@@ -37,13 +37,14 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     @IBOutlet weak var sendAmountTitle: UILabel!
     @IBOutlet weak var currentTitle: UILabel!
     @IBOutlet weak var remainingTitle: UILabel!
+    @IBOutlet weak var recipientChainTitle: UILabel!
     @IBOutlet weak var recipientTitle: UILabel!
     @IBOutlet weak var memoTitle: UILabel!
-    
     
     var pageHolderVC: StepGenTxViewController!
     var divideDecimal:Int16 = 6
     var displayDecimal:Int16 = 6
+    var feeDivideDecimal:Int16 = 6
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         currentTitle.text = NSLocalizedString("str_current_availabe", comment: "")
         remainingTitle.text = NSLocalizedString("str_remianing_availabe", comment: "")
         recipientTitle.text = NSLocalizedString("str_recipient_address", comment: "")
+        recipientChainTitle.text = NSLocalizedString("str_recipient_chain", comment: "")
         memoTitle.text = NSLocalizedString("str_memo", comment: "")
         backBtn.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
@@ -108,24 +110,31 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         var remainAvailable = NSDecimalNumber.zero
 
         if (chainConfig?.isGrpc == true) {
-            var priceSymbol = ""
-            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
-                divideDecimal = msAsset.decimal
-                displayDecimal = msAsset.decimal
+            var sendPriceDenom = toSendDenom
+            var feePriceDenom = feeDenom
+            if let sendMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
+                divideDecimal = sendMsAsset.decimal
+                displayDecimal = sendMsAsset.decimal
                 currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
                 if (toSendDenom == feeDenom) {
                     remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
                 } else {
                     remainAvailable = currentAvailable.subtracting(toSendAmount)
                 }
-                priceSymbol = msAsset.base_denom.lowercased()
+                sendPriceDenom = sendMsAsset.priceDenom()
                 
             } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
                 divideDecimal = msToken.decimal
                 displayDecimal = msToken.decimal
                 currentAvailable = NSDecimalNumber.init(string: msToken.amount)
                 remainAvailable = currentAvailable.subtracting(toSendAmount)
-                priceSymbol = msToken.denom
+                sendPriceDenom = msToken.denom
+            }
+            
+            feeDivideDecimal = WUtils.getDenomDecimal(chainConfig, feeDenom)
+            if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == feeDenom.lowercased() }).first {
+                feePriceDenom = feeMsAsset.priceDenom()
+                feeDivideDecimal = feeMsAsset.decimal
             }
             
             WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)
@@ -133,11 +142,11 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             WDP.dpCoin(chainConfig, toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel)
             WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
             
-            let feeDecimal = WUtils.getDenomDecimal(chainConfig, feeDenom)
-            feeValueLabel.attributedText = WUtils.dpAssetValue(feeDenom, feeAmount, feeDecimal, feeValueLabel.font)
-            sendValueLabel.attributedText = WUtils.dpAssetValue(priceSymbol, toSendAmount, divideDecimal, sendValueLabel.font)
-            availableValueLabel.attributedText = WUtils.dpAssetValue(priceSymbol, currentAvailable, divideDecimal, availableValueLabel.font)
-            remainValueLabel.attributedText = WUtils.dpAssetValue(priceSymbol, remainAvailable, divideDecimal, remainValueLabel.font)
+            
+            feeValueLabel.attributedText = WUtils.dpAssetValue(feePriceDenom, feeAmount, feeDivideDecimal, feeValueLabel.font)
+            sendValueLabel.attributedText = WUtils.dpAssetValue(sendPriceDenom, toSendAmount, divideDecimal, sendValueLabel.font)
+            availableValueLabel.attributedText = WUtils.dpAssetValue(sendPriceDenom, currentAvailable, divideDecimal, availableValueLabel.font)
+            remainValueLabel.attributedText = WUtils.dpAssetValue(sendPriceDenom, remainAvailable, divideDecimal, remainValueLabel.font)
             
         } else {
             divideDecimal = chainConfig!.divideDecimal

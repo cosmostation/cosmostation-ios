@@ -42,7 +42,7 @@ class ChainKi: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var grpcUrl = "lcd-kichain-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-kichain-app.cosmostation.io/"

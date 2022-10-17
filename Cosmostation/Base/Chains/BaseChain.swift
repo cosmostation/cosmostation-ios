@@ -117,6 +117,8 @@ class ChainFactory {
             return .KI_MAIN
         case CHAIN_KONSTELLATION_S:
             return .KONSTELLATION_MAIN
+        case CHAIN_KUJIRA_S:
+            return .KUJIRA_MAIN
         case CHAIN_LIKECOIN_S:
             return .LIKECOIN_MAIN
         case CHAIN_LUM_S:
@@ -225,6 +227,8 @@ class ChainFactory {
             return ChainKi(chainType!)
         case .KONSTELLATION_MAIN:
             return ChainKonstellation(chainType!)
+        case .KUJIRA_MAIN:
+            return ChainKujira(chainType!)
         case .LIKECOIN_MAIN:
             return ChainLike(chainType!)
         case .LUM_MAIN:
@@ -332,6 +336,7 @@ let CHAIN_JUNO_S = "SUPPORT_CHAIN_JUNO"
 let CHAIN_KAVA_S = "SUPPORT_CHAIN_KAVA_MAIN"
 let CHAIN_KI_S = "SUPPORT_CHAIN_KI_MAIN"
 let CHAIN_KONSTELLATION_S = "SUPPORT_CHAIN_KONSTELLATION"
+let CHAIN_KUJIRA_S = "SUPPORT_CHAIN_KUJIRA"
 let CHAIN_LIKECOIN_S = "SUPPORT_CHAIN_LIKECOIN"
 let CHAIN_LUM_S = "SUPPORT_CHAIN_LUM"
 let CHAIN_MEDI_S = "SUPPORT_CHAIN_MEDI"

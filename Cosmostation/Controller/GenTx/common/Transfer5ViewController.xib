@@ -26,6 +26,7 @@
                 <outlet property="recipientAddressLabel" destination="oaD-3e-LNX" id="JXT-kz-TxY"/>
                 <outlet property="recipientChainLabel" destination="9cZ-57-90O" id="hMV-0f-L06"/>
                 <outlet property="recipientChainLayer" destination="OQG-QA-P1s" id="RTp-GO-fPD"/>
+                <outlet property="recipientChainTitle" destination="wWk-Vh-Q3u" id="tSA-KV-sdh"/>
                 <outlet property="recipientTitle" destination="wCx-ud-bnX" id="01E-0s-fnA"/>
                 <outlet property="remainAmountLabel" destination="tVX-L4-KLv" id="il8-AR-zLu"/>
                 <outlet property="remainDenomLabel" destination="KVG-of-iTP" id="Rag-Bg-Fcw"/>

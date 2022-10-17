@@ -38,6 +38,7 @@ class AssetCell: UITableViewCell {
     func onBindNativeAsset(_ chainConfig: ChainConfig?, _ asset: MintscanAsset?, _ coin: Coin) {
         if (chainConfig == nil || asset == nil) { return }
         let decimal = asset!.decimal
+        let priceDenom = asset!.priceDenom()
         if let assetImgeUrl = asset!.assetImg() {
             assetImg.af_setImage(withURL: assetImgeUrl)
         }
@@ -46,24 +47,25 @@ class AssetCell: UITableViewCell {
         if (coin.denom == chainConfig?.stakeDenom) {
             let allAmount = WUtils.getAllMainAsset(coin.denom)
             assetAmount.attributedText = WDP.dpAmount(allAmount.stringValue, assetAmount.font!, decimal, 6)
-            assetValue.attributedText = WUtils.dpAssetValue(asset!.base_denom.lowercased(), allAmount, decimal, assetValue.font)
+            assetValue.attributedText = WUtils.dpAssetValue(priceDenom, allAmount, decimal, assetValue.font)
             
         } else if (chainConfig?.chainType == .KAVA_MAIN) {
             let allAmount = WUtils.getKavaTokenAll(coin.denom)
             assetAmount.attributedText = WDP.dpAmount(allAmount.stringValue, assetAmount.font!, decimal, 6)
-            assetValue.attributedText = WUtils.dpAssetValue(asset!.base_denom.lowercased(), allAmount, decimal, assetValue.font)
+            assetValue.attributedText = WUtils.dpAssetValue(priceDenom, allAmount, decimal, assetValue.font)
             
         } else {
             let available = NSDecimalNumber.init(string: coin.amount)
             assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
-            assetValue.attributedText = WUtils.dpAssetValue(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
+            assetValue.attributedText = WUtils.dpAssetValue(priceDenom, available, decimal, assetValue.font)
         }
-        onBindPriceView(asset!.base_denom)
+        onBindPriceView(priceDenom)
     }
     
     func onBindIbcAsset(_ chainConfig: ChainConfig?, _ asset: MintscanAsset?, _ coin: Coin) {
         if (chainConfig == nil || asset == nil) { return }
         let decimal = asset!.decimal
+        let priceDenom = asset!.priceDenom()
         let available = BaseData.instance.getAvailableAmount_gRPC(coin.denom)
         if let assetImgeUrl = asset!.assetImg() {
             assetImg.af_setImage(withURL: assetImgeUrl)
@@ -71,13 +73,14 @@ class AssetCell: UITableViewCell {
         assetSymbol.text = asset!.dp_denom
         assetDescription.text = WDP.dpPath(asset!.path)
         assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
-        assetValue.attributedText = WUtils.dpAssetValue(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
-        onBindPriceView(asset!.base_denom)
+        assetValue.attributedText = WUtils.dpAssetValue(priceDenom, available, decimal, assetValue.font)
+        onBindPriceView(priceDenom)
     }
     
     func onBindBridgeAsset(_ chainConfig: ChainConfig?, _ asset: MintscanAsset?, _ coin: Coin) {
         if (chainConfig == nil || asset == nil) { return }
         let decimal = asset!.decimal
+        let priceDenom = asset!.priceDenom()
         let available = BaseData.instance.getAvailableAmount_gRPC(coin.denom)
         if let assetImgeUrl = asset!.assetImg() {
             assetImg.af_setImage(withURL: assetImgeUrl)
@@ -85,8 +88,8 @@ class AssetCell: UITableViewCell {
         assetSymbol.text = asset!.dp_denom
         assetDescription.text = WDP.dpPath(asset!.path)
         assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
-        assetValue.attributedText = WUtils.dpAssetValue(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
-        onBindPriceView(asset!.base_denom)
+        assetValue.attributedText = WUtils.dpAssetValue(priceDenom, available, decimal, assetValue.font)
+        onBindPriceView(priceDenom)
     }
     
     //for bind cw20 & erc20
@@ -163,8 +166,6 @@ class AssetCell: UITableViewCell {
             }
         }
     }
-    
-    
     
     func onBindPriceView(_ priceDenom: String) {
         assetPrice.attributedText = WUtils.dpPrice(priceDenom, assetPrice.font)

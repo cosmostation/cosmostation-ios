@@ -53,6 +53,12 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
         pasteBtn.borderColor = UIColor.init(named: "_font05")
         beforeBtn.borderColor = UIColor.init(named: "_font05")
         nextBtn.borderColor = UIColor.init(named: "photon")
+        
+        emptyMemoMsg.text = NSLocalizedString("msg_memo", comment: "")
+        scanBtn.setTitle(NSLocalizedString("str_qr_scan", comment: ""), for: .normal)
+        pasteBtn.setTitle(NSLocalizedString("str_paste", comment: ""), for: .normal)
+        beforeBtn.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        nextBtn.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

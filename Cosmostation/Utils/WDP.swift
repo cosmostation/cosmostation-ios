@@ -236,12 +236,10 @@ public class WDP {
     }
     
     static func setPriceColor(_ label: UILabel, _ change: NSDecimalNumber) {
-        if (change.compare(NSDecimalNumber.zero).rawValue > 0) {
+        if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
             priceUpColor(label)
         } else if (change.compare(NSDecimalNumber.zero).rawValue < 0) {
             priceDownColor(label)
-        } else if (change.compare(NSDecimalNumber.zero).rawValue == 0) {
-            label.text = ""
         }
     }
 }

@@ -293,7 +293,8 @@ public class WUtils {
                 } else {
                     if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
                         let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                        let assetValue = assetValue(msAsset.base_denom, amount, msAsset.decimal)
+                        let priceDenom = msAsset.priceDenom()
+                        let assetValue = assetValue(priceDenom, amount, msAsset.decimal)
                         totalValue = totalValue.adding(assetValue)
                     }
                 }
@@ -713,28 +714,28 @@ public class WUtils {
             result.append(FeeInfo.init(gasInfo))
         }
         if (result.count == 1) {
-            result[0].title = "Fixed"
+            result[0].title = NSLocalizedString("str_fixed", comment: "")
             result[0].msg = NSLocalizedString("fee_speed_title_fixed", comment: "")
         } else if (result.count == 2) {
-            result[1].title = "Average"
+            result[1].title = NSLocalizedString("str_average", comment: "")
             result[1].msg = NSLocalizedString("fee_speed_title_average", comment: "")
             if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
-                result[0].title = "Zero"
+                result[0].title = NSLocalizedString("str_zero", comment: "")
                 result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
             } else {
-                result[0].title = "Tiny"
+                result[0].title = NSLocalizedString("str_tiny", comment: "")
                 result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
             }
         } else if (result.count == 3) {
-            result[2].title = "Average"
+            result[2].title = NSLocalizedString("str_average", comment: "")
             result[2].msg = NSLocalizedString("fee_speed_title_average", comment: "")
-            result[1].title = "Low"
+            result[1].title = NSLocalizedString("str_low", comment: "")
             result[1].msg = NSLocalizedString("fee_speed_title_low", comment: "")
             if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
-                result[0].title = "Zero"
+                result[0].title = NSLocalizedString("str_zero", comment: "")
                 result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
             } else {
-                result[0].title = "Tiny"
+                result[0].title = NSLocalizedString("str_tiny", comment: "")
                 result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
             }
         }
