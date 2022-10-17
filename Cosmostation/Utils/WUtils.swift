@@ -293,7 +293,8 @@ public class WUtils {
                 } else {
                     if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
                         let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                        let assetValue = assetValue(msAsset.base_denom, amount, msAsset.decimal)
+                        let priceDenom = msAsset.priceDenom()
+                        let assetValue = assetValue(priceDenom, amount, msAsset.decimal)
                         totalValue = totalValue.adding(assetValue)
                     }
                 }

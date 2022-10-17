@@ -13,6 +13,7 @@ public struct MintscanAsset {
     var denom: String = ""
     var type: String = ""
     var base_denom: String = ""
+    var price_denom: String = ""
     var base_type: String = ""
     var dp_denom: String = ""
     var origin_chain: String = ""
@@ -29,6 +30,7 @@ public struct MintscanAsset {
         self.denom = dictionary?["denom"] as? String ?? ""
         self.type = dictionary?["type"] as? String ?? ""
         self.base_denom = dictionary?["base_denom"] as? String ?? ""
+        self.price_denom = dictionary?["price_denom"] as? String ?? ""
         self.base_type = dictionary?["base_type"] as? String ?? ""
         self.dp_denom = dictionary?["dp_denom"] as? String ?? ""
         self.origin_chain = dictionary?["origin_chain"] as? String ?? ""
@@ -56,6 +58,10 @@ public struct MintscanAsset {
             }
         }
         return nil
+    }
+    
+    func priceDenom() -> String {
+        return price_denom.isEmpty ? base_denom.lowercased() : price_denom.lowercased()
     }
 }
 

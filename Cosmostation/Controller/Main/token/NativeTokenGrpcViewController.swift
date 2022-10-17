@@ -21,6 +21,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     var nativeDenom = ""
     var divideDecimal: Int16 = 6
     var totalAmount = NSDecimalNumber.zero
+    var msAsset: MintscanAsset!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,23 +54,23 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onInitView() {
-        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, nativeDenom) {
-            divideDecimal = msAsset.decimal
-            if let assetImgeUrl = msAsset.assetImg() {
-                naviTokenImg.af_setImage(withURL: assetImgeUrl)
-            }
-            naviTokenSymbol.text = msAsset.dp_denom
-            
-            if (chainConfig?.chainType == .KAVA_MAIN) {
-                totalAmount = WUtils.getKavaTokenAll(nativeDenom)
-            } else {
-                totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
-            }
+        msAsset = BaseData.instance.getMSAsset(chainConfig!, nativeDenom)
+        divideDecimal = msAsset.decimal
+        if let assetImgeUrl = msAsset.assetImg() {
+            naviTokenImg.af_setImage(withURL: assetImgeUrl)
         }
-        
-        self.naviPerPrice.attributedText = WUtils.dpPrice(nativeDenom, naviPerPrice.font)
-        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(nativeDenom, naviUpdownPercent.font)
-        let changePrice = WUtils.priceChange(nativeDenom)
+        naviTokenSymbol.text = msAsset.dp_denom
+
+        if (chainConfig?.chainType == .KAVA_MAIN) {
+            totalAmount = WUtils.getKavaTokenAll(nativeDenom)
+        } else {
+            totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
+        }
+
+        let priceDenom = msAsset.priceDenom()
+        self.naviPerPrice.attributedText = WUtils.dpPrice(priceDenom, naviPerPrice.font)
+        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(priceDenom, naviUpdownPercent.font)
+        let changePrice = WUtils.priceChange(priceDenom)
         WDP.setPriceColor(naviUpdownPercent, changePrice)
     }
 
@@ -93,7 +94,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
             cell?.onBindTokenDetail(account, chainConfig)
-            cell?.onBindValue(nativeDenom, totalAmount, divideDecimal)
+            cell?.onBindValue(msAsset.priceDenom(), totalAmount, divideDecimal)
             cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
             return cell!
             
