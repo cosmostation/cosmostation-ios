@@ -284,6 +284,8 @@
 "guide_msg_ixo" = "Ixo 프로토콜은 재생 금융 및 지구 상태 변화 검증을 위한 탄소 중립 블록체인 네트워크를 구축하는 것을 목표로 합니다.";
 "guide_title_stride" = "STRIDE";
 "guide_msg_stride" = "Stride 는 stToken의 발행을 통해 스테이킹된 자산을 유동화시키는 유동성 스테이킹 프로토콜입니다.";
+"guide_title_kujira" = "KUJIRA";
+"guide_msg_kujira" = "Cosmos SDK 와 Cosm Wasm 스마트 컨트랙트를 기반으로 설계된 레이어 1 디파이 플랫폼입니다.";
 "guide_btn_home" = "홈페이지";
 "guide_btn_blog" = "공식 블로그";
 

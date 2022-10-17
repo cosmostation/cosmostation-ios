@@ -579,6 +579,8 @@
 		0451FDAA2832370100214FDA /* osmosis_gamm_pool-models_balancer_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FD752832370100214FDA /* osmosis_gamm_pool-models_balancer_tx.grpc.swift */; };
 		04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
 		04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
+		0459103C28FCFE8300C51CE9 /* ChainKujira.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0459103B28FCFE8300C51CE9 /* ChainKujira.swift */; };
+		0459103D28FCFE8300C51CE9 /* ChainKujira.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0459103B28FCFE8300C51CE9 /* ChainKujira.swift */; };
 		045DAD4F288F52E2004ED9B4 /* GranterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD4D288F52E2004ED9B4 /* GranterViewCell.swift */; };
 		045DAD50288F52E2004ED9B4 /* GranterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD4D288F52E2004ED9B4 /* GranterViewCell.swift */; };
 		045DAD51288F52E2004ED9B4 /* GranterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD4E288F52E2004ED9B4 /* GranterViewCell.xib */; };
@@ -3251,6 +3253,7 @@
 		0451FD752832370100214FDA /* osmosis_gamm_pool-models_balancer_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_gamm_pool-models_balancer_tx.grpc.swift"; sourceTree = "<group>"; };
 		04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesmosProfileInfoCell.swift; sourceTree = "<group>"; };
 		04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DesmosProfileInfoCell.xib; sourceTree = "<group>"; };
+		0459103B28FCFE8300C51CE9 /* ChainKujira.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKujira.swift; sourceTree = "<group>"; };
 		045DAD4D288F52E2004ED9B4 /* GranterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GranterViewCell.swift; sourceTree = "<group>"; };
 		045DAD4E288F52E2004ED9B4 /* GranterViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GranterViewCell.xib; sourceTree = "<group>"; };
 		045DAD53288FAEB5004ED9B4 /* AuthzGranteeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthzGranteeCell.swift; sourceTree = "<group>"; };
@@ -4364,6 +4367,7 @@
 				04E165B628A0F873000F12C0 /* ChainTgrade.swift */,
 				0451FCB4282A3BD700214FDA /* ChainUmee.swift */,
 				04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */,
+				0459103B28FCFE8300C51CE9 /* ChainKujira.swift */,
 			);
 			path = Chains;
 			sourceTree = "<group>";
@@ -7488,6 +7492,7 @@
 				1817CC65283E2CE600523713 /* evmos_inflation_v1_genesis.pb.swift in Sources */,
 				1817CAFC283E2CE500523713 /* sifnode_dispensation_v1_types.pb.swift in Sources */,
 				1817CB4F283E2CE500523713 /* cosmos_staking_v1beta1_authz.pb.swift in Sources */,
+				0459103D28FCFE8300C51CE9 /* ChainKujira.swift in Sources */,
 				18FFB436281AF533004E65BB /* Cw20TransferReq.swift in Sources */,
 				0451FC98282A3B4200214FDA /* ChainStargaze.swift in Sources */,
 				18FFB43C281AF533004E65BB /* BinanceMessage.swift in Sources */,
@@ -8956,6 +8961,7 @@
 				042AEE132864530900E13825 /* OkVote1ViewController.swift in Sources */,
 				040FA87A275F55C200229F6F /* iris_mod_nft_tx.grpc.swift in Sources */,
 				04C43B67278D5F530022D5DF /* kava_bep3_v1beta1_query.grpc.swift in Sources */,
+				0459103C28FCFE8300C51CE9 /* ChainKujira.swift in Sources */,
 				28CFBFDD26C028A3009A300D /* CommonHeader.swift in Sources */,
 				040FA82F275F55C200229F6F /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				04E2A32727A581720045ED21 /* Cw20BalanceRes.swift in Sources */,
