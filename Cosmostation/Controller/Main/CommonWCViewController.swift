@@ -937,19 +937,24 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
             if (url.absoluteString.starts(with: "keplrwallet://wcV1")) {
                 UIApplication.shared.open(URL(string: url.absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc"))!, options: [:])
                 decisionHandler(.cancel)
+                return
             } else if (url.scheme == "cosmostation") {
                 UIApplication.shared.open(url, options: [:])
                 decisionHandler(.cancel)
+                return
             } else if (url.absoluteString.range(of: "https://.*/wc", options: .regularExpression) != nil) {
                 let newUrl = url.absoluteString.replacingCharacters(in: url.absoluteString.range(of: "https://.*/wc", options: .regularExpression)!, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
                 UIApplication.shared.open(URL(string: newUrl.removingPercentEncoding!)!, options: [:])
                 decisionHandler(.cancel)
-            } else {
-                decisionHandler(.allow)
+                return
             }
-        } else {
-            decisionHandler(.allow)
         }
+        
+        if navigationAction.navigationType == .linkActivated {
+            guard let url = navigationAction.request.url else {return}
+            webView.load(URLRequest(url: url))
+        }
+        decisionHandler(.allow)
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
