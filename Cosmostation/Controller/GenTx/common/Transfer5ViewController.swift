@@ -131,10 +131,10 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                 sendPriceDenom = msToken.denom
             }
             
-            feeDivideDecimal = chainConfig!.divideDecimal
+            feeDivideDecimal = WUtils.getDenomDecimal(chainConfig, feeDenom)
             if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == feeDenom.lowercased() }).first {
                 feePriceDenom = feeMsAsset.priceDenom()
-                feeDivideDecimal = WUtils.getDenomDecimal(chainConfig, feeDenom)
+                feeDivideDecimal = feeMsAsset.decimal
             }
             
             WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)

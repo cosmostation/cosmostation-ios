@@ -90,12 +90,12 @@ class TransactionViewController: UIViewController {
             
         } else if (mType == TASK_TYPE_REDELEGATE) {
             stepImg.image = UIImage.init(named: "txStep5_1")
-            stepDescription.text = NSLocalizedString("tx_send_0", comment: "")
+            stepDescription.text = NSLocalizedString("tx_redelegate_0", comment: "")
             self.titleLabel.text =  NSLocalizedString("title_redelegate", comment: "")
             
         } else if (mType == TASK_TYPE_TRANSFER) {
             stepImg.image = UIImage.init(named: "txStep5_1")
-            stepDescription.text = NSLocalizedString("send_step_1", comment: "")
+            stepDescription.text = NSLocalizedString("tx_send_0", comment: "")
             self.titleLabel.text =  NSLocalizedString("title_send", comment: "")
             
         } else if (mType == TASK_TYPE_CLAIM_STAKE_REWARD) {

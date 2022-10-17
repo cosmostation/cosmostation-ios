@@ -136,6 +136,12 @@
 "str_my_opinion" = "내 의견";
 "str_vote_direct" = "검증인에게 직접 투표";
 "str_vote_agent" = "대리인을 통한 간접 투표";
+"str_total_fee" = "Tx 수수료 합계";
+"str_fixed" = "고정";
+"str_average" = "평균";
+"str_zero" = "무료";
+"str_low" = "낮음";
+"str_tiny" = "최소";
 
 
 "btn_delegate" = "  위임 하기";
@@ -184,6 +190,9 @@
 "msg_htlc_swap_progress_1" = "2/4 스왑아이디를 확인 중 입니다.";
 "msg_htlc_swap_progress_2" = "3/4 받는 체인에서 BEP3 수신 트랜잭션을 발송 중 입니다.";
 "msg_htlc_swap_progress_3" = "4/4 양쪽 체인에서 각각의 트랜잭션을 확인중 입니다.";
+"msg_memo" = "메모를 확인하세요.\n일부 거래소나 지갑에서는 입금을 위해 특정 메모가 필요할 수 있습니다.";
+"msg_fee1" = "Tx 수수료는 체인에 지불됩니다.";
+"msg_fee2" = "코스모스테이션 월렛 서비스는 무료로 사용 가능하며, 지불한 Tx 수수료는 모든 검증인과 커뮤니티 풀에 분배됩니다.";
 
 
 "guide_title_cosmos" = "COSMOS HUB";

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="btnBefore" destination="KEu-T8-gWZ" id="cR2-22-9yr"/>
                 <outlet property="btnNext" destination="hS9-QE-032" id="bNm-Xj-I4l"/>
+                <outlet property="feeTitle" destination="j9V-gA-kp0" id="ghr-cc-tYg"/>
                 <outlet property="feeTotalAmount" destination="Ofe-cd-hih" id="e7q-bb-QdJ"/>
                 <outlet property="feeTotalCard" destination="Odg-uh-72H" id="pf4-hX-sQh"/>
                 <outlet property="feeTotalDenom" destination="aWT-cX-Tc4" id="IA8-qh-yVe"/>
@@ -20,6 +21,8 @@
                 <outlet property="feeTypeCard" destination="Kxe-Eu-Wki" id="nCG-m7-eko"/>
                 <outlet property="feeTypeDenom" destination="KVI-HT-72p" id="iJ0-z8-16S"/>
                 <outlet property="feeTypeImg" destination="ZtI-Zf-Ahg" id="AVv-ph-siK"/>
+                <outlet property="feeWarnMsg" destination="Hzk-qR-z7e" id="bvG-Q2-oN1"/>
+                <outlet property="feeWarnTitle" destination="Lx7-GX-6DP" id="DGl-5e-cGN"/>
                 <outlet property="gasDescriptionLabel" destination="tCv-2T-rSu" id="fuv-vn-lFP"/>
                 <outlet property="gasDetailCard" destination="0Bs-7R-IOU" id="EZO-3H-6CD"/>
                 <outlet property="gasSelectSegments" destination="9dr-ca-1pb" id="eaB-fJ-p9d"/>
@@ -32,7 +35,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Odg-uh-72H" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="54" width="382" height="122"/>
+                    <rect key="frame" x="16" y="58" width="382" height="125.5"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kxe-Eu-Wki" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                             <rect key="frame" x="12" y="16" width="358" height="42"/>
@@ -81,25 +84,25 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Fee" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9V-gA-kp0">
-                            <rect key="frame" x="16" y="70" width="51.5" height="14.5"/>
+                            <rect key="frame" x="16" y="70" width="55.5" height="16"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                             <color key="textColor" name="_font04"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofe-cd-hih">
-                            <rect key="frame" x="357" y="70" width="3.5" height="14.5"/>
+                            <rect key="frame" x="356" y="69" width="4" height="18"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWT-cX-Tc4">
-                            <rect key="frame" x="362.5" y="70" width="3.5" height="14.5"/>
+                            <rect key="frame" x="362" y="69" width="4" height="18"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVW-Uy-8UI">
-                            <rect key="frame" x="362.5" y="88.5" width="3.5" height="13.5"/>
+                            <rect key="frame" x="362.5" y="91" width="3.5" height="14.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                             <color key="textColor" name="_font04"/>
                             <nil key="highlightedColor"/>
@@ -139,7 +142,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Bs-7R-IOU" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="188" width="382" height="114.5"/>
+                    <rect key="frame" x="16" y="195.5" width="382" height="116"/>
                     <subviews>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="9dr-ca-1pb">
                             <rect key="frame" x="12" y="24" width="358" height="37"/>
@@ -156,7 +159,7 @@
                             </connections>
                         </segmentedControl>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="       " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tCv-2T-rSu">
-                            <rect key="frame" x="24" y="76" width="334" height="14.5"/>
+                            <rect key="frame" x="24" y="76" width="334" height="16"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                             <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>

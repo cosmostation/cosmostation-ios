@@ -136,6 +136,12 @@
 "str_my_opinion" = "My Opinion";
 "str_vote_direct" = "Direct vote to Validator";
 "str_vote_agent" = "Indirect vote with Agent";
+"str_total_fee" = "Total Tx Fee";
+"str_fixed" = "Fixed";
+"str_average" = "Average";
+"str_zero" = "Zero";
+"str_low" = "Low";
+"str_tiny" = "Tiny";
 
 
 "btn_delegate" = "  Delegate";
@@ -184,6 +190,9 @@
 "msg_htlc_swap_progress_1" = "2/4 Confirming swapid.";
 "msg_htlc_swap_progress_2" = "3/4 Broadcasting BEP3 claim Tx on receiving chain.";
 "msg_htlc_swap_progress_3" = "4/4 Confirming all Tx on each chain.";
+"msg_memo" = "Please check your memo.\nSome exchanges or wallets may require a specific memo for deposits.";
+"msg_fee1" = "Tx Fee is charged by the network.";
+"msg_fee2" = "Cosmostation Wallet service is free to use, and the Tx fee you pay is distributed to all validators and community pool.";
 
 
 "guide_title_cosmos" = "COSMOS HUB";

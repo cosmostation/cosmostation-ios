@@ -21,11 +21,14 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     @IBOutlet weak var feeTypeCard: CardView!
     @IBOutlet weak var feeTypeImg: UIImageView!
     @IBOutlet weak var feeTypeDenom: UILabel!
+    @IBOutlet weak var feeTitle: UILabel!
     
     @IBOutlet weak var gasDetailCard: CardView!
     @IBOutlet weak var gasSelectSegments: UISegmentedControl!
     @IBOutlet weak var gasDescriptionLabel: UILabel!
     
+    @IBOutlet weak var feeWarnTitle: UILabel!
+    @IBOutlet weak var feeWarnMsg: UILabel!
     @IBOutlet weak var btnBefore: UIButton!
     @IBOutlet weak var btnNext: UIButton!
     
@@ -73,6 +76,12 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         feeTypeCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
         btnBefore.borderColor = UIColor.init(named: "_font05")
         btnNext.borderColor = UIColor.init(named: "photon")
+        
+        feeTitle.text = NSLocalizedString("str_total_fee", comment: "")
+        feeWarnTitle.text = NSLocalizedString("msg_fee1", comment: "")
+        feeWarnMsg.text = NSLocalizedString("msg_fee2", comment: "")
+        btnBefore.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -130,9 +139,14 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         WDP.dpSymbol(chainConfig, mFeeData.denom, feeTypeDenom)
         WDP.dpCoin(chainConfig, mFee.amount[0], feeTotalDenom, feeTotalAmount)
         
-        let denomDecimal = WUtils.getDenomDecimal(chainConfig, mFeeData.denom)
-        feeTotalValue.attributedText = WUtils.dpAssetValue(mFeeData.denom!, NSDecimalNumber.init(string: mFee.amount[0].amount), denomDecimal, feeTotalValue.font)
-    
+        var feePriceDenom = mFeeData.denom!
+        var feeDivideDecimal = WUtils.getDenomDecimal(chainConfig, mFeeData.denom)
+        if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == mFeeData.denom!.lowercased() }).first {
+            feePriceDenom = feeMsAsset.priceDenom()
+            feeDivideDecimal = feeMsAsset.decimal
+        }
+        
+        feeTotalValue.attributedText = WUtils.dpAssetValue(feePriceDenom, NSDecimalNumber.init(string: mFee.amount[0].amount), feeDivideDecimal, feeTotalValue.font)
         gasDescriptionLabel.text = mFeeInfo[mSelectedFeeInfo].msg
     }
     
