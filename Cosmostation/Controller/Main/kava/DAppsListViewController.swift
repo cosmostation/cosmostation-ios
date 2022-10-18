@@ -176,19 +176,19 @@ extension WUtils {
     
     static func dpBepSwapChainInfo(_ chain: ChainType, _ img: UIImageView?, _ label: UILabel) {
         if (chain == ChainType.BINANCE_MAIN) {
-            label.text = NSLocalizedString("chain_title_bnb", comment: "")
+            label.text = "Binance"
             img?.image = UIImage(named: "chainBinance")
         } else if (chain == ChainType.KAVA_MAIN) {
-            label.text = NSLocalizedString("chain_title_kava", comment: "")
+            label.text = "Kava"
             img?.image = UIImage(named: "chainKava")
         }
     }
     
     static func dpBepSwapChainName(_ chain: ChainType) -> String {
         if (chain == ChainType.BINANCE_MAIN) {
-            return NSLocalizedString("chain_title_bnb", comment: "")
+            return "Binance"
         } else if (chain == ChainType.KAVA_MAIN) {
-            return NSLocalizedString("chain_title_kava", comment: "")
+            return "Kava"
         }
         return ""
     }

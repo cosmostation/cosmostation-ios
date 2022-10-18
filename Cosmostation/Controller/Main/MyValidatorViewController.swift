@@ -303,7 +303,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             else { self.onStartEasyCompounding(0) }
             
         } else {
-            let alertController = UIAlertController(title: NSLocalizedString("send_step_4", comment: ""), message: "", preferredStyle: .actionSheet)
+            let alertController = UIAlertController(title: NSLocalizedString("tx_set_fee", comment: ""), message: "", preferredStyle: .actionSheet)
             if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
             let feeInfo = WUtils.getFeeInfos(chainConfig)
             for i in 0 ..< Int(feeInfo.count) {
