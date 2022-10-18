@@ -598,14 +598,15 @@ public class WUtils {
         return NSDecimalNumber.zero
     }
     
+    //disable okc old type tokens(KIP10) value
     static func convertTokenToOkt(_ denom: String) -> NSDecimalNumber {
-        let baseData = BaseData.instance
-        let okToken = getOkToken(denom)
-        let tokenAmount = baseData.availableAmount(denom).adding(baseData.lockedAmount(denom))
-        let totalTokenValue = getOkexTokenDollorValue(okToken, tokenAmount)
-        if let okTUsd = perUsdValue(OKEX_MAIN_DENOM) {
-            return totalTokenValue.dividing(by: okTUsd, withBehavior: handler18)
-        }
+//        let baseData = BaseData.instance
+//        let okToken = getOkToken(denom)
+//        let tokenAmount = baseData.availableAmount(denom).adding(baseData.lockedAmount(denom))
+//        let totalTokenValue = getOkexTokenDollorValue(okToken, tokenAmount)
+//        if let okTUsd = perUsdValue(OKEX_MAIN_DENOM) {
+//            return totalTokenValue.dividing(by: okTUsd, withBehavior: handler18)
+//        }
         return NSDecimalNumber.zero
     }
     

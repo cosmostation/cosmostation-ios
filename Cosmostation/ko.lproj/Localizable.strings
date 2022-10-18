@@ -102,10 +102,10 @@
 "str_path" = "HD 경로 :";
 "str_displayed_chain" = "보여지는 체인";
 "str_hidden_chain" = "숨겨진 체인";
-"str_qr_scan" = "QR 스캔";
+"str_qr_scan" = "스캔";
 "str_switch_wallet" = "지갑 전환";
 "str_edit_token_list" = "토큰 편집";
-"str_wallet2" = "내 지갑";
+"str_wallet2" = "지갑";
 "str_recipient_chain" = "수신 체인";
 "str_recipient_address" = "수신 주소";
 "str_max_availabe" = "최대 가능 :";

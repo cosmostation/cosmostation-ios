@@ -38,9 +38,12 @@ class ProposalVotingPeriodCell: UITableViewCell {
         if (selectMode && selected.contains(proposal.id!)) {
             rootCardView.borderWidth = 1.0
             rootCardView.borderColor = chainConfig?.chainColor
+            rootCardView.layer.borderWidth = 1
+            rootCardView.layer.borderColor = chainConfig?.chainColor.cgColor
             
         } else {
             rootCardView.borderWidth = 0
+            rootCardView.layer.borderWidth = 0
         }
         
         if let rawVote = myVotes.filter({ String($0.proposal_id ?? -1) == proposal.id }).first {
