@@ -49,7 +49,7 @@ class TokenDetailUnbondingDetailCell: UITableViewCell {
         unBondingAmount3.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         unBondingAmount4.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         
-        unBondingSchduleLabel.text = NSLocalizedString("str_unbonding_schdule", comment: "")
+        unBondingSchduleLabel.text = NSLocalizedString("str_unbonding_schedule", comment: "")
     
     }
     

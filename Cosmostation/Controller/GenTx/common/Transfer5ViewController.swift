@@ -59,7 +59,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
         sendAmountTitle.text = NSLocalizedString("str_send_amount", comment: "")
         currentTitle.text = NSLocalizedString("str_current_availabe", comment: "")
-        remainingTitle.text = NSLocalizedString("str_remianing_availabe", comment: "")
+        remainingTitle.text = NSLocalizedString("str_remaining_availabe", comment: "")
         recipientTitle.text = NSLocalizedString("str_recipient_address", comment: "")
         recipientChainTitle.text = NSLocalizedString("str_recipient_chain", comment: "")
         memoTitle.text = NSLocalizedString("str_memo", comment: "")

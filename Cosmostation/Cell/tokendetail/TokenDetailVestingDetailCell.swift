@@ -49,7 +49,7 @@ class TokenDetailVestingDetailCell: UITableViewCell {
         vestingAmount3.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         vestingAmount4.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         
-        vestingSchduleLabel.text = NSLocalizedString("str_vesting_schdule", comment: "")
+        vestingSchduleLabel.text = NSLocalizedString("str_vesting_schedule", comment: "")
     }
     
     override func prepareForReuse() {
