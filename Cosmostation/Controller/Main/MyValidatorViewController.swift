@@ -160,11 +160,19 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         self.showWaittingAlert()
         var feeGasAmount = NSDecimalNumber.init(string: "500000")
         let feeInfo = WUtils.getFeeInfos(chainConfig)
-        let feeData = feeInfo[chainConfig!.getGasDefault()].FeeDatas[0]
+        let feeData = feeInfo[selectFee].FeeDatas[0]
         var fee: Fee!
         var feeCoin: Coin!
         if (chainType == .SIF_MAIN) {
             feeCoin = Coin.init(feeData.denom!, "100000000000000000")
+        } else if (chainType == .CHIHUAHUA_MAIN) {
+            if (selectFee == 0) {
+                feeCoin = Coin.init(feeData.denom!, "1000000")
+            } else if (selectFee == 1) {
+                feeCoin = Coin.init(feeData.denom!, "5000000")
+            } else {
+                feeCoin = Coin.init(feeData.denom!, "10000000")
+            }
         } else {
             let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
             feeCoin = Coin.init(feeData.denom!, amount.stringValue)
@@ -231,11 +239,19 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         self.showWaittingAlert()
         var feeGasAmount = NSDecimalNumber.init(string: "500000")
         let feeInfo = WUtils.getFeeInfos(chainConfig)
-        let feeData = feeInfo[chainConfig!.getGasDefault()].FeeDatas[0]
+        let feeData = feeInfo[selectFee].FeeDatas[0]
         var fee: Fee!
         var feeCoin: Coin!
         if (chainType == .SIF_MAIN) {
             feeCoin = Coin.init(feeData.denom!, "100000000000000000")
+        } else if (chainType == .CHIHUAHUA_MAIN) {
+            if (selectFee == 0) {
+                feeCoin = Coin.init(feeData.denom!, "1000000")
+            } else if (selectFee == 1) {
+                feeCoin = Coin.init(feeData.denom!, "5000000")
+            } else {
+                feeCoin = Coin.init(feeData.denom!, "10000000")
+            }
         } else {
             let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
             feeCoin = Coin.init(feeData.denom!, amount.stringValue)
