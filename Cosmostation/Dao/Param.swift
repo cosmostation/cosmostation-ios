@@ -61,7 +61,6 @@ public struct Param {
             
         } else if (chainType == .TERITORI_MAIN) {
             //NOTE adjust "reduction_factor" & "minting_rewards_distribution_start_block" after 1 year (adding 22.10.24)
-//            return inflationNum?.multiplying(by: <#T##NSDecimalNumber#>)
             if let teritoriParam = params?.teritori_minting_params?.params {
                 let inflationNum = teritoriParam.reduction_period_in_blocks.subtracting(teritoriParam.minting_rewards_distribution_start_block)
                 return inflationNum.multiplying(by: teritoriParam.genesis_block_provisions).dividing(by: getMainSupply(), withBehavior: WUtils.handler18)
