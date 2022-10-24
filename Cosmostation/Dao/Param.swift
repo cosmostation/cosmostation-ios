@@ -58,6 +58,15 @@ public struct Param {
             
         } else if (chainType == .AXELAR_MAIN) {
             return NSDecimalNumber.init(string: "0.150000000000000000")
+            
+        } else if (chainType == .TERITORI_MAIN) {
+            //NOTE adjust "reduction_factor" & "minting_rewards_distribution_start_block" after 1 year (adding 22.10.24)
+//            return inflationNum?.multiplying(by: <#T##NSDecimalNumber#>)
+            if let teritoriParam = params?.teritori_minting_params?.params {
+                let inflationNum = teritoriParam.reduction_period_in_blocks.subtracting(teritoriParam.minting_rewards_distribution_start_block)
+                return inflationNum.multiplying(by: teritoriParam.genesis_block_provisions).dividing(by: getMainSupply(), withBehavior: WUtils.handler18)
+            }
+            return NSDecimalNumber.zero
         }
         return NSDecimalNumber.init(string: params?.minting_inflation)
     }
@@ -121,6 +130,12 @@ public struct Param {
         } else if (chain == .AXELAR_MAIN) {
             let ap = getMainSupply().multiplying(by: NSDecimalNumber.init(value: 0.15))
             return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
+            
+        } else if (chain == .TERITORI_MAIN) {
+            if let stakingDistribution = params?.teritori_minting_params?.params?.distribution_proportions?.staking {
+                return inflation.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: bondingRate, withBehavior: WUtils.handler6)
+            }
+            return NSDecimalNumber.zero
         }
         
         let ap = NSDecimalNumber.init(string: params?.minting_annual_provisions)
@@ -246,6 +261,8 @@ public struct Params {
     var crescent_minting_params: CrescentMintingParam?
     var crescent_budgets = Array<CrescentBudget>()
     
+    var teritori_minting_params: TeritoriMintingParam?
+    
     init(_ dictionary: NSDictionary?) {
         if let rawIbcParams = dictionary?["ibc_params"] as? NSDictionary {
             self.ibc_params = IbcParams.init(rawIbcParams)
@@ -367,6 +384,10 @@ public struct Params {
                     self.crescent_budgets.append(CrescentBudget.init(rawBudget))
                 }
             }
+        }
+        
+        if let rawTeritoriMintingParams = dictionary?["teritori_minting_params"] as? NSDictionary {
+            self.teritori_minting_params = TeritoriMintingParam.init(rawTeritoriMintingParams)
         }
     }
 }
@@ -985,6 +1006,70 @@ public struct CrescentBudget {
             }
             self.source_address = dictionary?[source_address] as? String ?? ""
             self.destination_address = dictionary?["destination_address"] as? String ?? ""
+        }
+    }
+}
+
+public struct TeritoriMintingParam {
+    var params: Params?
+    
+    init(_ dictionary: NSDictionary?) {
+        if let rawParams = dictionary?["params"] as? NSDictionary {
+            self.params = Params.init(rawParams)
+        }
+    }
+    
+    public struct Params {
+        var mint_denom: String?
+        var reduction_factor: NSDecimalNumber = NSDecimalNumber.zero
+        var distribution_proportions: DistributionProportions?
+        var genesis_block_provisions: NSDecimalNumber = NSDecimalNumber.zero
+        var reduction_period_in_blocks: NSDecimalNumber = NSDecimalNumber.zero
+        var minting_rewards_distribution_start_block: NSDecimalNumber = NSDecimalNumber.zero
+        
+        init(_ dictionary: NSDictionary?) {
+            self.mint_denom = dictionary?["mint_denom"] as? String
+            if let reduction_factor = dictionary?["reduction_factor"] as? String {
+                self.reduction_factor = NSDecimalNumber.init(string: reduction_factor)
+            }
+            if let rawDistributionProportions = dictionary?["distribution_proportions"] as? NSDictionary {
+                self.distribution_proportions = DistributionProportions.init(rawDistributionProportions)
+            }
+            if let genesis_block_provisions = dictionary?["genesis_block_provisions"] as? String {
+                self.genesis_block_provisions = NSDecimalNumber.init(string: genesis_block_provisions)
+            }
+            if let reduction_period_in_blocks = dictionary?["reduction_period_in_blocks"] as? String {
+                self.reduction_period_in_blocks = NSDecimalNumber.init(string: reduction_period_in_blocks)
+            }
+            if let minting_rewards_distribution_start_block = dictionary?["minting_rewards_distribution_start_block"] as? String {
+                self.minting_rewards_distribution_start_block = NSDecimalNumber.init(string: minting_rewards_distribution_start_block)
+            }
+        }
+    }
+    
+    public struct DistributionProportions {
+        var staking: NSDecimalNumber?
+        var community_pool: NSDecimalNumber?
+        var grants_program: NSDecimalNumber?
+        var usage_incentive: NSDecimalNumber?
+        var developer_rewards: NSDecimalNumber?
+        
+        init(_ dictionary: NSDictionary?) {
+            if let staking = dictionary?["staking"] as? String {
+                self.staking = NSDecimalNumber.init(string: staking)
+            }
+            if let community_pool = dictionary?["community_pool"] as? String {
+                self.community_pool = NSDecimalNumber.init(string: community_pool)
+            }
+            if let grants_program = dictionary?["grants_program"] as? String {
+                self.grants_program = NSDecimalNumber.init(string: grants_program)
+            }
+            if let usage_incentive = dictionary?["usage_incentive"] as? String {
+                self.usage_incentive = NSDecimalNumber.init(string: usage_incentive)
+            }
+            if let developer_rewards = dictionary?["developer_rewards"] as? String {
+                self.developer_rewards = NSDecimalNumber.init(string: developer_rewards)
+            }
         }
     }
 }
