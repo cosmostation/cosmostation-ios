@@ -147,7 +147,7 @@ class CdpListViewController: BaseViewController, UITableViewDelegate, UITableVie
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Cdp_V1beta1_QueryCdpsRequest.with { $0.owner = address }
                 if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).cdps(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("onFetchgRPCMyCdps ", response.cdps)
+                    print("onFetchgRPCMyCdps ", response.cdps)
                     self.mMyCdps_gRPC = response.cdps
                 }
                 try channel.close().wait()

@@ -19,3 +19,24 @@ public struct KavaIncentiveParam {
         }
     }
 }
+
+public struct IncentiveParam {
+    var claim_multipliers: Array<ClaimMultiplier> = Array<ClaimMultiplier>()
+    
+    init(_ dictionary: NSDictionary?) {
+        if let rawClaimMultipliers = dictionary?["claim_multipliers"] as? Array<NSDictionary>  {
+            for rawClaimMultiplier in rawClaimMultipliers {
+                self.claim_multipliers.append(ClaimMultiplier(rawClaimMultiplier))
+            }
+        }
+    }
+    
+    public func getFactor(_ denom: String, _ position: Int) -> NSDecimalNumber{
+        for claim_multipliers in claim_multipliers {
+            if (claim_multipliers.denom == denom) {
+                return claim_multipliers.multipliers[position].factor
+            }
+        }
+        return NSDecimalNumber.zero
+    }
+}
