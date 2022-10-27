@@ -281,7 +281,6 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         self.navigationController?.pushViewController(txVC, animated: true)
     }
     
-    
     func onCommonCheck() -> Bool {
         if (!account!.account_has_private) {
             self.onShowAddMenomicDialog()
@@ -305,8 +304,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         }
         self.mFetchCnt = 2
         self.onFetchgRPCMyCdp(account!.account_address, mCollateralParamType)
-//        self.onFetchCdpDeposit(account!.account_address, mCollateralParamType)
-        self.onFetchgRPCCdpDeposits(account!.account_address, mCollateralParamType)
+        self.onFetchCdpDeposit(account!.account_address, mCollateralParamType)
         self.mDebtAmount = NSDecimalNumber.init(string: BaseData.instance.mParam?.getSupplyDenom("debt")?.amount)
     }
     
@@ -393,45 +391,45 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         }
     }
     
-    //TODO check this grpc not working!
-    func onFetchgRPCCdpDeposits(_ address: String, _ collateralType: String) {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let req = Kava_Cdp_V1beta1_QueryDepositsRequest.with { $0.owner = address; $0.collateralType = collateralType }
-                if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).deposits(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    response.deposits.forEach { deposit in
-                        self.mSelfDepositAmount = NSDecimalNumber.init(string: deposit.amount.amount)
-                    }
+    func onFetchCdpDeposit(_ address: String, _ collateralType: String) {
+        let request = Alamofire.request(BaseNetWork.depositCdpUrl(chainType, address, collateralType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
+                    self.onFetchFinished()
+                    return
                 }
-                try channel.close().wait()
+                let cdpDeposits = KavaCdpDeposits.init(responseData)
+                if let selfDeposit = cdpDeposits.result?.filter({ $0.depositor == self.account?.account_address}).first {
+                    self.mSelfDepositAmount = NSDecimalNumber.init(string: selfDeposit.amount?.amount)
+                }
+//                print("mSelfDepositAmount ", self.mSelfDepositAmount)
 
-            } catch {
-                print("onFetchgRPCCdpDeposits failed: \(error)")
+            case .failure(let error):
+                print("onFetchCdpDeposit ", error)
             }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+            self.onFetchFinished()
         }
     }
     
-//    func onFetchCdpDeposit(_ address: String, _ collateralType: String) {
-//        let request = Alamofire.request(BaseNetWork.depositCdpUrl(chainType, address, collateralType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-//        request.responseJSON { (response) in
-//            switch response.result {
-//            case .success(let res):
-//                guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-//                    self.onFetchFinished()
-//                    return
+//    //TODO check this grpc not working!
+//    func onFetchgRPCCdpDeposits(_ address: String, _ collateralType: String) {
+//        DispatchQueue.global().async {
+//            do {
+//                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+//                let req = Kava_Cdp_V1beta1_QueryDepositsRequest.with { $0.owner = address; $0.collateralType = collateralType }
+//                if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).deposits(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+//                    response.deposits.forEach { deposit in
+//                        self.mSelfDepositAmount = NSDecimalNumber.init(string: deposit.amount.amount)
+//                    }
 //                }
-//                let cdpDeposits = KavaCdpDeposits.init(responseData)
-//                if let selfDeposit = cdpDeposits.result?.filter { $0.depositor == self.account?.account_address}.first {
-//                    self.mSelfDepositAmount = NSDecimalNumber.init(string: selfDeposit.amount?.amount)
-//                }
-//                print("mSelfDepositAmount ", self.mSelfDepositAmount)
+//                try channel.close().wait()
 //
-//            case .failure(let error):
-//                print("onFetchCdpDeposit ", error)
+//            } catch {
+//                print("onFetchgRPCCdpDeposits failed: \(error)")
 //            }
-//            self.onFetchFinished()
+//            DispatchQueue.main.async(execute: { self.onFetchFinished() });
 //        }
 //    }
 }

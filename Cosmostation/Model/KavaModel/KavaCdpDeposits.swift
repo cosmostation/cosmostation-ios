@@ -22,3 +22,18 @@ public struct KavaCdpDeposits {
         }
     }
 }
+
+
+public struct CdpDeposit {
+    var cdp_id: String?
+    var depositor: String?
+    var amount: Coin?
+    
+    init(_ dictionary: NSDictionary?) {
+        self.cdp_id = dictionary?["cdp_id"] as? String
+        self.depositor = dictionary?["depositor"] as? String
+        if let rawAmount = dictionary?["amount"] as? NSDictionary {
+            self.amount = Coin.init(rawAmount)
+        }
+    }
+}
