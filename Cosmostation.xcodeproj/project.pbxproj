@@ -1740,7 +1740,6 @@
 		18FFB336281AF533004E65BB /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B23224A083E0019B7BB /* KeyboardViewController.swift */; };
 		18FFB33A281AF533004E65BB /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
 		18FFB33C281AF533004E65BB /* SifDexEthPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8FAF42719C28F005EAA9B /* SifDexEthPoolViewController.swift */; };
-		18FFB340281AF533004E65BB /* CdpListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DB2535573100C364F9 /* CdpListViewController.swift */; };
 		18FFB341281AF533004E65BB /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E086268C0A6700088391 /* RIPEMD160.swift */; };
 		18FFB342281AF533004E65BB /* RegisterDomain0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E9456254901D9007A9291 /* RegisterDomain0ViewController.swift */; };
 		18FFB34C281AF533004E65BB /* KavaSwapParam2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28129566250F5072007B217E /* KavaSwapParam2.swift */; };
@@ -1781,11 +1780,6 @@
 		18FFB3A7281AF533004E65BB /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1422489B030019B7BB /* IntroViewController.swift */; };
 		18FFB3A8281AF533004E65BB /* TxIncentiveDelegatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2812CA3C26DD4E160095C6AF /* TxIncentiveDelegatorCell.swift */; };
 		18FFB3B0281AF533004E65BB /* KavaSwap0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EEEC9A26DABA74002DDC4A /* KavaSwap0ViewController.swift */; };
-		18FFB3B4281AF533004E65BB /* HtlcResultSentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A33E424486DA20052BD3D /* HtlcResultSentCell.swift */; };
-		18FFB3BD281AF533004E65BB /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB2A8F2533DA2D00CFF097 /* AccountCell.swift */; };
-		18FFB3BE281AF533004E65BB /* HardPoolDeposit0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DB56F025FA3B7100B2F0E5 /* HardPoolDeposit0ViewController.swift */; };
-		18FFB3C5281AF533004E65BB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DDB224378D40097CAEE /* CardView.swift */; };
-		18FFB3C6281AF533004E65BB /* HardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DE2535573D00C364F9 /* HardListViewController.swift */; };
 		18FFB3CB281AF533004E65BB /* TokenDetailStakingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E750126CE36E40097CC04 /* TokenDetailStakingCell.swift */; };
 		18FFB3D3281AF533004E65BB /* StdSignMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = E151B64A224859E10026B8C0 /* StdSignMsg.swift */; };
 		18FFB3D4281AF533004E65BB /* VoteInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2845D87E246FAED7007CD497 /* VoteInfoTableViewCell.swift */; };
@@ -2437,8 +2431,6 @@
 		2848644E24A333CD0046E5C8 /* BottomLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2848644D24A333CD0046E5C8 /* BottomLineView.swift */; };
 		284D17A02535558A00C364F9 /* Kava.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 284D179F2535558A00C364F9 /* Kava.storyboard */; };
 		284D17D92535572300C364F9 /* DAppsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17D82535572300C364F9 /* DAppsListViewController.swift */; };
-		284D17DC2535573100C364F9 /* CdpListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DB2535573100C364F9 /* CdpListViewController.swift */; };
-		284D17DF2535573D00C364F9 /* HardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DE2535573D00C364F9 /* HardListViewController.swift */; };
 		284FBC7426DB961A00403FE2 /* DenomsToClaim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FBC7326DB961A00403FE2 /* DenomsToClaim.swift */; };
 		284FBC7926DBE96000403FE2 /* TxSwapTokenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FBC7726DBE96000403FE2 /* TxSwapTokenCell.swift */; };
 		284FBC7A26DBE96000403FE2 /* TxSwapTokenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 284FBC7826DBE96000403FE2 /* TxSwapTokenCell.xib */; };
@@ -2459,7 +2451,6 @@
 		285A33DE2447633D0052BD3D /* SelectAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A33DC2447633D0052BD3D /* SelectAccountCell.swift */; };
 		285A33DF2447633D0052BD3D /* SelectAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285A33DD2447633D0052BD3D /* SelectAccountCell.xib */; };
 		285A33E2244862670052BD3D /* HtlcResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A33E0244862670052BD3D /* HtlcResultViewController.swift */; };
-		285A33E624486DA20052BD3D /* HtlcResultSentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A33E424486DA20052BD3D /* HtlcResultSentCell.swift */; };
 		285A33E724486DA20052BD3D /* HtlcResultSentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285A33E524486DA20052BD3D /* HtlcResultSentCell.xib */; };
 		285A33EA24486DB60052BD3D /* HtlcResultClaimCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A33E824486DB60052BD3D /* HtlcResultClaimCell.swift */; };
 		285A33EB24486DB60052BD3D /* HtlcResultClaimCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285A33E924486DB60052BD3D /* HtlcResultClaimCell.xib */; };
@@ -2567,7 +2558,6 @@
 		28BB2A882533DA0B00CFF097 /* AccountPromotionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB2A862533DA0B00CFF097 /* AccountPromotionCell.xib */; };
 		28BB2A8C2533DA1C00CFF097 /* DomainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB2A8A2533DA1C00CFF097 /* DomainCell.swift */; };
 		28BB2A8D2533DA1C00CFF097 /* DomainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB2A8B2533DA1C00CFF097 /* DomainCell.xib */; };
-		28BB2A912533DA2D00CFF097 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB2A8F2533DA2D00CFF097 /* AccountCell.swift */; };
 		28BB2A922533DA2D00CFF097 /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB2A902533DA2D00CFF097 /* AccountCell.xib */; };
 		28CAAB6C25AC414A00416AA5 /* OkHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAAB6B25AC414A00416AA5 /* OkHistory.swift */; };
 		28CE973625872B7C006DEBEE /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE973525872B7C006DEBEE /* Signer.swift */; };
@@ -2658,6 +2648,17 @@
 		51FC6D9984FCBC8504B55E1F /* Pods_Cosmostation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB20D291C0AF536BBDAE928C /* Pods_Cosmostation.framework */; };
 		9F0C15A928DF518100BA24B1 /* TwoLinesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */; };
 		9F0C15AA28DF518100BA24B1 /* TwoLinesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */; };
+		9F48C75629097FA00015CF89 /* HardPoolDeposit0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DB56F025FA3B7100B2F0E5 /* HardPoolDeposit0ViewController.swift */; };
+		B113B26329094EF10004F5A6 /* CdpListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DB2535573100C364F9 /* CdpListViewController.swift */; };
+		B113B26429094F000004F5A6 /* CdpListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DB2535573100C364F9 /* CdpListViewController.swift */; };
+		B113B265290951F40004F5A6 /* HtlcResultSentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A33E424486DA20052BD3D /* HtlcResultSentCell.swift */; };
+		B113B266290952030004F5A6 /* HtlcResultSentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A33E424486DA20052BD3D /* HtlcResultSentCell.swift */; };
+		B113B267290952360004F5A6 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB2A8F2533DA2D00CFF097 /* AccountCell.swift */; };
+		B113B2682909523F0004F5A6 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB2A8F2533DA2D00CFF097 /* AccountCell.swift */; };
+		B113B2692909525B0004F5A6 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DDB224378D40097CAEE /* CardView.swift */; };
+		B113B26A290952630004F5A6 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DDB224378D40097CAEE /* CardView.swift */; };
+		B113B26B2909527F0004F5A6 /* HardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DE2535573D00C364F9 /* HardListViewController.swift */; };
+		B113B26C2909528A0004F5A6 /* HardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DE2535573D00C364F9 /* HardListViewController.swift */; };
 		C10F8E8103FA540DE8D91196 /* Pods_Cosmostation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB20D291C0AF536BBDAE928C /* Pods_Cosmostation.framework */; };
 		E10396772875AAB70055903A /* ProposalVotingPeriodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10396752875AAB70055903A /* ProposalVotingPeriodCell.swift */; };
 		E10396782875AAB70055903A /* ProposalVotingPeriodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10396752875AAB70055903A /* ProposalVotingPeriodCell.swift */; };
@@ -2760,7 +2761,6 @@
 		E1A82DD1224220910097CAEE /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD0224220910097CAEE /* Account.swift */; };
 		E1A82DD3224222E00097CAEE /* Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD2224222E00097CAEE /* Password.swift */; };
 		E1A82DD5224223250097CAEE /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD4224223250097CAEE /* Balance.swift */; };
-		E1A82DDC224378D40097CAEE /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DDB224378D40097CAEE /* CardView.swift */; };
 		E1A82DE32244821D0097CAEE /* PublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE22244821D0097CAEE /* PublicKey.swift */; };
 		E1A82DE5224482800097CAEE /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE4224482800097CAEE /* Coin.swift */; };
 		E1A82DE822448E940097CAEE /* WUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE722448E940097CAEE /* WUtils.swift */; };
@@ -7031,6 +7031,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F48C75629097FA00015CF89 /* HardPoolDeposit0ViewController.swift in Sources */,
+				B113B26B2909527F0004F5A6 /* HardListViewController.swift in Sources */,
+				B113B26A290952630004F5A6 /* CardView.swift in Sources */,
+				B113B267290952360004F5A6 /* AccountCell.swift in Sources */,
+				B113B265290951F40004F5A6 /* HtlcResultSentCell.swift in Sources */,
+				B113B26429094F000004F5A6 /* CdpListViewController.swift in Sources */,
 				18FFB260281AF533004E65BB /* KavaIncentiveParam.swift in Sources */,
 				1817CAE6283E2CE500523713 /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift in Sources */,
 				18FFB262281AF533004E65BB /* TxDelegateCell.swift in Sources */,
@@ -7233,10 +7239,8 @@
 				045DAD95289A8C18004ED9B4 /* AuthzUndelegate5ViewController.swift in Sources */,
 				1817CC2D283E2CE600523713 /* ibc_lightclients_localhost_v1_localhost.pb.swift in Sources */,
 				0443747A2862EA3A00C6A4ED /* Transfer5ViewController.swift in Sources */,
-				18FFB340281AF533004E65BB /* CdpListViewController.swift in Sources */,
 				04AA4C5A2906A6DE0027877B /* kava_earn_v1beta1_params.pb.swift in Sources */,
 				0451FC75282A3ABA00214FDA /* ChainKava.swift in Sources */,
-				18FFB340281AF533004E65BB /* CdpListViewController.swift in Sources */,
 				0451FC89282A3AE000214FDA /* ChainEvmos.swift in Sources */,
 				1817CB41283E2CE500523713 /* cosmos_base_store_v1beta1_snapshot.pb.swift in Sources */,
 				18FFB341281AF533004E65BB /* RIPEMD160.swift in Sources */,
@@ -7359,29 +7363,24 @@
 				1817CAB8283E2CE500523713 /* tendermint_crypto_proof.pb.swift in Sources */,
 				1817CBA8283E2CE500523713 /* gogoproto_gogo.pb.swift in Sources */,
 				04AA4C1E2906A6DD0027877B /* kava_committee_v1beta1_committee.pb.swift in Sources */,
-				18FFB3B4281AF533004E65BB /* HtlcResultSentCell.swift in Sources */,
+				1817CC3A283E2CE600523713 /* kava_cdp_v1beta1_tx.pb.swift in Sources */,
 				0451FC76282A3ABD00214FDA /* ChainFetchAi.swift in Sources */,
 				0451FC81282A3AC700214FDA /* ChainOkc.swift in Sources */,
 				045DAD89289A8BFB004ED9B4 /* AuthzUndelegate1ViewController.swift in Sources */,
-				18FFB3BD281AF533004E65BB /* AccountCell.swift in Sources */,
 				042A0CC0288E599F00C4DC38 /* cosmos_auth_v1beta1_query.grpc.swift in Sources */,
 				04AA4BC62906A6DD0027877B /* kava_evmutil_v1beta1_conversion_pair.pb.swift in Sources */,
 				042A0CBC288E599F00C4DC38 /* cosmos_authz_v1beta1_event.pb.swift in Sources */,
 				04AA4BE22906A6DD0027877B /* kava_swap_v1beta1_query.pb.swift in Sources */,
-				18FFB3BE281AF533004E65BB /* HardPoolDeposit0ViewController.swift in Sources */,
 				0451FCA4282A3B7500214FDA /* ChainInjective.swift in Sources */,
 				0451FC7E282A3AC700214FDA /* ChainBand.swift in Sources */,
 				1817CBC6283E2CE500523713 /* cosmos_staking_v1beta1_staking.pb.swift in Sources */,
 				04E165A428A0F49B000F12C0 /* confio_poe_v1beta1_genesis.pb.swift in Sources */,
-				18FFB3BD281AF533004E65BB /* AccountCell.swift in Sources */,
-				18FFB3BE281AF533004E65BB /* HardPoolDeposit0ViewController.swift in Sources */,
-				18FFB3C5281AF533004E65BB /* CardView.swift in Sources */,
 				04E165A228A0F49B000F12C0 /* confio_globalfee_v1beta1_query.grpc.swift in Sources */,
 				1817CC10283E2CE600523713 /* osmosis_pool-incentives_v1beta1_query.grpc.swift in Sources */,
 				1817CC3B283E2CE600523713 /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
 				1817CC30283E2CE600523713 /* sifnode_ethbridge_v1_types.pb.swift in Sources */,
 				1817CC00283E2CE600523713 /* starname_iov_escrow_v1beta1_query.grpc.swift in Sources */,
-				18FFB3C6281AF533004E65BB /* HardListViewController.swift in Sources */,
+				1817CC7A283E2CE600523713 /* kava_bep3_v1beta1_tx.pb.swift in Sources */,
 				18FFB3CB281AF533004E65BB /* TokenDetailStakingCell.swift in Sources */,
 				04AA4BD42906A6DD0027877B /* kava_issuance_v1beta1_query.pb.swift in Sources */,
 				1817CB57283E2CE500523713 /* desmos_subspaces_v1beta1_msgs.grpc.swift in Sources */,
@@ -7389,12 +7388,9 @@
 				1817CBE4283E2CE600523713 /* evmos_claims_v1_genesis.pb.swift in Sources */,
 				1817CB6A283E2CE500523713 /* sifnode_dispensation_v1_query.grpc.swift in Sources */,
 				04AA4BDC2906A6DD0027877B /* kava_swap_v1beta1_tx.grpc.swift in Sources */,
-				18FFB3B4281AF533004E65BB /* HtlcResultSentCell.swift in Sources */,
+				1817CB7E283E2CE500523713 /* kava_kavadist_v1beta1_proposal.pb.swift in Sources */,
 				042A0CB4288E599F00C4DC38 /* cosmos_auth_v1beta1_query.pb.swift in Sources */,
-				18FFB3BD281AF533004E65BB /* AccountCell.swift in Sources */,
-				18FFB3C5281AF533004E65BB /* CardView.swift in Sources */,
 				0451FCC2282A3C5000214FDA /* ChainCrescent.swift in Sources */,
-				18FFB3C6281AF533004E65BB /* HardListViewController.swift in Sources */,
 				1817CC50283E2CE600523713 /* sifnode_ethbridge_v1_tx.grpc.swift in Sources */,
 				1817CB90283E2CE500523713 /* osmosis_pool-incentives_v1beta1_genesis.pb.swift in Sources */,
 				04AA4C342906A6DE0027877B /* kava_incentive_v1beta1_claims.pb.swift in Sources */,
@@ -8088,6 +8084,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B113B26C2909528A0004F5A6 /* HardListViewController.swift in Sources */,
+				B113B2692909525B0004F5A6 /* CardView.swift in Sources */,
+				B113B2682909523F0004F5A6 /* AccountCell.swift in Sources */,
+				B113B266290952030004F5A6 /* HtlcResultSentCell.swift in Sources */,
+				B113B26329094EF10004F5A6 /* CdpListViewController.swift in Sources */,
 				28D7BDA125F0B707006EECD7 /* KavaIncentiveParam.swift in Sources */,
 				040FA96B275F55C300229F6F /* tendermint_farming_v1beta1_farming.pb.swift in Sources */,
 				04AA4BCB2906A6DD0027877B /* kava_swap_v1beta1_tx.pb.swift in Sources */,
@@ -8309,8 +8310,6 @@
 				047FB6EA281A4C53009D8AAF /* sifnode_clp_v1_querier.pb.swift in Sources */,
 				28E8FAF52719C28F005EAA9B /* SifDexEthPoolViewController.swift in Sources */,
 				040FAA21275F55C300229F6F /* desmos_fees_v1beta1_params.pb.swift in Sources */,
-				284D17DC2535573100C364F9 /* CdpListViewController.swift in Sources */,
-				284D17DC2535573100C364F9 /* CdpListViewController.swift in Sources */,
 				0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */,
 				283E9458254901D9007A9291 /* RegisterDomain0ViewController.swift in Sources */,
 				040FAA98275F55C400229F6F /* cryptoorg_supply_v1_accounts.pb.swift in Sources */,
@@ -8408,7 +8407,7 @@
 				28EEEC9C26DABA74002DDC4A /* KavaSwap0ViewController.swift in Sources */,
 				040FA8B6275F55C200229F6F /* desmos_posts_v1beta1_query.grpc.swift in Sources */,
 				040FA932275F55C300229F6F /* tendermint_version_types.pb.swift in Sources */,
-				285A33E624486DA20052BD3D /* HtlcResultSentCell.swift in Sources */,
+				04C43B77278D5F530022D5DF /* kava_hard_v1beta1_tx.pb.swift in Sources */,
 				040FA895275F55C200229F6F /* gravity_v1_msgs.pb.swift in Sources */,
 				E10396772875AAB70055903A /* ProposalVotingPeriodCell.swift in Sources */,
 				04AA4BB12906A6DD0027877B /* kava_swap_v1beta1_genesis.pb.swift in Sources */,
@@ -8417,7 +8416,6 @@
 				048C831327BF572800270528 /* evmos_erc20_v1_query.grpc.swift in Sources */,
 				047FB6F3281A4C53009D8AAF /* sifnode_clp_v1_tx.grpc.swift in Sources */,
 				040FA969275F55C300229F6F /* gravity_v1_query.pb.swift in Sources */,
-				28BB2A912533DA2D00CFF097 /* AccountCell.swift in Sources */,
 				28DB56F225FA3B7100B2F0E5 /* HardPoolDeposit0ViewController.swift in Sources */,
 				0451FCA3282A3B7500214FDA /* ChainInjective.swift in Sources */,
 				E1C5C0AB28992AC400E9E65D /* AuthzDelegate1ViewController.swift in Sources */,
@@ -8428,9 +8426,7 @@
 				040FA81D275F55C200229F6F /* cryptoorg_nft_v1_nft.pb.swift in Sources */,
 				04AA4BEF2906A6DD0027877B /* kava_kavadist_v1beta1_query.grpc.swift in Sources */,
 				04AA4C802907B6C50027877B /* kava_cdp_v1beta1_cdp.pb.swift in Sources */,
-				E1A82DDC224378D40097CAEE /* CardView.swift in Sources */,
 				0451FD882832370100214FDA /* osmosis_incentives_query.grpc.swift in Sources */,
-				284D17DF2535573D00C364F9 /* HardListViewController.swift in Sources */,
 				042A0CB9288E599F00C4DC38 /* cosmos_authz_v1beta1_query.grpc.swift in Sources */,
 				040FA814275F55C200229F6F /* tendermint_types_block.pb.swift in Sources */,
 				04AA4C452906A6DE0027877B /* kava_incentive_v1beta1_genesis.pb.swift in Sources */,
@@ -8439,20 +8435,19 @@
 				040FA9F0275F55C300229F6F /* google_api_annotations.pb.swift in Sources */,
 				283E750326CE36E40097CC04 /* TokenDetailStakingCell.swift in Sources */,
 				048C830727BF572800270528 /* evmos_erc20_v1_query.pb.swift in Sources */,
-				285A33E624486DA20052BD3D /* HtlcResultSentCell.swift in Sources */,
 				048C831927BF572800270528 /* evmos_erc20_v1_tx.grpc.swift in Sources */,
 				28BB2A912533DA2D00CFF097 /* AccountCell.swift in Sources */,
 				04AA4BC12906A6DD0027877B /* kava_earn_v1beta1_query.pb.swift in Sources */,
+				04C43B80278D5F530022D5DF /* kava_pricefeed_v1beta1_tx.pb.swift in Sources */,
+				048C831927BF572800270528 /* evmos_erc20_v1_tx.grpc.swift in Sources */,
 				0447AE8A288AAEF0004701A0 /* WalletAuthzCell.swift in Sources */,
 				040FA854275F55C200229F6F /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
-				E1A82DDC224378D40097CAEE /* CardView.swift in Sources */,
 				18D4C19B28C729C9003F230A /* ManageConnectionViewController.swift in Sources */,
 				042AEDFB286452C200E13825 /* OkDeposit1ViewController.swift in Sources */,
 				0451FD852832370100214FDA /* osmosis_superfluid_genesis.pb.swift in Sources */,
 				045DADB8289BCF69004ED9B4 /* AuthzSend5ViewController.swift in Sources */,
 				040FA9B4275F55C300229F6F /* desmos_profiles_v1beta1_msgs_profile.pb.swift in Sources */,
 				048C830027BF572800270528 /* evmos_epochs_v1_query.grpc.swift in Sources */,
-				284D17DF2535573D00C364F9 /* HardListViewController.swift in Sources */,
 				E151B64B224859E10026B8C0 /* StdSignMsg.swift in Sources */,
 				0451FD992832370100214FDA /* osmosis_claim_v1beta1_params.pb.swift in Sources */,
 				2845D880246FAED7007CD497 /* VoteInfoTableViewCell.swift in Sources */,
