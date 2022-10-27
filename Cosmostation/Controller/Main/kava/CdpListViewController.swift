@@ -134,9 +134,7 @@ class CdpListViewController: BaseViewController, UITableViewDelegate, UITableVie
                 }
                 try channel.close().wait()
                 
-            } catch {
-                print("onFetchgRPCCdpParam failed: \(error)")
-            }
+            } catch { print("onFetchgRPCCdpParam failed: \(error)") }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
@@ -147,14 +145,12 @@ class CdpListViewController: BaseViewController, UITableViewDelegate, UITableVie
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Cdp_V1beta1_QueryCdpsRequest.with { $0.owner = address }
                 if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).cdps(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("onFetchgRPCMyCdps ", response.cdps)
+//                    print("onFetchgRPCMyCdps ", response.cdps)
                     self.mMyCdps_gRPC = response.cdps
                 }
                 try channel.close().wait()
                 
-            } catch {
-                print("onFetchgRPCMyCdps failed: \(error)")
-            }
+            } catch { print("onFetchgRPCMyCdps failed: \(error)") }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
