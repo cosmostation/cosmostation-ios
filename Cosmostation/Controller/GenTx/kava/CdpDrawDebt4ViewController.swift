@@ -36,6 +36,14 @@ class CdpDrawDebt4ViewController: BaseViewController, PasswordViewDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        
+        btnBack.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        btnConfirm.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnBack.borderColor = UIColor.init(named: "_font05")
+        btnConfirm.borderColor = UIColor.init(named: "photon")
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {

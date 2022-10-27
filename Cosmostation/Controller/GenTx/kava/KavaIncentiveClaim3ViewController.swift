@@ -35,6 +35,14 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
         
         mIncentiveParam = BaseData.instance.mIncentiveParam
         mIncentiveRewards = BaseData.instance.mIncentiveRewards
+        
+        btnBack.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        btnConfirm.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnBack.borderColor = UIColor.init(named: "_font05")
+        btnConfirm.borderColor = UIColor.init(named: "photon")
     }
     
     override func enableUserInteraction() {

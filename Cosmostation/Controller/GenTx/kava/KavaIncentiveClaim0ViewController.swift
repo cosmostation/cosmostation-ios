@@ -42,15 +42,20 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
         kavaIncentiveAmountLabel.attributedText = WDP.dpAmount(kavaIncentiveAmount.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
         hardIncentiveAmountLabel.attributedText = WDP.dpAmount(hardIncentiveAmount.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
         swpIncentiveAmountLabel.attributedText = WDP.dpAmount(swpIncentiveAmount.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
+        
+        btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
+        btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
     }
     
     override func enableUserInteraction() {
         self.btnCancel.isUserInteractionEnabled = true
         self.btnNext.isUserInteractionEnabled = true
     }
-    
-    
-    
     
     @IBAction func onClickOption1(_ sender: UIButton) {
         initBtns()
