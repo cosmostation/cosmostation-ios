@@ -213,6 +213,54 @@ struct Kava_Incentive_V1beta1_SwapClaim {
   fileprivate var _baseClaim: Kava_Incentive_V1beta1_BaseMultiClaim? = nil
 }
 
+/// SavingsClaim stores the savings rewards that can be claimed by owner
+struct Kava_Incentive_V1beta1_SavingsClaim {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var baseClaim: Kava_Incentive_V1beta1_BaseMultiClaim {
+    get {return _baseClaim ?? Kava_Incentive_V1beta1_BaseMultiClaim()}
+    set {_baseClaim = newValue}
+  }
+  /// Returns true if `baseClaim` has been explicitly set.
+  var hasBaseClaim: Bool {return self._baseClaim != nil}
+  /// Clears the value of `baseClaim`. Subsequent reads from it will return its default value.
+  mutating func clearBaseClaim() {self._baseClaim = nil}
+
+  var rewardIndexes: [Kava_Incentive_V1beta1_MultiRewardIndex] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _baseClaim: Kava_Incentive_V1beta1_BaseMultiClaim? = nil
+}
+
+/// EarnClaim stores the earn rewards that can be claimed by owner
+struct Kava_Incentive_V1beta1_EarnClaim {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var baseClaim: Kava_Incentive_V1beta1_BaseMultiClaim {
+    get {return _baseClaim ?? Kava_Incentive_V1beta1_BaseMultiClaim()}
+    set {_baseClaim = newValue}
+  }
+  /// Returns true if `baseClaim` has been explicitly set.
+  var hasBaseClaim: Bool {return self._baseClaim != nil}
+  /// Clears the value of `baseClaim`. Subsequent reads from it will return its default value.
+  mutating func clearBaseClaim() {self._baseClaim = nil}
+
+  var rewardIndexes: [Kava_Incentive_V1beta1_MultiRewardIndex] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _baseClaim: Kava_Incentive_V1beta1_BaseMultiClaim? = nil
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "kava.incentive.v1beta1"
@@ -584,6 +632,82 @@ extension Kava_Incentive_V1beta1_SwapClaim: SwiftProtobuf.Message, SwiftProtobuf
   }
 
   static func ==(lhs: Kava_Incentive_V1beta1_SwapClaim, rhs: Kava_Incentive_V1beta1_SwapClaim) -> Bool {
+    if lhs._baseClaim != rhs._baseClaim {return false}
+    if lhs.rewardIndexes != rhs.rewardIndexes {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Kava_Incentive_V1beta1_SavingsClaim: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".SavingsClaim"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "base_claim"),
+    2: .standard(proto: "reward_indexes"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._baseClaim) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.rewardIndexes) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._baseClaim {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    }
+    if !self.rewardIndexes.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.rewardIndexes, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Kava_Incentive_V1beta1_SavingsClaim, rhs: Kava_Incentive_V1beta1_SavingsClaim) -> Bool {
+    if lhs._baseClaim != rhs._baseClaim {return false}
+    if lhs.rewardIndexes != rhs.rewardIndexes {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Kava_Incentive_V1beta1_EarnClaim: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".EarnClaim"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "base_claim"),
+    2: .standard(proto: "reward_indexes"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._baseClaim) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.rewardIndexes) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._baseClaim {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    }
+    if !self.rewardIndexes.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.rewardIndexes, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Kava_Incentive_V1beta1_EarnClaim, rhs: Kava_Incentive_V1beta1_EarnClaim) -> Bool {
     if lhs._baseClaim != rhs._baseClaim {return false}
     if lhs.rewardIndexes != rhs.rewardIndexes {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}

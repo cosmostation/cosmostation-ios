@@ -140,6 +140,58 @@ struct Kava_Incentive_V1beta1_MsgClaimSwapRewardResponse {
   init() {}
 }
 
+/// MsgClaimSavingsReward message type used to claim savings rewards
+struct Kava_Incentive_V1beta1_MsgClaimSavingsReward {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var sender: String = String()
+
+  var denomsToClaim: [Kava_Incentive_V1beta1_Selection] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// MsgClaimSavingsRewardResponse defines the Msg/ClaimSavingsReward response type.
+struct Kava_Incentive_V1beta1_MsgClaimSavingsRewardResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// MsgClaimEarnReward message type used to claim earn rewards
+struct Kava_Incentive_V1beta1_MsgClaimEarnReward {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var sender: String = String()
+
+  var denomsToClaim: [Kava_Incentive_V1beta1_Selection] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// MsgClaimEarnRewardResponse defines the Msg/ClaimEarnReward response type.
+struct Kava_Incentive_V1beta1_MsgClaimEarnRewardResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "kava.incentive.v1beta1"
@@ -405,6 +457,120 @@ extension Kava_Incentive_V1beta1_MsgClaimSwapRewardResponse: SwiftProtobuf.Messa
   }
 
   static func ==(lhs: Kava_Incentive_V1beta1_MsgClaimSwapRewardResponse, rhs: Kava_Incentive_V1beta1_MsgClaimSwapRewardResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Kava_Incentive_V1beta1_MsgClaimSavingsReward: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgClaimSavingsReward"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "sender"),
+    2: .standard(proto: "denoms_to_claim"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.sender) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.denomsToClaim) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.sender.isEmpty {
+      try visitor.visitSingularStringField(value: self.sender, fieldNumber: 1)
+    }
+    if !self.denomsToClaim.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.denomsToClaim, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Kava_Incentive_V1beta1_MsgClaimSavingsReward, rhs: Kava_Incentive_V1beta1_MsgClaimSavingsReward) -> Bool {
+    if lhs.sender != rhs.sender {return false}
+    if lhs.denomsToClaim != rhs.denomsToClaim {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Kava_Incentive_V1beta1_MsgClaimSavingsRewardResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgClaimSavingsRewardResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Kava_Incentive_V1beta1_MsgClaimSavingsRewardResponse, rhs: Kava_Incentive_V1beta1_MsgClaimSavingsRewardResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Kava_Incentive_V1beta1_MsgClaimEarnReward: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgClaimEarnReward"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "sender"),
+    2: .standard(proto: "denoms_to_claim"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.sender) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.denomsToClaim) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.sender.isEmpty {
+      try visitor.visitSingularStringField(value: self.sender, fieldNumber: 1)
+    }
+    if !self.denomsToClaim.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.denomsToClaim, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Kava_Incentive_V1beta1_MsgClaimEarnReward, rhs: Kava_Incentive_V1beta1_MsgClaimEarnReward) -> Bool {
+    if lhs.sender != rhs.sender {return false}
+    if lhs.denomsToClaim != rhs.denomsToClaim {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Kava_Incentive_V1beta1_MsgClaimEarnRewardResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgClaimEarnRewardResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Kava_Incentive_V1beta1_MsgClaimEarnRewardResponse, rhs: Kava_Incentive_V1beta1_MsgClaimEarnRewardResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

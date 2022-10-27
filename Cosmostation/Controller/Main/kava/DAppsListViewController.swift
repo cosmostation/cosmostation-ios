@@ -123,14 +123,17 @@ class DAppsListViewController: BaseViewController {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Swap_V1beta1_QueryPoolsRequest.init()
                 if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    self.mKavaSwapPools = response.pools
-//                    print("self.mKavaSwapPools ", self.mKavaSwapPools.count)
+                    response.pools.forEach { pool in
+                        //remove terra assets
+                        if (!pool.name.contains("B448C0CA358B958301D328CCDC5D5AD642FC30A6D3AE106FF721DB315F3DDE5C") &&
+                            !pool.name.contains("B8AF5D92165F35AB31F3FC7C7B444B9D240760FA5D406C49D24862BD0284E395")) {
+                            self.mKavaSwapPools.append(pool)
+                        }
+                    }
                 }
                 try channel.close().wait()
                 
-            } catch {
-                print("onFetchgRPCSwapPoolList failed: \(error)")
-            }
+            } catch { print("onFetchgRPCSwapPoolList failed: \(error)") }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
@@ -146,9 +149,7 @@ class DAppsListViewController: BaseViewController {
                 }
                 try channel.close().wait()
                 
-            } catch {
-                print("onFetchgRPCSwapPoolDeposit failed: \(error)")
-            }
+            } catch { print("onFetchgRPCSwapPoolDeposit failed: \(error)") }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
