@@ -9,14 +9,14 @@
 import Foundation
 
 public func getStarNameChainImgUrl(_ uri: String?) -> URL {
-    if let asset = getStarnameAssets().filter { $0.uri == uri }.first {
+    if let asset = getStarnameAssets().filter({ $0.uri == uri }).first {
         return URL(string: asset.chainImg ?? "")!
     }
     return URL(string: ChainImgStarnameUrl + "unknown.png")!
 }
 
 public func getStarNameChainName(_ uri: String?) -> String {
-    if let asset = getStarnameAssets().filter { $0.uri == uri }.first {
+    if let asset = getStarnameAssets().filter({ $0.uri == uri }).first {
         return asset.name
     }
     return "Unknown"

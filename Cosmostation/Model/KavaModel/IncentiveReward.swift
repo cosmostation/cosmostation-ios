@@ -101,7 +101,7 @@ public struct IncentiveReward {
     }
     
     public func getIncentiveAmount(_ denom: String) -> NSDecimalNumber {
-        if let coin = getAllIncentives().filter { $0.denom == denom }.first {
+        if let coin = getAllIncentives().filter({ $0.denom == denom }).first {
             return NSDecimalNumber.init(string: coin.amount)
         }
         return NSDecimalNumber.zero

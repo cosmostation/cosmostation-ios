@@ -59,7 +59,6 @@ class TxExitPoolCell: TxCell {
                 }
             }
         }
-        print("inCoin ", inCoin)
         if (inCoin != nil) {
             WDP.dpCoin(chainConfig, inCoin!, txPoolInDenomLabel, txPoolInAmountLabel)
         } else {

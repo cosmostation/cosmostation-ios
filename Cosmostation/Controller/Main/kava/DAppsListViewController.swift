@@ -77,9 +77,9 @@ class DAppsListViewController: BaseViewController {
     }
     
     var mFetchCnt = 0
-    @objc func onFetchKavaSwapPoolData() -> Bool {
+    @objc func onFetchKavaSwapPoolData() {
         if (self.mFetchCnt > 0)  {
-            return false
+            return
         }
         self.mFetchCnt = 4
         mKavaSwapPools.removeAll()
@@ -89,7 +89,6 @@ class DAppsListViewController: BaseViewController {
         self.onFetchgRPCSwapPoolList()
         self.onFetchgRPCSwapPoolDeposit(account!.account_address)
         self.onFetchgRPCKavaPrices()
-        return true
     }
     
     func onFetchFinished() {

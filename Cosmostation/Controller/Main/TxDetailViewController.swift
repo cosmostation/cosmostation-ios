@@ -271,7 +271,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func onBindMultiTransfer(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
         let cell:TxMultiTransferCell? = tableView.dequeueReusableCell(withIdentifier:"TxMultiTransferCell") as? TxMultiTransferCell
-        let msg = mTxInfo?.getMsg(position - 1)
         return cell!
     }
     
@@ -381,7 +380,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     
     func onFetchTx(_ txHash: String) {
-        var url = BaseNetWork.txUrl(chainType, txHash)
+        let url = BaseNetWork.txUrl(chainType, txHash)
         var request:DataRequest?
         if (self.chainType! == ChainType.BINANCE_MAIN) {
             request = Alamofire.request(url, method: .get, parameters: ["format":"json"], encoding: URLEncoding.default, headers: [:])
@@ -392,7 +391,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         request!.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-//                if(SHOW_LOG) { print("onFetchTx OK", self.mIsGen, " ", res) }
                 guard let info = res as? [String : Any], info["error"] == nil else {
                     if (self.mIsGen) {
                         self.mFetchCnt = self.mFetchCnt - 1

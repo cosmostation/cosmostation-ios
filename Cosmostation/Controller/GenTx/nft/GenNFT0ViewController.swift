@@ -43,14 +43,10 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
             self.loadingImg.stopAnimating()
             self.loadingImg.isHidden = true
             switch result {
-            case let .success(response):
-//                print("statusCode: \(response.statusCode)")
-//                print("result: \(response.data)")
+            case .success:
                 self.inInitView()
-                break
-            case let .failure(error):
+            case .failure:
                 self.onIPFSNetworkError()
-                break
             }
         }
         self.editRootView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:))))
@@ -147,7 +143,6 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
         picker.dismiss(animated: true) {
             self.showWaittingAlert()
             self.imageUpload(newImage!) { (success) in
-                print("upload result ", self.object?.hash)
                 if success {
                     self.onUpdateImgView(self.object?.hash)
                 } else {

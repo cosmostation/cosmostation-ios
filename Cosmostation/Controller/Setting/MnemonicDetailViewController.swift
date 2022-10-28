@@ -229,7 +229,7 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
             let trimmedString = textField?.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             if(trimmedString?.count ?? 0 > 0) {
                 self.mWords.nickName = trimmedString!
-                BaseData.instance.updateMnemonic(self.mWords)
+                _ = BaseData.instance.updateMnemonic(self.mWords)
                 BaseData.instance.setNeedRefresh(true)
                 self.onUpdateView()
             }

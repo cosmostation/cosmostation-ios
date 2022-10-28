@@ -105,8 +105,8 @@ class BaseViewController: UIViewController {
     
     func onDeleteWallet(_ account:Account, completion: @escaping () -> ()) {
         DispatchQueue.global().async {
-            BaseData.instance.deleteAccount(account: account)
-            BaseData.instance.deleteBalance(account: account)
+            _ = BaseData.instance.deleteAccount(account: account)
+            _ = BaseData.instance.deleteBalance(account: account)
             PushUtils.shared.sync()
             if (KeychainWrapper.standard.hasValue(forKey: account.account_uuid.sha1())) {
                 KeychainWrapper.standard.removeObject(forKey: account.account_uuid.sha1())
@@ -126,7 +126,7 @@ class BaseViewController: UIViewController {
                 self.onDeleteWallet(account) { }
             }
             PushUtils.shared.sync()
-            BaseData.instance.deleteMnemonic(mwords)
+            _ = BaseData.instance.deleteMnemonic(mwords)
             if (KeychainWrapper.standard.hasValue(forKey: mwords.uuid.sha1())) {
                 KeychainWrapper.standard.removeObject(forKey: mwords.uuid.sha1())
             }

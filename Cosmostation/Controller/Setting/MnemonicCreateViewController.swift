@@ -108,7 +108,7 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onCreateMenmonic() {
-        let words = try! Mnemonic.create(strength: .hight, language: .english)
+        let words = Mnemonic.create(strength: .hight, language: .english)
         self.mnemonicWords = words.components(separatedBy: " ")
         self.onUpdateView()
     }

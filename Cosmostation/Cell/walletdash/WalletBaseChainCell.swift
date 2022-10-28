@@ -67,7 +67,6 @@ class WalletBaseChainCell: UITableViewCell {
     func updateView(_ account: Account?, _ chainConfig: ChainConfig?) {
         if (account == nil || chainConfig == nil) { return }
         let stakingDenom = chainConfig!.stakeDenom
-        let chainType = chainConfig!.chainType
         let divideDecimal = chainConfig!.divideDecimal
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
         

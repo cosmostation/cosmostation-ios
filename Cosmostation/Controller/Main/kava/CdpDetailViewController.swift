@@ -427,7 +427,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
                     return
                 }
                 let cdpDeposits = KavaCdpDeposits.init(responseData)
-                if let selfDeposit = cdpDeposits.result?.filter { $0.depositor == self.account?.account_address}.first {
+                if let selfDeposit = cdpDeposits.result?.filter({ $0.depositor == self.account?.account_address}).first {
                     self.mSelfDepositAmount = NSDecimalNumber.init(string: selfDeposit.amount?.amount)
                 }
                 print("mSelfDepositAmount ", self.mSelfDepositAmount)

@@ -61,7 +61,6 @@ class TxTokenSwapCell: TxCell {
                 txSwapInAmountLabel.text = ""
                 txSwapInDenomLabel.text = ""
             }
-            print("inCoin ", inCoin)
             
             var outCoin: Coin?
             if response.txResponse.logs.count > position {
@@ -81,7 +80,6 @@ class TxTokenSwapCell: TxCell {
                     }
                 }
             }
-            print("outCoin ", outCoin)
             if (outCoin != nil) {
                 WDP.dpCoin(chainConfig, outCoin!, txSwapOutDenomLabel, txSwapOutAmountLabel)
             } else {
@@ -122,7 +120,6 @@ class TxTokenSwapCell: TxCell {
                 txSwapInAmountLabel.text = ""
                 txSwapInDenomLabel.text = ""
             }
-            print("inCoin ", inCoin)
             
             var outCoin: Coin?
             if response.txResponse.logs.count > position {
@@ -142,7 +139,6 @@ class TxTokenSwapCell: TxCell {
                     }
                 }
             }
-            print("outCoin ", outCoin)
             if (outCoin != nil) {
                 WDP.dpCoin(chainConfig, outCoin!, txSwapOutDenomLabel, txSwapOutAmountLabel)
             } else {

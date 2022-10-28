@@ -21,7 +21,7 @@ class LoadingImageView: UIImageView {
     }
     
     func setup() {
-        var imagesName = ["loading_1", "loading_2", "loading_3", "loading_4", "loading_5",
+        let imagesName = ["loading_1", "loading_2", "loading_3", "loading_4", "loading_5",
                           "loading_6", "loading_7", "loading_8", "loading_9", "loading_10",
                           "loading_11", "loading_12", "loading_13", "loading_14", "loading_15",
                           "loading_16", "loading_17", "loading_18", "loading_19", "loading_20",

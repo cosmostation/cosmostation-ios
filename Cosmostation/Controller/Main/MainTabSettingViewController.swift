@@ -31,7 +31,7 @@ class MainTabSettingViewController: BaseViewController {
         if (BaseData.instance.getNeedRefresh()) {
             BaseData.instance.setNeedRefresh(false)
             mainTabVC.onUpdateAccountDB()
-            mainTabVC.onFetchAccountData()
+            _ = mainTabVC.onFetchAccountData()
         }
         self.updateTitle()
     }

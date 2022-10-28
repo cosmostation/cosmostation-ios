@@ -52,12 +52,10 @@ class GenProfile0ViewController: BaseViewController, UIImagePickerControllerDele
             self.loadingImg.stopAnimating()
             self.loadingImg.isHidden = true
             switch result {
-            case let .success(response):
+            case .success:
                 self.inInitView()
-                break
-            case let .failure(error):
+            case .failure:
                 self.onIPFSNetworkError()
-                break
             }
         }
         self.editRootView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:))))

@@ -65,7 +65,7 @@ class GenDenom0ViewController: BaseViewController {
                 do {
                     let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                     let req = Irismod_Nft_QueryDenomRequest.with { $0.denomID = denomId }
-                    if let response = try? Irismod_Nft_QueryClient(channel: channel).denom(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    if let _ = try? Irismod_Nft_QueryClient(channel: channel).denom(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         DispatchQueue.main.async(execute: {
                             self.onShowToast(NSLocalizedString("error_nft_denom_exist", comment: ""))
                             return
@@ -86,7 +86,7 @@ class GenDenom0ViewController: BaseViewController {
                 do {
                     let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                     let req = Chainmain_Nft_V1_QueryDenomRequest.with { $0.denomID = denomId }
-                    if let response = try? Chainmain_Nft_V1_QueryClient(channel: channel).denom(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    if let _ = try? Chainmain_Nft_V1_QueryClient(channel: channel).denom(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         DispatchQueue.main.async(execute: {
                             self.onShowToast(NSLocalizedString("error_nft_denom_exist", comment: ""))
                             return
