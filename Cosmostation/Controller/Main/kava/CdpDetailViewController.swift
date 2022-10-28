@@ -353,7 +353,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
     
     func onShowSimpleHelp(_ title:String, _ msg:String) {
         let helpAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-        if #available(iOS 13.0, *) { helpAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        helpAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = NSTextAlignment.left
         let attributedMessage: NSMutableAttributedString = NSMutableAttributedString(

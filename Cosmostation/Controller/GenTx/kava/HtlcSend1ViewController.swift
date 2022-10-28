@@ -83,7 +83,7 @@ class HtlcSend1ViewController: BaseViewController, SBCardPopupDelegate {
                 msg = String(format: NSLocalizedString("error_can_not_bep3_account_msg2", comment: ""), WUtils.dpBepSwapChainName(pageHolderVC!.mHtlcToChain!))
             }
             let noAccountAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-            if #available(iOS 13.0, *) { noAccountAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+            noAccountAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
             noAccountAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
                 self.dismiss(animated: true, completion: nil)
             }))

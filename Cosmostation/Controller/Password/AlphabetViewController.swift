@@ -49,7 +49,7 @@ class AlphabetViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         
         self.AlphaBtns = [self.alphaBtn0, self.alphaBtn1, self.alphaBtn2, self.alphaBtn3, self.alphaBtn4, self.alphaBtn5, self.alphaBtn6, self.alphaBtn7, self.alphaBtn8, self.alphaBtn9,
                           self.alphaBtn10, self.alphaBtn11, self.alphaBtn12, self.alphaBtn13, self.alphaBtn14, self.alphaBtn15, self.alphaBtn16, self.alphaBtn17, self.alphaBtn18, self.alphaBtn19,
