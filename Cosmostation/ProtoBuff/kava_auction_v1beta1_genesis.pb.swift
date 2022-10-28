@@ -62,14 +62,23 @@ struct Kava_Auction_V1beta1_Params {
   /// Clears the value of `maxAuctionDuration`. Subsequent reads from it will return its default value.
   mutating func clearMaxAuctionDuration() {self._maxAuctionDuration = nil}
 
-  var bidDuration: SwiftProtobuf.Google_Protobuf_Duration {
-    get {return _bidDuration ?? SwiftProtobuf.Google_Protobuf_Duration()}
-    set {_bidDuration = newValue}
+  var forwardBidDuration: SwiftProtobuf.Google_Protobuf_Duration {
+    get {return _forwardBidDuration ?? SwiftProtobuf.Google_Protobuf_Duration()}
+    set {_forwardBidDuration = newValue}
   }
-  /// Returns true if `bidDuration` has been explicitly set.
-  var hasBidDuration: Bool {return self._bidDuration != nil}
-  /// Clears the value of `bidDuration`. Subsequent reads from it will return its default value.
-  mutating func clearBidDuration() {self._bidDuration = nil}
+  /// Returns true if `forwardBidDuration` has been explicitly set.
+  var hasForwardBidDuration: Bool {return self._forwardBidDuration != nil}
+  /// Clears the value of `forwardBidDuration`. Subsequent reads from it will return its default value.
+  mutating func clearForwardBidDuration() {self._forwardBidDuration = nil}
+
+  var reverseBidDuration: SwiftProtobuf.Google_Protobuf_Duration {
+    get {return _reverseBidDuration ?? SwiftProtobuf.Google_Protobuf_Duration()}
+    set {_reverseBidDuration = newValue}
+  }
+  /// Returns true if `reverseBidDuration` has been explicitly set.
+  var hasReverseBidDuration: Bool {return self._reverseBidDuration != nil}
+  /// Clears the value of `reverseBidDuration`. Subsequent reads from it will return its default value.
+  mutating func clearReverseBidDuration() {self._reverseBidDuration = nil}
 
   var incrementSurplus: Data = Data()
 
@@ -82,7 +91,8 @@ struct Kava_Auction_V1beta1_Params {
   init() {}
 
   fileprivate var _maxAuctionDuration: SwiftProtobuf.Google_Protobuf_Duration? = nil
-  fileprivate var _bidDuration: SwiftProtobuf.Google_Protobuf_Duration? = nil
+  fileprivate var _forwardBidDuration: SwiftProtobuf.Google_Protobuf_Duration? = nil
+  fileprivate var _reverseBidDuration: SwiftProtobuf.Google_Protobuf_Duration? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -137,7 +147,8 @@ extension Kava_Auction_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._Mes
   static let protoMessageName: String = _protobuf_package + ".Params"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "max_auction_duration"),
-    2: .standard(proto: "bid_duration"),
+    6: .standard(proto: "forward_bid_duration"),
+    7: .standard(proto: "reverse_bid_duration"),
     3: .standard(proto: "increment_surplus"),
     4: .standard(proto: "increment_debt"),
     5: .standard(proto: "increment_collateral"),
@@ -150,10 +161,11 @@ extension Kava_Auction_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._Mes
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._maxAuctionDuration) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._bidDuration) }()
       case 3: try { try decoder.decodeSingularBytesField(value: &self.incrementSurplus) }()
       case 4: try { try decoder.decodeSingularBytesField(value: &self.incrementDebt) }()
       case 5: try { try decoder.decodeSingularBytesField(value: &self.incrementCollateral) }()
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._forwardBidDuration) }()
+      case 7: try { try decoder.decodeSingularMessageField(value: &self._reverseBidDuration) }()
       default: break
       }
     }
@@ -162,9 +174,6 @@ extension Kava_Auction_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._Mes
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if let v = self._maxAuctionDuration {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    }
-    if let v = self._bidDuration {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }
     if !self.incrementSurplus.isEmpty {
       try visitor.visitSingularBytesField(value: self.incrementSurplus, fieldNumber: 3)
@@ -175,12 +184,19 @@ extension Kava_Auction_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._Mes
     if !self.incrementCollateral.isEmpty {
       try visitor.visitSingularBytesField(value: self.incrementCollateral, fieldNumber: 5)
     }
+    if let v = self._forwardBidDuration {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    }
+    if let v = self._reverseBidDuration {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Kava_Auction_V1beta1_Params, rhs: Kava_Auction_V1beta1_Params) -> Bool {
     if lhs._maxAuctionDuration != rhs._maxAuctionDuration {return false}
-    if lhs._bidDuration != rhs._bidDuration {return false}
+    if lhs._forwardBidDuration != rhs._forwardBidDuration {return false}
+    if lhs._reverseBidDuration != rhs._reverseBidDuration {return false}
     if lhs.incrementSurplus != rhs.incrementSurplus {return false}
     if lhs.incrementDebt != rhs.incrementDebt {return false}
     if lhs.incrementCollateral != rhs.incrementCollateral {return false}

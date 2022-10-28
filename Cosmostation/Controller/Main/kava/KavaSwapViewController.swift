@@ -132,8 +132,8 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
 
         //display swap rate with market price
         inputCoinExRateAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, 6)
-        let priceInput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mInputCoinDenom)) ?? NSDecimalNumber.zero
-        let priceOutput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mOutputCoinDenom)) ?? NSDecimalNumber.zero
+        let priceInput = WUtils.price(BaseData.instance.getBaseDenom(chainConfig, mInputCoinDenom))
+        let priceOutput = WUtils.price(BaseData.instance.getBaseDenom(chainConfig, mOutputCoinDenom))
         
         if (priceInput == NSDecimalNumber.zero || priceOutput == NSDecimalNumber.zero) {
             self.outputCoinExRateAmount.text = "?.??????"

@@ -30,9 +30,76 @@ struct Kava_Kavadist_V1beta1_Params {
 
   var periods: [Kava_Kavadist_V1beta1_Period] = []
 
+  var infrastructureParams: Kava_Kavadist_V1beta1_InfrastructureParams {
+    get {return _infrastructureParams ?? Kava_Kavadist_V1beta1_InfrastructureParams()}
+    set {_infrastructureParams = newValue}
+  }
+  /// Returns true if `infrastructureParams` has been explicitly set.
+  var hasInfrastructureParams: Bool {return self._infrastructureParams != nil}
+  /// Clears the value of `infrastructureParams`. Subsequent reads from it will return its default value.
+  mutating func clearInfrastructureParams() {self._infrastructureParams = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
+
+  fileprivate var _infrastructureParams: Kava_Kavadist_V1beta1_InfrastructureParams? = nil
+}
+
+/// InfrastructureParams define the parameters for infrastructure rewards.
+struct Kava_Kavadist_V1beta1_InfrastructureParams {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var infrastructurePeriods: [Kava_Kavadist_V1beta1_Period] = []
+
+  var coreRewards: [Kava_Kavadist_V1beta1_CoreReward] = []
+
+  var partnerRewards: [Kava_Kavadist_V1beta1_PartnerReward] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// CoreReward defines the reward weights for core infrastructure providers.
+struct Kava_Kavadist_V1beta1_CoreReward {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var address: Data = Data()
+
+  var weight: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// PartnerRewards defines the reward schedule for partner infrastructure providers.
+struct Kava_Kavadist_V1beta1_PartnerReward {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var address: Data = Data()
+
+  var rewardsPerSecond: Cosmos_Base_V1beta1_Coin {
+    get {return _rewardsPerSecond ?? Cosmos_Base_V1beta1_Coin()}
+    set {_rewardsPerSecond = newValue}
+  }
+  /// Returns true if `rewardsPerSecond` has been explicitly set.
+  var hasRewardsPerSecond: Bool {return self._rewardsPerSecond != nil}
+  /// Clears the value of `rewardsPerSecond`. Subsequent reads from it will return its default value.
+  mutating func clearRewardsPerSecond() {self._rewardsPerSecond = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _rewardsPerSecond: Cosmos_Base_V1beta1_Coin? = nil
 }
 
 /// Period stores the specified start and end dates, and the inflation, expressed as a decimal
@@ -82,6 +149,7 @@ extension Kava_Kavadist_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._Me
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "active"),
     3: .same(proto: "periods"),
+    4: .standard(proto: "infrastructure_params"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -92,6 +160,7 @@ extension Kava_Kavadist_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._Me
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularBoolField(value: &self.active) }()
       case 3: try { try decoder.decodeRepeatedMessageField(value: &self.periods) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._infrastructureParams) }()
       default: break
       }
     }
@@ -104,12 +173,136 @@ extension Kava_Kavadist_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._Me
     if !self.periods.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.periods, fieldNumber: 3)
     }
+    if let v = self._infrastructureParams {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Kava_Kavadist_V1beta1_Params, rhs: Kava_Kavadist_V1beta1_Params) -> Bool {
     if lhs.active != rhs.active {return false}
     if lhs.periods != rhs.periods {return false}
+    if lhs._infrastructureParams != rhs._infrastructureParams {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Kava_Kavadist_V1beta1_InfrastructureParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".InfrastructureParams"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "infrastructure_periods"),
+    2: .standard(proto: "core_rewards"),
+    3: .standard(proto: "partner_rewards"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.infrastructurePeriods) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.coreRewards) }()
+      case 3: try { try decoder.decodeRepeatedMessageField(value: &self.partnerRewards) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.infrastructurePeriods.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.infrastructurePeriods, fieldNumber: 1)
+    }
+    if !self.coreRewards.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.coreRewards, fieldNumber: 2)
+    }
+    if !self.partnerRewards.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.partnerRewards, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Kava_Kavadist_V1beta1_InfrastructureParams, rhs: Kava_Kavadist_V1beta1_InfrastructureParams) -> Bool {
+    if lhs.infrastructurePeriods != rhs.infrastructurePeriods {return false}
+    if lhs.coreRewards != rhs.coreRewards {return false}
+    if lhs.partnerRewards != rhs.partnerRewards {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Kava_Kavadist_V1beta1_CoreReward: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CoreReward"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "address"),
+    2: .same(proto: "weight"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.address) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.weight) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.address.isEmpty {
+      try visitor.visitSingularBytesField(value: self.address, fieldNumber: 1)
+    }
+    if !self.weight.isEmpty {
+      try visitor.visitSingularStringField(value: self.weight, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Kava_Kavadist_V1beta1_CoreReward, rhs: Kava_Kavadist_V1beta1_CoreReward) -> Bool {
+    if lhs.address != rhs.address {return false}
+    if lhs.weight != rhs.weight {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Kava_Kavadist_V1beta1_PartnerReward: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".PartnerReward"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "address"),
+    2: .standard(proto: "rewards_per_second"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.address) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._rewardsPerSecond) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.address.isEmpty {
+      try visitor.visitSingularBytesField(value: self.address, fieldNumber: 1)
+    }
+    if let v = self._rewardsPerSecond {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Kava_Kavadist_V1beta1_PartnerReward, rhs: Kava_Kavadist_V1beta1_PartnerReward) -> Bool {
+    if lhs.address != rhs.address {return false}
+    if lhs._rewardsPerSecond != rhs._rewardsPerSecond {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

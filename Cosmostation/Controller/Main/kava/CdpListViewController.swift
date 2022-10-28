@@ -134,9 +134,7 @@ class CdpListViewController: BaseViewController, UITableViewDelegate, UITableVie
                 }
                 try channel.close().wait()
                 
-            } catch {
-                print("onFetchgRPCCdpParam failed: \(error)")
-            }
+            } catch { print("onFetchgRPCCdpParam failed: \(error)") }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
@@ -152,9 +150,7 @@ class CdpListViewController: BaseViewController, UITableViewDelegate, UITableVie
                 }
                 try channel.close().wait()
                 
-            } catch {
-                print("onFetchgRPCMyCdps failed: \(error)")
-            }
+            } catch { print("onFetchgRPCMyCdps failed: \(error)") }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }

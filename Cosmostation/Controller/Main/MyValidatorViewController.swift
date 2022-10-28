@@ -187,7 +187,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
                     let simulReq = Signer.genSimulateClaimRewardsTxgRPC(authRes, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
                     if let simulRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).simulate(simulReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
-                        if (self.chainType != .SIF_MAIN) {
+                        if (self.chainType != .SIF_MAIN && self.chainType != .CHIHUAHUA_MAIN) {
                             let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
                             feeCoin = Coin.init(feeData.denom!, amount.stringValue)
                         }
@@ -269,7 +269,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
                             let simulReq = Signer.genSimulateCompounding(authRes, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
                             if let simulRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).simulate(simulReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                                 feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
-                                if (self.chainType != .SIF_MAIN) {
+                                if (self.chainType != .SIF_MAIN && self.chainType != .CHIHUAHUA_MAIN) {
                                     let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
                                     feeCoin = Coin.init(feeData.denom!, amount.stringValue)
                                 }

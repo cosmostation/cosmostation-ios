@@ -163,6 +163,10 @@ struct Kava_Incentive_V1beta1_Params {
   /// Clears the value of `claimEnd`. Subsequent reads from it will return its default value.
   mutating func clearClaimEnd() {self._claimEnd = nil}
 
+  var savingsRewardPeriods: [Kava_Incentive_V1beta1_MultiRewardPeriod] = []
+
+  var earnRewardPeriods: [Kava_Incentive_V1beta1_MultiRewardPeriod] = []
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -378,6 +382,8 @@ extension Kava_Incentive_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._M
     5: .standard(proto: "swap_reward_periods"),
     6: .standard(proto: "claim_multipliers"),
     7: .standard(proto: "claim_end"),
+    8: .standard(proto: "savings_reward_periods"),
+    9: .standard(proto: "earn_reward_periods"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -393,6 +399,8 @@ extension Kava_Incentive_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._M
       case 5: try { try decoder.decodeRepeatedMessageField(value: &self.swapRewardPeriods) }()
       case 6: try { try decoder.decodeRepeatedMessageField(value: &self.claimMultipliers) }()
       case 7: try { try decoder.decodeSingularMessageField(value: &self._claimEnd) }()
+      case 8: try { try decoder.decodeRepeatedMessageField(value: &self.savingsRewardPeriods) }()
+      case 9: try { try decoder.decodeRepeatedMessageField(value: &self.earnRewardPeriods) }()
       default: break
       }
     }
@@ -420,6 +428,12 @@ extension Kava_Incentive_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._M
     if let v = self._claimEnd {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
     }
+    if !self.savingsRewardPeriods.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.savingsRewardPeriods, fieldNumber: 8)
+    }
+    if !self.earnRewardPeriods.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.earnRewardPeriods, fieldNumber: 9)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -431,6 +445,8 @@ extension Kava_Incentive_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._M
     if lhs.swapRewardPeriods != rhs.swapRewardPeriods {return false}
     if lhs.claimMultipliers != rhs.claimMultipliers {return false}
     if lhs._claimEnd != rhs._claimEnd {return false}
+    if lhs.savingsRewardPeriods != rhs.savingsRewardPeriods {return false}
+    if lhs.earnRewardPeriods != rhs.earnRewardPeriods {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

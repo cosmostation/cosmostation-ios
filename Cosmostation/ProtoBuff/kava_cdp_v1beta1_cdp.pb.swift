@@ -88,7 +88,7 @@ struct Kava_Cdp_V1beta1_Deposit {
 
   var cdpID: UInt64 = 0
 
-  var depositor: String = String()
+  var depositor: Data = Data()
 
   var amount: Cosmos_Base_V1beta1_Coin {
     get {return _amount ?? Cosmos_Base_V1beta1_Coin()}
@@ -260,7 +260,7 @@ extension Kava_Cdp_V1beta1_Deposit: SwiftProtobuf.Message, SwiftProtobuf._Messag
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt64Field(value: &self.cdpID) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.depositor) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.depositor) }()
       case 3: try { try decoder.decodeSingularMessageField(value: &self._amount) }()
       default: break
       }
@@ -272,7 +272,7 @@ extension Kava_Cdp_V1beta1_Deposit: SwiftProtobuf.Message, SwiftProtobuf._Messag
       try visitor.visitSingularUInt64Field(value: self.cdpID, fieldNumber: 1)
     }
     if !self.depositor.isEmpty {
-      try visitor.visitSingularStringField(value: self.depositor, fieldNumber: 2)
+      try visitor.visitSingularBytesField(value: self.depositor, fieldNumber: 2)
     }
     if let v = self._amount {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
