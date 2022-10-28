@@ -47,6 +47,7 @@ class ChainJuno: ChainConfig {
     var authzSupoort = true
     var grpcUrl = "lcd-juno-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-juno-app.cosmostation.io/"
     var apiUrl = "https://api-juno.cosmostation.io/"
     var explorerUrl = MintscanUrl + "juno/"

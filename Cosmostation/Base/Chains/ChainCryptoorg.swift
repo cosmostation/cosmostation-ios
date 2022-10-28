@@ -47,6 +47,7 @@ class ChainCryptoorg: ChainConfig {
     var authzSupoort = false
     var grpcUrl = "lcd-cryptocom-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-cryptocom-app.cosmostation.io/"
     var apiUrl = "https://api-cryptocom.cosmostation.io/"
     var explorerUrl = MintscanUrl + "crypto-org/"

@@ -46,6 +46,7 @@ class ChainSentinel: ChainConfig {
     var authzSupoort = false
     var grpcUrl = "lcd-sentinel-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-sentinel-app.cosmostation.io/"
     var apiUrl = "https://api-sentinel.cosmostation.io/"
     var explorerUrl = MintscanUrl + "sentinel/"

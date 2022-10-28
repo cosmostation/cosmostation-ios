@@ -47,6 +47,7 @@ class ChainUmee: ChainConfig {
     var authzSupoort = true
     var grpcUrl = "lcd-umee-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-umee-app.cosmostation.io/"
     var apiUrl = "https://api-umee.cosmostation.io/"
     var explorerUrl = MintscanUrl + "umee/"

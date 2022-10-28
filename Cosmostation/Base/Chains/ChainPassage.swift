@@ -45,6 +45,7 @@ class ChainPassage: ChainConfig {
     var authzSupoort = true
     var grpcUrl = "lcd-passage-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-passage-app.cosmostation.io/"
     var apiUrl = "https://api-passage.cosmostation.io/"
     var explorerUrl = MintscanUrl + "passage/"

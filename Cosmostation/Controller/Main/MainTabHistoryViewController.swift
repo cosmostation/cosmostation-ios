@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SafariServices
 import UserNotifications
+import web3swift
 
 class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -59,6 +60,54 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
 //        self.emptyLabel.addGestureRecognizer(tapGesture)
 //        historyTableView.isHidden = true
 //        emptyLabel.isHidden = false
+        
+        self.onCheckWeb3()
+    }
+    
+    func onCheckWeb3() {
+        print("onCheckWeb3 ")
+//        DispatchQueue.global().async {
+//            do {
+//                let url = URL(string: "rpc-evmos-app.cosmostation.io")
+//                let web3 = try await Web3.new(url!)
+//                print("web3 ", web3.defaultBlock)
+//
+//            } catch {
+//                print("onCheckWeb3 failed: \(error)")
+//            }
+//            DispatchQueue.main.async(execute: {
+//                print("DispatchQueue")
+//            });
+//        }
+//        DispatchQueue.global().async {
+//            let url = URL(string: "https://rpc-evmos-app.cosmostation.io")
+//            let web3 = try? Web3.new(url!)
+//            print("web3 defaultBlock ", web3?.defaultBlock)
+//            print("web3 provider ", web3?.provider)
+//            print("web3 provider ", web3?.provider)
+//            
+//            
+//            let ethAddress = EthereumAddress.init(fromHex: "0xa76C7F20740300505FF26280E4b10873556CF4d0")
+//            let balance = try? web3?.eth.getBalance(address: ethAddress!)
+//            print("balance ", balance)
+//            
+//            let contractAddress = EthereumAddress.init(fromHex: "0x5842C5532b61aCF3227679a8b1BD0242a41752f2")
+//            let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
+//            let erc20Balance = try? erc20token.getBalance(account: ethAddress!)
+//            print("erc20Balance ", erc20Balance)
+//
+//            DispatchQueue.main.async(execute: {
+//                print("DispatchQueue")
+//            });
+//        }
+        
+//        let url = URL(string: "https://rpc-evmos-app.cosmostation.io")
+//        return try? await Web3.new(url!)
+//        let web3 = try? await Web3.new(url!)
+//        let web3 = try? await Web3.new(url!) {
+//            print("web3 ", web3?.defaultBlock)
+//        }
+//        print("web3 ", web3?.defaultBlock)
     }
     
     @objc func testClick(tapGestureRecognizer: UITapGestureRecognizer) {

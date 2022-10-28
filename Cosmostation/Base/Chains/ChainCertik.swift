@@ -45,6 +45,7 @@ class ChainCertik: ChainConfig {
     var authzSupoort = false
     var grpcUrl = "lcd-shentu-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-shentu-app.cosmostation.io/"
     var apiUrl = "https://api-shentu.cosmostation.io/"
     var explorerUrl = MintscanUrl + "shentu/"

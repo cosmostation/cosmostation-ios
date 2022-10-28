@@ -45,6 +45,7 @@ class ChainAssetMantle: ChainConfig {
     var authzSupoort = false
     var grpcUrl = "lcd-asset-mantle-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-asset-mantle-app.cosmostation.io/"
     var apiUrl = "https://api-asset-mantle.cosmostation.io/"
     var explorerUrl = MintscanUrl + "asset-mantle/"

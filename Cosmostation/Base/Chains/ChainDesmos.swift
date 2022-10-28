@@ -47,6 +47,7 @@ class ChainDesmos: ChainConfig {
     var authzSupoort = false
     var grpcUrl = "lcd-desmos-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-desmos-app.cosmostation.io/"
     var apiUrl = "https://api-desmos.cosmostation.io/"
     var explorerUrl = MintscanUrl + "desmos/"

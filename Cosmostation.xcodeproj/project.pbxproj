@@ -4348,6 +4348,7 @@
 				0451FC4D282A38F400214FDA /* ChainKava.swift */,
 				0451FC6B282A3A7300214FDA /* ChainKi.swift */,
 				0451FCB1282A3BC900214FDA /* ChainKonstellation.swift */,
+				0459103B28FCFE8300C51CE9 /* ChainKujira.swift */,
 				0468BF9F28C5ADE900CBC1C6 /* ChainLike.swift */,
 				0451FCA5282A3B7F00214FDA /* ChainLum.swift */,
 				0451FC6F282A3A9900214FDA /* ChainMedibloc.swift */,
@@ -4371,7 +4372,6 @@
 				04E165B628A0F873000F12C0 /* ChainTgrade.swift */,
 				0451FCB4282A3BD700214FDA /* ChainUmee.swift */,
 				04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */,
-				0459103B28FCFE8300C51CE9 /* ChainKujira.swift */,
 			);
 			path = Chains;
 			sourceTree = "<group>";

@@ -45,6 +45,7 @@ class ChainBitcana: ChainConfig {
     var authzSupoort = true
     var grpcUrl = "lcd-bitcanna-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-bitcanna-app.cosmostation.io/"
     var apiUrl = "https://api-bitcanna.cosmostation.io/"
     var explorerUrl = MintscanUrl + "bitcanna/"

@@ -46,6 +46,7 @@ class ChainAxelar: ChainConfig {
     var authzSupoort = false
     var grpcUrl = "lcd-axelar-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-axelar-app.cosmostation.io/"
     var apiUrl = "https://api-axelar.cosmostation.io/"
     var explorerUrl = MintscanUrl + "axelar/"

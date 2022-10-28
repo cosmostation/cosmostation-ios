@@ -12,6 +12,7 @@ import Toast_Swift
 import GRPC
 import NIO
 import SwiftProtobuf
+import web3swift
 
 class MainTabViewController: UITabBarController, UITabBarControllerDelegate, AccountSwitchDelegate {
     
@@ -1131,6 +1132,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             return
         }
         let request = Alamofire.request(BaseNetWork.mintscanErc20Tokens_v2(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+//        print("onFetchMintscanErc20 ", request.request?.url)
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -1138,6 +1140,15 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     erc20Tokens.forEach { erc20Token in
                         let token = MintscanToken.init(erc20Token)
                         BaseData.instance.mMintscanTokens.append(token)
+                    }
+                    BaseData.instance.setMyTokens(self.mAccount.account_address)
+                    Task {
+                        if let url = URL(string: self.mChainConfig.rpcUrl), let web3 = try? Web3.new(url) {
+                            BaseData.instance.mMyTokens.forEach { msToken in
+                                self.mFetchCnt = self.mFetchCnt + 1
+                                self.onFetchErc20Balance(web3, msToken.contract_address)
+                            }
+                        }
                     }
                 }
 
@@ -1147,6 +1158,20 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchFinished()
         }
     }
+    
+    func onFetchErc20Balance(_ web3: web3?, _ contAddress: String) {
+        print("onFetchErc20Balance ", web3?.provider, "  ", contAddress)
+        let contractAddress = EthereumAddress.init(fromHex: contAddress)
+        let ethAddress = EthereumAddress.init(fromHex: WKey.convertAddressCosmosToTender(mAccount.account_address))
+        let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
+        Task {
+            if let erc20Balance = try? erc20token.getBalance(account: ethAddress!) {
+                BaseData.instance.setMyTokenBalance(contAddress, String(erc20Balance))
+            }
+            self.onFetchFinished()
+        }
+    }
+    
     
     public func showWaittingAlert() {
         waitAlert = UIAlertController(title: "", message: "\n\n\n\n", preferredStyle: .alert)
