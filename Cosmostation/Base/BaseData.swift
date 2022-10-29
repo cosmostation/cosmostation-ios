@@ -440,7 +440,7 @@ final class BaseData : NSObject{
         } else if (chainConfig?.chainType == .OKEX_MAIN) {
             return NSDecimalNumber.init(string: FEE_OKC_BASE)
         }
-        if let feeAmount = getMinTxFeeAmounts(chainConfig).filter { $0.denom == chainConfig?.stakeDenom }.first?.amount {
+        if let feeAmount = getMinTxFeeAmounts(chainConfig).filter({ $0.denom == chainConfig?.stakeDenom }).first?.amount {
             return NSDecimalNumber.init(string: feeAmount)
         } else {
             return NSDecimalNumber.zero
@@ -1335,25 +1335,23 @@ final class BaseData : NSObject{
     }
     
     //for okchain display address
-    public func updateAccountAddress(_ account: Account) -> Int64 {
+    public func updateAccountAddress(_ account: Account) {
         let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
         do {
-            return try Int64(database.run(target.update(DB_ACCOUNT_ADDRESS <- account.account_address)))
+            try database.run(target.update(DB_ACCOUNT_ADDRESS <- account.account_address))
         } catch {
             print(error)
-            return -1
         }
     }
     
     //for okchain key custom_path 0 -> tendermint(996), 1 -> ethermint(996), 2 -> etherium(60)
-    public func updateAccountPathType(_ account: Account) -> Int64 {
-        if (account.account_import_time > 1643986800000) { return -1 }
+    public func updateAccountPathType(_ account: Account) {
+        if (account.account_import_time > 1643986800000) { return  }
         let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
         do {
-            return try Int64(database.run(target.update(DB_ACCOUNT_CUSTOM_PATH <- account.account_custom_path)))
+            try database.run(target.update(DB_ACCOUNT_CUSTOM_PATH <- account.account_custom_path))
         } catch {
             print(error)
-            return -1
         }
     }
     

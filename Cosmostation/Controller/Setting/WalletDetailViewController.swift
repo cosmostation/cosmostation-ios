@@ -132,7 +132,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
             let trimmedString = textField?.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             if (trimmedString?.count ?? 0 > 0) {
                 self.selectedAccount.account_nick_name = trimmedString!
-                BaseData.instance.updateAccount(self.selectedAccount)
+                _ = BaseData.instance.updateAccount(self.selectedAccount)
                 BaseData.instance.setNeedRefresh(true)
                 self.onReloadTableView(0)
             }

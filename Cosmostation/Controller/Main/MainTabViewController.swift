@@ -32,7 +32,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         self.notiView = NotificationView()
         
         self.onUpdateAccountDB()
-        self.onFetchAccountData()
+        _ = self.onFetchAccountData()
 
         self.delegate = self
         self.selectedIndex = BaseData.instance.getLastTab()

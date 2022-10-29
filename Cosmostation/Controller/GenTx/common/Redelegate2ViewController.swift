@@ -48,34 +48,33 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"RedelegateCell") as? RedelegateCell
-        if let validator = self.pageHolderVC.mToReDelegateValidators_gRPC[indexPath.row] as? Cosmos_Staking_V1beta1_Validator {
-            cell?.valMonikerLabel.text = validator.description_p.moniker
-            cell?.valMonikerLabel.adjustsFontSizeToFitWidth = true
-            if (validator.jailed == true) {
-                cell?.valjailedImg.isHidden = false
-                cell?.valjailedImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
-            } else {
-                cell?.valjailedImg.isHidden = true
-                cell?.valjailedImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
-            }
-            
-            cell?.valPowerLabel.attributedText = WDP.dpAmount(validator.tokens, cell!.valPowerLabel.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
-            cell?.valCommissionLabel.attributedText = WUtils.getDpEstAprCommission(cell!.valCommissionLabel.font, NSDecimalNumber.init(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18), pageHolderVC.chainType!)
-            if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {
-                cell?.valImg.af_setImage(withURL: url)
-            }
-            cell?.rootCard.needBorderUpdate = false
-            if (validator.operatorAddress == checkedValidator_gRPC?.operatorAddress) {
-                cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
-                cell?.valCheckedImg.tintColor = chainConfig?.chainColor
-                cell?.rootCard.layer.borderWidth = 1
-                cell?.rootCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
-                cell?.rootCard.clipsToBounds = true
-            } else {
-                cell?.valCheckedImg.image = UIImage.init(named: "iconCheck")
-                cell?.rootCard.layer.borderWidth = 0
-                cell?.rootCard.clipsToBounds = true
-            }
+        let validator = self.pageHolderVC.mToReDelegateValidators_gRPC[indexPath.row]
+        cell?.valMonikerLabel.text = validator.description_p.moniker
+        cell?.valMonikerLabel.adjustsFontSizeToFitWidth = true
+        if (validator.jailed == true) {
+            cell?.valjailedImg.isHidden = false
+            cell?.valjailedImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+        } else {
+            cell?.valjailedImg.isHidden = true
+            cell?.valjailedImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        }
+        
+        cell?.valPowerLabel.attributedText = WDP.dpAmount(validator.tokens, cell!.valPowerLabel.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
+        cell?.valCommissionLabel.attributedText = WUtils.getDpEstAprCommission(cell!.valCommissionLabel.font, NSDecimalNumber.init(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18), pageHolderVC.chainType!)
+        if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {
+            cell?.valImg.af_setImage(withURL: url)
+        }
+        cell?.rootCard.needBorderUpdate = false
+        if (validator.operatorAddress == checkedValidator_gRPC?.operatorAddress) {
+            cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
+            cell?.valCheckedImg.tintColor = chainConfig?.chainColor
+            cell?.rootCard.layer.borderWidth = 1
+            cell?.rootCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
+            cell?.rootCard.clipsToBounds = true
+        } else {
+            cell?.valCheckedImg.image = UIImage.init(named: "iconCheck")
+            cell?.rootCard.layer.borderWidth = 0
+            cell?.rootCard.clipsToBounds = true
         }
         return cell!
     }
@@ -85,18 +84,17 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let validator = self.pageHolderVC.mToReDelegateValidators_gRPC[indexPath.row] as? Cosmos_Staking_V1beta1_Validator {
-            self.checkedValidator_gRPC = validator
-            self.checkedPosition = indexPath
-            
-            let cell:RedelegateCell? = tableView.cellForRow(at: indexPath) as? RedelegateCell
-            cell?.rootCard.needBorderUpdate = false
-            cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
-            cell?.valCheckedImg.tintColor = chainConfig?.chainColor
-            cell?.rootCard.layer.borderWidth = 1
-            cell?.rootCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
-            cell?.rootCard.clipsToBounds = true
-        }
+        let validator = self.pageHolderVC.mToReDelegateValidators_gRPC[indexPath.row]
+        self.checkedValidator_gRPC = validator
+        self.checkedPosition = indexPath
+        
+        let cell:RedelegateCell? = tableView.cellForRow(at: indexPath) as? RedelegateCell
+        cell?.rootCard.needBorderUpdate = false
+        cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
+        cell?.valCheckedImg.tintColor = chainConfig?.chainColor
+        cell?.rootCard.layer.borderWidth = 1
+        cell?.rootCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
+        cell?.rootCard.clipsToBounds = true
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

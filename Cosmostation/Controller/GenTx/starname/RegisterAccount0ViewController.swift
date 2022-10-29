@@ -120,7 +120,7 @@ class RegisterAccount0ViewController: BaseViewController, SBCardPopupDelegate {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Starnamed_X_Starname_V1beta1_QueryStarnameRequest.with { $0.starname = account + "*" + doamin }
-                let response = try Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).starname(req, callOptions:BaseNetWork.getCallOptions()).response.wait()
+                _ = try Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).starname(req, callOptions:BaseNetWork.getCallOptions()).response.wait()
                 DispatchQueue.main.async(execute: {
                     self.onShowToast(NSLocalizedString("error_already_registered_account", comment: ""))
                     return

@@ -213,7 +213,7 @@ public struct Param {
     }
     
     func getUnbondingTime() -> UInt16 {
-        if let rawTime = params?.staking_params?.params?.unbonding_time?.filter{ $0.isNumber } as? String {
+        if let rawTime = params?.staking_params?.params?.unbonding_time?.filter({ $0.isNumber }) as? String {
             let time = UInt64(rawTime) ?? 1814400
             return UInt16(time / 24 / 60 / 60)
         }

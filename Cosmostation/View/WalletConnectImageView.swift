@@ -21,7 +21,7 @@ class WalletConnectImageView: UIImageView {
     }
     
     func setup() {
-        var imagesName = ["connectimg1", "connectimg2", "connectimg3", "connectimg4", "connectimg5",
+        let imagesName = ["connectimg1", "connectimg2", "connectimg3", "connectimg4", "connectimg5",
                           "connectimg6", "connectimg7", "connectimg8"]
         var images = [UIImage]()
         for i in 0..<imagesName.count {

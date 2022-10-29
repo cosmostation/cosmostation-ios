@@ -27,7 +27,7 @@ class OsmosisDAppViewController: BaseViewController {
         
         if #available(iOS 13.0, *) {
             dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font04")], for: .normal)
+            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor(named: "_font04")!], for: .normal)
             dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
             
         } else {
@@ -91,10 +91,7 @@ extension WUtils {
     }
     
     static func isAssetHasDenom(_ assets: [Osmosis_Gamm_V1beta1_PoolAsset], _ denom: String?) -> Bool {
-        guard let token = assets.filter({ $0.token.denom == denom }).first else {
-            return false
-        }
-        return true
+        assets.contains(where: { $0.token.denom == denom })
     }
     
     static func getOsmoLpTokenPerUsdPrice(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) -> NSDecimalNumber {
@@ -121,7 +118,7 @@ extension WUtils {
     static func getMyShareLpAmount(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool, _ denom: String) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         let myShare = BaseData.instance.getAvailableAmount_gRPC("gamm/pool/" + String(pool.id))
-        if let totalLpCoin = pool.poolAssets.filter { $0.token.denom == denom }.first?.token.amount {
+        if let totalLpCoin = pool.poolAssets.filter({ $0.token.denom == denom }).first?.token.amount {
             result = (NSDecimalNumber.init(string: totalLpCoin)).multiplying(by: myShare).dividing(by: NSDecimalNumber.init(string: pool.totalShares.amount), withBehavior: handler18)
         }
         return result

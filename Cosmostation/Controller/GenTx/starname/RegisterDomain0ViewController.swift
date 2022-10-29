@@ -128,8 +128,7 @@ class RegisterDomain0ViewController: BaseViewController {
                 let req = Starnamed_X_Starname_V1beta1_QueryDomainRequest.with {
                     $0.name = domain
                 }
-                let response = try Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).domain(req, callOptions:BaseNetWork.getCallOptions()).response.wait()
-//                print("onFetchgRPCDomainInfo ", response)
+                _ = try Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).domain(req, callOptions:BaseNetWork.getCallOptions()).response.wait()
                 DispatchQueue.main.async(execute: {
                     self.onShowToast(NSLocalizedString("error_already_registered_domain", comment: ""))
                     return

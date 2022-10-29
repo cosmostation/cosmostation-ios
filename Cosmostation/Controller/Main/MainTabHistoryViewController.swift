@@ -233,7 +233,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     func onFetchOkHistory(_ address: String) {
         let url = BaseNetWork.accountHistory(chainType!, address)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        print("onFetchOkHistory url ", request.request?.url)
         request.responseJSON { response in
             switch response.result {
             case .success(let res):
@@ -258,7 +257,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     func onFetchNewApiHistoryCustom(_ address:String) {
         let url = BaseNetWork.accountHistory(chainType!, address)
         let request = Alamofire.request(url, method: .get, parameters: ["limit":"50"], encoding: URLEncoding.default, headers: [:])
-        print("onFetchNewApiHistoryCustom url ", request.request?.url)
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):

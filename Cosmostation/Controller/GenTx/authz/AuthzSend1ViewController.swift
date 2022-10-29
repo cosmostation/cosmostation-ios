@@ -26,7 +26,7 @@ class AuthzSend1ViewController: BaseViewController, QrScannerDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        targetAddressTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(named: "_font04")])
+        targetAddressTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "_font04")!])
         
         cancelBtn.borderColor = UIColor.init(named: "_font05")
         nextBtn.borderColor = UIColor.init(named: "photon")

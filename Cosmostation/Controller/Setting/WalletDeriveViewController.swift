@@ -87,10 +87,8 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     var tempPath = 0
     @objc func onClickPath() {
-//        print("onClickPath")
-        let alert = UIAlertController(title: NSLocalizedString("select_hd_path", comment: ""), message: "\n\n\n\n\n\n", preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("select_hd_path", comment: ""), message: "\n\n\n\n\n\n", preferredStyle: .alert
         alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
-        alert.isModalInPopover = true
         let pickerFrame = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
         alert.view.addSubview(pickerFrame)
         pickerFrame.delegate = self
@@ -99,7 +97,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: { (UIAlertAction) in
-//            print("\(self.mPath)")
             self.showWaittingAlert()
             self.selectedHDPathLabel.text = String(self.mPath)
             self.mDerives.removeAll()

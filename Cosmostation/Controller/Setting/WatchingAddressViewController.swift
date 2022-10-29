@@ -101,7 +101,7 @@ class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
                 if (insertResult > 0) {
                     var hiddenChains = BaseData.instance.userHideChains()
                     if (hiddenChains.contains(chain)) {
-                        if let position = hiddenChains.firstIndex { $0 == chain } {
+                        if let position = hiddenChains.firstIndex(where: { $0 == chain }) {
                             hiddenChains.remove(at: position)
                         }
                         BaseData.instance.setUserHiddenChains(hiddenChains)

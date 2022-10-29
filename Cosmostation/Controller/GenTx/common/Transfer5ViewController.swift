@@ -311,9 +311,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                 let data = try? encoder.encode(postTx)
                 do {
                     let params = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
-                    print("params ", params)
                     let request = Alamofire.request(BaseNetWork.broadcastUrl(self.chainType), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
-                    print("request ", request.request?.url)
                     request.responseJSON { response in
                         var txResult = [String:Any]()
                         switch response.result {

@@ -77,7 +77,7 @@ public class WUtils {
     
     static func timeStringToDate(_ input: String) -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
         
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         if let result = dateFormatter.date(from: input) {
@@ -587,12 +587,11 @@ public class WUtils {
         if (okToken!.original_symbol == "usdt" || okToken!.original_symbol == "usdc" || okToken!.original_symbol == "usdk") {
             return amount
             
-        } else if (okToken!.original_symbol == "okb" && BaseData.instance.mOKBPrice != nil) {
+        } else if (okToken!.original_symbol == "okb") {
             return amount.multiplying(by: BaseData.instance.mOKBPrice)
             
         } else if (BaseData.instance.mOkTickerList != nil) {
             //TODO display with ticker update!
-            let okTickers = BaseData.instance.mOkTickerList?.data
             return NSDecimalNumber.zero
         }
         return NSDecimalNumber.zero
@@ -1324,7 +1323,7 @@ public class WUtils {
     
     static func onParsePeriodicRemainVestingAmount(_ vestingAccount: Cosmos_Vesting_V1beta1_PeriodicVestingAccount, _ denom: String, _ position: Int) -> NSDecimalNumber {
         let periods = onParsePeriodicRemainVestingsByDenom(vestingAccount, denom)
-        if (periods.count > position && periods[position] != nil) {
+        if position < periods.count {
             let coin = periods[position].amount.filter { $0.denom == denom }.first
             return NSDecimalNumber.init(string: coin?.amount)
         }
@@ -1352,7 +1351,7 @@ public class WUtils {
     
     static func onParseAutoRewardGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()
-        if (tx.txResponse.logs == nil || tx.txResponse.logs.count <= position || tx.txResponse.logs[position] == nil)  { return result }
+        guard tx.txResponse.logs.count <= position else { return result }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "transfer") {
                 for i in 0...event.attributes.count - 1 {
@@ -1378,7 +1377,7 @@ public class WUtils {
     
     static func onParseStakeRewardGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()
-        if (tx.txResponse.logs == nil || tx.txResponse.logs.count <= position || tx.txResponse.logs[position] == nil)  { return result }
+        guard tx.txResponse.logs.count <= position else { return result }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "withdraw_rewards") {
                 for i in 0...event.attributes.count - 1 {
@@ -1402,7 +1401,7 @@ public class WUtils {
     
     static func onParseCommisiondGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()
-        if (tx.txResponse.logs == nil || tx.txResponse.logs.count <= position || tx.txResponse.logs[position] == nil)  { return result }
+        guard tx.txResponse.logs.count <= position else { return result }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "withdraw_commission") {
                 for i in 0...event.attributes.count - 1 {
@@ -1426,7 +1425,7 @@ public class WUtils {
     
     static func onParseKavaIncentiveGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()
-        if (tx.txResponse.logs == nil || tx.txResponse.logs.count <= position || tx.txResponse.logs[position] == nil)  { return result }
+        guard tx.txResponse.logs.count <= position else { return result }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "claim_reward") {
                 for i in 0...event.attributes.count - 1 {
@@ -1450,7 +1449,7 @@ public class WUtils {
     
     static func onParseBep3ClaimAmountGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()
-        if (tx.txResponse.logs == nil || tx.txResponse.logs.count <= position || tx.txResponse.logs[position] == nil)  { return result }
+        guard tx.txResponse.logs.count <= position else { return result }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "transfer") {
                 for i in 0...event.attributes.count - 1 {
@@ -1632,11 +1631,10 @@ extension UIImage {
     }
     
     public class func gifImageWithURL(_ gifUrl:String) -> UIImage? {
-        guard let bundleURL:URL? = URL(string: gifUrl)
-            else {
-                return nil
+        guard let bundleURL: URL = URL(string: gifUrl) else {
+            return nil
         }
-        guard let imageData = try? Data(contentsOf: bundleURL!) else {
+        guard let imageData = try? Data(contentsOf: bundleURL) else {
             return nil
         }
         

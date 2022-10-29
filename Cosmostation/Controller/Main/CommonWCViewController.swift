@@ -369,10 +369,10 @@ class CommonWCViewController: BaseViewController {
     
     func rejectSessionRequest() {
         if (!self.isDeepLink && !self.isDapp) {
-            self.interactor?.rejectSession()
+            _ = self.interactor?.rejectSession()
         } else {
             self.moveToBackgroundIfNeedAndAction {
-                self.interactor?.rejectSession()
+                _ = self.interactor?.rejectSession()
             }
         }
         
