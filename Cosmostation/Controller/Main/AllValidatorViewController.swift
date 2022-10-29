@@ -107,7 +107,7 @@ class AllValidatorViewController: BaseViewController, UITableViewDelegate, UITab
     
     @objc func onStartSort() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("sort_by_name", comment: ""), style: UIAlertAction.Style.default, handler: { (action) in
             BaseData.instance.setAllValidatorSort(1)

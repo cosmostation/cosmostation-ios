@@ -101,6 +101,7 @@ public struct Msg: Codable {
         var withdraw_address: String?
         var validator_src_address: String?
         var validator_dst_address: String?
+        var validator: String?
         var delegation: Coin?
         var delegator_addr: String?
         var validator_addr: String?
@@ -181,6 +182,7 @@ public struct Msg: Codable {
             case withdraw_address
             case validator_src_address
             case validator_dst_address
+            case validator
             case delegation
             case delegator_addr
             case validator_addr
@@ -360,6 +362,10 @@ public struct Msg: Codable {
             
             if let vaddress =  dictionary["validator_dst_address"] as? String {
                 self.validator_dst_address = vaddress
+            }
+            
+            if let validator =  dictionary["validator"] as? String {
+                self.validator = validator
             }
             
             if let rawValue = dictionary["delegation"] as? [String : Any] {

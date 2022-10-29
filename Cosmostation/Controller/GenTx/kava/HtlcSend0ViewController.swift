@@ -65,7 +65,6 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
         self.toSwapableCoinList = WUtils.getHtlcSwappableCoin(pageHolderVC.chainType!)
         if (self.toSwapableCoinList.count <= 0) { pageHolderVC.onBeforePage() }
         self.toSwapDenom = pageHolderVC.mHtlcDenom;
-        print("toSwapDenom ", toSwapDenom)
         
         self.onCheckSwapParam()
         self.updateView()
@@ -209,9 +208,8 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
                     self.pageHolderVC.mKavaSwapParam2 = self.kavaSwapParam2
                     self.onCheckSwapSupply()
 
-                case .failure(let error):
+                case .failure:
                     self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                    return
                 }
         }
         
@@ -230,9 +228,8 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
                     self.pageHolderVC.mKavaSwapSupply2 = self.kavaSwapSupply2
                     self.updateView()
                     
-                case .failure(let error):
+                case .failure:
                     self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                    return
                 }
         }
         

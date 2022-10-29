@@ -65,9 +65,9 @@ class SifDexDAppViewController: BaseViewController {
     }
     
     var mFetchCnt = 0
-    @objc func onFetchSifDexData() -> Bool {
+    @objc func onFetchSifDexData() {
         if (self.mFetchCnt > 0)  {
-            return false
+            return
         }
         self.mFetchCnt = 2
         BaseData.instance.mSifDexPools_gRPC.removeAll()
@@ -75,7 +75,6 @@ class SifDexDAppViewController: BaseViewController {
         
         self.onFetchPools()
         self.onFetchMyPoolAssets(self.account!.account_address)
-        return true
     }
     
     func onFetchFinished() {

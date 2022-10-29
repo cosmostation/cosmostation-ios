@@ -43,14 +43,10 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
             self.loadingImg.stopAnimating()
             self.loadingImg.isHidden = true
             switch result {
-            case let .success(response):
-//                print("statusCode: \(response.statusCode)")
-//                print("result: \(response.data)")
+            case .success:
                 self.inInitView()
-                break
-            case let .failure(error):
+            case .failure:
                 self.onIPFSNetworkError()
-                break
             }
         }
         self.editRootView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:))))
@@ -147,7 +143,6 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
         picker.dismiss(animated: true) {
             self.showWaittingAlert()
             self.imageUpload(newImage!) { (success) in
-                print("upload result ", self.object?.hash)
                 if success {
                     self.onUpdateImgView(self.object?.hash)
                 } else {
@@ -242,7 +237,7 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
     
     func showAlertForSettings() {
         let settingsAlert = UIAlertController (title: NSLocalizedString("permission_photo_title", comment: "") , message: nil, preferredStyle: .alert)
-        if #available(iOS 13.0, *) { settingsAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        settingsAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let settingsAction = UIAlertAction(title: "Settings", style: .destructive) { (_) -> Void in
             let settingsUrl = NSURL(string:UIApplication.openSettingsURLString)
             if let url = settingsUrl {
@@ -268,7 +263,7 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
         let title = NSLocalizedString("str_ipfs_connect_fail_title", comment: "")
         let msg = NSLocalizedString("str_ipfs_connect_fail_msg", comment: "")
         let noticeAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: { _ in
             self.pageHolderVC.onBeforePage()
         }))

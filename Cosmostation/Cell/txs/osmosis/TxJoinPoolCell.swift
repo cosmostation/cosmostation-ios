@@ -90,7 +90,6 @@ class TxJoinPoolCell: TxCell {
                 }
             }
         }
-        print("outCoin ", outCoin)
         if (outCoin != nil) {
             WDP.dpCoin(chainConfig, outCoin!, txPoolOutDenomLabel, txPoolOutAmountLabel)
             

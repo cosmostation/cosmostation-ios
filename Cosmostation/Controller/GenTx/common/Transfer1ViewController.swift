@@ -211,8 +211,6 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
                 pageHolderVC.mMintscanPath = WUtils.getMintscanPath(chainConfig!, recipientChainConfig!, toSendDenom!)
             }
         }
-        print("channel ", pageHolderVC.mMintscanPath?.channel)
-        print("port ", pageHolderVC.mMintscanPath?.port)
         pageHolderVC.mMintscanAsset = mintscanAsset
         pageHolderVC.mMintscanTokens = mintscanTokens
     }
@@ -284,7 +282,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     func onShowMatchedStarName(_ starname: String, _ matchedAddress: String) {
         let msg = String(format: NSLocalizedString("str_starname_confirm_msg", comment: ""), starname, matchedAddress)
         let alertController = UIAlertController(title: NSLocalizedString("str_starname_confirm_title", comment: ""), message: msg, preferredStyle: .alert)
-        if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let settingsAction = UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default) { (_) -> Void in
             self.btnCancel.isUserInteractionEnabled = false
             self.btnNext.isUserInteractionEnabled = false

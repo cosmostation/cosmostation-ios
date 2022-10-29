@@ -320,7 +320,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             
         } else {
             let alertController = UIAlertController(title: NSLocalizedString("tx_set_fee", comment: ""), message: "", preferredStyle: .actionSheet)
-            if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+            alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
             let feeInfo = WUtils.getFeeInfos(chainConfig)
             for i in 0 ..< Int(feeInfo.count) {
                 let feeAction = UIAlertAction(title: feeInfo[i].title + " Fee", style: .default) { (_) -> Void in
@@ -381,7 +381,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     
     @objc func onStartSort() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("sort_by_name", comment: ""), style: UIAlertAction.Style.default, handler: { (action) in
             BaseData.instance.setMyValidatorSort(1)

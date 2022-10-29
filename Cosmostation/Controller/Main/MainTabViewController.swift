@@ -28,12 +28,12 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         
         self.notiView = NotificationView()
         
         self.onUpdateAccountDB()
-        self.onFetchAccountData()
+        _ = self.onFetchAccountData()
 
         self.delegate = self
         self.selectedIndex = BaseData.instance.getLastTab()

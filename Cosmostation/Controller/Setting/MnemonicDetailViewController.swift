@@ -157,7 +157,7 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
             let enginerAlert = UIAlertController(title: NSLocalizedString("str_enginer_is_on_title", comment: ""),
                                                  message: NSLocalizedString("str_enginer_is_on_msg", comment: ""),
                                                  preferredStyle: .alert)
-            if #available(iOS 13.0, *) { enginerAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+            enginerAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
             enginerAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default))
             enginerAlert.addAction(UIAlertAction(title:NSLocalizedString("continue", comment: ""), style: .destructive, handler: { _ in
                 self.onDeriveWallet()
@@ -172,7 +172,7 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
         let deleteAlert = UIAlertController(title: NSLocalizedString("delete_menmonic", comment: ""),
                                             message: String(format: NSLocalizedString("delete_menmonic_msg", comment: ""), String(self.mWords.getLinkedWalletCnt())),
                                             preferredStyle: .alert)
-        if #available(iOS 13.0, *) { deleteAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        deleteAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive, handler: { _ in
             let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
             self.navigationItem.title = ""
@@ -200,7 +200,7 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
     
     func onCopyAlert() {
         let copyAlert = UIAlertController(title: NSLocalizedString("str_safe_copy_title", comment: ""), message: NSLocalizedString("str_safe_copy_msg", comment: ""), preferredStyle: .alert)
-        if #available(iOS 13.0, *) { copyAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        copyAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         copyAlert.addAction(UIAlertAction(title: NSLocalizedString("str_raw_copy", comment: ""), style: .destructive, handler: { _ in
             UIPasteboard.general.string = self.mWords.getWords()
             self.onShowToast(NSLocalizedString("mnemonic_copied", comment: ""))
@@ -217,7 +217,7 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
     
     func onNameEditAlert() {
         let nameAlert = UIAlertController(title: NSLocalizedString("change_mnemonic_name", comment: ""), message: nil, preferredStyle: .alert)
-        if #available(iOS 13.0, *) { nameAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        nameAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         nameAlert.addTextField { (textField) in
             textField.placeholder = NSLocalizedString("mnemonic_name", comment: "")
         }
@@ -229,7 +229,7 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
             let trimmedString = textField?.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             if(trimmedString?.count ?? 0 > 0) {
                 self.mWords.nickName = trimmedString!
-                BaseData.instance.updateMnemonic(self.mWords)
+                _ = BaseData.instance.updateMnemonic(self.mWords)
                 BaseData.instance.setNeedRefresh(true)
                 self.onUpdateView()
             }

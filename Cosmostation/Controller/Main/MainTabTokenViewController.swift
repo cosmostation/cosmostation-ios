@@ -258,7 +258,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     
     func onBepSelectDialog(_ denom: String) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("bep3_tranfser", comment: ""), style: UIAlertAction.Style.default, handler: { (action) in
             self.onStartBep3TransferVC(denom)

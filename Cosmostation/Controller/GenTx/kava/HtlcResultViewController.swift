@@ -212,7 +212,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             
             
         } else if (self.mHtlcToChain == ChainType.KAVA_MAIN) {
-            let chainConfig = ChainKava.init(.KAVA_MAIN)
             cell?.blockHeightLabel.text = String(mClaimTxInfogRPC!.txResponse.height)
             cell?.txHashLabel.text = mClaimTxInfogRPC?.txResponse.txhash
             cell?.memoLabel.text = mClaimTxInfogRPC?.tx.body.memo
@@ -300,9 +299,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             self.mTimeStamp = Date().millisecondsSince1970 / 1000
             self.mRandomNumber = WKey.generateRandomBytes()
             self.mRandomNumberHash = WKey.getRandomNumnerHash(self.mRandomNumber!, self.mTimeStamp!)
-            print("BINANCE mTimeStamp ", self.mTimeStamp)
-            print("BINANCE mRandomNumber ", self.mRandomNumber)
-            print("BINANCE mRandomNumberHash ", self.mRandomNumberHash)
 
             let bnbMsg = MsgGenerator.genBnbCreateHTLCSwapMsg(self.chainType!,
                                                               self.mHtlcToChain!,
@@ -377,9 +373,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             self.mTimeStamp = Date().millisecondsSince1970 / 1000
             self.mRandomNumber = WKey.generateRandomBytes()
             self.mRandomNumberHash = WKey.getRandomNumnerHash(self.mRandomNumber!, self.mTimeStamp!)
-            print("KAVA mTimeStamp ", self.mTimeStamp)
-            print("KAVA mRandomNumber ", self.mRandomNumber)
-            print("KAVA mRandomNumberHash ", self.mRandomNumberHash)
             
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
@@ -639,7 +632,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     
     func onShowMoreSwapWait() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("more_wait_swap_title", comment: ""), message: NSLocalizedString("more_wait_swap_msg", comment: ""), preferredStyle: .alert)
-        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
             self.onStartMainTab()
@@ -654,7 +647,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     
     
     func onFetchSendTx() {
-        print("onFetchSendTx ", mSendHash)
         if (self.chainType == ChainType.BINANCE_MAIN) {
             let request = Alamofire.request(BaseNetWork.txUrl(self.chainType, mSendHash!), method: .get, parameters: ["format":"json"], encoding: URLEncoding.default, headers: [:])
             request.responseJSON { (response) in
@@ -695,7 +687,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     
     var mClaimTxFetchCnt = 50
     func onFetchClaimTx() {
-        print("onFetchClaimTx ", mClaimHash)
         onUpdateProgress(3)
         if (self.mHtlcToChain == ChainType.BINANCE_MAIN) {
             let request = Alamofire.request(BaseNetWork.txUrl(self.mHtlcToChain, mClaimHash!), method: .get, parameters: ["format":"json"], encoding: URLEncoding.default, headers: [:])

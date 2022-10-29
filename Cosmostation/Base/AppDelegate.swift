@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             } else {
                 scheme = url
-                if let mainVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabViewController {
+                if let mainVC = UIApplication.shared.foregroundWindow?.rootViewController as? MainTabViewController {
                     mainVC.processScheme()
                 } else {
                     let emptyWcVc = EmptyWCViewController(nibName: "EmptyWCViewController", bundle: nil)
@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if (BaseData.instance.getUsingAppLock() && BaseData.instance.hasPassword()) {
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 passwordVC.mTarget = PASSWORD_ACTION_APP_LOCK
-                if #available(iOS 13.0, *) { passwordVC.isModalInPresentation = true }
+                passwordVC.isModalInPresentation = true
                 application.topViewController!.present(passwordVC, animated: true, completion: nil)
             }
         }
@@ -157,13 +157,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 extension UIApplication{
     var topViewController: UIViewController? {
-        if keyWindow?.rootViewController == nil{
-            return keyWindow?.rootViewController
-        }
+        var pointedViewController = foregroundWindow?.rootViewController
         
-        var pointedViewController = keyWindow?.rootViewController
-        
-        while  pointedViewController?.presentedViewController != nil {
+        while pointedViewController?.presentedViewController != nil {
             switch pointedViewController?.presentedViewController {
             case let navagationController as UINavigationController:
                 pointedViewController = navagationController.viewControllers.last

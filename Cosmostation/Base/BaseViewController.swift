@@ -29,7 +29,7 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        overrideUserInterfaceStyle = BaseData.instance.getThemeType()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -105,8 +105,8 @@ class BaseViewController: UIViewController {
     
     func onDeleteWallet(_ account:Account, completion: @escaping () -> ()) {
         DispatchQueue.global().async {
-            BaseData.instance.deleteAccount(account: account)
-            BaseData.instance.deleteBalance(account: account)
+            _ = BaseData.instance.deleteAccount(account: account)
+            _ = BaseData.instance.deleteBalance(account: account)
             PushUtils.shared.sync()
             if (KeychainWrapper.standard.hasValue(forKey: account.account_uuid.sha1())) {
                 KeychainWrapper.standard.removeObject(forKey: account.account_uuid.sha1())
@@ -126,7 +126,7 @@ class BaseViewController: UIViewController {
                 self.onDeleteWallet(account) { }
             }
             PushUtils.shared.sync()
-            BaseData.instance.deleteMnemonic(mwords)
+            _ = BaseData.instance.deleteMnemonic(mwords)
             if (KeychainWrapper.standard.hasValue(forKey: mwords.uuid.sha1())) {
                 KeychainWrapper.standard.removeObject(forKey: mwords.uuid.sha1())
             }
@@ -154,7 +154,7 @@ class BaseViewController: UIViewController {
         if (chainConfig == nil || account == nil) { return }
         if (chainConfig!.etherAddressSupport) {
             let alert = UIAlertController(title: NSLocalizedString("address_type", comment: ""), message: "", preferredStyle: .alert)
-            if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+            alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
             alert.addAction(UIAlertAction(title: NSLocalizedString("tendermint_type", comment: ""), style: .default, handler: { _ in
                 self.shareAddress(account!.account_address, account!.getDpName())
             }))
@@ -226,7 +226,7 @@ class BaseViewController: UIViewController {
     
     func onShowAddMenomicDialog() {
         let alert = UIAlertController(title: NSLocalizedString("alert_title_no_private_key", comment: ""), message: NSLocalizedString("alert_msg_no_private_key", comment: ""), preferredStyle: .alert)
-        if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         alert.addAction(UIAlertAction(title: NSLocalizedString("add_mnemonic", comment: ""), style: .default, handler: { _ in
             self.onStartImportMnemonic()
         }))
