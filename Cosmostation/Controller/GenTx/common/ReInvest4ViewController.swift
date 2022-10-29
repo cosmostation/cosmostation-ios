@@ -79,7 +79,7 @@ class ReInvest4ViewController: BaseViewController, PasswordViewDelegate {
     @IBAction func onClickConfirm(_ sender: UIButton) {
         if (checkIsWasteFee()) {
             let disableAlert = UIAlertController(title: NSLocalizedString("fee_over_title", comment: ""), message: NSLocalizedString("fee_over_msg", comment: ""), preferredStyle: .alert)
-            if #available(iOS 13.0, *) { disableAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+            disableAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
             disableAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
                 self.dismiss(animated: true, completion: nil)
             }))

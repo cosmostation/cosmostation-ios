@@ -64,7 +64,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         
         mAccount = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         chainType = ChainFactory.getChainType(mAccount.account_base_chain)
@@ -223,7 +223,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     UIApplication.shared.open(url!, options: [:], completionHandler: nil)
                 } else {
                     let alert = UIAlertController(title: NSLocalizedString("warnning", comment: ""), message: NSLocalizedString("error_no_telegram", comment: ""), preferredStyle: .alert)
-                    if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+                    alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
                     let action = UIAlertAction(title: "Download And Install", style: .default, handler: { (UIAlertAction) in
                         let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id686449807")
                         if(UIApplication.shared.canOpenURL(urlAppStore!))
@@ -353,7 +353,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         )
         let showAlert = UIAlertController(title: nil, message: "", preferredStyle: .alert)
         showAlert.setValue(attributedMessage, forKey: "attributedMessage")
-        if #available(iOS 13.0, *) { showAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        showAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let autopass0Action = UIAlertAction(title: NSLocalizedString("autopass_5min", comment: ""), style: .default, handler: { _ in
             self.onSetAutoPass(1)
         })
@@ -385,7 +385,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     
     func onShowCurrenyDialog() {
         let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        if #available(iOS 13.0, *) { showAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        showAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let usdAction = UIAlertAction(title: NSLocalizedString("currency_usd", comment: ""), style: .default, handler: { _ in
             self.onSetCurrency(0)
         })
@@ -488,7 +488,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     
     func onShowThemeDialog() {
         let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        if #available(iOS 13.0, *) { showAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        showAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let systemAction = UIAlertAction(title: NSLocalizedString("theme_system", comment: ""), style: .default, handler: { _ in
             self.onSetTheme(0)
         })
@@ -589,7 +589,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     func onShowStarnameWcDialog() {
         let starnameWCAlert = UIAlertController(title: NSLocalizedString("str_starname_walletconnect_alert_title", comment: ""),
                                                 message: NSLocalizedString("str_starname_walletconnect_alert_msg", comment: ""), preferredStyle: .alert)
-        if #available(iOS 13.0, *) { starnameWCAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        starnameWCAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         starnameWCAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))
@@ -615,7 +615,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         let enginerAlert = UIAlertController(title: NSLocalizedString("str_enginer_alert_title", comment: ""),
                                              message: NSLocalizedString("str_enginer_alert_msg", comment: ""),
                                              preferredStyle: .alert)
-        if #available(iOS 13.0, *) { enginerAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        enginerAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         enginerAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: { _ in
             self.enginerModeSwitch.setOn(false, animated: true)
             self.dismiss(animated: true, completion: nil)
@@ -628,7 +628,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     
     func onShowPasscodeEnginerModeDialog() {
         let passcodeAlert = UIAlertController(title: "password", message: nil, preferredStyle: .alert)
-        if #available(iOS 13.0, *) { passcodeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        passcodeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         passcodeAlert.addTextField { (textField) in
             textField.placeholder = "insert password"
         }

@@ -338,7 +338,7 @@ class PasswordViewController: BaseViewController {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 if (self.mTarget == PASSWORD_ACTION_DEEPLINK_LOCK) {
                     appDelegate.scheme = self.mSchemeURL
-                    if let mainVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabViewController {
+                    if let mainVC = UIApplication.shared.foregroundWindow?.rootViewController as? MainTabViewController {
                         mainVC.processScheme()
                     }
                 }

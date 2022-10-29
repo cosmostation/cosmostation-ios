@@ -47,7 +47,7 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
     func onShowDBUpdate2() {
         DispatchQueue.main.async(execute: {
             let dbAlert = UIAlertController(title: "DB Upgrading", message: "\nPlease wait for upgrade", preferredStyle: .alert)
-            if #available(iOS 13.0, *) { dbAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+            dbAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
             self.present(dbAlert, animated: true, completion: nil)
             
             DispatchQueue.global(qos: .background).async(execute: {
@@ -182,7 +182,7 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
     
     func onShowNetworkAlert() {
         let netAlert = UIAlertController(title: NSLocalizedString("error_network", comment: ""), message: NSLocalizedString("error_network_msg", comment: ""), preferredStyle: .alert)
-        if #available(iOS 13.0, *) { netAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        netAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let action = UIAlertAction(title: NSLocalizedString("retry", comment: ""), style: .default, handler: { (UIAlertAction) in
             self.onCheckAppVersion()
         })
@@ -192,7 +192,7 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
     
     func onShowDisableAlert() {
         let disableAlert = UIAlertController(title: NSLocalizedString("error_disable", comment: ""), message: NSLocalizedString("error_disable_msg", comment: ""), preferredStyle: .alert)
-        if #available(iOS 13.0, *) { disableAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        disableAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let action = UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: { (UIAlertAction) in
             exit(-1)
         })
@@ -202,7 +202,7 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
     
     func onShowUpdateAlert() {
         let updateAlert = UIAlertController(title: NSLocalizedString("update_title", comment: ""), message: NSLocalizedString("update_msg", comment: ""), preferredStyle: .alert)
-        if #available(iOS 13.0, *) { updateAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        updateAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let action = UIAlertAction(title: NSLocalizedString("go_appstore", comment: ""), style: .default, handler: { (UIAlertAction) in
             let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id1459830339")
             if(UIApplication.shared.canOpenURL(urlAppStore!)) {

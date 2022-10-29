@@ -87,8 +87,8 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     var tempPath = 0
     @objc func onClickPath() {
-        let alert = UIAlertController(title: NSLocalizedString("select_hd_path", comment: ""), message: "\n\n\n\n\n\n", preferredStyle: .alert)
-        if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        let alert = UIAlertController(title: NSLocalizedString("select_hd_path", comment: ""), message: "\n\n\n\n\n\n", preferredStyle: .alert
+        alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let pickerFrame = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
         alert.view.addSubview(pickerFrame)
         pickerFrame.delegate = self
@@ -133,7 +133,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         if (selectedCnt > 0) {
             let msg = String(format: NSLocalizedString("import_account_msg", comment: ""), String(selectedCnt))
             let addingAlert = UIAlertController (title: NSLocalizedString("import_account_title", comment: "") , message: msg, preferredStyle: .alert)
-            if #available(iOS 13.0, *) { addingAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+            addingAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
             addingAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil))
             addingAlert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: { (UIAlertAction) in
                 self.onSaveAccount()
