@@ -30,7 +30,7 @@ class DecimalViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         
         self.DeciamlBtns = [self.deciamlBtn0, self.deciamlBtn1, self.deciamlBtn2,
                             self.deciamlBtn3, self.deciamlBtn4, self.deciamlBtn5,

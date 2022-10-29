@@ -648,7 +648,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     //no need yet
     func onClickOkVoteValMode() {
         let okVoteTypeAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        if #available(iOS 13.0, *) { okVoteTypeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        okVoteTypeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         okVoteTypeAlert.addAction(UIAlertAction(title: NSLocalizedString("str_vote_direct", comment: ""), style: .default, handler: { _ in
             self.onClickOkVoteVal()
         }))
@@ -745,7 +745,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let helpAlert = UIAlertController(title: "", message: msg1 + msg2 + msg3 + msg4, preferredStyle: .alert)
-        if #available(iOS 13.0, *) { helpAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        helpAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         helpAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))
@@ -789,7 +789,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         let noKeyAlert = UIAlertController(title: NSLocalizedString("buy_without_key_title", comment: ""),
                                            message: NSLocalizedString("buy_without_key_msg", comment: ""),
                                            preferredStyle: .alert)
-        if #available(iOS 13.0, *) { noKeyAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        noKeyAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         noKeyAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: {_ in
             self.dismiss(animated: true, completion: nil)
         }))
@@ -806,7 +806,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         let selectFiatAlert = UIAlertController(title: NSLocalizedString("buy_select_fiat_title", comment: ""),
                                                 message: NSLocalizedString("buy_select_fiat_msg", comment: ""),
                                                 preferredStyle: .alert)
-        if #available(iOS 13.0, *) { selectFiatAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        selectFiatAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let usdAction = UIAlertAction(title: "USD", style: .default, handler: { _ in
             self.onStartMoonpaySignature("usd")
         })

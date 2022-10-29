@@ -49,7 +49,7 @@ class ManageConnectionViewController: BaseViewController, UITableViewDelegate, U
             cell.action = {
                 let title = NSLocalizedString("wc_manage_disconnect_alert_message", comment: "")
                 let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-                if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+                alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
                 alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
                     WalletConnectManager.shared.removeWhitelist(url: url)
                     self.reloadItems()

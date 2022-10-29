@@ -70,7 +70,7 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
     @IBAction func onClickConfirm(_ sender: Any) {
         if (checkIsWasteFee()) {
             let disableAlert = UIAlertController(title: NSLocalizedString("fee_over_title", comment: ""), message: NSLocalizedString("fee_over_msg", comment: ""), preferredStyle: .alert)
-            if #available(iOS 13.0, *) { disableAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+            disableAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
             disableAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: nil))
             self.present(disableAlert, animated: true) {
                 let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
