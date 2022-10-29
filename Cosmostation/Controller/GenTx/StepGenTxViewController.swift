@@ -83,7 +83,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mIncentiveHardReceivable = NSDecimalNumber.zero
     var mHardMoneyMarketDenom: String?
     var mHardPoolCoins: Array<Coin>?
-    var mIncentiveMultiplier: String?
     var mHardPoolCoin = Coin.init()
     var mKavaShareAmount = NSDecimalNumber.zero
     var mKavaCollateralParam: Kava_Cdp_V1beta1_CollateralParam?

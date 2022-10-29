@@ -14,16 +14,29 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
     
     @IBOutlet weak var txFeeAmountLabel: UILabel!
     @IBOutlet weak var txFeeDenomLabel: UILabel!
-    @IBOutlet weak var kavaIncentiveAmountLabel: UILabel!
-    @IBOutlet weak var hardIncentiveAmountLabel: UILabel!
-    @IBOutlet weak var swpIncentiveAmountLabel: UILabel!
     @IBOutlet weak var lockupLabel: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!
     
+    @IBOutlet weak var incen0Layer: UIView!
+    @IBOutlet weak var incen0Amount: UILabel!
+    @IBOutlet weak var incen0Denom: UILabel!
+    @IBOutlet weak var incen1Layer: UIView!
+    @IBOutlet weak var incen1Amount: UILabel!
+    @IBOutlet weak var incen1Denom: UILabel!
+    @IBOutlet weak var incen2Layer: UIView!
+    @IBOutlet weak var incen2Amount: UILabel!
+    @IBOutlet weak var incen2Denom: UILabel!
+    @IBOutlet weak var incen3Layer: UIView!
+    @IBOutlet weak var incen3Amount: UILabel!
+    @IBOutlet weak var incen3Denom: UILabel!
+    @IBOutlet weak var incen4Layer: UIView!
+    @IBOutlet weak var incen4Amount: UILabel!
+    @IBOutlet weak var incen4Denom: UILabel!
+    
     var pageHolderVC: StepGenTxViewController!
-    var mIncentiveParam: IncentiveParam!
+//    var mIncentiveParam: IncentiveParam!
     var mIncentiveRewards: IncentiveReward!
 
     override func viewDidLoad() {
@@ -33,7 +46,7 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        mIncentiveParam = BaseData.instance.mIncentiveParam
+//        mIncentiveParam = BaseData.instance.mIncentiveParam
         mIncentiveRewards = BaseData.instance.mIncentiveRewards
         
         btnBack.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
@@ -53,28 +66,27 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
     
     func onUpdateView() {
         WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
-        
-        var kavaIncentiveAmount = mIncentiveRewards.getIncentiveAmount(KAVA_MAIN_DENOM)
-        var hardIncentiveAmount = mIncentiveRewards.getIncentiveAmount(KAVA_HARD_DENOM)
-        var swpIncentiveAmount = mIncentiveRewards.getIncentiveAmount(KAVA_SWAP_DENOM)
-        
-        if (pageHolderVC.mIncentiveMultiplier == "small") {
-            lockupLabel.text = "1 Month"
-            kavaIncentiveAmount = kavaIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_MAIN_DENOM, 0), withBehavior: WUtils.handler0)
-            hardIncentiveAmount = hardIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_HARD_DENOM, 0), withBehavior: WUtils.handler0)
-            swpIncentiveAmount = swpIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_SWAP_DENOM, 0), withBehavior: WUtils.handler0)
-            
-        } else {
-            lockupLabel.text = "12 Month"
-            kavaIncentiveAmount = kavaIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_MAIN_DENOM, 1), withBehavior: WUtils.handler0)
-            hardIncentiveAmount = hardIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_HARD_DENOM, 1), withBehavior: WUtils.handler0)
-            swpIncentiveAmount = swpIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_SWAP_DENOM, 1), withBehavior: WUtils.handler0)
+        let IncentiveCoins = mIncentiveRewards.getAllIncentives()
+        if (IncentiveCoins.count > 0) {
+            incen0Layer.isHidden = false
+            WDP.dpCoin(chainConfig, IncentiveCoins[0], incen0Denom, incen0Amount)
         }
-        
-        kavaIncentiveAmountLabel.attributedText = WDP.dpAmount(kavaIncentiveAmount.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
-        hardIncentiveAmountLabel.attributedText = WDP.dpAmount(hardIncentiveAmount.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
-        swpIncentiveAmountLabel.attributedText = WDP.dpAmount(swpIncentiveAmount.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
-        
+        if (IncentiveCoins.count > 1) {
+            incen1Layer.isHidden = false
+            WDP.dpCoin(chainConfig, IncentiveCoins[1], incen1Denom, incen1Amount)
+        }
+        if (IncentiveCoins.count > 2) {
+            incen2Layer.isHidden = false
+            WDP.dpCoin(chainConfig, IncentiveCoins[2], incen2Denom, incen2Amount)
+        }
+        if (IncentiveCoins.count > 3) {
+            incen3Layer.isHidden = false
+            WDP.dpCoin(chainConfig, IncentiveCoins[3], incen3Denom, incen3Amount)
+        }
+        if (IncentiveCoins.count > 4) {
+            incen4Layer.isHidden = false
+            WDP.dpCoin(chainConfig, IncentiveCoins[4], incen4Denom, incen4Amount)
+        }
         memoLabel.text = pageHolderVC.mMemo
     }
     
@@ -122,9 +134,10 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
+            // 2022.10.30 HARDCODING FOR FIX INCENTIVE
             let reqTx = Signer.genSignedKavaIncentiveAll(auth!,
                                                          self.account!.account_address,
-                                                         self.pageHolderVC.mIncentiveMultiplier!,
+                                                         "large",
                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                          self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                          self.chainType!)

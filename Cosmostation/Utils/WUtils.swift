@@ -1425,7 +1425,9 @@ public class WUtils {
     
     static func onParseKavaIncentiveGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()
-        guard tx.txResponse.logs.count <= position else { return result }
+        if (tx.txResponse.logs.count <= position) {
+            return result
+        }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "claim_reward") {
                 for i in 0...event.attributes.count - 1 {

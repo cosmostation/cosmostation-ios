@@ -1654,6 +1654,13 @@ class Signer {
             }
             anyMsgs.append(getKavaIncentiveSwap(sender, denoms_to_claims))
         }
+        if (incentiveRewards.getEarnRewardDenoms().count > 0) {
+            var denoms_to_claims = Array<Kava_Incentive_V1beta1_Selection>()
+            for denom in incentiveRewards.getEarnRewardDenoms() {
+                denoms_to_claims.append(Kava_Incentive_V1beta1_Selection.with { $0.denom = denom; $0.multiplierName = multiplier_name })
+            }
+            anyMsgs.append(getKavaIncentiveEarn(sender, denoms_to_claims))
+        }
         return anyMsgs
     }
     
@@ -1698,6 +1705,17 @@ class Signer {
         return Google_Protobuf2_Any.with {
             $0.typeURL = "/kava.incentive.v1beta1.MsgClaimSwapReward"
             $0.value = try! incentiveSwap.serializedData()
+        }
+    }
+    
+    static func getKavaIncentiveEarn(_ sender: String, _ denoms_to_claims: Array<Kava_Incentive_V1beta1_Selection>) -> Google_Protobuf2_Any {
+        let incentiveEarn = Kava_Incentive_V1beta1_MsgClaimEarnReward.with {
+            $0.sender = sender
+            $0.denomsToClaim = denoms_to_claims
+        }
+        return Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.incentive.v1beta1.MsgClaimEarnReward"
+            $0.value = try! incentiveEarn.serializedData()
         }
     }
     

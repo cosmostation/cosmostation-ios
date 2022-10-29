@@ -60,60 +60,12 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
 //        self.emptyLabel.addGestureRecognizer(tapGesture)
 //        historyTableView.isHidden = true
 //        emptyLabel.isHidden = false
-        
-        self.onCheckWeb3()
-    }
-    
-    func onCheckWeb3() {
-        print("onCheckWeb3 ")
-//        DispatchQueue.global().async {
-//            do {
-//                let url = URL(string: "rpc-evmos-app.cosmostation.io")
-//                let web3 = try await Web3.new(url!)
-//                print("web3 ", web3.defaultBlock)
-//
-//            } catch {
-//                print("onCheckWeb3 failed: \(error)")
-//            }
-//            DispatchQueue.main.async(execute: {
-//                print("DispatchQueue")
-//            });
-//        }
-//        DispatchQueue.global().async {
-//            let url = URL(string: "https://rpc-evmos-app.cosmostation.io")
-//            let web3 = try? Web3.new(url!)
-//            print("web3 defaultBlock ", web3?.defaultBlock)
-//            print("web3 provider ", web3?.provider)
-//            print("web3 provider ", web3?.provider)
-//            
-//            
-//            let ethAddress = EthereumAddress.init(fromHex: "0xa76C7F20740300505FF26280E4b10873556CF4d0")
-//            let balance = try? web3?.eth.getBalance(address: ethAddress!)
-//            print("balance ", balance)
-//            
-//            let contractAddress = EthereumAddress.init(fromHex: "0x5842C5532b61aCF3227679a8b1BD0242a41752f2")
-//            let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
-//            let erc20Balance = try? erc20token.getBalance(account: ethAddress!)
-//            print("erc20Balance ", erc20Balance)
-//
-//            DispatchQueue.main.async(execute: {
-//                print("DispatchQueue")
-//            });
-//        }
-        
-//        let url = URL(string: "https://rpc-evmos-app.cosmostation.io")
-//        return try? await Web3.new(url!)
-//        let web3 = try? await Web3.new(url!)
-//        let web3 = try? await Web3.new(url!) {
-//            print("web3 ", web3?.defaultBlock)
-//        }
-//        print("web3 ", web3?.defaultBlock)
     }
     
     @objc func testClick(tapGestureRecognizer: UITapGestureRecognizer) {
 //        let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
 //        txDetailVC.mIsGen = false
-//        txDetailVC.mTxHash = "B8A71DC85201C85CF866BFDAEA39CF47590629FF62FF15E358B985304E6739B2"
+//        txDetailVC.mTxHash = "B40F606948B2BF2C54D67D8EF34D5DF89623C188720737989ADAE988209A4071"
 //        txDetailVC.hidesBottomBarWhenPushed = true
 //        self.navigationItem.title = ""
 //        self.navigationController?.pushViewController(txDetailVC, animated: true)

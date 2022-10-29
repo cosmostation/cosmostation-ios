@@ -12,15 +12,26 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
     
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnNext: UIButton!
-    @IBOutlet weak var kavaIncentiveAmountLabel: UILabel!
-    @IBOutlet weak var hardIncentiveAmountLabel: UILabel!
-    @IBOutlet weak var swpIncentiveAmountLabel: UILabel!
     @IBOutlet weak var lockupLabel: UILabel!
-    @IBOutlet weak var option1Btn: UIButton!
-    @IBOutlet weak var option2Btn: UIButton!
+    
+    @IBOutlet weak var incen0Layer: UIView!
+    @IBOutlet weak var incen0Amount: UILabel!
+    @IBOutlet weak var incen0Denom: UILabel!
+    @IBOutlet weak var incen1Layer: UIView!
+    @IBOutlet weak var incen1Amount: UILabel!
+    @IBOutlet weak var incen1Denom: UILabel!
+    @IBOutlet weak var incen2Layer: UIView!
+    @IBOutlet weak var incen2Amount: UILabel!
+    @IBOutlet weak var incen2Denom: UILabel!
+    @IBOutlet weak var incen3Layer: UIView!
+    @IBOutlet weak var incen3Amount: UILabel!
+    @IBOutlet weak var incen3Denom: UILabel!
+    @IBOutlet weak var incen4Layer: UIView!
+    @IBOutlet weak var incen4Amount: UILabel!
+    @IBOutlet weak var incen4Denom: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
-    var mIncentiveParam: IncentiveParam!
+//    var mIncentiveParam: IncentiveParam!
     var mIncentiveRewards: IncentiveReward!
     var kavaIncentiveAmount = NSDecimalNumber.zero
     var hardIncentiveAmount = NSDecimalNumber.zero
@@ -30,18 +41,33 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        mIncentiveParam = BaseData.instance.mIncentiveParam
+//        mIncentiveParam = BaseData.instance.mIncentiveParam
         mIncentiveRewards = BaseData.instance.mIncentiveRewards
         
-        kavaIncentiveAmount = mIncentiveRewards.getIncentiveAmount(KAVA_MAIN_DENOM)
-        hardIncentiveAmount = mIncentiveRewards.getIncentiveAmount(KAVA_HARD_DENOM)
-        swpIncentiveAmount = mIncentiveRewards.getIncentiveAmount(KAVA_SWAP_DENOM)
-        
-        kavaIncentiveAmountLabel.attributedText = WDP.dpAmount(kavaIncentiveAmount.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
-        hardIncentiveAmountLabel.attributedText = WDP.dpAmount(hardIncentiveAmount.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
-        swpIncentiveAmountLabel.attributedText = WDP.dpAmount(swpIncentiveAmount.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
+        let IncentiveCoins = mIncentiveRewards.getAllIncentives()
+        if (IncentiveCoins.count > 0) {
+            incen0Layer.isHidden = false
+            WDP.dpCoin(chainConfig, IncentiveCoins[0], incen0Denom, incen0Amount)
+        }
+        if (IncentiveCoins.count > 1) {
+            incen1Layer.isHidden = false
+            WDP.dpCoin(chainConfig, IncentiveCoins[1], incen1Denom, incen1Amount)
+        }
+        if (IncentiveCoins.count > 2) {
+            incen2Layer.isHidden = false
+            WDP.dpCoin(chainConfig, IncentiveCoins[2], incen2Denom, incen2Amount)
+        }
+        if (IncentiveCoins.count > 3) {
+            incen3Layer.isHidden = false
+            WDP.dpCoin(chainConfig, IncentiveCoins[3], incen3Denom, incen3Amount)
+        }
+        if (IncentiveCoins.count > 4) {
+            incen4Layer.isHidden = false
+            WDP.dpCoin(chainConfig, IncentiveCoins[4], incen4Denom, incen4Amount)
+        }
         
         btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
         btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
@@ -57,36 +83,6 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
         self.btnNext.isUserInteractionEnabled = true
     }
     
-    @IBAction func onClickOption1(_ sender: UIButton) {
-        initBtns()
-        sender.borderColor = UIColor(named: "_font05")
-        let kavaIncentiveCal = kavaIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_MAIN_DENOM, 0), withBehavior: WUtils.handler0)
-        let hardIncentiveCal = hardIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_HARD_DENOM, 0), withBehavior: WUtils.handler0)
-        let swpIncentiveCal = swpIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_SWAP_DENOM, 0), withBehavior: WUtils.handler0)
-        
-        kavaIncentiveAmountLabel.attributedText = WDP.dpAmount(kavaIncentiveCal.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
-        hardIncentiveAmountLabel.attributedText = WDP.dpAmount(hardIncentiveCal.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
-        swpIncentiveAmountLabel.attributedText = WDP.dpAmount(swpIncentiveCal.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
-        
-        lockupLabel.text = "1 Month"
-        pageHolderVC.mIncentiveMultiplier = "small"
-    }
-    
-    @IBAction func onClickOption2(_ sender: UIButton) {
-        initBtns()
-        sender.borderColor = UIColor(named: "_font05")
-        let kavaIncentiveCal = kavaIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_MAIN_DENOM, 1), withBehavior: WUtils.handler0)
-        let hardIncentiveCal = hardIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_HARD_DENOM, 1), withBehavior: WUtils.handler0)
-        let swpIncentiveCal = swpIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_SWAP_DENOM, 1), withBehavior: WUtils.handler0)
-        
-        kavaIncentiveAmountLabel.attributedText = WDP.dpAmount(kavaIncentiveCal.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
-        hardIncentiveAmountLabel.attributedText = WDP.dpAmount(hardIncentiveCal.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
-        swpIncentiveAmountLabel.attributedText = WDP.dpAmount(swpIncentiveCal.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
-        
-        lockupLabel.text = "12 Month"
-        pageHolderVC.mIncentiveMultiplier = "large"
-    }
-    
     @IBAction func onClickCancel(_ sender: UIButton) {
         self.btnCancel.isUserInteractionEnabled = false
         self.btnNext.isUserInteractionEnabled = false
@@ -94,20 +90,18 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-        if (pageHolderVC.mIncentiveMultiplier != nil) {
-            self.btnCancel.isUserInteractionEnabled = false
-            self.btnNext.isUserInteractionEnabled = false
-            pageHolderVC.onNextPage()
-            
-        } else {
-            self.onShowToast(NSLocalizedString("error_no_opinion", comment: ""))
-            return
-        }
+        self.btnCancel.isUserInteractionEnabled = false
+        self.btnNext.isUserInteractionEnabled = false
+        pageHolderVC.onNextPage()
+        
+//        if (pageHolderVC.mIncentiveMultiplier != nil) {
+//            self.btnCancel.isUserInteractionEnabled = false
+//            self.btnNext.isUserInteractionEnabled = false
+//            pageHolderVC.onNextPage()
+//
+//        } else {
+//            self.onShowToast(NSLocalizedString("error_no_opinion", comment: ""))
+//            return
+//        }
     }
-    
-    func initBtns() {
-        option1Btn.borderColor = UIColor(named: "_font04")
-        option2Btn.borderColor = UIColor(named: "_font04")
-    }
-
 }

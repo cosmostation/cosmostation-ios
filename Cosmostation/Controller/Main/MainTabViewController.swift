@@ -136,7 +136,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mBnbTokenList.removeAll()
         BaseData.instance.mBnbTokenTicker.removeAll()
         
-        BaseData.instance.mIncentiveParam = nil
+//        BaseData.instance.mIncentiveParam = nil
+        BaseData.instance.mIncentiveRewards = nil
         
         BaseData.instance.mOkStaking = nil
         BaseData.instance.mOkUnbonding = nil
@@ -261,7 +262,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
         } else if (mChainType == .KAVA_MAIN) {
-            self.mFetchCnt = 12
+            self.mFetchCnt = 11
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
             self.onFetchgRPCBondedValidators(0)
@@ -275,7 +276,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             
 //            self.onFetchgRPCKavaPriceParam()
             self.onFetchgRPCKavaPrices()
-            self.onFetchKavaIncentiveParam()
+//            self.onFetchKavaIncentiveParam()
             self.onFetchKavaIncentiveReward(mAccount.account_address)
             
         } else if (mChainType == .TGRADE_MAIN) {
@@ -289,7 +290,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-        } else if (self.mChainType == .COSMOS_TEST || self.mChainType == .IRIS_TEST || self.mChainType == .ALTHEA_TEST || self.mChainType == .CRESCENT_TEST || self.mChainType == .STATION_TEST) {
+        } else if (self.mChainType == .COSMOS_TEST || self.mChainType == .IRIS_TEST || self.mChainType == .ALTHEA_TEST ||
+                   self.mChainType == .CRESCENT_TEST || self.mChainType == .STATION_TEST) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -976,14 +978,13 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         request.responseJSON { (response) in
             switch response.result {
                 case .success(let res):
-//                    print("IncentiveParam ", res)
                     guard let responseData = res as? NSDictionary,
                         let _ = responseData.object(forKey: "height") as? String else {
                             self.onFetchFinished()
                             return
                     }
                     let kavaIncentiveParam = KavaIncentiveParam.init(responseData)
-                    BaseData.instance.mIncentiveParam = kavaIncentiveParam.result
+//                    BaseData.instance.mIncentiveParam = kavaIncentiveParam.result
 //                    print("mIncentiveParam ", BaseData.instance.mIncentiveParam)
                     
                 case .failure(let error):
@@ -1005,6 +1006,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     let kavaIncentiveReward = KavaIncentiveReward.init(responseData)
                     BaseData.instance.mIncentiveRewards = kavaIncentiveReward.result
 //                    print("mIncentiveRewards ", BaseData.instance.mIncentiveRewards?.getAllIncentives().count)
+//                    print("mIncentiveRewards ", BaseData.instance.mIncentiveRewards?.getAllIncentives())
 
                 case .failure(let error):
                     print("onFetchKavaIncentiveReward ", error)
@@ -1059,6 +1061,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchMintscanAsset() {
+        print("onFetchMintscanAsset ", BaseNetWork.mintscanAssets_v2())
         let request = Alamofire.request(BaseNetWork.mintscanAssets_v2(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {

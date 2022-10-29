@@ -718,9 +718,10 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                              self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_KAVA_INCENTIVE_ALL) {
+            // 2022.10.30 HARDCODING FOR FIX INCENTIVE
             return Signer.genSimulateKavaIncentiveAll(auth,
                                                       self.account!.account_address,
-                                                      self.pageHolderVC.mIncentiveMultiplier!,
+                                                      "large",
                                                       self.mFee, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                       self.chainType!)
