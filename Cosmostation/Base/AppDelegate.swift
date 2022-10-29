@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             } else {
                 scheme = url
-                if let mainVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabViewController {
+                if let mainVC = UIApplication.shared.foregroundWindow?.rootViewController as? MainTabViewController {
                     mainVC.processScheme()
                 } else {
                     let emptyWcVc = EmptyWCViewController(nibName: "EmptyWCViewController", bundle: nil)
@@ -157,13 +157,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 extension UIApplication{
     var topViewController: UIViewController? {
-        if keyWindow?.rootViewController == nil{
-            return keyWindow?.rootViewController
-        }
+        var pointedViewController = foregroundWindow?.rootViewController
         
-        var pointedViewController = keyWindow?.rootViewController
-        
-        while  pointedViewController?.presentedViewController != nil {
+        while pointedViewController?.presentedViewController != nil {
             switch pointedViewController?.presentedViewController {
             case let navagationController as UINavigationController:
                 pointedViewController = navagationController.viewControllers.last
