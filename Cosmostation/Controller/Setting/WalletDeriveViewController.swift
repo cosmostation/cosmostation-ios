@@ -87,7 +87,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     var tempPath = 0
     @objc func onClickPath() {
-        let alert = UIAlertController(title: NSLocalizedString("select_hd_path", comment: ""), message: "\n\n\n\n\n\n", preferredStyle: .alert
+        let alert = UIAlertController(title: NSLocalizedString("select_hd_path", comment: ""), message: "\n\n\n\n\n\n", preferredStyle: .alert)
         alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let pickerFrame = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
         alert.view.addSubview(pickerFrame)
