@@ -2766,6 +2766,18 @@
 		E198291E290E89DF00451A81 /* EarnValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E198291B290E89DF00451A81 /* EarnValidatorCell.swift */; };
 		E198291F290E89DF00451A81 /* EarnValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E198291C290E89DF00451A81 /* EarnValidatorCell.xib */; };
 		E1982920290E89DF00451A81 /* EarnValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E198291C290E89DF00451A81 /* EarnValidatorCell.xib */; };
+		E1982923290E97B500451A81 /* KavaLiquidity0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1982921290E97B500451A81 /* KavaLiquidity0ViewController.swift */; };
+		E1982924290E97B500451A81 /* KavaLiquidity0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1982921290E97B500451A81 /* KavaLiquidity0ViewController.swift */; };
+		E1982925290E97B500451A81 /* KavaLiquidity0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1982922290E97B500451A81 /* KavaLiquidity0ViewController.xib */; };
+		E1982926290E97B500451A81 /* KavaLiquidity0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1982922290E97B500451A81 /* KavaLiquidity0ViewController.xib */; };
+		E1982929290E97C200451A81 /* KavaLiquidity1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1982927290E97C100451A81 /* KavaLiquidity1ViewController.swift */; };
+		E198292A290E97C200451A81 /* KavaLiquidity1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1982927290E97C100451A81 /* KavaLiquidity1ViewController.swift */; };
+		E198292B290E97C200451A81 /* KavaLiquidity1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1982928290E97C100451A81 /* KavaLiquidity1ViewController.xib */; };
+		E198292C290E97C200451A81 /* KavaLiquidity1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1982928290E97C100451A81 /* KavaLiquidity1ViewController.xib */; };
+		E198292F290E97D600451A81 /* KavaLiquidity4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E198292D290E97D600451A81 /* KavaLiquidity4ViewController.swift */; };
+		E1982930290E97D600451A81 /* KavaLiquidity4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E198292D290E97D600451A81 /* KavaLiquidity4ViewController.swift */; };
+		E1982931290E97D600451A81 /* KavaLiquidity4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E198292E290E97D600451A81 /* KavaLiquidity4ViewController.xib */; };
+		E1982932290E97D600451A81 /* KavaLiquidity4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E198292E290E97D600451A81 /* KavaLiquidity4ViewController.xib */; };
 		E19A321922544EB500A05E41 /* DashedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19A321822544EB500A05E41 /* DashedView.swift */; };
 		E19A321E22547DF400A05E41 /* SBCardPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19A321D22547DF400A05E41 /* SBCardPopupViewController.swift */; };
 		E19A32232254A61E00A05E41 /* WalletManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19A32212254A61E00A05E41 /* WalletManageViewController.swift */; };
@@ -4206,6 +4218,12 @@
 		E1982916290E85C800451A81 /* EarnStatusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarnStatusCell.xib; sourceTree = "<group>"; };
 		E198291B290E89DF00451A81 /* EarnValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnValidatorCell.swift; sourceTree = "<group>"; };
 		E198291C290E89DF00451A81 /* EarnValidatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarnValidatorCell.xib; sourceTree = "<group>"; };
+		E1982921290E97B500451A81 /* KavaLiquidity0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaLiquidity0ViewController.swift; sourceTree = "<group>"; };
+		E1982922290E97B500451A81 /* KavaLiquidity0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaLiquidity0ViewController.xib; sourceTree = "<group>"; };
+		E1982927290E97C100451A81 /* KavaLiquidity1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaLiquidity1ViewController.swift; sourceTree = "<group>"; };
+		E1982928290E97C100451A81 /* KavaLiquidity1ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaLiquidity1ViewController.xib; sourceTree = "<group>"; };
+		E198292D290E97D600451A81 /* KavaLiquidity4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaLiquidity4ViewController.swift; sourceTree = "<group>"; };
+		E198292E290E97D600451A81 /* KavaLiquidity4ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaLiquidity4ViewController.xib; sourceTree = "<group>"; };
 		E19A321822544EB500A05E41 /* DashedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedView.swift; sourceTree = "<group>"; };
 		E19A321D22547DF400A05E41 /* SBCardPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBCardPopupViewController.swift; sourceTree = "<group>"; };
 		E19A32212254A61E00A05E41 /* WalletManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManageViewController.swift; sourceTree = "<group>"; };
@@ -5571,6 +5589,12 @@
 				28FEDCE426DB140A00A43D01 /* KavaIncentiveClaim0ViewController.xib */,
 				28FEDCE726DB141900A43D01 /* KavaIncentiveClaim3ViewController.swift */,
 				28FEDCE826DB141900A43D01 /* KavaIncentiveClaim3ViewController.xib */,
+				E1982921290E97B500451A81 /* KavaLiquidity0ViewController.swift */,
+				E1982922290E97B500451A81 /* KavaLiquidity0ViewController.xib */,
+				E1982927290E97C100451A81 /* KavaLiquidity1ViewController.swift */,
+				E1982928290E97C100451A81 /* KavaLiquidity1ViewController.xib */,
+				E198292D290E97D600451A81 /* KavaLiquidity4ViewController.swift */,
+				E198292E290E97D600451A81 /* KavaLiquidity4ViewController.xib */,
 				04DEAF332864768700F23233 /* HtlcSend0ViewController.swift */,
 				04DEAF342864768700F23233 /* HtlcSend0ViewController.xib */,
 				04DEAF392864769600F23233 /* HtlcSend1ViewController.swift */,
@@ -6383,6 +6407,7 @@
 				18FFB6FC281AF533004E65BB /* ReplaceResource0ViewController.xib in Resources */,
 				E1982920290E89DF00451A81 /* EarnValidatorCell.xib in Resources */,
 				18F412A0286064AD0007E3F2 /* MnemonicDetailViewController.xib in Resources */,
+				E1982932290E97D600451A81 /* KavaLiquidity4ViewController.xib in Resources */,
 				04C5AE7428631737007627EA /* Undelegate4ViewController.xib in Resources */,
 				E148781328957E2900751D94 /* AuthzClaimReward4ViewController.xib in Resources */,
 				18FFB6FD281AF533004E65BB /* ManageAccountAddCell.xib in Resources */,
@@ -6413,6 +6438,7 @@
 				044374762862EA2500C6A4ED /* MemoViewController.xib in Resources */,
 				18FFB719281AF533004E65BB /* TxIncentiveHardCell.xib in Resources */,
 				18FFB71A281AF533004E65BB /* SifSwap0ViewController.xib in Resources */,
+				E1982926290E97B500451A81 /* KavaLiquidity0ViewController.xib in Resources */,
 				042AEE04286452CE00E13825 /* OkDeposit4ViewController.xib in Resources */,
 				18FFB71B281AF533004E65BB /* AccountSwitchViewController.xib in Resources */,
 				18FFB71C281AF533004E65BB /* Swap0ViewController.xib in Resources */,
@@ -6609,6 +6635,7 @@
 				18FFB7CF281AF533004E65BB /* ResourceChainCell.xib in Resources */,
 				18FFB7D0281AF533004E65BB /* WalletOkCell.xib in Resources */,
 				045DADA9289BA1FC004ED9B4 /* AuthzRedelegate5ViewController.xib in Resources */,
+				E198292C290E97C200451A81 /* KavaLiquidity1ViewController.xib in Resources */,
 				04C5AEAA286336D7007627EA /* RewardAddress4ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6747,6 +6774,7 @@
 				04C5AE8B28632774007627EA /* ClaimReward1ViewController.xib in Resources */,
 				E198291F290E89DF00451A81 /* EarnValidatorCell.xib in Resources */,
 				2868559424989AA50099D18F /* Bep3WarnPopup.xib in Resources */,
+				E1982931290E97D600451A81 /* KavaLiquidity4ViewController.xib in Resources */,
 				04983CA9278C24DC00F913A3 /* TxLinkAccountCell.xib in Resources */,
 				04C5AE7328631737007627EA /* Undelegate4ViewController.xib in Resources */,
 				E148781228957E2900751D94 /* AuthzClaimReward4ViewController.xib in Resources */,
@@ -6777,6 +6805,7 @@
 				044374752862EA2500C6A4ED /* MemoViewController.xib in Resources */,
 				042AEE03286452CE00E13825 /* OkDeposit4ViewController.xib in Resources */,
 				282FF35223F5172E0028CC66 /* TxTransferCell.xib in Resources */,
+				E1982925290E97B500451A81 /* KavaLiquidity0ViewController.xib in Resources */,
 				2842919B264A586B00130651 /* TokenDetailNativeCell.xib in Resources */,
 				28B325222637FDDD00275AED /* MemoMnemonicPopup.xib in Resources */,
 				2889FD832603484000CA9896 /* TxIncentiveHardCell.xib in Resources */,
@@ -6973,6 +7002,7 @@
 				280E1F2B254AD3A80007BA7D /* ResourceChainCell.xib in Resources */,
 				283D2EB024F5742000247424 /* WalletOkCell.xib in Resources */,
 				045DADA8289BA1FC004ED9B4 /* AuthzRedelegate5ViewController.xib in Resources */,
+				E198292B290E97C200451A81 /* KavaLiquidity1ViewController.xib in Resources */,
 				04C5AEA9286336D7007627EA /* RewardAddress4ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7306,6 +7336,7 @@
 				1817CBBE283E2CE500523713 /* ethermint_feemarket_v1_query.grpc.swift in Sources */,
 				18FFB353281AF533004E65BB /* MainTabHistoryViewController.swift in Sources */,
 				18D4C19628C704B8003F230A /* WalletConnectManager.swift in Sources */,
+				E1982924290E97B500451A81 /* KavaLiquidity0ViewController.swift in Sources */,
 				1817CBB8283E2CE500523713 /* google_api_http.pb.swift in Sources */,
 				18FFB356281AF533004E65BB /* LinkChainAccount3ViewController.swift in Sources */,
 				18FFB358281AF533004E65BB /* TxIssueNFTDenomCell.swift in Sources */,
@@ -7547,6 +7578,7 @@
 				18FFB45C281AF533004E65BB /* ManageAccountCell.swift in Sources */,
 				18FFB45E281AF533004E65BB /* JoinPool0ViewController.swift in Sources */,
 				1817CAC2283E2CE500523713 /* osmosis_superfluid_query.grpc.swift in Sources */,
+				E1982930290E97D600451A81 /* KavaLiquidity4ViewController.swift in Sources */,
 				04AA4C3A2906A6DE0027877B /* kava_auction_v1beta1_auction.pb.swift in Sources */,
 				043031E928BE1D72005FF935 /* MultiSelectPopupViewController.swift in Sources */,
 				1817CB05283E2CE500523713 /* crescent_farming_v1beta1_farming.pb.swift in Sources */,
@@ -7866,6 +7898,7 @@
 				1817CB07283E2CE500523713 /* cosmos_bank_v1beta1_genesis.pb.swift in Sources */,
 				E1D4EA5C2871BCDE005C1ECF /* WDP.swift in Sources */,
 				0451FC7D282A3AC700214FDA /* ChainCryptoorg.swift in Sources */,
+				E198292A290E97C200451A81 /* KavaLiquidity1ViewController.swift in Sources */,
 				18FFB5AA281AF533004E65BB /* ManageAccountAddCell.swift in Sources */,
 				1817CACC283E2CE500523713 /* tendermint_farming_v1beta1_query.pb.swift in Sources */,
 				04AA4C562906A6DE0027877B /* kava_hard_v1beta1_query.grpc.swift in Sources */,
@@ -8132,6 +8165,7 @@
 				040FA9D9275F55C300229F6F /* cosmos_feegrant_v1beta1_query.pb.swift in Sources */,
 				040FAA09275F55C300229F6F /* tendermint_farming_v1beta1_genesis.pb.swift in Sources */,
 				E1406FC422607B8500D9440C /* LoadingImageView.swift in Sources */,
+				E198292F290E97D600451A81 /* KavaLiquidity4ViewController.swift in Sources */,
 				28D28AC926CB6BD40074964C /* StartLock0ViewController.swift in Sources */,
 				E19A321E22547DF400A05E41 /* SBCardPopupViewController.swift in Sources */,
 				048C832027BF572800270528 /* evmos_vesting_v1_tx.grpc.swift in Sources */,
@@ -9157,6 +9191,7 @@
 				28D765A2271585FA00730F47 /* StarnameAssets.swift in Sources */,
 				040FA96D275F55C300229F6F /* cosmos_base_tendermint_v1beta1_query.grpc.swift in Sources */,
 				04E165AE28A0F4A4000F12C0 /* confio_twasm_v1beta1_query.grpc.swift in Sources */,
+				E1982923290E97B500451A81 /* KavaLiquidity0ViewController.swift in Sources */,
 				040FA869275F55C200229F6F /* cosmos_crisis_v1beta1_tx.pb.swift in Sources */,
 				04AA4C0F2906A6DD0027877B /* kava_liquid_v1beta1_query.grpc.swift in Sources */,
 				040FA8A0275F55C200229F6F /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */,
@@ -9166,6 +9201,7 @@
 				04D3392027E8390400E82AA7 /* gravity_v1_genesis.pb.swift in Sources */,
 				040FAB03275F55C400229F6F /* ibc_core_client_v1_tx.pb.swift in Sources */,
 				04E6ABCD286358B4008DC3C7 /* CdpDrawRepay1ViewController.swift in Sources */,
+				E1982929290E97C200451A81 /* KavaLiquidity1ViewController.swift in Sources */,
 				0451FDAA2832370100214FDA /* osmosis_gamm_pool-models_balancer_tx.grpc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

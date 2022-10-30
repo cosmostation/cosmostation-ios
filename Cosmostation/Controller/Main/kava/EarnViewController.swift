@@ -79,10 +79,18 @@ class EarnViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func onClickRemoveLiquidity(_ sender: UIButton) {
         print("onClickRemoveLiquidity")
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = TASK_TYPE_KAVA_LIQUIDITY_WITHDRAW
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     @IBAction func onClickAddLiquidity(_ sender: UIButton) {
         print("onClickAddLiquidity")
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = TASK_TYPE_KAVA_LIQUIDITY_DEPOSIT
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     func onFetchgRPCMyEarnDeposits(_ address: String) {

@@ -296,6 +296,13 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     KavaIncentiveClaim3ViewController(nibName: "KavaIncentiveClaim3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_TYPE_KAVA_LIQUIDITY_DEPOSIT || mType == TASK_TYPE_KAVA_LIQUIDITY_WITHDRAW) {
+            return [KavaLiquidity0ViewController(nibName: "KavaLiquidity0ViewController", bundle: nil),
+                    KavaLiquidity1ViewController(nibName: "KavaLiquidity1ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    KavaLiquidity4ViewController(nibName: "KavaLiquidity4ViewController", bundle: nil)]
         }
         
         //BEP3 Stranfer (KAVA, BINANCE)
