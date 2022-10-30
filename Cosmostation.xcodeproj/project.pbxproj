@@ -2758,6 +2758,14 @@
 		E1945E50222E842B00A1436F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E4F222E842B00A1436F /* BaseViewController.swift */; };
 		E1945E52223124F000A1436F /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E51223124F000A1436F /* BaseData.swift */; };
 		E1945E542231256800A1436F /* BaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E532231256800A1436F /* BaseConstant.swift */; };
+		E1982917290E85C800451A81 /* EarnStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1982915290E85C800451A81 /* EarnStatusCell.swift */; };
+		E1982918290E85C800451A81 /* EarnStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1982915290E85C800451A81 /* EarnStatusCell.swift */; };
+		E1982919290E85C800451A81 /* EarnStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1982916290E85C800451A81 /* EarnStatusCell.xib */; };
+		E198291A290E85C800451A81 /* EarnStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1982916290E85C800451A81 /* EarnStatusCell.xib */; };
+		E198291D290E89DF00451A81 /* EarnValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E198291B290E89DF00451A81 /* EarnValidatorCell.swift */; };
+		E198291E290E89DF00451A81 /* EarnValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E198291B290E89DF00451A81 /* EarnValidatorCell.swift */; };
+		E198291F290E89DF00451A81 /* EarnValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E198291C290E89DF00451A81 /* EarnValidatorCell.xib */; };
+		E1982920290E89DF00451A81 /* EarnValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E198291C290E89DF00451A81 /* EarnValidatorCell.xib */; };
 		E19A321922544EB500A05E41 /* DashedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19A321822544EB500A05E41 /* DashedView.swift */; };
 		E19A321E22547DF400A05E41 /* SBCardPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19A321D22547DF400A05E41 /* SBCardPopupViewController.swift */; };
 		E19A32232254A61E00A05E41 /* WalletManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19A32212254A61E00A05E41 /* WalletManageViewController.swift */; };
@@ -4194,6 +4202,10 @@
 		E1945E4F222E842B00A1436F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		E1945E51223124F000A1436F /* BaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
 		E1945E532231256800A1436F /* BaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConstant.swift; sourceTree = "<group>"; };
+		E1982915290E85C800451A81 /* EarnStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnStatusCell.swift; sourceTree = "<group>"; };
+		E1982916290E85C800451A81 /* EarnStatusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarnStatusCell.xib; sourceTree = "<group>"; };
+		E198291B290E89DF00451A81 /* EarnValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnValidatorCell.swift; sourceTree = "<group>"; };
+		E198291C290E89DF00451A81 /* EarnValidatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarnValidatorCell.xib; sourceTree = "<group>"; };
 		E19A321822544EB500A05E41 /* DashedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedView.swift; sourceTree = "<group>"; };
 		E19A321D22547DF400A05E41 /* SBCardPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBCardPopupViewController.swift; sourceTree = "<group>"; };
 		E19A32212254A61E00A05E41 /* WalletManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManageViewController.swift; sourceTree = "<group>"; };
@@ -5252,6 +5264,10 @@
 				28156E9E2536DE29006FF06C /* HarvestDetailMyActionCell.xib */,
 				28DB56E925F9DC7A00B2F0E5 /* HardDetailAssetsCell.swift */,
 				28DB56EA25F9DC7A00B2F0E5 /* HardDetailAssetsCell.xib */,
+				E1982915290E85C800451A81 /* EarnStatusCell.swift */,
+				E1982916290E85C800451A81 /* EarnStatusCell.xib */,
+				E198291B290E89DF00451A81 /* EarnValidatorCell.swift */,
+				E198291C290E89DF00451A81 /* EarnValidatorCell.xib */,
 			);
 			path = kava;
 			sourceTree = "<group>";
@@ -6365,6 +6381,7 @@
 				04C5AE8C28632774007627EA /* ClaimReward1ViewController.xib in Resources */,
 				043031EB28BE1D72005FF935 /* MultiSelectPopupViewController.xib in Resources */,
 				18FFB6FC281AF533004E65BB /* ReplaceResource0ViewController.xib in Resources */,
+				E1982920290E89DF00451A81 /* EarnValidatorCell.xib in Resources */,
 				18F412A0286064AD0007E3F2 /* MnemonicDetailViewController.xib in Resources */,
 				04C5AE7428631737007627EA /* Undelegate4ViewController.xib in Resources */,
 				E148781328957E2900751D94 /* AuthzClaimReward4ViewController.xib in Resources */,
@@ -6474,6 +6491,7 @@
 				18FFB76A281AF533004E65BB /* TxCdpBorrowCell.xib in Resources */,
 				18FFB76B281AF533004E65BB /* KavaSwap3ViewController.xib in Resources */,
 				043031E528BE0D21005FF935 /* SelectContractTokenCell.xib in Resources */,
+				E198291A290E85C800451A81 /* EarnStatusCell.xib in Resources */,
 				18FFB76D281AF533004E65BB /* WcSignRequestPopup.xib in Resources */,
 				04C5AE8628632062007627EA /* Redelegate5ViewController.xib in Resources */,
 				045DAD7028978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.xib in Resources */,
@@ -6727,6 +6745,7 @@
 				283A80DC24514AB8008FF813 /* RiskCheckPopupViewController.xib in Resources */,
 				043031EA28BE1D72005FF935 /* MultiSelectPopupViewController.xib in Resources */,
 				04C5AE8B28632774007627EA /* ClaimReward1ViewController.xib in Resources */,
+				E198291F290E89DF00451A81 /* EarnValidatorCell.xib in Resources */,
 				2868559424989AA50099D18F /* Bep3WarnPopup.xib in Resources */,
 				04983CA9278C24DC00F913A3 /* TxLinkAccountCell.xib in Resources */,
 				04C5AE7328631737007627EA /* Undelegate4ViewController.xib in Resources */,
@@ -6836,6 +6855,7 @@
 				2876546C2726B2690071FF96 /* WalletChainEditViewController.xib in Resources */,
 				283E9459254901D9007A9291 /* RegisterDomain0ViewController.xib in Resources */,
 				043031E428BE0D21005FF935 /* SelectContractTokenCell.xib in Resources */,
+				E1982919290E85C800451A81 /* EarnStatusCell.xib in Resources */,
 				280E1F17254ABB080007BA7D /* ResourceAddCell.xib in Resources */,
 				2894106926FF1307005BCBE4 /* SelectRelayerCell.xib in Resources */,
 				045DAD6F28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.xib in Resources */,
@@ -7189,6 +7209,7 @@
 				1817CB5F283E2CE500523713 /* sifnode_oracle_v1_types.pb.swift in Sources */,
 				18FFB2F6281AF533004E65BB /* KavaIncentiveClaim3ViewController.swift in Sources */,
 				1817CBBF283E2CE500523713 /* starname_iov_offchain_v1alpha1_offchain.pb.swift in Sources */,
+				E198291E290E89DF00451A81 /* EarnValidatorCell.swift in Sources */,
 				18FFB2F8281AF533004E65BB /* StarnameWalletConnectViewController.swift in Sources */,
 				1817CBC8283E2CE500523713 /* sifnode_dispensation_v1_tx.grpc.swift in Sources */,
 				1817CC3E283E2CE600523713 /* tendermint_types_evidence.pb.swift in Sources */,
@@ -7700,6 +7721,7 @@
 				18FFB504281AF533004E65BB /* TxIncentiveSwapCell.swift in Sources */,
 				18FFB506281AF533004E65BB /* HardDetailViewController.swift in Sources */,
 				18FFB507281AF533004E65BB /* WalletDesmosEventCell.swift in Sources */,
+				E1982918290E85C800451A81 /* EarnStatusCell.swift in Sources */,
 				04AA4BB62906A6DD0027877B /* kava_bep3_v1beta1_query.pb.swift in Sources */,
 				18FFB508281AF533004E65BB /* VaildatorDetailViewController.swift in Sources */,
 				18FFB50B281AF533004E65BB /* NewAccountTypePopup.swift in Sources */,
@@ -8464,6 +8486,7 @@
 				2845D880246FAED7007CD497 /* VoteInfoTableViewCell.swift in Sources */,
 				0451FDA22832370100214FDA /* osmosis_lockup_genesis.pb.swift in Sources */,
 				E191A57D237902C5002577BC /* WalletKavaCell.swift in Sources */,
+				E1982917290E85C800451A81 /* EarnStatusCell.swift in Sources */,
 				046FF01A277B43F100F72C11 /* GenDenom3ViewController.swift in Sources */,
 				040FA9BB275F55C300229F6F /* cosmos_gov_v1beta2_tx.pb.swift in Sources */,
 				04AA4BBF2906A6DD0027877B /* kava_incentive_v1beta1_tx.grpc.swift in Sources */,
@@ -9118,6 +9141,7 @@
 				E1A82DD5224223250097CAEE /* Balance.swift in Sources */,
 				04D338FF27E826F100E82AA7 /* crescent_liquidstaking_v1beta1_query.pb.swift in Sources */,
 				047FB6E7281A4C53009D8AAF /* sifnode_tokenregistry_v1_query.grpc.swift in Sources */,
+				E198291D290E89DF00451A81 /* EarnValidatorCell.swift in Sources */,
 				0443B8742853064B0027A6B9 /* SwitchAccountFooter.swift in Sources */,
 				282FF35523F518E00028CC66 /* TxMultiTransferCell.swift in Sources */,
 				04AA4BEB2906A6DD0027877B /* kava_swap_v1beta1_swap.pb.swift in Sources */,

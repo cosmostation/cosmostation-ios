@@ -668,8 +668,82 @@
                     <view key="view" contentMode="scaleToFill" id="kFy-Eu-sxB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="801"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N1n-tD-xE8">
+                                <rect key="frame" x="0.0" y="48" width="414" height="671"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UDC-Hv-AAZ">
+                                <rect key="frame" x="16" y="735" width="382" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qiZ-aY-9sa">
+                                        <rect key="frame" x="0.0" y="0.0" width="186" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="gWS-Jo-unw"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                        <state key="normal" title="Remove Liquidity">
+                                            <color key="titleColor" name="_font05"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" name="_font05"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onClickRemoveLiquidity:" destination="1fC-Mz-Ffi" eventType="touchUpInside" id="ISe-h4-5gc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xci-ZZ-o63">
+                                        <rect key="frame" x="196" y="0.0" width="186" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="rgi-gW-6D0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                        <state key="normal" title="Add Liquidity">
+                                            <color key="titleColor" name="photon"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" name="photon"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onClickAddLiquidity:" destination="1fC-Mz-Ffi" eventType="touchUpInside" id="jth-ya-Rdf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="o3U-b9-6GA"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UDC-Hv-AAZ" firstAttribute="top" secondItem="N1n-tD-xE8" secondAttribute="bottom" constant="16" id="Hy8-YY-9xr"/>
+                            <constraint firstItem="N1n-tD-xE8" firstAttribute="leading" secondItem="o3U-b9-6GA" secondAttribute="leading" id="LAN-mO-NIp"/>
+                            <constraint firstItem="N1n-tD-xE8" firstAttribute="top" secondItem="o3U-b9-6GA" secondAttribute="top" id="MiR-FL-Wnz"/>
+                            <constraint firstItem="UDC-Hv-AAZ" firstAttribute="leading" secondItem="o3U-b9-6GA" secondAttribute="leading" constant="16" id="d5E-Hd-dFh"/>
+                            <constraint firstItem="o3U-b9-6GA" firstAttribute="trailing" secondItem="N1n-tD-xE8" secondAttribute="trailing" id="hl9-WZ-Nul"/>
+                            <constraint firstItem="o3U-b9-6GA" firstAttribute="bottom" secondItem="UDC-Hv-AAZ" secondAttribute="bottom" constant="16" id="jXs-pN-G26"/>
+                            <constraint firstItem="o3U-b9-6GA" firstAttribute="trailing" secondItem="UDC-Hv-AAZ" secondAttribute="trailing" constant="16" id="rTu-kz-My4"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnAddLiquidity" destination="xci-ZZ-o63" id="e9Z-pA-Lqg"/>
+                        <outlet property="btnRemoveLiquidity" destination="qiZ-aY-9sa" id="coX-sH-pp3"/>
+                        <outlet property="earnTableView" destination="N1n-tD-xE8" id="5na-0p-VQp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XoI-LO-aeZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

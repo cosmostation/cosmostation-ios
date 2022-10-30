@@ -10,7 +10,12 @@ import UIKit
 import GRPC
 import NIO
 
-class EarnViewController: BaseViewController {
+class EarnViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var earnTableView: UITableView!
+    @IBOutlet weak var btnRemoveLiquidity: UIButton!
+    @IBOutlet weak var btnAddLiquidity: UIButton!
+    var refresher: UIRefreshControl!
     
     var mEarnDeposits: Array<Coin> = Array<Coin>()
 
@@ -20,11 +25,20 @@ class EarnViewController: BaseViewController {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
+        self.earnTableView.delegate = self
+        self.earnTableView.dataSource = self
+        self.earnTableView.register(UINib(nibName: "EarnStatusCell", bundle: nil), forCellReuseIdentifier: "EarnStatusCell")
+        self.earnTableView.register(UINib(nibName: "EarnValidatorCell", bundle: nil), forCellReuseIdentifier: "EarnValidatorCell")
+        
+        self.refresher = UIRefreshControl()
+        self.refresher.addTarget(self, action: #selector(onFetchData), for: .valueChanged)
+        self.refresher.tintColor = UIColor(named: "_font05")
+        
         self.onFetchData()
     }
     
     var mFetchCnt = 0
-    func onFetchData() {
+    @objc func onFetchData() {
         self.mFetchCnt = 1
         self.onFetchgRPCMyEarnDeposits(account!.account_address)
     }
@@ -32,8 +46,43 @@ class EarnViewController: BaseViewController {
     func onFetchFinished() {
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt <= 0) {
-            print("Earnings ", mEarnDeposits)
+            self.earnTableView.reloadData()
+            self.refresher.endRefreshing()
         }
+        print("Earnings ", mEarnDeposits)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (section == 0) {
+            return 1
+        } else {
+            return mEarnDeposits.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if (indexPath.section == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"EarnStatusCell") as? EarnStatusCell
+            cell?.onBindView(mEarnDeposits)
+            return cell!
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"EarnValidatorCell") as? EarnValidatorCell
+            cell?.onBindView(chainConfig!, mEarnDeposits[indexPath.row])
+            return cell!
+        }
+    }
+    
+    
+    @IBAction func onClickRemoveLiquidity(_ sender: UIButton) {
+        print("onClickRemoveLiquidity")
+    }
+    
+    @IBAction func onClickAddLiquidity(_ sender: UIButton) {
+        print("onClickAddLiquidity")
     }
     
     func onFetchgRPCMyEarnDeposits(_ address: String) {
@@ -44,7 +93,9 @@ class EarnViewController: BaseViewController {
                 if let response = try? Kava_Earn_V1beta1_QueryClient(channel: channel).deposits(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.deposits.forEach { deposit in
                         deposit.value.forEach { rawCoin in
-                            self.mEarnDeposits.append(Coin.init(rawCoin.denom, rawCoin.amount))
+                            if (rawCoin.denom.starts(with: "bkava-")) {
+                                self.mEarnDeposits.append(Coin.init(rawCoin.denom, rawCoin.amount))
+                            }
                         }
                     }
                 }
@@ -54,5 +105,4 @@ class EarnViewController: BaseViewController {
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
-
 }
