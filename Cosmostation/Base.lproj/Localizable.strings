@@ -112,6 +112,8 @@
 "str_max_delegable" = "Max Delegable :";
 "str_max_undelegable" = "Max Undelegable :";
 "str_max_redelegable" = "Max Redelegable :";
+"str_max_depositable" = "Max Depositable :";
+"str_max_withdrawable" = "Max Withdrawable :";
 "str_tx_fee" = "Tx Fee";
 "str_send_amount" = "Send Amount";
 "str_current_availabe" = "Current Amount";

@@ -20,7 +20,7 @@
                 <outlet property="btn10" destination="9hI-pj-ZhC" id="Vqe-qv-Haj"/>
                 <outlet property="btn100" destination="aPQ-L1-eZ8" id="fqg-OO-d0h"/>
                 <outlet property="btnAdd01" destination="Hos-Lo-nee" id="e4D-2T-T8B"/>
-                <outlet property="btnCancel" destination="v30-ou-NNJ" id="DGd-HX-lp9"/>
+                <outlet property="btnBack" destination="v30-ou-NNJ" id="zI8-S0-2eh"/>
                 <outlet property="btnHalf" destination="y6N-yh-l23" id="rHz-zB-9rg"/>
                 <outlet property="btnMax" destination="UPo-O0-g5U" id="fJ9-gR-6EQ"/>
                 <outlet property="btnNext" destination="NVI-ld-gQr" id="Y1O-X8-TOH"/>
@@ -230,7 +230,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="onClickCancel:" destination="-1" eventType="touchUpInside" id="nNB-QY-bu4"/>
+                                <action selector="onClickBack:" destination="-1" eventType="touchUpInside" id="l0C-eA-J1M"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NVI-ld-gQr">

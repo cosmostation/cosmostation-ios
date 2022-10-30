@@ -35,6 +35,7 @@ class TransactionViewController: UIViewController {
     var mHardMoneyMarketDenom: String?
     var mKavaSwapPool: Kava_Swap_V1beta1_PoolResponse?
     var mKavaSwapPoolDeposit: Kava_Swap_V1beta1_DepositResponse?
+    var mKavaEarnDeposit = Array<Coin>()
     
     var mHtlcDenom: String = BNB_MAIN_DENOM     //now only support bnb bep3
     
@@ -392,6 +393,7 @@ class TransactionViewController: UIViewController {
             //grpc
             StepVc.mKavaSwapPool = self.mKavaSwapPool
             StepVc.mKavaSwapPoolDeposit = self.mKavaSwapPoolDeposit
+            StepVc.mKavaEarnDeposit = self.mKavaEarnDeposit
             
             StepVc.mStarnameDomain = self.mStarnameDomain
             StepVc.mStarnameAccount = self.mStarnameAccount

@@ -112,6 +112,8 @@
 "str_max_delegable" = "최대 가능 :";
 "str_max_undelegable" = "최대 가능 :";
 "str_max_redelegable" = "최대 가능 :";
+"str_max_depositable" = "최대 입금 가능 :";
+"str_max_withdrawable" = "최대 출금 가능 :";
 "str_tx_fee" = "Tx 수수료";
 "str_send_amount" = "송금 수량";
 "str_current_availabe" = "현재 수량";

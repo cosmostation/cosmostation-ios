@@ -725,6 +725,25 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                       self.mFee, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                       self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_LIQUIDITY_DEPOSIT) {
+            return Signer.genSimulateKavaEarnDelegateMintDeposit(auth,
+                                                                 self.account!.account_address,
+                                                                 self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
+                                                                 self.pageHolderVC.mKavaEarnCoin,
+                                                                 self.mFee, self.pageHolderVC.mMemo!,
+                                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                                 self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_LIQUIDITY_WITHDRAW) {
+            return Signer.genSimulateKavaEarnWithdraw(auth,
+                                                      self.account!.account_address,
+                                                      self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
+                                                      self.pageHolderVC.mKavaEarnCoin,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                      self.chainType!)
+            
         }
         
         //for authz

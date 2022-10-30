@@ -50,4 +50,23 @@ class EarnValidatorCell: UITableViewCell {
         liquidityAmountLabel.attributedText = WDP.dpAmount(deposit.amount, liquidityAmountLabel.font!, 6, 6)
     }
     
+    func onBindDepositView(_ chainConfig: ChainConfig, _ validator : Cosmos_Staking_V1beta1_Validator, _ deposits: Array<Coin>) {
+        monikerLabel.text = validator.description_p.moniker
+        monikerLabel.adjustsFontSizeToFitWidth = true
+        if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {
+            validatorImg.af_setImage(withURL: url)
+        }
+        if let totalBkava = BaseData.instance.mParam?.params?.supply?.filter({ $0.denom == "bkava-" + validator.operatorAddress }).first {
+            totalAmountLabel.attributedText = WDP.dpAmount(totalBkava.amount, totalAmountLabel.font!, 6, 6)
+        }
+        
+        if let matched = deposits.filter({ $0.denom.contains(validator.operatorAddress) }).first {
+            cardView.backgroundColor = chainConfig.chainColorBG
+            liquidityAmountLabel.attributedText = WDP.dpAmount(matched.amount, liquidityAmountLabel.font!, 6, 6)
+        } else {
+            cardView.backgroundColor = UIColor.init(named: "_card_bg")
+            liquidityAmountLabel.attributedText = WDP.dpAmount("0", liquidityAmountLabel.font!, 6, 6)
+        }
+    }
+    
 }

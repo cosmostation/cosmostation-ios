@@ -88,6 +88,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mKavaCollateralParam: Kava_Cdp_V1beta1_CollateralParam?
     var mKavaSwapPool: Kava_Swap_V1beta1_PoolResponse?
     var mKavaSwapPoolDeposit: Kava_Swap_V1beta1_DepositResponse?
+    var mKavaEarnDeposit = Array<Coin>()
+    var mKavaEarnCoin = Coin.init()
     
     
     var mHtlcDenom: String?

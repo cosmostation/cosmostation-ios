@@ -45,6 +45,11 @@ class EarnViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     func onFetchFinished() {
         self.mFetchCnt = self.mFetchCnt - 1
+        mEarnDeposits.sort{
+            if ($0.denom == "bkava-kavavaloper140g8fnnl46mlvfhygj3zvjqlku6x0fwu6lgey7") { return true }
+            if ($1.denom == "bkava-kavavaloper140g8fnnl46mlvfhygj3zvjqlku6x0fwu6lgey7") { return false }
+            return false
+        }
         if (mFetchCnt <= 0) {
             self.earnTableView.reloadData()
             self.refresher.endRefreshing()
@@ -81,6 +86,7 @@ class EarnViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         print("onClickRemoveLiquidity")
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mType = TASK_TYPE_KAVA_LIQUIDITY_WITHDRAW
+        txVC.mKavaEarnDeposit = mEarnDeposits
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }
@@ -89,6 +95,7 @@ class EarnViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         print("onClickAddLiquidity")
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mType = TASK_TYPE_KAVA_LIQUIDITY_DEPOSIT
+        txVC.mKavaEarnDeposit = mEarnDeposits
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }
