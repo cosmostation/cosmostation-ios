@@ -16,15 +16,15 @@ class Signer {
     
     //Tx for Common Denom Transfer
     static func genSimpleSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                    _ toAddress: String, _ amount: Array<Coin>,
-                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType)  -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+                              _ toAddress: String, _ amount: Array<Coin>,
+                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType)  -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let sendMsg = genSendMsg(auth, toAddress, amount)
         return getGrpcSignedTx(auth, chainType, sendMsg, privateKey, publicKey, fee, memo)
     }
     
     static func simulSimpleSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                   _ toAddress: String, _ amount: Array<Coin>,
-                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType)  -> Cosmos_Tx_V1beta1_SimulateRequest {
+                                _ toAddress: String, _ amount: Array<Coin>,
+                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType)  -> Cosmos_Tx_V1beta1_SimulateRequest {
         let sendMsg = genSendMsg(auth, toAddress, amount)
         return getGrpcSimulateTx(auth, chainType, sendMsg, privateKey, publicKey, fee, memo)
     }
@@ -2207,6 +2207,8 @@ class Signer {
         let mode = Cosmos_Tx_V1beta1_ModeInfo.with {
             $0.single = single
         }
+        
+        print("getGrpcSignerInfos auth ", auth.account.typeURL)
         var pubKey: Google_Protobuf2_Any?
         if (chainType == ChainType.INJECTIVE_MAIN) {
             let pub = Injective_Crypto_V1beta1_Ethsecp256k1_PubKey.with {

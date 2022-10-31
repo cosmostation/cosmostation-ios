@@ -16,8 +16,8 @@ class MsgGenerator {
         var msg = Msg.init()
         var value = Msg.Value.init()
         if (chain == ChainType.OKEX_MAIN) {
-            value.from_address = WKey.convertAddressEthToCosmos(fromAddress, "ex")
-            value.to_address = WKey.convertAddressEthToCosmos(toAddress, "ex")
+            value.from_address = WKey.convertEvmToBech32(fromAddress, "ex")
+            value.to_address = WKey.convertEvmToBech32(toAddress, "ex")
             let data = try? JSONEncoder().encode(amount)
             do {
                 value.amount = try JSONDecoder().decode(AmountType.self, from:data!)
@@ -126,7 +126,7 @@ class MsgGenerator {
     static func genOkDepositMsg(_ delegator: String, _ coin: Coin) -> Msg {
         var msg = Msg.init()
         var value = Msg.Value.init()
-        value.delegator_address = WKey.convertAddressEthToCosmos(delegator, "ex")
+        value.delegator_address = WKey.convertEvmToBech32(delegator, "ex")
         value.quantity = coin;
         msg.type = "okexchain/staking/MsgDeposit";
         msg.value = value;
@@ -136,7 +136,7 @@ class MsgGenerator {
     static func genOkWithdarwMsg(_ delegator: String, _ coin: Coin) -> Msg {
         var msg = Msg.init()
         var value = Msg.Value.init()
-        value.delegator_address = WKey.convertAddressEthToCosmos(delegator, "ex")
+        value.delegator_address = WKey.convertEvmToBech32(delegator, "ex")
         value.quantity = coin;
         msg.type = "okexchain/staking/MsgWithdraw";
         msg.value = value;
@@ -146,7 +146,7 @@ class MsgGenerator {
     static func genOkVote(_ delegator: String, _ toVals: Array<String>) -> Msg {
         var msg = Msg.init()
         var value = Msg.Value.init()
-        value.delegator_address = WKey.convertAddressEthToCosmos(delegator, "ex")
+        value.delegator_address = WKey.convertEvmToBech32(delegator, "ex")
         value.validator_addresses = toVals;
         msg.type = "okexchain/staking/MsgAddShares";
         msg.value = value;

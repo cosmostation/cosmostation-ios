@@ -50,7 +50,7 @@ class WalletDetailInfoCell: UITableViewCell {
         
         if (chainConfig.etherAddressSupport == true) {
             ethAddressLabel.isHidden = false
-            ethAddressLabel.text = "(" + WKey.convertAddressCosmosToTender(account.account_address) + ")"
+            ethAddressLabel.text = "(" + WKey.convertBech32ToEvm(account.account_address) + ")"
             
         } else {
             ethAddressLabel.isHidden = true

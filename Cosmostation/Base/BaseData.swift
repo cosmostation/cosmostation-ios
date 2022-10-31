@@ -1286,7 +1286,7 @@ final class BaseData : NSObject{
         allOkAccount = BaseData.instance.selectAllAccountsByChain(ChainType.OKEX_MAIN)
         for account in allOkAccount {
             if (account.account_address.starts(with: "ex")) {
-                account.account_address = WKey.convertAddressCosmosToTender(account.account_address)
+                account.account_address = WKey.convertBech32ToEvm(account.account_address)
                 updateAccountAddress(account)
             }
         }

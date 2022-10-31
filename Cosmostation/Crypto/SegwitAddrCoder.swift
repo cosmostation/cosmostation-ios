@@ -64,6 +64,17 @@ public class SegwitAddrCoder {
         return (Int(dec.checksum[0]), conv)
     }
     
+    public func decode2(program: String) throws -> Data? {
+        let bech32 = Bech32()
+        guard let (_, data) = try? bech32.decode(program) else {
+            return nil
+        }
+        guard let result = try? convertBits(from: 5, to: 8, pad: false, idata: data) else {
+            return nil
+        }
+        return result
+    }
+    
     /// Encode segwit address
     public func encode(hrp: String, version: Int, program: Data) throws -> String {
         var enc = Data([UInt8(version)])

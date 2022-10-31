@@ -41,17 +41,7 @@ class CKey {
         let masterKey = getMasterKeyFromWords(m)
         let chainType = ChainFactory.getChainType(account.account_base_chain)
         
-        if (chainType == ChainType.COSMOS_MAIN || chainType == ChainType.IRIS_MAIN || chainType == ChainType.CERTIK_MAIN || chainType == ChainType.AKASH_MAIN ||
-            chainType == ChainType.SENTINEL_MAIN || chainType == ChainType.SIF_MAIN || chainType == ChainType.KI_MAIN || chainType == ChainType.OSMOSIS_MAIN ||
-            chainType == ChainType.EMONEY_MAIN || chainType == ChainType.RIZON_MAIN || chainType == ChainType.JUNO_MAIN || chainType == ChainType.REGEN_MAIN ||
-            chainType == ChainType.BITCANA_MAIN || chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.GRAVITY_BRIDGE_MAIN || chainType == ChainType.STARGAZE_MAIN ||
-            chainType == ChainType.COMDEX_MAIN || chainType == ChainType.CHIHUAHUA_MAIN || chainType == ChainType.AXELAR_MAIN || chainType == ChainType.KONSTELLATION_MAIN ||
-            chainType == ChainType.UMEE_MAIN || chainType == ChainType.CUDOS_MAIN || chainType == ChainType.CERBERUS_MAIN || chainType == ChainType.OMNIFLIX_MAIN ||
-            chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.MANTLE_MAIN || chainType == ChainType.NYX_MAIN || chainType == ChainType.PASSAGE_MAIN ||
-            chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.ALTHEA_TEST || chainType == ChainType.CRESCENT_TEST || chainType == ChainType.STATION_TEST) {
-            return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
-            
-        } else if (chainType == ChainType.BINANCE_MAIN) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 714, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             
         } else if (chainType == ChainType.BAND_MAIN) {
@@ -69,7 +59,7 @@ class CKey {
         } else if (chainType == ChainType.MEDI_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 371, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
-        } else if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN) {
+        } else if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN || chainType == ChainType.XPLA_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
         } else if (chainType == ChainType.BITSONG_MAIN) {
@@ -116,7 +106,11 @@ class CKey {
             }
             
         } else if (chainType == ChainType.OKEX_MAIN) {
-            return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+            if (account.account_custom_path == 0 || account.account_custom_path == 1) {
+                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+            } else {
+                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+            }
 
         }
         
@@ -132,30 +126,6 @@ class CKey {
     
     static func getPublicRaw(_ mnemonic: [String], _ account: Account) -> Data {
         return getHDKeyFromWords(mnemonic, account).publicKey.data
-    }
-    
-    static func getStdTx(_ privateKey: Data, _ publicKey: Data, _ msgList: Array<Msg>, _ stdMsg: StdSignMsg, _ account: Account, _ fee: Fee, _ memo: String) -> StdTx {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .sortedKeys
-        let data = try? encoder.encode(stdMsg)
-        let rawResult = String(data:data!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
-        let rawData: Data? = rawResult!.data(using: .utf8)
-        let hash = rawData!.sha256()
-        let signedData = try! ECDSA.compactsign(hash, privateKey: privateKey)
-        
-        var genedSignature = Signature.init()
-        var genPubkey =  PublicKey.init()
-        genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
-        genPubkey.value = publicKey.base64EncodedString()
-        genedSignature.pub_key = genPubkey
-        genedSignature.signature = signedData.base64EncodedString()
-        genedSignature.account_number = String(account.account_account_numner)
-        genedSignature.sequence = String(account.account_sequence_number)
-        
-        var signatures: Array<Signature> = Array<Signature>()
-        signatures.append(genedSignature)
-        
-        return MsgGenerator.genSignedTx(msgList, fee, memo, signatures)
     }
     
     
