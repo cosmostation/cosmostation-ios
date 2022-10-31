@@ -99,7 +99,7 @@ class KavaLiquidity4ViewController: BaseViewController, PasswordViewDelegate {
         DispatchQueue.global().async {
             var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest!
             if (self.txType == TASK_TYPE_KAVA_LIQUIDITY_DEPOSIT) {
-                reqTx = Signer.genSignedKavaEarnDelegateDeposit(auth!,
+                reqTx = Signer.genSignedKavaEarnDelegateDeposit(auth!, self.account!.account_pubkey_type,
                                                                 self.account!.account_address,
                                                                 self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
                                                                 self.pageHolderVC.mKavaEarnCoin,
@@ -107,7 +107,7 @@ class KavaLiquidity4ViewController: BaseViewController, PasswordViewDelegate {
                                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
                 
             } else {
-                reqTx = Signer.genSignedKavaEarnWithdraw(auth!,
+                reqTx = Signer.genSignedKavaEarnWithdraw(auth!, self.account!.account_pubkey_type,
                                                          self.account!.account_address,
                                                          self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
                                                          self.pageHolderVC.mKavaEarnCoin,

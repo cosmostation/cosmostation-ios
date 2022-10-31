@@ -108,7 +108,7 @@ class SifExitPool3ViewController: BaseViewController, PasswordViewDelegate {
             basisPoints = myShareWithdrawAmount.multiplying(byPowerOf10: 4).dividing(by: myShareAllAmount, withBehavior: WUtils.handler0).stringValue
             print("basisPoints ", basisPoints)
             
-            let reqTx = Signer.genSignedSifRemoveLpMsgTxgRPC(auth!,
+            let reqTx = Signer.genSignedSifRemoveLpMsgTxgRPC(auth!, self.account!.account_pubkey_type,
                                                              self.account!.account_address,
                                                              self.selectedPool.externalAsset.symbol,
                                                              basisPoints,

@@ -92,7 +92,7 @@ class HardPoolRepay3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedKavaHardRepay(auth!,
+            let reqTx = Signer.genSignedKavaHardRepay(auth!, self.account!.account_pubkey_type,
                                                       self.account!.account_address,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mHardPoolCoins!,

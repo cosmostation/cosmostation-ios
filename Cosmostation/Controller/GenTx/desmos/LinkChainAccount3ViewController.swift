@@ -105,7 +105,7 @@ class LinkChainAccount3ViewController: BaseViewController, PasswordViewDelegate 
                 }
             }
             
-            let reqTx = Signer.genSignedLinkChainTxgRPC(auth!,
+            let reqTx = Signer.genSignedLinkChainTxgRPC(auth!, self.account!.account_pubkey_type,
                                                         self.pageHolderVC.mAccount!.account_address,
                                                         self.pageHolderVC.mDesmosToLinkChain!,
                                                         toAccount,

@@ -112,7 +112,7 @@ class OkWithdraw4ViewController: BaseViewController, PasswordViewDelegate {
                 let rawResult = String(data:data!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
                 let rawData: Data? = rawResult!.data(using: .utf8)
                 
-                if (self.pageHolderVC.mAccount!.account_custom_path == 0) {
+                if (self.pageHolderVC.mAccount!.account_pubkey_type == 0) {
                     print("Tender Type")
                     let hash = rawData!.sha256()
                     let signedData = try! ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)

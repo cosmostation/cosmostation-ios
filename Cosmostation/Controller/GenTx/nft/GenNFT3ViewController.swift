@@ -103,7 +103,7 @@ class GenNFT3ViewController: BaseViewController, PasswordViewDelegate {
                 
                 var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest!
                 if (self.chainType == ChainType.IRIS_MAIN) {
-                    reqTx = Signer.genSignedIssueNftIrisTxgRPC(auth!,
+                    reqTx = Signer.genSignedIssueNftIrisTxgRPC(auth!, self.account!.account_pubkey_type,
                                                                self.account!.account_address,
                                                                self.pageHolderVC.mNFTDenomId!,
                                                                self.pageHolderVC.mNFTDenomName!,
@@ -116,7 +116,7 @@ class GenNFT3ViewController: BaseViewController, PasswordViewDelegate {
                                                                self.chainType!)
                     
                 } else if (self.chainType == ChainType.CRYPTO_MAIN) {
-                    reqTx = Signer.genSignedIssueNftCroTxgRPC(auth!,
+                    reqTx = Signer.genSignedIssueNftCroTxgRPC(auth!, self.account!.account_pubkey_type,
                                                               self.account!.account_address,
                                                               self.pageHolderVC.mNFTDenomId!,
                                                               self.pageHolderVC.mNFTDenomName!,

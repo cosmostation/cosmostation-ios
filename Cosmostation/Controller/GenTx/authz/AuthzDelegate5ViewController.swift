@@ -95,7 +95,7 @@ class AuthzDelegate5ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genAuthzDelegate(auth!,
+            let reqTx = Signer.genAuthzDelegate(auth!, self.account!.account_pubkey_type,
                                                 self.account!.account_address,
                                                 self.pageHolderVC.mGranterAddress!,
                                                 self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,

@@ -95,7 +95,7 @@ class DeleteStarname3ViewController: BaseViewController, PasswordViewDelegate {
         DispatchQueue.global().async {
             var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest = Cosmos_Tx_V1beta1_BroadcastTxRequest.init()
             if (self.pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_DOMAIN) {
-                reqTx = Signer.genSignedDeleteDomainMsgTxgRPC (auth!,
+                reqTx = Signer.genSignedDeleteDomainMsgTxgRPC (auth!, self.account!.account_pubkey_type,
                                                                self.pageHolderVC.mStarnameDomain!,
                                                                self.pageHolderVC.mAccount!.account_address,
                                                                self.pageHolderVC.mFee!,
@@ -104,7 +104,7 @@ class DeleteStarname3ViewController: BaseViewController, PasswordViewDelegate {
                                                                self.chainType!)
                 
             } else if (self.pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_ACCOUNT) {
-                reqTx = Signer.genSignedDeleteAccountMsgTxgRPC (auth!,
+                reqTx = Signer.genSignedDeleteAccountMsgTxgRPC (auth!, self.account!.account_pubkey_type,
                                                                 self.pageHolderVC.mStarnameDomain!,
                                                                 self.pageHolderVC.mStarnameAccount!,
                                                                 self.pageHolderVC.mAccount!.account_address,

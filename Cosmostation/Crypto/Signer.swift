@@ -15,18 +15,18 @@ import SwiftyJSON
 class Signer {
     
     //Tx for Common Denom Transfer
-    static func genSimpleSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimpleSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                               _ toAddress: String, _ amount: Array<Coin>,
                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType)  -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let sendMsg = genSendMsg(auth, toAddress, amount)
-        return getGrpcSignedTx(auth, chainType, sendMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, sendMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func simulSimpleSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func simulSimpleSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                 _ toAddress: String, _ amount: Array<Coin>,
                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType)  -> Cosmos_Tx_V1beta1_SimulateRequest {
         let sendMsg = genSendMsg(auth, toAddress, amount)
-        return getGrpcSimulateTx(auth, chainType, sendMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, sendMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genSendMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toAddress: String, _ amount: Array<Coin>) -> [Google_Protobuf2_Any] {
@@ -47,18 +47,18 @@ class Signer {
     }
     
     //Tx for Common Delegate
-    static func genSignedDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                         _ toValAddress: String, _ amount: Coin,
                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let deleMsg = genDelegateMsg(auth, toValAddress, amount)
-        return getGrpcSignedTx(auth, chainType, deleMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ toValAddress: String, _ amount: Coin,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let deleMsg = genDelegateMsg(auth, toValAddress, amount)
-        return getGrpcSimulateTx(auth, chainType, deleMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genDelegateMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toValAddress: String, _ amount: Coin) -> [Google_Protobuf2_Any] {
@@ -79,19 +79,19 @@ class Signer {
     }
     
     //Tx for Tgrade Delegate
-    static func genSignedTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                         _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin,
                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let deleMsg = genTgradeDelegateMsg(auth, toValAddress, availableAmount, vestingAmount)
-        return getGrpcSignedTx(auth, chainType, deleMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         print("auth ", auth)
         let deleMsg = genTgradeDelegateMsg(auth, toValAddress, availableAmount, vestingAmount)
-        return getGrpcSimulateTx(auth, chainType, deleMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genTgradeDelegateMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin) -> [Google_Protobuf2_Any] {
@@ -116,18 +116,18 @@ class Signer {
     }
     
     //Tx for Common UnDelegate
-    static func genSignedUnDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedUnDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ toValAddress: String, _ amount: Coin,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let undeleMsg = genUndelegateMsg(auth, toValAddress, amount)
-        return getGrpcSignedTx(auth, chainType, undeleMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, undeleMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateUnDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateUnDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ toValAddress: String, _ amount: Coin,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let undeleMsg = genUndelegateMsg(auth, toValAddress, amount)
-        return getGrpcSimulateTx(auth, chainType, undeleMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, undeleMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genUndelegateMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toValAddress: String, _ amount: Coin) -> [Google_Protobuf2_Any] {
@@ -148,18 +148,18 @@ class Signer {
     }
     
     //Tx for Common ReDelegate
-    static func genSignedReDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedReDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ fromValAddress: String, _ toValAddress: String, _ amount: Coin,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let redeleMsg = genRedelegateMsg(auth, fromValAddress, toValAddress, amount)
-        return getGrpcSignedTx(auth, chainType, redeleMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, redeleMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateReDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateReDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ fromValAddress: String, _ toValAddress: String, _ amount: Coin,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let redeleMsg = genRedelegateMsg(auth, fromValAddress, toValAddress, amount)
-        return getGrpcSimulateTx(auth, chainType, redeleMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, redeleMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genRedelegateMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ fromValAddress: String, _ toValAddress: String, _ amount: Coin) -> [Google_Protobuf2_Any] {
@@ -181,18 +181,18 @@ class Signer {
     }
     
     //Tx for Common Claim Staking Reward
-    static func genSignedClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ validators: Array<Cosmos_Staking_V1beta1_Validator>,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let claimRewardMsg = genClaimStakingRewardMsg(auth, validators)
-        return getGrpcSignedTx(auth, chainType, claimRewardMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, claimRewardMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                               _ validators: Array<Cosmos_Staking_V1beta1_Validator>,
                                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let claimRewardMsg = genClaimStakingRewardMsg(auth, validators)
-        return getGrpcSimulateTx(auth, chainType, claimRewardMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, claimRewardMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genClaimStakingRewardMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ validators: Array<Cosmos_Staking_V1beta1_Validator>) -> [Google_Protobuf2_Any] {
@@ -212,18 +212,18 @@ class Signer {
     }
     
     //Tx for Common Claim Staking Reward2
-    static func genSignedClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let claimRewardMsg = genClaimStakingRewardMsg(auth, rewards)
-        return getGrpcSignedTx(auth, chainType, claimRewardMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, claimRewardMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                               _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
                                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let claimRewardMsg = genClaimStakingRewardMsg(auth, rewards)
-        return getGrpcSimulateTx(auth, chainType, claimRewardMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, claimRewardMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genClaimStakingRewardMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>) -> [Google_Protobuf2_Any] {
@@ -243,18 +243,18 @@ class Signer {
     }
     
     //Tx for Common Re-Invest
-    static func genSignedReInvestTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedReInvestTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                         _ valAddress: String, _ amount: Coin,
                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let reinvestMsg = genReInvestMsg(auth, valAddress, amount)
-        return getGrpcSignedTx(auth, chainType, reinvestMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, reinvestMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateReInvestTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateReInvestTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ valAddress: String, _ amount: Coin,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let reinvestMsg = genReInvestMsg(auth, valAddress, amount)
-        return getGrpcSimulateTx(auth, chainType, reinvestMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, reinvestMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genReInvestMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ valAddress: String, _ amount: Coin) -> [Google_Protobuf2_Any] {
@@ -287,18 +287,18 @@ class Signer {
     
     
     //Tx for Common Compounding
-    static func genSignedCompounding(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedCompounding(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                      _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
                                      _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let compoundingMsg = genCompoundingMsg(auth, rewards, chainType)
-        return getGrpcSignedTx(auth, chainType, compoundingMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, compoundingMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateCompounding(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateCompounding(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                        _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let compoundingMsg = genCompoundingMsg(auth, rewards, chainType)
-        return getGrpcSimulateTx(auth, chainType, compoundingMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, compoundingMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genCompoundingMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>, _ chainType: ChainType) -> [Google_Protobuf2_Any] {
@@ -334,18 +334,18 @@ class Signer {
     }
     
     //Tx for Common Vote
-    static func genSignedVoteTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedVoteTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                     _ proposals: Array<MintscanProposalDetail>,
                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let voteMsg = genVoteMsg(auth, proposals)
-        return getGrpcSignedTx(auth, chainType, voteMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, voteMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateVoteTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateVoteTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                       _ proposals: Array<MintscanProposalDetail>,
                                       _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let voteMsg = genVoteMsg(auth, proposals)
-        return getGrpcSimulateTx(auth, chainType, voteMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, voteMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genVoteMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ proposals: Array<MintscanProposalDetail>) -> [Google_Protobuf2_Any] {
@@ -374,18 +374,18 @@ class Signer {
     }
     
     //Tx for Common Reward Address Change
-    static func genSignedSetRewardAddressTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedSetRewardAddressTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                 _ newRewardAddress: String,
                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let setRewardAddressMsg = genSetRewardAddressMsg(auth, newRewardAddress)
-        return getGrpcSignedTx(auth, chainType, setRewardAddressMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, setRewardAddressMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateetRewardAddressTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateetRewardAddressTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                  _ newRewardAddress: String,
                                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let setRewardAddressMsg = genSetRewardAddressMsg(auth, newRewardAddress)
-        return getGrpcSimulateTx(auth, chainType, setRewardAddressMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, setRewardAddressMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genSetRewardAddressMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ newRewardAddress: String) -> [Google_Protobuf2_Any] {
@@ -403,18 +403,18 @@ class Signer {
     
     //for Starname custom msgs
     //Tx for Starname Register Domain
-    static func genSignedRegisterDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedRegisterDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                  _ domain: String, _ admin: String, _ type: String,
                                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let setRegisterDomainMsg = genSetRegisterDomainMsg(domain, admin, type)
-        return getGrpcSignedTx(auth, chainType, setRegisterDomainMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, setRegisterDomainMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateRegisterDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateRegisterDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                    _ domain: String, _ admin: String, _ type: String,
                                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let setRegisterDomainMsg = genSetRegisterDomainMsg(domain, admin, type)
-        return getGrpcSimulateTx(auth, chainType, setRegisterDomainMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, setRegisterDomainMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genSetRegisterDomainMsg(_ domain: String, _ admin: String, _ type: String) -> [Google_Protobuf2_Any] {
@@ -433,18 +433,18 @@ class Signer {
     }
     
     //Tx for Starname Register Account
-    static func genSignedRegisterAccountMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedRegisterAccountMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                   _ domain: String, _ name: String, _ owner: String, _ registerer: String, _ resources: Array<Starnamed_X_Starname_V1beta1_Resource>,
                                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let registerAccountMsg = genRegisterAccountMsg(domain, name, owner, registerer, resources)
-        return getGrpcSignedTx(auth, chainType, registerAccountMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, registerAccountMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateRegisterAccountMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateRegisterAccountMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                     _ domain: String, _ name: String, _ owner: String, _ registerer: String, _ resources: Array<Starnamed_X_Starname_V1beta1_Resource>,
                                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let registerAccountMsg = genRegisterAccountMsg(domain, name, owner, registerer, resources)
-        return getGrpcSimulateTx(auth, chainType, registerAccountMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, registerAccountMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genRegisterAccountMsg(_ domain: String, _ name: String, _ owner: String, _ registerer: String, _ resources: Array<Starnamed_X_Starname_V1beta1_Resource>) -> [Google_Protobuf2_Any] {
@@ -465,18 +465,18 @@ class Signer {
     }
     
     //Tx for Starname Delete Domain
-    static func genSignedDeleteDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedDeleteDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                _ domain: String, _ owner: String,
                                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let deleteDomainMsg = genDeleteDomainMsg(domain, owner)
-        return getGrpcSignedTx(auth, chainType, deleteDomainMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, deleteDomainMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateDeleteDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateDeleteDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                  _ domain: String, _ owner: String,
                                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let deleteDomainMsg = genDeleteDomainMsg(domain, owner)
-        return getGrpcSimulateTx(auth, chainType, deleteDomainMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, deleteDomainMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genDeleteDomainMsg(_ domain: String, _ owner: String) -> [Google_Protobuf2_Any] {
@@ -493,18 +493,18 @@ class Signer {
     }
 
     //Tx for Starname Delete Account
-    static func genSignedDeleteAccountMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedDeleteAccountMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                 _ domain: String, _ name: String, _ owner: String,
                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let deleteAccountMsg = genDeleteAccountMsg(domain, name, owner)
-        return getGrpcSignedTx(auth, chainType, deleteAccountMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, deleteAccountMsg, privateKey, publicKey, fee, memo)
     }
 
-    static func genSimulateDeleteAccountMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateDeleteAccountMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                   _ domain: String, _ name: String, _ owner: String,
                                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let deleteAccountMsg = genDeleteAccountMsg(domain, name, owner)
-        return getGrpcSimulateTx(auth, chainType, deleteAccountMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, deleteAccountMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genDeleteAccountMsg(_ domain: String, _ name: String, _ owner: String) -> [Google_Protobuf2_Any] {
@@ -522,18 +522,18 @@ class Signer {
     }
      
     //Tx for Starname Renew Domain
-    static func genSignedRenewDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedRenewDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                               _ domain: String, _ signer: String,
                                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let renewDomainMsg = genRenewDomainMsg(domain, signer)
-        return getGrpcSignedTx(auth, chainType, renewDomainMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, renewDomainMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateRenewDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateRenewDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                 _ domain: String, _ signer: String,
                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let renewDomainMsg = genRenewDomainMsg(domain, signer)
-        return getGrpcSimulateTx(auth, chainType, renewDomainMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, renewDomainMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genRenewDomainMsg(_ domain: String, _ signer: String) -> [Google_Protobuf2_Any] {
@@ -550,18 +550,18 @@ class Signer {
     }
     
     //Tx for Starname Renew Account
-    static func genSignedRenewAccountMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedRenewAccountMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                               _ domain: String, _ name: String, _ signer: String,
                                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let renewAccountMsg = genRenewAccountMsg(domain, name, signer)
-        return getGrpcSignedTx(auth, chainType, renewAccountMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, renewAccountMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateRenewAccountMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateRenewAccountMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                  _ domain: String, _ name: String, _ signer: String,
                                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let renewAccountMsg = genRenewAccountMsg(domain, name, signer)
-        return getGrpcSimulateTx(auth, chainType, renewAccountMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, renewAccountMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genRenewAccountMsg(_ domain: String, _ name: String, _ signer: String) -> [Google_Protobuf2_Any] {
@@ -579,18 +579,18 @@ class Signer {
     }
     
     //Tx for Starname Replace Resource
-    static func genSignedReplaceResourceMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedReplaceResourceMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                   _ domain: String, _ name: String?, _ owner: String, _ resources: Array<Starnamed_X_Starname_V1beta1_Resource>,
                                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let replaceResourceMsg = genReplaceResourceMsg(domain, name, owner, resources)
-        return getGrpcSignedTx(auth, chainType, replaceResourceMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, replaceResourceMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateReplaceResourceMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateReplaceResourceMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                     _ domain: String, _ name: String?, _ owner: String, _ resources: Array<Starnamed_X_Starname_V1beta1_Resource>,
                                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let replaceResourceMsg = genReplaceResourceMsg(domain, name, owner, resources)
-        return getGrpcSimulateTx(auth, chainType, replaceResourceMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, replaceResourceMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genReplaceResourceMsg(_ domain: String, _ name: String?, _ owner: String, _ resources: Array<Starnamed_X_Starname_V1beta1_Resource>) -> [Google_Protobuf2_Any] {
@@ -612,18 +612,18 @@ class Signer {
     
     //for Osmosis custom msgs
     //Tx for Osmosis Swap In
-    static func genSignedSwapInMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedSwapInMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ swapRoutes: [Osmosis_Gamm_V1beta1_SwapAmountInRoute], _ inputDenom: String, _ inputAmount: String, _ outputAmount: String,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let SwapInMsg = genSwapInMsg(auth, swapRoutes, inputDenom, inputAmount, outputAmount)
-        return getGrpcSignedTx(auth, chainType, SwapInMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, SwapInMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateSwapInMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateSwapInMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ swapRoutes: [Osmosis_Gamm_V1beta1_SwapAmountInRoute], _ inputDenom: String, _ inputAmount: String, _ outputAmount: String,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let SwapInMsg = genSwapInMsg(auth, swapRoutes, inputDenom, inputAmount, outputAmount)
-        return getGrpcSimulateTx(auth, chainType, SwapInMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, SwapInMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genSwapInMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ swapRoutes: [Osmosis_Gamm_V1beta1_SwapAmountInRoute],
@@ -647,18 +647,18 @@ class Signer {
     }
     
     //Tx for Osmosis Deposit LP
-    static func genSignedDepositPoolMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedDepositPoolMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                               _ poolId: String, _ deposit0Coin: Coin, _ deposit1Coin: Coin, _ shareAmount: String,
                                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let depositPoolMsg = genDepositPoolMsg(auth, poolId, deposit0Coin, deposit1Coin, shareAmount)
-        return getGrpcSignedTx(auth, chainType, depositPoolMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, depositPoolMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateDepositPoolMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateDepositPoolMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                 _ poolId: String, _ deposit0Coin: Coin, _ deposit1Coin: Coin, _ shareAmount: String,
                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let depositPoolMsg = genDepositPoolMsg(auth, poolId, deposit0Coin, deposit1Coin, shareAmount)
-        return getGrpcSimulateTx(auth, chainType, depositPoolMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, depositPoolMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genDepositPoolMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
@@ -682,18 +682,18 @@ class Signer {
     }
     
     //Tx for Osmosis Withdraw LP
-    static func genSignedWithdrawPoolMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedWithdrawPoolMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                _ poolId: String, _ withdraw0Coin: Coin, _ withdraw1Coin: Coin, _ shareAmount: String,
                                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let withdrawPoolMsg = genWithdrawPoolMsg(auth, poolId, withdraw0Coin, withdraw1Coin, shareAmount)
-        return getGrpcSignedTx(auth, chainType, withdrawPoolMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, withdrawPoolMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateWithdrawPoolMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateWithdrawPoolMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                  _ poolId: String, _ withdraw0Coin: Coin, _ withdraw1Coin: Coin, _ shareAmount: String,
                                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let withdrawPoolMsg = genWithdrawPoolMsg(auth, poolId, withdraw0Coin, withdraw1Coin, shareAmount)
-        return getGrpcSimulateTx(auth, chainType, withdrawPoolMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, withdrawPoolMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genWithdrawPoolMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
@@ -718,18 +718,18 @@ class Signer {
     }
     
     //Tx for Osmosis Lock Tokens
-    static func genSignedLockTokensMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedLockTokensMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                              _ lpCoin: Coin, _ duration: Int64,
                                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let lockTokensMsg = genLockTokensMsg(auth, lpCoin, duration)
-        return getGrpcSignedTx(auth, chainType, lockTokensMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, lockTokensMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateLockTokensMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateLockTokensMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                _ lpCoin: Coin, _ duration: Int64,
                                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let lockTokensMsg = genLockTokensMsg(auth, lpCoin, duration)
-        return getGrpcSimulateTx(auth, chainType, lockTokensMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, lockTokensMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genLockTokensMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ lpCoin: Coin, _ duration: Int64) -> [Google_Protobuf2_Any] {
@@ -750,18 +750,18 @@ class Signer {
     }
     
     //Tx for Osmosis Begin Unlocking
-    static func genSignedBeginUnlockingsMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedBeginUnlockingsMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                   _ ids: Array<UInt64>,
                                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let beginUnlockingsMsg = genBeginUnlockingsMsg(auth, ids)
-        return getGrpcSignedTx(auth, chainType, beginUnlockingsMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, beginUnlockingsMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateBeginUnlockingsMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateBeginUnlockingsMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                     _ ids: Array<UInt64>,
                                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let beginUnlockingsMsg = genBeginUnlockingsMsg(auth, ids)
-        return getGrpcSimulateTx(auth, chainType, beginUnlockingsMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, beginUnlockingsMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genBeginUnlockingsMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ids: Array<UInt64>) -> [Google_Protobuf2_Any] {
@@ -782,18 +782,18 @@ class Signer {
     
     //for IBC Transfer custom msgs
     //Tx for Ibc Transfer
-    static func genIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                            _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height,
                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let ibcTransferMsg = genIbcTransferMsg(auth, receiver, amount, path, lastHeight)
-        return getGrpcSignedTx(auth, chainType, ibcTransferMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, ibcTransferMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func simulIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func simulIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                              _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height,
                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let ibcTransferMsg = genIbcTransferMsg(auth, receiver, amount, path, lastHeight)
-        return getGrpcSimulateTx(auth, chainType, ibcTransferMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, ibcTransferMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genIbcTransferMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height) -> [Google_Protobuf2_Any] {
@@ -823,18 +823,18 @@ class Signer {
     
     //for SIF custom msgs
     //Tx for Sif Swap
-    static func genSignedSifSwapMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedSifSwapMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ signer: String, _ inputDenom: String, _ inputAmount: String, _ outputDenom: String, _ outputAmount: String,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let sifSwapMsg = genSifSwapMsg(signer, inputDenom, inputAmount, outputDenom, outputAmount)
-        return getGrpcSignedTx(auth, chainType, sifSwapMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, sifSwapMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateSifSwapMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateSifSwapMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ signer: String, _ inputDenom: String, _ inputAmount: String, _ outputDenom: String, _ outputAmount: String,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let sifSwapMsg = genSifSwapMsg(signer, inputDenom, inputAmount, outputDenom, outputAmount)
-        return getGrpcSimulateTx(auth, chainType, sifSwapMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, sifSwapMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genSifSwapMsg(_ signer: String, _ inputDenom: String, _ inputAmount: String, _ outputDenom: String, _ outputAmount: String) -> [Google_Protobuf2_Any] {
@@ -859,18 +859,18 @@ class Signer {
     }
     
     //Tx for Sif Add LP
-    static func genSignedSifAddLpMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedSifAddLpMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ signer: String, _ nativeAmount: String, _ externalDenom: String, _ externalAmount: String,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let sifAddLpMsg = genSifAddLpMsg(signer, nativeAmount, externalDenom, externalAmount)
-        return getGrpcSignedTx(auth, chainType, sifAddLpMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, sifAddLpMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateSifAddLpMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateSifAddLpMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                              _ signer: String, _ nativeAmount: String, _ externalDenom: String, _ externalAmount: String,
                                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let sifAddLpMsg = genSifAddLpMsg(signer, nativeAmount, externalDenom, externalAmount)
-        return getGrpcSimulateTx(auth, chainType, sifAddLpMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, sifAddLpMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genSifAddLpMsg(_ signer: String, _ nativeAmount: String, _ externalDenom: String, _ externalAmount: String) -> [Google_Protobuf2_Any] {
@@ -891,18 +891,18 @@ class Signer {
     }
     
     //Tx for Sif Remove LP
-    static func genSignedSifRemoveLpMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedSifRemoveLpMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                               _ signer: String, _ externalDenom: String, _ w_basis_points: String,
                                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let sifRemoveLpMsg = genSifRemoveLpMsg(signer, externalDenom, w_basis_points)
-        return getGrpcSignedTx(auth, chainType, sifRemoveLpMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, sifRemoveLpMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateSifRemoveLpMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateSifRemoveLpMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                 _ signer: String, _ externalDenom: String, _ w_basis_points: String,
                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let sifRemoveLpMsg = genSifRemoveLpMsg(signer, externalDenom, w_basis_points)
-        return getGrpcSimulateTx(auth, chainType, sifRemoveLpMsg, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, sifRemoveLpMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genSifRemoveLpMsg(_ signer: String, _ externalDenom: String, _ w_basis_points: String) -> [Google_Protobuf2_Any] {
@@ -924,18 +924,18 @@ class Signer {
     
     //for IRIS custom msgs
     //Tx for Iris Issue Nft
-    static func genSignedIssueNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedIssueNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let irisIssueNft = genIrisIssueNft(signer, denom_id, denom_name, id, name, uri, data)
-        return getGrpcSignedTx(auth, chainType, irisIssueNft, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, irisIssueNft, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateIssueNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateIssueNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                               _ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
                                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let irisIssueNft = genIrisIssueNft(signer, denom_id, denom_name, id, name, uri, data)
-        return getGrpcSimulateTx(auth, chainType, irisIssueNft, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, irisIssueNft, privateKey, publicKey, fee, memo)
     }
     
     static func genIrisIssueNft(_ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String) -> [Google_Protobuf2_Any] {
@@ -972,18 +972,18 @@ class Signer {
     }
     
     //Tx for Iris Send Nft
-    static func genSignedSendNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedSendNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ irisResponse: Irismod_Nft_QueryNFTResponse,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let irisSendNft = genIrisSendNft(signer, recipient, id, denom_id, irisResponse)
-        return getGrpcSignedTx(auth, chainType, irisSendNft, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, irisSendNft, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateSendNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateSendNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                              _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ irisResponse: Irismod_Nft_QueryNFTResponse,
                                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let irisSendNft = genIrisSendNft(signer, recipient, id, denom_id, irisResponse)
-        return getGrpcSimulateTx(auth, chainType, irisSendNft, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, irisSendNft, privateKey, publicKey, fee, memo)
     }
     
     static func genIrisSendNft(_ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ irisResponse: Irismod_Nft_QueryNFTResponse) -> [Google_Protobuf2_Any] {
@@ -1004,18 +1004,18 @@ class Signer {
     }
     
     //Tx for Iris Issue Nft Denom
-    static func genSignedIssueNftDenomIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedIssueNftDenomIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                  _ signer: String,_ denom_id: String, _ denom_name: String,
                                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let irisIssueNftDenom = genIrisIssueNftDenom(signer, denom_id, denom_name)
-        return getGrpcSignedTx(auth, chainType, irisIssueNftDenom, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, irisIssueNftDenom, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateIssueNftDenomIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateIssueNftDenomIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                    _ signer: String,_ denom_id: String, _ denom_name: String,
                                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let irisIssueNftDenom = genIrisIssueNftDenom(signer, denom_id, denom_name)
-        return getGrpcSimulateTx(auth, chainType, irisIssueNftDenom, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, irisIssueNftDenom, privateKey, publicKey, fee, memo)
     }
     
     static func genIrisIssueNftDenom(_ signer: String,_ denom_id: String, _ denom_name: String) -> [Google_Protobuf2_Any] {
@@ -1037,18 +1037,18 @@ class Signer {
     
     //for CRO custom msgs
     //Tx for Cro Issue Nft
-    static func genSignedIssueNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedIssueNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let croIssueNft = genCroIssueNft(signer, denom_id, denom_name, id, name, uri, data)
-        return getGrpcSignedTx(auth, chainType, croIssueNft, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, croIssueNft, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateIssueNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateIssueNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                              _ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
                                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let croIssueNft = genCroIssueNft(signer, denom_id, denom_name, id, name, uri, data)
-        return getGrpcSimulateTx(auth, chainType, croIssueNft, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, croIssueNft, privateKey, publicKey, fee, memo)
     }
     
     static func genCroIssueNft(_ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String) -> [Google_Protobuf2_Any] {
@@ -1082,18 +1082,18 @@ class Signer {
     }
     
     //Tx for Cro Send Nft
-    static func genSignedSendNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedSendNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ croResponse: Chainmain_Nft_V1_QueryNFTResponse,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let croSendNft = genCroSendNft(signer, recipient, id, denom_id, croResponse)
-        return getGrpcSignedTx(auth, chainType, croSendNft, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, croSendNft, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateSendNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateSendNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ croResponse: Chainmain_Nft_V1_QueryNFTResponse,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let croSendNft = genCroSendNft(signer, recipient, id, denom_id, croResponse)
-        return getGrpcSimulateTx(auth, chainType, croSendNft, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, croSendNft, privateKey, publicKey, fee, memo)
     }
     
     static func genCroSendNft(_ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ croResponse: Chainmain_Nft_V1_QueryNFTResponse) -> [Google_Protobuf2_Any] {
@@ -1111,18 +1111,18 @@ class Signer {
     }
     
     //Tx for Cro Issue Nft Denom
-    static func genSignedIssueNftDenomCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedIssueNftDenomCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                 _ signer: String,_ denom_id: String, _ denom_name: String,
                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let croIssueNftDenom = genCroIssueNftDenom(signer, denom_id, denom_name)
-        return getGrpcSignedTx(auth, chainType, croIssueNftDenom, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, croIssueNftDenom, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateIssueNftDenomCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateIssueNftDenomCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                   _ signer: String,_ denom_id: String, _ denom_name: String,
                                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let croIssueNftDenom = genCroIssueNftDenom(signer, denom_id, denom_name)
-        return getGrpcSimulateTx(auth, chainType, croIssueNftDenom, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, croIssueNftDenom, privateKey, publicKey, fee, memo)
     }
     
     static func genCroIssueNftDenom(_ signer: String,_ denom_id: String, _ denom_name: String) -> [Google_Protobuf2_Any] {
@@ -1141,18 +1141,18 @@ class Signer {
     
     //for Desmos custom msgs
     //Tx for Desmos Save Profile
-    static func genSignedSaveProfileTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedSaveProfileTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ creator: String,_ dtag: String, _ nickname: String, _ bio: String, _ profile_picture: String, _ cover_picture: String,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let saveProfile = genSaveProfile(creator, dtag, nickname, bio, profile_picture, cover_picture)
-        return getGrpcSignedTx(auth, chainType, saveProfile, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, saveProfile, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateSaveProfileTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateSaveProfileTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                              _ creator: String,_ dtag: String, _ nickname: String, _ bio: String, _ profile_picture: String, _ cover_picture: String,
                                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let saveProfile = genSaveProfile(creator, dtag, nickname, bio, profile_picture, cover_picture)
-        return getGrpcSimulateTx(auth, chainType, saveProfile, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, saveProfile, privateKey, publicKey, fee, memo)
     }
     
     static func genSaveProfile(_ creator: String,_ dtag: String, _ nickname: String, _ bio: String, _ profile_picture: String, _ cover_picture: String) -> [Google_Protobuf2_Any] {
@@ -1172,18 +1172,18 @@ class Signer {
     }
     
     //Tx for Desmos Link Chain
-    static func genSignedLinkChainTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedLinkChainTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ signer: String, _ tochain: ChainType, _ toAccount: Account, _ toPrivateKey: Data, _ toPublicKey: Data,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let linkChain = genLinkChain(signer, tochain, toAccount, toPrivateKey, toPublicKey)
-        return getGrpcSignedTx(auth, chainType, linkChain, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, linkChain, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateLinkChainTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateLinkChainTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ signer: String, _ tochain: ChainType, _ toAccount: Account, _ toPrivateKey: Data, _ toPublicKey: Data,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let linkChain = genLinkChain(signer, tochain, toAccount, toPrivateKey, toPublicKey)
-        return getGrpcSimulateTx(auth, chainType, linkChain, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, linkChain, privateKey, publicKey, fee, memo)
     }
     
     static func genLinkChain(_ signer: String, _ tochain: ChainType, _ toAccount: Account, _ toPrivateKey: Data, _ toPublicKey: Data) -> [Google_Protobuf2_Any] {
@@ -1231,18 +1231,18 @@ class Signer {
     
     //for kava sign
     //Tx for Kava CDP Create
-    static func genSignedKavaCDPCreate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaCDPCreate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                        _ sender: String, _ collateral: Coin, _ principal: Coin, _ collateral_type: String,
                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let createCdp = genKavaCDPCreate(sender, collateral, principal, collateral_type)
-        return getGrpcSignedTx(auth, chainType, createCdp, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, createCdp, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaCDPCreate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaCDPCreate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ sender: String, _ collateral: Coin, _ principal: Coin, _ collateral_type: String,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let createCdp = genKavaCDPCreate(sender, collateral, principal, collateral_type)
-        return getGrpcSimulateTx(auth, chainType, createCdp, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, createCdp, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaCDPCreate(_ sender: String, _ collateral: Coin, _ principal: Coin, _ collateral_type: String) -> [Google_Protobuf2_Any] {
@@ -1268,18 +1268,18 @@ class Signer {
     }
     
     //Tx for Kava CDP Deposit
-    static func genSignedKavaCDPDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaCDPDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                         _ owner: String, _ depositor: String, _ collateral: Coin, _ collateral_type: String,
                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let depositCdp = genKavaCDPDeposit(owner, depositor, collateral, collateral_type)
-        return getGrpcSignedTx(auth, chainType, depositCdp, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, depositCdp, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaCDPDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaCDPDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ owner: String, _ depositor: String, _ collateral: Coin, _ collateral_type: String,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let depositCdp = genKavaCDPDeposit(owner, depositor, collateral, collateral_type)
-        return getGrpcSimulateTx(auth, chainType, depositCdp, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, depositCdp, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaCDPDeposit(_ owner: String, _ depositor: String, _ collateral: Coin, _ collateral_type: String) -> [Google_Protobuf2_Any] {
@@ -1301,18 +1301,18 @@ class Signer {
     }
     
     //Tx for Kava CDP Withdraw
-    static func genSignedKavaCDPWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaCDPWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ owner: String, _ depositor: String, _ collateral: Coin, _ collateral_type: String,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let withdrawCdp = genKavaCDPWithdraw(owner, depositor, collateral, collateral_type)
-        return getGrpcSignedTx(auth, chainType, withdrawCdp, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, withdrawCdp, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaCDPWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaCDPWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ owner: String, _ depositor: String, _ collateral: Coin, _ collateral_type: String,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let withdrawCdp = genKavaCDPWithdraw(owner, depositor, collateral, collateral_type)
-        return getGrpcSimulateTx(auth, chainType, withdrawCdp, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, withdrawCdp, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaCDPWithdraw(_ owner: String, _ depositor: String, _ collateral: Coin, _ collateral_type: String) -> [Google_Protobuf2_Any] {
@@ -1334,18 +1334,18 @@ class Signer {
     }
     
     //Tx for Kava CDP Draw Debt
-    static func genSignedKavaCDPDrawDebt(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaCDPDrawDebt(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ sender: String, _ principal: Coin, _ collateral_type: String,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let drawdebtCdp = genKavaCDPDrawDebt(sender, principal, collateral_type)
-        return getGrpcSignedTx(auth, chainType, drawdebtCdp, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, drawdebtCdp, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaCDPDrawDebt(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaCDPDrawDebt(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ sender: String, _ principal: Coin, _ collateral_type: String,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let drawdebtCdp = genKavaCDPDrawDebt(sender, principal, collateral_type)
-        return getGrpcSimulateTx(auth, chainType, drawdebtCdp, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, drawdebtCdp, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaCDPDrawDebt(_ sender: String, _ principal: Coin, _ collateral_type: String) -> [Google_Protobuf2_Any] {
@@ -1366,18 +1366,18 @@ class Signer {
     }
     
     //Tx for Kava CDP Repay
-    static func genSignedKavaCDPRepay(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaCDPRepay(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                       _ sender: String, _ payment: Coin, _ collateral_type: String,
                                       _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let repayCdp = genKavaCDPRepay(sender, payment, collateral_type)
-        return getGrpcSignedTx(auth, chainType, repayCdp, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, repayCdp, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaCDPRepay(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaCDPRepay(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                         _ sender: String, _ payment: Coin, _ collateral_type: String,
                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let repayCdp = genKavaCDPRepay(sender, payment, collateral_type)
-        return getGrpcSimulateTx(auth, chainType, repayCdp, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, repayCdp, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaCDPRepay(_ sender: String, _ payment: Coin, _ collateral_type: String) -> [Google_Protobuf2_Any] {
@@ -1398,18 +1398,18 @@ class Signer {
     }
     
     //Tx for Kava Hard Deposit
-    static func genSignedKavaHardDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaHardDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ depositor: String, _ toDepositCoins: Array<Coin>,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let depositHard = genKavaHardDeposit(depositor, toDepositCoins)
-        return getGrpcSignedTx(auth, chainType, depositHard, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, depositHard, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaHardDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaHardDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ depositor: String, _ toDepositCoins: Array<Coin>,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let depositHard = genKavaHardDeposit(depositor, toDepositCoins)
-        return getGrpcSimulateTx(auth, chainType, depositHard, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, depositHard, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaHardDeposit(_ depositor: String, _ toDepositCoins: Array<Coin>) -> [Google_Protobuf2_Any] {
@@ -1429,18 +1429,18 @@ class Signer {
     }
     
     //Tx for Kava Hard Withdraw
-    static func genSignedKavaHardWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaHardWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ depositor: String, _ toWithdrawCoins: Array<Coin>,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let withdrawHard = genKavaHardWithdraw(depositor, toWithdrawCoins)
-        return getGrpcSignedTx(auth, chainType, withdrawHard, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, withdrawHard, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaHardWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaHardWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ depositor: String, _ toWithdrawCoins: Array<Coin>,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let withdrawHard = genKavaHardWithdraw(depositor, toWithdrawCoins)
-        return getGrpcSimulateTx(auth, chainType, withdrawHard, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, withdrawHard, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaHardWithdraw(_ depositor: String, _ toWithdrawCoins: Array<Coin>) -> [Google_Protobuf2_Any] {
@@ -1460,18 +1460,18 @@ class Signer {
     }
     
     //Tx for Kava Hard Borrow
-    static func genSignedKavaHardBorrow(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaHardBorrow(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                         _ borrower: String, _ toBorrowCoins: Array<Coin>,
                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let borrowHard = genKavaHardBorrow(borrower, toBorrowCoins)
-        return getGrpcSignedTx(auth, chainType, borrowHard, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, borrowHard, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaHardBorrow(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaHardBorrow(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ borrower: String, _ toBorrowCoins: Array<Coin>,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let borrowHard = genKavaHardBorrow(borrower, toBorrowCoins)
-        return getGrpcSimulateTx(auth, chainType, borrowHard, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, borrowHard, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaHardBorrow(_ borrower: String, _ toBorrowCoins: Array<Coin>) -> [Google_Protobuf2_Any] {
@@ -1491,18 +1491,18 @@ class Signer {
     }
     
     //Tx for Kava Hard Repay
-    static func genSignedKavaHardRepay(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaHardRepay(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                        _ sender: String, _ owner: String, _ toRepayCoins: Array<Coin>,
                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let repayHard = genKavaHardRepay(sender, owner, toRepayCoins)
-        return getGrpcSignedTx(auth, chainType, repayHard, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, repayHard, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaHardRepay(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaHardRepay(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ sender: String, _ owner: String, _ toRepayCoins: Array<Coin>,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let repayHard = genKavaHardRepay(sender, owner, toRepayCoins)
-        return getGrpcSimulateTx(auth, chainType, repayHard, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, repayHard, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaHardRepay(_ sender: String, _ owner: String, _ toRepayCoins: Array<Coin>) -> [Google_Protobuf2_Any] {
@@ -1523,18 +1523,18 @@ class Signer {
     }
     
     //Tx for Kava Swap Deposit
-    static func genSignedKavaSwapDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaSwapDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ depositor: String, _ token_a: Coin, _ token_b: Coin, _ slippage: String, _ deadline: Int64,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let swapDeposit = genKavaSwapDeposit(depositor, token_a, token_b, slippage, deadline)
-        return getGrpcSignedTx(auth, chainType, swapDeposit, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, swapDeposit, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaSwapDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaSwapDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ depositor: String, _ token_a: Coin, _ token_b: Coin, _ slippage: String, _ deadline: Int64,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let swapDeposit = genKavaSwapDeposit(depositor, token_a, token_b, slippage, deadline)
-        return getGrpcSimulateTx(auth, chainType, swapDeposit, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, swapDeposit, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaSwapDeposit(_ depositor: String, _ token_a: Coin, _ token_b: Coin, _ slippage: String, _ deadline: Int64) -> [Google_Protobuf2_Any] {
@@ -1553,18 +1553,18 @@ class Signer {
     }
     
     //Tx for Kava Swap Withdraw
-    static func genSignedKavaSwapWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaSwapWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ from: String, _ shares: String, _ min_token_a: Coin, _ min_token_b: Coin, _ deadline: Int64,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let swapWithdraw = genKavaSwapWithdraw(from, shares, min_token_a, min_token_b, deadline)
-        return getGrpcSignedTx(auth, chainType, swapWithdraw, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, swapWithdraw, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaSwapWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaSwapWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ from: String, _ shares: String, _ min_token_a: Coin, _ min_token_b: Coin, _ deadline: Int64,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let swapWithdraw = genKavaSwapWithdraw(from, shares, min_token_a, min_token_b, deadline)
-        return getGrpcSimulateTx(auth, chainType, swapWithdraw, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, swapWithdraw, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaSwapWithdraw(_ from: String, _ shares: String, _ min_token_a: Coin, _ min_token_b: Coin, _ deadline: Int64) -> [Google_Protobuf2_Any] {
@@ -1583,18 +1583,18 @@ class Signer {
     }
     
     //Tx for Kava Swap Exact For Tokens
-    static func genSignedKavaSwapExactForTokens(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaSwapExactForTokens(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                 _ requester: String, _ swapIn: Coin, _ swapOut: Coin, _ slippage: String, _ deadline: Int64,
                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let swapExactForTokens = genKavaSwapExactForTokens(requester, swapIn, swapOut, slippage, deadline)
-        return getGrpcSignedTx(auth, chainType, swapExactForTokens, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, swapExactForTokens, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaSwapExactForTokens(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaSwapExactForTokens(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                   _ requester: String, _ swapIn: Coin, _ swapOut: Coin, _ slippage: String, _ deadline: Int64,
                                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let swapExactForTokens = genKavaSwapExactForTokens(requester, swapIn, swapOut, slippage, deadline)
-        return getGrpcSimulateTx(auth, chainType, swapExactForTokens, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, swapExactForTokens, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaSwapExactForTokens(_ requester: String, _ swapIn: Coin, _ swapOut: Coin, _ slippage: String, _ deadline: Int64) -> [Google_Protobuf2_Any] {
@@ -1613,18 +1613,18 @@ class Signer {
     }
     
     //Tx for Kava Incentive All
-    static func genSignedKavaIncentiveAll(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaIncentiveAll(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ sender: String, _ multiplier_name: String,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let kavaIncentive = genKavaIncentiveAll(sender, multiplier_name)
-        return getGrpcSignedTx(auth, chainType, kavaIncentive, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, kavaIncentive, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaIncentiveAll(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaIncentiveAll(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ sender: String, _ multiplier_name: String,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let kavaIncentive = genKavaIncentiveAll(sender, multiplier_name)
-        return getGrpcSimulateTx(auth, chainType, kavaIncentive, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, kavaIncentive, privateKey, publicKey, fee, memo)
     }
     
     static func genKavaIncentiveAll(_ sender: String, _ multiplier_name: String) -> [Google_Protobuf2_Any] {
@@ -1720,18 +1720,18 @@ class Signer {
     }
     
     //Tx for Kava Earn Deposit
-    static func genSignedKavaEarnDelegateDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaEarnDelegateDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ depositor: String, _ validator: String, _ depositCoin: Coin,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let earnDelegateDepositMsg = getKavaEarnDelegateDeposit(depositor, validator, depositCoin)
-        return getGrpcSignedTx(auth, chainType, [earnDelegateDepositMsg], privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, [earnDelegateDepositMsg], privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaEarnDelegateMintDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaEarnDelegateMintDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ depositor: String, _ validator: String, _ depositCoin: Coin,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let earnDelegateDepositMsg = getKavaEarnDelegateDeposit(depositor, validator, depositCoin)
-        return getGrpcSimulateTx(auth, chainType, [earnDelegateDepositMsg], privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, [earnDelegateDepositMsg], privateKey, publicKey, fee, memo)
     }
     
     static func getKavaEarnDelegateDeposit(_ depositor: String, _ validator: String, _ depositCoin: Coin) -> Google_Protobuf2_Any {
@@ -1747,18 +1747,18 @@ class Signer {
     }
     
     //Tx for Kava Earn Withdraw
-    static func genSignedKavaEarnWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaEarnWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ from: String, _ validator: String, _ depositCoin: Coin,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let earnWithdrawMsg = getKavaEarnWithdraw(from, validator, depositCoin)
-        return getGrpcSignedTx(auth, chainType, [earnWithdrawMsg], privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, [earnWithdrawMsg], privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateKavaEarnWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateKavaEarnWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ from: String, _ validator: String, _ depositCoin: Coin,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let earnWithdrawMsg = getKavaEarnWithdraw(from, validator, depositCoin)
-        return getGrpcSimulateTx(auth, chainType, [earnWithdrawMsg], privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, [earnWithdrawMsg], privateKey, publicKey, fee, memo)
     }
     
     static func getKavaEarnWithdraw(_ from: String, _ validator: String, _ depositCoin: Coin) -> Google_Protobuf2_Any {
@@ -1774,7 +1774,7 @@ class Signer {
     }
     
     //Tx for Kava Create HTLC Swap
-    static func genSignedKavaCreateHTLCSwap(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaCreateHTLCSwap(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ from: String, _ to: String, _ sendCoin: Array<Coin>, _ timeStamp: Int64, _ randomNumberHash: String,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let createAtomicSwap = Kava_Bep3_V1beta1_MsgCreateAtomicSwap.with {
@@ -1791,11 +1791,11 @@ class Signer {
             $0.typeURL = "/kava.bep3.v1beta1.MsgCreateAtomicSwap"
             $0.value = try! createAtomicSwap.serializedData()
         }
-        return getGrpcSignedTx(auth, chainType, [anyMsg], privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, [anyMsg], privateKey, publicKey, fee, memo)
     }
     
     //Tx for Kava Claim HTLC Swap
-    static func genSignedKavaClaimHTLCSwap(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSignedKavaClaimHTLCSwap(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ from: String, _ swapID: String, _ randomNumber: String,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let claimAtomicSwap = Kava_Bep3_V1beta1_MsgClaimAtomicSwap.with {
@@ -1807,24 +1807,24 @@ class Signer {
             $0.typeURL = "/kava.bep3.v1beta1.MsgClaimAtomicSwap"
             $0.value = try! claimAtomicSwap.serializedData()
         }
-        return getGrpcSignedTx2(auth, chainId, [anyMsg], privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx2(auth, pubkeyType, chainId, [anyMsg], privateKey, publicKey, fee, memo)
         
     }
     
     //for WASM custom msg
     //Tx for CW20 Transfer
-    static func genWasmSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genWasmSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                             _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>,
                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let cw20Send = genCw20Send(auth, toAddress, contractAddress, amount)
-        return getGrpcSignedTx(auth, chainType, cw20Send, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, cw20Send, privateKey, publicKey, fee, memo)
     }
     
-    static func simulWasmSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func simulWasmSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                               _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>,
                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let cw20Send = genCw20Send(auth, toAddress, contractAddress, amount)
-        return getGrpcSimulateTx(auth, chainType, cw20Send, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, cw20Send, privateKey, publicKey, fee, memo)
     }
     
     static func genCw20Send(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>) -> [Google_Protobuf2_Any] {
@@ -1841,24 +1841,24 @@ class Signer {
     }
     
     //Tx for CW20 IBC Transfer
-    static func genWasmIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genWasmIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                _ toAddress: String, _ cw20ContractAddress: String, _ amount: Array<Coin>, _ path: MintscanPath,
                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let jsonMsg : JSON = ["channel" : path.channel!, "remote_address" : toAddress, "timeout" : 900]
         let jsonMsgBase64 = try! jsonMsg.rawData(options: .sortedKeys).base64EncodedString()
         let innerMsg = Cw20IbcTransferReq.init(path.getIBCContract(), amount[0].amount, jsonMsgBase64).getEncode()
         let cw20IbcSend = genCw20IbcSend(auth, cw20ContractAddress, innerMsg)
-        return getGrpcSignedTx(auth, chainType, cw20IbcSend, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, cw20IbcSend, privateKey, publicKey, fee, memo)
     }
     
-    static func simulWasmIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func simulWasmIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                  _ toAddress: String, _ cw20ContractAddress: String, _ amount: Array<Coin>, _ path: MintscanPath,
                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let jsonMsg : JSON = ["channel" : path.channel!, "remote_address" : toAddress, "timeout" : 900]
         let jsonMsgBase64 = try! jsonMsg.rawData(options: .sortedKeys).base64EncodedString()
         let innerMsg = Cw20IbcTransferReq.init(path.getIBCContract(), amount[0].amount, jsonMsgBase64).getEncode()
         let cw20IbcSend = genCw20IbcSend(auth, cw20ContractAddress, innerMsg)
-        return getGrpcSimulateTx(auth, chainType, cw20IbcSend, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, cw20IbcSend, privateKey, publicKey, fee, memo)
     }
     
     static func genCw20IbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ cw20ContractAddress: String, _ innerMsg: Data) -> [Google_Protobuf2_Any] {
@@ -1876,18 +1876,18 @@ class Signer {
     
     //AUTHz
     //Tx for Authz Claim Rewards
-    static func genAuthzClaimReward(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genAuthzClaimReward(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                     _ grantee: String, _ granter: String, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let authzClaimRewards = genAuthzClaimStakingRewardMsg(grantee, granter, rewards)
-        return getGrpcSignedTx(auth, chainType, authzClaimRewards, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, authzClaimRewards, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateAuthzClaimReward(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateAuthzClaimReward(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                             _ grantee: String, _ granter: String, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let authzClaimRewards = genAuthzClaimStakingRewardMsg(grantee, granter, rewards)
-        return getGrpcSimulateTx(auth, chainType, authzClaimRewards, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, authzClaimRewards, privateKey, publicKey, fee, memo)
     }
     
     static func genAuthzClaimStakingRewardMsg(_ grantee: String, _ granter: String, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>) -> [Google_Protobuf2_Any] {
@@ -1915,18 +1915,18 @@ class Signer {
     }
     
     //Tx for Authz Claim Commission
-    static func genAuthzClaimCommission(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genAuthzClaimCommission(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                         _ grantee: String, _ granter: String, _ validatorAddress: String,
                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let authzClaimCommission = genAuthzClaimCommissionMsg(grantee, granter, validatorAddress)
-        return getGrpcSignedTx(auth, chainType, authzClaimCommission, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, authzClaimCommission, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateAuthzClaimCommission(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateAuthzClaimCommission(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                                 _ grantee: String, _ granter: String, _ validatorAddress: String,
                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let authzClaimCommission = genAuthzClaimCommissionMsg(grantee, granter, validatorAddress)
-        return getGrpcSimulateTx(auth, chainType, authzClaimCommission, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, authzClaimCommission, privateKey, publicKey, fee, memo)
     }
     
     static func genAuthzClaimCommissionMsg(_ grantee: String, _ granter: String, _ validatorAddress: String) -> [Google_Protobuf2_Any] {
@@ -1949,18 +1949,18 @@ class Signer {
     }
     
     //Tx for Authz Vote
-    static func genAuthzVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genAuthzVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                              _ grantee: String, _ granter: String, _ proposals: Array<MintscanProposalDetail>,
                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let authzVote = genAuthzVoteMsg(grantee, granter, proposals)
-        return getGrpcSignedTx(auth, chainType, authzVote, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, authzVote, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateAuthzVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateAuthzVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                      _ grantee: String, _ granter: String, _ proposals: Array<MintscanProposalDetail>,
                                      _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let authzVote = genAuthzVoteMsg(grantee, granter, proposals)
-        return getGrpcSimulateTx(auth, chainType, authzVote, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, authzVote, privateKey, publicKey, fee, memo)
     }
     
     static func genAuthzVoteMsg(_ grantee: String, _ granter: String, _ proposals: Array<MintscanProposalDetail>) -> [Google_Protobuf2_Any] {
@@ -1997,18 +1997,18 @@ class Signer {
     }
     
     //Tx for Authz Delegate
-    static func genAuthzDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genAuthzDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                  _ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin,
                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let authzDelegate = genAuthzDelegateMsg(grantee, granter, toValAddress, amount)
-        return getGrpcSignedTx(auth, chainType, authzDelegate, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, authzDelegate, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateAuthzDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateAuthzDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let authzDelegate = genAuthzDelegateMsg(grantee, granter, toValAddress, amount)
-        return getGrpcSimulateTx(auth, chainType, authzDelegate, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, authzDelegate, privateKey, publicKey, fee, memo)
     }
     
     static func genAuthzDelegateMsg(_ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin) -> [Google_Protobuf2_Any] {
@@ -2037,18 +2037,18 @@ class Signer {
     }
     
     //Tx for Authz UnDelegate
-    static func genAuthzUndelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genAuthzUndelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                    _ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin,
                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let authzUndelegate = genAuthzUndelegateMsg(grantee, granter, toValAddress, amount)
-        return getGrpcSignedTx(auth, chainType, authzUndelegate, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, authzUndelegate, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateAuthzUndelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateAuthzUndelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let authzUndelegate = genAuthzUndelegateMsg(grantee, granter, toValAddress, amount)
-        return getGrpcSimulateTx(auth, chainType, authzUndelegate, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, authzUndelegate, privateKey, publicKey, fee, memo)
     }
     
     static func genAuthzUndelegateMsg(_ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin) -> [Google_Protobuf2_Any] {
@@ -2077,18 +2077,18 @@ class Signer {
     }
     
     //Tx for Authz ReDelegate
-    static func genAuthzRedelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genAuthzRedelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                    _ grantee: String, _ granter: String, _ fromValAddress: String, _ toValAddress: String, _ amount: Coin,
                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let authzRedelegate = genAuthzRedelegateMsg(grantee, granter, fromValAddress, toValAddress, amount)
-        return getGrpcSignedTx(auth, chainType, authzRedelegate, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, authzRedelegate, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateAuthzRedelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateAuthzRedelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                            _ grantee: String, _ granter: String, _ fromValAddress: String, _ toValAddress: String, _ amount: Coin,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let authzRedelegate = genAuthzRedelegateMsg(grantee, granter, fromValAddress, toValAddress, amount)
-        return getGrpcSimulateTx(auth, chainType, authzRedelegate, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, authzRedelegate, privateKey, publicKey, fee, memo)
     }
     
     static func genAuthzRedelegateMsg(_ grantee: String, _ granter: String, _ fromValAddress: String, _ toValAddress: String, _ amount: Coin) -> [Google_Protobuf2_Any] {
@@ -2118,18 +2118,18 @@ class Signer {
     }
     
     //Tx for Authz Send
-    static func genAuthzSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genAuthzSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                              _ grantee: String, _ granter: String, _ toAddress: String, _ amount: Array<Coin>,
                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let authzSend = genAuthzSendMsg(grantee, granter, toAddress, amount)
-        return getGrpcSignedTx(auth, chainType, authzSend, privateKey, publicKey, fee, memo)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, authzSend, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateAuthzSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimulateAuthzSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                      _ grantee: String, _ granter: String, _ toAddress: String, _ amount: Array<Coin>,
                                      _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let authzSend = genAuthzSendMsg(grantee, granter, toAddress, amount)
-        return getGrpcSimulateTx(auth, chainType, authzSend, privateKey, publicKey, fee, memo)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, authzSend, privateKey, publicKey, fee, memo)
     }
     
     static func genAuthzSendMsg(_ grantee: String, _ granter: String, _ toAddress: String, _ amount: Array<Coin>) -> [Google_Protobuf2_Any] {
@@ -2161,9 +2161,9 @@ class Signer {
     
     
     
-    static func getGrpcSignedTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ chainType: ChainType, _ msgAnys: Array<Google_Protobuf2_Any>, _ privateKey: Data, _ publicKey: Data, _ fee: Fee, _ memo: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+    static func getGrpcSignedTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64, _ chainType: ChainType, _ msgAnys: Array<Google_Protobuf2_Any>, _ privateKey: Data, _ publicKey: Data, _ fee: Fee, _ memo: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let txBody = getGrpcTxBody(msgAnys, memo)
-        let signerInfo = getGrpcSignerInfos(auth, publicKey, chainType)
+        let signerInfo = getGrpcSignerInfos(auth, pubkeyType, publicKey, chainType)
         let authInfo = getGrpcAuthInfo(signerInfo, fee)
         let rawTx = getGrpcRawTxs(auth, txBody, authInfo, privateKey, chainType)
         return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
@@ -2172,9 +2172,9 @@ class Signer {
         }
     }
     
-    static func getGrpcSignedTx2(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ chainId: String, _ msgAnys: Array<Google_Protobuf2_Any>, _ privateKey: Data, _ publicKey: Data, _ fee: Fee, _ memo: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+    static func getGrpcSignedTx2(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64, _ chainId: String, _ msgAnys: Array<Google_Protobuf2_Any>, _ privateKey: Data, _ publicKey: Data, _ fee: Fee, _ memo: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let txBody = getGrpcTxBody(msgAnys, memo)
-        let signerInfo = getGrpcSignerInfos(auth, publicKey, nil)
+        let signerInfo = getGrpcSignerInfos(auth, pubkeyType, publicKey, nil)
         let authInfo = getGrpcAuthInfo(signerInfo, fee)
         let rawTx = getGrpcRawTxs2(auth, txBody, authInfo, privateKey, chainId)
         return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
@@ -2183,9 +2183,9 @@ class Signer {
         }
     }
     
-    static func getGrpcSimulateTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ chainType: ChainType, _ msgAnys: Array<Google_Protobuf2_Any>, _ privateKey: Data, _ publicKey: Data, _ fee: Fee, _ memo: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+    static func getGrpcSimulateTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64, _ chainType: ChainType, _ msgAnys: Array<Google_Protobuf2_Any>, _ privateKey: Data, _ publicKey: Data, _ fee: Fee, _ memo: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let txBody = getGrpcTxBody(msgAnys, memo)
-        let signerInfo = getGrpcSignerInfos(auth, publicKey, chainType)
+        let signerInfo = getGrpcSignerInfos(auth, pubkeyType, publicKey, chainType)
         let authInfo = getGrpcAuthInfo(signerInfo, fee)
         let simulateTx = getGrpcSimulTxs(auth, txBody, authInfo, privateKey, chainType)
         return Cosmos_Tx_V1beta1_SimulateRequest.with {
@@ -2200,15 +2200,13 @@ class Signer {
         }
     }
     
-    static func getGrpcSignerInfos(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ publicKey: Data, _ chainType: ChainType?) -> Cosmos_Tx_V1beta1_SignerInfo {
+    static func getGrpcSignerInfos(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64, _ publicKey: Data, _ chainType: ChainType?) -> Cosmos_Tx_V1beta1_SignerInfo {
         let single = Cosmos_Tx_V1beta1_ModeInfo.Single.with {
             $0.mode = Cosmos_Tx_Signing_V1beta1_SignMode.direct
         }
         let mode = Cosmos_Tx_V1beta1_ModeInfo.with {
             $0.single = single
         }
-        
-        print("getGrpcSignerInfos auth ", auth.account.typeURL)
         var pubKey: Google_Protobuf2_Any?
         if (chainType == ChainType.INJECTIVE_MAIN) {
             let pub = Injective_Crypto_V1beta1_Ethsecp256k1_PubKey.with {

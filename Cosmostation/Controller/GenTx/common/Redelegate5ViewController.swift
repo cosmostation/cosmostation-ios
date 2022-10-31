@@ -112,7 +112,7 @@ class Redelegate5ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedReDelegateTxgRPC(auth!,
+            let reqTx = Signer.genSignedReDelegateTxgRPC(auth!, self.account!.account_pubkey_type,
                                                          self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
                                                          self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
                                                          self.pageHolderVC.mToReDelegateAmount!,

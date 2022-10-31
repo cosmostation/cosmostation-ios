@@ -96,7 +96,7 @@ class AuthzVote5ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genAuthzVote(auth!,
+            let reqTx = Signer.genAuthzVote(auth!, self.account!.account_pubkey_type,
                                             self.account!.account_address,
                                             self.pageHolderVC.mGranterAddress!,
                                             self.pageHolderVC.mProposals,

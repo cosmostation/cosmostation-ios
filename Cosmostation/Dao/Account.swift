@@ -35,7 +35,7 @@ public class Account : NSObject, Codable, NSItemProviderReading, NSItemProviderW
     var account_push_alarm: Bool = false;
     var account_new_bip44: Bool = false;
     
-    var account_custom_path: Int64 = 0;
+    var account_pubkey_type: Int64 = 0;                //this is using how to sign type
     var account_mnemonic_id: Int64 = 0;
     
     
@@ -60,7 +60,7 @@ public class Account : NSObject, Codable, NSItemProviderReading, NSItemProviderW
         case account_sort_order
         case account_push_alarm
         case account_new_bip44
-        case account_custom_path
+        case account_pubkey_type
         case account_mnemonic_id
     }
     
@@ -98,7 +98,7 @@ public class Account : NSObject, Codable, NSItemProviderReading, NSItemProviderW
         self.account_push_alarm = pushAlarm;
         self.account_new_bip44 = newbip;
         
-        self.account_custom_path = customPath;
+        self.account_pubkey_type = customPath;
         self.account_mnemonic_id = mnemonicId;
         
     }

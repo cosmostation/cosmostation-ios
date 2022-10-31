@@ -100,7 +100,7 @@ class KavaSwapJoin3ViewController: BaseViewController, PasswordViewDelegate {
         DispatchQueue.global().async {
             let slippage = "30000000000000000"
             let deadline = (Date().millisecondsSince1970 / 1000) + 300
-            let reqTx = Signer.genSignedKavaSwapDeposit(auth!,
+            let reqTx = Signer.genSignedKavaSwapDeposit(auth!, self.account!.account_pubkey_type,
                                                         self.account!.account_address,
                                                         self.pageHolderVC.mPoolCoin0!,
                                                         self.pageHolderVC.mPoolCoin1!,

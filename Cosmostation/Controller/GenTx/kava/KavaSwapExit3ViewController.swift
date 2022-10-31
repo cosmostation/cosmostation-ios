@@ -119,7 +119,7 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
             let deadline = (Date().millisecondsSince1970 / 1000) + 300
-            let reqTx = Signer.genSignedKavaSwapWithdraw(auth!,
+            let reqTx = Signer.genSignedKavaSwapWithdraw(auth!, self.account!.account_pubkey_type,
                                                          self.account!.account_address,
                                                          self.pageHolderVC.mKavaShareAmount.stringValue,
                                                          self.coin0!,

@@ -261,7 +261,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                 let rawResult = String(data:data!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
                 let rawData: Data? = rawResult!.data(using: .utf8)
                 
-                if (self.pageHolderVC.mAccount!.account_custom_path == 0) {
+                if (self.pageHolderVC.mAccount!.account_pubkey_type == 0) {
                     print("Tender Type")
                     let hash = rawData!.sha256()
                     let signedData = try! ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
@@ -429,27 +429,27 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         DispatchQueue.global().async {
             var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest?
             if (self.pageHolderVC.mTransferType == TRANSFER_SIMPLE) {
-                reqTx = Signer.genSimpleSend(auth!,
+                reqTx = Signer.genSimpleSend(auth!, self.account!.account_pubkey_type,
                                              self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mToSendAmount,
                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
                 
             } else if (self.pageHolderVC.mTransferType == TRANSFER_IBC_SIMPLE) {
-                reqTx = Signer.genIbcSend(auth!,
+                reqTx = Signer.genIbcSend(auth!, self.account!.account_pubkey_type,
                                           self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mToSendAmount,
                                           self.pageHolderVC.mMintscanPath!, height!,
                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
                 
             } else if (self.pageHolderVC.mTransferType == TRANSFER_WASM) {
-                reqTx = Signer.genWasmSend(auth!,
+                reqTx = Signer.genWasmSend(auth!, self.account!.account_pubkey_type,
                                            self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mMintscanTokens!.contract_address,
                                            self.pageHolderVC.mToSendAmount,
                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
                 
             } else if (self.pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
-                reqTx = Signer.genWasmIbcSend(auth!,
+                reqTx = Signer.genWasmIbcSend(auth!, self.account!.account_pubkey_type,
                                               self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mMintscanTokens!.contract_address,
                                               self.pageHolderVC.mToSendAmount, self.pageHolderVC.mMintscanPath!,
                                               self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,

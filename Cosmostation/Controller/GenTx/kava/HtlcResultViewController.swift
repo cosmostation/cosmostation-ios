@@ -376,7 +376,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let reqTx = Signer.genSignedKavaCreateHTLCSwap(auth!,
+                let reqTx = Signer.genSignedKavaCreateHTLCSwap(auth!, self.account!.account_pubkey_type,
                                                                self.account!.account_address,
                                                                self.mHtlcToAccount!.account_address,
                                                                self.mHtlcToSendAmount,
@@ -607,7 +607,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             do {
                 let swapId = WKey.getSwapId(self.mHtlcToChain!, self.mHtlcToSendAmount, self.mRandomNumberHash!, self.account!.account_address)
                 let channel = BaseNetWork.getConnection(self.mHtlcToChain!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let reqTx = Signer.genSignedKavaClaimHTLCSwap(auth!,
+                let reqTx = Signer.genSignedKavaClaimHTLCSwap(auth!, self.mHtlcToAccount!.account_pubkey_type,
                                                               self.mHtlcToAccount!.account_address,
                                                               swapId,
                                                               self.mRandomNumber!,

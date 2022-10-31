@@ -109,7 +109,7 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
         DispatchQueue.global().async {
             var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest = Cosmos_Tx_V1beta1_BroadcastTxRequest.init()
             if (self.pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_DOMAIN) {
-                reqTx = Signer.genSignedRenewDomainMsgTxgRPC (auth!,
+                reqTx = Signer.genSignedRenewDomainMsgTxgRPC (auth!, self.account!.account_pubkey_type,
                                                               self.pageHolderVC.mStarnameDomain!,
                                                               self.pageHolderVC.mAccount!.account_address,
                                                               self.pageHolderVC.mFee!,
@@ -118,7 +118,7 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
                                                               self.chainType!)
                 
             } else if (self.pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_ACCOUNT) {
-                reqTx = Signer.genSignedRenewAccountMsgTxgRPC (auth!,
+                reqTx = Signer.genSignedRenewAccountMsgTxgRPC (auth!, self.account!.account_pubkey_type,
                                                                self.pageHolderVC.mStarnameDomain!,
                                                                self.pageHolderVC.mStarnameAccount!,
                                                                self.pageHolderVC.mAccount!.account_address,

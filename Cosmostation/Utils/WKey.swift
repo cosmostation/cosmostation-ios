@@ -86,39 +86,39 @@ class WKey {
         }
         
         else if (chainType == ChainType.KAVA_MAIN) {
-            if (account.account_custom_path == 0) {
+            if (account.account_pubkey_type == 0) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             } else {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(459)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             }
             
         } else if (chainType == ChainType.SECRET_MAIN) {
-            if (account.account_custom_path == 0) {
+            if (account.account_pubkey_type == 0) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             } else {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(529)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             }
             
         } else if (chainType == ChainType.LUM_MAIN) {
-            if (account.account_custom_path == 0) {
+            if (account.account_pubkey_type == 0) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             } else {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(880)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             }
             
         } else if (chainType == ChainType.FETCH_MAIN) {
-            if (account.account_custom_path == 0) {
+            if (account.account_pubkey_type == 0) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-            } else if (account.account_custom_path == 1) {
+            } else if (account.account_pubkey_type == 1) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-            } else if (account.account_custom_path == 2) {
+            } else if (account.account_pubkey_type == 2) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(UInt32(account.account_path)!)).derived(at: .notHardened(0)).derived(at: .notHardened(0))
             } else {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             }
             
         } else if (chainType == ChainType.OKEX_MAIN) {
-            if (account.account_custom_path == 0 || account.account_custom_path == 1) {
+            if (account.account_pubkey_type == 0 || account.account_pubkey_type == 1) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(996)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             } else {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))

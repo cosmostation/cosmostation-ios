@@ -114,7 +114,7 @@ class AuthzClaimCommisstion4ViewController: BaseViewController, PasswordViewDele
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genAuthzClaimCommission(auth!,
+            let reqTx = Signer.genAuthzClaimCommission(auth!, self.account!.account_pubkey_type,
                                                        self.account!.account_address,
                                                        self.pageHolderVC.mGranterAddress!,
                                                        WKey.getOpAddressFromAddress(self.pageHolderVC.mGranterAddress!, self.chainConfig),

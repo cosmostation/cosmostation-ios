@@ -97,7 +97,7 @@ class RegisterDomain3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedRegisterDomainMsgTxgRPC(auth!,
+            let reqTx = Signer.genSignedRegisterDomainMsgTxgRPC(auth!, self.account!.account_pubkey_type,
                                                                 self.pageHolderVC.mStarnameDomain!,
                                                                 self.pageHolderVC.mAccount!.account_address,
                                                                 self.pageHolderVC.mStarnameDomainType!,

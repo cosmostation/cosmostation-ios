@@ -135,7 +135,7 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
             // 2022.10.30 HARDCODING FOR FIX INCENTIVE
-            let reqTx = Signer.genSignedKavaIncentiveAll(auth!,
+            let reqTx = Signer.genSignedKavaIncentiveAll(auth!, self.account!.account_pubkey_type,
                                                          self.account!.account_address,
                                                          "large",
                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,

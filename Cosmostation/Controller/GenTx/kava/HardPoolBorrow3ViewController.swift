@@ -94,7 +94,7 @@ class HardPoolBorrow3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedKavaHardBorrow(auth!,
+            let reqTx = Signer.genSignedKavaHardBorrow(auth!, self.account!.account_pubkey_type,
                                                        self.account!.account_address,
                                                        self.pageHolderVC.mHardPoolCoins!,
                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,

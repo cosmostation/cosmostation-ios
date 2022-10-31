@@ -129,7 +129,7 @@ class CdpCreate4ViewController: BaseViewController, PasswordViewDelegate, SBCard
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedKavaCDPCreate(auth!,
+            let reqTx = Signer.genSignedKavaCDPCreate(auth!, self.account!.account_pubkey_type,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mCollateral,
                                                       self.pageHolderVC.mPrincipal,

@@ -112,7 +112,7 @@ class StartUnbonding3ViewController: BaseViewController, PasswordViewDelegate {
             for lockup in self.pageHolderVC.mLockups! {
                 ids.append(lockup.id)
             }
-            let reqTx = Signer.genSignedBeginUnlockingsMsgTxgRPC(auth!,
+            let reqTx = Signer.genSignedBeginUnlockingsMsgTxgRPC(auth!, self.account!.account_pubkey_type,
                                                                  ids,
                                                                  self.pageHolderVC.mFee!,
                                                                  self.pageHolderVC.mMemo!,

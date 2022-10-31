@@ -101,7 +101,7 @@ class SifSwap3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedSifSwapMsgTxgRPC(auth!,
+            let reqTx = Signer.genSignedSifSwapMsgTxgRPC(auth!, self.account!.account_pubkey_type,
                                                          self.account!.account_address,
                                                          self.pageHolderVC.mSwapInDenom!,
                                                          self.pageHolderVC.mSwapInAmount!.stringValue,

@@ -74,39 +74,39 @@ class CKey {
         }
         
         else if (chainType == ChainType.KAVA_MAIN) {
-            if (account.account_custom_path == 0) {
+            if (account.account_pubkey_type == 0) {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             } else {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 459, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             }
             
         } else if (chainType == ChainType.SECRET_MAIN) {
-            if (account.account_custom_path == 0) {
+            if (account.account_pubkey_type == 0) {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             } else {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 529, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             }
             
         } else if (chainType == ChainType.LUM_MAIN) {
-            if (account.account_custom_path == 0) {
+            if (account.account_pubkey_type == 0) {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             } else {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 880, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             }
             
         } else if (chainType == ChainType.FETCH_MAIN) {
-            if (account.account_custom_path == 0) {
+            if (account.account_pubkey_type == 0) {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
-            } else if (account.account_custom_path == 1) {
+            } else if (account.account_pubkey_type == 1) {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(account.account_path)!, false)
-            } else if (account.account_custom_path == 2) {
+            } else if (account.account_pubkey_type == 2) {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), UInt32(account.account_path)!, true), 0, false), 0, false)
             } else {
                 return cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), UInt32(account.account_path)!, false)
             }
             
         } else if (chainType == ChainType.OKEX_MAIN) {
-            if (account.account_custom_path == 0 || account.account_custom_path == 1) {
+            if (account.account_pubkey_type == 0 || account.account_pubkey_type == 1) {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             } else {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(account.account_path)!, false)

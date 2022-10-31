@@ -98,7 +98,7 @@ class AuthzSend5ViewController: BaseViewController, PasswordViewDelegate{
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genAuthzSend(auth!,
+            let reqTx = Signer.genAuthzSend(auth!, self.account!.account_pubkey_type,
                                             self.account!.account_address,
                                             self.pageHolderVC.mGranterAddress!,
                                             self.pageHolderVC.mRecipinetAddress!,

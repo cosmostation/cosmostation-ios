@@ -111,7 +111,7 @@ class ReplaceResource3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedReplaceResourceMsgTxgRPC(auth!,
+            let reqTx = Signer.genSignedReplaceResourceMsgTxgRPC(auth!, self.account!.account_pubkey_type,
                                                                  self.pageHolderVC.mStarnameDomain!,
                                                                  self.pageHolderVC.mStarnameAccount,
                                                                  self.pageHolderVC.mAccount!.account_address,

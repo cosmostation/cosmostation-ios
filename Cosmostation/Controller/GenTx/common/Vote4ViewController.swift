@@ -105,7 +105,7 @@ class Vote4ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedVoteTxgRPC(auth!,
+            let reqTx = Signer.genSignedVoteTxgRPC(auth!, self.account!.account_pubkey_type,
                                                    self.pageHolderVC.mProposals,
                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)

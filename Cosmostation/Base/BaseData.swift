@@ -1226,7 +1226,7 @@ final class BaseData : NSObject{
                                               DB_ACCOUNT_SORT_ORDER <- account.account_sort_order,
                                               DB_ACCOUNT_PUSHALARM <- account.account_push_alarm,
                                               DB_ACCOUNT_NEW_BIP <- account.account_new_bip44,
-                                              DB_ACCOUNT_CUSTOM_PATH <- account.account_custom_path,
+                                              DB_ACCOUNT_CUSTOM_PATH <- account.account_pubkey_type,
                                               DB_ACCOUNT_MNEMONIC_ID <- account.account_mnemonic_id)
         do {
             return try database.run(insertAccount)
@@ -1260,7 +1260,7 @@ final class BaseData : NSObject{
                                                         DB_ACCOUNT_PATH <- account.account_path,
                                                         DB_ACCOUNT_M_SIZE <- account.account_m_size,
                                                         DB_ACCOUNT_NEW_BIP <- account.account_new_bip44,
-                                                        DB_ACCOUNT_CUSTOM_PATH <- account.account_custom_path,
+                                                        DB_ACCOUNT_CUSTOM_PATH <- account.account_pubkey_type,
                                                         DB_ACCOUNT_MNEMONIC_ID <- account.account_mnemonic_id)))
         } catch {
             print(error)
@@ -1274,8 +1274,8 @@ final class BaseData : NSObject{
         var allOkAccount = BaseData.instance.selectAllAccountsByChain(ChainType.OKEX_MAIN)
         for account in allOkAccount {
             // update address with "0x" Eth style
-            if (account.account_new_bip44 == true && account.account_custom_path == 0) {
-                account.account_custom_path = 1
+            if (account.account_new_bip44 == true && account.account_pubkey_type == 0) {
+                account.account_pubkey_type = 1
                 updateAccountPathType(account)
             }
             if (account.account_address.starts(with: "okexchain")) {
@@ -1296,12 +1296,12 @@ final class BaseData : NSObject{
         let allSecretAccount = BaseData.instance.selectAllAccountsByChain(ChainType.SECRET_MAIN)
         for account in allSecretAccount {
             if (account.account_from_mnemonic) {
-                if (account.account_new_bip44 == true && account.account_custom_path != 0) {
-                    account.account_custom_path = 0
+                if (account.account_new_bip44 == true && account.account_pubkey_type != 0) {
+                    account.account_pubkey_type = 0
                     updateAccountPathType(account)
                 }
-                if (account.account_new_bip44 == false && account.account_custom_path != 1) {
-                    account.account_custom_path = 1
+                if (account.account_new_bip44 == false && account.account_pubkey_type != 1) {
+                    account.account_pubkey_type = 1
                     updateAccountPathType(account)
                 }
             }
@@ -1310,12 +1310,12 @@ final class BaseData : NSObject{
         //set custompath 118 -> 0, 459 -> 1
         let allKavaAccount = BaseData.instance.selectAllAccountsByChain(ChainType.KAVA_MAIN)
         for account in allKavaAccount {
-            if (account.account_new_bip44 == true && account.account_custom_path != 1) {
-                account.account_custom_path = 1
+            if (account.account_new_bip44 == true && account.account_pubkey_type != 1) {
+                account.account_pubkey_type = 1
                 updateAccountPathType(account)
             }
-            if (account.account_new_bip44 == false && account.account_custom_path != 0) {
-                account.account_custom_path = 0
+            if (account.account_new_bip44 == false && account.account_pubkey_type != 0) {
+                account.account_pubkey_type = 0
                 updateAccountPathType(account)
             }
         }
@@ -1323,12 +1323,12 @@ final class BaseData : NSObject{
         //set custompath 118 -> 0, 880 -> 1
         let allLumAccount = BaseData.instance.selectAllAccountsByChain(ChainType.LUM_MAIN)
         for account in allLumAccount {
-            if (account.account_new_bip44 == true && account.account_custom_path != 1) {
-                account.account_custom_path = 1
+            if (account.account_new_bip44 == true && account.account_pubkey_type != 1) {
+                account.account_pubkey_type = 1
                 updateAccountPathType(account)
             }
-            if (account.account_new_bip44 == false && account.account_custom_path != 0) {
-                account.account_custom_path = 0
+            if (account.account_new_bip44 == false && account.account_pubkey_type != 0) {
+                account.account_pubkey_type = 0
                 updateAccountPathType(account)
             }
         }
@@ -1349,7 +1349,7 @@ final class BaseData : NSObject{
         if (account.account_import_time > 1643986800000) { return  }
         let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
         do {
-            try database.run(target.update(DB_ACCOUNT_CUSTOM_PATH <- account.account_custom_path))
+            try database.run(target.update(DB_ACCOUNT_CUSTOM_PATH <- account.account_pubkey_type))
         } catch {
             print(error)
         }
@@ -1402,7 +1402,7 @@ final class BaseData : NSObject{
             let seed = wordSeedPairs.filter { $0.word == words }.first!.seed
             let chainType = ChainFactory.getChainType(account.account_base_chain)!
             let chainConfig = ChainFactory.getChainConfig(chainType)!
-            let fullPath = chainConfig.getHdPath(Int(account.account_custom_path), Int(account.account_path)!)
+            let fullPath = chainConfig.getHdPath(Int(account.account_pubkey_type), Int(account.account_path)!)
             let pKey = WKey.getPrivateKeyDataFromSeed(seed, fullPath)
             KeychainWrapper.standard.set(pKey.hexEncodedString(), forKey: account.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
         }
