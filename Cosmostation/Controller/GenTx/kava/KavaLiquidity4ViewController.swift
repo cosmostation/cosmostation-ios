@@ -34,6 +34,7 @@ class KavaLiquidity4ViewController: BaseViewController, PasswordViewDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        self.txType = self.pageHolderVC.mType
         
         self.btnBefore.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
         self.btnConfirm.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)

@@ -1004,6 +1004,11 @@ support@cosmostation.io";
 "tx_kava_auction_bid" = "옥션 비딩";
 "tx_kava_save_deposit" = "저축\n예치";
 "tx_kava_save_withdraw" = "저축\n출금";
+"tx_kava_earn_Deposit" = "어닝 리퀴디티\n입금";
+"tx_kava_earn_delegateDeposit" = "어닝 리퀴디티\n위임 입금";
+"tx_kava_earn_delegateDeposit2" = "어닝 리퀴디티 위임 입금";
+"tx_kava_earn_withdraw" = "어닝 리퀴디티\n출금";
+"tx_kava_earn_withdraw2" = "어닝 리퀴디티 출금";
 
 "tx_ibc_send" = "IBC 보내기";
 "tx_ibc_receive" = "IBC 받기";

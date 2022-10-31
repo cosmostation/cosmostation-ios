@@ -1010,6 +1010,11 @@ support@cosmostation.io";
 "tx_kava_auction_bid" = "Auction Bid";
 "tx_kava_save_deposit" = "Saving\nDeposit";
 "tx_kava_save_withdraw" = "Saving\nWithdraw";
+"tx_kava_earn_Deposit" = "Earn Liquidate\nDeposit";
+"tx_kava_earn_delegateDeposit" = "Earn Liquidate\nDelegate Deposit";
+"tx_kava_earn_delegateDeposit2" = "Earn Liquidate Delegate Deposit";
+"tx_kava_earn_withdraw" = "Earn Liquidate\nWithdraw";
+"tx_kava_earn_withdraw2" = "Earn Liquidate Withdraw";
 
 "tx_ibc_send" = "IBC Send";
 "tx_ibc_receive" = "IBC Received";

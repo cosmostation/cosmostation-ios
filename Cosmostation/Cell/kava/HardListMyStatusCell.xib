@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gof-qK-P9t" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="515" height="186"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnIconKavaDefi" translatesAutoresizingMaskIntoConstraints="NO" id="i8O-hk-5oc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgIconHardPool" translatesAutoresizingMaskIntoConstraints="NO" id="i8O-hk-5oc">
                                 <rect key="frame" x="16" y="16" width="28" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="MIo-Ou-hHB"/>
@@ -156,7 +156,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="btnIconKavaDefi" width="20" height="20"/>
+        <image name="msgIconHardPool" width="28" height="28"/>
         <namedColor name="_card_divider">
             <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

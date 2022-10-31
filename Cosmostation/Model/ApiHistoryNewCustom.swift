@@ -716,6 +716,18 @@ public struct ApiHistoryNewCustom {
                 if (msgType.contains("MsgPostPrice")) {
                     result = NSLocalizedString("tx_kava_post_price", comment: "")
                 }
+                
+            } else if (msgType.contains("kava.") && msgType.contains("router")) {
+                if (msgType.contains("MsgDelegateMintDeposit")) {
+                    result = NSLocalizedString("tx_kava_earn_delegateDeposit", comment: "")
+                    
+                } else if (msgType.contains("MsgMintDeposit")) {
+                    result = NSLocalizedString("tx_kava_earn_Deposit", comment: "")
+                    
+                } else if (msgType.contains("MsgWithdrawBurn")) {
+                    result = NSLocalizedString("tx_kava_earn_withdraw", comment: "")
+                    
+                }
             }
             
             // axelar msg type
