@@ -45,6 +45,7 @@ class ChainInjective: ChainConfig {
     var authzSupoort = true
     var grpcUrl = "lcd-inj-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-inj-app.cosmostation.io/"
     var apiUrl = "https://api-inj.cosmostation.io/"
     var explorerUrl = MintscanUrl + "injective/"

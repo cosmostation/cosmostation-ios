@@ -45,6 +45,7 @@ class ChainBitsong: ChainConfig {
     var authzSupoort = true
     var grpcUrl = "lcd-bitsong-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-bitsong-app.cosmostation.io/"
     var apiUrl = "https://api-bitsong.cosmostation.io/"
     var explorerUrl = MintscanUrl + "bitsong/"

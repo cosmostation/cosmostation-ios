@@ -45,6 +45,7 @@ class ChainSif: ChainConfig {
     var authzSupoort = true
     var grpcUrl = "lcd-sifchain-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-sifchain-app.cosmostation.io/"
     var apiUrl = "https://api-sifchain.cosmostation.io/"
     var explorerUrl = MintscanUrl + "sifchain/"

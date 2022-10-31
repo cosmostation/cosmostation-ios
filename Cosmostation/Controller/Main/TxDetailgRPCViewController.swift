@@ -104,6 +104,8 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxIncentiveHardCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveHardCell")
         self.txTableView.register(UINib(nibName: "TxIncentiveSwapCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveSwapCell")
         self.txTableView.register(UINib(nibName: "TxIncentiveDelegatorCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveDelegatorCell")
+        self.txTableView.register(UINib(nibName: "TxIncentiveEarnCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveEarnCell")
+        self.txTableView.register(UINib(nibName: "TxEarnCell", bundle: nil), forCellReuseIdentifier: "TxEarnCell")
         
         //for wasm msg type
         self.txTableView.register(UINib(nibName: "TxStoreContractCell", bundle: nil), forCellReuseIdentifier: "TxStoreContractCell")
@@ -439,6 +441,17 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
             } else if (msg.typeURL.contains(Kava_Incentive_V1beta1_MsgClaimSwapReward.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveSwapCell") as? TxCell
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Incentive_V1beta1_MsgClaimEarnReward.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveEarnCell") as? TxCell
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Router_V1beta1_MsgDelegateMintDeposit.protoMessageName) ||
+                       msg.typeURL.contains(Kava_Router_V1beta1_MsgWithdrawBurn.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxEarnCell") as? TxCell
                 cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 

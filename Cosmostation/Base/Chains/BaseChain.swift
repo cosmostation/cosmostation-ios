@@ -43,6 +43,7 @@ protocol ChainConfig {
     var authzSupoort: Bool { get set }
     var grpcUrl: String { get set }
     var grpcPort: Int { get set }
+    var rpcUrl: String { get set }
     var lcdUrl: String { get set }
     var apiUrl: String { get set }
     var explorerUrl: String { get set }

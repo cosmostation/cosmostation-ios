@@ -46,6 +46,7 @@ class ChainIxo: ChainConfig {
     var authzSupoort = true
     var grpcUrl = "lcd-ixo-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-ixo-app.cosmostation.io/"
     var apiUrl = "https://api-ixo.cosmostation.io/"
     var explorerUrl = MintscanUrl + "ixo/"

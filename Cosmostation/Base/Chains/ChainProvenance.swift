@@ -45,6 +45,7 @@ class ChainProvenance: ChainConfig {
     var authzSupoort = false
     var grpcUrl = "lcd-provenance-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-provenance-app.cosmostation.io/"
     var apiUrl = "https://api-provenance.cosmostation.io/"
     var explorerUrl = MintscanUrl + "provenance/"

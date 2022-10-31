@@ -1351,7 +1351,9 @@ public class WUtils {
     
     static func onParseAutoRewardGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()
-        guard tx.txResponse.logs.count <= position else { return result }
+        if (tx.txResponse.logs.count <= position) {
+            return result
+        }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "transfer") {
                 for i in 0...event.attributes.count - 1 {
@@ -1377,7 +1379,9 @@ public class WUtils {
     
     static func onParseStakeRewardGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()
-        guard tx.txResponse.logs.count <= position else { return result }
+        if (tx.txResponse.logs.count <= position) {
+            return result
+        }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "withdraw_rewards") {
                 for i in 0...event.attributes.count - 1 {
@@ -1401,7 +1405,9 @@ public class WUtils {
     
     static func onParseCommisiondGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()
-        guard tx.txResponse.logs.count <= position else { return result }
+        if (tx.txResponse.logs.count <= position) {
+            return result
+        }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "withdraw_commission") {
                 for i in 0...event.attributes.count - 1 {
@@ -1425,7 +1431,9 @@ public class WUtils {
     
     static func onParseKavaIncentiveGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()
-        guard tx.txResponse.logs.count <= position else { return result }
+        if (tx.txResponse.logs.count <= position) {
+            return result
+        }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "claim_reward") {
                 for i in 0...event.attributes.count - 1 {
@@ -1449,7 +1457,9 @@ public class WUtils {
     
     static func onParseBep3ClaimAmountGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()
-        guard tx.txResponse.logs.count <= position else { return result }
+        if (tx.txResponse.logs.count <= position) {
+            return result
+        }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "transfer") {
                 for i in 0...event.attributes.count - 1 {

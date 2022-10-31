@@ -47,6 +47,7 @@ class ChainKujira: ChainConfig {
     var authzSupoort = false
     var grpcUrl = "lcd-kujira-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-kujira-app.cosmostation.io/"
     var apiUrl = "https://api-kujira.cosmostation.io/"
     var explorerUrl = MintscanUrl + "kujira/"

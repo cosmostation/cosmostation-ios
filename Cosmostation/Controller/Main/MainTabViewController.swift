@@ -12,6 +12,7 @@ import Toast_Swift
 import GRPC
 import NIO
 import SwiftProtobuf
+import web3swift
 
 class MainTabViewController: UITabBarController, UITabBarControllerDelegate, AccountSwitchDelegate {
     
@@ -135,7 +136,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mBnbTokenList.removeAll()
         BaseData.instance.mBnbTokenTicker.removeAll()
         
-        BaseData.instance.mIncentiveParam = nil
+//        BaseData.instance.mIncentiveParam = nil
+        BaseData.instance.mIncentiveRewards = nil
         
         BaseData.instance.mOkStaking = nil
         BaseData.instance.mOkUnbonding = nil
@@ -260,7 +262,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
         } else if (mChainType == .KAVA_MAIN) {
-            self.mFetchCnt = 12
+            self.mFetchCnt = 11
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
             self.onFetchgRPCBondedValidators(0)
@@ -274,7 +276,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             
 //            self.onFetchgRPCKavaPriceParam()
             self.onFetchgRPCKavaPrices()
-            self.onFetchKavaIncentiveParam()
+//            self.onFetchKavaIncentiveParam()
             self.onFetchKavaIncentiveReward(mAccount.account_address)
             
         } else if (mChainType == .TGRADE_MAIN) {
@@ -288,7 +290,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-        } else if (self.mChainType == .COSMOS_TEST || self.mChainType == .IRIS_TEST || self.mChainType == .ALTHEA_TEST || self.mChainType == .CRESCENT_TEST || self.mChainType == .STATION_TEST) {
+        } else if (self.mChainType == .COSMOS_TEST || self.mChainType == .IRIS_TEST || self.mChainType == .ALTHEA_TEST ||
+                   self.mChainType == .CRESCENT_TEST || self.mChainType == .STATION_TEST) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -975,14 +978,13 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         request.responseJSON { (response) in
             switch response.result {
                 case .success(let res):
-//                    print("IncentiveParam ", res)
                     guard let responseData = res as? NSDictionary,
                         let _ = responseData.object(forKey: "height") as? String else {
                             self.onFetchFinished()
                             return
                     }
                     let kavaIncentiveParam = KavaIncentiveParam.init(responseData)
-                    BaseData.instance.mIncentiveParam = kavaIncentiveParam.result
+//                    BaseData.instance.mIncentiveParam = kavaIncentiveParam.result
 //                    print("mIncentiveParam ", BaseData.instance.mIncentiveParam)
                     
                 case .failure(let error):
@@ -1004,6 +1006,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     let kavaIncentiveReward = KavaIncentiveReward.init(responseData)
                     BaseData.instance.mIncentiveRewards = kavaIncentiveReward.result
 //                    print("mIncentiveRewards ", BaseData.instance.mIncentiveRewards?.getAllIncentives().count)
+//                    print("mIncentiveRewards ", BaseData.instance.mIncentiveRewards?.getAllIncentives())
 
                 case .failure(let error):
                     print("onFetchKavaIncentiveReward ", error)
@@ -1058,6 +1061,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchMintscanAsset() {
+        print("onFetchMintscanAsset ", BaseNetWork.mintscanAssets_v2())
         let request = Alamofire.request(BaseNetWork.mintscanAssets_v2(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
@@ -1131,6 +1135,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             return
         }
         let request = Alamofire.request(BaseNetWork.mintscanErc20Tokens_v2(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+//        print("onFetchMintscanErc20 ", request.request?.url)
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -1138,6 +1143,15 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     erc20Tokens.forEach { erc20Token in
                         let token = MintscanToken.init(erc20Token)
                         BaseData.instance.mMintscanTokens.append(token)
+                    }
+                    BaseData.instance.setMyTokens(self.mAccount.account_address)
+                    Task {
+                        if let url = URL(string: self.mChainConfig.rpcUrl), let web3 = try? Web3.new(url) {
+                            BaseData.instance.mMyTokens.forEach { msToken in
+                                self.mFetchCnt = self.mFetchCnt + 1
+                                self.onFetchErc20Balance(web3, msToken.contract_address)
+                            }
+                        }
                     }
                 }
 
@@ -1147,6 +1161,20 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchFinished()
         }
     }
+    
+    func onFetchErc20Balance(_ web3: web3?, _ contAddress: String) {
+        print("onFetchErc20Balance ", web3?.provider, "  ", contAddress)
+        let contractAddress = EthereumAddress.init(fromHex: contAddress)
+        let ethAddress = EthereumAddress.init(fromHex: WKey.convertAddressCosmosToTender(mAccount.account_address))
+        let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
+        Task {
+            if let erc20Balance = try? erc20token.getBalance(account: ethAddress!) {
+                BaseData.instance.setMyTokenBalance(contAddress, String(erc20Balance))
+            }
+            self.onFetchFinished()
+        }
+    }
+    
     
     public func showWaittingAlert() {
         waitAlert = UIAlertController(title: "", message: "\n\n\n\n", preferredStyle: .alert)

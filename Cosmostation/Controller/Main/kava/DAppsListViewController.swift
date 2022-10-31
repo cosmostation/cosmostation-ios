@@ -17,6 +17,7 @@ class DAppsListViewController: BaseViewController {
     @IBOutlet weak var poolView: UIView!
     @IBOutlet weak var cdpView: UIView!
     @IBOutlet weak var havestView: UIView!
+    @IBOutlet weak var earnView: UIView!
     
     var mKavaSwapPools: Array<Kava_Swap_V1beta1_PoolResponse> = Array<Kava_Swap_V1beta1_PoolResponse>()
     var mMyKavaPoolDeposits: Array<Kava_Swap_V1beta1_DepositResponse> = Array<Kava_Swap_V1beta1_DepositResponse>()
@@ -27,6 +28,7 @@ class DAppsListViewController: BaseViewController {
         poolView.alpha = 0
         cdpView.alpha = 0
         havestView.alpha = 0
+        earnView.alpha = 0
     
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
@@ -49,21 +51,31 @@ class DAppsListViewController: BaseViewController {
             poolView.alpha = 0
             cdpView.alpha = 0
             havestView.alpha = 0
+            earnView.alpha = 0
         } else if sender.selectedSegmentIndex == 1 {
             swapView.alpha = 0
             poolView.alpha = 1
             cdpView.alpha = 0
             havestView.alpha = 0
+            earnView.alpha = 0
         } else if sender.selectedSegmentIndex == 2 {
             swapView.alpha = 0
             poolView.alpha = 0
             cdpView.alpha = 1
             havestView.alpha = 0
+            earnView.alpha = 0
         } else if sender.selectedSegmentIndex == 3 {
             swapView.alpha = 0
             poolView.alpha = 0
             cdpView.alpha = 0
             havestView.alpha = 1
+            earnView.alpha = 0
+        } else if sender.selectedSegmentIndex == 4 {
+            swapView.alpha = 0
+            poolView.alpha = 0
+            cdpView.alpha = 0
+            havestView.alpha = 0
+            earnView.alpha = 1
         }
     }
     

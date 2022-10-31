@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SafariServices
 import UserNotifications
+import web3swift
 
 class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -64,7 +65,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     @objc func testClick(tapGestureRecognizer: UITapGestureRecognizer) {
 //        let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
 //        txDetailVC.mIsGen = false
-//        txDetailVC.mTxHash = "B8A71DC85201C85CF866BFDAEA39CF47590629FF62FF15E358B985304E6739B2"
+//        txDetailVC.mTxHash = "B40F606948B2BF2C54D67D8EF34D5DF89623C188720737989ADAE988209A4071"
 //        txDetailVC.hidesBottomBarWhenPushed = true
 //        self.navigationItem.title = ""
 //        self.navigationController?.pushViewController(txDetailVC, animated: true)

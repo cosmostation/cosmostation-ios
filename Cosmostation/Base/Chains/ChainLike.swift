@@ -46,6 +46,7 @@ class ChainLike: ChainConfig {
     var authzSupoort = true
     var grpcUrl = "lcd-likecoin-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-likecoin-app.cosmostation.io/"
     var apiUrl = "https://api-likecoin.cosmostation.io/"
     var explorerUrl = MintscanUrl + "likecoin/"

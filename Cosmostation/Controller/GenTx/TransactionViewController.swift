@@ -35,6 +35,7 @@ class TransactionViewController: UIViewController {
     var mHardMoneyMarketDenom: String?
     var mKavaSwapPool: Kava_Swap_V1beta1_PoolResponse?
     var mKavaSwapPoolDeposit: Kava_Swap_V1beta1_DepositResponse?
+    var mKavaEarnDeposit = Array<Coin>()
     
     var mHtlcDenom: String = BNB_MAIN_DENOM     //now only support bnb bep3
     
@@ -183,6 +184,16 @@ class TransactionViewController: UIViewController {
             stepDescription.text = NSLocalizedString("tx_claim_incentive_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_claim_incentive", comment: "")
+            
+        } else if (mType == TASK_TYPE_KAVA_LIQUIDITY_DEPOSIT) {
+            stepDescription.text = NSLocalizedString("tx_add_liquidity_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep5_1")
+            self.titleLabel.text =  NSLocalizedString("title_add_liquidity", comment: "")
+            
+        } else if (mType == TASK_TYPE_KAVA_LIQUIDITY_WITHDRAW) {
+            stepDescription.text = NSLocalizedString("tx_remove_liquidity_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep5_1")
+            self.titleLabel.text =  NSLocalizedString("title_remove_liquidity", comment: "")
             
         } else if (mType == TASK_TYPE_OK_DEPOSIT) {
             stepDescription.text = NSLocalizedString("tx_ok_stake_deposit_0", comment: "")
@@ -382,6 +393,7 @@ class TransactionViewController: UIViewController {
             //grpc
             StepVc.mKavaSwapPool = self.mKavaSwapPool
             StepVc.mKavaSwapPoolDeposit = self.mKavaSwapPoolDeposit
+            StepVc.mKavaEarnDeposit = self.mKavaEarnDeposit
             
             StepVc.mStarnameDomain = self.mStarnameDomain
             StepVc.mStarnameAccount = self.mStarnameAccount
@@ -506,6 +518,14 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     stepDescription.text = NSLocalizedString("tx_bep_swap_0", comment: "")
                     
+                } else if (mType == TASK_TYPE_KAVA_LIQUIDITY_DEPOSIT) {
+                    stepDescription.text = NSLocalizedString("tx_add_liquidity_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_1")
+                    
+                } else if (mType == TASK_TYPE_KAVA_LIQUIDITY_WITHDRAW) {
+                    stepDescription.text = NSLocalizedString("tx_remove_liquidity_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_1")
+                    
                 } else if (mType == TASK_TYPE_OK_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("tx_ok_stake_deposit_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
@@ -624,7 +644,8 @@ class TransactionViewController: UIViewController {
             } else if (step == 1) {
                 if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE || mType == TASK_TYPE_STARNAME_REGISTER_ACCOUNT ||
                     mType == TASK_TYPE_AUTHZ_VOTE || mType == TASK_TYPE_AUTHZ_DELEGATE || mType == TASK_TYPE_AUTHZ_UNDELEGATE ||
-                    mType == TASK_TYPE_AUTHZ_REDELEGATE || mType == TASK_TYPE_AUTHZ_SEND) {
+                    mType == TASK_TYPE_AUTHZ_REDELEGATE || mType == TASK_TYPE_AUTHZ_SEND || mType == TASK_TYPE_KAVA_LIQUIDITY_DEPOSIT ||
+                    mType == TASK_TYPE_KAVA_LIQUIDITY_WITHDRAW) {
                     stepImg.image = UIImage.init(named: "txStep5_2")
                     if (mType == TASK_TYPE_TRANSFER) {
                         stepDescription.text = NSLocalizedString("tx_send_1", comment: "")
@@ -642,6 +663,10 @@ class TransactionViewController: UIViewController {
                         stepDescription.text = NSLocalizedString("tx_authz_redelegate_1", comment: "")
                     } else if (mType == TASK_TYPE_AUTHZ_SEND) {
                         stepDescription.text = NSLocalizedString("tx_authz_send_1", comment: "")
+                    } else if (mType == TASK_TYPE_KAVA_LIQUIDITY_DEPOSIT) {
+                        stepDescription.text = NSLocalizedString("tx_add_liquidity_1", comment: "")
+                    } else if (mType == TASK_TYPE_KAVA_LIQUIDITY_WITHDRAW) {
+                        stepDescription.text = NSLocalizedString("tx_remove_liquidity_1", comment: "")
                     }
                     
                 } else {
@@ -657,7 +682,8 @@ class TransactionViewController: UIViewController {
             } else if (step == 2) {
                 if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE || mType == TASK_TYPE_STARNAME_REGISTER_ACCOUNT ||
                     mType == TASK_TYPE_AUTHZ_VOTE || mType == TASK_TYPE_AUTHZ_DELEGATE || mType == TASK_TYPE_AUTHZ_UNDELEGATE ||
-                    mType == TASK_TYPE_AUTHZ_REDELEGATE || mType == TASK_TYPE_AUTHZ_SEND) {
+                    mType == TASK_TYPE_AUTHZ_REDELEGATE || mType == TASK_TYPE_AUTHZ_SEND || mType == TASK_TYPE_KAVA_LIQUIDITY_DEPOSIT ||
+                    mType == TASK_TYPE_KAVA_LIQUIDITY_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("tx_set_memo", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_3")
                     
@@ -670,7 +696,8 @@ class TransactionViewController: UIViewController {
             } else if (step == 3) {
                 if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE || mType == TASK_TYPE_STARNAME_REGISTER_ACCOUNT ||
                     mType == TASK_TYPE_AUTHZ_VOTE || mType == TASK_TYPE_AUTHZ_DELEGATE || mType == TASK_TYPE_AUTHZ_UNDELEGATE ||
-                    mType == TASK_TYPE_AUTHZ_REDELEGATE || mType == TASK_TYPE_AUTHZ_SEND) {
+                    mType == TASK_TYPE_AUTHZ_REDELEGATE || mType == TASK_TYPE_AUTHZ_SEND || mType == TASK_TYPE_KAVA_LIQUIDITY_DEPOSIT ||
+                    mType == TASK_TYPE_KAVA_LIQUIDITY_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("tx_set_fee", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_4")
                     

@@ -681,19 +681,22 @@ public struct ApiHistoryNewCustom {
                 
             } else if (msgType.contains("kava.") && msgType.contains("incentive")) {
                 if (msgType.contains("MsgClaimUSDXMintingReward")) {
-                    result = NSLocalizedString("tx_kava_hard_mint_incentive", comment: "")
+                    result = NSLocalizedString("tx_kava_mint_incentive", comment: "")
                     
                 } else if (msgType.contains("MsgClaimHardReward")) {
-                    result = NSLocalizedString("tx_kava_hard_hard_incentive", comment: "")
+                    result = NSLocalizedString("tx_kava_hard_incentive", comment: "")
                     
                 } else if (msgType.contains("MsgClaimDelegatorReward")) {
-                    result = NSLocalizedString("tx_kava_hard_delegator_incentive", comment: "")
+                    result = NSLocalizedString("tx_kava_delegator_incentive", comment: "")
                     
                 } else if (msgType.contains("MsgClaimSwapReward")) {
-                    result = NSLocalizedString("tx_kava_hard_swap_incentive", comment: "")
+                    result = NSLocalizedString("tx_kava_swap_incentive", comment: "")
                     
                 } else if (msgType.contains("MsgClaimSavingsReward")) {
-                    result = NSLocalizedString("tx_kava_hard_save_incentive", comment: "")
+                    result = NSLocalizedString("tx_kava_save_incentive", comment: "")
+                    
+                } else if (msgType.contains("MsgClaimEarnReward")) {
+                    result = NSLocalizedString("tx_kava_earn_incentive", comment: "")
                     
                 }
                 
@@ -712,6 +715,18 @@ public struct ApiHistoryNewCustom {
             } else if (msgType.contains("kava.") && msgType.contains("pricefeed")) {
                 if (msgType.contains("MsgPostPrice")) {
                     result = NSLocalizedString("tx_kava_post_price", comment: "")
+                }
+                
+            } else if (msgType.contains("kava.") && msgType.contains("router")) {
+                if (msgType.contains("MsgDelegateMintDeposit")) {
+                    result = NSLocalizedString("tx_kava_earn_delegateDeposit", comment: "")
+                    
+                } else if (msgType.contains("MsgMintDeposit")) {
+                    result = NSLocalizedString("tx_kava_earn_Deposit", comment: "")
+                    
+                } else if (msgType.contains("MsgWithdrawBurn")) {
+                    result = NSLocalizedString("tx_kava_earn_withdraw", comment: "")
+                    
                 }
             }
             

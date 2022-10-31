@@ -45,6 +45,7 @@ class ChainBinance: ChainConfig {
     var authzSupoort = false
     var grpcUrl = ""
     var grpcPort = -1
+    var rpcUrl = ""
     var lcdUrl = "https://dex.binance.org/"
     var apiUrl = "https://dex.binance.org/"
     var explorerUrl = "https://binance.mintscan.io/"

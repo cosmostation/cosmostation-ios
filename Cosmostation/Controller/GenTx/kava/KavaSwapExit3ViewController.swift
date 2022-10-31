@@ -41,6 +41,14 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
         
         self.mKavaSwapPool = pageHolderVC.mKavaSwapPool
         self.mMyKavaPoolDeposits = pageHolderVC.mKavaSwapPoolDeposit
+        
+        btnBack.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        btnConfirm.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnBack.borderColor = UIColor.init(named: "_font05")
+        btnConfirm.borderColor = UIColor.init(named: "photon")
     }
     
     override func enableUserInteraction() {

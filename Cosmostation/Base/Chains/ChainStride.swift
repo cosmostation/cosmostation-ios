@@ -46,6 +46,7 @@ class ChainStride: ChainConfig {
     var authzSupoort = true
     var grpcUrl = "lcd-stride-app.cosmostation.io"
     var grpcPort = 9090
+    var rpcUrl = ""
     var lcdUrl = "https://lcd-stride-app.cosmostation.io/"
     var apiUrl = "https://api-stride.cosmostation.io/"
     var explorerUrl = MintscanUrl + "stride/"

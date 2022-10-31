@@ -25,6 +25,7 @@ public struct IncentiveReward {
     var usdx_minting_claims: Array<UsdxMintingClaim> = Array<UsdxMintingClaim>()
     var delegator_claims: Array<DelegatorClaim> = Array<DelegatorClaim>()
     var swap_claims: Array<SwapClaim> = Array<SwapClaim>()
+    var earn_claims: Array<EarnClaim> = Array<EarnClaim>()
     
     init(_ dictionary: NSDictionary?) {
         if let rawHardClaims = dictionary?["hard_claims"] as? Array<NSDictionary>  {
@@ -47,93 +48,88 @@ public struct IncentiveReward {
                 self.swap_claims.append(SwapClaim(rawSwapClaim))
             }
         }
+        if let rawEarnClaims = dictionary?["earn_claims"] as? Array<NSDictionary>  {
+            for rawEarnClaim in rawEarnClaims {
+                self.earn_claims.append(EarnClaim(rawEarnClaim))
+            }
+        }
     }
     
     public func getAllIncentives() -> Array<Coin> {
         var result = Array<Coin>()
-        var kavaAmount = NSDecimalNumber.zero
-        var hardAmount = NSDecimalNumber.zero
-        var usdxAmount = NSDecimalNumber.zero
-        var swapAmount = NSDecimalNumber.zero
         hard_claims.forEach { claim in
             claim.base_claim?.reward?.forEach({ reward in
-                if (reward.denom == KAVA_MAIN_DENOM) {
-                    kavaAmount = kavaAmount.adding(NSDecimalNumber.init(string: reward.amount))
-                } else if (reward.denom == KAVA_HARD_DENOM) {
-                    hardAmount = hardAmount.adding(NSDecimalNumber.init(string: reward.amount))
-                } else if (reward.denom == KAVA_USDX_DENOM) {
-                    usdxAmount = usdxAmount.adding(NSDecimalNumber.init(string: reward.amount))
-                } else if (reward.denom == KAVA_SWAP_DENOM) {
-                    swapAmount = swapAmount.adding(NSDecimalNumber.init(string: reward.amount))
+                let amount = NSDecimalNumber.init(string: reward.amount)
+                if (amount.compare(NSDecimalNumber.zero).rawValue > 0) {
+                    if let already = result.firstIndex(where: { $0.denom == reward.denom }) {
+                        let sumReward = NSDecimalNumber.init(string: result[already].amount).adding(amount)
+                        result[already] = Coin(reward.denom, sumReward.stringValue)
+                    } else {
+                        result.append(reward)
+                    }
                 }
             })
         }
-        usdx_minting_claims.forEach { claim in
-            kavaAmount = kavaAmount.adding(NSDecimalNumber.init(string: claim.base_claim?.reward?.amount))
-        }
         delegator_claims.forEach { claim in
             claim.base_claim?.reward?.forEach({ reward in
-                if (reward.denom == KAVA_MAIN_DENOM) {
-                    kavaAmount = kavaAmount.adding(NSDecimalNumber.init(string: reward.amount))
-                } else if (reward.denom == KAVA_HARD_DENOM) {
-                    hardAmount = hardAmount.adding(NSDecimalNumber.init(string: reward.amount))
-                } else if (reward.denom == KAVA_USDX_DENOM) {
-                    usdxAmount = usdxAmount.adding(NSDecimalNumber.init(string: reward.amount))
-                } else if (reward.denom == KAVA_SWAP_DENOM) {
-                    swapAmount = swapAmount.adding(NSDecimalNumber.init(string: reward.amount))
+                let amount = NSDecimalNumber.init(string: reward.amount)
+                if (amount.compare(NSDecimalNumber.zero).rawValue > 0) {
+                    if let already = result.firstIndex(where: { $0.denom == reward.denom }) {
+                        let sumReward = NSDecimalNumber.init(string: result[already].amount).adding(amount)
+                        result[already] = Coin(reward.denom, sumReward.stringValue)
+                    } else {
+                        result.append(reward)
+                    }
                 }
             })
         }
         swap_claims.forEach { claim in
             claim.base_claim?.reward?.forEach({ reward in
-                if (reward.denom == KAVA_MAIN_DENOM) {
-                    kavaAmount = kavaAmount.adding(NSDecimalNumber.init(string: reward.amount))
-                } else if (reward.denom == KAVA_HARD_DENOM) {
-                    hardAmount = hardAmount.adding(NSDecimalNumber.init(string: reward.amount))
-                } else if (reward.denom == KAVA_USDX_DENOM) {
-                    usdxAmount = usdxAmount.adding(NSDecimalNumber.init(string: reward.amount))
-                } else if (reward.denom == KAVA_SWAP_DENOM) {
-                    swapAmount = swapAmount.adding(NSDecimalNumber.init(string: reward.amount))
+                let amount = NSDecimalNumber.init(string: reward.amount)
+                if (amount.compare(NSDecimalNumber.zero).rawValue > 0) {
+                    if let already = result.firstIndex(where: { $0.denom == reward.denom }) {
+                        let sumReward = NSDecimalNumber.init(string: result[already].amount).adding(amount)
+                        result[already] = Coin(reward.denom, sumReward.stringValue)
+                    } else {
+                        result.append(reward)
+                    }
                 }
             })
         }
-        if (kavaAmount.compare(NSDecimalNumber.zero).rawValue > 0) {
-            result.append(Coin.init(KAVA_MAIN_DENOM, kavaAmount.stringValue))
+        earn_claims.forEach { claim in
+            claim.base_claim?.reward?.forEach({ reward in
+                let amount = NSDecimalNumber.init(string: reward.amount)
+                if (amount.compare(NSDecimalNumber.zero).rawValue > 0) {
+                    if let already = result.firstIndex(where: { $0.denom == reward.denom }) {
+                        let sumReward = NSDecimalNumber.init(string: result[already].amount).adding(amount)
+                        result[already] = Coin(reward.denom, sumReward.stringValue)
+                    } else {
+                        result.append(reward)
+                    }
+                }
+            })
         }
-        if (hardAmount.compare(NSDecimalNumber.zero).rawValue > 0) {
-            result.append(Coin.init(KAVA_HARD_DENOM, hardAmount.stringValue))
-        }
-        if (usdxAmount.compare(NSDecimalNumber.zero).rawValue > 0) {
-            result.append(Coin.init(KAVA_USDX_DENOM, usdxAmount.stringValue))
-        }
-        if (swapAmount.compare(NSDecimalNumber.zero).rawValue > 0) {
-            result.append(Coin.init(KAVA_SWAP_DENOM, swapAmount.stringValue))
+        usdx_minting_claims.forEach { claim in
+            if let reward = claim.base_claim?.reward {
+                let amount = NSDecimalNumber.init(string: reward.amount)
+                if (amount.compare(NSDecimalNumber.zero).rawValue > 0) {
+                    if let already = result.firstIndex(where: { $0.denom == reward.denom }) {
+                        let sumReward = NSDecimalNumber.init(string: result[already].amount).adding(amount)
+                        result[already] = Coin(reward.denom, sumReward.stringValue)
+                    } else {
+                        result.append(reward)
+                    }
+                }
+            }
         }
         return result;
     }
     
     public func getIncentiveAmount(_ denom: String) -> NSDecimalNumber {
-        if let coin = getAllIncentives().filter { $0.denom == denom }.first {
+        if let coin = getAllIncentives().filter({ $0.denom == denom }).first {
             return NSDecimalNumber.init(string: coin.amount)
         }
         return NSDecimalNumber.zero
-    }
-    
-    
-    public func getMintingRewardCnt() -> Int {
-        return usdx_minting_claims.count;
-    }
-    
-    public func getHardRewardCnt() -> Int {
-        return hard_claims.count;
-    }
-    
-    public func getDelegatorRewardCnt() -> Int {
-        return delegator_claims.count;
-    }
-    
-    public func getSwapRewardCnt() -> Int {
-        return swap_claims.count;
     }
     
     public func getMintingRewardAmount() -> NSDecimalNumber {
@@ -171,6 +167,18 @@ public struct IncentiveReward {
     public func getSwapRewardDenoms() -> Array<String> {
         var result = Array<String>()
         swap_claims.forEach { swapClaim in
+            swapClaim.base_claim?.reward?.forEach({ coin in
+                if (!result.contains(coin.denom)) {
+                    result.append(coin.denom)
+                }
+            })
+        }
+        return result
+    }
+    
+    public func getEarnRewardDenoms() -> Array<String> {
+        var result = Array<String>()
+        earn_claims.forEach { swapClaim in
             swapClaim.base_claim?.reward?.forEach({ coin in
                 if (!result.contains(coin.denom)) {
                     result.append(coin.denom)
@@ -218,6 +226,16 @@ public struct IncentiveReward {
     }
     
     public struct SwapClaim {
+        var base_claim: BaseClaim?
+        
+        init(_ dictionary: NSDictionary?) {
+            if let rawBaseClaim = dictionary?["base_claim"] as? NSDictionary {
+                self.base_claim = BaseClaim.init(rawBaseClaim)
+            }
+        }
+    }
+    
+    public struct EarnClaim {
         var base_claim: BaseClaim?
         
         init(_ dictionary: NSDictionary?) {

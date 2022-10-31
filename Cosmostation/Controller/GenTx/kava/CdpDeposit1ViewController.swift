@@ -69,6 +69,14 @@ class CdpDeposit1ViewController: BaseViewController, UITextFieldDelegate, SBCard
         self.onFetchCdpData()
         
         cAmountInput.delegate = self
+        
+        btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
+        btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
     }
     
     override func enableUserInteraction() {
