@@ -1188,7 +1188,7 @@ class Signer {
     
     static func genLinkChain(_ signer: String, _ tochain: ChainType, _ toAccount: Account, _ toPrivateKey: Data, _ toPublicKey: Data) -> [Google_Protobuf2_Any] {
         let plainString = "Link Chain With Cosmostation"
-        let sigbyte = getGrpcByteSingleSignatures(toPrivateKey, plainString.data(using: .utf8)!, nil)
+        let sigbyte = getGrpcByteSingleSignatures(toAccount.account_pubkey_type, toPrivateKey, plainString.data(using: .utf8)!, nil)
         
         let desmosBech32 = Desmos_Profiles_V1beta1_Bech32Address.with {
             $0.value = toAccount.account_address
@@ -2165,7 +2165,7 @@ class Signer {
         let txBody = getGrpcTxBody(msgAnys, memo)
         let signerInfo = getGrpcSignerInfos(auth, pubkeyType, publicKey, chainType)
         let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let rawTx = getGrpcRawTxs(auth, txBody, authInfo, privateKey, chainType)
+        let rawTx = getGrpcRawTxs(auth, pubkeyType, txBody, authInfo, privateKey, chainType)
         return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
             $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
             $0.txBytes = try! rawTx.serializedData()
@@ -2176,7 +2176,7 @@ class Signer {
         let txBody = getGrpcTxBody(msgAnys, memo)
         let signerInfo = getGrpcSignerInfos(auth, pubkeyType, publicKey, nil)
         let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let rawTx = getGrpcRawTxs2(auth, txBody, authInfo, privateKey, chainId)
+        let rawTx = getGrpcRawTxs2(auth, pubkeyType, txBody, authInfo, privateKey, chainId)
         return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
             $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
             $0.txBytes = try! rawTx.serializedData()
@@ -2187,7 +2187,7 @@ class Signer {
         let txBody = getGrpcTxBody(msgAnys, memo)
         let signerInfo = getGrpcSignerInfos(auth, pubkeyType, publicKey, chainType)
         let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let simulateTx = getGrpcSimulTxs(auth, txBody, authInfo, privateKey, chainType)
+        let simulateTx = getGrpcSimulTxs(auth, pubkeyType, txBody, authInfo, privateKey, chainType)
         return Cosmos_Tx_V1beta1_SimulateRequest.with {
             $0.tx = simulateTx
         }
@@ -2208,7 +2208,7 @@ class Signer {
             $0.single = single
         }
         var pubKey: Google_Protobuf2_Any?
-        if (chainType == ChainType.INJECTIVE_MAIN) {
+        if (chainType == .INJECTIVE_MAIN) {
             let pub = Injective_Crypto_V1beta1_Ethsecp256k1_PubKey.with {
                 $0.key = publicKey
             }
@@ -2217,7 +2217,7 @@ class Signer {
                 $0.value = try! pub.serializedData()
             }
             
-        } else if (chainType == ChainType.EVMOS_MAIN) {
+        } else if (chainType == .EVMOS_MAIN) {
             let pub = Ethermint_Crypto_V1_Ethsecp256k1_PubKey.with {
                 $0.key = publicKey
             }
@@ -2226,6 +2226,15 @@ class Signer {
                 $0.value = try! pub.serializedData()
             }
         
+        } else if (chainType == .XPLA_MAIN && pubkeyType == 1) {
+            let pub = Ethermint_Crypto_V1_Ethsecp256k1_PubKey.with {
+                $0.key = publicKey
+            }
+            pubKey = Google_Protobuf2_Any.with {
+                $0.typeURL = "/ethermint.crypto.v1.ethsecp256k1.PubKey"
+                $0.value = try! pub.serializedData()
+            }
+            
         } else {
             let pub = Cosmos_Crypto_Secp256k1_PubKey.with {
                 $0.key = publicKey
@@ -2258,14 +2267,14 @@ class Signer {
     }
     
     
-    static func getGrpcRawTxs(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ txBody: Cosmos_Tx_V1beta1_TxBody, _ authInfo: Cosmos_Tx_V1beta1_AuthInfo, _ privateKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_TxRaw {
+    static func getGrpcRawTxs(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64, _ txBody: Cosmos_Tx_V1beta1_TxBody, _ authInfo: Cosmos_Tx_V1beta1_AuthInfo, _ privateKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_TxRaw {
         let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
             $0.bodyBytes = try! txBody.serializedData()
             $0.authInfoBytes = try! authInfo.serializedData()
             $0.chainID = BaseData.instance.getChainId(chainType)
             $0.accountNumber = WUtils.onParseAuthGrpc(auth).1!
         }
-        let sigbyte = getGrpcByteSingleSignatures(privateKey, try! signDoc.serializedData(), chainType)
+        let sigbyte = getGrpcByteSingleSignatures(pubkeyType, privateKey, try! signDoc.serializedData(), chainType)
         return Cosmos_Tx_V1beta1_TxRaw.with {
             $0.bodyBytes = try! txBody.serializedData()
             $0.authInfoBytes = try! authInfo.serializedData()
@@ -2273,14 +2282,14 @@ class Signer {
         }
     }
     
-    static func getGrpcRawTxs2(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ txBody: Cosmos_Tx_V1beta1_TxBody, _ authInfo: Cosmos_Tx_V1beta1_AuthInfo, _ privateKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_TxRaw {
+    static func getGrpcRawTxs2(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64, _ txBody: Cosmos_Tx_V1beta1_TxBody, _ authInfo: Cosmos_Tx_V1beta1_AuthInfo, _ privateKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_TxRaw {
         let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
             $0.bodyBytes = try! txBody.serializedData()
             $0.authInfoBytes = try! authInfo.serializedData()
             $0.chainID = chainId
             $0.accountNumber = WUtils.onParseAuthGrpc(auth).1!
         }
-        let sigbyte = getGrpcByteSingleSignatures(privateKey, try! signDoc.serializedData(), nil)
+        let sigbyte = getGrpcByteSingleSignatures(pubkeyType, privateKey, try! signDoc.serializedData(), nil)
         return Cosmos_Tx_V1beta1_TxRaw.with {
             $0.bodyBytes = try! txBody.serializedData()
             $0.authInfoBytes = try! authInfo.serializedData()
@@ -2288,14 +2297,14 @@ class Signer {
         }
     }
     
-    static func getGrpcSimulTxs(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ txBody: Cosmos_Tx_V1beta1_TxBody, _ authInfo: Cosmos_Tx_V1beta1_AuthInfo, _ privateKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_Tx {
+    static func getGrpcSimulTxs(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64, _ txBody: Cosmos_Tx_V1beta1_TxBody, _ authInfo: Cosmos_Tx_V1beta1_AuthInfo, _ privateKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_Tx {
         let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
             $0.bodyBytes = try! txBody.serializedData()
             $0.authInfoBytes = try! authInfo.serializedData()
             $0.chainID = BaseData.instance.getChainId(chainType)
             $0.accountNumber = WUtils.onParseAuthGrpc(auth).1!
         }
-        let sigbyte = getGrpcByteSingleSignatures(privateKey, try! signDoc.serializedData(), chainType)
+        let sigbyte = getGrpcByteSingleSignatures(pubkeyType, privateKey, try! signDoc.serializedData(), chainType)
         return Cosmos_Tx_V1beta1_Tx.with {
             $0.authInfo = authInfo
             $0.body = txBody
@@ -2303,9 +2312,11 @@ class Signer {
         }
     }
     
-    static func getGrpcByteSingleSignatures(_ privateKey: Data, _ toSignByte: Data, _ chainType: ChainType?) -> Data {
+    static func getGrpcByteSingleSignatures(_ pubkeyType: Int64, _ privateKey: Data, _ toSignByte: Data, _ chainType: ChainType?) -> Data {
         var hash: Data?
-        if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN) {
+        if (chainType == .INJECTIVE_MAIN || chainType == .EVMOS_MAIN) {
+            hash = HDWalletKit.Crypto.sha3keccak256(data: toSignByte)
+        } else if (chainType == .XPLA_MAIN && pubkeyType == 1) {
             hash = HDWalletKit.Crypto.sha3keccak256(data: toSignByte)
         } else {
             hash = toSignByte.sha256()
