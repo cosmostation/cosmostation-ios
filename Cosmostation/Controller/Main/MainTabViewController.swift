@@ -190,34 +190,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             
         }
                 
-        else if (self.mChainType == .COSMOS_MAIN || self.mChainType == .IRIS_MAIN || self.mChainType == .AKASH_MAIN ||
-                 self.mChainType == .PERSIS_MAIN || self.mChainType == .CRYPTO_MAIN || self.mChainType == .SENTINEL_MAIN ||
-                 self.mChainType == .MEDI_MAIN || self.mChainType == .CERTIK_MAIN  || self.mChainType == .EMONEY_MAIN ||
-                 self.mChainType == .FETCH_MAIN || self.mChainType == .RIZON_MAIN || self.mChainType == .BAND_MAIN ||
-                 self.mChainType == .JUNO_MAIN || self.mChainType == .REGEN_MAIN || self.mChainType == .BITCANA_MAIN ||
-                 self.mChainType == .ALTHEA_MAIN || self.mChainType == .GRAVITY_BRIDGE_MAIN || self.mChainType == .KI_MAIN ||
-                 self.mChainType == .COMDEX_MAIN || self.mChainType == .SECRET_MAIN || self.mChainType == .INJECTIVE_MAIN ||
-                 self.mChainType == .BITSONG_MAIN || self.mChainType == .DESMOS_MAIN || self.mChainType == .LUM_MAIN ||
-                 self.mChainType == .CHIHUAHUA_MAIN || self.mChainType == .AXELAR_MAIN || self.mChainType == .KONSTELLATION_MAIN ||
-                 self.mChainType == .UMEE_MAIN || self.mChainType == .EVMOS_MAIN || self.mChainType == .PROVENANCE_MAIN ||
-                 self.mChainType == .CUDOS_MAIN || self.mChainType == .SIF_MAIN || self.mChainType == .CERBERUS_MAIN ||
-                 self.mChainType == .OMNIFLIX_MAIN || self.mChainType == .CRESCENT_MAIN || self.mChainType == .MANTLE_MAIN ||
-                 self.mChainType == .NYX_MAIN || self.mChainType == .PASSAGE_MAIN || self.mChainType == .SOMMELIER_MAIN ||
-                 self.mChainType == .LIKECOIN_MAIN || self.mChainType == .IXO_MAIN || self.mChainType == .STRIDE_MAIN ||
-                 self.mChainType == .KUJIRA_MAIN || self.mChainType == .TERITORI_MAIN) {
-            self.mFetchCnt = 9
-            self.onFetchgRPCNodeInfo()
-            self.onFetchgRPCAuth(self.mAccount.account_address)
-            self.onFetchgRPCBondedValidators(0)
-            self.onFetchgRPCUnbondedValidators(0)
-            self.onFetchgRPCUnbondingValidators(0)
-            
-            self.onFetchgRPCBalance(self.mAccount.account_address, 0)
-            self.onFetchgRPCDelegations(self.mAccount.account_address, 0)
-            self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
-            self.onFetchgRPCRewards(self.mAccount.account_address, 0)
-            
-        } else if (self.mChainType == .IOV_MAIN) {
+        if (self.mChainType == .IOV_MAIN) {
             self.mFetchCnt = 11
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -292,6 +265,19 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             
         } else if (self.mChainType == .COSMOS_TEST || self.mChainType == .IRIS_TEST || self.mChainType == .ALTHEA_TEST ||
                    self.mChainType == .CRESCENT_TEST || self.mChainType == .STATION_TEST) {
+            self.mFetchCnt = 9
+            self.onFetchgRPCNodeInfo()
+            self.onFetchgRPCAuth(self.mAccount.account_address)
+            self.onFetchgRPCBondedValidators(0)
+            self.onFetchgRPCUnbondedValidators(0)
+            self.onFetchgRPCUnbondingValidators(0)
+            
+            self.onFetchgRPCBalance(self.mAccount.account_address, 0)
+            self.onFetchgRPCDelegations(self.mAccount.account_address, 0)
+            self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
+            self.onFetchgRPCRewards(self.mAccount.account_address, 0)
+            
+        } else {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -1165,7 +1151,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchErc20Balance(_ web3: web3?, _ contAddress: String) {
         print("onFetchErc20Balance ", web3?.provider, "  ", contAddress)
         let contractAddress = EthereumAddress.init(fromHex: contAddress)
-        let ethAddress = EthereumAddress.init(fromHex: WKey.convertAddressCosmosToTender(mAccount.account_address))
+        let ethAddress = EthereumAddress.init(fromHex: WKey.convertBech32ToEvm(mAccount.account_address))
         let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
         Task {
             if let erc20Balance = try? erc20token.getBalance(account: ethAddress!) {

@@ -249,8 +249,8 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             
         } else if (chainType == ChainType.OKEX_MAIN) {
             var coins = msg?.value.getAmounts()
-            let convertFromAddress = WKey.convertAddressCosmosToTender(msg?.value.from_address ?? "")
-            let convertToAddress = WKey.convertAddressCosmosToTender(msg?.value.to_address ?? "")
+            let convertFromAddress = WKey.convertBech32ToEvm(msg?.value.from_address ?? "")
+            let convertToAddress = WKey.convertBech32ToEvm(msg?.value.to_address ?? "")
             
             cell?.fromLabel.text = convertFromAddress
             cell?.toLabel.text = convertToAddress
@@ -287,7 +287,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
         cell?.txIcon.tintColor = chainConfig?.chainColor
         
-        let convertDelegaterAddress = WKey.convertAddressCosmosToTender(msg?.value.delegator_address ?? "")
+        let convertDelegaterAddress = WKey.convertBech32ToEvm(msg?.value.delegator_address ?? "")
         cell?.delegatorLabel.text = convertDelegaterAddress
         WDP.dpCoin(chainConfig, msg!.value.quantity!, cell!.stakeDenom, cell!.stakeAmount)
         return cell!
@@ -299,7 +299,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
         cell?.txIcon.tintColor = chainConfig?.chainColor
         
-        let convertDelegaterAddress = WKey.convertAddressCosmosToTender(msg?.value.delegator_address ?? "")
+        let convertDelegaterAddress = WKey.convertBech32ToEvm(msg?.value.delegator_address ?? "")
         cell?.voterLabel.text = convertDelegaterAddress
         
         var monikers = ""

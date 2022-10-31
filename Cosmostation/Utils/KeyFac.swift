@@ -36,14 +36,6 @@ class KeyFac {
         }
     }
     
-    static func getStdTx(_ privateKey: Data, _ publicKey: Data, _ msgList: Array<Msg>, _ stdMsg: StdSignMsg, _ account: Account, _ fee: Fee, _ memo: String) -> StdTx {
-        if (BaseData.instance.getUsingEnginerMode()) {
-            return CKey.getStdTx(privateKey, publicKey, msgList, stdMsg, account, fee, memo)
-        } else {
-            return WKey.getStdTx(privateKey, publicKey, msgList, stdMsg, account, fee, memo)
-        }
-    }
-    
     static func isValidStringPrivateKey(_ input: String) -> Bool {
         let pKeyRegEx = "^(0x|0X)?[a-fA-F0-9]{64}"
         let pKeyPred = NSPredicate(format:"SELF MATCHES %@", pKeyRegEx)

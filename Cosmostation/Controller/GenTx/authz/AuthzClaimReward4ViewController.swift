@@ -133,7 +133,7 @@ class AuthzClaimReward4ViewController: BaseViewController, PasswordViewDelegate 
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genAuthzClaimReward(auth!,
+            let reqTx = Signer.genAuthzClaimReward(auth!, self.account!.account_pubkey_type,
                                                    self.account!.account_address,
                                                    self.pageHolderVC.mGranterAddress!,
                                                    self.pageHolderVC.mGranterReward,

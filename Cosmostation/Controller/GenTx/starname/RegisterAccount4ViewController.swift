@@ -112,7 +112,7 @@ class RegisterAccount4ViewController: BaseViewController, UITableViewDelegate, U
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedRegisterAccountMsgTxgRPC(auth!,
+            let reqTx = Signer.genSignedRegisterAccountMsgTxgRPC(auth!, self.account!.account_pubkey_type,
                                                                  self.pageHolderVC.mStarnameDomain!,
                                                                  self.pageHolderVC.mStarnameAccount!,
                                                                  self.pageHolderVC.mAccount!.account_address,

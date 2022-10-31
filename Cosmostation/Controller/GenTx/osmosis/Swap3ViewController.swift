@@ -101,7 +101,7 @@ class Swap3ViewController: BaseViewController, PasswordViewDelegate {
             }
             swapRoutes.append(swapRoute)
             
-            let reqTx = Signer.genSignedSwapInMsgTxgRPC(auth!,
+            let reqTx = Signer.genSignedSwapInMsgTxgRPC(auth!, self.account!.account_pubkey_type,
                                                         swapRoutes,
                                                         self.pageHolderVC.mSwapInDenom!,
                                                         self.pageHolderVC.mSwapInAmount!.stringValue,

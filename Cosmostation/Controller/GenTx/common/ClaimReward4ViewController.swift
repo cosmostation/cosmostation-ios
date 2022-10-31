@@ -187,7 +187,7 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedClaimRewardsTxgRPC(auth!,
+            let reqTx = Signer.genSignedClaimRewardsTxgRPC(auth!, self.account!.account_pubkey_type,
                                                            self.pageHolderVC.mRewardTargetValidators_gRPC,
                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)

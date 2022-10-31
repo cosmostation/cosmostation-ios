@@ -23,25 +23,27 @@ class WKey {
     }
     
     static func getDpAddress(_ chainConfig: ChainConfig, _ pkey: Data, _ type: Int) -> String {
-        let privateKey = PrivateKey.init(pk: pkey.hexEncodedString(), coin: .bitcoin)!
         if (chainConfig.chainType == .OKEX_MAIN) {
-            if (type == 0) { return generateTenderAddressFromPrivateKey(pkey) }
-            else { return generateEthAddressFromPrivateKey(pkey) }
+            if (type == 0) { return genLegacyOkcAddress(pkey) }
+            else { return genEthAddress(pkey) }
             
         } else if (chainConfig.chainType == .INJECTIVE_MAIN) {
-            let ethAddress = generateEthAddressFromPrivateKey(pkey)
-            return convertAddressEthToCosmos(ethAddress, "inj")
+            return getEthermintBech32Address(pkey, chainConfig.addressPrefix)
             
         } else if (chainConfig.chainType == .EVMOS_MAIN) {
-            let ethAddress = generateEthAddressFromPrivateKey(pkey)
-            return convertAddressEthToCosmos(ethAddress, "evmos")
+            return getEthermintBech32Address(pkey, chainConfig.addressPrefix)
+            
+        } else if (chainConfig.chainType == .XPLA_MAIN) {
+            if (type == 0) {
+                return getTendermintBech32Address(pkey, chainConfig.addressPrefix)
+            } else {
+                return getEthermintBech32Address(pkey, chainConfig.addressPrefix)
+            }
             
         } else {
-            return getDpAddress(privateKey.publicKey, chainConfig.addressPrefix)
+            return getTendermintBech32Address(pkey, chainConfig.addressPrefix)
         }
     }
-    
-    
     
     static func getMasterKeyFromWords(_ m: [String]) -> PrivateKey {
         return PrivateKey(seed: Mnemonic.createSeed(mnemonic: m.joined(separator: " ")), coin: .bitcoin)
@@ -51,17 +53,7 @@ class WKey {
         let masterKey = getMasterKeyFromWords(m)
         let chainType = ChainFactory.getChainType(account.account_base_chain)
         
-        if (chainType == ChainType.COSMOS_MAIN || chainType == ChainType.IRIS_MAIN || chainType == ChainType.CERTIK_MAIN || chainType == ChainType.AKASH_MAIN ||
-            chainType == ChainType.SENTINEL_MAIN || chainType == ChainType.SIF_MAIN || chainType == ChainType.KI_MAIN || chainType == ChainType.OSMOSIS_MAIN ||
-            chainType == ChainType.EMONEY_MAIN || chainType == ChainType.RIZON_MAIN || chainType == ChainType.JUNO_MAIN || chainType == ChainType.REGEN_MAIN ||
-            chainType == ChainType.BITCANA_MAIN || chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.GRAVITY_BRIDGE_MAIN || chainType == ChainType.STARGAZE_MAIN ||
-            chainType == ChainType.COMDEX_MAIN || chainType == ChainType.CHIHUAHUA_MAIN || chainType == ChainType.AXELAR_MAIN || chainType == ChainType.KONSTELLATION_MAIN ||
-            chainType == ChainType.UMEE_MAIN || chainType == ChainType.CUDOS_MAIN || chainType == ChainType.CERBERUS_MAIN || chainType == ChainType.OMNIFLIX_MAIN ||
-            chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.MANTLE_MAIN || chainType == ChainType.NYX_MAIN || chainType == ChainType.PASSAGE_MAIN ||
-            chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.ALTHEA_TEST || chainType == ChainType.CRESCENT_TEST || chainType == ChainType.STATION_TEST) {
-            return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-            
-        } else if (chainType == ChainType.BINANCE_MAIN) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(714)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
         } else if (chainType == ChainType.BAND_MAIN) {
@@ -85,7 +77,7 @@ class WKey {
         } else if (chainType == ChainType.DESMOS_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(852)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
-        } else if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN) {
+        } else if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN || chainType == ChainType.XPLA_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
 
         } else if (chainType == ChainType.PROVENANCE_MAIN) {
@@ -94,39 +86,39 @@ class WKey {
         }
         
         else if (chainType == ChainType.KAVA_MAIN) {
-            if (account.account_custom_path == 0) {
+            if (account.account_pubkey_type == 0) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             } else {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(459)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             }
             
         } else if (chainType == ChainType.SECRET_MAIN) {
-            if (account.account_custom_path == 0) {
+            if (account.account_pubkey_type == 0) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             } else {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(529)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             }
             
         } else if (chainType == ChainType.LUM_MAIN) {
-            if (account.account_custom_path == 0) {
+            if (account.account_pubkey_type == 0) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             } else {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(880)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             }
             
         } else if (chainType == ChainType.FETCH_MAIN) {
-            if (account.account_custom_path == 0) {
+            if (account.account_pubkey_type == 0) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-            } else if (account.account_custom_path == 1) {
+            } else if (account.account_pubkey_type == 1) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-            } else if (account.account_custom_path == 2) {
+            } else if (account.account_pubkey_type == 2) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(UInt32(account.account_path)!)).derived(at: .notHardened(0)).derived(at: .notHardened(0))
             } else {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             }
             
         } else if (chainType == ChainType.OKEX_MAIN) {
-            if (account.account_custom_path == 0 || account.account_custom_path == 1) {
+            if (account.account_pubkey_type == 0 || account.account_pubkey_type == 1) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(996)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             } else {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
@@ -149,13 +141,6 @@ class WKey {
         }
         return result
     }
-    
-    static func getDpAddress(_ pubkey: HDWalletKit.PublicKey, _ prefix: String) -> String {
-        let ripemd160 = RIPEMD160.hash(pubkey.data.sha256())
-        return try! SegwitAddrCoder.shared.encode2(hrp: prefix, program: ripemd160)
-    }
-
-    
     
     static func isValidateBech32(_ address:String) -> Bool {
         let bech32 = Bech32()
@@ -183,42 +168,6 @@ class WKey {
         return bech32.encode(chainConfig!.validatorPrefix, values: data)
     }
     
-    static func getDatafromDpAddress(_ address: String) -> Data? {
-        let bech32 = Bech32()
-        guard let (_, data) = try? bech32.decode(address) else {
-            return nil
-        }
-        
-        guard let result = try? convertBits(from: 5, to: 8, pad: false, idata: data) else {
-            return nil
-        }
-        return result
-    }
-    
-    static func convertBits(from: Int, to: Int, pad: Bool, idata: Data) throws -> Data {
-        var acc: Int = 0
-        var bits: Int = 0
-        let maxv: Int = (1 << to) - 1
-        let maxAcc: Int = (1 << (from + to - 1)) - 1
-        var odata = Data()
-        for ibyte in idata {
-            acc = ((acc << from) | Int(ibyte)) & maxAcc
-            bits += from
-            while bits >= to {
-                bits -= to
-                odata.append(UInt8((acc >> bits) & maxv))
-            }
-        }
-        if pad {
-            if bits != 0 {
-                odata.append(UInt8((acc << (to - bits)) & maxv))
-            }
-        } else if (bits >= from || ((acc << (to - bits)) & maxv) != 0) {
-            print("error")
-        }
-        return odata
-    }
-    
     static func generateRandomBytes() -> String? {
         var keyData = Data(count: 32)
         let result = keyData.withUnsafeMutableBytes {
@@ -244,13 +193,13 @@ class WKey {
         if (toChain == ChainType.BINANCE_MAIN) {
             var senderData: Data?
             if (toSendCoin[0].denom  == TOKEN_HTLC_KAVA_BNB) {
-                senderData = getDatafromDpAddress(BINANCE_MAIN_BNB_DEPUTY)
+                senderData = try! SegwitAddrCoder.shared.decode2(program: BINANCE_MAIN_BNB_DEPUTY)
             } else if (toSendCoin[0].denom == TOKEN_HTLC_KAVA_BTCB) {
-                senderData = getDatafromDpAddress(BINANCE_MAIN_BTCB_DEPUTY)
+                senderData = try! SegwitAddrCoder.shared.decode2(program: BINANCE_MAIN_BTCB_DEPUTY)
             } else if (toSendCoin[0].denom == TOKEN_HTLC_KAVA_XRPB) {
-                senderData = getDatafromDpAddress(BINANCE_MAIN_XRPB_DEPUTY)
+                senderData = try! SegwitAddrCoder.shared.decode2(program: BINANCE_MAIN_XRPB_DEPUTY)
             } else if (toSendCoin[0].denom == TOKEN_HTLC_KAVA_BUSD) {
-                senderData = getDatafromDpAddress(BINANCE_MAIN_BUSD_DEPUTY)
+                senderData = try! SegwitAddrCoder.shared.decode2(program: BINANCE_MAIN_BUSD_DEPUTY)
             }
             let otherSenderData = otherSender.data(using: .utf8)
             let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()
@@ -260,13 +209,13 @@ class WKey {
         } else if (toChain == ChainType.KAVA_MAIN) {
             var senderData: Data?
             if (toSendCoin[0].denom == TOKEN_HTLC_BINANCE_BNB) {
-                senderData = getDatafromDpAddress(KAVA_MAIN_BNB_DEPUTY)
+                senderData = try! SegwitAddrCoder.shared.decode2(program: KAVA_MAIN_BNB_DEPUTY)
             } else if (toSendCoin[0].denom == TOKEN_HTLC_BINANCE_BTCB) {
-                senderData = getDatafromDpAddress(KAVA_MAIN_BTCB_DEPUTY)
+                senderData = try! SegwitAddrCoder.shared.decode2(program: KAVA_MAIN_BTCB_DEPUTY)
             } else if (toSendCoin[0].denom == TOKEN_HTLC_BINANCE_XRPB) {
-                senderData = getDatafromDpAddress(KAVA_MAIN_XRPB_DEPUTY)
+                senderData = try! SegwitAddrCoder.shared.decode2(program: KAVA_MAIN_XRPB_DEPUTY)
             } else if (toSendCoin[0].denom == TOKEN_HTLC_BINANCE_BUSD) {
-                senderData = getDatafromDpAddress(KAVA_MAIN_BUSD_DEPUTY)
+                senderData = try! SegwitAddrCoder.shared.decode2(program: KAVA_MAIN_BUSD_DEPUTY)
             }
             let otherSenderData = otherSender.data(using: .utf8)
             let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()
@@ -289,14 +238,30 @@ class WKey {
         return result
     }
     
-    //comsos address to ether style
-    static func convertAddressCosmosToTender(_ exAddress: String) -> String {
-        let data = getDatafromDpAddress(exAddress)
-        return EthereumAddress.init(data: data!).string
+    // start with Ox (cosmos style address to ether style address only for lagacy okex user)
+    static func genLegacyOkcAddress(_ priKey: Data) -> String {
+        let publicKey = getPublicFromPrivateKey(priKey)
+        let sha256 = publicKey.sha256()
+        let ripemd160 = RIPEMD160.hash(sha256)
+        return EthereumAddress.init(data: ripemd160).string
+    }
+    
+    
+    // ripemd160 + bech32 for base cosmos sdk style (cosmos1.........)
+    static func getTendermintBech32Address(_ pkey: Data, _ prefix: String) -> String {
+        let publicKey = getPublicFromPrivateKey(pkey)
+        let ripemd160 = RIPEMD160.hash(publicKey.sha256())
+        return try! SegwitAddrCoder.shared.encode2(hrp: prefix, program: ripemd160)
+    }
+    
+    // sha3keccak256 + bech32 for base cosmos sdk style (evmos1.........)
+    static func getEthermintBech32Address(_ pkey: Data, _ prefix: String) -> String {
+        let ethAddress = genEthAddress(pkey)
+        return convertEvmToBech32(ethAddress, prefix)
     }
     
     //gen Ether style address (stat with 0x)
-    static func generateEthAddressFromPrivateKey(_ priKey: Data) -> String {
+    static func genEthAddress(_ priKey: Data) -> String {
         let uncompressedPubKey = HDWalletKit.Crypto.generatePublicKey(data: priKey, compressed: false)
         var pub = Data(count: 64)
         pub = uncompressedPubKey.subdata(in: (1..<65))
@@ -306,29 +271,19 @@ class WKey {
         return EthereumAddress.init(data: address).string
     }
     
-    //gen Tender style address (stat with 0x)
-    static func generateTenderAddressFromPrivateKey(_ priKey: Data) -> String {
-        let publicKey = getPublicFromPrivateKey(priKey)
-        let sha256 = publicKey.sha256()
-        let ripemd160 = RIPEMD160.hash(sha256)
-        return EthereumAddress.init(data: ripemd160).string
+    //Convert betch to ether style
+    static func convertBech32ToEvm(_ address: String) -> String {
+        let data = try! SegwitAddrCoder.shared.decode2(program: address)
+        return EthereumAddress.init(data: data!).string
     }
     
-    static func generateTenderAddressBytesFromPrivateKey(_ priKey: Data) -> Data {
-        let publicKey = getPublicFromPrivateKey(priKey)
-        let sha256 = publicKey.sha256()
-        let ripemd160 = RIPEMD160.hash(sha256)
-        return ripemd160
-    }
-    
-    //Convert eth to Betch style
-    static func convertAddressEthToCosmos(_ ethAddress: String, _ prefix: String) -> String {
+    //Convert ether to betch style
+    static func convertEvmToBech32(_ ethAddress: String, _ prefix: String) -> String {
         var address = ethAddress
         if (address.starts(with: "0x")) {
             address = address.replacingOccurrences(of: "0x", with: "")
         }
-        let convert = try? WKey.convertBits(from: 8, to: 5, pad: true, idata: Data.fromHex2(address)!)
-        return Bech32().encode(prefix, values: convert!)
+        return try! SegwitAddrCoder.shared.encode2(hrp: prefix, program: Data.fromHex2(address)!)
     }
     
     static func isValidEthAddress(_ input: String) -> Bool {
@@ -379,31 +334,6 @@ class WKey {
     static func getPublicFromPrivateKey(_ dataInput: Data) -> Data {
         return Crypto.generatePublicKey(data: dataInput, compressed: true)
     }
-    
-    static func getStdTx(_ privateKey: Data, _ publicKey: Data, _ msgList: Array<Msg>, _ stdMsg: StdSignMsg, _ account: Account, _ fee: Fee, _ memo: String) -> StdTx {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .sortedKeys
-        let data = try? encoder.encode(stdMsg)
-        let rawResult = String(data:data!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
-        let rawData: Data? = rawResult!.data(using: .utf8)
-        let hash = rawData!.sha256()
-        let signedData = try! ECDSA.compactsign(hash, privateKey: privateKey)
-        
-        var genedSignature = Signature.init()
-        var genPubkey =  PublicKey.init()
-        genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
-        genPubkey.value = publicKey.base64EncodedString()
-        genedSignature.pub_key = genPubkey
-        genedSignature.signature = signedData.base64EncodedString()
-        genedSignature.account_number = String(account.account_account_numner)
-        genedSignature.sequence = String(account.account_sequence_number)
-        
-        var signatures: Array<Signature> = Array<Signature>()
-        signatures.append(genedSignature)
-        
-        return MsgGenerator.genSignedTx(msgList, fee, memo, signatures)
-    }
-    
     
     
     

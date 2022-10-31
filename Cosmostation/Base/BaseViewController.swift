@@ -159,7 +159,7 @@ class BaseViewController: UIViewController {
                 self.shareAddress(account!.account_address, account!.getDpName())
             }))
             alert.addAction(UIAlertAction(title: NSLocalizedString("ether_type", comment: ""), style: .default, handler: { _ in
-                let ethAddress = WKey.convertAddressCosmosToTender(account!.account_address)
+                let ethAddress = WKey.convertBech32ToEvm(account!.account_address)
                 self.shareAddress(ethAddress, account!.getDpName())
             }))
             self.present(alert, animated: true, completion: nil)

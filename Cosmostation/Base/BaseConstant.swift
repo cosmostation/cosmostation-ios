@@ -320,6 +320,7 @@ public enum ChainType: String {
     case STRIDE_MAIN
     case KUJIRA_MAIN
     case TERITORI_MAIN
+    case XPLA_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -380,6 +381,7 @@ public enum ChainType: String {
         result.append(TERITORI_MAIN)
 //        result.append(TGRADE_MAIN)
         result.append(UMEE_MAIN)
+        result.append(XPLA_MAIN)
         
 
 //        result.append(COSMOS_TEST)

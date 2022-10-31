@@ -389,7 +389,7 @@ class CommonWCViewController: BaseViewController {
             if let baseAccount = self.accountMap[self.baseChain] {
                 if self.chainType == ChainType.EVMOS_MAIN {
                     self.getPrivateKeyAsync(account: baseAccount) { key in
-                        let ethAddress = WKey.generateEthAddressFromPrivateKey(key)
+                        let ethAddress = WKey.genEthAddress(key)
                         self.interactor?.approveSession(accounts: [ethAddress], chainId: 9001).done { _ in
                                 self.onViewUpdate(peer.peerMeta)
                             }.cauterize()
@@ -431,7 +431,7 @@ class CommonWCViewController: BaseViewController {
             return
         }
         self.getPrivateKeyAsync(account: baseAccount) { key in
-            let ethAddressString = WKey.generateEthAddressFromPrivateKey(key)
+            let ethAddressString = WKey.genEthAddress(key)
             guard let url = URL(string: "https://eth.bd.evmos.org:8545"),
                   let provider = Web3HttpProvider(url),
                   let ethAddress = EthereumAddress(ethAddressString),
@@ -657,7 +657,7 @@ class CommonWCViewController: BaseViewController {
             let name = account.getDpName()
             let algo = "secp256k1"
             let pubKey = [UInt8](tuple.publicKey)
-            let address = [UInt8](tuple.tendermintAddress)
+            let address = [UInt8](tuple.bech32Data)
             let bech32Address = account.account_address
             let wallet = WCKeplrWallet.init(name: name, algo: algo, pubKey: pubKey, address: address, bech32Address: bech32Address, isNanoLedger: false)
             listener(wallet)
@@ -669,7 +669,7 @@ class CommonWCViewController: BaseViewController {
         let name = account.getDpName()
         let algo = "secp256k1"
         let pubKey = [UInt8](tuple.publicKey)
-        let address = [UInt8](tuple.tendermintAddress)
+        let address = [UInt8](tuple.bech32Data)
         let bech32Address = account.account_address
         let comostationAccount = WCCosmostationAccount(name: name, algo: algo, pubKey: pubKey, address: address, bech32Address: bech32Address)
         return comostationAccount
@@ -802,14 +802,14 @@ class CommonWCViewController: BaseViewController {
         }
     }
     
-    typealias KeyTuple = (privateKey: Data, publicKey: Data, tendermintAddress:Data)
+    typealias KeyTuple = (privateKey: Data, publicKey: Data, bech32Data: Data)
     
     func getKey(chainName: String) -> KeyTuple {
         guard let account = accountMap[chainName] else { return (Data(), Data(), Data()) }
         let privateKey = getPrivateKey(account: account)
         let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
-        let tenderAddress = WKey.generateTenderAddressBytesFromPrivateKey(privateKey)
-        return (privateKey, publicKey, tenderAddress)
+        let bech32Data = RIPEMD160.hash(publicKey.sha256())
+        return (privateKey, publicKey, bech32Data)
     }
     
     func getPrivateKey(account: Account) -> Data {

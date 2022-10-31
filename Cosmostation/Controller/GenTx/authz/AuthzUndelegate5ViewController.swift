@@ -97,7 +97,7 @@ class AuthzUndelegate5ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genAuthzUndelegate(auth!,
+            let reqTx = Signer.genAuthzUndelegate(auth!, self.account!.account_pubkey_type,
                                                 self.account!.account_address,
                                                 self.pageHolderVC.mGranterAddress!,
                                                 self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,

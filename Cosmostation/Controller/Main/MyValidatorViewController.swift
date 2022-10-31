@@ -184,7 +184,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let authReq = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = self.account!.account_address }
                 if let authRes = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(authReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    let simulReq = Signer.genSimulateClaimRewardsTxgRPC(authRes, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
+                    let simulReq = Signer.genSimulateClaimRewardsTxgRPC(authRes, self.account!.account_pubkey_type, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
                     if let simulRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).simulate(simulReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
                         if (self.chainType != .SIF_MAIN && self.chainType != .CHIHUAHUA_MAIN) {
@@ -192,7 +192,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
                             feeCoin = Coin.init(feeData.denom!, amount.stringValue)
                         }
                         fee = Fee.init(feeGasAmount.stringValue, [feeCoin])
-                        let txReq = Signer.genSignedClaimRewardsTxgRPC(authRes, self.getClaimableReward(), fee, "",  self.privateKey!, self.publicKey!, self.chainType!)
+                        let txReq = Signer.genSignedClaimRewardsTxgRPC(authRes, self.account!.account_pubkey_type, self.getClaimableReward(), fee, "",  self.privateKey!, self.publicKey!, self.chainType!)
                         if let txRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(txReq).response.wait() {
                             DispatchQueue.main.async(execute: {
                                 if (self.waitAlert != nil) {
@@ -266,7 +266,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
                     if (response.withdrawAddress.replacingOccurrences(of: "\"", with: "") == self.account!.account_address) {
                         let authReq = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = self.account!.account_address }
                         if let authRes = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(authReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                            let simulReq = Signer.genSimulateCompounding(authRes, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
+                            let simulReq = Signer.genSimulateCompounding(authRes, self.account!.account_pubkey_type, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
                             if let simulRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).simulate(simulReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                                 feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
                                 if (self.chainType != .SIF_MAIN && self.chainType != .CHIHUAHUA_MAIN) {
@@ -274,7 +274,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
                                     feeCoin = Coin.init(feeData.denom!, amount.stringValue)
                                 }
                                 fee = Fee.init(feeGasAmount.stringValue, [feeCoin])
-                                let txReq = Signer.genSignedCompounding(authRes, self.getClaimableReward(), fee, "",  self.privateKey!, self.publicKey!, self.chainType!)
+                                let txReq = Signer.genSignedCompounding(authRes, self.account!.account_pubkey_type, self.getClaimableReward(), fee, "",  self.privateKey!, self.publicKey!, self.chainType!)
                                 if let txRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(txReq).response.wait() {
                                     DispatchQueue.main.async(execute: {
                                         if (self.waitAlert != nil) {

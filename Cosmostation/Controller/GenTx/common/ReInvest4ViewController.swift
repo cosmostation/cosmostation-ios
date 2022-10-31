@@ -139,7 +139,7 @@ class ReInvest4ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedReInvestTxgRPC(auth!,
+            let reqTx = Signer.genSignedReInvestTxgRPC(auth!, self.account!.account_pubkey_type,
                                                        self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mReinvestReward!,
                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)

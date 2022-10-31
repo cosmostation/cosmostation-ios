@@ -297,7 +297,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
 //        print("onOverideAccount ", derive.dpAddress)
         let existedAccount = BaseData.instance.selectExistAccount(derive.dpAddress, derive.chaintype)!
         existedAccount.account_path = String(derive.path)
-        existedAccount.account_custom_path = Int64(derive.hdpathtype)
+        existedAccount.account_pubkey_type = Int64(derive.hdpathtype)
         existedAccount.account_has_private = true
         
         if (mPrivateKeyMode) {
@@ -328,7 +328,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
 //        print("onCreateAccount ", derive.dpAddress)
         let newAccount = Account.init(isNew: true)
         newAccount.account_path = String(derive.path)
-        newAccount.account_custom_path = Int64(derive.hdpathtype)
+        newAccount.account_pubkey_type = Int64(derive.hdpathtype)
         newAccount.account_address = derive.dpAddress
         newAccount.account_base_chain = WUtils.getChainDBName(derive.chaintype)
         newAccount.account_has_private = true

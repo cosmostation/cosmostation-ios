@@ -50,7 +50,7 @@ class WalletDetailInfoCell: UITableViewCell {
         
         if (chainConfig.etherAddressSupport == true) {
             ethAddressLabel.isHidden = false
-            ethAddressLabel.text = "(" + WKey.convertAddressCosmosToTender(account.account_address) + ")"
+            ethAddressLabel.text = "(" + WKey.convertBech32ToEvm(account.account_address) + ")"
             
         } else {
             ethAddressLabel.isHidden = true
@@ -60,7 +60,7 @@ class WalletDetailInfoCell: UITableViewCell {
             if (account.account_from_mnemonic) {
                 importStateLabel.text = NSLocalizedString("str_with_mnemonics", comment: "")
                 mnemonicName.text = BaseData.instance.selectMnemonicById(account.account_mnemonic_id)?.getName()
-                keypathLabel.text = chainConfig.getHdPath(Int(account.account_custom_path), Int(account.account_path)!)
+                keypathLabel.text = chainConfig.getHdPath(Int(account.account_pubkey_type), Int(account.account_path)!)
                 mnemonicLayer.isHidden = false
                 keypathLayer.isHidden = false
                 

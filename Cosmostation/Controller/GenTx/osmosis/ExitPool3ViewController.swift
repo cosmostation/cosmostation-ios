@@ -92,7 +92,7 @@ class ExitPool3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedWithdrawPoolMsgTxgRPC(auth!,
+            let reqTx = Signer.genSignedWithdrawPoolMsgTxgRPC(auth!, self.account!.account_pubkey_type,
                                                               self.pageHolderVC.mPoolId!, self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!,
                                                               self.pageHolderVC.mLPCoin!.amount, self.pageHolderVC.mFee!,
                                                               self.pageHolderVC.mMemo!,

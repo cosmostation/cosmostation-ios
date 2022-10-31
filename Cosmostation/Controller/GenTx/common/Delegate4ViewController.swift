@@ -122,13 +122,13 @@ class Delegate4ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         DispatchQueue.global().async {
             var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest!
             if (self.pageHolderVC.chainType == .TGRADE_MAIN) {
-                reqTx = Signer.genSignedTgradeDelegate(auth!,
+                reqTx = Signer.genSignedTgradeDelegate(auth!, self.account!.account_pubkey_type,
                                                        self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!, Coin.init("utgd", "0"),
                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
                 
             } else {
-                reqTx = Signer.genSignedDelegateTxgRPC(auth!,
+                reqTx = Signer.genSignedDelegateTxgRPC(auth!, self.account!.account_pubkey_type,
                                                            self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,
                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)

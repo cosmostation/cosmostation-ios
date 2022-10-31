@@ -299,6 +299,8 @@
 "guide_msg_kujira" = "A Cosmos SDK and Cosm Wasm based layer-1 DeFi platform with various DeFi tools.";
 "guide_title_teritori" = "TERITORI";
 "guide_msg_teritori" = "Teritori is a decentralized multichain hub designed to provide an all-in-one experience for Web3 communities.";
+"guide_title_xpla" = "XPLA";
+"guide_msg_xpla" = "XPLA is a gaming media content-focused Cosmos SDK network built by Com2uS Corporation.";
 "guide_btn_home" = "Home Page";
 "guide_btn_blog" = "Official Blog";
 

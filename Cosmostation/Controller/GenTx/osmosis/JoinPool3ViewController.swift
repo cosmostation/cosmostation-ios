@@ -94,7 +94,7 @@ class JoinPool3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedDepositPoolMsgTxgRPC(auth!,
+            let reqTx = Signer.genSignedDepositPoolMsgTxgRPC(auth!, self.account!.account_pubkey_type,
                                                              self.pageHolderVC.mPoolId!, self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!,
                                                              self.pageHolderVC.mLPCoin!.amount, self.pageHolderVC.mFee!,
                                                              self.pageHolderVC.mMemo!,

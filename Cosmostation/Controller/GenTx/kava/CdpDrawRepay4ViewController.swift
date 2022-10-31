@@ -125,7 +125,7 @@ class CdpDrawRepay4ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedKavaCDPRepay(auth!,
+            let reqTx = Signer.genSignedKavaCDPRepay(auth!, self.account!.account_pubkey_type,
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mPayment,
                                                      self.pageHolderVC.mCollateralParamType!,

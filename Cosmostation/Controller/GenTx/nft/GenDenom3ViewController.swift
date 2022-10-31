@@ -91,7 +91,7 @@ class GenDenom3ViewController: BaseViewController, PasswordViewDelegate {
             do {
                 var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest!
                 if (self.chainType == ChainType.IRIS_MAIN) {
-                    reqTx = Signer.genSignedIssueNftDenomIrisTxgRPC(auth!,
+                    reqTx = Signer.genSignedIssueNftDenomIrisTxgRPC(auth!, self.account!.account_pubkey_type,
                                                                     self.account!.account_address,
                                                                     self.pageHolderVC.mNFTDenomId!,
                                                                     self.pageHolderVC.mNFTDenomName!,
@@ -102,7 +102,7 @@ class GenDenom3ViewController: BaseViewController, PasswordViewDelegate {
                     
                     
                 } else if (self.chainType == ChainType.CRYPTO_MAIN) {
-                    reqTx = Signer.genSignedIssueNftDenomCroTxgRPC(auth!,
+                    reqTx = Signer.genSignedIssueNftDenomCroTxgRPC(auth!, self.account!.account_pubkey_type,
                                                                    self.account!.account_address,
                                                                    self.pageHolderVC.mNFTDenomId!,
                                                                    self.pageHolderVC.mNFTDenomName!,
