@@ -35,26 +35,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzV-Nx-JIl">
-                                <rect key="frame" x="522.5" y="-1.5" width="15.5" height="50"/>
+                                <rect key="frame" x="522.5" y="-53.5" width="15.5" height="154"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXb-Pc-Mpx">
-                                <rect key="frame" x="525.5" y="54.5" width="12.5" height="16"/>
+                                <rect key="frame" x="525.5" y="106.5" width="12.5" height="16"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0yA-UP-CUn">
-                                <rect key="frame" x="12" y="82.5" width="526" height="0.5"/>
+                                <rect key="frame" x="12" y="134.5" width="526" height="0.5"/>
                                 <color key="backgroundColor" name="_card_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="G0j-Ka-JhF"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="b4l-g7-Rl6">
-                                <rect key="frame" x="12" y="99" width="526" height="90"/>
+                                <rect key="frame" x="12" y="151" width="526" height="90"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tBs-SD-05M">
                                         <rect key="frame" x="0.0" y="0.0" width="526" height="18"/>
@@ -180,7 +180,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Av8-xa-eft">
-                                <rect key="frame" x="12" y="205" width="526" height="40"/>
+                                <rect key="frame" x="12" y="257" width="526" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fg-vB-8al">
                                         <rect key="frame" x="0.0" y="0.0" width="259" height="40"/>
@@ -234,7 +234,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIq-cQ-1Nv">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIq-cQ-1Nv">
                                 <rect key="frame" x="12" y="253" width="526" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -267,10 +267,10 @@
                             <constraint firstItem="OIq-cQ-1Nv" firstAttribute="leading" secondItem="Av8-xa-eft" secondAttribute="leading" id="CQp-q6-KL8"/>
                             <constraint firstAttribute="trailing" secondItem="0yA-UP-CUn" secondAttribute="trailing" constant="12" id="Fig-rd-yjl"/>
                             <constraint firstItem="aXb-Pc-Mpx" firstAttribute="top" secondItem="HzV-Nx-JIl" secondAttribute="bottom" constant="6" id="JsJ-ao-xNy"/>
+                            <constraint firstAttribute="bottom" secondItem="Av8-xa-eft" secondAttribute="bottom" constant="16" id="MhU-VC-pln"/>
                             <constraint firstItem="OIq-cQ-1Nv" firstAttribute="trailing" secondItem="Av8-xa-eft" secondAttribute="trailing" id="N2l-je-DVY"/>
                             <constraint firstItem="cGq-85-hfB" firstAttribute="leading" secondItem="3gb-Jn-LFa" secondAttribute="leading" constant="12" id="NyQ-5U-40G"/>
                             <constraint firstAttribute="bottom" secondItem="OIq-cQ-1Nv" secondAttribute="bottom" constant="20" id="O4c-n5-RZ7"/>
-                            <constraint firstItem="OIq-cQ-1Nv" firstAttribute="top" secondItem="Av8-xa-eft" secondAttribute="bottom" constant="8" id="RyX-a2-XyN"/>
                             <constraint firstItem="0yA-UP-CUn" firstAttribute="leading" secondItem="3gb-Jn-LFa" secondAttribute="leading" constant="12" id="Wid-Oz-nHG"/>
                             <constraint firstItem="xIT-Pc-ngA" firstAttribute="leading" secondItem="cGq-85-hfB" secondAttribute="trailing" constant="6" id="aUf-vr-zZ8"/>
                             <constraint firstItem="0yA-UP-CUn" firstAttribute="top" secondItem="aXb-Pc-Mpx" secondAttribute="bottom" constant="12" id="dYq-Ql-BN7"/>
