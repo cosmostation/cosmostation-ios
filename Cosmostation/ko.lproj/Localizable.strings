@@ -299,6 +299,8 @@
 "guide_msg_kujira" = "Cosmos SDK 와 Cosm Wasm 스마트 컨트랙트를 기반으로 설계된 레이어 1 디파이 플랫폼입니다.";
 "guide_title_teritori" = "TERITORI";
 "guide_msg_teritori" = "Teritori는 웹3 커뮤니티들에게 플랫폼을 제공하기 위해 설계된 탈중앙화 멀티체인 생태계입니다.";
+"guide_title_xpla" = "XPLA";
+"guide_msg_xpla" = "Com2uS(컴투스)에서 자체 전개하는 Cosmos SDK 블록체인 기반 게임 미디어 콘텐츠 플랫폼입니다.";
 "guide_btn_home" = "홈페이지";
 "guide_btn_blog" = "공식 블로그";
 

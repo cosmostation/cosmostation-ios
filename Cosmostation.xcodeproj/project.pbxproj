@@ -1091,6 +1091,8 @@
 		04D2DB21290F6B80007FC197 /* TxEarnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2DB1E290F6B80007FC197 /* TxEarnCell.swift */; };
 		04D2DB22290F6B80007FC197 /* TxEarnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D2DB1F290F6B80007FC197 /* TxEarnCell.xib */; };
 		04D2DB23290F6B80007FC197 /* TxEarnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D2DB1F290F6B80007FC197 /* TxEarnCell.xib */; };
+		04D2DB25290F8943007FC197 /* ChainXpla.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2DB24290F8943007FC197 /* ChainXpla.swift */; };
+		04D2DB26290F8943007FC197 /* ChainXpla.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2DB24290F8943007FC197 /* ChainXpla.swift */; };
 		04D338FF27E826F100E82AA7 /* crescent_liquidstaking_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338E227E826EE00E82AA7 /* crescent_liquidstaking_v1beta1_query.pb.swift */; };
 		04D3390027E826F100E82AA7 /* crescent_liquidstaking_v1beta1_liquidstaking.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338E327E826EE00E82AA7 /* crescent_liquidstaking_v1beta1_liquidstaking.pb.swift */; };
 		04D3390127E826F100E82AA7 /* crescent_farming_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338E427E826EE00E82AA7 /* crescent_farming_v1beta1_query.grpc.swift */; };
@@ -3615,6 +3617,7 @@
 		04D1385A2691E26700D6AF9F /* TxExitPoolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxExitPoolCell.xib; sourceTree = "<group>"; };
 		04D2DB1E290F6B80007FC197 /* TxEarnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxEarnCell.swift; sourceTree = "<group>"; };
 		04D2DB1F290F6B80007FC197 /* TxEarnCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxEarnCell.xib; sourceTree = "<group>"; };
+		04D2DB24290F8943007FC197 /* ChainXpla.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainXpla.swift; sourceTree = "<group>"; };
 		04D338E227E826EE00E82AA7 /* crescent_liquidstaking_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = crescent_liquidstaking_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		04D338E327E826EE00E82AA7 /* crescent_liquidstaking_v1beta1_liquidstaking.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = crescent_liquidstaking_v1beta1_liquidstaking.pb.swift; sourceTree = "<group>"; };
 		04D338E427E826EE00E82AA7 /* crescent_farming_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = crescent_farming_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
@@ -4419,6 +4422,7 @@
 				04AA4B56290624B50027877B /* ChainTeritori.swift */,
 				04E165B628A0F873000F12C0 /* ChainTgrade.swift */,
 				0451FCB4282A3BD700214FDA /* ChainUmee.swift */,
+				04D2DB24290F8943007FC197 /* ChainXpla.swift */,
 				04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */,
 			);
 			path = Chains;
@@ -8011,6 +8015,7 @@
 				04E6ABA228635816008DC3C7 /* CdpCreate4ViewController.swift in Sources */,
 				18FFB5F4281AF533004E65BB /* ValidatorDetailMyDetailCell.swift in Sources */,
 				E1C5C0AC28992AC400E9E65D /* AuthzDelegate1ViewController.swift in Sources */,
+				04D2DB26290F8943007FC197 /* ChainXpla.swift in Sources */,
 				1817CAA3283E2CE500523713 /* crescent_farming_v1beta1_query.pb.swift in Sources */,
 				04E165A028A0F49B000F12C0 /* confio_poe_v1beta1_tx.grpc.swift in Sources */,
 				04E6ABBC28635875008DC3C7 /* CdpWithdraw4ViewController.swift in Sources */,
@@ -9036,6 +9041,7 @@
 				0451FD782832370100214FDA /* osmosis_epochs_query.pb.swift in Sources */,
 				E16FACB12361ADFA00372052 /* Bytes.swift in Sources */,
 				283E9472254902F4007A9291 /* TxDeleteAccountCell.swift in Sources */,
+				04D2DB25290F8943007FC197 /* ChainXpla.swift in Sources */,
 				04AA4C152906A6DD0027877B /* kava_router_v1beta1_tx.pb.swift in Sources */,
 				046FA6E32876995600F6318A /* VoteCell.swift in Sources */,
 				E1C3C89B23B1E3E400A693C0 /* NotificationView.swift in Sources */,

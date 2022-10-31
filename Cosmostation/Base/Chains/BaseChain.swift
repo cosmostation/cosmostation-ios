@@ -164,6 +164,8 @@ class ChainFactory {
             return .TGRADE_MAIN
         case CHAIN_UMEE_S:
             return .UMEE_MAIN
+        case CHAIN_XPLA_S:
+            return .XPLA_MAIN
             
             
         case CHAIN_STATION_TEST_S:
@@ -276,6 +278,8 @@ class ChainFactory {
 //            return ChainTgrade(chainType!)
         case .UMEE_MAIN:
             return ChainUmee(chainType!)
+        case .XPLA_MAIN:
+            return ChainXpla(chainType!)
             
             
         case .STATION_TEST:
@@ -364,6 +368,7 @@ let CHAIN_STRIDE_S = "SUPPORT_CHAIN_STRIDE"
 let CHAIN_TERITORI_S = "SUPPORT_CHAIN_TERITORI"
 let CHAIN_TGRADE_S = "SUPPORT_CHAIN_TGRADE"
 let CHAIN_UMEE_S = "SUPPORT_CHAIN_UMEE"
+let CHAIN_XPLA_S = "SUPPORT_CHAIN_XPLA"
 
 let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 

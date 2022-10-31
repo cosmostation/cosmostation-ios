@@ -36,6 +36,14 @@ class WKey {
             let ethAddress = generateEthAddressFromPrivateKey(pkey)
             return convertAddressEthToCosmos(ethAddress, "evmos")
             
+        } else if (chainConfig.chainType == .XPLA_MAIN) {
+            if (type == 0) {
+                return getDpAddress(privateKey.publicKey, chainConfig.addressPrefix)
+            } else {
+                let ethAddress = generateEthAddressFromPrivateKey(pkey)
+                return convertAddressEthToCosmos(ethAddress, "xpla")
+            }
+            
         } else {
             return getDpAddress(privateKey.publicKey, chainConfig.addressPrefix)
         }
