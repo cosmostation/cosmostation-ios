@@ -38,8 +38,6 @@ let KEY_CUSTOM_ICON                     = "KEY_CUSTOM_ICON"
 let KEY_DB_VERSION                      = "KEY_DB_VERSION"
 let KEY_WC_WHITELIST                    = "KEY_WC_WHITELIST"
 
-let STATION_URL                         = "https://api-utility.cosmostation.io/";
-let STATION_TEST_URL                    = "https://api-office.cosmostation.io/utility/";
 let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
 let CSS_URL                             = "https://api-wallet.cosmostation.io/";
 let NFT_INFURA                          = "https://ipfs.infura.io/ipfs/";

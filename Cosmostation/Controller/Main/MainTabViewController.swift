@@ -425,7 +425,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 }
                 BaseData.instance.mNodeInfo = NodeInfo.init(nodeInfo)
                 self.mFetchCnt = self.mFetchCnt + 1
-                self.onFetchParams(BaseData.instance.getChainId(self.mChainType))
+                self.onFetchParams(self.mChainConfig.chainAPIName)
                 if let height = responseData.object(forKey: "height") as? Int {
                     BaseData.instance.mHeight = height
                 }
@@ -676,7 +676,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mNodeInfo_gRPC = response.nodeInfo
                     self.mFetchCnt = self.mFetchCnt + 4
-                    self.onFetchParams(BaseData.instance.getChainId(self.mChainType))
+                    self.onFetchParams(self.mChainConfig.chainAPIName)
                     self.onFetchMintscanAsset()
                     self.onFetchMintscanCw20(self.mChainConfig.chainAPIName)
                     self.onFetchMintscanErc20(self.mChainConfig.chainAPIName)
@@ -1030,14 +1030,16 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchParams(_ chainId: String) {
-        print("onFetchParams ", chainId, "   ", BaseNetWork.getParams(self.mChainType, chainId))
-        let request = Alamofire.request(BaseNetWork.getParams(self.mChainType, chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        print("onFetchParams ", BaseNetWork.getParams(chainId))
+        let request = Alamofire.request(BaseNetWork.getParams(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
+                print("res ", res)
                 if let params = res as? NSDictionary {
                     BaseData.instance.mParam = Param.init(params)
                 }
+                print("mParam ", BaseData.instance.mParam?.params)
             
             case .failure(let error):
                 print("onFetchParams ", error)
