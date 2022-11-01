@@ -1035,11 +1035,10 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                print("res ", res)
                 if let params = res as? NSDictionary {
                     BaseData.instance.mParam = Param.init(params)
                 }
-                print("mParam ", BaseData.instance.mParam?.params)
+//                print("mParam ", BaseData.instance.mParam?.params)
             
             case .failure(let error):
                 print("onFetchParams ", error)

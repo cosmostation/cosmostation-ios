@@ -26,7 +26,7 @@ public struct Param {
         } else if (chainType == .IRIS_MAIN || chainType == .IRIS_TEST) {
             return NSDecimalNumber.init(string: params?.minting_params?.inflation)
             
-        } else if (chainType == .OSMOSIS_MAIN) {
+        } else if (chainType == .OSMOSIS_MAIN || chainType == .STRIDE_MAIN) {
             let epochProvisions = NSDecimalNumber.init(string: params?.osmosis_minting_epoch_provisions)
             let epochPeriod = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.reduction_period_in_epochs)
             let osmoSupply = getMainSupply()
@@ -115,7 +115,7 @@ public struct Param {
 //        print("getMainSupply ", getMainSupply())
 //        print("getBondedAmount ", getBondedAmount())
         if (bondingRate == NSDecimalNumber.zero) { return NSDecimalNumber.zero}
-        if (chain == .OSMOSIS_MAIN) {
+        if (chain == .OSMOSIS_MAIN || chain == .STRIDE_MAIN) {
             let stakingDistribution = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.distribution_proportions?.staking)
             return inflation.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: bondingRate, withBehavior: WUtils.handler6)
             
@@ -343,6 +343,13 @@ public struct Params {
         }
         if let rawOsmosisMintingEpochProvisions = dictionary?["osmosis_minting_epoch_provisions"] as? NSDictionary {
             self.osmosis_minting_epoch_provisions = OsmosisMintingEpochProvisions.init(rawOsmosisMintingEpochProvisions).epoch_provisions
+        }
+        
+        if let rawStrideMintingParams = dictionary?["stride_minting_params"] as? NSDictionary {
+            self.osmosis_minting_params = OsmosisMintingParam.init(rawStrideMintingParams)
+        }
+        if let rawStridMintingEpochProvisions = dictionary?["stride_minting_epoch_provisions"] as? NSDictionary {
+            self.osmosis_minting_epoch_provisions = OsmosisMintingEpochProvisions.init(rawStridMintingEpochProvisions).epoch_provisions
         }
         
         
