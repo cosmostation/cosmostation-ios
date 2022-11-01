@@ -56,6 +56,8 @@ class KavaLiquidity1ViewController: BaseViewController, UITextFieldDelegate {
         btn100.borderColor = UIColor.init(named: "_font05")
         btnHalf.borderColor = UIColor.init(named: "_font05")
         btnMax.borderColor = UIColor.init(named: "_font05")
+        btnBack.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

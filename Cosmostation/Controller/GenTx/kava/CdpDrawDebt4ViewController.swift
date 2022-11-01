@@ -37,6 +37,8 @@ class CdpDrawDebt4ViewController: BaseViewController, PasswordViewDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
+        btnBack.borderColor = UIColor.init(named: "_font05")
+        btnConfirm.borderColor = UIColor.init(named: "photon")
         btnBack.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
         btnConfirm.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
