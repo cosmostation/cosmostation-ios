@@ -940,8 +940,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
                 self.navigationController?.pushViewController(wcVC, animated: true)
                 
-            } else if (self.chainType == .OSMOSIS_MAIN || self.chainType == .KAVA_MAIN || self.chainType == .CRESCENT_MAIN ||
-                       self.chainType == .EVMOS_MAIN || self.chainType == .STATION_TEST || self.chainType == .LIKECOIN_MAIN) {
+            } else if (self.chainConfig?.wcSupoort == true) {
                 let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
                 commonWcVC.wcURL = self.wcURL!
                 commonWcVC.hidesBottomBarWhenPushed = true

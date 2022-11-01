@@ -42,7 +42,7 @@ class ChainStride: ChainConfig {
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
-    var wcSupoort = false
+    var wcSupoort = true
     var authzSupoort = true
     var grpcUrl = "lcd-stride-app.cosmostation.io"
     var grpcPort = 9090
