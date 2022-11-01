@@ -306,11 +306,15 @@ class BaseNetWork {
         return chainConfig.apiUrl + "v1/account/new_txs/" + address + "/" + valAddress
     }
     
-    static func getParams(_ chain : ChainType, _ chainId: String) -> String {
-        if (ChainType.IS_TESTNET(chain)) {
-            return STATION_TEST_URL + "v1/params/" + chainId
+    static func getParams(_ chainId: String) -> String {
+        //TODO hardcoing for V3
+        var chainId = chainId
+        if (chainId == "cryptoorg") {
+            chainId = "crypto-org"
+        } else if (chainId == "kichain") {
+            chainId = "ki-chain"
         }
-        return STATION_URL + "v1/params/" + chainId
+        return MINTSCAN_API_URL + "v1/utils/params/chain/" + chainId
     }
     
     static func getConnection(_ chain: ChainType, _ group: MultiThreadedEventLoopGroup) -> ClientConnection? {

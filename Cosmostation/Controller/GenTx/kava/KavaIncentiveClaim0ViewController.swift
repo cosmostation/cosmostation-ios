@@ -69,6 +69,8 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
             WDP.dpCoin(chainConfig, IncentiveCoins[4], incen4Denom, incen4Amount)
         }
         
+        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
         btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
         btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }

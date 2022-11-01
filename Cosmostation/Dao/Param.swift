@@ -14,7 +14,7 @@ public struct Param {
     
     init(_ dictionary: NSDictionary?) {
         self.chain_id = dictionary?["chain_id"] as? String
-        if let rawParams = dictionary?["Params"] as? NSDictionary {
+        if let rawParams = dictionary?["params"] as? NSDictionary {
             self.params = Params.init(rawParams)
         }
     }
@@ -26,10 +26,13 @@ public struct Param {
         } else if (chainType == .IRIS_MAIN || chainType == .IRIS_TEST) {
             return NSDecimalNumber.init(string: params?.minting_params?.inflation)
             
-        } else if (chainType == .OSMOSIS_MAIN) {
+        } else if (chainType == .OSMOSIS_MAIN || chainType == .STRIDE_MAIN) {
             let epochProvisions = NSDecimalNumber.init(string: params?.osmosis_minting_epoch_provisions)
             let epochPeriod = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.reduction_period_in_epochs)
             let osmoSupply = getMainSupply()
+//            print("epochProvisions ", epochProvisions)
+//            print("epochPeriod ", epochPeriod)
+//            print("osmoSupply ", osmoSupply)
             return epochProvisions.multiplying(by: epochPeriod).dividing(by: osmoSupply, withBehavior: WUtils.handler18)
             
         } else if (chainType == .STARGAZE_MAIN) {
@@ -107,8 +110,12 @@ public struct Param {
         let calTax = NSDecimalNumber.one.subtracting(getTax())
         if (getMainSupply() == NSDecimalNumber.zero) { return NSDecimalNumber.zero}
         let bondingRate = getBondedAmount().dividing(by: getMainSupply(), withBehavior: WUtils.handler6)
+//        print("inflation ", inflation)
+//        print("calTax ", calTax)
+//        print("getMainSupply ", getMainSupply())
+//        print("getBondedAmount ", getBondedAmount())
         if (bondingRate == NSDecimalNumber.zero) { return NSDecimalNumber.zero}
-        if (chain == .OSMOSIS_MAIN) {
+        if (chain == .OSMOSIS_MAIN || chain == .STRIDE_MAIN) {
             let stakingDistribution = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.distribution_proportions?.staking)
             return inflation.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: bondingRate, withBehavior: WUtils.handler6)
             
@@ -269,6 +276,10 @@ public struct Params {
         if let rawMintingParams = dictionary?["minting_params"] as? NSDictionary {
             self.minting_params = MintingParams.init(rawMintingParams)
         }
+        if let rawIrisMintingParams = dictionary?["iris_minting_params"] as? NSDictionary,
+           let result = rawIrisMintingParams["result"] as? NSDictionary {
+            self.minting_params = MintingParams.init(result)
+        }
         self.minting_inflation = "0"
         if let rawMintingInflation = dictionary?["minting_inflation"] as? NSDictionary {
             self.minting_inflation = MintingInflation.init(rawMintingInflation).inflation
@@ -290,6 +301,9 @@ public struct Params {
         }
         if let rawDistributionParam = dictionary?["distribution_params"] as? NSDictionary {
             self.distribution_params = DistributionParam.init(rawDistributionParam)
+        }
+        if let rawSupply = dictionary?["bank_supply"] as? NSDictionary {
+            self.supply = SupplyList.init(rawSupply).supply
         }
         if let rawSupply = dictionary?["supply"] as? NSDictionary {
             self.supply = SupplyList.init(rawSupply).supply
@@ -327,8 +341,15 @@ public struct Params {
         if let rawOsmosisMintingParams = dictionary?["osmosis_minting_params"] as? NSDictionary {
             self.osmosis_minting_params = OsmosisMintingParam.init(rawOsmosisMintingParams)
         }
-        if let rawOsmosisMintingEpochProvisions = dictionary?["minting_epoch_provisions"] as? NSDictionary {
+        if let rawOsmosisMintingEpochProvisions = dictionary?["osmosis_minting_epoch_provisions"] as? NSDictionary {
             self.osmosis_minting_epoch_provisions = OsmosisMintingEpochProvisions.init(rawOsmosisMintingEpochProvisions).epoch_provisions
+        }
+        
+        if let rawStrideMintingParams = dictionary?["stride_minting_params"] as? NSDictionary {
+            self.osmosis_minting_params = OsmosisMintingParam.init(rawStrideMintingParams)
+        }
+        if let rawStridMintingEpochProvisions = dictionary?["stride_minting_epoch_provisions"] as? NSDictionary {
+            self.osmosis_minting_epoch_provisions = OsmosisMintingEpochProvisions.init(rawStridMintingEpochProvisions).epoch_provisions
         }
         
         
@@ -336,7 +357,7 @@ public struct Params {
             self.emoney_minting_inflation = EmoneyMintingInflation.init(rawEmoneyMintingInflation)
         }
         
-        if let rawActiveValidators = dictionary?["active_validators"] as? NSDictionary {
+        if let rawActiveValidators = dictionary?["band_oracle_active_validators"] as? NSDictionary {
             self.band_active_validators = BandOrcleActiveValidators.init(rawActiveValidators)
         }
         
@@ -346,8 +367,11 @@ public struct Params {
             }
         }
         
-        if let rawGovTallying = dictionary?["gov_tallying"] as? NSDictionary {
+        if let rawGovTallying = dictionary?["gov_tally_params"] as? NSDictionary {
             self.gov_tallying = GovTallying.init(rawGovTallying)
+        }
+        if let rawShentuGovTallying = dictionary?["shentu_gov_tally_params"] as? NSDictionary {
+            self.gov_tallying = GovTallying.init(rawShentuGovTallying)
         }
         
         
@@ -366,10 +390,10 @@ public struct Params {
             self.stargaze_alloc_params = StargazeAllocParam.init(rawStargazeAllocParam)
         }
         
-        if let rawEvmosInflationParam = dictionary?["inflation_params"] as? NSDictionary {
+        if let rawEvmosInflationParam = dictionary?["evmos_inflation_params"] as? NSDictionary {
             self.evmos_inflation_params = EvmosInflationParam.init(rawEvmosInflationParam)
         }
-        if let rawEvmosEpochMintingProvisions = dictionary?["epoch_mint_provision"] as? NSDictionary {
+        if let rawEvmosEpochMintingProvisions = dictionary?["evmos_epoch_mint_provision"] as? NSDictionary {
             self.evmos_minting_epoch_provisions = rawEvmosEpochMintingProvisions.value(forKeyPath: "epoch_mint_provision.amount") as? String
         }
         
@@ -731,8 +755,7 @@ public struct EmoneyMintingInflation {
     var assets = Array<EmoneyMintingAsset>()
     
     init(_ dictionary: NSDictionary?) {
-        let result = dictionary?["result"] as? NSDictionary
-        let assets = result?["assets"] as? Array<NSDictionary>
+        let assets = dictionary?["assets"] as? Array<NSDictionary>
         assets?.forEach{ asset in
             self.assets.append(EmoneyMintingAsset.init(asset))
         }

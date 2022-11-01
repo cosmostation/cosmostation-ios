@@ -47,6 +47,8 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
         loadingImg.startAnimating()
         onFetchgRPCSwapPool(pageHolderVC.mKavaSwapPool!.name)
         
+        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
         btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
         btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }

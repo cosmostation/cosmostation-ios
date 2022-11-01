@@ -43,11 +43,11 @@ class ChainNyx: ChainConfig {
     var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
-    var grpcUrl = "lcd-nym-app.cosmostation.io"
+    var grpcUrl = "lcd-nyx-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-nym-app.cosmostation.io/"
-    var apiUrl = "https://api-nym.cosmostation.io/"
+    var lcdUrl = "https://lcd-nyx-app.cosmostation.io/"
+    var apiUrl = "https://api-nyx.cosmostation.io/"
     var explorerUrl = MintscanUrl + "nyx/"
     var validatorImgUrl = MonikerUrl + "nyx/"
     var priceUrl = ""
