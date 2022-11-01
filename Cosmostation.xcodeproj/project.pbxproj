@@ -1195,7 +1195,6 @@
 		04E25D5027749A92009B39BA /* GenNFT0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D4E27749A92009B39BA /* GenNFT0ViewController.xib */; };
 		04E25D5327749AA0009B39BA /* GenNFT3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25D5127749AA0009B39BA /* GenNFT3ViewController.swift */; };
 		04E25D5427749AA0009B39BA /* GenNFT3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D5227749AA0009B39BA /* GenNFT3ViewController.xib */; };
-		04E2A32327A5787A0045ED21 /* Cw20Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32227A5787A0045ED21 /* Cw20Token.swift */; };
 		04E2A32527A57D270045ED21 /* Cw20BalanceReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32427A57D270045ED21 /* Cw20BalanceReq.swift */; };
 		04E2A32727A581720045ED21 /* Cw20BalanceRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32627A581720045ED21 /* Cw20BalanceRes.swift */; };
 		04E6AB9D28635804008DC3C7 /* CdpCreate1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6AB9B28635804008DC3C7 /* CdpCreate1ViewController.swift */; };
@@ -1869,7 +1868,6 @@
 		18FFB4A3281AF533004E65BB /* EarnUnbondingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283EB77B26C8289900B9D28D /* EarnUnbondingCell.swift */; };
 		18FFB4A5281AF533004E65BB /* SifSwap3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C59271E7B7800B4A7C3 /* SifSwap3ViewController.swift */; };
 		18FFB4AB281AF533004E65BB /* HarvestDetailTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28156E982536DE14006FF06C /* HarvestDetailTopCell.swift */; };
-		18FFB4AC281AF533004E65BB /* Cw20Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32227A5787A0045ED21 /* Cw20Token.swift */; };
 		18FFB4AF281AF533004E65BB /* NTFDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25D3F2770C8BE009B39BA /* NTFDetailViewController.swift */; };
 		18FFB4B0281AF533004E65BB /* SifJoinPool3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C61271E7BA300B4A7C3 /* SifJoinPool3ViewController.swift */; };
 		18FFB4B1281AF533004E65BB /* OkMyValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4304524F8B36600BD7BB2 /* OkMyValidatorViewController.swift */; };
@@ -3692,7 +3690,6 @@
 		04E25D4E27749A92009B39BA /* GenNFT0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenNFT0ViewController.xib; sourceTree = "<group>"; };
 		04E25D5127749AA0009B39BA /* GenNFT3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenNFT3ViewController.swift; sourceTree = "<group>"; };
 		04E25D5227749AA0009B39BA /* GenNFT3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenNFT3ViewController.xib; sourceTree = "<group>"; };
-		04E2A32227A5787A0045ED21 /* Cw20Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20Token.swift; sourceTree = "<group>"; };
 		04E2A32427A57D270045ED21 /* Cw20BalanceReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20BalanceReq.swift; sourceTree = "<group>"; };
 		04E2A32627A581720045ED21 /* Cw20BalanceRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20BalanceRes.swift; sourceTree = "<group>"; };
 		04E6AB9B28635804008DC3C7 /* CdpCreate1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CdpCreate1ViewController.swift; sourceTree = "<group>"; };
@@ -5985,7 +5982,6 @@
 				04E165BC28B62133000F12C0 /* MintscanToken.swift */,
 				043031EC28C2136F005FF935 /* MintscanPath.swift */,
 				046BD21F27788723002333B5 /* StationNFTData.swift */,
-				04E2A32227A5787A0045ED21 /* Cw20Token.swift */,
 				04E2A32427A57D270045ED21 /* Cw20BalanceReq.swift */,
 				04E2A32627A581720045ED21 /* Cw20BalanceRes.swift */,
 				0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */,
@@ -7687,7 +7683,6 @@
 				18FFB4A5281AF533004E65BB /* SifSwap3ViewController.swift in Sources */,
 				1817CB7B283E2CE500523713 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
 				18FFB4AB281AF533004E65BB /* HarvestDetailTopCell.swift in Sources */,
-				18FFB4AC281AF533004E65BB /* Cw20Token.swift in Sources */,
 				1817CC0E283E2CE600523713 /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,
 				18FFB4AF281AF533004E65BB /* NTFDetailViewController.swift in Sources */,
 				1817CBA1283E2CE500523713 /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
@@ -8756,7 +8751,6 @@
 				048C830127BF572800270528 /* evmos_epochs_v1_genesis.pb.swift in Sources */,
 				040FA928275F55C300229F6F /* cosmos_nft_v1beta1_genesis.pb.swift in Sources */,
 				28156E9A2536DE14006FF06C /* HarvestDetailTopCell.swift in Sources */,
-				04E2A32327A5787A0045ED21 /* Cw20Token.swift in Sources */,
 				047FB6F2281A4C53009D8AAF /* sifnode_dispensation_v1_tx.pb.swift in Sources */,
 				04E25D412770C8BE009B39BA /* NTFDetailViewController.swift in Sources */,
 				28440C63271E7BA300B4A7C3 /* SifJoinPool3ViewController.swift in Sources */,
