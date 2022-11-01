@@ -44,11 +44,11 @@ class ChainStarname: ChainConfig {
     var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
-    var grpcUrl = "lcd-iov-app.cosmostation.io"
+    var grpcUrl = "lcd-starname-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-iov-app.cosmostation.io/"
-    var apiUrl = "https://api-iov.cosmostation.io/"
+    var lcdUrl = "https://lcd-starname-app.cosmostation.io/"
+    var apiUrl = "https://api-starname.cosmostation.io/"
     var explorerUrl = MintscanUrl + "starname/"
     var validatorImgUrl = MonikerUrl + "iov/"
     var priceUrl = CoingeckoUrl + "starname"

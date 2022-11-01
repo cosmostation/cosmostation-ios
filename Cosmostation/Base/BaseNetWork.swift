@@ -307,6 +307,13 @@ class BaseNetWork {
     }
     
     static func getParams(_ chainId: String) -> String {
+        //TODO hardcoing for V3
+        var chainId = chainId
+        if (chainId == "cryptoorg") {
+            chainId = "crypto-org"
+        } else if (chainId == "kichain") {
+            chainId = "ki-chain"
+        }
         return MINTSCAN_API_URL + "v1/utils/params/chain/" + chainId
     }
     

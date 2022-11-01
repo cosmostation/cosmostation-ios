@@ -50,7 +50,7 @@ class ChainCosmos: ChainConfig {
     var grpcPort = 9090
     var rpcUrl = ""
     var lcdUrl = "https://lcd-cosmos-app.cosmostation.io/"
-    var apiUrl = "https://api.cosmostation.io/"
+    var apiUrl = "https://api-cosmos.cosmostation.io/"
     var explorerUrl = MintscanUrl + "cosmos/"
     var validatorImgUrl = MonikerUrl + "cosmoshub/"
     var priceUrl = CoingeckoUrl + "cosmos"

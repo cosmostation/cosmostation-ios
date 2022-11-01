@@ -43,11 +43,11 @@ class ChainInjective: ChainConfig {
     var evmSupport = false
     var wcSupoort = false
     var authzSupoort = true
-    var grpcUrl = "lcd-inj-app.cosmostation.io"
+    var grpcUrl = "lcd-injective-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-inj-app.cosmostation.io/"
-    var apiUrl = "https://api-inj.cosmostation.io/"
+    var lcdUrl = "https://lcd-injective-app.cosmostation.io/"
+    var apiUrl = "https://api-injective.cosmostation.io/"
     var explorerUrl = MintscanUrl + "injective/"
     var validatorImgUrl = MonikerUrl + "injective/"
     var priceUrl = CoingeckoUrl + "injective-protocol"
