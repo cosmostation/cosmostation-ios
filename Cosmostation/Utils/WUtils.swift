@@ -228,9 +228,9 @@ public class WUtils {
     
     static func price(_ denom: String) -> NSDecimalNumber {
         guard let coinPrice = BaseData.instance.getPrice(denom) else {
-            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler3Down)
+            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler12Down)
         }
-        return NSDecimalNumber.init(value: coinPrice.current_price ?? 0).rounding(accordingToBehavior: handler3Down)
+        return NSDecimalNumber.init(value: coinPrice.current_price ?? 0).rounding(accordingToBehavior: handler12Down)
     }
     
     static func dpPrice(_ denom: String, _ font:UIFont) -> NSMutableAttributedString {
