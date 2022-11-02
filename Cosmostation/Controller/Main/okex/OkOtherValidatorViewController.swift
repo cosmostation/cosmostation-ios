@@ -40,7 +40,7 @@ class OkOtherValidatorViewController: BaseViewController, UITableViewDelegate, U
 
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-        self.refresher.tintColor = UIColor(named: "_font05")
+        self.refresher.tintColor = UIColor.font05
         self.okOtherValidatorTableView.addSubview(refresher)
         
         self.okOtherValidatorLabel.text = NSLocalizedString("str_validators", comment: "")
@@ -87,17 +87,17 @@ class OkOtherValidatorViewController: BaseViewController, UITableViewDelegate, U
         cell?.monikerLabel.adjustsFontSizeToFitWidth = true
         if (validator.jailed) {
             cell?.revokedImg.isHidden = false
-            cell?.validatorImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            cell?.validatorImg.layer.borderColor = UIColor.warnRed.cgColor
         } else {
             cell?.revokedImg.isHidden = true
-            cell?.validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            cell?.validatorImg.layer.borderColor = UIColor.font04.cgColor
         }
         cell?.powerLabel.attributedText =  WDP.dpAmount(validator.delegator_shares, cell!.powerLabel.font, 0, 0)
         cell?.commissionLabel.attributedText = WUtils.displayCommission("0", font: cell!.commissionLabel.font)
         if (self.mMyValidator.contains(where: {$0.operator_address == validator.operator_address})) {
             cell?.cardView.backgroundColor = UIColor.init(named: "okc_bg")
         } else {
-            cell?.cardView.backgroundColor = UIColor.init(named: "_card_bg")
+            cell?.cardView.backgroundColor = UIColor.cardBg
         }
         if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operator_address)) {
             cell?.validatorImg.af_setImage(withURL: url)

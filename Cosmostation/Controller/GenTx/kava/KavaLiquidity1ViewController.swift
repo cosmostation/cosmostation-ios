@@ -48,27 +48,27 @@ class KavaLiquidity1ViewController: BaseViewController, UITextFieldDelegate {
         let dp = "+ " + WUtils.decimalNumberToLocaleString(NSDecimalNumber(string: "0.1"), 1)
         btnAdd01.setTitle(dp, for: .normal)
         
-        btnBack.borderColor = UIColor.init(named: "_font05")
+        btnBack.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
-        btnAdd01.borderColor = UIColor.init(named: "_font05")
-        btn1.borderColor = UIColor.init(named: "_font05")
-        btn10.borderColor = UIColor.init(named: "_font05")
-        btn100.borderColor = UIColor.init(named: "_font05")
-        btnHalf.borderColor = UIColor.init(named: "_font05")
-        btnMax.borderColor = UIColor.init(named: "_font05")
+        btnAdd01.borderColor = UIColor.font05
+        btn1.borderColor = UIColor.font05
+        btn10.borderColor = UIColor.font05
+        btn100.borderColor = UIColor.font05
+        btnHalf.borderColor = UIColor.font05
+        btnMax.borderColor = UIColor.font05
         btnBack.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
         btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnBack.borderColor = UIColor.init(named: "_font05")
+        btnBack.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
-        btnAdd01.borderColor = UIColor.init(named: "_font05")
-        btn1.borderColor = UIColor.init(named: "_font05")
-        btn10.borderColor = UIColor.init(named: "_font05")
-        btn100.borderColor = UIColor.init(named: "_font05")
-        btnHalf.borderColor = UIColor.init(named: "_font05")
-        btnMax.borderColor = UIColor.init(named: "_font05")
+        btnAdd01.borderColor = UIColor.font05
+        btn1.borderColor = UIColor.font05
+        btn10.borderColor = UIColor.font05
+        btn100.borderColor = UIColor.font05
+        btnHalf.borderColor = UIColor.font05
+        btnMax.borderColor = UIColor.font05
     }
     
     override func enableUserInteraction() {
@@ -107,24 +107,24 @@ class KavaLiquidity1ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUIupdate() {
         guard let text = amountTextField.text?.trimmingCharacters(in: .whitespaces) else {
-            self.amountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.amountTextField.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if(text.count == 0) {
-            self.amountTextField.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            self.amountTextField.layer.borderColor = UIColor.font04.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            self.amountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.amountTextField.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: dpDecimal).compare(userAvailable).rawValue > 0) {
-            self.amountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.amountTextField.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        self.amountTextField.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        self.amountTextField.layer.borderColor = UIColor.font04.cgColor
     }
     
     func isValiadAmount() -> Bool {

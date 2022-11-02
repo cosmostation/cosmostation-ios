@@ -177,7 +177,7 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
             if (mMyDomainInfo_gRPC?.type == "open") {
                 myDomainType.textColor = UIColor.init(named: "starname")
             } else {
-                myDomainType.textColor = UIColor.init(named: "_font05")
+                myDomainType.textColor = UIColor.font05
             }
         }
     }

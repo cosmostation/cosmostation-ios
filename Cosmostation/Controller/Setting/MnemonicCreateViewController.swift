@@ -125,7 +125,7 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
             self.mnemonicLabels[i].adjustsFontSizeToFitWidth = true
             self.mnemonicLayers[i].layer.borderWidth = 1
             self.mnemonicLayers[i].layer.cornerRadius = 4
-            self.mnemonicLayers[i].layer.borderColor = UIColor.init(named: "_font04")!.cgColor
+            self.mnemonicLayers[i].layer.borderColor = UIColor.font04.cgColor
         }
         
         if (isDisplay) {

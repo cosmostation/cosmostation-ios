@@ -43,7 +43,7 @@ class GenProfile0ViewController: BaseViewController, UIImagePickerControllerDele
         
         self.profileImageView.layer.borderWidth = 1
         self.profileImageView.layer.masksToBounds = false
-        self.profileImageView.layer.borderColor = UIColor(named: "_font05")!.cgColor
+        self.profileImageView.layer.borderColor = UIColor.font05.cgColor
         self.profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         self.profileImageView.clipsToBounds = true
         
@@ -66,13 +66,13 @@ class GenProfile0ViewController: BaseViewController, UIImagePickerControllerDele
     func inInitView() {
         addCoverBtn.alignTextBelow()
         dTagTextView.layer.borderWidth = 1.0
-        dTagTextView.layer.borderColor = UIColor.init(named: "_font05")!.cgColor
+        dTagTextView.layer.borderColor = UIColor.font05.cgColor
         dTagTextView.layer.cornerRadius = 8
         nickNameTextView.layer.borderWidth = 1.0
-        nickNameTextView.layer.borderColor = UIColor.init(named: "_font05")!.cgColor
+        nickNameTextView.layer.borderColor = UIColor.font05.cgColor
         nickNameTextView.layer.cornerRadius = 8
         bioTextView.layer.borderWidth = 1.0
-        bioTextView.layer.borderColor = UIColor.init(named: "_font05")!.cgColor
+        bioTextView.layer.borderColor = UIColor.font05.cgColor
         bioTextView.layer.cornerRadius = 8
         
         onUpdateCoverImgView(nil)
@@ -116,7 +116,7 @@ class GenProfile0ViewController: BaseViewController, UIImagePickerControllerDele
             coverImageView.clipsToBounds = true
             coverImageView.layer.cornerRadius = 8
             let dashBorder = CAShapeLayer()
-            dashBorder.strokeColor = UIColor.init(named: "_font05")!.cgColor
+            dashBorder.strokeColor = UIColor.font05.cgColor
             dashBorder.lineWidth = 1
             dashBorder.lineDashPattern = [2, 4]
             dashBorder.fillColor = nil

@@ -46,7 +46,7 @@ public class WDP {
                 return
             }
         }
-        denomLabel?.textColor = UIColor(named: "_font05")
+        denomLabel?.textColor = UIColor.font05
     }
     
     static func dpSymbolImg(_ chainConfig: ChainConfig?, _ denom: String?, _ imgView: UIImageView?) {

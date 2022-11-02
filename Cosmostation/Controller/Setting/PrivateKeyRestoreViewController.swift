@@ -123,9 +123,9 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnCancel.borderColor = UIColor.init(named: "_font05")
-        btnScan.borderColor = UIColor.init(named: "_font05")
-        btnPaste.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
+        btnScan.borderColor = UIColor.font05
+        btnPaste.borderColor = UIColor.font05
     }
 
 }

@@ -28,12 +28,12 @@ class AuthzVote5ViewController: BaseViewController, PasswordViewDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        mBtnBack.borderColor = UIColor.init(named: "_font05")
+        mBtnBack.borderColor = UIColor.font05
         mBtnConfirm.borderColor = UIColor.init(named: "photon")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        mBtnBack.borderColor = UIColor.init(named: "_font05")
+        mBtnBack.borderColor = UIColor.font05
         mBtnConfirm.borderColor = UIColor.init(named: "photon")
     }
     

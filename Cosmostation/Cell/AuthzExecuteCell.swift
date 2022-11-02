@@ -28,10 +28,10 @@ class AuthzExecuteCell: UITableViewCell {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        authzTitleLabel.textColor = UIColor.init(named: "_font05")
-        authzExpireDateLabel.textColor = UIColor.init(named: "_font05")
-        authzLimitAmountLabel.textColor = UIColor.init(named: "_font05")
-        authzLimitAddressLabel.textColor = UIColor.init(named: "_font05")
+        authzTitleLabel.textColor = UIColor.font05
+        authzExpireDateLabel.textColor = UIColor.font05
+        authzLimitAmountLabel.textColor = UIColor.font05
+        authzLimitAddressLabel.textColor = UIColor.font05
     }
     
     func onBindSend(_ chainConfig: ChainConfig?, _ grant: Cosmos_Authz_V1beta1_Grant?) {
@@ -196,17 +196,17 @@ class AuthzExecuteCell: UITableViewCell {
     func setColor(_ hasAuth: Bool) {
         if (hasAuth) {
             authzIconImgView.image = authzIconImgView.image?.withRenderingMode(.alwaysTemplate)
-            authzIconImgView.tintColor = UIColor.init(named: "_font05")
-            authzTitleLabel.textColor = UIColor.init(named: "_font05")
-            authzLimitAmountLabel.textColor = UIColor.init(named: "_font05")
-            authzLimitAddressLabel.textColor = UIColor.init(named: "_font05")
+            authzIconImgView.tintColor = UIColor.font05
+            authzTitleLabel.textColor = UIColor.font05
+            authzLimitAmountLabel.textColor = UIColor.font05
+            authzLimitAddressLabel.textColor = UIColor.font05
             
         } else {
             authzIconImgView.image = authzIconImgView.image?.withRenderingMode(.alwaysTemplate)
-            authzIconImgView.tintColor = UIColor.init(named: "_font04")
-            authzTitleLabel.textColor = UIColor.init(named: "_font04")
-            authzLimitAmountLabel.textColor = UIColor.init(named: "_font04")
-            authzLimitAddressLabel.textColor = UIColor.init(named: "_font04")
+            authzIconImgView.tintColor = UIColor.font04
+            authzTitleLabel.textColor = UIColor.font04
+            authzLimitAmountLabel.textColor = UIColor.font04
+            authzLimitAddressLabel.textColor = UIColor.font04
             authzExpireDateLabel.text = ""
             authzLimitAmountLabel.text = ""
             authzLimitAddressLabel.text = ""

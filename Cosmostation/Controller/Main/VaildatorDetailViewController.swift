@@ -49,7 +49,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(onFetch), for: .valueChanged)
-        refresher.tintColor = UIColor(named: "_font05")
+        refresher.tintColor = UIColor.font05
         validatorDetailTableView.addSubview(refresher)
         
         self.loadingImg.onStartAnimation()

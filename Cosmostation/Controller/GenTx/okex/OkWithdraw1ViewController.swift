@@ -68,25 +68,25 @@ class OkWithdraw1ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUIupdate() {
         guard let text = toWithdrawAmountInput.text?.trimmingCharacters(in: .whitespaces) else {
-            self.toWithdrawAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.toWithdrawAmountInput.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if(text.count == 0) {
-            self.toWithdrawAmountInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            self.toWithdrawAmountInput.layer.borderColor = UIColor.font04.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            self.toWithdrawAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.toWithdrawAmountInput.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (userInput.compare(userAvailable).rawValue > 0) {
-            self.toWithdrawAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.toWithdrawAmountInput.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        self.toWithdrawAmountInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        self.toWithdrawAmountInput.layer.borderColor = UIColor.font04.cgColor
     }
     
     func isValiadAmount() -> Bool {

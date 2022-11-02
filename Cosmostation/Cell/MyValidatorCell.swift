@@ -27,7 +27,7 @@ class MyValidatorCell: UITableViewCell {
         super.awakeFromNib()
         validatorImg.layer.borderWidth = 1
         validatorImg.layer.masksToBounds = false
-        validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        validatorImg.layer.borderColor = UIColor.font04.cgColor
         validatorImg.layer.cornerRadius = validatorImg.frame.height/2
         validatorImg.clipsToBounds = true
         
@@ -57,10 +57,10 @@ class MyValidatorCell: UITableViewCell {
         monikerLabel.adjustsFontSizeToFitWidth = true
         if (validator.jailed == true) {
             revokedImg.isHidden = false
-            validatorImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            validatorImg.layer.borderColor = UIColor.warnRed.cgColor
         } else {
             revokedImg.isHidden = true
-            validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            validatorImg.layer.borderColor = UIColor.font04.cgColor
         }
         
         myDelegatedAmoutLabel.attributedText = WDP.dpAmount(BaseData.instance.getDelegated_gRPC(validator.operatorAddress).stringValue, myDelegatedAmoutLabel.font, chainConfig!.divideDecimal, 6)
@@ -90,10 +90,10 @@ class MyValidatorCell: UITableViewCell {
         monikerLabel.adjustsFontSizeToFitWidth = true
         if (validator.jailed == true) {
             revokedImg.isHidden = false
-            validatorImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            validatorImg.layer.borderColor = UIColor.warnRed.cgColor
         } else {
             revokedImg.isHidden = true
-            validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            validatorImg.layer.borderColor = UIColor.font04.cgColor
         }
         
         //DP granter delegation amount

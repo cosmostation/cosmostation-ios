@@ -27,7 +27,7 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
         pageHolderVC = self.parent as? StepGenTxViewController
         
         memoInputTextView.layer.cornerRadius = 8
-        memoInputTextView.tintColor = UIColor.init(named: "_font05")
+        memoInputTextView.tintColor = UIColor.font05
         memoInputTextView.clipsToBounds = true
         memoInputTextView.delegate = self
         
@@ -48,10 +48,10 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
             self.emptyMemoMsg.isHidden = true
         }
         
-        memoInputTextView.layer.borderColor = UIColor.init(named: "_font04")!.cgColor
-        scanBtn.borderColor = UIColor.init(named: "_font05")
-        pasteBtn.borderColor = UIColor.init(named: "_font05")
-        beforeBtn.borderColor = UIColor.init(named: "_font05")
+        memoInputTextView.layer.borderColor = UIColor.font04.cgColor
+        scanBtn.borderColor = UIColor.font05
+        pasteBtn.borderColor = UIColor.font05
+        beforeBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
         
         emptyMemoMsg.text = NSLocalizedString("msg_memo", comment: "")
@@ -62,10 +62,10 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        memoInputTextView.layer.borderColor = UIColor.init(named: "_font04")!.cgColor
-        scanBtn.borderColor = UIColor.init(named: "_font05")
-        pasteBtn.borderColor = UIColor.init(named: "_font05")
-        beforeBtn.borderColor = UIColor.init(named: "_font05")
+        memoInputTextView.layer.borderColor = UIColor.font04.cgColor
+        scanBtn.borderColor = UIColor.font05
+        pasteBtn.borderColor = UIColor.font05
+        beforeBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
     }
     
@@ -123,17 +123,17 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
         if (chainType == ChainType.BINANCE_MAIN) {
             memoCntLabel.text = String(byteArray.count) + "/100 byte"
             if (byteArray.count > 100) {
-                self.memoInputTextView.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+                self.memoInputTextView.layer.borderColor = UIColor.warnRed.cgColor
             } else {
-                self.memoInputTextView.layer.borderColor = UIColor(named: "_font04")!.cgColor
+                self.memoInputTextView.layer.borderColor = UIColor.font04.cgColor
             }
             
         } else {
             memoCntLabel.text = String(byteArray.count) + "/255 byte"
             if (byteArray.count > 255) {
-                self.memoInputTextView.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+                self.memoInputTextView.layer.borderColor = UIColor.warnRed.cgColor
             } else {
-                self.memoInputTextView.layer.borderColor = UIColor(named: "_font04")!.cgColor
+                self.memoInputTextView.layer.borderColor = UIColor.font04.cgColor
             }
             
         }

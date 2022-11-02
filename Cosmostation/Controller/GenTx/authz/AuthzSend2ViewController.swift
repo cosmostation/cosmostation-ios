@@ -59,26 +59,26 @@ class AuthzSend2ViewController: BaseViewController, UITextFieldDelegate, SBCardP
         
         onUpdateView()
         
-        backBtn.borderColor = UIColor.init(named: "_font05")
+        backBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
-        btn01.borderColor = UIColor.init(named: "_font05")
-        btn1.borderColor = UIColor.init(named: "_font05")
-        btn10.borderColor = UIColor.init(named: "_font05")
-        btn100.borderColor = UIColor.init(named: "_font05")
-        btnHalf.borderColor = UIColor.init(named: "_font05")
-        btnMax.borderColor = UIColor.init(named: "_font05")
+        btn01.borderColor = UIColor.font05
+        btn1.borderColor = UIColor.font05
+        btn10.borderColor = UIColor.font05
+        btn100.borderColor = UIColor.font05
+        btnHalf.borderColor = UIColor.font05
+        btnMax.borderColor = UIColor.font05
         
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        backBtn.borderColor = UIColor.init(named: "_font05")
+        backBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
-        btn01.borderColor = UIColor.init(named: "_font05")
-        btn1.borderColor = UIColor.init(named: "_font05")
-        btn10.borderColor = UIColor.init(named: "_font05")
-        btn100.borderColor = UIColor.init(named: "_font05")
-        btnHalf.borderColor = UIColor.init(named: "_font05")
-        btnMax.borderColor = UIColor.init(named: "_font05")
+        btn01.borderColor = UIColor.font05
+        btn1.borderColor = UIColor.font05
+        btn10.borderColor = UIColor.font05
+        btn100.borderColor = UIColor.font05
+        btnHalf.borderColor = UIColor.font05
+        btnMax.borderColor = UIColor.font05
     }
     
     override func enableUserInteraction() {
@@ -153,24 +153,24 @@ class AuthzSend2ViewController: BaseViewController, UITextFieldDelegate, SBCardP
     
     func onUIupdate() {
         guard let text = mTargetAmountTextField.text?.trimmingCharacters(in: .whitespaces) else {
-            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if(text.count == 0) {
-            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor.font04.cgColor
             return
         }
 
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: divideDecimal).compare(maxAvailable).rawValue > 0) {
-            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        self.mTargetAmountTextField.layer.borderColor = UIColor.font04.cgColor
     }
     
     func isValiadAmount() -> Bool {

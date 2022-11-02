@@ -65,9 +65,9 @@ class TokenDetailVestingDetailCell: UITableViewCell {
             if (denom == KAVA_MAIN_DENOM) {
                 rootCardView.backgroundColor = chainConfig.chainColorBG
             } else if (denom == KAVA_HARD_DENOM) {
-                rootCardView.backgroundColor = UIColor.init(named: "_card_bg")
+                rootCardView.backgroundColor = UIColor.cardBg
             } else if (denom == KAVA_SWAP_DENOM) {
-                rootCardView.backgroundColor = UIColor.init(named: "_card_bg")
+                rootCardView.backgroundColor = UIColor.cardBg
             }
             onBindVesting_gRPC(denom)
             

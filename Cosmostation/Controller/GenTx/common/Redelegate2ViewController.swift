@@ -31,14 +31,14 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
         self.redelegateToValTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.redelegateToValTableView.register(UINib(nibName: "RedelegateCell", bundle: nil), forCellReuseIdentifier: "RedelegateCell")
         
-        btnBefore.borderColor = UIColor.init(named: "_font05")
+        btnBefore.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
         btnBefore.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
         btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnBefore.borderColor = UIColor.init(named: "_font05")
+        btnBefore.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
     }
     
@@ -53,10 +53,10 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
         cell?.valMonikerLabel.adjustsFontSizeToFitWidth = true
         if (validator.jailed == true) {
             cell?.valjailedImg.isHidden = false
-            cell?.valjailedImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            cell?.valjailedImg.layer.borderColor = UIColor.warnRed.cgColor
         } else {
             cell?.valjailedImg.isHidden = true
-            cell?.valjailedImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            cell?.valjailedImg.layer.borderColor = UIColor.font04.cgColor
         }
         
         cell?.valPowerLabel.attributedText = WDP.dpAmount(validator.tokens, cell!.valPowerLabel.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
@@ -69,7 +69,7 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
             cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
             cell?.valCheckedImg.tintColor = chainConfig?.chainColor
             cell?.rootCard.layer.borderWidth = 1
-            cell?.rootCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
+            cell?.rootCard.layer.borderColor = UIColor.font05.cgColor
             cell?.rootCard.clipsToBounds = true
         } else {
             cell?.valCheckedImg.image = UIImage.init(named: "iconCheck")
@@ -93,7 +93,7 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
         cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
         cell?.valCheckedImg.tintColor = chainConfig?.chainColor
         cell?.rootCard.layer.borderWidth = 1
-        cell?.rootCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
+        cell?.rootCard.layer.borderColor = UIColor.font05.cgColor
         cell?.rootCard.clipsToBounds = true
     }
     

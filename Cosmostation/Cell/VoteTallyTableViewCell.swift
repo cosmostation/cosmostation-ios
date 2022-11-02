@@ -47,13 +47,13 @@ class VoteTallyTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         myVoteYes.image = myVoteYes.image?.withRenderingMode(.alwaysTemplate)
-        myVoteYes.tintColor = UIColor(named: "_font05")
+        myVoteYes.tintColor = UIColor.font05
         myVoteNo.image = myVoteNo.image?.withRenderingMode(.alwaysTemplate)
-        myVoteNo.tintColor = UIColor(named: "_font05")
+        myVoteNo.tintColor = UIColor.font05
         myVoteVeto.image = myVoteVeto.image?.withRenderingMode(.alwaysTemplate)
-        myVoteVeto.tintColor = UIColor(named: "_font05")
+        myVoteVeto.tintColor = UIColor.font05
         myVoteAbstain.image = myVoteAbstain.image?.withRenderingMode(.alwaysTemplate)
-        myVoteAbstain.tintColor = UIColor(named: "_font05")
+        myVoteAbstain.tintColor = UIColor.font05
     }
     
     func onCheckMyVote_gRPC(_ option: Cosmos_Gov_V1beta1_VoteOption?) {
@@ -64,55 +64,55 @@ class VoteTallyTableViewCell: UITableViewCell {
             myVoteYes.isHidden = false
             titleYes.textColor = UIColor.init(named: "_voteYes")
             progressYes.progressTintColor = UIColor(named: "_voteYes")
-            percentYes.textColor = UIColor.init(named: "_font05")
-            cntYes.textColor = UIColor.init(named: "_font05")
+            percentYes.textColor = UIColor.font05
+            cntYes.textColor = UIColor.font05
 
         } else if (option == Cosmos_Gov_V1beta1_VoteOption.no) {
             cardNo.borderWidth = 1
             myVoteNo.isHidden = false
             titleNo.textColor = UIColor.init(named: "_voteNo")
             progressNo.progressTintColor = UIColor(named: "_voteNo")
-            percentNo.textColor = UIColor.init(named: "_font05")
-            cntNo.textColor = UIColor.init(named: "_font05")
+            percentNo.textColor = UIColor.font05
+            cntNo.textColor = UIColor.font05
 
         } else if (option == Cosmos_Gov_V1beta1_VoteOption.noWithVeto) {
             cardVeto.borderWidth = 1
             myVoteVeto.isHidden = false
             titleVeto.textColor = UIColor.init(named: "_voteVeto")
             progressVeto.progressTintColor = UIColor(named: "_voteVeto")
-            percentVeto.textColor = UIColor.init(named: "_font05")
-            cntVeto.textColor = UIColor.init(named: "_font05")
+            percentVeto.textColor = UIColor.font05
+            cntVeto.textColor = UIColor.font05
 
         } else if (option == Cosmos_Gov_V1beta1_VoteOption.abstain) {
             cardAbstain.borderWidth = 1
             myVoteAbstain.isHidden = false
             titleAbstain.textColor = UIColor.init(named: "_voteAbstain")
             propressAbstain.progressTintColor = UIColor(named: "_voteAbstain")
-            percentAbstain.textColor = UIColor.init(named: "_font05")
-            cntAbstain.textColor = UIColor.init(named: "_font05")
+            percentAbstain.textColor = UIColor.font05
+            cntAbstain.textColor = UIColor.font05
         }
     }
     
     func onCheckDim() {
-        titleYes.textColor = UIColor.init(named: "_font03")
-        progressYes.progressTintColor = UIColor(named: "_font04")
-        percentYes.textColor = UIColor.init(named: "_font03")
-        cntYes.textColor = UIColor.init(named: "_font03")
+        titleYes.textColor = UIColor.font03
+        progressYes.progressTintColor = UIColor.font04
+        percentYes.textColor = UIColor.font03
+        cntYes.textColor = UIColor.font03
         
-        titleNo.textColor = UIColor.init(named: "_font03")
-        progressNo.progressTintColor = UIColor(named: "_font04")
-        percentNo.textColor = UIColor.init(named: "_font03")
-        cntNo.textColor = UIColor.init(named: "_font03")
+        titleNo.textColor = UIColor.font03
+        progressNo.progressTintColor = UIColor.font04
+        percentNo.textColor = UIColor.font03
+        cntNo.textColor = UIColor.font03
         
-        titleVeto.textColor = UIColor.init(named: "_font03")
-        progressVeto.progressTintColor = UIColor(named: "_font04")
-        percentVeto.textColor = UIColor.init(named: "_font03")
-        cntVeto.textColor = UIColor.init(named: "_font03")
+        titleVeto.textColor = UIColor.font03
+        progressVeto.progressTintColor = UIColor.font04
+        percentVeto.textColor = UIColor.font03
+        cntVeto.textColor = UIColor.font03
         
-        titleAbstain.textColor = UIColor.init(named: "_font03")
-        propressAbstain.progressTintColor = UIColor(named: "_font04")
-        percentAbstain.textColor = UIColor.init(named: "_font03")
-        cntAbstain.textColor = UIColor.init(named: "_font03")
+        titleAbstain.textColor = UIColor.font03
+        propressAbstain.progressTintColor = UIColor.font04
+        percentAbstain.textColor = UIColor.font03
+        cntAbstain.textColor = UIColor.font03
     }
     
     

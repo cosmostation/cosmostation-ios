@@ -84,10 +84,10 @@ class HarvestDetailMyActionCell: UITableViewCell {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        depositBtn.borderColor = UIColor.init(named: "_font05")
-        withdrawBtn.borderColor = UIColor.init(named: "_font05")
-        borrowBtn.borderColor = UIColor.init(named: "_font05")
-        repayBtn.borderColor = UIColor.init(named: "_font05")
+        depositBtn.borderColor = UIColor.font05
+        withdrawBtn.borderColor = UIColor.font05
+        borrowBtn.borderColor = UIColor.font05
+        repayBtn.borderColor = UIColor.font05
     }
     
 }

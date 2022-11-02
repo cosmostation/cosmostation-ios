@@ -45,7 +45,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onFetchAuthz), for: .valueChanged)
-        self.refresher.tintColor = UIColor(named: "_font05")
+        self.refresher.tintColor = UIColor.font05
         self.authzTableView.addSubview(refresher)
         
         self.loadingImg.onStartAnimation()

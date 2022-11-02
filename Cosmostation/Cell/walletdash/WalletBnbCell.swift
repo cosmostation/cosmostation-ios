@@ -63,8 +63,8 @@ class WalletBnbCell: UITableViewCell {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnWalletConnect.borderColor = UIColor.init(named: "_font05")
-        btnBep3.borderColor = UIColor.init(named: "_font05")
+        btnWalletConnect.borderColor = UIColor.font05
+        btnBep3.borderColor = UIColor.font05
     }
     
 }

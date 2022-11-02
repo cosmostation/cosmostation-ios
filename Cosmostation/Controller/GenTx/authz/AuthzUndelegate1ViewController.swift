@@ -42,12 +42,12 @@ class AuthzUndelegate1ViewController: BaseViewController, UITableViewDelegate, U
         
         self.onUpdateView()
         
-        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
     }
     

@@ -23,7 +23,7 @@ class WcSignRequestPopup: BaseViewController, SBCardPopupContent {
         super.viewDidLoad()
         
         self.wcMsgTextView.text = wcMsg?.prettyJson
-        self.wcMsgTextView.textColor = UIColor.init(named: "_font05")
+        self.wcMsgTextView.textColor = UIColor.font05
     }
 
     @IBAction func onClickCancel(_ sender: UIButton) {

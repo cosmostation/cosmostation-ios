@@ -66,13 +66,13 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
                 sendAmountDenom.textColor = UIColor.init(named: "binance")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BTC) {
                 sendAmountDenom.text = "BTC"
-                sendAmountDenom.textColor = UIColor.init(named: "_font05")
+                sendAmountDenom.textColor = UIColor.font05
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_XRPB) {
                 sendAmountDenom.text = "XRP"
-                sendAmountDenom.textColor = UIColor.init(named: "_font05")
+                sendAmountDenom.textColor = UIColor.font05
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BUSD) {
                 sendAmountDenom.text = "BUSD"
-                sendAmountDenom.textColor = UIColor.init(named: "_font05")
+                sendAmountDenom.textColor = UIColor.font05
             }
             sendAmountLabel.attributedText = WDP.dpAmount(toSendAmount.stringValue, sendAmountLabel.font, 0, 8)
             sendFeeLabel.attributedText = WDP.dpAmount(sendFeeAmount.stringValue, sendFeeLabel.font, 0, 8)
@@ -87,13 +87,13 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
                 sendAmountDenom.textColor = UIColor.init(named: "binance")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BTC) {
                 sendAmountDenom.text = "BTC"
-                sendAmountDenom.textColor = UIColor.init(named: "_font05")
+                sendAmountDenom.textColor = UIColor.font05
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_XRPB) {
                 sendAmountDenom.text = "XRP"
-                sendAmountDenom.textColor = UIColor.init(named: "_font05")
+                sendAmountDenom.textColor = UIColor.font05
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BUSD) {
                 sendAmountDenom.text = "BUSD"
-                sendAmountDenom.textColor = UIColor.init(named: "_font05")
+                sendAmountDenom.textColor = UIColor.font05
             }
             sendAmountLabel.attributedText = WDP.dpAmount(toSendAmount.stringValue, sendAmountLabel.font, mDpDecimal, mDpDecimal)
             sendFeeLabel.attributedText = WDP.dpAmount(sendFeeAmount.stringValue, sendFeeLabel.font, 6, 6)

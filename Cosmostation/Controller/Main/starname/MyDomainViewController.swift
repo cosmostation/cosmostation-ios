@@ -40,7 +40,7 @@ class MyDomainViewController: BaseViewController, UITableViewDelegate, UITableVi
         
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-        self.refresher.tintColor = UIColor(named: "_font05")
+        self.refresher.tintColor = UIColor.font05
         self.myDomainTableView.addSubview(refresher)
         self.myDomainTableView.isHidden = true
         
@@ -69,7 +69,7 @@ class MyDomainViewController: BaseViewController, UITableViewDelegate, UITableVi
             if (starnameAccount.type == "open") {
                 cell?.domainTypeLabel.textColor = UIColor.init(named: "starname")
             } else {
-                cell?.domainTypeLabel.textColor = UIColor.init(named: "_font05")
+                cell?.domainTypeLabel.textColor = UIColor.font05
             }
             let expireTime = starnameAccount.validUntil * 1000
             cell?.domainExpireTime.text = WDP.dpTime(expireTime)

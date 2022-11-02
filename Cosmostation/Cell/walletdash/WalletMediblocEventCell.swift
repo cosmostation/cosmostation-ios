@@ -24,7 +24,7 @@ class WalletMediblocEventCell: UITableViewCell {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnDownload.borderColor = UIColor.init(named: "_font05")
+        btnDownload.borderColor = UIColor.font05
     }
     
 }

@@ -26,19 +26,19 @@ class AuthzSend1ViewController: BaseViewController, QrScannerDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        targetAddressTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "_font04")!])
+        targetAddressTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.font04])
         
-        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
-        scanBtn.borderColor = UIColor.init(named: "_font05")
-        pasteBtn.borderColor = UIColor.init(named: "_font05")
+        scanBtn.borderColor = UIColor.font05
+        pasteBtn.borderColor = UIColor.font05
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
-        scanBtn.borderColor = UIColor.init(named: "_font05")
-        pasteBtn.borderColor = UIColor.init(named: "_font05")
+        scanBtn.borderColor = UIColor.font05
+        pasteBtn.borderColor = UIColor.font05
     }
     
     override func enableUserInteraction() {

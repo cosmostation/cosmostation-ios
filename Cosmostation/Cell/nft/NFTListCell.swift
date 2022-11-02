@@ -25,7 +25,7 @@ class NFTListCell: UITableViewCell {
         super.awakeFromNib()
         nftImgView.layer.borderWidth = 1
         nftImgView.layer.masksToBounds = false
-        nftImgView.layer.borderColor = UIColor.init(named: "_font05")!.cgColor
+        nftImgView.layer.borderColor = UIColor.font05.cgColor
         nftImgView.layer.cornerRadius = 8
         nftImgView.clipsToBounds = true
         self.selectionStyle = .none

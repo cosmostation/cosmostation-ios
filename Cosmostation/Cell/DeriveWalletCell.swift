@@ -56,19 +56,19 @@ class DeriveWalletCell: UITableViewCell {
             statusLabel.text = ""
             dimCardView.isHidden = true
             rootCardView.borderWidth = 0.5
-            rootCardView.borderColor = UIColor.init(named: "_font04")
+            rootCardView.borderColor = UIColor.font04
             
         } else if (derive.status == 0) {
             statusLabel.text = ""
             dimCardView.isHidden = true
             rootCardView.borderWidth = 0.5
-            rootCardView.borderColor = UIColor.init(named: "_font04")
+            rootCardView.borderColor = UIColor.font04
             
         } else if (derive.status == 1) {
             statusLabel.text = ""
             dimCardView.isHidden = true
             rootCardView.borderWidth = 0.5
-            rootCardView.borderColor = UIColor.init(named: "_font04")
+            rootCardView.borderColor = UIColor.font04
             
         } else if (derive.status == 2) {
             statusLabel.text = "Imported"

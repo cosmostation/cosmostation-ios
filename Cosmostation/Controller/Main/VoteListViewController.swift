@@ -47,7 +47,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onFetchProposals), for: .valueChanged)
-        self.refresher.tintColor = UIColor(named: "_font05")
+        self.refresher.tintColor = UIColor.font05
         self.voteTableView.addSubview(refresher)
         
         self.btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)

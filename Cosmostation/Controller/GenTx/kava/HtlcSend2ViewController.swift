@@ -44,17 +44,17 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BTC) {
                 availableDenom.text = "BTC"
-                availableDenom.textColor = UIColor.init(named: "_font05")
+                availableDenom.textColor = UIColor.font05
                 maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!)
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_XRPB) {
                 availableDenom.text = "XRP"
-                availableDenom.textColor = UIColor.init(named: "_font05")
+                availableDenom.textColor = UIColor.font05
                 maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!)
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BUSD) {
                 availableDenom.text = "BUSD"
-                availableDenom.textColor = UIColor.init(named: "_font05")
+                availableDenom.textColor = UIColor.font05
                 maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!)
                 
             }
@@ -81,15 +81,15 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BTC) {
                 availableDenom.text = "BTC"
-                availableDenom.textColor = UIColor.init(named: "_font05")
+                availableDenom.textColor = UIColor.font05
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_XRPB) {
                 availableDenom.text = "XRP"
-                availableDenom.textColor = UIColor.init(named: "_font05")
+                availableDenom.textColor = UIColor.font05
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BUSD) {
                 availableDenom.text = "BUSD"
-                availableDenom.textColor = UIColor.init(named: "_font05")
+                availableDenom.textColor = UIColor.font05
             }
 //            maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!)
             maxAvailable = BaseData.instance.getAvailableAmount_gRPC(self.pageHolderVC.mHtlcDenom!)
@@ -124,39 +124,39 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text?.trimmingCharacters(in: .whitespaces) else {
-            textField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            textField.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (text.count == 0) {
-            textField.layer.borderColor = UIColor.init(named: "_font04")!.cgColor
+            textField.layer.borderColor = UIColor.font04.cgColor
             return
         }
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            textField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            textField.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
             if (userInput.compare(maxAvailable).rawValue > 0) {
-                textField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+                textField.layer.borderColor = UIColor.warnRed.cgColor
                 return
             }
             if (userInput.compare(minAvailable).rawValue <= 0) {
-                textField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+                textField.layer.borderColor = UIColor.warnRed.cgColor
                 return
             }
             
         } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
             if (userInput.multiplying(byPowerOf10: mDpDecimal).compare(maxAvailable).rawValue > 0) {
-                textField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+                textField.layer.borderColor = UIColor.warnRed.cgColor
                 return
             }
             if (userInput.multiplying(byPowerOf10: mDpDecimal).compare(minAvailable).rawValue <= 0) {
-                textField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+                textField.layer.borderColor = UIColor.warnRed.cgColor
                 return
             }
         }
-        textField.layer.borderColor = UIColor.init(named: "_font04")!.cgColor
+        textField.layer.borderColor = UIColor.font04.cgColor
     }
     
     func isValiadAmount() -> Bool {

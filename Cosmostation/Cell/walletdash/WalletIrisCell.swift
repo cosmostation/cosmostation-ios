@@ -71,9 +71,9 @@ class WalletIrisCell: UITableViewCell {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnDelegate.borderColor = UIColor.init(named: "_font05")
-        btnProposal.borderColor = UIColor.init(named: "_font05")
-        btnNtf.borderColor = UIColor.init(named: "_font05")
+        btnDelegate.borderColor = UIColor.font05
+        btnProposal.borderColor = UIColor.font05
+        btnNtf.borderColor = UIColor.font05
     }
     
 }

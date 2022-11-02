@@ -43,25 +43,25 @@ class AuthzUndelegate2ViewController: BaseViewController, UITextFieldDelegate {
         btn01.setTitle(dp, for: .normal)
         
         onUpdateView()
-        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
-        btn01.borderColor = UIColor.init(named: "_font05")
-        btn1.borderColor = UIColor.init(named: "_font05")
-        btn10.borderColor = UIColor.init(named: "_font05")
-        btn100.borderColor = UIColor.init(named: "_font05")
-        btnHalf.borderColor = UIColor.init(named: "_font05")
-        btnMax.borderColor = UIColor.init(named: "_font05")
+        btn01.borderColor = UIColor.font05
+        btn1.borderColor = UIColor.font05
+        btn10.borderColor = UIColor.font05
+        btn100.borderColor = UIColor.font05
+        btnHalf.borderColor = UIColor.font05
+        btnMax.borderColor = UIColor.font05
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
-        btn01.borderColor = UIColor.init(named: "_font05")
-        btn1.borderColor = UIColor.init(named: "_font05")
-        btn10.borderColor = UIColor.init(named: "_font05")
-        btn100.borderColor = UIColor.init(named: "_font05")
-        btnHalf.borderColor = UIColor.init(named: "_font05")
-        btnMax.borderColor = UIColor.init(named: "_font05")
+        btn01.borderColor = UIColor.font05
+        btn1.borderColor = UIColor.font05
+        btn10.borderColor = UIColor.font05
+        btn100.borderColor = UIColor.font05
+        btnHalf.borderColor = UIColor.font05
+        btnMax.borderColor = UIColor.font05
     }
     
     override func enableUserInteraction() {
@@ -120,24 +120,24 @@ class AuthzUndelegate2ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUIupdate() {
         guard let text = toUndelegateAmountInput.text?.trimmingCharacters(in: .whitespaces) else {
-            self.toUndelegateAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.toUndelegateAmountInput.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if(text.count == 0) {
-            self.toUndelegateAmountInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            self.toUndelegateAmountInput.layer.borderColor = UIColor.font04.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            self.toUndelegateAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.toUndelegateAmountInput.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: dpDecimal).compare(granterUndelegatable).rawValue > 0) {
-            self.toUndelegateAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.toUndelegateAmountInput.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        self.toUndelegateAmountInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        self.toUndelegateAmountInput.layer.borderColor = UIColor.font04.cgColor
     }
     
     

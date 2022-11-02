@@ -40,7 +40,7 @@ class OkMyValidatorViewController: BaseViewController, UITableViewDelegate, UITa
 
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-        self.refresher.tintColor = UIColor(named: "_font05")
+        self.refresher.tintColor = UIColor.font05
         self.okMyValidatorTableView.addSubview(refresher)
         
         self.okMyValidatorLabel.text = NSLocalizedString("str_validators", comment: "")
@@ -119,10 +119,10 @@ class OkMyValidatorViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.monikerLabel.adjustsFontSizeToFitWidth = true
             if (validator.jailed) {
                 cell?.revokedImg.isHidden = false
-                cell?.validatorImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+                cell?.validatorImg.layer.borderColor = UIColor.warnRed.cgColor
             } else {
                 cell?.revokedImg.isHidden = true
-                cell?.validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
+                cell?.validatorImg.layer.borderColor = UIColor.font04.cgColor
             }
             cell?.powerLabel.attributedText =  WDP.dpAmount(validator.delegator_shares, cell!.powerLabel.font, 0, 0)
             cell?.commissionLabel.attributedText = WUtils.displayCommission("0", font: cell!.commissionLabel.font)

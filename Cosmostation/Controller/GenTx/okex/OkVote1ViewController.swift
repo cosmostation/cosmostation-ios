@@ -48,10 +48,10 @@ class OkVote1ViewController: BaseViewController, UITableViewDelegate, UITableVie
         cell?.valMonikerLabel.text = validator.description.moniker
         if(validator.jailed) {
             cell?.valjailedImg.isHidden = false
-            cell?.valjailedImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            cell?.valjailedImg.layer.borderColor = UIColor.warnRed.cgColor
         } else {
             cell?.valjailedImg.isHidden = true
-            cell?.valjailedImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            cell?.valjailedImg.layer.borderColor = UIColor.font04.cgColor
         }
         if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operator_address)) {
             cell?.valImg.af_setImage(withURL: url)
@@ -64,7 +64,7 @@ class OkVote1ViewController: BaseViewController, UITableViewDelegate, UITableVie
             cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
             cell?.valCheckedImg.tintColor = UIColor(named: "okc")
             cell?.rootCard.layer.borderWidth = 1
-            cell?.rootCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
+            cell?.rootCard.layer.borderColor = UIColor.font05.cgColor
             cell?.rootCard.clipsToBounds = true
             
         } else {

@@ -59,7 +59,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onFetchCdpData), for: .valueChanged)
-        self.refresher.tintColor = UIColor(named: "_font05")
+        self.refresher.tintColor = UIColor.font05
         self.cdpDetailTableView.addSubview(refresher)
         
         print("mCollateralParamType ", mCollateralParamType)

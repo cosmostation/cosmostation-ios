@@ -104,11 +104,11 @@ class CommonWCViewController: BaseViewController {
         if (connected) {
             dappConnectImage.image = UIImage(named: "ImgGovPassed")
             dappConnectLabel.text = "Connected"
-            dappConnectLabel.textColor = UIColor.init(named: "_font05")
+            dappConnectLabel.textColor = UIColor.font05
         } else {
             dappConnectImage.image = UIImage(named: "passUp")
             dappConnectLabel.text = "Not Connected"
-            dappConnectLabel.textColor = UIColor.init(named: "_font04")
+            dappConnectLabel.textColor = UIColor.font04
         }
     }
     

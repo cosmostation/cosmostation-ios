@@ -71,7 +71,7 @@ class RegisterDomain0ViewController: BaseViewController {
         } else {
             typeMsg.text = NSLocalizedString("str_description_closed_domain", comment: "")
             typeTitle.text = "CLOSED"
-            typeTitle.textColor = UIColor.init(named: "_font05")
+            typeTitle.textColor = UIColor.font05
         }
         onUpdateStarnameFee()
     }

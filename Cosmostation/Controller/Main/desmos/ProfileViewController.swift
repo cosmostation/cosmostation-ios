@@ -30,7 +30,7 @@ class ProfileViewController: BaseViewController, UITableViewDelegate, UITableVie
         
         self.profileImageView.layer.borderWidth = 1
         self.profileImageView.layer.masksToBounds = false
-        self.profileImageView.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        self.profileImageView.layer.borderColor = UIColor.font04.cgColor
         self.profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         self.profileImageView.clipsToBounds = true
         
@@ -53,11 +53,11 @@ class ProfileViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.profileDTagLabel.text = profileAccount.dtag
         self.profileHeaderView.bringSubviewToFront(profileInfoView)
         
-        btnStartEdit.borderColor = UIColor.init(named: "_font05")
+        btnStartEdit.borderColor = UIColor.font05
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnStartEdit.borderColor = UIColor.init(named: "_font05")
+        btnStartEdit.borderColor = UIColor.font05
     }
     
     override func viewWillAppear(_ animated: Bool) {

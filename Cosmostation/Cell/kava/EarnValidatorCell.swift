@@ -24,7 +24,7 @@ class EarnValidatorCell: UITableViewCell {
         super.awakeFromNib()
         validatorImg.layer.borderWidth = 1
         validatorImg.layer.masksToBounds = false
-        validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        validatorImg.layer.borderColor = UIColor.font04.cgColor
         validatorImg.layer.cornerRadius = validatorImg.frame.height/2
         validatorImg.clipsToBounds = true
         self.selectionStyle = .none
@@ -64,7 +64,7 @@ class EarnValidatorCell: UITableViewCell {
             cardView.backgroundColor = chainConfig.chainColorBG
             liquidityAmountLabel.attributedText = WDP.dpAmount(matched.amount, liquidityAmountLabel.font!, 6, 6)
         } else {
-            cardView.backgroundColor = UIColor.init(named: "_card_bg")
+            cardView.backgroundColor = UIColor.cardBg
             liquidityAmountLabel.attributedText = WDP.dpAmount("0", liquidityAmountLabel.font!, 6, 6)
         }
     }

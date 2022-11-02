@@ -45,10 +45,10 @@ class SwitchAccountCell: UITableViewCell {
         
         if (dpAccount?.account_id == currentAccount?.account_id) {
             chainAccountCard.borderWidth = 1.0
-            chainAccountCard.borderColor = UIColor.init(named: "_font05")
+            chainAccountCard.borderColor = UIColor.font05
         } else {
             chainAccountCard.borderWidth = 0.2
-            chainAccountCard.borderColor = UIColor.init(named: "_font04")
+            chainAccountCard.borderColor = UIColor.font04
         }
         
         let tapItem = UITapGestureRecognizer(target: self, action: #selector(self.onTapItem))
