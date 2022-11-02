@@ -9,10 +9,22 @@
 import UIKit
 
 extension UIColor {
-    static let font02: UIColor = UIColor(named: "_font02")!
-    static let font03: UIColor = UIColor(named: "_font03")!
-    static let font04: UIColor = UIColor(named: "_font04")!
-    static let font05: UIColor = UIColor(named: "_font05")!
-    static let warnRed: UIColor = UIColor(named: "_warnRed")!
-    static let cardBg: UIColor = UIColor(named: "_card_bg")!
+    static var font02: UIColor {
+        UIColor(named: "_font02")!
+    }
+    static var font03: UIColor {
+        UIColor(named: "_font03")!
+    }
+    static var font04: UIColor {
+        UIColor(named: "_font04")!
+    }
+    static var font05: UIColor {
+        UIColor(named: "_font05")!
+    }
+    static var warnRed: UIColor {
+        UIColor(named: "_warnRed")!
+    }
+    static var cardBg: UIColor {
+        UIColor(named: "_card_bg")!        
+    }
 }
