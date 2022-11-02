@@ -36,6 +36,7 @@ class TxEarnCell: TxCell {
             }
             let coin = Coin.init(msg.amount.denom, msg.amount.amount)
             WDP.dpCoin(chainConfig, coin, txDenomLabel, txAmountLabel)
+            return
         }
         
         if let msg = try? Kava_Router_V1beta1_MsgWithdrawBurn.init(serializedData: response.tx.body.messages[position].value) {
