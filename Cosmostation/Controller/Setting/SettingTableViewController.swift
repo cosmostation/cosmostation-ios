@@ -116,16 +116,14 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
 
         if (laContext.canEvaluatePolicy(biometricsPolicy, error: &error)) {
             if error != nil { return }
-            if #available(iOS 11.0, *) {
-                switch laContext.biometryType {
-                case .faceID:
-                    bioTypeLabel.text = NSLocalizedString("faceID", comment: "")
-                case .touchID:
-                    bioTypeLabel.text = NSLocalizedString("touchID", comment: "")
-                case .none:
-                    bioTypeLabel.text = ""
-                    break
-                }
+            switch laContext.biometryType {
+            case .faceID:
+                bioTypeLabel.text = NSLocalizedString("faceID", comment: "")
+            case .touchID:
+                bioTypeLabel.text = NSLocalizedString("touchID", comment: "")
+            case .none:
+                bioTypeLabel.text = ""
+                break
             }
         }
     }
