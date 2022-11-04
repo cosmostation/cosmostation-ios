@@ -63,7 +63,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         feeTotalCard.backgroundColor = chainConfig?.chainColorBG
         if #available(iOS 13.0, *) {
             gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font04")!], for: .normal)
+            gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
             gasSelectSegments.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
             gasSelectSegments.tintColor = chainConfig?.chainColor
@@ -73,8 +73,8 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         
         feeTypeCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickFeeDenom (_:))))
         
-        feeTypeCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
-        btnBefore.borderColor = UIColor.init(named: "_font05")
+        feeTypeCard.layer.borderColor = UIColor.font05.cgColor
+        btnBefore.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
         
         feeTitle.text = NSLocalizedString("str_total_fee", comment: "")
@@ -85,8 +85,8 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        feeTypeCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
-        btnBefore.borderColor = UIColor.init(named: "_font05")
+        feeTypeCard.layer.borderColor = UIColor.font05.cgColor
+        btnBefore.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
     }
     

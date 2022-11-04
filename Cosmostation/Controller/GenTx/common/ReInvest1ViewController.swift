@@ -40,7 +40,7 @@ class ReInvest1ViewController: BaseViewController {
         self.loadingImg.onStartAnimation()
         self.onFetchRewards_gRPC(pageHolderVC.mAccount!.account_address)
         
-        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
         rewardAmountTitle.text = NSLocalizedString("str_reward_amount", comment: "")
         validatorTitle.text = NSLocalizedString("str_validator", comment: "")
@@ -50,7 +50,7 @@ class ReInvest1ViewController: BaseViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
     }
     

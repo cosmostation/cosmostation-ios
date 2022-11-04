@@ -32,12 +32,12 @@ class AuthzSend5ViewController: BaseViewController, PasswordViewDelegate{
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        backBtn.borderColor = UIColor.init(named: "_font05")
+        backBtn.borderColor = UIColor.font05
         confirmBtn.borderColor = UIColor.init(named: "photon")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        backBtn.borderColor = UIColor.init(named: "_font05")
+        backBtn.borderColor = UIColor.font05
         confirmBtn.borderColor = UIColor.init(named: "photon")
     }
     

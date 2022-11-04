@@ -51,14 +51,14 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
         let dp = "+ " + WUtils.decimalNumberToLocaleString(NSDecimalNumber(string: "0.1"), 1)
         btn01.setTitle(dp, for: .normal)
         
-        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
-        btn01.borderColor = UIColor.init(named: "_font05")
-        btn1.borderColor = UIColor.init(named: "_font05")
-        btn10.borderColor = UIColor.init(named: "_font05")
-        btn100.borderColor = UIColor.init(named: "_font05")
-        btnHalf.borderColor = UIColor.init(named: "_font05")
-        btnMax.borderColor = UIColor.init(named: "_font05")
+        btn01.borderColor = UIColor.font05
+        btn1.borderColor = UIColor.font05
+        btn10.borderColor = UIColor.font05
+        btn100.borderColor = UIColor.font05
+        btnHalf.borderColor = UIColor.font05
+        btnMax.borderColor = UIColor.font05
         
         availableTitle.text = NSLocalizedString("str_max_delegable", comment: "")
         cancelBtn.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
@@ -66,14 +66,14 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
-        btn01.borderColor = UIColor.init(named: "_font05")
-        btn1.borderColor = UIColor.init(named: "_font05")
-        btn10.borderColor = UIColor.init(named: "_font05")
-        btn100.borderColor = UIColor.init(named: "_font05")
-        btnHalf.borderColor = UIColor.init(named: "_font05")
-        btnMax.borderColor = UIColor.init(named: "_font05")
+        btn01.borderColor = UIColor.font05
+        btn1.borderColor = UIColor.font05
+        btn10.borderColor = UIColor.font05
+        btn100.borderColor = UIColor.font05
+        btnHalf.borderColor = UIColor.font05
+        btnMax.borderColor = UIColor.font05
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -105,24 +105,24 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUIupdate() {
         guard let text = toDelegateAmountInput.text?.trimmingCharacters(in: .whitespaces) else {
-            self.toDelegateAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.toDelegateAmountInput.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if(text.count == 0) {
-            self.toDelegateAmountInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            self.toDelegateAmountInput.layer.borderColor = UIColor.font04.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            self.toDelegateAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.toDelegateAmountInput.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: mDpDecimal).compare(userBalance).rawValue > 0) {
-            self.toDelegateAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.toDelegateAmountInput.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        self.toDelegateAmountInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        self.toDelegateAmountInput.layer.borderColor = UIColor.font04.cgColor
     }
     
     func isValiadAmount() -> Bool {

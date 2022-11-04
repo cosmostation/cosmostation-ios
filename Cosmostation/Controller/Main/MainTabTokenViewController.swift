@@ -62,7 +62,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-        refresher.tintColor = UIColor(named: "_font05")
+        refresher.tintColor = UIColor.font05
         tokenTableView.addSubview(refresher)
         
         self.mBalances = BaseData.instance.mBalances

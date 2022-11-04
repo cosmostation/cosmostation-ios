@@ -84,11 +84,11 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         self.onUpdateToChainView()
         self.recipientChainCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickToChain (_:))))
         
-        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
-        btnWallet.borderColor = UIColor.init(named: "_font05")
-        btnQrScan.borderColor = UIColor.init(named: "_font05")
-        btnPaste.borderColor = UIColor.init(named: "_font05")
+        btnWallet.borderColor = UIColor.font05
+        btnQrScan.borderColor = UIColor.font05
+        btnPaste.borderColor = UIColor.font05
         
         recipientChainTitle.text = NSLocalizedString("str_recipient_chain", comment: "")
         recipientAddressTitle.text = NSLocalizedString("str_recipient_address", comment: "")
@@ -103,11 +103,11 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
-        btnWallet.borderColor = UIColor.init(named: "_font05")
-        btnQrScan.borderColor = UIColor.init(named: "_font05")
-        btnPaste.borderColor = UIColor.init(named: "_font05")
+        btnWallet.borderColor = UIColor.font05
+        btnQrScan.borderColor = UIColor.font05
+        btnPaste.borderColor = UIColor.font05
     }
     
     override func enableUserInteraction() {

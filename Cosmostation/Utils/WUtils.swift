@@ -566,7 +566,7 @@ public class WUtils {
         if (coin.denom == BNB_MAIN_DENOM) {
             WUtils.setDenomTitle(chainType, denomLabel)
         } else {
-            denomLabel.textColor = UIColor(named: "_font05")
+            denomLabel.textColor = UIColor.font05
             denomLabel.text = coin.denom.uppercased()
         }
         amountLabel.attributedText = WDP.dpAmount(coin.amount, amountLabel.font, 8, 8)

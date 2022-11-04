@@ -40,7 +40,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(onFetch), for: .valueChanged)
-        refresher.tintColor = UIColor(named: "_font05")
+        refresher.tintColor = UIColor.font05
         voteDetailTableView.addSubview(refresher)
         
         self.btnVote.setTitle(NSLocalizedString("str_vote", comment: ""), for: .normal)

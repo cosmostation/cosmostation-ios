@@ -29,9 +29,9 @@ class AssetCell: UITableViewCell {
         super.prepareForReuse()
         self.assetImg.af_cancelImageRequest()
         self.assetImg.image = UIImage(named: "tokenDefault")
-        self.assetSymbol.textColor = UIColor(named: "_font05")
-        self.assetPrice.textColor = UIColor(named: "_font05")
-        self.assetPriceChange.textColor = UIColor(named: "_font05")
+        self.assetSymbol.textColor = UIColor.font05
+        self.assetPrice.textColor = UIColor.font05
+        self.assetPriceChange.textColor = UIColor.font05
         self.assetDescription.lineBreakMode = .byTruncatingTail
     }
     

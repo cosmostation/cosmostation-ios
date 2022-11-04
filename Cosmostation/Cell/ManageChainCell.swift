@@ -22,12 +22,12 @@ class ManageChainCell: UITableViewCell {
     
     func onSetView(_ selected: Bool) {
         if (selected) {
-            chainCard.borderColor = UIColor.init(named: "_font05")
-            chainName.textColor = UIColor.init(named: "_font05")
+            chainCard.borderColor = UIColor.font05
+            chainName.textColor = UIColor.font05
             chainImg.alpha = 1.0
         } else {
             chainCard.borderColor = UIColor.init(hexString: "#000000", alpha: 0.0)
-            chainName.textColor = UIColor.init(named: "_font04")
+            chainName.textColor = UIColor.font04
             chainImg.alpha = 0.1
         }
     }

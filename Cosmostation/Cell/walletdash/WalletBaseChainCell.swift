@@ -92,8 +92,8 @@ class WalletBaseChainCell: UITableViewCell {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnDelegate.borderColor = UIColor.init(named: "_font05")
-        btnProposal.borderColor = UIColor.init(named: "_font05")
-        btnWalletConnect.borderColor = UIColor.init(named: "_font05")
+        btnDelegate.borderColor = UIColor.font05
+        btnProposal.borderColor = UIColor.font05
+        btnWalletConnect.borderColor = UIColor.font05
     }
 }

@@ -24,7 +24,7 @@ class AllValidatorCell: UITableViewCell {
         super.awakeFromNib()
         validatorImg.layer.borderWidth = 1
         validatorImg.layer.masksToBounds = false
-        validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        validatorImg.layer.borderColor = UIColor.font04.cgColor
         validatorImg.layer.cornerRadius = validatorImg.frame.height/2
         validatorImg.clipsToBounds = true
         
@@ -59,16 +59,16 @@ class AllValidatorCell: UITableViewCell {
         
         if (validator.jailed == true) {
             revokedImg.isHidden = false
-            validatorImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            validatorImg.layer.borderColor = UIColor.warnRed.cgColor
         } else {
             revokedImg.isHidden = true
-            validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            validatorImg.layer.borderColor = UIColor.font04.cgColor
         }
         if BaseData.instance.mMyValidators_gRPC.first(where: {$0.operatorAddress == validator.operatorAddress}) != nil {
             cardView.backgroundColor = chainConfig?.chainColorBG
             
         } else {
-            cardView.backgroundColor = UIColor(named: "_card_bg")
+            cardView.backgroundColor = UIColor.cardBg
         }
         
         

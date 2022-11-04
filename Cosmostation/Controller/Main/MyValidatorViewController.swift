@@ -43,7 +43,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
 
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-        self.refresher.tintColor = UIColor(named: "_font05")
+        self.refresher.tintColor = UIColor.font05
         self.myValidatorTableView.addSubview(refresher)
         
         self.myValidatorLabel.text = NSLocalizedString("str_validators", comment: "")

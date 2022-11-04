@@ -26,7 +26,7 @@ class DashedView: UIView {
     func setup() {
         dashedLine             = CAShapeLayer()
         dashedLine.fillColor   = UIColor.clear.cgColor
-        dashedLine.strokeColor = UIColor.init(named: "_font04")!.cgColor
+        dashedLine.strokeColor = UIColor.font04.cgColor
         dashedLine.lineWidth   = 1
         dashedLine.lineDashPattern = [2,2]
         layer.addSublayer(dashedLine)

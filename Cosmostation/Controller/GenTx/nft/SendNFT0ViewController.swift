@@ -25,19 +25,19 @@ class SendNFT0ViewController: BaseViewController, QrScannerDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
-        self.addressInput.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "_font03")!])
+        self.addressInput.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.font03])
         
-        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
-        btnQrScan.borderColor = UIColor.init(named: "_font05")
-        btnPaste.borderColor = UIColor.init(named: "_font05")
+        btnQrScan.borderColor = UIColor.font05
+        btnPaste.borderColor = UIColor.font05
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
-        btnQrScan.borderColor = UIColor.init(named: "_font05")
-        btnPaste.borderColor = UIColor.init(named: "_font05")
+        btnQrScan.borderColor = UIColor.font05
+        btnPaste.borderColor = UIColor.font05
     }
     
     override func enableUserInteraction() {

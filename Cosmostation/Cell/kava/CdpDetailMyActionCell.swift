@@ -152,9 +152,9 @@ class CdpDetailMyActionCell: UITableViewCell {
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        depositBtn.borderColor = UIColor.init(named: "_font05")
-        withdrawBtn.borderColor = UIColor.init(named: "_font05")
-        darwdebtBtn.borderColor = UIColor.init(named: "_font05")
-        repayBtn.borderColor = UIColor.init(named: "_font05")
+        depositBtn.borderColor = UIColor.font05
+        withdrawBtn.borderColor = UIColor.font05
+        darwdebtBtn.borderColor = UIColor.font05
+        repayBtn.borderColor = UIColor.font05
     }
 }

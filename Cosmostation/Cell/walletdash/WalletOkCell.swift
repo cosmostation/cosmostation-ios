@@ -80,9 +80,9 @@ class WalletOkCell: UITableViewCell {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnDeposit.borderColor = UIColor.init(named: "_font05")
-        btnWithdraw.borderColor = UIColor.init(named: "_font05")
-        btnVote.borderColor = UIColor.init(named: "_font05")
-        btnProposal.borderColor = UIColor.init(named: "_font05")
+        btnDeposit.borderColor = UIColor.font05
+        btnWithdraw.borderColor = UIColor.font05
+        btnVote.borderColor = UIColor.font05
+        btnProposal.borderColor = UIColor.font05
     }
 }

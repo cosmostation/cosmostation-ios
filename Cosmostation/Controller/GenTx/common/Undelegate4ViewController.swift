@@ -39,7 +39,7 @@ class Undelegate4ViewController: BaseViewController, PasswordViewDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        beforeBtn.borderColor = UIColor.init(named: "_font05")
+        beforeBtn.borderColor = UIColor.font05
         confirmBtn.borderColor = UIColor.init(named: "photon")
         undelegateTitle.text = NSLocalizedString("str_undelegate_amount", comment: "")
         feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
@@ -52,7 +52,7 @@ class Undelegate4ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        beforeBtn.borderColor = UIColor.init(named: "_font05")
+        beforeBtn.borderColor = UIColor.font05
         confirmBtn.borderColor = UIColor.init(named: "photon")
     }
     

@@ -31,12 +31,12 @@ class AuthzRedelegate5ViewController: BaseViewController, PasswordViewDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        btnBefore.borderColor = UIColor.init(named: "_font05")
+        btnBefore.borderColor = UIColor.font05
         btnConfirm.borderColor = UIColor.init(named: "photon")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnBefore.borderColor = UIColor.init(named: "_font05")
+        btnBefore.borderColor = UIColor.font05
         btnConfirm.borderColor = UIColor.init(named: "photon")
     }
     

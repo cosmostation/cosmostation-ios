@@ -31,10 +31,10 @@ class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
         
         self.onFetchRewardAddress_gRPC(pageHolderVC.mAccount!.account_address)
         
-        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
-        btnScan.borderColor = UIColor.init(named: "_font05")
-        btnPaste.borderColor = UIColor.init(named: "_font05")
+        btnScan.borderColor = UIColor.font05
+        btnPaste.borderColor = UIColor.font05
         
         currentRecipientTitle.text = NSLocalizedString("str_current_reward_recipient_address", comment: "")
         btnScan.setTitle(NSLocalizedString("str_qr_scan", comment: ""), for: .normal)
@@ -44,10 +44,10 @@ class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
-        btnScan.borderColor = UIColor.init(named: "_font05")
-        btnPaste.borderColor = UIColor.init(named: "_font05")
+        btnScan.borderColor = UIColor.font05
+        btnPaste.borderColor = UIColor.font05
     }
     
     @IBAction func onClickPaste(_ sender: UIButton) {
@@ -122,7 +122,7 @@ class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
             DispatchQueue.main.async(execute: {
                 self.currentRewardAddressLabel.text = responseAddress
                 if (responseAddress != address) {
-                    self.currentRewardAddressLabel.textColor = UIColor(named: "_warnRed")
+                    self.currentRewardAddressLabel.textColor = UIColor.warnRed
                 }
                 self.currentRewardAddressLabel.adjustsFontSizeToFitWidth = true
                 self.pageHolderVC.mCurrentRewardAddress = responseAddress

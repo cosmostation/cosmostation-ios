@@ -33,14 +33,14 @@ class Vote1ViewController: BaseViewController, UITableViewDelegate, UITableViewD
         
         self.toVoteProposals = pageHolderVC.mProposals
         
-        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
         btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
         btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
     }
     

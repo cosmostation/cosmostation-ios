@@ -107,10 +107,10 @@ class ValidatorDetailMyActionCell: UITableViewCell {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        delegateBtn.borderColor = UIColor.init(named: "_font05")
-        undelegateBtn.borderColor = UIColor.init(named: "_font05")
-        redelegateBtn.borderColor = UIColor.init(named: "_font05")
-        claimRewardBtn.borderColor = UIColor.init(named: "_font05")
-        reInvestBtn.borderColor = UIColor.init(named: "_font05")
+        delegateBtn.borderColor = UIColor.font05
+        undelegateBtn.borderColor = UIColor.font05
+        redelegateBtn.borderColor = UIColor.font05
+        claimRewardBtn.borderColor = UIColor.font05
+        reInvestBtn.borderColor = UIColor.font05
     }
 }

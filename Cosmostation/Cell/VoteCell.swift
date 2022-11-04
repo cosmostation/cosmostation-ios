@@ -75,18 +75,18 @@ class VoteCell: UITableViewCell {
     }
     
     func onCheckDim() {
-        yesLabel.textColor = UIColor.init(named: "_font03")
-        btnYes.tintColor = UIColor(named: "_font03")
-        btnYes.layer.borderColor = UIColor(named: "_font03")!.cgColor
-        noLabel.textColor = UIColor.init(named: "_font03")
-        btnNo.layer.borderColor = UIColor(named: "_font03")!.cgColor
-        btnNo.tintColor = UIColor(named: "_font03")
-        vetoLabel.textColor = UIColor.init(named: "_font03")
-        btnVeto.tintColor = UIColor(named: "_font03")
-        btnVeto.layer.borderColor = UIColor(named: "_font03")!.cgColor
-        abstainLabel.textColor = UIColor.init(named: "_font03")
-        btnAbstain.tintColor = UIColor(named: "_font03")
-        btnAbstain.layer.borderColor = UIColor(named: "_font03")!.cgColor
+        yesLabel.textColor = UIColor.font03
+        btnYes.tintColor = UIColor.font03
+        btnYes.layer.borderColor = UIColor.font03.cgColor
+        noLabel.textColor = UIColor.font03
+        btnNo.layer.borderColor = UIColor.font03.cgColor
+        btnNo.tintColor = UIColor.font03
+        vetoLabel.textColor = UIColor.font03
+        btnVeto.tintColor = UIColor.font03
+        btnVeto.layer.borderColor = UIColor.font03.cgColor
+        abstainLabel.textColor = UIColor.font03
+        btnAbstain.tintColor = UIColor.font03
+        btnAbstain.layer.borderColor = UIColor.font03.cgColor
     }
     
 }

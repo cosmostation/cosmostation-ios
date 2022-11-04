@@ -36,14 +36,14 @@ class KavaLiquidity4ViewController: BaseViewController, PasswordViewDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.txType = self.pageHolderVC.mType
         
-        self.btnBefore.borderColor = UIColor.init(named: "_font05")
+        self.btnBefore.borderColor = UIColor.font05
         self.btnConfirm.borderColor = UIColor.init(named: "photon")
         self.btnBefore.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
         self.btnConfirm.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        self.btnBefore.borderColor = UIColor.init(named: "_font05")
+        self.btnBefore.borderColor = UIColor.font05
         self.btnConfirm.borderColor = UIColor.init(named: "photon")
     }
     

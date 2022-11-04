@@ -73,14 +73,14 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
         
         pAmountInput.delegate = self
         
-        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
         btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
         btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
     }
     
@@ -106,27 +106,27 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
     
     @IBAction func AmountChangedP(_ sender: AmountInputTextField) {
         guard let text = sender.text?.trimmingCharacters(in: .whitespaces) else {
-            sender.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            sender.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (text.count == 0) {
-            sender.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            sender.layer.borderColor = UIColor.font04.cgColor
             return
         }
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            sender.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            sender.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: pDpDecimal).compare(pMaxAmount).rawValue > 0) {
-            sender.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            sender.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: pDpDecimal).compare(pMinAmount).rawValue < 0) {
-            sender.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            sender.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        sender.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        sender.layer.borderColor = UIColor.font04.cgColor
         onUpdateNextBtn()
     }
     

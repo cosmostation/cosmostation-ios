@@ -37,7 +37,7 @@ class Delegate4ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        beforeBtn.borderColor = UIColor.init(named: "_font05")
+        beforeBtn.borderColor = UIColor.font05
         confirmBtn.borderColor = UIColor.init(named: "photon")
         
         delegateAmountTitle.text = NSLocalizedString("str_delegate_amount", comment: "")
@@ -50,7 +50,7 @@ class Delegate4ViewController: BaseViewController, PasswordViewDelegate, SBCardP
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        beforeBtn.borderColor = UIColor.init(named: "_font05")
+        beforeBtn.borderColor = UIColor.font05
         confirmBtn.borderColor = UIColor.init(named: "photon")
     }
     

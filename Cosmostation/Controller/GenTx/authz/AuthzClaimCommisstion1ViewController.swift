@@ -33,12 +33,12 @@ class AuthzClaimCommisstion1ViewController: BaseViewController {
         self.loadingImg.onStartAnimation()
         self.onFetchRewardAddress_gRPC(pageHolderVC.mGranterAddress!)
         
-        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
     }
     

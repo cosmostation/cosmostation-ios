@@ -42,6 +42,6 @@ class WalletKavaIncentiveCell: UITableViewCell {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnClaimIncentive.borderColor = UIColor.init(named: "_font05")
+        btnClaimIncentive.borderColor = UIColor.font05
     }
 }

@@ -37,14 +37,14 @@ class KavaSwapExit0ViewController: BaseViewController, UITextFieldDelegate {
         inputTextFiled.delegate = self
         inputTextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
         btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
         btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.init(named: "photon")
     }
     
@@ -86,28 +86,28 @@ class KavaSwapExit0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUIupdate() {
         guard let text = inputTextFiled.text?.trimmingCharacters(in: .whitespaces) else {
-            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            inputTextFiled.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (text.count == 0) {
-            inputTextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            inputTextFiled.layer.borderColor = UIColor.font04.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            inputTextFiled.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (userInput.compare(NSDecimalNumber.zero).rawValue <= 0) {
-            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            inputTextFiled.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: coinDecimal).compare(availableMaxAmount).rawValue > 0) {
-            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            inputTextFiled.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        inputTextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        inputTextFiled.layer.borderColor = UIColor.font04.cgColor
     }
     
     @IBAction func onClickClear(_ sender: UIButton) {

@@ -27,7 +27,7 @@ class OsmosisDAppViewController: BaseViewController {
         
         if #available(iOS 13.0, *) {
             dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor(named: "_font04")!], for: .normal)
+            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
             dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
             
         } else {

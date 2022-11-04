@@ -33,7 +33,7 @@ class WalletAuthzCell: UITableViewCell {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnAuthz.borderColor = UIColor.init(named: "_font05")
+        btnAuthz.borderColor = UIColor.font05
     }
     
 }

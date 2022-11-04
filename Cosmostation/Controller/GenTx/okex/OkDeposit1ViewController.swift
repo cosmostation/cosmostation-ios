@@ -71,24 +71,24 @@ class OkDeposit1ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUIupdate() {
         guard let text = toDepositAmountInput.text?.trimmingCharacters(in: .whitespaces) else {
-            self.toDepositAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.toDepositAmountInput.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if(text.count == 0) {
-            self.toDepositAmountInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
+            self.toDepositAmountInput.layer.borderColor = UIColor.font04.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            self.toDepositAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.toDepositAmountInput.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         if (userInput.compare(userAvailable).rawValue > 0) {
-            self.toDepositAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+            self.toDepositAmountInput.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        self.toDepositAmountInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        self.toDepositAmountInput.layer.borderColor = UIColor.font04.cgColor
     }
     
     func isValiadAmount() -> Bool {

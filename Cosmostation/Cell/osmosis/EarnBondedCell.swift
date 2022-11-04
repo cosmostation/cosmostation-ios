@@ -81,6 +81,6 @@ class EarnBondedCell: UITableViewCell {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        btnUnbonding.borderColor = UIColor.init(named: "_font05")
+        btnUnbonding.borderColor = UIColor.font05
     }
 }
