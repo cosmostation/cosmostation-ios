@@ -196,12 +196,15 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         }
         
         DispatchQueue.main.async(execute: {
-            self.hideWaittingAlert()
             self.derivedWalletTableView.reloadData()
             
             for i in 0 ..< self.mDerives.count {
                 self.onFetchBalance(i)
             }
+        })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1500), execute: {
+            self.hideWaittingAlert()
         })
     }
     
