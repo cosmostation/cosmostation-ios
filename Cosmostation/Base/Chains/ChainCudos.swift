@@ -43,6 +43,8 @@ class ChainCudos: ChainConfig {
     var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
+    var moonPaySupoort = false
+    var kadoMoneySupoort = false
     var grpcUrl = "lcd-cudos-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""

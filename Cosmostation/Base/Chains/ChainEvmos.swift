@@ -43,6 +43,8 @@ class ChainEvmos: ChainConfig {
     var evmSupport = true
     var wcSupoort = true
     var authzSupoort = true
+    var moonPaySupoort = false
+    var kadoMoneySupoort = false
     var grpcUrl = "lcd-evmos-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = "https://rpc-evmos-app.cosmostation.io"

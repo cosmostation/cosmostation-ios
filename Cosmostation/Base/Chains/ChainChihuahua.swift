@@ -45,6 +45,8 @@ class ChainChihuahua: ChainConfig {
     var evmSupport = false
     var wcSupoort = true
     var authzSupoort = true
+    var moonPaySupoort = false
+    var kadoMoneySupoort = false
     var grpcUrl = "lcd-chihuahua-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""

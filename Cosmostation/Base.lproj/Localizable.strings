@@ -162,10 +162,8 @@
 "btn_withdraw" = " Withdraw";
 "btn_vote_validator" = " Vote for Validator";
 "btn_profile" = "  Profile";
-"btn_buy_atom" = "  Buy ATOM";
-"btn_buy_bnb" = "  Buy BNB";
-"btn_buy_kava" = "  Buy KAVA";
-"btn_buy_band" = "  Buy BAND";
+"btn_buy_moonpay" = "  Buy %@";
+"btn_buy_kadomoney" = "  Buy Crypto";
 
 
 "msg_authz_description" = "Perform transactions on behalf of another account";

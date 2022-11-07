@@ -41,6 +41,8 @@ protocol ChainConfig {
     var evmSupport: Bool { get set }
     var wcSupoort: Bool { get set }
     var authzSupoort: Bool { get set }
+    var moonPaySupoort: Bool { get set }
+    var kadoMoneySupoort: Bool { get set }
     var grpcUrl: String { get set }
     var grpcPort: Int { get set }
     var rpcUrl: String { get set }

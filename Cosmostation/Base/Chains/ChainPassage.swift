@@ -43,6 +43,8 @@ class ChainPassage: ChainConfig {
     var evmSupport = false
     var wcSupoort = false
     var authzSupoort = true
+    var moonPaySupoort = false
+    var kadoMoneySupoort = false
     var grpcUrl = "lcd-passage-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""
