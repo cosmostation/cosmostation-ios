@@ -88,9 +88,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             application.topViewController!.isKind(of: PasswordViewController.self)) {
             
         } else {
-            if (BaseData.instance.getUsingAppLock() && BaseData.instance.hasPassword()) {
-                let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-                passwordVC.mTarget = PASSWORD_ACTION_APP_LOCK
+            if (BaseData.instance.getUsingAppLock() && BaseData.instance.hasPassword()) {                
+                let passwordVC = UIStoryboard.passwordViewController(delegate: nil, target: PASSWORD_ACTION_APP_LOCK)
                 passwordVC.isModalInPresentation = true
                 application.topViewController!.present(passwordVC, animated: true, completion: nil)
             }
