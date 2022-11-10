@@ -45,6 +45,8 @@ class StationTest: ChainConfig {
     var evmSupport = false
     var wcSupoort = true
     var authzSupoort = false
+    var moonPaySupoort = false
+    var kadoMoneySupoort = false
     var grpcUrl = "lcd-office.cosmostation.io"
     var grpcPort = 10400
     var rpcUrl = ""

@@ -45,6 +45,8 @@ class ChainJuno: ChainConfig {
     var evmSupport = false
     var wcSupoort = false
     var authzSupoort = true
+    var moonPaySupoort = false
+    var kadoMoneySupoort = true
     var grpcUrl = "lcd-juno-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""

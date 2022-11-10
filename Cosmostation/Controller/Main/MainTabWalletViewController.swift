@@ -778,9 +778,66 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     func onClickBuyCoin() {
         if (self.account?.account_has_private == true) {
-            self.onShowBuySelectFiat()
+            self.onCheckCryptoPay()
         } else {
             self.onShowBuyWarnNoKey()
+        }
+    }
+    
+    func onCheckCryptoPay() {
+        if (self.chainConfig?.moonPaySupoort == true && self.chainConfig?.kadoMoneySupoort == true) {
+            let alert = UIAlertController(title: NSLocalizedString("btn_buy_kadomoney", comment: ""), message: "", preferredStyle: .alert)
+            alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
+            alert.addAction(UIAlertAction(title: String(format: NSLocalizedString("btn_buy_moonpay", comment: ""), self.chainConfig!.stakeSymbol), style: .default, handler: { _ in
+                self.onStartMoonPay()
+            }))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("btn_buy_kadomoney", comment: ""), style: .default, handler: { _ in
+                self.onStartKadoMoney()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        
+        } else if (self.chainConfig?.moonPaySupoort == true) {
+            self.onStartMoonPay()
+        } else if (self.chainConfig?.kadoMoneySupoort == true) {
+            self.onStartKadoMoney()
+        }
+    }
+    
+    func onStartKadoMoney() {
+        let query = "?apiKey=" + KADO_PAY_PUBLICK + "&network=" + self.chainConfig!.chainAPIName + "&networkList=" + self.chainConfig!.chainAPIName
+        let urlKadoMoney = URL(string: KADO_PAY_URL + query + "&onToAddress=" + self.account!.account_address)
+        if (UIApplication.shared.canOpenURL(urlKadoMoney!)) {
+            UIApplication.shared.open(urlKadoMoney!, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func onStartMoonPay() {
+        var query = "?apiKey=" + MOON_PAY_PUBLICK
+        if (self.chainConfig?.moonPaySupoort == true) {
+            query = query + "&currencyCode=" + self.chainConfig!.stakeSymbol.lowercased()
+        }
+        query = query + "&walletAddress=" + self.account!.account_address
+        let param = ["api_key" : query] as [String : Any]
+        let request = Alamofire.request(CSS_MOON_PAY, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]);
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                guard let responseData = res as? NSDictionary else {
+                    self.onShowToast(NSLocalizedString("error_network_msg", comment: ""))
+                    return
+                }
+                let result = responseData.object(forKey: "signature") as? String ?? ""
+                let signauture = result.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
+                
+                let urlMoonpay = URL(string: MOON_PAY_URL + query + "&signature=" + signauture!)
+                if(UIApplication.shared.canOpenURL(urlMoonpay!)) {
+                    UIApplication.shared.open(urlMoonpay!, options: [:], completionHandler: nil)
+                }
+                
+            case .failure(let error):
+                print("onStartMoonpaySignature ", error)
+                self.onShowToast(NSLocalizedString("error_network_msg", comment: ""))
+            }
         }
     }
     
@@ -793,73 +850,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.dismiss(animated: true, completion: nil)
         }))
         noKeyAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .destructive, handler: {_ in
-            self.onShowBuySelectFiat()
+            self.onCheckCryptoPay()
         }))
         self.present(noKeyAlert, animated: true) {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
             noKeyAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
-        }
-    }
-    
-    func onShowBuySelectFiat() {
-        let selectFiatAlert = UIAlertController(title: NSLocalizedString("buy_select_fiat_title", comment: ""),
-                                                message: NSLocalizedString("buy_select_fiat_msg", comment: ""),
-                                                preferredStyle: .alert)
-        selectFiatAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
-        let usdAction = UIAlertAction(title: "USD", style: .default, handler: { _ in
-            self.onStartMoonpaySignature("usd")
-        })
-        let eurAction = UIAlertAction(title: "EUR", style: .default, handler: { _ in
-            self.onStartMoonpaySignature("eur")
-        })
-        let gbpAction = UIAlertAction(title: "GBP", style: .default, handler: { _ in
-            self.onStartMoonpaySignature("gbp")
-        })
-        selectFiatAlert.addAction(usdAction)
-        selectFiatAlert.addAction(eurAction)
-        selectFiatAlert.addAction(gbpAction)
-        self.present(selectFiatAlert, animated: true) {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
-            selectFiatAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
-        }
-    }
-    
-    func onStartMoonpaySignature(_ fiat:String) {
-        var query = "?apiKey=" + MOON_PAY_PUBLICK
-        if (chainType! == ChainType.COSMOS_MAIN) {
-            query = query + "&currencyCode=atom"
-        } else if (chainType! == ChainType.BINANCE_MAIN) {
-            query = query + "&currencyCode=bnb"
-        } else if (chainType! == ChainType.KAVA_MAIN) {
-            query = query + "&currencyCode=kava"
-        } else if (chainType! == ChainType.BAND_MAIN) {
-            query = query + "&currencyCode=band"
-        }
-        query = query + "&walletAddress=" + self.account!.account_address + "&baseCurrencyCode=" + fiat;
-        let param = ["api_key" : query] as [String : Any]
-        let request = Alamofire.request(CSS_MOON_PAY, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary else {
-                    self.onShowToast(NSLocalizedString("error_network_msg", comment: ""))
-                    return
-                }
-                let result = responseData.object(forKey: "signature") as? String ?? ""
-                let signauture = result.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
-                self.onStartMoonPay(MOON_PAY_URL + query + "&signature=" + signauture!)
-                
-            case .failure(let error):
-                print("onStartMoonpaySignature ", error)
-                self.onShowToast(NSLocalizedString("error_network_msg", comment: ""))
-            }
-        }
-    }
-    
-    func onStartMoonPay(_ url: String) {
-        let urlMoonpay = URL(string: url)
-        if(UIApplication.shared.canOpenURL(urlMoonpay!)) {
-            UIApplication.shared.open(urlMoonpay!, options: [:], completionHandler: nil)
         }
     }
     

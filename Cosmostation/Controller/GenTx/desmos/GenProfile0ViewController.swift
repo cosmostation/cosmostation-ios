@@ -172,11 +172,9 @@ class GenProfile0ViewController: BaseViewController, UIImagePickerControllerDele
                     self.profileObject = object
                     handler(object != nil)
                 }
-                break
             case let .failure(error):
                 print("failure: \(error.localizedDescription)")
                 handler(false)
-                break
             }
         }
     }

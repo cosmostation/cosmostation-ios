@@ -1456,6 +1456,11 @@ final class BaseData : NSObject{
         }
     }
     
+    /// checks if app lock is active and exists a password. If both are met returns true, false otherwise
+    func isRequiredUnlock() -> Bool {
+        getUsingAppLock() && hasPassword()
+    }
+    
     /*
     public func selectPassword() -> Password? {
         do {

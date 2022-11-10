@@ -123,7 +123,6 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 bioTypeLabel.text = NSLocalizedString("touchID", comment: "")
             case .none:
                 bioTypeLabel.text = ""
-                break
             }
         }
     }

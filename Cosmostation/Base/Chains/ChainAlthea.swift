@@ -43,6 +43,8 @@ class ChainAlthea: ChainConfig {
     var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
+    var moonPaySupoort = false
+    var kadoMoneySupoort = false
     var grpcUrl = "lcd-office.cosmostation.io"
     var grpcPort = 20100
     var rpcUrl = ""

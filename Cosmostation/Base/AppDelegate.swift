@@ -39,7 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         self.requestToken()
                     }
                 })
-                break
             case .denied:
                 break
             case .authorized, .provisional, .ephemeral:
@@ -47,7 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     UIApplication.shared.registerForRemoteNotifications()
                 }
                 self.requestToken()
-                break
             }
         }
         
@@ -84,14 +82,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        if(application.topViewController!.isKind(of: IntroViewController.self) ||
-            application.topViewController!.isKind(of: PasswordViewController.self)) {
-            
-        } else {
-            if (BaseData.instance.getUsingAppLock() && BaseData.instance.hasPassword()) {                
+        if let topViewController = application.topViewController {
+            if !topViewController.isKind(of: PasswordViewController.self) && BaseData.instance.isRequiredUnlock() {
                 let passwordVC = UIStoryboard.passwordViewController(delegate: nil, target: PASSWORD_ACTION_APP_LOCK)
                 passwordVC.isModalInPresentation = true
-                application.topViewController!.present(passwordVC, animated: true, completion: nil)
+                topViewController.present(passwordVC, animated: true, completion: nil)
             }
         }
         
@@ -101,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        if (application.topViewController!.isKind(of: PasswordViewController.self)) {
+        if let topViewController = application.topViewController, topViewController.isKind(of: PasswordViewController.self) {
             NotificationCenter.default.post(name: Notification.Name("ForeGround"), object: nil, userInfo: nil)
         }
     }
@@ -167,8 +162,10 @@ extension UIApplication{
             default:
                 pointedViewController = pointedViewController?.presentedViewController
             }
+        }        
+        if let navigationController = pointedViewController as? UINavigationController {
+            pointedViewController = navigationController.viewControllers.last
         }
         return pointedViewController
-        
     }
 }

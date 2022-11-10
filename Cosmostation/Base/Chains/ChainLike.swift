@@ -44,6 +44,8 @@ class ChainLike: ChainConfig {
     var evmSupport = false
     var wcSupoort = true
     var authzSupoort = true
+    var moonPaySupoort = false
+    var kadoMoneySupoort = false
     var grpcUrl = "lcd-likecoin-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""

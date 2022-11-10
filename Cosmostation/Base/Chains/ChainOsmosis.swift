@@ -44,6 +44,8 @@ class ChainOsmosis: ChainConfig {
     var evmSupport = false
     var wcSupoort = true
     var authzSupoort = false
+    var moonPaySupoort = false
+    var kadoMoneySupoort = true
     var grpcUrl = "lcd-osmosis-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""
