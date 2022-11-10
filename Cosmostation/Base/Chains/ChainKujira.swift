@@ -45,6 +45,8 @@ class ChainKujira: ChainConfig {
     var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
+    var moonPaySupoort = false
+    var kadoMoneySupoort = true
     var grpcUrl = "lcd-kujira-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""

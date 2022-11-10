@@ -43,6 +43,8 @@ class ChainBitcana: ChainConfig {
     var evmSupport = false
     var wcSupoort = false
     var authzSupoort = true
+    var moonPaySupoort = false
+    var kadoMoneySupoort = false
     var grpcUrl = "lcd-bitcanna-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""

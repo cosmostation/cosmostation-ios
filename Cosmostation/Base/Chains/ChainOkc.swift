@@ -44,6 +44,8 @@ class ChainOkc: ChainConfig {
     var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
+    var moonPaySupoort = false
+    var kadoMoneySupoort = false
     var grpcUrl = ""
     var grpcPort = -1
     var rpcUrl = ""

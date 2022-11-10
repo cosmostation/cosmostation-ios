@@ -162,10 +162,8 @@
 "btn_withdraw" = " 회수";
 "btn_vote_validator" = " 검증인 선출";
 "btn_profile" = "  프로파일";
-"btn_buy_atom" = "  ATOM 구입";
-"btn_buy_bnb" = "  BNB 구입";
-"btn_buy_kava" = "  KAVA 구입";
-"btn_buy_band" = "  BAND 구입";
+"btn_buy_moonpay" = "  %@ 구입";
+"btn_buy_kadomoney" = "  크립토 구입";
 
 
 "msg_authz_description" = "다른 계정을 컨트롤 하실 수 있습니다.";
