@@ -161,11 +161,9 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
                 let object = try? moyaResponse.map(ObjectModel.self)
                 self.object = object
                 handler(object != nil)
-                break
             case let .failure(error):
                 print("failure: \(error.localizedDescription)")
                 handler(false)
-                break
             }
         }
     }

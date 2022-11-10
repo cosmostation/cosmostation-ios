@@ -39,7 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         self.requestToken()
                     }
                 })
-                break
             case .denied:
                 break
             case .authorized, .provisional, .ephemeral:
@@ -47,7 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     UIApplication.shared.registerForRemoteNotifications()
                 }
                 self.requestToken()
-                break
             }
         }
         
