@@ -80,23 +80,16 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
     
     func onCheckPassword() {
         if (!BaseData.instance.hasPassword()) {
-            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
             self.navigationItem.title = ""
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-            passwordVC.resultDelegate = self
-            passwordVC.mTarget = PASSWORD_ACTION_INIT
-            self.navigationController?.pushViewController(passwordVC, animated: false)
-            
+            self.navigationController?.pushViewController(UIStoryboard.passwordViewController(delegate: self, target: PASSWORD_ACTION_INIT), animated: false)            
         } else {
             if (BaseData.instance.isAutoPass()) {
                 self.onStartWalletDerive()
             } else {
-                let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 self.navigationItem.title = ""
                 self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-                passwordVC.resultDelegate = self
-                passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
-                self.navigationController?.pushViewController(passwordVC, animated: false)
+                self.navigationController?.pushViewController(UIStoryboard.passwordViewController(delegate: self, target: PASSWORD_ACTION_SIMPLE_CHECK), animated: false)
             }
         }
     }

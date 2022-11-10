@@ -318,21 +318,17 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     func onClickAutoPass() {
         if (BaseData.instance.hasPassword()) {
             self.checkMode = self.CHECK_FOR_AUTO_PASS
-            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            let passwordVC = UIStoryboard.passwordViewController(delegate: self, target: PASSWORD_ACTION_SETTING_CHECK)
             self.navigationItem.title = ""
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-            passwordVC.mTarget = PASSWORD_ACTION_SETTING_CHECK
-            passwordVC.resultDelegate = self
             passwordVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(passwordVC, animated: false)
 
         } else {
             self.checkMode = self.CHECK_FOR_AUTO_PASS
-            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            let passwordVC = UIStoryboard.passwordViewController(delegate: self, target: PASSWORD_ACTION_INIT)
             self.navigationItem.title = ""
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-            passwordVC.mTarget = PASSWORD_ACTION_INIT
-            passwordVC.resultDelegate = self
             passwordVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(passwordVC, animated: false)
         }
@@ -522,21 +518,17 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 BaseData.instance.setUsingAppLock(sender.isOn)
             } else {
                 self.checkMode = self.CHECK_FOR_APP_LOCK
-                let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+                let passwordVC = UIStoryboard.passwordViewController(delegate: self, target: PASSWORD_ACTION_SETTING_CHECK)
                 self.navigationItem.title = ""
                 self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-                passwordVC.mTarget = PASSWORD_ACTION_SETTING_CHECK
-                passwordVC.resultDelegate = self
                 passwordVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(passwordVC, animated: false)
             }
         } else {
             self.checkMode = self.CHECK_FOR_APP_LOCK
-            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            let passwordVC = UIStoryboard.passwordViewController(delegate: self, target: PASSWORD_ACTION_INIT)
             self.navigationItem.title = ""
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-            passwordVC.mTarget = PASSWORD_ACTION_INIT
-            passwordVC.resultDelegate = self
             passwordVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(passwordVC, animated: false)
         }

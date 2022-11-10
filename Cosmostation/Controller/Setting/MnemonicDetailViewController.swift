@@ -174,12 +174,9 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
                                             preferredStyle: .alert)
         deleteAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive, handler: { _ in
-            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
             self.navigationItem.title = ""
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-            passwordVC.mTarget = PASSWORD_ACTION_DELETE_ACCOUNT
-            passwordVC.resultDelegate = self
-            self.navigationController?.pushViewController(passwordVC, animated: false)
+            self.navigationController?.pushViewController(UIStoryboard.passwordViewController(delegate: self, target: PASSWORD_ACTION_DELETE_ACCOUNT), animated: false)
         }))
         deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)

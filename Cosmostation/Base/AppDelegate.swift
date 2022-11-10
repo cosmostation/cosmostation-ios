@@ -84,8 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationDidEnterBackground(_ application: UIApplication) {
         if let topViewController = application.topViewController {
             if !topViewController.isKind(of: PasswordViewController.self) && BaseData.instance.isRequiredUnlock() {
-                let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-                passwordVC.mTarget = PASSWORD_ACTION_APP_LOCK
+                let passwordVC = UIStoryboard.passwordViewController(delegate: nil, target: PASSWORD_ACTION_APP_LOCK)
                 passwordVC.isModalInPresentation = true
                 topViewController.present(passwordVC, animated: true, completion: nil)
             }

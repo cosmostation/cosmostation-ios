@@ -195,12 +195,9 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
         if (BaseData.instance.isAutoPass()) {
             self.onStartCheckVc()
         } else {
-            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
             self.navigationItem.title = ""
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-            passwordVC.resultDelegate = self
-            passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
-            self.navigationController?.pushViewController(passwordVC, animated: false)
+            self.navigationController?.pushViewController(UIStoryboard.passwordViewController(delegate: self, target: PASSWORD_ACTION_SIMPLE_CHECK), animated: false)
         }
     }
     
@@ -209,12 +206,9 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
         if (BaseData.instance.isAutoPass()) {
             self.onStartCheckVc()
         } else {
-            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
             self.navigationItem.title = ""
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-            passwordVC.resultDelegate = self
-            passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
-            self.navigationController?.pushViewController(passwordVC, animated: false)
+            self.navigationController?.pushViewController(UIStoryboard.passwordViewController(delegate: self, target: PASSWORD_ACTION_SIMPLE_CHECK), animated: false)
         }
     }
     
@@ -235,12 +229,9 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
         deleteAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive, handler: { _ in
             if (self.selectedAccount.account_has_private) {
-                let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 self.navigationItem.title = ""
                 self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-                passwordVC.mTarget = PASSWORD_ACTION_DELETE_ACCOUNT
-                passwordVC.resultDelegate = self
-                self.navigationController?.pushViewController(passwordVC, animated: false)
+                self.navigationController?.pushViewController(UIStoryboard.passwordViewController(delegate: self, target: PASSWORD_ACTION_DELETE_ACCOUNT), animated: false)
                 
             } else {
                 self.showWaittingAlert()

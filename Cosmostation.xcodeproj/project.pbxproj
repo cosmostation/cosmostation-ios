@@ -2659,6 +2659,8 @@
 		9F48C75629097FA00015CF89 /* HardPoolDeposit0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DB56F025FA3B7100B2F0E5 /* HardPoolDeposit0ViewController.swift */; };
 		9F7D91032912F31F002A382C /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D91022912F31F002A382C /* UIColor+Colors.swift */; };
 		9F7D91042912F31F002A382C /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D91022912F31F002A382C /* UIColor+Colors.swift */; };
+		9F831EED291C5C1800A998FC /* UIStoryboard+Instantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F831EEC291C5C1800A998FC /* UIStoryboard+Instantiate.swift */; };
+		9F831EEE291C5C1800A998FC /* UIStoryboard+Instantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F831EEC291C5C1800A998FC /* UIStoryboard+Instantiate.swift */; };
 		B113B26329094EF10004F5A6 /* CdpListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DB2535573100C364F9 /* CdpListViewController.swift */; };
 		B113B26429094F000004F5A6 /* CdpListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DB2535573100C364F9 /* CdpListViewController.swift */; };
 		B113B265290951F40004F5A6 /* HtlcResultSentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A33E424486DA20052BD3D /* HtlcResultSentCell.swift */; };
@@ -4136,6 +4138,7 @@
 		8378C93C7F20C3EFF8166D6C /* Pods-CosmostationDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.debug.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.debug.xcconfig"; sourceTree = "<group>"; };
 		9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLinesButton.swift; sourceTree = "<group>"; };
 		9F7D91022912F31F002A382C /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
+		9F831EEC291C5C1800A998FC /* UIStoryboard+Instantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Instantiate.swift"; sourceTree = "<group>"; };
 		B1247F34290ABE5C00F60500 /* UIApplication+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+KeyWindow.swift"; sourceTree = "<group>"; };
 		B928115C5F425560ED5DE8F4 /* Pods-Cosmostation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.debug.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.debug.xcconfig"; sourceTree = "<group>"; };
 		BB20D291C0AF536BBDAE928C /* Pods_Cosmostation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cosmostation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -5708,6 +5711,7 @@
 				9F7D91022912F31F002A382C /* UIColor+Colors.swift */,
 				04E1912B28E66F5800C98A6B /* UIViewController+Toast.swift */,
 				B1247F34290ABE5C00F60500 /* UIApplication+KeyWindow.swift */,
+				9F831EEC291C5C1800A998FC /* UIStoryboard+Instantiate.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -8106,6 +8110,7 @@
 				0451FCBF282A3C3E00214FDA /* ChainOmiflix.swift in Sources */,
 				0451FC9E282A3B5B00214FDA /* ChainBitsong.swift in Sources */,
 				18FFB62F281AF533004E65BB /* CdpDetailTopCell.swift in Sources */,
+				9F831EEE291C5C1800A998FC /* UIStoryboard+Instantiate.swift in Sources */,
 				18FFB636281AF533004E65BB /* GenNFT0ViewController.swift in Sources */,
 				1817CADA283E2CE500523713 /* evmos_inflation_v1_inflation.pb.swift in Sources */,
 				18FFB63C281AF533004E65BB /* ProfileViewController.swift in Sources */,
@@ -8665,6 +8670,7 @@
 				040FA7FA275F55C200229F6F /* desmos_posts_v1beta1_reactions.pb.swift in Sources */,
 				282BDFE224A5992500D3A5D4 /* WcTradePopup.swift in Sources */,
 				040FA916275F55C300229F6F /* desmos_profiles_v1beta1_query_profile.pb.swift in Sources */,
+				9F831EED291C5C1800A998FC /* UIStoryboard+Instantiate.swift in Sources */,
 				047FB6F0281A4C53009D8AAF /* sifnode_tokenregistry_v1_tx.grpc.swift in Sources */,
 				040FAA4C275F55C400229F6F /* desmos_profiles_v1beta1_query_relationships.pb.swift in Sources */,
 				041ECDEE27F41DCE00397D37 /* WcSignRequestPopup.swift in Sources */,
