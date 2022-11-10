@@ -159,104 +159,36 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 1) {
             if (!onCommonCheck()) { return }
-            if (indexPath.row == 0) {
-                guard let auth = getSendAuth() else {
-                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
-                    return
-                }
-                let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-                txVC.mGrant = auth
-                txVC.mGranterAddress = granterAddress
-                txVC.mGranterAvailables = granterAvailables
-                txVC.mType = TASK_TYPE_AUTHZ_SEND
+            guard let auth = getSendAuth() else {
+                onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                return
+            }
+            var viewController: UIViewController? = nil
+            if indexPath.row == 0 {
+                let granterData = GranterData(address: granterAddress, availables: granterAvailables)
+                viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_SEND)
+            } else if indexPath.row == 1 {
+                let granterData = GranterData(address: granterAddress, availables: granterAvailables, vestings: granterVestings, delegations: granterDelegation, unboundings: granterUnbonding, rewards: granterReward)
+                viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_DELEGATE)
+            } else if indexPath.row == 2 {
+                let granterData = GranterData(address: granterAddress, delegations: granterDelegation, unboundings: granterUnbonding, rewards: granterReward)
+                viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_UNDELEGATE)
+            } else if indexPath.row == 3 {
+                let granterData = GranterData(address: granterAddress, delegations: granterDelegation, unboundings: granterUnbonding, rewards: granterReward)
+                viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_REDELEGATE)
+            } else if indexPath.row == 4 {
+                let granterData = GranterData(address: granterAddress, rewards: granterReward)
+                viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_CLAIM_REWARDS)
+            } else if indexPath.row == 5 {
+                let granterData = GranterData(address: granterAddress, comission: granterCommission)
+                viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN)
+            } else if indexPath.row == 6 {
+                let granterData = GranterData(address: granterAddress)
+                viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_VOTE)
+            }
+            if let viewController = viewController  {
                 self.navigationItem.title = ""
-                self.navigationController?.pushViewController(txVC, animated: true)
-                
-            } else if (indexPath.row == 1) {
-                guard let auth = getDelegateAuth() else {
-                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
-                    return
-                }
-                let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-                txVC.mGrant = auth
-                txVC.mGranterAddress = granterAddress
-                txVC.mGranterAvailables = granterAvailables
-                txVC.mGranterVestings = granterVestings
-                txVC.mGranterDelegation = granterDelegation
-                txVC.mGranterUnbonding = granterUnbonding
-                txVC.mGranterReward = granterReward
-                txVC.mType = TASK_TYPE_AUTHZ_DELEGATE
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(txVC, animated: true)
-                
-            } else if (indexPath.row == 2) {
-                guard let auth = getUndelegateAuth() else {
-                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
-                    return
-                }
-                let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-                txVC.mGrant = auth
-                txVC.mGranterAddress = granterAddress
-                txVC.mGranterDelegation = granterDelegation
-                txVC.mGranterUnbonding = granterUnbonding
-                txVC.mGranterReward = granterReward
-                txVC.mType = TASK_TYPE_AUTHZ_UNDELEGATE
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(txVC, animated: true)
-                
-            } else if (indexPath.row == 3) {
-                guard let auth = getRedelegateAuth() else {
-                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
-                    return
-                }
-                let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-                txVC.mGrant = auth
-                txVC.mGranterAddress = granterAddress
-                txVC.mGranterDelegation = granterDelegation
-                txVC.mGranterUnbonding = granterUnbonding
-                txVC.mGranterReward = granterReward
-                txVC.mType = TASK_TYPE_AUTHZ_REDELEGATE
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(txVC, animated: true)
-                
-            } else if (indexPath.row == 4) {
-                guard let auth = getRewardAuth() else {
-                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
-                    return
-                }
-                let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-                txVC.mGrant = auth
-                txVC.mGranterAddress = granterAddress
-                txVC.mGranterReward = granterReward
-                txVC.mType = TASK_TYPE_AUTHZ_CLAIM_REWARDS
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(txVC, animated: true)
-                
-            } else if (indexPath.row == 5) {
-                guard let auth = getCommissionAuth() else {
-                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
-                    return
-                }
-                let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-                txVC.mGrant = auth
-                txVC.mGranterAddress = granterAddress
-                txVC.mGranterCommission = granterCommission
-                txVC.mType = TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(txVC, animated: true)
-                
-            } else if (indexPath.row == 6) {
-                guard let auth = getVoteAuth() else {
-                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
-                    return
-                }
-                let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-                txVC.mGrant = auth
-                txVC.mGranterAddress = granterAddress
-                txVC.mType = TASK_TYPE_AUTHZ_VOTE
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(txVC, animated: true)
-                
+                self.navigationController?.pushViewController(viewController, animated: true)
             }
         }
     }
