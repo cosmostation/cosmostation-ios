@@ -73,7 +73,7 @@ class AuthzRedelegate2ViewController: BaseViewController, UITextFieldDelegate {
     func onUpdateView() {
         dpDecimal = chainConfig!.displayDecimal
         let selectedValAddress = pageHolderVC.mTargetValidator_gRPC?.operatorAddress
-        if let delegated = pageHolderVC.mGranterDelegation.filter({ $0.delegation.validatorAddress == selectedValAddress }).first {
+        if let delegated = pageHolderVC.mGranterData.delegations.filter({ $0.delegation.validatorAddress == selectedValAddress }).first {
             granterRedelegatable = NSDecimalNumber.init(string: delegated.balance.amount)
         }
         print("granterRedelegatable1 ", granterRedelegatable)

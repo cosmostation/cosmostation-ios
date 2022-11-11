@@ -96,7 +96,7 @@ class AuthzRedelegate5ViewController: BaseViewController, PasswordViewDelegate {
         DispatchQueue.global().async {
             let reqTx = Signer.genAuthzRedelegate(auth!, self.account!.account_pubkey_type,
                                                   self.account!.account_address,
-                                                  self.pageHolderVC.mGranterAddress!,
+                                                  self.pageHolderVC.mGranterData.address,
                                                   self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
                                                   self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
                                                   self.pageHolderVC.mToReDelegateAmount!,

@@ -151,7 +151,7 @@ class AuthzVote1ViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     func onFetchMintscanMyVotes() {
-        let url = BaseNetWork.mintscanMyVotes(self.chainConfig!, self.pageHolderVC.mGranterAddress!)
+        let url = BaseNetWork.mintscanMyVotes(self.chainConfig!, self.pageHolderVC.mGranterData.address)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {

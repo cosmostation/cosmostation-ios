@@ -61,16 +61,9 @@ class TransactionViewController: UIViewController {
     var irisResponse: Irismod_Nft_QueryNFTResponse?
     var croResponse: Chainmain_Nft_V1_QueryNFTResponse?
     
-    //for authz tx
+    // MARK: - for authz tx
     var mGrant: Cosmos_Authz_V1beta1_Grant?
-    var mGranterAddress: String?
-    var mGranterAvailables = Array<Coin>()
-    var mGranterVestings = Array<Coin>()
-    var mGranterDelegation = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
-    var mGranterUnbonding = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
-    var mGranterReward = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
-    var mGranterCommission: Coin?
-    
+    var mGranterData: GranterData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -415,14 +408,8 @@ class TransactionViewController: UIViewController {
             StepVc.irisResponse = self.irisResponse
             StepVc.croResponse = self.croResponse
             
-            StepVc.mGrant = self.mGrant
-            StepVc.mGranterAddress = self.mGranterAddress
-            StepVc.mGranterAvailables = self.mGranterAvailables
-            StepVc.mGranterVestings = self.mGranterVestings
-            StepVc.mGranterDelegation = self.mGranterDelegation
-            StepVc.mGranterUnbonding = self.mGranterUnbonding
-            StepVc.mGranterReward = self.mGranterReward
-            StepVc.mGranterCommission = self.mGranterCommission
+            StepVc.mGrant = mGrant
+            StepVc.mGranterData = mGranterData
         }
     }
     

@@ -96,7 +96,7 @@ class AuthzUndelegate5ViewController: BaseViewController, PasswordViewDelegate {
         DispatchQueue.global().async {
             let reqTx = Signer.genAuthzUndelegate(auth!, self.account!.account_pubkey_type,
                                                 self.account!.account_address,
-                                                self.pageHolderVC.mGranterAddress!,
+                                                self.pageHolderVC.mGranterData.address,
                                                 self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
                                                 self.pageHolderVC.mToUndelegateAmount!,
                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,

@@ -38,8 +38,8 @@ class AuthzDelegate2ViewController: BaseViewController, UITextFieldDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         self.grant = pageHolderVC.mGrant
-        self.granterAvailables = pageHolderVC.mGranterAvailables
-        self.granterVestings = pageHolderVC.mGranterVestings
+        self.granterAvailables = pageHolderVC.mGranterData.availables
+        self.granterVestings = pageHolderVC.mGranterData.vestings
         
         dpDecimal = chainConfig!.displayDecimal
         var available = NSDecimalNumber.zero

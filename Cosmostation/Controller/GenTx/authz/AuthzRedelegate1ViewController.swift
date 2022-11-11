@@ -33,9 +33,9 @@ class AuthzRedelegate1ViewController: BaseViewController, UITableViewDelegate, U
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         self.grant = pageHolderVC.mGrant
-        self.granterDelegation = pageHolderVC.mGranterDelegation
-        self.granterUnbonding = pageHolderVC.mGranterUnbonding
-        self.granterReward = pageHolderVC.mGranterReward
+        self.granterDelegation = pageHolderVC.mGranterData.delegations
+        self.granterUnbonding = pageHolderVC.mGranterData.unboundings
+        self.granterReward = pageHolderVC.mGranterData.rewards
         
         self.validatorsTableView.delegate = self
         self.validatorsTableView.dataSource = self

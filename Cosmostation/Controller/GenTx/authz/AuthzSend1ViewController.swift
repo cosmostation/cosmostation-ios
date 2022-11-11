@@ -73,7 +73,7 @@ class AuthzSend1ViewController: BaseViewController, QrScannerDelegate {
     @IBAction func onClickNext(_ sender: UIButton) {
         let userInput = targetAddressTextField.text?.trimmingCharacters(in: .whitespaces)
         
-        if (pageHolderVC.mGranterAddress == userInput) {
+        if (pageHolderVC.mGranterData.address == userInput) {
             self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
             return;
         }

@@ -23,13 +23,7 @@ extension UIStoryboard {
         let transactionViewController = UIStoryboard(name: "GenTx", bundle: nil)
             .instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         transactionViewController.mGrant = grant
-        transactionViewController.mGranterAddress = granter.address
-        transactionViewController.mGranterAvailables = granter.availables
-        transactionViewController.mGranterVestings = granter.vestings
-        transactionViewController.mGranterDelegation = granter.delegations
-        transactionViewController.mGranterUnbonding = granter.unboundings
-        transactionViewController.mGranterReward = granter.rewards
-        transactionViewController.mGranterCommission = granter.comission
+        transactionViewController.mGranterData = granter
         transactionViewController.mType = type
         return transactionViewController
     }
@@ -42,7 +36,7 @@ struct GranterData {
     let delegations: [Cosmos_Staking_V1beta1_DelegationResponse]
     let unboundings: [Cosmos_Staking_V1beta1_UnbondingDelegation]
     let rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]
-    let comission: Coin?
+    let commission: Coin?
     
     init(address: String,
          availables: [Coin] = [],
@@ -57,6 +51,30 @@ struct GranterData {
         self.delegations = delegations
         self.unboundings = unboundings
         self.rewards = rewards
-        self.comission = comission
+        self.commission = comission
+    }
+}
+
+extension Optional where Wrapped == GranterData {
+    var address: String {
+        ""
+    }
+    var availables: [Coin] {
+        []
+    }
+    var vestings: [Coin] {
+        []
+    }
+    var delegations: [Cosmos_Staking_V1beta1_DelegationResponse] {
+        []
+    }
+    var unboundings: [Cosmos_Staking_V1beta1_UnbondingDelegation] {
+        []
+    }
+    var rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward] {
+        []
+    }
+    var commission: Coin? {
+        nil
     }
 }

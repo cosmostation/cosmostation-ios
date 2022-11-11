@@ -56,7 +56,7 @@ class AuthzClaimReward4ViewController: BaseViewController, PasswordViewDelegate 
         
         var monikers = ""
         BaseData.instance.mAllValidators_gRPC.forEach { validator in
-            pageHolderVC.mGranterReward.forEach { myValidator in
+            pageHolderVC.mGranterData.rewards.forEach { myValidator in
                 if (validator.operatorAddress == myValidator.validatorAddress) {
                     if (monikers.count > 0) {
                         monikers = monikers + ",   " + validator.description_p.moniker
@@ -70,7 +70,7 @@ class AuthzClaimReward4ViewController: BaseViewController, PasswordViewDelegate 
         
         recipientLabel.text = pageHolderVC.mRewardAddress
         recipientLabel.adjustsFontSizeToFitWidth = true
-        if (pageHolderVC.mGranterAddress == pageHolderVC.mRewardAddress) {
+        if (pageHolderVC.mGranterData.address == pageHolderVC.mRewardAddress) {
             self.recipientTitleLabel.isHidden = true
             self.recipientLabel.isHidden = true
         } else {
@@ -95,7 +95,7 @@ class AuthzClaimReward4ViewController: BaseViewController, PasswordViewDelegate 
     
     func getRewardSum() -> Coin {
         var sum = NSDecimalNumber.zero
-        pageHolderVC.mGranterReward.forEach { reward in
+        pageHolderVC.mGranterData.rewards.forEach { reward in
             reward.reward.forEach { rewardCoin in
                 if (rewardCoin.denom == chainConfig!.stakeDenom) {
                     sum = sum.adding(WUtils.plainStringToDecimal(rewardCoin.amount))
@@ -132,8 +132,8 @@ class AuthzClaimReward4ViewController: BaseViewController, PasswordViewDelegate 
         DispatchQueue.global().async {
             let reqTx = Signer.genAuthzClaimReward(auth!, self.account!.account_pubkey_type,
                                                    self.account!.account_address,
-                                                   self.pageHolderVC.mGranterAddress!,
-                                                   self.pageHolderVC.mGranterReward,
+                                                   self.pageHolderVC.mGranterData.address,
+                                                   self.pageHolderVC.mGranterData.rewards,
                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                    self.chainType!)

@@ -31,7 +31,7 @@ class AuthzClaimReward1ViewController: BaseViewController {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         self.loadingImg.onStartAnimation()
-        self.onFetchRewardAddress_gRPC(pageHolderVC.mGranterAddress!)
+        self.onFetchRewardAddress_gRPC(pageHolderVC.mGranterData.address)
         
         cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
@@ -53,7 +53,7 @@ class AuthzClaimReward1ViewController: BaseViewController {
         
         var monikers = ""
         BaseData.instance.mAllValidators_gRPC.forEach { validator in
-            pageHolderVC.mGranterReward.forEach { myValidator in
+            pageHolderVC.mGranterData.rewards.forEach { myValidator in
                 if (validator.operatorAddress == myValidator.validatorAddress) {
                     if (monikers.count > 0) {
                         monikers = monikers + ",   " + validator.description_p.moniker
@@ -67,7 +67,7 @@ class AuthzClaimReward1ViewController: BaseViewController {
         
         rewardToAddressLabel.text = pageHolderVC.mRewardAddress
         rewardToAddressLabel.adjustsFontSizeToFitWidth = true
-        if (pageHolderVC.mGranterAddress == pageHolderVC.mRewardAddress) {
+        if (pageHolderVC.mGranterData.address == pageHolderVC.mRewardAddress) {
             self.rewardToAddressTitle.isHidden = true
             self.rewardToAddressLabel.isHidden = true
         } else {
@@ -90,7 +90,7 @@ class AuthzClaimReward1ViewController: BaseViewController {
     
     func getRewardSum() -> Coin {
         var sum = NSDecimalNumber.zero
-        pageHolderVC.mGranterReward.forEach { reward in
+        pageHolderVC.mGranterData.rewards.forEach { reward in
             reward.reward.forEach { rewardCoin in
                 if (rewardCoin.denom == chainConfig!.stakeDenom) {
                     sum = sum.adding(WUtils.plainStringToDecimal(rewardCoin.amount))
