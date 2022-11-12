@@ -11,31 +11,25 @@ import UIKit
 class ClaimRewardAllCell: UITableViewCell {
     
     @IBOutlet weak var totalRewardTitleLabel: UILabel!
-    @IBOutlet weak var onClickRewardTitleLabel: UILabel!
-    @IBOutlet weak var onClickRewardMsgLAbel: UILabel!
-    @IBOutlet weak var onClickCompoundTitleLabel: UILabel!
-    @IBOutlet weak var onClickCompoundMsgLabel: UILabel!
-    
     @IBOutlet weak var totalRewardLabel: UILabel!
     @IBOutlet weak var denomLabel: UILabel!
-    @IBOutlet weak var claimAllCardView: CardView!
-    @IBOutlet weak var compoundingCardView: CardView!
+    @IBOutlet weak var claimAllButton: TwoLinesButton!
+    @IBOutlet weak var compoundButton: TwoLinesButton!
+    
+    var actionRewardAll: (() -> Void)? = nil
+    var actionCompunding: (() -> Void)? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        self.claimAllCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickReward (_:))))
-        self.compoundingCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickCompound (_:))))
-        
         totalRewardTitleLabel.text = NSLocalizedString("str_total_reward", comment: "")
-        onClickRewardTitleLabel.text = NSLocalizedString("str_one_click", comment: "")
-        onClickRewardMsgLAbel.text = NSLocalizedString("str_claim_reward_all", comment: "")
-        onClickCompoundTitleLabel.text = NSLocalizedString("str_one_click", comment: "")
-        onClickCompoundMsgLabel.text = NSLocalizedString("str_compounding", comment: "")
+        claimAllButton.setTitle(firstLineTitle: NSLocalizedString("str_one_click", comment: ""), firstLineColor: UIColor(named: "photon"),
+                                secondLineText: NSLocalizedString("str_claim_reward_all", comment: ""), secondLineColor: UIColor.font05,
+                                state: .normal)
+        compoundButton.setTitle(firstLineTitle: NSLocalizedString("str_one_click", comment: ""), firstLineColor: UIColor(named: "photon"),
+                                secondLineText: NSLocalizedString("str_compounding", comment: ""), secondLineColor: UIColor.font05,
+                                state: .normal)
     }
-    
-    var actionRewardAll: (() -> Void)? = nil
-    var actionCompunding: (() -> Void)? = nil
     
     func updateView(_ chainConfig: ChainConfig?) {
         let mainDenom = WUtils.getMainDenom(chainConfig)
@@ -43,11 +37,11 @@ class ClaimRewardAllCell: UITableViewCell {
         WDP.dpCoin(chainConfig, mainDenom, rewardSum, denomLabel, totalRewardLabel)
     }
     
-    @objc func onClickReward (_ sender: UITapGestureRecognizer) {
+    @IBAction func onClickAllRewards(_ sender: Any) {
         actionRewardAll?()
     }
     
-    @objc func onClickCompound (_ sender: UITapGestureRecognizer) {
+    @IBAction func onClickCompound(_ sender: Any) {
         actionCompunding?()
     }
 }
