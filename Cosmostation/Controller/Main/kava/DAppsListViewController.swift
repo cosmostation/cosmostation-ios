@@ -34,13 +34,9 @@ class DAppsListViewController: BaseViewController {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
-        if #available(iOS 13.0, *) {
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
-            dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
-        } else {
-            dAppsSegment.tintColor = chainConfig?.chainColor
-        }
+        dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
+        dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
         
         self.onFetchKavaSwapPoolData()
     }

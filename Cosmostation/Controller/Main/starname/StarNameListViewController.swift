@@ -33,14 +33,9 @@ class StarNameListViewController: BaseViewController {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
-        if #available(iOS 13.0, *) {
-            myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
-            myStarNameSegment.selectedSegmentTintColor = chainConfig?.chainColor
-            
-        } else {
-            myStarNameSegment.tintColor = chainConfig?.chainColor
-        }
+        myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
+        myStarNameSegment.selectedSegmentTintColor = chainConfig?.chainColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
