@@ -31,7 +31,7 @@ class AuthzClaimCommisstion1ViewController: BaseViewController {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         self.loadingImg.onStartAnimation()
-        self.onFetchRewardAddress_gRPC(pageHolderVC.mGranterAddress!)
+        self.onFetchRewardAddress_gRPC(pageHolderVC.mGranterData.address)
         
         cancelBtn.borderColor = UIColor.font05
         nextBtn.borderColor = UIColor.init(named: "photon")
@@ -48,16 +48,16 @@ class AuthzClaimCommisstion1ViewController: BaseViewController {
     }
     
     func onUpdateView() {
-        let mainCommision = pageHolderVC.mGranterCommission
+        let mainCommision = pageHolderVC.mGranterData.commission
         WDP.dpCoin(chainConfig, mainCommision, commissionDenomLabel, commissionAmountLabel)
         
-        let opAddress = WKey.getOpAddressFromAddress(pageHolderVC.mGranterAddress!, chainConfig)
+        let opAddress = WKey.getOpAddressFromAddress(pageHolderVC.mGranterData.address, chainConfig)
         let validatorInfo = BaseData.instance.mAllValidators_gRPC.filter { $0.operatorAddress == opAddress }.first
         commissionFromLabel.text = validatorInfo?.description_p.moniker
         
         commissionToAddressLabel.text = pageHolderVC.mRewardAddress
         commissionToAddressLabel.adjustsFontSizeToFitWidth = true
-        if (pageHolderVC.mGranterAddress == pageHolderVC.mRewardAddress) {
+        if (pageHolderVC.mGranterData.address == pageHolderVC.mRewardAddress) {
             self.commissionToAddressTitle.isHidden = true
             self.commissionToAddressLabel.isHidden = true
         } else {

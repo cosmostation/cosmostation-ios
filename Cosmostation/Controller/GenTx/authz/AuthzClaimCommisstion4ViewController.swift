@@ -50,17 +50,17 @@ class AuthzClaimCommisstion4ViewController: BaseViewController, PasswordViewDele
     }
     
     func onUpdateView() {
-        let mainCommision = pageHolderVC.mGranterCommission
+        let mainCommision = pageHolderVC.mGranterData.commission
         WDP.dpCoin(chainConfig, mainCommision, commissionDenomLabel, commissionAmoutLabel)
         WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
         
-        let opAddress = WKey.getOpAddressFromAddress(pageHolderVC.mGranterAddress!, chainConfig)
+        let opAddress = WKey.getOpAddressFromAddress(pageHolderVC.mGranterData.address, chainConfig)
         let validatorInfo = BaseData.instance.mAllValidators_gRPC.filter { $0.operatorAddress == opAddress }.first
         fromValidatorLabel.text = validatorInfo?.description_p.moniker
         
         recipientLabel.text = pageHolderVC.mRewardAddress
         recipientLabel.adjustsFontSizeToFitWidth = true
-        if (pageHolderVC.mGranterAddress == pageHolderVC.mRewardAddress) {
+        if (pageHolderVC.mGranterData.address == pageHolderVC.mRewardAddress) {
             self.recipientTitleLabel.isHidden = true
             self.recipientLabel.isHidden = true
         } else {
@@ -113,8 +113,8 @@ class AuthzClaimCommisstion4ViewController: BaseViewController, PasswordViewDele
         DispatchQueue.global().async {
             let reqTx = Signer.genAuthzClaimCommission(auth!, self.account!.account_pubkey_type,
                                                        self.account!.account_address,
-                                                       self.pageHolderVC.mGranterAddress!,
-                                                       WKey.getOpAddressFromAddress(self.pageHolderVC.mGranterAddress!, self.chainConfig),
+                                                       self.pageHolderVC.mGranterData.address,
+                                                       WKey.getOpAddressFromAddress(self.pageHolderVC.mGranterData.address, self.chainConfig),
                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                        self.chainType!)

@@ -97,7 +97,7 @@ class AuthzSend5ViewController: BaseViewController, PasswordViewDelegate{
         DispatchQueue.global().async {
             let reqTx = Signer.genAuthzSend(auth!, self.account!.account_pubkey_type,
                                             self.account!.account_address,
-                                            self.pageHolderVC.mGranterAddress!,
+                                            self.pageHolderVC.mGranterData.address,
                                             self.pageHolderVC.mRecipinetAddress!,
                                             self.pageHolderVC.mToSendAmount,
                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,

@@ -148,17 +148,9 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mDesmosToLinkChain: ChainType?
     var mDesmosToLinkAccountId: Int64!
     var mDesmosAirDropAmount: String?
-    
-    
+
     var mGrant: Cosmos_Authz_V1beta1_Grant?
-    var mGranterAddress: String?
-    var mGranterAvailables = Array<Coin>()
-    var mGranterVestings = Array<Coin>()
-    var mGranterDelegation = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
-    var mGranterUnbonding = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
-    var mGranterReward = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
-    var mGranterCommission: Coin?
-    
+    var mGranterData: GranterData?
     
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == TASK_TYPE_TRANSFER) {

@@ -42,7 +42,7 @@ class AuthzSend2ViewController: BaseViewController, UITextFieldDelegate, SBCardP
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         self.grant = pageHolderVC.mGrant
-        self.granterAvailables = pageHolderVC.mGranterAvailables
+        self.granterAvailables = pageHolderVC.mGranterData.availables
         self.granterAvailables.sort {
             if ($0.denom == chainConfig?.stakeDenom) { return true }
             if ($1.denom == chainConfig?.stakeDenom) { return false }

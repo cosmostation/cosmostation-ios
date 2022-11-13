@@ -754,8 +754,8 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
             return Signer.genSimulateAuthzClaimReward(auth, account!.account_pubkey_type,
                                                       self.account!.account_address,
-                                                      self.pageHolderVC.mGranterAddress!,
-                                                      self.pageHolderVC.mGranterReward,
+                                                      self.pageHolderVC.mGranterData.address,
+                                                      self.pageHolderVC.mGranterData.rewards,
                                                       self.mFee, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                       self.chainType!)
@@ -763,8 +763,8 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN) {
             return Signer.genSimulateAuthzClaimCommission(auth, account!.account_pubkey_type,
                                                           self.account!.account_address,
-                                                          self.pageHolderVC.mGranterAddress!,
-                                                          WKey.getOpAddressFromAddress(self.pageHolderVC.mGranterAddress!, self.chainConfig),
+                                                          self.pageHolderVC.mGranterData.address,
+                                                          WKey.getOpAddressFromAddress(self.pageHolderVC.mGranterData.address, self.chainConfig),
                                                           self.mFee, self.pageHolderVC.mMemo!,
                                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                           self.chainType!)
@@ -772,7 +772,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_VOTE) {
             return Signer.genSimulateAuthzVote(auth, account!.account_pubkey_type,
                                                self.account!.account_address,
-                                               self.pageHolderVC.mGranterAddress!,
+                                               self.pageHolderVC.mGranterData.address,
                                                self.pageHolderVC.mProposals,
                                                self.mFee, self.pageHolderVC.mMemo!,
                                                self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
@@ -781,7 +781,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_DELEGATE) {
             return Signer.genSimulateAuthzDelegate(auth, account!.account_pubkey_type,
                                                    self.account!.account_address,
-                                                   self.pageHolderVC.mGranterAddress!,
+                                                   self.pageHolderVC.mGranterData.address,
                                                    self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
                                                    self.pageHolderVC.mToDelegateAmount!,
                                                    self.mFee, self.pageHolderVC.mMemo!,
@@ -791,7 +791,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_UNDELEGATE) {
             return Signer.genSimulateAuthzUndelegate(auth, account!.account_pubkey_type,
                                                      self.account!.account_address,
-                                                     self.pageHolderVC.mGranterAddress!,
+                                                     self.pageHolderVC.mGranterData.address,
                                                      self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
                                                      self.pageHolderVC.mToUndelegateAmount!,
                                                      self.mFee, self.pageHolderVC.mMemo!,
@@ -801,7 +801,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_REDELEGATE) {
             return Signer.genSimulateAuthzRedelegate(auth, account!.account_pubkey_type,
                                                      self.account!.account_address,
-                                                     self.pageHolderVC.mGranterAddress!,
+                                                     self.pageHolderVC.mGranterData.address,
                                                      self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
                                                      self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
                                                      self.pageHolderVC.mToReDelegateAmount!,
@@ -812,7 +812,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_SEND) {
             return Signer.genSimulateAuthzSend(auth, account!.account_pubkey_type,
                                                self.account!.account_address,
-                                               self.pageHolderVC.mGranterAddress!,
+                                               self.pageHolderVC.mGranterData.address,
                                                self.pageHolderVC.mRecipinetAddress!,
                                                self.pageHolderVC.mToSendAmount,
                                                self.mFee, self.pageHolderVC.mMemo!,
