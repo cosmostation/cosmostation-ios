@@ -22,58 +22,37 @@
                         <rect key="frame" x="12" y="4" width="450" height="153"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Total Reward" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fus-s2-huz">
-                                <rect key="frame" x="186" y="10" width="78.5" height="16"/>
+                                <rect key="frame" x="188.5" y="10" width="73" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="liV-CD-bWn">
-                                <rect key="frame" x="134" y="28" width="182.5" height="57"/>
+                                <rect key="frame" x="147.5" y="26.5" width="155.5" height="14.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="121,232,212.000000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNn-gq-MZA">
-                                        <rect key="frame" x="0.0" y="0.0" width="139.5" height="57"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="115" height="14.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATOM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guL-u8-8x9">
-                                        <rect key="frame" x="145.5" y="0.0" width="37" height="57"/>
+                                        <rect key="frame" x="121" y="0.0" width="34.5" height="14.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                         <color key="textColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="IFP-x6-nJ7">
-                                <rect key="frame" x="16" y="95" width="418" height="42"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="IFP-x6-nJ7">
+                                <rect key="frame" x="6" y="51" width="438" height="94"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nmO-yp-BVv" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="203" height="42"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One Click" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYr-BF-Qsc">
-                                                <rect key="frame" x="76.5" y="6" width="50.5" height="13.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                                <color key="textColor" name="photon"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Claim Reward All" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sV-li-3CJ">
-                                                <rect key="frame" x="51" y="20" width="101.5" height="16"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                <color key="textColor" name="_font05"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="ZYr-BF-Qsc" firstAttribute="top" secondItem="nmO-yp-BVv" secondAttribute="top" constant="6" id="4aq-Ig-JDp"/>
-                                            <constraint firstAttribute="height" constant="42" id="7G4-ed-NYI"/>
-                                            <constraint firstAttribute="bottom" secondItem="3sV-li-3CJ" secondAttribute="bottom" constant="6" id="E4q-F4-4EL"/>
-                                            <constraint firstItem="ZYr-BF-Qsc" firstAttribute="centerX" secondItem="nmO-yp-BVv" secondAttribute="centerX" id="JvL-i7-5ub"/>
-                                            <constraint firstItem="3sV-li-3CJ" firstAttribute="centerX" secondItem="nmO-yp-BVv" secondAttribute="centerX" id="ZSa-SE-jmA"/>
-                                        </constraints>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fzt-gx-9t0" customClass="TwoLinesButton" customModule="Cosmostation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="216" height="94"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="4"/>
+                                                <integer key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                 <color key="value" name="_font05"/>
@@ -82,34 +61,16 @@
                                                 <real key="value" value="0.69999999999999996"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AJW-8k-xXD" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="215" y="0.0" width="203" height="42"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One Click" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDK-cN-VrG">
-                                                <rect key="frame" x="76.5" y="6" width="50.5" height="13.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                                <color key="textColor" name="photon"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compounding" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euh-tL-TwI">
-                                                <rect key="frame" x="59" y="20" width="85" height="16"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                <color key="textColor" name="_font05"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="NDK-cN-VrG" firstAttribute="top" secondItem="AJW-8k-xXD" secondAttribute="top" constant="6" id="6yf-Yl-rLa"/>
-                                            <constraint firstItem="NDK-cN-VrG" firstAttribute="centerX" secondItem="AJW-8k-xXD" secondAttribute="centerX" id="C4X-j5-QDr"/>
-                                            <constraint firstItem="euh-tL-TwI" firstAttribute="centerX" secondItem="AJW-8k-xXD" secondAttribute="centerX" id="Fsa-iK-dOV"/>
-                                            <constraint firstAttribute="bottom" secondItem="euh-tL-TwI" secondAttribute="bottom" constant="6" id="gWu-Eq-ULT"/>
-                                            <constraint firstAttribute="height" constant="42" id="nSq-dh-tWn"/>
-                                        </constraints>
+                                        <connections>
+                                            <action selector="onClickAllRewards:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VNx-Lp-4wP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KlP-gW-0CY" customClass="TwoLinesButton" customModule="Cosmostation" customModuleProvider="target">
+                                        <rect key="frame" x="222" y="0.0" width="216" height="94"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="4"/>
+                                                <integer key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                 <color key="value" name="_font05"/>
@@ -118,7 +79,10 @@
                                                 <real key="value" value="0.69999999999999996"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                    </view>
+                                        <connections>
+                                            <action selector="onClickCompound:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="h1q-pw-VmN"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -126,13 +90,13 @@
                         <constraints>
                             <constraint firstItem="IFP-x6-nJ7" firstAttribute="centerX" secondItem="LM8-me-rqz" secondAttribute="centerX" id="5hp-fF-GaV"/>
                             <constraint firstItem="fus-s2-huz" firstAttribute="top" secondItem="LM8-me-rqz" secondAttribute="top" constant="10" id="6ef-9b-sAp"/>
-                            <constraint firstAttribute="trailing" secondItem="IFP-x6-nJ7" secondAttribute="trailing" constant="16" id="BCS-hX-VAD"/>
-                            <constraint firstItem="IFP-x6-nJ7" firstAttribute="leading" secondItem="LM8-me-rqz" secondAttribute="leading" constant="16" id="Ojn-WX-FbF"/>
+                            <constraint firstAttribute="trailing" secondItem="IFP-x6-nJ7" secondAttribute="trailing" constant="6" id="BCS-hX-VAD"/>
+                            <constraint firstItem="IFP-x6-nJ7" firstAttribute="leading" secondItem="LM8-me-rqz" secondAttribute="leading" constant="6" id="Ojn-WX-FbF"/>
                             <constraint firstItem="liV-CD-bWn" firstAttribute="top" secondItem="fus-s2-huz" secondAttribute="bottom" constant="2" id="UKw-tc-vc7"/>
                             <constraint firstItem="liV-CD-bWn" firstAttribute="centerX" secondItem="LM8-me-rqz" secondAttribute="centerX" id="f7d-LV-SKu"/>
                             <constraint firstItem="IFP-x6-nJ7" firstAttribute="top" secondItem="liV-CD-bWn" secondAttribute="bottom" constant="10" id="g9t-1P-qIu"/>
                             <constraint firstItem="fus-s2-huz" firstAttribute="centerX" secondItem="LM8-me-rqz" secondAttribute="centerX" id="ieD-2S-bKA"/>
-                            <constraint firstAttribute="bottom" secondItem="IFP-x6-nJ7" secondAttribute="bottom" constant="16" id="q7W-Xo-XKb"/>
+                            <constraint firstAttribute="bottom" secondItem="IFP-x6-nJ7" secondAttribute="bottom" constant="8" id="q7W-Xo-XKb"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
@@ -164,19 +128,23 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="claimAllCardView" destination="nmO-yp-BVv" id="kXe-41-dnx"/>
-                <outlet property="compoundingCardView" destination="AJW-8k-xXD" id="yLK-J9-SOt"/>
+                <outlet property="claimAllButton" destination="Fzt-gx-9t0" id="JKq-oe-JCE"/>
+                <outlet property="compoundButton" destination="KlP-gW-0CY" id="diD-ag-bOe"/>
                 <outlet property="denomLabel" destination="guL-u8-8x9" id="sWY-Eo-0od"/>
-                <outlet property="onClickCompoundMsgLabel" destination="euh-tL-TwI" id="TZh-OM-20B"/>
-                <outlet property="onClickCompoundTitleLabel" destination="NDK-cN-VrG" id="rYi-Nl-UiQ"/>
-                <outlet property="onClickRewardMsgLAbel" destination="3sV-li-3CJ" id="Xk6-oW-zeQ"/>
-                <outlet property="onClickRewardTitleLabel" destination="ZYr-BF-Qsc" id="6nw-Ym-g75"/>
                 <outlet property="totalRewardLabel" destination="wNn-gq-MZA" id="sG3-1E-WFQ"/>
                 <outlet property="totalRewardTitleLabel" destination="fus-s2-huz" id="TnP-QE-mMc"/>
             </connections>
             <point key="canvasLocation" x="176" y="75.112443778110944"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="Fzt-gx-9t0">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="KlP-gW-0CY">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+    </designables>
     <resources>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -186,9 +154,6 @@
         </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="photon">
-            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
