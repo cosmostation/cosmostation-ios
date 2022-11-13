@@ -43,15 +43,11 @@ class ValidatorListViewController: BaseViewController {
         self.myValidatorView.alpha = 1
         self.allValidatorView.alpha = 0
         self.otherValidatorView.alpha = 0
-        
-        if #available(iOS 13.0, *) {
-            validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
-            validatorSegment.selectedSegmentTintColor = chainConfig?.chainColor
-        } else {
-            validatorSegment.tintColor = chainConfig?.chainColor
-        }
-        
+    
+        validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
+        validatorSegment.selectedSegmentTintColor = chainConfig?.chainColor
+            
         validatorSegment.setTitle(NSLocalizedString("str_my_validator", comment: ""), forSegmentAt: 0)
         validatorSegment.setTitle(NSLocalizedString("str_all_validator", comment: ""), forSegmentAt: 1)
         validatorSegment.setTitle(NSLocalizedString("str_other_validator", comment: ""), forSegmentAt: 2)

@@ -41,18 +41,11 @@ class OkValidatorListViewController: BaseViewController {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
-        
-        if #available(iOS 13.0, *) {
-            validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
-            if (chainType == ChainType.OKEX_MAIN) {
-                validatorSegment.selectedSegmentTintColor = chainConfig?.chainColor
-            }
-            
-        } else {
-            if (chainType == ChainType.OKEX_MAIN) {
-                validatorSegment.tintColor = chainConfig?.chainColor
-            }
+    
+        validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
+        if (chainType == ChainType.OKEX_MAIN) {
+            validatorSegment.selectedSegmentTintColor = chainConfig?.chainColor
         }
         
         validatorSegment.setTitle(NSLocalizedString("str_my_validator", comment: ""), forSegmentAt: 0)
