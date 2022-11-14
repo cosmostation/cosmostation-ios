@@ -144,7 +144,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Bs-7R-IOU" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="16" y="195.5" width="382" height="116"/>
                     <subviews>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="9dr-ca-1pb">
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="9dr-ca-1pb" customClass="SegmentedControl" customModule="Cosmostation" customModuleProvider="target">
                             <rect key="frame" x="12" y="24" width="358" height="37"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="36" id="3it-Nv-PbX"/>
