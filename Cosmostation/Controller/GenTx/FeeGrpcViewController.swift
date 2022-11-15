@@ -61,8 +61,6 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         }
         
         feeTotalCard.backgroundColor = chainConfig?.chainColorBG
-        gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
         gasSelectSegments.selectedSegmentTintColor = chainConfig?.chainColor
         mSelectedFeeInfo = chainConfig!.getGasDefault()
         gasSelectSegments.selectedSegmentIndex = mSelectedFeeInfo

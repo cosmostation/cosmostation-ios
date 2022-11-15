@@ -42,8 +42,6 @@ class OkValidatorListViewController: BaseViewController {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
     
-        validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
         if (chainType == ChainType.OKEX_MAIN) {
             validatorSegment.selectedSegmentTintColor = chainConfig?.chainColor
         }
