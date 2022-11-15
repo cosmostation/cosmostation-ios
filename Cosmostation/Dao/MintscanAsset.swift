@@ -60,7 +60,6 @@ public struct MintscanAsset {
         return nil
     }
     
-    
     func getIbcPathSummary() -> String {
         let chainPath = path.components(separatedBy: ">")
         return chainPath[0] + ">" + chainPath[1]
