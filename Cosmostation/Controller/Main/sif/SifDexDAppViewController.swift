@@ -28,8 +28,6 @@ class SifDexDAppViewController: BaseViewController {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
-        dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.font04], for: .normal)
         dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
         
         self.onFetchSifDexData()

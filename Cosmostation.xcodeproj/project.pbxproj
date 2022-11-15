@@ -2661,6 +2661,8 @@
 		9F7D91042912F31F002A382C /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D91022912F31F002A382C /* UIColor+Colors.swift */; };
 		9F831EED291C5C1800A998FC /* UIStoryboard+Instantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F831EEC291C5C1800A998FC /* UIStoryboard+Instantiate.swift */; };
 		9F831EEE291C5C1800A998FC /* UIStoryboard+Instantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F831EEC291C5C1800A998FC /* UIStoryboard+Instantiate.swift */; };
+		9F8C3E4C2922282B0031DA73 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8C3E4B2922282B0031DA73 /* SegmentedControl.swift */; };
+		9F8C3E4D2922282B0031DA73 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8C3E4B2922282B0031DA73 /* SegmentedControl.swift */; };
 		B113B26329094EF10004F5A6 /* CdpListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DB2535573100C364F9 /* CdpListViewController.swift */; };
 		B113B26429094F000004F5A6 /* CdpListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DB2535573100C364F9 /* CdpListViewController.swift */; };
 		B113B265290951F40004F5A6 /* HtlcResultSentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A33E424486DA20052BD3D /* HtlcResultSentCell.swift */; };
@@ -4139,6 +4141,7 @@
 		9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLinesButton.swift; sourceTree = "<group>"; };
 		9F7D91022912F31F002A382C /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		9F831EEC291C5C1800A998FC /* UIStoryboard+Instantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Instantiate.swift"; sourceTree = "<group>"; };
+		9F8C3E4B2922282B0031DA73 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		B1247F34290ABE5C00F60500 /* UIApplication+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+KeyWindow.swift"; sourceTree = "<group>"; };
 		B928115C5F425560ED5DE8F4 /* Pods-Cosmostation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.debug.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.debug.xcconfig"; sourceTree = "<group>"; };
 		BB20D291C0AF536BBDAE928C /* Pods_Cosmostation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cosmostation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -6027,6 +6030,7 @@
 				E1C3C89A23B1E3E400A693C0 /* NotificationView.swift */,
 				28908F6823F69BD100164030 /* EdgeInsetLabel.swift */,
 				2848644D24A333CD0046E5C8 /* BottomLineView.swift */,
+				9F8C3E4B2922282B0031DA73 /* SegmentedControl.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7677,6 +7681,7 @@
 				1817CC04283E2CE600523713 /* confio_proofs.pb.swift in Sources */,
 				18FFB49A281AF533004E65BB /* TxIncentiveMintingCell.swift in Sources */,
 				18FFB49B281AF533004E65BB /* CdpWarnPopup.swift in Sources */,
+				9F8C3E4D2922282B0031DA73 /* SegmentedControl.swift in Sources */,
 				1817CB60283E2CE500523713 /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
 				1817CBA3283E2CE500523713 /* cosmos_base_kv_v1beta1_kv.pb.swift in Sources */,
 				1817CB00283E2CE500523713 /* ethermint_types_v1_web3.pb.swift in Sources */,
@@ -8394,6 +8399,7 @@
 				048C831627BF572800270528 /* ethermint_types_v1_account.pb.swift in Sources */,
 				040FAA05275F55C300229F6F /* cosmos_base_abci_v1beta1_abci.pb.swift in Sources */,
 				046FF00F2779A16500F72C11 /* MyDenomsViewController.swift in Sources */,
+				9F8C3E4C2922282B0031DA73 /* SegmentedControl.swift in Sources */,
 				040FA837275F55C200229F6F /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
 				0444442C27ABF06900EB093E /* TxExeContractCell.swift in Sources */,
 				E1945E50222E842B00A1436F /* BaseViewController.swift in Sources */,
