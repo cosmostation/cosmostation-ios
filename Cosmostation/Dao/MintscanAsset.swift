@@ -60,6 +60,12 @@ public struct MintscanAsset {
         return nil
     }
     
+    
+    func getIbcPathSummary() -> String {
+        let chainPath = path.components(separatedBy: ">")
+        return chainPath[0] + ">" + chainPath[1]
+    }
+    
     func priceDenom() -> String {
         return price_denom.isEmpty ? base_denom.lowercased() : price_denom.lowercased()
     }
