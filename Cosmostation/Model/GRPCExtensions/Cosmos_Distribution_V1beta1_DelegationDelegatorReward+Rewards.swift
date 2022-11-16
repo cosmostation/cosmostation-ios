@@ -10,7 +10,7 @@ import Foundation
 import HDWalletKit
 
 extension Array where Element == Cosmos_Distribution_V1beta1_DelegationDelegatorReward {
-    /*
+    /**
      Sums all the rewards for the denom that matches with reward denom
      
      - Parameter: denom to filter by
