@@ -39,7 +39,7 @@
 "str_support" = "지원";
 "str_about_app" = "앱정보";
 "str_manage_wallet" = "지갑 관리";
-"str_manage_mnemonic" = "니모닉 관리/ 지갑 추가";
+"str_manage_mnemonic" = "니모닉 관리 / 지갑 추가";
 "str_import_privatekey" = "개인키 등록";
 "str_import_address" = "관찰 주소 등록";
 "str_manage_connection" = "지갑 연결 관리";

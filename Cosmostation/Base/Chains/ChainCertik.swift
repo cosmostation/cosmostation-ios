@@ -67,11 +67,11 @@ class ChainCertik: ChainConfig {
     }
     
     func getInfoLink1() -> String {
-        return "https://www.certik.foundation/"
+        return "https://www.certik.com"
     }
 
     func getInfoLink2() -> String {
-        return "https://www.certik.foundation/blog"
+        return "https://medium.com/shentu-foundation"
     }
     
     func getGasRates() -> Array<String> {
