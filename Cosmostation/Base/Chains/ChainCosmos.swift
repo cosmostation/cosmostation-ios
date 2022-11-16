@@ -45,7 +45,7 @@ class ChainCosmos: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var moonPaySupoort = true
     var kadoMoneySupoort = false
     var grpcUrl = "lcd-cosmos-app.cosmostation.io"

@@ -45,7 +45,7 @@ class ChainKava: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var moonPaySupoort = true
     var kadoMoneySupoort = false
     var grpcUrl = "lcd-kava-app.cosmostation.io"
