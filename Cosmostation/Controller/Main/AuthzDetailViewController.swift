@@ -520,19 +520,10 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
     }
     
-    func getRewardSum() -> Coin {
-        var sum = NSDecimalNumber.zero
-        granterReward.forEach { reward in
-            reward.reward.forEach { rewardCoin in
-                if (rewardCoin.denom == chainConfig!.stakeDenom) {
-                    sum = sum.adding(WUtils.plainStringToDecimal(rewardCoin.amount))
-                }
-            }
-        }
-        sum = sum.multiplying(byPowerOf10: -18)
-        return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
+    private func getRewardSum() -> Coin {
+        guard let chainConfig = chainConfig else { return .init() }
+        return granterReward.sum(denom: chainConfig.stakeDenom, WUtils.plainStringToDecimal)
     }
-    
     
     func getSendAuth() -> Cosmos_Authz_V1beta1_Grant? {
         var result: Cosmos_Authz_V1beta1_Grant?
