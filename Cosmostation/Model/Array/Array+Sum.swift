@@ -1,5 +1,5 @@
 //
-//  Cosmos_Authz_V1beta1_Grant+Grant.swift
+//  Array+Sum.swift
 //  Cosmostation
 //
 //  Created by albertopeam on 17/11/22.
