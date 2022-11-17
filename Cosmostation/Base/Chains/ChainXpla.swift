@@ -34,7 +34,7 @@ class ChainXpla: ChainConfig {
     
     var addressPrefix = "xpla"
     var validatorPrefix = "xplavaloper"
-    let addressHdPath0 = "m/44'/60'/0'/0/X"
+    var defaultPath = "m/44'/60'/0'/0/X"
     
     let gasRate0 = "850000000000axpla"
     
@@ -59,7 +59,7 @@ class ChainXpla: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0, addressHdPath0]
+        return [defaultPath, defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

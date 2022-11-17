@@ -34,7 +34,7 @@ class ChainFetchAi: ChainConfig {
     
     var addressPrefix = "fetch"
     var validatorPrefix = "fetchvaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/118'/0'/0/X"
     let addressHdPath1 = "m/44'/60'/0'/0/X"
     let addressHdPath2 = "m/44'/60'/X'/0/0"
     let addressHdPath3 = "m/44'/60'/0'/X"
@@ -62,7 +62,7 @@ class ChainFetchAi: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0, addressHdPath1, addressHdPath2, addressHdPath3]
+        return [defaultPath, addressHdPath1, addressHdPath2, addressHdPath3]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

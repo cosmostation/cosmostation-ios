@@ -34,7 +34,7 @@ class ChainAkash: ChainConfig {
     
     var addressPrefix = "akash"
     var validatorPrefix = "akashvaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uakt"
     let gasRate1 = "0.0025uakt"
@@ -61,7 +61,7 @@ class ChainAkash: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

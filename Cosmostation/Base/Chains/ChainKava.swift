@@ -34,8 +34,8 @@ class ChainKava: ChainConfig {
     
     var addressPrefix = "kava"
     var validatorPrefix = "kavavaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
-    var addressaddressHdPath1 = "m/44'/459'/0'/0/X"
+    let addressHdPath = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/459'/0'/0/X"
     
     let gasRate0 = "0.001ukava"
     let gasRate1 = "0.0025ukava"
@@ -62,7 +62,7 @@ class ChainKava: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0, addressaddressHdPath1]
+        return [addressHdPath, defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

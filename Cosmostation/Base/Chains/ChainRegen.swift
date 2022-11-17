@@ -34,7 +34,7 @@ class ChainRegen: ChainConfig {
     
     var addressPrefix = "regen"
     var validatorPrefix = "regenvaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uregen"
     let gasRate1 = "0.0025uregen"
@@ -61,7 +61,7 @@ class ChainRegen: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

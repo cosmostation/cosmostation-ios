@@ -34,7 +34,7 @@ class ChainDesmos: ChainConfig {
     
     var addressPrefix = "desmos"
     var validatorPrefix = "desmosvaloper"
-    let addressHdPath0 = "m/44'/852'/0'/0/X"
+    var defaultPath = "m/44'/852'/0'/0/X"
     
     let gasRate0 = "0.001udsm"
     let gasRate1 = "0.01udsm"
@@ -61,7 +61,7 @@ class ChainDesmos: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

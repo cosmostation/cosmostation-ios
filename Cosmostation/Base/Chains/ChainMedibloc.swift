@@ -34,7 +34,7 @@ class ChainMedibloc: ChainConfig {
     
     var addressPrefix = "panacea"
     var validatorPrefix = "panaceavaloper"
-    let addressHdPath0 = "m/44'/371'/0'/0/X"
+    var defaultPath = "m/44'/371'/0'/0/X"
     
     let gasRate0 = "5umed"
     
@@ -59,7 +59,7 @@ class ChainMedibloc: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

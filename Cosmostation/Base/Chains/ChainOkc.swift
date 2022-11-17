@@ -34,8 +34,8 @@ class ChainOkc: ChainConfig {
     
     var addressPrefix = "ex"
     var validatorPrefix = "ex"
-    let addressHdPath0 = "m/44'/996'/0'/0/X"
-    let addressHdPath1 = "m/44'/60'/0'/0/X"
+    let addressHdPath = "m/44'/996'/0'/0/X"
+    var defaultPath = "m/44'/60'/0'/0/X"
     
     let gasRate0 = "0.0000000001okt"
     
@@ -60,7 +60,7 @@ class ChainOkc: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0, addressHdPath0, addressHdPath1]
+        return [addressHdPath, addressHdPath, defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
