@@ -50,7 +50,8 @@ class AuthzClaimReward4ViewController: BaseViewController, PasswordViewDelegate 
     }
     
     func onUpdateView() {
-        let mainReward = getRewardSum()
+        guard let chainConfig = chainConfig else { return }
+        let mainReward = pageHolderVC.mGranterData.rewards.sum(denom: chainConfig.stakeDenom, WUtils.plainStringToDecimal)
         WDP.dpCoin(chainConfig, mainReward, rewardDenomLabel, rewardAmoutLabel)
         WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
         
@@ -91,19 +92,6 @@ class AuthzClaimReward4ViewController: BaseViewController, PasswordViewDelegate 
         self.navigationItem.title = ""
         self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
         self.navigationController?.pushViewController(UIStoryboard.passwordViewController(delegate: self, target: PASSWORD_ACTION_CHECK_TX), animated: false)
-    }
-    
-    func getRewardSum() -> Coin {
-        var sum = NSDecimalNumber.zero
-        pageHolderVC.mGranterData.rewards.forEach { reward in
-            reward.reward.forEach { rewardCoin in
-                if (rewardCoin.denom == chainConfig!.stakeDenom) {
-                    sum = sum.adding(WUtils.plainStringToDecimal(rewardCoin.amount))
-                }
-            }
-        }
-        sum = sum.multiplying(byPowerOf10: -18)
-        return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
     }
     
     func passwordResponse(result: Int) {

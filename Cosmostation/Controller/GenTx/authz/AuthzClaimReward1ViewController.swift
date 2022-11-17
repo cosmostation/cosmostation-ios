@@ -48,7 +48,8 @@ class AuthzClaimReward1ViewController: BaseViewController {
     }
     
     func onUpdateView() {
-        let mainReward = getRewardSum()
+        guard let chainConfig = chainConfig else { return }
+        let mainReward = pageHolderVC.mGranterData.rewards.sum(denom: chainConfig.stakeDenom, WUtils.plainStringToDecimal)
         WDP.dpCoin(chainConfig, mainReward, rewardDenomLabel, rewardAmountLabel)
         
         var monikers = ""
@@ -86,19 +87,6 @@ class AuthzClaimReward1ViewController: BaseViewController {
     @IBAction func onClickNext(_ sender: UIButton) {
         sender.isUserInteractionEnabled = false
         pageHolderVC.onNextPage()
-    }
-    
-    func getRewardSum() -> Coin {
-        var sum = NSDecimalNumber.zero
-        pageHolderVC.mGranterData.rewards.forEach { reward in
-            reward.reward.forEach { rewardCoin in
-                if (rewardCoin.denom == chainConfig!.stakeDenom) {
-                    sum = sum.adding(WUtils.plainStringToDecimal(rewardCoin.amount))
-                }
-            }
-        }
-        sum = sum.multiplying(byPowerOf10: -18)
-        return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
     }
     
     func onFetchRewardAddress_gRPC(_ address: String) {
