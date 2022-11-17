@@ -34,7 +34,7 @@ class ChainProvenance: ChainConfig {
     
     var addressPrefix = "pb"
     var validatorPrefix = "pbvaloper"
-    let addressHdPath0 = "m/44'/505'/0'/0/X"
+    var defaultPath = "m/44'/505'/0'/0/X"
     
     let gasRate0 = "2000nhash"
     
@@ -59,7 +59,7 @@ class ChainProvenance: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
