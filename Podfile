@@ -20,6 +20,7 @@ def shared_pods
     pod 'gRPC-Swift-Plugins'
     pod 'HPParallaxHeader'
     pod 'IpfsApi'
+    pod 'WalletConnectSwiftV2'
     pod 'web3swift'
 end
 
