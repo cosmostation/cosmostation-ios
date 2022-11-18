@@ -55,7 +55,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         backBtn.borderColor = UIColor.font05
-        confirmBtn.borderColor = UIColor.init(named: "photon")
+        confirmBtn.borderColor = UIColor.photon
         
         feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
         sendAmountTitle.text = NSLocalizedString("str_send_amount", comment: "")
@@ -70,7 +70,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         backBtn.borderColor = UIColor.font05
-        confirmBtn.borderColor = UIColor.init(named: "photon")
+        confirmBtn.borderColor = UIColor.photon
     }
     
     @IBAction func onClickConfirm(_ sender: Any) {

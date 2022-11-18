@@ -52,7 +52,7 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
         scanBtn.borderColor = UIColor.font05
         pasteBtn.borderColor = UIColor.font05
         beforeBtn.borderColor = UIColor.font05
-        nextBtn.borderColor = UIColor.init(named: "photon")
+        nextBtn.borderColor = UIColor.photon
         
         emptyMemoMsg.text = NSLocalizedString("msg_memo", comment: "")
         scanBtn.setTitle(NSLocalizedString("str_qr_scan", comment: ""), for: .normal)
@@ -66,7 +66,7 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
         scanBtn.borderColor = UIColor.font05
         pasteBtn.borderColor = UIColor.font05
         beforeBtn.borderColor = UIColor.font05
-        nextBtn.borderColor = UIColor.init(named: "photon")
+        nextBtn.borderColor = UIColor.photon
     }
     
     @IBAction func onClickBack(_ sender: Any) {

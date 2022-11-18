@@ -23,10 +23,10 @@ class ClaimRewardAllCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         totalRewardTitleLabel.text = NSLocalizedString("str_total_reward", comment: "")
-        claimAllButton.setTitle(firstLineTitle: NSLocalizedString("str_one_click", comment: ""), firstLineColor: UIColor(named: "photon"),
+        claimAllButton.setTitle(firstLineTitle: NSLocalizedString("str_one_click", comment: ""), firstLineColor: UIColor.photon,
                                 secondLineText: NSLocalizedString("str_claim_reward_all", comment: ""), secondLineColor: UIColor.font05,
                                 state: .normal)
-        compoundButton.setTitle(firstLineTitle: NSLocalizedString("str_one_click", comment: ""), firstLineColor: UIColor(named: "photon"),
+        compoundButton.setTitle(firstLineTitle: NSLocalizedString("str_one_click", comment: ""), firstLineColor: UIColor.photon,
                                 secondLineText: NSLocalizedString("str_compounding", comment: ""), secondLineColor: UIColor.font05,
                                 state: .normal)
     }

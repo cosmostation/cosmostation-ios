@@ -27,4 +27,7 @@ extension UIColor {
     static var cardBg: UIColor {
         UIColor(named: "_card_bg")!        
     }
+    static var photon: UIColor {
+        UIColor(named: "photon")!
+    }
 }

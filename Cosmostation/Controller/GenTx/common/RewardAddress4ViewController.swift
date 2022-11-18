@@ -36,7 +36,7 @@ class RewardAddress4ViewController: BaseViewController, PasswordViewDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         btnBack.borderColor = UIColor.font05
-        btnConfirm.borderColor = UIColor.init(named: "photon")
+        btnConfirm.borderColor = UIColor.photon
         feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
         currentTitle.text = NSLocalizedString("str_current_reward_recipient_address", comment: "")
         newTitle.text = NSLocalizedString("str_new_reward_recipient_address", comment: "")
@@ -48,7 +48,7 @@ class RewardAddress4ViewController: BaseViewController, PasswordViewDelegate {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnBack.borderColor = UIColor.font05
-        btnConfirm.borderColor = UIColor.init(named: "photon")
+        btnConfirm.borderColor = UIColor.photon
     }
     
     func onUpdateView() {

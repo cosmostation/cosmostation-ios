@@ -73,7 +73,7 @@ class AuthzDelegate2ViewController: BaseViewController, UITextFieldDelegate {
         btn01.setTitle(dp, for: .normal)
         
         cancelBtn.borderColor = UIColor.font05
-        nextBtn.borderColor = UIColor.init(named: "photon")
+        nextBtn.borderColor = UIColor.photon
         btn01.borderColor = UIColor.font05
         btn1.borderColor = UIColor.font05
         btn10.borderColor = UIColor.font05
@@ -84,7 +84,7 @@ class AuthzDelegate2ViewController: BaseViewController, UITextFieldDelegate {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         cancelBtn.borderColor = UIColor.font05
-        nextBtn.borderColor = UIColor.init(named: "photon")
+        nextBtn.borderColor = UIColor.photon
         btn01.borderColor = UIColor.font05
         btn1.borderColor = UIColor.font05
         btn10.borderColor = UIColor.font05

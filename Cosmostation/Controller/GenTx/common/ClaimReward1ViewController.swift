@@ -47,7 +47,7 @@ class ClaimReward1ViewController: BaseViewController {
         self.onFetchRewardsInfoData()
         
         cancelBtn.borderColor = UIColor.font05
-        nextBtn.borderColor = UIColor.init(named: "photon")
+        nextBtn.borderColor = UIColor.photon
         rewardAmountTitle.text = NSLocalizedString("str_reward_amount", comment: "")
         rewardFromTitle.text = NSLocalizedString("str_reward_from", comment: "")
         rewardAddressTitle.text = NSLocalizedString("str_reward_recipient_address", comment: "")
@@ -58,7 +58,7 @@ class ClaimReward1ViewController: BaseViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         cancelBtn.borderColor = UIColor.font05
-        nextBtn.borderColor = UIColor.init(named: "photon")
+        nextBtn.borderColor = UIColor.photon
     }
     
     func onFetchRewardsInfoData()  {

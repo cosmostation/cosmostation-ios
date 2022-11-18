@@ -88,7 +88,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         self.recipientChainCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickToChain (_:))))
         
         btnCancel.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
         btnWallet.borderColor = UIColor.font05
         btnQrScan.borderColor = UIColor.font05
         btnPaste.borderColor = UIColor.font05
@@ -107,7 +107,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnCancel.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
         btnWallet.borderColor = UIColor.font05
         btnQrScan.borderColor = UIColor.font05
         btnPaste.borderColor = UIColor.font05

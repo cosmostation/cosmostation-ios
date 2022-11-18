@@ -38,7 +38,7 @@ class Delegate4ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         beforeBtn.borderColor = UIColor.font05
-        confirmBtn.borderColor = UIColor.init(named: "photon")
+        confirmBtn.borderColor = UIColor.photon
         
         delegateAmountTitle.text = NSLocalizedString("str_delegate_amount", comment: "")
         feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
@@ -51,7 +51,7 @@ class Delegate4ViewController: BaseViewController, PasswordViewDelegate, SBCardP
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         beforeBtn.borderColor = UIColor.font05
-        confirmBtn.borderColor = UIColor.init(named: "photon")
+        confirmBtn.borderColor = UIColor.photon
     }
     
     @IBAction func onClickConfirm(_ sender: Any) {
