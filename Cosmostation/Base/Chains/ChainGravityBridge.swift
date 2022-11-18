@@ -34,7 +34,7 @@ class ChainGravityBridge: ChainConfig {
     
     var addressPrefix = "gravity"
     var validatorPrefix = "gravityvaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.0ugraviton"
     
@@ -59,7 +59,7 @@ class ChainGravityBridge: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

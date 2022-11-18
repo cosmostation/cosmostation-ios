@@ -73,9 +73,23 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let derive = mDerives[indexPath.row]
+        guard let chainConfig = ChainFactory.getChainConfig(derive.chaintype) else { return }
         if (derive.status == 2) { return }
         self.mDerives[indexPath.row].selected = !derive.selected
         self.derivedWalletTableView.reloadRows(at: [indexPath], with: .none)
+        
+        if (!derive.selected) {
+            if (chainConfig.supportHdPaths().count > 1 && derive.fullPath != chainConfig.defaultPath.replacingOccurrences(of: "X", with: String(mPath))) {
+                let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("select_to_default_path_warning", comment: ""), preferredStyle: .alert)
+                alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
+                alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { _ in
+                    self.mDerives[indexPath.row].selected = false
+                    self.derivedWalletTableView.reloadRows(at: [indexPath], with: .none)
+                }))
+                alert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,7 +97,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         cell?.onBindWallet(mDerives[indexPath.row], mPrivateKeyMode)
         return cell!
     }
-    
     
     var tempPath = 0
     @objc func onClickPath() {

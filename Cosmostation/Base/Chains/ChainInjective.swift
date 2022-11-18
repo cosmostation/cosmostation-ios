@@ -34,7 +34,7 @@ class ChainInjective: ChainConfig {
     
     var addressPrefix = "inj"
     var validatorPrefix = "injvaloper"
-    let addressHdPath0 = "m/44'/60'/0'/0/X"
+    var defaultPath = "m/44'/60'/0'/0/X"
     
     let gasRate0 = "500000000inj"
     
@@ -59,7 +59,7 @@ class ChainInjective: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

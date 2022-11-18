@@ -2657,6 +2657,8 @@
 		9F0C15A928DF518100BA24B1 /* TwoLinesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */; };
 		9F0C15AA28DF518100BA24B1 /* TwoLinesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */; };
 		9F48C75629097FA00015CF89 /* HardPoolDeposit0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DB56F025FA3B7100B2F0E5 /* HardPoolDeposit0ViewController.swift */; };
+		9F7B386A292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7B3869292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift */; };
+		9F7B386B292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7B3869292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift */; };
 		9F7D91032912F31F002A382C /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D91022912F31F002A382C /* UIColor+Colors.swift */; };
 		9F7D91042912F31F002A382C /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D91022912F31F002A382C /* UIColor+Colors.swift */; };
 		9F831EED291C5C1800A998FC /* UIStoryboard+Instantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F831EEC291C5C1800A998FC /* UIStoryboard+Instantiate.swift */; };
@@ -4139,6 +4141,7 @@
 		28FEDCE826DB141900A43D01 /* KavaIncentiveClaim3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaIncentiveClaim3ViewController.xib; sourceTree = "<group>"; };
 		8378C93C7F20C3EFF8166D6C /* Pods-CosmostationDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.debug.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.debug.xcconfig"; sourceTree = "<group>"; };
 		9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLinesButton.swift; sourceTree = "<group>"; };
+		9F7B3869292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift"; sourceTree = "<group>"; };
 		9F7D91022912F31F002A382C /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		9F831EEC291C5C1800A998FC /* UIStoryboard+Instantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Instantiate.swift"; sourceTree = "<group>"; };
 		9F8C3E4B2922282B0031DA73 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
@@ -5708,6 +5711,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9F7B38682925795C0076546C /* GRPCExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				9F7B3869292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift */,
+			);
+			path = GRPCExtensions;
+			sourceTree = "<group>";
+		};
 		9F7D91012912F30E002A382C /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -6038,6 +6049,7 @@
 		E1A82DDD224478150097CAEE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9F7B38682925795C0076546C /* GRPCExtensions */,
 				28D7BDAB25F0B8DE006EECD7 /* KavaModel */,
 				E1F7F63523436B71000E597F /* BnbHistory.swift */,
 				28CAAB6B25AC414A00416AA5 /* OkHistory.swift */,
@@ -8163,6 +8175,7 @@
 				18FFB65E281AF533004E65BB /* PostTx.swift in Sources */,
 				1817CC71283E2CE600523713 /* gravity_v1_genesis.pb.swift in Sources */,
 				04E6ABB028635854008DC3C7 /* CdpDeposit4ViewController.swift in Sources */,
+				9F7B386B292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift in Sources */,
 				18FFB664281AF533004E65BB /* StarnameAssets.swift in Sources */,
 				1817CB3D283E2CE500523713 /* cryptoorg_nft_v1_query.grpc.swift in Sources */,
 				04AA4B58290624B50027877B /* ChainTeritori.swift in Sources */,
@@ -8744,6 +8757,7 @@
 				28DB56F725FA3B8800B2F0E5 /* HardPoolDeposit3ViewController.swift in Sources */,
 				040FA918275F55C300229F6F /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
 				0443B8812855B9280027A6B9 /* WalletDetailAddressCell.swift in Sources */,
+				9F7B386A292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift in Sources */,
 				289DF180242DDF6A00433CF4 /* CdpDetailMyActionCell.swift in Sources */,
 				0451FC5A282A39AF00214FDA /* ChainSecret.swift in Sources */,
 				E151B64522484FAE0026B8C0 /* Delegation.swift in Sources */,
