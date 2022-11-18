@@ -30,11 +30,19 @@ class HistoryCell: UITableViewCell {
         txResultLabel.isHidden = true
     }
     
-    func bindHistoryOkView(_ history: OKHistoryHit, _ address: String) {
-        txTypeLabel.text = history.transactionDataType
-        txTimeLabel.text = WDP.dpTime(history.blocktime)
-        txTimeGapLabel.text = WDP.dpTimeGap(history.blocktime)
-        txBlockLabel.text = history.hash
+    func bindHistoryOkView(_ history: OKTransactionList, _ address: String) {
+        txTypeLabel.text = history.txId
+        txTypeLabel.lineBreakMode = .byTruncatingMiddle
+        txTypeLabel.numberOfLines = 1
+        
+        if (history.state == "success") {
+            txResultLabel.isHidden = true
+        } else {
+            txResultLabel.isHidden = false
+        }
+//        let transactionLongTime = Int64(history.transactionTime!)! + (9 * 60 * 60 * 1000)
+        txTimeLabel.text = WDP.dpTime(Int64(history.transactionTime!))
+        txTimeGapLabel.text = WDP.dpTimeGap(Int64(history.transactionTime!))
+        txBlockLabel.text = history.height! + " block"
     }
-    
 }
