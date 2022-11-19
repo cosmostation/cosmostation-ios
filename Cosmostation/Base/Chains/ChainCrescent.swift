@@ -44,7 +44,7 @@ class ChainCrescent: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = true
-    var authzSupoort = false
+    var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
     var grpcUrl = "lcd-crescent-app.cosmostation.io"
