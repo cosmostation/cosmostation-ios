@@ -39,7 +39,7 @@ class Redelegate5ViewController: BaseViewController, PasswordViewDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         btnBefore.borderColor = UIColor.font05
-        btnConfirm.borderColor = UIColor.init(named: "photon")
+        btnConfirm.borderColor = UIColor.photon
         redelegateAmountTitle.text = NSLocalizedString("str_redelegate_amount", comment: "")
         feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
         redelegateFromTitle.text = NSLocalizedString("str_redelegate_from", comment: "")
@@ -52,7 +52,7 @@ class Redelegate5ViewController: BaseViewController, PasswordViewDelegate {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnBefore.borderColor = UIColor.font05
-        btnConfirm.borderColor = UIColor.init(named: "photon")
+        btnConfirm.borderColor = UIColor.photon
     }
     
     func onUpdateView() {

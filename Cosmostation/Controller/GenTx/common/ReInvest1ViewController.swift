@@ -41,7 +41,7 @@ class ReInvest1ViewController: BaseViewController {
         self.onFetchRewards_gRPC(pageHolderVC.mAccount!.account_address)
         
         cancelBtn.borderColor = UIColor.font05
-        nextBtn.borderColor = UIColor.init(named: "photon")
+        nextBtn.borderColor = UIColor.photon
         rewardAmountTitle.text = NSLocalizedString("str_reward_amount", comment: "")
         validatorTitle.text = NSLocalizedString("str_validator", comment: "")
         compoundingMsg.text = NSLocalizedString("msg_reward", comment: "")
@@ -51,7 +51,7 @@ class ReInvest1ViewController: BaseViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         cancelBtn.borderColor = UIColor.font05
-        nextBtn.borderColor = UIColor.init(named: "photon")
+        nextBtn.borderColor = UIColor.photon
     }
     
     @IBAction func onClickCancel(_ sender: Any) {

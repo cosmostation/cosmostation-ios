@@ -78,7 +78,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         
         feeTypeCard.layer.borderColor = UIColor.font05.cgColor
         btnBefore.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
         
         feeTitle.text = NSLocalizedString("str_total_fee", comment: "")
         feeWarnTitle.text = NSLocalizedString("msg_fee1", comment: "")
@@ -90,7 +90,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         feeTypeCard.layer.borderColor = UIColor.font05.cgColor
         btnBefore.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
     }
     
     @IBAction func onSwitchGasRate(_ sender: UISegmentedControl) {

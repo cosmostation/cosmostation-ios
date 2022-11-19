@@ -29,14 +29,14 @@ class AuthzSend1ViewController: BaseViewController, QrScannerDelegate {
         targetAddressTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.font04])
         
         cancelBtn.borderColor = UIColor.font05
-        nextBtn.borderColor = UIColor.init(named: "photon")
+        nextBtn.borderColor = UIColor.photon
         scanBtn.borderColor = UIColor.font05
         pasteBtn.borderColor = UIColor.font05
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         cancelBtn.borderColor = UIColor.font05
-        nextBtn.borderColor = UIColor.init(named: "photon")
+        nextBtn.borderColor = UIColor.photon
         scanBtn.borderColor = UIColor.font05
         pasteBtn.borderColor = UIColor.font05
     }

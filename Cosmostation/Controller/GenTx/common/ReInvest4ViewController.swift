@@ -42,7 +42,7 @@ class ReInvest4ViewController: BaseViewController, PasswordViewDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         backBtn.borderColor = UIColor.font05
-        confirmBtn.borderColor = UIColor.init(named: "photon")
+        confirmBtn.borderColor = UIColor.photon
         rewardAmountTitle.text = NSLocalizedString("str_reward_amount", comment: "")
         feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
         validatorTitle.text = NSLocalizedString("str_validator", comment: "")
@@ -55,7 +55,7 @@ class ReInvest4ViewController: BaseViewController, PasswordViewDelegate {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         backBtn.borderColor = UIColor.font05
-        confirmBtn.borderColor = UIColor.init(named: "photon")
+        confirmBtn.borderColor = UIColor.photon
     }
     
     func onUpdateView() {

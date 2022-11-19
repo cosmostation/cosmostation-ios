@@ -88,14 +88,14 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
         pAmountInput.delegate = self
         
         btnCancel.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
         btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
         btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnCancel.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
     }
     
     override func enableUserInteraction() {
@@ -441,14 +441,14 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
         if (!isPrincipal) {
             btnNext.backgroundColor = UIColor.clear
             btnNext.setTitle(NSLocalizedString("tx_next", comment: ""), for: .normal)
-            btnNext.setTitleColor(UIColor.init(named: "photon"), for: .normal)
+            btnNext.setTitleColor(UIColor.photon, for: .normal)
             btnNext.layer.borderWidth = 1.0
             
         } else {
             if (!isValiadPAmount()) {
                 btnNext.backgroundColor = UIColor.clear
                 btnNext.setTitle(NSLocalizedString("tx_next", comment: ""), for: .normal)
-                btnNext.setTitleColor(UIColor.init(named: "photon"), for: .normal)
+                btnNext.setTitleColor(UIColor.photon, for: .normal)
                 btnNext.layer.borderWidth = 1.0
                 
             } else {
