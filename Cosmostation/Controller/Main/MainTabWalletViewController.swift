@@ -136,13 +136,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
                 return 3;
             }
-            if (chainType == .KAVA_MAIN || chainType == .DESMOS_MAIN || chainType == .MEDI_MAIN) {
-                return 5;
+            if (chainType == .KAVA_MAIN || chainType == .MEDI_MAIN) {
+                return 6;
             }
-            if (chainConfig!.authzSupoort) {
-                return 5
+            if (chainType == .DESMOS_MAIN || chainConfig!.authzSupoort) {
+                return 5;
             } else {
-                return 4
+                return 4;
             }
         }
     }
@@ -273,6 +273,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (indexPath.row == 3) {
             return onBindMintingCell(tableView)
             
+        } else if (indexPath.row == 4) {
+            return onBindAuthzCell(tableView)
+            
         } else {
             return onBindGuideCell(tableView)
         }
@@ -377,16 +380,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (indexPath.row == 2) {
             return onBindMintingCell(tableView)
 
-        }else {
+        } else {
             return onBindGuideCell(tableView)
         }
-        
-//        else if (indexPath.row == 3) {
-//            return onBindAuthzCell(tableView)
-//            
-//        } else {
-//            return onBindGuideCell(tableView)
-//        }
     }
     
     func onSetDesmosItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
@@ -430,6 +426,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onBindMintingCell(tableView)
 
         } else if (indexPath.row == 3) {
+            return onBindAuthzCell(tableView)
+
+        } else if (indexPath.row == 4) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletMediblocEventCell") as? WalletMediblocEventCell
             cell?.actionDownload = { self.onClickMediblocEvent() }
             return cell!
@@ -454,6 +453,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
 
         } else if (indexPath.row == 2) {
             return onBindMintingCell(tableView)
+
+        } else if (indexPath.row == 3) {
+            return onBindAuthzCell(tableView)
 
         } else {
             return onBindGuideCell(tableView)

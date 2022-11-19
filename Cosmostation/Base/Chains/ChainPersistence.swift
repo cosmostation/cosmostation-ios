@@ -34,7 +34,7 @@ class ChainPersistence: ChainConfig {
     
     var addressPrefix = "persistence"
     var validatorPrefix = "persistencevaloper"
-    let addressHdPath0 = "m/44'/750'/0'/0/X"
+    var defaultPath = "m/44'/750'/0'/0/X"
     
     let gasRate0 = "0.0uxprt"
     let gasRate1 = "0.025uxprt"
@@ -60,7 +60,7 @@ class ChainPersistence: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

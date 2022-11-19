@@ -35,7 +35,7 @@ class ChainCosmos: ChainConfig {
     
     var addressPrefix = "cosmos"
     var validatorPrefix = "cosmosvaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uatom"
     let gasRate1 = "0.0025uatom"
@@ -45,7 +45,7 @@ class ChainCosmos: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var moonPaySupoort = true
     var kadoMoneySupoort = false
     var grpcUrl = "lcd-cosmos-app.cosmostation.io"
@@ -62,7 +62,7 @@ class ChainCosmos: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

@@ -130,7 +130,13 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AuthzGranterCell") as? AuthzGranterCell
-                cell?.onBindView(chainConfig, granterAddress, getAvailableMain(), getVestingMain(), getDelegatedSum(), getUnbondingSum(), getRewardSum(), granterCommission)
+                let denom = chainConfig!.stakeDenom
+                let main = granterAvailables.filter{ $0.denom == denom }.sum(value: \.amount, denom: denom, WUtils.plainStringToDecimal)
+                let vesting = granterVestings.filter{ $0.denom == denom }.sum(value: \.amount, denom: denom, WUtils.plainStringToDecimal)
+                let delegated = granterDelegation.sum(value: \.balance.amount, denom: denom, WUtils.plainStringToDecimal)
+                let unbounding = granterUnbonding.flatMap({ $0.entries }).sum(value: \.balance, denom: denom, WUtils.plainStringToDecimal)
+                let reward = granterReward.sum(denom: denom, WUtils.plainStringToDecimal)
+                cell?.onBindView(chainConfig, granterAddress, main, vesting, delegated, unbounding, reward, granterCommission)
                 cell?.actionGranterAddress = { self.onLinkExplorer(self.granterAddress) }
                 return cell!
             }
@@ -481,58 +487,6 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
             
         }
     }
-    
-    func getAvailableMain() -> Coin {
-        var result = NSDecimalNumber.zero
-        granterAvailables.forEach { available in
-            if (available.denom == chainConfig!.stakeDenom) {
-                result = WUtils.plainStringToDecimal(available.amount)
-            }
-        }
-        return Coin.init(chainConfig!.stakeDenom, result.stringValue)
-    }
-    
-    func getVestingMain() -> Coin {
-        var result = NSDecimalNumber.zero
-        granterVestings.forEach { available in
-            if (available.denom == chainConfig!.stakeDenom) {
-                result = WUtils.plainStringToDecimal(available.amount)
-            }
-        }
-        return Coin.init(chainConfig!.stakeDenom, result.stringValue)
-    }
-    
-    func getDelegatedSum() -> Coin {
-        var sum = NSDecimalNumber.zero
-        granterDelegation.forEach { delegation in
-            sum = sum.adding(WUtils.plainStringToDecimal(delegation.balance.amount))
-        }
-        return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
-    }
-    
-    func getUnbondingSum() -> Coin {
-        var sum = NSDecimalNumber.zero
-        granterUnbonding.forEach { unbonding in
-            unbonding.entries.forEach { entry in
-                sum = sum.adding(WUtils.plainStringToDecimal(entry.balance))
-            }
-        }
-        return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
-    }
-    
-    func getRewardSum() -> Coin {
-        var sum = NSDecimalNumber.zero
-        granterReward.forEach { reward in
-            reward.reward.forEach { rewardCoin in
-                if (rewardCoin.denom == chainConfig!.stakeDenom) {
-                    sum = sum.adding(WUtils.plainStringToDecimal(rewardCoin.amount))
-                }
-            }
-        }
-        sum = sum.multiplying(byPowerOf10: -18)
-        return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
-    }
-    
     
     func getSendAuth() -> Cosmos_Authz_V1beta1_Grant? {
         var result: Cosmos_Authz_V1beta1_Grant?

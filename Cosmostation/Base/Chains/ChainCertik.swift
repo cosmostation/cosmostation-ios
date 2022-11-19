@@ -34,7 +34,7 @@ class ChainCertik: ChainConfig {
     
     var addressPrefix = "certik"
     var validatorPrefix = "certikvaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.05uctk"
     
@@ -42,7 +42,7 @@ class ChainCertik: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
     var grpcUrl = "lcd-shentu-app.cosmostation.io"
@@ -59,7 +59,7 @@ class ChainCertik: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
@@ -67,11 +67,11 @@ class ChainCertik: ChainConfig {
     }
     
     func getInfoLink1() -> String {
-        return "https://www.certik.foundation/"
+        return "https://www.certik.com"
     }
 
     func getInfoLink2() -> String {
-        return "https://www.certik.foundation/blog"
+        return "https://medium.com/shentu-foundation"
     }
     
     func getGasRates() -> Array<String> {

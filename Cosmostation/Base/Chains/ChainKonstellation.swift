@@ -34,7 +34,7 @@ class ChainKonstellation: ChainConfig {
     
     var addressPrefix = "darc"
     var validatorPrefix = "darcvaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.0001udarc"
     let gasRate1 = "0.001udarc"
@@ -44,7 +44,7 @@ class ChainKonstellation: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
     var grpcUrl = "lcd-konstellation-app.cosmostation.io"
@@ -61,7 +61,7 @@ class ChainKonstellation: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

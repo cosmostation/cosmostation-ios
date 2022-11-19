@@ -34,7 +34,7 @@ class ChainNyx: ChainConfig {
     
     var addressPrefix = "n"
     var validatorPrefix = "nvaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.025unym"
     
@@ -42,7 +42,7 @@ class ChainNyx: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
     var grpcUrl = "lcd-nyx-app.cosmostation.io"
@@ -59,7 +59,7 @@ class ChainNyx: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

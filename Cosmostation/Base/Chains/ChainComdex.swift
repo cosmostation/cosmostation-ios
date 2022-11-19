@@ -34,7 +34,7 @@ class ChainComdex: ChainConfig {
     
     var addressPrefix = "comdex"
     var validatorPrefix = "comdexvaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.25ucmdx"
     
@@ -42,7 +42,7 @@ class ChainComdex: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
     var grpcUrl = "lcd-comdex-app.cosmostation.io"
@@ -59,7 +59,7 @@ class ChainComdex: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

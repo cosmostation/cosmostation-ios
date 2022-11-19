@@ -47,9 +47,6 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         self.toSendDenom = pageHolderVC.mToSendDenom
         self.mintscanAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first
         self.mintscanTokens = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first
-//        print("toSendDenom ", toSendDenom)
-//        print("mintscanAsset ", mintscanAsset)
-//        print("mintscanTokens ", mintscanTokens)
         self.recipientableChains.append(chainConfig!)
         
         let allChainConfig = ChainFactory.SUPPRT_CONFIG()
@@ -58,12 +55,16 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
                 if (msAsset.chain == chainConfig?.chainAPIName && msAsset.denom.lowercased() == toSendDenom.lowercased()) {
                     //add backward path
                     if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.beforeChain(chainConfig!)}).first {
+                        if !self.recipientableChains.contains(where: { $0.chainAPIName == sendable.chainAPIName }) {
                         self.recipientableChains.append(sendable)
+                        }
                     }
-                } else if (msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
+                } else if (msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased() && msAsset.path.lowercased() == msAsset.getIbcPathSummary()) {
                     //add forward path
                     if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.chain }).first {
+                        if !self.recipientableChains.contains(where: { $0.chainAPIName == sendable.chainAPIName }) {
                         self.recipientableChains.append(sendable)
+                        }
                     }
                 }
                 
@@ -72,7 +73,9 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
                 //add only forward path
                 if (msAsset.counter_party?.denom == mintscanTokens?.contract_address) {
                     if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.chain }).first {
+                        if !self.recipientableChains.contains(where: { $0.chainAPIName == sendable.chainAPIName }) {
                         self.recipientableChains.append(sendable)
+                        }
                     }
                 }
             }

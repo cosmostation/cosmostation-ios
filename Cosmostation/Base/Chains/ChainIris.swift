@@ -34,7 +34,7 @@ class ChainIris: ChainConfig {
     
     var addressPrefix = "iaa"
     var validatorPrefix = "iva"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.002uiris"
     let gasRate1 = "0.02uiris"
@@ -61,7 +61,7 @@ class ChainIris: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

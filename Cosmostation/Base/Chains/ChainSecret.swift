@@ -34,8 +34,8 @@ class ChainSecret: ChainConfig {
     
     var addressPrefix = "secret"
     var validatorPrefix = "secretvaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
-    let addressHdPath1 = "m/44'/529'/0'/0/X"
+    let addressHdPath = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/529'/0'/0/X"
     
     let gasRate0 = "0.25uscrt"
     
@@ -43,7 +43,7 @@ class ChainSecret: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
     var grpcUrl = "lcd-secret.cosmostation.io"
@@ -60,7 +60,7 @@ class ChainSecret: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0, addressHdPath1]
+        return [addressHdPath, defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

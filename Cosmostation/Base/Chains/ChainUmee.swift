@@ -34,7 +34,7 @@ class ChainUmee: ChainConfig {
     
     var addressPrefix = "umee"
     var validatorPrefix = "umeevaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.000uumee"
     let gasRate1 = "0.001uumee"
@@ -61,7 +61,7 @@ class ChainUmee: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

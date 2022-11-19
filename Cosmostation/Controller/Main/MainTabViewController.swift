@@ -189,8 +189,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             
             
         }
-                
-        if (self.mChainType == .IOV_MAIN) {
+        
+        else if (self.mChainType == .IOV_MAIN) {
             self.mFetchCnt = 11
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)

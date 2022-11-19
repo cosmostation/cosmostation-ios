@@ -34,7 +34,7 @@ class StationTest: ChainConfig {
     
     var addressPrefix = "station"
     var validatorPrefix = "stationvaloper"
-    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uiss"
     let gasRate1 = "0.0025uiss"
@@ -48,7 +48,7 @@ class StationTest: ChainConfig {
     var moonPaySupoort = false
     var kadoMoneySupoort = false
     var grpcUrl = "lcd-office.cosmostation.io"
-    var grpcPort = 10400
+    var grpcPort = 20400
     var rpcUrl = ""
     var lcdUrl = "https://lcd-office.cosmostation.io/station-testnet/"
     var apiUrl = "https://api-office.cosmostation.io/station-testnet/"
@@ -61,7 +61,7 @@ class StationTest: ChainConfig {
     }
     
     func supportHdPaths() -> Array<String> {
-        return [addressHdPath0]
+        return [defaultPath]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

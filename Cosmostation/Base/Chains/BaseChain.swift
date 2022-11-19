@@ -35,6 +35,7 @@ protocol ChainConfig {
     
     var addressPrefix: String { get set }
     var validatorPrefix: String { get set }
+    var defaultPath: String { get set }
     
     var etherAddressSupport: Bool { get set }
     var wasmSupport: Bool { get set }
