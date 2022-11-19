@@ -12,6 +12,9 @@ import Floaty
 import SafariServices
 import StoreKit
 
+import HDWalletKit
+import web3swift
+
 class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, FloatyDelegate, QrScannerDelegate, PasswordViewDelegate {
 
     @IBOutlet weak var titleChainImg: UIImageView!
@@ -78,7 +81,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("onFetchDone"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("onFetchPrice"), object: nil)
     }

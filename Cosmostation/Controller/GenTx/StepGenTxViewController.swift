@@ -12,6 +12,8 @@ import GRPC
 import NIO
 import HDWalletKit
 import SwiftKeychainWrapper
+import web3swift
+
 
 class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIScrollViewDelegate {
     
@@ -151,6 +153,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
 
     var mGrant: Cosmos_Authz_V1beta1_Grant?
     var mGranterData: GranterData?
+    
+    var mEthereumTransaction: EthereumTransaction?
     
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == TASK_TYPE_TRANSFER) {

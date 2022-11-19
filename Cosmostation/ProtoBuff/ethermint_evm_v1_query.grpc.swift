@@ -62,21 +62,6 @@ internal protocol Ethermint_Evm_V1_QueryClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Ethermint_Evm_V1_QueryCodeRequest, Ethermint_Evm_V1_QueryCodeResponse>
 
-  func txLogs(
-    _ request: Ethermint_Evm_V1_QueryTxLogsRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Ethermint_Evm_V1_QueryTxLogsRequest, Ethermint_Evm_V1_QueryTxLogsResponse>
-
-  func blockLogs(
-    _ request: Ethermint_Evm_V1_QueryBlockLogsRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Ethermint_Evm_V1_QueryBlockLogsRequest, Ethermint_Evm_V1_QueryBlockLogsResponse>
-
-  func blockBloom(
-    _ request: Ethermint_Evm_V1_QueryBlockBloomRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Ethermint_Evm_V1_QueryBlockBloomRequest, Ethermint_Evm_V1_QueryBlockBloomResponse>
-
   func params(
     _ request: Ethermint_Evm_V1_QueryParamsRequest,
     callOptions: CallOptions?
@@ -91,6 +76,21 @@ internal protocol Ethermint_Evm_V1_QueryClientProtocol: GRPCClient {
     _ request: Ethermint_Evm_V1_EthCallRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Ethermint_Evm_V1_EthCallRequest, Ethermint_Evm_V1_EstimateGasResponse>
+
+  func traceTx(
+    _ request: Ethermint_Evm_V1_QueryTraceTxRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Ethermint_Evm_V1_QueryTraceTxRequest, Ethermint_Evm_V1_QueryTraceTxResponse>
+
+  func traceBlock(
+    _ request: Ethermint_Evm_V1_QueryTraceBlockRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Ethermint_Evm_V1_QueryTraceBlockRequest, Ethermint_Evm_V1_QueryTraceBlockResponse>
+
+  func baseFee(
+    _ request: Ethermint_Evm_V1_QueryBaseFeeRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Ethermint_Evm_V1_QueryBaseFeeRequest, Ethermint_Evm_V1_QueryBaseFeeResponse>
 }
 
 extension Ethermint_Evm_V1_QueryClientProtocol {
@@ -208,60 +208,6 @@ extension Ethermint_Evm_V1_QueryClientProtocol {
     )
   }
 
-  /// TxLogs queries ethereum logs from a transaction.
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to TxLogs.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func txLogs(
-    _ request: Ethermint_Evm_V1_QueryTxLogsRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Ethermint_Evm_V1_QueryTxLogsRequest, Ethermint_Evm_V1_QueryTxLogsResponse> {
-    return self.makeUnaryCall(
-      path: "/ethermint.evm.v1.Query/TxLogs",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeTxLogsInterceptors() ?? []
-    )
-  }
-
-  /// BlockLogs queries all the ethereum logs for a given block hash.
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to BlockLogs.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func blockLogs(
-    _ request: Ethermint_Evm_V1_QueryBlockLogsRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Ethermint_Evm_V1_QueryBlockLogsRequest, Ethermint_Evm_V1_QueryBlockLogsResponse> {
-    return self.makeUnaryCall(
-      path: "/ethermint.evm.v1.Query/BlockLogs",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeBlockLogsInterceptors() ?? []
-    )
-  }
-
-  /// BlockBloom queries the block bloom filter bytes at a given height.
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to BlockBloom.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func blockBloom(
-    _ request: Ethermint_Evm_V1_QueryBlockBloomRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Ethermint_Evm_V1_QueryBlockBloomRequest, Ethermint_Evm_V1_QueryBlockBloomResponse> {
-    return self.makeUnaryCall(
-      path: "/ethermint.evm.v1.Query/BlockBloom",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeBlockBloomInterceptors() ?? []
-    )
-  }
-
   /// Params queries the parameters of x/evm module.
   ///
   /// - Parameters:
@@ -315,6 +261,61 @@ extension Ethermint_Evm_V1_QueryClientProtocol {
       interceptors: self.interceptors?.makeEstimateGasInterceptors() ?? []
     )
   }
+
+  /// TraceTx implements the `debug_traceTransaction` rpc api
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to TraceTx.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func traceTx(
+    _ request: Ethermint_Evm_V1_QueryTraceTxRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Ethermint_Evm_V1_QueryTraceTxRequest, Ethermint_Evm_V1_QueryTraceTxResponse> {
+    return self.makeUnaryCall(
+      path: "/ethermint.evm.v1.Query/TraceTx",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTraceTxInterceptors() ?? []
+    )
+  }
+
+  /// TraceBlock implements the `debug_traceBlockByNumber` and `debug_traceBlockByHash` rpc api
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to TraceBlock.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func traceBlock(
+    _ request: Ethermint_Evm_V1_QueryTraceBlockRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Ethermint_Evm_V1_QueryTraceBlockRequest, Ethermint_Evm_V1_QueryTraceBlockResponse> {
+    return self.makeUnaryCall(
+      path: "/ethermint.evm.v1.Query/TraceBlock",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTraceBlockInterceptors() ?? []
+    )
+  }
+
+  /// BaseFee queries the base fee of the parent block of the current block,
+  /// it's similar to feemarket module's method, but also checks london hardfork status.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to BaseFee.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func baseFee(
+    _ request: Ethermint_Evm_V1_QueryBaseFeeRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Ethermint_Evm_V1_QueryBaseFeeRequest, Ethermint_Evm_V1_QueryBaseFeeResponse> {
+    return self.makeUnaryCall(
+      path: "/ethermint.evm.v1.Query/BaseFee",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeBaseFeeInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Ethermint_Evm_V1_QueryClientInterceptorFactoryProtocol {
@@ -337,15 +338,6 @@ internal protocol Ethermint_Evm_V1_QueryClientInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when invoking 'code'.
   func makeCodeInterceptors() -> [ClientInterceptor<Ethermint_Evm_V1_QueryCodeRequest, Ethermint_Evm_V1_QueryCodeResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'txLogs'.
-  func makeTxLogsInterceptors() -> [ClientInterceptor<Ethermint_Evm_V1_QueryTxLogsRequest, Ethermint_Evm_V1_QueryTxLogsResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'blockLogs'.
-  func makeBlockLogsInterceptors() -> [ClientInterceptor<Ethermint_Evm_V1_QueryBlockLogsRequest, Ethermint_Evm_V1_QueryBlockLogsResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'blockBloom'.
-  func makeBlockBloomInterceptors() -> [ClientInterceptor<Ethermint_Evm_V1_QueryBlockBloomRequest, Ethermint_Evm_V1_QueryBlockBloomResponse>]
-
   /// - Returns: Interceptors to use when invoking 'params'.
   func makeParamsInterceptors() -> [ClientInterceptor<Ethermint_Evm_V1_QueryParamsRequest, Ethermint_Evm_V1_QueryParamsResponse>]
 
@@ -354,6 +346,15 @@ internal protocol Ethermint_Evm_V1_QueryClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'estimateGas'.
   func makeEstimateGasInterceptors() -> [ClientInterceptor<Ethermint_Evm_V1_EthCallRequest, Ethermint_Evm_V1_EstimateGasResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'traceTx'.
+  func makeTraceTxInterceptors() -> [ClientInterceptor<Ethermint_Evm_V1_QueryTraceTxRequest, Ethermint_Evm_V1_QueryTraceTxResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'traceBlock'.
+  func makeTraceBlockInterceptors() -> [ClientInterceptor<Ethermint_Evm_V1_QueryTraceBlockRequest, Ethermint_Evm_V1_QueryTraceBlockResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'baseFee'.
+  func makeBaseFeeInterceptors() -> [ClientInterceptor<Ethermint_Evm_V1_QueryBaseFeeRequest, Ethermint_Evm_V1_QueryBaseFeeResponse>]
 }
 
 internal final class Ethermint_Evm_V1_QueryClient: Ethermint_Evm_V1_QueryClientProtocol {
@@ -404,15 +405,6 @@ internal protocol Ethermint_Evm_V1_QueryProvider: CallHandlerProvider {
   /// Code queries the balance of all coins for a single account.
   func code(request: Ethermint_Evm_V1_QueryCodeRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ethermint_Evm_V1_QueryCodeResponse>
 
-  /// TxLogs queries ethereum logs from a transaction.
-  func txLogs(request: Ethermint_Evm_V1_QueryTxLogsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ethermint_Evm_V1_QueryTxLogsResponse>
-
-  /// BlockLogs queries all the ethereum logs for a given block hash.
-  func blockLogs(request: Ethermint_Evm_V1_QueryBlockLogsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ethermint_Evm_V1_QueryBlockLogsResponse>
-
-  /// BlockBloom queries the block bloom filter bytes at a given height.
-  func blockBloom(request: Ethermint_Evm_V1_QueryBlockBloomRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ethermint_Evm_V1_QueryBlockBloomResponse>
-
   /// Params queries the parameters of x/evm module.
   func params(request: Ethermint_Evm_V1_QueryParamsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ethermint_Evm_V1_QueryParamsResponse>
 
@@ -421,6 +413,16 @@ internal protocol Ethermint_Evm_V1_QueryProvider: CallHandlerProvider {
 
   /// EstimateGas implements the `eth_estimateGas` rpc api
   func estimateGas(request: Ethermint_Evm_V1_EthCallRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ethermint_Evm_V1_EstimateGasResponse>
+
+  /// TraceTx implements the `debug_traceTransaction` rpc api
+  func traceTx(request: Ethermint_Evm_V1_QueryTraceTxRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ethermint_Evm_V1_QueryTraceTxResponse>
+
+  /// TraceBlock implements the `debug_traceBlockByNumber` and `debug_traceBlockByHash` rpc api
+  func traceBlock(request: Ethermint_Evm_V1_QueryTraceBlockRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ethermint_Evm_V1_QueryTraceBlockResponse>
+
+  /// BaseFee queries the base fee of the parent block of the current block,
+  /// it's similar to feemarket module's method, but also checks london hardfork status.
+  func baseFee(request: Ethermint_Evm_V1_QueryBaseFeeRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ethermint_Evm_V1_QueryBaseFeeResponse>
 }
 
 extension Ethermint_Evm_V1_QueryProvider {
@@ -487,33 +489,6 @@ extension Ethermint_Evm_V1_QueryProvider {
         userFunction: self.code(request:context:)
       )
 
-    case "TxLogs":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Ethermint_Evm_V1_QueryTxLogsRequest>(),
-        responseSerializer: ProtobufSerializer<Ethermint_Evm_V1_QueryTxLogsResponse>(),
-        interceptors: self.interceptors?.makeTxLogsInterceptors() ?? [],
-        userFunction: self.txLogs(request:context:)
-      )
-
-    case "BlockLogs":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Ethermint_Evm_V1_QueryBlockLogsRequest>(),
-        responseSerializer: ProtobufSerializer<Ethermint_Evm_V1_QueryBlockLogsResponse>(),
-        interceptors: self.interceptors?.makeBlockLogsInterceptors() ?? [],
-        userFunction: self.blockLogs(request:context:)
-      )
-
-    case "BlockBloom":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Ethermint_Evm_V1_QueryBlockBloomRequest>(),
-        responseSerializer: ProtobufSerializer<Ethermint_Evm_V1_QueryBlockBloomResponse>(),
-        interceptors: self.interceptors?.makeBlockBloomInterceptors() ?? [],
-        userFunction: self.blockBloom(request:context:)
-      )
-
     case "Params":
       return UnaryServerHandler(
         context: context,
@@ -539,6 +514,33 @@ extension Ethermint_Evm_V1_QueryProvider {
         responseSerializer: ProtobufSerializer<Ethermint_Evm_V1_EstimateGasResponse>(),
         interceptors: self.interceptors?.makeEstimateGasInterceptors() ?? [],
         userFunction: self.estimateGas(request:context:)
+      )
+
+    case "TraceTx":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ethermint_Evm_V1_QueryTraceTxRequest>(),
+        responseSerializer: ProtobufSerializer<Ethermint_Evm_V1_QueryTraceTxResponse>(),
+        interceptors: self.interceptors?.makeTraceTxInterceptors() ?? [],
+        userFunction: self.traceTx(request:context:)
+      )
+
+    case "TraceBlock":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ethermint_Evm_V1_QueryTraceBlockRequest>(),
+        responseSerializer: ProtobufSerializer<Ethermint_Evm_V1_QueryTraceBlockResponse>(),
+        interceptors: self.interceptors?.makeTraceBlockInterceptors() ?? [],
+        userFunction: self.traceBlock(request:context:)
+      )
+
+    case "BaseFee":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ethermint_Evm_V1_QueryBaseFeeRequest>(),
+        responseSerializer: ProtobufSerializer<Ethermint_Evm_V1_QueryBaseFeeResponse>(),
+        interceptors: self.interceptors?.makeBaseFeeInterceptors() ?? [],
+        userFunction: self.baseFee(request:context:)
       )
 
     default:
@@ -573,18 +575,6 @@ internal protocol Ethermint_Evm_V1_QueryServerInterceptorFactoryProtocol {
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeCodeInterceptors() -> [ServerInterceptor<Ethermint_Evm_V1_QueryCodeRequest, Ethermint_Evm_V1_QueryCodeResponse>]
 
-  /// - Returns: Interceptors to use when handling 'txLogs'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeTxLogsInterceptors() -> [ServerInterceptor<Ethermint_Evm_V1_QueryTxLogsRequest, Ethermint_Evm_V1_QueryTxLogsResponse>]
-
-  /// - Returns: Interceptors to use when handling 'blockLogs'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeBlockLogsInterceptors() -> [ServerInterceptor<Ethermint_Evm_V1_QueryBlockLogsRequest, Ethermint_Evm_V1_QueryBlockLogsResponse>]
-
-  /// - Returns: Interceptors to use when handling 'blockBloom'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeBlockBloomInterceptors() -> [ServerInterceptor<Ethermint_Evm_V1_QueryBlockBloomRequest, Ethermint_Evm_V1_QueryBlockBloomResponse>]
-
   /// - Returns: Interceptors to use when handling 'params'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeParamsInterceptors() -> [ServerInterceptor<Ethermint_Evm_V1_QueryParamsRequest, Ethermint_Evm_V1_QueryParamsResponse>]
@@ -596,4 +586,16 @@ internal protocol Ethermint_Evm_V1_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'estimateGas'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeEstimateGasInterceptors() -> [ServerInterceptor<Ethermint_Evm_V1_EthCallRequest, Ethermint_Evm_V1_EstimateGasResponse>]
+
+  /// - Returns: Interceptors to use when handling 'traceTx'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeTraceTxInterceptors() -> [ServerInterceptor<Ethermint_Evm_V1_QueryTraceTxRequest, Ethermint_Evm_V1_QueryTraceTxResponse>]
+
+  /// - Returns: Interceptors to use when handling 'traceBlock'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeTraceBlockInterceptors() -> [ServerInterceptor<Ethermint_Evm_V1_QueryTraceBlockRequest, Ethermint_Evm_V1_QueryTraceBlockResponse>]
+
+  /// - Returns: Interceptors to use when handling 'baseFee'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeBaseFeeInterceptors() -> [ServerInterceptor<Ethermint_Evm_V1_QueryBaseFeeRequest, Ethermint_Evm_V1_QueryBaseFeeResponse>]
 }

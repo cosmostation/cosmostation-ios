@@ -103,6 +103,15 @@ class BaseViewController: UIViewController {
         self.navigationController?.pushViewController(txDetailVC, animated: true)
     }
     
+    func onStartTxDetailEvm(_ resultHash: String) {
+        let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
+        txDetailVC.mIsGen = true
+        txDetailVC.mEthResultHash = resultHash
+        self.navigationItem.title = ""
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+        self.navigationController?.pushViewController(txDetailVC, animated: true)
+    }
+    
     func onDeleteWallet(_ account:Account, completion: @escaping () -> ()) {
         DispatchQueue.global().async {
             _ = BaseData.instance.deleteAccount(account: account)
