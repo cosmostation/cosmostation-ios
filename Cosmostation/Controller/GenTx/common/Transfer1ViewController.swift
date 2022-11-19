@@ -202,7 +202,14 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     func onSetTranfserType() {
         if (chainType == recipientChainConfig.chainType) {
             if (mintscanAsset != nil) { pageHolderVC.mTransferType = TRANSFER_SIMPLE }
-            else if (mintscanTokens != nil) { pageHolderVC.mTransferType = TRANSFER_WASM }
+            else if (mintscanTokens != nil) {
+                print("contract_address ", mintscanTokens?.contract_address)
+                if (mintscanTokens?.contract_address.starts(with: "0x") == true) {
+                    pageHolderVC.mTransferType = TRANSFER_EVM
+                } else {
+                    pageHolderVC.mTransferType = TRANSFER_WASM
+                }
+            }
 
         } else {
             if (mintscanAsset != nil) {

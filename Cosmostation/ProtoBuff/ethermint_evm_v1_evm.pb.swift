@@ -28,44 +28,36 @@ struct Ethermint_Evm_V1_Params {
 
   /// evm denom represents the token denomination used to run the EVM state
   /// transitions.
-  var evmDenom: String {
-    get {return _storage._evmDenom}
-    set {_uniqueStorage()._evmDenom = newValue}
-  }
+  var evmDenom: String = String()
 
   /// enable create toggles state transitions that use the vm.Create function
-  var enableCreate: Bool {
-    get {return _storage._enableCreate}
-    set {_uniqueStorage()._enableCreate = newValue}
-  }
+  var enableCreate: Bool = false
 
   /// enable call toggles state transitions that use the vm.Call function
-  var enableCall: Bool {
-    get {return _storage._enableCall}
-    set {_uniqueStorage()._enableCall = newValue}
-  }
+  var enableCall: Bool = false
 
   /// extra eips defines the additional EIPs for the vm.Config
-  var extraEips: [Int64] {
-    get {return _storage._extraEips}
-    set {_uniqueStorage()._extraEips = newValue}
-  }
+  var extraEips: [Int64] = []
 
   /// chain config defines the EVM chain configuration parameters
   var chainConfig: Ethermint_Evm_V1_ChainConfig {
-    get {return _storage._chainConfig ?? Ethermint_Evm_V1_ChainConfig()}
-    set {_uniqueStorage()._chainConfig = newValue}
+    get {return _chainConfig ?? Ethermint_Evm_V1_ChainConfig()}
+    set {_chainConfig = newValue}
   }
   /// Returns true if `chainConfig` has been explicitly set.
-  var hasChainConfig: Bool {return _storage._chainConfig != nil}
+  var hasChainConfig: Bool {return self._chainConfig != nil}
   /// Clears the value of `chainConfig`. Subsequent reads from it will return its default value.
-  mutating func clearChainConfig() {_uniqueStorage()._chainConfig = nil}
+  mutating func clearChainConfig() {self._chainConfig = nil}
+
+  /// Allow unprotected transactions defines if replay-protected (i.e non EIP155
+  /// signed) transactions can be executed on the state machine.
+  var allowUnprotectedTxs: Bool = false
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
-  fileprivate var _storage = _StorageClass.defaultInstance
+  fileprivate var _chainConfig: Ethermint_Evm_V1_ChainConfig? = nil
 }
 
 /// ChainConfig defines the Ethereum ChainConfig parameters using *sdk.Int values
@@ -76,54 +68,113 @@ struct Ethermint_Evm_V1_ChainConfig {
   // methods supported on all messages.
 
   /// Homestead switch block (nil no fork, 0 = already homestead)
-  var homesteadBlock: String = String()
+  var homesteadBlock: String {
+    get {return _storage._homesteadBlock}
+    set {_uniqueStorage()._homesteadBlock = newValue}
+  }
 
   /// TheDAO hard-fork switch block (nil no fork)
-  var daoForkBlock: String = String()
+  var daoForkBlock: String {
+    get {return _storage._daoForkBlock}
+    set {_uniqueStorage()._daoForkBlock = newValue}
+  }
 
   /// Whether the nodes supports or opposes the DAO hard-fork
-  var daoForkSupport: Bool = false
+  var daoForkSupport: Bool {
+    get {return _storage._daoForkSupport}
+    set {_uniqueStorage()._daoForkSupport = newValue}
+  }
 
   /// EIP150 implements the Gas price changes
   /// (https://github.com/ethereum/EIPs/issues/150) EIP150 HF block (nil no fork)
-  var eip150Block: String = String()
+  var eip150Block: String {
+    get {return _storage._eip150Block}
+    set {_uniqueStorage()._eip150Block = newValue}
+  }
 
   /// EIP150 HF hash (needed for header only clients as only gas pricing changed)
-  var eip150Hash: String = String()
+  var eip150Hash: String {
+    get {return _storage._eip150Hash}
+    set {_uniqueStorage()._eip150Hash = newValue}
+  }
 
   /// EIP155Block HF block
-  var eip155Block: String = String()
+  var eip155Block: String {
+    get {return _storage._eip155Block}
+    set {_uniqueStorage()._eip155Block = newValue}
+  }
 
   /// EIP158 HF block
-  var eip158Block: String = String()
+  var eip158Block: String {
+    get {return _storage._eip158Block}
+    set {_uniqueStorage()._eip158Block = newValue}
+  }
 
   /// Byzantium switch block (nil no fork, 0 = already on byzantium)
-  var byzantiumBlock: String = String()
+  var byzantiumBlock: String {
+    get {return _storage._byzantiumBlock}
+    set {_uniqueStorage()._byzantiumBlock = newValue}
+  }
 
   /// Constantinople switch block (nil no fork, 0 = already activated)
-  var constantinopleBlock: String = String()
+  var constantinopleBlock: String {
+    get {return _storage._constantinopleBlock}
+    set {_uniqueStorage()._constantinopleBlock = newValue}
+  }
 
   /// Petersburg switch block (nil same as Constantinople)
-  var petersburgBlock: String = String()
+  var petersburgBlock: String {
+    get {return _storage._petersburgBlock}
+    set {_uniqueStorage()._petersburgBlock = newValue}
+  }
 
   /// Istanbul switch block (nil no fork, 0 = already on istanbul)
-  var istanbulBlock: String = String()
+  var istanbulBlock: String {
+    get {return _storage._istanbulBlock}
+    set {_uniqueStorage()._istanbulBlock = newValue}
+  }
 
   /// Eip-2384 (bomb delay) switch block (nil no fork, 0 = already activated)
-  var muirGlacierBlock: String = String()
+  var muirGlacierBlock: String {
+    get {return _storage._muirGlacierBlock}
+    set {_uniqueStorage()._muirGlacierBlock = newValue}
+  }
 
   /// Berlin switch block (nil = no fork, 0 = already on berlin)
-  var berlinBlock: String = String()
-
-  /// Catalyst switch block (nil = no fork, 0 = already on catalyst)
-  var catalystBlock: String = String()
+  var berlinBlock: String {
+    get {return _storage._berlinBlock}
+    set {_uniqueStorage()._berlinBlock = newValue}
+  }
 
   /// London switch block (nil = no fork, 0 = already on london)
-  var londonBlock: String = String()
+  var londonBlock: String {
+    get {return _storage._londonBlock}
+    set {_uniqueStorage()._londonBlock = newValue}
+  }
+
+  /// Eip-4345 (bomb delay) switch block (nil = no fork, 0 = already activated)
+  var arrowGlacierBlock: String {
+    get {return _storage._arrowGlacierBlock}
+    set {_uniqueStorage()._arrowGlacierBlock = newValue}
+  }
+
+  ///  EIP-5133 (bomb delay) switch block (nil = no fork, 0 = already activated)
+  var grayGlacierBlock: String {
+    get {return _storage._grayGlacierBlock}
+    set {_uniqueStorage()._grayGlacierBlock = newValue}
+  }
+
+  /// Virtual fork after The Merge to use as a network splitter
+  var mergeNetsplitBlock: String {
+    get {return _storage._mergeNetsplitBlock}
+    set {_uniqueStorage()._mergeNetsplitBlock = newValue}
+  }
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 /// State represents a single Storage key value pair item.
@@ -258,6 +309,60 @@ struct Ethermint_Evm_V1_AccessTuple {
   init() {}
 }
 
+/// TraceConfig holds extra parameters to trace functions.
+struct Ethermint_Evm_V1_TraceConfig {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// custom javascript tracer
+  var tracer: String = String()
+
+  /// overrides the default timeout of 5 seconds for JavaScript-based tracing
+  /// calls
+  var timeout: String = String()
+
+  /// number of blocks the tracer is willing to go back
+  var reexec: UInt64 = 0
+
+  /// disable stack capture
+  var disableStack: Bool = false
+
+  /// disable storage capture
+  var disableStorage: Bool = false
+
+  /// print output during capture end
+  var debug: Bool = false
+
+  /// maximum length of output, but zero means unlimited
+  var limit: Int32 = 0
+
+  /// Chain overrides, can be used to execute a trace using future fork rules
+  var overrides: Ethermint_Evm_V1_ChainConfig {
+    get {return _overrides ?? Ethermint_Evm_V1_ChainConfig()}
+    set {_overrides = newValue}
+  }
+  /// Returns true if `overrides` has been explicitly set.
+  var hasOverrides: Bool {return self._overrides != nil}
+  /// Clears the value of `overrides`. Subsequent reads from it will return its default value.
+  mutating func clearOverrides() {self._overrides = nil}
+
+  /// enable memory capture
+  var enableMemory: Bool = false
+
+  /// enable return data capture
+  var enableReturnData: Bool = false
+
+  /// tracer config
+  var tracerJsonConfig: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _overrides: Ethermint_Evm_V1_ChainConfig? = nil
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "ethermint.evm.v1"
@@ -270,89 +375,55 @@ extension Ethermint_Evm_V1_Params: SwiftProtobuf.Message, SwiftProtobuf._Message
     3: .standard(proto: "enable_call"),
     4: .standard(proto: "extra_eips"),
     5: .standard(proto: "chain_config"),
+    6: .standard(proto: "allow_unprotected_txs"),
   ]
 
-  fileprivate class _StorageClass {
-    var _evmDenom: String = String()
-    var _enableCreate: Bool = false
-    var _enableCall: Bool = false
-    var _extraEips: [Int64] = []
-    var _chainConfig: Ethermint_Evm_V1_ChainConfig? = nil
-
-    static let defaultInstance = _StorageClass()
-
-    private init() {}
-
-    init(copying source: _StorageClass) {
-      _evmDenom = source._evmDenom
-      _enableCreate = source._enableCreate
-      _enableCall = source._enableCall
-      _extraEips = source._extraEips
-      _chainConfig = source._chainConfig
-    }
-  }
-
-  fileprivate mutating func _uniqueStorage() -> _StorageClass {
-    if !isKnownUniquelyReferenced(&_storage) {
-      _storage = _StorageClass(copying: _storage)
-    }
-    return _storage
-  }
-
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        // The use of inline closures is to circumvent an issue where the compiler
-        // allocates stack space for every case branch when no optimizations are
-        // enabled. https://github.com/apple/swift-protobuf/issues/1034
-        switch fieldNumber {
-        case 1: try { try decoder.decodeSingularStringField(value: &_storage._evmDenom) }()
-        case 2: try { try decoder.decodeSingularBoolField(value: &_storage._enableCreate) }()
-        case 3: try { try decoder.decodeSingularBoolField(value: &_storage._enableCall) }()
-        case 4: try { try decoder.decodeRepeatedInt64Field(value: &_storage._extraEips) }()
-        case 5: try { try decoder.decodeSingularMessageField(value: &_storage._chainConfig) }()
-        default: break
-        }
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.evmDenom) }()
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.enableCreate) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self.enableCall) }()
+      case 4: try { try decoder.decodeRepeatedInt64Field(value: &self.extraEips) }()
+      case 5: try { try decoder.decodeSingularMessageField(value: &self._chainConfig) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self.allowUnprotectedTxs) }()
+      default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if !_storage._evmDenom.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._evmDenom, fieldNumber: 1)
-      }
-      if _storage._enableCreate != false {
-        try visitor.visitSingularBoolField(value: _storage._enableCreate, fieldNumber: 2)
-      }
-      if _storage._enableCall != false {
-        try visitor.visitSingularBoolField(value: _storage._enableCall, fieldNumber: 3)
-      }
-      if !_storage._extraEips.isEmpty {
-        try visitor.visitPackedInt64Field(value: _storage._extraEips, fieldNumber: 4)
-      }
-      if let v = _storage._chainConfig {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-      }
+    if !self.evmDenom.isEmpty {
+      try visitor.visitSingularStringField(value: self.evmDenom, fieldNumber: 1)
+    }
+    if self.enableCreate != false {
+      try visitor.visitSingularBoolField(value: self.enableCreate, fieldNumber: 2)
+    }
+    if self.enableCall != false {
+      try visitor.visitSingularBoolField(value: self.enableCall, fieldNumber: 3)
+    }
+    if !self.extraEips.isEmpty {
+      try visitor.visitPackedInt64Field(value: self.extraEips, fieldNumber: 4)
+    }
+    if let v = self._chainConfig {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    }
+    if self.allowUnprotectedTxs != false {
+      try visitor.visitSingularBoolField(value: self.allowUnprotectedTxs, fieldNumber: 6)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Ethermint_Evm_V1_Params, rhs: Ethermint_Evm_V1_Params) -> Bool {
-    if lhs._storage !== rhs._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
-        let _storage = _args.0
-        let rhs_storage = _args.1
-        if _storage._evmDenom != rhs_storage._evmDenom {return false}
-        if _storage._enableCreate != rhs_storage._enableCreate {return false}
-        if _storage._enableCall != rhs_storage._enableCall {return false}
-        if _storage._extraEips != rhs_storage._extraEips {return false}
-        if _storage._chainConfig != rhs_storage._chainConfig {return false}
-        return true
-      }
-      if !storagesAreEqual {return false}
-    }
+    if lhs.evmDenom != rhs.evmDenom {return false}
+    if lhs.enableCreate != rhs.enableCreate {return false}
+    if lhs.enableCall != rhs.enableCall {return false}
+    if lhs.extraEips != rhs.extraEips {return false}
+    if lhs._chainConfig != rhs._chainConfig {return false}
+    if lhs.allowUnprotectedTxs != rhs.allowUnprotectedTxs {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -374,101 +445,177 @@ extension Ethermint_Evm_V1_ChainConfig: SwiftProtobuf.Message, SwiftProtobuf._Me
     11: .standard(proto: "istanbul_block"),
     12: .standard(proto: "muir_glacier_block"),
     13: .standard(proto: "berlin_block"),
-    16: .standard(proto: "catalyst_block"),
     17: .standard(proto: "london_block"),
+    18: .standard(proto: "arrow_glacier_block"),
+    20: .standard(proto: "gray_glacier_block"),
+    21: .standard(proto: "merge_netsplit_block"),
   ]
 
+  fileprivate class _StorageClass {
+    var _homesteadBlock: String = String()
+    var _daoForkBlock: String = String()
+    var _daoForkSupport: Bool = false
+    var _eip150Block: String = String()
+    var _eip150Hash: String = String()
+    var _eip155Block: String = String()
+    var _eip158Block: String = String()
+    var _byzantiumBlock: String = String()
+    var _constantinopleBlock: String = String()
+    var _petersburgBlock: String = String()
+    var _istanbulBlock: String = String()
+    var _muirGlacierBlock: String = String()
+    var _berlinBlock: String = String()
+    var _londonBlock: String = String()
+    var _arrowGlacierBlock: String = String()
+    var _grayGlacierBlock: String = String()
+    var _mergeNetsplitBlock: String = String()
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _homesteadBlock = source._homesteadBlock
+      _daoForkBlock = source._daoForkBlock
+      _daoForkSupport = source._daoForkSupport
+      _eip150Block = source._eip150Block
+      _eip150Hash = source._eip150Hash
+      _eip155Block = source._eip155Block
+      _eip158Block = source._eip158Block
+      _byzantiumBlock = source._byzantiumBlock
+      _constantinopleBlock = source._constantinopleBlock
+      _petersburgBlock = source._petersburgBlock
+      _istanbulBlock = source._istanbulBlock
+      _muirGlacierBlock = source._muirGlacierBlock
+      _berlinBlock = source._berlinBlock
+      _londonBlock = source._londonBlock
+      _arrowGlacierBlock = source._arrowGlacierBlock
+      _grayGlacierBlock = source._grayGlacierBlock
+      _mergeNetsplitBlock = source._mergeNetsplitBlock
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.homesteadBlock) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.daoForkBlock) }()
-      case 3: try { try decoder.decodeSingularBoolField(value: &self.daoForkSupport) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.eip150Block) }()
-      case 5: try { try decoder.decodeSingularStringField(value: &self.eip150Hash) }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self.eip155Block) }()
-      case 7: try { try decoder.decodeSingularStringField(value: &self.eip158Block) }()
-      case 8: try { try decoder.decodeSingularStringField(value: &self.byzantiumBlock) }()
-      case 9: try { try decoder.decodeSingularStringField(value: &self.constantinopleBlock) }()
-      case 10: try { try decoder.decodeSingularStringField(value: &self.petersburgBlock) }()
-      case 11: try { try decoder.decodeSingularStringField(value: &self.istanbulBlock) }()
-      case 12: try { try decoder.decodeSingularStringField(value: &self.muirGlacierBlock) }()
-      case 13: try { try decoder.decodeSingularStringField(value: &self.berlinBlock) }()
-      case 16: try { try decoder.decodeSingularStringField(value: &self.catalystBlock) }()
-      case 17: try { try decoder.decodeSingularStringField(value: &self.londonBlock) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularStringField(value: &_storage._homesteadBlock) }()
+        case 2: try { try decoder.decodeSingularStringField(value: &_storage._daoForkBlock) }()
+        case 3: try { try decoder.decodeSingularBoolField(value: &_storage._daoForkSupport) }()
+        case 4: try { try decoder.decodeSingularStringField(value: &_storage._eip150Block) }()
+        case 5: try { try decoder.decodeSingularStringField(value: &_storage._eip150Hash) }()
+        case 6: try { try decoder.decodeSingularStringField(value: &_storage._eip155Block) }()
+        case 7: try { try decoder.decodeSingularStringField(value: &_storage._eip158Block) }()
+        case 8: try { try decoder.decodeSingularStringField(value: &_storage._byzantiumBlock) }()
+        case 9: try { try decoder.decodeSingularStringField(value: &_storage._constantinopleBlock) }()
+        case 10: try { try decoder.decodeSingularStringField(value: &_storage._petersburgBlock) }()
+        case 11: try { try decoder.decodeSingularStringField(value: &_storage._istanbulBlock) }()
+        case 12: try { try decoder.decodeSingularStringField(value: &_storage._muirGlacierBlock) }()
+        case 13: try { try decoder.decodeSingularStringField(value: &_storage._berlinBlock) }()
+        case 17: try { try decoder.decodeSingularStringField(value: &_storage._londonBlock) }()
+        case 18: try { try decoder.decodeSingularStringField(value: &_storage._arrowGlacierBlock) }()
+        case 20: try { try decoder.decodeSingularStringField(value: &_storage._grayGlacierBlock) }()
+        case 21: try { try decoder.decodeSingularStringField(value: &_storage._mergeNetsplitBlock) }()
+        default: break
+        }
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.homesteadBlock.isEmpty {
-      try visitor.visitSingularStringField(value: self.homesteadBlock, fieldNumber: 1)
-    }
-    if !self.daoForkBlock.isEmpty {
-      try visitor.visitSingularStringField(value: self.daoForkBlock, fieldNumber: 2)
-    }
-    if self.daoForkSupport != false {
-      try visitor.visitSingularBoolField(value: self.daoForkSupport, fieldNumber: 3)
-    }
-    if !self.eip150Block.isEmpty {
-      try visitor.visitSingularStringField(value: self.eip150Block, fieldNumber: 4)
-    }
-    if !self.eip150Hash.isEmpty {
-      try visitor.visitSingularStringField(value: self.eip150Hash, fieldNumber: 5)
-    }
-    if !self.eip155Block.isEmpty {
-      try visitor.visitSingularStringField(value: self.eip155Block, fieldNumber: 6)
-    }
-    if !self.eip158Block.isEmpty {
-      try visitor.visitSingularStringField(value: self.eip158Block, fieldNumber: 7)
-    }
-    if !self.byzantiumBlock.isEmpty {
-      try visitor.visitSingularStringField(value: self.byzantiumBlock, fieldNumber: 8)
-    }
-    if !self.constantinopleBlock.isEmpty {
-      try visitor.visitSingularStringField(value: self.constantinopleBlock, fieldNumber: 9)
-    }
-    if !self.petersburgBlock.isEmpty {
-      try visitor.visitSingularStringField(value: self.petersburgBlock, fieldNumber: 10)
-    }
-    if !self.istanbulBlock.isEmpty {
-      try visitor.visitSingularStringField(value: self.istanbulBlock, fieldNumber: 11)
-    }
-    if !self.muirGlacierBlock.isEmpty {
-      try visitor.visitSingularStringField(value: self.muirGlacierBlock, fieldNumber: 12)
-    }
-    if !self.berlinBlock.isEmpty {
-      try visitor.visitSingularStringField(value: self.berlinBlock, fieldNumber: 13)
-    }
-    if !self.catalystBlock.isEmpty {
-      try visitor.visitSingularStringField(value: self.catalystBlock, fieldNumber: 16)
-    }
-    if !self.londonBlock.isEmpty {
-      try visitor.visitSingularStringField(value: self.londonBlock, fieldNumber: 17)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._homesteadBlock.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._homesteadBlock, fieldNumber: 1)
+      }
+      if !_storage._daoForkBlock.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._daoForkBlock, fieldNumber: 2)
+      }
+      if _storage._daoForkSupport != false {
+        try visitor.visitSingularBoolField(value: _storage._daoForkSupport, fieldNumber: 3)
+      }
+      if !_storage._eip150Block.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._eip150Block, fieldNumber: 4)
+      }
+      if !_storage._eip150Hash.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._eip150Hash, fieldNumber: 5)
+      }
+      if !_storage._eip155Block.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._eip155Block, fieldNumber: 6)
+      }
+      if !_storage._eip158Block.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._eip158Block, fieldNumber: 7)
+      }
+      if !_storage._byzantiumBlock.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._byzantiumBlock, fieldNumber: 8)
+      }
+      if !_storage._constantinopleBlock.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._constantinopleBlock, fieldNumber: 9)
+      }
+      if !_storage._petersburgBlock.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._petersburgBlock, fieldNumber: 10)
+      }
+      if !_storage._istanbulBlock.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._istanbulBlock, fieldNumber: 11)
+      }
+      if !_storage._muirGlacierBlock.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._muirGlacierBlock, fieldNumber: 12)
+      }
+      if !_storage._berlinBlock.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._berlinBlock, fieldNumber: 13)
+      }
+      if !_storage._londonBlock.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._londonBlock, fieldNumber: 17)
+      }
+      if !_storage._arrowGlacierBlock.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._arrowGlacierBlock, fieldNumber: 18)
+      }
+      if !_storage._grayGlacierBlock.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._grayGlacierBlock, fieldNumber: 20)
+      }
+      if !_storage._mergeNetsplitBlock.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._mergeNetsplitBlock, fieldNumber: 21)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Ethermint_Evm_V1_ChainConfig, rhs: Ethermint_Evm_V1_ChainConfig) -> Bool {
-    if lhs.homesteadBlock != rhs.homesteadBlock {return false}
-    if lhs.daoForkBlock != rhs.daoForkBlock {return false}
-    if lhs.daoForkSupport != rhs.daoForkSupport {return false}
-    if lhs.eip150Block != rhs.eip150Block {return false}
-    if lhs.eip150Hash != rhs.eip150Hash {return false}
-    if lhs.eip155Block != rhs.eip155Block {return false}
-    if lhs.eip158Block != rhs.eip158Block {return false}
-    if lhs.byzantiumBlock != rhs.byzantiumBlock {return false}
-    if lhs.constantinopleBlock != rhs.constantinopleBlock {return false}
-    if lhs.petersburgBlock != rhs.petersburgBlock {return false}
-    if lhs.istanbulBlock != rhs.istanbulBlock {return false}
-    if lhs.muirGlacierBlock != rhs.muirGlacierBlock {return false}
-    if lhs.berlinBlock != rhs.berlinBlock {return false}
-    if lhs.catalystBlock != rhs.catalystBlock {return false}
-    if lhs.londonBlock != rhs.londonBlock {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._homesteadBlock != rhs_storage._homesteadBlock {return false}
+        if _storage._daoForkBlock != rhs_storage._daoForkBlock {return false}
+        if _storage._daoForkSupport != rhs_storage._daoForkSupport {return false}
+        if _storage._eip150Block != rhs_storage._eip150Block {return false}
+        if _storage._eip150Hash != rhs_storage._eip150Hash {return false}
+        if _storage._eip155Block != rhs_storage._eip155Block {return false}
+        if _storage._eip158Block != rhs_storage._eip158Block {return false}
+        if _storage._byzantiumBlock != rhs_storage._byzantiumBlock {return false}
+        if _storage._constantinopleBlock != rhs_storage._constantinopleBlock {return false}
+        if _storage._petersburgBlock != rhs_storage._petersburgBlock {return false}
+        if _storage._istanbulBlock != rhs_storage._istanbulBlock {return false}
+        if _storage._muirGlacierBlock != rhs_storage._muirGlacierBlock {return false}
+        if _storage._berlinBlock != rhs_storage._berlinBlock {return false}
+        if _storage._londonBlock != rhs_storage._londonBlock {return false}
+        if _storage._arrowGlacierBlock != rhs_storage._arrowGlacierBlock {return false}
+        if _storage._grayGlacierBlock != rhs_storage._grayGlacierBlock {return false}
+        if _storage._mergeNetsplitBlock != rhs_storage._mergeNetsplitBlock {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -725,6 +872,98 @@ extension Ethermint_Evm_V1_AccessTuple: SwiftProtobuf.Message, SwiftProtobuf._Me
   static func ==(lhs: Ethermint_Evm_V1_AccessTuple, rhs: Ethermint_Evm_V1_AccessTuple) -> Bool {
     if lhs.address != rhs.address {return false}
     if lhs.storageKeys != rhs.storageKeys {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ethermint_Evm_V1_TraceConfig: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".TraceConfig"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "tracer"),
+    2: .same(proto: "timeout"),
+    3: .same(proto: "reexec"),
+    5: .standard(proto: "disable_stack"),
+    6: .standard(proto: "disable_storage"),
+    8: .same(proto: "debug"),
+    9: .same(proto: "limit"),
+    10: .same(proto: "overrides"),
+    11: .standard(proto: "enable_memory"),
+    12: .standard(proto: "enable_return_data"),
+    13: .standard(proto: "tracer_json_config"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.tracer) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.timeout) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.reexec) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self.disableStack) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self.disableStorage) }()
+      case 8: try { try decoder.decodeSingularBoolField(value: &self.debug) }()
+      case 9: try { try decoder.decodeSingularInt32Field(value: &self.limit) }()
+      case 10: try { try decoder.decodeSingularMessageField(value: &self._overrides) }()
+      case 11: try { try decoder.decodeSingularBoolField(value: &self.enableMemory) }()
+      case 12: try { try decoder.decodeSingularBoolField(value: &self.enableReturnData) }()
+      case 13: try { try decoder.decodeSingularStringField(value: &self.tracerJsonConfig) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.tracer.isEmpty {
+      try visitor.visitSingularStringField(value: self.tracer, fieldNumber: 1)
+    }
+    if !self.timeout.isEmpty {
+      try visitor.visitSingularStringField(value: self.timeout, fieldNumber: 2)
+    }
+    if self.reexec != 0 {
+      try visitor.visitSingularUInt64Field(value: self.reexec, fieldNumber: 3)
+    }
+    if self.disableStack != false {
+      try visitor.visitSingularBoolField(value: self.disableStack, fieldNumber: 5)
+    }
+    if self.disableStorage != false {
+      try visitor.visitSingularBoolField(value: self.disableStorage, fieldNumber: 6)
+    }
+    if self.debug != false {
+      try visitor.visitSingularBoolField(value: self.debug, fieldNumber: 8)
+    }
+    if self.limit != 0 {
+      try visitor.visitSingularInt32Field(value: self.limit, fieldNumber: 9)
+    }
+    if let v = self._overrides {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+    }
+    if self.enableMemory != false {
+      try visitor.visitSingularBoolField(value: self.enableMemory, fieldNumber: 11)
+    }
+    if self.enableReturnData != false {
+      try visitor.visitSingularBoolField(value: self.enableReturnData, fieldNumber: 12)
+    }
+    if !self.tracerJsonConfig.isEmpty {
+      try visitor.visitSingularStringField(value: self.tracerJsonConfig, fieldNumber: 13)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ethermint_Evm_V1_TraceConfig, rhs: Ethermint_Evm_V1_TraceConfig) -> Bool {
+    if lhs.tracer != rhs.tracer {return false}
+    if lhs.timeout != rhs.timeout {return false}
+    if lhs.reexec != rhs.reexec {return false}
+    if lhs.disableStack != rhs.disableStack {return false}
+    if lhs.disableStorage != rhs.disableStorage {return false}
+    if lhs.debug != rhs.debug {return false}
+    if lhs.limit != rhs.limit {return false}
+    if lhs._overrides != rhs._overrides {return false}
+    if lhs.enableMemory != rhs.enableMemory {return false}
+    if lhs.enableReturnData != rhs.enableReturnData {return false}
+    if lhs.tracerJsonConfig != rhs.tracerJsonConfig {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -37,11 +37,18 @@ struct Ethermint_Feemarket_V1_Params {
   /// have.
   var elasticityMultiplier: UInt32 = 0
 
-  /// initial base fee for EIP-1559 blocks.
-  var initialBaseFee: Int64 = 0
-
   /// height at which the base fee calculation is enabled.
   var enableHeight: Int64 = 0
+
+  /// base fee for EIP-1559 blocks.
+  var baseFee: String = String()
+
+  /// min_gas_price defines the minimum gas price value for cosmos and eth transactions
+  var minGasPrice: String = String()
+
+  /// min gas denominator bounds the minimum gasUsed to be charged
+  /// to senders based on GasLimit
+  var minGasMultiplier: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -58,8 +65,10 @@ extension Ethermint_Feemarket_V1_Params: SwiftProtobuf.Message, SwiftProtobuf._M
     1: .standard(proto: "no_base_fee"),
     2: .standard(proto: "base_fee_change_denominator"),
     3: .standard(proto: "elasticity_multiplier"),
-    4: .standard(proto: "initial_base_fee"),
     5: .standard(proto: "enable_height"),
+    6: .standard(proto: "base_fee"),
+    7: .standard(proto: "min_gas_price"),
+    8: .standard(proto: "min_gas_multiplier"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -71,8 +80,10 @@ extension Ethermint_Feemarket_V1_Params: SwiftProtobuf.Message, SwiftProtobuf._M
       case 1: try { try decoder.decodeSingularBoolField(value: &self.noBaseFee) }()
       case 2: try { try decoder.decodeSingularUInt32Field(value: &self.baseFeeChangeDenominator) }()
       case 3: try { try decoder.decodeSingularUInt32Field(value: &self.elasticityMultiplier) }()
-      case 4: try { try decoder.decodeSingularInt64Field(value: &self.initialBaseFee) }()
       case 5: try { try decoder.decodeSingularInt64Field(value: &self.enableHeight) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.baseFee) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.minGasPrice) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.minGasMultiplier) }()
       default: break
       }
     }
@@ -88,11 +99,17 @@ extension Ethermint_Feemarket_V1_Params: SwiftProtobuf.Message, SwiftProtobuf._M
     if self.elasticityMultiplier != 0 {
       try visitor.visitSingularUInt32Field(value: self.elasticityMultiplier, fieldNumber: 3)
     }
-    if self.initialBaseFee != 0 {
-      try visitor.visitSingularInt64Field(value: self.initialBaseFee, fieldNumber: 4)
-    }
     if self.enableHeight != 0 {
       try visitor.visitSingularInt64Field(value: self.enableHeight, fieldNumber: 5)
+    }
+    if !self.baseFee.isEmpty {
+      try visitor.visitSingularStringField(value: self.baseFee, fieldNumber: 6)
+    }
+    if !self.minGasPrice.isEmpty {
+      try visitor.visitSingularStringField(value: self.minGasPrice, fieldNumber: 7)
+    }
+    if !self.minGasMultiplier.isEmpty {
+      try visitor.visitSingularStringField(value: self.minGasMultiplier, fieldNumber: 8)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -101,8 +118,10 @@ extension Ethermint_Feemarket_V1_Params: SwiftProtobuf.Message, SwiftProtobuf._M
     if lhs.noBaseFee != rhs.noBaseFee {return false}
     if lhs.baseFeeChangeDenominator != rhs.baseFeeChangeDenominator {return false}
     if lhs.elasticityMultiplier != rhs.elasticityMultiplier {return false}
-    if lhs.initialBaseFee != rhs.initialBaseFee {return false}
     if lhs.enableHeight != rhs.enableHeight {return false}
+    if lhs.baseFee != rhs.baseFee {return false}
+    if lhs.minGasPrice != rhs.minGasPrice {return false}
+    if lhs.minGasMultiplier != rhs.minGasMultiplier {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

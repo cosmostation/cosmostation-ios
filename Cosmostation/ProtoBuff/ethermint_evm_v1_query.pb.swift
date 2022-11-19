@@ -224,34 +224,6 @@ struct Ethermint_Evm_V1_QueryTxLogsRequest {
   /// hash is the ethereum transaction hex hash to query the logs for.
   var hash: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-/// QueryTxLogs is the response type for the Query/TxLogs RPC method.
-struct Ethermint_Evm_V1_QueryTxLogsResponse {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  /// logs represents the ethereum logs generated from the given transaction.
-  var logs: [Ethermint_Evm_V1_Log] = []
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-/// QueryBlockLogsRequest is the request type for the Query/BlockLogs RPC method.
-struct Ethermint_Evm_V1_QueryBlockLogsRequest {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  /// hash is the block hash to query the logs for.
-  var hash: String = String()
-
   /// pagination defines an optional pagination for the request.
   var pagination: Cosmos_Base_Query_V1beta1_PageRequest {
     get {return _pagination ?? Cosmos_Base_Query_V1beta1_PageRequest()}
@@ -269,14 +241,14 @@ struct Ethermint_Evm_V1_QueryBlockLogsRequest {
   fileprivate var _pagination: Cosmos_Base_Query_V1beta1_PageRequest? = nil
 }
 
-/// QueryTxLogs is the response type for the Query/BlockLogs RPC method.
-struct Ethermint_Evm_V1_QueryBlockLogsResponse {
+/// QueryTxLogs is the response type for the Query/TxLogs RPC method.
+struct Ethermint_Evm_V1_QueryTxLogsResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// logs represents the ethereum logs generated at the given block hash.
-  var txLogs: [Ethermint_Evm_V1_TransactionLogs] = []
+  /// logs represents the ethereum logs generated from the given transaction.
+  var logs: [Ethermint_Evm_V1_Log] = []
 
   /// pagination defines the pagination in the response.
   var pagination: Cosmos_Base_Query_V1beta1_PageResponse {
@@ -293,39 +265,6 @@ struct Ethermint_Evm_V1_QueryBlockLogsResponse {
   init() {}
 
   fileprivate var _pagination: Cosmos_Base_Query_V1beta1_PageResponse? = nil
-}
-
-/// QueryBlockBloomRequest is the request type for the Query/BlockBloom RPC
-/// method.
-struct Ethermint_Evm_V1_QueryBlockBloomRequest {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  /// height of the block which we want to query the bloom filter.
-  /// Tendermint always replace the query request header by the current context
-  /// header, height cannot be extracted from there, so we need to explicitly
-  /// pass it in parameter.
-  var height: Int64 = 0
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-/// QueryBlockBloomResponse is the response type for the Query/BlockBloom RPC
-/// method.
-struct Ethermint_Evm_V1_QueryBlockBloomResponse {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  /// bloom represents bloom filter for the given block hash.
-  var bloom: Data = Data()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
 }
 
 /// QueryParamsRequest defines the request type for querying x/evm parameters.
@@ -362,6 +301,192 @@ struct Ethermint_Evm_V1_QueryParamsResponse {
   fileprivate var _params: Ethermint_Evm_V1_Params? = nil
 }
 
+/// EthCallRequest defines EthCall request
+struct Ethermint_Evm_V1_EthCallRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// same json format as the json rpc api.
+  var args: Data = Data()
+
+  /// the default gas cap to be used
+  var gasCap: UInt64 = 0
+
+  /// the proposer of the requested block
+  var proposerAddress: Data = Data()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// EstimateGasResponse defines EstimateGas response
+struct Ethermint_Evm_V1_EstimateGasResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// the estimated gas
+  var gas: UInt64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryTraceTxRequest defines TraceTx request
+struct Ethermint_Evm_V1_QueryTraceTxRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// msgEthereumTx for the requested transaction
+  var msg: Ethermint_Evm_V1_MsgEthereumTx {
+    get {return _storage._msg ?? Ethermint_Evm_V1_MsgEthereumTx()}
+    set {_uniqueStorage()._msg = newValue}
+  }
+  /// Returns true if `msg` has been explicitly set.
+  var hasMsg: Bool {return _storage._msg != nil}
+  /// Clears the value of `msg`. Subsequent reads from it will return its default value.
+  mutating func clearMsg() {_uniqueStorage()._msg = nil}
+
+  /// TraceConfig holds extra parameters to trace functions.
+  var traceConfig: Ethermint_Evm_V1_TraceConfig {
+    get {return _storage._traceConfig ?? Ethermint_Evm_V1_TraceConfig()}
+    set {_uniqueStorage()._traceConfig = newValue}
+  }
+  /// Returns true if `traceConfig` has been explicitly set.
+  var hasTraceConfig: Bool {return _storage._traceConfig != nil}
+  /// Clears the value of `traceConfig`. Subsequent reads from it will return its default value.
+  mutating func clearTraceConfig() {_uniqueStorage()._traceConfig = nil}
+
+  /// the predecessor transactions included in the same block
+  /// need to be replayed first to get correct context for tracing.
+  var predecessors: [Ethermint_Evm_V1_MsgEthereumTx] {
+    get {return _storage._predecessors}
+    set {_uniqueStorage()._predecessors = newValue}
+  }
+
+  /// block number of requested transaction
+  var blockNumber: Int64 {
+    get {return _storage._blockNumber}
+    set {_uniqueStorage()._blockNumber = newValue}
+  }
+
+  /// block hex hash of requested transaction
+  var blockHash: String {
+    get {return _storage._blockHash}
+    set {_uniqueStorage()._blockHash = newValue}
+  }
+
+  /// block time of requested transaction
+  var blockTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._blockTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._blockTime = newValue}
+  }
+  /// Returns true if `blockTime` has been explicitly set.
+  var hasBlockTime: Bool {return _storage._blockTime != nil}
+  /// Clears the value of `blockTime`. Subsequent reads from it will return its default value.
+  mutating func clearBlockTime() {_uniqueStorage()._blockTime = nil}
+
+  /// the proposer of the requested block
+  var proposerAddress: Data {
+    get {return _storage._proposerAddress}
+    set {_uniqueStorage()._proposerAddress = newValue}
+  }
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+/// QueryTraceTxResponse defines TraceTx response
+struct Ethermint_Evm_V1_QueryTraceTxResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// response serialized in bytes
+  var data: Data = Data()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryTraceBlockRequest defines TraceTx request
+struct Ethermint_Evm_V1_QueryTraceBlockRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// txs messages in the block
+  var txs: [Ethermint_Evm_V1_MsgEthereumTx] {
+    get {return _storage._txs}
+    set {_uniqueStorage()._txs = newValue}
+  }
+
+  /// TraceConfig holds extra parameters to trace functions.
+  var traceConfig: Ethermint_Evm_V1_TraceConfig {
+    get {return _storage._traceConfig ?? Ethermint_Evm_V1_TraceConfig()}
+    set {_uniqueStorage()._traceConfig = newValue}
+  }
+  /// Returns true if `traceConfig` has been explicitly set.
+  var hasTraceConfig: Bool {return _storage._traceConfig != nil}
+  /// Clears the value of `traceConfig`. Subsequent reads from it will return its default value.
+  mutating func clearTraceConfig() {_uniqueStorage()._traceConfig = nil}
+
+  /// block number
+  var blockNumber: Int64 {
+    get {return _storage._blockNumber}
+    set {_uniqueStorage()._blockNumber = newValue}
+  }
+
+  /// block hex hash
+  var blockHash: String {
+    get {return _storage._blockHash}
+    set {_uniqueStorage()._blockHash = newValue}
+  }
+
+  /// block time
+  var blockTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._blockTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._blockTime = newValue}
+  }
+  /// Returns true if `blockTime` has been explicitly set.
+  var hasBlockTime: Bool {return _storage._blockTime != nil}
+  /// Clears the value of `blockTime`. Subsequent reads from it will return its default value.
+  mutating func clearBlockTime() {_uniqueStorage()._blockTime = nil}
+
+  /// the proposer of the requested block
+  var proposerAddress: Data {
+    get {return _storage._proposerAddress}
+    set {_uniqueStorage()._proposerAddress = newValue}
+  }
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+/// QueryTraceBlockResponse defines TraceBlock response
+struct Ethermint_Evm_V1_QueryTraceBlockResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var data: Data = Data()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 /// QueryBaseFeeRequest defines the request type for querying the EIP1559 base
 /// fee.
 struct Ethermint_Evm_V1_QueryBaseFeeRequest {
@@ -381,50 +506,6 @@ struct Ethermint_Evm_V1_QueryBaseFeeResponse {
   // methods supported on all messages.
 
   var baseFee: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-/// QueryStaticCallRequest defines static call response
-struct Ethermint_Evm_V1_QueryStaticCallResponse {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var data: Data = Data()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-/// EthCallRequest defines EthCall request
-struct Ethermint_Evm_V1_EthCallRequest {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  /// same json format as the json rpc api.
-  var args: Data = Data()
-
-  /// the default gas cap to be used
-  var gasCap: UInt64 = 0
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-/// EstimateGasResponse defines EstimateGas response
-struct Ethermint_Evm_V1_EstimateGasResponse {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  /// the estimated gas
-  var gas: UInt64 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -865,6 +946,7 @@ extension Ethermint_Evm_V1_QueryTxLogsRequest: SwiftProtobuf.Message, SwiftProto
   static let protoMessageName: String = _protobuf_package + ".QueryTxLogsRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "hash"),
+    2: .same(proto: "pagination"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -874,6 +956,7 @@ extension Ethermint_Evm_V1_QueryTxLogsRequest: SwiftProtobuf.Message, SwiftProto
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.hash) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._pagination) }()
       default: break
       }
     }
@@ -883,11 +966,15 @@ extension Ethermint_Evm_V1_QueryTxLogsRequest: SwiftProtobuf.Message, SwiftProto
     if !self.hash.isEmpty {
       try visitor.visitSingularStringField(value: self.hash, fieldNumber: 1)
     }
+    if let v = self._pagination {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Ethermint_Evm_V1_QueryTxLogsRequest, rhs: Ethermint_Evm_V1_QueryTxLogsRequest) -> Bool {
     if lhs.hash != rhs.hash {return false}
+    if lhs._pagination != rhs._pagination {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -897,6 +984,7 @@ extension Ethermint_Evm_V1_QueryTxLogsResponse: SwiftProtobuf.Message, SwiftProt
   static let protoMessageName: String = _protobuf_package + ".QueryTxLogsResponse"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "logs"),
+    2: .same(proto: "pagination"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -906,6 +994,7 @@ extension Ethermint_Evm_V1_QueryTxLogsResponse: SwiftProtobuf.Message, SwiftProt
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.logs) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._pagination) }()
       default: break
       }
     }
@@ -915,151 +1004,15 @@ extension Ethermint_Evm_V1_QueryTxLogsResponse: SwiftProtobuf.Message, SwiftProt
     if !self.logs.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.logs, fieldNumber: 1)
     }
+    if let v = self._pagination {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Ethermint_Evm_V1_QueryTxLogsResponse, rhs: Ethermint_Evm_V1_QueryTxLogsResponse) -> Bool {
     if lhs.logs != rhs.logs {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Ethermint_Evm_V1_QueryBlockLogsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".QueryBlockLogsRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "hash"),
-    2: .same(proto: "pagination"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.hash) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._pagination) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.hash.isEmpty {
-      try visitor.visitSingularStringField(value: self.hash, fieldNumber: 1)
-    }
-    if let v = self._pagination {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Ethermint_Evm_V1_QueryBlockLogsRequest, rhs: Ethermint_Evm_V1_QueryBlockLogsRequest) -> Bool {
-    if lhs.hash != rhs.hash {return false}
     if lhs._pagination != rhs._pagination {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Ethermint_Evm_V1_QueryBlockLogsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".QueryBlockLogsResponse"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "tx_logs"),
-    2: .same(proto: "pagination"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.txLogs) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._pagination) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.txLogs.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.txLogs, fieldNumber: 1)
-    }
-    if let v = self._pagination {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Ethermint_Evm_V1_QueryBlockLogsResponse, rhs: Ethermint_Evm_V1_QueryBlockLogsResponse) -> Bool {
-    if lhs.txLogs != rhs.txLogs {return false}
-    if lhs._pagination != rhs._pagination {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Ethermint_Evm_V1_QueryBlockBloomRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".QueryBlockBloomRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "height"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularInt64Field(value: &self.height) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.height != 0 {
-      try visitor.visitSingularInt64Field(value: self.height, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Ethermint_Evm_V1_QueryBlockBloomRequest, rhs: Ethermint_Evm_V1_QueryBlockBloomRequest) -> Bool {
-    if lhs.height != rhs.height {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Ethermint_Evm_V1_QueryBlockBloomResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".QueryBlockBloomResponse"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "bloom"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularBytesField(value: &self.bloom) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.bloom.isEmpty {
-      try visitor.visitSingularBytesField(value: self.bloom, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Ethermint_Evm_V1_QueryBlockBloomResponse, rhs: Ethermint_Evm_V1_QueryBlockBloomResponse) -> Bool {
-    if lhs.bloom != rhs.bloom {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1116,6 +1069,362 @@ extension Ethermint_Evm_V1_QueryParamsResponse: SwiftProtobuf.Message, SwiftProt
   }
 }
 
+extension Ethermint_Evm_V1_EthCallRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".EthCallRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "args"),
+    2: .standard(proto: "gas_cap"),
+    3: .standard(proto: "proposer_address"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.args) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.gasCap) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.proposerAddress) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.args.isEmpty {
+      try visitor.visitSingularBytesField(value: self.args, fieldNumber: 1)
+    }
+    if self.gasCap != 0 {
+      try visitor.visitSingularUInt64Field(value: self.gasCap, fieldNumber: 2)
+    }
+    if !self.proposerAddress.isEmpty {
+      try visitor.visitSingularBytesField(value: self.proposerAddress, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ethermint_Evm_V1_EthCallRequest, rhs: Ethermint_Evm_V1_EthCallRequest) -> Bool {
+    if lhs.args != rhs.args {return false}
+    if lhs.gasCap != rhs.gasCap {return false}
+    if lhs.proposerAddress != rhs.proposerAddress {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ethermint_Evm_V1_EstimateGasResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".EstimateGasResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "gas"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.gas) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.gas != 0 {
+      try visitor.visitSingularUInt64Field(value: self.gas, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ethermint_Evm_V1_EstimateGasResponse, rhs: Ethermint_Evm_V1_EstimateGasResponse) -> Bool {
+    if lhs.gas != rhs.gas {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ethermint_Evm_V1_QueryTraceTxRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTraceTxRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "msg"),
+    3: .standard(proto: "trace_config"),
+    4: .same(proto: "predecessors"),
+    5: .standard(proto: "block_number"),
+    6: .standard(proto: "block_hash"),
+    7: .standard(proto: "block_time"),
+    8: .standard(proto: "proposer_address"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _msg: Ethermint_Evm_V1_MsgEthereumTx? = nil
+    var _traceConfig: Ethermint_Evm_V1_TraceConfig? = nil
+    var _predecessors: [Ethermint_Evm_V1_MsgEthereumTx] = []
+    var _blockNumber: Int64 = 0
+    var _blockHash: String = String()
+    var _blockTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _proposerAddress: Data = Data()
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _msg = source._msg
+      _traceConfig = source._traceConfig
+      _predecessors = source._predecessors
+      _blockNumber = source._blockNumber
+      _blockHash = source._blockHash
+      _blockTime = source._blockTime
+      _proposerAddress = source._proposerAddress
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularMessageField(value: &_storage._msg) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._traceConfig) }()
+        case 4: try { try decoder.decodeRepeatedMessageField(value: &_storage._predecessors) }()
+        case 5: try { try decoder.decodeSingularInt64Field(value: &_storage._blockNumber) }()
+        case 6: try { try decoder.decodeSingularStringField(value: &_storage._blockHash) }()
+        case 7: try { try decoder.decodeSingularMessageField(value: &_storage._blockTime) }()
+        case 8: try { try decoder.decodeSingularBytesField(value: &_storage._proposerAddress) }()
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._msg {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+      if let v = _storage._traceConfig {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      }
+      if !_storage._predecessors.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._predecessors, fieldNumber: 4)
+      }
+      if _storage._blockNumber != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._blockNumber, fieldNumber: 5)
+      }
+      if !_storage._blockHash.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._blockHash, fieldNumber: 6)
+      }
+      if let v = _storage._blockTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      }
+      if !_storage._proposerAddress.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._proposerAddress, fieldNumber: 8)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ethermint_Evm_V1_QueryTraceTxRequest, rhs: Ethermint_Evm_V1_QueryTraceTxRequest) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._msg != rhs_storage._msg {return false}
+        if _storage._traceConfig != rhs_storage._traceConfig {return false}
+        if _storage._predecessors != rhs_storage._predecessors {return false}
+        if _storage._blockNumber != rhs_storage._blockNumber {return false}
+        if _storage._blockHash != rhs_storage._blockHash {return false}
+        if _storage._blockTime != rhs_storage._blockTime {return false}
+        if _storage._proposerAddress != rhs_storage._proposerAddress {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ethermint_Evm_V1_QueryTraceTxResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTraceTxResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "data"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.data) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.data.isEmpty {
+      try visitor.visitSingularBytesField(value: self.data, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ethermint_Evm_V1_QueryTraceTxResponse, rhs: Ethermint_Evm_V1_QueryTraceTxResponse) -> Bool {
+    if lhs.data != rhs.data {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ethermint_Evm_V1_QueryTraceBlockRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTraceBlockRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "txs"),
+    3: .standard(proto: "trace_config"),
+    5: .standard(proto: "block_number"),
+    6: .standard(proto: "block_hash"),
+    7: .standard(proto: "block_time"),
+    8: .standard(proto: "proposer_address"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _txs: [Ethermint_Evm_V1_MsgEthereumTx] = []
+    var _traceConfig: Ethermint_Evm_V1_TraceConfig? = nil
+    var _blockNumber: Int64 = 0
+    var _blockHash: String = String()
+    var _blockTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _proposerAddress: Data = Data()
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _txs = source._txs
+      _traceConfig = source._traceConfig
+      _blockNumber = source._blockNumber
+      _blockHash = source._blockHash
+      _blockTime = source._blockTime
+      _proposerAddress = source._proposerAddress
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeRepeatedMessageField(value: &_storage._txs) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._traceConfig) }()
+        case 5: try { try decoder.decodeSingularInt64Field(value: &_storage._blockNumber) }()
+        case 6: try { try decoder.decodeSingularStringField(value: &_storage._blockHash) }()
+        case 7: try { try decoder.decodeSingularMessageField(value: &_storage._blockTime) }()
+        case 8: try { try decoder.decodeSingularBytesField(value: &_storage._proposerAddress) }()
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._txs.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._txs, fieldNumber: 1)
+      }
+      if let v = _storage._traceConfig {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      }
+      if _storage._blockNumber != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._blockNumber, fieldNumber: 5)
+      }
+      if !_storage._blockHash.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._blockHash, fieldNumber: 6)
+      }
+      if let v = _storage._blockTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      }
+      if !_storage._proposerAddress.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._proposerAddress, fieldNumber: 8)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ethermint_Evm_V1_QueryTraceBlockRequest, rhs: Ethermint_Evm_V1_QueryTraceBlockRequest) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._txs != rhs_storage._txs {return false}
+        if _storage._traceConfig != rhs_storage._traceConfig {return false}
+        if _storage._blockNumber != rhs_storage._blockNumber {return false}
+        if _storage._blockHash != rhs_storage._blockHash {return false}
+        if _storage._blockTime != rhs_storage._blockTime {return false}
+        if _storage._proposerAddress != rhs_storage._proposerAddress {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ethermint_Evm_V1_QueryTraceBlockResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTraceBlockResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "data"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.data) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.data.isEmpty {
+      try visitor.visitSingularBytesField(value: self.data, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ethermint_Evm_V1_QueryTraceBlockResponse, rhs: Ethermint_Evm_V1_QueryTraceBlockResponse) -> Bool {
+    if lhs.data != rhs.data {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ethermint_Evm_V1_QueryBaseFeeRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".QueryBaseFeeRequest"
   static let _protobuf_nameMap = SwiftProtobuf._NameMap()
@@ -1162,108 +1471,6 @@ extension Ethermint_Evm_V1_QueryBaseFeeResponse: SwiftProtobuf.Message, SwiftPro
 
   static func ==(lhs: Ethermint_Evm_V1_QueryBaseFeeResponse, rhs: Ethermint_Evm_V1_QueryBaseFeeResponse) -> Bool {
     if lhs.baseFee != rhs.baseFee {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Ethermint_Evm_V1_QueryStaticCallResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".QueryStaticCallResponse"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "data"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularBytesField(value: &self.data) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.data.isEmpty {
-      try visitor.visitSingularBytesField(value: self.data, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Ethermint_Evm_V1_QueryStaticCallResponse, rhs: Ethermint_Evm_V1_QueryStaticCallResponse) -> Bool {
-    if lhs.data != rhs.data {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Ethermint_Evm_V1_EthCallRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".EthCallRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "args"),
-    2: .standard(proto: "gas_cap"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularBytesField(value: &self.args) }()
-      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.gasCap) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.args.isEmpty {
-      try visitor.visitSingularBytesField(value: self.args, fieldNumber: 1)
-    }
-    if self.gasCap != 0 {
-      try visitor.visitSingularUInt64Field(value: self.gasCap, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Ethermint_Evm_V1_EthCallRequest, rhs: Ethermint_Evm_V1_EthCallRequest) -> Bool {
-    if lhs.args != rhs.args {return false}
-    if lhs.gasCap != rhs.gasCap {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Ethermint_Evm_V1_EstimateGasResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".EstimateGasResponse"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "gas"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.gas) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.gas != 0 {
-      try visitor.visitSingularUInt64Field(value: self.gas, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Ethermint_Evm_V1_EstimateGasResponse, rhs: Ethermint_Evm_V1_EstimateGasResponse) -> Bool {
-    if lhs.gas != rhs.gas {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

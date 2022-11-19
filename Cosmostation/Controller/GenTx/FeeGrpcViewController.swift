@@ -11,6 +11,8 @@ import SwiftKeychainWrapper
 import HDWalletKit
 import GRPC
 import NIO
+import web3swift
+import BigInt
 
 class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
 
@@ -53,16 +55,23 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         self.mFeeInfo = WUtils.getFeeInfos(chainConfig)
         WDP.dpSymbolImg(chainConfig, WUtils.getMainDenom(chainConfig), feeTypeImg)
         WDP.dpSymbol(chainConfig, WUtils.getMainDenom(chainConfig), feeTypeDenom)
-//        print("mFeeInfo ", mFeeInfo)
-        
-        gasSelectSegments.removeAllSegments()
-        for i in 0..<mFeeInfo.count {
-            gasSelectSegments.insertSegment(withTitle: mFeeInfo[i].title, at: i, animated: false)
-        }
         
         feeTotalCard.backgroundColor = chainConfig?.chainColorBG
         gasSelectSegments.selectedSegmentTintColor = chainConfig?.chainColor
-        mSelectedFeeInfo = chainConfig!.getGasDefault()
+        
+        
+        gasSelectSegments.removeAllSegments()
+        if (self.pageHolderVC.mTransferType != TRANSFER_EVM) {
+            for i in 0..<mFeeInfo.count {
+                gasSelectSegments.insertSegment(withTitle: mFeeInfo[i].title, at: i, animated: false)
+            }
+            mSelectedFeeInfo = chainConfig!.getGasDefault()
+        } else {
+            showWaittingAlert()
+            gasSelectSegments.insertSegment(withTitle: NSLocalizedString("str_fixed", comment: ""), at: 0, animated: false)
+            gasDescriptionLabel.text = NSLocalizedString("fee_speed_title_fixed", comment: "")
+            mSelectedFeeInfo = 0
+        }
         gasSelectSegments.selectedSegmentIndex = mSelectedFeeInfo
         
         feeTypeCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickFeeDenom (_:))))
@@ -85,9 +94,11 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     @IBAction func onSwitchGasRate(_ sender: UISegmentedControl) {
-        self.mSelectedFeeInfo = sender.selectedSegmentIndex
-        self.onCalculateFees()
-        self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
+        if (self.pageHolderVC.mTransferType != TRANSFER_EVM) {
+            self.mSelectedFeeInfo = sender.selectedSegmentIndex
+            self.onCalculateFees()
+            self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
+        }
     }
     
     @objc func onClickFeeDenom (_ onClickDenom: UITapGestureRecognizer) {
@@ -100,21 +111,30 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func SBCardPopupResponse(type: Int, result: Int) {
-        self.mSelectedFeeData = result
-        self.onCalculateFees()
-        self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        print("automatic gas amount check")
-        self.mSimulPassed = false
-        if (!BaseData.instance.getUsingEnginerMode()) {
+        if (self.pageHolderVC.mTransferType != TRANSFER_EVM) {
+            self.mSelectedFeeData = result
             self.onCalculateFees()
             self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("viewDidAppear ", self.pageHolderVC.mTransferType)
+        if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
+            self.onCalculateEvmFees()
+            
+        } else {
+            self.mSimulPassed = false
+            if (!BaseData.instance.getUsingEnginerMode()) {
+                self.onCalculateFees()
+                self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
+            }
+        }
+    }
+    
     func onCalculateFees() {
+        print("onCalculateFees")
         self.mFeeData = mFeeInfo[mSelectedFeeInfo].FeeDatas[mSelectedFeeData]
         if (chainType == .SIF_MAIN) {
             mFeeCoin = Coin.init(mFeeData.denom!, "100000000000000000")
@@ -134,22 +154,81 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
 //        print("onCalculateFees ", mFee)
     }
     
-    func onUpdateView() {
-        self.onCalculateFees()
-        
-        WDP.dpSymbolImg(chainConfig, mFeeData.denom, feeTypeImg)
-        WDP.dpSymbol(chainConfig, mFeeData.denom, feeTypeDenom)
-        WDP.dpCoin(chainConfig, mFee.amount[0], feeTotalDenom, feeTotalAmount)
-        
-        var feePriceDenom = mFeeData.denom!
-        var feeDivideDecimal = WUtils.getDenomDecimal(chainConfig, mFeeData.denom)
-        if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == mFeeData.denom!.lowercased() }).first {
-            feePriceDenom = feeMsAsset.priceDenom()
-            feeDivideDecimal = feeMsAsset.decimal
+    func onCalculateEvmFees() {
+        print("onCalculateEvmFees")
+        Task {
+            guard
+                let mintscanToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == pageHolderVC.mToSendDenom!.lowercased() }).first,
+                let url = URL(string: self.chainConfig!.rpcUrl),
+                let web3 = try? Web3.new(url)
+            else {
+                onUpdateView()
+                return
+            }
+            
+            let chainID = web3.provider.network?.chainID
+            let contractAddress = EthereumAddress.init(fromHex: mintscanToken.contract_address)
+            let senderAddress = EthereumAddress.init(fromHex: WKey.convertBech32ToEvm(account!.account_address))
+            let recipientAddress = EthereumAddress.init(fromHex: WKey.convertBech32ToEvm(pageHolderVC.mRecipinetAddress!))
+            let erc20token = ERC20(web3: web3, provider: web3.provider, address: contractAddress!)
+            
+            let sendAmount = self.pageHolderVC.mToSendAmount[0].amount
+            let calSendAmount = NSDecimalNumber.init(string: sendAmount).multiplying(byPowerOf10: -mintscanToken.decimal)
+            
+            let nounce = try? web3.eth.getTransactionCount(address: senderAddress!)
+            let wTx = try? erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
+            let eip1559 = EIP1559Envelope(to: contractAddress!, nonce: nounce!, chainID: chainID!, value: wTx!.transaction.value, data: wTx!.transaction.data,
+                                          maxPriorityFeePerGas: BigUInt(500000000),
+                                          maxFeePerGas: BigUInt(27500000000),
+                                          gasLimit: BigUInt(900000))
+            var tx = EthereumTransaction(with: eip1559)
+    
+            guard
+                let gasLimit = try? web3.eth.estimateGas(tx, transactionOptions: wTx?.transactionOptions)
+            else {
+                onUpdateView()
+                return
+            }
+            let newLimit = NSDecimalNumber(string: String(gasLimit)).multiplying(by: NSDecimalNumber(string: "1.1"), withBehavior: WUtils.handler0Up)
+            tx.parameters.gasLimit = Web3.Utils.parseToBigUInt(newLimit.stringValue, decimals: 0)
+            mFee = Fee.init(String(gasLimit), [Coin.init(chainConfig!.stakeDenom, String(gasLimit.multiplied(by: eip1559.maxFeePerGas)))])
+            self.pageHolderVC.mEthereumTransaction = tx
+            mSimulPassed = true
+            onUpdateView()
         }
-        
-        feeTotalValue.attributedText = WUtils.dpAssetValue(feePriceDenom, NSDecimalNumber.init(string: mFee.amount[0].amount), feeDivideDecimal, feeTotalValue.font)
-        gasDescriptionLabel.text = mFeeInfo[mSelectedFeeInfo].msg
+    }
+    
+    func onUpdateView() {
+        print("onUpdateView")
+        if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
+            self.hideWaittingAlert()
+            if (mSimulPassed == true) {
+                self.onShowToast(NSLocalizedString("gas_checked", comment: ""))
+                WDP.dpCoin(chainConfig, mFee.amount[0], feeTotalDenom, feeTotalAmount)
+                let mainDenom = chainConfig!.stakeDenom
+                let divideDeciaml = chainConfig!.divideDecimal
+                feeTotalValue.attributedText = WUtils.dpAssetValue(mainDenom, NSDecimalNumber.init(string: mFee.amount[0].amount), divideDeciaml, feeTotalValue.font)
+            } else {
+                self.onShowToast(NSLocalizedString("error_simul_error", comment: ""))
+            }
+            
+        } else {
+            self.onCalculateFees()
+            
+            WDP.dpSymbolImg(chainConfig, mFeeData.denom, feeTypeImg)
+            WDP.dpSymbol(chainConfig, mFeeData.denom, feeTypeDenom)
+            WDP.dpCoin(chainConfig, mFee.amount[0], feeTotalDenom, feeTotalAmount)
+            
+            var feePriceDenom = mFeeData.denom!
+            var feeDivideDecimal = WUtils.getDenomDecimal(chainConfig, mFeeData.denom)
+            if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == mFeeData.denom!.lowercased() }).first {
+                feePriceDenom = feeMsAsset.priceDenom()
+                feeDivideDecimal = feeMsAsset.decimal
+            }
+            
+            feeTotalValue.attributedText = WUtils.dpAssetValue(feePriceDenom, NSDecimalNumber.init(string: mFee.amount[0].amount), feeDivideDecimal, feeTotalValue.font)
+            gasDescriptionLabel.text = mFeeInfo[mSelectedFeeInfo].msg
+        }
     }
     
     override func enableUserInteraction() {
