@@ -21,9 +21,7 @@ class ChainKi: ChainConfig {
     var chainTitle = "(KiChain Mainnet)"
     var chainTitle2 = "KI"
     var chainDBName = CHAIN_KI_S
-    var chainAPIName = "kichain"
-    //TODO hardcoing for V3
-//    var chainAPIName = "ki-chain"
+    var chainAPIName = "ki-chain"
     var chainIdPrefix = "kichain-"
     
     var stakeDenomImg = UIImage(named: "tokenKi")
