@@ -47,7 +47,7 @@ class ChainCryptoorg: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-cryptocom-app.cosmostation.io"
+    var grpcUrl = "lcd-crypto-org-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""
     var lcdUrl = "https://lcd-crypto-org-app.cosmostation.io/"
