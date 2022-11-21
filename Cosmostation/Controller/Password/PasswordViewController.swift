@@ -167,19 +167,15 @@ class PasswordViewController: BaseViewController {
         let myLocalizedReasonString = NSLocalizedString("app_locked", comment: "")
         
         var authError: NSError?
-        if #available(iOS 8.0, macOS 10.12.1, *) {
-            if myContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-                myContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: myLocalizedReasonString) { success, evaluateError in
-                    DispatchQueue.main.async {
-                        if success {
-                            self.onUserSuccessUnlock()
-                        } else {
-                            self.cancelbio = true
-                        }
+        if myContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+            myContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: myLocalizedReasonString) { success, evaluateError in
+                DispatchQueue.main.async {
+                    if success {
+                        self.onUserSuccessUnlock()
+                    } else {
+                        self.cancelbio = true
                     }
                 }
-            } else {
-                self.cancelbio = true
             }
         } else {
             self.cancelbio = true
