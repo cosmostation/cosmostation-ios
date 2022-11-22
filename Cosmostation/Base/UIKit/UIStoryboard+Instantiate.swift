@@ -16,6 +16,7 @@ extension UIStoryboard {
             .instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
         passwordViewController.mTarget = target
         passwordViewController.resultDelegate = delegate
+        passwordViewController.hidesBottomBarWhenPushed = true
         return passwordViewController
     }
     
