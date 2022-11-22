@@ -48,7 +48,6 @@ let MOON_PAY_URL                        = "https://buy.moonpay.io";
 let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTuuCn";
 let KADO_PAY_URL                        = "https://app.kado.money";
 let KADO_PAY_PUBLICK                    = "18e55363-1d76-456c-8d4d-ecee7b9517ea";
-let OKC_API_KEY                         = "456ffc69-0887-4825-b96d-aecbe6047d7a";
 
 let CSS_VERSION                         = CSS_URL + "v1/app/version/ios";
 let CSS_PUSH_UPDATE                     = CSS_URL + "v1/account/update";

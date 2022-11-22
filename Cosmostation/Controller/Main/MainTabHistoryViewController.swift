@@ -228,8 +228,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     
     func onFetchOkHistory(_ address: String) {
         let url = BaseNetWork.accountHistory(chainType!, address)
-        let headers: HTTPHeaders = ["Ok-Access-Key" : OKC_API_KEY]
-        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers)
+        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { response in
             switch response.result {
             case .success(let res):

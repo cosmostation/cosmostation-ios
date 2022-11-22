@@ -293,7 +293,7 @@ class BaseNetWork {
         if (chainConfig.chainType == .BINANCE_MAIN) {
             return chainConfig.apiUrl + "api/v1/transactions"
         } else if (chainConfig.chainType == .OKEX_MAIN) {
-            return chainConfig.apiUrl + "address/transaction-list?chainShortName=okc&address=" + address + "&limit=50"
+            return MINTSCAN_API_URL + "v1/utils/proxy/okc-transaction-list?device=IOS&chainShortName=okc&address=" + address + "&limit=50"
         } else {
             return chainConfig.apiUrl + "v1/account/new_txs/" + address
         }

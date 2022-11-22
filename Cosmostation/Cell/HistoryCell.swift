@@ -40,9 +40,9 @@ class HistoryCell: UITableViewCell {
         } else {
             txResultLabel.isHidden = false
         }
-//        let transactionLongTime = Int64(history.transactionTime!)! + (9 * 60 * 60 * 1000)
-        txTimeLabel.text = WDP.dpTime(Int64(history.transactionTime!))
-        txTimeGapLabel.text = WDP.dpTimeGap(Int64(history.transactionTime!))
+        
+        txTimeLabel.text = WDP.okcDpTime(Int64(history.transactionTime!))
+        txTimeGapLabel.text = WDP.okcDpTimeGap(Int64(history.transactionTime!))
         txBlockLabel.text = history.height! + " block"
     }
 }

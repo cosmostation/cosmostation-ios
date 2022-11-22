@@ -209,6 +209,24 @@ public class WDP {
         return WUtils.getGapTime(date)
     }
     
+    static func okcDpTime(_ timeInt: Int64?) -> String {
+        if (timeInt == nil) { return "-" }
+        guard let date = WUtils.timeInt64ToDate(timeInt! + Int64(TimeZone.current.secondsFromGMT()) * 1000) else {
+            return "-"
+        }
+        let localFormatter = DateFormatter()
+        localFormatter.dateFormat = NSLocalizedString("date_format4", comment: "")
+        return localFormatter.string(from: date)
+    }
+    
+    static func okcDpTimeGap(_ timeInt: Int64?) -> String {
+        if (timeInt == nil) { return "" }
+        guard let date = WUtils.timeInt64ToDate(timeInt! + Int64(TimeZone.current.secondsFromGMT()) * 1000) else {
+            return ""
+        }
+        return WUtils.getGapTime(date)
+    }
+    
     static func dpPath(_ path: String) -> String {
         return path.replacingOccurrences(of: "bnb-beacon-chain", with: "binance")
             .replacingOccurrences(of: "ethereum", with: "eth")
