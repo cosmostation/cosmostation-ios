@@ -456,7 +456,6 @@ final class BaseData : NSObject{
         let chainType = ChainFactory.getChainType(account!.account_base_chain)!
         if (dpSortedChains().contains(chainType))  {
             return Int64(UserDefaults.standard.integer(forKey: KEY_RECENT_ACCOUNT))
-            
         } else {
             for dpChain in dpSortedChains() {
                 if (selectAllAccountsByChain(dpChain).count > 0) {
