@@ -170,7 +170,7 @@
 "msg_promotion1" = "START DELEGATING FOR REWARDS";
 "msg_promotion2" = "Delegate your tokens with Cosmostation.\nStart earning staking rewards and contribute to the network ecosystem.";
 "msg_history_with_validator" = "History with this validator";
-"msg_only_watchmode" = "Now only watch mode.\nAll services are available after mnemonic or private key integration.";
+"msg_only_watchmode" = "Currently in watch mode.\nAll transactions are made available after registering your mnemonic or private key.";
 "msg_warn_privatekey" = "Private Key is only used to restore the currently selected wallet. We highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anyone else.\n\nPrivate key is NOT mnemonics. You MUST backup your mnemonics if you have one. You need your mnemonics to restore your original wallets if you created them with mnemonics.";
 "msg_warn_mnemonic" = "Losing your mnemonics could lead to loss of your asset.\nWe highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anyone else.";
 "msg_warn_create_mnemonic" = "Losing your mnemonics could lead to loss of your asset.\nWe highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anyone else.\n\nYou can check/manage your mnemonics in [Manage Mnemonic]";
