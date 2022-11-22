@@ -73,7 +73,7 @@ class ChainChihuahua: ChainConfig {
     }
 
     func getInfoLink2() -> String {
-        return "https://chi.huahua.wtf/"
+        return "https://chihuahuachain.medium.com/"
     }
     
     func getGasRates() -> Array<String> {
