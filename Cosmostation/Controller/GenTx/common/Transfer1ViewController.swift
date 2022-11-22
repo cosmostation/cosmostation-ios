@@ -88,7 +88,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         self.recipientChainCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickToChain (_:))))
         
         btnCancel.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
         btnWallet.borderColor = UIColor.font05
         btnQrScan.borderColor = UIColor.font05
         btnPaste.borderColor = UIColor.font05
@@ -107,7 +107,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnCancel.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
         btnWallet.borderColor = UIColor.font05
         btnQrScan.borderColor = UIColor.font05
         btnPaste.borderColor = UIColor.font05
@@ -202,7 +202,14 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     func onSetTranfserType() {
         if (chainType == recipientChainConfig.chainType) {
             if (mintscanAsset != nil) { pageHolderVC.mTransferType = TRANSFER_SIMPLE }
-            else if (mintscanTokens != nil) { pageHolderVC.mTransferType = TRANSFER_WASM }
+            else if (mintscanTokens != nil) {
+                print("contract_address ", mintscanTokens?.contract_address)
+                if (mintscanTokens?.contract_address.starts(with: "0x") == true) {
+                    pageHolderVC.mTransferType = TRANSFER_EVM
+                } else {
+                    pageHolderVC.mTransferType = TRANSFER_WASM
+                }
+            }
 
         } else {
             if (mintscanAsset != nil) {

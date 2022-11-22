@@ -11,6 +11,7 @@ import Alamofire
 import HDWalletKit
 import GRPC
 import NIO
+import web3swift
 
 class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     
@@ -54,7 +55,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         backBtn.borderColor = UIColor.font05
-        confirmBtn.borderColor = UIColor.init(named: "photon")
+        confirmBtn.borderColor = UIColor.photon
         
         feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
         sendAmountTitle.text = NSLocalizedString("str_send_amount", comment: "")
@@ -69,7 +70,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         backBtn.borderColor = UIColor.font05
-        confirmBtn.borderColor = UIColor.init(named: "photon")
+        confirmBtn.borderColor = UIColor.photon
     }
     
     @IBAction func onClickConfirm(_ sender: Any) {
@@ -188,7 +189,12 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
             if (chainConfig?.isGrpc == true) {
-                self.onFetchAuth(account!.account_address)
+                if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
+                    self.onBroadcastEvmTx()
+                } else {
+                    self.onFetchAuth(account!.account_address)
+                }
+                
             } else {
                 self.onFetchAccountInfo(account!)
             }
@@ -376,6 +382,26 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
 
                 } catch {
                     print(error)
+                }
+            });
+        }
+    }
+    
+    func onBroadcastEvmTx() {
+        self.showWaittingAlert()
+        DispatchQueue.global().async {
+            let url = URL(string: self.chainConfig!.rpcUrl)
+            let web3 = try? Web3.new(url!)
+            
+            var ethTx = self.pageHolderVC.mEthereumTransaction!
+            try? ethTx.sign(privateKey: self.pageHolderVC.privateKey!)
+            let result = try? web3!.eth.sendRawTransaction(ethTx)
+            
+            DispatchQueue.main.async(execute: {
+                if (self.waitAlert != nil) {
+                    self.waitAlert?.dismiss(animated: true, completion: {
+                        self.onStartTxDetailEvm(result!.hash)
+                    })
                 }
             });
         }

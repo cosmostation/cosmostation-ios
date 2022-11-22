@@ -38,12 +38,12 @@ class FeeLcdViewController: BaseViewController {
         onUpdateView()
         
         btnBefore.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnBefore.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
     }
     
     func onUpdateView() {

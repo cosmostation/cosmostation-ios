@@ -28,14 +28,14 @@ class SendNFT0ViewController: BaseViewController, QrScannerDelegate {
         self.addressInput.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.font03])
         
         btnCancel.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
         btnQrScan.borderColor = UIColor.font05
         btnPaste.borderColor = UIColor.font05
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnCancel.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
         btnQrScan.borderColor = UIColor.font05
         btnPaste.borderColor = UIColor.font05
     }

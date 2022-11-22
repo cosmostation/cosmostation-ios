@@ -1117,40 +1117,36 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchMintscanErc20(_ chainId: String) {
-        //TODO disbale ERC20
-        self.onFetchFinished()
-        return
-        
-//        if (mChainConfig.evmSupport == false) {
-//            self.onFetchFinished()
-//            return
-//        }
-//        let request = Alamofire.request(BaseNetWork.mintscanErc20Tokens_v2(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-////        print("onFetchMintscanErc20 ", request.request?.url)
-//        request.responseJSON { (response) in
-//            switch response.result {
-//            case .success(let res):
-//                if let resData = res as? NSDictionary, let erc20Tokens = resData.object(forKey: "assets") as? Array<NSDictionary> {
-//                    erc20Tokens.forEach { erc20Token in
-//                        let token = MintscanToken.init(erc20Token)
-//                        BaseData.instance.mMintscanTokens.append(token)
-//                    }
-//                    BaseData.instance.setMyTokens(self.mAccount.account_address)
-//                    Task {
-//                        if let url = URL(string: self.mChainConfig.rpcUrl), let web3 = try? Web3.new(url) {
-//                            BaseData.instance.mMyTokens.forEach { msToken in
-//                                self.mFetchCnt = self.mFetchCnt + 1
-//                                self.onFetchErc20Balance(web3, msToken.contract_address)
-//                            }
-//                        }
-//                    }
-//                }
-//
-//            case .failure(let error):
-//                print("onFetchMintscanErc20 ", error)
-//            }
-//            self.onFetchFinished()
-//        }
+        if (mChainConfig.evmSupport == false) {
+            self.onFetchFinished()
+            return
+        }
+        let request = Alamofire.request(BaseNetWork.mintscanErc20Tokens_v2(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+//        print("onFetchMintscanErc20 ", request.request?.url)
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let resData = res as? NSDictionary, let erc20Tokens = resData.object(forKey: "assets") as? Array<NSDictionary> {
+                    erc20Tokens.forEach { erc20Token in
+                        let token = MintscanToken.init(erc20Token)
+                        BaseData.instance.mMintscanTokens.append(token)
+                    }
+                    BaseData.instance.setMyTokens(self.mAccount.account_address)
+                    Task {
+                        if let url = URL(string: self.mChainConfig.rpcUrl), let web3 = try? Web3.new(url) {
+                            BaseData.instance.mMyTokens.forEach { msToken in
+                                self.mFetchCnt = self.mFetchCnt + 1
+                                self.onFetchErc20Balance(web3, msToken.contract_address)
+                            }
+                        }
+                    }
+                }
+
+            case .failure(let error):
+                print("onFetchMintscanErc20 ", error)
+            }
+            self.onFetchFinished()
+        }
     }
     
     func onFetchErc20Balance(_ web3: web3?, _ contAddress: String) {

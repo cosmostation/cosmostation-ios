@@ -59,7 +59,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     @objc func testClick(tapGestureRecognizer: UITapGestureRecognizer) {
 //        let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
 //        txDetailVC.mIsGen = false
-//        txDetailVC.mTxHash = "B40F606948B2BF2C54D67D8EF34D5DF89623C188720737989ADAE988209A4071"
+//        txDetailVC.mEthResultHash = "0x2e47a1ee3705940e5cbd472208127124f6090589b1788e220a2c71f636eb27de"
 //        txDetailVC.hidesBottomBarWhenPushed = true
 //        self.navigationItem.title = ""
 //        self.navigationController?.pushViewController(txDetailVC, animated: true)
@@ -75,7 +75,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("onFetchDone"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("onFetchPrice"), object: nil)
     }

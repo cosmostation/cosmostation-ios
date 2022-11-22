@@ -49,7 +49,7 @@ class KavaLiquidity1ViewController: BaseViewController, UITextFieldDelegate {
         btnAdd01.setTitle(dp, for: .normal)
         
         btnBack.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
         btnAdd01.borderColor = UIColor.font05
         btn1.borderColor = UIColor.font05
         btn10.borderColor = UIColor.font05
@@ -62,7 +62,7 @@ class KavaLiquidity1ViewController: BaseViewController, UITextFieldDelegate {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnBack.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
         btnAdd01.borderColor = UIColor.font05
         btn1.borderColor = UIColor.font05
         btn10.borderColor = UIColor.font05

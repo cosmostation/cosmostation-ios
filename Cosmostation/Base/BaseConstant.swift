@@ -145,6 +145,8 @@ let TRANSFER_SIMPLE                         = "TRANSFER_SIMPLE";
 let TRANSFER_IBC_SIMPLE                     = "TRANSFER_IBC_SIMPLE";
 let TRANSFER_WASM                           = "TRANSFER_WASM";
 let TRANSFER_IBC_WASM                       = "TRANSFER_IBC_WASM";
+let TRANSFER_EVM                            = "TRANSFER_EVM";
+
 
 let TASK_TYPE_KAVA_CDP_CREATE               = "TASK_TYPE_KAVA_CDP_CREATE";
 let TASK_TYPE_KAVA_CDP_DEPOSIT              = "TASK_TYPE_KAVA_CDP_DEPOSIT";

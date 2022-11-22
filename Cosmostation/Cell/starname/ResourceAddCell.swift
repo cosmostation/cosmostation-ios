@@ -17,7 +17,7 @@ class ResourceAddCell: UITableViewCell {
         self.selectionStyle = .none
         
         addImg.image = addImg.image?.withRenderingMode(.alwaysTemplate)
-        addImg.tintColor = UIColor.init(named: "photon")
+        addImg.tintColor = UIColor.photon
     }
     
 }
