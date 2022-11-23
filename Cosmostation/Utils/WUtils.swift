@@ -897,6 +897,10 @@ public class WUtils {
         } else if (rawAccount.typeURL.contains(Ethermint_Types_V1_EthAccount.protoMessageName)) {
             let auth = try! Ethermint_Types_V1_EthAccount.init(serializedData: rawAccount.value).baseAccount
             return (auth.address, auth.accountNumber, auth.sequence)
+            
+        } else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)) {
+            let auth = try! Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value).baseVestingAccount.baseAccount
+            return (auth.address, auth.accountNumber, auth.sequence)
         }
         
         return (nil, nil, nil)
