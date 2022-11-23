@@ -24,7 +24,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     var mainTabVC: MainTabViewController!
     var refresher: UIRefreshControl!
     var mBnbHistories = Array<BnbHistory>()
-    var mOkHistories = Array<OKHistoryHit>()
+    var mOkHistories = Array<OKTransactionList>()
     var mApiCustomNewHistories = Array<ApiHistoryNewCustom>()
     
     
@@ -54,12 +54,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.historyTableView.addSubview(refresher)
         
         self.onRequestFetch()
-        
-//        self.emptyLabel.isUserInteractionEnabled = true
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(testClick(tapGestureRecognizer:)))
-//        self.emptyLabel.addGestureRecognizer(tapGesture)
-//        historyTableView.isHidden = true
-//        emptyLabel.isHidden = false
     }
     
     @objc func testClick(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -91,6 +85,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @objc func onFetchPrice(_ notification: NSNotification) {
+        self.historyTableView.reloadData()
     }
     
     func updateTitle() {
@@ -165,7 +160,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
                 let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as? HistoryCell
                 cell?.bindHistoryOkView(mOkHistories[indexPath.row], account!.account_address)
                 return cell!
-                
+            
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
                 cell?.bindHistoryView(chainConfig!, mApiCustomNewHistories[indexPath.row], account!.account_address)
@@ -190,7 +185,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             
         } else if (chainType == ChainType.OKEX_MAIN) {
             let okHistory = mOkHistories[indexPath.row]
-            let link = WUtils.getTxExplorer(chainConfig, okHistory.hash!)
+            let link = WUtils.getTxExplorer(chainConfig, okHistory.txId!)
             guard let url = URL(string: link) else { return }
             self.onShowSafariWeb(url)
             
@@ -238,13 +233,20 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         request.responseJSON { response in
             switch response.result {
             case .success(let res):
-                self.mOkHistories.removeAll()
-                if let histories = res as? NSDictionary, let hits = OkHistory.init(histories).data?.hits {
-                    self.mOkHistories = hits
-                }
-                if (self.mOkHistories.count > 0) {
-                    self.historyTableView.reloadData()
-                    self.emptyLabel.isHidden = true
+                if let histories = res as? NSDictionary {
+                    self.mOkHistories.removeAll()
+                    if let hitDatas = histories.object(forKey: "data") as? Array<NSDictionary> {
+                        hitDatas.forEach { hitData in
+                            self.mOkHistories = OKHistoryData.init(hitData).transactionLists
+                        }
+                    }
+                    if (self.mOkHistories.count > 0) {
+                        self.historyTableView.reloadData()
+                        self.emptyLabel.isHidden = true
+                    } else {
+                        self.emptyLabel.isHidden = false
+                    }
+                
                 } else {
                     self.emptyLabel.isHidden = false
                 }
