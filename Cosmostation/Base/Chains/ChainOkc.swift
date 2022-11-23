@@ -50,7 +50,7 @@ class ChainOkc: ChainConfig {
     var grpcPort = -1
     var rpcUrl = ""
     var lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
-    var apiUrl = "https://www.oklink.com/api/explorer/v1/"
+    var apiUrl = ""
     var explorerUrl = "https://www.oklink.com/okexchain/"
     var validatorImgUrl = MonikerUrl + "okex/"
     var priceUrl = CoingeckoUrl + "okc-token"
