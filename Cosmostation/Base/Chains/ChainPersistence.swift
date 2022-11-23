@@ -37,9 +37,6 @@ class ChainPersistence: ChainConfig {
     var defaultPath = "m/44'/118'/0'/0/X"
     let addressHdPath1 = "m/44'/750'/0'/0/X"
     
-    let gasRate0 = "0.0uxprt"
-    let gasRate1 = "0.025uxprt"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -74,13 +71,5 @@ class ChainPersistence: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/persistence-blog"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

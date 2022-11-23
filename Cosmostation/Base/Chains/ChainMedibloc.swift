@@ -36,8 +36,6 @@ class ChainMedibloc: ChainConfig {
     var validatorPrefix = "panaceavaloper"
     var defaultPath = "m/44'/371'/0'/0/X"
     
-    let gasRate0 = "5umed"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -80,13 +78,5 @@ class ChainMedibloc: ChainConfig {
         } else {
             return "https://medium.com/medibloc/"
         }
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

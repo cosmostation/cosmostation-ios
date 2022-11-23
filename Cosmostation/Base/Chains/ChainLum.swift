@@ -37,8 +37,6 @@ class ChainLum: ChainConfig {
     let addressHdPath = "m/44'/118'/0'/0/X"
     var defaultPath = "m/44'/880'/0'/0/X"
     
-    let gasRate0 = "0.001ulum"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -73,13 +71,5 @@ class ChainLum: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/lum-network"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

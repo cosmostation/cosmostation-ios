@@ -36,9 +36,6 @@ class ChainAxelar: ChainConfig {
     var validatorPrefix = "axelarvaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.007uaxl"
-    let gasRate1 = "0.05uaxl"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -73,13 +70,5 @@ class ChainAxelar: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://axelar.network/blog"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

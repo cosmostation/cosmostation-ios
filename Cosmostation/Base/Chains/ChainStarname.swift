@@ -36,9 +36,6 @@ class ChainStarname: ChainConfig {
     var validatorPrefix = "starvaloper"
     var defaultPath = "m/44'/234'/0'/0/X"
     
-    let gasRate0 = "0.1uiov"
-    let gasRate1 = "1.0uiov"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -73,13 +70,5 @@ class ChainStarname: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/iov-internet-of-values"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

@@ -708,39 +708,39 @@ public class WUtils {
         return transition
     }
     
-    static func getFeeInfos(_ chainConfig: ChainConfig?) -> Array<FeeInfo> {
-        var result = Array<FeeInfo>()
-        chainConfig?.getGasRates().forEach { gasInfo in
-            result.append(FeeInfo.init(gasInfo))
-        }
-        if (result.count == 1) {
-            result[0].title = NSLocalizedString("str_fixed", comment: "")
-            result[0].msg = NSLocalizedString("fee_speed_title_fixed", comment: "")
-        } else if (result.count == 2) {
-            result[1].title = NSLocalizedString("str_average", comment: "")
-            result[1].msg = NSLocalizedString("fee_speed_title_average", comment: "")
-            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
-                result[0].title = NSLocalizedString("str_zero", comment: "")
-                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
-            } else {
-                result[0].title = NSLocalizedString("str_tiny", comment: "")
-                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
-            }
-        } else if (result.count == 3) {
-            result[2].title = NSLocalizedString("str_average", comment: "")
-            result[2].msg = NSLocalizedString("fee_speed_title_average", comment: "")
-            result[1].title = NSLocalizedString("str_low", comment: "")
-            result[1].msg = NSLocalizedString("fee_speed_title_low", comment: "")
-            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
-                result[0].title = NSLocalizedString("str_zero", comment: "")
-                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
-            } else {
-                result[0].title = NSLocalizedString("str_tiny", comment: "")
-                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
-            }
-        }
-        return result
-    }
+//    static func getFeeInfos(_ chainConfig: ChainConfig?) -> Array<FeeInfo> {
+//        var result = Array<FeeInfo>()
+//        chainConfig?.getGasRates().forEach { gasInfo in
+//            result.append(FeeInfo.init(gasInfo))
+//        }
+//        if (result.count == 1) {
+//            result[0].title = NSLocalizedString("str_fixed", comment: "")
+//            result[0].msg = NSLocalizedString("fee_speed_title_fixed", comment: "")
+//        } else if (result.count == 2) {
+//            result[1].title = NSLocalizedString("str_average", comment: "")
+//            result[1].msg = NSLocalizedString("fee_speed_title_average", comment: "")
+//            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+//                result[0].title = NSLocalizedString("str_zero", comment: "")
+//                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
+//            } else {
+//                result[0].title = NSLocalizedString("str_tiny", comment: "")
+//                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
+//            }
+//        } else if (result.count == 3) {
+//            result[2].title = NSLocalizedString("str_average", comment: "")
+//            result[2].msg = NSLocalizedString("fee_speed_title_average", comment: "")
+//            result[1].title = NSLocalizedString("str_low", comment: "")
+//            result[1].msg = NSLocalizedString("fee_speed_title_low", comment: "")
+//            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+//                result[0].title = NSLocalizedString("str_zero", comment: "")
+//                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
+//            } else {
+//                result[0].title = NSLocalizedString("str_tiny", comment: "")
+//                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
+//            }
+//        }
+//        return result
+//    }
     
     static func getSymbol(_ chainConfig: ChainConfig?, _ denom: String?) -> String {
         if (chainConfig == nil || denom == nil || denom?.isEmpty == true) { return "Unknown" }

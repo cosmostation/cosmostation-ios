@@ -51,8 +51,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        
-        self.mFeeInfo = WUtils.getFeeInfos(chainConfig)
+        self.mFeeInfo = BaseData.instance.mParam!.getFeeInfos()
         WDP.dpSymbolImg(chainConfig, WUtils.getMainDenom(chainConfig), feeTypeImg)
         WDP.dpSymbol(chainConfig, WUtils.getMainDenom(chainConfig), feeTypeDenom)
         
@@ -65,7 +64,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             for i in 0..<mFeeInfo.count {
                 gasSelectSegments.insertSegment(withTitle: mFeeInfo[i].title, at: i, animated: false)
             }
-            mSelectedFeeInfo = chainConfig!.getGasDefault()
+            mSelectedFeeInfo = BaseData.instance.mParam!.gas_price!.base
         } else {
             showWaittingAlert()
             gasSelectSegments.insertSegment(withTitle: NSLocalizedString("str_fixed", comment: ""), at: 0, animated: false)

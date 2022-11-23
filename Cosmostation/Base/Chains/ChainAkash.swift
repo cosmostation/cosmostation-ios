@@ -36,10 +36,6 @@ class ChainAkash: ChainConfig {
     var validatorPrefix = "akashvaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.00025uakt"
-    let gasRate1 = "0.0025uakt"
-    let gasRate2 = "0.025uakt"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -74,13 +70,5 @@ class ChainAkash: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://akash.network/blog/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1, gasRate2]
-    }
-    
-    func getGasDefault() -> Int {
-        return 1
     }
 }

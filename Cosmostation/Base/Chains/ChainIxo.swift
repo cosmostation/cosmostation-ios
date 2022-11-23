@@ -37,8 +37,6 @@ class ChainIxo: ChainConfig {
     var validatorPrefix = "ixovaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.025uixo"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -73,13 +71,5 @@ class ChainIxo: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://earthstate.ixo.world/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

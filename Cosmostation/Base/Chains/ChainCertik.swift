@@ -36,8 +36,6 @@ class ChainCertik: ChainConfig {
     var validatorPrefix = "certikvaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.05uctk"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -72,13 +70,5 @@ class ChainCertik: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/shentu-foundation"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

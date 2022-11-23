@@ -37,8 +37,6 @@ class ChainTgrade: ChainConfig {
     var validatorPrefix = "tgrade"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.05utgd"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -73,14 +71,6 @@ class ChainTgrade: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/@k-martin-worner"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }
 

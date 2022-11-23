@@ -36,10 +36,6 @@ class ChainRizon: ChainConfig {
     var validatorPrefix = "rizonvaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.00025uatolo"
-    let gasRate1 = "0.0025uatolo"
-    let gasRate2 = "0.025uatolo"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -74,13 +70,5 @@ class ChainRizon: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/@hdac-rizon"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1, gasRate2]
-    }
-    
-    func getGasDefault() -> Int {
-        return 1
     }
 }

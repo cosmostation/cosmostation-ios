@@ -36,8 +36,6 @@ class ChainBitsong: ChainConfig {
     var validatorPrefix = "bitsongvaloper"
     var defaultPath = "m/44'/639'/0'/0/X"
     
-    let gasRate0 = "0.025ubtsg"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -72,13 +70,5 @@ class ChainBitsong: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://bitsongofficial.medium.com/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

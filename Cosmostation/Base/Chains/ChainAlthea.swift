@@ -36,8 +36,6 @@ class ChainAlthea: ChainConfig {
     var validatorPrefix = "oper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.0ualtg"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -72,13 +70,5 @@ class ChainAlthea: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.althea.net/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

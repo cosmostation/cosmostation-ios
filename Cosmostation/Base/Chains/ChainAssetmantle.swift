@@ -36,8 +36,6 @@ class ChainAssetMantle: ChainConfig {
     var validatorPrefix = "mantlevaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.0umntl"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -72,13 +70,5 @@ class ChainAssetMantle: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.assetmantle.one/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

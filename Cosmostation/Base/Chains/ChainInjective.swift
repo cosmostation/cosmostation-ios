@@ -36,8 +36,6 @@ class ChainInjective: ChainConfig {
     var validatorPrefix = "injvaloper"
     var defaultPath = "m/44'/60'/0'/0/X"
     
-    let gasRate0 = "500000000inj"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -72,13 +70,5 @@ class ChainInjective: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.injectiveprotocol.com/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

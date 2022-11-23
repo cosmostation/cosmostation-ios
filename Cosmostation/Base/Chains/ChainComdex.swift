@@ -36,8 +36,6 @@ class ChainComdex: ChainConfig {
     var validatorPrefix = "comdexvaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.25ucmdx"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -72,13 +70,5 @@ class ChainComdex: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.comdex.one/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

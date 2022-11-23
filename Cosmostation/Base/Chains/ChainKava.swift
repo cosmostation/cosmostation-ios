@@ -37,10 +37,6 @@ class ChainKava: ChainConfig {
     let addressHdPath = "m/44'/118'/0'/0/X"
     var defaultPath = "m/44'/459'/0'/0/X"
     
-    let gasRate0 = "0.001ukava"
-    let gasRate1 = "0.0025ukava"
-    let gasRate2 = "0.025ukava"
-    
     var etherAddressSupport = true
     var wasmSupport = false
     var evmSupport = false
@@ -75,14 +71,6 @@ class ChainKava: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/kava-labs"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1, gasRate2]
-    }
-    
-    func getGasDefault() -> Int {
-        return 1
     }
 }
 

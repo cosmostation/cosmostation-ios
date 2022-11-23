@@ -36,8 +36,6 @@ class ChainBinance: ChainConfig {
     var validatorPrefix = ""
     var defaultPath = "m/44'/714'/0'/0/X"
     
-    let gasRate0 = "0.0BNB"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -72,14 +70,6 @@ class ChainBinance: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://www.bnbchain.org/en/blog/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }
 

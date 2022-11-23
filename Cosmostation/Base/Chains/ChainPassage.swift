@@ -36,8 +36,6 @@ class ChainPassage: ChainConfig {
     var validatorPrefix = "pasgvaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.0upasg"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -72,14 +70,6 @@ class ChainPassage: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://passage3d.com"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }
 

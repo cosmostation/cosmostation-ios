@@ -36,8 +36,6 @@ class ChainProvenance: ChainConfig {
     var validatorPrefix = "pbvaloper"
     var defaultPath = "m/44'/505'/0'/0/X"
     
-    let gasRate0 = "2000nhash"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -72,13 +70,5 @@ class ChainProvenance: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://www.provenance.io/blog"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

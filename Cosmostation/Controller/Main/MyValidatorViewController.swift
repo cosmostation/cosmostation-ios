@@ -159,7 +159,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     func onStartEasyClaim(_ selectFee: Int) {
         self.showWaittingAlert()
         var feeGasAmount = NSDecimalNumber.init(string: "500000")
-        let feeInfo = WUtils.getFeeInfos(chainConfig)
+        let feeInfo = BaseData.instance.mParam!.getFeeInfos()
         let feeData = feeInfo[selectFee].FeeDatas[0]
         var fee: Fee!
         var feeCoin: Coin!
@@ -238,7 +238,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     func onStartEasyCompounding(_ selectFee: Int) {
         self.showWaittingAlert()
         var feeGasAmount = NSDecimalNumber.init(string: "500000")
-        let feeInfo = WUtils.getFeeInfos(chainConfig)
+        let feeInfo = BaseData.instance.mParam!.getFeeInfos()
         let feeData = feeInfo[selectFee].FeeDatas[0]
         var fee: Fee!
         var feeCoin: Coin!
@@ -313,7 +313,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onShowFeeDialog() {
-        let feeInfo = WUtils.getFeeInfos(chainConfig)
+        let feeInfo = BaseData.instance.mParam!.getFeeInfos()
         if (feeInfo.count == 1) {
             if (self.easyMode == EASY_MODE_CLAIM_REWARDS) { self.onStartEasyClaim(0) }
             else { self.onStartEasyCompounding(0) }
@@ -321,7 +321,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         } else {
             let alertController = UIAlertController(title: NSLocalizedString("tx_set_fee", comment: ""), message: "", preferredStyle: .actionSheet)
             alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
-            let feeInfo = WUtils.getFeeInfos(chainConfig)
+            let feeInfo = BaseData.instance.mParam!.getFeeInfos()
             for i in 0 ..< Int(feeInfo.count) {
                 let feeAction = UIAlertAction(title: feeInfo[i].title + " Fee", style: .default) { (_) -> Void in
                     if (self.easyMode == self.EASY_MODE_CLAIM_REWARDS) { self.onStartEasyClaim(i) }

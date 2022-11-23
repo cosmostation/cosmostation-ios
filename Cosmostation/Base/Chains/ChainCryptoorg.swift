@@ -38,10 +38,6 @@ class ChainCryptoorg: ChainConfig {
     var validatorPrefix = "crocncl"
     var defaultPath = "m/44'/394'/0'/0/X"
     
-    let gasRate0 = "0.025basecro"
-    let gasRate1 = "0.05basecro"
-    let gasRate2 = "0.075basecro"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -76,13 +72,5 @@ class ChainCryptoorg: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.crypto.com/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1, gasRate2]
-    }
-    
-    func getGasDefault() -> Int {
-        return 1
     }
 }

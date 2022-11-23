@@ -36,10 +36,6 @@ class ChainChihuahua: ChainConfig {
     var validatorPrefix = "chihuahuavaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.00035uhuahua"
-    let gasRate1 = "0.0035uhuahua"
-    let gasRate2 = "0.035uhuahua"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -74,13 +70,5 @@ class ChainChihuahua: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://chihuahuachain.medium.com/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1, gasRate2]
-    }
-    
-    func getGasDefault() -> Int {
-        return 1
     }
 }
