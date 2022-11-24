@@ -491,6 +491,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 var originalVesting = NSDecimalNumber.zero
                 var remainVesting = NSDecimalNumber.zero
                 var delegatedVesting = NSDecimalNumber.zero
+                var delegatedFree = NSDecimalNumber.zero
                 
                 dpAvailable = NSDecimalNumber.init(string: coin.amount)
                 vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
@@ -498,15 +499,24 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                         originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
                     }
                 })
+                
                 vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
                     if (coin.denom == denom) {
                         delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
                     }
                 })
+                
+                vestingAccount.baseVestingAccount.delegatedFree.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        delegatedFree = delegatedFree.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                
                 remainVesting = WUtils.onParseStridePeriodicRemainVestingsAmountByDenom(vestingAccount, denom)
-                dpVesting = remainVesting.subtracting(delegatedVesting);
+                dpVesting = remainVesting.subtracting(delegatedVesting).subtracting(delegatedFree);
                 dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
-                if (remainVesting.compare(delegatedVesting).rawValue > 0) {
+                
+                if (remainVesting.compare(delegatedVesting.adding(delegatedFree)).rawValue > 0) {
                     dpAvailable = dpAvailable.subtracting(remainVesting).adding(delegatedVesting);
                 }
                 granterAvailables.append(Coin.init(denom, dpAvailable.stringValue))
