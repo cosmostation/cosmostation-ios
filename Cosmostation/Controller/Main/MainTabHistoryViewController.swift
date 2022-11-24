@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 import SafariServices
 import UserNotifications
-import web3swift
 
 class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     

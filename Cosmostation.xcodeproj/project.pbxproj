@@ -6292,6 +6292,8 @@
 			dependencies = (
 			);
 			name = Cosmostation;
+			packageProductDependencies = (
+			);
 			productName = Cosmostation;
 			productReference = E1945E24222E7C0600A1436F /* Cosmostation.app */;
 			productType = "com.apple.product-type.application";
@@ -6330,6 +6332,8 @@
 				ko,
 			);
 			mainGroup = E1945E1B222E7C0600A1436F;
+			packageReferences = (
+			);
 			productRefGroup = E1945E25222E7C0600A1436F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

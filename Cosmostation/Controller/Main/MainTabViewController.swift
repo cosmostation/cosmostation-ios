@@ -56,19 +56,13 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             commonWcVC.modalPresentationStyle = .fullScreen
             if (mSchemeURL.host == "wc") {
                 commonWcVC.wcURL = mSchemeURL.query
-                commonWcVC.isDeepLink = true
-                commonWcVC.isDapp = false
-                commonWcVC.isDappInternal = false
+                commonWcVC.connectType = .WALLETCONNECT_DEEPLINK
             } else if (mSchemeURL.host == "dapp") {
                 commonWcVC.dappURL = mSchemeURL.query
-                commonWcVC.isDeepLink = false
-                commonWcVC.isDapp = true
-                commonWcVC.isDappInternal = false
+                commonWcVC.connectType = .EXTENRNAL_DAPP
             } else if (mSchemeURL.host == "internaldapp") {
                 commonWcVC.dappURL = mSchemeURL.query
-                commonWcVC.isDeepLink = false
-                commonWcVC.isDapp = false
-                commonWcVC.isDappInternal = true
+                commonWcVC.connectType = .INTERNAL_DAPP
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                 self.present(commonWcVC, animated: true, completion: nil)
@@ -1151,8 +1145,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     
     func onFetchErc20Balance(_ web3: web3?, _ contAddress: String) {
         print("onFetchErc20Balance ", web3?.provider, "  ", contAddress)
-        let contractAddress = EthereumAddress.init(fromHex: contAddress)
-        let ethAddress = EthereumAddress.init(fromHex: WKey.convertBech32ToEvm(mAccount.account_address))
+        let contractAddress = EthereumAddress.init(contAddress)
+        let ethAddress = EthereumAddress.init(WKey.convertBech32ToEvm(mAccount.account_address))
         let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
         Task {
             if let erc20Balance = try? erc20token.getBalance(account: ethAddress!) {

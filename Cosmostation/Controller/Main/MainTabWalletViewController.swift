@@ -13,7 +13,6 @@ import SafariServices
 import StoreKit
 
 import HDWalletKit
-import web3swift
 
 class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, FloatyDelegate, QrScannerDelegate, PasswordViewDelegate {
 
@@ -445,7 +444,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionWC = { self.onClickWalletConect() }
-            cell?.actionDapp = { self.onClickCrescentApp() }
             return cell!
 
         } else if (indexPath.row == 1) {
@@ -677,15 +675,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         osmosisDappVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(osmosisDappVC, animated: true)
-    }
-    
-    func onClickCrescentApp() {
-        let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
-        commonWcVC.dappURL = "https://wc.dev.cosmostation.io"
-        commonWcVC.isDapp = true
-        commonWcVC.isDeepLink = false
-        commonWcVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(commonWcVC, animated: true)
     }
     
     func onClickSifDex() {
@@ -939,6 +928,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 
             } else if (self.chainConfig?.wcSupoort == true) {
                 let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
+                commonWcVC.connectType = .WALLETCONNECT_QR
                 commonWcVC.wcURL = self.wcURL!
                 commonWcVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
