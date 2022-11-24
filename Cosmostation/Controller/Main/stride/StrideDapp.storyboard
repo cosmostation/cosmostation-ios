@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Stride Dapp View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="StrideDappViewController" id="Y6W-OH-hqX" customClass="StrideDappViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NFa-8E-ZtT" customClass="SegmentedControl" customModule="Cosmostation" customModuleProvider="target">
+                                <rect key="frame" x="113.66666666666669" y="55" width="163" height="32"/>
+                                <segments>
+                                    <segment title="Staking"/>
+                                    <segment title="Unstaking"/>
+                                </segments>
+                                <color key="tintColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <action selector="switchView:" destination="Y6W-OH-hqX" eventType="valueChanged" id="7Zh-NO-u2r"/>
+                                </connections>
+                            </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GNW-MZ-Vf8">
+                                <rect key="frame" x="0.0" y="94" width="390" height="750"/>
+                                <connections>
+                                    <segue destination="VFN-RF-cpl" kind="embed" id="pxL-OO-aob"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eRT-nN-fMe">
+                                <rect key="frame" x="0.0" y="94" width="390" height="750"/>
+                                <connections>
+                                    <segue destination="ypy-1V-0mg" kind="embed" id="f3x-3r-9Gx"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eRT-nN-fMe" firstAttribute="centerY" secondItem="GNW-MZ-Vf8" secondAttribute="centerY" id="75m-eA-FGx"/>
+                            <constraint firstItem="GNW-MZ-Vf8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="9Pa-mx-W1N"/>
+                            <constraint firstItem="eRT-nN-fMe" firstAttribute="leading" secondItem="GNW-MZ-Vf8" secondAttribute="leading" id="BYp-ZB-kQg"/>
+                            <constraint firstItem="GNW-MZ-Vf8" firstAttribute="top" secondItem="NFa-8E-ZtT" secondAttribute="bottom" constant="8" id="EQl-X9-dNf"/>
+                            <constraint firstItem="NFa-8E-ZtT" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="H7N-c0-aVe"/>
+                            <constraint firstItem="NFa-8E-ZtT" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="Kh5-PQ-9m7"/>
+                            <constraint firstItem="eRT-nN-fMe" firstAttribute="trailing" secondItem="GNW-MZ-Vf8" secondAttribute="trailing" id="Nst-2X-WX7"/>
+                            <constraint firstItem="eRT-nN-fMe" firstAttribute="centerX" secondItem="GNW-MZ-Vf8" secondAttribute="centerX" id="fAe-aU-CvM"/>
+                            <constraint firstItem="eRT-nN-fMe" firstAttribute="top" secondItem="GNW-MZ-Vf8" secondAttribute="top" id="n5t-xS-gsT"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="GNW-MZ-Vf8" secondAttribute="trailing" id="r9y-Xd-0ta"/>
+                            <constraint firstItem="eRT-nN-fMe" firstAttribute="bottom" secondItem="GNW-MZ-Vf8" secondAttribute="bottom" id="uBU-ap-3nJ"/>
+                            <constraint firstItem="GNW-MZ-Vf8" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="z5S-Mu-DF1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dAppsSegment" destination="NFa-8E-ZtT" id="5cd-dP-jQw"/>
+                        <outlet property="stakingView" destination="GNW-MZ-Vf8" id="VOJ-ai-rsy"/>
+                        <outlet property="unstakingView" destination="eRT-nN-fMe" id="o3c-ji-ySg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140" y="3.5545023696682461"/>
+        </scene>
+        <!--Liquidity Staking View Controller-->
+        <scene sceneID="8tr-OD-HXi">
+            <objects>
+                <viewController id="VFN-RF-cpl" customClass="LiquidityStakingViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="d9U-tm-zVd">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="750"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H2s-LI-Ysn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1031" y="780"/>
+        </scene>
+        <!--Liquidity Unstaking View Controller-->
+        <scene sceneID="Wf5-fI-1dh">
+            <objects>
+                <viewController id="ypy-1V-0mg" customClass="LiquidityUnstakingViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cfI-aK-fmE">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="750"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SVS-xg-awd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="937" y="771"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

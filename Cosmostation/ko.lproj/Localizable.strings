@@ -742,6 +742,7 @@ support@cosmostation.io";
 "title_authz_undelegate" = "Authz 위임철회 하기";
 "title_authz_redelegate" = "Authz 재위임 하기";
 "title_authz_send" = "Authz 전송하기";
+"title_liquidity_staking" = "리퀴디티 스테이킹";
 
 
 "proposal_type_basic" = "기본";

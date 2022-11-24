@@ -764,12 +764,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickLiquidity() {
-//        let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
-//        commonWcVC.dappURL = "https://wc.dev.cosmostation.io"
-//        commonWcVC.isDapp = true
-//        commonWcVC.isDeepLink = false
-//        commonWcVC.hidesBottomBarWhenPushed = true
-//        self.navigationController?.pushViewController(commonWcVC, animated: true)
+        let strideDappVC = UIStoryboard(name: "StrideDapp", bundle: nil).instantiateViewController(withIdentifier: "StrideDappViewController") as! StrideDappViewController
+        strideDappVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(strideDappVC, animated: true)
     }
     
     func onClickAprHelp() {

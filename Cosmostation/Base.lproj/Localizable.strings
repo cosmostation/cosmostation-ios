@@ -748,6 +748,7 @@ support@cosmostation.io";
 "title_authz_undelegate" = "Authz Undelegate";
 "title_authz_redelegate" = "Authz Redelegate";
 "title_authz_send" = "Authz Send";
+"title_liquidity_staking" = "Liquidity Staking";
 
 
 "proposal_type_basic" = "Basic";

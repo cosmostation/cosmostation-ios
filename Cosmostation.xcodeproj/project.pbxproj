@@ -1358,6 +1358,14 @@
 		04FCD2EC292F8C9D00BA5349 /* WalletStrideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2E9292F8C9D00BA5349 /* WalletStrideCell.swift */; };
 		04FCD2ED292F8C9D00BA5349 /* WalletStrideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FCD2EA292F8C9D00BA5349 /* WalletStrideCell.xib */; };
 		04FCD2EE292F8C9D00BA5349 /* WalletStrideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FCD2EA292F8C9D00BA5349 /* WalletStrideCell.xib */; };
+		04FCD2F1292F923200BA5349 /* StrideDapp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04FCD2F0292F923200BA5349 /* StrideDapp.storyboard */; };
+		04FCD2F2292F923200BA5349 /* StrideDapp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04FCD2F0292F923200BA5349 /* StrideDapp.storyboard */; };
+		04FCD2F4292F93AD00BA5349 /* StrideDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2F3292F93AD00BA5349 /* StrideDappViewController.swift */; };
+		04FCD2F5292F93AD00BA5349 /* StrideDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2F3292F93AD00BA5349 /* StrideDappViewController.swift */; };
+		04FCD2FD292F94D900BA5349 /* LiquidityStakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2FC292F94D900BA5349 /* LiquidityStakingViewController.swift */; };
+		04FCD2FE292F94D900BA5349 /* LiquidityStakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2FC292F94D900BA5349 /* LiquidityStakingViewController.swift */; };
+		04FCD300292F94E600BA5349 /* LiquidityUnstakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2FF292F94E600BA5349 /* LiquidityUnstakingViewController.swift */; };
+		04FCD301292F94E600BA5349 /* LiquidityUnstakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2FF292F94E600BA5349 /* LiquidityUnstakingViewController.swift */; };
 		04FD713828B8B3C80059E88B /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD713628B8B3C80059E88B /* AssetCell.swift */; };
 		04FD713928B8B3C80059E88B /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD713628B8B3C80059E88B /* AssetCell.swift */; };
 		04FD713A28B8B3C80059E88B /* AssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD713728B8B3C80059E88B /* AssetCell.xib */; };
@@ -3885,6 +3893,10 @@
 		04FCD288292E2CEF00BA5349 /* stride_claim_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_claim_params.pb.swift; sourceTree = "<group>"; };
 		04FCD2E9292F8C9D00BA5349 /* WalletStrideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStrideCell.swift; sourceTree = "<group>"; };
 		04FCD2EA292F8C9D00BA5349 /* WalletStrideCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStrideCell.xib; sourceTree = "<group>"; };
+		04FCD2F0292F923200BA5349 /* StrideDapp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StrideDapp.storyboard; sourceTree = "<group>"; };
+		04FCD2F3292F93AD00BA5349 /* StrideDappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrideDappViewController.swift; sourceTree = "<group>"; };
+		04FCD2FC292F94D900BA5349 /* LiquidityStakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidityStakingViewController.swift; sourceTree = "<group>"; };
+		04FCD2FF292F94E600BA5349 /* LiquidityUnstakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidityUnstakingViewController.swift; sourceTree = "<group>"; };
 		04FD713628B8B3C80059E88B /* AssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
 		04FD713728B8B3C80059E88B /* AssetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCell.xib; sourceTree = "<group>"; };
 		106166B99D48E1E1E23A50A9 /* Pods-CosmostationDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.release.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.release.xcconfig"; sourceTree = "<group>"; };
@@ -4731,6 +4743,17 @@
 				046FF019277B43F100F72C11 /* GenDenom3ViewController.xib */,
 			);
 			path = nft;
+			sourceTree = "<group>";
+		};
+		04FCD2EF292F8FF300BA5349 /* stride */ = {
+			isa = PBXGroup;
+			children = (
+				04FCD2F0292F923200BA5349 /* StrideDapp.storyboard */,
+				04FCD2F3292F93AD00BA5349 /* StrideDappViewController.swift */,
+				04FCD2FC292F94D900BA5349 /* LiquidityStakingViewController.swift */,
+				04FCD2FF292F94E600BA5349 /* LiquidityUnstakingViewController.swift */,
+			);
+			path = stride;
 			sourceTree = "<group>";
 		};
 		2807DB36278817D600016571 /* desmos */ = {
@@ -6178,6 +6201,7 @@
 		E1945E40222E7FB000A1436F /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				04FCD2EF292F8FF300BA5349 /* stride */,
 				041345B427855B0800DC49AD /* desmos */,
 				04E25D32276F6B25009B39BA /* nft */,
 				28E8FAED2719C20D005EAA9B /* sif */,
@@ -6681,6 +6705,7 @@
 				E148781328957E2900751D94 /* AuthzClaimReward4ViewController.xib in Resources */,
 				18FFB6FD281AF533004E65BB /* ManageAccountAddCell.xib in Resources */,
 				04E6ABC42863588A008DC3C7 /* CdpDrawDebt1ViewController.xib in Resources */,
+				04FCD2F2292F923200BA5349 /* StrideDapp.storyboard in Resources */,
 				18FFB702281AF533004E65BB /* JoinPool0ViewController.xib in Resources */,
 				18FFB705281AF533004E65BB /* AccountPromotionCell.xib in Resources */,
 				18FFB706281AF533004E65BB /* StartUnbonding3ViewController.xib in Resources */,
@@ -7051,6 +7076,7 @@
 				04C5AE7328631737007627EA /* Undelegate4ViewController.xib in Resources */,
 				E148781228957E2900751D94 /* AuthzClaimReward4ViewController.xib in Resources */,
 				28156E9B2536DE14006FF06C /* HarvestDetailTopCell.xib in Resources */,
+				04FCD2F1292F923200BA5349 /* StrideDapp.storyboard in Resources */,
 				04E6ABC32863588A008DC3C7 /* CdpDrawDebt1ViewController.xib in Resources */,
 				28DB570725FA3BBC00B2F0E5 /* HardPoolBorrow0ViewController.xib in Resources */,
 				282FF34223F4FFD20028CC66 /* TxCommissionCell.xib in Resources */,
@@ -7466,6 +7492,7 @@
 				18FFB2B2281AF533004E65BB /* WalletOsmoCell.swift in Sources */,
 				1817CB03283E2CE500523713 /* iris_mod_nft_tx.grpc.swift in Sources */,
 				042A0CB2288E599F00C4DC38 /* cosmos_authz_v1beta1_query.pb.swift in Sources */,
+				04FCD301292F94E600BA5349 /* LiquidityUnstakingViewController.swift in Sources */,
 				04FCD2AC292E2CEF00BA5349 /* stride_records_query.pb.swift in Sources */,
 				1817CC73283E2CE600523713 /* cosmos_proto_cosmos.pb.swift in Sources */,
 				1817CC16283E2CE600523713 /* cosmwasm_wasm_v1_types.pb.swift in Sources */,
@@ -7477,6 +7504,7 @@
 				1817CB58283E2CE500523713 /* ibc_applications_transfer_v1_tx.grpc.swift in Sources */,
 				1817CC3C283E2CE600523713 /* desmos_posts_v1beta1_report.pb.swift in Sources */,
 				04AA4C002906A6DD0027877B /* kava_evmutil_v1beta1_query.grpc.swift in Sources */,
+				04FCD2F5292F93AD00BA5349 /* StrideDappViewController.swift in Sources */,
 				18FFB2B5281AF533004E65BB /* BnbNodeInfo.swift in Sources */,
 				1817CACA283E2CE500523713 /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
 				04E6ABCE286358B4008DC3C7 /* CdpDrawRepay1ViewController.swift in Sources */,
@@ -8413,6 +8441,7 @@
 				18FFB62F281AF533004E65BB /* CdpDetailTopCell.swift in Sources */,
 				9F831EEE291C5C1800A998FC /* UIStoryboard+Instantiate.swift in Sources */,
 				18FFB636281AF533004E65BB /* GenNFT0ViewController.swift in Sources */,
+				04FCD2FE292F94D900BA5349 /* LiquidityStakingViewController.swift in Sources */,
 				1817CADA283E2CE500523713 /* evmos_inflation_v1_inflation.pb.swift in Sources */,
 				18FFB63C281AF533004E65BB /* ProfileViewController.swift in Sources */,
 				18FFB640281AF533004E65BB /* EarnBondedCell.swift in Sources */,
@@ -8982,6 +9011,7 @@
 				040FA8EA275F55C200229F6F /* tendermint_farming_v1beta1_query.pb.swift in Sources */,
 				04AA4C3B2906A6DE0027877B /* kava_earn_v1beta1_strategy.pb.swift in Sources */,
 				E1C5C0B128992AD300E9E65D /* AuthzDelegate2ViewController.swift in Sources */,
+				04FCD300292F94E600BA5349 /* LiquidityUnstakingViewController.swift in Sources */,
 				040FA832275F55C200229F6F /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,
 				046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */,
 				04AA4BF12906A6DD0027877B /* kava_pricefeed_v1beta1_tx.pb.swift in Sources */,
@@ -9159,6 +9189,7 @@
 				0451FD862832370100214FDA /* osmosis_claim_v1beta1_query.pb.swift in Sources */,
 				04B1BE2027A3BC4500B1236A /* cosmwasm_wasm_v1_tx.grpc.swift in Sources */,
 				040FA9EB275F55C300229F6F /* cosmos_gov_v1beta1_tx.grpc.swift in Sources */,
+				04FCD2FD292F94D900BA5349 /* LiquidityStakingViewController.swift in Sources */,
 				0451FD8D2832370100214FDA /* osmosis_incentives_params.pb.swift in Sources */,
 				042AEE192864531600E13825 /* OkVote4ViewController.swift in Sources */,
 				280E1EFD254A7AD60007BA7D /* DeleteStarname3ViewController.swift in Sources */,
@@ -9546,6 +9577,7 @@
 				04983CA4278C24C100F913A3 /* TxSaveProfileCell.swift in Sources */,
 				284FBC8126DBE98500403FE2 /* TxSwapWithdrawCell.swift in Sources */,
 				04C4938428506A0C00ECF4D2 /* WatchingAddressViewController.swift in Sources */,
+				04FCD2F4292F93AD00BA5349 /* StrideDappViewController.swift in Sources */,
 				04C5AE8928632774007627EA /* ClaimReward1ViewController.swift in Sources */,
 				28474ECD241E06AF00AF5A81 /* TxCdpDepositCell.swift in Sources */,
 				04983CA8278C24DC00F913A3 /* TxLinkAccountCell.swift in Sources */,
