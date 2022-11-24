@@ -1134,6 +1134,52 @@ public class WUtils {
                 
             })
             
+        } else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)) {
+            let vestingAccount = try! Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value)
+            sBalace.forEach({ (coin) in
+                let denom = coin.denom
+                var dpBalance = NSDecimalNumber.zero
+                var dpVesting = NSDecimalNumber.zero
+                var originalVesting = NSDecimalNumber.zero
+                var remainVesting = NSDecimalNumber.zero
+                var delegatedVesting = NSDecimalNumber.zero
+                
+                dpBalance = NSDecimalNumber.init(string: coin.amount)
+                
+                vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                
+                vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                
+                remainVesting = WUtils.onParseStridePeriodicRemainVestingsAmountByDenom(vestingAccount, denom)
+                dpVesting = remainVesting.subtracting(delegatedVesting);
+                dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
+                
+                if (remainVesting.compare(delegatedVesting).rawValue > 0) {
+                    dpBalance = dpBalance.subtracting(remainVesting).adding(delegatedVesting);
+                }
+                
+                if (dpVesting.compare(NSDecimalNumber.zero).rawValue > 0) {
+                    let vestingCoin = Coin.init(denom, dpVesting.stringValue)
+                    BaseData.instance.mMyVestings_gRPC.append(vestingCoin)
+                    var replace = -1
+                    for i in 0..<BaseData.instance.mMyBalances_gRPC.count {
+                        if (BaseData.instance.mMyBalances_gRPC[i].denom == denom) {
+                            replace = i
+                        }
+                    }
+                    if (replace >= 0) {
+                        BaseData.instance.mMyBalances_gRPC[replace] = Coin.init(denom, dpBalance.stringValue)
+                    }
+                }
+            })
         }
     }
     
@@ -1206,7 +1252,40 @@ public class WUtils {
         }
         return NSDecimalNumber.zero
     }
-    
+                            
+    static func onParseStridePeriodicRemainVestingsByDenom(_ vestingAccount: Stride_Vesting_StridePeriodicVestingAccount, _ denom: String) -> Array<Cosmos_Vesting_V1beta1_Period> {
+        var results = Array<Cosmos_Vesting_V1beta1_Period>()
+        let cTime = Date().millisecondsSince1970
+        vestingAccount.vestingPeriods.forEach { (period) in
+            let vestingEnd = (period.startTime + period.length) * 1000
+            if cTime < vestingEnd {
+                period.amount.forEach { (vesting) in
+                    if (vesting.denom == denom) {
+                        let temp = Cosmos_Vesting_V1beta1_Period.with {
+                            $0.length = vestingEnd
+                            $0.amount = period.amount
+                        }
+                        results.append(temp)
+                    }
+                }
+            }
+        }
+        return results
+    }
+                            
+    static func onParseStridePeriodicRemainVestingsAmountByDenom(_ vestingAccount: Stride_Vesting_StridePeriodicVestingAccount, _ denom: String) -> NSDecimalNumber {
+        var result = NSDecimalNumber.zero
+        var vpList = onParseStridePeriodicRemainVestingsByDenom(vestingAccount, denom)
+        vpList.forEach { (vp) in
+            vp.amount.forEach { (coin) in
+                if (coin.denom == denom) {
+                    result = result.adding(NSDecimalNumber.init(string: coin.amount))
+                }
+            }
+        }
+        return result
+    }
+                            
     static func getAmountVp(_ vp: Cosmos_Vesting_V1beta1_Period, _ denom: String) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         vp.amount.forEach { (coin) in

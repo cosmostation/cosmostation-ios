@@ -210,6 +210,15 @@ public struct ApiHistoryNewCustom {
 
             }
             
+            // stride msg type
+            else if (msgType.contains("stride.") && msgType.contains("stakeibc")) {
+                if (msgType.contains("MsgLiquidStake")) {
+                    result = NSLocalizedString("tx_stride_liquid_stake", comment: "")
+                
+                } else if (msgType.contains("MsgRedeemStake")) {
+                    result = NSLocalizedString("tx_stride_redeem_stake", comment: "")
+                }
+            }
             
             // ibc msg type
             else if (msgType.contains("ibc.")) {
@@ -779,7 +788,6 @@ public struct ApiHistoryNewCustom {
                     result = NSLocalizedString("tx_injective_cancel_spot_order", comment: "")
                 }
             }
-
 
             if (getMsgCnt() > 1) {
                 result = result +  " + " + String(getMsgCnt() - 1)

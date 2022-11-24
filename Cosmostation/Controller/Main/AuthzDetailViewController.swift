@@ -482,6 +482,37 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 granterVestings.append(Coin.init(denom, dpVesting.stringValue))
             })
             
+        } else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)) {
+            let vestingAccount = try! Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value)
+            sBalace.forEach({ (coin) in
+                let denom = coin.denom
+                var dpAvailable = NSDecimalNumber.zero
+                var dpVesting = NSDecimalNumber.zero
+                var originalVesting = NSDecimalNumber.zero
+                var remainVesting = NSDecimalNumber.zero
+                var delegatedVesting = NSDecimalNumber.zero
+                
+                dpAvailable = NSDecimalNumber.init(string: coin.amount)
+                vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                remainVesting = WUtils.onParseStridePeriodicRemainVestingsAmountByDenom(vestingAccount, denom)
+                dpVesting = remainVesting.subtracting(delegatedVesting);
+                dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
+                if (remainVesting.compare(delegatedVesting).rawValue > 0) {
+                    dpAvailable = dpAvailable.subtracting(remainVesting).adding(delegatedVesting);
+                }
+                granterAvailables.append(Coin.init(denom, dpAvailable.stringValue))
+                granterVestings.append(Coin.init(denom, dpVesting.stringValue))
+            })
+            
         } else {
             granterAvailables = granterBalances
             

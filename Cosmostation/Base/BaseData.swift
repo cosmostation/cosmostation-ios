@@ -285,6 +285,10 @@ final class BaseData : NSObject{
                     }
                 }
             }
+        
+        } else if (baseAccount?.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName) == true) {
+            let account = try! Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: baseAccount!.value)
+            return WUtils.onParseStridePeriodicRemainVestingsByDenom(account, denom)
         }
         return results
     }
