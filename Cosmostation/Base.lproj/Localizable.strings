@@ -1103,6 +1103,9 @@ support@cosmostation.io";
 "tx_injective_cancel_limit_order" = "Cancel Derivative Order";
 "tx_injective_cancel_spot_order" = "Cancel Spot Order";
 
+"tx_stride_liquid_stake" = "Liquid Stake";
+"tx_stride_redeem_stake" = "Redeem Stake";
+
 "tx_known" = "Unknown";
 
 "date_format" = "MMM d, yyyy HH:mm:ss";
