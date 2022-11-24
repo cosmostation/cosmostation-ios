@@ -33,7 +33,7 @@ class Vote4ViewController: BaseViewController, PasswordViewDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         mBtnBack.borderColor = UIColor.font05
-        mBtnConfirm.borderColor = UIColor.init(named: "photon")
+        mBtnConfirm.borderColor = UIColor.photon
         feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
         opnionTitle.text = NSLocalizedString("str_my_opinion", comment: "")
         memoTitle.text = NSLocalizedString("str_memo", comment: "")
@@ -43,7 +43,7 @@ class Vote4ViewController: BaseViewController, PasswordViewDelegate {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         mBtnBack.borderColor = UIColor.font05
-        mBtnConfirm.borderColor = UIColor.init(named: "photon")
+        mBtnConfirm.borderColor = UIColor.photon
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {

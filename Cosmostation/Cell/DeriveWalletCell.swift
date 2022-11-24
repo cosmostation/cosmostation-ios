@@ -79,7 +79,7 @@ class DeriveWalletCell: UITableViewCell {
         if (derive.selected == true) {
             selectedImg.isHidden = false
             rootCardView.borderWidth = 1.5
-            rootCardView.borderColor = UIColor.init(named: "photon")
+            rootCardView.borderColor = UIColor.photon
         } else {
             selectedImg.isHidden = true
         }

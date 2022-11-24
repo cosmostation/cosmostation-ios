@@ -36,7 +36,7 @@ struct Ethermint_Evm_V1_MsgEthereumTx {
   /// Clears the value of `data`. Subsequent reads from it will return its default value.
   mutating func clearData() {self._data = nil}
 
-  /// encoded storage size of the transaction
+  /// DEPRECATED: encoded storage size of the transaction
   var size: Double = 0
 
   /// transaction hash in hex format
@@ -55,6 +55,8 @@ struct Ethermint_Evm_V1_MsgEthereumTx {
 }
 
 /// LegacyTx is the transaction data of regular Ethereum transactions.
+/// NOTE: All non-protected transactions (i.e non EIP155 signed) will fail if the
+/// AllowUnprotectedTxs parameter is disabled.
 struct Ethermint_Evm_V1_LegacyTx {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for

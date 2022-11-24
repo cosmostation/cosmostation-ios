@@ -50,14 +50,14 @@ class HardPoolBorrow0ViewController: BaseViewController, UITextFieldDelegate {
         mUserInput.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         btnCancel.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
         btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
         btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnCancel.borderColor = UIColor.font05
-        btnNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.photon
     }
     
     override func enableUserInteraction() {

@@ -34,12 +34,12 @@ class AuthzVote2ViewController: BaseViewController, UITableViewDelegate, UITable
         self.toVoteProposals = pageHolderVC.mProposals
         
         beforeBtn.borderColor = UIColor.font05
-        nextBtn.borderColor = UIColor.init(named: "photon")
+        nextBtn.borderColor = UIColor.photon
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         beforeBtn.borderColor = UIColor.font05
-        nextBtn.borderColor = UIColor.init(named: "photon")
+        nextBtn.borderColor = UIColor.photon
     }
     
     

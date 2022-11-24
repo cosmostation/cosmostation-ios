@@ -48,7 +48,7 @@ class StationTest: ChainConfig {
     var moonPaySupoort = false
     var kadoMoneySupoort = false
     var grpcUrl = "lcd-office.cosmostation.io"
-    var grpcPort = 10400
+    var grpcPort = 20400
     var rpcUrl = ""
     var lcdUrl = "https://lcd-office.cosmostation.io/station-testnet/"
     var apiUrl = "https://api-office.cosmostation.io/station-testnet/"

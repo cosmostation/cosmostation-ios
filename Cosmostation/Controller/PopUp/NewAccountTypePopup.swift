@@ -20,13 +20,13 @@ class NewAccountTypePopup: BaseViewController, SBCardPopupContent {
         super.viewDidLoad()
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTapClose))
         self.view.addGestureRecognizer(tap)
-        restorePrivateKeyButton.setTitle(firstLineTitle: NSLocalizedString("new_account_restore", comment: ""), firstLineColor: .init(named: "photon"),
+        restorePrivateKeyButton.setTitle(firstLineTitle: NSLocalizedString("new_account_restore", comment: ""), firstLineColor: UIColor.photon,
                                          secondLineText: NSLocalizedString("new_account_private_key", comment: ""), secondLineColor: .white,
                                          state: .normal)
-        restoreMnemonicButton.setTitle(firstLineTitle: NSLocalizedString("new_account_restore", comment: ""), firstLineColor: .init(named: "photon"),
+        restoreMnemonicButton.setTitle(firstLineTitle: NSLocalizedString("new_account_restore", comment: ""), firstLineColor: UIColor.photon,
                                          secondLineText: NSLocalizedString("new_account_mnemonic", comment: ""), secondLineColor: .white,
                                          state: .normal)
-        watchingOnlyAddressButton.setTitle(firstLineTitle: NSLocalizedString("new_account_watching_only", comment: ""), firstLineColor: .init(named: "photon"),
+        watchingOnlyAddressButton.setTitle(firstLineTitle: NSLocalizedString("new_account_watching_only", comment: ""), firstLineColor: UIColor.photon,
                                          secondLineText: NSLocalizedString("new_account_address", comment: ""), secondLineColor: .white,
                                          state: .normal)
     }
