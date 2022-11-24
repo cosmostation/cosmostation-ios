@@ -1354,6 +1354,10 @@
 		04FCD2E6292E2CEF00BA5349 /* stride_stakeibc_callbacks.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD287292E2CEF00BA5349 /* stride_stakeibc_callbacks.pb.swift */; };
 		04FCD2E7292E2CEF00BA5349 /* stride_claim_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD288292E2CEF00BA5349 /* stride_claim_params.pb.swift */; };
 		04FCD2E8292E2CEF00BA5349 /* stride_claim_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD288292E2CEF00BA5349 /* stride_claim_params.pb.swift */; };
+		04FCD2EB292F8C9D00BA5349 /* WalletStrideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2E9292F8C9D00BA5349 /* WalletStrideCell.swift */; };
+		04FCD2EC292F8C9D00BA5349 /* WalletStrideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2E9292F8C9D00BA5349 /* WalletStrideCell.swift */; };
+		04FCD2ED292F8C9D00BA5349 /* WalletStrideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FCD2EA292F8C9D00BA5349 /* WalletStrideCell.xib */; };
+		04FCD2EE292F8C9D00BA5349 /* WalletStrideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FCD2EA292F8C9D00BA5349 /* WalletStrideCell.xib */; };
 		04FD713828B8B3C80059E88B /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD713628B8B3C80059E88B /* AssetCell.swift */; };
 		04FD713928B8B3C80059E88B /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD713628B8B3C80059E88B /* AssetCell.swift */; };
 		04FD713A28B8B3C80059E88B /* AssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD713728B8B3C80059E88B /* AssetCell.xib */; };
@@ -3879,6 +3883,8 @@
 		04FCD286292E2CEF00BA5349 /* stride_stakeibc_min_validator_requirements.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_stakeibc_min_validator_requirements.pb.swift; sourceTree = "<group>"; };
 		04FCD287292E2CEF00BA5349 /* stride_stakeibc_callbacks.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_stakeibc_callbacks.pb.swift; sourceTree = "<group>"; };
 		04FCD288292E2CEF00BA5349 /* stride_claim_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_claim_params.pb.swift; sourceTree = "<group>"; };
+		04FCD2E9292F8C9D00BA5349 /* WalletStrideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStrideCell.swift; sourceTree = "<group>"; };
+		04FCD2EA292F8C9D00BA5349 /* WalletStrideCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStrideCell.xib; sourceTree = "<group>"; };
 		04FD713628B8B3C80059E88B /* AssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
 		04FD713728B8B3C80059E88B /* AssetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCell.xib; sourceTree = "<group>"; };
 		106166B99D48E1E1E23A50A9 /* Pods-CosmostationDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.release.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.release.xcconfig"; sourceTree = "<group>"; };
@@ -5373,6 +5379,8 @@
 				E10A755F287E612100BC66BC /* WalletMediblocEventCell.xib */,
 				04D3392127E8803000E82AA7 /* WalletCrescentCell.swift */,
 				04D3392227E8803000E82AA7 /* WalletCrescentCell.xib */,
+				04FCD2E9292F8C9D00BA5349 /* WalletStrideCell.swift */,
+				04FCD2EA292F8C9D00BA5349 /* WalletStrideCell.xib */,
 				151788EA282E078600A7D7CC /* WalletStationCell.swift */,
 				151788EB282E078600A7D7CC /* WalletStationCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
@@ -6572,6 +6580,7 @@
 				18FFB6A3281AF533004E65BB /* OkPromotionCell.xib in Resources */,
 				042AEE0A286452E000E13825 /* OkWithdraw1ViewController.xib in Resources */,
 				04A116EC28F6C17E003605E5 /* MainStoryboard.storyboard in Resources */,
+				04FCD2EE292F8C9D00BA5349 /* WalletStrideCell.xib in Resources */,
 				18FFB6A4281AF533004E65BB /* ReplaceSelectChainViewController.xib in Resources */,
 				18FFB6A5281AF533004E65BB /* TxHardBorrowCell.xib in Resources */,
 				0443B8902855B94E0027A6B9 /* WalletDetailInfoCell.xib in Resources */,
@@ -6941,6 +6950,7 @@
 				046FF013277AD0E100F72C11 /* DenomListCell.xib in Resources */,
 				042AEE09286452E000E13825 /* OkWithdraw1ViewController.xib in Resources */,
 				04A116EB28F6C17E003605E5 /* MainStoryboard.storyboard in Resources */,
+				04FCD2ED292F8C9D00BA5349 /* WalletStrideCell.xib in Resources */,
 				28E746B825AD76ED004B2C64 /* OkPromotionCell.xib in Resources */,
 				047FB6FD281AA8D7009D8AAF /* MnemonicListViewController.xib in Resources */,
 				280E1F21254AC6340007BA7D /* ReplaceSelectChainViewController.xib in Resources */,
@@ -8268,6 +8278,7 @@
 				18FFB5D1281AF533004E65BB /* TxCdpCreateCell.swift in Sources */,
 				046FA6E42876995600F6318A /* VoteCell.swift in Sources */,
 				18FFB5D2281AF533004E65BB /* TxInstantContractCell.swift in Sources */,
+				04FCD2EC292F8C9D00BA5349 /* WalletStrideCell.swift in Sources */,
 				1817CC68283E2CE600523713 /* cosmos_capability_v1beta1_capability.pb.swift in Sources */,
 				04AA4C0A2906A6DD0027877B /* kava_liquid_v1beta1_tx.grpc.swift in Sources */,
 				18FFB5D3281AF533004E65BB /* SelectAccountCell.swift in Sources */,
@@ -8961,6 +8972,7 @@
 				043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */,
 				04C5AE9528632ECD007627EA /* ReInvest1ViewController.swift in Sources */,
 				040FA8DB275F55C200229F6F /* desmos_profiles_v1beta1_query.grpc.swift in Sources */,
+				04FCD2EB292F8C9D00BA5349 /* WalletStrideCell.swift in Sources */,
 				0454AE282927459300EC657D /* ethermint_feemarket_v1_query.pb.swift in Sources */,
 				E19A321922544EB500A05E41 /* DashedView.swift in Sources */,
 				285A33D624475DC00052BD3D /* SelectPopupViewController.swift in Sources */,

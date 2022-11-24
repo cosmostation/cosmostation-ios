@@ -164,6 +164,7 @@
 "btn_profile" = "  프로파일";
 "btn_buy_moonpay" = "  %@ 구입";
 "btn_buy_kadomoney" = "  크립토 구입";
+"btn_liquidity_staking" = "  리퀴디티 스테이킹";
 
 
 "msg_authz_description" = "다른 계정을 컨트롤 하실 수 있습니다.";

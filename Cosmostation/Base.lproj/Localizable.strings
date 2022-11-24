@@ -164,6 +164,7 @@
 "btn_profile" = "  Profile";
 "btn_buy_moonpay" = "  Buy %@";
 "btn_buy_kadomoney" = "  Buy Crypto";
+"btn_liquidity_staking" = "  Liquidity Staking";
 
 
 "msg_authz_description" = "Perform transactions on behalf of another account";

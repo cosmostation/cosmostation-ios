@@ -290,6 +290,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
+            onFetchStride()
+            
         }
         return true
     }
@@ -914,6 +916,58 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 
             } catch {
                 print("onFetchgRPCOsmoPools failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchStride() {
+        DispatchQueue.global().async {
+            do {
+                print("onFetchStride")
+                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                
+//                let req = Stride_Stakeibc_QueryParamsRequest.init()
+//                if let response = try? Stride_Stakeibc_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+//                    print("onFetchStride ", response)
+//                }
+                
+//                let req = Stride_Stakeibc_QueryGetValidatorsRequest.with { $0.chainID = "cosmoshub-4" }
+//                if let response = try? Stride_Stakeibc_QueryClient(channel: channel).validators(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+//                    print("onFetchStride ", response)
+//                }
+                
+//                let req = Stride_Stakeibc_QueryGetICAAccountRequest.init()
+//                if let response = try? Stride_Stakeibc_QueryClient(channel: channel).iCAAccount(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+//                    print("onFetchStride ", response)
+//                }
+                
+//                let req = Stride_Stakeibc_QueryGetHostZoneRequest.with { $0.chainID = "cosmoshub-4" }
+//                if let response = try? Stride_Stakeibc_QueryClient(channel: channel).hostZone(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+//                    print("onFetchStride ", response)
+//                }
+                
+//                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 1000 }
+//                let req = Stride_Stakeibc_QueryAllHostZoneRequest.with { $0.pagination = page }
+//                if let response = try? Stride_Stakeibc_QueryClient(channel: channel).hostZoneAll(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+//                    print("onFetchStride ", response)
+//                }
+                
+                let req = Stride_Records_QueryAllUserRedemptionRecordForUserRequest.with {
+                    $0.address = "stride1a7d87k6t5tfhjyaf33c80u97r8w0nqsm49aamt"
+                    $0.chainID = "osmosis-1"
+                    $0.limit = 50
+                    $0.day = 82
+                }
+                if let response = try? Stride_Records_QueryClient(channel: channel).userRedemptionRecordForUser(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    print("onFetchStride ", response)
+                }
+                
+                
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchStride failed: \(error)")
             }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
