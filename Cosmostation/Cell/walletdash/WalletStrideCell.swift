@@ -46,7 +46,7 @@ class WalletStrideCell: UITableViewCell {
         rewardLabel.text = NSLocalizedString("str_reward", comment: "")
         btnDelegate.setTitle(NSLocalizedString("btn_delegate", comment: ""), for: .normal)
         btnProposal.setTitle(NSLocalizedString("btn_governance", comment: ""), for: .normal)
-        btnLiquidity.setTitle(NSLocalizedString("btn_liquidity_staking", comment: ""), for: .normal)
+        btnLiquidity.setTitle(NSLocalizedString("btn_liquid_staking", comment: ""), for: .normal)
         btnWalletConnect.setTitle(NSLocalizedString("btn_walletconnect", comment: ""), for: .normal)
     }
     

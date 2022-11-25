@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LiquidityStakingViewController: BaseViewController, SBCardPopupDelegate {
+class LiquidStakingViewController: BaseViewController, SBCardPopupDelegate {
     
     @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var inputCoinLayer: CardView!
@@ -84,6 +84,21 @@ class LiquidityStakingViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     @IBAction func onClickStart(_ sender: UIButton) {
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
         
+        if (availableMaxAmount.compare(NSDecimalNumber.zero).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_to_balance", comment: ""))
+            return
+        }
+        
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = TASK_TYPE_STRIDE_LIQUIDITY_STAKE
+        txVC.mChainId = hostZones[selectedPosition].chainID
+        txVC.mToSendDenom = hostZones[selectedPosition].ibcDenom
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
 }

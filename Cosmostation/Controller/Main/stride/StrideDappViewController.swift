@@ -45,8 +45,8 @@ class StrideDappViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_liquidity_staking", comment: "");
-        self.navigationItem.title = NSLocalizedString("title_liquidity_staking", comment: "");
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_liquid_staking", comment: "");
+        self.navigationItem.title = NSLocalizedString("title_liquid_staking", comment: "");
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }

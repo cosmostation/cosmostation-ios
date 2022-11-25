@@ -145,6 +145,9 @@
 "str_low" = "Low";
 "str_tiny" = "Tiny";
 "str_select_coin" = "Select Coin.";
+"str_unstaking_history" = "Unstaking Histories";
+"str_insert_amount" = "Insert Amount";
+"str_estimate_withdraw_amount" = "Withdraw Amount(est)";
 
 
 "btn_delegate" = "  Delegate";
@@ -165,7 +168,7 @@
 "btn_profile" = "  Profile";
 "btn_buy_moonpay" = "  Buy %@";
 "btn_buy_kadomoney" = "  Buy Crypto";
-"btn_liquidity_staking" = "  Liquidity Staking";
+"btn_liquid_staking" = "  Liquid Staking";
 
 
 "msg_authz_description" = "Perform transactions on behalf of another account";
@@ -368,6 +371,9 @@
 "tx_authz_undelegate_1" = "Enter undelegation amount";
 "tx_authz_redelegate_0" = "Select validator";
 "tx_authz_redelegate_1" = "Enter redelegation amount";
+"tx_liquid_staking_0" = "Enter staking amount";
+"tx_liquid_unstaking_0" = "Enter unstaking amount";
+"tx_liquid_unstaking_1" = "Enter recipient Address";
 
 
 
@@ -749,7 +755,8 @@ support@cosmostation.io";
 "title_authz_undelegate" = "Authz Undelegate";
 "title_authz_redelegate" = "Authz Redelegate";
 "title_authz_send" = "Authz Send";
-"title_liquidity_staking" = "Liquidity Staking";
+"title_liquid_staking" = "Liquid Staking";
+"title_liquid_unstaking" = "Liquid Unstaking";
 
 
 "proposal_type_basic" = "Basic";
@@ -1107,7 +1114,7 @@ support@cosmostation.io";
 "tx_injective_cancel_spot_order" = "Cancel Spot Order";
 
 "tx_stride_liquid_stake" = "Liquid Stake";
-"tx_stride_redeem_stake" = "Redeem Stake";
+"tx_stride_redeem_stake" = "Liquid Unstake";
 
 "tx_known" = "Unknown";
 

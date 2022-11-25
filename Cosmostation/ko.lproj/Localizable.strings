@@ -145,6 +145,9 @@
 "str_low" = "낮음";
 "str_tiny" = "최소";
 "str_select_coin" = "코인을 선택하세요";
+"str_unstaking_history" = "언스테이킹 기록";
+"str_insert_amount" = "입금 수량";
+"str_estimate_withdraw_amount" = "출금 수량(예상)";
 
 
 "btn_delegate" = "  위임 하기";
@@ -165,7 +168,7 @@
 "btn_profile" = "  프로파일";
 "btn_buy_moonpay" = "  %@ 구입";
 "btn_buy_kadomoney" = "  크립토 구입";
-"btn_liquidity_staking" = "  리퀴디티 스테이킹";
+"btn_liquid_staking" = "  리퀴드 스테이킹";
 
 
 "msg_authz_description" = "다른 계정을 컨트롤 하실 수 있습니다.";
@@ -368,6 +371,9 @@
 "tx_authz_undelegate_1" = "위임철회할 수량을 입력하세요";
 "tx_authz_redelegate_0" = "검증인을 선택하세요";
 "tx_authz_redelegate_1" = "재위임 할 수량을 입력하세요";
+"tx_liquid_staking_0" = "수량을 입력하세요";
+"tx_liquid_unstaking_0" = "수량을 입력하세요";
+"tx_liquid_unstaking_1" = "받을 주소를 입력해주세요.";
 
 
 
@@ -743,7 +749,8 @@ support@cosmostation.io";
 "title_authz_undelegate" = "Authz 위임철회 하기";
 "title_authz_redelegate" = "Authz 재위임 하기";
 "title_authz_send" = "Authz 전송하기";
-"title_liquidity_staking" = "리퀴디티 스테이킹";
+"title_liquid_staking" = "리퀴드 스테이킹";
+"title_liquid_unstaking" = "리퀴드 언스테이킹";
 
 
 "proposal_type_basic" = "기본";
@@ -1101,7 +1108,7 @@ support@cosmostation.io";
 "tx_injective_cancel_spot_order" = "주문 취소\n(Spot Limit)";
 
 "tx_stride_liquid_stake" = "유동성 스테이크";
-"tx_stride_redeem_stake" = "유동성 상환";
+"tx_stride_redeem_stake" = "유동성 언스테이크";
 
 "tx_known" = "알 수 없음";
 

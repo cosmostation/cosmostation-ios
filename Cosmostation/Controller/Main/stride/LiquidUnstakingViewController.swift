@@ -10,7 +10,7 @@ import UIKit
 import GRPC
 import NIO
 
-class LiquidityUnstakingViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, SBCardPopupDelegate {
+class LiquidUnstakingViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, SBCardPopupDelegate {
     
     
     @IBOutlet weak var inputCoinLayer: CardView!
@@ -81,7 +81,6 @@ class LiquidityUnstakingViewController: BaseViewController, UITableViewDelegate,
         }
     }
     
-    
     @objc func onClickInput (_ sender: UITapGestureRecognizer) {
         let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
         popupVC.type = SELECT_LIQUIDITY_UNSTAKE
@@ -96,6 +95,18 @@ class LiquidityUnstakingViewController: BaseViewController, UITableViewDelegate,
         self.updateView()
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (records.count <= 0) { return 0 }
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        view.headerTitleLabel.text = NSLocalizedString("str_unstaking_history", comment: "")
+        view.headerCntLabel.text = String(records.count)
+        return view
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return records.count
     }
@@ -107,6 +118,22 @@ class LiquidityUnstakingViewController: BaseViewController, UITableViewDelegate,
     }
 
     @IBAction func onClickStart(_ sender: UIButton) {
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+        
+        if (availableMaxAmount.compare(NSDecimalNumber.zero).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_to_balance", comment: ""))
+            return
+        }
+        
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = TASK_TYPE_STRIDE_LIQUIDITY_UNSTAKE
+        txVC.mChainId = hostZones[selectedPosition].chainID
+        txVC.mToSendDenom = "st" + hostZones[selectedPosition].hostDenom
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
         
     }
     

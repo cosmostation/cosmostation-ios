@@ -69,10 +69,10 @@
             </objects>
             <point key="canvasLocation" x="140" y="3.5545023696682461"/>
         </scene>
-        <!--Liquidity Staking View Controller-->
+        <!--Liquid Staking View Controller-->
         <scene sceneID="8tr-OD-HXi">
             <objects>
-                <viewController id="VFN-RF-cpl" customClass="LiquidityStakingViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VFN-RF-cpl" customClass="LiquidStakingViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d9U-tm-zVd">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="750"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -318,10 +318,10 @@
             </objects>
             <point key="canvasLocation" x="-1031" y="780"/>
         </scene>
-        <!--Liquidity Unstaking View Controller-->
+        <!--Liquid Unstaking View Controller-->
         <scene sceneID="Wf5-fI-1dh">
             <objects>
-                <viewController id="ypy-1V-0mg" customClass="LiquidityUnstakingViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ypy-1V-0mg" customClass="LiquidUnstakingViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cfI-aK-fmE">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="750"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
