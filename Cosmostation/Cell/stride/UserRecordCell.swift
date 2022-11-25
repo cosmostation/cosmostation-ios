@@ -30,9 +30,9 @@ class UserRecordCell: UITableViewCell {
         } else {
             timeGapLabel.text = String(gap) + " Days Ago"
         }
-        let dpCoin = Coin.init(zone!.ibcDenom, String(record!.amount))
-        WDP.dpCoin(chainConfig, dpCoin, denomLabel, amountLabel)
         
+        if let recipientChain = ChainFactory.SUPPRT_CONFIG().filter({ $0.stakeDenom == zone!.hostDenom }).first {
+            WDP.dpCoin(recipientChain, recipientChain.stakeDenom, String(record!.amount), denomLabel, amountLabel)
+        }
     }
-    
 }

@@ -47,7 +47,6 @@ class TxLiquidStakeCell: TxCell {
                 creatorLabel.adjustsFontSizeToFitWidth = true
                 recipientLabel.text = msg.receiver
                 recipientLabel.adjustsFontSizeToFitWidth = true
-                
                 if let recipientChain = ChainFactory.SUPPRT_CONFIG().filter({ msg.hostZone.starts(with: $0.chainIdPrefix) == true }).first {
                     WDP.dpCoin(recipientChain, recipientChain.stakeDenom, String(msg.amount), denomLabel, amountLabel)
                 }
