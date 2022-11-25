@@ -57,10 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     private func initWalletConnectV2() {
         let metadata = AppMetadata(
-            name: "Example Wallet",
-            description: "wallet description",
-            url: "example.wallet",
-            icons: ["https://avatars.githubusercontent.com/u/37784886"])
+            name: NSLocalizedString("wc_peer_name", comment: ""),
+            description: NSLocalizedString("wc_peer_desc", comment: ""),
+            url: NSLocalizedString("wc_peer_url", comment: ""),
+            icons: [])
 
         Networking.configure(projectId: "63c00e1ca398a6aaaa517a30594c4559", socketFactory: self)
         Pair.configure(metadata: metadata)

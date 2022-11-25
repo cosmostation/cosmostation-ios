@@ -40,7 +40,7 @@ class TxEvmCell: TxCell {
         }
         blockLabel.text = String(txDetail!.blockNumber ?? "0")
         gasLabel.text = String(txReceipt!.gasUsed) + " / " + String(txDetail!.transaction.gasLimit)
-//        typeLabel.text = txDetail?.transaction.type.description
+        typeLabel.text = txDetail?.transaction.type.description
         contactLabel.text = txDetail?.transaction.to.address
         dataLabel.text = txDetail?.transaction.data.toHexString()
     }
