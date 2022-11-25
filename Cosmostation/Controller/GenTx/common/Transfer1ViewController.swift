@@ -56,18 +56,17 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
                     //add backward path
                     if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.beforeChain(chainConfig!)}).first {
                         if !self.recipientableChains.contains(where: { $0.chainAPIName == sendable.chainAPIName }) {
-                        self.recipientableChains.append(sendable)
+                            self.recipientableChains.append(sendable)
                         }
                     }
-                } else if (msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased() && msAsset.path.lowercased() == msAsset.getIbcPathSummary()) {
+                } else if (msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
                     //add forward path
                     if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.chain }).first {
                         if !self.recipientableChains.contains(where: { $0.chainAPIName == sendable.chainAPIName }) {
-                        self.recipientableChains.append(sendable)
+                            self.recipientableChains.append(sendable)
                         }
                     }
                 }
-                
                 
             } else if (mintscanTokens != nil) {
                 //add only forward path
@@ -80,7 +79,6 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
                 }
             }
         }
-        print("recipientableChains ", recipientableChains.count)
         
         self.onSortToChain()
         self.recipientChainConfig = recipientableChains[0]

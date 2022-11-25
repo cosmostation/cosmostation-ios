@@ -144,6 +144,11 @@
 "str_zero" = "무료";
 "str_low" = "낮음";
 "str_tiny" = "최소";
+"str_select_coin" = "코인을 선택하세요";
+"str_unstaking_history" = "언스테이킹 기록";
+"str_insert_amount" = "입금 수량";
+"str_estimate_withdraw_amount" = "출금 수량(예상)";
+"str_tip" = "팁";
 
 
 "btn_delegate" = "  위임 하기";
@@ -164,6 +169,7 @@
 "btn_profile" = "  프로파일";
 "btn_buy_moonpay" = "  %@ 구입";
 "btn_buy_kadomoney" = "  크립토 구입";
+"btn_liquid_staking" = "  리퀴드 스테이킹";
 
 
 "msg_authz_description" = "다른 계정을 컨트롤 하실 수 있습니다.";
@@ -193,6 +199,7 @@
 "msg_memo" = "메모를 확인하세요.\n일부 거래소나 지갑에서는 입금을 위해 특정 메모가 필요할 수 있습니다.";
 "msg_fee1" = "Tx 수수료는 체인에 지불됩니다.";
 "msg_fee2" = "코스모스테이션 월렛 서비스는 무료로 사용 가능하며, 지불한 Tx 수수료는 모든 검증인과 커뮤니티 풀에 분배됩니다.";
+"msg_liquid_unstake" = "언스테이킹이 완료되려면 원 체인이 설정한 기간이 필요합니다(14~28일).\n\nOsmosis Dex에서 st자산을 즉시 원 자산으로 바꾸실 수 있습니다.";
 
 
 "guide_title_cosmos" = "COSMOS HUB";
@@ -366,6 +373,9 @@
 "tx_authz_undelegate_1" = "위임철회할 수량을 입력하세요";
 "tx_authz_redelegate_0" = "검증인을 선택하세요";
 "tx_authz_redelegate_1" = "재위임 할 수량을 입력하세요";
+"tx_liquid_staking_0" = "수량을 입력하세요";
+"tx_liquid_unstaking_0" = "수량을 입력하세요";
+"tx_liquid_unstaking_1" = "받을 주소를 입력해주세요.";
 
 
 
@@ -554,7 +564,6 @@
 "str_select_osmo_unlock_all" = "모두 언락 하시겠습니까?";
 "str_select_ibc_destination" = "전송할 체인을 골라주세요.";
 "str_select_ibc_relayer" = "IBC 전송할 릴레이어를 선택하세요.";
-"str_notice" = "경고";
 "str_msg_ibc" = "IBC 전송은 거래소 입금을 지원 하지 않습니다.\n거래소로 전송을 원하실 경우 반드시 해당 체인의 본인 계정으로 IBC 전송 후에 다시 일반 전송으로 입금해야합니다.\n\n또한 본 지갑은 현재 활성화된 릴레이어의 IBC 전송을 중계를 지원할뿐 IBC 전송간 일어나는 내제적은 문제에 대해서는 책임을 지지 않습니다.\nIBC 전송 진행하기전에 선택한 릴레이어에 대한 안정성은 사용자가 직접 검토해야 합니다.";
 "str_msg_relayer_unauthed" = "선택하신 릴레이어는 확인되지 않았습니다.\n해당 릴레이어를 통해 IBC 전송을 실행할 경우 자산이 손실될 수 있습니다.(해당 체인의 커뮤니티 등을 통해 안전성을 확인하고 진행하시는것을 권장합니다.)\n계속 진행 하시겠습니까?";
 "str_select_starname_domain" = "도메인을 선택해 주세요.";
@@ -742,6 +751,8 @@ support@cosmostation.io";
 "title_authz_undelegate" = "Authz 위임철회 하기";
 "title_authz_redelegate" = "Authz 재위임 하기";
 "title_authz_send" = "Authz 전송하기";
+"title_liquid_staking" = "리퀴드 스테이킹";
+"title_liquid_unstaking" = "리퀴드 언스테이킹";
 
 
 "proposal_type_basic" = "기본";
@@ -871,8 +882,7 @@ support@cosmostation.io";
 "error_no_mnemonic" = "개인키만 존재합니다.";
 "error_no_selected_proposal" = "투표하실 프로포절을 선택하세요.";
 "error_no_authz_type" = "이 타입에 대한 권한이 없습니다.";
-
-
+"error_not_enough_liquid_stake" = "발란스가 충분하지 않습니다.\n원 체인으로 부터 IBC전송을 완료하신후 계속 진행하실 수 있습니다.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";
@@ -1097,6 +1107,9 @@ support@cosmostation.io";
 "tx_injective_create_spot_order" = "주문 생성\n(Spot Limit)";
 "tx_injective_cancel_limit_order" = "주문 취소\n(Derivative Limit)";
 "tx_injective_cancel_spot_order" = "주문 취소\n(Spot Limit)";
+
+"tx_stride_liquid_stake" = "유동성 스테이크";
+"tx_stride_liquid_unstake" = "유동성 언스테이크";
 
 "tx_known" = "알 수 없음";
 

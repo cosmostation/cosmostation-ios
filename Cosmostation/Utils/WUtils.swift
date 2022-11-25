@@ -708,39 +708,39 @@ public class WUtils {
         return transition
     }
     
-    static func getFeeInfos(_ chainConfig: ChainConfig?) -> Array<FeeInfo> {
-        var result = Array<FeeInfo>()
-        chainConfig?.getGasRates().forEach { gasInfo in
-            result.append(FeeInfo.init(gasInfo))
-        }
-        if (result.count == 1) {
-            result[0].title = NSLocalizedString("str_fixed", comment: "")
-            result[0].msg = NSLocalizedString("fee_speed_title_fixed", comment: "")
-        } else if (result.count == 2) {
-            result[1].title = NSLocalizedString("str_average", comment: "")
-            result[1].msg = NSLocalizedString("fee_speed_title_average", comment: "")
-            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
-                result[0].title = NSLocalizedString("str_zero", comment: "")
-                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
-            } else {
-                result[0].title = NSLocalizedString("str_tiny", comment: "")
-                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
-            }
-        } else if (result.count == 3) {
-            result[2].title = NSLocalizedString("str_average", comment: "")
-            result[2].msg = NSLocalizedString("fee_speed_title_average", comment: "")
-            result[1].title = NSLocalizedString("str_low", comment: "")
-            result[1].msg = NSLocalizedString("fee_speed_title_low", comment: "")
-            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
-                result[0].title = NSLocalizedString("str_zero", comment: "")
-                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
-            } else {
-                result[0].title = NSLocalizedString("str_tiny", comment: "")
-                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
-            }
-        }
-        return result
-    }
+//    static func getFeeInfos(_ chainConfig: ChainConfig?) -> Array<FeeInfo> {
+//        var result = Array<FeeInfo>()
+//        chainConfig?.getGasRates().forEach { gasInfo in
+//            result.append(FeeInfo.init(gasInfo))
+//        }
+//        if (result.count == 1) {
+//            result[0].title = NSLocalizedString("str_fixed", comment: "")
+//            result[0].msg = NSLocalizedString("fee_speed_title_fixed", comment: "")
+//        } else if (result.count == 2) {
+//            result[1].title = NSLocalizedString("str_average", comment: "")
+//            result[1].msg = NSLocalizedString("fee_speed_title_average", comment: "")
+//            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+//                result[0].title = NSLocalizedString("str_zero", comment: "")
+//                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
+//            } else {
+//                result[0].title = NSLocalizedString("str_tiny", comment: "")
+//                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
+//            }
+//        } else if (result.count == 3) {
+//            result[2].title = NSLocalizedString("str_average", comment: "")
+//            result[2].msg = NSLocalizedString("fee_speed_title_average", comment: "")
+//            result[1].title = NSLocalizedString("str_low", comment: "")
+//            result[1].msg = NSLocalizedString("fee_speed_title_low", comment: "")
+//            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+//                result[0].title = NSLocalizedString("str_zero", comment: "")
+//                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
+//            } else {
+//                result[0].title = NSLocalizedString("str_tiny", comment: "")
+//                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
+//            }
+//        }
+//        return result
+//    }
     
     static func getSymbol(_ chainConfig: ChainConfig?, _ denom: String?) -> String {
         if (chainConfig == nil || denom == nil || denom?.isEmpty == true) { return "Unknown" }
@@ -793,133 +793,6 @@ public class WUtils {
         attributedString1.append(attributedString2)
         return attributedString1
     }
-    
-    static func getRealBlockTime(_ chain: ChainType?) -> NSDecimalNumber {
-        if (chain == .COSMOS_MAIN || chain == .COSMOS_TEST) {
-            return BLOCK_TIME_COSMOS
-            
-        } else if (chain == .IRIS_MAIN || chain == .IRIS_TEST) {
-            return BLOCK_TIME_IRIS
-            
-        } else if (chain == .IOV_MAIN) {
-            return BLOCK_TIME_IOV
-            
-        } else if (chain == .KAVA_MAIN) {
-            return BLOCK_TIME_KAVA
-            
-        } else if (chain == .BAND_MAIN) {
-            return BLOCK_TIME_BAND
-            
-        } else if (chain == .CERTIK_MAIN) {
-            return BLOCK_TIME_CERTIK
-            
-        } else if (chain == .SECRET_MAIN) {
-            return BLOCK_TIME_SECRET
-            
-        } else if (chain == .AKASH_MAIN) {
-            return BLOCK_TIME_AKASH
-            
-        } else if (chain == .SENTINEL_MAIN) {
-            return BLOCK_TIME_SENTINEL
-            
-        } else if (chain == .PERSIS_MAIN) {
-            return BLOCK_TIME_PERSISTENCE
-            
-        } else if (chain == .FETCH_MAIN) {
-            return BLOCK_TIME_FETCH
-            
-        } else if (chain == .CRYPTO_MAIN) {
-            return BLOCK_TIME_CRYPTO
-            
-        } else if (chain == .SIF_MAIN) {
-            return BLOCK_TIME_SIF
-            
-        } else if (chain == .KI_MAIN) {
-            return BLOCK_TIME_KI
-            
-        } else if (chain == .MEDI_MAIN) {
-            return BLOCK_TIME_MEDI
-            
-        } else if (chain == .OSMOSIS_MAIN) {
-            return BLOCK_TIME_OSMOSIS
-            
-        } else if (chain == .EMONEY_MAIN) {
-            return BLOCK_TIME_EMONEY
-            
-        } else if (chain == .EMONEY_MAIN) {
-            return BLOCK_TIME_EMONEY
-            
-        } else if (chain == .RIZON_MAIN) {
-            return BLOCK_TIME_RIZON
-            
-        } else if (chain == .JUNO_MAIN) {
-            return BLOCK_TIME_JUNO
-            
-        } else if (chain == .BITCANA_MAIN) {
-            return BLOCK_TIME_BITCANNA
-            
-        } else if (chain == .REGEN_MAIN) {
-            return BLOCK_TIME_REGEN
-            
-        } else if (chain == .STARGAZE_MAIN) {
-            return BLOCK_TIME_STARGAZE
-            
-        } else if (chain == .INJECTIVE_MAIN) {
-            return BLOCK_TIME_INJECTIVE
-            
-        } else if (chain == .BITSONG_MAIN) {
-            return BLOCK_TIME_BITSONG
-            
-        } else if (chain == .DESMOS_MAIN) {
-            return BLOCK_TIME_DESMOS
-            
-        } else if (chain == .COMDEX_MAIN) {
-            return BLOCK_TIME_COMDEX
-            
-        } else if (chain == .GRAVITY_BRIDGE_MAIN) {
-            return BLOCK_TIME_GRAV
-            
-        } else if (chain == .LUM_MAIN) {
-            return BLOCK_TIME_LUM
-            
-        } else if (chain == .CHIHUAHUA_MAIN) {
-            return BLOCK_TIME_CHIHUAHUA
-            
-        } else if (chain == .AXELAR_MAIN) {
-            return BLOCK_TIME_AXELAR
-            
-        } else if (chain == .KONSTELLATION_MAIN) {
-            return BLOCK_TIME_KONSTEALLTION
-            
-        } else if (chain == .UMEE_MAIN) {
-            return BLOCK_TIME_UMEE
-            
-        } else if (chain == .EVMOS_MAIN) {
-            return BLOCK_TIME_EVMOS
-            
-        } else if (chain == .PROVENANCE_MAIN) {
-            return BLOCK_TIME_PROVENANCE
-            
-        } else if (chain == .CERBERUS_MAIN) {
-            return BLOCK_TIME_CERBERUS
-            
-        } else if (chain == .OMNIFLIX_MAIN) {
-            return BLOCK_TIME_OMNIFLIX
-            
-        } else if (chain == .PASSAGE_MAIN) {
-            return BLOCK_TIME_PASSAGE
-            
-        }
-        return NSDecimalNumber.zero
-    }
-    
-    static func getRealBlockPerYear(_ chain: ChainType?) -> NSDecimalNumber {
-        if (getRealBlockTime(chain) == NSDecimalNumber.zero) {
-            return NSDecimalNumber.zero
-        }
-        return YEAR_SEC.dividing(by: getRealBlockTime(chain), withBehavior: handler2)
-    }
-    
     
     static func getMonikerImgUrl(_ chainConfig: ChainConfig?, _ opAddress: String) -> String {
         if (chainConfig == nil) { return "" }
@@ -1023,6 +896,10 @@ public class WUtils {
         
         } else if (rawAccount.typeURL.contains(Ethermint_Types_V1_EthAccount.protoMessageName)) {
             let auth = try! Ethermint_Types_V1_EthAccount.init(serializedData: rawAccount.value).baseAccount
+            return (auth.address, auth.accountNumber, auth.sequence)
+            
+        } else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)) {
+            let auth = try! Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value).baseVestingAccount.baseAccount
             return (auth.address, auth.accountNumber, auth.sequence)
         }
         
@@ -1257,6 +1134,59 @@ public class WUtils {
                 
             })
             
+        } else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)) {
+            let vestingAccount = try! Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value)
+            sBalace.forEach({ (coin) in
+                let denom = coin.denom
+                var dpBalance = NSDecimalNumber.zero
+                var dpVesting = NSDecimalNumber.zero
+                var originalVesting = NSDecimalNumber.zero
+                var remainVesting = NSDecimalNumber.zero
+                var delegatedVesting = NSDecimalNumber.zero
+                var delegatedFree = NSDecimalNumber.zero
+                
+                dpBalance = NSDecimalNumber.init(string: coin.amount)
+                
+                vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                
+                vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                
+                vestingAccount.baseVestingAccount.delegatedFree.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        delegatedFree = delegatedFree.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                
+                remainVesting = WUtils.onParseStridePeriodicRemainVestingsAmountByDenom(vestingAccount, denom)
+                dpVesting = remainVesting.subtracting(delegatedVesting).subtracting(delegatedFree);
+                dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
+                
+                if (remainVesting.compare(delegatedVesting.adding(delegatedFree)).rawValue > 0) {
+                    dpBalance = dpBalance.subtracting(remainVesting).adding(delegatedVesting);
+                }
+                
+                if (dpVesting.compare(NSDecimalNumber.zero).rawValue > 0) {
+                    let vestingCoin = Coin.init(denom, dpVesting.stringValue)
+                    BaseData.instance.mMyVestings_gRPC.append(vestingCoin)
+                    var replace = -1
+                    for i in 0..<BaseData.instance.mMyBalances_gRPC.count {
+                        if (BaseData.instance.mMyBalances_gRPC[i].denom == denom) {
+                            replace = i
+                        }
+                    }
+                    if (replace >= 0) {
+                        BaseData.instance.mMyBalances_gRPC[replace] = Coin.init(denom, dpBalance.stringValue)
+                    }
+                }
+            })
         }
     }
     
@@ -1329,7 +1259,40 @@ public class WUtils {
         }
         return NSDecimalNumber.zero
     }
-    
+                            
+    static func onParseStridePeriodicRemainVestingsByDenom(_ vestingAccount: Stride_Vesting_StridePeriodicVestingAccount, _ denom: String) -> Array<Cosmos_Vesting_V1beta1_Period> {
+        var results = Array<Cosmos_Vesting_V1beta1_Period>()
+        let cTime = Date().millisecondsSince1970
+        vestingAccount.vestingPeriods.forEach { (period) in
+            let vestingEnd = (period.startTime + period.length) * 1000
+            if cTime < vestingEnd {
+                period.amount.forEach { (vesting) in
+                    if (vesting.denom == denom) {
+                        let temp = Cosmos_Vesting_V1beta1_Period.with {
+                            $0.length = vestingEnd
+                            $0.amount = period.amount
+                        }
+                        results.append(temp)
+                    }
+                }
+            }
+        }
+        return results
+    }
+                            
+    static func onParseStridePeriodicRemainVestingsAmountByDenom(_ vestingAccount: Stride_Vesting_StridePeriodicVestingAccount, _ denom: String) -> NSDecimalNumber {
+        var result = NSDecimalNumber.zero
+        var vpList = onParseStridePeriodicRemainVestingsByDenom(vestingAccount, denom)
+        vpList.forEach { (vp) in
+            vp.amount.forEach { (coin) in
+                if (coin.denom == denom) {
+                    result = result.adding(NSDecimalNumber.init(string: coin.amount))
+                }
+            }
+        }
+        return result
+    }
+                            
     static func getAmountVp(_ vp: Cosmos_Vesting_V1beta1_Period, _ denom: String) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         vp.amount.forEach { (coin) in

@@ -36,8 +36,6 @@ class ChainSif: ChainConfig {
     var validatorPrefix = "sifvaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.0rowan"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -72,14 +70,6 @@ class ChainSif: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/sifchain-finance"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }
 

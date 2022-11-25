@@ -36,8 +36,6 @@ class ChainCerberus: ChainConfig {
     var validatorPrefix = "cerberusvaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.0ucrbrus"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -72,13 +70,5 @@ class ChainCerberus: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/@cerberus_zone"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

@@ -919,8 +919,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
-    
-    
     //for KAVA
 //    func onFetchgRPCKavaPriceParam() {
 //        DispatchQueue.global().async {
@@ -1038,7 +1036,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 if let params = res as? NSDictionary {
                     BaseData.instance.mParam = Param.init(params)
                 }
-//                print("mParam ", BaseData.instance.mParam?.params)
             
             case .failure(let error):
                 print("onFetchParams ", error)

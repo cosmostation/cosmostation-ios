@@ -144,6 +144,11 @@
 "str_zero" = "Zero";
 "str_low" = "Low";
 "str_tiny" = "Tiny";
+"str_select_coin" = "Select Coin.";
+"str_unstaking_history" = "Unstaking Histories";
+"str_insert_amount" = "Insert Amount";
+"str_estimate_withdraw_amount" = "Withdraw Amount(est)";
+"str_tip" = "tip";
 
 
 "btn_delegate" = "  Delegate";
@@ -164,13 +169,14 @@
 "btn_profile" = "  Profile";
 "btn_buy_moonpay" = "  Buy %@";
 "btn_buy_kadomoney" = "  Buy Crypto";
+"btn_liquid_staking" = "  Liquid Staking";
 
 
 "msg_authz_description" = "Perform transactions on behalf of another account";
 "msg_promotion1" = "START DELEGATING FOR REWARDS";
 "msg_promotion2" = "Delegate your tokens with Cosmostation.\nStart earning staking rewards and contribute to the network ecosystem.";
 "msg_history_with_validator" = "History with this validator";
-"msg_only_watchmode" = "Now only watch mode.\nAll services are available after mnemonic or private key integration.";
+"msg_only_watchmode" = "Currently in watch mode.\nAll transactions are made available after registering your mnemonic or private key.";
 "msg_warn_privatekey" = "Private Key is only used to restore the currently selected wallet. We highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anyone else.\n\nPrivate key is NOT mnemonics. You MUST backup your mnemonics if you have one. You need your mnemonics to restore your original wallets if you created them with mnemonics.";
 "msg_warn_mnemonic" = "Losing your mnemonics could lead to loss of your asset.\nWe highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anyone else.";
 "msg_warn_create_mnemonic" = "Losing your mnemonics could lead to loss of your asset.\nWe highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anyone else.\n\nYou can check/manage your mnemonics in [Manage Mnemonic]";
@@ -193,6 +199,7 @@
 "msg_memo" = "Please check your memo.\nSome exchanges or wallets may require a specific memo for deposits.";
 "msg_fee1" = "Tx Fee is charged by the network.";
 "msg_fee2" = "Cosmostation Wallet service is free to use, and the Tx fee you pay is distributed to all validators and community pool.";
+"msg_liquid_unstake" = "Unstaking requires a period set by origin chain(14-28 days).\n\nYou can instantly convert st assets into original assets in Osmosis Dex.";
 
 
 "guide_title_cosmos" = "COSMOS HUB";
@@ -366,8 +373,9 @@
 "tx_authz_undelegate_1" = "Enter undelegation amount";
 "tx_authz_redelegate_0" = "Select validator";
 "tx_authz_redelegate_1" = "Enter redelegation amount";
-
-
+"tx_liquid_staking_0" = "Enter staking amount";
+"tx_liquid_unstaking_0" = "Enter unstaking amount";
+"tx_liquid_unstaking_1" = "Enter recipient Address";
 
 
 
@@ -586,7 +594,6 @@
 "str_select_osmo_unlock_all" = "Unlock all?";
 "str_select_ibc_destination" = "Select Recipient Chain.";
 "str_select_ibc_relayer" = "Select Relayer for IBC Transfer.";
-"str_notice" = "Notice";
 "str_msg_ibc" = "IBC transactions are not supported on centralized exchanges.\nIf you wish to transfer to an exchange, you must send back the asset to its original chain before depositing it via a regular send transaction.\n\nThis wallet only supports the broadcasting of txs through active IBC relayers and therefore is not responsible for intrinsic issues that may exist in IBC txs.\nUser must perform due diligence on the stability and security of the selected relayer before executing IBC txs.";
 "str_msg_relayer_unauthed" = "This is an unconfirmed relayer.\nIBC transfers through an inoperable relayer may result in loss of assets.\nDo you wish to continue?";
 "str_select_starname_domain" = "Select domain for starname.";
@@ -748,6 +755,8 @@ support@cosmostation.io";
 "title_authz_undelegate" = "Authz Undelegate";
 "title_authz_redelegate" = "Authz Redelegate";
 "title_authz_send" = "Authz Send";
+"title_liquid_staking" = "Liquid Staking";
+"title_liquid_unstaking" = "Liquid Unstaking";
 
 
 "proposal_type_basic" = "Basic";
@@ -809,9 +818,6 @@ support@cosmostation.io";
 "error_max_30_validator" = "You can select Max 30 Validators.";
 "error_invalid_private_Key" = "Invalid private key.";
 "error_simul_error" = "This is a non-executable Tx.";
-
-"alert_title_no_private_key" = "No Private Key";
-"alert_msg_no_private_key" = "This account has only address with watch mode.\nYou need to add mnemonics for generate transaction.";
 "error_reward_address_changed_title" = "Reward Address Changed";
 "error_reward_address_changed_msg" = "This account has changed its reward address.\nYou can use compounding feature after reset your reward address to self.";
 "error_duple_address" = "This address is already imported.";
@@ -882,6 +888,11 @@ support@cosmostation.io";
 "error_no_mnemonic" = "Only private key imported";
 "error_no_selected_proposal" = "Please select proposals to vote";
 "error_no_authz_type" = "No auth for this type";
+"error_not_enough_liquid_stake" = "Not enough balance.\nIBC transfer this asset from origin chain to continue";
+
+
+"alert_title_no_private_key" = "No Private Key";
+"alert_msg_no_private_key" = "This account has only address with watch mode.\nYou need to add mnemonics for generate transaction.";
 
 "theme_system" = "System";
 "theme_light" = "Light";
@@ -1103,6 +1114,9 @@ support@cosmostation.io";
 "tx_injective_create_spot_order" = "Create Spot Order";
 "tx_injective_cancel_limit_order" = "Cancel Derivative Order";
 "tx_injective_cancel_spot_order" = "Cancel Spot Order";
+
+"tx_stride_liquid_stake" = "Liquid Stake";
+"tx_stride_liquid_unstake" = "Liquid Unstake";
 
 "tx_known" = "Unknown";
 

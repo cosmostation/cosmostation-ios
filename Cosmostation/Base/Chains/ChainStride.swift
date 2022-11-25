@@ -37,8 +37,6 @@ class ChainStride: ChainConfig {
     var validatorPrefix = "stridevaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.0ustrd"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -73,13 +71,5 @@ class ChainStride: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://stride.zone/blog"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

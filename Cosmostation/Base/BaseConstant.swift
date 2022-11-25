@@ -208,6 +208,10 @@ let TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN       = "TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN
 let TASK_TYPE_AUTHZ_VOTE                    = "TASK_TYPE_AUTHZ_VOTE";
 
 
+let TASK_TYPE_STRIDE_LIQUIDITY_STAKE        = "TASK_TYPE_STRIDE_LIQUIDITY_STAKE";
+let TASK_TYPE_STRIDE_LIQUIDITY_UNSTAKE      = "TASK_TYPE_STRIDE_LIQUIDITY_UNSTAKE";
+
+
 
 
 let PASSWORD_ACTION_INIT                    = "ACTION_INIT"
@@ -455,50 +459,13 @@ let SELECT_POPUP_FEE_DENOM = 18
 let SELECT_POPUP_COIN_LIST = 19
 let SELECT_POPUP_CONTRACT_TOKEN_EDIT = 20
 let SELECT_POPUP_PRICE_COLOR = 21
+let SELECT_LIQUIDITY_STAKE = 22
+let SELECT_LIQUIDITY_UNSTAKE = 23
 
 
 let DAY_SEC     = NSDecimalNumber.init(string: "86400")
 let MONTH_SEC   = DAY_SEC.multiplying(by: NSDecimalNumber.init(string: "30"))
 let YEAR_SEC    = DAY_SEC.multiplying(by: NSDecimalNumber.init(string: "365"))
-
-let BLOCK_TIME_COSMOS       = NSDecimalNumber.init(string: "7.6597")
-let BLOCK_TIME_IRIS         = NSDecimalNumber.init(string: "6.7884")
-let BLOCK_TIME_IOV          = NSDecimalNumber.init(string: "6.0124")
-let BLOCK_TIME_KAVA         = NSDecimalNumber.init(string: "6.7262")
-let BLOCK_TIME_BAND         = NSDecimalNumber.init(string: "3.0236")
-let BLOCK_TIME_CERTIK       = NSDecimalNumber.init(string: "5.9740")
-let BLOCK_TIME_SECRET       = NSDecimalNumber.init(string: "6.0408")
-let BLOCK_TIME_AKASH        = NSDecimalNumber.init(string: "6.4526")
-let BLOCK_TIME_SENTINEL     = NSDecimalNumber.init(string: "6.3113")
-let BLOCK_TIME_PERSISTENCE  = NSDecimalNumber.init(string: "5.7982")
-let BLOCK_TIME_FETCH        = NSDecimalNumber.init(string: "6.0678")
-let BLOCK_TIME_CRYPTO       = NSDecimalNumber.init(string: "6.1939")
-let BLOCK_TIME_SIF          = NSDecimalNumber.init(string: "5.7246")
-let BLOCK_TIME_KI           = NSDecimalNumber.init(string: "5.7571")
-let BLOCK_TIME_MEDI         = NSDecimalNumber.init(string: "5.7849")
-let BLOCK_TIME_OSMOSIS      = NSDecimalNumber.init(string: "6.5324")
-let BLOCK_TIME_EMONEY       = NSDecimalNumber.init(string: "24.8486")
-let BLOCK_TIME_RIZON        = NSDecimalNumber.init(string: "5.8850")
-let BLOCK_TIME_JUNO         = NSDecimalNumber.init(string: "6.3104")
-let BLOCK_TIME_BITCANNA     = NSDecimalNumber.init(string: "6.0256")
-let BLOCK_TIME_REGEN        = NSDecimalNumber.init(string: "6.2491")
-let BLOCK_TIME_STARGAZE     = NSDecimalNumber.init(string: "5.8129")
-let BLOCK_TIME_INJECTIVE    = NSDecimalNumber.init(string: "2.4865")
-let BLOCK_TIME_BITSONG      = NSDecimalNumber.init(string: "5.9040")
-let BLOCK_TIME_DESMOS       = NSDecimalNumber.init(string: "6.1605")
-let BLOCK_TIME_COMDEX       = NSDecimalNumber.init(string: "6.1746")
-let BLOCK_TIME_GRAV         = NSDecimalNumber.init(string: "6.4500")
-let BLOCK_TIME_LUM          = NSDecimalNumber.init(string: "5.7210")
-let BLOCK_TIME_CHIHUAHUA    = NSDecimalNumber.init(string: "5.8172")
-let BLOCK_TIME_AXELAR       = NSDecimalNumber.init(string: "5.5596")
-let BLOCK_TIME_KONSTEALLTION = NSDecimalNumber.init(string: "5.376")
-let BLOCK_TIME_UMEE         = NSDecimalNumber.init(string: "5.658")
-let BLOCK_TIME_EVMOS        = NSDecimalNumber.init(string: "5.824")
-let BLOCK_TIME_PROVENANCE   = NSDecimalNumber.init(string: "6.3061")
-let BLOCK_TIME_CERBERUS     = NSDecimalNumber.init(string: "5.9666")
-let BLOCK_TIME_OMNIFLIX     = NSDecimalNumber.init(string: "5.7970")
-let BLOCK_TIME_PASSAGE      = NSDecimalNumber.init(string: "5.8680")
-
 
 //NFT Denom Default config
 let STATION_NFT_DENOM           = "station";

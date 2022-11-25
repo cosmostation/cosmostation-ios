@@ -27,6 +27,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
     var ibcToChain = Array<ChainConfig>()
     var starnameDomains = Array<String>()
     var feeData = Array<FeeData>()
+    var hostZones = Array<Stride_Stakeibc_HostZone>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,6 +99,9 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_PRICE_COLOR) {
             self.popupTitle.text = NSLocalizedString("str_select_price_color", comment: "")
+            
+        } else if (type == SELECT_LIQUIDITY_STAKE || type == SELECT_LIQUIDITY_UNSTAKE) {
+            self.popupTitle.text = NSLocalizedString("str_select_coin", comment: "")
         }
     }
     
@@ -127,6 +131,8 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             esHeight = (CGFloat)((feeData.count * 55) + 55)
         } else if (type == SELECT_POPUP_COIN_LIST) {
             esHeight = (CGFloat)((toCoins.count * 55) + 55)
+        } else if (type == SELECT_LIQUIDITY_STAKE || type == SELECT_LIQUIDITY_UNSTAKE) {
+            esHeight = (CGFloat)((hostZones.count * 55) + 55)
         } else if (type == SELECT_POPUP_PRICE_COLOR) {
             cardView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.size.width, height: 165)
             cardView.layoutIfNeeded()
@@ -165,6 +171,8 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             return toCoins.count
         } else if (type == SELECT_POPUP_PRICE_COLOR) {
             return 2
+        } else if (type == SELECT_LIQUIDITY_STAKE || type == SELECT_LIQUIDITY_UNSTAKE) {
+            return hostZones.count
         }
         return 0
     }
@@ -351,6 +359,20 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
                 cell?.upColorImg.image = UIImage.init(named: "iconPriceRed")
                 cell?.downColorImg.image = UIImage.init(named: "iconPriceGreen")
             }
+            return cell!
+            
+        } else if (type == SELECT_LIQUIDITY_STAKE) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
+            let denom = hostZones[indexPath.row].ibcDenom
+            WDP.dpSymbolImg(chainConfig, denom, cell!.coinImg)
+            WDP.dpSymbol(chainConfig, denom, cell!.coinTitle)
+            return cell!
+            
+        } else if (type == SELECT_LIQUIDITY_UNSTAKE) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
+            let denom = "st" + hostZones[indexPath.row].hostDenom
+            WDP.dpSymbolImg(chainConfig, denom, cell!.coinImg)
+            WDP.dpSymbol(chainConfig, denom, cell!.coinTitle)
             return cell!
             
         } else {

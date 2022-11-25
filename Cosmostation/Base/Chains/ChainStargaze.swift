@@ -36,9 +36,6 @@ class ChainStargaze: ChainConfig {
     var validatorPrefix = "starsvaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.0ustars"
-    let gasRate1 = "0.0025ustars"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -73,13 +70,5 @@ class ChainStargaze: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://mirror.xyz/stargazezone.eth"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1]
-    }
-    
-    func getGasDefault() -> Int {
-        return 1
     }
 }

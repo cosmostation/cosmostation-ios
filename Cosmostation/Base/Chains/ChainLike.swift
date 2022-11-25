@@ -37,8 +37,6 @@ class ChainLike: ChainConfig {
     var validatorPrefix = "likevaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "1nanolike"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -73,14 +71,6 @@ class ChainLike: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/likecoin"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }
 

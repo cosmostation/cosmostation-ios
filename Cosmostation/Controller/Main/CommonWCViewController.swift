@@ -590,6 +590,9 @@ class CommonWCViewController: BaseViewController {
         if (!self.isDapp && !self.isDappInternal) {
             self.wcCardView.isHidden = false
             self.wcDisconnectBtn.isHidden = false
+            self.wcLoading.isHidden = false
+            self.wcLoading.onStartAnimation()
+            
         } else {
             self.wcCardView.isHidden = true
             self.wcDisconnectBtn.isHidden = true

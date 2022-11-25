@@ -76,7 +76,11 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     @IBAction func onClickConfirm(_ sender: Any) {
         if (BaseData.instance.isAutoPass()) {
             if (chainConfig?.isGrpc == true) {
-                self.onFetchAuth(account!.account_address)
+                if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
+                    self.onBroadcastEvmTx()
+                } else {
+                    self.onFetchAuth(account!.account_address)
+                }
             } else {
                 self.onFetchAccountInfo(account!)
             }

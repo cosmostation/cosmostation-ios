@@ -37,8 +37,6 @@ class ChainSecret: ChainConfig {
     let addressHdPath = "m/44'/118'/0'/0/X"
     var defaultPath = "m/44'/529'/0'/0/X"
     
-    let gasRate0 = "0.25uscrt"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -73,13 +71,5 @@ class ChainSecret: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.scrt.network"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

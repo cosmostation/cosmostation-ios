@@ -85,11 +85,13 @@ class MyDomainViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let starnameAccount = myDomains_gRPC[indexPath.row]
-        let domainDetailVC = DomainDetailViewController(nibName: "DomainDetailViewController", bundle: nil)
-        domainDetailVC.mMyDomain = starnameAccount.name
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(domainDetailVC, animated: true)
+        if (self.myDomains_gRPC.count > 0) {
+            let starnameAccount = myDomains_gRPC[indexPath.row]
+            let domainDetailVC = DomainDetailViewController(nibName: "DomainDetailViewController", bundle: nil)
+            domainDetailVC.mMyDomain = starnameAccount.name
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(domainDetailVC, animated: true)
+        }
     }
     
     func onFetchFinished() {

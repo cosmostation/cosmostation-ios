@@ -36,10 +36,6 @@ class ChainCrescent: ChainConfig {
     var validatorPrefix = "crevaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.01ucre,0.01ubcre"
-    let gasRate1 = "0.02ucre,0.02ubcre"
-    let gasRate2 = "0.05ucre,0.05ubcre"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -74,14 +70,6 @@ class ChainCrescent: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://crescentnetwork.medium.com/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1, gasRate2]
-    }
-    
-    func getGasDefault() -> Int {
-        return 1
     }
 }
 

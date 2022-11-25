@@ -36,10 +36,6 @@ class ChainBand: ChainConfig {
     var validatorPrefix = "bandvaloper"
     var defaultPath = "m/44'/494'/0'/0/X"
     
-    let gasRate0 = "0.00025uband"
-    let gasRate1 = "0.0025uband"
-    let gasRate2 = "0.025uband"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -74,13 +70,5 @@ class ChainBand: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/bandprotocol"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1, gasRate2]
-    }
-    
-    func getGasDefault() -> Int {
-        return 1
     }
 }
