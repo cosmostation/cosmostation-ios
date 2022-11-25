@@ -616,11 +616,36 @@ class CommonWCViewController: BaseViewController {
     }
     
     func onViewUpdate(_ peer: WCPeerMeta) {
-        if let imgUrl = peer.icons.last {
-            self.wcImg.af_setImage(withURL: URL(string: imgUrl)!)
+        if let imgUrl = peer.icons.last, let url = URL(string: imgUrl) {
+            self.wcImg.af_setImage(withURL: url)
+        } else {
+            self.wcImg.image = UIImage(named: "validatorDefault")
         }
         self.wcTitle.text = peer.name
         self.wcUrl.text = peer.url
+        self.wcAddress.text = accountMap.values.map { $0.account_address }.joined(separator: "\n")
+        self.wcCardView.backgroundColor = chainConfig?.chainColorBG
+        if (self.connectType.isDapp()) {
+            self.wcCardView.isHidden = true
+            self.wcDisconnectBtn.isHidden = true
+        } else {
+            self.wcCardView.isHidden = false
+            self.wcDisconnectBtn.isHidden = false
+        }
+    }
+    
+    func onViewUpdate(_ proposal: Session.Proposal) {
+        if let imgUrl = proposal.proposer.icons.last, let url = URL(string: imgUrl) {
+            self.wcImg.af_setImage(withURL: url)
+        } else {
+            self.wcImg.image = UIImage(named: "validatorDefault")
+        }
+        if (proposal.proposer.name.isEmpty) {
+            self.wcTitle.text = NSLocalizedString("title_wallet_connect", comment: "")
+        } else {
+            self.wcTitle.text = proposal.proposer.name
+        }
+        self.wcUrl.text = proposal.proposer.url
         self.wcAddress.text = accountMap.values.map { $0.account_address }.joined(separator: "\n")
         self.wcCardView.backgroundColor = chainConfig?.chainColorBG
         if (self.connectType.isDapp()) {
@@ -1204,6 +1229,13 @@ extension CommonWCViewController {
                 let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events, extensions: extensions)
                 sessionNamespaces[caip2Namespace] = sessionNamespace
                 self.approve(proposalId:  proposal.id, namespaces: sessionNamespaces)
+                self.onViewUpdate(proposal)
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
+                    if (self.connectType.isDapp()) {
+                        self.connectStatus(connected: true)
+                    }
+                    self.hideLoading()
+                })
             }
         }
     }

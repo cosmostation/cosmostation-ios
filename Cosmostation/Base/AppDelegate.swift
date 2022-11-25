@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             url: NSLocalizedString("wc_peer_url", comment: ""),
             icons: [])
 
-        Networking.configure(projectId: "63c00e1ca398a6aaaa517a30594c4559", socketFactory: self)
+        Networking.configure(projectId: Bundle.main.WALLET_CONNECT_API_KEY, socketFactory: self)
         Pair.configure(metadata: metadata)
     }
     
