@@ -144,6 +144,7 @@
 "str_zero" = "무료";
 "str_low" = "낮음";
 "str_tiny" = "최소";
+"str_select_coin" = "코인을 선택하세요";
 
 
 "btn_delegate" = "  위임 하기";

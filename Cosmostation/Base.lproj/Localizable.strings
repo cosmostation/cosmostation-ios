@@ -144,6 +144,7 @@
 "str_zero" = "Zero";
 "str_low" = "Low";
 "str_tiny" = "Tiny";
+"str_select_coin" = "Select Coin.";
 
 
 "btn_delegate" = "  Delegate";

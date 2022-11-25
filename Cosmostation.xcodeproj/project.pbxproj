@@ -1366,6 +1366,10 @@
 		04FCD2FE292F94D900BA5349 /* LiquidityStakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2FC292F94D900BA5349 /* LiquidityStakingViewController.swift */; };
 		04FCD300292F94E600BA5349 /* LiquidityUnstakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2FF292F94E600BA5349 /* LiquidityUnstakingViewController.swift */; };
 		04FCD301292F94E600BA5349 /* LiquidityUnstakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2FF292F94E600BA5349 /* LiquidityUnstakingViewController.swift */; };
+		04FCD30529306C7600BA5349 /* UserRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD30329306C7600BA5349 /* UserRecordCell.swift */; };
+		04FCD30629306C7600BA5349 /* UserRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD30329306C7600BA5349 /* UserRecordCell.swift */; };
+		04FCD30729306C7600BA5349 /* UserRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FCD30429306C7600BA5349 /* UserRecordCell.xib */; };
+		04FCD30829306C7600BA5349 /* UserRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FCD30429306C7600BA5349 /* UserRecordCell.xib */; };
 		04FD713828B8B3C80059E88B /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD713628B8B3C80059E88B /* AssetCell.swift */; };
 		04FD713928B8B3C80059E88B /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD713628B8B3C80059E88B /* AssetCell.swift */; };
 		04FD713A28B8B3C80059E88B /* AssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD713728B8B3C80059E88B /* AssetCell.xib */; };
@@ -3897,6 +3901,8 @@
 		04FCD2F3292F93AD00BA5349 /* StrideDappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrideDappViewController.swift; sourceTree = "<group>"; };
 		04FCD2FC292F94D900BA5349 /* LiquidityStakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidityStakingViewController.swift; sourceTree = "<group>"; };
 		04FCD2FF292F94E600BA5349 /* LiquidityUnstakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidityUnstakingViewController.swift; sourceTree = "<group>"; };
+		04FCD30329306C7600BA5349 /* UserRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecordCell.swift; sourceTree = "<group>"; };
+		04FCD30429306C7600BA5349 /* UserRecordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserRecordCell.xib; sourceTree = "<group>"; };
 		04FD713628B8B3C80059E88B /* AssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
 		04FD713728B8B3C80059E88B /* AssetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCell.xib; sourceTree = "<group>"; };
 		106166B99D48E1E1E23A50A9 /* Pods-CosmostationDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.release.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.release.xcconfig"; sourceTree = "<group>"; };
@@ -4752,6 +4758,15 @@
 				04FCD2F3292F93AD00BA5349 /* StrideDappViewController.swift */,
 				04FCD2FC292F94D900BA5349 /* LiquidityStakingViewController.swift */,
 				04FCD2FF292F94E600BA5349 /* LiquidityUnstakingViewController.swift */,
+			);
+			path = stride;
+			sourceTree = "<group>";
+		};
+		04FCD30229306C4100BA5349 /* stride */ = {
+			isa = PBXGroup;
+			children = (
+				04FCD30329306C7600BA5349 /* UserRecordCell.swift */,
+				04FCD30429306C7600BA5349 /* UserRecordCell.xib */,
 			);
 			path = stride;
 			sourceTree = "<group>";
@@ -6363,6 +6378,7 @@
 		E1A82DF12244EC1C0097CAEE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				04FCD30229306C4100BA5349 /* stride */,
 				04547BE82786AF0500011984 /* desmos */,
 				04E25D432770D53F009B39BA /* nft */,
 				28D809BA26A177830030B1BE /* osmosis */,
@@ -6929,6 +6945,7 @@
 				18FFB7CE281AF533004E65BB /* GenProfile3ViewController.xib in Resources */,
 				045DADA3289BA1F0004ED9B4 /* AuthzRedelegate2ViewController.xib in Resources */,
 				18FFB7CF281AF533004E65BB /* ResourceChainCell.xib in Resources */,
+				04FCD30829306C7600BA5349 /* UserRecordCell.xib in Resources */,
 				18FFB7D0281AF533004E65BB /* WalletOkCell.xib in Resources */,
 				045DADA9289BA1FC004ED9B4 /* AuthzRedelegate5ViewController.xib in Resources */,
 				E198292C290E97C200451A81 /* KavaLiquidity1ViewController.xib in Resources */,
@@ -7300,6 +7317,7 @@
 				2807DB3E2788182F00016571 /* GenProfile3ViewController.xib in Resources */,
 				045DADA2289BA1F0004ED9B4 /* AuthzRedelegate2ViewController.xib in Resources */,
 				280E1F2B254AD3A80007BA7D /* ResourceChainCell.xib in Resources */,
+				04FCD30729306C7600BA5349 /* UserRecordCell.xib in Resources */,
 				283D2EB024F5742000247424 /* WalletOkCell.xib in Resources */,
 				045DADA8289BA1FC004ED9B4 /* AuthzRedelegate5ViewController.xib in Resources */,
 				E198292B290E97C200451A81 /* KavaLiquidity1ViewController.xib in Resources */,
@@ -7440,6 +7458,7 @@
 				18FFB277281AF533004E65BB /* DecimalViewController.swift in Sources */,
 				18F811BB282E1FD7008AF0D2 /* WalletStationCell.swift in Sources */,
 				18FFB278281AF533004E65BB /* WalletDetailViewController.swift in Sources */,
+				04FCD30629306C7600BA5349 /* UserRecordCell.swift in Sources */,
 				1817CB6B283E2CE500523713 /* cosmos_bank_v1beta1_tx.grpc.swift in Sources */,
 				04C5AEB428633D47007627EA /* Vote4ViewController.swift in Sources */,
 				04E6ABC82863589E008DC3C7 /* CdpDrawDebt4ViewController.swift in Sources */,
@@ -9475,6 +9494,7 @@
 				04E1912C28E66F5800C98A6B /* UIViewController+Toast.swift in Sources */,
 				283439A42531D1DF00CCFADE /* MyAccountViewController.swift in Sources */,
 				28B37D2C26D8EB42008AACD2 /* KavaSwapViewController.swift in Sources */,
+				04FCD30529306C7600BA5349 /* UserRecordCell.swift in Sources */,
 				040FA7C3275F55C200229F6F /* tendermint_types_params.pb.swift in Sources */,
 				045DADAC289BCF4B004ED9B4 /* AuthzSend1ViewController.swift in Sources */,
 				E10A7560287E612100BC66BC /* WalletMediblocEventCell.swift in Sources */,
