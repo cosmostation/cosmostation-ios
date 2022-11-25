@@ -97,7 +97,7 @@ class LiquidStakingViewController: BaseViewController, SBCardPopupDelegate {
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mType = TASK_TYPE_STRIDE_LIQUIDITY_STAKE
         txVC.mChainId = hostZones[selectedPosition].chainID
-        txVC.mToSendDenom = hostZones[selectedPosition].ibcDenom
+        txVC.mSwapInDenom = hostZones[selectedPosition].ibcDenom
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }

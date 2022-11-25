@@ -127,25 +127,25 @@ class LiquidUnstakingViewController: BaseViewController, UITableViewDelegate, UI
             self.onShowToast(NSLocalizedString("error_not_enough_to_balance", comment: ""))
             return
         }
-        
-        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = TASK_TYPE_STRIDE_LIQUIDITY_UNSTAKE
-        txVC.mChainId = hostZones[selectedPosition].chainID
-        txVC.mToSendDenom = "st" + hostZones[selectedPosition].hostDenom
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(txVC, animated: true)
-        
+        self.showAlertUnstaking()
     }
     
     func showAlertUnstaking() {
-        let unstakingAlert = UIAlertController (title: NSLocalizedString("permission_photo_title", comment: "") , message: nil, preferredStyle: .alert)
+        let title = NSLocalizedString("str_tip", comment: "")
+        let msg = NSLocalizedString("msg_liquid_unstake", comment: "")
+        let unstakingAlert = UIAlertController (title: title , message: msg, preferredStyle: .alert)
         unstakingAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)
         let continueAction = UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default) { _ in
-            
+            let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+            txVC.mType = TASK_TYPE_STRIDE_LIQUIDITY_UNSTAKE
+            txVC.mChainId = self.hostZones[self.selectedPosition].chainID
+            txVC.mSwapInDenom = "st" + self.hostZones[self.selectedPosition].hostDenom
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(txVC, animated: true)
         }
-        let settingsAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)
+        unstakingAlert.addAction(cancelAction)
         unstakingAlert.addAction(continueAction)
-        unstakingAlert.addAction(settingsAction)
         self.present(unstakingAlert , animated: true, completion: nil)
     }
     

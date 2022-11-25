@@ -42,7 +42,7 @@ class StrideLiquid0ViewController: BaseViewController, UITextFieldDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         self.txType = pageHolderVC.mType
-        self.inputDenom = pageHolderVC.mToSendDenom
+        self.inputDenom = pageHolderVC.mSwapInDenom
         self.chainId = pageHolderVC.mChainId
         
         inputTextFiled.delegate = self
@@ -124,10 +124,6 @@ class StrideLiquid0ViewController: BaseViewController, UITextFieldDelegate {
             inputTextFiled.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        if (userInput.compare(NSDecimalNumber.init(string: "0.01")).rawValue < 0) {
-            inputTextFiled.layer.borderColor = UIColor.warnRed.cgColor
-            return
-        }
         if (userInput.multiplying(byPowerOf10: inputDecimal).compare(maxAmount).rawValue > 0) {
             inputTextFiled.layer.borderColor = UIColor.warnRed.cgColor
             return
@@ -190,6 +186,8 @@ class StrideLiquid0ViewController: BaseViewController, UITextFieldDelegate {
             pageHolderVC.mStride_Stakeibc_HostZone = self.hostZones
             sender.isUserInteractionEnabled = false
             pageHolderVC.onNextPage()
+        } else {
+            self.onShowToast(NSLocalizedString("error_amount", comment: ""))
         }
     }
     
@@ -201,6 +199,10 @@ class StrideLiquid0ViewController: BaseViewController, UITextFieldDelegate {
         if (userInput.multiplying(byPowerOf10: inputDecimal).compare(maxAmount).rawValue > 0) {
             return false
         }
+        let out = outputCoinAmountLabel.text?.trimmingCharacters(in: .whitespaces)
+        if (out == nil || out!.count == 0) { return false }
+        let userOutput = WUtils.localeStringToDecimal(out!)
+        if (userOutput == NSDecimalNumber.zero) { return false }
         return true
     }
     

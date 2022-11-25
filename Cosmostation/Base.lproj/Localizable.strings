@@ -148,6 +148,7 @@
 "str_unstaking_history" = "Unstaking Histories";
 "str_insert_amount" = "Insert Amount";
 "str_estimate_withdraw_amount" = "Withdraw Amount(est)";
+"str_tip" = "tip";
 
 
 "btn_delegate" = "  Delegate";
@@ -198,6 +199,7 @@
 "msg_memo" = "Please check your memo.\nSome exchanges or wallets may require a specific memo for deposits.";
 "msg_fee1" = "Tx Fee is charged by the network.";
 "msg_fee2" = "Cosmostation Wallet service is free to use, and the Tx fee you pay is distributed to all validators and community pool.";
+"msg_liquid_unstake" = "Unstaking requires a period set by origin chain(14-28 days).\n\nYou can instantly convert st assets into original assets in Osmosis Dex.";
 
 
 "guide_title_cosmos" = "COSMOS HUB";
@@ -374,8 +376,6 @@
 "tx_liquid_staking_0" = "Enter staking amount";
 "tx_liquid_unstaking_0" = "Enter unstaking amount";
 "tx_liquid_unstaking_1" = "Enter recipient Address";
-
-
 
 
 
@@ -818,9 +818,6 @@ support@cosmostation.io";
 "error_max_30_validator" = "You can select Max 30 Validators.";
 "error_invalid_private_Key" = "Invalid private key.";
 "error_simul_error" = "This is a non-executable Tx.";
-
-"alert_title_no_private_key" = "No Private Key";
-"alert_msg_no_private_key" = "This account has only address with watch mode.\nYou need to add mnemonics for generate transaction.";
 "error_reward_address_changed_title" = "Reward Address Changed";
 "error_reward_address_changed_msg" = "This account has changed its reward address.\nYou can use compounding feature after reset your reward address to self.";
 "error_duple_address" = "This address is already imported.";
@@ -891,7 +888,11 @@ support@cosmostation.io";
 "error_no_mnemonic" = "Only private key imported";
 "error_no_selected_proposal" = "Please select proposals to vote";
 "error_no_authz_type" = "No auth for this type";
-"error_not_enough_liquid_stake" = "Not enough balance.\nYou can IBC send this asset form original chain and continue";
+"error_not_enough_liquid_stake" = "Not enough balance.\nIBC transfer this asset from origin chain to continue";
+
+
+"alert_title_no_private_key" = "No Private Key";
+"alert_msg_no_private_key" = "This account has only address with watch mode.\nYou need to add mnemonics for generate transaction.";
 
 "theme_system" = "System";
 "theme_light" = "Light";

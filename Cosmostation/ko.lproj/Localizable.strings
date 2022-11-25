@@ -148,6 +148,7 @@
 "str_unstaking_history" = "언스테이킹 기록";
 "str_insert_amount" = "입금 수량";
 "str_estimate_withdraw_amount" = "출금 수량(예상)";
+"str_tip" = "팁";
 
 
 "btn_delegate" = "  위임 하기";
@@ -198,6 +199,7 @@
 "msg_memo" = "메모를 확인하세요.\n일부 거래소나 지갑에서는 입금을 위해 특정 메모가 필요할 수 있습니다.";
 "msg_fee1" = "Tx 수수료는 체인에 지불됩니다.";
 "msg_fee2" = "코스모스테이션 월렛 서비스는 무료로 사용 가능하며, 지불한 Tx 수수료는 모든 검증인과 커뮤니티 풀에 분배됩니다.";
+"msg_liquid_unstake" = "언스테이킹이 완료되려면 원 체인이 설정한 기간이 필요합니다(14~28일).\n\nOsmosis Dex에서 st자산을 즉시 원 자산으로 바꾸실 수 있습니다.";
 
 
 "guide_title_cosmos" = "COSMOS HUB";
@@ -881,8 +883,6 @@ support@cosmostation.io";
 "error_no_selected_proposal" = "투표하실 프로포절을 선택하세요.";
 "error_no_authz_type" = "이 타입에 대한 권한이 없습니다.";
 "error_not_enough_liquid_stake" = "발란스가 충분하지 않습니다.\n원 체인으로 부터 IBC전송을 완료하신후 계속 진행하실 수 있습니다.";
-
-
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";
