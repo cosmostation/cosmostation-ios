@@ -216,7 +216,7 @@ public struct ApiHistoryNewCustom {
                     result = NSLocalizedString("tx_stride_liquid_stake", comment: "")
                 
                 } else if (msgType.contains("MsgRedeemStake")) {
-                    result = NSLocalizedString("tx_stride_redeem_stake", comment: "")
+                    result = NSLocalizedString("tx_stride_liquid_unstake", comment: "")
                 }
             }
             

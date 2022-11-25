@@ -1382,6 +1382,10 @@
 		04FCD3192930D42200BA5349 /* StrideLiquid1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD3162930D42200BA5349 /* StrideLiquid1ViewController.swift */; };
 		04FCD31A2930D42200BA5349 /* StrideLiquid1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FCD3172930D42200BA5349 /* StrideLiquid1ViewController.xib */; };
 		04FCD31B2930D42200BA5349 /* StrideLiquid1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FCD3172930D42200BA5349 /* StrideLiquid1ViewController.xib */; };
+		04FCD31F2930EB9400BA5349 /* TxLiquidStakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD31D2930EB9400BA5349 /* TxLiquidStakeCell.swift */; };
+		04FCD3202930EB9400BA5349 /* TxLiquidStakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD31D2930EB9400BA5349 /* TxLiquidStakeCell.swift */; };
+		04FCD3212930EB9400BA5349 /* TxLiquidStakeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FCD31E2930EB9400BA5349 /* TxLiquidStakeCell.xib */; };
+		04FCD3222930EB9400BA5349 /* TxLiquidStakeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FCD31E2930EB9400BA5349 /* TxLiquidStakeCell.xib */; };
 		04FD713828B8B3C80059E88B /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD713628B8B3C80059E88B /* AssetCell.swift */; };
 		04FD713928B8B3C80059E88B /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD713628B8B3C80059E88B /* AssetCell.swift */; };
 		04FD713A28B8B3C80059E88B /* AssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD713728B8B3C80059E88B /* AssetCell.xib */; };
@@ -3921,6 +3925,8 @@
 		04FCD3112930AB0400BA5349 /* StrideLiquid4ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StrideLiquid4ViewController.xib; sourceTree = "<group>"; };
 		04FCD3162930D42200BA5349 /* StrideLiquid1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrideLiquid1ViewController.swift; sourceTree = "<group>"; };
 		04FCD3172930D42200BA5349 /* StrideLiquid1ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StrideLiquid1ViewController.xib; sourceTree = "<group>"; };
+		04FCD31D2930EB9400BA5349 /* TxLiquidStakeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxLiquidStakeCell.swift; sourceTree = "<group>"; };
+		04FCD31E2930EB9400BA5349 /* TxLiquidStakeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxLiquidStakeCell.xib; sourceTree = "<group>"; };
 		04FD713628B8B3C80059E88B /* AssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
 		04FD713728B8B3C80059E88B /* AssetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCell.xib; sourceTree = "<group>"; };
 		106166B99D48E1E1E23A50A9 /* Pods-CosmostationDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.release.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.release.xcconfig"; sourceTree = "<group>"; };
@@ -4802,6 +4808,15 @@
 			path = stride;
 			sourceTree = "<group>";
 		};
+		04FCD31C2930EB6400BA5349 /* stride */ = {
+			isa = PBXGroup;
+			children = (
+				04FCD31D2930EB9400BA5349 /* TxLiquidStakeCell.swift */,
+				04FCD31E2930EB9400BA5349 /* TxLiquidStakeCell.xib */,
+			);
+			path = stride;
+			sourceTree = "<group>";
+		};
 		2807DB36278817D600016571 /* desmos */ = {
 			isa = PBXGroup;
 			children = (
@@ -5598,6 +5613,7 @@
 		284D17F32535D69000C364F9 /* txs */ = {
 			isa = PBXGroup;
 			children = (
+				04FCD31C2930EB6400BA5349 /* stride */,
 				0444442E27AC030700EB093E /* wasm */,
 				04983CA1278C24A500F913A3 /* desmos */,
 				046BD22927795C9B002333B5 /* nft */,
@@ -6952,6 +6968,7 @@
 				18FFB7B7281AF533004E65BB /* DesmosProfileInfoCell.xib in Resources */,
 				18FFB7B8281AF533004E65BB /* Bep3SupplyPopup.xib in Resources */,
 				18FFB7BA281AF533004E65BB /* WalletCrescentCell.xib in Resources */,
+				04FCD3222930EB9400BA5349 /* TxLiquidStakeCell.xib in Resources */,
 				0443B8722852FB000027A6B9 /* SwitchAccountHeader.xib in Resources */,
 				18FFB7BB281AF533004E65BB /* FarmingDetailViewController.xib in Resources */,
 				0454AE4D2928D71400EC657D /* TxEvmCell.xib in Resources */,
@@ -7327,6 +7344,7 @@
 				2812956F250F81C3007B217E /* SelectCoinCell.xib in Resources */,
 				04E25D3E276F7574009B39BA /* NFTListCell.xib in Resources */,
 				28E8FAEC2716F190005EAA9B /* SelectTextCell.xib in Resources */,
+				04FCD3212930EB9400BA5349 /* TxLiquidStakeCell.xib in Resources */,
 				28474ED6241E06AF00AF5A81 /* TxCdpDepositCell.xib in Resources */,
 				046BD22D27795CC6002333B5 /* TxIssueNFTCell.xib in Resources */,
 				0454AE4C2928D71400EC657D /* TxEvmCell.xib in Resources */,
@@ -8429,6 +8447,7 @@
 				18FFB5FE281AF533004E65BB /* RegisterAccount1ViewController.swift in Sources */,
 				18FFB5FF281AF533004E65BB /* OkTopValidatorViewController.swift in Sources */,
 				0451FC77282A3AC000214FDA /* ChainIris.swift in Sources */,
+				04FCD3202930EB9400BA5349 /* TxLiquidStakeCell.swift in Sources */,
 				1817CBBA283E2CE500523713 /* sifnode_ethbridge_v1_query.grpc.swift in Sources */,
 				18FFB603281AF533004E65BB /* HardPoolWithdraw3ViewController.swift in Sources */,
 				0454AE352927459300EC657D /* ethermint_evm_v1_query.pb.swift in Sources */,
@@ -8740,6 +8759,7 @@
 				E151B636224533F90026B8C0 /* PromotionCell.swift in Sources */,
 				283D2EAA24F56AEE00247424 /* OkStaking.swift in Sources */,
 				040FA98C275F55C300229F6F /* ibc_core_channel_v1_genesis.pb.swift in Sources */,
+				04FCD31F2930EB9400BA5349 /* TxLiquidStakeCell.swift in Sources */,
 				04D3390527E826F100E82AA7 /* crescent_liquidstaking_v1beta1_tx.grpc.swift in Sources */,
 				040FA86C275F55C200229F6F /* starname_cosmwasm_wasm_v1_query.grpc.swift in Sources */,
 				040FA979275F55C300229F6F /* tendermint_libs_bits_types.pb.swift in Sources */,

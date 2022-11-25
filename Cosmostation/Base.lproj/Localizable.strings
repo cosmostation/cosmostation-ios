@@ -1114,7 +1114,7 @@ support@cosmostation.io";
 "tx_injective_cancel_spot_order" = "Cancel Spot Order";
 
 "tx_stride_liquid_stake" = "Liquid Stake";
-"tx_stride_redeem_stake" = "Liquid Unstake";
+"tx_stride_liquid_unstake" = "Liquid Unstake";
 
 "tx_known" = "Unknown";
 

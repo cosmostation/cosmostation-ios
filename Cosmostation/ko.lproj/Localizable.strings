@@ -1108,7 +1108,7 @@ support@cosmostation.io";
 "tx_injective_cancel_spot_order" = "주문 취소\n(Spot Limit)";
 
 "tx_stride_liquid_stake" = "유동성 스테이크";
-"tx_stride_redeem_stake" = "유동성 언스테이크";
+"tx_stride_liquid_unstake" = "유동성 언스테이크";
 
 "tx_known" = "알 수 없음";
 
