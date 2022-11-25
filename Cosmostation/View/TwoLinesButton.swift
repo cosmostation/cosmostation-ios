@@ -41,7 +41,7 @@ final class TwoLinesButton: UIButton {
         attributedString.append(NSAttributedString(string: firstLineTitle, attributes: labelAttribute))
         
         let textAttribute = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
             NSAttributedString.Key.foregroundColor: secondLineColor ?? .white,
             NSAttributedString.Key.paragraphStyle: paragraph
         ]

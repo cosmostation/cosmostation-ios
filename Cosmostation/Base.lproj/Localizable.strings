@@ -148,7 +148,7 @@
 "str_unstaking_history" = "Unstaking Histories";
 "str_insert_amount" = "Insert Amount";
 "str_estimate_withdraw_amount" = "Withdraw Amount(est)";
-"str_tip" = "tip";
+"str_tip" = "Tip";
 
 
 "btn_delegate" = "  Delegate";
