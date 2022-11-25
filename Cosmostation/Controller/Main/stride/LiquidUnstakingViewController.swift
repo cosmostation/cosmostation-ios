@@ -137,6 +137,18 @@ class LiquidUnstakingViewController: BaseViewController, UITableViewDelegate, UI
         
     }
     
+    func showAlertUnstaking() {
+        let unstakingAlert = UIAlertController (title: NSLocalizedString("permission_photo_title", comment: "") , message: nil, preferredStyle: .alert)
+        unstakingAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
+        let continueAction = UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default) { _ in
+            
+        }
+        let settingsAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)
+        unstakingAlert.addAction(continueAction)
+        unstakingAlert.addAction(settingsAction)
+        self.present(unstakingAlert , animated: true, completion: nil)
+    }
+    
     func onFetchUserHistory() {
         DispatchQueue.global().async {
             do {

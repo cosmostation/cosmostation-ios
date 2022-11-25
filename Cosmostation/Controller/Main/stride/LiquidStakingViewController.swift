@@ -90,7 +90,7 @@ class LiquidStakingViewController: BaseViewController, SBCardPopupDelegate {
         }
         
         if (availableMaxAmount.compare(NSDecimalNumber.zero).rawValue <= 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_to_balance", comment: ""))
+            self.onShowToast(NSLocalizedString("error_not_enough_liquid_stake", comment: ""))
             return
         }
         

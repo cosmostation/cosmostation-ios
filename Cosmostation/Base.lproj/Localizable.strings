@@ -891,6 +891,7 @@ support@cosmostation.io";
 "error_no_mnemonic" = "Only private key imported";
 "error_no_selected_proposal" = "Please select proposals to vote";
 "error_no_authz_type" = "No auth for this type";
+"error_not_enough_liquid_stake" = "Not enough balance.\nYou can IBC send this asset form original chain and continue";
 
 "theme_system" = "System";
 "theme_light" = "Light";
