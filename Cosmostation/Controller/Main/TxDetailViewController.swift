@@ -75,7 +75,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
 
         } else {
             //TODO TEST HASH for KAVA 
-//            mTxHash = "83D7BCB9D3F686ECF164C00388DFC052FD2D88F499532C58131C35630F79DF2F"
+//            mTxHash = "96C56A5DC1C922CB18945C2EF6735F5A2E815A7A3B2932ECC627ED37DCC6102C"
 //            self.loadingMsg.isHidden = true
 //            self.loadingImg.onStartAnimation()
 //            self.onFetchTx(mTxHash!)
@@ -277,7 +277,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onBindOkStake(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
         let cell:TxOkStakeCell? = tableView.dequeueReusableCell(withIdentifier:"TxOkStakeCell") as? TxOkStakeCell
         let msg = mTxInfo?.getMsg(position - 1)
-        if (msg?.type == TASK_TYPE_OK_DEPOSIT) {
+        if (msg?.type == "okexchain/staking/MsgDeposit") {
             cell?.txIcon.image = UIImage(named: "msgIconCDP")
             cell?.txLabel.text = NSLocalizedString("title_ok_deposit", comment: "")
         } else {

@@ -254,13 +254,11 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                                                      self.pageHolderVC.mRecipinetAddress!,
                                                      self.pageHolderVC.mToSendAmount,
                                                      self.chainType!)
-                var msgList = Array<Msg>()
-                msgList.append(msg)
                 
                 let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
                                                        String(self.pageHolderVC.mAccount!.account_account_numner),
                                                        String(self.pageHolderVC.mAccount!.account_sequence_number),
-                                                       msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+                                                       [msg], self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
                 
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .sortedKeys
@@ -285,7 +283,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                     var signatures: Array<Signature> = Array<Signature>()
                     signatures.append(genedSignature)
                     
-                    stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
+                    stdTx = MsgGenerator.genSignedTx([msg], self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
                     
                 } else {
                     print("Ether Type")
@@ -304,7 +302,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                     var signatures: Array<Signature> = Array<Signature>()
                     signatures.append(genedSignature)
                     
-                    stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
+                    stdTx = MsgGenerator.genSignedTx([msg], self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
                 }
                 
             } catch {

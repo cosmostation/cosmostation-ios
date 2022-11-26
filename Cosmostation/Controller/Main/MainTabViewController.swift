@@ -461,7 +461,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchAccountInfo(_ account: Account) {
+        print("onFetchAccountInfo ", account.account_address)
         let request = Alamofire.request(BaseNetWork.accountInfoUrl(mChainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
+        print("request ", request.request?.url)
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):

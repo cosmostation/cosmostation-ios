@@ -94,14 +94,13 @@ class OkWithdraw4ViewController: BaseViewController, PasswordViewDelegate {
         DispatchQueue.global().async {
             var stdTx:StdTx!
             do {
-                let msg = MsgGenerator.genOkWithdarwMsg(self.pageHolderVC.mAccount!.account_address, self.pageHolderVC.mOkToWithdraw)
-                var msgList = Array<Msg>()
-                msgList.append(msg)
+                let msg = MsgGenerator.genOkWithdarwMsg(self.pageHolderVC.mAccount!.account_address,
+                                                        self.pageHolderVC.mOkToWithdraw)
                 
                 let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
                                                        String(self.pageHolderVC.mAccount!.account_account_numner),
                                                        String(self.pageHolderVC.mAccount!.account_sequence_number),
-                                                       msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+                                                       [msg], self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
                 
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .sortedKeys
@@ -126,7 +125,7 @@ class OkWithdraw4ViewController: BaseViewController, PasswordViewDelegate {
                     var signatures: Array<Signature> = Array<Signature>()
                     signatures.append(genedSignature)
                     
-                    stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
+                    stdTx = MsgGenerator.genSignedTx([msg], self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
                     
                 } else {
                     print("Ether Type")
@@ -145,7 +144,7 @@ class OkWithdraw4ViewController: BaseViewController, PasswordViewDelegate {
                     var signatures: Array<Signature> = Array<Signature>()
                     signatures.append(genedSignature)
                     
-                    stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
+                    stdTx = MsgGenerator.genSignedTx([msg], self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
                 }
                 
             } catch {
