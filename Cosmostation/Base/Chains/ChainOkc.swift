@@ -46,7 +46,7 @@ class ChainOkc: ChainConfig {
     var kadoMoneySupoort = false
     var grpcUrl = ""
     var grpcPort = -1
-    var rpcUrl = ""
+    var rpcUrl = "https://exchainrpc.okex.org"
     var lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
     var apiUrl = ""
     var explorerUrl = "https://www.oklink.com/okexchain/"

@@ -1911,7 +1911,6 @@
 		18FFB383281AF533004E65BB /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E171A06A225B04BD00C5756C /* TransactionViewController.swift */; };
 		18FFB384281AF533004E65BB /* SelectRelayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894106626FF1307005BCBE4 /* SelectRelayerCell.swift */; };
 		18FFB386281AF533004E65BB /* CommonWCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */; };
-		18FFB388281AF533004E65BB /* OkTickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F8C8D25CFB27D00317B30 /* OkTickerList.swift */; };
 		18FFB38E281AF533004E65BB /* CommonMyPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E4DB126E5D777007C7C35 /* CommonMyPoolCell.swift */; };
 		18FFB390281AF533004E65BB /* NativeTokenGrpcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B2E4B926CFB94800ECF960 /* NativeTokenGrpcViewController.swift */; };
 		18FFB393281AF533004E65BB /* CdpListAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2842AB70242C7C8A00248EEB /* CdpListAllCell.swift */; };
@@ -2601,7 +2600,6 @@
 		285A33EB24486DB60052BD3D /* HtlcResultClaimCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285A33E924486DB60052BD3D /* HtlcResultClaimCell.xib */; };
 		285ADF0D272EE35F0023651F /* CKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285ADF0C272EE35F0023651F /* CKey.swift */; };
 		285F8C8B25CFB21000317B30 /* OkTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F8C8A25CFB21000317B30 /* OkTicker.swift */; };
-		285F8C8E25CFB27D00317B30 /* OkTickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F8C8D25CFB27D00317B30 /* OkTickerList.swift */; };
 		28641F2C2601959E000AAEB8 /* TxDetailgRPCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28641F2A2601959E000AAEB8 /* TxDetailgRPCViewController.swift */; };
 		28641F2D2601959E000AAEB8 /* TxDetailgRPCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28641F2B2601959E000AAEB8 /* TxDetailgRPCViewController.xib */; };
 		28641F302601AD59000AAEB8 /* TxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28641F2F2601AD59000AAEB8 /* TxCell.swift */; };
@@ -4156,7 +4154,6 @@
 		285A33E924486DB60052BD3D /* HtlcResultClaimCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HtlcResultClaimCell.xib; sourceTree = "<group>"; };
 		285ADF0C272EE35F0023651F /* CKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKey.swift; sourceTree = "<group>"; };
 		285F8C8A25CFB21000317B30 /* OkTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkTicker.swift; sourceTree = "<group>"; };
-		285F8C8D25CFB27D00317B30 /* OkTickerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkTickerList.swift; sourceTree = "<group>"; };
 		28641F2A2601959E000AAEB8 /* TxDetailgRPCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxDetailgRPCViewController.swift; sourceTree = "<group>"; };
 		28641F2B2601959E000AAEB8 /* TxDetailgRPCViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxDetailgRPCViewController.xib; sourceTree = "<group>"; };
 		28641F2F2601AD59000AAEB8 /* TxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxCell.swift; sourceTree = "<group>"; };
@@ -6389,7 +6386,6 @@
 				2812956A250F52C8007B217E /* KavaSwapSupply2.swift */,
 				28129566250F5072007B217E /* KavaSwapParam2.swift */,
 				283D2EA524F5308900247424 /* OkTokenList.swift */,
-				285F8C8D25CFB27D00317B30 /* OkTickerList.swift */,
 				283D2EA724F5388C00247424 /* OkAccountToken.swift */,
 				283D2EA924F56AEE00247424 /* OkStaking.swift */,
 				283D2EAB24F56AFF00247424 /* OkUnbonding.swift */,
@@ -7777,7 +7773,6 @@
 				18FFB386281AF533004E65BB /* CommonWCViewController.swift in Sources */,
 				04E6ABA52863581C008DC3C7 /* CdpCreate1ViewController.swift in Sources */,
 				04C5AE9C28632EDA007627EA /* ReInvest4ViewController.swift in Sources */,
-				18FFB388281AF533004E65BB /* OkTickerList.swift in Sources */,
 				0451FC83282A3AC700214FDA /* ChainKi.swift in Sources */,
 				1817CB81283E2CE500523713 /* osmosis_incentives_tx.pb.swift in Sources */,
 				18FFB38E281AF533004E65BB /* CommonMyPoolCell.swift in Sources */,
@@ -8893,7 +8888,6 @@
 				2894106826FF1307005BCBE4 /* SelectRelayerCell.swift in Sources */,
 				04FCD2A1292E2CEF00BA5349 /* stride_icacallbacks_tx.grpc.swift in Sources */,
 				04C53944274B41FE00C1EE83 /* CommonWCViewController.swift in Sources */,
-				285F8C8E25CFB27D00317B30 /* OkTickerList.swift in Sources */,
 				0454AE402927459300EC657D /* ethermint_feemarket_v1_query.grpc.swift in Sources */,
 				0451FC5E282A39D000214FDA /* ChainAkash.swift in Sources */,
 				040FA849275F55C200229F6F /* ibc_core_port_v1_query.grpc.swift in Sources */,
