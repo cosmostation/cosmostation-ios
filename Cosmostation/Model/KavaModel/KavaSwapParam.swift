@@ -1,5 +1,5 @@
 //
-//  KavaSwapParam2.swift
+//  KavaSwapParam.swift
 //  Cosmostation
 //
 //  Created by 정용주 on 2020/09/14.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class KavaSwapParam2 {
+public class KavaSwapParam {
     var height: String = ""
     var result: KavaBep3AssetParams = KavaBep3AssetParams.init()
     

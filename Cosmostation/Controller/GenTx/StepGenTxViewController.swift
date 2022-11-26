@@ -99,8 +99,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mHtlcToAccount: Account?
     var mHtlcSendFee: Fee?
     var mHtlcClaimFee: Fee?
-    var mKavaSwapParam2: KavaSwapParam2?
-    var mKavaSwapSupply2: KavaSwapSupply2?
+    var mKavaSwapParam: KavaSwapParam?
+    var mKavaSwapSupply: KavaSwapSupply?
     
     
     var mSwapRemainCap: NSDecimalNumber = NSDecimalNumber.zero
