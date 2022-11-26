@@ -26,7 +26,7 @@ class OkDeposit4ViewController: BaseViewController, PasswordViewDelegate, SBCard
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
-        pageHolderVC = self.parent as? StepGenTxViewController
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         WUtils.setDenomTitle(chainType, toDepositAmountDenom)
         WUtils.setDenomTitle(chainType, feeAmountDenom)
     }
