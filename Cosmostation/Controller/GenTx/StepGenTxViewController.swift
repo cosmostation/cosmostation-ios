@@ -99,8 +99,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mHtlcToAccount: Account?
     var mHtlcSendFee: Fee?
     var mHtlcClaimFee: Fee?
-    var mKavaSwapParam2: KavaSwapParam2?
-    var mKavaSwapSupply2: KavaSwapSupply2?
+    var mKavaSwapParam: KavaSwapParam?
+    var mKavaSwapSupply: KavaSwapSupply?
     
     
     var mSwapRemainCap: NSDecimalNumber = NSDecimalNumber.zero
@@ -155,6 +155,9 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mGranterData: GranterData?
     
     var mEthereumTransaction: EthereumTransaction?
+    
+    var mChainId: String?
+    var mStride_Stakeibc_HostZone: Stride_Stakeibc_HostZone?
     
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == TASK_TYPE_TRANSFER) {
@@ -497,10 +500,20 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                    MemoViewController(nibName: "MemoViewController", bundle: nil),
                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                    AuthzSend5ViewController(nibName: "AuthzSend5ViewController", bundle: nil)]
+           
+       } else if (mType == TASK_TYPE_STRIDE_LIQUIDITY_STAKE) {
+           return [StrideLiquid0ViewController(nibName: "StrideLiquid0ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   StrideLiquid4ViewController(nibName: "StrideLiquid4ViewController", bundle: nil)]
+           
+       } else if (mType == TASK_TYPE_STRIDE_LIQUIDITY_UNSTAKE) {
+           return [StrideLiquid0ViewController(nibName: "StrideLiquid0ViewController", bundle: nil),
+                   StrideLiquid1ViewController(nibName: "StrideLiquid1ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   StrideLiquid4ViewController(nibName: "StrideLiquid4ViewController", bundle: nil)]
        }
-        
-        
-        
         
         else {
             return[]

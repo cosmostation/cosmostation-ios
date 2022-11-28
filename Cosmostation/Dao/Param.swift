@@ -11,11 +11,19 @@ import Foundation
 public struct Param {
     var chain_id: String?
     var params: Params?
+    var block_time = NSDecimalNumber.init(string: "6")
+    var gas_price: GasPriceParams?
     
     init(_ dictionary: NSDictionary?) {
         self.chain_id = dictionary?["chain_id"] as? String
+        if let rawBlockTimes = dictionary?["block_time"] as? Double {
+            self.block_time = NSDecimalNumber(value: rawBlockTimes)
+        }
         if let rawParams = dictionary?["params"] as? NSDictionary {
             self.params = Params.init(rawParams)
+        }
+        if let rawGasPrice = dictionary?["gas_price"] as? NSDictionary {
+            self.gas_price = GasPriceParams.init(rawGasPrice)
         }
     }
     
@@ -158,10 +166,10 @@ public struct Param {
     }
     
     func getRealApr(_ chain: ChainType?) -> NSDecimalNumber {
-        if (WUtils.getRealBlockPerYear(chain) == NSDecimalNumber.zero || getBlockPerYear(chain) == NSDecimalNumber.zero) {
+        if (getRealBlockPerYear() == NSDecimalNumber.zero || getBlockPerYear() == NSDecimalNumber.zero) {
             return NSDecimalNumber.zero
         }
-        return getApr(chain).multiplying(by: WUtils.getRealBlockPerYear(chain)).dividing(by: getBlockPerYear(chain), withBehavior: WUtils.handler6)
+        return getApr(chain).multiplying(by: getRealBlockPerYear()).dividing(by: getBlockPerYear(), withBehavior: WUtils.handler6)
     }
     
     func getDpRealApr(_ chain: ChainType?) -> NSDecimalNumber {
@@ -169,7 +177,7 @@ public struct Param {
         return getRealApr(chain).multiplying(byPowerOf10: 2, withBehavior: WUtils.handler2)
     }
     
-    func getBlockPerYear(_ chain: ChainType?) -> NSDecimalNumber {
+    func getBlockPerYear() -> NSDecimalNumber {
         if let blocks_per_year = params?.minting_params?.params?.blocks_per_year {
             return NSDecimalNumber.init(string: blocks_per_year)
         }
@@ -182,6 +190,13 @@ public struct Param {
             return NSDecimalNumber.init(string: blocks_per_year)
         }
         return NSDecimalNumber.zero
+    }
+    
+    func getRealBlockPerYear() -> NSDecimalNumber {
+        if (block_time == NSDecimalNumber.zero) {
+            return NSDecimalNumber.zero
+        }
+        return YEAR_SEC.dividing(by: block_time, withBehavior: WUtils.handler2)
     }
     
     func getSupplyDenom(_ denom: String) -> Coin?{
@@ -205,14 +220,6 @@ public struct Param {
         return params?.enabled_pools?.contains(id)
     }
     
-    func getSifTokens() -> Array<SifTokenEntry>? {
-        return params?.sifchain_token_registry?.registry?.entries
-    }
-    
-    func getGdexList() -> Array<GdexStatus>? {
-        return params?.gdex_status
-    }
-    
     func getCrescentRewardFact() -> NSDecimalNumber {
         let ecosystemIncentive = params?.crescent_budgets.filter { $0.budget?.name == "budget-ecosystem-incentive" }.first?.budget?.rate ?? NSDecimalNumber.zero
         let devTeam = params?.crescent_budgets.filter { $0.budget?.name == "budget-dev-team" }.first?.budget?.rate ?? NSDecimalNumber.zero
@@ -227,10 +234,43 @@ public struct Param {
         return 21
     }
     
+    func getFeeInfos() -> Array<FeeInfo> {
+        var result = Array<FeeInfo>()
+        gas_price?.rate.forEach({ gasInfo in
+            result.append(FeeInfo.init(gasInfo))
+        })
+        if (result.count == 1) {
+            result[0].title = NSLocalizedString("str_fixed", comment: "")
+            result[0].msg = NSLocalizedString("fee_speed_title_fixed", comment: "")
+        } else if (result.count == 2) {
+            result[1].title = NSLocalizedString("str_average", comment: "")
+            result[1].msg = NSLocalizedString("fee_speed_title_average", comment: "")
+            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+                result[0].title = NSLocalizedString("str_zero", comment: "")
+                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
+            } else {
+                result[0].title = NSLocalizedString("str_tiny", comment: "")
+                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
+            }
+        } else if (result.count == 3) {
+            result[2].title = NSLocalizedString("str_average", comment: "")
+            result[2].msg = NSLocalizedString("fee_speed_title_average", comment: "")
+            result[1].title = NSLocalizedString("str_low", comment: "")
+            result[1].msg = NSLocalizedString("fee_speed_title_low", comment: "")
+            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+                result[0].title = NSLocalizedString("str_zero", comment: "")
+                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
+            } else {
+                result[0].title = NSLocalizedString("str_tiny", comment: "")
+                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
+            }
+        }
+        return result
+    }
+    
 }
 
 public struct Params {
-    var ibc_params: IbcParams?
     var minting_params: MintingParams?
     var minting_inflation: String?
     var minting_annual_provisions: String?
@@ -243,8 +283,6 @@ public struct Params {
 
     var enabled_pools: Array<Int>?
     
-    var gdex_status: Array<GdexStatus>?
-    
     var osmosis_minting_params: OsmosisMintingParam?
     var osmosis_minting_epoch_provisions: String?
     
@@ -253,8 +291,6 @@ public struct Params {
     var band_active_validators: BandOrcleActiveValidators?
     
     var starname_domains = Array<String>()
-    
-    var sifchain_token_registry: SifChainTokens?
     
     var rison_swap_enabled: Bool?
     
@@ -270,9 +306,6 @@ public struct Params {
     var teritori_minting_params: TeritoriMintingParam?
     
     init(_ dictionary: NSDictionary?) {
-        if let rawIbcParams = dictionary?["ibc_params"] as? NSDictionary {
-            self.ibc_params = IbcParams.init(rawIbcParams)
-        }
         if let rawMintingParams = dictionary?["minting_params"] as? NSDictionary {
             self.minting_params = MintingParams.init(rawMintingParams)
         }
@@ -331,13 +364,6 @@ public struct Params {
             }
         }
         
-        if let rawGdexStatus = dictionary?["gdex_status"] as? Array<NSDictionary> {
-            self.gdex_status = Array<GdexStatus>()
-            for rawGdex in rawGdexStatus {
-                self.gdex_status?.append(GdexStatus.init(rawGdex))
-            }
-        }
-        
         if let rawOsmosisMintingParams = dictionary?["osmosis_minting_params"] as? NSDictionary {
             self.osmosis_minting_params = OsmosisMintingParam.init(rawOsmosisMintingParams)
         }
@@ -372,11 +398,6 @@ public struct Params {
         }
         if let rawShentuGovTallying = dictionary?["shentu_gov_tally_params"] as? NSDictionary {
             self.gov_tallying = GovTallying.init(rawShentuGovTallying)
-        }
-        
-        
-        if let rawSifchainTokenRegistry = dictionary?["sifchain_token_registry"] as? NSDictionary {
-            self.sifchain_token_registry = SifChainTokens.init(rawSifchainTokenRegistry)
         }
         
         if let rawSwap_enabled = dictionary?["swap_enabled"] as? Bool {
@@ -415,22 +436,14 @@ public struct Params {
     }
 }
 
-public struct IbcParams {
-    var params: Params?
+public struct GasPriceParams {
+    var base: Int = 0
+    var rate = Array<String>()
     
     init(_ dictionary: NSDictionary?) {
-        if let rawParams = dictionary?["params"] as? NSDictionary {
-            self.params = Params.init(rawParams)
-        }
-    }
-    
-    public struct Params {
-        var send_enabled: Bool?
-        var receive_enabled: Bool?
-        
-        init(_ dictionary: NSDictionary?) {
-            self.send_enabled = dictionary?["send_enabled"] as? Bool
-            self.receive_enabled = dictionary?["receive_enabled"] as? Bool
+        self.base = dictionary?["base"] as? Int ?? 0
+        if let rawRates = dictionary?["rate"] as? Array<String> {
+            self.rate = rawRates
         }
     }
 }
@@ -785,62 +798,6 @@ public struct BandOrcleActiveValidators {
                 addresses.append(rawAddress)
             }
         })
-    }
-}
-
-public struct SifChainTokens {
-    var registry: SifTokenRegistry?
-    
-    init(_ dictionary: NSDictionary?) {
-        let rawRegistry = dictionary?["registry"] as? NSDictionary
-        self.registry = SifTokenRegistry.init(rawRegistry)
-    }
-}
-
-public struct SifTokenRegistry {
-    var entries = Array<SifTokenEntry>()
-    
-    init(_ dictionary: NSDictionary?) {
-        let rawEntries = dictionary?["entries"] as? Array<NSDictionary>
-        rawEntries?.forEach({ rawEntry in
-            entries.append(SifTokenEntry.init(rawEntry))
-        })
-    }
-}
-
-public struct SifTokenEntry {
-    var denom: String?
-    var decimals: Int16?
-    var base_denom: String?
-    var is_whitelisted: Bool?
-    var ibc_counterparty_denom: String?
-    
-    init(_ dictionary: NSDictionary?) {
-        self.denom = dictionary?["denom"] as? String
-        self.base_denom = dictionary?["base_denom"] as? String
-        self.is_whitelisted = dictionary?["is_whitelisted"] as? Bool
-        self.ibc_counterparty_denom = dictionary?["ibc_counterparty_denom"] as? String
-        if let rawDecimal = dictionary?["decimals"] as? String {
-            self.decimals = Int16(rawDecimal)
-        }
-    }
-}
-
-public struct GdexStatus {
-    var id: UInt64?
-    var reserve_address: String?
-    var pool_token: String?
-    var token_pair = Array<Coin>()
-    
-    init(_ dictionary: NSDictionary?) {
-        self.id = dictionary?["id"] as? UInt64
-        self.reserve_address = dictionary?["reserve_address"] as? String
-        self.pool_token = dictionary?["pool_token"] as? String
-        if let rawCoins = dictionary?["token_pair"] as? Array<NSDictionary> {
-            for rawCoin in rawCoins {
-                self.token_pair.append(Coin.init(rawCoin))
-            }
-        }
     }
 }
 

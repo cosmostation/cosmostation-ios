@@ -186,49 +186,20 @@ class BaseNetWork {
     
     
     //for Okex
-    static func balanceOkUrl(_ chain: ChainType?, _ address: String) -> String {
-        if let chainConfig = ChainFactory.getChainConfig(chain) {
-            if (chainConfig.chainType == .OKEX_MAIN) {
-                return chainConfig.lcdUrl + "accounts/" + address
-            }
-        }
-        return ""
+    static func balanceOkUrl(_ chainConfig: ChainConfig, _ address: String) -> String {
+        return chainConfig.lcdUrl + "accounts/" + address
     }
     
-    static func stakingOkUrl(_ chain: ChainType, _ address: String) -> String {
-        if let chainConfig = ChainFactory.getChainConfig(chain) {
-            if (chainConfig.chainType == .OKEX_MAIN) {
-                return chainConfig.lcdUrl + "staking/delegators/" + address
-            }
-        }
-        return ""
+    static func stakingOkUrl(_ chainConfig: ChainConfig, _ address: String) -> String {
+        return chainConfig.lcdUrl + "staking/delegators/" + address
     }
     
-    static func unbondingOkUrl(_ chain: ChainType, _ address: String) -> String {
-        if let chainConfig = ChainFactory.getChainConfig(chain) {
-            if (chainConfig.chainType == .OKEX_MAIN) {
-                return chainConfig.lcdUrl + "staking/delegators/" + address + "/unbonding_delegations"
-            }
-        }
-        return ""
+    static func unbondingOkUrl(_ chainConfig: ChainConfig, _ address: String) -> String {
+        return chainConfig.lcdUrl + "staking/delegators/" + address + "/unbonding_delegations"
     }
     
-    static func tokenListOkUrl(_ chain: ChainType) -> String {
-        if let chainConfig = ChainFactory.getChainConfig(chain) {
-            if (chainConfig.chainType == .OKEX_MAIN) {
-                return chainConfig.lcdUrl + "tokens"
-            }
-        }
-        return ""
-    }
-    
-    static func tickerListOkUrl(_ chain: ChainType) -> String {
-        if let chainConfig = ChainFactory.getChainConfig(chain) {
-            if (chainConfig.chainType == .OKEX_MAIN) {
-                return chainConfig.lcdUrl + "tickers"
-            }
-        }
-        return ""
+    static func tokenListOkUrl(_ chainConfig: ChainConfig) -> String {
+        return chainConfig.lcdUrl + "tokens"
     }
     
     
@@ -307,13 +278,6 @@ class BaseNetWork {
     }
     
     static func getParams(_ chainId: String) -> String {
-        //TODO hardcoing for V3
-        var chainId = chainId
-        if (chainId == "cryptoorg") {
-            chainId = "crypto-org"
-        } else if (chainId == "kichain") {
-            chainId = "ki-chain"
-        }
         return MINTSCAN_API_URL + "v1/utils/params/chain/" + chainId
     }
     

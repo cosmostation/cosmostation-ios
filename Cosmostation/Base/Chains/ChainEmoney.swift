@@ -36,10 +36,6 @@ class ChainEmoney: ChainConfig {
     var validatorPrefix = "emoneyvaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.1ungm"
-    let gasRate1 = "0.3ungm"
-    let gasRate2 = "1ungm"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -74,14 +70,6 @@ class ChainEmoney: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/e-money-com"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1, gasRate2]
-    }
-    
-    func getGasDefault() -> Int {
-        return 1
     }
 }
 

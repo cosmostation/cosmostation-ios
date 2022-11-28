@@ -22,6 +22,13 @@ public struct Signature: Codable {
         self.account_number = dictionary["account_number"] as? String ?? ""
         self.sequence = dictionary["sequence"] as? String ?? ""
     }
+    
+    init(_ pub_key: PublicKey, _ signature: String, _ account_number: String, _ sequence: String) {
+        self.pub_key = pub_key
+        self.signature = signature
+        self.account_number = account_number
+        self.sequence = sequence
+    }
 }
 
 public struct TrustSignature: Codable {

@@ -49,6 +49,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletDesmosEventCell", bundle: nil), forCellReuseIdentifier: "WalletDesmosEventCell")
         self.walletTableView.register(UINib(nibName: "WalletMediblocEventCell", bundle: nil), forCellReuseIdentifier: "WalletMediblocEventCell")
         self.walletTableView.register(UINib(nibName: "WalletCrescentCell", bundle: nil), forCellReuseIdentifier: "WalletCrescentCell")
+        self.walletTableView.register(UINib(nibName: "WalletStrideCell", bundle: nil), forCellReuseIdentifier: "WalletStrideCell")
         self.walletTableView.register(UINib(nibName: "WalletStationCell", bundle: nil), forCellReuseIdentifier: "WalletStationCell")
         self.walletTableView.register(UINib(nibName: "WalletBaseChainCell", bundle: nil), forCellReuseIdentifier: "WalletBaseChainCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
@@ -173,6 +174,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 return onSetMediblocItems(tableView, indexPath);
             } else if (chainType == .CRESCENT_MAIN) {
                 return onSetCrescentItems(tableView, indexPath);
+            } else if (chainType == .STRIDE_MAIN) {
+                return onSetStrideItems(tableView, indexPath);
             } else if (chainType == .STATION_TEST) {
                 return onSetStationItems(tableView, indexPath);
             }
@@ -460,6 +463,30 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
+    func onSetStrideItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletStrideCell") as? WalletStrideCell
+            cell?.updateView(account, chainConfig)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            cell?.actionWC = { self.onClickWalletConect() }
+            cell?.actionLiquidity = { self.onClickLiquidity() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            return onBindPriceCell(tableView)
+
+        } else if (indexPath.row == 2) {
+            return onBindMintingCell(tableView)
+
+        } else if (indexPath.row == 3) {
+            return onBindAuthzCell(tableView)
+
+        } else {
+            return onBindGuideCell(tableView)
+        }
+    }
+    
     func onSetStationItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletStationCell") as? WalletStationCell
@@ -723,6 +750,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onClickMediblocEvent() {
         guard let url = URL(string: "https://web.medipass.me/") else { return }
         self.onShowSafariWeb(url)
+    }
+    
+    func onClickLiquidity() {
+        let strideDappVC = UIStoryboard(name: "StrideDapp", bundle: nil).instantiateViewController(withIdentifier: "StrideDappViewController") as! StrideDappViewController
+        strideDappVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(strideDappVC, animated: true)
     }
     
     func onClickAprHelp() {

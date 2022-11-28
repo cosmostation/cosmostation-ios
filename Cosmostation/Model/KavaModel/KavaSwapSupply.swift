@@ -1,5 +1,5 @@
 //
-//  KavaSwapSupply2.swift
+//  KavaSwapSupply.swift
 //  Cosmostation
 //
 //  Created by 정용주 on 2020/09/14.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class KavaSwapSupply2 {
+public class KavaSwapSupply {
     var height: String = ""
-    var result: Array<SwapSupply2> = Array<SwapSupply2>()
+    var result: Array<SwapSupply> = Array<SwapSupply>()
     
     init() {}
     
@@ -19,12 +19,12 @@ public class KavaSwapSupply2 {
         if let results = dictionary["result"] as? Array<NSDictionary> {
             self.result.removeAll()
             for supply in results {
-                self.result.append(SwapSupply2(supply as! [String : Any]))
+                self.result.append(SwapSupply(supply as! [String : Any]))
             }
         }
     }
     
-    public class SwapSupply2 {
+    public class SwapSupply {
         var incoming_supply: Coin = Coin.init()
         var outgoing_supply: Coin = Coin.init()
         var current_supply: Coin = Coin.init()
@@ -66,7 +66,7 @@ public class KavaSwapSupply2 {
         }
     }
     
-    public func getSwapSupply(_ denom:String) -> SwapSupply2?{
+    public func getSwapSupply(_ denom:String) -> SwapSupply?{
         for supply in result {
             if (denom.lowercased().starts(with: supply.incoming_supply.denom.lowercased())) {
                 return supply

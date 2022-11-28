@@ -197,6 +197,51 @@ class MsgGenerator {
         return stdSignedMsg
     }
     
+    static func stdMsgEncoding(_ stdMsg: StdSignMsg) -> Data {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .sortedKeys
+        let encoded = try? encoder.encode(stdMsg)
+        let rawResult = String(data:encoded!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
+        return rawResult!.data(using: .utf8)!
+    }
+    
+    static func genSecp256k1Signature(_ toSignData: Data, _ priKey: Data, _ pubKey: Data, _ accNum: String, _ seqNum: String) -> [Signature] {
+        let signedData = try! ECDSA.compactsign(toSignData.sha256(), privateKey: priKey)
+        let publicKey = PublicKey.init(COSMOS_KEY_TYPE_PUBLIC, pubKey.base64EncodedString())
+        let genedSignature = Signature.init(publicKey, signedData.base64EncodedString(), accNum, seqNum)
+        return [genedSignature]
+    }
+    
+    static func genEthSecp256k1Signature(_ toSignData: Data, _ priKey: Data, _ pubKey: Data, _ accNum: String, _ seqNum: String) -> [Signature] {
+        let signedData = try! ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: toSignData), privateKey: priKey)
+        let publicKey = PublicKey.init(ETHERMINT_KEY_TYPE_PUBLIC, pubKey.base64EncodedString())
+        let genedSignature = Signature.init(publicKey, signedData.base64EncodedString(), accNum, seqNum)
+        return [genedSignature]
+    }
+    
+    
+    static func getPostData(_ chainConfig: ChainConfig, _ account: Account, _ msgs: Array<Msg>, _ priKey: Data, _ pubKey: Data, _ fee: Fee, _ memo: String) -> Data {
+        let chainID = BaseData.instance.getChainId(chainConfig.chainType)
+        let accNum = String(account.account_account_numner)
+        let seqNum = String(account.account_sequence_number)
+        
+        let stdMsg = getToSignMsg(chainID, accNum, seqNum, msgs, fee, memo)
+        let toSignData = stdMsgEncoding(stdMsg)
+        //OKC case
+        var signatures: [Signature]
+        if (account.account_pubkey_type == 0) {
+            signatures = genSecp256k1Signature(toSignData, priKey, pubKey, accNum, seqNum)
+        } else {
+            signatures = genEthSecp256k1Signature(toSignData, priKey, pubKey, accNum, seqNum)
+        }
+        let stdTx = genSignedTx(msgs, fee, memo, signatures)
+        
+        let postTx = PostTx.init("sync", stdTx.value)
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .sortedKeys
+        return try! encoder.encode(postTx)
+    }
+    
     static func byteArray<T>(from value: T) -> [UInt8] where T: FixedWidthInteger {
         withUnsafeBytes(of: value.bigEndian, Array.init)
     }

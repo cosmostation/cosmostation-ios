@@ -122,6 +122,9 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         //for EVM tx
         self.txTableView.register(UINib(nibName: "TxEvmCell", bundle: nil), forCellReuseIdentifier: "TxEvmCell")
         
+        //for Liquid Staking
+        self.txTableView.register(UINib(nibName: "TxLiquidStakeCell", bundle: nil), forCellReuseIdentifier: "TxLiquidStakeCell")
+        
         //for unknown msg type
         self.txTableView.register(UINib(nibName: "TxUnknownCell", bundle: nil), forCellReuseIdentifier: "TxUnknownCell")
         
@@ -499,11 +502,19 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 }
                 
                 else if (msg.typeURL.contains(Cosmos_Authz_V1beta1_MsgExec.protoMessageName)) {
-                   let cell = tableView.dequeueReusableCell(withIdentifier:"TxAuthzExecCell") as? TxCell
-                   cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
-                   return cell!
-                   
-               }
+                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxAuthzExecCell") as? TxCell
+                    cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
+                    return cell!
+                    
+                }
+                
+                else if (msg.typeURL.contains(Stride_Stakeibc_MsgLiquidStake.protoMessageName) ||
+                         msg.typeURL.contains(Stride_Stakeibc_MsgRedeemStake.protoMessageName)) {
+                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxLiquidStakeCell") as? TxCell
+                    cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
+                    return cell!
+                    
+                }
                 
             }
             let cell:TxUnknownCell? = tableView.dequeueReusableCell(withIdentifier:"TxUnknownCell") as? TxUnknownCell

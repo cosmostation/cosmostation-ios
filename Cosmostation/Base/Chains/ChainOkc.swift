@@ -37,8 +37,6 @@ class ChainOkc: ChainConfig {
     let addressHdPath = "m/44'/996'/0'/0/X"
     var defaultPath = "m/44'/60'/0'/0/X"
     
-    let gasRate0 = "0.0000000001okt"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -48,7 +46,7 @@ class ChainOkc: ChainConfig {
     var kadoMoneySupoort = false
     var grpcUrl = ""
     var grpcPort = -1
-    var rpcUrl = ""
+    var rpcUrl = "https://exchainrpc.okex.org"
     var lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
     var apiUrl = ""
     var explorerUrl = "https://www.oklink.com/okexchain/"
@@ -73,14 +71,6 @@ class ChainOkc: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://www.okx.com/academy/en/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }
 

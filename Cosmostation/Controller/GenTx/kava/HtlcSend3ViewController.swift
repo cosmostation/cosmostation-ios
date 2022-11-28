@@ -125,7 +125,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             }
             WUtils.setDenomTitle(pageHolderVC.mHtlcToChain!, claimFeeDenom)
             
-            relayerFee = self.pageHolderVC.mKavaSwapParam2!.getSupportedSwapAssetFee(pageHolderVC.mHtlcDenom!)
+            relayerFee = self.pageHolderVC.mKavaSwapParam!.getSupportedSwapAssetFee(pageHolderVC.mHtlcDenom!)
             receiveAmountLabel.attributedText = WDP.dpAmount(toSendAmount.subtracting(relayerFee).stringValue , receiveAmountLabel.font, mDpDecimal, mDpDecimal)
             relayFeeLabel.attributedText = WDP.dpAmount(relayerFee.stringValue, relayFeeLabel.font, mDpDecimal, mDpDecimal)
             claimFeeLabel.attributedText = WDP.dpAmount(claimFeeAmount.stringValue, claimFeeLabel.font, 0, mDpDecimal)
@@ -147,7 +147,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             }
             WUtils.setDenomTitle(pageHolderVC.mHtlcToChain!, claimFeeDenom)
             
-            relayerFee = self.pageHolderVC.mKavaSwapParam2!.getSupportedSwapAssetFee(pageHolderVC.mHtlcDenom!).multiplying(byPowerOf10: -8)
+            relayerFee = self.pageHolderVC.mKavaSwapParam!.getSupportedSwapAssetFee(pageHolderVC.mHtlcDenom!).multiplying(byPowerOf10: -8)
             receiveAmountLabel.attributedText = WDP.dpAmount(toSendAmount.subtracting(relayerFee).stringValue , receiveAmountLabel.font, 0, 8)
             relayFeeLabel.attributedText = WDP.dpAmount(relayerFee.stringValue, relayFeeLabel.font, 0, 8)
             claimFeeLabel.attributedText = WDP.dpAmount(claimFeeAmount.stringValue, claimFeeLabel.font, 6, 6)

@@ -74,12 +74,14 @@ class MyAccountViewController: BaseViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let starnameAccount = myAccounts_gRPC[indexPath.row]
-        let accountDetailVC = AccountDetailViewController(nibName: "AccountDetailViewController", bundle: nil)
-        accountDetailVC.mMyDomain = starnameAccount.domain
-        accountDetailVC.mMyAccount = starnameAccount.name.value
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(accountDetailVC, animated: true)
+        if (self.myAccounts_gRPC.count > 0) {
+            let starnameAccount = myAccounts_gRPC[indexPath.row]
+            let accountDetailVC = AccountDetailViewController(nibName: "AccountDetailViewController", bundle: nil)
+            accountDetailVC.mMyDomain = starnameAccount.domain
+            accountDetailVC.mMyAccount = starnameAccount.name.value
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(accountDetailVC, animated: true)
+        }
     }
     
     func onFetchFinished() {

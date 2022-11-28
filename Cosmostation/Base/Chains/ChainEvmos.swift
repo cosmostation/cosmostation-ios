@@ -36,8 +36,6 @@ class ChainEvmos: ChainConfig {
     var validatorPrefix = "evmosvaloper"
     var defaultPath = "m/44'/60'/0'/0/X"
     
-    let gasRate0 = "20000000000aevmos"
-    
     var etherAddressSupport = true
     var wasmSupport = false
     var evmSupport = true
@@ -72,13 +70,5 @@ class ChainEvmos: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://evmos.blog/"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

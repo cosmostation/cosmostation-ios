@@ -51,14 +51,22 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         self.refresher.tintColor = UIColor.font05
         self.historyTableView.addSubview(refresher)
+
         
         self.onRequestFetch()
+        
+//        self.emptyLabel.isUserInteractionEnabled = true
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(testClick(tapGestureRecognizer:)))
+//        self.emptyLabel.addGestureRecognizer(tapGesture)
+//        historyTableView.isHidden = true
+//        emptyLabel.isHidden = false
     }
     
     @objc func testClick(tapGestureRecognizer: UITapGestureRecognizer) {
 //        let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
 //        txDetailVC.mIsGen = false
-//        txDetailVC.mEthResultHash = "0x2e47a1ee3705940e5cbd472208127124f6090589b1788e220a2c71f636eb27de"
+////        txDetailVC.mTxHash = "77D4E08316A8B0132688F62FAFC93759207BF6EF008BE8E895D84C28CBFB3252"
+//        txDetailVC.mTxHash = "5BFBB4ADABA98E86C42651DDF23E6B416C4418C3C6759BAEE09C8EA8F2A02A42"
 //        txDetailVC.hidesBottomBarWhenPushed = true
 //        self.navigationItem.title = ""
 //        self.navigationController?.pushViewController(txDetailVC, animated: true)
@@ -227,6 +235,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     
     func onFetchOkHistory(_ address: String) {
         let url = BaseNetWork.accountHistory(chainType!, address)
+        print("onFetchOkHistory ", url)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { response in
             switch response.result {

@@ -36,8 +36,6 @@ class ChainXpla: ChainConfig {
     var validatorPrefix = "xplavaloper"
     var defaultPath = "m/44'/60'/0'/0/X"
     
-    let gasRate0 = "850000000000axpla"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -72,13 +70,5 @@ class ChainXpla: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/@XPLA_Official"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

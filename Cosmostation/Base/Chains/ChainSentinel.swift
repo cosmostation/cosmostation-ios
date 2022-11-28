@@ -36,9 +36,6 @@ class ChainSentinel: ChainConfig {
     var validatorPrefix = "sentvaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.01udvpn"
-    let gasRate1 = "0.1udvpn"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -73,13 +70,5 @@ class ChainSentinel: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/sentinel"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

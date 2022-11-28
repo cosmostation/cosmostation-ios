@@ -36,10 +36,6 @@ class ChainDesmos: ChainConfig {
     var validatorPrefix = "desmosvaloper"
     var defaultPath = "m/44'/852'/0'/0/X"
     
-    let gasRate0 = "0.001udsm"
-    let gasRate1 = "0.01udsm"
-    let gasRate2 = "0.025udsm"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -74,13 +70,5 @@ class ChainDesmos: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/desmosnetwork"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1, gasRate2]
-    }
-    
-    func getGasDefault() -> Int {
-        return 1
     }
 }

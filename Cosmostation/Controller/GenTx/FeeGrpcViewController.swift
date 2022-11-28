@@ -51,8 +51,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        
-        self.mFeeInfo = WUtils.getFeeInfos(chainConfig)
+        self.mFeeInfo = BaseData.instance.mParam!.getFeeInfos()
         WDP.dpSymbolImg(chainConfig, WUtils.getMainDenom(chainConfig), feeTypeImg)
         WDP.dpSymbol(chainConfig, WUtils.getMainDenom(chainConfig), feeTypeDenom)
         
@@ -65,7 +64,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             for i in 0..<mFeeInfo.count {
                 gasSelectSegments.insertSegment(withTitle: mFeeInfo[i].title, at: i, animated: false)
             }
-            mSelectedFeeInfo = chainConfig!.getGasDefault()
+            mSelectedFeeInfo = BaseData.instance.mParam!.gas_price!.base
         } else {
             showWaittingAlert()
             gasSelectSegments.insertSegment(withTitle: NSLocalizedString("str_fixed", comment: ""), at: 0, animated: false)
@@ -120,7 +119,6 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("viewDidAppear ", self.pageHolderVC.mTransferType)
         if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
             self.onCalculateEvmFees()
             
@@ -134,7 +132,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func onCalculateFees() {
-        print("onCalculateFees")
+//        print("onCalculateFees")
         self.mFeeData = mFeeInfo[mSelectedFeeInfo].FeeDatas[mSelectedFeeData]
         if (chainType == .SIF_MAIN) {
             mFeeCoin = Coin.init(mFeeData.denom!, "100000000000000000")
@@ -155,7 +153,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func onCalculateEvmFees() {
-        print("onCalculateEvmFees")
+//        print("onCalculateEvmFees")
         Task {
             guard
                 let mintscanToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == pageHolderVC.mToSendDenom!.lowercased() }).first,
@@ -891,6 +889,25 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                self.mFee, self.pageHolderVC.mMemo!,
                                                self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_STRIDE_LIQUIDITY_STAKE) {
+            return Signer.genSimulateLiquidityStaking(auth, account!.account_pubkey_type,
+                                                      self.account!.account_address,
+                                                      self.pageHolderVC.mSwapInAmount!.stringValue,
+                                                      self.pageHolderVC.mStride_Stakeibc_HostZone!.hostDenom,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                      self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_STRIDE_LIQUIDITY_UNSTAKE) {
+            return Signer.genSimulateLiquidityUnstaking(auth, account!.account_pubkey_type,
+                                                        self.account!.account_address,
+                                                        self.pageHolderVC.mSwapInAmount!.stringValue,
+                                                        self.pageHolderVC.mStride_Stakeibc_HostZone!.chainID,
+                                                        self.pageHolderVC.mRecipinetAddress!,
+                                                        self.mFee, self.pageHolderVC.mMemo!,
+                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                        self.chainType!)
         }
         
         return nil

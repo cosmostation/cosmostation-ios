@@ -37,10 +37,8 @@ final class BaseData : NSObject{
     
     var mOkAccountInfo: OkAccountInfo?
     var mOkTokenList: OkTokenList?
-    var mOkTickerList: OkTickerList?
     var mOkStaking: OkStaking?
     var mOkUnbonding: OkUnbonding?
-    var mOKBPrice: NSDecimalNumber = NSDecimalNumber.zero
     
     
     //For ProtoBuf and gRPC
@@ -285,6 +283,10 @@ final class BaseData : NSObject{
                     }
                 }
             }
+        
+        } else if (baseAccount?.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName) == true) {
+            let account = try! Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: baseAccount!.value)
+            return WUtils.onParseStridePeriodicRemainVestingsByDenom(account, denom)
         }
         return results
     }
@@ -423,9 +425,8 @@ final class BaseData : NSObject{
     func getMinTxFeeAmounts(_ chainConfig: ChainConfig?) -> Array<Coin> {
         var result = Array<Coin>()
         let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
-        let feeDatas = WUtils.getFeeInfos(chainConfig)[0].FeeDatas
-        
-        feeDatas.forEach { feeData in
+        let feeDatas = mParam?.getFeeInfos()[0].FeeDatas
+        feeDatas?.forEach { feeData in
             let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: WUtils.handler0Up)
             result.append(Coin.init(feeData.denom!, amount.stringValue))
         }
@@ -456,7 +457,6 @@ final class BaseData : NSObject{
         let chainType = ChainFactory.getChainType(account!.account_base_chain)!
         if (dpSortedChains().contains(chainType))  {
             return Int64(UserDefaults.standard.integer(forKey: KEY_RECENT_ACCOUNT))
-            
         } else {
             for dpChain in dpSortedChains() {
                 if (selectAllAccountsByChain(dpChain).count > 0) {

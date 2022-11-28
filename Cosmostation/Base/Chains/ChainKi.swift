@@ -38,8 +38,6 @@ class ChainKi: ChainConfig {
     var validatorPrefix = "kivaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.025uxki"
-    
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
@@ -74,13 +72,5 @@ class ChainKi: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/ki-foundation"
-    }
-    
-    func getGasRates() -> Array<String> {
-        return [gasRate0]
-    }
-    
-    func getGasDefault() -> Int {
-        return 0
     }
 }

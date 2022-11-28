@@ -112,35 +112,31 @@ class BaseViewController: UIViewController {
         self.navigationController?.pushViewController(txDetailVC, animated: true)
     }
     
-    func onDeleteWallet(_ account:Account, completion: @escaping () -> ()) {
-        DispatchQueue.global().async {
-            _ = BaseData.instance.deleteAccount(account: account)
-            _ = BaseData.instance.deleteBalance(account: account)
-            PushUtils.shared.sync()
-            if (KeychainWrapper.standard.hasValue(forKey: account.account_uuid.sha1())) {
-                KeychainWrapper.standard.removeObject(forKey: account.account_uuid.sha1())
-            }
-            
-            if (KeychainWrapper.standard.hasValue(forKey: account.getPrivateKeySha1())) {
-                KeychainWrapper.standard.removeObject(forKey: account.getPrivateKeySha1())
-            }
-            completion()
+    func onDeleteWallet(_ account: Account, completion: @escaping () -> ()) {
+        _ = BaseData.instance.deleteAccount(account: account)
+        _ = BaseData.instance.deleteBalance(account: account)
+        PushUtils.shared.sync()
+        if (KeychainWrapper.standard.hasValue(forKey: account.account_uuid.sha1())) {
+            KeychainWrapper.standard.removeObject(forKey: account.account_uuid.sha1())
         }
+
+        if (KeychainWrapper.standard.hasValue(forKey: account.getPrivateKeySha1())) {
+            KeychainWrapper.standard.removeObject(forKey: account.getPrivateKeySha1())
+        }
+        completion()
     }
     
     func onDeleteMnemonic(_ mwords: MWords, completion: @escaping () -> ()) {
-        DispatchQueue.global().async {
-            let linkedAccounts = BaseData.instance.selectAccountsByMnemonic(mwords.id)
-            linkedAccounts.forEach { account in
-                self.onDeleteWallet(account) { }
-            }
-            PushUtils.shared.sync()
-            _ = BaseData.instance.deleteMnemonic(mwords)
-            if (KeychainWrapper.standard.hasValue(forKey: mwords.uuid.sha1())) {
-                KeychainWrapper.standard.removeObject(forKey: mwords.uuid.sha1())
-            }
-            completion()
+        let linkedAccounts = BaseData.instance.selectAccountsByMnemonic(mwords.id)
+        linkedAccounts.forEach { account in
+            self.onDeleteWallet(account) { }
         }
+        PushUtils.shared.sync()
+        _ = BaseData.instance.deleteMnemonic(mwords)
+        if (KeychainWrapper.standard.hasValue(forKey: mwords.uuid.sha1())) {
+            KeychainWrapper.standard.removeObject(forKey: mwords.uuid.sha1())
+        }
+        completion()
     }
     
     func onSelectNextAccount() {

@@ -2158,7 +2158,62 @@ class Signer {
     }
     
     
+    //Tx for Liquidity Staking
+    static func genLiquidityStaking(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                    _ creater: String, _ amount: String, _ hostDenom: String,
+                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let staking = genLiquidityStaking(creater, amount, hostDenom)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, staking, privateKey, publicKey, fee, memo)
+    }
     
+    static func genSimulateLiquidityStaking(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                            _ creater: String, _ amount: String, _ hostDenom: String,
+                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let staking = genLiquidityStaking(creater, amount, hostDenom)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, staking, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genLiquidityStaking(_ creater: String, _ amount: String, _ hostDenom: String) -> [Google_Protobuf2_Any] {
+        let staking = Stride_Stakeibc_MsgLiquidStake.with {
+            $0.creator = creater
+            $0.amount = UInt64(amount)!
+            $0.hostDenom = hostDenom
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/stride.stakeibc.MsgLiquidStake"
+            $0.value = try! staking.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Liquidity Unstaking
+    static func genLiquidityUnstaking(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                      _ creater: String, _ amount: String, _ hostZone: String, _ receiver: String,
+                                      _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let unstaking = genLiquidityUnstaking(creater, amount, hostZone, receiver)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, unstaking, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateLiquidityUnstaking(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                              _ creater: String, _ amount: String, _ hostZone: String, _ receiver: String,
+                                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let unstaking = genLiquidityUnstaking(creater, amount, hostZone, receiver)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, unstaking, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genLiquidityUnstaking(_ creater: String, _ amount: String, _ hostZone: String, _ receiver: String) -> [Google_Protobuf2_Any] {
+        let unStaking = Stride_Stakeibc_MsgRedeemStake.with {
+            $0.creator = creater
+            $0.amount = UInt64(amount)!
+            $0.hostZone = hostZone
+            $0.receiver = receiver
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/stride.stakeibc.MsgRedeemStake"
+            $0.value = try! unStaking.serializedData()
+        }
+        return [anyMsg]
+    }
     
     
     static func getGrpcSignedTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64, _ chainType: ChainType, _ msgAnys: Array<Google_Protobuf2_Any>, _ privateKey: Data, _ publicKey: Data, _ fee: Fee, _ memo: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
