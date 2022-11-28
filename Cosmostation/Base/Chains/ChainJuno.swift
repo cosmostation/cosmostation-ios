@@ -39,7 +39,7 @@ class ChainJuno: ChainConfig {
     var etherAddressSupport = false
     var wasmSupport = true
     var evmSupport = false
-    var wcSupoort = false
+    var wcSupoort = true
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = true
