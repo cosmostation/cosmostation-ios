@@ -844,7 +844,12 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     func onStartKadoMoney() {
         let query = "?apiKey=" + KADO_PAY_PUBLICK + "&network=" + self.chainConfig!.chainAPIName + "&networkList=" + self.chainConfig!.chainAPIName
-        let urlKadoMoney = URL(string: KADO_PAY_URL + query + "&onToAddress=" + self.account!.account_address)
+        var urlKadoMoney: URL?
+        if (chainConfig?.chainType == .INJECTIVE_MAIN) {
+            urlKadoMoney = URL(string: KADO_PAY_URL + query + "&onToAddress=" + self.account!.account_address + "&onRevCurrency=" + "USDT")
+        } else {
+            urlKadoMoney = URL(string: KADO_PAY_URL + query + "&onToAddress=" + self.account!.account_address)
+        }
         if (UIApplication.shared.canOpenURL(urlKadoMoney!)) {
             UIApplication.shared.open(urlKadoMoney!, options: [:], completionHandler: nil)
         }

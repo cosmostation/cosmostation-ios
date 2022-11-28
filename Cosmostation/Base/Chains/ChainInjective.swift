@@ -42,7 +42,7 @@ class ChainInjective: ChainConfig {
     var wcSupoort = false
     var authzSupoort = true
     var moonPaySupoort = false
-    var kadoMoneySupoort = false
+    var kadoMoneySupoort = true
     var grpcUrl = "lcd-injective-app.cosmostation.io"
     var grpcPort = 9090
     var rpcUrl = ""
