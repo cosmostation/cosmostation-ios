@@ -40,7 +40,7 @@ class ChainCosmos: ChainConfig {
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
-    var wcSupoort = false
+    var wcSupoort = true
     var authzSupoort = true
     var moonPaySupoort = true
     var kadoMoneySupoort = false
