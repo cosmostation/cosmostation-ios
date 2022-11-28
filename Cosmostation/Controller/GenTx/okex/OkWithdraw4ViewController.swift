@@ -26,6 +26,7 @@ class OkWithdraw4ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         WUtils.setDenomTitle(chainType, toWithdrawAmountDenom)
         WUtils.setDenomTitle(chainType, feeAmountDenom)
@@ -92,97 +93,34 @@ class OkWithdraw4ViewController: BaseViewController, PasswordViewDelegate {
     
     func onGenOkWithdrawTx() {
         DispatchQueue.global().async {
-            var stdTx:StdTx!
-            do {
-                let msg = MsgGenerator.genOkWithdarwMsg(self.pageHolderVC.mAccount!.account_address, self.pageHolderVC.mOkToWithdraw)
-                var msgList = Array<Msg>()
-                msgList.append(msg)
-                
-                let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
-                                                       String(self.pageHolderVC.mAccount!.account_account_numner),
-                                                       String(self.pageHolderVC.mAccount!.account_sequence_number),
-                                                       msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
-                
-                let encoder = JSONEncoder()
-                encoder.outputFormatting = .sortedKeys
-                let data = try? encoder.encode(stdMsg)
-                let rawResult = String(data:data!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
-                let rawData: Data? = rawResult!.data(using: .utf8)
-                
-                if (self.pageHolderVC.mAccount!.account_pubkey_type == 0) {
-                    print("Tender Type")
-                    let hash = rawData!.sha256()
-                    let signedData = try! ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
-
-                    var genedSignature = Signature.init()
-                    var genPubkey =  PublicKey.init()
-                    genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
-                    genPubkey.value = self.pageHolderVC.publicKey!.base64EncodedString()
-                    genedSignature.pub_key = genPubkey
-                    genedSignature.signature = signedData.base64EncodedString()
-                    genedSignature.account_number = String(self.pageHolderVC.mAccount!.account_account_numner)
-                    genedSignature.sequence = String(self.pageHolderVC.mAccount!.account_sequence_number)
-                    
-                    var signatures: Array<Signature> = Array<Signature>()
-                    signatures.append(genedSignature)
-                    
-                    stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
-                    
-                } else {
-                    print("Ether Type")
-                    let hash = HDWalletKit.Crypto.sha3keccak256(data: rawData!)
-                    let signedData: Data? = try ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
-                    
-                    var genedSignature = Signature.init()
-                    var genPubkey =  PublicKey.init()
-                    genPubkey.type = ETHERMINT_KEY_TYPE_PUBLIC
-                    genPubkey.value = self.pageHolderVC.publicKey!.base64EncodedString()
-                    genedSignature.pub_key = genPubkey
-                    genedSignature.signature = signedData!.base64EncodedString()
-                    genedSignature.account_number = String(self.pageHolderVC.mAccount!.account_account_numner)
-                    genedSignature.sequence = String(self.pageHolderVC.mAccount!.account_sequence_number)
-                    
-                    var signatures: Array<Signature> = Array<Signature>()
-                    signatures.append(genedSignature)
-                    
-                    stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
-                }
-                
-            } catch {
-                print(error)
-            }
+            let msg = MsgGenerator.genOkWithdarwMsg(self.account!.account_address,self.pageHolderVC.mOkToWithdraw)
+            let postData = MsgGenerator.getPostData(self.chainConfig!, self.account!,
+                                                    [msg],
+                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
             
             DispatchQueue.main.async(execute: {
-                let postTx = PostTx.init("sync", stdTx.value)
-                let encoder = JSONEncoder()
-                encoder.outputFormatting = .sortedKeys
-                let data = try? encoder.encode(postTx)
-                do {
-                    let params = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
-                    let request = Alamofire.request(BaseNetWork.broadcastUrl(self.chainType), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
-                    request.responseJSON { response in
-                        var txResult = [String:Any]()
-                        switch response.result {
-                        case .success(let res):
-                            print("Withdraw ", res)
-                            if let result = res as? [String : Any]  {
-                                txResult = result
-                            }
-                        case .failure(let error):
-                            print("Withdraw error ", error)
-                            if (response.response?.statusCode == 500) {
-                                txResult["net_error"] = 500
-                            }
+                let params = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
+                let request = Alamofire.request(BaseNetWork.broadcastUrl(self.chainType), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
+                request.responseJSON { response in
+                    var txResult = [String:Any]()
+                    switch response.result {
+                    case .success(let res):
+                        print("Withdraw ", res)
+                        if let result = res as? [String : Any]  {
+                            txResult = result
                         }
-                        if (self.waitAlert != nil) {
-                            self.waitAlert?.dismiss(animated: true, completion: {
-                                self.onStartTxDetail(txResult)
-                            })
+                    case .failure(let error):
+                        print("Withdraw error ", error)
+                        if (response.response?.statusCode == 500) {
+                            txResult["net_error"] = 500
                         }
                     }
-
-                } catch {
-                    print(error)
+                    if (self.waitAlert != nil) {
+                        self.waitAlert?.dismiss(animated: true, completion: {
+                            self.onStartTxDetail(txResult)
+                        })
+                    }
                 }
             });
         }

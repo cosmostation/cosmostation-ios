@@ -148,7 +148,7 @@
 "str_unstaking_history" = "Unstaking Histories";
 "str_insert_amount" = "Insert Amount";
 "str_estimate_withdraw_amount" = "Withdraw Amount(est)";
-"str_tip" = "tip";
+"str_tip" = "Tip";
 
 
 "btn_delegate" = "  Delegate";
@@ -214,8 +214,8 @@
 "guide_msg_iov" = "Built on Tendermint, Starname builds a fast, secure and decentralized universal name service.";
 "guide_title_band" = "BAND PROTOCOL";
 "guide_msg_band" = "Cross-chain oracle platform based on Tendermint. Aggregates and connects real-world data and APIs to smart contracts.";
-"guide_title_ok" = "OKC CHAIN";
-"guide_msg_ok" = "OKC Chain is a public decentralized exchange powered by Tendermint.";
+"guide_title_ok" = "OKC";
+"guide_msg_ok" = "OKX Chain(OKC) is a public decentralized exchange powered by Tendermint.";
 "guide_title_certik" = "SHENTU CHAIN";
 "guide_msg_certik" = "A public platform based on the Certik Foundation's unique Formal Verification security system.";
 "guide_title_secret" = "SECRET CHAIN";

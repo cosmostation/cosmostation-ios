@@ -320,8 +320,6 @@ public class WUtils {
                 var allOKT = NSDecimalNumber.zero
                 if (coin.balance_denom == getMainDenom(chainConfig)) {
                     allOKT = allOKT.adding(getAllExToken(coin.balance_denom))
-                } else {
-                    allOKT = allOKT.adding(convertTokenToOkt(coin.balance_denom))
                 }
                 let assetValue = assetValue(getMainDenom(chainConfig), allOKT, 0)
                 totalValue = totalValue.adding(assetValue)
@@ -580,33 +578,6 @@ public class WUtils {
         } else {
             return dataBase.availableAmount(symbol).adding(dataBase.lockedAmount(symbol))
         }
-    }
-    
-    static func getOkexTokenDollorValue(_ okToken: OkToken?, _ amount: NSDecimalNumber) -> NSDecimalNumber {
-        if (okToken == nil) { return NSDecimalNumber.zero }
-        if (okToken!.original_symbol == "usdt" || okToken!.original_symbol == "usdc" || okToken!.original_symbol == "usdk") {
-            return amount
-            
-        } else if (okToken!.original_symbol == "okb") {
-            return amount.multiplying(by: BaseData.instance.mOKBPrice)
-            
-        } else if (BaseData.instance.mOkTickerList != nil) {
-            //TODO display with ticker update!
-            return NSDecimalNumber.zero
-        }
-        return NSDecimalNumber.zero
-    }
-    
-    //disable okc old type tokens(KIP10) value
-    static func convertTokenToOkt(_ denom: String) -> NSDecimalNumber {
-//        let baseData = BaseData.instance
-//        let okToken = getOkToken(denom)
-//        let tokenAmount = baseData.availableAmount(denom).adding(baseData.lockedAmount(denom))
-//        let totalTokenValue = getOkexTokenDollorValue(okToken, tokenAmount)
-//        if let okTUsd = perUsdValue(OKEX_MAIN_DENOM) {
-//            return totalTokenValue.dividing(by: okTUsd, withBehavior: handler18)
-//        }
-        return NSDecimalNumber.zero
     }
     
     static func getOkToken(_ symbol:String?) -> OkToken? {

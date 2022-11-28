@@ -158,9 +158,8 @@ class AssetCell: UITableViewCell {
                 assetDescription.text = okToken.description
                 
                 let tokenAmount = WUtils.getAllExToken(balance!.balance_denom)
-                let convertedAmount = WUtils.convertTokenToOkt(balance!.balance_denom)
                 assetAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, assetAmount.font, 0, 6)
-                assetValue.attributedText = WUtils.dpAssetValue(OKEX_MAIN_DENOM, convertedAmount, 0, assetValue.font)
+                assetValue.attributedText = WUtils.dpAssetValue(OKEX_MAIN_DENOM, NSDecimalNumber.zero, 0, assetValue.font)
                 assetPrice.text = "-"
                 assetPriceChange.text = ""
             }

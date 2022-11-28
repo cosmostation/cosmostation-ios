@@ -142,7 +142,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mOkStaking = nil
         BaseData.instance.mOkUnbonding = nil
         BaseData.instance.mOkTokenList = nil
-        BaseData.instance.mOkTickerList = nil
         
         
         
@@ -175,14 +174,13 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             onFetchBnbMiniTokenTickers()
             
         } else if (mChainType == .OKEX_MAIN) {
-            self.mFetchCnt = 8
+            self.mFetchCnt = 7
             onFetchNodeInfo()
             onFetchAllValidatorsInfo();
             
             onFetchAccountInfo(mAccount)
             onFetchOkAccountBalance(mAccount)
             onFetchOkTokenList()
-            onFetchOkDexTicker()
             
             onFetchOkStakingInfo(mAccount)
             onFetchOkUnbondingInfo(mAccount)
@@ -571,7 +569,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchOkAccountBalance(_ account: Account) {
-        let request = Alamofire.request(BaseNetWork.balanceOkUrl(mChainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
+        let request = Alamofire.request(BaseNetWork.balanceOkUrl(mChainConfig, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -591,7 +589,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchOkStakingInfo(_ account: Account) {
-        let request = Alamofire.request(BaseNetWork.stakingOkUrl(mChainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
+        let request = Alamofire.request(BaseNetWork.stakingOkUrl(mChainConfig, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -610,7 +608,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchOkUnbondingInfo(_ account: Account) {
-        let request = Alamofire.request(BaseNetWork.unbondingOkUrl(mChainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
+        let request = Alamofire.request(BaseNetWork.unbondingOkUrl(mChainConfig, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -629,8 +627,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchOkTokenList() {
-        print("onFetchOkTokenList ", BaseNetWork.tokenListOkUrl(mChainType))
-        let request = Alamofire.request(BaseNetWork.tokenListOkUrl(mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
+        print("onFetchOkTokenList ", BaseNetWork.tokenListOkUrl(mChainConfig))
+        let request = Alamofire.request(BaseNetWork.tokenListOkUrl(mChainConfig), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -647,25 +645,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
-    func onFetchOkDexTicker() {
-        print("onFetchOkDexTicker ", BaseNetWork.tickerListOkUrl(mChainType))
-        let request = Alamofire.request(BaseNetWork.tickerListOkUrl(mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let tickerList = res as? NSDictionary else {
-                    self.onFetchFinished()
-                    return
-                }
-                BaseData.instance.mOkTickerList = OkTickerList.init(tickerList)
-                
-            case .failure(let error):
-                print("onFetchOkDexTicker ", error)
-            }
-            self.onFetchFinished()
-        }
-        
-    }
     
     //gRPC
     func onFetchgRPCNodeInfo() {
