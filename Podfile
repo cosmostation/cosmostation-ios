@@ -6,8 +6,9 @@ platform :ios, '13.5'
 
 def shared_pods
     pod 'SwiftyJSON', '~> 4.3'
-    pod 'HDWalletKit', :git => 'https://github.com/cosmostation/HDWallet.git', branch: 'develop'
-    pod 'WalletConnect', git: 'https://github.com/cosmostation/wallet-connect-swift.git', branch: 'master'
+    pod 'HDWalletKit', git: 'https://github.com/cosmostation/HDWallet.git', branch: 'cosmostation-develop'
+    pod 'WalletConnect', git: 'https://github.com/cosmostation/wallet-connect-swift.git', branch: 'cosmostation-develop'
+    pod 'web3swift', git: 'https://github.com/cosmostation/web3swift.git', branch: 'cosmostation-develop'
     pod 'AlamofireImage', '~> 3.3'
     pod 'SQLite.swift', '~> 0.11.5'
     pod 'SwiftKeychainWrapper'
@@ -20,7 +21,7 @@ def shared_pods
     pod 'gRPC-Swift-Plugins'
     pod 'HPParallaxHeader'
     pod 'IpfsApi'
-    pod 'web3swift'
+    pod 'WalletConnectSwiftV2'
 end
 
 target 'Cosmostation' do

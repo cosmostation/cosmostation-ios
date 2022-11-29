@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -237,32 +237,6 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="am0-a4-tCW">
                                 <rect key="frame" x="12" y="285" width="523" height="40"/>
                                 <subviews>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4o5-nE-eSk">
-                                        <rect key="frame" x="0.0" y="-40" width="523" height="40"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="0eB-6r-PvM"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
-                                        <state key="normal" title="Crescent App" image="btnIconCrescentDex">
-                                            <color key="titleColor" name="_font05"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="0.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" name="_font05"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="onClickDapp:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ogd-CC-xun"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aj4-9O-Ysa">
                                         <rect key="frame" x="0.0" y="0.0" width="523" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -348,7 +322,6 @@
             <connections>
                 <outlet property="availableAmount" destination="FY4-Ct-Ky1" id="LeS-JQ-bfS"/>
                 <outlet property="availableLabel" destination="OS2-u7-56m" id="3Fb-u1-C0c"/>
-                <outlet property="btnDefi" destination="4o5-nE-eSk" id="JrK-3N-d5R"/>
                 <outlet property="btnDelegate" destination="mAQ-it-LOQ" id="HtC-A6-FFG"/>
                 <outlet property="btnProposal" destination="3uc-yW-AAi" id="4QF-RY-huG"/>
                 <outlet property="btnWalletConnect" destination="aj4-9O-Ysa" id="qVB-U1-rTR"/>
@@ -369,7 +342,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="btnIconCrescentDex" width="20" height="20"/>
         <image name="btnIconRewad" width="20" height="20"/>
         <image name="btnIconVote" width="20" height="20"/>
         <image name="btnIconWalletConnect" width="20" height="20"/>

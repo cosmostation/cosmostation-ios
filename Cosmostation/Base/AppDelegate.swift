@@ -10,6 +10,8 @@ import UIKit
 import SwiftKeychainWrapper
 import Firebase
 import UserNotifications
+import WalletConnectSwiftV2
+import Starscream
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -20,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        initWalletConnectV2()
         BaseData.instance.copySalt = UUID().uuidString
         if UserDefaults.standard.object(forKey: "FirstInstall") == nil {
             KeychainWrapper.standard.removeAllKeys()
@@ -50,6 +53,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         return true
+    }
+    
+    private func initWalletConnectV2() {
+        let metadata = AppMetadata(
+            name: NSLocalizedString("wc_peer_name", comment: ""),
+            description: NSLocalizedString("wc_peer_desc", comment: ""),
+            url: NSLocalizedString("wc_peer_url", comment: ""),
+            icons: [])
+
+        Networking.configure(projectId: Bundle.main.WALLET_CONNECT_API_KEY, socketFactory: self)
+        Pair.configure(metadata: metadata)
     }
     
     func requestToken() {
@@ -169,3 +183,11 @@ extension UIApplication{
         return pointedViewController
     }
 }
+
+extension AppDelegate: WebSocketFactory {
+    func create(with url: URL) -> WalletConnectSwiftV2.WebSocketConnecting {
+        return WebSocket(request: URLRequest(url: url))
+    }
+}
+
+extension WebSocket: WebSocketConnecting { }
