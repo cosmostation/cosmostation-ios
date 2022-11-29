@@ -43,8 +43,8 @@ class ChainCrescent: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-crescent-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-crescent.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-crescent-app.cosmostation.io/"
     var apiUrl = "https://api-crescent.cosmostation.io/"

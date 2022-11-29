@@ -44,8 +44,8 @@ class ChainSecret: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-secret.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-secret.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-secret.cosmostation.io/"
     var apiUrl = "https://api-secret.cosmostation.io/"

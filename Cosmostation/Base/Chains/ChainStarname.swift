@@ -43,8 +43,8 @@ class ChainStarname: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-starname-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-starname.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-starname-app.cosmostation.io/"
     var apiUrl = "https://api-starname.cosmostation.io/"
