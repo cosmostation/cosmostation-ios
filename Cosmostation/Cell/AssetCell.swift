@@ -100,7 +100,7 @@ class AssetCell: UITableViewCell {
         if let assetImgeUrl = token!.assetImg() {
             assetImg.af_setImage(withURL: assetImgeUrl)
         }
-        assetSymbol.text = token!.denom.uppercased()
+        assetSymbol.text = token!.denom
 //        assetDescription.text = token?.contract_address
         assetDescription.text = ""
         assetDescription.lineBreakMode = .byTruncatingMiddle

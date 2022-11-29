@@ -722,7 +722,7 @@ public class WUtils {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
                 return msAsset.dp_denom
             } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
-                return msToken.denom.uppercased()
+                return msToken.denom
             }
             
         } else {
