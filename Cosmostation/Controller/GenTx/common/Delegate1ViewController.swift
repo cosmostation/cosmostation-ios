@@ -77,10 +77,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if (textField == toDelegateAmountInput) {
-            return textField.shouldChange(charactersIn: range, replacementString: string, displayDecimal: mDpDecimal)
-        }
-        return true
+        textField.shouldChange(charactersIn: range, replacementString: string, displayDecimal: mDpDecimal)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
