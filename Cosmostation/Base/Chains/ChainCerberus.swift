@@ -43,8 +43,8 @@ class ChainCerberus: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-cerberus-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-cerberus.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-cerberus-app.cosmostation.io/"
     var apiUrl = "https://api-cerberus.cosmostation.io/"
