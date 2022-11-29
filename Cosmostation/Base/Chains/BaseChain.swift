@@ -167,6 +167,8 @@ class ChainFactory {
             return .UMEE_MAIN
         case CHAIN_XPLA_S:
             return .XPLA_MAIN
+        case CHAIN_ONOMY_S:
+            return .ONOMY_MAIN
             
             
         case CHAIN_STATION_TEST_S:
@@ -247,6 +249,8 @@ class ChainFactory {
             return ChainOkc(chainType!)
         case .OMNIFLIX_MAIN:
             return ChainOmniflix(chainType!)
+        case .ONOMY_MAIN:
+            return ChainOnomy(chainType!)
         case .OSMOSIS_MAIN:
             return ChainOsmosis(chainType!)
         case .PASSAGE_MAIN:
@@ -370,6 +374,7 @@ let CHAIN_TERITORI_S = "SUPPORT_CHAIN_TERITORI"
 let CHAIN_TGRADE_S = "SUPPORT_CHAIN_TGRADE"
 let CHAIN_UMEE_S = "SUPPORT_CHAIN_UMEE"
 let CHAIN_XPLA_S = "SUPPORT_CHAIN_XPLA"
+let CHAIN_ONOMY_S = "SUPPORT_CHAIN_ONOMY"
 
 let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 
