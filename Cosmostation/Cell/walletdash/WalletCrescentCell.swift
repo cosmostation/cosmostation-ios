@@ -20,7 +20,6 @@ class WalletCrescentCell: UITableViewCell {
     @IBOutlet weak var vestingLayer: UIView!
     @IBOutlet weak var btnDelegate: UIButton!
     @IBOutlet weak var btnProposal: UIButton!
-    @IBOutlet weak var btnDefi: UIButton!
     @IBOutlet weak var btnWalletConnect: UIButton!
     
     @IBOutlet weak var availableLabel: UILabel!
@@ -45,7 +44,6 @@ class WalletCrescentCell: UITableViewCell {
         rewardLabel.text = NSLocalizedString("str_reward", comment: "")
         btnDelegate.setTitle(NSLocalizedString("btn_delegate", comment: ""), for: .normal)
         btnProposal.setTitle(NSLocalizedString("btn_governance", comment: ""), for: .normal)
-        btnDefi.setTitle(NSLocalizedString("btn_credefi", comment: ""), for: .normal)
         btnWalletConnect.setTitle(NSLocalizedString("btn_walletconnect", comment: ""), for: .normal)
     }
     
@@ -92,7 +90,6 @@ class WalletCrescentCell: UITableViewCell {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnDelegate.borderColor = UIColor.font05
         btnProposal.borderColor = UIColor.font05
-        btnDefi.borderColor = UIColor.font05
         btnWalletConnect.borderColor = UIColor.font05
     }
     
