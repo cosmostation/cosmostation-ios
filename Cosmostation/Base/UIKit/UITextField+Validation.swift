@@ -10,7 +10,7 @@ import UIKit
 
 extension UITextField {
     /**
-     Checks that the text won't contain: `.` or `,` at the begining; duplicated `.` or `,` ;  simultaneous `.` and `,`;  more than `displayDecimal` decimals or text characters
+     Checks that the text won't contain: `.` or `,` at the begining; duplicated `.` or `,` ;  simultaneous `.` and `,`;  more than `displayDecimal` decimals.
      - Parameter range: The range of characters to be replaced
      - Parameter replacementString: The replacement string for the specified range.
      - Parameter displayDecimal: Max number of decimals supported.
@@ -41,12 +41,6 @@ extension UITextField {
             if (text.substring(from: index).count > (displayDecimal - 1) && range.length == 0) {
                 return false
             }
-        }
-        if string.unicodeScalars.first(where: {
-            NSCharacterSet.letters.contains($0) ||
-            NSCharacterSet.controlCharacters.contains($0) ||
-            NSCharacterSet.symbols.contains($0) }) != nil {
-            return false
         }
         return true
     }
