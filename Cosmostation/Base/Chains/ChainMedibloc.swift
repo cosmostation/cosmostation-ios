@@ -43,8 +43,8 @@ class ChainMedibloc: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-medibloc-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-medibloc.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-medibloc-app.cosmostation.io/"
     var apiUrl = "https://api-medibloc.cosmostation.io/"

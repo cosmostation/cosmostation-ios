@@ -43,8 +43,8 @@ class ChainAkash: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-akash-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-akash.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-akash-app.cosmostation.io/"
     var apiUrl = "https://api-akash.cosmostation.io/"

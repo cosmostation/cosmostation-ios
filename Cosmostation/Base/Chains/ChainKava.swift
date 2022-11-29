@@ -44,8 +44,8 @@ class ChainKava: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = true
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-kava-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-kava.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-kava-app.cosmostation.io/"
     var apiUrl = "https://api-kava.cosmostation.io/"

@@ -43,8 +43,8 @@ class ChainProvenance: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-provenance-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-provenance.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-provenance-app.cosmostation.io/"
     var apiUrl = "https://api-provenance.cosmostation.io/"

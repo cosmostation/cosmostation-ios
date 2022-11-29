@@ -43,8 +43,8 @@ class ChainCertik: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-shentu-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-shentu.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-shentu-app.cosmostation.io/"
     var apiUrl = "https://api-shentu.cosmostation.io/"

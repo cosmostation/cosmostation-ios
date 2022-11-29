@@ -43,8 +43,8 @@ class ChainDesmos: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-desmos-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-desmos.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-desmos-app.cosmostation.io/"
     var apiUrl = "https://api-desmos.cosmostation.io/"

@@ -46,8 +46,8 @@ class ChainFetchAi: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-fetchai-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-fetchai.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-fetchai-app.cosmostation.io/"
     var apiUrl = "https://api-fetchai.cosmostation.io/"

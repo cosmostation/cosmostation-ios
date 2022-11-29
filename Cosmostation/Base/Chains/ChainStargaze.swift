@@ -43,8 +43,8 @@ class ChainStargaze: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-stargaze-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-stargaze.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-stargaze-app.cosmostation.io/"
     var apiUrl = "https://api-stargaze.cosmostation.io/"

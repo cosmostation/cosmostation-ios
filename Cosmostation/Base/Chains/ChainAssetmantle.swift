@@ -43,8 +43,8 @@ class ChainAssetMantle: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-asset-mantle-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-asset-mantle.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-asset-mantle-app.cosmostation.io/"
     var apiUrl = "https://api-asset-mantle.cosmostation.io/"

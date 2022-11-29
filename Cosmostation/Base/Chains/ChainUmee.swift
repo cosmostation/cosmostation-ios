@@ -43,8 +43,8 @@ class ChainUmee: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-umee-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-umee.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-umee-app.cosmostation.io/"
     var apiUrl = "https://api-umee.cosmostation.io/"

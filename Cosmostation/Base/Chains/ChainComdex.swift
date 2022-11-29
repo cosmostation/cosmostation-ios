@@ -43,8 +43,8 @@ class ChainComdex: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-comdex-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-comdex.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-comdex-app.cosmostation.io/"
     var apiUrl = "https://api-comdex.cosmostation.io/"

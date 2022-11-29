@@ -43,8 +43,8 @@ class ChainEmoney: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-emoney-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-emoney.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-emoney-app.cosmostation.io/"
     var apiUrl = "https://api-emoney.cosmostation.io/"

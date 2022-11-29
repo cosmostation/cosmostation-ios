@@ -43,8 +43,8 @@ class ChainKonstellation: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-konstellation-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-konstellation.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-konstellation-app.cosmostation.io/"
     var apiUrl = "https://api-konstellation.cosmostation.io/"

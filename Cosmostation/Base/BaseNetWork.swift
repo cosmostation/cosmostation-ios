@@ -285,7 +285,8 @@ class BaseNetWork {
         guard let chainConfig = ChainFactory.getChainConfig(chain) else {
             return nil
         }
-        return ClientConnection.insecure(group: group).connect(host: chainConfig.grpcUrl, port: chainConfig.grpcPort)
+//        return ClientConnection.insecure(group: group).connect(host: chainConfig.grpcUrl, port: chainConfig.grpcPort)
+        return ClientConnection.secure(group: group).connect(host: chainConfig.grpcUrl, port: chainConfig.grpcPort)
     }
     
     static func getCallOptions() -> CallOptions {

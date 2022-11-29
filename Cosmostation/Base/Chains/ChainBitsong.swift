@@ -43,8 +43,8 @@ class ChainBitsong: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-bitsong-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-bitsong.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-bitsong-app.cosmostation.io/"
     var apiUrl = "https://api-bitsong.cosmostation.io/"
