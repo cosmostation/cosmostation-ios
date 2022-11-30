@@ -250,6 +250,10 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v2/assets/" +  chainId + "/token/erc20"
     }
     
+    static func mintscanEvmTxcheck(_ chainId: String, _ ethTx: String) -> String {
+        return MINTSCAN_API_URL + "v1/" +  chainId + "/evm/tx/"  +  ethTx
+    }
+    
     static func getPrices() -> String {
         let currency = BaseData.instance.getCurrencyString().lowercased()
         return MINTSCAN_API_URL + "v2/utils/market/prices?currency=" + currency
