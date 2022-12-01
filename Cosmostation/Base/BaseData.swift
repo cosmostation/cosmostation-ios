@@ -120,19 +120,6 @@ final class BaseData : NSObject{
         return mPrices.filter { $0.coinGeckoId == geckoId }.first
     }
     
-    func getBaseDenom(_ chainConfig: ChainConfig?, _ denom: String) -> String {
-        if (chainConfig == nil) { return "" }
-        if (chainConfig!.isGrpc) {
-            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom.lowercased() }).first {
-                return msAsset.origin_denom
-            }
-//            else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom.lowercased() }).first {
-//                return msToken.denom.lowercased()
-//            }
-        }
-        return denom
-    }
-    
     func getChainId(_ chainType: ChainType?) -> String {
         if (WUtils.isGRPC(chainType)) {
             if (mNodeInfo_gRPC != nil) { return mNodeInfo_gRPC!.network }

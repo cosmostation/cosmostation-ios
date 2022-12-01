@@ -30,17 +30,13 @@ class HardListCell: UITableViewCell {
     
     func onBindView(_ position: Int, _ hardParam: Kava_Hard_V1beta1_Params?, _ myDeposits: Array<Coin>?, _ myBorrows: Array<Coin>?,
                     _ interestRates: Array<Kava_Hard_V1beta1_MoneyMarketInterestRate>?) {
-        guard let hardMoneyMarket = hardParam?.moneyMarkets[position] else {
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+        guard let hardMoneyMarket = hardParam?.moneyMarkets[position],
+              let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == hardMoneyMarket.denom }).first else {
             return
         }
-        let chainConfig = ChainKava.init(.KAVA_MAIN)
-        var hardImgDenom = ""
-        if (hardMoneyMarket.denom.starts(with: "ibc/")) {
-            hardImgDenom = BaseData.instance.getBaseDenom(chainConfig, hardMoneyMarket.denom)
-        } else {
-            hardImgDenom = hardMoneyMarket.denom
-        }
-        let decimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == hardMoneyMarket.denom }).first?.decimals ?? 6
+        let hardImgDenom = msAsset.origin_denom
+        let decimal = msAsset.decimals
         let url = KAVA_HARD_POOL_IMG_URL + "lp" + hardImgDenom + ".png"
         let title = hardMoneyMarket.spotMarketID.replacingOccurrences(of: ":30", with: "").replacingOccurrences(of: ":720", with: "")
         harvestImg.af_setImage(withURL: URL(string: url)!)
