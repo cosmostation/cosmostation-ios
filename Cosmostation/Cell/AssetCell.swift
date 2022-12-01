@@ -124,7 +124,7 @@ class AssetCell: UITableViewCell {
             }
             
         } else if (chainConfig?.chainType == .OKEX_MAIN && balance?.balance_denom == OKT_MAIN_DENOM) {
-            if let okToken = WUtils.getOkToken(OKT_MAIN_DENOM) {
+            if let okToken = BaseData.instance.okToken(OKT_MAIN_DENOM) {
                 let amount = WUtils.getAllExToken(OKT_MAIN_DENOM)
                 assetImg.image = UIImage(named: "tokenOkc")
                 assetSymbol.text = okToken.symbol!.uppercased()
@@ -153,8 +153,8 @@ class AssetCell: UITableViewCell {
             }
             
         } else if (chainConfig?.chainType == .OKEX_MAIN) {
-            if let okToken = WUtils.getOkToken(balance!.balance_denom) {
-                assetImg.af_setImage(withURL: URL(string: OKTokenImgUrl + okToken.original_symbol! + ".png")!)
+            if let okToken = BaseData.instance.okToken(balance!.balance_denom) {
+                assetImg.af_setImage(withURL: okToken.assetImg())
                 assetSymbol.text = okToken.original_symbol?.uppercased()
                 assetDescription.text = okToken.description
                 

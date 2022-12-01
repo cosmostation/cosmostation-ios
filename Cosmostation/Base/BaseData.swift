@@ -174,7 +174,7 @@ final class BaseData : NSObject{
     }
     
     func bnbToken(_ symbol: String?) -> BnbToken? {
-        return BaseData.instance.mBnbTokenList.filter{ $0.symbol == symbol }.first
+        return mBnbTokenList.filter{ $0.symbol == symbol }.first
     }
     
     func bnbTicker(_ symbol: String?) -> BnbTicker? {
@@ -185,6 +185,12 @@ final class BaseData : NSObject{
             return result
         }
         return nil
+    }
+    
+    
+    //OK chain
+    func okToken(_ symbol: String?) -> OkToken? {
+        return mOkTokenList?.data?.filter { $0.symbol == symbol}.first
     }
     
     func okDepositAmount() -> NSDecimalNumber {

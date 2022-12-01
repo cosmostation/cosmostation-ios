@@ -526,10 +526,6 @@ public class WUtils {
         }
     }
     
-    static func getOkToken(_ symbol:String?) -> OkToken? {
-        return BaseData.instance.mOkTokenList?.data?.filter { $0.symbol == symbol}.first
-    }
-    
     static func getTokenAmount(_ balances: Array<Balance>?, _ symbol:String) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         if (balances != nil) {
@@ -621,7 +617,7 @@ public class WUtils {
                 }
                 
             } else if (chainConfig!.chainType == .OKEX_MAIN) {
-                if let okTokenInfo = getOkToken(denom!) {
+                if let okTokenInfo = BaseData.instance.okToken(denom) {
                     return okTokenInfo.original_symbol!.uppercased()
                 }
             }

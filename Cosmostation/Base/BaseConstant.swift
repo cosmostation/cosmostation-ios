@@ -483,4 +483,3 @@ let MintscanUrl = "https://www.mintscan.io/"
 let GeckoUrl = "https://www.coingecko.com/en/coins/"
 
 let ChainImgStarnameUrl  = ResourceBase + "chains/logo/"
-let OKTokenImgUrl = ResourceBase + "coin_image/okex/";

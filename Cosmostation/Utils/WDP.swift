@@ -78,11 +78,8 @@ public class WDP {
                 }
 
             } else if (chainConfig!.chainType == .OKEX_MAIN) {
-                if let okTokenInfo = WUtils.getOkToken(denom!) {
-                    if let url = URL(string: OKTokenImgUrl + okTokenInfo.original_symbol! + ".png") {
-                        imgView?.af_setImage(withURL: url)
-                        return
-                    }
+                if let okTokenInfo = BaseData.instance.okToken(denom) {
+                    imgView?.af_setImage(withURL: okTokenInfo.assetImg())
                 }
             }
         }

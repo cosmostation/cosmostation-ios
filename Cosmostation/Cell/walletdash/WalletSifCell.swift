@@ -72,7 +72,6 @@ class WalletSifCell: UITableViewCell {
         
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 18, 6)
-        WDP.dpAssetValue(msAsset.coinGeckoId, totalToken, 18, totalValue)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, 18, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 18, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 18, 6)
