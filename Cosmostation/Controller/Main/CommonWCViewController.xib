@@ -239,10 +239,10 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofa-Z7-EWc">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <rect key="frame" x="0.0" y="104" width="414" height="792"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HWh-pL-9Xo" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
-                            <rect key="frame" x="177" y="418" width="60" height="60"/>
+                            <rect key="frame" x="177" y="366" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="P9Q-vc-N1K"/>
                                 <constraint firstAttribute="width" constant="60" id="meJ-QS-3K8"/>
@@ -261,7 +261,7 @@
             <constraints>
                 <constraint firstItem="lei-Tz-eQ9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4H7-Ak-TeW"/>
                 <constraint firstItem="ycw-kr-7A8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="5Rf-l9-ZdM"/>
-                <constraint firstItem="ofa-Z7-EWc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8hT-pS-nUf"/>
+                <constraint firstItem="ofa-Z7-EWc" firstAttribute="top" secondItem="VEr-cg-Ahz" secondAttribute="top" constant="56" id="8hT-pS-nUf"/>
                 <constraint firstAttribute="trailing" secondItem="ycw-kr-7A8" secondAttribute="trailing" constant="16" id="Bfd-QL-ADd"/>
                 <constraint firstItem="cch-dN-UlM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="HzA-Lh-mA0"/>
                 <constraint firstItem="lei-Tz-eQ9" firstAttribute="top" secondItem="VEr-cg-Ahz" secondAttribute="top" id="LBQ-vG-6Gg"/>
@@ -274,7 +274,7 @@
                 <constraint firstItem="VEr-cg-Ahz" firstAttribute="trailing" secondItem="ofa-Z7-EWc" secondAttribute="trailing" id="cY5-rC-5Yq"/>
                 <constraint firstItem="ycw-kr-7A8" firstAttribute="top" secondItem="VEr-cg-Ahz" secondAttribute="top" constant="30" id="jsw-6b-00T"/>
                 <constraint firstItem="VEr-cg-Ahz" firstAttribute="bottom" secondItem="cch-dN-UlM" secondAttribute="bottom" constant="16" id="kOP-a7-1kf"/>
-                <constraint firstItem="VEr-cg-Ahz" firstAttribute="bottom" secondItem="lei-Tz-eQ9" secondAttribute="bottom" constant="-34" id="vmV-56-ZbJ"/>
+                <constraint firstAttribute="bottom" secondItem="lei-Tz-eQ9" secondAttribute="bottom" id="vmV-56-ZbJ"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="153.34821428571428"/>
         </view>
