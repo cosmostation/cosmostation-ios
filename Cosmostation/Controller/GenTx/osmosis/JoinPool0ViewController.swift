@@ -63,8 +63,8 @@ class JoinPool0ViewController: BaseViewController, UITextFieldDelegate {
         if (coin1Denom == OSMOSIS_MAIN_DENOM) {
             available1MaxAmount = available1MaxAmount.subtracting(mainDenomFee)
         }
-        coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0Denom)
-        coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1Denom)
+//        coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0Denom)
+//        coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1Denom)
         
         WDP.dpSymbolImg(chainConfig, coin0Denom, inputCoin0Img)
         WDP.dpSymbol(chainConfig, coin0Denom, inputCoin0Name)

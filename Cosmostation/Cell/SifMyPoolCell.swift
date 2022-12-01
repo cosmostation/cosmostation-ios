@@ -44,44 +44,44 @@ class SifMyPoolCell: UITableViewCell {
     }
     
     func onBindSifPoolView(_ pool: Sifnode_Clp_V1_Pool, _ myLp: Sifnode_Clp_V1_LiquidityProviderRes?) {
-        poolCardView.backgroundColor = UIColor.init(named: "sif_bg")
-        poolPairLabel.textColor = UIColor.init(named: "sif")
-        
-        let chainConfig = ChainSif.init(.SIF_MAIN)
-        let nf = WUtils.getNumberFormatter(2)
-        let rowanDecimal = WUtils.getDenomDecimal(chainConfig, SIF_MAIN_DENOM)
-        let rowanAmount = NSDecimalNumber.init(string: pool.nativeAssetBalance)
-        let externalDecimal = WUtils.getDenomDecimal(chainConfig, pool.externalAsset.symbol)
-        let externalAmount = NSDecimalNumber.init(string: pool.externalAssetBalance)
-        let exteranlDenom = pool.externalAsset.symbol
-        let poolValue = WUtils.getSifPoolValue(pool)
-        let poolValueFormatted = "$ " + nf.string(from: poolValue)!
-        WDP.dpSymbolImg(chainConfig, exteranlDenom, poolPairTokenImg)
-        
-        poolPairLabel.text = "ROWAN : " + WUtils.getSymbol(chainConfig, exteranlDenom)
-        totalLiquidityValueLabel.attributedText = WUtils.getDpAttributedString(poolValueFormatted, 2, totalLiquidityValueLabel.font)
-        WDP.dpSymbol(chainConfig, SIF_MAIN_DENOM, liquidity1DenomLabel)
-        WDP.dpSymbol(chainConfig, exteranlDenom, liquidity2DenomLabel)
-        liquidity1AmountLabel.attributedText = WDP.dpAmount(rowanAmount.stringValue, liquidity1AmountLabel.font, rowanDecimal, 6)
-        liquidity2AmountLabel.attributedText = WDP.dpAmount(externalAmount.stringValue, liquidity2AmountLabel.font, externalDecimal, 6)
-        
-        //dp my lp info
-        if (myLp != nil) {
-            let myShareValue = WUtils.getSifMyShareValue(pool, myLp!)
-            let myShareValueFormatted = "$ " + nf.string(from: myShareValue)!
-            myShareValueLabel.attributedText = WUtils.getDpAttributedString(myShareValueFormatted, 2, myShareValueLabel.font)
-            WDP.dpSymbol(chainConfig, SIF_MAIN_DENOM, myDepositCoin0DenomLabel)
-            WDP.dpSymbol(chainConfig, exteranlDenom, myDepositCoin1DenomLabel)
-            myDepositCoin0AmountLabel.attributedText = WDP.dpAmount(myLp!.nativeAssetBalance, myDepositCoin0AmountLabel.font, rowanDecimal, 6)
-            myDepositCoin1AmountLabel.attributedText = WDP.dpAmount(myLp?.externalAssetBalance, myDepositCoin1AmountLabel.font, externalDecimal, 6)
-        }
-        
-        //dp available
-        let availableRowan = BaseData.instance.getAvailable_gRPC(SIF_MAIN_DENOM)
-        let availableExternal = BaseData.instance.getAvailable_gRPC(exteranlDenom)
-        WDP.dpSymbol(chainConfig, SIF_MAIN_DENOM, availableCoin0DenomLabel)
-        WDP.dpSymbol(chainConfig, exteranlDenom, availableCoin1DenomLabel)
-        availableCoin0AmountLabel.attributedText = WDP.dpAmount(availableRowan, availableCoin0AmountLabel.font, rowanDecimal, 6)
-        availableCoin1AmountLabel.attributedText = WDP.dpAmount(availableExternal, availableCoin1AmountLabel.font, externalDecimal, 6)
+//        poolCardView.backgroundColor = UIColor.init(named: "sif_bg")
+//        poolPairLabel.textColor = UIColor.init(named: "sif")
+//        
+//        let chainConfig = ChainSif.init(.SIF_MAIN)
+//        let nf = WUtils.getNumberFormatter(2)
+//        let rowanDecimal = WUtils.getDenomDecimal(chainConfig, SIF_MAIN_DENOM)
+//        let rowanAmount = NSDecimalNumber.init(string: pool.nativeAssetBalance)
+//        let externalDecimal = WUtils.getDenomDecimal(chainConfig, pool.externalAsset.symbol)
+//        let externalAmount = NSDecimalNumber.init(string: pool.externalAssetBalance)
+//        let exteranlDenom = pool.externalAsset.symbol
+//        let poolValue = WUtils.getSifPoolValue(pool)
+//        let poolValueFormatted = "$ " + nf.string(from: poolValue)!
+//        WDP.dpSymbolImg(chainConfig, exteranlDenom, poolPairTokenImg)
+//        
+//        poolPairLabel.text = "ROWAN : " + WUtils.getSymbol(chainConfig, exteranlDenom)
+//        totalLiquidityValueLabel.attributedText = WUtils.getDpAttributedString(poolValueFormatted, 2, totalLiquidityValueLabel.font)
+//        WDP.dpSymbol(chainConfig, SIF_MAIN_DENOM, liquidity1DenomLabel)
+//        WDP.dpSymbol(chainConfig, exteranlDenom, liquidity2DenomLabel)
+//        liquidity1AmountLabel.attributedText = WDP.dpAmount(rowanAmount.stringValue, liquidity1AmountLabel.font, rowanDecimal, 6)
+//        liquidity2AmountLabel.attributedText = WDP.dpAmount(externalAmount.stringValue, liquidity2AmountLabel.font, externalDecimal, 6)
+//        
+//        //dp my lp info
+//        if (myLp != nil) {
+//            let myShareValue = WUtils.getSifMyShareValue(pool, myLp!)
+//            let myShareValueFormatted = "$ " + nf.string(from: myShareValue)!
+//            myShareValueLabel.attributedText = WUtils.getDpAttributedString(myShareValueFormatted, 2, myShareValueLabel.font)
+//            WDP.dpSymbol(chainConfig, SIF_MAIN_DENOM, myDepositCoin0DenomLabel)
+//            WDP.dpSymbol(chainConfig, exteranlDenom, myDepositCoin1DenomLabel)
+//            myDepositCoin0AmountLabel.attributedText = WDP.dpAmount(myLp!.nativeAssetBalance, myDepositCoin0AmountLabel.font, rowanDecimal, 6)
+//            myDepositCoin1AmountLabel.attributedText = WDP.dpAmount(myLp?.externalAssetBalance, myDepositCoin1AmountLabel.font, externalDecimal, 6)
+//        }
+//        
+//        //dp available
+//        let availableRowan = BaseData.instance.getAvailable_gRPC(SIF_MAIN_DENOM)
+//        let availableExternal = BaseData.instance.getAvailable_gRPC(exteranlDenom)
+//        WDP.dpSymbol(chainConfig, SIF_MAIN_DENOM, availableCoin0DenomLabel)
+//        WDP.dpSymbol(chainConfig, exteranlDenom, availableCoin1DenomLabel)
+//        availableCoin0AmountLabel.attributedText = WDP.dpAmount(availableRowan, availableCoin0AmountLabel.font, rowanDecimal, 6)
+//        availableCoin1AmountLabel.attributedText = WDP.dpAmount(availableExternal, availableCoin1AmountLabel.font, externalDecimal, 6)
     }
 }

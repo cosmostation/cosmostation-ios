@@ -114,7 +114,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         if (chainConfig?.isGrpc == true) {
             var sendGeckocId = ""
             var feeGeckocId = feeDenom
-            if let sendMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
+            if let sendMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == toSendDenom }).first {
                 divideDecimal = sendMsAsset.decimals
                 displayDecimal = sendMsAsset.decimals
                 currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
@@ -133,8 +133,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                 sendGeckocId = msToken.coinGeckoId
             }
             
-            feeDivideDecimal = WUtils.getDenomDecimal(chainConfig, feeDenom)
-            if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == feeDenom.lowercased() }).first {
+            if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == feeDenom }).first {
                 feeGeckocId = feeMsAsset.coinGeckoId
                 feeDivideDecimal = feeMsAsset.decimals
             }

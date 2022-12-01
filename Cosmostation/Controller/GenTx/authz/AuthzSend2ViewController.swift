@@ -87,8 +87,11 @@ class AuthzSend2ViewController: BaseViewController, UITextFieldDelegate, SBCardP
     }
     
     func onUpdateView() {
-        divideDecimal = WUtils.getDenomDecimal(chainConfig, selectedCoin.denom)
-        displayDecimal = WUtils.getDenomDecimal(chainConfig, selectedCoin.denom)
+        guard let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == selectedCoin.denom }).first else {
+            return
+        }
+        divideDecimal = msAsset.decimals
+        displayDecimal = msAsset.decimals
         maxAvailable = NSDecimalNumber.init(string: selectedCoin.amount)
         
         if (grant!.authorization.typeURL.contains(Cosmos_Bank_V1beta1_SendAuthorization.protoMessageName)) {

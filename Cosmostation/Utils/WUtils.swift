@@ -578,19 +578,6 @@ public class WUtils {
         return chainConfig?.stakeDenom ?? ""
     }
     
-    static func getDenomDecimal(_ chainConfig: ChainConfig?, _ denom: String?) -> Int16 {
-        if (chainConfig == nil || denom == nil) { return 6 }
-        if (chainConfig!.isGrpc) {
-            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
-                return msAsset.decimals
-            }
-//            else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
-//                return msToken.decimal
-//            }
-        }
-        return chainConfig!.divideDecimal
-    }
-    
     static func setDenomTitle(_ chain: ChainType?, _ label: UILabel?) {
         if let chainConfig = ChainFactory.getChainConfig(chain) {
             label?.text = chainConfig.stakeSymbol

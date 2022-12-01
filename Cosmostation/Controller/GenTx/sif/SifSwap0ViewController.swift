@@ -44,8 +44,8 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
         self.selectedPool = self.pageHolderVC.mSifPool
         self.swapInDenom = self.pageHolderVC.mSwapInDenom!
         self.swapOutDenom = self.pageHolderVC.mSwapOutDenom!
-        self.dpInPutDecimal = WUtils.getDenomDecimal(chainConfig, swapInDenom)
-        self.dpOutPutDecimal = WUtils.getDenomDecimal(chainConfig, swapOutDenom)
+//        self.dpInPutDecimal = WUtils.getDenomDecimal(chainConfig, swapInDenom)
+//        self.dpOutPutDecimal = WUtils.getDenomDecimal(chainConfig, swapOutDenom)
         
         inputTextFiled.delegate = self
         inputTextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

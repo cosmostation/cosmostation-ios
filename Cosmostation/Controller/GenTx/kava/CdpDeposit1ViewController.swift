@@ -277,8 +277,8 @@ class CdpDeposit1ViewController: BaseViewController, UITextFieldDelegate, SBCard
             if (mKavaMyCdp_gRPC ==  nil || mKavaOraclePrice == nil) { return }
             self.mCDenom = mCollateralParam!.getcDenom()!
             self.mPDenom = mCollateralParam!.getpDenom()!
-            self.cDpDecimal = WUtils.getDenomDecimal(chainConfig, mCDenom)
-            self.pDpDecimal = WUtils.getDenomDecimal(chainConfig, mPDenom)
+            self.cDpDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == mCDenom }).first?.decimals ?? 6
+            self.pDpDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == mPDenom }).first?.decimals ?? 6
             self.cMaxAmount = BaseData.instance.getAvailableAmount_gRPC(mCDenom)
             cAvailabeMaxLabel.attributedText = WDP.dpAmount(cMaxAmount.stringValue, cAvailabeMaxLabel.font!, cDpDecimal, cDpDecimal)
             

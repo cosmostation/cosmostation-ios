@@ -315,9 +315,14 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
             self.mCollateralParam = BaseData.instance.mKavaCdpParams_gRPC?.getCollateralParamByType(mCollateralParamType)
             self.mCDenom = mCollateralParam!.getcDenom()!
             self.mPDenom = mCollateralParam!.getpDenom()!
-            self.cDpDecimal = WUtils.getDenomDecimal(chainConfig, mCDenom)
-            self.pDpDecimal = WUtils.getDenomDecimal(chainConfig, mPDenom)
-            self.kDpDecimal = WUtils.getDenomDecimal(chainConfig, KAVA_MAIN_DENOM)
+            guard let cMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == mCDenom }).first,
+                  let pMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == mPDenom }).first,
+                  let kMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == KAVA_MAIN_DENOM }).first else {
+                return
+            }
+            self.cDpDecimal = cMsAsset.decimals
+            self.pDpDecimal = pMsAsset.decimals
+            self.kDpDecimal = kMsAsset.decimals
             self.cAvailable = BaseData.instance.getAvailableAmount_gRPC(mCDenom)
             self.pAvailable = BaseData.instance.getAvailableAmount_gRPC(mPDenom)
             self.kAvailable = BaseData.instance.getAvailableAmount_gRPC(KAVA_MAIN_DENOM)

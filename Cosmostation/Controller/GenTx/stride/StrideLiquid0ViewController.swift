@@ -71,7 +71,7 @@ class StrideLiquid0ViewController: BaseViewController, UITextFieldDelegate {
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
         
-        inputDecimal = WUtils.getDenomDecimal(chainConfig, inputDenom)
+        inputDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == inputDenom }).first?.decimals ?? 6
         maxAmount = BaseData.instance.getAvailableAmount_gRPC(inputDenom)
         
         WDP.dpSymbol(chainConfig, inputDenom, inputCoinName)
@@ -84,7 +84,7 @@ class StrideLiquid0ViewController: BaseViewController, UITextFieldDelegate {
         } else if (txType == TASK_TYPE_STRIDE_LIQUIDITY_UNSTAKE) {
             outputDenom = hostZones.ibcDenom
         }
-        outputDecimal = WUtils.getDenomDecimal(chainConfig, outputDenom)
+        outputDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == outputDenom }).first?.decimals ?? 6
         WDP.dpSymbol(chainConfig, outputDenom, outputCoinName)
         WDP.dpSymbolImg(chainConfig, outputDenom, outputCoinImg)
     }

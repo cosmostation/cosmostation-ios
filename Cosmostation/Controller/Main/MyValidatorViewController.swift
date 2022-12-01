@@ -430,26 +430,28 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func getClaimableReward() -> Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward> {
-        let soreted = BaseData.instance.mMyReward_gRPC.sorted {
-            let firstCoin = $0.reward.filter({ $0.denom == chainConfig?.stakeDenom }).first
-            let secondCoin = $1.reward.filter({ $0.denom == chainConfig?.stakeDenom }).first
-            let firstAmount = NSDecimalNumber.init(string: firstCoin?.amount)
-            let secondAmount = NSDecimalNumber.init(string: secondCoin?.amount)
-            return firstAmount.compare(secondAmount).rawValue > 0 ? true : false
-        }
         var result = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
-        soreted.forEach { rawReward in
-            if let stakeCoin = rawReward.reward.filter({ $0.denom == chainConfig?.stakeDenom }).first {
-                let divideDecimal = WUtils.getDenomDecimal(chainConfig, stakeCoin.denom)
-                var rewardAmount = NSDecimalNumber.init(string: stakeCoin.amount)
-                rewardAmount = rewardAmount.multiplying(byPowerOf10: -18).multiplying(byPowerOf10: -divideDecimal)
-                if (rewardAmount.compare(NSDecimalNumber.init(string: "0.01")).rawValue > 0) {
-                    result.append(rawReward)
+        if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == chainConfig!.stakeDenom }).first {
+            let decimal = msAsset.decimals
+            let soreted = BaseData.instance.mMyReward_gRPC.sorted {
+                let firstCoin = $0.reward.filter({ $0.denom == chainConfig?.stakeDenom }).first
+                let secondCoin = $1.reward.filter({ $0.denom == chainConfig?.stakeDenom }).first
+                let firstAmount = NSDecimalNumber.init(string: firstCoin?.amount)
+                let secondAmount = NSDecimalNumber.init(string: secondCoin?.amount)
+                return firstAmount.compare(secondAmount).rawValue > 0 ? true : false
+            }
+            soreted.forEach { rawReward in
+                if let stakeCoin = rawReward.reward.filter({ $0.denom == chainConfig?.stakeDenom }).first {
+                    var rewardAmount = NSDecimalNumber.init(string: stakeCoin.amount)
+                    rewardAmount = rewardAmount.multiplying(byPowerOf10: -18).multiplying(byPowerOf10: -decimal)
+                    if (rewardAmount.compare(NSDecimalNumber.init(string: "0.01")).rawValue > 0) {
+                        result.append(rawReward)
+                    }
                 }
             }
-        }
-        if (result.count > 10) {
-            result = Array(result[0..<10])
+            if (result.count > 10) {
+                result = Array(result[0..<10])
+            }
         }
         return result
     }

@@ -72,8 +72,8 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         coin0Denom = mKavaSwapPool.coins[0].denom
         coin1Denom = mKavaSwapPool.coins[1].denom
-        coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0Denom)
-        coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1Denom)
+        coin0Decimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == coin0Denom }).first?.decimals ?? 6
+        coin1Decimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == coin1Denom }).first?.decimals ?? 6
         
         if (mKavaSwapPool.coins[0].denom == coin0Denom) {
             coin0Amount = NSDecimalNumber.init(string: mKavaSwapPool.coins[0].amount)

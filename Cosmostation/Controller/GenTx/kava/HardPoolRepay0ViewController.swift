@@ -35,7 +35,7 @@ class HardPoolRepay0ViewController: BaseViewController, UITextFieldDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         hardPoolDenom = pageHolderVC.mHardMoneyMarketDenom!
-        dpDecimal = WUtils.getDenomDecimal(chainConfig, hardPoolDenom)
+        dpDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == hardPoolDenom }).first?.decimals ?? 6
         
         let currentAvailable = BaseData.instance.getAvailableAmount_gRPC(hardPoolDenom)
         currentBorrowed = WUtils.getHardBorrowedAmountByDenom(hardPoolDenom, BaseData.instance.mHardMyBorrow).multiplying(by: NSDecimalNumber.init(string: "1.05"), withBehavior: WUtils.handler0 )

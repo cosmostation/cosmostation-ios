@@ -73,8 +73,8 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
             mOutputCoinAmount = NSDecimalNumber.init(string: mKavaSwapPool.coins[0].amount)
         }
         
-        dpInPutDecimal = WUtils.getDenomDecimal(chainConfig, inputCoinDenom)
-        dpOutPutDecimal = WUtils.getDenomDecimal(chainConfig, outputCoinDenom)
+        dpInPutDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == inputCoinDenom }).first?.decimals ?? 6
+        dpOutPutDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == outputCoinDenom }).first?.decimals ?? 6 
         
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(inputCoinDenom)
         WDP.dpCoin(chainConfig, inputCoinDenom, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel)

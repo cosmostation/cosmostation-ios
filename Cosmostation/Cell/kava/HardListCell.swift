@@ -40,7 +40,7 @@ class HardListCell: UITableViewCell {
         } else {
             hardImgDenom = hardMoneyMarket.denom
         }
-        let decimal = WUtils.getDenomDecimal(chainConfig, hardMoneyMarket.denom)
+        let decimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == hardMoneyMarket.denom }).first?.decimals ?? 6
         let url = KAVA_HARD_POOL_IMG_URL + "lp" + hardImgDenom + ".png"
         let title = hardMoneyMarket.spotMarketID.replacingOccurrences(of: ":30", with: "").replacingOccurrences(of: ":720", with: "")
         harvestImg.af_setImage(withURL: URL(string: url)!)

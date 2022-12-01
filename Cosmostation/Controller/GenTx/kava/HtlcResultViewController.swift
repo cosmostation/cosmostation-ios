@@ -174,7 +174,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             }
             
             let sendCoin = Coin.init(msg.amount[0].denom, msg.amount[0].amount)
-            let sendCoinDecimal = WUtils.getDenomDecimal(chainConfig, sendCoin.denom)
+            let sendCoinDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == sendCoin.denom }).first?.decimals ?? 6
             cell?.sentAmountLabel.attributedText = WDP.dpAmount(sendCoin.amount, cell!.sentAmountLabel.font!, sendCoinDecimal, sendCoinDecimal)
             cell?.sentDenom.text = sendCoin.denom.uppercased()
             
