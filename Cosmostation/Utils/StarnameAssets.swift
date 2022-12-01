@@ -10,9 +10,9 @@ import Foundation
 
 public func getStarNameChainImgUrl(_ uri: String?) -> URL {
     if let asset = getStarnameAssets().filter({ $0.uri == uri }).first {
-        return URL(string: asset.chainImg ?? "")!
+        return URL(string: asset.chainImg!)!
     }
-    return URL(string: ChainImgStarnameUrl + "unknown.png")!
+    return URL(string: ResourceBase + "starname/module/nameservice/unknown.png")!
 }
 
 public func getStarNameChainName(_ uri: String?) -> String {
@@ -93,9 +93,9 @@ public struct StarnameAsset {
         self.chainType = chainType
         
         if (chainImg == nil) {
-            self.chainImg = ChainImgStarnameUrl + "unknown.png"
+            self.chainImg = ResourceBase + "starname/module/nameservice/unknown.png"
         } else {
-            self.chainImg = ChainImgStarnameUrl + chainImg!
+            self.chainImg = ResourceBase + "starname/module/nameservice/" + chainImg!
         }
     }
 }

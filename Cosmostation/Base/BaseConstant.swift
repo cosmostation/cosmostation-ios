@@ -481,5 +481,3 @@ let ICON_2002                   = "ICON_2002";
 let ResourceBase = "https://raw.githubusercontent.com/cosmostation/chainlist/master/chain/"
 let MintscanUrl = "https://www.mintscan.io/"
 let GeckoUrl = "https://www.coingecko.com/en/coins/"
-
-let ChainImgStarnameUrl  = ResourceBase + "chains/logo/"
