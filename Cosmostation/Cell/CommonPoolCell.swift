@@ -33,42 +33,42 @@ class CommonPoolCell: UITableViewCell {
     }
     
     func onBindOsmoPoolView(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) {
-        //dp pool info
-        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
-        let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
-        let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
-        let coin0Symbol =  WUtils.getSymbol(chainConfig, coin0.denom)
-        let coin1Symbol = WUtils.getSymbol(chainConfig, coin1.denom)
-        let coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0.denom)
-        let coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1.denom)
-        
-        poolPairLabel.text = "#" + String(pool.id) + " " + coin0Symbol + " : " + coin1Symbol
-        
-        let coin0Value = WUtils.usdValue(chainConfig, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
-        let coin1Value = WUtils.usdValue(chainConfig, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
-        let poolValue = coin0Value.adding(coin1Value)
-        let nf = WUtils.getNumberFormatter(2)
-        let formatted = "$ " + nf.string(from: poolValue)!
-        totalLiquidityValueLabel.attributedText = WUtils.getDpAttributedString(formatted, 2, totalLiquidityValueLabel.font)
-        
-        WDP.dpSymbol(chainConfig, coin0.denom, liquidity1DenomLabel)
-        liquidity1DenomLabel.adjustsFontSizeToFitWidth = true
-        WDP.dpSymbol(chainConfig, coin0.denom, liquidity2DenomLabel)
-        liquidity2DenomLabel.adjustsFontSizeToFitWidth = true
-        liquidity1AmountLabel.attributedText = WDP.dpAmount(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
-        liquidity2AmountLabel.attributedText = WDP.dpAmount(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
-        
-        
-        //dp available
-        let availableCoin0 = BaseData.instance.getAvailable_gRPC(coin0.denom)
-        let availableCoin1 = BaseData.instance.getAvailable_gRPC(coin1.denom)
-        
-        WDP.dpSymbol(chainConfig, coin0.denom, availableCoin0DenomLabel)
-        availableCoin0DenomLabel.adjustsFontSizeToFitWidth = true
-        WDP.dpSymbol(chainConfig, coin1.denom, availableCoin1DenomLabel)
-        availableCoin1DenomLabel.adjustsFontSizeToFitWidth = true
-        availableCoin0AmountLabel.attributedText = WDP.dpAmount(availableCoin0, availableCoin0AmountLabel.font, coin0Decimal, 6)
-        availableCoin1AmountLabel.attributedText = WDP.dpAmount(availableCoin1, availableCoin1AmountLabel.font, coin1Decimal, 6)
+//        //dp pool info
+//        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
+//        let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
+//        let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
+//        let coin0Symbol =  WUtils.getSymbol(chainConfig, coin0.denom)
+//        let coin1Symbol = WUtils.getSymbol(chainConfig, coin1.denom)
+//        let coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0.denom)
+//        let coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1.denom)
+//        
+//        poolPairLabel.text = "#" + String(pool.id) + " " + coin0Symbol + " : " + coin1Symbol
+//        
+//        let coin0Value = WUtils.usdValue(chainConfig, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
+//        let coin1Value = WUtils.usdValue(chainConfig, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
+//        let poolValue = coin0Value.adding(coin1Value)
+//        let nf = WUtils.getNumberFormatter(2)
+//        let formatted = "$ " + nf.string(from: poolValue)!
+//        totalLiquidityValueLabel.attributedText = WUtils.getDpAttributedString(formatted, 2, totalLiquidityValueLabel.font)
+//        
+//        WDP.dpSymbol(chainConfig, coin0.denom, liquidity1DenomLabel)
+//        liquidity1DenomLabel.adjustsFontSizeToFitWidth = true
+//        WDP.dpSymbol(chainConfig, coin0.denom, liquidity2DenomLabel)
+//        liquidity2DenomLabel.adjustsFontSizeToFitWidth = true
+//        liquidity1AmountLabel.attributedText = WDP.dpAmount(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
+//        liquidity2AmountLabel.attributedText = WDP.dpAmount(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
+//        
+//        
+//        //dp available
+//        let availableCoin0 = BaseData.instance.getAvailable_gRPC(coin0.denom)
+//        let availableCoin1 = BaseData.instance.getAvailable_gRPC(coin1.denom)
+//        
+//        WDP.dpSymbol(chainConfig, coin0.denom, availableCoin0DenomLabel)
+//        availableCoin0DenomLabel.adjustsFontSizeToFitWidth = true
+//        WDP.dpSymbol(chainConfig, coin1.denom, availableCoin1DenomLabel)
+//        availableCoin1DenomLabel.adjustsFontSizeToFitWidth = true
+//        availableCoin0AmountLabel.attributedText = WDP.dpAmount(availableCoin0, availableCoin0AmountLabel.font, coin0Decimal, 6)
+//        availableCoin1AmountLabel.attributedText = WDP.dpAmount(availableCoin1, availableCoin1AmountLabel.font, coin1Decimal, 6)
     }
     
     func onBindKavaPoolView(_ pool: Kava_Swap_V1beta1_PoolResponse) {

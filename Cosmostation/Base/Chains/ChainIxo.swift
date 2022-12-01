@@ -50,7 +50,6 @@ class ChainIxo: ChainConfig {
     var lcdUrl = "https://lcd-ixo-app.cosmostation.io/"
     var apiUrl = "https://api-ixo.cosmostation.io/"
     var explorerUrl = MintscanUrl + "ixo/"
-    var validatorImgUrl = MonikerUrl + "ixo/"
     var priceUrl = CoingeckoUrl + "ixo"
     
     required init(_ chainType: ChainType) {

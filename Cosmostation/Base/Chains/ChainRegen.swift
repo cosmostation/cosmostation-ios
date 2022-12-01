@@ -49,7 +49,6 @@ class ChainRegen: ChainConfig {
     var lcdUrl = "https://lcd-regen-app.cosmostation.io/"
     var apiUrl = "https://api-regen.cosmostation.io/"
     var explorerUrl = MintscanUrl + "regen/"
-    var validatorImgUrl = MonikerUrl + "regen/"
     var priceUrl = CoingeckoUrl + "regen"
     
     required init(_ chainType: ChainType) {

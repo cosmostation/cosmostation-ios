@@ -50,7 +50,7 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
                     maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!)
                 }
                 
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == toSendDenom }).first {
                 divideDecimal = msToken.decimal
                 displayDecimal = msToken.decimal
                 maxAvailable = NSDecimalNumber.init(string: msToken.amount)

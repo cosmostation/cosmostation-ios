@@ -49,7 +49,6 @@ class ChainSentinel: ChainConfig {
     var lcdUrl = "https://lcd-sentinel-app.cosmostation.io/"
     var apiUrl = "https://api-sentinel.cosmostation.io/"
     var explorerUrl = MintscanUrl + "sentinel/"
-    var validatorImgUrl = MonikerUrl + "sentinel/"
     var priceUrl = CoingeckoUrl + "sentinel"
     
     required init(_ chainType: ChainType) {

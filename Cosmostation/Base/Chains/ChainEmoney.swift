@@ -49,7 +49,6 @@ class ChainEmoney: ChainConfig {
     var lcdUrl = "https://lcd-emoney-app.cosmostation.io/"
     var apiUrl = "https://api-emoney.cosmostation.io/"
     var explorerUrl = MintscanUrl + "emoney/"
-    var validatorImgUrl = MonikerUrl + "emoney/"
     var priceUrl = CoingeckoUrl + "e-money"
     
     required init(_ chainType: ChainType) {
@@ -81,4 +80,3 @@ let EMONEY_DKK_DENOM = "edkk"
 let EMONEY_NOK_DENOM = "enok"
 let EMONEY_SEK_DENOM = "esek"
 
-let EMONEY_COIN_IMG_URL = ResourceBase + "coin_image/emoney/";

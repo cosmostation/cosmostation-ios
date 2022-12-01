@@ -49,7 +49,6 @@ class ChainProvenance: ChainConfig {
     var lcdUrl = "https://lcd-provenance-app.cosmostation.io/"
     var apiUrl = "https://api-provenance.cosmostation.io/"
     var explorerUrl = MintscanUrl + "provenance/"
-    var validatorImgUrl = MonikerUrl + "provenance/"
     var priceUrl = CoingeckoUrl + "provenance-blockchain"
     
     required init(_ chainType: ChainType) {

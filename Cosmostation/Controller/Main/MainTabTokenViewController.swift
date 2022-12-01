@@ -223,7 +223,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cardPopup.show(onViewController: self)
             
         } else if (indexPath.section == SECTION_TOKEN_GRPC && indexPath.row != mToken_gRPC.count) {
-            onStartTransferVC(mToken_gRPC[indexPath.row].denom)
+//            onStartTransferVC(mToken_gRPC[indexPath.row].denom)
+            onStartTransferVC(mToken_gRPC[indexPath.row].address)
             
         } else if (indexPath.section == SECTION_IBC_GRPC) {
             onStartTransferVC(mIbc_gRPC[indexPath.row].denom)

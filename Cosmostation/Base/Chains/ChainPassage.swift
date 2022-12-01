@@ -49,7 +49,6 @@ class ChainPassage: ChainConfig {
     var lcdUrl = "https://lcd-passage-app.cosmostation.io/"
     var apiUrl = "https://api-passage.cosmostation.io/"
     var explorerUrl = MintscanUrl + "passage/"
-    var validatorImgUrl = MonikerUrl + "passage/"
     var priceUrl = ""
     
     required init(_ chainType: ChainType) {

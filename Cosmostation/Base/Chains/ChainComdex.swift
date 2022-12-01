@@ -49,7 +49,6 @@ class ChainComdex: ChainConfig {
     var lcdUrl = "https://lcd-comdex-app.cosmostation.io/"
     var apiUrl = "https://api-comdex.cosmostation.io/"
     var explorerUrl = MintscanUrl + "comdex/"
-    var validatorImgUrl = MonikerUrl + "comdex/"
     var priceUrl = CoingeckoUrl + "comdex"
     
     required init(_ chainType: ChainType) {

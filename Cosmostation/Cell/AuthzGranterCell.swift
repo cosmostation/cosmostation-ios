@@ -45,6 +45,10 @@ class AuthzGranterCell: UITableViewCell {
                     _ reward: Coin?, _ commission: Coin?) {
         if (chainConfig == nil) { return }
         let stakingDenom = chainConfig!.stakeDenom
+        guard let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) else {
+            return
+        }
+        
         let availableAmount = WUtils.plainStringToDecimal(available?.amount)
         let vestingAmount = WUtils.plainStringToDecimal(vesting?.amount)
         let delegatedAmount = WUtils.plainStringToDecimal(delegated?.amount)
@@ -70,7 +74,7 @@ class AuthzGranterCell: UITableViewCell {
         }
         
         totalAmountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, totalAmountLabel.font!, chainConfig!.divideDecimal, 6)
-        totalValueLabel.attributedText = WUtils.dpAssetValue(stakingDenom, totalAmount, chainConfig!.divideDecimal, totalValueLabel.font)
+        totalValueLabel.attributedText = WUtils.dpAssetValue(msAsset.coinGeckoId, totalAmount, chainConfig!.divideDecimal, totalValueLabel.font)
         
     }
 }

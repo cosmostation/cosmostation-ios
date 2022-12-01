@@ -50,7 +50,6 @@ class ChainStride: ChainConfig {
     var lcdUrl = "https://lcd-stride-app.cosmostation.io/"
     var apiUrl = "https://api-stride.cosmostation.io/"
     var explorerUrl = MintscanUrl + "stride/"
-    var validatorImgUrl = MonikerUrl + "stride/"
     var priceUrl = CoingeckoUrl + "stride"
     
     required init(_ chainType: ChainType) {

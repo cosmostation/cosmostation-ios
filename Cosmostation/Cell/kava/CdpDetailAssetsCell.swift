@@ -58,8 +58,9 @@ class CdpDetailAssetsCell: UITableViewCell {
         let principalValues = pAvailable.multiplying(byPowerOf10: -pDpDecimal)
         principalValue.attributedText = WUtils.getDPRawDollor(principalValues.stringValue, 2, principalValue.font)
 
+        //TODO display kava value with usd
         kavaAmount.attributedText = WDP.dpAmount(kAvailable.stringValue, kavaAmount.font!, kDpDecimal, kDpDecimal)
-        let kavaValues = kAvailable.multiplying(byPowerOf10: -kDpDecimal).multiplying(by: WUtils.perUsdValue(KAVA_MAIN_DENOM)!, withBehavior: WUtils.handler2Down)
+        let kavaValues = kAvailable.multiplying(byPowerOf10: -kDpDecimal).multiplying(by: NSDecimalNumber.zero, withBehavior: WUtils.handler2Down)
         kavaValue.attributedText = WUtils.getDPRawDollor(kavaValues.stringValue, 2, kavaValue.font)
         
         WDP.dpSymbolImg(chainConfig, cDenom, collateralImg)

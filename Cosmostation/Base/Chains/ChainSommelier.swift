@@ -49,7 +49,6 @@ class ChainSommelier: ChainConfig {
     var lcdUrl = "https://lcd-sommelier-app.cosmostation.io/"
     var apiUrl = "https://api-sommelier.cosmostation.io/"
     var explorerUrl = MintscanUrl + "sommelier/"
-    var validatorImgUrl = MonikerUrl + "sommelier/"
     var priceUrl = CoingeckoUrl + "sommelier"
     
     required init(_ chainType: ChainType) {

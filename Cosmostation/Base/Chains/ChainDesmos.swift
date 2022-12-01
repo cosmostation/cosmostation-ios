@@ -49,7 +49,6 @@ class ChainDesmos: ChainConfig {
     var lcdUrl = "https://lcd-desmos-app.cosmostation.io/"
     var apiUrl = "https://api-desmos.cosmostation.io/"
     var explorerUrl = MintscanUrl + "desmos/"
-    var validatorImgUrl = MonikerUrl + "desmos/"
     var priceUrl = CoingeckoUrl + "desmos"
     
     required init(_ chainType: ChainType) {

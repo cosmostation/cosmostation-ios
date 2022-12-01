@@ -59,14 +59,19 @@ class WalletIrisCell: UITableViewCell {
     
     func updateView(_ account: Account?, _ chainConfig: ChainConfig?) {
         if (account == nil || chainConfig == nil) { return }
+        let stakingDenom = chainConfig!.stakeDenom
+        guard let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) else {
+            return
+        }
+        
+        let totalIris = WUtils.getAllMainAsset(stakingDenom)
         denomTitle.text = chainConfig!.stakeSymbol
-        let totalIris = WUtils.getAllMainAsset(chainConfig!.stakeDenom)
         totalAmount.attributedText = WDP.dpAmount(totalIris.stringValue, totalAmount.font!, 6, 6)
-        totalValue.attributedText = WUtils.dpAssetValue(chainConfig!.stakeDenom, totalIris, 6, totalValue.font)
-        availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(chainConfig!.stakeDenom), availableAmount.font!, 6, 6)
+        totalValue.attributedText = WUtils.dpAssetValue(msAsset.coinGeckoId, totalIris, 6, totalValue.font)
+        availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, 6, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)
-        rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(chainConfig!.stakeDenom), rewardAmount.font, 6, 6)
+        rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(stakingDenom), rewardAmount.font, 6, 6)
         BaseData.instance.updateLastTotal(account, totalIris.multiplying(byPowerOf10: -6).stringValue)
     }
     

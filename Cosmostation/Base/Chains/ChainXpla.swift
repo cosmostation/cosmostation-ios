@@ -49,7 +49,6 @@ class ChainXpla: ChainConfig {
     var lcdUrl = "https://lcd-xpla-app.cosmostation.io/"
     var apiUrl = "https://api-xpla.cosmostation.io/"
     var explorerUrl = MintscanUrl + "xpla/"
-    var validatorImgUrl = MonikerUrl + "xpla/"
     var priceUrl = CoingeckoUrl + "xpla"
     
     required init(_ chainType: ChainType) {

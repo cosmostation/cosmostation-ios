@@ -49,7 +49,6 @@ class ChainCrescent: ChainConfig {
     var lcdUrl = "https://lcd-crescent-app.cosmostation.io/"
     var apiUrl = "https://api-crescent.cosmostation.io/"
     var explorerUrl = MintscanUrl + "crescent/"
-    var validatorImgUrl = MonikerUrl + "crescent/"
     var priceUrl = CoingeckoUrl + "crescent-network"
     
     required init(_ chainType: ChainType) {

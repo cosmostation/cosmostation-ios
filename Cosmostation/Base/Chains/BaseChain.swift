@@ -50,7 +50,6 @@ protocol ChainConfig {
     var lcdUrl: String { get set }
     var apiUrl: String { get set }
     var explorerUrl: String { get set }
-    var validatorImgUrl: String { get set }
     var priceUrl: String { get set }
     
     init (_ chainType: ChainType)

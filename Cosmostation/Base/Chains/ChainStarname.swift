@@ -49,7 +49,6 @@ class ChainStarname: ChainConfig {
     var lcdUrl = "https://lcd-starname-app.cosmostation.io/"
     var apiUrl = "https://api-starname.cosmostation.io/"
     var explorerUrl = MintscanUrl + "starname/"
-    var validatorImgUrl = MonikerUrl + "iov/"
     var priceUrl = CoingeckoUrl + "starname"
     
     required init(_ chainType: ChainType) {

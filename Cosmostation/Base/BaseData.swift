@@ -66,7 +66,6 @@ final class BaseData : NSObject{
     //kava gRPC
     var mKavaPrices_gRPC: Array<Kava_Pricefeed_V1beta1_CurrentPriceResponse> = Array<Kava_Pricefeed_V1beta1_CurrentPriceResponse>()
     var mKavaCdpParams_gRPC: Kava_Cdp_V1beta1_Params?
-//    var mIncentiveParam: IncentiveParam?
     var mIncentiveRewards: IncentiveReward?
     var mKavaHardParams_gRPC: Kava_Hard_V1beta1_Params?
     var mHardMyDeposit: Array<Coin> = Array<Coin>()
@@ -102,7 +101,7 @@ final class BaseData : NSObject{
             }
         }
         getUserFavoTokens(address).forEach({ userFavo in
-            if (!mMyTokens.contains(where: { $0.contract_address == userFavo.contract_address })) {
+            if (!mMyTokens.contains(where: { $0.address == userFavo.address })) {
                 mMyTokens.append(userFavo)
             }
         })
@@ -111,24 +110,25 @@ final class BaseData : NSObject{
     
     func setMyTokenBalance(_ contAddress: String, _ amount: String) {
         mMyTokens.forEach { myToken in
-            if (myToken.contract_address == contAddress) {
+            if (myToken.address == contAddress) {
                 myToken.setAmount(amount)
             }
         }
     }
     
-    func getPrice(_ denom: String) -> Price? {
-        return mPrices.filter { $0.denom!.lowercased() == denom.lowercased() }.first
+    func getPrice(_ geckoId: String) -> Price? {
+        return mPrices.filter { $0.coinGeckoId == geckoId }.first
     }
     
     func getBaseDenom(_ chainConfig: ChainConfig?, _ denom: String) -> String {
         if (chainConfig == nil) { return "" }
         if (chainConfig!.isGrpc) {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom.lowercased() }).first {
-                return msAsset.base_denom
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom.lowercased() }).first {
-                return msToken.denom.lowercased()
+                return msAsset.origin_denom
             }
+//            else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom.lowercased() }).first {
+//                return msToken.denom.lowercased()
+//            }
         }
         return denom
     }
@@ -897,7 +897,7 @@ final class BaseData : NSObject{
         var result = Array<MintscanToken>()
         let contracts = UserDefaults.standard.stringArray(forKey: address + " " + KEY_USER_FAVO_TOKENS) ?? []
         contracts.forEach { contract in
-            if let userFavo = mMintscanTokens.filter({ $0.contract_address.lowercased() == contract.lowercased() }).first {
+            if let userFavo = mMintscanTokens.filter({ $0.address == contract }).first {
                 result.append(userFavo)
             }
         }

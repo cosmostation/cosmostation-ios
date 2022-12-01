@@ -50,7 +50,6 @@ class ChainTgrade: ChainConfig {
     var lcdUrl = "https://lcd-tgrade-app.cosmostation.io/"
     var apiUrl = "https://api-tgrade.cosmostation.io/"
     var explorerUrl = MintscanUrl + "tgrade/"
-    var validatorImgUrl = MonikerUrl + "tgrade/"
     var priceUrl = CoingeckoUrl + "tgrade"
     
     required init(_ chainType: ChainType) {

@@ -50,7 +50,6 @@ class ChainLike: ChainConfig {
     var lcdUrl = "https://lcd-likecoin-app.cosmostation.io/"
     var apiUrl = "https://api-likecoin.cosmostation.io/"
     var explorerUrl = MintscanUrl + "likecoin/"
-    var validatorImgUrl = MonikerUrl + "likecoin/"
     var priceUrl = CoingeckoUrl + "likecoin"
     
     required init(_ chainType: ChainType) {

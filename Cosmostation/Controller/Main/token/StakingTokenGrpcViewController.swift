@@ -20,6 +20,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     
     var stakingDenom = ""
     var totalAmount = NSDecimalNumber.zero
+    var msAsset: MintscanAsset!
     var hasVesting = false
     var hasUnbonding = false
     
@@ -56,11 +57,12 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     }
     
     func onInitView() {
+        msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom)
         WUtils.setDenomTitle(chainType, naviTokenSymbol)
         self.naviTokenImg.image = chainConfig?.stakeDenomImg
-        self.naviPerPrice.attributedText = WUtils.dpPrice(WUtils.getMainDenom(chainConfig), naviPerPrice.font)
-        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(WUtils.getMainDenom(chainConfig), naviUpdownPercent.font)
-        let changePrice = WUtils.priceChange(WUtils.getMainDenom(chainConfig))
+        self.naviPerPrice.attributedText = WUtils.dpPrice(msAsset.coinGeckoId, naviPerPrice.font)
+        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(msAsset.coinGeckoId, naviUpdownPercent.font)
+        let changePrice = WUtils.priceChange(msAsset.coinGeckoId)
         WDP.setPriceColor(naviUpdownPercent, changePrice)
         totalAmount = WUtils.getAllMainAsset(stakingDenom)
     }
@@ -91,7 +93,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
             cell?.onBindTokenDetail(account, chainConfig)
-            cell?.onBindValue(stakingDenom, totalAmount, chainConfig!.divideDecimal)
+            cell?.onBindValue(msAsset.coinGeckoId, totalAmount, chainConfig!.divideDecimal)
             cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
             return cell!
             

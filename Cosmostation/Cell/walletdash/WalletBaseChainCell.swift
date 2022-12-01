@@ -69,6 +69,9 @@ class WalletBaseChainCell: UITableViewCell {
         let stakingDenom = chainConfig!.stakeDenom
         let divideDecimal = chainConfig!.divideDecimal
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
+        guard let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) else {
+            return
+        }
         
         cardRoot.backgroundColor = chainConfig!.chainColorBG
         tokenSymbolImg.image = chainConfig!.stakeDenomImg
@@ -77,7 +80,7 @@ class WalletBaseChainCell: UITableViewCell {
         btnWalletConnect.isHidden = !chainConfig!.wcSupoort
 
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, divideDecimal, 6)
-        totalValue.attributedText = WUtils.dpAssetValue(stakingDenom, totalToken, divideDecimal, totalValue.font)
+        totalValue.attributedText = WUtils.dpAssetValue(msAsset.coinGeckoId, totalToken, divideDecimal, totalValue.font)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, divideDecimal, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, divideDecimal, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, divideDecimal, 6)

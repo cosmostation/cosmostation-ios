@@ -66,14 +66,20 @@ class WalletSifCell: UITableViewCell {
         vestingLayer.isHidden = true
     }
     
-    func updateView(_ account: Account?, _ chainType: ChainType?) {
-        let totalToken = WUtils.getAllMainAsset(SIF_MAIN_DENOM)
+    func updateView(_ account: Account?, _ chainConfig: ChainConfig?) {
+        if (account == nil || chainConfig == nil) { return }
+        let stakingDenom = chainConfig!.stakeDenom
+        guard let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) else {
+            return
+        }
+        
+        let totalToken = WUtils.getAllMainAsset(stakingDenom)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 18, 6)
-        totalValue.attributedText = WUtils.dpAssetValue(SIF_MAIN_DENOM, totalToken, 18, totalValue.font)
-        availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(SIF_MAIN_DENOM), availableAmount.font!, 18, 6)
+        totalValue.attributedText = WUtils.dpAssetValue(msAsset.coinGeckoId, totalToken, 18, totalValue.font)
+        availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, 18, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 18, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 18, 6)
-        rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(SIF_MAIN_DENOM), rewardAmount.font, 18, 6)
+        rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(stakingDenom), rewardAmount.font, 18, 6)
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -18).stringValue)
     }
     

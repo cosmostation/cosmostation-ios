@@ -12,42 +12,45 @@ public struct MintscanAsset {
     var chain: String = ""
     var denom: String = ""
     var type: String = ""
-    var base_denom: String = ""
-    var price_denom: String = ""
-    var base_type: String = ""
-    var dp_denom: String = ""
     var origin_chain: String = ""
+    var origin_denom: String = ""
+    var origin_type: String = ""
+    var symbol: String = ""
     var decimal: Int16 = 6
+    var description: String = ""
+    var image: String = ""
+    var coinGeckoId: String = ""
+    
+    var enable: Bool = false
     var path: String = ""
     var channel: String = ""
     var port: String = ""
     var counter_party: MintscanAssetCounterParty?
-    var description: String = ""
-    var image: String = ""
     
     init(_ dictionary: NSDictionary?) {
         self.chain = dictionary?["chain"] as? String ?? ""
         self.denom = dictionary?["denom"] as? String ?? ""
         self.type = dictionary?["type"] as? String ?? ""
-        self.base_denom = dictionary?["base_denom"] as? String ?? ""
-        self.price_denom = dictionary?["price_denom"] as? String ?? ""
-        self.base_type = dictionary?["base_type"] as? String ?? ""
-        self.dp_denom = dictionary?["dp_denom"] as? String ?? ""
         self.origin_chain = dictionary?["origin_chain"] as? String ?? ""
+        self.origin_denom = dictionary?["origin_denom"] as? String ?? ""
+        self.origin_type = dictionary?["origin_type"] as? String ?? ""
+        self.symbol = dictionary?["symbol"] as? String ?? ""
         self.decimal = dictionary?["decimal"] as? Int16 ?? 6
+        self.description = dictionary?["description"] as? String ?? ""
+        self.image = dictionary?["image"] as? String ?? ""
+        self.coinGeckoId = dictionary?["coinGeckoId"] as? String ?? ""
+        
+        self.enable = dictionary?["enable"] as? Bool ?? false
         self.path = dictionary?["path"] as? String ?? ""
         self.channel = dictionary?["channel"] as? String ?? ""
         self.port = dictionary?["port"] as? String ?? ""
         if let rawMintscanAssetCounterParty = dictionary?["counter_party"] as? NSDictionary {
             self.counter_party = MintscanAssetCounterParty.init(rawMintscanAssetCounterParty)
         }
-        self.description = dictionary?["description"] as? String ?? ""
-        self.image = dictionary?["image"] as? String ?? ""
     }
     
     func assetImg() -> URL? {
-        let imageurl = AssetBase + image
-        return URL(string: imageurl)
+        return URL(string: ResourceBase + image)
     }
     
     func beforeChain(_ currentChain: ChainConfig) -> String? {
@@ -58,10 +61,6 @@ public struct MintscanAsset {
             }
         }
         return nil
-    }
-    
-    func priceDenom() -> String {
-        return price_denom.isEmpty ? base_denom.lowercased() : price_denom.lowercased()
     }
 }
 

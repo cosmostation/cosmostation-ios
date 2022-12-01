@@ -49,7 +49,6 @@ class ChainOnomy: ChainConfig {
     var lcdUrl = "https://lcd-onomy-protocol-app.cosmostation.io/"
     var apiUrl = "https://api-onomy-protocol.cosmostation.io/"
     var explorerUrl = MintscanUrl + "onomy-protocol/"
-    var validatorImgUrl = MonikerUrl + "onomy-protocol/"
     var priceUrl = CoingeckoUrl + "onomy-protocol"
     
     required init(_ chainType: ChainType) {

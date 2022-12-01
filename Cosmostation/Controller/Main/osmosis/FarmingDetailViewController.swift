@@ -43,101 +43,101 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory.getChainConfig(chainType)
-        
-        topApr1dayLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
-        topArp7dayLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
-        topArp14DayLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
-        
-        self.farmDetailTableView.delegate = self
-        self.farmDetailTableView.dataSource = self
-        self.farmDetailTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.farmDetailTableView.register(UINib(nibName: "EarnBondedCell", bundle: nil), forCellReuseIdentifier: "EarnBondedCell")
-        self.farmDetailTableView.register(UINib(nibName: "EarnUnbondingCell", bundle: nil), forCellReuseIdentifier: "EarnUnbondingCell")
-        self.farmDetailTableView.register(UINib(nibName: "EarnUnbondedCell", bundle: nil), forCellReuseIdentifier: "EarnUnbondedCell")
-        
-        if #available(iOS 15.0, *) {
-            self.farmDetailTableView.sectionHeaderTopPadding = 0.0
-        }
-        
-        print("mPool ", mPool.id)
-        print("mPoolGauges ", mPoolGauges.count)
-        print("mLockUps ", mLockUps.count)
-        
-        coin0 = Coin.init(mPool.poolAssets[0].token.denom, mPool.poolAssets[0].token.amount)
-        coin1 = Coin.init(mPool.poolAssets[1].token.denom, mPool.poolAssets[1].token.amount)
-        let coin0Symbol =  WUtils.getSymbol(chainConfig, coin0.denom)
-        let coin1Symbol = WUtils.getSymbol(chainConfig, coin1.denom)
-        lpCoinPrice = WUtils.getOsmoLpTokenPerUsdPrice(mPool)
-        nf = WUtils.getNumberFormatter(2)
-        
-        let coin0Value = WUtils.usdValue(chainConfig!, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
-        let coin1Value = WUtils.usdValue(chainConfig!, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
-        poolValue = coin0Value.adding(coin1Value)
-        
-        
-        //display title
-        if (mLockUps.count > 0) {
-            topPoolIDLabel.text = "MY EARNING #" + String(mPool.id)
-            topPoolIDLabel.textColor = UIColor.init(named: "osmosis")
-        } else {
-            topPoolIDLabel.text = "EARNING #" + String(mPool.id)
-        }
-        
-        topPoolPairLabel.text = coin0Symbol + " / " + coin1Symbol
-        
-        
-        //display ARPs
-        if (mPoolGauges.count == 3 && mPoolGauges[0].distributedCoins.count > 0 && mPoolGauges[1].distributedCoins.count > 0 && mPoolGauges[2].distributedCoins.count > 0) {
-            let gauge0Amount = mPoolGauges[0].coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
-            let incentive1Day = NSDecimalNumber.init(string: gauge0Amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[0].distributedCoins[0].amount))
-            let incentiveValue1Day = WUtils.usdValue(chainConfig!, OSMOSIS_MAIN_DENOM, incentive1Day)
-            
-            let gauge1Amount = mPoolGauges[1].coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
-            let incentive7Day = NSDecimalNumber.init(string: gauge1Amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[1].distributedCoins[0].amount))
-            var incentiveValue7Day = WUtils.usdValue(chainConfig!, OSMOSIS_MAIN_DENOM, incentive7Day)
-            
-            let gauge2Amount = mPoolGauges[2].coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
-            let incentive14Day = NSDecimalNumber.init(string: gauge2Amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[2].distributedCoins[0].amount))
-            var incentiveValue14Day = WUtils.usdValue(chainConfig!, OSMOSIS_MAIN_DENOM, incentive14Day)
-            
-            
-            incentiveValue14Day = incentiveValue14Day.adding(incentiveValue7Day).adding(incentiveValue1Day)
-            incentiveValue7Day = incentiveValue7Day.adding(incentiveValue1Day)
-            
-            apr1Day = incentiveValue1Day.multiplying(by: NSDecimalNumber.init(value: 36500)).dividing(by: poolValue, withBehavior: WUtils.handler12)
-            apr7Day = incentiveValue7Day.multiplying(by: NSDecimalNumber.init(value: 36500)).dividing(by: poolValue, withBehavior: WUtils.handler12)
-            apr14Day = incentiveValue14Day.multiplying(by: NSDecimalNumber.init(value: 36500)).dividing(by: poolValue, withBehavior: WUtils.handler12)
-        }
-        topApr1dayLabel.attributedText = WUtils.displayPercent(apr1Day, topApr1dayLabel.font)
-        topArp7dayLabel.attributedText = WUtils.displayPercent(apr7Day, topArp7dayLabel.font)
-        topArp14DayLabel.attributedText = WUtils.displayPercent(apr14Day, topArp14DayLabel.font)
-        
-        
-        //display LP coin available
-        let lpCoin = BaseData.instance.getAvailable_gRPC("gamm/pool/" + String(mPool.id))
-        let lpCoinValue = NSDecimalNumber.init(string: lpCoin).multiplying(by: lpCoinPrice).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler2)
-        let formattedLpCoinValue = "$ " + nf.string(from: lpCoinValue)!
-        
-        topAvailableDenomLabel.text = "GAMM-" + String(mPool.id)
-        topAvailableAmountLabel.attributedText = WDP.dpAmount(lpCoin, topAvailableAmountLabel.font, 18, 18)
-        topAvailableValueLabel.attributedText = WUtils.getDpAttributedString(formattedLpCoinValue, 2, topAvailableValueLabel.font)
-        
-        
-        mLockUps.forEach { lockup in
-            let now = Date.init().millisecondsSince1970
-            let endTime = lockup.endTime.date.millisecondsSince1970
-            if (endTime == -62135596800000) {
-                mBondedList.append(lockup)
-            } else if (endTime > now) {
-                mUnbondingList.append(lockup)
-            } else {
-                mUnbondedList.append(lockup)
-            }
-        }
-        farmDetailTableView.reloadData()
+//        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+//        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+//        self.chainConfig = ChainFactory.getChainConfig(chainType)
+//        
+//        topApr1dayLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+//        topArp7dayLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+//        topArp14DayLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+//        
+//        self.farmDetailTableView.delegate = self
+//        self.farmDetailTableView.dataSource = self
+//        self.farmDetailTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+//        self.farmDetailTableView.register(UINib(nibName: "EarnBondedCell", bundle: nil), forCellReuseIdentifier: "EarnBondedCell")
+//        self.farmDetailTableView.register(UINib(nibName: "EarnUnbondingCell", bundle: nil), forCellReuseIdentifier: "EarnUnbondingCell")
+//        self.farmDetailTableView.register(UINib(nibName: "EarnUnbondedCell", bundle: nil), forCellReuseIdentifier: "EarnUnbondedCell")
+//        
+//        if #available(iOS 15.0, *) {
+//            self.farmDetailTableView.sectionHeaderTopPadding = 0.0
+//        }
+//        
+//        print("mPool ", mPool.id)
+//        print("mPoolGauges ", mPoolGauges.count)
+//        print("mLockUps ", mLockUps.count)
+//        
+//        coin0 = Coin.init(mPool.poolAssets[0].token.denom, mPool.poolAssets[0].token.amount)
+//        coin1 = Coin.init(mPool.poolAssets[1].token.denom, mPool.poolAssets[1].token.amount)
+//        let coin0Symbol =  WUtils.getSymbol(chainConfig, coin0.denom)
+//        let coin1Symbol = WUtils.getSymbol(chainConfig, coin1.denom)
+//        lpCoinPrice = WUtils.getOsmoLpTokenPerUsdPrice(mPool)
+//        nf = WUtils.getNumberFormatter(2)
+//        
+//        let coin0Value = WUtils.usdValue(chainConfig!, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
+//        let coin1Value = WUtils.usdValue(chainConfig!, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
+//        poolValue = coin0Value.adding(coin1Value)
+//        
+//        
+//        //display title
+//        if (mLockUps.count > 0) {
+//            topPoolIDLabel.text = "MY EARNING #" + String(mPool.id)
+//            topPoolIDLabel.textColor = UIColor.init(named: "osmosis")
+//        } else {
+//            topPoolIDLabel.text = "EARNING #" + String(mPool.id)
+//        }
+//        
+//        topPoolPairLabel.text = coin0Symbol + " / " + coin1Symbol
+//        
+//        
+//        //display ARPs
+//        if (mPoolGauges.count == 3 && mPoolGauges[0].distributedCoins.count > 0 && mPoolGauges[1].distributedCoins.count > 0 && mPoolGauges[2].distributedCoins.count > 0) {
+//            let gauge0Amount = mPoolGauges[0].coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
+//            let incentive1Day = NSDecimalNumber.init(string: gauge0Amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[0].distributedCoins[0].amount))
+//            let incentiveValue1Day = WUtils.usdValue(chainConfig!, OSMOSIS_MAIN_DENOM, incentive1Day)
+//            
+//            let gauge1Amount = mPoolGauges[1].coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
+//            let incentive7Day = NSDecimalNumber.init(string: gauge1Amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[1].distributedCoins[0].amount))
+//            var incentiveValue7Day = WUtils.usdValue(chainConfig!, OSMOSIS_MAIN_DENOM, incentive7Day)
+//            
+//            let gauge2Amount = mPoolGauges[2].coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
+//            let incentive14Day = NSDecimalNumber.init(string: gauge2Amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[2].distributedCoins[0].amount))
+//            var incentiveValue14Day = WUtils.usdValue(chainConfig!, OSMOSIS_MAIN_DENOM, incentive14Day)
+//            
+//            
+//            incentiveValue14Day = incentiveValue14Day.adding(incentiveValue7Day).adding(incentiveValue1Day)
+//            incentiveValue7Day = incentiveValue7Day.adding(incentiveValue1Day)
+//            
+//            apr1Day = incentiveValue1Day.multiplying(by: NSDecimalNumber.init(value: 36500)).dividing(by: poolValue, withBehavior: WUtils.handler12)
+//            apr7Day = incentiveValue7Day.multiplying(by: NSDecimalNumber.init(value: 36500)).dividing(by: poolValue, withBehavior: WUtils.handler12)
+//            apr14Day = incentiveValue14Day.multiplying(by: NSDecimalNumber.init(value: 36500)).dividing(by: poolValue, withBehavior: WUtils.handler12)
+//        }
+//        topApr1dayLabel.attributedText = WUtils.displayPercent(apr1Day, topApr1dayLabel.font)
+//        topArp7dayLabel.attributedText = WUtils.displayPercent(apr7Day, topArp7dayLabel.font)
+//        topArp14DayLabel.attributedText = WUtils.displayPercent(apr14Day, topArp14DayLabel.font)
+//        
+//        
+//        //display LP coin available
+//        let lpCoin = BaseData.instance.getAvailable_gRPC("gamm/pool/" + String(mPool.id))
+//        let lpCoinValue = NSDecimalNumber.init(string: lpCoin).multiplying(by: lpCoinPrice).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler2)
+//        let formattedLpCoinValue = "$ " + nf.string(from: lpCoinValue)!
+//        
+//        topAvailableDenomLabel.text = "GAMM-" + String(mPool.id)
+//        topAvailableAmountLabel.attributedText = WDP.dpAmount(lpCoin, topAvailableAmountLabel.font, 18, 18)
+//        topAvailableValueLabel.attributedText = WUtils.getDpAttributedString(formattedLpCoinValue, 2, topAvailableValueLabel.font)
+//        
+//        
+//        mLockUps.forEach { lockup in
+//            let now = Date.init().millisecondsSince1970
+//            let endTime = lockup.endTime.date.millisecondsSince1970
+//            if (endTime == -62135596800000) {
+//                mBondedList.append(lockup)
+//            } else if (endTime > now) {
+//                mUnbondingList.append(lockup)
+//            } else {
+//                mUnbondedList.append(lockup)
+//            }
+//        }
+//        farmDetailTableView.reloadData()
         
     }
     

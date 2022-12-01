@@ -64,12 +64,13 @@ public class WDP {
                     imgView?.af_setImage(withURL: assetImgeUrl)
                     return
                 }
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
-                if let assetImgeUrl = msToken.assetImg() {
-                    imgView?.af_setImage(withURL: assetImgeUrl)
-                    return
-                }
             }
+//            else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
+//                if let assetImgeUrl = msToken.assetImg() {
+//                    imgView?.af_setImage(withURL: assetImgeUrl)
+//                    return
+//                }
+//            }
             
         } else {
             if (chainConfig!.chainType == .BINANCE_MAIN) {
@@ -102,9 +103,11 @@ public class WDP {
         if (chainConfig?.isGrpc == true) {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
                 amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msAsset.decimal, msAsset.decimal)
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
-                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msToken.decimal, msToken.decimal)
-            } else {
+            }
+//            else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
+//                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msToken.decimal, msToken.decimal)
+//            }
+            else {
                 let decimal = WUtils.getDenomDecimal(chainConfig, denom)
                 amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, decimal, decimal)
             }

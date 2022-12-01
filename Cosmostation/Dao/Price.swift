@@ -9,6 +9,7 @@
 import Foundation
 
 public struct Price {
+    var coinGeckoId: String?
     var denom: String?
     var current_price: Double?
     var market_cap: Double?
@@ -17,6 +18,7 @@ public struct Price {
     var last_updated: String?
     
     init(_ dictionary: NSDictionary?) {
+        self.coinGeckoId = dictionary?["coinGeckoId"] as? String
         self.denom = dictionary?["denom"] as? String
         self.current_price = dictionary?["current_price"] as? Double
         self.market_cap = dictionary?["market_cap"] as? Double

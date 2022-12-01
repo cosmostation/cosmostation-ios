@@ -49,7 +49,6 @@ class ChainNyx: ChainConfig {
     var lcdUrl = "https://lcd-nyx-app.cosmostation.io/"
     var apiUrl = "https://api-nyx.cosmostation.io/"
     var explorerUrl = MintscanUrl + "nyx/"
-    var validatorImgUrl = MonikerUrl + "nyx/"
     var priceUrl = ""
     
     required init(_ chainType: ChainType) {

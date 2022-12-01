@@ -59,7 +59,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         if let assetImgeUrl = msAsset.assetImg() {
             naviTokenImg.af_setImage(withURL: assetImgeUrl)
         }
-        naviTokenSymbol.text = msAsset.dp_denom
+        naviTokenSymbol.text = msAsset.symbol
 
         if (chainConfig?.chainType == .KAVA_MAIN) {
             totalAmount = WUtils.getKavaTokenAll(nativeDenom)
@@ -67,10 +67,10 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
         }
 
-        let priceDenom = msAsset.priceDenom()
-        self.naviPerPrice.attributedText = WUtils.dpPrice(priceDenom, naviPerPrice.font)
-        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(priceDenom, naviUpdownPercent.font)
-        let changePrice = WUtils.priceChange(priceDenom)
+        let geckoId = msAsset.coinGeckoId
+        self.naviPerPrice.attributedText = WUtils.dpPrice(geckoId, naviPerPrice.font)
+        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(geckoId, naviUpdownPercent.font)
+        let changePrice = WUtils.priceChange(geckoId)
         WDP.setPriceColor(naviUpdownPercent, changePrice)
     }
 
@@ -94,7 +94,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
             cell?.onBindTokenDetail(account, chainConfig)
-            cell?.onBindValue(msAsset.priceDenom(), totalAmount, divideDecimal)
+            cell?.onBindValue(msAsset.coinGeckoId, totalAmount, divideDecimal)
             cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
             return cell!
             

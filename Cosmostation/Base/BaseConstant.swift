@@ -478,12 +478,10 @@ let ICON_SANTA                  = "ICON_SANTA";
 let ICON_2002                   = "ICON_2002";
 
 
-let ResourceBase = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/"
-let AssetBase = ResourceBase + "assets/images/"
-let MonikerUrl =  ResourceBase + "moniker/"
+let ResourceBase = "https://raw.githubusercontent.com/cosmostation/chainlist/master/chain/"
+let MintscanUrl = "https://www.mintscan.io/"
+let CoingeckoUrl = "https://www.coingecko.com/en/coins/"
+
 let ChainImgStarnameUrl  = ResourceBase + "chains/logo/"
 let BinanceTokenImgUrl = ResourceBase + "coin_image/binance/";
 let OKTokenImgUrl = ResourceBase + "coin_image/okex/";
-let BridgeTokenImgUrl = ResourceBase + "assets/images/ethereum/";
-let MintscanUrl = "https://www.mintscan.io/"
-let CoingeckoUrl = "https://www.coingecko.com/en/coins/"

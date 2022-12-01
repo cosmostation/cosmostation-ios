@@ -207,16 +207,16 @@ public class WUtils {
         }
     }
     
-    static func priceChange(_ denom: String) -> NSDecimalNumber {
-        guard let coinPrice = BaseData.instance.getPrice(denom) else {
+    static func priceChange(_ geckoId: String) -> NSDecimalNumber {
+        guard let coinPrice = BaseData.instance.getPrice(geckoId) else {
             return NSDecimalNumber.zero.rounding(accordingToBehavior: handler2Down)
         }
         return NSDecimalNumber.init(value: coinPrice.daily_price_change_in_percent ?? 0).rounding(accordingToBehavior: handler2Down)
     }
     
-    static func dpPriceChange(_ denom: String, _ font:UIFont) -> NSMutableAttributedString {
+    static func dpPriceChange(_ geckoId: String, _ font:UIFont) -> NSMutableAttributedString {
         let nf = getNumberFormatter(2)
-        let change = priceChange(denom)
+        let change = priceChange(geckoId)
         if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
             let formatted = "+" + nf.string(from: change)! + "%"
             return getDpAttributedString(formatted, 3, font)
@@ -226,51 +226,27 @@ public class WUtils {
         }
     }
     
-    static func price(_ denom: String) -> NSDecimalNumber {
-        guard let coinPrice = BaseData.instance.getPrice(denom) else {
+    static func price(_ geckoId: String) -> NSDecimalNumber {
+        guard let coinPrice = BaseData.instance.getPrice(geckoId) else {
             return NSDecimalNumber.zero.rounding(accordingToBehavior: handler12Down)
         }
         return NSDecimalNumber.init(value: coinPrice.current_price ?? 0).rounding(accordingToBehavior: handler12Down)
     }
     
-    static func dpPrice(_ denom: String, _ font:UIFont) -> NSMutableAttributedString {
+    static func dpPrice(_ geckoId: String, _ font:UIFont) -> NSMutableAttributedString {
         let nf = getNumberFormatter(3)
-        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: price(denom))!
+        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: price(geckoId))!
         return getDpAttributedString(formatted, 3, font)
     }
     
-    static func assetValue(_ denom: String, _ amount: NSDecimalNumber, _ divider: Int16) -> NSDecimalNumber {
-        return price(denom).multiplying(by: amount).multiplying(byPowerOf10: -divider, withBehavior: handler3Down)
+    static func assetValue(_ geckoId: String, _ amount: NSDecimalNumber, _ divider: Int16) -> NSDecimalNumber {
+        return price(geckoId).multiplying(by: amount).multiplying(byPowerOf10: -divider, withBehavior: handler3Down)
     }
     
-    static func dpAssetValue(_ denom: String, _ amount: NSDecimalNumber, _ divider: Int16, _ font: UIFont) -> NSMutableAttributedString {
+    static func dpAssetValue(_ geckoId: String, _ amount: NSDecimalNumber, _ divider: Int16, _ font: UIFont) -> NSMutableAttributedString {
         let nf = getNumberFormatter(3)
-        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: assetValue(denom, amount, divider))!
+        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: assetValue(geckoId, amount, divider))!
         return getDpAttributedString(formatted, 3, font)
-    }
-    
-    
-    //TODO using to display TVL with USD, need to update
-    static func perUsdValue(_ denom: String) -> NSDecimalNumber? {
-//        if (denom == EMONEY_EUR_DENOM || denom == EMONEY_CHF_DENOM || denom == EMONEY_DKK_DENOM || denom == EMONEY_NOK_DENOM || denom == EMONEY_SEK_DENOM) {
-//            if let value = BaseData.instance.getPrice("usdt")?.prices.filter{ $0.currency == denom.substring(from: 1) }.first?.current_price {
-//                return NSDecimalNumber.one.dividing(by: NSDecimalNumber.init(value: value), withBehavior: handler18)
-//            }
-//        }
-//        if let coinPrice = BaseData.instance.getPrice(denom) {
-//            return coinPrice.currencyPrice("usd").rounding(accordingToBehavior: handler18)
-//        }
-//        return nil
-        return NSDecimalNumber.zero
-    }
-    
-    static func usdValue(_ chainConfig: ChainConfig, _ denom: String, _ amount: NSDecimalNumber) -> NSDecimalNumber {
-//        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, denom)
-//        let decimalDenom = getDenomDecimal(chainConfig, denom)
-//        if let perUsdValue = perUsdValue(baseDenom) {
-//            return perUsdValue.multiplying(by: amount).multiplying(byPowerOf10: -decimalDenom, withBehavior: handler3Down)
-//        }
-        return NSDecimalNumber.zero
     }
     
     static func allAssetValue(_ chainConfig: ChainConfig?) -> NSDecimalNumber {
@@ -279,22 +255,24 @@ public class WUtils {
         if (chainConfig?.isGrpc == true) {
             baseData.mMyBalances_gRPC.forEach { coin in
                 if (coin.denom == getMainDenom(chainConfig)) {
-                    let amount = getAllMainAsset(coin.denom)
-                    let assetValue = assetValue(coin.denom, amount, chainConfig!.divideDecimal)
-                    totalValue = totalValue.adding(assetValue)
+                    if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
+                        let amount = getAllMainAsset(coin.denom)
+                        let assetValue = assetValue(msAsset.coinGeckoId, amount, msAsset.decimal)
+                        totalValue = totalValue.adding(assetValue)
+                    }
                     
                 } else if (chainConfig?.chainType == .KAVA_MAIN) {
                     if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
                         let amount = WUtils.getKavaTokenAll(coin.denom)
-                        let assetValue = assetValue(msAsset.base_denom, amount, msAsset.decimal)
+                        let assetValue = assetValue(msAsset.coinGeckoId, amount, msAsset.decimal)
                         totalValue = totalValue.adding(assetValue)
                     }
                     
                 } else {
                     if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
                         let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                        let priceDenom = msAsset.priceDenom()
-                        let assetValue = assetValue(priceDenom, amount, msAsset.decimal)
+                        let geckoId = msAsset.coinGeckoId
+                        let assetValue = assetValue(geckoId, amount, msAsset.decimal)
                         totalValue = totalValue.adding(assetValue)
                     }
                 }
@@ -311,7 +289,7 @@ public class WUtils {
                 } else {
                     allBnb = allBnb.adding(bnbConvertAmount(coin.balance_denom))
                 }
-                let assetValue = assetValue(getMainDenom(chainConfig), allBnb, 0)
+                let assetValue = assetValue("bnb", allBnb, 0)
                 totalValue = totalValue.adding(assetValue)
             }
             
@@ -321,7 +299,7 @@ public class WUtils {
                 if (coin.balance_denom == getMainDenom(chainConfig)) {
                     allOKT = allOKT.adding(getAllExToken(coin.balance_denom))
                 }
-                let assetValue = assetValue(getMainDenom(chainConfig), allOKT, 0)
+                let assetValue = assetValue("okt", allOKT, 0)
                 totalValue = totalValue.adding(assetValue)
             }
             
@@ -331,7 +309,7 @@ public class WUtils {
         if (chainConfig?.wasmSupport == true || chainConfig?.evmSupport == true) {
             BaseData.instance.mMyTokens.forEach { msToken in
                 let amount = NSDecimalNumber.init(string: msToken.amount)
-                let assetValue = assetValue(msToken.denom, amount, msToken.decimal)
+                let assetValue = assetValue(msToken.coinGeckoId, amount, msToken.decimal)
                 totalValue = totalValue.adding(assetValue)
             }
         }
@@ -605,9 +583,10 @@ public class WUtils {
         if (chainConfig!.isGrpc) {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
                 return msAsset.decimal
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
-                return msToken.decimal
             }
+//            else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
+//                return msToken.decimal
+//            }
         }
         return chainConfig!.divideDecimal
     }
@@ -628,7 +607,7 @@ public class WUtils {
     
     static func getMintscanPath(_ fromChain: ChainConfig, _ toChain: ChainConfig, _ denom: String) -> MintscanPath? {
         let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom.lowercased() }).first
-        let msTokens = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom.lowercased() }).first
+        let msTokens = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first
         var result: MintscanPath?
         BaseData.instance.mMintscanAssets.forEach { asset in
             if (msAsset != nil) {
@@ -648,7 +627,7 @@ public class WUtils {
             } else if (msTokens != nil) {
                 if (asset.chain == toChain.chainAPIName &&
                     asset.beforeChain(toChain) == fromChain.chainAPIName &&
-                    asset.counter_party?.denom?.lowercased() == msTokens?.contract_address.lowercased()) {
+                    asset.counter_party?.denom?.lowercased() == msTokens?.address.lowercased()) {
                     result = MintscanPath.init(asset.counter_party!.channel!, asset.counter_party!.port!)
                     return
                 }
@@ -679,40 +658,6 @@ public class WUtils {
         return transition
     }
     
-//    static func getFeeInfos(_ chainConfig: ChainConfig?) -> Array<FeeInfo> {
-//        var result = Array<FeeInfo>()
-//        chainConfig?.getGasRates().forEach { gasInfo in
-//            result.append(FeeInfo.init(gasInfo))
-//        }
-//        if (result.count == 1) {
-//            result[0].title = NSLocalizedString("str_fixed", comment: "")
-//            result[0].msg = NSLocalizedString("fee_speed_title_fixed", comment: "")
-//        } else if (result.count == 2) {
-//            result[1].title = NSLocalizedString("str_average", comment: "")
-//            result[1].msg = NSLocalizedString("fee_speed_title_average", comment: "")
-//            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
-//                result[0].title = NSLocalizedString("str_zero", comment: "")
-//                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
-//            } else {
-//                result[0].title = NSLocalizedString("str_tiny", comment: "")
-//                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
-//            }
-//        } else if (result.count == 3) {
-//            result[2].title = NSLocalizedString("str_average", comment: "")
-//            result[2].msg = NSLocalizedString("fee_speed_title_average", comment: "")
-//            result[1].title = NSLocalizedString("str_low", comment: "")
-//            result[1].msg = NSLocalizedString("fee_speed_title_low", comment: "")
-//            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
-//                result[0].title = NSLocalizedString("str_zero", comment: "")
-//                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
-//            } else {
-//                result[0].title = NSLocalizedString("str_tiny", comment: "")
-//                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
-//            }
-//        }
-//        return result
-//    }
-    
     static func getSymbol(_ chainConfig: ChainConfig?, _ denom: String?) -> String {
         if (chainConfig == nil || denom == nil || denom?.isEmpty == true) { return "Unknown" }
         if (chainConfig!.stakeDenom == denom) {
@@ -720,9 +665,9 @@ public class WUtils {
         }
         if (chainConfig?.isGrpc == true) {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
-                return msAsset.dp_denom
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
-                return msToken.denom
+                return msAsset.symbol
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first {
+                return msToken.symbol
             }
             
         } else {
@@ -767,7 +712,7 @@ public class WUtils {
     
     static func getMonikerImgUrl(_ chainConfig: ChainConfig?, _ opAddress: String) -> String {
         if (chainConfig == nil) { return "" }
-        return chainConfig!.validatorImgUrl + opAddress + ".png"
+        return ResourceBase + chainConfig!.chainAPIName + "/moniker/" + opAddress + ".png"
     }
     
     static func getTxExplorer(_ chainConfig: ChainConfig?, _ hash: String) -> String {

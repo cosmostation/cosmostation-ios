@@ -49,7 +49,6 @@ class ChainCerberus: ChainConfig {
     var lcdUrl = "https://lcd-cerberus-app.cosmostation.io/"
     var apiUrl = "https://api-cerberus.cosmostation.io/"
     var explorerUrl = MintscanUrl + "cerberus/"
-    var validatorImgUrl = MonikerUrl + "cerberus/"
     var priceUrl = CoingeckoUrl + "cerberus"
     
     required init(_ chainType: ChainType) {

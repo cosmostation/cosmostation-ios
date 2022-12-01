@@ -30,8 +30,8 @@ class SelectContractTokenCell: UITableViewCell {
     func onBindToken(_ token: MintscanToken, _ selectedList: Array<String>) {
         if let assetImgeUrl = token.assetImg() {
             coinImg.af_setImage(withURL: assetImgeUrl)
-            coinTitle.text = token.denom
+            coinTitle.text = token.symbol
         }
-        coinSwitch.isOn = selectedList.contains(token.contract_address)
+        coinSwitch.isOn = selectedList.contains(token.address)
     }
 }

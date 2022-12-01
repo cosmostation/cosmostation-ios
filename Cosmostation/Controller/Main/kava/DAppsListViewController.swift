@@ -247,7 +247,7 @@ extension WUtils {
     static func getKavaMarketId(_ denom: String) -> String {
         if (denom.starts(with: "ibc/")) {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom.lowercased() }).first {
-                return "\(msAsset.base_denom):usd"
+                return "\(msAsset.origin_denom):usd"
             }
         
         } else if denom == KAVA_MAIN_DENOM {

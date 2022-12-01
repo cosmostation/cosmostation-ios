@@ -50,7 +50,6 @@ class ChainOkc: ChainConfig {
     var lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
     var apiUrl = ""
     var explorerUrl = "https://www.oklink.com/okexchain/"
-    var validatorImgUrl = MonikerUrl + "okex/"
     var priceUrl = CoingeckoUrl + "okc-token"
     
     required init(_ chainType: ChainType) {

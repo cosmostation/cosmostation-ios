@@ -235,19 +235,15 @@ class BaseNetWork {
     }
     
     static func mintscanAssets() -> String {
-        return MINTSCAN_API_URL + "v1/assets"
+        return MINTSCAN_API_URL + "v3/assets"
     }
     
-    static func mintscanAssets_v2() -> String {
-        return MINTSCAN_API_URL + "v2/assets"
+    static func mintscanCw20Tokens(_ chainId: String) -> String {
+        return MINTSCAN_API_URL + "v3/assets/" +  chainId + "/cw20"
     }
     
-    static func mintscanCw20Tokens_v2(_ chainId: String) -> String {
-        return MINTSCAN_API_URL + "v2/assets/" +  chainId + "/token/cw20"
-    }
-    
-    static func mintscanErc20Tokens_v2(_ chainId: String) -> String {
-        return MINTSCAN_API_URL + "v2/assets/" +  chainId + "/token/erc20"
+    static func mintscanErc20Tokens(_ chainId: String) -> String {
+        return MINTSCAN_API_URL + "v3/assets/" +  chainId + "/erc20"
     }
     
     static func mintscanEvmTxcheck(_ chainId: String, _ ethTx: String) -> String {

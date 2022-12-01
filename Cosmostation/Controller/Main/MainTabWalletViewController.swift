@@ -256,7 +256,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetKavaItem(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletKavaCell") as? WalletKavaCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionCdp = { self.onClickCdp() }
@@ -344,7 +344,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetSifItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletSifCell") as? WalletSifCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionDex = { self.onClickSifDex() }
@@ -369,7 +369,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetOsmoItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletOsmoCell") as? WalletOsmoCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionLab = { self.onClickOsmosisLab() }

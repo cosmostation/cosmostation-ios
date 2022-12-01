@@ -71,11 +71,11 @@ class MultiSelectPopupViewController: BaseViewController, SBCardPopupContent, UI
             cell?.onBindToken(msToken, selectedContractTokens)
             cell?.actionToggle = { result in
                 if (result) {
-                    if (!self.selectedContractTokens.contains(msToken.contract_address)) {
-                        self.selectedContractTokens.append(msToken.contract_address)
+                    if (!self.selectedContractTokens.contains(msToken.address)) {
+                        self.selectedContractTokens.append(msToken.address)
                     }
                 } else {
-                    self.selectedContractTokens.removeAll { $0 == msToken.contract_address }
+                    self.selectedContractTokens.removeAll { $0 == msToken.address }
                 }
             }
             return cell!

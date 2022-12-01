@@ -49,7 +49,6 @@ class ChainBinance: ChainConfig {
     var lcdUrl = "https://dex.binance.org/"
     var apiUrl = "https://dex.binance.org/"
     var explorerUrl = "https://binance.mintscan.io/"
-    var validatorImgUrl = ""
     var priceUrl = CoingeckoUrl + "binancecoin"
     
     required init(_ chainType: ChainType) {

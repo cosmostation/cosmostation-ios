@@ -49,7 +49,6 @@ class ChainEvmos: ChainConfig {
     var lcdUrl = "https://lcd-evmos-app.cosmostation.io/"
     var apiUrl = "https://api-evmos.cosmostation.io/"
     var explorerUrl = MintscanUrl + "evmos/"
-    var validatorImgUrl = MonikerUrl + "evmos/"
     var priceUrl = CoingeckoUrl + "evmos"
     
     required init(_ chainType: ChainType) {

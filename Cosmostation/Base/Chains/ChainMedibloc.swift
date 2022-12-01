@@ -49,7 +49,6 @@ class ChainMedibloc: ChainConfig {
     var lcdUrl = "https://lcd-medibloc-app.cosmostation.io/"
     var apiUrl = "https://api-medibloc.cosmostation.io/"
     var explorerUrl = MintscanUrl + "medibloc/"
-    var validatorImgUrl = MonikerUrl + "medibloc/"
     var priceUrl = CoingeckoUrl + "medibloc"
     
     required init(_ chainType: ChainType) {

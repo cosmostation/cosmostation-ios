@@ -104,14 +104,14 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         outputCoinRateAmount.attributedText = WDP.dpAmount(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, 6)
         
         //display swap rate with market price
-        let priceInput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mInputCoinDenom!)) ?? NSDecimalNumber.zero
-        let priceOutput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mOutputCoinDenom!)) ?? NSDecimalNumber.zero
-        if (priceInput == NSDecimalNumber.zero || priceOutput == NSDecimalNumber.zero) {
-            self.outputCoinExRateAmount.text = "?.??????"
-        } else {
-            let priceRate = priceInput.dividing(by: priceOutput, withBehavior: WUtils.handler6)
-            self.outputCoinExRateAmount.attributedText = WDP.dpAmount(priceRate.stringValue, outputCoinExRateAmount.font, 0, 6)
-        }
+//        let priceInput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mInputCoinDenom!)) ?? NSDecimalNumber.zero
+//        let priceOutput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mOutputCoinDenom!)) ?? NSDecimalNumber.zero
+//        if (priceInput == NSDecimalNumber.zero || priceOutput == NSDecimalNumber.zero) {
+//            self.outputCoinExRateAmount.text = "?.??????"
+//        } else {
+//            let priceRate = priceInput.dividing(by: priceOutput, withBehavior: WUtils.handler6)
+//            self.outputCoinExRateAmount.attributedText = WDP.dpAmount(priceRate.stringValue, outputCoinExRateAmount.font, 0, 6)
+//        }
     }
     
     @IBAction func onClickToggle(_ sender: UIButton) {

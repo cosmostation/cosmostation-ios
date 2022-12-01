@@ -75,7 +75,7 @@ class WalletAddressCell: UITableViewCell {
         }
     }
     
-    func onBindValue(_ denom: String, _ amount: NSDecimalNumber, _ decimal: Int16) {
-        totalValue.attributedText = WUtils.dpAssetValue(denom, amount, decimal, totalValue.font)
+    func onBindValue(_ geckoId: String, _ amount: NSDecimalNumber, _ decimal: Int16) {
+        totalValue.attributedText = WUtils.dpAssetValue(geckoId, amount, decimal, totalValue.font)
     }
 }

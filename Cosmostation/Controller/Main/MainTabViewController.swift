@@ -1018,8 +1018,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchMintscanAsset() {
-        print("onFetchMintscanAsset ", BaseNetWork.mintscanAssets_v2())
-        let request = Alamofire.request(BaseNetWork.mintscanAssets_v2(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        print("onFetchMintscanAsset ", BaseNetWork.mintscanAssets())
+        let request = Alamofire.request(BaseNetWork.mintscanAssets(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -1042,7 +1042,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchFinished()
             return
         }
-        let request = Alamofire.request(BaseNetWork.mintscanCw20Tokens_v2(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        let request = Alamofire.request(BaseNetWork.mintscanCw20Tokens(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -1054,7 +1054,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     BaseData.instance.setMyTokens(self.mAccount.account_address)
                     BaseData.instance.mMyTokens.forEach { msToken in
                         self.mFetchCnt = self.mFetchCnt + 1
-                        self.onFetchCw20Balance(msToken.contract_address)
+                        self.onFetchCw20Balance(msToken.address)
                     }
                 }
 
@@ -1087,12 +1087,13 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchMintscanErc20(_ chainId: String) {
+        print("onFetchMintscanErc20 ", chainId, " ", mChainConfig.evmSupport)
         if (mChainConfig.evmSupport == false) {
             self.onFetchFinished()
             return
         }
-        let request = Alamofire.request(BaseNetWork.mintscanErc20Tokens_v2(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-//        print("onFetchMintscanErc20 ", request.request?.url)
+        let request = Alamofire.request(BaseNetWork.mintscanErc20Tokens(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        print("onFetchMintscanErc20 ", request.request?.url)
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -1106,7 +1107,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                         if let url = URL(string: self.mChainConfig.rpcUrl), let web3 = try? Web3.new(url) {
                             BaseData.instance.mMyTokens.forEach { msToken in
                                 self.mFetchCnt = self.mFetchCnt + 1
-                                self.onFetchErc20Balance(web3, msToken.contract_address)
+                                self.onFetchErc20Balance(web3, msToken.address)
                             }
                         }
                     }

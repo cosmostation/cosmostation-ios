@@ -49,7 +49,6 @@ class ChainKonstellation: ChainConfig {
     var lcdUrl = "https://lcd-konstellation-app.cosmostation.io/"
     var apiUrl = "https://api-konstellation.cosmostation.io/"
     var explorerUrl = MintscanUrl + "konstellation/"
-    var validatorImgUrl = MonikerUrl + "konstellation/"
     var priceUrl = CoingeckoUrl + "konstellation"
     
     required init(_ chainType: ChainType) {
