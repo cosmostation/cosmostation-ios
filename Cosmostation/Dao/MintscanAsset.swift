@@ -16,7 +16,7 @@ public struct MintscanAsset {
     var origin_denom: String = ""
     var origin_type: String = ""
     var symbol: String = ""
-    var decimal: Int16 = 6
+    var decimals: Int16 = 6
     var description: String = ""
     var image: String = ""
     var coinGeckoId: String = ""
@@ -35,7 +35,7 @@ public struct MintscanAsset {
         self.origin_denom = dictionary?["origin_denom"] as? String ?? ""
         self.origin_type = dictionary?["origin_type"] as? String ?? ""
         self.symbol = dictionary?["symbol"] as? String ?? ""
-        self.decimal = dictionary?["decimal"] as? Int16 ?? 6
+        self.decimals = dictionary?["decimals"] as? Int16 ?? 6
         self.description = dictionary?["description"] as? String ?? ""
         self.image = dictionary?["image"] as? String ?? ""
         self.coinGeckoId = dictionary?["coinGeckoId"] as? String ?? ""

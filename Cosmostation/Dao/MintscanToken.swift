@@ -15,7 +15,7 @@ public class MintscanToken {
     var address: String = ""            //we handle contract address as denom
     var symbol: String = ""
     var description: String = ""
-    var decimal: Int16 = 6
+    var decimals: Int16 = 6
     var display: Int16 = -1
     var image: String = ""
     var coinGeckoId: String = ""
@@ -30,7 +30,7 @@ public class MintscanToken {
         self.address = dictionary?["address"] as? String ?? ""
         self.symbol = dictionary?["symbol"] as? String ?? ""
         self.description = dictionary?["description"] as? String ?? ""
-        self.decimal = dictionary?["decimal"] as? Int16 ?? 6
+        self.decimals = dictionary?["decimals"] as? Int16 ?? 6
         self.display = dictionary?["display"] as? Int16 ?? -1
         self.image = dictionary?["image"] as? String ?? ""
         self.default_show = dictionary?["default"] as? Bool ?? false

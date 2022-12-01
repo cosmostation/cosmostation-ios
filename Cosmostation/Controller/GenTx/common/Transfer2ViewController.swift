@@ -42,8 +42,8 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
         let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         if (chainConfig?.isGrpc == true) {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
-                divideDecimal = msAsset.decimal
-                displayDecimal = msAsset.decimal
+                divideDecimal = msAsset.decimals
+                displayDecimal = msAsset.decimals
                 if (pageHolderVC.mToSendDenom == mainDenom) {
                     maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
                 } else {
@@ -51,8 +51,8 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
                 }
                 
             } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == toSendDenom }).first {
-                divideDecimal = msToken.decimal
-                displayDecimal = msToken.decimal
+                divideDecimal = msToken.decimals
+                displayDecimal = msToken.decimals
                 maxAvailable = NSDecimalNumber.init(string: msToken.amount)
             }
             

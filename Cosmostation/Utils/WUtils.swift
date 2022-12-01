@@ -257,14 +257,14 @@ public class WUtils {
                 if (coin.denom == getMainDenom(chainConfig)) {
                     if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
                         let amount = getAllMainAsset(coin.denom)
-                        let assetValue = assetValue(msAsset.coinGeckoId, amount, msAsset.decimal)
+                        let assetValue = assetValue(msAsset.coinGeckoId, amount, msAsset.decimals)
                         totalValue = totalValue.adding(assetValue)
                     }
                     
                 } else if (chainConfig?.chainType == .KAVA_MAIN) {
                     if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
                         let amount = WUtils.getKavaTokenAll(coin.denom)
-                        let assetValue = assetValue(msAsset.coinGeckoId, amount, msAsset.decimal)
+                        let assetValue = assetValue(msAsset.coinGeckoId, amount, msAsset.decimals)
                         totalValue = totalValue.adding(assetValue)
                     }
                     
@@ -272,7 +272,7 @@ public class WUtils {
                     if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
                         let amount = baseData.getAvailableAmount_gRPC(coin.denom)
                         let geckoId = msAsset.coinGeckoId
-                        let assetValue = assetValue(geckoId, amount, msAsset.decimal)
+                        let assetValue = assetValue(geckoId, amount, msAsset.decimals)
                         totalValue = totalValue.adding(assetValue)
                     }
                 }
@@ -309,7 +309,7 @@ public class WUtils {
         if (chainConfig?.wasmSupport == true || chainConfig?.evmSupport == true) {
             BaseData.instance.mMyTokens.forEach { msToken in
                 let amount = NSDecimalNumber.init(string: msToken.amount)
-                let assetValue = assetValue(msToken.coinGeckoId, amount, msToken.decimal)
+                let assetValue = assetValue(msToken.coinGeckoId, amount, msToken.decimals)
                 totalValue = totalValue.adding(assetValue)
             }
         }
@@ -582,7 +582,7 @@ public class WUtils {
         if (chainConfig == nil || denom == nil) { return 6 }
         if (chainConfig!.isGrpc) {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
-                return msAsset.decimal
+                return msAsset.decimals
             }
 //            else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
 //                return msToken.decimal

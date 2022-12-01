@@ -37,7 +37,7 @@ class AssetCell: UITableViewCell {
     
     func onBindNativeAsset(_ chainConfig: ChainConfig?, _ asset: MintscanAsset?, _ coin: Coin) {
         if (chainConfig == nil || asset == nil) { return }
-        let decimal = asset!.decimal
+        let decimal = asset!.decimals
         let geckoId = asset!.coinGeckoId
         if let assetImgeUrl = asset!.assetImg() {
             assetImg.af_setImage(withURL: assetImgeUrl)
@@ -64,7 +64,7 @@ class AssetCell: UITableViewCell {
     
     func onBindIbcAsset(_ chainConfig: ChainConfig?, _ asset: MintscanAsset?, _ coin: Coin) {
         if (chainConfig == nil || asset == nil) { return }
-        let decimal = asset!.decimal
+        let decimal = asset!.decimals
         let geckoId = asset!.coinGeckoId
         let available = BaseData.instance.getAvailableAmount_gRPC(coin.denom)
         if let assetImgeUrl = asset!.assetImg() {
@@ -79,7 +79,7 @@ class AssetCell: UITableViewCell {
     
     func onBindBridgeAsset(_ chainConfig: ChainConfig?, _ asset: MintscanAsset?, _ coin: Coin) {
         if (chainConfig == nil || asset == nil) { return }
-        let decimal = asset!.decimal
+        let decimal = asset!.decimals
         let geckoId = asset!.coinGeckoId
         let available = BaseData.instance.getAvailableAmount_gRPC(coin.denom)
         if let assetImgeUrl = asset!.assetImg() {
@@ -95,7 +95,7 @@ class AssetCell: UITableViewCell {
     //for bind cw20 & erc20
     func onBindContractToken(_ chainConfig: ChainConfig?, _ token: MintscanToken?) {
         if (chainConfig == nil || token == nil) { return }
-        let decimal = token!.decimal
+        let decimal = token!.decimals
         let geckoId = token!.coinGeckoId
         let available = NSDecimalNumber.init(string: token!.amount)
         if let assetImgeUrl = token!.assetImg() {

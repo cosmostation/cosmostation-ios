@@ -102,7 +102,7 @@ public class WDP {
         dpSymbol(chainConfig, denom, denomLabel)
         if (chainConfig?.isGrpc == true) {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
-                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msAsset.decimal, msAsset.decimal)
+                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msAsset.decimals, msAsset.decimals)
             }
 //            else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
 //                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msToken.decimal, msToken.decimal)

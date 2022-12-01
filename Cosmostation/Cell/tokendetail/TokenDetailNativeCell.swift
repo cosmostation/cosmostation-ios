@@ -57,7 +57,7 @@ class TokenDetailNativeCell: UITableViewCell {
     func onBindNativeToken_gRPC(_ chainConfig: ChainConfig?, _ denom: String?) {
         if (chainConfig == nil || denom == nil) { return }
         if let msAsset = BaseData.instance.getMSAsset(chainConfig!, denom!) {
-            let decimal = msAsset.decimal
+            let decimal = msAsset.decimals
             if (chainConfig?.chainType == ChainType.KAVA_MAIN) {
                 onBindKavaTokens(denom)
             } else {

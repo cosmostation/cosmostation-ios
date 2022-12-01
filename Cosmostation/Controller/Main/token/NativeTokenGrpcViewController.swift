@@ -55,7 +55,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     
     func onInitView() {
         msAsset = BaseData.instance.getMSAsset(chainConfig!, nativeDenom)
-        divideDecimal = msAsset.decimal
+        divideDecimal = msAsset.decimals
         if let assetImgeUrl = msAsset.assetImg() {
             naviTokenImg.af_setImage(withURL: assetImgeUrl)
         }

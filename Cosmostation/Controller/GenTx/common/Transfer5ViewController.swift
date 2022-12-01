@@ -115,8 +115,8 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             var sendGeckocId = ""
             var feeGeckocId = feeDenom
             if let sendMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
-                divideDecimal = sendMsAsset.decimal
-                displayDecimal = sendMsAsset.decimal
+                divideDecimal = sendMsAsset.decimals
+                displayDecimal = sendMsAsset.decimals
                 currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
                 if (toSendDenom == feeDenom) {
                     remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
@@ -126,8 +126,8 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                 sendGeckocId = sendMsAsset.coinGeckoId
                 
             } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == toSendDenom }).first {
-                divideDecimal = msToken.decimal
-                displayDecimal = msToken.decimal
+                divideDecimal = msToken.decimals
+                displayDecimal = msToken.decimals
                 currentAvailable = NSDecimalNumber.init(string: msToken.amount)
                 remainAvailable = currentAvailable.subtracting(toSendAmount)
                 sendGeckocId = msToken.coinGeckoId
@@ -136,7 +136,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             feeDivideDecimal = WUtils.getDenomDecimal(chainConfig, feeDenom)
             if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == feeDenom.lowercased() }).first {
                 feeGeckocId = feeMsAsset.coinGeckoId
-                feeDivideDecimal = feeMsAsset.decimal
+                feeDivideDecimal = feeMsAsset.decimals
             }
             
             WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)

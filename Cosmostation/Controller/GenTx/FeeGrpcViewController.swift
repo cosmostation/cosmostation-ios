@@ -171,7 +171,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             let erc20token = ERC20(web3: web3, provider: web3.provider, address: contractAddress!)
             
             let sendAmount = self.pageHolderVC.mToSendAmount[0].amount
-            let calSendAmount = NSDecimalNumber.init(string: sendAmount).multiplying(byPowerOf10: -mintscanToken.decimal)
+            let calSendAmount = NSDecimalNumber.init(string: sendAmount).multiplying(byPowerOf10: -mintscanToken.decimals)
             
             let nounce = try? web3.eth.getTransactionCount(address: senderAddress!)
             let wTx = try? erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
@@ -205,7 +205,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                 WDP.dpCoin(chainConfig, mFee.amount[0], feeTotalDenom, feeTotalAmount)
                 
                 if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == chainConfig!.stakeDenom }).first {
-                    feeTotalValue.attributedText = WUtils.dpAssetValue(feeMsAsset.coinGeckoId, NSDecimalNumber.init(string: mFee.amount[0].amount), feeMsAsset.decimal, feeTotalValue.font)
+                    feeTotalValue.attributedText = WUtils.dpAssetValue(feeMsAsset.coinGeckoId, NSDecimalNumber.init(string: mFee.amount[0].amount), feeMsAsset.decimals, feeTotalValue.font)
                 }
                 
             } else {
@@ -220,7 +220,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             WDP.dpCoin(chainConfig, mFee.amount[0], feeTotalDenom, feeTotalAmount)
             
             if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == mFeeData.denom! }).first {
-                feeTotalValue.attributedText = WUtils.dpAssetValue(feeMsAsset.coinGeckoId, NSDecimalNumber.init(string: mFee.amount[0].amount), feeMsAsset.decimal, feeTotalValue.font)
+                feeTotalValue.attributedText = WUtils.dpAssetValue(feeMsAsset.coinGeckoId, NSDecimalNumber.init(string: mFee.amount[0].amount), feeMsAsset.decimals, feeTotalValue.font)
             }
             gasDescriptionLabel.text = mFeeInfo[mSelectedFeeInfo].msg
         }
