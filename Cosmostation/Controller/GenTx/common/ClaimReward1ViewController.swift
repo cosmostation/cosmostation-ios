@@ -80,7 +80,7 @@ class ClaimReward1ViewController: BaseViewController {
     func updateView() {
         var selectedRewardSum = NSDecimalNumber.zero
         for validator in pageHolderVC.mRewardTargetValidators_gRPC {
-            let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator.operatorAddress)
+            let amount = BaseData.instance.getReward_gRPC(chainConfig!.stakeDenom, validator.operatorAddress)
             selectedRewardSum = selectedRewardSum.adding(amount)
         }
         rewardAmountLabel.attributedText = WDP.dpAmount(selectedRewardSum.stringValue, rewardAmountLabel.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)

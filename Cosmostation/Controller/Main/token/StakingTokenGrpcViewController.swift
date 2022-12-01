@@ -29,7 +29,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
-        self.stakingDenom = WUtils.getMainDenom(chainConfig)
+        self.stakingDenom = chainConfig!.stakeDenom
         
         self.onInitView()
         

@@ -304,7 +304,7 @@ final class BaseData : NSObject{
     }
     
     func getDelegatable_gRPC(_ chainConfig: ChainConfig?) -> NSDecimalNumber {
-        let mainDenom = WUtils.getMainDenom(chainConfig)
+        let mainDenom = chainConfig!.stakeDenom
         if (chainConfig?.chainType == ChainType.CRESCENT_MAIN || chainConfig?.chainType == ChainType.CRESCENT_TEST) {
             return getAvailableAmount_gRPC(mainDenom)
         }

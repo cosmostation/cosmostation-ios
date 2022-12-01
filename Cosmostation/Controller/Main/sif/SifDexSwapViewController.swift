@@ -122,7 +122,7 @@ class SifDexSwapViewController: BaseViewController, SBCardPopupDelegate {
         }
         if (mSelectedPool == nil || mInputCoinDenom == nil || mOutputCoinDenom == nil) {
             mSelectedPool = BaseData.instance.mSifDexPools_gRPC[0]
-            mInputCoinDenom = WUtils.getMainDenom(chainConfig)
+            mInputCoinDenom = chainConfig!.stakeDenom
             mOutputCoinDenom = mSelectedPool?.externalAsset.symbol
         }
         self.updateView()

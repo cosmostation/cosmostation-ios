@@ -423,8 +423,8 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             if ($1.description_p.moniker == "Cosmostation") { return false }
             if ($0.jailed && !$1.jailed) { return false }
             if (!$0.jailed && $1.jailed) { return true }
-            let firstVal = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(self.chainConfig), $0.operatorAddress)
-            let seconVal = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(self.chainConfig), $1.operatorAddress)
+            let firstVal = BaseData.instance.getReward_gRPC(chainConfig!.stakeDenom, $0.operatorAddress)
+            let seconVal = BaseData.instance.getReward_gRPC(chainConfig!.stakeDenom, $1.operatorAddress)
             return firstVal.compare(seconVal).rawValue > 0 ? true : false
         }
     }

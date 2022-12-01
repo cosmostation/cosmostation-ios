@@ -254,7 +254,7 @@ public class WUtils {
         var totalValue = NSDecimalNumber.zero
         if (chainConfig?.isGrpc == true) {
             baseData.mMyBalances_gRPC.forEach { coin in
-                if (coin.denom == getMainDenom(chainConfig)) {
+                if (coin.denom == chainConfig?.stakeDenom) {
                     if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
                         let amount = getAllMainAsset(coin.denom)
                         let assetValue = assetValue(msAsset.coinGeckoId, amount, msAsset.decimals)
@@ -284,7 +284,7 @@ public class WUtils {
             baseData.mBalances.forEach { coin in
                 var allBnb = NSDecimalNumber.zero
                 let amount = BaseData.instance.allBnbTokenAmount(coin.balance_denom)
-                if (coin.balance_denom == getMainDenom(chainConfig)) {
+                if (coin.balance_denom == chainConfig?.stakeDenom) {
                     allBnb = allBnb.adding(amount)
                 } else {
                     allBnb = allBnb.adding(bnbConvertAmount(coin.balance_denom))
@@ -296,7 +296,7 @@ public class WUtils {
         } else if (chainConfig?.chainType == .OKEX_MAIN) {
             baseData.mBalances.forEach { coin in
                 var allOKT = NSDecimalNumber.zero
-                if (coin.balance_denom == getMainDenom(chainConfig)) {
+                if (coin.balance_denom == chainConfig?.stakeDenom) {
                     allOKT = allOKT.adding(getAllExToken(coin.balance_denom))
                 }
                 let assetValue = assetValue("okt", allOKT, 0)
@@ -572,10 +572,6 @@ public class WUtils {
             })
         }
         return result
-    }
-    
-    static func getMainDenom(_ chainConfig: ChainConfig?) -> String {
-        return chainConfig?.stakeDenom ?? ""
     }
     
     static func setDenomTitle(_ chain: ChainType?, _ label: UILabel?) {
@@ -1210,7 +1206,7 @@ public class WUtils {
         if (tx.tx.authInfo.fee.amount.count > 0) {
             return Coin.init(tx.tx.authInfo.fee.amount[0].denom, tx.tx.authInfo.fee.amount[0].amount)
         } else {
-            return Coin.init(getMainDenom(chainConfig), "0")
+            return Coin.init(chainConfig.stakeDenom, "0")
         }
     }
     

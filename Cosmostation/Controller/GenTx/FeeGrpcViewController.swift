@@ -52,8 +52,8 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.mFeeInfo = BaseData.instance.mParam!.getFeeInfos()
-        WDP.dpSymbolImg(chainConfig, WUtils.getMainDenom(chainConfig), feeTypeImg)
-        WDP.dpSymbol(chainConfig, WUtils.getMainDenom(chainConfig), feeTypeDenom)
+        WDP.dpSymbolImg(chainConfig, chainConfig!.stakeDenom, feeTypeImg)
+        WDP.dpSymbol(chainConfig, chainConfig!.stakeDenom, feeTypeDenom)
         
         feeTotalCard.backgroundColor = chainConfig?.chainColorBG
         gasSelectSegments.selectedSegmentTintColor = chainConfig?.chainColor

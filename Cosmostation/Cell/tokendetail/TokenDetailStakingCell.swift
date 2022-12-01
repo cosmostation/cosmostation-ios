@@ -48,7 +48,7 @@ class TokenDetailStakingCell: UITableViewCell {
     }
     
     func onBindStakingToken(_ chainConfig: ChainConfig) {
-        let stakingDenom = WUtils.getMainDenom(chainConfig)
+        let stakingDenom = chainConfig.stakeDenom
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, chainConfig.divideDecimal, chainConfig.displayDecimal)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, chainConfig.divideDecimal, chainConfig.displayDecimal)

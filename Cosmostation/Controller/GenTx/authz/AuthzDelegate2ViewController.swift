@@ -164,7 +164,7 @@ class AuthzDelegate2ViewController: BaseViewController, UITextFieldDelegate {
     @IBAction func onClickNext(_ sender: UIButton) {
         if (isValiadAmount()) {
             let userInput = WUtils.localeStringToDecimal((toDelegateAmountInput.text?.trimmingCharacters(in: .whitespaces))!)
-            let coin = Coin.init(WUtils.getMainDenom(chainConfig), userInput.multiplying(byPowerOf10: dpDecimal).stringValue)
+            let coin = Coin.init(chainConfig!.stakeDenom, userInput.multiplying(byPowerOf10: dpDecimal).stringValue)
             pageHolderVC.mToDelegateAmount = coin
             sender.isUserInteractionEnabled = false
             pageHolderVC.onNextPage()

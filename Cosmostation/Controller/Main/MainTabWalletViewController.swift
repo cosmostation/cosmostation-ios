@@ -919,7 +919,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mToSendDenom = WUtils.getMainDenom(chainConfig)
+        txVC.mToSendDenom = chainConfig!.stakeDenom
         txVC.mType = TASK_TYPE_TRANSFER
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""

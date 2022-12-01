@@ -253,7 +253,7 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
     @IBAction func onClickMax(_ sender: UIButton) {
         let maxValue = maxAvailable.multiplying(byPowerOf10: -divideDecimal, withBehavior: WUtils.getDivideHandler(displayDecimal))
         mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(maxValue, displayDecimal)
-        if (pageHolderVC.mToSendDenom == WUtils.getMainDenom(chainConfig)) {
+        if (pageHolderVC.mToSendDenom == chainConfig.stakeDenom) {
             self.showMaxWarnning()
         }
         self.onUIupdate()

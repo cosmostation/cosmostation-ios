@@ -34,11 +34,10 @@ class Undelegate1ViewController: BaseViewController, UITextFieldDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        let mainDenom = WUtils.getMainDenom(chainConfig)
         
         mDpDecimal = chainConfig!.displayDecimal
         userDelegated = BaseData.instance.getDelegated_gRPC(self.pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
-        WDP.dpCoin(chainConfig, mainDenom, userDelegated.stringValue, availableDenomLabel, availableAmountLabel)
+        WDP.dpCoin(chainConfig, chainConfig!.stakeDenom, userDelegated.stringValue, availableDenomLabel, availableAmountLabel)
         
         toUndelegateAmountInput.delegate = self
         toUndelegateAmountInput.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -140,7 +139,7 @@ class Undelegate1ViewController: BaseViewController, UITextFieldDelegate {
     @IBAction func onClickNext(_ sender: UIButton) {
         if (isValiadAmount()) {
             let userInput = WUtils.localeStringToDecimal((toUndelegateAmountInput.text?.trimmingCharacters(in: .whitespaces))!)
-            let coin = Coin.init(WUtils.getMainDenom(chainConfig), userInput.multiplying(byPowerOf10: mDpDecimal).stringValue)
+            let coin = Coin.init(chainConfig!.stakeDenom, userInput.multiplying(byPowerOf10: mDpDecimal).stringValue)
             pageHolderVC.mToUndelegateAmount = coin
             sender.isUserInteractionEnabled = false
             pageHolderVC.onNextPage()
