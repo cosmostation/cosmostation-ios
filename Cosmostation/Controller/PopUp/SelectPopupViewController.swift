@@ -223,9 +223,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_HTLC_TO_ACCOUNT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
             let account = toAccountList[indexPath.row]
+            let toChainConfig = ChainFactory.getChainConfig(toChain)
             cell?.keyStatusImg.image = cell?.keyStatusImg.image?.withRenderingMode(.alwaysTemplate)
             cell?.accountAddress.text = account.account_address
-            WUtils.setDenomTitle(toChain!, cell!.accountDenom)
+            WDP.dpMainSymbol(toChainConfig, cell!.accountDenom)
             if (toChain == ChainType.BINANCE_MAIN) {
                 cell?.keyStatusImg.tintColor = UIColor.init(named: "binance")
                 cell!.accountBalance.attributedText = WDP.dpAmount(WUtils.getTokenAmount(account.account_balances, BNB_MAIN_DENOM).stringValue, cell!.accountBalance.font, 0, 8)
@@ -240,7 +241,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
             let toChainConfig = ChainFactory.getChainConfig(toChain)
             let account = toAccountList[indexPath.row]
-            WUtils.setDenomTitle(toChain!, cell!.accountDenom)
+            WDP.dpMainSymbol(toChainConfig, cell!.accountDenom)
             cell?.accountAddress.text = account.account_address
             cell?.accountName.text = account.getDpName()
             if (account.account_has_private == true) {
@@ -326,7 +327,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
             let account = toAccountList[indexPath.row]
             let toChainConfig = ChainFactory.getChainConfig(toChain)
-            WUtils.setDenomTitle(toChain!, cell!.accountDenom)
+            WDP.dpMainSymbol(toChainConfig, cell!.accountDenom)
             cell?.accountAddress.text = account.account_address
             cell?.accountName.text = account.getDpName()
             cell?.keyStatusImg.image = cell?.keyStatusImg.image?.withRenderingMode(.alwaysTemplate)

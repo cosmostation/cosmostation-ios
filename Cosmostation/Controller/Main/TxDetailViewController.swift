@@ -245,7 +245,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             let coins = msg?.value.inputs?[0].coins
             cell?.multiAmountStack.isHidden = false
             cell?.multiAmountLayer0.isHidden = false
-            WUtils.showBNBTxDp(coins![0], cell!.multiAmountDenom0, cell!.multiAmount0, chainType!)
+            WDP.dpBnbTxCoin(chainConfig!, coins![0], cell!.multiAmountDenom0, cell!.multiAmount0)
             
         } else if (chainType == ChainType.OKEX_MAIN) {
             var coins = msg?.value.getAmounts()

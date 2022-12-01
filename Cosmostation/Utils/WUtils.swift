@@ -538,16 +538,6 @@ public class WUtils {
         return getDpAttributedString(formatted, 3, font)
     }
     
-    static func showBNBTxDp(_ coin:Coin, _ denomLabel:UILabel, _ amountLabel:UILabel, _ chainType:ChainType) {
-        if (coin.denom == BNB_MAIN_DENOM) {
-            WUtils.setDenomTitle(chainType, denomLabel)
-        } else {
-            denomLabel.textColor = UIColor.font05
-            denomLabel.text = coin.denom.uppercased()
-        }
-        amountLabel.attributedText = WDP.dpAmount(coin.amount, amountLabel.font, 8, 8)
-    }
-    
     //for okx utils
     static func getAllExToken(_ symbol: String) -> NSDecimalNumber {
         let dataBase = BaseData.instance
@@ -572,13 +562,6 @@ public class WUtils {
             })
         }
         return result
-    }
-    
-    static func setDenomTitle(_ chain: ChainType?, _ label: UILabel?) {
-        if let chainConfig = ChainFactory.getChainConfig(chain) {
-            label?.text = chainConfig.stakeSymbol
-            label?.textColor = chainConfig.chainColor
-        }
     }
     
     static func getChainDBName(_ chain:ChainType?) -> String {

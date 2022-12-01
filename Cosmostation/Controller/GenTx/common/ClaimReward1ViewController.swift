@@ -37,7 +37,7 @@ class ClaimReward1ViewController: BaseViewController {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(pageHolderVC.chainType!, rewardDenomLabel)
+        WDP.dpMainSymbol(chainConfig, rewardDenomLabel)
         
         if (pageHolderVC.mRewardTargetValidators_gRPC.count == 16) {
             self.onShowToast(NSLocalizedString("reward_claim_top_16", comment: ""))

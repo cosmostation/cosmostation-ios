@@ -41,7 +41,7 @@ class SwitchAccountCell: UITableViewCell {
         chainAccountAddress.text = dpAccount!.account_address
         
         chainAccountAmount.attributedText = WDP.dpAmount(dpAccount?.account_last_total, chainAccountAmount.font, 0, 6)
-        WUtils.setDenomTitle(dpChainConfig.chainType, chainAccountDenom)
+        WDP.dpMainSymbol(dpChainConfig, chainAccountDenom)
         
         if (dpAccount?.account_id == currentAccount?.account_id) {
             chainAccountCard.borderWidth = 1.0

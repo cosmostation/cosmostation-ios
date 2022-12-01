@@ -45,9 +45,9 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(chainType!, rewardDenomLabel)
-        WUtils.setDenomTitle(chainType!, feeDenomLabel)
-        WUtils.setDenomTitle(chainType!, expectedDenomLabel)
+        WDP.dpMainSymbol(chainConfig, rewardDenomLabel)
+        WDP.dpMainSymbol(chainConfig, feeDenomLabel)
+        WDP.dpMainSymbol(chainConfig, expectedDenomLabel)
         
         beforeBtn.borderColor = UIColor.font05
         confirmBtn.borderColor = UIColor.photon

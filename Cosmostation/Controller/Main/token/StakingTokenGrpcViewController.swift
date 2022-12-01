@@ -58,7 +58,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     
     func onInitView() {
         msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom)
-        WUtils.setDenomTitle(chainType, naviTokenSymbol)
+        WDP.dpMainSymbol(chainConfig, naviTokenSymbol)
         self.naviTokenImg.image = chainConfig?.stakeDenomImg
         self.naviPerPrice.attributedText = WUtils.dpPrice(msAsset.coinGeckoId, naviPerPrice.font)
         self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(msAsset.coinGeckoId, naviUpdownPercent.font)

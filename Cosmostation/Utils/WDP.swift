@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 
 public class WDP {
+    static func dpMainSymbol(_ chainConfig: ChainConfig?, _ label: UILabel?) {
+        label?.text = chainConfig?.stakeSymbol
+        label?.textColor = chainConfig?.chainColor
+    }
+    
     static func dpSymbol(_ chainConfig: ChainConfig?, _ denom: String?, _ denomLabel: UILabel?) {
         denomLabel?.text = WUtils.getSymbol(chainConfig, denom)
         if (chainConfig!.stakeDenom == denom) {
@@ -118,6 +123,16 @@ public class WDP {
                 amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, 0, 18)
             }
         }
+    }
+    
+    static func dpBnbTxCoin(_ chainConfig: ChainConfig, _ coin:Coin, _ denomLabel:UILabel, _ amountLabel:UILabel) {
+        if (coin.denom == BNB_MAIN_DENOM) {
+            WDP.dpMainSymbol(chainConfig, denomLabel)
+        } else {
+            denomLabel.textColor = UIColor.font05
+            denomLabel.text = coin.denom.uppercased()
+        }
+        amountLabel.attributedText = WDP.dpAmount(coin.amount, amountLabel.font, 8, 8)
     }
     
     static func dpAmount(_ amount: String?, _ font: UIFont, _ inputPoint: Int16, _ dpPoint: Int16) -> NSMutableAttributedString {

@@ -35,7 +35,7 @@ class ReInvest1ViewController: BaseViewController {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        WUtils.setDenomTitle(pageHolderVC.chainType!, rewardDenomLabel)
+        WDP.dpMainSymbol(chainConfig, rewardDenomLabel)
         
         self.loadingImg.onStartAnimation()
         self.onFetchRewards_gRPC(pageHolderVC.mAccount!.account_address)
