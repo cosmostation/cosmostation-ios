@@ -82,26 +82,10 @@ class SifJoinPool0ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = textField.text else { return true }
-        if (text.contains(".") && string.contains(".") && range.length == 0) { return false }
-        if (text.count == 0 && string.starts(with: ".")) { return false }
-        if (text.contains(",") && string.contains(",") && range.length == 0) { return false }
-        if (text.count == 0 && string.starts(with: ",")) { return false }
         if (textField == input0TextFiled) {
-            if let index = text.range(of: ".")?.upperBound {
-                if(text.substring(from: index).count > (rowanDecimal - 1) && range.length == 0) { return false }
-            }
-            if let index = text.range(of: ",")?.upperBound {
-                if(text.substring(from: index).count > (rowanDecimal - 1) && range.length == 0) { return false }
-            }
-            
+            return textField.shouldChange(charactersIn: range, replacementString: string, displayDecimal: rowanDecimal)
         } else if (textField == input1TextFiled) {
-            if let index = text.range(of: ".")?.upperBound {
-                if(text.substring(from: index).count > (externalDecimal - 1) && range.length == 0) { return false }
-            }
-            if let index = text.range(of: ",")?.upperBound {
-                if(text.substring(from: index).count > (externalDecimal - 1) && range.length == 0) { return false }
-            }
+            return textField.shouldChange(charactersIn: range, replacementString: string, displayDecimal: externalDecimal)
         }
         return true
     }
