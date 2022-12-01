@@ -46,6 +46,7 @@ class CommonWCViewController: BaseViewController {
     var interactor: WCInteractor?
     var accountMap: Dictionary<String, Account> = [String:Account]()
     var baseChain = ""
+    var lastAccountAction: ((_ accounts: [WCCosmostationAccount]) -> Void)?
     
     var connectType = ConnectType.WALLETCONNECT_QR
     
@@ -354,9 +355,10 @@ class CommonWCViewController: BaseViewController {
             chains.forEach { chain in
                 self.accountChainSet.insert(chain)
             }
-            self.showAccountPopup { accounts in
+            self.lastAccountAction = { accounts in
                 self.interactor?.approveRequest(id: id, result: accounts).cauterize()
             }
+            self.showAccountPopup()
         }
         
         interactor.cosmos.onCosmosAccounts = { [weak self] (id, chains) in
@@ -367,9 +369,10 @@ class CommonWCViewController: BaseViewController {
             chains.forEach { chain in
                 self.accountChainSet.insert(chain)
             }
-            self.showAccountPopup { accounts in
+            self.lastAccountAction = { accounts in
                 self.interactor?.approveRequest(id: id, result: accounts).cauterize()
             }
+            self.showAccountPopup()
         }
         
         interactor.cosmostation.onCosmosatationSignTx = { [weak self] (rawData) in
@@ -563,7 +566,7 @@ class CommonWCViewController: BaseViewController {
         }
     }
     
-    func showAccountPopup(_ action: @escaping (_ accounts: [WCCosmostationAccount]) -> Void) {
+    func showAccountPopup() {
         if (self.accountChainSet.isEmpty) {
             DispatchQueue.global().async {
                 let cosmostationAccountSet = self.accountSelectedSet.map { account in
@@ -571,7 +574,7 @@ class CommonWCViewController: BaseViewController {
                 }
                 DispatchQueue.main.async {
                     self.moveToBackgroundIfNeedAndAction {
-                        action(cosmostationAccountSet)
+                        self.lastAccountAction?(cosmostationAccountSet)
                     }
                 }
             }
@@ -580,13 +583,13 @@ class CommonWCViewController: BaseViewController {
         
         guard let chainId = self.accountChainSet.popFirst() else { return }
         if (!hasAccount(chainId: chainId)) {
-            showAccountPopup(action)
+            showAccountPopup()
             return
         }
         
         if let account = self.accountMap[WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId))] {
             accountSelectedSet.insert(account)
-            showAccountPopup(action)
+            showAccountPopup()
             return
         } else {
             guard let chainType = WUtils.getChainTypeByChainId(chainId) else { return }
@@ -883,6 +886,8 @@ class CommonWCViewController: BaseViewController {
                 interactor.disconnect()
             }
         }
+    
+        self.disconnectV2Sessions()
         
         if (self.navigationController != nil) {
             self.navigationController?.popViewController(animated: true)
@@ -1050,11 +1055,7 @@ extension CommonWCViewController: SBCardPopupDelegate {
                 }
                 self.accountMap[chainName] = selectedAccount
                 accountSelectedSet.insert(selectedAccount)
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
-                    self.showAccountPopup { accounts in
-                        self.interactor?.approveRequest(id: self.wcId!, result: accounts).cauterize()
-                    }
-                })
+                self.showAccountPopup()
             }
         }
     }
@@ -1093,9 +1094,9 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
             completionHandler()
         }
         alertController.addAction(cancelAction)
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
             self.present(alertController, animated: true, completion: nil)
-        }
+        })
     }
     
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
@@ -1109,9 +1110,9 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
         }
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
             self.present(alertController, animated: true, completion: nil)
-        }
+        })
     }
 }
 
@@ -1206,15 +1207,13 @@ extension CommonWCViewController {
     }
     
     private func approveProposal (proposal: Session.Proposal) {
-        var sessionNamespaces = [String: SessionNamespace]()
-        proposal.requiredNamespaces.forEach { namespaces in
-            self.wcV2CurrentProposal = proposal
-            self.accountChainSet.removeAll()
-            self.accountSelectedSet.removeAll()
-            namespaces.value.chains.forEach { chain in
-                self.accountChainSet.insert(chain.reference)
-            }
-            self.showAccountPopup { accounts in
+        self.wcV2CurrentProposal = proposal
+        self.accountChainSet.removeAll()
+        self.accountSelectedSet.removeAll()
+        self.accountChainSet = Set(proposal.requiredNamespaces.flatMap { $0.value.chains }.map { $0.reference })
+        self.lastAccountAction = { _ in
+            var sessionNamespaces = [String: SessionNamespace]()
+            proposal.requiredNamespaces.forEach { namespaces in
                 let caip2Namespace = namespaces.key
                 let proposalNamespace = namespaces.value
                 let accounts = Set(namespaces.value.chains.filter { chain in
@@ -1228,16 +1227,17 @@ extension CommonWCViewController {
                 }
                 let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events, extensions: extensions)
                 sessionNamespaces[caip2Namespace] = sessionNamespace
-                self.approve(proposalId:  proposal.id, namespaces: sessionNamespaces)
-                self.onViewUpdate(proposal)
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
-                    if (self.connectType.isDapp()) {
-                        self.connectStatus(connected: true)
-                    }
-                    self.hideLoading()
-                })
             }
+            self.approve(proposalId:  proposal.id, namespaces: sessionNamespaces)
+            self.onViewUpdate(proposal)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
+                if (self.connectType.isDapp()) {
+                    self.connectStatus(connected: true)
+                }
+                self.hideLoading()
+            })
         }
+        self.showAccountPopup()
     }
     
     @MainActor
@@ -1288,7 +1288,7 @@ extension CommonWCViewController {
             }
         }
     }
-
+    
     @MainActor
     private func reject(proposalId: String, reason: RejectionReason) {
         Task {
@@ -1296,6 +1296,20 @@ extension CommonWCViewController {
                 try await Sign.instance.reject(proposalId: proposalId, reason: reason)
             } catch {
                 print("Reject Session error: \(error)")
+            }
+        }
+    }
+    
+    @MainActor
+    private func disconnectV2Sessions() {
+        Task {
+            do {
+                for pairing in Pair.instance.getPairings() {
+                    try await Pair.instance.disconnect(topic: pairing.topic)
+                    try await Sign.instance.disconnect(topic: pairing.topic)
+                }
+            } catch {
+                print("Disconnect error: \(error)")
             }
         }
     }

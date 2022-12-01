@@ -2793,6 +2793,8 @@
 		51FC6D9984FCBC8504B55E1F /* Pods_Cosmostation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB20D291C0AF536BBDAE928C /* Pods_Cosmostation.framework */; };
 		9F0C15A928DF518100BA24B1 /* TwoLinesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */; };
 		9F0C15AA28DF518100BA24B1 /* TwoLinesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */; };
+		9F3E32882935464C00C5C5A9 /* UITextField+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E32872935464C00C5C5A9 /* UITextField+Validation.swift */; };
+		9F3E32892935464C00C5C5A9 /* UITextField+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E32872935464C00C5C5A9 /* UITextField+Validation.swift */; };
 		9F48C75629097FA00015CF89 /* HardPoolDeposit0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DB56F025FA3B7100B2F0E5 /* HardPoolDeposit0ViewController.swift */; };
 		9F7B386A292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7B3869292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift */; };
 		9F7B386B292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7B3869292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift */; };
@@ -4349,6 +4351,7 @@
 		28FEDCE826DB141900A43D01 /* KavaIncentiveClaim3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaIncentiveClaim3ViewController.xib; sourceTree = "<group>"; };
 		8378C93C7F20C3EFF8166D6C /* Pods-CosmostationDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.debug.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.debug.xcconfig"; sourceTree = "<group>"; };
 		9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLinesButton.swift; sourceTree = "<group>"; };
+		9F3E32872935464C00C5C5A9 /* UITextField+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Validation.swift"; sourceTree = "<group>"; };
 		9F7B3869292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift"; sourceTree = "<group>"; };
 		9F7D91022912F31F002A382C /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		9F831EEC291C5C1800A998FC /* UIStoryboard+Instantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Instantiate.swift"; sourceTree = "<group>"; };
@@ -6034,6 +6037,7 @@
 				04E1912B28E66F5800C98A6B /* UIViewController+Toast.swift */,
 				B1247F34290ABE5C00F60500 /* UIApplication+KeyWindow.swift */,
 				9F831EEC291C5C1800A998FC /* UIStoryboard+Instantiate.swift */,
+				9F3E32872935464C00C5C5A9 /* UITextField+Validation.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -8091,6 +8095,7 @@
 				1817CBE8283E2CE600523713 /* cosmos_gov_v1beta2_query.pb.swift in Sources */,
 				18FFB4A2281AF533004E65BB /* DelegateWarnPopup.swift in Sources */,
 				18FFB4A3281AF533004E65BB /* EarnUnbondingCell.swift in Sources */,
+				9F3E32892935464C00C5C5A9 /* UITextField+Validation.swift in Sources */,
 				1817CBBD283E2CE500523713 /* cryptoorg_supply_v1_query.pb.swift in Sources */,
 				18FFB4A5281AF533004E65BB /* SifSwap3ViewController.swift in Sources */,
 				1817CB7B283E2CE500523713 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
@@ -9625,6 +9630,7 @@
 				282FC71726C3FD62001BE250 /* FarmCell.swift in Sources */,
 				048C830A27BF572800270528 /* evmos_claims_v1_claims.pb.swift in Sources */,
 				04FCD2E7292E2CEF00BA5349 /* stride_claim_params.pb.swift in Sources */,
+				9F3E32882935464C00C5C5A9 /* UITextField+Validation.swift in Sources */,
 				0451FDA12832370100214FDA /* osmosis_gamm_v1beta1_tx.pb.swift in Sources */,
 				04AA4BCD2906A6DD0027877B /* kava_issuance_v1beta1_query.grpc.swift in Sources */,
 				28B4304424F8B34100BD7BB2 /* OkValidatorListViewController.swift in Sources */,

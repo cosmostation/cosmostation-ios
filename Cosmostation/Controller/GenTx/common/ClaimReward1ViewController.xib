@@ -89,7 +89,6 @@
                     </subviews>
                     <color key="backgroundColor" name="_card_bg"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="300" id="7gp-BH-16L"/>
                         <constraint firstItem="0Dc-OS-QdG" firstAttribute="top" secondItem="DBD-4q-6vi" secondAttribute="bottom" constant="8" id="AEp-TB-2zY"/>
                         <constraint firstItem="BAK-K3-dZH" firstAttribute="leading" secondItem="7ya-R7-gL0" secondAttribute="leading" constant="16" id="IcZ-aR-vAF"/>
                         <constraint firstItem="BAK-K3-dZH" firstAttribute="top" secondItem="0Dc-OS-QdG" secondAttribute="bottom" constant="16" id="Mtq-x7-0SR"/>
@@ -195,6 +194,7 @@ The actual amount of rewards you receive may be equal to or greater than what is
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="XF8-el-Uea" firstAttribute="top" secondItem="7ya-R7-gL0" secondAttribute="bottom" constant="16" id="5q0-YK-9sg"/>
                 <constraint firstItem="1Tt-1C-RFN" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-16" id="9l8-CE-Ja6"/>
                 <constraint firstItem="7ya-R7-gL0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Rlk-2e-xOl"/>
                 <constraint firstItem="1Tt-1C-RFN" firstAttribute="top" secondItem="AhF-1b-FCy" secondAttribute="bottom" constant="16" id="Rrf-FX-jyF"/>
