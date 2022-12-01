@@ -56,30 +56,32 @@ class WalletPriceCell: UITableViewCell {
     
     func onBindCell(_ account: Account?, _ chainConfig: ChainConfig?) {
         if (account == nil || chainConfig == nil) { return }
-        let chainType = chainConfig!.chainType
-        guard let chainConfig = chainConfig else { return }
+        let stakingDenom = chainConfig!.stakeDenom
+        guard let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) else {
+            return
+        }
 
         sourceSite.text = "(CoinGecko 24h)"
-        perPrice.attributedText = WUtils.dpPrice(WUtils.getMainDenom(chainConfig), perPrice.font)
-        updownPercent.attributedText = WUtils.dpPriceChange(WUtils.getMainDenom(chainConfig), updownPercent.font)
-        let changePrice = WUtils.priceChange(WUtils.getMainDenom(chainConfig))
+        perPrice.attributedText = WUtils.dpPrice(msAsset.coinGeckoId, perPrice.font)
+        updownPercent.attributedText = WUtils.dpPriceChange(msAsset.coinGeckoId, updownPercent.font)
+        let changePrice = WUtils.priceChange(msAsset.coinGeckoId)
         WDP.setPriceColor(updownPercent, changePrice)
         
-        if (chainConfig.moonPaySupoort == true && chainConfig.kadoMoneySupoort == true) {
-            buyBtn.setTitle(String(format: NSLocalizedString("btn_buy_kadomoney", comment: ""), chainConfig.stakeSymbol), for: .normal)
+        if (chainConfig!.moonPaySupoort == true && chainConfig!.kadoMoneySupoort == true) {
+            buyBtn.setTitle(String(format: NSLocalizedString("btn_buy_kadomoney", comment: ""), chainConfig!.stakeSymbol), for: .normal)
             buySeparator.isHidden = false
             buyBtn.isHidden = false
             buyConstraint.priority = .defaultHigh
             noBuyConstraint.priority = .defaultLow
         
-        } else if (chainConfig.moonPaySupoort == true) {
-            buyBtn.setTitle(String(format: NSLocalizedString("btn_buy_moonpay", comment: ""), chainConfig.stakeSymbol), for: .normal)
+        } else if (chainConfig!.moonPaySupoort == true) {
+            buyBtn.setTitle(String(format: NSLocalizedString("btn_buy_moonpay", comment: ""), chainConfig!.stakeSymbol), for: .normal)
             buySeparator.isHidden = false
             buyBtn.isHidden = false
             buyConstraint.priority = .defaultHigh
             noBuyConstraint.priority = .defaultLow
         
-        } else if (chainConfig.kadoMoneySupoort == true) {
+        } else if (chainConfig!.kadoMoneySupoort == true) {
             buyBtn.setTitle(NSLocalizedString("btn_buy_kadomoney", comment: ""), for: .normal)
             buySeparator.isHidden = false
             buyBtn.isHidden = false
