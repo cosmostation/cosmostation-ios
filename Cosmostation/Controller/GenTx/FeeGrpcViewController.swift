@@ -52,8 +52,8 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.mFeeInfo = BaseData.instance.mParam!.getFeeInfos()
-        WDP.dpSymbolImg(chainConfig, WUtils.getMainDenom(chainConfig), feeTypeImg)
-        WDP.dpSymbol(chainConfig, WUtils.getMainDenom(chainConfig), feeTypeDenom)
+        WDP.dpSymbolImg(chainConfig, chainConfig!.stakeDenom, feeTypeImg)
+        WDP.dpSymbol(chainConfig, chainConfig!.stakeDenom, feeTypeDenom)
         
         feeTotalCard.backgroundColor = chainConfig?.chainColorBG
         gasSelectSegments.selectedSegmentTintColor = chainConfig?.chainColor
@@ -156,7 +156,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
 //        print("onCalculateEvmFees")
         Task {
             guard
-                let mintscanToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == pageHolderVC.mToSendDenom!.lowercased() }).first,
+                let mintscanToken = BaseData.instance.mMintscanTokens.filter({ $0.address == pageHolderVC.mToSendDenom! }).first,
                 let url = URL(string: self.chainConfig!.rpcUrl),
                 let web3 = try? Web3.new(url)
             else {
@@ -165,13 +165,13 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             }
             
             let chainID = web3.provider.network?.chainID
-            let contractAddress = EthereumAddress.init(fromHex: mintscanToken.contract_address)
+            let contractAddress = EthereumAddress.init(fromHex: mintscanToken.address)
             let senderAddress = EthereumAddress.init(fromHex: WKey.convertBech32ToEvm(account!.account_address))
             let recipientAddress = EthereumAddress.init(fromHex: WKey.convertBech32ToEvm(pageHolderVC.mRecipinetAddress!))
             let erc20token = ERC20(web3: web3, provider: web3.provider, address: contractAddress!)
             
             let sendAmount = self.pageHolderVC.mToSendAmount[0].amount
-            let calSendAmount = NSDecimalNumber.init(string: sendAmount).multiplying(byPowerOf10: -mintscanToken.decimal)
+            let calSendAmount = NSDecimalNumber.init(string: sendAmount).multiplying(byPowerOf10: -mintscanToken.decimals)
             
             let nounce = try? web3.eth.getTransactionCount(address: senderAddress!)
             let wTx = try? erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
@@ -203,9 +203,11 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             if (mSimulPassed == true) {
                 self.onShowToast(NSLocalizedString("gas_checked", comment: ""))
                 WDP.dpCoin(chainConfig, mFee.amount[0], feeTotalDenom, feeTotalAmount)
-                let mainDenom = chainConfig!.stakeDenom
-                let divideDeciaml = chainConfig!.divideDecimal
-                feeTotalValue.attributedText = WUtils.dpAssetValue(mainDenom, NSDecimalNumber.init(string: mFee.amount[0].amount), divideDeciaml, feeTotalValue.font)
+                
+                if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == chainConfig!.stakeDenom }).first {
+                    WDP.dpAssetValue(feeMsAsset.coinGeckoId, NSDecimalNumber.init(string: mFee.amount[0].amount), feeMsAsset.decimals, feeTotalValue)
+                }
+                
             } else {
                 self.onShowToast(NSLocalizedString("error_simul_error", comment: ""))
             }
@@ -217,14 +219,9 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             WDP.dpSymbol(chainConfig, mFeeData.denom, feeTypeDenom)
             WDP.dpCoin(chainConfig, mFee.amount[0], feeTotalDenom, feeTotalAmount)
             
-            var feePriceDenom = mFeeData.denom!
-            var feeDivideDecimal = WUtils.getDenomDecimal(chainConfig, mFeeData.denom)
-            if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == mFeeData.denom!.lowercased() }).first {
-                feePriceDenom = feeMsAsset.priceDenom()
-                feeDivideDecimal = feeMsAsset.decimal
+            if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == mFeeData.denom! }).first {
+                WDP.dpAssetValue(feeMsAsset.coinGeckoId, NSDecimalNumber.init(string: mFee.amount[0].amount), feeMsAsset.decimals, feeTotalValue)
             }
-            
-            feeTotalValue.attributedText = WUtils.dpAssetValue(feePriceDenom, NSDecimalNumber.init(string: mFee.amount[0].amount), feeDivideDecimal, feeTotalValue.font)
             gasDescriptionLabel.text = mFeeInfo[mSelectedFeeInfo].msg
         }
     }
@@ -343,13 +340,13 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                 
             } else if (pageHolderVC.mTransferType == TRANSFER_WASM) {
                 return Signer.simulWasmSend(auth, account!.account_pubkey_type,
-                                            pageHolderVC.mRecipinetAddress!, pageHolderVC.mMintscanTokens!.contract_address,
+                                            pageHolderVC.mRecipinetAddress!, pageHolderVC.mMintscanTokens!.address,
                                             pageHolderVC.mToSendAmount,
                                             mFee, pageHolderVC.mMemo!, privateKey, publicKey, chainType!)
                 
             } else if (pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
                 return Signer.simulWasmIbcSend(auth, account!.account_pubkey_type,
-                                               pageHolderVC.mRecipinetAddress!, pageHolderVC.mMintscanTokens!.contract_address,
+                                               pageHolderVC.mRecipinetAddress!, pageHolderVC.mMintscanTokens!.address,
                                                pageHolderVC.mToSendAmount, pageHolderVC.mMintscanPath!,
                                                mFee, pageHolderVC.mMemo!, privateKey, publicKey, chainType!)
                 

@@ -42,17 +42,17 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
         let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         if (chainConfig?.isGrpc == true) {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
-                divideDecimal = msAsset.decimal
-                displayDecimal = msAsset.decimal
+                divideDecimal = msAsset.decimals
+                displayDecimal = msAsset.decimals
                 if (pageHolderVC.mToSendDenom == mainDenom) {
                     maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
                 } else {
                     maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!)
                 }
                 
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
-                divideDecimal = msToken.decimal
-                displayDecimal = msToken.decimal
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == toSendDenom }).first {
+                divideDecimal = msToken.decimals
+                displayDecimal = msToken.decimals
                 maxAvailable = NSDecimalNumber.init(string: msToken.amount)
             }
             
@@ -236,7 +236,7 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
     @IBAction func onClickMax(_ sender: UIButton) {
         let maxValue = maxAvailable.multiplying(byPowerOf10: -divideDecimal, withBehavior: WUtils.getDivideHandler(displayDecimal))
         mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(maxValue, displayDecimal)
-        if (pageHolderVC.mToSendDenom == WUtils.getMainDenom(chainConfig)) {
+        if (pageHolderVC.mToSendDenom == chainConfig?.stakeDenom) {
             self.showMaxWarnning()
         }
         self.onUIupdate()

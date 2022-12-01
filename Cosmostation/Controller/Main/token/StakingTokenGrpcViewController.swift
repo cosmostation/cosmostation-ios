@@ -20,6 +20,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     
     var stakingDenom = ""
     var totalAmount = NSDecimalNumber.zero
+    var msAsset: MintscanAsset!
     var hasVesting = false
     var hasUnbonding = false
     
@@ -28,7 +29,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
-        self.stakingDenom = WUtils.getMainDenom(chainConfig)
+        self.stakingDenom = chainConfig!.stakeDenom
         
         self.onInitView()
         
@@ -56,11 +57,12 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     }
     
     func onInitView() {
-        WUtils.setDenomTitle(chainType, naviTokenSymbol)
+        msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom)
+        WDP.dpMainSymbol(chainConfig, naviTokenSymbol)
         self.naviTokenImg.image = chainConfig?.stakeDenomImg
-        self.naviPerPrice.attributedText = WUtils.dpPrice(WUtils.getMainDenom(chainConfig), naviPerPrice.font)
-        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(WUtils.getMainDenom(chainConfig), naviUpdownPercent.font)
-        let changePrice = WUtils.priceChange(WUtils.getMainDenom(chainConfig))
+        WDP.dpPrice(msAsset.coinGeckoId, naviPerPrice)
+        WDP.dpPriceChanged(msAsset.coinGeckoId, naviUpdownPercent)
+        let changePrice = WUtils.priceChange(msAsset.coinGeckoId)
         WDP.setPriceColor(naviUpdownPercent, changePrice)
         totalAmount = WUtils.getAllMainAsset(stakingDenom)
     }
@@ -91,7 +93,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
             cell?.onBindTokenDetail(account, chainConfig)
-            cell?.onBindValue(stakingDenom, totalAmount, chainConfig!.divideDecimal)
+            cell?.onBindValue(msAsset.coinGeckoId, totalAmount, chainConfig!.divideDecimal)
             cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
             return cell!
             

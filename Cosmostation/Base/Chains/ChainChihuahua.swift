@@ -43,14 +43,13 @@ class ChainChihuahua: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-chihuahua-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-chihuahua.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-chihuahua-app.cosmostation.io/"
     var apiUrl = "https://api-chihuahua.cosmostation.io/"
     var explorerUrl = MintscanUrl + "chihuahua/"
-    var validatorImgUrl = MonikerUrl + "chihuahua/"
-    var priceUrl = CoingeckoUrl + "chihuahua-chain"
+    var priceUrl = GeckoUrl + "chihuahua-chain"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

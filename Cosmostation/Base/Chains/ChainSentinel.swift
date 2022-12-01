@@ -43,14 +43,13 @@ class ChainSentinel: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-sentinel-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-sentinel.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-sentinel-app.cosmostation.io/"
     var apiUrl = "https://api-sentinel.cosmostation.io/"
     var explorerUrl = MintscanUrl + "sentinel/"
-    var validatorImgUrl = MonikerUrl + "sentinel/"
-    var priceUrl = CoingeckoUrl + "sentinel"
+    var priceUrl = GeckoUrl + "sentinel"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

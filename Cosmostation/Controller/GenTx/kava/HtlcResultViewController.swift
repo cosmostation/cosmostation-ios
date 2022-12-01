@@ -51,6 +51,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.htlcResultTableView.delegate = self
         self.htlcResultTableView.dataSource = self
@@ -149,10 +150,10 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             
             let sendCoin = msg?.value.getAmounts()![0]
             cell?.sentAmountLabel.attributedText = WDP.dpAmount(sendCoin?.amount, cell!.sentAmountLabel.font!, 8, 8)
-            WUtils.setDenomTitle(chainType!, cell!.sentDenom)
+            WDP.dpMainSymbol(chainConfig, cell!.sentDenom)
             
             cell?.feeLabel.attributedText = WDP.dpAmount(FEE_BINANCE_BASE, cell!.feeLabel.font!, 0, 8)
-            WUtils.setDenomTitle(chainType!, cell!.feeDenom)
+            WDP.dpMainSymbol(chainConfig, cell!.feeDenom)
             
             cell?.senderLabel.text = msg?.value.from
             cell?.relayRecipientLabel.text = msg?.value.to
@@ -174,7 +175,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             }
             
             let sendCoin = Coin.init(msg.amount[0].denom, msg.amount[0].amount)
-            let sendCoinDecimal = WUtils.getDenomDecimal(chainConfig, sendCoin.denom)
+            let sendCoinDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == sendCoin.denom }).first?.decimals ?? 6
             cell?.sentAmountLabel.attributedText = WDP.dpAmount(sendCoin.amount, cell!.sentAmountLabel.font!, sendCoinDecimal, sendCoinDecimal)
             cell?.sentDenom.text = sendCoin.denom.uppercased()
             
@@ -192,8 +193,9 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     
     func onSetHtlcClaimItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell:HtlcResultClaimCell? = tableView.dequeueReusableCell(withIdentifier:"HtlcResultClaimCell") as? HtlcResultClaimCell
+        let toChainConfig = ChainFactory.getChainConfig(mHtlcToChain!)
         cell?.claimImg.image = cell?.claimImg.image?.withRenderingMode(.alwaysTemplate)
-        cell?.claimImg.tintColor = ChainFactory.getChainConfig(mHtlcToChain!)?.chainColor
+        cell?.claimImg.tintColor = toChainConfig!.chainColor
         if (self.mHtlcToChain == ChainType.BINANCE_MAIN) {
             let msg = mClaimTxInfo?.getMsgs()[0]
             cell?.blockHeightLabel.text = mClaimTxInfo?.height
@@ -204,7 +206,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             cell?.receivedDenom.text = ""
             
             cell?.feeLabel.attributedText = WDP.dpAmount(FEE_BINANCE_BASE, cell!.feeLabel.font!, 0, 8)
-            WUtils.setDenomTitle(mHtlcToChain!, cell!.feeDenomLabel)
+            WDP.dpMainSymbol(toChainConfig, cell!.feeDenomLabel)
             
             cell?.claimerAddress.text = msg?.value.from
             cell?.randomNumberLabel.text = msg?.value.random_number

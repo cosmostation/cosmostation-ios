@@ -44,14 +44,13 @@ class ChainKava: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = true
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-kava-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-kava.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-kava-app.cosmostation.io/"
     var apiUrl = "https://api-kava.cosmostation.io/"
     var explorerUrl = MintscanUrl + "kava/"
-    var validatorImgUrl = MonikerUrl + "kava/"
-    var priceUrl = CoingeckoUrl + "kava"
+    var priceUrl = GeckoUrl + "kava"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -79,6 +78,5 @@ let KAVA_HARD_DENOM = "hard"
 let KAVA_USDX_DENOM = "usdx"
 let KAVA_SWAP_DENOM = "swp"
 
-let KAVA_CDP_IMG_URL        = ResourceBase + "kava/cdp/";
-let KAVA_HARD_POOL_IMG_URL  = ResourceBase + "kava/hard/";
-let KAVA_COIN_IMG_URL       = ResourceBase + "coin_image/kava/";
+let KAVA_CDP_IMG_URL        = ResourceBase + "kava/module/mint/";
+let KAVA_HARD_POOL_IMG_URL  = ResourceBase + "kava/module/lend/";

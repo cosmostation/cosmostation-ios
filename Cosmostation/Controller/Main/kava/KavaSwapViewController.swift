@@ -94,8 +94,13 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
     }
     
     func updateView() {
-        let inputCoinDecimal = WUtils.getDenomDecimal(chainConfig, mInputCoinDenom)
-        let outputCoinDecimal = WUtils.getDenomDecimal(chainConfig, mOutputCoinDenom)
+        guard let inputMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == mInputCoinDenom }).first,
+              let outputMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == mOutputCoinDenom }).first else {
+            return
+        }
+        
+        let inputCoinDecimal = inputMsAsset.decimals
+        let outputCoinDecimal = outputMsAsset.decimals
         mAvailableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(mInputCoinDenom!)
 
         let swapFee = NSDecimalNumber.init(string: mKavaSwapPoolParam?.swapFee).multiplying(byPowerOf10: -16)
@@ -132,8 +137,8 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
 
         //display swap rate with market price
         inputCoinExRateAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, 6)
-        let priceInput = WUtils.price(BaseData.instance.getBaseDenom(chainConfig, mInputCoinDenom))
-        let priceOutput = WUtils.price(BaseData.instance.getBaseDenom(chainConfig, mOutputCoinDenom))
+        let priceInput = WUtils.price(inputMsAsset.coinGeckoId)
+        let priceOutput = WUtils.price(outputMsAsset.coinGeckoId)
         
         if (priceInput == NSDecimalNumber.zero || priceOutput == NSDecimalNumber.zero) {
             self.outputCoinExRateAmount.text = "?.??????"

@@ -43,14 +43,13 @@ class ChainOsmosis: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = true
-    var grpcUrl = "lcd-osmosis-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-osmosis.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-osmosis-app.cosmostation.io/"
     var apiUrl = "https://api-osmosis.cosmostation.io/"
     var explorerUrl = MintscanUrl + "osmosis/"
-    var validatorImgUrl = MonikerUrl + "osmosis/"
-    var priceUrl = CoingeckoUrl + "osmosis"
+    var priceUrl = GeckoUrl + "osmosis"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

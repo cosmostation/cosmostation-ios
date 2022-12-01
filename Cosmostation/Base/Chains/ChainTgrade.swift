@@ -44,14 +44,13 @@ class ChainTgrade: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-tgrade-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-tgrade.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-tgrade-app.cosmostation.io/"
     var apiUrl = "https://api-tgrade.cosmostation.io/"
     var explorerUrl = MintscanUrl + "tgrade/"
-    var validatorImgUrl = MonikerUrl + "tgrade/"
-    var priceUrl = CoingeckoUrl + "tgrade"
+    var priceUrl = GeckoUrl + "tgrade"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

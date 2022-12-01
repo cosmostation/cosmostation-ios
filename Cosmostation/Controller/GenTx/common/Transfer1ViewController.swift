@@ -46,7 +46,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         
         self.toSendDenom = pageHolderVC.mToSendDenom
         self.mintscanAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first
-        self.mintscanTokens = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first
+        self.mintscanTokens = BaseData.instance.mMintscanTokens.filter({ $0.address == toSendDenom }).first
         self.recipientableChains.append(chainConfig!)
         
         let allChainConfig = ChainFactory.SUPPRT_CONFIG()
@@ -70,7 +70,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
                 
             } else if (mintscanTokens != nil) {
                 //add only forward path
-                if (msAsset.counter_party?.denom == mintscanTokens?.contract_address) {
+                if (msAsset.counter_party?.denom == mintscanTokens?.address) {
                     if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.chain }).first {
                         if !self.recipientableChains.contains(where: { $0.chainAPIName == sendable.chainAPIName }) {
                         self.recipientableChains.append(sendable)
@@ -201,8 +201,8 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         if (chainType == recipientChainConfig.chainType) {
             if (mintscanAsset != nil) { pageHolderVC.mTransferType = TRANSFER_SIMPLE }
             else if (mintscanTokens != nil) {
-                print("contract_address ", mintscanTokens?.contract_address)
-                if (mintscanTokens?.contract_address.starts(with: "0x") == true) {
+                print("contract_address ", mintscanTokens?.address)
+                if (mintscanTokens?.address.starts(with: "0x") == true) {
                     pageHolderVC.mTransferType = TRANSFER_EVM
                 } else {
                     pageHolderVC.mTransferType = TRANSFER_WASM

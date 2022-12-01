@@ -77,7 +77,6 @@ class WalletBaseChainCell: UITableViewCell {
         btnWalletConnect.isHidden = !chainConfig!.wcSupoort
 
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, divideDecimal, 6)
-        totalValue.attributedText = WUtils.dpAssetValue(stakingDenom, totalToken, divideDecimal, totalValue.font)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, divideDecimal, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, divideDecimal, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, divideDecimal, 6)
@@ -89,6 +88,10 @@ class WalletBaseChainCell: UITableViewCell {
             vestingAmount.attributedText = WDP.dpAmount(BaseData.instance.getVesting_gRPC(stakingDenom), vestingAmount.font!, divideDecimal, 6)
         }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -divideDecimal).stringValue)
+        
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) {
+            WDP.dpAssetValue(msAsset.coinGeckoId, totalToken, divideDecimal, totalValue)
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

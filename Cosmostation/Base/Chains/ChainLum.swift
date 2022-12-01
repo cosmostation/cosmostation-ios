@@ -44,14 +44,13 @@ class ChainLum: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-lum-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-lum.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-lum-app.cosmostation.io/"
     var apiUrl = "https://api-lum.cosmostation.io/"
     var explorerUrl = MintscanUrl + "lum/"
-    var validatorImgUrl = MonikerUrl + "lum-network/"
-    var priceUrl = CoingeckoUrl + "lum-network"
+    var priceUrl = GeckoUrl + "lum-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

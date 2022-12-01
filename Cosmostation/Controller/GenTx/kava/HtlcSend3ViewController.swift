@@ -58,7 +58,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         //set Send layer's data
         sendImg.image = sendImg.image?.withRenderingMode(.alwaysTemplate)
         sendImg.tintColor = ChainFactory.getChainConfig(chainType)?.chainColor
-        WUtils.setDenomTitle(chainType, sendFeeDenom)
+        WDP.dpMainSymbol(chainConfig, sendFeeDenom)
         if (chainType == ChainType.BINANCE_MAIN) {
             mDpDecimal = 8;
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BNB) {
@@ -80,8 +80,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             recipientAddressLabel.text = pageHolderVC.mHtlcToAccount?.account_address
             
         } else if (chainType == ChainType.KAVA_MAIN) {
-            let chainConfig = ChainKava.init(.KAVA_MAIN)
-            mDpDecimal = WUtils.getDenomDecimal(chainConfig, self.pageHolderVC.mHtlcDenom!)
+            mDpDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == self.pageHolderVC.mHtlcDenom! }).first?.decimals ?? 6
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BNB) {
                 sendAmountDenom.text = "BNB"
                 sendAmountDenom.textColor = UIColor.init(named: "binance")
@@ -102,8 +101,9 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         }
         
         //set Claim layer's data
+        let toChainConfig = ChainFactory.getChainConfig(pageHolderVC.mHtlcToChain!)
         claimImg.image = claimImg.image?.withRenderingMode(.alwaysTemplate)
-        claimImg.tintColor = ChainFactory.getChainConfig(pageHolderVC.mHtlcToChain)?.chainColor
+        claimImg.tintColor = toChainConfig?.chainColor
         if (pageHolderVC.mHtlcToChain == ChainType.BINANCE_MAIN) {
             receiveAmountDenom.text = self.pageHolderVC.mHtlcDenom!.uppercased()
             relayFeeDenom.text = self.pageHolderVC.mHtlcDenom!.uppercased()
@@ -123,7 +123,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
                 relayFeeDenom.text = "BUSD"
                 
             }
-            WUtils.setDenomTitle(pageHolderVC.mHtlcToChain!, claimFeeDenom)
+            WDP.dpMainSymbol(toChainConfig, claimFeeDenom)
             
             relayerFee = self.pageHolderVC.mKavaSwapParam!.getSupportedSwapAssetFee(pageHolderVC.mHtlcDenom!)
             receiveAmountLabel.attributedText = WDP.dpAmount(toSendAmount.subtracting(relayerFee).stringValue , receiveAmountLabel.font, mDpDecimal, mDpDecimal)
@@ -145,7 +145,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
                 receiveAmountDenom.text = "BUSD"
                 relayFeeDenom.text = "BUSD"
             }
-            WUtils.setDenomTitle(pageHolderVC.mHtlcToChain!, claimFeeDenom)
+            WDP.dpMainSymbol(toChainConfig, claimFeeDenom)
             
             relayerFee = self.pageHolderVC.mKavaSwapParam!.getSupportedSwapAssetFee(pageHolderVC.mHtlcDenom!).multiplying(byPowerOf10: -8)
             receiveAmountLabel.attributedText = WDP.dpAmount(toSendAmount.subtracting(relayerFee).stringValue , receiveAmountLabel.font, 0, 8)

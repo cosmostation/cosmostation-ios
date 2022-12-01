@@ -44,14 +44,13 @@ class ChainLike: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-likecoin-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-likecoin.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-likecoin-app.cosmostation.io/"
     var apiUrl = "https://api-likecoin.cosmostation.io/"
     var explorerUrl = MintscanUrl + "likecoin/"
-    var validatorImgUrl = MonikerUrl + "likecoin/"
-    var priceUrl = CoingeckoUrl + "likecoin"
+    var priceUrl = GeckoUrl + "likecoin"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

@@ -178,7 +178,7 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Starnamed_X_Starname_V1beta1_QueryDomainRequest.with { $0.name = domain }
                 if let response = try? Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).domain(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
-                    print("onFetchDomainInfo_gRPC ", domain, " ", response)
+//                    print("onFetchDomainInfo_gRPC ", domain, " ", response)
                     self.mMyDomainInfo_gRPC = response.domain
                 }
                 try channel.close().wait()
@@ -196,7 +196,7 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Starnamed_X_Starname_V1beta1_QueryStarnameRequest.with { $0.starname = account + "*" + doamin }
                 if let response = try? Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).starname(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
-                    print("onFetchgRPCResolve ", response)
+//                    print("onFetchgRPCResolve ", response)
                     self.mMyAccountResolve_gRPC = response
                 }
                 try channel.close().wait()

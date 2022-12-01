@@ -27,8 +27,8 @@ class OkDeposit4ViewController: BaseViewController, PasswordViewDelegate, SBCard
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(chainType, toDepositAmountDenom)
-        WUtils.setDenomTitle(chainType, feeAmountDenom)
+        WDP.dpMainSymbol(chainConfig, toDepositAmountDenom)
+        WDP.dpMainSymbol(chainConfig, feeAmountDenom)
     }
     
     @IBAction func onClickConfirm(_ sender: Any) {

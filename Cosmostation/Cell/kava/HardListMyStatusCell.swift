@@ -30,7 +30,7 @@ class HardListMyStatusCell: UITableViewCell {
         var totalDepositValue = NSDecimalNumber.zero
         var totalLTVValue = NSDecimalNumber.zero
         myDeposits?.forEach({ coin in
-            let decimal         = WUtils.getDenomDecimal(chainConfig, coin.denom)
+            let decimal         = BaseData.instance.mMintscanAssets.filter({ $0.denom == coin.denom }).first?.decimals ?? 6
             let LTV             = hardParam!.getLTV(coin.denom)
             let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
             let depositValue    = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
@@ -43,7 +43,7 @@ class HardListMyStatusCell: UITableViewCell {
         
         var totalBorroweValue = NSDecimalNumber.zero
         myBorrows?.forEach { coin in
-            let decimal         = WUtils.getDenomDecimal(chainConfig, coin.denom)
+            let decimal         = BaseData.instance.mMintscanAssets.filter({ $0.denom == coin.denom }).first?.decimals ?? 6 
             let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
             let borrowValue     = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
             totalBorroweValue = totalBorroweValue.adding(borrowValue)

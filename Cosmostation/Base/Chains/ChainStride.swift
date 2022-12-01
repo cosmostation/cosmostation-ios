@@ -44,14 +44,13 @@ class ChainStride: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-stride-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-stride.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-stride-app.cosmostation.io/"
     var apiUrl = "https://api-stride.cosmostation.io/"
     var explorerUrl = MintscanUrl + "stride/"
-    var validatorImgUrl = MonikerUrl + "stride/"
-    var priceUrl = CoingeckoUrl + "stride"
+    var priceUrl = GeckoUrl + "stride"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

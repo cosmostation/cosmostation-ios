@@ -43,14 +43,13 @@ class ChainXpla: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-xpla-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-xpla.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-xpla-app.cosmostation.io/"
     var apiUrl = "https://api-xpla.cosmostation.io/"
     var explorerUrl = MintscanUrl + "xpla/"
-    var validatorImgUrl = MonikerUrl + "xpla/"
-    var priceUrl = CoingeckoUrl + "xpla"
+    var priceUrl = GeckoUrl + "xpla"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

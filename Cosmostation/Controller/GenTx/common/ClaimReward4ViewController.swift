@@ -45,9 +45,9 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(chainType!, rewardDenomLabel)
-        WUtils.setDenomTitle(chainType!, feeDenomLabel)
-        WUtils.setDenomTitle(chainType!, expectedDenomLabel)
+        WDP.dpMainSymbol(chainConfig, rewardDenomLabel)
+        WDP.dpMainSymbol(chainConfig, feeDenomLabel)
+        WDP.dpMainSymbol(chainConfig, expectedDenomLabel)
         
         beforeBtn.borderColor = UIColor.font05
         confirmBtn.borderColor = UIColor.photon
@@ -103,7 +103,7 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
     func checkIsWasteFee() -> Bool {
         var selectedRewardSum = NSDecimalNumber.zero
         for validator in pageHolderVC.mRewardTargetValidators_gRPC {
-            let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator.operatorAddress)
+            let amount = BaseData.instance.getReward_gRPC(chainConfig!.stakeDenom, validator.operatorAddress)
             selectedRewardSum = selectedRewardSum.adding(amount)
         }
         if (NSDecimalNumber.init(string: pageHolderVC.mFee?.amount[0].amount).compare(selectedRewardSum).rawValue > 0 ) {
@@ -128,14 +128,14 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
         
         var selectedRewardSum = NSDecimalNumber.zero
         for validator in pageHolderVC.mRewardTargetValidators_gRPC {
-            let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator.operatorAddress)
+            let amount = BaseData.instance.getReward_gRPC(chainConfig!.stakeDenom, validator.operatorAddress)
             selectedRewardSum = selectedRewardSum.adding(amount)
         }
         
         rewardAmoutLaebl.attributedText = WDP.dpAmount(selectedRewardSum.stringValue, rewardAmoutLaebl.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
         feeAmountLabel.attributedText = WDP.dpAmount(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
         
-        let userBalance: NSDecimalNumber = BaseData.instance.getAvailableAmount_gRPC(WUtils.getMainDenom(chainConfig))
+        let userBalance: NSDecimalNumber = BaseData.instance.getAvailableAmount_gRPC(chainConfig!.stakeDenom)
         let expectedAmount = userBalance.adding(selectedRewardSum).subtracting(WUtils.plainStringToDecimal(pageHolderVC.mFee?.amount[0].amount))
         expectedAmountLabel.attributedText = WDP.dpAmount(expectedAmount.stringValue, rewardAmoutLaebl.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
         

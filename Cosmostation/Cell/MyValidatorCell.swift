@@ -65,7 +65,7 @@ class MyValidatorCell: UITableViewCell {
         
         myDelegatedAmoutLabel.attributedText = WDP.dpAmount(BaseData.instance.getDelegated_gRPC(validator.operatorAddress).stringValue, myDelegatedAmoutLabel.font, chainConfig!.divideDecimal, 6)
         myUndelegatingAmountLabel.attributedText = WDP.dpAmount(BaseData.instance.getUnbonding_gRPC(validator.operatorAddress).stringValue, myUndelegatingAmountLabel.font, chainConfig!.divideDecimal, 6)
-        rewardAmoutLabel.attributedText = WDP.dpAmount(BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator.operatorAddress).stringValue, rewardAmoutLabel.font, chainConfig!.divideDecimal, 6)
+        rewardAmoutLabel.attributedText = WDP.dpAmount(BaseData.instance.getReward_gRPC(chainConfig!.stakeDenom, validator.operatorAddress).stringValue, rewardAmoutLabel.font, chainConfig!.divideDecimal, 6)
         
         cardView.backgroundColor = chainConfig?.chainColorBG
         if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {

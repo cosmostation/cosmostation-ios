@@ -735,6 +735,8 @@
 		046FF01B277B43F100F72C11 /* GenDenom3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FF019277B43F100F72C11 /* GenDenom3ViewController.xib */; };
 		046FF01E277B766200F72C11 /* TxIssueNFTDenomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF01C277B766200F72C11 /* TxIssueNFTDenomCell.swift */; };
 		046FF01F277B766200F72C11 /* TxIssueNFTDenomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FF01D277B766200F72C11 /* TxIssueNFTDenomCell.xib */; };
+		047597972935FF97002DA28C /* ChainOnomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047597962935FF97002DA28C /* ChainOnomy.swift */; };
+		047597982935FF97002DA28C /* ChainOnomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047597962935FF97002DA28C /* ChainOnomy.swift */; };
 		047966502757409700315D55 /* MintscanProposalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479664F2757409700315D55 /* MintscanProposalDetail.swift */; };
 		047DCEE228855F4800253CAA /* MintscanMyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DCEE128855F4800253CAA /* MintscanMyVote.swift */; };
 		047DCEE328855F4800253CAA /* MintscanMyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DCEE128855F4800253CAA /* MintscanMyVote.swift */; };
@@ -3525,6 +3527,7 @@
 		046FF019277B43F100F72C11 /* GenDenom3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenDenom3ViewController.xib; sourceTree = "<group>"; };
 		046FF01C277B766200F72C11 /* TxIssueNFTDenomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxIssueNFTDenomCell.swift; sourceTree = "<group>"; };
 		046FF01D277B766200F72C11 /* TxIssueNFTDenomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxIssueNFTDenomCell.xib; sourceTree = "<group>"; };
+		047597962935FF97002DA28C /* ChainOnomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOnomy.swift; sourceTree = "<group>"; };
 		0479664F2757409700315D55 /* MintscanProposalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanProposalDetail.swift; sourceTree = "<group>"; };
 		047DCEE128855F4800253CAA /* MintscanMyVote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanMyVote.swift; sourceTree = "<group>"; };
 		047FB6CA281A4C4F009D8AAF /* sifnode_dispensation_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_dispensation_v1_query.pb.swift; sourceTree = "<group>"; };
@@ -4623,6 +4626,7 @@
 				04403735284A2B2F004CD7E3 /* ChainNyx.swift */,
 				0451FC5F282A39FB00214FDA /* ChainOkc.swift */,
 				0451FCBD282A3C3E00214FDA /* ChainOmiflix.swift */,
+				047597962935FF97002DA28C /* ChainOnomy.swift */,
 				0451FC6D282A3A7F00214FDA /* ChainOsmosis.swift */,
 				1569489728ABD9E0004777ED /* ChainPassage.swift */,
 				0451FC61282A3A0C00214FDA /* ChainPersistence.swift */,
@@ -8240,6 +8244,7 @@
 				04E6ABD4286358C4008DC3C7 /* CdpDrawRepay4ViewController.swift in Sources */,
 				1817CBF6283E2CE600523713 /* desmos_profiles_v1beta1_query_params.pb.swift in Sources */,
 				04C4937F285069C800ECF4D2 /* PrivateKeyRestoreViewController.swift in Sources */,
+				047597982935FF97002DA28C /* ChainOnomy.swift in Sources */,
 				1817CABC283E2CE500523713 /* band_oracle_v1_tx.pb.swift in Sources */,
 				18FFB54E281AF533004E65BB /* TxVoteCell.swift in Sources */,
 				04FCD2D8292E2CEF00BA5349 /* stride_interchainquery_v1_messages.pb.swift in Sources */,
@@ -8618,6 +8623,7 @@
 				28D28AC926CB6BD40074964C /* StartLock0ViewController.swift in Sources */,
 				E19A321E22547DF400A05E41 /* SBCardPopupViewController.swift in Sources */,
 				048C832027BF572800270528 /* evmos_vesting_v1_tx.grpc.swift in Sources */,
+				047597972935FF97002DA28C /* ChainOnomy.swift in Sources */,
 				0451FC5C282A39C100214FDA /* ChainCertik.swift in Sources */,
 				280E1F2A254AD3A80007BA7D /* ResourceChainCell.swift in Sources */,
 				28B3251F2637F80500275AED /* MemoMnemonicPopup.swift in Sources */,

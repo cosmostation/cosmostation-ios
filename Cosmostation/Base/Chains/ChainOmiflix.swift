@@ -43,14 +43,13 @@ class ChainOmniflix: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-omniflix-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-omniflix.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-omniflix-app.cosmostation.io/"
     var apiUrl = "https://api-omniflix.cosmostation.io/"
     var explorerUrl = MintscanUrl + "omniflix/"
-    var validatorImgUrl = MonikerUrl + "omniflix/"
-    var priceUrl = CoingeckoUrl + "omniflix-network"
+    var priceUrl = GeckoUrl + "omniflix-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

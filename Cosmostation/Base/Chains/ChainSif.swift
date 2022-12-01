@@ -43,14 +43,13 @@ class ChainSif: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-sifchain-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-sifchain.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-sifchain-app.cosmostation.io/"
     var apiUrl = "https://api-sifchain.cosmostation.io/"
     var explorerUrl = MintscanUrl + "sifchain/"
-    var validatorImgUrl = MonikerUrl + "sif/"
-    var priceUrl = CoingeckoUrl + "sifchain"
+    var priceUrl = GeckoUrl + "sifchain"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

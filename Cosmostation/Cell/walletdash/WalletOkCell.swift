@@ -64,8 +64,8 @@ class WalletOkCell: UITableViewCell {
     }
     
     func updateView(_ account: Account?, _ chainType: ChainType?) {
-        let available = BaseData.instance.availableAmount(OKEX_MAIN_DENOM)
-        let locked = BaseData.instance.lockedAmount(OKEX_MAIN_DENOM)
+        let available = BaseData.instance.availableAmount(OKT_MAIN_DENOM)
+        let locked = BaseData.instance.lockedAmount(OKT_MAIN_DENOM)
         let deposit = BaseData.instance.okDepositAmount()
         let withdraw = BaseData.instance.okWithdrawAmount()
         let total = available.adding(locked).adding(deposit).adding(withdraw)
@@ -75,8 +75,9 @@ class WalletOkCell: UITableViewCell {
         lockedAmount.attributedText = WDP.dpAmount(locked.stringValue, lockedAmount.font, 0, 6)
         depositAmount.attributedText = WDP.dpAmount(deposit.stringValue, depositAmount.font, 0, 6)
         withdrawAmount.attributedText = WDP.dpAmount(withdraw.stringValue, withdrawAmount.font, 0, 6)
-        totalValue.attributedText = WUtils.dpAssetValue(OKEX_MAIN_DENOM, total, 0, totalValue.font)
         BaseData.instance.updateLastTotal(account, total.stringValue)
+        
+        WDP.dpAssetValue(OKT_GECKO_ID, total, 0, totalValue)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -44,14 +44,13 @@ class ChainPersistence: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-persistence-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-persistence.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-persistence-app.cosmostation.io/"
     var apiUrl = "https://api-persistence.cosmostation.io/"
     var explorerUrl = MintscanUrl + "persistence/"
-    var validatorImgUrl = MonikerUrl + "persistence/"
-    var priceUrl = CoingeckoUrl + "persistence"
+    var priceUrl = GeckoUrl + "persistence"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

@@ -28,8 +28,8 @@ class OkWithdraw4ViewController: BaseViewController, PasswordViewDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(chainType, toWithdrawAmountDenom)
-        WUtils.setDenomTitle(chainType, feeAmountDenom)
+        WDP.dpMainSymbol(chainConfig, toWithdrawAmountDenom)
+        WDP.dpMainSymbol(chainConfig, feeAmountDenom)
     }
     
     @IBAction func onClickConfirm(_ sender: Any) {

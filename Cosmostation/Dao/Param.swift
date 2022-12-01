@@ -441,7 +441,9 @@ public struct GasPriceParams {
     var rate = Array<String>()
     
     init(_ dictionary: NSDictionary?) {
-        self.base = dictionary?["base"] as? Int ?? 0
+        if let rawBase = dictionary?["base"] as? String {
+            self.base = Int(rawBase) ?? 0
+        }
         if let rawRates = dictionary?["rate"] as? Array<String> {
             self.rate = rawRates
         }

@@ -43,14 +43,13 @@ class ChainEmoney: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-emoney-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-emoney.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-emoney-app.cosmostation.io/"
     var apiUrl = "https://api-emoney.cosmostation.io/"
     var explorerUrl = MintscanUrl + "emoney/"
-    var validatorImgUrl = MonikerUrl + "emoney/"
-    var priceUrl = CoingeckoUrl + "e-money"
+    var priceUrl = GeckoUrl + "e-money"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -81,4 +80,3 @@ let EMONEY_DKK_DENOM = "edkk"
 let EMONEY_NOK_DENOM = "enok"
 let EMONEY_SEK_DENOM = "esek"
 
-let EMONEY_COIN_IMG_URL = ResourceBase + "coin_image/emoney/";

@@ -202,7 +202,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //TODO handle for kava bep sending!!
         if (indexPath.section == SECTION_NATIVE_GRPC) {
-            if (mNative_gRPC[indexPath.row].denom == WUtils.getMainDenom(chainConfig)) {
+            if (mNative_gRPC[indexPath.row].denom == chainConfig!.stakeDenom) {
                 let sTokenDetailVC = StakingTokenGrpcViewController(nibName: "StakingTokenGrpcViewController", bundle: nil)
                 sTokenDetailVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
@@ -223,7 +223,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cardPopup.show(onViewController: self)
             
         } else if (indexPath.section == SECTION_TOKEN_GRPC && indexPath.row != mToken_gRPC.count) {
-            onStartTransferVC(mToken_gRPC[indexPath.row].denom)
+            onStartTransferVC(mToken_gRPC[indexPath.row].address)
             
         } else if (indexPath.section == SECTION_IBC_GRPC) {
             onStartTransferVC(mIbc_gRPC[indexPath.row].denom)
@@ -379,7 +379,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mNative.removeAll()
         mEtc.removeAll()
         self.mBalances.forEach { balance in
-            if (WUtils.getMainDenom(chainConfig) == balance.balance_denom) {
+            if (chainConfig!.stakeDenom == balance.balance_denom) {
                 mNative.append(balance)
             } else {
                 mEtc.append(balance)
@@ -387,8 +387,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         }
         
         mNative_gRPC.sort {
-            if ($0.denom == WUtils.getMainDenom(chainConfig)) { return true }
-            if ($1.denom == WUtils.getMainDenom(chainConfig)) { return false }
+            if ($0.denom == chainConfig!.stakeDenom) { return true }
+            if ($1.denom == chainConfig!.stakeDenom) { return false }
             if (chainType == .KAVA_MAIN) {
                 if ($0.denom == KAVA_HARD_DENOM) { return true }
                 if ($1.denom == KAVA_HARD_DENOM) { return false }
@@ -398,8 +398,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             return false
         }
         mNative.sort {
-            if ($0.balance_denom == WUtils.getMainDenom(chainConfig)) { return true }
-            if ($1.balance_denom == WUtils.getMainDenom(chainConfig)) { return false }
+            if ($0.balance_denom == chainConfig!.stakeDenom) { return true }
+            if ($1.balance_denom == chainConfig!.stakeDenom) { return false }
             
             return false
         }

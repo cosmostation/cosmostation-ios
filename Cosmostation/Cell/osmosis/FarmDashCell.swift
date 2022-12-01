@@ -38,19 +38,19 @@ class FarmDashCell: UITableViewCell {
         lockUps.forEach { lockup in
             let lpCoin = Coin.init(lockup.coins[0].denom, lockup.coins[0].amount)
             var lpCoinValue = NSDecimalNumber.zero
-            if let matchedPool = myPools.filter({ $0.id == lpCoin.osmosisAmmPoolId() }).first {
-                let totalShares = NSDecimalNumber.init(string: matchedPool.totalShares.amount)
-                let myShare = NSDecimalNumber.init(string: lpCoin.amount)
-                let denom0 = matchedPool.poolAssets[0].token.denom
-                let denom1 = matchedPool.poolAssets[1].token.denom
-                let poolAmount0 = NSDecimalNumber.init(string: matchedPool.poolAssets[0].token.amount)
-                let poolAmount1 = NSDecimalNumber.init(string: matchedPool.poolAssets[1].token.amount)
-                let withdrawableAmount0 = poolAmount0.multiplying(by: myShare).dividing(by: totalShares, withBehavior: WUtils.handler0)
-                let withdrawableAmount1 = poolAmount1.multiplying(by: myShare).dividing(by: totalShares, withBehavior: WUtils.handler0)
-                let coin0Value = WUtils.usdValue(chainConfig, denom0, withdrawableAmount0)
-                let coin1Value = WUtils.usdValue(chainConfig, denom1, withdrawableAmount1)
-                lpCoinValue = coin0Value.adding(coin1Value)
-            }
+//            if let matchedPool = myPools.filter({ $0.id == lpCoin.osmosisAmmPoolId() }).first {
+//                let totalShares = NSDecimalNumber.init(string: matchedPool.totalShares.amount)
+//                let myShare = NSDecimalNumber.init(string: lpCoin.amount)
+//                let denom0 = matchedPool.poolAssets[0].token.denom
+//                let denom1 = matchedPool.poolAssets[1].token.denom
+//                let poolAmount0 = NSDecimalNumber.init(string: matchedPool.poolAssets[0].token.amount)
+//                let poolAmount1 = NSDecimalNumber.init(string: matchedPool.poolAssets[1].token.amount)
+//                let withdrawableAmount0 = poolAmount0.multiplying(by: myShare).dividing(by: totalShares, withBehavior: WUtils.handler0)
+//                let withdrawableAmount1 = poolAmount1.multiplying(by: myShare).dividing(by: totalShares, withBehavior: WUtils.handler0)
+//                let coin0Value = WUtils.usdValue(chainConfig, denom0, withdrawableAmount0)
+//                let coin1Value = WUtils.usdValue(chainConfig, denom1, withdrawableAmount1)
+//                lpCoinValue = coin0Value.adding(coin1Value)
+//            }
             
             let endTime = lockup.endTime.date.millisecondsSince1970
             if (endTime == -62135596800000) {

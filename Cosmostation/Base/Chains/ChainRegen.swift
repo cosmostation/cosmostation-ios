@@ -43,14 +43,13 @@ class ChainRegen: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-regen-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-regen.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-regen-app.cosmostation.io/"
     var apiUrl = "https://api-regen.cosmostation.io/"
     var explorerUrl = MintscanUrl + "regen/"
-    var validatorImgUrl = MonikerUrl + "regen/"
-    var priceUrl = CoingeckoUrl + "regen"
+    var priceUrl = GeckoUrl + "regen"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

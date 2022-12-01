@@ -43,14 +43,13 @@ class ChainAxelar: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-axelar-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-axelar.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-axelar-app.cosmostation.io/"
     var apiUrl = "https://api-axelar.cosmostation.io/"
     var explorerUrl = MintscanUrl + "axelar/"
-    var validatorImgUrl = MonikerUrl + "axelar/"
-    var priceUrl = CoingeckoUrl + "axelar-network"
+    var priceUrl = GeckoUrl + "axelar-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

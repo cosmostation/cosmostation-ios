@@ -20,7 +20,12 @@ class SelectContractTokenCell: UITableViewCell {
         coinSwitch.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
     }
     
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.coinImg.image = UIImage(named: "tokenDefault")
+        self.coinTitle.text = ""
+        self.coinSwitch.isOn = false
+    }
     
     var actionToggle: ((Bool) -> Void)? = nil
     @IBAction func onToggle(_ sender: UISwitch) {
@@ -30,8 +35,8 @@ class SelectContractTokenCell: UITableViewCell {
     func onBindToken(_ token: MintscanToken, _ selectedList: Array<String>) {
         if let assetImgeUrl = token.assetImg() {
             coinImg.af_setImage(withURL: assetImgeUrl)
-            coinTitle.text = token.denom.uppercased()
+            coinTitle.text = token.symbol
         }
-        coinSwitch.isOn = selectedList.contains(token.contract_address)
+        coinSwitch.isOn = selectedList.contains(token.address)
     }
 }

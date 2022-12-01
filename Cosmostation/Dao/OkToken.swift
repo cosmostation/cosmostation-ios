@@ -29,4 +29,8 @@ public struct OkToken {
         self.owner = dictionary?["owner"] as? String
         self.mintable = dictionary?["mintable"] as? Bool
     }
+    
+    func assetImg() -> URL! {
+        return URL(string: ResourceBase + "okc/asset/" + original_symbol!.lowercased() + ".png")
+    }
 }

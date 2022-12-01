@@ -59,8 +59,8 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         WDP.dpSymbolImg(chainConfig, pageHolderVC.mSwapOutDenom!, outputCoinImg)
         WDP.dpSymbol(chainConfig, pageHolderVC.mSwapOutDenom!, outputCoinName)
         
-        dpInPutDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mSwapInDenom)
-        dpOutPutDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mSwapOutDenom)
+//        dpInPutDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mSwapInDenom)
+//        dpOutPutDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mSwapOutDenom)
         
         var inputAssetAmount = NSDecimalNumber.zero
         var inputAssetWeight = NSDecimalNumber.zero

@@ -290,8 +290,8 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
             if (mKavaMyCdp_gRPC ==  nil || mKavaOraclePrice == nil) { return }
             self.mCDenom = mCollateralParam!.getcDenom()!
             self.mPDenom = mCollateralParam!.getpDenom()!
-            self.cDpDecimal = WUtils.getDenomDecimal(chainConfig, mCDenom)
-            self.pDpDecimal = WUtils.getDenomDecimal(chainConfig, mPDenom)
+            self.cDpDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == mCDenom }).first?.decimals ?? 6
+            self.pDpDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == mPDenom }).first?.decimals ?? 6
             self.currentPrice = NSDecimalNumber.init(string: mKavaOraclePrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
             
             let currentPAmount = mKavaMyCdp_gRPC!.getRawPrincipalAmount()

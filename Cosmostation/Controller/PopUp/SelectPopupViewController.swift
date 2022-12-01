@@ -188,18 +188,9 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
             let toSendCoin = toCoinList[indexPath.row]
             if (chainType! == ChainType.BINANCE_MAIN) {
-                if (toSendCoin == TOKEN_HTLC_BINANCE_BNB) {
-                    cell!.coinImg.image = UIImage(named: "tokenBinance")
-                    cell!.coinTitle.text = "BNB"
-                } else if (toSendCoin == TOKEN_HTLC_BINANCE_BTCB) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + "BTCB.png")!)
-                    cell!.coinTitle.text = "BTC"
-                } else if (toSendCoin == TOKEN_HTLC_BINANCE_XRPB) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + "XRP.png")!)
-                    cell!.coinTitle.text = "XRP"
-                } else if (toSendCoin == TOKEN_HTLC_BINANCE_BUSD) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + "BUSD.png")!)
-                    cell!.coinTitle.text = "BUSD"
+                if let bnbToken = BaseData.instance.bnbToken(toSendCoin) {
+                    cell!.coinImg.af_setImage(withURL: bnbToken.assetImg())
+                    cell!.coinTitle.text = bnbToken.original_symbol
                 }
                 
             } else if (chainType! == ChainType.KAVA_MAIN) {
@@ -223,9 +214,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_HTLC_TO_ACCOUNT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
             let account = toAccountList[indexPath.row]
+            let toChainConfig = ChainFactory.getChainConfig(toChain)
             cell?.keyStatusImg.image = cell?.keyStatusImg.image?.withRenderingMode(.alwaysTemplate)
             cell?.accountAddress.text = account.account_address
-            WUtils.setDenomTitle(toChain!, cell!.accountDenom)
+            WDP.dpMainSymbol(toChainConfig, cell!.accountDenom)
             if (toChain == ChainType.BINANCE_MAIN) {
                 cell?.keyStatusImg.tintColor = UIColor.init(named: "binance")
                 cell!.accountBalance.attributedText = WDP.dpAmount(WUtils.getTokenAmount(account.account_balances, BNB_MAIN_DENOM).stringValue, cell!.accountBalance.font, 0, 8)
@@ -240,7 +232,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
             let toChainConfig = ChainFactory.getChainConfig(toChain)
             let account = toAccountList[indexPath.row]
-            WUtils.setDenomTitle(toChain!, cell!.accountDenom)
+            WDP.dpMainSymbol(toChainConfig, cell!.accountDenom)
             cell?.accountAddress.text = account.account_address
             cell?.accountName.text = account.getDpName()
             if (account.account_has_private == true) {
@@ -326,7 +318,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
             let account = toAccountList[indexPath.row]
             let toChainConfig = ChainFactory.getChainConfig(toChain)
-            WUtils.setDenomTitle(toChain!, cell!.accountDenom)
+            WDP.dpMainSymbol(toChainConfig, cell!.accountDenom)
             cell?.accountAddress.text = account.account_address
             cell?.accountName.text = account.getDpName()
             cell?.keyStatusImg.image = cell?.keyStatusImg.image?.withRenderingMode(.alwaysTemplate)

@@ -43,7 +43,7 @@ class TxCommonCell: TxCell {
     }
     
     func setDenomType(_ chainConfig: ChainConfig) {
-        WUtils.setDenomTitle(chainConfig.chainType, feeDenomLabel)
+        WDP.dpMainSymbol(chainConfig, feeDenomLabel)
     }
     
     override func onBind(_ chainConfig: ChainConfig, _ tx: Cosmos_Tx_V1beta1_GetTxResponse) {

@@ -43,14 +43,13 @@ class ChainRizon: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-rizon-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-rizon.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-rizon-app.cosmostation.io/"
     var apiUrl = "https://api-rizon.cosmostation.io/"
     var explorerUrl = MintscanUrl + "rizon/"
-    var validatorImgUrl = MonikerUrl + "rizon/"
-    var priceUrl = CoingeckoUrl + "rizon"
+    var priceUrl = GeckoUrl + "rizon"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

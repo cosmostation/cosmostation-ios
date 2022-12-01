@@ -44,14 +44,13 @@ class ChainSecret: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-secret.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-secret.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-secret.cosmostation.io/"
     var apiUrl = "https://api-secret.cosmostation.io/"
     var explorerUrl = MintscanUrl + "secret/"
-    var validatorImgUrl = MonikerUrl + "secret/"
-    var priceUrl = CoingeckoUrl + "secret"
+    var priceUrl = GeckoUrl + "secret"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

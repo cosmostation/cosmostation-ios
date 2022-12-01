@@ -245,7 +245,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             let coins = msg?.value.inputs?[0].coins
             cell?.multiAmountStack.isHidden = false
             cell?.multiAmountLayer0.isHidden = false
-            WUtils.showBNBTxDp(coins![0], cell!.multiAmountDenom0, cell!.multiAmount0, chainType!)
+            WDP.dpBnbTxCoin(chainConfig!, coins![0], cell!.multiAmountDenom0, cell!.multiAmount0)
             
         } else if (chainType == ChainType.OKEX_MAIN) {
             var coins = msg?.value.getAmounts()
@@ -467,16 +467,16 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     func sortCoins(_ coins:Array<Coin>, _ chain:ChainType) -> Array<Coin> {
         if (chainType! == ChainType.OKEX_MAIN) {
             return coins.sorted(by: {
-                if ($0.denom == OKEX_MAIN_DENOM) {
+                if ($0.denom == OKT_MAIN_DENOM) {
                     return true
                 }
-                if ($1.denom == OKEX_MAIN_DENOM) {
+                if ($1.denom == OKT_MAIN_DENOM) {
                     return false
                 }
-                if ($0.denom == OKEX_MAIN_OKB) {
+                if ($0.denom == OKT_OKB) {
                     return true
                 }
-                if ($1.denom == OKEX_MAIN_OKB) {
+                if ($1.denom == OKT_OKB) {
                     return false
                 }
                 return false

@@ -32,4 +32,8 @@ public class BnbToken {
         self.total_supply = dictionary["total_supply"] as? String ?? ""
         self.mintable = dictionary["mintable"] as? Bool ?? false
     }
+    
+    func assetImg() -> URL! {
+        return URL(string: ResourceBase + "bnb-beacon-chain/asset/" + original_symbol.lowercased() + ".png")
+    }
 }

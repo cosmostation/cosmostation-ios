@@ -820,7 +820,7 @@ public struct ApiHistoryNewCustom {
                                         for rawAttribute in rawAttributes {
                                             if let rawKey = rawAttribute.object(forKey: "key") as? String, rawKey == "amount", let rawValue = rawAttribute.object(forKey: "value") as? String  {
                                                 for rawCoin in rawValue.split(separator: ","){
-                                                    if (String(rawCoin).contains(WUtils.getMainDenom(chainConfig))) {
+                                                    if (String(rawCoin).contains(chainConfig.stakeDenom)) {
                                                         totalRewardSum = totalRewardSum.adding(NSDecimalNumber.init(string: String(rawCoin).filter{ $0.isNumber }))
                                                     }
                                                 }
@@ -831,7 +831,7 @@ public struct ApiHistoryNewCustom {
                             }
                         }
                     }
-                    return Coin.init(WUtils.getMainDenom(chainConfig), totalRewardSum.stringValue)
+                    return Coin.init(chainConfig.stakeDenom, totalRewardSum.stringValue)
                 }
             }
         }

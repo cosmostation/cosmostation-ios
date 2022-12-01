@@ -73,8 +73,7 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
             minAvailableAmount.attributedText = WDP.dpAmount(minAvailable.stringValue, minAvailableAmount.font, 0, mDpDecimal)
             
         } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
-            let chainConfig = ChainKava.init(.KAVA_MAIN)
-            mDpDecimal = WUtils.getDenomDecimal(chainConfig, self.pageHolderVC.mHtlcDenom!)
+            mDpDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == self.pageHolderVC.mHtlcDenom! }).first?.decimals ?? 6
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BNB) {
                 availableDenom.text = "BNB"
                 availableDenom.textColor = UIColor.init(named: "binance")

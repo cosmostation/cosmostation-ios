@@ -256,7 +256,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetKavaItem(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletKavaCell") as? WalletKavaCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionCdp = { self.onClickCdp() }
@@ -344,7 +344,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetSifItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletSifCell") as? WalletSifCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionDex = { self.onClickSifDex() }
@@ -369,7 +369,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetOsmoItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletOsmoCell") as? WalletOsmoCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionLab = { self.onClickOsmosisLab() }
@@ -640,7 +640,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
                     return
                 }
-        if (WUtils.getTokenAmount(mainTabVC.mBalances, OKEX_MAIN_DENOM).compare(NSDecimalNumber(string: "0.01")).rawValue < 0) {
+        if (WUtils.getTokenAmount(mainTabVC.mBalances, OKT_MAIN_DENOM).compare(NSDecimalNumber(string: "0.01")).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_to_deposit", comment: ""))
             return
         }
@@ -919,7 +919,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mToSendDenom = WUtils.getMainDenom(chainConfig)
+        txVC.mToSendDenom = chainConfig!.stakeDenom
         txVC.mType = TASK_TYPE_TRANSFER
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""

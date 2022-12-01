@@ -44,14 +44,13 @@ class ChainKujira: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = true
-    var grpcUrl = "lcd-kujira-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-kujira.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-kujira-app.cosmostation.io/"
     var apiUrl = "https://api-kujira.cosmostation.io/"
     var explorerUrl = MintscanUrl + "kujira/"
-    var validatorImgUrl = MonikerUrl + "kujira/"
-    var priceUrl = CoingeckoUrl + "kujira"
+    var priceUrl = GeckoUrl + "kujira"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

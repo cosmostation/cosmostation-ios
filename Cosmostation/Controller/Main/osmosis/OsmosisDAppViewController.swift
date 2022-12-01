@@ -88,24 +88,26 @@ extension WUtils {
     }
     
     static func getOsmoLpTokenPerUsdPrice(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) -> NSDecimalNumber {
-        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
-        let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
-        let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
-        let coin0Value = WUtils.usdValue(chainConfig, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
-        let coin1Value = WUtils.usdValue(chainConfig, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
-        
-        let poolValue = coin0Value.adding(coin1Value)
-        let totalShare = NSDecimalNumber.init(string: pool.totalShares.amount).multiplying(byPowerOf10: -18, withBehavior: handler18)
-        return poolValue.dividing(by: totalShare, withBehavior: handler18)
+//        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
+//        let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
+//        let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
+//        let coin0Value = WUtils.usdValue(chainConfig, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
+//        let coin1Value = WUtils.usdValue(chainConfig, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
+//
+//        let poolValue = coin0Value.adding(coin1Value)
+//        let totalShare = NSDecimalNumber.init(string: pool.totalShares.amount).multiplying(byPowerOf10: -18, withBehavior: handler18)
+//        return poolValue.dividing(by: totalShare, withBehavior: handler18)
+        return NSDecimalNumber.zero
     }
     
     static func getPoolValue(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) -> NSDecimalNumber {
-        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
-        let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
-        let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
-        let coin0Value = WUtils.usdValue(chainConfig, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
-        let coin1Value = WUtils.usdValue(chainConfig, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
-        return coin0Value.adding(coin1Value)
+//        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
+//        let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
+//        let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
+//        let coin0Value = WUtils.usdValue(chainConfig, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
+//        let coin1Value = WUtils.usdValue(chainConfig, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
+//        return coin0Value.adding(coin1Value)
+        return NSDecimalNumber.zero
     }
     
     static func getMyShareLpAmount(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool, _ denom: String) -> NSDecimalNumber {
@@ -132,11 +134,12 @@ extension WUtils {
     }
     
     static func getPoolArp(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool, _ gauges: Array<Osmosis_Incentives_Gauge>, _ position: UInt) -> NSDecimalNumber  {
-        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
-        let poolValue = getPoolValue(pool)
-        let incentiveAmount = getNextIncentiveAmount(pool, gauges, position)
-        let incentiveValue = WUtils.usdValue(chainConfig, OSMOSIS_MAIN_DENOM, incentiveAmount)
-        return incentiveValue.multiplying(by: NSDecimalNumber.init(value: 36500)).dividing(by: poolValue, withBehavior: WUtils.handler12)
+//        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
+//        let poolValue = getPoolValue(pool)
+//        let incentiveAmount = getNextIncentiveAmount(pool, gauges, position)
+//        let incentiveValue = WUtils.usdValue(chainConfig, OSMOSIS_MAIN_DENOM, incentiveAmount)
+//        return incentiveValue.multiplying(by: NSDecimalNumber.init(value: 36500)).dividing(by: poolValue, withBehavior: WUtils.handler12)
+        return NSDecimalNumber.zero
     }
     
 }

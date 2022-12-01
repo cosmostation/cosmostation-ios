@@ -21,9 +21,7 @@ class ChainCryptoorg: ChainConfig {
     var chainTitle = "(Crypto.org Mainnet)"
     var chainTitle2 = "CRYPTO.ORG"
     var chainDBName = CHAIN_CRYPTO_S
-    var chainAPIName = "cryptoorg"
-    //TODO hardcoing for V3
-//    var chainAPIName = "crypto-org"
+    var chainAPIName = "crypto-org"
     var chainIdPrefix = "crypto-org-"
     
     var stakeDenomImg = UIImage(named: "tokenCryptoorg")
@@ -45,14 +43,13 @@ class ChainCryptoorg: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-crypto-org-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-crypto-org.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-crypto-org-app.cosmostation.io/"
     var apiUrl = "https://api-crypto-org.cosmostation.io/"
     var explorerUrl = MintscanUrl + "crypto-org/"
-    var validatorImgUrl = MonikerUrl + "cryto/"
-    var priceUrl = CoingeckoUrl + "cronos"
+    var priceUrl = GeckoUrl + "cronos"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

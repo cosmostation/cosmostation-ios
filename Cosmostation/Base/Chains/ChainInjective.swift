@@ -43,14 +43,13 @@ class ChainInjective: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = true
-    var grpcUrl = "lcd-injective-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-injective.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-injective-app.cosmostation.io/"
     var apiUrl = "https://api-injective.cosmostation.io/"
     var explorerUrl = MintscanUrl + "injective/"
-    var validatorImgUrl = MonikerUrl + "injective/"
-    var priceUrl = CoingeckoUrl + "injective-protocol"
+    var priceUrl = GeckoUrl + "injective-protocol"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

@@ -57,9 +57,9 @@ class TokenDetailNativeCell: UITableViewCell {
     func onBindNativeToken_gRPC(_ chainConfig: ChainConfig?, _ denom: String?) {
         if (chainConfig == nil || denom == nil) { return }
         if let msAsset = BaseData.instance.getMSAsset(chainConfig!, denom!) {
-            let decimal = msAsset.decimal
+            let decimal = msAsset.decimals
             if (chainConfig?.chainType == ChainType.KAVA_MAIN) {
-                onBindKavaTokens(denom)
+                onBindKavaTokens(chainConfig, denom)
             } else {
                 let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
                 totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, decimal, decimal)
@@ -68,25 +68,18 @@ class TokenDetailNativeCell: UITableViewCell {
         }
     }
     
-    func onBindKavaTokens(_ denom: String?) {
-        let chainConfig = ChainKava.init(.KAVA_MAIN)
-        let dpDecimal = WUtils.getDenomDecimal(chainConfig, denom!)
-        let available = BaseData.instance.getAvailableAmount_gRPC(denom!)
-        let vesting = BaseData.instance.getVestingAmount_gRPC(denom!)
-        
-        totalAmount.attributedText = WDP.dpAmount(available.adding(vesting).stringValue, totalAmount.font, dpDecimal, dpDecimal)
-        availableAmount.attributedText = WDP.dpAmount(available.stringValue, availableAmount.font, dpDecimal, dpDecimal)
-        if (vesting.compare(NSDecimalNumber.zero).rawValue > 0) {
-            vestingLayer.isHidden = false
-            vestingAmount.attributedText = WDP.dpAmount(vesting.stringValue, vestingAmount.font!, dpDecimal, dpDecimal)
-        }
-        
-        if (denom == KAVA_HARD_DENOM) {
-            rootCardView.backgroundColor = UIColor.cardBg
-        } else if (denom == KAVA_USDX_DENOM) {
-            rootCardView.backgroundColor = UIColor.cardBg
-        } else if (denom == KAVA_SWAP_DENOM) {
-            rootCardView.backgroundColor = UIColor.cardBg
+    func onBindKavaTokens(_ chainConfig: ChainConfig?, _ denom: String?) {
+        if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == denom }).first {
+            let decimals = msAsset.decimals
+            let available = BaseData.instance.getAvailableAmount_gRPC(denom!)
+            let vesting = BaseData.instance.getVestingAmount_gRPC(denom!)
+            
+            totalAmount.attributedText = WDP.dpAmount(available.adding(vesting).stringValue, totalAmount.font, decimals, decimals)
+            availableAmount.attributedText = WDP.dpAmount(available.stringValue, availableAmount.font, decimals, decimals)
+            if (vesting.compare(NSDecimalNumber.zero).rawValue > 0) {
+                vestingLayer.isHidden = false
+                vestingAmount.attributedText = WDP.dpAmount(vesting.stringValue, vestingAmount.font!, decimals, decimals)
+            }
         }
     }
 }

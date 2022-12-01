@@ -327,6 +327,7 @@ public enum ChainType: String {
     case KUJIRA_MAIN
     case TERITORI_MAIN
     case XPLA_MAIN
+    case ONOMY_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -370,6 +371,7 @@ public enum ChainType: String {
         result.append(NYX_MAIN)
         result.append(OKEX_MAIN)
         result.append(OMNIFLIX_MAIN)
+        result.append(ONOMY_MAIN)
         result.append(OSMOSIS_MAIN)
         result.append(PASSAGE_MAIN)
         result.append(PERSIS_MAIN)
@@ -476,12 +478,6 @@ let ICON_SANTA                  = "ICON_SANTA";
 let ICON_2002                   = "ICON_2002";
 
 
-let ResourceBase = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/"
-let AssetBase = ResourceBase + "assets/images/"
-let MonikerUrl =  ResourceBase + "moniker/"
-let ChainImgStarnameUrl  = ResourceBase + "chains/logo/"
-let BinanceTokenImgUrl = ResourceBase + "coin_image/binance/";
-let OKTokenImgUrl = ResourceBase + "coin_image/okex/";
-let BridgeTokenImgUrl = ResourceBase + "assets/images/ethereum/";
+let ResourceBase = "https://raw.githubusercontent.com/cosmostation/chainlist/master/chain/"
 let MintscanUrl = "https://www.mintscan.io/"
-let CoingeckoUrl = "https://www.coingecko.com/en/coins/"
+let GeckoUrl = "https://www.coingecko.com/en/coins/"

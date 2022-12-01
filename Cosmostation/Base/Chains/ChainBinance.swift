@@ -49,8 +49,7 @@ class ChainBinance: ChainConfig {
     var lcdUrl = "https://dex.binance.org/"
     var apiUrl = "https://dex.binance.org/"
     var explorerUrl = "https://binance.mintscan.io/"
-    var validatorImgUrl = ""
-    var priceUrl = CoingeckoUrl + "binancecoin"
+    var priceUrl = GeckoUrl + "binancecoin"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -73,4 +72,6 @@ class ChainBinance: ChainConfig {
     }
 }
 
+
 let BNB_MAIN_DENOM = "BNB"
+let BNB_GECKO_ID = "binancecoin"

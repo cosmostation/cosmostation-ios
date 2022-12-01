@@ -43,14 +43,13 @@ class ChainTeritori: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-teritori-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-teritori.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-teritori-app.cosmostation.io/"
     var apiUrl = "https://api-teritori.cosmostation.io/"
     var explorerUrl = MintscanUrl + "teritori/"
-    var validatorImgUrl = MonikerUrl + "teritori/"
-    var priceUrl = CoingeckoUrl + "teritori"
+    var priceUrl = GeckoUrl + "teritori"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

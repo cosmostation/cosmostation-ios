@@ -43,14 +43,13 @@ class ChainCudos: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-cudos-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-cudos.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-cudos-app.cosmostation.io/"
     var apiUrl = "https://api-cudos.cosmostation.io/"
     var explorerUrl = MintscanUrl + "cudos/"
-    var validatorImgUrl = MonikerUrl + "cudos/"
-    var priceUrl = CoingeckoUrl + "cudos"
+    var priceUrl = GeckoUrl + "cudos"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

@@ -158,19 +158,20 @@ extension WUtils {
     }
     
     static func getSifPoolValue(_ pool: Sifnode_Clp_V1_Pool) -> NSDecimalNumber {
-        let chainConfig = ChainSif.init(.SIF_MAIN)
-        let rowanDecimal = getDenomDecimal(chainConfig, SIF_MAIN_DENOM)
-        let rowanAmount = NSDecimalNumber.init(string: pool.nativeAssetBalance)
-        let rowanPrice = perUsdValue(SIF_MAIN_DENOM) ?? NSDecimalNumber.zero
-        
-        let externalDecimal = getDenomDecimal(chainConfig, pool.externalAsset.symbol)
-        let externalAmount = NSDecimalNumber.init(string: pool.externalAssetBalance)
-        let exteranlBaseDenom = BaseData.instance.getBaseDenom(chainConfig, pool.externalAsset.symbol)
-        let exteranlPrice = perUsdValue(exteranlBaseDenom) ?? NSDecimalNumber.zero
-        
-        let rowanValue = rowanAmount.multiplying(by: rowanPrice).multiplying(byPowerOf10: -rowanDecimal, withBehavior: WUtils.handler2)
-        let exteranlValue = externalAmount.multiplying(by: exteranlPrice).multiplying(byPowerOf10: -externalDecimal, withBehavior: WUtils.handler2)
-        return rowanValue.adding(exteranlValue)
+//        let chainConfig = ChainSif.init(.SIF_MAIN)
+//        let rowanDecimal = getDenomDecimal(chainConfig, SIF_MAIN_DENOM)
+//        let rowanAmount = NSDecimalNumber.init(string: pool.nativeAssetBalance)
+//        let rowanPrice = perUsdValue(SIF_MAIN_DENOM) ?? NSDecimalNumber.zero
+//
+//        let externalDecimal = getDenomDecimal(chainConfig, pool.externalAsset.symbol)
+//        let externalAmount = NSDecimalNumber.init(string: pool.externalAssetBalance)
+//        let exteranlBaseDenom = BaseData.instance.getBaseDenom(chainConfig, pool.externalAsset.symbol)
+//        let exteranlPrice = perUsdValue(exteranlBaseDenom) ?? NSDecimalNumber.zero
+//
+//        let rowanValue = rowanAmount.multiplying(by: rowanPrice).multiplying(byPowerOf10: -rowanDecimal, withBehavior: WUtils.handler2)
+//        let exteranlValue = externalAmount.multiplying(by: exteranlPrice).multiplying(byPowerOf10: -externalDecimal, withBehavior: WUtils.handler2)
+//        return rowanValue.adding(exteranlValue)
+        return NSDecimalNumber.zero
     }
     
     static func getSifMyShareValue(_ pool: Sifnode_Clp_V1_Pool, _ myLp: Sifnode_Clp_V1_LiquidityProviderRes) -> NSDecimalNumber {

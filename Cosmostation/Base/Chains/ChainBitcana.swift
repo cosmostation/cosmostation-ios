@@ -43,14 +43,13 @@ class ChainBitcana: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-bitcanna-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-bitcanna.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-bitcanna-app.cosmostation.io/"
     var apiUrl = "https://api-bitcanna.cosmostation.io/"
     var explorerUrl = MintscanUrl + "bitcanna/"
-    var validatorImgUrl = MonikerUrl + "bitcanna/"
-    var priceUrl = CoingeckoUrl + "bitcanna"
+    var priceUrl = GeckoUrl + "bitcanna"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

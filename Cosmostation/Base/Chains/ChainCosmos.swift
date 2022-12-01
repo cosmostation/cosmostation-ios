@@ -44,14 +44,13 @@ class ChainCosmos: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = true
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-cosmos-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-cosmos.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-cosmos-app.cosmostation.io/"
     var apiUrl = "https://api-cosmos.cosmostation.io/"
     var explorerUrl = MintscanUrl + "cosmos/"
-    var validatorImgUrl = MonikerUrl + "cosmoshub/"
-    var priceUrl = CoingeckoUrl + "cosmos"
+    var priceUrl = GeckoUrl + "cosmos"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

@@ -43,14 +43,13 @@ class ChainUmee: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-umee-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-umee.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-umee-app.cosmostation.io/"
     var apiUrl = "https://api-umee.cosmostation.io/"
     var explorerUrl = MintscanUrl + "umee/"
-    var validatorImgUrl = MonikerUrl + "umee/"
-    var priceUrl = CoingeckoUrl + "umee"
+    var priceUrl = GeckoUrl + "umee"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

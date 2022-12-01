@@ -50,7 +50,7 @@ class WalletAddressCell: UITableViewCell {
         } else {
             dpKeyStateImg.image = UIImage.init(named: "iconKeyEmpty")
         }
-        totalValue.attributedText = WUtils.dpAllAssetValue(chainConfig, totalValue.font)
+        WDP.dpAllAssetValue(chainConfig, totalValue)
     }
     
     func onBindTokenDetail(_ account: Account?, _ chainConfig: ChainConfig?) {
@@ -75,7 +75,7 @@ class WalletAddressCell: UITableViewCell {
         }
     }
     
-    func onBindValue(_ denom: String, _ amount: NSDecimalNumber, _ decimal: Int16) {
-        totalValue.attributedText = WUtils.dpAssetValue(denom, amount, decimal, totalValue.font)
+    func onBindValue(_ geckoId: String, _ amount: NSDecimalNumber, _ decimal: Int16) {
+        WDP.dpAssetValue(geckoId, amount, decimal, totalValue)
     }
 }

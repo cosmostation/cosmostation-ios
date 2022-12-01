@@ -21,9 +21,7 @@ class ChainKi: ChainConfig {
     var chainTitle = "(KiChain Mainnet)"
     var chainTitle2 = "KI"
     var chainDBName = CHAIN_KI_S
-    var chainAPIName = "kichain"
-    //TODO hardcoing for V3
-//    var chainAPIName = "ki-chain"
+    var chainAPIName = "ki-chain"
     var chainIdPrefix = "kichain-"
     
     var stakeDenomImg = UIImage(named: "tokenKi")
@@ -45,14 +43,13 @@ class ChainKi: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-ki-chain-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-ki-chain.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-ki-chain-app.cosmostation.io/"
     var apiUrl = "https://api-ki-chain.cosmostation.io/"
     var explorerUrl = MintscanUrl + "ki-chain/"
-    var validatorImgUrl = MonikerUrl + "ki/"
-    var priceUrl = CoingeckoUrl + "ki"
+    var priceUrl = GeckoUrl + "ki"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

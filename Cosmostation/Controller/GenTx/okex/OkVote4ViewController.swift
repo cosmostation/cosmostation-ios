@@ -27,7 +27,7 @@ class OkVote4ViewController: BaseViewController, PasswordViewDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(chainType, feeAmountDenom)
+        WDP.dpMainSymbol(chainConfig, feeAmountDenom)
     }
     
     override func enableUserInteraction() {

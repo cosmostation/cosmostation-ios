@@ -34,7 +34,7 @@ class HardPoolBorrow0ViewController: BaseViewController, UITextFieldDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         hardPoolDenom = pageHolderVC.mHardMoneyMarketDenom!
-        dpDecimal = WUtils.getDenomDecimal(chainConfig, hardPoolDenom)
+        dpDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == hardPoolDenom }).first?.decimals ?? 6
         availableMax = WUtils.getHardBorrowableAmountByDenom(hardPoolDenom, BaseData.instance.mHardMyDeposit, BaseData.instance.mHardMyBorrow,
                                                              BaseData.instance.mHardModuleCoins, BaseData.instance.mHardReserveCoins)
         print("availableMax ", availableMax)

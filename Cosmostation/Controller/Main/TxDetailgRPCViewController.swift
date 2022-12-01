@@ -10,6 +10,7 @@ import UIKit
 import GRPC
 import NIO
 import web3swift
+import Alamofire
 
 class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var txTableView: UITableView!
@@ -615,32 +616,57 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         }
     }
     
+    func onFetchEvmTxcheck(_ ethHash: String, completion: @escaping (String?) -> Void) {
+        let request = Alamofire.request(BaseNetWork.mintscanEvmTxcheck(chainConfig!.chainAPIName, ethHash), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                guard let responseData = res as? NSDictionary,
+                      let txHash = responseData.object(forKey: "txHash") as? String else {
+                    completion(nil)
+                    return
+                }
+                completion(txHash)
+                
+            case .failure(let error):
+                completion(nil)
+            }
+        }
+    }
+    
     @IBAction func onClickShare(_ sender: UIButton) {
         if (mEthResultHash != nil) {
-            //TODO check with mintscan
-            let link = WUtils.getTxExplorer(chainConfig, self.mEthResultHash!)
+            //check with mintscan api
+            self.onFetchEvmTxcheck(self.mEthResultHash!) { txHash in
+                if (txHash != nil) {
+                    let link = WUtils.getTxExplorer(self.chainConfig, txHash!)
+                    let textToShare = [ link ]
+                    let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+                    activityViewController.popoverPresentationController?.sourceView = self.view
+                    self.present(activityViewController, animated: true, completion: nil)
+                }
+            }
+            
+            
+        } else {
+            let link = WUtils.getTxExplorer(chainConfig, self.mTxHash!)
             let textToShare = [ link ]
             let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
-            
-        } else {
-            if (self.errorLayer.isHidden) {
-                let link = WUtils.getTxExplorer(chainConfig, self.mTxHash!)
-                let textToShare = [ link ]
-                let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.view
-                self.present(activityViewController, animated: true, completion: nil)
-            }
         }
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
         if (mEthResultHash != nil) {
-            //TODO check with mintscan
-            let link = WUtils.getTxExplorer(chainConfig, self.mEthResultHash!)
-            guard let url = URL(string: link) else { return }
-            self.onShowSafariWeb(url)
+            //check with mintscan api
+            self.onFetchEvmTxcheck(self.mEthResultHash!) { txHash in
+                if (txHash != nil) {
+                    let link = WUtils.getTxExplorer(self.chainConfig, txHash!)
+                    guard let url = URL(string: link) else { return }
+                    self.onShowSafariWeb(url)
+                }
+            }
             
         } else {
             let link = WUtils.getTxExplorer(chainConfig, self.mTxHash!)

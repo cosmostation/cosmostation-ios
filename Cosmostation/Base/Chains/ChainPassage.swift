@@ -43,13 +43,12 @@ class ChainPassage: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-passage-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-passage.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-passage-app.cosmostation.io/"
     var apiUrl = "https://api-passage.cosmostation.io/"
     var explorerUrl = MintscanUrl + "passage/"
-    var validatorImgUrl = MonikerUrl + "passage/"
     var priceUrl = ""
     
     required init(_ chainType: ChainType) {

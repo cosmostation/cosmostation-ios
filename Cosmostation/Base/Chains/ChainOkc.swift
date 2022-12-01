@@ -50,8 +50,7 @@ class ChainOkc: ChainConfig {
     var lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
     var apiUrl = ""
     var explorerUrl = "https://www.oklink.com/okexchain/"
-    var validatorImgUrl = MonikerUrl + "okex/"
-    var priceUrl = CoingeckoUrl + "okc-token"
+    var priceUrl = GeckoUrl + "okc-token"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -74,5 +73,6 @@ class ChainOkc: ChainConfig {
     }
 }
 
-let OKEX_MAIN_DENOM = "okt"
-let OKEX_MAIN_OKB = "okb"
+let OKT_MAIN_DENOM = "okt"
+let OKT_OKB = "okb"
+let OKT_GECKO_ID = "oec-token"

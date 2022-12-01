@@ -32,8 +32,8 @@ class HardDetailAssetsCell: UITableViewCell {
         if (hardMoneyMarketDenom == KAVA_MAIN_DENOM) {
             marketLayer.isHidden = true
         }
-
-        let dpDecimal = WUtils.getDenomDecimal(chainConfig, hardMoneyMarketDenom)
+        guard let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == hardMoneyMarketDenom }).first else { return }
+        let dpDecimal = msAsset.decimals
         let targetAvailable = BaseData.instance.getAvailableAmount_gRPC(hardMoneyMarketDenom)
         let targetPrice = BaseData.instance.getKavaOraclePrice(hardParam.getHardMoneyMarket(hardMoneyMarketDenom)?.spotMarketID)
         let marketValue = targetAvailable.multiplying(byPowerOf10: -dpDecimal).multiplying(by: targetPrice, withBehavior: WUtils.handler2Down)

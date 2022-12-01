@@ -33,12 +33,12 @@ class HarvestDetailTopCell: UITableViewCell {
                              _ totalDeposit: Array<Coin>?, _ totalBorrow: Array<Coin>?, _ moduleCoins: Array<Coin>?, _ reservedCoins: Array<Coin>?) {
         if (hardParam == nil) { return }
         let chainConfig = ChainKava.init(.KAVA_MAIN)
-        var hardImgDenom = ""
-        if (hardMoneyMarketDenom.starts(with: "ibc/")) {
-            hardImgDenom = BaseData.instance.getBaseDenom(chainConfig, hardMoneyMarketDenom)
-        } else {
-            hardImgDenom = hardMoneyMarketDenom
+        guard let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == hardMoneyMarketDenom }).first else {
+            return
         }
+        
+        let hardImgDenom = msAsset.origin_denom
+        let decimal = msAsset.decimals
         harvestImg.af_setImage(withURL: URL(string: KAVA_HARD_POOL_IMG_URL + "lp" + hardImgDenom + ".png")!)
         harvestTitle.text = hardParam!.getHardMoneyMarket(hardMoneyMarketDenom)?.spotMarketID.replacingOccurrences(of: ":30", with: "").replacingOccurrences(of: ":720", with: "").uppercased()
 
@@ -58,20 +58,19 @@ class HarvestDetailTopCell: UITableViewCell {
         systemBorrowedValue.attributedText = WUtils.getDPRawDollor("0", 2, systemBorrowedValue.font)
         systemRemainBorrowableValue.attributedText = WUtils.getDPRawDollor("0", 2, systemRemainBorrowableValue.font)
 
-        let dpDecimal = WUtils.getDenomDecimal(chainConfig, hardMoneyMarketDenom)
         let targetPrice = BaseData.instance.getKavaOraclePrice(hardParam!.getHardMoneyMarket(hardMoneyMarketDenom)?.spotMarketID)
 
         // display system total supplied
         if let totalDepositCoin = totalDeposit?.filter({ $0.denom == hardMoneyMarketDenom }).first {
             WDP.dpCoin(chainConfig, hardMoneyMarketDenom, totalDepositCoin.amount, systemSuppliedDenom, systemSuppliedAmount)
-            let supplyValue = NSDecimalNumber.init(string: totalDepositCoin.amount).multiplying(byPowerOf10: -dpDecimal).multiplying(by: targetPrice, withBehavior: WUtils.handler2Down)
+            let supplyValue = NSDecimalNumber.init(string: totalDepositCoin.amount).multiplying(byPowerOf10: -decimal).multiplying(by: targetPrice, withBehavior: WUtils.handler2Down)
             systemSuppliedValue.attributedText = WUtils.getDPRawDollor(supplyValue.stringValue, 2, systemSuppliedValue.font)
         }
 
         // display system total borrowed
         if let totalBorrowedCoin = totalBorrow?.filter({ $0.denom == hardMoneyMarketDenom }).first {
             WDP.dpCoin(chainConfig, hardMoneyMarketDenom, totalBorrowedCoin.amount, systemBorrowedDenom, systemBorrowedAmount)
-            let BorrowedValue = NSDecimalNumber.init(string: totalBorrowedCoin.amount).multiplying(byPowerOf10: -dpDecimal).multiplying(by: targetPrice, withBehavior: WUtils.handler2Down)
+            let BorrowedValue = NSDecimalNumber.init(string: totalBorrowedCoin.amount).multiplying(byPowerOf10: -decimal).multiplying(by: targetPrice, withBehavior: WUtils.handler2Down)
             systemBorrowedValue.attributedText = WUtils.getDPRawDollor(BorrowedValue.stringValue, 2, systemBorrowedValue.font)
         }
 
@@ -95,7 +94,7 @@ class HarvestDetailTopCell: UITableViewCell {
             SystemBorrowableAmount = moduleBorrowable
         }
         WDP.dpCoin(chainConfig, hardMoneyMarketDenom, SystemBorrowableAmount.stringValue, systemRemainBorrowableDenom, systemRemainBorrowableAmount)
-        SystemBorrowableValue = SystemBorrowableAmount.multiplying(byPowerOf10: -dpDecimal).multiplying(by: targetPrice, withBehavior: WUtils.handler2Down)
+        SystemBorrowableValue = SystemBorrowableAmount.multiplying(byPowerOf10: -decimal).multiplying(by: targetPrice, withBehavior: WUtils.handler2Down)
         systemRemainBorrowableValue.attributedText = WUtils.getDPRawDollor(SystemBorrowableValue.stringValue, 2, systemRemainBorrowableValue.font)
     }
     

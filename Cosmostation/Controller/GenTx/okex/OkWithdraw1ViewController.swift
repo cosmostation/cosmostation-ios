@@ -23,8 +23,11 @@ class OkWithdraw1ViewController: BaseViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(pageHolderVC.chainType!, denomTitleLabel)
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
+        WDP.dpMainSymbol(chainConfig, denomTitleLabel)
         
         if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
             mDpDecimal = 18
@@ -91,7 +94,7 @@ class OkWithdraw1ViewController: BaseViewController, UITextFieldDelegate {
             let userInput = WUtils.localeStringToDecimal((toWithdrawAmountInput.text?.trimmingCharacters(in: .whitespaces))!)
             var toWithdrawCoin: Coin?
             if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
-                toWithdrawCoin = Coin.init(OKEX_MAIN_DENOM, WUtils.getFormattedNumber(userInput, mDpDecimal))
+                toWithdrawCoin = Coin.init(OKT_MAIN_DENOM, WUtils.getFormattedNumber(userInput, mDpDecimal))
             }
             
             self.pageHolderVC.mOkToWithdraw = toWithdrawCoin!

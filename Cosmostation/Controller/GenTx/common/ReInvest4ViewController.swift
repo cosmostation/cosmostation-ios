@@ -64,8 +64,8 @@ class ReInvest4ViewController: BaseViewController, PasswordViewDelegate {
         
         let currentDelegation = BaseData.instance.getDelegated_gRPC(pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
         let expectedDelegation = currentDelegation.adding(NSDecimalNumber.init(string: pageHolderVC.mReinvestReward!.amount))
-        WDP.dpCoin(chainConfig, WUtils.getMainDenom(chainConfig), currentDelegation.stringValue, currentDenom, currentDelegateAmount!)
-        WDP.dpCoin(chainConfig, WUtils.getMainDenom(chainConfig), expectedDelegation.stringValue, expectedDenom, expectedDelegateAmount)
+        WDP.dpCoin(chainConfig, chainConfig!.stakeDenom, currentDelegation.stringValue, currentDenom, currentDelegateAmount!)
+        WDP.dpCoin(chainConfig, chainConfig!.stakeDenom, expectedDelegation.stringValue, expectedDenom, expectedDelegateAmount)
         validatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         memoLabel.text = pageHolderVC.mMemo
     }

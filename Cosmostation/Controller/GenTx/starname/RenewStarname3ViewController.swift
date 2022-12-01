@@ -29,10 +29,10 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.balances = account!.account_balances
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        
-        WUtils.setDenomTitle(chainType, feeAmountDenom)
+        WDP.dpMainSymbol(chainConfig, feeAmountDenom)
     }
     
     override func enableUserInteraction() {

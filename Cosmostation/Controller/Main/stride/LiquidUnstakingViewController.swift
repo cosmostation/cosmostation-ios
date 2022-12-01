@@ -61,7 +61,7 @@ class LiquidUnstakingViewController: BaseViewController, UITableViewDelegate, UI
     
     func updateView() {
         self.inputCoinDenom = "st" + hostZones[selectedPosition].hostDenom
-        let inputCoinDecimal = WUtils.getDenomDecimal(chainConfig, inputCoinDenom)
+        let inputCoinDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == inputCoinDenom }).first?.decimals ?? 6
         
         WDP.dpSymbol(chainConfig, inputCoinDenom, inputCoinName)
         WDP.dpSymbolImg(chainConfig, inputCoinDenom, inputCoinImg)

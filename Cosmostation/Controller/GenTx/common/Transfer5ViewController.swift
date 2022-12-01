@@ -112,31 +112,30 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         var remainAvailable = NSDecimalNumber.zero
 
         if (chainConfig?.isGrpc == true) {
-            var sendPriceDenom = toSendDenom
-            var feePriceDenom = feeDenom
-            if let sendMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
-                divideDecimal = sendMsAsset.decimal
-                displayDecimal = sendMsAsset.decimal
+            var sendGeckocId = ""
+            var feeGeckocId = feeDenom
+            if let sendMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == toSendDenom }).first {
+                divideDecimal = sendMsAsset.decimals
+                displayDecimal = sendMsAsset.decimals
                 currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
                 if (toSendDenom == feeDenom) {
                     remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
                 } else {
                     remainAvailable = currentAvailable.subtracting(toSendAmount)
                 }
-                sendPriceDenom = sendMsAsset.priceDenom()
+                sendGeckocId = sendMsAsset.coinGeckoId
                 
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
-                divideDecimal = msToken.decimal
-                displayDecimal = msToken.decimal
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == toSendDenom }).first {
+                divideDecimal = msToken.decimals
+                displayDecimal = msToken.decimals
                 currentAvailable = NSDecimalNumber.init(string: msToken.amount)
                 remainAvailable = currentAvailable.subtracting(toSendAmount)
-                sendPriceDenom = msToken.denom
+                sendGeckocId = msToken.coinGeckoId
             }
             
-            feeDivideDecimal = WUtils.getDenomDecimal(chainConfig, feeDenom)
-            if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == feeDenom.lowercased() }).first {
-                feePriceDenom = feeMsAsset.priceDenom()
-                feeDivideDecimal = feeMsAsset.decimal
+            if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == feeDenom }).first {
+                feeGeckocId = feeMsAsset.coinGeckoId
+                feeDivideDecimal = feeMsAsset.decimals
             }
             
             WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)
@@ -145,10 +144,10 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
             
             
-            feeValueLabel.attributedText = WUtils.dpAssetValue(feePriceDenom, feeAmount, feeDivideDecimal, feeValueLabel.font)
-            sendValueLabel.attributedText = WUtils.dpAssetValue(sendPriceDenom, toSendAmount, divideDecimal, sendValueLabel.font)
-            availableValueLabel.attributedText = WUtils.dpAssetValue(sendPriceDenom, currentAvailable, divideDecimal, availableValueLabel.font)
-            remainValueLabel.attributedText = WUtils.dpAssetValue(sendPriceDenom, remainAvailable, divideDecimal, remainValueLabel.font)
+            WDP.dpAssetValue(feeGeckocId, feeAmount, feeDivideDecimal, feeValueLabel)
+            WDP.dpAssetValue(sendGeckocId, toSendAmount, divideDecimal, sendValueLabel)
+            WDP.dpAssetValue(sendGeckocId, currentAvailable, divideDecimal, availableValueLabel)
+            WDP.dpAssetValue(sendGeckocId, remainAvailable, divideDecimal, remainValueLabel)
             
         } else {
             divideDecimal = chainConfig!.divideDecimal
@@ -407,14 +406,14 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                 
             } else if (self.pageHolderVC.mTransferType == TRANSFER_WASM) {
                 reqTx = Signer.genWasmSend(auth!, self.account!.account_pubkey_type,
-                                           self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mMintscanTokens!.contract_address,
+                                           self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mMintscanTokens!.address,
                                            self.pageHolderVC.mToSendAmount,
                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
                 
             } else if (self.pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
                 reqTx = Signer.genWasmIbcSend(auth!, self.account!.account_pubkey_type,
-                                              self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mMintscanTokens!.contract_address,
+                                              self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mMintscanTokens!.address,
                                               self.pageHolderVC.mToSendAmount, self.pageHolderVC.mMintscanPath!,
                                               self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                               self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)

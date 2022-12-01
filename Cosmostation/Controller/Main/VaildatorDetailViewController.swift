@@ -510,7 +510,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), mValidator_gRPC?.operatorAddress)
+        let reward = BaseData.instance.getReward_gRPC(chainConfig!.stakeDenom, mValidator_gRPC?.operatorAddress)
         if (reward.compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return
@@ -535,7 +535,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), mValidator_gRPC?.operatorAddress)
+        let reward = BaseData.instance.getReward_gRPC(chainConfig!.stakeDenom, mValidator_gRPC?.operatorAddress)
         if (reward.compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return

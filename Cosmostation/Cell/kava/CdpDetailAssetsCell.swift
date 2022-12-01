@@ -40,9 +40,15 @@ class CdpDetailAssetsCell: UITableViewCell {
         let chainConfig = ChainKava.init(.KAVA_MAIN)
         let cDenom = collateralParam!.getcDenom()!
         let pDenom = collateralParam!.getpDenom()!
-        let cDpDecimal = WUtils.getDenomDecimal(chainConfig, cDenom)
-        let pDpDecimal = WUtils.getDenomDecimal(chainConfig, pDenom)
-        let kDpDecimal = WUtils.getDenomDecimal(chainConfig, KAVA_MAIN_DENOM)
+        guard let cMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == cDenom }).first,
+              let pMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == pDenom }).first,
+              let kMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == KAVA_MAIN_DENOM }).first else {
+            return
+        }
+        
+        let cDpDecimal = cMsAsset.decimals
+        let pDpDecimal = pMsAsset.decimals
+        let kDpDecimal = kMsAsset.decimals
         let cAvailable = BaseData.instance.getAvailableAmount_gRPC(cDenom)
         let pAvailable = BaseData.instance.getAvailableAmount_gRPC(pDenom)
         let kAvailable = BaseData.instance.getAvailableAmount_gRPC(KAVA_MAIN_DENOM)
@@ -58,8 +64,9 @@ class CdpDetailAssetsCell: UITableViewCell {
         let principalValues = pAvailable.multiplying(byPowerOf10: -pDpDecimal)
         principalValue.attributedText = WUtils.getDPRawDollor(principalValues.stringValue, 2, principalValue.font)
 
+        //TODO display kava value with usd
         kavaAmount.attributedText = WDP.dpAmount(kAvailable.stringValue, kavaAmount.font!, kDpDecimal, kDpDecimal)
-        let kavaValues = kAvailable.multiplying(byPowerOf10: -kDpDecimal).multiplying(by: WUtils.perUsdValue(KAVA_MAIN_DENOM)!, withBehavior: WUtils.handler2Down)
+        let kavaValues = kAvailable.multiplying(byPowerOf10: -kDpDecimal).multiplying(by: NSDecimalNumber.zero, withBehavior: WUtils.handler2Down)
         kavaValue.attributedText = WUtils.getDPRawDollor(kavaValues.stringValue, 2, kavaValue.font)
         
         WDP.dpSymbolImg(chainConfig, cDenom, collateralImg)

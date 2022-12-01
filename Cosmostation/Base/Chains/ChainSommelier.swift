@@ -43,14 +43,13 @@ class ChainSommelier: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "lcd-sommelier-app.cosmostation.io"
-    var grpcPort = 9090
+    var grpcUrl = "grpc-sommelier.cosmostation.io"
+    var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-sommelier-app.cosmostation.io/"
     var apiUrl = "https://api-sommelier.cosmostation.io/"
     var explorerUrl = MintscanUrl + "sommelier/"
-    var validatorImgUrl = MonikerUrl + "sommelier/"
-    var priceUrl = CoingeckoUrl + "sommelier"
+    var priceUrl = GeckoUrl + "sommelier"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

@@ -465,8 +465,8 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
         if (mFetchCnt <= 0) {
             self.mCDenom = mCollateralParam!.getcDenom()!
             self.mPDenom = mCollateralParam!.getpDenom()!
-            self.cDpDecimal = WUtils.getDenomDecimal(chainConfig, mCDenom)
-            self.pDpDecimal = WUtils.getDenomDecimal(chainConfig, mPDenom)
+            self.cDpDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == mCDenom }).first?.decimals ?? 6
+            self.pDpDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == mPDenom }).first?.decimals ?? 6
             
             pMinAmount = mKavaCdpParams_gRPC.getDebtFloorAmount()
             currentPrice = NSDecimalNumber.init(string: mKavaOraclePrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)

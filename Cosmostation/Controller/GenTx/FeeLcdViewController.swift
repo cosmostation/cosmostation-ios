@@ -95,13 +95,19 @@ class FeeLcdViewController: BaseViewController {
             } else {
                 mFee = NSDecimalNumber.init(string: FEE_OKC_BASE)
             }
+            print("mFee ", mFee)
+            WDP.dpCoin(chainConfig, mStakingDenom, mFee.stringValue, feeTotalDenom, feeTotalAmount)
+            WDP.dpAssetValue(OKT_GECKO_ID, mFee, chainConfig!.divideDecimal, feeTotalValue)
             
-        } else {
+        } else if (chainType == .BINANCE_MAIN) {
             mFee = BaseData.instance.getMainDenomFee(chainConfig)
+            print("mFee ", mFee)
+            WDP.dpCoin(chainConfig, mStakingDenom, mFee.stringValue, feeTotalDenom, feeTotalAmount)
+            WDP.dpAssetValue(BNB_GECKO_ID, mFee, chainConfig!.divideDecimal, feeTotalValue)
         }
-        print("mFee ", mFee)
-        WDP.dpCoin(chainConfig, mStakingDenom, mFee.stringValue, feeTotalDenom, feeTotalAmount)
-        feeTotalValue.attributedText = WUtils.dpAssetValue(WUtils.getMainDenom(chainConfig), mFee, chainConfig!.divideDecimal, feeTotalValue.font)
+        
+        
+        
     }
     
     override func enableUserInteraction() {
@@ -134,7 +140,7 @@ class FeeLcdViewController: BaseViewController {
             fee.gas = baseGas.multiplying(by: mMux).stringValue
             pageHolderVC.mFee = fee
             
-        } else {
+        }  else if (chainType == .BINANCE_MAIN) {
             let gasCoin = Coin.init(mStakingDenom, mFee.stringValue)
             var amount: Array<Coin> = Array<Coin>()
             amount.append(gasCoin)
