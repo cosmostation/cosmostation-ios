@@ -240,10 +240,10 @@ class AuthzExecuteCell: UITableViewCell {
         stakeAuth.denyList.address.forEach { opAddress in
             opAddresses.append(opAddress)
         }
-        if (opAddresses.count == 0) {
+        guard let opAddress = opAddresses.first else {
             return nil
         }
-        let monikerString = BaseData.instance.mAllValidators_gRPC.filter { $0.operatorAddress == opAddresses[0] }.first?.description_p.moniker ?? "known"
+        let monikerString = BaseData.instance.searchValidator(withAddress: opAddress)?.description_p.moniker ?? "known"
         if (opAddresses.count > 1) {
             return monikerString + "+" + String(opAddresses.count - 1)
         } else {

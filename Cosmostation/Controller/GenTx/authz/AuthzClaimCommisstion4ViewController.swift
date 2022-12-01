@@ -55,7 +55,7 @@ class AuthzClaimCommisstion4ViewController: BaseViewController, PasswordViewDele
         WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
         
         let opAddress = WKey.getOpAddressFromAddress(pageHolderVC.mGranterData.address, chainConfig)
-        let validatorInfo = BaseData.instance.mAllValidators_gRPC.filter { $0.operatorAddress == opAddress }.first
+        let validatorInfo = BaseData.instance.searchValidator(withAddress: opAddress)
         fromValidatorLabel.text = validatorInfo?.description_p.moniker
         
         recipientLabel.text = pageHolderVC.mRewardAddress

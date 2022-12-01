@@ -1574,6 +1574,17 @@ final class BaseData : NSObject{
         }
     }
     
+    
+    // MARK: -  validators
+    
+    /**
+     Searches a validator for the specified address
+     - Parameter withAddress address for the searched validtor
+     - Returns validator if exists, nil otherwise
+     */
+    func searchValidator(withAddress address: String) -> Cosmos_Staking_V1beta1_Validator? {
+        mAllValidators_gRPC.first { $0.operatorAddress == address}
+    }
 }
 
 extension Connection {

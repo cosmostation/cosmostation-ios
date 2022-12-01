@@ -36,7 +36,7 @@ class EarnValidatorCell: UITableViewCell {
     func onBindView(_ chainConfig: ChainConfig, _ deposit: Coin) {
         cardView.backgroundColor = chainConfig.chainColorBG
         let valOpAddress = deposit.denom.replacingOccurrences(of: "bkava-", with: "")
-        if let validator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == valOpAddress }).first {
+        if let validator = BaseData.instance.searchValidator(withAddress: valOpAddress) {
             monikerLabel.text = validator.description_p.moniker
             monikerLabel.adjustsFontSizeToFitWidth = true
             if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {
