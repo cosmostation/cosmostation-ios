@@ -70,20 +70,11 @@ public class WDP {
                     return
                 }
             }
-//            else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
-//                if let assetImgeUrl = msToken.assetImg() {
-//                    imgView?.af_setImage(withURL: assetImgeUrl)
-//                    return
-//                }
-//            }
             
         } else {
             if (chainConfig!.chainType == .BINANCE_MAIN) {
                 if let bnbTokenInfo = BaseData.instance.bnbToken(denom) {
-                    if let url = URL(string: BinanceTokenImgUrl + bnbTokenInfo.original_symbol + ".png") {
-                        imgView?.af_setImage(withURL: url)
-                        return
-                    }
+                    imgView?.af_setImage(withURL: bnbTokenInfo.assetImg())
                 }
 
             } else if (chainConfig!.chainType == .OKEX_MAIN) {
@@ -107,32 +98,32 @@ public class WDP {
         dpSymbol(chainConfig, denom, denomLabel)
         if (chainConfig?.isGrpc == true) {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == denom }).first {
-                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msAsset.decimals, msAsset.decimals)
+                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, msAsset.decimals, msAsset.decimals)
             }
             else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first {
-                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msToken.decimals, msToken.decimals)
+                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, msToken.decimals, msToken.decimals)
             }
             else {
-                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, 6, 6)
+                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, 6, 6)
             }
             
         } else {
             if (chainConfig?.chainType == .BINANCE_MAIN) {
-                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, 0, 8)
+                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, 0, 8)
             } else if (chainConfig?.chainType == .OKEX_MAIN ) {
-                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, 0, 18)
+                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, 0, 18)
             }
         }
     }
     
-    static func dpBnbTxCoin(_ chainConfig: ChainConfig, _ coin:Coin, _ denomLabel:UILabel, _ amountLabel:UILabel) {
+    static func dpBnbTxCoin(_ chainConfig: ChainConfig, _ coin:Coin, _ denomLabel: UILabel, _ amountLabel: UILabel) {
         if (coin.denom == BNB_MAIN_DENOM) {
             WDP.dpMainSymbol(chainConfig, denomLabel)
         } else {
             denomLabel.textColor = UIColor.font05
             denomLabel.text = coin.denom.uppercased()
         }
-        amountLabel.attributedText = WDP.dpAmount(coin.amount, amountLabel.font, 8, 8)
+        amountLabel.attributedText = dpAmount(coin.amount, amountLabel.font, 8, 8)
     }
     
     static func dpAmount(_ amount: String?, _ font: UIFont, _ inputPoint: Int16, _ dpPoint: Int16) -> NSMutableAttributedString {
@@ -190,6 +181,50 @@ public class WDP {
         return attributedString1
     }
     
+    
+    
+    //display price & value
+    static func dpAssetValue(_ geckoId: String, _ amount: NSDecimalNumber, _ divider: Int16, _ label: UILabel?) {
+        let assetValue = WUtils.assetValue(geckoId, amount, divider)
+        let nf = WUtils.getNumberFormatter(3)
+        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: assetValue)!
+        label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
+    }
+    
+    static func dpAllAssetValue(_ chainConfig: ChainConfig?, _ label: UILabel?) {
+        let totalValue = WUtils.allAssetValue(chainConfig)
+        let nf = WUtils.getNumberFormatter(3)
+        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: totalValue)!
+        label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
+    }
+    
+    static func dpBnbTokenPrice(_ symbol: String, _ label: UILabel?) {
+        let nf = WUtils.getNumberFormatter(3)
+        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: WUtils.bnbTokenPrice(symbol))!
+        label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
+    }
+    
+    static func dpPrice(_ geckoId: String, _ label: UILabel?) {
+        let nf = WUtils.getNumberFormatter(3)
+        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: WUtils.price(geckoId))!
+        label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
+    }
+    
+    static func dpPriceChanged(_ geckoId: String, _ label: UILabel?) {
+        let nf = WUtils.getNumberFormatter(2)
+        let change = WUtils.priceChange(geckoId)
+        if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
+            let formatted = "+" + nf.string(from: change)! + "%"
+            label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
+        } else {
+            let formatted = nf.string(from: change)! + "%"
+            label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
+        }
+    }
+    
+    
+    
+    //display time
     static func dpTime(_ timeString: String?) -> String {
         if (timeString == nil) { return "-" }
         guard let date = WUtils.timeStringToDate(timeString!) else {

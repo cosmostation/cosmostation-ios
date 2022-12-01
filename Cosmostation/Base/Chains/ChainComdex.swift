@@ -49,7 +49,7 @@ class ChainComdex: ChainConfig {
     var lcdUrl = "https://lcd-comdex-app.cosmostation.io/"
     var apiUrl = "https://api-comdex.cosmostation.io/"
     var explorerUrl = MintscanUrl + "comdex/"
-    var priceUrl = CoingeckoUrl + "comdex"
+    var priceUrl = GeckoUrl + "comdex"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

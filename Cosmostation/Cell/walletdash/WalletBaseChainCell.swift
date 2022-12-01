@@ -80,7 +80,7 @@ class WalletBaseChainCell: UITableViewCell {
         btnWalletConnect.isHidden = !chainConfig!.wcSupoort
 
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, divideDecimal, 6)
-        totalValue.attributedText = WUtils.dpAssetValue(msAsset.coinGeckoId, totalToken, divideDecimal, totalValue.font)
+        WDP.dpAssetValue(msAsset.coinGeckoId, totalToken, divideDecimal, totalValue)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, divideDecimal, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, divideDecimal, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, divideDecimal, 6)

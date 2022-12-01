@@ -640,7 +640,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
                     return
                 }
-        if (WUtils.getTokenAmount(mainTabVC.mBalances, OKEX_MAIN_DENOM).compare(NSDecimalNumber(string: "0.01")).rawValue < 0) {
+        if (WUtils.getTokenAmount(mainTabVC.mBalances, OKT_MAIN_DENOM).compare(NSDecimalNumber(string: "0.01")).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_to_deposit", comment: ""))
             return
         }

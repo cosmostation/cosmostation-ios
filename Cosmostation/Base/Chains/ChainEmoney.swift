@@ -49,7 +49,7 @@ class ChainEmoney: ChainConfig {
     var lcdUrl = "https://lcd-emoney-app.cosmostation.io/"
     var apiUrl = "https://api-emoney.cosmostation.io/"
     var explorerUrl = MintscanUrl + "emoney/"
-    var priceUrl = CoingeckoUrl + "e-money"
+    var priceUrl = GeckoUrl + "e-money"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

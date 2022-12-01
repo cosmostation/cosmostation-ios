@@ -50,7 +50,7 @@ class ChainPersistence: ChainConfig {
     var lcdUrl = "https://lcd-persistence-app.cosmostation.io/"
     var apiUrl = "https://api-persistence.cosmostation.io/"
     var explorerUrl = MintscanUrl + "persistence/"
-    var priceUrl = CoingeckoUrl + "persistence"
+    var priceUrl = GeckoUrl + "persistence"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

@@ -49,7 +49,7 @@ class ChainMedibloc: ChainConfig {
     var lcdUrl = "https://lcd-medibloc-app.cosmostation.io/"
     var apiUrl = "https://api-medibloc.cosmostation.io/"
     var explorerUrl = MintscanUrl + "medibloc/"
-    var priceUrl = CoingeckoUrl + "medibloc"
+    var priceUrl = GeckoUrl + "medibloc"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

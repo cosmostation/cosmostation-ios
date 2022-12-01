@@ -50,7 +50,7 @@ class ChainKava: ChainConfig {
     var lcdUrl = "https://lcd-kava-app.cosmostation.io/"
     var apiUrl = "https://api-kava.cosmostation.io/"
     var explorerUrl = MintscanUrl + "kava/"
-    var priceUrl = CoingeckoUrl + "kava"
+    var priceUrl = GeckoUrl + "kava"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

@@ -144,10 +144,10 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
             
             
-            feeValueLabel.attributedText = WUtils.dpAssetValue(feeGeckocId, feeAmount, feeDivideDecimal, feeValueLabel.font)
-            sendValueLabel.attributedText = WUtils.dpAssetValue(sendGeckocId, toSendAmount, divideDecimal, sendValueLabel.font)
-            availableValueLabel.attributedText = WUtils.dpAssetValue(sendGeckocId, currentAvailable, divideDecimal, availableValueLabel.font)
-            remainValueLabel.attributedText = WUtils.dpAssetValue(sendGeckocId, remainAvailable, divideDecimal, remainValueLabel.font)
+            WDP.dpAssetValue(feeGeckocId, feeAmount, feeDivideDecimal, feeValueLabel)
+            WDP.dpAssetValue(sendGeckocId, toSendAmount, divideDecimal, sendValueLabel)
+            WDP.dpAssetValue(sendGeckocId, currentAvailable, divideDecimal, availableValueLabel)
+            WDP.dpAssetValue(sendGeckocId, remainAvailable, divideDecimal, remainValueLabel)
             
         } else {
             divideDecimal = chainConfig!.divideDecimal

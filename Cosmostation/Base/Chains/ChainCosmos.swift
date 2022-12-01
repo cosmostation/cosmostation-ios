@@ -50,7 +50,7 @@ class ChainCosmos: ChainConfig {
     var lcdUrl = "https://lcd-cosmos-app.cosmostation.io/"
     var apiUrl = "https://api-cosmos.cosmostation.io/"
     var explorerUrl = MintscanUrl + "cosmos/"
-    var priceUrl = CoingeckoUrl + "cosmos"
+    var priceUrl = GeckoUrl + "cosmos"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

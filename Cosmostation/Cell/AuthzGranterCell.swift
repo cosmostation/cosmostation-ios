@@ -74,7 +74,7 @@ class AuthzGranterCell: UITableViewCell {
         }
         
         totalAmountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, totalAmountLabel.font!, chainConfig!.divideDecimal, 6)
-        totalValueLabel.attributedText = WUtils.dpAssetValue(msAsset.coinGeckoId, totalAmount, chainConfig!.divideDecimal, totalValueLabel.font)
+        WDP.dpAssetValue(msAsset.coinGeckoId, totalAmount, chainConfig!.divideDecimal, totalValueLabel)
         
     }
 }

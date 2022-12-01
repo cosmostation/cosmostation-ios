@@ -67,7 +67,7 @@ class WalletIrisCell: UITableViewCell {
         let totalIris = WUtils.getAllMainAsset(stakingDenom)
         denomTitle.text = chainConfig!.stakeSymbol
         totalAmount.attributedText = WDP.dpAmount(totalIris.stringValue, totalAmount.font!, 6, 6)
-        totalValue.attributedText = WUtils.dpAssetValue(msAsset.coinGeckoId, totalIris, 6, totalValue.font)
+        WDP.dpAssetValue(msAsset.coinGeckoId, totalIris, 6, totalValue)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, 6, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)

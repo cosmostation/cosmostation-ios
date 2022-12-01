@@ -49,7 +49,7 @@ class ChainCertik: ChainConfig {
     var lcdUrl = "https://lcd-shentu-app.cosmostation.io/"
     var apiUrl = "https://api-shentu.cosmostation.io/"
     var explorerUrl = MintscanUrl + "shentu/"
-    var priceUrl = CoingeckoUrl + "shentu"
+    var priceUrl = GeckoUrl + "shentu"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

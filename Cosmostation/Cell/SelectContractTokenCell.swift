@@ -20,7 +20,12 @@ class SelectContractTokenCell: UITableViewCell {
         coinSwitch.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
     }
     
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.coinImg.image = UIImage(named: "tokenDefault")
+        self.coinTitle.text = ""
+        self.coinSwitch.isOn = false
+    }
     
     var actionToggle: ((Bool) -> Void)? = nil
     @IBAction func onToggle(_ sender: UISwitch) {

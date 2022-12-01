@@ -49,7 +49,7 @@ class ChainEvmos: ChainConfig {
     var lcdUrl = "https://lcd-evmos-app.cosmostation.io/"
     var apiUrl = "https://api-evmos.cosmostation.io/"
     var explorerUrl = MintscanUrl + "evmos/"
-    var priceUrl = CoingeckoUrl + "evmos"
+    var priceUrl = GeckoUrl + "evmos"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

@@ -49,7 +49,7 @@ class ChainAxelar: ChainConfig {
     var lcdUrl = "https://lcd-axelar-app.cosmostation.io/"
     var apiUrl = "https://api-axelar.cosmostation.io/"
     var explorerUrl = MintscanUrl + "axelar/"
-    var priceUrl = CoingeckoUrl + "axelar-network"
+    var priceUrl = GeckoUrl + "axelar-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

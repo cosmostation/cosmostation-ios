@@ -205,7 +205,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                 WDP.dpCoin(chainConfig, mFee.amount[0], feeTotalDenom, feeTotalAmount)
                 
                 if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == chainConfig!.stakeDenom }).first {
-                    feeTotalValue.attributedText = WUtils.dpAssetValue(feeMsAsset.coinGeckoId, NSDecimalNumber.init(string: mFee.amount[0].amount), feeMsAsset.decimals, feeTotalValue.font)
+                    WDP.dpAssetValue(feeMsAsset.coinGeckoId, NSDecimalNumber.init(string: mFee.amount[0].amount), feeMsAsset.decimals, feeTotalValue)
                 }
                 
             } else {
@@ -220,7 +220,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             WDP.dpCoin(chainConfig, mFee.amount[0], feeTotalDenom, feeTotalAmount)
             
             if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == mFeeData.denom! }).first {
-                feeTotalValue.attributedText = WUtils.dpAssetValue(feeMsAsset.coinGeckoId, NSDecimalNumber.init(string: mFee.amount[0].amount), feeMsAsset.decimals, feeTotalValue.font)
+                WDP.dpAssetValue(feeMsAsset.coinGeckoId, NSDecimalNumber.init(string: mFee.amount[0].amount), feeMsAsset.decimals, feeTotalValue)
             }
             gasDescriptionLabel.text = mFeeInfo[mSelectedFeeInfo].msg
         }

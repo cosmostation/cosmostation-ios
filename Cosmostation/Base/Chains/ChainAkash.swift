@@ -49,7 +49,7 @@ class ChainAkash: ChainConfig {
     var lcdUrl = "https://lcd-akash-app.cosmostation.io/"
     var apiUrl = "https://api-akash.cosmostation.io/"
     var explorerUrl = MintscanUrl + "akash/"
-    var priceUrl = CoingeckoUrl + "akash-network"
+    var priceUrl = GeckoUrl + "akash-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

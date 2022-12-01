@@ -49,7 +49,7 @@ class ChainStargaze: ChainConfig {
     var lcdUrl = "https://lcd-stargaze-app.cosmostation.io/"
     var apiUrl = "https://api-stargaze.cosmostation.io/"
     var explorerUrl = MintscanUrl + "stargaze/"
-    var priceUrl = CoingeckoUrl + "stargaze"
+    var priceUrl = GeckoUrl + "stargaze"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

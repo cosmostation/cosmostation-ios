@@ -49,7 +49,7 @@ class ChainInjective: ChainConfig {
     var lcdUrl = "https://lcd-injective-app.cosmostation.io/"
     var apiUrl = "https://api-injective.cosmostation.io/"
     var explorerUrl = MintscanUrl + "injective/"
-    var priceUrl = CoingeckoUrl + "injective-protocol"
+    var priceUrl = GeckoUrl + "injective-protocol"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

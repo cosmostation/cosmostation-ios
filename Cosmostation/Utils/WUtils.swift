@@ -207,23 +207,25 @@ public class WUtils {
         }
     }
     
+    static func getGeckoId(_ chainConfig: ChainConfig?) -> String {
+        if (chainConfig == nil) { return "" }
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, chainConfig!.stakeDenom) {
+            return msAsset.coinGeckoId
+        }
+        if (chainConfig?.chainType == .BINANCE_MAIN) {
+            return BNB_GECKO_ID
+            
+        } else if (chainConfig?.chainType == .OKEX_MAIN) {
+            return OKT_GECKO_ID
+        }
+        return ""
+    }
+    
     static func priceChange(_ geckoId: String) -> NSDecimalNumber {
         guard let coinPrice = BaseData.instance.getPrice(geckoId) else {
             return NSDecimalNumber.zero.rounding(accordingToBehavior: handler2Down)
         }
         return NSDecimalNumber.init(value: coinPrice.daily_price_change_in_percent ?? 0).rounding(accordingToBehavior: handler2Down)
-    }
-    
-    static func dpPriceChange(_ geckoId: String, _ font:UIFont) -> NSMutableAttributedString {
-        let nf = getNumberFormatter(2)
-        let change = priceChange(geckoId)
-        if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
-            let formatted = "+" + nf.string(from: change)! + "%"
-            return getDpAttributedString(formatted, 3, font)
-        } else {
-            let formatted = nf.string(from: change)! + "%"
-            return getDpAttributedString(formatted, 3, font)
-        }
     }
     
     static func price(_ geckoId: String) -> NSDecimalNumber {
@@ -233,20 +235,8 @@ public class WUtils {
         return NSDecimalNumber.init(value: coinPrice.current_price ?? 0).rounding(accordingToBehavior: handler12Down)
     }
     
-    static func dpPrice(_ geckoId: String, _ font:UIFont) -> NSMutableAttributedString {
-        let nf = getNumberFormatter(3)
-        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: price(geckoId))!
-        return getDpAttributedString(formatted, 3, font)
-    }
-    
     static func assetValue(_ geckoId: String, _ amount: NSDecimalNumber, _ divider: Int16) -> NSDecimalNumber {
         return price(geckoId).multiplying(by: amount).multiplying(byPowerOf10: -divider, withBehavior: handler3Down)
-    }
-    
-    static func dpAssetValue(_ geckoId: String, _ amount: NSDecimalNumber, _ divider: Int16, _ font: UIFont) -> NSMutableAttributedString {
-        let nf = getNumberFormatter(3)
-        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: assetValue(geckoId, amount, divider))!
-        return getDpAttributedString(formatted, 3, font)
     }
     
     static func allAssetValue(_ chainConfig: ChainConfig?) -> NSDecimalNumber {
@@ -289,7 +279,7 @@ public class WUtils {
                 } else {
                     allBnb = allBnb.adding(bnbConvertAmount(coin.balance_denom))
                 }
-                let assetValue = assetValue("bnb", allBnb, 0)
+                let assetValue = assetValue(BNB_GECKO_ID, allBnb, 0)
                 totalValue = totalValue.adding(assetValue)
             }
             
@@ -299,7 +289,7 @@ public class WUtils {
                 if (coin.balance_denom == chainConfig?.stakeDenom) {
                     allOKT = allOKT.adding(getAllExToken(coin.balance_denom))
                 }
-                let assetValue = assetValue("okt", allOKT, 0)
+                let assetValue = assetValue(OKT_GECKO_ID, allOKT, 0)
                 totalValue = totalValue.adding(assetValue)
             }
             
@@ -316,13 +306,6 @@ public class WUtils {
         return totalValue
     }
     
-    static func dpAllAssetValue(_ chainConfig: ChainConfig?, _ font:UIFont) -> NSMutableAttributedString {
-        let totalValue = allAssetValue(chainConfig)
-        let nf = getNumberFormatter(3)
-        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: totalValue)!
-        return getDpAttributedString(formatted, 3, font)
-    }
-    
     static func getNumberFormatter(_ divider: Int) -> NumberFormatter {
         let nf = NumberFormatter()
         nf.numberStyle = .decimal
@@ -331,12 +314,13 @@ public class WUtils {
         return nf
     }
     
-    static func getDpAttributedString(_ dpString: String, _ divider: Int, _ font:UIFont) -> NSMutableAttributedString {
+    static func getDpAttributedString(_ dpString: String, _ divider: Int, _ font: UIFont?) -> NSMutableAttributedString? {
+        if (font == nil) { return nil }
         let endIndex    = dpString.index(dpString.endIndex, offsetBy: -divider)
         let preString   = dpString[..<endIndex]
         let postString  = dpString[endIndex...]
         let preAttrs    = [NSAttributedString.Key.font : font]
-        let postAttrs   = [NSAttributedString.Key.font : font.withSize(CGFloat(Int(Double(font.pointSize) * 0.85)))]
+        let postAttrs   = [NSAttributedString.Key.font : font!.withSize(CGFloat(Int(Double(font!.pointSize) * 0.85)))]
         
         let attributedString1 = NSMutableAttributedString(string:String(preString), attributes:preAttrs as [NSAttributedString.Key : Any])
         let attributedString2 = NSMutableAttributedString(string:String(postString), attributes:postAttrs as [NSAttributedString.Key : Any])
@@ -523,25 +507,19 @@ public class WUtils {
         if let bnbTicker = BaseData.instance.bnbTicker(symbol) {
             if (bnbTicker.baseAssetName == BNB_MAIN_DENOM) {
                 let perPrice = (NSDecimalNumber.one).dividing(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
-                return perPrice.multiplying(by: price(BNB_MAIN_DENOM))
+                return perPrice.multiplying(by: price(BNB_GECKO_ID))
             } else {
                 let perPrice = (NSDecimalNumber.one).multiplying(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
-                return perPrice.multiplying(by: price(BNB_MAIN_DENOM))
+                return perPrice.multiplying(by: price(BNB_GECKO_ID))
             }
         }
         return NSDecimalNumber.zero
     }
     
-    static func dpBnbTokenPrice(_ symbol: String, _ font:UIFont) -> NSMutableAttributedString {
-        let nf = getNumberFormatter(3)
-        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: bnbTokenPrice(symbol))!
-        return getDpAttributedString(formatted, 3, font)
-    }
-    
     //for okx utils
     static func getAllExToken(_ symbol: String) -> NSDecimalNumber {
         let dataBase = BaseData.instance
-        if (symbol == OKEX_MAIN_DENOM) {
+        if (symbol == OKT_MAIN_DENOM) {
             return dataBase.availableAmount(symbol).adding(dataBase.lockedAmount(symbol)).adding(dataBase.okDepositAmount()).adding(dataBase.okWithdrawAmount())
         } else {
             return dataBase.availableAmount(symbol).adding(dataBase.lockedAmount(symbol))

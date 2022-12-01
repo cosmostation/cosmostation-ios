@@ -188,18 +188,9 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
             let toSendCoin = toCoinList[indexPath.row]
             if (chainType! == ChainType.BINANCE_MAIN) {
-                if (toSendCoin == TOKEN_HTLC_BINANCE_BNB) {
-                    cell!.coinImg.image = UIImage(named: "tokenBinance")
-                    cell!.coinTitle.text = "BNB"
-                } else if (toSendCoin == TOKEN_HTLC_BINANCE_BTCB) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + "BTCB.png")!)
-                    cell!.coinTitle.text = "BTC"
-                } else if (toSendCoin == TOKEN_HTLC_BINANCE_XRPB) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + "XRP.png")!)
-                    cell!.coinTitle.text = "XRP"
-                } else if (toSendCoin == TOKEN_HTLC_BINANCE_BUSD) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + "BUSD.png")!)
-                    cell!.coinTitle.text = "BUSD"
+                if let bnbToken = BaseData.instance.bnbToken(toSendCoin) {
+                    cell!.coinImg.af_setImage(withURL: bnbToken.assetImg())
+                    cell!.coinTitle.text = bnbToken.original_symbol
                 }
                 
             } else if (chainType! == ChainType.KAVA_MAIN) {

@@ -97,13 +97,13 @@ class FeeLcdViewController: BaseViewController {
             }
             print("mFee ", mFee)
             WDP.dpCoin(chainConfig, mStakingDenom, mFee.stringValue, feeTotalDenom, feeTotalAmount)
-            feeTotalValue.attributedText = WUtils.dpAssetValue("okt", mFee, chainConfig!.divideDecimal, feeTotalValue.font)
+            WDP.dpAssetValue(OKT_GECKO_ID, mFee, chainConfig!.divideDecimal, feeTotalValue)
             
         } else if (chainType == .BINANCE_MAIN) {
             mFee = BaseData.instance.getMainDenomFee(chainConfig)
             print("mFee ", mFee)
             WDP.dpCoin(chainConfig, mStakingDenom, mFee.stringValue, feeTotalDenom, feeTotalAmount)
-            feeTotalValue.attributedText = WUtils.dpAssetValue("bnb", mFee, chainConfig!.divideDecimal, feeTotalValue.font)
+            WDP.dpAssetValue(BNB_GECKO_ID, mFee, chainConfig!.divideDecimal, feeTotalValue)
         }
         
         

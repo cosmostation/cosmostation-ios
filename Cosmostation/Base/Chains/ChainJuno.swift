@@ -49,7 +49,7 @@ class ChainJuno: ChainConfig {
     var lcdUrl = "https://lcd-juno-app.cosmostation.io/"
     var apiUrl = "https://api-juno.cosmostation.io/"
     var explorerUrl = MintscanUrl + "juno/"
-    var priceUrl = CoingeckoUrl + "juno-network"
+    var priceUrl = GeckoUrl + "juno-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

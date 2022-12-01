@@ -467,16 +467,16 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     func sortCoins(_ coins:Array<Coin>, _ chain:ChainType) -> Array<Coin> {
         if (chainType! == ChainType.OKEX_MAIN) {
             return coins.sorted(by: {
-                if ($0.denom == OKEX_MAIN_DENOM) {
+                if ($0.denom == OKT_MAIN_DENOM) {
                     return true
                 }
-                if ($1.denom == OKEX_MAIN_DENOM) {
+                if ($1.denom == OKT_MAIN_DENOM) {
                     return false
                 }
-                if ($0.denom == OKEX_MAIN_OKB) {
+                if ($0.denom == OKT_OKB) {
                     return true
                 }
-                if ($1.denom == OKEX_MAIN_OKB) {
+                if ($1.denom == OKT_OKB) {
                     return false
                 }
                 return false

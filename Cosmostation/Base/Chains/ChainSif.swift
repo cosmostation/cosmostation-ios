@@ -49,7 +49,7 @@ class ChainSif: ChainConfig {
     var lcdUrl = "https://lcd-sifchain-app.cosmostation.io/"
     var apiUrl = "https://api-sifchain.cosmostation.io/"
     var explorerUrl = MintscanUrl + "sifchain/"
-    var priceUrl = CoingeckoUrl + "sifchain"
+    var priceUrl = GeckoUrl + "sifchain"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

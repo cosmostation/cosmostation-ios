@@ -49,7 +49,7 @@ class ChainOmniflix: ChainConfig {
     var lcdUrl = "https://lcd-omniflix-app.cosmostation.io/"
     var apiUrl = "https://api-omniflix.cosmostation.io/"
     var explorerUrl = MintscanUrl + "omniflix/"
-    var priceUrl = CoingeckoUrl + "omniflix-network"
+    var priceUrl = GeckoUrl + "omniflix-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

@@ -49,7 +49,7 @@ class ChainChihuahua: ChainConfig {
     var lcdUrl = "https://lcd-chihuahua-app.cosmostation.io/"
     var apiUrl = "https://api-chihuahua.cosmostation.io/"
     var explorerUrl = MintscanUrl + "chihuahua/"
-    var priceUrl = CoingeckoUrl + "chihuahua-chain"
+    var priceUrl = GeckoUrl + "chihuahua-chain"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

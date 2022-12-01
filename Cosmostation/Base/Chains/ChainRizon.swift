@@ -49,7 +49,7 @@ class ChainRizon: ChainConfig {
     var lcdUrl = "https://lcd-rizon-app.cosmostation.io/"
     var apiUrl = "https://api-rizon.cosmostation.io/"
     var explorerUrl = MintscanUrl + "rizon/"
-    var priceUrl = CoingeckoUrl + "rizon"
+    var priceUrl = GeckoUrl + "rizon"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

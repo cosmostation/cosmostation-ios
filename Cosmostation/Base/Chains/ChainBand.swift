@@ -49,7 +49,7 @@ class ChainBand: ChainConfig {
     var lcdUrl = "https://lcd-band-app.cosmostation.io/"
     var apiUrl = "https://api-band.cosmostation.io/"
     var explorerUrl = MintscanUrl + "band/"
-    var priceUrl = CoingeckoUrl + "band-protocol"
+    var priceUrl = GeckoUrl + "band-protocol"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

@@ -30,6 +30,7 @@ class WalletPriceCell: UITableViewCell {
 //        updownPercent.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         
         currentPriceLabel.text = NSLocalizedString("str_current_price", comment: "")
+        sourceSite.text = "(CoinGecko 24h)"
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTapPrice))
         self.contentView.isUserInteractionEnabled = true
@@ -56,16 +57,12 @@ class WalletPriceCell: UITableViewCell {
     
     func onBindCell(_ account: Account?, _ chainConfig: ChainConfig?) {
         if (account == nil || chainConfig == nil) { return }
-        let stakingDenom = chainConfig!.stakeDenom
-        guard let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) else {
-            return
-        }
-
-        sourceSite.text = "(CoinGecko 24h)"
-        perPrice.attributedText = WUtils.dpPrice(msAsset.coinGeckoId, perPrice.font)
-        updownPercent.attributedText = WUtils.dpPriceChange(msAsset.coinGeckoId, updownPercent.font)
-        let changePrice = WUtils.priceChange(msAsset.coinGeckoId)
-        WDP.setPriceColor(updownPercent, changePrice)
+        
+        let coinGeckoId = WUtils.getGeckoId(chainConfig)
+        let changePriced = WUtils.priceChange(coinGeckoId)
+        WDP.dpPrice(coinGeckoId, perPrice)
+        WDP.dpPriceChanged(coinGeckoId, updownPercent)
+        WDP.setPriceColor(updownPercent, changePriced)
         
         if (chainConfig!.moonPaySupoort == true && chainConfig!.kadoMoneySupoort == true) {
             buyBtn.setTitle(String(format: NSLocalizedString("btn_buy_kadomoney", comment: ""), chainConfig!.stakeSymbol), for: .normal)

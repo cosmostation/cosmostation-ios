@@ -50,7 +50,7 @@ class ChainSecret: ChainConfig {
     var lcdUrl = "https://lcd-secret.cosmostation.io/"
     var apiUrl = "https://api-secret.cosmostation.io/"
     var explorerUrl = MintscanUrl + "secret/"
-    var priceUrl = CoingeckoUrl + "secret"
+    var priceUrl = GeckoUrl + "secret"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

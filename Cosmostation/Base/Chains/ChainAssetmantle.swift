@@ -49,7 +49,7 @@ class ChainAssetMantle: ChainConfig {
     var lcdUrl = "https://lcd-asset-mantle-app.cosmostation.io/"
     var apiUrl = "https://api-asset-mantle.cosmostation.io/"
     var explorerUrl = MintscanUrl + "asset-mantle/"
-    var priceUrl = CoingeckoUrl + "assetmantle"
+    var priceUrl = GeckoUrl + "assetmantle"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

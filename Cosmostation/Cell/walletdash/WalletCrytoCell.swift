@@ -75,7 +75,7 @@ class WalletCrytoCell: UITableViewCell {
         
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 8, 6)
-        totalValue.attributedText = WUtils.dpAssetValue(msAsset.coinGeckoId, totalToken, 8, totalValue.font)
+        WDP.dpAssetValue(msAsset.coinGeckoId, totalToken, 8, totalValue)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, 8, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 8, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 8, 6)

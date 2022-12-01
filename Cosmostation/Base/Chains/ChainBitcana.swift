@@ -49,7 +49,7 @@ class ChainBitcana: ChainConfig {
     var lcdUrl = "https://lcd-bitcanna-app.cosmostation.io/"
     var apiUrl = "https://api-bitcanna.cosmostation.io/"
     var explorerUrl = MintscanUrl + "bitcanna/"
-    var priceUrl = CoingeckoUrl + "bitcanna"
+    var priceUrl = GeckoUrl + "bitcanna"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

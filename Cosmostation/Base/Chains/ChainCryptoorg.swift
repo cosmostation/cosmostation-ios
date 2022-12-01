@@ -49,7 +49,7 @@ class ChainCryptoorg: ChainConfig {
     var lcdUrl = "https://lcd-crypto-org-app.cosmostation.io/"
     var apiUrl = "https://api-crypto-org.cosmostation.io/"
     var explorerUrl = MintscanUrl + "crypto-org/"
-    var priceUrl = CoingeckoUrl + "cronos"
+    var priceUrl = GeckoUrl + "cronos"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

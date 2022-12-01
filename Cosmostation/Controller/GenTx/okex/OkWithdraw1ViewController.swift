@@ -112,7 +112,7 @@ class OkWithdraw1ViewController: BaseViewController, UITextFieldDelegate {
             let userInput = WUtils.localeStringToDecimal((toWithdrawAmountInput.text?.trimmingCharacters(in: .whitespaces))!)
             var toWithdrawCoin: Coin?
             if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
-                toWithdrawCoin = Coin.init(OKEX_MAIN_DENOM, WUtils.getFormattedNumber(userInput, mDpDecimal))
+                toWithdrawCoin = Coin.init(OKT_MAIN_DENOM, WUtils.getFormattedNumber(userInput, mDpDecimal))
             }
             
             self.pageHolderVC.mOkToWithdraw = toWithdrawCoin!

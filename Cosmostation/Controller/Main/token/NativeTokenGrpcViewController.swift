@@ -68,8 +68,8 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         }
 
         let geckoId = msAsset.coinGeckoId
-        self.naviPerPrice.attributedText = WUtils.dpPrice(geckoId, naviPerPrice.font)
-        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(geckoId, naviUpdownPercent.font)
+        WDP.dpPrice(geckoId, naviPerPrice)
+        WDP.dpPriceChanged(geckoId, naviUpdownPercent)
         let changePrice = WUtils.priceChange(geckoId)
         WDP.setPriceColor(naviUpdownPercent, changePrice)
     }

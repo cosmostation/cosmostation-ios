@@ -77,19 +77,11 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
         if (pageHolderVC.chainType == ChainType.BINANCE_MAIN && kavaSwapParam != nil && kavaSwapSupply != nil) {
             RelayerMaxLayer.isHidden = false
             RelayerReaminLayer.isHidden = false
-            if (toSwapDenom == TOKEN_HTLC_BINANCE_BNB) {
-                sendCoinImg.image = UIImage(named: "tokenBinance")
-                self.onSetDpDenom("BNB")
-            } else if (toSwapDenom == TOKEN_HTLC_BINANCE_BTCB) {
-                sendCoinImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + "BTCB.png")!)
-                self.onSetDpDenom("BTC")
-            } else if (toSwapDenom == TOKEN_HTLC_BINANCE_XRPB) {
-                sendCoinImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + "XRP.png")!)
-                self.onSetDpDenom("XRP")
-            } else if (toSwapDenom == TOKEN_HTLC_BINANCE_BUSD) {
-                sendCoinImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + "BUSD.png")!)
-                self.onSetDpDenom("BUSD")
+            if let bnbToken = BaseData.instance.bnbToken(toSwapDenom) {
+                sendCoinImg.af_setImage(withURL: bnbToken.assetImg())
+                self.onSetDpDenom(bnbToken.original_symbol)
             }
+            
             availableAmount = pageHolderVC.mAccount!.getTokenBalance(toSwapDenom!)
             supplyLimit = kavaSwapParam!.getSupportedSwapAssetLimit(toSwapDenom!)
             supplyRemain = kavaSwapSupply!.getRemainCap(toSwapDenom!, supplyLimit)

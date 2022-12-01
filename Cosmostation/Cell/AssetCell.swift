@@ -47,17 +47,17 @@ class AssetCell: UITableViewCell {
         if (coin.denom == chainConfig?.stakeDenom) {
             let allAmount = WUtils.getAllMainAsset(coin.denom)
             assetAmount.attributedText = WDP.dpAmount(allAmount.stringValue, assetAmount.font!, decimal, 6)
-            assetValue.attributedText = WUtils.dpAssetValue(geckoId, allAmount, decimal, assetValue.font)
+            WDP.dpAssetValue(geckoId, allAmount, decimal, assetValue)
             
         } else if (chainConfig?.chainType == .KAVA_MAIN) {
             let allAmount = WUtils.getKavaTokenAll(coin.denom)
             assetAmount.attributedText = WDP.dpAmount(allAmount.stringValue, assetAmount.font!, decimal, 6)
-            assetValue.attributedText = WUtils.dpAssetValue(geckoId, allAmount, decimal, assetValue.font)
+            WDP.dpAssetValue(geckoId, allAmount, decimal, assetValue)
             
         } else {
             let available = NSDecimalNumber.init(string: coin.amount)
             assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
-            assetValue.attributedText = WUtils.dpAssetValue(geckoId, available, decimal, assetValue.font)
+            WDP.dpAssetValue(geckoId, available, decimal, assetValue)
         }
         onBindPriceView(geckoId)
     }
@@ -73,7 +73,7 @@ class AssetCell: UITableViewCell {
         assetSymbol.text = asset!.symbol
         assetDescription.text = WDP.dpPath(asset!.path)
         assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
-        assetValue.attributedText = WUtils.dpAssetValue(geckoId, available, decimal, assetValue.font)
+        WDP.dpAssetValue(geckoId, available, decimal, assetValue)
         onBindPriceView(geckoId)
     }
     
@@ -88,7 +88,7 @@ class AssetCell: UITableViewCell {
         assetSymbol.text = asset!.symbol
         assetDescription.text = WDP.dpPath(asset!.path)
         assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
-        assetValue.attributedText = WUtils.dpAssetValue(geckoId, available, decimal, assetValue.font)
+        WDP.dpAssetValue(geckoId, available, decimal, assetValue)
         onBindPriceView(geckoId)
     }
     
@@ -105,7 +105,7 @@ class AssetCell: UITableViewCell {
         assetDescription.text = token!.description
         assetDescription.lineBreakMode = .byTruncatingMiddle
         assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
-        assetValue.attributedText = WUtils.dpAssetValue(geckoId, available, decimal, assetValue.font)
+        WDP.dpAssetValue(geckoId, available, decimal, assetValue)
         onBindPriceView(geckoId)
     }
     
@@ -119,35 +119,36 @@ class AssetCell: UITableViewCell {
                 assetSymbol.text = bnbToken.original_symbol.uppercased()
                 assetDescription.text = bnbToken.name
                 assetAmount.attributedText = WDP.dpAmount(amount.stringValue, assetAmount.font!, 0, 6)
-                assetValue.attributedText = WUtils.dpAssetValue("bnb", amount, 0, assetValue.font)
+                WDP.dpAssetValue(BNB_GECKO_ID, amount, 0, assetValue)
+                onBindPriceView(BNB_GECKO_ID)
             }
             
-        } else if (chainConfig?.chainType == .OKEX_MAIN && balance?.balance_denom == OKEX_MAIN_DENOM) {
-            if let okToken = WUtils.getOkToken(OKEX_MAIN_DENOM) {
-                let amount = WUtils.getAllExToken(OKEX_MAIN_DENOM)
+        } else if (chainConfig?.chainType == .OKEX_MAIN && balance?.balance_denom == OKT_MAIN_DENOM) {
+            if let okToken = WUtils.getOkToken(OKT_MAIN_DENOM) {
+                let amount = WUtils.getAllExToken(OKT_MAIN_DENOM)
                 assetImg.image = UIImage(named: "tokenOkc")
                 assetSymbol.text = okToken.symbol!.uppercased()
                 assetDescription.text = okToken.description
                 assetAmount.attributedText = WDP.dpAmount(amount.stringValue, assetAmount.font!, 0, 6)
-                assetValue.attributedText = WUtils.dpAssetValue("okt", amount, 0, assetValue.font)
+                WDP.dpAssetValue(OKT_GECKO_ID, amount, 0, assetValue)
+                onBindPriceView(OKT_GECKO_ID)
             }
         }
-        onBindPriceView(balance!.balance_denom)
     }
     
     func onBindEtcCoin(_ chainConfig: ChainConfig?, _ balance: Balance?) {
         if (chainConfig == nil || balance == nil) { return }
         if (chainConfig?.chainType == .BINANCE_MAIN) {
             if let bnbToken = BaseData.instance.bnbToken(balance!.balance_denom) {
-                assetImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + bnbToken.original_symbol + ".png")!)
+                assetImg.af_setImage(withURL: bnbToken.assetImg())
                 assetSymbol.text = bnbToken.original_symbol.uppercased()
                 assetDescription.text = bnbToken.name
                 
                 let tokenAmount = BaseData.instance.allBnbTokenAmount(balance!.balance_denom)
                 let convertAmount = WUtils.bnbConvertAmount(balance!.balance_denom)
                 assetAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, assetAmount.font, 0, 6)
-                assetValue.attributedText = WUtils.dpAssetValue("bnb", convertAmount, 0, assetValue.font)
-                assetPrice.attributedText = WUtils.dpBnbTokenPrice(balance!.balance_denom, assetPrice.font)
+                WDP.dpAssetValue(BNB_GECKO_ID, convertAmount, 0, assetValue)
+                WDP.dpBnbTokenPrice(balance!.balance_denom, assetPrice)
                 assetPriceChange.text = ""
             }
             
@@ -159,7 +160,7 @@ class AssetCell: UITableViewCell {
                 
                 let tokenAmount = WUtils.getAllExToken(balance!.balance_denom)
                 assetAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, assetAmount.font, 0, 6)
-                assetValue.attributedText = WUtils.dpAssetValue("okt", NSDecimalNumber.zero, 0, assetValue.font)
+                WDP.dpAssetValue(OKT_GECKO_ID, NSDecimalNumber.zero, 0, assetValue)
                 assetPrice.text = "-"
                 assetPriceChange.text = ""
             }
@@ -167,8 +168,8 @@ class AssetCell: UITableViewCell {
     }
     
     func onBindPriceView(_ geckoId: String) {
-        assetPrice.attributedText = WUtils.dpPrice(geckoId, assetPrice.font)
-        assetPriceChange.attributedText = WUtils.dpPriceChange(geckoId, assetPriceChange.font)
+        WDP.dpPrice(geckoId, assetPrice)
+        WDP.dpPriceChanged(geckoId, assetPriceChange)
         
         let changePrice = WUtils.priceChange(geckoId)
         WDP.setPriceColor(assetPriceChange, changePrice)

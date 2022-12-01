@@ -49,7 +49,7 @@ class ChainStarname: ChainConfig {
     var lcdUrl = "https://lcd-starname-app.cosmostation.io/"
     var apiUrl = "https://api-starname.cosmostation.io/"
     var explorerUrl = MintscanUrl + "starname/"
-    var priceUrl = CoingeckoUrl + "starname"
+    var priceUrl = GeckoUrl + "starname"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

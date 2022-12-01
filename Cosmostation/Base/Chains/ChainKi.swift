@@ -49,7 +49,7 @@ class ChainKi: ChainConfig {
     var lcdUrl = "https://lcd-ki-chain-app.cosmostation.io/"
     var apiUrl = "https://api-ki-chain.cosmostation.io/"
     var explorerUrl = MintscanUrl + "ki-chain/"
-    var priceUrl = CoingeckoUrl + "ki"
+    var priceUrl = GeckoUrl + "ki"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

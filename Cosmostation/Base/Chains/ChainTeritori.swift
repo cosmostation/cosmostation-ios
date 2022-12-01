@@ -49,7 +49,7 @@ class ChainTeritori: ChainConfig {
     var lcdUrl = "https://lcd-teritori-app.cosmostation.io/"
     var apiUrl = "https://api-teritori.cosmostation.io/"
     var explorerUrl = MintscanUrl + "teritori/"
-    var priceUrl = CoingeckoUrl + "teritori"
+    var priceUrl = GeckoUrl + "teritori"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
