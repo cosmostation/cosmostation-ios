@@ -60,19 +60,19 @@ class WalletIrisCell: UITableViewCell {
     func updateView(_ account: Account?, _ chainConfig: ChainConfig?) {
         if (account == nil || chainConfig == nil) { return }
         let stakingDenom = chainConfig!.stakeDenom
-        guard let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) else {
-            return
-        }
         
         let totalIris = WUtils.getAllMainAsset(stakingDenom)
         denomTitle.text = chainConfig!.stakeSymbol
         totalAmount.attributedText = WDP.dpAmount(totalIris.stringValue, totalAmount.font!, 6, 6)
-        WDP.dpAssetValue(msAsset.coinGeckoId, totalIris, 6, totalValue)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, 6, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)
         rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(stakingDenom), rewardAmount.font, 6, 6)
         BaseData.instance.updateLastTotal(account, totalIris.multiplying(byPowerOf10: -6).stringValue)
+        
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) {
+            WDP.dpAssetValue(msAsset.coinGeckoId, totalIris, 6, totalValue)
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

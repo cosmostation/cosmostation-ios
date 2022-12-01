@@ -69,9 +69,6 @@ class WalletSifCell: UITableViewCell {
     func updateView(_ account: Account?, _ chainConfig: ChainConfig?) {
         if (account == nil || chainConfig == nil) { return }
         let stakingDenom = chainConfig!.stakeDenom
-        guard let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) else {
-            return
-        }
         
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 18, 6)
@@ -81,6 +78,10 @@ class WalletSifCell: UITableViewCell {
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 18, 6)
         rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(stakingDenom), rewardAmount.font, 18, 6)
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -18).stringValue)
+        
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) {
+            WDP.dpAssetValue(msAsset.coinGeckoId, totalToken, 18, totalValue)
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

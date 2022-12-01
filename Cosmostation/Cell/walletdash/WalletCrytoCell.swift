@@ -69,13 +69,9 @@ class WalletCrytoCell: UITableViewCell {
     func updateView(_ account: Account?, _ chainConfig: ChainConfig?) {
         if (account == nil || chainConfig == nil) { return }
         let stakingDenom = chainConfig!.stakeDenom
-        guard let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) else {
-            return
-        }
         
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 8, 6)
-        WDP.dpAssetValue(msAsset.coinGeckoId, totalToken, 8, totalValue)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, 8, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 8, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 8, 6)
@@ -87,6 +83,10 @@ class WalletCrytoCell: UITableViewCell {
             vestingAmount.attributedText = WDP.dpAmount(BaseData.instance.getVesting_gRPC(stakingDenom), vestingAmount.font!, 8, 6)
         }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -8).stringValue)
+        
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) {
+            WDP.dpAssetValue(msAsset.coinGeckoId, totalToken, 8, totalValue)
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -917,7 +917,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Pricefeed_V1beta1_QueryPricesRequest.init()
                 if let response = try? Kava_Pricefeed_V1beta1_QueryClient(channel: channel).prices(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("onFetchgRPCPrices ", response.prices)
+//                    print("onFetchgRPCPrices ", response.prices)
                     BaseData.instance.mKavaPrices_gRPC = response.prices
                 }
                 try channel.close().wait()

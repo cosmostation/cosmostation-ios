@@ -75,8 +75,9 @@ class WalletOkCell: UITableViewCell {
         lockedAmount.attributedText = WDP.dpAmount(locked.stringValue, lockedAmount.font, 0, 6)
         depositAmount.attributedText = WDP.dpAmount(deposit.stringValue, depositAmount.font, 0, 6)
         withdrawAmount.attributedText = WDP.dpAmount(withdraw.stringValue, withdrawAmount.font, 0, 6)
-        WDP.dpAssetValue(OKT_GECKO_ID, total, 0, totalValue)
         BaseData.instance.updateLastTotal(account, total.stringValue)
+        
+        WDP.dpAssetValue(OKT_GECKO_ID, total, 0, totalValue)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
