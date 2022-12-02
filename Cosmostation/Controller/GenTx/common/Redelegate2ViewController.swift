@@ -59,7 +59,7 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
             cell?.valjailedImg.layer.borderColor = UIColor.font04.cgColor
         }
         
-        cell?.valPowerLabel.attributedText = WDP.dpAmount(validator.tokens, cell!.valPowerLabel.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
+        cell?.valPowerLabel.attributedText = WDP.dpAmount(validator.tokens, cell!.valPowerLabel.font, chainConfig!.divideDecimal, 6)
         cell?.valCommissionLabel.attributedText = WUtils.getDpEstAprCommission(cell!.valCommissionLabel.font, NSDecimalNumber.init(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18), pageHolderVC.chainType!)
         if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {
             cell?.valImg.af_setImage(withURL: url)

@@ -148,7 +148,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
             self.onShowAddMenomicDialog()
             return
         }
-        if (selectedChainConfig.chainType == .FETCH_MAIN) {
+        if (selectedChainConfig.chainType == .FETCH_MAIN || selectedChainConfig.chainType == .ONOMY_MAIN) {
             self.onShowToast("Disabled")
             return
         }
