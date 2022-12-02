@@ -24,7 +24,11 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     var refresher: UIRefreshControl!
     var mBnbHistories = Array<BnbHistory>()
     var mOkHistories = Array<OKTransactionList>()
-    var mApiCustomNewHistories = Array<ApiHistoryNewCustom>()
+    
+    var mApiHistories = Array<ApiHistoryNewCustom>()
+    var mApiHistoyID: Int64 = 0
+    var mApiHasMore = false
+    let mApiBatchCnt = 30
     
     
     override func viewDidLoad() {
@@ -110,7 +114,10 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         } else if (chainType == ChainType.OKEX_MAIN) {
             onFetchOkHistory(account!.account_address)
         } else {
-            onFetchNewApiHistoryCustom(account!.account_address)
+            mApiHistories.removeAll()
+            mApiHistoyID = 0
+            mApiHasMore = false
+            onFetchNewApiHistoryCustom(account!.account_address, mApiHistoyID)
         }
     }
     
@@ -132,7 +139,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         } else if (chainType == ChainType.OKEX_MAIN) {
             cntString = String(self.mOkHistories.count)
         } else {
-            cntString = String(self.mApiCustomNewHistories.count)
+            cntString = String(self.mApiHistories.count)
         }
         view.headerCntLabel.text = cntString
         return view
@@ -148,7 +155,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             } else if (chainType == .OKEX_MAIN) {
                 return self.mOkHistories.count
             } else {
-                return self.mApiCustomNewHistories.count
+                return self.mApiHistories.count
             }
         }
     }
@@ -170,7 +177,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
-                cell?.bindHistoryView(chainConfig!, mApiCustomNewHistories[indexPath.row], account!.account_address)
+                cell?.bindHistoryView(chainConfig!, mApiHistories[indexPath.row], account!.account_address)
                 return cell!
             }
         }
@@ -197,10 +204,21 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             self.onShowSafariWeb(url)
             
         } else {
-            let history = mApiCustomNewHistories[indexPath.row]
+            let history = mApiHistories[indexPath.row]
             let link = WUtils.getTxExplorer(chainConfig, history.data!.txhash!)
             guard let url = URL(string: link) else { return }
             self.onShowSafariWeb(url)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if (chainConfig?.isGrpc == true) {
+            if indexPath.row == self.mApiHistories.count - 1 {
+                if (mApiHasMore == true) {
+                    mApiHasMore = false
+                    onFetchNewApiHistoryCustom(account!.account_address, mApiHistoyID)
+                }
+            }
         }
     }
     
@@ -265,19 +283,26 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.refresher.endRefreshing()
     }
     
-    func onFetchNewApiHistoryCustom(_ address:String) {
+    func onFetchNewApiHistoryCustom(_ address: String, _ id: Int64) {
         let url = BaseNetWork.accountHistory(chainType!, address)
-        let request = Alamofire.request(url, method: .get, parameters: ["limit":"50"], encoding: URLEncoding.default, headers: [:])
+        let request = Alamofire.request(url, method: .get, parameters: ["limit":String(self.mApiBatchCnt), "from":String(id)], encoding: URLEncoding.default, headers: [:])
+//        print("onFetchNewApiHistoryCustom ", request.request?.url)
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                self.mApiCustomNewHistories.removeAll()
                 if let histories = res as? Array<NSDictionary> {
                     for rawHistory in histories {
-                        self.mApiCustomNewHistories.append(ApiHistoryNewCustom.init(rawHistory))
+                        self.mApiHistories.append(ApiHistoryNewCustom.init(rawHistory))
                     }
+                    self.mApiHistoyID = self.mApiHistories.last?.header?.id ?? 0
+                    self.mApiHasMore = histories.count >= self.mApiBatchCnt
+                    
+                } else {
+                    self.mApiHasMore = false
+                    self.mApiHistoyID = 0
                 }
-                if (self.mApiCustomNewHistories.count > 0) {
+                
+                if (self.mApiHistories.count > 0) {
                     self.historyTableView.reloadData()
                     self.emptyLabel.isHidden = true
                 } else {
