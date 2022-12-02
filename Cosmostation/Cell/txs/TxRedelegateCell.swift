@@ -52,11 +52,11 @@ class TxRedelegateCell: TxCell {
             
             redelegatorLabel.text = msg.delegatorAddress
             fromValidatorLabel.text = msg.validatorSrcAddress
-            if let fValidator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validatorSrcAddress}).first {
+            if let fValidator = BaseData.instance.searchValidator(withAddress: msg.validatorSrcAddress) {
                 fromMonikerLabel.text = "(" + fValidator.description_p.moniker + ")"
             }
             toValidatorLabel.text = msg.validatorDstAddress
-            if let dValidator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validatorDstAddress}).first {
+            if let dValidator = BaseData.instance.searchValidator(withAddress: msg.validatorDstAddress) {
                 toMonikerLabel.text = "(" + dValidator.description_p.moniker + ")"
             }
             WDP.dpCoin(chainConfig, msg.amount.denom, msg.amount.amount, redelegateDenomLabel, redelegateAmountLabel)

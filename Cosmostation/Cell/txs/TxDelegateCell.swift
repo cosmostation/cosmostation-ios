@@ -49,7 +49,7 @@ class TxDelegateCell: TxCell {
         if let msg = try? Cosmos_Staking_V1beta1_MsgDelegate.init(serializedData: response.tx.body.messages[position].value) {
             delegatorLabel.text = msg.delegatorAddress
             validatorLabel.text = msg.validatorAddress
-            if let validator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validatorAddress}).first {
+            if let validator = BaseData.instance.searchValidator(withAddress: msg.validatorAddress) {
                 monikerLabel.text = "(" + validator.description_p.moniker + ")"
             }
             WDP.dpCoin(chainConfig, msg.amount.denom, msg.amount.amount, delegateDenomLabel, delegateAmountLabel)

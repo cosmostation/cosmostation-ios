@@ -46,7 +46,7 @@ class TxRewardCell: TxCell {
         let msg = try! Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.init(serializedData: response.tx.body.messages[position].value)
         delegatorLabel.text = msg.delegatorAddress
         validatorLabel.text = msg.validatorAddress
-        if let validator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validatorAddress}).first {
+        if let validator = BaseData.instance.searchValidator(withAddress: msg.validatorAddress) {
             monikerLabel.text = "(" + validator.description_p.moniker + ")"
         }
         
