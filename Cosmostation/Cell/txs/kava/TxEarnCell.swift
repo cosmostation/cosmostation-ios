@@ -31,7 +31,7 @@ class TxEarnCell: TxCell {
             txMsgTitleLabel.text = NSLocalizedString("tx_kava_earn_delegateDeposit2", comment: "")
             txSenderTitleLabel.text = "Depositor"
             txSenderLabel.text = msg.depositor
-            if let validator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validator}).first {
+            if let validator = BaseData.instance.searchValidator(withAddress: msg.validator) {
                 txValidatorLabel.text = "(" + validator.description_p.moniker + ")"
             }
             let coin = Coin.init(msg.amount.denom, msg.amount.amount)
@@ -43,7 +43,7 @@ class TxEarnCell: TxCell {
             txMsgTitleLabel.text = NSLocalizedString("tx_kava_earn_withdraw2", comment: "")
             txSenderTitleLabel.text = "From"
             txSenderLabel.text = msg.from
-            if let validator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validator}).first {
+            if let validator = BaseData.instance.searchValidator(withAddress: msg.validator) {
                 txValidatorLabel.text = "(" + validator.description_p.moniker + ")"
             }
             let coin = Coin.init(msg.amount.denom, msg.amount.amount)

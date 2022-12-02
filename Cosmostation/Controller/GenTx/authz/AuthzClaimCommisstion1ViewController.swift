@@ -52,7 +52,7 @@ class AuthzClaimCommisstion1ViewController: BaseViewController {
         WDP.dpCoin(chainConfig, mainCommision, commissionDenomLabel, commissionAmountLabel)
         
         let opAddress = WKey.getOpAddressFromAddress(pageHolderVC.mGranterData.address, chainConfig)
-        let validatorInfo = BaseData.instance.mAllValidators_gRPC.filter { $0.operatorAddress == opAddress }.first
+        let validatorInfo = BaseData.instance.searchValidator(withAddress: opAddress)
         commissionFromLabel.text = validatorInfo?.description_p.moniker
         
         commissionToAddressLabel.text = pageHolderVC.mRewardAddress
