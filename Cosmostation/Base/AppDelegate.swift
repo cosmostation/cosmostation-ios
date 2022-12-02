@@ -64,8 +64,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         Networking.configure(projectId: Bundle.main.WALLET_CONNECT_API_KEY, socketFactory: self)
         Pair.configure(metadata: metadata)
+#if DEBUG
         try? Pair.instance.cleanup()
         try? Sign.instance.cleanup()
+#endif
     }
     
     func requestToken() {
