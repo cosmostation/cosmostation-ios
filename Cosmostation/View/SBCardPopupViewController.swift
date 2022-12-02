@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol SBCardPopupContent: class {
-    weak var popupViewController: SBCardPopupViewController? {get set}
+    var popupViewController: SBCardPopupViewController? {get set}
     var allowsTapToDismissPopupCard: Bool {get}
     var allowsSwipeToDismissPopupCard: Bool {get}
 }
