@@ -26,8 +26,6 @@ class FarmDashCell: UITableViewCell {
     }
     
     func onBindView(_ myPools: Array<Osmosis_Gamm_Balancer_V1beta1_Pool>, _ lockUps: Array<Osmosis_Lockup_PeriodLock>) {
-        print("lockedCoins ", lockUps.count)
-        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         let nf = WUtils.getNumberFormatter(2)
         let now = Date.init().millisecondsSince1970
         
@@ -36,8 +34,7 @@ class FarmDashCell: UITableViewCell {
         var totalUnbondedValue = NSDecimalNumber.zero
         
         lockUps.forEach { lockup in
-            let lpCoin = Coin.init(lockup.coins[0].denom, lockup.coins[0].amount)
-            var lpCoinValue = NSDecimalNumber.zero
+            let lpCoinValue = NSDecimalNumber.zero
 //            if let matchedPool = myPools.filter({ $0.id == lpCoin.osmosisAmmPoolId() }).first {
 //                let totalShares = NSDecimalNumber.init(string: matchedPool.totalShares.amount)
 //                let myShare = NSDecimalNumber.init(string: lpCoin.amount)
