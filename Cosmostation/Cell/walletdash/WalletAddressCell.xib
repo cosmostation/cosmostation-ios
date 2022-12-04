@@ -39,7 +39,7 @@
                                                     <constraint firstAttribute="width" constant="22" id="NYf-67-z7X"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="address" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3i-OG-E97">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="address" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3i-OG-E97">
                                                 <rect key="frame" x="26" y="2.5" width="442" height="17.5"/>
                                                 <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="13"/>
                                                 <color key="textColor" name="_font05"/>
@@ -56,7 +56,7 @@
                                             <constraint firstItem="R4D-UP-kIZ" firstAttribute="centerY" secondItem="cXg-Tf-sq2" secondAttribute="centerY" id="ycZ-fy-slW"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(eth address)" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00m-4f-bRo">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(eth address)" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00m-4f-bRo">
                                         <rect key="frame" x="0.0" y="24" width="468" height="11"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="11" id="rap-DW-MJR"/>
@@ -75,7 +75,7 @@
                                     <constraint firstItem="cXg-Tf-sq2" firstAttribute="leading" secondItem="Iug-0B-MoB" secondAttribute="leading" id="wNz-aU-dbK"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wX3-Y8-zcT" userLabel="Value">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wX3-Y8-zcT" userLabel="Value">
                                 <rect key="frame" x="219" y="55" width="54.5" height="22"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <color key="textColor" name="_font05"/>

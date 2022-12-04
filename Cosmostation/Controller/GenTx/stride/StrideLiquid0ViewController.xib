@@ -196,8 +196,8 @@
                                 <constraint firstAttribute="height" constant="32" id="TF8-CZ-jSq"/>
                             </constraints>
                         </stackView>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Baa-al-jZr" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
-                            <rect key="frame" x="56" y="30.333333333333329" width="298" height="42"/>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Baa-al-jZr" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="56" y="29.333333333333329" width="298" height="42"/>
                             <color key="backgroundColor" name="_font02"/>
                             <color key="tintColor" name="_font05"/>
                             <constraints>

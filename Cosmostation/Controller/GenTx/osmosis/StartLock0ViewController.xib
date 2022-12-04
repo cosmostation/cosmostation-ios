@@ -184,7 +184,7 @@
                             <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FEL-8t-Jcz" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FEL-8t-Jcz" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
                             <rect key="frame" x="12" y="12" width="358" height="42"/>
                             <color key="backgroundColor" name="_font02"/>
                             <color key="tintColor" name="_font05"/>

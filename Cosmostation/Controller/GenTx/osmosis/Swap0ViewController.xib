@@ -227,7 +227,7 @@
                             <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tmj-bn-A4w" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tmj-bn-A4w" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
                             <rect key="frame" x="56" y="29.5" width="322" height="42"/>
                             <color key="backgroundColor" name="_font02"/>
                             <color key="tintColor" name="_font05"/>

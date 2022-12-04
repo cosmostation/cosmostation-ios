@@ -28,13 +28,13 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8C-5O-EJt">
                     <rect key="frame" x="18" y="64" width="378" height="25.5"/>
-                    <string key="text">With watch mode, you can check the status of an account. 
+                    <string key="text">With watch mode, you can check the status of an account.
 You need to add the correct mnemonics for the wallet to enable transactions.</string>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert address." adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AY9-Pu-5bO" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert address." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AY9-Pu-5bO" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="16" y="101.5" width="382" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

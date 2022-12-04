@@ -44,7 +44,7 @@
                             <color key="textColor" name="_font04"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hP0-Ni-htr">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hP0-Ni-htr">
                             <rect key="frame" x="16" y="80.5" width="350" height="16.5"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                             <color key="textColor" name="_font05"/>
