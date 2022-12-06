@@ -26,7 +26,6 @@ class HardListMyStatusCell: UITableViewCell {
     
     func onBindMyHard(_ hardParam: Kava_Hard_V1beta1_Params?, _ myDeposits: Array<Coin>?, _ myBorrows: Array<Coin>?) {
         if (hardParam == nil) { return }
-        let chainConfig = ChainKava.init(.KAVA_MAIN)
         var totalDepositValue = NSDecimalNumber.zero
         var totalLTVValue = NSDecimalNumber.zero
         myDeposits?.forEach({ coin in

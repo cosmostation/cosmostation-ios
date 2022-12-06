@@ -129,7 +129,6 @@ public class WDP {
         nf.numberStyle = .decimal
         
         let number = WUtils.plainStringToDecimal(amount)
-//        print("number ", number)
         var formatted: String?
         if (number == NSDecimalNumber.zero) {
             nf.minimumSignificantDigits = Int(dpPoint) + 1
@@ -138,7 +137,6 @@ public class WDP {
             
         } else {
             let calNumber = number.multiplying(byPowerOf10: -Int16(inputPoint))
-//            print("calNumber ", calNumber)
             if (calNumber.compare(NSDecimalNumber.one).rawValue < 0) {
                 var temp = ""
                 let decimal = Array(String(calNumber.stringValue.split(separator: ".")[1]))
@@ -153,20 +151,18 @@ public class WDP {
                 
             } else {
                 let count = calNumber.multiplying(by: NSDecimalNumber.one, withBehavior: WUtils.handler0Down).stringValue.count
-//                print("count ", count)
                 nf.minimumSignificantDigits = Int(dpPoint) + count
                 nf.maximumSignificantDigits = Int(dpPoint) + count
                 formatted = nf.string(from: calNumber)
             }
-            
-        }
-//        print("formatted ", formatted)
 
-        let added       = formatted
-        let endIndex    = added!.index(added!.endIndex, offsetBy: -dpPoint)
+        }
+
+        let added       = formatted!
+        let endIndex    = added.index(added.endIndex, offsetBy: Int(-dpPoint))
         
-        let preString   = added![..<endIndex]
-        let postString  = added![endIndex...]
+        let preString   = added[..<endIndex]
+        let postString  = added[endIndex...]
         
         let preAttrs = [NSAttributedString.Key.font : font]
         let postAttrs = [NSAttributedString.Key.font : font.withSize(CGFloat(Int(Double(font.pointSize) * 0.85)))]

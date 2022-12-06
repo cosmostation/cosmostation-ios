@@ -940,10 +940,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                             self.onFetchFinished()
                             return
                     }
-                    let kavaIncentiveParam = KavaIncentiveParam.init(responseData)
-//                    BaseData.instance.mIncentiveParam = kavaIncentiveParam.result
-//                    print("mIncentiveParam ", BaseData.instance.mIncentiveParam)
-                    
                 case .failure(let error):
                     print("onFetchIncentiveParam ", error)
                 }
@@ -1093,7 +1089,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             return
         }
         let request = Alamofire.request(BaseNetWork.mintscanErc20Tokens(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        print("onFetchMintscanErc20 ", request.request?.url)
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -1121,7 +1116,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchErc20Balance(_ web3: web3?, _ contAddress: String) {
-        print("onFetchErc20Balance ", web3?.provider, "  ", contAddress)
         let contractAddress = EthereumAddress.init(contAddress)
         let ethAddress = EthereumAddress.init(WKey.convertBech32ToEvm(mAccount.account_address))
         let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)

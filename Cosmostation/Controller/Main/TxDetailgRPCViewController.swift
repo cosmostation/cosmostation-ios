@@ -628,7 +628,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 }
                 completion(txHash)
                 
-            case .failure(let error):
+            case .failure:
                 completion(nil)
             }
         }
