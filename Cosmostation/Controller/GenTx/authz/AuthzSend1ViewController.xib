@@ -28,7 +28,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ya2-qn-fsB">
                     <rect key="frame" x="0.0" y="44" width="414" height="150"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="StarName or Recipient Address" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Im-M6-7pv" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="StarName or Recipient Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Im-M6-7pv" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
                             <rect key="frame" x="16" y="10" width="382" height="50"/>
                             <color key="backgroundColor" name="_font02"/>
                             <color key="tintColor" name="_font05"/>
