@@ -35,7 +35,7 @@
                         <constraint firstAttribute="width" constant="32" id="OoU-cN-bhr"/>
                     </constraints>
                 </imageView>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qbs-1i-FNY" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qbs-1i-FNY" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="60" y="52" width="338" height="50"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>

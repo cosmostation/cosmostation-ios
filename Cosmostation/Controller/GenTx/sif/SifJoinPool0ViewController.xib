@@ -101,7 +101,7 @@
                             <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xe6-6d-g8T" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xe6-6d-g8T" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
                             <rect key="frame" x="54" y="8" width="324" height="38"/>
                             <color key="backgroundColor" name="_font02"/>
                             <color key="tintColor" name="_font05"/>
@@ -240,7 +240,7 @@
                             <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U2J-dw-tAB" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U2J-dw-tAB" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
                             <rect key="frame" x="54" y="122" width="324" height="38"/>
                             <color key="backgroundColor" name="_font02"/>
                             <color key="tintColor" name="_font05"/>

@@ -55,7 +55,7 @@
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pnF-jx-LVp" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pnF-jx-LVp" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="62" y="52" width="336" height="50"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>
@@ -242,7 +242,7 @@
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3uP-uL-e0g" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3uP-uL-e0g" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="62" y="134" width="336" height="50"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>
