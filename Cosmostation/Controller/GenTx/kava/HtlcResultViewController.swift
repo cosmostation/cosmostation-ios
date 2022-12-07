@@ -162,7 +162,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             cell?.randomHashLabel.text = msg?.value.random_number_hash
             
         } else if (self.chainType == ChainType.KAVA_MAIN) {
-            let chainConfig = ChainKava.init(.KAVA_MAIN)
             cell?.blockHeightLabel.text = String(mSendTxInfogRPC!.txResponse.height)
             cell?.txHashLabel.text = mSendTxInfogRPC?.txResponse.txhash
             cell?.memoLabel.text = mSendTxInfogRPC?.tx.body.memo

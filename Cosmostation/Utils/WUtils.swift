@@ -1138,7 +1138,7 @@ public class WUtils {
                             
     static func onParseStridePeriodicRemainVestingsAmountByDenom(_ vestingAccount: Stride_Vesting_StridePeriodicVestingAccount, _ denom: String) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
-        var vpList = onParseStridePeriodicRemainVestingsByDenom(vestingAccount, denom)
+        let vpList = onParseStridePeriodicRemainVestingsByDenom(vestingAccount, denom)
         vpList.forEach { (vp) in
             vp.amount.forEach { (coin) in
                 if (coin.denom == denom) {
