@@ -29,20 +29,20 @@ class TxEvmCell: TxCell {
     func onBindEvm(_ chainConfig: ChainConfig, _ txDetail: TransactionDetails?, _ txReceipt: TransactionReceipt?) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chainConfig.chainColor
-        if (txDetail == nil || txReceipt == nil) { return }
+        guard let txDetail = txDetail, let txReceipt = txReceipt else { return }
         
-        if (txReceipt?.status == .ok) {
+        if (txReceipt.status == .ok) {
             resultImg.image = UIImage(named: "successIc")
             resultLabel.text = NSLocalizedString("tx_success", comment: "")
         } else {
             resultImg.image = UIImage(named: "failIc")
             resultLabel.text = NSLocalizedString("tx_fail", comment: "")
         }
-        blockLabel.text = String(txDetail!.blockNumber ?? "0")
-        gasLabel.text = String(txReceipt!.gasUsed) + " / " + String(txDetail!.transaction.gasLimit)
-        typeLabel.text = txDetail?.transaction.type.description
-        contactLabel.text = txDetail?.transaction.to.address
-        dataLabel.text = txDetail?.transaction.data.toHexString()
+        blockLabel.text = String(txDetail.blockNumber ?? "0")
+        gasLabel.text = String(txReceipt.gasUsed) + " / " + String(txDetail.transaction.parameters.gasLimit ?? "")
+        typeLabel.text = txDetail.transaction.type.description
+        contactLabel.text = txDetail.transaction.to.address
+        dataLabel.text = txDetail.transaction.data.toHexString()
     }
     
 }
