@@ -33,12 +33,14 @@ extension UITextField {
             return false
         }
         if let index = text.range(of: ".")?.upperBound {
-            if text.substring(from: index).count > displayDecimal - 1 && range.length == 0 {
+            let numDecimals = text[index...].count
+            if numDecimals >= displayDecimal && range.length == 0 {
                 return false
             }
         }
         if let index = text.range(of: ",")?.upperBound {
-            if text.substring(from: index).count > displayDecimal - 1 && range.length == 0 {
+            let numDecimals = text[index...].count
+            if numDecimals >= displayDecimal && range.length == 0 {
                 return false
             }
         }
