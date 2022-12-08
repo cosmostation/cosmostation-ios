@@ -199,7 +199,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCStarNameConfig()
             
         } else if (self.mChainType == .OSMOSIS_MAIN) {
-            self.mFetchCnt = 10
+            self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
             self.onFetchgRPCBondedValidators(0)
@@ -211,7 +211,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-            self.onFetchgRPCOsmoPools()
+//            self.onFetchgRPCOsmoPools()
             
         } else if (self.mChainType == .STARGAZE_MAIN) {
             self.mFetchCnt = 9
