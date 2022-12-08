@@ -22,7 +22,7 @@ class ChainIxo: ChainConfig {
     var chainTitle2 = "IXO"
     var chainDBName = CHAIN_IXO_S
     var chainAPIName = "ixo"
-    var chainIdPrefix = "impacthub-"
+    var chainIdPrefix = "ixo-"
     
     
     var stakeDenomImg = UIImage(named: "tokenIxo")
