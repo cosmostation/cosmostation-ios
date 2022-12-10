@@ -24,7 +24,7 @@ class Swap3ViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var btnConfirm: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    var mPool: Osmosis_Gamm_Balancer_V1beta1_Pool!
+//    var mPool: Osmosis_Gamm_Balancer_V1beta1_Pool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ class Swap3ViewController: BaseViewController, PasswordViewDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        self.mPool = pageHolderVC!.mPool
+//        self.mPool = pageHolderVC!.mPool
     }
     
     override func enableUserInteraction() {
@@ -42,11 +42,11 @@ class Swap3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
-        WDP.dpCoin(chainConfig, pageHolderVC.mSwapInDenom!, pageHolderVC.mSwapInAmount!.stringValue, swapInDenomLabel, swapInAmountLabel)
-        WDP.dpCoin(chainConfig, pageHolderVC.mSwapOutDenom!, pageHolderVC.mSwapOutAmount!.stringValue, swapOutDenomLabel, swapOutAmountLabel)
-        swapFeeLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: mPool.poolParams.swapFee).multiplying(byPowerOf10: -16), swapFeeLabel.font)
-        mMemoLabel.text = pageHolderVC.mMemo
+//        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
+//        WDP.dpCoin(chainConfig, pageHolderVC.mSwapInDenom!, pageHolderVC.mSwapInAmount!.stringValue, swapInDenomLabel, swapInAmountLabel)
+//        WDP.dpCoin(chainConfig, pageHolderVC.mSwapOutDenom!, pageHolderVC.mSwapOutAmount!.stringValue, swapOutDenomLabel, swapOutAmountLabel)
+//        swapFeeLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: mPool.poolParams.swapFee).multiplying(byPowerOf10: -16), swapFeeLabel.font)
+//        mMemoLabel.text = pageHolderVC.mMemo
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {
@@ -93,7 +93,7 @@ class Swap3ViewController: BaseViewController, PasswordViewDelegate {
         DispatchQueue.global().async {
             var swapRoutes = Array<Osmosis_Gamm_V1beta1_SwapAmountInRoute>()
             let swapRoute = Osmosis_Gamm_V1beta1_SwapAmountInRoute.with {
-                $0.poolID = self.pageHolderVC.mPool!.id
+//                $0.poolID = self.pageHolderVC.mPool!.id
                 $0.tokenOutDenom = self.pageHolderVC.mSwapOutDenom!
             }
             swapRoutes.append(swapRoute)

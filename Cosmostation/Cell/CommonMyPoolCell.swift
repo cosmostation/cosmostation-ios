@@ -42,7 +42,7 @@ class CommonMyPoolCell: UITableViewCell {
         availableCoin1AmountLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
     }
     
-    func onBindOsmoPoolView(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) {
+//    func onBindOsmoPoolView(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) {
 //        //dp pool info
 //        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
 //        poolCardView.backgroundColor = UIColor.init(named: "osmosis_bg")
@@ -100,7 +100,7 @@ class CommonMyPoolCell: UITableViewCell {
 //        availableCoin1DenomLabel.adjustsFontSizeToFitWidth = true
 //        availableCoin0AmountLabel.attributedText = WDP.dpAmount(availableCoin0, availableCoin0AmountLabel.font, coin0Decimal, 6)
 //        availableCoin1AmountLabel.attributedText = WDP.dpAmount(availableCoin1, availableCoin1AmountLabel.font, coin1Decimal, 6)
-    }
+//    }
     
     
     func onBindKavaPoolView(_ pool: Kava_Swap_V1beta1_PoolResponse, _ myDeposit: Kava_Swap_V1beta1_DepositResponse) {

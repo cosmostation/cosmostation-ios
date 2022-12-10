@@ -66,16 +66,16 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         var inputAssetWeight = NSDecimalNumber.zero
         var outputAssetAmount = NSDecimalNumber.zero
         var outputAssetWeight = NSDecimalNumber.zero
-        pageHolderVC.mPool!.poolAssets.forEach { poolAsset in
-            if (poolAsset.token.denom == pageHolderVC.mSwapInDenom) {
-                inputAssetAmount = NSDecimalNumber.init(string: poolAsset.token.amount)
-                inputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
-            }
-            if (poolAsset.token.denom == pageHolderVC.mSwapOutDenom) {
-                outputAssetAmount = NSDecimalNumber.init(string: poolAsset.token.amount)
-                outputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
-            }
-        }
+//        pageHolderVC.mPool!.poolAssets.forEach { poolAsset in
+//            if (poolAsset.token.denom == pageHolderVC.mSwapInDenom) {
+//                inputAssetAmount = NSDecimalNumber.init(string: poolAsset.token.amount)
+//                inputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
+//            }
+//            if (poolAsset.token.denom == pageHolderVC.mSwapOutDenom) {
+//                outputAssetAmount = NSDecimalNumber.init(string: poolAsset.token.amount)
+//                outputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
+//            }
+//        }
         swapRate = outputAssetAmount.multiplying(by: inputAssetWeight).dividing(by: inputAssetAmount, withBehavior: WUtils.handler18).dividing(by: outputAssetWeight, withBehavior: WUtils.handler18)
         print("swapRate ", swapRate)
     }
@@ -189,29 +189,29 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
     
     
     func onFetchGammPool(_ poolId: String) {
-        DispatchQueue.global().async {
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
-            
-            do {
-                let req = Osmosis_Gamm_V1beta1_QueryPoolRequest.with {
-                    $0.poolID = UInt64(poolId)!
-                }
-                let response = try Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pool(req, callOptions: BaseNetWork.getCallOptions()).response.wait()
-                self.pageHolderVC.mPool = try! Osmosis_Gamm_Balancer_V1beta1_Pool.init(serializedData: response.pool.value)
-                
-                
-            } catch {
-                print("onFetchGammPools failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: {
-                self.loadingImg.stopAnimating()
-                self.loadingImg.isHidden = true
-                self.onInitView()
-            });
-        }
+//        DispatchQueue.global().async {
+//            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+//            defer { try! group.syncShutdownGracefully() }
+//            
+//            let channel = BaseNetWork.getConnection(self.chainType!, group)!
+//            defer { try! channel.close().wait() }
+//            
+//            do {
+//                let req = Osmosis_Gamm_V1beta1_QueryPoolRequest.with {
+//                    $0.poolID = UInt64(poolId)!
+//                }
+//                let response = try Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pool(req, callOptions: BaseNetWork.getCallOptions()).response.wait()
+//                self.pageHolderVC.mPool = try! Osmosis_Gamm_Balancer_V1beta1_Pool.init(serializedData: response.pool.value)
+//                
+//                
+//            } catch {
+//                print("onFetchGammPools failed: \(error)")
+//            }
+//            DispatchQueue.main.async(execute: {
+//                self.loadingImg.stopAnimating()
+//                self.loadingImg.isHidden = true
+//                self.onInitView()
+//            });
+//        }
     }
 }

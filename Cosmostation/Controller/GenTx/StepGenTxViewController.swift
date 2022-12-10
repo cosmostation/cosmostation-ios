@@ -121,12 +121,12 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mSwapOutDenom: String?
     var mSwapInAmount: NSDecimalNumber?
     var mSwapOutAmount: NSDecimalNumber?
-    var mPool: Osmosis_Gamm_Balancer_V1beta1_Pool?
+//    var mPool: Osmosis_Gamm_Balancer_V1beta1_Pool?
     var mPoolCoin0: Coin?
     var mPoolCoin1: Coin?
     var mLPCoin: Coin?
     var mLockupDuration: Int64?
-    var mLockups: Array<Osmosis_Lockup_PeriodLock>?
+//    var mLockups: Array<Osmosis_Lockup_PeriodLock>?
     
     
     var mSifPool: Sifnode_Clp_V1_Pool?
@@ -374,29 +374,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     Swap3ViewController(nibName: "Swap3ViewController", bundle: nil)]
             
-        } else if (mType == TASK_TYPE_OSMOSIS_JOIN_POOL) {
-            return [JoinPool0ViewController(nibName: "JoinPool0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    JoinPool3ViewController(nibName: "JoinPool3ViewController", bundle: nil)]
-            
-        } else if (mType == TASK_TYPE_OSMOSIS_EXIT_POOL) {
-            return [ExitPool0ViewController(nibName: "ExitPool0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    ExitPool3ViewController(nibName: "ExitPool3ViewController", bundle: nil)]
-            
-        } else if (mType == TASK_TYPE_OSMOSIS_LOCK) {
-            return [StartLock0ViewController(nibName: "StartLock0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    StartLock3ViewController(nibName: "StartLock3ViewController", bundle: nil)]
-            
-        } else if (mType == TASK_TYPE_OSMOSIS_BEGIN_UNLCOK) {
-            return [StartUnbonding0ViewController(nibName: "StartUnbonding0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    StartUnbonding3ViewController(nibName: "StartUnbonding3ViewController", bundle: nil)]
         }
         
         //SIF

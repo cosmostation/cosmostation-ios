@@ -156,7 +156,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mStarNameFee_gRPC = nil
         BaseData.instance.mStarNameConfig_gRPC = nil
         
-        BaseData.instance.mOsmoPools_gRPC.removeAll()
+//        BaseData.instance.mOsmoPools_gRPC.removeAll()
         
         if (mChainType == .BINANCE_MAIN) {
             self.mFetchCnt = 6
@@ -872,24 +872,24 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchgRPCOsmoPools() {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 1000 }
-                let req = Osmosis_Gamm_V1beta1_QueryPoolsRequest.with { $0.pagination = page }
-                if let response = try? Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    response.pools.forEach { pool in
-                        let rawPool = try! Osmosis_Gamm_Balancer_V1beta1_Pool.init(serializedData: pool.value)
-                        BaseData.instance.mOsmoPools_gRPC.append(rawPool)
-                    }
-                }
-                try channel.close().wait()
-                
-            } catch {
-                print("onFetchgRPCOsmoPools failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
-        }
+//        DispatchQueue.global().async {
+//            do {
+//                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+//                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 1000 }
+//                let req = Osmosis_Gamm_V1beta1_QueryPoolsRequest.with { $0.pagination = page }
+//                if let response = try? Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+//                    response.pools.forEach { pool in
+//                        let rawPool = try! Osmosis_Gamm_Balancer_V1beta1_Pool.init(serializedData: pool.value)
+//                        BaseData.instance.mOsmoPools_gRPC.append(rawPool)
+//                    }
+//                }
+//                try channel.close().wait()
+//
+//            } catch {
+//                print("onFetchgRPCOsmoPools failed: \(error)")
+//            }
+//            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+//        }
     }
     
     //for KAVA

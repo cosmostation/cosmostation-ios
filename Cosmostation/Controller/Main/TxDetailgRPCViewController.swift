@@ -290,50 +290,11 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                     
                 }
                 
-                else if (msg.typeURL.contains(Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPool.protoMessageName)) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxCreatePoolCell") as? TxCell
-                    cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
-                    return cell!
-                    
-                } else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgJoinPool.protoMessageName)) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxJoinPoolCell") as? TxCell
-                    cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
-                    return cell!
-                    
-                } else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgExitPool.protoMessageName)) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxExitPoolCell") as? TxCell
-                    cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
-                    return cell!
-                    
-                } else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgSwapExactAmountIn.protoMessageName) || msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgSwapExactAmountOut.protoMessageName)) {
+                else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgSwapExactAmountIn.protoMessageName) || msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgSwapExactAmountOut.protoMessageName)) {
                     let cell = tableView.dequeueReusableCell(withIdentifier:"TxTokenSwapCell") as? TxCell
                     cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                     return cell!
                     
-                } else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgJoinSwapExternAmountIn.protoMessageName)) {
-                    
-                } else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgJoinSwapShareAmountOut.protoMessageName)) {
-                    
-                } else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgExitSwapExternAmountOut.protoMessageName)) {
-                    
-                } else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgExitSwapShareAmountIn.protoMessageName)) {
-                    
-                }
-                
-                else if (msg.typeURL.contains(Osmosis_Lockup_MsgLockTokens.protoMessageName)) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxLockTokenCell") as? TxCell
-                    cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
-                    return cell!
-                    
-                } else if (msg.typeURL == ("/" + Osmosis_Lockup_MsgBeginUnlocking.protoMessageName)) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxBeginUnlockTokenCell") as? TxCell
-                    cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
-                    return cell!
-                    
-                } else if (msg.typeURL == ("/" + Osmosis_Lockup_MsgBeginUnlockingAll.protoMessageName)) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxBeginUnlockAllTokensCell") as? TxCell
-                    cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
-                    return cell!
                 }
                 
                 else if (msg.typeURL.contains(Sifnode_Clp_V1_MsgAddLiquidity.protoMessageName)) {
