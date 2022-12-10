@@ -58,7 +58,7 @@ final class BaseData : NSObject{
     var mStarNameFee_gRPC: Starnamed_X_Configuration_V1beta1_Fees?
     var mStarNameConfig_gRPC: Starnamed_X_Configuration_V1beta1_Config?
     
-//    var mOsmoPools_gRPC = Array<Osmosis_Gamm_Balancer_V1beta1_Pool>()
+    var mSupportPools = Array<SupportPool>()
     
     var mSifDexPools_gRPC = Array<Sifnode_Clp_V1_Pool>()
     var mSifDexMyAssets_gRPC = Array<Sifnode_Clp_V1_Asset>()

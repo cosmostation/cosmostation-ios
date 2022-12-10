@@ -156,7 +156,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mStarNameFee_gRPC = nil
         BaseData.instance.mStarNameConfig_gRPC = nil
         
-//        BaseData.instance.mOsmoPools_gRPC.removeAll()
+        BaseData.instance.mSupportPools.removeAll()
         
         if (mChainType == .BINANCE_MAIN) {
             self.mFetchCnt = 6
@@ -199,7 +199,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCStarNameConfig()
             
         } else if (self.mChainType == .OSMOSIS_MAIN) {
-            self.mFetchCnt = 9
+            self.mFetchCnt = 10
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
             self.onFetchgRPCBondedValidators(0)
@@ -211,7 +211,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-//            self.onFetchgRPCOsmoPools()
+            self.onFetchSupportPools(self.mChainConfig)
             
         } else if (self.mChainType == .STARGAZE_MAIN) {
             self.mFetchCnt = 9
@@ -875,12 +875,18 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
 //        DispatchQueue.global().async {
 //            do {
 //                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-//                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 1000 }
+//                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
 //                let req = Osmosis_Gamm_V1beta1_QueryPoolsRequest.with { $0.pagination = page }
 //                if let response = try? Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
 //                    response.pools.forEach { pool in
-//                        let rawPool = try! Osmosis_Gamm_Balancer_V1beta1_Pool.init(serializedData: pool.value)
-//                        BaseData.instance.mOsmoPools_gRPC.append(rawPool)
+//                        if (pool.typeURL.contains(Osmosis_Gamm_V1beta1_Pool.protoMessageName)) {
+//                            let osmoPool = try! Osmosis_Gamm_V1beta1_Pool.init(serializedData: pool.value)
+//                            print("Osmosis_Gamm_V1beta1_Pool ", osmoPool.id)
+//
+//                        } else if (pool.typeURL.contains(Osmosis_Gamm_Poolmodels_Stableswap_V1beta1_Pool.protoMessageName)) {
+//                            let osmoPool = try! Osmosis_Gamm_Poolmodels_Stableswap_V1beta1_Pool.init(serializedData: pool.value)
+//                            print("Osmosis_Gamm_Poolmodels_Stableswap_V1beta1_Pool ", osmoPool.id)
+//                        }
 //                    }
 //                }
 //                try channel.close().wait()
@@ -893,24 +899,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     //for KAVA
-//    func onFetchgRPCKavaPriceParam() {
-//        DispatchQueue.global().async {
-//            do {
-//                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-//                let req = Kava_Pricefeed_V1beta1_QueryParamsRequest.init()
-//                if let response = try? Kava_Pricefeed_V1beta1_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    BaseData.instance.mKavaPriceMarkets_gRPC = response.params.markets
-////                    print("onFetchgRPCKavaPriceParam ", BaseData.instance.mKavaPriceMarkets_gRPC.count)
-//                }
-//                try channel.close().wait()
-//                
-//            } catch {
-//                print("onFetchgRPCKavaPriceParam failed: \(error)")
-//            }
-//            DispatchQueue.main.async(execute: { self.onFetchFinished() });
-//        }
-//    }
-    
     func onFetchgRPCKavaPrices() {
         DispatchQueue.global().async {
             do {
@@ -1122,6 +1110,23 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         Task {
             if let erc20Balance = try? erc20token.getBalance(account: ethAddress!) {
                 BaseData.instance.setMyTokenBalance(contAddress, String(erc20Balance))
+            }
+            self.onFetchFinished()
+        }
+    }
+    
+    func onFetchSupportPools(_ chainConfig: ChainConfig) {
+        let request = Alamofire.request(BaseNetWork.getSupportPools(chainConfig), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let pools = res as? Array<NSDictionary> {
+                    pools.forEach { pool in
+                        BaseData.instance.mSupportPools.append(SupportPool.init(pool))
+                    }
+                }
+            case .failure(let error):
+                print("onFetchSupportPools ", error)
             }
             self.onFetchFinished()
         }

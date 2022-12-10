@@ -2668,6 +2668,8 @@
 		E11A28DE29435063003311FD /* osmosis_gamm_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28C529435062003311FD /* osmosis_gamm_v1beta1_tx.grpc.swift */; };
 		E11A28DF29435063003311FD /* osmosis_gamm_v2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28C629435063003311FD /* osmosis_gamm_v2_query.grpc.swift */; };
 		E11A28E029435063003311FD /* osmosis_gamm_v2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28C629435063003311FD /* osmosis_gamm_v2_query.grpc.swift */; };
+		E11A28E22944716D003311FD /* SupportPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28E12944716D003311FD /* SupportPool.swift */; };
+		E11A28E32944716D003311FD /* SupportPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28E12944716D003311FD /* SupportPool.swift */; };
 		E123FD3B233CCBF3004EC348 /* MainTabTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E123FD3A233CCBF3004EC348 /* MainTabTokenViewController.swift */; };
 		E123FD3D233DEFE1004EC348 /* BnbAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E123FD3C233DEFE1004EC348 /* BnbAccountInfo.swift */; };
 		E123FD3F233E0161004EC348 /* MainTabWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E123FD3E233E0161004EC348 /* MainTabWalletViewController.swift */; };
@@ -4120,6 +4122,7 @@
 		E11A28C429435062003311FD /* osmosis_gamm_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		E11A28C529435062003311FD /* osmosis_gamm_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
 		E11A28C629435063003311FD /* osmosis_gamm_v2_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v2_query.grpc.swift; sourceTree = "<group>"; };
+		E11A28E12944716D003311FD /* SupportPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportPool.swift; sourceTree = "<group>"; };
 		E123FD3A233CCBF3004EC348 /* MainTabTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabTokenViewController.swift; sourceTree = "<group>"; };
 		E123FD3C233DEFE1004EC348 /* BnbAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BnbAccountInfo.swift; sourceTree = "<group>"; };
 		E123FD3E233E0161004EC348 /* MainTabWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabWalletViewController.swift; sourceTree = "<group>"; };
@@ -6059,6 +6062,7 @@
 				280524B7255CEEC7004D6172 /* ExportStarname.swift */,
 				0428ACFD268AD31700EB438F /* BandOracleStatus.swift */,
 				04B1BE1327A165F000B1236A /* CertikVote.swift */,
+				E11A28E12944716D003311FD /* SupportPool.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -7626,6 +7630,7 @@
 				043031DD28BDFA9A005FF935 /* AssetAddCell.swift in Sources */,
 				0451FC85282A3AC700214FDA /* ChainStarname.swift in Sources */,
 				1817CB69283E2CE500523713 /* cryptoorg_nft_v1_tx.grpc.swift in Sources */,
+				E11A28E32944716D003311FD /* SupportPool.swift in Sources */,
 				18FFB473281AF533004E65BB /* CdpDetailAssetsCell.swift in Sources */,
 				18FFB474281AF533004E65BB /* StakingTokenGrpcViewController.swift in Sources */,
 				18FFB476281AF533004E65BB /* Msg.swift in Sources */,
@@ -8530,6 +8535,7 @@
 				28A209DF248897F400C2C078 /* TokenDetailVestingDetailCell.swift in Sources */,
 				04C5AEA7286336D7007627EA /* RewardAddress4ViewController.swift in Sources */,
 				04AA4C092906A6DD0027877B /* kava_liquid_v1beta1_tx.grpc.swift in Sources */,
+				E11A28E22944716D003311FD /* SupportPool.swift in Sources */,
 				040FAAAF275F55C400229F6F /* desmos_posts_v1beta1_msgs.pb.swift in Sources */,
 				E11A28CD29435063003311FD /* osmosis_gamm_pool-models_stableswap_tx.grpc.swift in Sources */,
 				042A0CC9288E599F00C4DC38 /* cosmos_authz_v1beta1_authz.pb.swift in Sources */,

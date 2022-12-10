@@ -18,55 +18,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JOm-f5-fUa" customClass="SegmentedControl" customModule="Cosmostation" customModuleProvider="target">
-                                <rect key="frame" x="107" y="56" width="200" height="32"/>
-                                <segments>
-                                    <segment title="Swap"/>
-                                    <segment title="Pool"/>
-                                    <segment title="Earning"/>
-                                </segments>
-                                <color key="tintColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                                <connections>
-                                    <action selector="switchView:" destination="Y6W-OH-hqX" eventType="valueChanged" id="1h2-r6-bl7"/>
-                                </connections>
-                            </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NkA-M8-RMO">
-                                <rect key="frame" x="0.0" y="95" width="414" height="801"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="824"/>
                                 <connections>
                                     <segue destination="xuv-jM-I2o" kind="embed" id="GVc-MR-dR3"/>
                                 </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxM-uH-a0c">
-                                <rect key="frame" x="0.0" y="95" width="414" height="801"/>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M5T-TH-A6x">
-                                <rect key="frame" x="0.0" y="95" width="414" height="801"/>
                             </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="M5T-TH-A6x" firstAttribute="trailing" secondItem="NkA-M8-RMO" secondAttribute="trailing" id="0ws-yF-XU4"/>
                             <constraint firstItem="NkA-M8-RMO" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="9qV-ZB-5BI"/>
+                            <constraint firstItem="NkA-M8-RMO" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="24" id="CrB-J5-K8S"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="NkA-M8-RMO" secondAttribute="trailing" id="Ehv-Rd-q9z"/>
-                            <constraint firstItem="NkA-M8-RMO" firstAttribute="top" secondItem="JOm-f5-fUa" secondAttribute="bottom" constant="8" id="Lj6-Fs-TBd"/>
-                            <constraint firstItem="M5T-TH-A6x" firstAttribute="leading" secondItem="NkA-M8-RMO" secondAttribute="leading" id="MZS-yr-8Zf"/>
                             <constraint firstItem="NkA-M8-RMO" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="S9o-OX-waE"/>
-                            <constraint firstItem="kxM-uH-a0c" firstAttribute="trailing" secondItem="NkA-M8-RMO" secondAttribute="trailing" id="TuO-uL-WNL"/>
-                            <constraint firstItem="JOm-f5-fUa" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="VpZ-gM-fXu"/>
-                            <constraint firstItem="NkA-M8-RMO" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="47" id="bJa-nx-EDk"/>
-                            <constraint firstItem="kxM-uH-a0c" firstAttribute="bottom" secondItem="NkA-M8-RMO" secondAttribute="bottom" id="bRO-ZS-ulP"/>
-                            <constraint firstItem="M5T-TH-A6x" firstAttribute="top" secondItem="NkA-M8-RMO" secondAttribute="top" id="dPO-uf-I6L"/>
-                            <constraint firstItem="kxM-uH-a0c" firstAttribute="leading" secondItem="NkA-M8-RMO" secondAttribute="leading" id="hyZ-jg-dIP"/>
-                            <constraint firstItem="JOm-f5-fUa" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="iIS-5t-t7X"/>
-                            <constraint firstItem="kxM-uH-a0c" firstAttribute="top" secondItem="NkA-M8-RMO" secondAttribute="top" id="mfv-gs-QT4"/>
-                            <constraint firstItem="M5T-TH-A6x" firstAttribute="bottom" secondItem="NkA-M8-RMO" secondAttribute="bottom" id="wfP-Ah-KWY"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dAppsSegment" destination="JOm-f5-fUa" id="Bik-U2-sFi"/>
-                        <outlet property="farmingView" destination="M5T-TH-A6x" id="SaK-u7-UvJ"/>
-                        <outlet property="poolView" destination="kxM-uH-a0c" id="I45-BS-vO0"/>
                         <outlet property="swapView" destination="NkA-M8-RMO" id="btd-uP-k1M"/>
                     </connections>
                 </viewController>

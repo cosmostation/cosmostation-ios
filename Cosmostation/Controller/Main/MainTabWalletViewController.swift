@@ -698,6 +698,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickOsmosisLab() {
+        if (BaseData.instance.mSupportPools.count <= 0) { return }
         let osmosisDappVC = UIStoryboard(name: "Osmosis", bundle: nil).instantiateViewController(withIdentifier: "OsmosisDAppViewController") as! OsmosisDAppViewController
         osmosisDappVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
