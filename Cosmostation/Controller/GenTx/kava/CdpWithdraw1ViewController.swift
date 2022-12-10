@@ -243,15 +243,15 @@ class CdpWithdraw1ViewController: BaseViewController, UITextFieldDelegate, SBCar
             btnNext.setTitleColor(UIColor.black, for: .normal)
             btnNext.layer.borderWidth = 0.0
             if (afterRiskRate.doubleValue <= 50) {
-                btnNext.backgroundColor = UIColor(named: "kava_safe")
+                btnNext.backgroundColor = UIColor.kavaSafe
                 btnNext.setTitle("SAFE", for: .normal)
                 
             } else if (afterRiskRate.doubleValue < 80) {
-                btnNext.backgroundColor = UIColor(named: "kava_stable")
+                btnNext.backgroundColor = UIColor.kavaStable
                 btnNext.setTitle("STABLE", for: .normal)
                 
             } else {
-                btnNext.backgroundColor = UIColor(named: "kava_danger")
+                btnNext.backgroundColor = UIColor.kavaDanger
                 btnNext.setTitle("DANGER", for: .normal)
             }
             WUtils.showRiskRate2(afterRiskRate, afterSafeRate, afterSafeTxt)
