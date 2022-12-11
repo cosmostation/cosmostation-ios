@@ -47,11 +47,11 @@
             <objects>
                 <viewController storyboardIdentifier="SwapViewController" id="xuv-jM-I2o" customClass="SwapViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sk8-Cf-NFU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="801"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="824"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRz-WA-a6L">
-                                <rect key="frame" x="16" y="735" width="382" height="50"/>
+                                <rect key="frame" x="16" y="758" width="382" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Dme-hb-6yW"/>
                                 </constraints>
@@ -296,7 +296,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDD-7j-0Sh" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                                <rect key="frame" x="16" y="549" width="382" height="170"/>
+                                <rect key="frame" x="16" y="572" width="382" height="170"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Swap rate on this pool)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgW-EY-gT4">
                                         <rect key="frame" x="127.5" y="31" width="127" height="14"/>
@@ -448,7 +448,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="GYA-19-WCd" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
-                                <rect key="frame" x="177" y="370.5" width="60" height="60"/>
+                                <rect key="frame" x="177" y="382" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="ct8-cY-5FA"/>
                                     <constraint firstAttribute="width" constant="60" id="j56-En-dMa"/>
@@ -460,6 +460,7 @@
                         <constraints>
                             <constraint firstItem="T2e-Mb-t1E" firstAttribute="top" secondItem="Sao-J6-XKf" secondAttribute="bottom" constant="24" id="9Xc-pw-6bX"/>
                             <constraint firstItem="f8e-V9-936" firstAttribute="trailing" secondItem="Sao-J6-XKf" secondAttribute="trailing" id="B5O-sQ-K6O"/>
+                            <constraint firstItem="JU1-1h-XFL" firstAttribute="bottom" secondItem="gRz-WA-a6L" secondAttribute="bottom" constant="16" id="CCO-mq-Xor"/>
                             <constraint firstItem="UGg-Nf-ZPi" firstAttribute="top" secondItem="T2e-Mb-t1E" secondAttribute="bottom" id="LSk-N9-IzT"/>
                             <constraint firstItem="gRz-WA-a6L" firstAttribute="top" secondItem="dDD-7j-0Sh" secondAttribute="bottom" constant="16" id="NDJ-W0-N6U"/>
                             <constraint firstItem="pVV-Im-lKg" firstAttribute="centerX" secondItem="JU1-1h-XFL" secondAttribute="centerX" id="RQY-u9-693"/>
@@ -472,7 +473,6 @@
                             <constraint firstItem="pVV-Im-lKg" firstAttribute="leading" secondItem="T2e-Mb-t1E" secondAttribute="trailing" constant="24" id="c9b-W7-RdZ"/>
                             <constraint firstItem="JU1-1h-XFL" firstAttribute="trailing" secondItem="Sao-J6-XKf" secondAttribute="trailing" constant="16" id="dwa-Ni-lgr"/>
                             <constraint firstItem="UGg-Nf-ZPi" firstAttribute="centerX" secondItem="T2e-Mb-t1E" secondAttribute="centerX" id="e91-Qp-3HR"/>
-                            <constraint firstAttribute="bottom" secondItem="gRz-WA-a6L" secondAttribute="bottom" constant="16" id="gxV-gQ-RBD"/>
                             <constraint firstItem="dDD-7j-0Sh" firstAttribute="trailing" secondItem="f8e-V9-936" secondAttribute="trailing" id="hA3-hO-ibU"/>
                             <constraint firstItem="8wO-oY-t2I" firstAttribute="leading" secondItem="pVV-Im-lKg" secondAttribute="trailing" constant="24" id="lRH-G6-FtH"/>
                             <constraint firstItem="GYA-19-WCd" firstAttribute="centerX" secondItem="Sk8-Cf-NFU" secondAttribute="centerX" id="oOk-4R-XFT"/>

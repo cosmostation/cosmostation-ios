@@ -9,13 +9,13 @@
 import Foundation
 
 public struct SupportPool {
-    var id: String?
-    var adenom: String?
-    var bdenom: String?
+    var id: String!
+    var adenom: String!
+    var bdenom: String!
     
     init(_ dictionary: NSDictionary?) {
-        self.id = dictionary?["id"] as? String
-        self.adenom = dictionary?["adenom"] as? String
-        self.bdenom = dictionary?["bdenom"] as? String
+        self.id = dictionary?["id"] as? String ?? ""
+        self.adenom = dictionary?["adenom"] as? String ?? ""
+        self.bdenom = dictionary?["bdenom"] as? String ?? ""
     }
 }
