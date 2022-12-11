@@ -125,7 +125,7 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
             inputTextFiled.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        if (userInput.compare(NSDecimalNumber.init(string: "0.01")).rawValue < 0) {
+        if (userInput.compare(NSDecimalNumber.init(string: "0.001")).rawValue < 0) {
             inputTextFiled.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
@@ -191,8 +191,8 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         if (text == nil || text!.count == 0) { return false }
         let userInput = WUtils.localeStringToDecimal(text!)
         if (userInput == NSDecimalNumber.zero) { return false }
-        if (userInput.compare(NSDecimalNumber.init(string: "0.01")).rawValue < 0) {
-            self.onShowToast("Please enter 0.01 or higher")
+        if (userInput.compare(NSDecimalNumber.init(string: "0.001")).rawValue < 0) {
+            self.onShowToast("Please enter 0.001 or higher")
             return false
         }
         if (userInput.multiplying(byPowerOf10: inputDecimal).compare(availableMaxAmount).rawValue > 0) {
