@@ -42,8 +42,8 @@ class AlphabetViewController: UIViewController {
     
     @IBOutlet weak var alphaBtnBack: UIButton!
     
-    var AlphaBtns: [UIButton] = [UIButton]()
-    var Char: [String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
+    private var alphaBtns: [UIButton] = [UIButton]()
+    private var chars: [String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
                           "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
                           "W", "X", "Y", "Z"]
 
@@ -51,7 +51,7 @@ class AlphabetViewController: UIViewController {
         super.viewDidLoad()
         overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         
-        self.AlphaBtns = [self.alphaBtn0, self.alphaBtn1, self.alphaBtn2, self.alphaBtn3, self.alphaBtn4, self.alphaBtn5, self.alphaBtn6, self.alphaBtn7, self.alphaBtn8, self.alphaBtn9,
+        alphaBtns = [self.alphaBtn0, self.alphaBtn1, self.alphaBtn2, self.alphaBtn3, self.alphaBtn4, self.alphaBtn5, self.alphaBtn6, self.alphaBtn7, self.alphaBtn8, self.alphaBtn9,
                           self.alphaBtn10, self.alphaBtn11, self.alphaBtn12, self.alphaBtn13, self.alphaBtn14, self.alphaBtn15, self.alphaBtn16, self.alphaBtn17, self.alphaBtn18, self.alphaBtn19,
                           self.alphaBtn20, self.alphaBtn21, self.alphaBtn22, self.alphaBtn23, self.alphaBtn24, self.alphaBtn25]
         
@@ -90,9 +90,9 @@ class AlphabetViewController: UIViewController {
     }
     
     @objc func onRefreshKeyBoard() {
-        Char.shuffle()
-        for i in 0 ..< Char.count {
-            self.AlphaBtns[i].setTitle(Char[i], for: .normal)
+        chars.shuffle()
+        for i in 0 ..< chars.count {
+            self.alphaBtns[i].setTitle(chars[i], for: .normal)
         }
     }
     
@@ -107,11 +107,11 @@ class AlphabetViewController: UIViewController {
     }
     
     @objc func diableButtons() {
-        UIApplication.shared.beginIgnoringInteractionEvents()
+        alphaBtns.forEach { $0.isUserInteractionEnabled = false }
     }
     
     @objc func enbleButtons() {
-        UIApplication.shared.endIgnoringInteractionEvents()
+        alphaBtns.forEach { $0.isUserInteractionEnabled = true }
     }
 
 }

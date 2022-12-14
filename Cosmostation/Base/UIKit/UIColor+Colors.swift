@@ -30,4 +30,13 @@ extension UIColor {
     static var photon: UIColor {
         UIColor(named: "photon")!
     }
+    static var kavaSafe: UIColor {
+        UIColor(named: "kava_safe")!
+    }
+    static var kavaStable: UIColor {
+        UIColor(named: "kava_stable")!
+    }
+    static var kavaDanger: UIColor {
+        UIColor(named: "kava_danger")!
+    }
 }
