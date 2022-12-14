@@ -22,7 +22,6 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     var mMyValidator = false
     var mValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var mSelfDelegationInfo_gRPC: Cosmos_Staking_V1beta1_DelegationResponse?
-    var mApiCustomNewHistories = Array<ApiHistoryNewCustom>()
         
     var refresher: UIRefreshControl!
 
@@ -38,8 +37,6 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         self.validatorDetailTableView.register(UINib(nibName: "ValidatorDetailMyDetailCell", bundle: nil), forCellReuseIdentifier: "ValidatorDetailMyDetailCell")
         self.validatorDetailTableView.register(UINib(nibName: "ValidatorDetailMyActionCell", bundle: nil), forCellReuseIdentifier: "ValidatorDetailMyActionCell")
         self.validatorDetailTableView.register(UINib(nibName: "ValidatorDetailCell", bundle: nil), forCellReuseIdentifier: "ValidatorDetailCell")
-        self.validatorDetailTableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
-        self.validatorDetailTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
         self.validatorDetailTableView.rowHeight = UITableView.automaticDimension
         self.validatorDetailTableView.estimatedRowHeight = UITableView.automaticDimension
         
@@ -64,7 +61,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     @objc func onFetch() {
-        self.mFetchCnt = 6
+        self.mFetchCnt = 5
         BaseData.instance.mMyDelegations_gRPC.removeAll()
         BaseData.instance.mMyUnbondings_gRPC.removeAll()
         BaseData.instance.mMyReward_gRPC.removeAll()
@@ -74,7 +71,6 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         onFetchDelegations_gRPC(account!.account_address, 0)
         onFetchUndelegations_gRPC(account!.account_address, 0)
         onFetchRewards_gRPC(account!.account_address)
-        onFetchNewApiHistoryCustom(account!.account_address, mValidator_gRPC!.operatorAddress)
     }
     
     func onFetchFinished() {
@@ -88,39 +84,21 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (section == 0) {
-            if (BaseData.instance.mMyValidators_gRPC.contains{ $0.operatorAddress == mValidator_gRPC?.operatorAddress }) { return 2 }
-            else { return 1 }
-        } else {
-            return self.mApiCustomNewHistories.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (section == 1) {
-            view.headerTitleLabel.text = NSLocalizedString("msg_history_with_validator", comment: "");
-            view.headerCntLabel.text = ""
-        }
-        return view
+        if (BaseData.instance.mMyValidators_gRPC.contains{ $0.operatorAddress == mValidator_gRPC?.operatorAddress }) { return 2 }
+        else { return 1 }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (indexPath.section == 0) {
-            if (indexPath.row == 0 && BaseData.instance.mMyValidators_gRPC.contains{ $0.operatorAddress == mValidator_gRPC?.operatorAddress }) {
-                return onSetMyValidatorItems(tableView, indexPath)
-            } else if (indexPath.row == 0 && !BaseData.instance.mMyValidators_gRPC.contains{ $0.operatorAddress == mValidator_gRPC?.operatorAddress }) {
-                return onSetOtherValidatorItems(tableView, indexPath)
-            } else {
-                return onSetActionItems(tableView, indexPath)
-            }
-            
+        if (indexPath.row == 0 && BaseData.instance.mMyValidators_gRPC.contains{ $0.operatorAddress == mValidator_gRPC?.operatorAddress }) {
+            return onSetMyValidatorItems(tableView, indexPath)
+        } else if (indexPath.row == 0 && !BaseData.instance.mMyValidators_gRPC.contains{ $0.operatorAddress == mValidator_gRPC?.operatorAddress }) {
+            return onSetOtherValidatorItems(tableView, indexPath)
         } else {
-            return onSetHistoryItems(tableView, indexPath)
+            return onSetActionItems(tableView, indexPath)
         }
     }
     
@@ -187,31 +165,8 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         return cell!
     }
     
-    func onSetHistoryItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
-        cell?.bindHistoryView(chainConfig!, mApiCustomNewHistories[indexPath.row], account!.account_address)
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (indexPath.section == 1) {
-            let history = mApiCustomNewHistories[indexPath.row]
-            let link = WUtils.getTxExplorer(chainConfig, history.data!.txhash!)
-            guard let url = URL(string: link) else { return }
-            self.onShowSafariWeb(url)
-        }
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension;
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 0) {
-            return 0
-        } else {
-            return 30
-        }
     }
     
     
@@ -402,27 +357,6 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
                 print("onFetchRedelegation_gRPC failed: \(error)")
             }
             
-        }
-    }
-    
-    func onFetchNewApiHistoryCustom(_ address: String, _ valAddress: String) {
-        print("onFetchNewApiHistoryCustom ", address)
-        let url = BaseNetWork.accountStakingHistory(chainType!, address, valAddress)
-        let request = Alamofire.request(url, method: .get, parameters: ["limit":"50"], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                self.mApiCustomNewHistories.removeAll()
-                if let histories = res as? Array<NSDictionary> {
-                    for rawHistory in histories {
-                        self.mApiCustomNewHistories.append(ApiHistoryNewCustom.init(rawHistory))
-                    }
-                }
-                
-            case .failure(let error):
-                print("onFetchNewApiHistoryCustom ", error)
-            }
-            self.onFetchFinished()
         }
     }
     
