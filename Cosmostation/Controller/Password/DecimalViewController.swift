@@ -25,14 +25,14 @@ class DecimalViewController: UIViewController {
     
     @IBOutlet weak var deciamlBtnBack: UIButton!
     
-    var DeciamlBtns: [UIButton] = [UIButton]()
-    var Number: [String] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    private var decimalBtns: [UIButton] = [UIButton]()
+    private var numbers: [String] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         
-        self.DeciamlBtns = [self.deciamlBtn0, self.deciamlBtn1, self.deciamlBtn2,
+        self.decimalBtns = [self.deciamlBtn0, self.deciamlBtn1, self.deciamlBtn2,
                             self.deciamlBtn3, self.deciamlBtn4, self.deciamlBtn5,
                             self.deciamlBtn6, self.deciamlBtn7, self.deciamlBtn8, self.deciamlBtn9]
         
@@ -69,9 +69,9 @@ class DecimalViewController: UIViewController {
     }
     
     @objc func onRefreshKeyBoard() {
-        Number.shuffle()
-        for i in 0 ..< DeciamlBtns.count {
-            self.DeciamlBtns[i].setTitle(Number[i], for: .normal)
+        numbers.shuffle()
+        for i in 0 ..< decimalBtns.count {
+            self.decimalBtns[i].setTitle(numbers[i], for: .normal)
         }
     }
     
@@ -86,11 +86,11 @@ class DecimalViewController: UIViewController {
     }
     
     @objc func diableButtons() {
-        UIApplication.shared.beginIgnoringInteractionEvents()
+        decimalBtns.forEach { $0.isUserInteractionEnabled = false }
     }
     
     @objc func enbleButtons() {
-        UIApplication.shared.endIgnoringInteractionEvents()
+        decimalBtns.forEach { $0.isUserInteractionEnabled = true }
     }
 
 }

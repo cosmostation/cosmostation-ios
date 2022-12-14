@@ -184,7 +184,6 @@ class PasswordViewController: BaseViewController {
     
     func sendResultAndPop(_ data: Int) {
         if (mTarget != PASSWORD_ACTION_APP_LOCK) {
-            UIApplication.shared.endIgnoringInteractionEvents()
             let transition:CATransition = CATransition()
             transition.duration = 0.3
             transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
@@ -293,7 +292,6 @@ class PasswordViewController: BaseViewController {
                 }
             }
             DispatchQueue.main.async(execute: {
-                UIApplication.shared.endIgnoringInteractionEvents()
                 if (result) {
                     self.onUserSuccessUnlock()
                 } else {
