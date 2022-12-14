@@ -16,7 +16,7 @@ class PasswordViewController: BaseViewController {
     
     var resultDelegate: PasswordViewDelegate?
 
-    @IBOutlet weak var passwordTitleLable: UILabel!
+    @IBOutlet weak var passwordTitleLabel: UILabel!
     @IBOutlet weak var passwordMsgLabel: UILabel!
     @IBOutlet weak var pin0Img: UIImageView!
     @IBOutlet weak var pin1Img: UIImageView!
@@ -77,27 +77,27 @@ class PasswordViewController: BaseViewController {
         passwordMsgLabel.isHidden = true
         if (mTarget == PASSWORD_ACTION_INIT) {
             passwordMsgLabel.isHidden = false
-            passwordTitleLable.text = NSLocalizedString("password_init1", comment: "")
+            passwordTitleLabel.text = NSLocalizedString("password_init1", comment: "")
             
         } else if (mTarget == PASSWORD_ACTION_SIMPLE_CHECK) {
-            passwordTitleLable.text = NSLocalizedString("password_check", comment: "")
+            passwordTitleLabel.text = NSLocalizedString("password_check", comment: "")
             
         } else if (mTarget == PASSWORD_ACTION_DELETE_ACCOUNT) {
-            passwordTitleLable.text = NSLocalizedString("password_delete", comment: "")
+            passwordTitleLabel.text = NSLocalizedString("password_delete", comment: "")
             
         } else if (mTarget == PASSWORD_ACTION_CHECK_TX) {
-            passwordTitleLable.text = NSLocalizedString("password_tx", comment: "")
+            passwordTitleLabel.text = NSLocalizedString("password_tx", comment: "")
             
         } else if (mTarget == PASSWORD_ACTION_APP_LOCK || mTarget ==  PASSWORD_ACTION_INTRO_LOCK) {
-            passwordTitleLable.text = NSLocalizedString("password_app_lock", comment: "")
+            passwordTitleLabel.text = NSLocalizedString("password_app_lock", comment: "")
             
         } else if (mTarget == PASSWORD_ACTION_DEEPLINK_LOCK) {
-            passwordTitleLable.text = NSLocalizedString("insert_password_deeplink", comment: "")
+            passwordTitleLabel.text = NSLocalizedString("insert_password_deeplink", comment: "")
             
         } else if (mTarget == PASSWORD_ACTION_SETTING_CHECK) {
-            passwordTitleLable.text = NSLocalizedString("password_check", comment: "")
+            passwordTitleLabel.text = NSLocalizedString("password_check", comment: "")
         }
-        passwordTitleLable.adjustsFontSizeToFitWidth = true
+        passwordTitleLabel.adjustsFontSizeToFitWidth = true
         
         mIsConfirmSequence = false
         mUserInsert = ""
@@ -108,8 +108,8 @@ class PasswordViewController: BaseViewController {
     }
     
     func initConfirmView() {
-        passwordTitleLable.text = NSLocalizedString("password_init2", comment: "")
-        passwordTitleLable.adjustsFontSizeToFitWidth = true
+        passwordTitleLabel.text = NSLocalizedString("password_init2", comment: "")
+        passwordTitleLabel.adjustsFontSizeToFitWidth = true
         
         self.mIsConfirmSequence = true
         self.mUserConfirm = mUserInsert
