@@ -271,26 +271,26 @@ extension WUtils {
     
     static func getRiskColor(_ riskRate: NSDecimalNumber) -> UIColor {
         if (riskRate.doubleValue <= 50) {
-            return UIColor(named: "kava_safe")!
+            return UIColor.kavaSafe
         } else if (riskRate.doubleValue < 80) {
-            return UIColor(named: "kava_stable")!
+            return UIColor.kavaStable
         } else {
-            return UIColor(named: "kava_danger")!
+            return UIColor.kavaDanger
         }
     }
     
     static func showRiskRate(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _rateIamg:UIImageView?) {
         scoreLabel.attributedText = WDP.dpAmount(riskRate.stringValue, scoreLabel.font, 0, 2)
         if (riskRate.floatValue <= 50) {
-            scoreLabel.textColor = UIColor(named: "kava_safe")
+            scoreLabel.textColor = UIColor.kavaSafe
             _rateIamg?.image = UIImage(named: "imgKavaRiskSafe")
             
         } else if (riskRate.floatValue < 80) {
-            scoreLabel.textColor = UIColor(named: "kava_stable")
+            scoreLabel.textColor = UIColor.kavaStable
             _rateIamg?.image = UIImage(named: "imgKavaRiskStable")
             
         } else {
-            scoreLabel.textColor = UIColor(named: "kava_danger")
+            scoreLabel.textColor = UIColor.kavaDanger
             _rateIamg?.image = UIImage(named: "imgKavaRiskDanger")
         }
     }
@@ -298,18 +298,18 @@ extension WUtils {
     static func showRiskRate2(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _ textLabel:UILabel) {
         scoreLabel.attributedText = WDP.dpAmount(riskRate.stringValue, scoreLabel.font, 0, 2)
         if (riskRate.doubleValue <= 50) {
-            scoreLabel.textColor = UIColor(named: "kava_safe")
-            textLabel.textColor = UIColor(named: "kava_safe")
+            scoreLabel.textColor = UIColor.kavaSafe
+            textLabel.textColor = UIColor.kavaSafe
             textLabel.text = "SAFE"
             
         } else if (riskRate.doubleValue < 80) {
-            scoreLabel.textColor = UIColor(named: "kava_stable")
-            textLabel.textColor = UIColor(named: "kava_stable")
+            scoreLabel.textColor = UIColor.kavaStable
+            textLabel.textColor = UIColor.kavaStable
             textLabel.text = "STABLE"
             
         } else {
-            scoreLabel.textColor = UIColor(named: "kava_danger")
-            textLabel.textColor = UIColor(named: "kava_danger")
+            scoreLabel.textColor = UIColor.kavaDanger
+            textLabel.textColor = UIColor.kavaDanger
             textLabel.text = "DANGER"
         }
     }
@@ -318,15 +318,15 @@ extension WUtils {
         scoreLabel.attributedText = WDP.dpAmount(riskRate.stringValue, scoreLabel.font, 0, 2)
         if (riskRate.doubleValue <= 50) {
             textLabel.text = "SAFE"
-            cardView.backgroundColor = UIColor(named: "kava_safe")
+            cardView.backgroundColor = UIColor.kavaSafe
             
         } else if (riskRate.doubleValue < 80) {
             textLabel.text = "STABLE"
-            cardView.backgroundColor = UIColor(named: "kava_stable")
+            cardView.backgroundColor = UIColor.kavaStable
             
         } else {
             textLabel.text = "DANGER"
-            cardView.backgroundColor = UIColor(named: "kava_danger")
+            cardView.backgroundColor = UIColor.kavaDanger
         }
     }
     
