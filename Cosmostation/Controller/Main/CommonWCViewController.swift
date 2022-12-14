@@ -871,32 +871,15 @@ class CommonWCViewController: BaseViewController {
     }
     
     @IBAction func onCloseDapp(_ sender: UIButton) {
-        if let interactor = interactor {
-            if (interactor.state == .connected) {
-                interactor.killSession().done { [weak self] in
-                    self?.interactor = nil
-                    if (self?.navigationController != nil) {
-                        self?.navigationController?.popViewController(animated: true)
-                    } else {
-                        self?.dismiss(animated: true)
-                    }
-                }.cauterize()
-                return
-            } else {
-                interactor.disconnect()
-            }
-        }
-    
-        self.disconnectV2Sessions()
-        
-        if (self.navigationController != nil) {
-            self.navigationController?.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true)
-        }
+        self.webView.isHidden = true
+        disconnect()
     }
     
     @IBAction func onClickDisconnect(_ sender: UIButton) {
+        disconnect()
+    }
+    
+    private func disconnect() {
         if let interactor = interactor {
             if (interactor.state == .connected) {
                 interactor.killSession().done { [weak self] in
@@ -910,8 +893,11 @@ class CommonWCViewController: BaseViewController {
                 return
             } else {
                 interactor.disconnect()
+                self.interactor = nil
             }
         }
+        
+        self.disconnectV2Sessions()
         
         if (self.navigationController != nil) {
             self.navigationController?.popViewController(animated: true)
@@ -1063,6 +1049,11 @@ extension CommonWCViewController: SBCardPopupDelegate {
 
 extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if self.webView.isHidden {
+            decisionHandler(.cancel)
+            return
+        }
+        
         if let url = navigationAction.request.url {
             if (url.absoluteString.starts(with: "keplrwallet://wcV1")) {
                 UIApplication.shared.open(URL(string: url.absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc"))!, options: [:])
