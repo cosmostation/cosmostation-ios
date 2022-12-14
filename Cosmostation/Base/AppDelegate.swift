@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var scheme: URL?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
+        configureFirebase()
         initWalletConnectV2()
         BaseData.instance.copySalt = UUID().uuidString
         if UserDefaults.standard.object(forKey: "FirstInstall") == nil {
@@ -195,3 +195,13 @@ extension AppDelegate: WebSocketFactory {
 }
 
 extension WebSocket: WebSocketConnecting { }
+
+// MARK: - Firebase
+
+private extension AppDelegate {
+    func configureFirebase() {
+        if Bundle.main.bundleIdentifier == "io.wannabit.cosmostation" {
+            FirebaseApp.configure()
+        }
+    }
+}

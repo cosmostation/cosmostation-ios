@@ -1397,7 +1397,6 @@
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
 		181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
 		1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1812D46128E184D800AC7D61 /* GoogleService-Info.plist */; };
-		1812D46328E18E5000AC7D61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1812D46128E184D800AC7D61 /* GoogleService-Info.plist */; };
 		1817CAA3283E2CE500523713 /* crescent_farming_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338EA27E826EF00E82AA7 /* crescent_farming_v1beta1_query.pb.swift */; };
 		1817CAA4283E2CE500523713 /* starname_cosmwasm_wasm_v1_ibc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5FF275F55A300229F6F /* starname_cosmwasm_wasm_v1_ibc.pb.swift */; };
 		1817CAA5283E2CE500523713 /* cosmos_staking_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4D9275F559000229F6F /* cosmos_staking_v1beta1_query.grpc.swift */; };
@@ -6991,7 +6990,6 @@
 				18FFB7C0281AF533004E65BB /* TxIncentiveDelegatorCell.xib in Resources */,
 				18FFB7C1281AF533004E65BB /* WalletDesmosEventCell.xib in Resources */,
 				04DEAF44286476AF00F23233 /* HtlcSend2ViewController.xib in Resources */,
-				1812D46328E18E5000AC7D61 /* GoogleService-Info.plist in Resources */,
 				18D4C19A28C729C9003F230A /* ManageConnectionViewController.xib in Resources */,
 				18FFB7C2281AF533004E65BB /* HardPoolRepay3ViewController.xib in Resources */,
 				04E6ABBE28635875008DC3C7 /* CdpWithdraw4ViewController.xib in Resources */,
