@@ -266,15 +266,8 @@ class BaseNetWork {
         } else if (chainConfig.chainType == .OKEX_MAIN) {
             return MINTSCAN_API_URL + "v1/utils/proxy/okc-transaction-list?device=IOS&chainShortName=okc&address=" + address + "&limit=50"
         } else {
-            return chainConfig.apiUrl + "v1/account/new_txs/" + address
+            return MINTSCAN_API_URL + "v1/" + chainConfig.chainAPIName + "/account/" + address + "/txs"
         }
-    }
-    
-    static func accountStakingHistory(_ chain: ChainType, _ address: String, _ valAddress: String) -> String {
-        guard let chainConfig = ChainFactory.getChainConfig(chain) else {
-            return ""
-        }
-        return chainConfig.apiUrl + "v1/account/new_txs/" + address + "/" + valAddress
     }
     
     static func getParams(_ chainId: String) -> String {

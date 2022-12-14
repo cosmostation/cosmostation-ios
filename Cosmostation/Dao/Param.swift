@@ -32,21 +32,27 @@ public struct Param {
             return NSDecimalNumber.init(string: params?.emoney_minting_inflation?.assets.filter { $0.denom == EMONEY_MAIN_DENOM }.first?.inflation)
             
         } else if (chainType == .IRIS_MAIN || chainType == .IRIS_TEST) {
-            return NSDecimalNumber.init(string: params?.minting_params?.inflation)
+            if let infa = params?.minting_params?.inflation {
+                return NSDecimalNumber.init(string: infa)
+            }
+            return NSDecimalNumber.zero
             
         } else if (chainType == .OSMOSIS_MAIN || chainType == .STRIDE_MAIN) {
-            let epochProvisions = NSDecimalNumber.init(string: params?.osmosis_minting_epoch_provisions)
-            let epochPeriod = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.reduction_period_in_epochs)
-            let osmoSupply = getMainSupply()
-//            print("epochProvisions ", epochProvisions)
-//            print("epochPeriod ", epochPeriod)
-//            print("osmoSupply ", osmoSupply)
-            return epochProvisions.multiplying(by: epochPeriod).dividing(by: osmoSupply, withBehavior: WUtils.handler18)
+            if let ep = params?.osmosis_minting_epoch_provisions, let rpie = params?.osmosis_minting_params?.params?.reduction_period_in_epochs {
+                let epochProvisions = NSDecimalNumber.init(string: ep)
+                let epochPeriod = NSDecimalNumber.init(string: rpie)
+                let osmoSupply = getMainSupply()
+                return epochProvisions.multiplying(by: epochPeriod).dividing(by: osmoSupply, withBehavior: WUtils.handler18)
+            }
+            return NSDecimalNumber.zero
             
         } else if (chainType == .STARGAZE_MAIN) {
-            let annualProvisions = NSDecimalNumber.init(string: params?.stargaze_minting_params?.params?.initial_annual_provisions)
-            let starsSupply = getMainSupply()
-            return annualProvisions.dividing(by: starsSupply, withBehavior: WUtils.handler18)
+            if let iap = params?.stargaze_minting_params?.params?.initial_annual_provisions {
+                let annualProvisions = NSDecimalNumber.init(string: iap)
+                let starsSupply = getMainSupply()
+                return annualProvisions.dividing(by: starsSupply, withBehavior: WUtils.handler18)
+            }
+            return NSDecimalNumber.zero
             
         } else if (chainType == .EVMOS_MAIN) {
             if (params?.evmos_inflation_params?.params?.enable_inflation == false) {

@@ -114,7 +114,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         } else if (chainType == ChainType.OKEX_MAIN) {
             onFetchOkHistory(account!.account_address)
         } else {
-            mApiHistories.removeAll()
             mApiHistoyID = 0
             mApiHasMore = false
             onFetchNewApiHistoryCustom(account!.account_address, mApiHistoyID)
@@ -253,7 +252,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     
     func onFetchOkHistory(_ address: String) {
         let url = BaseNetWork.accountHistory(chainType!, address)
-        print("onFetchOkHistory ", url)
+//        print("onFetchOkHistory ", url)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { response in
             switch response.result {
@@ -290,6 +289,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
+                if (id == 0) { self.mApiHistories.removeAll() }
                 if let histories = res as? Array<NSDictionary> {
                     for rawHistory in histories {
                         self.mApiHistories.append(ApiHistoryNewCustom.init(rawHistory))
