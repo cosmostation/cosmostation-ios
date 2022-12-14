@@ -39,8 +39,9 @@ struct Osmosis_Gamm_V1beta1_GenesisState {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var pools: [SwiftProtobuf.Google_Protobuf_Any] = []
+  var pools: [Google_Protobuf2_Any] = []
 
+  /// will be renamed to next_pool_id in an upcoming version
   var nextPoolNumber: UInt64 = 0
 
   var params: Osmosis_Gamm_V1beta1_Params {
@@ -58,6 +59,11 @@ struct Osmosis_Gamm_V1beta1_GenesisState {
 
   fileprivate var _params: Osmosis_Gamm_V1beta1_Params? = nil
 }
+
+#if swift(>=5.5) && canImport(_Concurrency)
+extension Osmosis_Gamm_V1beta1_Params: @unchecked Sendable {}
+extension Osmosis_Gamm_V1beta1_GenesisState: @unchecked Sendable {}
+#endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
@@ -118,15 +124,19 @@ extension Osmosis_Gamm_V1beta1_GenesisState: SwiftProtobuf.Message, SwiftProtobu
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.pools.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.pools, fieldNumber: 1)
     }
     if self.nextPoolNumber != 0 {
       try visitor.visitSingularUInt64Field(value: self.nextPoolNumber, fieldNumber: 2)
     }
-    if let v = self._params {
+    try { if let v = self._params {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 

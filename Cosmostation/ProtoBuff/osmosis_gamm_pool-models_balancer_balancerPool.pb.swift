@@ -31,7 +31,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 ///     w(t) = initial_pool_weights + (t - start_time) *
 ///       (target_pool_weights - initial_pool_weights) / (duration)
 ///   t > start_time + duration: w(t) = target_pool_weights
-struct Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams {
+struct Osmosis_Gamm_V1beta1_SmoothWeightChangeParams {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -83,7 +83,7 @@ struct Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams {
 /// governance in the future. This params are not managed by the chain
 /// governance. Instead they will be managed by the token holders of the pool.
 /// The pool's token holders are specified in future_pool_governor.
-struct Osmosis_Gamm_Balancer_V1beta1_PoolParams {
+struct Osmosis_Gamm_V1beta1_PoolParams {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -92,8 +92,8 @@ struct Osmosis_Gamm_Balancer_V1beta1_PoolParams {
 
   var exitFee: String = String()
 
-  var smoothWeightChangeParams: Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams {
-    get {return _smoothWeightChangeParams ?? Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams()}
+  var smoothWeightChangeParams: Osmosis_Gamm_V1beta1_SmoothWeightChangeParams {
+    get {return _smoothWeightChangeParams ?? Osmosis_Gamm_V1beta1_SmoothWeightChangeParams()}
     set {_smoothWeightChangeParams = newValue}
   }
   /// Returns true if `smoothWeightChangeParams` has been explicitly set.
@@ -105,10 +105,40 @@ struct Osmosis_Gamm_Balancer_V1beta1_PoolParams {
 
   init() {}
 
-  fileprivate var _smoothWeightChangeParams: Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams? = nil
+  fileprivate var _smoothWeightChangeParams: Osmosis_Gamm_V1beta1_SmoothWeightChangeParams? = nil
 }
 
-struct Osmosis_Gamm_Balancer_V1beta1_Pool {
+/// Pool asset is an internal struct that combines the amount of the
+/// token in the pool, and its balancer weight.
+/// This is an awkward packaging of data,
+/// and should be revisited in a future state migration.
+struct Osmosis_Gamm_V1beta1_PoolAsset {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Coins we are talking about,
+  /// the denomination must be unique amongst all PoolAssets for this pool.
+  var token: Cosmos_Base_V1beta1_Coin {
+    get {return _token ?? Cosmos_Base_V1beta1_Coin()}
+    set {_token = newValue}
+  }
+  /// Returns true if `token` has been explicitly set.
+  var hasToken: Bool {return self._token != nil}
+  /// Clears the value of `token`. Subsequent reads from it will return its default value.
+  mutating func clearToken() {self._token = nil}
+
+  /// Weight that is not normalized. This weight must be less than 2^50
+  var weight: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _token: Cosmos_Base_V1beta1_Coin? = nil
+}
+
+struct Osmosis_Gamm_V1beta1_Pool {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -117,8 +147,8 @@ struct Osmosis_Gamm_Balancer_V1beta1_Pool {
 
   var id: UInt64 = 0
 
-  var poolParams: Osmosis_Gamm_Balancer_V1beta1_PoolParams {
-    get {return _poolParams ?? Osmosis_Gamm_Balancer_V1beta1_PoolParams()}
+  var poolParams: Osmosis_Gamm_V1beta1_PoolParams {
+    get {return _poolParams ?? Osmosis_Gamm_V1beta1_PoolParams()}
     set {_poolParams = newValue}
   }
   /// Returns true if `poolParams` has been explicitly set.
@@ -158,21 +188,28 @@ struct Osmosis_Gamm_Balancer_V1beta1_Pool {
 
   init() {}
 
-  fileprivate var _poolParams: Osmosis_Gamm_Balancer_V1beta1_PoolParams? = nil
+  fileprivate var _poolParams: Osmosis_Gamm_V1beta1_PoolParams? = nil
   fileprivate var _totalShares: Cosmos_Base_V1beta1_Coin? = nil
 }
 
+#if swift(>=5.5) && canImport(_Concurrency)
+extension Osmosis_Gamm_V1beta1_SmoothWeightChangeParams: @unchecked Sendable {}
+extension Osmosis_Gamm_V1beta1_PoolParams: @unchecked Sendable {}
+extension Osmosis_Gamm_V1beta1_PoolAsset: @unchecked Sendable {}
+extension Osmosis_Gamm_V1beta1_Pool: @unchecked Sendable {}
+#endif  // swift(>=5.5) && canImport(_Concurrency)
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "osmosis.gamm.balancer.v1beta1"
+fileprivate let _protobuf_package = "osmosis.gamm.v1beta1"
 
-extension Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Osmosis_Gamm_V1beta1_SmoothWeightChangeParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".SmoothWeightChangeParams"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "start_time"),
     2: .same(proto: "duration"),
-    3: .same(proto: "initialPoolWeights"),
-    4: .same(proto: "targetPoolWeights"),
+    3: .standard(proto: "initial_pool_weights"),
+    4: .standard(proto: "target_pool_weights"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -191,12 +228,16 @@ extension Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams: SwiftProtobuf.
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._startTime {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._startTime {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    }
-    if let v = self._duration {
+    } }()
+    try { if let v = self._duration {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    }
+    } }()
     if !self.initialPoolWeights.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.initialPoolWeights, fieldNumber: 3)
     }
@@ -206,7 +247,7 @@ extension Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams: SwiftProtobuf.
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams, rhs: Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams) -> Bool {
+  static func ==(lhs: Osmosis_Gamm_V1beta1_SmoothWeightChangeParams, rhs: Osmosis_Gamm_V1beta1_SmoothWeightChangeParams) -> Bool {
     if lhs._startTime != rhs._startTime {return false}
     if lhs._duration != rhs._duration {return false}
     if lhs.initialPoolWeights != rhs.initialPoolWeights {return false}
@@ -216,12 +257,12 @@ extension Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams: SwiftProtobuf.
   }
 }
 
-extension Osmosis_Gamm_Balancer_V1beta1_PoolParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Osmosis_Gamm_V1beta1_PoolParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".PoolParams"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "swapFee"),
-    2: .same(proto: "exitFee"),
-    3: .same(proto: "smoothWeightChangeParams"),
+    1: .standard(proto: "swap_fee"),
+    2: .standard(proto: "exit_fee"),
+    3: .standard(proto: "smooth_weight_change_params"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -239,19 +280,23 @@ extension Osmosis_Gamm_Balancer_V1beta1_PoolParams: SwiftProtobuf.Message, Swift
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.swapFee.isEmpty {
       try visitor.visitSingularStringField(value: self.swapFee, fieldNumber: 1)
     }
     if !self.exitFee.isEmpty {
       try visitor.visitSingularStringField(value: self.exitFee, fieldNumber: 2)
     }
-    if let v = self._smoothWeightChangeParams {
+    try { if let v = self._smoothWeightChangeParams {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Osmosis_Gamm_Balancer_V1beta1_PoolParams, rhs: Osmosis_Gamm_Balancer_V1beta1_PoolParams) -> Bool {
+  static func ==(lhs: Osmosis_Gamm_V1beta1_PoolParams, rhs: Osmosis_Gamm_V1beta1_PoolParams) -> Bool {
     if lhs.swapFee != rhs.swapFee {return false}
     if lhs.exitFee != rhs.exitFee {return false}
     if lhs._smoothWeightChangeParams != rhs._smoothWeightChangeParams {return false}
@@ -260,16 +305,58 @@ extension Osmosis_Gamm_Balancer_V1beta1_PoolParams: SwiftProtobuf.Message, Swift
   }
 }
 
-extension Osmosis_Gamm_Balancer_V1beta1_Pool: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Osmosis_Gamm_V1beta1_PoolAsset: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".PoolAsset"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "token"),
+    2: .same(proto: "weight"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._token) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.weight) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._token {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if !self.weight.isEmpty {
+      try visitor.visitSingularStringField(value: self.weight, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Osmosis_Gamm_V1beta1_PoolAsset, rhs: Osmosis_Gamm_V1beta1_PoolAsset) -> Bool {
+    if lhs._token != rhs._token {return false}
+    if lhs.weight != rhs.weight {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Osmosis_Gamm_V1beta1_Pool: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".Pool"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "address"),
     2: .same(proto: "id"),
-    3: .same(proto: "poolParams"),
+    3: .standard(proto: "pool_params"),
     4: .standard(proto: "future_pool_governor"),
-    5: .same(proto: "totalShares"),
-    6: .same(proto: "poolAssets"),
-    7: .same(proto: "totalWeight"),
+    5: .standard(proto: "total_shares"),
+    6: .standard(proto: "pool_assets"),
+    7: .standard(proto: "total_weight"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -291,21 +378,25 @@ extension Osmosis_Gamm_Balancer_V1beta1_Pool: SwiftProtobuf.Message, SwiftProtob
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.address.isEmpty {
       try visitor.visitSingularStringField(value: self.address, fieldNumber: 1)
     }
     if self.id != 0 {
       try visitor.visitSingularUInt64Field(value: self.id, fieldNumber: 2)
     }
-    if let v = self._poolParams {
+    try { if let v = self._poolParams {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    }
+    } }()
     if !self.futurePoolGovernor.isEmpty {
       try visitor.visitSingularStringField(value: self.futurePoolGovernor, fieldNumber: 4)
     }
-    if let v = self._totalShares {
+    try { if let v = self._totalShares {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-    }
+    } }()
     if !self.poolAssets.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.poolAssets, fieldNumber: 6)
     }
@@ -315,7 +406,7 @@ extension Osmosis_Gamm_Balancer_V1beta1_Pool: SwiftProtobuf.Message, SwiftProtob
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Osmosis_Gamm_Balancer_V1beta1_Pool, rhs: Osmosis_Gamm_Balancer_V1beta1_Pool) -> Bool {
+  static func ==(lhs: Osmosis_Gamm_V1beta1_Pool, rhs: Osmosis_Gamm_V1beta1_Pool) -> Bool {
     if lhs.address != rhs.address {return false}
     if lhs.id != rhs.id {return false}
     if lhs._poolParams != rhs._poolParams {return false}

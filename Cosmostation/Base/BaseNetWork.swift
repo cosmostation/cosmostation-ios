@@ -281,6 +281,10 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v1/utils/params/chain/" + chainId
     }
     
+    static func getSupportPools(_ chainConfig: ChainConfig) -> String {
+        return ResourceBase + chainConfig.chainAPIName + "/pool.json"
+    }
+    
     static func getConnection(_ chain: ChainType, _ group: MultiThreadedEventLoopGroup) -> ClientConnection? {
         guard let chainConfig = ChainFactory.getChainConfig(chain) else {
             return nil

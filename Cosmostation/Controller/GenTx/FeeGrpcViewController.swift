@@ -456,7 +456,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_SWAP) {
             var swapRoutes = Array<Osmosis_Gamm_V1beta1_SwapAmountInRoute>()
             let swapRoute = Osmosis_Gamm_V1beta1_SwapAmountInRoute.with {
-                $0.poolID = self.pageHolderVC.mPool!.id
+                $0.poolID = UInt64(self.pageHolderVC.mPoolId!)!
                 $0.tokenOutDenom = self.pageHolderVC.mSwapOutDenom!
             }
             swapRoutes.append(swapRoute)
@@ -467,38 +467,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                      privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_JOIN_POOL) {
-            return Signer.genSimulateDepositPoolMsgTxgRPC(auth, account!.account_pubkey_type,
-                                                          self.pageHolderVC.mPoolId!, self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!,
-                                                          self.pageHolderVC.mLPCoin!.amount,
-                                                          self.mFee, self.pageHolderVC.mMemo!,
-                                                          privateKey, publicKey, self.chainType!)
-            
-        } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_EXIT_POOL) {
-            return Signer.genSimulateWithdrawPoolMsgTxgRPC(auth, account!.account_pubkey_type,
-                                                           self.pageHolderVC.mPoolId!, self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!,
-                                                           self.pageHolderVC.mLPCoin!.amount,
-                                                           self.mFee, self.pageHolderVC.mMemo!,
-                                                           privateKey, publicKey, self.chainType!)
-            
-        } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_LOCK) {
-            return Signer.genSimulateLockTokensMsgTxgRPC(auth, account!.account_pubkey_type,
-                                                         self.pageHolderVC.mLPCoin!,
-                                                         self.pageHolderVC.mLockupDuration!,
-                                                         self.mFee, self.pageHolderVC.mMemo!,
-                                                         privateKey, publicKey, self.chainType!)
-            
-        } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_BEGIN_UNLCOK) {
-            var ids = Array<UInt64>()
-            for lockup in self.pageHolderVC.mLockups! {
-                ids.append(lockup.id)
-            }
-            return Signer.genSimulateBeginUnlockingsMsgTxgRPC(auth, account!.account_pubkey_type,
-                                                              ids,
-                                                              self.mFee, self.pageHolderVC.mMemo!,
-                                                              privateKey, publicKey, self.chainType!)
-            
-        }
+        } 
         
         else if (pageHolderVC.mType == TASK_TYPE_SIF_ADD_LP) {
             return Signer.genSimulateSifAddLpMsgTxgRPC(auth, account!.account_pubkey_type,

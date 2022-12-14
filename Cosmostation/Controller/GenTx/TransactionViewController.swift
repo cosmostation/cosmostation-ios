@@ -50,9 +50,9 @@ class TransactionViewController: UIViewController {
     var mPoolId: String?
     var mSwapInDenom: String?
     var mSwapOutDenom: String?
-    var mPool: Osmosis_Gamm_Balancer_V1beta1_Pool?
+//    var mPool: Osmosis_Gamm_Balancer_V1beta1_Pool?
     var mLockupDuration: Int64?
-    var mLockups: Array<Osmosis_Lockup_PeriodLock>?
+//    var mLockups: Array<Osmosis_Lockup_PeriodLock>?
     
     var mSifPool: Sifnode_Clp_V1_Pool?
     
@@ -409,9 +409,9 @@ class TransactionViewController: UIViewController {
             StepVc.mPoolId = self.mPoolId
             StepVc.mSwapInDenom = self.mSwapInDenom
             StepVc.mSwapOutDenom = self.mSwapOutDenom
-            StepVc.mPool = self.mPool
+//            StepVc.mPool = self.mPool
             StepVc.mLockupDuration = self.mLockupDuration
-            StepVc.mLockups = self.mLockups
+//            StepVc.mLockups = self.mLockups
             
             StepVc.mSifPool = self.mSifPool
             

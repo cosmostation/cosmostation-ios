@@ -26,9 +26,12 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var outputCoinAmountLabel: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
+    var selectedPool: Google_Protobuf2_Any!
+    var inputDenom: String?
+    var outputDenom: String?
+    var inputDecimal:Int16 = 6
+    var outputDecimal:Int16 = 6
     var availableMaxAmount = NSDecimalNumber.zero
-    var dpInPutDecimal:Int16 = 6
-    var dpOutPutDecimal:Int16 = 6
     var swapRate = NSDecimalNumber.one
     
     override func viewDidLoad() {
@@ -42,41 +45,53 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         inputTextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         loadingImg.startAnimating()
-        onFetchGammPool(pageHolderVC.mPoolId!)
+        onFetchSelectedPool(pageHolderVC.mPoolId!)
     }
     
     func onInitView() {
+        inputDenom = pageHolderVC.mSwapInDenom!
+        outputDenom = pageHolderVC.mSwapOutDenom!
+        guard let inputMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == inputDenom }).first,
+              let outputMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == outputDenom }).first else {
+            return
+        }
+        inputDecimal = inputMsAsset.decimals
+        outputDecimal = outputMsAsset.decimals
+        
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mSwapInDenom!)
         let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
-        print("availableMaxAmount ", availableMaxAmount)
-        print("mainDenomFee ", mainDenomFee)
-        if (pageHolderVC.mSwapInDenom == OSMOSIS_MAIN_DENOM) {
+        if (inputDenom == OSMOSIS_MAIN_DENOM) {
             availableMaxAmount = availableMaxAmount.subtracting(mainDenomFee)
         }
         WDP.dpCoin(chainConfig, pageHolderVC.mSwapInDenom!, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel)
-        WDP.dpSymbolImg(chainConfig, pageHolderVC.mSwapInDenom!, inputCoinImg)
-        WDP.dpSymbol(chainConfig, pageHolderVC.mSwapInDenom!, inputCoinName)
-        WDP.dpSymbolImg(chainConfig, pageHolderVC.mSwapOutDenom!, outputCoinImg)
-        WDP.dpSymbol(chainConfig, pageHolderVC.mSwapOutDenom!, outputCoinName)
+        WDP.dpSymbolImg(chainConfig, inputDenom, inputCoinImg)
+        WDP.dpSymbol(chainConfig, inputDenom, inputCoinName)
+        WDP.dpSymbolImg(chainConfig, outputDenom, outputCoinImg)
+        WDP.dpSymbol(chainConfig, outputDenom, outputCoinName)
         
-//        dpInPutDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mSwapInDenom)
-//        dpOutPutDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mSwapOutDenom)
-        
-        var inputAssetAmount = NSDecimalNumber.zero
-        var inputAssetWeight = NSDecimalNumber.zero
-        var outputAssetAmount = NSDecimalNumber.zero
-        var outputAssetWeight = NSDecimalNumber.zero
-        pageHolderVC.mPool!.poolAssets.forEach { poolAsset in
-            if (poolAsset.token.denom == pageHolderVC.mSwapInDenom) {
-                inputAssetAmount = NSDecimalNumber.init(string: poolAsset.token.amount)
-                inputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
+        if (selectedPool.typeURL.contains(Osmosis_Gamm_V1beta1_Pool.protoMessageName) == true) {
+            var inputAssetAmount = NSDecimalNumber.zero
+            var inputAssetWeight = NSDecimalNumber.zero
+            var outputAssetAmount = NSDecimalNumber.zero
+            var outputAssetWeight = NSDecimalNumber.zero
+            
+            let pool = try! Osmosis_Gamm_V1beta1_Pool.init(serializedData: selectedPool.value)
+            pool.poolAssets.forEach { poolAsset in
+                if (poolAsset.token.denom == pageHolderVC.mSwapInDenom) {
+                    inputAssetAmount = NSDecimalNumber.init(string: poolAsset.token.amount)
+                    inputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
+                }
+                if (poolAsset.token.denom == pageHolderVC.mSwapOutDenom) {
+                    outputAssetAmount = NSDecimalNumber.init(string: poolAsset.token.amount)
+                    outputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
+                }
             }
-            if (poolAsset.token.denom == pageHolderVC.mSwapOutDenom) {
-                outputAssetAmount = NSDecimalNumber.init(string: poolAsset.token.amount)
-                outputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
-            }
+            swapRate = outputAssetAmount.multiplying(by: inputAssetWeight).dividing(by: inputAssetAmount, withBehavior: WUtils.handler18).dividing(by: outputAssetWeight, withBehavior: WUtils.handler18)
+            
+        } else if (selectedPool.typeURL.contains(Osmosis_Gamm_Poolmodels_Stableswap_V1beta1_Pool.protoMessageName) == true) {
+            
         }
-        swapRate = outputAssetAmount.multiplying(by: inputAssetWeight).dividing(by: inputAssetAmount, withBehavior: WUtils.handler18).dividing(by: outputAssetWeight, withBehavior: WUtils.handler18)
+        
         print("swapRate ", swapRate)
     }
     
@@ -86,7 +101,7 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        textField.shouldChange(charactersIn: range, replacementString: string, displayDecimal: dpInPutDecimal)
+        textField.shouldChange(charactersIn: range, replacementString: string, displayDecimal: inputDecimal)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -110,19 +125,19 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
             inputTextFiled.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        if (userInput.compare(NSDecimalNumber.init(string: "0.01")).rawValue < 0) {
+        if (userInput.compare(NSDecimalNumber.init(string: "0.001")).rawValue < 0) {
             inputTextFiled.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        if (userInput.multiplying(byPowerOf10: dpInPutDecimal).compare(availableMaxAmount).rawValue > 0) {
+        if (userInput.multiplying(byPowerOf10: inputDecimal).compare(availableMaxAmount).rawValue > 0) {
             inputTextFiled.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
         inputTextFiled.layer.borderColor = UIColor.font04.cgColor
         
         let padding = NSDecimalNumber(string: "0.97")
-        let outputAmount = userInput.multiplying(byPowerOf10: dpInPutDecimal - dpOutPutDecimal).multiplying(by: padding).multiplying(by: swapRate, withBehavior: WUtils.handler18)
-        outputCoinAmountLabel.text = WUtils.decimalNumberToLocaleString(outputAmount, dpOutPutDecimal)
+        let outputAmount = userInput.multiplying(byPowerOf10: inputDecimal - outputDecimal).multiplying(by: padding).multiplying(by: swapRate, withBehavior: WUtils.handler18)
+        outputCoinAmountLabel.text = WUtils.decimalNumberToLocaleString(outputAmount, outputDecimal)
     }
     
     @IBAction func onClickClear(_ sender: UIButton) {
@@ -131,26 +146,26 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func onClick1_4(_ sender: UIButton) {
-        let calValue = availableMaxAmount.multiplying(by: NSDecimalNumber.init(string: "0.25")).multiplying(byPowerOf10: -dpInPutDecimal, withBehavior: WUtils.getDivideHandler(dpInPutDecimal))
-        inputTextFiled.text = WUtils.decimalNumberToLocaleString(calValue, dpInPutDecimal)
+        let calValue = availableMaxAmount.multiplying(by: NSDecimalNumber.init(string: "0.25")).multiplying(byPowerOf10: -inputDecimal, withBehavior: WUtils.getDivideHandler(inputDecimal))
+        inputTextFiled.text = WUtils.decimalNumberToLocaleString(calValue, inputDecimal)
         self.onUIupdate()
     }
     
     @IBAction func onClickHalf(_ sender: UIButton) {
-        let calValue = availableMaxAmount.dividing(by: NSDecimalNumber(2)).multiplying(byPowerOf10: -dpInPutDecimal, withBehavior: WUtils.getDivideHandler(dpInPutDecimal))
-        inputTextFiled.text = WUtils.decimalNumberToLocaleString(calValue, dpInPutDecimal)
+        let calValue = availableMaxAmount.dividing(by: NSDecimalNumber(2)).multiplying(byPowerOf10: -inputDecimal, withBehavior: WUtils.getDivideHandler(inputDecimal))
+        inputTextFiled.text = WUtils.decimalNumberToLocaleString(calValue, inputDecimal)
         self.onUIupdate()
     }
     
     @IBAction func onClick3_4(_ sender: UIButton) {
-        let calValue = availableMaxAmount.multiplying(by: NSDecimalNumber.init(string: "0.75")).multiplying(byPowerOf10: -dpInPutDecimal, withBehavior: WUtils.getDivideHandler(dpInPutDecimal))
-        inputTextFiled.text = WUtils.decimalNumberToLocaleString(calValue, dpInPutDecimal)
+        let calValue = availableMaxAmount.multiplying(by: NSDecimalNumber.init(string: "0.75")).multiplying(byPowerOf10: -inputDecimal, withBehavior: WUtils.getDivideHandler(inputDecimal))
+        inputTextFiled.text = WUtils.decimalNumberToLocaleString(calValue, inputDecimal)
         self.onUIupdate()
     }
     
     @IBAction func onClickMax(_ sender: UIButton) {
-        let maxValue = availableMaxAmount.multiplying(byPowerOf10: -dpInPutDecimal, withBehavior: WUtils.getDivideHandler(dpInPutDecimal))
-        inputTextFiled.text = WUtils.decimalNumberToLocaleString(maxValue, dpInPutDecimal)
+        let maxValue = availableMaxAmount.multiplying(byPowerOf10: -inputDecimal, withBehavior: WUtils.getDivideHandler(inputDecimal))
+        inputTextFiled.text = WUtils.decimalNumberToLocaleString(maxValue, inputDecimal)
         self.onUIupdate()
     }
     
@@ -163,9 +178,9 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
     @IBAction func onClickNext(_ sender: UIButton) {
         if (isValiadAmount()) {
             let userInput = WUtils.localeStringToDecimal((inputTextFiled.text?.trimmingCharacters(in: .whitespaces))!)
-            pageHolderVC.mSwapInAmount = userInput.multiplying(byPowerOf10: dpInPutDecimal)
+            pageHolderVC.mSwapInAmount = userInput.multiplying(byPowerOf10: inputDecimal)
             let userOutput = WUtils.localeStringToDecimal((outputCoinAmountLabel.text?.trimmingCharacters(in: .whitespaces))!)
-            pageHolderVC.mSwapOutAmount = userOutput.multiplying(byPowerOf10: dpOutPutDecimal)
+            pageHolderVC.mSwapOutAmount = userOutput.multiplying(byPowerOf10: outputDecimal)
             sender.isUserInteractionEnabled = false
             pageHolderVC.onNextPage()
         }
@@ -176,36 +191,28 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         if (text == nil || text!.count == 0) { return false }
         let userInput = WUtils.localeStringToDecimal(text!)
         if (userInput == NSDecimalNumber.zero) { return false }
-        if (userInput.compare(NSDecimalNumber.init(string: "0.01")).rawValue < 0) {
-            self.onShowToast("Please enter 0.01 or higher")
+        if (userInput.compare(NSDecimalNumber.init(string: "0.001")).rawValue < 0) {
+            self.onShowToast("Please enter 0.001 or higher")
             return false
         }
-        if (userInput.multiplying(byPowerOf10: dpInPutDecimal).compare(availableMaxAmount).rawValue > 0) {
+        if (userInput.multiplying(byPowerOf10: inputDecimal).compare(availableMaxAmount).rawValue > 0) {
             return false
         }
         return true
     }
     
-    
-    
-    func onFetchGammPool(_ poolId: String) {
+    func onFetchSelectedPool(_ poolId: String) {
         DispatchQueue.global().async {
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
-            
             do {
-                let req = Osmosis_Gamm_V1beta1_QueryPoolRequest.with {
-                    $0.poolID = UInt64(poolId)!
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Osmosis_Gamm_V1beta1_QueryPoolRequest.with { $0.poolID = UInt64(poolId)! }
+                if let response = try? Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pool(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.selectedPool = response.pool
                 }
-                let response = try Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pool(req, callOptions: BaseNetWork.getCallOptions()).response.wait()
-                self.pageHolderVC.mPool = try! Osmosis_Gamm_Balancer_V1beta1_Pool.init(serializedData: response.pool.value)
-                
+                try channel.close().wait()
                 
             } catch {
-                print("onFetchGammPools failed: \(error)")
+                print("onFetchSelectedPool failed: \(error)")
             }
             DispatchQueue.main.async(execute: {
                 self.loadingImg.stopAnimating()
