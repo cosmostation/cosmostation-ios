@@ -265,12 +265,9 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
                 let req = Osmosis_Gamm_V1beta1_QueryPoolRequest.with { $0.poolID = id}
                 if let response = try? Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pool(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     if (response.pool.typeURL.contains(Osmosis_Gamm_V1beta1_Pool.protoMessageName) == true) {
-                        self.mSelectedPool = try! Osmosis_Gamm_V1beta1_Pool.init(serializedData: response.pool.value)
-                        print("mSelectedPool ", self.mSelectedPool?.id)
-                        
+                        self.mSelectedPool = try! Osmosis_Gamm_V1beta1_Pool.init(serializedData: response.pool.value)                        
                     } else if (response.pool.typeURL.contains(Osmosis_Gamm_Poolmodels_Stableswap_V1beta1_Pool.protoMessageName) == true) {
                         self.mSelectedStablePool = try! Osmosis_Gamm_Poolmodels_Stableswap_V1beta1_Pool.init(serializedData: response.pool.value)
-                        print("mSelectedStablePool ", self.mSelectedStablePool?.id)
                     }
                 }
                 try channel.close().wait()
