@@ -726,8 +726,8 @@ public class WUtils {
     //address, accountnumber, sequencenumber
     static func onParseAuthGrpc(_ response :Cosmos_Auth_V1beta1_QueryAccountResponse) -> (String?, UInt64?, UInt64?) {
         var rawAccount = response.account
-        if (rawAccount.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName)) {
-            rawAccount = try! Desmos_Profiles_V1beta1_Profile.init(serializedData: rawAccount.value).account
+        if (rawAccount.typeURL.contains(Desmos_Profiles_V3_Profile.protoMessageName)) {
+            rawAccount = try! Desmos_Profiles_V3_Profile.init(serializedData: rawAccount.value).account
         }
         
         if (rawAccount.typeURL.contains(Cosmos_Auth_V1beta1_BaseAccount.protoMessageName)) {
