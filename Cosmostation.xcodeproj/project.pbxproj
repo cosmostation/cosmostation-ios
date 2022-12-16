@@ -1354,6 +1354,7 @@
 		04FD713B28B8B3C80059E88B /* AssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD713728B8B3C80059E88B /* AssetCell.xib */; };
 		151788EC282E078600A7D7CC /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
 		1569489828ABD9E0004777ED /* ChainPassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1569489728ABD9E0004777ED /* ChainPassage.swift */; };
+		15F0B718294C770200127D9A /* ChainQuicksilver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B717294C770200127D9A /* ChainQuicksilver.swift */; };
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
 		181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
 		1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1812D46128E184D800AC7D61 /* GoogleService-Info.plist */; };
@@ -3710,6 +3711,7 @@
 		151788EA282E078600A7D7CC /* WalletStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStationCell.swift; sourceTree = "<group>"; };
 		151788EB282E078600A7D7CC /* WalletStationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStationCell.xib; sourceTree = "<group>"; };
 		1569489728ABD9E0004777ED /* ChainPassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPassage.swift; sourceTree = "<group>"; };
+		15F0B717294C770200127D9A /* ChainQuicksilver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainQuicksilver.swift; sourceTree = "<group>"; };
 		181099DE28AE92FC00C178B5 /* PushUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUtils.swift; sourceTree = "<group>"; };
 		1812D46128E184D800AC7D61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		187446FE2930940F00849EE4 /* ApiKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKey.plist; sourceTree = "<group>"; };
@@ -4385,6 +4387,7 @@
 				1569489728ABD9E0004777ED /* ChainPassage.swift */,
 				0451FC61282A3A0C00214FDA /* ChainPersistence.swift */,
 				0451FCB7282A3C1000214FDA /* ChainProvenance.swift */,
+				15F0B717294C770200127D9A /* ChainQuicksilver.swift */,
 				0451FC8D282A3B0800214FDA /* ChainRegen.swift */,
 				0451FC8A282A3AEB00214FDA /* ChainRizon.swift */,
 				0451FC59282A39AF00214FDA /* ChainSecret.swift */,
@@ -8946,6 +8949,7 @@
 				0444443527AC08F100EB093E /* TxStoreContractCell.swift in Sources */,
 				E1827E252256293900BC0350 /* ValidatorDetailCell.swift in Sources */,
 				042A0CC3288E599F00C4DC38 /* cosmos_authz_v1beta1_genesis.pb.swift in Sources */,
+				15F0B718294C770200127D9A /* ChainQuicksilver.swift in Sources */,
 				2802B4AD28250A9300B2D9E8 /* DeriveWalletCell.swift in Sources */,
 				040FAAE2275F55C400229F6F /* cosmos_capability_v1beta1_capability.pb.swift in Sources */,
 				04AA4C132906A6DD0027877B /* kava_router_v1beta1_tx.grpc.swift in Sources */,
