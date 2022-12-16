@@ -239,12 +239,12 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         } else if (type == SELECT_POPUP_OSMOSIS_COIN_OUT) {
             self.mOutputDenom = self.mSwapableDenoms[result]
             mSelectedPoolId = 0
-            if let pool = BaseData.instance.mSupportPools.filter({ $0.adenom == mOutputDenom }).first {
+            if let pool = BaseData.instance.mSupportPools.filter({ $0.adenom == mOutputDenom && $0.bdenom == mInputDenom }).first {
                 mInputDenom = pool.bdenom
                 mSelectedPoolId = UInt64(pool.id)!
                 onFetchSelectedPool(mSelectedPoolId)
             }
-            if let pool = BaseData.instance.mSupportPools.filter({ $0.bdenom == mOutputDenom }).first {
+            if let pool = BaseData.instance.mSupportPools.filter({ $0.bdenom == mOutputDenom && $0.adenom == mInputDenom}).first {
                 mInputDenom = pool.adenom
                 mSelectedPoolId = UInt64(pool.id)!
                 onFetchSelectedPool(mSelectedPoolId)
