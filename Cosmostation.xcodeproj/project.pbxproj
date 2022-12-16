@@ -1016,6 +1016,50 @@
 		04C5AEB428633D47007627EA /* Vote4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5AEB128633D47007627EA /* Vote4ViewController.swift */; };
 		04C5AEB528633D47007627EA /* Vote4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C5AEB228633D47007627EA /* Vote4ViewController.xib */; };
 		04C5AEB628633D47007627EA /* Vote4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C5AEB228633D47007627EA /* Vote4ViewController.xib */; };
+		04CF7113294C0DDE00134A84 /* desmos_profiles_v3_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF70FE294C0DDC00134A84 /* desmos_profiles_v3_models_profile.pb.swift */; };
+		04CF7114294C0DDE00134A84 /* desmos_profiles_v3_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF70FE294C0DDC00134A84 /* desmos_profiles_v3_models_profile.pb.swift */; };
+		04CF7115294C0DDE00134A84 /* desmos_profiles_v3_models_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF70FF294C0DDC00134A84 /* desmos_profiles_v3_models_dtag_requests.pb.swift */; };
+		04CF7116294C0DDE00134A84 /* desmos_profiles_v3_models_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF70FF294C0DDC00134A84 /* desmos_profiles_v3_models_dtag_requests.pb.swift */; };
+		04CF7117294C0DDE00134A84 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7100294C0DDC00134A84 /* desmos_profiles_v3_query_dtag_requests.pb.swift */; };
+		04CF7118294C0DDE00134A84 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7100294C0DDC00134A84 /* desmos_profiles_v3_query_dtag_requests.pb.swift */; };
+		04CF7119294C0DDE00134A84 /* desmos_profiles_v3_models_packets.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7101294C0DDC00134A84 /* desmos_profiles_v3_models_packets.pb.swift */; };
+		04CF711A294C0DDE00134A84 /* desmos_profiles_v3_models_packets.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7101294C0DDC00134A84 /* desmos_profiles_v3_models_packets.pb.swift */; };
+		04CF711B294C0DDE00134A84 /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7102294C0DDC00134A84 /* desmos_profiles_v3_models_chain_links.pb.swift */; };
+		04CF711C294C0DDE00134A84 /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7102294C0DDC00134A84 /* desmos_profiles_v3_models_chain_links.pb.swift */; };
+		04CF711D294C0DDE00134A84 /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7103294C0DDD00134A84 /* desmos_profiles_v3_msgs_app_links.pb.swift */; };
+		04CF711E294C0DDE00134A84 /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7103294C0DDD00134A84 /* desmos_profiles_v3_msgs_app_links.pb.swift */; };
+		04CF711F294C0DDE00134A84 /* desmos_profiles_v3_query_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7104294C0DDD00134A84 /* desmos_profiles_v3_query_profile.pb.swift */; };
+		04CF7120294C0DDE00134A84 /* desmos_profiles_v3_query_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7104294C0DDD00134A84 /* desmos_profiles_v3_query_profile.pb.swift */; };
+		04CF7121294C0DDE00134A84 /* desmos_profiles_v3_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7105294C0DDD00134A84 /* desmos_profiles_v3_query.grpc.swift */; };
+		04CF7122294C0DDE00134A84 /* desmos_profiles_v3_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7105294C0DDD00134A84 /* desmos_profiles_v3_query.grpc.swift */; };
+		04CF7123294C0DDE00134A84 /* desmos_profiles_v3_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7106294C0DDD00134A84 /* desmos_profiles_v3_query.pb.swift */; };
+		04CF7124294C0DDE00134A84 /* desmos_profiles_v3_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7106294C0DDD00134A84 /* desmos_profiles_v3_query.pb.swift */; };
+		04CF7125294C0DDE00134A84 /* desmos_profiles_v3_msg_server.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7107294C0DDD00134A84 /* desmos_profiles_v3_msg_server.pb.swift */; };
+		04CF7126294C0DDE00134A84 /* desmos_profiles_v3_msg_server.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7107294C0DDD00134A84 /* desmos_profiles_v3_msg_server.pb.swift */; };
+		04CF7127294C0DDE00134A84 /* desmos_profiles_v3_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7108294C0DDD00134A84 /* desmos_profiles_v3_genesis.pb.swift */; };
+		04CF7128294C0DDE00134A84 /* desmos_profiles_v3_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7108294C0DDD00134A84 /* desmos_profiles_v3_genesis.pb.swift */; };
+		04CF7129294C0DDE00134A84 /* desmos_profiles_v3_models_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7109294C0DDD00134A84 /* desmos_profiles_v3_models_params.pb.swift */; };
+		04CF712A294C0DDE00134A84 /* desmos_profiles_v3_models_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7109294C0DDD00134A84 /* desmos_profiles_v3_models_params.pb.swift */; };
+		04CF712B294C0DDE00134A84 /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF710A294C0DDD00134A84 /* desmos_profiles_v3_query_chain_links.pb.swift */; };
+		04CF712C294C0DDE00134A84 /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF710A294C0DDD00134A84 /* desmos_profiles_v3_query_chain_links.pb.swift */; };
+		04CF712D294C0DDE00134A84 /* desmos_profiles_v3_query_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF710B294C0DDD00134A84 /* desmos_profiles_v3_query_params.pb.swift */; };
+		04CF712E294C0DDE00134A84 /* desmos_profiles_v3_query_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF710B294C0DDD00134A84 /* desmos_profiles_v3_query_params.pb.swift */; };
+		04CF712F294C0DDE00134A84 /* desmos_profiles_v3_msgs_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF710C294C0DDD00134A84 /* desmos_profiles_v3_msgs_chain_links.pb.swift */; };
+		04CF7130294C0DDE00134A84 /* desmos_profiles_v3_msgs_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF710C294C0DDD00134A84 /* desmos_profiles_v3_msgs_chain_links.pb.swift */; };
+		04CF7131294C0DDE00134A84 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF710D294C0DDE00134A84 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift */; };
+		04CF7132294C0DDE00134A84 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF710D294C0DDE00134A84 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift */; };
+		04CF7133294C0DDE00134A84 /* desmos_profiles_v3_client_cli.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF710E294C0DDE00134A84 /* desmos_profiles_v3_client_cli.pb.swift */; };
+		04CF7134294C0DDE00134A84 /* desmos_profiles_v3_client_cli.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF710E294C0DDE00134A84 /* desmos_profiles_v3_client_cli.pb.swift */; };
+		04CF7135294C0DDE00134A84 /* desmos_profiles_v3_msg_server.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF710F294C0DDE00134A84 /* desmos_profiles_v3_msg_server.grpc.swift */; };
+		04CF7136294C0DDE00134A84 /* desmos_profiles_v3_msg_server.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF710F294C0DDE00134A84 /* desmos_profiles_v3_msg_server.grpc.swift */; };
+		04CF7137294C0DDE00134A84 /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7110294C0DDE00134A84 /* desmos_profiles_v3_msgs_profile.pb.swift */; };
+		04CF7138294C0DDE00134A84 /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7110294C0DDE00134A84 /* desmos_profiles_v3_msgs_profile.pb.swift */; };
+		04CF7139294C0DDE00134A84 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7111294C0DDE00134A84 /* desmos_profiles_v3_models_app_links.pb.swift */; };
+		04CF713A294C0DDE00134A84 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7111294C0DDE00134A84 /* desmos_profiles_v3_models_app_links.pb.swift */; };
+		04CF713B294C0DDE00134A84 /* desmos_profiles_v3_query_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7112294C0DDE00134A84 /* desmos_profiles_v3_query_app_links.pb.swift */; };
+		04CF713C294C0DDE00134A84 /* desmos_profiles_v3_query_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF7112294C0DDE00134A84 /* desmos_profiles_v3_query_app_links.pb.swift */; };
+		04CF713E294C0EB300134A84 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF713D294C0EB300134A84 /* PasswordViewController.swift */; };
+		04CF713F294C0EB300134A84 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF713D294C0EB300134A84 /* PasswordViewController.swift */; };
 		04CFBD482691F8460013150B /* TxTokenSwapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFBD462691F8460013150B /* TxTokenSwapCell.swift */; };
 		04CFBD492691F8460013150B /* TxTokenSwapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CFBD472691F8460013150B /* TxTokenSwapCell.xib */; };
 		04CFBD4D2692274B0013150B /* TxIbcReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFBD4B2692274B0013150B /* TxIbcReceiveCell.swift */; };
@@ -1310,48 +1354,6 @@
 		04FD713B28B8B3C80059E88B /* AssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD713728B8B3C80059E88B /* AssetCell.xib */; };
 		151788EC282E078600A7D7CC /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
 		1569489828ABD9E0004777ED /* ChainPassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1569489728ABD9E0004777ED /* ChainPassage.swift */; };
-		15F0B6EB294B919D00127D9A /* desmos_profiles_v3_query_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6D6294B919B00127D9A /* desmos_profiles_v3_query_profile.pb.swift */; };
-		15F0B6EC294B919D00127D9A /* desmos_profiles_v3_query_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6D6294B919B00127D9A /* desmos_profiles_v3_query_profile.pb.swift */; };
-		15F0B6ED294B919D00127D9A /* desmos_profiles_v3_models_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6D7294B919B00127D9A /* desmos_profiles_v3_models_dtag_requests.pb.swift */; };
-		15F0B6EE294B919E00127D9A /* desmos_profiles_v3_models_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6D7294B919B00127D9A /* desmos_profiles_v3_models_dtag_requests.pb.swift */; };
-		15F0B6EF294B919E00127D9A /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6D8294B919B00127D9A /* desmos_profiles_v3_models_chain_links.pb.swift */; };
-		15F0B6F0294B919E00127D9A /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6D8294B919B00127D9A /* desmos_profiles_v3_models_chain_links.pb.swift */; };
-		15F0B6F1294B919E00127D9A /* desmos_profiles_v3_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6D9294B919B00127D9A /* desmos_profiles_v3_query.grpc.swift */; };
-		15F0B6F2294B919E00127D9A /* desmos_profiles_v3_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6D9294B919B00127D9A /* desmos_profiles_v3_query.grpc.swift */; };
-		15F0B6F3294B919E00127D9A /* desmos_profiles_v3_models_packets.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6DA294B919B00127D9A /* desmos_profiles_v3_models_packets.pb.swift */; };
-		15F0B6F4294B919E00127D9A /* desmos_profiles_v3_models_packets.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6DA294B919B00127D9A /* desmos_profiles_v3_models_packets.pb.swift */; };
-		15F0B6F5294B919E00127D9A /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6DB294B919B00127D9A /* desmos_profiles_v3_msgs_app_links.pb.swift */; };
-		15F0B6F6294B919E00127D9A /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6DB294B919B00127D9A /* desmos_profiles_v3_msgs_app_links.pb.swift */; };
-		15F0B6F7294B919E00127D9A /* desmos_profiles_v3_models_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6DC294B919B00127D9A /* desmos_profiles_v3_models_params.pb.swift */; };
-		15F0B6F8294B919E00127D9A /* desmos_profiles_v3_models_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6DC294B919B00127D9A /* desmos_profiles_v3_models_params.pb.swift */; };
-		15F0B6F9294B919E00127D9A /* desmos_profiles_v3_msg_server.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6DD294B919C00127D9A /* desmos_profiles_v3_msg_server.pb.swift */; };
-		15F0B6FA294B919E00127D9A /* desmos_profiles_v3_msg_server.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6DD294B919C00127D9A /* desmos_profiles_v3_msg_server.pb.swift */; };
-		15F0B6FB294B919E00127D9A /* desmos_profiles_v3_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6DE294B919C00127D9A /* desmos_profiles_v3_models_profile.pb.swift */; };
-		15F0B6FC294B919E00127D9A /* desmos_profiles_v3_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6DE294B919C00127D9A /* desmos_profiles_v3_models_profile.pb.swift */; };
-		15F0B6FD294B919E00127D9A /* desmos_profiles_v3_msg_server.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6DF294B919C00127D9A /* desmos_profiles_v3_msg_server.grpc.swift */; };
-		15F0B6FE294B919E00127D9A /* desmos_profiles_v3_msg_server.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6DF294B919C00127D9A /* desmos_profiles_v3_msg_server.grpc.swift */; };
-		15F0B6FF294B919E00127D9A /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E0294B919C00127D9A /* desmos_profiles_v3_msgs_profile.pb.swift */; };
-		15F0B700294B919E00127D9A /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E0294B919C00127D9A /* desmos_profiles_v3_msgs_profile.pb.swift */; };
-		15F0B701294B919E00127D9A /* desmos_profiles_v3_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E1294B919C00127D9A /* desmos_profiles_v3_models_app_links.pb.swift */; };
-		15F0B702294B919E00127D9A /* desmos_profiles_v3_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E1294B919C00127D9A /* desmos_profiles_v3_models_app_links.pb.swift */; };
-		15F0B703294B919E00127D9A /* desmos_profiles_v3_query_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E2294B919C00127D9A /* desmos_profiles_v3_query_app_links.pb.swift */; };
-		15F0B704294B919E00127D9A /* desmos_profiles_v3_query_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E2294B919C00127D9A /* desmos_profiles_v3_query_app_links.pb.swift */; };
-		15F0B705294B919E00127D9A /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E3294B919C00127D9A /* desmos_profiles_v3_query_dtag_requests.pb.swift */; };
-		15F0B706294B919E00127D9A /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E3294B919C00127D9A /* desmos_profiles_v3_query_dtag_requests.pb.swift */; };
-		15F0B707294B919E00127D9A /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E4294B919C00127D9A /* desmos_profiles_v3_msgs_dtag_requests.pb.swift */; };
-		15F0B708294B919E00127D9A /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E4294B919C00127D9A /* desmos_profiles_v3_msgs_dtag_requests.pb.swift */; };
-		15F0B709294B919E00127D9A /* desmos_profiles_v3_client_cli.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E5294B919D00127D9A /* desmos_profiles_v3_client_cli.pb.swift */; };
-		15F0B70A294B919E00127D9A /* desmos_profiles_v3_client_cli.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E5294B919D00127D9A /* desmos_profiles_v3_client_cli.pb.swift */; };
-		15F0B70B294B919E00127D9A /* desmos_profiles_v3_query_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E6294B919D00127D9A /* desmos_profiles_v3_query_params.pb.swift */; };
-		15F0B70C294B919E00127D9A /* desmos_profiles_v3_query_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E6294B919D00127D9A /* desmos_profiles_v3_query_params.pb.swift */; };
-		15F0B70D294B919E00127D9A /* desmos_profiles_v3_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E7294B919D00127D9A /* desmos_profiles_v3_query.pb.swift */; };
-		15F0B70E294B919E00127D9A /* desmos_profiles_v3_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E7294B919D00127D9A /* desmos_profiles_v3_query.pb.swift */; };
-		15F0B70F294B919E00127D9A /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E8294B919D00127D9A /* desmos_profiles_v3_query_chain_links.pb.swift */; };
-		15F0B710294B919E00127D9A /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E8294B919D00127D9A /* desmos_profiles_v3_query_chain_links.pb.swift */; };
-		15F0B711294B919E00127D9A /* desmos_profiles_v3_msgs_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E9294B919D00127D9A /* desmos_profiles_v3_msgs_chain_links.pb.swift */; };
-		15F0B712294B919E00127D9A /* desmos_profiles_v3_msgs_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6E9294B919D00127D9A /* desmos_profiles_v3_msgs_chain_links.pb.swift */; };
-		15F0B713294B919E00127D9A /* desmos_profiles_v3_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6EA294B919D00127D9A /* desmos_profiles_v3_genesis.pb.swift */; };
-		15F0B714294B919E00127D9A /* desmos_profiles_v3_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B6EA294B919D00127D9A /* desmos_profiles_v3_genesis.pb.swift */; };
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
 		181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
 		1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1812D46128E184D800AC7D61 /* GoogleService-Info.plist */; };
@@ -1993,7 +1995,6 @@
 		18FFB5EB281AF533004E65BB /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283439A32531D1DF00CCFADE /* MyAccountViewController.swift */; };
 		18FFB5EC281AF533004E65BB /* KavaSwapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B37D2B26D8EB42008AACD2 /* KavaSwapViewController.swift */; };
 		18FFB5EE281AF533004E65BB /* TxRegisterDomainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E9461254902BA007A9291 /* TxRegisterDomainCell.swift */; };
-		18FFB5F0281AF533004E65BB /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B212249EA0C0019B7BB /* PasswordViewController.swift */; };
 		18FFB5F2281AF533004E65BB /* SegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E3C222E7E2900A1436F /* SegwitAddrCoder.swift */; };
 		18FFB5F4281AF533004E65BB /* ValidatorDetailMyDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1827E19225628FF00BC0350 /* ValidatorDetailMyDetailCell.swift */; };
 		18FFB5FA281AF533004E65BB /* HtlcResultClaimCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A33E824486DB60052BD3D /* HtlcResultClaimCell.swift */; };
@@ -2712,7 +2713,6 @@
 		E16D9B1B2248D1370019B7BB /* BoarderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1A2248D1370019B7BB /* BoarderLabel.swift */; };
 		E16D9B1D2248E6A60019B7BB /* WKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1C2248E6A60019B7BB /* WKey.swift */; };
 		E16D9B202249E9DC0019B7BB /* Password.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E16D9B1F2249E9DC0019B7BB /* Password.storyboard */; };
-		E16D9B222249EA0C0019B7BB /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B212249EA0C0019B7BB /* PasswordViewController.swift */; };
 		E16D9B24224A083E0019B7BB /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B23224A083E0019B7BB /* KeyboardViewController.swift */; };
 		E16D9B26224A08510019B7BB /* DecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B25224A08510019B7BB /* DecimalViewController.swift */; };
 		E16D9B28224A08660019B7BB /* AlphabetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B27224A08660019B7BB /* AlphabetViewController.swift */; };
@@ -3510,6 +3510,28 @@
 		04C5AEAC28633D39007627EA /* Vote1ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Vote1ViewController.xib; sourceTree = "<group>"; };
 		04C5AEB128633D47007627EA /* Vote4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vote4ViewController.swift; sourceTree = "<group>"; };
 		04C5AEB228633D47007627EA /* Vote4ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Vote4ViewController.xib; sourceTree = "<group>"; };
+		04CF70FE294C0DDC00134A84 /* desmos_profiles_v3_models_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_models_profile.pb.swift; sourceTree = "<group>"; };
+		04CF70FF294C0DDC00134A84 /* desmos_profiles_v3_models_dtag_requests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_models_dtag_requests.pb.swift; sourceTree = "<group>"; };
+		04CF7100294C0DDC00134A84 /* desmos_profiles_v3_query_dtag_requests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query_dtag_requests.pb.swift; sourceTree = "<group>"; };
+		04CF7101294C0DDC00134A84 /* desmos_profiles_v3_models_packets.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_models_packets.pb.swift; sourceTree = "<group>"; };
+		04CF7102294C0DDC00134A84 /* desmos_profiles_v3_models_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_models_chain_links.pb.swift; sourceTree = "<group>"; };
+		04CF7103294C0DDD00134A84 /* desmos_profiles_v3_msgs_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msgs_app_links.pb.swift; sourceTree = "<group>"; };
+		04CF7104294C0DDD00134A84 /* desmos_profiles_v3_query_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query_profile.pb.swift; sourceTree = "<group>"; };
+		04CF7105294C0DDD00134A84 /* desmos_profiles_v3_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query.grpc.swift; sourceTree = "<group>"; };
+		04CF7106294C0DDD00134A84 /* desmos_profiles_v3_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query.pb.swift; sourceTree = "<group>"; };
+		04CF7107294C0DDD00134A84 /* desmos_profiles_v3_msg_server.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msg_server.pb.swift; sourceTree = "<group>"; };
+		04CF7108294C0DDD00134A84 /* desmos_profiles_v3_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_genesis.pb.swift; sourceTree = "<group>"; };
+		04CF7109294C0DDD00134A84 /* desmos_profiles_v3_models_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_models_params.pb.swift; sourceTree = "<group>"; };
+		04CF710A294C0DDD00134A84 /* desmos_profiles_v3_query_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query_chain_links.pb.swift; sourceTree = "<group>"; };
+		04CF710B294C0DDD00134A84 /* desmos_profiles_v3_query_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query_params.pb.swift; sourceTree = "<group>"; };
+		04CF710C294C0DDD00134A84 /* desmos_profiles_v3_msgs_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msgs_chain_links.pb.swift; sourceTree = "<group>"; };
+		04CF710D294C0DDE00134A84 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msgs_dtag_requests.pb.swift; sourceTree = "<group>"; };
+		04CF710E294C0DDE00134A84 /* desmos_profiles_v3_client_cli.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_client_cli.pb.swift; sourceTree = "<group>"; };
+		04CF710F294C0DDE00134A84 /* desmos_profiles_v3_msg_server.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msg_server.grpc.swift; sourceTree = "<group>"; };
+		04CF7110294C0DDE00134A84 /* desmos_profiles_v3_msgs_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msgs_profile.pb.swift; sourceTree = "<group>"; };
+		04CF7111294C0DDE00134A84 /* desmos_profiles_v3_models_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_models_app_links.pb.swift; sourceTree = "<group>"; };
+		04CF7112294C0DDE00134A84 /* desmos_profiles_v3_query_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query_app_links.pb.swift; sourceTree = "<group>"; };
+		04CF713D294C0EB300134A84 /* PasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		04CFBD462691F8460013150B /* TxTokenSwapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxTokenSwapCell.swift; sourceTree = "<group>"; };
 		04CFBD472691F8460013150B /* TxTokenSwapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxTokenSwapCell.xib; sourceTree = "<group>"; };
 		04CFBD4B2692274B0013150B /* TxIbcReceiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxIbcReceiveCell.swift; sourceTree = "<group>"; };
@@ -3688,27 +3710,6 @@
 		151788EA282E078600A7D7CC /* WalletStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStationCell.swift; sourceTree = "<group>"; };
 		151788EB282E078600A7D7CC /* WalletStationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStationCell.xib; sourceTree = "<group>"; };
 		1569489728ABD9E0004777ED /* ChainPassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPassage.swift; sourceTree = "<group>"; };
-		15F0B6D6294B919B00127D9A /* desmos_profiles_v3_query_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_query_profile.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_query_profile.pb.swift; sourceTree = "<group>"; };
-		15F0B6D7294B919B00127D9A /* desmos_profiles_v3_models_dtag_requests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_models_dtag_requests.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_models_dtag_requests.pb.swift; sourceTree = "<group>"; };
-		15F0B6D8294B919B00127D9A /* desmos_profiles_v3_models_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_models_chain_links.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_models_chain_links.pb.swift; sourceTree = "<group>"; };
-		15F0B6D9294B919B00127D9A /* desmos_profiles_v3_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_query.grpc.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_query.grpc.swift; sourceTree = "<group>"; };
-		15F0B6DA294B919B00127D9A /* desmos_profiles_v3_models_packets.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_models_packets.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_models_packets.pb.swift; sourceTree = "<group>"; };
-		15F0B6DB294B919B00127D9A /* desmos_profiles_v3_msgs_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_msgs_app_links.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_msgs_app_links.pb.swift; sourceTree = "<group>"; };
-		15F0B6DC294B919B00127D9A /* desmos_profiles_v3_models_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_models_params.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_models_params.pb.swift; sourceTree = "<group>"; };
-		15F0B6DD294B919C00127D9A /* desmos_profiles_v3_msg_server.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_msg_server.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_msg_server.pb.swift; sourceTree = "<group>"; };
-		15F0B6DE294B919C00127D9A /* desmos_profiles_v3_models_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_models_profile.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_models_profile.pb.swift; sourceTree = "<group>"; };
-		15F0B6DF294B919C00127D9A /* desmos_profiles_v3_msg_server.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_msg_server.grpc.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_msg_server.grpc.swift; sourceTree = "<group>"; };
-		15F0B6E0294B919C00127D9A /* desmos_profiles_v3_msgs_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_msgs_profile.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_msgs_profile.pb.swift; sourceTree = "<group>"; };
-		15F0B6E1294B919C00127D9A /* desmos_profiles_v3_models_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_models_app_links.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_models_app_links.pb.swift; sourceTree = "<group>"; };
-		15F0B6E2294B919C00127D9A /* desmos_profiles_v3_query_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_query_app_links.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_query_app_links.pb.swift; sourceTree = "<group>"; };
-		15F0B6E3294B919C00127D9A /* desmos_profiles_v3_query_dtag_requests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_query_dtag_requests.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_query_dtag_requests.pb.swift; sourceTree = "<group>"; };
-		15F0B6E4294B919C00127D9A /* desmos_profiles_v3_msgs_dtag_requests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_msgs_dtag_requests.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_msgs_dtag_requests.pb.swift; sourceTree = "<group>"; };
-		15F0B6E5294B919D00127D9A /* desmos_profiles_v3_client_cli.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_client_cli.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_client_cli.pb.swift; sourceTree = "<group>"; };
-		15F0B6E6294B919D00127D9A /* desmos_profiles_v3_query_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_query_params.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_query_params.pb.swift; sourceTree = "<group>"; };
-		15F0B6E7294B919D00127D9A /* desmos_profiles_v3_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_query.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_query.pb.swift; sourceTree = "<group>"; };
-		15F0B6E8294B919D00127D9A /* desmos_profiles_v3_query_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_query_chain_links.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_query_chain_links.pb.swift; sourceTree = "<group>"; };
-		15F0B6E9294B919D00127D9A /* desmos_profiles_v3_msgs_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_msgs_chain_links.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_msgs_chain_links.pb.swift; sourceTree = "<group>"; };
-		15F0B6EA294B919D00127D9A /* desmos_profiles_v3_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = desmos_profiles_v3_genesis.pb.swift; path = ../../../proto/proto_collections/output_swift/desmos_profiles_v3_genesis.pb.swift; sourceTree = "<group>"; };
 		181099DE28AE92FC00C178B5 /* PushUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUtils.swift; sourceTree = "<group>"; };
 		1812D46128E184D800AC7D61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		187446FE2930940F00849EE4 /* ApiKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKey.plist; sourceTree = "<group>"; };
@@ -4163,7 +4164,6 @@
 		E16D9B1A2248D1370019B7BB /* BoarderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoarderLabel.swift; sourceTree = "<group>"; };
 		E16D9B1C2248E6A60019B7BB /* WKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKey.swift; sourceTree = "<group>"; };
 		E16D9B1F2249E9DC0019B7BB /* Password.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Password.storyboard; sourceTree = "<group>"; };
-		E16D9B212249EA0C0019B7BB /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		E16D9B23224A083E0019B7BB /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		E16D9B25224A08510019B7BB /* DecimalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalViewController.swift; sourceTree = "<group>"; };
 		E16D9B27224A08660019B7BB /* AlphabetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabetViewController.swift; sourceTree = "<group>"; };
@@ -4847,27 +4847,27 @@
 				040FA6DB275F55B300229F6F /* desmos_profiles_v1beta1_query_relationships.pb.swift */,
 				040FA56A275F559900229F6F /* desmos_profiles_v1beta1_query.grpc.swift */,
 				040FA4D5275F559000229F6F /* desmos_profiles_v1beta1_query.pb.swift */,
-				15F0B6E5294B919D00127D9A /* desmos_profiles_v3_client_cli.pb.swift */,
-				15F0B6EA294B919D00127D9A /* desmos_profiles_v3_genesis.pb.swift */,
-				15F0B6E1294B919C00127D9A /* desmos_profiles_v3_models_app_links.pb.swift */,
-				15F0B6D8294B919B00127D9A /* desmos_profiles_v3_models_chain_links.pb.swift */,
-				15F0B6D7294B919B00127D9A /* desmos_profiles_v3_models_dtag_requests.pb.swift */,
-				15F0B6DA294B919B00127D9A /* desmos_profiles_v3_models_packets.pb.swift */,
-				15F0B6DC294B919B00127D9A /* desmos_profiles_v3_models_params.pb.swift */,
-				15F0B6DE294B919C00127D9A /* desmos_profiles_v3_models_profile.pb.swift */,
-				15F0B6DF294B919C00127D9A /* desmos_profiles_v3_msg_server.grpc.swift */,
-				15F0B6DD294B919C00127D9A /* desmos_profiles_v3_msg_server.pb.swift */,
-				15F0B6DB294B919B00127D9A /* desmos_profiles_v3_msgs_app_links.pb.swift */,
-				15F0B6E9294B919D00127D9A /* desmos_profiles_v3_msgs_chain_links.pb.swift */,
-				15F0B6E4294B919C00127D9A /* desmos_profiles_v3_msgs_dtag_requests.pb.swift */,
-				15F0B6E0294B919C00127D9A /* desmos_profiles_v3_msgs_profile.pb.swift */,
-				15F0B6E2294B919C00127D9A /* desmos_profiles_v3_query_app_links.pb.swift */,
-				15F0B6E8294B919D00127D9A /* desmos_profiles_v3_query_chain_links.pb.swift */,
-				15F0B6E3294B919C00127D9A /* desmos_profiles_v3_query_dtag_requests.pb.swift */,
-				15F0B6E6294B919D00127D9A /* desmos_profiles_v3_query_params.pb.swift */,
-				15F0B6D6294B919B00127D9A /* desmos_profiles_v3_query_profile.pb.swift */,
-				15F0B6D9294B919B00127D9A /* desmos_profiles_v3_query.grpc.swift */,
-				15F0B6E7294B919D00127D9A /* desmos_profiles_v3_query.pb.swift */,
+				04CF710E294C0DDE00134A84 /* desmos_profiles_v3_client_cli.pb.swift */,
+				04CF7108294C0DDD00134A84 /* desmos_profiles_v3_genesis.pb.swift */,
+				04CF7111294C0DDE00134A84 /* desmos_profiles_v3_models_app_links.pb.swift */,
+				04CF7102294C0DDC00134A84 /* desmos_profiles_v3_models_chain_links.pb.swift */,
+				04CF70FF294C0DDC00134A84 /* desmos_profiles_v3_models_dtag_requests.pb.swift */,
+				04CF7101294C0DDC00134A84 /* desmos_profiles_v3_models_packets.pb.swift */,
+				04CF7109294C0DDD00134A84 /* desmos_profiles_v3_models_params.pb.swift */,
+				04CF710F294C0DDE00134A84 /* desmos_profiles_v3_msg_server.grpc.swift */,
+				04CF7107294C0DDD00134A84 /* desmos_profiles_v3_msg_server.pb.swift */,
+				04CF710C294C0DDD00134A84 /* desmos_profiles_v3_msgs_chain_links.pb.swift */,
+				04CF710D294C0DDE00134A84 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift */,
+				04CF7110294C0DDE00134A84 /* desmos_profiles_v3_msgs_profile.pb.swift */,
+				04CF7112294C0DDE00134A84 /* desmos_profiles_v3_query_app_links.pb.swift */,
+				04CF7103294C0DDD00134A84 /* desmos_profiles_v3_msgs_app_links.pb.swift */,
+				04CF710A294C0DDD00134A84 /* desmos_profiles_v3_query_chain_links.pb.swift */,
+				04CF710B294C0DDD00134A84 /* desmos_profiles_v3_query_params.pb.swift */,
+				04CF70FE294C0DDC00134A84 /* desmos_profiles_v3_models_profile.pb.swift */,
+				04CF7100294C0DDC00134A84 /* desmos_profiles_v3_query_dtag_requests.pb.swift */,
+				04CF7104294C0DDD00134A84 /* desmos_profiles_v3_query_profile.pb.swift */,
+				04CF7105294C0DDD00134A84 /* desmos_profiles_v3_query.grpc.swift */,
+				04CF7106294C0DDD00134A84 /* desmos_profiles_v3_query.pb.swift */,
 				040FA583275F559B00229F6F /* gogoproto_gogo.pb.swift */,
 				040FA67F275F55AC00229F6F /* google_api_annotations.pb.swift */,
 				040FA75A275F55BC00229F6F /* google_api_http.pb.swift */,
@@ -5814,7 +5814,7 @@
 			isa = PBXGroup;
 			children = (
 				E16D9B1F2249E9DC0019B7BB /* Password.storyboard */,
-				E16D9B212249EA0C0019B7BB /* PasswordViewController.swift */,
+				04CF713D294C0EB300134A84 /* PasswordViewController.swift */,
 				E16D9B23224A083E0019B7BB /* KeyboardViewController.swift */,
 				E16D9B25224A08510019B7BB /* DecimalViewController.swift */,
 				E16D9B27224A08660019B7BB /* AlphabetViewController.swift */,
@@ -7105,7 +7105,6 @@
 			files = (
 				9F48C75629097FA00015CF89 /* HardPoolDeposit0ViewController.swift in Sources */,
 				B113B26B2909527F0004F5A6 /* HardListViewController.swift in Sources */,
-				15F0B710294B919E00127D9A /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */,
 				B113B26A290952630004F5A6 /* CardView.swift in Sources */,
 				B113B267290952360004F5A6 /* AccountCell.swift in Sources */,
 				B113B265290951F40004F5A6 /* HtlcResultSentCell.swift in Sources */,
@@ -7123,6 +7122,7 @@
 				1817CC58283E2CE600523713 /* ibc_core_client_v1_tx.pb.swift in Sources */,
 				04FCD2CC292E2CEF00BA5349 /* stride_claim_query.grpc.swift in Sources */,
 				049837DD286053EB009C91B8 /* MnemonicCreateViewController.swift in Sources */,
+				04CF713A294C0DDE00134A84 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */,
 				04FCD28C292E2CEF00BA5349 /* stride_stakeibc_genesis.pb.swift in Sources */,
 				18FFB26E281AF533004E65BB /* ResourceChainCell.swift in Sources */,
 				1817CB3E283E2CE500523713 /* starname_iov_escrow_v1beta1_tx.pb.swift in Sources */,
@@ -7169,6 +7169,7 @@
 				042AEE02286452CE00E13825 /* OkDeposit4ViewController.swift in Sources */,
 				1817CBE6283E2CE600523713 /* cosmos_crypto_keyring_v1_record.pb.swift in Sources */,
 				18FFB298281AF533004E65BB /* TokenDetailUnbondingDetailCell.swift in Sources */,
+				04CF7132294C0DDE00134A84 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */,
 				1817CC62283E2CE600523713 /* cosmos_group_v1beta1_tx.pb.swift in Sources */,
 				18FFB29C281AF533004E65BB /* GenDenom0ViewController.swift in Sources */,
 				04FCD296292E2CEF00BA5349 /* stride_vesting_vesting.pb.swift in Sources */,
@@ -7176,7 +7177,6 @@
 				0454AE2B2927459300EC657D /* ethermint_evm_v1_tx.pb.swift in Sources */,
 				0443B88E2855B94E0027A6B9 /* WalletDetailInfoCell.swift in Sources */,
 				18FFB29D281AF533004E65BB /* MainTabViewController.swift in Sources */,
-				15F0B706294B919E00127D9A /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */,
 				04FCD2B6292E2CEF00BA5349 /* stride_vesting_tx.pb.swift in Sources */,
 				18FFB29E281AF533004E65BB /* TxSendNFTCell.swift in Sources */,
 				04DEAF42286476AF00F23233 /* HtlcSend2ViewController.swift in Sources */,
@@ -7198,6 +7198,7 @@
 				04FCD2C2292E2CEF00BA5349 /* stride_mint_v1beta1_query.pb.swift in Sources */,
 				18FFB2B3281AF533004E65BB /* SifExitPool3ViewController.swift in Sources */,
 				1817CC43283E2CE600523713 /* cosmos_distribution_v1beta1_distribution.pb.swift in Sources */,
+				04CF712C294C0DDE00134A84 /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */,
 				1817CC6E283E2CE600523713 /* cosmos_base_query_v1beta1_pagination.pb.swift in Sources */,
 				04C5AE8428632062007627EA /* Redelegate5ViewController.swift in Sources */,
 				1817CB58283E2CE500523713 /* ibc_applications_transfer_v1_tx.grpc.swift in Sources */,
@@ -7213,6 +7214,7 @@
 				04E6ABB628635867008DC3C7 /* CdpWithdraw1ViewController.swift in Sources */,
 				1817CC27283E2CE600523713 /* band_oracle_v1_oracle.pb.swift in Sources */,
 				1817CBB6283E2CE500523713 /* cosmos_base_reflection_v1beta1_reflection.grpc.swift in Sources */,
+				04CF7120294C0DDE00134A84 /* desmos_profiles_v3_query_profile.pb.swift in Sources */,
 				042AEE1A2864531600E13825 /* OkVote4ViewController.swift in Sources */,
 				18FFB2C4281AF533004E65BB /* WalletCheckPKeyViewController.swift in Sources */,
 				18FFB2C8281AF533004E65BB /* DenomListCell.swift in Sources */,
@@ -7263,6 +7265,7 @@
 				18FFB306281AF533004E65BB /* HardListMyStatusCell.swift in Sources */,
 				1817CC28283E2CE600523713 /* ibc_core_connection_v1_query.grpc.swift in Sources */,
 				1817CC63283E2CE600523713 /* crescent_mint_v1beta1_mint.pb.swift in Sources */,
+				04CF7136294C0DDE00134A84 /* desmos_profiles_v3_msg_server.grpc.swift in Sources */,
 				18FFB307281AF533004E65BB /* BinanceProto.swift in Sources */,
 				1817CB5C283E2CE500523713 /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */,
 				1817CBC3283E2CE500523713 /* crescent_farming_v1beta1_proposal.pb.swift in Sources */,
@@ -7272,6 +7275,7 @@
 				E11A28CC29435063003311FD /* osmosis_gamm_pool-models_balancer_tx_tx.grpc.swift in Sources */,
 				1817CBC0283E2CE500523713 /* cosmos_slashing_v1beta1_query.pb.swift in Sources */,
 				1817CC02283E2CE600523713 /* cosmos_base_tendermint_v1beta1_query.grpc.swift in Sources */,
+				04CF711C294C0DDE00134A84 /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */,
 				18FFB31A281AF533004E65BB /* BinanceHexEncoding.swift in Sources */,
 				18FFB31B281AF533004E65BB /* TxCdpRepayCell.swift in Sources */,
 				1817CB89283E2CE500523713 /* evmos_vesting_v1_tx.pb.swift in Sources */,
@@ -7301,6 +7305,7 @@
 				18FFB332281AF533004E65BB /* KeyFac.swift in Sources */,
 				1817CBA4283E2CE500523713 /* cosmos_group_v1beta1_types.pb.swift in Sources */,
 				1817CB66283E2CE500523713 /* evmos_erc20_v1_query.pb.swift in Sources */,
+				04CF7118294C0DDE00134A84 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */,
 				1817CAB5283E2CE500523713 /* sifnode_dispensation_v1_query.pb.swift in Sources */,
 				04FC7F2028C6FECD00F64841 /* ChainStride.swift in Sources */,
 				04FCD2E6292E2CEF00BA5349 /* stride_stakeibc_callbacks.pb.swift in Sources */,
@@ -7408,6 +7413,7 @@
 				1817CC81283E2CE600523713 /* crescent_liquidity_v1beta1_query.pb.swift in Sources */,
 				18FFB39B281AF533004E65BB /* TxCell.swift in Sources */,
 				18FFB39D281AF533004E65BB /* StarNameListViewController.swift in Sources */,
+				04CF712A294C0DDE00134A84 /* desmos_profiles_v3_models_params.pb.swift in Sources */,
 				1817CB0A283E2CE500523713 /* cosmos_gov_v1beta1_query.pb.swift in Sources */,
 				18FFB39E281AF533004E65BB /* TxDetailViewController.swift in Sources */,
 				1817CAE5283E2CE500523713 /* crescent_claim_v1beta1_query.grpc.swift in Sources */,
@@ -7435,10 +7441,10 @@
 				04AA4C1E2906A6DD0027877B /* kava_committee_v1beta1_committee.pb.swift in Sources */,
 				0451FC76282A3ABD00214FDA /* ChainFetchAi.swift in Sources */,
 				04FCD2E4292E2CEF00BA5349 /* stride_stakeibc_min_validator_requirements.pb.swift in Sources */,
+				04CF7116294C0DDE00134A84 /* desmos_profiles_v3_models_dtag_requests.pb.swift in Sources */,
 				04FCD2D2292E2CEF00BA5349 /* stride_stakeibc_tx.grpc.swift in Sources */,
 				04FCD292292E2CEF00BA5349 /* stride_stakeibc_epoch_tracker.pb.swift in Sources */,
 				04FCD2B0292E2CEF00BA5349 /* stride_icacallbacks_params.pb.swift in Sources */,
-				15F0B70A294B919E00127D9A /* desmos_profiles_v3_client_cli.pb.swift in Sources */,
 				0451FC81282A3AC700214FDA /* ChainOkc.swift in Sources */,
 				045DAD89289A8BFB004ED9B4 /* AuthzUndelegate1ViewController.swift in Sources */,
 				042A0CC0288E599F00C4DC38 /* cosmos_auth_v1beta1_query.grpc.swift in Sources */,
@@ -7451,6 +7457,7 @@
 				1817CBC6283E2CE500523713 /* cosmos_staking_v1beta1_staking.pb.swift in Sources */,
 				04E165A428A0F49B000F12C0 /* confio_poe_v1beta1_genesis.pb.swift in Sources */,
 				04E165A228A0F49B000F12C0 /* confio_globalfee_v1beta1_query.grpc.swift in Sources */,
+				04CF7138294C0DDE00134A84 /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */,
 				1817CC3B283E2CE600523713 /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
 				1817CC30283E2CE600523713 /* sifnode_ethbridge_v1_types.pb.swift in Sources */,
 				04FCD2C0292E2CEF00BA5349 /* stride_claim_query.pb.swift in Sources */,
@@ -7461,6 +7468,7 @@
 				1817CBE4283E2CE600523713 /* evmos_claims_v1_genesis.pb.swift in Sources */,
 				1817CB6A283E2CE500523713 /* sifnode_dispensation_v1_query.grpc.swift in Sources */,
 				04AA4BDC2906A6DD0027877B /* kava_swap_v1beta1_tx.grpc.swift in Sources */,
+				04CF7134294C0DDE00134A84 /* desmos_profiles_v3_client_cli.pb.swift in Sources */,
 				042A0CB4288E599F00C4DC38 /* cosmos_auth_v1beta1_query.pb.swift in Sources */,
 				0451FCC2282A3C5000214FDA /* ChainCrescent.swift in Sources */,
 				1817CC50283E2CE600523713 /* sifnode_ethbridge_v1_tx.grpc.swift in Sources */,
@@ -7481,14 +7489,13 @@
 				E11A28CE29435063003311FD /* osmosis_gamm_pool-models_stableswap_tx.grpc.swift in Sources */,
 				0454AE292927459300EC657D /* ethermint_feemarket_v1_query.pb.swift in Sources */,
 				1817CC0F283E2CE600523713 /* cosmos_group_v1beta1_tx.grpc.swift in Sources */,
-				15F0B700294B919E00127D9A /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */,
 				1817CC13283E2CE600523713 /* cosmos_crypto_hd_v1_hd.pb.swift in Sources */,
 				04AA4C142906A6DD0027877B /* kava_router_v1beta1_tx.grpc.swift in Sources */,
 				04FCD298292E2CEF00BA5349 /* stride_stakeibc_tx.pb.swift in Sources */,
+				04CF711A294C0DDE00134A84 /* desmos_profiles_v3_models_packets.pb.swift in Sources */,
 				1817CBBB283E2CE500523713 /* starname_cosmwasm_wasm_v1_types.pb.swift in Sources */,
 				18FFB3DB281AF533004E65BB /* SelectCoinCell.swift in Sources */,
 				1817CB4E283E2CE500523713 /* sifnode_tokenregistry_v1_tx.grpc.swift in Sources */,
-				15F0B712294B919E00127D9A /* desmos_profiles_v3_msgs_chain_links.pb.swift in Sources */,
 				18FFB3DC281AF533004E65BB /* BorderButton.swift in Sources */,
 				18FFB3DD281AF533004E65BB /* BinanceModel.swift in Sources */,
 				042A0CBE288E599F00C4DC38 /* cosmos_auth_v1beta1_auth.pb.swift in Sources */,
@@ -7518,7 +7525,6 @@
 				04AA4BB22906A6DD0027877B /* kava_swap_v1beta1_genesis.pb.swift in Sources */,
 				1817CBE0283E2CE600523713 /* sifnode_clp_v1_params.pb.swift in Sources */,
 				18FFB3F7281AF533004E65BB /* NFTListCell.swift in Sources */,
-				15F0B704294B919E00127D9A /* desmos_profiles_v3_query_app_links.pb.swift in Sources */,
 				1817CBAD283E2CE500523713 /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */,
 				18FFB3FA281AF533004E65BB /* ApiHistoryNewCustom.swift in Sources */,
 				1817CAC4283E2CE500523713 /* tendermint_types_block.pb.swift in Sources */,
@@ -7540,7 +7546,6 @@
 				18D4C1A228C73411003F230A /* ManageConnectionCell.swift in Sources */,
 				18FFB41A281AF533004E65BB /* WalletSifCell.swift in Sources */,
 				18FFB41B281AF533004E65BB /* Bep3SupplyPopup.swift in Sources */,
-				15F0B708294B919E00127D9A /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */,
 				18FFB41E281AF533004E65BB /* BinanceSegwitAddrCoder.swift in Sources */,
 				18F4129B2860645A0007E3F2 /* WalletBaseChainCell.swift in Sources */,
 				04FCD2BA292E2CEF00BA5349 /* stride_epochs_query.pb.swift in Sources */,
@@ -7612,6 +7617,7 @@
 				0454AE3B2927459300EC657D /* ethermint_evm_v1_evm.pb.swift in Sources */,
 				18FFB460281AF533004E65BB /* AllValidatorCell.swift in Sources */,
 				0451FCA1282A3B6800214FDA /* ChainDesmos.swift in Sources */,
+				04CF7114294C0DDE00134A84 /* desmos_profiles_v3_models_profile.pb.swift in Sources */,
 				1817CAFA283E2CE500523713 /* cosmos_bank_v1beta1_tx.pb.swift in Sources */,
 				1817CC51283E2CE600523713 /* crescent_mint_v1beta1_query.grpc.swift in Sources */,
 				1817CBAC283E2CE500523713 /* evmos_erc20_v1_query.grpc.swift in Sources */,
@@ -7623,10 +7629,12 @@
 				04AA4BC82906A6DD0027877B /* kava_earn_v1beta1_vault.pb.swift in Sources */,
 				1817CBEB283E2CE600523713 /* tendermint_types_params.pb.swift in Sources */,
 				18FFB46A281AF533004E65BB /* WalletIrisCell.swift in Sources */,
+				04CF7130294C0DDE00134A84 /* desmos_profiles_v3_msgs_chain_links.pb.swift in Sources */,
 				1817CAA5283E2CE500523713 /* cosmos_staking_v1beta1_query.grpc.swift in Sources */,
 				18FFB46B281AF533004E65BB /* TxTokenSwapCell.swift in Sources */,
 				18FFB46F281AF533004E65BB /* EditDisplayChainCell.swift in Sources */,
 				04AA4C0E2906A6DD0027877B /* kava_issuance_v1beta1_tx.pb.swift in Sources */,
+				04CF7128294C0DDE00134A84 /* desmos_profiles_v3_genesis.pb.swift in Sources */,
 				043031DD28BDFA9A005FF935 /* AssetAddCell.swift in Sources */,
 				0451FC85282A3AC700214FDA /* ChainStarname.swift in Sources */,
 				1817CB69283E2CE500523713 /* cryptoorg_nft_v1_tx.grpc.swift in Sources */,
@@ -7676,11 +7684,9 @@
 				045DADB3289BCF59004ED9B4 /* AuthzSend2ViewController.swift in Sources */,
 				1817CAC3283E2CE500523713 /* cosmos_evidence_v1beta1_tx.pb.swift in Sources */,
 				04E165AD28A0F4A4000F12C0 /* confio_twasm_v1beta1_contract_extension.pb.swift in Sources */,
-				15F0B6FA294B919E00127D9A /* desmos_profiles_v3_msg_server.pb.swift in Sources */,
 				18FFB4A1281AF533004E65BB /* MainTabSettingViewController.swift in Sources */,
 				04FCD2A2292E2CEF00BA5349 /* stride_icacallbacks_tx.grpc.swift in Sources */,
 				1817CBE8283E2CE600523713 /* cosmos_gov_v1beta2_query.pb.swift in Sources */,
-				15F0B6F4294B919E00127D9A /* desmos_profiles_v3_models_packets.pb.swift in Sources */,
 				18FFB4A2281AF533004E65BB /* DelegateWarnPopup.swift in Sources */,
 				9F3E32892935464C00C5C5A9 /* UITextField+Validation.swift in Sources */,
 				1817CBBD283E2CE500523713 /* cryptoorg_supply_v1_query.pb.swift in Sources */,
@@ -7688,7 +7694,6 @@
 				E11A28E029435063003311FD /* osmosis_gamm_v2_query.grpc.swift in Sources */,
 				1817CB7B283E2CE500523713 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
 				18FFB4AB281AF533004E65BB /* HarvestDetailTopCell.swift in Sources */,
-				15F0B6F6294B919E00127D9A /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */,
 				1817CC0E283E2CE600523713 /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,
 				18FFB4AF281AF533004E65BB /* NTFDetailViewController.swift in Sources */,
 				1817CBA1283E2CE500523713 /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
@@ -7704,13 +7709,14 @@
 				18FFB4C5281AF533004E65BB /* OkTokenList.swift in Sources */,
 				04C4938528506A0C00ECF4D2 /* WatchingAddressViewController.swift in Sources */,
 				0451FCA7282A3B7F00214FDA /* ChainLum.swift in Sources */,
+				04CF7126294C0DDE00134A84 /* desmos_profiles_v3_msg_server.pb.swift in Sources */,
 				1817CC52283E2CE600523713 /* starname_cosmwasm_wasm_v1_query.grpc.swift in Sources */,
-				15F0B702294B919E00127D9A /* desmos_profiles_v3_models_app_links.pb.swift in Sources */,
 				18FFB4C8281AF533004E65BB /* TxSwapDepositCell.swift in Sources */,
 				18FFB4C9281AF533004E65BB /* SelectTextCell.swift in Sources */,
-				15F0B6EE294B919E00127D9A /* desmos_profiles_v3_models_dtag_requests.pb.swift in Sources */,
+				04CF7122294C0DDE00134A84 /* desmos_profiles_v3_query.grpc.swift in Sources */,
 				18FFB4CA281AF533004E65BB /* AmountInputTextField.swift in Sources */,
 				18FFB4CF281AF533004E65BB /* Signature.swift in Sources */,
+				04CF7124294C0DDE00134A84 /* desmos_profiles_v3_query.pb.swift in Sources */,
 				0454AE3D2927459300EC657D /* ethermint_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */,
 				18FFB4D1281AF533004E65BB /* OkOtherValidatorViewController.swift in Sources */,
 				1817CB02283E2CE500523713 /* cosmos_crisis_v1beta1_tx.grpc.swift in Sources */,
@@ -7742,6 +7748,7 @@
 				04AA4C4C2906A6DE0027877B /* kava_hard_v1beta1_hard.pb.swift in Sources */,
 				045DAD9B289BA1E4004ED9B4 /* AuthzRedelegate1ViewController.swift in Sources */,
 				1817CB49283E2CE500523713 /* ibc_core_client_v1_query.pb.swift in Sources */,
+				04CF712E294C0DDE00134A84 /* desmos_profiles_v3_query_params.pb.swift in Sources */,
 				1817CBA6283E2CE500523713 /* cosmos_params_v1beta1_query.pb.swift in Sources */,
 				04AA4C3E2906A6DE0027877B /* kava_auction_v1beta1_genesis.pb.swift in Sources */,
 				1817CC14283E2CE600523713 /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */,
@@ -7785,14 +7792,12 @@
 				E148780B28957E1B00751D94 /* AuthzClaimReward1ViewController.swift in Sources */,
 				E1D4EA592871584B005C1ECF /* FeeInfo.swift in Sources */,
 				045DAD852897BC14004ED9B4 /* MintscanMyVotes.swift in Sources */,
-				15F0B6FC294B919E00127D9A /* desmos_profiles_v3_models_profile.pb.swift in Sources */,
 				1817CAE0283E2CE500523713 /* cosmos_feegrant_v1beta1_query.pb.swift in Sources */,
 				E148781128957E2900751D94 /* AuthzClaimReward4ViewController.swift in Sources */,
 				04AA4BC22906A6DD0027877B /* kava_earn_v1beta1_query.pb.swift in Sources */,
 				1817CB23283E2CE500523713 /* starname_iov_escrow_v1beta1_test.pb.swift in Sources */,
 				1817CC1D283E2CE600523713 /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */,
 				04AA4C812907B6C50027877B /* kava_cdp_v1beta1_cdp.pb.swift in Sources */,
-				15F0B6F8294B919E00127D9A /* desmos_profiles_v3_models_params.pb.swift in Sources */,
 				18FFB51D281AF533004E65BB /* DAppsListViewController.swift in Sources */,
 				043031EE28C2136F005FF935 /* MintscanPath.swift in Sources */,
 				04C5AE9028632783007627EA /* ClaimReward4ViewController.swift in Sources */,
@@ -7889,7 +7894,6 @@
 				1817CAFD283E2CE500523713 /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,
 				18FFB58B281AF533004E65BB /* BinanceInt+VarInt.swift in Sources */,
 				1817CC11283E2CE600523713 /* evmos_erc20_v1_genesis.pb.swift in Sources */,
-				15F0B714294B919E00127D9A /* desmos_profiles_v3_genesis.pb.swift in Sources */,
 				0451FCB0282A3BB800214FDA /* ChainAssetmantle.swift in Sources */,
 				04AA4BFE2906A6DD0027877B /* kava_pricefeed_v1beta1_query.grpc.swift in Sources */,
 				1817CC6C283E2CE600523713 /* cosmos_base_snapshots_v1beta1_snapshot.pb.swift in Sources */,
@@ -7908,6 +7912,7 @@
 				18FFB59C281AF533004E65BB /* TxInfo.swift in Sources */,
 				04AA4BC02906A6DD0027877B /* kava_incentive_v1beta1_tx.grpc.swift in Sources */,
 				18FFB59F281AF533004E65BB /* Signer.swift in Sources */,
+				04CF713C294C0DDE00134A84 /* desmos_profiles_v3_query_app_links.pb.swift in Sources */,
 				04AA4C282906A6DE0027877B /* kava_evmutil_v1beta1_genesis.pb.swift in Sources */,
 				04AA4C0C2906A6DD0027877B /* kava_kavadist_v1beta1_genesis.pb.swift in Sources */,
 				18FFB5A3281AF533004E65BB /* WalletDesmosCell.swift in Sources */,
@@ -8003,13 +8008,13 @@
 				04AA4C362906A6DE0027877B /* kava_auction_v1beta1_query.pb.swift in Sources */,
 				1817CBA5283E2CE500523713 /* cosmos_tx_v1beta1_service.grpc.swift in Sources */,
 				1817CB0D283E2CE500523713 /* ibc_applications_transfer_v2_packet.pb.swift in Sources */,
+				04CF713F294C0EB300134A84 /* PasswordViewController.swift in Sources */,
 				18FFB5EE281AF533004E65BB /* TxRegisterDomainCell.swift in Sources */,
 				1817CC1F283E2CE600523713 /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */,
-				18FFB5F0281AF533004E65BB /* PasswordViewController.swift in Sources */,
 				04AA4C402906A6DE0027877B /* kava_earn_v1beta1_proposal.pb.swift in Sources */,
 				E10396782875AAB70055903A /* ProposalVotingPeriodCell.swift in Sources */,
 				18FFB5F2281AF533004E65BB /* SegwitAddrCoder.swift in Sources */,
-				15F0B70E294B919E00127D9A /* desmos_profiles_v3_query.pb.swift in Sources */,
+				04CF711E294C0DDE00134A84 /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */,
 				1817CC77283E2CE600523713 /* ibc_applications_transfer_v1_query.pb.swift in Sources */,
 				04AA4C082906A6DD0027877B /* kava_earn_v1beta1_tx.pb.swift in Sources */,
 				04E6ABA228635816008DC3C7 /* CdpCreate4ViewController.swift in Sources */,
@@ -8022,7 +8027,6 @@
 				1817CB2E283E2CE500523713 /* cosmwasm_wasm_v1_proposal.pb.swift in Sources */,
 				1817CB7D283E2CE500523713 /* tendermint_farming_v1beta1_farming.pb.swift in Sources */,
 				04403737284A2B2F004CD7E3 /* ChainNyx.swift in Sources */,
-				15F0B6F0294B919E00127D9A /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */,
 				18FFB5FA281AF533004E65BB /* HtlcResultClaimCell.swift in Sources */,
 				04FCD2B4292E2CEF00BA5349 /* stride_records_genesis.pb.swift in Sources */,
 				040583F8290D858C00918513 /* TxIncentiveEarnCell.swift in Sources */,
@@ -8032,7 +8036,6 @@
 				18FFB5FF281AF533004E65BB /* OkTopValidatorViewController.swift in Sources */,
 				0451FC77282A3AC000214FDA /* ChainIris.swift in Sources */,
 				04FCD3202930EB9400BA5349 /* TxLiquidStakeCell.swift in Sources */,
-				15F0B6FE294B919E00127D9A /* desmos_profiles_v3_msg_server.grpc.swift in Sources */,
 				1817CBBA283E2CE500523713 /* sifnode_ethbridge_v1_query.grpc.swift in Sources */,
 				18FFB603281AF533004E65BB /* HardPoolWithdraw3ViewController.swift in Sources */,
 				0454AE352927459300EC657D /* ethermint_evm_v1_query.pb.swift in Sources */,
@@ -8088,7 +8091,6 @@
 				1817CBC1283E2CE500523713 /* google_protobuf2_any.pb.swift in Sources */,
 				04AA4C162906A6DD0027877B /* kava_router_v1beta1_tx.pb.swift in Sources */,
 				18FFB62A281AF533004E65BB /* VoteDetailsViewController.swift in Sources */,
-				15F0B6F2294B919E00127D9A /* desmos_profiles_v3_query.grpc.swift in Sources */,
 				043031E328BE0D21005FF935 /* SelectContractTokenCell.swift in Sources */,
 				1817CB3A283E2CE500523713 /* sifnode_ethbridge_v1_tx.pb.swift in Sources */,
 				18FFB62B281AF533004E65BB /* WalletIovCell.swift in Sources */,
@@ -8098,7 +8100,6 @@
 				0451FC9E282A3B5B00214FDA /* ChainBitsong.swift in Sources */,
 				18FFB62F281AF533004E65BB /* CdpDetailTopCell.swift in Sources */,
 				9F831EEE291C5C1800A998FC /* UIStoryboard+Instantiate.swift in Sources */,
-				15F0B6EC294B919D00127D9A /* desmos_profiles_v3_query_profile.pb.swift in Sources */,
 				18FFB636281AF533004E65BB /* GenNFT0ViewController.swift in Sources */,
 				04FCD2FE292F94D900BA5349 /* LiquidStakingViewController.swift in Sources */,
 				1817CADA283E2CE500523713 /* evmos_inflation_v1_inflation.pb.swift in Sources */,
@@ -8118,7 +8119,6 @@
 				045DAD56288FAEB5004ED9B4 /* AuthzGranteeCell.swift in Sources */,
 				1817CC4F283E2CE600523713 /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift in Sources */,
 				045DADA1289BA1F0004ED9B4 /* AuthzRedelegate2ViewController.swift in Sources */,
-				15F0B70C294B919E00127D9A /* desmos_profiles_v3_query_params.pb.swift in Sources */,
 				1817CAED283E2CE500523713 /* sifnode_clp_v1_querier.grpc.swift in Sources */,
 				1817CBDC283E2CE600523713 /* cosmwasm_wasm_v1_tx.grpc.swift in Sources */,
 				1817CAFF283E2CE500523713 /* starname_iov_starname_v1beta1_tx.pb.swift in Sources */,
@@ -8186,6 +8186,7 @@
 				048C832027BF572800270528 /* evmos_vesting_v1_tx.grpc.swift in Sources */,
 				047597972935FF97002DA28C /* ChainOnomy.swift in Sources */,
 				0451FC5C282A39C100214FDA /* ChainCertik.swift in Sources */,
+				04CF7139294C0DDE00134A84 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */,
 				280E1F2A254AD3A80007BA7D /* ResourceChainCell.swift in Sources */,
 				28B3251F2637F80500275AED /* MemoMnemonicPopup.swift in Sources */,
 				040FAA73275F55C400229F6F /* ibc_core_channel_v1_query.grpc.swift in Sources */,
@@ -8199,7 +8200,6 @@
 				E16D9B26224A08510019B7BB /* DecimalViewController.swift in Sources */,
 				151788EC282E078600A7D7CC /* WalletStationCell.swift in Sources */,
 				E1827E112254C92900BC0350 /* WalletDetailViewController.swift in Sources */,
-				15F0B70F294B919E00127D9A /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */,
 				040FA89F275F55C200229F6F /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
 				9F0C15A928DF518100BA24B1 /* TwoLinesButton.swift in Sources */,
 				04B1BE2227A3BC4500B1236A /* cosmwasm_wasm_v1_query.grpc.swift in Sources */,
@@ -8232,6 +8232,7 @@
 				044374732862EA2500C6A4ED /* MemoViewController.swift in Sources */,
 				E1945E42222E7FC800A1436F /* MainTabViewController.swift in Sources */,
 				046BD23027795CD4002333B5 /* TxSendNFTCell.swift in Sources */,
+				04CF7131294C0DDE00134A84 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */,
 				0443B88D2855B94E0027A6B9 /* WalletDetailInfoCell.swift in Sources */,
 				28156E7F25360B70006FF06C /* HardListCell.swift in Sources */,
 				04B1BE1D27A3BC4500B1236A /* cosmwasm_wasm_v1_tx.pb.swift in Sources */,
@@ -8260,7 +8261,7 @@
 				040FA93F275F55C300229F6F /* cosmos_staking_v1beta1_staking.pb.swift in Sources */,
 				041399EB275C94490013A1BE /* WalletCheckPKeyViewController.swift in Sources */,
 				04FCD2C3292E2CEF00BA5349 /* stride_stakeibc_query.grpc.swift in Sources */,
-				15F0B6EF294B919E00127D9A /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */,
+				04CF712B294C0DDE00134A84 /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */,
 				040FA8E8275F55C200229F6F /* desmos_profiles_v1beta1_models_chain_links.pb.swift in Sources */,
 				0451FCA6282A3B7F00214FDA /* ChainLum.swift in Sources */,
 				040FA900275F55C300229F6F /* cosmos_distribution_v1beta1_query.grpc.swift in Sources */,
@@ -8276,6 +8277,7 @@
 				04FCD2D1292E2CEF00BA5349 /* stride_stakeibc_tx.grpc.swift in Sources */,
 				048C830427BF572800270528 /* evmos_epochs_v1_query.pb.swift in Sources */,
 				040FAA32275F55C400229F6F /* band_oracle_v1_query.grpc.swift in Sources */,
+				04CF711F294C0DDE00134A84 /* desmos_profiles_v3_query_profile.pb.swift in Sources */,
 				040FAA41275F55C400229F6F /* cosmos_feegrant_v1beta1_tx.grpc.swift in Sources */,
 				0454AE262927459300EC657D /* ethermint_evm_v1_tx.grpc.swift in Sources */,
 				040FAA65275F55C400229F6F /* cosmos_gov_v1beta2_query.pb.swift in Sources */,
@@ -8309,10 +8311,8 @@
 				E1A82DD3224222E00097CAEE /* Password.swift in Sources */,
 				285A33DA244763290052BD3D /* SelectChainCell.swift in Sources */,
 				04AA4C2D2906A6DE0027877B /* kava_hard_v1beta1_genesis.pb.swift in Sources */,
-				15F0B6FF294B919E00127D9A /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */,
 				E16D9B28224A08660019B7BB /* AlphabetViewController.swift in Sources */,
 				04AA4C592906A6DE0027877B /* kava_earn_v1beta1_params.pb.swift in Sources */,
-				15F0B6F1294B919E00127D9A /* desmos_profiles_v3_query.grpc.swift in Sources */,
 				28DB56EB25F9DC7A00B2F0E5 /* HardDetailAssetsCell.swift in Sources */,
 				045DAD94289A8C18004ED9B4 /* AuthzUndelegate5ViewController.swift in Sources */,
 				28FEDCE926DB141900A43D01 /* KavaIncentiveClaim3ViewController.swift in Sources */,
@@ -8326,6 +8326,7 @@
 				04FCD31F2930EB9400BA5349 /* TxLiquidStakeCell.swift in Sources */,
 				04D3390527E826F100E82AA7 /* crescent_liquidstaking_v1beta1_tx.grpc.swift in Sources */,
 				040FA86C275F55C200229F6F /* starname_cosmwasm_wasm_v1_query.grpc.swift in Sources */,
+				04CF7135294C0DDE00134A84 /* desmos_profiles_v3_msg_server.grpc.swift in Sources */,
 				040FA979275F55C300229F6F /* tendermint_libs_bits_types.pb.swift in Sources */,
 				04AA4B57290624B50027877B /* ChainTeritori.swift in Sources */,
 				042A0CBB288E599F00C4DC38 /* cosmos_authz_v1beta1_event.pb.swift in Sources */,
@@ -8335,6 +8336,7 @@
 				040FA90E275F55C300229F6F /* cosmos_mint_v1beta1_query.pb.swift in Sources */,
 				28D7BE7D25F10636006EECD7 /* HardListMyStatusCell.swift in Sources */,
 				046E903D268C413A002CFFE1 /* BinanceProto.swift in Sources */,
+				04CF711B294C0DDE00134A84 /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */,
 				04FCD3122930AB0400BA5349 /* StrideLiquid4ViewController.swift in Sources */,
 				047FB6EC281A4C53009D8AAF /* sifnode_ethbridge_v1_query.pb.swift in Sources */,
 				040FA9CD275F55C300229F6F /* cosmos_crypto_keyring_v1_record.pb.swift in Sources */,
@@ -8364,6 +8366,7 @@
 				04D3392327E8803000E82AA7 /* WalletCrescentCell.swift in Sources */,
 				047FB6F6281A4C53009D8AAF /* sifnode_oracle_v1_types.pb.swift in Sources */,
 				E171A075225B091300C5756C /* StepGenTxViewController.swift in Sources */,
+				04CF7117294C0DDE00134A84 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */,
 				283439A12531D1CF00CCFADE /* MyDomainViewController.swift in Sources */,
 				047FB710281EC0E8009D8AAF /* WalletDeriveViewController.swift in Sources */,
 				04AA4C4F2906A6DE0027877B /* kava_pricefeed_v1beta1_store.pb.swift in Sources */,
@@ -8390,7 +8393,6 @@
 				047FB6EA281A4C53009D8AAF /* sifnode_clp_v1_querier.pb.swift in Sources */,
 				28E8FAF52719C28F005EAA9B /* SifDexEthPoolViewController.swift in Sources */,
 				0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */,
-				15F0B707294B919E00127D9A /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */,
 				283E9458254901D9007A9291 /* RegisterDomain0ViewController.swift in Sources */,
 				040FAA98275F55C400229F6F /* cryptoorg_supply_v1_accounts.pb.swift in Sources */,
 				040FA8E2275F55C200229F6F /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
@@ -8471,6 +8473,7 @@
 				04AA4BDF2906A6DD0027877B /* kava_savings_v1beta1_tx.grpc.swift in Sources */,
 				040FA937275F55C300229F6F /* cosmos_bank_v1beta1_tx.pb.swift in Sources */,
 				040FA8CA275F55C200229F6F /* tendermint_farming_v1beta1_tx.pb.swift in Sources */,
+				04CF7129294C0DDE00134A84 /* desmos_profiles_v3_models_params.pb.swift in Sources */,
 				E16D9B1522489B030019B7BB /* IntroViewController.swift in Sources */,
 				0451FC64282A3A2200214FDA /* ChainJuno.swift in Sources */,
 				2812CA3E26DD4E160095C6AF /* TxIncentiveDelegatorCell.swift in Sources */,
@@ -8488,16 +8491,15 @@
 				048C831327BF572800270528 /* evmos_erc20_v1_query.grpc.swift in Sources */,
 				047FB6F3281A4C53009D8AAF /* sifnode_clp_v1_tx.grpc.swift in Sources */,
 				040FA969275F55C300229F6F /* gravity_v1_query.pb.swift in Sources */,
-				15F0B6F9294B919E00127D9A /* desmos_profiles_v3_msg_server.pb.swift in Sources */,
 				28DB56F225FA3B7100B2F0E5 /* HardPoolDeposit0ViewController.swift in Sources */,
 				0451FCA3282A3B7500214FDA /* ChainInjective.swift in Sources */,
 				E1C5C0AB28992AC400E9E65D /* AuthzDelegate1ViewController.swift in Sources */,
 				04AA4BC72906A6DD0027877B /* kava_earn_v1beta1_vault.pb.swift in Sources */,
 				040FA84E275F55C200229F6F /* confio_proofs.pb.swift in Sources */,
-				15F0B6FD294B919E00127D9A /* desmos_profiles_v3_msg_server.grpc.swift in Sources */,
 				045DAD55288FAEB5004ED9B4 /* AuthzGranteeCell.swift in Sources */,
 				040FA81D275F55C200229F6F /* cryptoorg_nft_v1_nft.pb.swift in Sources */,
 				04AA4BEF2906A6DD0027877B /* kava_kavadist_v1beta1_query.grpc.swift in Sources */,
+				04CF7115294C0DDE00134A84 /* desmos_profiles_v3_models_dtag_requests.pb.swift in Sources */,
 				04AA4C802907B6C50027877B /* kava_cdp_v1beta1_cdp.pb.swift in Sources */,
 				9F7D91032912F31F002A382C /* UIColor+Colors.swift in Sources */,
 				042A0CB9288E599F00C4DC38 /* cosmos_authz_v1beta1_query.grpc.swift in Sources */,
@@ -8514,6 +8516,7 @@
 				0447AE8A288AAEF0004701A0 /* WalletAuthzCell.swift in Sources */,
 				040FA854275F55C200229F6F /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
 				18D4C19B28C729C9003F230A /* ManageConnectionViewController.swift in Sources */,
+				04CF7137294C0DDE00134A84 /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */,
 				042AEDFB286452C200E13825 /* OkDeposit1ViewController.swift in Sources */,
 				045DADB8289BCF69004ED9B4 /* AuthzSend5ViewController.swift in Sources */,
 				040FA9B4275F55C300229F6F /* desmos_profiles_v1beta1_msgs_profile.pb.swift in Sources */,
@@ -8524,8 +8527,8 @@
 				04FCD28D292E2CEF00BA5349 /* stride_icacallbacks_callback_data.pb.swift in Sources */,
 				E1982917290E85C800451A81 /* EarnStatusCell.swift in Sources */,
 				046FF01A277B43F100F72C11 /* GenDenom3ViewController.swift in Sources */,
+				04CF7133294C0DDE00134A84 /* desmos_profiles_v3_client_cli.pb.swift in Sources */,
 				0454AE362927459300EC657D /* ethermint_feemarket_v1_feemarket.pb.swift in Sources */,
-				15F0B713294B919E00127D9A /* desmos_profiles_v3_genesis.pb.swift in Sources */,
 				04FCD28F292E2CEF00BA5349 /* stride_stakeibc_ica_account.pb.swift in Sources */,
 				040FA9BB275F55C300229F6F /* cosmos_gov_v1beta2_tx.pb.swift in Sources */,
 				04AA4BBF2906A6DD0027877B /* kava_incentive_v1beta1_tx.grpc.swift in Sources */,
@@ -8545,9 +8548,9 @@
 				040FA805275F55C200229F6F /* cosmos_evidence_v1beta1_query.grpc.swift in Sources */,
 				040FA9A4275F55C300229F6F /* cosmos_nft_v1beta1_query.pb.swift in Sources */,
 				04FCD2A3292E2CEF00BA5349 /* stride_claim_tx.grpc.swift in Sources */,
-				15F0B6F3294B919E00127D9A /* desmos_profiles_v3_models_packets.pb.swift in Sources */,
 				28DB570B25FA3BC900B2F0E5 /* HardPoolBorrow3ViewController.swift in Sources */,
 				045DADA6289BA1FC004ED9B4 /* AuthzRedelegate5ViewController.swift in Sources */,
+				04CF7119294C0DDE00134A84 /* desmos_profiles_v3_models_packets.pb.swift in Sources */,
 				040FA7A2275F55C200229F6F /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
 				282BDFE624A5BCCB00D3A5D4 /* WcCancelPopup.swift in Sources */,
 				040FA94A275F55C300229F6F /* starname_iov_starname_v1beta1_query.grpc.swift in Sources */,
@@ -8646,7 +8649,6 @@
 				2889FD7C260337C600CA9896 /* TxHardLiquidateCell.swift in Sources */,
 				288F8076270DDEE8009825B5 /* TxSifSwapCell.swift in Sources */,
 				28B4303924F7996C00BD7BB2 /* TxOkStakeCell.swift in Sources */,
-				15F0B705294B919E00127D9A /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */,
 				282BDFE224A5992500D3A5D4 /* WcTradePopup.swift in Sources */,
 				040FA916275F55C300229F6F /* desmos_profiles_v1beta1_query_profile.pb.swift in Sources */,
 				9F831EED291C5C1800A998FC /* UIStoryboard+Instantiate.swift in Sources */,
@@ -8675,6 +8677,7 @@
 				282FF35123F5172E0028CC66 /* TxTransferCell.swift in Sources */,
 				04C5AE6B28631727007627EA /* Undelegate1ViewController.swift in Sources */,
 				04AA4BDB2906A6DD0027877B /* kava_swap_v1beta1_tx.grpc.swift in Sources */,
+				04CF7113294C0DDE00134A84 /* desmos_profiles_v3_models_profile.pb.swift in Sources */,
 				040FA973275F55C300229F6F /* google_protobuf2_any.pb.swift in Sources */,
 				E1FD2328233E1BC4009327FE /* WalletIrisCell.swift in Sources */,
 				04CFBD482691F8460013150B /* TxTokenSwapCell.swift in Sources */,
@@ -8686,10 +8689,12 @@
 				042A0C9C288E46F500C4DC38 /* AuthzDetailViewController.swift in Sources */,
 				289DF184242DDF8300433CF4 /* CdpDetailAssetsCell.swift in Sources */,
 				283E74FF26CE247C0097CC04 /* StakingTokenGrpcViewController.swift in Sources */,
+				04CF712F294C0DDE00134A84 /* desmos_profiles_v3_msgs_chain_links.pb.swift in Sources */,
 				04D3391427E826F100E82AA7 /* crescent_mint_v1beta1_mint.pb.swift in Sources */,
 				04AA4C552906A6DE0027877B /* kava_hard_v1beta1_query.grpc.swift in Sources */,
 				E151B647224850040026B8C0 /* Msg.swift in Sources */,
 				0454AE302927459300EC657D /* ethermint_types_v1_web3.pb.swift in Sources */,
+				04CF7127294C0DDE00134A84 /* desmos_profiles_v3_genesis.pb.swift in Sources */,
 				048C832127BF572800270528 /* evmos_incentives_v1_query.pb.swift in Sources */,
 				04AA4C012906A6DD0027877B /* kava_issuance_v1beta1_genesis.pb.swift in Sources */,
 				04D3390827E826F100E82AA7 /* crescent_farming_v1beta1_farming.pb.swift in Sources */,
@@ -8767,15 +8772,17 @@
 				2889FD822603484000CA9896 /* TxIncentiveHardCell.swift in Sources */,
 				04E6ABD3286358C4008DC3C7 /* CdpDrawRepay4ViewController.swift in Sources */,
 				0451FC60282A39FB00214FDA /* ChainOkc.swift in Sources */,
+				04CF7125294C0DDE00134A84 /* desmos_profiles_v3_msg_server.pb.swift in Sources */,
 				04B1BE2327A3BC4500B1236A /* cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				283D2EA624F5308900247424 /* OkTokenList.swift in Sources */,
 				04FCD2AF292E2CEF00BA5349 /* stride_icacallbacks_params.pb.swift in Sources */,
 				040FA85C275F55C200229F6F /* desmos_profiles_v1beta1_query_chain_links.pb.swift in Sources */,
+				04CF7121294C0DDE00134A84 /* desmos_profiles_v3_query.grpc.swift in Sources */,
 				284FBC7D26DBE97200403FE2 /* TxSwapDepositCell.swift in Sources */,
 				28E8FAEB2716F190005EAA9B /* SelectTextCell.swift in Sources */,
 				E1FEE459225B17970040FAFD /* AmountInputTextField.swift in Sources */,
+				04CF7123294C0DDE00134A84 /* desmos_profiles_v3_query.pb.swift in Sources */,
 				040FA97F275F55C300229F6F /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */,
-				15F0B70D294B919E00127D9A /* desmos_profiles_v3_query.pb.swift in Sources */,
 				040FA95B275F55C300229F6F /* ibc_core_client_v1_client.pb.swift in Sources */,
 				040FAA17275F55C300229F6F /* cosmos_feegrant_v1beta1_query.grpc.swift in Sources */,
 				04D3390127E826F100E82AA7 /* crescent_farming_v1beta1_query.grpc.swift in Sources */,
@@ -8792,7 +8799,6 @@
 				040FAA40275F55C400229F6F /* ibc_applications_transfer_v1_tx.pb.swift in Sources */,
 				E1FD2338233E1C30009327FE /* WalletInflationCell.swift in Sources */,
 				04D3391127E826F100E82AA7 /* crescent_liquidity_v1beta1_query.pb.swift in Sources */,
-				15F0B701294B919E00127D9A /* desmos_profiles_v3_models_app_links.pb.swift in Sources */,
 				04AA4C492906A6DE0027877B /* kava_pricefeed_v1beta1_query.pb.swift in Sources */,
 				04FCD2C5292E2CEF00BA5349 /* stride_interchainquery_v1_messages.grpc.swift in Sources */,
 				04B1BE2027A3BC4500B1236A /* cosmwasm_wasm_v1_tx.grpc.swift in Sources */,
@@ -8805,6 +8811,7 @@
 				0451FC56282A398E00214FDA /* ChainStarname.swift in Sources */,
 				040FA7DA275F55C200229F6F /* ibc_core_channel_v1_query.pb.swift in Sources */,
 				040FAA2F275F55C400229F6F /* starname_iov_configuration_v1beta1_msgs.pb.swift in Sources */,
+				04CF712D294C0DDE00134A84 /* desmos_profiles_v3_query_params.pb.swift in Sources */,
 				04C5AE7728632049007627EA /* Redelegate1ViewController.swift in Sources */,
 				04FCD2AB292E2CEF00BA5349 /* stride_records_query.pb.swift in Sources */,
 				283E94772549030C007A9291 /* TxReplaceResourceCell.swift in Sources */,
@@ -8886,7 +8893,6 @@
 				B1247F35290ABE5C00F60500 /* UIApplication+KeyWindow.swift in Sources */,
 				04AA4C292906A6DE0027877B /* kava_auction_v1beta1_tx.pb.swift in Sources */,
 				283E946D254902E5007A9291 /* TxDeleteDomainCell.swift in Sources */,
-				15F0B6F7294B919E00127D9A /* desmos_profiles_v3_models_params.pb.swift in Sources */,
 				040FA9C8275F55C300229F6F /* cosmos_base_reflection_v1beta1_reflection.pb.swift in Sources */,
 				04FCD2B5292E2CEF00BA5349 /* stride_vesting_tx.pb.swift in Sources */,
 				04E165A528A0F49B000F12C0 /* confio_poe_v1beta1_query.pb.swift in Sources */,
@@ -8966,11 +8972,11 @@
 				04AA4BCF2906A6DD0027877B /* kava_evmutil_v1beta1_query.pb.swift in Sources */,
 				04D3390027E826F100E82AA7 /* crescent_liquidstaking_v1beta1_liquidstaking.pb.swift in Sources */,
 				04D3391627E826F100E82AA7 /* crescent_farming_v1beta1_proposal.pb.swift in Sources */,
-				15F0B711294B919E00127D9A /* desmos_profiles_v3_msgs_chain_links.pb.swift in Sources */,
 				045DAD792897A1A2004ED9B4 /* AuthzVote2ViewController.swift in Sources */,
 				046E9041268C4863002CFFE1 /* BinanceInt+VarInt.swift in Sources */,
 				040FA812275F55C200229F6F /* cosmos_group_v1beta1_tx.grpc.swift in Sources */,
 				044374672862E9BD00C6A4ED /* Transfer2ViewController.swift in Sources */,
+				04CF713B294C0DDE00134A84 /* desmos_profiles_v3_query_app_links.pb.swift in Sources */,
 				E19A32232254A61E00A05E41 /* WalletManageViewController.swift in Sources */,
 				E1F7F634234311F8000E597F /* BnbToken.swift in Sources */,
 				04C49378284F465D00ECF4D2 /* MnemonicRestoreViewController.swift in Sources */,
@@ -8984,9 +8990,7 @@
 				040FA999275F55C300229F6F /* google_api_httpbody.pb.swift in Sources */,
 				18D4C19528C704B8003F230A /* WalletConnectManager.swift in Sources */,
 				04E25D462770D56C009B39BA /* NFTDetailInfoCell.swift in Sources */,
-				15F0B70B294B919E00127D9A /* desmos_profiles_v3_query_params.pb.swift in Sources */,
 				040FA846275F55C200229F6F /* desmos_profiles_v1beta1_query.pb.swift in Sources */,
-				15F0B6ED294B919D00127D9A /* desmos_profiles_v3_models_dtag_requests.pb.swift in Sources */,
 				0451FC4C282A38E000214FDA /* ChainCosmos.swift in Sources */,
 				E1406FC22260654F00D9440C /* TxInfo.swift in Sources */,
 				040FA924275F55C300229F6F /* cosmos_gov_v1beta2_tx.grpc.swift in Sources */,
@@ -9026,12 +9030,10 @@
 				048C830227BF572800270528 /* evmos_incentives_v1_genesis.pb.swift in Sources */,
 				04E1913028E6B9B900C98A6B /* SelectPriceColorCell.swift in Sources */,
 				E123FD3F233E0161004EC348 /* MainTabWalletViewController.swift in Sources */,
-				15F0B6EB294B919D00127D9A /* desmos_profiles_v3_query_profile.pb.swift in Sources */,
 				28FC030C2652662B001C0319 /* Price.swift in Sources */,
 				E16FACB12361ADFA00372052 /* Bytes.swift in Sources */,
 				283E9472254902F4007A9291 /* TxDeleteAccountCell.swift in Sources */,
 				04D2DB25290F8943007FC197 /* ChainXpla.swift in Sources */,
-				15F0B709294B919E00127D9A /* desmos_profiles_v3_client_cli.pb.swift in Sources */,
 				04AA4C152906A6DD0027877B /* kava_router_v1beta1_tx.pb.swift in Sources */,
 				046FA6E32876995600F6318A /* VoteCell.swift in Sources */,
 				E1C3C89B23B1E3E400A693C0 /* NotificationView.swift in Sources */,
@@ -9052,7 +9054,6 @@
 				040FA82F275F55C200229F6F /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				04E2A32727A581720045ED21 /* Cw20BalanceRes.swift in Sources */,
 				280E1F1B254ABB1D0007BA7D /* ResourceEditCell.swift in Sources */,
-				15F0B6FB294B919E00127D9A /* desmos_profiles_v3_models_profile.pb.swift in Sources */,
 				04FCD2C7292E2CEF00BA5349 /* stride_claim_claim.pb.swift in Sources */,
 				E151B63C22467E520026B8C0 /* HistoryCell.swift in Sources */,
 				0443B86E2852FAF30027A6B9 /* SwitchAccountHeader.swift in Sources */,
@@ -9070,9 +9071,11 @@
 				0454AE3E2927459300EC657D /* ethermint_types_v1_account.pb.swift in Sources */,
 				04FCD2C1292E2CEF00BA5349 /* stride_mint_v1beta1_query.pb.swift in Sources */,
 				040FA80B275F55C200229F6F /* starname_cosmwasm_wasm_v1_tx.pb.swift in Sources */,
+				04CF713E294C0EB300134A84 /* PasswordViewController.swift in Sources */,
 				28DB570625FA3BBC00B2F0E5 /* HardPoolBorrow0ViewController.swift in Sources */,
 				0451FC62282A3A0C00214FDA /* ChainPersistence.swift in Sources */,
 				04E25D36276F6C5D009B39BA /* MyNTFsViewController.swift in Sources */,
+				04CF711D294C0DDE00134A84 /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */,
 				040FA950275F55C300229F6F /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */,
 				04E1659528A0F49B000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift in Sources */,
 				04E1912C28E66F5800C98A6B /* UIViewController+Toast.swift in Sources */,
@@ -9083,13 +9086,11 @@
 				045DADAC289BCF4B004ED9B4 /* AuthzSend1ViewController.swift in Sources */,
 				E10A7560287E612100BC66BC /* WalletMediblocEventCell.swift in Sources */,
 				283E9463254902BA007A9291 /* TxRegisterDomainCell.swift in Sources */,
-				E16D9B222249EA0C0019B7BB /* PasswordViewController.swift in Sources */,
 				04AA4BE52906A6DD0027877B /* kava_committee_v1beta1_query.pb.swift in Sources */,
 				E1945E3E222E7E2900A1436F /* SegwitAddrCoder.swift in Sources */,
 				040FA83F275F55C200229F6F /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift in Sources */,
 				04E1659B28A0F49B000F12C0 /* confio_poe_v1beta1_tx.pb.swift in Sources */,
 				E1D4EA582871584B005C1ECF /* FeeInfo.swift in Sources */,
-				15F0B6F5294B919E00127D9A /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */,
 				E1827E1B225628FF00BC0350 /* ValidatorDetailMyDetailCell.swift in Sources */,
 				040FAA6C275F55C400229F6F /* cosmos_crypto_multisig_keys.pb.swift in Sources */,
 				040FA941275F55C300229F6F /* desmos_profiles_v1beta1_msgs_app_links.pb.swift in Sources */,
@@ -9143,7 +9144,6 @@
 				040FA934275F55C300229F6F /* cosmos_nft_v1beta1_query.grpc.swift in Sources */,
 				0454AE2C2927459300EC657D /* ethermint_evm_v1_query.grpc.swift in Sources */,
 				046E903F268C45DC002CFFE1 /* BinanceHexlify.swift in Sources */,
-				15F0B703294B919E00127D9A /* desmos_profiles_v3_query_app_links.pb.swift in Sources */,
 				040FA997275F55C300229F6F /* starname_iov_escrow_v1beta1_events.pb.swift in Sources */,
 				2827E11523F3DC9B007CDB6E /* TxCommonCell.swift in Sources */,
 				2845D87D246FAE16007CD497 /* VoteDetailsViewController.swift in Sources */,
