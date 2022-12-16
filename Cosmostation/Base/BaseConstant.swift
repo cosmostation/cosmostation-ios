@@ -328,6 +328,7 @@ public enum ChainType: String {
     case TERITORI_MAIN
     case XPLA_MAIN
     case ONOMY_MAIN
+    case QUICKSILVER_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -376,6 +377,7 @@ public enum ChainType: String {
         result.append(PASSAGE_MAIN)
         result.append(PERSIS_MAIN)
         result.append(PROVENANCE_MAIN)
+        result.append(QUICKSILVER_MAIN)
         result.append(REGEN_MAIN)
         result.append(RIZON_MAIN)
         result.append(SECRET_MAIN)
