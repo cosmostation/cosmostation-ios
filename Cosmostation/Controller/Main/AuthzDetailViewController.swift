@@ -359,8 +359,8 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func checkAccountType() {
         guard let rawAccount = granterAuth else { return }
-        if (chainConfig?.chainType == .DESMOS_MAIN && rawAccount.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName)) {
-            if let profileAccount = try? Desmos_Profiles_V1beta1_Profile.init(serializedData: rawAccount.value) {
+        if (chainConfig?.chainType == .DESMOS_MAIN && rawAccount.typeURL.contains(Desmos_Profiles_V3_Profile.protoMessageName)) {
+            if let profileAccount = try? Desmos_Profiles_V3_Profile.init(serializedData: rawAccount.value) {
                 checkVesting(chainConfig?.chainType, profileAccount.account)
             } else {
                 checkVesting(chainConfig?.chainType, rawAccount)

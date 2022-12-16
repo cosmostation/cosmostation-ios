@@ -234,8 +234,8 @@ final class BaseData : NSObject{
     func onParseRemainVestingsByDenom_gRPC(_ denom: String) -> Array<Cosmos_Vesting_V1beta1_Period> {
         var results = Array<Cosmos_Vesting_V1beta1_Period>()
         let baseAccount: Google_Protobuf2_Any?
-        if (mAccount_gRPC?.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName) == true) {
-            let profileAccount = try! Desmos_Profiles_V1beta1_Profile.init(serializedData: mAccount_gRPC.value)
+        if (mAccount_gRPC?.typeURL.contains(Desmos_Profiles_V3_Profile.protoMessageName) == true) {
+            let profileAccount = try! Desmos_Profiles_V3_Profile.init(serializedData: mAccount_gRPC.value)
             baseAccount = profileAccount.account
         } else {
             baseAccount = mAccount_gRPC
