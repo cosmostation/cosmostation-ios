@@ -16,7 +16,7 @@ class ChainQuicksilver: ChainConfig {
     var chainInfoImg = UIImage(named: "infoQuicksilver")
     var chainInfoTitle = NSLocalizedString("guide_title_quicksilver", comment: "")
     var chainInfoMsg = NSLocalizedString("guide_msg_quicksilver", comment: "")
-    var chainColor = UIColor(named: "quicksilver")!a
+    var chainColor = UIColor(named: "quicksilver")!
     var chainColorBG = UIColor(named: "quicksilver_bg")!
     var chainTitle = "(Quicksilver Mainnet)"
     var chainTitle2 = "QUICKSILVER"
