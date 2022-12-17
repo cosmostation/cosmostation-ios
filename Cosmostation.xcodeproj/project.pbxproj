@@ -2603,6 +2603,7 @@
 		28FEDCEA26DB141900A43D01 /* KavaIncentiveClaim3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FEDCE826DB141900A43D01 /* KavaIncentiveClaim3ViewController.xib */; };
 		9F0C15A928DF518100BA24B1 /* TwoLinesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */; };
 		9F0C15AA28DF518100BA24B1 /* TwoLinesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */; };
+		9F388861294E52BF0090812C /* ChainQuicksilver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B717294C770200127D9A /* ChainQuicksilver.swift */; };
 		9F3E32882935464C00C5C5A9 /* UITextField+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E32872935464C00C5C5A9 /* UITextField+Validation.swift */; };
 		9F3E32892935464C00C5C5A9 /* UITextField+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E32872935464C00C5C5A9 /* UITextField+Validation.swift */; };
 		9F48C75629097FA00015CF89 /* HardPoolDeposit0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DB56F025FA3B7100B2F0E5 /* HardPoolDeposit0ViewController.swift */; };
@@ -7886,6 +7887,7 @@
 				04FCD2BE292E2CEF00BA5349 /* stride_mint_v1beta1_query.grpc.swift in Sources */,
 				04FCD2C4292E2CEF00BA5349 /* stride_stakeibc_query.grpc.swift in Sources */,
 				1817CB68283E2CE500523713 /* ibc_core_port_v1_query.pb.swift in Sources */,
+				9F388861294E52BF0090812C /* ChainQuicksilver.swift in Sources */,
 				18FFB57A281AF533004E65BB /* WKey.swift in Sources */,
 				1817CC41283E2CE600523713 /* cosmos_params_v1beta1_params.pb.swift in Sources */,
 				04AA4BDA2906A6DD0027877B /* kava_bep3_v1beta1_genesis.pb.swift in Sources */,
