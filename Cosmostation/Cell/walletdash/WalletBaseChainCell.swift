@@ -65,16 +65,16 @@ class WalletBaseChainCell: UITableViewCell {
     }
     
     func updateView(_ account: Account?, _ chainConfig: ChainConfig?) {
-        if (account == nil || chainConfig == nil) { return }
-        let stakingDenom = chainConfig!.stakeDenom
-        let divideDecimal = chainConfig!.divideDecimal
+        guard let account = account, let chainConfig = chainConfig else { return }
+        let stakingDenom = chainConfig.stakeDenom
+        let divideDecimal = chainConfig.divideDecimal
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
         
-        cardRoot.backgroundColor = chainConfig!.chainColorBG
-        tokenSymbolImg.image = chainConfig!.stakeDenomImg
-        tokenSymbolLabel.text = chainConfig!.stakeSymbol
-        tokenSymbolLabel.textColor = chainConfig!.chainColor
-        btnWalletConnect.isHidden = !chainConfig!.wcSupoort
+        cardRoot.backgroundColor = chainConfig.chainColorBG
+        tokenSymbolImg.image = chainConfig.stakeDenomImg
+        tokenSymbolLabel.text = chainConfig.stakeSymbol
+        tokenSymbolLabel.textColor = chainConfig.chainColor
+        btnWalletConnect.isHidden = !chainConfig.wcSupoort
 
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, divideDecimal, 6)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, divideDecimal, 6)
@@ -89,7 +89,7 @@ class WalletBaseChainCell: UITableViewCell {
         }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -divideDecimal).stringValue)
         
-        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) {
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig, stakingDenom) {
             WDP.dpAssetValue(msAsset.coinGeckoId, totalToken, divideDecimal, totalValue)
         }
     }
