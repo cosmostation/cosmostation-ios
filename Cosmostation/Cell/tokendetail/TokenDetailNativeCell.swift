@@ -55,13 +55,13 @@ class TokenDetailNativeCell: UITableViewCell {
     }
     
     func onBindNativeToken_gRPC(_ chainConfig: ChainConfig?, _ denom: String?) {
-        if (chainConfig == nil || denom == nil) { return }
-        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, denom!) {
+        guard let denom = denom, let chainConfig = chainConfig else { return }
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig, denom) {
             let decimal = msAsset.decimals
-            if (chainConfig?.chainType == ChainType.KAVA_MAIN) {
+            if (chainConfig.chainType == ChainType.KAVA_MAIN) {
                 onBindKavaTokens(chainConfig, denom)
             } else {
-                let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
+                let total = BaseData.instance.getAvailableAmount_gRPC(denom)
                 totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, decimal, decimal)
                 availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, decimal, decimal)
             }

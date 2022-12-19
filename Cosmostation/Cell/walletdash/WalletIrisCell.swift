@@ -58,11 +58,11 @@ class WalletIrisCell: UITableViewCell {
     }
     
     func updateView(_ account: Account?, _ chainConfig: ChainConfig?) {
-        if (account == nil || chainConfig == nil) { return }
-        let stakingDenom = chainConfig!.stakeDenom
+        guard let account = account, let chainConfig = chainConfig else { return }
+        let stakingDenom = chainConfig.stakeDenom
         
         let totalIris = WUtils.getAllMainAsset(stakingDenom)
-        denomTitle.text = chainConfig!.stakeSymbol
+        denomTitle.text = chainConfig.stakeSymbol
         totalAmount.attributedText = WDP.dpAmount(totalIris.stringValue, totalAmount.font!, 6, 6)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, 6, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
@@ -70,7 +70,7 @@ class WalletIrisCell: UITableViewCell {
         rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(stakingDenom), rewardAmount.font, 6, 6)
         BaseData.instance.updateLastTotal(account, totalIris.multiplying(byPowerOf10: -6).stringValue)
         
-        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) {
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig, stakingDenom) {
             WDP.dpAssetValue(msAsset.coinGeckoId, totalIris, 6, totalValue)
         }
     }

@@ -36,10 +36,10 @@ class WalletGuideCell: UITableViewCell {
         btn1Label.setTitle(NSLocalizedString("guide_btn_home", comment: ""), for: .normal)
         btn2Label.setTitle(NSLocalizedString("guide_btn_blog", comment: ""), for: .normal)
         
-        if (account == nil || chainConfig == nil) { return }
-        guideImg.image = chainConfig!.chainInfoImg
-        guideTitle.text = chainConfig!.chainInfoTitle
-        guideMsg.text = chainConfig!.chainInfoMsg
+        guard let chainConfig = chainConfig else { return }
+        guideImg.image = chainConfig.chainInfoImg
+        guideTitle.text = chainConfig.chainInfoTitle
+        guideMsg.text = chainConfig.chainInfoMsg
         
     }
 }

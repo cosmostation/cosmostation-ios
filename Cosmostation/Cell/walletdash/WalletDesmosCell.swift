@@ -66,8 +66,8 @@ class WalletDesmosCell: UITableViewCell {
     }
     
     func updateView(_ account: Account?, _ chainConfig: ChainConfig?) {
-        if (account == nil || chainConfig == nil) { return }
-        let stakingDenom = chainConfig!.stakeDenom
+        guard let account = account, let chainConfig = chainConfig else { return }
+        let stakingDenom = chainConfig.stakeDenom
         
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 6, 6)
@@ -76,14 +76,14 @@ class WalletDesmosCell: UITableViewCell {
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)
         rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(stakingDenom), rewardAmount.font, 6, 6)
         
-        let vesting = BaseData.instance.getVestingAmount_gRPC(chainConfig!.stakeDenom)
+        let vesting = BaseData.instance.getVestingAmount_gRPC(chainConfig.stakeDenom)
         if (vesting.compare(NSDecimalNumber.zero).rawValue > 0) {
             vestingLayer.isHidden = false
             vestingAmount.attributedText = WDP.dpAmount(BaseData.instance.getVesting_gRPC(stakingDenom), vestingAmount.font!, 6, 6)
         }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -6).stringValue)
         
-        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) {
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig, stakingDenom) {
             WDP.dpAssetValue(msAsset.coinGeckoId, totalToken, 6, totalValue)
         }
     }

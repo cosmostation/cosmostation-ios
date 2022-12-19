@@ -37,8 +37,8 @@ class WalletInflationCell: UITableViewCell {
     }
     
     func onBindCell(_ account: Account?, _ chainConfig: ChainConfig?) {
-        if (account == nil || chainConfig == nil) { return }
-        let chainType = chainConfig!.chainType
+        guard let chainConfig = chainConfig else { return }
+        let chainType = chainConfig.chainType
         guard let param = BaseData.instance.mParam else {
             return
         }
