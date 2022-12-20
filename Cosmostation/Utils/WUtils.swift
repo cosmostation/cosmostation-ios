@@ -208,14 +208,14 @@ public class WUtils {
     }
     
     static func getGeckoId(_ chainConfig: ChainConfig?) -> String {
-        if (chainConfig == nil) { return "" }
-        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, chainConfig!.stakeDenom) {
+        guard let chainConfig = chainConfig else { return "" }
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig, chainConfig.stakeDenom) {
             return msAsset.coinGeckoId
         }
-        if (chainConfig?.chainType == .BINANCE_MAIN) {
+        if (chainConfig.chainType == .BINANCE_MAIN) {
             return BNB_GECKO_ID
             
-        } else if (chainConfig?.chainType == .OKEX_MAIN) {
+        } else if (chainConfig.chainType == .OKEX_MAIN) {
             return OKT_GECKO_ID
         }
         return ""
@@ -687,20 +687,20 @@ public class WUtils {
     }
     
     static func isValidChainAddress(_ chainConfig: ChainConfig?, _ address: String?) -> Bool {
-        if (chainConfig == nil) { return false }
-        if (address?.starts(with: "0x") == true) {
-            if (WKey.isValidEthAddress(address!) && chainConfig?.chainType == .OKEX_MAIN) { return true }
+        guard let chainConfig = chainConfig else { return false }
+        if let address = address, address.starts(with: "0x") {
+            if (WKey.isValidEthAddress(address) && chainConfig.chainType == .OKEX_MAIN) { return true }
             return false
         }
         if (!WKey.isValidateBech32(address ?? "")) { return false }
-        let addressPrfix = chainConfig!.addressPrefix + "1"
+        let addressPrfix = chainConfig.addressPrefix + "1"
         if (address?.starts(with: addressPrfix) == true) { return true }
         return false
     }
     
     static func getChainsFromAddress(_ address: String?) -> ChainType? {
-        if (address?.starts(with: "0x") == true) {
-            if (WKey.isValidEthAddress(address!)) { return .OKEX_MAIN }
+        if let address = address, address.starts(with: "0x") {
+            if (WKey.isValidEthAddress(address)) { return .OKEX_MAIN }
             return nil
         }
         if (!WKey.isValidateBech32(address ?? "")) { return nil }

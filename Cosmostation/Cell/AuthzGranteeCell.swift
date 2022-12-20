@@ -27,12 +27,12 @@ class AuthzGranteeCell: UITableViewCell {
     }
     
     func onBindView(_ chainConfig: ChainConfig?, _ address: String) {
-        if (chainConfig == nil) { return }
-        let stakingDenom = chainConfig!.stakeDenom
+        guard let chainConfig = chainConfig else { return }
+        let stakingDenom = chainConfig.stakeDenom
         
-        rootCardView.backgroundColor = chainConfig!.chainColorBG
+        rootCardView.backgroundColor = chainConfig.chainColorBG
         granteeAddressLabel.text = address
         granteeAddressLabel.adjustsFontSizeToFitWidth = true
-        availableAmountLabel.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmountLabel.font!, chainConfig!.divideDecimal, 6)
+        availableAmountLabel.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmountLabel.font!, chainConfig.divideDecimal, 6)
     }
 }

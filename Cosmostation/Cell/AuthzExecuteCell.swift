@@ -35,21 +35,21 @@ class AuthzExecuteCell: UITableViewCell {
     }
     
     func onBindSend(_ chainConfig: ChainConfig?, _ grant: Cosmos_Authz_V1beta1_Grant?) {
-        if (chainConfig == nil) { return }
-        stakingDenom = chainConfig!.stakeDenom
+        guard let chainConfig = chainConfig else { return }
+        stakingDenom = chainConfig.stakeDenom
         authzIconImgView.image = UIImage.init(named: "authzIconSend")
         authzTitleLabel.text = "Send"
-        if (grant != nil) {
+        if let grant = grant {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
-            if (grant!.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+            authzExpireDateLabel.text = WDP.dpTimeGap(grant.expiration.seconds * 1000)
+            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
                 authzLimitAmountLabel.text = ""
                 authzLimitAddressLabel.text = ""
             }
-            if (grant!.authorization.typeURL.contains(Cosmos_Bank_V1beta1_SendAuthorization.protoMessageName)) {
-                let transAuth = try! Cosmos_Bank_V1beta1_SendAuthorization.init(serializedData: grant!.authorization.value)
+            if (grant.authorization.typeURL.contains(Cosmos_Bank_V1beta1_SendAuthorization.protoMessageName)) {
+                let transAuth = try! Cosmos_Bank_V1beta1_SendAuthorization.init(serializedData: grant.authorization.value)
                 if let maxAmount = getSpendMax(transAuth) {
-                    authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, chainConfig!.divideDecimal, 6)
+                    authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, chainConfig.divideDecimal, 6)
                 } else {
                     authzLimitAmountLabel.text = "-"
                 }
@@ -61,21 +61,21 @@ class AuthzExecuteCell: UITableViewCell {
     }
     
     func onBindDelegate(_ chainConfig: ChainConfig?, _ grant: Cosmos_Authz_V1beta1_Grant?) {
-        if (chainConfig == nil) { return }
-        stakingDenom = chainConfig!.stakeDenom
+        guard let chainConfig = chainConfig else { return }
+        stakingDenom = chainConfig.stakeDenom
         authzIconImgView.image = UIImage.init(named: "authzIconStake")
         authzTitleLabel.text = "Delegate"
-        if (grant != nil) {
+        if let grant = grant {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
-            if (grant!.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+            authzExpireDateLabel.text = WDP.dpTimeGap(grant.expiration.seconds * 1000)
+            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
                 authzLimitAmountLabel.text = "-"
                 authzLimitAddressLabel.text = "-"
             }
-            if (grant!.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
-                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
+            if (grant.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
+                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant.authorization.value)
                 if let maxAmount = getMaxToken(stakeAuth) {
-                    authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, chainConfig!.divideDecimal, 6)
+                    authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, chainConfig.divideDecimal, 6)
                 } else {
                     authzLimitAmountLabel.text = "-"
                 }

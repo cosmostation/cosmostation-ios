@@ -17,11 +17,11 @@ public class WDP {
     
     static func dpSymbol(_ chainConfig: ChainConfig?, _ denom: String?, _ denomLabel: UILabel?) {
         denomLabel?.text = WUtils.getSymbol(chainConfig, denom)
-        if (chainConfig!.stakeDenom == denom) {
+        if (chainConfig?.stakeDenom == denom) {
             denomLabel?.textColor = chainConfig?.chainColor
             return
         }
-        if (chainConfig!.chainType == .KAVA_MAIN) {
+        if (chainConfig?.chainType == .KAVA_MAIN) {
             if (denom == KAVA_HARD_DENOM) {
                 denomLabel?.textColor = UIColor.init(named: "kava_hard")
                 return
@@ -33,19 +33,19 @@ public class WDP {
                 return
             }
 
-        } else if (chainConfig!.chainType == .OSMOSIS_MAIN) {
+        } else if (chainConfig?.chainType == .OSMOSIS_MAIN) {
             if (denom == OSMOSIS_ION_DENOM) {
                 denomLabel?.textColor = UIColor.init(named: "osmosis_ion")
                 return
             }
 
-        } else if (chainConfig!.chainType == .CRESCENT_MAIN) {
+        } else if (chainConfig?.chainType == .CRESCENT_MAIN) {
             if (denom == CRESCENT_BCRE_DENOM) {
                 denomLabel?.textColor = UIColor.init(named: "crescent_bcre")
                 return
             }
 
-        } else if (chainConfig!.chainType == .NYX_MAIN) {
+        } else if (chainConfig?.chainType == .NYX_MAIN) {
             if (denom == NYX_NYM_DENOM) {
                 denomLabel?.textColor = UIColor.init(named: "nyx_nym")
                 return
@@ -59,11 +59,11 @@ public class WDP {
             imgView?.image = UIImage(named: "tokenDefault")
             return
         }
-        if (chainConfig!.stakeDenom == denom) {
-            imgView?.image = chainConfig!.stakeDenomImg
+        if (chainConfig?.stakeDenom == denom) {
+            imgView?.image = chainConfig?.stakeDenomImg
             return
         }
-        if (chainConfig!.isGrpc) {
+        if chainConfig?.isGrpc == true {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
                 if let assetImgeUrl = msAsset.assetImg() {
                     imgView?.af_setImage(withURL: assetImgeUrl)
@@ -72,12 +72,12 @@ public class WDP {
             }
             
         } else {
-            if (chainConfig!.chainType == .BINANCE_MAIN) {
+            if (chainConfig?.chainType == .BINANCE_MAIN) {
                 if let bnbTokenInfo = BaseData.instance.bnbToken(denom) {
                     imgView?.af_setImage(withURL: bnbTokenInfo.assetImg())
                 }
 
-            } else if (chainConfig!.chainType == .OKEX_MAIN) {
+            } else if (chainConfig?.chainType == .OKEX_MAIN) {
                 if let okTokenInfo = BaseData.instance.okToken(denom) {
                     imgView?.af_setImage(withURL: okTokenInfo.assetImg())
                 }
