@@ -46,9 +46,9 @@ class OtherValidatorCell: UITableViewCell {
     }
     
     func updateView(_ validator: Cosmos_Staking_V1beta1_Validator, _ chainConfig: ChainConfig?) {
-        if (chainConfig == nil) { return }
-        let chainType = chainConfig!.chainType
-        powerLabel.attributedText = WDP.dpAmount(validator.tokens, powerLabel.font!, chainConfig!.divideDecimal, 6)
+        guard let chainConfig = chainConfig else { return }
+        let chainType = chainConfig.chainType
+        powerLabel.attributedText = WDP.dpAmount(validator.tokens, powerLabel.font!, chainConfig.divideDecimal, 6)
         commissionLabel.attributedText = WUtils.getDpEstAprCommission(commissionLabel.font, NSDecimalNumber.one, chainType)
         if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {
             validatorImg.af_setImage(withURL: url)
@@ -64,7 +64,7 @@ class OtherValidatorCell: UITableViewCell {
             validatorImg.layer.borderColor = UIColor.font04.cgColor
         }
         if BaseData.instance.mMyValidators_gRPC.first(where: {$0.operatorAddress == validator.operatorAddress}) != nil {
-            cardView.backgroundColor = chainConfig?.chainColorBG
+            cardView.backgroundColor = chainConfig.chainColorBG
         } else {
             cardView.backgroundColor = UIColor.cardBg
         }
