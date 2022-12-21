@@ -28,12 +28,13 @@ class TxSifSwapCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chainConfig.chainColor
         
-        let msg = try! Sifnode_Clp_V1_MsgSwap.init(serializedData: response.tx.body.messages[position].value)
-        txSingerLabel.text = msg.signer
-        txSingerLabel.adjustsFontSizeToFitWidth = true
-        
-        let inCoin = Coin.init(msg.sentAsset.symbol, msg.sentAmount)
-        WDP.dpCoin(chainConfig, inCoin, txSwapInDenomLabel, txSwapInAmountLabel)
+        if let msg = try? Sifnode_Clp_V1_MsgSwap.init(serializedData: response.tx.body.messages[position].value) {
+            txSingerLabel.text = msg.signer
+            txSingerLabel.adjustsFontSizeToFitWidth = true
+            
+            let inCoin = Coin.init(msg.sentAsset.symbol, msg.sentAmount)
+            WDP.dpCoin(chainConfig, inCoin, txSwapInDenomLabel, txSwapInAmountLabel)
+        }
         
         var outCoin: Coin?
         if response.txResponse.logs.count > position {
@@ -53,8 +54,8 @@ class TxSifSwapCell: TxCell {
                 }
             }
         }
-        if (outCoin != nil) {
-            WDP.dpCoin(chainConfig, outCoin!, txSwapOutDenomLabel, txSwapOutAmountLabel)
+        if let outCoin = outCoin {
+            WDP.dpCoin(chainConfig, outCoin, txSwapOutDenomLabel, txSwapOutAmountLabel)
         } else {
             txSwapOutAmountLabel.text = ""
             txSwapOutDenomLabel.text = ""

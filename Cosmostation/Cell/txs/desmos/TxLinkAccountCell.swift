@@ -36,11 +36,11 @@ class TxLinkAccountCell: TxCell {
     }
     
     func onDesmosClaimAirdrop(_ address: String) {
-        print("onDesmosClaimAirdrop ", address)
         let desmosClaimAirdrop = DesmosClaimAirdrop.init(address)
-        let data = try! JSONEncoder().encode(desmosClaimAirdrop)
-        let params = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
-        let request = Alamofire.request(BaseNetWork.desmosClaim(), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
-        request.responseString() { _ in }
+        if let data = try? JSONEncoder().encode(desmosClaimAirdrop),
+            let params = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] {
+            let request = Alamofire.request(BaseNetWork.desmosClaim(), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
+            request.responseString() { _ in }
+        }
     }
 }

@@ -29,9 +29,10 @@ class TxSifRemoveLpCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chainConfig.chainColor
         
-        let msg = try! Sifnode_Clp_V1_MsgRemoveLiquidity.init(serializedData: response.tx.body.messages[position].value)
-        txSignerLabel.text = msg.signer
-        txSignerLabel.adjustsFontSizeToFitWidth = true
+        if let msg = try? Sifnode_Clp_V1_MsgRemoveLiquidity.init(serializedData: response.tx.body.messages[position].value) {
+            txSignerLabel.text = msg.signer
+            txSignerLabel.adjustsFontSizeToFitWidth = true
+        }
         
         var removeCoins = Array<Coin>()
         if response.txResponse.logs.count > position {
@@ -53,18 +54,17 @@ class TxSifRemoveLpCell: TxCell {
                 }
             }
         }
-        print("removeCoins ", removeCoins)
         
         let removeRowan = removeCoins.filter { $0.denom == SIF_MAIN_DENOM }.first
-        if (removeRowan != nil) {
-            WDP.dpCoin(chainConfig, removeRowan!, txWithdraw1DenomLabel, txWithdraw1AmountLabel)
+        if let removeRowan = removeRowan {
+            WDP.dpCoin(chainConfig, removeRowan, txWithdraw1DenomLabel, txWithdraw1AmountLabel)
         } else {
             WDP.dpCoin(chainConfig, SIF_MAIN_DENOM, "0", txWithdraw1DenomLabel, txWithdraw1AmountLabel)
         }
         
         let removeOther = removeCoins.filter { $0.denom != SIF_MAIN_DENOM }.first
-        if (removeOther != nil) {
-            WDP.dpCoin(chainConfig, removeOther!, txWithdraw2DenomLabel, txWithdraw2AmountLabel)
+        if let removeOther = removeOther {
+            WDP.dpCoin(chainConfig, removeOther, txWithdraw2DenomLabel, txWithdraw2AmountLabel)
         } else {
             txWithdraw2DenomLabel.isHidden = true
             txWithdraw2AmountLabel.isHidden = true

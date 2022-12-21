@@ -22,8 +22,9 @@ class TxIbcUpdateClientCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chain.chainColor
         
-        let msg = try! Ibc_Core_Client_V1_MsgUpdateClient.init(serializedData: response.tx.body.messages[position].value)
-        txSingerLabel.text = msg.signer
-        txClientIdLabel.text = msg.clientID
+        if let msg = try? Ibc_Core_Client_V1_MsgUpdateClient.init(serializedData: response.tx.body.messages[position].value) {
+            txSingerLabel.text = msg.signer
+            txClientIdLabel.text = msg.clientID
+        }
     }
 }

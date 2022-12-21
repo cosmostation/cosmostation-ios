@@ -61,40 +61,40 @@ class TxTransferCell: UITableViewCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chainConfig.chainColor
         
-        let msg = try! Cosmos_Bank_V1beta1_MsgSend.init(serializedData: response.tx.body.messages[position].value)
-        fromLabel.text = msg.fromAddress
-        toLabel.text = msg.toAddress
-        fromLabel.adjustsFontSizeToFitWidth = true
-        toLabel.adjustsFontSizeToFitWidth = true
-        
-        if (myAddress == msg.fromAddress) {
-            txTitleLabel.text = NSLocalizedString("tx_send", comment: "")
-        }
-        if (myAddress == msg.toAddress) {
-            txTitleLabel.text = NSLocalizedString("tx_receive", comment: "")
-        }
-        var coins = Array<Coin>()
-        for coin in msg.amount {
-            coins.append(Coin.init(coin.denom, coin.amount))
-        }
-//        print("coins size", coins.count)
-        multiAmountLayer0.isHidden = false
-        WDP.dpCoin(chainConfig, coins[0], multiAmountDenom0, multiAmount0)
-        if (coins.count > 1) {
-            multiAmountLayer1.isHidden = false
-            WDP.dpCoin(chainConfig, coins[1], multiAmountDenom1, multiAmount1)
-        }
-        if (coins.count > 2) {
-            multiAmountLayer2.isHidden = false
-            WDP.dpCoin(chainConfig, coins[2], multiAmountDenom2, multiAmount2)
-        }
-        if (coins.count > 3) {
-            multiAmountLayer3.isHidden = false
-            WDP.dpCoin(chainConfig, coins[3], multiAmountDenom3, multiAmount3)
-        }
-        if (coins.count > 4) {
-            multiAmountLayer4.isHidden = false
-            WDP.dpCoin(chainConfig, coins[4], multiAmountDenom4, multiAmount4)
+        if let msg = try? Cosmos_Bank_V1beta1_MsgSend.init(serializedData: response.tx.body.messages[position].value) {
+            fromLabel.text = msg.fromAddress
+            toLabel.text = msg.toAddress
+            fromLabel.adjustsFontSizeToFitWidth = true
+            toLabel.adjustsFontSizeToFitWidth = true
+            
+            if (myAddress == msg.fromAddress) {
+                txTitleLabel.text = NSLocalizedString("tx_send", comment: "")
+            }
+            if (myAddress == msg.toAddress) {
+                txTitleLabel.text = NSLocalizedString("tx_receive", comment: "")
+            }
+            var coins = Array<Coin>()
+            for coin in msg.amount {
+                coins.append(Coin.init(coin.denom, coin.amount))
+            }
+            multiAmountLayer0.isHidden = false
+            WDP.dpCoin(chainConfig, coins[0], multiAmountDenom0, multiAmount0)
+            if (coins.count > 1) {
+                multiAmountLayer1.isHidden = false
+                WDP.dpCoin(chainConfig, coins[1], multiAmountDenom1, multiAmount1)
+            }
+            if (coins.count > 2) {
+                multiAmountLayer2.isHidden = false
+                WDP.dpCoin(chainConfig, coins[2], multiAmountDenom2, multiAmount2)
+            }
+            if (coins.count > 3) {
+                multiAmountLayer3.isHidden = false
+                WDP.dpCoin(chainConfig, coins[3], multiAmountDenom3, multiAmount3)
+            }
+            if (coins.count > 4) {
+                multiAmountLayer4.isHidden = false
+                WDP.dpCoin(chainConfig, coins[4], multiAmountDenom4, multiAmount4)
+            }
         }
         
     }

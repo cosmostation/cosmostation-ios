@@ -22,8 +22,9 @@ class TxIbcAcknowledgeCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chain.chainColor
         
-        let msg = try! Ibc_Core_Channel_V1_MsgAcknowledgement.init(serializedData: response.tx.body.messages[position].value)
-        txSingerLabel.text = msg.signer
-        txAcknowledgementLabel.text = msg.acknowledgement.toHexString()
+        if let msg = try? Ibc_Core_Channel_V1_MsgAcknowledgement.init(serializedData: response.tx.body.messages[position].value) {
+            txSingerLabel.text = msg.signer
+            txAcknowledgementLabel.text = msg.acknowledgement.toHexString()
+        }
     }
 }

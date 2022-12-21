@@ -29,15 +29,14 @@ class TxSifAddLpCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chainConfig.chainColor
         
-        let msg = try! Sifnode_Clp_V1_MsgAddLiquidity.init(serializedData: response.tx.body.messages[position].value)
-        txSingerLabel.text = msg.signer
-        txSingerLabel.adjustsFontSizeToFitWidth = true
-        
-        let depositRowan = Coin.init(SIF_MAIN_DENOM, msg.nativeAssetAmount)
-        let depositOther = Coin.init(msg.externalAsset.symbol, msg.externalAssetAmount)
-        WDP.dpCoin(chainConfig, depositRowan, txDeposit1DenomLabel, txDeposit1AmountLabel)
-        WDP.dpCoin(chainConfig, depositOther, txDeposit2DenomLabel, txDeposit2AmountLabel)
-        
+        if let msg = try? Sifnode_Clp_V1_MsgAddLiquidity.init(serializedData: response.tx.body.messages[position].value) {
+            txSingerLabel.text = msg.signer
+            txSingerLabel.adjustsFontSizeToFitWidth = true
+            let depositRowan = Coin.init(SIF_MAIN_DENOM, msg.nativeAssetAmount)
+            let depositOther = Coin.init(msg.externalAsset.symbol, msg.externalAssetAmount)
+            WDP.dpCoin(chainConfig, depositRowan, txDeposit1DenomLabel, txDeposit1AmountLabel)
+            WDP.dpCoin(chainConfig, depositOther, txDeposit2DenomLabel, txDeposit2AmountLabel)
+        }
     }
     
 }

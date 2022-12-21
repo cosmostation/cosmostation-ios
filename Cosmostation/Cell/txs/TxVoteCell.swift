@@ -24,21 +24,22 @@ class TxVoteCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chain.chainColor
         
-        let msg = try! Cosmos_Gov_V1beta1_MsgVote.init(serializedData: response.tx.body.messages[position].value)
-        voterLabel.text = msg.voter
-        proposalIdLabel.text = String(msg.proposalID)
-        if (msg.option == Cosmos_Gov_V1beta1_VoteOption.yes) {
-            opinionLabel.text = "Yes"
-            
-        } else if (msg.option == Cosmos_Gov_V1beta1_VoteOption.no) {
-            opinionLabel.text = "No"
-            
-        } else if (msg.option == Cosmos_Gov_V1beta1_VoteOption.noWithVeto) {
-            opinionLabel.text = "No With Veto"
-            
-        } else if (msg.option == Cosmos_Gov_V1beta1_VoteOption.abstain) {
-            opinionLabel.text = "Abstain"
-            
+        if let msg = try? Cosmos_Gov_V1beta1_MsgVote.init(serializedData: response.tx.body.messages[position].value) {
+            voterLabel.text = msg.voter
+            proposalIdLabel.text = String(msg.proposalID)
+            if (msg.option == Cosmos_Gov_V1beta1_VoteOption.yes) {
+                opinionLabel.text = "Yes"
+                
+            } else if (msg.option == Cosmos_Gov_V1beta1_VoteOption.no) {
+                opinionLabel.text = "No"
+                
+            } else if (msg.option == Cosmos_Gov_V1beta1_VoteOption.noWithVeto) {
+                opinionLabel.text = "No With Veto"
+                
+            } else if (msg.option == Cosmos_Gov_V1beta1_VoteOption.abstain) {
+                opinionLabel.text = "Abstain"
+                
+            }
         }
     }
     
