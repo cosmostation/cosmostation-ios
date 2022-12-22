@@ -26,12 +26,13 @@ class TxIbcSendCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chainConfig.chainColor
         
-        let msg = try! Ibc_Applications_Transfer_V1_MsgTransfer.init(serializedData: response.tx.body.messages[position].value)
-        senderLabel.text = msg.sender
-        receipientLabel.text = msg.receiver
-        
-        let sendCoin = Coin.init(msg.token.denom, msg.token.amount)
-        WDP.dpCoin(chainConfig, sendCoin, sendDenom, sendAmount)
+        if let msg = try? Ibc_Applications_Transfer_V1_MsgTransfer.init(serializedData: response.tx.body.messages[position].value) {
+            senderLabel.text = msg.sender
+            receipientLabel.text = msg.receiver
+            
+            let sendCoin = Coin.init(msg.token.denom, msg.token.amount)
+            WDP.dpCoin(chainConfig, sendCoin, sendDenom, sendAmount)
+        }
     }
     
 }
