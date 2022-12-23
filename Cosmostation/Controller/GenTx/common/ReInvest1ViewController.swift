@@ -87,17 +87,16 @@ class ReInvest1ViewController: BaseViewController {
     func onFetchRewards_gRPC(_ address: String) {
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.pageHolderVC.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with {
                 $0.delegatorAddress = address
             }
             do {
                 let response = try Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegationTotalRewards(req).response.wait()
-//            print("onFetchgRPCRewards: \(response.rewards.count)")
                 response.rewards.forEach { reward in
                     BaseData.instance.mMyReward_gRPC.append(reward)
                 }

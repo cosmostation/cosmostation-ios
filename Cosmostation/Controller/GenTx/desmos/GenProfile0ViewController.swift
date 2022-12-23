@@ -272,10 +272,10 @@ class GenProfile0ViewController: BaseViewController, UIImagePickerControllerDele
     func onFetchgRPCDtag(_ dtag: String) {
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             do {
                 let req = Desmos_Profiles_V1beta1_QueryProfileRequest.with { $0.user = dtag }

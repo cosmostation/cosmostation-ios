@@ -608,10 +608,10 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     func onFetchBondedValidators(_ offset:Int) {
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let page = Cosmos_Base_Query_V1beta1_PageRequest.with {
                 $0.limit = 300

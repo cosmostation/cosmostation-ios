@@ -172,20 +172,18 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     
     //gRPC
     func onFetchSingleValidator_gRPC(_ opAddress: String) {
-//        print("onFetchSingleValidator_gRPC")
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let req = Cosmos_Staking_V1beta1_QueryValidatorRequest.with {
                 $0.validatorAddr = opAddress
             }
             do {
                 let response = try Cosmos_Staking_V1beta1_QueryClient(channel: channel).validator(req).response.wait()
-//                print("onFetchSingleValidator_gRPC: \(response.validator)")
                 self.mValidator_gRPC = response.validator
             } catch {
                 print("onFetchgRPCBondedValidators failed: \(error)")
@@ -197,13 +195,12 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onFetchValidatorSelfBond_gRPC(_ address: String, _ opAddress: String) {
-//        print("onFetchValidatorSelfBond_gRPC")
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let req = Cosmos_Staking_V1beta1_QueryDelegationRequest.with {
                 $0.delegatorAddr = address
@@ -211,7 +208,6 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             }
             do {
                 let response = try Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegation(req).response.wait()
-//                print("onFetchValidatorSelfBond_gRPC: \(response.delegationResponse)")
                 self.mSelfDelegationInfo_gRPC = response.delegationResponse
             } catch {
                 print("onFetchValidatorSelfBond_gRPC failed: \(error)")
@@ -224,13 +220,12 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onFetchDelegations_gRPC(_ address: String, _ offset: Int) {
-//        print("onFetchDelegations_gRPC")
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with {
                 $0.delegatorAddr = address
@@ -250,13 +245,12 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onFetchUndelegations_gRPC(_ address: String, _ offset: Int) {
-//        print("onFetchUndelegations_gRPC")
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with {
                 $0.delegatorAddr = address
@@ -276,13 +270,12 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onFetchRewards_gRPC(_ address: String) {
-//        print("onFetchRewards_gRPC")
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with {
                 $0.delegatorAddress = address
@@ -302,13 +295,12 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onFetchRedelegation_gRPC(_ address: String, _ toValAddress: String) {
-//        print("onFetchRedelegation_gRPC")
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let req = Cosmos_Staking_V1beta1_QueryRedelegationsRequest.with {
                 $0.delegatorAddr = address
@@ -334,13 +326,12 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onFetchRewardsAddress_gRPC(_ address: String) {
-//        print("onFetchRewardsAddress_gRPC")
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with {
                 $0.delegatorAddress = address
