@@ -91,7 +91,8 @@ class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableV
         }
     }
     
-    func onFetchGranter_gRPC(_ address: String) {
+    //TODO: remove
+    func onFetchGranter_gRPC2(_ address: String) {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
@@ -110,6 +111,30 @@ class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableV
                 print("onFetchGranter_gRPC failed: \(error)")
             }
             DispatchQueue.main.async(execute: { self.onUpdateViews() });
+        }
+    }
+    
+    func onFetchGranter_gRPC(_ address: String) {
+        do {
+            try runOnBackground { () -> [String] in
+                let channel = try ClientConnection.connection()
+                defer { try? channel.close().wait() }
+                let request = Cosmos_Authz_V1beta1_QueryGranteeGrantsRequest.with { $0.grantee = address }
+                let client = Cosmos_Authz_V1beta1_QueryClient(channel: channel)
+                let response = try client.granteeGrants(request, callOptions: BaseNetWork.getCallOptions()).response.wait()
+                var granters: Array<String> = .init()
+                response.grants.forEach { grant in
+                    if (!granters.contains(grant.granter)) {
+                        granters.append(grant.granter)
+                    }
+                }
+                return granters
+            } runOnMain: { granters in
+                self.granters = granters
+                self.onUpdateViews()
+            }
+        } catch {
+            print("onFetchGranter_gRPC failed: \(error)")
         }
     }
 }
