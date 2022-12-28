@@ -43,15 +43,14 @@ class TxRewardCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chainConfig.chainColor
         
-        let msg = try! Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.init(serializedData: response.tx.body.messages[position].value)
-        delegatorLabel.text = msg.delegatorAddress
-        validatorLabel.text = msg.validatorAddress
-        if let validator = BaseData.instance.searchValidator(withAddress: msg.validatorAddress) {
-            monikerLabel.text = "(" + validator.description_p.moniker + ")"
+        if let msg = try? Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.init(serializedData: response.tx.body.messages[position].value) {
+            delegatorLabel.text = msg.delegatorAddress
+            validatorLabel.text = msg.validatorAddress
+            if let validator = BaseData.instance.searchValidator(withAddress: msg.validatorAddress) {
+                monikerLabel.text = "(" + validator.description_p.moniker + ")"
+            }
         }
-        
         let rewardsCoins = WUtils.onParseStakeRewardGrpc(response,  position)
-        print("rewardsCoins ", rewardsCoins)
         if (rewardsCoins.count > 0) {
             incen0Layer.isHidden = false
             WDP.dpCoin(chainConfig, rewardsCoins[0], incen0Denom, incen0Amount)

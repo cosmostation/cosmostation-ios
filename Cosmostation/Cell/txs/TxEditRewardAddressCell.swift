@@ -23,8 +23,9 @@ class TxEditRewardAddressCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chain.chainColor
         
-        let msg = try! Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress.init(serializedData: response.tx.body.messages[position].value)
-        delegatorLabel.text = msg.delegatorAddress
-        widthrawAddressLabel.text = msg.withdrawAddress
+        if let msg = try? Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress.init(serializedData: response.tx.body.messages[position].value) {
+            delegatorLabel.text = msg.delegatorAddress
+            widthrawAddressLabel.text = msg.withdrawAddress
+        }
     }
 }

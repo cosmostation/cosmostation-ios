@@ -27,15 +27,12 @@ class TxIssueNFTDenomCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chain.chainColor
         
-        if (chain.chainType == .IRIS_MAIN) {
-            let msg = try! Irismod_Nft_MsgIssueDenom.init(serializedData: response.tx.body.messages[position].value)
+        if chain.chainType == .IRIS_MAIN, let msg = try? Irismod_Nft_MsgIssueDenom.init(serializedData: response.tx.body.messages[position].value) {
             txDenomIdLabel.text = msg.id
             txDenomNameLabel.text = msg.name
             txSchemaLabel.text = msg.schema
             
-            
-        } else if (chain.chainType == .CRYPTO_MAIN) {
-            let msg = try! Chainmain_Nft_V1_MsgIssueDenom.init(serializedData: response.tx.body.messages[position].value)
+        } else if chain.chainType == .CRYPTO_MAIN, let msg = try? Chainmain_Nft_V1_MsgIssueDenom.init(serializedData: response.tx.body.messages[position].value) {
             txDenomIdLabel.text = msg.id
             txDenomNameLabel.text = msg.name
             txSchemaLabel.text = msg.schema

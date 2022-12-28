@@ -25,8 +25,7 @@ class TxSendNFTCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chain.chainColor
         
-        if (chain.chainType == .IRIS_MAIN) {
-            let msg = try! Irismod_Nft_MsgTransferNFT.init(serializedData: response.tx.body.messages[position].value)
+        if chain.chainType == .IRIS_MAIN, let msg = try? Irismod_Nft_MsgTransferNFT.init(serializedData: response.tx.body.messages[position].value) {
             txTitleLabel.text = NSLocalizedString("tx_nft_transfer", comment: "")
             if (myAddress == msg.sender) {
                 txTitleLabel.text = NSLocalizedString("tx_nft_send", comment: "")
@@ -39,8 +38,7 @@ class TxSendNFTCell: TxCell {
             txNFTTokenIdLabel.text = msg.id
             txNFTDenomIdLabel.text = msg.denomID
             
-        } else if (chain.chainType == .CRYPTO_MAIN) {
-            let msg = try! Chainmain_Nft_V1_MsgTransferNFT.init(serializedData: response.tx.body.messages[position].value)
+        } else if chain.chainType == .CRYPTO_MAIN, let msg = try? Chainmain_Nft_V1_MsgTransferNFT.init(serializedData: response.tx.body.messages[position].value) {            
             txTitleLabel.text = NSLocalizedString("tx_nft_transfer", comment: "")
             if (myAddress == msg.sender) {
                 txTitleLabel.text = NSLocalizedString("tx_nft_send", comment: "")

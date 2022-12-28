@@ -42,10 +42,12 @@ class TxCommissionCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chainConfig.chainColor
         
-        let msg = try! Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission.init(serializedData: response.tx.body.messages[position].value)
-        validatorLabel.text = msg.validatorAddress
-        if let validator = BaseData.instance.searchValidator(withAddress: msg.validatorAddress) {
-            monikerLabel.text = "(" + validator.description_p.moniker + ")"
+        if let msg = try? Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission.init(serializedData: response.tx.body.messages[position].value) {
+            validatorLabel.text = msg.validatorAddress
+                
+            if let validator = BaseData.instance.searchValidator(withAddress: msg.validatorAddress) {
+                monikerLabel.text = "(" + validator.description_p.moniker + ")"
+            }
         }
         
         let commissionsCoins = WUtils.onParseCommisiondGrpc(response,  position)
