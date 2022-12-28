@@ -136,10 +136,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
                 return 3;
             }
-            if (chainType == .KAVA_MAIN || chainType == .MEDI_MAIN) {
+            if (chainType == .KAVA_MAIN || chainType == .MEDI_MAIN || chainType == .DESMOS_MAIN) {
                 return 6;
             }
-            if (chainType == .DESMOS_MAIN || chainConfig!.authzSupoort) {
+            if (chainConfig!.authzSupoort) {
                 return 5;
             } else {
                 return 4;
@@ -232,6 +232,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (indexPath.row == 2) {
             return onBindMintingCell(tableView)
             
+        } else if (indexPath.row == 3) {
+            return onBindAuthzCell(tableView)
+            
         } else {
             return onBindGuideCell(tableView)
         }
@@ -298,6 +301,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (indexPath.row == 2) {
             return onBindMintingCell(tableView)
             
+        } else if (indexPath.row == 3) {
+            return onBindAuthzCell(tableView)
+            
         } else {
             return onBindGuideCell(tableView)
         }
@@ -356,9 +362,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (indexPath.row == 2) {
             return onBindMintingCell(tableView)
             
-        }
-        
-        if (indexPath.row == 3 && chainConfig!.authzSupoort) {
+        } else if (indexPath.row == 3) {
             return onBindAuthzCell(tableView)
             
         } else {
@@ -403,6 +407,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onBindMintingCell(tableView)
 
         } else if (indexPath.row == 3) {
+            return onBindAuthzCell(tableView)
+
+        } else if (indexPath.row == 4) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDesmosEventCell") as? WalletDesmosEventCell
             cell?.actionDownload = { self.onClickDesmosEvent() }
             return cell!
