@@ -206,14 +206,18 @@ class MsgGenerator {
     }
     
     static func genSecp256k1Signature(_ toSignData: Data, _ priKey: Data, _ pubKey: Data, _ accNum: String, _ seqNum: String) -> [Signature] {
-        let signedData = try! ECDSA.compactsign(toSignData.sha256(), privateKey: priKey)
+        guard let signedData = try? ECDSA.compactsign(toSignData.sha256(), privateKey: priKey) else {
+            return []
+        }
         let publicKey = PublicKey.init(COSMOS_KEY_TYPE_PUBLIC, pubKey.base64EncodedString())
         let genedSignature = Signature.init(publicKey, signedData.base64EncodedString(), accNum, seqNum)
         return [genedSignature]
     }
     
     static func genEthSecp256k1Signature(_ toSignData: Data, _ priKey: Data, _ pubKey: Data, _ accNum: String, _ seqNum: String) -> [Signature] {
-        let signedData = try! ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: toSignData), privateKey: priKey)
+        guard let signedData = try? ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: toSignData), privateKey: priKey) else {
+            return []
+        }
         let publicKey = PublicKey.init(ETHERMINT_KEY_TYPE_PUBLIC, pubKey.base64EncodedString())
         let genedSignature = Signature.init(publicKey, signedData.base64EncodedString(), accNum, seqNum)
         return [genedSignature]
@@ -239,7 +243,11 @@ class MsgGenerator {
         let postTx = PostTx.init("sync", stdTx.value)
         let encoder = JSONEncoder()
         encoder.outputFormatting = .sortedKeys
-        return try! encoder.encode(postTx)
+        if let data = try? encoder.encode(postTx) {
+            return data
+        } else {
+            return Data()
+        }
     }
     
     static func byteArray<T>(from value: T) -> [UInt8] where T: FixedWidthInteger {
