@@ -56,7 +56,7 @@ class WalletPriceCell: UITableViewCell {
     }
     
     func onBindCell(_ account: Account?, _ chainConfig: ChainConfig?) {
-        if (account == nil || chainConfig == nil) { return }
+        guard let chainConfig = chainConfig else { return }
         
         let coinGeckoId = WUtils.getGeckoId(chainConfig)
         let changePriced = WUtils.priceChange(coinGeckoId)
@@ -64,21 +64,21 @@ class WalletPriceCell: UITableViewCell {
         WDP.dpPriceChanged(coinGeckoId, updownPercent)
         WDP.setPriceColor(updownPercent, changePriced)
         
-        if (chainConfig!.moonPaySupoort == true && chainConfig!.kadoMoneySupoort == true) {
-            buyBtn.setTitle(String(format: NSLocalizedString("btn_buy_kadomoney", comment: ""), chainConfig!.stakeSymbol), for: .normal)
+        if (chainConfig.moonPaySupoort == true && chainConfig.kadoMoneySupoort == true) {
+            buyBtn.setTitle(String(format: NSLocalizedString("btn_buy_kadomoney", comment: ""), chainConfig.stakeSymbol), for: .normal)
             buySeparator.isHidden = false
             buyBtn.isHidden = false
             buyConstraint.priority = .defaultHigh
             noBuyConstraint.priority = .defaultLow
         
-        } else if (chainConfig!.moonPaySupoort == true) {
-            buyBtn.setTitle(String(format: NSLocalizedString("btn_buy_moonpay", comment: ""), chainConfig!.stakeSymbol), for: .normal)
+        } else if (chainConfig.moonPaySupoort == true) {
+            buyBtn.setTitle(String(format: NSLocalizedString("btn_buy_moonpay", comment: ""), chainConfig.stakeSymbol), for: .normal)
             buySeparator.isHidden = false
             buyBtn.isHidden = false
             buyConstraint.priority = .defaultHigh
             noBuyConstraint.priority = .defaultLow
         
-        } else if (chainConfig!.kadoMoneySupoort == true) {
+        } else if (chainConfig.kadoMoneySupoort == true) {
             buyBtn.setTitle(NSLocalizedString("btn_buy_kadomoney", comment: ""), for: .normal)
             buySeparator.isHidden = false
             buyBtn.isHidden = false

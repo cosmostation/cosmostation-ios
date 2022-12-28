@@ -67,8 +67,8 @@ class WalletCrytoCell: UITableViewCell {
     }
     
     func updateView(_ account: Account?, _ chainConfig: ChainConfig?) {
-        if (account == nil || chainConfig == nil) { return }
-        let stakingDenom = chainConfig!.stakeDenom
+        guard let account = account, let chainConfig = chainConfig else { return }
+        let stakingDenom = chainConfig.stakeDenom
         
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 8, 6)
@@ -84,7 +84,7 @@ class WalletCrytoCell: UITableViewCell {
         }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -8).stringValue)
         
-        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) {
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig, stakingDenom) {
             WDP.dpAssetValue(msAsset.coinGeckoId, totalToken, 8, totalValue)
         }
     }
