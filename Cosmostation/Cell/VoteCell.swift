@@ -54,22 +54,22 @@ class VoteCell: UITableViewCell {
         if (proposal.getMyVote() == "Yes") {
             yesLabel.textColor = chainConfig?.chainColor
             btnYes.tintColor = chainConfig?.chainColor
-            btnYes.layer.borderColor = chainConfig!.chainColor.cgColor
+            btnYes.layer.borderColor = chainConfig?.chainColor.cgColor
             
         } else if (proposal.getMyVote() == "No") {
             noLabel.textColor = chainConfig?.chainColor
             btnNo.tintColor = chainConfig?.chainColor
-            btnNo.layer.borderColor = chainConfig!.chainColor.cgColor
+            btnNo.layer.borderColor = chainConfig?.chainColor.cgColor
             
         } else if (proposal.getMyVote() == "NoWithVeto") {
             vetoLabel.textColor = chainConfig?.chainColor
             btnVeto.tintColor = chainConfig?.chainColor
-            btnVeto.layer.borderColor = chainConfig!.chainColor.cgColor
+            btnVeto.layer.borderColor = chainConfig?.chainColor.cgColor
             
         } else if (proposal.getMyVote() == "Abstain") {
             abstainLabel.textColor = chainConfig?.chainColor
             btnAbstain.tintColor = chainConfig?.chainColor
-            btnAbstain.layer.borderColor = chainConfig!.chainColor.cgColor
+            btnAbstain.layer.borderColor = chainConfig?.chainColor.cgColor
             
         }
     }

@@ -32,7 +32,8 @@ class ClaimRewardAllCell: UITableViewCell {
     }
     
     func updateView(_ chainConfig: ChainConfig?) {
-        let mainDenom = chainConfig!.stakeDenom
+        guard let chainConfig = chainConfig else { return }
+        let mainDenom = chainConfig.stakeDenom
         let rewardSum = BaseData.instance.getRewardSum_gRPC(mainDenom)
         WDP.dpCoin(chainConfig, mainDenom, rewardSum, denomLabel, totalRewardLabel)
     }

@@ -43,9 +43,9 @@ class AuthzGranterCell: UITableViewCell {
     func onBindView(_ chainConfig: ChainConfig?, _ address: String,
                     _ available: Coin?, _ vesting: Coin?, _ delegated: Coin?, _ unbonding: Coin?,
                     _ reward: Coin?, _ commission: Coin?) {
-        if (chainConfig == nil) { return }
-        let stakingDenom = chainConfig!.stakeDenom
-        guard let msAsset = BaseData.instance.getMSAsset(chainConfig!, stakingDenom) else {
+        guard let chainConfig = chainConfig else { return }
+        let stakingDenom = chainConfig.stakeDenom
+        guard let msAsset = BaseData.instance.getMSAsset(chainConfig, stakingDenom) else {
             return
         }
         
@@ -60,12 +60,12 @@ class AuthzGranterCell: UITableViewCell {
         granterAddressLabel.text = address
         granterAddressLabel.adjustsFontSizeToFitWidth = true
         
-        availableAmountLabel.attributedText = WDP.dpAmount(availableAmount.stringValue, availableAmountLabel.font!, chainConfig!.divideDecimal, 6)
-        vestingAmountLabel.attributedText = WDP.dpAmount(vestingAmount.stringValue, availableAmountLabel.font!, chainConfig!.divideDecimal, 6)
-        delegatedAmountLabel.attributedText = WDP.dpAmount(delegatedAmount.stringValue, availableAmountLabel.font!, chainConfig!.divideDecimal, 6)
-        unbondingAmountLabel.attributedText = WDP.dpAmount(unbondingAmount.stringValue, availableAmountLabel.font!, chainConfig!.divideDecimal, 6)
-        stakingRewardAmountLabel.attributedText = WDP.dpAmount(rewardAmount.stringValue, availableAmountLabel.font!, chainConfig!.divideDecimal, 6)
-        commissionAmountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, availableAmountLabel.font!, chainConfig!.divideDecimal, 6)
+        availableAmountLabel.attributedText = WDP.dpAmount(availableAmount.stringValue, availableAmountLabel.font!, chainConfig.divideDecimal, 6)
+        vestingAmountLabel.attributedText = WDP.dpAmount(vestingAmount.stringValue, availableAmountLabel.font!, chainConfig.divideDecimal, 6)
+        delegatedAmountLabel.attributedText = WDP.dpAmount(delegatedAmount.stringValue, availableAmountLabel.font!, chainConfig.divideDecimal, 6)
+        unbondingAmountLabel.attributedText = WDP.dpAmount(unbondingAmount.stringValue, availableAmountLabel.font!, chainConfig.divideDecimal, 6)
+        stakingRewardAmountLabel.attributedText = WDP.dpAmount(rewardAmount.stringValue, availableAmountLabel.font!, chainConfig.divideDecimal, 6)
+        commissionAmountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, availableAmountLabel.font!, chainConfig.divideDecimal, 6)
         if (vestingAmount.compare(NSDecimalNumber.zero).rawValue > 0) {
             vestingLayer.isHidden = false
         }
@@ -73,8 +73,8 @@ class AuthzGranterCell: UITableViewCell {
             commissionLayer.isHidden = false
         }
         
-        totalAmountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, totalAmountLabel.font!, chainConfig!.divideDecimal, 6)
-        WDP.dpAssetValue(msAsset.coinGeckoId, totalAmount, chainConfig!.divideDecimal, totalValueLabel)
+        totalAmountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, totalAmountLabel.font!, chainConfig.divideDecimal, 6)
+        WDP.dpAssetValue(msAsset.coinGeckoId, totalAmount, chainConfig.divideDecimal, totalValueLabel)
         
     }
 }
