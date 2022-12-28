@@ -102,14 +102,13 @@ class AuthzDelegate5ViewController: BaseViewController, PasswordViewDelegate {
                                                 self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             do {
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
-//                print("response ", response.txResponse.txhash)
                 DispatchQueue.main.async(execute: {
                     if (self.waitAlert != nil) {
                         self.waitAlert?.dismiss(animated: true, completion: {

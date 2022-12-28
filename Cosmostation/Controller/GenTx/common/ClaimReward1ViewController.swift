@@ -129,10 +129,10 @@ class ClaimReward1ViewController: BaseViewController {
     func onFetchRewards_gRPC(_ address: String) {
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.pageHolderVC.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with {
                 $0.delegatorAddress = address
@@ -156,10 +156,10 @@ class ClaimReward1ViewController: BaseViewController {
         DispatchQueue.global().async {
             var responseAddress = ""
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.pageHolderVC.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with {
                 $0.delegatorAddress = address

@@ -105,10 +105,10 @@ class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
         DispatchQueue.global().async {
             var responseAddress = ""
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.pageHolderVC.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with {
                 $0.delegatorAddress = address

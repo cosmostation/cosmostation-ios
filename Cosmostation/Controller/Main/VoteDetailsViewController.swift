@@ -193,7 +193,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                defer { try! channel.close().wait() }
+                defer { try? channel.close().wait() }
 
                 let req = Cosmos_Gov_V1beta1_QueryVoteRequest.with { $0.voter = address; $0.proposalID = UInt64(proposal_id)! }
                 if let response = try? Cosmos_Gov_V1beta1_QueryClient(channel: channel).vote(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {

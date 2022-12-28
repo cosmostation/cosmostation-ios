@@ -119,10 +119,10 @@ class RegisterDomain0ViewController: BaseViewController {
     func onFetchgRPCDomainInfo(_ domain: String) {
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             do {
                 let req = Starnamed_X_Starname_V1beta1_QueryDomainRequest.with {

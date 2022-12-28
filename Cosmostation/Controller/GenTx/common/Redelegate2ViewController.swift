@@ -128,17 +128,16 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
     func onFetchRedelegation_gRPC(_ address: String, _ fromValAddress: String, _ toValAddress: String) {
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
+            defer { try? group.syncShutdownGracefully() }
             
             let channel = BaseNetWork.getConnection(self.pageHolderVC.chainType!, group)!
-            defer { try! channel.close().wait() }
+            defer { try? channel.close().wait() }
             
             let req = Cosmos_Staking_V1beta1_QueryRedelegationsRequest.with {
                 $0.delegatorAddr = address
             }
             do {
                 let response = try Cosmos_Staking_V1beta1_QueryClient(channel: channel).redelegations(req).response.wait()
-//                print("response ", response)
                 for redelegation in response.redelegationResponses {
                     if (redelegation.redelegation.validatorSrcAddress == self.pageHolderVC.mTargetValidator_gRPC?.operatorAddress &&
                             redelegation.redelegation.validatorDstAddress == self.checkedValidator_gRPC?.operatorAddress) {

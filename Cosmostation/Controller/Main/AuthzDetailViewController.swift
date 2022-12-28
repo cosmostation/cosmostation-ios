@@ -216,7 +216,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                defer { try! channel.close().wait() }
+                defer { try? channel.close().wait() }
                 let req = Cosmos_Authz_V1beta1_QueryGrantsRequest.with { $0.grantee = granteeAddress; $0.granter = granterAddress }
                 if let response = try? Cosmos_Authz_V1beta1_QueryClient(channel: channel).grants(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
                     response.grants.forEach { grant in
