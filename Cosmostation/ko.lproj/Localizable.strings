@@ -31,6 +31,8 @@
 "str_undelegate" = "위임철회 하기";
 "str_redelegate" = "재위임 하기";
 "str_claim_reward" = "이자 받기";
+"str_claim_rewards" = "청구 보상";
+"str_claim_comission" = "청구 수수료";
 "str_one_click" = "원 클릭";
 "str_claim_reward_all" = "이자 모두 받기";
 "str_compounding" = "컴파운딩";

@@ -31,6 +31,8 @@
 "str_undelegate" = "Undelegate";
 "str_redelegate" = "Redelegate";
 "str_claim_reward" = "Claim Reward";
+"str_claim_rewards" = "Claim Rewards";
+"str_claim_comission" = "Claim Commission";
 "str_compounding" = "Compounding";
 "str_claim_reward_all" = "Claim All Rewards";
 "str_one_click" = "One Click";

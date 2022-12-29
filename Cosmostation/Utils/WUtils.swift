@@ -240,26 +240,29 @@ public class WUtils {
     }
     
     static func allAssetValue(_ chainConfig: ChainConfig?) -> NSDecimalNumber {
+        guard let chainConfig = chainConfig else {
+            return .zero
+        }
         let baseData = BaseData.instance
         var totalValue = NSDecimalNumber.zero
-        if (chainConfig?.isGrpc == true) {
+        if chainConfig.isGrpc {
             baseData.mMyBalances_gRPC.forEach { coin in
-                if (coin.denom == chainConfig?.stakeDenom) {
-                    if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
+                if (coin.denom == chainConfig.stakeDenom) {
+                    if let msAsset = BaseData.instance.getMSAsset(chainConfig, coin.denom) {
                         let amount = getAllMainAsset(coin.denom)
                         let assetValue = assetValue(msAsset.coinGeckoId, amount, msAsset.decimals)
                         totalValue = totalValue.adding(assetValue)
                     }
                     
-                } else if (chainConfig?.chainType == .KAVA_MAIN) {
-                    if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
+                } else if (chainConfig.chainType == .KAVA_MAIN) {
+                    if let msAsset = BaseData.instance.getMSAsset(chainConfig, coin.denom) {
                         let amount = WUtils.getKavaTokenAll(coin.denom)
                         let assetValue = assetValue(msAsset.coinGeckoId, amount, msAsset.decimals)
                         totalValue = totalValue.adding(assetValue)
                     }
                     
                 } else {
-                    if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
+                    if let msAsset = BaseData.instance.getMSAsset(chainConfig, coin.denom) {
                         let amount = baseData.getAvailableAmount_gRPC(coin.denom)
                         let geckoId = msAsset.coinGeckoId
                         let assetValue = assetValue(geckoId, amount, msAsset.decimals)
@@ -270,11 +273,11 @@ public class WUtils {
         }
         
         //cal for legacy chains
-        else if (chainConfig?.chainType == .BINANCE_MAIN) {
+        else if (chainConfig.chainType == .BINANCE_MAIN) {
             baseData.mBalances.forEach { coin in
                 var allBnb = NSDecimalNumber.zero
                 let amount = BaseData.instance.allBnbTokenAmount(coin.balance_denom)
-                if (coin.balance_denom == chainConfig?.stakeDenom) {
+                if (coin.balance_denom == chainConfig.stakeDenom) {
                     allBnb = allBnb.adding(amount)
                 } else {
                     allBnb = allBnb.adding(bnbConvertAmount(coin.balance_denom))
@@ -283,10 +286,10 @@ public class WUtils {
                 totalValue = totalValue.adding(assetValue)
             }
             
-        } else if (chainConfig?.chainType == .OKEX_MAIN) {
+        } else if (chainConfig.chainType == .OKEX_MAIN) {
             baseData.mBalances.forEach { coin in
                 var allOKT = NSDecimalNumber.zero
-                if (coin.balance_denom == chainConfig?.stakeDenom) {
+                if (coin.balance_denom == chainConfig.stakeDenom) {
                     allOKT = allOKT.adding(getAllExToken(coin.balance_denom))
                 }
                 let assetValue = assetValue(OKT_GECKO_ID, allOKT, 0)
@@ -296,7 +299,7 @@ public class WUtils {
         }
         
         //Add contract token value
-        if (chainConfig?.wasmSupport == true || chainConfig?.evmSupport == true) {
+        if chainConfig.wasmSupport || chainConfig.evmSupport {
             BaseData.instance.mMyTokens.forEach { msToken in
                 let amount = NSDecimalNumber.init(string: msToken.amount)
                 let assetValue = assetValue(msToken.coinGeckoId, amount, msToken.decimals)
