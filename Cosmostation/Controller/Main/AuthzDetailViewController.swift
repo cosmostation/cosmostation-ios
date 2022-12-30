@@ -333,16 +333,17 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onFetchCommission_gRPC(_ granterAddress: String) {
+        guard let chainType = chainType else {
+            return
+        }
         let valOpAddress = WKey.getOpAddressFromAddress(granterAddress, chainConfig)
-//        print("valOpAddress ", valOpAddress)
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(chainType, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Distribution_V1beta1_QueryValidatorCommissionRequest.with { $0.validatorAddress = valOpAddress }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).validatorCommission(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("Commission ", response)
                     response.commission.commission.forEach { commission in
-                        if (commission.denom == self.chainConfig!.stakeDenom) {
+                        if (commission.denom == self.chainConfig?.stakeDenom) {
                             let commissionAmount = WUtils.plainStringToDecimal(commission.amount).multiplying(byPowerOf10: -18)
                             self.granterCommission = Coin.init(commission.denom, commissionAmount.stringValue)
                         }

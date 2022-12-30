@@ -390,18 +390,21 @@ final class BaseData : NSObject{
     
     
     func isTxFeePayable(_ chainConfig: ChainConfig?) -> Bool {
-        if (chainConfig?.chainType == .SIF_MAIN) {
-            if (getAvailableAmount_gRPC(chainConfig!.stakeDenom).compare(NSDecimalNumber.init(string: "100000000000000000")).rawValue >= 0) {
+        guard let chainConfig = chainConfig else {
+            return false
+        }
+        if (chainConfig.chainType == .SIF_MAIN) {
+            if (getAvailableAmount_gRPC(chainConfig.stakeDenom).compare(NSDecimalNumber.init(string: "100000000000000000")).rawValue >= 0) {
                 return true
             }
             return false
-        } else if (chainConfig?.chainType == .BINANCE_MAIN) {
-            if (availableAmount(chainConfig!.stakeDenom).compare(NSDecimalNumber.init(string: FEE_BINANCE_BASE)).rawValue >= 0) {
+        } else if (chainConfig.chainType == .BINANCE_MAIN) {
+            if (availableAmount(chainConfig.stakeDenom).compare(NSDecimalNumber.init(string: FEE_BINANCE_BASE)).rawValue >= 0) {
                 return true
             }
             return false
-        } else if (chainConfig?.chainType == .OKEX_MAIN) {
-            if (availableAmount(chainConfig!.stakeDenom).compare(NSDecimalNumber.init(string: FEE_OKC_BASE)).rawValue >= 0) {
+        } else if (chainConfig.chainType == .OKEX_MAIN) {
+            if (availableAmount(chainConfig.stakeDenom).compare(NSDecimalNumber.init(string: FEE_OKC_BASE)).rawValue >= 0) {
                 return true
             }
             return false

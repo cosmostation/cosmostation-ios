@@ -156,20 +156,22 @@ class BaseViewController: UIViewController {
     }
     
     func shareAddressType(_ chainConfig: ChainConfig?, _ account: Account?) {
-        if (chainConfig == nil || account == nil) { return }
-        if (chainConfig!.etherAddressSupport) {
+        guard let chainConfig = chainConfig, let account = account else {
+            return
+        }
+        if (chainConfig.etherAddressSupport) {
             let alert = UIAlertController(title: NSLocalizedString("address_type", comment: ""), message: "", preferredStyle: .alert)
             alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
             alert.addAction(UIAlertAction(title: NSLocalizedString("tendermint_type", comment: ""), style: .default, handler: { _ in
-                self.shareAddress(account!.account_address, account!.getDpName())
+                self.shareAddress(account.account_address, account.getDpName())
             }))
             alert.addAction(UIAlertAction(title: NSLocalizedString("ether_type", comment: ""), style: .default, handler: { _ in
-                let ethAddress = WKey.convertBech32ToEvm(account!.account_address)
-                self.shareAddress(ethAddress, account!.getDpName())
+                let ethAddress = WKey.convertBech32ToEvm(account.account_address)
+                self.shareAddress(ethAddress, account.getDpName())
             }))
             self.present(alert, animated: true, completion: nil)
         } else {
-            shareAddress(account!.account_address, account!.getDpName())
+            shareAddress(account.account_address, account.getDpName())
         }
     }
     
