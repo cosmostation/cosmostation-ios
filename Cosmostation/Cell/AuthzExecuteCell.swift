@@ -38,7 +38,7 @@ class AuthzExecuteCell: UITableViewCell {
         guard let chainConfig = chainConfig else { return }
         stakingDenom = chainConfig.stakeDenom
         authzIconImgView.image = UIImage.init(named: "authzIconSend")
-        authzTitleLabel.text = "Send"
+        authzTitleLabel.text = NSLocalizedString("str_send", comment: "")
         if let grant = grant {
             setColor(true)
             authzExpireDateLabel.text = WDP.dpTimeGap(grant.expiration.seconds * 1000)
@@ -60,11 +60,11 @@ class AuthzExecuteCell: UITableViewCell {
         }
     }
     
-    func onBindDelegate(_ chainConfig: ChainConfig?, _ grant: Cosmos_Authz_V1beta1_Grant?) {
+    func onBindStake(type: String, _ chainConfig: ChainConfig?, _ grant: Cosmos_Authz_V1beta1_Grant?) {
         guard let chainConfig = chainConfig else { return }
         stakingDenom = chainConfig.stakeDenom
         authzIconImgView.image = UIImage.init(named: "authzIconStake")
-        authzTitleLabel.text = "Delegate"
+        authzTitleLabel.text = type
         if let grant = grant {
             setColor(true)
             authzExpireDateLabel.text = WDP.dpTimeGap(grant.expiration.seconds * 1000)
@@ -91,101 +91,12 @@ class AuthzExecuteCell: UITableViewCell {
         }
     }
     
-    func onBindUndelegate(_ chainConfig: ChainConfig?, _ grant: Cosmos_Authz_V1beta1_Grant?) {
-        if (chainConfig == nil) { return }
-        stakingDenom = chainConfig!.stakeDenom
-        authzIconImgView.image = UIImage.init(named: "authzIconStake")
-        authzTitleLabel.text = "Undelegate"
-        if (grant != nil) {
+    func onBindGrant(type: String, _ image: UIImage?, _ grant: Cosmos_Authz_V1beta1_Grant?) {
+        authzIconImgView.image = image
+        authzTitleLabel.text = type
+        if let grant = grant {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
-            if (grant!.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                authzLimitAmountLabel.text = "-"
-                authzLimitAddressLabel.text = "-"
-            }
-            if (grant!.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
-                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
-                if let maxAmount = getMaxToken(stakeAuth) {
-                    authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, chainConfig!.divideDecimal, 6)
-                } else {
-                    authzLimitAmountLabel.text = "-"
-                }
-                if let monikers = getMonikerNames(stakeAuth) {
-                    authzLimitAddressLabel.text = monikers
-                } else {
-                    authzLimitAddressLabel.text = "-"
-                }
-            }
-            
-        } else {
-            setColor(false)
-        }
-    }
-    
-    func onBindRedelegate(_ chainConfig: ChainConfig?, _ grant: Cosmos_Authz_V1beta1_Grant?) {
-        if (chainConfig == nil) { return }
-        stakingDenom = chainConfig!.stakeDenom
-        authzIconImgView.image = UIImage.init(named: "authzIconStake")
-        authzTitleLabel.text = "Redelegate"
-        if (grant != nil) {
-            setColor(true)
-            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
-            if (grant!.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                authzLimitAmountLabel.text = "-"
-                authzLimitAddressLabel.text = "-"
-            }
-            if (grant!.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
-                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
-                if let maxAmount = getMaxToken(stakeAuth) {
-                    authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, chainConfig!.divideDecimal, 6)
-                } else {
-                    authzLimitAmountLabel.text = "-"
-                }
-                if let monikers = getMonikerNames(stakeAuth) {
-                    authzLimitAddressLabel.text = monikers
-                } else {
-                    authzLimitAddressLabel.text = "-"
-                }
-            }
-            
-        } else {
-            setColor(false)
-        }
-        
-    }
-    
-    func onBindReward(_ grant: Cosmos_Authz_V1beta1_Grant?) {
-        authzIconImgView.image = UIImage.init(named: "authzIconReward")
-        authzTitleLabel.text = "Claim Rewards"
-        if (grant != nil) {
-            setColor(true)
-            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
-            authzLimitAmountLabel.text = "-"
-            authzLimitAddressLabel.text = "-"
-        } else {
-            setColor(false)
-        }
-    }
-    
-    func onBindCommission(_ grant: Cosmos_Authz_V1beta1_Grant?) {
-        authzIconImgView.image = UIImage.init(named: "authzIconCommission")
-        authzTitleLabel.text = "Claim Commission"
-        if (grant != nil) {
-            setColor(true)
-            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
-            authzLimitAmountLabel.text = "-"
-            authzLimitAddressLabel.text = "-"
-        } else {
-            setColor(false)
-        }
-    }
-    
-    func onBindVote(_ grant: Cosmos_Authz_V1beta1_Grant?) {
-        authzIconImgView.image = UIImage.init(named: "authzIconVote")
-        authzTitleLabel.text = "Vote"
-        if (grant != nil) {
-            setColor(true)
-            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
+            authzExpireDateLabel.text = WDP.dpTimeGap(grant.expiration.seconds * 1000)
             authzLimitAmountLabel.text = "-"
             authzLimitAddressLabel.text = "-"
         } else {

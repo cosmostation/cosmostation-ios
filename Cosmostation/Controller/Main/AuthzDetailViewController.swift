@@ -146,17 +146,17 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
             if (indexPath.row == 0) {
                 cell?.onBindSend(chainConfig, getSendAuth())
             } else if (indexPath.row == 1) {
-                cell?.onBindDelegate(chainConfig, getDelegateAuth())
+                cell?.onBindStake(type: NSLocalizedString("str_delegate", comment: ""), chainConfig, getDelegateAuth())
             } else if (indexPath.row == 2) {
-                cell?.onBindUndelegate(chainConfig, getUndelegateAuth())
+                cell?.onBindStake(type: NSLocalizedString("str_undelegate", comment: ""), chainConfig, getUndelegateAuth())
             } else if (indexPath.row == 3) {
-                cell?.onBindRedelegate(chainConfig, getRedelegateAuth())
+                cell?.onBindStake(type: NSLocalizedString("str_redelegate", comment: ""), chainConfig, getRedelegateAuth())
             } else if (indexPath.row == 4) {
-                cell?.onBindReward(getRewardAuth())
+                cell?.onBindGrant(type: NSLocalizedString("str_claim_rewards", comment: ""), UIImage(named: "authzIconReward"), getRewardAuth())
             } else if (indexPath.row == 5) {
-                cell?.onBindCommission(getCommissionAuth())
+                cell?.onBindGrant(type: NSLocalizedString("str_claim_comission", comment: ""), UIImage(named: "authzIconCommission"), getCommissionAuth())
             } else if (indexPath.row == 6) {
-                cell?.onBindVote(getVoteAuth())
+                cell?.onBindGrant(type: NSLocalizedString("str_vote", comment: ""), UIImage(named: "authzIconVote"), getVoteAuth())
             }
             return cell!
         }
