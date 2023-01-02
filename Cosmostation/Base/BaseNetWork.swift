@@ -47,8 +47,11 @@ class BaseNetWork {
     
     //handle certick proto parisng error
     static func myVoteUrl(_ chainConfig: ChainConfig?, _ proposalId: String,  _ address: String) -> String {
-        if (chainConfig?.chainType == .CERTIK_MAIN) {
-            return chainConfig!.lcdUrl + "shentu/gov/v1alpha1/proposals/" + proposalId + "/votes/" + address
+        guard let chainConfig = chainConfig else {
+            return ""
+        }
+        if (chainConfig.chainType == .CERTIK_MAIN) {
+            return chainConfig.lcdUrl + "shentu/gov/v1alpha1/proposals/" + proposalId + "/votes/" + address
         }
         return ""
     }
