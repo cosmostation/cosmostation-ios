@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import web3swift
+import BigInt
 
 class FeeLcdViewController: BaseViewController {
     
@@ -20,12 +22,12 @@ class FeeLcdViewController: BaseViewController {
     var pageHolderVC: StepGenTxViewController!
     
     var mStakingDenom = ""
-    var mFee = NSDecimalNumber.zero
+    var mFeeGasAmount = NSDecimalNumber.zero
     var mDisplayDecimal: Int16 = 6
     var mMux = NSDecimalNumber.one
     var txType: String?
+    var mSimulPassed = true
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pageHolderVC = self.parent as? StepGenTxViewController
@@ -39,10 +41,21 @@ class FeeLcdViewController: BaseViewController {
         mStakingDenom = chainConfig!.stakeDenom
         mDisplayDecimal = chainConfig!.displayDecimal
         
-        onUpdateView()
-        
         btnBefore.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.photon
+        
+        if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
+            showWaittingAlert()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
+            self.onCalculateEvmFees()
+        } else {
+            self.onCalculFee()
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -51,6 +64,64 @@ class FeeLcdViewController: BaseViewController {
     }
     
     func onUpdateView() {
+        if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
+            self.hideWaittingAlert()
+            if (mSimulPassed == true) {
+                self.onShowToast(NSLocalizedString("gas_checked", comment: ""))
+            } else {
+                self.onShowToast(NSLocalizedString("error_simul_error", comment: ""))
+            }
+        }
+        WDP.dpCoin(chainConfig, mStakingDenom, mFeeGasAmount.stringValue, feeTotalDenom, feeTotalAmount)
+        WDP.dpAssetValue(WUtils.getGeckoId(chainConfig), mFeeGasAmount, chainConfig!.divideDecimal, feeTotalValue)
+    }
+    
+    override func enableUserInteraction() {
+        btnBefore.isUserInteractionEnabled = true
+        btnNext.isUserInteractionEnabled = true
+    }
+    
+    @IBAction func onClickBack(_ sender: UIButton) {
+        btnBefore.isUserInteractionEnabled = false
+        btnNext.isUserInteractionEnabled = false
+        pageHolderVC.onBeforePage()
+    }
+    
+    @IBAction func onClickNext(_ sender: UIButton) {
+        if (!mSimulPassed) {
+            self.onShowToast(NSLocalizedString("error_simul_error", comment: ""))
+            return
+        }
+        btnBefore.isUserInteractionEnabled = false
+        btnNext.isUserInteractionEnabled = false
+        pageHolderVC.onNextPage()
+    }
+    
+    func onSetFee() {
+        if (chainType == .OKEX_MAIN) {
+            let gasCoin = Coin.init(mStakingDenom, WUtils.getFormattedNumber(mFeeGasAmount, mDisplayDecimal))
+            var amount: Array<Coin> = Array<Coin>()
+            amount.append(gasCoin)
+
+            var fee = Fee.init()
+            fee.amount = amount
+            let baseGas = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
+            fee.gas = baseGas.multiplying(by: mMux).stringValue
+            pageHolderVC.mFee = fee
+
+        }  else if (chainType == .BINANCE_MAIN) {
+            let gasCoin = Coin.init(mStakingDenom, mFeeGasAmount.stringValue)
+            var amount: Array<Coin> = Array<Coin>()
+            amount.append(gasCoin)
+
+            var fee = Fee.init()
+            fee.amount = amount
+            fee.gas = BASE_GAS_AMOUNT
+            pageHolderVC.mFee = fee
+        }
+    }
+    
+    func onCalculFee() {
         if (chainType == .OKEX_MAIN) {
             if (txType == TASK_TYPE_OK_DEPOSIT || txType == TASK_TYPE_OK_WITHDRAW ) {
                 let count = BaseData.instance.mMyValidator.count
@@ -70,7 +141,7 @@ class FeeLcdViewController: BaseViewController {
                     mMux = NSDecimalNumber.init(string: "10")
                 }
                 let base = NSDecimalNumber.init(string: FEE_OKC_BASE)
-                mFee = base.multiplying(by: mMux, withBehavior: WUtils.handler12Down)
+                mFeeGasAmount = base.multiplying(by: mMux, withBehavior: WUtils.handler12Down)
                 
             } else if (txType == TASK_TYPE_OK_DIRECT_VOTE) {
                 let count = BaseData.instance.mMyValidator.count + self.pageHolderVC.mOkVoteValidators.count
@@ -90,65 +161,59 @@ class FeeLcdViewController: BaseViewController {
                     mMux = NSDecimalNumber.init(string: "10")
                 }
                 let base = NSDecimalNumber.init(string: FEE_OKC_BASE)
-                mFee = base.multiplying(by: mMux, withBehavior: WUtils.handler12Down)
+                mFeeGasAmount = base.multiplying(by: mMux, withBehavior: WUtils.handler12Down)
                 
             } else {
-                mFee = NSDecimalNumber.init(string: FEE_OKC_BASE)
+                mFeeGasAmount = NSDecimalNumber.init(string: FEE_OKC_BASE)
             }
-            print("mFee ", mFee)
-            WDP.dpCoin(chainConfig, mStakingDenom, mFee.stringValue, feeTotalDenom, feeTotalAmount)
-            WDP.dpAssetValue(OKT_GECKO_ID, mFee, chainConfig!.divideDecimal, feeTotalValue)
             
         } else if (chainType == .BINANCE_MAIN) {
-            mFee = BaseData.instance.getMainDenomFee(chainConfig)
-            print("mFee ", mFee)
-            WDP.dpCoin(chainConfig, mStakingDenom, mFee.stringValue, feeTotalDenom, feeTotalAmount)
-            WDP.dpAssetValue(BNB_GECKO_ID, mFee, chainConfig!.divideDecimal, feeTotalValue)
+            mFeeGasAmount = BaseData.instance.getMainDenomFee(chainConfig)
         }
-        
-        
-        
+        self.onSetFee()
+        self.onUpdateView()
     }
     
-    override func enableUserInteraction() {
-        btnBefore.isUserInteractionEnabled = true
-        btnNext.isUserInteractionEnabled = true
-    }
-    
-    @IBAction func onClickBack(_ sender: UIButton) {
-        btnBefore.isUserInteractionEnabled = false
-        btnNext.isUserInteractionEnabled = false
-        pageHolderVC.onBeforePage()
-    }
-    
-    @IBAction func onClickNext(_ sender: UIButton) {
-        onSetFee()
-        btnBefore.isUserInteractionEnabled = false
-        btnNext.isUserInteractionEnabled = false
-        pageHolderVC.onNextPage()
-    }
-    
-    func onSetFee() {
-        if (chainType == .OKEX_MAIN) {
-            let gasCoin = Coin.init(mStakingDenom, WUtils.getFormattedNumber(mFee, mDisplayDecimal))
-            var amount: Array<Coin> = Array<Coin>()
-            amount.append(gasCoin)
-
-            var fee = Fee.init()
-            fee.amount = amount
-            let baseGas = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
-            fee.gas = baseGas.multiplying(by: mMux).stringValue
-            pageHolderVC.mFee = fee
+    func onCalculateEvmFees() {
+        Task {
+            guard
+                let mintscanToken = BaseData.instance.mMintscanTokens.filter({ $0.address == pageHolderVC.mToSendDenom! }).first,
+                let url = URL(string: self.chainConfig!.rpcUrl),
+                let web3 = try? Web3.new(url)
+            else {
+                onUpdateView()
+                return
+            }
             
-        }  else if (chainType == .BINANCE_MAIN) {
-            let gasCoin = Coin.init(mStakingDenom, mFee.stringValue)
-            var amount: Array<Coin> = Array<Coin>()
-            amount.append(gasCoin)
-
-            var fee = Fee.init()
-            fee.amount = amount
-            fee.gas = BASE_GAS_AMOUNT
-            pageHolderVC.mFee = fee
+            let chainID = web3.provider.network?.chainID
+            let contractAddress = EthereumAddress.init(fromHex: mintscanToken.address)
+            let senderAddress = EthereumAddress.init(fromHex: account!.account_address)
+            let recipientAddress = EthereumAddress.init(fromHex: pageHolderVC.mRecipinetAddress!)
+            let erc20token = ERC20(web3: web3, provider: web3.provider, address: contractAddress!)
+            
+            let sendAmount = self.pageHolderVC.mToSendAmount[0].amount
+            let calSendAmount = NSDecimalNumber.init(string: sendAmount).multiplying(byPowerOf10: -mintscanToken.decimals)
+            
+            let nonce = try? web3.eth.getTransactionCount(address: senderAddress!)
+            let wTx = try? erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
+            let gasPrice = try? web3.eth.getGasPrice()
+            let legacy = LegacyEnvelope(to: contractAddress!, nonce: nonce!, chainID: chainID, value: wTx!.transaction.value, data: wTx!.transaction.data, gasPrice: gasPrice!, gasLimit: BigUInt(900000))
+            
+            var tx = EthereumTransaction(with: legacy)
+            
+            guard
+                let gasLimit = try? web3.eth.estimateGas(tx, transactionOptions: wTx?.transactionOptions)
+            else {
+                onUpdateView()
+                return
+            }
+            let newLimit = NSDecimalNumber(string: String(gasLimit)).multiplying(by: NSDecimalNumber(string: "1.1"), withBehavior: WUtils.handler0Up)
+            tx.parameters.gasLimit = Web3.Utils.parseToBigUInt(newLimit.stringValue, decimals: 0)
+            mFeeGasAmount = newLimit.multiplying(by: NSDecimalNumber(string: String(legacy.gasPrice))).multiplying(byPowerOf10: -mintscanToken.decimals)
+            pageHolderVC.mFee = Fee.init(String(gasLimit), [Coin.init(chainConfig!.stakeDenom, mFeeGasAmount.stringValue)])
+            self.pageHolderVC.mEthereumTransaction = tx
+            mSimulPassed = true
+            onUpdateView()
         }
     }
 }

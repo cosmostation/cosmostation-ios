@@ -16,10 +16,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     let SECTION_NATIVE_GRPC             = 1;
     let SECTION_IBC_GRPC                = 2;
     let SECTION_BRIDGE_GRPC             = 3;
-    let SECTION_TOKEN_GRPC              = 4;
     
-    let SECTION_NATIVE                  = 5;
-    let SECTION_ETC                     = 6;
+    let SECTION_NATIVE                  = 4;
+    let SECTION_ETC                     = 5;
+    let SECTION_TOKEN_GRPC              = 6;
 
     @IBOutlet weak var titleChainImg: UIImageView!
     @IBOutlet weak var titleWalletName: UILabel!
@@ -34,11 +34,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     var mNative_gRPC = Array<Coin>()                // section 1
     var mIbc_gRPC = Array<Coin>()                   // section 2
     var mBridged_gRPC = Array<Coin>()               // section 3
-    var mToken_gRPC = Array<MintscanToken>()        // section 4
     
-    var mNative = Array<Balance>()                  // section 5
-    var mEtc = Array<Balance>()                     // section 6
-    
+    var mNative = Array<Balance>()                  // section 4
+    var mEtc = Array<Balance>()                     // section 5
+    var mToken_gRPC = Array<MintscanToken>()        // section 6
 
     override func viewDidLoad() {
         super.viewDidLoad()
