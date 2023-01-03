@@ -614,14 +614,18 @@ public class WUtils {
             }
             
         } else {
-            if (chainConfig!.chainType == .BINANCE_MAIN) {
-                if let bnbTokenInfo = BaseData.instance.bnbToken(denom) {
-                    return bnbTokenInfo.original_symbol.uppercased()
-                }
-                
-            } else if (chainConfig!.chainType == .OKEX_MAIN) {
-                if let okTokenInfo = BaseData.instance.okToken(denom) {
-                    return okTokenInfo.original_symbol!.uppercased()
+            if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first {
+                return msToken.symbol
+            } else {
+                if (chainConfig!.chainType == .BINANCE_MAIN) {
+                    if let bnbTokenInfo = BaseData.instance.bnbToken(denom) {
+                        return bnbTokenInfo.original_symbol.uppercased()
+                    }
+                    
+                } else if (chainConfig!.chainType == .OKEX_MAIN) {
+                    if let okTokenInfo = BaseData.instance.okToken(denom) {
+                        return okTokenInfo.original_symbol!.uppercased()
+                    }
                 }
             }
         }

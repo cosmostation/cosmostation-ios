@@ -101,14 +101,18 @@ public class WDP {
                 amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, msToken.decimals, msToken.decimals)
             }
             else {
-                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, 6, 6)
+                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
             }
             
         } else {
-            if (chainConfig?.chainType == .BINANCE_MAIN) {
-                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, 0, 8)
-            } else if (chainConfig?.chainType == .OKEX_MAIN ) {
-                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, 0, 18)
+            if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first {
+                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, msToken.decimals, msToken.decimals)
+            } else {
+                if (chainConfig?.chainType == .BINANCE_MAIN) {
+                    amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, 0, 8)
+                } else if (chainConfig?.chainType == .OKEX_MAIN ) {
+                    amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, 0, 18)
+                }
             }
         }
     }

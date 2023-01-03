@@ -408,8 +408,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     return
                 }
                 BaseData.instance.mNodeInfo = NodeInfo.init(nodeInfo)
-                self.mFetchCnt = self.mFetchCnt + 1
+                self.mFetchCnt = self.mFetchCnt + 2
                 self.onFetchParams(self.mChainConfig.chainAPIName)
+                self.onFetchMintscanErc20(self.mChainConfig.chainAPIName)
                 if let height = responseData.object(forKey: "height") as? Int {
                     BaseData.instance.mHeight = height
                 }
@@ -1097,7 +1098,12 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     
     func onFetchErc20Balance(_ web3: web3?, _ contAddress: String) {
         let contractAddress = EthereumAddress.init(contAddress)
-        let ethAddress = EthereumAddress.init(WKey.convertBech32ToEvm(mAccount.account_address))
+        var ethAddress: EthereumAddress?
+        if (mAccount.account_address.starts(with: "0x")) {
+            ethAddress = EthereumAddress.init(mAccount.account_address)
+        } else {
+            ethAddress = EthereumAddress.init(WKey.convertBech32ToEvm(mAccount.account_address))
+        }
         let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
         Task {
             if let erc20Balance = try? erc20token.getBalance(account: ethAddress!) {

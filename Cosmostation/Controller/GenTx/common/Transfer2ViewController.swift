@@ -40,30 +40,32 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
         
         let mainDenom = chainConfig!.stakeDenom
         let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
-        if (chainConfig?.isGrpc == true) {
-            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
-                divideDecimal = msAsset.decimals
-                displayDecimal = msAsset.decimals
-                if (pageHolderVC.mToSendDenom == mainDenom) {
-                    maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
-                } else {
-                    maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!)
-                }
-                
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == toSendDenom }).first {
-                divideDecimal = msToken.decimals
-                displayDecimal = msToken.decimals
-                maxAvailable = NSDecimalNumber.init(string: msToken.amount)
-            }
+        
+        if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == toSendDenom }).first {
+            divideDecimal = msToken.decimals
+            displayDecimal = msToken.decimals
+            maxAvailable = NSDecimalNumber.init(string: msToken.amount)
             
         } else {
-            // Binance & OKC
-            divideDecimal = chainConfig!.divideDecimal
-            displayDecimal = chainConfig!.displayDecimal
-            if (pageHolderVC.mToSendDenom == mainDenom) {
-                maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
+            if (chainConfig!.isGrpc == true) {
+                if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
+                    divideDecimal = msAsset.decimals
+                    displayDecimal = msAsset.decimals
+                    if (pageHolderVC.mToSendDenom == mainDenom) {
+                        maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
+                    } else {
+                        maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!)
+                    }
+                }
+                
             } else {
-                maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!)
+                divideDecimal = chainConfig!.divideDecimal
+                displayDecimal = chainConfig!.displayDecimal
+                if (pageHolderVC.mToSendDenom == mainDenom) {
+                    maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
+                } else {
+                    maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!)
+                }
             }
         }
         WDP.dpCoin(chainConfig, self.pageHolderVC.mToSendDenom!, maxAvailable.stringValue, mAvailableDenomLabel, mAvailableAmountLabel)
@@ -160,15 +162,17 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
     
     @IBAction func onClickNext(_ sender: Any) {
         if (isValiadAmount()) {
-            if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
+            let msTokens = BaseData.instance.mMintscanTokens.filter({ $0.address == toSendDenom }).first
+            
+            if (pageHolderVC.chainType! == ChainType.OKEX_MAIN && msTokens == nil) {
                 let userInput = WUtils.localeStringToDecimal((mTargetAmountTextField.text?.trimmingCharacters(in: .whitespaces))!)
                 let toSendCoin = Coin.init(pageHolderVC.mToSendDenom!, WUtils.getFormattedNumber(userInput, displayDecimal))
                 self.pageHolderVC.mToSendAmount = [toSendCoin]
-                
+                        
                 self.backBtn.isUserInteractionEnabled = false
                 self.nextBtn.isUserInteractionEnabled = false
                 pageHolderVC.onNextPage()
-                
+                        
             } else {
                 let userInput = WUtils.localeStringToDecimal((mTargetAmountTextField.text?.trimmingCharacters(in: .whitespaces))!)
                 let toSendCoin = Coin.init(pageHolderVC.mToSendDenom!, userInput.multiplying(byPowerOf10: divideDecimal).stringValue)
