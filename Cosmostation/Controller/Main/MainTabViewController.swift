@@ -130,7 +130,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mBnbTokenList.removeAll()
         BaseData.instance.mBnbTokenTicker.removeAll()
         
-//        BaseData.instance.mIncentiveParam = nil
         BaseData.instance.mIncentiveRewards = nil
         
         BaseData.instance.mOkStaking = nil
@@ -205,13 +204,14 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCBondedValidators(0)
             self.onFetchgRPCUnbondedValidators(0)
             self.onFetchgRPCUnbondingValidators(0)
-            
+
             self.onFetchgRPCBalance(self.mAccount.account_address, 0)
             self.onFetchgRPCDelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
-            
+
             self.onFetchSupportPools(self.mChainConfig)
+            
             
         } else if (self.mChainType == .STARGAZE_MAIN) {
             self.mFetchCnt = 9
@@ -351,59 +351,51 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             } else {
                 WUtils.onParseAuthAccount(self.mChainType, self.mAccount.account_id)
             }
-            self.onFetchPriceInfo()
-            NotificationCenter.default.post(name: Notification.Name("onFetchDone"), object: nil, userInfo: nil)
-            self.hideWaittingAlert()
-            self.checkEventIcon()
-            return
+            self.onFetchIcnsByAddress(self.mAccount.account_address)
             
-        } else if (mChainType == .BINANCE_MAIN) {
-            mAccount    = BaseData.instance.selectAccountById(id: mAccount!.account_id)
-            mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
-            BaseData.instance.mBalances = mBalances
-            self.onFetchPriceInfo()
-            NotificationCenter.default.post(name: Notification.Name("onFetchDone"), object: nil, userInfo: nil)
-            self.hideWaittingAlert()
-            self.checkEventIcon()
-            return
-            
-        } else if (mChainType == .OKEX_MAIN) {
-            mAccount    = BaseData.instance.selectAccountById(id: mAccount!.account_id)
-            mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
-            
-            for validator in BaseData.instance.mAllValidator {
-                if (validator.status == validator.BONDED) {
-                    BaseData.instance.mTopValidator.append(validator)
-                } else {
-                    BaseData.instance.mOtherValidator.append(validator)
-                }
-                if let validator_address = BaseData.instance.mOkStaking?.validator_address {
-                    for myVal in validator_address {
-                        if (validator.operator_address == myVal) {
-                            BaseData.instance.mMyValidator.append(validator)
+        } else {
+            if (mChainType == .BINANCE_MAIN) {
+                mAccount    = BaseData.instance.selectAccountById(id: mAccount!.account_id)
+                mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
+                BaseData.instance.mBalances = mBalances
+                
+            } else if (mChainType == .OKEX_MAIN) {
+                mAccount    = BaseData.instance.selectAccountById(id: mAccount!.account_id)
+                mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
+                
+                for validator in BaseData.instance.mAllValidator {
+                    if (validator.status == validator.BONDED) {
+                        BaseData.instance.mTopValidator.append(validator)
+                    } else {
+                        BaseData.instance.mOtherValidator.append(validator)
+                    }
+                    if let validator_address = BaseData.instance.mOkStaking?.validator_address {
+                        for myVal in validator_address {
+                            if (validator.operator_address == myVal) {
+                                BaseData.instance.mMyValidator.append(validator)
+                            }
                         }
                     }
                 }
+                BaseData.instance.mBalances = mBalances
             }
-            BaseData.instance.mBalances = mBalances
-            self.onFetchPriceInfo()
             
+            print("BaseData.instance.mAllValidator ", BaseData.instance.mAllValidator.count)
+            print("BaseData.instance.mTopValidator ", BaseData.instance.mTopValidator.count)
+            print("BaseData.instance.mOtherValidator ", BaseData.instance.mOtherValidator.count)
+            print("BaseData.instance.mMyValidator ", BaseData.instance.mMyValidator.count)
+            print("BaseData.instance.mBalances ", BaseData.instance.mBalances.count)
+            print("BaseData.instance.mAccount ", mAccount.account_address)
+            
+            if (BaseData.instance.mNodeInfo == nil || BaseData.instance.mAllValidator.count <= 0) {
+                self.onShowToast(NSLocalizedString("error_network", comment: ""))
+            }
         }
         
-        print("BaseData.instance.mAllValidator ", BaseData.instance.mAllValidator.count)
-        print("BaseData.instance.mTopValidator ", BaseData.instance.mTopValidator.count)
-        print("BaseData.instance.mOtherValidator ", BaseData.instance.mOtherValidator.count)
-        print("BaseData.instance.mMyValidator ", BaseData.instance.mMyValidator.count)
-        print("BaseData.instance.mBalances ", BaseData.instance.mBalances.count)
-        print("BaseData.instance.mAccount ", mAccount.account_address)
-        
-        
-        if (BaseData.instance.mNodeInfo == nil || BaseData.instance.mAllValidator.count <= 0) {
-            self.onShowToast(NSLocalizedString("error_network", comment: ""))
-        }
         NotificationCenter.default.post(name: Notification.Name("onFetchDone"), object: nil, userInfo: nil)
-        self.checkEventIcon()
+        self.onFetchPriceInfo()
         self.hideWaittingAlert()
+        self.checkEventIcon()
     }
     
     func onFetchNodeInfo() {
@@ -871,31 +863,31 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
-    func onFetchgRPCOsmoPools() {
-//        DispatchQueue.global().async {
-//            do {
-//                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-//                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
-//                let req = Osmosis_Gamm_V1beta1_QueryPoolsRequest.with { $0.pagination = page }
-//                if let response = try? Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    response.pools.forEach { pool in
-//                        if (pool.typeURL.contains(Osmosis_Gamm_V1beta1_Pool.protoMessageName)) {
-//                            let osmoPool = try! Osmosis_Gamm_V1beta1_Pool.init(serializedData: pool.value)
-//                            print("Osmosis_Gamm_V1beta1_Pool ", osmoPool.id)
-//
-//                        } else if (pool.typeURL.contains(Osmosis_Gamm_Poolmodels_Stableswap_V1beta1_Pool.protoMessageName)) {
-//                            let osmoPool = try! Osmosis_Gamm_Poolmodels_Stableswap_V1beta1_Pool.init(serializedData: pool.value)
-//                            print("Osmosis_Gamm_Poolmodels_Stableswap_V1beta1_Pool ", osmoPool.id)
-//                        }
-//                    }
-//                }
-//                try channel.close().wait()
-//
-//            } catch {
-//                print("onFetchgRPCOsmoPools failed: \(error)")
-//            }
-//            DispatchQueue.main.async(execute: { self.onFetchFinished() });
-//        }
+    //for ICNS check
+    func onFetchIcnsByAddress(_ address: String) {
+        DispatchQueue.global().async {
+            var icnsName = ""
+            do {
+                let channel = BaseNetWork.getConnection(.OSMOSIS_MAIN, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+                    $0.address = ICNS_CONTRACT_ADDRESS
+                    $0.queryData = Cw20IcnsByAddressReq.init(address).getEncode()
+                }
+                if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait(),
+                   let name = try? JSONDecoder().decode(Cw20IcnsByAddressRes.self, from: response.data).name {
+                    icnsName = name!
+                }
+                try channel.close().wait()
+
+            } catch {
+                print("onFetchIcnsByAddress failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: {
+                if (!icnsName.isEmpty && self.mAccount.account_nick_name != icnsName) {
+                    //TODO ask user for update nickname
+                }
+            });
+        }
     }
     
     //for KAVA
@@ -1064,7 +1056,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 try channel.close().wait()
 
             } catch {
-                print("onFetchgRPCCw20Balance failed: \(error)")
+                print("onFetchCw20Balance failed: \(error)")
             }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
