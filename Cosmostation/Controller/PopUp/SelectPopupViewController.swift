@@ -28,6 +28,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
     var starnameDomains = Array<String>()
     var feeData = Array<FeeData>()
     var hostZones = Array<Stride_Stakeibc_HostZone>()
+    var nameservices = Array<NameService>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +103,9 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_LIQUIDITY_STAKE || type == SELECT_LIQUIDITY_UNSTAKE) {
             self.popupTitle.text = NSLocalizedString("str_select_coin", comment: "")
+            
+        } else if (type == SELECT_POPUP_NAME_SERVICE) {
+            self.popupTitle.text = nameservices[0].name
         }
     }
     
@@ -137,6 +141,8 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             cardView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.size.width, height: 165)
             cardView.layoutIfNeeded()
             return
+        } else if (type == SELECT_POPUP_NAME_SERVICE) {
+            esHeight = (CGFloat)((nameservices.count * 55) + 55)
         }
         esHeight = (esHeight > 350) ? 350 : esHeight
         cardView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.size.width, height: esHeight)
@@ -173,6 +179,8 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             return 2
         } else if (type == SELECT_LIQUIDITY_STAKE || type == SELECT_LIQUIDITY_UNSTAKE) {
             return hostZones.count
+        } else if (type == SELECT_POPUP_NAME_SERVICE) {
+            return nameservices.count
         }
         return 0
     }
@@ -365,6 +373,21 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let denom = "st" + hostZones[indexPath.row].hostDenom
             WDP.dpSymbolImg(chainConfig, denom, cell!.coinImg)
             WDP.dpSymbol(chainConfig, denom, cell!.coinTitle)
+            return cell!
+            
+        } else if (type == SELECT_POPUP_NAME_SERVICE) {
+            let nameservice = nameservices[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as? SelectChainCell
+            if (nameservice.type == .starname) {
+                cell?.chainImg.image = UIImage(named: "iconNsStarname")
+            } else if (nameservice.type == .icns) {
+                cell?.chainImg.image = UIImage(named: "iconNsOsmosis")
+            } else if (nameservice.type == .stargaze) {
+                cell?.chainImg.image = UIImage(named: "iconNsStargaze")
+            } else if (nameservice.type == .icns_stargaze) {
+                cell?.chainImg.image = UIImage(named: "iconNsOsmo+Stargaze")
+            }
+            cell?.chainTitle.text = nameservice.address
             return cell!
             
         } else {

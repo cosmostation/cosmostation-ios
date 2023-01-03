@@ -177,6 +177,10 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     
     @IBAction func onClickNext(_ sender: UIButton) {
         let userInput = recipientAddressinput.text?.trimmingCharacters(in: .whitespaces)
+        if (userInput?.isEmpty == true) {
+            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+            return;
+        }
         if (account?.account_address == userInput) {
             self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
             return;
@@ -191,27 +195,18 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
             pageHolderVC.onNextPage()
             
         } else {
-            //TODO check nameservice
+            nameservices.removeAll()
             if (WUtils.isStarnameValidStarName(userInput!.lowercased())) {
-                onCheckStarNameService(userInput!.lowercased())
+                fetchCnt = 1
+                onCheckStarNameService(recipientChainConfig, userInput!.lowercased())
                 return;
                 
             } else {
-                
+                fetchCnt = 1
+                onCheckIcnsNameService(recipientChainConfig, userInput!.lowercased())
+//                onCheckStargazeNameService(recipientChainConfig, userInput!.lowercased())
             }
         }
-        
-//        if (!WUtils.isValidChainAddress(recipientChainConfig, userInput)) {
-//            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-//            return;
-//        }
-//
-//        btnCancel.isUserInteractionEnabled = false
-//        btnNext.isUserInteractionEnabled = false
-//        pageHolderVC.mRecipinetChainConfig = recipientChainConfig
-//        pageHolderVC.mRecipinetAddress = userInput
-//        onSetTranfserType()
-//        pageHolderVC.onNextPage()
     }
     
     func onSetTranfserType() {
@@ -257,8 +252,23 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         if (type == SELECT_POPUP_RECIPIENT_CHAIN) {
             recipientChainConfig = recipientableChains[result]
             onUpdateToChainView()
+            
         } else if (type == SELECT_POPUP_RECIPIENT_ADDRESS) {
             recipientAddressinput.text = recipientableAccounts[result].account_address
+            
+        } else if (type == SELECT_POPUP_NAME_SERVICE) {
+            let matchedAddress = nameservices[result].address
+            if (account?.account_address == matchedAddress) {
+                self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
+                return;
+            }
+            
+            self.btnCancel.isUserInteractionEnabled = false
+            self.btnNext.isUserInteractionEnabled = false
+            self.pageHolderVC.mRecipinetChainConfig = recipientChainConfig
+            self.pageHolderVC.mRecipinetAddress = matchedAddress
+            self.onSetTranfserType()
+            self.pageHolderVC.onNextPage()
         }
     }
     
@@ -274,83 +284,110 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         }
     }
     
-    func onCheckStarNameService(_ userInput: String) {
+    func onCheckStarNameService(_ recipientChainConfig: ChainConfig, _ userInput: String) {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(.IOV_MAIN, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Starnamed_X_Starname_V1beta1_QueryStarnameRequest.with { $0.starname = userInput }
                 if let response = try? Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).starname(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
-                    DispatchQueue.main.async(execute: {
-                        guard let matchedAddress = WUtils.checkStarnameWithResource(self.recipientChainConfig.chainType, response) else {
-                            self.onShowToast(NSLocalizedString("error_no_mattched_starname", comment: ""))
-                            return
-                        }
-                        if (self.account?.account_address == userInput) {
-                            self.onShowToast(NSLocalizedString("error_starname_self_send", comment: ""))
-                            return;
-                        }
-                        self.onShowMatchedStarName(userInput, matchedAddress)
-                    });
+                    if let matchedAddress = WUtils.checkStarnameWithResource(recipientChainConfig.chainType, response) {
+                        self.nameservices = [NameService.init(.starname, userInput, matchedAddress)]
+                    }
                 }
                 try channel.close().wait()
                 
-            } catch {
-                print("onFetchgRPCResolve failed: \(error)")
-                DispatchQueue.main.async(execute: {
-                    self.onShowToast(NSLocalizedString("error_invalide_starname", comment: ""))
-                    return
-                });
-            }
-        }
-    }
-    
-    func onShowMatchedStarName(_ starname: String, _ matchedAddress: String) {
-        let msg = String(format: NSLocalizedString("str_starname_confirm_msg", comment: ""), starname, matchedAddress)
-        let alertController = UIAlertController(title: NSLocalizedString("str_starname_confirm_title", comment: ""), message: msg, preferredStyle: .alert)
-        alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
-        let settingsAction = UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default) { (_) -> Void in
-            self.btnCancel.isUserInteractionEnabled = false
-            self.btnNext.isUserInteractionEnabled = false
-            self.pageHolderVC.mRecipinetChainConfig = self.recipientChainConfig
-            self.pageHolderVC.mRecipinetAddress = matchedAddress
-            self.onSetTranfserType()
-            self.pageHolderVC.onNextPage()
-        }
-        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)
-        alertController.addAction(cancelAction)
-        alertController.addAction(settingsAction)
-        DispatchQueue.main.async {
-            self.present(alertController, animated: true, completion: nil)
+            } catch { print("onFetchgRPCResolve failed: \(error)") }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
     
     func onCheckIcnsNameService(_ recipientChainConfig: ChainConfig, _ userInput: String) {
         DispatchQueue.global().async {
             do {
+                let nameReq = Cw20IcnsByNameReq.init(recipientChainConfig.addressPrefix, userInput)
                 let channel = BaseNetWork.getConnection(.OSMOSIS_MAIN, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
                     $0.address = ICNS_CONTRACT_ADDRESS
-                    $0.queryData = Cw20IcnsByNameReq.init(recipientChainConfig.addressPrefix, userInput).getEncode()
+                    $0.queryData = nameReq.getEncode()
                 }
                 if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    DispatchQueue.main.async(execute: {
-                        guard let matchedAddress = try? JSONDecoder().decode(Cw20IcnsByNameRes.self, from: response.data).bech32_address else {
-                            self.onShowToast(NSLocalizedString("error_no_mattched_starname", comment: ""))
-                            return
+                    if let matchedAddress = try? JSONDecoder().decode(Cw20IcnsByNameRes.self, from: response.data).bech32_address {
+                        if (matchedAddress?.isEmpty == false) {
+                            self.nameservices = [NameService.init(.icns, nameReq.address_by_icns!.icns, matchedAddress!)]
                         }
-                        if (self.account?.account_address == userInput) {
-                            self.onShowToast(NSLocalizedString("error_starname_self_send", comment: ""))
-                            return;
-                        }
-                        self.onShowMatchedStarName(userInput, matchedAddress!)
-                    });
+                    }
                 }
                 try channel.close().wait()
 
-            } catch {
-                print("onCheckIcnsNameService failed: \(error)")
-            }
+            } catch { print("onCheckIcnsNameService failed: \(error)") }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    //TODO notyet
+    func onCheckStargazeNameService(_ recipientChainConfig: ChainConfig, _ userInput: String) {
+        DispatchQueue.global().async {
+            do {
+                let nameReq = Cw20IcnsByNameReq.init(recipientChainConfig.addressPrefix, userInput)
+                let channel = BaseNetWork.getConnection(.STARGAZE_MAIN, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+                    $0.address = STARGAZE_NS_CONTRACT_ADDRESS
+                    $0.queryData = Cw20IcnsByNameReq.init(recipientChainConfig.addressPrefix, userInput).getEncode()
+                }
+                if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    if let matchedAddress = try? JSONDecoder().decode(Cw20IcnsByNameRes.self, from: response.data).bech32_address {
+                        if (matchedAddress?.isEmpty == false) {
+                            self.nameservices = [NameService.init(.icns, nameReq.address_by_icns!.icns, matchedAddress!)]
+                        }
+                    }
+                }
+                try channel.close().wait()
+
+            } catch { print("onCheckStargazeNameService failed: \(error)") }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    var fetchCnt = 0
+    var nameservices = Array<NameService>()
+    func onFetchFinished() {
+        fetchCnt = fetchCnt - 1
+        if (fetchCnt > 0) { return }
+        
+        if (nameservices.count == 0) {
+            self.onShowToast(NSLocalizedString("error_invalide_nameservice", comment: ""))
+            return;
+        }
+        if (nameservices.count == 2 && (nameservices[0].address == nameservices[1].address)) {
+            nameservices[0].type = .icns_stargaze
+            nameservices.removeLast()
         }
         
+        let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
+        popupVC.type = SELECT_POPUP_NAME_SERVICE
+        popupVC.nameservices = nameservices
+        let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
+        cardPopup.resultDelegate = self
+        cardPopup.show(onViewController: self)
+    }
+}
+
+
+enum NameServiceType: Int {
+    case starname = 0
+    case icns = 1
+    case stargaze = 2
+    case icns_stargaze = 3
+}
+
+public struct NameService {
+    var type: NameServiceType?
+    var name: String?
+    var address: String?
+    
+    init(_ type: NameServiceType?, _ name: String?, _ address: String?) {
+        self.type = type
+        self.name = name
+        self.address = address
     }
 }

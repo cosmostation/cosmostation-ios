@@ -71,3 +71,5 @@ class ChainStargaze: ChainConfig {
         return "https://mirror.xyz/stargazezone.eth"
     }
 }
+
+let STARGAZE_NS_CONTRACT_ADDRESS = "stars1fx74nkqkw2748av8j7ew7r3xt9cgjqduwn8m0ur5lhe49uhlsasszc5fhr"
