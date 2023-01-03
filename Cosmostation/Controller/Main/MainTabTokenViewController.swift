@@ -16,10 +16,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     let SECTION_NATIVE_GRPC             = 1;
     let SECTION_IBC_GRPC                = 2;
     let SECTION_BRIDGE_GRPC             = 3;
-    let SECTION_TOKEN_GRPC              = 4;
     
-    let SECTION_NATIVE                  = 5;
-    let SECTION_ETC                     = 6;
+    let SECTION_NATIVE                  = 4;
+    let SECTION_ETC                     = 5;
+    let SECTION_TOKEN_GRPC              = 6;
 
     @IBOutlet weak var titleChainImg: UIImageView!
     @IBOutlet weak var titleWalletName: UILabel!
@@ -34,11 +34,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     var mNative_gRPC = Array<Coin>()                // section 1
     var mIbc_gRPC = Array<Coin>()                   // section 2
     var mBridged_gRPC = Array<Coin>()               // section 3
-    var mToken_gRPC = Array<MintscanToken>()        // section 4
     
-    var mNative = Array<Balance>()                  // section 5
-    var mEtc = Array<Balance>()                     // section 6
-    
+    var mNative = Array<Balance>()                  // section 4
+    var mEtc = Array<Balance>()                     // section 5
+    var mToken_gRPC = Array<MintscanToken>()        // section 6
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,10 +127,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         else if (section == SECTION_NATIVE_GRPC && mNative_gRPC.count > 0) { return 30 }
         else if (section == SECTION_IBC_GRPC && mIbc_gRPC.count > 0) { return 30 }
         else if (section == SECTION_BRIDGE_GRPC && mBridged_gRPC.count > 0) { return 30 }
-        else if (section == SECTION_TOKEN_GRPC && mToken_gRPC.count > 0) { return 30 }
         
         else if (section == SECTION_NATIVE && mNative.count > 0) { return 30 }
         else if (section == SECTION_ETC && mEtc.count > 0) { return 30 }
+        
+        else if (section == SECTION_TOKEN_GRPC && mToken_gRPC.count > 0) {
+            guard let path = chainConfig?.getHdPath(Int(account!.account_pubkey_type), Int(account!.account_path)!) else { return 0 }
+            if (path.contains("60")) {
+                return 30
+            }
+            return 0
+        }
         else { return 0 }
     }
     
@@ -140,13 +146,16 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         if (section == SECTION_NATIVE_GRPC) { view.headerTitleLabel.text = "Native Coins"; view.headerCntLabel.text = String(self.mNative_gRPC.count) }
         else if (section == SECTION_IBC_GRPC) { view.headerTitleLabel.text = "IBC Coins"; view.headerCntLabel.text = String(self.mIbc_gRPC.count) }
         else if (section == SECTION_BRIDGE_GRPC) { view.headerTitleLabel.text = "Bridged Assets"; view.headerCntLabel.text = String(self.mBridged_gRPC.count) }
-        else if (section == SECTION_TOKEN_GRPC) { view.headerTitleLabel.text = "Contract Tokens"; view.headerCntLabel.text = String(self.mToken_gRPC.count) }
         
         else if (section == SECTION_NATIVE) { view.headerTitleLabel.text = "Native Coins"; view.headerCntLabel.text = String(self.mNative.count) }
         else if (section == SECTION_ETC) {
             view.headerTitleLabel.text = (chainType! == ChainType.OKEX_MAIN) ? "KIP10 Coins" : "Tokens"
             view.headerCntLabel.text = String(self.mEtc.count)
         }
+        
+        else if (section == SECTION_TOKEN_GRPC) {
+            view.headerTitleLabel.text = (chainType! == ChainType.OKEX_MAIN) ? "KIP20 Coins" : "Contract Tokens";
+            view.headerCntLabel.text = String(self.mToken_gRPC.count) }
         else { view.headerTitleLabel.text = ""; view.headerCntLabel.text = "" }
         return view
     }
@@ -156,13 +165,18 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         else if (section == SECTION_NATIVE_GRPC) { return mNative_gRPC.count }
         else if (section == SECTION_IBC_GRPC) { return mIbc_gRPC.count }
         else if (section == SECTION_BRIDGE_GRPC) { return mBridged_gRPC.count }
-        else if (section == SECTION_TOKEN_GRPC) {
-            if (mToken_gRPC.count > 0) { return mToken_gRPC.count + 1 }
-            return 0
-        }
         
         else if (section == SECTION_NATIVE) { return mNative.count }
         else if (section == SECTION_ETC) { return mEtc.count }
+        else if (section == SECTION_TOKEN_GRPC) {
+            if (mToken_gRPC.count > 0) {
+                guard let path = chainConfig?.getHdPath(Int(account!.account_pubkey_type), Int(account!.account_path)!) else { return 0 }
+                if (path.contains("60")) {
+                    return mToken_gRPC.count + 1
+                }
+            }
+            return 0
+        }
         else { return 0 }
     }
     

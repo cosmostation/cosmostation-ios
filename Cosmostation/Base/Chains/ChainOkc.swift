@@ -21,7 +21,7 @@ class ChainOkc: ChainConfig {
     var chainTitle = "(OKC Mainnet)"
     var chainTitle2 = "OKC"
     var chainDBName = CHAIN_OKEX_S
-    var chainAPIName = ""
+    var chainAPIName = "okc"
     var chainIdPrefix = "exchain-"
     
     var stakeDenomImg = UIImage(named: "tokenOkc")
@@ -39,7 +39,7 @@ class ChainOkc: ChainConfig {
     
     var etherAddressSupport = false
     var wasmSupport = false
-    var evmSupport = false
+    var evmSupport = true
     var wcSupoort = false
     var authzSupoort = false
     var moonPaySupoort = false

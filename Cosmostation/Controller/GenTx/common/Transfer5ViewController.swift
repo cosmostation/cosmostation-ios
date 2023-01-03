@@ -110,39 +110,15 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         let feeAmount = NSDecimalNumber.init(string: pageHolderVC.mFee!.amount[0].amount)
         var currentAvailable = NSDecimalNumber.zero
         var remainAvailable = NSDecimalNumber.zero
-
-        if (chainConfig?.isGrpc == true) {
-            var sendGeckocId = ""
-            var feeGeckocId = feeDenom
-            if let sendMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == toSendDenom }).first {
-                divideDecimal = sendMsAsset.decimals
-                displayDecimal = sendMsAsset.decimals
-                currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
-                if (toSendDenom == feeDenom) {
-                    remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
-                } else {
-                    remainAvailable = currentAvailable.subtracting(toSendAmount)
-                }
-                sendGeckocId = sendMsAsset.coinGeckoId
-                
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == toSendDenom }).first {
-                divideDecimal = msToken.decimals
-                displayDecimal = msToken.decimals
-                currentAvailable = NSDecimalNumber.init(string: msToken.amount)
-                remainAvailable = currentAvailable.subtracting(toSendAmount)
-                sendGeckocId = msToken.coinGeckoId
-            }
-            
-            if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == feeDenom }).first {
-                feeGeckocId = feeMsAsset.coinGeckoId
-                feeDivideDecimal = feeMsAsset.decimals
-            }
-            
-            WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)
-            WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
-            WDP.dpCoin(chainConfig, toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel)
-            WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
-            
+        
+        var sendGeckocId = ""
+        var feeGeckocId = feeDenom
+        if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == toSendDenom }).first {
+            divideDecimal = msToken.decimals
+            displayDecimal = msToken.decimals
+            currentAvailable = NSDecimalNumber.init(string: msToken.amount)
+            remainAvailable = currentAvailable.subtracting(toSendAmount)
+            sendGeckocId = msToken.coinGeckoId
             
             WDP.dpAssetValue(feeGeckocId, feeAmount, feeDivideDecimal, feeValueLabel)
             WDP.dpAssetValue(sendGeckocId, toSendAmount, divideDecimal, sendValueLabel)
@@ -150,30 +126,50 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             WDP.dpAssetValue(sendGeckocId, remainAvailable, divideDecimal, remainValueLabel)
             
         } else {
-            divideDecimal = chainConfig!.divideDecimal
-            displayDecimal = chainConfig!.displayDecimal
-            currentAvailable = BaseData.instance.availableAmount(toSendDenom)
-            if (pageHolderVC.mToSendDenom == chainConfig!.stakeDenom) {
-                remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
+            if (chainConfig!.isGrpc == true) {
+                if let sendMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
+                    divideDecimal = sendMsAsset.decimals
+                    displayDecimal = sendMsAsset.decimals
+                    currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
+                    if (toSendDenom == feeDenom) {
+                        remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
+                    } else {
+                        remainAvailable = currentAvailable.subtracting(toSendAmount)
+                    }
+                    sendGeckocId = sendMsAsset.coinGeckoId
+                }
+                
+                if let feeMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == feeDenom }).first {
+                    feeGeckocId = feeMsAsset.coinGeckoId
+                    feeDivideDecimal = feeMsAsset.decimals
+                }
+                
+                WDP.dpAssetValue(feeGeckocId, feeAmount, feeDivideDecimal, feeValueLabel)
+                WDP.dpAssetValue(sendGeckocId, toSendAmount, divideDecimal, sendValueLabel)
+                WDP.dpAssetValue(sendGeckocId, currentAvailable, divideDecimal, availableValueLabel)
+                WDP.dpAssetValue(sendGeckocId, remainAvailable, divideDecimal, remainValueLabel)
+                
             } else {
-                remainAvailable = currentAvailable.subtracting(toSendAmount)
+                divideDecimal = chainConfig!.divideDecimal
+                displayDecimal = chainConfig!.displayDecimal
+                currentAvailable = BaseData.instance.availableAmount(toSendDenom)
+                if (pageHolderVC.mToSendDenom == chainConfig!.stakeDenom) {
+                    remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
+                } else {
+                    remainAvailable = currentAvailable.subtracting(toSendAmount)
+                }
+                
+                feeValueLabel.isHidden = true
+                sendValueLabel.isHidden = true
+                availableValueLabel.isHidden = true
+                remainValueLabel.isHidden = true
             }
-            
-            WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)
-            WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
-            WDP.dpCoin(chainConfig, toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel)
-            WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
-            
-            feeValueLabel.isHidden = true
-            sendValueLabel.isHidden = true
-            availableValueLabel.isHidden = true
-            remainValueLabel.isHidden = true
         }
         
-        print("fee              ", feeDenom, "  ", feeAmount)
-        print("toSend           ", toSendDenom, "  ", toSendAmount)
-        print("currentAvailable ", toSendDenom, "  ", currentAvailable)
-        print("remainAvailable  ", toSendDenom, "  ", remainAvailable)
+        WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
+        WDP.dpCoin(chainConfig, toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel)
+        WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
         
         if (self.pageHolderVC.mTransferType == TRANSFER_IBC_SIMPLE || self.pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
             recipientChainLayer.isHidden = false
@@ -186,24 +182,19 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         recipientAddressLabel.text = pageHolderVC.mRecipinetAddress
         recipientAddressLabel.adjustsFontSizeToFitWidth = true
         mMemoLabel.text = pageHolderVC.mMemo
-        
     }
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            if (chainConfig?.isGrpc == true) {
-                if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
-                    self.onBroadcastEvmTx()
-                } else {
-                    self.onFetchAuth(account!.account_address)
-                }
-                
+            if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
+                self.onBroadcastEvmTx()
+            } else if (chainConfig?.isGrpc == true) {
+                self.onFetchAuth(account!.account_address)
             } else {
                 self.onFetchAccountInfo(account!)
             }
         }
     }
-    
     
     func onFetchAccountInfo(_ account: Account) {
         self.showWaittingAlert()
