@@ -147,7 +147,9 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         if (chainType == ChainType.CERTIK_MAIN) {
             cell?.onCheckMyVote_gRPC(mCertikMyVote?.getMyOption())
         } else {
-            cell?.onCheckMyVote_gRPC(mMyVote_gRPC?.option)
+            self.mMyVote_gRPC?.options.forEach { vote in
+                cell?.onCheckMyVote_gRPC(vote.option)
+            }
         }
         return cell!
     }
