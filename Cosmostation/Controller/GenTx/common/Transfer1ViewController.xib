@@ -92,7 +92,7 @@
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="insert *starname or recipient address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ff0-9U-jko" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ff0-9U-jko" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="16" y="177" width="382" height="46"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>

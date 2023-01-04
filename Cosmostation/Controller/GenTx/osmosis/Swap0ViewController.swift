@@ -70,7 +70,7 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mSwapInDenom!)
         let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
-        if (inputDenom == OSMOSIS_MAIN_DENOM) {
+        if (inputDenom == chainConfig!.stakeDenom) {
             availableMaxAmount = availableMaxAmount.subtracting(mainDenomFee)
         }
         WDP.dpCoin(chainConfig, pageHolderVC.mSwapInDenom!, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel)

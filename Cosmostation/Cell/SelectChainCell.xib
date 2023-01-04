@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,8 +28,8 @@
                                     <constraint firstAttribute="width" constant="42" id="Zj2-gV-Lor"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cosmos MainNet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gS8-QO-9Qv">
-                                <rect key="frame" x="50" y="17" width="107.5" height="16.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cosmos MainNet" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gS8-QO-9Qv">
+                                <rect key="frame" x="50" y="17" width="253" height="16.5"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -40,6 +40,7 @@
                             <constraint firstItem="V2N-dt-3bN" firstAttribute="leading" secondItem="DWE-HG-cOW" secondAttribute="leading" constant="4" id="Af1-1o-yds"/>
                             <constraint firstItem="V2N-dt-3bN" firstAttribute="top" secondItem="DWE-HG-cOW" secondAttribute="top" constant="4" id="DRx-fS-7jZ"/>
                             <constraint firstItem="V2N-dt-3bN" firstAttribute="centerY" secondItem="DWE-HG-cOW" secondAttribute="centerY" id="JR9-tQ-Apc"/>
+                            <constraint firstAttribute="trailing" secondItem="gS8-QO-9Qv" secondAttribute="trailing" constant="12" id="KVh-dl-tAh"/>
                             <constraint firstAttribute="bottom" secondItem="V2N-dt-3bN" secondAttribute="bottom" constant="4" id="ShS-5A-7Sh"/>
                             <constraint firstAttribute="height" constant="50" id="WAY-IA-BpX"/>
                             <constraint firstItem="gS8-QO-9Qv" firstAttribute="centerY" secondItem="DWE-HG-cOW" secondAttribute="centerY" id="btf-8w-rhG"/>
