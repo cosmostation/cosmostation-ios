@@ -198,13 +198,13 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
             nameservices.removeAll()
             if (WUtils.isStarnameValidStarName(userInput!.lowercased())) {
                 fetchCnt = 1
-                onCheckStarNameService(recipientChainConfig, userInput!.lowercased())
+                onCheckStarNameService(recipientChainConfig, userInput!)
                 return;
                 
             } else {
                 fetchCnt = 1
-                onCheckIcnsNameService(recipientChainConfig, userInput!.lowercased())
-//                onCheckStargazeNameService(recipientChainConfig, userInput!.lowercased())
+                onCheckIcnsNameService(recipientChainConfig, userInput!)
+//                onCheckStargazeNameService(recipientChainConfig, userInput!)
             }
         }
     }
@@ -260,6 +260,11 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
             let matchedAddress = nameservices[result].address
             if (account?.account_address == matchedAddress) {
                 self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
+                return;
+            }
+            
+            if (!WUtils.isValidChainAddress(recipientChainConfig, matchedAddress)) {
+                self.onShowToast(NSLocalizedString("error_invalid_nameservice_address", comment: ""))
                 return;
             }
             

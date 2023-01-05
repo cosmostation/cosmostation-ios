@@ -788,6 +788,7 @@ support@cosmostation.io";
 "error_not_reward" = "No enough reward to Claim.";
 "error_memo" = "Please insert validate memo.";
 "error_invalid_address" = "Invalid Address, please check again.";
+"error_invalid_nameservice_address" = "The address of the registered name service is incorrect.";
 "error_self_send" = "Self sending is not support.";
 "error_invalid_password" = "Invalid PIN number";
 "error_not_enough_fee" = "No enough balance for fee.";
