@@ -203,6 +203,7 @@
 "msg_fee2" = "Cosmostation Wallet service is free to use, and the Tx fee you pay is distributed to all validators and community pool.";
 "msg_liquid_unstake" = "Unstaking requires a period set by origin chain(14-28 days).\n\nYou can instantly convert st assets into original assets in Osmosis Dex.";
 "msg_address_nameservice" = "Insert recipient address or service name";
+"msg_account_nickname_updated_with_nameservice" = "update wallet name with nameservice name";
 
 
 "guide_title_cosmos" = "COSMOS HUB";
