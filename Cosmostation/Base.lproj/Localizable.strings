@@ -204,6 +204,7 @@
 "msg_liquid_unstake" = "Unstaking requires a period set by origin chain(14-28 days).\n\nYou can instantly convert st assets into original assets in Osmosis Dex.";
 "msg_address_nameservice" = "Insert recipient address or service name";
 "msg_account_nickname_updated_with_nameservice" = "update wallet name with nameservice name";
+"msg_okc_deprecated_msg" = "You selected deprecated path wallet.\nFor your convenience, highly recommend using current official address type.\n\n(You can add a wallet with default Address type in [Setting] > [Manage Mnemonic / Add Wallet])";
 
 
 "guide_title_cosmos" = "COSMOS HUB";
