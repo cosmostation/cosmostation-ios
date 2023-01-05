@@ -82,6 +82,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.navigationController?.navigationBar.topItem?.title = "";
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("onFetchDone"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("onFetchPrice"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTitle), name: Notification.Name("onNameCheckDone"), object: nil)
         self.updateTitle()
     }
     
@@ -89,6 +90,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("onFetchDone"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("onFetchPrice"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("onNameCheckDone"), object: nil)
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
@@ -99,7 +101,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.historyTableView.reloadData()
     }
     
-    func updateTitle() {
+    @objc func updateTitle() {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)

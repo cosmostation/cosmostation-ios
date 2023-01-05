@@ -876,7 +876,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 }
                 if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait(),
                    let name = try? JSONDecoder().decode(Cw20IcnsByAddressRes.self, from: response.data).name {
-                    icnsName = name!
+                    if (name?.isEmpty == false) {
+                        icnsName = name! + "." + self.mChainConfig.addressPrefix
+                    }
                 }
                 try channel.close().wait()
 
@@ -886,6 +888,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             DispatchQueue.main.async(execute: {
                 if (!icnsName.isEmpty && self.mAccount.account_nick_name != icnsName) {
                     //TODO ask user for update nickname
+                    self.mAccount.account_nick_name = icnsName
+                    _ = BaseData.instance.updateAccount(self.mAccount)
+                    NotificationCenter.default.post(name: Notification.Name("onNameCheckDone"), object: nil, userInfo: nil)
                 }
             });
         }
