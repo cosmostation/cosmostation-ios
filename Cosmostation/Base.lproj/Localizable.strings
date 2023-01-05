@@ -203,6 +203,7 @@
 "msg_fee2" = "Cosmostation Wallet service is free to use, and the Tx fee you pay is distributed to all validators and community pool.";
 "msg_liquid_unstake" = "Unstaking requires a period set by origin chain(14-28 days).\n\nYou can instantly convert st assets into original assets in Osmosis Dex.";
 "msg_address_nameservice" = "Insert recipient address or service name";
+"msg_account_nickname_updated_with_nameservice" = "update wallet name with nameservice name";
 
 
 "guide_title_cosmos" = "COSMOS HUB";
@@ -788,6 +789,7 @@ support@cosmostation.io";
 "error_not_reward" = "No enough reward to Claim.";
 "error_memo" = "Please insert validate memo.";
 "error_invalid_address" = "Invalid Address, please check again.";
+"error_invalid_nameservice_address" = "The address of the registered name service is incorrect.";
 "error_self_send" = "Self sending is not support.";
 "error_invalid_password" = "Invalid PIN number";
 "error_not_enough_fee" = "No enough balance for fee.";

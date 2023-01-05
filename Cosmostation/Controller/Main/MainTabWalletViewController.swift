@@ -76,6 +76,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.navigationController?.navigationBar.topItem?.title = "";
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("onFetchDone"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("onFetchPrice"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTitle), name: Notification.Name("onNameCheckDone"), object: nil)
         self.updateTitle()
         self.walletTableView.reloadData()
     }
@@ -84,9 +85,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("onFetchDone"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("onFetchPrice"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("onNameCheckDone"), object: nil)
     }
     
-    func updateTitle() {
+    @objc func updateTitle() {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)

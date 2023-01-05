@@ -28,11 +28,17 @@ class MainDappViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = "";
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTitle), name: Notification.Name("onNameCheckDone"), object: nil)
         self.updateTitle()
         
         if let url = URL(string: "https://dapps.cosmostation.io/?chain=\(chainConfig?.chainAPIName ?? "")&theme=\(currentThemeParams())") {
             webView.load(URLRequest(url: url))
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("onNameCheckDone"), object: nil)
     }
     
     func currentThemeParams() -> String {
@@ -133,7 +139,7 @@ extension MainDappViewController: WKNavigationDelegate, WKUIDelegate {
         self.onShowSafariWeb(url)
     }
     
-    func updateTitle() {
+    @objc func updateTitle() {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)

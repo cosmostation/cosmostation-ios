@@ -28,6 +28,7 @@ class MainTabSettingViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = "";
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTitle), name: Notification.Name("onNameCheckDone"), object: nil)
         if (BaseData.instance.getNeedRefresh()) {
             BaseData.instance.setNeedRefresh(false)
             mainTabVC.onUpdateAccountDB()
@@ -36,7 +37,12 @@ class MainTabSettingViewController: BaseViewController {
         self.updateTitle()
     }
     
-    func updateTitle() {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("onNameCheckDone"), object: nil)
+    }
+    
+    @objc func updateTitle() {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
