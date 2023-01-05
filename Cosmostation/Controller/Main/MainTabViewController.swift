@@ -45,7 +45,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if( self.mFetchCnt > 0)  {
+        if (self.mFetchCnt > 0)  {
             self.showWaittingAlert()
         }
     }
@@ -378,6 +378,11 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     }
                 }
                 BaseData.instance.mBalances = mBalances
+                
+                print("mAccount ", mAccount.account_address, " ", mAccount.account_pubkey_type, "     ",  mAccount.account_path)
+                if (mAccount.account_pubkey_type != 2) {
+                    showDeprecatedWarn()
+                }
             }
             
             print("BaseData.instance.mAllValidator ", BaseData.instance.mAllValidator.count)
@@ -1168,6 +1173,17 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }))
         warnAlert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: nil))
         self.present(warnAlert, animated: true, completion: nil)
+    }
+    
+    public func showDeprecatedWarn() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            let alert = UIAlertController(title: NSLocalizedString("warnning", comment: ""),
+                                          message: NSLocalizedString("msg_okc_deprecated_msg", comment: ""),
+                                          preferredStyle: .alert)
+            alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
+            alert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        });
     }
     
     public func hideWaittingAlert() {
