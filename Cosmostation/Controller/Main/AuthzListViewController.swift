@@ -9,21 +9,23 @@
 import UIKit
 import GRPC
 import NIO
+import Combine
 
-class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class AuthzListViewController: BaseViewController {
 
     @IBOutlet weak var authzTableView: UITableView!
     @IBOutlet weak var loadingImg: LoadingImageView!
-    
-    var refresher: UIRefreshControl!
-    var granters = Array<String>()
+    private let store: Store = .init(reducer: AuthzReducers.granteeGrants, serviceLocator: AuthzServiceLocatorImpl())
+    private var subscriptions: Set<AnyCancellable> = .init()
+    private let refresher: UIRefreshControl = UIRefreshControl()
+    private var granters = Array<String>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
-        
+    
         self.authzTableView.delegate = self
         self.authzTableView.dataSource = self
         self.authzTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -31,15 +33,13 @@ class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableV
         self.authzTableView.register(UINib(nibName: "GranterEmptyViewCell", bundle: nil), forCellReuseIdentifier: "GranterEmptyViewCell")
         self.authzTableView.rowHeight = UITableView.automaticDimension
         self.authzTableView.estimatedRowHeight = UITableView.automaticDimension
-        self.authzTableView.isHidden = true
         
-        self.refresher = UIRefreshControl()
-        self.refresher.addTarget(self, action: #selector(onFetchAuthz), for: .valueChanged)
+        self.refresher.addTarget(self, action: #selector(startRefreshTask), for: .valueChanged)
         self.refresher.tintColor = UIColor.font05
         self.authzTableView.addSubview(refresher)
         
-        self.loadingImg.onStartAnimation()
-        self.onFetchAuthz()
+        observeStateTask()
+        startLoadTask()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,17 +51,41 @@ class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableV
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    @objc func onFetchAuthz() {
-        self.onFetchGranter_gRPC(account!.account_address)
+    private func observeStateTask() {
+        Task {
+            await store.$state
+                .sink { [weak self] in self?.endLoadTask($0) }
+                .store(in: &subscriptions)
+        }
     }
     
-    func onUpdateViews() {
-        self.loadingImg.stopAnimating()
-        self.loadingImg.isHidden = true
-        self.authzTableView.isHidden = false
-        self.authzTableView.reloadData()
-        self.refresher.endRefreshing()
+    private func startLoadTask() {
+        guard let account = account else { return }
+        Task {
+            await store.dispatch(action: .load(granteeAddress: account.account_address))
+        }
     }
+    
+    @objc private func startRefreshTask() {
+        guard let account = account else { return }
+        Task {
+            await store.dispatch(action: .refresh(granteeAddress: account.account_address))
+        }
+    }
+    
+    private func endLoadTask(_ state: GranteeGrantsState) {
+        loadingImg.animated = state.load.isLoading
+        loadingImg.isHidden = !state.load.isLoading
+        authzTableView.isHidden = state.load.isLoading
+        refresher.animate(state.load.isRefreshing)
+        granters = state.granters
+        authzTableView.reloadData()
+    }
+}
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
+
+extension AuthzListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (granters.count == 0) {
@@ -90,51 +114,5 @@ class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableV
             self.navigationController?.pushViewController(authzDetailVC, animated: true)
         }
     }
-    
-    //TODO: remove
-    func onFetchGranter_gRPC2(_ address: String) {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                defer { try? channel.close().wait() }
-                let req = Cosmos_Authz_V1beta1_QueryGranteeGrantsRequest.with { $0.grantee = address }
-                if let response = try? Cosmos_Authz_V1beta1_QueryClient(channel: channel).granteeGrants(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
-                    response.grants.forEach { grant in
-                        if (!self.granters.contains(grant.granter)) {
-                            self.granters.append(grant.granter)
-                        }
-                    }
-                }
-                try channel.close().wait()
-
-            } catch {
-                print("onFetchGranter_gRPC failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.onUpdateViews() });
-        }
-    }
-    
-    func onFetchGranter_gRPC(_ address: String) {
-        do {
-            try runOnBackground { () -> [String] in
-                let channel = try ClientConnection.connection()
-                defer { try? channel.close().wait() }
-                let request = Cosmos_Authz_V1beta1_QueryGranteeGrantsRequest.with { $0.grantee = address }
-                let client = Cosmos_Authz_V1beta1_QueryClient(channel: channel)
-                let response = try client.granteeGrants(request, callOptions: BaseNetWork.getCallOptions()).response.wait()
-                var granters: Array<String> = .init()
-                response.grants.forEach { grant in
-                    if (!granters.contains(grant.granter)) {
-                        granters.append(grant.granter)
-                    }
-                }
-                return granters
-            } runOnMain: { granters in
-                self.granters = granters
-                self.onUpdateViews()
-            }
-        } catch {
-            print("onFetchGranter_gRPC failed: \(error)")
-        }
-    }
 }
+

@@ -10,6 +10,16 @@ import UIKit
 
 class LoadingImageView: UIImageView {
     
+    var animated: Bool = false {
+        didSet {
+            if animated {
+                onStartAnimation()
+            } else {
+                onStopAnimation()
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
