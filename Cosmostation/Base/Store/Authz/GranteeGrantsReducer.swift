@@ -46,7 +46,7 @@ enum AuthzReducers {
         let client = try serviceLocator.authzQueryClient()
         defer { try? client.channel.close().wait() }
         let req = Cosmos_Authz_V1beta1_QueryGranteeGrantsRequest.with { $0.grantee = granteeAddress }
-        let call = client.granteeGrants(req, callOptions:BaseNetWork.getCallOptions())
+        let call = client.granteeGrants(req, callOptions: BaseNetWork.getCallOptions())
         let result = try await call.response.get()
         return result.grants.removeDuplicates().map({ $0.granter })
     }
