@@ -14,7 +14,7 @@ class ChainCrescent: ChainConfig {
     var chainType = ChainType.CRESCENT_MAIN
     var chainImg = UIImage(named: "chainCrescent")
     var chainInfoImg = UIImage(named: "infoCrescent")
-    var chainInfoTitle = NSLocalizedString("guide_title_crescent", comment: "")
+    var chainInfoTitle = "CRESCENT"
     var chainInfoMsg = NSLocalizedString("guide_msg_crescent", comment: "")
     var chainColor = UIColor(named: "crescent")!
     var chainColorBG = UIColor(named: "crescent_bg")!

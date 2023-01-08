@@ -14,7 +14,7 @@ class ChainOnomy: ChainConfig {
     var chainType = ChainType.ONOMY_MAIN
     var chainImg = UIImage(named: "chainOnomy")
     var chainInfoImg = UIImage(named: "infoOnomy")
-    var chainInfoTitle = NSLocalizedString("guide_title_onomy", comment: "")
+    var chainInfoTitle = "ONOMY"
     var chainInfoMsg = NSLocalizedString("guide_msg_onomy", comment: "")
     var chainColor = UIColor(named: "onomy")!
     var chainColorBG = UIColor(named: "onomy_bg")!

@@ -14,7 +14,7 @@ class ChainOkc: ChainConfig {
     var chainType = ChainType.OKEX_MAIN
     var chainImg = UIImage(named: "chainOkc")
     var chainInfoImg = UIImage(named: "infoOkc")
-    var chainInfoTitle = NSLocalizedString("guide_title_ok", comment: "")
+    var chainInfoTitle = "OKC"
     var chainInfoMsg = NSLocalizedString("guide_msg_ok", comment: "")
     var chainColor = UIColor(named: "okc")!
     var chainColorBG = UIColor(named: "okc_bg")!

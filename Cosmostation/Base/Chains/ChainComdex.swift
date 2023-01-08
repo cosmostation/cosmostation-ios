@@ -14,7 +14,7 @@ class ChainComdex: ChainConfig {
     var chainType = ChainType.COMDEX_MAIN
     var chainImg = UIImage(named: "chainComdex")
     var chainInfoImg = UIImage(named: "infoComdex")
-    var chainInfoTitle = NSLocalizedString("guide_title_comdex", comment: "")
+    var chainInfoTitle = "COMDEX"
     var chainInfoMsg = NSLocalizedString("guide_msg_comdex", comment: "")
     var chainColor = UIColor(named: "comdex")!
     var chainColorBG = UIColor(named: "comdex_bg")!

@@ -14,7 +14,7 @@ class ChainKonstellation: ChainConfig {
     var chainType = ChainType.KONSTELLATION_MAIN
     var chainImg = UIImage(named: "chainKonstellation")
     var chainInfoImg = UIImage(named: "infoKonstellation")
-    var chainInfoTitle = NSLocalizedString("guide_title_konstellation", comment: "")
+    var chainInfoTitle = "KONSTELLATION"
     var chainInfoMsg = NSLocalizedString("guide_msg_konstellation", comment: "")
     var chainColor = UIColor(named: "konstellation")!
     var chainColorBG = UIColor(named: "konstellation_bg")!

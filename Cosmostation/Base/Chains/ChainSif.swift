@@ -14,7 +14,7 @@ class ChainSif: ChainConfig {
     var chainType = ChainType.SIF_MAIN
     var chainImg = UIImage(named: "chainSif")
     var chainInfoImg = UIImage(named: "infoSif")
-    var chainInfoTitle = NSLocalizedString("guide_title_sif", comment: "")
+    var chainInfoTitle = "SIF"
     var chainInfoMsg = NSLocalizedString("guide_msg_sif", comment: "")
     var chainColor = UIColor(named: "sif")!
     var chainColorBG = UIColor(named: "sif_bg")!

@@ -14,7 +14,7 @@ class ChainTeritori: ChainConfig {
     var chainType = ChainType.TERITORI_MAIN
     var chainImg = UIImage(named: "chainTeritori")
     var chainInfoImg = UIImage(named: "infoTerotori")
-    var chainInfoTitle = NSLocalizedString("guide_title_teritori", comment: "")
+    var chainInfoTitle = "TERITORI"
     var chainInfoMsg = NSLocalizedString("guide_msg_teritori", comment: "")
     var chainColor = UIColor(named: "teritori")!
     var chainColorBG = UIColor(named: "teritori_bg")!

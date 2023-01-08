@@ -14,7 +14,7 @@ class ChainBitsong: ChainConfig {
     var chainType = ChainType.BITSONG_MAIN
     var chainImg = UIImage(named: "chainBitsong")
     var chainInfoImg = UIImage(named: "infoBitsong")
-    var chainInfoTitle = NSLocalizedString("guide_title_bitsong", comment: "")
+    var chainInfoTitle = "BITSONG"
     var chainInfoMsg = NSLocalizedString("guide_msg_bitsong", comment: "")
     var chainColor = UIColor(named: "bitsong")!
     var chainColorBG = UIColor(named: "bitsong_bg")!

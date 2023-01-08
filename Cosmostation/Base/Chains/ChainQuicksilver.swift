@@ -14,7 +14,7 @@ class ChainQuicksilver: ChainConfig {
     var chainType = ChainType.QUICKSILVER_MAIN
     var chainImg = UIImage(named: "chainQuicksilver")
     var chainInfoImg = UIImage(named: "infoQuicksilver")
-    var chainInfoTitle = NSLocalizedString("guide_title_quicksilver", comment: "")
+    var chainInfoTitle = "QUICKSILVER"
     var chainInfoMsg = NSLocalizedString("guide_msg_quicksilver", comment: "")
     var chainColor = UIColor(named: "quicksilver")!
     var chainColorBG = UIColor(named: "quicksilver_bg")!

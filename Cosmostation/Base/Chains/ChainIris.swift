@@ -14,7 +14,7 @@ class ChainIris: ChainConfig {
     var chainType = ChainType.IRIS_MAIN
     var chainImg = UIImage(named: "chainIris")
     var chainInfoImg = UIImage(named: "infoIris")
-    var chainInfoTitle = NSLocalizedString("guide_title_iris", comment: "")
+    var chainInfoTitle = "IRIS"
     var chainInfoMsg = NSLocalizedString("guide_msg_iris", comment: "")
     var chainColor = UIColor(named: "iris")!
     var chainColorBG = UIColor(named: "iris_bg")!

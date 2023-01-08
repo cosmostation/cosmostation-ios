@@ -14,7 +14,7 @@ class ChainKujira: ChainConfig {
     var chainType = ChainType.KUJIRA_MAIN
     var chainImg = UIImage(named: "chainKujira")
     var chainInfoImg = UIImage(named: "infoKujira")
-    var chainInfoTitle = NSLocalizedString("guide_title_kujira", comment: "")
+    var chainInfoTitle = "KUJIRA"
     var chainInfoMsg = NSLocalizedString("guide_msg_kujira", comment: "")
     var chainColor = UIColor(named: "kujira")!
     var chainColorBG = UIColor(named: "kujira_bg")!

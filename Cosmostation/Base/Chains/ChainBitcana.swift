@@ -14,7 +14,7 @@ class ChainBitcana: ChainConfig {
     var chainType = ChainType.BITCANA_MAIN
     var chainImg = UIImage(named: "chainBitcanna")
     var chainInfoImg = UIImage(named: "infoBitcanna")
-    var chainInfoTitle = NSLocalizedString("guide_title_bitcanna", comment: "")
+    var chainInfoTitle = "BITCANNA"
     var chainInfoMsg = NSLocalizedString("guide_msg_bitcanna", comment: "")
     var chainColor = UIColor(named: "bitcanna")!
     var chainColorBG = UIColor(named: "bitcanna_bg")!
