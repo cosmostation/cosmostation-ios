@@ -14,7 +14,7 @@ class ChainMedibloc: ChainConfig {
     var chainType = ChainType.MEDI_MAIN
     var chainImg = UIImage(named: "chainMedibloc")
     var chainInfoImg = UIImage(named: "infoMedibloc")
-    var chainInfoTitle = NSLocalizedString("guide_title_medi", comment: "")
+    var chainInfoTitle = "MEDIBLOC"
     var chainInfoMsg = NSLocalizedString("guide_msg_medi", comment: "")
     var chainColor = UIColor(named: "medibloc")!
     var chainColorBG = UIColor(named: "medibloc_bg")!

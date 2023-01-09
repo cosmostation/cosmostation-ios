@@ -14,7 +14,7 @@ class ChainAlthea: ChainConfig {
     var chainType = ChainType.ALTHEA_MAIN
     var chainImg = UIImage(named: "chainAlthea")
     var chainInfoImg = UIImage(named: "infoAlthea")
-    var chainInfoTitle = NSLocalizedString("guide_title_althea", comment: "")
+    var chainInfoTitle = "ALTHEA"
     var chainInfoMsg = NSLocalizedString("guide_msg_althea", comment: "")
     var chainColor = UIColor(named: "althea")!
     var chainColorBG = UIColor(named: "althea_bg")!

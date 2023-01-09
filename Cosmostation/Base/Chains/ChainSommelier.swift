@@ -14,7 +14,7 @@ class ChainSommelier: ChainConfig {
     var chainType = ChainType.SOMMELIER_MAIN
     var chainImg = UIImage(named: "chainSommelier")
     var chainInfoImg = UIImage(named: "infoSommelier")
-    var chainInfoTitle = NSLocalizedString("guide_title_sommelier", comment: "")
+    var chainInfoTitle = "SOMMELIER"
     var chainInfoMsg = NSLocalizedString("guide_msg_sommelier", comment: "")
     var chainColor = UIColor(named: "sommelier")!
     var chainColorBG = UIColor(named: "sommelier_bg")!

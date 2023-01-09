@@ -14,7 +14,7 @@ class StationTest: ChainConfig {
     var chainType = ChainType.STATION_TEST
     var chainImg = UIImage(named: "chainStationTest")
     var chainInfoImg = UIImage(named: "infoStation")
-    var chainInfoTitle = NSLocalizedString("Station", comment: "")
+    var chainInfoTitle = "STATION"
     var chainInfoMsg = NSLocalizedString("Station", comment: "")
     var chainColor = UIColor(named: "station")!
     var chainColorBG = UIColor(named: "station_bg")!

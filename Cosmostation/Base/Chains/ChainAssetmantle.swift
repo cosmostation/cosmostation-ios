@@ -14,7 +14,7 @@ class ChainAssetMantle: ChainConfig {
     var chainType = ChainType.MANTLE_MAIN
     var chainImg = UIImage(named: "chainAssetmantle")
     var chainInfoImg = UIImage(named: "infoAssetmantle")
-    var chainInfoTitle = NSLocalizedString("guide_title_mantle", comment: "")
+    var chainInfoTitle = "ASSETMANTLE"
     var chainInfoMsg = NSLocalizedString("guide_msg_mantle", comment: "")
     var chainColor = UIColor(named: "assetmantle")!
     var chainColorBG = UIColor(named: "assetmantle_bg")!

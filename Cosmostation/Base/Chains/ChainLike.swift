@@ -14,7 +14,7 @@ class ChainLike: ChainConfig {
     var chainType = ChainType.LIKECOIN_MAIN
     var chainImg = UIImage(named: "chainLike")
     var chainInfoImg = UIImage(named: "infoLike")
-    var chainInfoTitle = NSLocalizedString("guide_title_like", comment: "")
+    var chainInfoTitle = "LIKECOIN"
     var chainInfoMsg = NSLocalizedString("guide_msg_like", comment: "")
     var chainColor = UIColor(named: "like")!
     var chainColorBG = UIColor(named: "like_bg")!

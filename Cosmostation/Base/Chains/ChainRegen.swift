@@ -14,7 +14,7 @@ class ChainRegen: ChainConfig {
     var chainType = ChainType.REGEN_MAIN
     var chainImg = UIImage(named: "chainRegen")
     var chainInfoImg = UIImage(named: "infoRegen")
-    var chainInfoTitle = NSLocalizedString("guide_title_regen", comment: "")
+    var chainInfoTitle = "REGEN"
     var chainInfoMsg = NSLocalizedString("guide_msg_regen", comment: "")
     var chainColor = UIColor(named: "regen")!
     var chainColorBG = UIColor(named: "regen_bg")!

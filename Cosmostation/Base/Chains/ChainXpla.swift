@@ -14,7 +14,7 @@ class ChainXpla: ChainConfig {
     var chainType = ChainType.XPLA_MAIN
     var chainImg = UIImage(named: "chainXpla")
     var chainInfoImg = UIImage(named: "infoXpla")
-    var chainInfoTitle = NSLocalizedString("guide_title_xpla", comment: "")
+    var chainInfoTitle = "XPLA"
     var chainInfoMsg = NSLocalizedString("guide_msg_xpla", comment: "")
     var chainColor = UIColor(named: "xpla")!
     var chainColorBG = UIColor(named: "xpla_bg")!

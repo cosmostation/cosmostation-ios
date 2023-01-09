@@ -14,7 +14,7 @@ class ChainSecret: ChainConfig {
     var chainType = ChainType.SECRET_MAIN
     var chainImg = UIImage(named: "chainSecret")
     var chainInfoImg = UIImage(named: "infoSecret")
-    var chainInfoTitle = NSLocalizedString("guide_title_secret", comment: "")
+    var chainInfoTitle = "SECRET"
     var chainInfoMsg = NSLocalizedString("guide_msg_secret", comment: "")
     var chainColor = UIColor(named: "secret")!
     var chainColorBG = UIColor(named: "secret_bg")!

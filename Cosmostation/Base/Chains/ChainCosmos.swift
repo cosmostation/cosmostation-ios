@@ -14,7 +14,7 @@ class ChainCosmos: ChainConfig {
     var chainType = ChainType.COSMOS_MAIN
     var chainImg = UIImage(named: "chainCosmos")
     var chainInfoImg = UIImage(named: "infoCosmos")
-    var chainInfoTitle = NSLocalizedString("guide_title_cosmos", comment: "")
+    var chainInfoTitle = "COSMOS HUB"
     var chainInfoMsg = NSLocalizedString("guide_msg_cosmos", comment: "")
     var chainColor = UIColor(named: "cosmos")!
     var chainColorBG = UIColor(named: "cosmos_bg")!

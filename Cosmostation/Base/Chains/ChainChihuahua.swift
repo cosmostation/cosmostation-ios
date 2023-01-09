@@ -14,7 +14,7 @@ class ChainChihuahua: ChainConfig {
     var chainType = ChainType.CHIHUAHUA_MAIN
     var chainImg = UIImage(named: "chainChihuahua")
     var chainInfoImg = UIImage(named: "infoChihuahua")
-    var chainInfoTitle = NSLocalizedString("guide_title_chihuahua", comment: "")
+    var chainInfoTitle = "CHIHUAHUA"
     var chainInfoMsg = NSLocalizedString("guide_msg_chihuahua", comment: "")
     var chainColor = UIColor(named: "chihuahua")!
     var chainColorBG = UIColor(named: "chihuahua_bg")!

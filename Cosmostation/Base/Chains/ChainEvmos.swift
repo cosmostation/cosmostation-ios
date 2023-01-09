@@ -14,7 +14,7 @@ class ChainEvmos: ChainConfig {
     var chainType = ChainType.EVMOS_MAIN
     var chainImg = UIImage(named: "chainEvmos")
     var chainInfoImg = UIImage(named: "infoEvmos")
-    var chainInfoTitle = NSLocalizedString("guide_title_evmos", comment: "")
+    var chainInfoTitle = "EVMOS"
     var chainInfoMsg = NSLocalizedString("guide_msg_evmos", comment: "")
     var chainColor = UIColor(named: "evmos")!
     var chainColorBG = UIColor(named: "evmos_bg")!
