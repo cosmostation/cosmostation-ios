@@ -799,13 +799,13 @@ public struct BandOrcleActiveValidators {
     var addresses = Array<String>()
     
     init(_ dictionary: NSDictionary?) {
-        let result = dictionary?["result"] as? NSDictionary
-        let result2 = result?["result"] as? Array<NSDictionary>
-        result2?.forEach({ rawResult in
-            if let rawAddress = rawResult["address"] as? String {
-                addresses.append(rawAddress)
+        if let rawValidators = dictionary?["validators"] as? Array<NSDictionary> {
+            rawValidators.forEach { validator in
+                if let rawAddress = validator["address"] as? String {
+                    addresses.append(rawAddress)
+                }
             }
-        })
+        }
     }
 }
 
