@@ -274,7 +274,7 @@ class BaseNetWork {
     }
     
     static func getParams(_ chainId: String) -> String {
-        return MINTSCAN_API_URL + "v1/utils/params/chain/" + chainId
+        return MINTSCAN_API_URL + "v2/utils/params/" + chainId
     }
     
     static func getSupportPools(_ chainConfig: ChainConfig) -> String {
