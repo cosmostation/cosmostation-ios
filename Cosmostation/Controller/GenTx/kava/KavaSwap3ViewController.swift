@@ -55,7 +55,6 @@ class KavaSwap3ViewController: BaseViewController, PasswordViewDelegate {
         WDP.dpCoin(chainConfig, pageHolderVC.mSwapInDenom!, pageHolderVC.mSwapInAmount!.stringValue, swapInDenomLabel, swapInAmountLabel)
         WDP.dpCoin(chainConfig, pageHolderVC.mSwapOutDenom!, pageHolderVC.mSwapOutAmount!.stringValue, swapOutDenomLabel, swapOutAmountLabel)
         let dpSwapFee = NSDecimalNumber.init(string: BaseData.instance.mKavaSwapPoolParam?.swapFee).multiplying(byPowerOf10: -16)
-        print("dpSwapFee ", dpSwapFee)
         swapFeeLabel.attributedText = WUtils.displayPercent(dpSwapFee, swapFeeLabel.font)
         mSlippageLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: "3"), mSlippageLabel.font)
         mMemoLabel.text = pageHolderVC.mMemo

@@ -112,10 +112,6 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
             sendCoinAvailable.attributedText = WDP.dpAmount(availableAmount.stringValue, sendCoinAvailable.font, 8, 8)
             
         }
-//        print("availableAmount ", availableAmount)
-//        print("supplyLimit ", supplyLimit)
-//        print("supplyRemain ", supplyRemain)
-//        print("onetimeMax ", onetimeMax)
         
         oneTimeLimitAmount.attributedText = WDP.dpAmount(onetimeMax.stringValue, oneTimeLimitAmount.font, 8, 8)
         systemMaxAmount.attributedText = WDP.dpAmount(supplyLimit.stringValue, systemMaxAmount.font, 8, 8)

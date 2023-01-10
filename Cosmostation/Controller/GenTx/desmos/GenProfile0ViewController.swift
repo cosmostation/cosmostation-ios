@@ -201,7 +201,6 @@ class GenProfile0ViewController: BaseViewController, UIImagePickerControllerDele
     }
     
     @objc func onProfileimg (_ sender: UITapGestureRecognizer) {
-        print("onProfileimg")
         self.isCover = false
         self.authCheck()
     }
@@ -280,7 +279,6 @@ class GenProfile0ViewController: BaseViewController, UIImagePickerControllerDele
             do {
                 let req = Desmos_Profiles_V1beta1_QueryProfileRequest.with { $0.user = dtag }
                 let response = try Desmos_Profiles_V1beta1_QueryClient(channel: channel).profile(req, callOptions:BaseNetWork.getCallOptions()).response.wait()
-                print("onFetchgRPCDtag ", response)
                 DispatchQueue.main.async(execute: {
                     self.onShowToast(NSLocalizedString("error_already_registered_domain", comment: ""))
                     return

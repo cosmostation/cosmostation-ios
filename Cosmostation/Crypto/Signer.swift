@@ -89,7 +89,6 @@ class Signer {
     static func genSimulateTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                           _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        print("auth ", auth)
         let deleMsg = genTgradeDelegateMsg(auth, toValAddress, availableAmount, vestingAmount)
         return getGrpcSimulateTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
     }

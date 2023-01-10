@@ -113,7 +113,6 @@ class OkVote4ViewController: BaseViewController, PasswordViewDelegate {
                     var txResult = [String:Any]()
                     switch response.result {
                     case .success(let res):
-                        print("Vote ", res)
                         if let result = res as? [String : Any]  {
                             txResult = result
                         }

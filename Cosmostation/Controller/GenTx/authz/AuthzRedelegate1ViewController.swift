@@ -119,7 +119,6 @@ class AuthzRedelegate1ViewController: BaseViewController, UITableViewDelegate, U
                 }
             }
         }
-//        print("toValidators ", toValidators)
         validatorsTableView.reloadData()
     }
     

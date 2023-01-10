@@ -70,7 +70,6 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
         let randomUUID = STATION_NFT_DENOM + UUID().uuidString.replacingOccurrences(of: "-", with: "").lowercased()
         nftDenomIdLabel.text = randomUUID
         nftDenomNameLabel.text = randomUUID
-        print("randomUUID ", randomUUID)
         
         onUpdateImgView(nil)
         editRootView.isHidden = false

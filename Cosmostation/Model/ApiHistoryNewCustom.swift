@@ -86,7 +86,6 @@ public struct ApiHistoryNewCustom {
             if let rawMsgType = getMsgs()?[0].object(forKey: "type") as? String {
                 msgType = rawMsgType
             }
-//            print("msgType ", msgType)
             
 
             // cosmos default msg type

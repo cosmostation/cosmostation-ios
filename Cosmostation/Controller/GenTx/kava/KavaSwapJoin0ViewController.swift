@@ -100,7 +100,6 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         WDP.dpCoin(chainConfig, coin1Denom, available1MaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel)
         
         depositRate = coin1Amount.dividing(by: coin0Amount, withBehavior: WUtils.handler18)
-        print("depositRate ", depositRate)
     }
     
     override func enableUserInteraction() {
@@ -317,7 +316,6 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
                 let req = Kava_Swap_V1beta1_QueryPoolsRequest.with { $0.poolID = poolId }
                 if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.mKavaSwapPool = response.pools[0]
-//                    print("self.mKavaSwapPools ", self.mKavaSwapPools.count)
                 }
                 try channel.close().wait()
                 

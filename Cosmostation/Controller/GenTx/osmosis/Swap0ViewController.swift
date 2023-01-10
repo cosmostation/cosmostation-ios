@@ -101,8 +101,6 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         } else if (selectedPool.typeURL.contains(Osmosis_Gamm_Poolmodels_Stableswap_V1beta1_Pool.protoMessageName) == true) {
             
         }
-        
-        print("swapRate ", swapRate)
     }
     
     override func enableUserInteraction() {

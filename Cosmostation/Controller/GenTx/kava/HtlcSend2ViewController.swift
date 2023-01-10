@@ -101,8 +101,6 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
             
             minAvailable = self.pageHolderVC.mKavaSwapParam!.getSupportedSwapAssetMin(pageHolderVC.mHtlcDenom!)
             minAvailableAmount.attributedText = WDP.dpAmount(minAvailable.stringValue, minAvailableAmount.font, mDpDecimal, mDpDecimal)
-
-            print("minAvailable ", minAvailable)
         }
     }
     

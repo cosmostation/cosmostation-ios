@@ -31,7 +31,6 @@ class StrideLiquid1ViewController: BaseViewController, QrScannerDelegate, SBCard
         
         recipientAddressinput.placeholder = NSLocalizedString("tx_send_nft_0", comment: "")
         recipientChain = ChainFactory.SUPPRT_CONFIG().filter { pageHolderVC.mChainId!.starts(with: $0.chainIdPrefix) == true }.first
-        print("targetChain ", recipientChain)
         
         recipientAddressTitle.text = NSLocalizedString("str_recipient_address", comment: "")
         btnWallet.setTitle(NSLocalizedString("str_wallet2", comment: ""), for: .normal)

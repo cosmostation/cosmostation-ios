@@ -37,7 +37,6 @@ class HardPoolBorrow0ViewController: BaseViewController, UITextFieldDelegate {
         dpDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == hardPoolDenom }).first?.decimals ?? 6
         availableMax = WUtils.getHardBorrowableAmountByDenom(hardPoolDenom, BaseData.instance.mHardMyDeposit, BaseData.instance.mHardMyBorrow,
                                                              BaseData.instance.mHardModuleCoins, BaseData.instance.mHardReserveCoins)
-        print("availableMax ", availableMax)
         
         WDP.dpSymbol(chainConfig, hardPoolDenom, mCoinLabel)
         WDP.dpCoin(chainConfig, hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel)

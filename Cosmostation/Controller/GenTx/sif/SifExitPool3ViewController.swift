@@ -103,7 +103,6 @@ class SifExitPool3ViewController: BaseViewController, PasswordViewDelegate {
             let myShareAllAmount = NSDecimalNumber.init(string: self.pageHolderVC.mSifMyAllUnitAmount)
             let myShareWithdrawAmount = NSDecimalNumber.init(string: self.pageHolderVC.mSifMyWithdrawUnitAmount)
             basisPoints = myShareWithdrawAmount.multiplying(byPowerOf10: 4).dividing(by: myShareAllAmount, withBehavior: WUtils.handler0).stringValue
-            print("basisPoints ", basisPoints)
             
             let reqTx = Signer.genSignedSifRemoveLpMsgTxgRPC(auth!, self.account!.account_pubkey_type,
                                                              self.account!.account_address,

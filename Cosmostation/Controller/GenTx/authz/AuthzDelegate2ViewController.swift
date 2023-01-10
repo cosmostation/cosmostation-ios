@@ -52,7 +52,6 @@ class AuthzDelegate2ViewController: BaseViewController, UITextFieldDelegate {
         }
         
         granterDelegatable = available.adding(vesting)
-        print("granterDelegatable1 ", granterDelegatable)
         
         if (grant.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
             let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
@@ -63,7 +62,6 @@ class AuthzDelegate2ViewController: BaseViewController, UITextFieldDelegate {
                 }
             }
         }
-        print("granterDelegatable2 ", granterDelegatable)
         WDP.dpCoin(chainConfig, chainConfig!.stakeDenom, granterDelegatable.stringValue, availableDenomLabel, availableAmountLabel)
         
         toDelegateAmountInput.delegate = self
