@@ -175,7 +175,6 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func onFetchMintscanProposl(_ id: String) {
         let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
-//        print("url ", url)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
@@ -212,11 +211,9 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func onFetchCertikMyVote(_ proposal_id: String, _ address: String) {
         let request = Alamofire.request(BaseNetWork.myVoteUrl(self.chainConfig, proposal_id, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-//        print("onFetchCertikProposalMyVote ", request.request?.url)
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                print("res ", res)
                 if let data = res as? NSDictionary, let rawVote = data.object(forKey: "vote") as? NSDictionary {
                     self.mCertikMyVote = CertikVote.init(rawVote)
                 }

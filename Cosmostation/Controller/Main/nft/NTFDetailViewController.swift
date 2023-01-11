@@ -92,7 +92,7 @@ class NTFDetailViewController: BaseViewController, UITableViewDelegate, UITableV
     }
 
     func parallaxHeaderDidScroll(_ parallaxHeader: HPParallaxHeader) {
-//        print("progress \(parallaxHeader.progress)")
+
     }
     
     @IBAction func onClickIBCSend(_ sender: UIButton) {

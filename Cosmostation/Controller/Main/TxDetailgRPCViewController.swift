@@ -495,7 +495,6 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     
     
     func onFetchgRPCTx(_ txHash: String) {
-        print("onFetchgRPCTx ", txHash)
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!

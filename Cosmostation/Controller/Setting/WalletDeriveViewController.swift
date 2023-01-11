@@ -159,7 +159,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func getSeedFormWords() {
-        print("getSeedFormWords ")
         self.showWaittingAlert()
         DispatchQueue.global().async {
             self.mSeed = WKey.getSeedFromWords(self.mWords)
@@ -168,7 +167,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func onGetAllKeyTypes() {
-        print("onGetAllKeyTypes ", mPath)
         if (mPrivateKeyMode) {
             ChainFactory.getAllKeyType().forEach { keyTypes in
                 let chainConfig = ChainFactory.getChainConfig(keyTypes.0)!
@@ -310,7 +308,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func onOverideAccount(_ derive: Derive) {
-//        print("onOverideAccount ", derive.dpAddress)
         let existedAccount = BaseData.instance.selectExistAccount(derive.dpAddress, derive.chaintype)!
         existedAccount.account_path = String(derive.path)
         existedAccount.account_pubkey_type = Int64(derive.hdpathtype)
@@ -341,7 +338,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func onCreateAccount(_ derive: Derive) {
-//        print("onCreateAccount ", derive.dpAddress)
         let newAccount = Account.init(isNew: true)
         newAccount.account_path = String(derive.path)
         newAccount.account_pubkey_type = Int64(derive.hdpathtype)

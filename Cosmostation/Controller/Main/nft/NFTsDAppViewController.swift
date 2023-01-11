@@ -55,8 +55,6 @@ class NFTsDAppViewController: BaseViewController {
     }
     
     func onFetchFinished() {
-        print("onFetchFinished mMyIrisCollections ", self.mMyIrisCollections.count)
-        print("onFetchFinished mMyCroCollections ", self.mMyCroCollections.count)
         NotificationCenter.default.post(name: Notification.Name("NftFetchDone"), object: nil, userInfo: nil)
     }
     

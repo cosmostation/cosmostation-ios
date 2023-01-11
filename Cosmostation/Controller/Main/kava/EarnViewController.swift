@@ -54,7 +54,6 @@ class EarnViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             self.earnTableView.reloadData()
             self.refresher.endRefreshing()
         }
-        print("Earnings ", mEarnDeposits)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -83,7 +82,6 @@ class EarnViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     
     @IBAction func onClickRemoveLiquidity(_ sender: UIButton) {
-        print("onClickRemoveLiquidity")
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mType = TASK_TYPE_KAVA_LIQUIDITY_WITHDRAW
         txVC.mKavaEarnDeposit = mEarnDeposits
@@ -92,7 +90,6 @@ class EarnViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     @IBAction func onClickAddLiquidity(_ sender: UIButton) {
-        print("onClickAddLiquidity")
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mType = TASK_TYPE_KAVA_LIQUIDITY_DEPOSIT
         txVC.mKavaEarnDeposit = mEarnDeposits

@@ -80,7 +80,7 @@ class ProfileViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func parallaxHeaderDidScroll(_ parallaxHeader: HPParallaxHeader) {
-//        print("progress \(parallaxHeader.progress)")
+
     }
     
     @IBAction func onClickEdit(_ sender: UIButton) {

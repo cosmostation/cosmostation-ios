@@ -88,7 +88,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func onShowErrorView(_ code: Int) {
-        print("onShowErrorView")
         var logMsg = ""
         if let errorMsg = mBroadCaseResult?["raw_log"] as? String {
             logMsg = errorMsg;
@@ -387,7 +386,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         } else {
             request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         }
-        print("url ", url)
         request!.responseJSON { (response) in
             switch response.result {
             case .success(let res):

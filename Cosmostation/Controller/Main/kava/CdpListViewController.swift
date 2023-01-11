@@ -69,8 +69,6 @@ class CdpListViewController: BaseViewController, UITableViewDelegate, UITableVie
                     self.mOtherCdps_gRPC.append(collateralParam)
                 }
             })
-//            print("mMyCdps_gRPC ", mMyCdps_gRPC.count)
-//            print("mOtherCdps_gRPC ", mOtherCdps_gRPC.count)
             
             self.cdpTableView.reloadData()
             self.refresher.endRefreshing()
@@ -129,7 +127,6 @@ class CdpListViewController: BaseViewController, UITableViewDelegate, UITableVie
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Cdp_V1beta1_QueryParamsRequest.init()
                 if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("onFetchgRPCCdpParam ", response.params)
                     BaseData.instance.mKavaCdpParams_gRPC = response.params
                 }
                 try channel.close().wait()
@@ -145,7 +142,6 @@ class CdpListViewController: BaseViewController, UITableViewDelegate, UITableVie
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Cdp_V1beta1_QueryCdpsRequest.with { $0.owner = address }
                 if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).cdps(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("onFetchgRPCMyCdps ", response.cdps)
                     self.mMyCdps_gRPC = response.cdps
                 }
                 try channel.close().wait()

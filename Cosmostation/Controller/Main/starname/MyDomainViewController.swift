@@ -95,7 +95,6 @@ class MyDomainViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func onFetchFinished() {
-//        print("onFetchFinished ", self.mFetchCnt)
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt <= 0) {
             self.myDomainCnt.text = String(myDomains_gRPC.count)
@@ -127,14 +126,12 @@ class MyDomainViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func onFetchgRPCMyDomain(_ account: Account) {
-//        print("onFetchgRPCMyDomain ", account.account_address)
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
                 let req = Starnamed_X_Starname_V1beta1_QueryOwnerDomainsRequest.with { $0.owner = account.account_address; $0.pagination = page }
                 if let response = try? Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).ownerDomains(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
-//                    print("onFetchgRPCMyDomain myDomains_gRPC.count ", self.myDomains_gRPC.count)
                     response.domains.forEach { domain in
                         self.myDomains_gRPC.append(domain)
                     }
@@ -155,7 +152,6 @@ class MyDomainViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func onFetchgRPCResolve(_ domain: String) {
-//        print("onFetchgRPCResolve ", domain)
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
