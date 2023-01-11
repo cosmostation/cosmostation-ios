@@ -75,10 +75,6 @@ class CdpDetailMyTopCell: UITableViewCell {
         let liquiPrice = myCdp!.getLiquidationPrice(cDenom, pDenom, collateralParam!)
         let riskRate = NSDecimalNumber.init(string: "100").subtracting(oraclePrice.subtracting(liquiPrice).multiplying(byPowerOf10: 2).dividing(by: oraclePrice, withBehavior: WUtils.handler2Down))
 
-        print("oraclePrice ", oraclePrice)
-        print("liquiPrice ", liquiPrice)
-        print("riskRate ", riskRate)
-
         marketTitle.text = collateralParam!.getDpMarketId()
         marketType.text = collateralParam!.type.uppercased()
         WUtils.showRiskRate(riskRate, riskScore, _rateIamg: riskRateImg)

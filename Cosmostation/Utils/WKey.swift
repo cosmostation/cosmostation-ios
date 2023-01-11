@@ -177,7 +177,6 @@ class WKey {
         if result == errSecSuccess {
             return keyData.hexEncodedString()
         } else {
-            print("Problem generating random bytes")
             return nil
         }
     }

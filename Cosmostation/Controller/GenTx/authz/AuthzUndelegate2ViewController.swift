@@ -76,7 +76,6 @@ class AuthzUndelegate2ViewController: BaseViewController, UITextFieldDelegate {
         if let delegated = pageHolderVC.mGranterData.delegations.filter({ $0.delegation.validatorAddress == selectedValAddress }).first {
             granterUndelegatable = NSDecimalNumber.init(string: delegated.balance.amount)
         }
-        print("granterUndelegatable1 ", granterUndelegatable)
         
         if (grant.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
             let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
@@ -87,7 +86,6 @@ class AuthzUndelegate2ViewController: BaseViewController, UITextFieldDelegate {
                 }
             }
         }
-        print("granterUndelegatable2 ", granterUndelegatable)
         WDP.dpCoin(chainConfig, chainConfig!.stakeDenom, granterUndelegatable.stringValue, availableDenomLabel, availableAmountLabel)
     }
     

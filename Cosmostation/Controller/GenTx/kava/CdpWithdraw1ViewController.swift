@@ -224,10 +224,6 @@ class CdpWithdraw1ViewController: BaseViewController, UITextFieldDelegate, SBCar
 
         afterLiquidationPrice = rawDebtAmount.dividing(by: collateralAmount, withBehavior: WUtils.getDivideHandler(pDpDecimal))
         afterRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(afterLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
-        
-//        print("currentPrice ", currentPrice)
-//        print("afterLiquidationPrice ", afterLiquidationPrice)
-//        print("afterRiskRate ", afterRiskRate)
         return true
     }
 
@@ -287,10 +283,6 @@ class CdpWithdraw1ViewController: BaseViewController, UITextFieldDelegate, SBCar
             cMaxWithdrawableAmount = mKavaMyCdp_gRPC!.getWithdrawableAmount(mCDenom, mPDenom, mCollateralParam!, currentPrice, mSelfDepositAmount)
             cAvailabeMaxLabel.attributedText = WDP.dpAmount(cMaxWithdrawableAmount.stringValue, cAvailabeMaxLabel.font!, cDpDecimal, cDpDecimal)
             
-//            print("currentPrice ", currentPrice)
-//            print("beforeLiquidationPrice ", beforeLiquidationPrice)
-//            print("beforeRiskRate ", beforeRiskRate)
-            
             WDP.dpSymbol(chainConfig, mCDenom, cDenomLabel)
             WDP.dpSymbol(chainConfig, mCDenom, cAvailableDenom)
             WDP.dpSymbolImg(chainConfig, mCDenom, cDenomImg)
@@ -327,7 +319,6 @@ class CdpWithdraw1ViewController: BaseViewController, UITextFieldDelegate, SBCar
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Cdp_V1beta1_QueryCdpRequest.with { $0.owner = address; $0.collateralType = collateralType }
                 if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).cdp(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("onFetchgRPCMyCdp ", response.cdp)
                     self.mKavaMyCdp_gRPC = response.cdp
                 }
                 try channel.close().wait()

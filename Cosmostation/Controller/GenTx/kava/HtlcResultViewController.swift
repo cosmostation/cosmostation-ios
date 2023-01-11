@@ -251,7 +251,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     
     
     func onCheckCreateHtlcSwap() {
-        print("onCheckCreateHtlcSwap")
         if (self.chainType == ChainType.BINANCE_MAIN) {
             self.onCheckCreateHtlcSwapBinance()
         } else {
@@ -260,7 +259,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     func onCheckCreateHtlcSwapBinance() {
-        print("onCheckCreateHtlcSwapBinance")
         let request = Alamofire.request(BaseNetWork.accountInfoUrl(self.chainType, account!.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
@@ -283,7 +281,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     func onCreateHtlcSwapBinance() {
-        print("onCreateHtlcSwapBinance")
         DispatchQueue.global().async {
             var privateKey: Data?
             if (self.account!.account_from_mnemonic == true) {
@@ -389,7 +386,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                                                                self.chainType!)
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
                 DispatchQueue.main.async(execute: {
-                    print("response ", response.txResponse.txhash)
                     self.mSendHash = response.txResponse.txhash
                     DispatchQueue.main.async(execute: {
                         self.onFetchSwapId()
@@ -409,15 +405,12 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     var mSwapFetchCnt = 15
     func onFetchSwapId() {
         onUpdateProgress(1)
-        print("onFetchSwapId ", mSwapFetchCnt)
         let swapId = WKey.getSwapId(self.mHtlcToChain!, self.mHtlcToSendAmount, self.mRandomNumberHash!, self.account!.account_address)
         let url = BaseNetWork.swapIdBep3Url(self.mHtlcToChain, swapId)
-        print("swapId url ", url)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                print("onFetchSwapId ", res)
                 self.mSwapFetchCnt = self.mSwapFetchCnt - 1
                 guard let info = res as? [String : Any], info["error"] == nil else {
                     if (self.mSwapFetchCnt > 0) {
@@ -446,7 +439,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     func onCheckClaimHtlcSwap() {
-        print("onCheckClaimHtlcSwap")
         onUpdateProgress(2)
         if (self.mHtlcToChain == ChainType.BINANCE_MAIN) {
             self.onCheckClaimHtlcSwapBinance()
@@ -456,7 +448,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     func onCheckClaimHtlcSwapBinance() {
-        print("onCheckClaimHtlcSwapBinance")
         let request = Alamofire.request(BaseNetWork.accountInfoUrl(mHtlcToChain, mHtlcToAccount!.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
@@ -481,7 +472,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     func onClaimHtlcSwapBinance() {
-        print("onClaimHtlcSwapBinance")
         DispatchQueue.global().async {
             let group = DispatchGroup()
             var mHtlcToChainId = ""
@@ -501,7 +491,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                 group.leave()
             }
             group.wait()
-            print("mHtlcToChainId ", mHtlcToChainId)
             
             var privateKey: Data?
             if (self.mHtlcToAccount!.account_from_mnemonic == true) {
@@ -552,7 +541,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     func onCheckClaimHtlcSwapKava() {
-        print("onCheckClaimHtlcSwapKava")
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.mHtlcToChain!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
@@ -570,7 +558,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     func onClaimHtlcSwapKava1(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
-        print("onClaimHtlcSwapKava1 NodeInfo")
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.mHtlcToChain!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
@@ -588,7 +575,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     func onClaimHtlcSwapKava2(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?, _ chainId: String) {
-        print("onClaimHtlcSwapKava2")
         DispatchQueue.global().async {
             var privateKey: Data?
             var publicKey: Data?
@@ -618,7 +604,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                                                               chainId)
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
                 DispatchQueue.main.async(execute: {
-                    print("onClaimHtlcSwapKava2 response ", response)
                     self.mClaimHash = response.txResponse.txhash
                     self.onFetchSendTx()
                     self.onFetchClaimTx()
@@ -654,11 +639,9 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                 switch response.result {
                 case .success(let res):
                     guard let info = res as? [String : Any], info["error"] == nil else {
-                        print("onFetchSendTx error")
                         self.onUpdateView(NSLocalizedString("error_network", comment: ""))
                         return
                     }
-                    print("onFetchSendTx OK", res)
                     self.mSendTxInfo = TxInfo.init(info)
                     self.onUpdateView("")
                     
@@ -694,7 +677,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             request.responseJSON { (response) in
                 switch response.result {
                 case .success(let res):
-                    print("onFetchClaimTx OK", res)
                     self.mClaimTxFetchCnt = self.mClaimTxFetchCnt - 1
                     guard let info = res as? [String : Any], info["error"] == nil else {
                         if (self.mClaimTxFetchCnt > 0) {

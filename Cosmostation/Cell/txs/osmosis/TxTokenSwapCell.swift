@@ -31,7 +31,6 @@ class TxTokenSwapCell: TxCell {
         txIcon.tintColor = chainConfig.chainColor
         
         if let msg = try? Osmosis_Gamm_V1beta1_MsgSwapExactAmountIn.init(serializedData: response.tx.body.messages[position].value) {
-            print("Osmosis_Gamm_V1beta1_MsgSwapExactAmountIn")
             txTypeLabel.text = String(Osmosis_Gamm_V1beta1_MsgSwapExactAmountIn.protoMessageName.split(separator: ".").last!)
             
             txSenderLabel.text = msg.sender
@@ -90,7 +89,6 @@ class TxTokenSwapCell: TxCell {
         }
         
         if let msg = try? Osmosis_Gamm_V1beta1_MsgSwapExactAmountOut.init(serializedData: response.tx.body.messages[position].value) {
-            print("Osmosis_Gamm_V1beta1_MsgSwapExactAmountOut")
             txTypeLabel.text = String(Osmosis_Gamm_V1beta1_MsgSwapExactAmountOut.protoMessageName.split(separator: ".").last!)
             
             txSenderLabel.text = msg.sender

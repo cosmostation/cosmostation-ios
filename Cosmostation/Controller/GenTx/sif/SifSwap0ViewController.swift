@@ -72,7 +72,6 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
         WDP.dpSymbol(chainConfig, swapOutDenom, outputCoinName)
         
         swapRate = WUtils.getPoolLpPrice(selectedPool, swapInDenom)
-        print("swapRate ", swapRate)
         
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
@@ -112,7 +111,6 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
         //slippage
         let padding = NSDecimalNumber(string: "0.98")
         let outputAmount = userInput.multiplying(by: padding, withBehavior: WUtils.handler24Down).multiplying(by: swapRate, withBehavior: WUtils.handler24Down)
-        print("outputAmount ", outputAmount)
         
         //lp Fee
         let lpInputAmount = WUtils.getPoolLpAmount(selectedPool, swapInDenom)
@@ -122,7 +120,6 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
         let divider = input.adding(lpInputAmount)
         let denominator = divider.multiplying(by: divider)
         let lpFee = numerator.dividing(by: denominator, withBehavior: WUtils.handler0).multiplying(byPowerOf10: -dpOutPutDecimal, withBehavior: WUtils.handler18)
-        print("lpFee ", lpFee)
         
         
         outputCoinAmountLabel.text = WUtils.decimalNumberToLocaleString(outputAmount.subtracting(lpFee), dpOutPutDecimal)

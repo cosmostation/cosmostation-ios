@@ -41,9 +41,6 @@ class HardPoolRepay0ViewController: BaseViewController, UITextFieldDelegate {
         currentBorrowed = WUtils.getHardBorrowedAmountByDenom(hardPoolDenom, BaseData.instance.mHardMyBorrow).multiplying(by: NSDecimalNumber.init(string: "1.05"), withBehavior: WUtils.handler0 )
         availableMax = currentAvailable.compare(currentBorrowed).rawValue > 0 ? currentBorrowed : currentAvailable
         
-        print("currentAvailable ", currentAvailable)
-        print("currentBorrowed ", currentBorrowed)
-        
         WDP.dpSymbol(chainConfig, hardPoolDenom, mCoinLabel)
         WDP.dpCoin(chainConfig, hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel)
         WDP.dpSymbolImg(chainConfig, hardPoolDenom, mCoinImg)

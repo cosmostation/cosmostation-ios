@@ -38,7 +38,6 @@ class HardPoolWithdraw0ViewController: BaseViewController, UITextFieldDelegate {
         
         let depositedCoin = BaseData.instance.mHardMyDeposit.filter({ $0.denom == hardPoolDenom}).first
         availableMax = NSDecimalNumber.init(string: depositedCoin?.amount)
-        print("availableMax ", availableMax)
         
         WDP.dpSymbol(chainConfig, hardPoolDenom, mCoinLabel)
         WDP.dpCoin(chainConfig, hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel)

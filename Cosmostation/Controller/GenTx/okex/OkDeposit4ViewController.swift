@@ -117,7 +117,6 @@ class OkDeposit4ViewController: BaseViewController, PasswordViewDelegate, SBCard
                     var txResult = [String:Any]()
                     switch response.result {
                     case .success(let res):
-                        print("Deposit ", res)
                         if let result = res as? [String : Any]  {
                             txResult = result
                         }
