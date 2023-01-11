@@ -535,6 +535,26 @@ final class BaseData : NSObject{
         return NSLocalizedString("theme_system", comment: "")
     }
     
+    func setLanguage(_ language : Int) {
+        UserDefaults.standard.set(language, forKey: KEY_LANGUAGE)
+    }
+    
+    func getLanguage() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_LANGUAGE)
+    }
+    
+    func getLanguageType() -> String {
+        if (getLanguage() == 1) {
+            return "English(United States)"
+        } else if (getLanguage() == 2) {
+            return "한국어(대한민국)"
+        } else if (getLanguage() == 3) {
+            return "日本語(日本)"
+        }
+        return "System"
+    }
+    
+    
     func setCurrency(_ currency : Int) {
         UserDefaults.standard.set(currency, forKey: KEY_CURRENCY)
     }

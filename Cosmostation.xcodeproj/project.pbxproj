@@ -3759,6 +3759,8 @@
 		18FFB7D5281AF533004E65BB /* CosmostationDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CosmostationDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18FFB7D9281E9C9F004E65BB /* CosmostationDev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CosmostationDev.plist; sourceTree = "<group>"; };
 		23DC1186B7119D1B4D2EB379 /* Pods-Cosmostation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.release.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.release.xcconfig"; sourceTree = "<group>"; };
+		25F8C72F296D0D0B0008CCC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		25F8C730296D31200008CCC8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2802B4AB28250A9300B2D9E8 /* DeriveWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeriveWalletCell.swift; sourceTree = "<group>"; };
 		2802B4AC28250A9300B2D9E8 /* DeriveWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeriveWalletCell.xib; sourceTree = "<group>"; };
 		280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameWalletConnectViewController.swift; sourceTree = "<group>"; };
@@ -6381,6 +6383,7 @@
 				en,
 				Base,
 				ko,
+				ja,
 			);
 			mainGroup = E1945E1B222E7C0600A1436F;
 			packageReferences = (
@@ -9462,6 +9465,8 @@
 			children = (
 				E1271B03224B17230083AF17 /* Base */,
 				E1F2AE4B227E865D00C87F3F /* ko */,
+				25F8C72F296D0D0B0008CCC8 /* en */,
+				25F8C730296D31200008CCC8 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

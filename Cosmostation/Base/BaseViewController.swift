@@ -30,6 +30,17 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = BaseData.instance.getThemeType()
+        let lang = BaseData.instance.getLanguage()
+        if (lang == 1) {
+            Bundle.setLanguage("en")
+        } else if (lang == 2) {
+            Bundle.setLanguage("ko")
+        } else if (lang == 3) {
+            Bundle.setLanguage("ja")
+        } else {
+            let lang = Locale.preferredLanguages.first!
+            Bundle.setLanguage(lang)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

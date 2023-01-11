@@ -46,6 +46,7 @@
 "str_import_address" = "관찰 주소 등록";
 "str_manage_connection" = "지갑 연결 관리";
 "str_theme" = "테마";
+"str_language" = "언어";
 "str_notification" = "알림";
 "str_applock" = "앱 잠금";
 "str_autopass" = "핀코드 자동통과";

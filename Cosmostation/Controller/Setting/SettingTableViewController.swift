@@ -17,7 +17,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     let CHECK_NONE:Int = -1
     let CHECK_FOR_APP_LOCK:Int = 1
     let CHECK_FOR_AUTO_PASS:Int = 2
-
+    
     var mAccount: Account!
     var chainType: ChainType!
     var chainConfig: ChainConfig!
@@ -25,6 +25,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var currecyLabel: UILabel!
     @IBOutlet weak var themeLabel: UILabel!
+    @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var appLockSwitch: UISwitch!
     @IBOutlet weak var bioTypeLabel: UILabel!
     @IBOutlet weak var bioSwitch: UISwitch!
@@ -43,6 +44,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var manageConnectionTitle: UILabel!
     
     @IBOutlet weak var themeTitle: UILabel!
+    @IBOutlet weak var languageTitle: UILabel!
     @IBOutlet weak var notificationTitle: UILabel!
     @IBOutlet weak var applockTitle: UILabel!
     @IBOutlet weak var autopassTitle: UILabel!
@@ -74,6 +76,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             self.versionLabel.text = "v " + appVersion
         }
         self.onUpdateTheme()
+        self.onUpdateLanguage()
         self.onUpdateAutoPass()
         self.onUpdateCurrency()
         self.onUpdatePriceChangeColor()
@@ -85,6 +88,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         importWatchTitle.text = NSLocalizedString("str_import_address", comment: "")
         manageConnectionTitle.text = NSLocalizedString("str_manage_connection", comment: "")
         themeTitle.text = NSLocalizedString("str_theme", comment: "")
+        languageTitle.text = NSLocalizedString("str_language", comment: "")
         notificationTitle.text = NSLocalizedString("str_notification", comment: "")
         applockTitle.text = NSLocalizedString("str_applock", comment: "")
         autopassTitle.text = NSLocalizedString("str_autopass", comment: "")
@@ -105,15 +109,15 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.explorerLabel.text = NSLocalizedString("mintscan_explorer", comment: "")
-
+        
         let laContext = LAContext()
         let biometricsPolicy = LAPolicy.deviceOwnerAuthenticationWithBiometrics
         var error: NSError?
-
+        
         appLockSwitch.setOn(BaseData.instance.getUsingAppLock(), animated: false)
         bioSwitch.setOn(BaseData.instance.getUsingBioAuth(), animated: false)
         enginerModeSwitch.setOn(BaseData.instance.getUsingEnginerMode(), animated: false)
-
+        
         if (laContext.canEvaluatePolicy(biometricsPolicy, error: &error)) {
             if error != nil { return }
             switch laContext.biometryType {
@@ -184,13 +188,16 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             if (indexPath.row == 0) {
                 self.onShowThemeDialog()
                 
-            } else if (indexPath.row == 4) {
-                self.onClickAutoPass()
+            } else if (indexPath.row == 1) {
+                self.onShowLanguageDialog()
                 
             } else if (indexPath.row == 5) {
-                self.onShowCurrenyDialog()
+                self.onClickAutoPass()
                 
             } else if (indexPath.row == 6) {
+                self.onShowCurrenyDialog()
+                
+            } else if (indexPath.row == 7) {
                 let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
                 popupVC.type = SELECT_POPUP_PRICE_COLOR
                 let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
@@ -202,18 +209,18 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             if (indexPath.row == 0) {
                 guard let url = URL(string: chainConfig.explorerUrl) else { return }
                 self.onShowSafariWeb(url)
-            
+                
             } else if (indexPath.row == 1) {
                 self.onShowNotice()
-            
+                
             } else if (indexPath.row == 2) {
                 guard let url = URL(string: "https://www.cosmostation.io") else { return }
                 self.onShowSafariWeb(url)
-            
+                
             } else if (indexPath.row == 3) {
                 guard let url = URL(string: "https://medium.com/cosmostation") else { return }
                 self.onShowSafariWeb(url)
-            
+                
             } else if(indexPath.row == 4) {
                 let url = URL(string: "tg://resolve?domain=cosmostation")
                 if(UIApplication.shared.canOpenURL(url!)) {
@@ -238,7 +245,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             } else if(indexPath.row == 5) {
                 self.onShowStarnameWcDialog()
             }
-        
+            
         } else if (indexPath.section == 3) {
             if(indexPath.row == 0) {
                 if(Locale.current.languageCode == "ko") {
@@ -265,6 +272,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     
     func onUpdateTheme() {
         themeLabel.text = BaseData.instance.getThemeString()
+    }
+    
+    func onUpdateLanguage() {
+        languageLabel.text = BaseData.instance.getLanguageType()
     }
     
     func onUpdateAutoPass() {
@@ -323,7 +334,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
             passwordVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(passwordVC, animated: false)
-
+            
         } else {
             self.checkMode = self.CHECK_FOR_AUTO_PASS
             let passwordVC = UIStoryboard.passwordViewController(delegate: self, target: PASSWORD_ACTION_INIT)
@@ -460,11 +471,11 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             BaseData.instance.setCurrency(value)
             self.onUpdateCurrency()
             let request = Alamofire.request(BaseNetWork.getPrices(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-//            print("getPrices ", request.request?.url)
+            //print("getPrices ", request.request?.url)
             request.responseJSON { (response) in
                 switch response.result {
                 case .success(let res):
-//                    print("getPrices ", res)
+                    //print("getPrices ", res)
                     BaseData.instance.mPrices.removeAll()
                     if let priceInfos = res as? Array<NSDictionary> {
                         priceInfos.forEach { priceInfo in
@@ -473,7 +484,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                         BaseData.instance.setLastPriceTime()
                     }
                     NotificationCenter.default.post(name: Notification.Name("onFetchPrice"), object: nil, userInfo: nil)
-                
+                    
                 case .failure(let error):
                     print("onFetchPriceInfo ", error)
                 }
@@ -512,6 +523,56 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             appDelegate.window?.rootViewController = mainTabVC
             self.present(mainTabVC, animated: true, completion: nil)
         }
+    }
+    
+    func onShowLanguageDialog() {
+        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        showAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
+        let systemAction = UIAlertAction(title: "System", style: .default, handler: { _ in
+            self.onSetLanguage(0)
+        })
+        let englishAction = UIAlertAction(title: "English(United States)", style: .default, handler: { _ in
+            self.onSetLanguage(1)
+        })
+        let koreanAction = UIAlertAction(title: "한국어(대한민국)", style: .default, handler: { _ in
+            self.onSetLanguage(2)
+        })
+        let japaneseAction = UIAlertAction(title: "日本語(日本)", style: .default, handler: { _ in
+            self.onSetLanguage(3)
+        })
+                
+        showAlert.addAction(systemAction)
+        showAlert.addAction(englishAction)
+        showAlert.addAction(koreanAction)
+        showAlert.addAction(japaneseAction)
+        
+        self.present(showAlert, animated: true) {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+            showAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    func onSetLanguage(_ value:Int) {
+        if (value == 1) {
+            Bundle.setLanguage("en")
+            
+        } else if (value == 2) {
+            Bundle.setLanguage("ko")
+            
+        } else if (value == 3) {
+            Bundle.setLanguage("ja")
+            
+        } else {
+            let lang = Locale.preferredLanguages.first!
+            Bundle.setLanguage(lang)
+        }
+        
+        BaseData.instance.setLanguage(value)
+        
+        let mainTabVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainTabViewController") as! MainTabViewController
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = mainTabVC
+        self.present(mainTabVC, animated: true, completion: nil)
     }
     
     @IBAction func appLockToggle(_ sender: UISwitch) {

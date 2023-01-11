@@ -37,6 +37,7 @@ let KEY_PRE_EVENT_HIDE                  = "KEY_PRE_EVENT_HIDE"
 let KEY_CUSTOM_ICON                     = "KEY_CUSTOM_ICON"
 let KEY_DB_VERSION                      = "KEY_DB_VERSION"
 let KEY_WC_WHITELIST                    = "KEY_WC_WHITELIST"
+let KEY_LANGUAGE                        = "KEY_LANGUAGE"
 
 let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
 let CSS_URL                             = "https://api-wallet.cosmostation.io/";
