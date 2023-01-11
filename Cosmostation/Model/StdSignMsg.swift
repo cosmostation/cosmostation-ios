@@ -33,23 +33,6 @@ public struct StdSignMsg: Codable{
         self.memo = dictionary["memo"] as? String ?? ""
     }
     
-    //for trust wallet paring
-    init(trustv dictionary: NSDictionary?) {
-        self.chain_id = dictionary?["chainId"] as? String ?? ""
-        self.account_number = dictionary?["accountNumber"] as? String ?? ""
-        self.sequence = dictionary?["sequence"] as? String ?? ""
-        self.fee = Fee.init(dictionary?["fee"] as! [String : Any])
-        
-        self.msgs.removeAll()
-        let rawMsgs = dictionary?["messages"] as! Array<NSDictionary>
-        for rawMsg in rawMsgs {
-            let rawjsonmessage = rawMsg["rawJsonMessage"] as? NSDictionary
-            self.msgs.append(Msg.init(trustv: rawjsonmessage))
-            
-        }
-        self.memo = dictionary?["memo"] as? String ?? ""
-    }
-    
     
     func getToSignHash() -> Data {
         let encoder = JSONEncoder()
