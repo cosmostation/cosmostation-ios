@@ -169,21 +169,6 @@ class MsgGenerator {
         return stdTx
     }
     
-    static func genTrustSignedTx(_ msgs: Array<Msg>, _ fee: Fee, _ memo: String, _ signatures: Array<TrustSignature>) -> TrustStdTx {
-        let stdTx = TrustStdTx.init()
-        let value = TrustStdTx.Value.init()
-        
-        value.msg = msgs
-        value.fee = fee
-        value.signatures = signatures
-        value.memo = memo
-        
-        stdTx.type = COSMOS_AUTH_TYPE_STDTX
-        stdTx.value = value
-        
-        return stdTx
-    }
-    
     static func getToSignMsg(_ chain: String, _ accountNum: String, _ sequenceNum: String, _ msgs: Array<Msg>, _ fee: Fee, _ memo: String) -> StdSignMsg {
         var stdSignedMsg = StdSignMsg.init()
         
@@ -199,10 +184,8 @@ class MsgGenerator {
     
     static func stdMsgEncoding(_ stdMsg: StdSignMsg) -> Data {
         let encoder = JSONEncoder()
-        encoder.outputFormatting = .sortedKeys
-        let encoded = try? encoder.encode(stdMsg)
-        let rawResult = String(data:encoded!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
-        return rawResult!.data(using: .utf8)!
+        encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+        return try! encoder.encode(stdMsg)
     }
     
     static func genSecp256k1Signature(_ toSignData: Data, _ priKey: Data, _ pubKey: Data, _ accNum: String, _ seqNum: String) -> [Signature] {
@@ -242,7 +225,7 @@ class MsgGenerator {
         
         let postTx = PostTx.init("sync", stdTx.value)
         let encoder = JSONEncoder()
-        encoder.outputFormatting = .sortedKeys
+        encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
         if let data = try? encoder.encode(postTx) {
             return data
         } else {
