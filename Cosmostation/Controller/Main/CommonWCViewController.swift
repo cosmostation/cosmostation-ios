@@ -788,9 +788,8 @@ class CommonWCViewController: BaseViewController {
     
     func approveCosmosRequest() {
         let json = try? JSON(data: wcCosmosRequest!)
-        let sortedJsonData = try? json!.rawData(options: .sortedKeys)
-        let rawOrderdDoc = String(data:sortedJsonData!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
-        let rawOrderdDocSha = rawOrderdDoc!.data(using: .utf8)!.sha256()
+        let sortedJsonData = try? json!.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
+        let rawOrderdDocSha = sortedJsonData!.sha256()
         
         getKeyAsync(chainName: self.wcRequestChainName! ) { tuple in
             if let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey) {
@@ -839,9 +838,8 @@ class CommonWCViewController: BaseViewController {
         if let request = wcV2Request,
            let json = try? JSON(data: request.params.encoded) {
             let signDoc = json["signDoc"]
-            let sortedJsonData = try? signDoc.rawData(options: .sortedKeys)
-            let rawOrderdDoc = String(data:sortedJsonData!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
-            let rawOrderdDocSha = rawOrderdDoc!.data(using: .utf8)!.sha256()
+            let sortedJsonData = try? signDoc.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
+            let rawOrderdDocSha = sortedJsonData!.sha256()
             let chainId = signDoc["chain_id"].rawString()
             getKeyAsync(chainName: WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId)) ) { tuple in
                 if  let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey) {

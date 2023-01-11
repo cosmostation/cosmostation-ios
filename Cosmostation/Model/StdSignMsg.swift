@@ -36,9 +36,7 @@ public struct StdSignMsg: Codable{
     
     func getToSignHash() -> Data {
         let encoder = JSONEncoder()
-        encoder.outputFormatting = .sortedKeys
-        let data = try? encoder.encode(self)
-        let rawResult = String(data:data!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
-        return rawResult!.data(using: .utf8)!.sha256()
+        encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+        return try! encoder.encode(self)
     }
 }
