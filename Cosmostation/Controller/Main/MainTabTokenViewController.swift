@@ -134,11 +134,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         else if (section == SECTION_ETC && mEtc.count > 0) { return 30 }
         
         else if (section == SECTION_TOKEN_GRPC && mToken_gRPC.count > 0) {
-            guard let path = chainConfig?.getHdPath(Int(account!.account_pubkey_type), Int(account!.account_path)!) else { return 0 }
-            if (path.contains("60")) {
-                return 30
-            }
-            return 0
+            if (chainType == .OKEX_MAIN) {
+                if (account!.account_has_private && account?.account_pubkey_type == 2) { return 30 }
+                else { return 0 }
+            } else { return 30 }
         }
         else { return 0 }
     }
@@ -170,14 +169,11 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         
         else if (section == SECTION_NATIVE) { return mNative.count }
         else if (section == SECTION_ETC) { return mEtc.count }
-        else if (section == SECTION_TOKEN_GRPC) {
-            if (mToken_gRPC.count > 0) {
-                guard let path = chainConfig?.getHdPath(Int(account!.account_pubkey_type), Int(account!.account_path)!) else { return 0 }
-                if (path.contains("60")) {
-                    return mToken_gRPC.count + 1
-                }
-            }
-            return 0
+        else if (section == SECTION_TOKEN_GRPC && mToken_gRPC.count > 0) {
+            if (chainType == .OKEX_MAIN) {
+                if (account!.account_has_private && account?.account_pubkey_type == 2) { return mToken_gRPC.count + 1 }
+                else { return 0 }
+            } else { return mToken_gRPC.count + 1 }
         }
         else { return 0 }
     }
