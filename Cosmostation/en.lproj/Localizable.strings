@@ -39,7 +39,7 @@
 "str_wallet" = "Wallet";
 "str_general" = "General";
 "str_support" = "Support";
-"str_about_app" = "About App";
+"str_app_info" = "App Info";
 "str_manage_wallet" = "Manage Wallet";
 "str_manage_mnemonic" = "Manage Mnemonic / Add Wallet";
 "str_import_privatekey" = "Import PrivateKey";

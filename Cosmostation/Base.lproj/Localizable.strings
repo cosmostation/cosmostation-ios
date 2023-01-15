@@ -36,10 +36,10 @@
 "str_compounding" = "Compounding";
 "str_claim_reward_all" = "Claim All Rewards";
 "str_one_click" = "One Click";
-"str_wallet" = "WALLET";
-"str_general" = "GENERAL";
-"str_support" = "SUPPORT";
-"str_about_app" = "ABOUT APP";
+"str_wallet" = "Wallet";
+"str_general" = "General";
+"str_support" = "Support";
+"str_app_info" = "App Info";
 "str_manage_wallet" = "Manage Wallet";
 "str_manage_mnemonic" = "Manage Mnemonic / Add Wallet";
 "str_import_privatekey" = "Import PrivateKey";

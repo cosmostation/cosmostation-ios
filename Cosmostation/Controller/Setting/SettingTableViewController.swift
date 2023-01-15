@@ -139,7 +139,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         } else if (section == 2) {
             return NSLocalizedString("str_support", comment: "")
         } else if (section == 3) {
-            return NSLocalizedString("str_about_app", comment: "")
+            return NSLocalizedString("str_app_info", comment: "")
         }
         return ""
     }
@@ -553,20 +553,9 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     }
     
     func onSetLanguage(_ value:Int) {
-        if (value == 1) {
-            Bundle.setLanguage("en")
-            
-        } else if (value == 2) {
-            Bundle.setLanguage("ko")
-            
-        } else if (value == 3) {
-            Bundle.setLanguage("ja")
-            
-        } else {
-            let lang = Locale.preferredLanguages.first!
-            Bundle.setLanguage(lang)
+        if let lang = BaseData.Language(rawValue: value) {
+            Bundle.setLanguage(lang.description)
         }
-        
         BaseData.instance.setLanguage(value)
         
         let mainTabVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainTabViewController") as! MainTabViewController

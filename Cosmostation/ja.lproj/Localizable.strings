@@ -453,7 +453,7 @@
 "sort_by_reward" = "私の利子数量で整列";
 "sort_by_value" = "値別";
 "sort_by_yield" = "利子で整列";
-"str_about_app" = "アプリ情報";
+"str_app_info" = "アプリ情報";
 "str_add_wallet" = "ウォレット追加";
 "str_address" = "アドレス";
 "str_address" = "アドレス";

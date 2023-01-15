@@ -535,6 +535,22 @@ final class BaseData : NSObject{
         return NSLocalizedString("theme_system", comment: "")
     }
     
+    enum Language: Int, CustomStringConvertible {
+      case System = 0
+      case English = 1
+      case Korean = 2
+      case Japanese = 3
+        
+      var description: String {
+         switch self {
+         case .System: return Locale.preferredLanguages.first ?? ""
+         case .English: return "en"
+         case .Korean: return "ko"
+         case .Japanese: return "ja"
+        }
+      }
+    }
+    
     func setLanguage(_ language : Int) {
         UserDefaults.standard.set(language, forKey: KEY_LANGUAGE)
     }
@@ -544,16 +560,16 @@ final class BaseData : NSObject{
     }
     
     func getLanguageType() -> String {
-        if (getLanguage() == 1) {
+        let lang = getLanguage()
+        if(lang == 1) {
             return "English(United States)"
-        } else if (getLanguage() == 2) {
-            return "한국어(대한민국)"
-        } else if (getLanguage() == 3) {
+        } else if(lang == 2) {
+            return "한국어(대한민국"
+        } else if(lang == 3) {
             return "日本語(日本)"
         }
         return "System"
     }
-    
     
     func setCurrency(_ currency : Int) {
         UserDefaults.standard.set(currency, forKey: KEY_CURRENCY)
