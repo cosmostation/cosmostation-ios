@@ -78,8 +78,6 @@ class AuthzDelegate1ViewController: BaseViewController, UITableViewDelegate, UIT
                 if (mine) { myValidators.append(validator) }
                 else { otherValidators.append(validator) }
             }
-            print("myValidators ", myValidators.count)
-            print("otherValidators ", otherValidators.count)
             
         } else if (grant.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
             let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
@@ -116,8 +114,6 @@ class AuthzDelegate1ViewController: BaseViewController, UITableViewDelegate, UIT
                 if (mine) { myValidators.append(validator) }
                 else { otherValidators.append(validator) }
             }
-            print("filtered myValidators ", myValidators.count)
-            print("filtered otherValidators ", otherValidators.count)
         }
         validatorsTableView.reloadData()
     }

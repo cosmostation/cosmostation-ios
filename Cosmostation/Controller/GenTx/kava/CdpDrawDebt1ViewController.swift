@@ -236,10 +236,6 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
         let rawDebtAmount = sumPAmount.multiplying(by: mCollateralParam!.getLiquidationRatioAmount()).multiplying(byPowerOf10: -pDpDecimal)
         afterLiquidationPrice = rawDebtAmount.dividing(by: collateralAmount, withBehavior: WUtils.getDivideHandler(pDpDecimal))
         afterRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(afterLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
-        
-//        print("currentPrice ", currentPrice)
-//        print("afterLiquidationPrice ", afterLiquidationPrice)
-//        print("afterRiskRate ", afterRiskRate)
         return true
     }
     
@@ -310,10 +306,6 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
             beforeRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(beforeLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
             WUtils.showRiskRate2(beforeRiskRate, beforeSafeRate, beforeSafeTxt)
             
-//            print("currentPrice ", currentPrice)
-//            print("beforeLiquidationPrice ", beforeLiquidationPrice)
-//            print("beforeRiskRate ", beforeRiskRate)
-            
             WDP.dpSymbol(chainConfig, mPDenom, pDenomLabel)
             WDP.dpSymbol(chainConfig, mPDenom, pAvailableDenom)
             WDP.dpSymbolImg(chainConfig, mPDenom, pDenomImg)
@@ -349,7 +341,6 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Cdp_V1beta1_QueryCdpRequest.with { $0.owner = address; $0.collateralType = collateralType }
                 if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).cdp(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    //                    print("onFetchgRPCMyCdp ", response.cdp)
                     self.mKavaMyCdp_gRPC = response.cdp
                 }
                 try channel.close().wait()
@@ -374,7 +365,6 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
                 if let selfDeposit = cdpDeposits.result?.filter({ $0.depositor == self.account?.account_address}).first {
                     self.mSelfDepositAmount = NSDecimalNumber.init(string: selfDeposit.amount?.amount)
                 }
-//                print("mSelfDepositAmount ", self.mSelfDepositAmount)
                 
             case .failure(let error):
                 print("onFetchCdpDeposit ", error)

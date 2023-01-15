@@ -44,7 +44,6 @@ class DeriveWalletCell: UITableViewCell {
         }
         addressLabel.text = derive.dpAddress
         
-//        print("derive.coin ", derive.coin)
         if let coin = derive.coin {
             WDP.dpCoin(chainConfig, coin, denomLabel, amountLabel)
         } else {

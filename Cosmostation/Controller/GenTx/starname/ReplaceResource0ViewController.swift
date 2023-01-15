@@ -37,7 +37,6 @@ class ReplaceResource0ViewController: BaseViewController, UITableViewDelegate, U
     }
     
     func onInitData() {
-//        print("pageHolderVC.mStarnameResources_gRPC ", pageHolderVC.mStarnameResources_gRPC.count)
         if (pageHolderVC.mStarnameResources_gRPC.count == 0) {
             let initResource = Starnamed_X_Starname_V1beta1_Resource.with { $0.uri = STARNAME; $0.resource = self.account!.account_address }
             pageHolderVC.mStarnameResources_gRPC.append(initResource)
@@ -103,7 +102,6 @@ class ReplaceResource0ViewController: BaseViewController, UITableViewDelegate, U
     }
     
     func chainSelectedCallback(_ chain: String) {
-//        print("chainSelected ", chain)
         let replaceEditVC = ReplaceEditAddressViewController(nibName: "ReplaceEditAddressViewController", bundle: nil)
         replaceEditVC.modalPresentationStyle = .popover
         replaceEditVC.chainNameResource = chain
@@ -112,7 +110,6 @@ class ReplaceResource0ViewController: BaseViewController, UITableViewDelegate, U
     }
     
     func addressEditedCallback(_ chain: String, _ address: String) {
-//        print("addressEdited ", chain, "  ", address)
         var already = -1
         for i in 0..<self.pageHolderVC.mStarnameResources_gRPC.count {
             if (self.pageHolderVC.mStarnameResources_gRPC[i].uri == chain) {

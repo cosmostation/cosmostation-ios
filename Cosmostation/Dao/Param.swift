@@ -124,10 +124,6 @@ public struct Param {
         let calTax = NSDecimalNumber.one.subtracting(getTax())
         if (getMainSupply() == NSDecimalNumber.zero) { return NSDecimalNumber.zero}
         let bondingRate = getBondedAmount().dividing(by: getMainSupply(), withBehavior: WUtils.handler6)
-//        print("inflation ", inflation)
-//        print("calTax ", calTax)
-//        print("getMainSupply ", getMainSupply())
-//        print("getBondedAmount ", getBondedAmount())
         if (bondingRate == NSDecimalNumber.zero) { return NSDecimalNumber.zero}
         if (chain == .OSMOSIS_MAIN || chain == .STRIDE_MAIN) {
             let stakingDistribution = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.distribution_proportions?.staking)

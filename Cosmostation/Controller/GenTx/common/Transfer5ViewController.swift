@@ -231,7 +231,6 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             case .failure(let error):
                 self.hideWaittingAlert()
                 self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                print("onFetchAccountInfo ", error)
             }
         }
     }
@@ -254,12 +253,10 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                     var txResult = [String:Any]()
                     switch response.result {
                     case .success(let res):
-                        print("Send ", res)
                         if let result = res as? [String : Any]  {
                             txResult = result
                         }
                     case .failure(let error):
-                        print("send error ", error)
                         if (response.response?.statusCode == 500) {
                             txResult["net_error"] = 500
                         }
@@ -296,7 +293,6 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                         var txResult = [String:Any]()
                         switch response.result {
                         case .success(let res):
-                            print("res ", res)
                             if let result = res as? Array<NSDictionary> {
                                 txResult["hash"] = result[0].object(forKey:"hash")
                             }

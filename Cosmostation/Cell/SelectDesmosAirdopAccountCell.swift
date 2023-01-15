@@ -26,11 +26,9 @@ class SelectDesmosAirdopAccountCell: UITableViewCell {
         self.accountAddress.text = account.account_address
         
         let request = Alamofire.request(BaseNetWork.desmosClaimableCheck(account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        print("url ", BaseNetWork.desmosClaimableCheck(account.account_address))
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                print("desmosClaimablecheck ", res)
                 if let responseData = res as? NSDictionary {
                     let desmosAirDrops = DesmosAirDrops.init(responseData)
                     self.airdropBalance.text = desmosAirDrops.getUnclaimedAirdropAmount().stringValue

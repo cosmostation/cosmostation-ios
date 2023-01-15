@@ -691,25 +691,72 @@ class CommonWCViewController: BaseViewController {
         }
     }
     
+    func getTrustSignDic(_ input: NSDictionary) -> NSDictionary {
+        var result = NSMutableDictionary()
+        result.setValue(input.value(forKey: "chainId"), forKey: "chain_id")
+        result.setValue(input.value(forKey: "accountNumber"), forKey: "account_number")
+        result.setValue(input.value(forKey: "sequence"), forKey: "sequence")
+        result.setValue(input.value(forKey: "memo"), forKey: "memo")
+        
+        //support Custom Msgs
+        var msgs = Array<NSDictionary>()
+        if let rawMsgs = input["messages"] as? Array<NSDictionary> {
+            for rawMsg in rawMsgs {
+                if let rawjsonmessage = rawMsg["rawJsonMessage"] as? NSDictionary {
+                    let type = rawjsonmessage.value(forKey: "type") as? String
+                    let stringValue = rawjsonmessage.value(forKey: "value") as? String
+                    if let value = try? JSONSerialization.jsonObject(with: stringValue!.data(using: .utf8)!, options : .allowFragments) as? [String:Any] {
+                        let msg = NSMutableDictionary()
+                        msg.setValue(type, forKey: "type")
+                        msg.setValue(value, forKey: "value")
+                        msgs.append(msg)
+                    }
+                }
+            }
+        }
+        result.setValue(msgs, forKey: "msgs")
+        
+        //support legacy fee
+        var fee = NSMutableDictionary()
+        if let rawFee = input["fee"] as? NSDictionary {
+            fee.setValue(rawFee.value(forKey: "gas"), forKey: "gas")
+            if let rawAmounts = rawFee.value(forKey: "amounts") as? Array<NSDictionary> {
+                fee.setValue(rawAmounts, forKey: "amount")
+            }
+            if let rawAmount = rawFee.value(forKey: "amount") as? Array<NSDictionary> {
+                fee.setValue(rawAmount, forKey: "amount")
+            }
+        }
+        result.setValue(fee, forKey: "fee")
+        
+        return result
+    }
+    
     func signTrust(_ keyTuple: KeyTuple) {
-        let stdMsg: StdSignMsg = StdSignMsg.init(trustv: self.wcTrustRequest!)
-        if let signature = try? ECDSA.compactsign(stdMsg.getToSignHash(), privateKey: keyTuple.privateKey) {
-            var genedSignature = TrustSignature.init()
-            var genPubkey =  PublicKey.init()
-            genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
-            genPubkey.value = keyTuple.publicKey.base64EncodedString()
-            genedSignature.pub_key = genPubkey
-            genedSignature.signature = signature.base64EncodedString()
+        let trustSignDic = getTrustSignDic(self.wcTrustRequest!)
+        let jsonData = try! JSONSerialization.data(withJSONObject: trustSignDic, options: [.sortedKeys, .withoutEscapingSlashes])
+        
+        if let signature = try? ECDSA.compactsign(jsonData.sha256(), privateKey: keyTuple.privateKey) {
+            let publicKey = NSMutableDictionary()
+            publicKey.setValue(COSMOS_KEY_TYPE_PUBLIC, forKey: "type")
+            publicKey.setValue(keyTuple.publicKey.base64EncodedString(), forKey: "value")
             
-            var signatures: Array<TrustSignature> = Array<TrustSignature>()
-            signatures.append(genedSignature)
+            let genedSignature = NSMutableDictionary()
+            genedSignature.setValue(publicKey, forKey: "pub_key")
+            genedSignature.setValue(signature.base64EncodedString(), forKey: "signature")
             
-            let stdTx = MsgGenerator.genTrustSignedTx([], stdMsg.fee, stdMsg.memo, signatures)
-            let postTx = TrustPostTx.init("block", stdTx.value)
+            let trustSignedTxValue = NSMutableDictionary()
+            trustSignedTxValue.setValue([genedSignature], forKey: "signatures")
+            trustSignedTxValue.setValue([], forKey: "msg")
+            trustSignedTxValue.setValue(trustSignDic.value(forKey: "fee"), forKey: "fee")
+            trustSignedTxValue.setValue(trustSignDic.value(forKey: "memo"), forKey: "memo")
             
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .sortedKeys
-            let data = try? encoder.encode(postTx)
+            let trustPostTx = NSMutableDictionary()
+            trustPostTx.setValue("block", forKey: "mode")
+            trustPostTx.setValue(trustSignedTxValue, forKey: "tx")
+            
+            let data = try? JSONSerialization.data(withJSONObject: trustPostTx, options: [.sortedKeys, .withoutEscapingSlashes])
+            
             self.interactor?.approveRequest(id: self.wcId!, result: String(data: data!, encoding: .utf8)!).done({ _ in
                 self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
             }).cauterize()
@@ -741,9 +788,8 @@ class CommonWCViewController: BaseViewController {
     
     func approveCosmosRequest() {
         let json = try? JSON(data: wcCosmosRequest!)
-        let sortedJsonData = try? json!.rawData(options: .sortedKeys)
-        let rawOrderdDoc = String(data:sortedJsonData!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
-        let rawOrderdDocSha = rawOrderdDoc!.data(using: .utf8)!.sha256()
+        let sortedJsonData = try? json!.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
+        let rawOrderdDocSha = sortedJsonData!.sha256()
         
         getKeyAsync(chainName: self.wcRequestChainName! ) { tuple in
             if let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey) {
@@ -792,9 +838,8 @@ class CommonWCViewController: BaseViewController {
         if let request = wcV2Request,
            let json = try? JSON(data: request.params.encoded) {
             let signDoc = json["signDoc"]
-            let sortedJsonData = try? signDoc.rawData(options: .sortedKeys)
-            let rawOrderdDoc = String(data:sortedJsonData!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
-            let rawOrderdDocSha = rawOrderdDoc!.data(using: .utf8)!.sha256()
+            let sortedJsonData = try? signDoc.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
+            let rawOrderdDocSha = sortedJsonData!.sha256()
             let chainId = signDoc["chain_id"].rawString()
             getKeyAsync(chainName: WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId)) ) { tuple in
                 if  let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey) {

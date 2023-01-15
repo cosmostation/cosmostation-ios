@@ -76,11 +76,6 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
         mCollateralParam = mKavaCdpParams_gRPC?.getCollateralParamByType(mCollateralParamType)
         mMarketID = mCollateralParam!.liquidationMarketID
         
-//        print("mCollateralParamType ", mCollateralParamType)
-//        print("mKavaCdpParams_gRPC ", mKavaCdpParams_gRPC)
-//        print("mCollateralParam ", mCollateralParam)
-//        print("mMarketID ", mMarketID)
-        
         self.loadingImg.onStartAnimation()
         self.onFetchCdpData()
         
@@ -412,12 +407,6 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
         let rawDebtAmount = toPAmount.multiplying(by: mCollateralParam!.getLiquidationRatioAmount()).multiplying(byPowerOf10: -pDpDecimal)
         liquidationPrice = rawDebtAmount.dividing(by: collateralAmount, withBehavior: WUtils.getDivideHandler(pDpDecimal))
         riskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(liquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
-        
-        print("toPAmount ", toPAmount)
-        print("collateralAmount ", collateralAmount)
-        print("rawDebtAmount ", rawDebtAmount)
-        print("liquidationPrice ", liquidationPrice)
-        print("riskRate ", riskRate)
         return true
     }
     
@@ -472,10 +461,6 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
             currentPrice = NSDecimalNumber.init(string: mKavaOraclePrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
             cMaxAmount = BaseData.instance.getAvailableAmount_gRPC(mCDenom)
             cMinAmount = pMinAmount.multiplying(byPowerOf10: cDpDecimal - pDpDecimal).multiplying(by: NSDecimalNumber.init(string: "1.05263157895")).multiplying(by: mCollateralParam!.getLiquidationRatioAmount()).dividing(by: currentPrice, withBehavior: WUtils.handler0Up)
-            print("currentPrice ", currentPrice)
-            print("pMinAmount ", pMinAmount)
-            print("cMinAmount ", cMinAmount)
-            print("cMaxAmount ", cMaxAmount)
             
             WDP.dpCoin(chainConfig, mCDenom, cMinAmount.stringValue, nil, cAvailabeMinLabel)
             WDP.dpCoin(chainConfig, mCDenom, cMaxAmount.stringValue, nil, cAvailabeMaxLabel)
