@@ -109,14 +109,12 @@ class MyAccountViewController: BaseViewController, UITableViewDelegate, UITableV
     }
     
     func onFetchgRPCMyAccount(_ account:Account) {
-//        print("onFetchgRPCMyAccount ", account.account_address)
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
                 let req = Starnamed_X_Starname_V1beta1_QueryOwnerAccountsRequest.with { $0.owner = account.account_address; $0.pagination = page }
                 if let response = try? Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).ownerAccounts(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
-//                    print("onFetchgRPCMyAccount response ", response)
                     response.accounts.forEach { rawAccount in
                         if (!rawAccount.name.value.isEmpty) {
                             self.myAccounts_gRPC.append(rawAccount)

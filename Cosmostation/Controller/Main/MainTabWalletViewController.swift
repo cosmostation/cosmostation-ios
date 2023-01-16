@@ -624,7 +624,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickKavaIncentive() {
-        print("onClickKavaIncentive")
         if (account?.account_has_private == false) {
             self.onShowAddMenomicDialog()
             return
@@ -946,7 +945,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func scannedAddress(result: String) {
-        print("scannedAddress ", result)
         self.wcURL = result
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(610), execute: {
             if (BaseData.instance.isAutoPass()) {

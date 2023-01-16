@@ -74,8 +74,6 @@ class SifDexDAppViewController: BaseViewController {
     func onFetchFinished() {
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt > 0) { return }
-        print("allPools ", BaseData.instance.mSifDexPools_gRPC.count)
-        print("myAssets ", BaseData.instance.mSifDexMyAssets_gRPC.count)
         NotificationCenter.default.post(name: Notification.Name("SifDexFetchDone"), object: nil, userInfo: nil)
     }
 

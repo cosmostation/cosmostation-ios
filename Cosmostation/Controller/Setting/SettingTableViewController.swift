@@ -471,11 +471,9 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             BaseData.instance.setCurrency(value)
             self.onUpdateCurrency()
             let request = Alamofire.request(BaseNetWork.getPrices(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-            //print("getPrices ", request.request?.url)
             request.responseJSON { (response) in
                 switch response.result {
                 case .success(let res):
-                    //print("getPrices ", res)
                     BaseData.instance.mPrices.removeAll()
                     if let priceInfos = res as? Array<NSDictionary> {
                         priceInfos.forEach { priceInfo in
