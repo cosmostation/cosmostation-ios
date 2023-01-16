@@ -150,7 +150,6 @@ class DAppsListViewController: BaseViewController {
                 let req = Kava_Swap_V1beta1_QueryDepositsRequest.with { $0.owner = address }
                 if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).deposits(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.mMyKavaPoolDeposits = response.deposits
-//                    print("self.mMyKavaPoolDeposits ", self.mMyKavaPoolDeposits.count)
                 }
                 try channel.close().wait()
                 

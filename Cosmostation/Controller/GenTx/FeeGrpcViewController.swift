@@ -132,7 +132,6 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func onCalculateFees() {
-//        print("onCalculateFees")
         self.mFeeData = mFeeInfo[mSelectedFeeInfo].FeeDatas[mSelectedFeeData]
         if (chainType == .SIF_MAIN) {
             mFeeCoin = Coin.init(mFeeData.denom!, "100000000000000000")
@@ -149,11 +148,9 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             mFeeCoin = Coin.init(mFeeData.denom!, amount.stringValue)
         }
         mFee = Fee.init(mFeeGasAmount.stringValue, [mFeeCoin])
-//        print("onCalculateFees ", mFee)
     }
     
     func onCalculateEvmFees() {
-//        print("onCalculateEvmFees")
         Task {
             guard
                 let mintscanToken = BaseData.instance.mMintscanTokens.filter({ $0.address == pageHolderVC.mToSendDenom! }).first,
@@ -197,7 +194,6 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func onUpdateView() {
-        print("onUpdateView")
         if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
             self.hideWaittingAlert()
             if (mSimulPassed == true) {
@@ -295,7 +291,6 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).simulate(simulateReq!).response.wait()
-//                print("response ", response.gasInfo)
                 DispatchQueue.main.async(execute: {
                     if (self.waitAlert != nil) {
                         self.waitAlert?.dismiss(animated: true, completion: {

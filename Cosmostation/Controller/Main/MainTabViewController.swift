@@ -101,7 +101,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             BaseData.instance.setRecentAccountId(mAccount.account_id)
         }
         if (mAccount == nil) {
-            print("NO ACCOUNT ERROR!!!!")
             return
         }
         mChainType = ChainFactory.getChainType(mAccount.account_base_chain)
@@ -340,12 +339,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 
             }
             
-            print("BaseData.instance.mAllValidators_gRPC ", BaseData.instance.mAllValidators_gRPC.count)
-            print("BaseData.instance.mBondedValidators_gRPC ", BaseData.instance.mBondedValidators_gRPC.count)
-            print("BaseData.instance.mUnbondValidators_gRPC ", BaseData.instance.mUnbondValidators_gRPC.count)
-            print("BaseData.instance.mMyValidators_gRPC ", BaseData.instance.mMyValidators_gRPC.count)
-            print("BaseData.instance.mMyBalances_gRPC ", BaseData.instance.mMyBalances_gRPC.count)
-            
             if (BaseData.instance.mNodeInfo_gRPC == nil) {
                 self.onShowToast(NSLocalizedString("error_network", comment: ""))
             } else {
@@ -379,18 +372,10 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 }
                 BaseData.instance.mBalances = mBalances
                 
-                print("mAccount ", mAccount.account_address, " ", mAccount.account_pubkey_type, "     ",  mAccount.account_path)
                 if (mAccount.account_pubkey_type != 2) {
                     showDeprecatedWarn()
                 }
             }
-            
-            print("BaseData.instance.mAllValidator ", BaseData.instance.mAllValidator.count)
-            print("BaseData.instance.mTopValidator ", BaseData.instance.mTopValidator.count)
-            print("BaseData.instance.mOtherValidator ", BaseData.instance.mOtherValidator.count)
-            print("BaseData.instance.mMyValidator ", BaseData.instance.mMyValidator.count)
-            print("BaseData.instance.mBalances ", BaseData.instance.mBalances.count)
-            print("BaseData.instance.mAccount ", mAccount.account_address)
             
             if (BaseData.instance.mNodeInfo == nil || BaseData.instance.mAllValidator.count <= 0) {
                 self.onShowToast(NSLocalizedString("error_network", comment: ""))
@@ -485,7 +470,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchBnbTokens() {
-        print("onFetchBnbTokens ", BaseNetWork.bnbTokenUrl(mChainType))
         let request = Alamofire.request(BaseNetWork.bnbTokenUrl(mChainType), method: .get, parameters: ["limit":"3000"], encoding: URLEncoding.default, headers: [:]);
         request.responseJSON { (response) in
             switch response.result {
@@ -524,13 +508,11 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchBnbTokenTickers() {
-        print("onFetchBnbTokenTickers ", BaseNetWork.bnbTicUrl(mChainType))
         let request = Alamofire.request(BaseNetWork.bnbTicUrl(mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
                 if let bnbTickers = res as? Array<NSDictionary> {
-//                    print("onFetchBnbTokenTickers ", bnbTickers.count)
                     bnbTickers.forEach { bnbTicker in
                         BaseData.instance.mBnbTokenTicker.append(BnbTicker.init(bnbTicker))
                     }
@@ -548,7 +530,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             switch response.result {
             case .success(let res):
                 if let bnbMiniTickers = res as? Array<NSDictionary> {
-//                    print("onFetchBnbMiniTokenTickers ", bnbMiniTickers.count)
                     bnbMiniTickers.forEach { bnbMiniTicker in
                         BaseData.instance.mBnbTokenTicker.append(BnbTicker.init(bnbMiniTicker))
                     }
@@ -619,7 +600,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchOkTokenList() {
-        print("onFetchOkTokenList ", BaseNetWork.tokenListOkUrl(mChainConfig))
         let request = Alamofire.request(BaseNetWork.tokenListOkUrl(mChainConfig), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
         request.responseJSON { (response) in
             switch response.result {
@@ -667,7 +647,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("Auth response ", response)
                     BaseData.instance.mAccount_gRPC = response.account
                 }
                 try channel.close().wait()
@@ -756,7 +735,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
                 let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = address; $0.pagination = page }
                 if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("Balance response ", response)
                     response.balances.forEach { balance in
                         if (NSDecimalNumber.init(string: balance.amount) != NSDecimalNumber.zero) {
                             BaseData.instance.mMyBalances_gRPC.append(Coin.init(balance.denom, balance.amount))
@@ -781,7 +759,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = address }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("Delegations response ", response)
                     response.delegationResponses.forEach { delegationResponse in
                         BaseData.instance.mMyDelegations_gRPC.append(delegationResponse)
                     }
@@ -801,7 +778,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = address }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("Undelegations response ", response)
                     response.unbondingResponses.forEach { unbondingResponse in
                         BaseData.instance.mMyUnbondings_gRPC.append(unbondingResponse)
                     }
@@ -821,7 +797,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = address }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegationTotalRewards(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("Rewards response ", response)
                     response.rewards.forEach { reward in
                         BaseData.instance.mMyReward_gRPC.append(reward)
                     }
@@ -908,7 +883,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Pricefeed_V1beta1_QueryPricesRequest.init()
                 if let response = try? Kava_Pricefeed_V1beta1_QueryClient(channel: channel).prices(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("onFetchgRPCPrices ", response.prices)
                     BaseData.instance.mKavaPrices_gRPC = response.prices
                 }
                 try channel.close().wait()
@@ -949,8 +923,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     }
                     let kavaIncentiveReward = KavaIncentiveReward.init(responseData)
                     BaseData.instance.mIncentiveRewards = kavaIncentiveReward.result
-//                    print("mIncentiveRewards ", BaseData.instance.mIncentiveRewards?.getAllIncentives().count)
-//                    print("mIncentiveRewards ", BaseData.instance.mIncentiveRewards?.getAllIncentives())
 
                 case .failure(let error):
                     print("onFetchKavaIncentiveReward ", error)
@@ -962,7 +934,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     
     //fetch for common
     func onFetchPriceInfo() {
-        print("onFetchPriceInfo ", BaseData.instance.needPriceUpdate())
         if (!BaseData.instance.needPriceUpdate()) {
 //            NotificationCenter.default.post(name: Notification.Name("onFetchPrice"), object: nil, userInfo: nil)
             return
@@ -988,7 +959,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchParams(_ chainId: String) {
-        print("onFetchParams ", BaseNetWork.getParams(chainId))
         let request = Alamofire.request(BaseNetWork.getParams(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
@@ -1005,7 +975,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchMintscanAsset() {
-        print("onFetchMintscanAsset ", BaseNetWork.mintscanAssets())
         let request = Alamofire.request(BaseNetWork.mintscanAssets(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
@@ -1074,7 +1043,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchMintscanErc20(_ chainId: String) {
-        print("onFetchMintscanErc20 ", chainId, " ", mChainConfig.evmSupport)
         if (mChainConfig.evmSupport == false) {
             self.onFetchFinished()
             return

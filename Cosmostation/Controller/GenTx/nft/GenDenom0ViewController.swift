@@ -59,7 +59,6 @@ class GenDenom0ViewController: BaseViewController {
     }
 
     func onCheckUniqueDenom(_ denomId: String) {
-        print("onCheckUniqueDenom ", denomId)
         if (chainType == ChainType.IRIS_MAIN) {
             DispatchQueue.global().async {
                 do {

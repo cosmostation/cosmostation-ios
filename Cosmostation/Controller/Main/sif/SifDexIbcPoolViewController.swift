@@ -100,7 +100,6 @@ class SifDexIbcPoolViewController: BaseViewController, UITableViewDataSource, UI
     }
     
     func onCheckPoolJoin(_ pool: Sifnode_Clp_V1_Pool) {
-        print("IBC onCheckPoolJoin")
         if (!account!.account_has_private) {
             self.onShowAddMenomicDialog()
             return
@@ -126,7 +125,6 @@ class SifDexIbcPoolViewController: BaseViewController, UITableViewDataSource, UI
     }
     
     func onCheckExitJoin(_ pool: Sifnode_Clp_V1_Pool) {
-        print("IBC onCheckExitJoin")
         if (!account!.account_has_private) {
             self.onShowAddMenomicDialog()
             return
@@ -155,7 +153,6 @@ class SifDexIbcPoolViewController: BaseViewController, UITableViewDataSource, UI
                 mMyIbcAssets.append(asset.symbol)
             }
         }
-        print("mMyIbcAssets ", mMyIbcAssets.count)
         
         BaseData.instance.mSifDexPools_gRPC.forEach { pool in
             if (pool.externalAsset.symbol.starts(with: "ibc/")) {
@@ -166,8 +163,6 @@ class SifDexIbcPoolViewController: BaseViewController, UITableViewDataSource, UI
                 }
             }
         }
-        print("mMyIbcPools ", mMyIbcPools.count)
-        print("mOtherIbcPools ", mOtherIbcPools.count)
         
         if (mMyIbcAssets.count > 0) {
             self.mMyIbcProviders.removeAll()
@@ -185,8 +180,6 @@ class SifDexIbcPoolViewController: BaseViewController, UITableViewDataSource, UI
     func onFetchFinished() {
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt > 0) { return }
-        
-        print("mMyIbcProviders ", mMyIbcProviders.count)
         self.updateView()
     }
     

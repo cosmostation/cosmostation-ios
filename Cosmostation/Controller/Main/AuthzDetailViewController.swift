@@ -86,7 +86,6 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onFetchFinished() {
-//        print("onFetchFinished ", mFetchCnt)
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt > 0) { return }
         
@@ -258,7 +257,6 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
                 let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = granterAddress; $0.pagination = page }
                 if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("Balance ", response)
                     response.balances.forEach { balance in
                         self.granterBalances.append(Coin.init(balance.denom, balance.amount))
                     }
@@ -278,7 +276,6 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = granterAddress }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("Delegations ", response)
                     response.delegationResponses.forEach { delegationResponse in
                         self.granterDelegation.append(delegationResponse)
                     }
@@ -298,7 +295,6 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = granterAddress }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("Undelegation ", response)
                     response.unbondingResponses.forEach { unbondingResponse in
                         self.granterUnbonding.append(unbondingResponse)
                     }
@@ -318,7 +314,6 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = granterAddress }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegationTotalRewards(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("Reward ", response)
                     response.rewards.forEach { reward in
                         self.granterReward.append(reward)
                     }

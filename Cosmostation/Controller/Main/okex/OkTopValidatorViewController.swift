@@ -105,10 +105,6 @@ class OkTopValidatorViewController: BaseViewController, UITableViewDelegate, UIT
         return cell!
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRowAt")
-    }
-    
     func sortOkValidator() {
         self.mTopValidator.sort{
             if ($0.description.moniker == "Cosmostation") {

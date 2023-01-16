@@ -322,7 +322,6 @@ class PasswordViewController: BaseViewController {
     }
     
     func onUserSuccessUnlock() {
-        print("onUserSuccessUnlock")
         BaseData.instance.setLastPassTime()
         if (mTarget == PASSWORD_ACTION_INTRO_LOCK || mTarget == PASSWORD_ACTION_SIMPLE_CHECK || mTarget == PASSWORD_ACTION_CHECK_TX) {
             self.sendResultAndPop(PASSWORD_RESUKT_OK)
