@@ -343,7 +343,6 @@ class CdpWithdraw1ViewController: BaseViewController, UITextFieldDelegate, SBCar
                 if let selfDeposit = cdpDeposits.result?.filter({ $0.depositor == self.account?.account_address}).first {
                     self.mSelfDepositAmount = NSDecimalNumber.init(string: selfDeposit.amount?.amount)
                 }
-//                print("mSelfDepositAmount ", self.mSelfDepositAmount)
                 
             case .failure(let error):
                 print("onFetchCdpDeposit ", error)

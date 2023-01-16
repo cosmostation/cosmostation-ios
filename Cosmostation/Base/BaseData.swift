@@ -105,7 +105,6 @@ final class BaseData : NSObject{
                 mMyTokens.append(userFavo)
             }
         })
-        print("setMyTokens ", mMyTokens.count)
     }
     
     func setMyTokenBalance(_ contAddress: String, _ amount: String) {
@@ -692,8 +691,6 @@ final class BaseData : NSObject{
         let min: Int64 = 60000
         if (getAutoPass() == 1) {
             let passTime = Int64(UserDefaults.standard.string(forKey: KEY_LAST_PASS_TIME) ?? "0")! + (min * 5)
-            print("now ", now)
-            print("passTime ", passTime)
             return passTime > now ? true : false
             
         } else if (getAutoPass() == 2) {

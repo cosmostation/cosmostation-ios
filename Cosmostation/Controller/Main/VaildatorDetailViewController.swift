@@ -75,7 +75,6 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     
     func onFetchFinished() {
         self.mFetchCnt = self.mFetchCnt - 1
-//        print("onFetchFinished ", self.mFetchCnt)
         self.validatorDetailTableView.reloadData()
         self.loadingImg.onStopAnimation()
         self.loadingImg.isHidden = true

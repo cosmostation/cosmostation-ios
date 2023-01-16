@@ -243,8 +243,6 @@ class WalletConnectViewController: BaseViewController, SBCardPopupDelegate {
                 if let key = KeychainWrapper.standard.string(forKey: self.account!.getPrivateKeySha1()) {
                     self.privateKey = KeyFac.getPrivateFromString(key)
                     self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
-                    print("Private private ", self.privateKey!.hexEncodedString())
-                    print("Private publicKey ", self.publicKey!.hexEncodedString())
                 }
             }
         }

@@ -128,7 +128,6 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
             lpOutputAmount = NSDecimalNumber.init(string: self.mKavaSelectedPool.coins[0].amount)
         }
         let poolSwapRate = lpOutputAmount.dividing(by: lpInputAmount, withBehavior: WUtils.handler6).multiplying(byPowerOf10: (inputCoinDecimal - outputCoinDecimal))
-        print("poolSwapRate ", poolSwapRate)
 
         //display swap rate with this pool
         inputCoinRateAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputCoinRateAmount.font, 0, 6)

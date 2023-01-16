@@ -62,7 +62,6 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
                 self.mAllDenoms.append(supportPool.bdenom)
             }
         }
-//        print("mAllDenoms ", mAllDenoms.count)
         
         self.inputCoinLayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickInput (_:))))
         self.outputCoinLayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickOutput (_:))))
@@ -95,9 +94,6 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         WDP.dpSymbol(chainConfig, mInputDenom, inputCoinExRateDenom)
         WDP.dpSymbol(chainConfig, mOutputDenom, outputCoinExRateDenom)
         
-//        print("Input ", mInputDenom, " ", mInputDecimal, "  ", mAvailableMaxAmount)
-//        print("Output ", mOutputDenom, " ", mOutputDecimal)
-        
         if (mSelectedPool != nil) {
             self.swapFeeLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: mSelectedPool!.poolParams.swapFee).multiplying(byPowerOf10: -16), swapFeeLabel.font)
 
@@ -129,11 +125,6 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
             inputAssetAmount = inputAssetAmount.multiplying(byPowerOf10: -mInputDecimal)
             outputAssetAmount = outputAssetAmount.multiplying(byPowerOf10: -mOutputDecimal)
             let poolSwapRate = outputAssetAmount.multiplying(by: inputAssetWeight).dividing(by: inputAssetAmount, withBehavior: WUtils.handler18).dividing(by: outputAssetWeight, withBehavior: WUtils.handler6)
-//            print("inputAssetAmount ", inputAssetAmount)
-//            print("inputAssetWeight ", inputAssetWeight)
-//            print("outputAssetAmount ", outputAssetAmount)
-//            print("outputAssetWeight ", outputAssetWeight)
-            print("poolSwapRate ", poolSwapRate)
             outputCoinRateAmount.attributedText = WDP.dpAmount(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, 6)
             
         } else if (mSelectedStablePool != nil) {
@@ -174,7 +165,6 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
                 }
             }
         }
-        print("mSwapableDenoms ", mSwapableDenoms)
     }
     
     @objc func onClickInput (_ sender: UITapGestureRecognizer) {
@@ -200,7 +190,6 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
     
     
     @IBAction func onClickSwap(_ sender: UIButton) {
-        print("onClickSwap")
         if (!account!.account_has_private) {
             self.onShowAddMenomicDialog()
             return

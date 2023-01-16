@@ -62,8 +62,6 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         self.refresher.tintColor = UIColor.font05
         self.cdpDetailTableView.addSubview(refresher)
         
-        print("mCollateralParamType ", mCollateralParamType)
-        
         mKavaCdpParams_gRPC = BaseData.instance.mKavaCdpParams_gRPC
         
         self.loadingImg.onStartAnimation()
@@ -297,7 +295,6 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
     
     var mFetchCnt = 0
     @objc func onFetchCdpData() {
-        print("onFetchCdpData")
         if (self.mFetchCnt > 0)  {
             self.refresher.endRefreshing()
             return
@@ -327,17 +324,6 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
             self.pAvailable = BaseData.instance.getAvailableAmount_gRPC(mPDenom)
             self.kAvailable = BaseData.instance.getAvailableAmount_gRPC(KAVA_MAIN_DENOM)
             self.currentPrice = BaseData.instance.getKavaOraclePrice(mCollateralParam?.liquidationMarketID)
-            
-//            print("mCollateralParam ", mCollateralParam)
-//            print("mCDenom ", mCDenom)
-//            print("mPDenom ", mPDenom)
-//            print("cDpDecimal ", cDpDecimal)
-//            print("pDpDecimal ", pDpDecimal)
-//            print("kDpDecimal ", kDpDecimal)
-//
-//            print("cAvailable ", cAvailable)
-//            print("pAvailable ", pAvailable)
-//            print("kAvailable ", kAvailable)
             
             if (mKavaMyCdp_gRPC != nil) {
                 emptyConstraint?.isActive = false
@@ -384,7 +370,6 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Cdp_V1beta1_QueryCdpRequest.with { $0.owner = address; $0.collateralType = collateralType }
                 if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).cdp(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("onFetchgRPCMyCdp ", response.cdp)
                     self.mKavaMyCdp_gRPC = response.cdp
                 }
                 try channel.close().wait()
@@ -409,7 +394,6 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
                 if let selfDeposit = cdpDeposits.result?.filter({ $0.depositor == self.account?.account_address}).first {
                     self.mSelfDepositAmount = NSDecimalNumber.init(string: selfDeposit.amount?.amount)
                 }
-//                print("mSelfDepositAmount ", self.mSelfDepositAmount)
 
             case .failure(let error):
                 print("onFetchCdpDeposit ", error)
