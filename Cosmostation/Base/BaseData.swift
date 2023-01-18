@@ -542,7 +542,7 @@ final class BaseData : NSObject{
         
       var description: String {
          switch self {
-         case .System: return Locale.preferredLanguages.first ?? ""
+         case .System: return Locale.current.languageCode ?? ""
          case .English: return "en"
          case .Korean: return "ko"
          case .Japanese: return "ja"
