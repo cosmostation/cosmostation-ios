@@ -47,7 +47,6 @@ class ChainRizon: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-rizon-app.cosmostation.io/"
-    var apiUrl = "https://api-rizon.cosmostation.io/"
     var explorerUrl = MintscanUrl + "rizon/"
     var priceUrl = GeckoUrl + "rizon"
     

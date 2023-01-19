@@ -47,7 +47,6 @@ class ChainInjective: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-injective-app.cosmostation.io/"
-    var apiUrl = "https://api-injective.cosmostation.io/"
     var explorerUrl = MintscanUrl + "injective/"
     var priceUrl = GeckoUrl + "injective-protocol"
     

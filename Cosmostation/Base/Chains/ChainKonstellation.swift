@@ -47,7 +47,6 @@ class ChainKonstellation: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-konstellation-app.cosmostation.io/"
-    var apiUrl = "https://api-konstellation.cosmostation.io/"
     var explorerUrl = MintscanUrl + "konstellation/"
     var priceUrl = GeckoUrl + "konstellation"
     

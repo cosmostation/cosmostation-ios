@@ -48,7 +48,6 @@ class ChainSecret: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-secret.cosmostation.io/"
-    var apiUrl = "https://api-secret.cosmostation.io/"
     var explorerUrl = MintscanUrl + "secret/"
     var priceUrl = GeckoUrl + "secret"
     

@@ -48,7 +48,6 @@ protocol ChainConfig {
     var grpcPort: Int { get set }
     var rpcUrl: String { get set }
     var lcdUrl: String { get set }
-    var apiUrl: String { get set }
     var explorerUrl: String { get set }
     var priceUrl: String { get set }
     

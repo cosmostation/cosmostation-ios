@@ -47,7 +47,6 @@ class ChainBitcana: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-bitcanna-app.cosmostation.io/"
-    var apiUrl = "https://api-bitcanna.cosmostation.io/"
     var explorerUrl = MintscanUrl + "bitcanna/"
     var priceUrl = GeckoUrl + "bitcanna"
     

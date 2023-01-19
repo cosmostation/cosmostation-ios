@@ -48,7 +48,6 @@ class ChainStride: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-stride-app.cosmostation.io/"
-    var apiUrl = "https://api-stride.cosmostation.io/"
     var explorerUrl = MintscanUrl + "stride/"
     var priceUrl = GeckoUrl + "stride"
     

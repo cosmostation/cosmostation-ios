@@ -47,7 +47,6 @@ class ChainAlthea: ChainConfig {
     var grpcPort = 20100
     var rpcUrl = ""
     var lcdUrl = ""
-    var apiUrl = ""
     var explorerUrl = ""
     var priceUrl = ""
     

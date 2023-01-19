@@ -47,7 +47,6 @@ class ChainEmoney: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-emoney-app.cosmostation.io/"
-    var apiUrl = "https://api-emoney.cosmostation.io/"
     var explorerUrl = MintscanUrl + "emoney/"
     var priceUrl = GeckoUrl + "e-money"
     

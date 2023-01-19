@@ -48,7 +48,6 @@ class ChainOkc: ChainConfig {
     var grpcPort = -1
     var rpcUrl = "https://exchainrpc.okex.org"
     var lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
-    var apiUrl = ""
     var explorerUrl = "https://www.oklink.com/okexchain/"
     var priceUrl = GeckoUrl + "okc-token"
     

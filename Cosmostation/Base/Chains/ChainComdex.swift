@@ -47,7 +47,6 @@ class ChainComdex: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-comdex-app.cosmostation.io/"
-    var apiUrl = "https://api-comdex.cosmostation.io/"
     var explorerUrl = MintscanUrl + "comdex/"
     var priceUrl = GeckoUrl + "comdex"
     

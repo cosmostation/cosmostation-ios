@@ -47,7 +47,6 @@ class ChainRegen: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-regen-app.cosmostation.io/"
-    var apiUrl = "https://api-regen.cosmostation.io/"
     var explorerUrl = MintscanUrl + "regen/"
     var priceUrl = GeckoUrl + "regen"
     

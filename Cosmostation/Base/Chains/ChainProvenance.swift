@@ -47,7 +47,6 @@ class ChainProvenance: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-provenance-app.cosmostation.io/"
-    var apiUrl = "https://api-provenance.cosmostation.io/"
     var explorerUrl = MintscanUrl + "provenance/"
     var priceUrl = GeckoUrl + "provenance-blockchain"
     

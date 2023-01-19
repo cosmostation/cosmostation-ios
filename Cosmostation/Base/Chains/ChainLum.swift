@@ -48,7 +48,6 @@ class ChainLum: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-lum-app.cosmostation.io/"
-    var apiUrl = "https://api-lum.cosmostation.io/"
     var explorerUrl = MintscanUrl + "lum/"
     var priceUrl = GeckoUrl + "lum-network"
     

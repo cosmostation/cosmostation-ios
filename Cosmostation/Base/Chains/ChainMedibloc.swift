@@ -47,7 +47,6 @@ class ChainMedibloc: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-medibloc-app.cosmostation.io/"
-    var apiUrl = "https://api-medibloc.cosmostation.io/"
     var explorerUrl = MintscanUrl + "medibloc/"
     var priceUrl = GeckoUrl + "medibloc"
     
