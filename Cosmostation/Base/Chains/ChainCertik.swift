@@ -47,7 +47,6 @@ class ChainCertik: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-shentu-app.cosmostation.io/"
-    var apiUrl = "https://api-shentu.cosmostation.io/"
     var explorerUrl = MintscanUrl + "shentu/"
     var priceUrl = GeckoUrl + "shentu"
     

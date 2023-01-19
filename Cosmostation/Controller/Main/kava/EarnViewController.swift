@@ -100,7 +100,7 @@ class EarnViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     func onFetchgRPCMyEarnDeposits(_ address: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Earn_V1beta1_QueryDepositsRequest.with { $0.depositor = address }
                 if let response = try? Kava_Earn_V1beta1_QueryClient(channel: channel).deposits(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.deposits.forEach { deposit in

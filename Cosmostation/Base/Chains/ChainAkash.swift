@@ -47,7 +47,6 @@ class ChainAkash: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-akash-app.cosmostation.io/"
-    var apiUrl = "https://api-akash.cosmostation.io/"
     var explorerUrl = MintscanUrl + "akash/"
     var priceUrl = GeckoUrl + "akash-network"
     

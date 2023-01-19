@@ -118,16 +118,9 @@ class RegisterDomain0ViewController: BaseViewController {
     //check for already exist domain
     func onFetchgRPCDomainInfo(_ domain: String) {
         DispatchQueue.global().async {
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try? group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try? channel.close().wait() }
-            
             do {
-                let req = Starnamed_X_Starname_V1beta1_QueryDomainRequest.with {
-                    $0.name = domain
-                }
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
+                let req = Starnamed_X_Starname_V1beta1_QueryDomainRequest.with { $0.name = domain }
                 _ = try Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).domain(req, callOptions:BaseNetWork.getCallOptions()).response.wait()
                 DispatchQueue.main.async(execute: {
                     self.onShowToast(NSLocalizedString("error_already_registered_domain", comment: ""))

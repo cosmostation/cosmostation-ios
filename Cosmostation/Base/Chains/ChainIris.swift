@@ -47,7 +47,6 @@ class ChainIris: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-iris-app.cosmostation.io/"
-    var apiUrl = "https://api-iris.cosmostation.io/"
     var explorerUrl = MintscanUrl + "iris/"
     var priceUrl = GeckoUrl + "irisnet"
     

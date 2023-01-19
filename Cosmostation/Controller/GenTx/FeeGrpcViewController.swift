@@ -248,7 +248,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         self.showWaittingAlert()
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = account.account_address }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req).response.wait() {
                     if (self.pageHolderVC.mTransferType == TRANSFER_IBC_SIMPLE || self.pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
@@ -268,7 +268,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     func onFetchIbcClientState(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
                     $0.channelID = self.pageHolderVC.mMintscanPath!.channel!
                     $0.portID = self.pageHolderVC.mMintscanPath!.port!
@@ -289,7 +289,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             let simulateReq = self.genSimulateReq(auth!, self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, height)
             
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).simulate(simulateReq!).response.wait()
                 DispatchQueue.main.async(execute: {
                     if (self.waitAlert != nil) {

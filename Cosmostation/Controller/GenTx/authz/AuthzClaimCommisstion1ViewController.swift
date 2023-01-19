@@ -81,7 +81,7 @@ class AuthzClaimCommisstion1ViewController: BaseViewController {
         DispatchQueue.global().async {
             var responseAddress = ""
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = address }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegatorWithdrawAddress(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     responseAddress = response.withdrawAddress.replacingOccurrences(of: "\"", with: "")

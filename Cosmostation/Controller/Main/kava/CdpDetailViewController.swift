@@ -367,7 +367,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
     func onFetchgRPCMyCdp(_ address: String, _ collateralType: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Cdp_V1beta1_QueryCdpRequest.with { $0.owner = address; $0.collateralType = collateralType }
                 if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).cdp(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.mKavaMyCdp_gRPC = response.cdp

@@ -338,7 +338,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     func onCheckCreateHtlcSwapKava() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = self.account!.account_address }
                 let response = try Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req).response.wait()
                 self.onCreateHtlcSwapKava(response)
@@ -373,7 +373,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             self.mRandomNumberHash = WKey.getRandomNumnerHash(self.mRandomNumber!, self.mTimeStamp!)
             
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let reqTx = Signer.genSignedKavaCreateHTLCSwap(auth!, self.account!.account_pubkey_type,
                                                                self.account!.account_address,
                                                                self.mHtlcToAccount!.account_address,
@@ -543,7 +543,8 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     func onCheckClaimHtlcSwapKava() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mHtlcToChain!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let htlcToChainConfig = ChainKava(.KAVA_MAIN)
+                let channel = BaseNetWork.getConnection(htlcToChainConfig)!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with {  $0.address = self.mHtlcToAccount!.account_address }
                 let response = try Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req).response.wait()
                 self.onClaimHtlcSwapKava1(response)
@@ -560,7 +561,8 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     func onClaimHtlcSwapKava1(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mHtlcToChain!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let htlcToChainConfig = ChainKava(.KAVA_MAIN)
+                let channel = BaseNetWork.getConnection(htlcToChainConfig)!
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.onClaimHtlcSwapKava2(auth, response.nodeInfo.network)
@@ -593,7 +595,8 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             
             do {
                 let swapId = WKey.getSwapId(self.mHtlcToChain!, self.mHtlcToSendAmount, self.mRandomNumberHash!, self.account!.account_address)
-                let channel = BaseNetWork.getConnection(self.mHtlcToChain!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let htlcToChainConfig = ChainKava(.KAVA_MAIN)
+                let channel = BaseNetWork.getConnection(htlcToChainConfig)!
                 let reqTx = Signer.genSignedKavaClaimHTLCSwap(auth!, self.mHtlcToAccount!.account_pubkey_type,
                                                               self.mHtlcToAccount!.account_address,
                                                               swapId,
@@ -656,7 +659,8 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         } else if (self.chainType == ChainType.KAVA_MAIN) {
             DispatchQueue.global().async {
                 do {
-                    let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                    let htlcToChainConfig = ChainKava(.KAVA_MAIN)
+                    let channel = BaseNetWork.getConnection(htlcToChainConfig)!
                     let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = self.mSendHash! }
                     self.mSendTxInfogRPC = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).getTx(req).response.wait()
                     DispatchQueue.main.async(execute: { self.onUpdateView("") });
@@ -707,7 +711,8 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         } else if (self.mHtlcToChain == ChainType.KAVA_MAIN) {
             DispatchQueue.global().async {
                 do {
-                    let channel = BaseNetWork.getConnection(self.mHtlcToChain!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                    let htlcToChainConfig = ChainKava(.KAVA_MAIN)
+                    let channel = BaseNetWork.getConnection(htlcToChainConfig)!
                     let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = self.mClaimHash! }
                     self.mClaimTxInfogRPC = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).getTx(req).response.wait()
                     DispatchQueue.main.async(execute: { self.onUpdateView("") });

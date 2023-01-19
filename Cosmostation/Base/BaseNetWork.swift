@@ -260,16 +260,14 @@ class BaseNetWork {
     
     
     //API
-    static func accountHistory(_ chain: ChainType, _ address: String) -> String {
-        guard let chainConfig = ChainFactory.getChainConfig(chain) else {
-            return ""
-        }
-        if (chainConfig.chainType == .BINANCE_MAIN) {
-            return chainConfig.apiUrl + "api/v1/transactions"
-        } else if (chainConfig.chainType == .OKEX_MAIN) {
+    static func accountHistory(_ chainConfig: ChainConfig?, _ address: String) -> String {
+        if (chainConfig == nil) { return "" }
+        if (chainConfig?.chainType == .BINANCE_MAIN) {
+            return "https://dex.binance.org/api/v1/transactions"
+        } else if (chainConfig?.chainType == .OKEX_MAIN) {
             return MINTSCAN_API_URL + "v1/utils/proxy/okc-transaction-list?device=IOS&chainShortName=okc&address=" + address + "&limit=50"
         } else {
-            return MINTSCAN_API_URL + "v1/" + chainConfig.chainAPIName + "/account/" + address + "/txs"
+            return MINTSCAN_API_URL + "v1/" + chainConfig!.chainAPIName + "/account/" + address + "/txs"
         }
     }
     
@@ -281,11 +279,10 @@ class BaseNetWork {
         return ResourceBase + chainConfig.chainAPIName + "/pool.json"
     }
     
-    static func getConnection(_ chain: ChainType, _ group: MultiThreadedEventLoopGroup) -> ClientConnection? {
-        guard let chainConfig = ChainFactory.getChainConfig(chain) else {
-            return nil
-        }
-        return ClientConnection.secure(group: group).connect(host: chainConfig.grpcUrl, port: chainConfig.grpcPort)
+    static func getConnection(_ chainConfig: ChainConfig?, _ thread: Int = 1) -> ClientConnection? {
+        if (chainConfig == nil) { return nil }
+        let group = MultiThreadedEventLoopGroup(numberOfThreads: thread)
+        return ClientConnection.secure(group: group).connect(host: chainConfig!.grpcUrl, port: chainConfig!.grpcPort)
     }
     
     static func getCallOptions() -> CallOptions {

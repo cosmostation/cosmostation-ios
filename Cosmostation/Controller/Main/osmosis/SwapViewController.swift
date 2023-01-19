@@ -250,7 +250,7 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         self.mSelectedStablePool = nil
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Osmosis_Gamm_V1beta1_QueryPoolRequest.with { $0.poolID = id}
                 if let response = try? Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pool(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     if (response.pool.typeURL.contains(Osmosis_Gamm_V1beta1_Pool.protoMessageName) == true) {

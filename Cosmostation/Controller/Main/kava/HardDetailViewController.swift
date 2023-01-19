@@ -242,7 +242,7 @@ class HardDetailViewController: BaseViewController, UITableViewDelegate, UITable
     func onFetchgRPCHardReserves() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Hard_V1beta1_QueryReservesRequest.init()
                 if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).reserves(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.amount.forEach { coin in

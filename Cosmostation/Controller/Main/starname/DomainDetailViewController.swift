@@ -185,7 +185,7 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
     func onFetchgRPCDomainInfo(_ domain: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Starnamed_X_Starname_V1beta1_QueryDomainRequest.with { $0.name = domain }
                 if let response = try? Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).domain(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
                     self.mMyDomainInfo_gRPC = response.domain
@@ -202,7 +202,7 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
     func onFetchgRPCResolve(_ starname: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Starnamed_X_Starname_V1beta1_QueryStarnameRequest.with { $0.starname = "*" + starname }
                 if let response = try? Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).starname(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
                     self.mMyDomainResolve_gRPC = response

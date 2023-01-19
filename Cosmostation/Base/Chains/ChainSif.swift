@@ -47,7 +47,6 @@ class ChainSif: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-sifchain-app.cosmostation.io/"
-    var apiUrl = "https://api-sifchain.cosmostation.io/"
     var explorerUrl = MintscanUrl + "sifchain/"
     var priceUrl = GeckoUrl + "sifchain"
     

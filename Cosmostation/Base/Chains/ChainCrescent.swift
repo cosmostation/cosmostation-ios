@@ -47,7 +47,6 @@ class ChainCrescent: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-crescent-app.cosmostation.io/"
-    var apiUrl = "https://api-crescent.cosmostation.io/"
     var explorerUrl = MintscanUrl + "crescent/"
     var priceUrl = GeckoUrl + "crescent-network"
     

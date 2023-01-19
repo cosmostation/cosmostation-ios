@@ -497,7 +497,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     func onFetchgRPCTx(_ txHash: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = txHash }
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).getTx(req).response.wait()
                 self.mTxRespose = response

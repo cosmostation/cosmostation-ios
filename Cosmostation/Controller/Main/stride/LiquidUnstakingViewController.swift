@@ -152,7 +152,7 @@ class LiquidUnstakingViewController: BaseViewController, UITableViewDelegate, UI
     func onFetchUserHistory() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Stride_Records_QueryAllUserRedemptionRecordForUserRequest.with {
                     $0.address = self.account!.account_address
                     $0.chainID = self.hostZones[self.selectedPosition].chainID

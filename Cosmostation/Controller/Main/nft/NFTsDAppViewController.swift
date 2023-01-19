@@ -69,7 +69,7 @@ class NFTsDAppViewController: BaseViewController {
     func onFetchIrisNFT(_ owner: String, _ nextKey: Data?) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with {
                     $0.countTotal = true
                     $0.limit = 1000
@@ -108,7 +108,7 @@ class NFTsDAppViewController: BaseViewController {
     func onFetchCroNFT(_ owner: String, _ nextKey: Data?) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with {
                     $0.countTotal = true
                     $0.limit = 1000

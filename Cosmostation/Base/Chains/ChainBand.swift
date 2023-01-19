@@ -47,7 +47,6 @@ class ChainBand: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-band-app.cosmostation.io/"
-    var apiUrl = "https://api-band.cosmostation.io/"
     var explorerUrl = MintscanUrl + "band/"
     var priceUrl = GeckoUrl + "band-protocol"
     

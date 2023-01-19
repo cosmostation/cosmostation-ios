@@ -47,7 +47,6 @@ class ChainTeritori: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-teritori-app.cosmostation.io/"
-    var apiUrl = "https://api-teritori.cosmostation.io/"
     var explorerUrl = MintscanUrl + "teritori/"
     var priceUrl = GeckoUrl + "teritori"
     

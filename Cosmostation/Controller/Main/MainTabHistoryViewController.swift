@@ -224,7 +224,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func onFetchBnbHistory(_ address:String) {
-        let url = BaseNetWork.accountHistory(chainType!, address)
+        let url = BaseNetWork.accountHistory(chainConfig, address)
         let request = Alamofire.request(url, method: .get, parameters: ["address":address, "startTime":Date().Stringmilli3MonthAgo, "endTime":Date().millisecondsSince1970], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { response in
             switch response.result {
@@ -253,7 +253,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func onFetchOkHistory(_ address: String) {
-        let url = BaseNetWork.accountHistory(chainType!, address)
+        let url = BaseNetWork.accountHistory(chainConfig, address)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { response in
             switch response.result {
@@ -284,7 +284,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func onFetchNewApiHistoryCustom(_ address: String, _ id: Int64) {
-        let url = BaseNetWork.accountHistory(chainType!, address)
+        let url = BaseNetWork.accountHistory(chainConfig, address)
         let request = Alamofire.request(url, method: .get, parameters: ["limit":String(self.mApiBatchCnt), "from":String(id)], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {

@@ -113,7 +113,7 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onFetchgRPCHardParam()  {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Hard_V1beta1_QueryParamsRequest.init()
                 if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.mHardParam = response.params
@@ -131,7 +131,7 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onFetchgRPCHardInterestRate()  {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Hard_V1beta1_QueryInterestRateRequest.init()
                 if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).interestRate(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.mHardInterestRates = response.interestRates
@@ -149,7 +149,7 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onFetchgRPCHardTotalDeposit()  {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Hard_V1beta1_QueryTotalDepositedRequest.init()
                 if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).totalDeposited(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.suppliedCoins.forEach {
@@ -169,7 +169,7 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onFetchgRPCHardTotalBorrow()  {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Hard_V1beta1_QueryTotalBorrowedRequest.init()
                 if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).totalBorrowed(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.borrowedCoins.forEach {
@@ -189,7 +189,7 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onFetchgRPCHardMyDeposit(_ address: String)  {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Hard_V1beta1_QueryDepositsRequest.with { $0.owner = address }
                 if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).deposits(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     if (response.deposits.count > 0) {
@@ -212,7 +212,7 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onFetchgRPCHardMyBorrow(_ address: String)  {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Hard_V1beta1_QueryBorrowsRequest.with { $0.owner = address }
                 if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).borrows(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     if (response.borrows.count > 0) {

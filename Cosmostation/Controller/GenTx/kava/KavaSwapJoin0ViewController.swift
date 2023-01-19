@@ -312,7 +312,7 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
     func onFetchgRPCSwapPool(_ poolId: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Swap_V1beta1_QueryPoolsRequest.with { $0.poolID = poolId }
                 if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.mKavaSwapPool = response.pools[0]

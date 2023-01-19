@@ -295,7 +295,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
     func onFetchRewardAddress_gRPC(_ address: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.selectedChainType, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.selectedChainConfig)!
                 let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = address }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegatorWithdrawAddress(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.rewardAddress = response.withdrawAddress.replacingOccurrences(of: "\"", with: "")
@@ -326,7 +326,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
     func onFetchgRPCNodeInfo() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.selectedChainType, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.selectedChainConfig)!
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.chainId = response.nodeInfo.network

@@ -47,7 +47,6 @@ class ChainBinance: ChainConfig {
     var grpcPort = -1
     var rpcUrl = ""
     var lcdUrl = "https://dex.binance.org/"
-    var apiUrl = "https://dex.binance.org/"
     var explorerUrl = "https://binance.mintscan.io/"
     var priceUrl = GeckoUrl + "binancecoin"
     

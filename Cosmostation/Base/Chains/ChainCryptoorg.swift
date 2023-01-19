@@ -47,7 +47,6 @@ class ChainCryptoorg: ChainConfig {
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = "https://lcd-crypto-org-app.cosmostation.io/"
-    var apiUrl = "https://api-crypto-org.cosmostation.io/"
     var explorerUrl = MintscanUrl + "crypto-org/"
     var priceUrl = GeckoUrl + "cronos"
     
