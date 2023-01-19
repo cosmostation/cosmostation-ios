@@ -29,7 +29,7 @@ class DenomListCell: UITableViewCell {
         if (chainType == ChainType.IRIS_MAIN) {
             DispatchQueue.global().async {
                 do {
-                    let channel = BaseNetWork.getConnection(chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                    let channel = BaseNetWork.getConnection(chainConfig)!
                     let req = Irismod_Nft_QueryDenomRequest.with { $0.denomID = irisCollection!.denomID }
                     if let response = try? Irismod_Nft_QueryClient(channel: channel).denom(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         DispatchQueue.main.async(execute: {
@@ -46,7 +46,7 @@ class DenomListCell: UITableViewCell {
         } else if (chainType == ChainType.CRYPTO_MAIN) {
             DispatchQueue.global().async {
                 do {
-                    let channel = BaseNetWork.getConnection(chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                    let channel = BaseNetWork.getConnection(chainConfig)!
                     let req = Chainmain_Nft_V1_QueryDenomRequest.with { $0.denomID = croCollection!.denomID }
                     if let response = try? Chainmain_Nft_V1_QueryClient(channel: channel).denom(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         DispatchQueue.main.async(execute: {

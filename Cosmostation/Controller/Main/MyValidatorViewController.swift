@@ -181,7 +181,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let authReq = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = self.account!.account_address }
                 if let authRes = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(authReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     let simulReq = Signer.genSimulateClaimRewardsTxgRPC(authRes, self.account!.account_pubkey_type, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
@@ -260,7 +260,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let rewardAddressReq = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = self.account!.account_address }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegatorWithdrawAddress(rewardAddressReq).response.wait() {
                     if (response.withdrawAddress.replacingOccurrences(of: "\"", with: "") == self.account!.account_address) {

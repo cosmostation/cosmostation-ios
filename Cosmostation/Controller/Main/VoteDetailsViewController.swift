@@ -193,7 +193,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     func onFetchMyVote_gRPC(_ proposal_id: String, _ address: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 defer { try? channel.close().wait() }
 
                 let req = Cosmos_Gov_V1beta1_QueryVoteRequest.with { $0.voter = address; $0.proposalID = UInt64(proposal_id)! }

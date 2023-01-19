@@ -76,7 +76,7 @@ class StrideDappViewController: BaseViewController {
     func onFetchAllHostZone() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 1000 }
                 let req = Stride_Stakeibc_QueryAllHostZoneRequest.with { $0.pagination = page }
                 if let response = try? Stride_Stakeibc_QueryClient(channel: channel).hostZoneAll(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
@@ -94,7 +94,7 @@ class StrideDappViewController: BaseViewController {
     func onFetchDayEpoch() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Stride_Stakeibc_QueryGetEpochTrackerRequest.with { $0.epochIdentifier = "day" }
                 if let response = try? Stride_Stakeibc_QueryClient(channel: channel).epochTracker(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.dayEpoch = response.epochTracker

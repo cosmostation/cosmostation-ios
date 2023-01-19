@@ -124,7 +124,7 @@ class CdpListViewController: BaseViewController, UITableViewDelegate, UITableVie
     func onFetchgRPCCdpParam() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Cdp_V1beta1_QueryParamsRequest.init()
                 if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mKavaCdpParams_gRPC = response.params
@@ -139,7 +139,7 @@ class CdpListViewController: BaseViewController, UITableViewDelegate, UITableVie
     func onFetchgRPCMyCdps(_ address: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Cdp_V1beta1_QueryCdpsRequest.with { $0.owner = address }
                 if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).cdps(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.mMyCdps_gRPC = response.cdps

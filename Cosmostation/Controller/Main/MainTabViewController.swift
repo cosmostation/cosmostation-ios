@@ -275,7 +275,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCBondedValidators(0)
             self.onFetchgRPCUnbondedValidators(0)
             self.onFetchgRPCUnbondingValidators(0)
-            
+
             self.onFetchgRPCBalance(self.mAccount.account_address, 0)
             self.onFetchgRPCDelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
@@ -622,7 +622,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchgRPCNodeInfo() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mNodeInfo_gRPC = response.nodeInfo
@@ -644,7 +644,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchgRPCAuth(_ address: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mAccount_gRPC = response.account
@@ -661,7 +661,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchgRPCBondedValidators(_ offset: Int) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 300 }
                 if (self.mChainType == .TGRADE_MAIN) {
                     let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page}
@@ -691,7 +691,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchgRPCUnbondedValidators(_ offset:Int) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
                 let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_UNBONDED" }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).validators(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
@@ -711,7 +711,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchgRPCUnbondingValidators(_ offset:Int) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
                 let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_UNBONDING" }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).validators(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
@@ -731,7 +731,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchgRPCBalance(_ address: String, _ offset:Int) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
                 let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = address; $0.pagination = page }
                 if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
@@ -756,7 +756,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchgRPCDelegations(_ address: String, _ offset:Int) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = address }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.delegationResponses.forEach { delegationResponse in
@@ -775,7 +775,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchgRPCUndelegations(_ address: String, _ offset:Int) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = address }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.unbondingResponses.forEach { unbondingResponse in
@@ -794,7 +794,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchgRPCRewards(_ address: String, _ offset:Int) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = address }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegationTotalRewards(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.rewards.forEach { reward in
@@ -813,7 +813,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchgRPCStarNameFees() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let req = Starnamed_X_Configuration_V1beta1_QueryFeesRequest.init()
                 if let response = try? Starnamed_X_Configuration_V1beta1_QueryClient(channel: channel).fees(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mStarNameFee_gRPC = response.fees
@@ -830,7 +830,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchgRPCStarNameConfig() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let req = Starnamed_X_Configuration_V1beta1_QueryConfigRequest.init()
                 if let response = try? Starnamed_X_Configuration_V1beta1_QueryClient(channel: channel).config(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mStarNameConfig_gRPC = response.config
@@ -849,7 +849,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         DispatchQueue.global().async {
             var icnsName = ""
             do {
-                let channel = BaseNetWork.getConnection(.OSMOSIS_MAIN, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(ChainFactory.getChainConfig(.OSMOSIS_MAIN))!
                 let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
                     $0.address = ICNS_CONTRACT_ADDRESS
                     $0.queryData = Cw20IcnsByAddressReq.init(address).getEncode()
@@ -880,7 +880,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchgRPCKavaPrices() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let req = Kava_Pricefeed_V1beta1_QueryPricesRequest.init()
                 if let response = try? Kava_Pricefeed_V1beta1_QueryClient(channel: channel).prices(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mKavaPrices_gRPC = response.prices
@@ -1024,7 +1024,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchCw20Balance(_ contAddress: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
                     $0.address = contAddress
                     $0.queryData = Cw20BalaceReq.init(self.mAccount.account_address).getEncode()

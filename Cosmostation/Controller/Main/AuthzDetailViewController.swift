@@ -214,7 +214,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     func onFetchGrant_gRPC(_ granteeAddress: String, _ granterAddress: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 defer { try? channel.close().wait() }
                 let req = Cosmos_Authz_V1beta1_QueryGrantsRequest.with { $0.grantee = granteeAddress; $0.granter = granterAddress }
                 if let response = try? Cosmos_Authz_V1beta1_QueryClient(channel: channel).grants(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
@@ -235,7 +235,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     func onFetchAuth_gRPC(_ granterAddress: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = granterAddress }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.granterAuth = response.account
@@ -253,7 +253,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     func onFetchBalance_gRPC(_ granterAddress: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
                 let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = granterAddress; $0.pagination = page }
                 if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
@@ -273,7 +273,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     func onFetchDelegations_gRPC(_ granterAddress: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = granterAddress }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.delegationResponses.forEach { delegationResponse in
@@ -292,7 +292,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     func onFetchUndelegations_gRPC(_ granterAddress: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = granterAddress }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.unbondingResponses.forEach { unbondingResponse in
@@ -311,7 +311,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     func onFetchStakingRewards_gRPC(_ granterAddress: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = granterAddress }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegationTotalRewards(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.rewards.forEach { reward in
@@ -328,13 +328,10 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onFetchCommission_gRPC(_ granterAddress: String) {
-        guard let chainType = chainType else {
-            return
-        }
         let valOpAddress = WKey.getOpAddressFromAddress(granterAddress, chainConfig)
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(chainType, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Cosmos_Distribution_V1beta1_QueryValidatorCommissionRequest.with { $0.validatorAddress = valOpAddress }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).validatorCommission(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.commission.commission.forEach { commission in

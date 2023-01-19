@@ -80,7 +80,7 @@ class AuthzUndelegate5ViewController: BaseViewController, PasswordViewDelegate {
         self.showWaittingAlert()
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = account.account_address }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.onBroadcastGrpcTx(response)
@@ -102,14 +102,8 @@ class AuthzUndelegate5ViewController: BaseViewController, PasswordViewDelegate {
                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                 self.chainType!)
-            
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try? group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try? channel.close().wait() }
-            
             do {
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
                 DispatchQueue.main.async(execute: {
                     if (self.waitAlert != nil) {

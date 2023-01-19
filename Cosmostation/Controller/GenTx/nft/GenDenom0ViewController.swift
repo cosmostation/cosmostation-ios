@@ -62,7 +62,7 @@ class GenDenom0ViewController: BaseViewController {
         if (chainType == ChainType.IRIS_MAIN) {
             DispatchQueue.global().async {
                 do {
-                    let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                    let channel = BaseNetWork.getConnection(self.chainConfig)!
                     let req = Irismod_Nft_QueryDenomRequest.with { $0.denomID = denomId }
                     if let _ = try? Irismod_Nft_QueryClient(channel: channel).denom(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         DispatchQueue.main.async(execute: {
@@ -83,7 +83,7 @@ class GenDenom0ViewController: BaseViewController {
         } else if (chainType == ChainType.CRYPTO_MAIN) {
             DispatchQueue.global().async {
                 do {
-                    let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                    let channel = BaseNetWork.getConnection(self.chainConfig)!
                     let req = Chainmain_Nft_V1_QueryDenomRequest.with { $0.denomID = denomId }
                     if let _ = try? Chainmain_Nft_V1_QueryClient(channel: channel).denom(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         DispatchQueue.main.async(execute: {

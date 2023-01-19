@@ -108,7 +108,7 @@ class DAppsListViewController: BaseViewController {
     func onFetchgRPCSwapPoolParam() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Swap_V1beta1_QueryParamsRequest.init()
                 if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mKavaSwapPoolParam = response.params
@@ -125,7 +125,7 @@ class DAppsListViewController: BaseViewController {
     func onFetchgRPCSwapPoolList() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Swap_V1beta1_QueryPoolsRequest.init()
                 if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.pools.forEach { pool in
@@ -146,7 +146,7 @@ class DAppsListViewController: BaseViewController {
     func onFetchgRPCSwapPoolDeposit(_ address: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Swap_V1beta1_QueryDepositsRequest.with { $0.owner = address }
                 if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).deposits(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.mMyKavaPoolDeposits = response.deposits
@@ -161,7 +161,7 @@ class DAppsListViewController: BaseViewController {
     func onFetchgRPCKavaPrices() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Pricefeed_V1beta1_QueryPricesRequest.init()
                 if let response = try? Kava_Pricefeed_V1beta1_QueryClient(channel: channel).prices(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mKavaPrices_gRPC = response.prices

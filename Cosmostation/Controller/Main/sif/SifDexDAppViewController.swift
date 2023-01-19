@@ -81,7 +81,7 @@ class SifDexDAppViewController: BaseViewController {
     func onFetchPools() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Sifnode_Clp_V1_PoolsReq.init()
                 if let response = try? Sifnode_Clp_V1_QueryClient(channel: channel).getPools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.pools.forEach { pool in
@@ -102,7 +102,7 @@ class SifDexDAppViewController: BaseViewController {
     func onFetchMyPoolAssets(_ address: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Sifnode_Clp_V1_AssetListReq.with { $0.lpAddress = address }
                 if let response = try? Sifnode_Clp_V1_QueryClient(channel: channel).getAssetList(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mSifDexMyAssets_gRPC = response.assets

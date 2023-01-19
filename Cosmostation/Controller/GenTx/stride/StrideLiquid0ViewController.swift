@@ -199,7 +199,7 @@ class StrideLiquid0ViewController: BaseViewController, UITextFieldDelegate {
     func onFetchData(_ chainId: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Stride_Stakeibc_QueryGetHostZoneRequest.with { $0.chainID = chainId }
                 if let response = try? Stride_Stakeibc_QueryClient(channel: channel).hostZone(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.hostZones = response.hostZone

@@ -104,20 +104,13 @@ class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
     func onFetchRewardAddress_gRPC(_ address: String) {
         DispatchQueue.global().async {
             var responseAddress = ""
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try? group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.pageHolderVC.chainType!, group)!
-            defer { try? channel.close().wait() }
-            
-            let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with {
-                $0.delegatorAddress = address
-            }
             do {
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
+                let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = address }
                 let response = try Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegatorWithdrawAddress(req).response.wait()
                 responseAddress = response.withdrawAddress.replacingOccurrences(of: "\"", with: "")
             } catch {
-                print("onFetchRedelegation_gRPC failed: \(error)")
+                print("onFetchRewardAddress_gRPC failed: \(error)")
             }
             DispatchQueue.main.async(execute: {
                 self.currentRewardAddressLabel.text = responseAddress

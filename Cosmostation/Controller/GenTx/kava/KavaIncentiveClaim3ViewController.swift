@@ -119,7 +119,7 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
         self.showWaittingAlert()
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = account.account_address }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.onBroadcastGrpcTx(response)
@@ -142,7 +142,7 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
                                                          self.chainType!)
             
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 if let response = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     DispatchQueue.main.async(execute: {
                         if (self.waitAlert != nil) {

@@ -292,7 +292,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     func onCheckStarNameService(_ recipientChainConfig: ChainConfig, _ userInput: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(.IOV_MAIN, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(ChainStarname(.IOV_MAIN))!
                 let req = Starnamed_X_Starname_V1beta1_QueryStarnameRequest.with { $0.starname = userInput }
                 if let response = try? Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).starname(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
                     if let matchedAddress = WUtils.checkStarnameWithResource(recipientChainConfig.chainType, response) {
@@ -310,7 +310,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         DispatchQueue.global().async {
             do {
                 let nameReq = Cw20IcnsByNameReq.init(recipientChainConfig.addressPrefix, userInput)
-                let channel = BaseNetWork.getConnection(.OSMOSIS_MAIN, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(ChainOsmosis(.OSMOSIS_MAIN))!
                 let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
                     $0.address = ICNS_CONTRACT_ADDRESS
                     $0.queryData = nameReq.getEncode()
@@ -334,7 +334,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         DispatchQueue.global().async {
             do {
                 let nameReq = Cw20IcnsByNameReq.init(recipientChainConfig.addressPrefix, userInput)
-                let channel = BaseNetWork.getConnection(.STARGAZE_MAIN, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(ChainStargaze(.STARGAZE_MAIN))!
                 let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
                     $0.address = STARGAZE_NS_CONTRACT_ADDRESS
                     $0.queryData = Cw20IcnsByNameReq.init(recipientChainConfig.addressPrefix, userInput).getEncode()

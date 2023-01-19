@@ -25,6 +25,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     var mAccount: Account?
     var chainType: ChainType?
+    var chainConfig: ChainConfig?
     var mBalances = Array<Balance>()
     
     var mToSendDenom: String?                   //denom or contract_address
@@ -506,6 +507,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         mAccount        = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         mBalances       = mAccount!.account_balances
         chainType       = ChainFactory.getChainType(mAccount!.account_base_chain)
+        chainConfig     = ChainFactory.getChainConfig(chainType)
         mBnbToken       = BaseData.instance.bnbToken(mToSendDenom)
         
         self.getKey()
@@ -607,20 +609,10 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     func onFetchBondedValidators(_ offset:Int) {
         DispatchQueue.global().async {
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try? group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try? channel.close().wait() }
-            
-            let page = Cosmos_Base_Query_V1beta1_PageRequest.with {
-                $0.limit = 300
-            }
-            let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with {
-                $0.pagination = page
-                $0.status = "BOND_STATUS_BONDED"
-            }
             do {
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
+                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 300 }
+                let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_BONDED" }
                 let response = try Cosmos_Staking_V1beta1_QueryClient(channel: channel).validators(req).response.wait()
                 response.validators.forEach { validator in
                     if (validator.operatorAddress != self.mTargetValidator_gRPC?.operatorAddress) {

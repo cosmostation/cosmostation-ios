@@ -118,7 +118,7 @@ class RegisterAccount0ViewController: BaseViewController, SBCardPopupDelegate {
     func onFetchgRPCResolve(_ account: String, _ doamin: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Starnamed_X_Starname_V1beta1_QueryStarnameRequest.with { $0.starname = account + "*" + doamin }
                 _ = try Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).starname(req, callOptions:BaseNetWork.getCallOptions()).response.wait()
                 DispatchQueue.main.async(execute: {

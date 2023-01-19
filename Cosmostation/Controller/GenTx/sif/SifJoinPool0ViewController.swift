@@ -285,7 +285,7 @@ class SifJoinPool0ViewController: BaseViewController, UITextFieldDelegate {
     func onFetchSifPool(_ denom: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Sifnode_Clp_V1_PoolReq.with { $0.symbol = denom }
                 if let response = try? Sifnode_Clp_V1_QueryClient(channel: channel).getPool(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.selectedPool = response.pool

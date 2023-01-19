@@ -483,7 +483,7 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
     func onFetchgRPCKavaPrice(_ marketId: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Kava_Pricefeed_V1beta1_QueryPriceRequest.with {
                     $0.marketID = marketId
                 }

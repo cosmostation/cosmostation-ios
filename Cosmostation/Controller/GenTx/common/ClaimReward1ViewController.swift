@@ -128,16 +128,9 @@ class ClaimReward1ViewController: BaseViewController {
     
     func onFetchRewards_gRPC(_ address: String) {
         DispatchQueue.global().async {
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try? group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.pageHolderVC.chainType!, group)!
-            defer { try? channel.close().wait() }
-            
-            let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with {
-                $0.delegatorAddress = address
-            }
             do {
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
+                let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = address }
                 let response = try Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegationTotalRewards(req).response.wait()
                 BaseData.instance.mMyReward_gRPC.removeAll()
                 response.rewards.forEach { reward in
@@ -155,16 +148,9 @@ class ClaimReward1ViewController: BaseViewController {
     func onFetchRewardAddress_gRPC(_ address: String) {
         DispatchQueue.global().async {
             var responseAddress = ""
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try? group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.pageHolderVC.chainType!, group)!
-            defer { try? channel.close().wait() }
-            
-            let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with {
-                $0.delegatorAddress = address
-            }
             do {
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
+                let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = address }
                 let response = try Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegatorWithdrawAddress(req).response.wait()
                 responseAddress = response.withdrawAddress.replacingOccurrences(of: "\"", with: "")
             } catch {

@@ -128,7 +128,7 @@ class MyDomainViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onFetchgRPCMyDomain(_ account: Account) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
                 let req = Starnamed_X_Starname_V1beta1_QueryOwnerDomainsRequest.with { $0.owner = account.account_address; $0.pagination = page }
                 if let response = try? Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).ownerDomains(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
@@ -154,7 +154,7 @@ class MyDomainViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onFetchgRPCResolve(_ domain: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Starnamed_X_Starname_V1beta1_QueryStarnameRequest.with { $0.starname = "*" + domain }
                 if let response = try? Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).starname(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
                     self.myDomainResolves_gRPC.append(response.account)

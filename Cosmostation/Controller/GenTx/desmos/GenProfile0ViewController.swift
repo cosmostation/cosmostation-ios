@@ -270,13 +270,8 @@ class GenProfile0ViewController: BaseViewController, UIImagePickerControllerDele
     //check for already exist domain
     func onFetchgRPCDtag(_ dtag: String) {
         DispatchQueue.global().async {
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try? group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try? channel.close().wait() }
-            
             do {
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
                 let req = Desmos_Profiles_V1beta1_QueryProfileRequest.with { $0.user = dtag }
                 let response = try Desmos_Profiles_V1beta1_QueryClient(channel: channel).profile(req, callOptions:BaseNetWork.getCallOptions()).response.wait()
                 DispatchQueue.main.async(execute: {
