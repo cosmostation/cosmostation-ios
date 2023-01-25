@@ -575,10 +575,10 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "str_only_address" = "観察用ウォーレット";
 "str_opensource" = "オープンソース (GitHub)";
 "str_other_validator" = "その他ノード";
-"str_paste" = "貼り付け";
+"str_paste" = "Paste";
 "str_path" = "HD 経路 :";
 "str_price_change_color" = "価格変動の色";
-"str_qr_scan" = "スキャン";
+"str_qr_scan" = "Scan";
 "str_raw_copy" = "原本コピー";
 "str_recipient_address" = "受取住所";
 "str_recipient_chain" = "受信チェーン";
@@ -646,7 +646,7 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "str_vote_direct" = "検証人に直接投票";
 "str_voting_power" = "全体委任量";
 "str_wallet" = "ウォーレット";
-"str_wallet2" = "ウォーレット";
+"str_wallet2" = "Wallet";
 "str_with_mnemonics" = "転送可能ウォレット（ニーモニック）";
 "str_with_private_key" = "転送可能ウォーレット（プライベートキー）";
 "str_withdraw" = "%@出金";

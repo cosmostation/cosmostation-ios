@@ -101,14 +101,14 @@
 "str_create_mnemonic" = "니모닉 생성";
 "str_derived_wallets" = "파생된 지갑 수";
 "str_words_count" = "단어 수";
-"str_paste" = "붙여넣기";
+"str_paste" = "Paste";
 "str_path" = "HD 경로 :";
 "str_displayed_chain" = "보여지는 체인";
 "str_hidden_chain" = "숨겨진 체인";
-"str_qr_scan" = "스캔";
+"str_qr_scan" = "Scan";
 "str_switch_wallet" = "지갑 전환";
 "str_edit_token_list" = "토큰 편집";
-"str_wallet2" = "지갑";
+"str_wallet2" = "Wallet";
 "str_recipient_chain" = "수신 체인";
 "str_recipient_address" = "수신 주소";
 "str_max_availabe" = "최대 가능 :";

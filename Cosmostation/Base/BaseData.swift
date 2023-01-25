@@ -542,7 +542,7 @@ final class BaseData : NSObject{
         
       var description: String {
          switch self {
-         case .System: return Locale.preferredLanguages.first ?? ""
+         case .System: return Locale.current.languageCode ?? ""
          case .English: return "en"
          case .Korean: return "ko"
          case .Japanese: return "ja"
@@ -567,7 +567,7 @@ final class BaseData : NSObject{
         } else if(lang == 3) {
             return "日本語(日本)"
         }
-        return "System"
+        return NSLocalizedString("theme_system", comment: "")
     }
     
     func setCurrency(_ currency : Int) {
