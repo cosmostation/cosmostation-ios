@@ -4,6 +4,4 @@
 //
 import Foundation
 
-protocol State {
-    init()
-}
+protocol State {}

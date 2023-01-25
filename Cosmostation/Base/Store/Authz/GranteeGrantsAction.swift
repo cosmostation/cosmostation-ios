@@ -9,6 +9,6 @@
 import Foundation
 
 enum GranteeGrantsAction: Equatable {
-    case load(granteeAddress: String)
-    case refresh(granteeAddress: String)
+    case load
+    case refresh
 }
