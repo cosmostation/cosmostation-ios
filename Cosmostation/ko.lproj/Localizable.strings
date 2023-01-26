@@ -59,6 +59,7 @@
 "str_telegram" = "텔레그램";
 "str_starname_wc" = "스타네임 지갑연결";
 "str_term" = "약관";
+"str_privacy_policy" = "개인정보처리방침";
 "str_opensource" = "오픈소스 (Github)";
 "str_version" = "버전";
 "str_engineer" = "엔지니어 모드";

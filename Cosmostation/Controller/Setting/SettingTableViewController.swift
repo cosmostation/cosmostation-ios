@@ -59,6 +59,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var starnameWCTitle: UILabel!
     
     @IBOutlet weak var termTitle: UILabel!
+    @IBOutlet weak var privacyPolicyTitle: UILabel!
     @IBOutlet weak var githubTitle: UILabel!
     @IBOutlet weak var versionTitle: UILabel!
     @IBOutlet weak var engineerTitle: UILabel!
@@ -101,6 +102,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         telegramTitle.text = NSLocalizedString("str_telegram", comment: "")
         starnameWCTitle.text = NSLocalizedString("str_starname_wc", comment: "")
         termTitle.text = NSLocalizedString("str_term", comment: "")
+        privacyPolicyTitle.text = NSLocalizedString("str_privacy_policy", comment: "")
         githubTitle.text = NSLocalizedString("str_opensource", comment: "")
         versionTitle.text = NSLocalizedString("str_version", comment: "")
         engineerTitle.text = NSLocalizedString("str_engineer", comment: "")
@@ -249,19 +251,22 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         } else if (indexPath.section == 3) {
             if(indexPath.row == 0) {
                 if(Locale.current.languageCode == "ko") {
-                    guard let url = URL(string: "https://www.cosmostation.io/service_kr") else { return }
+                    guard let url = URL(string: "https://cosmostation.io/service_kr") else { return }
                     self.onShowSafariWeb(url)
                 } else {
-                    guard let url = URL(string: "https://www.cosmostation.io/service_en") else { return }
+                    guard let url = URL(string: "https://cosmostation.io/service_en") else { return }
                     self.onShowSafariWeb(url)
                 }
                 
-                
             } else if(indexPath.row == 1) {
-                guard let url = URL(string: "https://github.com/cosmostation/cosmostation-ios") else { return }
+                guard let url = URL(string: "https://cosmostation.io/privacy-policy") else { return }
                 self.onShowSafariWeb(url)
                 
             } else if(indexPath.row == 2) {
+                guard let url = URL(string: "https://github.com/cosmostation/cosmostation-ios") else { return }
+                self.onShowSafariWeb(url)
+                
+            } else if(indexPath.row == 3) {
                 let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id1459830339")
                 if(UIApplication.shared.canOpenURL(urlAppStore!)) {
                     UIApplication.shared.open(urlAppStore!, options: [:], completionHandler: nil)

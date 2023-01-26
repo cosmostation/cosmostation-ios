@@ -625,6 +625,7 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "str_switch_wallet" = "ウォレット切り替え";
 "str_telegram" = "テレグラム";
 "str_term" = "利用規約";
+"str_privacy_policy" = "個人情報処理方針";
 "str_theme" = "テーマ";
 "str_tiny" = "最小";
 "str_total" = "合計";

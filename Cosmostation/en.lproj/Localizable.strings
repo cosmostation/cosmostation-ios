@@ -58,7 +58,8 @@
 "str_blog" = "Cosmostation Blog";
 "str_telegram" = "Telegram";
 "str_starname_wc" = "Starname Wallet Connect";
-"str_term" = "Term and Policy";
+"str_term" = "Term";
+"str_privacy_policy" = "Privacy Policy";
 "str_opensource" = "Open Source (Github)";
 "str_version" = "Version";
 "str_engineer" = "Engineer Mode";
