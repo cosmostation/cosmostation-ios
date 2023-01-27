@@ -42,11 +42,6 @@ internal protocol Stride_Stakeibc_QueryClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Stride_Stakeibc_QueryGetValidatorsRequest, Stride_Stakeibc_QueryGetValidatorsResponse>
 
-  func iCAAccount(
-    _ request: Stride_Stakeibc_QueryGetICAAccountRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Stride_Stakeibc_QueryGetICAAccountRequest, Stride_Stakeibc_QueryGetICAAccountResponse>
-
   func hostZone(
     _ request: Stride_Stakeibc_QueryGetHostZoneRequest,
     callOptions: CallOptions?
@@ -76,6 +71,11 @@ internal protocol Stride_Stakeibc_QueryClientProtocol: GRPCClient {
     _ request: Stride_Stakeibc_QueryAllEpochTrackerRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Stride_Stakeibc_QueryAllEpochTrackerRequest, Stride_Stakeibc_QueryAllEpochTrackerResponse>
+
+  func nextPacketSequence(
+    _ request: Stride_Stakeibc_QueryGetNextPacketSequenceRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Stride_Stakeibc_QueryGetNextPacketSequenceRequest, Stride_Stakeibc_QueryGetNextPacketSequenceResponse>
 }
 
 extension Stride_Stakeibc_QueryClientProtocol {
@@ -116,24 +116,6 @@ extension Stride_Stakeibc_QueryClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeValidatorsInterceptors() ?? []
-    )
-  }
-
-  /// Queries a ICAAccount by index.
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to ICAAccount.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func iCAAccount(
-    _ request: Stride_Stakeibc_QueryGetICAAccountRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Stride_Stakeibc_QueryGetICAAccountRequest, Stride_Stakeibc_QueryGetICAAccountResponse> {
-    return self.makeUnaryCall(
-      path: "/stride.stakeibc.Query/ICAAccount",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeICAAccountInterceptors() ?? []
     )
   }
 
@@ -245,6 +227,24 @@ extension Stride_Stakeibc_QueryClientProtocol {
       interceptors: self.interceptors?.makeEpochTrackerAllInterceptors() ?? []
     )
   }
+
+  /// Queries the next packet sequence for one for a given channel
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to NextPacketSequence.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func nextPacketSequence(
+    _ request: Stride_Stakeibc_QueryGetNextPacketSequenceRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Stride_Stakeibc_QueryGetNextPacketSequenceRequest, Stride_Stakeibc_QueryGetNextPacketSequenceResponse> {
+    return self.makeUnaryCall(
+      path: "/stride.stakeibc.Query/NextPacketSequence",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeNextPacketSequenceInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Stride_Stakeibc_QueryClientInterceptorFactoryProtocol {
@@ -254,9 +254,6 @@ internal protocol Stride_Stakeibc_QueryClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'validators'.
   func makeValidatorsInterceptors() -> [ClientInterceptor<Stride_Stakeibc_QueryGetValidatorsRequest, Stride_Stakeibc_QueryGetValidatorsResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'iCAAccount'.
-  func makeICAAccountInterceptors() -> [ClientInterceptor<Stride_Stakeibc_QueryGetICAAccountRequest, Stride_Stakeibc_QueryGetICAAccountResponse>]
 
   /// - Returns: Interceptors to use when invoking 'hostZone'.
   func makeHostZoneInterceptors() -> [ClientInterceptor<Stride_Stakeibc_QueryGetHostZoneRequest, Stride_Stakeibc_QueryGetHostZoneResponse>]
@@ -275,6 +272,9 @@ internal protocol Stride_Stakeibc_QueryClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'epochTrackerAll'.
   func makeEpochTrackerAllInterceptors() -> [ClientInterceptor<Stride_Stakeibc_QueryAllEpochTrackerRequest, Stride_Stakeibc_QueryAllEpochTrackerResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'nextPacketSequence'.
+  func makeNextPacketSequenceInterceptors() -> [ClientInterceptor<Stride_Stakeibc_QueryGetNextPacketSequenceRequest, Stride_Stakeibc_QueryGetNextPacketSequenceResponse>]
 }
 
 internal final class Stride_Stakeibc_QueryClient: Stride_Stakeibc_QueryClientProtocol {
@@ -311,9 +311,6 @@ internal protocol Stride_Stakeibc_QueryProvider: CallHandlerProvider {
   /// Queries a Validator by host zone.
   func validators(request: Stride_Stakeibc_QueryGetValidatorsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Stride_Stakeibc_QueryGetValidatorsResponse>
 
-  /// Queries a ICAAccount by index.
-  func iCAAccount(request: Stride_Stakeibc_QueryGetICAAccountRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Stride_Stakeibc_QueryGetICAAccountResponse>
-
   /// Queries a HostZone by id.
   func hostZone(request: Stride_Stakeibc_QueryGetHostZoneRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Stride_Stakeibc_QueryGetHostZoneResponse>
 
@@ -332,6 +329,9 @@ internal protocol Stride_Stakeibc_QueryProvider: CallHandlerProvider {
 
   /// Queries a list of EpochTracker items.
   func epochTrackerAll(request: Stride_Stakeibc_QueryAllEpochTrackerRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Stride_Stakeibc_QueryAllEpochTrackerResponse>
+
+  /// Queries the next packet sequence for one for a given channel
+  func nextPacketSequence(request: Stride_Stakeibc_QueryGetNextPacketSequenceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Stride_Stakeibc_QueryGetNextPacketSequenceResponse>
 }
 
 extension Stride_Stakeibc_QueryProvider {
@@ -360,15 +360,6 @@ extension Stride_Stakeibc_QueryProvider {
         responseSerializer: ProtobufSerializer<Stride_Stakeibc_QueryGetValidatorsResponse>(),
         interceptors: self.interceptors?.makeValidatorsInterceptors() ?? [],
         userFunction: self.validators(request:context:)
-      )
-
-    case "ICAAccount":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Stride_Stakeibc_QueryGetICAAccountRequest>(),
-        responseSerializer: ProtobufSerializer<Stride_Stakeibc_QueryGetICAAccountResponse>(),
-        interceptors: self.interceptors?.makeICAAccountInterceptors() ?? [],
-        userFunction: self.iCAAccount(request:context:)
       )
 
     case "HostZone":
@@ -425,6 +416,15 @@ extension Stride_Stakeibc_QueryProvider {
         userFunction: self.epochTrackerAll(request:context:)
       )
 
+    case "NextPacketSequence":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Stride_Stakeibc_QueryGetNextPacketSequenceRequest>(),
+        responseSerializer: ProtobufSerializer<Stride_Stakeibc_QueryGetNextPacketSequenceResponse>(),
+        interceptors: self.interceptors?.makeNextPacketSequenceInterceptors() ?? [],
+        userFunction: self.nextPacketSequence(request:context:)
+      )
+
     default:
       return nil
     }
@@ -440,10 +440,6 @@ internal protocol Stride_Stakeibc_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'validators'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeValidatorsInterceptors() -> [ServerInterceptor<Stride_Stakeibc_QueryGetValidatorsRequest, Stride_Stakeibc_QueryGetValidatorsResponse>]
-
-  /// - Returns: Interceptors to use when handling 'iCAAccount'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeICAAccountInterceptors() -> [ServerInterceptor<Stride_Stakeibc_QueryGetICAAccountRequest, Stride_Stakeibc_QueryGetICAAccountResponse>]
 
   /// - Returns: Interceptors to use when handling 'hostZone'.
   ///   Defaults to calling `self.makeInterceptors()`.
@@ -468,4 +464,8 @@ internal protocol Stride_Stakeibc_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'epochTrackerAll'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeEpochTrackerAllInterceptors() -> [ServerInterceptor<Stride_Stakeibc_QueryAllEpochTrackerRequest, Stride_Stakeibc_QueryAllEpochTrackerResponse>]
+
+  /// - Returns: Interceptors to use when handling 'nextPacketSequence'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeNextPacketSequenceInterceptors() -> [ServerInterceptor<Stride_Stakeibc_QueryGetNextPacketSequenceRequest, Stride_Stakeibc_QueryGetNextPacketSequenceResponse>]
 }

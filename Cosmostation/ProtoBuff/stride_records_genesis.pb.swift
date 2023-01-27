@@ -32,7 +32,7 @@ struct Stride_Records_UserRedemptionRecord {
 
   var receiver: String = String()
 
-  var amount: UInt64 = 0
+  var amount: String = String()
 
   var denom: String = String()
 
@@ -115,7 +115,7 @@ struct Stride_Records_DepositRecord {
 
   var id: UInt64 = 0
 
-  var amount: Int64 = 0
+  var amount: String = String()
 
   var denom: String = String()
 
@@ -229,9 +229,9 @@ struct Stride_Records_HostZoneUnbonding {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var stTokenAmount: UInt64 = 0
+  var stTokenAmount: String = String()
 
-  var nativeTokenAmount: UInt64 = 0
+  var nativeTokenAmount: String = String()
 
   var denom: String = String()
 
@@ -382,7 +382,7 @@ extension Stride_Records_UserRedemptionRecord: SwiftProtobuf.Message, SwiftProto
       case 1: try { try decoder.decodeSingularStringField(value: &self.id) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.sender) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.receiver) }()
-      case 4: try { try decoder.decodeSingularUInt64Field(value: &self.amount) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.amount) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self.denom) }()
       case 6: try { try decoder.decodeSingularStringField(value: &self.hostZoneID) }()
       case 7: try { try decoder.decodeSingularUInt64Field(value: &self.epochNumber) }()
@@ -402,8 +402,8 @@ extension Stride_Records_UserRedemptionRecord: SwiftProtobuf.Message, SwiftProto
     if !self.receiver.isEmpty {
       try visitor.visitSingularStringField(value: self.receiver, fieldNumber: 3)
     }
-    if self.amount != 0 {
-      try visitor.visitSingularUInt64Field(value: self.amount, fieldNumber: 4)
+    if !self.amount.isEmpty {
+      try visitor.visitSingularStringField(value: self.amount, fieldNumber: 4)
     }
     if !self.denom.isEmpty {
       try visitor.visitSingularStringField(value: self.denom, fieldNumber: 5)
@@ -535,7 +535,7 @@ extension Stride_Records_DepositRecord: SwiftProtobuf.Message, SwiftProtobuf._Me
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt64Field(value: &self.id) }()
-      case 2: try { try decoder.decodeSingularInt64Field(value: &self.amount) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.amount) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.denom) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.hostZoneID) }()
       case 6: try { try decoder.decodeSingularEnumField(value: &self.status) }()
@@ -550,8 +550,8 @@ extension Stride_Records_DepositRecord: SwiftProtobuf.Message, SwiftProtobuf._Me
     if self.id != 0 {
       try visitor.visitSingularUInt64Field(value: self.id, fieldNumber: 1)
     }
-    if self.amount != 0 {
-      try visitor.visitSingularInt64Field(value: self.amount, fieldNumber: 2)
+    if !self.amount.isEmpty {
+      try visitor.visitSingularStringField(value: self.amount, fieldNumber: 2)
     }
     if !self.denom.isEmpty {
       try visitor.visitSingularStringField(value: self.denom, fieldNumber: 3)
@@ -618,8 +618,8 @@ extension Stride_Records_HostZoneUnbonding: SwiftProtobuf.Message, SwiftProtobuf
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.stTokenAmount) }()
-      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.nativeTokenAmount) }()
+      case 1: try { try decoder.decodeSingularStringField(value: &self.stTokenAmount) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.nativeTokenAmount) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.denom) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.hostZoneID) }()
       case 5: try { try decoder.decodeSingularUInt64Field(value: &self.unbondingTime) }()
@@ -631,11 +631,11 @@ extension Stride_Records_HostZoneUnbonding: SwiftProtobuf.Message, SwiftProtobuf
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.stTokenAmount != 0 {
-      try visitor.visitSingularUInt64Field(value: self.stTokenAmount, fieldNumber: 1)
+    if !self.stTokenAmount.isEmpty {
+      try visitor.visitSingularStringField(value: self.stTokenAmount, fieldNumber: 1)
     }
-    if self.nativeTokenAmount != 0 {
-      try visitor.visitSingularUInt64Field(value: self.nativeTokenAmount, fieldNumber: 2)
+    if !self.nativeTokenAmount.isEmpty {
+      try visitor.visitSingularStringField(value: self.nativeTokenAmount, fieldNumber: 2)
     }
     if !self.denom.isEmpty {
       try visitor.visitSingularStringField(value: self.denom, fieldNumber: 3)

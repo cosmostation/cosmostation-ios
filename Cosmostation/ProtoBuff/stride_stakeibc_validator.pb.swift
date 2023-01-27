@@ -47,7 +47,7 @@ struct Stride_Stakeibc_Validator {
 
   var commissionRate: UInt64 = 0
 
-  var delegationAmt: UInt64 = 0
+  var delegationAmt: String = String()
 
   var weight: UInt64 = 0
 
@@ -171,7 +171,7 @@ extension Stride_Stakeibc_Validator: SwiftProtobuf.Message, SwiftProtobuf._Messa
       case 2: try { try decoder.decodeSingularStringField(value: &self.address) }()
       case 3: try { try decoder.decodeSingularEnumField(value: &self.status) }()
       case 4: try { try decoder.decodeSingularUInt64Field(value: &self.commissionRate) }()
-      case 5: try { try decoder.decodeSingularUInt64Field(value: &self.delegationAmt) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.delegationAmt) }()
       case 6: try { try decoder.decodeSingularUInt64Field(value: &self.weight) }()
       case 7: try { try decoder.decodeSingularMessageField(value: &self._internalExchangeRate) }()
       default: break
@@ -192,8 +192,8 @@ extension Stride_Stakeibc_Validator: SwiftProtobuf.Message, SwiftProtobuf._Messa
     if self.commissionRate != 0 {
       try visitor.visitSingularUInt64Field(value: self.commissionRate, fieldNumber: 4)
     }
-    if self.delegationAmt != 0 {
-      try visitor.visitSingularUInt64Field(value: self.delegationAmt, fieldNumber: 5)
+    if !self.delegationAmt.isEmpty {
+      try visitor.visitSingularStringField(value: self.delegationAmt, fieldNumber: 5)
     }
     if self.weight != 0 {
       try visitor.visitSingularUInt64Field(value: self.weight, fieldNumber: 6)

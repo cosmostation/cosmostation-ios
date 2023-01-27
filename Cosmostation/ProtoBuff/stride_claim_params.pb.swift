@@ -67,7 +67,7 @@ struct Stride_Claim_Airdrop {
   var distributorAddress: String = String()
 
   /// ustrd tokens claimed so far in the current period
-  var claimedSoFar: Int64 = 0
+  var claimedSoFar: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -135,7 +135,7 @@ extension Stride_Claim_Airdrop: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       case 3: try { try decoder.decodeSingularMessageField(value: &self._airdropDuration) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.claimDenom) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self.distributorAddress) }()
-      case 6: try { try decoder.decodeSingularInt64Field(value: &self.claimedSoFar) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.claimedSoFar) }()
       default: break
       }
     }
@@ -157,8 +157,8 @@ extension Stride_Claim_Airdrop: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if !self.distributorAddress.isEmpty {
       try visitor.visitSingularStringField(value: self.distributorAddress, fieldNumber: 5)
     }
-    if self.claimedSoFar != 0 {
-      try visitor.visitSingularInt64Field(value: self.claimedSoFar, fieldNumber: 6)
+    if !self.claimedSoFar.isEmpty {
+      try visitor.visitSingularStringField(value: self.claimedSoFar, fieldNumber: 6)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
