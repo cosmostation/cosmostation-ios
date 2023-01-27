@@ -14,10 +14,18 @@ class DelegateWarnPopup: BaseViewController, SBCardPopupContent {
     let allowsSwipeToDismissPopupCard =  false
     var warnImgType: UInt16?
     @IBOutlet weak var warnImg: UIImageView!
+    @IBOutlet weak var delegateWarnTitle: UILabel!
+    @IBOutlet weak var delegateWarnContent: UILabel!
+    @IBOutlet weak var btnCancel: UIButton!
+    @IBOutlet weak var btnConfirm: UIButton!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        delegateWarnTitle.text = NSLocalizedString("str_delegate_warn_title", comment: "")
+        delegateWarnContent.text = NSLocalizedString("str_delegate_warn_msg", comment: "")
+        btnCancel.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
+        btnConfirm.setTitle(NSLocalizedString("confirm", comment: ""), for: .normal)
+        
         if (warnImgType == 14) {
             self.warnImg.image = UIImage(named: "imgDelegate14Warning")
         } else if (warnImgType == 3) {

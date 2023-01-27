@@ -120,7 +120,7 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
         }
         
         mnemonicTitle.text = NSLocalizedString("msg_enter_mnemonics", comment: "")
-        btnPaste.setTitle(NSLocalizedString("str_paste", comment: ""), for: .normal)
+        btnPaste.setTitle(NSLocalizedString("str_paste_translate", comment: ""), for: .normal)
         btnConfirm.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     

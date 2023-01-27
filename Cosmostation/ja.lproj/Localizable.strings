@@ -536,7 +536,7 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "str_homepage" = "Cosmostation ホームページ";
 "str_icon_updated" = "アイコンの更新完了。";
 "str_import_address" = "観察アドレス登録";
-"str_import_mnemonic" = "ニモニック登録";
+"str_import_mnemonic" = "ニーモニック復元";
 "str_import_privatekey" = "プライベートキー登録";
 "str_imported_date" = "登録日付";
 "str_imported_state" = "登録状態";
@@ -654,6 +654,9 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "str_withdraw" = "%@出金";
 "str_words_count" = "文字数";
 "str_zero" = "無料";
+"str_delegate_warn_title" = "委任について";
+"str_delegate_warn_msg" = "検証人に委任してステーキング報酬を受けることができます。 選択したノードに問題が発生すると、委任された時分の一部を失う可能性があります。 慎重に選択してください。\n\n委任を撤回すると、撤回期間があります。 この期間中にはステーキング報酬を受けることができません。\n\n";
+"str_paste_translate" = "貼り付け";
 "tendermint_type" = "テンダーミントスタイル";
 "testnet_warn_msg" = "選択したウォレットはテストネット用のウォレットです（該当するウォレットのトークンは実際の価値はありません）。
 コスモステーションは、ユーザーが各チェーンのユニークな機能をメインネットに反映する前に確認して試す機会を提供するため、テストネットをサポートしています。 そのテストネットのサポートはいつでも中断される可能性があります。";
