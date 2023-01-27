@@ -115,6 +115,7 @@
 
 "btn_buy_moonpay" = " %@ 購入";
 "btn_buy_kadomoney" = "クリプト購入";
+"btn_liquid_staking" = "  リキッド ステーキング";
 
 "add_address_hint" = "1 つ以上のアドレスを入力してください。";
 "add_address_msg" = "観察モードに復旧単語入力なしでウォーレットの状態が確認できます。
@@ -153,7 +154,7 @@
 "btn_sifdefi" = "Sif De-Fi";
 "btn_undelegate" = "委任を取り消す";
 "btn_vote_validator" = "検証人投票";
-"btn_walletconnect" = "ウォレットコネクト";
+"btn_walletconnect" = "Wallet Connect";
 "btn_withdraw" = "撤退";
 "buy_select_fiat_msg" = "購入する通貨を選択してください。";
 "buy_select_fiat_title" = "通貨選択";
