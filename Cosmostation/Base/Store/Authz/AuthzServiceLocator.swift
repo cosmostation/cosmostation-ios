@@ -11,6 +11,7 @@ import GRPC
 
 protocol AuthzServiceLocator {
     func authzQueryClient() throws -> Cosmos_Authz_V1beta1_QueryClient
+    func baseData() -> BaseData
 }
 
 struct AuthzServiceLocatorImpl: AuthzServiceLocator {
@@ -18,5 +19,9 @@ struct AuthzServiceLocatorImpl: AuthzServiceLocator {
         let connection = try ClientConnection.connection()
         let client = Cosmos_Authz_V1beta1_QueryClient(channel: connection)
         return client
+    }
+    
+    func baseData() -> BaseData {
+        BaseData.instance
     }
 }

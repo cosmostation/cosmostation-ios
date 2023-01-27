@@ -30,14 +30,11 @@ struct GranteeGrantsState: State {
     }
     let load: LoadState
     let granters: [String]
+    let chainConfig: ChainConfig?
     
-    init() {
-        load = .notLoading
-        granters = []
-    }
-    
-    init(load: LoadState, granters: [String]) {
+    init(load: LoadState = .loading, granters: [String] = [], chainConfig: ChainConfig? = nil) {
         self.load = load
         self.granters = granters
+        self.chainConfig = chainConfig
     }
 }

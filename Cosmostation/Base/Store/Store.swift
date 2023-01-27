@@ -11,19 +11,15 @@ actor Store<S: State, Action, R: AsyncSequence, ServiceLocator>: ObservableObjec
     typealias Output = R
     typealias Reducer = (Input) -> Output
 
-    @MainActor @Published private(set) var state: S = .init()
+    @MainActor @Published private(set) var state: S
     private let reducer: Reducer
     private let serviceLocator: ServiceLocator
 
     @MainActor 
-    init(reducer: @escaping Reducer, serviceLocator: ServiceLocator, state: S? = nil) {
+    init(reducer: @escaping Reducer, serviceLocator: ServiceLocator, state: S) {
         self.reducer = reducer
         self.serviceLocator = serviceLocator
-        if let state = state {
-            self.state = state
-        } else {
-            self.state = S()
-        }
+        self.state = state
     }
 
     func dispatch(action: Action) async {

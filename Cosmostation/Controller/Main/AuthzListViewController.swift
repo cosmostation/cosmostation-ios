@@ -7,25 +7,28 @@
 //
 
 import UIKit
-import GRPC
-import NIO
 import Combine
 
 class AuthzListViewController: BaseViewController {
 
     @IBOutlet weak var authzTableView: UITableView!
     @IBOutlet weak var loadingImg: LoadingImageView!
-    private let store: Store = .init(reducer: AuthzReducers.granteeGrants, serviceLocator: AuthzServiceLocatorImpl())
+    private let store: Store = .init(reducer: AuthzReducers.granteeGrants,
+                                     serviceLocator: AuthzServiceLocatorImpl(),
+                                     state: .init())
     private var subscriptions: Set<AnyCancellable> = .init()
     private let refresher: UIRefreshControl = UIRefreshControl()
-    private var granters = Array<String>()
+    
+    init() {
+        super.init(nibName: "AuthzListViewController", bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory.getChainConfig(chainType)
-    
         self.authzTableView.delegate = self
         self.authzTableView.dataSource = self
         self.authzTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -33,7 +36,6 @@ class AuthzListViewController: BaseViewController {
         self.authzTableView.register(UINib(nibName: "GranterEmptyViewCell", bundle: nil), forCellReuseIdentifier: "GranterEmptyViewCell")
         self.authzTableView.rowHeight = UITableView.automaticDimension
         self.authzTableView.estimatedRowHeight = UITableView.automaticDimension
-        
         self.refresher.addTarget(self, action: #selector(startRefreshTask), for: .valueChanged)
         self.refresher.tintColor = UIColor.font05
         self.authzTableView.addSubview(refresher)
@@ -60,16 +62,14 @@ class AuthzListViewController: BaseViewController {
     }
     
     private func startLoadTask() {
-        guard let account = account else { return }
         Task {
-            await store.dispatch(action: .load(granteeAddress: account.account_address))
+            await store.dispatch(action: .load)
         }
     }
     
     @objc private func startRefreshTask() {
-        guard let account = account else { return }
         Task {
-            await store.dispatch(action: .refresh(granteeAddress: account.account_address))
+            await store.dispatch(action: .refresh)
         }
     }
     
@@ -78,7 +78,6 @@ class AuthzListViewController: BaseViewController {
         loadingImg.isHidden = !state.load.isLoading
         authzTableView.isHidden = state.load.isLoading
         refresher.animate(state.load.isRefreshing)
-        granters = state.granters
         authzTableView.reloadData()
     }
 }
@@ -88,28 +87,29 @@ class AuthzListViewController: BaseViewController {
 extension AuthzListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (granters.count == 0) {
+        if (store.state.granters.count == 0) {
             return 1
         }
-        return granters.count
+        return store.state.granters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (granters.count == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"GranterEmptyViewCell") as? GranterEmptyViewCell
+        let chainConfig = store.state.chainConfig
+        if (store.state.granters.count == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"GranterEmptyViewCell") as? GranterEmptyViewCell            
             cell?.rootCardView.backgroundColor = chainConfig?.chainColorBG
             return cell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"GranterViewCell") as? GranterViewCell
-            cell?.onBindView(chainConfig, granters[indexPath.row])
+            cell?.onBindView(chainConfig, store.state.granters[indexPath.row])
             return cell!
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (granters.count > 0) {
+        if (store.state.granters.count > 0) {
             let authzDetailVC = AuthzDetailViewController(nibName: "AuthzDetailViewController", bundle: nil)
-            authzDetailVC.granterAddress = granters[indexPath.row]
+            authzDetailVC.granterAddress = store.state.granters[indexPath.row]
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(authzDetailVC, animated: true)
         }
