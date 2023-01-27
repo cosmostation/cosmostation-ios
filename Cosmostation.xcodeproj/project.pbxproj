@@ -2609,6 +2609,7 @@
 		28FEDCE626DB140A00A43D01 /* KavaIncentiveClaim0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FEDCE426DB140A00A43D01 /* KavaIncentiveClaim0ViewController.xib */; };
 		28FEDCE926DB141900A43D01 /* KavaIncentiveClaim3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEDCE726DB141900A43D01 /* KavaIncentiveClaim3ViewController.swift */; };
 		28FEDCEA26DB141900A43D01 /* KavaIncentiveClaim3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FEDCE826DB141900A43D01 /* KavaIncentiveClaim3ViewController.xib */; };
+		9EBDC03599A6A52BCFB81E33 /* Pods_Cosmostation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA3F07B8EA5FD2C04B9EB807 /* Pods_Cosmostation.framework */; };
 		9F0C15A928DF518100BA24B1 /* TwoLinesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */; };
 		9F0C15AA28DF518100BA24B1 /* TwoLinesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */; };
 		9F1EE31E295F9555007B7CD7 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1EE31D295F9555007B7CD7 /* Store.swift */; };
@@ -2657,7 +2658,6 @@
 		B113B26C2909528A0004F5A6 /* HardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284D17DE2535573D00C364F9 /* HardListViewController.swift */; };
 		B1247F35290ABE5C00F60500 /* UIApplication+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1247F34290ABE5C00F60500 /* UIApplication+KeyWindow.swift */; };
 		B1247F36290ABE5C00F60500 /* UIApplication+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1247F34290ABE5C00F60500 /* UIApplication+KeyWindow.swift */; };
-		C10F8E8103FA540DE8D91196 /* Pods_Cosmostation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB20D291C0AF536BBDAE928C /* Pods_Cosmostation.framework */; };
 		E10396772875AAB70055903A /* ProposalVotingPeriodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10396752875AAB70055903A /* ProposalVotingPeriodCell.swift */; };
 		E10396782875AAB70055903A /* ProposalVotingPeriodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10396752875AAB70055903A /* ProposalVotingPeriodCell.swift */; };
 		E10396792875AAB70055903A /* ProposalVotingPeriodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10396762875AAB70055903A /* ProposalVotingPeriodCell.xib */; };
@@ -2847,7 +2847,7 @@
 		E1FD233D233E1C44009327FE /* WalletGuideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1FD233B233E1C44009327FE /* WalletGuideCell.xib */; };
 		E1FEE459225B17970040FAFD /* AmountInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FEE458225B17970040FAFD /* AmountInputTextField.swift */; };
 		E1FEE45B225B1AEF0040FAFD /* MemoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FEE45A225B1AEF0040FAFD /* MemoTextView.swift */; };
-		EF72FCADF97529BEAE2972CD /* Pods_CosmostationDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D86957DECC357BB555822802 /* Pods_CosmostationDev.framework */; };
+		EB85535FBF1815AEAECE43D4 /* Pods_CosmostationDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE90772AFD2E77BC9578D8B2 /* Pods_CosmostationDev.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -3740,7 +3740,6 @@
 		04FCD31E2930EB9400BA5349 /* TxLiquidStakeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxLiquidStakeCell.xib; sourceTree = "<group>"; };
 		04FD713628B8B3C80059E88B /* AssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
 		04FD713728B8B3C80059E88B /* AssetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCell.xib; sourceTree = "<group>"; };
-		106166B99D48E1E1E23A50A9 /* Pods-CosmostationDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.release.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.release.xcconfig"; sourceTree = "<group>"; };
 		151788EA282E078600A7D7CC /* WalletStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStationCell.swift; sourceTree = "<group>"; };
 		151788EB282E078600A7D7CC /* WalletStationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStationCell.xib; sourceTree = "<group>"; };
 		1569489728ABD9E0004777ED /* ChainPassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPassage.swift; sourceTree = "<group>"; };
@@ -3758,7 +3757,7 @@
 		18D4C19E28C73410003F230A /* ManageConnectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageConnectionCell.swift; sourceTree = "<group>"; };
 		18FFB7D5281AF533004E65BB /* CosmostationDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CosmostationDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18FFB7D9281E9C9F004E65BB /* CosmostationDev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CosmostationDev.plist; sourceTree = "<group>"; };
-		23DC1186B7119D1B4D2EB379 /* Pods-Cosmostation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.release.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.release.xcconfig"; sourceTree = "<group>"; };
+		21BC7F3516AE8AA91E95290A /* Pods-CosmostationDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.debug.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.debug.xcconfig"; sourceTree = "<group>"; };
 		25F8C72F296D0D0B0008CCC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		25F8C730296D31200008CCC8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2802B4AB28250A9300B2D9E8 /* DeriveWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeriveWalletCell.swift; sourceTree = "<group>"; };
@@ -4128,7 +4127,8 @@
 		28FEDCE426DB140A00A43D01 /* KavaIncentiveClaim0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaIncentiveClaim0ViewController.xib; sourceTree = "<group>"; };
 		28FEDCE726DB141900A43D01 /* KavaIncentiveClaim3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaIncentiveClaim3ViewController.swift; sourceTree = "<group>"; };
 		28FEDCE826DB141900A43D01 /* KavaIncentiveClaim3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaIncentiveClaim3ViewController.xib; sourceTree = "<group>"; };
-		8378C93C7F20C3EFF8166D6C /* Pods-CosmostationDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.debug.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.debug.xcconfig"; sourceTree = "<group>"; };
+		6ED0AF4867E1AFC41A279302 /* Pods-Cosmostation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.debug.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.debug.xcconfig"; sourceTree = "<group>"; };
+		9EC086EE8CB71A2FB9E32070 /* Pods-Cosmostation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.release.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.release.xcconfig"; sourceTree = "<group>"; };
 		9F0C15A828DF518100BA24B1 /* TwoLinesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLinesButton.swift; sourceTree = "<group>"; };
 		9F1EE31D295F9555007B7CD7 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		9F1EE320295F957C007B7CD7 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -4146,10 +4146,9 @@
 		9F8C3E4B2922282B0031DA73 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		9F9C28C6295A496F00BC97D1 /* ClientConnection+Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClientConnection+Create.swift"; sourceTree = "<group>"; };
 		9FF966032926BE78006C2300 /* Array+Sum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Sum.swift"; sourceTree = "<group>"; };
+		B033DE716D0CD3ABABAD6866 /* Pods-CosmostationDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.release.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.release.xcconfig"; sourceTree = "<group>"; };
 		B1247F34290ABE5C00F60500 /* UIApplication+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+KeyWindow.swift"; sourceTree = "<group>"; };
-		B928115C5F425560ED5DE8F4 /* Pods-Cosmostation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.debug.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.debug.xcconfig"; sourceTree = "<group>"; };
-		BB20D291C0AF536BBDAE928C /* Pods_Cosmostation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cosmostation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D86957DECC357BB555822802 /* Pods_CosmostationDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CosmostationDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE90772AFD2E77BC9578D8B2 /* Pods_CosmostationDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CosmostationDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E10396752875AAB70055903A /* ProposalVotingPeriodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalVotingPeriodCell.swift; sourceTree = "<group>"; };
 		E10396762875AAB70055903A /* ProposalVotingPeriodCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProposalVotingPeriodCell.xib; sourceTree = "<group>"; };
 		E103967B2875AACC0055903A /* ProposalEtcPeriodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalEtcPeriodCell.swift; sourceTree = "<group>"; };
@@ -4301,6 +4300,7 @@
 		E1FD233B233E1C44009327FE /* WalletGuideCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletGuideCell.xib; sourceTree = "<group>"; };
 		E1FEE458225B17970040FAFD /* AmountInputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInputTextField.swift; sourceTree = "<group>"; };
 		E1FEE45A225B1AEF0040FAFD /* MemoTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTextView.swift; sourceTree = "<group>"; };
+		FA3F07B8EA5FD2C04B9EB807 /* Pods_Cosmostation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cosmostation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -4308,7 +4308,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF72FCADF97529BEAE2972CD /* Pods_CosmostationDev.framework in Frameworks */,
+				EB85535FBF1815AEAECE43D4 /* Pods_CosmostationDev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4316,7 +4316,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C10F8E8103FA540DE8D91196 /* Pods_Cosmostation.framework in Frameworks */,
+				9EBDC03599A6A52BCFB81E33 /* Pods_Cosmostation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4610,6 +4610,15 @@
 				04FCD31E2930EB9400BA5349 /* TxLiquidStakeCell.xib */,
 			);
 			path = stride;
+			sourceTree = "<group>";
+		};
+		1D72712946482FD8BAF942D7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA3F07B8EA5FD2C04B9EB807 /* Pods_Cosmostation.framework */,
+				BE90772AFD2E77BC9578D8B2 /* Pods_CosmostationDev.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		2807DB36278817D600016571 /* desmos */ = {
@@ -5715,22 +5724,13 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		51090F06A9DC4E886F628890 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BB20D291C0AF536BBDAE928C /* Pods_Cosmostation.framework */,
-				D86957DECC357BB555822802 /* Pods_CosmostationDev.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		74DE208134C7AE8A99805D94 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B928115C5F425560ED5DE8F4 /* Pods-Cosmostation.debug.xcconfig */,
-				23DC1186B7119D1B4D2EB379 /* Pods-Cosmostation.release.xcconfig */,
-				8378C93C7F20C3EFF8166D6C /* Pods-CosmostationDev.debug.xcconfig */,
-				106166B99D48E1E1E23A50A9 /* Pods-CosmostationDev.release.xcconfig */,
+				6ED0AF4867E1AFC41A279302 /* Pods-Cosmostation.debug.xcconfig */,
+				9EC086EE8CB71A2FB9E32070 /* Pods-Cosmostation.release.xcconfig */,
+				21BC7F3516AE8AA91E95290A /* Pods-CosmostationDev.debug.xcconfig */,
+				B033DE716D0CD3ABABAD6866 /* Pods-CosmostationDev.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -5941,7 +5941,7 @@
 				E1945E26222E7C0600A1436F /* Cosmostation */,
 				E1945E25222E7C0600A1436F /* Products */,
 				74DE208134C7AE8A99805D94 /* Pods */,
-				51090F06A9DC4E886F628890 /* Frameworks */,
+				1D72712946482FD8BAF942D7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -6315,11 +6315,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18FFB7D2281AF533004E65BB /* Build configuration list for PBXNativeTarget "CosmostationDev" */;
 			buildPhases = (
-				5B89D0D020D39025BEB263F4 /* [CP] Check Pods Manifest.lock */,
+				2069A3DF626B99914CFA0F14 /* [CP] Check Pods Manifest.lock */,
 				18FFB25F281AF533004E65BB /* Sources */,
 				18FFB671281AF533004E65BB /* Frameworks */,
 				18FFB673281AF533004E65BB /* Resources */,
-				91192CAA3B5E648499088B1D /* [CP] Embed Pods Frameworks */,
+				FF2E224BAFF55340BB9A9502 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -6334,19 +6334,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E1945E36222E7C0800A1436F /* Build configuration list for PBXNativeTarget "Cosmostation" */;
 			buildPhases = (
-				F35A0FAB16C488FCD2EBCC56 /* [CP] Check Pods Manifest.lock */,
+				0105E11F0EFC61A959B832A3 /* [CP] Check Pods Manifest.lock */,
 				E1945E20222E7C0600A1436F /* Sources */,
 				E1945E21222E7C0600A1436F /* Frameworks */,
 				E1945E22222E7C0600A1436F /* Resources */,
-				5810D5D6DD2213420F19BF35 /* [CP] Embed Pods Frameworks */,
+				A3D328274E250531DA57755A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Cosmostation;
-			packageProductDependencies = (
-			);
 			productName = Cosmostation;
 			productReference = E1945E24222E7C0600A1436F /* Cosmostation.app */;
 			productType = "com.apple.product-type.application";
@@ -6386,8 +6384,6 @@
 				ja,
 			);
 			mainGroup = E1945E1B222E7C0600A1436F;
-			packageReferences = (
-			);
 			productRefGroup = E1945E25222E7C0600A1436F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -7113,24 +7109,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5810D5D6DD2213420F19BF35 /* [CP] Embed Pods Frameworks */ = {
+		0105E11F0EFC61A959B832A3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cosmostation/Pods-Cosmostation-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cosmostation/Pods-Cosmostation-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cosmostation-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cosmostation/Pods-Cosmostation-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5B89D0D020D39025BEB263F4 /* [CP] Check Pods Manifest.lock */ = {
+		2069A3DF626B99914CFA0F14 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -7152,7 +7153,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		91192CAA3B5E648499088B1D /* [CP] Embed Pods Frameworks */ = {
+		A3D328274E250531DA57755A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cosmostation/Pods-Cosmostation-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cosmostation/Pods-Cosmostation-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cosmostation/Pods-Cosmostation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF2E224BAFF55340BB9A9502 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -7167,28 +7185,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F35A0FAB16C488FCD2EBCC56 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cosmostation-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -9485,7 +9481,7 @@
 /* Begin XCBuildConfiguration section */
 		18FFB7D3281AF533004E65BB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8378C93C7F20C3EFF8166D6C /* Pods-CosmostationDev.debug.xcconfig */;
+			baseConfigurationReference = 21BC7F3516AE8AA91E95290A /* Pods-CosmostationDev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDebug;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -9518,7 +9514,7 @@
 		};
 		18FFB7D4281AF533004E65BB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 106166B99D48E1E1E23A50A9 /* Pods-CosmostationDev.release.xcconfig */;
+			baseConfigurationReference = B033DE716D0CD3ABABAD6866 /* Pods-CosmostationDev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDebug;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -9528,6 +9524,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 180;
 				DEVELOPMENT_TEAM = 8G562MW56M;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -9542,6 +9539,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Cosmostation debug provisioning profile";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Cosmostation debug provisioning profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "Cosmostation/Utils/Cosmostation-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -9670,7 +9668,7 @@
 		};
 		E1945E37222E7C0800A1436F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B928115C5F425560ED5DE8F4 /* Pods-Cosmostation.debug.xcconfig */;
+			baseConfigurationReference = 6ED0AF4867E1AFC41A279302 /* Pods-Cosmostation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -9702,7 +9700,7 @@
 		};
 		E1945E38222E7C0800A1436F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23DC1186B7119D1B4D2EB379 /* Pods-Cosmostation.release.xcconfig */;
+			baseConfigurationReference = 9EC086EE8CB71A2FB9E32070 /* Pods-Cosmostation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

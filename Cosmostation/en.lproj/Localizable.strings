@@ -58,7 +58,8 @@
 "str_blog" = "Cosmostation Blog";
 "str_telegram" = "Telegram";
 "str_starname_wc" = "Starname Wallet Connect";
-"str_term" = "Term and Policy";
+"str_term" = "Term";
+"str_privacy_policy" = "Privacy Policy";
 "str_opensource" = "Open Source (Github)";
 "str_version" = "Version";
 "str_engineer" = "Engineer Mode";
@@ -152,6 +153,10 @@
 "str_insert_amount" = "Insert Amount";
 "str_estimate_withdraw_amount" = "Withdraw Amount(est)";
 "str_tip" = "Tip";
+"str_delegate_warn_title" = "Delegate Notice";
+"str_delegate_warn_msg" = "You can receive staking rewards by delegating to a validator. You may lose a portion of your delegated stake if a problem occurs with the selected node. Please perform careful due diligence before delegating.\n\nWhen you undelegate, there is an unbonding period. You will not receive staking rewards during this time.\n\n";
+"str_paste_translate" = "Paste";
+
 
 
 "btn_delegate" = "  Delegate";
@@ -332,9 +337,6 @@
 "tx_liquid_staking_0" = "Enter staking amount";
 "tx_liquid_unstaking_0" = "Enter unstaking amount";
 "tx_liquid_unstaking_1" = "Enter recipient Address";
-
-
-
 
 
 "password_init1" = "Enter your new PIN";
