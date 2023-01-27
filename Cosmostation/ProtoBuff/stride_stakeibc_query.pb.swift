@@ -108,37 +108,6 @@ struct Stride_Stakeibc_QueryGetValidatorsResponse {
   init() {}
 }
 
-struct Stride_Stakeibc_QueryGetICAAccountRequest {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-struct Stride_Stakeibc_QueryGetICAAccountResponse {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var icaAccount: Stride_Stakeibc_ICAAccount {
-    get {return _icaAccount ?? Stride_Stakeibc_ICAAccount()}
-    set {_icaAccount = newValue}
-  }
-  /// Returns true if `icaAccount` has been explicitly set.
-  var hasIcaAccount: Bool {return self._icaAccount != nil}
-  /// Clears the value of `icaAccount`. Subsequent reads from it will return its default value.
-  mutating func clearIcaAccount() {self._icaAccount = nil}
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  fileprivate var _icaAccount: Stride_Stakeibc_ICAAccount? = nil
-}
-
 struct Stride_Stakeibc_QueryGetHostZoneRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -278,20 +247,9 @@ struct Stride_Stakeibc_QueryAllEpochTrackerRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var pagination: Cosmos_Base_Query_V1beta1_PageRequest {
-    get {return _pagination ?? Cosmos_Base_Query_V1beta1_PageRequest()}
-    set {_pagination = newValue}
-  }
-  /// Returns true if `pagination` has been explicitly set.
-  var hasPagination: Bool {return self._pagination != nil}
-  /// Clears the value of `pagination`. Subsequent reads from it will return its default value.
-  mutating func clearPagination() {self._pagination = nil}
-
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  fileprivate var _pagination: Cosmos_Base_Query_V1beta1_PageRequest? = nil
 }
 
 struct Stride_Stakeibc_QueryAllEpochTrackerResponse {
@@ -301,20 +259,35 @@ struct Stride_Stakeibc_QueryAllEpochTrackerResponse {
 
   var epochTracker: [Stride_Stakeibc_EpochTracker] = []
 
-  var pagination: Cosmos_Base_Query_V1beta1_PageResponse {
-    get {return _pagination ?? Cosmos_Base_Query_V1beta1_PageResponse()}
-    set {_pagination = newValue}
-  }
-  /// Returns true if `pagination` has been explicitly set.
-  var hasPagination: Bool {return self._pagination != nil}
-  /// Clears the value of `pagination`. Subsequent reads from it will return its default value.
-  mutating func clearPagination() {self._pagination = nil}
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Stride_Stakeibc_QueryGetNextPacketSequenceRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var channelID: String = String()
+
+  var portID: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
+}
 
-  fileprivate var _pagination: Cosmos_Base_Query_V1beta1_PageResponse? = nil
+struct Stride_Stakeibc_QueryGetNextPacketSequenceResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var sequence: UInt64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -501,57 +474,6 @@ extension Stride_Stakeibc_QueryGetValidatorsResponse: SwiftProtobuf.Message, Swi
 
   static func ==(lhs: Stride_Stakeibc_QueryGetValidatorsResponse, rhs: Stride_Stakeibc_QueryGetValidatorsResponse) -> Bool {
     if lhs.validators != rhs.validators {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Stride_Stakeibc_QueryGetICAAccountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".QueryGetICAAccountRequest"
-  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let _ = try decoder.nextFieldNumber() {
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Stride_Stakeibc_QueryGetICAAccountRequest, rhs: Stride_Stakeibc_QueryGetICAAccountRequest) -> Bool {
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Stride_Stakeibc_QueryGetICAAccountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".QueryGetICAAccountResponse"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "ica_account"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._icaAccount) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._icaAccount {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Stride_Stakeibc_QueryGetICAAccountResponse, rhs: Stride_Stakeibc_QueryGetICAAccountResponse) -> Bool {
-    if lhs._icaAccount != rhs._icaAccount {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -821,31 +743,18 @@ extension Stride_Stakeibc_QueryGetEpochTrackerResponse: SwiftProtobuf.Message, S
 
 extension Stride_Stakeibc_QueryAllEpochTrackerRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".QueryAllEpochTrackerRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "pagination"),
-  ]
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._pagination) }()
-      default: break
-      }
+    while let _ = try decoder.nextFieldNumber() {
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._pagination {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Stride_Stakeibc_QueryAllEpochTrackerRequest, rhs: Stride_Stakeibc_QueryAllEpochTrackerRequest) -> Bool {
-    if lhs._pagination != rhs._pagination {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -855,7 +764,6 @@ extension Stride_Stakeibc_QueryAllEpochTrackerResponse: SwiftProtobuf.Message, S
   static let protoMessageName: String = _protobuf_package + ".QueryAllEpochTrackerResponse"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "epoch_tracker"),
-    2: .same(proto: "pagination"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -865,7 +773,6 @@ extension Stride_Stakeibc_QueryAllEpochTrackerResponse: SwiftProtobuf.Message, S
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.epochTracker) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._pagination) }()
       default: break
       }
     }
@@ -875,15 +782,81 @@ extension Stride_Stakeibc_QueryAllEpochTrackerResponse: SwiftProtobuf.Message, S
     if !self.epochTracker.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.epochTracker, fieldNumber: 1)
     }
-    if let v = self._pagination {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Stride_Stakeibc_QueryAllEpochTrackerResponse, rhs: Stride_Stakeibc_QueryAllEpochTrackerResponse) -> Bool {
     if lhs.epochTracker != rhs.epochTracker {return false}
-    if lhs._pagination != rhs._pagination {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Stride_Stakeibc_QueryGetNextPacketSequenceRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryGetNextPacketSequenceRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "channel_id"),
+    2: .standard(proto: "port_id"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.channelID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.portID) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.channelID.isEmpty {
+      try visitor.visitSingularStringField(value: self.channelID, fieldNumber: 1)
+    }
+    if !self.portID.isEmpty {
+      try visitor.visitSingularStringField(value: self.portID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Stride_Stakeibc_QueryGetNextPacketSequenceRequest, rhs: Stride_Stakeibc_QueryGetNextPacketSequenceRequest) -> Bool {
+    if lhs.channelID != rhs.channelID {return false}
+    if lhs.portID != rhs.portID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Stride_Stakeibc_QueryGetNextPacketSequenceResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryGetNextPacketSequenceResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "sequence"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.sequence) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.sequence != 0 {
+      try visitor.visitSingularUInt64Field(value: self.sequence, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Stride_Stakeibc_QueryGetNextPacketSequenceResponse, rhs: Stride_Stakeibc_QueryGetNextPacketSequenceResponse) -> Bool {
+    if lhs.sequence != rhs.sequence {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

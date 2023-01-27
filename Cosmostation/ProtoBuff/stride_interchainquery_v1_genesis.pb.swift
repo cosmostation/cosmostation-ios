@@ -35,15 +35,11 @@ struct Stride_Interchainquery_V1_Query {
 
   var request: Data = Data()
 
-  var period: String = String()
-
-  var lastHeight: String = String()
-
   var callbackID: String = String()
 
   var ttl: UInt64 = 0
 
-  var height: Int64 = 0
+  var requestSent: Bool = false
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -93,11 +89,9 @@ extension Stride_Interchainquery_V1_Query: SwiftProtobuf.Message, SwiftProtobuf.
     3: .standard(proto: "chain_id"),
     4: .standard(proto: "query_type"),
     5: .same(proto: "request"),
-    6: .same(proto: "period"),
-    7: .standard(proto: "last_height"),
     8: .standard(proto: "callback_id"),
     9: .same(proto: "ttl"),
-    10: .same(proto: "height"),
+    11: .standard(proto: "request_sent"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -111,11 +105,9 @@ extension Stride_Interchainquery_V1_Query: SwiftProtobuf.Message, SwiftProtobuf.
       case 3: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.queryType) }()
       case 5: try { try decoder.decodeSingularBytesField(value: &self.request) }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self.period) }()
-      case 7: try { try decoder.decodeSingularStringField(value: &self.lastHeight) }()
       case 8: try { try decoder.decodeSingularStringField(value: &self.callbackID) }()
       case 9: try { try decoder.decodeSingularUInt64Field(value: &self.ttl) }()
-      case 10: try { try decoder.decodeSingularInt64Field(value: &self.height) }()
+      case 11: try { try decoder.decodeSingularBoolField(value: &self.requestSent) }()
       default: break
       }
     }
@@ -137,20 +129,14 @@ extension Stride_Interchainquery_V1_Query: SwiftProtobuf.Message, SwiftProtobuf.
     if !self.request.isEmpty {
       try visitor.visitSingularBytesField(value: self.request, fieldNumber: 5)
     }
-    if !self.period.isEmpty {
-      try visitor.visitSingularStringField(value: self.period, fieldNumber: 6)
-    }
-    if !self.lastHeight.isEmpty {
-      try visitor.visitSingularStringField(value: self.lastHeight, fieldNumber: 7)
-    }
     if !self.callbackID.isEmpty {
       try visitor.visitSingularStringField(value: self.callbackID, fieldNumber: 8)
     }
     if self.ttl != 0 {
       try visitor.visitSingularUInt64Field(value: self.ttl, fieldNumber: 9)
     }
-    if self.height != 0 {
-      try visitor.visitSingularInt64Field(value: self.height, fieldNumber: 10)
+    if self.requestSent != false {
+      try visitor.visitSingularBoolField(value: self.requestSent, fieldNumber: 11)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -161,11 +147,9 @@ extension Stride_Interchainquery_V1_Query: SwiftProtobuf.Message, SwiftProtobuf.
     if lhs.chainID != rhs.chainID {return false}
     if lhs.queryType != rhs.queryType {return false}
     if lhs.request != rhs.request {return false}
-    if lhs.period != rhs.period {return false}
-    if lhs.lastHeight != rhs.lastHeight {return false}
     if lhs.callbackID != rhs.callbackID {return false}
     if lhs.ttl != rhs.ttl {return false}
-    if lhs.height != rhs.height {return false}
+    if lhs.requestSent != rhs.requestSent {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

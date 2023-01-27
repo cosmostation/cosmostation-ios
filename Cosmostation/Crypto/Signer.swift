@@ -2042,7 +2042,7 @@ class Signer {
     static func genLiquidityStaking(_ creater: String, _ amount: String, _ hostDenom: String) -> [Google_Protobuf2_Any] {
         let staking = Stride_Stakeibc_MsgLiquidStake.with {
             $0.creator = creater
-            $0.amount = UInt64(amount)!
+            $0.amount = amount
             $0.hostDenom = hostDenom
         }
         let anyMsg = Google_Protobuf2_Any.with {
@@ -2070,7 +2070,7 @@ class Signer {
     static func genLiquidityUnstaking(_ creater: String, _ amount: String, _ hostZone: String, _ receiver: String) -> [Google_Protobuf2_Any] {
         let unStaking = Stride_Stakeibc_MsgRedeemStake.with {
             $0.creator = creater
-            $0.amount = UInt64(amount)!
+            $0.amount = amount
             $0.hostZone = hostZone
             $0.receiver = receiver
         }

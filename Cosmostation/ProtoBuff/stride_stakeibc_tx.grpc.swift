@@ -86,6 +86,11 @@ internal protocol Stride_Stakeibc_MsgClientProtocol: GRPCClient {
     _ request: Stride_Stakeibc_MsgClearBalance,
     callOptions: CallOptions?
   ) -> UnaryCall<Stride_Stakeibc_MsgClearBalance, Stride_Stakeibc_MsgClearBalanceResponse>
+
+  func resetUnbondingRecordEpochNumbers(
+    _ request: Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbers,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbers, Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbersResponse>
 }
 
 extension Stride_Stakeibc_MsgClientProtocol {
@@ -129,8 +134,7 @@ extension Stride_Stakeibc_MsgClientProtocol {
     )
   }
 
-  /// TODO(TEST-53): Remove this pre-launch (no need for clients to create /
-  /// interact with ICAs)
+  /// Unary call to RegisterHostZone
   ///
   /// - Parameters:
   ///   - request: Request to send to RegisterHostZone.
@@ -274,7 +278,7 @@ extension Stride_Stakeibc_MsgClientProtocol {
     )
   }
 
-  /// this line is used by starport scaffolding # proto/tx/rpc
+  /// Unary call to ClearBalance
   ///
   /// - Parameters:
   ///   - request: Request to send to ClearBalance.
@@ -289,6 +293,24 @@ extension Stride_Stakeibc_MsgClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeClearBalanceInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to ResetUnbondingRecordEpochNumbers
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to ResetUnbondingRecordEpochNumbers.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func resetUnbondingRecordEpochNumbers(
+    _ request: Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbers,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbers, Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbersResponse> {
+    return self.makeUnaryCall(
+      path: "/stride.stakeibc.Msg/ResetUnbondingRecordEpochNumbers",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeResetUnbondingRecordEpochNumbersInterceptors() ?? []
     )
   }
 }
@@ -327,6 +349,9 @@ internal protocol Stride_Stakeibc_MsgClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'clearBalance'.
   func makeClearBalanceInterceptors() -> [ClientInterceptor<Stride_Stakeibc_MsgClearBalance, Stride_Stakeibc_MsgClearBalanceResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'resetUnbondingRecordEpochNumbers'.
+  func makeResetUnbondingRecordEpochNumbersInterceptors() -> [ClientInterceptor<Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbers, Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbersResponse>]
 }
 
 internal final class Stride_Stakeibc_MsgClient: Stride_Stakeibc_MsgClientProtocol {
@@ -361,8 +386,6 @@ internal protocol Stride_Stakeibc_MsgProvider: CallHandlerProvider {
 
   func redeemStake(request: Stride_Stakeibc_MsgRedeemStake, context: StatusOnlyCallContext) -> EventLoopFuture<Stride_Stakeibc_MsgRedeemStakeResponse>
 
-  /// TODO(TEST-53): Remove this pre-launch (no need for clients to create /
-  /// interact with ICAs)
   func registerHostZone(request: Stride_Stakeibc_MsgRegisterHostZone, context: StatusOnlyCallContext) -> EventLoopFuture<Stride_Stakeibc_MsgRegisterHostZoneResponse>
 
   func claimUndelegatedTokens(request: Stride_Stakeibc_MsgClaimUndelegatedTokens, context: StatusOnlyCallContext) -> EventLoopFuture<Stride_Stakeibc_MsgClaimUndelegatedTokensResponse>
@@ -379,8 +402,9 @@ internal protocol Stride_Stakeibc_MsgProvider: CallHandlerProvider {
 
   func updateValidatorSharesExchRate(request: Stride_Stakeibc_MsgUpdateValidatorSharesExchRate, context: StatusOnlyCallContext) -> EventLoopFuture<Stride_Stakeibc_MsgUpdateValidatorSharesExchRateResponse>
 
-  /// this line is used by starport scaffolding # proto/tx/rpc
   func clearBalance(request: Stride_Stakeibc_MsgClearBalance, context: StatusOnlyCallContext) -> EventLoopFuture<Stride_Stakeibc_MsgClearBalanceResponse>
+
+  func resetUnbondingRecordEpochNumbers(request: Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbers, context: StatusOnlyCallContext) -> EventLoopFuture<Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbersResponse>
 }
 
 extension Stride_Stakeibc_MsgProvider {
@@ -492,6 +516,15 @@ extension Stride_Stakeibc_MsgProvider {
         userFunction: self.clearBalance(request:context:)
       )
 
+    case "ResetUnbondingRecordEpochNumbers":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbers>(),
+        responseSerializer: ProtobufSerializer<Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbersResponse>(),
+        interceptors: self.interceptors?.makeResetUnbondingRecordEpochNumbersInterceptors() ?? [],
+        userFunction: self.resetUnbondingRecordEpochNumbers(request:context:)
+      )
+
     default:
       return nil
     }
@@ -543,4 +576,8 @@ internal protocol Stride_Stakeibc_MsgServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'clearBalance'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeClearBalanceInterceptors() -> [ServerInterceptor<Stride_Stakeibc_MsgClearBalance, Stride_Stakeibc_MsgClearBalanceResponse>]
+
+  /// - Returns: Interceptors to use when handling 'resetUnbondingRecordEpochNumbers'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeResetUnbondingRecordEpochNumbersInterceptors() -> [ServerInterceptor<Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbers, Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbersResponse>]
 }

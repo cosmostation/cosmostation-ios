@@ -38,21 +38,7 @@ struct Stride_Stakeibc_GenesisState {
   var portID: String = String()
 
   /// list of zones that are registered by the protocol
-  var icaAccount: Stride_Stakeibc_ICAAccount {
-    get {return _icaAccount ?? Stride_Stakeibc_ICAAccount()}
-    set {_icaAccount = newValue}
-  }
-  /// Returns true if `icaAccount` has been explicitly set.
-  var hasIcaAccount: Bool {return self._icaAccount != nil}
-  /// Clears the value of `icaAccount`. Subsequent reads from it will return its default value.
-  mutating func clearIcaAccount() {self._icaAccount = nil}
-
   var hostZoneList: [Stride_Stakeibc_HostZone] = []
-
-  var hostZoneCount: UInt64 = 0
-
-  /// stores a map from hostZone base denom to hostZone
-  var denomToHostZone: Dictionary<String,String> = [:]
 
   var epochTrackerList: [Stride_Stakeibc_EpochTracker] = []
 
@@ -61,7 +47,6 @@ struct Stride_Stakeibc_GenesisState {
   init() {}
 
   fileprivate var _params: Stride_Stakeibc_Params? = nil
-  fileprivate var _icaAccount: Stride_Stakeibc_ICAAccount? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -73,10 +58,7 @@ extension Stride_Stakeibc_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._Me
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "params"),
     2: .standard(proto: "port_id"),
-    4: .standard(proto: "ica_account"),
     5: .standard(proto: "host_zone_list"),
-    6: .standard(proto: "host_zone_count"),
-    9: .standard(proto: "denom_to_host_zone"),
     10: .standard(proto: "epoch_tracker_list"),
   ]
 
@@ -88,10 +70,7 @@ extension Stride_Stakeibc_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._Me
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._params) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.portID) }()
-      case 4: try { try decoder.decodeSingularMessageField(value: &self._icaAccount) }()
       case 5: try { try decoder.decodeRepeatedMessageField(value: &self.hostZoneList) }()
-      case 6: try { try decoder.decodeSingularUInt64Field(value: &self.hostZoneCount) }()
-      case 9: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufString>.self, value: &self.denomToHostZone) }()
       case 10: try { try decoder.decodeRepeatedMessageField(value: &self.epochTrackerList) }()
       default: break
       }
@@ -105,17 +84,8 @@ extension Stride_Stakeibc_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._Me
     if !self.portID.isEmpty {
       try visitor.visitSingularStringField(value: self.portID, fieldNumber: 2)
     }
-    if let v = self._icaAccount {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    }
     if !self.hostZoneList.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.hostZoneList, fieldNumber: 5)
-    }
-    if self.hostZoneCount != 0 {
-      try visitor.visitSingularUInt64Field(value: self.hostZoneCount, fieldNumber: 6)
-    }
-    if !self.denomToHostZone.isEmpty {
-      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufString>.self, value: self.denomToHostZone, fieldNumber: 9)
     }
     if !self.epochTrackerList.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.epochTrackerList, fieldNumber: 10)
@@ -126,10 +96,7 @@ extension Stride_Stakeibc_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._Me
   static func ==(lhs: Stride_Stakeibc_GenesisState, rhs: Stride_Stakeibc_GenesisState) -> Bool {
     if lhs._params != rhs._params {return false}
     if lhs.portID != rhs.portID {return false}
-    if lhs._icaAccount != rhs._icaAccount {return false}
     if lhs.hostZoneList != rhs.hostZoneList {return false}
-    if lhs.hostZoneCount != rhs.hostZoneCount {return false}
-    if lhs.denomToHostZone != rhs.denomToHostZone {return false}
     if lhs.epochTrackerList != rhs.epochTrackerList {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

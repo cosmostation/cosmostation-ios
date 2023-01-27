@@ -27,9 +27,8 @@ struct Stride_Stakeibc_MsgLiquidStake {
 
   var creator: String = String()
 
-  var amount: UInt64 = 0
+  var amount: String = String()
 
-  /// TODO(TEST-86): Update Denom -> HostDenom
   var hostDenom: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -56,7 +55,7 @@ struct Stride_Stakeibc_MsgClearBalance {
 
   var chainID: String = String()
 
-  var amount: UInt64 = 0
+  var amount: String = String()
 
   var channel: String = String()
 
@@ -82,7 +81,7 @@ struct Stride_Stakeibc_MsgRedeemStake {
 
   var creator: String = String()
 
-  var amount: UInt64 = 0
+  var amount: String = String()
 
   var hostZone: String = String()
 
@@ -128,8 +127,6 @@ struct Stride_Stakeibc_MsgRegisterHostZone {
   init() {}
 }
 
-/// TODO(TEST-53): Remove this pre-launch (no need for clients to create /
-/// interact with ICAs)
 struct Stride_Stakeibc_MsgRegisterHostZoneResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -333,6 +330,28 @@ struct Stride_Stakeibc_MsgUpdateValidatorSharesExchRateResponse {
   init() {}
 }
 
+struct Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbers {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var creator: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbersResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "stride.stakeibc"
@@ -352,7 +371,7 @@ extension Stride_Stakeibc_MsgLiquidStake: SwiftProtobuf.Message, SwiftProtobuf._
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.creator) }()
-      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.amount) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.amount) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.hostDenom) }()
       default: break
       }
@@ -363,8 +382,8 @@ extension Stride_Stakeibc_MsgLiquidStake: SwiftProtobuf.Message, SwiftProtobuf._
     if !self.creator.isEmpty {
       try visitor.visitSingularStringField(value: self.creator, fieldNumber: 1)
     }
-    if self.amount != 0 {
-      try visitor.visitSingularUInt64Field(value: self.amount, fieldNumber: 2)
+    if !self.amount.isEmpty {
+      try visitor.visitSingularStringField(value: self.amount, fieldNumber: 2)
     }
     if !self.hostDenom.isEmpty {
       try visitor.visitSingularStringField(value: self.hostDenom, fieldNumber: 3)
@@ -417,7 +436,7 @@ extension Stride_Stakeibc_MsgClearBalance: SwiftProtobuf.Message, SwiftProtobuf.
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.creator) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
-      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.amount) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.amount) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.channel) }()
       default: break
       }
@@ -431,8 +450,8 @@ extension Stride_Stakeibc_MsgClearBalance: SwiftProtobuf.Message, SwiftProtobuf.
     if !self.chainID.isEmpty {
       try visitor.visitSingularStringField(value: self.chainID, fieldNumber: 2)
     }
-    if self.amount != 0 {
-      try visitor.visitSingularUInt64Field(value: self.amount, fieldNumber: 3)
+    if !self.amount.isEmpty {
+      try visitor.visitSingularStringField(value: self.amount, fieldNumber: 3)
     }
     if !self.channel.isEmpty {
       try visitor.visitSingularStringField(value: self.channel, fieldNumber: 4)
@@ -485,7 +504,7 @@ extension Stride_Stakeibc_MsgRedeemStake: SwiftProtobuf.Message, SwiftProtobuf._
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.creator) }()
-      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.amount) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.amount) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.hostZone) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.receiver) }()
       default: break
@@ -497,8 +516,8 @@ extension Stride_Stakeibc_MsgRedeemStake: SwiftProtobuf.Message, SwiftProtobuf._
     if !self.creator.isEmpty {
       try visitor.visitSingularStringField(value: self.creator, fieldNumber: 1)
     }
-    if self.amount != 0 {
-      try visitor.visitSingularUInt64Field(value: self.amount, fieldNumber: 2)
+    if !self.amount.isEmpty {
+      try visitor.visitSingularStringField(value: self.amount, fieldNumber: 2)
     }
     if !self.hostZone.isEmpty {
       try visitor.visitSingularStringField(value: self.hostZone, fieldNumber: 3)
@@ -1091,6 +1110,57 @@ extension Stride_Stakeibc_MsgUpdateValidatorSharesExchRateResponse: SwiftProtobu
   }
 
   static func ==(lhs: Stride_Stakeibc_MsgUpdateValidatorSharesExchRateResponse, rhs: Stride_Stakeibc_MsgUpdateValidatorSharesExchRateResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbers: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgResetUnbondingRecordEpochNumbers"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "creator"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.creator) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.creator.isEmpty {
+      try visitor.visitSingularStringField(value: self.creator, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbers, rhs: Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbers) -> Bool {
+    if lhs.creator != rhs.creator {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbersResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgResetUnbondingRecordEpochNumbersResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbersResponse, rhs: Stride_Stakeibc_MsgResetUnbondingRecordEpochNumbersResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

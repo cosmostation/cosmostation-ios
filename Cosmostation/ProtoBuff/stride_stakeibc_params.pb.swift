@@ -117,6 +117,11 @@ struct Stride_Stakeibc_Params {
     set {_uniqueStorage()._safetyNumValidators = newValue}
   }
 
+  var safetyMaxSlashPercent: UInt64 {
+    get {return _storage._safetyMaxSlashPercent}
+    set {_uniqueStorage()._safetyMaxSlashPercent = newValue}
+  }
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -148,6 +153,7 @@ extension Stride_Stakeibc_Params: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     15: .standard(proto: "safety_max_redemption_rate_threshold"),
     16: .standard(proto: "ibc_transfer_timeout_nanos"),
     17: .standard(proto: "safety_num_validators"),
+    18: .standard(proto: "safety_max_slash_percent"),
   ]
 
   fileprivate class _StorageClass {
@@ -168,6 +174,7 @@ extension Stride_Stakeibc_Params: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     var _safetyMaxRedemptionRateThreshold: UInt64 = 0
     var _ibcTransferTimeoutNanos: UInt64 = 0
     var _safetyNumValidators: UInt64 = 0
+    var _safetyMaxSlashPercent: UInt64 = 0
 
     static let defaultInstance = _StorageClass()
 
@@ -191,6 +198,7 @@ extension Stride_Stakeibc_Params: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       _safetyMaxRedemptionRateThreshold = source._safetyMaxRedemptionRateThreshold
       _ibcTransferTimeoutNanos = source._ibcTransferTimeoutNanos
       _safetyNumValidators = source._safetyNumValidators
+      _safetyMaxSlashPercent = source._safetyMaxSlashPercent
     }
   }
 
@@ -226,6 +234,7 @@ extension Stride_Stakeibc_Params: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         case 15: try { try decoder.decodeSingularUInt64Field(value: &_storage._safetyMaxRedemptionRateThreshold) }()
         case 16: try { try decoder.decodeSingularUInt64Field(value: &_storage._ibcTransferTimeoutNanos) }()
         case 17: try { try decoder.decodeSingularUInt64Field(value: &_storage._safetyNumValidators) }()
+        case 18: try { try decoder.decodeSingularUInt64Field(value: &_storage._safetyMaxSlashPercent) }()
         default: break
         }
       }
@@ -285,6 +294,9 @@ extension Stride_Stakeibc_Params: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       if _storage._safetyNumValidators != 0 {
         try visitor.visitSingularUInt64Field(value: _storage._safetyNumValidators, fieldNumber: 17)
       }
+      if _storage._safetyMaxSlashPercent != 0 {
+        try visitor.visitSingularUInt64Field(value: _storage._safetyMaxSlashPercent, fieldNumber: 18)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -311,6 +323,7 @@ extension Stride_Stakeibc_Params: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         if _storage._safetyMaxRedemptionRateThreshold != rhs_storage._safetyMaxRedemptionRateThreshold {return false}
         if _storage._ibcTransferTimeoutNanos != rhs_storage._ibcTransferTimeoutNanos {return false}
         if _storage._safetyNumValidators != rhs_storage._safetyNumValidators {return false}
+        if _storage._safetyMaxSlashPercent != rhs_storage._safetyMaxSlashPercent {return false}
         return true
       }
       if !storagesAreEqual {return false}

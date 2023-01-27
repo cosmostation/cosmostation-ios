@@ -68,16 +68,12 @@ extension Stride_Stakeibc_ICAAccountType: CaseIterable {
 
 #endif  // swift(>=4.2)
 
-/// TODO(TEST-XX): Update these fields to be more useful (e.g. balances should be
-/// coins, maybe store port name directly)
 struct Stride_Stakeibc_ICAAccount {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   var address: String = String()
-
-  var delegations: [Stride_Stakeibc_Delegation] = []
 
   var target: Stride_Stakeibc_ICAAccountType = .delegation
 
@@ -103,7 +99,6 @@ extension Stride_Stakeibc_ICAAccount: SwiftProtobuf.Message, SwiftProtobuf._Mess
   static let protoMessageName: String = _protobuf_package + ".ICAAccount"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "address"),
-    2: .same(proto: "delegations"),
     3: .same(proto: "target"),
   ]
 
@@ -114,7 +109,6 @@ extension Stride_Stakeibc_ICAAccount: SwiftProtobuf.Message, SwiftProtobuf._Mess
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.address) }()
-      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.delegations) }()
       case 3: try { try decoder.decodeSingularEnumField(value: &self.target) }()
       default: break
       }
@@ -125,9 +119,6 @@ extension Stride_Stakeibc_ICAAccount: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if !self.address.isEmpty {
       try visitor.visitSingularStringField(value: self.address, fieldNumber: 1)
     }
-    if !self.delegations.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.delegations, fieldNumber: 2)
-    }
     if self.target != .delegation {
       try visitor.visitSingularEnumField(value: self.target, fieldNumber: 3)
     }
@@ -136,7 +127,6 @@ extension Stride_Stakeibc_ICAAccount: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
   static func ==(lhs: Stride_Stakeibc_ICAAccount, rhs: Stride_Stakeibc_ICAAccount) -> Bool {
     if lhs.address != rhs.address {return false}
-    if lhs.delegations != rhs.delegations {return false}
     if lhs.target != rhs.target {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

@@ -28,7 +28,7 @@ struct Stride_Stakeibc_SplitDelegation {
 
   var validator: String = String()
 
-  var amount: UInt64 = 0
+  var amount: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -132,7 +132,7 @@ struct Stride_Stakeibc_Rebalancing {
 
   var dstValidator: String = String()
 
-  var amt: UInt64 = 0
+  var amt: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -171,7 +171,7 @@ extension Stride_Stakeibc_SplitDelegation: SwiftProtobuf.Message, SwiftProtobuf.
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.validator) }()
-      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.amount) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.amount) }()
       default: break
       }
     }
@@ -181,8 +181,8 @@ extension Stride_Stakeibc_SplitDelegation: SwiftProtobuf.Message, SwiftProtobuf.
     if !self.validator.isEmpty {
       try visitor.visitSingularStringField(value: self.validator, fieldNumber: 1)
     }
-    if self.amount != 0 {
-      try visitor.visitSingularUInt64Field(value: self.amount, fieldNumber: 2)
+    if !self.amount.isEmpty {
+      try visitor.visitSingularStringField(value: self.amount, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -419,7 +419,7 @@ extension Stride_Stakeibc_Rebalancing: SwiftProtobuf.Message, SwiftProtobuf._Mes
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.srcValidator) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.dstValidator) }()
-      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.amt) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.amt) }()
       default: break
       }
     }
@@ -432,8 +432,8 @@ extension Stride_Stakeibc_Rebalancing: SwiftProtobuf.Message, SwiftProtobuf._Mes
     if !self.dstValidator.isEmpty {
       try visitor.visitSingularStringField(value: self.dstValidator, fieldNumber: 2)
     }
-    if self.amt != 0 {
-      try visitor.visitSingularUInt64Field(value: self.amt, fieldNumber: 3)
+    if !self.amt.isEmpty {
+      try visitor.visitSingularStringField(value: self.amt, fieldNumber: 3)
     }
     try unknownFields.traverse(visitor: &visitor)
   }

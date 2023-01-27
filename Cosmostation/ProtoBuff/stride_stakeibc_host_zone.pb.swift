@@ -123,7 +123,7 @@ struct Stride_Stakeibc_HostZone {
   }
 
   /// TODO(TEST-101) int to dec
-  var stakedBal: UInt64 {
+  var stakedBal: String {
     get {return _storage._stakedBal}
     set {_uniqueStorage()._stakedBal = newValue}
   }
@@ -182,7 +182,7 @@ extension Stride_Stakeibc_HostZone: SwiftProtobuf.Message, SwiftProtobuf._Messag
     var _lastRedemptionRate: String = String()
     var _redemptionRate: String = String()
     var _unbondingFrequency: UInt64 = 0
-    var _stakedBal: UInt64 = 0
+    var _stakedBal: String = String()
     var _address: String = String()
 
     static let defaultInstance = _StorageClass()
@@ -237,7 +237,7 @@ extension Stride_Stakeibc_HostZone: SwiftProtobuf.Message, SwiftProtobuf._Messag
         case 10: try { try decoder.decodeSingularStringField(value: &_storage._lastRedemptionRate) }()
         case 11: try { try decoder.decodeSingularStringField(value: &_storage._redemptionRate) }()
         case 12: try { try decoder.decodeSingularStringField(value: &_storage._transferChannelID) }()
-        case 13: try { try decoder.decodeSingularUInt64Field(value: &_storage._stakedBal) }()
+        case 13: try { try decoder.decodeSingularStringField(value: &_storage._stakedBal) }()
         case 14: try { try decoder.decodeSingularUInt64Field(value: &_storage._unbondingFrequency) }()
         case 16: try { try decoder.decodeSingularMessageField(value: &_storage._redemptionAccount) }()
         case 17: try { try decoder.decodeSingularStringField(value: &_storage._bech32Prefix) }()
@@ -286,8 +286,8 @@ extension Stride_Stakeibc_HostZone: SwiftProtobuf.Message, SwiftProtobuf._Messag
       if !_storage._transferChannelID.isEmpty {
         try visitor.visitSingularStringField(value: _storage._transferChannelID, fieldNumber: 12)
       }
-      if _storage._stakedBal != 0 {
-        try visitor.visitSingularUInt64Field(value: _storage._stakedBal, fieldNumber: 13)
+      if !_storage._stakedBal.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._stakedBal, fieldNumber: 13)
       }
       if _storage._unbondingFrequency != 0 {
         try visitor.visitSingularUInt64Field(value: _storage._unbondingFrequency, fieldNumber: 14)
