@@ -156,6 +156,18 @@
 "str_delegate_warn_title" = "위임에 관해서";
 "str_delegate_warn_msg" = "검증인에게 위임하여 스테이킹 보상을 받을 수 있습니다. 선택한 노드에 문제가 발생하면 위임 지분의 일부를 잃을 수 있습니다. 신중히 선택해주세요.\n\n위임을 철회하면 철회 기간이 있습니다. 이 기간 동안에는 스테이킹 보상을 받을 수 없습니다.\n\n";
 "str_paste_translate" = "붙여넣기";
+"str_vote_yes" = "찬성";
+"str_vote_no" = "반대";
+"str_vote_veto" = "절대반대";
+"str_vote_abstain" = "기권";
+"str_quorum" = "정족율";
+"str_current_turnout" = "현재 투표율";
+"str_proposer" = "제안자";
+"str_proposal_type" = "의제 타입";
+"str_voting_start_time" = "투표 시작 시간";
+"str_voting_end_time" = "투표 종료 시간";
+"str_request_amount" = "요청 금액";
+"str_voting_description" = "설명";
 
 "btn_delegate" = "  위임 하기";
 "btn_undelegate" = "  위임철회 하기";
