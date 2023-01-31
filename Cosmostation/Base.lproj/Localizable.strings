@@ -168,6 +168,8 @@
 "str_voting_end_time" = "Voting End Time";
 "str_request_amount" = "Request Amount";
 "str_voting_description" = "Description";
+"str_voting_period" = "Voting Period Proposals";
+"str_vote_proposals" = "Proposals";
 
 "btn_delegate" = "  Delegate";
 "btn_undelegate" = "  Undelegate";
