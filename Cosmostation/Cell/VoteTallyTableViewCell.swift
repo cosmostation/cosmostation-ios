@@ -48,12 +48,19 @@ class VoteTallyTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         myVoteYes.image = myVoteYes.image?.withRenderingMode(.alwaysTemplate)
         myVoteYes.tintColor = UIColor.font05
+        titleYes.text = NSLocalizedString("str_vote_yes", comment: "")
         myVoteNo.image = myVoteNo.image?.withRenderingMode(.alwaysTemplate)
         myVoteNo.tintColor = UIColor.font05
+        titleNo.text = NSLocalizedString("str_vote_no", comment: "")
         myVoteVeto.image = myVoteVeto.image?.withRenderingMode(.alwaysTemplate)
         myVoteVeto.tintColor = UIColor.font05
+        titleVeto.text = NSLocalizedString("str_vote_veto", comment: "")
         myVoteAbstain.image = myVoteAbstain.image?.withRenderingMode(.alwaysTemplate)
         myVoteAbstain.tintColor = UIColor.font05
+        titleAbstain.text = NSLocalizedString("str_vote_abstain", comment: "")
+        
+        quorumTitle.text = NSLocalizedString("str_quorum", comment: "")
+        turnoutTitle.text = NSLocalizedString("str_current_turnout", comment: "")
     }
     
     func onCheckMyVote_gRPC(_ option: Cosmos_Gov_V1beta1_VoteOption?) {

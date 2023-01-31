@@ -644,6 +644,19 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "str_vesting" = "ロックされた数量（委任のみ可能）";
 "str_vesting_schedule" = "ベスティングロック解除情報";
 "str_vote" = "投票";
+"str_vote_yes" = "賛成";
+"str_vote_no" = "反対";
+"str_vote_veto" = "絶対反対";
+"str_vote_abstain" = "棄権";
+"str_quorum" = "定足数";
+"str_current_turnout" = "現在投票率";
+"str_proposer" = "提案者";
+"str_proposal_type" = "議題タイプ";
+"str_voting_start_time" = "投票開始時間";
+"str_voting_end_time" = "投票終了時間";
+"str_request_amount" = "請求金額";
+"str_voting_description" = "説明";
+
 "str_vote_agent" = "代理人による間接投票";
 "str_vote_direct" = "検証人に直接投票";
 "str_voting_power" = "全体委任量";

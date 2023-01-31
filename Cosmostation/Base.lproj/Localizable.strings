@@ -156,6 +156,18 @@
 "str_delegate_warn_title" = "Delegate Notice";
 "str_delegate_warn_msg" = "You can receive staking rewards by delegating to a validator. You may lose a portion of your delegated stake if a problem occurs with the selected node. Please perform careful due diligence before delegating.\n\nWhen you undelegate, there is an unbonding period. You will not receive staking rewards during this time.\n\n";
 "str_paste_translate" = "Paste";
+"str_vote_yes" = "Yes";
+"str_vote_no" = "No";
+"str_vote_veto" = "NoWithVeto";
+"str_vote_abstain" = "Abstain";
+"str_quorum" = "Quorum";
+"str_current_turnout" = "Current Turnout";
+"str_proposer" = "Proposer";
+"str_proposal_type" = "Proposal Type";
+"str_voting_start_time" = "Voting Start Time";
+"str_voting_end_time" = "Voting End Time";
+"str_request_amount" = "Request Amount";
+"str_voting_description" = "Description";
 
 "btn_delegate" = "  Delegate";
 "btn_undelegate" = "  Undelegate";

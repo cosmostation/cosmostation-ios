@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +22,7 @@
                         <rect key="frame" x="12" y="4" width="468" height="409"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Quorum" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPS-oS-6mh">
-                                <rect key="frame" x="16" y="12" width="42" height="16.5"/>
+                                <rect key="frame" x="16" y="12" width="45.5" height="16.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Current Turnout" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rad-M2-mdd">
-                                <rect key="frame" x="16" y="40.5" width="84" height="16.5"/>
+                                <rect key="frame" x="16" y="40.5" width="90.5" height="16.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
@@ -73,13 +73,13 @@
                                                 <color key="trackTintColor" name="_font03"/>
                                             </progressView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6b-ff-VjR">
-                                                <rect key="frame" x="12" y="65.5" width="20.5" height="16.5"/>
+                                                <rect key="frame" x="12" y="68" width="20.5" height="14"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2F-oU-YVr">
-                                                <rect key="frame" x="190" y="65.5" width="8" height="16.5"/>
+                                                <rect key="frame" x="190" y="67" width="8" height="16.5"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -91,6 +91,13 @@
                                                     <constraint firstAttribute="height" constant="24" id="4IQ-k5-KOZ"/>
                                                 </constraints>
                                             </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voting_person" translatesAutoresizingMaskIntoConstraints="NO" id="XkQ-ZB-kKo">
+                                                <rect key="frame" x="174" y="68" width="14" height="14"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="14" id="Kki-KQ-ZoX"/>
+                                                    <constraint firstAttribute="height" constant="14" id="xAa-yr-WcJ"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -98,13 +105,16 @@
                                             <constraint firstItem="8Kh-dh-eH7" firstAttribute="top" secondItem="8FL-nr-HOW" secondAttribute="top" constant="24" id="6ai-37-8ba"/>
                                             <constraint firstItem="8Kh-dh-eH7" firstAttribute="leading" secondItem="8FL-nr-HOW" secondAttribute="leading" constant="12" id="7x5-gN-xkB"/>
                                             <constraint firstItem="L3d-tM-X3h" firstAttribute="centerY" secondItem="8FL-nr-HOW" secondAttribute="centerY" id="A5S-QR-bDg"/>
+                                            <constraint firstItem="XkQ-ZB-kKo" firstAttribute="top" secondItem="L3d-tM-X3h" secondAttribute="bottom" constant="15" id="DYv-8w-T0j"/>
                                             <constraint firstItem="N6b-ff-VjR" firstAttribute="leading" secondItem="8Kh-dh-eH7" secondAttribute="leading" id="FMj-qh-t0I"/>
+                                            <constraint firstItem="XkQ-ZB-kKo" firstAttribute="centerY" secondItem="s2F-oU-YVr" secondAttribute="centerY" id="I6B-xh-L4d"/>
                                             <constraint firstAttribute="trailing" secondItem="Unv-De-Py7" secondAttribute="trailing" constant="12" id="SPw-fr-NXS"/>
                                             <constraint firstItem="s2F-oU-YVr" firstAttribute="trailing" secondItem="L3d-tM-X3h" secondAttribute="trailing" id="VZL-GT-iyp"/>
                                             <constraint firstItem="Unv-De-Py7" firstAttribute="top" secondItem="8FL-nr-HOW" secondAttribute="top" constant="12" id="ah4-cS-GYp"/>
                                             <constraint firstItem="L3d-tM-X3h" firstAttribute="leading" secondItem="8FL-nr-HOW" secondAttribute="leading" constant="12" id="bqE-0I-PcM"/>
                                             <constraint firstItem="s2F-oU-YVr" firstAttribute="centerY" secondItem="N6b-ff-VjR" secondAttribute="centerY" id="hv5-PN-VQl"/>
                                             <constraint firstAttribute="trailing" secondItem="L3d-tM-X3h" secondAttribute="trailing" constant="12" id="pcR-IR-qXR"/>
+                                            <constraint firstItem="XkQ-ZB-kKo" firstAttribute="leading" secondItem="s2F-oU-YVr" secondAttribute="leading" constant="-16" id="uDW-0J-ZYx"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
@@ -148,13 +158,13 @@
                                                 <color key="trackTintColor" name="_font03"/>
                                             </progressView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQ1-Nc-H2z">
-                                                <rect key="frame" x="12" y="65.5" width="20.5" height="16.5"/>
+                                                <rect key="frame" x="12" y="68" width="20.5" height="14"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxA-oh-dgF">
-                                                <rect key="frame" x="190" y="65.5" width="8" height="16.5"/>
+                                                <rect key="frame" x="190" y="67" width="8" height="16.5"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -166,13 +176,23 @@
                                                     <constraint firstAttribute="width" constant="24" id="Wje-jZ-mB6"/>
                                                 </constraints>
                                             </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voting_person" translatesAutoresizingMaskIntoConstraints="NO" id="EpB-yt-ban">
+                                                <rect key="frame" x="174" y="68" width="14" height="14"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="14" id="fvF-IP-ZBE"/>
+                                                    <constraint firstAttribute="height" constant="14" id="gIk-rT-18k"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="rIE-e8-cIJ" firstAttribute="leading" secondItem="HlZ-ta-QAd" secondAttribute="leading" constant="12" id="0r4-qP-O2W"/>
                                             <constraint firstItem="nxA-oh-dgF" firstAttribute="centerY" secondItem="EQ1-Nc-H2z" secondAttribute="centerY" id="BrH-SX-qTd"/>
+                                            <constraint firstItem="EpB-yt-ban" firstAttribute="centerY" secondItem="nxA-oh-dgF" secondAttribute="centerY" id="Kwb-AD-eOa"/>
                                             <constraint firstAttribute="trailing" secondItem="PF8-Ru-58e" secondAttribute="trailing" constant="12" id="O4B-ht-1Or"/>
+                                            <constraint firstItem="EpB-yt-ban" firstAttribute="top" secondItem="PF8-Ru-58e" secondAttribute="bottom" constant="15" id="PXm-Bp-gGo"/>
                                             <constraint firstAttribute="trailing" secondItem="pdJ-Y5-Ztb" secondAttribute="trailing" constant="12" id="WIc-kC-LKe"/>
+                                            <constraint firstItem="EpB-yt-ban" firstAttribute="leading" secondItem="nxA-oh-dgF" secondAttribute="leading" constant="-16" id="XPT-k4-mAN"/>
                                             <constraint firstAttribute="trailing" secondItem="nxA-oh-dgF" secondAttribute="trailing" constant="12" id="cML-Gd-g2O"/>
                                             <constraint firstAttribute="bottom" secondItem="EQ1-Nc-H2z" secondAttribute="bottom" constant="18" id="gFQ-Kk-aIZ"/>
                                             <constraint firstItem="rIE-e8-cIJ" firstAttribute="top" secondItem="HlZ-ta-QAd" secondAttribute="top" constant="24" id="kCn-Op-dnk"/>
@@ -231,13 +251,13 @@
                                                 <color key="trackTintColor" name="_font03"/>
                                             </progressView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="80%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHk-EK-GOT">
-                                                <rect key="frame" x="12" y="65.5" width="28.5" height="16.5"/>
+                                                <rect key="frame" x="12" y="68" width="28.5" height="14"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EtN-8u-scs">
-                                                <rect key="frame" x="190" y="65.5" width="8" height="16.5"/>
+                                                <rect key="frame" x="190" y="67" width="8" height="16.5"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -249,18 +269,28 @@
                                                     <constraint firstAttribute="height" constant="24" id="mMb-h9-KxK"/>
                                                 </constraints>
                                             </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voting_person" translatesAutoresizingMaskIntoConstraints="NO" id="e6a-FA-SDb">
+                                                <rect key="frame" x="174" y="68" width="14" height="14"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="14" id="4yb-eJ-4pK"/>
+                                                    <constraint firstAttribute="width" constant="14" id="fZE-Za-b81"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="xcP-Ku-mgP" firstAttribute="leading" secondItem="exS-cs-Lay" secondAttribute="leading" constant="12" id="3sT-bk-0Cl"/>
                                             <constraint firstAttribute="bottom" secondItem="cHk-EK-GOT" secondAttribute="bottom" constant="18" id="DX9-Bz-4jK"/>
                                             <constraint firstItem="xcP-Ku-mgP" firstAttribute="centerY" secondItem="exS-cs-Lay" secondAttribute="centerY" id="Dx5-Px-6mY"/>
+                                            <constraint firstItem="e6a-FA-SDb" firstAttribute="top" secondItem="xcP-Ku-mgP" secondAttribute="bottom" constant="15" id="EY8-mU-uGG"/>
                                             <constraint firstItem="cHk-EK-GOT" firstAttribute="leading" secondItem="PfI-qo-fdK" secondAttribute="leading" id="I5K-gB-1cJ"/>
                                             <constraint firstItem="PfI-qo-fdK" firstAttribute="leading" secondItem="exS-cs-Lay" secondAttribute="leading" constant="12" id="PCO-aV-zYa"/>
                                             <constraint firstAttribute="trailing" secondItem="tWu-V1-Czs" secondAttribute="trailing" constant="12" id="R93-cb-Tpi"/>
                                             <constraint firstItem="tWu-V1-Czs" firstAttribute="top" secondItem="exS-cs-Lay" secondAttribute="top" constant="12" id="Tkg-Z0-55D"/>
                                             <constraint firstItem="EtN-8u-scs" firstAttribute="centerY" secondItem="cHk-EK-GOT" secondAttribute="centerY" id="Ytb-6h-YTg"/>
                                             <constraint firstAttribute="trailing" secondItem="xcP-Ku-mgP" secondAttribute="trailing" constant="12" id="a6m-qj-Zvn"/>
+                                            <constraint firstItem="e6a-FA-SDb" firstAttribute="leading" secondItem="EtN-8u-scs" secondAttribute="leading" constant="-16" id="ayi-tC-0Jt"/>
+                                            <constraint firstItem="e6a-FA-SDb" firstAttribute="centerY" secondItem="EtN-8u-scs" secondAttribute="centerY" id="kEc-Ms-pvo"/>
                                             <constraint firstItem="EtN-8u-scs" firstAttribute="trailing" secondItem="xcP-Ku-mgP" secondAttribute="trailing" id="uEc-NS-iwY"/>
                                             <constraint firstItem="PfI-qo-fdK" firstAttribute="top" secondItem="exS-cs-Lay" secondAttribute="top" constant="24" id="yT2-gb-Naa"/>
                                         </constraints>
@@ -306,13 +336,13 @@
                                                 <color key="trackTintColor" name="_font03"/>
                                             </progressView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PV2-J3-6aT">
-                                                <rect key="frame" x="12" y="65.5" width="20.5" height="16.5"/>
+                                                <rect key="frame" x="12" y="68" width="20.5" height="14"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cke-Ib-Dh6">
-                                                <rect key="frame" x="190" y="65.5" width="8" height="16.5"/>
+                                                <rect key="frame" x="190" y="67" width="8" height="16.5"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -324,15 +354,25 @@
                                                     <constraint firstAttribute="width" constant="24" id="9Gv-fF-bBR"/>
                                                 </constraints>
                                             </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voting_person" translatesAutoresizingMaskIntoConstraints="NO" id="DNh-bb-p8O">
+                                                <rect key="frame" x="174" y="68" width="14" height="14"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="14" id="BRO-A6-g0D"/>
+                                                    <constraint firstAttribute="height" constant="14" id="PMc-LF-1DG"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="UPb-3Z-Pa8" firstAttribute="centerY" secondItem="rsS-pF-rjO" secondAttribute="centerY" id="9G6-BY-wUI"/>
+                                            <constraint firstItem="DNh-bb-p8O" firstAttribute="leading" secondItem="cke-Ib-Dh6" secondAttribute="leading" constant="-16" id="C2T-gb-Q4E"/>
                                             <constraint firstAttribute="trailing" secondItem="C48-c5-YSl" secondAttribute="trailing" constant="12" id="FPA-RX-881"/>
                                             <constraint firstItem="C48-c5-YSl" firstAttribute="top" secondItem="rsS-pF-rjO" secondAttribute="top" constant="12" id="FgE-xb-wmR"/>
+                                            <constraint firstItem="DNh-bb-p8O" firstAttribute="centerY" secondItem="cke-Ib-Dh6" secondAttribute="centerY" id="GfY-a4-pSC"/>
                                             <constraint firstItem="cke-Ib-Dh6" firstAttribute="centerY" secondItem="PV2-J3-6aT" secondAttribute="centerY" id="Sax-AQ-Kzu"/>
                                             <constraint firstItem="Gcf-GN-Nlk" firstAttribute="leading" secondItem="rsS-pF-rjO" secondAttribute="leading" constant="12" id="T8R-PC-CUH"/>
                                             <constraint firstItem="PV2-J3-6aT" firstAttribute="leading" secondItem="Gcf-GN-Nlk" secondAttribute="leading" id="VDH-K8-Em4"/>
+                                            <constraint firstItem="DNh-bb-p8O" firstAttribute="top" secondItem="UPb-3Z-Pa8" secondAttribute="bottom" constant="15" id="XRM-mF-Qwp"/>
                                             <constraint firstItem="UPb-3Z-Pa8" firstAttribute="leading" secondItem="rsS-pF-rjO" secondAttribute="leading" constant="12" id="elc-SV-5Z6"/>
                                             <constraint firstAttribute="trailing" secondItem="UPb-3Z-Pa8" secondAttribute="trailing" constant="12" id="gfl-pu-sh0"/>
                                             <constraint firstItem="Gcf-GN-Nlk" firstAttribute="top" secondItem="rsS-pF-rjO" secondAttribute="top" constant="24" id="h6n-7q-mU6"/>
@@ -454,6 +494,7 @@
     </objects>
     <resources>
         <image name="iconCheck" width="22" height="22"/>
+        <image name="voting_person" width="14" height="14"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
