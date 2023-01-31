@@ -411,6 +411,7 @@
 "change_wallet_name" = "지갑 별칭 변경";
 "wallet_name" = "별칭";
 "change_mnemonic_name" = "니모닉 별칭 변경";
+"set_mnemonic_name" = "니모닉 별칭 설정";
 "mnemonic_name" = "별칭";
 "share_text" = "\t\t주소 공유\t\t";
 "share_qr" = "\t\tQR 코드 공유\t\t";
