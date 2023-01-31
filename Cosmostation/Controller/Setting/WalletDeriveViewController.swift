@@ -356,7 +356,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             newAccount.account_from_mnemonic = true
             newAccount.account_m_size = Int64(self.mWords.getWordsCnt())
             newAccount.account_mnemonic_id = self.mWords.id
-            newAccount.account_nick_name = self.mWords.getName() + " - " + String(derive.path)
+            newAccount.account_nick_name = self.mWords.getName()
             if (BaseData.instance.insertAccount(newAccount) > 0) {
                 KeychainWrapper.standard.set(self.mWords.getWords(), forKey: newAccount.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
                 KeychainWrapper.standard.set(derive.pKey.hexEncodedString(), forKey: newAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)

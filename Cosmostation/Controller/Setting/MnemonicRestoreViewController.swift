@@ -76,6 +76,7 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
     var userInputWords = [String]()
     var mCurrentPosition = 0;
     var customPath = 0;
+    var mnemonicName: String!
     
     @IBOutlet weak var suggestCollectionView: UICollectionView!
     @IBOutlet weak var wordCntLabel: UILabel!
@@ -115,6 +116,7 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
         self.actionView.isHidden = true
         self.keyboardView.isHidden = true
         
+        self.onSetMnemonicName()
         if (BaseData.instance.getUsingEnginerMode()) {
             self.onShowEnginerModeDialog()
         }
@@ -130,6 +132,25 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_restore", comment: "")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("clear_all", comment: ""), style: .done, target: self, action: #selector(clearAll))
         self.initViewUpdate()
+    }
+    
+    func onSetMnemonicName() {
+        let nameAlert = UIAlertController(title: NSLocalizedString("set_mnemonic_name", comment: ""), message: nil, preferredStyle: .alert)
+        nameAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
+        nameAlert.addTextField { (textField) in textField.placeholder = NSLocalizedString("wallet_name", comment: "") }
+        nameAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        nameAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak nameAlert] (_) in
+            let textField = nameAlert?.textFields![0]
+            let trimmedString = textField?.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            if (trimmedString?.count ?? 0 > 0) {
+                self.mnemonicName = trimmedString
+            } else {
+                self.present(nameAlert!, animated: true)
+            }
+        }))
+        self.present(nameAlert, animated: true)
     }
     
     @objc func clearAll(sender: AnyObject) {
@@ -344,6 +365,7 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
             let userInputSum = self.userInputWords.reduce("") { result, x in result + x + " "}.trimmingCharacters(in: .whitespacesAndNewlines)
             let newWords = MWords.init(isNew: true)
             newWords.wordsCnt = Int64(self.userInputWords.count)
+            newWords.nickName = self.mnemonicName
             if (BaseData.instance.insertMnemonics(newWords) > 0) {
                 KeychainWrapper.standard.set(userInputSum, forKey: newWords.uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
             }
@@ -358,7 +380,6 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
         }
     }
 
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredMnemonicWords.count
     }

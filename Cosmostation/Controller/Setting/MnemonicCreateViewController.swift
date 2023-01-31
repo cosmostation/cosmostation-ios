@@ -72,6 +72,7 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
     var mnemonicLayers: [UIView] = [UIView]()
     var mnemonicLabels: [UILabel] = [UILabel]()
     var mnemonicWords: [String]!
+    var mnemonicName: String!
     
     var isDisplay = false
     
@@ -91,6 +92,7 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
                                self.mnemonic20, self.mnemonic21, self.mnemonic22, self.mnemonic23]
         
         self.onCreateMenmonic()
+        self.onSetMnemonicName()
         
         if (BaseData.instance.getUsingEnginerMode()) {
             self.onShowEnginerModeDialog()
@@ -105,6 +107,25 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_mnemonic_create", comment: "")
+    }
+    
+    func onSetMnemonicName() {
+        let nameAlert = UIAlertController(title: NSLocalizedString("set_mnemonic_name", comment: ""), message: nil, preferredStyle: .alert)
+        nameAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
+        nameAlert.addTextField { (textField) in textField.placeholder = NSLocalizedString("wallet_name", comment: "") }
+        nameAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        nameAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak nameAlert] (_) in
+            let textField = nameAlert?.textFields![0]
+            let trimmedString = textField?.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            if (trimmedString?.count ?? 0 > 0) {
+                self.mnemonicName = trimmedString
+            } else {
+                self.present(nameAlert!, animated: true)
+            }
+        }))
+        self.present(nameAlert, animated: true)
     }
     
     func onCreateMenmonic() {
@@ -168,6 +189,7 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
             let userInputSum = self.mnemonicWords.reduce("") { result, x in result + x + " "}.trimmingCharacters(in: .whitespacesAndNewlines)
             let newWords = MWords.init(isNew: true)
             newWords.wordsCnt = Int64(self.mnemonicWords.count)
+            newWords.nickName = self.mnemonicName
             if (BaseData.instance.insertMnemonics(newWords) > 0) {
                 KeychainWrapper.standard.set(userInputSum, forKey: newWords.uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
             }

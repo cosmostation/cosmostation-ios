@@ -416,6 +416,7 @@
 "import_menmonic" = "Import Mnemonic";
 "import_private_key" = "Import PrivateKey";
 "change_wallet_name" = "Change Wallet Name";
+"set_mnemonic_name" = "Set Mnemonic Name";
 "wallet_name" = "wallet name";
 "change_mnemonic_name" = "Change Mnemonic Name";
 "mnemonic_name" = "Mnemonic name";
