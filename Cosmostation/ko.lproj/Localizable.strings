@@ -168,6 +168,8 @@
 "str_voting_end_time" = "투표 종료 시간";
 "str_request_amount" = "요청 금액";
 "str_voting_description" = "설명";
+"str_voting_period" = "Voting Period Proposals";
+"str_vote_proposals" = "Proposals";
 
 "btn_delegate" = "  위임 하기";
 "btn_undelegate" = "  위임철회 하기";

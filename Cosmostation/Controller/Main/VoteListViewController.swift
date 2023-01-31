@@ -169,10 +169,10 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0) {
-            view.headerTitleLabel.text = "Voting Period Proposals";
+            view.headerTitleLabel.text = NSLocalizedString("str_voting_period", comment: "")
             view.headerCntLabel.text = String(mVotingPeriods.count)
         } else if (section == 1) {
-            view.headerTitleLabel.text = "Proposals";
+            view.headerTitleLabel.text = NSLocalizedString("str_vote_proposals", comment: "")
             view.headerCntLabel.text = String(mEtcPeriods.count)
         }
         return view
