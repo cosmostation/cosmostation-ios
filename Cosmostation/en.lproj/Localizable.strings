@@ -279,6 +279,7 @@
 "guide_msg_xpla" = "XPLA is a gaming media content-focused Cosmos SDK network built by Com2uS Corporation.";
 "guide_msg_onomy" = "Onomy is a Cosmos SDK-based layer-1 protocol designed for Onomy Exchange and Onomy Reserve.";
 "guide_msg_quicksilver" = "Quicksilver Protocol is an liquid staking protocol for the Cosmos Interchain ecosystem.";
+"guide_msg_mars" = "Mars Hub is the governing app-chain that administers Mars Protocol’s various DeFi outposts across the Interchain ecosystem.";
 "guide_btn_home" = "Home Page";
 "guide_btn_blog" = "Official Blog";
 
