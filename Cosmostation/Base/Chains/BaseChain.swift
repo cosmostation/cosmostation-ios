@@ -123,6 +123,8 @@ class ChainFactory {
             return .LIKECOIN_MAIN
         case CHAIN_LUM_S:
             return .LUM_MAIN
+        case CHAIN_MARS_S:
+            return .MARS_MAIN
         case CHAIN_MEDI_S:
             return .MEDI_MAIN
         case CHAIN_NYX_S:
@@ -252,6 +254,8 @@ class ChainFactory {
             return ChainLike(chainType)
         case .LUM_MAIN:
             return ChainLum(chainType)
+        case .MARS_MAIN:
+            return ChainMars(chainType)
         case .MEDI_MAIN:
             return ChainMedibloc(chainType)
         case .NYX_MAIN:
@@ -363,6 +367,7 @@ let CHAIN_KONSTELLATION_S = "SUPPORT_CHAIN_KONSTELLATION"
 let CHAIN_KUJIRA_S = "SUPPORT_CHAIN_KUJIRA"
 let CHAIN_LIKECOIN_S = "SUPPORT_CHAIN_LIKECOIN"
 let CHAIN_LUM_S = "SUPPORT_CHAIN_LUM"
+let CHAIN_MARS_S = "SUPPORT_CHAIN_MARS"
 let CHAIN_MEDI_S = "SUPPORT_CHAIN_MEDI"
 let CHAIN_NYX_S = "SUPPORT_CHAIN_NYX"
 let CHAIN_OKEX_S = "SUPPORT_CHAIN_OKEX_MAIN"
