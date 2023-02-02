@@ -1634,6 +1634,7 @@
 		1817CC7E283E2CE600523713 /* evmos_incentives_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82D827BF572300270528 /* evmos_incentives_v1_query.grpc.swift */; };
 		1817CC7F283E2CE600523713 /* evmos_erc20_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82E727BF572500270528 /* evmos_erc20_v1_tx.pb.swift */; };
 		1817CC81283E2CE600523713 /* crescent_liquidity_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338F427E826F000E82AA7 /* crescent_liquidity_v1beta1_query.pb.swift */; };
+		184D2C91298C0CEB00DD679E /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28C029435062003311FD /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift */; };
 		187446FF2930940F00849EE4 /* ApiKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187446FE2930940F00849EE4 /* ApiKey.plist */; };
 		187447012930942400849EE4 /* ApiKeyDev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187447002930942400849EE4 /* ApiKeyDev.plist */; };
 		18744703293094CB00849EE4 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18744702293094CB00849EE4 /* BundleExtension.swift */; };
@@ -2643,7 +2644,6 @@
 		E11A28D129435063003311FD /* osmosis_gamm_v2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28BF29435062003311FD /* osmosis_gamm_v2_query.pb.swift */; };
 		E11A28D229435063003311FD /* osmosis_gamm_v2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28BF29435062003311FD /* osmosis_gamm_v2_query.pb.swift */; };
 		E11A28D329435063003311FD /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28C029435062003311FD /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift */; };
-		E11A28D429435063003311FD /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28C029435062003311FD /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift */; };
 		E11A28D529435063003311FD /* osmosis_gamm_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28C129435062003311FD /* osmosis_gamm_v1beta1_genesis.pb.swift */; };
 		E11A28D629435063003311FD /* osmosis_gamm_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28C129435062003311FD /* osmosis_gamm_v1beta1_genesis.pb.swift */; };
 		E11A28D729435063003311FD /* osmosis_gamm_pool-models_stableswap_stableswap_pool.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11A28C229435062003311FD /* osmosis_gamm_pool-models_stableswap_stableswap_pool.pb.swift */; };
@@ -7675,7 +7675,6 @@
 				18FFB47C281AF533004E65BB /* MsgGenerator.swift in Sources */,
 				18E3368B28ADB4A20034EE11 /* ChainPassage.swift in Sources */,
 				18FFB47D281AF533004E65BB /* BnbTicker.swift in Sources */,
-				E11A28D429435063003311FD /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift in Sources */,
 				1817CAAA283E2CE500523713 /* starname_iov_starname_v1beta1_types.pb.swift in Sources */,
 				1817CB67283E2CE500523713 /* starname_iov_escrow_v1beta1_query.pb.swift in Sources */,
 				1817CC6D283E2CE600523713 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
@@ -7952,6 +7951,7 @@
 				18FFB5AC281AF533004E65BB /* KavaSwapSupply.swift in Sources */,
 				18FFB5AE281AF533004E65BB /* AccountDetailViewController.swift in Sources */,
 				18FFB5AF281AF533004E65BB /* BottomLineView.swift in Sources */,
+				184D2C91298C0CEB00DD679E /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift in Sources */,
 				042A0CCA288E599F00C4DC38 /* cosmos_authz_v1beta1_authz.pb.swift in Sources */,
 				18FFB5B1281AF533004E65BB /* FeeLcdViewController.swift in Sources */,
 				1817CBE5283E2CE600523713 /* evmos_erc20_v1_erc20.pb.swift in Sources */,
