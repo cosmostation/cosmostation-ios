@@ -270,6 +270,13 @@ public struct Param {
         return result
     }
     
+    func getTurnoutBondedAmount() -> NSDecimalNumber {
+        if let marsVestingAmount = params?.mars_vesting_balance?.balances[0].amount {
+            return getBondedAmount().adding(NSDecimalNumber.init(string: marsVestingAmount))
+        }
+        return getBondedAmount()
+    }
+    
 }
 
 public struct Params {
@@ -306,6 +313,8 @@ public struct Params {
     var crescent_budgets = Array<CrescentBudget>()
     
     var teritori_minting_params: TeritoriMintingParam?
+    
+    var mars_vesting_balance: MarsVestingBalance?
     
     init(_ dictionary: NSDictionary?) {
         if let rawMintingParams = dictionary?["minting_params"] as? NSDictionary {
@@ -434,6 +443,10 @@ public struct Params {
         
         if let rawTeritoriMintingParams = dictionary?["teritori_minting_params"] as? NSDictionary {
             self.teritori_minting_params = TeritoriMintingParam.init(rawTeritoriMintingParams)
+        }
+        
+        if let rawMarsVestingBalacneParams = dictionary?["mars_vesting_balance"] as? NSDictionary {
+            self.mars_vesting_balance = MarsVestingBalance.init(rawMarsVestingBalacneParams)
         }
     }
 }
@@ -1052,6 +1065,18 @@ public struct TeritoriMintingParam {
             }
             if let developer_rewards = dictionary?["developer_rewards"] as? String {
                 self.developer_rewards = NSDecimalNumber.init(string: developer_rewards)
+            }
+        }
+    }
+}
+
+public struct MarsVestingBalance {
+    var balances = Array<Coin>()
+    
+    init(_ dictionary: NSDictionary?) {
+        if let rawMarsVestingBalances = dictionary?["balances"] as? Array<NSDictionary> {
+            for rawMarsVestingBalance in rawMarsVestingBalances {
+                self.balances.append(Coin.init(rawMarsVestingBalance))
             }
         }
     }

@@ -102,7 +102,7 @@ public struct MintscanProposalDetail {
         if (getSum() == NSDecimalNumber.zero || voteMeta == nil) {
             return NSDecimalNumber.zero
         }
-        return getSum().multiplying(byPowerOf10: 2).dividing(by: param.getBondedAmount(), withBehavior: WUtils.handler2)
+        return getSum().multiplying(byPowerOf10: 2).dividing(by: param.getTurnoutBondedAmount(), withBehavior: WUtils.handler2)
     }
 }
 
