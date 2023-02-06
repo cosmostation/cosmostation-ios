@@ -14,8 +14,10 @@ import NIO
 
 class VoteListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var voteTitle: UILabel!
     @IBOutlet weak var voteTableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
+    @IBOutlet weak var btnShowAll: UIButton!
     @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var layerMultiVote: UIView!
     @IBOutlet weak var layerMultiVoteAction: UIStackView!
@@ -26,16 +28,21 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     var refresher: UIRefreshControl!
     var mVotingPeriods = Array<MintscanProposalDetail>()
     var mEtcPeriods = Array<MintscanProposalDetail>()
+    var mCheckedPeriods = Array<MintscanProposalDetail>()
     var mMyVotes = Array<MintscanMyVotes>()
     var mSelectedProposalId = Array<String>()
     var isSelectMode = false;
     var mFetchCnt = 0
+    
+    var isShowAll = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
+        
+        self.voteTitle.text = NSLocalizedString("title_vote_list", comment: "")
         
         self.voteTableView.delegate = self
         self.voteTableView.dataSource = self
@@ -75,14 +82,18 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_vote_list", comment: "")
-        self.navigationItem.title = NSLocalizedString("title_vote_list", comment: "")
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.navigationBar.topItem?.title = "";
     }
     
     func onUpdateViews() {
+        if (isShowAll) {
+            mCheckedPeriods = mEtcPeriods
+            btnShowAll.setImage(UIImage(named: "iconCheckBox"), for: .normal)
+        } else {
+            btnShowAll.setImage(UIImage(named: "iconUnCheckedBox"), for: .normal)
+            mCheckedPeriods = mEtcPeriods.filter() {!$0.proposal_status!.localizedCaseInsensitiveContains("DEPOSIT")}
+        }
         if (mVotingPeriods.count > 1) {
             self.layerMultiVote.isHidden = false
         } else {
@@ -107,6 +118,15 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.refresher.endRefreshing()
         self.loadingImg.onStopAnimation()
         self.loadingImg.isHidden = true
+    }
+    
+    @IBAction func onClickBack(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func onClickShowAll(_ sender: UIButton) {
+        isShowAll = !isShowAll
+        self.onUpdateViews()
     }
     
     @IBAction func onClickStartSelect(_ sender: UIButton) {
@@ -173,20 +193,20 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
             view.headerCntLabel.text = String(mVotingPeriods.count)
         } else if (section == 1) {
             view.headerTitleLabel.text = NSLocalizedString("str_vote_proposals", comment: "")
-            view.headerCntLabel.text = String(mEtcPeriods.count)
+            view.headerCntLabel.text = String(mCheckedPeriods.count)
         }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0 && mVotingPeriods.count <= 0) { return 0 }
-        if (section == 1 && mEtcPeriods.count <= 0) { return 0 }
+        if (section == 1 && mCheckedPeriods.count <= 0) { return 0 }
         return 30
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) { return mVotingPeriods.count }
-        else if (section == 1) { return mEtcPeriods.count }
+        else if (section == 1) { return mCheckedPeriods.count }
         else { return 0 }
     }
     
@@ -202,7 +222,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
             return cell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"ProposalEtcPeriodCell") as? ProposalEtcPeriodCell
-            let proposal = mEtcPeriods[indexPath.row]
+            let proposal = mCheckedPeriods[indexPath.row]
             cell?.onBindView(chainConfig, proposal, mMyVotes)
             return cell!
         }
@@ -234,7 +254,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(voteDetailsVC, animated: true)
             } else {
-                let proposal = mEtcPeriods[indexPath.row]
+                let proposal = mCheckedPeriods[indexPath.row]
                 onExplorerLink(proposal.id!)
             }
         }
@@ -275,7 +295,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.mVotingPeriods.sort {
             return Int($0.id!)! < Int($1.id!)! ? false : true
         }
-        self.mEtcPeriods.sort {
+        self.mCheckedPeriods.sort {
             return Int($0.id!)! < Int($1.id!)! ? false : true
         }
     }
