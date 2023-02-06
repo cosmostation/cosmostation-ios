@@ -1098,7 +1098,10 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             case .success(let res):
                 if let pools = res as? Array<NSDictionary> {
                     pools.forEach { pool in
-                        BaseData.instance.mSupportPools.append(SupportPool.init(pool))
+                        let supportPool = SupportPool.init(pool)
+                        if (supportPool.type != "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool") {
+                            BaseData.instance.mSupportPools.append(supportPool)
+                        }
                     }
                 }
             case .failure(let error):
