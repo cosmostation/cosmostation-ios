@@ -48,7 +48,7 @@ class ChainMars: ChainConfig {
     var rpcUrl = ""
     var lcdUrl = ""
     var explorerUrl = MintscanUrl + "mars-protocol/"
-    var priceUrl = ""
+    var priceUrl = GeckoUrl + "mars-protocol"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
