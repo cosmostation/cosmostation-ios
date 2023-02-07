@@ -1096,13 +1096,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                if let pools = res as? Array<NSDictionary> {
-                    pools.forEach { pool in
-                        let supportPool = SupportPool.init(pool)
-                        if (supportPool.type != "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool") {
-                            BaseData.instance.mSupportPools.append(supportPool)
-                        }
-                    }
+                if let pools = res as? Array<[String:String]> {
+                    BaseData.instance.addSupportPools(pools: pools)
                 }
             case .failure(let error):
                 print("onFetchSupportPools ", error)
@@ -1110,7 +1105,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchFinished()
         }
     }
-    
     
     public func showWaittingAlert() {
         waitAlert = UIAlertController(title: "", message: "\n\n\n\n", preferredStyle: .alert)
@@ -1195,6 +1189,17 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         UIApplication.shared.setAlternateIconName(iconName) { (error) in
             if (error != nil) {
                 self.onShowToast(NSLocalizedString("str_icon_updated", comment: ""))
+            }
+        }
+    }
+}
+
+extension BaseData {
+    func addSupportPools(pools: Array<[String: String]>) {
+        pools.forEach { pool in
+            let supportPool = SupportPool.init(pool)
+            if (supportPool.id != "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool") {
+                  mSupportPools.append(supportPool)
             }
         }
     }
