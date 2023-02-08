@@ -76,6 +76,12 @@ public struct Param {
         } else if (chainType == .AXELAR_MAIN) {
             return NSDecimalNumber.init(string: "0.150000000000000000")
             
+        } else if (chainType == .CUDOS_MAIN) {
+            if let inflation = params?.cudos_minting_params?.inflation {
+                return NSDecimalNumber.init(string: inflation)
+            }
+            return NSDecimalNumber.zero
+            
         } else if (chainType == .TERITORI_MAIN) {
             //NOTE adjust "reduction_factor" & "minting_rewards_distribution_start_block" after 1 year (adding 22.10.24)
             if let teritoriParam = params?.teritori_minting_params?.params {
@@ -150,6 +156,12 @@ public struct Param {
         } else if (chain == .TERITORI_MAIN) {
             if let stakingDistribution = params?.teritori_minting_params?.params?.distribution_proportions?.staking {
                 return inflation.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: bondingRate, withBehavior: WUtils.handler6)
+            }
+            return NSDecimalNumber.zero
+            
+        } else if (chain == .CUDOS_MAIN) {
+            if let apr = params?.cudos_minting_params?.apr {
+                return NSDecimalNumber.init(string: apr)
             }
             return NSDecimalNumber.zero
         }
@@ -316,6 +328,8 @@ public struct Params {
     
     var mars_vesting_balance: MarsVestingBalance?
     
+    var cudos_minting_params: CudosMintingParam?
+    
     init(_ dictionary: NSDictionary?) {
         if let rawMintingParams = dictionary?["minting_params"] as? NSDictionary {
             self.minting_params = MintingParams.init(rawMintingParams)
@@ -447,6 +461,10 @@ public struct Params {
         
         if let rawMarsVestingBalacneParams = dictionary?["mars_vesting_balance"] as? NSDictionary {
             self.mars_vesting_balance = MarsVestingBalance.init(rawMarsVestingBalacneParams)
+        }
+        
+        if let rawCudosMintingParam = dictionary?["cudos_minting_params"] as? NSDictionary {
+            self.cudos_minting_params = CudosMintingParam.init(rawCudosMintingParam)
         }
     }
 }
@@ -1079,5 +1097,17 @@ public struct MarsVestingBalance {
                 self.balances.append(Coin.init(rawMarsVestingBalance))
             }
         }
+    }
+}
+
+public struct CudosMintingParam {
+    var inflation: String?
+    var apr: String?
+    var supply: String?
+    
+    init(_ dictionary: NSDictionary?) {
+        self.inflation = dictionary?["inflation"] as? String
+        self.apr = dictionary?["apr"] as? String
+        self.supply = dictionary?["supply"] as? String
     }
 }
