@@ -157,7 +157,7 @@ public struct Param {
                 return ap.multiplying(by: getCrescentRewardFact()).multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             }
         } else if (chain == .AXELAR_MAIN) {
-            let ap = getMainSupply().multiplying(by: NSDecimalNumber.init(value: 0.15))
+            let ap = getMainSupply().multiplying(by: inflation)
             return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             
         } else if (chain == .TERITORI_MAIN) {
