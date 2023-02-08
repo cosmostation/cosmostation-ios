@@ -74,7 +74,14 @@ public struct Param {
             }
             
         } else if (chainType == .AXELAR_MAIN) {
-            return NSDecimalNumber.init(string: "0.150000000000000000")
+            let baseInflation = NSDecimalNumber.init(string: params?.minting_inflation)
+            let keyManageRate = NSDecimalNumber.init(string: params?.axelar_key_mgmt_relative_inflation_rate)
+            let externalRate = NSDecimalNumber.init(string: params?.axelar_external_chain_voting_inflation_rate)
+            let evmChainCnt = NSDecimalNumber.init(value: params?.axelar_evm_chains.count ?? 0)
+            
+            let keyManageInflation = baseInflation.multiplying(by: keyManageRate)
+            let externalEvmInflation = externalRate.multiplying(by: evmChainCnt)
+            return baseInflation.adding(keyManageInflation).adding(externalEvmInflation)
             
         } else if (chainType == .CUDOS_MAIN) {
             if let inflation = params?.cudos_minting_params?.inflation {
@@ -330,6 +337,10 @@ public struct Params {
     
     var cudos_minting_params: CudosMintingParam?
     
+    var axelar_key_mgmt_relative_inflation_rate: String?
+    var axelar_external_chain_voting_inflation_rate: String?
+    var axelar_evm_chains = Array<String>()
+    
     init(_ dictionary: NSDictionary?) {
         if let rawMintingParams = dictionary?["minting_params"] as? NSDictionary {
             self.minting_params = MintingParams.init(rawMintingParams)
@@ -465,6 +476,18 @@ public struct Params {
         
         if let rawCudosMintingParam = dictionary?["cudos_minting_params"] as? NSDictionary {
             self.cudos_minting_params = CudosMintingParam.init(rawCudosMintingParam)
+        }
+        
+        if let rawAxelarKeyMgmtRelativeInflationRate = dictionary?["axelar_key_mgmt_relative_inflation_rate"] as? String {
+            self.axelar_key_mgmt_relative_inflation_rate = rawAxelarKeyMgmtRelativeInflationRate
+        }
+        if let rawAxelarExternalChainVotingInflationRate = dictionary?["axelar_external_chain_voting_inflation_rate"] as? String {
+            self.axelar_external_chain_voting_inflation_rate = rawAxelarExternalChainVotingInflationRate
+        }
+        if let rawAxelarEvmChains = dictionary?["axelar_evm_chains"] as? Array<String> {
+            for rawAxelarEvmChain in rawAxelarEvmChains {
+                self.axelar_evm_chains.append(rawAxelarEvmChain)
+            }
         }
     }
 }
