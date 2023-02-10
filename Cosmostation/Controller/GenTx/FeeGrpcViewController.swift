@@ -120,7 +120,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
-            self.onCalculateEvmFees()
+            self.onCalculateEvmFees(self.chainConfig!)
             
         } else {
             self.mSimulPassed = false
@@ -150,7 +150,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         mFee = Fee.init(mFeeGasAmount.stringValue, [mFeeCoin])
     }
     
-    func onCalculateEvmFees() {
+    func onCalculateEvmFees(_ chainConfig: ChainConfig) {
         Task {
             guard
                 let mintscanToken = BaseData.instance.mMintscanTokens.filter({ $0.address == pageHolderVC.mToSendDenom! }).first,
@@ -170,13 +170,23 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             let sendAmount = self.pageHolderVC.mToSendAmount[0].amount
             let calSendAmount = NSDecimalNumber.init(string: sendAmount).multiplying(byPowerOf10: -mintscanToken.decimals)
             
-            let nounce = try? web3.eth.getTransactionCount(address: senderAddress!)
+            let nonce = try? web3.eth.getTransactionCount(address: senderAddress!)
             let wTx = try? erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
-            let eip1559 = EIP1559Envelope(to: contractAddress!, nonce: nounce!, chainID: chainID!, value: wTx!.transaction.value, data: wTx!.transaction.data,
-                                          maxPriorityFeePerGas: BigUInt(500000000),
-                                          maxFeePerGas: BigUInt(27500000000),
-                                          gasLimit: BigUInt(900000))
-            var tx = EthereumTransaction(with: eip1559)
+            let gasPrice = try? web3.eth.getGasPrice()
+            var tx: EthereumTransaction
+            var multipleGas: BigUInt
+            if (chainConfig.chainType == .EVMOS_MAIN) {
+                let eip1559 = EIP1559Envelope(to: contractAddress!, nonce: nonce!, chainID: chainID!, value: wTx!.transaction.value, data: wTx!.transaction.data,
+                                              maxPriorityFeePerGas: BigUInt(500000000),
+                                              maxFeePerGas: BigUInt(27500000000),
+                                              gasLimit: BigUInt(900000))
+                tx = EthereumTransaction(with: eip1559)
+                multipleGas = eip1559.maxFeePerGas
+            } else {
+                let legacy = LegacyEnvelope(to: contractAddress!, nonce: nonce!, chainID: chainID, value: wTx!.transaction.value, data: wTx!.transaction.data, gasPrice: gasPrice!, gasLimit: BigUInt(900000))
+                tx = EthereumTransaction(with: legacy)
+                multipleGas = legacy.gasPrice
+            }
     
             guard
                 let gasLimit = try? web3.eth.estimateGas(tx, transactionOptions: wTx?.transactionOptions)
@@ -186,7 +196,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             }
             let newLimit = NSDecimalNumber(string: String(gasLimit)).multiplying(by: NSDecimalNumber(string: "1.1"), withBehavior: WUtils.handler0Up)
             tx.parameters.gasLimit = Web3.Utils.parseToBigUInt(newLimit.stringValue, decimals: 0)
-            mFee = Fee.init(String(gasLimit), [Coin.init(chainConfig!.stakeDenom, String(gasLimit.multiplied(by: eip1559.maxFeePerGas)))])
+            mFee = Fee.init(String(gasLimit), [Coin.init(chainConfig.stakeDenom, String(gasLimit.multiplied(by: multipleGas)))])
             self.pageHolderVC.mEthereumTransaction = tx
             mSimulPassed = true
             onUpdateView()
