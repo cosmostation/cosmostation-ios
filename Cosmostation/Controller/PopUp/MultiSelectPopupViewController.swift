@@ -49,16 +49,6 @@ class MultiSelectPopupViewController: BaseViewController, SBCardPopupContent, UI
         
         tableViewHeightConstraint.constant = CGFloat(min(contractTokens.count * 55 + 10, 250))
     }
-
-//    override func viewDidLayoutSubviews() {
-//        var esHeight: CGFloat = 420
-//        if (type == SELECT_POPUP_CONTRACT_TOKEN_EDIT) {
-//            esHeight = (CGFloat)((contractTokens.count * 55) + 105)
-//        }
-//        esHeight = (esHeight > 420) ? 420 : esHeight
-//        cardView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.size.width, height: esHeight)
-//        cardView.layoutIfNeeded()
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (type == SELECT_POPUP_CONTRACT_TOKEN_EDIT) {
