@@ -2138,7 +2138,7 @@ class Signer {
                 $0.value = try! pub.serializedData()
             }
             
-        } else if (chainType == .EVMOS_MAIN) {
+        } else if (chainType == .EVMOS_MAIN || chainType == .CANTO_MAIN) {
             let pub = Ethermint_Crypto_V1_Ethsecp256k1_PubKey.with {
                 $0.key = publicKey
             }
@@ -2235,7 +2235,7 @@ class Signer {
     
     static func getGrpcByteSingleSignatures(_ pubkeyType: Int64, _ privateKey: Data, _ toSignByte: Data, _ chainType: ChainType?) -> Data {
         var hash: Data?
-        if (chainType == .INJECTIVE_MAIN || chainType == .EVMOS_MAIN) {
+        if (chainType == .INJECTIVE_MAIN || chainType == .EVMOS_MAIN || chainType == .CANTO_MAIN) {
             hash = HDWalletKit.Crypto.sha3keccak256(data: toSignByte)
         } else if (chainType == .XPLA_MAIN && pubkeyType == 1) {
             hash = HDWalletKit.Crypto.sha3keccak256(data: toSignByte)

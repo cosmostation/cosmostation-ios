@@ -54,13 +54,18 @@ public struct Param {
             }
             return NSDecimalNumber.zero
             
-        } else if (chainType == .EVMOS_MAIN) {
+        } else if (chainType == .EVMOS_MAIN || chainType == .CANTO_MAIN) {
             if (params?.evmos_inflation_params?.params?.enable_inflation == false) {
                 return NSDecimalNumber.zero
             }
             let annualProvisions = NSDecimalNumber.init(string: params?.evmos_minting_epoch_provisions).multiplying(by: NSDecimalNumber.init(string: "365"))
-            let evmosSupply = getMainSupply().subtracting(NSDecimalNumber.init(string: "200000000000000000000000000"))
-            return annualProvisions.dividing(by: evmosSupply, withBehavior: WUtils.handler18)
+            var supply = NSDecimalNumber.zero
+            if (chainType == .EVMOS_MAIN) {
+                supply = getMainSupply().subtracting(NSDecimalNumber.init(string: "200000000000000000000000000"))
+            } else {
+                supply = getMainSupply()
+            }
+            return annualProvisions.dividing(by: supply, withBehavior: WUtils.handler18)
             
         } else if (chainType == .CRESCENT_MAIN || chainType == .CRESCENT_TEST) {
             let now = Date.init().millisecondsSince1970
@@ -146,7 +151,7 @@ public struct Param {
             let reductionFactor = NSDecimalNumber.one.subtracting(params?.stargaze_alloc_params?.getReduction() ?? NSDecimalNumber.zero)
             return inflation.multiplying(by: calTax).multiplying(by: reductionFactor).dividing(by: bondingRate, withBehavior: WUtils.handler6)
             
-        } else if (chain == .EVMOS_MAIN) {
+        } else if (chain == .EVMOS_MAIN || chain == .CANTO_MAIN) {
             let ap = NSDecimalNumber.init(string: params?.evmos_minting_epoch_provisions).multiplying(by: NSDecimalNumber.init(string: "365"))
             let stakingRewardsFactor = params?.evmos_inflation_params?.params?.inflation_distribution?.staking_rewards ?? NSDecimalNumber.zero
             return ap.multiplying(by: stakingRewardsFactor).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
@@ -451,6 +456,13 @@ public struct Params {
             self.evmos_inflation_params = EvmosInflationParam.init(rawEvmosInflationParam)
         }
         if let rawEvmosEpochMintingProvisions = dictionary?["evmos_epoch_mint_provision"] as? NSDictionary {
+            self.evmos_minting_epoch_provisions = rawEvmosEpochMintingProvisions.value(forKeyPath: "epoch_mint_provision.amount") as? String
+        }
+        
+        if let rawEvmosInflationParam = dictionary?["canto_inflation_params"] as? NSDictionary {
+            self.evmos_inflation_params = EvmosInflationParam.init(rawEvmosInflationParam)
+        }
+        if let rawEvmosEpochMintingProvisions = dictionary?["canto_epoch_mint_provision"] as? NSDictionary {
             self.evmos_minting_epoch_provisions = rawEvmosEpochMintingProvisions.value(forKeyPath: "epoch_mint_provision.amount") as? String
         }
         

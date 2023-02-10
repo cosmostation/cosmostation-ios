@@ -61,6 +61,7 @@
 "guide_msg_onomy" = "オーダーブックとAMMが結合されたOnomyデックス取引所とステーブルコイン発行のため設計されたコスモスSDKベースレイヤー1ブロックチェーンプロトコル";
 "guide_msg_quicksilver" = "Cosmos Interchainエコシステムチェーンのためのリキッドステーキング プロトコル。";
 "guide_msg_mars" = "Mars HubはInterchain生態系全般にわたって配布されるMars Protocolの多様なDeFiアプリの管理および運営のために設計されたブロックチェーンです。";
+"guide_msg_canto" = "Cantoは、イーサリアム仮想マシン（EVM）を実行できるように設計されたCosmos SDKベースのレイヤ1ブロックチェーンです。";
 "guide_btn_home" = "ホームページ";
 "guide_btn_blog" = "公式ブログ";
 

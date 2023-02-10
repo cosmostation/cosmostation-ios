@@ -1317,6 +1317,7 @@
 		154A98122983A05800E0B801 /* stride_records_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154A97E02983A05700E0B801 /* stride_records_genesis.pb.swift */; };
 		154A98132983A05800E0B801 /* stride_epochs_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154A97E12983A05700E0B801 /* stride_epochs_query.pb.swift */; };
 		1569489828ABD9E0004777ED /* ChainPassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1569489728ABD9E0004777ED /* ChainPassage.swift */; };
+		15E4258729962E8E00FBA119 /* ChainCanto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4258629962E8E00FBA119 /* ChainCanto.swift */; };
 		15F0B718294C770200127D9A /* ChainQuicksilver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B717294C770200127D9A /* ChainQuicksilver.swift */; };
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
 		181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
@@ -3752,6 +3753,7 @@
 		154A97E02983A05700E0B801 /* stride_records_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_records_genesis.pb.swift; sourceTree = "<group>"; };
 		154A97E12983A05700E0B801 /* stride_epochs_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_epochs_query.pb.swift; sourceTree = "<group>"; };
 		1569489728ABD9E0004777ED /* ChainPassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPassage.swift; sourceTree = "<group>"; };
+		15E4258629962E8E00FBA119 /* ChainCanto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainCanto.swift; sourceTree = "<group>"; };
 		15F0B717294C770200127D9A /* ChainQuicksilver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainQuicksilver.swift; sourceTree = "<group>"; };
 		181099DE28AE92FC00C178B5 /* PushUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUtils.swift; sourceTree = "<group>"; };
 		1812D46128E184D800AC7D61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -4411,6 +4413,7 @@
 				0451FC53282A398100214FDA /* ChainBinance.swift */,
 				0451FC90282A3B1C00214FDA /* ChainBitcana.swift */,
 				0451FC9C282A3B5B00214FDA /* ChainBitsong.swift */,
+				15E4258629962E8E00FBA119 /* ChainCanto.swift */,
 				0451FCBA282A3C2B00214FDA /* ChainCerberus.swift */,
 				0451FC5B282A39C100214FDA /* ChainCertik.swift */,
 				0451FCA8282A3B9100214FDA /* ChainChihuahua.swift */,
@@ -8609,6 +8612,7 @@
 				040FA8CA275F55C200229F6F /* tendermint_farming_v1beta1_tx.pb.swift in Sources */,
 				04CF7129294C0DDE00134A84 /* desmos_profiles_v3_models_params.pb.swift in Sources */,
 				E16D9B1522489B030019B7BB /* IntroViewController.swift in Sources */,
+				15E4258729962E8E00FBA119 /* ChainCanto.swift in Sources */,
 				154A98062983A05700E0B801 /* stride_stakeibc_query.pb.swift in Sources */,
 				0451FC64282A3A2200214FDA /* ChainJuno.swift in Sources */,
 				2812CA3E26DD4E160095C6AF /* TxIncentiveDelegatorCell.swift in Sources */,
