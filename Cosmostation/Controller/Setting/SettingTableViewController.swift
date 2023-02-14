@@ -149,6 +149,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             headerView.textLabel?.textColor = UIColor.font04
+            headerView.textLabel?.text = headerView.textLabel?.text?.capitalized
         }
     }
     
