@@ -250,7 +250,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             
         } else if (indexPath.section == 3) {
             if(indexPath.row == 0) {
-                if(Locale.current.languageCode == "ko") {
+                if(BaseData.instance.getLanguage() == 0 || BaseData.instance.getLanguage() == 2) {
                     guard let url = URL(string: "https://cosmostation.io/service_kr") else { return }
                     self.onShowSafariWeb(url)
                 } else {
