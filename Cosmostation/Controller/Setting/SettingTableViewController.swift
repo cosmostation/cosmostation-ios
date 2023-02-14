@@ -149,6 +149,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             headerView.textLabel?.textColor = UIColor.font04
+            headerView.textLabel?.text = headerView.textLabel?.text?.capitalized
         }
     }
     
@@ -250,7 +251,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             
         } else if (indexPath.section == 3) {
             if(indexPath.row == 0) {
-                if(Locale.current.languageCode == "ko") {
+                if(BaseData.instance.getLanguage() == 2) {
                     guard let url = URL(string: "https://cosmostation.io/service_kr") else { return }
                     self.onShowSafariWeb(url)
                 } else {
