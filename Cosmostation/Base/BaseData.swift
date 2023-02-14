@@ -563,7 +563,7 @@ final class BaseData : NSObject{
         if(lang == 1) {
             return "English(United States)"
         } else if(lang == 2) {
-            return "한국어(대한민국"
+            return "한국어(대한민국)"
         } else if(lang == 3) {
             return "日本語(日本)"
         }
