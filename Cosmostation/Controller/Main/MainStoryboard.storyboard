@@ -2722,7 +2722,9 @@
                         <outlet property="noticeTitle" destination="iLi-if-cw9" id="CI3-p6-myY"/>
                         <outlet property="notificationSwitch" destination="gbV-j5-8zb" id="id2-Xw-sBf"/>
                         <outlet property="notificationTitle" destination="DqO-Q6-FOh" id="zfP-Ra-fyN"/>
+                        <outlet property="priceColorDownTitle" destination="P3z-5E-7Zx" id="iyk-MB-sLY"/>
                         <outlet property="priceColorTitle" destination="Zt2-Bk-gIK" id="tWR-mI-6WD"/>
+                        <outlet property="priceColorUpTitle" destination="GMh-c5-JVQ" id="N79-1G-1oQ"/>
                         <outlet property="priceDownImg" destination="DjR-r2-OAA" id="fnU-zH-cJe"/>
                         <outlet property="priceUpImg" destination="3oF-My-sJx" id="BEZ-QJ-nav"/>
                         <outlet property="privacyPolicyTitle" destination="L1Z-OK-czJ" id="AHs-fd-kBi"/>

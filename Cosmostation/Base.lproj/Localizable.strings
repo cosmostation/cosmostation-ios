@@ -52,6 +52,8 @@
 "str_autopass" = "PIN Auto Pass";
 "str_currentcy" = "Currency";
 "str_price_change_color" = "Price Change Color";
+"str_up" = "Up：";
+"str_down" = "Down：";
 "str_explorer" = "MintScan Explorer";
 "str_notice" = "Notice";
 "str_homepage" = "Cosmostation Home Page";
