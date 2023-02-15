@@ -170,6 +170,7 @@
 "str_voting_description" = "설명";
 "str_voting_period" = "Voting Period Proposals";
 "str_vote_proposals" = "Proposals";
+"str_synchronize_name_service" = "네임서비스 동기화";
 
 "btn_delegate" = "  위임 하기";
 "btn_undelegate" = "  위임철회 하기";

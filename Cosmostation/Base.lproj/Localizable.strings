@@ -170,6 +170,7 @@
 "str_voting_description" = "Description";
 "str_voting_period" = "Voting Period Proposals";
 "str_vote_proposals" = "Proposals";
+"str_synchronize_name_service" = "Synchronize NameService";
 
 "btn_delegate" = "  Delegate";
 "btn_undelegate" = "  Undelegate";

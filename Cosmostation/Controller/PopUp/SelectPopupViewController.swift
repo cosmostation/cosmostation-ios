@@ -106,6 +106,9 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_NAME_SERVICE) {
             self.popupTitle.text = nameservices[0].name
+            
+        } else if (type == SELECT_POPUP_ADDRESS_NAME_SERVICE) {
+            self.popupTitle.text = NSLocalizedString("str_synchronize_name_service", comment: "")
         }
     }
     
@@ -141,7 +144,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             cardView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.size.width, height: 165)
             cardView.layoutIfNeeded()
             return
-        } else if (type == SELECT_POPUP_NAME_SERVICE) {
+        } else if (type == SELECT_POPUP_NAME_SERVICE || type == SELECT_POPUP_ADDRESS_NAME_SERVICE) {
             esHeight = (CGFloat)((nameservices.count * 55) + 55)
         }
         esHeight = (esHeight > 350) ? 350 : esHeight
@@ -179,7 +182,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             return 2
         } else if (type == SELECT_LIQUIDITY_STAKE || type == SELECT_LIQUIDITY_UNSTAKE) {
             return hostZones.count
-        } else if (type == SELECT_POPUP_NAME_SERVICE) {
+        } else if (type == SELECT_POPUP_NAME_SERVICE || type == SELECT_POPUP_ADDRESS_NAME_SERVICE) {
             return nameservices.count
         }
         return 0
@@ -388,6 +391,17 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
                 cell?.chainImg.image = UIImage(named: "iconNsOsmo+Stargaze")
             }
             cell?.chainTitle.text = nameservice.address
+            return cell!
+            
+        } else if (type == SELECT_POPUP_ADDRESS_NAME_SERVICE) {
+            let nameservice = nameservices[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as? SelectChainCell
+            if (nameservice.type == .icns) {
+                cell?.chainImg.image = UIImage(named: "iconNsOsmosis")
+            } else if (nameservice.type == .stargaze) {
+                cell?.chainImg.image = UIImage(named: "iconNsStargaze")
+            }
+            cell?.chainTitle.text = nameservice.name
             return cell!
             
         } else {

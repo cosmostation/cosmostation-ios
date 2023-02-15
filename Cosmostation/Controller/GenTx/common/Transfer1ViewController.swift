@@ -202,9 +202,9 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
                 return;
                 
             } else {
-                fetchCnt = 1
+                fetchCnt = 2
                 onCheckIcnsNameService(recipientChainConfig, userInput!)
-//                onCheckStargazeNameService(recipientChainConfig, userInput!)
+                onCheckStargazeNameService(recipientChainConfig, userInput!)
             }
         }
     }
@@ -317,8 +317,8 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
                 }
                 if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     if let matchedAddress = try? JSONDecoder().decode(Cw20IcnsByNameRes.self, from: response.data).bech32_address {
-                        if (matchedAddress?.isEmpty == false) {
-                            self.nameservices = [NameService.init(.icns, nameReq.address_by_icns!.icns, matchedAddress!)]
+                        if (matchedAddress.isEmpty == false) {
+                            self.nameservices = [NameService.init(.icns, nameReq.address_by_icns!.icns, matchedAddress)]
                         }
                     }
                 }
@@ -329,21 +329,19 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         }
     }
     
-    //TODO notyet
     func onCheckStargazeNameService(_ recipientChainConfig: ChainConfig, _ userInput: String) {
         DispatchQueue.global().async {
             do {
-                let nameReq = Cw20IcnsByNameReq.init(recipientChainConfig.addressPrefix, userInput)
-                let channel = BaseNetWork.getConnection(ChainStargaze(.STARGAZE_MAIN))!
+                let nameReq = Cw20IcnsByNameReq.init(userInput)
+                let channel = BaseNetWork.getConnection(recipientChainConfig)!
                 let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
                     $0.address = STARGAZE_NS_CONTRACT_ADDRESS
-                    $0.queryData = Cw20IcnsByNameReq.init(recipientChainConfig.addressPrefix, userInput).getEncode()
+                    $0.queryData = nameReq.getEncode()
                 }
                 if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    if let matchedAddress = try? JSONDecoder().decode(Cw20IcnsByNameRes.self, from: response.data).bech32_address {
-                        if (matchedAddress?.isEmpty == false) {
-                            self.nameservices = [NameService.init(.icns, nameReq.address_by_icns!.icns, matchedAddress!)]
-                        }
+                    let matchedAddress = String(decoding: response.data, as: UTF8.self)
+                    if (matchedAddress.isEmpty == false) {
+                        self.nameservices = [NameService.init(.stargaze, nameReq.associated_address!.name! + "." + recipientChainConfig.addressPrefix, matchedAddress.replacingOccurrences(of: "\"", with: ""))]
                     }
                 }
                 try channel.close().wait()
