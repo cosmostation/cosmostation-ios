@@ -11,13 +11,23 @@ import UIKit
 class TxVoteCell: TxCell {
 
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var voteTitle: UILabel!
     @IBOutlet weak var voterLabel: UILabel!
+    @IBOutlet weak var voterTitle: UILabel!
     @IBOutlet weak var proposalIdLabel: UILabel!
+    @IBOutlet weak var proposalIdTitle: UILabel!
     @IBOutlet weak var opinionLabel: UILabel!
+    @IBOutlet weak var opinionTitle: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        voteTitle.text = NSLocalizedString("tx_vote", comment: "")
+        voterTitle.text = NSLocalizedString("str_voter", comment: "")
+        proposalIdTitle.text = NSLocalizedString("str_proposal_id", comment: "")
+        opinionTitle.text = NSLocalizedString("str_opinion", comment: "")
+        
     }
     
     override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {

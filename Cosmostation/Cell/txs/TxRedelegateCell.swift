@@ -11,15 +11,21 @@ import UIKit
 class TxRedelegateCell: TxCell {
 
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var redelegateTitle: UILabel!
     @IBOutlet weak var redelegatorLabel: UILabel!
+    @IBOutlet weak var redelegatorTitle: UILabel!
+    @IBOutlet weak var fromValidatorTitle: UILabel!
     @IBOutlet weak var fromValidatorLabel: UILabel!
     @IBOutlet weak var fromMonikerLabel: UILabel!
+    @IBOutlet weak var toValidatorTitle: UILabel!
     @IBOutlet weak var toValidatorLabel: UILabel!
     @IBOutlet weak var toMonikerLabel: UILabel!
+    @IBOutlet weak var redelegateAmountTitle: UILabel!
     @IBOutlet weak var redelegateAmountLabel: UILabel!
     @IBOutlet weak var redelegateDenomLabel: UILabel!
     
     @IBOutlet weak var autoRewardLabel: UILabel!
+    @IBOutlet weak var autoRewardTitle: UILabel!
     @IBOutlet weak var incen0Layer: UIView!
     @IBOutlet weak var incen0Amount: UILabel!
     @IBOutlet weak var incen0Denom: UILabel!
@@ -37,6 +43,12 @@ class TxRedelegateCell: TxCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         
+        redelegateTitle.text = NSLocalizedString("str_redelegate", comment: "")
+        redelegatorTitle.text = NSLocalizedString("str_redelegator", comment: "")
+        fromValidatorTitle.text = NSLocalizedString("str_from_validator", comment: "")
+        toValidatorTitle.text = NSLocalizedString("str_to_validator", comment: "")
+        redelegateAmountTitle.text = NSLocalizedString("str_amount", comment: "")
+        autoRewardTitle.text = NSLocalizedString("str_auto_claimed_reward", comment: "")
         redelegateAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         incen0Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         incen1Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)

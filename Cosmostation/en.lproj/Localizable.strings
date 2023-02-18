@@ -170,6 +170,37 @@
 "str_voting_description" = "Description";
 "str_voting_period" = "Voting Period Proposals";
 "str_vote_proposals" = "Proposals";
+"str_tx_status" = "Status";
+"str_tx_height" = "Block Height";
+"str_tx_msg_cnt" = "Message Size";
+"str_tx_gas_info" = "Gas (used/wanted)";
+"str_tx_time" = "Time";
+"str_tx_detail" = "Transaction Detail";
+"str_from" = "From";
+"str_to" = "To";
+"str_amount" = "Amount";
+"str_share" = "Share";
+"str_explorer" = "Explorer";
+"str_done" = "Done";
+"str_delegator" = "Delegator";
+"str_validator" = "Validator";
+"str_auto_claimed_reward" = "Auto claimed rewards";
+"str_undelegator" = "Undelegator";
+"str_redelegator" = "Redelegator";
+"str_from_validator" = "From Validator";
+"str_to_validator" = "To Validator";
+"str_withdraw_address" = "Reward Withdraw Address";
+"str_voter" = "Voter";
+"str_proposal_id" = "Proposal Id";
+"str_opinion" = "My Vote";
+"str_ibc_sender" = "Sender";
+"str_ibc_recipient" = "Recipient";
+"str_ibc_send_amount" = "Send Amount";
+"str_swap_coin_type" = "Type";
+"str_sender" = "Sender";
+"str_pool_id" = "Pool id";
+"str_swap_in" = "Swap In";
+"str_swap_out" = "Swap Out";
 
 "btn_delegate" = "  Delegate";
 "btn_undelegate" = "  Undelegate";
@@ -351,6 +382,8 @@
 "tx_liquid_staking_0" = "Enter staking amount";
 "tx_liquid_unstaking_0" = "Enter unstaking amount";
 "tx_liquid_unstaking_1" = "Enter recipient Address";
+"tx_osmosis_coin_swap" = "Swap Coin";
+
 
 
 "password_init1" = "Enter your new PIN";

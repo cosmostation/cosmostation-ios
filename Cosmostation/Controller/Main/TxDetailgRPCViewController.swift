@@ -18,6 +18,11 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     @IBOutlet weak var errorLayer: CardView!
     @IBOutlet weak var errorCode: UILabel!
     @IBOutlet weak var loadingImg: LoadingImageView!
+    @IBOutlet weak var txDetailTitle: UILabel!
+    @IBOutlet weak var btnshare: UIButton!
+    @IBOutlet weak var btnexplorer: UIButton!
+    @IBOutlet weak var btnDone: UIButton!
+
     
     var mIsGen: Bool = true
     var mTxHash: String?
@@ -36,6 +41,11 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.loadingImg.onStartAnimation()
         
+        self.txDetailTitle.text = NSLocalizedString("str_tx_detail", comment: "")
+        self.btnshare.setTitle(NSLocalizedString("str_share", comment: ""), for: .normal)
+        self.btnexplorer.setTitle(NSLocalizedString("str_explorer", comment: ""), for: .normal)
+        self.btnDone.setTitle(NSLocalizedString("str_done", comment: ""), for: .normal)
+
         self.txTableView.delegate = self
         self.txTableView.dataSource = self
         self.txTableView.separatorStyle = UITableViewCell.SeparatorStyle.none

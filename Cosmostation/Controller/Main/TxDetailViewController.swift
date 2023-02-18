@@ -19,6 +19,10 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var loadingLayer: UIView!
     @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var loadingMsg: UILabel!
+    @IBOutlet weak var txDetailTitle: UILabel!
+    @IBOutlet weak var btnshare: UIButton!
+    @IBOutlet weak var btnexplorer: UIButton!
+    @IBOutlet weak var btnDone: UIButton!
     
     var mIsGen: Bool = false
     var mTxHash: String?
@@ -36,6 +40,13 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.mAllValidator = BaseData.instance.mAllValidator
+        
+        self.txDetailTitle.text = NSLocalizedString("str_tx_detail", comment: "")
+        self.txDetailTitle.text = NSLocalizedString("str_tx_detail", comment: "")
+        self.btnshare.setTitle(NSLocalizedString("str_share", comment: ""), for: .normal)
+        self.btnexplorer.setTitle(NSLocalizedString("str_explorer", comment: ""), for: .normal)
+        self.btnDone.setTitle(NSLocalizedString("str_done", comment: ""), for: .normal)
+
         
         self.txTableView.delegate = self
         self.txTableView.dataSource = self

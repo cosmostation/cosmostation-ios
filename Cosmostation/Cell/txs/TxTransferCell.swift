@@ -13,7 +13,10 @@ class TxTransferCell: UITableViewCell {
     @IBOutlet weak var txIcon: UIImageView!
     @IBOutlet weak var txTitleLabel: UILabel!
     @IBOutlet weak var fromLabel: UILabel!
+    @IBOutlet weak var fromTitle: UILabel!
     @IBOutlet weak var toLabel: UILabel!
+    @IBOutlet weak var toTitle: UILabel!
+    @IBOutlet weak var amountTitle: UILabel!
 
     @IBOutlet weak var multiAmountStack: UIStackView!
     @IBOutlet weak var multiAmountLayer0: UIView!
@@ -38,7 +41,9 @@ class TxTransferCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         
-        
+        fromTitle.text = NSLocalizedString("str_from", comment: "")
+        toTitle.text = NSLocalizedString("str_to", comment: "")
+        amountTitle.text = NSLocalizedString("str_amount", comment: "")
         multiAmount0.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         multiAmount1.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         multiAmount2.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)

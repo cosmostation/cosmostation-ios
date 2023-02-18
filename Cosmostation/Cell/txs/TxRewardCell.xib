@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,13 +29,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Reward" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAd-Gd-xYC">
-                                <rect key="frame" x="50" y="23" width="66" height="14.5"/>
+                                <rect key="frame" x="50" y="21" width="80" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Delegator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojC-59-kRz">
-                                <rect key="frame" x="16" y="60" width="51.5" height="15"/>
+                                <rect key="frame" x="16" y="60" width="55.5" height="15"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
@@ -47,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Validator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYJ-Gj-FGA">
-                                <rect key="frame" x="16" y="111.5" width="46.5" height="14.5"/>
+                                <rect key="frame" x="16" y="111.5" width="50.5" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
@@ -65,16 +65,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxe-VK-7nb">
-                                <rect key="frame" x="16" y="303.5" width="41" height="13.5"/>
+                                <rect key="frame" x="16" y="302.5" width="44" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="HDu-Ts-jOp">
-                                <rect key="frame" x="16" y="303.5" width="416" height="9.5"/>
+                                <rect key="frame" x="16" y="302.5" width="416" height="10.5"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EY0-eA-Sc2">
-                                        <rect key="frame" x="0.0" y="9.5" width="416" height="16"/>
+                                        <rect key="frame" x="0.0" y="10.5" width="416" height="16"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cob-UC-url">
                                                 <rect key="frame" x="369" y="0.0" width="5" height="16.5"/>
@@ -102,7 +102,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MSo-T5-gIt">
-                                        <rect key="frame" x="0.0" y="9.5" width="416" height="16"/>
+                                        <rect key="frame" x="0.0" y="10.5" width="416" height="16"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPU-0X-aw0">
                                                 <rect key="frame" x="369" y="0.0" width="5" height="16.5"/>
@@ -130,7 +130,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ufp-os-T72">
-                                        <rect key="frame" x="0.0" y="9.5" width="416" height="16"/>
+                                        <rect key="frame" x="0.0" y="10.5" width="416" height="16"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOr-OB-9XZ">
                                                 <rect key="frame" x="369" y="0.0" width="5" height="16.5"/>
@@ -158,7 +158,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dG-WS-b6c">
-                                        <rect key="frame" x="0.0" y="9.5" width="416" height="16"/>
+                                        <rect key="frame" x="0.0" y="10.5" width="416" height="16"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGO-mP-ODx">
                                                 <rect key="frame" x="369" y="0.0" width="5" height="16.5"/>
@@ -245,6 +245,8 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="delegatorLabel" destination="9R2-FE-k3b" id="S3e-Rh-R52"/>
+                <outlet property="delegatorTitle" destination="ojC-59-kRz" id="fra-6W-6aG"/>
+                <outlet property="getRewardTitle" destination="AAd-Gd-xYC" id="2Hc-HJ-hXx"/>
                 <outlet property="incen0Amount" destination="Cob-UC-url" id="AbA-bx-l3A"/>
                 <outlet property="incen0Denom" destination="8U5-1u-mop" id="hbV-Ko-Wer"/>
                 <outlet property="incen0Layer" destination="EY0-eA-Sc2" id="qfy-3i-u52"/>
@@ -258,8 +260,10 @@
                 <outlet property="incen3Denom" destination="Kv4-cc-rmI" id="Wz7-fj-JyF"/>
                 <outlet property="incen3Layer" destination="8dG-WS-b6c" id="krS-br-5lz"/>
                 <outlet property="monikerLabel" destination="hod-cA-rzO" id="NKf-yU-r7k"/>
+                <outlet property="rewardAmountTitle" destination="fxe-VK-7nb" id="yiP-ux-qIJ"/>
                 <outlet property="txIcon" destination="Boq-68-8Km" id="7dm-e9-Wd6"/>
                 <outlet property="validatorLabel" destination="SU9-Y2-3mM" id="vMZ-jy-shq"/>
+                <outlet property="validatorTitle" destination="cYJ-Gj-FGA" id="0fe-85-x1T"/>
             </connections>
             <point key="canvasLocation" x="247.82608695652175" y="252.79017857142856"/>
         </tableViewCell>

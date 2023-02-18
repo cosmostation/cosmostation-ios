@@ -661,6 +661,38 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "str_voting_description" = "説明";
 "str_voting_period" = "投票期間の提案";
 "str_vote_proposals" = "提案";
+"str_tx_status" = "結果";
+"str_tx_height" = "ブロックの高さ";
+"str_tx_msg_cnt" = "メッセージ個数";
+"str_tx_gas_info" = "ガス（使用/最大）";
+"str_tx_time" = "ブロック時間";
+"str_tx_hash" = "トランザクション・ハッシュ";
+"str_tx_detail" = "トランザクション詳細";
+"str_from" = "出金アドレス";
+"str_to" = "入金アドレス";
+"str_amount" = "数量";
+"str_share" = "共有";
+"str_explorer" = "エキスプローラ―";
+"str_done" = "完了";
+"str_delegator" = "委任者";
+"str_validator" = "検証人";
+"str_auto_claimed_reward" = "自動収集利息";
+"str_undelegator" = "委任解約者";
+"str_redelegator" = "再委任者";
+"str_from_validator" = "スタート検証人";
+"str_to_validator" = "到着検証人";
+"str_withdraw_address" = "利子出金アドレス";
+"str_voter" = "投票者";
+"str_proposal_id" = "議題番号";
+"str_opinion" = "私の投票";
+"str_ibc_sender" = "送るアドレス";
+"str_ibc_recipient" = "受信アドレス";
+"str_ibc_send_amount" = "数量";
+"str_swap_coin_type" = "タイプ";
+"str_sender" = "申請者";
+"str_pool_id" = "プール ID";
+"str_swap_in" = "Swap イン";
+"str_swap_out" = "Swap アウト";
 
 "str_vote_agent" = "代理人による間接投票";
 "str_vote_direct" = "検証人に直接投票";
@@ -984,6 +1016,8 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "tx_vote_weighted" = "加重投票";
 "tx_withdraw_cdp_0" = "出金金額を入力";
 "tx_withdraw_hardpool_0" = "ハードプールの出金額を入力";
+"tx_osmosis_coin_swap" = "コインスワップ";
+
 "update_msg" = "新しいバージョンが利用可能です。 AppStoreから最新版にアップデートしてください。";
 "update_title" = "アップデート";
 "validator_address" = "バリデータアドレス";
