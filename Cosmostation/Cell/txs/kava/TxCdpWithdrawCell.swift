@@ -11,15 +11,23 @@ import UIKit
 class TxCdpWithdrawCell: TxCell {
 
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var cdpWithdrawTitle: UILabel!
     @IBOutlet weak var ownerLabel: UILabel!
+    @IBOutlet weak var ownerTitle: UILabel!
     @IBOutlet weak var depositorLabel: UILabel!
+    @IBOutlet weak var depositorTitle: UILabel!
     @IBOutlet weak var collateralAmount: UILabel!
+    @IBOutlet weak var collateralAmountTitle: UILabel!
     @IBOutlet weak var collateralDenom: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
         
+        cdpWithdrawTitle.text = NSLocalizedString("tx_kava_withdraw_cdp2", comment: "")
+        ownerTitle.text = NSLocalizedString("str_owner_cdp", comment: "")
+        depositorTitle.text = NSLocalizedString("str_depositor_cdp", comment: "")
+        collateralAmountTitle.text = NSLocalizedString("str_collateral_cdp", comment: "")
         collateralAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     

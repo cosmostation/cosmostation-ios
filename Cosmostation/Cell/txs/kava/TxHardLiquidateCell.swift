@@ -11,12 +11,19 @@ import UIKit
 class TxHardLiquidateCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var hardLiquidateTitle: UILabel!
     @IBOutlet weak var keeper: UILabel!
+    @IBOutlet weak var keeperTitle: UILabel!
     @IBOutlet weak var owener: UILabel!
+    @IBOutlet weak var owenerTitle: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        hardLiquidateTitle.text = NSLocalizedString("tx_kava_hard_liquidate2", comment: "")
+        keeperTitle.text = NSLocalizedString("str_keeper", comment: "")
+        owenerTitle.text = NSLocalizedString("str_borrower", comment: "")
     }
     
     override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {

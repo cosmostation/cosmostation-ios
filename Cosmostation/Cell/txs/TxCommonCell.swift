@@ -42,7 +42,6 @@ class TxCommonCell: TxCell {
         self.selectionStyle = .none
         
         statusLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
-        statusLabel.text = NSLocalizedString("str_tx_status", comment: "")
         statusTitle.text = NSLocalizedString("str_tx_status", comment: "")
         heightLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         heightTitle.text = NSLocalizedString("str_tx_height", comment: "")

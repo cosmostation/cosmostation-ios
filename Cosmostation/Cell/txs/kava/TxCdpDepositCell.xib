@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -129,10 +129,14 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="cdpDepositTitle" destination="F0G-hz-e7W" id="eK9-LR-osH"/>
                 <outlet property="collateralAmount" destination="9Zp-AZ-k9A" id="POX-bt-3yR"/>
+                <outlet property="collateralAmountTitle" destination="p0q-vJ-Di7" id="cC8-CU-XLx"/>
                 <outlet property="collateralDenom" destination="nvt-et-3VB" id="L1B-3I-aS0"/>
                 <outlet property="depositorLabel" destination="7O9-o1-ui8" id="adK-Rm-NnU"/>
-                <outlet property="owerLabel" destination="uwP-yq-gM9" id="TX4-VS-nxv"/>
+                <outlet property="depositorTitle" destination="yOw-nJ-7WH" id="bkC-cs-iqK"/>
+                <outlet property="ownerLabel" destination="uwP-yq-gM9" id="T1N-tT-VV5"/>
+                <outlet property="ownerTitle" destination="Rhe-IS-011" id="Z1O-fZ-hE7"/>
                 <outlet property="txIcon" destination="2L2-1o-oJF" id="2wa-pT-atv"/>
             </connections>
             <point key="canvasLocation" x="188.40579710144928" y="209.59821428571428"/>

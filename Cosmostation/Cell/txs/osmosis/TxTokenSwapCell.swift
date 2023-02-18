@@ -28,7 +28,7 @@ class TxTokenSwapCell: TxCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         
-        swapTokenTitle.text = NSLocalizedString("tx_osmosis_coin_swap", comment: "")
+        swapTokenTitle.text = NSLocalizedString("tx_coin_swap", comment: "")
         txTypeTitle.text = NSLocalizedString("str_swap_coin_type", comment: "")
         txSenderTitle.text = NSLocalizedString("str_sender", comment: "")
         txPoolIdTitle.text = NSLocalizedString("str_pool_id", comment: "")
