@@ -640,13 +640,13 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mNodeInfo_gRPC = response.nodeInfo
-                    self.mFetchCnt = self.mFetchCnt + 6
+                    self.mFetchCnt = self.mFetchCnt + 5
                     self.onFetchParams(self.mChainConfig.chainAPIName)
                     self.onFetchMintscanAsset()
                     self.onFetchMintscanCw20(self.mChainConfig.chainAPIName)
                     self.onFetchMintscanErc20(self.mChainConfig.chainAPIName)
                     self.onFetchIcnsByAddress(self.mAccount.account_address)
-                    self.onFetchStargazeNsByAddress(self.mAccount.account_address)
+//                    self.onFetchStargazeNsByAddress(self.mAccount.account_address)
                 }
                 try channel.close().wait()
                 
@@ -1265,7 +1265,7 @@ extension BaseData {
     func addSupportPools(pools: Array<[String: String]>) {
         pools.forEach { pool in
             let supportPool = SupportPool.init(pool)
-            if (supportPool.id != "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool") {
+            if (supportPool.type != "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool") {
                   mSupportPools.append(supportPool)
             }
         }
