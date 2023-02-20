@@ -582,6 +582,8 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "str_paste" = "Paste";
 "str_path" = "HD 経路 :";
 "str_price_change_color" = "価格変動の色";
+"str_up" = "上昇：";
+"str_down" = "下落：";
 "str_qr_scan" = "Scan";
 "str_raw_copy" = "原本コピー";
 "str_recipient_address" = "受取住所";

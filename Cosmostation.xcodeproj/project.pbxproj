@@ -2262,6 +2262,7 @@
 		18FFB7CE281AF533004E65BB /* GenProfile3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2807DB3C2788182F00016571 /* GenProfile3ViewController.xib */; };
 		18FFB7CF281AF533004E65BB /* ResourceChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E1F29254AD3A80007BA7D /* ResourceChainCell.xib */; };
 		18FFB7D0281AF533004E65BB /* WalletOkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283D2EAE24F5742000247424 /* WalletOkCell.xib */; };
+		25BB5333299BEB2A00D5663D /* ChainCanto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4258629962E8E00FBA119 /* ChainCanto.swift */; };
 		2802B4AD28250A9300B2D9E8 /* DeriveWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2802B4AB28250A9300B2D9E8 /* DeriveWalletCell.swift */; };
 		2802B4AE28250A9300B2D9E8 /* DeriveWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2802B4AC28250A9300B2D9E8 /* DeriveWalletCell.xib */; };
 		280524B4255CDA7D004D6172 /* StarnameWalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */; };
@@ -7531,6 +7532,7 @@
 				18FFB39F281AF533004E65BB /* TxRenewStarnameCell.swift in Sources */,
 				1817CAD4283E2CE500523713 /* desmos_profiles_v1beta1_query_relationships.pb.swift in Sources */,
 				1817CC36283E2CE600523713 /* crescent_claim_v1beta1_query.pb.swift in Sources */,
+				25BB5333299BEB2A00D5663D /* ChainCanto.swift in Sources */,
 				18FFB3A2281AF533004E65BB /* KavaSwapJoin3ViewController.swift in Sources */,
 				1817CC53283E2CE600523713 /* evmos_claims_v1_query.pb.swift in Sources */,
 				0447AE8B288AAEF0004701A0 /* WalletAuthzCell.swift in Sources */,
