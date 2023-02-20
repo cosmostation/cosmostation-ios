@@ -355,10 +355,14 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectPriceColorCell") as? SelectPriceColorCell
             if (indexPath.row == 0) {
                 cell?.optionLabel.text = "Oprion 1"
+                cell?.upLabel.text = NSLocalizedString("str_up", comment: "")
+                cell?.downLabel.text = NSLocalizedString("str_down", comment: "")
                 cell?.upColorImg.image = UIImage.init(named: "iconPriceGreen")
                 cell?.downColorImg.image = UIImage.init(named: "iconPriceRed")
             } else {
                 cell?.optionLabel.text = "Oprion 2"
+                cell?.upLabel.text = NSLocalizedString("str_up", comment: "")
+                cell?.downLabel.text = NSLocalizedString("str_down", comment: "")
                 cell?.upColorImg.image = UIImage.init(named: "iconPriceRed")
                 cell?.downColorImg.image = UIImage.init(named: "iconPriceGreen")
             }

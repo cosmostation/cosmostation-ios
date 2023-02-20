@@ -11,15 +11,24 @@ import UIKit
 class TxCdpCreateCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var cdpOpenTitle: UILabel!
     @IBOutlet weak var senderLabel: UILabel!
+    @IBOutlet weak var senderTitle: UILabel!
     @IBOutlet weak var collateralAmount: UILabel!
+    @IBOutlet weak var collateralAmountTitle: UILabel!
     @IBOutlet weak var collateralDenom: UILabel!
     @IBOutlet weak var principalAmount: UILabel!
+    @IBOutlet weak var principalAmountTitle: UILabel!
     @IBOutlet weak var principalDenom: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        cdpOpenTitle.text = NSLocalizedString("tx_kava_deposit_cdp2", comment: "")
+        senderTitle.text = NSLocalizedString("str_sender_cdp", comment: "")
+        collateralAmountTitle.text = NSLocalizedString("str_collateral_cdp", comment: "")
+        principalAmountTitle.text = NSLocalizedString("str_principal_cdp", comment: "")
         collateralAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         principalAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }

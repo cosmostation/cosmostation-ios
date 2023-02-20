@@ -11,13 +11,18 @@ import UIKit
 class TxDelegateCell: TxCell {
 
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var delegateTitle: UILabel!
     @IBOutlet weak var delegatorLabel: UILabel!
+    @IBOutlet weak var delegatorTitle: UILabel!
     @IBOutlet weak var validatorLabel: UILabel!
+    @IBOutlet weak var validatorTitle: UILabel!
     @IBOutlet weak var monikerLabel: UILabel!
     @IBOutlet weak var delegateAmountLabel: UILabel!
+    @IBOutlet weak var delegateAmountTitle: UILabel!
     @IBOutlet weak var delegateDenomLabel: UILabel!
     
     @IBOutlet weak var autoReward: UILabel!
+    @IBOutlet weak var autoRewardTitle: UILabel!
     @IBOutlet weak var incen0Layer: UIView!
     @IBOutlet weak var incen0Amount: UILabel!
     @IBOutlet weak var incen0Denom: UILabel!
@@ -35,6 +40,11 @@ class TxDelegateCell: TxCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         
+        delegateTitle.text = NSLocalizedString("tx_delegate", comment: "")
+        delegatorTitle.text = NSLocalizedString("str_delegator", comment: "")
+        validatorTitle.text = NSLocalizedString("str_validator", comment: "")
+        autoRewardTitle.text = NSLocalizedString("", comment: "")
+        delegateAmountTitle.text = NSLocalizedString("str_amount", comment: "")
         delegateAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         incen0Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         incen1Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,13 +29,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incentive Minting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esl-px-wik">
-                                <rect key="frame" x="50" y="23" width="97" height="14.5"/>
+                                <rect key="frame" x="50" y="21" width="117" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5d8-a8-Ds2">
-                                <rect key="frame" x="16" y="60" width="37.5" height="13.5"/>
+                                <rect key="frame" x="16" y="60" width="40.5" height="13.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
@@ -47,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Multiplier Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqX-Ww-3I5">
-                                <rect key="frame" x="16" y="105" width="82.5" height="13.5"/>
+                                <rect key="frame" x="16" y="105" width="89" height="13.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
@@ -252,8 +252,11 @@
                 <outlet property="incen3Amount" destination="RZw-AF-46E" id="7Vd-lH-lrS"/>
                 <outlet property="incen3Denom" destination="h84-K7-2PE" id="LG5-VD-aDr"/>
                 <outlet property="incen3Layer" destination="hxm-zi-1Kn" id="ODm-EX-lHI"/>
+                <outlet property="incentiveMintingTitle" destination="esl-px-wik" id="Fhh-OC-PmX"/>
                 <outlet property="multiplier" destination="l6p-vs-OxR" id="Cqz-x4-Fx9"/>
+                <outlet property="multiplierTitle" destination="bqX-Ww-3I5" id="aOd-Y2-GDe"/>
                 <outlet property="sender" destination="Qtf-Jj-Igp" id="N1H-A0-cI9"/>
+                <outlet property="senderTitle" destination="5d8-a8-Ds2" id="u1J-IF-lTA"/>
                 <outlet property="txIcon" destination="HgA-RM-wOJ" id="5xK-W0-kco"/>
             </connections>
             <point key="canvasLocation" x="260.86956521739131" y="187.16517857142856"/>

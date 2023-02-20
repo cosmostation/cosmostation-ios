@@ -11,7 +11,10 @@ import UIKit
 class TxSwapWithdrawCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var swapWithdrawTitle: UILabel!
     @IBOutlet weak var txSenderLabel: UILabel!
+    @IBOutlet weak var txSenderTitle: UILabel!
+    @IBOutlet weak var tokenOutTitle: UILabel!
     @IBOutlet weak var txPoolAsset1AmountLabel: UILabel!
     @IBOutlet weak var txPoolAsset1DenomLabel: UILabel!
     @IBOutlet weak var txPoolAsset2AmountLabel: UILabel!
@@ -20,6 +23,10 @@ class TxSwapWithdrawCell: TxCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        swapWithdrawTitle.text = NSLocalizedString("tx_kava_swap_withdraw2", comment: "")
+        txSenderTitle.text = NSLocalizedString("str_sender", comment: "")
+        tokenOutTitle.text = NSLocalizedString("str_token_out", comment: "")
     }
     
     override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {

@@ -11,6 +11,8 @@ import UIKit
 class SelectPriceColorCell: UITableViewCell {
     
     @IBOutlet weak var optionLabel: UILabel!
+    @IBOutlet weak var upLabel: UILabel!
+    @IBOutlet weak var downLabel: UILabel!
     @IBOutlet weak var upColorImg: UIImageView!
     @IBOutlet weak var downColorImg: UIImageView!
     

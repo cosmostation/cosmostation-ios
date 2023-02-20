@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -129,10 +129,14 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="cdpBorrowTitle" destination="6mi-gU-xWa" id="nqm-BZ-Kyy"/>
                 <outlet property="coinTypeLabel" destination="aM6-bE-ITl" id="asY-Ed-YAh"/>
+                <outlet property="coinTypeTitle" destination="DUb-m5-uFa" id="i0b-uQ-VGT"/>
                 <outlet property="principalAmount" destination="qkn-sl-4OJ" id="d4Q-Fj-Nkc"/>
+                <outlet property="principalAmountTitle" destination="UtT-aX-6Oc" id="cay-Yw-3u3"/>
                 <outlet property="principalDenom" destination="X8W-BE-wpL" id="YGA-tL-Fy0"/>
                 <outlet property="senderLabel" destination="QZa-L1-biO" id="sjP-74-HQs"/>
+                <outlet property="senderTitle" destination="GFF-qD-pTf" id="abU-Qu-b8c"/>
                 <outlet property="txIcon" destination="KeA-iu-FUF" id="ieS-Jf-En1"/>
             </connections>
             <point key="canvasLocation" x="297.82608695652175" y="209.59821428571428"/>

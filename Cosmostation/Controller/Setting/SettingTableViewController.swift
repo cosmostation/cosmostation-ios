@@ -50,6 +50,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var autopassTitle: UILabel!
     @IBOutlet weak var currencyTitle: UILabel!
     @IBOutlet weak var priceColorTitle: UILabel!
+    @IBOutlet weak var priceColorUpTitle: UILabel!
+    @IBOutlet weak var priceColorDownTitle: UILabel!
     
     @IBOutlet weak var explorerTitle: UILabel!
     @IBOutlet weak var noticeTitle: UILabel!
@@ -95,6 +97,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         autopassTitle.text = NSLocalizedString("str_autopass", comment: "")
         currencyTitle.text = NSLocalizedString("str_currentcy", comment: "")
         priceColorTitle.text = NSLocalizedString("str_price_change_color", comment: "")
+        priceColorUpTitle.text = NSLocalizedString("str_up", comment: "")
+        priceColorDownTitle.text = NSLocalizedString("str_down", comment: "")
         explorerTitle.text = NSLocalizedString("str_explorer", comment: "")
         noticeTitle.text = NSLocalizedString("str_notice", comment: "")
         homepageTitle.text = NSLocalizedString("str_homepage", comment: "")

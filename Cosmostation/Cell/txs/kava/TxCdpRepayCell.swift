@@ -11,15 +11,23 @@ import UIKit
 class TxCdpRepayCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var cdpRepayTitle: UILabel!
     @IBOutlet weak var senderLabel: UILabel!
+    @IBOutlet weak var senderTitle: UILabel!
     @IBOutlet weak var coinTypeLabel: UILabel!
+    @IBOutlet weak var coinTypeTitle: UILabel!
     @IBOutlet weak var paymentAmount: UILabel!
+    @IBOutlet weak var paymentAmountTitle: UILabel!
     @IBOutlet weak var paymentDenom: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
         
+        cdpRepayTitle.text = NSLocalizedString("tx_kava_repaydebt_cdp2", comment: "")
+        senderTitle.text = NSLocalizedString("str_sender_cdp", comment: "")
+        coinTypeTitle.text = NSLocalizedString("str_denom_cdp", comment: "")
+        paymentAmountTitle.text = NSLocalizedString("str_principal_cdp", comment: "")
         paymentAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     

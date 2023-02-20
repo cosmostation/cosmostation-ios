@@ -11,8 +11,13 @@ import UIKit
 class TxSwapTokenCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var swapTokenTitle: UILabel!
     @IBOutlet weak var txTypeLabel: UILabel!
+    @IBOutlet weak var txTypeTitle: UILabel!
     @IBOutlet weak var txSenderLabel: UILabel!
+    @IBOutlet weak var txSenderTitle: UILabel!
+    @IBOutlet weak var swapInTitle: UILabel!
+    @IBOutlet weak var swapOutTitle: UILabel!
     @IBOutlet weak var txPoolInAmountLabel: UILabel!
     @IBOutlet weak var txPoolInDenomLabel: UILabel!
     @IBOutlet weak var txPoolOutAmountLabel: UILabel!
@@ -21,6 +26,12 @@ class TxSwapTokenCell: TxCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        swapTokenTitle.text = NSLocalizedString("tx_coin_swap", comment: "")
+        txTypeTitle.text = NSLocalizedString("str_type", comment: "")
+        txSenderTitle.text = NSLocalizedString("str_sender", comment: "")
+        swapInTitle.text = NSLocalizedString("str_swap_in", comment: "")
+        swapOutTitle.text = NSLocalizedString("str_swap_out", comment: "")
     }
     
     override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {

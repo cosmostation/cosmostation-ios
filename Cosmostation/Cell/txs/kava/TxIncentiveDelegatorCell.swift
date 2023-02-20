@@ -10,8 +10,12 @@ import UIKit
 
 class TxIncentiveDelegatorCell: TxCell {
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var incentiveDelegatorTitle: UILabel!
     @IBOutlet weak var sender: UILabel!
+    @IBOutlet weak var senderTitle: UILabel!
     @IBOutlet weak var multiplier: UILabel!
+    @IBOutlet weak var multiplierTitle: UILabel!
+    @IBOutlet weak var rewardAmountTitle: UILabel!
     
     @IBOutlet weak var incen0Layer: UIView!
     @IBOutlet weak var incen0Amount: UILabel!
@@ -29,6 +33,12 @@ class TxIncentiveDelegatorCell: TxCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        incentiveDelegatorTitle.text = NSLocalizedString("tx_kava_delegator_incentive2", comment: "")
+        senderTitle.text = NSLocalizedString("str_sender", comment: "")
+        multiplierTitle.text = NSLocalizedString("str_multiplier_name", comment: "")
+        rewardAmountTitle.text = NSLocalizedString("str_incentive_amount", comment: "")
+        
         incen0Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         incen1Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         incen2Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)

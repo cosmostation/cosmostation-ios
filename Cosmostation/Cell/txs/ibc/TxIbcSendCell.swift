@@ -11,14 +11,23 @@ import UIKit
 class TxIbcSendCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var ibcSendTitle: UILabel!
     @IBOutlet weak var senderLabel: UILabel!
+    @IBOutlet weak var senderTitle: UILabel!
     @IBOutlet weak var receipientLabel: UILabel!
+    @IBOutlet weak var receipientTitle: UILabel!
     @IBOutlet weak var sendAmount: UILabel!
+    @IBOutlet weak var sendAmountTitle: UILabel!
     @IBOutlet weak var sendDenom: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        ibcSendTitle.text = NSLocalizedString("tx_ibc_send", comment: "")
+        senderTitle.text = NSLocalizedString("str_ibc_sender", comment: "")
+        receipientTitle.text = NSLocalizedString("str_ibc_recipient", comment: "")
+        sendAmountTitle.text = NSLocalizedString("str_ibc_send_amount", comment: "")
         sendAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     

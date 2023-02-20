@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,12 +12,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TxDetailViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="btnDone" destination="yTa-fS-Pb4" id="SWw-a2-mHr"/>
+                <outlet property="btnexplorer" destination="m4a-6Y-f1I" id="ZdN-gV-SGX"/>
+                <outlet property="btnshare" destination="502-rv-iQc" id="YQF-lK-OD5"/>
                 <outlet property="controlLayer" destination="bTa-9h-KWo" id="s6z-PY-zgK"/>
                 <outlet property="errorCode" destination="G9v-QX-nXf" id="cn6-IO-Cut"/>
                 <outlet property="errorLayer" destination="N0K-ec-NhI" id="IOm-kP-qme"/>
                 <outlet property="loadingImg" destination="4FG-m6-2sk" id="lk9-np-zBR"/>
                 <outlet property="loadingLayer" destination="vAt-Ci-Cas" id="csv-ld-BAX"/>
                 <outlet property="loadingMsg" destination="Yke-lk-aaV" id="FP6-hE-52u"/>
+                <outlet property="txDetailTitle" destination="H6Q-0Y-3AI" id="Kam-69-miO"/>
                 <outlet property="txTableView" destination="7Nr-oT-YCK" id="2Xh-nk-Y6k"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,7 +32,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Nz-jE-jGN">
-                    <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                    <rect key="frame" x="0.0" y="48" width="414" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6Q-0Y-3AI">
                             <rect key="frame" x="130.5" y="14.5" width="153.5" height="21"/>
@@ -45,11 +49,11 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Nr-oT-YCK">
-                    <rect key="frame" x="0.0" y="102" width="414" height="636"/>
+                    <rect key="frame" x="0.0" y="106" width="414" height="632"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0K-ec-NhI" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="48" y="363" width="318" height="180"/>
+                    <rect key="frame" x="48" y="365" width="318" height="180"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ERROR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbm-qv-Lyd">
                             <rect key="frame" x="133.5" y="51.5" width="51" height="16.5"/>
@@ -91,7 +95,7 @@ Please check the error code and message.</string>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vAt-Ci-Cas">
-                    <rect key="frame" x="57" y="393" width="300" height="120"/>
+                    <rect key="frame" x="57" y="395" width="300" height="120"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="4FG-m6-2sk" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
                             <rect key="frame" x="120" y="0.0" width="60" height="60"/>

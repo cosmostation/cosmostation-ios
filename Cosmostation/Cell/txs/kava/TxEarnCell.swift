@@ -15,12 +15,17 @@ class TxEarnCell: TxCell {
     @IBOutlet weak var txSenderTitleLabel: UILabel!
     @IBOutlet weak var txSenderLabel: UILabel!
     @IBOutlet weak var txValidatorLabel: UILabel!
+    @IBOutlet weak var txValidatorTitle: UILabel!
     @IBOutlet weak var txAmountLabel: UILabel!
+    @IBOutlet weak var txAmountTitle: UILabel!
     @IBOutlet weak var txDenomLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        txValidatorTitle.text = NSLocalizedString("str_validator", comment: "")
+        txAmountTitle.text = NSLocalizedString("str_amount", comment: "")
     }
     
     override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
@@ -29,7 +34,7 @@ class TxEarnCell: TxCell {
         
         if let msg = try? Kava_Router_V1beta1_MsgDelegateMintDeposit.init(serializedData: response.tx.body.messages[position].value) {
             txMsgTitleLabel.text = NSLocalizedString("tx_kava_earn_delegateDeposit2", comment: "")
-            txSenderTitleLabel.text = "Depositor"
+            txSenderTitleLabel.text = NSLocalizedString("str_depositor_cdp", comment: "")
             txSenderLabel.text = msg.depositor
             if let validator = BaseData.instance.searchValidator(withAddress: msg.validator) {
                 txValidatorLabel.text = "(" + validator.description_p.moniker + ")"
@@ -41,7 +46,7 @@ class TxEarnCell: TxCell {
         
         if let msg = try? Kava_Router_V1beta1_MsgWithdrawBurn.init(serializedData: response.tx.body.messages[position].value) {
             txMsgTitleLabel.text = NSLocalizedString("tx_kava_earn_withdraw2", comment: "")
-            txSenderTitleLabel.text = "From"
+            txSenderTitleLabel.text = NSLocalizedString("str_from", comment: "")
             txSenderLabel.text = msg.from
             if let validator = BaseData.instance.searchValidator(withAddress: msg.validator) {
                 txValidatorLabel.text = "(" + validator.description_p.moniker + ")"

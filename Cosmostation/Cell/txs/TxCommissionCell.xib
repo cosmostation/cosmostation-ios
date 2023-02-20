@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,40 +29,40 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Get Commission" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEK-3g-Zv1">
-                                <rect key="frame" x="50" y="23" width="93" height="14.5"/>
+                                <rect key="frame" x="50" y="21" width="112.5" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Validator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGG-5B-RNc">
-                                <rect key="frame" x="16" y="64" width="46.5" height="13.5"/>
+                                <rect key="frame" x="16" y="64" width="50.5" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u94-ug-6PW">
-                                <rect key="frame" x="16" y="83.5" width="413" height="13.5"/>
+                                <rect key="frame" x="16" y="84.5" width="413" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACN-oP-Mpv">
-                                <rect key="frame" x="16" y="97" width="5.5" height="13.5"/>
+                                <rect key="frame" x="16" y="99" width="5.5" height="13.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udg-bq-mdK">
-                                <rect key="frame" x="16" y="126.5" width="41" height="13.5"/>
+                                <rect key="frame" x="16" y="128.5" width="44" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BEF-sr-ywb">
-                                <rect key="frame" x="16" y="126.5" width="413" height="162.5"/>
+                                <rect key="frame" x="16" y="128.5" width="413" height="160.5"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AaS-qe-Msi">
-                                        <rect key="frame" x="0.0" y="162.5" width="413" height="16"/>
+                                        <rect key="frame" x="0.0" y="160.5" width="413" height="16"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IhB-Zy-uKv">
                                                 <rect key="frame" x="366" y="0.0" width="5" height="16.5"/>
@@ -91,7 +91,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2h-bA-bL5">
-                                        <rect key="frame" x="0.0" y="162.5" width="413" height="16"/>
+                                        <rect key="frame" x="0.0" y="160.5" width="413" height="16"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXX-wO-BRL">
                                                 <rect key="frame" x="366" y="0.0" width="5" height="16.5"/>
@@ -120,7 +120,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJ9-bF-CDd">
-                                        <rect key="frame" x="0.0" y="162.5" width="413" height="16"/>
+                                        <rect key="frame" x="0.0" y="160.5" width="413" height="16"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9N-PR-zxb">
                                                 <rect key="frame" x="366" y="0.0" width="5" height="16.5"/>
@@ -149,7 +149,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mCc-Db-Bo0">
-                                        <rect key="frame" x="0.0" y="162.5" width="413" height="16"/>
+                                        <rect key="frame" x="0.0" y="160.5" width="413" height="16"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LJ-Ss-PMA">
                                                 <rect key="frame" x="366" y="0.0" width="5" height="16.5"/>
@@ -230,6 +230,8 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="commissionAmountTitle" destination="udg-bq-mdK" id="uWO-1m-0dh"/>
+                <outlet property="getCommissionTitle" destination="WEK-3g-Zv1" id="zLw-qN-Jvm"/>
                 <outlet property="incen0Amount" destination="IhB-Zy-uKv" id="Udh-pY-n61"/>
                 <outlet property="incen0Denom" destination="9Tx-wA-IWk" id="hWq-2M-Tvr"/>
                 <outlet property="incen0Layer" destination="AaS-qe-Msi" id="dGw-pq-32a"/>
@@ -245,6 +247,7 @@
                 <outlet property="monikerLabel" destination="ACN-oP-Mpv" id="8Hb-L8-OwH"/>
                 <outlet property="txIcon" destination="Gyr-JM-toq" id="z1L-iT-YkS"/>
                 <outlet property="validatorLabel" destination="u94-ug-6PW" id="Gkn-kf-8vb"/>
+                <outlet property="validatorTitle" destination="VGG-5B-RNc" id="Cqj-Cx-fXa"/>
             </connections>
             <point key="canvasLocation" x="251.44927536231887" y="186.49553571428569"/>
         </tableViewCell>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -132,12 +132,14 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="txAmountLabel" destination="hZx-g0-1LT" id="nIF-iK-cNO"/>
+                <outlet property="txAmountTitle" destination="bvA-HU-41Q" id="SnO-E7-WNX"/>
                 <outlet property="txDenomLabel" destination="zQy-uZ-qaU" id="tSk-eZ-zqd"/>
                 <outlet property="txIcon" destination="HR2-XQ-rYm" id="qUc-m7-bNa"/>
                 <outlet property="txMsgTitleLabel" destination="rf2-Gf-NJX" id="7So-Lu-xWe"/>
                 <outlet property="txSenderLabel" destination="PaE-yS-pSW" id="F7K-WK-tUX"/>
                 <outlet property="txSenderTitleLabel" destination="fLz-VV-KOa" id="VkI-LD-kpR"/>
                 <outlet property="txValidatorLabel" destination="nIp-yP-C7H" id="Wtj-bf-5FN"/>
+                <outlet property="txValidatorTitle" destination="7Rg-z7-t8T" id="UwX-1L-4Dr"/>
             </connections>
             <point key="canvasLocation" x="266.92307692307691" y="80.33175355450237"/>
         </tableViewCell>
