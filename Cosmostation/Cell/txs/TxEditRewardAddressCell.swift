@@ -12,11 +12,18 @@ class TxEditRewardAddressCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
     @IBOutlet weak var delegatorLabel: UILabel!
+    @IBOutlet weak var editAddressTitle: UILabel!
+    @IBOutlet weak var delegatorTitle: UILabel!
     @IBOutlet weak var widthrawAddressLabel: UILabel!
+    @IBOutlet weak var widthrawAddressTitle: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        editAddressTitle.text = NSLocalizedString("tx_change_reward_address", comment: "")
+        delegatorTitle.text = NSLocalizedString("str_delegator", comment: "")
+        widthrawAddressTitle.text = NSLocalizedString("str_withdraw_address", comment: "")
     }
     
     override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {

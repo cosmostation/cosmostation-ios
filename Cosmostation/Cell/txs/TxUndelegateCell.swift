@@ -11,13 +11,18 @@ import UIKit
 class TxUndelegateCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var undelegateTitle: UILabel!
     @IBOutlet weak var undelegatorLabel: UILabel!
+    @IBOutlet weak var undelegatorTitle: UILabel!
     @IBOutlet weak var validatorLabel: UILabel!
+    @IBOutlet weak var validatorTitle: UILabel!
     @IBOutlet weak var monikerLabel: UILabel!
     @IBOutlet weak var undelegateAmountLabel: UILabel!
+    @IBOutlet weak var undelegateAmountTitle: UILabel!
     @IBOutlet weak var undelegateDenomLabel: UILabel!
     
     @IBOutlet weak var autoRewardLabel: UILabel!
+    @IBOutlet weak var autoRewardTitle: UILabel!
     @IBOutlet weak var incen0Layer: UIView!
     @IBOutlet weak var incen0Amount: UILabel!
     @IBOutlet weak var incen0Denom: UILabel!
@@ -36,6 +41,11 @@ class TxUndelegateCell: TxCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         
+        undelegateTitle.text = NSLocalizedString("tx_undelegate", comment: "")
+        undelegatorTitle.text = NSLocalizedString("str_undelegator", comment: "")
+        validatorTitle.text = NSLocalizedString("str_validator", comment: "")
+        autoRewardTitle.text = NSLocalizedString("str_auto_claimed_reward", comment: "")
+        undelegateAmountTitle.text = NSLocalizedString("str_amount", comment: "")
         undelegateAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         incen0Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         incen1Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)

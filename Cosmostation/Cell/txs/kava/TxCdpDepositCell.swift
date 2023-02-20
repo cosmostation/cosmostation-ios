@@ -11,15 +11,22 @@ import UIKit
 class TxCdpDepositCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
-    @IBOutlet weak var owerLabel: UILabel!
+    @IBOutlet weak var cdpDepositTitle: UILabel!
+    @IBOutlet weak var ownerLabel: UILabel!
+    @IBOutlet weak var ownerTitle: UILabel!
     @IBOutlet weak var depositorLabel: UILabel!
+    @IBOutlet weak var depositorTitle: UILabel!
     @IBOutlet weak var collateralAmount: UILabel!
+    @IBOutlet weak var collateralAmountTitle: UILabel!
     @IBOutlet weak var collateralDenom: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        
+        cdpDepositTitle.text = NSLocalizedString("tx_kava_deposit_cdp2", comment: "")
+        ownerTitle.text = NSLocalizedString("str_owner_cdp", comment: "")
+        depositorTitle.text = NSLocalizedString("str_depositor_cdp", comment: "")
+        collateralAmountTitle.text = NSLocalizedString("str_collateral_cdp", comment: "")
         collateralAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
@@ -28,7 +35,7 @@ class TxCdpDepositCell: TxCell {
         txIcon.tintColor = chainConfig.chainColor
         
         if let msg = try? Kava_Cdp_V1beta1_MsgDeposit.init(serializedData: response.tx.body.messages[position].value) {
-            owerLabel.text = msg.owner
+            ownerLabel.text = msg.owner
             depositorLabel.text = msg.depositor
             
             let collateralCoin = Coin.init(msg.collateral.denom, msg.collateral.amount)

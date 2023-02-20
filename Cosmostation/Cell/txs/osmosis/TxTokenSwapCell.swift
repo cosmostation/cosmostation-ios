@@ -10,19 +10,31 @@ import UIKit
 
 class TxTokenSwapCell: TxCell {
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var swapTokenTitle: UILabel!
     @IBOutlet weak var txTypeLabel: UILabel!
+    @IBOutlet weak var txTypeTitle: UILabel!
     @IBOutlet weak var txSenderLabel: UILabel!
+    @IBOutlet weak var txSenderTitle: UILabel!
     @IBOutlet weak var txPoolIdLabel: UILabel!
+    @IBOutlet weak var txPoolIdTitle: UILabel!
     @IBOutlet weak var txSwapInAmountLabel: UILabel!
+    @IBOutlet weak var txSwapInAmountTitle: UILabel!
     @IBOutlet weak var txSwapInDenomLabel: UILabel!
     @IBOutlet weak var txSwapOutAmountLabel: UILabel!
+    @IBOutlet weak var txSwapOutAmountTitle: UILabel!
     @IBOutlet weak var txSwapOutDenomLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
         
+        swapTokenTitle.text = NSLocalizedString("tx_coin_swap", comment: "")
+        txTypeTitle.text = NSLocalizedString("str_swap_coin_type", comment: "")
+        txSenderTitle.text = NSLocalizedString("str_sender", comment: "")
+        txPoolIdTitle.text = NSLocalizedString("str_pool_id", comment: "")
+        txSwapInAmountTitle.text = NSLocalizedString("str_swap_in", comment: "")
         txSwapInAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        txSwapOutAmountTitle.text = NSLocalizedString("str_swap_out", comment: "")
         txSwapOutAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     

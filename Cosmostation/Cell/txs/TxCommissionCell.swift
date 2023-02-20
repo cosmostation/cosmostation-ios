@@ -11,9 +11,12 @@ import UIKit
 class TxCommissionCell: TxCell {
 
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var getCommissionTitle: UILabel!
     @IBOutlet weak var validatorLabel: UILabel!
+    @IBOutlet weak var validatorTitle: UILabel!
     @IBOutlet weak var monikerLabel: UILabel!
-    
+    @IBOutlet weak var commissionAmountTitle: UILabel!
+
     @IBOutlet weak var incen0Layer: UIView!
     @IBOutlet weak var incen0Amount: UILabel!
     @IBOutlet weak var incen0Denom: UILabel!
@@ -32,6 +35,9 @@ class TxCommissionCell: TxCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         
+        getCommissionTitle.text = NSLocalizedString("tx_get_commission", comment: "")
+        validatorTitle.text = NSLocalizedString("str_validator", comment: "")
+        commissionAmountTitle.text = NSLocalizedString("str_amount", comment: "")        
         incen0Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         incen1Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         incen2Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)

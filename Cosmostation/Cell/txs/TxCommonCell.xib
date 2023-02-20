@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -282,16 +282,24 @@
                 <outlet property="feeAmountLabel" destination="HK3-48-Yxm" id="mG8-cY-go6"/>
                 <outlet property="feeDenomLabel" destination="alK-NO-QX4" id="xFA-PB-IPW"/>
                 <outlet property="feeLayer" destination="ja1-tO-Lbn" id="tFK-40-aEn"/>
+                <outlet property="feeLayerTitle" destination="2cs-Rk-zrO" id="nNz-nk-aAJ"/>
                 <outlet property="gasAmountLabel" destination="flK-Y6-Cqs" id="5aU-BL-D2d"/>
+                <outlet property="gasAmountTitle" destination="obt-nm-NRl" id="c65-VC-vsV"/>
                 <outlet property="hashLabel" destination="GOr-KA-OgB" id="uXA-eQ-f76"/>
+                <outlet property="hashTitle" destination="GNl-xb-HLN" id="3NX-Xb-L9k"/>
                 <outlet property="heightLabel" destination="mph-oG-HyM" id="63M-Ge-ugA"/>
+                <outlet property="heightTitle" destination="pvA-km-yH3" id="YqB-fF-pDd"/>
                 <outlet property="memoLabel" destination="JSL-Pj-5cX" id="stg-0T-21R"/>
+                <outlet property="memoTitle" destination="cJz-Am-OWy" id="Ada-Hx-RmM"/>
                 <outlet property="msgCntLabel" destination="av5-13-jva" id="Y1T-DE-lOJ"/>
+                <outlet property="msgCntTitle" destination="K5m-bU-og5" id="m8J-kj-qtp"/>
                 <outlet property="statusImg" destination="NH7-FB-3rT" id="fUe-QN-9Yr"/>
                 <outlet property="statusLabel" destination="ul9-Qv-EO6" id="9sk-xb-c02"/>
+                <outlet property="statusTitle" destination="M9u-q3-Ejf" id="2tZ-Ph-teu"/>
                 <outlet property="successConstraint" destination="qqg-yq-DQr" id="uAp-Ak-zVz"/>
                 <outlet property="timeGapLabel" destination="N5y-vF-wFW" id="680-AR-Og3"/>
                 <outlet property="timeLabel" destination="mw9-2T-yzP" id="VPo-LY-ZJr"/>
+                <outlet property="timeTitle" destination="8bG-jL-dbB" id="nJ3-r1-IH5"/>
             </connections>
             <point key="canvasLocation" x="136.95652173913044" y="191.85267857142856"/>
         </tableViewCell>

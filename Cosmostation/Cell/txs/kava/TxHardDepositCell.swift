@@ -11,14 +11,20 @@ import UIKit
 class TxHardDepositCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var hardDepositTitle: UILabel!
     @IBOutlet weak var depositor: UILabel!
+    @IBOutlet weak var depositorTitle: UILabel!
     @IBOutlet weak var depositAmount: UILabel!
+    @IBOutlet weak var depositAmountTitle: UILabel!
     @IBOutlet weak var depositDenom: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
         
+        hardDepositTitle.text = NSLocalizedString("tx_kava_hard_deposit2", comment: "")
+        depositorTitle.text = NSLocalizedString("str_depositor_cdp", comment: "")
+        depositAmountTitle.text = NSLocalizedString("str_deposit_amount", comment: "")
         depositAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     

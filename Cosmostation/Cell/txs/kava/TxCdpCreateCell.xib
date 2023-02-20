@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -143,11 +143,15 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="cdpOpenTitle" destination="cJz-lT-9Kp" id="yNO-qH-Bh8"/>
                 <outlet property="collateralAmount" destination="FHO-7B-RZT" id="q5m-qQ-dK5"/>
+                <outlet property="collateralAmountTitle" destination="bqz-zt-fe2" id="8lu-mV-3Zv"/>
                 <outlet property="collateralDenom" destination="VtQ-Jz-Xte" id="YeF-ii-6Ew"/>
                 <outlet property="principalAmount" destination="rgR-Pq-gey" id="DGi-A3-aTE"/>
+                <outlet property="principalAmountTitle" destination="naQ-g9-8nf" id="kfT-B4-hW9"/>
                 <outlet property="principalDenom" destination="JSl-F1-icW" id="Rc8-JU-05Q"/>
                 <outlet property="senderLabel" destination="YaD-li-3R2" id="FXR-h8-7af"/>
+                <outlet property="senderTitle" destination="XrT-Gr-bMW" id="4AU-Vp-UGw"/>
                 <outlet property="txIcon" destination="hMR-58-Ksi" id="TzZ-gf-DsI"/>
             </connections>
             <point key="canvasLocation" x="225.36231884057972" y="200.55803571428569"/>

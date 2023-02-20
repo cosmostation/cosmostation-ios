@@ -11,8 +11,12 @@ import UIKit
 class TxRewardCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var getRewardTitle: UILabel!
     @IBOutlet weak var delegatorLabel: UILabel!
+    @IBOutlet weak var delegatorTitle: UILabel!
     @IBOutlet weak var validatorLabel: UILabel!
+    @IBOutlet weak var validatorTitle: UILabel!
+    @IBOutlet weak var rewardAmountTitle: UILabel!
     @IBOutlet weak var monikerLabel: UILabel!
     
     @IBOutlet weak var incen0Layer: UIView!
@@ -33,6 +37,11 @@ class TxRewardCell: TxCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        getRewardTitle.text = NSLocalizedString("tx_get_reward", comment: "")
+        delegatorTitle.text = NSLocalizedString("str_delegator", comment: "")
+        validatorTitle.text = NSLocalizedString("str_validator", comment: "")
+        rewardAmountTitle.text = NSLocalizedString("str_amount", comment: "")
         incen0Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         incen1Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         incen2Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
