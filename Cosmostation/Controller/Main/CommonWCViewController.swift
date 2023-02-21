@@ -767,7 +767,7 @@ class CommonWCViewController: BaseViewController {
         getKeyAsync(chainName: account.account_base_chain) { tuple in
             let name = account.getDpName()
             let algo = "secp256k1"
-            let pubKey = [UInt8](tuple.publicKey)
+            let pubKey = tuple.publicKey.dataToHexString()
             let address = [UInt8](tuple.bech32Data)
             let bech32Address = account.account_address
             let wallet = WCKeplrWallet.init(name: name, algo: algo, pubKey: pubKey, address: address, bech32Address: bech32Address, isNanoLedger: false)
@@ -779,7 +779,7 @@ class CommonWCViewController: BaseViewController {
         let tuple = getKey(chainName: account.account_base_chain)
         let name = account.getDpName()
         let algo = "secp256k1"
-        let pubKey = [UInt8](tuple.publicKey)
+        let pubKey = tuple.publicKey.dataToHexString()
         let address = [UInt8](tuple.bech32Data)
         let bech32Address = account.account_address
         let comostationAccount = WCCosmostationAccount(name: name, algo: algo, pubKey: pubKey, address: address, bech32Address: bech32Address)
