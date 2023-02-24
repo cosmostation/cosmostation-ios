@@ -1096,8 +1096,10 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                if let pools = res as? Array<[String:String]> {
-                    BaseData.instance.addSupportPools(pools: pools)
+                if let pools = res as? Array<[String: String]> {
+                    pools.forEach { pool in
+                        BaseData.instance.mSupportPools.append(SupportPool.init(pool))
+                    }
                 }
             case .failure(let error):
                 print("onFetchSupportPools ", error)
@@ -1189,17 +1191,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         UIApplication.shared.setAlternateIconName(iconName) { (error) in
             if (error != nil) {
                 self.onShowToast(NSLocalizedString("str_icon_updated", comment: ""))
-            }
-        }
-    }
-}
-
-extension BaseData {
-    func addSupportPools(pools: Array<[String: String]>) {
-        pools.forEach { pool in
-            let supportPool = SupportPool.init(pool)
-            if (supportPool.id != "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool") {
-                  mSupportPools.append(supportPool)
             }
         }
     }

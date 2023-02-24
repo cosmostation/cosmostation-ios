@@ -31,8 +31,8 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
     var outputDenom: String?
     var inputDecimal:Int16 = 6
     var outputDecimal:Int16 = 6
+    var swapRateAmount = NSDecimalNumber.zero
     var availableMaxAmount = NSDecimalNumber.zero
-    var swapRate = NSDecimalNumber.one
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +45,7 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         inputTextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         loadingImg.startAnimating()
-        onFetchSelectedPool(pageHolderVC.mPoolId!)
+        onFetchEstimateOut(pageHolderVC.mPoolId!)
         
         btnCancel.borderColor = UIColor.font05
         btnNext.borderColor = UIColor.photon
@@ -61,12 +61,6 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
     func onInitView() {
         inputDenom = pageHolderVC.mSwapInDenom!
         outputDenom = pageHolderVC.mSwapOutDenom!
-        guard let inputMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == inputDenom }).first,
-              let outputMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == outputDenom }).first else {
-            return
-        }
-        inputDecimal = inputMsAsset.decimals
-        outputDecimal = outputMsAsset.decimals
         
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mSwapInDenom!)
         let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
@@ -78,29 +72,6 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         WDP.dpSymbol(chainConfig, inputDenom, inputCoinName)
         WDP.dpSymbolImg(chainConfig, outputDenom, outputCoinImg)
         WDP.dpSymbol(chainConfig, outputDenom, outputCoinName)
-        
-        if (selectedPool.typeURL.contains(Osmosis_Gamm_V1beta1_Pool.protoMessageName) == true) {
-            var inputAssetAmount = NSDecimalNumber.zero
-            var inputAssetWeight = NSDecimalNumber.zero
-            var outputAssetAmount = NSDecimalNumber.zero
-            var outputAssetWeight = NSDecimalNumber.zero
-            
-            let pool = try! Osmosis_Gamm_V1beta1_Pool.init(serializedData: selectedPool.value)
-            pool.poolAssets.forEach { poolAsset in
-                if (poolAsset.token.denom == pageHolderVC.mSwapInDenom) {
-                    inputAssetAmount = NSDecimalNumber.init(string: poolAsset.token.amount)
-                    inputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
-                }
-                if (poolAsset.token.denom == pageHolderVC.mSwapOutDenom) {
-                    outputAssetAmount = NSDecimalNumber.init(string: poolAsset.token.amount)
-                    outputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
-                }
-            }
-            swapRate = outputAssetAmount.multiplying(by: inputAssetWeight).dividing(by: inputAssetAmount, withBehavior: WUtils.handler18).dividing(by: outputAssetWeight, withBehavior: WUtils.handler18)
-            
-        } else if (selectedPool.typeURL.contains(Osmosis_Gamm_Poolmodels_Stableswap_V1beta1_Pool.protoMessageName) == true) {
-            
-        }
     }
     
     override func enableUserInteraction() {
@@ -144,7 +115,7 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         inputTextFiled.layer.borderColor = UIColor.font04.cgColor
         
         let padding = NSDecimalNumber(string: "0.97")
-        let outputAmount = userInput.multiplying(byPowerOf10: inputDecimal - outputDecimal).multiplying(by: padding).multiplying(by: swapRate, withBehavior: WUtils.handler18)
+        let outputAmount = userInput.multiplying(by: padding).multiplying(byPowerOf10: -outputDecimal).multiplying(by: self.swapRateAmount, withBehavior: WUtils.handler18)
         outputCoinAmountLabel.text = WUtils.decimalNumberToLocaleString(outputAmount, outputDecimal)
     }
     
@@ -221,6 +192,43 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
                 
             } catch {
                 print("onFetchSelectedPool failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: {
+                self.loadingImg.stopAnimating()
+                self.loadingImg.isHidden = true
+                self.onInitView()
+            });
+        }
+    }
+    
+    func onFetchEstimateOut(_ poolId: String) {
+        guard let inputAsset = BaseData.instance.getMSAsset(chainConfig!, pageHolderVC.mSwapInDenom!),
+              let outputAsset = BaseData.instance.getMSAsset(chainConfig!, pageHolderVC.mSwapOutDenom!) else {
+            return
+        }
+        inputDecimal = inputAsset.decimals
+        outputDecimal = outputAsset.decimals
+        
+        var swapRoutes = Array<Osmosis_Gamm_V1beta1_SwapAmountInRoute>()
+        let swapRoute = Osmosis_Gamm_V1beta1_SwapAmountInRoute.with { $0.poolID = UInt64(poolId)!; $0.tokenOutDenom = pageHolderVC.mSwapOutDenom! }
+        swapRoutes.append(swapRoute)
+        
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
+                let req = Osmosis_Gamm_V1beta1_QuerySwapExactAmountInRequest.with {
+                    $0.sender = self.account!.account_address;
+                    $0.poolID = UInt64(poolId)!;
+                    $0.tokenIn = NSDecimalNumber(string: "1").multiplying(byPowerOf10: self.inputDecimal).stringValue + self.pageHolderVC.mSwapInDenom!
+                    $0.routes = swapRoutes
+                }
+                if let response = try? Osmosis_Gamm_V1beta1_QueryClient(channel: channel).estimateSwapExactAmountIn(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.swapRateAmount = NSDecimalNumber.init(string: response.tokenOutAmount)
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchEstimateOut failed: \(error)")
             }
             DispatchQueue.main.async(execute: {
                 self.loadingImg.stopAnimating()
