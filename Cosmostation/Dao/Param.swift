@@ -101,6 +101,13 @@ public struct Param {
                 return inflationNum.multiplying(by: teritoriParam.genesis_block_provisions).dividing(by: getMainSupply(), withBehavior: WUtils.handler18)
             }
             return NSDecimalNumber.zero
+            
+        } else if (chainType == .SOMMELIER_MAIN) {
+            let calTax = NSDecimalNumber.one.subtracting(getTax())
+            let bondingRate = getBondedAmount().dividing(by: getMainSupply())
+            if let apy = params?.sommelier_apy?.apy {
+                return NSDecimalNumber.init(string: apy).multiplying(by: bondingRate).dividing(by: calTax, withBehavior: WUtils.handler6)
+            }
         }
         return NSDecimalNumber.init(string: params?.minting_inflation)
     }
@@ -174,6 +181,12 @@ public struct Param {
         } else if (chain == .CUDOS_MAIN) {
             if let apr = params?.cudos_minting_params?.apr {
                 return NSDecimalNumber.init(string: apr)
+            }
+            return NSDecimalNumber.zero
+            
+        } else if (chain == .SOMMELIER_MAIN) {
+            if let apy = params?.sommelier_apy?.apy {
+                return NSDecimalNumber.init(string: apy)
             }
             return NSDecimalNumber.zero
         }
@@ -346,6 +359,8 @@ public struct Params {
     var axelar_external_chain_voting_inflation_rate: String?
     var axelar_evm_chains = Array<String>()
     
+    var sommelier_apy: SommelierApy?
+    
     init(_ dictionary: NSDictionary?) {
         if let rawMintingParams = dictionary?["minting_params"] as? NSDictionary {
             self.minting_params = MintingParams.init(rawMintingParams)
@@ -500,6 +515,10 @@ public struct Params {
             for rawAxelarEvmChain in rawAxelarEvmChains {
                 self.axelar_evm_chains.append(rawAxelarEvmChain)
             }
+        }
+        
+        if let rawSommelierApy = dictionary?["sommelier_apy"] as? NSDictionary {
+            self.sommelier_apy = SommelierApy.init(rawSommelierApy)
         }
     }
 }
@@ -1144,5 +1163,13 @@ public struct CudosMintingParam {
         self.inflation = dictionary?["inflation"] as? String
         self.apr = dictionary?["apr"] as? String
         self.supply = dictionary?["supply"] as? String
+    }
+}
+
+public struct SommelierApy {
+    var apy: String?
+    
+    init(_ dictionary: NSDictionary?) {
+        self.apy = dictionary?["apy"] as? String
     }
 }
