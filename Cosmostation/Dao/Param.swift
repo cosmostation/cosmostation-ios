@@ -102,12 +102,6 @@ public struct Param {
             }
             return NSDecimalNumber.zero
             
-        } else if (chainType == .SOMMELIER_MAIN) {
-            let calTax = NSDecimalNumber.one.subtracting(getTax())
-            let bondingRate = getBondedAmount().dividing(by: getMainSupply())
-            if let apy = params?.sommelier_apy?.apy {
-                return NSDecimalNumber.init(string: apy).multiplying(by: bondingRate).dividing(by: calTax, withBehavior: WUtils.handler6)
-            }
         }
         return NSDecimalNumber.init(string: params?.minting_inflation)
     }
