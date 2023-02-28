@@ -122,6 +122,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mSwapOutDenom: String?
     var mSwapInAmount: NSDecimalNumber?
     var mSwapOutAmount: NSDecimalNumber?
+    var mSwapInCoin: Coin?
 //    var mPool: Osmosis_Gamm_Balancer_V1beta1_Pool?
     var mPoolCoin0: Coin?
     var mPoolCoin1: Coin?
@@ -491,6 +492,12 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                    MemoViewController(nibName: "MemoViewController", bundle: nil),
                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                    StrideLiquid4ViewController(nibName: "StrideLiquid4ViewController", bundle: nil)]
+           
+       } else if (mType == TASK_TYPE_PERSIS_LIQUIDITY_STAKE) {
+           return [PersisLiquid0ViewController(nibName: "PersisLiquid0ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   PersisLiquid3ViewController(nibName: "PersisLiquid3ViewController", bundle: nil)]
        }
         
         else {

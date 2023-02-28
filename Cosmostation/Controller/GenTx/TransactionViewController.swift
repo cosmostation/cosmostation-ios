@@ -350,6 +350,11 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep5_1")
             self.titleLabel.text =  NSLocalizedString("title_liquid_unstaking", comment: "")
             
+        } else if (mType == TASK_TYPE_PERSIS_LIQUIDITY_STAKE) {
+            stepDescription.text = NSLocalizedString("tx_liquid_staking_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            self.titleLabel.text =  NSLocalizedString("title_liquid_staking", comment: "")
+            
         }
         
         
@@ -646,6 +651,10 @@ class TransactionViewController: UIViewController {
                 } else if (mType == TASK_TYPE_STRIDE_LIQUIDITY_UNSTAKE) {
                     stepDescription.text = NSLocalizedString("tx_liquid_unstaking_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_1")
+                    
+                } else if (mType == TASK_TYPE_PERSIS_LIQUIDITY_STAKE) {
+                    stepDescription.text = NSLocalizedString("tx_liquid_staking_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_1")
                     
                 }
                 

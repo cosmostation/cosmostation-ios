@@ -135,6 +135,9 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         //for Liquid Staking
         self.txTableView.register(UINib(nibName: "TxLiquidStakeCell", bundle: nil), forCellReuseIdentifier: "TxLiquidStakeCell")
         
+        //for Persistence Liquid Staking
+        self.txTableView.register(UINib(nibName: "TxPersisLiquidStakeCell", bundle: nil), forCellReuseIdentifier: "TxPersisLiquidStakeCell")
+        
         //for unknown msg type
         self.txTableView.register(UINib(nibName: "TxUnknownCell", bundle: nil), forCellReuseIdentifier: "TxUnknownCell")
         
@@ -488,6 +491,12 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                     cell?.onBindMsg(chainConfig, mTxRespose!, indexPath.row - 1)
                     return cell!
                     
+                }
+                
+                else if (msg.typeURL.contains(Pstake_Lscosmos_V1beta1_MsgLiquidStake.protoMessageName)) {
+                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxPersisLiquidStakeCell") as? TxCell
+                    cell?.onBindMsg(chainConfig, mTxRespose!, indexPath.row - 1)
+                    return cell!
                 }
                 
             }

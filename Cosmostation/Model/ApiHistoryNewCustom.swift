@@ -787,6 +787,13 @@ public struct ApiHistoryNewCustom {
                     result = NSLocalizedString("tx_injective_cancel_spot_order", comment: "")
                 }
             }
+            
+            // persistence msg type
+            else if (msgType.contains("pstake.") && msgType.contains("lscosmos")) {
+                if (msgType.contains("MsgLiquidStake")) {
+                    result = NSLocalizedString("tx_stride_liquid_stake", comment: "")
+                }
+            }
 
             if (getMsgCnt() > 1) {
                 result = result +  " + " + String(getMsgCnt() - 1)
