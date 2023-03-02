@@ -9,5 +9,5 @@
 import Foundation
 
 public struct Cw20IcnsByNameRes : Codable {
-    var bech32_address: String?
+    let bech32_address: String
 }

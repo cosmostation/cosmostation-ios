@@ -172,6 +172,8 @@
 "str_voting_description" = "Description";
 "str_voting_period" = "Voting Period Proposals";
 "str_vote_proposals" = "Proposals";
+"str_synchronize_name_service" = "Synchronize NameService";
+
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
 "str_tx_msg_cnt" = "Message Size";
@@ -223,7 +225,6 @@
 "str_swap_out" = "Swap Out";
 "str_multiplier_name" = "Multiplier Name";
 "str_incentive_amount" = "Incentive Reward";
-
 
 
 "btn_delegate" = "  Delegate";

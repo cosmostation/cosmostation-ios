@@ -663,6 +663,8 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "str_voting_description" = "説明";
 "str_voting_period" = "投票期間の提案";
 "str_vote_proposals" = "提案";
+"str_synchronize_name_service" = "ネームサービス同期";
+
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
 "str_tx_msg_cnt" = "メッセージ個数";
