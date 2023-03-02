@@ -42,10 +42,13 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
     var mSelectedPoolId: UInt64 = 1
     var mSelectedPool: Osmosis_Gamm_V1beta1_Pool?
     var mSelectedStablePool: Osmosis_Gamm_Poolmodels_Stableswap_V1beta1_Pool?
+    var mInputAsset: MintscanAsset?
+    var mOutputAsset: MintscanAsset?
     var mInputDenom: String?
     var mOutputDenom: String?
     var mInputDecimal:Int16 = 6
     var mOutputDecimal:Int16 = 6
+    var mSwapRateAmount = NSDecimalNumber.zero
     var mAvailableMaxAmount = NSDecimalNumber.zero
 
     override func viewDidLoad() {
@@ -69,19 +72,13 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         self.mSelectedPoolId = 1
         self.mInputDenom = "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
         self.mOutputDenom = "uosmo"
-        self.onFetchSelectedPool(mSelectedPoolId)
+        self.onFetchOsmoSwapPoolData(mSelectedPoolId)
     }
     
     func updateView() {
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
-        guard let inputMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == mInputDenom }).first,
-              let outputMsAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == mOutputDenom }).first else {
-            return
-        }
         
-        mInputDecimal = inputMsAsset.decimals
-        mOutputDecimal = outputMsAsset.decimals
         mAvailableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(mInputDenom!)
         WDP.dpCoin(chainConfig, mInputDenom, mAvailableMaxAmount.stringValue, nil, inputCoinAvailableAmountLabel)
         
@@ -107,34 +104,12 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         inputCoinExRateAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, 6)
         
         //display swap rate with this pool
-        if (mSelectedPool != nil) {
-            var inputAssetAmount = NSDecimalNumber.zero
-            var inputAssetWeight = NSDecimalNumber.zero
-            var outputAssetAmount = NSDecimalNumber.zero
-            var outputAssetWeight = NSDecimalNumber.zero
-            mSelectedPool!.poolAssets.forEach { poolAsset in
-                if (poolAsset.token.denom == mInputDenom) {
-                    inputAssetAmount = NSDecimalNumber.init(string: poolAsset.token.amount)
-                    inputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
-                }
-                if (poolAsset.token.denom == mOutputDenom) {
-                    outputAssetAmount = NSDecimalNumber.init(string: poolAsset.token.amount)
-                    outputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
-                }
-            }
-            inputAssetAmount = inputAssetAmount.multiplying(byPowerOf10: -mInputDecimal)
-            outputAssetAmount = outputAssetAmount.multiplying(byPowerOf10: -mOutputDecimal)
-            let poolSwapRate = outputAssetAmount.multiplying(by: inputAssetWeight).dividing(by: inputAssetAmount, withBehavior: WUtils.handler18).dividing(by: outputAssetWeight, withBehavior: WUtils.handler6)
-            outputCoinRateAmount.attributedText = WDP.dpAmount(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, 6)
-            
-        } else if (mSelectedStablePool != nil) {
-            
-        }
+        outputCoinRateAmount.attributedText = WDP.dpAmount(mSwapRateAmount.stringValue, outputCoinRateAmount.font, mOutputDecimal, 6)
         
         //display swap rate with market price
         inputCoinExRateAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, 6)
-        let priceInput = WUtils.price(inputMsAsset.coinGeckoId)
-        let priceOutput = WUtils.price(outputMsAsset.coinGeckoId)
+        let priceInput = WUtils.price(mInputAsset!.coinGeckoId)
+        let priceOutput = WUtils.price(mOutputAsset!.coinGeckoId)
         
         if (priceInput == NSDecimalNumber.zero || priceOutput == NSDecimalNumber.zero) {
             self.outputCoinExRateAmount.text = "?.??????"
@@ -148,7 +123,7 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         let temp = mInputDenom
         mInputDenom = mOutputDenom
         mOutputDenom = temp
-        self.updateView()
+        onFetchOsmoSwapPoolData(mSelectedPoolId)
     }
     
     func onSetSwapableDenoms(_ include: String) {
@@ -197,7 +172,7 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mType = TASK_TYPE_OSMOSIS_SWAP
-        txVC.mPoolId = String(mSelectedPool!.id)
+        txVC.mPoolId = String(mSelectedPoolId)
         txVC.mSwapInDenom = mInputDenom
         txVC.mSwapOutDenom = mOutputDenom
         self.navigationItem.title = ""
@@ -212,14 +187,14 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
             if let pool = BaseData.instance.mSupportPools.filter({ $0.adenom == mInputDenom }).first {
                 mOutputDenom = pool.bdenom
                 mSelectedPoolId = UInt64(pool.id)!
-                onFetchSelectedPool(mSelectedPoolId)
+                onFetchOsmoSwapPoolData(mSelectedPoolId)
                 return
                 
             }
             if let pool = BaseData.instance.mSupportPools.filter({ $0.bdenom == mInputDenom }).first {
                 mOutputDenom = pool.adenom
                 mSelectedPoolId = UInt64(pool.id)!
-                onFetchSelectedPool(mSelectedPoolId)
+                onFetchOsmoSwapPoolData(mSelectedPoolId)
                 return
             }
             print("Error")
@@ -231,16 +206,34 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
             if let pool = BaseData.instance.mSupportPools.filter({ $0.adenom == mOutputDenom && $0.bdenom == mInputDenom }).first {
                 mInputDenom = pool.bdenom
                 mSelectedPoolId = UInt64(pool.id)!
-                onFetchSelectedPool(mSelectedPoolId)
+                onFetchOsmoSwapPoolData(mSelectedPoolId)
             }
             if let pool = BaseData.instance.mSupportPools.filter({ $0.bdenom == mOutputDenom && $0.adenom == mInputDenom}).first {
                 mInputDenom = pool.adenom
                 mSelectedPoolId = UInt64(pool.id)!
-                onFetchSelectedPool(mSelectedPoolId)
+                onFetchOsmoSwapPoolData(mSelectedPoolId)
             }
             print("Error")
             self.dismiss(animated: true)
         }
+    }
+    
+    var mFetchCnt = 0
+    @objc func onFetchOsmoSwapPoolData(_ id: UInt64) {
+        if (self.mFetchCnt > 0)  {
+            return
+        }
+        self.mFetchCnt = 2
+        
+        self.onFetchSelectedPool(id)
+        self.onFetchEstimateOut(id)
+    }
+    
+    func onFetchFinished() {
+        self.mFetchCnt = self.mFetchCnt - 1
+        if (mFetchCnt > 0) { return }
+        
+        self.updateView()
     }
     
     func onFetchSelectedPool(_ id: UInt64) {
@@ -264,7 +257,38 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
             } catch {
                 print("onFetchSelectedPool failed: \(error)")
             }
-            DispatchQueue.main.async(execute: { self.updateView() });
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchEstimateOut(_ id: UInt64) {
+        mInputAsset = BaseData.instance.getMSAsset(self.chainConfig!, mInputDenom!)
+        mOutputAsset = BaseData.instance.getMSAsset(self.chainConfig!, mOutputDenom!)
+        mInputDecimal = mInputAsset!.decimals
+        mOutputDecimal = mOutputAsset!.decimals
+        
+        var swapRoutes = Array<Osmosis_Gamm_V1beta1_SwapAmountInRoute>()
+        let swapRoute = Osmosis_Gamm_V1beta1_SwapAmountInRoute.with { $0.poolID = id; $0.tokenOutDenom = mOutputDenom! }
+        swapRoutes.append(swapRoute)
+        
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
+                let req = Osmosis_Gamm_V1beta1_QuerySwapExactAmountInRequest.with {
+                    $0.sender = self.account!.account_address;
+                    $0.poolID = id;
+                    $0.tokenIn = NSDecimalNumber(string: "1").multiplying(byPowerOf10: self.mInputDecimal).stringValue + self.mInputDenom!
+                    $0.routes = swapRoutes
+                }
+                if let response = try? Osmosis_Gamm_V1beta1_QueryClient(channel: channel).estimateSwapExactAmountIn(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.mSwapRateAmount = NSDecimalNumber.init(string: response.tokenOutAmount)
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchEstimateOut failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
 }

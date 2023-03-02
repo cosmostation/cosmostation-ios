@@ -1140,8 +1140,10 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                if let pools = res as? Array<[String:String]> {
-                    BaseData.instance.addSupportPools(pools: pools)
+                if let pools = res as? Array<[String: String]> {
+                    pools.forEach { pool in
+                        BaseData.instance.mSupportPools.append(SupportPool.init(pool))
+                    }
                 }
             case .failure(let error):
                 print("onFetchSupportPools ", error)
@@ -1261,6 +1263,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
 }
 
+
 extension BaseData {
     func addSupportPools(pools: Array<[String: String]>) {
         pools.forEach { pool in
@@ -1271,3 +1274,4 @@ extension BaseData {
         }
     }
 }
+
