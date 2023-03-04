@@ -83,8 +83,6 @@ class ChainFactory {
             return .BITSONG_MAIN
         case CHAIN_CANTO_S:
             return .CANTO_MAIN
-        case CHAIN_CERBERUS_S:
-            return .CERBERUS_MAIN
         case CHAIN_CERTIK_S:
             return .CERTIK_MAIN
         case CHAIN_CHIHUAHUA_S:
@@ -216,8 +214,6 @@ class ChainFactory {
             return ChainBitsong(chainType)
         case .CANTO_MAIN:
             return ChainCanto(chainType)
-        case .CERBERUS_MAIN:
-            return ChainCerberus(chainType)
         case .CERTIK_MAIN:
             return ChainCertik(chainType)
         case .CHIHUAHUA_MAIN:
@@ -351,7 +347,6 @@ let CHAIN_BINANCE_S = "SUPPORT_CHAIN_BINANCE_MAIN"
 let CHAIN_BITCANA_S = "SUPPORT_CHAIN_BITCANA"
 let CHAIN_BITSONG_S = "SUPPORT_CHAIN_BITSONG"
 let CHAIN_CANTO_S = "SUPPORT_CHAIN_CANTO"
-let CHAIN_CERBERUS_S = "SUPPORT_CHAIN_CERBERUS"
 let CHAIN_CERTIK_S = "SUPPORT_CHAIN_CERTIK_MAIN"
 let CHAIN_CHIHUAHUA_S = "SUPPORT_CHAIN_CHIHUAHUA"
 let CHAIN_COMDEX_S = "SUPPORT_CHAIN_COMDEX"

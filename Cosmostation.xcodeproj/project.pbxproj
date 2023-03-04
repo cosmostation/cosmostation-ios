@@ -505,8 +505,6 @@
 		0451FCB6282A3BD700214FDA /* ChainUmee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FCB4282A3BD700214FDA /* ChainUmee.swift */; };
 		0451FCB8282A3C1000214FDA /* ChainProvenance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FCB7282A3C1000214FDA /* ChainProvenance.swift */; };
 		0451FCB9282A3C1000214FDA /* ChainProvenance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FCB7282A3C1000214FDA /* ChainProvenance.swift */; };
-		0451FCBB282A3C2B00214FDA /* ChainCerberus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FCBA282A3C2B00214FDA /* ChainCerberus.swift */; };
-		0451FCBC282A3C2B00214FDA /* ChainCerberus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FCBA282A3C2B00214FDA /* ChainCerberus.swift */; };
 		0451FCBE282A3C3E00214FDA /* ChainOmiflix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FCBD282A3C3E00214FDA /* ChainOmiflix.swift */; };
 		0451FCBF282A3C3E00214FDA /* ChainOmiflix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FCBD282A3C3E00214FDA /* ChainOmiflix.swift */; };
 		0451FCC1282A3C5000214FDA /* ChainCrescent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FCC0282A3C5000214FDA /* ChainCrescent.swift */; };
@@ -3237,7 +3235,6 @@
 		0451FCB1282A3BC900214FDA /* ChainKonstellation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKonstellation.swift; sourceTree = "<group>"; };
 		0451FCB4282A3BD700214FDA /* ChainUmee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainUmee.swift; sourceTree = "<group>"; };
 		0451FCB7282A3C1000214FDA /* ChainProvenance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainProvenance.swift; sourceTree = "<group>"; };
-		0451FCBA282A3C2B00214FDA /* ChainCerberus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCerberus.swift; sourceTree = "<group>"; };
 		0451FCBD282A3C3E00214FDA /* ChainOmiflix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOmiflix.swift; sourceTree = "<group>"; };
 		0451FCC0282A3C5000214FDA /* ChainCrescent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCrescent.swift; sourceTree = "<group>"; };
 		04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesmosProfileInfoCell.swift; sourceTree = "<group>"; };
@@ -4418,7 +4415,6 @@
 				0451FC90282A3B1C00214FDA /* ChainBitcana.swift */,
 				0451FC9C282A3B5B00214FDA /* ChainBitsong.swift */,
 				15E4258629962E8E00FBA119 /* ChainCanto.swift */,
-				0451FCBA282A3C2B00214FDA /* ChainCerberus.swift */,
 				0451FC5B282A39C100214FDA /* ChainCertik.swift */,
 				0451FCA8282A3B9100214FDA /* ChainChihuahua.swift */,
 				0451FC99282A3B5000214FDA /* ChainComdex.swift */,
@@ -7355,7 +7351,6 @@
 				18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */,
 				18DFB7FA298CADC900E812B6 /* tendermint_farming_v1beta1_genesis.pb.swift in Sources */,
 				18FFB2ED281AF533004E65BB /* NFTDetailRawCell.swift in Sources */,
-				0451FCBC282A3C2B00214FDA /* ChainCerberus.swift in Sources */,
 				18FFB2F2281AF533004E65BB /* Password.swift in Sources */,
 				18FFB2F3281AF533004E65BB /* SelectChainCell.swift in Sources */,
 				18FFB2F4281AF533004E65BB /* AlphabetViewController.swift in Sources */,
@@ -8408,7 +8403,6 @@
 				154A980A2983A05800E0B801 /* stride_claim_tx.grpc.swift in Sources */,
 				040FA802275F55C200229F6F /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,
 				045DAD732897A195004ED9B4 /* AuthzVote1ViewController.swift in Sources */,
-				0451FCBB282A3C2B00214FDA /* ChainCerberus.swift in Sources */,
 				280E1F11254AB5C70007BA7D /* ReplaceResource3ViewController.swift in Sources */,
 				282FF34923F50C540028CC66 /* TxUndelegateCell.swift in Sources */,
 				154A97FD2983A05700E0B801 /* stride_interchainquery_v1_genesis.pb.swift in Sources */,

@@ -314,7 +314,6 @@ public enum ChainType: String {
     case UMEE_MAIN
     case PROVENANCE_MAIN
     case CUDOS_MAIN
-    case CERBERUS_MAIN
     case OMNIFLIX_MAIN
     case CRESCENT_MAIN
     case MANTLE_MAIN
@@ -352,7 +351,6 @@ public enum ChainType: String {
         result.append(BITCANA_MAIN)
         result.append(BITSONG_MAIN)
         result.append(CANTO_MAIN)
-        result.append(CERBERUS_MAIN)
         result.append(CHIHUAHUA_MAIN)
         result.append(COMDEX_MAIN)
         result.append(CRESCENT_MAIN)
