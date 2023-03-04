@@ -405,6 +405,7 @@
 "tx_liquid_staking_0" = "수량을 입력하세요";
 "tx_liquid_unstaking_0" = "수량을 입력하세요";
 "tx_liquid_unstaking_1" = "받을 주소를 입력해주세요.";
+"tx_liquid_redeem_0" = "수량을 입력하세요";
 "tx_coin_swap" = "코인 스왑";
 
 
@@ -781,6 +782,7 @@ support@cosmostation.io";
 "title_authz_send" = "Authz 전송하기";
 "title_liquid_staking" = "리퀴드 스테이킹";
 "title_liquid_unstaking" = "리퀴드 언스테이킹";
+"title_liquid_redeem" = "리퀴드 상환";
 
 
 "proposal_type_basic" = "기본";
@@ -1157,6 +1159,8 @@ support@cosmostation.io";
 
 "tx_stride_liquid_stake" = "유동성 스테이크";
 "tx_stride_liquid_unstake" = "유동성 언스테이크";
+"tx_persis_liquid_redeem" = "유동성 상환";
+"tx_persis_liquid_claim" = "언스테이크 유동성 받기";
 
 "tx_known" = "알 수 없음";
 

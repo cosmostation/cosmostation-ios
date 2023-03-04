@@ -406,6 +406,7 @@
 "tx_liquid_staking_0" = "Enter staking amount";
 "tx_liquid_unstaking_0" = "Enter unstaking amount";
 "tx_liquid_unstaking_1" = "Enter recipient Address";
+"tx_liquid_redeem_0" = "Enter redeem amount";
 "tx_coin_swap" = "Swap Coin";
 
 
@@ -1163,6 +1164,8 @@ support@cosmostation.io";
 
 "tx_stride_liquid_stake" = "Liquid Stake";
 "tx_stride_liquid_unstake" = "Liquid Unstake";
+"tx_persis_liquid_redeem" = "Liquid Redeem";
+"tx_persis_liquid_claim" = "Liquid Unstaked Claim";
 
 "tx_known" = "Unknown";
 

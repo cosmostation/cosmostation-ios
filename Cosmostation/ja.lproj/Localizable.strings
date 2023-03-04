@@ -1067,6 +1067,8 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "tx_coin_swap" = "コインスワップ";
 "tx_stride_liquid_stake" = "流動性ステーク";
 "tx_stride_liquid_unstake" = "流動性アンステーク";
+"tx_persis_liquid_redeem" = "流動性償還";
+"tx_persis_liquid_claim" = "アンステーキの流動性を受ける";
 
 "update_msg" = "新しいバージョンが利用可能です。 AppStoreから最新版にアップデートしてください。";
 "update_title" = "アップデート";

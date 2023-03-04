@@ -105,13 +105,25 @@ class PersisLiquid3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genPersisLiquidityStaking(auth!, self.account!.account_pubkey_type,
-                                                         self.account!.account_address,
-                                                         self.pageHolderVC.mSwapInCoin!,
-                                                         self.pageHolderVC.mFee!,
-                                                         self.pageHolderVC.mMemo!,
-                                                         self.pageHolderVC.privateKey!,
-                                                         self.pageHolderVC.publicKey!, self.chainType!)
+            var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest!
+            if (self.pageHolderVC.mType == TASK_TYPE_PERSIS_LIQUIDITY_STAKE) {
+                reqTx = Signer.genPersisLiquidityStaking(auth!, self.account!.account_pubkey_type,
+                                                             self.account!.account_address,
+                                                             self.pageHolderVC.mSwapInCoin!,
+                                                             self.pageHolderVC.mFee!,
+                                                             self.pageHolderVC.mMemo!,
+                                                             self.pageHolderVC.privateKey!,
+                                                             self.pageHolderVC.publicKey!, self.chainType!)
+                
+            } else if (self.pageHolderVC.mType == TASK_TYPE_PERSIS_LIQUIDITY_REDEEM) {
+                reqTx = Signer.genPersisLiquidityRedeem(auth!, self.account!.account_pubkey_type,
+                                                        self.account!.account_address,
+                                                        self.pageHolderVC.mSwapInCoin!,
+                                                        self.pageHolderVC.mFee!,
+                                                        self.pageHolderVC.mMemo!,
+                                                        self.pageHolderVC.privateKey!,
+                                                        self.pageHolderVC.publicKey!, self.chainType!)
+            }
             do {
                 let channel = BaseNetWork.getConnection(self.chainConfig)!
                 if let response = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx, callOptions: BaseNetWork.getCallOptions()).response.wait() {

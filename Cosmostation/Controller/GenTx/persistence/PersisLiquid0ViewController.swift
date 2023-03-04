@@ -77,10 +77,9 @@ class PersisLiquid0ViewController: BaseViewController, UITextFieldDelegate {
 
         if (txType == TASK_TYPE_PERSIS_LIQUIDITY_STAKE) {
             outputDenom = "stk/uatom"
+        } else if (txType == TASK_TYPE_PERSIS_LIQUIDITY_REDEEM) {
+            outputDenom = "uatom"
         }
-//        else if (txType == TASK_TYPE_STRIDE_LIQUIDITY_UNSTAKE) {
-//            outputDenom = hostZones.ibcDenom
-//        }
         outputDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == outputDenom }).first?.decimals ?? 6
         WDP.dpSymbol(chainConfig, outputDenom, outputCoinName)
         WDP.dpSymbolImg(chainConfig, outputDenom, outputCoinImg)
@@ -121,8 +120,9 @@ class PersisLiquid0ViewController: BaseViewController, UITextFieldDelegate {
         var userOutput = NSDecimalNumber.zero
         if (txType == TASK_TYPE_PERSIS_LIQUIDITY_STAKE) {
             userOutput = userInput.multiplying(by: rate, withBehavior: WUtils.handler12Down)
-        } else if (txType == TASK_TYPE_STRIDE_LIQUIDITY_UNSTAKE) {
-            userOutput = userInput.multiplying(by: rate, withBehavior: WUtils.handler12Down)
+        } else if (txType == TASK_TYPE_PERSIS_LIQUIDITY_REDEEM) {
+            let redeemFee = userInput.multiplying(by: NSDecimalNumber.init(string: "0.005"))
+            userOutput = userInput.dividing(by: rate, withBehavior: WUtils.handler12Down).subtracting(redeemFee)
         }
         outputCoinAmountLabel.text = WUtils.decimalNumberToLocaleString(userOutput, outputDecimal)
     }

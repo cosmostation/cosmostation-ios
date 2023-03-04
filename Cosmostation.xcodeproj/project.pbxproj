@@ -1377,6 +1377,12 @@
 		15A1A50329ADAC390076504E /* TxPersisLiquidStakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1A50029ADAC390076504E /* TxPersisLiquidStakeCell.swift */; };
 		15A1A50429ADAC390076504E /* TxPersisLiquidStakeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15A1A50129ADAC390076504E /* TxPersisLiquidStakeCell.xib */; };
 		15A1A50529ADAC390076504E /* TxPersisLiquidStakeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15A1A50129ADAC390076504E /* TxPersisLiquidStakeCell.xib */; };
+		15A1A50729ADD4AA0076504E /* PersisLiquidUnstakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1A50629ADD4AA0076504E /* PersisLiquidUnstakingViewController.swift */; };
+		15A1A50829ADD4AA0076504E /* PersisLiquidUnstakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1A50629ADD4AA0076504E /* PersisLiquidUnstakingViewController.swift */; };
+		15A1A50C29AE022E0076504E /* UserEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1A50A29AE022E0076504E /* UserEntryCell.swift */; };
+		15A1A50D29AE022E0076504E /* UserEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1A50A29AE022E0076504E /* UserEntryCell.swift */; };
+		15A1A50E29AE022E0076504E /* UserEntryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15A1A50B29AE022E0076504E /* UserEntryCell.xib */; };
+		15A1A50F29AE022E0076504E /* UserEntryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15A1A50B29AE022E0076504E /* UserEntryCell.xib */; };
 		15B6BDA729ABC2EB00493E11 /* WalletPersisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15B6BDA629ABC2EB00493E11 /* WalletPersisCell.xib */; };
 		15B6BDA829ABC2EB00493E11 /* WalletPersisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15B6BDA629ABC2EB00493E11 /* WalletPersisCell.xib */; };
 		15B6BDAA29ABC2FB00493E11 /* WalletPersisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B6BDA929ABC2FB00493E11 /* WalletPersisCell.swift */; };
@@ -3848,6 +3854,9 @@
 		1569489728ABD9E0004777ED /* ChainPassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPassage.swift; sourceTree = "<group>"; };
 		15A1A50029ADAC390076504E /* TxPersisLiquidStakeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxPersisLiquidStakeCell.swift; sourceTree = "<group>"; };
 		15A1A50129ADAC390076504E /* TxPersisLiquidStakeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxPersisLiquidStakeCell.xib; sourceTree = "<group>"; };
+		15A1A50629ADD4AA0076504E /* PersisLiquidUnstakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersisLiquidUnstakingViewController.swift; sourceTree = "<group>"; };
+		15A1A50A29AE022E0076504E /* UserEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntryCell.swift; sourceTree = "<group>"; };
+		15A1A50B29AE022E0076504E /* UserEntryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserEntryCell.xib; sourceTree = "<group>"; };
 		15B6BDA629ABC2EB00493E11 /* WalletPersisCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletPersisCell.xib; sourceTree = "<group>"; };
 		15B6BDA929ABC2FB00493E11 /* WalletPersisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPersisCell.swift; sourceTree = "<group>"; };
 		15E4258629962E8E00FBA119 /* ChainCanto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainCanto.swift; sourceTree = "<group>"; };
@@ -4728,6 +4737,7 @@
 				150DB1F229ABCD2E00D0C7A2 /* PersisDapp.storyboard */,
 				150DB1F529ABCFD100D0C7A2 /* PersisDappViewController.swift */,
 				1537A08429AC7B8700342ACF /* PersisLiquidStakingViewController.swift */,
+				15A1A50629ADD4AA0076504E /* PersisLiquidUnstakingViewController.swift */,
 			);
 			path = persistence;
 			sourceTree = "<group>";
@@ -4748,6 +4758,15 @@
 				1537A08E29AC93B100342ACF /* PersisLiquid0ViewController.xib */,
 				1537A0D029ACA97700342ACF /* PersisLiquid3ViewController.swift */,
 				152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */,
+			);
+			path = persistence;
+			sourceTree = "<group>";
+		};
+		15A1A50929AE01D10076504E /* persistence */ = {
+			isa = PBXGroup;
+			children = (
+				15A1A50A29AE022E0076504E /* UserEntryCell.swift */,
+				15A1A50B29AE022E0076504E /* UserEntryCell.xib */,
 			);
 			path = persistence;
 			sourceTree = "<group>";
@@ -6360,6 +6379,7 @@
 		E1A82DF12244EC1C0097CAEE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				15A1A50929AE01D10076504E /* persistence */,
 				04FCD30229306C4100BA5349 /* stride */,
 				04547BE82786AF0500011984 /* desmos */,
 				04E25D432770D53F009B39BA /* nft */,
@@ -6890,6 +6910,7 @@
 				18FFB7BA281AF533004E65BB /* WalletCrescentCell.xib in Resources */,
 				04FCD3222930EB9400BA5349 /* TxLiquidStakeCell.xib in Resources */,
 				0443B8722852FB000027A6B9 /* SwitchAccountHeader.xib in Resources */,
+				15A1A50F29AE022E0076504E /* UserEntryCell.xib in Resources */,
 				0454AE4D2928D71400EC657D /* TxEvmCell.xib in Resources */,
 				18F811B9282E1FC4008AF0D2 /* WalletStationCell.xib in Resources */,
 				18F4129D2860649E0007E3F2 /* WalletDeriveViewController.xib in Resources */,
@@ -7219,6 +7240,7 @@
 				04E25D4B2770D57E009B39BA /* NFTDetailRawCell.xib in Resources */,
 				2889FD6E2603378900CA9896 /* TxHardWithdrawCell.xib in Resources */,
 				E1C5C0AD28992AC400E9E65D /* AuthzDelegate1ViewController.xib in Resources */,
+				15A1A50E29AE022E0076504E /* UserEntryCell.xib in Resources */,
 				15A1A50429ADAC390076504E /* TxPersisLiquidStakeCell.xib in Resources */,
 				04E6ABD5286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib in Resources */,
 				282BDFE724A5BCCB00D3A5D4 /* WcCancelPopup.xib in Resources */,
@@ -7483,6 +7505,7 @@
 				1817CACA283E2CE500523713 /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
 				04E6ABCE286358B4008DC3C7 /* CdpDrawRepay1ViewController.swift in Sources */,
 				18FFB2BA281AF533004E65BB /* TxIbcReceiveCell.swift in Sources */,
+				15A1A50D29AE022E0076504E /* UserEntryCell.swift in Sources */,
 				18FFB2BC281AF533004E65BB /* EditHideChainCell.swift in Sources */,
 				0468BFA428C5EE7100CBC1C6 /* ChainIxo.swift in Sources */,
 				04E6ABB628635867008DC3C7 /* CdpWithdraw1ViewController.swift in Sources */,
@@ -8009,6 +8032,7 @@
 				18FFB4C8281AF533004E65BB /* TxSwapDepositCell.swift in Sources */,
 				18FFB4C9281AF533004E65BB /* SelectTextCell.swift in Sources */,
 				04CF7122294C0DDE00134A84 /* desmos_profiles_v3_query.grpc.swift in Sources */,
+				15A1A50829ADD4AA0076504E /* PersisLiquidUnstakingViewController.swift in Sources */,
 				18FFB4CA281AF533004E65BB /* AmountInputTextField.swift in Sources */,
 				18FFB4CF281AF533004E65BB /* Signature.swift in Sources */,
 				04CF7124294C0DDE00134A84 /* desmos_profiles_v3_query.pb.swift in Sources */,
@@ -8592,6 +8616,7 @@
 				046FF012277AD0E100F72C11 /* DenomListCell.swift in Sources */,
 				04AA4BDD2906A6DD0027877B /* kava_earn_v1beta1_query.grpc.swift in Sources */,
 				040FAA2A275F55C400229F6F /* cosmos_nft_v1beta1_tx.grpc.swift in Sources */,
+				15A1A50C29AE022E0076504E /* UserEntryCell.swift in Sources */,
 				154A980A2983A05800E0B801 /* stride_claim_tx.grpc.swift in Sources */,
 				040FA802275F55C200229F6F /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,
 				045DAD732897A195004ED9B4 /* AuthzVote1ViewController.swift in Sources */,
@@ -9118,6 +9143,7 @@
 				04B1BE2327A3BC4500B1236A /* cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				283D2EA624F5308900247424 /* OkTokenList.swift in Sources */,
 				040FA85C275F55C200229F6F /* desmos_profiles_v1beta1_query_chain_links.pb.swift in Sources */,
+				15A1A50729ADD4AA0076504E /* PersisLiquidUnstakingViewController.swift in Sources */,
 				04CF7121294C0DDE00134A84 /* desmos_profiles_v3_query.grpc.swift in Sources */,
 				284FBC7D26DBE97200403FE2 /* TxSwapDepositCell.swift in Sources */,
 				28E8FAEB2716F190005EAA9B /* SelectTextCell.swift in Sources */,

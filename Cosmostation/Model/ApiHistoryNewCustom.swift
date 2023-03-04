@@ -792,6 +792,15 @@ public struct ApiHistoryNewCustom {
             else if (msgType.contains("pstake.") && msgType.contains("lscosmos")) {
                 if (msgType.contains("MsgLiquidStake")) {
                     result = NSLocalizedString("tx_stride_liquid_stake", comment: "")
+                    
+                } else if (msgType.contains("MsgLiquidUnstake")) {
+                    result = NSLocalizedString("tx_stride_liquid_unstake", comment: "")
+                    
+                } else if (msgType.contains("MsgRedeem")) {
+                    result = NSLocalizedString("tx_persis_liquid_redeem", comment: "")
+                    
+                } else if (msgType.contains("MsgClaim")) {
+                    result = NSLocalizedString("tx_persis_liquid_claim", comment: "")
                 }
             }
 

@@ -493,7 +493,8 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                     
                 }
                 
-                else if (msg.typeURL.contains(Pstake_Lscosmos_V1beta1_MsgLiquidStake.protoMessageName)) {
+                else if (msg.typeURL.contains(Pstake_Lscosmos_V1beta1_MsgLiquidStake.protoMessageName) ||
+                         msg.typeURL.contains(Pstake_Lscosmos_V1beta1_MsgRedeem.protoMessageName)) {
                     let cell = tableView.dequeueReusableCell(withIdentifier:"TxPersisLiquidStakeCell") as? TxCell
                     cell?.onBindMsg(chainConfig, mTxRespose!, indexPath.row - 1)
                     return cell!

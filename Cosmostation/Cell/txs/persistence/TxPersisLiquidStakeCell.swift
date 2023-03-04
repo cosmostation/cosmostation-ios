@@ -13,8 +13,10 @@ class TxPersisLiquidStakeCell: TxCell {
     @IBOutlet weak var txIcon: UIImageView!
     @IBOutlet weak var txTitleLabel: UILabel!
     @IBOutlet weak var delegatorLabel: UILabel!
-    @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var denomLabel: UILabel!
+    @IBOutlet weak var amountInLabel: UILabel!
+    @IBOutlet weak var denomInLabel: UILabel!
+    @IBOutlet weak var amountOutLabel: UILabel!
+    @IBOutlet weak var denomOutLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,11 +29,27 @@ class TxPersisLiquidStakeCell: TxCell {
         
         let msgPoint = response.tx.body.messages[position]
         
-        if let msg = try? Pstake_Lscosmos_V1beta1_MsgLiquidStake.init(serializedData: msgPoint.value) {
-            txTitleLabel.text = NSLocalizedString("tx_stride_liquid_stake", comment: "")
-            delegatorLabel.text = msg.delegatorAddress
-            delegatorLabel.adjustsFontSizeToFitWidth = true
-            WDP.dpCoin(chainConfig, msg.amount.denom, msg.amount.amount, denomLabel, amountLabel)
+        if (msgPoint.typeURL.contains(Pstake_Lscosmos_V1beta1_MsgLiquidStake.protoMessageName)) {
+            if let msg = try? Pstake_Lscosmos_V1beta1_MsgLiquidStake.init(serializedData: msgPoint.value) {
+                txTitleLabel.text = NSLocalizedString("tx_stride_liquid_stake", comment: "")
+                delegatorLabel.text = msg.delegatorAddress
+                delegatorLabel.adjustsFontSizeToFitWidth = true
+                
+                WDP.dpCoin(chainConfig, msg.amount.denom, msg.amount.amount, denomInLabel, amountInLabel)
+                let liquidCoin = WUtils.onParseLiquidAmountGrpc(response, position).filter{ $0.denom.starts(with: "stk/") }.first
+                WDP.dpCoin(chainConfig, liquidCoin, denomOutLabel, amountOutLabel)
+            }
+            
+        } else if (msgPoint.typeURL.contains(Pstake_Lscosmos_V1beta1_MsgRedeem.protoMessageName)) {
+            if let msg = try? Pstake_Lscosmos_V1beta1_MsgLiquidStake.init(serializedData: msgPoint.value) {
+                txTitleLabel.text = NSLocalizedString("tx_persis_liquid_redeem", comment: "")
+                delegatorLabel.text = msg.delegatorAddress
+                delegatorLabel.adjustsFontSizeToFitWidth = true
+                
+                WDP.dpCoin(chainConfig, msg.amount.denom, msg.amount.amount, denomInLabel, amountInLabel)
+                let liquidCoin = WUtils.onParseLiquidAmountGrpc(response, position).filter{ $0.denom.starts(with: "ibc/") }.first
+                WDP.dpCoin(chainConfig, liquidCoin, denomOutLabel, amountOutLabel)
+            }
         }
     }
 }

@@ -355,6 +355,10 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_liquid_staking", comment: "")
             
+        } else if (mType == TASK_TYPE_PERSIS_LIQUIDITY_REDEEM) {
+            stepDescription.text = NSLocalizedString("tx_liquid_redeem_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            self.titleLabel.text =  NSLocalizedString("title_liquid_redeem", comment: "")
         }
         
         
@@ -654,6 +658,10 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_PERSIS_LIQUIDITY_STAKE) {
                     stepDescription.text = NSLocalizedString("tx_liquid_staking_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_1")
+                    
+                } else if (mType == TASK_TYPE_PERSIS_LIQUIDITY_REDEEM) {
+                    stepDescription.text = NSLocalizedString("tx_liquid_redeem_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
                 }
