@@ -318,7 +318,6 @@
 "guide_msg_konstellation" = "A Cosmos SDK-based decentralized cross-chain capital markets network.";
 "guide_msg_evmos" = "A Cosmos SDK based IBC & EVM-compatible(Ethereum Virtual Machine) blockchain.";
 "guide_msg_provenance" = "Provenance is a Tendermint-based blockchain network utilized by $HASH, designed to support financial service industry.";
-"guide_msg_cerberus" = "Cerberus is a community-led tri-headed dog meme coin in Cosmos ecosystem.";
 "guide_msg_omniflix" = "OmniFlix Network is a blockchain specifically designed for creators and communities, powered by NFTs.";
 "guide_msg_crescent" = "Crescent is a Tendermint-based DeFi hub powered by $CRE tokens & Inter-Blockchain Communication protocol.";
 "guide_msg_mantle" = "AssetMantle is a community focused one-for-all NFT platform for creators and collectors, powered by $MNTL token.";
