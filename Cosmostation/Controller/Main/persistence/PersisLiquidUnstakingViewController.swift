@@ -8,18 +8,19 @@
 
 import UIKit
 
-class PersisLiquidUnstakingViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class PersisLiquidUnstakingViewController: BaseViewController {
     
     @IBOutlet weak var inputCoinImg: UIImageView!
     @IBOutlet weak var inputCoinName: UILabel!
     @IBOutlet weak var inputCoinAmountLabel: UILabel!
     
-    @IBOutlet weak var unstakeEmptyView: UIView!
-    @IBOutlet weak var unstakeTableView: UITableView!
+    @IBOutlet weak var inputAmount: UILabel!
+    @IBOutlet weak var inputDenom: UILabel!
+    @IBOutlet weak var outputAmount: UILabel!
+    @IBOutlet weak var outputDenom: UILabel!
     
     var pageHolderVC: PersisDappViewController!
-    var currentEpochNumber: Int64!
-    var entries = Array<Pstake_Lscosmos_V1beta1_DelegatorUnbondingEpochEntry>()
+    var cValue: String!
     var inputCoinDenom: String!
     var availableMaxAmount = NSDecimalNumber.zero
     
@@ -28,16 +29,27 @@ class PersisLiquidUnstakingViewController: BaseViewController, UITableViewDelega
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
-        
-        self.unstakeTableView.delegate = self
-        self.unstakeTableView.dataSource = self
-        self.unstakeTableView.register(UINib(nibName: "UserEntryCell", bundle: nil), forCellReuseIdentifier: "UserEntryCell")
-
-        self.onFetchLiquidData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onCValueDone(_:)), name: Notification.Name("CValueDone"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("CValueDone"), object: nil)
+    }
+    
+    @objc func onCValueDone(_ notification: NSNotification) {
+        self.pageHolderVC = self.parent as? PersisDappViewController
+        self.cValue = pageHolderVC.cValue
+        self.updateView()
     }
     
     func updateView() {
         self.inputCoinDenom = "stk/uatom"
+        var outputCoinDenom = "ibc/C8A74ABBE2AF892E15680D916A7C22130585CE5704F9B17A10F184A90D53BECA"
         let inputCoinDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == inputCoinDenom }).first?.decimals ?? 6
         
         WDP.dpSymbol(chainConfig, inputCoinDenom, inputCoinName)
@@ -46,38 +58,13 @@ class PersisLiquidUnstakingViewController: BaseViewController, UITableViewDelega
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(inputCoinDenom!)
         inputCoinAmountLabel.attributedText = WDP.dpAmount(availableMaxAmount.stringValue, inputCoinAmountLabel.font!, inputCoinDecimal, inputCoinDecimal)
         
-        updateHistory()
-    }
-    
-    func updateHistory() {
-        self.unstakeTableView.reloadData()
-        if (entries.count > 0) {
-            self.unstakeEmptyView.isHidden = true
-        } else {
-            self.unstakeEmptyView.isHidden = false
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (entries.count <= 0) { return 0 }
-        return 30
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.headerTitleLabel.text = NSLocalizedString("str_unstaking_history", comment: "")
-        view.headerCntLabel.text = String(entries.count)
-        return view
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return entries.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"UserEntryCell") as? UserEntryCell
-        cell?.bindView(chainConfig, entries[indexPath.row], currentEpochNumber)
-        return cell!
+        inputAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputAmount.font, 0, 6)
+        WDP.dpSymbol(chainConfig, self.inputCoinDenom, inputDenom)
+        let rate = NSDecimalNumber(string: self.cValue).multiplying(byPowerOf10: -18)
+        let redeemFee = NSDecimalNumber.one.multiplying(by: NSDecimalNumber.init(string: "0.005"))
+        let outAmount = NSDecimalNumber.one.dividing(by: rate, withBehavior: WUtils.handler12Down).subtracting(redeemFee)
+        outputAmount.attributedText = WDP.dpAmount(outAmount.stringValue, outputAmount.font, 0, 6)
+        WDP.dpSymbol(chainConfig, outputCoinDenom, outputDenom)
     }
     
     @IBAction func onClickRedeem(_ sender: UIButton) {
@@ -96,60 +83,5 @@ class PersisLiquidUnstakingViewController: BaseViewController, UITableViewDelega
         txVC.mSwapInDenom = self.inputCoinDenom
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
-    }
-    
-    var mFetchCnt = 0
-    @objc func onFetchLiquidData() {
-        if (self.mFetchCnt > 0)  {
-            return
-        }
-        self.mFetchCnt = 2
-        entries.removeAll()
-        currentEpochNumber = 0
-        
-        self.onFetchCurrentEpoch()
-        self.onFetchUserEpochEntry()
-    }
-    
-    func onFetchFinished() {
-        self.mFetchCnt = self.mFetchCnt - 1
-        if (mFetchCnt > 0) { return }
-        
-        self.updateView()
-    }
-    
-    func onFetchCurrentEpoch() {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.chainConfig)!
-                let req = Persistence_Epochs_V1beta1_QueryCurrentEpochRequest.with { $0.identifier = "day" }
-                if let response = try? Persistence_Epochs_V1beta1_QueryClient(channel: channel).currentEpoch(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    self.currentEpochNumber = response.currentEpoch
-                }
-                try channel.close().wait()
-
-            } catch {
-                print("onFetchCurrentEpoch failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
-        }
-    }
-    
-    func onFetchUserEpochEntry() {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.chainConfig)!
-                let req = Pstake_Lscosmos_V1beta1_QueryAllDelegatorUnbondingEpochEntriesRequest.with { $0.delegatorAddress = self.account!.account_address
-                }
-                if let response = try? Pstake_Lscosmos_V1beta1_QueryClient(channel: channel).delegatorUnbondingEpochEntries(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    self.entries = response.delegatorUnbondingEpochEntries
-                }
-                try channel.close().wait()
-
-            } catch {
-                print("onFetchUserEpochEntry failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
-        }
     }
 }
