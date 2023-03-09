@@ -1289,6 +1289,32 @@ public class WUtils {
         return result
     }
     
+    static func onParseLiquidAmountGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
+        var result = Array<Coin>()
+        if (tx.txResponse.logs.count <= position) {
+            return result
+        }
+        tx.txResponse.logs[position].events.forEach { (event) in
+            if (event.type == "transfer") {
+                for i in 0...event.attributes.count - 1 {
+                    if (event.attributes[i].key == "amount") {
+                        let rawValue = event.attributes[i].value
+                        for rawCoin in rawValue.split(separator: ","){
+                            let coin = String(rawCoin)
+                            if let range = coin.range(of: "[0-9]*", options: .regularExpression) {
+                                let amount = String(coin[range])
+                                let denomIndex = coin.index(coin.startIndex, offsetBy: amount.count)
+                                let denom = String(coin[denomIndex...])
+                                result.append(Coin.init(denom, amount))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result
+    }
+    
     static func onProposalProposer(_ proposal: MintscanProposalDetail?) -> String? {
         if (proposal?.moniker?.isEmpty == true) {
             return proposal?.proposer

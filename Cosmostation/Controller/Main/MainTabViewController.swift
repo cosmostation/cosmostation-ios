@@ -1263,15 +1263,3 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
 }
 
-
-extension BaseData {
-    func addSupportPools(pools: Array<[String: String]>) {
-        pools.forEach { pool in
-            let supportPool = SupportPool.init(pool)
-            if (supportPool.type != "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool") {
-                  mSupportPools.append(supportPool)
-            }
-        }
-    }
-}
-

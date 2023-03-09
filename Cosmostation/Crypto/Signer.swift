@@ -2081,6 +2081,67 @@ class Signer {
         return [anyMsg]
     }
     
+    //Tx for persistence Liquidity Staking
+    static func genPersisLiquidityStaking(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                    _ delegator_address: String, _ coin: Coin,
+                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let staking = genPersisLiquidityStaking(delegator_address, coin)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, staking, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulatePersisLiquidityStaking(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                            _ delegator_address: String, _ coin: Coin,
+                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let staking = genPersisLiquidityStaking(delegator_address, coin)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, staking, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genPersisLiquidityStaking(_ delegator_address: String, _ coin: Coin) -> [Google_Protobuf2_Any] {
+        let amount = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = coin.denom
+            $0.amount = coin.amount
+        }
+        let staking = Pstake_Lscosmos_V1beta1_MsgLiquidStake.with {
+            $0.delegatorAddress = delegator_address
+            $0.amount = amount
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/pstake.lscosmos.v1beta1.MsgLiquidStake"
+            $0.value = try! staking.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    static func genPersisLiquidityRedeem(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                    _ delegator_address: String, _ coin: Coin,
+                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let redeem = genPersisLiquidityRedeem(delegator_address, coin)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, redeem, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulatePersisLiquidityRedeem(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                            _ delegator_address: String, _ coin: Coin,
+                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let redeem = genPersisLiquidityRedeem(delegator_address, coin)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, redeem, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genPersisLiquidityRedeem(_ delegator_address: String, _ coin: Coin) -> [Google_Protobuf2_Any] {
+        let amount = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = coin.denom
+            $0.amount = coin.amount
+        }
+        let reedem = Pstake_Lscosmos_V1beta1_MsgRedeem.with {
+            $0.delegatorAddress = delegator_address
+            $0.amount = amount
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/pstake.lscosmos.v1beta1.MsgRedeem"
+            $0.value = try! reedem.serializedData()
+        }
+        return [anyMsg]
+    }
+    
     
     static func getGrpcSignedTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64, _ chainType: ChainType, _ msgAnys: Array<Google_Protobuf2_Any>, _ privateKey: Data, _ publicKey: Data, _ fee: Fee, _ memo: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let txBody = getGrpcTxBody(msgAnys, memo)

@@ -24,7 +24,7 @@
                                     <segment title="Staking"/>
                                     <segment title="Unstaking"/>
                                 </segments>
-                                <color key="tintColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="tintColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="switchView:" destination="Y6W-OH-hqX" eventType="valueChanged" id="7Zh-NO-u2r"/>
                                 </connections>

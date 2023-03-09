@@ -877,6 +877,22 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                         self.mFee, self.pageHolderVC.mMemo!,
                                                         self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                         self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_PERSIS_LIQUIDITY_STAKE) {
+            return Signer.genSimulatePersisLiquidityStaking(auth, account!.account_pubkey_type,
+                                                            self.account!.account_address,
+                                                            self.pageHolderVC.mSwapInCoin!,
+                                                            self.mFee, self.pageHolderVC.mMemo!,
+                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                            self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_PERSIS_LIQUIDITY_REDEEM) {
+            return Signer.genSimulatePersisLiquidityRedeem(auth, account!.account_pubkey_type,
+                                                        self.account!.account_address,
+                                                        self.pageHolderVC.mSwapInCoin!,
+                                                        self.mFee, self.pageHolderVC.mMemo!,
+                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                        self.chainType!)
         }
         
         return nil
