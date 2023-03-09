@@ -172,6 +172,8 @@
 "str_voting_description" = "설명";
 "str_voting_period" = "Voting Period Proposals";
 "str_vote_proposals" = "Proposals";
+"str_synchronize_name_service" = "네임서비스 동기화";
+
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";
 "str_tx_msg_cnt" = "메시지 갯수";
@@ -224,6 +226,7 @@
 "str_swap_out" = "Swap Out";
 "str_multiplier_name" = "수신 방식";
 "str_incentive_amount" = "인센티브 수량";
+
 
 "btn_delegate" = "  위임 하기";
 "btn_undelegate" = "  위임철회 하기";

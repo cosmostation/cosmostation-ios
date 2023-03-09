@@ -124,10 +124,8 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             
         } else {
             self.mSimulPassed = false
-            if (!BaseData.instance.getUsingEnginerMode()) {
-                self.onCalculateFees()
-                self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
-            }
+            self.onCalculateFees()
+            self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
         }
     }
     

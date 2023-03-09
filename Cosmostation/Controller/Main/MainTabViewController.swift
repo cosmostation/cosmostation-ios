@@ -14,13 +14,14 @@ import NIO
 import SwiftProtobuf
 import web3swift
 
-class MainTabViewController: UITabBarController, UITabBarControllerDelegate, AccountSwitchDelegate {
+class MainTabViewController: UITabBarController, UITabBarControllerDelegate, AccountSwitchDelegate, SBCardPopupDelegate {
     
     var mAccounts = Array<Account>()
     var mAccount: Account!
     var mChainConfig: ChainConfig!
     var mChainType: ChainType!
     var mBalances = Array<Balance>()
+    var mNameservices = Array<NameService>()
     var mFetchCnt = 0
         
     var waitAlert: UIAlertController?
@@ -155,6 +156,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mStarNameConfig_gRPC = nil
         
         BaseData.instance.mSupportPools.removeAll()
+        mNameservices.removeAll()
         
         if (mChainType == .BINANCE_MAIN) {
             self.mFetchCnt = 6
@@ -344,7 +346,19 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             } else {
                 WUtils.onParseAuthAccount(self.mChainType, self.mAccount.account_id)
             }
-            self.onFetchIcnsByAddress(self.mAccount.account_address)
+            
+            if (self.mAccount.account_nick_name.isEmpty || mNameservices.filter { $0.name == self.mAccount.account_nick_name }.count == 0) {
+                if (mNameservices.count == 2) {
+                    if (mNameservices[0].name == mNameservices[1].name) {
+                        updateAccountNameService(mNameservices[0].name!)
+                    } else {
+                        showNameservicePopup()
+                    }
+                    
+                } else if (mNameservices.count == 1) {
+                    updateAccountNameService(mNameservices[0].name!)
+                }
+            }
             
         } else {
             if (mChainType == .BINANCE_MAIN) {
@@ -626,11 +640,13 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mNodeInfo_gRPC = response.nodeInfo
-                    self.mFetchCnt = self.mFetchCnt + 4
+                    self.mFetchCnt = self.mFetchCnt + 5
                     self.onFetchParams(self.mChainConfig.chainAPIName)
                     self.onFetchMintscanAsset()
                     self.onFetchMintscanCw20(self.mChainConfig.chainAPIName)
                     self.onFetchMintscanErc20(self.mChainConfig.chainAPIName)
+                    self.onFetchIcnsByAddress(self.mAccount.account_address)
+//                    self.onFetchStargazeNsByAddress(self.mAccount.account_address)
                 }
                 try channel.close().wait()
                 
@@ -866,12 +882,40 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 print("onFetchIcnsByAddress failed: \(error)")
             }
             DispatchQueue.main.async(execute: {
-                if (!icnsName.isEmpty && self.mAccount.account_nick_name != icnsName) {
-                    self.mAccount.account_nick_name = icnsName
-                    _ = BaseData.instance.updateAccount(self.mAccount)
-                    NotificationCenter.default.post(name: Notification.Name("onNameCheckDone"), object: nil, userInfo: nil)
-                    self.onShowToast(NSLocalizedString("msg_account_nickname_updated_with_nameservice", comment: ""))
+                if (!icnsName.isEmpty) {
+                    self.mNameservices.append(NameService.init(.icns, icnsName, self.mAccount.account_address))
                 }
+                self.onFetchFinished()
+            });
+        }
+    }
+    
+    //for Stargaze NS check
+    func onFetchStargazeNsByAddress(_ address: String) {
+        DispatchQueue.global().async {
+            var stargazeNSName = ""
+            do {
+                let channel = BaseNetWork.getConnection(ChainFactory.getChainConfig(.STARGAZE_MAIN))!
+                let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+                    $0.address = STARGAZE_NS_CONTRACT_ADDRESS
+                    $0.queryData = Cw20StargazeNsByAddressReq.init(address).getEncode()
+                }
+                if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    let name = String(decoding: response.data, as: UTF8.self).replacingOccurrences(of: "\"", with: "")
+                    if (!name.isEmpty) {
+                        stargazeNSName = name + "." + self.mChainConfig.addressPrefix
+                    }
+                }
+                try channel.close().wait()
+
+            } catch {
+                print("onFetchIcnsByAddress failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: {
+                if (!stargazeNSName.isEmpty) {
+                    self.mNameservices.append(NameService.init(.stargaze, stargazeNSName, self.mAccount.account_address))
+                }
+                self.onFetchFinished()
             });
         }
     }
@@ -1096,8 +1140,10 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                if let pools = res as? Array<[String:String]> {
-                    BaseData.instance.addSupportPools(pools: pools)
+                if let pools = res as? Array<[String: String]> {
+                    pools.forEach { pool in
+                        BaseData.instance.mSupportPools.append(SupportPool.init(pool))
+                    }
                 }
             case .failure(let error):
                 print("onFetchSupportPools ", error)
@@ -1151,6 +1197,17 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         });
     }
     
+    public func showNameservicePopup() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
+            popupVC.type = SELECT_POPUP_ADDRESS_NAME_SERVICE
+            popupVC.nameservices = self.mNameservices
+            let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
+            cardPopup.resultDelegate = self
+            cardPopup.show(onViewController: self)
+        });
+    }
+    
     public func hideWaittingAlert() {
         if (waitAlert != nil) {
             waitAlert?.dismiss(animated: true, completion: nil)
@@ -1192,15 +1249,29 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             }
         }
     }
+    
+    func updateAccountNameService(_ matchedName: String) {
+        self.mAccount.account_nick_name = matchedName
+        _ = BaseData.instance.updateAccount(self.mAccount)
+        NotificationCenter.default.post(name: Notification.Name("onNameCheckDone"), object: nil, userInfo: nil)
+        self.onShowToast(NSLocalizedString("msg_account_nickname_updated_with_nameservice", comment: ""))
+    }
+    
+    func SBCardPopupResponse(type: Int, result: Int) {
+        guard let selectedName = mNameservices[result].name else { return }
+        updateAccountNameService(selectedName)
+    }
 }
+
 
 extension BaseData {
     func addSupportPools(pools: Array<[String: String]>) {
         pools.forEach { pool in
             let supportPool = SupportPool.init(pool)
-            if (supportPool.id != "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool") {
+            if (supportPool.type != "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool") {
                   mSupportPools.append(supportPool)
             }
         }
     }
 }
+
