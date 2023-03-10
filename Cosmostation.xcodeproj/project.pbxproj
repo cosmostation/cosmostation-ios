@@ -1383,6 +1383,8 @@
 		15B6BDA829ABC2EB00493E11 /* WalletPersisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15B6BDA629ABC2EB00493E11 /* WalletPersisCell.xib */; };
 		15B6BDAA29ABC2FB00493E11 /* WalletPersisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B6BDA929ABC2FB00493E11 /* WalletPersisCell.swift */; };
 		15B6BDAB29ABC2FB00493E11 /* WalletPersisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B6BDA929ABC2FB00493E11 /* WalletPersisCell.swift */; };
+		1577DAC829B9F07800C360EC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577DAC729B9F07800C360EC /* Board.swift */; };
+		1577DAC929B9F07800C360EC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577DAC729B9F07800C360EC /* Board.swift */; };
 		15BF8482299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */; };
 		15BF8483299D472A00B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */; };
 		15E4258729962E8E00FBA119 /* ChainCanto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4258629962E8E00FBA119 /* ChainCanto.swift */; };
@@ -3855,6 +3857,7 @@
 		15A1A50629ADD4AA0076504E /* PersisLiquidUnstakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersisLiquidUnstakingViewController.swift; sourceTree = "<group>"; };
 		15B6BDA629ABC2EB00493E11 /* WalletPersisCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletPersisCell.xib; sourceTree = "<group>"; };
 		15B6BDA929ABC2FB00493E11 /* WalletPersisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPersisCell.swift; sourceTree = "<group>"; };
+		1577DAC729B9F07800C360EC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20StargazeNsByAddressReq.swift; sourceTree = "<group>"; };
 		15E4258629962E8E00FBA119 /* ChainCanto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainCanto.swift; sourceTree = "<group>"; };
 		15F0B717294C770200127D9A /* ChainQuicksilver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainQuicksilver.swift; sourceTree = "<group>"; };
@@ -6275,6 +6278,7 @@
 				047847CA2962C94800FD6A7E /* Cw20IcnsByAddressRes.swift */,
 				15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */,
 				E1D4EA572871584B005C1ECF /* FeeInfo.swift */,
+				1577DAC729B9F07800C360EC /* Board.swift */,
 			);
 			path = Dao;
 			sourceTree = "<group>";
@@ -7779,6 +7783,7 @@
 				1817CC0F283E2CE600523713 /* cosmos_group_v1beta1_tx.grpc.swift in Sources */,
 				9F5519572968CEC500856467 /* UIRefreshControl+Animate.swift in Sources */,
 				1817CC13283E2CE600523713 /* cosmos_crypto_hd_v1_hd.pb.swift in Sources */,
+				1577DAC929B9F07800C360EC /* Board.swift in Sources */,
 				18DFB817298CADC900E812B6 /* tendermint_types_evidence.pb.swift in Sources */,
 				04AA4C142906A6DD0027877B /* kava_router_v1beta1_tx.grpc.swift in Sources */,
 				04CF711A294C0DDE00134A84 /* desmos_profiles_v3_models_packets.pb.swift in Sources */,
@@ -8890,6 +8895,7 @@
 				E151B639224626990026B8C0 /* BorderButton.swift in Sources */,
 				046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */,
 				040FA7EC275F55C200229F6F /* cosmos_distribution_v1beta1_tx.pb.swift in Sources */,
+				1577DAC829B9F07800C360EC /* Board.swift in Sources */,
 				0468BFA328C5EE7100CBC1C6 /* ChainIxo.swift in Sources */,
 				E1945E542231256800A1436F /* BaseConstant.swift in Sources */,
 				154A97F82983A05700E0B801 /* stride_records_callbacks.pb.swift in Sources */,

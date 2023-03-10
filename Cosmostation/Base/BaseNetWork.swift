@@ -258,6 +258,10 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v2/utils/market/prices?currency=" + currency
     }
     
+    static func mintscanNoticeInfo() -> String {
+        return MINTSCAN_API_URL + "v1/boards"
+    }
+    
     
     //API
     static func accountHistory(_ chainConfig: ChainConfig?, _ address: String) -> String {
