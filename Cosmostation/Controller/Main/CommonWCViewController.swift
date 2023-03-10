@@ -1193,6 +1193,22 @@ extension CommonWCViewController {
             self.wcV2Request = request
             self.wcId = request.id.right
             self.onShowPopupForRequest(WcRequestType.V2_SIGN_DIRECT, request.params.encoded)
+        } else if request.method == "cosmos_getAccounts" {
+            self.wcV2Request = request
+            self.wcId = request.id.right
+            
+            self.accountChainSet.removeAll()
+            self.accountSelectedSet.removeAll()
+            self.accountChainSet.insert(request.chainId.reference)
+            self.lastAccountAction = { accounts in
+                let v2Accounts = accounts.map { account in
+                    ["address":account.bech32Address, "pubkey":account.pubKey, "algo":account.algo]
+                }
+                self.moveToBackgroundIfNeedAndAction {
+                    self.respondOnSign(request: request, response: AnyCodable(v2Accounts))
+                }
+            }
+            self.showAccountPopup()
         }
     }
     
