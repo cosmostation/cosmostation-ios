@@ -335,6 +335,7 @@ public enum ChainType: String {
     case QUICKSILVER_MAIN
     case MARS_MAIN
     case CANTO_MAIN
+    case KYVE_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -373,6 +374,7 @@ public enum ChainType: String {
         result.append(KI_MAIN)
         result.append(KONSTELLATION_MAIN)
         result.append(KUJIRA_MAIN)
+        result.append(KYVE_MAIN)
         result.append(LIKECOIN_MAIN)
         result.append(LUM_MAIN)
         result.append(MARS_MAIN)

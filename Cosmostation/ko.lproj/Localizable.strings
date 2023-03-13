@@ -338,6 +338,7 @@
 "guide_msg_quicksilver" = "Cosmos Interchain 생태계 체인들을 위한 리퀴드 스테이킹 프로토콜.";
 "guide_msg_mars" = "Mars Hub는 Interchain 생태계 전반에 걸쳐 배포될 Mars Protocol의 다양한 디파이 앱들의 관리 및 운영을 위해 설계된 블록체인입니다.";
 "guide_msg_canto" = "Canto는 이더리움 가상머신을(EVM) 실행할 수 있도록 만들어진 Cosmos SDK 기반 레이어 1 블록체인입니다.";
+"guide_msg_kyve" = "KYVE 네트워크는 탈중앙화된 데이터 레이크 솔루션을 제공하는 Cosmos SDK 기반 블록체인입니다.";
 "guide_btn_home" = "홈페이지";
 "guide_btn_blog" = "공식 블로그";
 
