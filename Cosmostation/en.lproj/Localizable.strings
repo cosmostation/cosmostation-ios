@@ -279,6 +279,7 @@
 "msg_address_nameservice" = "Insert recipient address or service name";
 "msg_account_nickname_updated_with_nameservice" = "update wallet name with nameservice name";
 "msg_okc_deprecated_msg" = "You selected deprecated path wallet.\nFor your convenience, highly recommend using current official address type.\n\n(You can add a wallet with default Address type in [Setting] > [Manage Mnemonic / Add Wallet])";
+"msg_no_supported_chain" = "This network is no longer operational.\n\nNote that Cosmostation Wallet is showing archived data only.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -786,6 +787,7 @@ support@cosmostation.io";
 "title_authz_send" = "Authz Send";
 "title_liquid_staking" = "Liquid Staking";
 "title_liquid_unstaking" = "Liquid Unstaking";
+"title_inactive_network" = "Inactive Network!";
 
 
 "proposal_type_basic" = "Basic";

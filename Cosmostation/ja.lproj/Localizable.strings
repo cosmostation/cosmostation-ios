@@ -828,6 +828,8 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "title_withdraw_cdp" = "担保出金";
 "title_withdraw_hardpool" = "ハードサプライ出金";
 "title_withdraw_harvest" = "ハーベスト出金";
+"title_inactive_network" = "非アクティブなネットワーク!";
+
 "touchID" = "タッチID";
 "tx_add_liquidity" = "プールに参加";
 "tx_authz_claim_commission_0" = "受け取るコミッション情報を確認してください";
@@ -1114,3 +1116,4 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "msg_okc_deprecated_msg" = "そのアドレスはチェーンでそれ以上サポートしません。
 円滑な使用のために公式アドレスを生成して資産を異伝することを強くお勧めします。
 （設定>ウォレット追加メニューから公式アドレスを追加できます。）";
+"msg_no_supported_chain" = "このネットワークはもう機能しません。\n\nCosmostationウォレットはアーカイブされたデータのみを表示していますのでご注意ください。";
