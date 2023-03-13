@@ -19,6 +19,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     @IBOutlet weak var titleChainImg: UIImageView!
     @IBOutlet weak var titleWalletName: UILabel!
     
+    @IBOutlet weak var noticeCard: CardView!
+    @IBOutlet weak var noticeBadge: UILabel!
+    @IBOutlet weak var noticeTitle: UILabel!
+    @IBOutlet weak var noticeTopConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var walletTableView: UITableView!
     var refresher: UIRefreshControl!
     
@@ -66,6 +71,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.refresher.tintColor = UIColor.font05
         self.walletTableView.addSubview(refresher)
         
+        self.noticeCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickNoticeBoard)))
+        
         #if RELEASE
         SKStoreReviewController.requestReview()
         #endif
@@ -78,6 +85,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("onFetchDone"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("onFetchPrice"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateTitle), name: Notification.Name("onNameCheckDone"), object: nil)
+        self.onFetchNoticeInfo(self.chainConfig!)
         self.updateTitle()
         self.walletTableView.reloadData()
     }
@@ -586,6 +594,12 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.onShowSafariWeb(url)
     }
     
+    @objc func onClickNoticeBoard() {
+        if let url = URL(string: "https://notice.mintscan.io/" + self.chainConfig!.chainAPIName + "/" + String(self.noticeCard.tag)) {
+            self.onShowSafariWeb(url)
+        }
+    }
+    
     func onClickValidatorList() {
         let validatorListVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "ValidatorListViewController") as! ValidatorListViewController
         validatorListVC.hidesBottomBarWhenPushed = true
@@ -1017,5 +1031,34 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 self.navigationController?.pushViewController(commonWcVC, animated: true)
             }
         })
+    }
+    
+    func onFetchNoticeInfo(_ chainConfig: ChainConfig) {
+        self.noticeCard.backgroundColor = chainConfig.chainColorBG
+        let request = Alamofire.request(BaseNetWork.mintscanNoticeInfo(), method: .get, parameters: ["dashboard": "true", "chain": chainConfig.chainAPIName], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let resData = res as? NSDictionary, let boards = resData.object(forKey: "boards") as? Array<NSDictionary> {
+                    if let firstBoard = boards.first {
+                        let board = Board.init(firstBoard)
+                        self.noticeCard.isHidden = false
+                        self.noticeBadge.text = board.type?.uppercased()
+                        self.noticeTitle.text = board.title
+                        self.noticeTopConstraint.isActive = true
+                        if let boardId = board.id {
+                            self.noticeCard.tag = boardId
+                        }
+                    } else {
+                        self.noticeCard.isHidden = true
+                        self.noticeTopConstraint.isActive = false
+                    }
+                }
+            case .failure(let error):
+                print("onFetchNoticeInfo ", error)
+                self.noticeCard.isHidden = true
+                self.noticeTopConstraint.isActive = false
+            }
+        }
     }
 }

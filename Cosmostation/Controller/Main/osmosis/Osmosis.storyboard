@@ -84,7 +84,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMa-6t-bPJ" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="38.5" width="362" height="42"/>
+                                        <rect key="frame" x="16" y="38.5" width="350" height="42"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="76u-yO-BCk">
                                                 <rect key="frame" x="12" y="9" width="24" height="24"/>
@@ -100,14 +100,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropdown_btn" translatesAutoresizingMaskIntoConstraints="NO" id="0MO-gc-saE">
-                                                <rect key="frame" x="336" y="11" width="20" height="20"/>
+                                                <rect key="frame" x="324" y="11" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="XVl-bm-hle"/>
                                                     <constraint firstAttribute="width" constant="20" id="fe6-vA-mIg"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYg-h5-QDl">
-                                                <rect key="frame" x="328" y="21" width="0.0" height="0.0"/>
+                                                <rect key="frame" x="316" y="21" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -143,10 +143,10 @@
                                 </subviews>
                                 <color key="backgroundColor" name="_card_bg"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="jMa-6t-bPJ" secondAttribute="trailing" constant="10" id="2Gz-2X-H9k"/>
+                                    <constraint firstAttribute="trailing" secondItem="jMa-6t-bPJ" secondAttribute="trailing" constant="16" id="2Gz-2X-H9k"/>
                                     <constraint firstItem="6zb-cA-oWx" firstAttribute="top" secondItem="Sao-J6-XKf" secondAttribute="top" constant="10" id="5a3-rb-bHy"/>
                                     <constraint firstItem="6zb-cA-oWx" firstAttribute="leading" secondItem="Sao-J6-XKf" secondAttribute="leading" constant="16" id="7h7-4i-7zr"/>
-                                    <constraint firstItem="jMa-6t-bPJ" firstAttribute="leading" secondItem="Sao-J6-XKf" secondAttribute="leading" constant="10" id="8ta-LU-Efp"/>
+                                    <constraint firstItem="jMa-6t-bPJ" firstAttribute="leading" secondItem="Sao-J6-XKf" secondAttribute="leading" constant="16" id="8ta-LU-Efp"/>
                                     <constraint firstAttribute="height" constant="100" id="P0P-fw-TDV"/>
                                     <constraint firstItem="jMa-6t-bPJ" firstAttribute="top" secondItem="6zb-cA-oWx" secondAttribute="bottom" constant="12" id="bZY-DT-6SJ"/>
                                 </constraints>
@@ -219,7 +219,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PpZ-fc-F8G" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="38.5" width="362" height="42"/>
+                                        <rect key="frame" x="16" y="38.5" width="350" height="42"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="4og-jm-ujG">
                                                 <rect key="frame" x="12" y="9" width="24" height="24"/>
@@ -235,7 +235,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropdown_btn" translatesAutoresizingMaskIntoConstraints="NO" id="Y22-cE-X1M">
-                                                <rect key="frame" x="336" y="11" width="20" height="20"/>
+                                                <rect key="frame" x="324" y="11" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="ISb-xW-U23"/>
                                                     <constraint firstAttribute="height" constant="20" id="eto-Fc-UBO"/>
@@ -272,10 +272,10 @@
                                 <constraints>
                                     <constraint firstItem="jca-IX-S7Q" firstAttribute="top" secondItem="f8e-V9-936" secondAttribute="top" constant="10" id="9Jv-2E-s54"/>
                                     <constraint firstItem="PpZ-fc-F8G" firstAttribute="top" secondItem="jca-IX-S7Q" secondAttribute="bottom" constant="12" id="Lfq-sh-hvs"/>
-                                    <constraint firstAttribute="trailing" secondItem="PpZ-fc-F8G" secondAttribute="trailing" constant="10" id="Pb2-kn-7ik"/>
+                                    <constraint firstAttribute="trailing" secondItem="PpZ-fc-F8G" secondAttribute="trailing" constant="16" id="Pb2-kn-7ik"/>
                                     <constraint firstAttribute="height" constant="100" id="UiU-UX-6Wh"/>
                                     <constraint firstItem="jca-IX-S7Q" firstAttribute="leading" secondItem="f8e-V9-936" secondAttribute="leading" constant="16" id="k3z-kZ-4eY"/>
-                                    <constraint firstItem="PpZ-fc-F8G" firstAttribute="leading" secondItem="f8e-V9-936" secondAttribute="leading" constant="10" id="zIR-aj-Fxc"/>
+                                    <constraint firstItem="PpZ-fc-F8G" firstAttribute="leading" secondItem="f8e-V9-936" secondAttribute="leading" constant="16" id="zIR-aj-Fxc"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
@@ -305,7 +305,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Average Swap Rate on global exchanges)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qC-H1-qmd">
-                                        <rect key="frame" x="72.5" y="119" width="237.5" height="14"/>
+                                        <rect key="frame" x="72.5" y="119" width="237" height="14"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                         <color key="textColor" name="_font04"/>
                                         <nil key="highlightedColor"/>
@@ -384,7 +384,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="=" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Agj-BC-IOF">
-                                        <rect key="frame" x="187" y="141" width="8" height="14.5"/>
+                                        <rect key="frame" x="187" y="141" width="8" height="15"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                         <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
