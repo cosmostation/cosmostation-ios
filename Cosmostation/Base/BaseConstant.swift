@@ -399,7 +399,6 @@ public enum ChainType: String {
 //        result.append(TGRADE_MAIN)
         result.append(UMEE_MAIN)
         result.append(XPLA_MAIN)
-        result.append(CERBERUS_MAIN)
         
 
 //        result.append(COSMOS_TEST)
@@ -407,6 +406,7 @@ public enum ChainType: String {
 //        result.append(ALTHEA_TEST)
 //        result.append(CRESCENT_TEST)
         result.append(STATION_TEST)
+        result.append(CERBERUS_MAIN)
         return result
     }
     
