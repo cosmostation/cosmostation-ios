@@ -355,7 +355,6 @@ public enum ChainType: String {
         result.append(BITCANA_MAIN)
         result.append(BITSONG_MAIN)
         result.append(CANTO_MAIN)
-        result.append(CERBERUS_MAIN)
         result.append(CHIHUAHUA_MAIN)
         result.append(COMDEX_MAIN)
         result.append(CRESCENT_MAIN)
@@ -407,6 +406,7 @@ public enum ChainType: String {
 //        result.append(ALTHEA_TEST)
 //        result.append(CRESCENT_TEST)
         result.append(STATION_TEST)
+        result.append(CERBERUS_MAIN)
         return result
     }
     
