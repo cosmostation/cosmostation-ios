@@ -33,6 +33,9 @@ class UserRecordCell: UITableViewCell {
         
         if let recipientChain = ChainFactory.SUPPRT_CONFIG().filter({ $0.stakeDenom == zone!.hostDenom }).first {
             WDP.dpCoin(recipientChain, recipientChain.stakeDenom, String(record!.amount), denomLabel, amountLabel)
+        } else {
+            amountLabel.attributedText = WDP.dpAmount(String(record!.amount), amountLabel.font!, 6, 6)
+            denomLabel.text = ""
         }
     }
 }

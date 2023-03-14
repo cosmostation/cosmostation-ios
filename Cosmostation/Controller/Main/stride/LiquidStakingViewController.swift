@@ -94,11 +94,16 @@ class LiquidStakingViewController: BaseViewController, SBCardPopupDelegate {
             return
         }
         
-        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = TASK_TYPE_STRIDE_LIQUIDITY_STAKE
-        txVC.mChainId = hostZones[selectedPosition].chainID
-        txVC.mSwapInDenom = hostZones[selectedPosition].ibcDenom
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(txVC, animated: true)
+        if ChainFactory.SUPPRT_CONFIG().filter({ $0.stakeDenom == self.hostZones[selectedPosition].hostDenom }).first != nil {
+            let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+            txVC.mType = TASK_TYPE_STRIDE_LIQUIDITY_STAKE
+            txVC.mChainId = hostZones[selectedPosition].chainID
+            txVC.mSwapInDenom = hostZones[selectedPosition].ibcDenom
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(txVC, animated: true)
+        } else {
+            self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
+            return
+        }
     }
 }

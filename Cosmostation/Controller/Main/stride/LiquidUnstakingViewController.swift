@@ -127,7 +127,13 @@ class LiquidUnstakingViewController: BaseViewController, UITableViewDelegate, UI
             self.onShowToast(NSLocalizedString("error_not_enough_to_balance", comment: ""))
             return
         }
-        self.showAlertUnstaking()
+        
+        if ChainFactory.SUPPRT_CONFIG().filter({ $0.stakeDenom == self.hostZones[selectedPosition].hostDenom }).first != nil {
+            self.showAlertUnstaking()
+        } else {
+            self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
+            return
+        }
     }
     
     func showAlertUnstaking() {
