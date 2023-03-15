@@ -1268,6 +1268,8 @@
 		150DB1F429ABCD2E00D0C7A2 /* PersisDapp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 150DB1F229ABCD2E00D0C7A2 /* PersisDapp.storyboard */; };
 		150DB1F629ABCFD100D0C7A2 /* PersisDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150DB1F529ABCFD100D0C7A2 /* PersisDappViewController.swift */; };
 		150DB1F729ABCFD100D0C7A2 /* PersisDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150DB1F529ABCFD100D0C7A2 /* PersisDappViewController.swift */; };
+		15119C5729BF2F89004760DE /* ChainKyve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15119C5629BF2F89004760DE /* ChainKyve.swift */; };
+		15119C5829BF2F89004760DE /* ChainKyve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15119C5629BF2F89004760DE /* ChainKyve.swift */; };
 		151788EC282E078600A7D7CC /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
 		152AC22929ACAA36007AB276 /* PersisLiquid3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */; };
 		152AC22A29ACAA36007AB276 /* PersisLiquid3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */; };
@@ -1373,6 +1375,8 @@
 		154A98122983A05800E0B801 /* stride_records_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154A97E02983A05700E0B801 /* stride_records_genesis.pb.swift */; };
 		154A98132983A05800E0B801 /* stride_epochs_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154A97E12983A05700E0B801 /* stride_epochs_query.pb.swift */; };
 		1569489828ABD9E0004777ED /* ChainPassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1569489728ABD9E0004777ED /* ChainPassage.swift */; };
+		1577DAC829B9F07800C360EC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577DAC729B9F07800C360EC /* Board.swift */; };
+		1577DAC929B9F07800C360EC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577DAC729B9F07800C360EC /* Board.swift */; };
 		15A1A50229ADAC390076504E /* TxPersisLiquidStakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1A50029ADAC390076504E /* TxPersisLiquidStakeCell.swift */; };
 		15A1A50329ADAC390076504E /* TxPersisLiquidStakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1A50029ADAC390076504E /* TxPersisLiquidStakeCell.swift */; };
 		15A1A50429ADAC390076504E /* TxPersisLiquidStakeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15A1A50129ADAC390076504E /* TxPersisLiquidStakeCell.xib */; };
@@ -1383,8 +1387,6 @@
 		15B6BDA829ABC2EB00493E11 /* WalletPersisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15B6BDA629ABC2EB00493E11 /* WalletPersisCell.xib */; };
 		15B6BDAA29ABC2FB00493E11 /* WalletPersisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B6BDA929ABC2FB00493E11 /* WalletPersisCell.swift */; };
 		15B6BDAB29ABC2FB00493E11 /* WalletPersisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B6BDA929ABC2FB00493E11 /* WalletPersisCell.swift */; };
-		1577DAC829B9F07800C360EC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577DAC729B9F07800C360EC /* Board.swift */; };
-		1577DAC929B9F07800C360EC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577DAC729B9F07800C360EC /* Board.swift */; };
 		15BF8482299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */; };
 		15BF8483299D472A00B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */; };
 		15E4258729962E8E00FBA119 /* ChainCanto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4258629962E8E00FBA119 /* ChainCanto.swift */; };
@@ -3772,6 +3774,7 @@
 		04FD713728B8B3C80059E88B /* AssetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCell.xib; sourceTree = "<group>"; };
 		150DB1F229ABCD2E00D0C7A2 /* PersisDapp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PersisDapp.storyboard; sourceTree = "<group>"; };
 		150DB1F529ABCFD100D0C7A2 /* PersisDappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersisDappViewController.swift; sourceTree = "<group>"; };
+		15119C5629BF2F89004760DE /* ChainKyve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKyve.swift; sourceTree = "<group>"; };
 		151788EA282E078600A7D7CC /* WalletStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStationCell.swift; sourceTree = "<group>"; };
 		151788EB282E078600A7D7CC /* WalletStationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStationCell.xib; sourceTree = "<group>"; };
 		152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersisLiquid3ViewController.xib; sourceTree = "<group>"; };
@@ -3852,12 +3855,12 @@
 		154A97E02983A05700E0B801 /* stride_records_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_records_genesis.pb.swift; sourceTree = "<group>"; };
 		154A97E12983A05700E0B801 /* stride_epochs_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_epochs_query.pb.swift; sourceTree = "<group>"; };
 		1569489728ABD9E0004777ED /* ChainPassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPassage.swift; sourceTree = "<group>"; };
+		1577DAC729B9F07800C360EC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		15A1A50029ADAC390076504E /* TxPersisLiquidStakeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxPersisLiquidStakeCell.swift; sourceTree = "<group>"; };
 		15A1A50129ADAC390076504E /* TxPersisLiquidStakeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxPersisLiquidStakeCell.xib; sourceTree = "<group>"; };
 		15A1A50629ADD4AA0076504E /* PersisLiquidUnstakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersisLiquidUnstakingViewController.swift; sourceTree = "<group>"; };
 		15B6BDA629ABC2EB00493E11 /* WalletPersisCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletPersisCell.xib; sourceTree = "<group>"; };
 		15B6BDA929ABC2FB00493E11 /* WalletPersisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPersisCell.swift; sourceTree = "<group>"; };
-		1577DAC729B9F07800C360EC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20StargazeNsByAddressReq.swift; sourceTree = "<group>"; };
 		15E4258629962E8E00FBA119 /* ChainCanto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainCanto.swift; sourceTree = "<group>"; };
 		15F0B717294C770200127D9A /* ChainQuicksilver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainQuicksilver.swift; sourceTree = "<group>"; };
@@ -4539,6 +4542,7 @@
 				0451FC6B282A3A7300214FDA /* ChainKi.swift */,
 				0451FCB1282A3BC900214FDA /* ChainKonstellation.swift */,
 				0459103B28FCFE8300C51CE9 /* ChainKujira.swift */,
+				15119C5629BF2F89004760DE /* ChainKyve.swift */,
 				0468BF9F28C5ADE900CBC1C6 /* ChainLike.swift */,
 				0451FCA5282A3B7F00214FDA /* ChainLum.swift */,
 				153559972988FDE70055A1D3 /* ChainMars.swift */,
@@ -8152,6 +8156,7 @@
 				047597982935FF97002DA28C /* ChainOnomy.swift in Sources */,
 				1817CABC283E2CE500523713 /* band_oracle_v1_tx.pb.swift in Sources */,
 				18FFB54E281AF533004E65BB /* TxVoteCell.swift in Sources */,
+				15119C5829BF2F89004760DE /* ChainKyve.swift in Sources */,
 				1537A0AB29ACA33F00342ACF /* persistence_interchainquery_v1beta1_genesis.pb.swift in Sources */,
 				18FFB54F281AF533004E65BB /* SifMyPoolCell.swift in Sources */,
 				18FFB550281AF533004E65BB /* HarvestDetailMyActionCell.swift in Sources */,
@@ -9264,6 +9269,7 @@
 				04D3391827E826F100E82AA7 /* crescent_claim_v1beta1_tx.pb.swift in Sources */,
 				040FA965275F55C300229F6F /* cosmos_upgrade_v1beta1_query.grpc.swift in Sources */,
 				040FA9E3275F55C300229F6F /* ibc_core_connection_v1_connection.pb.swift in Sources */,
+				15119C5729BF2F89004760DE /* ChainKyve.swift in Sources */,
 				1537A0AA29ACA33F00342ACF /* persistence_interchainquery_v1beta1_genesis.pb.swift in Sources */,
 				047847BF2962988300FD6A7E /* Cw20IcnsByNameReq.swift in Sources */,
 				E1A82DF02244E0BD0097CAEE /* AllValidatorViewController.swift in Sources */,
