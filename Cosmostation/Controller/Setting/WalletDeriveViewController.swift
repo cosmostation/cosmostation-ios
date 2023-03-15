@@ -19,7 +19,10 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     @IBOutlet weak var pathTitle: UILabel!
     @IBOutlet weak var pathLabel: UILabel!
     @IBOutlet weak var pathCardView: CardView!
+    @IBOutlet weak var searchLabel: UITextField!
     @IBOutlet weak var selectedHDPathLabel: UILabel!
+    @IBOutlet weak var noResultImg: UIImageView!
+    @IBOutlet weak var noResultLabel: UILabel!
     @IBOutlet weak var derivedWalletTableView: UITableView!
     @IBOutlet weak var btnAddWallet: UIButton!
     
@@ -30,9 +33,11 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     var mSeed: Data!
     var mPath = 0
     var mDerives = Array<Derive>()
+    var mSearchRes = Array<Derive>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.searchLabel.placeholder = NSLocalizedString("msg_search_chain", comment: "")
         self.derivedWalletTableView.delegate = self
         self.derivedWalletTableView.dataSource = self
         self.derivedWalletTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -68,14 +73,16 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mDerives.count
+        return mSearchRes.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let derive = mDerives[indexPath.row]
+        let derive = mSearchRes[indexPath.row]
         guard let chainConfig = ChainFactory.getChainConfig(derive.chaintype) else { return }
         if (derive.status == 2) { return }
-        self.mDerives[indexPath.row].selected = !derive.selected
+        self.mSearchRes[indexPath.row].selected = !derive.selected
+        let filterIndex = mDerives.firstIndex(where: { $0.dpAddress == derive.dpAddress })
+        self.mDerives[filterIndex!].selected = !derive.selected
         self.derivedWalletTableView.reloadRows(at: [indexPath], with: .none)
         
         if (!derive.selected) {
@@ -83,7 +90,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                 let alert = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("select_to_default_path_warning", comment: ""), preferredStyle: .alert)
                 alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
                 alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { _ in
-                    self.mDerives[indexPath.row].selected = false
+                    self.mSearchRes[indexPath.row].selected = false
                     self.derivedWalletTableView.reloadRows(at: [indexPath], with: .none)
                 }))
                 alert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: nil))
@@ -94,7 +101,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"DeriveWalletCell") as? DeriveWalletCell
-        cell?.onBindWallet(mDerives[indexPath.row], mPrivateKeyMode)
+        cell?.onBindWallet(mSearchRes[indexPath.row], mPrivateKeyMode)
         return cell!
     }
     
@@ -113,6 +120,8 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             self.showWaittingAlert()
             self.selectedHDPathLabel.text = String(self.mPath)
             self.mDerives.removeAll()
+            self.mSearchRes.removeAll()
+            self.searchLabel.text = ""
             self.derivedWalletTableView.reloadData()
             DispatchQueue.main.async(execute: {
                 self.onGetAllKeyTypes()
@@ -137,12 +146,45 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         self.mPath = row
     }
     
+    @IBAction func searchChainView(_ sender: Any) {
+        filterDerives()
+    }
+    
+    private func filterDerives() {
+        let trimmedString = self.searchLabel?.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        if trimmedString.isEmpty {
+            mSearchRes = mDerives
+        } else {
+            mSearchRes = mDerives.filter({ derive in
+                if let chainConfig = ChainFactory.getChainConfig(derive.chaintype) {
+                    return [chainConfig.chainAPIName, chainConfig.chainKoreanName, chainConfig.stakeSymbol].filter { str in
+                        str.localizedStandardContains(trimmedString.lowercased())
+                    }.count > 0
+                } else {
+                    return false
+                }
+            })
+        }
+        
+        DispatchQueue.main.async(execute: {
+            if (self.mSearchRes.isEmpty) {
+                self.noResultImg.isHidden = false
+                self.noResultLabel.isHidden = false
+                self.noResultLabel.text = NSLocalizedString("str_no_result", comment: "")
+            } else {
+                self.noResultImg.isHidden = true
+                self.noResultLabel.isHidden = true
+            }
+            self.derivedWalletTableView.reloadData()
+        })
+    }
+    
     @IBAction func onClickBack(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func onClickDerive(_ sender: UIButton) {
-        let selectedCnt = mDerives.filter { $0.selected == true }.count
+        let selectedCnt = mSearchRes.filter { $0.selected == true }.count
         if (selectedCnt > 0) {
             let msg = String(format: NSLocalizedString("import_account_msg", comment: ""), String(selectedCnt))
             let addingAlert = UIAlertController (title: NSLocalizedString("import_account_title", comment: "") , message: msg, preferredStyle: .alert)
@@ -185,7 +227,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                     self.mDerives.append(derive)
                 }
             }
-            
         } else {
             ChainFactory.getAllKeyType().forEach { keyTypes in
                 let chainConfig = ChainFactory.getChainConfig(keyTypes.0)!
@@ -205,11 +246,12 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                 }
             }
         }
+        filterDerives()
         
         DispatchQueue.main.async(execute: {
             self.derivedWalletTableView.reloadData()
             
-            for i in 0 ..< self.mDerives.count {
+            for i in 0 ..< self.mSearchRes.count {
                 self.onFetchBalance(i)
             }
         })
@@ -235,10 +277,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                     try channel.close().wait()
                 } catch { }
                 DispatchQueue.main.async(execute: {
-                    self.mDerives[position].coin = tempCoin
-                    self.derivedWalletTableView.beginUpdates()
-                    self.derivedWalletTableView.reloadRows(at: [IndexPath(row: position, section: 0)], with: .none)
-                    self.derivedWalletTableView.endUpdates()
+                    self.onTableViewLoadData(position, tempCoin)
                 });
             }
             
@@ -273,18 +312,26 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                 case .failure(let error):
                     print(error)
                 }
-                self.mDerives[position].coin = tempCoin
-                self.derivedWalletTableView.beginUpdates()
-                self.derivedWalletTableView.reloadRows(at: [IndexPath(row: position, section: 0)], with: .none)
-                self.derivedWalletTableView.endUpdates()
+                self.onTableViewLoadData(position, tempCoin)
             }
+        }
+    }
+    
+    private func onTableViewLoadData(_ position: Int, _ tempCoin: Coin) {
+        self.mDerives[position].coin = tempCoin
+        if let firstIndex = self.mSearchRes.firstIndex(where: { derive in
+            derive.chaintype == self.mDerives[position].chaintype}) {
+            self.mSearchRes[firstIndex].coin = tempCoin
+            self.derivedWalletTableView.beginUpdates()
+            self.derivedWalletTableView.reloadRows(at: [IndexPath(row: firstIndex, section: 0)], with: .none)
+            self.derivedWalletTableView.endUpdates()
         }
     }
     
     func onSaveAccount() {
         self.showWaittingAlert()
         DispatchQueue.global().async {
-            self.mDerives.forEach { derive in
+            self.mSearchRes.forEach { derive in
                 if (derive.selected == true) {
                     if (derive.status == 1) {
                         self.onOverideAccount(derive)
@@ -296,7 +343,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             
             DispatchQueue.main.async(execute: {
                 self.hideWaittingAlert()
-                let initDerive = self.mDerives.filter { $0.selected == true }.first!
+                let initDerive = self.mSearchRes.filter { $0.selected == true }.first!
                 let initAccount = BaseData.instance.selectExistAccount(initDerive.dpAddress, initDerive.chaintype)!
                 BaseData.instance.setLastTab(0)
                 BaseData.instance.setRecentAccountId(initAccount.account_id)

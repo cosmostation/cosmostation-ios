@@ -22,6 +22,7 @@ class ChainTeritori: ChainConfig {
     var chainTitle2 = "TERITORI"
     var chainDBName = CHAIN_TERITORI_S
     var chainAPIName = "teritori"
+    var chainKoreanName = "테리토리"
     var chainIdPrefix = "teritori-"
     
     var stakeDenomImg = UIImage(named: "tokenTeritori")

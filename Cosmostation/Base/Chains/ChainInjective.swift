@@ -22,6 +22,7 @@ class ChainInjective: ChainConfig {
     var chainTitle2 = "INJECTIVE"
     var chainDBName = CHAIN_INJECTIVE_S
     var chainAPIName = "injective"
+    var chainKoreanName = "인젝티브"
     var chainIdPrefix = "injective-"
     
     var stakeDenomImg = UIImage(named: "tokenInjective")

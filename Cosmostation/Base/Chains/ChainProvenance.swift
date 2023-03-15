@@ -22,6 +22,7 @@ class ChainProvenance: ChainConfig {
     var chainTitle2 = "PROVENANCE"
     var chainDBName = CHAIN_PROVENANCE_S
     var chainAPIName = "provenance"
+    var chainKoreanName = "프로비넌스"
     var chainIdPrefix = "pio-mainnet-"
     
     var stakeDenomImg = UIImage(named: "tokenProvenance")

@@ -395,7 +395,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 }
             }
             
-            if (BaseData.instance.mNodeInfo == nil || BaseData.instance.mAllValidator.count <= 0) {
+            if (BaseData.instance.mNodeInfo == nil) {
                 self.onShowToast(NSLocalizedString("error_network", comment: ""))
             }
         }

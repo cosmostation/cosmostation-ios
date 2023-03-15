@@ -22,6 +22,7 @@ class ChainRegen: ChainConfig {
     var chainTitle2 = "REGEN"
     var chainDBName = CHAIN_REGEN_S
     var chainAPIName = "regen"
+    var chainKoreanName = "리젠"
     var chainIdPrefix = "regen-"
     
     var stakeDenomImg = UIImage(named: "tokenRegen")

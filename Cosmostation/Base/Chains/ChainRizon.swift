@@ -22,6 +22,7 @@ class ChainRizon: ChainConfig {
     var chainTitle2 = "RIZON"
     var chainDBName = CHAIN_RIZON_S
     var chainAPIName = "rizon"
+    var chainKoreanName = "라이즌"
     var chainIdPrefix = "titan-"
     
     var stakeDenomImg = UIImage(named: "tokenRizon")

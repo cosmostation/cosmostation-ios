@@ -22,6 +22,7 @@ class ChainJuno: ChainConfig {
     var chainTitle2 = "JUNO"
     var chainDBName = CHAIN_JUNO_S
     var chainAPIName = "juno"
+    var chainKoreanName = "주노"
     var chainIdPrefix = "juno-"
     
     var stakeDenomImg = UIImage(named: "tokenJuno")

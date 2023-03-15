@@ -22,6 +22,7 @@ class ChainStarname: ChainConfig {
     var chainTitle2 = "STARNAME"
     var chainDBName = CHAIN_IOV_S
     var chainAPIName = "starname"
+    var chainKoreanName = "스타네임"
     var chainIdPrefix = "iov-"
     
     var stakeDenomImg = UIImage(named: "tokenStarname")

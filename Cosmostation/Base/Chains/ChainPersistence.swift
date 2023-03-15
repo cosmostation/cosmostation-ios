@@ -22,6 +22,7 @@ class ChainPersistence: ChainConfig {
     var chainTitle2 = "PERSISTENCE"
     var chainDBName = CHAIN_PERSIS_S
     var chainAPIName = "persistence"
+    var chainKoreanName = "퍼시스턴스"
     var chainIdPrefix = "core-"
     
     var stakeDenomImg = UIImage(named: "tokenPersistence")

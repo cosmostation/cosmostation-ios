@@ -22,6 +22,7 @@ class ChainKyve: ChainConfig {
     var chainTitle2 = "KYVE"
     var chainDBName = CHAIN_KYVE_S
     var chainAPIName = "kyve"
+    var chainKoreanName = "카이브"
     var chainIdPrefix = "kyve-"
     
     var stakeDenomImg = UIImage(named: "tokenKyve")

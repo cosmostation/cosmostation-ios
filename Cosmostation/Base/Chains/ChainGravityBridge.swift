@@ -22,6 +22,7 @@ class ChainGravityBridge: ChainConfig {
     var chainTitle2 = "G-BRIDGE"
     var chainDBName = CHAIN_GRAVITY_BRIDGE_S
     var chainAPIName = "gravity-bridge"
+    var chainKoreanName = "그래비티브릿지"
     var chainIdPrefix = "gravity-bridge-"
     
     var stakeDenomImg = UIImage(named: "tokenGravityBridge")

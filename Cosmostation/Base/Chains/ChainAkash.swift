@@ -22,6 +22,7 @@ class ChainAkash: ChainConfig {
     var chainTitle2 = "AKASH"
     var chainDBName = CHAIN_AKASH_S
     var chainAPIName = "akash"
+    var chainKoreanName = "아카시"
     var chainIdPrefix = "akashnet-"
     
     var stakeDenomImg = UIImage(named: "tokenAkash")

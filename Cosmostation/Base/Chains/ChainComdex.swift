@@ -22,6 +22,7 @@ class ChainComdex: ChainConfig {
     var chainTitle2 = "COMDEX"
     var chainDBName = CHAIN_COMDEX_S
     var chainAPIName = "comdex"
+    var chainKoreanName = "컴덱스"
     var chainIdPrefix = "comdex-"
     
     var stakeDenomImg = UIImage(named: "tokenComdex")

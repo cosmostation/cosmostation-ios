@@ -22,6 +22,7 @@ class ChainMars: ChainConfig {
     var chainTitle2 = "MARS"
     var chainDBName = CHAIN_MARS_S
     var chainAPIName = "mars-protocol"
+    var chainKoreanName = "마스"
     var chainIdPrefix = "mars-"
     
     var stakeDenomImg = UIImage(named: "tokenMars")

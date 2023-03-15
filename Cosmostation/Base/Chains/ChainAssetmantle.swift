@@ -22,6 +22,7 @@ class ChainAssetMantle: ChainConfig {
     var chainTitle2 = "ASSET-MANTLE"
     var chainDBName = "SUPPORT_CHAIN_MANTLE"
     var chainAPIName = "asset-mantle"
+    var chainKoreanName = "에셋멘틀"
     var chainIdPrefix = "mantle-"
     
     var stakeDenomImg = UIImage(named: "tokenAssetmantle")

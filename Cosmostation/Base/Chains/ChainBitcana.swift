@@ -22,6 +22,7 @@ class ChainBitcana: ChainConfig {
     var chainTitle2 = "BITCANNA"
     var chainDBName = CHAIN_BITCANA_S
     var chainAPIName = "bitcanna"
+    var chainKoreanName = "비트카나"
     var chainIdPrefix = "bitcanna-"
     
     var stakeDenomImg = UIImage(named: "tokenBitcanna")

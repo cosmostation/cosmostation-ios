@@ -22,6 +22,7 @@ class ChainQuicksilver: ChainConfig {
     var chainTitle2 = "QUICKSILVER"
     var chainDBName = CHAIN_QUICKSILVER_S
     var chainAPIName = "quicksilver"
+    var chainKoreanName = "퀵실버"
     var chainIdPrefix = "quicksilver-"
     
     var stakeDenomImg = UIImage(named: "tokenQuicksilver")

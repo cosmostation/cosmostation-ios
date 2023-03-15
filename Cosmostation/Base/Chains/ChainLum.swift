@@ -22,6 +22,7 @@ class ChainLum: ChainConfig {
     var chainTitle2 = "LUM"
     var chainDBName = CHAIN_LUM_S
     var chainAPIName = "lum"
+    var chainKoreanName = "룸"
     var chainIdPrefix = "lum-"
     
     var stakeDenomImg = UIImage(named: "tokenLum")

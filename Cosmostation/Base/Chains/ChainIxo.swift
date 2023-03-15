@@ -22,6 +22,7 @@ class ChainIxo: ChainConfig {
     var chainTitle2 = "IXO"
     var chainDBName = CHAIN_IXO_S
     var chainAPIName = "ixo"
+    var chainKoreanName = "아이엑스오"
     var chainIdPrefix = "ixo-"
     
     

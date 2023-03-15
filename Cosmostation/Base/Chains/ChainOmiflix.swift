@@ -22,6 +22,7 @@ class ChainOmniflix: ChainConfig {
     var chainTitle2 = "OMNIFLIX"
     var chainDBName = CHAIN_OMNIFLIX_S
     var chainAPIName = "omniflix"
+    var chainKoreanName = "옴니플리스"
     var chainIdPrefix = "omniflixhub-"
     
     var stakeDenomImg = UIImage(named: "tokenOmniflix")

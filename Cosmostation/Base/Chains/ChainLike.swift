@@ -22,6 +22,7 @@ class ChainLike: ChainConfig {
     var chainTitle2 = "LIKECOIN"
     var chainDBName = CHAIN_LIKECOIN_S
     var chainAPIName = "likecoin"
+    var chainKoreanName = "라이크코인"
     var chainIdPrefix = "likecoin-"
     
     
