@@ -22,6 +22,7 @@ class ChainCosmos: ChainConfig {
     var chainTitle2 = "COSMOS"
     var chainDBName = CHAIN_COSMOS_S
     var chainAPIName = "cosmos"
+    var chainKoreanName = "코스모스"
     var chainIdPrefix = "cosmoshub-"
     
     

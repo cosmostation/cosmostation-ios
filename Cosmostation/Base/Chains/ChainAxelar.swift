@@ -22,6 +22,7 @@ class ChainAxelar: ChainConfig {
     var chainTitle2 = "AXELAR"
     var chainDBName = CHAIN_AXELAR_S
     var chainAPIName = "axelar"
+    var chainKoreanName = "악셀라"
     var chainIdPrefix = "axelar-"
     
     var stakeDenomImg = UIImage(named: "tokenAxelar")

@@ -22,6 +22,7 @@ class ChainCanto: ChainConfig {
     var chainTitle2 = "CANTO"
     var chainDBName = CHAIN_CANTO_S
     var chainAPIName = "canto"
+    var chainKoreanName = "칸토"
     var chainIdPrefix = "canto_"
     
     var stakeDenomImg = UIImage(named: "tokenCanto")

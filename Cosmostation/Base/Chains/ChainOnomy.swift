@@ -22,6 +22,7 @@ class ChainOnomy: ChainConfig {
     var chainTitle2 = "ONOMY"
     var chainDBName = CHAIN_ONOMY_S
     var chainAPIName = "onomy-protocol"
+    var chainKoreanName = "오노미"
     var chainIdPrefix = "onomy-"
     
     var stakeDenomImg = UIImage(named: "tokenOnomy")

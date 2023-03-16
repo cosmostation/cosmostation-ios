@@ -22,6 +22,7 @@ class ChainNyx: ChainConfig {
     var chainTitle2 = "NYX"
     var chainDBName = CHAIN_NYX_S
     var chainAPIName = "nyx"
+    var chainKoreanName = "닉스"
     var chainIdPrefix = "nyx"
     
     var stakeDenomImg = UIImage(named: "tokenNyx")

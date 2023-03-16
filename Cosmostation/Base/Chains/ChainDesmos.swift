@@ -22,6 +22,7 @@ class ChainDesmos: ChainConfig {
     var chainTitle2 = "DESMOS"
     var chainDBName = CHAIN_DESMOS_S
     var chainAPIName = "desmos"
+    var chainKoreanName = "데스모스"
     var chainIdPrefix = "desmos-"
     
     var stakeDenomImg = UIImage(named: "tokenDesmos")

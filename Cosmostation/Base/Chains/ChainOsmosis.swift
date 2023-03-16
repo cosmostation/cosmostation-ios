@@ -22,6 +22,7 @@ class ChainOsmosis: ChainConfig {
     var chainTitle2 = "OSMOSIS"
     var chainDBName = CHAIN_OSMOSIS_S
     var chainAPIName = "osmosis"
+    var chainKoreanName = "오스모시스"
     var chainIdPrefix = "osmosis-"
     
     var stakeDenomImg = UIImage(named: "tokenOsmosis")

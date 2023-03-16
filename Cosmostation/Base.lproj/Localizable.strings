@@ -225,6 +225,7 @@
 "str_swap_out" = "Swap Out";
 "str_multiplier_name" = "Multiplier Name";
 "str_incentive_amount" = "Incentive Reward";
+"str_no_result" = "No Result";
 
 
 "btn_delegate" = "  Delegate";
@@ -280,6 +281,7 @@
 "msg_account_nickname_updated_with_nameservice" = "update wallet name with nameservice name";
 "msg_okc_deprecated_msg" = "You selected deprecated path wallet.\nFor your convenience, highly recommend using current official address type.\n\n(You can add a wallet with default Address type in [Setting] > [Manage Mnemonic / Add Wallet])";
 "msg_no_supported_chain" = "This network is no longer operational.\n\nNote that Cosmostation Wallet is showing archived data only.";
+"msg_search_chain" = "Search by Chain or Token";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";

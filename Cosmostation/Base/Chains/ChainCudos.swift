@@ -22,6 +22,7 @@ class ChainCudos: ChainConfig {
     var chainTitle2 = "CUDOS"
     var chainDBName = CHAIN_CUDOS_S
     var chainAPIName = "cudos"
+    var chainKoreanName = "쿠도스"
     var chainIdPrefix = "cudos-"
     
     var stakeDenomImg = UIImage(named: "tokenCudos")

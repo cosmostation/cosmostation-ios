@@ -83,5 +83,4 @@ class DeriveWalletCell: UITableViewCell {
             selectedImg.isHidden = true
         }
     }
-    
 }

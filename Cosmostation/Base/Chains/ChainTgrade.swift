@@ -22,6 +22,7 @@ class ChainTgrade: ChainConfig {
     var chainTitle2 = "TGRADE"
     var chainDBName = CHAIN_TGRADE_S
     var chainAPIName = "tgrade"
+    var chainKoreanName = "티그레이드"
     var chainIdPrefix = "tgrade-"
     
     

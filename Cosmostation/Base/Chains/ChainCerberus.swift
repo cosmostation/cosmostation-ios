@@ -22,6 +22,7 @@ class ChainCerberus: ChainConfig {
     var chainTitle2 = "CERBERUS"
     var chainDBName = CHAIN_CERBERUS_S
     var chainAPIName = "cerberus"
+    var chainKoreanName = "케르베로스"
     var chainIdPrefix = "cerberus-"
     
     var stakeDenomImg = UIImage(named: "tokenCerberus")

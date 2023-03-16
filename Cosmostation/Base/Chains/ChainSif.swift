@@ -22,6 +22,7 @@ class ChainSif: ChainConfig {
     var chainTitle2 = "SIF"
     var chainDBName = CHAIN_SIF_S
     var chainAPIName = "sifchain"
+    var chainKoreanName = "시프"
     var chainIdPrefix = "sifchain-"
     
     var stakeDenomImg = UIImage(named: "tokenSif")

@@ -22,6 +22,7 @@ class ChainEmoney: ChainConfig {
     var chainTitle2 = "E-MONEY"
     var chainDBName = CHAIN_EMONEY_S
     var chainAPIName = "emoney"
+    var chainKoreanName = "이머니"
     var chainIdPrefix = "emoney-"
     
     var stakeDenomImg = UIImage(named: "tokenEmoney")

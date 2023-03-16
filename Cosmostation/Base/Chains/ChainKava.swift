@@ -22,6 +22,7 @@ class ChainKava: ChainConfig {
     var chainTitle2 = "KAVA"
     var chainDBName = CHAIN_KAVA_S
     var chainAPIName = "kava"
+    var chainKoreanName = "카바"
     var chainIdPrefix = "kava_"
     
     var stakeDenomImg = UIImage(named: "tokenKava")

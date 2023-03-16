@@ -23,6 +23,7 @@ class ChainStride: ChainConfig {
     var chainTitle2 = "STRIDE"
     var chainDBName = CHAIN_STRIDE_S
     var chainAPIName = "stride"
+    var chainKoreanName = "스트라이드"
     var chainIdPrefix = "stride-"
     
     var stakeDenomImg = UIImage(named: "tokenStride")

@@ -22,6 +22,7 @@ class ChainPassage: ChainConfig {
     var chainTitle2 = "PASSAGE"
     var chainDBName = CHAIN_PASSAGE_S
     var chainAPIName = "passage"
+    var chainKoreanName = "파사지"
     var chainIdPrefix = "passage-"
     
     var stakeDenomImg = UIImage(named: "tokenPassage")

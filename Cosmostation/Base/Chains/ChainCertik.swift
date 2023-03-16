@@ -22,6 +22,7 @@ class ChainCertik: ChainConfig {
     var chainTitle2 = "SHENTU"
     var chainDBName = CHAIN_CERTIK_S
     var chainAPIName = "shentu"
+    var chainKoreanName = "센츄"
     var chainIdPrefix = "shentu-"
     
     var stakeDenomImg = UIImage(named: "tokenCertik")

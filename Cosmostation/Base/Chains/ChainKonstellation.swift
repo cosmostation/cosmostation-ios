@@ -22,6 +22,7 @@ class ChainKonstellation: ChainConfig {
     var chainTitle2 = "KONSTELLATION"
     var chainDBName = CHAIN_KONSTELLATION_S
     var chainAPIName = "konstellation"
+    var chainKoreanName = "콘스텔레이션"
     var chainIdPrefix = "darchub"
     
     var stakeDenomImg = UIImage(named: "tokenKonstellation")

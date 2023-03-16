@@ -22,6 +22,7 @@ class ChainEvmos: ChainConfig {
     var chainTitle2 = "EVMOS"
     var chainDBName = CHAIN_EVMOS_S
     var chainAPIName = "evmos"
+    var chainKoreanName = "이비모스"
     var chainIdPrefix = "evmos_"
     
     var stakeDenomImg = UIImage(named: "tokenEvmos")

@@ -22,6 +22,7 @@ class ChainSommelier: ChainConfig {
     var chainTitle2 = "SOMMELIER"
     var chainDBName = CHAIN_SOMMELIER_S
     var chainAPIName = "sommelier"
+    var chainKoreanName = "소믈리에"
     var chainIdPrefix = "sommelier-"
     
     var stakeDenomImg = UIImage(named: "tokenSommelier")

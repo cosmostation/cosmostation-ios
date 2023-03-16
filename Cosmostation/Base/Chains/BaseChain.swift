@@ -23,6 +23,7 @@ protocol ChainConfig {
     var chainTitle2: String { get set }
     var chainDBName: String { get set }
     var chainAPIName: String { get set }
+    var chainKoreanName: String { get set }
     var chainIdPrefix: String { get set }
     
     var stakeDenomImg: UIImage? { get set }

@@ -22,6 +22,7 @@ class ChainBand: ChainConfig {
     var chainTitle2 = "BAND"
     var chainDBName = CHAIN_BAND_S
     var chainAPIName = "band"
+    var chainKoreanName = "밴드"
     var chainIdPrefix = "laozi-mainnet"
     
     var stakeDenomImg = UIImage(named: "tokenBand")

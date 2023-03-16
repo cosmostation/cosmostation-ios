@@ -22,6 +22,7 @@ class ChainXpla: ChainConfig {
     var chainTitle2 = "XPLA"
     var chainDBName = CHAIN_XPLA_S
     var chainAPIName = "xpla"
+    var chainKoreanName = "엑스플라"
     var chainIdPrefix = "dimension_"
     
     var stakeDenomImg = UIImage(named: "tokenXpla")

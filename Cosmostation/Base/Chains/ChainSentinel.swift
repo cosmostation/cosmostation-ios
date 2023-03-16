@@ -22,6 +22,7 @@ class ChainSentinel: ChainConfig {
     var chainTitle2 = "SENTINEL"
     var chainDBName = CHAIN_SENTINEL_S
     var chainAPIName = "sentinel"
+    var chainKoreanName = "센티넬"
     var chainIdPrefix = "sentinelhub-"
     
     var stakeDenomImg = UIImage(named: "tokenSentinel")

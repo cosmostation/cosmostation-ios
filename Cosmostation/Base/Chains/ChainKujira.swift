@@ -22,6 +22,7 @@ class ChainKujira: ChainConfig {
     var chainTitle2 = "KUJIRA"
     var chainDBName = CHAIN_KUJIRA_S
     var chainAPIName = "kujira"
+    var chainKoreanName = "쿠지라"
     var chainIdPrefix = "kaiyo-"
     
     

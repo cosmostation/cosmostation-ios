@@ -22,6 +22,7 @@ class ChainAlthea: ChainConfig {
     var chainTitle2 = "ALTHEA"
     var chainDBName = CHAIN_ALTHEA_S
     var chainAPIName = "althea"
+    var chainKoreanName = "알테아"
     var chainIdPrefix = "althea-"
     
     var stakeDenomImg = UIImage(named: "tokenAlthea")
