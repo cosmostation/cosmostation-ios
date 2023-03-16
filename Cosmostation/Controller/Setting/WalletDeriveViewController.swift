@@ -16,6 +16,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var mnemonicNameLabel: UILabel!
+    @IBOutlet weak var mnemonicTitleLeadingLayout: NSLayoutConstraint?
     @IBOutlet weak var pathTitle: UILabel!
     @IBOutlet weak var pathLabel: UILabel!
     @IBOutlet weak var pathCardView: CardView!
@@ -47,6 +48,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         
         if (!mBackable) {
             self.backBtn.isHidden = true
+            self.mnemonicTitleLeadingLayout?.isActive = false
         }
         
         if (mPrivateKeyMode) {
@@ -81,8 +83,9 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         guard let chainConfig = ChainFactory.getChainConfig(derive.chaintype) else { return }
         if (derive.status == 2) { return }
         self.mSearchRes[indexPath.row].selected = !derive.selected
-        let filterIndex = mDerives.firstIndex(where: { $0.dpAddress == derive.dpAddress })
-        self.mDerives[filterIndex!].selected = !derive.selected
+        if let filterIndex = self.mDerives.firstIndex(where: { $0.dpAddress == derive.dpAddress }) {
+            self.mDerives[filterIndex].selected = !derive.selected
+        }
         self.derivedWalletTableView.reloadRows(at: [indexPath], with: .none)
         
         if (!derive.selected) {
@@ -184,7 +187,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
 
     @IBAction func onClickDerive(_ sender: UIButton) {
-        let selectedCnt = mSearchRes.filter { $0.selected == true }.count
+        let selectedCnt = mDerives.filter { $0.selected == true }.count
         if (selectedCnt > 0) {
             let msg = String(format: NSLocalizedString("import_account_msg", comment: ""), String(selectedCnt))
             let addingAlert = UIAlertController (title: NSLocalizedString("import_account_title", comment: "") , message: msg, preferredStyle: .alert)
@@ -331,7 +334,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     func onSaveAccount() {
         self.showWaittingAlert()
         DispatchQueue.global().async {
-            self.mSearchRes.forEach { derive in
+            self.mDerives.forEach { derive in
                 if (derive.selected == true) {
                     if (derive.status == 1) {
                         self.onOverideAccount(derive)
@@ -343,7 +346,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             
             DispatchQueue.main.async(execute: {
                 self.hideWaittingAlert()
-                let initDerive = self.mSearchRes.filter { $0.selected == true }.first!
+                let initDerive = self.mDerives.filter { $0.selected == true }.first!
                 let initAccount = BaseData.instance.selectExistAccount(initDerive.dpAddress, initDerive.chaintype)!
                 BaseData.instance.setLastTab(0)
                 BaseData.instance.setRecentAccountId(initAccount.account_id)

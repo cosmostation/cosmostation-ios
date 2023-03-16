@@ -50,7 +50,6 @@ class DeriveWalletCell: UITableViewCell {
             amountLabel.text = ""
             denomLabel.text = ""
         }
-//        self.onFetchBalance(derive)
         
         if (derive.status == -1) {
             statusLabel.text = ""
@@ -82,27 +81,6 @@ class DeriveWalletCell: UITableViewCell {
             rootCardView.borderColor = UIColor.photon
         } else {
             selectedImg.isHidden = true
-        }
-    }
-    
-    func onFetchBalance(_ derive: Derive) {
-        guard let chainConfig = ChainFactory.getChainConfig(derive.chaintype) else { return }
-        
-        var tempCoin = Coin.init(chainConfig.stakeDenom, "0")
-        if (chainConfig.isGrpc) {
-            DispatchQueue.global().async {
-                do {
-                    let channel = BaseNetWork.getConnection(chainConfig)!
-                    let req = Cosmos_Bank_V1beta1_QueryBalanceRequest.with { $0.address = derive.dpAddress; $0.denom = chainConfig.stakeDenom }
-                    if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).balance(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                        tempCoin = Coin.init(response.balance.denom, response.balance.amount)
-                    }
-                    try channel.close().wait()
-                } catch { }
-                DispatchQueue.main.async(execute: {
-                    WDP.dpCoin(chainConfig, tempCoin, self.denomLabel, self.amountLabel)
-                });
-            }
         }
     }
 }

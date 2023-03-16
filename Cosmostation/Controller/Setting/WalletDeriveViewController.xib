@@ -16,6 +16,7 @@
                 <outlet property="btnAddWallet" destination="Cu9-nM-TCI" id="XL9-U1-Vlf"/>
                 <outlet property="derivedWalletTableView" destination="5h5-QG-NvX" id="7RJ-1q-mEZ"/>
                 <outlet property="mnemonicNameLabel" destination="l80-IG-HYS" id="N8y-AA-xE8"/>
+                <outlet property="mnemonicTitleLeadingLayout" destination="OW5-01-qIo" id="rwB-bv-Gct"/>
                 <outlet property="noResultImg" destination="Tot-yX-wOh" id="xyp-Iw-xgC"/>
                 <outlet property="noResultLabel" destination="r5u-EQ-9m6" id="3fO-Hp-i19"/>
                 <outlet property="pathCardView" destination="JPy-W7-6tb" id="j8E-VN-WaN"/>
@@ -111,6 +112,7 @@
                         <constraint firstItem="bTH-hI-ri0" firstAttribute="centerY" secondItem="hgU-dS-4E3" secondAttribute="centerY" id="Thg-6T-j57"/>
                         <constraint firstItem="l80-IG-HYS" firstAttribute="centerY" secondItem="hgU-dS-4E3" secondAttribute="centerY" id="WQs-Zy-SYA"/>
                         <constraint firstAttribute="height" constant="50" id="ZFY-O2-Tb4"/>
+                        <constraint firstItem="l80-IG-HYS" firstAttribute="leading" secondItem="hgU-dS-4E3" secondAttribute="leading" priority="750" constant="12" id="eZB-s4-Vly"/>
                         <constraint firstItem="bTH-hI-ri0" firstAttribute="height" secondItem="hgU-dS-4E3" secondAttribute="height" multiplier="0.6" id="p2j-0o-0Ps"/>
                         <constraint firstItem="bTH-hI-ri0" firstAttribute="leading" secondItem="hgU-dS-4E3" secondAttribute="leading" constant="8" id="xaj-8P-Pic"/>
                     </constraints>
