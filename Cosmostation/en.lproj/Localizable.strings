@@ -790,6 +790,7 @@ support@cosmostation.io";
 "title_authz_send" = "Authz Send";
 "title_liquid_staking" = "Liquid Staking";
 "title_liquid_unstaking" = "Liquid Unstaking";
+"title_liquid_redeem" = "Liquid Redeem";
 "title_inactive_network" = "Inactive Network!";
 
 

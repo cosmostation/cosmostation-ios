@@ -9972,7 +9972,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 184;
-				DEVELOPMENT_TEAM = 8G562MW56M;
+				DEVELOPMENT_TEAM = 9L9857BHYL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
