@@ -44,7 +44,7 @@ class ChainCosmos: ChainConfig {
     var wcSupoort = true
     var authzSupoort = true
     var moonPaySupoort = true
-    var kadoMoneySupoort = false
+    var kadoMoneySupoort = true
     var grpcUrl = "grpc-cosmos.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
