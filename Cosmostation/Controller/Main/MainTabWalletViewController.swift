@@ -893,11 +893,16 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         var urlKadoMoney: URL?
         if (chainConfig?.chainType == .INJECTIVE_MAIN) {
             urlKadoMoney = URL(string: KADO_PAY_URL + query + "&onToAddress=" + self.account!.account_address + "&onRevCurrency=" + "USDT")
+        } else if (chainConfig?.chainType == .COSMOS_MAIN) {
+            let cosmosQuery = "?apiKey=" + KADO_PAY_PUBLICK + "&network=" + "cosmos+hub" + "&networkList=" + "cosmos+hub"
+            urlKadoMoney = URL(string: KADO_PAY_URL + cosmosQuery + "&onToAddress=" + self.account!.account_address + "&onRevCurrency=" + "ATOM")
         } else {
             urlKadoMoney = URL(string: KADO_PAY_URL + query + "&onToAddress=" + self.account!.account_address)
         }
-        if (UIApplication.shared.canOpenURL(urlKadoMoney!)) {
+        if #available(iOS 10.0, *){
             UIApplication.shared.open(urlKadoMoney!, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(urlKadoMoney!)
         }
     }
     
