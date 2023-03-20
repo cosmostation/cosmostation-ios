@@ -335,11 +335,23 @@ class CommonWCViewController: BaseViewController {
         
         
         interactor.keplr.onSignKeplrAmino = { [weak self] (rawData) in
+            var params = JSON(rawData["params"]).arrayValue
+            let chainId = params[0].stringValue
+            if (chainId == "osmosis-1") {
+                if (params[2].exists() && params[2]["fee"].exists() && params[2]["fee"]["amount"].exists()) {
+                    var amounts = params[2]["fee"]["amount"].arrayValue
+                    if (amounts.count == 0) {
+                        params[2]["fee"]["amount"] = [["amount":"6250", "denom":"uosmo"]]
+                    } else if (params[2]["fee"]["amount"][0].exists()
+                               && params[2]["fee"]["amount"][0]["denom"] == "uosmo"
+                               && params[2]["fee"]["amount"][0]["amount"] == "0") {
+                        params[2]["fee"]["amount"][0]["amount"] = "6250"
+                    }
+                }
+            }
             guard let self = self else { return }
             if let id = rawData["id"] as? Int64,
-               let params = rawData["params"] as? Array<Any>,
-               let sigData = try? JSONSerialization.data(withJSONObject:params[2]),
-               let chainId = params[0] as? String {
+               let sigData = try? params[2].rawData() {
                 self.wcId = id
                 self.wcCosmosRequest = sigData
                 self.wcRequestChainName = WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId))

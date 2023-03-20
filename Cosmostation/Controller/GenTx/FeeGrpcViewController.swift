@@ -305,7 +305,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                             if (self.chainType == .PROVENANCE_MAIN || self.chainType == .TERITORI_MAIN) {
                                 self.mFeeGasAmount = NSDecimalNumber.init(value: response.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.3), withBehavior: WUtils.handler0Up)
                             } else {
-                                self.mFeeGasAmount = NSDecimalNumber.init(value: response.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
+                                self.mFeeGasAmount = NSDecimalNumber.init(value: response.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.15), withBehavior: WUtils.handler0Up)
                             }
                             self.mSimulPassed = true
                             self.onShowToast(NSLocalizedString("gas_checked", comment: ""))
