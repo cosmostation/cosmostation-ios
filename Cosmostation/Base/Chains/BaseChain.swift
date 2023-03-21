@@ -148,6 +148,8 @@ class ChainFactory {
             return .PERSIS_MAIN
         case CHAIN_PROVENANCE_S:
             return .PROVENANCE_MAIN
+        case CHAIN_QUASAR_S:
+            return .QUASAR_MAIN
         case CHAIN_QUICKSILVER_S:
             return .QUICKSILVER_MAIN
         case CHAIN_REGEN_S:
@@ -285,6 +287,8 @@ class ChainFactory {
             return ChainPersistence(chainType)
         case .PROVENANCE_MAIN:
             return ChainProvenance(chainType)
+        case .QUASAR_MAIN:
+            return ChainQuasar(chainType)
         case .QUICKSILVER_MAIN:
             return ChainQuicksilver(chainType)
         case .REGEN_MAIN:
@@ -404,6 +408,7 @@ let CHAIN_UMEE_S = "SUPPORT_CHAIN_UMEE"
 let CHAIN_XPLA_S = "SUPPORT_CHAIN_XPLA"
 let CHAIN_ONOMY_S = "SUPPORT_CHAIN_ONOMY"
 let CHAIN_QUICKSILVER_S = "SUPPORT_CHAIN_QUICKSILVER"
+let CHAIN_QUASAR_S = "SUPPORT_CHAIN_QUASAR"
 
 let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 
