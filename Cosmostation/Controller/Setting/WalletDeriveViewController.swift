@@ -249,10 +249,10 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                 }
             }
         }
-        filterDerives()
         
         DispatchQueue.main.async(execute: {
             self.derivedWalletTableView.reloadData()
+            self.filterDerives()
             
             for i in 0 ..< self.mSearchRes.count {
                 self.onFetchBalance(i)
@@ -323,7 +323,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     private func onTableViewLoadData(_ position: Int, _ tempCoin: Coin) {
         self.mDerives[position].coin = tempCoin
         if let firstIndex = self.mSearchRes.firstIndex(where: { derive in
-            derive.chaintype == self.mDerives[position].chaintype}) {
+            derive.chaintype == self.mDerives[position].chaintype && derive.dpAddress == self.mDerives[position].dpAddress}) {
             self.mSearchRes[firstIndex].coin = tempCoin
             self.derivedWalletTableView.beginUpdates()
             self.derivedWalletTableView.reloadRows(at: [IndexPath(row: firstIndex, section: 0)], with: .none)
