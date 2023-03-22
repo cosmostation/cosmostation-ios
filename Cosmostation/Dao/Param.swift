@@ -37,7 +37,7 @@ public struct Param {
             }
             return NSDecimalNumber.zero
             
-        } else if (chainType == .OSMOSIS_MAIN || chainType == .STRIDE_MAIN) {
+        } else if (chainType == .OSMOSIS_MAIN || chainType == .STRIDE_MAIN || chainType == .QUICKSILVER_MAIN) {
             if let ep = params?.osmosis_minting_epoch_provisions, let rpie = params?.osmosis_minting_params?.params?.reduction_period_in_epochs {
                 let epochProvisions = NSDecimalNumber.init(string: ep)
                 let epochPeriod = NSDecimalNumber.init(string: rpie)
@@ -183,6 +183,10 @@ public struct Param {
                 return NSDecimalNumber.init(string: apy)
             }
             return NSDecimalNumber.zero
+            
+        } else if (chain == .QUICKSILVER_MAIN) {
+            let stakingDistribution = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.distribution_proportions?.staking)
+            return inflation.multiplying(by: stakingDistribution).dividing(by: bondingRate, withBehavior: WUtils.handler6)
         }
         
         let ap = NSDecimalNumber.init(string: params?.minting_annual_provisions)
@@ -427,7 +431,12 @@ public struct Params {
         if let rawStridMintingEpochProvisions = dictionary?["stride_minting_epoch_provisions"] as? NSDictionary {
             self.osmosis_minting_epoch_provisions = OsmosisMintingEpochProvisions.init(rawStridMintingEpochProvisions).epoch_provisions
         }
-        
+        if let rawQuicksilverMintingParams = dictionary?["quicksilver_minting_params"] as? NSDictionary {
+            self.osmosis_minting_params = OsmosisMintingParam.init(rawQuicksilverMintingParams)
+        }
+        if let rawQuicksilverMintingEpochProvisions = dictionary?["quicksilver_minting_epoch_provisions"] as? NSDictionary {
+            self.osmosis_minting_epoch_provisions = OsmosisMintingEpochProvisions.init(rawQuicksilverMintingEpochProvisions).epoch_provisions
+        }
         
         if let rawEmoneyMintingInflation = dictionary?["emoney_minting_inflation"] as? NSDictionary {
             self.emoney_minting_inflation = EmoneyMintingInflation.init(rawEmoneyMintingInflation)
