@@ -92,6 +92,8 @@ class ChainFactory {
             return .CHIHUAHUA_MAIN
         case CHAIN_COMDEX_S:
             return .COMDEX_MAIN
+        case CHAIN_COREUM_S:
+            return .COREUM_MAIN
         case CHAIN_CRESENT_S:
             return .CRESCENT_MAIN
         case CHAIN_CRYPTO_S:
@@ -231,6 +233,8 @@ class ChainFactory {
             return ChainChihuahua(chainType)
         case .COMDEX_MAIN:
             return ChainComdex(chainType)
+        case .COREUM_MAIN:
+            return ChainCoreum(chainType)
         case .CRESCENT_MAIN:
             return ChainCrescent(chainType)
         case .CRYPTO_MAIN:
@@ -409,6 +413,7 @@ let CHAIN_XPLA_S = "SUPPORT_CHAIN_XPLA"
 let CHAIN_ONOMY_S = "SUPPORT_CHAIN_ONOMY"
 let CHAIN_QUICKSILVER_S = "SUPPORT_CHAIN_QUICKSILVER"
 let CHAIN_QUASAR_S = "SUPPORT_CHAIN_QUASAR"
+let CHAIN_COREUM_S = "SUPPORT_CHAIN_COREUM"
 
 let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 

@@ -753,6 +753,8 @@
 		04983CA9278C24DC00F913A3 /* TxLinkAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04983CA7278C24DC00F913A3 /* TxLinkAccountCell.xib */; };
 		049B691929C998590027B82D /* ChainQuasar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691829C998590027B82D /* ChainQuasar.swift */; };
 		049B691A29C998590027B82D /* ChainQuasar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691829C998590027B82D /* ChainQuasar.swift */; };
+		049B691C29CC13910027B82D /* ChainCoreum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691B29CC13910027B82D /* ChainCoreum.swift */; };
+		049B691D29CC13910027B82D /* ChainCoreum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691B29CC13910027B82D /* ChainCoreum.swift */; };
 		04A116E828F6BC99003605E5 /* RedelegateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A116E728F6BC99003605E5 /* RedelegateCell.xib */; };
 		04A116E928F6BC99003605E5 /* RedelegateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A116E728F6BC99003605E5 /* RedelegateCell.xib */; };
 		04A116EB28F6C17E003605E5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A116EA28F6C17E003605E5 /* MainStoryboard.storyboard */; };
@@ -3484,6 +3486,7 @@
 		04983CA6278C24DC00F913A3 /* TxLinkAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxLinkAccountCell.swift; sourceTree = "<group>"; };
 		04983CA7278C24DC00F913A3 /* TxLinkAccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxLinkAccountCell.xib; sourceTree = "<group>"; };
 		049B691829C998590027B82D /* ChainQuasar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainQuasar.swift; sourceTree = "<group>"; };
+		049B691B29CC13910027B82D /* ChainCoreum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCoreum.swift; sourceTree = "<group>"; };
 		04A116E728F6BC99003605E5 /* RedelegateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RedelegateCell.xib; sourceTree = "<group>"; };
 		04A116EA28F6C17E003605E5 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		04A116ED28F7C3F2003605E5 /* TokenDetailUnbondingDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TokenDetailUnbondingDetailCell.xib; sourceTree = "<group>"; };
@@ -4530,6 +4533,7 @@
 				0451FC5B282A39C100214FDA /* ChainCertik.swift */,
 				0451FCA8282A3B9100214FDA /* ChainChihuahua.swift */,
 				0451FC99282A3B5000214FDA /* ChainComdex.swift */,
+				049B691B29CC13910027B82D /* ChainCoreum.swift */,
 				0451FCC0282A3C5000214FDA /* ChainCrescent.swift */,
 				0451FC67282A3A5200214FDA /* ChainCryptoorg.swift */,
 				046FA6E72876C3FF00F6318A /* ChainCudos.swift */,
@@ -8402,6 +8406,7 @@
 				1817CC42283E2CE600523713 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
 				04A8E96A2860597A00A5E023 /* MnemonicListViewController.swift in Sources */,
 				04AA4C442906A6DE0027877B /* kava_earn_v1beta1_tx.grpc.swift in Sources */,
+				049B691D29CC13910027B82D /* ChainCoreum.swift in Sources */,
 				1817CC7F283E2CE600523713 /* evmos_erc20_v1_tx.pb.swift in Sources */,
 				9F1EE329295F965F007B7CD7 /* GranteeGrantsAction.swift in Sources */,
 				18FFB61D281AF533004E65BB /* TxHardBorrowCell.swift in Sources */,
@@ -9516,6 +9521,7 @@
 				040FA86E275F55C200229F6F /* ibc_core_channel_v1_tx.grpc.swift in Sources */,
 				9F1EE328295F965F007B7CD7 /* GranteeGrantsAction.swift in Sources */,
 				040FA7DD275F55C200229F6F /* cosmos_gov_v1beta2_gov.pb.swift in Sources */,
+				049B691C29CC13910027B82D /* ChainCoreum.swift in Sources */,
 				04D3390A27E826F100E82AA7 /* crescent_liquidity_v1beta1_tx.grpc.swift in Sources */,
 				E13696592292499400F3D5E2 /* OtherValidatorViewController.swift in Sources */,
 				0451FC6C282A3A7300214FDA /* ChainKi.swift in Sources */,
