@@ -343,6 +343,7 @@
 "guide_msg_canto" = "Canto는 이더리움 가상머신을(EVM) 실행할 수 있도록 만들어진 Cosmos SDK 기반 레이어 1 블록체인입니다.";
 "guide_msg_kyve" = "KYVE 네트워크는 탈중앙화된 데이터 레이크 솔루션을 제공하는 Cosmos SDK 기반 블록체인입니다.";
 "guide_msg_quasar" = "Quasar는 볼트(Vaults)와 볼트 전략을 활용한 탈중앙화 자산 관리(Decentralized Asset Management) 서비스를 제공하는 코스모스 SDK 기반 앱체인입니다.";
+"guide_msg_coreum" = "Coreum은 ISO20022 기준에 부합하는 기관급 레이어-1 블록체인으로, 미래의 탈중앙화 어플리케이션들을 위한 핵심 인프라를 제공합니다.";
 "guide_btn_home" = "홈페이지";
 "guide_btn_blog" = "공식 블로그";
 
