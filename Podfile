@@ -21,7 +21,7 @@ def shared_pods
     pod 'gRPC-Swift-Plugins'
     pod 'HPParallaxHeader'
     pod 'IpfsApi'
-    pod 'WalletConnectSwiftV2'
+    pod 'WalletConnectSwiftV2', '1.3.0'
 end
 
 target 'Cosmostation' do
