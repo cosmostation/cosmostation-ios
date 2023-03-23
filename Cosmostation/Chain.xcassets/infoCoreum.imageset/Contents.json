@@ -1,6 +1,16 @@
 {
   "images" : [
     {
+      "filename" : "infoicon_light.png",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
       "filename" : "infoicon_dark.pdf",
       "idiom" : "universal"
     }

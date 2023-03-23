@@ -23,7 +23,7 @@ class ChainCoreum: ChainConfig {
     var chainDBName = CHAIN_COREUM_S
     var chainAPIName = "coreum"
     var chainKoreanName = "코리움"
-    var chainIdPrefix = "coreum-"
+    var chainIdPrefix = "coreum-mainnet"
     
     
     var stakeDenomImg = UIImage(named: "tokenCoreum")
@@ -36,7 +36,7 @@ class ChainCoreum: ChainConfig {
     
     var addressPrefix = "core"
     var validatorPrefix = "corevaloper"
-    var defaultPath = "m/44'/118'/0'/0/X"
+    var defaultPath = "m/44'/990'/0'/0/X"
     
     var etherAddressSupport = false
     var wasmSupport = false
