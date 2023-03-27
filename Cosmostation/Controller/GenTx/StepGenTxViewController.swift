@@ -72,9 +72,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     var mBnbToken: BnbToken?
     
-    var mProposeId: String?
-    var mProposalTitle: String?
-    var mProposer: String?
     var mVoteOpinion: String?
     var mProposals = Array<MintscanProposalDetail>()
     
@@ -123,12 +120,10 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mSwapInAmount: NSDecimalNumber?
     var mSwapOutAmount: NSDecimalNumber?
     var mSwapInCoin: Coin?
-//    var mPool: Osmosis_Gamm_Balancer_V1beta1_Pool?
     var mPoolCoin0: Coin?
     var mPoolCoin1: Coin?
     var mLPCoin: Coin?
     var mLockupDuration: Int64?
-//    var mLockups: Array<Osmosis_Lockup_PeriodLock>?
     
     
     var mSifPool: Sifnode_Clp_V1_Pool?

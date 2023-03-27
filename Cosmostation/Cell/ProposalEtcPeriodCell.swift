@@ -28,13 +28,13 @@ class ProposalEtcPeriodCell: UITableViewCell {
         self.myVoteStatusImg.image = UIImage.init(named: "imgVoteWeight")
     }
     
-    func onBindView(_ chainConfig: ChainConfig?, _ proposal: MintscanProposalDetail, _ myVotes: Array<MintscanMyVotes>) {
-        let title = "# ".appending(proposal.id!).appending("  ").appending(proposal.title ?? "")
+    func onBindView(_ chainConfig: ChainConfig?, _ proposal: MintscanV1Proposal, _ myVotes: Array<MintscanMyVotes>) {
+        let title = "# ".appending(String(proposal.id!)).appending("  ").appending(proposal.title ?? "")
         proposalTitleLabel.text = title
-        proposalStateLabel.text = WUtils.onProposalStatusTxt(proposal)
-        proposalStateImg.image = WUtils.onProposalStatusImg(proposal)
+        proposalStateLabel.text = proposal.onProposalStatusTxt()
+        proposalStateImg.image = proposal.onProposalStatusImg()
         
-        if let rawVote = myVotes.filter({ String($0.proposal_id ?? -1) == proposal.id }).first {
+        if let rawVote = myVotes.filter({ $0.proposal_id == proposal.id }).first {
             if (rawVote.votes.count > 1) {
                 self.myVoteStatusImg.image = UIImage.init(named: "imgVoteWeight")
             } else {

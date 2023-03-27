@@ -19,7 +19,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var loadingImg: LoadingImageView!
     var refresher: UIRefreshControl!
     
-    var proposalId: String?
+    var proposalId: UInt?
     var mMintscanProposalDetail: MintscanProposalDetail?
     var mMyVote_gRPC: Cosmos_Gov_V1beta1_Vote?
     var mCertikMyVote: CertikVote?
@@ -68,9 +68,9 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onClickLink() {
-        let link = WUtils.getProposalExplorer(chainConfig, proposalId!)
-        guard let url = URL(string: link) else { return }
-        self.onShowSafariWeb(url)
+//        let link = WUtils.getProposalExplorer(chainConfig, proposalId!)
+//        guard let url = URL(string: link) else { return }
+//        self.onShowSafariWeb(url)
     }
     
     
@@ -155,14 +155,14 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     @objc func onFetch() {
-        mFetchCnt = 2
-        onFetchMintscanProposl(proposalId!)
-        if (chainType == ChainType.CERTIK_MAIN) {
-            onFetchCertikMyVote(self.proposalId!, self.account!.account_address)
-            
-        } else {
-            onFetchMyVote_gRPC(self.proposalId!, self.account!.account_address)
-        }
+//        mFetchCnt = 2
+//        onFetchMintscanProposl(proposalId!)
+//        if (chainType == ChainType.CERTIK_MAIN) {
+//            onFetchCertikMyVote(self.proposalId!, self.account!.account_address)
+//
+//        } else {
+//            onFetchMyVote_gRPC(self.proposalId!, self.account!.account_address)
+//        }
     }
     
     var mFetchCnt = 0
@@ -174,20 +174,21 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onFetchMintscanProposl(_ id: String) {
-        let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
-        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                if let responseData = res as? NSDictionary {
-                    self.mMintscanProposalDetail = MintscanProposalDetail.init(responseData)
-                }
-                
-            case .failure(let error):
-                print("onFetchMintscanProposl ", error)
-            }
-            self.onFetchFinished()
-        }
+//        let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
+//        print("url ", url)
+//        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+//        request.responseJSON { (response) in
+//            switch response.result {
+//            case .success(let res):
+//                if let responseData = res as? NSDictionary {
+//                    self.mMintscanProposalDetail = MintscanProposalDetail.init(responseData)
+//                }
+//                
+//            case .failure(let error):
+//                print("onFetchMintscanProposl ", error)
+//            }
+//            self.onFetchFinished()
+//        }
     }
     
     func onFetchMyVote_gRPC(_ proposal_id: String, _ address: String) {

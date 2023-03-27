@@ -755,6 +755,8 @@
 		049B691A29C998590027B82D /* ChainQuasar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691829C998590027B82D /* ChainQuasar.swift */; };
 		049B691C29CC13910027B82D /* ChainCoreum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691B29CC13910027B82D /* ChainCoreum.swift */; };
 		049B691D29CC13910027B82D /* ChainCoreum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691B29CC13910027B82D /* ChainCoreum.swift */; };
+		049B691F29D1736B0027B82D /* MintscanV1Proposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691E29D1736B0027B82D /* MintscanV1Proposal.swift */; };
+		049B692029D1736B0027B82D /* MintscanV1Proposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691E29D1736B0027B82D /* MintscanV1Proposal.swift */; };
 		04A116E828F6BC99003605E5 /* RedelegateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A116E728F6BC99003605E5 /* RedelegateCell.xib */; };
 		04A116E928F6BC99003605E5 /* RedelegateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A116E728F6BC99003605E5 /* RedelegateCell.xib */; };
 		04A116EB28F6C17E003605E5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A116EA28F6C17E003605E5 /* MainStoryboard.storyboard */; };
@@ -3489,6 +3491,7 @@
 		04983CA7278C24DC00F913A3 /* TxLinkAccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxLinkAccountCell.xib; sourceTree = "<group>"; };
 		049B691829C998590027B82D /* ChainQuasar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainQuasar.swift; sourceTree = "<group>"; };
 		049B691B29CC13910027B82D /* ChainCoreum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCoreum.swift; sourceTree = "<group>"; };
+		049B691E29D1736B0027B82D /* MintscanV1Proposal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanV1Proposal.swift; sourceTree = "<group>"; };
 		04A116E728F6BC99003605E5 /* RedelegateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RedelegateCell.xib; sourceTree = "<group>"; };
 		04A116EA28F6C17E003605E5 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		04A116ED28F7C3F2003605E5 /* TokenDetailUnbondingDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TokenDetailUnbondingDetailCell.xib; sourceTree = "<group>"; };
@@ -6295,6 +6298,7 @@
 				15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */,
 				E1D4EA572871584B005C1ECF /* FeeInfo.swift */,
 				1577DAC729B9F07800C360EC /* Board.swift */,
+				049B691E29D1736B0027B82D /* MintscanV1Proposal.swift */,
 			);
 			path = Dao;
 			sourceTree = "<group>";
@@ -8443,6 +8447,7 @@
 				1817CBC1283E2CE500523713 /* google_protobuf2_any.pb.swift in Sources */,
 				04AA4C162906A6DD0027877B /* kava_router_v1beta1_tx.pb.swift in Sources */,
 				18FFB62A281AF533004E65BB /* VoteDetailsViewController.swift in Sources */,
+				049B692029D1736B0027B82D /* MintscanV1Proposal.swift in Sources */,
 				043031E328BE0D21005FF935 /* SelectContractTokenCell.swift in Sources */,
 				1817CB3A283E2CE500523713 /* sifnode_ethbridge_v1_tx.pb.swift in Sources */,
 				18FFB62B281AF533004E65BB /* WalletIovCell.swift in Sources */,
@@ -9559,6 +9564,7 @@
 				040FA807275F55C200229F6F /* cosmos_group_v1beta1_query.pb.swift in Sources */,
 				154A97EA2983A05700E0B801 /* stride_stakeibc_ica_account.pb.swift in Sources */,
 				040FA8A1275F55C200229F6F /* cosmos_staking_v1beta1_query.pb.swift in Sources */,
+				049B691F29D1736B0027B82D /* MintscanV1Proposal.swift in Sources */,
 				041345BB27855F6600DC49AD /* ProfileViewController.swift in Sources */,
 				04D3390327E826F100E82AA7 /* crescent_farming_v1beta1_tx.grpc.swift in Sources */,
 				047FB6EE281A4C53009D8AAF /* sifnode_tokenregistry_v1_query.pb.swift in Sources */,

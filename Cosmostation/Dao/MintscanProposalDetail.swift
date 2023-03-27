@@ -104,6 +104,18 @@ public struct MintscanProposalDetail {
         }
         return getSum().multiplying(byPowerOf10: 2).dividing(by: param.getTurnoutBondedAmount(), withBehavior: WUtils.handler2)
     }
+    
+    public func isScam() -> Bool {
+        print("isScam getYes ", getYes())
+        print("isScam getSum ", getSum())
+        if (getYes() == NSDecimalNumber.zero || getSum() == NSDecimalNumber.zero) {
+            return true
+        }
+        if (getYes().dividing(by: getSum()).compare(NSDecimalNumber(string: "0.1")).rawValue > 0) {
+            return false
+        }
+        return true
+    }
 }
 
 public struct MintscanVoteMeta {

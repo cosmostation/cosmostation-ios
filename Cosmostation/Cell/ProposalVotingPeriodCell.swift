@@ -23,14 +23,8 @@ class ProposalVotingPeriodCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
-//    var actionMultiVote: (() -> Void)? = nil
-//
-//    @IBAction func onMultiVoteClick(_ sender: UIButton) {
-//        actionMultiVote?()
-//    }
-    
-    func onBindView(_ chainConfig: ChainConfig?, _ proposal: MintscanProposalDetail, _ myVotes: Array<MintscanMyVotes>, _ selectMode: Bool, _ selected: Array<String>) {
-        let title = "# ".appending(proposal.id!).appending("  ").appending(proposal.title ?? "")
+    func onBindView(_ chainConfig: ChainConfig?, _ proposal: MintscanV1Proposal, _ myVotes: Array<MintscanMyVotes>, _ selectMode: Bool, _ selected: Array<UInt>) {
+        let title = "# ".appending(String(proposal.id!)).appending("  ").appending(proposal.title ?? "")
         let time = WDP.dpTime(proposal.voting_end_time).appending(" ").appending(WDP.dpTimeGap(proposal.voting_end_time))
         proposalTitleLabel.text = title
         votingEndTimeLabel.text = time
@@ -46,7 +40,7 @@ class ProposalVotingPeriodCell: UITableViewCell {
             rootCardView.layer.borderWidth = 0
         }
         
-        if let rawVote = myVotes.filter({ String($0.proposal_id ?? -1) == proposal.id }).first {
+        if let rawVote = myVotes.filter({ $0.proposal_id == proposal.id }).first {
             if (rawVote.votes.count > 1) {
                 self.myVoteStatusImg.image = UIImage.init(named: "imgVoteWeight")
             } else {
