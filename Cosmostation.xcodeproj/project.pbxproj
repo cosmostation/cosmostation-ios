@@ -1395,6 +1395,8 @@
 		15BF8483299D472A00B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */; };
 		15E4258729962E8E00FBA119 /* ChainCanto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4258629962E8E00FBA119 /* ChainCanto.swift */; };
 		15F0B718294C770200127D9A /* ChainQuicksilver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0B717294C770200127D9A /* ChainQuicksilver.swift */; };
+		1809C35129D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
+		1809C35229D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
 		181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
 		1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1812D46128E184D800AC7D61 /* GoogleService-Info.plist */; };
@@ -3870,6 +3872,7 @@
 		15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20StargazeNsByAddressReq.swift; sourceTree = "<group>"; };
 		15E4258629962E8E00FBA119 /* ChainCanto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainCanto.swift; sourceTree = "<group>"; };
 		15F0B717294C770200127D9A /* ChainQuicksilver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainQuicksilver.swift; sourceTree = "<group>"; };
+		1809C35029D16C80008884C1 /* injectScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = injectScript.js; sourceTree = "<group>"; };
 		181099DE28AE92FC00C178B5 /* PushUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUtils.swift; sourceTree = "<group>"; };
 		1812D46128E184D800AC7D61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		187446FE2930940F00849EE4 /* ApiKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKey.plist; sourceTree = "<group>"; };
@@ -6146,6 +6149,7 @@
 		E1945E26222E7C0600A1436F /* Cosmostation */ = {
 			isa = PBXGroup;
 			children = (
+				1809C35029D16C80008884C1 /* injectScript.js */,
 				28F8EFA3286EC19700162FC1 /* Fonts */,
 				04E25D29276F23C5009B39BA /* Icons */,
 				282121BA25FDE71C0016ABFE /* ProtoBuff */,
@@ -6695,6 +6699,7 @@
 				18FFB6E6281AF533004E65BB /* TxCommonCell.xib in Resources */,
 				18FFB6E8281AF533004E65BB /* RegisterAccount0ViewController.xib in Resources */,
 				18FFB6E9281AF533004E65BB /* DomainPromotionCell.xib in Resources */,
+				1809C35229D16C80008884C1 /* injectScript.js in Resources */,
 				04694681288A4005004EE923 /* WalletAddressCell.xib in Resources */,
 				18FFB6EA281AF533004E65BB /* TxIbcAcknowledgeCell.xib in Resources */,
 				18FFB6EB281AF533004E65BB /* DeleteStarname3ViewController.xib in Resources */,
@@ -6982,6 +6987,7 @@
 				28EEEC9D26DABA74002DDC4A /* KavaSwap0ViewController.xib in Resources */,
 				282FF34E23F50E010028CC66 /* TxRedelegateCell.xib in Resources */,
 				046FF013277AD0E100F72C11 /* DenomListCell.xib in Resources */,
+				1809C35129D16C80008884C1 /* injectScript.js in Resources */,
 				042AEE09286452E000E13825 /* OkWithdraw1ViewController.xib in Resources */,
 				04A116EB28F6C17E003605E5 /* MainStoryboard.storyboard in Resources */,
 				04FCD2ED292F8C9D00BA5349 /* WalletStrideCell.xib in Resources */,
