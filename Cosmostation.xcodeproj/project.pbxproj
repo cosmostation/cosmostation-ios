@@ -1381,6 +1381,8 @@
 		1569489828ABD9E0004777ED /* ChainPassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1569489728ABD9E0004777ED /* ChainPassage.swift */; };
 		1577DAC829B9F07800C360EC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577DAC729B9F07800C360EC /* Board.swift */; };
 		1577DAC929B9F07800C360EC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577DAC729B9F07800C360EC /* Board.swift */; };
+		1599551029D14410004EFCF2 /* ChainNoble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599550F29D14410004EFCF2 /* ChainNoble.swift */; };
+		1599551129D14410004EFCF2 /* ChainNoble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599550F29D14410004EFCF2 /* ChainNoble.swift */; };
 		15A1A50229ADAC390076504E /* TxPersisLiquidStakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1A50029ADAC390076504E /* TxPersisLiquidStakeCell.swift */; };
 		15A1A50329ADAC390076504E /* TxPersisLiquidStakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1A50029ADAC390076504E /* TxPersisLiquidStakeCell.swift */; };
 		15A1A50429ADAC390076504E /* TxPersisLiquidStakeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15A1A50129ADAC390076504E /* TxPersisLiquidStakeCell.xib */; };
@@ -3862,6 +3864,7 @@
 		154A97E12983A05700E0B801 /* stride_epochs_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_epochs_query.pb.swift; sourceTree = "<group>"; };
 		1569489728ABD9E0004777ED /* ChainPassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPassage.swift; sourceTree = "<group>"; };
 		1577DAC729B9F07800C360EC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		1599550F29D14410004EFCF2 /* ChainNoble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainNoble.swift; sourceTree = "<group>"; };
 		15A1A50029ADAC390076504E /* TxPersisLiquidStakeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxPersisLiquidStakeCell.swift; sourceTree = "<group>"; };
 		15A1A50129ADAC390076504E /* TxPersisLiquidStakeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxPersisLiquidStakeCell.xib; sourceTree = "<group>"; };
 		15A1A50629ADD4AA0076504E /* PersisLiquidUnstakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersisLiquidUnstakingViewController.swift; sourceTree = "<group>"; };
@@ -4554,6 +4557,7 @@
 				0451FCA5282A3B7F00214FDA /* ChainLum.swift */,
 				153559972988FDE70055A1D3 /* ChainMars.swift */,
 				0451FC6F282A3A9900214FDA /* ChainMedibloc.swift */,
+				1599550F29D14410004EFCF2 /* ChainNoble.swift */,
 				04403735284A2B2F004CD7E3 /* ChainNyx.swift */,
 				0451FC5F282A39FB00214FDA /* ChainOkc.swift */,
 				0451FCBD282A3C3E00214FDA /* ChainOmiflix.swift */,
@@ -7765,6 +7769,7 @@
 				1817CC30283E2CE600523713 /* sifnode_ethbridge_v1_types.pb.swift in Sources */,
 				1817CC00283E2CE600523713 /* starname_iov_escrow_v1beta1_query.grpc.swift in Sources */,
 				18FFB3CB281AF533004E65BB /* TokenDetailStakingCell.swift in Sources */,
+				1599551129D14410004EFCF2 /* ChainNoble.swift in Sources */,
 				04AA4BD42906A6DD0027877B /* kava_issuance_v1beta1_query.pb.swift in Sources */,
 				1817CC40283E2CE600523713 /* cosmos_group_v1beta1_query.grpc.swift in Sources */,
 				1817CBE4283E2CE600523713 /* evmos_claims_v1_genesis.pb.swift in Sources */,
@@ -8880,6 +8885,7 @@
 				154A97EE2983A05700E0B801 /* stride_claim_claim.pb.swift in Sources */,
 				040FA814275F55C200229F6F /* tendermint_types_block.pb.swift in Sources */,
 				04AA4C452906A6DE0027877B /* kava_incentive_v1beta1_genesis.pb.swift in Sources */,
+				1599551029D14410004EFCF2 /* ChainNoble.swift in Sources */,
 				040FA858275F55C200229F6F /* desmos_profiles_v1beta1_msg_server.pb.swift in Sources */,
 				040FAAF2275F55C400229F6F /* ibc_applications_transfer_v1_query.grpc.swift in Sources */,
 				040FA9F0275F55C300229F6F /* google_api_annotations.pb.swift in Sources */,

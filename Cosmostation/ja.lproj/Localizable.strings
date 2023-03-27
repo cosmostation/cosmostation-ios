@@ -65,6 +65,7 @@
 "guide_msg_kyve" = "KYVEネットワークは、脱中央化されたデータレイクソリューションを提供するCosmos SDKベースのブロックチェーンです。";
 "guide_msg_quasar" = "Quasarはボルトとボルト戦略を活用した分散型資産管理(DAM)サービスを提供している。";
 "guide_msg_coreum" = "Coreumは、将来の分散アプリケーションのコアインフラストラクチャとして機能するエンタープライズクラスのL1ブロックチェーンです。";
+"guide_msg_noble" = "NobleはCircleと協力してコスモス生態系内のネイティブ$USDCトークンを支援するために設計されたCosmosSDKベースのブロックチェーンです。";
 "guide_btn_home" = "ホームページ";
 "guide_btn_blog" = "公式ブログ";
 
