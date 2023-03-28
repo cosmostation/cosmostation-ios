@@ -32,7 +32,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     var mFilteredEtcProposals = Array<MintscanV1Proposal>()
     var mCheckedPeriods = Array<MintscanV1Proposal>()
     var mMyVotes = Array<MintscanMyVotes>()
-    var mSelectedProposalIds = Array<UInt>()
+    var mSelectedProposalIds = Array<UInt64>()
     var mToVoteList = Array<MintscanProposalDetail>()
     
     var mFetchCnt = 0
@@ -271,7 +271,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    func onExplorerLink(_ proposalId: UInt) {
+    func onExplorerLink(_ proposalId: UInt64) {
         let link = WUtils.getProposalExplorer(chainConfig, proposalId)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
@@ -323,7 +323,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    func onFetchMintscanProposalDetail(_ id: UInt) {
+    func onFetchMintscanProposalDetail(_ id: UInt64) {
         let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in

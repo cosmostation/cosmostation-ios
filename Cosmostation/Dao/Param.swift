@@ -247,6 +247,7 @@ public struct Param {
         if let rawQuorum = params?.gov_tallying?.tally_params?.quorum {
             return NSDecimalNumber.init(string: rawQuorum)
         }
+        //for certic custom tally
         if let rawQuorum = params?.gov_tallying?.tally_params?.default_tally?.quorum {
             return NSDecimalNumber.init(string: rawQuorum)
         }
@@ -743,12 +744,14 @@ public struct GovTallying {
         var quorum: String?
         var threshold: String?
         var veto_threshold: String?
+        var expedited_threshold: String?
         var default_tally: DefaultTally?
         
         init(_ dictionary: NSDictionary?) {
             self.quorum = dictionary?["quorum"] as? String
             self.threshold = dictionary?["threshold"] as? String
             self.veto_threshold = dictionary?["veto_threshold"] as? String
+            self.expedited_threshold = dictionary?["expedited_threshold"] as? String
             if let rawDefaultTally = dictionary?["default_tally"] as? NSDictionary {
                 self.default_tally = DefaultTally.init(rawDefaultTally)
             }

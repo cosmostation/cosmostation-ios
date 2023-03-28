@@ -678,7 +678,7 @@ public class WUtils {
         return chainConfig!.explorerUrl + "account/" + address
     }
     
-    static func getProposalExplorer(_ chainConfig: ChainConfig?, _ proposalId: UInt) -> String {
+    static func getProposalExplorer(_ chainConfig: ChainConfig?, _ proposalId: UInt64) -> String {
         if (chainConfig == nil) { return "" }
         return chainConfig!.explorerUrl + "proposals/" + String(proposalId)
     }

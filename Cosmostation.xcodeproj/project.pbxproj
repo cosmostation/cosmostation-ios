@@ -953,7 +953,6 @@
 		04AA4C862907B6C50027877B /* kava_cdp_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA4C7B2907B6C50027877B /* kava_cdp_v1beta1_query.pb.swift */; };
 		04AA4C872907B6C50027877B /* kava_cdp_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA4C7B2907B6C50027877B /* kava_cdp_v1beta1_query.pb.swift */; };
 		04AAD5B7275BAD9B002D3A95 /* NewAccountTypePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AAD5B9275BAD9B002D3A95 /* NewAccountTypePopup.xib */; };
-		04B1BE1427A165F000B1236A /* CertikVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1327A165F000B1236A /* CertikVote.swift */; };
 		04B1BE1D27A3BC4500B1236A /* cosmwasm_wasm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1527A3BC4400B1236A /* cosmwasm_wasm_v1_tx.pb.swift */; };
 		04B1BE1E27A3BC4500B1236A /* cosmwasm_wasm_v1_ibc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1627A3BC4400B1236A /* cosmwasm_wasm_v1_ibc.pb.swift */; };
 		04B1BE1F27A3BC4500B1236A /* cosmwasm_wasm_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1727A3BC4400B1236A /* cosmwasm_wasm_v1_types.pb.swift */; };
@@ -2068,7 +2067,6 @@
 		18FFB5B3281AF533004E65BB /* HardPoolWithdraw0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DB56FA25FA3B9C00B2F0E5 /* HardPoolWithdraw0ViewController.swift */; };
 		18FFB5B6281AF533004E65BB /* BTCMnemonic.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E12282D6AD003D8CD1 /* BTCMnemonic.m */; };
 		18FFB5B8281AF533004E65BB /* KavaIncentiveReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D7BE4225F0D304006EECD7 /* KavaIncentiveReward.swift */; };
-		18FFB5BF281AF533004E65BB /* CertikVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1327A165F000B1236A /* CertikVote.swift */; };
 		18FFB5C2281AF533004E65BB /* BinanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903A268C401E002CFFE1 /* BinanceType.swift */; };
 		18FFB5C4281AF533004E65BB /* MainTabWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E123FD3E233E0161004EC348 /* MainTabWalletViewController.swift */; };
 		18FFB5C5281AF533004E65BB /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* Price.swift */; };
@@ -3591,7 +3589,6 @@
 		04AA4C7B2907B6C50027877B /* kava_cdp_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_cdp_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		04AAD5B8275BAD9B002D3A95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NewAccountTypePopup.xib; sourceTree = "<group>"; };
 		04AAD5BB275BADA2002D3A95 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/NewAccountTypePopup.strings; sourceTree = "<group>"; };
-		04B1BE1327A165F000B1236A /* CertikVote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertikVote.swift; sourceTree = "<group>"; };
 		04B1BE1527A3BC4400B1236A /* cosmwasm_wasm_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_tx.pb.swift; sourceTree = "<group>"; };
 		04B1BE1627A3BC4400B1236A /* cosmwasm_wasm_v1_ibc.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_ibc.pb.swift; sourceTree = "<group>"; };
 		04B1BE1727A3BC4400B1236A /* cosmwasm_wasm_v1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_types.pb.swift; sourceTree = "<group>"; };
@@ -6280,6 +6277,7 @@
 				283D2EA324F52FE700247424 /* OkToken.swift */,
 				28FC030B2652662B001C0319 /* Price.swift */,
 				28E3E37F2671BE8D00BA89C2 /* Param.swift */,
+				049B691E29D1736B0027B82D /* MintscanV1Proposal.swift */,
 				0479664F2757409700315D55 /* MintscanProposalDetail.swift */,
 				045DAD832897BC14004ED9B4 /* MintscanMyVotes.swift */,
 				047DCEE128855F4800253CAA /* MintscanMyVote.swift */,
@@ -6298,7 +6296,6 @@
 				15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */,
 				E1D4EA572871584B005C1ECF /* FeeInfo.swift */,
 				1577DAC729B9F07800C360EC /* Board.swift */,
-				049B691E29D1736B0027B82D /* MintscanV1Proposal.swift */,
 			);
 			path = Dao;
 			sourceTree = "<group>";
@@ -6360,7 +6357,6 @@
 				28B4302924F76AD500BD7BB2 /* OkTransfer.swift */,
 				280524B7255CEEC7004D6172 /* ExportStarname.swift */,
 				0428ACFD268AD31700EB438F /* BandOracleStatus.swift */,
-				04B1BE1327A165F000B1236A /* CertikVote.swift */,
 				E11A28E12944716D003311FD /* SupportPool.swift */,
 			);
 			path = Model;
@@ -8303,7 +8299,6 @@
 				1817CACF283E2CE500523713 /* cosmos_bank_v1beta1_bank.pb.swift in Sources */,
 				1817CAFE283E2CE500523713 /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
 				04AA4BD62906A6DD0027877B /* kava_committee_v1beta1_proposal.pb.swift in Sources */,
-				18FFB5BF281AF533004E65BB /* CertikVote.swift in Sources */,
 				E11A28D629435063003311FD /* osmosis_gamm_v1beta1_genesis.pb.swift in Sources */,
 				1817CC5A283E2CE600523713 /* evmos_incentives_v1_incentives.pb.swift in Sources */,
 				18FFB5C2281AF533004E65BB /* BinanceType.swift in Sources */,
@@ -9425,7 +9420,6 @@
 				28D7BE4325F0D304006EECD7 /* KavaIncentiveReward.swift in Sources */,
 				040FA951275F55C300229F6F /* desmos_profiles_v1beta1_msg_server.grpc.swift in Sources */,
 				04AA4BC92906A6DD0027877B /* kava_bep3_v1beta1_bep3.pb.swift in Sources */,
-				04B1BE1427A165F000B1236A /* CertikVote.swift in Sources */,
 				046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */,
 				048C830227BF572800270528 /* evmos_incentives_v1_genesis.pb.swift in Sources */,
 				04E1913028E6B9B900C98A6B /* SelectPriceColorCell.swift in Sources */,

@@ -20,7 +20,7 @@ class AuthzVote1ViewController: BaseViewController, UITableViewDelegate, UITable
     var pageHolderVC: StepGenTxViewController!
     var mVotingPeriods = Array<MintscanV1Proposal>()
     var myVotes = Array<MintscanMyVotes>()
-    var mSelectedProposalIds = Array<UInt>()
+    var mSelectedProposalIds = Array<UInt64>()
     var mToVoteList = Array<MintscanProposalDetail>()
     var mFetchCnt = 0
     
@@ -170,7 +170,7 @@ class AuthzVote1ViewController: BaseViewController, UITableViewDelegate, UITable
         }
     }
     
-    func onFetchMintscanProposalDetail(_ id: UInt) {
+    func onFetchMintscanProposalDetail(_ id: UInt64) {
         let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in

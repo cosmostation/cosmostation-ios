@@ -11,13 +11,15 @@ import UIKit
 
 
 public struct MintscanV1Proposal {
-    var id: UInt?
+    
+    var id: UInt64?
     var title: String?
     var description: String?
     var proposal_type: String?
     var proposal_status: String?
     var voting_start_time: String?
     var voting_end_time: String?
+    var is_expedited = false
     var yes: NSDecimalNumber = NSDecimalNumber.zero
     var abstain: NSDecimalNumber = NSDecimalNumber.zero
     var no: NSDecimalNumber = NSDecimalNumber.zero
@@ -26,7 +28,7 @@ public struct MintscanV1Proposal {
     
     init(_ dictionary: NSDictionary?) {
         if let rawId = dictionary?["id"] as? String {
-            self.id = UInt(rawId)
+            self.id = UInt64(rawId)
         }
         self.title = dictionary?["title"] as? String
         self.description = dictionary?["description"] as? String
@@ -34,6 +36,7 @@ public struct MintscanV1Proposal {
         self.proposal_status = dictionary?["proposal_status"] as? String
         self.voting_start_time = dictionary?["voting_start_time"] as? String
         self.voting_end_time = dictionary?["voting_end_time"] as? String
+        self.is_expedited = dictionary?["is_expedited"] as? Bool ?? false
         if let rawYes = dictionary?["yes"] as? String {
             self.yes = NSDecimalNumber.init(string: rawYes)
         }

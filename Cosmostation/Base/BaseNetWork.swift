@@ -225,7 +225,7 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v1/" + chainConfig.chainAPIName + "/proposals"
     }
     
-    static func mintscanProposalDetail(_ chainConfig: ChainConfig, _ proposalId: UInt) -> String {
+    static func mintscanProposalDetail(_ chainConfig: ChainConfig, _ proposalId: UInt64) -> String {
         return MINTSCAN_API_URL + "v2/" + chainConfig.chainAPIName + "/proposals/" + String(proposalId)
     }
     

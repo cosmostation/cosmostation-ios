@@ -19,10 +19,9 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var loadingImg: LoadingImageView!
     var refresher: UIRefreshControl!
     
-    var proposalId: UInt?
+    var proposalId: UInt64?
     var mMintscanProposalDetail: MintscanProposalDetail?
     var mMyVote_gRPC: Cosmos_Gov_V1beta1_Vote?
-    var mCertikMyVote: CertikVote?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,9 +67,9 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onClickLink() {
-//        let link = WUtils.getProposalExplorer(chainConfig, proposalId!)
-//        guard let url = URL(string: link) else { return }
-//        self.onShowSafariWeb(url)
+        let link = WUtils.getProposalExplorer(chainConfig, proposalId!)
+        guard let url = URL(string: link) else { return }
+        self.onShowSafariWeb(url)
     }
     
     
@@ -141,28 +140,19 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func onBindTally(_ tableView: UITableView) -> UITableViewCell {
         let cell:VoteTallyTableViewCell? = tableView.dequeueReusableCell(withIdentifier:"VoteTallyTableViewCell") as? VoteTallyTableViewCell
-        if (mMintscanProposalDetail != nil) {
-            cell?.onUpdateCards(chainType, mMintscanProposalDetail!)
-        }
-        if (chainType == ChainType.CERTIK_MAIN) {
-            cell?.onCheckMyVote_gRPC(mCertikMyVote?.getMyOption())
-        } else {
-            self.mMyVote_gRPC?.options.forEach { vote in
-                cell?.onCheckMyVote_gRPC(vote.option)
-            }
-        }
+//        if (mMintscanProposalDetail != nil) {
+//            cell?.onUpdateCards(chainType, mMintscanProposalDetail!)
+//        }
+//        self.mMyVote_gRPC?.options.forEach { vote in
+//            cell?.onCheckMyVote_gRPC(vote.option)
+//        }
         return cell!
     }
     
     @objc func onFetch() {
-//        mFetchCnt = 2
-//        onFetchMintscanProposl(proposalId!)
-//        if (chainType == ChainType.CERTIK_MAIN) {
-//            onFetchCertikMyVote(self.proposalId!, self.account!.account_address)
-//
-//        } else {
-//            onFetchMyVote_gRPC(self.proposalId!, self.account!.account_address)
-//        }
+        mFetchCnt = 2
+        onFetchMintscanProposl(proposalId!)
+        onFetchMyVote_gRPC(self.proposalId!, self.account!.account_address)
     }
     
     var mFetchCnt = 0
@@ -173,7 +163,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         self.onUpdateView()
     }
     
-    func onFetchMintscanProposl(_ id: String) {
+    func onFetchMintscanProposl(_ id: UInt64) {
 //        let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
 //        print("url ", url)
 //        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
@@ -191,13 +181,13 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
 //        }
     }
     
-    func onFetchMyVote_gRPC(_ proposal_id: String, _ address: String) {
+    func onFetchMyVote_gRPC(_ id: UInt64, _ address: String) {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainConfig)!
                 defer { try? channel.close().wait() }
 
-                let req = Cosmos_Gov_V1beta1_QueryVoteRequest.with { $0.voter = address; $0.proposalID = UInt64(proposal_id)! }
+                let req = Cosmos_Gov_V1beta1_QueryVoteRequest.with { $0.voter = address; $0.proposalID = id }
                 if let response = try? Cosmos_Gov_V1beta1_QueryClient(channel: channel).vote(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
                     self.mMyVote_gRPC = response.vote
                 }
@@ -207,22 +197,6 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
                 print("onFetchProposalMyVote_gRPC failed: \(error)")
             }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
-        }
-    }
-    
-    func onFetchCertikMyVote(_ proposal_id: String, _ address: String) {
-        let request = Alamofire.request(BaseNetWork.myVoteUrl(self.chainConfig, proposal_id, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                if let data = res as? NSDictionary, let rawVote = data.object(forKey: "vote") as? NSDictionary {
-                    self.mCertikMyVote = CertikVote.init(rawVote)
-                }
-                
-            case .failure(let error):
-                print("onFetchCertikProposalMyVote ", error)
-            }
-            self.onFetchFinished()
         }
     }
 }
