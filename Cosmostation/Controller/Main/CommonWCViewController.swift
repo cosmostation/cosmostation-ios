@@ -29,10 +29,11 @@ class CommonWCViewController: BaseViewController {
     
     @IBOutlet weak var dappWrapView: UIView!
     @IBOutlet weak var webView: WKWebView!
-    @IBOutlet weak var dappConnectImage: UIImageView!
-    @IBOutlet weak var dappConnectLabel: UILabel!
     @IBOutlet weak var dappUrl: UILabel!
     @IBOutlet weak var dappClose: UIButton!
+    @IBOutlet weak var dappRefresh: UIButton!
+    @IBOutlet weak var dappForward: UIButton!
+    @IBOutlet weak var dappBack: UIButton!
     @IBOutlet weak var dappToolbar: UIView!
     
     @IBOutlet weak var loadingWrapView: UIView!
@@ -100,7 +101,7 @@ class CommonWCViewController: BaseViewController {
             dappWrapView.isHidden = false
             connectStatus(connected: false)
             if let url = dappURL {
-                webView.load(URLRequest(url: URL(string: "https://app.stride.zone")!))
+                webView.load(URLRequest(url: URL(string: url)!))
                 dappUrl.text = url
             }
         } else {
@@ -128,15 +129,6 @@ class CommonWCViewController: BaseViewController {
     }
     
     func connectStatus(connected: Bool) {
-        if (connected) {
-            dappConnectImage.image = UIImage(named: "ImgGovPassed")
-            dappConnectLabel.text = "Connected"
-            dappConnectLabel.textColor = UIColor.font05
-        } else {
-            dappConnectImage.image = UIImage(named: "passUp")
-            dappConnectLabel.text = "Not Connected"
-            dappConnectLabel.textColor = UIColor.font04
-        }
     }
     
     func processQuery(host: String?, query: String?) {
@@ -153,8 +145,6 @@ class CommonWCViewController: BaseViewController {
     }
     
     func initWebView() {
-        let configuration = WKWebViewConfiguration()
-        configuration.allowsInlineMediaPlayback = true
         if let file = Bundle.main.path(forResource: "injectScript", ofType: "js"), let script = try? String(contentsOfFile: file) {
             let userScript = WKUserScript(source: script,
                                           injectionTime: .atDocumentEnd,
@@ -992,6 +982,22 @@ class CommonWCViewController: BaseViewController {
     @IBAction func onCloseDapp(_ sender: UIButton) {
         self.webView.isHidden = true
         disconnect()
+    }
+    
+    @IBAction func onBack(_ sender: UIButton) {
+        if self.webView.canGoBack {
+            self.webView.goBack()
+        }
+    }
+    
+    @IBAction func onForward(_ sender: UIButton) {
+        if self.webView.canGoForward {
+            self.webView.goForward()
+        }
+    }
+    
+    @IBAction func onRefresh(_ sender: UIButton) {
+        self.webView.reload()
     }
     
     @IBAction func onClickDisconnect(_ sender: UIButton) {
