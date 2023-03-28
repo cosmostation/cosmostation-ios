@@ -1187,6 +1187,12 @@ extension CommonWCViewController: SBCardPopupDelegate {
 }
 
 extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if let host = webView.url?.host {
+            dappUrl.text = host 
+        }
+    }
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if self.webView.isHidden {
             decisionHandler(.cancel)
