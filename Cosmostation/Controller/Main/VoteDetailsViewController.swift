@@ -20,9 +20,9 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var loadingImg: LoadingImageView!
     var refresher: UIRefreshControl!
     
-    var mProposalId: UInt64?
-    var mMintscanProposalDetail: MintscanProposalDetail?
-    var mMintscanMyVote: MintscanMyVotes?
+    var proposalId: UInt64?
+    var mintscanProposalDetail: MintscanProposalDetail?
+    var mintscanMyVotes: MintscanMyVotes?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +71,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func onClickLink() {
-        let link = WUtils.getProposalExplorer(chainConfig, mProposalId!)
+        let link = WUtils.getProposalExplorer(chainConfig, proposalId!)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
     }
@@ -82,7 +82,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
             return
         }
 
-        if (mMintscanProposalDetail?.proposal_status?.localizedCaseInsensitiveContains("VOTING") == false) {
+        if (mintscanProposalDetail?.proposal_status?.localizedCaseInsensitiveContains("VOTING") == false) {
             self.onShowToast(NSLocalizedString("error_not_voting_period", comment: ""))
             return
         }
@@ -96,36 +96,47 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         }
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mProposals = [mMintscanProposalDetail!]
+        txVC.mProposals = [mintscanProposalDetail!]
         txVC.mType = TASK_TYPE_VOTE
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
-            return onBindVoteInfo(tableView)
+            let cell = tableView.dequeueReusableCell(withIdentifier:"VoteDetailTitleCell") as? VoteDetailTitleCell
+            cell?.onBindView(mintscanProposalDetail)
+            return cell!
+            
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"VoteDetailStatusCell") as? VoteDetailStatusCell
+            cell?.onBindView(mintscanProposalDetail, mintscanMyVotes)
+            return cell!
+            
         } else {
-            return onBindTally(tableView)
+            let cell = tableView.dequeueReusableCell(withIdentifier:"VoteDetailStatusCell") as? VoteDetailStatusCell
+            return cell!
+            
         }
     }
     
+    /*
     func onBindVoteInfo(_ tableView: UITableView) -> UITableViewCell {
         let cell:VoteInfoCell? = tableView.dequeueReusableCell(withIdentifier:"VoteInfoCell") as? VoteInfoCell
-        if (mMintscanProposalDetail != nil) {
-            cell?.statusImg.image = WUtils.onProposalStatusImg(mMintscanProposalDetail)
-            cell?.statusTitle.text = WUtils.onProposalStatusTxt(mMintscanProposalDetail)
-            cell?.proposalTitle.text = "# ".appending(mMintscanProposalDetail!.id!).appending("  ").appending(mMintscanProposalDetail!.title!)
-            cell?.proposerLabel.text = WUtils.onProposalProposer(mMintscanProposalDetail)
-            cell?.proposalTypeLabel.text = mMintscanProposalDetail?.proposal_type
-            cell?.voteStartTime.text = WDP.dpTime(mMintscanProposalDetail?.voting_start_time)
-            cell?.voteEndTime.text = WDP.dpTime(mMintscanProposalDetail?.voting_end_time)
-            cell?.voteDescription.text = mMintscanProposalDetail?.description
-            if let requestCoin = mMintscanProposalDetail?.content?.amount?[0] {
+        if (mintscanProposalDetail != nil) {
+            cell?.statusImg.image = WUtils.onProposalStatusImg(mintscanProposalDetail)
+            cell?.statusTitle.text = WUtils.onProposalStatusTxt(mintscanProposalDetail)
+            cell?.proposalTitle.text = "# ".appending(mintscanProposalDetail!.id!).appending("  ").appending(mintscanProposalDetail!.title!)
+            cell?.proposerLabel.text = WUtils.onProposalProposer(mintscanProposalDetail)
+            cell?.proposalTypeLabel.text = mintscanProposalDetail?.proposal_type
+            cell?.voteStartTime.text = WDP.dpTime(mintscanProposalDetail?.voting_start_time)
+            cell?.voteEndTime.text = WDP.dpTime(mintscanProposalDetail?.voting_end_time)
+            cell?.voteDescription.text = mintscanProposalDetail?.description
+            if let requestCoin = mintscanProposalDetail?.content?.amount?[0] {
                 WDP.dpCoin(chainConfig, requestCoin, cell!.requestAmountDenom, cell!.requestAmount)
             } else {
                 cell!.requestAmountDenom.text = "N/A"
@@ -143,18 +154,19 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func onBindTally(_ tableView: UITableView) -> UITableViewCell {
         let cell:VoteDetailStatusCell? = tableView.dequeueReusableCell(withIdentifier:"VoteDetailStatusCell") as? VoteDetailStatusCell
-//        if (mMintscanProposalDetail != nil) {
-//            cell?.onUpdateCards(chainType, mMintscanProposalDetail!)
+//        if (mintscanProposalDetail != nil) {
+//            cell?.onUpdateCards(chainType, mintscanProposalDetail!)
 //        }
 //        self.mMyVote_gRPC?.options.forEach { vote in
 //            cell?.onCheckMyVote_gRPC(vote.option)
 //        }
         return cell!
     }
+     */
     
     @objc func onFetch() {
         mFetchCnt = 2
-        onFetchMintscanProposl(mProposalId!)
+        onFetchMintscanProposl(proposalId!)
         onFetchMintscanMyVotes()
     }
     
@@ -162,19 +174,17 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     func onFetchFinished() {
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt > 0) { return }
-        
         self.onUpdateView()
     }
     
     func onFetchMintscanProposl(_ id: UInt64) {
         let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
-        print("url ", url)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
                 if let responseData = res as? NSDictionary {
-                    self.mMintscanProposalDetail = MintscanProposalDetail.init(responseData)
+                    self.mintscanProposalDetail = MintscanProposalDetail.init(responseData)
                 }
                 
             case .failure(let error):
@@ -193,7 +203,11 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
                 if let responseDatas = res as? NSDictionary,
                     let rawVotes = responseDatas.object(forKey: "votes") as? Array<NSDictionary> {
                     rawVotes.forEach { rawVote in
-                        
+                        let votes = MintscanMyVotes.init(rawVote)
+                        if (votes.proposal_id == self.proposalId) {
+                            self.mintscanMyVotes = votes
+                            return
+                        }
                     }
                 }
                 

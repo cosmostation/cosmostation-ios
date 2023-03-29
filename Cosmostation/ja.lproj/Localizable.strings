@@ -659,6 +659,9 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "str_vote_no" = "反対";
 "str_vote_veto" = "絶対反対";
 "str_vote_abstain" = "棄権";
+"str_vote_weight" = "比率";
+"str_vote_yet" = "無投票";
+"str_current_status" = "現在 状況 : ";
 "str_quorum" = "定足数";
 "str_current_turnout" = "現在投票率";
 "str_proposer" = "提案者";
@@ -669,6 +672,10 @@ BitcoinKitライブラリv1.0.2により、Cosmostation iOSアプリで作成さ
 "str_voting_description" = "説明";
 "str_voting_period" = "投票期間の提案";
 "str_vote_proposals" = "提案";
+"str_vote_reject_by_qourum" = "定足数が満たされていません。 もっと多くの投票が必要です。";
+"str_vote_reject_by_veto" = "定足数は決まっているが、拒否権はある。";
+"str_vote_reject_by_no" = "定足数は確定したが、過半数がNOに投票した。";
+"str_vote_pass_by_yes" = "定足数が確定し、過半数が賛成票を投じた。";
 "str_synchronize_name_service" = "ネームサービス同期";
 
 "str_tx_status" = "結果";

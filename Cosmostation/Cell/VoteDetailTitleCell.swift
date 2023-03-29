@@ -20,7 +20,12 @@ class VoteDetailTitleCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
-    func onBindView() {
-        
+    func onBindView(_ proposalDetail: MintscanProposalDetail?) {
+        if let proposalDetail = proposalDetail {
+            idLabel.text = "# ".appending(proposalDetail.id!)
+            titleLabel.text = proposalDetail.title
+            dateLabel.text =  WDP.dpTimeGap(proposalDetail.voting_end_time, false)
+            expeditedImg.isHidden = !proposalDetail.is_expedited
+        }
     }
 }

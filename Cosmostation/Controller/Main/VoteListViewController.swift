@@ -260,7 +260,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         } else {
             if (indexPath.section == 0) {
                 let voteDetailVC = VoteDetailsViewController(nibName: "VoteDetailsViewController", bundle: nil)
-                voteDetailVC.mProposalId = mFilteredProposals[indexPath.row].id!
+                voteDetailVC.proposalId = mFilteredProposals[indexPath.row].id!
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(voteDetailVC, animated: true)
                 

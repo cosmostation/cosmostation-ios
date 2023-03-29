@@ -24,6 +24,7 @@ public struct MintscanProposalDetail {
     var voting_end_time: String?
     var voteMeta: MintscanVoteMeta?
     var content: MintscanContent?
+    var is_expedited = false
     
     var myVote: String?
     
@@ -46,6 +47,7 @@ public struct MintscanProposalDetail {
         if let rawContent = dictionary?["content"] as? NSDictionary  {
             self.content = MintscanContent.init(rawContent)
         }
+        self.is_expedited = dictionary?["is_expedited"] as? Bool ?? false
     }
     
     public mutating func setMyVote(_ option: String) {
@@ -56,7 +58,17 @@ public struct MintscanProposalDetail {
         return self.myVote
     }
     
-    public func getSum() ->NSDecimalNumber {
+    public func getValidAmount() -> NSDecimalNumber {
+        var sum = NSDecimalNumber.zero
+        if (voteMeta != nil) {
+            sum = sum.adding(voteMeta!.yes_amount)
+            sum = sum.adding(voteMeta!.no_amount)
+            sum = sum.adding(voteMeta!.abstain_amount)
+        }
+        return sum
+    }
+    
+    public func getSumAmount() -> NSDecimalNumber {
         var sum = NSDecimalNumber.zero
         if (voteMeta != nil) {
             sum = sum.adding(voteMeta!.yes_amount)
@@ -67,54 +79,105 @@ public struct MintscanProposalDetail {
         return sum
     }
     
+    public func getYesAmount() -> NSDecimalNumber {
+        var sum = NSDecimalNumber.zero
+        if (voteMeta != nil) {
+            sum = sum.adding(voteMeta!.yes_amount)
+        }
+        return sum
+    }
+    
+    public func getNoAmount() -> NSDecimalNumber {
+        var sum = NSDecimalNumber.zero
+        if (voteMeta != nil) {
+            sum = sum.adding(voteMeta!.no_amount)
+        }
+        return sum
+    }
+    
+    public func getVetoAmount() -> NSDecimalNumber {
+        var sum = NSDecimalNumber.zero
+        if (voteMeta != nil) {
+            sum = sum.adding(voteMeta!.no_with_veto_amount)
+        }
+        return sum
+    }
+    
+    public func getAbstainAmount() -> NSDecimalNumber {
+        var sum = NSDecimalNumber.zero
+        if (voteMeta != nil) {
+            sum = sum.adding(voteMeta!.abstain_amount)
+        }
+        return sum
+    }
+    
     public func getYes() -> NSDecimalNumber {
-        if (getSum() == NSDecimalNumber.zero || voteMeta == nil) {
+        if (getSumAmount() == NSDecimalNumber.zero || voteMeta == nil) {
             return NSDecimalNumber.zero
         }
-        return voteMeta!.yes_amount.multiplying(byPowerOf10: 2).dividing(by: getSum(), withBehavior: WUtils.handler2)
+        return voteMeta!.yes_amount.multiplying(byPowerOf10: 2).dividing(by: getSumAmount(), withBehavior: WUtils.handler2)
     }
     
     public func getNo() -> NSDecimalNumber {
-        if (getSum() == NSDecimalNumber.zero || voteMeta == nil) {
+        if (getSumAmount() == NSDecimalNumber.zero || voteMeta == nil) {
             return NSDecimalNumber.zero
         }
-        return voteMeta!.no_amount.multiplying(byPowerOf10: 2).dividing(by: getSum(), withBehavior: WUtils.handler2)
+        return voteMeta!.no_amount.multiplying(byPowerOf10: 2).dividing(by: getSumAmount(), withBehavior: WUtils.handler2)
     }
     
     public func getVeto() -> NSDecimalNumber {
-        if (getSum() == NSDecimalNumber.zero || voteMeta == nil) {
+        if (getSumAmount() == NSDecimalNumber.zero || voteMeta == nil) {
             return NSDecimalNumber.zero
         }
-        return voteMeta!.no_with_veto_amount.multiplying(byPowerOf10: 2).dividing(by: getSum(), withBehavior: WUtils.handler2)
+        return voteMeta!.no_with_veto_amount.multiplying(byPowerOf10: 2).dividing(by: getSumAmount(), withBehavior: WUtils.handler2)
     }
     
     public func getAbstain() -> NSDecimalNumber {
-        if (getSum() == NSDecimalNumber.zero || voteMeta == nil) {
+        if (getSumAmount() == NSDecimalNumber.zero || voteMeta == nil) {
             return NSDecimalNumber.zero
         }
-        return voteMeta!.abstain_amount.multiplying(byPowerOf10: 2).dividing(by: getSum(), withBehavior: WUtils.handler2)
+        return voteMeta!.abstain_amount.multiplying(byPowerOf10: 2).dividing(by: getSumAmount(), withBehavior: WUtils.handler2)
     }
     
     public func getTurnout() -> NSDecimalNumber {
         guard let param = BaseData.instance.mParam else {
             return NSDecimalNumber.zero
         }
-        if (getSum() == NSDecimalNumber.zero || voteMeta == nil) {
+        if (getSumAmount() == NSDecimalNumber.zero || voteMeta == nil) {
             return NSDecimalNumber.zero
         }
-        return getSum().multiplying(byPowerOf10: 2).dividing(by: param.getTurnoutBondedAmount(), withBehavior: WUtils.handler2)
+        return getSumAmount().multiplying(byPowerOf10: 2).dividing(by: param.getTurnoutBondedAmount(), withBehavior: WUtils.handler2)
     }
     
     public func isScam() -> Bool {
-        print("isScam getYes ", getYes())
-        print("isScam getSum ", getSum())
-        if (getYes() == NSDecimalNumber.zero || getSum() == NSDecimalNumber.zero) {
+        if (getYesAmount() == NSDecimalNumber.zero || getSumAmount() == NSDecimalNumber.zero) {
             return true
         }
-        if (getYes().dividing(by: getSum()).compare(NSDecimalNumber(string: "0.1")).rawValue > 0) {
+        if (getYesAmount().dividing(by: getSumAmount()).compare(NSDecimalNumber(string: "0.1")).rawValue > 0) {
             return false
         }
         return true
+    }
+    
+    public func getStatus() -> (pass: Bool, reason: String) {
+        guard let param = BaseData.instance.mParam else {
+            return (false, "")
+        }
+        let quorum = is_expedited == true ? param.getExpeditedQuorum() : param.getQuorum()
+        let threshold = param.getThreshold()
+        let vetoThreshold = param.getVetoThreshold()
+        let bondedAmount = param.getTurnoutBondedAmount()
+        
+        if (bondedAmount.multiplying(by: quorum).compare(getSumAmount()).rawValue > 0) {
+            return (false, NSLocalizedString("str_vote_reject_by_qourum", comment: ""))
+        }
+        if (getSumAmount().multiplying(by: vetoThreshold).compare(getVetoAmount()).rawValue < 0) {
+            return (false, NSLocalizedString("str_vote_reject_by_veto", comment: ""))
+        }
+        if (getValidAmount().multiplying(by: threshold).compare(getYesAmount()).rawValue > 0) {
+            return (false, NSLocalizedString("str_vote_reject_by_no", comment: ""))
+        }
+        return (true, NSLocalizedString("str_vote_pass_by_yes", comment: ""))
     }
 }
 

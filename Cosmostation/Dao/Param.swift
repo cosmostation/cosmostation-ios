@@ -254,6 +254,38 @@ public struct Param {
         return NSDecimalNumber.zero
     }
     
+    func getExpeditedQuorum() -> NSDecimalNumber {
+        if let rawExpeditedQuorum = params?.gov_tallying?.tally_params?.expedited_threshold {
+            return NSDecimalNumber.init(string: rawExpeditedQuorum)
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    func getThreshold() -> NSDecimalNumber {
+        if let rawThreshold = params?.gov_tallying?.threshold {
+            return NSDecimalNumber.init(string: rawThreshold)
+        }
+        if let rawThreshold = params?.gov_tallying?.tally_params?.threshold {
+            return NSDecimalNumber.init(string: rawThreshold)
+        }
+        //for certic custom tally
+        if let rawThreshold = params?.gov_tallying?.tally_params?.default_tally?.threshold {
+            return NSDecimalNumber.init(string: rawThreshold)
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    func getVetoThreshold() -> NSDecimalNumber {
+        if let rawThreshold = params?.gov_tallying?.tally_params?.veto_threshold {
+            return NSDecimalNumber.init(string: rawThreshold)
+        }
+        //for certic custom tally
+        if let rawThreshold = params?.gov_tallying?.tally_params?.default_tally?.veto_threshold {
+            return NSDecimalNumber.init(string: rawThreshold)
+        }
+        return NSDecimalNumber.zero
+    }
+    
     func isPoolEnabled(_ id: Int) -> Bool? {
         return params?.enabled_pools?.contains(id)
     }
@@ -762,11 +794,13 @@ public struct GovTallying {
         var veto: String?
         var quorum: String?
         var threshold: String?
+        var veto_threshold: String?
         
         init(_ dictionary: NSDictionary?) {
             self.veto = dictionary?["veto"] as? String
             self.quorum = dictionary?["quorum"] as? String
             self.threshold = dictionary?["threshold"] as? String
+            self.veto_threshold = dictionary?["veto_threshold"] as? String
         }
     }
 }

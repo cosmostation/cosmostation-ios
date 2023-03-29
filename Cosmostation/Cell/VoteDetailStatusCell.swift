@@ -10,147 +10,111 @@ import UIKit
 
 class VoteDetailStatusCell: UITableViewCell {
     
-    @IBOutlet weak var cardYes: CardView!
+    @IBOutlet weak var currentStatusTitle: UILabel!
+    @IBOutlet weak var myVoteTitle: UILabel!
+    @IBOutlet weak var quorumTitle: UILabel!
+    @IBOutlet weak var turnoutTitle: UILabel!
+    
+    @IBOutlet weak var currentStatusLabel: UILabel!
+    @IBOutlet weak var reasonLabel: UILabel!
+    @IBOutlet weak var myVoteImg: UIImageView!
+    @IBOutlet weak var myVoteLabel: UILabel!
+    @IBOutlet weak var quorumLabel: UILabel!
+    @IBOutlet weak var turnoutLabel: UILabel!
+    
+    
     @IBOutlet weak var titleYes: UILabel!
     @IBOutlet weak var progressYes: UIProgressView!
     @IBOutlet weak var percentYes: UILabel!
-    @IBOutlet weak var myVoteYes: UIImageView!
-    @IBOutlet weak var cntYes: UILabel!
-    
-    @IBOutlet weak var cardNo: CardView!
     @IBOutlet weak var titleNo: UILabel!
     @IBOutlet weak var progressNo: UIProgressView!
     @IBOutlet weak var percentNo: UILabel!
-    @IBOutlet weak var myVoteNo: UIImageView!
-    @IBOutlet weak var cntNo: UILabel!
-    
-    @IBOutlet weak var cardVeto: CardView!
     @IBOutlet weak var titleVeto: UILabel!
     @IBOutlet weak var progressVeto: UIProgressView!
     @IBOutlet weak var percentVeto: UILabel!
-    @IBOutlet weak var myVoteVeto: UIImageView!
-    @IBOutlet weak var cntVeto: UILabel!
-    
-    @IBOutlet weak var cardAbstain: CardView!
     @IBOutlet weak var titleAbstain: UILabel!
     @IBOutlet weak var propressAbstain: UIProgressView!
     @IBOutlet weak var percentAbstain: UILabel!
-    @IBOutlet weak var myVoteAbstain: UIImageView!
-    @IBOutlet weak var cntAbstain: UILabel!
-    
-    @IBOutlet weak var quorumTitle: UILabel!
-    @IBOutlet weak var quorumRate: UILabel!
-    @IBOutlet weak var turnoutTitle: UILabel!
-    @IBOutlet weak var turnoutRate: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        myVoteYes.image = myVoteYes.image?.withRenderingMode(.alwaysTemplate)
-        myVoteYes.tintColor = UIColor.font05
-        titleYes.text = NSLocalizedString("str_vote_yes", comment: "")
-        myVoteNo.image = myVoteNo.image?.withRenderingMode(.alwaysTemplate)
-        myVoteNo.tintColor = UIColor.font05
-        titleNo.text = NSLocalizedString("str_vote_no", comment: "")
-        myVoteVeto.image = myVoteVeto.image?.withRenderingMode(.alwaysTemplate)
-        myVoteVeto.tintColor = UIColor.font05
-        titleVeto.text = NSLocalizedString("str_vote_veto", comment: "")
-        myVoteAbstain.image = myVoteAbstain.image?.withRenderingMode(.alwaysTemplate)
-        myVoteAbstain.tintColor = UIColor.font05
-        titleAbstain.text = NSLocalizedString("str_vote_abstain", comment: "")
-        
+        currentStatusTitle.text = NSLocalizedString("str_current_status", comment: "")
+        myVoteTitle.text = NSLocalizedString("str_opinion", comment: "")
         quorumTitle.text = NSLocalizedString("str_quorum", comment: "")
         turnoutTitle.text = NSLocalizedString("str_current_turnout", comment: "")
+        titleYes.text = NSLocalizedString("str_vote_yes", comment: "")
+        titleNo.text = NSLocalizedString("str_vote_no", comment: "")
+        titleVeto.text = NSLocalizedString("str_vote_veto", comment: "")
+        titleAbstain.text = NSLocalizedString("str_vote_abstain", comment: "")
     }
     
-    func onCheckMyVote_gRPC(_ option: Cosmos_Gov_V1beta1_VoteOption?) {
-        if (option == nil) { return }
-        onCheckDim()
-        if (option == Cosmos_Gov_V1beta1_VoteOption.yes) {
-            cardYes.borderWidth = 1
-            myVoteYes.isHidden = false
-            titleYes.textColor = UIColor.init(named: "_voteYes")
-            progressYes.progressTintColor = UIColor(named: "_voteYes")
-            percentYes.textColor = UIColor.font05
-            cntYes.textColor = UIColor.font05
+    func onBindView(_ proposalDetail: MintscanProposalDetail?, _ myVotes: MintscanMyVotes?) {
+        
+        if let detail = proposalDetail {
+            if (proposalDetail?.is_expedited == true) {
+                quorumLabel.attributedText = WUtils.displayPercent(WUtils.expeditedQuorum().multiplying(byPowerOf10: 2), quorumLabel.font)
+            } else {
+                quorumLabel.attributedText = WUtils.displayPercent(WUtils.systemQuorum().multiplying(byPowerOf10: 2), quorumLabel.font)
+            }
+            turnoutLabel.attributedText = WUtils.displayPercent(detail.getTurnout(), turnoutLabel.font)
+            
+            let status = detail.getStatus()
+            if (status.pass == true) {
+                currentStatusLabel.text = "PASS"
+                currentStatusLabel.textColor = UIColor(named: "_voteYes")
+            } else {
+                currentStatusLabel.text = "REJECT"
+                currentStatusLabel.textColor = UIColor(named: "_voteNo")
+            }
+            reasonLabel.text = status.reason
+            
+            progressYes.progress = detail.getYes().floatValue / 100
+            progressNo.progress = detail.getNo().floatValue / 100
+            progressVeto.progress = detail.getVeto().floatValue / 100
+            propressAbstain.progress = detail.getAbstain().floatValue / 100
 
-        } else if (option == Cosmos_Gov_V1beta1_VoteOption.no) {
-            cardNo.borderWidth = 1
-            myVoteNo.isHidden = false
-            titleNo.textColor = UIColor.init(named: "_voteNo")
-            progressNo.progressTintColor = UIColor(named: "_voteNo")
-            percentNo.textColor = UIColor.font05
-            cntNo.textColor = UIColor.font05
-
-        } else if (option == Cosmos_Gov_V1beta1_VoteOption.noWithVeto) {
-            cardVeto.borderWidth = 1
-            myVoteVeto.isHidden = false
-            titleVeto.textColor = UIColor.init(named: "_voteVeto")
-            progressVeto.progressTintColor = UIColor(named: "_voteVeto")
-            percentVeto.textColor = UIColor.font05
-            cntVeto.textColor = UIColor.font05
-
-        } else if (option == Cosmos_Gov_V1beta1_VoteOption.abstain) {
-            cardAbstain.borderWidth = 1
-            myVoteAbstain.isHidden = false
-            titleAbstain.textColor = UIColor.init(named: "_voteAbstain")
-            propressAbstain.progressTintColor = UIColor(named: "_voteAbstain")
-            percentAbstain.textColor = UIColor.font05
-            cntAbstain.textColor = UIColor.font05
+            percentYes.attributedText = WUtils.displayPercent(detail.getYes(), percentYes.font)
+            percentNo.attributedText = WUtils.displayPercent(detail.getNo(), percentNo.font)
+            percentVeto.attributedText = WUtils.displayPercent(detail.getVeto(), percentVeto.font)
+            percentAbstain.attributedText = WUtils.displayPercent(detail.getAbstain(), percentAbstain.font)
         }
-    }
-    
-    func onCheckDim() {
-        titleYes.textColor = UIColor.font03
-        progressYes.progressTintColor = UIColor.font04
-        percentYes.textColor = UIColor.font03
-        cntYes.textColor = UIColor.font03
         
-        titleNo.textColor = UIColor.font03
-        progressNo.progressTintColor = UIColor.font04
-        percentNo.textColor = UIColor.font03
-        cntNo.textColor = UIColor.font03
-        
-        titleVeto.textColor = UIColor.font03
-        progressVeto.progressTintColor = UIColor.font04
-        percentVeto.textColor = UIColor.font03
-        cntVeto.textColor = UIColor.font03
-        
-        titleAbstain.textColor = UIColor.font03
-        propressAbstain.progressTintColor = UIColor.font04
-        percentAbstain.textColor = UIColor.font03
-        cntAbstain.textColor = UIColor.font03
-    }
-    
-    
-    func onUpdateCards(_ chain: ChainType?, _ detail: MintscanProposalDetail) {
-        progressYes.progress = detail.getYes().floatValue / 100
-        progressNo.progress = detail.getNo().floatValue / 100
-        progressVeto.progress = detail.getVeto().floatValue / 100
-        propressAbstain.progress = detail.getAbstain().floatValue / 100
-
-        percentYes.attributedText = WUtils.displayPercent(detail.getYes(), percentYes.font)
-        percentNo.attributedText = WUtils.displayPercent(detail.getNo(), percentNo.font)
-        percentVeto.attributedText = WUtils.displayPercent(detail.getVeto(), percentVeto.font)
-        percentAbstain.attributedText = WUtils.displayPercent(detail.getAbstain(), percentAbstain.font)
-        
-        if (detail.proposal_status?.contains("VOTING") == true) {
-            cntYes.isHidden = false
-            cntNo.isHidden = false
-            cntVeto.isHidden = false
-            cntAbstain.isHidden = false
+        if let myVotes = myVotes {
+            if (myVotes.votes.count > 1) {
+                myVoteImg.image = UIImage.init(named: "imgMyVoteWeight")
+                myVoteLabel.text = NSLocalizedString("str_vote_weight", comment: "").uppercased()
+                myVoteLabel.textColor = UIColor(named: "_voteWeight")
+                
+            } else {
+                let myVote = myVotes.votes[0]
+                if (myVote.option?.contains("OPTION_YES") == true) {
+                    myVoteImg.image = UIImage.init(named: "imgMyVoteYes")
+                    myVoteLabel.text = NSLocalizedString("str_vote_yes", comment: "").uppercased()
+                    myVoteLabel.textColor = UIColor(named: "_voteYes")
+                    return
+                } else if (myVote.option?.contains("OPTION_NO_WITH_VETO") == true) {
+                    myVoteImg.image = UIImage.init(named: "imgMyVoteVeto")
+                    myVoteLabel.text = NSLocalizedString("str_vote_veto", comment: "").uppercased()
+                    myVoteLabel.textColor = UIColor(named: "_voteVeto")
+                    return
+                } else if (myVote.option?.contains("OPTION_NO") == true) {
+                    myVoteImg.image = UIImage.init(named: "imgMyVoteNo")
+                    myVoteLabel.text = NSLocalizedString("str_vote_no", comment: "").uppercased()
+                    myVoteLabel.textColor = UIColor(named: "_voteNo")
+                    return
+                } else if (myVote.option?.contains("OPTION_ABSTAIN") == true) {
+                    myVoteImg.image = UIImage.init(named: "imgMyVoteAbstain")
+                    myVoteLabel.text = NSLocalizedString("str_vote_abstain", comment: "").uppercased()
+                    myVoteLabel.textColor = UIColor(named: "_voteAbstain")
+                    return
+                }
+            }
             
-            cntYes.text = detail.voteMeta?.yes ?? "0"
-            cntNo.text = detail.voteMeta?.no ?? "0"
-            cntVeto.text = detail.voteMeta?.no_with_veto ?? "0"
-            cntAbstain.text = detail.voteMeta?.abstain ?? "0"
-            
-            quorumTitle.isHidden = false
-            quorumRate.isHidden = false
-            turnoutRate.isHidden = false
-            turnoutTitle.isHidden = false
-            quorumRate.attributedText = WUtils.displayPercent(WUtils.systemQuorum(chain).multiplying(byPowerOf10: 2), quorumRate.font)
-            turnoutRate.attributedText = WUtils.displayPercent(detail.getTurnout(), turnoutRate.font)
+        } else {
+            myVoteImg.image = UIImage.init(named: "imgMyVoteNone")
+            myVoteLabel.text = NSLocalizedString("str_vote_yet", comment: "").uppercased()
+            myVoteLabel.textColor = UIColor(named: "_voteNotVoted")
         }
     }
 }

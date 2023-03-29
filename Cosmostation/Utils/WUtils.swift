@@ -117,9 +117,9 @@ public class WUtils {
         } else {
             gapTime = gapTime * -1
             if gapTime < day {
-                return "(D-day)"
+                return "H-\(gapTime / hour)"
             } else {
-                return "(D-\(gapTime / day))"
+                return "D-\(gapTime / day)"
             }
         }
     }
@@ -722,9 +722,30 @@ public class WUtils {
     }
     
     
-    static func systemQuorum(_ chain: ChainType?) -> NSDecimalNumber {
+    static func systemQuorum() -> NSDecimalNumber {
         if (BaseData.instance.mParam != nil) {
             return BaseData.instance.mParam!.getQuorum()
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    static func expeditedQuorum() -> NSDecimalNumber {
+        if (BaseData.instance.mParam != nil) {
+            return BaseData.instance.mParam!.getExpeditedQuorum()
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    static func systemThreshold() -> NSDecimalNumber {
+        if (BaseData.instance.mParam != nil) {
+            return BaseData.instance.mParam!.getThreshold()
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    static func systemVetoThreshold() -> NSDecimalNumber {
+        if (BaseData.instance.mParam != nil) {
+            return BaseData.instance.mParam!.getVetoThreshold()
         }
         return NSDecimalNumber.zero
     }

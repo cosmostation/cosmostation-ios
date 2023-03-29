@@ -28,7 +28,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" text="description" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zfd-PB-8pe">
-                                <rect key="frame" x="15" y="42.666666666666664" width="409" height="25.333333333333336"/>
+                                <rect key="frame" x="15" y="40.666666666666664" width="409" height="27.333333333333336"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -54,7 +54,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
+                                        <integer key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -75,7 +75,7 @@
                             <constraint firstItem="Zfd-PB-8pe" firstAttribute="leading" secondItem="F6I-xp-eML" secondAttribute="leading" constant="15" id="FHI-Te-UGc"/>
                             <constraint firstItem="bQO-6c-rLT" firstAttribute="centerY" secondItem="XPd-5P-erM" secondAttribute="centerY" id="Fx2-8q-B8j"/>
                             <constraint firstItem="XPd-5P-erM" firstAttribute="top" secondItem="F6I-xp-eML" secondAttribute="top" constant="14" id="Plw-AW-gO8"/>
-                            <constraint firstItem="Zfd-PB-8pe" firstAttribute="top" secondItem="XPd-5P-erM" secondAttribute="bottom" constant="10" id="Wfb-Du-fGO"/>
+                            <constraint firstItem="Zfd-PB-8pe" firstAttribute="top" secondItem="XPd-5P-erM" secondAttribute="bottom" constant="8" id="Wfb-Du-fGO"/>
                             <constraint firstAttribute="trailing" secondItem="Zfd-PB-8pe" secondAttribute="trailing" constant="15" id="as9-YW-b7a"/>
                             <constraint firstItem="qjn-y5-qPg" firstAttribute="centerY" secondItem="XPd-5P-erM" secondAttribute="centerY" id="o0P-tu-bYT"/>
                             <constraint firstItem="XPd-5P-erM" firstAttribute="leading" secondItem="F6I-xp-eML" secondAttribute="leading" constant="15" id="pYV-A6-aqZ"/>
@@ -109,6 +109,12 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="dateLabel" destination="oxm-i2-7bF" id="3f9-Z1-SWv"/>
+                <outlet property="expeditedImg" destination="bQO-6c-rLT" id="3fN-7J-t0U"/>
+                <outlet property="idLabel" destination="XPd-5P-erM" id="Cdh-Ya-jYh"/>
+                <outlet property="titleLabel" destination="Zfd-PB-8pe" id="qgG-gx-5Jk"/>
+            </connections>
             <point key="canvasLocation" x="248.09160305343511" y="36.619718309859159"/>
         </tableViewCell>
     </objects>
