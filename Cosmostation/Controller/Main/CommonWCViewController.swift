@@ -1489,7 +1489,7 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_supportedChainIds") {
-                let data = ["official": ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1"], "unofficial": []]
+                let data = ["official": ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1", "core-1"], "unofficial": []]
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_signAmino") {
