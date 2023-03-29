@@ -60,7 +60,6 @@ class CommonWCViewController: BaseViewController {
     var accountChainSet = Set<String>()
     var accountSelectedSet = Set<Account>()
     var injectRequest: JSON?
-    var injectBody: JSON?
     
     private var beginingPoint: CGPoint?
     var isViewShowed: Bool = true
@@ -873,7 +872,7 @@ class CommonWCViewController: BaseViewController {
         var data = JSON()
         let privateKey = getPrivateKey(account: account!)
         let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
-        if let json = self.injectRequest,
+        if let json = self.injectRequest?["params"]["doc"],
            let chainId = json["chain_id"].rawString(),
            let bodyBase64Decoded = Data.fromHex2(json["body_bytes"].stringValue),
            let bodyBytes = try? Cosmos_Tx_V1beta1_TxBody.init(serializedData: bodyBase64Decoded),
@@ -892,8 +891,8 @@ class CommonWCViewController: BaseViewController {
             }
         }
         
-        data["signed_doc"] = self.injectRequest!
-        let retVal = ["response": ["result": data], "message": injectBody]
+        data["signed_doc"] = self.injectRequest!["params"]["doc"]
+        let retVal = ["response": ["result": data], "message": injectRequest, "isCosmostation": true]
         self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
     }
     
@@ -901,20 +900,20 @@ class CommonWCViewController: BaseViewController {
         var data = JSON()
         let privateKey = getPrivateKey(account: account!)
         let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
-        let sortedJsonData = try! self.injectRequest!.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
+        let sortedJsonData = try! self.injectRequest!["params"]["doc"].rawData(options: [.sortedKeys, .withoutEscapingSlashes])
         let rawOrderdDocSha = sortedJsonData.sha256()
         if let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: privateKey) {
             data["pub_key"] = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : publicKey.base64EncodedString()]
             data["signature"].stringValue = signature.base64EncodedString()
         }
         
-        data["signed_doc"] = self.injectRequest!
-        let retVal = ["response": ["result": data], "message": injectBody]
+        data["signed_doc"] = self.injectRequest!["params"]["doc"]
+        let retVal = ["response": ["result": data], "message": injectRequest, "isCosmostation": true]
         self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
     }
     
     func rejectInject() {
-        let retVal = ["response": ["error": "cancel"], "message": injectRequest]
+        let retVal = ["response": ["error": "Cancel"], "message": injectRequest, "isCosmostation": true]
         self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
     }
     
@@ -1471,9 +1470,11 @@ extension CommonWCViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if (message.name == "station") {
             let bodyJSON = JSON(parseJSON: message.body as? String ?? "")
-            let method = bodyJSON["method"].stringValue
+            let isCosmostation = bodyJSON["isCosmostation"].boolValue
+            let messageJSON = bodyJSON["message"]
+            let method = messageJSON["method"].stringValue
             if (method == "cos_requestAccount" || method == "cos_account" || method == "ten_requestAccount" || method == "ten_account") {
-                let params = bodyJSON["params"]
+                let params = messageJSON["params"]
                 let chainId = params["chainName"].stringValue
                 let chainType = WUtils.getChainTypeByChainId(chainId)
                 let chainConfig = ChainFactory.getChainConfig(chainType)
@@ -1485,26 +1486,25 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 data["name"].stringValue = self.account?.account_nick_name ?? ""
                 data["address"].stringValue = WKey.getDpAddress(chainConfig!, privateKey, 0)
                 data["publicKey"].stringValue = KeyFac.getPublicFromPrivateKey(privateKey).toHexString()
-                let retVal = ["response": ["result": data], "message": bodyJSON]
+                let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_supportedChainIds") {
-                let data = ["official": ["cosmoshub-4", "osmosis-1", "stride-1", "injective-1"], "unofficial": []]
-                let retVal = ["response": ["result": data], "message": bodyJSON]
+                let data = ["official": ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1"], "unofficial": []]
+                let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_signAmino") {
-                let params = bodyJSON["params"]
+                let params = messageJSON["params"]
                 let doc = params["doc"]
-                self.injectBody = bodyJSON
-                self.injectRequest = doc
+                self.injectRequest = messageJSON
                 self.onShowPopupForRequest(WcRequestType.INJECT_SIGN_AMINO, try! doc.rawData())
             } else if (method == "cos_signDirect") {
-                let params = bodyJSON["params"]
+                let params = messageJSON["params"]
                 let doc = params["doc"]
-                self.injectBody = bodyJSON
-                self.injectRequest = doc
+                self.injectRequest = messageJSON
                 self.onShowPopupForRequest(WcRequestType.INJECT_SIGN_DIRECT, try! doc.rawData())
             } else {
-                
+                let retVal = ["response": ["error": "Not implemented"], "message": messageJSON, "isCosmostation": true]
+                self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             }
         }
     }
