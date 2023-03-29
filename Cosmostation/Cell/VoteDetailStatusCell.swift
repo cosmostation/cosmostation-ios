@@ -1,5 +1,5 @@
 //
-//  VoteTallyTableViewCell.swift
+//  VoteDetailStatusCell.swift
 //  Cosmostation
 //
 //  Created by 정용주 on 2020/05/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VoteTallyTableViewCell: UITableViewCell {
+class VoteDetailStatusCell: UITableViewCell {
     
     @IBOutlet weak var cardYes: CardView!
     @IBOutlet weak var titleYes: UILabel!

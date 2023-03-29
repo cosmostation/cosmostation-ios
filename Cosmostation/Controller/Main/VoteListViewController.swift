@@ -259,11 +259,11 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
 
         } else {
             if (indexPath.section == 0) {
-                let proposal = mFilteredProposals[indexPath.row]
-                let voteDetailsVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VoteDetailsViewController") as! VoteDetailsViewController
-                voteDetailsVC.proposalId = proposal.id!
+                let voteDetailVC = VoteDetailsViewController(nibName: "VoteDetailsViewController", bundle: nil)
+                voteDetailVC.mProposalId = mFilteredProposals[indexPath.row].id!
                 self.navigationItem.title = ""
-                self.navigationController?.pushViewController(voteDetailsVC, animated: true)
+                self.navigationController?.pushViewController(voteDetailVC, animated: true)
+                
             } else {
                 let proposal = mFilteredEtcProposals[indexPath.row]
                 onExplorerLink(proposal.id!)

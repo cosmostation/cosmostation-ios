@@ -14,14 +14,15 @@ import NIO
 
 class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var vcTitleLabel: UILabel!
     @IBOutlet weak var voteDetailTableView: UITableView!
     @IBOutlet weak var btnVote: UIButton!
     @IBOutlet weak var loadingImg: LoadingImageView!
     var refresher: UIRefreshControl!
     
-    var proposalId: UInt64?
+    var mProposalId: UInt64?
     var mMintscanProposalDetail: MintscanProposalDetail?
-    var mMyVote_gRPC: Cosmos_Gov_V1beta1_Vote?
+    var mMintscanMyVote: MintscanMyVotes?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +33,9 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         self.voteDetailTableView.delegate = self
         self.voteDetailTableView.dataSource = self
         self.voteDetailTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.voteDetailTableView.register(UINib(nibName: "VoteInfoTableViewCell", bundle: nil), forCellReuseIdentifier: "VoteInfoTableViewCell")
-        self.voteDetailTableView.register(UINib(nibName: "VoteTallyTableViewCell", bundle: nil), forCellReuseIdentifier: "VoteTallyTableViewCell")
+        self.voteDetailTableView.register(UINib(nibName: "VoteDetailTitleCell", bundle: nil), forCellReuseIdentifier: "VoteDetailTitleCell")
+        self.voteDetailTableView.register(UINib(nibName: "VoteInfoCell", bundle: nil), forCellReuseIdentifier: "VoteInfoCell")
+        self.voteDetailTableView.register(UINib(nibName: "VoteDetailStatusCell", bundle: nil), forCellReuseIdentifier: "VoteDetailStatusCell")
         self.voteDetailTableView.rowHeight = UITableView.automaticDimension
         self.voteDetailTableView.estimatedRowHeight = UITableView.automaticDimension
         
@@ -42,6 +44,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         refresher.tintColor = UIColor.font05
         voteDetailTableView.addSubview(refresher)
         
+        self.vcTitleLabel.text = NSLocalizedString("title_vote_detail", comment: "")
         self.btnVote.setTitle(NSLocalizedString("str_vote", comment: ""), for: .normal)
         
         self.loadingImg.onStartAnimation()
@@ -50,11 +53,8 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_vote_detail", comment: "")
-        self.navigationItem.title = NSLocalizedString("title_vote_detail", comment: "")
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.navigationBar.topItem?.title = "";
     }
     
     func onUpdateView() {
@@ -66,12 +66,15 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         self.refresher.endRefreshing()
     }
     
-    func onClickLink() {
-        let link = WUtils.getProposalExplorer(chainConfig, proposalId!)
+    @IBAction func onClickBack(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func onClickLink() {
+        let link = WUtils.getProposalExplorer(chainConfig, mProposalId!)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
     }
-    
     
     @IBAction func onClickVote(_ sender: UIButton) {
         if (!account!.account_has_private) {
@@ -112,7 +115,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onBindVoteInfo(_ tableView: UITableView) -> UITableViewCell {
-        let cell:VoteInfoTableViewCell? = tableView.dequeueReusableCell(withIdentifier:"VoteInfoTableViewCell") as? VoteInfoTableViewCell
+        let cell:VoteInfoCell? = tableView.dequeueReusableCell(withIdentifier:"VoteInfoCell") as? VoteInfoCell
         if (mMintscanProposalDetail != nil) {
             cell?.statusImg.image = WUtils.onProposalStatusImg(mMintscanProposalDetail)
             cell?.statusTitle.text = WUtils.onProposalStatusTxt(mMintscanProposalDetail)
@@ -128,9 +131,9 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
                 cell!.requestAmountDenom.text = "N/A"
             }
         }
-        cell?.actionLink = {
-            self.onClickLink()
-        }
+//        cell?.actionLink = {
+//            self.onClickLink()
+//        }
         cell?.actionToggle = {
             cell?.voteDescription.isScrollEnabled = !(cell?.voteDescription.isScrollEnabled)!
             self.voteDetailTableView.reloadData()
@@ -139,7 +142,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onBindTally(_ tableView: UITableView) -> UITableViewCell {
-        let cell:VoteTallyTableViewCell? = tableView.dequeueReusableCell(withIdentifier:"VoteTallyTableViewCell") as? VoteTallyTableViewCell
+        let cell:VoteDetailStatusCell? = tableView.dequeueReusableCell(withIdentifier:"VoteDetailStatusCell") as? VoteDetailStatusCell
 //        if (mMintscanProposalDetail != nil) {
 //            cell?.onUpdateCards(chainType, mMintscanProposalDetail!)
 //        }
@@ -151,8 +154,8 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     
     @objc func onFetch() {
         mFetchCnt = 2
-        onFetchMintscanProposl(proposalId!)
-        onFetchMyVote_gRPC(self.proposalId!, self.account!.account_address)
+        onFetchMintscanProposl(mProposalId!)
+        onFetchMintscanMyVotes()
     }
     
     var mFetchCnt = 0
@@ -164,39 +167,40 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onFetchMintscanProposl(_ id: UInt64) {
-//        let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
-//        print("url ", url)
-//        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-//        request.responseJSON { (response) in
-//            switch response.result {
-//            case .success(let res):
-//                if let responseData = res as? NSDictionary {
-//                    self.mMintscanProposalDetail = MintscanProposalDetail.init(responseData)
-//                }
-//                
-//            case .failure(let error):
-//                print("onFetchMintscanProposl ", error)
-//            }
-//            self.onFetchFinished()
-//        }
+        let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
+        print("url ", url)
+        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let responseData = res as? NSDictionary {
+                    self.mMintscanProposalDetail = MintscanProposalDetail.init(responseData)
+                }
+                
+            case .failure(let error):
+                print("onFetchMintscanProposl ", error)
+            }
+            self.onFetchFinished()
+        }
     }
     
-    func onFetchMyVote_gRPC(_ id: UInt64, _ address: String) {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.chainConfig)!
-                defer { try? channel.close().wait() }
-
-                let req = Cosmos_Gov_V1beta1_QueryVoteRequest.with { $0.voter = address; $0.proposalID = id }
-                if let response = try? Cosmos_Gov_V1beta1_QueryClient(channel: channel).vote(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
-                    self.mMyVote_gRPC = response.vote
+    func onFetchMintscanMyVotes() {
+        let url = BaseNetWork.mintscanMyVotes(self.chainConfig!, self.account!.account_address)
+        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let responseDatas = res as? NSDictionary,
+                    let rawVotes = responseDatas.object(forKey: "votes") as? Array<NSDictionary> {
+                    rawVotes.forEach { rawVote in
+                        
+                    }
                 }
-                try channel.close().wait()
                 
-            } catch {
-                print("onFetchProposalMyVote_gRPC failed: \(error)")
+            case .failure(let error):
+                print("onFetchMintscanMyVotes ", error)
             }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+            self.onFetchFinished()
         }
     }
 }

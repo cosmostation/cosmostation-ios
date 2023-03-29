@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="KGk-i7-Jjw" customClass="VoteDetailTitleCell" customModule="Cosmostation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="463" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="463" height="90"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6I-xp-eML" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
+                        <rect key="frame" x="12" y="4" width="439" height="82"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPd-5P-erM">
+                                <rect key="frame" x="14.999999999999996" y="14.000000000000002" width="35.666666666666657" height="18.666666666666671"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                <color key="textColor" name="_font05"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" text="description" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zfd-PB-8pe">
+                                <rect key="frame" x="15" y="42.666666666666664" width="409" height="25.333333333333336"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                <color key="textColor" name="_font05"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qjn-y5-qPg">
+                                <rect key="frame" x="370" y="12" width="57" height="23"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D -1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oxm-i2-7bF">
+                                        <rect key="frame" x="16" y="4" width="25" height="15"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
+                                        <color key="textColor" name="_font05"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="_font03"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="oxm-i2-7bF" secondAttribute="bottom" constant="4" id="1nL-9r-oLW"/>
+                                    <constraint firstItem="oxm-i2-7bF" firstAttribute="centerX" secondItem="qjn-y5-qPg" secondAttribute="centerX" id="D5N-lQ-QHj"/>
+                                    <constraint firstAttribute="trailing" secondItem="oxm-i2-7bF" secondAttribute="trailing" constant="16" id="RBL-TY-GMo"/>
+                                    <constraint firstItem="oxm-i2-7bF" firstAttribute="leading" secondItem="qjn-y5-qPg" secondAttribute="leading" constant="16" id="Wzc-bX-LvS"/>
+                                    <constraint firstItem="oxm-i2-7bF" firstAttribute="top" secondItem="qjn-y5-qPg" secondAttribute="top" constant="4" id="vNH-37-cxo"/>
+                                    <constraint firstItem="oxm-i2-7bF" firstAttribute="centerY" secondItem="qjn-y5-qPg" secondAttribute="centerY" id="ypK-62-CpY"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_expedited_proposal" translatesAutoresizingMaskIntoConstraints="NO" id="bQO-6c-rLT">
+                                <rect key="frame" x="54.666666666666671" y="11.333333333333336" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="K1l-Od-o5Z"/>
+                                    <constraint firstAttribute="height" constant="24" id="Oya-1N-PPU"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" name="_card_bg"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Zfd-PB-8pe" secondAttribute="bottom" constant="14" id="4EJ-53-fQX"/>
+                            <constraint firstItem="bQO-6c-rLT" firstAttribute="leading" secondItem="XPd-5P-erM" secondAttribute="trailing" constant="4" id="5cW-fZ-kkZ"/>
+                            <constraint firstAttribute="trailing" secondItem="qjn-y5-qPg" secondAttribute="trailing" constant="12" id="5lw-FI-4kR"/>
+                            <constraint firstItem="Zfd-PB-8pe" firstAttribute="leading" secondItem="F6I-xp-eML" secondAttribute="leading" constant="15" id="FHI-Te-UGc"/>
+                            <constraint firstItem="bQO-6c-rLT" firstAttribute="centerY" secondItem="XPd-5P-erM" secondAttribute="centerY" id="Fx2-8q-B8j"/>
+                            <constraint firstItem="XPd-5P-erM" firstAttribute="top" secondItem="F6I-xp-eML" secondAttribute="top" constant="14" id="Plw-AW-gO8"/>
+                            <constraint firstItem="Zfd-PB-8pe" firstAttribute="top" secondItem="XPd-5P-erM" secondAttribute="bottom" constant="10" id="Wfb-Du-fGO"/>
+                            <constraint firstAttribute="trailing" secondItem="Zfd-PB-8pe" secondAttribute="trailing" constant="15" id="as9-YW-b7a"/>
+                            <constraint firstItem="qjn-y5-qPg" firstAttribute="centerY" secondItem="XPd-5P-erM" secondAttribute="centerY" id="o0P-tu-bYT"/>
+                            <constraint firstItem="XPd-5P-erM" firstAttribute="leading" secondItem="F6I-xp-eML" secondAttribute="leading" constant="15" id="pYV-A6-aqZ"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
+                                <integer key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.29999999999999999"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="F6I-xp-eML" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Lrt-6C-OCs"/>
+                    <constraint firstAttribute="trailing" secondItem="F6I-xp-eML" secondAttribute="trailing" constant="12" id="sDq-cA-3fg"/>
+                    <constraint firstItem="F6I-xp-eML" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="xVl-Xs-ZjY"/>
+                    <constraint firstAttribute="bottom" secondItem="F6I-xp-eML" secondAttribute="bottom" constant="4" id="y4N-Um-3mP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <point key="canvasLocation" x="248.09160305343511" y="36.619718309859159"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_expedited_proposal" width="24" height="24"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font03">
+            <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
