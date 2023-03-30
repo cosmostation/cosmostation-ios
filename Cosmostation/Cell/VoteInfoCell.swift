@@ -1,5 +1,5 @@
 //
-//  VoteInfoTableViewCell.swift
+//  VoteInfoCell.swift
 //  Cosmostation
 //
 //  Created by 정용주 on 2020/05/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VoteInfoTableViewCell: UITableViewCell {
+class VoteInfoCell: UITableViewCell {
  
     @IBOutlet weak var statusImg: UIImageView!
     @IBOutlet weak var statusTitle: UILabel!

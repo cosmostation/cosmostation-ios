@@ -18,9 +18,10 @@ class AuthzVote1ViewController: BaseViewController, UITableViewDelegate, UITable
     @IBOutlet weak var proposalTableView: UITableView!
     
     var pageHolderVC: StepGenTxViewController!
-    var mVotingPeriods = Array<MintscanProposalDetail>()
+    var mVotingPeriods = Array<MintscanV1Proposal>()
     var myVotes = Array<MintscanMyVotes>()
-    var mSelectedProposalIds = Array<String>()
+    var mSelectedProposalIds = Array<UInt64>()
+    var mToVoteList = Array<MintscanProposalDetail>()
     var mFetchCnt = 0
     
     override func viewDidLoad() {
@@ -94,20 +95,25 @@ class AuthzVote1ViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
+        sender.isUserInteractionEnabled = false
+        
         if (mSelectedProposalIds.count <= 0) {
             self.onShowToast(NSLocalizedString("error_no_selected_proposal", comment: ""))
             return
         }
         
-        var proposal = Array<MintscanProposalDetail>()
-        mSelectedProposalIds.forEach { selectedId in
-            if let filtered = mVotingPeriods.filter({ $0.id == selectedId }).first {
-                proposal.append(filtered)
-            }
+        mToVoteList.removeAll()
+        showWaittingAlert()
+        mSelectedProposalIds.forEach { toVote in
+            onFetchMintscanProposalDetail(toVote)
         }
-        pageHolderVC.mProposals = proposal
-        sender.isUserInteractionEnabled = false
-        pageHolderVC.onNextPage()
+    }
+    
+    func onNextPage() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+            self.pageHolderVC.mProposals = self.mToVoteList
+            self.pageHolderVC.onNextPage()
+        })
     }
     
     func onFetchVoteData() {
@@ -131,8 +137,8 @@ class AuthzVote1ViewController: BaseViewController, UITableViewDelegate, UITable
             case .success(let res):
                 if let responseDatas = res as? Array<NSDictionary> {
                     responseDatas.forEach { rawProposal in
-                        let tempProposal = MintscanProposalDetail.init(rawProposal)
-                        if (tempProposal.proposal_status!.localizedCaseInsensitiveContains("VOTING")) {
+                        let tempProposal = MintscanV1Proposal.init(rawProposal)
+                        if (tempProposal.isVotingPeriod()) {
                             self.mVotingPeriods.append(tempProposal)
                         }
                     }
@@ -141,12 +147,6 @@ class AuthzVote1ViewController: BaseViewController, UITableViewDelegate, UITable
                 print("onFetchMintscanProposal ", error)
             }
             self.onFetchFinished()
-        }
-    }
-    
-    func sortProposals() {
-        self.mVotingPeriods.sort {
-            return Int($0.id!)! < Int($1.id!)! ? false : true
         }
     }
     
@@ -167,6 +167,33 @@ class AuthzVote1ViewController: BaseViewController, UITableViewDelegate, UITable
                 print("onFetchMintscanMyVotes ", error)
             }
             self.onFetchFinished()
+        }
+    }
+    
+    func onFetchMintscanProposalDetail(_ id: UInt64) {
+        let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
+        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let responseData = res as? NSDictionary {
+                    self.mToVoteList.append(MintscanProposalDetail.init(responseData))
+                }
+                if (self.mToVoteList.count == self.mSelectedProposalIds.count) {
+                    self.hideWaittingAlert()
+                    self.onNextPage()
+                }
+                
+            case .failure(let error):
+                print("onFetchMintscanProposalDetail ", error)
+            }
+            self.nextBtn.isUserInteractionEnabled = true
+        }
+    }
+    
+    func sortProposals() {
+        self.mVotingPeriods.sort {
+            return $0.id! < $1.id! ? false : true
         }
     }
 

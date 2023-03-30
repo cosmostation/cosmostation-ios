@@ -164,30 +164,61 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 1) {
             if (!onCommonCheck()) { return }
-            guard let auth = getSendAuth() else {
-                onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
-                return
-            }
+
             var viewController: UIViewController? = nil
             if indexPath.row == 0 {
+                guard let auth = getSendAuth() else {
+                    onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
                 let granterData = GranterData(address: granterAddress, availables: granterAvailables)
                 viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_SEND)
+                
             } else if indexPath.row == 1 {
+                guard let auth = getDelegateAuth() else {
+                    onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
                 let granterData = GranterData(address: granterAddress, availables: granterAvailables, vestings: granterVestings, delegations: granterDelegation, unboundings: granterUnbonding, rewards: granterReward)
                 viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_DELEGATE)
+                
             } else if indexPath.row == 2 {
+                guard let auth = getUndelegateAuth() else {
+                    onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
                 let granterData = GranterData(address: granterAddress, delegations: granterDelegation, unboundings: granterUnbonding, rewards: granterReward)
                 viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_UNDELEGATE)
+                
             } else if indexPath.row == 3 {
+                guard let auth = getRedelegateAuth() else {
+                    onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
                 let granterData = GranterData(address: granterAddress, delegations: granterDelegation, unboundings: granterUnbonding, rewards: granterReward)
                 viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_REDELEGATE)
+                
             } else if indexPath.row == 4 {
+                guard let auth = getRewardAuth() else {
+                    onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
                 let granterData = GranterData(address: granterAddress, rewards: granterReward)
                 viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_CLAIM_REWARDS)
+                
             } else if indexPath.row == 5 {
+                guard let auth = getCommissionAuth() else {
+                    onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
                 let granterData = GranterData(address: granterAddress, comission: granterCommission)
                 viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN)
+                
             } else if indexPath.row == 6 {
+                guard let auth = getVoteAuth() else {
+                    onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
                 let granterData = GranterData(address: granterAddress)
                 viewController = UIStoryboard.transactionViewController(grant: auth, granter: granterData, type: TASK_TYPE_AUTHZ_VOTE)
             }

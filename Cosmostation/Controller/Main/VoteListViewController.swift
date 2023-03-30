@@ -26,14 +26,17 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var btnMultiVote: UIButton!
     
     var refresher: UIRefreshControl!
-    var mVotingPeriods = Array<MintscanProposalDetail>()
-    var mEtcPeriods = Array<MintscanProposalDetail>()
-    var mCheckedPeriods = Array<MintscanProposalDetail>()
+    var mVotingPeriods = Array<MintscanV1Proposal>()
+    var mEtcPeriods = Array<MintscanV1Proposal>()
+    var mFilteredProposals = Array<MintscanV1Proposal>()
+    var mFilteredEtcProposals = Array<MintscanV1Proposal>()
+    var mCheckedPeriods = Array<MintscanV1Proposal>()
     var mMyVotes = Array<MintscanMyVotes>()
-    var mSelectedProposalId = Array<String>()
-    var isSelectMode = false;
-    var mFetchCnt = 0
+    var mSelectedProposalIds = Array<UInt64>()
+    var mToVoteList = Array<MintscanProposalDetail>()
     
+    var mFetchCnt = 0
+    var isSelectMode = false;
     var isShowAll = false
     
     override func viewDidLoad() {
@@ -88,28 +91,33 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func onUpdateViews() {
         if (isShowAll) {
-            mCheckedPeriods = mEtcPeriods
             btnShowAll.setImage(UIImage(named: "iconCheckBox"), for: .normal)
+            mFilteredProposals = mVotingPeriods
+            mFilteredEtcProposals = mEtcPeriods
         } else {
             btnShowAll.setImage(UIImage(named: "iconUnCheckedBox"), for: .normal)
-            mCheckedPeriods = mEtcPeriods.filter() {!$0.proposal_status!.localizedCaseInsensitiveContains("DEPOSIT")}
+            mFilteredProposals = mVotingPeriods.filter() { !$0.isScam() }
+            mFilteredEtcProposals = mEtcPeriods.filter() { !$0.isScam() }
         }
-        if (mVotingPeriods.count > 1) {
+        
+        if (mFilteredProposals.count > 1) {
             self.layerMultiVote.isHidden = false
         } else {
             self.layerMultiVote.isHidden = true
         }
+        
+        
         if (isSelectMode) {
             btnMultiVote.isHidden = true
             layerMultiVoteAction.isHidden = false
-            
+
         } else {
             btnMultiVote.isHidden = false
             layerMultiVoteAction.isHidden = true
         }
-        
+
         self.sortProposals()
-        if (mVotingPeriods.count > 0 || mEtcPeriods.count > 0) {
+        if (mFilteredProposals.count > 0 || mEtcPeriods.count > 0) {
             self.emptyLabel.isHidden = true
             self.voteTableView.reloadData()
         } else {
@@ -135,7 +143,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func onClickCancel(_ sender: UIButton) {
-        mSelectedProposalId.removeAll()
+        mSelectedProposalIds.removeAll()
         isSelectMode = false
         onUpdateViews()
     }
@@ -145,7 +153,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
             self.onShowAddMenomicDialog()
             return
         }
-        if (mSelectedProposalId.count <= 0) {
+        if (mSelectedProposalIds.count <= 0) {
             self.onShowToast(NSLocalizedString("error_no_selected_proposal", comment: ""))
             return
         }
@@ -158,24 +166,27 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
             return
         }
         
-        var selected = Array<MintscanProposalDetail>()
-        mVotingPeriods.forEach { proposal in
-            if (mSelectedProposalId.contains(proposal.id!)) {
-                selected.append(proposal)
-            }
+        mToVoteList.removeAll()
+        showWaittingAlert()
+        mSelectedProposalIds.forEach { toVote in
+            onFetchMintscanProposalDetail(toVote)
         }
-        
-        mSelectedProposalId.removeAll()
+    }
+    
+    func onStartVote() {
+        mSelectedProposalIds.removeAll()
         isSelectMode = false
         voteTableView.reloadData()
         btnMultiVote.isHidden = false
         layerMultiVoteAction.isHidden = true
         
-        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mProposals = selected
-        txVC.mType = TASK_TYPE_VOTE
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(txVC, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+            let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+            txVC.mProposals = self.mToVoteList
+            txVC.mType = TASK_TYPE_VOTE
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(txVC, animated: true)
+        })
     }
     
     
@@ -190,23 +201,23 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0) {
             view.headerTitleLabel.text = NSLocalizedString("str_voting_period", comment: "")
-            view.headerCntLabel.text = String(mVotingPeriods.count)
+            view.headerCntLabel.text = String(mFilteredProposals.count)
         } else if (section == 1) {
             view.headerTitleLabel.text = NSLocalizedString("str_vote_proposals", comment: "")
-            view.headerCntLabel.text = String(mCheckedPeriods.count)
+            view.headerCntLabel.text = String(mFilteredEtcProposals.count)
         }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 0 && mVotingPeriods.count <= 0) { return 0 }
-        if (section == 1 && mCheckedPeriods.count <= 0) { return 0 }
+        if (section == 0 && mFilteredProposals.count <= 0) { return 0 }
+        if (section == 1 && mFilteredEtcProposals.count <= 0) { return 0 }
         return 30
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (section == 0) { return mVotingPeriods.count }
-        else if (section == 1) { return mCheckedPeriods.count }
+        if (section == 0) { return mFilteredProposals.count }
+        else if (section == 1) { return mFilteredEtcProposals.count }
         else { return 0 }
     }
     
@@ -217,12 +228,12 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onBindProposal(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell  {
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"ProposalVotingPeriodCell") as? ProposalVotingPeriodCell
-            let proposal = mVotingPeriods[indexPath.row]
-            cell?.onBindView(chainConfig, proposal, mMyVotes, isSelectMode, mSelectedProposalId)
+            let proposal = mFilteredProposals[indexPath.row]
+            cell?.onBindView(chainConfig, proposal, mMyVotes, isSelectMode, mSelectedProposalIds)
             return cell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"ProposalEtcPeriodCell") as? ProposalEtcPeriodCell
-            let proposal = mCheckedPeriods[indexPath.row]
+            let proposal = mFilteredEtcProposals[indexPath.row]
             cell?.onBindView(chainConfig, proposal, mMyVotes)
             return cell!
         }
@@ -235,32 +246,32 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (isSelectMode) {
             if (indexPath.section == 0) {
-                let proposal = mVotingPeriods[indexPath.row]
-                if (self.mSelectedProposalId.contains(proposal.id!)) {
-                    if let index = self.mSelectedProposalId.firstIndex(of: proposal.id!) {
-                        self.mSelectedProposalId.remove(at: index)
+                let proposal = mFilteredProposals[indexPath.row]
+                if (self.mSelectedProposalIds.contains(proposal.id!)) {
+                    if let index = self.mSelectedProposalIds.firstIndex(of: proposal.id!) {
+                        self.mSelectedProposalIds.remove(at: index)
                     }
                 } else {
-                    self.mSelectedProposalId.append(proposal.id!)
+                    self.mSelectedProposalIds.append(proposal.id!)
                 }
                 self.voteTableView.reloadRows(at: [indexPath], with: .none)
             }
-            
+
         } else {
             if (indexPath.section == 0) {
-                let proposal = mVotingPeriods[indexPath.row]
-                let voteDetailsVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VoteDetailsViewController") as! VoteDetailsViewController
-                voteDetailsVC.proposalId = proposal.id!
+                let voteDetailVC = VoteDetailsViewController(nibName: "VoteDetailsViewController", bundle: nil)
+                voteDetailVC.proposalId = mFilteredProposals[indexPath.row].id!
                 self.navigationItem.title = ""
-                self.navigationController?.pushViewController(voteDetailsVC, animated: true)
+                self.navigationController?.pushViewController(voteDetailVC, animated: true)
+                
             } else {
-                let proposal = mCheckedPeriods[indexPath.row]
+                let proposal = mFilteredEtcProposals[indexPath.row]
                 onExplorerLink(proposal.id!)
             }
         }
     }
     
-    func onExplorerLink(_ proposalId: String) {
+    func onExplorerLink(_ proposalId: UInt64) {
         let link = WUtils.getProposalExplorer(chainConfig, proposalId)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
@@ -272,12 +283,12 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                self.mVotingPeriods.removeAll()
+                self.mFilteredProposals.removeAll()
                 self.mEtcPeriods.removeAll()
                 if let responseDatas = res as? Array<NSDictionary> {
                     responseDatas.forEach { rawProposal in
-                        let tempProposal = MintscanProposalDetail.init(rawProposal)
-                        if (tempProposal.proposal_status!.localizedCaseInsensitiveContains("VOTING")) {
+                        let tempProposal = MintscanV1Proposal.init(rawProposal)
+                        if (tempProposal.isVotingPeriod()) {
                             self.mVotingPeriods.append(tempProposal)
                         } else {
                             self.mEtcPeriods.append(tempProposal)
@@ -288,15 +299,6 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
                 print("onFetchMintscanProposal ", error)
             }
             self.onFetchFinished()
-        }
-    }
-    
-    func sortProposals() {
-        self.mVotingPeriods.sort {
-            return Int($0.id!)! < Int($1.id!)! ? false : true
-        }
-        self.mCheckedPeriods.sort {
-            return Int($0.id!)! < Int($1.id!)! ? false : true
         }
     }
     
@@ -318,6 +320,38 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
                 print("onFetchMintscanMyVotes ", error)
             }
             self.onFetchFinished()
+        }
+    }
+    
+    func onFetchMintscanProposalDetail(_ id: UInt64) {
+        let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
+        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let responseData = res as? NSDictionary {
+                    self.mToVoteList.append(MintscanProposalDetail.init(responseData))
+                }
+                if (self.mToVoteList.count == self.mSelectedProposalIds.count) {
+                    self.hideWaittingAlert()
+                    self.onStartVote()
+                }
+                
+            case .failure(let error):
+                print("onFetchMintscanProposalDetail ", error)
+            }
+        }
+    }
+    
+    func sortProposals() {
+        self.mFilteredProposals.sort {
+            return $0.id! < $1.id! ? false : true
+        }
+        self.mEtcPeriods.sort {
+            return $0.id! < $1.id! ? false : true
+        }
+        self.mCheckedPeriods.sort {
+            return $0.id! < $1.id! ? false : true
         }
     }
 

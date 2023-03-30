@@ -162,6 +162,9 @@
 "str_vote_no" = "반대";
 "str_vote_veto" = "절대반대";
 "str_vote_abstain" = "기권";
+"str_vote_weight" = "비율";
+"str_vote_yet" = "안함";
+"str_current_status" = "현재 상황 : ";
 "str_quorum" = "정족율";
 "str_current_turnout" = "현재 투표율";
 "str_proposer" = "제안자";
@@ -172,6 +175,10 @@
 "str_voting_description" = "설명";
 "str_voting_period" = "Voting Period Proposals";
 "str_vote_proposals" = "Proposals";
+"str_vote_reject_by_qourum" = "정족수가 충족되지 못했습니다. 더 많은 투표가 필요합니다.";
+"str_vote_reject_by_veto" = "정족수가 충족 되었지만, VETO 상태입니다.";
+"str_vote_reject_by_no" = "정족수가 충족 되었지만, 찬성률을 넘기지 못했습니다.";
+"str_vote_pass_by_yes" = "정족수가 충족 되었고, 찬성률을 넘겼습니다.";
 "str_synchronize_name_service" = "네임서비스 동기화";
 
 "str_tx_status" = "결과";

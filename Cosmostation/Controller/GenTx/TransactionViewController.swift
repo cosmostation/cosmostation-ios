@@ -24,9 +24,6 @@ class TransactionViewController: UIViewController {
     var mTargetValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var mRewardTargetValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
     
-    var mProposeId: String?
-    var mProposalTitle: String?
-    var mProposer: String?
     var mProposals = Array<MintscanProposalDetail>()
     
     var mCollateralParamType: String?
@@ -50,9 +47,7 @@ class TransactionViewController: UIViewController {
     var mPoolId: String?
     var mSwapInDenom: String?
     var mSwapOutDenom: String?
-//    var mPool: Osmosis_Gamm_Balancer_V1beta1_Pool?
     var mLockupDuration: Int64?
-//    var mLockups: Array<Osmosis_Lockup_PeriodLock>?
     
     var mSifPool: Sifnode_Clp_V1_Pool?
     
@@ -392,9 +387,7 @@ class TransactionViewController: UIViewController {
             StepVc.mType = self.mType
             StepVc.mTargetValidator_gRPC = self.mTargetValidator_gRPC
             StepVc.mRewardTargetValidators_gRPC = self.mRewardTargetValidators_gRPC
-            StepVc.mProposeId = self.mProposeId
-            StepVc.mProposalTitle = self.mProposalTitle
-            StepVc.mProposer = self.mProposer
+            
             StepVc.mProposals = self.mProposals
             StepVc.mToSendDenom = self.mToSendDenom
             

@@ -17,6 +17,7 @@ class ProposalEtcPeriodCell: UITableViewCell {
     @IBOutlet weak var myVoteStatusImg: UIImageView!
     @IBOutlet weak var proposalStateLabel: UILabel!
     @IBOutlet weak var proposalStateImg: UIImageView!
+    @IBOutlet weak var expeditedImg: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,15 +27,17 @@ class ProposalEtcPeriodCell: UITableViewCell {
     override func prepareForReuse() {
         self.myVoteStatusImg.isHidden = false
         self.myVoteStatusImg.image = UIImage.init(named: "imgVoteWeight")
+        self.expeditedImg.isHidden = true
     }
     
-    func onBindView(_ chainConfig: ChainConfig?, _ proposal: MintscanProposalDetail, _ myVotes: Array<MintscanMyVotes>) {
-        let title = "# ".appending(proposal.id!).appending("  ").appending(proposal.title ?? "")
+    func onBindView(_ chainConfig: ChainConfig?, _ proposal: MintscanV1Proposal, _ myVotes: Array<MintscanMyVotes>) {
+        let title = "# ".appending(String(proposal.id!)).appending("  ").appending(proposal.title ?? "")
         proposalTitleLabel.text = title
-        proposalStateLabel.text = WUtils.onProposalStatusTxt(proposal)
-        proposalStateImg.image = WUtils.onProposalStatusImg(proposal)
+        proposalStateLabel.text = proposal.onProposalStatusTxt()
+        proposalStateImg.image = proposal.onProposalStatusImg()
+        expeditedImg.isHidden = !proposal.is_expedited
         
-        if let rawVote = myVotes.filter({ String($0.proposal_id ?? -1) == proposal.id }).first {
+        if let rawVote = myVotes.filter({ $0.proposal_id == proposal.id }).first {
             if (rawVote.votes.count > 1) {
                 self.myVoteStatusImg.image = UIImage.init(named: "imgVoteWeight")
             } else {

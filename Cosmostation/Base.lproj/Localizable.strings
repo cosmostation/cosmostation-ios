@@ -160,8 +160,11 @@
 "str_paste_translate" = "Paste";
 "str_vote_yes" = "Yes";
 "str_vote_no" = "No";
-"str_vote_veto" = "NoWithVeto";
+"str_vote_veto" = "Veto";
 "str_vote_abstain" = "Abstain";
+"str_vote_weight" = "Weight";
+"str_vote_yet" = "Not Voted";
+"str_current_status" = "Current Status : ";
 "str_quorum" = "Quorum";
 "str_current_turnout" = "Current Turnout";
 "str_proposer" = "Proposer";
@@ -172,6 +175,10 @@
 "str_voting_description" = "Description";
 "str_voting_period" = "Voting Period Proposals";
 "str_vote_proposals" = "Proposals";
+"str_vote_reject_by_qourum" = "The quorum is NOT established, need more votes.";
+"str_vote_reject_by_veto" = "The quorum is established, but VETO.";
+"str_vote_reject_by_no" = "The quorum is established, but the majority has voted NO.";
+"str_vote_pass_by_yes" = "The quorum is established, and the majority has voted YES.";
 "str_synchronize_name_service" = "Synchronize NameService";
 
 "str_tx_status" = "Status";

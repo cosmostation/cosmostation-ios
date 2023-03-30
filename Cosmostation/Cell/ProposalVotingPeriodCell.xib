@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,14 +21,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aP4-d7-MxA" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="350" height="68"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="#1 Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orz-Xr-OF6">
-                                <rect key="frame" x="16" y="14" width="278" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1 Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orz-Xr-OF6">
+                                <rect key="frame" x="16" y="14" width="278" height="16"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" ambiguous="YES" text="description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Soa-pp-vDv">
-                                <rect key="frame" x="16" y="39" width="278" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" text="description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Soa-pp-vDv">
+                                <rect key="frame" x="16" y="40" width="53.5" height="14"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
@@ -40,10 +40,18 @@
                                     <constraint firstAttribute="height" constant="40" id="cTX-7r-OKI"/>
                                 </constraints>
                             </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_expedited_proposal" translatesAutoresizingMaskIntoConstraints="NO" id="bzo-l0-Vqg">
+                                <rect key="frame" x="73.5" y="35" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="9hj-XO-AYo"/>
+                                    <constraint firstAttribute="height" constant="24" id="kPv-Fu-DnB"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
                             <constraint firstItem="Soa-pp-vDv" firstAttribute="leading" secondItem="orz-Xr-OF6" secondAttribute="leading" id="DL8-p1-9RJ"/>
+                            <constraint firstItem="bzo-l0-Vqg" firstAttribute="leading" secondItem="Soa-pp-vDv" secondAttribute="trailing" constant="4" id="Etk-Fu-MHQ"/>
                             <constraint firstItem="orz-Xr-OF6" firstAttribute="top" secondItem="aP4-d7-MxA" secondAttribute="top" constant="14" id="Fwj-Y4-bga"/>
                             <constraint firstItem="c0U-xW-Aer" firstAttribute="centerY" secondItem="aP4-d7-MxA" secondAttribute="centerY" id="Ipl-Jr-idD"/>
                             <constraint firstItem="c0U-xW-Aer" firstAttribute="leading" secondItem="orz-Xr-OF6" secondAttribute="trailing" constant="8" id="NY1-bM-a5p"/>
@@ -51,7 +59,7 @@
                             <constraint firstAttribute="trailing" secondItem="c0U-xW-Aer" secondAttribute="trailing" constant="8" id="aL4-4A-dN5"/>
                             <constraint firstItem="Soa-pp-vDv" firstAttribute="top" secondItem="orz-Xr-OF6" secondAttribute="bottom" constant="10" id="cHH-0f-otj"/>
                             <constraint firstItem="orz-Xr-OF6" firstAttribute="leading" secondItem="aP4-d7-MxA" secondAttribute="leading" constant="16" id="e3q-Jy-ycW"/>
-                            <constraint firstItem="Soa-pp-vDv" firstAttribute="trailing" secondItem="orz-Xr-OF6" secondAttribute="trailing" id="q7N-8Y-Yfj"/>
+                            <constraint firstItem="bzo-l0-Vqg" firstAttribute="centerY" secondItem="Soa-pp-vDv" secondAttribute="centerY" id="fAe-6n-38I"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
@@ -83,6 +91,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="expeditedImg" destination="bzo-l0-Vqg" id="NXY-KO-wPf"/>
                 <outlet property="myVoteStatusImg" destination="c0U-xW-Aer" id="lyT-Ot-ETf"/>
                 <outlet property="proposalTitleLabel" destination="orz-Xr-OF6" id="qmy-sD-X0d"/>
                 <outlet property="rootCardView" destination="aP4-d7-MxA" id="kYo-te-L0P"/>
@@ -92,6 +101,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="icon_expedited_proposal" width="24" height="24"/>
         <image name="imgVoteYes" width="40" height="40"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
