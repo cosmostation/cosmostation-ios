@@ -29,10 +29,11 @@ class CommonWCViewController: BaseViewController {
     
     @IBOutlet weak var dappWrapView: UIView!
     @IBOutlet weak var webView: WKWebView!
-    @IBOutlet weak var dappConnectImage: UIImageView!
-    @IBOutlet weak var dappConnectLabel: UILabel!
     @IBOutlet weak var dappUrl: UILabel!
     @IBOutlet weak var dappClose: UIButton!
+    @IBOutlet weak var dappRefresh: UIButton!
+    @IBOutlet weak var dappForward: UIButton!
+    @IBOutlet weak var dappBack: UIButton!
     @IBOutlet weak var dappToolbar: UIView!
     
     @IBOutlet weak var loadingWrapView: UIView!
@@ -58,6 +59,7 @@ class CommonWCViewController: BaseViewController {
     var wcRequestChainName: String?
     var accountChainSet = Set<String>()
     var accountSelectedSet = Set<Account>()
+    var injectRequest: JSON?
     
     private var beginingPoint: CGPoint?
     var isViewShowed: Bool = true
@@ -126,15 +128,6 @@ class CommonWCViewController: BaseViewController {
     }
     
     func connectStatus(connected: Bool) {
-        if (connected) {
-            dappConnectImage.image = UIImage(named: "ImgGovPassed")
-            dappConnectLabel.text = "Connected"
-            dappConnectLabel.textColor = UIColor.font05
-        } else {
-            dappConnectImage.image = UIImage(named: "passUp")
-            dappConnectLabel.text = "Not Connected"
-            dappConnectLabel.textColor = UIColor.font04
-        }
     }
     
     func processQuery(host: String?, query: String?) {
@@ -151,8 +144,13 @@ class CommonWCViewController: BaseViewController {
     }
     
     func initWebView() {
-        let configuration = WKWebViewConfiguration()
-        configuration.allowsInlineMediaPlayback = true
+        if let file = Bundle.main.path(forResource: "injectScript", ofType: "js"), let script = try? String(contentsOfFile: file) {
+            let userScript = WKUserScript(source: script,
+                                          injectionTime: .atDocumentEnd,
+                                          forMainFrameOnly: false)
+            webView.configuration.userContentController.addUserScript(userScript)
+            webView.configuration.userContentController.add(self, name: "station")
+        }
         webView.isOpaque = false
         webView.backgroundColor = UIColor.clear
         webView.navigationDelegate = self
@@ -870,6 +868,55 @@ class CommonWCViewController: BaseViewController {
         }
     }
     
+    func approveInjectSignDirect() {
+        var data = JSON()
+        let privateKey = getPrivateKey(account: account!)
+        let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
+        if let json = self.injectRequest?["params"]["doc"],
+           let chainId = json["chain_id"].rawString(),
+           let bodyBase64Decoded = Data.fromHex2(json["body_bytes"].stringValue),
+           let bodyBytes = try? Cosmos_Tx_V1beta1_TxBody.init(serializedData: bodyBase64Decoded),
+           let authInfoBase64Decoded = Data.fromHex2(json["auth_info_bytes"].stringValue),
+           let authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: authInfoBase64Decoded) {
+            let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
+                $0.bodyBytes = try! bodyBytes.serializedData()
+                $0.authInfoBytes = try! authInfo.serializedData()
+                $0.chainID = chainId
+                $0.accountNumber = json["account_number"].uInt64Value
+            }
+            
+            if let signature = try? ECDSA.compactsign(try! signDoc.serializedData().sha256(), privateKey: privateKey) {
+                data["pub_key"] = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : publicKey.base64EncodedString()]
+                data["signature"].stringValue = signature.base64EncodedString()
+            }
+        }
+        
+        data["signed_doc"] = self.injectRequest!["params"]["doc"]
+        let retVal = ["response": ["result": data], "message": injectRequest, "isCosmostation": true]
+        self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+    }
+    
+    func approveInjectSignAmino() {
+        var data = JSON()
+        let privateKey = getPrivateKey(account: account!)
+        let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
+        let sortedJsonData = try! self.injectRequest!["params"]["doc"].rawData(options: [.sortedKeys, .withoutEscapingSlashes])
+        let rawOrderdDocSha = sortedJsonData.sha256()
+        if let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: privateKey) {
+            data["pub_key"] = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : publicKey.base64EncodedString()]
+            data["signature"].stringValue = signature.base64EncodedString()
+        }
+        
+        data["signed_doc"] = self.injectRequest!["params"]["doc"]
+        let retVal = ["response": ["result": data], "message": injectRequest, "isCosmostation": true]
+        self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+    }
+    
+    func rejectInject() {
+        let retVal = ["response": ["error": "Cancel"], "message": injectRequest, "isCosmostation": true]
+        self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+    }
+    
     func approveV2CosmosDirectRequest() {
         if let request = wcV2Request,
            let json = try? JSON(data: request.params.encoded) {
@@ -934,6 +981,22 @@ class CommonWCViewController: BaseViewController {
     @IBAction func onCloseDapp(_ sender: UIButton) {
         self.webView.isHidden = true
         disconnect()
+    }
+    
+    @IBAction func onBack(_ sender: UIButton) {
+        if self.webView.canGoBack {
+            self.webView.goBack()
+        }
+    }
+    
+    @IBAction func onForward(_ sender: UIButton) {
+        if self.webView.canGoForward {
+            self.webView.goForward()
+        }
+    }
+    
+    @IBAction func onRefresh(_ sender: UIButton) {
+        self.webView.reload()
     }
     
     @IBAction func onClickDisconnect(_ sender: UIButton) {
@@ -1104,11 +1167,31 @@ extension CommonWCViewController: SBCardPopupDelegate {
                 accountSelectedSet.insert(selectedAccount)
                 self.showAccountPopup()
             }
+        } else if (type == WcRequestType.INJECT_SIGN_AMINO.rawValue) {
+            if (result == 0) {
+                self.approveInjectSignAmino()
+            } else {
+                self.rejectInject()
+            }
+        } else if (type == WcRequestType.INJECT_SIGN_DIRECT.rawValue) {
+            if (result == 0) {
+                self.approveInjectSignDirect()
+            } else {
+                self.rejectInject()
+            }
         }
     }
+    
+    
 }
 
 extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if let host = webView.url?.host {
+            dappUrl.text = host 
+        }
+    }
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if self.webView.isHidden {
             decisionHandler(.cancel)
@@ -1378,6 +1461,50 @@ extension CommonWCViewController {
                 }
             } catch {
                 print("Disconnect error: \(error)")
+            }
+        }
+    }
+}
+
+extension CommonWCViewController: WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if (message.name == "station") {
+            let bodyJSON = JSON(parseJSON: message.body as? String ?? "")
+            let isCosmostation = bodyJSON["isCosmostation"].boolValue
+            let messageJSON = bodyJSON["message"]
+            let method = messageJSON["method"].stringValue
+            if (method == "cos_requestAccount" || method == "cos_account" || method == "ten_requestAccount" || method == "ten_account") {
+                let params = messageJSON["params"]
+                let chainId = params["chainName"].stringValue
+                let chainType = WUtils.getChainTypeByChainId(chainId)
+                let chainConfig = ChainFactory.getChainConfig(chainType)
+                let privateKey = getPrivateKey(account: account!)
+                var data = JSON()
+                data["isKeystone"] = false
+                data["isEthermint"] = false
+                data["isLedger"] = false
+                data["name"].stringValue = self.account?.account_nick_name ?? ""
+                data["address"].stringValue = WKey.getDpAddress(chainConfig!, privateKey, 0)
+                data["publicKey"].stringValue = KeyFac.getPublicFromPrivateKey(privateKey).toHexString()
+                let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true]
+                self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+            } else if (method == "cos_supportedChainIds") {
+                let data = ["official": ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1", "core-1"], "unofficial": []]
+                let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true]
+                self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+            } else if (method == "cos_signAmino") {
+                let params = messageJSON["params"]
+                let doc = params["doc"]
+                self.injectRequest = messageJSON
+                self.onShowPopupForRequest(WcRequestType.INJECT_SIGN_AMINO, try! doc.rawData())
+            } else if (method == "cos_signDirect") {
+                let params = messageJSON["params"]
+                let doc = params["doc"]
+                self.injectRequest = messageJSON
+                self.onShowPopupForRequest(WcRequestType.INJECT_SIGN_DIRECT, try! doc.rawData())
+            } else {
+                let retVal = ["response": ["error": "Not implemented"], "message": messageJSON, "isCosmostation": true]
+                self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             }
         }
     }

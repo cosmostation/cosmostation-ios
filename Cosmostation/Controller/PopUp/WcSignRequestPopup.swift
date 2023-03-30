@@ -44,4 +44,6 @@ public enum WcRequestType: Int {
     case COSMOS_DIRECT_TYPE = 3
     case V2_SIGN_DIRECT = 4
     case V2_SIGN_AMINO = 5
+    case INJECT_SIGN_AMINO = 6
+    case INJECT_SIGN_DIRECT = 7
 }

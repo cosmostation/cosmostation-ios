@@ -12,9 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommonWCViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="dappBack" destination="Xdi-oy-i96" id="gSD-e2-j5Q"/>
                 <outlet property="dappClose" destination="EzO-xM-H7P" id="F2M-se-d5F"/>
-                <outlet property="dappConnectImage" destination="WEt-J9-ZIZ" id="fQ4-zG-oWd"/>
-                <outlet property="dappConnectLabel" destination="MFF-2M-qVe" id="v0I-UO-HMR"/>
+                <outlet property="dappForward" destination="ZJc-w7-2wG" id="xul-pH-Q2i"/>
+                <outlet property="dappRefresh" destination="IZI-ir-RDm" id="PpR-BD-CkN"/>
                 <outlet property="dappToolbar" destination="mkI-9p-rWl" id="wbj-op-f8r"/>
                 <outlet property="dappUrl" destination="BhS-sQ-2En" id="UEM-Eh-GsS"/>
                 <outlet property="dappWrapView" destination="lei-Tz-eQ9" id="t5i-Mu-qhA"/>
@@ -165,7 +166,7 @@
                         <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R3K-83-IUb">
                             <rect key="frame" x="0.0" y="56" width="414" height="792"/>
                             <color key="backgroundColor" name="_font03"/>
-                            <wkWebViewConfiguration key="configuration">
+                            <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES">
                                 <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                 <wkPreferences key="preferences"/>
                             </wkWebViewConfiguration>
@@ -173,58 +174,68 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mkI-9p-rWl">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Browser" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdi-mV-E21">
-                                    <rect key="frame" x="15" y="12" width="66.5" height="21"/>
-                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
-                                    <color key="textColor" name="_font05"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BhS-sQ-2En">
-                                    <rect key="frame" x="15" y="34" width="341" height="14.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" name="_font04"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xdi-oy-i96">
+                                    <rect key="frame" x="341" y="11" width="34" height="34"/>
+                                    <color key="tintColor" name="_font05"/>
+                                    <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="browseBack"/>
+                                    <connections>
+                                        <action selector="onBack:" destination="-1" eventType="touchUpInside" id="u3L-UU-zwM"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJc-w7-2wG">
+                                    <rect key="frame" x="375" y="11" width="34" height="34"/>
+                                    <color key="tintColor" name="_font05"/>
+                                    <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="browseForward"/>
+                                    <connections>
+                                        <action selector="onForward:" destination="-1" eventType="touchUpInside" id="zDl-a3-pT1"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZI-ir-RDm">
+                                    <rect key="frame" x="73" y="14" width="26" height="28"/>
+                                    <color key="tintColor" name="_font04"/>
+                                    <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="browseRefresh"/>
+                                    <connections>
+                                        <action selector="onRefresh:" destination="-1" eventType="touchUpInside" id="hHP-af-XwC"/>
+                                    </connections>
+                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzO-xM-H7P">
-                                    <rect key="frame" x="371" y="9" width="38" height="38"/>
+                                    <rect key="frame" x="5" y="9" width="38" height="38"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="38" id="1EL-7E-HXa"/>
                                         <constraint firstAttribute="width" constant="38" id="JQw-iX-DMf"/>
                                     </constraints>
                                     <color key="tintColor" name="_font05"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" image="btnIconClose"/>
+                                    <state key="normal" image="browseClose"/>
                                     <connections>
                                         <action selector="onCloseDapp:" destination="-1" eventType="touchUpInside" id="oqI-mN-pPu"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFF-2M-qVe">
-                                    <rect key="frame" x="105.5" y="15.5" width="62" height="14.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" name="_font04"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BhS-sQ-2En">
+                                    <rect key="frame" x="53" y="19" width="20" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" name="_font05"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImgGovPassed" translatesAutoresizingMaskIntoConstraints="NO" id="WEt-J9-ZIZ">
-                                    <rect key="frame" x="93.5" y="18.5" width="8" height="8"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="8" id="8v3-2w-dMq"/>
-                                        <constraint firstAttribute="width" constant="8" id="AKa-o2-1Gt"/>
-                                    </constraints>
-                                </imageView>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="WEt-J9-ZIZ" firstAttribute="centerY" secondItem="Bdi-mV-E21" secondAttribute="centerY" id="4sW-fw-bmS"/>
-                                <constraint firstItem="MFF-2M-qVe" firstAttribute="leading" secondItem="WEt-J9-ZIZ" secondAttribute="trailing" constant="4" id="Gc3-2a-TwY"/>
-                                <constraint firstItem="Bdi-mV-E21" firstAttribute="top" secondItem="mkI-9p-rWl" secondAttribute="top" constant="12" id="HWt-A3-CJR"/>
+                                <constraint firstItem="BhS-sQ-2En" firstAttribute="centerY" secondItem="mkI-9p-rWl" secondAttribute="centerY" id="1tW-kF-GxV"/>
+                                <constraint firstItem="EzO-xM-H7P" firstAttribute="leading" secondItem="mkI-9p-rWl" secondAttribute="leading" constant="5" id="9Bk-Ug-H17"/>
+                                <constraint firstItem="IZI-ir-RDm" firstAttribute="leading" secondItem="BhS-sQ-2En" secondAttribute="trailing" id="Cs2-Pn-QaD"/>
                                 <constraint firstAttribute="height" constant="56" id="Ks0-cY-ZiH"/>
-                                <constraint firstItem="Bdi-mV-E21" firstAttribute="leading" secondItem="mkI-9p-rWl" secondAttribute="leading" constant="15" id="O5c-if-BlD"/>
-                                <constraint firstItem="MFF-2M-qVe" firstAttribute="centerY" secondItem="Bdi-mV-E21" secondAttribute="centerY" id="O9c-p5-RBj"/>
-                                <constraint firstItem="BhS-sQ-2En" firstAttribute="top" secondItem="Bdi-mV-E21" secondAttribute="bottom" constant="1" id="OJZ-AZ-8uE"/>
-                                <constraint firstItem="WEt-J9-ZIZ" firstAttribute="leading" secondItem="Bdi-mV-E21" secondAttribute="trailing" constant="12" id="Ted-27-4jz"/>
-                                <constraint firstItem="BhS-sQ-2En" firstAttribute="leading" secondItem="mkI-9p-rWl" secondAttribute="leading" constant="15" id="VHH-gT-0jJ"/>
-                                <constraint firstAttribute="trailing" secondItem="EzO-xM-H7P" secondAttribute="trailing" constant="5" id="jy5-Qy-Ymz"/>
-                                <constraint firstItem="EzO-xM-H7P" firstAttribute="centerY" secondItem="mkI-9p-rWl" secondAttribute="centerY" id="pbo-El-9uM"/>
-                                <constraint firstItem="EzO-xM-H7P" firstAttribute="leading" secondItem="BhS-sQ-2En" secondAttribute="trailing" constant="15" id="yJt-aU-uTr"/>
+                                <constraint firstAttribute="trailing" secondItem="ZJc-w7-2wG" secondAttribute="trailing" constant="5" id="cpd-A5-VEs"/>
+                                <constraint firstItem="ZJc-w7-2wG" firstAttribute="centerY" secondItem="mkI-9p-rWl" secondAttribute="centerY" id="eR7-Vc-mvQ"/>
+                                <constraint firstItem="ZJc-w7-2wG" firstAttribute="leading" secondItem="Xdi-oy-i96" secondAttribute="trailing" id="fKZ-1z-biL"/>
+                                <constraint firstItem="IZI-ir-RDm" firstAttribute="centerY" secondItem="mkI-9p-rWl" secondAttribute="centerY" id="lUD-O6-Rp4"/>
+                                <constraint firstItem="Xdi-oy-i96" firstAttribute="centerY" secondItem="mkI-9p-rWl" secondAttribute="centerY" id="qj3-WE-tHM"/>
+                                <constraint firstItem="EzO-xM-H7P" firstAttribute="centerY" secondItem="mkI-9p-rWl" secondAttribute="centerY" id="qnA-eH-Lbj"/>
+                                <constraint firstItem="BhS-sQ-2En" firstAttribute="leading" secondItem="EzO-xM-H7P" secondAttribute="trailing" constant="10" id="scw-LY-wAS"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -280,8 +291,10 @@
         </view>
     </objects>
     <resources>
-        <image name="ImgGovPassed" width="6" height="6"/>
-        <image name="btnIconClose" width="24" height="24"/>
+        <image name="browseBack" width="24" height="24"/>
+        <image name="browseClose" width="24" height="24"/>
+        <image name="browseForward" width="24" height="24"/>
+        <image name="browseRefresh" width="16" height="16"/>
         <image name="btnIconWalletConnect" width="20" height="20"/>
         <image name="connectimg1" width="177" height="50"/>
         <namedColor name="_card_bg">

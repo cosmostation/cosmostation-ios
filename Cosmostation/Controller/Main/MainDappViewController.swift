@@ -31,7 +31,12 @@ class MainDappViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateTitle), name: Notification.Name("onNameCheckDone"), object: nil)
         self.updateTitle()
         
-        if let url = URL(string: "https://dapps.cosmostation.io/?chain=\(chainConfig?.chainAPIName ?? "")&theme=\(currentThemeParams())") {
+        var dappUrl = "https://dapps.cosmostation.io"
+        #if DEBUG
+            dappUrl = "https://dapps.dev.cosmostation.io"
+        #endif
+        
+        if let url = URL(string: "\(dappUrl)/?chain=\(chainConfig?.chainAPIName ?? "")&theme=\(currentThemeParams())") {
             webView.load(URLRequest(url: url))
         }
     }
@@ -82,7 +87,7 @@ class MainDappViewController: BaseViewController {
 extension MainDappViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url {
-            if (url.host == "dapps.cosmostation.io") {
+            if (url.host == "dapps.cosmostation.io" || url.host == "dapps.dev.cosmostation.io") {
                 decisionHandler(.allow)
             } else {
                 if (account?.account_has_private == false) {
