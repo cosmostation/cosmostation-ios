@@ -13,6 +13,10 @@
 		040583FA290D858C00918513 /* TxIncentiveEarnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040583F6290D858C00918513 /* TxIncentiveEarnCell.xib */; };
 		040583FC290DA4ED00918513 /* EarnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040583FB290DA4ED00918513 /* EarnViewController.swift */; };
 		040583FD290DA4ED00918513 /* EarnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040583FB290DA4ED00918513 /* EarnViewController.swift */; };
+		040593BF29D530FE004B61EF /* VoteDetailMsgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040593BD29D530FE004B61EF /* VoteDetailMsgCell.swift */; };
+		040593C029D530FE004B61EF /* VoteDetailMsgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040593BD29D530FE004B61EF /* VoteDetailMsgCell.swift */; };
+		040593C129D530FE004B61EF /* VoteDetailMsgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040593BE29D530FE004B61EF /* VoteDetailMsgCell.xib */; };
+		040593C229D530FE004B61EF /* VoteDetailMsgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040593BE29D530FE004B61EF /* VoteDetailMsgCell.xib */; };
 		040FA7A2275F55C200229F6F /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA431275F558600229F6F /* cosmos_base_reflection_v2alpha1_reflection.pb.swift */; };
 		040FA7AE275F55C200229F6F /* tendermint_types_validator.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA43D275F558700229F6F /* tendermint_types_validator.pb.swift */; };
 		040FA7B1275F55C200229F6F /* starname_iov_escrow_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA440275F558700229F6F /* starname_iov_escrow_v1beta1_params.pb.swift */; };
@@ -2948,6 +2952,8 @@
 		040583F5290D858C00918513 /* TxIncentiveEarnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxIncentiveEarnCell.swift; sourceTree = "<group>"; };
 		040583F6290D858C00918513 /* TxIncentiveEarnCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxIncentiveEarnCell.xib; sourceTree = "<group>"; };
 		040583FB290DA4ED00918513 /* EarnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnViewController.swift; sourceTree = "<group>"; };
+		040593BD29D530FE004B61EF /* VoteDetailMsgCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailMsgCell.swift; sourceTree = "<group>"; };
+		040593BE29D530FE004B61EF /* VoteDetailMsgCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteDetailMsgCell.xib; sourceTree = "<group>"; };
 		040FA431275F558600229F6F /* cosmos_base_reflection_v2alpha1_reflection.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_base_reflection_v2alpha1_reflection.pb.swift; sourceTree = "<group>"; };
 		040FA43D275F558700229F6F /* tendermint_types_validator.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_types_validator.pb.swift; sourceTree = "<group>"; };
 		040FA440275F558700229F6F /* starname_iov_escrow_v1beta1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_escrow_v1beta1_params.pb.swift; sourceTree = "<group>"; };
@@ -6476,6 +6482,8 @@
 				049B692829D42A540027B82D /* VoteDetailTitleCell.xib */,
 				2845D882246FAEED007CD497 /* VoteDetailStatusCell.swift */,
 				2845D883246FAEED007CD497 /* VoteDetailStatusCell.xib */,
+				040593BD29D530FE004B61EF /* VoteDetailMsgCell.swift */,
+				040593BE29D530FE004B61EF /* VoteDetailMsgCell.xib */,
 				2845D87E246FAED7007CD497 /* VoteInfoCell.swift */,
 				2845D87F246FAED7007CD497 /* VoteInfoCell.xib */,
 				289E4DAD26E5D765007C7C35 /* CommonPoolCell.swift */,
@@ -6665,6 +6673,7 @@
 				042C38A428F6895900FF45A2 /* AllValidatorCell.xib in Resources */,
 				18FFB6B2281AF533004E65BB /* TxEditRewardAddressCell.xib in Resources */,
 				18FFB6B3281AF533004E65BB /* HardPoolDeposit3ViewController.xib in Resources */,
+				040593C229D530FE004B61EF /* VoteDetailMsgCell.xib in Resources */,
 				04C4938728506A0C00ECF4D2 /* WatchingAddressViewController.xib in Resources */,
 				18FFB6B4281AF533004E65BB /* CommonWCViewController.xib in Resources */,
 				043031DF28BDFA9A005FF935 /* AssetAddCell.xib in Resources */,
@@ -7204,6 +7213,7 @@
 				042A0C98288E469700C4DC38 /* AuthzListViewController.xib in Resources */,
 				0443B8A0285C62E10027A6B9 /* WalletBaseChainCell.xib in Resources */,
 				2839C1FE26A2A47C00638EBC /* Swap3ViewController.xib in Resources */,
+				040593C129D530FE004B61EF /* VoteDetailMsgCell.xib in Resources */,
 				2876546C2726B2690071FF96 /* WalletChainEditViewController.xib in Resources */,
 				283E9459254901D9007A9291 /* RegisterDomain0ViewController.xib in Resources */,
 				043031E428BE0D21005FF935 /* SelectContractTokenCell.xib in Resources */,
@@ -8429,6 +8439,7 @@
 				9FF966052926BE7C006C2300 /* Array+Sum.swift in Sources */,
 				18FFB619281AF533004E65BB /* OkValidatorListViewController.swift in Sources */,
 				045DAD802897A1AD004ED9B4 /* AuthzVote5ViewController.swift in Sources */,
+				040593C029D530FE004B61EF /* VoteDetailMsgCell.swift in Sources */,
 				1817CB3B283E2CE500523713 /* desmos_profiles_v1beta1_query_chain_links.pb.swift in Sources */,
 				1817CC42283E2CE600523713 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
 				04A8E96A2860597A00A5E023 /* MnemonicListViewController.swift in Sources */,
@@ -9546,6 +9557,7 @@
 				154A97EB2983A05700E0B801 /* stride_claim_genesis.pb.swift in Sources */,
 				28EEECB026DAE9C2002DDC4A /* KavaSwapExit3ViewController.swift in Sources */,
 				040FA985275F55C300229F6F /* cosmos_gov_v1beta2_query.grpc.swift in Sources */,
+				040593BF29D530FE004B61EF /* VoteDetailMsgCell.swift in Sources */,
 				040FAA19275F55C300229F6F /* desmos_profiles_v1beta1_query_dtag_requests.pb.swift in Sources */,
 				040FA86E275F55C200229F6F /* ibc_core_channel_v1_tx.grpc.swift in Sources */,
 				9F1EE328295F965F007B7CD7 /* GranteeGrantsAction.swift in Sources */,

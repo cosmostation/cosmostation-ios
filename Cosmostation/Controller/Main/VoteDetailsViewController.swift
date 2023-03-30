@@ -23,6 +23,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     var proposalId: UInt64?
     var mintscanProposalDetail: MintscanProposalDetail?
     var mintscanMyVotes: MintscanMyVotes?
+    var selectedMsg = Array<Int>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +35,8 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         self.voteDetailTableView.dataSource = self
         self.voteDetailTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.voteDetailTableView.register(UINib(nibName: "VoteDetailTitleCell", bundle: nil), forCellReuseIdentifier: "VoteDetailTitleCell")
-        self.voteDetailTableView.register(UINib(nibName: "VoteInfoCell", bundle: nil), forCellReuseIdentifier: "VoteInfoCell")
         self.voteDetailTableView.register(UINib(nibName: "VoteDetailStatusCell", bundle: nil), forCellReuseIdentifier: "VoteDetailStatusCell")
+        self.voteDetailTableView.register(UINib(nibName: "VoteDetailMsgCell", bundle: nil), forCellReuseIdentifier: "VoteDetailMsgCell")
         self.voteDetailTableView.rowHeight = UITableView.automaticDimension
         self.voteDetailTableView.estimatedRowHeight = UITableView.automaticDimension
         
@@ -102,25 +103,45 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         self.navigationController?.pushViewController(txVC, animated: true)
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if (section == 0) {
+            return 2
+        } else {
+            return mintscanProposalDetail?.messages.count ?? 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (indexPath.row == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"VoteDetailTitleCell") as? VoteDetailTitleCell
-            cell?.onBindView(mintscanProposalDetail)
-            return cell!
-            
-        } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"VoteDetailStatusCell") as? VoteDetailStatusCell
-            cell?.onBindView(mintscanProposalDetail, mintscanMyVotes)
-            return cell!
+        if (indexPath.section == 0) {
+            if (indexPath.row == 0) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"VoteDetailTitleCell") as? VoteDetailTitleCell
+                cell?.onBindView(mintscanProposalDetail)
+                return cell!
+                
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"VoteDetailStatusCell") as? VoteDetailStatusCell
+                cell?.onBindView(mintscanProposalDetail, mintscanMyVotes)
+                return cell!
+            }
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"VoteDetailStatusCell") as? VoteDetailStatusCell
+            let cell = tableView.dequeueReusableCell(withIdentifier:"VoteDetailMsgCell") as? VoteDetailMsgCell
+            cell?.onBindView(mintscanProposalDetail?.messages[indexPath.row], indexPath.row, selectedMsg)
+            cell?.actionToggle = {
+                if let index = self.selectedMsg.firstIndex(of: indexPath.row) {
+                    self.selectedMsg.remove(at: index)
+                } else {
+                    self.selectedMsg.append(indexPath.row)
+                }
+                self.voteDetailTableView.beginUpdates()
+                self.voteDetailTableView.reloadRows(at: [indexPath], with: .automatic)
+                self.voteDetailTableView.endUpdates()
+            }
             return cell!
-            
         }
     }
     
@@ -165,6 +186,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
      */
     
     @objc func onFetch() {
+        selectedMsg.removeAll()
         mFetchCnt = 2
         onFetchMintscanProposl(proposalId!)
         onFetchMintscanMyVotes()

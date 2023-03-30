@@ -1008,7 +1008,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     
     func onFetchParams(_ chainId: String) {
         let request = Alamofire.request(BaseNetWork.getParams(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        print("request ", request.request?.url)
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):

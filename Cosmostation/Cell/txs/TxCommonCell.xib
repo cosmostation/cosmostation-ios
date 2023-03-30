@@ -306,7 +306,7 @@
     </objects>
     <designables>
         <designable name="lLF-as-eG4">
-            <size key="intrinsicContentSize" width="76" height="13.5"/>
+            <size key="intrinsicContentSize" width="92" height="21.5"/>
         </designable>
     </designables>
     <resources>

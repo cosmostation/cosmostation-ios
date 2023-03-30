@@ -22,7 +22,6 @@ class VoteDetailStatusCell: UITableViewCell {
     @IBOutlet weak var quorumLabel: UILabel!
     @IBOutlet weak var turnoutLabel: UILabel!
     
-    
     @IBOutlet weak var titleYes: UILabel!
     @IBOutlet weak var progressYes: UIProgressView!
     @IBOutlet weak var percentYes: UILabel!

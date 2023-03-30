@@ -25,6 +25,7 @@ public struct MintscanProposalDetail {
     var voteMeta: MintscanVoteMeta?
     var content: MintscanContent?
     var is_expedited = false
+    var messages = Array<MintscanV2Message>()
     
     var myVote: String?
     
@@ -48,6 +49,11 @@ public struct MintscanProposalDetail {
             self.content = MintscanContent.init(rawContent)
         }
         self.is_expedited = dictionary?["is_expedited"] as? Bool ?? false
+        if let rawMessages = dictionary?["messages"] as? Array<NSDictionary> {
+            for rawMessage in rawMessages {
+                messages.append(MintscanV2Message.init(rawMessage))
+            }
+        }
     }
     
     public mutating func setMyVote(_ option: String) {
@@ -236,4 +242,24 @@ public struct MintscanContent {
             }
         }
     }
+}
+
+
+public struct MintscanV2Message {
+    var type: String?
+    var title: String?
+    var description: String?
+    var requestAmount: Coin?
+    
+    init(_ dictionary: NSDictionary?) {
+        self.type = dictionary?["@type"] as? String ?? ""
+        self.title = dictionary?["title"] as? String ?? ""
+        self.description = dictionary?["description"] as? String ?? ""
+        if let rawAmounts = dictionary?["amount"] as? Array<NSDictionary> {
+            for rawAmount in rawAmounts {
+                requestAmount = Coin.init(rawAmount)
+            }
+        }
+    }
+    
 }
