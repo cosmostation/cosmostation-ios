@@ -169,6 +169,7 @@
 "cancel" = "キャンセル";
 "change_mnemonic_name" = "ニーモニック名変更";
 "change_wallet_name" = "ウォレット名変更";
+"change_url" = "URL を変更";
 "set_mnemonic_name" = "ニーモニック名の設定";
 "check_mnemonic" = "ニーモニックの確認";
 "check_private_key" = "プライベートキー確認";
