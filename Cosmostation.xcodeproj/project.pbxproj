@@ -1923,7 +1923,6 @@
 		18FFB3B0281AF533004E65BB /* KavaSwap0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EEEC9A26DABA74002DDC4A /* KavaSwap0ViewController.swift */; };
 		18FFB3CB281AF533004E65BB /* TokenDetailStakingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E750126CE36E40097CC04 /* TokenDetailStakingCell.swift */; };
 		18FFB3D3281AF533004E65BB /* StdSignMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = E151B64A224859E10026B8C0 /* StdSignMsg.swift */; };
-		18FFB3D4281AF533004E65BB /* VoteInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2845D87E246FAED7007CD497 /* VoteInfoCell.swift */; };
 		18FFB3D5281AF533004E65BB /* WalletKavaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191A57B237902C5002577BC /* WalletKavaCell.swift */; };
 		18FFB3D6281AF533004E65BB /* GenDenom3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF018277B43F100F72C11 /* GenDenom3ViewController.swift */; };
 		18FFB3DB281AF533004E65BB /* SelectCoinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2812956C250F81C3007B217E /* SelectCoinCell.swift */; };
@@ -2274,7 +2273,6 @@
 		18FFB752281AF533004E65BB /* xmas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2A276F23D9009B39BA /* xmas@3x.png */; };
 		18FFB754281AF533004E65BB /* ReplaceResource3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E1F10254AB5C70007BA7D /* ReplaceResource3ViewController.xib */; };
 		18FFB756281AF533004E65BB /* SelectChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285A33D9244763290052BD3D /* SelectChainCell.xib */; };
-		18FFB757281AF533004E65BB /* VoteInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2845D87F246FAED7007CD497 /* VoteInfoCell.xib */; };
 		18FFB759281AF533004E65BB /* DeleteStarname0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E1EF7254A7AC80007BA7D /* DeleteStarname0ViewController.xib */; };
 		18FFB75C281AF533004E65BB /* MnemonicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14BDFFA224CCFE20007DD7D /* MnemonicCell.xib */; };
 		18FFB75D281AF533004E65BB /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB2A902533DA2D00CFF097 /* AccountCell.xib */; };
@@ -2502,8 +2500,6 @@
 		28440C6B271E7BC800B4A7C3 /* SifExitPool3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C69271E7BC800B4A7C3 /* SifExitPool3ViewController.swift */; };
 		28440C6C271E7BC800B4A7C3 /* SifExitPool3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C6A271E7BC800B4A7C3 /* SifExitPool3ViewController.xib */; };
 		2845D87D246FAE16007CD497 /* VoteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2845D87C246FAE16007CD497 /* VoteDetailsViewController.swift */; };
-		2845D880246FAED7007CD497 /* VoteInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2845D87E246FAED7007CD497 /* VoteInfoCell.swift */; };
-		2845D881246FAED7007CD497 /* VoteInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2845D87F246FAED7007CD497 /* VoteInfoCell.xib */; };
 		2845D884246FAEED007CD497 /* VoteDetailStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2845D882246FAEED007CD497 /* VoteDetailStatusCell.swift */; };
 		2845D885246FAEED007CD497 /* VoteDetailStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2845D883246FAEED007CD497 /* VoteDetailStatusCell.xib */; };
 		28474ECB241E06AF00AF5A81 /* TxCdpWithdrawCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28474EBF241E06AF00AF5A81 /* TxCdpWithdrawCell.xib */; };
@@ -4065,8 +4061,6 @@
 		28440C69271E7BC800B4A7C3 /* SifExitPool3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifExitPool3ViewController.swift; sourceTree = "<group>"; };
 		28440C6A271E7BC800B4A7C3 /* SifExitPool3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SifExitPool3ViewController.xib; sourceTree = "<group>"; };
 		2845D87C246FAE16007CD497 /* VoteDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailsViewController.swift; sourceTree = "<group>"; };
-		2845D87E246FAED7007CD497 /* VoteInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteInfoCell.swift; sourceTree = "<group>"; };
-		2845D87F246FAED7007CD497 /* VoteInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteInfoCell.xib; sourceTree = "<group>"; };
 		2845D882246FAEED007CD497 /* VoteDetailStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailStatusCell.swift; sourceTree = "<group>"; };
 		2845D883246FAEED007CD497 /* VoteDetailStatusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteDetailStatusCell.xib; sourceTree = "<group>"; };
 		28474EBF241E06AF00AF5A81 /* TxCdpWithdrawCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TxCdpWithdrawCell.xib; sourceTree = "<group>"; };
@@ -6488,8 +6482,6 @@
 				2845D883246FAEED007CD497 /* VoteDetailStatusCell.xib */,
 				040593BD29D530FE004B61EF /* VoteDetailMsgCell.swift */,
 				040593BE29D530FE004B61EF /* VoteDetailMsgCell.xib */,
-				2845D87E246FAED7007CD497 /* VoteInfoCell.swift */,
-				2845D87F246FAED7007CD497 /* VoteInfoCell.xib */,
 				289E4DAD26E5D765007C7C35 /* CommonPoolCell.swift */,
 				289E4DAE26E5D765007C7C35 /* CommonPoolCell.xib */,
 				289E4DB126E5D777007C7C35 /* CommonMyPoolCell.swift */,
@@ -6569,6 +6561,8 @@
 			dependencies = (
 			);
 			name = Cosmostation;
+			packageProductDependencies = (
+			);
 			productName = Cosmostation;
 			productReference = E1945E24222E7C0600A1436F /* Cosmostation.app */;
 			productType = "com.apple.product-type.application";
@@ -6608,6 +6602,8 @@
 				ja,
 			);
 			mainGroup = E1945E1B222E7C0600A1436F;
+			packageReferences = (
+			);
 			productRefGroup = E1945E25222E7C0600A1436F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -6837,7 +6833,6 @@
 				18FFB754281AF533004E65BB /* ReplaceResource3ViewController.xib in Resources */,
 				04FD713B28B8B3C80059E88B /* AssetCell.xib in Resources */,
 				18FFB756281AF533004E65BB /* SelectChainCell.xib in Resources */,
-				18FFB757281AF533004E65BB /* VoteInfoCell.xib in Resources */,
 				18FFB759281AF533004E65BB /* DeleteStarname0ViewController.xib in Resources */,
 				18FFB75C281AF533004E65BB /* MnemonicCell.xib in Resources */,
 				18FFB75D281AF533004E65BB /* AccountCell.xib in Resources */,
@@ -7206,7 +7201,6 @@
 				04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */,
 				280E1F12254AB5C70007BA7D /* ReplaceResource3ViewController.xib in Resources */,
 				285A33DB244763290052BD3D /* SelectChainCell.xib in Resources */,
-				2845D881246FAED7007CD497 /* VoteInfoCell.xib in Resources */,
 				280E1EF9254A7AC80007BA7D /* DeleteStarname0ViewController.xib in Resources */,
 				E14BDFFC224CCFE20007DD7D /* MnemonicCell.xib in Resources */,
 				E1853684289C104700B84DC6 /* GranterEmptyViewCell.xib in Resources */,
@@ -7823,7 +7817,6 @@
 				18FFB3D3281AF533004E65BB /* StdSignMsg.swift in Sources */,
 				9F1EE31F295F9555007B7CD7 /* Store.swift in Sources */,
 				1537A0C929ACA33F00342ACF /* persistence_halving_v1beta1_genesis.pb.swift in Sources */,
-				18FFB3D4281AF533004E65BB /* VoteInfoCell.swift in Sources */,
 				18FFB3D5281AF533004E65BB /* WalletKavaCell.swift in Sources */,
 				18DFB7F5298CADC900E812B6 /* stride_vesting_tx.pb.swift in Sources */,
 				1817CB06283E2CE500523713 /* sifnode_dispensation_v1_tx.pb.swift in Sources */,
@@ -8944,7 +8937,6 @@
 				040FA9B4275F55C300229F6F /* desmos_profiles_v1beta1_msgs_profile.pb.swift in Sources */,
 				048C830027BF572800270528 /* evmos_epochs_v1_query.grpc.swift in Sources */,
 				E151B64B224859E10026B8C0 /* StdSignMsg.swift in Sources */,
-				2845D880246FAED7007CD497 /* VoteInfoCell.swift in Sources */,
 				E191A57D237902C5002577BC /* WalletKavaCell.swift in Sources */,
 				E1982917290E85C800451A81 /* EarnStatusCell.swift in Sources */,
 				046FF01A277B43F100F72C11 /* GenDenom3ViewController.swift in Sources */,

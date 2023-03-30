@@ -130,7 +130,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"VoteDetailMsgCell") as? VoteDetailMsgCell
-            cell?.onBindView(mintscanProposalDetail?.messages[indexPath.row], indexPath.row, selectedMsg)
+            cell?.onBindView(chainConfig, mintscanProposalDetail?.messages[indexPath.row], indexPath.row, selectedMsg)
             cell?.actionToggle = {
                 if let index = self.selectedMsg.firstIndex(of: indexPath.row) {
                     self.selectedMsg.remove(at: index)
@@ -141,49 +141,13 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
                 self.voteDetailTableView.reloadRows(at: [indexPath], with: .automatic)
                 self.voteDetailTableView.endUpdates()
             }
+            cell?.actionLink = { url in
+                print("actionLink ", url)
+                self.onClickLink()
+            }
             return cell!
         }
     }
-    
-    /*
-    func onBindVoteInfo(_ tableView: UITableView) -> UITableViewCell {
-        let cell:VoteInfoCell? = tableView.dequeueReusableCell(withIdentifier:"VoteInfoCell") as? VoteInfoCell
-        if (mintscanProposalDetail != nil) {
-            cell?.statusImg.image = WUtils.onProposalStatusImg(mintscanProposalDetail)
-            cell?.statusTitle.text = WUtils.onProposalStatusTxt(mintscanProposalDetail)
-            cell?.proposalTitle.text = "# ".appending(mintscanProposalDetail!.id!).appending("  ").appending(mintscanProposalDetail!.title!)
-            cell?.proposerLabel.text = WUtils.onProposalProposer(mintscanProposalDetail)
-            cell?.proposalTypeLabel.text = mintscanProposalDetail?.proposal_type
-            cell?.voteStartTime.text = WDP.dpTime(mintscanProposalDetail?.voting_start_time)
-            cell?.voteEndTime.text = WDP.dpTime(mintscanProposalDetail?.voting_end_time)
-            cell?.voteDescription.text = mintscanProposalDetail?.description
-            if let requestCoin = mintscanProposalDetail?.content?.amount?[0] {
-                WDP.dpCoin(chainConfig, requestCoin, cell!.requestAmountDenom, cell!.requestAmount)
-            } else {
-                cell!.requestAmountDenom.text = "N/A"
-            }
-        }
-//        cell?.actionLink = {
-//            self.onClickLink()
-//        }
-        cell?.actionToggle = {
-            cell?.voteDescription.isScrollEnabled = !(cell?.voteDescription.isScrollEnabled)!
-            self.voteDetailTableView.reloadData()
-        }
-        return cell!
-    }
-    
-    func onBindTally(_ tableView: UITableView) -> UITableViewCell {
-        let cell:VoteDetailStatusCell? = tableView.dequeueReusableCell(withIdentifier:"VoteDetailStatusCell") as? VoteDetailStatusCell
-//        if (mintscanProposalDetail != nil) {
-//            cell?.onUpdateCards(chainType, mintscanProposalDetail!)
-//        }
-//        self.mMyVote_gRPC?.options.forEach { vote in
-//            cell?.onCheckMyVote_gRPC(vote.option)
-//        }
-        return cell!
-    }
-     */
     
     @objc func onFetch() {
         selectedMsg.removeAll()

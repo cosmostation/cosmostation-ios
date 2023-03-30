@@ -22,13 +22,13 @@
                         <rect key="frame" x="12" y="4" width="552" height="216"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="1. Proposal Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MdZ-0x-9m5">
-                                <rect key="frame" x="15" y="14.999999999999998" width="105" height="16.333333333333329"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                <rect key="frame" x="14.999999999999993" y="14.999999999999998" width="112.33333333333331" height="17.333333333333329"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 <color key="textColor" name="cosmos"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Te5-U3-aYf">
-                                <rect key="frame" x="15" y="39.333333333333329" width="522" height="148.66666666666669"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Te5-U3-aYf">
+                                <rect key="frame" x="15" y="40.333333333333329" width="522" height="147.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Proposal Title Proposal TitleProposal TitleProposal TitleProposal TitleProposal TitleProposal Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXw-43-fql">
                                         <rect key="frame" x="0.0" y="0.0" width="522" height="36"/>
@@ -39,51 +39,13 @@
                                         <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qhO-0L-1oV">
-                                        <rect key="frame" x="0.0" y="37.999999999999993" width="522" height="82.666666666666657"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <mutableString key="text">Code Block Swift
-   ///Expand and collapse the cell
-   func toggleFullView() {
-     showFullDetails.toggle()
-     
-     if showFullDetails {
-       //show the full version
-       if contentView.subviews.contains(previewDetailsView) {
-         previewDetailsView.removeFromSuperview()
-       }
-       if !contentView.subviews.contains(fullDetailsView) {
-         contentView.addSubview(fullDetailsView)
-       }
-     } else {
-       //show the preview version
-       if contentView.subviews.contains(fullDetailsView) {
-         fullDetailsView.removeFromSuperview()
-       }
-       if !contentView.subviews.contains(previewDetailsView) {
-         contentView.addSubview(previewDetailsView)
-       }
-     }
-    //Invalidate the layout
-    contentView.setNeedsLayout()
-     
-     UIView.animate(withDuration: 1.2) {
-      self.layoutIfNeeded()
-     }
-   }
-</mutableString>
-                                        <color key="textColor" name="_font05"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
-                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                                    </textView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d8Z-iL-K4C">
-                                        <rect key="frame" x="0.0" y="122.66666666666666" width="522" height="26"/>
+                                        <rect key="frame" x="0.0" y="39.999999999999993" width="522" height="26.000000000000007"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Request Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMb-JD-T78">
-                                                <rect key="frame" x="0.0" y="5" width="103.66666666666667" height="16.333333333333332"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMb-JD-T78">
+                                                <rect key="frame" x="0.0" y="5" width="48.333333333333336" height="16.333333333333332"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                                <color key="textColor" name="_font05"/>
+                                                <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHQ-ic-ePv">
@@ -113,9 +75,56 @@
                                             <constraint firstItem="z7f-fY-exe" firstAttribute="leading" secondItem="jHQ-ic-ePv" secondAttribute="trailing" constant="4" id="njo-4c-idw"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xM-gx-2kO">
+                                        <rect key="frame" x="0.0" y="70" width="522" height="0.6666666666666714"/>
+                                        <color key="backgroundColor" name="_card_divider"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="tyP-an-Tv7"/>
+                                        </constraints>
+                                    </view>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qhO-0L-1oV">
+                                        <rect key="frame" x="0.0" y="74.666666666666657" width="522" height="73"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <string key="text">Code Block Swift
+   ///Expand and collapse the cell
+   func toggleFullView() {
+     showFullDetails.toggle()
+     
+     if showFullDetails {
+       //show the full version
+       if contentView.subviews.contains(previewDetailsView) {
+         previewDetailsView.removeFromSuperview()
+       }
+       if !contentView.subviews.contains(fullDetailsView) {
+         contentView.addSubview(fullDetailsView)
+       }
+     } else {
+       //show the preview version
+       if contentView.subviews.contains(fullDetailsView) {
+         fullDetailsView.removeFromSuperview()
+       }
+       if !contentView.subviews.contains(previewDetailsView) {
+         contentView.addSubview(previewDetailsView)
+       }
+     }
+    //Invalidate the layout
+    contentView.setNeedsLayout()
+     
+     UIView.animate(withDuration: 1.2) {
+      self.layoutIfNeeded()
+     }
+   }
+</string>
+                                        <color key="textColor" name="_font05"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                    </textView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="9xM-gx-2kO" secondAttribute="trailing" id="0In-dp-WoU"/>
                                     <constraint firstItem="fXw-43-fql" firstAttribute="leading" secondItem="Te5-U3-aYf" secondAttribute="leading" id="0uE-eo-Oig"/>
+                                    <constraint firstItem="9xM-gx-2kO" firstAttribute="leading" secondItem="Te5-U3-aYf" secondAttribute="leading" id="VMf-da-NeQ"/>
                                     <constraint firstAttribute="trailing" secondItem="qhO-0L-1oV" secondAttribute="trailing" id="VbQ-Yd-2CZ"/>
                                     <constraint firstItem="fXw-43-fql" firstAttribute="top" secondItem="Te5-U3-aYf" secondAttribute="top" id="gHe-vF-cGo"/>
                                     <constraint firstAttribute="trailing" secondItem="fXw-43-fql" secondAttribute="trailing" id="sFw-QG-9GC"/>
@@ -179,6 +188,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="descriptionBarLayer" destination="9xM-gx-2kO" id="Syb-js-YxY"/>
                 <outlet property="descriptionTv" destination="qhO-0L-1oV" id="fMb-wc-qAn"/>
                 <outlet property="requsetAmountLabel" destination="jHQ-ic-ePv" id="GpS-9s-uDy"/>
                 <outlet property="requsetDenomLabel" destination="z7f-fY-exe" id="LFp-fw-gVl"/>
@@ -194,6 +204,9 @@
         <image name="arrowDown" width="24" height="24"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_card_divider">
+            <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font04">
             <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
