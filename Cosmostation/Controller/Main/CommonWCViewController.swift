@@ -60,6 +60,7 @@ class CommonWCViewController: BaseViewController {
     var accountChainSet = Set<String>()
     var accountSelectedSet = Set<Account>()
     var injectRequest: JSON?
+    var currentV2PairingUri: String?
     
     private var beginingPoint: CGPoint?
     var isViewShowed: Bool = true
@@ -131,9 +132,13 @@ class CommonWCViewController: BaseViewController {
     }
     
     func processQuery(host: String?, query: String?) {
-        if let host = host, let query = query {
+        if let host = host, let query = query?.removingPercentEncoding {
             if host == "wc" {
-                wcURL = query.removingPercentEncoding
+                if (query.starts(with: "uri=")) {
+                    wcURL = query.replacingOccurrences(of: "uri=", with: "")
+                } else {
+                    wcURL = query
+                }
                 connectSession()
             } else if host == "dapp" || host == "internaldapp" {
                 if webView.isHidden == false, let url = URL(string: query) {
@@ -188,12 +193,25 @@ class CommonWCViewController: BaseViewController {
         }
     }
     
+    func isConnected() -> Bool {
+        if let interactor = interactor {
+            if (interactor.state == .connected) {
+                return true
+            }
+        }
+        if wcURL == currentV2PairingUri {
+            return true
+        }
+        return false
+    }
+    
     func connectSession() {
-        showLoading()
-        guard let url = wcURL else {
+        if isConnected() { return }
+        guard let url = wcURL, url.starts(with: "wc") else {
             dismissOrPopViewController()
             return
         }
+        showLoading()
         if (url.contains("@2")) {
             connectWalletConnectV2(url: url)
         } else {
@@ -203,6 +221,7 @@ class CommonWCViewController: BaseViewController {
     
     private func connectWalletConnectV2(url: String) {
         setUpAuthSubscribing()
+        currentV2PairingUri = url
         pairClient(uri: WalletConnectURI(string: url)!)
     }
     
@@ -215,6 +234,24 @@ class CommonWCViewController: BaseViewController {
         self.interactor = interactor
         configureWalletConnect()
         interactor.connect().cauterize()
+    }
+    
+    @IBAction func onUrlChange() {
+        let nameAlert = UIAlertController(title: NSLocalizedString("change_wallet_name", comment: ""), message: nil, preferredStyle: .alert)
+        nameAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
+        nameAlert.addTextField { (textField) in textField.placeholder = NSLocalizedString("wallet_name", comment: "") }
+        nameAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { _ in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        nameAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak nameAlert] (_) in
+            let textField = nameAlert?.textFields![0]
+            let trimmedString = textField?.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.webView.load(URLRequest(url: URL(string: trimmedString!)!))
+        }))
+        self.present(nameAlert, animated: true) {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+            nameAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        }
     }
     
     func configureWalletConnect() {
