@@ -486,6 +486,7 @@
 "check_mnemonic" = "니모닉 확인";
 "check_private_key" = "개인키 확인";
 "change_wallet_name" = "지갑 별칭 변경";
+"change_url" = "URL 입력";
 "wallet_name" = "별칭";
 "change_mnemonic_name" = "니모닉 별칭 변경";
 "set_mnemonic_name" = "니모닉 별칭 설정";

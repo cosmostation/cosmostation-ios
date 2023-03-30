@@ -237,9 +237,9 @@ class CommonWCViewController: BaseViewController {
     }
     
     @IBAction func onUrlChange() {
-        let nameAlert = UIAlertController(title: NSLocalizedString("change_wallet_name", comment: ""), message: nil, preferredStyle: .alert)
+        let nameAlert = UIAlertController(title: NSLocalizedString("change_url", comment: ""), message: nil, preferredStyle: .alert)
         nameAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
-        nameAlert.addTextField { (textField) in textField.placeholder = NSLocalizedString("wallet_name", comment: "") }
+        nameAlert.addTextField()
         nameAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))
