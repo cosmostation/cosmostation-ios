@@ -224,6 +224,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstItem="BhS-sQ-2En" firstAttribute="centerY" secondItem="mkI-9p-rWl" secondAttribute="centerY" id="1tW-kF-GxV"/>
                                 <constraint firstItem="EzO-xM-H7P" firstAttribute="leading" secondItem="mkI-9p-rWl" secondAttribute="leading" constant="5" id="9Bk-Ug-H17"/>
@@ -237,6 +238,9 @@
                                 <constraint firstItem="EzO-xM-H7P" firstAttribute="centerY" secondItem="mkI-9p-rWl" secondAttribute="centerY" id="qnA-eH-Lbj"/>
                                 <constraint firstItem="BhS-sQ-2En" firstAttribute="leading" secondItem="EzO-xM-H7P" secondAttribute="trailing" constant="10" id="scw-LY-wAS"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="5mw-1j-1ls" appends="YES" id="zvO-Rt-Kvh"/>
+                            </connections>
                         </view>
                     </subviews>
                     <constraints>
@@ -289,6 +293,11 @@
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="153.34821428571428"/>
         </view>
+        <tapGestureRecognizer id="5mw-1j-1ls">
+            <connections>
+                <action selector="onUrlChange" destination="-1" id="lyM-p6-a2h"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="browseBack" width="24" height="24"/>
