@@ -250,6 +250,35 @@ public struct MintscanV2Message {
     var title: String?
     var description: String?
     var requestAmount: Coin?
+    var content: MintscanV2Content?
+    
+    init(_ dictionary: NSDictionary?) {
+        self.type = dictionary?["@type"] as? String ?? ""
+        self.title = dictionary?["title"] as? String ?? ""
+        self.description = dictionary?["description"] as? String ?? ""
+        if let rawAmounts = dictionary?["amount"] as? Array<NSDictionary> {
+            for rawAmount in rawAmounts {
+                requestAmount = Coin.init(rawAmount)
+            }
+        }
+        if let rawContent = dictionary?["content"] as? NSDictionary  {
+            self.content = MintscanV2Content.init(rawContent)
+        }
+        
+        if (self.type?.contains("MsgExecLegacyContent") == true && self.content != nil) {
+            self.type = self.content?.type
+            self.title = self.content?.title
+            self.description = self.content?.description
+            self.requestAmount = self.content?.requestAmount
+        }
+    }
+}
+
+public struct MintscanV2Content {
+    var type: String?
+    var title: String?
+    var description: String?
+    var requestAmount: Coin?
     
     init(_ dictionary: NSDictionary?) {
         self.type = dictionary?["@type"] as? String ?? ""
@@ -261,5 +290,4 @@ public struct MintscanV2Message {
             }
         }
     }
-    
 }

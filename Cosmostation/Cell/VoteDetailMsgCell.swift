@@ -8,53 +8,58 @@
 
 import UIKit
 
-class VoteDetailMsgCell: UITableViewCell {
+class VoteDetailMsgCell: UITableViewCell, UITextViewDelegate {
 
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var requsetLayer: UIView!
     @IBOutlet weak var requsetAmountLabel: UILabel!
     @IBOutlet weak var requsetDenomLabel: UILabel!
+    @IBOutlet weak var descriptionBarLayer: UIView!
     @IBOutlet weak var descriptionTv: UITextView!
     @IBOutlet weak var toggleBtn: UIButton!
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    func onBindView(_ message: MintscanV2Message?, _ position: Int, _ selected : Array<Int>) {
+    func onBindView(_ chainConfig: ChainConfig?, _ message: MintscanV2Message?, _ position: Int, _ selected : Array<Int>) {
+        guard let chainConfig = chainConfig else {
+            return
+        }
         typeLabel.text = String(position + 1) + ". " + String(message?.type?.split(separator: ".").last ?? "")
+        typeLabel.textColor = chainConfig.chainColor
         titleLabel.text = message?.title
-//        descriptionTv.text = message?.description
-        descriptionTv.attributedText = message?.description?.htmlToAttributedString
+        descriptionTv.text = message?.description
+        descriptionTv.tintColor = UIColor(named: "photon")!
+        
+        if let reqCoin = message?.requestAmount {
+            WDP.dpCoin(chainConfig, reqCoin, requsetDenomLabel, requsetAmountLabel)
+            requsetLayer.isHidden = false
+        } else {
+            requsetLayer.isHidden = true
+        }
         
         if (selected.contains(position)) {
+            descriptionBarLayer.isHidden = false
             descriptionTv.isHidden = false
             toggleBtn.setImage(UIImage(named: "arrowUp"), for: .normal)
         } else {
+            descriptionBarLayer.isHidden = true
             descriptionTv.isHidden = true
             toggleBtn.setImage(UIImage(named: "arrowDown"), for: .normal)
         }
+        descriptionTv.delegate = self
     }
     
     var actionToggle: (() -> Void)? = nil
     @IBAction func onToggle(_ sender: UIButton) {
         actionToggle?()
     }
-}
-
-
-extension String {
-    var htmlToAttributedString: NSAttributedString? {
-        guard let data = data(using: .utf8) else { return nil }
-        do {
-            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
-        } catch {
-            return nil
-        }
-    }
-    var htmlToString: String {
-        return htmlToAttributedString?.string ?? ""
+    
+    var actionLink: ((URL) -> Void)? = nil
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        actionLink?(URL)
+        return false
     }
 }
