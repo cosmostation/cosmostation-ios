@@ -14,7 +14,7 @@ class ChainCoreum: ChainConfig {
     var chainType = ChainType.COREUM_MAIN
     var chainImg = UIImage(named: "chainCoreum")
     var chainInfoImg = UIImage(named: "infoCoreum")
-    var chainInfoTitle = "Coreum"
+    var chainInfoTitle = "COREUM"
     var chainInfoMsg = NSLocalizedString("guide_msg_coreum", comment: "")
     var chainColor = UIColor(named: "coreum")!
     var chainColorBG = UIColor(named: "coreum_bg")!
