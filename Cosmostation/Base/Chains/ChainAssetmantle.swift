@@ -47,7 +47,7 @@ class ChainAssetMantle: ChainConfig {
     var grpcUrl = "grpc-asset-mantle.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-asset-mantle-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "asset-mantle/"
     var priceUrl = GeckoUrl + "assetmantle"
     

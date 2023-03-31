@@ -47,7 +47,7 @@ class ChainCanto: ChainConfig {
     var grpcUrl = "grpc-canto.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = "https://rpc-canto-app.cosmostation.io"
-    var lcdUrl = "https://lcd-canto-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "canto/"
     var priceUrl = GeckoUrl + "canto"
     

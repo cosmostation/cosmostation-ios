@@ -50,7 +50,7 @@ class ChainFetchAi: ChainConfig {
     var grpcUrl = "grpc-fetchai.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-fetchai-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "fetchai/"
     var priceUrl = GeckoUrl + "fetch-ai"
     

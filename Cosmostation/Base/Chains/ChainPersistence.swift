@@ -48,7 +48,7 @@ class ChainPersistence: ChainConfig {
     var grpcUrl = "grpc-persistence.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-persistence-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "persistence/"
     var priceUrl = GeckoUrl + "persistence"
     

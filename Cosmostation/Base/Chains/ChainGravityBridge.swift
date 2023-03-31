@@ -47,7 +47,7 @@ class ChainGravityBridge: ChainConfig {
     var grpcUrl = "grpc-gravity-bridge.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-gravity-bridge-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "gravity-bridge/"
     var priceUrl = GeckoUrl + "graviton"
     

@@ -48,7 +48,7 @@ class ChainLike: ChainConfig {
     var grpcUrl = "grpc-likecoin.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-likecoin-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "likecoin/"
     var priceUrl = GeckoUrl + "likecoin"
     

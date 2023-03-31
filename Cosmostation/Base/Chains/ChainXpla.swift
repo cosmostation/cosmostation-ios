@@ -47,7 +47,7 @@ class ChainXpla: ChainConfig {
     var grpcUrl = "grpc-xpla.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-xpla-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "xpla/"
     var priceUrl = GeckoUrl + "xpla"
     

@@ -47,7 +47,7 @@ class ChainSommelier: ChainConfig {
     var grpcUrl = "grpc-sommelier.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-sommelier-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "sommelier/"
     var priceUrl = GeckoUrl + "sommelier"
     

@@ -46,8 +46,8 @@ class ChainEvmos: ChainConfig {
     var kadoMoneySupoort = false
     var grpcUrl = "grpc-evmos.cosmostation.io"
     var grpcPort = 443
-    var rpcUrl = "https://rpc-evmos.cosmostation.io"
-    var lcdUrl = "https://lcd-evmos.cosmostation.io/"
+    var rpcUrl = "https://rpc-evmos-app.cosmostation.io"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "evmos/"
     var priceUrl = GeckoUrl + "evmos"
     

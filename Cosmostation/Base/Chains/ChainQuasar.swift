@@ -47,7 +47,7 @@ class ChainQuasar: ChainConfig {
     var grpcUrl = "grpc-quasar.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-quasar-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "quasar/"
     var priceUrl = GeckoUrl + "quasar"
     

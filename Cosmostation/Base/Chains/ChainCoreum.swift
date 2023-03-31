@@ -48,7 +48,7 @@ class ChainCoreum: ChainConfig {
     var grpcUrl = "grpc-coreum.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-coreum-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "coreum/"
     var priceUrl = GeckoUrl + "coreum"
     

@@ -47,7 +47,7 @@ class ChainCerberus: ChainConfig {
     var grpcUrl = "grpc-cerberus.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-cerberus-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "cerberus/"
     var priceUrl = GeckoUrl + "cerberus"
     

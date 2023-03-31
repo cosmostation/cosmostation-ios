@@ -47,7 +47,7 @@ class ChainBitsong: ChainConfig {
     var grpcUrl = "grpc-bitsong.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-bitsong-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "bitsong/"
     var priceUrl = GeckoUrl + "bitsong"
     

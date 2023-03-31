@@ -47,8 +47,7 @@ class StationTest: ChainConfig {
     var grpcUrl = "grpc-office.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-office.cosmostation.io/station-testnet/"
-//    var apiUrl = "https://api-office.cosmostation.io/station-testnet/"
+    var lcdUrl = ""
     var explorerUrl = "https://testnet.mintscan.io/station/"
     var priceUrl = ""
     

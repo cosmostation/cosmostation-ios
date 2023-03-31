@@ -47,7 +47,7 @@ class ChainSentinel: ChainConfig {
     var grpcUrl = "grpc-sentinel.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-sentinel-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "sentinel/"
     var priceUrl = GeckoUrl + "sentinel"
     
