@@ -47,7 +47,7 @@ class ChainChihuahua: ChainConfig {
     var grpcUrl = "grpc-chihuahua.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-chihuahua-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "chihuahua/"
     var priceUrl = GeckoUrl + "chihuahua-chain"
     

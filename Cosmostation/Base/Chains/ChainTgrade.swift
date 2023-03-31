@@ -48,7 +48,7 @@ class ChainTgrade: ChainConfig {
     var grpcUrl = "grpc-tgrade.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-tgrade-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "tgrade/"
     var priceUrl = GeckoUrl + "tgrade"
     

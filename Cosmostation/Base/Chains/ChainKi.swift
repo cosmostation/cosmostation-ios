@@ -47,7 +47,7 @@ class ChainKi: ChainConfig {
     var grpcUrl = "grpc-ki-chain.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-ki-chain-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "ki-chain/"
     var priceUrl = GeckoUrl + "ki"
     

@@ -48,7 +48,7 @@ class ChainCosmos: ChainConfig {
     var grpcUrl = "grpc-cosmos.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-cosmos-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "cosmos/"
     var priceUrl = GeckoUrl + "cosmos"
     

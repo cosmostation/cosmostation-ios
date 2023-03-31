@@ -47,7 +47,7 @@ class ChainCudos: ChainConfig {
     var grpcUrl = "grpc-cudos.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-cudos-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "cudos/"
     var priceUrl = GeckoUrl + "cudos"
     

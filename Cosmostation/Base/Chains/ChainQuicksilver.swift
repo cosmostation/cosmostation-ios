@@ -47,7 +47,7 @@ class ChainQuicksilver: ChainConfig {
     var grpcUrl = "grpc-quicksilver.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-quicksilver-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "quicksilver/"
     var priceUrl = GeckoUrl + "quicksilver"
     

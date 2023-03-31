@@ -47,7 +47,7 @@ class ChainOmniflix: ChainConfig {
     var grpcUrl = "grpc-omniflix.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-omniflix-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "omniflix/"
     var priceUrl = GeckoUrl + "omniflix-network"
     

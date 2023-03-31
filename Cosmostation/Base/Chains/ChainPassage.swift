@@ -47,7 +47,7 @@ class ChainPassage: ChainConfig {
     var grpcUrl = "grpc-passage.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-passage-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "passage/"
     var priceUrl = ""
     

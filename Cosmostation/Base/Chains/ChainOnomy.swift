@@ -47,7 +47,7 @@ class ChainOnomy: ChainConfig {
     var grpcUrl = "grpc-onomy-protocol.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-onomy-protocol-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "onomy-protocol/"
     var priceUrl = GeckoUrl + "onomy-protocol"
     

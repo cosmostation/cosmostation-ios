@@ -47,7 +47,7 @@ class ChainJuno: ChainConfig {
     var grpcUrl = "grpc-juno.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-juno-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "juno/"
     var priceUrl = GeckoUrl + "juno-network"
     

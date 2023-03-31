@@ -105,13 +105,13 @@ public class WUtils {
         var gapTime = Int(Date().timeIntervalSince(date))
         if (gapTime > 0) {
             if gapTime < minute {
-                return "(\(gapTime) seconds ago)"
+                return "\(gapTime) seconds ago"
             } else if gapTime < hour {
-                return "(\(gapTime / minute) minutes ago)"
+                return "\(gapTime / minute) minutes ago"
             } else if gapTime < day {
-                return "(\(gapTime / hour) hours ago)"
+                return "\(gapTime / hour) hours ago"
             } else {
-                return "(\(gapTime / day) days ago)"
+                return "\(gapTime / day) days ago"
             }
             
         } else {

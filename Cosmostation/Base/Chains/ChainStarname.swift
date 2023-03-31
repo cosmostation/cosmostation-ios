@@ -47,7 +47,7 @@ class ChainStarname: ChainConfig {
     var grpcUrl = "grpc-starname.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-starname-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "starname/"
     var priceUrl = GeckoUrl + "starname"
     

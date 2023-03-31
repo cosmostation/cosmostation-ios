@@ -47,7 +47,7 @@ class ChainUmee: ChainConfig {
     var grpcUrl = "grpc-umee.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-umee-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "umee/"
     var priceUrl = GeckoUrl + "umee"
     

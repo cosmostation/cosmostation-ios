@@ -48,7 +48,7 @@ class ChainKava: ChainConfig {
     var grpcUrl = "grpc-kava.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-kava-app.cosmostation.io/"
+    var lcdUrl = "https://lcd-kava.cosmostation.io/"
     var explorerUrl = MintscanUrl + "kava/"
     var priceUrl = GeckoUrl + "kava"
     

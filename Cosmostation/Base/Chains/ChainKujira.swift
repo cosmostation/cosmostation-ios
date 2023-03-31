@@ -48,7 +48,7 @@ class ChainKujira: ChainConfig {
     var grpcUrl = "grpc-kujira.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-kujira-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "kujira/"
     var priceUrl = GeckoUrl + "kujira"
     

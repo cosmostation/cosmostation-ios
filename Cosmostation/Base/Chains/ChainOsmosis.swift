@@ -47,7 +47,7 @@ class ChainOsmosis: ChainConfig {
     var grpcUrl = "grpc-osmosis.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-osmosis-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "osmosis/"
     var priceUrl = GeckoUrl + "osmosis"
     

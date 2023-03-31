@@ -47,7 +47,7 @@ class ChainStargaze: ChainConfig {
     var grpcUrl = "grpc-stargaze.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-stargaze-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "stargaze/"
     var priceUrl = GeckoUrl + "stargaze"
     

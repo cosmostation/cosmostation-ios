@@ -48,7 +48,7 @@ class ChainIxo: ChainConfig {
     var grpcUrl = "grpc-ixo.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
-    var lcdUrl = "https://lcd-ixo-app.cosmostation.io/"
+    var lcdUrl = ""
     var explorerUrl = MintscanUrl + "ixo/"
     var priceUrl = GeckoUrl + "ixo"
     
