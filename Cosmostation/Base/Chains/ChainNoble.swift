@@ -27,7 +27,7 @@ class ChainNoble: ChainConfig {
     
     var stakeDenomImg = UIImage(named: "tokenNoble")
     var stakeDenom = "ustake"
-    var stakeSymbol = "Noble"
+    var stakeSymbol = "NOBLE"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "noble")!
     var divideDecimal: Int16 = 6
