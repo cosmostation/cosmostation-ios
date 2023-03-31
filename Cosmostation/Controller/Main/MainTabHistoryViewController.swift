@@ -18,7 +18,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
 
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
-    @IBOutlet weak var comingLabel: UILabel!
     
     var mainTabVC: MainTabViewController!
     var refresher: UIRefreshControl!
@@ -64,13 +63,13 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
 //        self.emptyLabel.addGestureRecognizer(tapGesture)
 //        historyTableView.isHidden = true
 //        emptyLabel.isHidden = false
+//        print("emptyLabel ", emptyLabel.isHidden, "   ", emptyLabel.text)
     }
     
     @objc func testClick(tapGestureRecognizer: UITapGestureRecognizer) {
 //        let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
 //        txDetailVC.mIsGen = false
-////        txDetailVC.mTxHash = "77D4E08316A8B0132688F62FAFC93759207BF6EF008BE8E895D84C28CBFB3252"
-//        txDetailVC.mTxHash = "5BFBB4ADABA98E86C42651DDF23E6B416C4418C3C6759BAEE09C8EA8F2A02A42"
+//        txDetailVC.mTxHash = "DB6BD420C64A0DEFAC7CD134B1FDE40F0F50A291CBEDA2A46BB347D44CA94219"
 //        txDetailVC.hidesBottomBarWhenPushed = true
 //        self.navigationItem.title = ""
 //        self.navigationController?.pushViewController(txDetailVC, animated: true)
