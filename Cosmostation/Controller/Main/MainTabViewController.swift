@@ -1168,7 +1168,13 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         WUtils.clearBackgroundColor(of: waitAlert!.view)
         self.present(waitAlert!, animated: true, completion: nil)
         image.onStartAnimation()
-        
+    }
+    
+    public func hideWaittingAlert() {
+        if (waitAlert != nil) {
+            waitAlert?.dismiss(animated: true, completion: nil)
+            processScheme()
+        }
     }
     
     public func showKavaTestWarn() {
@@ -1221,13 +1227,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             cardPopup.resultDelegate = self
             cardPopup.show(onViewController: self)
         });
-    }
-    
-    public func hideWaittingAlert() {
-        if (waitAlert != nil) {
-            waitAlert?.dismiss(animated: true, completion: nil)
-            processScheme()
-        }
     }
     
     func accountSelected(_ id: Int64) {
