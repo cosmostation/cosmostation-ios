@@ -21,6 +21,7 @@ class VoteDetailMsgCell: UITableViewCell, UITextViewDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = .none
     }
     
     func onBindView(_ chainConfig: ChainConfig?, _ message: MintscanV2Message?, _ position: Int, _ selected : Array<Int>) {

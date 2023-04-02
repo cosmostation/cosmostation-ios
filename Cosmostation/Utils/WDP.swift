@@ -228,7 +228,7 @@ public class WDP {
             return "-"
         }
         let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format4", comment: "")
+        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
         return localFormatter.string(from: date)
     }
     
@@ -238,7 +238,7 @@ public class WDP {
             return "-"
         }
         let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format4", comment: "")
+        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
         return localFormatter.string(from: date)
     }
     
@@ -270,7 +270,7 @@ public class WDP {
             return "-"
         }
         let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format4", comment: "")
+        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
         return localFormatter.string(from: date)
     }
     
