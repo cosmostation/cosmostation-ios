@@ -1187,10 +1187,7 @@ support@cosmostation.io";
 
 "tx_known" = "Unknown";
 
-"date_format" = "MMM d, yyyy HH:mm:ss";
-"date_format2" = "MMM d, yyyy";
-"date_format3" = "MMM d, yyyy HH:mm";
-"date_format4" = "MMM d, yy HH:mm:ss";
+"date_format" = "dd-MM-yyyy HH:mm:ss";
 
 "new_account_restore" = "Restore with";
 "new_account_private_key" = "Private Key";

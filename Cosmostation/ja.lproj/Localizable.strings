@@ -107,9 +107,6 @@
 "currency_btc_symbol" = "₿";
 
 "date_format" = "yyyy-MM-dd HH:mm:ss";
-"date_format2" = "yyyy-MM-dd";
-"date_format3" = "yyyy-MM-dd HH:mm";
-"date_format4" = "yy-MM-dd HH:mm:ss";
 
 "new_account_restore" = "ウォレットを復元";
 "new_account_private_key" = "プライベートキー";
