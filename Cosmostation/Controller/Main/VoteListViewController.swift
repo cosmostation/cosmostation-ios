@@ -222,10 +222,6 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return onBindProposal(tableView, indexPath)
-    }
-    
-    func onBindProposal(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell  {
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"ProposalVotingPeriodCell") as? ProposalVotingPeriodCell
             let proposal = mFilteredProposals[indexPath.row]
@@ -283,8 +279,10 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                self.mFilteredProposals.removeAll()
+                self.mVotingPeriods.removeAll()
                 self.mEtcPeriods.removeAll()
+                self.mFilteredProposals.removeAll()
+                self.mFilteredEtcProposals.removeAll()
                 if let responseDatas = res as? Array<NSDictionary> {
                     responseDatas.forEach { rawProposal in
                         let tempProposal = MintscanV1Proposal.init(rawProposal)
