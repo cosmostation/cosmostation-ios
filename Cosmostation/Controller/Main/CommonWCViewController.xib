@@ -239,7 +239,7 @@
                                 <constraint firstItem="BhS-sQ-2En" firstAttribute="leading" secondItem="EzO-xM-H7P" secondAttribute="trailing" constant="10" id="scw-LY-wAS"/>
                             </constraints>
                             <connections>
-                                <outletCollection property="gestureRecognizers" destination="5mw-1j-1ls" appends="YES" id="zvO-Rt-Kvh"/>
+                                <outletCollection property="gestureRecognizers" destination="5mw-1j-1ls" appends="YES" id="8li-tV-ahl"/>
                             </connections>
                         </view>
                     </subviews>

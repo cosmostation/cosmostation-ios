@@ -927,6 +927,7 @@ support@cosmostation.io";
 "error_select_account_link" = "Please select account to link";
 "error_not_support_chain_title" = "Error";
 "error_not_support_chain_msg" = "%@ is not a currently supported chain";
+"error_not_support_wallet" = "This wallet is not supported. (Please change the wallet.)";
 "error_no_accounts_chain_title" = "Error";
 "error_no_accounts_chain_msg" = "No wallet for that chain";
 "error_not_selected_to_import" = "Select address to import";

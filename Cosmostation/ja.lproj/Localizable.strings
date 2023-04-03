@@ -279,7 +279,7 @@
 "error_not_redelegate" = "再委任する数量がありません。";
 "error_not_reward" = "貯まった利子が十分ではありません。";
 "error_not_selected_to_import" = "登録するウォーレットを選択してください。";
-"error_not_support_chain_msg" = "%@はサポートしないチェーンです。";
+"error_not_support_chain_msg" = "サポートしていない財布です。（財布を変更してください。）";
 "error_not_support_chain_title" = "エラー";
 "error_not_support_cosmostation" = "Cosmostaion walletでサポートしないチェーンです。";
 "error_not_undelegate" = "委任を解除する数量がありません。";

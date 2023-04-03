@@ -926,6 +926,7 @@ support@cosmostation.io";
 "error_select_account_link" = "연결할 계정을 선택해 주세요.";
 "error_not_support_chain_title" = "오류";
 "error_not_support_chain_msg" = "%@는 지원하지 않는 체인입니다.";
+"error_not_support_wallet" = "지원하지 않는 지갑입니다.(지갑을 변경해주세요.)";
 "error_no_accounts_chain_title" = "오류";
 "error_no_accounts_chain_msg" = "해당 체인에 대한 지갑이 없습니다";
 "error_not_selected_to_import" = "등록할 지갑을 골라주세요";
