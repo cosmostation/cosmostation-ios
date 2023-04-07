@@ -607,7 +607,7 @@ public class WUtils {
             return chainConfig!.stakeSymbol
         }
         if (chainConfig?.isGrpc == true) {
-            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() && $0.chain == chainConfig?.chainAPIName }).first {
                 return msAsset.symbol
             } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first {
                 return msToken.symbol
