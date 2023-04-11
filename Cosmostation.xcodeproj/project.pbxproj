@@ -1392,6 +1392,12 @@
 		154A98122983A05800E0B801 /* stride_records_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154A97E02983A05700E0B801 /* stride_records_genesis.pb.swift */; };
 		154A98132983A05800E0B801 /* stride_epochs_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154A97E12983A05700E0B801 /* stride_epochs_query.pb.swift */; };
 		1569489828ABD9E0004777ED /* ChainPassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1569489728ABD9E0004777ED /* ChainPassage.swift */; };
+		156CDB8029E5236000D55BD2 /* ChainNeutronTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CDB7F29E5236000D55BD2 /* ChainNeutronTest.swift */; };
+		156CDB8129E5236000D55BD2 /* ChainNeutronTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CDB7F29E5236000D55BD2 /* ChainNeutronTest.swift */; };
+		156CDB8429E52B6A00D55BD2 /* WalletNeutronCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CDB8229E52B6A00D55BD2 /* WalletNeutronCell.swift */; };
+		156CDB8529E52B6A00D55BD2 /* WalletNeutronCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CDB8229E52B6A00D55BD2 /* WalletNeutronCell.swift */; };
+		156CDB8629E52B6A00D55BD2 /* WalletNeutronCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156CDB8329E52B6A00D55BD2 /* WalletNeutronCell.xib */; };
+		156CDB8729E52B6A00D55BD2 /* WalletNeutronCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156CDB8329E52B6A00D55BD2 /* WalletNeutronCell.xib */; };
 		1577DAC829B9F07800C360EC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577DAC729B9F07800C360EC /* Board.swift */; };
 		1577DAC929B9F07800C360EC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577DAC729B9F07800C360EC /* Board.swift */; };
 		1599551029D14410004EFCF2 /* ChainNoble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599550F29D14410004EFCF2 /* ChainNoble.swift */; };
@@ -3879,6 +3885,9 @@
 		154A97E02983A05700E0B801 /* stride_records_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_records_genesis.pb.swift; sourceTree = "<group>"; };
 		154A97E12983A05700E0B801 /* stride_epochs_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_epochs_query.pb.swift; sourceTree = "<group>"; };
 		1569489728ABD9E0004777ED /* ChainPassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPassage.swift; sourceTree = "<group>"; };
+		156CDB7F29E5236000D55BD2 /* ChainNeutronTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainNeutronTest.swift; sourceTree = "<group>"; };
+		156CDB8229E52B6A00D55BD2 /* WalletNeutronCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNeutronCell.swift; sourceTree = "<group>"; };
+		156CDB8329E52B6A00D55BD2 /* WalletNeutronCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletNeutronCell.xib; sourceTree = "<group>"; };
 		1577DAC729B9F07800C360EC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		1599550F29D14410004EFCF2 /* ChainNoble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainNoble.swift; sourceTree = "<group>"; };
 		15A1A50029ADAC390076504E /* TxPersisLiquidStakeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxPersisLiquidStakeCell.swift; sourceTree = "<group>"; };
@@ -4596,6 +4605,7 @@
 				04E165B628A0F873000F12C0 /* ChainTgrade.swift */,
 				0451FCB4282A3BD700214FDA /* ChainUmee.swift */,
 				04D2DB24290F8943007FC197 /* ChainXpla.swift */,
+				156CDB7F29E5236000D55BD2 /* ChainNeutronTest.swift */,
 				04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */,
 			);
 			path = Chains;
@@ -5437,6 +5447,8 @@
 				04FCD2EA292F8C9D00BA5349 /* WalletStrideCell.xib */,
 				15B6BDA929ABC2FB00493E11 /* WalletPersisCell.swift */,
 				15B6BDA629ABC2EB00493E11 /* WalletPersisCell.xib */,
+				156CDB8229E52B6A00D55BD2 /* WalletNeutronCell.swift */,
+				156CDB8329E52B6A00D55BD2 /* WalletNeutronCell.xib */,
 				151788EA282E078600A7D7CC /* WalletStationCell.swift */,
 				151788EB282E078600A7D7CC /* WalletStationCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
@@ -6649,6 +6661,7 @@
 				18FFB69D281AF533004E65BB /* KavaSwap0ViewController.xib in Resources */,
 				18FFB69E281AF533004E65BB /* TxRedelegateCell.xib in Resources */,
 				18B9FC1C287FEA700018FB76 /* WalletBaseChainCell.xib in Resources */,
+				156CDB8729E52B6A00D55BD2 /* WalletNeutronCell.xib in Resources */,
 				18FFB6A0281AF533004E65BB /* DenomListCell.xib in Resources */,
 				18FFB6A3281AF533004E65BB /* OkPromotionCell.xib in Resources */,
 				042AEE0A286452E000E13825 /* OkWithdraw1ViewController.xib in Resources */,
@@ -7060,6 +7073,7 @@
 				04C5AEAF28633D39007627EA /* Vote1ViewController.xib in Resources */,
 				04877300277C6E0700D9E201 /* new2022@1x.png in Resources */,
 				047FB705281EBA14009D8AAF /* MnemonicDetailViewController.xib in Resources */,
+				156CDB8629E52B6A00D55BD2 /* WalletNeutronCell.xib in Resources */,
 				04983CA0278B376500F913A3 /* SelectDesmosAirdopAccountCell.xib in Resources */,
 				28B4303624F7766200BD7BB2 /* TxOkDirectVoteCell.xib in Resources */,
 				04A116FD28F82368003605E5 /* GenTx.storyboard in Resources */,
@@ -7747,8 +7761,10 @@
 				1817CAF7283E2CE500523713 /* cosmos_evidence_v1beta1_query.grpc.swift in Sources */,
 				04C5AE7E28632055007627EA /* Redelegate2ViewController.swift in Sources */,
 				18DFB7EE298CADC900E812B6 /* tendermint_types_block.pb.swift in Sources */,
+				156CDB8129E5236000D55BD2 /* ChainNeutronTest.swift in Sources */,
 				1817CAEA283E2CE500523713 /* evmos_erc20_v1_tx.grpc.swift in Sources */,
 				18DFB82A298CB3F500E812B6 /* ChainMars.swift in Sources */,
+				156CDB8529E52B6A00D55BD2 /* WalletNeutronCell.swift in Sources */,
 				1817CB4C283E2CE500523713 /* cosmos_gov_v1beta2_gov.pb.swift in Sources */,
 				1817CC81283E2CE600523713 /* crescent_liquidity_v1beta1_query.pb.swift in Sources */,
 				18FFB39B281AF533004E65BB /* TxCell.swift in Sources */,
@@ -8864,8 +8880,10 @@
 				28B2E4BB26CFB94800ECF960 /* NativeTokenGrpcViewController.swift in Sources */,
 				0451FC8E282A3B0800214FDA /* ChainRegen.swift in Sources */,
 				2842AB72242C7C8A00248EEB /* CdpListAllCell.swift in Sources */,
+				156CDB8029E5236000D55BD2 /* ChainNeutronTest.swift in Sources */,
 				04E165B728A0F873000F12C0 /* ChainTgrade.swift in Sources */,
 				153559982988FDE70055A1D3 /* ChainMars.swift in Sources */,
+				156CDB8429E52B6A00D55BD2 /* WalletNeutronCell.swift in Sources */,
 				283D2EA824F5388C00247424 /* OkAccountToken.swift in Sources */,
 				E1A82DE822448E940097CAEE /* WUtils.swift in Sources */,
 				28641F302601AD59000AAEB8 /* TxCell.swift in Sources */,

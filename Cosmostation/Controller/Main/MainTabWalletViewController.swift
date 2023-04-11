@@ -56,6 +56,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletCrescentCell", bundle: nil), forCellReuseIdentifier: "WalletCrescentCell")
         self.walletTableView.register(UINib(nibName: "WalletStrideCell", bundle: nil), forCellReuseIdentifier: "WalletStrideCell")
         self.walletTableView.register(UINib(nibName: "WalletPersisCell", bundle: nil), forCellReuseIdentifier: "WalletPersisCell")
+        self.walletTableView.register(UINib(nibName: "WalletNeutronCell", bundle: nil), forCellReuseIdentifier: "WalletNeutronCell")
         self.walletTableView.register(UINib(nibName: "WalletStationCell", bundle: nil), forCellReuseIdentifier: "WalletStationCell")
         self.walletTableView.register(UINib(nibName: "WalletBaseChainCell", bundle: nil), forCellReuseIdentifier: "WalletBaseChainCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
@@ -144,7 +145,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return 1;
             
         } else {
-            if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
+            if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN || chainType == .NEUTRON_TEST) {
                 return 3;
             }
             if (chainType == .KAVA_MAIN || chainType == .MEDI_MAIN || chainType == .DESMOS_MAIN) {
@@ -189,6 +190,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 return onSetStrideItems(tableView, indexPath);
             } else if (chainType == .PERSIS_MAIN) {
                 return onSetPersisItems(tableView, indexPath);
+            } else if (chainType == .NEUTRON_TEST) {
+                return onSetNeutronItems(tableView, indexPath);
             } else if (chainType == .STATION_TEST) {
                 return onSetStationItems(tableView, indexPath);
             }
@@ -530,6 +533,24 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
+    func onSetNeutronItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletNeutronCell") as? WalletNeutronCell
+            cell?.updateView(account, chainConfig)
+            cell?.actionVault = { self.onClickVault() }
+            cell?.actionDao = { self.onClickDao() }
+            cell?.actionDefi = { self.onShowToast(NSLocalizedString("prepare", comment: "")) }
+            cell?.actionWc = { self.onShowToast(NSLocalizedString("prepare", comment: "")) }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            return onBindPriceCell(tableView)
+
+        } else {
+            return onBindGuideCell(tableView)
+        }
+    }
+    
     func onSetStationItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletStationCell") as? WalletStationCell
@@ -813,6 +834,14 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(persisDappVC, animated: true)
         }
+    }
+    
+    func onClickVault() {
+        self.onShowToast(NSLocalizedString("prepare", comment: ""))
+    }
+    
+    func onClickDao() {
+        self.onShowToast(NSLocalizedString("prepare", comment: ""))
     }
     
     func onClickAprHelp() {
