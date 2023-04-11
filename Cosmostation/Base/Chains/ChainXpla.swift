@@ -40,7 +40,7 @@ class ChainXpla: ChainConfig {
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
-    var wcSupoort = false
+    var wcSupoort = true
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
