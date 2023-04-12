@@ -117,7 +117,7 @@
                                             <constraint firstAttribute="height" constant="40" id="lUs-WF-T5g"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <state key="normal" title=" Vault" image="btnIconRewad">
+                                        <state key="normal" title=" Vault" image="btnIconVault">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -142,7 +142,7 @@
                                             <constraint firstAttribute="height" constant="40" id="dXR-su-o2a"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <state key="normal" title=" Dao" image="btnIconVote">
+                                        <state key="normal" title=" Dao" image="btnIconDao">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -172,7 +172,7 @@
                                             <constraint firstAttribute="height" constant="40" id="pfc-Z8-eF4"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <state key="normal" title=" Neutron DeFi" image="msgIconCDP">
+                                        <state key="normal" title=" Neutron DeFi" image="btnIconNeutronDefi">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -290,10 +290,10 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="btnIconRewad" width="20" height="20"/>
-        <image name="btnIconVote" width="20" height="20"/>
+        <image name="btnIconDao" width="20" height="20"/>
+        <image name="btnIconNeutronDefi" width="20" height="20"/>
+        <image name="btnIconVault" width="20" height="20"/>
         <image name="btnIconWalletConnect" width="20" height="20"/>
-        <image name="msgIconCDP" width="28" height="28"/>
         <image name="tokenNeutron" width="28" height="28"/>
         <namedColor name="_card_divider">
             <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -305,10 +305,10 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="neutron">
-            <color red="0.27450980392156865" green="0.36470588235294116" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.27500000596046448" green="0.36500000953674316" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="neutron_bg">
-            <color red="0.92549019607843142" green="0.93725490196078431" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.92500001192092896" green="0.93699997663497925" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
