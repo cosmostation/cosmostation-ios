@@ -601,6 +601,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickValidatorList() {
+        if (chainType == .STAFI_MAIN) {
+            self.onShowToast(NSLocalizedString("error_no_staking", comment: ""))
+            return
+        }
         let validatorListVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "ValidatorListViewController") as! ValidatorListViewController
         validatorListVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""

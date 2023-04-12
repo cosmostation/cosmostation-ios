@@ -1392,6 +1392,8 @@
 		154A98122983A05800E0B801 /* stride_records_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154A97E02983A05700E0B801 /* stride_records_genesis.pb.swift */; };
 		154A98132983A05800E0B801 /* stride_epochs_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154A97E12983A05700E0B801 /* stride_epochs_query.pb.swift */; };
 		1569489828ABD9E0004777ED /* ChainPassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1569489728ABD9E0004777ED /* ChainPassage.swift */; };
+		1575C2C629E6595D009BEE39 /* ChainStafi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1575C2C529E6595D009BEE39 /* ChainStafi.swift */; };
+		1575C2C729E6595D009BEE39 /* ChainStafi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1575C2C529E6595D009BEE39 /* ChainStafi.swift */; };
 		1577DAC829B9F07800C360EC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577DAC729B9F07800C360EC /* Board.swift */; };
 		1577DAC929B9F07800C360EC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577DAC729B9F07800C360EC /* Board.swift */; };
 		1599551029D14410004EFCF2 /* ChainNoble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599550F29D14410004EFCF2 /* ChainNoble.swift */; };
@@ -3879,6 +3881,7 @@
 		154A97E02983A05700E0B801 /* stride_records_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_records_genesis.pb.swift; sourceTree = "<group>"; };
 		154A97E12983A05700E0B801 /* stride_epochs_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_epochs_query.pb.swift; sourceTree = "<group>"; };
 		1569489728ABD9E0004777ED /* ChainPassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPassage.swift; sourceTree = "<group>"; };
+		1575C2C529E6595D009BEE39 /* ChainStafi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStafi.swift; sourceTree = "<group>"; };
 		1577DAC729B9F07800C360EC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		1599550F29D14410004EFCF2 /* ChainNoble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainNoble.swift; sourceTree = "<group>"; };
 		15A1A50029ADAC390076504E /* TxPersisLiquidStakeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxPersisLiquidStakeCell.swift; sourceTree = "<group>"; };
@@ -4589,6 +4592,7 @@
 				0451FC65282A3A3200214FDA /* ChainSentinel.swift */,
 				0451FC69282A3A5F00214FDA /* ChainSif.swift */,
 				0468BF9C28C5A04700CBC1C6 /* ChainSommelier.swift */,
+				1575C2C529E6595D009BEE39 /* ChainStafi.swift */,
 				0451FC96282A3B4200214FDA /* ChainStargaze.swift */,
 				0451FC55282A398E00214FDA /* ChainStarname.swift */,
 				04FC7F1E28C6FECD00F64841 /* ChainStride.swift */,
@@ -7454,6 +7458,7 @@
 				04CF713A294C0DDE00134A84 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */,
 				18FFB26E281AF533004E65BB /* ResourceChainCell.swift in Sources */,
 				18DFB7F3298CADC900E812B6 /* starname_iov_starname_v1beta1_tx.grpc.swift in Sources */,
+				1575C2C729E6595D009BEE39 /* ChainStafi.swift in Sources */,
 				1817CB3E283E2CE500523713 /* starname_iov_escrow_v1beta1_tx.pb.swift in Sources */,
 				1817CC03283E2CE600523713 /* gravity_v1_msgs.grpc.swift in Sources */,
 				18FFB270281AF533004E65BB /* MemoMnemonicPopup.swift in Sources */,
@@ -8571,6 +8576,7 @@
 				154A97E42983A05700E0B801 /* stride_icacallbacks_tx.grpc.swift in Sources */,
 				0451FC5C282A39C100214FDA /* ChainCertik.swift in Sources */,
 				04CF7139294C0DDE00134A84 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */,
+				1575C2C629E6595D009BEE39 /* ChainStafi.swift in Sources */,
 				280E1F2A254AD3A80007BA7D /* ResourceChainCell.swift in Sources */,
 				28B3251F2637F80500275AED /* MemoMnemonicPopup.swift in Sources */,
 				040FAA73275F55C400229F6F /* ibc_core_channel_v1_query.grpc.swift in Sources */,

@@ -66,6 +66,7 @@
 "guide_msg_quasar" = "Quasarはボルトとボルト戦略を活用した分散型資産管理(DAM)サービスを提供している。";
 "guide_msg_coreum" = "Coreumは、将来の分散アプリケーションのコアインフラストラクチャとして機能するエンタープライズクラスのL1ブロックチェーンです。";
 "guide_msg_noble" = "NobleはIBC生態系上、ネイティブトークン発行のために設計されたCosmosSDKベースのブロックチェーンです。";
+"guide_msg_stafi" = "StaFi Hubはクロスチェーンリキッドステーキングのために設計されたCosmos SDKベースのブロックチェーンネットワークです。";
 "guide_btn_home" = "ホームページ";
 "guide_btn_blog" = "公式ブログ";
 
@@ -307,6 +308,8 @@
 "error_starname_self_send" = "スターネームは有効ですが、自分のアドレスには送金できません。";
 "error_unbonding_count_over" = "委任撤回可能回数を超えました。";
 "error_wasting_fee" = "要請する利子がTx手数料よりも低く、手数料の無駄です。";
+"error_no_staking" = "このチェーンはステーキングをサポートしていません。";
+
 "ether_type" = "イーサリアムスタイル";
 "faceID" = "Face ID";
 "fee_over_msg" = "受け取る利子よりTx手数料が高いです。 Tx手数料を少なく設定するか、後で利子が貯まったら要請してください。";
