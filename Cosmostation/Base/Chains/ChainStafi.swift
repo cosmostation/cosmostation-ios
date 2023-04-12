@@ -34,7 +34,7 @@ class ChainStafi: ChainConfig {
     var displayDecimal: Int16 = 6
     
     var addressPrefix = "stafi"
-    var validatorPrefix = "sommvaloper"
+    var validatorPrefix = "stafivaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
     var etherAddressSupport = false
