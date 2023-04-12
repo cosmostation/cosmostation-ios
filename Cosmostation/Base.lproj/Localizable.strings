@@ -13,6 +13,7 @@
 "str_frozen" = "Frozen";
 "str_vesting" = "Vesting (Delegable)";
 "str_staking" = "Staking";
+"str_bonded" = "Bonded";
 "str_incentive" = "Incentive";
 "str_current_price" = "Current Price";
 "str_inflation" = "Inflation";
@@ -349,6 +350,7 @@
 "guide_msg_canto" = "Canto is a Cosmos SDK based Layer-1 blockchain that runs Ethereum Virtual Machine.";
 "guide_msg_kyve" = "KYVE is a Cosmos SDK-based network that provides a decentralized data lake solution.";
 "guide_msg_noble" = "Noble is a Cosmos chain bringing native asset issuance to the IBC ecosystem.";
+"guide_msg_neutron" = "Neutron is a permissionless CosmWasm platform secured by Cosmos Hub’s Interchain Security.";
 "guide_msg_stafi" = "StaFi Hub is a sovereign Cosmos SDK based blockchain designed for cross-chain liquid staking.";
 "guide_btn_home" = "Home Page";
 "guide_btn_blog" = "Official Blog";

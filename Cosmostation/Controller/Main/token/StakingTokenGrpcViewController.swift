@@ -38,6 +38,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tokenTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailStakingCell", bundle: nil), forCellReuseIdentifier: "TokenDetailStakingCell")
+        self.tokenTableView.register(UINib(nibName: "TokenDetailNeutronCell", bundle: nil), forCellReuseIdentifier: "TokenDetailNeutronCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailVestingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailVestingDetailCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailUnbondingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailUnbondingDetailCell")
         self.tokenTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
@@ -98,9 +99,15 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
             return cell!
             
         } else if (indexPath.section == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailStakingCell") as? TokenDetailStakingCell
-            cell?.onBindStakingToken(chainConfig!)
-            return cell!
+            if (chainType == .NEUTRON_TEST) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailNeutronCell") as? TokenDetailNeutronCell
+                cell?.onBindStakingToken(chainConfig!)
+                return cell!
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailStakingCell") as? TokenDetailStakingCell
+                cell?.onBindStakingToken(chainConfig!)
+                return cell!
+            }
             
         } else if (indexPath.section == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailVestingDetailCell") as? TokenDetailVestingDetailCell

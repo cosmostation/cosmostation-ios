@@ -346,6 +346,7 @@ public enum ChainType: String {
     case ALTHEA_TEST
     case CRESCENT_TEST
     case STATION_TEST
+    case NEUTRON_TEST
     
     static func SUPPRT_CHAIN() -> Array<ChainType> {
         var result = [ChainType]()
@@ -415,6 +416,7 @@ public enum ChainType: String {
 //        result.append(IRIS_TEST)
 //        result.append(ALTHEA_TEST)
 //        result.append(CRESCENT_TEST)
+        result.append(NEUTRON_TEST)
         result.append(STATION_TEST)
         result.append(CERBERUS_MAIN)
         return result
@@ -502,4 +504,5 @@ let ICON_2002                   = "ICON_2002";
 
 let ResourceBase = "https://raw.githubusercontent.com/cosmostation/chainlist/master/chain/"
 let MintscanUrl = "https://www.mintscan.io/"
+let MintscanTestUrl = "https://testnet.mintscan.io/"
 let GeckoUrl = "https://www.coingecko.com/en/coins/"

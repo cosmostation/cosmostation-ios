@@ -66,6 +66,7 @@
 "guide_msg_quasar" = "Quasarはボルトとボルト戦略を活用した分散型資産管理(DAM)サービスを提供している。";
 "guide_msg_coreum" = "Coreumは、将来の分散アプリケーションのコアインフラストラクチャとして機能するエンタープライズクラスのL1ブロックチェーンです。";
 "guide_msg_noble" = "NobleはIBC生態系上、ネイティブトークン発行のために設計されたCosmosSDKベースのブロックチェーンです。";
+"guide_msg_neutron" = "Neutronは、CosmosハブのInterchain Securityを使用する非許可型CosmWasmプラットフォームです。";
 "guide_msg_stafi" = "StaFi Hubはクロスチェーンリキッドステーキングのために設計されたCosmos SDKベースのブロックチェーンネットワークです。";
 "guide_btn_home" = "ホームページ";
 "guide_btn_blog" = "公式ブログ";
@@ -485,6 +486,7 @@
 スワップ可能な最大数量に関するお問い合わせは、下記の公式Kavaコミュニティチャンネルにお問い合わせください。 https://t.me/kavalabs";
 "str_bep3_unavailable_title" = "BNB-BEP3 スワップ不可";
 "str_blog" = "Cosmostation ブログ";
+"str_bonded" = "預けられた";
 "str_bull" = "上昇";
 "str_cancel" = "キャンセル";
 "str_cannot_repay_all" = "すべての返済に必要なUSDX不足";

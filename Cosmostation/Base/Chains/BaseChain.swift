@@ -188,8 +188,11 @@ class ChainFactory {
             return .ONOMY_MAIN
             
             
+        case CHAIN_NEUTRON_TEST_S:
+            return .NEUTRON_TEST
         case CHAIN_STATION_TEST_S:
             return .STATION_TEST
+        
             
         default:
             return nil
@@ -329,6 +332,8 @@ class ChainFactory {
             return ChainUmee(chainType)
         case .XPLA_MAIN:
             return ChainXpla(chainType)
+        case .NEUTRON_TEST:
+            return ChainNeutronTest(chainType)
         case .STATION_TEST:
             return StationTest(chainType)
         default:
@@ -426,6 +431,7 @@ let CHAIN_NOBLE_S = "SUPPORT_CHAIN_NOBLE"
 let CHAIN_STAFI_S = "SUPPORT_CHAIN_STAFI"
 
 let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
+let CHAIN_NEUTRON_TEST_S = "SUPPORT_CHAIN_NEUTRON_TEST"
 
 
 let CHAIN_ALTHEA_S = "SUPPORT_CHAIN_ALTHEA"
