@@ -11,7 +11,7 @@ import Foundation
 
 class ChainStafi: ChainConfig {
     var isGrpc = true
-    var chainType = ChainType.SOMMELIER_MAIN
+    var chainType = ChainType.STAFI_MAIN
     var chainImg = UIImage(named: "chainStafi")
     var chainInfoImg = UIImage(named: "infoStafi")
     var chainInfoTitle = "STAFI HUB"
