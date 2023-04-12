@@ -168,6 +168,8 @@ class ChainFactory {
             return .SIF_MAIN
         case CHAIN_SOMMELIER_S:
             return .SOMMELIER_MAIN
+        case CHAIN_STAFI_S:
+            return .STAFI_MAIN
         case CHAIN_STARGAZE_S:
             return .STARGAZE_MAIN
         case CHAIN_IOV_S:
@@ -314,6 +316,8 @@ class ChainFactory {
             return ChainSif(chainType)
         case .SOMMELIER_MAIN:
             return ChainSommelier(chainType)
+        case .STAFI_MAIN:
+            return ChainStafi(chainType)
         case .STARGAZE_MAIN:
             return ChainStargaze(chainType)
         case .IOV_MAIN:
@@ -424,6 +428,7 @@ let CHAIN_QUICKSILVER_S = "SUPPORT_CHAIN_QUICKSILVER"
 let CHAIN_QUASAR_S = "SUPPORT_CHAIN_QUASAR"
 let CHAIN_COREUM_S = "SUPPORT_CHAIN_COREUM"
 let CHAIN_NOBLE_S = "SUPPORT_CHAIN_NOBLE"
+let CHAIN_STAFI_S = "SUPPORT_CHAIN_STAFI"
 
 let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 let CHAIN_NEUTRON_TEST_S = "SUPPORT_CHAIN_NEUTRON_TEST"

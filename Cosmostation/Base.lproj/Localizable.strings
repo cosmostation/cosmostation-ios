@@ -351,6 +351,7 @@
 "guide_msg_kyve" = "KYVE is a Cosmos SDK-based network that provides a decentralized data lake solution.";
 "guide_msg_noble" = "Noble is a Cosmos chain bringing native asset issuance to the IBC ecosystem.";
 "guide_msg_neutron" = "Neutron is a permissionless CosmWasm platform secured by Cosmos Hub’s Interchain Security.";
+"guide_msg_stafi" = "StaFi Hub is a sovereign Cosmos SDK based blockchain designed for cross-chain liquid staking.";
 "guide_btn_home" = "Home Page";
 "guide_btn_blog" = "Official Blog";
 
@@ -939,6 +940,7 @@ support@cosmostation.io";
 "error_no_selected_proposal" = "Please select proposals to vote";
 "error_no_authz_type" = "No auth for this type";
 "error_not_enough_liquid_stake" = "Not enough balance.\nIBC transfer this asset from origin chain to continue";
+"error_no_staking" = "The chain does not support staking.";
 
 
 "alert_title_no_private_key" = "No Private Key";

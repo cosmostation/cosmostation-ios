@@ -56,7 +56,7 @@ extension WUtils {
     }
     
     static func isStarnameValidDomain(_ starname: String) -> Bool {
-        let starNameRegEx = "^[mabcdefghijklnopqrstuvwxy][-a-z0-9_]{0,2}$|^[-a-z0-9_]{4,32}$"
+        let starNameRegEx = "^[mabcdefghijklnopqrstuvwxyz0123456789][-a-z0-9_]{0,2}$|^[-a-z0-9_]{4,32}$"
         let starNamePred = NSPredicate(format:"SELF MATCHES %@", starNameRegEx)
         return starNamePred.evaluate(with: starname)
     }
