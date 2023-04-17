@@ -186,7 +186,11 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
                 if let authRes = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(authReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     let simulReq = Signer.genSimulateClaimRewardsTxgRPC(authRes, self.account!.account_pubkey_type, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
                     if let simulRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).simulate(simulReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                        feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
+                        if (self.chainType == .IXO_MAIN) {
+                            feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 3), withBehavior: WUtils.handler0Up)
+                        } else {
+                            feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.5), withBehavior: WUtils.handler0Up)
+                        }
                         if (self.chainType != .SIF_MAIN && self.chainType != .CHIHUAHUA_MAIN) {
                             let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
                             feeCoin = Coin.init(feeData.denom!, amount.stringValue)
@@ -268,7 +272,11 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
                         if let authRes = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(authReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                             let simulReq = Signer.genSimulateCompounding(authRes, self.account!.account_pubkey_type, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
                             if let simulRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).simulate(simulReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                                feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
+                                if (self.chainType == .IXO_MAIN) {
+                                    feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 3), withBehavior: WUtils.handler0Up)
+                                } else {
+                                    feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.5), withBehavior: WUtils.handler0Up)
+                                }
                                 if (self.chainType != .SIF_MAIN && self.chainType != .CHIHUAHUA_MAIN) {
                                     let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
                                     feeCoin = Coin.init(feeData.denom!, amount.stringValue)
