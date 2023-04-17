@@ -1,0 +1,13 @@
+/* 
+  InfoPlist.strings
+  Cosmostation
+
+  Created by yongjoo on 05/05/2019.
+  Copyright © 2019 wannabit. All rights reserved.
+*/
+
+"CFBundleDisplayName" = "Cosmostation";
+"NSCameraUsageDescription" = "このカメラは、ウォレットコネクトのブロックチェーンアドレスやURLを表すQRコードをスキャンするのに使われる。";
+"NSFaceIDUsageDescription" = "ロック解除アプリに顔IDを使用しています。";
+"NSPhotoLibraryUsageDescription" = "NFTを生成するために写真にアクセスします。";
+
