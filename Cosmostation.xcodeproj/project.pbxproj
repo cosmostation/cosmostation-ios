@@ -1263,6 +1263,10 @@
 		04F4060E29ED0F1200CD88E4 /* CdpDetailTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4060A29ED0F1200CD88E4 /* CdpDetailTopCell.xib */; };
 		04F4061029ED0F1F00CD88E4 /* CdpListAllCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4060F29ED0F1E00CD88E4 /* CdpListAllCell.xib */; };
 		04F4061129ED0F1F00CD88E4 /* CdpListAllCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4060F29ED0F1E00CD88E4 /* CdpListAllCell.xib */; };
+		04F4061329ED103C00CD88E4 /* HtlcResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061229ED103C00CD88E4 /* HtlcResultViewController.xib */; };
+		04F4061429ED103C00CD88E4 /* HtlcResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061229ED103C00CD88E4 /* HtlcResultViewController.xib */; };
+		04F4061729ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
+		04F4061829ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
 		04FC7F1F28C6FECD00F64841 /* ChainStride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FC7F1E28C6FECD00F64841 /* ChainStride.swift */; };
 		04FC7F2028C6FECD00F64841 /* ChainStride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FC7F1E28C6FECD00F64841 /* ChainStride.swift */; };
 		04FCD2EB292F8C9D00BA5349 /* WalletStrideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD2E9292F8C9D00BA5349 /* WalletStrideCell.swift */; };
@@ -2212,7 +2216,6 @@
 		18FFB6B9281AF533004E65BB /* ResourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283E948E25494896007A9291 /* ResourceCell.xib */; };
 		18FFB6BA281AF533004E65BB /* DomainDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283E94802549331D007A9291 /* DomainDetailViewController.xib */; };
 		18FFB6BB281AF533004E65BB /* SifJoinPool3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C62271E7BA300B4A7C3 /* SifJoinPool3ViewController.xib */; };
-		18FFB6BE281AF533004E65BB /* HtlcResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283A80E8245158FB008FF813 /* HtlcResultViewController.xib */; };
 		18FFB6C0281AF533004E65BB /* HardPoolRepay0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DB570F25FA3BDD00B2F0E5 /* HardPoolRepay0ViewController.xib */; };
 		18FFB6C2281AF533004E65BB /* TxCdpLiquidateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 286EB38526035FB00021C79D /* TxCdpLiquidateCell.xib */; };
 		18FFB6C3281AF533004E65BB /* new2022@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048772FE277C6E0700D9E201 /* new2022@1x.png */; };
@@ -2360,7 +2363,6 @@
 		18FFB7B7281AF533004E65BB /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
 		18FFB7B8281AF533004E65BB /* Bep3SupplyPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2868558E24989A8F0099D18F /* Bep3SupplyPopup.xib */; };
 		18FFB7BA281AF533004E65BB /* WalletCrescentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D3392227E8803000E82AA7 /* WalletCrescentCell.xib */; };
-		18FFB7BE281AF533004E65BB /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E103DAE022814802006C2146 /* Init.storyboard */; };
 		18FFB7BF281AF533004E65BB /* HardPoolBorrow3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DB570A25FA3BC900B2F0E5 /* HardPoolBorrow3ViewController.xib */; };
 		18FFB7C0281AF533004E65BB /* TxIncentiveDelegatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2812CA3D26DD4E160095C6AF /* TxIncentiveDelegatorCell.xib */; };
 		18FFB7C1281AF533004E65BB /* WalletDesmosEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04166117278C2F01001CAF73 /* WalletDesmosEventCell.xib */; };
@@ -2461,7 +2463,6 @@
 		283439A42531D1DF00CCFADE /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283439A32531D1DF00CCFADE /* MyAccountViewController.swift */; };
 		2839C1FD26A2A47C00638EBC /* Swap3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2839C1FB26A2A47C00638EBC /* Swap3ViewController.swift */; };
 		2839C1FE26A2A47C00638EBC /* Swap3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2839C1FC26A2A47C00638EBC /* Swap3ViewController.xib */; };
-		283A80E6245158FB008FF813 /* HtlcResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283A80E8245158FB008FF813 /* HtlcResultViewController.xib */; };
 		283D2EA424F52FE700247424 /* OkToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2EA324F52FE700247424 /* OkToken.swift */; };
 		283D2EA624F5308900247424 /* OkTokenList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2EA524F5308900247424 /* OkTokenList.swift */; };
 		283D2EA824F5388C00247424 /* OkAccountToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2EA724F5388C00247424 /* OkAccountToken.swift */; };
@@ -2774,7 +2775,6 @@
 		E103967E2875AACC0055903A /* ProposalEtcPeriodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E103967B2875AACC0055903A /* ProposalEtcPeriodCell.swift */; };
 		E103967F2875AACC0055903A /* ProposalEtcPeriodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E103967C2875AACC0055903A /* ProposalEtcPeriodCell.xib */; };
 		E10396802875AACC0055903A /* ProposalEtcPeriodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E103967C2875AACC0055903A /* ProposalEtcPeriodCell.xib */; };
-		E103DADE22814802006C2146 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E103DAE022814802006C2146 /* Init.storyboard */; };
 		E10492132347B41000A2980F /* WalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10492122347B41000A2980F /* WalletConnectViewController.swift */; };
 		E10492152347C5D900A2980F /* WalletConnectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10492142347C5D900A2980F /* WalletConnectImageView.swift */; };
 		E10A7560287E612100BC66BC /* WalletMediblocEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10A755E287E612100BC66BC /* WalletMediblocEventCell.swift */; };
@@ -3786,9 +3786,6 @@
 		04E6ABCC286358B4008DC3C7 /* CdpDrawRepay1ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CdpDrawRepay1ViewController.xib; sourceTree = "<group>"; };
 		04E6ABD1286358C4008DC3C7 /* CdpDrawRepay4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CdpDrawRepay4ViewController.swift; sourceTree = "<group>"; };
 		04E6ABD2286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CdpDrawRepay4ViewController.xib; sourceTree = "<group>"; };
-		04F405DF29ECF3A100CD88E4 /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ko; path = ko.lproj/HtlcResultViewController.xib; sourceTree = "<group>"; };
-		04F405E329ECF4B900CD88E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Init.storyboard; sourceTree = "<group>"; };
-		04F405E729ECF4BA00CD88E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/HtlcResultViewController.xib; sourceTree = "<group>"; };
 		04F405EF29ECF6F000CD88E4 /* RiskCheckPopupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RiskCheckPopupViewController.xib; sourceTree = "<group>"; };
 		04F405F129ECF74100CD88E4 /* NewAccountTypePopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewAccountTypePopup.xib; sourceTree = "<group>"; };
 		04F405F429ECF75800CD88E4 /* MemoMnemonicPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemoMnemonicPopup.xib; sourceTree = "<group>"; };
@@ -3800,6 +3797,9 @@
 		04F4060929ED0F1200CD88E4 /* CdpDetailMyTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CdpDetailMyTopCell.xib; sourceTree = "<group>"; };
 		04F4060A29ED0F1200CD88E4 /* CdpDetailTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CdpDetailTopCell.xib; sourceTree = "<group>"; };
 		04F4060F29ED0F1E00CD88E4 /* CdpListAllCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CdpListAllCell.xib; sourceTree = "<group>"; };
+		04F4061229ED103C00CD88E4 /* HtlcResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HtlcResultViewController.xib; sourceTree = "<group>"; };
+		04F4061529ED112100CD88E4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		04F4061629ED119800CD88E4 /* Init.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Init.storyboard; sourceTree = "<group>"; };
 		04FC7F1E28C6FECD00F64841 /* ChainStride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStride.swift; sourceTree = "<group>"; };
 		04FCD2E9292F8C9D00BA5349 /* WalletStrideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStrideCell.swift; sourceTree = "<group>"; };
 		04FCD2EA292F8C9D00BA5349 /* WalletStrideCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStrideCell.xib; sourceTree = "<group>"; };
@@ -5897,7 +5897,7 @@
 				04DEAF45286476BE00F23233 /* HtlcSend3ViewController.swift */,
 				04DEAF46286476BE00F23233 /* HtlcSend3ViewController.xib */,
 				285A33E0244862670052BD3D /* HtlcResultViewController.swift */,
-				283A80E8245158FB008FF813 /* HtlcResultViewController.xib */,
+				04F4061229ED103C00CD88E4 /* HtlcResultViewController.xib */,
 			);
 			path = kava;
 			sourceTree = "<group>";
@@ -6110,7 +6110,7 @@
 		E16D9B1122489AC20019B7BB /* Init */ = {
 			isa = PBXGroup;
 			children = (
-				E103DAE022814802006C2146 /* Init.storyboard */,
+				04F4061629ED119800CD88E4 /* Init.storyboard */,
 				E16D9B1422489B030019B7BB /* IntroViewController.swift */,
 			);
 			path = Init;
@@ -6697,7 +6697,6 @@
 				045DAD822897A1AD004ED9B4 /* AuthzVote5ViewController.xib in Resources */,
 				E10396802875AACC0055903A /* ProposalEtcPeriodCell.xib in Resources */,
 				0443B8A3285C7F050027A6B9 /* Chain.xcassets in Resources */,
-				18FFB6BE281AF533004E65BB /* HtlcResultViewController.xib in Resources */,
 				28F8EFB2286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
 				042C38B028F68DD400FF45A2 /* PromotionCell.xib in Resources */,
 				04E6ABB228635854008DC3C7 /* CdpDeposit4ViewController.xib in Resources */,
@@ -6717,6 +6716,7 @@
 				18FFB6CD281AF533004E65BB /* HtlcResultClaimCell.xib in Resources */,
 				18FFB6D0281AF533004E65BB /* HardPoolWithdraw0ViewController.xib in Resources */,
 				0447AE8D288AAEF0004701A0 /* WalletAuthzCell.xib in Resources */,
+				04F4061429ED103C00CD88E4 /* HtlcResultViewController.xib in Resources */,
 				18FFB6D2281AF533004E65BB /* TxSifRemoveLpCell.xib in Resources */,
 				18FFB6D3281AF533004E65BB /* TxCdpRepayCell.xib in Resources */,
 				04F405FC29ED0C8C00CD88E4 /* CdpDetailViewController.xib in Resources */,
@@ -6814,6 +6814,7 @@
 				04C5AEB628633D47007627EA /* Vote4ViewController.xib in Resources */,
 				18FFB738281AF533004E65BB /* DomainCell.xib in Resources */,
 				18FFB73D281AF533004E65BB /* KavaSwapExit0ViewController.xib in Resources */,
+				04F4061829ED119800CD88E4 /* Init.storyboard in Resources */,
 				18FFB73E281AF533004E65BB /* RegisterDomain3ViewController.xib in Resources */,
 				04D2DB23290F6B80007FC197 /* TxEarnCell.xib in Resources */,
 				18FFB740281AF533004E65BB /* TxRenewStarnameCell.xib in Resources */,
@@ -6959,7 +6960,6 @@
 				18F811B9282E1FC4008AF0D2 /* WalletStationCell.xib in Resources */,
 				18F4129D2860649E0007E3F2 /* WalletDeriveViewController.xib in Resources */,
 				04C5AE9828632ECD007627EA /* ReInvest1ViewController.xib in Resources */,
-				18FFB7BE281AF533004E65BB /* Init.storyboard in Resources */,
 				18FFB7BF281AF533004E65BB /* HardPoolBorrow3ViewController.xib in Resources */,
 				18FFB7C0281AF533004E65BB /* TxIncentiveDelegatorCell.xib in Resources */,
 				18FFB7C1281AF533004E65BB /* WalletDesmosEventCell.xib in Resources */,
@@ -7060,7 +7060,6 @@
 				283E94822549331D007A9291 /* DomainDetailViewController.xib in Resources */,
 				045DAD812897A1AD004ED9B4 /* AuthzVote5ViewController.xib in Resources */,
 				28440C64271E7BA300B4A7C3 /* SifJoinPool3ViewController.xib in Resources */,
-				283A80E6245158FB008FF813 /* HtlcResultViewController.xib in Resources */,
 				28F8EFB1286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
 				04E6ABB128635854008DC3C7 /* CdpDeposit4ViewController.xib in Resources */,
 				042C38AF28F68DD400FF45A2 /* PromotionCell.xib in Resources */,
@@ -7290,6 +7289,7 @@
 				28E8FAEF2719C227005EAA9B /* SifChainDex.storyboard in Resources */,
 				04E25D4B2770D57E009B39BA /* NFTDetailRawCell.xib in Resources */,
 				2889FD6E2603378900CA9896 /* TxHardWithdrawCell.xib in Resources */,
+				04F4061329ED103C00CD88E4 /* HtlcResultViewController.xib in Resources */,
 				E1C5C0AD28992AC400E9E65D /* AuthzDelegate1ViewController.xib in Resources */,
 				15A1A50429ADAC390076504E /* TxPersisLiquidStakeCell.xib in Resources */,
 				04E6ABD5286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib in Resources */,
@@ -7301,6 +7301,7 @@
 				04A116F728F7DE3A003605E5 /* WalletDetailViewController.xib in Resources */,
 				04DEAF49286476BE00F23233 /* HtlcSend3ViewController.xib in Resources */,
 				042A0C9E288E46F500C4DC38 /* AuthzDetailViewController.xib in Resources */,
+				04F4061729ED119800CD88E4 /* Init.storyboard in Resources */,
 				046FA6E52876995600F6318A /* VoteCell.xib in Resources */,
 				04E6ABCF286358B4008DC3C7 /* CdpDrawRepay1ViewController.xib in Resources */,
 				18F811BA282E1FC5008AF0D2 /* WalletStationCell.xib in Resources */,
@@ -7331,7 +7332,6 @@
 				04F405F029ECF6F000CD88E4 /* RiskCheckPopupViewController.xib in Resources */,
 				04D3392427E8803000E82AA7 /* WalletCrescentCell.xib in Resources */,
 				04C5AE9728632ECD007627EA /* ReInvest1ViewController.xib in Resources */,
-				E103DADE22814802006C2146 /* Init.storyboard in Resources */,
 				28DB570C25FA3BC900B2F0E5 /* HardPoolBorrow3ViewController.xib in Resources */,
 				18D4C19928C729C9003F230A /* ManageConnectionViewController.xib in Resources */,
 				04DEAF43286476AF00F23233 /* HtlcSend2ViewController.xib in Resources */,
@@ -9687,23 +9687,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		283A80E8245158FB008FF813 /* HtlcResultViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				04F405DF29ECF3A100CD88E4 /* ko */,
-				04F405E729ECF4BA00CD88E4 /* en */,
-			);
-			name = HtlcResultViewController.xib;
-			sourceTree = "<group>";
-		};
-		E103DAE022814802006C2146 /* Init.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				04F405E329ECF4B900CD88E4 /* en */,
-			);
-			name = Init.storyboard;
-			sourceTree = "<group>";
-		};
 		E1271B02224B17230083AF17 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -9719,6 +9702,7 @@
 			children = (
 				E1F2AE4F227EC05100C87F3F /* ko */,
 				E1F2AE51227EC06900C87F3F /* en */,
+				04F4061529ED112100CD88E4 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
