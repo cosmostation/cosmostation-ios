@@ -33,7 +33,7 @@ class StrideLiquid1ViewController: BaseViewController, QrScannerDelegate, SBCard
         recipientChain = ChainFactory.SUPPRT_CONFIG().filter { pageHolderVC.mChainId!.starts(with: $0.chainIdPrefix) == true }.first
         
         recipientAddressTitle.text = NSLocalizedString("str_recipient_address", comment: "")
-        btnWallet.setTitle(NSLocalizedString("str_wallet2", comment: ""), for: .normal)
+        btnWallet.setTitle(NSLocalizedString("str_wallet", comment: ""), for: .normal)
         btnQrScan.setTitle(NSLocalizedString("str_qr_scan", comment: ""), for: .normal)
         btnPaste.setTitle(NSLocalizedString("str_paste", comment: ""), for: .normal)
         btnBack.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)

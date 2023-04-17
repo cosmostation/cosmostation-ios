@@ -97,7 +97,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         ibcMsg1.text = NSLocalizedString("msg_warn_ibc_send1", comment: "")
         ibcMsg2.text = NSLocalizedString("msg_warn_ibc_send2", comment: "")
         ibcMsg3.text = NSLocalizedString("msg_warn_ibc_send3", comment: "")
-        btnWallet.setTitle(NSLocalizedString("str_wallet2", comment: ""), for: .normal)
+        btnWallet.setTitle(NSLocalizedString("str_wallet", comment: ""), for: .normal)
         btnQrScan.setTitle(NSLocalizedString("str_qr_scan", comment: ""), for: .normal)
         btnPaste.setTitle(NSLocalizedString("str_paste", comment: ""), for: .normal)
         btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
