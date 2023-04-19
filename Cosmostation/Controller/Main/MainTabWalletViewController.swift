@@ -57,6 +57,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletStrideCell", bundle: nil), forCellReuseIdentifier: "WalletStrideCell")
         self.walletTableView.register(UINib(nibName: "WalletPersisCell", bundle: nil), forCellReuseIdentifier: "WalletPersisCell")
         self.walletTableView.register(UINib(nibName: "WalletNeutronCell", bundle: nil), forCellReuseIdentifier: "WalletNeutronCell")
+        self.walletTableView.register(UINib(nibName: "WalletNobleCell", bundle: nil), forCellReuseIdentifier: "WalletNobleCell")
         self.walletTableView.register(UINib(nibName: "WalletStationCell", bundle: nil), forCellReuseIdentifier: "WalletStationCell")
         self.walletTableView.register(UINib(nibName: "WalletBaseChainCell", bundle: nil), forCellReuseIdentifier: "WalletBaseChainCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
@@ -151,6 +152,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             if (chainType == .KAVA_MAIN || chainType == .MEDI_MAIN || chainType == .DESMOS_MAIN) {
                 return 6;
             }
+            if (chainType == .NOBLE_MAIN) {
+                return 4;
+            }
             if (chainConfig!.authzSupoort) {
                 return 5;
             } else {
@@ -190,6 +194,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 return onSetStrideItems(tableView, indexPath);
             } else if (chainType == .PERSIS_MAIN) {
                 return onSetPersisItems(tableView, indexPath);
+            } else if (chainType == .NOBLE_MAIN) {
+                return onSetNobleItems(tableView, indexPath);
             } else if (chainType == .NEUTRON_TEST) {
                 return onSetNeutronItems(tableView, indexPath);
             } else if (chainType == .STATION_TEST) {
@@ -533,6 +539,25 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
+    func onSetNobleItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletNobleCell") as? WalletNobleCell
+            cell?.updateView(account, chainConfig)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionNmm = { self.onShowToast(NSLocalizedString("prepare", comment: "")) }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            return onBindPriceCell(tableView)
+
+        } else if (indexPath.row == 2) {
+            return onBindAuthzCell(tableView)
+
+        } else {
+            return onBindGuideCell(tableView)
+        }
+    }
+    
     func onSetNeutronItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletNeutronCell") as? WalletNeutronCell
@@ -622,7 +647,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickValidatorList() {
-        if (chainType == .STAFI_MAIN) {
+        if (chainType == .STAFI_MAIN || chainType == .NOBLE_MAIN) {
             self.onShowToast(NSLocalizedString("error_no_staking", comment: ""))
             return
         }
