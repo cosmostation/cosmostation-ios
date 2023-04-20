@@ -20,7 +20,7 @@ class TokenDetailCustomCell: UITableViewCell {
 
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var coinDataLayout: UIStackView!
-    @IBOutlet weak var coinDataConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coinDataConstraint: NSLayoutConstraint?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,7 +43,7 @@ class TokenDetailCustomCell: UITableViewCell {
             
             view.isHidden = true
             coinDataLayout.isHidden = true
-            coinDataConstraint.isActive = false
+            coinDataConstraint?.isActive = false
             
         } else {
             let bonded = NSDecimalNumber.zero
@@ -55,7 +55,7 @@ class TokenDetailCustomCell: UITableViewCell {
             
             view.isHidden = false
             coinDataLayout.isHidden = false
-            coinDataConstraint.isActive = true
+            coinDataConstraint?.isActive = true
         }
         cardRoot.backgroundColor = chainConfig.chainColorBG
     }
