@@ -38,7 +38,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tokenTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailStakingCell", bundle: nil), forCellReuseIdentifier: "TokenDetailStakingCell")
-        self.tokenTableView.register(UINib(nibName: "TokenDetailNeutronCell", bundle: nil), forCellReuseIdentifier: "TokenDetailNeutronCell")
+        self.tokenTableView.register(UINib(nibName: "TokenDetailCustomCell", bundle: nil), forCellReuseIdentifier: "TokenDetailCustomCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailVestingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailVestingDetailCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailUnbondingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailUnbondingDetailCell")
         self.tokenTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
@@ -99,8 +99,8 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
             return cell!
             
         } else if (indexPath.section == 1) {
-            if (chainType == .NEUTRON_TEST) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailNeutronCell") as? TokenDetailNeutronCell
+            if (chainType == .NOBLE_MAIN || chainType == .NEUTRON_TEST) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailCustomCell") as? TokenDetailCustomCell
                 cell?.onBindStakingToken(chainConfig!)
                 return cell!
             } else {
