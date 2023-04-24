@@ -14,6 +14,7 @@
 "str_vesting" = "ロックされた数量（委任のみ可能）";
 "str_staking" = "ステーキング";
 "str_bonded" = "預けられた";
+"str_vault_bonded" = "Vault 保税額です";
 "str_incentive" = "インセンティブ";
 "str_current_price" = "現在価格";
 "str_inflation" = "インフレーション";

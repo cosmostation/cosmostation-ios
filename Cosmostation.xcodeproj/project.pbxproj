@@ -255,6 +255,9 @@
 		041399EC275C94490013A1BE /* WalletCheckPKeyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041399EA275C94490013A1BE /* WalletCheckPKeyViewController.xib */; };
 		04166118278C2F01001CAF73 /* WalletDesmosEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04166116278C2F01001CAF73 /* WalletDesmosEventCell.swift */; };
 		04166119278C2F01001CAF73 /* WalletDesmosEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04166117278C2F01001CAF73 /* WalletDesmosEventCell.xib */; };
+		04172B7829F67CE600D6279C /* NeutronModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7729F67CE600D6279C /* NeutronModel.swift */; };
+		04172B7A29F6819300D6279C /* Cw20VaultDepositReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */; };
+		04172B7C29F6826200D6279C /* Cw20VaultDepositRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */; };
 		041ECDEE27F41DCE00397D37 /* WcSignRequestPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */; };
 		041ECDEF27F41DCE00397D37 /* WcSignRequestPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */; };
 		041ECDF227F5750700397D37 /* EmptyWCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDF027F5750700397D37 /* EmptyWCViewController.swift */; };
@@ -3205,6 +3208,9 @@
 		041399EA275C94490013A1BE /* WalletCheckPKeyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCheckPKeyViewController.xib; sourceTree = "<group>"; };
 		04166116278C2F01001CAF73 /* WalletDesmosEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDesmosEventCell.swift; sourceTree = "<group>"; };
 		04166117278C2F01001CAF73 /* WalletDesmosEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDesmosEventCell.xib; sourceTree = "<group>"; };
+		04172B7729F67CE600D6279C /* NeutronModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronModel.swift; sourceTree = "<group>"; };
+		04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20VaultDepositReq.swift; sourceTree = "<group>"; };
+		04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20VaultDepositRes.swift; sourceTree = "<group>"; };
 		041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WcSignRequestPopup.swift; sourceTree = "<group>"; };
 		041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WcSignRequestPopup.xib; sourceTree = "<group>"; };
 		041ECDF027F5750700397D37 /* EmptyWCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyWCViewController.swift; sourceTree = "<group>"; };
@@ -6332,6 +6338,8 @@
 				047847C72962C93F00FD6A7E /* Cw20IcnsByAddressReq.swift */,
 				047847CA2962C94800FD6A7E /* Cw20IcnsByAddressRes.swift */,
 				15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */,
+				04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */,
+				04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */,
 				E1D4EA572871584B005C1ECF /* FeeInfo.swift */,
 				1577DAC729B9F07800C360EC /* Board.swift */,
 			);
@@ -6396,6 +6404,7 @@
 				280524B7255CEEC7004D6172 /* ExportStarname.swift */,
 				0428ACFD268AD31700EB438F /* BandOracleStatus.swift */,
 				E11A28E12944716D003311FD /* SupportPool.swift */,
+				04172B7729F67CE600D6279C /* NeutronModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -8899,6 +8908,7 @@
 				153559982988FDE70055A1D3 /* ChainMars.swift in Sources */,
 				156CDB8429E52B6A00D55BD2 /* WalletNeutronCell.swift in Sources */,
 				283D2EA824F5388C00247424 /* OkAccountToken.swift in Sources */,
+				04172B7829F67CE600D6279C /* NeutronModel.swift in Sources */,
 				E1A82DE822448E940097CAEE /* WUtils.swift in Sources */,
 				28641F302601AD59000AAEB8 /* TxCell.swift in Sources */,
 				04AA4C252906A6DE0027877B /* kava_auction_v1beta1_query.grpc.swift in Sources */,
@@ -9193,6 +9203,7 @@
 				048C830127BF572800270528 /* evmos_epochs_v1_genesis.pb.swift in Sources */,
 				040FA928275F55C300229F6F /* cosmos_nft_v1beta1_genesis.pb.swift in Sources */,
 				28156E9A2536DE14006FF06C /* HarvestDetailTopCell.swift in Sources */,
+				04172B7C29F6826200D6279C /* Cw20VaultDepositRes.swift in Sources */,
 				047FB6F2281A4C53009D8AAF /* sifnode_dispensation_v1_tx.pb.swift in Sources */,
 				04E25D412770C8BE009B39BA /* NTFDetailViewController.swift in Sources */,
 				28440C63271E7BA300B4A7C3 /* SifJoinPool3ViewController.swift in Sources */,
@@ -9633,6 +9644,7 @@
 				045DAD7F2897A1AD004ED9B4 /* AuthzVote5ViewController.swift in Sources */,
 				040FA8F4275F55C200229F6F /* gogoproto_gogo.pb.swift in Sources */,
 				040FA9E9275F55C300229F6F /* starname_iov_escrow_v1beta1_types.pb.swift in Sources */,
+				04172B7A29F6819300D6279C /* Cw20VaultDepositReq.swift in Sources */,
 				0451FC97282A3B4200214FDA /* ChainStargaze.swift in Sources */,
 				043031DC28BDFA9A005FF935 /* AssetAddCell.swift in Sources */,
 				0451FCB2282A3BC900214FDA /* ChainKonstellation.swift in Sources */,

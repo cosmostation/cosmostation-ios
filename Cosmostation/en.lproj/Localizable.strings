@@ -14,6 +14,7 @@
 "str_vesting" = "Vesting (Delegable)";
 "str_staking" = "Staking";
 "str_bonded" = "Bonded";
+"str_vault_bonded" = "Vault Bonded";
 "str_incentive" = "Incentive";
 "str_current_price" = "Current Price";
 "str_inflation" = "Inflation";

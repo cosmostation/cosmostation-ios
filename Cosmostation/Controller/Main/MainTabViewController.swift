@@ -158,6 +158,10 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mSupportPools.removeAll()
         mNameservices.removeAll()
         
+        BaseData.instance.mNeutronVaults.removeAll()
+        BaseData.instance.mNeutronDaos.removeAll()
+        BaseData.instance.mNeutronVaultDeposit = NSDecimalNumber.zero
+        
         if (mChainType == .BINANCE_MAIN) {
             self.mFetchCnt = 6
             onFetchNodeInfo()
@@ -255,6 +259,15 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCDelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
+            
+        } else if (self.mChainType == .NEUTRON_TEST) {
+            self.mFetchCnt = 4
+            self.onFetchgRPCNodeInfo()
+            self.onFetchgRPCAuth(self.mAccount.account_address)
+            self.onFetchgRPCBalance(self.mAccount.account_address, 0)
+            
+            self.onFetchNeutronData(self.mChainConfig)
+            
             
         } else if (self.mChainType == .COSMOS_TEST || self.mChainType == .IRIS_TEST || self.mChainType == .ALTHEA_TEST ||
                    self.mChainType == .CRESCENT_TEST || self.mChainType == .STATION_TEST) {
@@ -1153,6 +1166,67 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 print("onFetchSupportPools ", error)
             }
             self.onFetchFinished()
+        }
+    }
+    
+    func onFetchNeutronData(_ chainConfig: ChainConfig) {
+        var vaultUrl = ""
+        var daoUrl = ""
+        if (chainConfig.chainType == .NEUTRON_TEST) {
+            vaultUrl = NEUTRON_TEST_VAULTS
+            daoUrl = NEUTRON_TEST_DAO
+        }
+        Alamofire.request(vaultUrl, method: .get).responseJSON { response in
+            switch response.result {
+            case .success(let res):
+                if let vaults = res as? Array<NSDictionary> {
+                    vaults.forEach { vault in
+                        BaseData.instance.mNeutronVaults.append(NeutronVault.init(vault))
+                    }
+                }
+            case .failure(let error):
+                print("Neutron Vaults ", error)
+            }
+            if (BaseData.instance.mNeutronVaults.count > 0) {
+                self.mFetchCnt = self.mFetchCnt + 1
+                self.onFetchVaultDeposit(BaseData.instance.mNeutronVaults[0].address!)
+            }
+            self.onFetchFinished()
+        }
+        
+        Alamofire.request(daoUrl, method: .get).responseJSON { response in
+            switch response.result {
+            case .success(let res):
+                if let daos = res as? Array<NSDictionary> {
+                    daos.forEach { dao in
+                        BaseData.instance.mNeutronDaos.append(NeutronDao.init(dao))
+                    }
+                }
+            case .failure(let error):
+                print("Neutron Daos ", error)
+            }
+            self.onFetchFinished()
+        }
+    }
+    
+    func onFetchVaultDeposit(_ contAddress: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
+                let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+                    $0.address = contAddress
+                    $0.queryData = Cw20VaultDepositReq.init(self.mAccount.account_address).getEncode()
+                }
+                if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    let vaultDeposit = try? JSONDecoder().decode(Cw20VaultDepositRes.self, from: response.data)
+                    BaseData.instance.mNeutronVaultDeposit = NSDecimalNumber(string: vaultDeposit?.power) 
+                }
+                try channel.close().wait()
+
+            } catch {
+                print("onFetchVaultDeposit failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
     

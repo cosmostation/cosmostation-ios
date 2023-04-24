@@ -72,3 +72,6 @@ class ChainNeutronTest: ChainConfig {
     }
 }
 
+let NEUTRON_TEST_VAULTS = "https://raw.githubusercontent.com/cosmostation/chainlist/main/chain/neutron-testnet/vaults.json"
+let NEUTRON_TEST_DAO = "https://raw.githubusercontent.com/cosmostation/chainlist/main/chain/neutron-testnet/daos.json"
+

@@ -63,6 +63,11 @@ final class BaseData : NSObject{
     var mSifDexPools_gRPC = Array<Sifnode_Clp_V1_Pool>()
     var mSifDexMyAssets_gRPC = Array<Sifnode_Clp_V1_Asset>()
     
+    var mNeutronVaults = Array<NeutronVault>()
+    var mNeutronDaos = Array<NeutronDao>()
+    var mNeutronVaultDeposit = NSDecimalNumber.zero
+    
+    
     //kava gRPC
     var mKavaPrices_gRPC: Array<Kava_Pricefeed_V1beta1_CurrentPriceResponse> = Array<Kava_Pricefeed_V1beta1_CurrentPriceResponse>()
     var mKavaCdpParams_gRPC: Kava_Cdp_V1beta1_Params?
