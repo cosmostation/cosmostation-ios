@@ -35,14 +35,6 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xnd-3Q-oUz">
-                    <rect key="frame" x="337" y="102.33333333333333" width="32" height="31.999999999999986"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="32" id="1bC-wd-Jjp"/>
-                        <constraint firstAttribute="height" constant="32" id="Ax4-2m-Sz0"/>
-                    </constraints>
-                    <state key="normal" image="btnIconClose"/>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Available : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FtF-ZT-WZ7">
                     <rect key="frame" x="256.33333333333331" y="69" width="84.333333333333314" height="14.333333333333329"/>
                     <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
@@ -72,6 +64,17 @@
                     <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" returnKeyType="done" smartInsertDeleteType="no"/>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xnd-3Q-oUz">
+                    <rect key="frame" x="337" y="102.33333333333333" width="32" height="31.999999999999986"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="32" id="1bC-wd-Jjp"/>
+                        <constraint firstAttribute="height" constant="32" id="Ax4-2m-Sz0"/>
+                    </constraints>
+                    <state key="normal" image="btnIconClose"/>
+                    <connections>
+                        <action selector="onClickClearAmount:" destination="-1" eventType="touchUpInside" id="gwi-BA-fUJ"/>
+                    </connections>
+                </button>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="UgH-SM-jlB">
                     <rect key="frame" x="54" y="155.33333333333334" width="323" height="32"/>
                     <subviews>

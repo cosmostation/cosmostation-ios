@@ -35,12 +35,20 @@ class VaultContract0ViewController: BaseViewController, UITextFieldDelegate {
         let mainDenom = chainConfig!.stakeDenom
         let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         
-        userMax = BaseData.instance.getAvailableAmount_gRPC(mainDenom).subtracting(mainDenomFee)
+        if pageHolderVC.mType == TASK_TYPE_NEUTRON_VAULTE_DEPOSIT {
+            userMax = BaseData.instance.getAvailableAmount_gRPC(mainDenom).subtracting(mainDenomFee)
+            depositableTitle.text = "Max Depoistable : "
+            
+        } else if pageHolderVC.mType == TASK_TYPE_NEUTRON_VAULTE_WITHDRAW {
+            userMax = BaseData.instance.mNeutronVaultDeposit
+            depositableTitle.text = "Max withdrawable : "
+        }
+        
+        
         WDP.dpCoin(chainConfig, mainDenom, userMax.stringValue, depositableDenomLabel, depositableAmountLabel)
         
         amountTextField.delegate = self
         amountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        
         
         btnAmount0.borderColor = UIColor.font05
         btnAmount1.borderColor = UIColor.font05
@@ -68,25 +76,19 @@ class VaultContract0ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func onViewUpdate() {
-        guard let text = amountTextField.text?.trimmingCharacters(in: .whitespaces) else {
-            self.amountTextField.layer.borderColor = UIColor.warnRed.cgColor
+        let inputString = amountTextField.text?.trimmingCharacters(in: .whitespaces)
+        let inputAmount = WUtils.localeStringToDecimal(inputString)
+        if (inputString?.count == 0) {
+            amountTextField.layer.borderColor = UIColor.font04.cgColor
             return
         }
-        if (text.count == 0) {
-            self.amountTextField.layer.borderColor = UIColor.font04.cgColor
+        if (NSDecimalNumber.notANumber == inputAmount ||
+            NSDecimalNumber.zero == inputAmount ||
+            inputAmount.multiplying(byPowerOf10: decimal).compare(userMax).rawValue > 0) {
+            amountTextField.layer.borderColor = UIColor.warnRed.cgColor
             return
         }
-        
-        let userInput =  NSDecimalNumber(string: text, locale: Locale(identifier: "en_US"))
-        if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            self.amountTextField.layer.borderColor = UIColor.warnRed.cgColor
-            return
-        }
-        if (userInput.multiplying(byPowerOf10: decimal).compare(userMax).rawValue > 0) {
-            self.amountTextField.layer.borderColor = UIColor.warnRed.cgColor
-            return
-        }
-        self.amountTextField.layer.borderColor = UIColor.font04.cgColor
+        amountTextField.layer.borderColor = UIColor.font04.cgColor
     }
     
     @IBAction func onClickAmount(_ sender: UIButton) {
@@ -117,12 +119,15 @@ class VaultContract0ViewController: BaseViewController, UITextFieldDelegate {
     
     @IBAction func onClickNext(_ sender: UIButton) {
         if (isValiadAmount()) {
-            
+            sender.isUserInteractionEnabled = false
+            let userInput = WUtils.localeStringToDecimal(amountTextField.text?.trimmingCharacters(in: .whitespaces))
+            pageHolderVC.neutronVaultAmount = userInput.multiplying(byPowerOf10: decimal).stringValue
+            pageHolderVC.onNextPage()
         }
     }
     
     func isValiadAmount() -> Bool {
-        let inputAmount = NSDecimalNumber(string: amountTextField.text?.trimmingCharacters(in: .whitespaces), locale: Locale(identifier: "en_US"))
+        let inputAmount = WUtils.localeStringToDecimal(amountTextField.text?.trimmingCharacters(in: .whitespaces))
         if (NSDecimalNumber.notANumber == inputAmount || NSDecimalNumber.zero == inputAmount) {
             self.onShowToast(NSLocalizedString("error_amount", comment: ""))
             return false;

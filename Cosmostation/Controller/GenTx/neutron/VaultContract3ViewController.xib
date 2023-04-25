@@ -17,6 +17,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VaultContract3ViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="actionAmountLabel" destination="M84-1d-dqZ" id="yZQ-iJ-PU8"/>
+                <outlet property="actionDenomLabel" destination="6qq-oX-1HF" id="EVB-Q6-RqQ"/>
+                <outlet property="actionTitle" destination="D65-ge-LDt" id="G2w-LU-KQS"/>
+                <outlet property="beforeBtn" destination="HS2-i8-kTh" id="Dkm-xA-e96"/>
+                <outlet property="confirmBtn" destination="Q87-ep-keR" id="Coq-u1-A6n"/>
+                <outlet property="contractLabel" destination="bxv-Of-kZT" id="Xt2-nf-1aJ"/>
+                <outlet property="feeAmountLabel" destination="kny-sB-Mat" id="yWv-3U-UvU"/>
+                <outlet property="feeDenomLabel" destination="ZRd-iA-tJ1" id="lLZ-FC-UDx"/>
+                <outlet property="memoLabel" destination="HQj-oQ-9ec" id="vED-9V-Rvn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -64,8 +73,8 @@
                             <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Deposit Contract" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdx-vM-aMl">
-                            <rect key="frame" x="15.999999999999993" y="81.333333333333343" width="105.33333333333331" height="16.666666666666671"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Contract" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdx-vM-aMl">
+                            <rect key="frame" x="16" y="81.333333333333343" width="54" height="16.666666666666671"/>
                             <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                             <color key="textColor" name="_font04"/>
                             <nil key="highlightedColor"/>
@@ -154,6 +163,9 @@
                                     <color key="value" name="_font05"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickBack:" destination="-1" eventType="touchUpInside" id="Pr7-lf-yrw"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q87-ep-keR">
                             <rect key="frame" x="185.66666666666663" y="0.0" width="175.33333333333337" height="50"/>
@@ -175,6 +187,9 @@
                                     <color key="value" name="photon"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="dl1-Kw-Yxr"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
