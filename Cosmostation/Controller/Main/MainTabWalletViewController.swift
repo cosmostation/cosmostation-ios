@@ -866,7 +866,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickVault() {
-        self.onShowToast(NSLocalizedString("prepare", comment: ""))
+        let vaultListVC = VaultsListViewController(nibName: "VaultsListViewController", bundle: nil)
+        vaultListVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(vaultListVC, animated: true)
+        
     }
     
     func onClickDao() {

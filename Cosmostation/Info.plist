@@ -77,6 +77,8 @@
 	<string>Access your photo for generating NFT.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Bold.ttf</string>
 		<string>RobotoMono-VariableFont_wght.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>

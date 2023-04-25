@@ -56,6 +56,8 @@ class TransactionViewController: UIViewController {
     var irisResponse: Irismod_Nft_QueryNFTResponse?
     var croResponse: Chainmain_Nft_V1_QueryNFTResponse?
     
+    var neutronVault: NeutronVault?
+    
     // MARK: - for authz tx
     var mGrant: Cosmos_Authz_V1beta1_Grant?
     var mGranterData: GranterData?
@@ -354,6 +356,19 @@ class TransactionViewController: UIViewController {
             stepDescription.text = NSLocalizedString("tx_liquid_redeem_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_liquid_redeem", comment: "")
+            
+        }
+        
+        else if (mType == TASK_TYPE_NEUTRON_VAULTE_DEPOSIT) {
+            stepDescription.text = NSLocalizedString("tx_vaults_deposit_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            titleLabel.text =  NSLocalizedString("title_vaults_deposit", comment: "")
+            
+        } else if (mType == TASK_TYPE_NEUTRON_VAULTE_WITHDRAW) {
+            stepDescription.text = NSLocalizedString("tx_vaults_withdraw_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            titleLabel.text =  NSLocalizedString("title_vaults_withdraw", comment: "")
+            
         }
         
         
@@ -421,6 +436,9 @@ class TransactionViewController: UIViewController {
             StepVc.mNFTTokenId = self.mNFTTokenId
             StepVc.irisResponse = self.irisResponse
             StepVc.croResponse = self.croResponse
+            
+            
+            StepVc.neutronVault = self.neutronVault
             
             StepVc.mGrant = mGrant
             StepVc.mGranterData = mGranterData
@@ -655,6 +673,14 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_PERSIS_LIQUIDITY_REDEEM) {
                     stepDescription.text = NSLocalizedString("tx_liquid_redeem_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_1")
+                    
+                } else if (mType == TASK_TYPE_NEUTRON_VAULTE_DEPOSIT) {
+                    stepDescription.text = NSLocalizedString("tx_vaults_deposit_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_1")
+                    
+                } else if (mType == TASK_TYPE_NEUTRON_VAULTE_WITHDRAW) {
+                    stepDescription.text = NSLocalizedString("tx_vaults_withdraw_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
                 }

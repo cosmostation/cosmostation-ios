@@ -156,6 +156,9 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mChainId: String?
     var mStride_Stakeibc_HostZone: Stride_Stakeibc_HostZone?
     
+    
+    var neutronVault: NeutronVault?
+    
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == TASK_TYPE_TRANSFER) {
             if (WUtils.isGRPC(chainType!)) {
@@ -494,6 +497,13 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                    PersisLiquid3ViewController(nibName: "PersisLiquid3ViewController", bundle: nil)]
        }
+        
+        else if (mType == TASK_TYPE_NEUTRON_VAULTE_DEPOSIT || mType == TASK_TYPE_NEUTRON_VAULTE_WITHDRAW) {
+            return [VaultContract0ViewController(nibName: "VaultContract0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    VaultContract3ViewController(nibName: "VaultContract3ViewController", bundle: nil)]
+        }
         
         else {
             return[]

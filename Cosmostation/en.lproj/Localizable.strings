@@ -425,6 +425,8 @@
 "tx_liquid_unstaking_1" = "Enter recipient Address";
 "tx_liquid_redeem_0" = "Enter redeem amount";
 "tx_coin_swap" = "Swap Coin";
+"tx_vaults_deposit_0" = "Enter amount";
+"tx_vaults_withdraw_0" = "Enter amount";
 
 
 
@@ -790,6 +792,9 @@
 "title_liquid_unstaking" = "Liquid Unstaking";
 "title_liquid_redeem" = "Liquid Redeem";
 "title_inactive_network" = "Inactive Network!";
+"title_vaults_list" = "Vaults List";
+"title_vaults_deposit" = "Vault Deposit";
+"title_vaults_withdraw" = "Vault Withdraw";
 
 
 "proposal_type_basic" = "Basic";

@@ -1219,7 +1219,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 }
                 if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     let vaultDeposit = try? JSONDecoder().decode(Cw20VaultDepositRes.self, from: response.data)
-                    BaseData.instance.mNeutronVaultDeposit = NSDecimalNumber(string: vaultDeposit?.power) 
+                    BaseData.instance.mNeutronVaultDeposit = NSDecimalNumber(string: vaultDeposit?.power)
                 }
                 try channel.close().wait()
 
