@@ -158,7 +158,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     
     var neutronVault: NeutronVault?
-    var neutronVaultAmount: String?
+    var neutronVaultAmount = Array<Coin>()
     
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == TASK_TYPE_TRANSFER) {

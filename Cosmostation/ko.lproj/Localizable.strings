@@ -233,6 +233,7 @@
 "str_multiplier_name" = "수신 방식";
 "str_incentive_amount" = "인센티브 수량";
 "str_no_result" = "검색 결과가 없습니다";
+"str_smart_contract" = "스마트 컨트랙트";
 
 
 "btn_delegate" = "  위임 하기";

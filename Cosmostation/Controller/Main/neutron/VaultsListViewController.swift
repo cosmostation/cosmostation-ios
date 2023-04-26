@@ -34,16 +34,42 @@ class VaultsListViewController: BaseViewController {
     }
     
     func onCheckDeposit(_ position: Int) {
-        //TODO fee check
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (BaseData.instance.getAvailableAmount_gRPC(chainConfig!.stakeDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
+            return
+        }
+        
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.neutronVault = BaseData.instance.mNeutronVaults[position]
         txVC.mType = TASK_TYPE_NEUTRON_VAULTE_DEPOSIT
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     func onCheckWithdraw(_ position: Int) {
-        //TODO validate check
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (BaseData.instance.mNeutronVaultDeposit.compare(NSDecimalNumber.zero).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_to_withdraw", comment: ""))
+            return
+        }
+        
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.neutronVault = BaseData.instance.mNeutronVaults[position]
         txVC.mType = TASK_TYPE_NEUTRON_VAULTE_WITHDRAW
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)

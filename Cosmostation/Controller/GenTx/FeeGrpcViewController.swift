@@ -893,6 +893,25 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                         self.mFee, self.pageHolderVC.mMemo!,
                                                         self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                         self.chainType!)
+            
+        }
+        
+        
+        else if (pageHolderVC.mType == TASK_TYPE_NEUTRON_VAULTE_DEPOSIT) {
+            return Signer.simulNutronVaultDeposit(auth, account!.account_pubkey_type,
+                                                  self.pageHolderVC.neutronVault!.address!,
+                                                  self.pageHolderVC.neutronVaultAmount,
+                                                  self.mFee, self.pageHolderVC.mMemo!,
+                                                  self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                  self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_NEUTRON_VAULTE_WITHDRAW) {
+            return Signer.simulNutronVaultWithdraw(auth, account!.account_pubkey_type,
+                                                   self.pageHolderVC.neutronVault!.address!,
+                                                   self.pageHolderVC.neutronVaultAmount,
+                                                   self.mFee, self.pageHolderVC.mMemo!,
+                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                   self.chainType!)
         }
         
         return nil

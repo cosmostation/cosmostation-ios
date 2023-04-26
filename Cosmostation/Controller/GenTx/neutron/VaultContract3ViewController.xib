@@ -18,14 +18,18 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VaultContract3ViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="actionAmountLabel" destination="M84-1d-dqZ" id="yZQ-iJ-PU8"/>
+                <outlet property="actionAmountTitle" destination="D65-ge-LDt" id="1f0-KL-kVK"/>
                 <outlet property="actionDenomLabel" destination="6qq-oX-1HF" id="EVB-Q6-RqQ"/>
                 <outlet property="actionTitle" destination="D65-ge-LDt" id="G2w-LU-KQS"/>
                 <outlet property="beforeBtn" destination="HS2-i8-kTh" id="Dkm-xA-e96"/>
                 <outlet property="confirmBtn" destination="Q87-ep-keR" id="Coq-u1-A6n"/>
                 <outlet property="contractLabel" destination="bxv-Of-kZT" id="Xt2-nf-1aJ"/>
+                <outlet property="contractTitle" destination="Rdx-vM-aMl" id="eE6-ge-suf"/>
                 <outlet property="feeAmountLabel" destination="kny-sB-Mat" id="yWv-3U-UvU"/>
                 <outlet property="feeDenomLabel" destination="ZRd-iA-tJ1" id="lLZ-FC-UDx"/>
+                <outlet property="feeTitle" destination="ymn-vK-HF1" id="TNB-u4-8oX"/>
                 <outlet property="memoLabel" destination="HQj-oQ-9ec" id="vED-9V-Rvn"/>
+                <outlet property="memoTitle" destination="Utf-xe-6vh" id="Ffd-zA-2Z9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

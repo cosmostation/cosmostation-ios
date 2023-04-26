@@ -41,7 +41,7 @@ class VaultContract0ViewController: BaseViewController, UITextFieldDelegate {
             
         } else if pageHolderVC.mType == TASK_TYPE_NEUTRON_VAULTE_WITHDRAW {
             userMax = BaseData.instance.mNeutronVaultDeposit
-            depositableTitle.text = "Max withdrawable : "
+            depositableTitle.text = "Max Withdrawable : "
         }
         
         
@@ -67,15 +67,21 @@ class VaultContract0ViewController: BaseViewController, UITextFieldDelegate {
         btnNext.borderColor = UIColor.photon
     }
     
+    override func enableUserInteraction() {
+        onUpdateView()
+        btnBack.isUserInteractionEnabled = true
+        btnNext.isUserInteractionEnabled = true
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         textField.shouldChange(charactersIn: range, replacementString: string, displayDecimal: decimal)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        self.onViewUpdate()
+        self.onUpdateView()
     }
     
-    func onViewUpdate() {
+    func onUpdateView() {
         let inputString = amountTextField.text?.trimmingCharacters(in: .whitespaces)
         let inputAmount = WUtils.localeStringToDecimal(inputString)
         if (inputString?.count == 0) {
@@ -104,12 +110,12 @@ class VaultContract0ViewController: BaseViewController, UITextFieldDelegate {
             calValue = userMax.multiplying(byPowerOf10: -decimal, withBehavior: handler)
         }
         amountTextField.text = WUtils.decimalNumberToLocaleString(calValue, decimal)
-        onViewUpdate()
+        onUpdateView()
     }
     
     @IBAction func onClickClearAmount(_ sender: UIButton) {
         amountTextField.text = ""
-        onViewUpdate()
+        onUpdateView()
     }
     
     @IBAction func onClickCancel(_ sender: UIButton) {
@@ -121,7 +127,8 @@ class VaultContract0ViewController: BaseViewController, UITextFieldDelegate {
         if (isValiadAmount()) {
             sender.isUserInteractionEnabled = false
             let userInput = WUtils.localeStringToDecimal(amountTextField.text?.trimmingCharacters(in: .whitespaces))
-            pageHolderVC.neutronVaultAmount = userInput.multiplying(byPowerOf10: decimal).stringValue
+            let coin = Coin.init(chainConfig!.stakeDenom, userInput.multiplying(byPowerOf10: decimal).stringValue)
+            pageHolderVC.neutronVaultAmount = [coin]
             pageHolderVC.onNextPage()
         }
     }

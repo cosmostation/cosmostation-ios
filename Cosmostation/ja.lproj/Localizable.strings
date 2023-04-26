@@ -233,6 +233,7 @@
 "str_multiplier_name" = "受信方法";
 "str_incentive_amount" = "インセンティブ数量";
 "str_no_result" = "検索結果がありません";
+"str_smart_contract" = "スマートな契約です";
 
 
 "btn_delegate" = "  委任する";

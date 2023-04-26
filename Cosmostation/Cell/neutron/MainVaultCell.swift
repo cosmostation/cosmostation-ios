@@ -48,10 +48,13 @@ class MainVaultCell: UITableViewCell {
     func onFetchTotalVotingPower(_ chainConfig: ChainConfig, _ contAddress: String) {
         DispatchQueue.global().async {
             do {
+                let query: JSON = ["total_power_at_height" : JSON()]
+                let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+                
                 let channel = BaseNetWork.getConnection(chainConfig)!
                 let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
                     $0.address = contAddress
-                    $0.queryData = Data(base64Encoded: "ewogICAgInRvdGFsX3Bvd2VyX2F0X2hlaWdodCI6IHt9Cn0=")!
+                    $0.queryData = Data(base64Encoded: queryBase64)!
                 }
                 if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     let vaultDeposit = try? JSONDecoder().decode(Cw20VaultDepositRes.self, from: response.data)

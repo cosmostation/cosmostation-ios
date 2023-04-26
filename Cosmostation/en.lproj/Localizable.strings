@@ -233,6 +233,7 @@
 "str_multiplier_name" = "Multiplier Name";
 "str_incentive_amount" = "Incentive Reward";
 "str_no_result" = "No Result";
+"str_smart_contract" = "Smart Contract";
 
 
 "btn_delegate" = "  Delegate";
