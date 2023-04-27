@@ -42,7 +42,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" ambiguous="YES" text="this is main vault" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNt-08-ppo">
                                 <rect key="frame" x="15" y="68" width="362" height="14.333333333333329"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -176,14 +176,14 @@
                         <color key="backgroundColor" name="neutron_bg"/>
                         <constraints>
                             <constraint firstItem="zur-UP-rUp" firstAttribute="leading" secondItem="WKh-BP-JeG" secondAttribute="leading" id="18g-ii-lH8"/>
-                            <constraint firstItem="HNt-08-ppo" firstAttribute="top" secondItem="YfA-Id-CUi" secondAttribute="bottom" constant="12" id="2o9-Tb-9yC"/>
+                            <constraint firstItem="HNt-08-ppo" firstAttribute="top" secondItem="YfA-Id-CUi" secondAttribute="bottom" constant="8" id="2o9-Tb-9yC"/>
                             <constraint firstItem="YfA-Id-CUi" firstAttribute="top" secondItem="l1M-NU-8QZ" secondAttribute="top" constant="16" id="Abc-2z-lUi"/>
                             <constraint firstAttribute="trailing" secondItem="F6w-nN-Uls" secondAttribute="trailing" constant="15" id="B5Z-Aq-aTm"/>
-                            <constraint firstItem="zur-UP-rUp" firstAttribute="top" secondItem="WKh-BP-JeG" secondAttribute="bottom" constant="8" id="BdY-0I-Y9w"/>
+                            <constraint firstItem="zur-UP-rUp" firstAttribute="top" secondItem="WKh-BP-JeG" secondAttribute="bottom" constant="10" id="BdY-0I-Y9w"/>
                             <constraint firstItem="Bmf-XX-cdb" firstAttribute="centerY" secondItem="WKh-BP-JeG" secondAttribute="centerY" id="Eme-Nq-6XM"/>
                             <constraint firstAttribute="trailing" secondItem="s2X-aF-K5z" secondAttribute="trailing" constant="15" id="F1M-eF-lXq"/>
                             <constraint firstItem="Jhk-iq-9wO" firstAttribute="centerY" secondItem="H7g-2g-NaR" secondAttribute="centerY" id="FTk-dG-G8u"/>
-                            <constraint firstItem="WKh-BP-JeG" firstAttribute="top" secondItem="H7g-2g-NaR" secondAttribute="bottom" constant="8" id="Ky9-rx-llC"/>
+                            <constraint firstItem="WKh-BP-JeG" firstAttribute="top" secondItem="H7g-2g-NaR" secondAttribute="bottom" constant="10" id="Ky9-rx-llC"/>
                             <constraint firstItem="H7g-2g-NaR" firstAttribute="leading" secondItem="l1M-NU-8QZ" secondAttribute="leading" constant="15" id="O5w-GV-W2g"/>
                             <constraint firstItem="moz-9T-PXh" firstAttribute="leading" secondItem="YfA-Id-CUi" secondAttribute="trailing" constant="12" id="Vbe-Gs-UFW"/>
                             <constraint firstItem="dNe-Pb-Qys" firstAttribute="leading" secondItem="H7g-2g-NaR" secondAttribute="leading" id="XfA-l3-ds8"/>

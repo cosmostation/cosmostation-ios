@@ -37,12 +37,26 @@ class DaosListViewController: BaseViewController {
 
 extension DaosListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return BaseData.instance.mNeutronDaos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"MainDaoCell") as? MainDaoCell
-        return cell!
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"MainDaoCell") as? MainDaoCell
+            cell?.onBindView(chainConfig!, indexPath.row)
+            return cell!
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SubDaoCell") as? SubDaoCell
+            cell?.onBindView(chainConfig!, indexPath.row)
+            return cell!
+            
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dao = BaseData.instance.mNeutronDaos[indexPath.row]
+        return
     }
     
 }

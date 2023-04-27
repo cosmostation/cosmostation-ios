@@ -42,7 +42,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" ambiguous="YES" text="this is sub vault" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTb-WF-cLT">
                                 <rect key="frame" x="15" y="68" width="420" height="14.333333333333329"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -173,14 +173,14 @@
                                 <color key="tintColor" name="_font05"/>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
                             <constraint firstItem="QC3-pC-FQi" firstAttribute="top" secondItem="wgo-Ok-Igc" secondAttribute="bottom" constant="12" id="3o8-Wb-XuW"/>
                             <constraint firstItem="nvN-uC-iHu" firstAttribute="centerY" secondItem="SXM-zC-2u4" secondAttribute="centerY" id="8mJ-Q4-zeP"/>
                             <constraint firstItem="vwt-sL-tz0" firstAttribute="leading" secondItem="aPH-9C-aMT" secondAttribute="leading" constant="15" id="953-KF-SaJ"/>
                             <constraint firstAttribute="trailing" secondItem="QC3-pC-FQi" secondAttribute="trailing" constant="13" id="9Na-mx-MR0"/>
                             <constraint firstItem="Ccc-aN-hiT" firstAttribute="top" secondItem="aPH-9C-aMT" secondAttribute="top" constant="16" id="Cdy-AW-Ihy"/>
-                            <constraint firstItem="Yd2-DA-md4" firstAttribute="top" secondItem="vwt-sL-tz0" secondAttribute="bottom" constant="8" id="Cj8-Rg-cPe"/>
+                            <constraint firstItem="Yd2-DA-md4" firstAttribute="top" secondItem="vwt-sL-tz0" secondAttribute="bottom" constant="10" id="Cj8-Rg-cPe"/>
                             <constraint firstAttribute="trailing" secondItem="aDZ-tz-FKR" secondAttribute="trailing" constant="15" id="Dgr-cr-Sg7"/>
                             <constraint firstItem="6oe-C7-Cd0" firstAttribute="centerY" secondItem="Yd2-DA-md4" secondAttribute="centerY" id="EnG-O6-d3a"/>
                             <constraint firstItem="PI1-ai-ZTx" firstAttribute="centerY" secondItem="SXM-zC-2u4" secondAttribute="centerY" id="Ig2-0b-YoB"/>
@@ -189,7 +189,7 @@
                             <constraint firstItem="wgo-Ok-Igc" firstAttribute="top" secondItem="2DZ-y1-qGH" secondAttribute="bottom" constant="16" id="NC5-qI-V5U"/>
                             <constraint firstItem="Fz7-dq-3st" firstAttribute="centerY" secondItem="Ccc-aN-hiT" secondAttribute="centerY" id="Nqc-ly-kYR"/>
                             <constraint firstItem="wgo-Ok-Igc" firstAttribute="leading" secondItem="SXM-zC-2u4" secondAttribute="leading" id="OOv-K4-20v"/>
-                            <constraint firstItem="TTb-WF-cLT" firstAttribute="top" secondItem="Ccc-aN-hiT" secondAttribute="bottom" constant="12" id="ThP-nm-Ur2"/>
+                            <constraint firstItem="TTb-WF-cLT" firstAttribute="top" secondItem="Ccc-aN-hiT" secondAttribute="bottom" constant="8" id="ThP-nm-Ur2"/>
                             <constraint firstItem="QC3-pC-FQi" firstAttribute="leading" secondItem="aPH-9C-aMT" secondAttribute="leading" constant="13" id="VZo-rH-d6k"/>
                             <constraint firstItem="Vy1-ym-P7k" firstAttribute="leading" secondItem="nvN-uC-iHu" secondAttribute="trailing" constant="6" id="Y4g-bM-WkN"/>
                             <constraint firstItem="Ccc-aN-hiT" firstAttribute="leading" secondItem="aPH-9C-aMT" secondAttribute="leading" constant="12" id="cua-52-jaR"/>
@@ -200,7 +200,7 @@
                             <constraint firstAttribute="trailing" secondItem="ZOV-q4-N1X" secondAttribute="trailing" constant="15" id="nzv-No-QSJ"/>
                             <constraint firstItem="nvN-uC-iHu" firstAttribute="leading" secondItem="PI1-ai-ZTx" secondAttribute="trailing" constant="6" id="p1i-Pu-c1r"/>
                             <constraint firstItem="6oe-C7-Cd0" firstAttribute="trailing" secondItem="ZOV-q4-N1X" secondAttribute="trailing" id="qMX-CH-qKI"/>
-                            <constraint firstItem="vwt-sL-tz0" firstAttribute="top" secondItem="SXM-zC-2u4" secondAttribute="bottom" constant="8" id="sP6-zo-aLs"/>
+                            <constraint firstItem="vwt-sL-tz0" firstAttribute="top" secondItem="SXM-zC-2u4" secondAttribute="bottom" constant="10" id="sP6-zo-aLs"/>
                             <constraint firstItem="Fz7-dq-3st" firstAttribute="leading" secondItem="Ccc-aN-hiT" secondAttribute="trailing" constant="12" id="sWx-k6-5Iq"/>
                             <constraint firstItem="SXM-zC-2u4" firstAttribute="top" secondItem="TTb-WF-cLT" secondAttribute="bottom" constant="16" id="tJv-Pn-0jg"/>
                             <constraint firstAttribute="trailing" secondItem="Vy1-ym-P7k" secondAttribute="trailing" constant="15" id="tYJ-IV-Yiy"/>
@@ -255,6 +255,9 @@
     <resources>
         <image name="imgSubVault" width="40" height="40"/>
         <image name="tokenNeutron" width="28" height="28"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="_card_divider">
             <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
