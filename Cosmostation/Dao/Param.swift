@@ -191,7 +191,14 @@ public struct Param {
         
         let ap = NSDecimalNumber.init(string: params?.minting_annual_provisions)
         if (ap.compare(NSDecimalNumber.zero).rawValue > 0) {
-            return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
+            if (chain == .OMNIFLIX_MAIN) {
+                if let stakingDistribution = params?.omniflix_alloc_params?.distribution_proportions?.staking_rewards {
+                    return ap.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
+                }
+                return NSDecimalNumber.zero
+            } else {
+                return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
+            }
         } else {
             return inflation.multiplying(by: calTax).dividing(by: bondingRate, withBehavior: WUtils.handler6)
         }
@@ -392,6 +399,8 @@ public struct Params {
     
     var sommelier_apy: SommelierApy?
     
+    var omniflix_alloc_params: OmniflixAllocParams?
+    
     init(_ dictionary: NSDictionary?) {
         if let rawMintingParams = dictionary?["minting_params"] as? NSDictionary {
             self.minting_params = MintingParams.init(rawMintingParams)
@@ -555,6 +564,10 @@ public struct Params {
         
         if let rawSommelierApy = dictionary?["sommelier_apy"] as? NSDictionary {
             self.sommelier_apy = SommelierApy.init(rawSommelierApy)
+        }
+        
+        if let rawOmniflixAllocParams = dictionary?["omniflix_alloc_params"] as? NSDictionary {
+            self.omniflix_alloc_params = OmniflixAllocParams.init(rawOmniflixAllocParams)
         }
     }
 }
@@ -1211,5 +1224,25 @@ public struct SommelierApy {
     
     init(_ dictionary: NSDictionary?) {
         self.apy = dictionary?["apy"] as? String
+    }
+}
+
+public struct OmniflixAllocParams {
+    var distribution_proportions: DistributionProportions?
+    
+    init(_ dictionary: NSDictionary?) {
+        if let rawDistributionProportions = dictionary?["distribution_proportions"] as? NSDictionary {
+            self.distribution_proportions = DistributionProportions.init(rawDistributionProportions)
+        }
+    }
+    
+    public struct DistributionProportions {
+        var staking_rewards: NSDecimalNumber?
+        
+        init(_ dictionary: NSDictionary?) {
+            if let staking_rewards = dictionary?["staking_rewards"] as? String {
+                self.staking_rewards = NSDecimalNumber.init(string: staking_rewards)
+            }
+        }
     }
 }
