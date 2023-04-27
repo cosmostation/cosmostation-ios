@@ -874,7 +874,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickDao() {
-        self.onShowToast(NSLocalizedString("prepare", comment: ""))
+        let daoListVC = DaosListViewController(nibName: "DaosListViewController", bundle: nil)
+        daoListVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(daoListVC, animated: true)
     }
     
     func onClickAprHelp() {
@@ -901,7 +904,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickAuthz() {
-        guard let account = account else { return }
         let authzListVC = AuthzListViewController()
         authzListVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
