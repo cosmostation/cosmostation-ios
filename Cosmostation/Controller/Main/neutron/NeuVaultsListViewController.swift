@@ -1,5 +1,5 @@
 //
-//  VaultsListViewController.swift
+//  NeuVaultsListViewController.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/04/24.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VaultsListViewController: BaseViewController {
+class NeuVaultsListViewController: BaseViewController {
 
     @IBOutlet weak var vaultsListTableView: UITableView!
     
@@ -77,7 +77,7 @@ class VaultsListViewController: BaseViewController {
 
 }
 
-extension VaultsListViewController: UITableViewDelegate, UITableViewDataSource {
+extension NeuVaultsListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return BaseData.instance.mNeutronVaults.count

@@ -258,10 +258,10 @@
 		04172B7829F67CE600D6279C /* NeutronModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7729F67CE600D6279C /* NeutronModel.swift */; };
 		04172B7A29F6819300D6279C /* Cw20VaultDepositReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */; };
 		04172B7C29F6826200D6279C /* Cw20VaultDepositRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */; };
-		04172B8029F68F7600D6279C /* VaultsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7E29F68F7600D6279C /* VaultsListViewController.swift */; };
-		04172B8129F68F7700D6279C /* VaultsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7E29F68F7600D6279C /* VaultsListViewController.swift */; };
-		04172B8229F68F7700D6279C /* VaultsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04172B7F29F68F7600D6279C /* VaultsListViewController.xib */; };
-		04172B8329F68F7700D6279C /* VaultsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04172B7F29F68F7600D6279C /* VaultsListViewController.xib */; };
+		04172B8029F68F7600D6279C /* NeuVaultsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7E29F68F7600D6279C /* NeuVaultsListViewController.swift */; };
+		04172B8129F68F7700D6279C /* NeuVaultsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7E29F68F7600D6279C /* NeuVaultsListViewController.swift */; };
+		04172B8229F68F7700D6279C /* NeuVaultsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04172B7F29F68F7600D6279C /* NeuVaultsListViewController.xib */; };
+		04172B8329F68F7700D6279C /* NeuVaultsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04172B7F29F68F7600D6279C /* NeuVaultsListViewController.xib */; };
 		04172B8729F6901300D6279C /* MainVaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B8529F6901300D6279C /* MainVaultCell.swift */; };
 		04172B8829F6901300D6279C /* MainVaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B8529F6901300D6279C /* MainVaultCell.swift */; };
 		04172B8929F6901300D6279C /* MainVaultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04172B8629F6901300D6279C /* MainVaultCell.xib */; };
@@ -282,6 +282,10 @@
 		04172BBC29F803E900D6279C /* VaultContract0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172BB929F803E900D6279C /* VaultContract0ViewController.swift */; };
 		04172BBD29F803E900D6279C /* VaultContract0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04172BBA29F803E900D6279C /* VaultContract0ViewController.xib */; };
 		04172BBE29F803E900D6279C /* VaultContract0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04172BBA29F803E900D6279C /* VaultContract0ViewController.xib */; };
+		0418341E29FAC11500A54EAE /* NeuProposalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418341C29FAC11500A54EAE /* NeuProposalListViewController.swift */; };
+		0418341F29FAC11500A54EAE /* NeuProposalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418341C29FAC11500A54EAE /* NeuProposalListViewController.swift */; };
+		0418342029FAC11500A54EAE /* NeuProposalListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0418341D29FAC11500A54EAE /* NeuProposalListViewController.xib */; };
+		0418342129FAC11500A54EAE /* NeuProposalListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0418341D29FAC11500A54EAE /* NeuProposalListViewController.xib */; };
 		041ECDEE27F41DCE00397D37 /* WcSignRequestPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */; };
 		041ECDEF27F41DCE00397D37 /* WcSignRequestPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */; };
 		041ECDF227F5750700397D37 /* EmptyWCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDF027F5750700397D37 /* EmptyWCViewController.swift */; };
@@ -2985,10 +2989,10 @@
 		E1FD233D233E1C44009327FE /* WalletGuideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1FD233B233E1C44009327FE /* WalletGuideCell.xib */; };
 		E1FEE459225B17970040FAFD /* AmountInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FEE458225B17970040FAFD /* AmountInputTextField.swift */; };
 		E1FEE45B225B1AEF0040FAFD /* MemoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FEE45A225B1AEF0040FAFD /* MemoTextView.swift */; };
-		E1FFB67229F96E3500E6A28A /* DaosListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFB67029F96E3500E6A28A /* DaosListViewController.swift */; };
-		E1FFB67329F96E3500E6A28A /* DaosListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFB67029F96E3500E6A28A /* DaosListViewController.swift */; };
-		E1FFB67429F96E3500E6A28A /* DaosListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1FFB67129F96E3500E6A28A /* DaosListViewController.xib */; };
-		E1FFB67529F96E3500E6A28A /* DaosListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1FFB67129F96E3500E6A28A /* DaosListViewController.xib */; };
+		E1FFB67229F96E3500E6A28A /* NeuDaosListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFB67029F96E3500E6A28A /* NeuDaosListViewController.swift */; };
+		E1FFB67329F96E3500E6A28A /* NeuDaosListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFB67029F96E3500E6A28A /* NeuDaosListViewController.swift */; };
+		E1FFB67429F96E3500E6A28A /* NeuDaosListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1FFB67129F96E3500E6A28A /* NeuDaosListViewController.xib */; };
+		E1FFB67529F96E3500E6A28A /* NeuDaosListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1FFB67129F96E3500E6A28A /* NeuDaosListViewController.xib */; };
 		E1FFB67829F96EFC00E6A28A /* MainDaoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFB67629F96EFC00E6A28A /* MainDaoCell.swift */; };
 		E1FFB67929F96EFC00E6A28A /* MainDaoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFB67629F96EFC00E6A28A /* MainDaoCell.swift */; };
 		E1FFB67A29F96EFC00E6A28A /* MainDaoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1FFB67729F96EFC00E6A28A /* MainDaoCell.xib */; };
@@ -3247,8 +3251,8 @@
 		04172B7729F67CE600D6279C /* NeutronModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronModel.swift; sourceTree = "<group>"; };
 		04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20VaultDepositReq.swift; sourceTree = "<group>"; };
 		04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20VaultDepositRes.swift; sourceTree = "<group>"; };
-		04172B7E29F68F7600D6279C /* VaultsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultsListViewController.swift; sourceTree = "<group>"; };
-		04172B7F29F68F7600D6279C /* VaultsListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VaultsListViewController.xib; sourceTree = "<group>"; };
+		04172B7E29F68F7600D6279C /* NeuVaultsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuVaultsListViewController.swift; sourceTree = "<group>"; };
+		04172B7F29F68F7600D6279C /* NeuVaultsListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeuVaultsListViewController.xib; sourceTree = "<group>"; };
 		04172B8529F6901300D6279C /* MainVaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVaultCell.swift; sourceTree = "<group>"; };
 		04172B8629F6901300D6279C /* MainVaultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainVaultCell.xib; sourceTree = "<group>"; };
 		04172B8B29F6902000D6279C /* SubVaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVaultCell.swift; sourceTree = "<group>"; };
@@ -3259,6 +3263,8 @@
 		04172B9F29F7E2C300D6279C /* VaultContract3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VaultContract3ViewController.xib; sourceTree = "<group>"; };
 		04172BB929F803E900D6279C /* VaultContract0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultContract0ViewController.swift; sourceTree = "<group>"; };
 		04172BBA29F803E900D6279C /* VaultContract0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VaultContract0ViewController.xib; sourceTree = "<group>"; };
+		0418341C29FAC11500A54EAE /* NeuProposalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuProposalListViewController.swift; sourceTree = "<group>"; };
+		0418341D29FAC11500A54EAE /* NeuProposalListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeuProposalListViewController.xib; sourceTree = "<group>"; };
 		041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WcSignRequestPopup.swift; sourceTree = "<group>"; };
 		041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WcSignRequestPopup.xib; sourceTree = "<group>"; };
 		041ECDF027F5750700397D37 /* EmptyWCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyWCViewController.swift; sourceTree = "<group>"; };
@@ -4510,8 +4516,8 @@
 		E1FD233B233E1C44009327FE /* WalletGuideCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletGuideCell.xib; sourceTree = "<group>"; };
 		E1FEE458225B17970040FAFD /* AmountInputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInputTextField.swift; sourceTree = "<group>"; };
 		E1FEE45A225B1AEF0040FAFD /* MemoTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTextView.swift; sourceTree = "<group>"; };
-		E1FFB67029F96E3500E6A28A /* DaosListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaosListViewController.swift; sourceTree = "<group>"; };
-		E1FFB67129F96E3500E6A28A /* DaosListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DaosListViewController.xib; sourceTree = "<group>"; };
+		E1FFB67029F96E3500E6A28A /* NeuDaosListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuDaosListViewController.swift; sourceTree = "<group>"; };
+		E1FFB67129F96E3500E6A28A /* NeuDaosListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeuDaosListViewController.xib; sourceTree = "<group>"; };
 		E1FFB67629F96EFC00E6A28A /* MainDaoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDaoCell.swift; sourceTree = "<group>"; };
 		E1FFB67729F96EFC00E6A28A /* MainDaoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainDaoCell.xib; sourceTree = "<group>"; };
 		E1FFB67C29F96F0B00E6A28A /* SubDaoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDaoCell.swift; sourceTree = "<group>"; };
@@ -4551,10 +4557,12 @@
 		04172B7D29F68F4700D6279C /* neutron */ = {
 			isa = PBXGroup;
 			children = (
-				04172B7E29F68F7600D6279C /* VaultsListViewController.swift */,
-				04172B7F29F68F7600D6279C /* VaultsListViewController.xib */,
-				E1FFB67029F96E3500E6A28A /* DaosListViewController.swift */,
-				E1FFB67129F96E3500E6A28A /* DaosListViewController.xib */,
+				04172B7E29F68F7600D6279C /* NeuVaultsListViewController.swift */,
+				04172B7F29F68F7600D6279C /* NeuVaultsListViewController.xib */,
+				E1FFB67029F96E3500E6A28A /* NeuDaosListViewController.swift */,
+				E1FFB67129F96E3500E6A28A /* NeuDaosListViewController.xib */,
+				0418341C29FAC11500A54EAE /* NeuProposalListViewController.swift */,
+				0418341D29FAC11500A54EAE /* NeuProposalListViewController.xib */,
 			);
 			path = neutron;
 			sourceTree = "<group>";
@@ -6825,7 +6833,7 @@
 				18FFB6C3281AF533004E65BB /* new2022@1x.png in Resources */,
 				18FFB6C5281AF533004E65BB /* SelectDesmosAirdopAccountCell.xib in Resources */,
 				18FFB6C7281AF533004E65BB /* TxOkDirectVoteCell.xib in Resources */,
-				04172B8329F68F7700D6279C /* VaultsListViewController.xib in Resources */,
+				04172B8329F68F7700D6279C /* NeuVaultsListViewController.xib in Resources */,
 				04A116FE28F82368003605E5 /* GenTx.storyboard in Resources */,
 				18FFB6C8281AF533004E65BB /* KavaIncentiveClaim3ViewController.xib in Resources */,
 				18FFB6C9281AF533004E65BB /* ReplaceEditAddressViewController.xib in Resources */,
@@ -6953,7 +6961,7 @@
 				18FFB74A281AF533004E65BB /* ProfileViewController.xib in Resources */,
 				042AEE10286452F500E13825 /* OkWithdraw4ViewController.xib in Resources */,
 				18FFB74B281AF533004E65BB /* new2022.png in Resources */,
-				E1FFB67529F96E3500E6A28A /* DaosListViewController.xib in Resources */,
+				E1FFB67529F96E3500E6A28A /* NeuDaosListViewController.xib in Resources */,
 				18FFB74D281AF533004E65BB /* Password.storyboard in Resources */,
 				18FFB750281AF533004E65BB /* TxIbcSendCell.xib in Resources */,
 				045DAD91289A8C09004ED9B4 /* AuthzUndelegate2ViewController.xib in Resources */,
@@ -7059,6 +7067,7 @@
 				18FFB7AC281AF533004E65BB /* WalletKavaIncentiveCell.xib in Resources */,
 				04A116F528F7DE31003605E5 /* WalletManageViewController.xib in Resources */,
 				04F4060E29ED0F1200CD88E4 /* CdpDetailTopCell.xib in Resources */,
+				0418342129FAC11500A54EAE /* NeuProposalListViewController.xib in Resources */,
 				E1C5C0B428992AD300E9E65D /* AuthzDelegate2ViewController.xib in Resources */,
 				18FFB7AD281AF533004E65BB /* SelectCoinCell.xib in Resources */,
 				18FFB7AF281AF533004E65BB /* NFTListCell.xib in Resources */,
@@ -7121,7 +7130,7 @@
 			files = (
 				04E25D2F276F23D9009B39BA /* new2022@3x.png in Resources */,
 				042C38C728F69E7000FF45A2 /* ValidatorDetailMyActionCell.xib in Resources */,
-				E1FFB67429F96E3500E6A28A /* DaosListViewController.xib in Resources */,
+				E1FFB67429F96E3500E6A28A /* NeuDaosListViewController.xib in Resources */,
 				0443B8832855B9280027A6B9 /* WalletDetailAddressCell.xib in Resources */,
 				283E9473254902F4007A9291 /* TxDeleteAccountCell.xib in Resources */,
 				289E4DB026E5D765007C7C35 /* CommonPoolCell.xib in Resources */,
@@ -7176,7 +7185,7 @@
 				042C38A328F6895900FF45A2 /* AllValidatorCell.xib in Resources */,
 				04E25D5027749A92009B39BA /* GenNFT0ViewController.xib in Resources */,
 				28EEECA526DAE996002DDC4A /* KavaSwapJoin0ViewController.xib in Resources */,
-				04172B8229F68F7700D6279C /* VaultsListViewController.xib in Resources */,
+				04172B8229F68F7700D6279C /* NeuVaultsListViewController.xib in Resources */,
 				282FF35E23F530ED0028CC66 /* TxEditRewardAddressCell.xib in Resources */,
 				043031DE28BDFA9A005FF935 /* AssetAddCell.xib in Resources */,
 				28DB56F825FA3B8800B2F0E5 /* HardPoolDeposit3ViewController.xib in Resources */,
@@ -7305,6 +7314,7 @@
 				045DAD8A289A8BFB004ED9B4 /* AuthzUndelegate1ViewController.xib in Resources */,
 				2889FD78260337AD00CA9896 /* TxHardRepayCell.xib in Resources */,
 				04CFBD4E2692274B0013150B /* TxIbcReceiveCell.xib in Resources */,
+				0418342029FAC11500A54EAE /* NeuProposalListViewController.xib in Resources */,
 				046FF01B277B43F100F72C11 /* GenDenom3ViewController.xib in Resources */,
 				1575C2D829F04EF0009BEE39 /* TokenDetailCustomCell.xib in Resources */,
 				28DB56EC25F9DC7A00B2F0E5 /* HardDetailAssetsCell.xib in Resources */,
@@ -7813,7 +7823,7 @@
 				0451FC89282A3AE000214FDA /* ChainEvmos.swift in Sources */,
 				1817CB41283E2CE500523713 /* cosmos_base_store_v1beta1_snapshot.pb.swift in Sources */,
 				18DFB7EF298CADC900E812B6 /* tendermint_abci_types.grpc.swift in Sources */,
-				04172B8129F68F7700D6279C /* VaultsListViewController.swift in Sources */,
+				04172B8129F68F7700D6279C /* NeuVaultsListViewController.swift in Sources */,
 				18FFB341281AF533004E65BB /* RIPEMD160.swift in Sources */,
 				04AA4C022906A6DD0027877B /* kava_issuance_v1beta1_genesis.pb.swift in Sources */,
 				04AA4C582906A6DE0027877B /* kava_issuance_v1beta1_tx.grpc.swift in Sources */,
@@ -8153,6 +8163,7 @@
 				18FFB47C281AF533004E65BB /* MsgGenerator.swift in Sources */,
 				18E3368B28ADB4A20034EE11 /* ChainPassage.swift in Sources */,
 				18FFB47D281AF533004E65BB /* BnbTicker.swift in Sources */,
+				0418341F29FAC11500A54EAE /* NeuProposalListViewController.swift in Sources */,
 				1817CB67283E2CE500523713 /* starname_iov_escrow_v1beta1_query.pb.swift in Sources */,
 				18DFB7F1298CADC900E812B6 /* tendermint_farming_v1beta1_proposal.pb.swift in Sources */,
 				1817CC6D283E2CE600523713 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
@@ -8577,7 +8588,7 @@
 				18FFB603281AF533004E65BB /* HardPoolWithdraw3ViewController.swift in Sources */,
 				0454AE352927459300EC657D /* ethermint_evm_v1_query.pb.swift in Sources */,
 				045DAD6E28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.swift in Sources */,
-				E1FFB67329F96E3500E6A28A /* DaosListViewController.swift in Sources */,
+				E1FFB67329F96E3500E6A28A /* NeuDaosListViewController.swift in Sources */,
 				04AA4C262906A6DE0027877B /* kava_auction_v1beta1_query.grpc.swift in Sources */,
 				0443B8822855B9280027A6B9 /* WalletDetailAddressCell.swift in Sources */,
 				1817CB25283E2CE500523713 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */,
@@ -8807,6 +8818,7 @@
 				9F1EE331295F9862007B7CD7 /* Stream.swift in Sources */,
 				04CFBD4D2692274B0013150B /* TxIbcReceiveCell.swift in Sources */,
 				04172B8729F6901300D6279C /* MainVaultCell.swift in Sources */,
+				0418341E29FAC11500A54EAE /* NeuProposalListViewController.swift in Sources */,
 				287654732726BFE80071FF96 /* EditHideChainCell.swift in Sources */,
 				0451FCBE282A3C3E00214FDA /* ChainOmiflix.swift in Sources */,
 				0451FCA9282A3B9100214FDA /* ChainChihuahua.swift in Sources */,
@@ -8838,7 +8850,7 @@
 				040FAA41275F55C400229F6F /* cosmos_feegrant_v1beta1_tx.grpc.swift in Sources */,
 				0454AE262927459300EC657D /* ethermint_evm_v1_tx.grpc.swift in Sources */,
 				040FAA65275F55C400229F6F /* cosmos_gov_v1beta2_query.pb.swift in Sources */,
-				04172B8029F68F7600D6279C /* VaultsListViewController.swift in Sources */,
+				04172B8029F68F7600D6279C /* NeuVaultsListViewController.swift in Sources */,
 				1569489828ABD9E0004777ED /* ChainPassage.swift in Sources */,
 				04C4937E285069C800ECF4D2 /* PrivateKeyRestoreViewController.swift in Sources */,
 				0443B89F285C62E10027A6B9 /* WalletBaseChainCell.swift in Sources */,
@@ -9416,7 +9428,7 @@
 				04AA4BC32906A6DD0027877B /* kava_savings_v1beta1_genesis.pb.swift in Sources */,
 				28DB571025FA3BDD00B2F0E5 /* HardPoolRepay0ViewController.swift in Sources */,
 				E1FD233C233E1C44009327FE /* WalletGuideCell.swift in Sources */,
-				E1FFB67229F96E3500E6A28A /* DaosListViewController.swift in Sources */,
+				E1FFB67229F96E3500E6A28A /* NeuDaosListViewController.swift in Sources */,
 				047FB6E3281A4C52009D8AAF /* sifnode_dispensation_v1_tx.grpc.swift in Sources */,
 				28E3E3802671BE8D00BA89C2 /* Param.swift in Sources */,
 				E11A28D129435063003311FD /* osmosis_gamm_v2_query.pb.swift in Sources */,

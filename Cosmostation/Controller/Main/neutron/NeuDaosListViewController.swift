@@ -1,5 +1,5 @@
 //
-//  DaosListViewController.swift
+//  NeuDaosListViewController.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/04/26.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DaosListViewController: BaseViewController {
+class NeuDaosListViewController: BaseViewController {
     
     @IBOutlet weak var daosListTableView: UITableView!
 
@@ -35,7 +35,7 @@ class DaosListViewController: BaseViewController {
 }
 
 
-extension DaosListViewController: UITableViewDelegate, UITableViewDataSource {
+extension NeuDaosListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return BaseData.instance.mNeutronDaos.count
     }

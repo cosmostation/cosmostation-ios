@@ -866,7 +866,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickVault() {
-        let vaultListVC = VaultsListViewController(nibName: "VaultsListViewController", bundle: nil)
+        let vaultListVC = NeuVaultsListViewController(nibName: "NeuVaultsListViewController", bundle: nil)
         vaultListVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(vaultListVC, animated: true)
@@ -874,7 +874,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickDao() {
-        let daoListVC = DaosListViewController(nibName: "DaosListViewController", bundle: nil)
+        let daoListVC = NeuDaosListViewController(nibName: "NeuDaosListViewController", bundle: nil)
         daoListVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(daoListVC, animated: true)
