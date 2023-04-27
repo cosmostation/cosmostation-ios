@@ -55,8 +55,10 @@ extension NeuDaosListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let dao = BaseData.instance.mNeutronDaos[indexPath.row]
+        let proposalListVC = NeuProposalListViewController(nibName: "NeuProposalListViewController", bundle: nil)
+        proposalListVC.neutronDao = BaseData.instance.mNeutronDaos[indexPath.row]
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(proposalListVC, animated: true)
         return
     }
-    
 }

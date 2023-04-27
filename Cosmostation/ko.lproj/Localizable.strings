@@ -797,6 +797,7 @@
 "title_vaults_deposit" = "볼트 입금";
 "title_vaults_withdraw" = "볼트 출금";
 "title_daos_list" = "다오 목록";
+"title_daos_proposal_list" = "다오 투표 목록";
 
 
 "proposal_type_basic" = "기본";

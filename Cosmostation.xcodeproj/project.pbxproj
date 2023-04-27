@@ -290,6 +290,10 @@
 		041ECDEF27F41DCE00397D37 /* WcSignRequestPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */; };
 		041ECDF227F5750700397D37 /* EmptyWCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDF027F5750700397D37 /* EmptyWCViewController.swift */; };
 		041ECDF327F5750700397D37 /* EmptyWCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041ECDF127F5750700397D37 /* EmptyWCViewController.xib */; };
+		0424400E29FAE7420018A1D9 /* DaoProposalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424400C29FAE7420018A1D9 /* DaoProposalCell.swift */; };
+		0424400F29FAE7420018A1D9 /* DaoProposalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424400C29FAE7420018A1D9 /* DaoProposalCell.swift */; };
+		0424401029FAE7420018A1D9 /* DaoProposalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0424400D29FAE7420018A1D9 /* DaoProposalCell.xib */; };
+		0424401129FAE7420018A1D9 /* DaoProposalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0424400D29FAE7420018A1D9 /* DaoProposalCell.xib */; };
 		0428ACFE268AD31700EB438F /* BandOracleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428ACFD268AD31700EB438F /* BandOracleStatus.swift */; };
 		042A0C96288E469700C4DC38 /* AuthzListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A0C94288E469700C4DC38 /* AuthzListViewController.swift */; };
 		042A0C97288E469700C4DC38 /* AuthzListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A0C94288E469700C4DC38 /* AuthzListViewController.swift */; };
@@ -3269,6 +3273,8 @@
 		041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WcSignRequestPopup.xib; sourceTree = "<group>"; };
 		041ECDF027F5750700397D37 /* EmptyWCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyWCViewController.swift; sourceTree = "<group>"; };
 		041ECDF127F5750700397D37 /* EmptyWCViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyWCViewController.xib; sourceTree = "<group>"; };
+		0424400C29FAE7420018A1D9 /* DaoProposalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaoProposalCell.swift; sourceTree = "<group>"; };
+		0424400D29FAE7420018A1D9 /* DaoProposalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DaoProposalCell.xib; sourceTree = "<group>"; };
 		0428ACFD268AD31700EB438F /* BandOracleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandOracleStatus.swift; sourceTree = "<group>"; };
 		042A0C94288E469700C4DC38 /* AuthzListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthzListViewController.swift; sourceTree = "<group>"; };
 		042A0C95288E469700C4DC38 /* AuthzListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthzListViewController.xib; sourceTree = "<group>"; };
@@ -4578,6 +4584,8 @@
 				E1FFB67729F96EFC00E6A28A /* MainDaoCell.xib */,
 				E1FFB67C29F96F0B00E6A28A /* SubDaoCell.swift */,
 				E1FFB67D29F96F0B00E6A28A /* SubDaoCell.xib */,
+				0424400C29FAE7420018A1D9 /* DaoProposalCell.swift */,
+				0424400D29FAE7420018A1D9 /* DaoProposalCell.xib */,
 			);
 			path = neutron;
 			sourceTree = "<group>";
@@ -6881,6 +6889,7 @@
 				E1982920290E89DF00451A81 /* EarnValidatorCell.xib in Resources */,
 				18F412A0286064AD0007E3F2 /* MnemonicDetailViewController.xib in Resources */,
 				E1982932290E97D600451A81 /* KavaLiquidity4ViewController.xib in Resources */,
+				0424401129FAE7420018A1D9 /* DaoProposalCell.xib in Resources */,
 				04C5AE7428631737007627EA /* Undelegate4ViewController.xib in Resources */,
 				E148781328957E2900751D94 /* AuthzClaimReward4ViewController.xib in Resources */,
 				18FFB6FD281AF533004E65BB /* ManageAccountAddCell.xib in Resources */,
@@ -7421,6 +7430,7 @@
 				042AEE152864530900E13825 /* OkVote1ViewController.xib in Resources */,
 				280E1F1C254ABB1D0007BA7D /* ResourceEditCell.xib in Resources */,
 				E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */,
+				0424401029FAE7420018A1D9 /* DaoProposalCell.xib in Resources */,
 				282FF34623F5062A0028CC66 /* TxDelegateCell.xib in Resources */,
 				045DAD7B2897A1A2004ED9B4 /* AuthzVote2ViewController.xib in Resources */,
 				2868559824989AB80099D18F /* CdpWarnPopup.xib in Resources */,
@@ -7982,6 +7992,7 @@
 				04AA4C832907B6C50027877B /* kava_cdp_v1beta1_tx.pb.swift in Sources */,
 				18FFB3D3281AF533004E65BB /* StdSignMsg.swift in Sources */,
 				9F1EE31F295F9555007B7CD7 /* Store.swift in Sources */,
+				0424400F29FAE7420018A1D9 /* DaoProposalCell.swift in Sources */,
 				1537A0C929ACA33F00342ACF /* persistence_halving_v1beta1_genesis.pb.swift in Sources */,
 				18FFB3D5281AF533004E65BB /* WalletKavaCell.swift in Sources */,
 				18DFB7F5298CADC900E812B6 /* stride_vesting_tx.pb.swift in Sources */,
@@ -8774,6 +8785,7 @@
 				040FA957275F55C300229F6F /* band_oracle_v1_tx.grpc.swift in Sources */,
 				284FBC7426DB961A00403FE2 /* DenomsToClaim.swift in Sources */,
 				28E8FAF32719C279005EAA9B /* SifDexSwapViewController.swift in Sources */,
+				0424400E29FAE7420018A1D9 /* DaoProposalCell.swift in Sources */,
 				040FAAD4275F55C400229F6F /* cosmos_bank_v1beta1_authz.pb.swift in Sources */,
 				047FB6E9281A4C53009D8AAF /* sifnode_clp_v1_types.pb.swift in Sources */,
 				E1FEE45B225B1AEF0040FAFD /* MemoTextView.swift in Sources */,
