@@ -49,9 +49,11 @@ class StarNameListViewController: BaseViewController {
 
 extension WUtils {
     static func isStarnameValidStarName(_ starname: String) -> Bool {
-        if (starname.starts(with: "*") && starname.count > 3) { return true }
-        let names = starname.split(separator: "*")
+        let names = starname.split(separator: "*", omittingEmptySubsequences: false)
         if (names.count != 2)  { return false }
+        if(String(names[0]).isEmpty) { 
+            return isStarnameValidDomain(String(names[1])) 
+        }
         return (isStarnameValidAccount(String(names[0])) && isStarnameValidDomain(String(names[1])))
     }
     
