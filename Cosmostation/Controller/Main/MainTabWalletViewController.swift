@@ -870,7 +870,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         vaultListVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(vaultListVC, animated: true)
-        
     }
     
     func onClickNeutronDao() {

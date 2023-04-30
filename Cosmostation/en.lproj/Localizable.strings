@@ -428,6 +428,9 @@
 "tx_coin_swap" = "Swap Coin";
 "tx_vaults_deposit_0" = "Enter amount";
 "tx_vaults_withdraw_0" = "Enter amount";
+"tx_neutron_vote_single_0" = "Select your Opinion";
+"tx_neutron_vote_multi_0" = "Select your Opinion";
+"tx_neutron_vote_overrule_0" = "Select your Opinion";
 
 
 
@@ -798,7 +801,10 @@
 "title_vaults_withdraw" = "Vault Withdraw";
 "title_daos_list" = "Daos List";
 "title_daos_proposal_list" = "Dao Proposal List";
-"title_neutron_defi" = "Neurton DeFi";
+"title_neutron_defi" = "Neutron DeFi";
+"title_neutron_vote_single" = "Dao Vote (Single)";
+"title_neutron_vote_multi" = "Dao Vote (Multi)";
+"title_neutron_vote_overrule" = "Dao Vote (Overrule)";
 
 
 "proposal_type_basic" = "Basic";

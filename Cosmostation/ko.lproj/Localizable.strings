@@ -428,6 +428,9 @@
 "tx_coin_swap" = "코인 스왑";
 "tx_vaults_deposit_0" = "수량을 입력하세요";
 "tx_vaults_withdraw_0" = "수량을 입력하세요";
+"tx_neutron_vote_single_0" = "의견을 선택하세요";
+"tx_neutron_vote_multi_0" = "의견을 선택하세요";
+"tx_neutron_vote_overrule_0" = "의견을 선택하세요";
 
 
 
@@ -798,7 +801,10 @@
 "title_vaults_withdraw" = "볼트 출금";
 "title_daos_list" = "다오 목록";
 "title_daos_proposal_list" = "다오 투표 목록";
-"title_neutron_defi" = "Neurton DeFi";
+"title_neutron_defi" = "Neutron DeFi";
+"title_neutron_vote_single" = "다오 투표 (싱글)";
+"title_neutron_vote_multi" = "다오 투표 (멀티)";
+"title_neutron_vote_overrule" = "다오 투표 (오버롤)";
 
 
 "proposal_type_basic" = "기본";

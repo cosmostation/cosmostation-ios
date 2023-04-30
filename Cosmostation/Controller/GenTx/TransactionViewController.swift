@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class TransactionViewController: UIViewController {
 
@@ -57,6 +58,8 @@ class TransactionViewController: UIViewController {
     var croResponse: Chainmain_Nft_V1_QueryNFTResponse?
     
     var neutronVault: NeutronVault?
+    var neutronProposalModule: NeutronProposalModule?
+    var neutronProposal: JSON?
     
     // MARK: - for authz tx
     var mGrant: Cosmos_Authz_V1beta1_Grant?
@@ -369,6 +372,20 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep4_1")
             titleLabel.text =  NSLocalizedString("title_vaults_withdraw", comment: "")
             
+        } else if (mType == TASK_TYPE_NEUTRON_VOTE_SINGLE) {
+            stepDescription.text = NSLocalizedString("tx_neutron_vote_single_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            titleLabel.text =  NSLocalizedString("title_neutron_vote_single", comment: "")
+            
+        } else if (mType == TASK_TYPE_NEUTRON_VOTE_MULTI) {
+            stepDescription.text = NSLocalizedString("tx_neutron_vote_multi_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            titleLabel.text =  NSLocalizedString("title_neutron_vote_multi", comment: "")
+            
+        } else if (mType == TASK_TYPE_NEUTRON_VOTE_OVERRULE) {
+            stepDescription.text = NSLocalizedString("tx_neutron_vote_overrule_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            titleLabel.text =  NSLocalizedString("title_neutron_vote_overrule", comment: "")
         }
         
         
@@ -439,6 +456,8 @@ class TransactionViewController: UIViewController {
             
             
             StepVc.neutronVault = self.neutronVault
+            StepVc.neutronProposalModule = self.neutronProposalModule
+            StepVc.neutronProposal = self.neutronProposal
             
             StepVc.mGrant = mGrant
             StepVc.mGranterData = mGranterData
@@ -683,6 +702,17 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("tx_vaults_withdraw_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
+                } else if (mType == TASK_TYPE_NEUTRON_VOTE_SINGLE) {
+                    stepDescription.text = NSLocalizedString("tx_neutron_vote_single_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_1")
+                    
+                } else if (mType == TASK_TYPE_NEUTRON_VOTE_MULTI) {
+                    stepDescription.text = NSLocalizedString("tx_neutron_vote_multi_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_1")
+                    
+                } else if (mType == TASK_TYPE_NEUTRON_VOTE_OVERRULE) {
+                    stepDescription.text = NSLocalizedString("tx_neutron_vote_overrule_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_1")
                 }
                 
                 

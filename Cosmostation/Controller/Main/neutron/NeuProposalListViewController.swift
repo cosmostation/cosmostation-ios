@@ -103,26 +103,26 @@ extension NeuProposalListViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let sectionData = neutronDao.proposal_modules[section]
-        if let proposals = neutronProposals.filter({ $0.0 == sectionData.address }).first {
+        let proposalModule = neutronDao.proposal_modules[section]
+        if let proposals = neutronProposals.filter({ $0.0 == proposalModule.address }).first {
             if (proposals.1.count > 0) { return 30 }
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionData = neutronDao.proposal_modules[section]
+        let proposalModule = neutronDao.proposal_modules[section]
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if let proposals = neutronProposals.filter({ $0.0 == sectionData.address }).first {
-            view.headerTitleLabel.text = sectionData.name
+        if let proposals = neutronProposals.filter({ $0.0 == proposalModule.address }).first {
+            view.headerTitleLabel.text = proposalModule.name
             view.headerCntLabel.text = String(proposals.1.count)
         }
         return view
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionData = neutronDao.proposal_modules[section]
-        if let proposals = neutronProposals.filter({ $0.0 == sectionData.address }).first {
+        let proposalModule = neutronDao.proposal_modules[section]
+        if let proposals = neutronProposals.filter({ $0.0 == proposalModule.address }).first {
             return proposals.1.count
         }
         return 0
@@ -130,14 +130,30 @@ extension NeuProposalListViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"DaoProposalCell") as? DaoProposalCell
-        let sectionData = neutronDao.proposal_modules[indexPath.section]
-        if let proposals = neutronProposals.filter({ $0.0 == sectionData.address }).first {
-            cell?.onBindView(sectionData, proposals.1[indexPath.row])
+        let proposalModule = neutronDao.proposal_modules[indexPath.section]
+        if let proposals = neutronProposals.filter({ $0.0 == proposalModule.address }).first {
+            cell?.onBindView(proposalModule, proposals.1[indexPath.row])
         }
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("didSelectRowAt ", indexPath.section, " ", indexPath.row )
+        let proposalModule = neutronDao.proposal_modules[indexPath.section]
+        if let proposals = neutronProposals.filter({ $0.0 == proposalModule.address }).first {
+            
+            let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+            txVC.neutronProposalModule = proposalModule
+            txVC.neutronProposal = proposals.1[indexPath.row]
+            if (proposalModule.prefix == "A") {
+                txVC.mType = TASK_TYPE_NEUTRON_VOTE_SINGLE
+            } else if (proposalModule.prefix == "B") {
+                txVC.mType = TASK_TYPE_NEUTRON_VOTE_MULTI
+            } else if (proposalModule.prefix == "C") {
+                txVC.mType = TASK_TYPE_NEUTRON_VOTE_OVERRULE
+            }
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(txVC, animated: true)
+        }
     }
 }
