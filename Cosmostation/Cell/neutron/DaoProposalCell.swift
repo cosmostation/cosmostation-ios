@@ -26,6 +26,10 @@ class DaoProposalCell: UITableViewCell {
         
         titleLabel.text = "# ".appending(String(id)).appending("  ").appending(contents["title"].stringValue)
         descriptionLabel.text = contents["description"].stringValue
+        
+        print("status ", contents["status"].stringValue)
+        print("expiration ", contents["expiration"]["at_time"].int64Value / 1000000000)
+        print("allowRevoting ", contents["allow_revoting"].boolValue)
     }
     
 }
