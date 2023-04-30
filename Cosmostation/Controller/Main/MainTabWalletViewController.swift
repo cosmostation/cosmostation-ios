@@ -562,9 +562,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletNeutronCell") as? WalletNeutronCell
             cell?.updateView(account, chainConfig)
-            cell?.actionVault = { self.onClickVault() }
-            cell?.actionDao = { self.onClickDao() }
-            cell?.actionDefi = { self.onShowToast(NSLocalizedString("prepare", comment: "")) }
+            cell?.actionVault = { self.onClickNeutronVault() }
+            cell?.actionDao = { self.onClickNeutronDao() }
+            cell?.actionDefi = { self.onClickNeutronDefi() }
             cell?.actionWc = { self.onShowToast(NSLocalizedString("prepare", comment: "")) }
             return cell!
 
@@ -865,7 +865,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
-    func onClickVault() {
+    func onClickNeutronVault() {
         let vaultListVC = NeuVaultsListViewController(nibName: "NeuVaultsListViewController", bundle: nil)
         vaultListVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
@@ -873,11 +873,18 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         
     }
     
-    func onClickDao() {
+    func onClickNeutronDao() {
         let daoListVC = NeuDaosListViewController(nibName: "NeuDaosListViewController", bundle: nil)
         daoListVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(daoListVC, animated: true)
+    }
+    
+    func onClickNeutronDefi() {
+        let dAppVC = UIStoryboard(name: "Neutron", bundle: nil).instantiateViewController(withIdentifier: "NeuDappViewController") as! NeuDappViewController
+        dAppVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(dAppVC, animated: true)
     }
     
     func onClickAprHelp() {

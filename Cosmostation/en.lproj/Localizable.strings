@@ -798,6 +798,7 @@
 "title_vaults_withdraw" = "Vault Withdraw";
 "title_daos_list" = "Daos List";
 "title_daos_proposal_list" = "Dao Proposal List";
+"title_neutron_defi" = "Neurton DeFi";
 
 
 "proposal_type_basic" = "Basic";

@@ -286,6 +286,14 @@
 		0418341F29FAC11500A54EAE /* NeuProposalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418341C29FAC11500A54EAE /* NeuProposalListViewController.swift */; };
 		0418342029FAC11500A54EAE /* NeuProposalListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0418341D29FAC11500A54EAE /* NeuProposalListViewController.xib */; };
 		0418342129FAC11500A54EAE /* NeuProposalListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0418341D29FAC11500A54EAE /* NeuProposalListViewController.xib */; };
+		0419C92829FE331D001F9E58 /* Neutron.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0419C92729FE331D001F9E58 /* Neutron.storyboard */; };
+		0419C92929FE331D001F9E58 /* Neutron.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0419C92729FE331D001F9E58 /* Neutron.storyboard */; };
+		0419C92B29FE351F001F9E58 /* NeuSwapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419C92A29FE351F001F9E58 /* NeuSwapViewController.swift */; };
+		0419C92C29FE351F001F9E58 /* NeuSwapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419C92A29FE351F001F9E58 /* NeuSwapViewController.swift */; };
+		0419C92E29FE3536001F9E58 /* NeuLiquidityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419C92D29FE3536001F9E58 /* NeuLiquidityViewController.swift */; };
+		0419C92F29FE3536001F9E58 /* NeuLiquidityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419C92D29FE3536001F9E58 /* NeuLiquidityViewController.swift */; };
+		0419C93129FE358F001F9E58 /* NeuDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419C93029FE358F001F9E58 /* NeuDappViewController.swift */; };
+		0419C93229FE358F001F9E58 /* NeuDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419C93029FE358F001F9E58 /* NeuDappViewController.swift */; };
 		041ECDEE27F41DCE00397D37 /* WcSignRequestPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */; };
 		041ECDEF27F41DCE00397D37 /* WcSignRequestPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */; };
 		041ECDF227F5750700397D37 /* EmptyWCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDF027F5750700397D37 /* EmptyWCViewController.swift */; };
@@ -3269,6 +3277,10 @@
 		04172BBA29F803E900D6279C /* VaultContract0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VaultContract0ViewController.xib; sourceTree = "<group>"; };
 		0418341C29FAC11500A54EAE /* NeuProposalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuProposalListViewController.swift; sourceTree = "<group>"; };
 		0418341D29FAC11500A54EAE /* NeuProposalListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeuProposalListViewController.xib; sourceTree = "<group>"; };
+		0419C92729FE331D001F9E58 /* Neutron.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Neutron.storyboard; sourceTree = "<group>"; };
+		0419C92A29FE351F001F9E58 /* NeuSwapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuSwapViewController.swift; sourceTree = "<group>"; };
+		0419C92D29FE3536001F9E58 /* NeuLiquidityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuLiquidityViewController.swift; sourceTree = "<group>"; };
+		0419C93029FE358F001F9E58 /* NeuDappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuDappViewController.swift; sourceTree = "<group>"; };
 		041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WcSignRequestPopup.swift; sourceTree = "<group>"; };
 		041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WcSignRequestPopup.xib; sourceTree = "<group>"; };
 		041ECDF027F5750700397D37 /* EmptyWCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyWCViewController.swift; sourceTree = "<group>"; };
@@ -4569,6 +4581,10 @@
 				E1FFB67129F96E3500E6A28A /* NeuDaosListViewController.xib */,
 				0418341C29FAC11500A54EAE /* NeuProposalListViewController.swift */,
 				0418341D29FAC11500A54EAE /* NeuProposalListViewController.xib */,
+				0419C92729FE331D001F9E58 /* Neutron.storyboard */,
+				0419C93029FE358F001F9E58 /* NeuDappViewController.swift */,
+				0419C92A29FE351F001F9E58 /* NeuSwapViewController.swift */,
+				0419C92D29FE3536001F9E58 /* NeuLiquidityViewController.swift */,
 			);
 			path = neutron;
 			sourceTree = "<group>";
@@ -6863,6 +6879,7 @@
 				04C5AE8028632055007627EA /* Redelegate2ViewController.xib in Resources */,
 				18FFB6DD281AF533004E65BB /* HardPoolWithdraw3ViewController.xib in Resources */,
 				18FFB6DF281AF533004E65BB /* HtlcResultSentCell.xib in Resources */,
+				0419C92929FE331D001F9E58 /* Neutron.storyboard in Resources */,
 				04C5AE9E28632EDA007627EA /* ReInvest4ViewController.xib in Resources */,
 				18FFB6E1281AF533004E65BB /* FeeLcdViewController.xib in Resources */,
 				18FFB6E2281AF533004E65BB /* Assets.xcassets in Resources */,
@@ -7209,6 +7226,7 @@
 				04E6ABB128635854008DC3C7 /* CdpDeposit4ViewController.xib in Resources */,
 				042C38AF28F68DD400FF45A2 /* PromotionCell.xib in Resources */,
 				28DB571125FA3BDD00B2F0E5 /* HardPoolRepay0ViewController.xib in Resources */,
+				0419C92829FE331D001F9E58 /* Neutron.storyboard in Resources */,
 				042C38B228F68E6B00FF45A2 /* ClaimRewardAllCell.xib in Resources */,
 				04FCD3142930AB0400BA5349 /* StrideLiquid4ViewController.xib in Resources */,
 				286EB38726035FB00021C79D /* TxCdpLiquidateCell.xib in Resources */,
@@ -7617,6 +7635,7 @@
 				18FFB269281AF533004E65BB /* LoadingImageView.swift in Sources */,
 				18FFB26B281AF533004E65BB /* SBCardPopupViewController.swift in Sources */,
 				045DAD5C288FAEC8004ED9B4 /* AuthzGranterCell.swift in Sources */,
+				0419C92C29FE351F001F9E58 /* NeuSwapViewController.swift in Sources */,
 				1817CC58283E2CE600523713 /* ibc_core_client_v1_tx.pb.swift in Sources */,
 				9F1EE326295F9642007B7CD7 /* GranteeGrantsState.swift in Sources */,
 				049837DD286053EB009C91B8 /* MnemonicCreateViewController.swift in Sources */,
@@ -8509,6 +8528,7 @@
 				18DFB814298CADC900E812B6 /* stride_interchainquery_v1_messages.grpc.swift in Sources */,
 				1817CB11283E2CE500523713 /* ibc_core_channel_v1_channel.pb.swift in Sources */,
 				1817CACF283E2CE500523713 /* cosmos_bank_v1beta1_bank.pb.swift in Sources */,
+				0419C92F29FE3536001F9E58 /* NeuLiquidityViewController.swift in Sources */,
 				1817CAFE283E2CE500523713 /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
 				04AA4BD62906A6DD0027877B /* kava_committee_v1beta1_proposal.pb.swift in Sources */,
 				E11A28D629435063003311FD /* osmosis_gamm_v1beta1_genesis.pb.swift in Sources */,
@@ -8713,6 +8733,7 @@
 				1537A08D29AC914000342ACF /* PersisLiquid0ViewController.swift in Sources */,
 				9F7B386B292579870076546C /* Cosmos_Distribution_V1beta1_DelegationDelegatorReward+Rewards.swift in Sources */,
 				18FFB664281AF533004E65BB /* StarnameAssets.swift in Sources */,
+				0419C93229FE358F001F9E58 /* NeuDappViewController.swift in Sources */,
 				1817CB3D283E2CE500523713 /* cryptoorg_nft_v1_query.grpc.swift in Sources */,
 				04AA4B58290624B50027877B /* ChainTeritori.swift in Sources */,
 				04C49379284F465D00ECF4D2 /* MnemonicRestoreViewController.swift in Sources */,
@@ -9421,6 +9442,7 @@
 				040FAA2F275F55C400229F6F /* starname_iov_configuration_v1beta1_msgs.pb.swift in Sources */,
 				04CF712D294C0DDE00134A84 /* desmos_profiles_v3_query_params.pb.swift in Sources */,
 				04C5AE7728632049007627EA /* Redelegate1ViewController.swift in Sources */,
+				0419C92B29FE351F001F9E58 /* NeuSwapViewController.swift in Sources */,
 				15B6BDAA29ABC2FB00493E11 /* WalletPersisCell.swift in Sources */,
 				283E94772549030C007A9291 /* TxReplaceResourceCell.swift in Sources */,
 				E123FD3D233DEFE1004EC348 /* BnbAccountInfo.swift in Sources */,
@@ -9555,6 +9577,7 @@
 				0451FC8B282A3AEB00214FDA /* ChainRizon.swift in Sources */,
 				28474ED0241E06AF00AF5A81 /* TxCdpWithdrawCell.swift in Sources */,
 				047FB6FC281AA8D7009D8AAF /* MnemonicListViewController.swift in Sources */,
+				0419C93129FE358F001F9E58 /* NeuDappViewController.swift in Sources */,
 				047FB704281EBA14009D8AAF /* MnemonicDetailViewController.swift in Sources */,
 				040FA92C275F55C300229F6F /* desmos_profiles_v1beta1_client_cli.pb.swift in Sources */,
 				040FA96C275F55C300229F6F /* cosmos_gov_v1beta1_tx.pb.swift in Sources */,
@@ -9760,6 +9783,7 @@
 				040FA86E275F55C200229F6F /* ibc_core_channel_v1_tx.grpc.swift in Sources */,
 				9F1EE328295F965F007B7CD7 /* GranteeGrantsAction.swift in Sources */,
 				040FA7DD275F55C200229F6F /* cosmos_gov_v1beta2_gov.pb.swift in Sources */,
+				0419C92E29FE3536001F9E58 /* NeuLiquidityViewController.swift in Sources */,
 				049B691C29CC13910027B82D /* ChainCoreum.swift in Sources */,
 				04D3390A27E826F100E82AA7 /* crescent_liquidity_v1beta1_tx.grpc.swift in Sources */,
 				E13696592292499400F3D5E2 /* OtherValidatorViewController.swift in Sources */,
