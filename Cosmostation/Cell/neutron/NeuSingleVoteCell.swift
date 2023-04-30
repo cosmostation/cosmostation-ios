@@ -46,11 +46,10 @@ class NeuSingleVoteCell: UITableViewCell {
             let expiration = contents["expiration"]["at_time"].int64Value / 1000000
             let time = WDP.dpTime(expiration).appending(" ").appending(WDP.dpTimeGap(expiration))
             
-            print("expiration ", expiration)
-            print("date ", Date().StringmillisecondsSince1970)
-            
             titleLabel.text = "# ".appending(String(id)).appending("  ").appending(contents["title"].stringValue)
             timeLabel.text = time
+            
+            //TODO expiration block check
             
             onCheckDim()
             if (myOpinion?.lowercased() == "yes") {
@@ -68,9 +67,7 @@ class NeuSingleVoteCell: UITableViewCell {
                 btnAbstain.tintColor = chainConfig.chainColor
                 btnAbstain.layer.borderColor = chainConfig.chainColor.cgColor
             }
-            
         }
-        
     }
     
     func onCheckDim() {
