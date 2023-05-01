@@ -31,7 +31,7 @@ class TokenDetailCustomCell: UITableViewCell {
         
         totalLabel.text = NSLocalizedString("str_total", comment: "")
         availableLabel.text = NSLocalizedString("str_available", comment: "")
-        bondedLabel.text = NSLocalizedString("str_bonded", comment: "")
+        bondedLabel.text = NSLocalizedString("str_vault_bonded", comment: "")
     }
     
     func onBindStakingToken(_ chainConfig: ChainConfig) {

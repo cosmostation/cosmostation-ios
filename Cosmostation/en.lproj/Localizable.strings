@@ -14,6 +14,7 @@
 "str_vesting" = "Vesting (Delegable)";
 "str_staking" = "Staking";
 "str_bonded" = "Bonded";
+"str_vault_bonded" = "Vault Bonded";
 "str_incentive" = "Incentive";
 "str_current_price" = "Current Price";
 "str_inflation" = "Inflation";
@@ -232,6 +233,7 @@
 "str_multiplier_name" = "Multiplier Name";
 "str_incentive_amount" = "Incentive Reward";
 "str_no_result" = "No Result";
+"str_smart_contract" = "Smart Contract";
 
 
 "btn_delegate" = "  Delegate";
@@ -424,6 +426,11 @@
 "tx_liquid_unstaking_1" = "Enter recipient Address";
 "tx_liquid_redeem_0" = "Enter redeem amount";
 "tx_coin_swap" = "Swap Coin";
+"tx_vaults_deposit_0" = "Enter amount";
+"tx_vaults_withdraw_0" = "Enter amount";
+"tx_neutron_vote_single_0" = "Select your Opinion";
+"tx_neutron_vote_multi_0" = "Select your Opinion";
+"tx_neutron_vote_overrule_0" = "Select your Opinion";
 
 
 
@@ -789,6 +796,15 @@
 "title_liquid_unstaking" = "Liquid Unstaking";
 "title_liquid_redeem" = "Liquid Redeem";
 "title_inactive_network" = "Inactive Network!";
+"title_vaults_list" = "Vaults List";
+"title_vaults_deposit" = "Vault Deposit";
+"title_vaults_withdraw" = "Vault Withdraw";
+"title_daos_list" = "Daos List";
+"title_daos_proposal_list" = "Dao Proposal List";
+"title_neutron_defi" = "Neutron DeFi";
+"title_neutron_vote_single" = "Dao Vote (Single)";
+"title_neutron_vote_multi" = "Dao Vote (Multi)";
+"title_neutron_vote_overrule" = "Dao Vote (Overrule)";
 
 
 "proposal_type_basic" = "Basic";

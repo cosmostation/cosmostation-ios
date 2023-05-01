@@ -14,6 +14,7 @@
 "str_vesting" = "베스팅 수량 (위임 가능)";
 "str_staking" = "스테이킹 수량";
 "str_bonded" = "예치된 수량";
+"str_vault_bonded" = "볼트 예치된 수량";
 "str_incentive" = "인센티브";
 "str_current_price" = "현재 가격";
 "str_inflation" = "인플레이션";
@@ -232,6 +233,7 @@
 "str_multiplier_name" = "수신 방식";
 "str_incentive_amount" = "인센티브 수량";
 "str_no_result" = "검색 결과가 없습니다";
+"str_smart_contract" = "스마트 컨트랙트";
 
 
 "btn_delegate" = "  위임 하기";
@@ -424,6 +426,11 @@
 "tx_liquid_unstaking_1" = "받을 주소를 입력해주세요.";
 "tx_liquid_redeem_0" = "수량을 입력하세요";
 "tx_coin_swap" = "코인 스왑";
+"tx_vaults_deposit_0" = "수량을 입력하세요";
+"tx_vaults_withdraw_0" = "수량을 입력하세요";
+"tx_neutron_vote_single_0" = "의견을 선택하세요";
+"tx_neutron_vote_multi_0" = "의견을 선택하세요";
+"tx_neutron_vote_overrule_0" = "의견을 선택하세요";
 
 
 
@@ -789,6 +796,15 @@
 "title_liquid_unstaking" = "리퀴드 언스테이킹";
 "title_liquid_redeem" = "리퀴드 상환";
 "title_inactive_network" = "비활성화된 네트워크!";
+"title_vaults_list" = "볼트 목록";
+"title_vaults_deposit" = "볼트 입금";
+"title_vaults_withdraw" = "볼트 출금";
+"title_daos_list" = "다오 목록";
+"title_daos_proposal_list" = "다오 투표 목록";
+"title_neutron_defi" = "Neutron DeFi";
+"title_neutron_vote_single" = "다오 투표 (싱글)";
+"title_neutron_vote_multi" = "다오 투표 (멀티)";
+"title_neutron_vote_overrule" = "다오 투표 (오버롤)";
 
 
 "proposal_type_basic" = "기본";

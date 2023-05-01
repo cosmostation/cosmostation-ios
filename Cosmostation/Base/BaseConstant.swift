@@ -216,6 +216,12 @@ let TASK_TYPE_PERSIS_LIQUIDITY_STAKE        = "TASK_TYPE_PERSIS_LIQUIDITY_STAKE"
 let TASK_TYPE_PERSIS_LIQUIDITY_REDEEM       = "TASK_TYPE_PERSIS_LIQUIDITY_REDEEM";
 
 
+let TASK_TYPE_NEUTRON_VAULTE_DEPOSIT        = "TASK_TYPE_NEUTRON_VAULTE_DEPOSIT";
+let TASK_TYPE_NEUTRON_VAULTE_WITHDRAW       = "TASK_TYPE_NEUTRON_VAULTE_WITHDRAW";
+let TASK_TYPE_NEUTRON_VOTE_SINGLE           = "TASK_TYPE_NEUTRON_VOTE_SINGLE";
+let TASK_TYPE_NEUTRON_VOTE_MULTI            = "TASK_TYPE_NEUTRON_VOTE_MULTI";
+let TASK_TYPE_NEUTRON_VOTE_OVERRULE         = "TASK_TYPE_NEUTRON_VOTE_OVERRULE";
+
 
 
 let PASSWORD_ACTION_INIT                    = "ACTION_INIT"
@@ -453,12 +459,11 @@ let BAND           = "asset:band";
 let TEZOS          = "asset:xtz";
 let LISK           = "asset:lsk";
 
-
-let Font_17_body = UIFont(name: "Helvetica-Light", size: 17)!
-let Font_15_subTitle = UIFont(name: "Helvetica-Light", size: 15)!
-let Font_13_footnote = UIFont(name: "Helvetica-Light", size: 13)!
-let Font_12_caption1 = UIFont(name: "Helvetica-Light", size: 12)!
-let Font_11_caption2 = UIFont(name: "Helvetica-Light", size: 11)!
+let Font_17_body = UIFont(name: "Roboto-Medium", size: 17)!
+let Font_15_subTitle = UIFont(name: "Roboto-Medium", size: 15)!
+let Font_13_footnote = UIFont(name: "Roboto-Medium", size: 13)!
+let Font_12_caption1 = UIFont(name: "Roboto-Medium", size: 12)!
+let Font_11_caption2 = UIFont(name: "Roboto-Medium", size: 11)!
 
 
 let SELECT_POPUP_HTLC_TO_CHAIN = 0

@@ -39,4 +39,8 @@ extension UIColor {
     static var kavaDanger: UIColor {
         UIColor(named: "kava_danger")!
     }
+    
+    static var transparency: UIColor {
+        UIColor(white: 1, alpha: 0.0)
+    }
 }

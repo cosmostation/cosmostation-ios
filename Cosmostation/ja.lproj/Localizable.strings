@@ -14,6 +14,7 @@
 "str_vesting" = "ロックされた数量（委任のみ可能）";
 "str_staking" = "ステーキング";
 "str_bonded" = "預けられた";
+"str_vault_bonded" = "Vault 保税額です";
 "str_incentive" = "インセンティブ";
 "str_current_price" = "現在価格";
 "str_inflation" = "インフレーション";
@@ -232,6 +233,7 @@
 "str_multiplier_name" = "受信方法";
 "str_incentive_amount" = "インセンティブ数量";
 "str_no_result" = "検索結果がありません";
+"str_smart_contract" = "スマートな契約です";
 
 
 "btn_delegate" = "  委任する";
@@ -424,6 +426,11 @@
 "tx_liquid_unstaking_1" = "受信者のアドレスを入力してください";
 "tx_liquid_redeem_0" = "償還額を入力してください";
 "tx_coin_swap" = "スワップコイン";
+"tx_vaults_deposit_0" = "金額を入力してください";
+"tx_vaults_withdraw_0" = "金額を入力してください";
+"tx_neutron_vote_single_0" = "ご意見をお選びください。";
+"tx_neutron_vote_multi_0" = "ご意見をお選びください。";
+"tx_neutron_vote_overrule_0" = "ご意見をお選びください。";
 
 
 
@@ -789,6 +796,15 @@
 "title_liquid_unstaking" = "Liquid Unstaking";
 "title_liquid_redeem" = "Liquid Redeem";
 "title_inactive_network" = "Inactive Network!";
+"title_vaults_list" = "Vaults List";
+"title_vaults_deposit" = "Vault Deposit";
+"title_vaults_withdraw" = "Vault Withdraw";
+"title_daos_list" = "Daos List";
+"title_daos_proposal_list" = "Dao Proposal List";
+"title_neutron_defi" = "Neutron DeFi";
+"title_neutron_vote_single" = "Dao Vote (Single)";
+"title_neutron_vote_multi" = "Dao Vote (Multi)";
+"title_neutron_vote_overrule" = "Dao Vote (Overrule)";
 
 
 "proposal_type_basic" = "Basic";

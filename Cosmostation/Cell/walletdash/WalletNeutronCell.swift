@@ -30,14 +30,14 @@ class WalletNeutronCell: UITableViewCell {
         totalbondedAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         
         availableLabel.text = NSLocalizedString("str_available", comment: "")
-        totalbondedLabel.text = NSLocalizedString("str_bonded", comment: "")
+        totalbondedLabel.text = NSLocalizedString("str_vault_bonded", comment: "")
     }
     
     func updateView(_ account: Account?, _ chainConfig: ChainConfig?) {
         guard let account = account, let chainConfig = chainConfig else { return }
         let stakingDenom = chainConfig.stakeDenom
         
-        let bondedAmount = NSDecimalNumber.zero
+        let bondedAmount = BaseData.instance.mNeutronVaultDeposit
         let totalToken = BaseData.instance.getAvailableAmount_gRPC(stakingDenom).adding(bondedAmount)
         
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 6, 6)

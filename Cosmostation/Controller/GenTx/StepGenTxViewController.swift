@@ -13,6 +13,7 @@ import NIO
 import HDWalletKit
 import SwiftKeychainWrapper
 import web3swift
+import SwiftyJSON
 
 
 class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIScrollViewDelegate {
@@ -155,6 +156,14 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     var mChainId: String?
     var mStride_Stakeibc_HostZone: Stride_Stakeibc_HostZone?
+    
+    
+    var neutronVault: NeutronVault?
+    var neutronVaultAmount = Array<Coin>()
+    var neutronProposalModule: NeutronProposalModule?
+    var neutronProposal: JSON?
+    var neutronVoteSingleOpinion: String?
+    var neutronVoteMultiOpinion: Int?
     
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == TASK_TYPE_TRANSFER) {
@@ -494,6 +503,33 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                    PersisLiquid3ViewController(nibName: "PersisLiquid3ViewController", bundle: nil)]
        }
+        
+        else if (mType == TASK_TYPE_NEUTRON_VAULTE_DEPOSIT || mType == TASK_TYPE_NEUTRON_VAULTE_WITHDRAW) {
+            return [VaultContract0ViewController(nibName: "VaultContract0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    VaultContract3ViewController(nibName: "VaultContract3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_TYPE_NEUTRON_VOTE_SINGLE) {
+            return [SingleVote0ViewController(nibName: "SingleVote0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    NeuVote3ViewController(nibName: "NeuVote3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_TYPE_NEUTRON_VOTE_MULTI) {
+            return [MultiVote0ViewController(nibName: "MultiVote0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    NeuVote3ViewController(nibName: "NeuVote3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_TYPE_NEUTRON_VOTE_OVERRULE) {
+            return [OverruleVote0ViewController(nibName: "OverruleVote0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    NeuVote3ViewController(nibName: "NeuVote3ViewController", bundle: nil)]
+            
+        }
+                  
         
         else {
             return[]
