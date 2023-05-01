@@ -314,6 +314,10 @@
 		0419C94E29FE5B88001F9E58 /* NeuSingleVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419C94B29FE5B88001F9E58 /* NeuSingleVoteCell.swift */; };
 		0419C94F29FE5B88001F9E58 /* NeuSingleVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0419C94C29FE5B88001F9E58 /* NeuSingleVoteCell.xib */; };
 		0419C95029FE5B88001F9E58 /* NeuSingleVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0419C94C29FE5B88001F9E58 /* NeuSingleVoteCell.xib */; };
+		0419C95329FF5FA7001F9E58 /* NeuMultiVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419C95129FF5FA7001F9E58 /* NeuMultiVoteCell.swift */; };
+		0419C95429FF5FA7001F9E58 /* NeuMultiVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419C95129FF5FA7001F9E58 /* NeuMultiVoteCell.swift */; };
+		0419C95529FF5FA7001F9E58 /* NeuMultiVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0419C95229FF5FA7001F9E58 /* NeuMultiVoteCell.xib */; };
+		0419C95629FF5FA7001F9E58 /* NeuMultiVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0419C95229FF5FA7001F9E58 /* NeuMultiVoteCell.xib */; };
 		041ECDEE27F41DCE00397D37 /* WcSignRequestPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */; };
 		041ECDEF27F41DCE00397D37 /* WcSignRequestPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */; };
 		041ECDF227F5750700397D37 /* EmptyWCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDF027F5750700397D37 /* EmptyWCViewController.swift */; };
@@ -3311,6 +3315,8 @@
 		0419C94629FE599D001F9E58 /* NeuVote3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeuVote3ViewController.xib; sourceTree = "<group>"; };
 		0419C94B29FE5B88001F9E58 /* NeuSingleVoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuSingleVoteCell.swift; sourceTree = "<group>"; };
 		0419C94C29FE5B88001F9E58 /* NeuSingleVoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeuSingleVoteCell.xib; sourceTree = "<group>"; };
+		0419C95129FF5FA7001F9E58 /* NeuMultiVoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuMultiVoteCell.swift; sourceTree = "<group>"; };
+		0419C95229FF5FA7001F9E58 /* NeuMultiVoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeuMultiVoteCell.xib; sourceTree = "<group>"; };
 		041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WcSignRequestPopup.swift; sourceTree = "<group>"; };
 		041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WcSignRequestPopup.xib; sourceTree = "<group>"; };
 		041ECDF027F5750700397D37 /* EmptyWCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyWCViewController.swift; sourceTree = "<group>"; };
@@ -4634,6 +4640,8 @@
 				0424400D29FAE7420018A1D9 /* DaoProposalCell.xib */,
 				0419C94B29FE5B88001F9E58 /* NeuSingleVoteCell.swift */,
 				0419C94C29FE5B88001F9E58 /* NeuSingleVoteCell.xib */,
+				0419C95129FF5FA7001F9E58 /* NeuMultiVoteCell.swift */,
+				0419C95229FF5FA7001F9E58 /* NeuMultiVoteCell.xib */,
 			);
 			path = neutron;
 			sourceTree = "<group>";
@@ -7119,6 +7127,7 @@
 				18FFB79B281AF533004E65BB /* RegisterAccount1ViewController.xib in Resources */,
 				04E6ABA62863581F008DC3C7 /* CdpCreate1ViewController.xib in Resources */,
 				045DAD64289128C3004ED9B4 /* AuthzExecuteCell.xib in Resources */,
+				0419C95629FF5FA7001F9E58 /* NeuMultiVoteCell.xib in Resources */,
 				18FFB79C281AF533004E65BB /* TxIbcUpdateClientCell.xib in Resources */,
 				04E6ABD6286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib in Resources */,
 				E1C5C0AE28992AC400E9E65D /* AuthzDelegate1ViewController.xib in Resources */,
@@ -7493,6 +7502,7 @@
 				28B9B689271DC5DD0067C6AE /* SifPoolCell.xib in Resources */,
 				04983CA5278C24C100F913A3 /* TxSaveProfileCell.xib in Resources */,
 				283E94782549030C007A9291 /* TxReplaceResourceCell.xib in Resources */,
+				0419C95529FF5FA7001F9E58 /* NeuMultiVoteCell.xib in Resources */,
 				E185368A289C149B00B84DC6 /* TxAuthzExecCell.xib in Resources */,
 				042AEE152864530900E13825 /* OkVote1ViewController.xib in Resources */,
 				280E1F1C254ABB1D0007BA7D /* ResourceEditCell.xib in Resources */,
@@ -7767,6 +7777,7 @@
 				042A0CB2288E599F00C4DC38 /* cosmos_authz_v1beta1_query.pb.swift in Sources */,
 				04FCD301292F94E600BA5349 /* LiquidUnstakingViewController.swift in Sources */,
 				1817CC73283E2CE600523713 /* cosmos_proto_cosmos.pb.swift in Sources */,
+				0419C95429FF5FA7001F9E58 /* NeuMultiVoteCell.swift in Sources */,
 				1817CC16283E2CE600523713 /* cosmwasm_wasm_v1_types.pb.swift in Sources */,
 				18DFB80A298CADC900E812B6 /* stride_icacallbacks_callback_data.pb.swift in Sources */,
 				047847C629629AD100FD6A7E /* Cw20IcnsByNameRes.swift in Sources */,
@@ -9825,6 +9836,7 @@
 				E148781028957E2900751D94 /* AuthzClaimReward4ViewController.swift in Sources */,
 				28DB570125FA3BA900B2F0E5 /* HardPoolWithdraw3ViewController.swift in Sources */,
 				0454AE2E2927459300EC657D /* ethermint_types_v1_dynamic_fee.pb.swift in Sources */,
+				0419C95329FF5FA7001F9E58 /* NeuMultiVoteCell.swift in Sources */,
 				040FAAA4275F55C400229F6F /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
 				047847CB2962C94800FD6A7E /* Cw20IcnsByAddressRes.swift in Sources */,
 				042A0CC7288E599F00C4DC38 /* cosmos_auth_v1beta1_genesis.pb.swift in Sources */,

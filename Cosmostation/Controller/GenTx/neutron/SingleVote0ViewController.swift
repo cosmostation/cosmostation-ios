@@ -62,7 +62,6 @@ class SingleVote0ViewController: BaseViewController {
         if (opinion == nil) {
             onShowToast(NSLocalizedString("error_no_opinion", comment: ""))
             return
-            
         }
         pageHolderVC.neutronVoteSingleOpinion = opinion
         btnCancel.isUserInteractionEnabled = false

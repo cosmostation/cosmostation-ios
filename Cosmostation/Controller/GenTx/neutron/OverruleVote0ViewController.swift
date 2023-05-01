@@ -8,10 +8,30 @@
 
 import UIKit
 
-class OverruleVote0ViewController: UIViewController {
+class OverruleVote0ViewController: BaseViewController {
+    
+    @IBOutlet weak var proposalsTableView: UITableView!
+    @IBOutlet weak var btnCancel: UIButton!
+    @IBOutlet weak var btnNext: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnCancel.borderColor = UIColor.font05
+        btnNext.borderColor = UIColor.photon
+    }
+    
+    override func enableUserInteraction() {
+        self.btnCancel.isUserInteractionEnabled = true
+        self.btnNext.isUserInteractionEnabled = true
+    }
+    
+    @IBAction func onClickCancel(_ sender: UIButton) {
+    }
+    
+    @IBAction func onClickNext(_ sender: UIButton) {
     }
 
 }

@@ -8,6 +8,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -23,13 +28,13 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="#1 Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ty-Cj-kRF">
                                 <rect key="frame" x="16" y="14" width="497" height="15.666666666666664"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPG-f5-Dcg">
-                                <rect key="frame" x="16" y="39.666666666666657" width="26" height="13.333333333333336"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Time" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPG-f5-Dcg">
+                                <rect key="frame" x="16" y="39.666666666666657" width="497" height="13.333333333333336"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -52,6 +57,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="u2X-BY-BfF"/>
                                                 </constraints>
+                                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                 <color key="tintColor" name="_font03"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                                 <state key="normal" image="iconCheck">
@@ -101,6 +107,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="1xa-vf-owX"/>
                                                 </constraints>
+                                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                 <color key="tintColor" name="_font03"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                                 <state key="normal" image="iconCheck">
@@ -150,6 +157,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="8ef-8n-ffl"/>
                                                 </constraints>
+                                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
                                                 <color key="tintColor" name="_font03"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                                 <state key="normal" image="iconCheck">
@@ -207,6 +215,7 @@
                             <constraint firstItem="63S-J5-3A4" firstAttribute="leading" secondItem="SjZ-Fs-dB4" secondAttribute="leading" constant="16" id="Ek3-qS-zfQ"/>
                             <constraint firstAttribute="bottom" secondItem="NLf-f0-FPq" secondAttribute="bottom" constant="16" id="FDc-Bg-eRj"/>
                             <constraint firstItem="NLf-f0-FPq" firstAttribute="top" secondItem="63S-J5-3A4" secondAttribute="bottom" constant="16" id="L6X-Sr-gfc"/>
+                            <constraint firstItem="PPG-f5-Dcg" firstAttribute="trailing" secondItem="9ty-Cj-kRF" secondAttribute="trailing" id="MBk-mw-SC9"/>
                             <constraint firstItem="63S-J5-3A4" firstAttribute="top" secondItem="PPG-f5-Dcg" secondAttribute="bottom" constant="16" id="NBW-h2-2sy"/>
                             <constraint firstAttribute="trailing" secondItem="NLf-f0-FPq" secondAttribute="trailing" constant="16" id="Nfd-Bl-tp9"/>
                             <constraint firstAttribute="trailing" secondItem="9ty-Cj-kRF" secondAttribute="trailing" constant="16" id="Qra-6e-hW8"/>

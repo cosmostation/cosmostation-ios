@@ -43,13 +43,17 @@ class NeuSingleVoteCell: UITableViewCell {
         if let chainConfig = chainConfig, let module = module, let proposal = proposal {
             let id = proposal["id"].int64Value
             let contents = proposal["proposal"]
-            let expiration = contents["expiration"]["at_time"].int64Value / 1000000
-            let time = WDP.dpTime(expiration).appending(" ").appending(WDP.dpTimeGap(expiration))
-            
             titleLabel.text = "# ".appending(String(id)).appending("  ").appending(contents["title"].stringValue)
-            timeLabel.text = time
             
-            //TODO expiration block check
+            let expirationTime = contents["expiration"]["at_time"].int64Value
+            if (expirationTime > 0) {
+                let time = expirationTime / 1000000
+                timeLabel.text = WDP.dpTime(time).appending(" ").appending(WDP.dpTimeGap(time))
+            }
+            let expirationHeight = contents["expiration"]["at_height"].int64Value
+            if (expirationHeight > 0) {
+                timeLabel.text = "Expiration at : " + String(expirationHeight)
+            }
             
             onCheckDim()
             if (myOpinion?.lowercased() == "yes") {
