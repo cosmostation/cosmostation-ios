@@ -2153,8 +2153,8 @@ class Signer {
         }
         let jsonMsg: JSON = ["bond" : JSON()]
         let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-        let neutronVaultDeposit = genNutronVaultDepositMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!, [depositCoin])
-        return getGrpcSignedTx(auth, pubkeyType, chainType, neutronVaultDeposit, privateKey, publicKey, fee, memo)
+        let contractMsg = genWasmMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!, [depositCoin])
+        return getGrpcSignedTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
     }
     
     static func simulNutronVaultDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
@@ -2166,23 +2166,8 @@ class Signer {
         }
         let jsonMsg: JSON = ["bond" : JSON()]
         let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-        let neutronVaultDeposit = genNutronVaultDepositMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!, [depositCoin])
-        return getGrpcSimulateTx(auth, pubkeyType, chainType, neutronVaultDeposit, privateKey, publicKey, fee, memo)
-    }
-    
-    static func genNutronVaultDepositMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ contractAddress: String, _ innerMsg: Data, _ innerFunds: [Cosmos_Base_V1beta1_Coin]) -> [Google_Protobuf2_Any] {
-        let exeContract = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-            $0.sender = WUtils.onParseAuthGrpc(auth).0!
-            $0.contract = contractAddress
-            //            $0.msg  = Data(base64Encoded: "ewogICAgImJvbmQiOiB7fQp9")!
-            $0.msg  = innerMsg
-            $0.funds = innerFunds
-        }
-        let anyMsg = Google_Protobuf2_Any.with {
-            $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
-            $0.value = try! exeContract.serializedData()
-        }
-        return [anyMsg]
+        let contractMsg = genWasmMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!, [depositCoin])
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
     }
     
     
@@ -2191,8 +2176,8 @@ class Signer {
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let jsonMsg: JSON = ["unbond" : ["amount" : amount[0].amount]]
         let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-        let neutronVaultWithdraw = genNutronVaultWithdrawMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!)
-        return getGrpcSignedTx(auth, pubkeyType, chainType, neutronVaultWithdraw, privateKey, publicKey, fee, memo)
+        let contractMsg = genWasmMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
     }
     
     static func simulNutronVaultWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
@@ -2200,15 +2185,58 @@ class Signer {
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let jsonMsg: JSON = ["unbond" : ["amount" : amount[0].amount]]
         let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-        let neutronVaultWithdraw = genNutronVaultWithdrawMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!)
-        return getGrpcSimulateTx(auth, pubkeyType, chainType, neutronVaultWithdraw, privateKey, publicKey, fee, memo)
+        let contractMsg = genWasmMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genNutronVaultWithdrawMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ contractAddress: String, _ innerMsg: Data) -> [Google_Protobuf2_Any] {
+    
+    static func genNutronSingleVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                    _ contractAddress: String,_ proposalId: Int64, _ opinion: String,
+                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let jsonMsg: JSON = ["vote" : ["proposal_id" : proposalId, "vote" : opinion]]
+        let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+        let contractMsg = genWasmMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
+    }
+    
+    static func simulNutronSingleVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                      _ contractAddress: String,_ proposalId: Int64, _ opinion: String,
+                                      _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let jsonMsg: JSON = ["vote" : ["proposal_id" : proposalId, "vote" : opinion]]
+        let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+        let contractMsg = genWasmMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
+    }
+    
+    
+    static func genNutronMultiVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                   _ contractAddress: String,_ proposalId: Int64, _ opinion: Int,
+                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let jsonMsg: JSON = ["vote" : ["proposal_id" : proposalId, "vote" : ["option_id" : proposalId]]]
+        let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+        let contractMsg = genWasmMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
+    }
+    
+    static func simulNutronMultiVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                     _ contractAddress: String,_ proposalId: Int64, _ opinion: Int,
+                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let jsonMsg: JSON = ["vote" : ["proposal_id" : proposalId, "vote" : ["option_id" : proposalId]]]
+        let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+        let contractMsg = genWasmMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genWasmMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ contractAddress: String, _ innerMsg: Data? = nil, _ innerFunds: [Cosmos_Base_V1beta1_Coin]? = nil) -> [Google_Protobuf2_Any] {
         let exeContract = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = WUtils.onParseAuthGrpc(auth).0!
             $0.contract = contractAddress
-            $0.msg  = innerMsg
+            if let innerMsg = innerMsg {
+                $0.msg  = innerMsg
+            }
+            if let innerFunds = innerFunds {
+                $0.funds = innerFunds
+            }
         }
         let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
