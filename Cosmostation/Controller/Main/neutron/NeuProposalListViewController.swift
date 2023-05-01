@@ -19,6 +19,8 @@ class NeuProposalListViewController: BaseViewController {
     var neutronDao: NeutronDao!
     var neutronProposals = Array<(String, [JSON])>()
     var fetchCnt = 0
+    var isShowAll = false
+    var btnShowAll: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,24 @@ class NeuProposalListViewController: BaseViewController {
         self.navigationItem.title = NSLocalizedString("title_daos_proposal_list", comment: "")
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        let showAllBtn = UIButton(type: .system)
+        showAllBtn.setImage(UIImage(named: "iconUnCheckedBox"), for: .normal)
+        showAllBtn.setTitle("Show All", for: .normal)
+        showAllBtn.titleLabel?.font = Font_13_footnote
+        showAllBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
+        showAllBtn.sizeToFit()
+        showAllBtn.addTarget(self, action: #selector(onToggleShow(_:)), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem =  UIBarButtonItem(customView: showAllBtn)
+    }
+    
+    @objc func onToggleShow(_ button: UIButton) {
+        isShowAll = !isShowAll
+        if (isShowAll) {
+            button.setImage(UIImage(named: "iconCheckBox"), for: .normal)
+        } else {
+            button.setImage(UIImage(named: "iconUnCheckedBox"), for: .normal)
+        }
     }
     
     func onFetchFinished() {
@@ -138,10 +158,8 @@ extension NeuProposalListViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRowAt ", indexPath.section, " ", indexPath.row )
         let proposalModule = neutronDao.proposal_modules[indexPath.section]
         if let proposals = neutronProposals.filter({ $0.0 == proposalModule.address }).first {
-            
             let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
             txVC.neutronProposalModule = proposalModule
             txVC.neutronProposal = proposals.1[indexPath.row]
