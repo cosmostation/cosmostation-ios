@@ -22,6 +22,17 @@ class MainDappViewController: BaseViewController {
         
         self.mainTabVC = (self.parent)?.parent as? MainTabViewController
         initWebView()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(310), execute: {
+            var dappUrl = "https://dapps.cosmostation.io"
+            #if DEBUG
+                dappUrl = "https://dapps.dev.cosmostation.io"
+            #endif
+            if let url = URL(string: "\(dappUrl)/?chain=\(self.chainConfig?.chainAPIName ?? "")&theme=\(self.currentThemeParams())") {
+                print("load load")
+                self.webView.load(URLRequest(url: url))
+            }
+        });
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,15 +41,6 @@ class MainDappViewController: BaseViewController {
         self.navigationController?.navigationBar.topItem?.title = "";
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateTitle), name: Notification.Name("onNameCheckDone"), object: nil)
         self.updateTitle()
-        
-        var dappUrl = "https://dapps.cosmostation.io"
-        #if DEBUG
-            dappUrl = "https://dapps.dev.cosmostation.io"
-        #endif
-        
-        if let url = URL(string: "\(dappUrl)/?chain=\(chainConfig?.chainAPIName ?? "")&theme=\(currentThemeParams())") {
-            webView.load(URLRequest(url: url))
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
