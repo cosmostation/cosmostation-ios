@@ -14,10 +14,8 @@ import NIO
 
 class VoteListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var voteTitle: UILabel!
     @IBOutlet weak var voteTableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
-    @IBOutlet weak var btnShowAll: UIButton!
     @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var layerMultiVote: UIView!
     @IBOutlet weak var layerMultiVoteAction: UIStackView!
@@ -44,8 +42,6 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
-        
-        self.voteTitle.text = NSLocalizedString("title_vote_list", comment: "")
         
         self.voteTableView.delegate = self
         self.voteTableView.dataSource = self
@@ -85,17 +81,35 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = "";
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_vote_list", comment: "")
+        self.navigationItem.title = NSLocalizedString("title_vote_list", comment: "")
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        let showAllBtn = UIButton(type: .system)
+        if (isShowAll) { showAllBtn.setImage(UIImage(named: "iconCheckBox"), for: .normal) }
+        else { showAllBtn.setImage(UIImage(named: "iconUnCheckedBox"), for: .normal) }
+        showAllBtn.setTitle("Show All", for: .normal)
+        showAllBtn.titleLabel?.font = Font_13_footnote
+        showAllBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
+        showAllBtn.sizeToFit()
+        showAllBtn.addTarget(self, action: #selector(onToggleShow(_:)), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem =  UIBarButtonItem(customView: showAllBtn)
+    }
+    
+    @objc func onToggleShow(_ button: UIButton) {
+        isShowAll = !isShowAll
+        if (isShowAll) { button.setImage(UIImage(named: "iconCheckBox"), for: .normal) }
+        else { button.setImage(UIImage(named: "iconUnCheckedBox"), for: .normal) }
+        self.onUpdateViews()
     }
     
     func onUpdateViews() {
         if (isShowAll) {
-            btnShowAll.setImage(UIImage(named: "iconCheckBox"), for: .normal)
             mFilteredProposals = mVotingPeriods
             mFilteredEtcProposals = mEtcPeriods
         } else {
-            btnShowAll.setImage(UIImage(named: "iconUnCheckedBox"), for: .normal)
             mFilteredProposals = mVotingPeriods.filter() { !$0.isScam() }
             mFilteredEtcProposals = mEtcPeriods.filter() { !$0.isScam() }
         }
@@ -130,11 +144,6 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     @IBAction func onClickBack(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func onClickShowAll(_ sender: UIButton) {
-        isShowAll = !isShowAll
-        self.onUpdateViews()
     }
     
     @IBAction func onClickStartSelect(_ sender: UIButton) {
@@ -174,12 +183,6 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func onStartVote() {
-        mSelectedProposalIds.removeAll()
-        isSelectMode = false
-        voteTableView.reloadData()
-        btnMultiVote.isHidden = false
-        layerMultiVoteAction.isHidden = true
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
             let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
             txVC.mProposals = self.mToVoteList

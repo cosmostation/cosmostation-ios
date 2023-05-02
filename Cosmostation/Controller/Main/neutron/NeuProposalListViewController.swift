@@ -49,7 +49,8 @@ class NeuProposalListViewController: BaseViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
         let showAllBtn = UIButton(type: .system)
-        showAllBtn.setImage(UIImage(named: "iconUnCheckedBox"), for: .normal)
+        if (isShowAll) { showAllBtn.setImage(UIImage(named: "iconCheckBox"), for: .normal) }
+        else { showAllBtn.setImage(UIImage(named: "iconUnCheckedBox"), for: .normal) }
         showAllBtn.setTitle("Show All", for: .normal)
         showAllBtn.titleLabel?.font = Font_13_footnote
         showAllBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
@@ -60,11 +61,8 @@ class NeuProposalListViewController: BaseViewController {
     
     @objc func onToggleShow(_ button: UIButton) {
         isShowAll = !isShowAll
-        if (isShowAll) {
-            button.setImage(UIImage(named: "iconCheckBox"), for: .normal)
-        } else {
-            button.setImage(UIImage(named: "iconUnCheckedBox"), for: .normal)
-        }
+        if (isShowAll) { button.setImage(UIImage(named: "iconCheckBox"), for: .normal) }
+        else { button.setImage(UIImage(named: "iconUnCheckedBox"), for: .normal) }
     }
     
     func onFetchFinished() {
