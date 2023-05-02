@@ -62,16 +62,16 @@
                         </subviews>
                         <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
-                            <constraint firstItem="XMp-t6-ixR" firstAttribute="top" secondItem="5DQ-aJ-n9c" secondAttribute="top" constant="14" id="5lh-9B-Ycn"/>
+                            <constraint firstItem="XMp-t6-ixR" firstAttribute="top" secondItem="5DQ-aJ-n9c" secondAttribute="top" constant="12" id="5lh-9B-Ycn"/>
                             <constraint firstItem="XMp-t6-ixR" firstAttribute="leading" secondItem="5DQ-aJ-n9c" secondAttribute="leading" constant="16" id="Ajm-eI-vfp"/>
                             <constraint firstItem="ulg-ck-Qf5" firstAttribute="leading" secondItem="XMp-t6-ixR" secondAttribute="leading" id="Cqg-3z-VU7"/>
                             <constraint firstAttribute="bottom" secondItem="9D4-p2-CP0" secondAttribute="bottom" id="Jtg-7M-Qdf"/>
                             <constraint firstAttribute="trailing" secondItem="XMp-t6-ixR" secondAttribute="trailing" constant="16" id="K1h-KS-hM4"/>
                             <constraint firstItem="ulg-ck-Qf5" firstAttribute="trailing" secondItem="XMp-t6-ixR" secondAttribute="trailing" id="ZNE-4k-Cqf"/>
-                            <constraint firstItem="ulg-ck-Qf5" firstAttribute="top" secondItem="XMp-t6-ixR" secondAttribute="bottom" constant="10" id="aMt-oN-rWk"/>
+                            <constraint firstItem="ulg-ck-Qf5" firstAttribute="top" secondItem="XMp-t6-ixR" secondAttribute="bottom" constant="8" id="aMt-oN-rWk"/>
                             <constraint firstItem="9D4-p2-CP0" firstAttribute="leading" secondItem="5DQ-aJ-n9c" secondAttribute="leading" id="g7p-Du-W8n"/>
                             <constraint firstItem="9D4-p2-CP0" firstAttribute="top" secondItem="5DQ-aJ-n9c" secondAttribute="top" id="hnU-Qb-9yX"/>
-                            <constraint firstAttribute="bottom" secondItem="ulg-ck-Qf5" secondAttribute="bottom" constant="16" id="nEo-Xn-ewB"/>
+                            <constraint firstAttribute="bottom" secondItem="ulg-ck-Qf5" secondAttribute="bottom" constant="14" id="nEo-Xn-ewB"/>
                             <constraint firstAttribute="trailing" secondItem="9D4-p2-CP0" secondAttribute="trailing" id="sp4-TM-DAY"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
