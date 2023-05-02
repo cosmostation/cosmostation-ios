@@ -15,12 +15,13 @@ class NeuProposalListViewController: BaseViewController {
     @IBOutlet weak var emptyView: UIView!
     
     var refresher: UIRefreshControl!
+    var btnShowAll: UIButton!
     
     var neutronDao: NeutronDao!
     var neutronProposals = Array<(String, [JSON])>()
+    var neutronFilteredProposals = Array<(String, [JSON])>()
     var fetchCnt = 0
     var isShowAll = false
-    var btnShowAll: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,18 +64,23 @@ class NeuProposalListViewController: BaseViewController {
         isShowAll = !isShowAll
         if (isShowAll) { button.setImage(UIImage(named: "iconCheckBox"), for: .normal) }
         else { button.setImage(UIImage(named: "iconUnCheckedBox"), for: .normal) }
+        onUpdateView()
+    }
+    
+    func onUpdateView() {
+        refresher.endRefreshing()
+        proposalListTableView.reloadData()
+        if (isShowAll) {
+            emptyView.isHidden = neutronProposals.filter({ $0.1.count > 0 }).count > 0 ? true : false
+        } else {
+            emptyView.isHidden = neutronFilteredProposals.filter({ $0.1.count > 0 }).count > 0 ? true : false
+        }
     }
     
     func onFetchFinished() {
         fetchCnt = fetchCnt - 1
         if (fetchCnt <= 0) {
-            refresher.endRefreshing()
-            proposalListTableView.reloadData()
-            if let _ = neutronProposals.filter({ $0.1.count > 0 }).first {
-                emptyView.isHidden = true
-            } else {
-                emptyView.isHidden = false
-            }
+            onUpdateView()
         }
     }
     
@@ -87,6 +93,7 @@ class NeuProposalListViewController: BaseViewController {
     
     func onFetchProposalList(_ contAddress: String) {
         neutronProposals.removeAll()
+        neutronFilteredProposals.removeAll()
         DispatchQueue.global().async {
             do {
                 let query: JSON = ["reverse_proposals" : JSON()]
@@ -100,6 +107,13 @@ class NeuProposalListViewController: BaseViewController {
                 if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     if let result = try? JSONDecoder().decode(JSON.self, from: response.data) {
                         self.neutronProposals.append((contAddress, result["proposals"].arrayValue))
+                        var openProposal = Array<JSON>()
+                        result["proposals"].arrayValue.forEach { proposal in
+                            if (proposal["proposal"]["status"].stringValue.lowercased() == "open") {
+                                openProposal.append(proposal)
+                            }
+                        }
+                        self.neutronFilteredProposals.append((contAddress, openProposal))
                     }
                 }
                 try channel.close().wait()
@@ -122,7 +136,7 @@ extension NeuProposalListViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let proposalModule = neutronDao.proposal_modules[section]
-        if let proposals = neutronProposals.filter({ $0.0 == proposalModule.address }).first {
+        if let proposals = getProposal(proposalModule.address) {
             if (proposals.1.count > 0) { return 30 }
         }
         return 0
@@ -131,7 +145,7 @@ extension NeuProposalListViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let proposalModule = neutronDao.proposal_modules[section]
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if let proposals = neutronProposals.filter({ $0.0 == proposalModule.address }).first {
+        if let proposals = getProposal(proposalModule.address) {
             view.headerTitleLabel.text = proposalModule.name
             view.headerCntLabel.text = String(proposals.1.count)
         }
@@ -140,7 +154,7 @@ extension NeuProposalListViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let proposalModule = neutronDao.proposal_modules[section]
-        if let proposals = neutronProposals.filter({ $0.0 == proposalModule.address }).first {
+        if let proposals = getProposal(proposalModule.address) {
             return proposals.1.count
         }
         return 0
@@ -149,7 +163,7 @@ extension NeuProposalListViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"DaoProposalCell") as? DaoProposalCell
         let proposalModule = neutronDao.proposal_modules[indexPath.section]
-        if let proposals = neutronProposals.filter({ $0.0 == proposalModule.address }).first {
+        if let proposals = getProposal(proposalModule.address) {
             cell?.onBindView(proposalModule, proposals.1[indexPath.row])
         }
         return cell!
@@ -157,7 +171,7 @@ extension NeuProposalListViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let proposalModule = neutronDao.proposal_modules[indexPath.section]
-        if let proposals = neutronProposals.filter({ $0.0 == proposalModule.address }).first {
+        if let proposals = getProposal(proposalModule.address) {
             let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
             txVC.neutronProposalModule = proposalModule
             txVC.neutronProposal = proposals.1[indexPath.row]
@@ -170,6 +184,14 @@ extension NeuProposalListViewController: UITableViewDelegate, UITableViewDataSou
             }
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(txVC, animated: true)
+        }
+    }
+    
+    func getProposal(_ address: String?) -> (String, [JSON])? {
+        if (isShowAll) {
+            return neutronProposals.filter({ $0.0 == address }).first
+        } else {
+            return neutronFilteredProposals.filter({ $0.0 == address }).first
         }
     }
 }
