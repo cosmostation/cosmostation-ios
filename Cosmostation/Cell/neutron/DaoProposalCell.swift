@@ -12,11 +12,24 @@ import SwiftyJSON
 class DaoProposalCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var statusLayer: UIView!
+    @IBOutlet weak var statusImg: UIImageView!
+    @IBOutlet weak var statusTitle: UILabel!
+    @IBOutlet weak var myVoteImg: UIImageView!
+    @IBOutlet weak var myVoteNum: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+    }
+    
+    override func prepareForReuse() {
+        self.timeLabel.isHidden = true
+        self.statusLayer.isHidden = true
+        self.myVoteImg.isHidden = true
+        self.myVoteNum.isHidden = true
     }
     
     func onBindView(_ module: NeutronProposalModule, _ proposal: JSON) {
@@ -24,7 +37,31 @@ class DaoProposalCell: UITableViewCell {
         let contents = proposal["proposal"]
         
         titleLabel.text = "# ".appending(String(id)).appending("  ").appending(contents["title"].stringValue)
-        descriptionLabel.text = contents["description"].stringValue
+        
+        let status = contents["status"].stringValue.lowercased()
+        if (status == "open") {
+            let expirationTime = contents["expiration"]["at_time"].int64Value
+            if (expirationTime > 0) {
+                let time = expirationTime / 1000000
+                timeLabel.text = WDP.dpTime(time).appending(" ").appending(WDP.dpTimeGap(time))
+            }
+            let expirationHeight = contents["expiration"]["at_height"].int64Value
+            if (expirationHeight > 0) {
+                timeLabel.text = "Expiration at : " + String(expirationHeight) + " Block"
+            }
+            timeLabel.isHidden = false
+
+        } else {
+            if (status == "passed" || status == "executed") {
+                statusImg.image = UIImage.init(named: "ImgGovPassed")
+            } else if (status == "rejected" || status == "failed") {
+                statusImg.image = UIImage.init(named: "ImgGovRejected")
+            }
+            statusTitle.text = status.uppercased()
+            statusLayer.isHidden = false
+        }
     }
+    
+    //TODO check my voted
     
 }

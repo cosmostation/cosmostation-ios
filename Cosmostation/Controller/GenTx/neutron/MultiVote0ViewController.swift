@@ -58,7 +58,7 @@ class MultiVote0ViewController: BaseViewController {
             }
             let expirationHeight = contents["expiration"]["at_height"].int64Value
             if (expirationHeight > 0) {
-                timeLabel.text = "Expiration at : " + String(expirationHeight)
+                timeLabel.text = "Expiration at : " + String(expirationHeight) + " Block"
             }
         }
     }
