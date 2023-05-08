@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import Alamofire
 
 class NeuProposalListViewController: BaseViewController {
     
@@ -20,6 +21,7 @@ class NeuProposalListViewController: BaseViewController {
     var neutronDao: NeutronDao!
     var neutronProposals = Array<(String, [JSON])>()
     var neutronFilteredProposals = Array<(String, [JSON])>()
+    var myVotes = Array<MintscanDaoVote>()
     var fetchCnt = 0
     var isShowAll = false
 
@@ -85,10 +87,11 @@ class NeuProposalListViewController: BaseViewController {
     }
     
     @objc func onRequestFetch() {
-        fetchCnt = neutronDao.proposal_modules.count
+        fetchCnt = neutronDao.proposal_modules.count + 1
         neutronDao.proposal_modules.forEach { module in
-            self.onFetchProposalList(module.address!)
+            onFetchProposalList(module.address!)
         }
+        onFetchMintscanMyVotes()
     }
     
     func onFetchProposalList(_ contAddress: String) {
@@ -122,6 +125,27 @@ class NeuProposalListViewController: BaseViewController {
                 print("onFetchProposalList failed: \(error)")
             }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchMintscanMyVotes() {
+        let url = BaseNetWork.mintscanDaoMyVotes(chainConfig!, account!.account_address)
+        print("url ", url)
+        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                self.myVotes.removeAll()
+                if let responseDatas = res as? Array<NSDictionary> {
+                    responseDatas.forEach { rawVote in
+                        self.myVotes.append(MintscanDaoVote.init(rawVote))
+                    }
+                }
+                
+            case .failure(let error):
+                print("onFetchMintscanMyVotes ", error)
+            }
+            self.onFetchFinished()
         }
     }
 
@@ -164,7 +188,7 @@ extension NeuProposalListViewController: UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier:"DaoProposalCell") as? DaoProposalCell
         let proposalModule = neutronDao.proposal_modules[indexPath.section]
         if let proposals = getProposal(proposalModule.address) {
-            cell?.onBindView(proposalModule, proposals.1[indexPath.row])
+            cell?.onBindView(proposalModule, proposals.1[indexPath.row], myVotes)
         }
         return cell!
     }

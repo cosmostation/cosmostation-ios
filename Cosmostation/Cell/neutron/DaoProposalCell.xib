@@ -27,7 +27,7 @@
                         <rect key="frame" x="12" y="4" width="488" height="74"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1 Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4e-AL-IEU">
-                                <rect key="frame" x="16" y="14" width="416" height="20"/>
+                                <rect key="frame" x="16" y="14" width="396" height="20"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -74,8 +74,11 @@
                                 </constraints>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbx-VK-coH">
-                                <rect key="frame" x="440" y="17" width="40" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="420" y="17" width="60" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="xFW-61-Yiz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="_voteYes"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -87,13 +90,12 @@
                             <constraint firstItem="2Op-qR-Rmx" firstAttribute="top" secondItem="v4e-AL-IEU" secondAttribute="bottom" constant="10" id="2gW-Pa-rRG"/>
                             <constraint firstAttribute="bottom" secondItem="qbE-e8-82l" secondAttribute="bottom" constant="16" id="3Ls-0s-iB4"/>
                             <constraint firstItem="yEr-WT-Zqp" firstAttribute="centerY" secondItem="R7h-CR-saj" secondAttribute="centerY" id="CIc-cs-Taa"/>
-                            <constraint firstItem="yEr-WT-Zqp" firstAttribute="leading" secondItem="v4e-AL-IEU" secondAttribute="trailing" constant="8" id="FFu-DX-iYl"/>
                             <constraint firstItem="fbx-VK-coH" firstAttribute="top" secondItem="yEr-WT-Zqp" secondAttribute="top" id="Jxh-hO-LTH"/>
                             <constraint firstItem="qbE-e8-82l" firstAttribute="top" secondItem="v4e-AL-IEU" secondAttribute="bottom" constant="10" id="KGX-0p-Eml"/>
                             <constraint firstItem="v4e-AL-IEU" firstAttribute="leading" secondItem="R7h-CR-saj" secondAttribute="leading" constant="16" id="S0O-39-vUY"/>
+                            <constraint firstItem="fbx-VK-coH" firstAttribute="leading" secondItem="v4e-AL-IEU" secondAttribute="trailing" constant="8" id="THb-DS-V8d"/>
                             <constraint firstItem="2Op-qR-Rmx" firstAttribute="leading" secondItem="v4e-AL-IEU" secondAttribute="leading" id="XmQ-Tu-Edh"/>
                             <constraint firstItem="qbE-e8-82l" firstAttribute="leading" secondItem="v4e-AL-IEU" secondAttribute="leading" id="YtB-DF-pY0"/>
-                            <constraint firstItem="fbx-VK-coH" firstAttribute="leading" secondItem="yEr-WT-Zqp" secondAttribute="leading" id="axU-RC-Dqx"/>
                             <constraint firstItem="v4e-AL-IEU" firstAttribute="top" secondItem="R7h-CR-saj" secondAttribute="top" constant="14" id="pjT-6S-9yf"/>
                             <constraint firstItem="fbx-VK-coH" firstAttribute="bottom" secondItem="yEr-WT-Zqp" secondAttribute="bottom" id="vWq-uA-cWe"/>
                             <constraint firstAttribute="bottom" secondItem="2Op-qR-Rmx" secondAttribute="bottom" constant="16" id="x0J-Ow-lg4"/>

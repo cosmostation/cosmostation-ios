@@ -262,6 +262,13 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v1/boards"
     }
     
+    static func mintscanDaoMyVotes(_ chainConfig: ChainConfig?, _ voter: String) -> String {
+        if (chainConfig is ChainNeutronTest) {
+            return MINTSCAN_DEV_API_URL + "v1/" + chainConfig!.chainAPIName + "/dao/address/" + voter + "/votes"
+        }
+        return MINTSCAN_API_URL + "v1/" + chainConfig!.chainAPIName + "/dao/address/" + voter + "/votes"
+    }
+    
     
     //API
     static func accountHistory(_ chainConfig: ChainConfig?, _ address: String) -> String {

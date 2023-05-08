@@ -32,7 +32,7 @@ class DaoProposalCell: UITableViewCell {
         self.myVoteNum.isHidden = true
     }
     
-    func onBindView(_ module: NeutronProposalModule, _ proposal: JSON) {
+    func onBindView(_ module: NeutronProposalModule, _ proposal: JSON, _ myVotes: Array<MintscanDaoVote>) {
         let id = proposal["id"].int64Value
         let contents = proposal["proposal"]
         
@@ -60,8 +60,35 @@ class DaoProposalCell: UITableViewCell {
             statusTitle.text = status.uppercased()
             statusLayer.isHidden = false
         }
+        
+        if let myVote = myVotes.filter({ $0.contract_address == module.address && $0.proposal_id == id }).first {
+            if (myVote.option == "yes") {
+                myVoteImg.image = UIImage.init(named: "imgVoteYes")
+                myVoteImg.isHidden = false
+                return
+                
+            } else if (myVote.option == "no") {
+                myVoteImg.image = UIImage.init(named: "imgVoteNo")
+                myVoteImg.isHidden = false
+                return
+                
+            } else if (myVote.option == "abstain") {
+                myVoteImg.image = UIImage.init(named: "imgVoteAbstain")
+                myVoteImg.isHidden = false
+                return
+            }
+            
+            if let numberOption = myVote.option {
+                myVoteNum.text = "Option " + numberOption
+//                myVoteNum.text = numberOption
+                myVoteNum.isHidden = false
+                return
+            }
+            
+        } else {
+            myVoteImg.image = UIImage.init(named: "imgNotVoted")
+            myVoteImg.isHidden = false
+        }
     }
-    
-    //TODO check my voted
     
 }
