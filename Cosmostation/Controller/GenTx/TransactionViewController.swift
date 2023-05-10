@@ -60,6 +60,9 @@ class TransactionViewController: UIViewController {
     var neutronVault: NeutronVault?
     var neutronProposalModule: NeutronProposalModule?
     var neutronProposal: JSON?
+    var neutronSwapPool: NeutronSwapPool?
+    var neutronInputPair: NeutronSwapPoolPair?
+    var neutronOutputPair: NeutronSwapPoolPair?
     
     // MARK: - for authz tx
     var mGrant: Cosmos_Authz_V1beta1_Grant?
@@ -458,6 +461,9 @@ class TransactionViewController: UIViewController {
             StepVc.neutronVault = self.neutronVault
             StepVc.neutronProposalModule = self.neutronProposalModule
             StepVc.neutronProposal = self.neutronProposal
+            StepVc.neutronSwapPool = self.neutronSwapPool
+            StepVc.neutronInputPair = self.neutronInputPair
+            StepVc.neutronOutputPair = self.neutronOutputPair
             
             StepVc.mGrant = mGrant
             StepVc.mGranterData = mGranterData

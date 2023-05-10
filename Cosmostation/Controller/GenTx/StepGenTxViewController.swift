@@ -164,6 +164,9 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var neutronProposal: JSON?
     var neutronVoteSingleOpinion: String?
     var neutronVoteMultiOpinion: Int?
+    var neutronSwapPool: NeutronSwapPool?
+    var neutronInputPair: NeutronSwapPoolPair?
+    var neutronOutputPair: NeutronSwapPoolPair?
     
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == TASK_TYPE_TRANSFER) {

@@ -315,4 +315,34 @@ public class WDP {
             priceDownColor(label)
         }
     }
+    
+    
+    static func dpNeutronCoinInfo(_ chainConfig: ChainConfig?, _ pair: NeutronSwapPoolPair, _ symbolLabel: UILabel?, _ symbolImg: UIImageView?, _ amountLabel: UILabel?) {
+        if (pair.type == "cw20") {
+            if let cw20Token = BaseData.instance.mMintscanTokens.filter({ $0.address == pair.address }).first {
+                symbolLabel?.text = cw20Token.symbol
+                if let assetImgeUrl = cw20Token.assetImg() {
+                    symbolImg?.af_setImage(withURL: assetImgeUrl)
+                }
+                
+                if (amountLabel != nil) {
+                    let available = NSDecimalNumber.init(string: cw20Token.amount)
+                    let decimal = cw20Token.decimals
+                    amountLabel!.attributedText = WDP.dpAmount(available.stringValue, amountLabel!.font!, decimal, decimal)
+                }
+            }
+            
+        } else {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == pair.denom }).first {
+                WDP.dpSymbol(chainConfig, msAsset.denom, symbolLabel)
+                WDP.dpSymbolImg(chainConfig, msAsset.denom, symbolImg)
+                
+                if (amountLabel != nil) {
+                    let available =  BaseData.instance.getAvailableAmount_gRPC(msAsset.denom)
+                    let decimal = msAsset.decimals
+                    amountLabel!.attributedText = WDP.dpAmount(available.stringValue, amountLabel!.font!, decimal, decimal)
+                }
+            }
+        }
+    }
 }

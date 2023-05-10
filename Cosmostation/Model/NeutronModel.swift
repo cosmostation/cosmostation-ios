@@ -65,5 +65,46 @@ public struct NeutronProposalModule {
             if (rawStatus == "Enabled") { self.status = true }
         }
     }
+}
+
+
+public struct NeutronSwapPool {
+    var id: Int64?
+    var chain: String?
+    var router_address: String?
+    var factory_address: String?
+    var contract_address: String?
+    var total_share: NSDecimalNumber?
+    var pairs =  Array<NeutronSwapPoolPair>()
     
+    init(_ dictionary: NSDictionary?) {
+        self.id = dictionary?["id"] as? Int64
+        self.chain = dictionary?["chain"] as? String
+        self.router_address = dictionary?["router_address"] as? String
+        self.factory_address = dictionary?["factory_address"] as? String
+        self.contract_address = dictionary?["contract_address"] as? String
+        if let rawShare = dictionary?["total_share"] as? String {
+            self.total_share = NSDecimalNumber(string: rawShare)
+        }
+        if let rawPairs = dictionary?["pairs"] as? Array<NSDictionary> {
+            rawPairs.forEach { rawPair in
+                self.pairs.append(NeutronSwapPoolPair.init(rawPair))
+            }
+        }
+    }
+}
+
+
+public struct NeutronSwapPoolPair {
+    var type: String?
+    var address: String?
+    var denom: String?
+    var amount: String?
+    
+    init(_ dictionary: NSDictionary?) {
+        self.type = dictionary?["type"] as? String
+        self.address = dictionary?["address"] as? String
+        self.denom = dictionary?["denom"] as? String
+        self.amount = dictionary?["amount"] as? String
+    }
 }

@@ -38,7 +38,7 @@ class ChainNeutronTest: ChainConfig {
     var defaultPath = "m/44'/118'/0'/0/X"
     
     var etherAddressSupport = false
-    var wasmSupport = false
+    var wasmSupport = true
     var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
