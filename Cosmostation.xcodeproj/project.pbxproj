@@ -1216,6 +1216,8 @@
 		04DFE2F52A0BD26A005BD46C /* NeuSwap3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE2F22A0BD26A005BD46C /* NeuSwap3ViewController.swift */; };
 		04DFE2F62A0BD26A005BD46C /* NeuSwap3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DFE2F32A0BD26A005BD46C /* NeuSwap3ViewController.xib */; };
 		04DFE2F72A0BD26A005BD46C /* NeuSwap3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DFE2F32A0BD26A005BD46C /* NeuSwap3ViewController.xib */; };
+		04DFE2F92A0D3C75005BD46C /* ChainNeutron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE2F82A0D3C75005BD46C /* ChainNeutron.swift */; };
+		04DFE2FA2A0D3C75005BD46C /* ChainNeutron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE2F82A0D3C75005BD46C /* ChainNeutron.swift */; };
 		04E1659528A0F49B000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1658C28A0F49A000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift */; };
 		04E1659628A0F49B000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1658C28A0F49A000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift */; };
 		04E1659728A0F49B000F12C0 /* confio_globalfee_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1658D28A0F49A000F12C0 /* confio_globalfee_v1beta1_query.pb.swift */; };
@@ -3855,6 +3857,7 @@
 		04DFE2ED2A0BD245005BD46C /* NeuSwap0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeuSwap0ViewController.xib; sourceTree = "<group>"; };
 		04DFE2F22A0BD26A005BD46C /* NeuSwap3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuSwap3ViewController.swift; sourceTree = "<group>"; };
 		04DFE2F32A0BD26A005BD46C /* NeuSwap3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeuSwap3ViewController.xib; sourceTree = "<group>"; };
+		04DFE2F82A0D3C75005BD46C /* ChainNeutron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainNeutron.swift; sourceTree = "<group>"; };
 		04E1658C28A0F49A000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_globalfee_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		04E1658D28A0F49A000F12C0 /* confio_globalfee_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_globalfee_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		04E1658E28A0F49A000F12C0 /* confio_poe_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_poe_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
@@ -4777,6 +4780,7 @@
 				0451FCA5282A3B7F00214FDA /* ChainLum.swift */,
 				153559972988FDE70055A1D3 /* ChainMars.swift */,
 				0451FC6F282A3A9900214FDA /* ChainMedibloc.swift */,
+				04DFE2F82A0D3C75005BD46C /* ChainNeutron.swift */,
 				1599550F29D14410004EFCF2 /* ChainNoble.swift */,
 				04403735284A2B2F004CD7E3 /* ChainNyx.swift */,
 				0451FC5F282A39FB00214FDA /* ChainOkc.swift */,
@@ -8394,6 +8398,7 @@
 				1817CBA6283E2CE500523713 /* cosmos_params_v1beta1_query.pb.swift in Sources */,
 				18DFB7FD298CADC900E812B6 /* tendermint_crypto_proof.pb.swift in Sources */,
 				04AA4C3E2906A6DE0027877B /* kava_auction_v1beta1_genesis.pb.swift in Sources */,
+				04DFE2FA2A0D3C75005BD46C /* ChainNeutron.swift in Sources */,
 				1817CC14283E2CE600523713 /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */,
 				18FFB4F3281AF533004E65BB /* TxRedelegateCell.swift in Sources */,
 				18FFB4F4281AF533004E65BB /* HardPoolRepay0ViewController.swift in Sources */,
@@ -9213,6 +9218,7 @@
 				04AA4BC72906A6DD0027877B /* kava_earn_v1beta1_vault.pb.swift in Sources */,
 				04172BA029F7E2C300D6279C /* VaultContract3ViewController.swift in Sources */,
 				040FA84E275F55C200229F6F /* confio_proofs.pb.swift in Sources */,
+				04DFE2F92A0D3C75005BD46C /* ChainNeutron.swift in Sources */,
 				15A1A50229ADAC390076504E /* TxPersisLiquidStakeCell.swift in Sources */,
 				045DAD55288FAEB5004ED9B4 /* AuthzGranteeCell.swift in Sources */,
 				040FA81D275F55C200229F6F /* cryptoorg_nft_v1_nft.pb.swift in Sources */,

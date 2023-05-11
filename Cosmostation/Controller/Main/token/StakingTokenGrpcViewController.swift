@@ -99,7 +99,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
             return cell!
             
         } else if (indexPath.section == 1) {
-            if (chainType == .NOBLE_MAIN || chainType == .NEUTRON_TEST) {
+            if (chainType == .NOBLE_MAIN || chainType == .NEUTRON_MAIN || chainType == .NEUTRON_TEST) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailCustomCell") as? TokenDetailCustomCell
                 cell?.onBindStakingToken(chainConfig!)
                 return cell!

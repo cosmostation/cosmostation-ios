@@ -146,7 +146,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return 1;
             
         } else {
-            if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN || chainType == .NEUTRON_TEST) {
+            if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN || chainType == .NEUTRON_MAIN || chainType == .NEUTRON_TEST) {
                 return 3;
             }
             if (chainType == .KAVA_MAIN || chainType == .MEDI_MAIN || chainType == .DESMOS_MAIN) {
@@ -196,7 +196,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 return onSetPersisItems(tableView, indexPath);
             } else if (chainType == .NOBLE_MAIN) {
                 return onSetNobleItems(tableView, indexPath);
-            } else if (chainType == .NEUTRON_TEST) {
+            } else if (chainType == .NEUTRON_MAIN || chainType == .NEUTRON_TEST) {
                 return onSetNeutronItems(tableView, indexPath);
             } else if (chainType == .STATION_TEST) {
                 return onSetStationItems(tableView, indexPath);

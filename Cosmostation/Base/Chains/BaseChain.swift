@@ -136,6 +136,8 @@ class ChainFactory {
             return .MARS_MAIN
         case CHAIN_MEDI_S:
             return .MEDI_MAIN
+        case CHAIN_NEUTRON_S:
+            return .NEUTRON_MAIN
         case CHAIN_NOBLE_S:
             return .NOBLE_MAIN
         case CHAIN_NYX_S:
@@ -282,6 +284,8 @@ class ChainFactory {
             return ChainMars(chainType)
         case .MEDI_MAIN:
             return ChainMedibloc(chainType)
+        case .NEUTRON_MAIN:
+            return ChainNeutron(chainType)
         case .NOBLE_MAIN:
             return ChainNoble(chainType)
         case .NYX_MAIN:
@@ -429,6 +433,7 @@ let CHAIN_QUASAR_S = "SUPPORT_CHAIN_QUASAR"
 let CHAIN_COREUM_S = "SUPPORT_CHAIN_COREUM"
 let CHAIN_NOBLE_S = "SUPPORT_CHAIN_NOBLE"
 let CHAIN_STAFI_S = "SUPPORT_CHAIN_STAFI"
+let CHAIN_NEUTRON_S = "SUPPORT_CHAIN_NEUTRON"
 
 let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 let CHAIN_NEUTRON_TEST_S = "SUPPORT_CHAIN_NEUTRON_TEST"
