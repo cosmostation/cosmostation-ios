@@ -565,7 +565,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionVault = { self.onClickNeutronVault() }
             cell?.actionDao = { self.onClickNeutronDao() }
             cell?.actionDefi = { self.onClickNeutronDefi() }
-            cell?.actionWc = { self.onShowToast(NSLocalizedString("prepare", comment: "")) }
+            cell?.actionWc = { self.onClickWalletConect() }
             return cell!
 
         } else if (indexPath.row == 1) {

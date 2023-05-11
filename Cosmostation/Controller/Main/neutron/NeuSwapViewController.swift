@@ -127,6 +127,10 @@ class NeuSwapViewController: BaseViewController, SBCardPopupDelegate {
     
     
     func onInitData() {
+        if (swapPools.count <= 0) {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
         swapPools.forEach { pool in
             pool.pairs.forEach { pair in
                 if (allPairs.filter { $0.type == pair.type && $0.address == pair.address && $0.denom == pair.denom }.first == nil) {
