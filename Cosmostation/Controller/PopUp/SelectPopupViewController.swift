@@ -416,7 +416,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_NEUTRON_SWAP_IN || type == SELECT_POPUP_NEUTRON_SWAP_OUT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
             let pair = neutronPairs[indexPath.row]
-            WDP.dpNeutronCoinInfo(chainConfig, pair, cell?.coinTitle, cell?.coinImg, nil)
+            WDP.dpNeutronPairInfo(chainConfig, pair, cell?.coinTitle, cell?.coinImg, nil)
             return cell!
             
         } else {

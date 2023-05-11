@@ -144,8 +144,8 @@ class NeuSwapViewController: BaseViewController, SBCardPopupDelegate {
     }
 
     func onUpdateView() {
-        WDP.dpNeutronCoinInfo(chainConfig, inputCoin, inputCoinName, inputCoinImg, inputCoinAvailableAmountLabel)
-        WDP.dpNeutronCoinInfo(chainConfig, outputCoin, outputCoinName, outputCoinImg, nil)
+        WDP.dpNeutronPairInfo(chainConfig, inputCoin, inputCoinName, inputCoinImg, inputCoinAvailableAmountLabel)
+        WDP.dpNeutronPairInfo(chainConfig, outputCoin, outputCoinName, outputCoinImg, nil)
     }
     
     func mintscanAstroPort() {

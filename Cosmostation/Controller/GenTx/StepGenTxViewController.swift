@@ -531,6 +531,11 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     NeuVote3ViewController(nibName: "NeuVote3ViewController", bundle: nil)]
             
+        } else if (mType == TASK_TYPE_NEUTRON_SWAP_TOKEN) {
+            return [NeuSwap0ViewController(nibName: "NeuSwap0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    NeuSwap3ViewController(nibName: "NeuSwap3ViewController", bundle: nil)]
         }
                   
         

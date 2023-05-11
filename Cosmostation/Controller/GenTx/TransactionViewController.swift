@@ -389,6 +389,11 @@ class TransactionViewController: UIViewController {
             stepDescription.text = NSLocalizedString("tx_neutron_vote_overrule_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             titleLabel.text =  NSLocalizedString("title_neutron_vote_overrule", comment: "")
+            
+        } else if (mType == TASK_TYPE_NEUTRON_SWAP_TOKEN) {
+            stepDescription.text = NSLocalizedString("tx_swap_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            titleLabel.text =  NSLocalizedString("title_swap_token", comment: "")
         }
         
         
@@ -718,6 +723,10 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_NEUTRON_VOTE_OVERRULE) {
                     stepDescription.text = NSLocalizedString("tx_neutron_vote_overrule_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_1")
+                    
+                } else if (mType == TASK_TYPE_NEUTRON_SWAP_TOKEN) {
+                    stepDescription.text = NSLocalizedString("tx_swap_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                 }
                 

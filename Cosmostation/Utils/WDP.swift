@@ -317,7 +317,7 @@ public class WDP {
     }
     
     
-    static func dpNeutronCoinInfo(_ chainConfig: ChainConfig?, _ pair: NeutronSwapPoolPair, _ symbolLabel: UILabel?, _ symbolImg: UIImageView?, _ amountLabel: UILabel?) {
+    static func dpNeutronPairInfo(_ chainConfig: ChainConfig?, _ pair: NeutronSwapPoolPair, _ symbolLabel: UILabel?, _ symbolImg: UIImageView?, _ amountLabel: UILabel?) {
         if (pair.type == "cw20") {
             if let cw20Token = BaseData.instance.mMintscanTokens.filter({ $0.address == pair.address }).first {
                 symbolLabel?.text = cw20Token.symbol
@@ -338,11 +338,41 @@ public class WDP {
                 WDP.dpSymbolImg(chainConfig, msAsset.denom, symbolImg)
                 
                 if (amountLabel != nil) {
-                    let available =  BaseData.instance.getAvailableAmount_gRPC(msAsset.denom)
+                    let available = BaseData.instance.getAvailableAmount_gRPC(msAsset.denom)
                     let decimal = msAsset.decimals
                     amountLabel!.attributedText = WDP.dpAmount(available.stringValue, amountLabel!.font!, decimal, decimal)
                 }
             }
         }
+    }
+    
+    static func neutronPairDecimal(_ pair: NeutronSwapPoolPair) -> Int16 {
+        var result: Int16 = 6
+        if (pair.type == "cw20") {
+            if let cw20Token = BaseData.instance.mMintscanTokens.filter({ $0.address == pair.address }).first {
+                result = cw20Token.decimals
+            }
+            
+        } else {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == pair.denom }).first {
+                result = msAsset.decimals
+            }
+        }
+        return result
+    }
+    
+    static func neutronPairAmount(_ pair: NeutronSwapPoolPair) -> NSDecimalNumber {
+        var result = NSDecimalNumber.zero
+        if (pair.type == "cw20") {
+            if let cw20Token = BaseData.instance.mMintscanTokens.filter({ $0.address == pair.address }).first {
+                result = NSDecimalNumber.init(string: cw20Token.amount)
+            }
+            
+        } else {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == pair.denom }).first {
+                result = BaseData.instance.getAvailableAmount_gRPC(msAsset.denom)
+            }
+        }
+        return result
     }
 }
