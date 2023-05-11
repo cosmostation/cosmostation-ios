@@ -70,17 +70,11 @@ class NeuSwap0ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func onInitView() {
-        print("neutronInputPair ", neutronInputPair)
-        print("neutronOutputPair ", neutronOutputPair)
-        
         WDP.dpNeutronPairInfo(chainConfig, neutronInputPair, inputCoinName, inputCoinImg, nil)
         WDP.dpNeutronPairInfo(chainConfig, neutronOutputPair, outputCoinName, outputCoinImg, nil)
         
         dpInPutDecimal = WDP.neutronPairDecimal(neutronInputPair)
         dpOutPutDecimal = WDP.neutronPairDecimal(neutronOutputPair)
-        
-        print("dpInPutDecimal ", dpInPutDecimal)
-        print("dpOutPutDecimal ", dpOutPutDecimal)
         
         availableMaxAmount = WDP.neutronPairAmount(neutronInputPair)
         
@@ -89,7 +83,6 @@ class NeuSwap0ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func onUpdateView(_ oldInputAmount: String?, _ outputResult: String?) {
-        print("onUpdateView ", oldInputAmount, "   ", outputResult)
         beliefPrice = NSDecimalNumber.zero
         if (oldInputAmount == nil || outputResult == nil) { return }
         let userInput = WUtils.localeStringToDecimal((inputTextFiled.text?.trimmingCharacters(in: .whitespaces))!)
@@ -108,9 +101,6 @@ class NeuSwap0ViewController: BaseViewController, UITextFieldDelegate {
                 inputAmount = userInput.multiplying(byPowerOf10: dpInPutDecimal)
                 outputAmount = NSDecimalNumber(string: outputResult)
                 beliefPrice = inputAmount.dividing(by: outputAmount, withBehavior: WUtils.handler18Up)
-                print("inputAmount ", inputAmount)
-                print("outputAmount ", outputAmount)
-                print("beliefPrice ", beliefPrice)
             }
             
         } else {
@@ -196,7 +186,6 @@ class NeuSwap0ViewController: BaseViewController, UITextFieldDelegate {
     func onSwapSimul() {
         let userInput = WUtils.localeStringToDecimal((inputTextFiled.text?.trimmingCharacters(in: .whitespaces))!)
         let inputAmount = userInput.multiplying(byPowerOf10: dpInPutDecimal).stringValue
-        print("inputAmount ", inputAmount)
         
         let offer_asset: JSON = ["info" : WUtils.swapAssetInfo(neutronInputPair), "amount" : inputAmount]
         let ask_asset_info: JSON = WUtils.swapAssetInfo(neutronOutputPair)
@@ -206,7 +195,6 @@ class NeuSwap0ViewController: BaseViewController, UITextFieldDelegate {
         DispatchQueue.global().async {
             do {
                 let query: JSON = ["simulation" : ["offer_asset" : offer_asset , "ask_asset_info" : ask_asset_info]]
-                print("query ", query)
                 let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
 
                 let channel = BaseNetWork.getConnection(self.chainConfig)!
@@ -216,7 +204,6 @@ class NeuSwap0ViewController: BaseViewController, UITextFieldDelegate {
                 }
                 if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     if let result = try? JSONDecoder().decode(JSON.self, from: response.data) {
-                        print("onSwapSimul ", result)
                         outputAmount = result["return_amount"].stringValue
                     }
                 }
