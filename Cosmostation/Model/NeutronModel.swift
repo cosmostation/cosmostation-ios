@@ -108,3 +108,59 @@ public struct NeutronSwapPoolPair {
         self.amount = dictionary?["amount"] as? String
     }
 }
+
+
+public struct NeutronOfferAsset {
+    var amount: String?
+    
+    
+}
+
+public struct NeutronAskAsset {
+    var native_token: NeutronNativeToken?
+    var token: NeutronToken?
+    
+    init(_ nativeToken: String?, _ token: String?) {
+        if let nativeToken = nativeToken {
+            self.native_token = NeutronNativeToken.init(nativeToken)
+        }
+        if let token = token {
+            self.token = NeutronToken.init(token)
+        }
+    }
+    
+    init(_ dictionary: NSDictionary?) {
+        if let rawNativeToken = dictionary?["native_token"] as? NSDictionary {
+            self.native_token = NeutronNativeToken.init(rawNativeToken)
+        }
+        if let rawToken = dictionary?["token"] as? NSDictionary {
+            self.token = NeutronToken.init(rawToken)
+        }
+    }
+}
+
+
+public struct NeutronSwapAsset {
+    
+}
+
+
+public struct NeutronNativeToken {
+    var denom: String?
+    init(_ string: String?) {
+        self.denom = string
+    }
+    init(_ dictionary: NSDictionary?) {
+        self.denom = dictionary?["denom"] as? String
+    }
+}
+
+public struct NeutronToken {
+    var denom: String?
+    init(_ string: String?) {
+        self.denom = string
+    }
+    init(_ dictionary: NSDictionary?) {
+        self.denom = dictionary?["denom"] as? String
+    }
+}

@@ -167,6 +167,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var neutronSwapPool: NeutronSwapPool?
     var neutronInputPair: NeutronSwapPoolPair?
     var neutronOutputPair: NeutronSwapPoolPair?
+    var beliefPrice: NSDecimalNumber?
     
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == TASK_TYPE_TRANSFER) {

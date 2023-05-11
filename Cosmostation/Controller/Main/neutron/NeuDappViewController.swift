@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class NeuDappViewController: BaseViewController {
     
@@ -46,4 +47,17 @@ class NeuDappViewController: BaseViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
 
+}
+
+extension WUtils {
+    
+    static func swapAssetInfo(_ pair: NeutronSwapPoolPair) -> JSON {
+        var result = JSON()
+        if (pair.type == "cw20") {
+            result = ["token" : ["contract_addr" : pair.address]]
+        } else {
+            result = ["native_token" : ["denom" : pair.denom]]
+        }
+        return result
+    }
 }

@@ -228,8 +228,6 @@
 "str_repay_amount" = "返済額";
 "str_token_in" = "Token イン";
 "str_token_out" = "Token アウト";
-"str_swap_in" = "Swap イン";
-"str_swap_out" = "Swap アウト";
 "str_multiplier_name" = "受信方法";
 "str_incentive_amount" = "インセンティブ数量";
 "str_no_result" = "検索結果がありません";

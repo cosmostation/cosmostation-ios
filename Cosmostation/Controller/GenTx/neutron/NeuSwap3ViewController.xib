@@ -17,6 +17,19 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NeuSwap3ViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="btnBack" destination="a2E-qs-WNY" id="hVq-x8-enw"/>
+                <outlet property="btnConfirm" destination="ax5-QS-VC1" id="9nB-Bq-XZD"/>
+                <outlet property="feeAmoutLabel" destination="ZtC-lA-405" id="g4i-g2-DSl"/>
+                <outlet property="feeDenomLabel" destination="b89-jp-8UL" id="Fq0-d0-unU"/>
+                <outlet property="feeTitle" destination="wNk-p4-3qV" id="FHX-DE-RIT"/>
+                <outlet property="mMemoLabel" destination="8p2-HJ-MrH" id="h3g-zP-JnM"/>
+                <outlet property="memoTitle" destination="Ghk-5g-UGU" id="Ztg-sX-3In"/>
+                <outlet property="swapInAmountLabel" destination="42l-9v-SDl" id="eG6-1N-nfh"/>
+                <outlet property="swapInDenomLabel" destination="1nt-Yj-A3q" id="ic0-hy-VD9"/>
+                <outlet property="swapInTitle" destination="SKY-4D-yP7" id="yzV-Yg-pec"/>
+                <outlet property="swapOutAmountLabel" destination="ANu-5A-gic" id="GTq-K1-gJk"/>
+                <outlet property="swapOutDenomLabel" destination="caR-7O-yaE" id="wwh-Nv-z2a"/>
+                <outlet property="swapOuttitle" destination="BcS-Tb-vFu" id="jh9-ks-pec"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -139,7 +152,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-2Q-Ecg">
-                    <rect key="frame" x="16" y="784" width="361" height="50"/>
+                    <rect key="frame" x="16" y="752" width="361" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2E-qs-WNY">
                             <rect key="frame" x="0.0" y="0.0" width="175.66666666666666" height="50"/>
@@ -161,6 +174,9 @@
                                     <color key="value" name="_font05"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickBack:" destination="-1" eventType="touchUpInside" id="qwf-le-8mJ"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ax5-QS-VC1">
                             <rect key="frame" x="185.66666666666663" y="0.0" width="175.33333333333337" height="50"/>
@@ -182,6 +198,9 @@
                                     <color key="value" name="photon"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="fiq-7W-NYw"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
@@ -189,7 +208,7 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="7Kf-2Q-Ecg" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="16" id="320-NS-IOu"/>
+                <constraint firstItem="7Kf-2Q-Ecg" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-16" id="320-NS-IOu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qUs-fd-OvS" secondAttribute="trailing" constant="16" id="CwK-6u-AAU"/>
                 <constraint firstItem="qUs-fd-OvS" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="I4e-Ms-zK0"/>
                 <constraint firstItem="7Kf-2Q-Ecg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Is0-Fx-qHe"/>

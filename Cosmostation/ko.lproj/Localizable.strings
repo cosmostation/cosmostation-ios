@@ -228,8 +228,6 @@
 "str_repay_amount" = "상환 금액";
 "str_token_in" = "Token In";
 "str_token_out" = "Token Out";
-"str_swap_in" = "Swap In";
-"str_swap_out" = "Swap Out";
 "str_multiplier_name" = "수신 방식";
 "str_incentive_amount" = "인센티브 수량";
 "str_no_result" = "검색 결과가 없습니다";

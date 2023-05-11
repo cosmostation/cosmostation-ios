@@ -102,7 +102,7 @@ class NeuVote3ViewController: BaseViewController, PasswordViewDelegate {
         DispatchQueue.global().async {
             var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest = Cosmos_Tx_V1beta1_BroadcastTxRequest.init()
             if (self.pageHolderVC.mType == TASK_TYPE_NEUTRON_VOTE_SINGLE) {
-                reqTx = Signer.genNutronSingleVote (auth!, self.account!.account_pubkey_type,
+                reqTx = Signer.genNeutronSingleVote (auth!, self.account!.account_pubkey_type,
                                                     self.pageHolderVC.neutronProposalModule!.address!,
                                                     self.pageHolderVC.neutronProposal!["id"].int64Value,
                                                     self.pageHolderVC.neutronVoteSingleOpinion!,
@@ -112,7 +112,7 @@ class NeuVote3ViewController: BaseViewController, PasswordViewDelegate {
                                                     self.chainType!)
                 
             } else if (self.pageHolderVC.mType == TASK_TYPE_NEUTRON_VOTE_MULTI) {
-                reqTx = Signer.genNutronMultiVote (auth!, self.account!.account_pubkey_type,
+                reqTx = Signer.genNeutronMultiVote (auth!, self.account!.account_pubkey_type,
                                                    self.pageHolderVC.neutronProposalModule!.address!,
                                                    self.pageHolderVC.neutronProposal!["id"].int64Value,
                                                    self.pageHolderVC.neutronVoteMultiOpinion!,
