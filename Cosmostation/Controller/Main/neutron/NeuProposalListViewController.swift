@@ -21,6 +21,7 @@ class NeuProposalListViewController: BaseViewController {
     var neutronDao: NeutronDao!
     var neutronProposals = Array<(String, [JSON])>()
     var neutronFilteredProposals = Array<(String, [JSON])>()
+    var neutronDaoMembers = Array<String>()
     var myVotes = Array<MintscanDaoVote>()
     var fetchCnt = 0
     var isShowAll = false
@@ -79,6 +80,52 @@ class NeuProposalListViewController: BaseViewController {
         }
     }
     
+    func onStartVote(_ indexPath: IndexPath) {
+        if (!account!.account_has_private) {
+            onShowAddMenomicDialog()
+            return
+        }
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        let proposalModule = neutronDao.proposal_modules[indexPath.section]
+        if let proposal = getProposal(proposalModule.address)?.1[indexPath.row] {
+            if (proposal["proposal"]["status"].stringValue != "open") {
+                onShowToast(NSLocalizedString("error_not_voting_period", comment: ""))
+                return
+            }
+            if (neutronDao.group_contract_address?.isEmpty == false) {
+                if (!neutronDaoMembers.contains(account!.account_address)) {
+                    onShowToast(NSLocalizedString("error_not_dao_member", comment: ""))
+                    return
+                }
+            }
+            if (proposalModule.allow_revoting == false) {
+                if (myVotes.filter({ $0.contract_address == proposalModule.address && $0.proposal_id == proposal["id"].int64Value }).count > 0) {
+                    onShowToast(NSLocalizedString("error_can_not_revote", comment: ""))
+                    return
+                }
+            }
+            
+            let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+            txVC.neutronProposalModule = proposalModule
+            txVC.neutronProposal = proposal
+            if (proposalModule.prefix == "A") {
+                txVC.mType = TASK_TYPE_NEUTRON_VOTE_SINGLE
+            } else if (proposalModule.prefix == "B") {
+                txVC.mType = TASK_TYPE_NEUTRON_VOTE_MULTI
+            } else if (proposalModule.prefix == "C") {
+                txVC.mType = TASK_TYPE_NEUTRON_VOTE_OVERRULE
+                //TODO not tested yet!!
+                return
+            }
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(txVC, animated: true)
+        }
+    }
+    
     func onFetchFinished() {
         fetchCnt = fetchCnt - 1
         if (fetchCnt <= 0) {
@@ -90,6 +137,10 @@ class NeuProposalListViewController: BaseViewController {
         fetchCnt = neutronDao.proposal_modules.count + 1
         neutronDao.proposal_modules.forEach { module in
             onFetchProposalList(module.address!)
+        }
+        if (neutronDao.group_contract_address?.isEmpty == false) {
+            fetchCnt = fetchCnt + 1
+            onFetchDaoMembers(neutronDao.group_contract_address!)
         }
         onFetchMintscanMyVotes()
     }
@@ -128,9 +179,36 @@ class NeuProposalListViewController: BaseViewController {
         }
     }
     
+    func onFetchDaoMembers(_ groupContractAddress: String) {
+        neutronDaoMembers.removeAll()
+        DispatchQueue.global().async {
+            do {
+                let query: JSON = ["list_members" : JSON()]
+                let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+                
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
+                let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+                    $0.address = groupContractAddress
+                    $0.queryData = Data(base64Encoded: queryBase64)!
+                }
+                if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    if let result = try? JSONDecoder().decode(JSON.self, from: response.data) {
+                        result["members"].arrayValue .forEach { member in
+                            self.neutronDaoMembers.append(member["addr"].stringValue)
+                        }
+                    }
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchDaoMembers failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
     func onFetchMintscanMyVotes() {
         let url = BaseNetWork.mintscanDaoMyVotes(chainConfig!, account!.account_address)
-        print("url ", url)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
@@ -194,21 +272,7 @@ extension NeuProposalListViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let proposalModule = neutronDao.proposal_modules[indexPath.section]
-        if let proposals = getProposal(proposalModule.address) {
-            let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-            txVC.neutronProposalModule = proposalModule
-            txVC.neutronProposal = proposals.1[indexPath.row]
-            if (proposalModule.prefix == "A") {
-                txVC.mType = TASK_TYPE_NEUTRON_VOTE_SINGLE
-            } else if (proposalModule.prefix == "B") {
-                txVC.mType = TASK_TYPE_NEUTRON_VOTE_MULTI
-            } else if (proposalModule.prefix == "C") {
-                txVC.mType = TASK_TYPE_NEUTRON_VOTE_OVERRULE
-            }
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(txVC, animated: true)
-        }
+        onStartVote(indexPath)
     }
     
     func getProposal(_ address: String?) -> (String, [JSON])? {

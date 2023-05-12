@@ -34,6 +34,7 @@ public struct NeutronDao {
     var dao_uri: String?
     var address: String?
     var voting_module: String?
+    var group_contract_address: String?
     var proposal_modules = Array<NeutronProposalModule>()
     
     init(_ dictionary: NSDictionary?) {
@@ -41,6 +42,8 @@ public struct NeutronDao {
         self.description = dictionary?["description"] as? String
         self.dao_uri = dictionary?["dao_uri"] as? String
         self.address = dictionary?["address"] as? String
+        self.voting_module = dictionary?["voting_module"] as? String
+        self.group_contract_address = dictionary?["group_contract_address"] as? String
         if let rawModules = dictionary?["proposal_modules"] as? Array<NSDictionary> {
             rawModules.forEach { rawModule in
                 self.proposal_modules.append(NeutronProposalModule(rawModule))
@@ -52,6 +55,7 @@ public struct NeutronDao {
 public struct NeutronProposalModule {
     var name: String?
     var description: String?
+    var allow_revoting: Bool?
     var address: String?
     var prefix: String?
     var status: Bool?
@@ -59,6 +63,7 @@ public struct NeutronProposalModule {
     init(_ dictionary: NSDictionary?) {
         self.name = dictionary?["name"] as? String
         self.description = dictionary?["description"] as? String
+        self.allow_revoting = dictionary?["allow_revoting"] as? Bool
         self.address = dictionary?["address"] as? String
         self.prefix = dictionary?["prefix"] as? String
         if let rawStatus = dictionary?["status"] as? String {

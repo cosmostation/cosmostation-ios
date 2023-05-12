@@ -937,6 +937,8 @@
 "error_no_authz_type" = "No auth for this type";
 "error_not_enough_liquid_stake" = "Not enough balance.\nIBC transfer this asset from origin chain to continue";
 "error_no_staking" = "The chain does not support staking.";
+"error_not_dao_member" = "You are not this Dao member.";
+"error_can_not_revote" = "Can not revote.";
 
 
 "alert_title_no_private_key" = "No Private Key";
