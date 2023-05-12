@@ -83,7 +83,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         guard let chainConfig = ChainFactory.getChainConfig(derive.chaintype) else { return }
         if (derive.status == 2) { return }
         self.mSearchRes[indexPath.row].selected = !derive.selected
-        if let filterIndex = self.mDerives.firstIndex(where: { $0.dpAddress == derive.dpAddress }) {
+        if let filterIndex = self.mDerives.firstIndex(where: { $0.dpAddress == derive.dpAddress  && $0.chaintype == derive.chaintype}) {
             self.mDerives[filterIndex].selected = !derive.selected
         }
         self.derivedWalletTableView.reloadRows(at: [indexPath], with: .none)
