@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -279,7 +279,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ym0-A0-qWg">
-                                <rect key="frame" x="16" y="680" width="361" height="50"/>
+                                <rect key="frame" x="16" y="654" width="361" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="pjT-SH-Sej"/>
                                 </constraints>
@@ -303,24 +303,24 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="cEF-Zp-F0I" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
-                                <rect key="frame" x="166.66666666666666" y="372.66666666666669" width="60" height="60"/>
+                                <rect key="frame" x="166.66666666666666" y="355.66666666666669" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="rz0-LV-Qwm"/>
                                     <constraint firstAttribute="height" constant="60" id="wL8-6v-pG9"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gK4-jL-QVW">
-                                <rect key="frame" x="42" y="545.66666666666663" width="307" height="110.33333333333337"/>
+                                <rect key="frame" x="42" y="490" width="307" height="140"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgAstroport" translatesAutoresizingMaskIntoConstraints="NO" id="dLG-uG-Nkf">
-                                        <rect key="frame" x="123.66666666666666" y="0.0" width="60" height="60"/>
+                                        <rect key="frame" x="98.666666666666657" y="0.0" width="110" height="90"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="B7s-2l-1QN"/>
-                                            <constraint firstAttribute="width" constant="60" id="V1a-fo-Y7P"/>
+                                            <constraint firstAttribute="height" constant="90" id="B7s-2l-1QN"/>
+                                            <constraint firstAttribute="width" constant="110" id="V1a-fo-Y7P"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Astroport is an AMM(Automated Market Maker)-style decentralized exchange built with CosmWasm smart contracts." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbu-2F-zPC">
-                                        <rect key="frame" x="44" y="68" width="219" height="42.333333333333343"/>
+                                        <rect key="frame" x="44" y="98" width="219" height="42"/>
                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
                                         <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
@@ -350,7 +350,7 @@
                             <constraint firstItem="cEF-Zp-F0I" firstAttribute="centerY" secondItem="yji-eG-11r" secondAttribute="centerY" id="GcW-TM-t8K"/>
                             <constraint firstItem="Ym0-A0-qWg" firstAttribute="leading" secondItem="yji-eG-11r" secondAttribute="leading" constant="16" id="N2z-jq-nI5"/>
                             <constraint firstItem="fj5-fk-sq7" firstAttribute="trailing" secondItem="Gxi-cv-Agk" secondAttribute="trailing" id="OOu-xU-jqL"/>
-                            <constraint firstItem="yji-eG-11r" firstAttribute="bottom" secondItem="Ym0-A0-qWg" secondAttribute="bottom" constant="16" id="TF9-Nz-5bb"/>
+                            <constraint firstItem="yji-eG-11r" firstAttribute="bottom" secondItem="Ym0-A0-qWg" secondAttribute="bottom" constant="8" id="TF9-Nz-5bb"/>
                             <constraint firstItem="ghY-YA-9TZ" firstAttribute="centerX" secondItem="yji-eG-11r" secondAttribute="centerX" id="V5j-pB-gJG"/>
                             <constraint firstItem="yji-eG-11r" firstAttribute="trailing" secondItem="Ym0-A0-qWg" secondAttribute="trailing" constant="16" id="XdX-sQ-fLb"/>
                             <constraint firstItem="gK4-jL-QVW" firstAttribute="leading" secondItem="yji-eG-11r" secondAttribute="leading" constant="42" id="bNA-3D-IP6"/>
@@ -385,7 +385,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOS-Lf-5nM">
-                                <rect key="frame" x="104" y="349.66666666666669" width="185" height="106"/>
+                                <rect key="frame" x="104" y="332.66666666666669" width="185" height="106"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconDataEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="iJy-uj-66t">
                                         <rect key="frame" x="67.666666666666657" y="8" width="50" height="50"/>
@@ -433,7 +433,7 @@
         <image name="dropdown_btn" width="24" height="24"/>
         <image name="iconDataEmpty" width="36" height="36"/>
         <image name="iconSwap" width="14" height="14"/>
-        <image name="imgAstroport" width="70" height="70"/>
+        <image name="imgAstroport" width="110" height="90"/>
         <image name="loading_1" width="144" height="144"/>
         <image name="tokenDefault" width="22" height="22"/>
         <namedColor name="_card_bg">
