@@ -432,13 +432,6 @@ public enum ChainType: String {
         return result
     }
     
-    static func IS_TESTNET(_ chain: ChainType?) -> Bool {
-        if (chain == .STATION_TEST) {
-            return true
-        }
-        return false
-    }
-    
     static func IS_SUPPORT_CHAIN(_ chainS: String) -> Bool {
         if let chainS = ChainFactory.getChainType(chainS) {
             return SUPPRT_CHAIN().contains(chainS)

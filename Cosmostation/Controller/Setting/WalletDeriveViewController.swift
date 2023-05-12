@@ -226,7 +226,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                     status = 0
                 }
                 let derive = Derive.init(chainConfig.chainType, keyTypes.1, self.mPath, fullPath, dpAddress, pKey!, status)
-                if (!self.mDerives.contains(where: { $0.dpAddress == derive.dpAddress })) {
+                if (!self.mDerives.contains(where: { $0.dpAddress == derive.dpAddress && $0.chaintype == derive.chaintype })) {
                     self.mDerives.append(derive)
                 }
             }
@@ -244,7 +244,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                     status = 0
                 }
                 let derive = Derive.init(chainConfig.chainType, keyTypes.1, self.mPath, fullPath, dpAddress, pKey, status)
-                if (!self.mDerives.contains(where: { $0.dpAddress == derive.dpAddress })) {
+                if (!self.mDerives.contains(where: { $0.dpAddress == derive.dpAddress && $0.chaintype == derive.chaintype })) {
                     self.mDerives.append(derive)
                 }
             }

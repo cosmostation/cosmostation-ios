@@ -332,6 +332,7 @@ class ChainFactory {
             return ChainTeritori(chainType)
 //        case .TGRADE_MAIN:
 //            return ChainTgrade(chainType!)
+            
         case .UMEE_MAIN:
             return ChainUmee(chainType)
         case .XPLA_MAIN:
