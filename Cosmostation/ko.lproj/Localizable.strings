@@ -228,8 +228,6 @@
 "str_repay_amount" = "상환 금액";
 "str_token_in" = "Token In";
 "str_token_out" = "Token Out";
-"str_swap_in" = "Swap In";
-"str_swap_out" = "Swap Out";
 "str_multiplier_name" = "수신 방식";
 "str_incentive_amount" = "인센티브 수량";
 "str_no_result" = "검색 결과가 없습니다";
@@ -939,6 +937,8 @@
 "error_no_authz_type" = "이 타입에 대한 권한이 없습니다.";
 "error_not_enough_liquid_stake" = "발란스가 충분하지 않습니다.\n원 체인으로 부터 IBC전송을 완료하신후 계속 진행하실 수 있습니다.";
 "error_no_staking" = "해당 체인은 스테이킹을 지원하지 않습니다.";
+"error_not_dao_member" = "이 Dao의 회원이 아닙니다.";
+"error_can_not_revote" = "재투표 할 수 없습니다.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";

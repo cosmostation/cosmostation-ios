@@ -18,4 +18,9 @@ class SelectCoinCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
+    
+    override func prepareForReuse() {
+        self.coinImg.image = UIImage(named: "tokenDefault")
+        self.coinTitle.text = ""
+    }
 }

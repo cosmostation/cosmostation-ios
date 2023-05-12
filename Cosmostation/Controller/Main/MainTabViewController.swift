@@ -260,7 +260,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-        } else if (self.mChainType == .NEUTRON_TEST) {
+        } else if (self.mChainType == .NEUTRON_MAIN || self.mChainType == .NEUTRON_TEST) {
             self.mFetchCnt = 4
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -1175,6 +1175,10 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         if (chainConfig.chainType == .NEUTRON_TEST) {
             vaultUrl = NEUTRON_TEST_VAULTS
             daoUrl = NEUTRON_TEST_DAO
+        } else if (chainConfig.chainType == .NEUTRON_MAIN) {
+            vaultUrl = NEUTRON_MAIN_VAULTS
+            daoUrl = NEUTRON_MAIN_DAO
+            
         }
         Alamofire.request(vaultUrl, method: .get).responseJSON { response in
             switch response.result {

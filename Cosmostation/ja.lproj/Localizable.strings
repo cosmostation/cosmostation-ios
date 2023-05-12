@@ -228,8 +228,6 @@
 "str_repay_amount" = "返済額";
 "str_token_in" = "Token イン";
 "str_token_out" = "Token アウト";
-"str_swap_in" = "Swap イン";
-"str_swap_out" = "Swap アウト";
 "str_multiplier_name" = "受信方法";
 "str_incentive_amount" = "インセンティブ数量";
 "str_no_result" = "検索結果がありません";
@@ -869,6 +867,7 @@
 "error_simul_error" = "このTx は実行できません。";
 "error_reward_address_changed_title" = "利子アドレス変更";
 "error_reward_address_changed_msg" = "利子支給アドレスが変更されたアカウントです。コンパウンディング機能を使用できません。";
+"error_duple_address" = "このアドレスは既にインポートされています。";
 "error_network_msg" = "ネットワーク接続ができません。";
 "error_disable" = "点検中";
 "error_disable_msg" = "システム点検中です。詳しい内容はコミュニティ チャンネルを確認してください。";
@@ -938,6 +937,8 @@
 "error_no_authz_type" = "このタイプの認証はありません";
 "error_not_enough_liquid_stake" = "バランスが足りません。\nIBCは、この資産をソースチェーンから転送して続行します";
 "error_no_staking" = "このチェーンはステーキングをサポートしていません。";
+"error_not_dao_member" = "あなたはこのDAOのメンバーではありません。";
+"error_can_not_revote" = "再投票できません。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

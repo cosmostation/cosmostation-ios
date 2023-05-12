@@ -28,7 +28,7 @@ class NeuMultiVoteCell: UITableViewCell {
     func onBindView(_ chainConfig: ChainConfig?, _ proposal: JSON?, _ position: Int, _ myOpinion: Int?) {
         if let chainConfig = chainConfig, let proposal = proposal {
             let choice = proposal["proposal"]["choices"].arrayValue[position]
-            titleLabel.text = choice["option_type"].stringValue
+            titleLabel.text = "Option " + String(position) + "   : " + choice["option_type"].stringValue
             descriptionLabel.text = choice["description"].stringValue
             
             if (myOpinion == position) {

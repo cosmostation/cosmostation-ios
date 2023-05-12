@@ -31,6 +31,18 @@ class NeuVaultsListViewController: BaseViewController {
         self.navigationItem.title = NSLocalizedString("title_vaults_list", comment: "")
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        let explorerBtn = UIButton(type: .system)
+        explorerBtn.setImage(UIImage(named: "btnExplorer"), for: .normal)
+        explorerBtn.sizeToFit()
+        explorerBtn.addTarget(self, action: #selector(onExplorer(_:)), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem =  UIBarButtonItem(customView: explorerBtn)
+    }
+    
+    @objc func onExplorer(_ button: UIButton) {
+        let link = chainConfig!.explorerUrl + "dao/vault"
+        guard let url = URL(string: link) else { return }
+        onShowSafariWeb(url)
     }
     
     func onCheckDeposit(_ position: Int) {

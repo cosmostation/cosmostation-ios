@@ -11,6 +11,7 @@ import SwiftyJSON
 
 class NeuSingleVoteCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet weak var btnYes: UIButton!
@@ -44,6 +45,7 @@ class NeuSingleVoteCell: UITableViewCell {
             let id = proposal["id"].int64Value
             let contents = proposal["proposal"]
             titleLabel.text = "# ".appending(String(id)).appending("  ").appending(contents["title"].stringValue)
+            descriptionLabel.text = contents["description"].stringValue
             
             let expirationTime = contents["expiration"]["at_time"].int64Value
             if (expirationTime > 0) {
@@ -52,7 +54,7 @@ class NeuSingleVoteCell: UITableViewCell {
             }
             let expirationHeight = contents["expiration"]["at_height"].int64Value
             if (expirationHeight > 0) {
-                timeLabel.text = "Expiration at : " + String(expirationHeight)
+                timeLabel.text = "Expiration at : " + String(expirationHeight) + " Block"
             }
             
             onCheckDim()

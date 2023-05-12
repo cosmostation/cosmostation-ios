@@ -48,6 +48,7 @@ class BaseViewController: UIViewController {
     
     public func showWaittingAlert() {
         waitAlert = UIAlertController(title: "", message: "\n\n\n\n", preferredStyle: .alert)
+        waitAlert?.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         let image = LoadingImageView(frame: CGRect(x: 0, y: 0, width: 58, height: 58))
         waitAlert!.view.addSubview(image)
         image.translatesAutoresizingMaskIntoConstraints = false

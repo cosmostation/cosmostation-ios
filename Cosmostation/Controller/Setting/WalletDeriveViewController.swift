@@ -83,7 +83,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         guard let chainConfig = ChainFactory.getChainConfig(derive.chaintype) else { return }
         if (derive.status == 2) { return }
         self.mSearchRes[indexPath.row].selected = !derive.selected
-        if let filterIndex = self.mDerives.firstIndex(where: { $0.dpAddress == derive.dpAddress }) {
+        if let filterIndex = self.mDerives.firstIndex(where: { $0.dpAddress == derive.dpAddress  && $0.chaintype == derive.chaintype}) {
             self.mDerives[filterIndex].selected = !derive.selected
         }
         self.derivedWalletTableView.reloadRows(at: [indexPath], with: .none)
@@ -226,7 +226,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                     status = 0
                 }
                 let derive = Derive.init(chainConfig.chainType, keyTypes.1, self.mPath, fullPath, dpAddress, pKey!, status)
-                if (!self.mDerives.contains(where: { $0.dpAddress == derive.dpAddress })) {
+                if (!self.mDerives.contains(where: { $0.dpAddress == derive.dpAddress && $0.chaintype == derive.chaintype })) {
                     self.mDerives.append(derive)
                 }
             }
@@ -244,7 +244,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                     status = 0
                 }
                 let derive = Derive.init(chainConfig.chainType, keyTypes.1, self.mPath, fullPath, dpAddress, pKey, status)
-                if (!self.mDerives.contains(where: { $0.dpAddress == derive.dpAddress })) {
+                if (!self.mDerives.contains(where: { $0.dpAddress == derive.dpAddress && $0.chaintype == derive.chaintype })) {
                     self.mDerives.append(derive)
                 }
             }

@@ -146,7 +146,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return 1;
             
         } else {
-            if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN || chainType == .NEUTRON_TEST) {
+            if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN || chainType == .NEUTRON_MAIN || chainType == .NEUTRON_TEST) {
                 return 3;
             }
             if (chainType == .KAVA_MAIN || chainType == .MEDI_MAIN || chainType == .DESMOS_MAIN) {
@@ -196,7 +196,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 return onSetPersisItems(tableView, indexPath);
             } else if (chainType == .NOBLE_MAIN) {
                 return onSetNobleItems(tableView, indexPath);
-            } else if (chainType == .NEUTRON_TEST) {
+            } else if (chainType == .NEUTRON_MAIN || chainType == .NEUTRON_TEST) {
                 return onSetNeutronItems(tableView, indexPath);
             } else if (chainType == .STATION_TEST) {
                 return onSetStationItems(tableView, indexPath);
@@ -565,7 +565,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionVault = { self.onClickNeutronVault() }
             cell?.actionDao = { self.onClickNeutronDao() }
             cell?.actionDefi = { self.onClickNeutronDefi() }
-            cell?.actionWc = { self.onShowToast(NSLocalizedString("prepare", comment: "")) }
+            cell?.actionWc = { self.onClickWalletConect() }
             return cell!
 
         } else if (indexPath.row == 1) {
@@ -735,9 +735,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return
         }
         if (!BaseData.instance.isTxFeePayable(chainConfig)) {
-                    self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                    return
-                }
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         if (WUtils.getTokenAmount(mainTabVC.mBalances, OKT_MAIN_DENOM).compare(NSDecimalNumber(string: "0.01")).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_to_deposit", comment: ""))
             return

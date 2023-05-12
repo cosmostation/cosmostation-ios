@@ -1,29 +1,29 @@
 //
-//  ChainNeutronTest.swift
+//  ChainNeutron.swift
 //  Cosmostation
 //
-//  Created by 권혁준 on 2023/04/11.
+//  Created by yongjoo jung on 2023/05/12.
 //  Copyright © 2023 wannabit. All rights reserved.
 //
 
 import UIKit
 import Foundation
 
-class ChainNeutronTest: ChainConfig {
+class ChainNeutron: ChainConfig {
     var isGrpc = true
-    var chainType = ChainType.NEUTRON_TEST
-    var chainImg = UIImage(named: "chainNeutronTest")
+    var chainType = ChainType.NEUTRON_MAIN
+    var chainImg = UIImage(named: "chainNeutron")
     var chainInfoImg = UIImage(named: "infoNeutron")
     var chainInfoTitle = "NEUTRON"
     var chainInfoMsg = NSLocalizedString("guide_msg_neutron", comment: "")
     var chainColor = UIColor(named: "neutron")!
     var chainColorBG = UIColor(named: "neutron_bg")!
-    var chainTitle = "(Neutron Testnet)"
-    var chainTitle2 = "NEUTRON TEST"
-    var chainDBName = CHAIN_NEUTRON_TEST_S
-    var chainAPIName = "neutron-testnet"
-    var chainKoreanName = "뉴트론 테스트넷"
-    var chainIdPrefix = "baryon-"
+    var chainTitle = "(Neutron Mainnet)"
+    var chainTitle2 = "NEUTRON"
+    var chainDBName = CHAIN_NEUTRON_S
+    var chainAPIName = "neutron"
+    var chainKoreanName = "뉴트론"
+    var chainIdPrefix = "neutron-"
     
     var stakeDenomImg = UIImage(named: "tokenNeutron")
     var stakeDenom = "untrn"
@@ -44,11 +44,11 @@ class ChainNeutronTest: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "grpc-office-neutron.cosmostation.io"
+    var grpcUrl = "grpc-neutron.cosmostation.io"
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = ""
-    var explorerUrl = MintscanTestUrl + "neutron-testnet/"
+    var explorerUrl = MintscanUrl + "neutron/"
     var priceUrl = ""
     
     required init(_ chainType: ChainType) {
@@ -72,6 +72,5 @@ class ChainNeutronTest: ChainConfig {
     }
 }
 
-let NEUTRON_TEST_VAULTS = "https://raw.githubusercontent.com/cosmostation/chainlist/main/chain/neutron-testnet/vaults.json"
-let NEUTRON_TEST_DAO = "https://raw.githubusercontent.com/cosmostation/chainlist/main/chain/neutron-testnet/daos.json"
-
+let NEUTRON_MAIN_VAULTS = "https://raw.githubusercontent.com/cosmostation/chainlist/main/chain/neutron/vaults.json"
+let NEUTRON_MAIN_DAO = "https://raw.githubusercontent.com/cosmostation/chainlist/main/chain/neutron/daos.json"

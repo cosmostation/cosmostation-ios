@@ -60,6 +60,9 @@ class TransactionViewController: UIViewController {
     var neutronVault: NeutronVault?
     var neutronProposalModule: NeutronProposalModule?
     var neutronProposal: JSON?
+    var neutronSwapPool: NeutronSwapPool?
+    var neutronInputPair: NeutronSwapPoolPair?
+    var neutronOutputPair: NeutronSwapPoolPair?
     
     // MARK: - for authz tx
     var mGrant: Cosmos_Authz_V1beta1_Grant?
@@ -386,6 +389,11 @@ class TransactionViewController: UIViewController {
             stepDescription.text = NSLocalizedString("tx_neutron_vote_overrule_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             titleLabel.text =  NSLocalizedString("title_neutron_vote_overrule", comment: "")
+            
+        } else if (mType == TASK_TYPE_NEUTRON_SWAP_TOKEN) {
+            stepDescription.text = NSLocalizedString("tx_swap_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            titleLabel.text =  NSLocalizedString("title_swap_token", comment: "")
         }
         
         
@@ -458,6 +466,9 @@ class TransactionViewController: UIViewController {
             StepVc.neutronVault = self.neutronVault
             StepVc.neutronProposalModule = self.neutronProposalModule
             StepVc.neutronProposal = self.neutronProposal
+            StepVc.neutronSwapPool = self.neutronSwapPool
+            StepVc.neutronInputPair = self.neutronInputPair
+            StepVc.neutronOutputPair = self.neutronOutputPair
             
             StepVc.mGrant = mGrant
             StepVc.mGranterData = mGranterData
@@ -712,6 +723,10 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_NEUTRON_VOTE_OVERRULE) {
                     stepDescription.text = NSLocalizedString("tx_neutron_vote_overrule_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_1")
+                    
+                } else if (mType == TASK_TYPE_NEUTRON_SWAP_TOKEN) {
+                    stepDescription.text = NSLocalizedString("tx_swap_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                 }
                 

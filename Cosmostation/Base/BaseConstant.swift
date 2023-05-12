@@ -39,6 +39,7 @@ let KEY_DB_VERSION                      = "KEY_DB_VERSION"
 let KEY_WC_WHITELIST                    = "KEY_WC_WHITELIST"
 let KEY_LANGUAGE                        = "KEY_LANGUAGE"
 
+let MINTSCAN_DEV_API_URL                = "https://dev.api.mintscan.io/";
 let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
 let CSS_URL                             = "https://api-wallet.cosmostation.io/";
 let NFT_INFURA                          = "https://ipfs.infura.io/ipfs/";
@@ -221,6 +222,7 @@ let TASK_TYPE_NEUTRON_VAULTE_WITHDRAW       = "TASK_TYPE_NEUTRON_VAULTE_WITHDRAW
 let TASK_TYPE_NEUTRON_VOTE_SINGLE           = "TASK_TYPE_NEUTRON_VOTE_SINGLE";
 let TASK_TYPE_NEUTRON_VOTE_MULTI            = "TASK_TYPE_NEUTRON_VOTE_MULTI";
 let TASK_TYPE_NEUTRON_VOTE_OVERRULE         = "TASK_TYPE_NEUTRON_VOTE_OVERRULE";
+let TASK_TYPE_NEUTRON_SWAP_TOKEN            = "TASK_TYPE_NEUTRON_SWAP_TOKEN";
 
 
 
@@ -346,6 +348,7 @@ public enum ChainType: String {
     case COREUM_MAIN
     case NOBLE_MAIN
     case STAFI_MAIN
+    case NEUTRON_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -390,6 +393,7 @@ public enum ChainType: String {
         result.append(LUM_MAIN)
         result.append(MARS_MAIN)
         result.append(MEDI_MAIN)
+        result.append(NEUTRON_MAIN)
         result.append(NOBLE_MAIN)
         result.append(NYX_MAIN)
         result.append(OKEX_MAIN)
@@ -426,13 +430,6 @@ public enum ChainType: String {
         result.append(STATION_TEST)
         result.append(CERBERUS_MAIN)
         return result
-    }
-    
-    static func IS_TESTNET(_ chain: ChainType?) -> Bool {
-        if (chain == .STATION_TEST) {
-            return true
-        }
-        return false
     }
     
     static func IS_SUPPORT_CHAIN(_ chainS: String) -> Bool {
@@ -492,6 +489,8 @@ let SELECT_LIQUIDITY_STAKE = 22
 let SELECT_LIQUIDITY_UNSTAKE = 23
 let SELECT_POPUP_NAME_SERVICE = 24
 let SELECT_POPUP_ADDRESS_NAME_SERVICE = 25
+let SELECT_POPUP_NEUTRON_SWAP_IN = 26
+let SELECT_POPUP_NEUTRON_SWAP_OUT = 27
 
 
 let DAY_SEC     = NSDecimalNumber.init(string: "86400")

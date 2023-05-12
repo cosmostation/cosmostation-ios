@@ -2144,7 +2144,7 @@ class Signer {
     
     
     //Tx for Neutron
-    static func genNutronVaultDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+    static func genNeutronVaultDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                         _ contractAddress: String, _ amount: Array<Coin>,
                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let depositCoin = Cosmos_Base_V1beta1_Coin.with {
@@ -2157,7 +2157,7 @@ class Signer {
         return getGrpcSignedTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func simulNutronVaultDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+    static func simulNeutronVaultDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                         _ contractAddress: String, _ amount: Array<Coin>,
                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let depositCoin = Cosmos_Base_V1beta1_Coin.with {
@@ -2171,7 +2171,7 @@ class Signer {
     }
     
     
-    static func genNutronVaultWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+    static func genNeutronVaultWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ contractAddress: String, _ amount: Array<Coin>,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let jsonMsg: JSON = ["unbond" : ["amount" : amount[0].amount]]
@@ -2180,7 +2180,7 @@ class Signer {
         return getGrpcSignedTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func simulNutronVaultWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+    static func simulNeutronVaultWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                          _ contractAddress: String, _ amount: Array<Coin>,
                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let jsonMsg: JSON = ["unbond" : ["amount" : amount[0].amount]]
@@ -2190,7 +2190,7 @@ class Signer {
     }
     
     
-    static func genNutronSingleVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+    static func genNeutronSingleVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                     _ contractAddress: String,_ proposalId: Int64, _ opinion: String,
                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let jsonMsg: JSON = ["vote" : ["proposal_id" : proposalId, "vote" : opinion]]
@@ -2199,7 +2199,7 @@ class Signer {
         return getGrpcSignedTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func simulNutronSingleVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+    static func simulNeutronSingleVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                       _ contractAddress: String,_ proposalId: Int64, _ opinion: String,
                                       _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let jsonMsg: JSON = ["vote" : ["proposal_id" : proposalId, "vote" : opinion]]
@@ -2209,7 +2209,7 @@ class Signer {
     }
     
     
-    static func genNutronMultiVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+    static func genNeutronMultiVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                    _ contractAddress: String,_ proposalId: Int64, _ opinion: Int,
                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let jsonMsg: JSON = ["vote" : ["proposal_id" : proposalId, "vote" : ["option_id" : proposalId]]]
@@ -2218,7 +2218,7 @@ class Signer {
         return getGrpcSignedTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func simulNutronMultiVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+    static func simulNeutronMultiVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
                                      _ contractAddress: String,_ proposalId: Int64, _ opinion: Int,
                                      _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let jsonMsg: JSON = ["vote" : ["proposal_id" : proposalId, "vote" : ["option_id" : proposalId]]]
@@ -2226,6 +2226,58 @@ class Signer {
         let contractMsg = genWasmMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!)
         return getGrpcSimulateTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
     }
+    
+    
+    static func genNeutronSwap(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                               _ neutronSwapPool: NeutronSwapPool, _ neutronInputPair: NeutronSwapPoolPair, _ neutronOutputPair: NeutronSwapPoolPair, _ inputAmount: String, _ beliefPrice: String,
+                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        if (neutronInputPair.type == "cw20") {
+            let innerMsg: JSON = ["swap" : ["belief_price" : beliefPrice]]
+            let innerMsgBase64 = try! innerMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+            let jsonMsg: JSON = ["send" : ["amount" : inputAmount, "contract" : neutronSwapPool.contract_address!, "msg" : innerMsgBase64]]
+            let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+            let contractMsg = genWasmMsg(auth, neutronInputPair.address!, Data(base64Encoded: jsonMsgBase64)!)
+            return getGrpcSignedTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
+            
+        } else {
+            let offer_asset: JSON = ["info" : WUtils.swapAssetInfo(neutronInputPair), "amount" : inputAmount]
+            let jsonMsg: JSON = ["swap" : ["offer_asset" : offer_asset, "belief_price" : beliefPrice]]
+            let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+            let fundCoin = Cosmos_Base_V1beta1_Coin.with {
+                $0.denom = neutronInputPair.denom!
+                $0.amount = inputAmount
+            }
+            let contractMsg = genWasmMsg(auth, neutronSwapPool.contract_address!, Data(base64Encoded: jsonMsgBase64)!, [fundCoin])
+            return getGrpcSignedTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
+        }
+    }
+    
+    static func simulNeutronSwap(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                 _ neutronSwapPool: NeutronSwapPool, _ neutronInputPair: NeutronSwapPoolPair, _ neutronOutputPair: NeutronSwapPoolPair, _ inputAmount: String, _ beliefPrice: String,
+                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        if (neutronInputPair.type == "cw20") {
+            let innerMsg: JSON = ["swap" : ["belief_price" : beliefPrice]]
+            let innerMsgBase64 = try! innerMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+            let jsonMsg: JSON = ["send" : ["amount" : inputAmount, "contract" : neutronSwapPool.contract_address!, "msg" : innerMsgBase64]]
+            let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+            let contractMsg = genWasmMsg(auth, neutronInputPair.address!, Data(base64Encoded: jsonMsgBase64)!)
+            return getGrpcSimulateTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
+            
+        } else {
+            let offer_asset: JSON = ["info" : WUtils.swapAssetInfo(neutronInputPair), "amount" : inputAmount]
+            let jsonMsg: JSON = ["swap" : ["offer_asset" : offer_asset, "belief_price" : beliefPrice]]
+            let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+            let fundCoin = Cosmos_Base_V1beta1_Coin.with {
+                $0.denom = neutronInputPair.denom!
+                $0.amount = inputAmount
+            }
+            let contractMsg = genWasmMsg(auth, neutronSwapPool.contract_address!, Data(base64Encoded: jsonMsgBase64)!, [fundCoin])
+            return getGrpcSimulateTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
+        }
+    }
+    
+    
+    
     
     static func genWasmMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ contractAddress: String, _ innerMsg: Data? = nil, _ innerFunds: [Cosmos_Base_V1beta1_Coin]? = nil) -> [Google_Protobuf2_Any] {
         let exeContract = Cosmwasm_Wasm_V1_MsgExecuteContract.with {

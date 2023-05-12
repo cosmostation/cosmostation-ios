@@ -108,7 +108,7 @@ class VaultContract3ViewController: BaseViewController, PasswordViewDelegate {
         DispatchQueue.global().async {
             var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest = Cosmos_Tx_V1beta1_BroadcastTxRequest.init()
             if (self.pageHolderVC.mType == TASK_TYPE_NEUTRON_VAULTE_DEPOSIT) {
-                reqTx = Signer.genNutronVaultDeposit (auth!, self.account!.account_pubkey_type,
+                reqTx = Signer.genNeutronVaultDeposit (auth!, self.account!.account_pubkey_type,
                                                        self.pageHolderVC.neutronVault!.address!,
                                                        self.pageHolderVC.neutronVaultAmount,
                                                        self.pageHolderVC.mFee!,
@@ -117,7 +117,7 @@ class VaultContract3ViewController: BaseViewController, PasswordViewDelegate {
                                                        self.chainType!)
                 
             } else if (self.pageHolderVC.mType == TASK_TYPE_NEUTRON_VAULTE_WITHDRAW) {
-                reqTx = Signer.genNutronVaultWithdraw (auth!, self.account!.account_pubkey_type,
+                reqTx = Signer.genNeutronVaultWithdraw (auth!, self.account!.account_pubkey_type,
                                                        self.pageHolderVC.neutronVault!.address!,
                                                        self.pageHolderVC.neutronVaultAmount,
                                                        self.pageHolderVC.mFee!,

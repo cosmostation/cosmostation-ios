@@ -27,13 +27,19 @@
                         <rect key="frame" x="12" y="4" width="529" height="268"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="#1 Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ty-Cj-kRF">
-                                <rect key="frame" x="16" y="14" width="497" height="15.666666666666664"/>
+                                <rect key="frame" x="16" y="14" width="497" height="16.666666666666671"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Time" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPG-f5-Dcg">
-                                <rect key="frame" x="16" y="39.666666666666657" width="497" height="13.333333333333336"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPG-f5-Dcg">
+                                <rect key="frame" x="16" y="42.666666666666657" width="497" height="14.333333333333336"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
+                                <color key="textColor" name="_font04"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Time" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8T6-Fr-EoW">
+                                <rect key="frame" x="16" y="67" width="497" height="14.333333333333329"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
@@ -211,17 +217,20 @@
                         </subviews>
                         <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
+                            <constraint firstItem="8T6-Fr-EoW" firstAttribute="top" secondItem="PPG-f5-Dcg" secondAttribute="bottom" constant="10" id="3WI-2b-dxJ"/>
+                            <constraint firstItem="8T6-Fr-EoW" firstAttribute="leading" secondItem="PPG-f5-Dcg" secondAttribute="leading" id="7C2-Rm-9TC"/>
                             <constraint firstAttribute="trailing" secondItem="63S-J5-3A4" secondAttribute="trailing" constant="16" id="EHk-Bi-IvO"/>
                             <constraint firstItem="63S-J5-3A4" firstAttribute="leading" secondItem="SjZ-Fs-dB4" secondAttribute="leading" constant="16" id="Ek3-qS-zfQ"/>
                             <constraint firstAttribute="bottom" secondItem="NLf-f0-FPq" secondAttribute="bottom" constant="16" id="FDc-Bg-eRj"/>
                             <constraint firstItem="NLf-f0-FPq" firstAttribute="top" secondItem="63S-J5-3A4" secondAttribute="bottom" constant="16" id="L6X-Sr-gfc"/>
                             <constraint firstItem="PPG-f5-Dcg" firstAttribute="trailing" secondItem="9ty-Cj-kRF" secondAttribute="trailing" id="MBk-mw-SC9"/>
-                            <constraint firstItem="63S-J5-3A4" firstAttribute="top" secondItem="PPG-f5-Dcg" secondAttribute="bottom" constant="16" id="NBW-h2-2sy"/>
                             <constraint firstAttribute="trailing" secondItem="NLf-f0-FPq" secondAttribute="trailing" constant="16" id="Nfd-Bl-tp9"/>
                             <constraint firstAttribute="trailing" secondItem="9ty-Cj-kRF" secondAttribute="trailing" constant="16" id="Qra-6e-hW8"/>
                             <constraint firstItem="NLf-f0-FPq" firstAttribute="leading" secondItem="SjZ-Fs-dB4" secondAttribute="leading" constant="15.999999999999986" id="ZCz-m2-L36"/>
                             <constraint firstItem="PPG-f5-Dcg" firstAttribute="leading" secondItem="9ty-Cj-kRF" secondAttribute="leading" id="cQS-Gi-Arg"/>
-                            <constraint firstItem="PPG-f5-Dcg" firstAttribute="top" secondItem="9ty-Cj-kRF" secondAttribute="bottom" constant="10" id="pGr-w5-p5h"/>
+                            <constraint firstItem="63S-J5-3A4" firstAttribute="top" secondItem="8T6-Fr-EoW" secondAttribute="bottom" constant="16" id="dnZ-ls-VXl"/>
+                            <constraint firstItem="8T6-Fr-EoW" firstAttribute="trailing" secondItem="PPG-f5-Dcg" secondAttribute="trailing" id="hLb-Ka-CDa"/>
+                            <constraint firstItem="PPG-f5-Dcg" firstAttribute="top" secondItem="9ty-Cj-kRF" secondAttribute="bottom" constant="12" id="pGr-w5-p5h"/>
                             <constraint firstItem="9ty-Cj-kRF" firstAttribute="top" secondItem="SjZ-Fs-dB4" secondAttribute="top" constant="14" id="q2M-yb-DJ3"/>
                             <constraint firstItem="9ty-Cj-kRF" firstAttribute="leading" secondItem="SjZ-Fs-dB4" secondAttribute="leading" constant="16" id="x9w-0R-9LT"/>
                         </constraints>
@@ -261,8 +270,9 @@
                 <outlet property="btnAbstain" destination="Z7L-34-Tok" id="pfz-JF-lk7"/>
                 <outlet property="btnNo" destination="G6e-io-x7m" id="4ad-b1-Oou"/>
                 <outlet property="btnYes" destination="69l-mg-omZ" id="tGV-IR-i59"/>
+                <outlet property="descriptionLabel" destination="PPG-f5-Dcg" id="gcD-XT-q4p"/>
                 <outlet property="noLabel" destination="lG3-WP-bQK" id="QYi-Yo-k6i"/>
-                <outlet property="timeLabel" destination="PPG-f5-Dcg" id="8G1-VT-T9T"/>
+                <outlet property="timeLabel" destination="8T6-Fr-EoW" id="j8J-Kw-enL"/>
                 <outlet property="titleLabel" destination="9ty-Cj-kRF" id="CAq-pU-FVZ"/>
                 <outlet property="yesLabel" destination="p73-wT-uva" id="ofa-xa-mVD"/>
             </connections>

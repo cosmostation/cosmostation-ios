@@ -29,6 +29,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
     var feeData = Array<FeeData>()
     var hostZones = Array<Stride_Stakeibc_HostZone>()
     var nameservices = Array<NameService>()
+    var neutronPairs = Array<NeutronSwapPoolPair>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,10 +66,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             self.popupTitle.text = NSLocalizedString("select_account", comment: "")
             self.toAccountList = BaseData.instance.selectAllAccountsByChain(toChain!)
             
-        } else if (type == SELECT_POPUP_OSMOSIS_COIN_IN || type == SELECT_POPUP_KAVA_SWAP_IN || type == SELECT_POPUP_SIF_SWAP_IN) {
+        } else if (type == SELECT_POPUP_OSMOSIS_COIN_IN || type == SELECT_POPUP_KAVA_SWAP_IN || type == SELECT_POPUP_SIF_SWAP_IN || type == SELECT_POPUP_NEUTRON_SWAP_IN) {
             self.popupTitle.text = NSLocalizedString("str_select_coin_swap_in", comment: "")
             
-        } else if (type == SELECT_POPUP_OSMOSIS_COIN_OUT || type == SELECT_POPUP_KAVA_SWAP_OUT || type == SELECT_POPUP_SIF_SWAP_OUT) {
+        } else if (type == SELECT_POPUP_OSMOSIS_COIN_OUT || type == SELECT_POPUP_KAVA_SWAP_OUT || type == SELECT_POPUP_SIF_SWAP_OUT || type == SELECT_POPUP_NEUTRON_SWAP_OUT) {
             self.popupTitle.text = NSLocalizedString("str_select_coin_swap_out", comment: "")
             
         } else if (type == SELECT_POPUP_RECIPIENT_CHAIN) {
@@ -140,6 +141,8 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             esHeight = (CGFloat)((toCoins.count * 55) + 55)
         } else if (type == SELECT_LIQUIDITY_STAKE || type == SELECT_LIQUIDITY_UNSTAKE) {
             esHeight = (CGFloat)((hostZones.count * 55) + 55)
+        } else if (type == SELECT_POPUP_NEUTRON_SWAP_IN || type == SELECT_POPUP_NEUTRON_SWAP_OUT) {
+            esHeight = (CGFloat)((neutronPairs.count * 55) + 55)
         } else if (type == SELECT_POPUP_PRICE_COLOR) {
             cardView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.size.width, height: 165)
             cardView.layoutIfNeeded()
@@ -184,6 +187,8 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             return hostZones.count
         } else if (type == SELECT_POPUP_NAME_SERVICE || type == SELECT_POPUP_ADDRESS_NAME_SERVICE) {
             return nameservices.count
+        } else if (type == SELECT_POPUP_NEUTRON_SWAP_IN || type == SELECT_POPUP_NEUTRON_SWAP_OUT) {
+            return neutronPairs.count
         }
         return 0
     }
@@ -406,6 +411,12 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
                 cell?.chainImg.image = UIImage(named: "iconNsStargaze")
             }
             cell?.chainTitle.text = nameservice.name
+            return cell!
+            
+        } else if (type == SELECT_POPUP_NEUTRON_SWAP_IN || type == SELECT_POPUP_NEUTRON_SWAP_OUT) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
+            let pair = neutronPairs[indexPath.row]
+            WDP.dpNeutronPairInfo(chainConfig, pair, cell?.coinTitle, cell?.coinImg, nil)
             return cell!
             
         } else {

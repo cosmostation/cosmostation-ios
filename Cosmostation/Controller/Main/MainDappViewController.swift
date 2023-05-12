@@ -29,7 +29,6 @@ class MainDappViewController: BaseViewController {
                 dappUrl = "https://dapps.dev.cosmostation.io"
             #endif
             if let url = URL(string: "\(dappUrl)/?chain=\(self.chainConfig?.chainAPIName ?? "")&theme=\(self.currentThemeParams())") {
-                print("load load")
                 self.webView.load(URLRequest(url: url))
             }
         });
