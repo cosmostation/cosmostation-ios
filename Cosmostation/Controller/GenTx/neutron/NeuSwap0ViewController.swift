@@ -113,6 +113,7 @@ class NeuSwap0ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
+        beliefPrice = NSDecimalNumber.zero
         let userInput = inputTextFiled.text?.trimmingCharacters(in: .whitespaces)
         if (userInput == nil || userInput!.isEmpty == true) {
             inputTextFiled.layer.borderColor = UIColor.font04.cgColor
@@ -171,6 +172,7 @@ class NeuSwap0ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
+        print("onClickNext ", beliefPrice)
         if (beliefPrice == NSDecimalNumber.zero) {
             self.onShowToast(NSLocalizedString("error_amount", comment: ""))
             return
