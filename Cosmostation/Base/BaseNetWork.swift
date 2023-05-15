@@ -271,9 +271,9 @@ class BaseNetWork {
     
     static func mintscanAstroPort(_ chainConfig: ChainConfig?) -> String {
         if (chainConfig is ChainNeutronTest) {
-            return MINTSCAN_DEV_API_URL + "v1/" + chainConfig!.chainAPIName + "/astroport/neutron12jm24l9lr9cupufqjuxpdjnnweana4h66tsx5cl800mke26td26sq7m05p"
+            return MINTSCAN_DEV_API_URL + "v1/" + chainConfig!.chainAPIName + "/astroport"
         } else {
-            return MINTSCAN_DEV_API_URL + "v1/" + chainConfig!.chainAPIName + ""
+            return MINTSCAN_API_URL + "v1/" + chainConfig!.chainAPIName + "/astroport"
         }
     }
     
