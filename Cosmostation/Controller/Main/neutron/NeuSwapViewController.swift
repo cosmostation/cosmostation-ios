@@ -13,17 +13,19 @@ import Alamofire
 class NeuSwapViewController: BaseViewController, SBCardPopupDelegate {
     
     @IBOutlet weak var loadingImg: LoadingImageView!
-    
+    @IBOutlet weak var inputCardLayer: CardView!
     @IBOutlet weak var inputCoinLayer: CardView!
     @IBOutlet weak var inputCoinImg: UIImageView!
     @IBOutlet weak var inputCoinName: UILabel!
     @IBOutlet weak var inputCoinAvailableAmountLabel: UILabel!
-    
     @IBOutlet weak var toggleBtn: UIButton!
-    
+    @IBOutlet weak var outputCardLayer: CardView!
     @IBOutlet weak var outputCoinLayer: CardView!
     @IBOutlet weak var outputCoinImg: UIImageView!
     @IBOutlet weak var outputCoinName: UILabel!
+    @IBOutlet weak var astroPortView: UIView!
+    @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var btnSwap: UIButton!
     
     var pageHolderVC: NeuDappViewController!
     
@@ -127,9 +129,19 @@ class NeuSwapViewController: BaseViewController, SBCardPopupDelegate {
     
     
     func onInitData() {
+        loadingImg.stopAnimating()
+        loadingImg.isHidden = true
+        
         if (swapPools.count <= 0) {
-            self.navigationController?.popViewController(animated: true)
+            emptyView.isHidden = false
             return
+        } else {
+            inputCardLayer.isHidden = false
+            toggleBtn.isHidden = false
+            outputCardLayer.isHidden = false
+            astroPortView.isHidden = false
+            btnSwap.isHidden = false
+            
         }
         swapPools.forEach { pool in
             pool.pairs.forEach { pair in
@@ -142,8 +154,6 @@ class NeuSwapViewController: BaseViewController, SBCardPopupDelegate {
         inputCoin = selectedPool.pairs[0]
         outputCoin = selectedPool.pairs[1]
         
-        loadingImg.stopAnimating()
-        loadingImg.isHidden = true
         onUpdateView()
     }
 
