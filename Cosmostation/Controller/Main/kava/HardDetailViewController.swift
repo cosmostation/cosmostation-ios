@@ -223,13 +223,10 @@ class HardDetailViewController: BaseViewController, UITableViewDelegate, UITable
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                if let responseData = res as? NSDictionary, let responseResult = responseData.object(forKey: "result") as? Array<NSDictionary> {
-                    if let coinsDic = responseResult[0].object(forKey: "coins") as? Array<NSDictionary> {
-                        coinsDic.forEach { rawCoin in
-                            self.mHardModuleCoins.append(Coin.init(rawCoin))
-                        }
-                        BaseData.instance.mHardModuleCoins = self.mHardModuleCoins
-                    }
+                if let responseData = res as? NSDictionary, let responseResult = responseData.object(forKey: "accounts") as? Array<NSDictionary>,
+                let address = responseResult[0].object(forKey: "address") as? String {
+                    self.mFetchCnt = self.mFetchCnt + 1
+                    self.onFetchBalance_gRPC(address)
                 }
                 
             case .failure(let error):
@@ -254,6 +251,27 @@ class HardDetailViewController: BaseViewController, UITableViewDelegate, UITable
                 
             } catch {
                 print("onFetchgRPCHardInterestRate failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchBalance_gRPC(_ moduleAddress: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainConfig)!
+                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
+                let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = moduleAddress; $0.pagination = page }
+                if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    response.balances.forEach { balance in
+                        self.mHardModuleCoins.append(Coin.init(balance.denom, balance.amount))
+                    }
+                    BaseData.instance.mHardModuleCoins = self.mHardModuleCoins
+                }
+                try channel.close().wait()
+
+            } catch {
+                print("onFetchBalance_gRPC failed: \(error)")
             }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }

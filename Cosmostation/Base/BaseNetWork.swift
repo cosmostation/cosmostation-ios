@@ -143,7 +143,7 @@ class BaseNetWork {
     static func managerHardPoolUrl(_ chain: ChainType?) -> String {
         if let chainConfig = ChainFactory.getChainConfig(chain) {
             if (chainConfig.chainType == .KAVA_MAIN) {
-                return chainConfig.lcdUrl + "hard/accounts"
+                return chainConfig.lcdUrl + "kava/hard/v1beta1/accounts"
             }
         }
         return ""
@@ -152,7 +152,7 @@ class BaseNetWork {
     static func incentiveUrl(_ chain: ChainType?) -> String {
         if let chainConfig = ChainFactory.getChainConfig(chain) {
             if (chainConfig.chainType == .KAVA_MAIN) {
-                return chainConfig.lcdUrl + "incentive/rewards"
+                return chainConfig.lcdUrl + "kava/incentive/v1beta1/rewards"
             }
         }
         return ""
