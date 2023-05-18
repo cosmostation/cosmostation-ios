@@ -978,13 +978,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         request.responseJSON { (response) in
             switch response.result {
                 case .success(let res):
-                    guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-                        self.onFetchFinished()
-                        return
-                    }
-                    let kavaIncentiveReward = KavaIncentiveReward.init(responseData)
-                    BaseData.instance.mIncentiveRewards = kavaIncentiveReward.result
-
+                if let responseData = res as? NSDictionary {
+                    BaseData.instance.mIncentiveRewards = IncentiveReward.init(responseData)
+                }
                 case .failure(let error):
                     print("onFetchKavaIncentiveReward ", error)
                 }

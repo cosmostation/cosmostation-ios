@@ -8,18 +8,6 @@
 
 import Foundation
 
-public struct KavaIncentiveReward {
-    var height: String?
-    var result: IncentiveReward?
-    
-    init(_ dictionary: NSDictionary?) {
-        self.height = dictionary?["height"] as? String
-        if let rawIncentiveReward = dictionary?["result"] as? NSDictionary {
-            self.result = IncentiveReward.init(rawIncentiveReward)
-        }
-    }
-}
-
 public struct IncentiveReward {
     var hard_claims: Array<HardClaim> = Array<HardClaim>()
     var usdx_minting_claims: Array<UsdxMintingClaim> = Array<UsdxMintingClaim>()
@@ -28,7 +16,7 @@ public struct IncentiveReward {
     var earn_claims: Array<EarnClaim> = Array<EarnClaim>()
     
     init(_ dictionary: NSDictionary?) {
-        if let rawHardClaims = dictionary?["hard_claims"] as? Array<NSDictionary>  {
+        if let rawHardClaims = dictionary?["hard_liquidity_provider_claims"] as? Array<NSDictionary>  {
             for rawHardClaim in rawHardClaims {
                 self.hard_claims.append(HardClaim(rawHardClaim))
             }
