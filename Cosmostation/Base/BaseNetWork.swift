@@ -161,7 +161,7 @@ class BaseNetWork {
     static func paramBep3Url(_ chain: ChainType?) -> String {
         if let chainConfig = ChainFactory.getChainConfig(.KAVA_MAIN) {
             if (chainConfig.chainType == .KAVA_MAIN) {
-                return chainConfig.lcdUrl + "bep3/parameters"
+                return chainConfig.lcdUrl + "kava/bep3/v1beta1/params"
             }
         }
         return ""
@@ -170,7 +170,7 @@ class BaseNetWork {
     static func supplyBep3Url(_ chain: ChainType?) -> String {
         if let chainConfig = ChainFactory.getChainConfig(.KAVA_MAIN) {
             if (chainConfig.chainType == .KAVA_MAIN) {
-                return chainConfig.lcdUrl + "bep3/supplies"
+                return chainConfig.lcdUrl + "kava/bep3/v1beta1/assetsupplies"
             }
         }
         return ""
@@ -181,7 +181,7 @@ class BaseNetWork {
             if (chainConfig.chainType == .BINANCE_MAIN) {
                 return chainConfig.lcdUrl + "api/v1/atomic-swaps/" + id
             } else if (chainConfig.chainType == .KAVA_MAIN) {
-                return chainConfig.lcdUrl + "bep3/swap/" + id
+                return chainConfig.lcdUrl + "kava/bep3/v1beta1/atomicswap/" + id
             }
         }
         return ""

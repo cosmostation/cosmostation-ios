@@ -9,14 +9,12 @@
 import Foundation
 
 public class KavaSwapSupply {
-    var height: String = ""
     var result: Array<SwapSupply> = Array<SwapSupply>()
     
     init() {}
     
     init(_ dictionary: [String: Any]) {
-        self.height = dictionary["height"] as? String ?? ""
-        if let results = dictionary["result"] as? Array<NSDictionary> {
+        if let results = dictionary["asset_supplies"] as? Array<NSDictionary> {
             self.result.removeAll()
             for supply in results {
                 self.result.append(SwapSupply(supply as! [String : Any]))

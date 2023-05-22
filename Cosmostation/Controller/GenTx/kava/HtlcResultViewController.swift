@@ -673,7 +673,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         }
     }
     
-    var mClaimTxFetchCnt = 50
+    var mClaimTxFetchCnt = 15
     func onFetchClaimTx() {
         onUpdateProgress(3)
         if (self.mHtlcToChain == ChainType.BINANCE_MAIN) {
