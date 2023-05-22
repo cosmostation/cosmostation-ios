@@ -14,7 +14,6 @@ import NIO
 
 class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var vcTitleLabel: UILabel!
     @IBOutlet weak var voteDetailTableView: UITableView!
     @IBOutlet weak var btnVote: UIButton!
     @IBOutlet weak var loadingImg: LoadingImageView!
@@ -45,7 +44,6 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         refresher.tintColor = UIColor.font05
         voteDetailTableView.addSubview(refresher)
         
-        self.vcTitleLabel.text = NSLocalizedString("title_vote_detail", comment: "")
         self.btnVote.setTitle(NSLocalizedString("str_vote", comment: ""), for: .normal)
         
         self.loadingImg.onStartAnimation()
@@ -54,8 +52,23 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = "";
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_vote_detail", comment: "")
+        self.navigationItem.title = NSLocalizedString("title_vote_detail", comment: "")
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        let explorerBtn = UIButton(type: .system)
+        explorerBtn.setImage(UIImage(named: "btnExplorer"), for: .normal)
+        explorerBtn.sizeToFit()
+        explorerBtn.addTarget(self, action: #selector(onExplorer), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem =  UIBarButtonItem(customView: explorerBtn)
+    }
+    
+    @objc func onExplorer() {
+        let link = WUtils.getProposalExplorer(chainConfig, proposalId!)
+        guard let url = URL(string: link) else { return }
+        self.onShowSafariWeb(url)
     }
     
     func onUpdateView() {
@@ -65,16 +78,6 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         self.voteDetailTableView.isHidden = false
         self.btnVote.isHidden = false
         self.refresher.endRefreshing()
-    }
-    
-    @IBAction func onClickBack(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func onClickLink() {
-        let link = WUtils.getProposalExplorer(chainConfig, proposalId!)
-        guard let url = URL(string: link) else { return }
-        self.onShowSafariWeb(url)
     }
     
     @IBAction func onClickVote(_ sender: UIButton) {
@@ -143,7 +146,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
             }
             cell?.actionLink = { url in
                 print("actionLink ", url)
-                self.onClickLink()
+                self.onExplorer()
             }
             return cell!
         }
