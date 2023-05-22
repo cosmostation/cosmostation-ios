@@ -9,14 +9,12 @@
 import Foundation
 
 public class KavaSwapParam {
-    var height: String = ""
     var result: KavaBep3AssetParams = KavaBep3AssetParams.init()
     
     init() {}
     
     init(_ dictionary: [String: Any]) {
-        self.height = dictionary["height"] as? String ?? ""
-        self.result = KavaBep3AssetParams.init(dictionary["result"] as! [String : Any])
+        self.result = KavaBep3AssetParams.init(dictionary["params"] as! [String : Any])
     }
     
     
