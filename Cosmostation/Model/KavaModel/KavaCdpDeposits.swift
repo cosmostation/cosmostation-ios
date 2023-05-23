@@ -9,12 +9,10 @@
 import Foundation
 
 public struct KavaCdpDeposits {
-    var height: String?
     var result: Array<CdpDeposit>?
     
     init(_ dictionary: NSDictionary?) {
-        self.height = dictionary?["height"] as? String
-        if let rawResults = dictionary?["result"] as? Array<NSDictionary> {
+        if let rawResults = dictionary?["deposits"] as? Array<NSDictionary> {
             self.result = Array<CdpDeposit>()
             for rawResult in rawResults {
                 self.result?.append(CdpDeposit.init(rawResult))
