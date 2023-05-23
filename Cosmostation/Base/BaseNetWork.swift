@@ -134,7 +134,7 @@ class BaseNetWork {
     static func depositCdpUrl(_ chain: ChainType?, _ address: String, _ collateralType: String) -> String {
         if let chainConfig = ChainFactory.getChainConfig(chain) {
             if (chainConfig.chainType == .KAVA_MAIN) {
-                return chainConfig.lcdUrl + "cdp/cdps/cdp/deposits/" + address + "/" + collateralType
+                return chainConfig.lcdUrl + "kava/cdp/v1beta1/cdps/deposits/" + address + "/" + collateralType
             }
         }
         return ""

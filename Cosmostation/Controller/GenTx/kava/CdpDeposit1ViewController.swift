@@ -41,7 +41,6 @@ class CdpDeposit1ViewController: BaseViewController, UITextFieldDelegate, SBCard
     var mKavaCdpParams_gRPC: Kava_Cdp_V1beta1_Params!
     var mKavaOraclePrice: Kava_Pricefeed_V1beta1_CurrentPriceResponse?
     var mKavaMyCdp_gRPC: Kava_Cdp_V1beta1_CDPResponse?
-    var mSelfDepositAmount: NSDecimalNumber = NSDecimalNumber.zero
     
     var currentPrice: NSDecimalNumber = NSDecimalNumber.zero
     var beforeLiquidationPrice: NSDecimalNumber = NSDecimalNumber.zero
@@ -250,10 +249,9 @@ class CdpDeposit1ViewController: BaseViewController, UITextFieldDelegate, SBCard
     
     var mFetchCnt = 0
     func onFetchCdpData() {
-        self.mFetchCnt = 3
+        self.mFetchCnt = 2
         self.onFetchgRPCKavaPrice(mMarketID)
         self.onFetchgRPCMyCdp(account!.account_address, mCollateralParamType)
-        self.onFetchCdpDeposit(account!.account_address, mCollateralParamType!)
     }
     
     func onFetchFinished() {
@@ -318,26 +316,4 @@ class CdpDeposit1ViewController: BaseViewController, UITextFieldDelegate, SBCard
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
-    
-    func onFetchCdpDeposit(_ address: String, _ collateralType: String) {
-        let request = Alamofire.request(BaseNetWork.depositCdpUrl(chainType, address, collateralType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-                    self.onFetchFinished()
-                    return
-                }
-                let cdpDeposits = KavaCdpDeposits.init(responseData)
-                if let selfDeposit = cdpDeposits.result?.filter({ $0.depositor == self.account?.account_address}).first {
-                    self.mSelfDepositAmount = NSDecimalNumber.init(string: selfDeposit.amount?.amount)
-                }
-                
-            case .failure(let error):
-                print("onFetchCdpDeposit ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-
 }

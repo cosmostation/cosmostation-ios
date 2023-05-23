@@ -31,7 +31,7 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
     @IBOutlet weak var pAllLabel: UILabel!
     @IBOutlet weak var pAllDenom: UILabel!
     @IBOutlet weak var pDisableAll: UILabel!
-
+    
     @IBOutlet weak var beforeSafeTxt: UILabel!
     @IBOutlet weak var beforeSafeRate: UILabel!
     @IBOutlet weak var afterSafeTxt: UILabel!
@@ -45,18 +45,17 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
     var pDpDecimal:Int16 = 6
     var mMarketID: String = ""
     
-//    var mCollateralParamType: String?
-//    var mCollateralParam: CollateralParam?
-//    var mCdpParam: CdpParam?
-//    var myCdp: MyCdp?
-//    var mSelfDepositAmount: NSDecimalNumber = NSDecimalNumber.zero
-//    var mPrice: KavaPriceFeedPrice?
+    //    var mCollateralParamType: String?
+    //    var mCollateralParam: CollateralParam?
+    //    var mCdpParam: CdpParam?
+    //    var myCdp: MyCdp?
+    //    var mSelfDepositAmount: NSDecimalNumber = NSDecimalNumber.zero
+    //    var mPrice: KavaPriceFeedPrice?
     var mCollateralParamType: String!
     var mCollateralParam: Kava_Cdp_V1beta1_CollateralParam!
     var mKavaCdpParams_gRPC: Kava_Cdp_V1beta1_Params!
     var mKavaOraclePrice: Kava_Pricefeed_V1beta1_CurrentPriceResponse?
     var mKavaMyCdp_gRPC: Kava_Cdp_V1beta1_CDPResponse?
-    var mSelfDepositAmount: NSDecimalNumber = NSDecimalNumber.zero
     
     var currentPrice: NSDecimalNumber = NSDecimalNumber.zero
     var beforeLiquidationPrice: NSDecimalNumber = NSDecimalNumber.zero
@@ -70,7 +69,7 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
     var toPAmount: NSDecimalNumber = NSDecimalNumber.zero
     var pAvailable: NSDecimalNumber = NSDecimalNumber.zero
     var reaminPAmount: NSDecimalNumber = NSDecimalNumber.zero
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
@@ -103,7 +102,7 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
         self.btnCancel.isUserInteractionEnabled = true
         self.btnNext.isUserInteractionEnabled = true
     }
-
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         textField.shouldChange(charactersIn: range, replacementString: string, displayDecimal: pDpDecimal)
     }
@@ -209,7 +208,7 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
             let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
             cardPopup.resultDelegate = self
             cardPopup.show(onViewController: self)
-
+            
         } else {
             self.onShowToast(NSLocalizedString("error_amount", comment: ""))
         }
@@ -229,7 +228,7 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
                 self.pageHolderVC.mPDenom = self.mPDenom
                 self.pageHolderVC.totalLoanAmount = self.reaminPAmount
                 self.pageHolderVC.mKavaCollateralParam = self.mCollateralParam
-
+                
                 self.btnCancel.isUserInteractionEnabled = false
                 self.btnNext.isUserInteractionEnabled = false
                 self.pageHolderVC.onNextPage()
@@ -292,10 +291,9 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
     
     var mFetchCnt = 0
     func onFetchCdpData() {
-        self.mFetchCnt = 3
+        self.mFetchCnt = 2
         self.onFetchgRPCKavaPrice(mMarketID)
         self.onFetchgRPCMyCdp(account!.account_address, mCollateralParamType)
-        self.onFetchCdpDeposit(account!.account_address, mCollateralParamType!)
     }
     
     func onFetchFinished() {
@@ -350,7 +348,7 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
                 pParticalDenom.isHidden = true
                 pDisablePartical.isHidden = false
             }
-
+            
             beforeLiquidationPrice = mKavaMyCdp_gRPC!.getLiquidationPrice(mCDenom, mPDenom, mCollateralParam!)
             beforeRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(beforeLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
             WUtils.showRiskRate2(beforeRiskRate, beforeSafeRate, beforeSafeTxt)
@@ -400,27 +398,4 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
-    
-    func onFetchCdpDeposit(_ address: String, _ collateralType: String) {
-        let request = Alamofire.request(BaseNetWork.depositCdpUrl(chainType, address, collateralType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-                    self.onFetchFinished()
-                    return
-                }
-                let cdpDeposits = KavaCdpDeposits.init(responseData)
-                if let selfDeposit = cdpDeposits.result?.filter({ $0.depositor == self.account?.account_address}).first {
-                    self.mSelfDepositAmount = NSDecimalNumber.init(string: selfDeposit.amount?.amount)
-                }
-                
-            case .failure(let error):
-                print("onFetchCdpDeposit ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-
-
 }

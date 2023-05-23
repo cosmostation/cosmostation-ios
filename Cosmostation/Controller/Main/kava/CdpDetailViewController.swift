@@ -386,7 +386,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
+                guard let responseData = res as? NSDictionary else {
                     self.onFetchFinished()
                     return
                 }
