@@ -15,6 +15,7 @@
 "str_staking" = "스테이킹 수량";
 "str_bonded" = "예치된 수량";
 "str_vault_bonded" = "볼트 예치된 수량";
+"str_vesting_amount" = "베스팅 수량";
 "str_incentive" = "인센티브";
 "str_current_price" = "현재 가격";
 "str_inflation" = "인플레이션";

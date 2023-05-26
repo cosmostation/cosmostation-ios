@@ -69,47 +69,55 @@ class TokenDetailVestingDetailCell: UITableViewCell {
             } else if (denom == KAVA_SWAP_DENOM) {
                 rootCardView.backgroundColor = UIColor.cardBg
             }
-            onBindVesting_gRPC(denom)
+            onBindVesting_gRPC(chainConfig, denom)
             
         } else {
             rootCardView.backgroundColor = chainConfig.chainColorBG
-            onBindVesting_gRPC(denom)
+            onBindVesting_gRPC(chainConfig, denom)
             
         }
     }
     
-    func onBindVesting_gRPC(_ denom: String) {
+    func onBindVesting_gRPC(_ chainConfig: ChainConfig, _ denom: String) {
         let baseData = BaseData.instance
-        let vps = baseData.onParseRemainVestingsByDenom_gRPC(denom)
-        vestingCntLabel.text = String(vps.count)
-        
-        vestingTime0.text = WDP.dpTime(vps[0].length)
-        vestingGap0.text = WDP.dpTimeGap(vps[0].length)
-        vestingAmount0.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[0], denom).stringValue, vestingAmount0.font!, 6, 6)
-        
-        if (vps.count > 1) {
-            vestingLayer1.isHidden = false
-            vestingTime1.text = WDP.dpTime(vps[1].length)
-            vestingGap1.text = WDP.dpTimeGap(vps[1].length)
-            vestingAmount1.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[1], denom).stringValue, vestingAmount0.font!, 6, 6)
-        }
-        if (vps.count > 2) {
-            vestingLayer2.isHidden = false
-            vestingTime2.text = WDP.dpTime(vps[2].length)
-            vestingGap2.text = WDP.dpTimeGap(vps[2].length)
-            vestingAmount2.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[2], denom).stringValue, vestingAmount0.font!, 6, 6)
-        }
-        if (vps.count > 3) {
-            vestingLayer3.isHidden = false
-            vestingTime3.text = WDP.dpTime(vps[3].length)
-            vestingGap3.text = WDP.dpTimeGap(vps[3].length)
-            vestingAmount3.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[3], denom).stringValue, vestingAmount0.font!, 6, 6)
-        }
-        if (vps.count > 4) {
-            vestingLayer4.isHidden = false
-            vestingTime4.text = WDP.dpTime(vps[4].length)
-            vestingGap4.text = WDP.dpTimeGap(vps[4].length)
-            vestingAmount4.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[4], denom).stringValue, vestingAmount0.font!, 6, 6)
+        if (chainConfig.chainType == .NEUTRON_MAIN || chainConfig.chainType == .NEUTRON_TEST) {
+            vestingCntLabel.text = String(1)
+            vestingTime0.text = WDP.dpTime(baseData.mNeutronDuration)
+            vestingGap0.text = WDP.dpTimeGap(baseData.mNeutronDuration)
+            vestingAmount0.attributedText = WDP.dpAmount(baseData.mNeutronVesting.stringValue, vestingAmount0.font!, 6, 6)
+            
+        } else {
+            let vps = baseData.onParseRemainVestingsByDenom_gRPC(denom)
+            vestingCntLabel.text = String(vps.count)
+            
+            vestingTime0.text = WDP.dpTime(vps[0].length)
+            vestingGap0.text = WDP.dpTimeGap(vps[0].length)
+            vestingAmount0.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[0], denom).stringValue, vestingAmount0.font!, 6, 6)
+            
+            if (vps.count > 1) {
+                vestingLayer1.isHidden = false
+                vestingTime1.text = WDP.dpTime(vps[1].length)
+                vestingGap1.text = WDP.dpTimeGap(vps[1].length)
+                vestingAmount1.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[1], denom).stringValue, vestingAmount0.font!, 6, 6)
+            }
+            if (vps.count > 2) {
+                vestingLayer2.isHidden = false
+                vestingTime2.text = WDP.dpTime(vps[2].length)
+                vestingGap2.text = WDP.dpTimeGap(vps[2].length)
+                vestingAmount2.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[2], denom).stringValue, vestingAmount0.font!, 6, 6)
+            }
+            if (vps.count > 3) {
+                vestingLayer3.isHidden = false
+                vestingTime3.text = WDP.dpTime(vps[3].length)
+                vestingGap3.text = WDP.dpTimeGap(vps[3].length)
+                vestingAmount3.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[3], denom).stringValue, vestingAmount0.font!, 6, 6)
+            }
+            if (vps.count > 4) {
+                vestingLayer4.isHidden = false
+                vestingTime4.text = WDP.dpTime(vps[4].length)
+                vestingGap4.text = WDP.dpTimeGap(vps[4].length)
+                vestingAmount4.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[4], denom).stringValue, vestingAmount0.font!, 6, 6)
+            }
         }
     }
 }

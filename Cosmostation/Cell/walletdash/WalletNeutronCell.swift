@@ -14,6 +14,8 @@ class WalletNeutronCell: UITableViewCell {
     @IBOutlet weak var totalValue: UILabel!
     @IBOutlet weak var availableAmount: UILabel!
     @IBOutlet weak var totalbondedAmount: UILabel!
+    @IBOutlet weak var vestingAmount: UILabel!
+    @IBOutlet weak var vestingLayer: UIView!
     
     @IBOutlet weak var btnVault: UIButton!
     @IBOutlet weak var btnDao: UIButton!
@@ -21,6 +23,7 @@ class WalletNeutronCell: UITableViewCell {
     @IBOutlet weak var btnWc: UIButton!
     
     @IBOutlet weak var availableLabel: UILabel!
+    @IBOutlet weak var vestingLabel: UILabel!
     @IBOutlet weak var totalbondedLabel: UILabel!
     
     override func awakeFromNib() {
@@ -28,8 +31,10 @@ class WalletNeutronCell: UITableViewCell {
         self.selectionStyle = .none
         availableAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         totalbondedAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        vestingAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         
         availableLabel.text = NSLocalizedString("str_available", comment: "")
+        vestingLabel.text = NSLocalizedString("str_vesting_amount", comment: "")
         totalbondedLabel.text = NSLocalizedString("str_vault_bonded", comment: "")
     }
     
@@ -37,13 +42,18 @@ class WalletNeutronCell: UITableViewCell {
         guard let account = account, let chainConfig = chainConfig else { return }
         let stakingDenom = chainConfig.stakeDenom
         
+        let vesting = BaseData.instance.mNeutronVesting
         let bondedAmount = BaseData.instance.mNeutronVaultDeposit
-        let totalToken = BaseData.instance.getAvailableAmount_gRPC(stakingDenom).adding(bondedAmount)
+        let totalToken = BaseData.instance.getAvailableAmount_gRPC(stakingDenom).adding(bondedAmount).adding(vesting)
         
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 6, 6)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, 6, 6)
         totalbondedAmount.attributedText = WDP.dpAmount(bondedAmount.stringValue, totalbondedAmount.font!, 6, 6)
         
+        if (vesting.compare(NSDecimalNumber.zero).rawValue > 0) {
+            vestingLayer.isHidden = false
+            vestingAmount.attributedText = WDP.dpAmount(vesting.stringValue, vestingAmount.font!, 6, 6)
+        }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -6).stringValue)
         
         if let msAsset = BaseData.instance.getMSAsset(chainConfig, stakingDenom) {
@@ -70,6 +80,10 @@ class WalletNeutronCell: UITableViewCell {
     
     @IBAction func onClickWc(_ sender: Any) {
         actionWc?()
+    }
+    
+    override func prepareForReuse() {
+        vestingLayer.isHidden = true
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
