@@ -161,6 +161,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mNeutronVaults.removeAll()
         BaseData.instance.mNeutronDaos.removeAll()
         BaseData.instance.mNeutronVaultDeposit = NSDecimalNumber.zero
+        BaseData.instance.mNeutronVesting = NSDecimalNumber.zero
         
         if (mChainType == .BINANCE_MAIN) {
             self.mFetchCnt = 6
@@ -261,12 +262,13 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
         } else if (self.mChainType == .NEUTRON_MAIN || self.mChainType == .NEUTRON_TEST) {
-            self.mFetchCnt = 4
+            self.mFetchCnt = 5
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
             self.onFetchgRPCBalance(self.mAccount.account_address, 0)
             
             self.onFetchNeutronData(self.mChainConfig)
+            self.onFetchNeutronVesting()
             
             
         } else if (self.mChainType == .COSMOS_TEST || self.mChainType == .IRIS_TEST || self.mChainType == .ALTHEA_TEST ||
@@ -1225,6 +1227,28 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
 
             } catch {
                 print("onFetchVaultDeposit failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchNeutronVesting() {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.mChainConfig)!
+                let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+                    $0.address = NEUTRON_VESTING_CONTRACT_ADDRESS
+                    $0.queryData = Cw20NeutronVestingReq.init(self.mAccount.account_address).getEncode()
+                }
+                if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    let neutronVesting = try? JSONDecoder().decode(Cw20NeutronVestingRes.self, from: response.data)
+                    BaseData.instance.mNeutronVesting = NSDecimalNumber(string: neutronVesting?.allocated_amount)
+                    BaseData.instance.mNeutronDuration = neutronVesting?.schedule?.getVestingDuration()
+                }
+                try channel.close().wait()
+
+            } catch {
+                print("onFetchNeutronVesting failed: \(error)")
             }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }

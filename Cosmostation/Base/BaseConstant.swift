@@ -510,3 +510,6 @@ let ResourceBase = "https://raw.githubusercontent.com/cosmostation/chainlist/mas
 let MintscanUrl = "https://www.mintscan.io/"
 let MintscanTestUrl = "https://testnet.mintscan.io/"
 let GeckoUrl = "https://www.coingecko.com/en/coins/"
+
+//Neutron Contract Address
+let NEUTRON_VESTING_CONTRACT_ADDRESS = "neutron1h6828as2z5av0xqtlh4w9m75wxewapk8z9l2flvzc29zeyzhx6fqgp648z"

@@ -1388,6 +1388,10 @@
 		150DB1F729ABCFD100D0C7A2 /* PersisDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150DB1F529ABCFD100D0C7A2 /* PersisDappViewController.swift */; };
 		15119C5729BF2F89004760DE /* ChainKyve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15119C5629BF2F89004760DE /* ChainKyve.swift */; };
 		15119C5829BF2F89004760DE /* ChainKyve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15119C5629BF2F89004760DE /* ChainKyve.swift */; };
+		151734672A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
+		151734682A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
+		1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */; };
+		1517346B2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */; };
 		151788EC282E078600A7D7CC /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
 		152AC22929ACAA36007AB276 /* PersisLiquid3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */; };
 		152AC22A29ACAA36007AB276 /* PersisLiquid3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */; };
@@ -3955,6 +3959,8 @@
 		150DB1F229ABCD2E00D0C7A2 /* PersisDapp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PersisDapp.storyboard; sourceTree = "<group>"; };
 		150DB1F529ABCFD100D0C7A2 /* PersisDappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersisDappViewController.swift; sourceTree = "<group>"; };
 		15119C5629BF2F89004760DE /* ChainKyve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKyve.swift; sourceTree = "<group>"; };
+		151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingReq.swift; sourceTree = "<group>"; };
+		151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingRes.swift; sourceTree = "<group>"; };
 		151788EA282E078600A7D7CC /* WalletStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStationCell.swift; sourceTree = "<group>"; };
 		151788EB282E078600A7D7CC /* WalletStationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStationCell.xib; sourceTree = "<group>"; };
 		152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersisLiquid3ViewController.xib; sourceTree = "<group>"; };
@@ -6535,6 +6541,8 @@
 				15BF8481299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift */,
 				04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */,
 				04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */,
+				151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */,
+				151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */,
 				E1D4EA572871584B005C1ECF /* FeeInfo.swift */,
 				1577DAC729B9F07800C360EC /* Board.swift */,
 			);
@@ -7914,6 +7922,7 @@
 				18FFB330281AF533004E65BB /* BoarderLabel.swift in Sources */,
 				18FFB332281AF533004E65BB /* KeyFac.swift in Sources */,
 				1817CBA4283E2CE500523713 /* cosmos_group_v1beta1_types.pb.swift in Sources */,
+				151734682A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */,
 				1817CB66283E2CE500523713 /* evmos_erc20_v1_query.pb.swift in Sources */,
 				04CF7118294C0DDE00134A84 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */,
 				1817CAB5283E2CE500523713 /* sifnode_dispensation_v1_query.pb.swift in Sources */,
@@ -8589,6 +8598,7 @@
 				04AA4C562906A6DE0027877B /* kava_hard_v1beta1_query.grpc.swift in Sources */,
 				18DFB7F0298CADC900E812B6 /* tendermint_farming_v1beta1_tx.grpc.swift in Sources */,
 				1817CB0B283E2CE500523713 /* cosmos_feegrant_v1beta1_feegrant.pb.swift in Sources */,
+				1517346B2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
 				042AEDFC286452C200E13825 /* OkDeposit1ViewController.swift in Sources */,
 				18FFB5AB281AF533004E65BB /* DomainDetailViewController.swift in Sources */,
 				18FFB5AC281AF533004E65BB /* KavaSwapSupply.swift in Sources */,
@@ -9246,6 +9256,7 @@
 				042AEDFB286452C200E13825 /* OkDeposit1ViewController.swift in Sources */,
 				045DADB8289BCF69004ED9B4 /* AuthzSend5ViewController.swift in Sources */,
 				1537A0C829ACA33F00342ACF /* persistence_halving_v1beta1_genesis.pb.swift in Sources */,
+				1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
 				040FA9B4275F55C300229F6F /* desmos_profiles_v1beta1_msgs_profile.pb.swift in Sources */,
 				048C830027BF572800270528 /* evmos_epochs_v1_query.grpc.swift in Sources */,
 				E151B64B224859E10026B8C0 /* StdSignMsg.swift in Sources */,
@@ -9693,6 +9704,7 @@
 				E1ECCA7A224CB4AA00BAB623 /* BottomLineTextField.swift in Sources */,
 				04B1BE2427A3BC4500B1236A /* cosmwasm_wasm_v1_proposal.pb.swift in Sources */,
 				040FA90A275F55C300229F6F /* ibc_lightclients_solomachine_v1_solomachine.pb.swift in Sources */,
+				151734672A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */,
 				042A0CC1288E599F00C4DC38 /* cosmos_auth_v1beta1_tx.pb.swift in Sources */,
 				28F1E8B9286B172100A08024 /* Validator.swift in Sources */,
 				E11A28C729435063003311FD /* osmosis_gamm_pool-models_balancer_tx_tx.pb.swift in Sources */,

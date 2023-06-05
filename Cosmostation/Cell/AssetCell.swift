@@ -44,7 +44,14 @@ class AssetCell: UITableViewCell {
         }
         assetSymbol.text = asset!.symbol
         assetDescription.text = asset!.description
-        if (coin.denom == chainConfig?.stakeDenom) {
+        if (chainConfig?.chainType == .NEUTRON_MAIN || chainConfig?.chainType == .NEUTRON_TEST) {
+            let vesting = BaseData.instance.mNeutronVesting
+            let bondedAmount = BaseData.instance.mNeutronVaultDeposit
+            let allAmount = BaseData.instance.getAvailableAmount_gRPC(coin.denom).adding(bondedAmount).adding(vesting)
+            assetAmount.attributedText = WDP.dpAmount(allAmount.stringValue, assetAmount.font!, decimal, 6)
+            WDP.dpAssetValue(geckoId, allAmount, decimal, assetValue)
+            
+        } else if (coin.denom == chainConfig?.stakeDenom) {
             let allAmount = WUtils.getAllMainAsset(coin.denom)
             assetAmount.attributedText = WDP.dpAmount(allAmount.stringValue, assetAmount.font!, decimal, 6)
             WDP.dpAssetValue(geckoId, allAmount, decimal, assetValue)

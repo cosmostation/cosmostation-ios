@@ -80,7 +80,8 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
             return 1
             
         } else if (section == 2) {
-            if (BaseData.instance.onParseRemainVestingsByDenom_gRPC(stakingDenom).count > 0) { return 1 }
+            if (BaseData.instance.onParseRemainVestingsByDenom_gRPC(stakingDenom).count > 0 ||
+                BaseData.instance.mNeutronVesting.compare(NSDecimalNumber.zero).rawValue > 0) { return 1 }
             else { return 0 }
             
         } else if (section == 3) {

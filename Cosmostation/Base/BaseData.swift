@@ -66,6 +66,8 @@ final class BaseData : NSObject{
     var mNeutronVaults = Array<NeutronVault>()
     var mNeutronDaos = Array<NeutronDao>()
     var mNeutronVaultDeposit = NSDecimalNumber.zero
+    var mNeutronVesting = NSDecimalNumber.zero
+    var mNeutronDuration: Int64? = 0
     
     
     //kava gRPC
