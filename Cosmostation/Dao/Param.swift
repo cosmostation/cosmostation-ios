@@ -162,7 +162,7 @@ public struct Param {
             if let ap = params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time > now }).first?.amount {
                 return ap.multiplying(by: getCrescentRewardFact()).multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             }
-        } else if (chain == .AXELAR_MAIN) {
+        } else if (chain == .AXELAR_MAIN || chain == .ONOMY_MAIN) {
             let ap = getMainSupply().multiplying(by: inflation)
             return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             
