@@ -47,7 +47,7 @@ public struct Param {
             return NSDecimalNumber.zero
             
         } else if (chainType == .STARGAZE_MAIN) {
-            if let iap = params?.stargaze_minting_params?.params?.initial_annual_provisions {
+            if let iap = params?.stargaze_annual_provisions {
                 let annualProvisions = NSDecimalNumber.init(string: iap)
                 let starsSupply = getMainSupply()
                 return annualProvisions.dividing(by: starsSupply, withBehavior: WUtils.handler18)
@@ -162,7 +162,7 @@ public struct Param {
             if let ap = params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time > now }).first?.amount {
                 return ap.multiplying(by: getCrescentRewardFact()).multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             }
-        } else if (chain == .AXELAR_MAIN) {
+        } else if (chain == .AXELAR_MAIN || chain == .ONOMY_MAIN) {
             let ap = getMainSupply().multiplying(by: inflation)
             return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             
@@ -401,6 +401,8 @@ public struct Params {
     
     var omniflix_alloc_params: OmniflixAllocParams?
     
+    var stargaze_annual_provisions: String?
+    
     init(_ dictionary: NSDictionary?) {
         if let rawMintingParams = dictionary?["minting_params"] as? NSDictionary {
             self.minting_params = MintingParams.init(rawMintingParams)
@@ -568,6 +570,10 @@ public struct Params {
         
         if let rawOmniflixAllocParams = dictionary?["omniflix_alloc_params"] as? NSDictionary {
             self.omniflix_alloc_params = OmniflixAllocParams.init(rawOmniflixAllocParams)
+        }
+        
+        if let rawStargazeAnnualProvisions = dictionary?["stargaze_annual_provisions"] as? String {
+            self.stargaze_annual_provisions = rawStargazeAnnualProvisions
         }
     }
 }
