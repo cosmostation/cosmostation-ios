@@ -375,7 +375,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
-            cell?.actionDex = { self.onClickSifDex() }
             return cell!
             
         } else if (indexPath.row == 1) {
@@ -801,13 +800,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         osmosisDappVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(osmosisDappVC, animated: true)
-    }
-    
-    func onClickSifDex() {
-        let sifDexDappVC = UIStoryboard(name: "SifChainDex", bundle: nil).instantiateViewController(withIdentifier: "SifDexDAppViewController") as! SifDexDAppViewController
-        sifDexDappVC.hidesBottomBarWhenPushed = true
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(sifDexDappVC, animated: true)
     }
     
     func onClickNFT() {

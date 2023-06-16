@@ -50,8 +50,6 @@ class TransactionViewController: UIViewController {
     var mSwapOutDenom: String?
     var mLockupDuration: Int64?
     
-    var mSifPool: Sifnode_Clp_V1_Pool?
-    
     var mNFTDenomId: String?
     var mNFTTokenId: String?
     var irisResponse: Irismod_Nft_QueryNFTResponse?
@@ -268,21 +266,6 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_begin_unbonding_osmosis", comment: "")
             
-        } else if (mType == TASK_TYPE_SIF_ADD_LP) {
-            stepDescription.text = NSLocalizedString("tx_sif_add_lp_0", comment: "")
-            stepImg.image = UIImage.init(named: "txStep4_1")
-            self.titleLabel.text =  NSLocalizedString("title_pool_join", comment: "")
-            
-        } else if (mType == TASK_TYPE_SIF_REMOVE_LP) {
-            stepDescription.text = NSLocalizedString("tx_sif_remove_lp_0", comment: "")
-            stepImg.image = UIImage.init(named: "txStep4_1")
-            self.titleLabel.text =  NSLocalizedString("title_pool_exit", comment: "")
-            
-        } else if (mType == TASK_TYPE_SIF_SWAP_CION) {
-            stepDescription.text = NSLocalizedString("tx_swap_0", comment: "")
-            stepImg.image = UIImage.init(named: "txStep4_1")
-            self.titleLabel.text =  NSLocalizedString("title_swap_token", comment: "")
-            
         } else if (mType == TASK_TYPE_NFT_ISSUE) {
             stepDescription.text = NSLocalizedString("tx_issue_nft_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
@@ -455,7 +438,6 @@ class TransactionViewController: UIViewController {
             StepVc.mLockupDuration = self.mLockupDuration
 //            StepVc.mLockups = self.mLockups
             
-            StepVc.mSifPool = self.mSifPool
             
             StepVc.mNFTDenomId = self.mNFTDenomId
             StepVc.mNFTTokenId = self.mNFTTokenId
@@ -627,18 +609,6 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_OSMOSIS_BEGIN_UNLCOK) {
                     stepDescription.text = NSLocalizedString("tx_osmosis_begin_unbonding_0", comment: "")
-                    stepImg.image = UIImage.init(named: "txStep4_1")
-                    
-                } else if (mType == TASK_TYPE_SIF_ADD_LP) {
-                    stepDescription.text = NSLocalizedString("tx_sif_add_lp_0", comment: "")
-                    stepImg.image = UIImage.init(named: "txStep4_1")
-                    
-                } else if (mType == TASK_TYPE_SIF_REMOVE_LP) {
-                    stepDescription.text = NSLocalizedString("tx_sif_remove_lp_0", comment: "")
-                    stepImg.image = UIImage.init(named: "txStep4_1")
-                    
-                } else if (mType == TASK_TYPE_SIF_SWAP_CION) {
-                    stepDescription.text = NSLocalizedString("tx_swap_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
                 } else if (mType == TASK_TYPE_NFT_ISSUE) {

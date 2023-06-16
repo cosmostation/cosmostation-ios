@@ -85,11 +85,6 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         //for rizon
         self.txTableView.register(UINib(nibName: "TxRizonEventHorizonCell", bundle: nil), forCellReuseIdentifier: "TxRizonEventHorizonCell")
         
-        //for sif msg type
-        self.txTableView.register(UINib(nibName: "TxSifAddLpCell", bundle: nil), forCellReuseIdentifier: "TxSifAddLpCell")
-        self.txTableView.register(UINib(nibName: "TxSifRemoveLpCell", bundle: nil), forCellReuseIdentifier: "TxSifRemoveLpCell")
-        self.txTableView.register(UINib(nibName: "TxSifSwapCell", bundle: nil), forCellReuseIdentifier: "TxSifSwapCell")
-        
         //for NFT msg type
         self.txTableView.register(UINib(nibName: "TxIssueNFTDenomCell", bundle: nil), forCellReuseIdentifier: "TxIssueNFTDenomCell")
         self.txTableView.register(UINib(nibName: "TxIssueNFTCell", bundle: nil), forCellReuseIdentifier: "TxIssueNFTCell")
@@ -307,23 +302,6 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
                 else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgSwapExactAmountIn.protoMessageName) || msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgSwapExactAmountOut.protoMessageName)) {
                     let cell = tableView.dequeueReusableCell(withIdentifier:"TxTokenSwapCell") as? TxCell
-                    cell?.onBindMsg(chainConfig, mTxRespose!, indexPath.row - 1)
-                    return cell!
-                    
-                }
-                
-                else if (msg.typeURL.contains(Sifnode_Clp_V1_MsgAddLiquidity.protoMessageName)) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxSifAddLpCell") as? TxCell
-                    cell?.onBindMsg(chainConfig, mTxRespose!, indexPath.row - 1)
-                    return cell!
-                    
-                } else if (msg.typeURL.contains(Sifnode_Clp_V1_MsgRemoveLiquidity.protoMessageName)) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxSifRemoveLpCell") as? TxCell
-                    cell?.onBindMsg(chainConfig, mTxRespose!, indexPath.row - 1)
-                    return cell!
-                    
-                } else if (msg.typeURL.contains(Sifnode_Clp_V1_MsgSwap.protoMessageName)) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxSifSwapCell") as? TxCell
                     cell?.onBindMsg(chainConfig, mTxRespose!, indexPath.row - 1)
                     return cell!
                     

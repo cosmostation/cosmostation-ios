@@ -472,39 +472,6 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             
         } 
         
-        else if (pageHolderVC.mType == TASK_TYPE_SIF_ADD_LP) {
-            return Signer.genSimulateSifAddLpMsgTxgRPC(auth, account!.account_pubkey_type,
-                                                       self.account!.account_address,
-                                                       self.pageHolderVC.mPoolCoin0!.amount,
-                                                       self.pageHolderVC.mPoolCoin1!.denom,
-                                                       self.pageHolderVC.mPoolCoin1!.amount,
-                                                       self.mFee, self.pageHolderVC.mMemo!,
-                                                       privateKey, publicKey, self.chainType!)
-            
-        } else if (pageHolderVC.mType == TASK_TYPE_SIF_REMOVE_LP) {
-            var basisPoints = ""
-            let myShareAllAmount = NSDecimalNumber.init(string: self.pageHolderVC.mSifMyAllUnitAmount)
-            let myShareWithdrawAmount = NSDecimalNumber.init(string: self.pageHolderVC.mSifMyWithdrawUnitAmount)
-            basisPoints = myShareWithdrawAmount.multiplying(byPowerOf10: 4).dividing(by: myShareAllAmount, withBehavior: WUtils.handler0).stringValue
-            
-            return Signer.genSimulateSifRemoveLpMsgTxgRPC(auth, account!.account_pubkey_type,
-                                                          self.account!.account_address,
-                                                          self.pageHolderVC.mSifPool!.externalAsset.symbol,
-                                                          basisPoints,
-                                                          self.mFee, self.pageHolderVC.mMemo!,
-                                                          privateKey, publicKey, self.chainType!)
-            
-        } else if (pageHolderVC.mType == TASK_TYPE_SIF_SWAP_CION) {
-            return Signer.genSimulateSifSwapMsgTxgRPC(auth, account!.account_pubkey_type,
-                                                      self.account!.account_address,
-                                                      self.pageHolderVC.mSwapInDenom!,
-                                                      self.pageHolderVC.mSwapInAmount!.stringValue,
-                                                      self.pageHolderVC.mSwapOutDenom!,
-                                                      self.pageHolderVC.mSwapOutAmount!.stringValue,
-                                                      self.mFee, self.pageHolderVC.mMemo!,
-                                                      privateKey, publicKey, self.chainType!)
-        }
-        
         //for NFT
         else if (pageHolderVC.mType == TASK_TYPE_NFT_ISSUE) {
             let stationData = StationNFTData.init(self.pageHolderVC.mNFTName!, self.pageHolderVC.mNFTDescription!, NFT_INFURA + self.pageHolderVC.mNFTHash!,

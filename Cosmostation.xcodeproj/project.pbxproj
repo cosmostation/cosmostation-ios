@@ -747,29 +747,6 @@
 		047966502757409700315D55 /* MintscanProposalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479664F2757409700315D55 /* MintscanProposalDetail.swift */; };
 		047DCEE228855F4800253CAA /* MintscanMyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DCEE128855F4800253CAA /* MintscanMyVote.swift */; };
 		047DCEE328855F4800253CAA /* MintscanMyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DCEE128855F4800253CAA /* MintscanMyVote.swift */; };
-		047FB6E1281A4C52009D8AAF /* sifnode_dispensation_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CA281A4C4F009D8AAF /* sifnode_dispensation_v1_query.pb.swift */; };
-		047FB6E2281A4C52009D8AAF /* sifnode_clp_v1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CB281A4C4F009D8AAF /* sifnode_clp_v1_params.pb.swift */; };
-		047FB6E3281A4C52009D8AAF /* sifnode_dispensation_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CC281A4C4F009D8AAF /* sifnode_dispensation_v1_tx.grpc.swift */; };
-		047FB6E4281A4C52009D8AAF /* sifnode_ethbridge_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CD281A4C4F009D8AAF /* sifnode_ethbridge_v1_query.grpc.swift */; };
-		047FB6E5281A4C52009D8AAF /* sifnode_ethbridge_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CE281A4C4F009D8AAF /* sifnode_ethbridge_v1_tx.pb.swift */; };
-		047FB6E6281A4C52009D8AAF /* sifnode_ethbridge_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CF281A4C50009D8AAF /* sifnode_ethbridge_v1_types.pb.swift */; };
-		047FB6E7281A4C53009D8AAF /* sifnode_tokenregistry_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D0281A4C50009D8AAF /* sifnode_tokenregistry_v1_query.grpc.swift */; };
-		047FB6E8281A4C53009D8AAF /* sifnode_tokenregistry_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D1281A4C50009D8AAF /* sifnode_tokenregistry_v1_tx.pb.swift */; };
-		047FB6E9281A4C53009D8AAF /* sifnode_clp_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D2281A4C50009D8AAF /* sifnode_clp_v1_types.pb.swift */; };
-		047FB6EA281A4C53009D8AAF /* sifnode_clp_v1_querier.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D3281A4C50009D8AAF /* sifnode_clp_v1_querier.pb.swift */; };
-		047FB6EB281A4C53009D8AAF /* sifnode_tokenregistry_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D4281A4C50009D8AAF /* sifnode_tokenregistry_v1_types.pb.swift */; };
-		047FB6EC281A4C53009D8AAF /* sifnode_ethbridge_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D5281A4C51009D8AAF /* sifnode_ethbridge_v1_query.pb.swift */; };
-		047FB6ED281A4C53009D8AAF /* sifnode_ethbridge_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D6281A4C51009D8AAF /* sifnode_ethbridge_v1_tx.grpc.swift */; };
-		047FB6EE281A4C53009D8AAF /* sifnode_tokenregistry_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D7281A4C51009D8AAF /* sifnode_tokenregistry_v1_query.pb.swift */; };
-		047FB6EF281A4C53009D8AAF /* sifnode_clp_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D8281A4C51009D8AAF /* sifnode_clp_v1_tx.pb.swift */; };
-		047FB6F0281A4C53009D8AAF /* sifnode_tokenregistry_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D9281A4C51009D8AAF /* sifnode_tokenregistry_v1_tx.grpc.swift */; };
-		047FB6F1281A4C53009D8AAF /* sifnode_clp_v1_querier.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DA281A4C51009D8AAF /* sifnode_clp_v1_querier.grpc.swift */; };
-		047FB6F2281A4C53009D8AAF /* sifnode_dispensation_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DB281A4C51009D8AAF /* sifnode_dispensation_v1_tx.pb.swift */; };
-		047FB6F3281A4C53009D8AAF /* sifnode_clp_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DC281A4C52009D8AAF /* sifnode_clp_v1_tx.grpc.swift */; };
-		047FB6F4281A4C53009D8AAF /* sifnode_clp_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DD281A4C52009D8AAF /* sifnode_clp_v1_genesis.pb.swift */; };
-		047FB6F5281A4C53009D8AAF /* sifnode_dispensation_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DE281A4C52009D8AAF /* sifnode_dispensation_v1_types.pb.swift */; };
-		047FB6F6281A4C53009D8AAF /* sifnode_oracle_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DF281A4C52009D8AAF /* sifnode_oracle_v1_types.pb.swift */; };
-		047FB6F7281A4C53009D8AAF /* sifnode_dispensation_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6E0281A4C52009D8AAF /* sifnode_dispensation_v1_query.grpc.swift */; };
 		047FB6F9281A5823009D8AAF /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6F8281A5822009D8AAF /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift */; };
 		047FB6FC281AA8D7009D8AAF /* MnemonicListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6FA281AA8D7009D8AAF /* MnemonicListViewController.swift */; };
 		047FB6FD281AA8D7009D8AAF /* MnemonicListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047FB6FB281AA8D7009D8AAF /* MnemonicListViewController.xib */; };
@@ -1547,7 +1524,6 @@
 		1817CAB1283E2CE500523713 /* ibc_lightclients_solomachine_v1_solomachine.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA599275F559C00229F6F /* ibc_lightclients_solomachine_v1_solomachine.pb.swift */; };
 		1817CAB2283E2CE500523713 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA788275F55C000229F6F /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */; };
 		1817CAB4283E2CE500523713 /* evmos_incentives_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82FC27BF572800270528 /* evmos_incentives_v1_query.pb.swift */; };
-		1817CAB5283E2CE500523713 /* sifnode_dispensation_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CA281A4C4F009D8AAF /* sifnode_dispensation_v1_query.pb.swift */; };
 		1817CAB9283E2CE500523713 /* evmos_epochs_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82DC27BF572400270528 /* evmos_epochs_v1_genesis.pb.swift */; };
 		1817CABC283E2CE500523713 /* band_oracle_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA546275F559700229F6F /* band_oracle_v1_tx.pb.swift */; };
 		1817CABE283E2CE500523713 /* crescent_liquidstaking_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338F027E826EF00E82AA7 /* crescent_liquidstaking_v1beta1_tx.pb.swift */; };
@@ -1576,24 +1552,20 @@
 		1817CAEA283E2CE500523713 /* evmos_erc20_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82F427BF572700270528 /* evmos_erc20_v1_tx.grpc.swift */; };
 		1817CAEB283E2CE500523713 /* cosmos_slashing_v1beta1_slashing.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA565275F559900229F6F /* cosmos_slashing_v1beta1_slashing.pb.swift */; };
 		1817CAEC283E2CE500523713 /* cosmos_upgrade_v1beta1_upgrade.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA506275F559300229F6F /* cosmos_upgrade_v1beta1_upgrade.pb.swift */; };
-		1817CAED283E2CE500523713 /* sifnode_clp_v1_querier.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DA281A4C51009D8AAF /* sifnode_clp_v1_querier.grpc.swift */; };
 		1817CAF4283E2CE500523713 /* starname_cosmwasm_wasm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA49A275F558C00229F6F /* starname_cosmwasm_wasm_v1_tx.pb.swift */; };
 		1817CAF5283E2CE500523713 /* gravity_v1_msgs.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA524275F559500229F6F /* gravity_v1_msgs.pb.swift */; };
 		1817CAF7283E2CE500523713 /* cosmos_evidence_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA494275F558C00229F6F /* cosmos_evidence_v1beta1_query.grpc.swift */; };
 		1817CAF9283E2CE500523713 /* ibc_core_connection_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA742275F55BA00229F6F /* ibc_core_connection_v1_query.pb.swift */; };
 		1817CAFA283E2CE500523713 /* cosmos_bank_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C6275F559F00229F6F /* cosmos_bank_v1beta1_tx.pb.swift */; };
-		1817CAFC283E2CE500523713 /* sifnode_dispensation_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DE281A4C52009D8AAF /* sifnode_dispensation_v1_types.pb.swift */; };
 		1817CAFD283E2CE500523713 /* cosmos_mint_v1beta1_mint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA460275F558900229F6F /* cosmos_mint_v1beta1_mint.pb.swift */; };
 		1817CAFE283E2CE500523713 /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA733275F55B900229F6F /* cosmos_feegrant_v1beta1_tx.pb.swift */; };
 		1817CB02283E2CE500523713 /* cosmos_crisis_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4AA275F558D00229F6F /* cosmos_crisis_v1beta1_tx.grpc.swift */; };
 		1817CB03283E2CE500523713 /* iris_mod_nft_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA509275F559300229F6F /* iris_mod_nft_tx.grpc.swift */; };
 		1817CB05283E2CE500523713 /* crescent_farming_v1beta1_farming.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338EB27E826EF00E82AA7 /* crescent_farming_v1beta1_farming.pb.swift */; };
-		1817CB06283E2CE500523713 /* sifnode_dispensation_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DB281A4C51009D8AAF /* sifnode_dispensation_v1_tx.pb.swift */; };
 		1817CB07283E2CE500523713 /* cosmos_bank_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA62B275F55A600229F6F /* cosmos_bank_v1beta1_genesis.pb.swift */; };
 		1817CB09283E2CE500523713 /* cosmos_distribution_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA47B275F558A00229F6F /* cosmos_distribution_v1beta1_tx.pb.swift */; };
 		1817CB0A283E2CE500523713 /* cosmos_gov_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6D1275F55B200229F6F /* cosmos_gov_v1beta1_query.pb.swift */; };
 		1817CB0B283E2CE500523713 /* cosmos_feegrant_v1beta1_feegrant.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA713275F55B700229F6F /* cosmos_feegrant_v1beta1_feegrant.pb.swift */; };
-		1817CB0C283E2CE500523713 /* sifnode_tokenregistry_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D7281A4C51009D8AAF /* sifnode_tokenregistry_v1_query.pb.swift */; };
 		1817CB0D283E2CE500523713 /* ibc_applications_transfer_v2_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA630275F55A700229F6F /* ibc_applications_transfer_v2_packet.pb.swift */; };
 		1817CB0E283E2CE500523713 /* injective_types_v1beta1_account.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA664275F55AA00229F6F /* injective_types_v1beta1_account.pb.swift */; };
 		1817CB10283E2CE500523713 /* cosmos_params_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA648275F55A800229F6F /* cosmos_params_v1beta1_query.grpc.swift */; };
@@ -1606,7 +1578,6 @@
 		1817CB1E283E2CE500523713 /* starname_iov_configuration_v1beta1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA703275F55B600229F6F /* starname_iov_configuration_v1beta1_types.pb.swift */; };
 		1817CB1F283E2CE500523713 /* cosmos_evidence_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4C1275F558F00229F6F /* cosmos_evidence_v1beta1_query.pb.swift */; };
 		1817CB20283E2CE500523713 /* desmos_profiles_legacy_v100_models_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA58A275F559B00229F6F /* desmos_profiles_legacy_v100_models_params.pb.swift */; };
-		1817CB21283E2CE500523713 /* sifnode_clp_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D2281A4C50009D8AAF /* sifnode_clp_v1_types.pb.swift */; };
 		1817CB22283E2CE500523713 /* cosmos_crypto_multisig_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6FB275F55B500229F6F /* cosmos_crypto_multisig_keys.pb.swift */; };
 		1817CB23283E2CE500523713 /* starname_iov_escrow_v1beta1_test.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA593275F559C00229F6F /* starname_iov_escrow_v1beta1_test.pb.swift */; };
 		1817CB25283E2CE500523713 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4CD275F559000229F6F /* ibc_applications_transfer_v1_transfer.pb.swift */; };
@@ -1617,15 +1588,12 @@
 		1817CB2A283E2CE500523713 /* desmos_profiles_v1beta1_msg_server.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5E0275F55A100229F6F /* desmos_profiles_v1beta1_msg_server.grpc.swift */; };
 		1817CB2B283E2CE500523713 /* cosmos_feegrant_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6D0275F55B200229F6F /* cosmos_feegrant_v1beta1_tx.grpc.swift */; };
 		1817CB2E283E2CE500523713 /* cosmwasm_wasm_v1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1C27A3BC4500B1236A /* cosmwasm_wasm_v1_proposal.pb.swift */; };
-		1817CB2F283E2CE500523713 /* sifnode_tokenregistry_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D4281A4C50009D8AAF /* sifnode_tokenregistry_v1_types.pb.swift */; };
-		1817CB30283E2CE500523713 /* sifnode_tokenregistry_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D1281A4C50009D8AAF /* sifnode_tokenregistry_v1_tx.pb.swift */; };
 		1817CB31283E2CE500523713 /* crescent_liquidity_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338ED27E826EF00E82AA7 /* crescent_liquidity_v1beta1_tx.grpc.swift */; };
 		1817CB33283E2CE500523713 /* evmos_claims_v1_claims.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82E527BF572500270528 /* evmos_claims_v1_claims.pb.swift */; };
 		1817CB34283E2CE500523713 /* desmos_profiles_v1beta1_query_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5A5275F559D00229F6F /* desmos_profiles_v1beta1_query_profile.pb.swift */; };
 		1817CB35283E2CE500523713 /* cryptoorg_nft_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA455275F558800229F6F /* cryptoorg_nft_v1_query.pb.swift */; };
 		1817CB36283E2CE500523713 /* desmos_profiles_v1beta1_client_cli.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5BB275F559F00229F6F /* desmos_profiles_v1beta1_client_cli.pb.swift */; };
 		1817CB39283E2CE500523713 /* ibc_core_client_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA64E275F55A900229F6F /* ibc_core_client_v1_query.grpc.swift */; };
-		1817CB3A283E2CE500523713 /* sifnode_ethbridge_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CE281A4C4F009D8AAF /* sifnode_ethbridge_v1_tx.pb.swift */; };
 		1817CB3B283E2CE500523713 /* desmos_profiles_v1beta1_query_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4EB275F559100229F6F /* desmos_profiles_v1beta1_query_chain_links.pb.swift */; };
 		1817CB3C283E2CE500523713 /* injective_types_v1beta1_tx_ext.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA508275F559300229F6F /* injective_types_v1beta1_tx_ext.pb.swift */; };
 		1817CB3D283E2CE500523713 /* cryptoorg_nft_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B6275F559E00229F6F /* cryptoorg_nft_v1_query.grpc.swift */; };
@@ -1633,12 +1601,10 @@
 		1817CB3F283E2CE500523713 /* crescent_farming_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338E627E826EE00E82AA7 /* crescent_farming_v1beta1_tx.grpc.swift */; };
 		1817CB41283E2CE500523713 /* cosmos_base_store_v1beta1_snapshot.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA613275F55A500229F6F /* cosmos_base_store_v1beta1_snapshot.pb.swift */; };
 		1817CB42283E2CE500523713 /* cosmos_upgrade_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5F4275F55A300229F6F /* cosmos_upgrade_v1beta1_query.grpc.swift */; };
-		1817CB45283E2CE500523713 /* sifnode_tokenregistry_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D0281A4C50009D8AAF /* sifnode_tokenregistry_v1_query.grpc.swift */; };
 		1817CB47283E2CE500523713 /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4BE275F558F00229F6F /* cosmos_evidence_v1beta1_tx.grpc.swift */; };
 		1817CB49283E2CE500523713 /* ibc_core_client_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C2275F559F00229F6F /* ibc_core_client_v1_query.pb.swift */; };
 		1817CB4C283E2CE500523713 /* cosmos_gov_v1beta2_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA46C275F558900229F6F /* cosmos_gov_v1beta2_gov.pb.swift */; };
 		1817CB4D283E2CE500523713 /* starname_cosmwasm_wasm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA568275F559900229F6F /* starname_cosmwasm_wasm_v1_query.pb.swift */; };
-		1817CB4E283E2CE500523713 /* sifnode_tokenregistry_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D9281A4C51009D8AAF /* sifnode_tokenregistry_v1_tx.grpc.swift */; };
 		1817CB4F283E2CE500523713 /* cosmos_staking_v1beta1_authz.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA535275F559600229F6F /* cosmos_staking_v1beta1_authz.pb.swift */; };
 		1817CB51283E2CE500523713 /* google_api_annotations.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA67F275F55AC00229F6F /* google_api_annotations.pb.swift */; };
 		1817CB55283E2CE500523713 /* starname_iov_escrow_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4ED275F559200229F6F /* starname_iov_escrow_v1beta1_tx.grpc.swift */; };
@@ -1646,7 +1612,6 @@
 		1817CB5B283E2CE500523713 /* cosmos_gov_v1beta2_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B3275F559E00229F6F /* cosmos_gov_v1beta2_tx.grpc.swift */; };
 		1817CB5C283E2CE500523713 /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4BB275F558E00229F6F /* cosmos_base_tendermint_v1beta1_query.pb.swift */; };
 		1817CB5D283E2CE500523713 /* crescent_liquidstaking_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338E227E826EE00E82AA7 /* crescent_liquidstaking_v1beta1_query.pb.swift */; };
-		1817CB5F283E2CE500523713 /* sifnode_oracle_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DF281A4C52009D8AAF /* sifnode_oracle_v1_types.pb.swift */; };
 		1817CB60283E2CE500523713 /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA578275F559A00229F6F /* cosmos_crypto_secp256r1_keys.pb.swift */; };
 		1817CB64283E2CE500523713 /* crescent_claim_v1beta1_claim.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338FC27E826F100E82AA7 /* crescent_claim_v1beta1_claim.pb.swift */; };
 		1817CB65283E2CE500523713 /* cosmos_staking_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4EA275F559100229F6F /* cosmos_staking_v1beta1_tx.pb.swift */; };
@@ -1654,7 +1619,6 @@
 		1817CB67283E2CE500523713 /* starname_iov_escrow_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA777275F55BE00229F6F /* starname_iov_escrow_v1beta1_query.pb.swift */; };
 		1817CB68283E2CE500523713 /* ibc_core_port_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA48A275F558B00229F6F /* ibc_core_port_v1_query.pb.swift */; };
 		1817CB69283E2CE500523713 /* cryptoorg_nft_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4BF275F558F00229F6F /* cryptoorg_nft_v1_tx.grpc.swift */; };
-		1817CB6A283E2CE500523713 /* sifnode_dispensation_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6E0281A4C52009D8AAF /* sifnode_dispensation_v1_query.grpc.swift */; };
 		1817CB6B283E2CE500523713 /* cosmos_bank_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4A0275F558D00229F6F /* cosmos_bank_v1beta1_tx.grpc.swift */; };
 		1817CB72283E2CE500523713 /* evmos_epochs_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82DF27BF572400270528 /* evmos_epochs_v1_query.pb.swift */; };
 		1817CB73283E2CE500523713 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4E3275F559100229F6F /* desmos_profiles_v1beta1_models_app_links.pb.swift */; };
@@ -1673,10 +1637,8 @@
 		1817CB89283E2CE500523713 /* evmos_vesting_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82E427BF572500270528 /* evmos_vesting_v1_tx.pb.swift */; };
 		1817CB8B283E2CE500523713 /* evmos_epochs_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82DB27BF572400270528 /* evmos_epochs_v1_query.grpc.swift */; };
 		1817CB8C283E2CE500523713 /* crescent_liquidity_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338F827E826F000E82AA7 /* crescent_liquidity_v1beta1_query.grpc.swift */; };
-		1817CB8D283E2CE500523713 /* sifnode_clp_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D8281A4C51009D8AAF /* sifnode_clp_v1_tx.pb.swift */; };
 		1817CB8E283E2CE500523713 /* cosmos_base_v1beta1_coin.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4F7275F559200229F6F /* cosmos_base_v1beta1_coin.pb.swift */; };
 		1817CB8F283E2CE500523713 /* cosmos_nft_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C3275F559F00229F6F /* cosmos_nft_v1beta1_query.grpc.swift */; };
-		1817CB91283E2CE500523713 /* sifnode_ethbridge_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D5281A4C51009D8AAF /* sifnode_ethbridge_v1_query.pb.swift */; };
 		1817CB94283E2CE500523713 /* desmos_profiles_v1beta1_msgs_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6EA275F55B400229F6F /* desmos_profiles_v1beta1_msgs_chain_links.pb.swift */; };
 		1817CB95283E2CE500523713 /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA52F275F559600229F6F /* cosmos_staking_v1beta1_genesis.pb.swift */; };
 		1817CB97283E2CE500523713 /* evmos_inflation_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82FA27BF572700270528 /* evmos_inflation_v1_query.grpc.swift */; };
@@ -1703,7 +1665,6 @@
 		1817CBB6283E2CE500523713 /* cosmos_base_reflection_v1beta1_reflection.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5F7275F55A300229F6F /* cosmos_base_reflection_v1beta1_reflection.grpc.swift */; };
 		1817CBB7283E2CE500523713 /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4CE275F559000229F6F /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift */; };
 		1817CBB8283E2CE500523713 /* google_api_http.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA75A275F55BC00229F6F /* google_api_http.pb.swift */; };
-		1817CBBA283E2CE500523713 /* sifnode_ethbridge_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CD281A4C4F009D8AAF /* sifnode_ethbridge_v1_query.grpc.swift */; };
 		1817CBBB283E2CE500523713 /* starname_cosmwasm_wasm_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA706275F55B600229F6F /* starname_cosmwasm_wasm_v1_types.pb.swift */; };
 		1817CBBD283E2CE500523713 /* cryptoorg_supply_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA44B275F558800229F6F /* cryptoorg_supply_v1_query.pb.swift */; };
 		1817CBC0283E2CE500523713 /* cosmos_slashing_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C7275F55A000229F6F /* cosmos_slashing_v1beta1_query.pb.swift */; };
@@ -1711,7 +1672,6 @@
 		1817CBC2283E2CE500523713 /* cosmos_mint_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6F0275F55B400229F6F /* cosmos_mint_v1beta1_query.grpc.swift */; };
 		1817CBC3283E2CE500523713 /* crescent_farming_v1beta1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338F927E826F000E82AA7 /* crescent_farming_v1beta1_proposal.pb.swift */; };
 		1817CBC6283E2CE500523713 /* cosmos_staking_v1beta1_staking.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5CE275F55A000229F6F /* cosmos_staking_v1beta1_staking.pb.swift */; };
-		1817CBC8283E2CE500523713 /* sifnode_dispensation_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CC281A4C4F009D8AAF /* sifnode_dispensation_v1_tx.grpc.swift */; };
 		1817CBCA283E2CE500523713 /* cosmos_gov_v1beta2_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA64A275F55A800229F6F /* cosmos_gov_v1beta2_tx.pb.swift */; };
 		1817CBCE283E2CE600523713 /* cosmos_base_abci_v1beta1_abci.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA694275F55AE00229F6F /* cosmos_base_abci_v1beta1_abci.pb.swift */; };
 		1817CBCF283E2CE600523713 /* ibc_core_client_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA66A275F55AB00229F6F /* ibc_core_client_v1_genesis.pb.swift */; };
@@ -1722,9 +1682,7 @@
 		1817CBDB283E2CE600523713 /* crescent_liquidstaking_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338EC27E826EF00E82AA7 /* crescent_liquidstaking_v1beta1_query.grpc.swift */; };
 		1817CBDC283E2CE600523713 /* cosmwasm_wasm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1827A3BC4400B1236A /* cosmwasm_wasm_v1_tx.grpc.swift */; };
 		1817CBDD283E2CE600523713 /* cosmos_gov_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA67A275F55AC00229F6F /* cosmos_gov_v1beta1_tx.grpc.swift */; };
-		1817CBDE283E2CE600523713 /* sifnode_clp_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DD281A4C52009D8AAF /* sifnode_clp_v1_genesis.pb.swift */; };
 		1817CBDF283E2CE600523713 /* desmos_profiles_v1beta1_msgs_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5D0275F55A000229F6F /* desmos_profiles_v1beta1_msgs_app_links.pb.swift */; };
-		1817CBE0283E2CE600523713 /* sifnode_clp_v1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CB281A4C4F009D8AAF /* sifnode_clp_v1_params.pb.swift */; };
 		1817CBE1283E2CE600523713 /* cosmos_group_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA496275F558C00229F6F /* cosmos_group_v1beta1_query.pb.swift */; };
 		1817CBE2283E2CE600523713 /* cosmos_crisis_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4F8275F559200229F6F /* cosmos_crisis_v1beta1_tx.pb.swift */; };
 		1817CBE4283E2CE600523713 /* evmos_claims_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82E927BF572500270528 /* evmos_claims_v1_genesis.pb.swift */; };
@@ -1738,7 +1696,6 @@
 		1817CBF5283E2CE600523713 /* desmos_profiles_v1beta1_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B0275F559E00229F6F /* desmos_profiles_v1beta1_models_profile.pb.swift */; };
 		1817CBF6283E2CE600523713 /* desmos_profiles_v1beta1_query_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA687275F55AD00229F6F /* desmos_profiles_v1beta1_query_params.pb.swift */; };
 		1817CBF7283E2CE600523713 /* crescent_liquidstaking_v1beta1_liquidstaking.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338E327E826EE00E82AA7 /* crescent_liquidstaking_v1beta1_liquidstaking.pb.swift */; };
-		1817CBF8283E2CE600523713 /* sifnode_clp_v1_querier.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D3281A4C50009D8AAF /* sifnode_clp_v1_querier.pb.swift */; };
 		1817CBF9283E2CE600523713 /* gravity_v1_gravity.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA757275F55BC00229F6F /* gravity_v1_gravity.pb.swift */; };
 		1817CBFC283E2CE600523713 /* cosmos_gov_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6A1275F55AF00229F6F /* cosmos_gov_v1beta1_query.grpc.swift */; };
 		1817CBFF283E2CE600523713 /* cosmos_bank_v1beta1_authz.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA763275F55BD00229F6F /* cosmos_bank_v1beta1_authz.pb.swift */; };
@@ -1766,7 +1723,6 @@
 		1817CC1C283E2CE600523713 /* crescent_liquidity_v1beta1_liquidity.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338F227E826F000E82AA7 /* crescent_liquidity_v1beta1_liquidity.pb.swift */; };
 		1817CC1D283E2CE600523713 /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA555275F559800229F6F /* cosmos_staking_v1beta1_tx.grpc.swift */; };
 		1817CC1F283E2CE600523713 /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5DF275F55A100229F6F /* desmos_profiles_v1beta1_models_relationships.pb.swift */; };
-		1817CC23283E2CE600523713 /* sifnode_clp_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DC281A4C52009D8AAF /* sifnode_clp_v1_tx.grpc.swift */; };
 		1817CC24283E2CE600523713 /* starname_cosmwasm_wasm_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C0275F559F00229F6F /* starname_cosmwasm_wasm_v1_genesis.pb.swift */; };
 		1817CC25283E2CE600523713 /* desmos_profiles_v1beta1_msgs_relationships.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C5275F559F00229F6F /* desmos_profiles_v1beta1_msgs_relationships.pb.swift */; };
 		1817CC27283E2CE600523713 /* band_oracle_v1_oracle.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA677275F55AC00229F6F /* band_oracle_v1_oracle.pb.swift */; };
@@ -1776,7 +1732,6 @@
 		1817CC2C283E2CE600523713 /* cosmos_gov_v1beta1_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6FC275F55B500229F6F /* cosmos_gov_v1beta1_gov.pb.swift */; };
 		1817CC2D283E2CE600523713 /* ibc_lightclients_localhost_v1_localhost.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA541275F559700229F6F /* ibc_lightclients_localhost_v1_localhost.pb.swift */; };
 		1817CC2E283E2CE600523713 /* desmos_profiles_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4D5275F559000229F6F /* desmos_profiles_v1beta1_query.pb.swift */; };
-		1817CC30283E2CE600523713 /* sifnode_ethbridge_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CF281A4C50009D8AAF /* sifnode_ethbridge_v1_types.pb.swift */; };
 		1817CC31283E2CE600523713 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA589275F559B00229F6F /* ibc_lightclients_solomachine_v2_solomachine.pb.swift */; };
 		1817CC35283E2CE600523713 /* desmos_profiles_v1beta1_msgs_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA643275F55A800229F6F /* desmos_profiles_v1beta1_msgs_profile.pb.swift */; };
 		1817CC36283E2CE600523713 /* crescent_claim_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338F627E826F000E82AA7 /* crescent_claim_v1beta1_query.pb.swift */; };
@@ -1793,7 +1748,6 @@
 		1817CC4B283E2CE600523713 /* cosmos_nft_v1beta1_nft.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA722275F55B800229F6F /* cosmos_nft_v1beta1_nft.pb.swift */; };
 		1817CC4D283E2CE600523713 /* cosmos_vesting_v1beta1_vesting.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA533275F559600229F6F /* cosmos_vesting_v1beta1_vesting.pb.swift */; };
 		1817CC4F283E2CE600523713 /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA518275F559400229F6F /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift */; };
-		1817CC50283E2CE600523713 /* sifnode_ethbridge_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D6281A4C51009D8AAF /* sifnode_ethbridge_v1_tx.grpc.swift */; };
 		1817CC51283E2CE600523713 /* crescent_mint_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338F327E826F000E82AA7 /* crescent_mint_v1beta1_query.grpc.swift */; };
 		1817CC52283E2CE600523713 /* starname_cosmwasm_wasm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4FB275F559200229F6F /* starname_cosmwasm_wasm_v1_query.grpc.swift */; };
 		1817CC53283E2CE600523713 /* evmos_claims_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82E627BF572500270528 /* evmos_claims_v1_query.pb.swift */; };
@@ -1947,7 +1901,6 @@
 		18FFB278281AF533004E65BB /* WalletDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1827E0F2254C92900BC0350 /* WalletDetailViewController.swift */; };
 		18FFB27E281AF533004E65BB /* KavaSwapExit0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EEECAA26DAE9B4002DDC4A /* KavaSwapExit0ViewController.swift */; };
 		18FFB284281AF533004E65BB /* DenomsToClaim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FBC7326DB961A00403FE2 /* DenomsToClaim.swift */; };
-		18FFB285281AF533004E65BB /* SifDexSwapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8FAF22719C279005EAA9B /* SifDexSwapViewController.swift */; };
 		18FFB28C281AF533004E65BB /* MemoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FEE45A225B1AEF0040FAFD /* MemoTextView.swift */; };
 		18FFB28E281AF533004E65BB /* WalletCrytoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2829CEA52627080C0048B52A /* WalletCrytoCell.swift */; };
 		18FFB298281AF533004E65BB /* TokenDetailUnbondingDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2876AD58240CDC5A005B33F4 /* TokenDetailUnbondingDetailCell.swift */; };
@@ -1958,7 +1911,6 @@
 		18FFB2A9281AF533004E65BB /* OkUnbonding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2EAB24F56AFF00247424 /* OkUnbonding.swift */; };
 		18FFB2AF281AF533004E65BB /* BandOracleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428ACFD268AD31700EB438F /* BandOracleStatus.swift */; };
 		18FFB2B2281AF533004E65BB /* WalletOsmoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852EAEE2681A4CC003A5E74 /* WalletOsmoCell.swift */; };
-		18FFB2B3281AF533004E65BB /* SifExitPool3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C69271E7BC800B4A7C3 /* SifExitPool3ViewController.swift */; };
 		18FFB2B5281AF533004E65BB /* BnbNodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2888B7FB246BC17300B2EB4A /* BnbNodeInfo.swift */; };
 		18FFB2BA281AF533004E65BB /* TxIbcReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFBD4B2692274B0013150B /* TxIbcReceiveCell.swift */; };
 		18FFB2BC281AF533004E65BB /* EditHideChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287654712726BFE80071FF96 /* EditHideChainCell.swift */; };
@@ -2004,18 +1956,15 @@
 		18FFB332281AF533004E65BB /* KeyFac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281008492696D979002986A6 /* KeyFac.swift */; };
 		18FFB336281AF533004E65BB /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B23224A083E0019B7BB /* KeyboardViewController.swift */; };
 		18FFB33A281AF533004E65BB /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
-		18FFB33C281AF533004E65BB /* SifDexEthPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8FAF42719C28F005EAA9B /* SifDexEthPoolViewController.swift */; };
 		18FFB341281AF533004E65BB /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E086268C0A6700088391 /* RIPEMD160.swift */; };
 		18FFB342281AF533004E65BB /* RegisterDomain0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E9456254901D9007A9291 /* RegisterDomain0ViewController.swift */; };
 		18FFB34C281AF533004E65BB /* KavaSwapParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28129566250F5072007B217E /* KavaSwapParam.swift */; };
 		18FFB34D281AF533004E65BB /* InOutPut.swift in Sources */ = {isa = PBXBuildFile; fileRef = E151B63E22484A710026B8C0 /* InOutPut.swift */; };
 		18FFB34F281AF533004E65BB /* PoolListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B37D2926D8EAFE008AACD2 /* PoolListViewController.swift */; };
 		18FFB350281AF533004E65BB /* RegisterAccount0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3729E254BFCCA0071B136 /* RegisterAccount0ViewController.swift */; };
-		18FFB352281AF533004E65BB /* SifDexIbcPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8FAF62719C29F005EAA9B /* SifDexIbcPoolViewController.swift */; };
 		18FFB353281AF533004E65BB /* MainTabHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E49222E81B300A1436F /* MainTabHistoryViewController.swift */; };
 		18FFB356281AF533004E65BB /* LinkChainAccount3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983C99278B046D00F913A3 /* LinkChainAccount3ViewController.swift */; };
 		18FFB358281AF533004E65BB /* TxIssueNFTDenomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF01C277B766200F72C11 /* TxIssueNFTDenomCell.swift */; };
-		18FFB35D281AF533004E65BB /* TxSifAddLpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288F8078270DDEFA009825B5 /* TxSifAddLpCell.swift */; };
 		18FFB362281AF533004E65BB /* TxDetailgRPCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28641F2A2601959E000AAEB8 /* TxDetailgRPCViewController.swift */; };
 		18FFB369281AF533004E65BB /* KavaSwap3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EEEC9E26DABA83002DDC4A /* KavaSwap3ViewController.swift */; };
 		18FFB36A281AF533004E65BB /* NewHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288D24FE268326060093121A /* NewHistoryCell.swift */; };
@@ -2061,9 +2010,7 @@
 		18FFB406281AF533004E65BB /* NFTsDAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25D39276F6CB5009B39BA /* NFTsDAppViewController.swift */; };
 		18FFB40C281AF533004E65BB /* SelectDesmosAirdopAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983C9D278B376500F913A3 /* SelectDesmosAirdopAccountCell.swift */; };
 		18FFB40E281AF533004E65BB /* TxCdpBorrowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28474EC2241E06AF00AF5A81 /* TxCdpBorrowCell.swift */; };
-		18FFB40F281AF533004E65BB /* SifDexDAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8FAF02719C265005EAA9B /* SifDexDAppViewController.swift */; };
 		18FFB410281AF533004E65BB /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E151B657224873640026B8C0 /* SettingTableViewController.swift */; };
-		18FFB412281AF533004E65BB /* SifPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B9B686271DC5DD0067C6AE /* SifPoolCell.swift */; };
 		18FFB41A281AF533004E65BB /* WalletSifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28105892262EE638009244B8 /* WalletSifCell.swift */; };
 		18FFB41B281AF533004E65BB /* Bep3SupplyPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2868558D24989A8F0099D18F /* Bep3SupplyPopup.swift */; };
 		18FFB41E281AF533004E65BB /* BinanceSegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9042268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift */; };
@@ -2079,7 +2026,6 @@
 		18FFB43C281AF533004E65BB /* BinanceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9036268C3F29002CFFE1 /* BinanceMessage.swift */; };
 		18FFB43E281AF533004E65BB /* Swap3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2839C1FB26A2A47C00638EBC /* Swap3ViewController.swift */; };
 		18FFB440281AF533004E65BB /* TxHardLiquidateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2889FD7A260337C600CA9896 /* TxHardLiquidateCell.swift */; };
-		18FFB441281AF533004E65BB /* TxSifSwapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288F8074270DDEE8009825B5 /* TxSifSwapCell.swift */; };
 		18FFB442281AF533004E65BB /* TxOkStakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4303724F7996C00BD7BB2 /* TxOkStakeCell.swift */; };
 		18FFB444281AF533004E65BB /* WcTradePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282BDFE024A5992500D3A5D4 /* WcTradePopup.swift */; };
 		18FFB44C281AF533004E65BB /* WcSignRequestPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */; };
@@ -2107,12 +2053,9 @@
 		18FFB49B281AF533004E65BB /* CdpWarnPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2868559524989AB80099D18F /* CdpWarnPopup.swift */; };
 		18FFB4A1281AF533004E65BB /* MainTabSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E4D222E81D000A1436F /* MainTabSettingViewController.swift */; };
 		18FFB4A2281AF533004E65BB /* DelegateWarnPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2868559924989ACD0099D18F /* DelegateWarnPopup.swift */; };
-		18FFB4A5281AF533004E65BB /* SifSwap3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C59271E7B7800B4A7C3 /* SifSwap3ViewController.swift */; };
 		18FFB4AB281AF533004E65BB /* HarvestDetailTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28156E982536DE14006FF06C /* HarvestDetailTopCell.swift */; };
 		18FFB4AF281AF533004E65BB /* NTFDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25D3F2770C8BE009B39BA /* NTFDetailViewController.swift */; };
-		18FFB4B0281AF533004E65BB /* SifJoinPool3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C61271E7BA300B4A7C3 /* SifJoinPool3ViewController.swift */; };
 		18FFB4B1281AF533004E65BB /* OkMyValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4304524F8B36600BD7BB2 /* OkMyValidatorViewController.swift */; };
-		18FFB4B2281AF533004E65BB /* TxSifRemoveLpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288F807C270DDF08009825B5 /* TxSifRemoveLpCell.swift */; };
 		18FFB4B8281AF533004E65BB /* TxIbcUpdateClientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFBD532692278C0013150B /* TxIbcUpdateClientCell.swift */; };
 		18FFB4BD281AF533004E65BB /* Cw20BalanceReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32427A57D270045ED21 /* Cw20BalanceReq.swift */; };
 		18FFB4C1281AF533004E65BB /* TxIncentiveHardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2889FD802603484000CA9896 /* TxIncentiveHardCell.swift */; };
@@ -2126,7 +2069,6 @@
 		18FFB4D3281AF533004E65BB /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE4224482800097CAEE /* Coin.swift */; };
 		18FFB4DB281AF533004E65BB /* WalletInflationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FD2336233E1C30009327FE /* WalletInflationCell.swift */; };
 		18FFB4E0281AF533004E65BB /* DeleteStarname3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280E1EFB254A7AD60007BA7D /* DeleteStarname3ViewController.swift */; };
-		18FFB4E1281AF533004E65BB /* SifSwap0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C55271E7B6800B4A7C3 /* SifSwap0ViewController.swift */; };
 		18FFB4E7281AF533004E65BB /* TxReplaceResourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E94752549030C007A9291 /* TxReplaceResourceCell.swift */; };
 		18FFB4E8281AF533004E65BB /* BnbAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E123FD3C233DEFE1004EC348 /* BnbAccountInfo.swift */; };
 		18FFB4EF281AF533004E65BB /* SendNFT3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD2252778B398002333B5 /* SendNFT3ViewController.swift */; };
@@ -2137,7 +2079,6 @@
 		18FFB4F5281AF533004E65BB /* WalletGuideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FD233A233E1C44009327FE /* WalletGuideCell.swift */; };
 		18FFB4F8281AF533004E65BB /* Param.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E3E37F2671BE8D00BA89C2 /* Param.swift */; };
 		18FFB4FE281AF533004E65BB /* TxEditRewardAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282FF35B23F530ED0028CC66 /* TxEditRewardAddressCell.swift */; };
-		18FFB501281AF533004E65BB /* SifJoinPool0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C5D271E7B9500B4A7C3 /* SifJoinPool0ViewController.swift */; };
 		18FFB504281AF533004E65BB /* TxIncentiveSwapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FBC8326DBE9A100403FE2 /* TxIncentiveSwapCell.swift */; };
 		18FFB506281AF533004E65BB /* HardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28156EA22536DE53006FF06C /* HardDetailViewController.swift */; };
 		18FFB507281AF533004E65BB /* WalletDesmosEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04166116278C2F01001CAF73 /* WalletDesmosEventCell.swift */; };
@@ -2160,7 +2101,6 @@
 		18FFB544281AF533004E65BB /* AllValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DEF2244E0BD0097CAEE /* AllValidatorViewController.swift */; };
 		18FFB546281AF533004E65BB /* TokenDetailNativeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28429198264A586B00130651 /* TokenDetailNativeCell.swift */; };
 		18FFB54E281AF533004E65BB /* TxVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282FF35F23F532360028CC66 /* TxVoteCell.swift */; };
-		18FFB54F281AF533004E65BB /* SifMyPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B9B68A271DC5F60067C6AE /* SifMyPoolCell.swift */; };
 		18FFB550281AF533004E65BB /* HarvestDetailMyActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28156E9D2536DE29006FF06C /* HarvestDetailMyActionCell.swift */; };
 		18FFB551281AF533004E65BB /* TxUnknownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282FF36323F533AF0028CC66 /* TxUnknownCell.swift */; };
 		18FFB554281AF533004E65BB /* AddressInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1271B07224B90230083AF17 /* AddressInputTextField.swift */; };
@@ -2238,7 +2178,6 @@
 		18FFB615281AF533004E65BB /* OtherValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13696582292499400F3D5E2 /* OtherValidatorViewController.swift */; };
 		18FFB619281AF533004E65BB /* OkValidatorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4304324F8B34100BD7BB2 /* OkValidatorListViewController.swift */; };
 		18FFB61D281AF533004E65BB /* TxHardBorrowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2889FD702603379A00CA9896 /* TxHardBorrowCell.swift */; };
-		18FFB61F281AF533004E65BB /* SifExitPool0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C65271E7BBA00B4A7C3 /* SifExitPool0ViewController.swift */; };
 		18FFB620281AF533004E65BB /* ResourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E948D25494896007A9291 /* ResourceCell.swift */; };
 		18FFB623281AF533004E65BB /* BinanceHexlify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903E268C45DC002CFFE1 /* BinanceHexlify.swift */; };
 		18FFB626281AF533004E65BB /* TxCommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827E11323F3DC9B007CDB6E /* TxCommonCell.swift */; };
@@ -2286,7 +2225,6 @@
 		18FFB6A4281AF533004E65BB /* ReplaceSelectChainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E1F1F254AC6340007BA7D /* ReplaceSelectChainViewController.xib */; };
 		18FFB6A5281AF533004E65BB /* TxHardBorrowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2889FD712603379A00CA9896 /* TxHardBorrowCell.xib */; };
 		18FFB6A6281AF533004E65BB /* EmptyWCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041ECDF127F5750700397D37 /* EmptyWCViewController.xib */; };
-		18FFB6A7281AF533004E65BB /* SifSwap3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C5A271E7B7800B4A7C3 /* SifSwap3ViewController.xib */; };
 		18FFB6A8281AF533004E65BB /* TxHardLiquidateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2889FD7B260337C600CA9896 /* TxHardLiquidateCell.xib */; };
 		18FFB6A9281AF533004E65BB /* TxRewardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282FF35823F52FD40028CC66 /* TxRewardCell.xib */; };
 		18FFB6AA281AF533004E65BB /* SelectAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285A33DD2447633D0052BD3D /* SelectAccountCell.xib */; };
@@ -2300,7 +2238,6 @@
 		18FFB6B7281AF533004E65BB /* HarvestDetailMyActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28156E9E2536DE29006FF06C /* HarvestDetailMyActionCell.xib */; };
 		18FFB6B9281AF533004E65BB /* ResourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283E948E25494896007A9291 /* ResourceCell.xib */; };
 		18FFB6BA281AF533004E65BB /* DomainDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283E94802549331D007A9291 /* DomainDetailViewController.xib */; };
-		18FFB6BB281AF533004E65BB /* SifJoinPool3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C62271E7BA300B4A7C3 /* SifJoinPool3ViewController.xib */; };
 		18FFB6C0281AF533004E65BB /* HardPoolRepay0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DB570F25FA3BDD00B2F0E5 /* HardPoolRepay0ViewController.xib */; };
 		18FFB6C2281AF533004E65BB /* TxCdpLiquidateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 286EB38526035FB00021C79D /* TxCdpLiquidateCell.xib */; };
 		18FFB6C3281AF533004E65BB /* new2022@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048772FE277C6E0700D9E201 /* new2022@1x.png */; };
@@ -2311,13 +2248,10 @@
 		18FFB6CC281AF533004E65BB /* RenewStarname3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E1F06254A9B780007BA7D /* RenewStarname3ViewController.xib */; };
 		18FFB6CD281AF533004E65BB /* HtlcResultClaimCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285A33E924486DB60052BD3D /* HtlcResultClaimCell.xib */; };
 		18FFB6D0281AF533004E65BB /* HardPoolWithdraw0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DB56FB25FA3B9C00B2F0E5 /* HardPoolWithdraw0ViewController.xib */; };
-		18FFB6D2281AF533004E65BB /* TxSifRemoveLpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288F807D270DDF08009825B5 /* TxSifRemoveLpCell.xib */; };
 		18FFB6D3281AF533004E65BB /* TxCdpRepayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28474EC3241E06AF00AF5A81 /* TxCdpRepayCell.xib */; };
 		18FFB6D4281AF533004E65BB /* TxDeleteDomainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283E946C254902E5007A9291 /* TxDeleteDomainCell.xib */; };
-		18FFB6D5281AF533004E65BB /* SifExitPool0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C66271E7BBA00B4A7C3 /* SifExitPool0ViewController.xib */; };
 		18FFB6D6281AF533004E65BB /* Nft.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D33276F6B38009B39BA /* Nft.storyboard */; };
 		18FFB6D7281AF533004E65BB /* TxDetailgRPCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28641F2B2601959E000AAEB8 /* TxDetailgRPCViewController.xib */; };
-		18FFB6D8281AF533004E65BB /* SifExitPool3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C6A271E7BC800B4A7C3 /* SifExitPool3ViewController.xib */; };
 		18FFB6DA281AF533004E65BB /* SendNFT3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BD2262778B398002333B5 /* SendNFT3ViewController.xib */; };
 		18FFB6DD281AF533004E65BB /* HardPoolWithdraw3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DB570025FA3BA900B2F0E5 /* HardPoolWithdraw3ViewController.xib */; };
 		18FFB6DF281AF533004E65BB /* HtlcResultSentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285A33E524486DA20052BD3D /* HtlcResultSentCell.xib */; };
@@ -2341,16 +2275,13 @@
 		18FFB6FC281AF533004E65BB /* ReplaceResource0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E1F0B254AB5BA0007BA7D /* ReplaceResource0ViewController.xib */; };
 		18FFB6FD281AF533004E65BB /* ManageAccountAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E11338FC235D70D20011B61D /* ManageAccountAddCell.xib */; };
 		18FFB705281AF533004E65BB /* AccountPromotionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB2A862533DA0B00CFF097 /* AccountPromotionCell.xib */; };
-		18FFB709281AF533004E65BB /* TxSifAddLpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288F8079270DDEFA009825B5 /* TxSifAddLpCell.xib */; };
 		18FFB70A281AF533004E65BB /* TxCdpWithdrawCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28474EBF241E06AF00AF5A81 /* TxCdpWithdrawCell.xib */; };
 		18FFB70B281AF533004E65BB /* LinkChainAccount0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04983C96278B046100F913A3 /* LinkChainAccount0ViewController.xib */; };
 		18FFB70D281AF533004E65BB /* CdpLisyMyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2842AB6D242C5C7200248EEB /* CdpLisyMyCell.xib */; };
-		18FFB70E281AF533004E65BB /* SifMyPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B9B68B271DC5F60067C6AE /* SifMyPoolCell.xib */; };
 		18FFB711281AF533004E65BB /* TxIncentiveMintingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2889FD862603485200CA9896 /* TxIncentiveMintingCell.xib */; };
 		18FFB714281AF533004E65BB /* TxTransferCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282FF35023F5172E0028CC66 /* TxTransferCell.xib */; };
 		18FFB717281AF533004E65BB /* TokenDetailNativeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28429199264A586B00130651 /* TokenDetailNativeCell.xib */; };
 		18FFB719281AF533004E65BB /* TxIncentiveHardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2889FD812603484000CA9896 /* TxIncentiveHardCell.xib */; };
-		18FFB71A281AF533004E65BB /* SifSwap0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C56271E7B6800B4A7C3 /* SifSwap0ViewController.xib */; };
 		18FFB71B281AF533004E65BB /* AccountSwitchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A2A4C92721B9030042ACC4 /* AccountSwitchViewController.xib */; };
 		18FFB71C281AF533004E65BB /* Swap0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28E04591269B52290022A366 /* Swap0ViewController.xib */; };
 		18FFB71D281AF533004E65BB /* xmas@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048772FF277C6E0700D9E201 /* xmas@1x.png */; };
@@ -2416,7 +2347,6 @@
 		18FFB784281AF533004E65BB /* RenewStarname0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E1F01254A9B6B0007BA7D /* RenewStarname0ViewController.xib */; };
 		18FFB786281AF533004E65BB /* WalletGuideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1FD233B233E1C44009327FE /* WalletGuideCell.xib */; };
 		18FFB787281AF533004E65BB /* VoteDetailStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2845D883246FAEED007CD497 /* VoteDetailStatusCell.xib */; };
-		18FFB788281AF533004E65BB /* SifPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B9B687271DC5DD0067C6AE /* SifPoolCell.xib */; };
 		18FFB789281AF533004E65BB /* TxSaveProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04983CA3278C24C100F913A3 /* TxSaveProfileCell.xib */; };
 		18FFB78A281AF533004E65BB /* TxReplaceResourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283E94762549030C007A9291 /* TxReplaceResourceCell.xib */; };
 		18FFB78C281AF533004E65BB /* ResourceEditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E1F1A254ABB1D0007BA7D /* ResourceEditCell.xib */; };
@@ -2425,7 +2355,6 @@
 		18FFB791281AF533004E65BB /* CdpWarnPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2868559624989AB80099D18F /* CdpWarnPopup.xib */; };
 		18FFB793281AF533004E65BB /* CommonMyPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 289E4DB226E5D777007C7C35 /* CommonMyPoolCell.xib */; };
 		18FFB796281AF533004E65BB /* RegistAccountCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28D372AF254C07470071B136 /* RegistAccountCheckCell.xib */; };
-		18FFB797281AF533004E65BB /* SifChainDex.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28E8FAEE2719C226005EAA9B /* SifChainDex.storyboard */; };
 		18FFB798281AF533004E65BB /* NFTDetailRawCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D492770D57E009B39BA /* NFTDetailRawCell.xib */; };
 		18FFB799281AF533004E65BB /* TxHardWithdrawCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2889FD6C2603378900CA9896 /* TxHardWithdrawCell.xib */; };
 		18FFB79A281AF533004E65BB /* WcCancelPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282BDFE524A5BCCB00D3A5D4 /* WcCancelPopup.xib */; };
@@ -2444,7 +2373,6 @@
 		18FFB7B2281AF533004E65BB /* TxCdpDepositCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28474ECA241E06AF00AF5A81 /* TxCdpDepositCell.xib */; };
 		18FFB7B4281AF533004E65BB /* TxIssueNFTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BD22B27795CC6002333B5 /* TxIssueNFTCell.xib */; };
 		18FFB7B5281AF533004E65BB /* EditHideChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287654722726BFE80071FF96 /* EditHideChainCell.xib */; };
-		18FFB7B6281AF533004E65BB /* TxSifSwapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288F8075270DDEE8009825B5 /* TxSifSwapCell.xib */; };
 		18FFB7B7281AF533004E65BB /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
 		18FFB7B8281AF533004E65BB /* Bep3SupplyPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2868558E24989A8F0099D18F /* Bep3SupplyPopup.xib */; };
 		18FFB7BA281AF533004E65BB /* WalletCrescentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D3392227E8803000E82AA7 /* WalletCrescentCell.xib */; };
@@ -2454,7 +2382,6 @@
 		18FFB7C2281AF533004E65BB /* HardPoolRepay3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DB571425FA3BEA00B2F0E5 /* HardPoolRepay3ViewController.xib */; };
 		18FFB7C5281AF533004E65BB /* TxHardDepositCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2889FD672603377700CA9896 /* TxHardDepositCell.xib */; };
 		18FFB7C9281AF533004E65BB /* WalletOsmoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2852EAEF2681A4CC003A5E74 /* WalletOsmoCell.xib */; };
-		18FFB7CA281AF533004E65BB /* SifJoinPool0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C5E271E7B9500B4A7C3 /* SifJoinPool0ViewController.xib */; };
 		18FFB7CB281AF533004E65BB /* StarName.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2834399A2531D13C00CCFADE /* StarName.storyboard */; };
 		18FFB7CC281AF533004E65BB /* TxRegisterAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283E9467254902D4007A9291 /* TxRegisterAccountCell.xib */; };
 		18FFB7CE281AF533004E65BB /* GenProfile3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2807DB3C2788182F00016571 /* GenProfile3ViewController.xib */; };
@@ -2587,18 +2514,6 @@
 		2842AB6E242C5C7200248EEB /* CdpLisyMyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2842AB6C242C5C7200248EEB /* CdpLisyMyCell.swift */; };
 		2842AB6F242C5C7200248EEB /* CdpLisyMyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2842AB6D242C5C7200248EEB /* CdpLisyMyCell.xib */; };
 		2842AB72242C7C8A00248EEB /* CdpListAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2842AB70242C7C8A00248EEB /* CdpListAllCell.swift */; };
-		28440C57271E7B6800B4A7C3 /* SifSwap0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C55271E7B6800B4A7C3 /* SifSwap0ViewController.swift */; };
-		28440C58271E7B6800B4A7C3 /* SifSwap0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C56271E7B6800B4A7C3 /* SifSwap0ViewController.xib */; };
-		28440C5B271E7B7800B4A7C3 /* SifSwap3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C59271E7B7800B4A7C3 /* SifSwap3ViewController.swift */; };
-		28440C5C271E7B7800B4A7C3 /* SifSwap3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C5A271E7B7800B4A7C3 /* SifSwap3ViewController.xib */; };
-		28440C5F271E7B9500B4A7C3 /* SifJoinPool0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C5D271E7B9500B4A7C3 /* SifJoinPool0ViewController.swift */; };
-		28440C60271E7B9500B4A7C3 /* SifJoinPool0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C5E271E7B9500B4A7C3 /* SifJoinPool0ViewController.xib */; };
-		28440C63271E7BA300B4A7C3 /* SifJoinPool3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C61271E7BA300B4A7C3 /* SifJoinPool3ViewController.swift */; };
-		28440C64271E7BA300B4A7C3 /* SifJoinPool3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C62271E7BA300B4A7C3 /* SifJoinPool3ViewController.xib */; };
-		28440C67271E7BBA00B4A7C3 /* SifExitPool0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C65271E7BBA00B4A7C3 /* SifExitPool0ViewController.swift */; };
-		28440C68271E7BBA00B4A7C3 /* SifExitPool0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C66271E7BBA00B4A7C3 /* SifExitPool0ViewController.xib */; };
-		28440C6B271E7BC800B4A7C3 /* SifExitPool3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C69271E7BC800B4A7C3 /* SifExitPool3ViewController.swift */; };
-		28440C6C271E7BC800B4A7C3 /* SifExitPool3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28440C6A271E7BC800B4A7C3 /* SifExitPool3ViewController.xib */; };
 		2845D87D246FAE16007CD497 /* VoteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2845D87C246FAE16007CD497 /* VoteDetailsViewController.swift */; };
 		2845D884246FAEED007CD497 /* VoteDetailStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2845D882246FAEED007CD497 /* VoteDetailStatusCell.swift */; };
 		2845D885246FAEED007CD497 /* VoteDetailStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2845D883246FAEED007CD497 /* VoteDetailStatusCell.xib */; };
@@ -2679,12 +2594,6 @@
 		288D2501268326060093121A /* NewHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288D24FF268326060093121A /* NewHistoryCell.xib */; };
 		288D250426834E980093121A /* TxIbcSendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288D250226834E980093121A /* TxIbcSendCell.swift */; };
 		288D250526834E980093121A /* TxIbcSendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288D250326834E980093121A /* TxIbcSendCell.xib */; };
-		288F8076270DDEE8009825B5 /* TxSifSwapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288F8074270DDEE8009825B5 /* TxSifSwapCell.swift */; };
-		288F8077270DDEE8009825B5 /* TxSifSwapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288F8075270DDEE8009825B5 /* TxSifSwapCell.xib */; };
-		288F807A270DDEFA009825B5 /* TxSifAddLpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288F8078270DDEFA009825B5 /* TxSifAddLpCell.swift */; };
-		288F807B270DDEFA009825B5 /* TxSifAddLpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288F8079270DDEFA009825B5 /* TxSifAddLpCell.xib */; };
-		288F807E270DDF08009825B5 /* TxSifRemoveLpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288F807C270DDF08009825B5 /* TxSifRemoveLpCell.swift */; };
-		288F807F270DDF08009825B5 /* TxSifRemoveLpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288F807D270DDF08009825B5 /* TxSifRemoveLpCell.xib */; };
 		28908F6923F69BD100164030 /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28908F6823F69BD100164030 /* EdgeInsetLabel.swift */; };
 		2894106826FF1307005BCBE4 /* SelectRelayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894106626FF1307005BCBE4 /* SelectRelayerCell.swift */; };
 		2894106926FF1307005BCBE4 /* SelectRelayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2894106726FF1307005BCBE4 /* SelectRelayerCell.xib */; };
@@ -2716,10 +2625,6 @@
 		28B4304624F8B36600BD7BB2 /* OkMyValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4304524F8B36600BD7BB2 /* OkMyValidatorViewController.swift */; };
 		28B4304824F8B37600BD7BB2 /* OkTopValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4304724F8B37500BD7BB2 /* OkTopValidatorViewController.swift */; };
 		28B4304A24F8B38500BD7BB2 /* OkOtherValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4304924F8B38500BD7BB2 /* OkOtherValidatorViewController.swift */; };
-		28B9B688271DC5DD0067C6AE /* SifPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B9B686271DC5DD0067C6AE /* SifPoolCell.swift */; };
-		28B9B689271DC5DD0067C6AE /* SifPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B9B687271DC5DD0067C6AE /* SifPoolCell.xib */; };
-		28B9B68C271DC5F60067C6AE /* SifMyPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B9B68A271DC5F60067C6AE /* SifMyPoolCell.swift */; };
-		28B9B68D271DC5F60067C6AE /* SifMyPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B9B68B271DC5F60067C6AE /* SifMyPoolCell.xib */; };
 		28BB2A812533D9FB00CFF097 /* DomainPromotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB2A7F2533D9FB00CFF097 /* DomainPromotionCell.swift */; };
 		28BB2A822533D9FB00CFF097 /* DomainPromotionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB2A802533D9FB00CFF097 /* DomainPromotionCell.xib */; };
 		28BB2A872533DA0B00CFF097 /* AccountPromotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB2A852533DA0B00CFF097 /* AccountPromotionCell.swift */; };
@@ -2775,11 +2680,6 @@
 		28E746B825AD76ED004B2C64 /* OkPromotionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28E746B625AD76ED004B2C64 /* OkPromotionCell.xib */; };
 		28E8FAEB2716F190005EAA9B /* SelectTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8FAE92716F190005EAA9B /* SelectTextCell.swift */; };
 		28E8FAEC2716F190005EAA9B /* SelectTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28E8FAEA2716F190005EAA9B /* SelectTextCell.xib */; };
-		28E8FAEF2719C227005EAA9B /* SifChainDex.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28E8FAEE2719C226005EAA9B /* SifChainDex.storyboard */; };
-		28E8FAF12719C265005EAA9B /* SifDexDAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8FAF02719C265005EAA9B /* SifDexDAppViewController.swift */; };
-		28E8FAF32719C279005EAA9B /* SifDexSwapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8FAF22719C279005EAA9B /* SifDexSwapViewController.swift */; };
-		28E8FAF52719C28F005EAA9B /* SifDexEthPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8FAF42719C28F005EAA9B /* SifDexEthPoolViewController.swift */; };
-		28E8FAF72719C29F005EAA9B /* SifDexIbcPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8FAF62719C29F005EAA9B /* SifDexIbcPoolViewController.swift */; };
 		28EEEC9C26DABA74002DDC4A /* KavaSwap0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EEEC9A26DABA74002DDC4A /* KavaSwap0ViewController.swift */; };
 		28EEEC9D26DABA74002DDC4A /* KavaSwap0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EEEC9B26DABA74002DDC4A /* KavaSwap0ViewController.xib */; };
 		28EEECA026DABA83002DDC4A /* KavaSwap3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EEEC9E26DABA83002DDC4A /* KavaSwap3ViewController.swift */; };
@@ -3569,29 +3469,6 @@
 		047847CA2962C94800FD6A7E /* Cw20IcnsByAddressRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IcnsByAddressRes.swift; sourceTree = "<group>"; };
 		0479664F2757409700315D55 /* MintscanProposalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanProposalDetail.swift; sourceTree = "<group>"; };
 		047DCEE128855F4800253CAA /* MintscanMyVote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanMyVote.swift; sourceTree = "<group>"; };
-		047FB6CA281A4C4F009D8AAF /* sifnode_dispensation_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_dispensation_v1_query.pb.swift; sourceTree = "<group>"; };
-		047FB6CB281A4C4F009D8AAF /* sifnode_clp_v1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_clp_v1_params.pb.swift; sourceTree = "<group>"; };
-		047FB6CC281A4C4F009D8AAF /* sifnode_dispensation_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_dispensation_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		047FB6CD281A4C4F009D8AAF /* sifnode_ethbridge_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_ethbridge_v1_query.grpc.swift; sourceTree = "<group>"; };
-		047FB6CE281A4C4F009D8AAF /* sifnode_ethbridge_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_ethbridge_v1_tx.pb.swift; sourceTree = "<group>"; };
-		047FB6CF281A4C50009D8AAF /* sifnode_ethbridge_v1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_ethbridge_v1_types.pb.swift; sourceTree = "<group>"; };
-		047FB6D0281A4C50009D8AAF /* sifnode_tokenregistry_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_tokenregistry_v1_query.grpc.swift; sourceTree = "<group>"; };
-		047FB6D1281A4C50009D8AAF /* sifnode_tokenregistry_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_tokenregistry_v1_tx.pb.swift; sourceTree = "<group>"; };
-		047FB6D2281A4C50009D8AAF /* sifnode_clp_v1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_clp_v1_types.pb.swift; sourceTree = "<group>"; };
-		047FB6D3281A4C50009D8AAF /* sifnode_clp_v1_querier.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_clp_v1_querier.pb.swift; sourceTree = "<group>"; };
-		047FB6D4281A4C50009D8AAF /* sifnode_tokenregistry_v1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_tokenregistry_v1_types.pb.swift; sourceTree = "<group>"; };
-		047FB6D5281A4C51009D8AAF /* sifnode_ethbridge_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_ethbridge_v1_query.pb.swift; sourceTree = "<group>"; };
-		047FB6D6281A4C51009D8AAF /* sifnode_ethbridge_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_ethbridge_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		047FB6D7281A4C51009D8AAF /* sifnode_tokenregistry_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_tokenregistry_v1_query.pb.swift; sourceTree = "<group>"; };
-		047FB6D8281A4C51009D8AAF /* sifnode_clp_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_clp_v1_tx.pb.swift; sourceTree = "<group>"; };
-		047FB6D9281A4C51009D8AAF /* sifnode_tokenregistry_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_tokenregistry_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		047FB6DA281A4C51009D8AAF /* sifnode_clp_v1_querier.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_clp_v1_querier.grpc.swift; sourceTree = "<group>"; };
-		047FB6DB281A4C51009D8AAF /* sifnode_dispensation_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_dispensation_v1_tx.pb.swift; sourceTree = "<group>"; };
-		047FB6DC281A4C52009D8AAF /* sifnode_clp_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_clp_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		047FB6DD281A4C52009D8AAF /* sifnode_clp_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_clp_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		047FB6DE281A4C52009D8AAF /* sifnode_dispensation_v1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_dispensation_v1_types.pb.swift; sourceTree = "<group>"; };
-		047FB6DF281A4C52009D8AAF /* sifnode_oracle_v1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_oracle_v1_types.pb.swift; sourceTree = "<group>"; };
-		047FB6E0281A4C52009D8AAF /* sifnode_dispensation_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_dispensation_v1_query.grpc.swift; sourceTree = "<group>"; };
 		047FB6F8281A5822009D8AAF /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
 		047FB6FA281AA8D7009D8AAF /* MnemonicListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicListViewController.swift; sourceTree = "<group>"; };
 		047FB6FB281AA8D7009D8AAF /* MnemonicListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MnemonicListViewController.xib; sourceTree = "<group>"; };
@@ -4202,18 +4079,6 @@
 		2842AB6C242C5C7200248EEB /* CdpLisyMyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CdpLisyMyCell.swift; sourceTree = "<group>"; };
 		2842AB6D242C5C7200248EEB /* CdpLisyMyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CdpLisyMyCell.xib; sourceTree = "<group>"; };
 		2842AB70242C7C8A00248EEB /* CdpListAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CdpListAllCell.swift; sourceTree = "<group>"; };
-		28440C55271E7B6800B4A7C3 /* SifSwap0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifSwap0ViewController.swift; sourceTree = "<group>"; };
-		28440C56271E7B6800B4A7C3 /* SifSwap0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SifSwap0ViewController.xib; sourceTree = "<group>"; };
-		28440C59271E7B7800B4A7C3 /* SifSwap3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifSwap3ViewController.swift; sourceTree = "<group>"; };
-		28440C5A271E7B7800B4A7C3 /* SifSwap3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SifSwap3ViewController.xib; sourceTree = "<group>"; };
-		28440C5D271E7B9500B4A7C3 /* SifJoinPool0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifJoinPool0ViewController.swift; sourceTree = "<group>"; };
-		28440C5E271E7B9500B4A7C3 /* SifJoinPool0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SifJoinPool0ViewController.xib; sourceTree = "<group>"; };
-		28440C61271E7BA300B4A7C3 /* SifJoinPool3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifJoinPool3ViewController.swift; sourceTree = "<group>"; };
-		28440C62271E7BA300B4A7C3 /* SifJoinPool3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SifJoinPool3ViewController.xib; sourceTree = "<group>"; };
-		28440C65271E7BBA00B4A7C3 /* SifExitPool0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifExitPool0ViewController.swift; sourceTree = "<group>"; };
-		28440C66271E7BBA00B4A7C3 /* SifExitPool0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SifExitPool0ViewController.xib; sourceTree = "<group>"; };
-		28440C69271E7BC800B4A7C3 /* SifExitPool3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifExitPool3ViewController.swift; sourceTree = "<group>"; };
-		28440C6A271E7BC800B4A7C3 /* SifExitPool3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SifExitPool3ViewController.xib; sourceTree = "<group>"; };
 		2845D87C246FAE16007CD497 /* VoteDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailsViewController.swift; sourceTree = "<group>"; };
 		2845D882246FAEED007CD497 /* VoteDetailStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailStatusCell.swift; sourceTree = "<group>"; };
 		2845D883246FAEED007CD497 /* VoteDetailStatusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteDetailStatusCell.xib; sourceTree = "<group>"; };
@@ -4297,12 +4162,6 @@
 		288D24FF268326060093121A /* NewHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewHistoryCell.xib; sourceTree = "<group>"; };
 		288D250226834E980093121A /* TxIbcSendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxIbcSendCell.swift; sourceTree = "<group>"; };
 		288D250326834E980093121A /* TxIbcSendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxIbcSendCell.xib; sourceTree = "<group>"; };
-		288F8074270DDEE8009825B5 /* TxSifSwapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxSifSwapCell.swift; sourceTree = "<group>"; };
-		288F8075270DDEE8009825B5 /* TxSifSwapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxSifSwapCell.xib; sourceTree = "<group>"; };
-		288F8078270DDEFA009825B5 /* TxSifAddLpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxSifAddLpCell.swift; sourceTree = "<group>"; };
-		288F8079270DDEFA009825B5 /* TxSifAddLpCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxSifAddLpCell.xib; sourceTree = "<group>"; };
-		288F807C270DDF08009825B5 /* TxSifRemoveLpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxSifRemoveLpCell.swift; sourceTree = "<group>"; };
-		288F807D270DDF08009825B5 /* TxSifRemoveLpCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxSifRemoveLpCell.xib; sourceTree = "<group>"; };
 		28908F6823F69BD100164030 /* EdgeInsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabel.swift; sourceTree = "<group>"; };
 		2894106626FF1307005BCBE4 /* SelectRelayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRelayerCell.swift; sourceTree = "<group>"; };
 		2894106726FF1307005BCBE4 /* SelectRelayerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectRelayerCell.xib; sourceTree = "<group>"; };
@@ -4334,10 +4193,6 @@
 		28B4304524F8B36600BD7BB2 /* OkMyValidatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkMyValidatorViewController.swift; sourceTree = "<group>"; };
 		28B4304724F8B37500BD7BB2 /* OkTopValidatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkTopValidatorViewController.swift; sourceTree = "<group>"; };
 		28B4304924F8B38500BD7BB2 /* OkOtherValidatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkOtherValidatorViewController.swift; sourceTree = "<group>"; };
-		28B9B686271DC5DD0067C6AE /* SifPoolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifPoolCell.swift; sourceTree = "<group>"; };
-		28B9B687271DC5DD0067C6AE /* SifPoolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SifPoolCell.xib; sourceTree = "<group>"; };
-		28B9B68A271DC5F60067C6AE /* SifMyPoolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifMyPoolCell.swift; sourceTree = "<group>"; };
-		28B9B68B271DC5F60067C6AE /* SifMyPoolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SifMyPoolCell.xib; sourceTree = "<group>"; };
 		28BB2A7F2533D9FB00CFF097 /* DomainPromotionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainPromotionCell.swift; sourceTree = "<group>"; };
 		28BB2A802533D9FB00CFF097 /* DomainPromotionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DomainPromotionCell.xib; sourceTree = "<group>"; };
 		28BB2A852533DA0B00CFF097 /* AccountPromotionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPromotionCell.swift; sourceTree = "<group>"; };
@@ -4394,11 +4249,6 @@
 		28E746B625AD76ED004B2C64 /* OkPromotionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OkPromotionCell.xib; sourceTree = "<group>"; };
 		28E8FAE92716F190005EAA9B /* SelectTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTextCell.swift; sourceTree = "<group>"; };
 		28E8FAEA2716F190005EAA9B /* SelectTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectTextCell.xib; sourceTree = "<group>"; };
-		28E8FAEE2719C226005EAA9B /* SifChainDex.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SifChainDex.storyboard; sourceTree = "<group>"; };
-		28E8FAF02719C265005EAA9B /* SifDexDAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifDexDAppViewController.swift; sourceTree = "<group>"; };
-		28E8FAF22719C279005EAA9B /* SifDexSwapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifDexSwapViewController.swift; sourceTree = "<group>"; };
-		28E8FAF42719C28F005EAA9B /* SifDexEthPoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifDexEthPoolViewController.swift; sourceTree = "<group>"; };
-		28E8FAF62719C29F005EAA9B /* SifDexIbcPoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifDexIbcPoolViewController.swift; sourceTree = "<group>"; };
 		28EEEC9A26DABA74002DDC4A /* KavaSwap0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaSwap0ViewController.swift; sourceTree = "<group>"; };
 		28EEEC9B26DABA74002DDC4A /* KavaSwap0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaSwap0ViewController.xib; sourceTree = "<group>"; };
 		28EEEC9E26DABA83002DDC4A /* KavaSwap3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaSwap3ViewController.swift; sourceTree = "<group>"; };
@@ -5459,29 +5309,6 @@
 				04AA4B772906A6D80027877B /* kava_swap_v1beta1_swap.pb.swift */,
 				04AA4B6F2906A6D80027877B /* kava_swap_v1beta1_tx.grpc.swift */,
 				04AA4B672906A6D70027877B /* kava_swap_v1beta1_tx.pb.swift */,
-				047FB6DD281A4C52009D8AAF /* sifnode_clp_v1_genesis.pb.swift */,
-				047FB6CB281A4C4F009D8AAF /* sifnode_clp_v1_params.pb.swift */,
-				047FB6DA281A4C51009D8AAF /* sifnode_clp_v1_querier.grpc.swift */,
-				047FB6D3281A4C50009D8AAF /* sifnode_clp_v1_querier.pb.swift */,
-				047FB6DC281A4C52009D8AAF /* sifnode_clp_v1_tx.grpc.swift */,
-				047FB6D8281A4C51009D8AAF /* sifnode_clp_v1_tx.pb.swift */,
-				047FB6D2281A4C50009D8AAF /* sifnode_clp_v1_types.pb.swift */,
-				047FB6E0281A4C52009D8AAF /* sifnode_dispensation_v1_query.grpc.swift */,
-				047FB6CA281A4C4F009D8AAF /* sifnode_dispensation_v1_query.pb.swift */,
-				047FB6CC281A4C4F009D8AAF /* sifnode_dispensation_v1_tx.grpc.swift */,
-				047FB6DB281A4C51009D8AAF /* sifnode_dispensation_v1_tx.pb.swift */,
-				047FB6DE281A4C52009D8AAF /* sifnode_dispensation_v1_types.pb.swift */,
-				047FB6CD281A4C4F009D8AAF /* sifnode_ethbridge_v1_query.grpc.swift */,
-				047FB6D5281A4C51009D8AAF /* sifnode_ethbridge_v1_query.pb.swift */,
-				047FB6D6281A4C51009D8AAF /* sifnode_ethbridge_v1_tx.grpc.swift */,
-				047FB6CE281A4C4F009D8AAF /* sifnode_ethbridge_v1_tx.pb.swift */,
-				047FB6CF281A4C50009D8AAF /* sifnode_ethbridge_v1_types.pb.swift */,
-				047FB6DF281A4C52009D8AAF /* sifnode_oracle_v1_types.pb.swift */,
-				047FB6D0281A4C50009D8AAF /* sifnode_tokenregistry_v1_query.grpc.swift */,
-				047FB6D7281A4C51009D8AAF /* sifnode_tokenregistry_v1_query.pb.swift */,
-				047FB6D9281A4C51009D8AAF /* sifnode_tokenregistry_v1_tx.grpc.swift */,
-				047FB6D1281A4C50009D8AAF /* sifnode_tokenregistry_v1_tx.pb.swift */,
-				047FB6D4281A4C50009D8AAF /* sifnode_tokenregistry_v1_types.pb.swift */,
 				040FA5C0275F559F00229F6F /* starname_cosmwasm_wasm_v1_genesis.pb.swift */,
 				040FA5FF275F55A300229F6F /* starname_cosmwasm_wasm_v1_ibc.pb.swift */,
 				040FA6AE275F55AF00229F6F /* starname_cosmwasm_wasm_v1_proposal.pb.swift */,
@@ -5735,25 +5562,6 @@
 			path = token;
 			sourceTree = "<group>";
 		};
-		2845AE4C271C70EB005AA537 /* sif */ = {
-			isa = PBXGroup;
-			children = (
-				28440C55271E7B6800B4A7C3 /* SifSwap0ViewController.swift */,
-				28440C56271E7B6800B4A7C3 /* SifSwap0ViewController.xib */,
-				28440C59271E7B7800B4A7C3 /* SifSwap3ViewController.swift */,
-				28440C5A271E7B7800B4A7C3 /* SifSwap3ViewController.xib */,
-				28440C5D271E7B9500B4A7C3 /* SifJoinPool0ViewController.swift */,
-				28440C5E271E7B9500B4A7C3 /* SifJoinPool0ViewController.xib */,
-				28440C61271E7BA300B4A7C3 /* SifJoinPool3ViewController.swift */,
-				28440C62271E7BA300B4A7C3 /* SifJoinPool3ViewController.xib */,
-				28440C65271E7BBA00B4A7C3 /* SifExitPool0ViewController.swift */,
-				28440C66271E7BBA00B4A7C3 /* SifExitPool0ViewController.xib */,
-				28440C69271E7BC800B4A7C3 /* SifExitPool3ViewController.swift */,
-				28440C6A271E7BC800B4A7C3 /* SifExitPool3ViewController.xib */,
-			);
-			path = sif;
-			sourceTree = "<group>";
-		};
 		284D179D2535556800C364F9 /* kava */ = {
 			isa = PBXGroup;
 			children = (
@@ -5813,7 +5621,6 @@
 				0444442E27AC030700EB093E /* wasm */,
 				04983CA1278C24A500F913A3 /* desmos */,
 				046BD22927795C9B002333B5 /* nft */,
-				288F806B270DDE95009825B5 /* sif */,
 				284FBC7626DBCBC900403FE2 /* starname */,
 				284FBC7526DBCBA400403FE2 /* kava */,
 				04CFBD4A269226CE0013150B /* ibc */,
@@ -5986,19 +5793,6 @@
 			path = okex;
 			sourceTree = "<group>";
 		};
-		288F806B270DDE95009825B5 /* sif */ = {
-			isa = PBXGroup;
-			children = (
-				288F8074270DDEE8009825B5 /* TxSifSwapCell.swift */,
-				288F8075270DDEE8009825B5 /* TxSifSwapCell.xib */,
-				288F8078270DDEFA009825B5 /* TxSifAddLpCell.swift */,
-				288F8079270DDEFA009825B5 /* TxSifAddLpCell.xib */,
-				288F807C270DDF08009825B5 /* TxSifRemoveLpCell.swift */,
-				288F807D270DDF08009825B5 /* TxSifRemoveLpCell.xib */,
-			);
-			path = sif;
-			sourceTree = "<group>";
-		};
 		28BB2A7E2533D92500CFF097 /* starname */ = {
 			isa = PBXGroup;
 			children = (
@@ -6132,18 +5926,6 @@
 				28E04589269B35480022A366 /* SwapViewController.swift */,
 			);
 			path = osmosis;
-			sourceTree = "<group>";
-		};
-		28E8FAED2719C20D005EAA9B /* sif */ = {
-			isa = PBXGroup;
-			children = (
-				28E8FAEE2719C226005EAA9B /* SifChainDex.storyboard */,
-				28E8FAF02719C265005EAA9B /* SifDexDAppViewController.swift */,
-				28E8FAF22719C279005EAA9B /* SifDexSwapViewController.swift */,
-				28E8FAF42719C28F005EAA9B /* SifDexEthPoolViewController.swift */,
-				28E8FAF62719C29F005EAA9B /* SifDexIbcPoolViewController.swift */,
-			);
-			path = sif;
 			sourceTree = "<group>";
 		};
 		28F8EFA3286EC19700162FC1 /* Fonts */ = {
@@ -6349,7 +6131,6 @@
 				E148780728957DC000751D94 /* authz */,
 				2807DB36278817D600016571 /* desmos */,
 				04E25D4C27749A70009B39BA /* nft */,
-				2845AE4C271C70EB005AA537 /* sif */,
 				28E0458F269B520E0022A366 /* osmosis */,
 				28DB56EF25FA3B1B00B2F0E5 /* kava */,
 				2870EBC325ABEC5B00AF4590 /* okex */,
@@ -6469,7 +6250,6 @@
 				04FCD2EF292F8FF300BA5349 /* stride */,
 				041345B427855B0800DC49AD /* desmos */,
 				04E25D32276F6B25009B39BA /* nft */,
-				28E8FAED2719C20D005EAA9B /* sif */,
 				284291A6264BC2FF00130651 /* token */,
 				28E66703269940DA00BA2C68 /* osmosis */,
 				284FF3EF25A6EDF900505E7A /* okex */,
@@ -6719,10 +6499,6 @@
 				289E4DAE26E5D765007C7C35 /* CommonPoolCell.xib */,
 				289E4DB126E5D777007C7C35 /* CommonMyPoolCell.swift */,
 				289E4DB226E5D777007C7C35 /* CommonMyPoolCell.xib */,
-				28B9B686271DC5DD0067C6AE /* SifPoolCell.swift */,
-				28B9B687271DC5DD0067C6AE /* SifPoolCell.xib */,
-				28B9B68A271DC5F60067C6AE /* SifMyPoolCell.swift */,
-				28B9B68B271DC5F60067C6AE /* SifMyPoolCell.xib */,
 				2876546D2726BFD30071FF96 /* EditDisplayChainCell.swift */,
 				2876546E2726BFD30071FF96 /* EditDisplayChainCell.xib */,
 				287654712726BFE80071FF96 /* EditHideChainCell.swift */,
@@ -6892,7 +6668,6 @@
 				0443B8902855B94E0027A6B9 /* WalletDetailInfoCell.xib in Resources */,
 				18FFB6A6281AF533004E65BB /* EmptyWCViewController.xib in Resources */,
 				042C38C228F69E6600FF45A2 /* ValidatorDetailCell.xib in Resources */,
-				18FFB6A7281AF533004E65BB /* SifSwap3ViewController.xib in Resources */,
 				04C5AE6E28631727007627EA /* Undelegate1ViewController.xib in Resources */,
 				18FFB6A8281AF533004E65BB /* TxHardLiquidateCell.xib in Resources */,
 				0419C93829FE595A001F9E58 /* SingleVote0ViewController.xib in Resources */,
@@ -6918,7 +6693,6 @@
 				18FFB6B7281AF533004E65BB /* HarvestDetailMyActionCell.xib in Resources */,
 				18FFB6B9281AF533004E65BB /* ResourceCell.xib in Resources */,
 				18FFB6BA281AF533004E65BB /* DomainDetailViewController.xib in Resources */,
-				18FFB6BB281AF533004E65BB /* SifJoinPool3ViewController.xib in Resources */,
 				045DAD822897A1AD004ED9B4 /* AuthzVote5ViewController.xib in Resources */,
 				04172B9029F6902000D6279C /* SubVaultCell.xib in Resources */,
 				E10396802875AACC0055903A /* ProposalEtcPeriodCell.xib in Resources */,
@@ -6945,14 +6719,11 @@
 				E1FFB67B29F96EFC00E6A28A /* MainDaoCell.xib in Resources */,
 				0447AE8D288AAEF0004701A0 /* WalletAuthzCell.xib in Resources */,
 				04F4061429ED103C00CD88E4 /* HtlcResultViewController.xib in Resources */,
-				18FFB6D2281AF533004E65BB /* TxSifRemoveLpCell.xib in Resources */,
 				18FFB6D3281AF533004E65BB /* TxCdpRepayCell.xib in Resources */,
 				04F405FC29ED0C8C00CD88E4 /* CdpDetailViewController.xib in Resources */,
 				18FFB6D4281AF533004E65BB /* TxDeleteDomainCell.xib in Resources */,
-				18FFB6D5281AF533004E65BB /* SifExitPool0ViewController.xib in Resources */,
 				18FFB6D6281AF533004E65BB /* Nft.storyboard in Resources */,
 				18FFB6D7281AF533004E65BB /* TxDetailgRPCViewController.xib in Resources */,
-				18FFB6D8281AF533004E65BB /* SifExitPool3ViewController.xib in Resources */,
 				18FFB6DA281AF533004E65BB /* SendNFT3ViewController.xib in Resources */,
 				04C5AE8028632055007627EA /* Redelegate2ViewController.xib in Resources */,
 				18FFB6DD281AF533004E65BB /* HardPoolWithdraw3ViewController.xib in Resources */,
@@ -7001,12 +6772,10 @@
 				15B6BDA829ABC2EB00493E11 /* WalletPersisCell.xib in Resources */,
 				04E6ABB828635867008DC3C7 /* CdpWithdraw1ViewController.xib in Resources */,
 				044374642862E9A900C6A4ED /* Transfer1ViewController.xib in Resources */,
-				18FFB709281AF533004E65BB /* TxSifAddLpCell.xib in Resources */,
 				042C389B28F5605D00FF45A2 /* WalletIovCell.xib in Resources */,
 				18FFB70A281AF533004E65BB /* TxCdpWithdrawCell.xib in Resources */,
 				18FFB70B281AF533004E65BB /* LinkChainAccount0ViewController.xib in Resources */,
 				18FFB70D281AF533004E65BB /* CdpLisyMyCell.xib in Resources */,
-				18FFB70E281AF533004E65BB /* SifMyPoolCell.xib in Resources */,
 				18FFB711281AF533004E65BB /* TxIncentiveMintingCell.xib in Resources */,
 				0443B8962855B9600027A6B9 /* WalletDetailRewardCell.xib in Resources */,
 				04C49381285069C800ECF4D2 /* PrivateKeyRestoreViewController.xib in Resources */,
@@ -7014,7 +6783,6 @@
 				18FFB717281AF533004E65BB /* TokenDetailNativeCell.xib in Resources */,
 				044374762862EA2500C6A4ED /* MemoViewController.xib in Resources */,
 				18FFB719281AF533004E65BB /* TxIncentiveHardCell.xib in Resources */,
-				18FFB71A281AF533004E65BB /* SifSwap0ViewController.xib in Resources */,
 				E1982926290E97B500451A81 /* KavaLiquidity0ViewController.xib in Resources */,
 				042AEE04286452CE00E13825 /* OkDeposit4ViewController.xib in Resources */,
 				18FFB71B281AF533004E65BB /* AccountSwitchViewController.xib in Resources */,
@@ -7136,7 +6904,6 @@
 				18FFB786281AF533004E65BB /* WalletGuideCell.xib in Resources */,
 				18FFB787281AF533004E65BB /* VoteDetailStatusCell.xib in Resources */,
 				04C5AEA4286336C7007627EA /* RewardAddress1ViewController.xib in Resources */,
-				18FFB788281AF533004E65BB /* SifPoolCell.xib in Resources */,
 				18FFB789281AF533004E65BB /* TxSaveProfileCell.xib in Resources */,
 				18FFB78A281AF533004E65BB /* TxReplaceResourceCell.xib in Resources */,
 				04E6ABA428635816008DC3C7 /* CdpCreate4ViewController.xib in Resources */,
@@ -7148,7 +6915,6 @@
 				E185368B289C149B00B84DC6 /* TxAuthzExecCell.xib in Resources */,
 				18FFB793281AF533004E65BB /* CommonMyPoolCell.xib in Resources */,
 				18FFB796281AF533004E65BB /* RegistAccountCheckCell.xib in Resources */,
-				18FFB797281AF533004E65BB /* SifChainDex.storyboard in Resources */,
 				045DAD7C2897A1A2004ED9B4 /* AuthzVote2ViewController.xib in Resources */,
 				18FFB798281AF533004E65BB /* NFTDetailRawCell.xib in Resources */,
 				18FFB799281AF533004E65BB /* TxHardWithdrawCell.xib in Resources */,
@@ -7192,7 +6958,6 @@
 				18FFB7B4281AF533004E65BB /* TxIssueNFTCell.xib in Resources */,
 				18FFB7B5281AF533004E65BB /* EditHideChainCell.xib in Resources */,
 				04172B9429F7AE4000D6279C /* Roboto-Bold.ttf in Resources */,
-				18FFB7B6281AF533004E65BB /* TxSifSwapCell.xib in Resources */,
 				18F41296286062700007E3F2 /* DeriveWalletCell.xib in Resources */,
 				18FFB7B7281AF533004E65BB /* DesmosProfileInfoCell.xib in Resources */,
 				18FFB7B8281AF533004E65BB /* Bep3SupplyPopup.xib in Resources */,
@@ -7215,7 +6980,6 @@
 				04F405F629ECF75800CD88E4 /* MemoMnemonicPopup.xib in Resources */,
 				042C389E28F5607300FF45A2 /* WalletPriceCell.xib in Resources */,
 				18FFB7C9281AF533004E65BB /* WalletOsmoCell.xib in Resources */,
-				18FFB7CA281AF533004E65BB /* SifJoinPool0ViewController.xib in Resources */,
 				18FFB7CB281AF533004E65BB /* StarName.storyboard in Resources */,
 				049B692C29D42A540027B82D /* VoteDetailTitleCell.xib in Resources */,
 				18FFB7CC281AF533004E65BB /* TxRegisterAccountCell.xib in Resources */,
@@ -7282,7 +7046,6 @@
 				04172B8929F6901300D6279C /* MainVaultCell.xib in Resources */,
 				042C38C128F69E6600FF45A2 /* ValidatorDetailCell.xib in Resources */,
 				041ECDF327F5750700397D37 /* EmptyWCViewController.xib in Resources */,
-				28440C5C271E7B7800B4A7C3 /* SifSwap3ViewController.xib in Resources */,
 				04C5AE6D28631727007627EA /* Undelegate1ViewController.xib in Resources */,
 				2889FD7D260337C600CA9896 /* TxHardLiquidateCell.xib in Resources */,
 				282FF35A23F52FD40028CC66 /* TxRewardCell.xib in Resources */,
@@ -7306,7 +7069,6 @@
 				283E949025494896007A9291 /* ResourceCell.xib in Resources */,
 				283E94822549331D007A9291 /* DomainDetailViewController.xib in Resources */,
 				045DAD812897A1AD004ED9B4 /* AuthzVote5ViewController.xib in Resources */,
-				28440C64271E7BA300B4A7C3 /* SifJoinPool3ViewController.xib in Resources */,
 				28F8EFB1286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
 				04E6ABB128635854008DC3C7 /* CdpDeposit4ViewController.xib in Resources */,
 				042C38AF28F68DD400FF45A2 /* PromotionCell.xib in Resources */,
@@ -7330,13 +7092,10 @@
 				285A33EB24486DB60052BD3D /* HtlcResultClaimCell.xib in Resources */,
 				28DB56FD25FA3B9C00B2F0E5 /* HardPoolWithdraw0ViewController.xib in Resources */,
 				0447AE8C288AAEF0004701A0 /* WalletAuthzCell.xib in Resources */,
-				288F807F270DDF08009825B5 /* TxSifRemoveLpCell.xib in Resources */,
 				28474ECF241E06AF00AF5A81 /* TxCdpRepayCell.xib in Resources */,
 				283E946E254902E5007A9291 /* TxDeleteDomainCell.xib in Resources */,
-				28440C68271E7BBA00B4A7C3 /* SifExitPool0ViewController.xib in Resources */,
 				04E25D34276F6B38009B39BA /* Nft.storyboard in Resources */,
 				28641F2D2601959E000AAEB8 /* TxDetailgRPCViewController.xib in Resources */,
-				28440C6C271E7BC800B4A7C3 /* SifExitPool3ViewController.xib in Resources */,
 				046BD2282778B398002333B5 /* SendNFT3ViewController.xib in Resources */,
 				04C5AE7F28632055007627EA /* Redelegate2ViewController.xib in Resources */,
 				0443B8952855B9600027A6B9 /* WalletDetailRewardCell.xib in Resources */,
@@ -7387,11 +7146,9 @@
 				28BB2A882533DA0B00CFF097 /* AccountPromotionCell.xib in Resources */,
 				042C389A28F5605D00FF45A2 /* WalletIovCell.xib in Resources */,
 				04E6ABA328635816008DC3C7 /* CdpCreate4ViewController.xib in Resources */,
-				288F807B270DDEFA009825B5 /* TxSifAddLpCell.xib in Resources */,
 				28474ECB241E06AF00AF5A81 /* TxCdpWithdrawCell.xib in Resources */,
 				04983C98278B046100F913A3 /* LinkChainAccount0ViewController.xib in Resources */,
 				2842AB6F242C5C7200248EEB /* CdpLisyMyCell.xib in Resources */,
-				28B9B68D271DC5F60067C6AE /* SifMyPoolCell.xib in Resources */,
 				2889FD882603485200CA9896 /* TxIncentiveMintingCell.xib in Resources */,
 				044374752862EA2500C6A4ED /* MemoViewController.xib in Resources */,
 				042AEE03286452CE00E13825 /* OkDeposit4ViewController.xib in Resources */,
@@ -7401,7 +7158,6 @@
 				2889FD832603484000CA9896 /* TxIncentiveHardCell.xib in Resources */,
 				04172B9329F7AE4000D6279C /* Roboto-Bold.ttf in Resources */,
 				04172B9529F7AE4000D6279C /* Roboto-Medium.ttf in Resources */,
-				28440C58271E7B6800B4A7C3 /* SifSwap0ViewController.xib in Resources */,
 				0419C94F29FE5B88001F9E58 /* NeuSingleVoteCell.xib in Resources */,
 				042C389128F55FE300FF45A2 /* WalletIrisCell.xib in Resources */,
 				04C5AE9128632783007627EA /* ClaimReward4ViewController.xib in Resources */,
@@ -7530,7 +7286,6 @@
 				280E1F03254A9B6B0007BA7D /* RenewStarname0ViewController.xib in Resources */,
 				E1FD233D233E1C44009327FE /* WalletGuideCell.xib in Resources */,
 				2845D885246FAEED007CD497 /* VoteDetailStatusCell.xib in Resources */,
-				28B9B689271DC5DD0067C6AE /* SifPoolCell.xib in Resources */,
 				04983CA5278C24C100F913A3 /* TxSaveProfileCell.xib in Resources */,
 				283E94782549030C007A9291 /* TxReplaceResourceCell.xib in Resources */,
 				0419C95529FF5FA7001F9E58 /* NeuMultiVoteCell.xib in Resources */,
@@ -7548,7 +7303,6 @@
 				04DFE2F02A0BD245005BD46C /* NeuSwap0ViewController.xib in Resources */,
 				044374692862E9BD00C6A4ED /* Transfer2ViewController.xib in Resources */,
 				045DAD63289128C3004ED9B4 /* AuthzExecuteCell.xib in Resources */,
-				28E8FAEF2719C227005EAA9B /* SifChainDex.storyboard in Resources */,
 				04E25D4B2770D57E009B39BA /* NFTDetailRawCell.xib in Resources */,
 				2889FD6E2603378900CA9896 /* TxHardWithdrawCell.xib in Resources */,
 				04F4061329ED103C00CD88E4 /* HtlcResultViewController.xib in Resources */,
@@ -7589,7 +7343,6 @@
 				046BD22D27795CC6002333B5 /* TxIssueNFTCell.xib in Resources */,
 				0454AE4C2928D71400EC657D /* TxEvmCell.xib in Resources */,
 				287654742726BFE80071FF96 /* EditHideChainCell.xib in Resources */,
-				288F8077270DDEE8009825B5 /* TxSifSwapCell.xib in Resources */,
 				04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */,
 				2868559024989A8F0099D18F /* Bep3SupplyPopup.xib in Resources */,
 				04F405F029ECF6F000CD88E4 /* RiskCheckPopupViewController.xib in Resources */,
@@ -7607,7 +7360,6 @@
 				28DB571625FA3BEA00B2F0E5 /* HardPoolRepay3ViewController.xib in Resources */,
 				2889FD692603377700CA9896 /* TxHardDepositCell.xib in Resources */,
 				2852EAF12681A4CC003A5E74 /* WalletOsmoCell.xib in Resources */,
-				28440C60271E7B9500B4A7C3 /* SifJoinPool0ViewController.xib in Resources */,
 				2834399B2531D13C00CCFADE /* StarName.storyboard in Resources */,
 				283E9469254902D4007A9291 /* TxRegisterAccountCell.xib in Resources */,
 				2807DB3E2788182F00016571 /* GenProfile3ViewController.xib in Resources */,
@@ -7764,7 +7516,6 @@
 				18FFB27E281AF533004E65BB /* KavaSwapExit0ViewController.swift in Sources */,
 				1817CC70283E2CE600523713 /* band_oracle_v1_tx.grpc.swift in Sources */,
 				18FFB284281AF533004E65BB /* DenomsToClaim.swift in Sources */,
-				18FFB285281AF533004E65BB /* SifDexSwapViewController.swift in Sources */,
 				0451FCB9282A3C1000214FDA /* ChainProvenance.swift in Sources */,
 				18FFB28C281AF533004E65BB /* MemoTextView.swift in Sources */,
 				18DFB80F298CADC900E812B6 /* tendermint_farming_v1beta1_query.grpc.swift in Sources */,
@@ -7813,7 +7564,6 @@
 				1817CC16283E2CE600523713 /* cosmwasm_wasm_v1_types.pb.swift in Sources */,
 				18DFB80A298CADC900E812B6 /* stride_icacallbacks_callback_data.pb.swift in Sources */,
 				047847C629629AD100FD6A7E /* Cw20IcnsByNameRes.swift in Sources */,
-				18FFB2B3281AF533004E65BB /* SifExitPool3ViewController.swift in Sources */,
 				1817CC43283E2CE600523713 /* cosmos_distribution_v1beta1_distribution.pb.swift in Sources */,
 				04CF712C294C0DDE00134A84 /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */,
 				1817CC6E283E2CE600523713 /* cosmos_base_query_v1beta1_pagination.pb.swift in Sources */,
@@ -7866,11 +7616,9 @@
 				1537A0BD29ACA33F00342ACF /* pstake_lscosmos_v1beta1_params.pb.swift in Sources */,
 				18FFB2F5281AF533004E65BB /* HardDetailAssetsCell.swift in Sources */,
 				1817CBB0283E2CE500523713 /* google_api_httpbody.pb.swift in Sources */,
-				1817CB5F283E2CE500523713 /* sifnode_oracle_v1_types.pb.swift in Sources */,
 				18FFB2F6281AF533004E65BB /* KavaIncentiveClaim3ViewController.swift in Sources */,
 				E198291E290E89DF00451A81 /* EarnValidatorCell.swift in Sources */,
 				18FFB2F8281AF533004E65BB /* StarnameWalletConnectViewController.swift in Sources */,
-				1817CBC8283E2CE500523713 /* sifnode_dispensation_v1_tx.grpc.swift in Sources */,
 				18FFB2FB281AF533004E65BB /* PromotionCell.swift in Sources */,
 				18FFB2FC281AF533004E65BB /* OkStaking.swift in Sources */,
 				1817CB99283E2CE500523713 /* desmos_profiles_v1beta1_models_chain_links.pb.swift in Sources */,
@@ -7925,7 +7673,6 @@
 				151734682A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */,
 				1817CB66283E2CE500523713 /* evmos_erc20_v1_query.pb.swift in Sources */,
 				04CF7118294C0DDE00134A84 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */,
-				1817CAB5283E2CE500523713 /* sifnode_dispensation_v1_query.pb.swift in Sources */,
 				04FC7F2028C6FECD00F64841 /* ChainStride.swift in Sources */,
 				18FFB336281AF533004E65BB /* KeyboardViewController.swift in Sources */,
 				04E165BB28B61BE1000F12C0 /* MintscanAsset.swift in Sources */,
@@ -7937,7 +7684,6 @@
 				1537A08629AC7B8700342ACF /* PersisLiquidStakingViewController.swift in Sources */,
 				18DFB7E3298CADC900E812B6 /* starname_iov_offchain_v1alpha1_offchain.pb.swift in Sources */,
 				18DFB7EB298CADC900E812B6 /* stride_icacallbacks_query.grpc.swift in Sources */,
-				18FFB33C281AF533004E65BB /* SifDexEthPoolViewController.swift in Sources */,
 				1817CAE7283E2CE500523713 /* iris_mod_nft_query.pb.swift in Sources */,
 				045DAD95289A8C18004ED9B4 /* AuthzUndelegate5ViewController.swift in Sources */,
 				1817CC2D283E2CE600523713 /* ibc_lightclients_localhost_v1_localhost.pb.swift in Sources */,
@@ -7967,7 +7713,6 @@
 				18FFB34F281AF533004E65BB /* PoolListViewController.swift in Sources */,
 				0451FC95282A3B3200214FDA /* ChainGravityBridge.swift in Sources */,
 				18FFB350281AF533004E65BB /* RegisterAccount0ViewController.swift in Sources */,
-				18FFB352281AF533004E65BB /* SifDexIbcPoolViewController.swift in Sources */,
 				18FFB353281AF533004E65BB /* MainTabHistoryViewController.swift in Sources */,
 				18D4C19628C704B8003F230A /* WalletConnectManager.swift in Sources */,
 				E1982924290E97B500451A81 /* KavaLiquidity0ViewController.swift in Sources */,
@@ -7978,7 +7723,6 @@
 				04FCD3132930AB0400BA5349 /* StrideLiquid4ViewController.swift in Sources */,
 				04C5AEAE28633D39007627EA /* Vote1ViewController.swift in Sources */,
 				1817CB51283E2CE500523713 /* google_api_annotations.pb.swift in Sources */,
-				18FFB35D281AF533004E65BB /* TxSifAddLpCell.swift in Sources */,
 				1817CBCA283E2CE500523713 /* cosmos_gov_v1beta2_tx.pb.swift in Sources */,
 				18FFB362281AF533004E65BB /* TxDetailgRPCViewController.swift in Sources */,
 				1817CC38283E2CE600523713 /* evmos_inflation_v1_query.pb.swift in Sources */,
@@ -8003,7 +7747,6 @@
 				1817CBE9283E2CE600523713 /* starname_iov_configuration_v1beta1_query.grpc.swift in Sources */,
 				045DAD742897A195004ED9B4 /* AuthzVote1ViewController.swift in Sources */,
 				04AA4C482906A6DE0027877B /* kava_incentive_v1beta1_params.pb.swift in Sources */,
-				1817CC23283E2CE600523713 /* sifnode_clp_v1_tx.grpc.swift in Sources */,
 				1537A0A929ACA33F00342ACF /* pstake_lscosmos_v1beta1_governance_proposal.pb.swift in Sources */,
 				1817CB16283E2CE500523713 /* cosmos_feegrant_v1beta1_query.grpc.swift in Sources */,
 				18FFB37F281AF533004E65BB /* ReplaceResource0ViewController.swift in Sources */,
@@ -8063,7 +7806,6 @@
 				1817CB33283E2CE500523713 /* evmos_claims_v1_claims.pb.swift in Sources */,
 				18FFB3A7281AF533004E65BB /* IntroViewController.swift in Sources */,
 				04AA4C222906A6DE0027877B /* kava_evmutil_v1beta1_tx.pb.swift in Sources */,
-				1817CBF8283E2CE600523713 /* sifnode_clp_v1_querier.pb.swift in Sources */,
 				18FFB3A8281AF533004E65BB /* TxIncentiveDelegatorCell.swift in Sources */,
 				18DFB7EA298CADC900E812B6 /* stride_stakeibc_tx.grpc.swift in Sources */,
 				042A0CB0288E599F00C4DC38 /* cosmos_auth_module_v1_module.pb.swift in Sources */,
@@ -8088,20 +7830,17 @@
 				04E165A228A0F49B000F12C0 /* confio_globalfee_v1beta1_query.grpc.swift in Sources */,
 				04CF7138294C0DDE00134A84 /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */,
 				1817CC3B283E2CE600523713 /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
-				1817CC30283E2CE600523713 /* sifnode_ethbridge_v1_types.pb.swift in Sources */,
 				1817CC00283E2CE600523713 /* starname_iov_escrow_v1beta1_query.grpc.swift in Sources */,
 				18FFB3CB281AF533004E65BB /* TokenDetailStakingCell.swift in Sources */,
 				1599551129D14410004EFCF2 /* ChainNoble.swift in Sources */,
 				04AA4BD42906A6DD0027877B /* kava_issuance_v1beta1_query.pb.swift in Sources */,
 				1817CC40283E2CE600523713 /* cosmos_group_v1beta1_query.grpc.swift in Sources */,
 				1817CBE4283E2CE600523713 /* evmos_claims_v1_genesis.pb.swift in Sources */,
-				1817CB6A283E2CE500523713 /* sifnode_dispensation_v1_query.grpc.swift in Sources */,
 				04AA4BDC2906A6DD0027877B /* kava_swap_v1beta1_tx.grpc.swift in Sources */,
 				04CF7134294C0DDE00134A84 /* desmos_profiles_v3_client_cli.pb.swift in Sources */,
 				042A0CB4288E599F00C4DC38 /* cosmos_auth_v1beta1_query.pb.swift in Sources */,
 				18DFB7FB298CADC900E812B6 /* tendermint_p2p_types.pb.swift in Sources */,
 				0451FCC2282A3C5000214FDA /* ChainCrescent.swift in Sources */,
-				1817CC50283E2CE600523713 /* sifnode_ethbridge_v1_tx.grpc.swift in Sources */,
 				04AA4C342906A6DE0027877B /* kava_incentive_v1beta1_claims.pb.swift in Sources */,
 				04AA4C832907B6C50027877B /* kava_cdp_v1beta1_tx.pb.swift in Sources */,
 				18FFB3D3281AF533004E65BB /* StdSignMsg.swift in Sources */,
@@ -8110,7 +7849,6 @@
 				1537A0C929ACA33F00342ACF /* persistence_halving_v1beta1_genesis.pb.swift in Sources */,
 				18FFB3D5281AF533004E65BB /* WalletKavaCell.swift in Sources */,
 				18DFB7F5298CADC900E812B6 /* stride_vesting_tx.pb.swift in Sources */,
-				1817CB06283E2CE500523713 /* sifnode_dispensation_v1_tx.pb.swift in Sources */,
 				1817CABE283E2CE500523713 /* crescent_liquidstaking_v1beta1_tx.pb.swift in Sources */,
 				0419C93C29FE5969001F9E58 /* MultiVote0ViewController.swift in Sources */,
 				18FFB3D6281AF533004E65BB /* GenDenom3ViewController.swift in Sources */,
@@ -8130,11 +7868,9 @@
 				1537A0CB29ACA33F00342ACF /* pstake_lscosmos_v1beta1_packet.pb.swift in Sources */,
 				1817CBBB283E2CE500523713 /* starname_cosmwasm_wasm_v1_types.pb.swift in Sources */,
 				18FFB3DB281AF533004E65BB /* SelectCoinCell.swift in Sources */,
-				1817CB4E283E2CE500523713 /* sifnode_tokenregistry_v1_tx.grpc.swift in Sources */,
 				18FFB3DC281AF533004E65BB /* BorderButton.swift in Sources */,
 				18FFB3DD281AF533004E65BB /* BinanceModel.swift in Sources */,
 				042A0CBE288E599F00C4DC38 /* cosmos_auth_v1beta1_auth.pb.swift in Sources */,
-				1817CB21283E2CE500523713 /* sifnode_clp_v1_types.pb.swift in Sources */,
 				1537A0D229ACA97700342ACF /* PersisLiquid3ViewController.swift in Sources */,
 				1817CB73283E2CE500523713 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
 				04E165BE28B62133000F12C0 /* MintscanToken.swift in Sources */,
@@ -8142,7 +7878,6 @@
 				1817CB2A283E2CE500523713 /* desmos_profiles_v1beta1_msg_server.grpc.swift in Sources */,
 				1817CB36283E2CE500523713 /* desmos_profiles_v1beta1_client_cli.pb.swift in Sources */,
 				18FFB3E1281AF533004E65BB /* TokenDetailVestingDetailCell.swift in Sources */,
-				1817CB45283E2CE500523713 /* sifnode_tokenregistry_v1_query.grpc.swift in Sources */,
 				04E1659628A0F49B000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift in Sources */,
 				18FFB3E7281AF533004E65BB /* HardPoolBorrow3ViewController.swift in Sources */,
 				E11A28DE29435063003311FD /* osmosis_gamm_v1beta1_tx.grpc.swift in Sources */,
@@ -8158,7 +7893,6 @@
 				0468BF9E28C5A04700CBC1C6 /* ChainSommelier.swift in Sources */,
 				047DCEE328855F4800253CAA /* MintscanMyVote.swift in Sources */,
 				04AA4BB22906A6DD0027877B /* kava_swap_v1beta1_genesis.pb.swift in Sources */,
-				1817CBE0283E2CE600523713 /* sifnode_clp_v1_params.pb.swift in Sources */,
 				18FFB3F7281AF533004E65BB /* NFTListCell.swift in Sources */,
 				1817CBAD283E2CE500523713 /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */,
 				18FFB3FA281AF533004E65BB /* ApiHistoryNewCustom.swift in Sources */,
@@ -8171,13 +7905,11 @@
 				18FFB406281AF533004E65BB /* NFTsDAppViewController.swift in Sources */,
 				18FFB40C281AF533004E65BB /* SelectDesmosAirdopAccountCell.swift in Sources */,
 				18FFB40E281AF533004E65BB /* TxCdpBorrowCell.swift in Sources */,
-				18FFB40F281AF533004E65BB /* SifDexDAppViewController.swift in Sources */,
 				0443748028630E2500C6A4ED /* Delegate1ViewController.swift in Sources */,
 				1817CC17283E2CE600523713 /* cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				04E165B828A0F873000F12C0 /* ChainTgrade.swift in Sources */,
 				18DFB821298CADC900E812B6 /* stride_stakeibc_callbacks.pb.swift in Sources */,
 				18FFB410281AF533004E65BB /* SettingTableViewController.swift in Sources */,
-				18FFB412281AF533004E65BB /* SifPoolCell.swift in Sources */,
 				1817CACE283E2CE500523713 /* starname_iov_configuration_v1beta1_msgs.pb.swift in Sources */,
 				18D4C1A228C73411003F230A /* ManageConnectionCell.swift in Sources */,
 				18FFB41A281AF533004E65BB /* WalletSifCell.swift in Sources */,
@@ -8209,7 +7941,6 @@
 				04C5AEA8286336D7007627EA /* RewardAddress4ViewController.swift in Sources */,
 				181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */,
 				1817CC65283E2CE600523713 /* evmos_inflation_v1_genesis.pb.swift in Sources */,
-				1817CAFC283E2CE500523713 /* sifnode_dispensation_v1_types.pb.swift in Sources */,
 				1817CB4F283E2CE500523713 /* cosmos_staking_v1beta1_authz.pb.swift in Sources */,
 				1537A0C329ACA33F00342ACF /* persistence_halving_v1beta1_query.grpc.swift in Sources */,
 				E11A28CA29435063003311FD /* osmosis_gamm_pool-models_stableswap_tx.pb.swift in Sources */,
@@ -8223,7 +7954,6 @@
 				04AA4C2C2906A6DE0027877B /* kava_kavadist_v1beta1_query.pb.swift in Sources */,
 				0451FC8C282A3AEB00214FDA /* ChainRizon.swift in Sources */,
 				E162430628C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
-				18FFB441281AF533004E65BB /* TxSifSwapCell.swift in Sources */,
 				18FFB442281AF533004E65BB /* TxOkStakeCell.swift in Sources */,
 				18FFB444281AF533004E65BB /* WcTradePopup.swift in Sources */,
 				28F1E8BA286B172100A08024 /* Validator.swift in Sources */,
@@ -8336,7 +8066,6 @@
 				18FFB4A2281AF533004E65BB /* DelegateWarnPopup.swift in Sources */,
 				9F3E32892935464C00C5C5A9 /* UITextField+Validation.swift in Sources */,
 				1817CBBD283E2CE500523713 /* cryptoorg_supply_v1_query.pb.swift in Sources */,
-				18FFB4A5281AF533004E65BB /* SifSwap3ViewController.swift in Sources */,
 				E11A28E029435063003311FD /* osmosis_gamm_v2_query.grpc.swift in Sources */,
 				1817CB7B283E2CE500523713 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
 				18FFB4AB281AF533004E65BB /* HarvestDetailTopCell.swift in Sources */,
@@ -8345,10 +8074,8 @@
 				1817CBA1283E2CE500523713 /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
 				1537A0BB29ACA33F00342ACF /* pstake_lscosmos_v1beta1_genesis.pb.swift in Sources */,
 				04AA4BDE2906A6DD0027877B /* kava_earn_v1beta1_query.grpc.swift in Sources */,
-				18FFB4B0281AF533004E65BB /* SifJoinPool3ViewController.swift in Sources */,
 				18FFB4B1281AF533004E65BB /* OkMyValidatorViewController.swift in Sources */,
 				18DFB825298CADC900E812B6 /* stride_mint_v1beta1_query.pb.swift in Sources */,
-				18FFB4B2281AF533004E65BB /* TxSifRemoveLpCell.swift in Sources */,
 				1817CBDF283E2CE600523713 /* desmos_profiles_v1beta1_msgs_app_links.pb.swift in Sources */,
 				18DFB818298CADC900E812B6 /* tendermint_crypto_keys.pb.swift in Sources */,
 				18FFB4B8281AF533004E65BB /* TxIbcUpdateClientCell.swift in Sources */,
@@ -8384,7 +8111,6 @@
 				04AA4C382906A6DE0027877B /* kava_committee_v1beta1_query.grpc.swift in Sources */,
 				0443B86F2852FAF30027A6B9 /* SwitchAccountHeader.swift in Sources */,
 				18FFB4E0281AF533004E65BB /* DeleteStarname3ViewController.swift in Sources */,
-				18FFB4E1281AF533004E65BB /* SifSwap0ViewController.swift in Sources */,
 				18DFB7AC298CAC3200E812B6 /* MnemonicDetailViewController.swift in Sources */,
 				18FFB4E7281AF533004E65BB /* TxReplaceResourceCell.swift in Sources */,
 				0454AE412927459300EC657D /* ethermint_feemarket_v1_query.grpc.swift in Sources */,
@@ -8428,7 +8154,6 @@
 				1817CAE2283E2CE500523713 /* cryptoorg_nft_v1_tx.pb.swift in Sources */,
 				18FFB4FE281AF533004E65BB /* TxEditRewardAddressCell.swift in Sources */,
 				045DAD7A2897A1A2004ED9B4 /* AuthzVote2ViewController.swift in Sources */,
-				18FFB501281AF533004E65BB /* SifJoinPool0ViewController.swift in Sources */,
 				1817CC69283E2CE600523713 /* cosmos_mint_v1beta1_query.pb.swift in Sources */,
 				18FFB504281AF533004E65BB /* TxIncentiveSwapCell.swift in Sources */,
 				18FFB506281AF533004E65BB /* HardDetailViewController.swift in Sources */,
@@ -8440,7 +8165,6 @@
 				18FFB508281AF533004E65BB /* VaildatorDetailViewController.swift in Sources */,
 				18DFB810298CADC900E812B6 /* stride_records_genesis.grpc.swift in Sources */,
 				18FFB50B281AF533004E65BB /* NewAccountTypePopup.swift in Sources */,
-				1817CB30283E2CE500523713 /* sifnode_tokenregistry_v1_tx.pb.swift in Sources */,
 				18FFB514281AF533004E65BB /* RegisterAccount4ViewController.swift in Sources */,
 				04AA4C102906A6DD0027877B /* kava_liquid_v1beta1_query.grpc.swift in Sources */,
 				04AA4C502906A6DE0027877B /* kava_pricefeed_v1beta1_store.pb.swift in Sources */,
@@ -8472,10 +8196,8 @@
 				18FFB52A281AF533004E65BB /* WalletChainEditViewController.swift in Sources */,
 				1817CAF5283E2CE500523713 /* gravity_v1_msgs.pb.swift in Sources */,
 				04AA4C2A2906A6DE0027877B /* kava_auction_v1beta1_tx.pb.swift in Sources */,
-				1817CB8D283E2CE500523713 /* sifnode_clp_v1_tx.pb.swift in Sources */,
 				1817CB12283E2CE500523713 /* ibc_core_commitment_v1_commitment.pb.swift in Sources */,
 				18FFB52C281AF533004E65BB /* DomainPromotionCell.swift in Sources */,
-				1817CBDE283E2CE600523713 /* sifnode_clp_v1_genesis.pb.swift in Sources */,
 				18FFB52E281AF533004E65BB /* ResourceAddCell.swift in Sources */,
 				1537A0AD29ACA33F00342ACF /* persistence_interchainquery_v1beta1_messages.pb.swift in Sources */,
 				18FFB531281AF533004E65BB /* WalletPriceCell.swift in Sources */,
@@ -8483,7 +8205,6 @@
 				18FFB534281AF533004E65BB /* DomainCell.swift in Sources */,
 				04172BA129F7E2C300D6279C /* VaultContract3ViewController.swift in Sources */,
 				04AA4BF42906A6DD0027877B /* kava_savings_v1beta1_store.pb.swift in Sources */,
-				1817CB2F283E2CE500523713 /* sifnode_tokenregistry_v1_types.pb.swift in Sources */,
 				1817CAD3283E2CE500523713 /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
 				E10A7561287E612100BC66BC /* WalletMediblocEventCell.swift in Sources */,
 				E1853689289C149B00B84DC6 /* TxAuthzExecCell.swift in Sources */,
@@ -8500,7 +8221,6 @@
 				18FFB54E281AF533004E65BB /* TxVoteCell.swift in Sources */,
 				15119C5829BF2F89004760DE /* ChainKyve.swift in Sources */,
 				1537A0AB29ACA33F00342ACF /* persistence_interchainquery_v1beta1_genesis.pb.swift in Sources */,
-				18FFB54F281AF533004E65BB /* SifMyPoolCell.swift in Sources */,
 				18FFB550281AF533004E65BB /* HarvestDetailMyActionCell.swift in Sources */,
 				047847C02962988300FD6A7E /* Cw20IcnsByNameReq.swift in Sources */,
 				18FFB551281AF533004E65BB /* TxUnknownCell.swift in Sources */,
@@ -8537,7 +8257,6 @@
 				18FFB56D281AF533004E65BB /* ValidatorDetailCell.swift in Sources */,
 				045DADA7289BA1FC004ED9B4 /* AuthzRedelegate5ViewController.swift in Sources */,
 				04AA4C602906AF320027877B /* ClaimMultiplier.swift in Sources */,
-				1817CB0C283E2CE500523713 /* sifnode_tokenregistry_v1_query.pb.swift in Sources */,
 				18FFB570281AF533004E65BB /* BottomLineTextField.swift in Sources */,
 				1817CC5C283E2CE600523713 /* cosmos_capability_v1beta1_genesis.pb.swift in Sources */,
 				18FFB576281AF533004E65BB /* OkHistory.swift in Sources */,
@@ -8716,7 +8435,6 @@
 				18FFB5FF281AF533004E65BB /* OkTopValidatorViewController.swift in Sources */,
 				0451FC77282A3AC000214FDA /* ChainIris.swift in Sources */,
 				04FCD3202930EB9400BA5349 /* TxLiquidStakeCell.swift in Sources */,
-				1817CBBA283E2CE500523713 /* sifnode_ethbridge_v1_query.grpc.swift in Sources */,
 				18FFB603281AF533004E65BB /* HardPoolWithdraw3ViewController.swift in Sources */,
 				0454AE352927459300EC657D /* ethermint_evm_v1_query.pb.swift in Sources */,
 				045DAD6E28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.swift in Sources */,
@@ -8757,7 +8475,6 @@
 				1817CC5B283E2CE600523713 /* desmos_profiles_v1beta1_query.grpc.swift in Sources */,
 				1817CB31283E2CE500523713 /* crescent_liquidity_v1beta1_tx.grpc.swift in Sources */,
 				18DFB808298CADC900E812B6 /* stride_claim_params.pb.swift in Sources */,
-				18FFB61F281AF533004E65BB /* SifExitPool0ViewController.swift in Sources */,
 				04AA4C522906A6DE0027877B /* kava_savings_v1beta1_query.grpc.swift in Sources */,
 				04AA4BE02906A6DD0027877B /* kava_savings_v1beta1_tx.grpc.swift in Sources */,
 				1817CAAD283E2CE500523713 /* band_oracle_v1_query.pb.swift in Sources */,
@@ -8782,7 +8499,6 @@
 				18FFB62A281AF533004E65BB /* VoteDetailsViewController.swift in Sources */,
 				049B692029D1736B0027B82D /* MintscanV1Proposal.swift in Sources */,
 				043031E328BE0D21005FF935 /* SelectContractTokenCell.swift in Sources */,
-				1817CB3A283E2CE500523713 /* sifnode_ethbridge_v1_tx.pb.swift in Sources */,
 				18FFB62B281AF533004E65BB /* WalletIovCell.swift in Sources */,
 				0454AE332927459300EC657D /* ethermint_types_v1_indexer.pb.swift in Sources */,
 				0451FCBF282A3C3E00214FDA /* ChainOmiflix.swift in Sources */,
@@ -8808,14 +8524,12 @@
 				045DAD56288FAEB5004ED9B4 /* AuthzGranteeCell.swift in Sources */,
 				1817CC4F283E2CE600523713 /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift in Sources */,
 				045DADA1289BA1F0004ED9B4 /* AuthzRedelegate2ViewController.swift in Sources */,
-				1817CAED283E2CE500523713 /* sifnode_clp_v1_querier.grpc.swift in Sources */,
 				1817CBDC283E2CE600523713 /* cosmwasm_wasm_v1_tx.grpc.swift in Sources */,
 				1817CC19283E2CE600523713 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */,
 				18FFB649281AF533004E65BB /* TxLinkAccountCell.swift in Sources */,
 				1817CC2C283E2CE600523713 /* cosmos_gov_v1beta1_gov.pb.swift in Sources */,
 				1817CAB9283E2CE500523713 /* evmos_epochs_v1_genesis.pb.swift in Sources */,
 				04E6ABC22863588A008DC3C7 /* CdpDrawDebt1ViewController.swift in Sources */,
-				1817CB91283E2CE500523713 /* sifnode_ethbridge_v1_query.pb.swift in Sources */,
 				0443B89C2859C0770027A6B9 /* ChainAlthea.swift in Sources */,
 				18FFB64E281AF533004E65BB /* WcTransferPopup.swift in Sources */,
 				18FFB652281AF533004E65BB /* GenProfile3ViewController.swift in Sources */,
@@ -8868,7 +8582,6 @@
 				04DFE2F42A0BD26A005BD46C /* NeuSwap3ViewController.swift in Sources */,
 				04AA4BCB2906A6DD0027877B /* kava_swap_v1beta1_tx.pb.swift in Sources */,
 				282FF34523F5062A0028CC66 /* TxDelegateCell.swift in Sources */,
-				047FB6E1281A4C52009D8AAF /* sifnode_dispensation_v1_query.pb.swift in Sources */,
 				040FA9D9275F55C300229F6F /* cosmos_feegrant_v1beta1_query.pb.swift in Sources */,
 				040FAA09275F55C300229F6F /* tendermint_farming_v1beta1_genesis.pb.swift in Sources */,
 				E1406FC422607B8500D9440C /* LoadingImageView.swift in Sources */,
@@ -8909,10 +8622,8 @@
 				04AA4C532906A6DE0027877B /* kava_savings_v1beta1_tx.pb.swift in Sources */,
 				040FA957275F55C300229F6F /* band_oracle_v1_tx.grpc.swift in Sources */,
 				284FBC7426DB961A00403FE2 /* DenomsToClaim.swift in Sources */,
-				28E8FAF32719C279005EAA9B /* SifDexSwapViewController.swift in Sources */,
 				0424400E29FAE7420018A1D9 /* DaoProposalCell.swift in Sources */,
 				040FAAD4275F55C400229F6F /* cosmos_bank_v1beta1_authz.pb.swift in Sources */,
-				047FB6E9281A4C53009D8AAF /* sifnode_clp_v1_types.pb.swift in Sources */,
 				E1FEE45B225B1AEF0040FAFD /* MemoTextView.swift in Sources */,
 				2829CEA72627080C0048B52A /* WalletCrytoCell.swift in Sources */,
 				040FAA08275F55C300229F6F /* starname_iov_starname_v1beta1_tx.pb.swift in Sources */,
@@ -8947,7 +8658,6 @@
 				1537A0B229ACA33F00342ACF /* persistence_epochs_v1beta1_query.grpc.swift in Sources */,
 				04E165B428A0F4A4000F12C0 /* confio_twasm_v1beta1_proposal.pb.swift in Sources */,
 				2852EAF02681A4CC003A5E74 /* WalletOsmoCell.swift in Sources */,
-				28440C6B271E7BC800B4A7C3 /* SifExitPool3ViewController.swift in Sources */,
 				2888B7FC246BC17300B2EB4A /* BnbNodeInfo.swift in Sources */,
 				048C830B27BF572800270528 /* evmos_claims_v1_query.pb.swift in Sources */,
 				048C82FD27BF572800270528 /* evmos_incentives_v1_query.grpc.swift in Sources */,
@@ -9050,7 +8760,6 @@
 				046E903D268C413A002CFFE1 /* BinanceProto.swift in Sources */,
 				04CF711B294C0DDE00134A84 /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */,
 				04FCD3122930AB0400BA5349 /* StrideLiquid4ViewController.swift in Sources */,
-				047FB6EC281A4C53009D8AAF /* sifnode_ethbridge_v1_query.pb.swift in Sources */,
 				040FA9CD275F55C300229F6F /* cosmos_crypto_keyring_v1_record.pb.swift in Sources */,
 				048C831527BF572800270528 /* evmos_vesting_v1_vesting.pb.swift in Sources */,
 				040FA995275F55C300229F6F /* starname_iov_offchain_v1alpha1_offchain.pb.swift in Sources */,
@@ -9065,7 +8774,6 @@
 				042A0CB3288E599F00C4DC38 /* cosmos_auth_v1beta1_query.pb.swift in Sources */,
 				040FA936275F55C300229F6F /* desmos_profiles_v1beta1_msgs_relationships.pb.swift in Sources */,
 				283D2EA424F52FE700247424 /* OkToken.swift in Sources */,
-				047FB6F4281A4C53009D8AAF /* sifnode_clp_v1_genesis.pb.swift in Sources */,
 				040FAA5B275F55C400229F6F /* desmos_profiles_v1beta1_msgs_chain_links.pb.swift in Sources */,
 				04E6ABAF28635854008DC3C7 /* CdpDeposit4ViewController.swift in Sources */,
 				04AA4C5F2906AF320027877B /* ClaimMultiplier.swift in Sources */,
@@ -9074,7 +8782,6 @@
 				04E165BA28B61BE1000F12C0 /* MintscanAsset.swift in Sources */,
 				28474ED5241E06AF00AF5A81 /* TxCdpRepayCell.swift in Sources */,
 				04D3392327E8803000E82AA7 /* WalletCrescentCell.swift in Sources */,
-				047FB6F6281A4C53009D8AAF /* sifnode_oracle_v1_types.pb.swift in Sources */,
 				E171A075225B091300C5756C /* StepGenTxViewController.swift in Sources */,
 				04CF7117294C0DDE00134A84 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */,
 				283439A12531D1CF00CCFADE /* MyDomainViewController.swift in Sources */,
@@ -9103,8 +8810,6 @@
 				154A98082983A05700E0B801 /* stride_interchainquery_v1_messages.grpc.swift in Sources */,
 				0451FC58282A399D00214FDA /* ChainBand.swift in Sources */,
 				04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */,
-				047FB6EA281A4C53009D8AAF /* sifnode_clp_v1_querier.pb.swift in Sources */,
-				28E8FAF52719C28F005EAA9B /* SifDexEthPoolViewController.swift in Sources */,
 				0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */,
 				283E9458254901D9007A9291 /* RegisterDomain0ViewController.swift in Sources */,
 				040FAA98275F55C400229F6F /* cryptoorg_supply_v1_accounts.pb.swift in Sources */,
@@ -9123,14 +8828,12 @@
 				154A980F2983A05800E0B801 /* stride_icacallbacks_callback_data.pb.swift in Sources */,
 				0454AE4A2928D71400EC657D /* TxEvmCell.swift in Sources */,
 				28D372A0254BFCCA0071B136 /* RegisterAccount0ViewController.swift in Sources */,
-				28E8FAF72719C29F005EAA9B /* SifDexIbcPoolViewController.swift in Sources */,
 				E1945E4A222E81B300A1436F /* MainTabHistoryViewController.swift in Sources */,
 				04983C9B278B046D00F913A3 /* LinkChainAccount3ViewController.swift in Sources */,
 				04FCD30C2930AAF700BA5349 /* StrideLiquid0ViewController.swift in Sources */,
 				040FAA61275F55C400229F6F /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
 				046FF01E277B766200F72C11 /* TxIssueNFTDenomCell.swift in Sources */,
 				040FA945275F55C300229F6F /* cosmos_params_v1beta1_params.pb.swift in Sources */,
-				288F807A270DDEFA009825B5 /* TxSifAddLpCell.swift in Sources */,
 				040FA9D5275F55C300229F6F /* injective_types_v1beta1_account.pb.swift in Sources */,
 				28641F2C2601959E000AAEB8 /* TxDetailgRPCViewController.swift in Sources */,
 				0454AE3A2927459300EC657D /* ethermint_evm_v1_evm.pb.swift in Sources */,
@@ -9175,7 +8878,6 @@
 				040FA849275F55C200229F6F /* ibc_core_port_v1_query.grpc.swift in Sources */,
 				040FA8B2275F55C200229F6F /* ibc_lightclients_localhost_v1_localhost.pb.swift in Sources */,
 				289E4DB326E5D777007C7C35 /* CommonMyPoolCell.swift in Sources */,
-				047FB6E6281A4C52009D8AAF /* sifnode_ethbridge_v1_types.pb.swift in Sources */,
 				28B2E4BB26CFB94800ECF960 /* NativeTokenGrpcViewController.swift in Sources */,
 				0451FC8E282A3B0800214FDA /* ChainRegen.swift in Sources */,
 				2842AB72242C7C8A00248EEB /* CdpListAllCell.swift in Sources */,
@@ -9188,7 +8890,6 @@
 				E1A82DE822448E940097CAEE /* WUtils.swift in Sources */,
 				28641F302601AD59000AAEB8 /* TxCell.swift in Sources */,
 				04AA4C252906A6DE0027877B /* kava_auction_v1beta1_query.grpc.swift in Sources */,
-				047FB6E2281A4C52009D8AAF /* sifnode_clp_v1_params.pb.swift in Sources */,
 				E11A28D329435063003311FD /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift in Sources */,
 				2834399E2531D1A200CCFADE /* StarNameListViewController.swift in Sources */,
 				2827E11123F3896C007CDB6E /* TxDetailViewController.swift in Sources */,
@@ -9220,7 +8921,6 @@
 				04AA4BD12906A6DD0027877B /* kava_earn_v1beta1_genesis.pb.swift in Sources */,
 				040FA9E8275F55C300229F6F /* band_oracle_v1_oracle.pb.swift in Sources */,
 				048C831327BF572800270528 /* evmos_erc20_v1_query.grpc.swift in Sources */,
-				047FB6F3281A4C53009D8AAF /* sifnode_clp_v1_tx.grpc.swift in Sources */,
 				040FA969275F55C300229F6F /* gravity_v1_query.pb.swift in Sources */,
 				28DB56F225FA3B7100B2F0E5 /* HardPoolDeposit0ViewController.swift in Sources */,
 				0451FCA3282A3B7500214FDA /* ChainInjective.swift in Sources */,
@@ -9328,11 +9028,9 @@
 				04C5AEA1286336C7007627EA /* RewardAddress1ViewController.swift in Sources */,
 				040FA803275F55C200229F6F /* cosmos_crypto_secp256k1_keys.pb.swift in Sources */,
 				28474ECE241E06AF00AF5A81 /* TxCdpBorrowCell.swift in Sources */,
-				28E8FAF12719C265005EAA9B /* SifDexDAppViewController.swift in Sources */,
 				E151B658224873640026B8C0 /* SettingTableViewController.swift in Sources */,
 				040FA7BC275F55C200229F6F /* cryptoorg_supply_v1_query.pb.swift in Sources */,
 				0451FC6E282A3A7F00214FDA /* ChainOsmosis.swift in Sources */,
-				28B9B688271DC5DD0067C6AE /* SifPoolCell.swift in Sources */,
 				040FA8B7275F55C200229F6F /* band_oracle_v1_tx.pb.swift in Sources */,
 				040FA7CB275F55C200229F6F /* cosmos_capability_v1beta1_genesis.pb.swift in Sources */,
 				040FA8FB275F55C300229F6F /* desmos_profiles_legacy_v100_models_params.pb.swift in Sources */,
@@ -9347,9 +9045,7 @@
 				046E9043268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift in Sources */,
 				28A2A4CA2721B9030042ACC4 /* AccountSwitchViewController.swift in Sources */,
 				28B4302A24F76AD500BD7BB2 /* OkTransfer.swift in Sources */,
-				047FB6ED281A4C53009D8AAF /* sifnode_ethbridge_v1_tx.grpc.swift in Sources */,
 				04AA4BF72906A6DD0027877B /* kava_swap_v1beta1_query.grpc.swift in Sources */,
-				047FB6E4281A4C52009D8AAF /* sifnode_ethbridge_v1_query.grpc.swift in Sources */,
 				1537A0B629ACA33F00342ACF /* persistence_interchainquery_v1beta1_query.pb.swift in Sources */,
 				04CFBD51269227680013150B /* TxIbcAcknowledgeCell.swift in Sources */,
 				040FAA1F275F55C300229F6F /* starname_cosmwasm_wasm_v1_proposal.pb.swift in Sources */,
@@ -9384,13 +9080,11 @@
 				040FA90C275F55C300229F6F /* cosmos_group_v1beta1_query.grpc.swift in Sources */,
 				04172BBB29F803E900D6279C /* VaultContract0ViewController.swift in Sources */,
 				2889FD7C260337C600CA9896 /* TxHardLiquidateCell.swift in Sources */,
-				288F8076270DDEE8009825B5 /* TxSifSwapCell.swift in Sources */,
 				28B4303924F7996C00BD7BB2 /* TxOkStakeCell.swift in Sources */,
 				282BDFE224A5992500D3A5D4 /* WcTradePopup.swift in Sources */,
 				0419C94729FE599D001F9E58 /* NeuVote3ViewController.swift in Sources */,
 				040FA916275F55C300229F6F /* desmos_profiles_v1beta1_query_profile.pb.swift in Sources */,
 				9F831EED291C5C1800A998FC /* UIStoryboard+Instantiate.swift in Sources */,
-				047FB6F0281A4C53009D8AAF /* sifnode_tokenregistry_v1_tx.grpc.swift in Sources */,
 				040FAA4C275F55C400229F6F /* desmos_profiles_v1beta1_query_relationships.pb.swift in Sources */,
 				041ECDEE27F41DCE00397D37 /* WcSignRequestPopup.swift in Sources */,
 				048C831127BF572800270528 /* evmos_inflation_v1_genesis.pb.swift in Sources */,
@@ -9478,33 +9172,26 @@
 				2868559B24989ACD0099D18F /* DelegateWarnPopup.swift in Sources */,
 				04AA4BF32906A6DD0027877B /* kava_savings_v1beta1_store.pb.swift in Sources */,
 				0451FCAF282A3BB800214FDA /* ChainAssetmantle.swift in Sources */,
-				047FB6E8281A4C53009D8AAF /* sifnode_tokenregistry_v1_tx.pb.swift in Sources */,
-				28440C5B271E7B7800B4A7C3 /* SifSwap3ViewController.swift in Sources */,
 				0451FC9A282A3B5000214FDA /* ChainComdex.swift in Sources */,
 				040FAACB275F55C400229F6F /* google_api_http.pb.swift in Sources */,
 				048C830127BF572800270528 /* evmos_epochs_v1_genesis.pb.swift in Sources */,
 				040FA928275F55C300229F6F /* cosmos_nft_v1beta1_genesis.pb.swift in Sources */,
 				28156E9A2536DE14006FF06C /* HarvestDetailTopCell.swift in Sources */,
 				04172B7C29F6826200D6279C /* Cw20VaultDepositRes.swift in Sources */,
-				047FB6F2281A4C53009D8AAF /* sifnode_dispensation_v1_tx.pb.swift in Sources */,
 				04E25D412770C8BE009B39BA /* NTFDetailViewController.swift in Sources */,
-				28440C63271E7BA300B4A7C3 /* SifJoinPool3ViewController.swift in Sources */,
 				04AA4BF92906A6DD0027877B /* kava_bep3_v1beta1_tx.grpc.swift in Sources */,
 				043031E828BE1D72005FF935 /* MultiSelectPopupViewController.swift in Sources */,
 				1537A0BA29ACA33F00342ACF /* pstake_lscosmos_v1beta1_genesis.pb.swift in Sources */,
 				28B4304624F8B36600BD7BB2 /* OkMyValidatorViewController.swift in Sources */,
 				04AA4C232906A6DE0027877B /* kava_hard_v1beta1_tx.pb.swift in Sources */,
 				04AA4BE32906A6DD0027877B /* kava_evmutil_v1beta1_tx.grpc.swift in Sources */,
-				288F807E270DDF08009825B5 /* TxSifRemoveLpCell.swift in Sources */,
 				040FA85B275F55C200229F6F /* cosmos_staking_v1beta1_tx.pb.swift in Sources */,
 				042A0C96288E469700C4DC38 /* AuthzListViewController.swift in Sources */,
 				040FA8CC275F55C200229F6F /* cosmos_base_store_v1beta1_commit_info.pb.swift in Sources */,
 				040FA80A275F55C200229F6F /* tendermint_types_types.pb.swift in Sources */,
 				04AA4C412906A6DE0027877B /* kava_committee_v1beta1_genesis.pb.swift in Sources */,
 				04CFBD552692278C0013150B /* TxIbcUpdateClientCell.swift in Sources */,
-				047FB6F1281A4C53009D8AAF /* sifnode_clp_v1_querier.grpc.swift in Sources */,
 				04E2A32527A57D270045ED21 /* Cw20BalanceReq.swift in Sources */,
-				047FB6EB281A4C53009D8AAF /* sifnode_tokenregistry_v1_types.pb.swift in Sources */,
 				2889FD822603484000CA9896 /* TxIncentiveHardCell.swift in Sources */,
 				04E6ABD3286358C4008DC3C7 /* CdpDrawRepay4ViewController.swift in Sources */,
 				0451FC60282A39FB00214FDA /* ChainOkc.swift in Sources */,
@@ -9545,7 +9232,6 @@
 				042AEE192864531600E13825 /* OkVote4ViewController.swift in Sources */,
 				280E1EFD254A7AD60007BA7D /* DeleteStarname3ViewController.swift in Sources */,
 				04AA4C212906A6DE0027877B /* kava_evmutil_v1beta1_tx.pb.swift in Sources */,
-				28440C57271E7B6800B4A7C3 /* SifSwap0ViewController.swift in Sources */,
 				0451FC56282A398E00214FDA /* ChainStarname.swift in Sources */,
 				040FA7DA275F55C200229F6F /* ibc_core_channel_v1_query.pb.swift in Sources */,
 				040FAA2F275F55C400229F6F /* starname_iov_configuration_v1beta1_msgs.pb.swift in Sources */,
@@ -9559,7 +9245,6 @@
 				046FA6E82876C3FF00F6318A /* ChainCudos.swift in Sources */,
 				E11A28D729435063003311FD /* osmosis_gamm_pool-models_stableswap_stableswap_pool.pb.swift in Sources */,
 				040FAA55275F55C400229F6F /* cosmos_bank_v1beta1_bank.pb.swift in Sources */,
-				047FB6EF281A4C53009D8AAF /* sifnode_clp_v1_tx.pb.swift in Sources */,
 				04AA4C172906A6DD0027877B /* kava_committee_v1beta1_tx.grpc.swift in Sources */,
 				040FA9A1275F55C300229F6F /* ibc_applications_transfer_v2_packet.pb.swift in Sources */,
 				040FA889275F55C200229F6F /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift in Sources */,
@@ -9572,7 +9257,6 @@
 				28DB571025FA3BDD00B2F0E5 /* HardPoolRepay0ViewController.swift in Sources */,
 				E1FD233C233E1C44009327FE /* WalletGuideCell.swift in Sources */,
 				E1FFB67229F96E3500E6A28A /* NeuDaosListViewController.swift in Sources */,
-				047FB6E3281A4C52009D8AAF /* sifnode_dispensation_v1_tx.grpc.swift in Sources */,
 				28E3E3802671BE8D00BA89C2 /* Param.swift in Sources */,
 				E11A28D129435063003311FD /* osmosis_gamm_v2_query.pb.swift in Sources */,
 				0468BFA028C5ADE900CBC1C6 /* ChainLike.swift in Sources */,
@@ -9581,7 +9265,6 @@
 				0451FC91282A3B1C00214FDA /* ChainBitcana.swift in Sources */,
 				040FAA43275F55C400229F6F /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				042A0CAF288E599F00C4DC38 /* cosmos_auth_module_v1_module.pb.swift in Sources */,
-				28440C5F271E7B9500B4A7C3 /* SifJoinPool0ViewController.swift in Sources */,
 				04AA4C072906A6DD0027877B /* kava_earn_v1beta1_tx.pb.swift in Sources */,
 				040FAAFD275F55C400229F6F /* cosmos_group_v1beta1_tx.pb.swift in Sources */,
 				042A0CB5288E599F00C4DC38 /* cosmos_authz_v1beta1_tx.pb.swift in Sources */,
@@ -9604,7 +9287,6 @@
 				040FAA03275F55C300229F6F /* iris_mod_nft_query.grpc.swift in Sources */,
 				040FA860275F55C200229F6F /* cosmos_evidence_v1beta1_tx.pb.swift in Sources */,
 				04AA4C0D2906A6DD0027877B /* kava_issuance_v1beta1_tx.pb.swift in Sources */,
-				047FB6F5281A4C53009D8AAF /* sifnode_dispensation_v1_types.pb.swift in Sources */,
 				1537A0AE29ACA33F00342ACF /* persistence_interchainquery_v1beta1_query.grpc.swift in Sources */,
 				28D372AA254BFCE70071B136 /* RegisterAccount4ViewController.swift in Sources */,
 				2842AB6E242C5C7200248EEB /* CdpLisyMyCell.swift in Sources */,
@@ -9656,7 +9338,6 @@
 				04B1BE1E27A3BC4500B1236A /* cosmwasm_wasm_v1_ibc.pb.swift in Sources */,
 				282FF36123F532360028CC66 /* TxVoteCell.swift in Sources */,
 				188746D628914EE300E0A558 /* MainDappViewController.swift in Sources */,
-				28B9B68C271DC5F60067C6AE /* SifMyPoolCell.swift in Sources */,
 				28156E9F2536DE29006FF06C /* HarvestDetailMyActionCell.swift in Sources */,
 				282FF36523F533AF0028CC66 /* TxUnknownCell.swift in Sources */,
 				E1271B08224B90230083AF17 /* AddressInputTextField.swift in Sources */,
@@ -9906,7 +9587,6 @@
 				28B4304424F8B34100BD7BB2 /* OkValidatorListViewController.swift in Sources */,
 				040FA9CA275F55C300229F6F /* starname_cosmwasm_wasm_v1_tx.grpc.swift in Sources */,
 				2889FD722603379A00CA9896 /* TxHardBorrowCell.swift in Sources */,
-				28440C67271E7BBA00B4A7C3 /* SifExitPool0ViewController.swift in Sources */,
 				283E948F25494896007A9291 /* ResourceCell.swift in Sources */,
 				040FA934275F55C300229F6F /* cosmos_nft_v1beta1_query.grpc.swift in Sources */,
 				0454AE2C2927459300EC657D /* ethermint_evm_v1_query.grpc.swift in Sources */,
@@ -9934,7 +9614,6 @@
 				049B691F29D1736B0027B82D /* MintscanV1Proposal.swift in Sources */,
 				041345BB27855F6600DC49AD /* ProfileViewController.swift in Sources */,
 				04D3390327E826F100E82AA7 /* crescent_farming_v1beta1_tx.grpc.swift in Sources */,
-				047FB6EE281A4C53009D8AAF /* sifnode_tokenregistry_v1_query.pb.swift in Sources */,
 				045DAD7F2897A1AD004ED9B4 /* AuthzVote5ViewController.swift in Sources */,
 				040FA8F4275F55C200229F6F /* gogoproto_gogo.pb.swift in Sources */,
 				040FA9E9275F55C300229F6F /* starname_iov_escrow_v1beta1_types.pb.swift in Sources */,
@@ -9968,7 +9647,6 @@
 				040FAA92275F55C400229F6F /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
 				E1A82DD5224223250097CAEE /* Balance.swift in Sources */,
 				04D338FF27E826F100E82AA7 /* crescent_liquidstaking_v1beta1_query.pb.swift in Sources */,
-				047FB6E7281A4C53009D8AAF /* sifnode_tokenregistry_v1_query.grpc.swift in Sources */,
 				E198291D290E89DF00451A81 /* EarnValidatorCell.swift in Sources */,
 				0443B8742853064B0027A6B9 /* SwitchAccountFooter.swift in Sources */,
 				282FF35523F518E00028CC66 /* TxMultiTransferCell.swift in Sources */,
@@ -9979,8 +9657,6 @@
 				04AA4BD52906A6DD0027877B /* kava_committee_v1beta1_proposal.pb.swift in Sources */,
 				9FF966042926BE78006C2300 /* Array+Sum.swift in Sources */,
 				E1317142225F352A00EE5AD0 /* PostTx.swift in Sources */,
-				047FB6F7281A4C53009D8AAF /* sifnode_dispensation_v1_query.grpc.swift in Sources */,
-				047FB6E5281A4C52009D8AAF /* sifnode_ethbridge_v1_tx.pb.swift in Sources */,
 				04D3390427E826F100E82AA7 /* crescent_mint_v1beta1_query.pb.swift in Sources */,
 				1537A0CE29ACA33F00342ACF /* pstake_lscosmos_v1beta1_lscosmos.pb.swift in Sources */,
 				1537A08C29AC914000342ACF /* PersisLiquid0ViewController.swift in Sources */,
