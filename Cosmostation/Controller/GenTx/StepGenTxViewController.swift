@@ -126,11 +126,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mLPCoin: Coin?
     var mLockupDuration: Int64?
     
-    
-    var mSifPool: Sifnode_Clp_V1_Pool?
-    var mSifMyAllUnitAmount: String?
-    var mSifMyWithdrawUnitAmount: String?
-    
     var mNFTHash: String?
     var mNFTName: String?
     var mNFTDescription: String?
@@ -384,26 +379,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     Swap3ViewController(nibName: "Swap3ViewController", bundle: nil)]
             
-        }
-        
-        //SIF
-        else if (mType == TASK_TYPE_SIF_ADD_LP) {
-            return [SifJoinPool0ViewController(nibName: "SifJoinPool0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    SifJoinPool3ViewController(nibName: "SifJoinPool3ViewController", bundle: nil)]
-            
-        } else if (mType == TASK_TYPE_SIF_REMOVE_LP) {
-            return [SifExitPool0ViewController(nibName: "SifExitPool0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    SifExitPool3ViewController(nibName: "SifExitPool3ViewController", bundle: nil)]
-            
-        } else if (mType == TASK_TYPE_SIF_SWAP_CION) {
-            return [SifSwap0ViewController(nibName: "SifSwap0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    SifSwap3ViewController(nibName: "SifSwap3ViewController", bundle: nil)]
         }
         
         //DESMOS

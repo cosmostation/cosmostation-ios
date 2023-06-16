@@ -60,9 +60,6 @@ final class BaseData : NSObject{
     
     var mSupportPools = Array<SupportPool>()
     
-    var mSifDexPools_gRPC = Array<Sifnode_Clp_V1_Pool>()
-    var mSifDexMyAssets_gRPC = Array<Sifnode_Clp_V1_Asset>()
-    
     var mNeutronVaults = Array<NeutronVault>()
     var mNeutronDaos = Array<NeutronDao>()
     var mNeutronVaultDeposit = NSDecimalNumber.zero
