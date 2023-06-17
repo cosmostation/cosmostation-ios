@@ -1340,7 +1340,7 @@ extension CommonWCViewController {
             self.accountChainSet.insert(request.chainId.reference)
             self.lastAccountAction = { accounts in
                 let v2Accounts = accounts.map { account in
-                    ["address":account.bech32Address, "pubkey":account.pubKey, "algo":account.algo]
+                    ["address":account.bech32Address, "pubkey": self.convertHexToBase64(account.pubKey), "algo":account.algo]
                 }
                 self.moveToBackgroundIfNeedAndAction {
                     self.respondOnSign(request: request, response: AnyCodable(v2Accounts))
@@ -1350,7 +1350,14 @@ extension CommonWCViewController {
         }
     }
     
-
+    func convertHexToBase64(_ value: String) -> String {
+        if let data = Data(fromHex: value) {
+            return data.base64EncodedString()
+        } else {
+            return ""
+        }
+    }
+    
     @MainActor
     private func pairClient(uri: WalletConnectURI) {
         Task {
