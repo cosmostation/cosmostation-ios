@@ -167,11 +167,11 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             feeCoin = Coin.init(feeData.denom!, "100000000000000000")
         } else if (chainType == .CHIHUAHUA_MAIN) {
             if (selectFee == 0) {
-                feeCoin = Coin.init(feeData.denom!, "1000000")
+                feeCoin = Coin.init(feeData.denom!, "100000000")
             } else if (selectFee == 1) {
-                feeCoin = Coin.init(feeData.denom!, "5000000")
+                feeCoin = Coin.init(feeData.denom!, "250000000")
             } else {
-                feeCoin = Coin.init(feeData.denom!, "10000000")
+                feeCoin = Coin.init(feeData.denom!, "500000000")
             }
         } else {
             let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
@@ -250,11 +250,11 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             feeCoin = Coin.init(feeData.denom!, "100000000000000000")
         } else if (chainType == .CHIHUAHUA_MAIN) {
             if (selectFee == 0) {
-                feeCoin = Coin.init(feeData.denom!, "1000000")
+                feeCoin = Coin.init(feeData.denom!, "100000000")
             } else if (selectFee == 1) {
-                feeCoin = Coin.init(feeData.denom!, "5000000")
+                feeCoin = Coin.init(feeData.denom!, "250000000")
             } else {
-                feeCoin = Coin.init(feeData.denom!, "10000000")
+                feeCoin = Coin.init(feeData.denom!, "500000000")
             }
         } else {
             let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
