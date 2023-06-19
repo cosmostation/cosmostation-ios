@@ -40,7 +40,7 @@ class ChainKava: ChainConfig {
     
     var etherAddressSupport = true
     var wasmSupport = false
-    var evmSupport = false
+    var evmSupport = true
     var wcSupoort = true
     var authzSupoort = true
     var moonPaySupoort = true
