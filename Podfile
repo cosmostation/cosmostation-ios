@@ -17,8 +17,6 @@ def shared_pods
     pod 'QRCode'
     pod 'Firebase/Core', '8.1'
     pod 'Firebase/Messaging', '8.1'
-    pod 'gRPC-Swift', '~> 1.0.0'
-    pod 'gRPC-Swift-Plugins'
     pod 'HPParallaxHeader'
     pod 'IpfsApi'
     pod 'WalletConnectSwiftV2', '1.3.0'
