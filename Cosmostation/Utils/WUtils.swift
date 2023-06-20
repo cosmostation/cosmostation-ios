@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftProtobuf
 
 public class WUtils {
     
@@ -832,7 +833,7 @@ public class WUtils {
         BaseData.instance.updateBalances(accountId, snapBalance)
     }
     
-    static func onParseVestingAccount(_ chain: ChainType, _ rawAccount: Google_Protobuf2_Any) {
+    static func onParseVestingAccount(_ chain: ChainType, _ rawAccount: Google_Protobuf_Any) {
         var sBalace = Array<Coin>()
         BaseData.instance.mMyBalances_gRPC.forEach { coin in
             sBalace.append(coin)

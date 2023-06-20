@@ -658,7 +658,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainConfig)!
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    BaseData.instance.mNodeInfo_gRPC = response.nodeInfo
+                    BaseData.instance.mNodeInfo_gRPC = response.defaultNodeInfo
                     self.mFetchCnt = self.mFetchCnt + 5
                     self.onFetchParams(self.mChainConfig.chainAPIName)
                     self.onFetchMintscanAsset()

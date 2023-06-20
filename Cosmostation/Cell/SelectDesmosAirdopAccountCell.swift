@@ -22,22 +22,22 @@ class SelectDesmosAirdopAccountCell: UITableViewCell {
     }
     
     func onBindAccount(_ chainType: ChainType?, _ account: Account) {
-        self.accountName.text = account.getDpName()
-        self.accountAddress.text = account.account_address
-        
-        let request = Alamofire.request(BaseNetWork.desmosClaimableCheck(account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                if let responseData = res as? NSDictionary {
-                    let desmosAirDrops = DesmosAirDrops.init(responseData)
-                    self.airdropBalance.text = desmosAirDrops.getUnclaimedAirdropAmount().stringValue
-                }
-                
-            case .failure(let error):
-                print("desmosClaimablecheck ", error)
-            }
-        }
+//        self.accountName.text = account.getDpName()
+//        self.accountAddress.text = account.account_address
+//        
+//        let request = Alamofire.request(BaseNetWork.desmosClaimableCheck(account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+//        request.responseJSON { (response) in
+//            switch response.result {
+//            case .success(let res):
+//                if let responseData = res as? NSDictionary {
+//                    let desmosAirDrops = DesmosAirDrops.init(responseData)
+//                    self.airdropBalance.text = desmosAirDrops.getUnclaimedAirdropAmount().stringValue
+//                }
+//                
+//            case .failure(let error):
+//                print("desmosClaimablecheck ", error)
+//            }
+//        }
     }
     
 }

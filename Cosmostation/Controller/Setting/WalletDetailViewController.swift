@@ -329,7 +329,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
                 let channel = BaseNetWork.getConnection(self.selectedChainConfig)!
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    self.chainId = response.nodeInfo.network
+                    self.chainId = response.defaultNodeInfo.network
                 }
                 try channel.close().wait()
             } catch { print("onFetchgRPCNodeInfo failed: \(error)") }
