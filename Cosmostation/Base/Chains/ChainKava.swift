@@ -38,16 +38,16 @@ class ChainKava: ChainConfig {
     let addressHdPath = "m/44'/118'/0'/0/X"
     var defaultPath = "m/44'/459'/0'/0/X"
     
-    var etherAddressSupport = true
+    var etherAddressSupport = false
     var wasmSupport = false
-    var evmSupport = true
+    var evmSupport = false
     var wcSupoort = true
     var authzSupoort = true
     var moonPaySupoort = true
     var kadoMoneySupoort = false
     var grpcUrl = "grpc-kava.cosmostation.io"
     var grpcPort = 443
-    var rpcUrl = ""
+    var rpcUrl = "https://rpc-kava-app.cosmostation.io/"
     var lcdUrl = "https://lcd-kava.cosmostation.io/"
     var explorerUrl = MintscanUrl + "kava/"
     var priceUrl = GeckoUrl + "kava"
