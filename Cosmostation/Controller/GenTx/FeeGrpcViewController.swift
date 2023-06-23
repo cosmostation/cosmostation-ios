@@ -457,8 +457,8 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         
         //for osmosis custom msg
         else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_SWAP) {
-            var swapRoutes = Array<Osmosis_Gamm_V1beta1_SwapAmountInRoute>()
-            let swapRoute = Osmosis_Gamm_V1beta1_SwapAmountInRoute.with {
+            var swapRoutes = Array<Osmosis_Poolmanager_V1beta1_SwapAmountInRoute>()
+            let swapRoute = Osmosis_Poolmanager_V1beta1_SwapAmountInRoute.with {
                 $0.poolID = UInt64(self.pageHolderVC.mPoolId!)!
                 $0.tokenOutDenom = self.pageHolderVC.mSwapOutDenom!
             }
@@ -549,47 +549,6 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                                 self.chainType!)
             }
-            
-        }
-        
-        //for desmos
-        else if (pageHolderVC.mType == TASK_TYPE_DESMOS_GEN_PROFILE) {
-            return Signer.genSimulateSaveProfileTxgRPC(auth, account!.account_pubkey_type,
-                                                       self.pageHolderVC.mAccount!.account_address,
-                                                       self.pageHolderVC.mDesmosDtag!,
-                                                       self.pageHolderVC.mDesmosNickName!,
-                                                       self.pageHolderVC.mDesmosBio!,
-                                                       (self.pageHolderVC.mDesmosProfileHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosProfileHash!,
-                                                       (self.pageHolderVC.mDesmosCoverHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosCoverHash!,
-                                                       self.mFee, self.pageHolderVC.mMemo!,
-                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                       self.chainType!)
-            
-        } else if (pageHolderVC.mType == TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT) {
-            let toAccount = BaseData.instance.selectAccountById(id: self.pageHolderVC.mDesmosToLinkAccountId)!
-            var toPrivateKey: Data!
-            var toPublicKey: Data!
-            if (toAccount.account_from_mnemonic == true) {
-                if let words = KeychainWrapper.standard.string(forKey: toAccount.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
-                    toPrivateKey = KeyFac.getPrivateRaw(words, toAccount)
-                    toPublicKey = KeyFac.getPublicFromPrivateKey(toPrivateKey)
-                }
-                
-            } else {
-                if let key = KeychainWrapper.standard.string(forKey: toAccount.getPrivateKeySha1()) {
-                    toPrivateKey = KeyFac.getPrivateFromString(key)
-                    toPublicKey = KeyFac.getPublicFromPrivateKey(toPrivateKey)
-                }
-            }
-            return Signer.genSimulateLinkChainTxgRPC(auth, account!.account_pubkey_type,
-                                                     self.pageHolderVC.mAccount!.account_address,
-                                                     self.pageHolderVC.mDesmosToLinkChain!,
-                                                     toAccount,
-                                                     toPrivateKey,
-                                                     toPublicKey,
-                                                     self.mFee, self.pageHolderVC.mMemo!,
-                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                     self.chainType!)
             
         }
         

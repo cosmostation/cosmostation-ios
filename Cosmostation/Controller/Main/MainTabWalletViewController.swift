@@ -418,7 +418,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
-            cell?.actionProfile = { self.onClickProfile() }
             return cell!
 
         } else if (indexPath.row == 1) {
@@ -807,30 +806,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         nftDappVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(nftDappVC, animated: true)
-    }
-    
-    func onClickProfile() {
-        if (BaseData.instance.mAccount_gRPC?.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName) == true) {
-            let profileVC = ProfileViewController(nibName: "ProfileViewController", bundle: nil)
-            profileVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(profileVC, animated: true)
-
-        } else {
-            if (account?.account_has_private == false) {
-                self.onShowAddMenomicDialog()
-                return
-            }
-            if (!BaseData.instance.isTxFeePayable(chainConfig)) {
-                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                return
-            }
-            let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-            txVC.mType = TASK_TYPE_DESMOS_GEN_PROFILE
-            txVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(txVC, animated: true)
-        }
     }
     
     func onClickDesmosEvent() {

@@ -9,6 +9,7 @@
 import UIKit
 import GRPC
 import NIO
+import SwiftProtobuf
 
 class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -19,7 +20,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     var granterAddress: String!
     var grants = Array<Cosmos_Authz_V1beta1_Grant>()
     
-    var granterAuth: Google_Protobuf2_Any?
+    var granterAuth: Google_Protobuf_Any?
     var granterBalances = Array<Coin>()
     var granterAvailables = Array<Coin>()
     var granterVestings = Array<Coin>()
@@ -393,7 +394,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         checkVesting(chainConfig?.chainType, rawAccount)
     }
     
-    func checkVesting(_ chain: ChainType?, _ rawAccount: Google_Protobuf2_Any) {
+    func checkVesting(_ chain: ChainType?, _ rawAccount: Google_Protobuf_Any) {
         var sBalace = Array<Coin>()
         granterBalances.forEach { coin in
             sBalace.append(coin)

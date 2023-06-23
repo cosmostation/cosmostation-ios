@@ -83,7 +83,6 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_DESMOS_LINK_CHAIN) {
             self.popupTitle.text = NSLocalizedString("select_to_link_chain", comment: "")
-            self.toChainList = WUtils.getDesmosAirDropChains()
             
         } else if (type == SELECT_POPUP_DESMOS_LINK_ACCOUNT) {
             self.popupTitle.text = NSLocalizedString("select_to_link_account", comment: "")

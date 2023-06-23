@@ -9,6 +9,7 @@
 import Foundation
 import SQLite
 import SwiftKeychainWrapper
+import SwiftProtobuf
 
 
 final class BaseData : NSObject{
@@ -42,8 +43,8 @@ final class BaseData : NSObject{
     
     
     //For ProtoBuf and gRPC
-    var mNodeInfo_gRPC: Tendermint_P2p_NodeInfo?
-    var mAccount_gRPC: Google_Protobuf2_Any!
+    var mNodeInfo_gRPC: Tendermint_P2p_DefaultNodeInfo?
+    var mAccount_gRPC: Google_Protobuf_Any!
     var mAllValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
     var mBondedValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
     var mUnbondValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
@@ -236,7 +237,7 @@ final class BaseData : NSObject{
     
     func onParseRemainVestingsByDenom_gRPC(_ denom: String) -> Array<Cosmos_Vesting_V1beta1_Period> {
         var results = Array<Cosmos_Vesting_V1beta1_Period>()
-        let baseAccount: Google_Protobuf2_Any?
+        let baseAccount: Google_Protobuf_Any?
         if (mAccount_gRPC?.typeURL.contains(Desmos_Profiles_V3_Profile.protoMessageName) == true) {
             let profileAccount = try! Desmos_Profiles_V3_Profile.init(serializedData: mAccount_gRPC.value)
             baseAccount = profileAccount.account

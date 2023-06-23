@@ -565,7 +565,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                 let channel = BaseNetWork.getConnection(htlcToChainConfig)!
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    self.onClaimHtlcSwapKava2(auth, response.nodeInfo.network)
+                    self.onClaimHtlcSwapKava2(auth, response.defaultNodeInfo.network)
                 }
                 try channel.close().wait()
                 

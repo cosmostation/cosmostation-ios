@@ -281,16 +281,6 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_issue_nft_denom", comment: "")
             
-        } else if (mType == TASK_TYPE_DESMOS_GEN_PROFILE) {
-            stepDescription.text = NSLocalizedString("tx_desmos_create_profile_0", comment: "")
-            stepImg.image = UIImage.init(named: "txStep4_1")
-            self.titleLabel.text =  NSLocalizedString("title_profile_create", comment: "")
-            
-        } else if (mType == TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT) {
-            stepDescription.text = NSLocalizedString("tx_desmos_account_link_0", comment: "")
-            stepImg.image = UIImage.init(named: "txStep4_1")
-            self.titleLabel.text =  NSLocalizedString("title_account_chain_link", comment: "")
-            
         } else if (mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
             stepDescription.text = NSLocalizedString("tx_authz_claim_reward_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
@@ -621,14 +611,6 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_NFT_ISSUE_DENOM) {
                     stepDescription.text = NSLocalizedString("tx_issue_nft_denom_0", comment: "")
-                    stepImg.image = UIImage.init(named: "txStep4_1")
-                    
-                } else if (mType == TASK_TYPE_DESMOS_GEN_PROFILE) {
-                    stepDescription.text = NSLocalizedString("tx_desmos_create_profile_0", comment: "")
-                    stepImg.image = UIImage.init(named: "txStep4_1")
-                    
-                } else if (mType == TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT) {
-                    stepDescription.text = NSLocalizedString("tx_desmos_account_link_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
                 } else if (mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {

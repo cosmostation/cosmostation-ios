@@ -381,20 +381,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
             
         }
         
-        //DESMOS
-        else if (mType == TASK_TYPE_DESMOS_GEN_PROFILE) {
-            return [GenProfile0ViewController(nibName: "GenProfile0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    GenProfile3ViewController(nibName: "GenProfile3ViewController", bundle: nil)]
-            
-        } else if (mType == TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT) {
-            return [LinkChainAccount0ViewController(nibName: "LinkChainAccount0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    LinkChainAccount3ViewController(nibName: "LinkChainAccount3ViewController", bundle: nil)]
-        }
-        
         //NFT
         else if (mType == TASK_TYPE_NFT_ISSUE) {
             return [GenNFT0ViewController(nibName: "GenNFT0ViewController", bundle: nil),
