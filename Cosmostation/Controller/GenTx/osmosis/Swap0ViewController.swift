@@ -26,7 +26,7 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var outputCoinAmountLabel: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
-    var selectedPool: Google_Protobuf2_Any!
+    var selectedPool: Google_Protobuf_Any!
     var inputDenom: String?
     var outputDenom: String?
     var inputDecimal:Int16 = 6
@@ -209,8 +209,8 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         inputDecimal = inputAsset.decimals
         outputDecimal = outputAsset.decimals
         
-        var swapRoutes = Array<Osmosis_Gamm_V1beta1_SwapAmountInRoute>()
-        let swapRoute = Osmosis_Gamm_V1beta1_SwapAmountInRoute.with { $0.poolID = UInt64(poolId)!; $0.tokenOutDenom = pageHolderVC.mSwapOutDenom! }
+        var swapRoutes = Array<Osmosis_Poolmanager_V1beta1_SwapAmountInRoute>()
+        let swapRoute = Osmosis_Poolmanager_V1beta1_SwapAmountInRoute.with { $0.poolID = UInt64(poolId)!; $0.tokenOutDenom = pageHolderVC.mSwapOutDenom! }
         swapRoutes.append(swapRoute)
         
         DispatchQueue.global().async {

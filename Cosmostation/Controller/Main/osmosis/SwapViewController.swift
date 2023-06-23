@@ -267,8 +267,8 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         mInputDecimal = mInputAsset!.decimals
         mOutputDecimal = mOutputAsset!.decimals
         
-        var swapRoutes = Array<Osmosis_Gamm_V1beta1_SwapAmountInRoute>()
-        let swapRoute = Osmosis_Gamm_V1beta1_SwapAmountInRoute.with { $0.poolID = id; $0.tokenOutDenom = mOutputDenom! }
+        var swapRoutes = Array<Osmosis_Poolmanager_V1beta1_SwapAmountInRoute>()
+        let swapRoute = Osmosis_Poolmanager_V1beta1_SwapAmountInRoute.with { $0.poolID = id; $0.tokenOutDenom = mOutputDenom! }
         swapRoutes.append(swapRoute)
         
         DispatchQueue.global().async {

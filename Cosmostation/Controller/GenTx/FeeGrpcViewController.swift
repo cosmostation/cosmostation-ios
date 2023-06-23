@@ -457,8 +457,8 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         
         //for osmosis custom msg
         else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_SWAP) {
-            var swapRoutes = Array<Osmosis_Gamm_V1beta1_SwapAmountInRoute>()
-            let swapRoute = Osmosis_Gamm_V1beta1_SwapAmountInRoute.with {
+            var swapRoutes = Array<Osmosis_Poolmanager_V1beta1_SwapAmountInRoute>()
+            let swapRoute = Osmosis_Poolmanager_V1beta1_SwapAmountInRoute.with {
                 $0.poolID = UInt64(self.pageHolderVC.mPoolId!)!
                 $0.tokenOutDenom = self.pageHolderVC.mSwapOutDenom!
             }
