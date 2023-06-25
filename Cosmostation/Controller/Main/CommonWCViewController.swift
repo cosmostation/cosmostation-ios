@@ -29,17 +29,22 @@ class CommonWCViewController: BaseViewController {
     
     @IBOutlet weak var dappWrapView: UIView!
     @IBOutlet weak var webView: WKWebView!
-    @IBOutlet weak var dappUrl: UILabel!
     @IBOutlet weak var dappClose: UIButton!
     @IBOutlet weak var dappRefresh: UIButton!
     @IBOutlet weak var dappForward: UIButton!
     @IBOutlet weak var dappBack: UIButton!
     @IBOutlet weak var dappToolbar: UIView!
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var searchTextField: UITextField!
     
     @IBOutlet weak var loadingWrapView: UIView!
     @IBOutlet weak var loadingImg: LoadingImageView!
     
     @IBOutlet weak var toolbarTopConstraint: NSLayoutConstraint!
+    
+    var dapps: [NSDictionary] = []
+    var filteredDapps: [NSDictionary] = []
     
     var wcURL: String?
     var dappURL: String?
@@ -86,6 +91,58 @@ class CommonWCViewController: BaseViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupViewByConnectType()
+        loadDapp()
+        self.tableView.register(UINib(nibName: "DappCell", bundle: nil), forCellReuseIdentifier: "DappCell")
+    }
+    
+    private func loadDapp() {
+        let request = Alamofire.request("https://raw.githubusercontent.com/cosmostation/chainlist/master/dapp/dapps.json", method: .get, encoding: URLEncoding.default)
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let result = res as? [NSDictionary] {
+                    self.dapps = result
+                }
+                break
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
+    @IBAction func searchTextChange() {
+        filteredDapps = []
+        if let text = searchTextField.text {
+            if text.isEmpty {
+                return
+            }
+            
+            if text.starts(with: "http") {
+                filteredDapps.append(["title": "\"\(text)\" - Open in Browser", "url":text, "description":""])
+            } else {
+                filteredDapps.append(["title": "\"\(text)\" - Search in Google", "url":"https://www.google.com/search?q=\(text)", "description":""])
+            }
+            filteredDapps += dapps.filter({ item in
+                var contain = false
+                if let title = item["title"] as? String {
+                    contain = contain || title.contains(text)
+                }
+                if let title = item["description"] as? String {
+                    contain = contain || title.contains(text)
+                }
+                if let title = item["url"] as? String {
+                    contain = contain || title.contains(text)
+                }
+                return contain
+            })
+        }
+        
+        if filteredDapps.isEmpty {
+            self.tableView.isHidden = true
+        } else {
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
+        }
     }
     
     private func setupViewByConnectType() {
@@ -103,7 +160,7 @@ class CommonWCViewController: BaseViewController {
             connectStatus(connected: false)
             if let url = dappURL {
                 webView.load(URLRequest(url: URL(string: url)!))
-                dappUrl.text = url
+                searchTextField.text = url
             }
         } else {
             dappWrapView.isHidden = true
@@ -165,7 +222,6 @@ class CommonWCViewController: BaseViewController {
         webView.uiDelegate = self
         webView.allowsLinkPreview = false
         webView.scrollView.bounces = false
-        webView.scrollView.delegate = self
         if let dictionary = Bundle.main.infoDictionary,
             let version = dictionary["CFBundleShortVersionString"] as? String {
             webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
@@ -235,25 +291,6 @@ class CommonWCViewController: BaseViewController {
         self.interactor = interactor
         configureWalletConnect()
         interactor.connect().cauterize()
-    }
-    
-    @IBAction func onUrlChange() {
-        let nameAlert = UIAlertController(title: NSLocalizedString("change_url", comment: ""), message: nil, preferredStyle: .alert)
-        nameAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
-        nameAlert.addTextField()
-        nameAlert.textFields?[0].text = self.webView.url?.absoluteString
-        nameAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { _ in
-        }))
-        nameAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak nameAlert] (_) in
-            let textField = nameAlert?.textFields![0]
-            if let trimmedString = textField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), let url = URL(string: trimmedString) {
-                self.webView.load(URLRequest(url: url))
-            }
-        }))
-        self.present(nameAlert, animated: true) {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
-            nameAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
-        }
     }
     
     func configureWalletConnect() {
@@ -1226,8 +1263,8 @@ extension CommonWCViewController: SBCardPopupDelegate {
 
 extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        if let host = webView.url?.host {
-            dappUrl.text = host 
+        if let url = webView.url {
+            searchTextField.text = url.absoluteString
         }
     }
     
@@ -1287,23 +1324,6 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
             self.present(alertController, animated: true, completion: nil)
         })
-    }
-}
-
-extension CommonWCViewController: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        beginingPoint = scrollView.contentOffset
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let beginingPoint = beginingPoint else { return }
-        let currentPoint = scrollView.contentOffset
-
-        if beginingPoint.y < currentPoint.y {
-            self.hideToolbar()
-        } else {
-            self.showToolbar()
-        }
     }
 }
 
@@ -1560,5 +1580,46 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             }
         }
+    }
+}
+
+extension CommonWCViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier:"DappCell") as? DappCell {
+            let item = filteredDapps[indexPath.row]
+            if let logo = item["logo"] as? String, let url = URL(string: logo) {
+                cell.iconImg.af_setImage(withURL: url)
+            } else {
+                cell.iconImg.image = UIImage(named: "btnExplorer")
+            }
+            cell.descriptionLabel.text = item["description"] as? String
+            cell.titleLabel.text = item["title"] as? String
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = filteredDapps[indexPath.row]
+        if let urlString = item["url"] as? String, let url = URL(string: urlString) {
+            self.webView.load(URLRequest(url: url))
+        }
+        self.searchTextField.resignFirstResponder()
+        self.searchTextField.text = ""
+        self.tableView.isHidden = true
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredDapps.count
+    }
+}
+
+extension CommonWCViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let urlString = textField.text, let url = URL(string: urlString) {
+            self.webView.load(URLRequest(url: url))
+        }
+        self.searchTextField.resignFirstResponder()
+        return true
     }
 }

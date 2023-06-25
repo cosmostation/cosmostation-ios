@@ -2777,6 +2777,10 @@
 		18744704293094CB00849EE4 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18744702293094CB00849EE4 /* BundleExtension.swift */; };
 		188746D628914EE300E0A558 /* MainDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188746D528914EE300E0A558 /* MainDappViewController.swift */; };
 		188746D728914EED00E0A558 /* MainDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188746D528914EE300E0A558 /* MainDappViewController.swift */; };
+		18A95DDB2A489B15009E94D9 /* DappCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A95DD92A489B15009E94D9 /* DappCell.xib */; };
+		18A95DDC2A489B15009E94D9 /* DappCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A95DD92A489B15009E94D9 /* DappCell.xib */; };
+		18A95DDD2A489B15009E94D9 /* DappCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A95DDA2A489B15009E94D9 /* DappCell.swift */; };
+		18A95DDE2A489B15009E94D9 /* DappCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A95DDA2A489B15009E94D9 /* DappCell.swift */; };
 		18B9FC1C287FEA700018FB76 /* WalletBaseChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0443B89E285C62E00027A6B9 /* WalletBaseChainCell.xib */; };
 		18D4C19528C704B8003F230A /* WalletConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4C19428C704B8003F230A /* WalletConnectManager.swift */; };
 		18D4C19628C704B8003F230A /* WalletConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4C19428C704B8003F230A /* WalletConnectManager.swift */; };
@@ -5270,6 +5274,8 @@
 		187447002930942400849EE4 /* ApiKeyDev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeyDev.plist; sourceTree = "<group>"; };
 		18744702293094CB00849EE4 /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		188746D528914EE300E0A558 /* MainDappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDappViewController.swift; sourceTree = "<group>"; };
+		18A95DD92A489B15009E94D9 /* DappCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappCell.xib; sourceTree = "<group>"; };
+		18A95DDA2A489B15009E94D9 /* DappCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappCell.swift; sourceTree = "<group>"; };
 		18D4C19428C704B8003F230A /* WalletConnectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectManager.swift; sourceTree = "<group>"; };
 		18D4C19728C729C9003F230A /* ManageConnectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ManageConnectionViewController.xib; sourceTree = "<group>"; };
 		18D4C19828C729C9003F230A /* ManageConnectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageConnectionViewController.swift; sourceTree = "<group>"; };
@@ -8410,6 +8416,8 @@
 				045DAD59288FAEC8004ED9B4 /* AuthzGranterCell.swift */,
 				045DAD5A288FAEC8004ED9B4 /* AuthzGranterCell.xib */,
 				045DAD5F289128C3004ED9B4 /* AuthzExecuteCell.swift */,
+				18A95DDA2A489B15009E94D9 /* DappCell.swift */,
+				18A95DD92A489B15009E94D9 /* DappCell.xib */,
 				045DAD60289128C3004ED9B4 /* AuthzExecuteCell.xib */,
 				18D4C19E28C73410003F230A /* ManageConnectionCell.swift */,
 				18D4C19D28C73410003F230A /* ManageConnectionCell.xib */,
@@ -8563,6 +8571,7 @@
 				04172BBE29F803E900D6279C /* VaultContract0ViewController.xib in Resources */,
 				18FFB6AA281AF533004E65BB /* SelectAccountCell.xib in Resources */,
 				0443748828630E3200C6A4ED /* Delegate4ViewController.xib in Resources */,
+				18A95DDC2A489B15009E94D9 /* DappCell.xib in Resources */,
 				18FFB6AE281AF533004E65BB /* TxUndelegateCell.xib in Resources */,
 				04A116E928F6BC99003605E5 /* RedelegateCell.xib in Resources */,
 				04F405F329ECF74100CD88E4 /* NewAccountTypePopup.xib in Resources */,
@@ -9233,6 +9242,7 @@
 				042C389D28F5607300FF45A2 /* WalletPriceCell.xib in Resources */,
 				04172B8F29F6902000D6279C /* SubVaultCell.xib in Resources */,
 				28DB571625FA3BEA00B2F0E5 /* HardPoolRepay3ViewController.xib in Resources */,
+				18A95DDB2A489B15009E94D9 /* DappCell.xib in Resources */,
 				2889FD692603377700CA9896 /* TxHardDepositCell.xib in Resources */,
 				2852EAF12681A4CC003A5E74 /* WalletOsmoCell.xib in Resources */,
 				2834399B2531D13C00CCFADE /* StarName.storyboard in Resources */,
@@ -9988,6 +9998,7 @@
 				0459103D28FCFE8300C51CE9 /* ChainKujira.swift in Sources */,
 				18FFB436281AF533004E65BB /* Cw20TransferReq.swift in Sources */,
 				04F795322A458DF90093B79B /* stride_mint_v1beta1_query.pb.swift in Sources */,
+				18A95DDE2A489B15009E94D9 /* DappCell.swift in Sources */,
 				0451FC98282A3B4200214FDA /* ChainStargaze.swift in Sources */,
 				18FFB43C281AF533004E65BB /* BinanceMessage.swift in Sources */,
 				18FFB43E281AF533004E65BB /* Swap3ViewController.swift in Sources */,
@@ -11986,6 +11997,7 @@
 				0481601A2A41E1810006A906 /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */,
 				04F797772A4593040093B79B /* kava_savings_v1beta1_genesis.pb.swift in Sources */,
 				04815CB82A41DCD90006A906 /* ethermint_evm_v1_query.pb.swift in Sources */,
+				18A95DDD2A489B15009E94D9 /* DappCell.swift in Sources */,
 				15F0B718294C770200127D9A /* ChainQuicksilver.swift in Sources */,
 				04F794382A458AA40093B79B /* injective_peggy_v1_genesis.pb.swift in Sources */,
 				2802B4AD28250A9300B2D9E8 /* DeriveWalletCell.swift in Sources */,
@@ -12474,7 +12486,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 194;
+				CURRENT_PROJECT_VERSION = 199;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12486,7 +12498,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 1.9.9;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -12507,7 +12519,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 194;
+				CURRENT_PROJECT_VERSION = 199;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -12520,7 +12532,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 1.9.9;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Cosmostation debug provisioning profile";
