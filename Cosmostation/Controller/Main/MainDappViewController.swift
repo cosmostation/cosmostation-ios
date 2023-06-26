@@ -7,44 +7,48 @@
 //
 
 import UIKit
-import WebKit
+import Alamofire
+import AlamofireImage
 
 class MainDappViewController: BaseViewController {
-    @IBOutlet weak var titleChainImg: UIImageView!
-    @IBOutlet weak var titleWalletName: UILabel!
-    
-    @IBOutlet weak var webView: WKWebView!
-    
+    @IBOutlet weak var searchTextField: UITextField!
     var mainTabVC: MainTabViewController!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyView: UIView!
+    var dapps: [NSDictionary] = []
+    var filteredDapps: [NSDictionary] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.mainTabVC = (self.parent)?.parent as? MainTabViewController
-        initWebView()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(310), execute: {
-            var dappUrl = "https://dapps.cosmostation.io"
-            #if DEBUG
-                dappUrl = "https://dapps.dev.cosmostation.io"
-            #endif
-            if let url = URL(string: "\(dappUrl)/?chain=\(self.chainConfig?.chainAPIName ?? "")&theme=\(self.currentThemeParams())") {
-                self.webView.load(URLRequest(url: url))
+        self.tableView.register(UINib(nibName: "DappCell", bundle: nil), forCellReuseIdentifier: "DappCell")
+        loadDapp()
+    }
+    
+    private func loadDapp() {
+        let request = Alamofire.request("https://raw.githubusercontent.com/cosmostation/chainlist/master/dapp/dapps.json", method: .get, encoding: URLEncoding.default)
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let result = res as? [NSDictionary] {
+                    self.dapps = result
+                }
+                break
+            case .failure(_):
+                break
             }
-        });
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = "";
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTitle), name: Notification.Name("onNameCheckDone"), object: nil)
-        self.updateTitle()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("onNameCheckDone"), object: nil)
     }
     
     func currentThemeParams() -> String {
@@ -59,98 +63,77 @@ class MainDappViewController: BaseViewController {
         return themeParams
     }
     
-    func initWebView() {
-        let configuration = WKWebViewConfiguration()
-        configuration.allowsInlineMediaPlayback = true
-        webView.isOpaque = false
-        webView.backgroundColor = UIColor.clear
-        webView.navigationDelegate = self
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.allowsBackForwardNavigationGestures = true
-        webView.uiDelegate = self
-        webView.allowsLinkPreview = false
-        webView.scrollView.bounces = false
-        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
-                    records.forEach { record in
-                        WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+    @IBAction func searchTextChange() {
+        filteredDapps = []
+        if let text = searchTextField.text {
+            if !text.isEmpty {
+//                if text.starts(with: "http") {
+//                    filteredDapps.append(["title": "\"\(text)\" - Open in Browser", "url":text, "description":""])
+//                } else {
+//                    filteredDapps.append(["title": "\"\(text)\" - Search in Google", "url":"https://www.google.com/search?q=\(text)", "description":""])
+//                }
+                filteredDapps += dapps.filter({ item in
+                    var contain = false
+                    if let title = item["title"] as? String {
+                        contain = contain || title.contains(text)
                     }
-                }
-        if let dictionary = Bundle.main.infoDictionary,
-            let version = dictionary["CFBundleShortVersionString"] as? String {
-            webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
-                let originUserAgent = result as! String
-                self.webView.customUserAgent = "Cosmostation/APP/iOS/DappTab/\(version) \(originUserAgent)"
+                    if let title = item["description"] as? String {
+                        contain = contain || title.contains(text)
+                    }
+                    if let title = item["url"] as? String {
+                        contain = contain || title.contains(text)
+                    }
+                    return contain
+                })
             }
+        }
+        
+        if filteredDapps.isEmpty {
+            self.tableView.isHidden = true
+            self.emptyView.isHidden = false
+        } else {
+            self.tableView.isHidden = false
+            self.emptyView.isHidden = true
+            self.tableView.reloadData()
         }
     }
 }
 
-extension MainDappViewController: WKNavigationDelegate, WKUIDelegate {
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url {
-            if (url.host == "dapps.cosmostation.io" || url.host == "dapps.dev.cosmostation.io") {
-                decisionHandler(.allow)
+extension MainDappViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row >= filteredDapps.count {
+            return UITableViewCell()
+        }
+        if let cell = tableView.dequeueReusableCell(withIdentifier:"DappCell") as? DappCell {
+            let item = filteredDapps[indexPath.row]
+            if let logo = item["logo"] as? String, let url = URL(string: logo) {
+                cell.iconImg.af_setImage(withURL: url)
             } else {
-                if (account?.account_has_private == false) {
-                    self.onShowAddMenomicDialog()
-                } else {
-                    UIApplication.shared.open(url, options: [:])
-                }
-                decisionHandler(.cancel)
+                cell.iconImg.image = UIImage(named: "btnExplorer")
             }
-        } else {
-            decisionHandler(.allow)
+            cell.descriptionLabel.text = item["description"] as? String
+            cell.titleLabel.text = item["title"] as? String
+            return cell
         }
-        
+        return UITableViewCell()
     }
     
-    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-        let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
-        alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
-        let cancelAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel) { _ in
-            completionHandler()	
-        }
-        alertController.addAction(cancelAction)
-        DispatchQueue.main.async {
-            self.present(alertController, animated: true, completion: nil)
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = filteredDapps[indexPath.row]
+        let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
+        commonWcVC.modalPresentationStyle = .fullScreen
+        commonWcVC.dappURL = item["url"] as? String ?? ""
+        commonWcVC.connectType = .INTERNAL_DAPP
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
+            self.present(commonWcVC, animated: false, completion: nil)
+        })
+        self.searchTextField.resignFirstResponder()
+        self.searchTextField.text = ""
+        self.tableView.isHidden = true
+        self.emptyView.isHidden = false
     }
     
-    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
-        let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
-        alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
-        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel) { _ in
-            completionHandler(false)
-        }
-        let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { _ in
-            completionHandler(true)
-        }
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        DispatchQueue.main.async {
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-    
-    @IBAction func onClickSwitchAccount(_ sender: UIButton) {
-        sender.isUserInteractionEnabled = false
-        self.mainTabVC.onShowAccountSwicth {
-            sender.isUserInteractionEnabled = true
-        }
-    }
-    
-    @IBAction func onClickExplorer(_ sender: UIButton) {
-        let link = WUtils.getAccountExplorer(chainConfig, account!.account_address)
-        guard let url = URL(string: link) else { return }
-        self.onShowSafariWeb(url)
-    }
-    
-    @objc func updateTitle() {
-        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory.getChainConfig(chainType)
-        
-        self.titleChainImg.image = chainConfig?.chainImg
-        self.titleWalletName.text = account?.getDpName()
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredDapps.count
     }
 }
