@@ -66,28 +66,26 @@ class MainDappViewController: BaseViewController {
     @IBAction func searchTextChange() {
         filteredDapps = []
         if let text = searchTextField.text {
-            if text.isEmpty {
-                return
+            if !text.isEmpty {
+//                if text.starts(with: "http") {
+//                    filteredDapps.append(["title": "\"\(text)\" - Open in Browser", "url":text, "description":""])
+//                } else {
+//                    filteredDapps.append(["title": "\"\(text)\" - Search in Google", "url":"https://www.google.com/search?q=\(text)", "description":""])
+//                }
+                filteredDapps += dapps.filter({ item in
+                    var contain = false
+                    if let title = item["title"] as? String {
+                        contain = contain || title.contains(text)
+                    }
+                    if let title = item["description"] as? String {
+                        contain = contain || title.contains(text)
+                    }
+                    if let title = item["url"] as? String {
+                        contain = contain || title.contains(text)
+                    }
+                    return contain
+                })
             }
-            
-            if text.starts(with: "http") {
-                filteredDapps.append(["title": "\"\(text)\" - Open in Browser", "url":text, "description":""])
-            } else {
-                filteredDapps.append(["title": "\"\(text)\" - Search in Google", "url":"https://www.google.com/search?q=\(text)", "description":""])
-            }
-            filteredDapps += dapps.filter({ item in
-                var contain = false
-                if let title = item["title"] as? String {
-                    contain = contain || title.contains(text)
-                }
-                if let title = item["description"] as? String {
-                    contain = contain || title.contains(text)
-                }
-                if let title = item["url"] as? String {
-                    contain = contain || title.contains(text)
-                }
-                return contain
-            })
         }
         
         if filteredDapps.isEmpty {
@@ -103,6 +101,9 @@ class MainDappViewController: BaseViewController {
 
 extension MainDappViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row >= filteredDapps.count {
+            return UITableViewCell()
+        }
         if let cell = tableView.dequeueReusableCell(withIdentifier:"DappCell") as? DappCell {
             let item = filteredDapps[indexPath.row]
             if let logo = item["logo"] as? String, let url = URL(string: logo) {
@@ -123,8 +124,8 @@ extension MainDappViewController: UITableViewDelegate, UITableViewDataSource {
         commonWcVC.modalPresentationStyle = .fullScreen
         commonWcVC.dappURL = item["url"] as? String ?? ""
         commonWcVC.connectType = .INTERNAL_DAPP
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-            self.present(commonWcVC, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
+            self.present(commonWcVC, animated: false, completion: nil)
         })
         self.searchTextField.resignFirstResponder()
         self.searchTextField.text = ""
