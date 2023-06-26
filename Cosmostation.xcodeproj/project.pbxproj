@@ -2775,6 +2775,11 @@
 		187447012930942400849EE4 /* ApiKeyDev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187447002930942400849EE4 /* ApiKeyDev.plist */; };
 		18744703293094CB00849EE4 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18744702293094CB00849EE4 /* BundleExtension.swift */; };
 		18744704293094CB00849EE4 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18744702293094CB00849EE4 /* BundleExtension.swift */; };
+		1876EE882A49352400C53352 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 1876EE872A49352400C53352 /* GRPC */; };
+		1876EE8A2A49353100C53352 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 1876EE892A49353100C53352 /* SwiftProtobuf */; };
+		1876EE8B2A49355D00C53352 /* NeutronModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7729F67CE600D6279C /* NeutronModel.swift */; };
+		1876EE8C2A4935AB00C53352 /* Cw20VaultDepositReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */; };
+		1876EE8D2A4935EA00C53352 /* Cw20VaultDepositRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */; };
 		188746D628914EE300E0A558 /* MainDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188746D528914EE300E0A558 /* MainDappViewController.swift */; };
 		188746D728914EED00E0A558 /* MainDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188746D528914EE300E0A558 /* MainDappViewController.swift */; };
 		18B9FC1C287FEA700018FB76 /* WalletBaseChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0443B89E285C62E00027A6B9 /* WalletBaseChainCell.xib */; };
@@ -5765,7 +5770,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1876EE882A49352400C53352 /* GRPC in Frameworks */,
 				EB85535FBF1815AEAECE43D4 /* Pods_CosmostationDev.framework in Frameworks */,
+				1876EE8A2A49353100C53352 /* SwiftProtobuf in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8435,6 +8442,10 @@
 			dependencies = (
 			);
 			name = CosmostationDev;
+			packageProductDependencies = (
+				1876EE872A49352400C53352 /* GRPC */,
+				1876EE892A49353100C53352 /* SwiftProtobuf */,
+			);
 			productName = Cosmostation;
 			productReference = 18FFB7D5281AF533004E65BB /* CosmostationDev.app */;
 			productType = "com.apple.product-type.application";
@@ -9559,6 +9570,7 @@
 				04815DFE2A41E1480006A906 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift in Sources */,
 				04F7979E2A4593040093B79B /* kava_earn_v1beta1_params.pb.swift in Sources */,
 				18FFB2F6281AF533004E65BB /* KavaIncentiveClaim3ViewController.swift in Sources */,
+				1876EE8B2A49355D00C53352 /* NeutronModel.swift in Sources */,
 				04F794FC2A458DF90093B79B /* stride_stakeibc_tx.grpc.swift in Sources */,
 				E198291E290E89DF00451A81 /* EarnValidatorCell.swift in Sources */,
 				18FFB2F8281AF533004E65BB /* StarnameWalletConnectViewController.swift in Sources */,
@@ -9592,6 +9604,7 @@
 				18FFB31D281AF533004E65BB /* WalletCrescentCell.swift in Sources */,
 				044374682862E9BD00C6A4ED /* Transfer2ViewController.swift in Sources */,
 				04F793E32A458AA40093B79B /* injective_wasmx_v1_query.grpc.swift in Sources */,
+				1876EE8C2A4935AB00C53352 /* Cw20VaultDepositReq.swift in Sources */,
 				18FFB31F281AF533004E65BB /* StepGenTxViewController.swift in Sources */,
 				18FFB320281AF533004E65BB /* MyDomainViewController.swift in Sources */,
 				0481616E2A41E6520006A906 /* desmos_reports_v1_msgs.grpc.swift in Sources */,
@@ -9886,6 +9899,7 @@
 				1577DAC929B9F07800C360EC /* Board.swift in Sources */,
 				04815E5A2A41E1480006A906 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */,
 				18FFB3DB281AF533004E65BB /* SelectCoinCell.swift in Sources */,
+				1876EE8D2A4935EA00C53352 /* Cw20VaultDepositRes.swift in Sources */,
 				048160FC2A41E6520006A906 /* desmos_reactions_v1_query.pb.swift in Sources */,
 				04815D2A2A41DE030006A906 /* evmos_epochs_v1_query.pb.swift in Sources */,
 				18FFB3DC281AF533004E65BB /* BorderButton.swift in Sources */,
@@ -12776,6 +12790,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04815BDF2A41DB410006A906 /* XCRemoteSwiftPackageReference "grpc-swift" */;
 			productName = GRPC;
+		};
+		1876EE872A49352400C53352 /* GRPC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04815BDF2A41DB410006A906 /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = GRPC;
+		};
+		1876EE892A49353100C53352 /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04815BDC2A41DB120006A906 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
