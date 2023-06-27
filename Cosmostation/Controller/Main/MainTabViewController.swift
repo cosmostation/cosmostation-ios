@@ -1242,7 +1242,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 }
                 if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     let neutronVesting = try? JSONDecoder().decode(Cw20NeutronVestingRes.self, from: response.data)
-                    BaseData.instance.mNeutronVesting = NSDecimalNumber(string: neutronVesting?.allocated_amount)
+                    BaseData.instance.mNeutronVesting = neutronVesting?.getNeutronVestingAmount() ?? NSDecimalNumber.zero
                     BaseData.instance.mNeutronDuration = neutronVesting?.schedule?.getVestingDuration()
                 }
                 try channel.close().wait()
