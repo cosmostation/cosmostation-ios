@@ -45,6 +45,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletBnbCell", bundle: nil), forCellReuseIdentifier: "WalletBnbCell")
         self.walletTableView.register(UINib(nibName: "WalletKavaCell", bundle: nil), forCellReuseIdentifier: "WalletKavaCell")
         self.walletTableView.register(UINib(nibName: "WalletKavaIncentiveCell", bundle: nil), forCellReuseIdentifier: "WalletKavaIncentiveCell")
+        self.walletTableView.register(UINib(nibName: "WalletKavaEvmCell", bundle: nil), forCellReuseIdentifier: "WalletKavaEvmCell")
         self.walletTableView.register(UINib(nibName: "WalletIovCell", bundle: nil), forCellReuseIdentifier: "WalletIovCell")
         self.walletTableView.register(UINib(nibName: "WalletOkCell", bundle: nil), forCellReuseIdentifier: "WalletOkCell")
         self.walletTableView.register(UINib(nibName: "WalletCrytoCell", bundle: nil), forCellReuseIdentifier: "WalletCrytoCell")
@@ -146,7 +147,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return 1;
             
         } else {
-            if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN || chainType == .NEUTRON_MAIN || chainType == .NEUTRON_TEST) {
+            if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN || chainType == .KAVA_EVM_MAIN  || chainType == .NEUTRON_MAIN || chainType == .NEUTRON_TEST) {
                 return 3;
             }
             if (chainType == .KAVA_MAIN || chainType == .MEDI_MAIN || chainType == .DESMOS_MAIN) {
@@ -172,6 +173,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 return onSetIrisItem(tableView, indexPath);
             } else if (chainType == .KAVA_MAIN) {
                 return onSetKavaItem(tableView, indexPath);
+            } else if (chainType == .KAVA_EVM_MAIN) {
+                return onSetKavaEvmItem(tableView, indexPath);
             } else if (chainType == .BINANCE_MAIN) {
                 return onSetBnbItem(tableView, indexPath);
             } else if (chainType == .OKEX_MAIN) {
@@ -302,6 +305,20 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (indexPath.row == 4) {
             return onBindAuthzCell(tableView)
+            
+        } else {
+            return onBindGuideCell(tableView)
+        }
+    }
+    
+    func onSetKavaEvmItem(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletKavaEvmCell") as? WalletKavaEvmCell
+            cell?.updateView()
+            return cell!
+            
+        } else if (indexPath.row == 1) {
+            return onBindPriceCell(tableView)
             
         } else {
             return onBindGuideCell(tableView)

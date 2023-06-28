@@ -41,6 +41,8 @@ final class BaseData : NSObject{
     var mOkStaking: OkStaking?
     var mOkUnbonding: OkUnbonding?
     
+    var mEvmBalance: Coin?
+    
     
     //For ProtoBuf and gRPC
     var mNodeInfo_gRPC: Tendermint_P2p_DefaultNodeInfo?
@@ -125,7 +127,10 @@ final class BaseData : NSObject{
     }
     
     func getChainId(_ chainType: ChainType?) -> String {
-        if (WUtils.isGRPC(chainType)) {
+        guard let chainConfig = ChainFactory.getChainConfig(chainType) else {
+            return ""
+        }
+        if (chainConfig.isGrpc == true) {
             if (mNodeInfo_gRPC != nil) { return mNodeInfo_gRPC!.network }
         } else {
             if (mNodeInfo != nil) { return mNodeInfo!.network! }

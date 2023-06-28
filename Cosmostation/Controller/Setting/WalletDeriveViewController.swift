@@ -11,6 +11,7 @@ import Alamofire
 import GRPC
 import NIO
 import SwiftKeychainWrapper
+import web3swift
 
 class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -275,10 +276,22 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                     let channel = BaseNetWork.getConnection(chainConfig)!
                     let req = Cosmos_Bank_V1beta1_QueryBalanceRequest.with { $0.address = derive.dpAddress; $0.denom = chainConfig.stakeDenom }
                     if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).balance(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                        tempCoin = Coin.init(response.balance.denom, response.balance.amount)                        
+                        tempCoin = Coin.init(response.balance.denom, response.balance.amount)
                     }
                     try channel.close().wait()
                 } catch { }
+                DispatchQueue.main.async(execute: {
+                    self.onTableViewLoadData(position, tempCoin)
+                });
+            }
+            
+        } else if (chainConfig.chainType == .KAVA_EVM_MAIN) {
+            DispatchQueue.global().async {
+                if let url = URL(string: chainConfig.rpcUrl), let web3 = try? Web3.new(url) {
+                    if let balance = try? web3.eth.getBalance(address: EthereumAddress.init(derive.dpAddress)!) {
+                        tempCoin = Coin.init(chainConfig.stakeDenom, String(balance))
+                    }
+                }
                 DispatchQueue.main.async(execute: {
                     self.onTableViewLoadData(position, tempCoin)
                 });

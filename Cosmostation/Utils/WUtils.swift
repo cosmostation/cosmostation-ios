@@ -202,14 +202,6 @@ public class WUtils {
         return formatted!
     }
     
-    static func tokenCnt(_ chainType: ChainType?) -> String {
-        if (isGRPC(chainType)) {
-            return String(BaseData.instance.mMyBalances_gRPC.count)
-        } else {
-            return String(BaseData.instance.mBalances.count)
-        }
-    }
-    
     static func getGeckoId(_ chainConfig: ChainConfig?) -> String {
         guard let chainConfig = chainConfig else { return "" }
         if let msAsset = BaseData.instance.getMSAsset(chainConfig, chainConfig.stakeDenom) {
@@ -297,6 +289,14 @@ public class WUtils {
                 }
                 let assetValue = assetValue(OKT_GECKO_ID, allOKT, 0)
                 totalValue = totalValue.adding(assetValue)
+            }
+            
+        }
+        
+        //cal for kava evm
+        else if (chainConfig.chainType == .KAVA_EVM_MAIN) {
+            if let amount = BaseData.instance.mEvmBalance?.amount {
+                totalValue = assetValue(KAVA_GECKO_ID, NSDecimalNumber(string: amount), 18)
             }
             
         }
@@ -1373,13 +1373,6 @@ public class WUtils {
             return UIImage.init(named: "ImgGovRejected")
         }
         return UIImage.init(named: "ImgGovFailed")
-    }
-    
-    public static func isGRPC(_ chain: ChainType?) -> Bool {
-        if (chain == .BINANCE_MAIN || chain == .OKEX_MAIN) {
-            return false
-        }
-        return true
     }
 }
 

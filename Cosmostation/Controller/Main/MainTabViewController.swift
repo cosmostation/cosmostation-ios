@@ -136,6 +136,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mOkUnbonding = nil
         BaseData.instance.mOkTokenList = nil
         
+        BaseData.instance.mEvmBalance = nil
+        
         
         
         //gRPC
@@ -184,7 +186,11 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             onFetchOkStakingInfo(mAccount)
             onFetchOkUnbondingInfo(mAccount)
             
-            
+        } else if (mChainType == .KAVA_EVM_MAIN) {
+            self.mFetchCnt = 3
+            onFetchEvmBalance(self.mAccount.account_address)
+            onFetchMintscanErc20(self.mChainConfig.chainAPIName)
+            onFetchMintscanAsset()
         }
         
         else if (self.mChainType == .IOV_MAIN) {
@@ -306,7 +312,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt > 0) { return }
         
-        if (WUtils.isGRPC(mChainType!)) {
+        if (mChainConfig?.isGrpc == true) {
             if (self.mChainType == .TGRADE_MAIN) {
                 for validator in BaseData.instance.mAllValidators_gRPC {
                     var mine = false;
@@ -385,6 +391,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
                 BaseData.instance.mBalances = mBalances
                 
+                if (BaseData.instance.mNodeInfo == nil) { self.onShowToast(NSLocalizedString("error_network", comment: "")) }
+                
             } else if (mChainType == .OKEX_MAIN) {
                 mAccount    = BaseData.instance.selectAccountById(id: mAccount!.account_id)
                 mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
@@ -405,13 +413,12 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 }
                 BaseData.instance.mBalances = mBalances
                 
-                if (mAccount.account_pubkey_type != 2) {
-                    showDeprecatedWarn()
-                }
-            }
-            
-            if (BaseData.instance.mNodeInfo == nil) {
-                self.onShowToast(NSLocalizedString("error_network", comment: ""))
+                if (mAccount.account_pubkey_type != 2) { showDeprecatedWarn() }
+                
+                if (BaseData.instance.mNodeInfo == nil) { self.onShowToast(NSLocalizedString("error_network", comment: "")) }
+                
+            } else if (mChainType == .KAVA_EVM_MAIN) {
+                // nothing
             }
         }
         
@@ -1101,6 +1108,17 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
+    func onFetchEvmBalance(_ address: String) {
+        DispatchQueue.global().async {
+            if let url = URL(string: self.mChainConfig.rpcUrl), let web3 = try? Web3.new(url) {
+                if let balance = try? web3.eth.getBalance(address: EthereumAddress.init(address)!) {
+                    BaseData.instance.mEvmBalance = Coin.init(self.mChainConfig.stakeDenom, String(balance))
+                }
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
     func onFetchMintscanErc20(_ chainId: String) {
         if (mChainConfig.evmSupport == false) {
             self.onFetchFinished()
@@ -1116,7 +1134,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                         BaseData.instance.mMintscanTokens.append(token)
                     }
                     BaseData.instance.setMyTokens(self.mAccount.account_address)
-                    Task {
+                    
+                    DispatchQueue.global().async {
                         if let url = URL(string: self.mChainConfig.rpcUrl), let web3 = try? Web3.new(url) {
                             BaseData.instance.mMyTokens.forEach { msToken in
                                 self.mFetchCnt = self.mFetchCnt + 1
@@ -1142,11 +1161,11 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             ethAddress = EthereumAddress.init(WKey.convertBech32ToEvm(mAccount.account_address))
         }
         let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
-        Task {
+        DispatchQueue.global().async {
             if let erc20Balance = try? erc20token.getBalance(account: ethAddress!) {
                 BaseData.instance.setMyTokenBalance(contAddress, String(erc20Balance))
             }
-            self.onFetchFinished()
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
     

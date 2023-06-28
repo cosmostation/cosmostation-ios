@@ -118,6 +118,8 @@ class ChainFactory {
             return .JUNO_MAIN
         case CHAIN_KAVA_S:
             return .KAVA_MAIN
+        case CHAIN_KAVA_EVM_S:
+            return .KAVA_EVM_MAIN
         case CHAIN_KI_S:
             return .KI_MAIN
         case CHAIN_KONSTELLATION_S:
@@ -268,6 +270,8 @@ class ChainFactory {
             return ChainJuno(chainType)
         case .KAVA_MAIN:
             return ChainKava(chainType)
+        case .KAVA_EVM_MAIN:
+            return ChainKavaEvm(chainType)
         case .KI_MAIN:
             return ChainKi(chainType)
         case .KONSTELLATION_MAIN:
@@ -400,6 +404,7 @@ let CHAIN_INJECTIVE_S = "SUPPORT_CHAIN_INJECTIVE"
 let CHAIN_IXO_S = "SUPPORT_CHAIN_IXO"
 let CHAIN_JUNO_S = "SUPPORT_CHAIN_JUNO"
 let CHAIN_KAVA_S = "SUPPORT_CHAIN_KAVA_MAIN"
+let CHAIN_KAVA_EVM_S = "SUPPORT_CHAIN_KAVA_EVM_MAIN"
 let CHAIN_KI_S = "SUPPORT_CHAIN_KI_MAIN"
 let CHAIN_KONSTELLATION_S = "SUPPORT_CHAIN_KONSTELLATION"
 let CHAIN_KUJIRA_S = "SUPPORT_CHAIN_KUJIRA"

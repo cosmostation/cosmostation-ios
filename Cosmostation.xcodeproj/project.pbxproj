@@ -318,6 +318,12 @@
 		0451FCBF282A3C3E00214FDA /* ChainOmiflix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FCBD282A3C3E00214FDA /* ChainOmiflix.swift */; };
 		0451FCC1282A3C5000214FDA /* ChainCrescent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FCC0282A3C5000214FDA /* ChainCrescent.swift */; };
 		0451FCC2282A3C5000214FDA /* ChainCrescent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FCC0282A3C5000214FDA /* ChainCrescent.swift */; };
+		0453BF022A4C253E004097F9 /* WalletKavaEvmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453BF002A4C253E004097F9 /* WalletKavaEvmCell.swift */; };
+		0453BF032A4C253E004097F9 /* WalletKavaEvmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453BF002A4C253E004097F9 /* WalletKavaEvmCell.swift */; };
+		0453BF042A4C253E004097F9 /* WalletKavaEvmCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0453BF012A4C253E004097F9 /* WalletKavaEvmCell.xib */; };
+		0453BF052A4C253E004097F9 /* WalletKavaEvmCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0453BF012A4C253E004097F9 /* WalletKavaEvmCell.xib */; };
+		0453BF072A4C2DC1004097F9 /* ChainKavaEvm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453BF062A4C2DC1004097F9 /* ChainKavaEvm.swift */; };
+		0453BF082A4C2DC1004097F9 /* ChainKavaEvm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453BF062A4C2DC1004097F9 /* ChainKavaEvm.swift */; };
 		04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
 		04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
 		0454AE4A2928D71400EC657D /* TxEvmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454AE482928D71400EC657D /* TxEvmCell.swift */; };
@@ -4005,6 +4011,9 @@
 		0451FCBA282A3C2B00214FDA /* ChainCerberus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCerberus.swift; sourceTree = "<group>"; };
 		0451FCBD282A3C3E00214FDA /* ChainOmiflix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOmiflix.swift; sourceTree = "<group>"; };
 		0451FCC0282A3C5000214FDA /* ChainCrescent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCrescent.swift; sourceTree = "<group>"; };
+		0453BF002A4C253E004097F9 /* WalletKavaEvmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletKavaEvmCell.swift; sourceTree = "<group>"; };
+		0453BF012A4C253E004097F9 /* WalletKavaEvmCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletKavaEvmCell.xib; sourceTree = "<group>"; };
+		0453BF062A4C2DC1004097F9 /* ChainKavaEvm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKavaEvm.swift; sourceTree = "<group>"; };
 		04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesmosProfileInfoCell.swift; sourceTree = "<group>"; };
 		04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DesmosProfileInfoCell.xib; sourceTree = "<group>"; };
 		0454AE482928D71400EC657D /* TxEvmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TxEvmCell.swift; path = Cosmostation/Cell/txs/TxEvmCell.swift; sourceTree = SOURCE_ROOT; };
@@ -5944,6 +5953,7 @@
 				0468BFA228C5EE7100CBC1C6 /* ChainIxo.swift */,
 				0451FC63282A3A2200214FDA /* ChainJuno.swift */,
 				0451FC4D282A38F400214FDA /* ChainKava.swift */,
+				0453BF062A4C2DC1004097F9 /* ChainKavaEvm.swift */,
 				0451FC6B282A3A7300214FDA /* ChainKi.swift */,
 				0451FCB1282A3BC900214FDA /* ChainKonstellation.swift */,
 				0459103B28FCFE8300C51CE9 /* ChainKujira.swift */,
@@ -7359,6 +7369,8 @@
 				042C389328F5604D00FF45A2 /* WalletBnbCell.xib */,
 				E191A57B237902C5002577BC /* WalletKavaCell.swift */,
 				042C389628F5605500FF45A2 /* WalletKavaCell.xib */,
+				0453BF002A4C253E004097F9 /* WalletKavaEvmCell.swift */,
+				0453BF012A4C253E004097F9 /* WalletKavaEvmCell.xib */,
 				28FA684E26D8A53E00CF4C57 /* WalletKavaIncentiveCell.swift */,
 				28FA684F26D8A53E00CF4C57 /* WalletKavaIncentiveCell.xib */,
 				E1A699592366E8CC004CA274 /* WalletIovCell.swift */,
@@ -8834,6 +8846,7 @@
 				18FFB7A2281AF533004E65BB /* AccountDetailViewController.xib in Resources */,
 				04DEAF4A286476BE00F23233 /* HtlcSend3ViewController.xib in Resources */,
 				045DADAF289BCF4B004ED9B4 /* AuthzSend1ViewController.xib in Resources */,
+				0453BF052A4C253E004097F9 /* WalletKavaEvmCell.xib in Resources */,
 				04E6ABD0286358B4008DC3C7 /* CdpDrawRepay1ViewController.xib in Resources */,
 				04A116F828F7DE3A003605E5 /* WalletDetailViewController.xib in Resources */,
 				18FFB7A7281AF533004E65BB /* StakingTokenGrpcViewController.xib in Resources */,
@@ -9225,6 +9238,7 @@
 				04C4937A284F465D00ECF4D2 /* MnemonicRestoreViewController.xib in Resources */,
 				045DAD57288FAEB5004ED9B4 /* AuthzGranteeCell.xib in Resources */,
 				283E750026CE247C0097CC04 /* StakingTokenGrpcViewController.xib in Resources */,
+				0453BF042A4C253E004097F9 /* WalletKavaEvmCell.xib in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
 				046FF017277B43E300F72C11 /* GenDenom0ViewController.xib in Resources */,
 				04DEAF372864768700F23233 /* HtlcSend0ViewController.xib in Resources */,
@@ -10279,6 +10293,7 @@
 				04815D042A41DE030006A906 /* evmos_claims_v1_claims.pb.swift in Sources */,
 				048162412A41F2650006A906 /* irismod_htlc_genesis.pb.swift in Sources */,
 				04F793DF2A458AA40093B79B /* injective_peggy_v1_query.grpc.swift in Sources */,
+				0453BF082A4C2DC1004097F9 /* ChainKavaEvm.swift in Sources */,
 				18F412982860628E0007E3F2 /* ManageMnemonicCell.swift in Sources */,
 				04F794432A458AA40093B79B /* injective_exchange_v1beta1_tx.grpc.swift in Sources */,
 				04815E422A41E1480006A906 /* ibc_applications_fee_v1_ack.pb.swift in Sources */,
@@ -10488,6 +10503,7 @@
 				04815FAF2A41E1810006A906 /* cosmos_staking_module_v1_module.pb.swift in Sources */,
 				0451FCB0282A3BB800214FDA /* ChainAssetmantle.swift in Sources */,
 				0481607A2A41E34E0006A906 /* tendermint_types_validator.pb.swift in Sources */,
+				0453BF032A4C253E004097F9 /* WalletKavaEvmCell.swift in Sources */,
 				04815F412A41E1810006A906 /* cosmos_auth_v1beta1_query.pb.swift in Sources */,
 				04F797CA2A4593050093B79B /* kava_swap_v1beta1_swap.pb.swift in Sources */,
 				04815F132A41E1800006A906 /* cosmos_gov_v1_genesis.pb.swift in Sources */,
@@ -11834,6 +11850,7 @@
 				0481621A2A41F2640006A906 /* irismod_nft_tx.pb.swift in Sources */,
 				048160462A41E1820006A906 /* cosmos_evidence_v1beta1_evidence.pb.swift in Sources */,
 				048162142A41F2640006A906 /* irismod_oracle_tx.grpc.swift in Sources */,
+				0453BF072A4C2DC1004097F9 /* ChainKavaEvm.swift in Sources */,
 				046BD2272778B398002333B5 /* SendNFT3ViewController.swift in Sources */,
 				283E945E254901E7007A9291 /* RegisterDomain3ViewController.swift in Sources */,
 				E10492132347B41000A2980F /* WalletConnectViewController.swift in Sources */,
@@ -12043,6 +12060,7 @@
 				048160222A41E1810006A906 /* cosmos_vesting_v1beta1_tx.grpc.swift in Sources */,
 				04F7950D2A458DF90093B79B /* stride_stakeibc_address_unbonding.pb.swift in Sources */,
 				045DAD792897A1A2004ED9B4 /* AuthzVote2ViewController.swift in Sources */,
+				0453BF022A4C253E004097F9 /* WalletKavaEvmCell.swift in Sources */,
 				04815CA02A41DCD90006A906 /* ethermint_evm_v1_events.pb.swift in Sources */,
 				04F7966E2A458EFB0093B79B /* osmosis_gamm_v1beta1_query.grpc.swift in Sources */,
 				048160502A41E1820006A906 /* cosmos_vesting_v1beta1_vesting.pb.swift in Sources */,

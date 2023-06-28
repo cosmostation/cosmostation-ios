@@ -59,7 +59,7 @@ class CKey {
         } else if (chainType == ChainType.MEDI_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 371, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
-        } else if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN || chainType == ChainType.XPLA_MAIN || chainType == ChainType.CANTO_MAIN) {
+        } else if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN || chainType == ChainType.XPLA_MAIN || chainType == ChainType.CANTO_MAIN || chainType == ChainType.KAVA_EVM_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
         } else if (chainType == ChainType.BITSONG_MAIN) {

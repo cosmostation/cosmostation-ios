@@ -95,23 +95,25 @@ public class WDP {
         dpSymbol(chainConfig, denom, denomLabel)
         if (chainConfig?.isGrpc == true) {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == denom }).first {
-                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, msAsset.decimals, msAsset.decimals)
+                dpAmount(amount, msAsset.decimals, msAsset.decimals, amountLabel!)
             }
             else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first {
-                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, msToken.decimals, msToken.decimals)
+                dpAmount(amount, msToken.decimals, msToken.decimals, amountLabel!)
             }
             else {
-                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
+                dpAmount(amount, chainConfig!.divideDecimal, chainConfig!.displayDecimal, amountLabel!)
             }
             
         } else {
             if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first {
-                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, msToken.decimals, msToken.decimals)
+                dpAmount(amount, msToken.decimals, msToken.decimals, amountLabel!)
             } else {
                 if (chainConfig?.chainType == .BINANCE_MAIN) {
-                    amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, 0, 8)
-                } else if (chainConfig?.chainType == .OKEX_MAIN ) {
-                    amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, 0, 18)
+                    dpAmount(amount, 0, 8, amountLabel!)
+                } else if (chainConfig?.chainType == .OKEX_MAIN) {
+                    dpAmount(amount, 0, 18, amountLabel!)
+                } else if (chainConfig?.chainType == .KAVA_EVM_MAIN) {
+                    dpAmount(amount, 18, 18, amountLabel!)
                 }
             }
         }
@@ -124,7 +126,11 @@ public class WDP {
             denomLabel.textColor = UIColor.font05
             denomLabel.text = coin.denom.uppercased()
         }
-        amountLabel.attributedText = dpAmount(coin.amount, amountLabel.font, 8, 8)
+        dpAmount(coin.amount, 8, 8, amountLabel)
+    }
+    
+    static func dpAmount(_ amount: String?, _ inputPoint: Int16, _ dpPoint: Int16,  _ amountLabel: UILabel) {
+        amountLabel.attributedText = dpAmount(amount, amountLabel.font, inputPoint, dpPoint)
     }
     
     static func dpAmount(_ amount: String?, _ font: UIFont, _ inputPoint: Int16, _ dpPoint: Int16) -> NSMutableAttributedString {

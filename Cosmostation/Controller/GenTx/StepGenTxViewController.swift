@@ -166,7 +166,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == TASK_TYPE_TRANSFER) {
-            if (WUtils.isGRPC(chainType!)) {
+            if (chainConfig?.isGrpc == true) {
                 return [Transfer1ViewController(nibName: "Transfer1ViewController", bundle: nil),
                         Transfer2ViewController(nibName: "Transfer2ViewController", bundle: nil),
                         MemoViewController(nibName: "MemoViewController", bundle: nil),

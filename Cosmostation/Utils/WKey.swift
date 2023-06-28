@@ -27,7 +27,7 @@ class WKey {
             if (type == 0) { return genLegacyOkcAddress(pkey) }
             else { return genEthAddress(pkey) }
             
-        } else if (chainConfig.chainType == . INJECTIVE_MAIN || chainConfig.chainType == .EVMOS_MAIN || chainConfig.chainType == .CANTO_MAIN) {
+        } else if (chainConfig.chainType == .INJECTIVE_MAIN || chainConfig.chainType == .EVMOS_MAIN || chainConfig.chainType == .CANTO_MAIN) {
             return getEthermintBech32Address(pkey, chainConfig.addressPrefix)
             
         } else if (chainConfig.chainType == .XPLA_MAIN) {
@@ -36,6 +36,9 @@ class WKey {
             } else {
                 return getEthermintBech32Address(pkey, chainConfig.addressPrefix)
             }
+            
+        } else if (chainConfig.chainType == .KAVA_EVM_MAIN) {
+            return genEthAddress(pkey)
             
         } else {
             return getTendermintBech32Address(pkey, chainConfig.addressPrefix)
@@ -74,7 +77,7 @@ class WKey {
         } else if (chainType == ChainType.DESMOS_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(852)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
-        } else if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN || chainType == ChainType.XPLA_MAIN || chainType == ChainType.CANTO_MAIN) {
+        } else if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN || chainType == ChainType.XPLA_MAIN || chainType == ChainType.CANTO_MAIN || chainType == ChainType.KAVA_EVM_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
 
         } else if (chainType == ChainType.PROVENANCE_MAIN) {
