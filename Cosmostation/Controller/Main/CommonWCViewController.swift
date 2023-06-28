@@ -1224,9 +1224,9 @@ extension CommonWCViewController: SBCardPopupDelegate {
                 if let peerMeta = self.wCPeerMeta {
                     self.onViewUpdate(peerMeta)
                 }
+                self.accountMap[chainName] = selectedAccount
                 getKeplrAccount(account: selectedAccount, listener: { wallet in
                     self.moveToBackgroundIfNeedAndAction {
-                        self.accountMap[chainName] = selectedAccount
                         self.interactor?.approveRequest(id: self.wcId!, result: [wallet]).cauterize()
                     }
                 })
@@ -1553,7 +1553,9 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 data["isEthermint"] = false
                 data["isLedger"] = false
                 data["name"].stringValue = self.account?.account_nick_name ?? ""
-                data["address"].stringValue = WKey.getDpAddress(chainConfig!, privateKey, 0)
+                if (chainConfig != nil) {
+                    data["address"].stringValue = WKey.getDpAddress(chainConfig!, privateKey, 0)
+                }
                 data["publicKey"].stringValue = KeyFac.getPublicFromPrivateKey(privateKey).toHexString()
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
