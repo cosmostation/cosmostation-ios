@@ -12,6 +12,13 @@ public struct Cw20NeutronVestingRes : Codable {
     var allocated_amount: String?
     var withdrawn_amount: String?
     var schedule: VestingSchedule?
+    
+    func getNeutronVestingAmount() -> NSDecimalNumber {
+        if (allocated_amount != nil && withdrawn_amount != nil) {
+            return NSDecimalNumber(string: allocated_amount).subtracting(NSDecimalNumber(string: withdrawn_amount))
+        }
+        return NSDecimalNumber.zero
+    }
 }
 
 public struct VestingSchedule : Codable {
