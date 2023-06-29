@@ -925,10 +925,24 @@ class CommonWCViewController: BaseViewController {
     func approveV2CosmosAminoRequest() {
         if let request = wcV2Request,
            let json = try? JSON(data: request.params.encoded) {
-            let signDoc = json["signDoc"]
+            var signDoc = json["signDoc"]
+            let chainId = signDoc["chain_id"].rawString()
+            let chainType = WUtils.getChainTypeByChainId(chainId)
+            let chainConfig = ChainFactory.getChainConfig(chainType)
+            let denom = chainConfig?.stakeDenom
+            if (signDoc["fee"].exists() && signDoc["fee"]["amount"].exists()) {
+                let amounts = signDoc["fee"]["amount"].arrayValue
+                let gas = signDoc["fee"]["gas"].stringValue
+                let value = NSDecimalNumber(string: gas).dividing(by: NSDecimalNumber(value: 40))
+                if (amounts.count == 0) {
+                    signDoc["fee"]["amount"] = [["amount": value.stringValue, "denom": denom]]
+                }
+                if amounts.count == 1 && amounts.contains(where: { $0["denom"].stringValue == denom && $0["amount"].stringValue == "0" }) {
+                    signDoc["fee"]["amount"] = [["amount": value.stringValue, "denom": denom]]
+                }
+            }
             let sortedJsonData = try? signDoc.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
             let rawOrderdDocSha = sortedJsonData!.sha256()
-            let chainId = signDoc["chain_id"].rawString()
             getKeyAsync(chainName: WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId)) ) { tuple in
                 if  let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey) {
                     let pubkey: JSON = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]

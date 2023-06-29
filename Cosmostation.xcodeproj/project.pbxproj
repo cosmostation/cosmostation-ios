@@ -2811,6 +2811,8 @@
 		18F4129D2860649E0007E3F2 /* WalletDeriveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047FB70F281EC0E8009D8AAF /* WalletDeriveViewController.xib */; };
 		18F4129E286064A80007E3F2 /* MnemonicListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047FB6FB281AA8D7009D8AAF /* MnemonicListViewController.xib */; };
 		18F412A0286064AD0007E3F2 /* MnemonicDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047FB703281EBA14009D8AAF /* MnemonicDetailViewController.xib */; };
+		18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187447002930942400849EE4 /* ApiKeyDev.plist */; };
+		18F4EAD22A4DA0A500CFBE2B /* ApiKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187446FE2930940F00849EE4 /* ApiKey.plist */; };
 		18F811B9282E1FC4008AF0D2 /* WalletStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151788EB282E078600A7D7CC /* WalletStationCell.xib */; };
 		18F811BA282E1FC5008AF0D2 /* WalletStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151788EB282E078600A7D7CC /* WalletStationCell.xib */; };
 		18F811BB282E1FD7008AF0D2 /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
@@ -8780,6 +8782,7 @@
 				18FFB771281AF533004E65BB /* EditDisplayChainCell.xib in Resources */,
 				18FFB772281AF533004E65BB /* TxMultiTransferCell.xib in Resources */,
 				18FFB773281AF533004E65BB /* Osmosis.storyboard in Resources */,
+				18F4EAD22A4DA0A500CFBE2B /* ApiKey.plist in Resources */,
 				18FFB775281AF533004E65BB /* TxSwapWithdrawCell.xib in Resources */,
 				042C38A728F6896000FF45A2 /* MyValidatorCell.xib in Resources */,
 				04172B8A29F6901300D6279C /* MainVaultCell.xib in Resources */,
@@ -9244,6 +9247,7 @@
 				04D3392427E8803000E82AA7 /* WalletCrescentCell.xib in Resources */,
 				04C5AE9728632ECD007627EA /* ReInvest1ViewController.xib in Resources */,
 				28DB570C25FA3BC900B2F0E5 /* HardPoolBorrow3ViewController.xib in Resources */,
+				18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */,
 				18D4C19928C729C9003F230A /* ManageConnectionViewController.xib in Resources */,
 				04DEAF43286476AF00F23233 /* HtlcSend2ViewController.xib in Resources */,
 				2812CA3F26DD4E160095C6AF /* TxIncentiveDelegatorCell.xib in Resources */,
