@@ -122,13 +122,13 @@ class CommonWCViewController: BaseViewController {
                 filteredDapps += dapps.filter({ item in
                     var contain = false
                     if let title = item["title"] as? String {
-                        contain = contain || title.contains(text)
+                        contain = contain || title.lowercased().contains(text.lowercased())
                     }
                     if let title = item["description"] as? String {
-                        contain = contain || title.contains(text)
+                        contain = contain || title.lowercased().contains(text.lowercased())
                     }
                     if let title = item["url"] as? String {
-                        contain = contain || title.contains(text)
+                        contain = contain || title.lowercased().contains(text.lowercased())
                     }
                     return contain
                 })
@@ -925,16 +925,31 @@ class CommonWCViewController: BaseViewController {
     func approveV2CosmosAminoRequest() {
         if let request = wcV2Request,
            let json = try? JSON(data: request.params.encoded) {
-            let signDoc = json["signDoc"]
+            var signDoc = json["signDoc"]
+            let chainId = signDoc["chain_id"].rawString()
+            let chainType = WUtils.getChainTypeByChainId(chainId)
+            let chainConfig = ChainFactory.getChainConfig(chainType)
+            let denom = chainConfig?.stakeDenom
+            if (signDoc["fee"].exists() && signDoc["fee"]["amount"].exists()) {
+                let amounts = signDoc["fee"]["amount"].arrayValue
+                let gas = signDoc["fee"]["gas"].stringValue
+                let value = NSDecimalNumber(string: gas).dividing(by: NSDecimalNumber(value: 40))
+                if (amounts.count == 0) {
+                    signDoc["fee"]["amount"] = [["amount": value.stringValue, "denom": denom]]
+                }
+                if amounts.count == 1 && amounts.contains(where: { $0["denom"].stringValue == denom && $0["amount"].stringValue == "0" }) {
+                    signDoc["fee"]["amount"] = [["amount": value.stringValue, "denom": denom]]
+                }
+            }
             let sortedJsonData = try? signDoc.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
             let rawOrderdDocSha = sortedJsonData!.sha256()
-            let chainId = signDoc["chain_id"].rawString()
             getKeyAsync(chainName: WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId)) ) { tuple in
                 if  let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey) {
                     let pubkey: JSON = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
                     let signature: JSON = ["signature" : signature.base64EncodedString(), "pub_key" : pubkey]
+                    let response: JSON = ["signed" : signDoc.rawValue, "signature":signature.dictionaryValue]
                     self.moveToBackgroundIfNeedAndAction {
-                        self.respondOnSign(request: request, response: AnyCodable(signature.dictionaryValue))
+                        self.respondOnSign(request: request, response: AnyCodable(response))
                         self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
                     }
                 }
@@ -1277,6 +1292,10 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
                 UIApplication.shared.open(URL(string: url.absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc"))!, options: [:])
                 decisionHandler(.cancel)
                 return
+            } else if (url.absoluteString.starts(with: "keplrwallet://wcV2")) {
+                UIApplication.shared.open(URL(string: url.absoluteString.removingPercentEncoding!.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc"))!, options: [:])
+                decisionHandler(.cancel)
+                return
             } else if (url.scheme == "cosmostation") {
                 UIApplication.shared.open(url, options: [:])
                 decisionHandler(.cancel)
@@ -1383,6 +1402,7 @@ extension CommonWCViewController {
                 try await Pair.instance.pair(uri: uri)
             } catch {
                 print("Pairing connect error: \(error)")
+                self.hideLoading()
             }
         }
     }
@@ -1540,7 +1560,10 @@ extension CommonWCViewController: WKScriptMessageHandler {
             if (method == "cos_requestAccount" || method == "cos_account" || method == "ten_requestAccount" || method == "ten_account") {
                 let params = messageJSON["params"]
                 let chainId = params["chainName"].stringValue
-                let chainType = WUtils.getChainTypeByChainId(chainId)
+                var chainType = WUtils.getChainTypeByChainId(chainId)
+                if chainType == nil {
+                    chainType = WUtils.getChainTypeByChainName(chainId)
+                }
                 let chainConfig = ChainFactory.getChainConfig(chainType)
                 if (self.chainConfig?.defaultPath != "m/44'/118'/0'/0/X") {
                     self.onShowToast(NSLocalizedString("error_not_support_wallet", comment: ""))
@@ -1559,8 +1582,20 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 data["publicKey"].stringValue = KeyFac.getPublicFromPrivateKey(privateKey).toHexString()
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
-            } else if (method == "cos_supportedChainIds") {
-                let data = ["official": ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1", "core-1"], "unofficial": []]
+            } else if (method == "cos_supportedChainIds" || method == "ten_supportedChainIds") {
+                let data = ["official": ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1", "core-1", "crescent-1"], "unofficial": []]
+                let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
+                self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+            } else if (method == "ten_supportedChainNames" || method == "cos_supportedChainNames") {
+                let data = ["official": ["cosmos", "osmosis", "stride", "stargaze", "omniflix", "crescent"], "unofficial": []]
+                let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
+                self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+            } else if (method == "cos_activatedChainIds" || method == "ten_activatedChainIds") {
+                let data = ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1", "core-1", "crescent-1"]
+                let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
+                self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+            } else if (method == "cos_activatedChainNames" || method == "ten_activatedChainNames") {
+                let data = ["cosmos", "osmosis", "stride", "stargaze", "omniflix", "crescent"]
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_signAmino") {

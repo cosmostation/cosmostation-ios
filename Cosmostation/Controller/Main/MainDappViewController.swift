@@ -75,13 +75,13 @@ class MainDappViewController: BaseViewController {
                 filteredDapps += dapps.filter({ item in
                     var contain = false
                     if let title = item["title"] as? String {
-                        contain = contain || title.contains(text)
+                        contain = contain || title.lowercased().contains(text.lowercased())
                     }
                     if let title = item["description"] as? String {
-                        contain = contain || title.contains(text)
+                        contain = contain || title.lowercased().contains(text.lowercased())
                     }
                     if let title = item["url"] as? String {
-                        contain = contain || title.contains(text)
+                        contain = contain || title.lowercased().contains(text.lowercased())
                     }
                     return contain
                 })
