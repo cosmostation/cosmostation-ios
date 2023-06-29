@@ -696,6 +696,16 @@ public class WUtils {
         return nil
     }
     
+    static func getChainTypeByChainName(_ chainName: String?) -> ChainType? {
+        let allConfigs = ChainFactory.SUPPRT_CONFIG()
+        for i in 0..<allConfigs.count {
+            if (chainName?.contains(allConfigs[i].chainAPIName) == true) {
+                return allConfigs[i].chainType
+            }
+        }
+        return nil
+    }
+    
     static func isValidChainAddress(_ chainConfig: ChainConfig?, _ address: String?) -> Bool {
         guard let chainConfig = chainConfig else { return false }
         if let address = address, address.starts(with: "0x") {
