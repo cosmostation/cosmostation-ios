@@ -114,11 +114,12 @@ class CommonWCViewController: BaseViewController {
         filteredDapps = []
         if let text = searchTextField.text {
             if !text.isEmpty {
-//                if text.starts(with: "http") {
-//                    filteredDapps.append(["title": "\"\(text)\" - Open in Browser", "url":text, "description":""])
-//                } else {
-//                    filteredDapps.append(["title": "\"\(text)\" - Search in Google", "url":"https://www.google.com/search?q=\(text)", "description":""])
-//                }
+                if text.starts(with: "http") {
+                    filteredDapps.append(["title": "\"\(text)\" - Open in Browser", "url":text, "description":""])
+                } else {
+                    filteredDapps.append(["title": "\"\(text)\" - Search in Google", "url":"https://www.google.com/search?q=\(text)", "description":""])
+                }
+                
                 filteredDapps += dapps.filter({ item in
                     var contain = false
                     if let title = item["title"] as? String {
@@ -157,7 +158,7 @@ class CommonWCViewController: BaseViewController {
             dappWrapView.isHidden = false
             connectStatus(connected: false)
             if let url = dappURL {
-                webView.load(URLRequest(url: URL(string: url)!))
+                loadUrl(urlText: url)
                 searchTextField.text = url
             }
         } else {
@@ -197,8 +198,8 @@ class CommonWCViewController: BaseViewController {
                 }
                 connectSession()
             } else if host == "dapp" || host == "internaldapp" {
-                if webView.isHidden == false, let url = URL(string: query) {
-                    webView.load(URLRequest(url: url))
+                if webView.isHidden == false {
+                    loadUrl(urlText: query)
                 }
             }
         }
@@ -212,14 +213,17 @@ class CommonWCViewController: BaseViewController {
             webView.configuration.userContentController.addUserScript(userScript)
             webView.configuration.userContentController.add(self, name: "station")
         }
+        if #available(iOS 16.4, *) {
+            webView.isInspectable = true
+        } else {
+            // Fallback on earlier versions
+        }
         webView.isOpaque = false
         webView.backgroundColor = UIColor.clear
         webView.navigationDelegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.allowsBackForwardNavigationGestures = true
-        webView.uiDelegate = self
         webView.allowsLinkPreview = false
-        webView.scrollView.bounces = false
         if let dictionary = Bundle.main.infoDictionary,
             let version = dictionary["CFBundleShortVersionString"] as? String {
             webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
@@ -495,6 +499,17 @@ class CommonWCViewController: BaseViewController {
                 self?.wcRequestChainName = WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId))
                 self?.onShowPopupForRequest(WcRequestType.COSMOS_TYPE, sigData)
             }
+        }
+    }
+    
+    func loadUrl(urlText: String) {
+        var formattedURLString = urlText
+        if !formattedURLString.hasPrefix("https://") && !formattedURLString.hasPrefix("http://") {
+            formattedURLString = "https://" + formattedURLString
+        }
+        
+        if let url = URL(string: formattedURLString) {
+            self.webView.load(URLRequest(url: url))
         }
     }
     
@@ -1296,10 +1311,10 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
                 UIApplication.shared.open(URL(string: url.absoluteString.removingPercentEncoding!.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc"))!, options: [:])
                 decisionHandler(.cancel)
                 return
-            } else if (url.scheme == "cosmostation") {
-                UIApplication.shared.open(url, options: [:])
-                decisionHandler(.cancel)
-                return
+//            } else if (url.scheme == "cosmostation") {
+//                UIApplication.shared.open(url, options: [:])
+//                decisionHandler(.cancel)
+//                return
             } else if (url.absoluteString.range(of: "https://.*/wc", options: .regularExpression) != nil) {
                 let newUrl = url.absoluteString.replacingCharacters(in: url.absoluteString.range(of: "https://.*/wc", options: .regularExpression)!, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
                 UIApplication.shared.open(URL(string: newUrl.removingPercentEncoding!)!, options: [:])
@@ -1310,7 +1325,7 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
         
         if navigationAction.navigationType == .linkActivated {
             guard let url = navigationAction.request.url else {return}
-            webView.load(URLRequest(url: url))
+            loadUrl(urlText: url.absoluteString)
         }
         decisionHandler(.allow)
     }
@@ -1629,7 +1644,7 @@ extension CommonWCViewController: UITableViewDelegate, UITableViewDataSource {
             if let logo = item["logo"] as? String, let url = URL(string: logo) {
                 cell.iconImg.af_setImage(withURL: url)
             } else {
-                cell.iconImg.image = UIImage(named: "btnExplorer")
+                cell.iconImg.image = nil
             }
             cell.descriptionLabel.text = item["description"] as? String
             cell.titleLabel.text = item["title"] as? String
@@ -1640,8 +1655,8 @@ extension CommonWCViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = filteredDapps[indexPath.row]
-        if let urlString = item["url"] as? String, let url = URL(string: urlString) {
-            self.webView.load(URLRequest(url: url))
+        if let urlString = item["url"] as? String {
+            self.loadUrl(urlText: urlString)
         }
         self.searchTextField.resignFirstResponder()
         self.searchTextField.text = ""
@@ -1655,8 +1670,8 @@ extension CommonWCViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CommonWCViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let urlString = textField.text, let url = URL(string: urlString) {
-            self.webView.load(URLRequest(url: url))
+        if let urlString = textField.text {
+            self.loadUrl(urlText: urlString)
         }
         self.searchTextField.resignFirstResponder()
         return true

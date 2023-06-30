@@ -3010,6 +3010,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="go" textContentType="url"/>
                                         <connections>
                                             <action selector="searchTextChange" destination="YMX-6a-dIv" eventType="editingChanged" id="7Fj-OC-NN3"/>
+                                            <outlet property="delegate" destination="YMX-6a-dIv" id="52m-Gt-zIZ"/>
                                         </connections>
                                     </textField>
                                 </subviews>
