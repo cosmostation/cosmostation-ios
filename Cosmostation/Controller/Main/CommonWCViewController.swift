@@ -96,7 +96,7 @@ class CommonWCViewController: BaseViewController {
     }
     
     private func loadDapp() {
-        let request = Alamofire.request("https://raw.githubusercontent.com/cosmostation/chainlist/master/dapp/dapps.json", method: .get, encoding: URLEncoding.default)
+        let request = Alamofire.request("https://raw.githubusercontent.com/cosmostation/chainlist/master/dapp/recommend.json", method: .get, encoding: URLEncoding.default)
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
