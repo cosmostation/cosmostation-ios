@@ -70,6 +70,8 @@ class ChainFactory {
             return .IRIS_MAIN
         case CHAIN_AKASH_S:
             return .AKASH_MAIN
+        case CHAIN_ARCHWAY_S:
+            return .ARCHWAY_MAIN
         case CHAIN_MANTLE_S:
             return .MANTLE_MAIN
         case CHAIN_AXELAR_S:
@@ -220,6 +222,8 @@ class ChainFactory {
             return ChainIris(chainType)
         case .AKASH_MAIN:
             return ChainAkash(chainType)
+        case .ARCHWAY_MAIN:
+            return ChainArchway(chainType)
         case .MANTLE_MAIN:
             return ChainAssetMantle(chainType)
         case .AXELAR_MAIN:
@@ -377,6 +381,7 @@ class ChainFactory {
 let CHAIN_COSMOS_S = "SUPPORT_CHAIN_COSMOS_MAIN"
 let CHAIN_IRIS_S = "SUPPORT_CHAIN_IRIS_MAIN"
 let CHAIN_AKASH_S = "SUPPORT_CHAIN_AKASH_MAIN"
+let CHAIN_ARCHWAY_S = "SUPPORT_CHAIN_ARCHWAY_MAIN"
 let CHAIN_MANTLE_S = "SUPPORT_CHAIN_MANTLE"
 let CHAIN_AXELAR_S = "SUPPORT_CHAIN_AXELAR"
 let CHAIN_BAND_S = "SUPPORT_CHAIN_BAND_MAIN"
