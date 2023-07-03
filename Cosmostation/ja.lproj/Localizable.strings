@@ -352,6 +352,7 @@
 "guide_msg_coreum" = "Coreumは、将来の分散アプリケーションのコアインフラストラクチャとして機能するエンタープライズクラスのL1ブロックチェーンです。";
 "guide_msg_noble" = "NobleはIBC生態系上、ネイティブトークン発行のために設計されたCosmosSDKベースのブロックチェーンです。";
 "guide_msg_neutron" = "Neutronは、CosmosハブのInterchain Securityを使用する非許可型CosmWasmプラットフォームです。";
+"guide_msg_archway" = "Archwayは、dAppの貢献度に応じてリワードが開発者に分配されるように設計されたスマートコントラクトブロックチェーンです。";
 "guide_msg_stafi" = "StaFi Hubはクロスチェーンリキッドステーキングのために設計されたCosmos SDKベースのブロックチェーンネットワークです。";
 "guide_btn_home" = "ホームページ";
 "guide_btn_blog" = "公式ブログ";
