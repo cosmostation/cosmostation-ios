@@ -2723,6 +2723,8 @@
 		152AC22929ACAA36007AB276 /* PersisLiquid3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */; };
 		152AC22A29ACAA36007AB276 /* PersisLiquid3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */; };
 		153559982988FDE70055A1D3 /* ChainMars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153559972988FDE70055A1D3 /* ChainMars.swift */; };
+		15378CCA2A52A5D50017BE75 /* ChainArchway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15378CC92A52A5D50017BE75 /* ChainArchway.swift */; };
+		15378CCB2A52A5D50017BE75 /* ChainArchway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15378CC92A52A5D50017BE75 /* ChainArchway.swift */; };
 		1537A08529AC7B8700342ACF /* PersisLiquidStakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1537A08429AC7B8700342ACF /* PersisLiquidStakingViewController.swift */; };
 		1537A08629AC7B8700342ACF /* PersisLiquidStakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1537A08429AC7B8700342ACF /* PersisLiquidStakingViewController.swift */; };
 		1537A08C29AC914000342ACF /* PersisLiquid0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1537A08B29AC914000342ACF /* PersisLiquid0ViewController.swift */; };
@@ -5251,6 +5253,7 @@
 		151788EB282E078600A7D7CC /* WalletStationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStationCell.xib; sourceTree = "<group>"; };
 		152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersisLiquid3ViewController.xib; sourceTree = "<group>"; };
 		153559972988FDE70055A1D3 /* ChainMars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMars.swift; sourceTree = "<group>"; };
+		15378CC92A52A5D50017BE75 /* ChainArchway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainArchway.swift; sourceTree = "<group>"; };
 		1537A08429AC7B8700342ACF /* PersisLiquidStakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersisLiquidStakingViewController.swift; sourceTree = "<group>"; };
 		1537A08B29AC914000342ACF /* PersisLiquid0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersisLiquid0ViewController.swift; sourceTree = "<group>"; };
 		1537A08E29AC93B100342ACF /* PersisLiquid0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersisLiquid0ViewController.xib; sourceTree = "<group>"; };
@@ -5922,6 +5925,7 @@
 				0451FC51282A397200214FDA /* ChainIris.swift */,
 				0451FC5D282A39D000214FDA /* ChainAkash.swift */,
 				0443B89A2859C0770027A6B9 /* ChainAlthea.swift */,
+				15378CC92A52A5D50017BE75 /* ChainArchway.swift */,
 				0451FCAE282A3BB800214FDA /* ChainAssetmantle.swift */,
 				0451FCAB282A3BA400214FDA /* ChainAxelar.swift */,
 				0451FC57282A399D00214FDA /* ChainBand.swift */,
@@ -9775,6 +9779,7 @@
 				04F7977E2A4593040093B79B /* kava_earn_v1beta1_vault.pb.swift in Sources */,
 				04815D682A41DE6B0006A906 /* band_oracle_v1_oracle.pb.swift in Sources */,
 				04815C512A41DC440006A906 /* crescent_marker_v1beta1_query.grpc.swift in Sources */,
+				15378CCB2A52A5D50017BE75 /* ChainArchway.swift in Sources */,
 				045DAD742897A195004ED9B4 /* AuthzVote1ViewController.swift in Sources */,
 				0481614A2A41E6520006A906 /* desmos_subspaces_v3_msgs_treasury.pb.swift in Sources */,
 				04815F7F2A41E1810006A906 /* cosmos_store_streaming_abci_grpc.grpc.swift in Sources */,
@@ -11330,6 +11335,7 @@
 				04E6ABA128635816008DC3C7 /* CdpCreate4ViewController.swift in Sources */,
 				04815E1F2A41E1480006A906 /* ibc_core_client_v1_tx.pb.swift in Sources */,
 				04815F882A41E1810006A906 /* cosmos_authz_v1beta1_genesis.pb.swift in Sources */,
+				15378CCA2A52A5D50017BE75 /* ChainArchway.swift in Sources */,
 				04815C4C2A41DC440006A906 /* crescent_liquidfarming_v1beta1_liquidfarming.pb.swift in Sources */,
 				04F795752A458E450093B79B /* pstake_lspersistence_v1beta1_query.pb.swift in Sources */,
 				04815D132A41DE030006A906 /* evmos_inflation_v1_inflation.pb.swift in Sources */,
