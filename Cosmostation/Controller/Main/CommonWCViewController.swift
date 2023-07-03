@@ -1598,19 +1598,19 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_supportedChainIds" || method == "ten_supportedChainIds") {
-                let data = ["official": ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1", "core-1", "crescent-1"], "unofficial": []]
+                let data = ["official": ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1", "core-1", "crescent-1", "archway-1"], "unofficial": []]
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "ten_supportedChainNames" || method == "cos_supportedChainNames") {
-                let data = ["official": ["cosmos", "osmosis", "stride", "stargaze", "omniflix", "crescent"], "unofficial": []]
+                let data = ["official": ["cosmos", "osmosis", "stride", "stargaze", "omniflix", "crescent", "archway"], "unofficial": []]
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_activatedChainIds" || method == "ten_activatedChainIds") {
-                let data = ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1", "core-1", "crescent-1"]
+                let data = ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1", "core-1", "crescent-1", "archway-1"]
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_activatedChainNames" || method == "ten_activatedChainNames") {
-                let data = ["cosmos", "osmosis", "stride", "stargaze", "omniflix", "crescent"]
+                let data = ["cosmos", "osmosis", "stride", "stargaze", "omniflix", "crescent", "archway"]
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_signAmino") {
