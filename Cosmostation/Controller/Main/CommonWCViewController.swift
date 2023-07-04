@@ -1593,24 +1593,28 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 data["name"].stringValue = self.account?.account_nick_name ?? ""
                 if (chainConfig != nil) {
                     data["address"].stringValue = WKey.getDpAddress(chainConfig!, privateKey, 0)
+                } else {
+                    if let chain = BaseData.instance.mSupportConfig?.customChains.filter({ $0.chainId == chainId }).first {
+                        data["address"].stringValue = WKey.getTendermintBech32Address(privateKey, chain.prefix!)
+                    }
                 }
                 data["publicKey"].stringValue = KeyFac.getPublicFromPrivateKey(privateKey).toHexString()
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_supportedChainIds" || method == "ten_supportedChainIds") {
-                let data = ["official": ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1", "core-1", "crescent-1", "archway-1"], "unofficial": []]
+                let data = ["official": BaseData.instance.mSupportConfig?.supportChainIds, "unofficial": []]
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "ten_supportedChainNames" || method == "cos_supportedChainNames") {
-                let data = ["official": ["cosmos", "osmosis", "stride", "stargaze", "omniflix", "crescent", "archway"], "unofficial": []]
+                let data = ["official": BaseData.instance.mSupportConfig?.supportChainNames, "unofficial": []]
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_activatedChainIds" || method == "ten_activatedChainIds") {
-                let data = ["cosmoshub-4", "osmosis-1", "stride-1", "stargaze-1", "core-1", "crescent-1", "archway-1"]
+                let data = BaseData.instance.mSupportConfig?.supportChainIds
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_activatedChainNames" || method == "ten_activatedChainNames") {
-                let data = ["cosmos", "osmosis", "stride", "stargaze", "omniflix", "crescent", "archway"]
+                let data = BaseData.instance.mSupportConfig?.supportChainNames
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_signAmino") {
