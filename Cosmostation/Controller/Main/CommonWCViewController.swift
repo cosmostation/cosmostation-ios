@@ -372,7 +372,18 @@ class CommonWCViewController: BaseViewController {
         
         interactor.trust.onGetAccounts = { [weak self] (id) in
             guard let self = self else { return }
-            self.interactor?.approveRequest(id: id, result: self.getTrustAccounts()).cauterize()
+            self.accountChainSet.removeAll()
+            self.accountSelectedSet.removeAll()
+            
+            self.accountChainSet.insert("kava_2222-10")
+            var trustAccounts = Array<WCTrustAccount>()
+            self.lastAccountAction = { accounts in
+                let account = accounts.map { account in
+                    trustAccounts.append(WCTrustAccount.init(network: 459, address: account.bech32Address))
+                    self.interactor?.approveRequest(id: id, result: trustAccounts).cauterize()
+                }
+            }
+            self.showAccountPopup()
         }
         
         interactor.trust.onTransactionSign = { [weak self] (id, trustTx) in
@@ -380,7 +391,6 @@ class CommonWCViewController: BaseViewController {
             if let trustTxParsing = try? JSONSerialization.jsonObject(with: trustTx.transaction.data(using: .utf8)!, options: .allowFragments) as? NSDictionary {
                 self.wcId = id
                 self.wcTrustRequest = trustTxParsing
-                self.wcRequestChainName = self.baseChain
                 self.onShowPopupForRequest(WcRequestType.TRUST_TYPE, trustTx.transaction.data(using: .utf8)!)
             }
         }
@@ -773,18 +783,11 @@ class CommonWCViewController: BaseViewController {
         wcPopup.show(onViewController: self)
     }
     
-    
-    func getTrustAccounts() -> Array<WCTrustAccount> {
-        var result = Array<WCTrustAccount>()
-        if self.chainType == ChainType.KAVA_MAIN, let account = accountMap[baseChain] {
-            result.append(WCTrustAccount.init(network: 459, address: account.account_address))
-        }
-        return result
-    }
-    
     func approveTrustRequest() {
-        getKeyAsync(chainName: baseChain) { tuple in
-            self.signTrust(tuple)
+        self.accountSelectedSet.forEach { account in
+            getKeyAsync(chainName: account.account_base_chain) { tuple in
+                self.signTrust(tuple)
+            }
         }
     }
     
