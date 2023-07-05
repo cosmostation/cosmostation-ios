@@ -190,7 +190,9 @@ public struct Param {
         }
         
         let ap = NSDecimalNumber.init(string: params?.minting_annual_provisions)
-        if (ap.compare(NSDecimalNumber.zero).rawValue > 0) {
+        if (chain == .ARCHWAY_MAIN) {
+            return NSDecimalNumber(string: "0.075").dividing(by: bondingRate, withBehavior: WUtils.handler6)
+        } else if (ap.compare(NSDecimalNumber.zero).rawValue > 0) {
             if (chain == .OMNIFLIX_MAIN) {
                 if let stakingDistribution = params?.omniflix_alloc_params?.distribution_proportions?.staking_rewards {
                     return ap.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
