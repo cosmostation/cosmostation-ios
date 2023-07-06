@@ -162,7 +162,7 @@ public struct Param {
             if let ap = params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time > now }).first?.amount {
                 return ap.multiplying(by: getCrescentRewardFact()).multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             }
-        } else if (chain == .AXELAR_MAIN || chain == .ONOMY_MAIN) {
+        } else if (chain == .AXELAR_MAIN) {
             let ap = getMainSupply().multiplying(by: inflation)
             return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             
@@ -187,6 +187,17 @@ public struct Param {
         } else if (chain == .QUICKSILVER_MAIN) {
             let stakingDistribution = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.distribution_proportions?.staking)
             return inflation.multiplying(by: stakingDistribution).dividing(by: bondingRate, withBehavior: WUtils.handler6)
+            
+        } else if (chain == .ARCHWAY_MAIN) {
+            return params?.archway_staking_inflation.dividing(by: bondingRate, withBehavior: WUtils.handler6) ?? NSDecimalNumber.zero
+            
+        } else if (chain == .ONOMY_MAIN) {
+            if let treasuryBalance = params?.onomy_protocol_treasury_balance?[0].amount {
+                let activeSupply = getMainSupply().subtracting(NSDecimalNumber(string: treasuryBalance))
+                let activeBondingRate = getBondedAmount().dividing(by: activeSupply, withBehavior: WUtils.handler6)
+                return inflation.multiplying(by: calTax).dividing(by: activeBondingRate, withBehavior: WUtils.handler6)
+            }
+            return NSDecimalNumber.zero
         }
         
         let ap = NSDecimalNumber.init(string: params?.minting_annual_provisions)
@@ -403,6 +414,10 @@ public struct Params {
     
     var stargaze_annual_provisions: String?
     
+    var archway_staking_inflation = NSDecimalNumber.zero
+    
+    var onomy_protocol_treasury_balance: Array<Coin>?
+    
     init(_ dictionary: NSDictionary?) {
         if let rawMintingParams = dictionary?["minting_params"] as? NSDictionary {
             self.minting_params = MintingParams.init(rawMintingParams)
@@ -574,6 +589,17 @@ public struct Params {
         
         if let rawStargazeAnnualProvisions = dictionary?["stargaze_annual_provisions"] as? String {
             self.stargaze_annual_provisions = rawStargazeAnnualProvisions
+        }
+        
+        if let rawArchwayStakingInflation = dictionary?["archway_staking_inflation"] as? Double {
+            self.archway_staking_inflation = NSDecimalNumber.init(value: rawArchwayStakingInflation)
+        }
+        
+        if let rawOnomyTreasuryBalances = dictionary?["onomy_protocol_treasury_balance"] as? Array<NSDictionary> {
+            self.onomy_protocol_treasury_balance = Array<Coin>()
+            for rawOnomyTreasuryBalance in rawOnomyTreasuryBalances {
+                self.onomy_protocol_treasury_balance?.append(Coin.init(rawOnomyTreasuryBalance))
+            }
         }
     }
 }
