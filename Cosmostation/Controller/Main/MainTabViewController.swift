@@ -156,6 +156,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mStarNameConfig_gRPC = nil
         
         BaseData.instance.mSupportPools.removeAll()
+        BaseData.instance.mSupportConfig = nil
         mNameservices.removeAll()
         
         BaseData.instance.mNeutronVaults.removeAll()
@@ -659,12 +660,13 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mNodeInfo_gRPC = response.defaultNodeInfo
-                    self.mFetchCnt = self.mFetchCnt + 5
+                    self.mFetchCnt = self.mFetchCnt + 6
                     self.onFetchParams(self.mChainConfig.chainAPIName)
                     self.onFetchMintscanAsset()
                     self.onFetchMintscanCw20(self.mChainConfig.chainAPIName)
                     self.onFetchMintscanErc20(self.mChainConfig.chainAPIName)
                     self.onFetchIcnsByAddress(self.mAccount.account_address)
+                    self.onFetchSupportConfigs()
 //                    self.onFetchStargazeNsByAddress(self.mAccount.account_address)
                 }
                 try channel.close().wait()
@@ -1251,6 +1253,23 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 print("onFetchNeutronVesting failed: \(error)")
             }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchSupportConfigs() {
+        let request = Alamofire.request(BaseNetWork.getSupportConfigs(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                guard let config = res as? NSDictionary else {
+                    self.onFetchFinished()
+                    return
+                }
+                BaseData.instance.mSupportConfig = SupportConfig.init(config)
+            case .failure(let error):
+                print("onFetchSupportConfigs ", error)
+            }
+            self.onFetchFinished()
         }
     }
     

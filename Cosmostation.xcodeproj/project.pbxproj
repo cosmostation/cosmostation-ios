@@ -2725,6 +2725,8 @@
 		153559982988FDE70055A1D3 /* ChainMars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153559972988FDE70055A1D3 /* ChainMars.swift */; };
 		15378CCA2A52A5D50017BE75 /* ChainArchway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15378CC92A52A5D50017BE75 /* ChainArchway.swift */; };
 		15378CCB2A52A5D50017BE75 /* ChainArchway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15378CC92A52A5D50017BE75 /* ChainArchway.swift */; };
+		15378CCD2A53C2F90017BE75 /* SupportConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15378CCC2A53C2F90017BE75 /* SupportConfig.swift */; };
+		15378CCE2A53C2F90017BE75 /* SupportConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15378CCC2A53C2F90017BE75 /* SupportConfig.swift */; };
 		1537A08529AC7B8700342ACF /* PersisLiquidStakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1537A08429AC7B8700342ACF /* PersisLiquidStakingViewController.swift */; };
 		1537A08629AC7B8700342ACF /* PersisLiquidStakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1537A08429AC7B8700342ACF /* PersisLiquidStakingViewController.swift */; };
 		1537A08C29AC914000342ACF /* PersisLiquid0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1537A08B29AC914000342ACF /* PersisLiquid0ViewController.swift */; };
@@ -5254,6 +5256,7 @@
 		152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersisLiquid3ViewController.xib; sourceTree = "<group>"; };
 		153559972988FDE70055A1D3 /* ChainMars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMars.swift; sourceTree = "<group>"; };
 		15378CC92A52A5D50017BE75 /* ChainArchway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainArchway.swift; sourceTree = "<group>"; };
+		15378CCC2A53C2F90017BE75 /* SupportConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportConfig.swift; sourceTree = "<group>"; };
 		1537A08429AC7B8700342ACF /* PersisLiquidStakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersisLiquidStakingViewController.swift; sourceTree = "<group>"; };
 		1537A08B29AC914000342ACF /* PersisLiquid0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersisLiquid0ViewController.swift; sourceTree = "<group>"; };
 		1537A08E29AC93B100342ACF /* PersisLiquid0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersisLiquid0ViewController.xib; sourceTree = "<group>"; };
@@ -8291,6 +8294,7 @@
 				0428ACFD268AD31700EB438F /* BandOracleStatus.swift */,
 				E11A28E12944716D003311FD /* SupportPool.swift */,
 				04172B7729F67CE600D6279C /* NeutronModel.swift */,
+				15378CCC2A53C2F90017BE75 /* SupportConfig.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -9417,6 +9421,7 @@
 				04815DA02A41DFDF0006A906 /* confio_poe_v1beta1_query.pb.swift in Sources */,
 				04F796632A458EFB0093B79B /* osmosis_pool-incentives_v1beta1_genesis.pb.swift in Sources */,
 				18FFB270281AF533004E65BB /* MemoMnemonicPopup.swift in Sources */,
+				15378CCE2A53C2F90017BE75 /* SupportConfig.swift in Sources */,
 				04815C692A41DC440006A906 /* crescent_marker_v1beta1_genesis.pb.swift in Sources */,
 				04815D6E2A41DE6B0006A906 /* band_bandchain_v1_node_query.grpc.swift in Sources */,
 				0451FC8F282A3B0800214FDA /* ChainRegen.swift in Sources */,
@@ -10973,6 +10978,7 @@
 				04815F482A41E1810006A906 /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,
 				04F796BA2A458EFB0093B79B /* osmosis_superfluid_v1beta1_gov.pb.swift in Sources */,
 				04815F622A41E1810006A906 /* cosmos_store_internal_kv_v1beta1_kv.pb.swift in Sources */,
+				15378CCD2A53C2F90017BE75 /* SupportConfig.swift in Sources */,
 				048161052A41E6520006A906 /* desmos_posts_v1_models.pb.swift in Sources */,
 				048161432A41E6520006A906 /* desmos_posts_v3_models.pb.swift in Sources */,
 				04F797DB2A4593050093B79B /* kava_incentive_v1beta1_params.pb.swift in Sources */,

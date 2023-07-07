@@ -298,6 +298,10 @@ class BaseNetWork {
         return ResourceBase + chainConfig.chainAPIName + "/pool.json"
     }
     
+    static func getSupportConfigs() -> String {
+        return ResourceDappBase + "config.json"
+    }
+    
     static func getConnection(_ chainConfig: ChainConfig?, _ thread: Int = 1) -> ClientConnection? {
         if (chainConfig == nil) { return nil }
         let group = MultiThreadedEventLoopGroup(numberOfThreads: thread)
