@@ -33,6 +33,8 @@ jobs:
         run: echo "${{ secrets.DEBUG_PROVISIONING_SECRET }}" | base64 -d > dev.mobileprovision
       - name: Make debug google service file
         run: echo "${{ secrets.DEBUG_GOOGLE_SERVICE_SECRET }}" | base64 -d > Cosmostation/GoogleService-Info.plist
+      - name: Make API KEY file
+        run: echo "${{ secrets.IOS_API_KEY }}" | base64 -d > Cosmostation/ApiKey.plist
 
       - name : Configure Code Signing
         run: |
