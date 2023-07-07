@@ -60,6 +60,7 @@ final class BaseData : NSObject{
     var mStarNameConfig_gRPC: Starnamed_X_Configuration_V1beta1_Config?
     
     var mSupportPools = Array<SupportPool>()
+    var mSupportConfig: SupportConfig?
     
     var mNeutronVaults = Array<NeutronVault>()
     var mNeutronDaos = Array<NeutronDao>()
