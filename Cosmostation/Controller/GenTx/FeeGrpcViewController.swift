@@ -134,13 +134,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         if (chainType == .SIF_MAIN) {
             mFeeCoin = Coin.init(mFeeData.denom!, "100000000000000000")
         } else if (chainType == .CHIHUAHUA_MAIN) {
-            if (mSelectedFeeInfo == 0) {
-                mFeeCoin = Coin.init(mFeeData.denom!, "100000000")
-            } else if (mSelectedFeeInfo == 1) {
-                mFeeCoin = Coin.init(mFeeData.denom!, "250000000")
-            } else {
-                mFeeCoin = Coin.init(mFeeData.denom!, "500000000")
-            }
+            mFeeCoin = Coin.init(mFeeData.denom!, "500000000")
         } else {
             let amount = (mFeeData.gasRate)!.multiplying(by: mFeeGasAmount, withBehavior: WUtils.handler0Up)
             mFeeCoin = Coin.init(mFeeData.denom!, amount.stringValue)
