@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -183,10 +183,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wGe-xc-bNM" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                                    <rect key="frame" x="53" y="8" width="242" height="40"/>
+                                    <rect key="frame" x="53" y="8" width="240" height="40"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdfklasjdfasdfklasdjfaksdlfjsakdflkassdfasdf" placeholder="Search" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bgi-U8-k63">
-                                            <rect key="frame" x="10" y="12" width="216" height="16"/>
+                                            <rect key="frame" x="10" y="12" width="214" height="16"/>
                                             <color key="backgroundColor" name="_card_bg"/>
                                             <color key="tintColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="textColor" name="_font05"/>
@@ -259,10 +259,6 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZI-ir-RDm">
                                     <rect key="frame" x="305" y="9" width="36" height="38"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="36" id="Wxa-Ig-Tma"/>
-                                        <constraint firstAttribute="height" constant="38" id="n9C-0H-9nO"/>
-                                    </constraints>
                                     <color key="tintColor" name="_font04"/>
                                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -289,7 +285,7 @@
                             <constraints>
                                 <constraint firstItem="Xdi-oy-i96" firstAttribute="leading" secondItem="IZI-ir-RDm" secondAttribute="trailing" id="4HG-gb-Tco"/>
                                 <constraint firstItem="EzO-xM-H7P" firstAttribute="leading" secondItem="mkI-9p-rWl" secondAttribute="leading" constant="5" id="9Bk-Ug-H17"/>
-                                <constraint firstItem="IZI-ir-RDm" firstAttribute="leading" secondItem="wGe-xc-bNM" secondAttribute="trailing" constant="10" id="9Wi-QM-NU1"/>
+                                <constraint firstItem="IZI-ir-RDm" firstAttribute="leading" secondItem="wGe-xc-bNM" secondAttribute="trailing" constant="12" id="9Wi-QM-NU1"/>
                                 <constraint firstItem="wGe-xc-bNM" firstAttribute="leading" secondItem="EzO-xM-H7P" secondAttribute="trailing" constant="10" id="Gs5-mG-tBr"/>
                                 <constraint firstAttribute="height" constant="56" id="Ks0-cY-ZiH"/>
                                 <constraint firstAttribute="trailing" secondItem="ZJc-w7-2wG" secondAttribute="trailing" constant="5" id="cpd-A5-VEs"/>

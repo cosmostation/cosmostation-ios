@@ -92,6 +92,7 @@ class CommonWCViewController: BaseViewController {
         setupNavigationBar()
         setupViewByConnectType()
         loadDapp()
+        self.dappRefresh.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         self.tableView.register(UINib(nibName: "DappCell", bundle: nil), forCellReuseIdentifier: "DappCell")
     }
     
