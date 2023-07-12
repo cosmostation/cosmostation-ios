@@ -962,14 +962,20 @@ class CommonWCViewController: BaseViewController {
             let sortedJsonData = try? signDoc.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
             let rawOrderdDocSha = sortedJsonData!.sha256()
             getKeyAsync(chainName: WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId)) ) { tuple in
-                if  let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey) {
-                    let pubkey: JSON = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
-                    let signature: JSON = ["signature" : signature.base64EncodedString(), "pub_key" : pubkey]
-                    let response: JSON = ["signed" : signDoc.rawValue, "signature":signature.dictionaryValue]
-                    self.moveToBackgroundIfNeedAndAction {
-                        self.respondOnSign(request: request, response: AnyCodable(response))
-                        self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
-                    }
+                var sig: Data?
+                var pubkey: JSON?
+                if (chainType == .INJECTIVE_MAIN) {
+                    sig = try? ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: sortedJsonData!), privateKey: tuple.privateKey)
+                    pubkey = ["type" : INJECTIVE_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
+                } else {
+                    sig = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey)
+                    pubkey = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
+                }
+                let signature: JSON = ["signature" : sig?.base64EncodedString() as Any, "pub_key" : pubkey!]
+                let response: JSON = ["signed" : signDoc.rawValue, "signature":signature.dictionaryValue]
+                self.moveToBackgroundIfNeedAndAction {
+                    self.respondOnSign(request: request, response: AnyCodable(response))
+                    self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
                 }
             }
         }
@@ -1309,6 +1315,14 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
             if (url.absoluteString.starts(with: "keplrwallet://wcV1")) {
                 UIApplication.shared.open(URL(string: url.absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc"))!, options: [:])
                 decisionHandler(.cancel)
+                return
+            } else if (url.absoluteString.starts(with: "intent://wcV2")) {
+                let tempUrl = url.absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
+                if let range = tempUrl.range(of: "#Intent") {
+                    let trimmedUrl = String(tempUrl[..<range.lowerBound])
+                    UIApplication.shared.open(URL(string: trimmedUrl)!, options: [:])
+                    decisionHandler(.cancel)
+                }
                 return
             } else if (url.absoluteString.starts(with: "keplrwallet://wcV2")) {
                 UIApplication.shared.open(URL(string: url.absoluteString.removingPercentEncoding!.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc"))!, options: [:])
