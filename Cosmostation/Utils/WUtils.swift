@@ -1191,7 +1191,7 @@ public class WUtils {
     }
     
     
-    static func onParseAutoRewardGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
+    static func onParseAutoRewardGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int, _ msgAmount: String) -> Array<Coin> {
         var result = Array<Coin>()
         if (tx.txResponse.logs.count <= position) {
             return result
@@ -1207,7 +1207,9 @@ public class WUtils {
                                 let amount = String(coin[range])
                                 let denomIndex = coin.index(coin.startIndex, offsetBy: amount.count)
                                 let denom = String(coin[denomIndex...])
-                                result.append(Coin.init(denom, amount))
+                                if (msgAmount != amount) {
+                                    result.append(Coin.init(denom, amount))
+                                }
                             }
                         }
                     }
