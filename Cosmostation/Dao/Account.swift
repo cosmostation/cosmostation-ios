@@ -9,7 +9,7 @@
 import Foundation
 import MobileCoreServices
 
-public class Account : NSObject, Codable, NSItemProviderReading, NSItemProviderWriting {
+public class Account {
     
     var account_id: Int64 = -1;
     var account_uuid: String = "";
@@ -103,63 +103,63 @@ public class Account : NSObject, Codable, NSItemProviderReading, NSItemProviderW
         
     }
     
-    var account_balances = Array<Balance>()
-    
-    func getPrivateKeySha1() -> String {
-        return (account_uuid + "privateKey").sha1()
-    }
-    
-    func getDpName() -> String {
-        var nickName:String?
-        if (account_nick_name == "") {
-            nickName = NSLocalizedString("wallet_dash", comment: "") + String(account_id)
-        } else {
-            nickName = account_nick_name
-        }
-        return nickName!
-    }
-    
-    func setBalances(_ balances:Array<Balance>) {
-        self.account_balances = balances
-    }
-    
-    func getTokenBalance(_ symbol:String) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
-        for balance in self.account_balances {
-            if (balance.balance_denom == symbol) {
-                result = WUtils.plainStringToDecimal(balance.balance_amount)
-            }
-        }
-        return result
-    }
-    
-    public static var readableTypeIdentifiersForItemProvider: [String] {
-        return [(kUTTypeData) as String]
-    }
-
-    public static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> Self {
-        let decoder = JSONDecoder()
-        do {
-            let myJSON = try decoder.decode(Account.self, from: data)
-            return myJSON as! Self
-        } catch {
-            fatalError("Err")
-        }
-    }
-
-    public static var writableTypeIdentifiersForItemProvider: [String]{
-        return [(kUTTypeData) as String]
-    }
-
-    public func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
-        let progress = Progress(totalUnitCount: 100)
-        do {
-          let data = try JSONEncoder().encode(self)
-          progress.completedUnitCount = 100
-          completionHandler(data, nil)
-        } catch {
-          completionHandler(nil, error)
-        }
-        return progress
-    }
+//    var account_balances = Array<Balance>()
+//
+//    func getPrivateKeySha1() -> String {
+//        return (account_uuid + "privateKey").sha1()
+//    }
+//
+//    func getDpName() -> String {
+//        var nickName:String?
+//        if (account_nick_name == "") {
+//            nickName = NSLocalizedString("wallet_dash", comment: "") + String(account_id)
+//        } else {
+//            nickName = account_nick_name
+//        }
+//        return nickName!
+//    }
+//
+//    func setBalances(_ balances:Array<Balance>) {
+//        self.account_balances = balances
+//    }
+//
+//    func getTokenBalance(_ symbol:String) -> NSDecimalNumber {
+//        var result = NSDecimalNumber.zero
+//        for balance in self.account_balances {
+//            if (balance.balance_denom == symbol) {
+//                result = WUtils.plainStringToDecimal(balance.balance_amount)
+//            }
+//        }
+//        return result
+//    }
+//
+//    public static var readableTypeIdentifiersForItemProvider: [String] {
+//        return [(kUTTypeData) as String]
+//    }
+//
+//    public static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> Self {
+//        let decoder = JSONDecoder()
+//        do {
+//            let myJSON = try decoder.decode(Account.self, from: data)
+//            return myJSON as! Self
+//        } catch {
+//            fatalError("Err")
+//        }
+//    }
+//
+//    public static var writableTypeIdentifiersForItemProvider: [String]{
+//        return [(kUTTypeData) as String]
+//    }
+//
+//    public func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
+//        let progress = Progress(totalUnitCount: 100)
+//        do {
+//          let data = try JSONEncoder().encode(self)
+//          progress.completedUnitCount = 100
+//          completionHandler(data, nil)
+//        } catch {
+//          completionHandler(nil, error)
+//        }
+//        return progress
+//    }
 }

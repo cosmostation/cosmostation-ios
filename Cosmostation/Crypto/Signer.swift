@@ -13,6 +13,7 @@ import SwiftProtobuf
 import SwiftyJSON
 
 class Signer {
+    /*
     
     //Tx for Common Denom Transfer
     static func genSimpleSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
@@ -2272,6 +2273,7 @@ class Signer {
         let signedData = try! ECDSA.compactsign(hash!, privateKey: privateKey)
         return signedData
     }
+     */
 }
 
 

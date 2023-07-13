@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 public class WDP {
+    /*
     static func dpMainSymbol(_ chainConfig: ChainConfig?, _ label: UILabel?) {
         label?.text = chainConfig?.stakeSymbol
         label?.textColor = chainConfig?.chainColor
@@ -375,4 +376,5 @@ public class WDP {
         }
         return result
     }
+     */
 }

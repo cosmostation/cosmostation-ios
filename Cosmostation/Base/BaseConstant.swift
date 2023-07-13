@@ -426,12 +426,12 @@ public enum ChainType: String {
         return result
     }
     
-    static func IS_SUPPORT_CHAIN(_ chainS: String) -> Bool {
-        if let chainS = ChainFactory.getChainType(chainS) {
-            return SUPPRT_CHAIN().contains(chainS)
-        }
-        return false
-    }
+//    static func IS_SUPPORT_CHAIN(_ chainS: String) -> Bool {
+//        if let chainS = ChainFactory.getChainType(chainS) {
+//            return SUPPRT_CHAIN().contains(chainS)
+//        }
+//        return false
+//    }
 }
 
 

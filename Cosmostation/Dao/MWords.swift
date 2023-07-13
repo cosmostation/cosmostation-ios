@@ -32,37 +32,37 @@ public class MWords {
         self.importTime = importTime;
     }
     
-    func getWords() -> String {
-        if let words = KeychainWrapper.standard.string(forKey: self.uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
-            return words
-        }
-        return ""
-    }
-    
-    func getMnemonicWords() -> Array<String> {
-        return getWords().components(separatedBy: " ")
-    }
-    
-    func getName() -> String {
-        if (self.nickName == "") {
-            return "Account " + String(id)
-        }
-        return nickName
-    }
-    
-    func getLinkedWalletCnt() -> Int {
-        return BaseData.instance.selectAccountsByMnemonic(id).count
-    }
-    
-    func getWordsCnt() -> Int {
-        return getWords().components(separatedBy: " ").count
-    }
-    
-    func getImportDate() -> String {
-        return WDP.dpTime(importTime)
-    }
-    
-    func getMasterKey() -> PrivateKey {
-        return PrivateKey(seed: Mnemonic.createSeed(mnemonic: getWords()), coin: .bitcoin)
-    }
+//    func getWords() -> String {
+//        if let words = KeychainWrapper.standard.string(forKey: self.uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
+//            return words
+//        }
+//        return ""
+//    }
+//    
+//    func getMnemonicWords() -> Array<String> {
+//        return getWords().components(separatedBy: " ")
+//    }
+//    
+//    func getName() -> String {
+//        if (self.nickName == "") {
+//            return "Account " + String(id)
+//        }
+//        return nickName
+//    }
+//    
+//    func getLinkedWalletCnt() -> Int {
+//        return BaseData.instance.selectAccountsByMnemonic(id).count
+//    }
+//    
+//    func getWordsCnt() -> Int {
+//        return getWords().components(separatedBy: " ").count
+//    }
+//    
+//    func getImportDate() -> String {
+//        return WDP.dpTime(importTime)
+//    }
+//    
+//    func getMasterKey() -> PrivateKey {
+//        return PrivateKey(seed: Mnemonic.createSeed(mnemonic: getWords()), coin: .bitcoin)
+//    }
 }

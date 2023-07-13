@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SwiftProtobuf
 
+/*
 public class WUtils {
     
     static let handler18 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 18, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
@@ -1393,6 +1394,8 @@ public class WUtils {
     }
 }
 
+*/
+
 extension Date {
     var millisecondsSince1970:Int64 {
         return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
@@ -1646,22 +1649,5 @@ extension UIImage {
                                               duration: Double(duration) / 3000.0)
         
         return animation
-    }
-}
-
-
-open class CustomSlider : UISlider {
-    @IBInspectable open var trackWidth:CGFloat = 2 {
-        didSet {setNeedsDisplay()}
-    }
-
-    override open func trackRect(forBounds bounds: CGRect) -> CGRect {
-        let defaultBounds = super.trackRect(forBounds: bounds)
-        return CGRect(
-            x: defaultBounds.origin.x,
-            y: defaultBounds.origin.y + defaultBounds.size.height/2 - trackWidth/2,
-            width: defaultBounds.size.width,
-            height: trackWidth
-        )
     }
 }
