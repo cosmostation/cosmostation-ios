@@ -19,6 +19,14 @@ final class BaseData : NSObject{
     var database: Connection!
     var copySalt: String?
     
+    
+    public override init() {
+        super.init();
+        if database == nil {
+            self.initdb();
+        }
+    }
+    
     func setAllValidatorSort(_ sort : Int64) {
         UserDefaults.standard.set(sort, forKey: KEY_ALL_VAL_SORT)
     }
@@ -374,59 +382,59 @@ final class BaseData : NSObject{
             let database = try Connection(fileUrl.path)
             self.database = database
             
-            let createAccountTable = DB_ACCOUNT.create(ifNotExists: true) { (table) in
-                table.column(DB_ACCOUNT_ID, primaryKey: true)
-                table.column(DB_ACCOUNT_UUID)
-                table.column(DB_ACCOUNT_NICKNAME)
-                table.column(DB_ACCOUNT_FAVO)
-                table.column(DB_ACCOUNT_ADDRESS)
-                table.column(DB_ACCOUNT_BASECHAIN)
-                table.column(DB_ACCOUNT_HAS_PRIVATE)
-                table.column(DB_ACCOUNT_RESOURCE)
-                table.column(DB_ACCOUNT_FROM_MNEMONIC)
-                table.column(DB_ACCOUNT_PATH)
-                table.column(DB_ACCOUNT_IS_VALIDATOR)
-                table.column(DB_ACCOUNT_SEQUENCE_NUMBER)
-                table.column(DB_ACCOUNT_ACCOUNT_NUMBER)
-                table.column(DB_ACCOUNT_FETCH_TIME)
-                table.column(DB_ACCOUNT_M_SIZE)
-                table.column(DB_ACCOUNT_IMPORT_TIME)
-            }
-            try self.database.run(createAccountTable)
-            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_LAST_TOTAL, defaultValue: ""))
-            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_SORT_ORDER, defaultValue: 0))
-            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_PUSHALARM, defaultValue: false))
-            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_NEW_BIP, defaultValue: false))
-            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_CUSTOM_PATH, defaultValue: 0))
-            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_MNEMONIC_ID, defaultValue: -1))
-            
-            let createBalanceTable = DB_BALANCE.create(ifNotExists: true) { (table) in
-                table.column(DB_BALANCE_ID, primaryKey: true)
-                table.column(DB_BALANCE_ACCOUNT_ID)
-                table.column(DB_BALANCE_DENOM)
-                table.column(DB_BALANCE_AMOUNT)
-                table.column(DB_BALANCE_FETCH_TIME)
-                table.column(DB_BALANCE_FROZEN)
-                table.column(DB_BALANCE_LOCKED)
-            }
-            try self.database.run(createBalanceTable)
-            _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_FROZEN, defaultValue: ""))
-            _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_LOCKED, defaultValue: ""))
-            
-            let createMnemonicTable = DB_MNEMONIC.create(ifNotExists: true) { (table) in
-                table.column(DB_MNEMONIC_ID, primaryKey: true)
-                table.column(DB_MNEMONIC_UUID)
-                table.column(DB_MNEMONIC_NICKNAME)
-                table.column(DB_MNEMONIC_CNT)
-                table.column(DB_MNEMONIC_FAVO)
-                table.column(DB_MNEMONIC_IMPORT_TIME)
-            }
-            try self.database.run(createMnemonicTable)
-            _ = try? self.database.run(DB_MNEMONIC.addColumn(DB_MNEMONIC_IMPORT_TIME, defaultValue: -1))
-            
-            //delete LCD used old table
-            try self.database.run(DB_BONDING.drop(ifExists: true))
-            try self.database.run(DB_UNBONDING.drop(ifExists: true))
+//            let createAccountTable = DB_ACCOUNT.create(ifNotExists: true) { (table) in
+//                table.column(DB_ACCOUNT_ID, primaryKey: true)
+//                table.column(DB_ACCOUNT_UUID)
+//                table.column(DB_ACCOUNT_NICKNAME)
+//                table.column(DB_ACCOUNT_FAVO)
+//                table.column(DB_ACCOUNT_ADDRESS)
+//                table.column(DB_ACCOUNT_BASECHAIN)
+//                table.column(DB_ACCOUNT_HAS_PRIVATE)
+//                table.column(DB_ACCOUNT_RESOURCE)
+//                table.column(DB_ACCOUNT_FROM_MNEMONIC)
+//                table.column(DB_ACCOUNT_PATH)
+//                table.column(DB_ACCOUNT_IS_VALIDATOR)
+//                table.column(DB_ACCOUNT_SEQUENCE_NUMBER)
+//                table.column(DB_ACCOUNT_ACCOUNT_NUMBER)
+//                table.column(DB_ACCOUNT_FETCH_TIME)
+//                table.column(DB_ACCOUNT_M_SIZE)
+//                table.column(DB_ACCOUNT_IMPORT_TIME)
+//            }
+//            try self.database.run(createAccountTable)
+//            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_LAST_TOTAL, defaultValue: ""))
+//            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_SORT_ORDER, defaultValue: 0))
+//            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_PUSHALARM, defaultValue: false))
+//            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_NEW_BIP, defaultValue: false))
+//            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_CUSTOM_PATH, defaultValue: 0))
+//            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_MNEMONIC_ID, defaultValue: -1))
+//            
+//            let createBalanceTable = DB_BALANCE.create(ifNotExists: true) { (table) in
+//                table.column(DB_BALANCE_ID, primaryKey: true)
+//                table.column(DB_BALANCE_ACCOUNT_ID)
+//                table.column(DB_BALANCE_DENOM)
+//                table.column(DB_BALANCE_AMOUNT)
+//                table.column(DB_BALANCE_FETCH_TIME)
+//                table.column(DB_BALANCE_FROZEN)
+//                table.column(DB_BALANCE_LOCKED)
+//            }
+//            try self.database.run(createBalanceTable)
+//            _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_FROZEN, defaultValue: ""))
+//            _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_LOCKED, defaultValue: ""))
+//            
+//            let createMnemonicTable = DB_MNEMONIC.create(ifNotExists: true) { (table) in
+//                table.column(DB_MNEMONIC_ID, primaryKey: true)
+//                table.column(DB_MNEMONIC_UUID)
+//                table.column(DB_MNEMONIC_NICKNAME)
+//                table.column(DB_MNEMONIC_CNT)
+//                table.column(DB_MNEMONIC_FAVO)
+//                table.column(DB_MNEMONIC_IMPORT_TIME)
+//            }
+//            try self.database.run(createMnemonicTable)
+//            _ = try? self.database.run(DB_MNEMONIC.addColumn(DB_MNEMONIC_IMPORT_TIME, defaultValue: -1))
+//            
+//            //delete LCD used old table
+//            try self.database.run(DB_BONDING.drop(ifExists: true))
+//            try self.database.run(DB_UNBONDING.drop(ifExists: true))
             
         } catch {
             print(error)
@@ -434,7 +442,7 @@ final class BaseData : NSObject{
     }
     
     
-    public func selectAllMnemonics() -> Array<MWords> {
+    public func legacySelectAllMnemonics() -> Array<MWords> {
         var result = Array<MWords>()
         do {
             for mnemonicBD in try database.prepare(DB_MNEMONIC) {
@@ -446,6 +454,7 @@ final class BaseData : NSObject{
         return result
     }
     
+    /*
     public func selectMnemonicById(_ id: Int64) -> MWords? {
         return selectAllMnemonics().filter { $0.id == id }.first
     }
@@ -482,6 +491,7 @@ final class BaseData : NSObject{
             return -1
         }
     }
+    */
     
     
     

@@ -7,8 +7,13 @@
 //
 
 import Foundation
+import web3swift
 
 class KeyFac {
+    
+    static func getSeedFromWords(_ mnemnics: String) -> Data? {
+        return BIP39.seedFromMmemonics(mnemnics, password: "", language: .english)
+    }
     
 //    static func getPrivateKeyDataFromSeed(_ seed: Data, _ fullpath: String) -> Data {
 //        if (BaseData.instance.getUsingEnginerMode()) {

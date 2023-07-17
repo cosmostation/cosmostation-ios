@@ -450,11 +450,11 @@ let BAND           = "asset:band";
 let TEZOS          = "asset:xtz";
 let LISK           = "asset:lsk";
 
-let Font_17_body = UIFont(name: "Roboto-Medium", size: 17)!
-let Font_15_subTitle = UIFont(name: "Roboto-Medium", size: 15)!
-let Font_13_footnote = UIFont(name: "Roboto-Medium", size: 13)!
-let Font_12_caption1 = UIFont(name: "Roboto-Medium", size: 12)!
-let Font_11_caption2 = UIFont(name: "Roboto-Medium", size: 11)!
+//let Font_17_body = UIFont(name: "Roboto-Medium", size: 17)!
+//let Font_15_subTitle = UIFont(name: "Roboto-Medium", size: 15)!
+//let Font_13_footnote = UIFont(name: "Roboto-Medium", size: 13)!
+//let Font_12_caption1 = UIFont(name: "Roboto-Medium", size: 12)!
+//let Font_11_caption2 = UIFont(name: "Roboto-Medium", size: 11)!
 
 
 let SELECT_POPUP_HTLC_TO_CHAIN = 0

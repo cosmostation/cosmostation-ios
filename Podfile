@@ -5,21 +5,17 @@ use_frameworks!
 platform :ios, '13.5'
 
 def shared_pods
-    pod 'SwiftyJSON', '~> 4.3'
     pod 'HDWalletKit', git: 'https://github.com/cosmostation/HDWallet.git', branch: 'cosmostation-develop'
     pod 'WalletConnect', git: 'https://github.com/cosmostation/wallet-connect-swift.git', branch: 'cosmostation-develop'
     pod 'web3swift', git: 'https://github.com/cosmostation/web3swift.git', branch: 'cosmostation-develop'
-    pod 'AlamofireImage', '~> 3.3'
-    pod 'SQLite.swift', '~> 0.11.5'
-    pod 'SwiftKeychainWrapper'
     pod 'Toast-Swift', '~> 4.0.0'
-    pod 'Floaty', '~> 4.1.0'
+#    pod 'Floaty', '~> 4.1.0'
     pod 'QRCode'
-    pod 'Firebase/Core', '8.1'
-    pod 'Firebase/Messaging', '8.1'
     pod 'HPParallaxHeader'
     pod 'IpfsApi'
-    pod 'WalletConnectSwiftV2', '1.3.0'
+
+    # replace keychainAccess with V2
+    pod 'SwiftKeychainWrapper'
 end
 
 target 'Cosmostation' do

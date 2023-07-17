@@ -34,7 +34,7 @@ class PushUtils {
         
         guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
         let parameters: Parameters = ["fcm_token": token, "subscribe": enable]
-        Alamofire.request(WALLET_API_PUSH_STATUS_URL, method: .put, parameters: parameters, encoding: JSONEncoding.default).response { response in
+        AF.request(WALLET_API_PUSH_STATUS_URL, method: .put, parameters: parameters, encoding: JSONEncoding.default).response { response in
             if let error = response.error {
                 print("push status update error : ", error)
             }

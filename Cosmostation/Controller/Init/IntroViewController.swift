@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import Firebase
+import SwiftKeychainWrapper
+import KeychainAccess
 
 class IntroViewController: BaseViewController {
     
@@ -17,5 +19,48 @@ class IntroViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("IntroViewController viewDidLoad")
+        onUpdateMigration()
+        
+        
+    }
+    
+    
+    func onUpdateMigration() {
+        Task {
+            let migrationResult = await migrationV2()
+            print("onUpdateMigration ", migrationResult)
+        }
+    }
+}
+
+extension IntroViewController {
+    
+    func migrationV2() async -> Bool {
+        let keychain = Keychain(service: "io.cosmostation")
+            .synchronizable(false)
+            .accessibility(.afterFirstUnlockThisDeviceOnly)
+        
+        let wordsList = BaseData.instance.legacySelectAllMnemonics()
+        print("wordsList ", wordsList.count)
+        wordsList.forEach { word in
+            if let words = KeychainWrapper.standard.string(forKey: word.uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                print(word.nickName, " --> " , words)
+                let seed = KeyFac.getSeedFromWords(words)
+                print(word.nickName, " --> " , seed?.toHexString())
+                
+                let newData = words + " : " + seed!.toHexString()
+                print("newData ", newData)
+
+//                keychain[word.uuid.sha1()] = newData
+                
+                try? keychain.set(newData, key: word.uuid.sha1())
+                
+                let recover = try? keychain.getString(word.uuid.sha1())
+                print("recover ", recover)
+            }
+        }
+        return true
     }
 }
