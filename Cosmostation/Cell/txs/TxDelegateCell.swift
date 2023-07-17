@@ -64,7 +64,7 @@ class TxDelegateCell: TxCell {
             }
             WDP.dpCoin(chainConfig, msg.amount.denom, msg.amount.amount, delegateDenomLabel, delegateAmountLabel)
             
-            let autoRewardCoins = WUtils.onParseAutoRewardGrpc(response, position)
+            let autoRewardCoins = WUtils.onParseAutoRewardGrpc(response, position, msg.amount.amount)
             if (autoRewardCoins.count > 0) {
                 autoReward.isHidden = false
                 incen0Layer.isHidden = false

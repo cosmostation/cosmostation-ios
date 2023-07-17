@@ -129,6 +129,7 @@ let DB_MNEMONIC_IMPORT_TIME         = Expression<Int64>("importTime")
 let COSMOS_AUTH_TYPE_OKEX_ACCOUNT           = "okexchain/EthAccount";
 let COSMOS_KEY_TYPE_PUBLIC                  = "tendermint/PubKeySecp256k1";
 let ETHERMINT_KEY_TYPE_PUBLIC               = "ethermint/PubKeyEthSecp256k1";
+let INJECTIVE_KEY_TYPE_PUBLIC               = "injective/PubKeyEthSecp256k1";
 let COSMOS_AUTH_TYPE_STDTX                  = "auth/StdTx";
 
 

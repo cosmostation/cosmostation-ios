@@ -92,6 +92,7 @@ class CommonWCViewController: BaseViewController {
         setupNavigationBar()
         setupViewByConnectType()
         loadDapp()
+        self.dappRefresh.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         self.tableView.register(UINib(nibName: "DappCell", bundle: nil), forCellReuseIdentifier: "DappCell")
     }
     
@@ -962,14 +963,20 @@ class CommonWCViewController: BaseViewController {
             let sortedJsonData = try? signDoc.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
             let rawOrderdDocSha = sortedJsonData!.sha256()
             getKeyAsync(chainName: WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId)) ) { tuple in
-                if  let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey) {
-                    let pubkey: JSON = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
-                    let signature: JSON = ["signature" : signature.base64EncodedString(), "pub_key" : pubkey]
-                    let response: JSON = ["signed" : signDoc.rawValue, "signature":signature.dictionaryValue]
-                    self.moveToBackgroundIfNeedAndAction {
-                        self.respondOnSign(request: request, response: AnyCodable(response))
-                        self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
-                    }
+                var sig: Data?
+                var pubkey: JSON?
+                if (chainType == .INJECTIVE_MAIN) {
+                    sig = try? ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: sortedJsonData!), privateKey: tuple.privateKey)
+                    pubkey = ["type" : INJECTIVE_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
+                } else {
+                    sig = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey)
+                    pubkey = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
+                }
+                let signature: JSON = ["signature" : sig?.base64EncodedString() as Any, "pub_key" : pubkey!]
+                let response: JSON = ["signed" : signDoc.rawValue, "signature":signature.dictionaryValue]
+                self.moveToBackgroundIfNeedAndAction {
+                    self.respondOnSign(request: request, response: AnyCodable(response))
+                    self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
                 }
             }
         }
@@ -977,10 +984,9 @@ class CommonWCViewController: BaseViewController {
     
     func approveInjectSignDirect() {
         var data = JSON()
-        let privateKey = getPrivateKey(account: account!)
-        let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
         if let json = self.webToAppMessage?["params"]["doc"],
            let chainId = json["chain_id"].rawString(),
+           let dappChainType = WUtils.getChainTypeByChainId(chainId),
            let bodyBase64Decoded = Data.fromHex2(json["body_bytes"].stringValue),
            let bodyBytes = try? Cosmos_Tx_V1beta1_TxBody.init(serializedData: bodyBase64Decoded),
            let authInfoBase64Decoded = Data.fromHex2(json["auth_info_bytes"].stringValue),
@@ -992,6 +998,8 @@ class CommonWCViewController: BaseViewController {
                 $0.accountNumber = json["account_number"].uInt64Value
             }
             
+            let privateKey = getBaseAccountKey(dappChainType: dappChainType, account: account!)
+            let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
             if let signature = try? ECDSA.compactsign(try! signDoc.serializedData().sha256(), privateKey: privateKey) {
                 data["pub_key"] = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : publicKey.base64EncodedString()]
                 data["signature"].stringValue = signature.base64EncodedString()
@@ -1005,16 +1013,23 @@ class CommonWCViewController: BaseViewController {
     
     func approveInjectSignAmino() {
         var data = JSON()
-        let privateKey = getPrivateKey(account: account!)
-        let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
-        let sortedJsonData = try! self.webToAppMessage!["params"]["doc"].rawData(options: [.sortedKeys, .withoutEscapingSlashes])
-        let rawOrderdDocSha = sortedJsonData.sha256()
-        if let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: privateKey) {
-            data["pub_key"] = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : publicKey.base64EncodedString()]
-            data["signature"].stringValue = signature.base64EncodedString()
+        if let json = self.webToAppMessage?["params"]["doc"] {
+            let chainId = json["chain_id"].rawString()
+            var dappChainType = WUtils.getChainTypeByChainId(chainId)
+            if (dappChainType == nil) {
+                dappChainType = WUtils.getChainTypeByChainName(self.webToAppMessage?["params"]["chainName"].rawString())
+            }
+            let privateKey = getBaseAccountKey(dappChainType: dappChainType!, account: account!)
+            let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
+            let sortedJsonData = try! self.webToAppMessage!["params"]["doc"].rawData(options: [.sortedKeys, .withoutEscapingSlashes])
+            let rawOrderdDocSha = sortedJsonData.sha256()
+            if let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: privateKey) {
+                data["pub_key"] = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : publicKey.base64EncodedString()]
+                data["signature"].stringValue = signature.base64EncodedString()
+                data["signed_doc"] = json
+            }
         }
         
-        data["signed_doc"] = self.webToAppMessage!["params"]["doc"]
         let retVal = ["response": ["result": data], "message": webToAppMessage, "isCosmostation": true, "messageId": self.webToAppMessageId!]
         self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
     }
@@ -1139,6 +1154,13 @@ class CommonWCViewController: BaseViewController {
     
     typealias KeyTuple = (privateKey: Data, publicKey: Data, bech32Data: Data)
     
+    func getBaseAccountKey(dappChainType: ChainType, account: Account) -> Data {
+        let chainConfig = ChainFactory.getChainConfig(dappChainType)
+        let fullPath = chainConfig?.getHdPath(0, 0)
+        let seed = WKey.getSeedFromWords(BaseData.instance.selectMnemonicById(account.account_mnemonic_id)!)
+        return KeyFac.getPrivateKeyDataFromSeed(seed!, fullPath!)
+    }
+    
     func getKey(chainName: String) -> KeyTuple {
         guard let account = accountMap[chainName] else { return (Data(), Data(), Data()) }
         let privateKey = getPrivateKey(account: account)
@@ -1160,7 +1182,6 @@ class CommonWCViewController: BaseViewController {
             }
             
         } else {
-            //Speed-Up for get privatekey with non-enginerMode
             if let key = KeychainWrapper.standard.string(forKey: account.getPrivateKeySha1()) {
                 return KeyFac.getPrivateFromString(key)
             }
@@ -1309,6 +1330,14 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
             if (url.absoluteString.starts(with: "keplrwallet://wcV1")) {
                 UIApplication.shared.open(URL(string: url.absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc"))!, options: [:])
                 decisionHandler(.cancel)
+                return
+            } else if (url.absoluteString.starts(with: "intent://wcV2")) {
+                let tempUrl = url.absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
+                if let range = tempUrl.range(of: "#Intent") {
+                    let trimmedUrl = String(tempUrl[..<range.lowerBound])
+                    UIApplication.shared.open(URL(string: trimmedUrl)!, options: [:])
+                    decisionHandler(.cancel)
+                }
                 return
             } else if (url.absoluteString.starts(with: "keplrwallet://wcV2")) {
                 UIApplication.shared.open(URL(string: url.absoluteString.removingPercentEncoding!.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc"))!, options: [:])
@@ -1578,30 +1607,30 @@ extension CommonWCViewController: WKScriptMessageHandler {
             if (method == "cos_requestAccount" || method == "cos_account" || method == "ten_requestAccount" || method == "ten_account") {
                 let params = messageJSON["params"]
                 let chainId = params["chainName"].stringValue
-                var chainType = WUtils.getChainTypeByChainId(chainId)
-                if chainType == nil {
-                    chainType = WUtils.getChainTypeByChainName(chainId)
+                var dappChainType = WUtils.getChainTypeByChainId(chainId)
+                if dappChainType == nil {
+                    dappChainType = WUtils.getChainTypeByChainName(chainId)
                 }
-                let chainConfig = ChainFactory.getChainConfig(chainType)
-                if (self.chainConfig?.defaultPath != "m/44'/118'/0'/0/X") {
-                    self.onShowToast(NSLocalizedString("error_not_support_wallet", comment: ""))
-                    self.rejectInject("Not support wallet.(Need change wallet.)", bodyJSON["messageId"])
-                    return
-                }
-                let privateKey = getPrivateKey(account: account!)
+                let dappChainConfig = ChainFactory.getChainConfig(dappChainType)
+                var privateKey: Data
+                
                 var data = JSON()
                 data["isKeystone"] = false
                 data["isEthermint"] = false
                 data["isLedger"] = false
                 data["name"].stringValue = self.account?.account_nick_name ?? ""
-                if (chainConfig != nil) {
-                    data["address"].stringValue = WKey.getDpAddress(chainConfig!, privateKey, 0)
+                
+                if (dappChainConfig != nil) {
+                    privateKey = getBaseAccountKey(dappChainType: dappChainType!, account: account!)
+                    data["address"].stringValue = WKey.getDpAddress(dappChainConfig!, privateKey, 0)
                 } else {
+                    privateKey = getPrivateKey(account: account!)
                     if let chain = BaseData.instance.mSupportConfig?.customChains.filter({ $0.chainId == chainId }).first {
                         data["address"].stringValue = WKey.getTendermintBech32Address(privateKey, chain.prefix!)
                     }
                 }
                 data["publicKey"].stringValue = KeyFac.getPublicFromPrivateKey(privateKey).toHexString()
+                
                 let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
             } else if (method == "cos_supportedChainIds" || method == "ten_supportedChainIds") {

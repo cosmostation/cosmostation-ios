@@ -78,7 +78,6 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         }
     }
     
-    var mTxFetchCnt = 2
     func onUpdateView(_ errorMSg: String) {
         self.loadingLayer.isHidden = false
         if (!errorMSg.isEmpty) {
@@ -422,7 +421,9 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                     }
                     return
                 }
-                self.onCheckClaimHtlcSwap()
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                    self.onCheckClaimHtlcSwap()
+                })
             
             case .failure(let error):
                 print("onFetchSwapId failure", error , " ", self.mSwapFetchCnt)
@@ -565,7 +566,9 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                 let channel = BaseNetWork.getConnection(htlcToChainConfig)!
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    self.onClaimHtlcSwapKava2(auth, response.defaultNodeInfo.network)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                        self.onClaimHtlcSwapKava2(auth, response.defaultNodeInfo.network)
+                    })
                 }
                 try channel.close().wait()
                 
