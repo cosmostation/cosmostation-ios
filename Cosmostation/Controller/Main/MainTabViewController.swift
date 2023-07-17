@@ -1333,8 +1333,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                                           message: NSLocalizedString("msg_no_supported_chain", comment: ""),
                                           preferredStyle: .alert)
             } else {
-                alert = UIAlertController(title: NSLocalizedString("공지", comment: ""),
-                                                  message: NSLocalizedString("", comment: ""),
+                alert = UIAlertController(title: NSLocalizedString("title_not_support", comment: ""),
+                                                  message: NSLocalizedString("msg_not_support", comment: ""),
                                                   preferredStyle: .alert)
             }
             alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
