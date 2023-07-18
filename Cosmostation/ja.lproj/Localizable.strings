@@ -289,6 +289,7 @@
 "msg_okc_deprecated_msg" = "そのアドレスはチェーンでそれ以上サポートしません。\n円滑な使用のために公式アドレスを生成して資産を異伝することを強くお勧めします。\n（設定>ウォレット追加メニューから公式アドレスを追加できます。）";
 "msg_no_supported_chain" = "このネットワークはもう機能しません。\n\nCosmostationウォレットはアーカイブされたデータのみを表示していますのでご注意ください。";
 "msg_search_chain" = "チェーンやトークンを検索してください。";
+"msg_not_support" = "\n現在接続しているアドレスはまもなくサポートが終了する予定です。\n\n現在のウォレットを使い続けるには、当財団が推奨するウォレットプラットフォームをご検討ください。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -805,6 +806,7 @@
 "title_neutron_vote_single" = "Dao Vote (Single)";
 "title_neutron_vote_multi" = "Dao Vote (Multi)";
 "title_neutron_vote_overrule" = "Dao Vote (Overrule)";
+"title_not_support" = "一部のサービス中断のご案内です";
 
 
 "proposal_type_basic" = "Basic";

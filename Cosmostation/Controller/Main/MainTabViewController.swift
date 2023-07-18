@@ -376,7 +376,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 }
             }
             
-            if (self.mChainConfig.chainType == .CERBERUS_MAIN) {
+            if (self.mChainConfig.chainType == .CERBERUS_MAIN || self.mChainConfig.chainType == .KONSTELLATION_MAIN ||
+                self.mChainConfig.chainType == .KUJIRA_MAIN || self.mChainConfig.chainType == .SIF_MAIN) {
                 showNoSupportedWarn()
             }
             
@@ -1326,9 +1327,16 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     
     public func showNoSupportedWarn() {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-            let alert = UIAlertController(title: NSLocalizedString("title_inactive_network", comment: ""),
+            let alert: UIAlertController
+            if (self.mChainType == .CERBERUS_MAIN) {
+                alert = UIAlertController(title: NSLocalizedString("title_inactive_network", comment: ""),
                                           message: NSLocalizedString("msg_no_supported_chain", comment: ""),
                                           preferredStyle: .alert)
+            } else {
+                alert = UIAlertController(title: NSLocalizedString("title_not_support", comment: ""),
+                                                  message: NSLocalizedString("msg_not_support", comment: ""),
+                                                  preferredStyle: .alert)
+            }
             alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType()
             alert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)

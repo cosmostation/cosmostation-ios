@@ -289,6 +289,7 @@
 "msg_okc_deprecated_msg" = "해당 주소는 체인에서 더 이상 추가 지원을 하지 않습니다.\n원활한 사용을 위해 공식 주소를 생성하여 자산을 이전하는 것을 강력히 권장합니다.\n\n(설정>지갑 추가 메뉴를 통해 공식 주소를 추가할 수 있습니다.)";
 "msg_no_supported_chain" = "이 네트워크는 더 이상 작동하지 않습니다.\n\n코스모스테이션 월렛은 보관된 데이터만 보여드리고 있으니 참고하세요.";
 "msg_search_chain" = "체인이나 토큰을 검색하세요";
+"msg_not_support" = "\n현재 접속하신 주소는 지원종료 될 예정입니다.\n\n현재 지갑을 계속 사용하시려면 재단에서 권장하는 지갑 플랫폼을 검토해 보시기 바랍니다.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";
@@ -805,6 +806,7 @@
 "title_neutron_vote_single" = "다오 투표 (싱글)";
 "title_neutron_vote_multi" = "다오 투표 (멀티)";
 "title_neutron_vote_overrule" = "다오 투표 (오버롤)";
+"title_not_support" = "일부 서비스 중단 안내";
 
 
 "proposal_type_basic" = "기본";
