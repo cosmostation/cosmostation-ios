@@ -18,7 +18,7 @@ jobs:
       - name: Select latest Xcode
         run: "sudo xcode-select -s /Applications/Xcode.app"
       - name: Checkout project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Configure Keychain 
         run: |
           security create-keychain -p "" "$KEYCHAIN"
