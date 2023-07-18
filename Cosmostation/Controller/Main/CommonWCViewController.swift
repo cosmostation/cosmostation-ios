@@ -1352,6 +1352,11 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
                 UIApplication.shared.open(URL(string: newUrl.removingPercentEncoding!)!, options: [:])
                 decisionHandler(.cancel)
                 return
+            } else if (url.absoluteString.starts(with: "cosmostation://wc")) {
+                let newUrl = url.absoluteString.replacingOccurrences(of: "uri=", with: "")
+                UIApplication.shared.open(URL(string: newUrl.removingPercentEncoding!)!, options: [:])
+                decisionHandler(.cancel)
+                return
             }
         }
         
