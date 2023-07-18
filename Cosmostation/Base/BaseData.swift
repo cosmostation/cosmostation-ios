@@ -12,7 +12,7 @@ import SwiftKeychainWrapper
 import SwiftProtobuf
 
 
-final class BaseData : NSObject{
+final class BaseData: NSObject{
     
     static let instance = BaseData()
     
@@ -368,6 +368,7 @@ final class BaseData : NSObject{
 //    }
     
     
+    /*
     func initdb() {
         do {
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -382,77 +383,67 @@ final class BaseData : NSObject{
             let database = try Connection(fileUrl.path)
             self.database = database
             
-//            let createAccountTable = DB_ACCOUNT.create(ifNotExists: true) { (table) in
-//                table.column(DB_ACCOUNT_ID, primaryKey: true)
-//                table.column(DB_ACCOUNT_UUID)
-//                table.column(DB_ACCOUNT_NICKNAME)
-//                table.column(DB_ACCOUNT_FAVO)
-//                table.column(DB_ACCOUNT_ADDRESS)
-//                table.column(DB_ACCOUNT_BASECHAIN)
-//                table.column(DB_ACCOUNT_HAS_PRIVATE)
-//                table.column(DB_ACCOUNT_RESOURCE)
-//                table.column(DB_ACCOUNT_FROM_MNEMONIC)
-//                table.column(DB_ACCOUNT_PATH)
-//                table.column(DB_ACCOUNT_IS_VALIDATOR)
-//                table.column(DB_ACCOUNT_SEQUENCE_NUMBER)
-//                table.column(DB_ACCOUNT_ACCOUNT_NUMBER)
-//                table.column(DB_ACCOUNT_FETCH_TIME)
-//                table.column(DB_ACCOUNT_M_SIZE)
-//                table.column(DB_ACCOUNT_IMPORT_TIME)
-//            }
-//            try self.database.run(createAccountTable)
-//            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_LAST_TOTAL, defaultValue: ""))
-//            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_SORT_ORDER, defaultValue: 0))
-//            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_PUSHALARM, defaultValue: false))
-//            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_NEW_BIP, defaultValue: false))
-//            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_CUSTOM_PATH, defaultValue: 0))
-//            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_MNEMONIC_ID, defaultValue: -1))
-//            
-//            let createBalanceTable = DB_BALANCE.create(ifNotExists: true) { (table) in
-//                table.column(DB_BALANCE_ID, primaryKey: true)
-//                table.column(DB_BALANCE_ACCOUNT_ID)
-//                table.column(DB_BALANCE_DENOM)
-//                table.column(DB_BALANCE_AMOUNT)
-//                table.column(DB_BALANCE_FETCH_TIME)
-//                table.column(DB_BALANCE_FROZEN)
-//                table.column(DB_BALANCE_LOCKED)
-//            }
-//            try self.database.run(createBalanceTable)
-//            _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_FROZEN, defaultValue: ""))
-//            _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_LOCKED, defaultValue: ""))
-//            
-//            let createMnemonicTable = DB_MNEMONIC.create(ifNotExists: true) { (table) in
-//                table.column(DB_MNEMONIC_ID, primaryKey: true)
-//                table.column(DB_MNEMONIC_UUID)
-//                table.column(DB_MNEMONIC_NICKNAME)
-//                table.column(DB_MNEMONIC_CNT)
-//                table.column(DB_MNEMONIC_FAVO)
-//                table.column(DB_MNEMONIC_IMPORT_TIME)
-//            }
-//            try self.database.run(createMnemonicTable)
-//            _ = try? self.database.run(DB_MNEMONIC.addColumn(DB_MNEMONIC_IMPORT_TIME, defaultValue: -1))
-//            
-//            //delete LCD used old table
-//            try self.database.run(DB_BONDING.drop(ifExists: true))
-//            try self.database.run(DB_UNBONDING.drop(ifExists: true))
+            let createAccountTable = DB_ACCOUNT.create(ifNotExists: true) { (table) in
+                table.column(DB_ACCOUNT_ID, primaryKey: true)
+                table.column(DB_ACCOUNT_UUID)
+                table.column(DB_ACCOUNT_NICKNAME)
+                table.column(DB_ACCOUNT_FAVO)
+                table.column(DB_ACCOUNT_ADDRESS)
+                table.column(DB_ACCOUNT_BASECHAIN)
+                table.column(DB_ACCOUNT_HAS_PRIVATE)
+                table.column(DB_ACCOUNT_RESOURCE)
+                table.column(DB_ACCOUNT_FROM_MNEMONIC)
+                table.column(DB_ACCOUNT_PATH)
+                table.column(DB_ACCOUNT_IS_VALIDATOR)
+                table.column(DB_ACCOUNT_SEQUENCE_NUMBER)
+                table.column(DB_ACCOUNT_ACCOUNT_NUMBER)
+                table.column(DB_ACCOUNT_FETCH_TIME)
+                table.column(DB_ACCOUNT_M_SIZE)
+                table.column(DB_ACCOUNT_IMPORT_TIME)
+            }
+            try self.database.run(createAccountTable)
+            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_LAST_TOTAL, defaultValue: ""))
+            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_SORT_ORDER, defaultValue: 0))
+            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_PUSHALARM, defaultValue: false))
+            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_NEW_BIP, defaultValue: false))
+            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_CUSTOM_PATH, defaultValue: 0))
+            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_MNEMONIC_ID, defaultValue: -1))
+            
+            let createBalanceTable = DB_BALANCE.create(ifNotExists: true) { (table) in
+                table.column(DB_BALANCE_ID, primaryKey: true)
+                table.column(DB_BALANCE_ACCOUNT_ID)
+                table.column(DB_BALANCE_DENOM)
+                table.column(DB_BALANCE_AMOUNT)
+                table.column(DB_BALANCE_FETCH_TIME)
+                table.column(DB_BALANCE_FROZEN)
+                table.column(DB_BALANCE_LOCKED)
+            }
+            try self.database.run(createBalanceTable)
+            _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_FROZEN, defaultValue: ""))
+            _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_LOCKED, defaultValue: ""))
+            
+            let createMnemonicTable = DB_MNEMONIC.create(ifNotExists: true) { (table) in
+                table.column(DB_MNEMONIC_ID, primaryKey: true)
+                table.column(DB_MNEMONIC_UUID)
+                table.column(DB_MNEMONIC_NICKNAME)
+                table.column(DB_MNEMONIC_CNT)
+                table.column(DB_MNEMONIC_FAVO)
+                table.column(DB_MNEMONIC_IMPORT_TIME)
+            }
+            try self.database.run(createMnemonicTable)
+            _ = try? self.database.run(DB_MNEMONIC.addColumn(DB_MNEMONIC_IMPORT_TIME, defaultValue: -1))
+            
+            //delete LCD used old table
+            try self.database.run(DB_BONDING.drop(ifExists: true))
+            try self.database.run(DB_UNBONDING.drop(ifExists: true))
             
         } catch {
             print(error)
         }
     }
+    */
     
     
-    public func legacySelectAllMnemonics() -> Array<MWords> {
-        var result = Array<MWords>()
-        do {
-            for mnemonicBD in try database.prepare(DB_MNEMONIC) {
-                let mWords = MWords(mnemonicBD[DB_MNEMONIC_ID], mnemonicBD[DB_MNEMONIC_UUID], mnemonicBD[DB_MNEMONIC_NICKNAME],
-                                    mnemonicBD[DB_MNEMONIC_CNT], mnemonicBD[DB_MNEMONIC_FAVO], mnemonicBD[DB_MNEMONIC_IMPORT_TIME]);
-                result.append(mWords);
-            }
-        } catch { print(error) }
-        return result
-    }
     
     /*
     public func selectMnemonicById(_ id: Int64) -> MWords? {
@@ -496,24 +487,10 @@ final class BaseData : NSObject{
     
     
     
-//    public func selectAllAccounts() -> Array<Account> {
-//        var result = Array<Account>()
-//        do {
-//            for accountBD in try database.prepare(DB_ACCOUNT) {
-//                let account = Account(accountBD[DB_ACCOUNT_ID], accountBD[DB_ACCOUNT_UUID], accountBD[DB_ACCOUNT_NICKNAME], accountBD[DB_ACCOUNT_FAVO], accountBD[DB_ACCOUNT_ADDRESS],
-//                                      accountBD[DB_ACCOUNT_BASECHAIN], accountBD[DB_ACCOUNT_HAS_PRIVATE],  accountBD[DB_ACCOUNT_RESOURCE], accountBD[DB_ACCOUNT_FROM_MNEMONIC],
-//                                      accountBD[DB_ACCOUNT_PATH], accountBD[DB_ACCOUNT_IS_VALIDATOR], accountBD[DB_ACCOUNT_SEQUENCE_NUMBER], accountBD[DB_ACCOUNT_ACCOUNT_NUMBER],
-//                                      accountBD[DB_ACCOUNT_FETCH_TIME], accountBD[DB_ACCOUNT_M_SIZE], accountBD[DB_ACCOUNT_IMPORT_TIME], accountBD[DB_ACCOUNT_LAST_TOTAL],
-//                                      accountBD[DB_ACCOUNT_SORT_ORDER], accountBD[DB_ACCOUNT_PUSHALARM], accountBD[DB_ACCOUNT_NEW_BIP], accountBD[DB_ACCOUNT_CUSTOM_PATH],
-//                                      accountBD[DB_ACCOUNT_MNEMONIC_ID]);
-//                account.setBalances(selectBalanceById(accountId: account.account_id))
-//                result.append(account);
-//            }
-//        } catch {
-//            print(error)
-//        }
-//        return result;
-//    }
+
+    
+
+    
 //
 //    public func selectAccountsByMnemonic(_ id: Int64) -> Array<Account> {
 //        var result = Array<Account>()
@@ -561,105 +538,105 @@ final class BaseData : NSObject{
 //        }
 //        return nil
 //    }
-    
-    public func isDupleAccount(_ address: String, _ chain: String) -> Bool {
-        do {
-            let query = DB_ACCOUNT.filter(DB_ACCOUNT_ADDRESS == address && DB_ACCOUNT_BASECHAIN == chain)
-            if (try database.pluck(query)) != nil {
-                return true
-            } else {
-                return false
-            }
-            
-        } catch {
-            print(error)
-        }
-        return true;
-    }
-    
-    public func insertAccount(_ account: Account) -> Int64 {
-        let insertAccount = DB_ACCOUNT.insert(DB_ACCOUNT_UUID <- account.account_uuid,
-                                              DB_ACCOUNT_NICKNAME <- account.account_nick_name,
-                                              DB_ACCOUNT_FAVO <- account.account_favo,
-                                              DB_ACCOUNT_ADDRESS <- account.account_address,
-                                              DB_ACCOUNT_BASECHAIN <- account.account_base_chain,
-                                              DB_ACCOUNT_HAS_PRIVATE <- account.account_has_private,
-                                              DB_ACCOUNT_RESOURCE <- account.account_resource,
-                                              DB_ACCOUNT_FROM_MNEMONIC <- account.account_from_mnemonic,
-                                              DB_ACCOUNT_PATH <- account.account_path,
-                                              DB_ACCOUNT_IS_VALIDATOR <- account.account_is_validator,
-                                              DB_ACCOUNT_SEQUENCE_NUMBER <- account.account_sequence_number,
-                                              DB_ACCOUNT_ACCOUNT_NUMBER <- account.account_account_numner,
-                                              DB_ACCOUNT_FETCH_TIME <- account.account_fetch_time,
-                                              DB_ACCOUNT_M_SIZE <- account.account_m_size,
-                                              DB_ACCOUNT_IMPORT_TIME <- account.account_import_time,
-                                              DB_ACCOUNT_LAST_TOTAL <- account.account_last_total,
-                                              DB_ACCOUNT_SORT_ORDER <- account.account_sort_order,
-                                              DB_ACCOUNT_PUSHALARM <- account.account_push_alarm,
-                                              DB_ACCOUNT_NEW_BIP <- account.account_new_bip44,
-                                              DB_ACCOUNT_CUSTOM_PATH <- account.account_pubkey_type,
-                                              DB_ACCOUNT_MNEMONIC_ID <- account.account_mnemonic_id)
-        do {
-            return try database.run(insertAccount)
-        } catch {
-            print(error)
-            return -1
-        }
-    }
-    
-    public func updateAccount(_ account: Account) -> Int64 {
-        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
-        do {
-            return try Int64(database.run(target.update(DB_ACCOUNT_NICKNAME <- account.account_nick_name,
-                                                        DB_ACCOUNT_FAVO <- account.account_favo,
-                                                        DB_ACCOUNT_BASECHAIN <- account.account_base_chain,
-                                                        DB_ACCOUNT_SEQUENCE_NUMBER <- account.account_sequence_number,
-                                                        DB_ACCOUNT_ACCOUNT_NUMBER <- account.account_account_numner,
-                                                        DB_ACCOUNT_RESOURCE <- account.account_resource,
-                                                        DB_ACCOUNT_FETCH_TIME <- account.account_fetch_time)))
-        } catch {
-            print(error)
-            return -1
-        }
-    }
-    
-    public func overrideAccount(_ account: Account) -> Int64 {
-        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
-        do {
-            return try Int64(database.run(target.update(DB_ACCOUNT_HAS_PRIVATE <- account.account_has_private,
-                                                        DB_ACCOUNT_FROM_MNEMONIC <- account.account_from_mnemonic,
-                                                        DB_ACCOUNT_PATH <- account.account_path,
-                                                        DB_ACCOUNT_M_SIZE <- account.account_m_size,
-                                                        DB_ACCOUNT_NEW_BIP <- account.account_new_bip44,
-                                                        DB_ACCOUNT_CUSTOM_PATH <- account.account_pubkey_type,
-                                                        DB_ACCOUNT_MNEMONIC_ID <- account.account_mnemonic_id)))
-        } catch {
-            print(error)
-            return -1
-        }
-    }
-    
-    
-    //for okchain display address
-    public func updateAccountAddress(_ account: Account) {
-        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
-        do {
-            try database.run(target.update(DB_ACCOUNT_ADDRESS <- account.account_address))
-        } catch {
-            print(error)
-        }
-    }
-    
-    //for okchain key custom_path 0 -> tendermint(996), 1 -> ethermint(996), 2 -> etherium(60)
-    public func updateAccountPathType(_ account: Account) {
-        if (account.account_import_time > 1643986800000) { return  }
-        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
-        do {
-            try database.run(target.update(DB_ACCOUNT_CUSTOM_PATH <- account.account_pubkey_type))
-        } catch {
-            print(error)
-        }
-    }
+//
+//    public func isDupleAccount(_ address: String, _ chain: String) -> Bool {
+//        do {
+//            let query = DB_ACCOUNT.filter(DB_ACCOUNT_ADDRESS == address && DB_ACCOUNT_BASECHAIN == chain)
+//            if (try database.pluck(query)) != nil {
+//                return true
+//            } else {
+//                return false
+//            }
+//
+//        } catch {
+//            print(error)
+//        }
+//        return true;
+//    }
+//
+//    public func insertAccount(_ account: Account) -> Int64 {
+//        let insertAccount = DB_ACCOUNT.insert(DB_ACCOUNT_UUID <- account.account_uuid,
+//                                              DB_ACCOUNT_NICKNAME <- account.account_nick_name,
+//                                              DB_ACCOUNT_FAVO <- account.account_favo,
+//                                              DB_ACCOUNT_ADDRESS <- account.account_address,
+//                                              DB_ACCOUNT_BASECHAIN <- account.account_base_chain,
+//                                              DB_ACCOUNT_HAS_PRIVATE <- account.account_has_private,
+//                                              DB_ACCOUNT_RESOURCE <- account.account_resource,
+//                                              DB_ACCOUNT_FROM_MNEMONIC <- account.account_from_mnemonic,
+//                                              DB_ACCOUNT_PATH <- account.account_path,
+//                                              DB_ACCOUNT_IS_VALIDATOR <- account.account_is_validator,
+//                                              DB_ACCOUNT_SEQUENCE_NUMBER <- account.account_sequence_number,
+//                                              DB_ACCOUNT_ACCOUNT_NUMBER <- account.account_account_numner,
+//                                              DB_ACCOUNT_FETCH_TIME <- account.account_fetch_time,
+//                                              DB_ACCOUNT_M_SIZE <- account.account_m_size,
+//                                              DB_ACCOUNT_IMPORT_TIME <- account.account_import_time,
+//                                              DB_ACCOUNT_LAST_TOTAL <- account.account_last_total,
+//                                              DB_ACCOUNT_SORT_ORDER <- account.account_sort_order,
+//                                              DB_ACCOUNT_PUSHALARM <- account.account_push_alarm,
+//                                              DB_ACCOUNT_NEW_BIP <- account.account_new_bip44,
+//                                              DB_ACCOUNT_CUSTOM_PATH <- account.account_pubkey_type,
+//                                              DB_ACCOUNT_MNEMONIC_ID <- account.account_mnemonic_id)
+//        do {
+//            return try database.run(insertAccount)
+//        } catch {
+//            print(error)
+//            return -1
+//        }
+//    }
+//
+//    public func updateAccount(_ account: Account) -> Int64 {
+//        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
+//        do {
+//            return try Int64(database.run(target.update(DB_ACCOUNT_NICKNAME <- account.account_nick_name,
+//                                                        DB_ACCOUNT_FAVO <- account.account_favo,
+//                                                        DB_ACCOUNT_BASECHAIN <- account.account_base_chain,
+//                                                        DB_ACCOUNT_SEQUENCE_NUMBER <- account.account_sequence_number,
+//                                                        DB_ACCOUNT_ACCOUNT_NUMBER <- account.account_account_numner,
+//                                                        DB_ACCOUNT_RESOURCE <- account.account_resource,
+//                                                        DB_ACCOUNT_FETCH_TIME <- account.account_fetch_time)))
+//        } catch {
+//            print(error)
+//            return -1
+//        }
+//    }
+//
+//    public func overrideAccount(_ account: Account) -> Int64 {
+//        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
+//        do {
+//            return try Int64(database.run(target.update(DB_ACCOUNT_HAS_PRIVATE <- account.account_has_private,
+//                                                        DB_ACCOUNT_FROM_MNEMONIC <- account.account_from_mnemonic,
+//                                                        DB_ACCOUNT_PATH <- account.account_path,
+//                                                        DB_ACCOUNT_M_SIZE <- account.account_m_size,
+//                                                        DB_ACCOUNT_NEW_BIP <- account.account_new_bip44,
+//                                                        DB_ACCOUNT_CUSTOM_PATH <- account.account_pubkey_type,
+//                                                        DB_ACCOUNT_MNEMONIC_ID <- account.account_mnemonic_id)))
+//        } catch {
+//            print(error)
+//            return -1
+//        }
+//    }
+//
+//
+//    //for okchain display address
+//    public func updateAccountAddress(_ account: Account) {
+//        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
+//        do {
+//            try database.run(target.update(DB_ACCOUNT_ADDRESS <- account.account_address))
+//        } catch {
+//            print(error)
+//        }
+//    }
+//
+//    //for okchain key custom_path 0 -> tendermint(996), 1 -> ethermint(996), 2 -> etherium(60)
+//    public func updateAccountPathType(_ account: Account) {
+//        if (account.account_import_time > 1643986800000) { return  }
+//        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
+//        do {
+//            try database.run(target.update(DB_ACCOUNT_CUSTOM_PATH <- account.account_pubkey_type))
+//        } catch {
+//            print(error)
+//        }
+//    }
     
     
 //    public func upgradeMnemonicDB() {
@@ -703,48 +680,48 @@ final class BaseData : NSObject{
 //        }
 //    }
     
-    public func updateLastTotal(_ account: Account?, _ amount: String) {
-        if (account == nil) { return}
-        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account!.account_id)
-        do {
-            try database.run(target.update(DB_ACCOUNT_LAST_TOTAL <- amount))
-        } catch {
-            print(error)
-        }
-    }
-    
-    public func updateSortOrder(_ accounts: Array<Account>) {
-        for account in accounts {
-            let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
-            do {
-                try database.run(target.update(DB_ACCOUNT_SORT_ORDER <- account.account_sort_order))
-            } catch {
-                print(error)
-            }
-        }
-    }
-    
-    public func updateMnemonicId(_ account: Account) {
-        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
-        do {
-            try database.run(target.update(DB_ACCOUNT_MNEMONIC_ID <- account.account_mnemonic_id))
-        } catch {
-            print(error)
-        }
-    }
-    
-    public func deleteAccount(account: Account) -> Int {
-        let query = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
-        do {
-            return  try database.run(query.delete())
-        } catch {
-            print(error)
-            return -1
-        }
-    }
+//    public func updateLastTotal(_ account: Account?, _ amount: String) {
+//        if (account == nil) { return}
+//        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account!.account_id)
+//        do {
+//            try database.run(target.update(DB_ACCOUNT_LAST_TOTAL <- amount))
+//        } catch {
+//            print(error)
+//        }
+//    }
+//
+//    public func updateSortOrder(_ accounts: Array<Account>) {
+//        for account in accounts {
+//            let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
+//            do {
+//                try database.run(target.update(DB_ACCOUNT_SORT_ORDER <- account.account_sort_order))
+//            } catch {
+//                print(error)
+//            }
+//        }
+//    }
+//
+//    public func updateMnemonicId(_ account: Account) {
+//        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
+//        do {
+//            try database.run(target.update(DB_ACCOUNT_MNEMONIC_ID <- account.account_mnemonic_id))
+//        } catch {
+//            print(error)
+//        }
+//    }
+//
+//    public func deleteAccount(account: Account) -> Int {
+//        let query = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
+//        do {
+//            return  try database.run(query.delete())
+//        } catch {
+//            print(error)
+//            return -1
+//        }
+//    }
     
     public func hasPassword() -> Bool{
-        if(KeychainWrapper.standard.hasValue(forKey: "password")) {
+        if (KeychainWrapper.standard.hasValue(forKey: "password")) {
             return true;
         } else {
             return false;
@@ -760,15 +737,156 @@ final class BaseData : NSObject{
     
     
     
-    public func selectAllBalances() -> Array<Balance> {
-        var result = Array<Balance>()
+//    public func selectAllBalances() -> Array<Balance> {
+//        var result = Array<Balance>()
+//        do {
+//            for balanceBD in try database.prepare(DB_BALANCE) {
+//                let balance = Balance(balanceBD[DB_BALANCE_ID], balanceBD[DB_BALANCE_ACCOUNT_ID],
+//                                      balanceBD[DB_BALANCE_DENOM], balanceBD[DB_BALANCE_AMOUNT],
+//                                      balanceBD[DB_BALANCE_FETCH_TIME], balanceBD[DB_BALANCE_FROZEN],
+//                                      balanceBD[DB_BALANCE_LOCKED])
+//                result.append(balance);
+//            }
+//        } catch {
+//            print(error)
+//        }
+//        return result;
+//    }
+//
+//    public func selectBalanceById(accountId: Int64) -> Array<Balance> {
+//        var result = Array<Balance>()
+//        do {
+//            for balanceBD in try database.prepare(DB_BALANCE.filter(DB_BALANCE_ACCOUNT_ID == accountId)) {
+//                let balance = Balance(balanceBD[DB_BALANCE_ID], balanceBD[DB_BALANCE_ACCOUNT_ID],
+//                                      balanceBD[DB_BALANCE_DENOM], balanceBD[DB_BALANCE_AMOUNT],
+//                                      balanceBD[DB_BALANCE_FETCH_TIME], balanceBD[DB_BALANCE_FROZEN],
+//                                      balanceBD[DB_BALANCE_LOCKED])
+//                result.append(balance);
+//            }
+//        } catch {
+//            print(error)
+//        }
+//        return result
+//    }
+//
+//    public func deleteBalance(account: Account) -> Int {
+//        let query = DB_BALANCE.filter(DB_BALANCE_ACCOUNT_ID == account.account_id)
+//        do {
+//            return  try database.run(query.delete())
+//        } catch {
+//            print(error)
+//            return -1
+//        }
+//    }
+//
+//    public func deleteBalanceById(accountId: Int64) -> Int {
+//        let query = DB_BALANCE.filter(DB_BALANCE_ACCOUNT_ID == accountId)
+//        do {
+//            return  try database.run(query.delete())
+//        } catch {
+//            print(error)
+//            return -1
+//        }
+//    }
+//
+//    public func insertBalance(balance: Balance) -> Int64 {
+//        let insertBalance = DB_BALANCE.insert(DB_BALANCE_ACCOUNT_ID <- balance.balance_account_id,
+//                                              DB_BALANCE_DENOM <- balance.balance_denom,
+//                                              DB_BALANCE_AMOUNT <- balance.balance_amount,
+//                                              DB_BALANCE_FETCH_TIME <- balance.balance_fetch_time,
+//                                              DB_BALANCE_FROZEN <- balance.balance_frozen,
+//                                              DB_BALANCE_LOCKED <- balance.balance_locked)
+//        do {
+//            return try database.run(insertBalance)
+//        } catch {
+//            print(error)
+//            return -1
+//        }
+//    }
+//
+//    public func updateBalances(_ accountId: Int64, _ newBalances: Array<Balance>) {
+//        if(newBalances.count == 0) {
+//            _ = deleteBalanceById(accountId: accountId)
+//            return
+//        }
+//        _ = deleteBalanceById(accountId: newBalances[0].balance_account_id)
+//        for balance in newBalances {
+//            _ = self.insertBalance(balance: balance)
+//        }
+//    }
+}
+
+
+extension BaseData {
+    
+    func initdb() {
         do {
-            for balanceBD in try database.prepare(DB_BALANCE) {
-                let balance = Balance(balanceBD[DB_BALANCE_ID], balanceBD[DB_BALANCE_ACCOUNT_ID],
-                                      balanceBD[DB_BALANCE_DENOM], balanceBD[DB_BALANCE_AMOUNT],
-                                      balanceBD[DB_BALANCE_FETCH_TIME], balanceBD[DB_BALANCE_FROZEN],
-                                      balanceBD[DB_BALANCE_LOCKED])
-                result.append(balance);
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            var fileUrl = documentDirectory.appendingPathComponent("cosmostation").appendingPathExtension("sqlite3")
+            do {
+                var resourceValues = URLResourceValues()
+                resourceValues.isExcludedFromBackup = true
+                try fileUrl.setResourceValues(resourceValues)
+                
+            } catch { print(error) }
+            
+            let database = try Connection(fileUrl.path)
+            self.database = database
+            
+            //V2 version
+            let accountTable = TABLE_BASEACCOUNT.create(ifNotExists: true) { table in
+                table.column(BASEACCOUNT_ID, primaryKey: true)
+                table.column(BASEACCOUNT_UUID)
+                table.column(BASEACCOUNT_NAME)
+                table.column(BASEACCOUNT_TYPE)
+            }
+            try self.database.run(accountTable)
+            
+        } catch { print(error) }
+    }
+    
+    //V2 version
+    public func selectAccounts() -> Array<BaseAccount> {
+        var result = Array<BaseAccount>()
+        for row in try! database.prepare(TABLE_BASEACCOUNT) {
+            result.append(BaseAccount(row[BASEACCOUNT_ID], row[BASEACCOUNT_UUID], row[BASEACCOUNT_NAME], row[BASEACCOUNT_TYPE]))
+        }
+        return result
+    }
+    
+    public func insertAccount(_ account: BaseAccount) -> Int64 {
+        let toInsert = TABLE_BASEACCOUNT.insert(BASEACCOUNT_UUID <- account.uuid,
+                                                BASEACCOUNT_NAME <- account.name,
+                                                BASEACCOUNT_TYPE <- account.type.rawValue)
+        return try! database.run(toInsert)
+    }
+    
+    
+    
+    //legacy
+    public func legacySelectAllMnemonics() -> Array<MWords> {
+        var result = Array<MWords>()
+        do {
+            for mnemonicBD in try database.prepare(DB_MNEMONIC) {
+                let mWords = MWords(mnemonicBD[DB_MNEMONIC_ID], mnemonicBD[DB_MNEMONIC_UUID], mnemonicBD[DB_MNEMONIC_NICKNAME],
+                                    mnemonicBD[DB_MNEMONIC_CNT], mnemonicBD[DB_MNEMONIC_FAVO], mnemonicBD[DB_MNEMONIC_IMPORT_TIME]);
+                result.append(mWords);
+            }
+        } catch { print(error) }
+        return result
+    }
+    
+    public func legacySelectAllAccounts() -> Array<Account> {
+        var result = Array<Account>()
+        do {
+            for accountBD in try database.prepare(DB_ACCOUNT) {
+                let account = Account(accountBD[DB_ACCOUNT_ID], accountBD[DB_ACCOUNT_UUID], accountBD[DB_ACCOUNT_NICKNAME], accountBD[DB_ACCOUNT_FAVO], accountBD[DB_ACCOUNT_ADDRESS],
+                                      accountBD[DB_ACCOUNT_BASECHAIN], accountBD[DB_ACCOUNT_HAS_PRIVATE],  accountBD[DB_ACCOUNT_RESOURCE], accountBD[DB_ACCOUNT_FROM_MNEMONIC],
+                                      accountBD[DB_ACCOUNT_PATH], accountBD[DB_ACCOUNT_IS_VALIDATOR], accountBD[DB_ACCOUNT_SEQUENCE_NUMBER], accountBD[DB_ACCOUNT_ACCOUNT_NUMBER],
+                                      accountBD[DB_ACCOUNT_FETCH_TIME], accountBD[DB_ACCOUNT_M_SIZE], accountBD[DB_ACCOUNT_IMPORT_TIME], accountBD[DB_ACCOUNT_LAST_TOTAL],
+                                      accountBD[DB_ACCOUNT_SORT_ORDER], accountBD[DB_ACCOUNT_PUSHALARM], accountBD[DB_ACCOUNT_NEW_BIP], accountBD[DB_ACCOUNT_CUSTOM_PATH],
+                                      accountBD[DB_ACCOUNT_MNEMONIC_ID]);
+                result.append(account);
             }
         } catch {
             print(error)
@@ -776,65 +894,13 @@ final class BaseData : NSObject{
         return result;
     }
     
-    public func selectBalanceById(accountId: Int64) -> Array<Balance> {
-        var result = Array<Balance>()
-        do {
-            for balanceBD in try database.prepare(DB_BALANCE.filter(DB_BALANCE_ACCOUNT_ID == accountId)) {
-                let balance = Balance(balanceBD[DB_BALANCE_ID], balanceBD[DB_BALANCE_ACCOUNT_ID],
-                                      balanceBD[DB_BALANCE_DENOM], balanceBD[DB_BALANCE_AMOUNT],
-                                      balanceBD[DB_BALANCE_FETCH_TIME], balanceBD[DB_BALANCE_FROZEN],
-                                      balanceBD[DB_BALANCE_LOCKED])
-                result.append(balance);
+        public func legacySelectAccountsByPrivateKey() -> Array<Account> {
+            var result = Array<Account>()
+            for account in legacySelectAllAccounts() {
+                if (account.account_from_mnemonic == false && account.account_has_private == true) {
+                    result.append(account)
+                }
             }
-        } catch {
-            print(error)
+            return result
         }
-        return result
-    }
-    
-    public func deleteBalance(account: Account) -> Int {
-        let query = DB_BALANCE.filter(DB_BALANCE_ACCOUNT_ID == account.account_id)
-        do {
-            return  try database.run(query.delete())
-        } catch {
-            print(error)
-            return -1
-        }
-    }
-    
-    public func deleteBalanceById(accountId: Int64) -> Int {
-        let query = DB_BALANCE.filter(DB_BALANCE_ACCOUNT_ID == accountId)
-        do {
-            return  try database.run(query.delete())
-        } catch {
-            print(error)
-            return -1
-        }
-    }
-    
-    public func insertBalance(balance: Balance) -> Int64 {
-        let insertBalance = DB_BALANCE.insert(DB_BALANCE_ACCOUNT_ID <- balance.balance_account_id,
-                                              DB_BALANCE_DENOM <- balance.balance_denom,
-                                              DB_BALANCE_AMOUNT <- balance.balance_amount,
-                                              DB_BALANCE_FETCH_TIME <- balance.balance_fetch_time,
-                                              DB_BALANCE_FROZEN <- balance.balance_frozen,
-                                              DB_BALANCE_LOCKED <- balance.balance_locked)
-        do {
-            return try database.run(insertBalance)
-        } catch {
-            print(error)
-            return -1
-        }
-    }
-    
-    public func updateBalances(_ accountId: Int64, _ newBalances: Array<Balance>) {
-        if(newBalances.count == 0) {
-            _ = deleteBalanceById(accountId: accountId)
-            return
-        }
-        _ = deleteBalanceById(accountId: newBalances[0].balance_account_id)
-        for balance in newBalances {
-            _ = self.insertBalance(balance: balance)
-        }
-    }
 }

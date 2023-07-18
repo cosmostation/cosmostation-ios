@@ -11,6 +11,7 @@ import Alamofire
 import Firebase
 import SwiftKeychainWrapper
 import KeychainAccess
+import HDWalletKit
 
 class IntroViewController: BaseViewController {
     
@@ -46,19 +47,26 @@ extension IntroViewController {
         print("wordsList ", wordsList.count)
         wordsList.forEach { word in
             if let words = KeychainWrapper.standard.string(forKey: word.uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
-                print(word.nickName, " --> " , words)
                 let seed = KeyFac.getSeedFromWords(words)
-                print(word.nickName, " --> " , seed?.toHexString())
-                
-                let newData = words + " : " + seed!.toHexString()
-                print("newData ", newData)
+                let recoverAccount = BaseAccount(word.nickName, .withMnemonic)
+                BaseData.instance.insertAccount(recoverAccount)
 
-//                keychain[word.uuid.sha1()] = newData
-                
-                try? keychain.set(newData, key: word.uuid.sha1())
-                
-                let recover = try? keychain.getString(word.uuid.sha1())
-                print("recover ", recover)
+                let newData = words + " : " + seed!.toHexString()
+                try? keychain.set(newData, key: recoverAccount.uuid.sha1())
+            }
+        }
+        
+        var pkeyList = Array<String>()
+        let accounts = BaseData.instance.legacySelectAccountsByPrivateKey()
+        print("accounts ", accounts.count)
+        accounts.forEach { account in
+            if let pKey = KeychainWrapper.standard.string(forKey: account.getPrivateKeySha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                if (!pkeyList.contains(pKey)) {
+                    pkeyList.append(pKey)
+                    let recoverAccount = BaseAccount(account.account_nick_name, .onlyPrivateKey)
+                    BaseData.instance.insertAccount(recoverAccount)
+                    try? keychain.set(pKey, key: recoverAccount.uuid.sha1())
+                }
             }
         }
         return true

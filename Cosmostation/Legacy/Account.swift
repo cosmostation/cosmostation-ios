@@ -105,9 +105,9 @@ public class Account {
     
 //    var account_balances = Array<Balance>()
 //
-//    func getPrivateKeySha1() -> String {
-//        return (account_uuid + "privateKey").sha1()
-//    }
+    func getPrivateKeySha1() -> String {
+        return (account_uuid + "privateKey").sha1()
+    }
 //
 //    func getDpName() -> String {
 //        var nickName:String?

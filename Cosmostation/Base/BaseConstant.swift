@@ -126,6 +126,14 @@ let DB_MNEMONIC_FAVO                = Expression<Bool>("isFavo")
 let DB_MNEMONIC_IMPORT_TIME         = Expression<Int64>("importTime")
 
 
+//V2 DB
+let TABLE_BASEACCOUNT = Table("BaseAccount")
+let BASEACCOUNT_ID    = Expression<Int64>("id")
+let BASEACCOUNT_UUID  = Expression<String>("uuid")
+let BASEACCOUNT_NAME  = Expression<String>("name")
+let BASEACCOUNT_TYPE  = Expression<Int64>("type")
+
+
 let COSMOS_AUTH_TYPE_OKEX_ACCOUNT           = "okexchain/EthAccount";
 let COSMOS_KEY_TYPE_PUBLIC                  = "tendermint/PubKeySecp256k1";
 let ETHERMINT_KEY_TYPE_PUBLIC               = "ethermint/PubKeyEthSecp256k1";

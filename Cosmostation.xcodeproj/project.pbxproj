@@ -64,6 +64,8 @@
 		04D279D52A6508C500AF046A /* WalletConnectPairing in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279D42A6508C500AF046A /* WalletConnectPairing */; };
 		04D279D82A65092B00AF046A /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279D72A65092B00AF046A /* SQLite */; };
 		04D279DA2A65093600AF046A /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279D92A65093600AF046A /* SQLite */; };
+		04D279DC2A66863C00AF046A /* BaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279DB2A66863C00AF046A /* BaseAccount.swift */; };
+		04D279DD2A66863C00AF046A /* BaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279DB2A66863C00AF046A /* BaseAccount.swift */; };
 		04D547EA2A6128CA001F1A4B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 04D547E92A6128CA001F1A4B /* SwiftyJSON */; };
 		04D547ED2A612914001F1A4B /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 04D547EC2A612914001F1A4B /* FirebaseMessaging */; };
 		04D547F02A612935001F1A4B /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 04D547EF2A612935001F1A4B /* AlamofireImage */; };
@@ -110,7 +112,6 @@
 		18F4EAD22A4DA0A500CFBE2B /* ApiKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187446FE2930940F00849EE4 /* ApiKey.plist */; };
 		18FFB272281AF533004E65BB /* CKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285ADF0C272EE35F0023651F /* CKey.swift */; };
 		18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E51223124F000A1436F /* BaseData.swift */; };
-		18FFB2F2281AF533004E65BB /* Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD2224222E00097CAEE /* Password.swift */; };
 		18FFB307281AF533004E65BB /* BinanceProto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903C268C413A002CFFE1 /* BinanceProto.swift */; };
 		18FFB317281AF533004E65BB /* OkToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2EA324F52FE700247424 /* OkToken.swift */; };
 		18FFB31A281AF533004E65BB /* BinanceHexEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9048268C7C2B002CFFE1 /* BinanceHexEncoding.swift */; };
@@ -143,7 +144,6 @@
 		18FFB5D9281AF533004E65BB /* Cw20BalanceRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32627A581720045ED21 /* Cw20BalanceRes.swift */; };
 		18FFB5F2281AF533004E65BB /* SegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E3C222E7E2900A1436F /* SegwitAddrCoder.swift */; };
 		18FFB623281AF533004E65BB /* BinanceHexlify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903E268C45DC002CFFE1 /* BinanceHexlify.swift */; };
-		18FFB656281AF533004E65BB /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD4224223250097CAEE /* Balance.swift */; };
 		18FFB664281AF533004E65BB /* StarnameAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D765A1271585FA00730F47 /* StarnameAssets.swift */; };
 		18FFB66B281AF533004E65BB /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD0224220910097CAEE /* Account.swift */; };
 		18FFB674281AF533004E65BB /* new2022@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2B276F23D9009B39BA /* new2022@3x.png */; };
@@ -184,8 +184,6 @@
 		E1945E52223124F000A1436F /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E51223124F000A1436F /* BaseData.swift */; };
 		E1945E542231256800A1436F /* BaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E532231256800A1436F /* BaseConstant.swift */; };
 		E1A82DD1224220910097CAEE /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD0224220910097CAEE /* Account.swift */; };
-		E1A82DD3224222E00097CAEE /* Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD2224222E00097CAEE /* Password.swift */; };
-		E1A82DD5224223250097CAEE /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD4224223250097CAEE /* Balance.swift */; };
 		E1A82DE822448E940097CAEE /* WUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE722448E940097CAEE /* WUtils.swift */; };
 		E1D4EA582871584B005C1ECF /* FeeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA572871584B005C1ECF /* FeeInfo.swift */; };
 		E1D4EA592871584B005C1ECF /* FeeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA572871584B005C1ECF /* FeeInfo.swift */; };
@@ -229,6 +227,7 @@
 		048DBCE1280EC5E90007275E /* MWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWords.swift; sourceTree = "<group>"; };
 		049B691E29D1736B0027B82D /* MintscanV1Proposal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanV1Proposal.swift; sourceTree = "<group>"; };
 		04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		04D279DB2A66863C00AF046A /* BaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAccount.swift; sourceTree = "<group>"; };
 		04E165B928B61BE1000F12C0 /* MintscanAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanAsset.swift; sourceTree = "<group>"; };
 		04E165BC28B62133000F12C0 /* MintscanToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanToken.swift; sourceTree = "<group>"; };
 		04E25D2A276F23D9009B39BA /* xmas@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@3x.png"; sourceTree = "<group>"; };
@@ -288,8 +287,6 @@
 		E1945E51223124F000A1436F /* BaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
 		E1945E532231256800A1436F /* BaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConstant.swift; sourceTree = "<group>"; };
 		E1A82DD0224220910097CAEE /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		E1A82DD2224222E00097CAEE /* Password.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Password.swift; sourceTree = "<group>"; };
-		E1A82DD4224223250097CAEE /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		E1A82DE722448E940097CAEE /* WUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WUtils.swift; sourceTree = "<group>"; };
 		E1D4EA572871584B005C1ECF /* FeeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeInfo.swift; sourceTree = "<group>"; };
 		E1D4EA5A2871BCDE005C1ECF /* WDP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDP.swift; sourceTree = "<group>"; };
@@ -340,6 +337,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04D279DE2A66D24600AF046A /* Legacy */ = {
+			isa = PBXGroup;
+			children = (
+				048DBCE1280EC5E90007275E /* MWords.swift */,
+				E1A82DD0224220910097CAEE /* Account.swift */,
+			);
+			path = Legacy;
+			sourceTree = "<group>";
+		};
 		04E25D29276F23C5009B39BA /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,6 +444,7 @@
 		E1945E26222E7C0600A1436F /* Cosmostation */ = {
 			isa = PBXGroup;
 			children = (
+				04D279DE2A66D24600AF046A /* Legacy */,
 				1809C35029D16C80008884C1 /* injectScript.js */,
 				28F8EFA3286EC19700162FC1 /* Fonts */,
 				04E25D29276F23C5009B39BA /* Icons */,
@@ -470,6 +477,7 @@
 				E1945E4F222E842B00A1436F /* BaseViewController.swift */,
 				E1945E51223124F000A1436F /* BaseData.swift */,
 				E1945E532231256800A1436F /* BaseConstant.swift */,
+				04D279DB2A66863C00AF046A /* BaseAccount.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -496,10 +504,6 @@
 		E1A82DCF224220810097CAEE /* Dao */ = {
 			isa = PBXGroup;
 			children = (
-				048DBCE1280EC5E90007275E /* MWords.swift */,
-				E1A82DD0224220910097CAEE /* Account.swift */,
-				E1A82DD2224222E00097CAEE /* Password.swift */,
-				E1A82DD4224223250097CAEE /* Balance.swift */,
 				E1F7F633234311F8000E597F /* BnbToken.swift */,
 				284291A0264AA77C00130651 /* BnbTicker.swift */,
 				283D2EA324F52FE700247424 /* OkToken.swift */,
@@ -823,7 +827,6 @@
 				18FFB272281AF533004E65BB /* CKey.swift in Sources */,
 				047847C629629AD100FD6A7E /* Cw20IcnsByNameRes.swift in Sources */,
 				18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */,
-				18FFB2F2281AF533004E65BB /* Password.swift in Sources */,
 				18FFB307281AF533004E65BB /* BinanceProto.swift in Sources */,
 				18FFB317281AF533004E65BB /* OkToken.swift in Sources */,
 				18FFB31A281AF533004E65BB /* BinanceHexEncoding.swift in Sources */,
@@ -848,6 +851,7 @@
 				18FFB43C281AF533004E65BB /* BinanceMessage.swift in Sources */,
 				E162430628C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
 				18FFB47D281AF533004E65BB /* BnbTicker.swift in Sources */,
+				04D279DD2A66863C00AF046A /* BaseAccount.swift in Sources */,
 				18FFB4BD281AF533004E65BB /* Cw20BalanceReq.swift in Sources */,
 				18F4129A286062FA0007E3F2 /* MWords.swift in Sources */,
 				18FFB4F8281AF533004E65BB /* Param.swift in Sources */,
@@ -878,7 +882,6 @@
 				047847CC2962C94800FD6A7E /* Cw20IcnsByAddressRes.swift in Sources */,
 				18FFB623281AF533004E65BB /* BinanceHexlify.swift in Sources */,
 				049B692029D1736B0027B82D /* MintscanV1Proposal.swift in Sources */,
-				18FFB656281AF533004E65BB /* Balance.swift in Sources */,
 				18FFB664281AF533004E65BB /* StarnameAssets.swift in Sources */,
 				18FFB66B281AF533004E65BB /* Account.swift in Sources */,
 			);
@@ -891,7 +894,6 @@
 				285ADF0D272EE35F0023651F /* CKey.swift in Sources */,
 				047847C529629AD100FD6A7E /* Cw20IcnsByNameRes.swift in Sources */,
 				E1945E52223124F000A1436F /* BaseData.swift in Sources */,
-				E1A82DD3224222E00097CAEE /* Password.swift in Sources */,
 				046E903D268C413A002CFFE1 /* BinanceProto.swift in Sources */,
 				04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */,
 				283D2EA424F52FE700247424 /* OkToken.swift in Sources */,
@@ -916,6 +918,7 @@
 				04172B7C29F6826200D6279C /* Cw20VaultDepositRes.swift in Sources */,
 				04E2A32527A57D270045ED21 /* Cw20BalanceReq.swift in Sources */,
 				28E3E3802671BE8D00BA89C2 /* Param.swift in Sources */,
+				04D279DC2A66863C00AF046A /* BaseAccount.swift in Sources */,
 				181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */,
 				E17748E62282D782003D8CD1 /* BTCProtocolSerialization.m in Sources */,
 				047966502757409700315D55 /* MintscanProposalDetail.swift in Sources */,
@@ -946,7 +949,6 @@
 				049B691F29D1736B0027B82D /* MintscanV1Proposal.swift in Sources */,
 				04172B7A29F6819300D6279C /* Cw20VaultDepositReq.swift in Sources */,
 				047DCEE228855F4800253CAA /* MintscanMyVote.swift in Sources */,
-				E1A82DD5224223250097CAEE /* Balance.swift in Sources */,
 				28D765A2271585FA00730F47 /* StarnameAssets.swift in Sources */,
 				E1A82DD1224220910097CAEE /* Account.swift in Sources */,
 			);
