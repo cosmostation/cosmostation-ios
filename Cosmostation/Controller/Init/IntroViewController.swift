@@ -10,8 +10,6 @@ import UIKit
 import Alamofire
 import Firebase
 import SwiftKeychainWrapper
-import KeychainAccess
-import HDWalletKit
 
 class IntroViewController: BaseViewController {
     
@@ -29,6 +27,7 @@ class IntroViewController: BaseViewController {
     
     
     func onUpdateMigration() {
+        showWait()
         Task {
             let migrationResult = await migrationV2()
             print("onUpdateMigration ", migrationResult)
@@ -39,12 +38,9 @@ class IntroViewController: BaseViewController {
 extension IntroViewController {
     
     func migrationV2() async -> Bool {
-        let keychain = Keychain(service: "io.cosmostation")
-            .synchronizable(false)
-            .accessibility(.afterFirstUnlockThisDeviceOnly)
+        let keychain = BaseData.instance.getKeyChain()
         
         let wordsList = BaseData.instance.legacySelectAllMnemonics()
-        print("wordsList ", wordsList.count)
         wordsList.forEach { word in
             if let words = KeychainWrapper.standard.string(forKey: word.uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
                 let seed = KeyFac.getSeedFromWords(words)
@@ -58,7 +54,6 @@ extension IntroViewController {
         
         var pkeyList = Array<String>()
         let accounts = BaseData.instance.legacySelectAccountsByPrivateKey()
-        print("accounts ", accounts.count)
         accounts.forEach { account in
             if let pKey = KeychainWrapper.standard.string(forKey: account.getPrivateKeySha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
                 if (!pkeyList.contains(pKey)) {
@@ -68,6 +63,11 @@ extension IntroViewController {
                     try? keychain.set(pKey, key: recoverAccount.uuid.sha1())
                 }
             }
+        }
+        
+        if (KeychainWrapper.standard.hasValue(forKey: "password")) {
+            let password = KeychainWrapper.standard.string(forKey: "password")!
+            try? keychain.set(password, key: "password")
         }
         return true
     }

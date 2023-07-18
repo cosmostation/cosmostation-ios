@@ -67,53 +67,23 @@ let DB_ACCOUNT_UUID                 = Expression<String>("uuid")
 let DB_ACCOUNT_NICKNAME             = Expression<String>("nickName")
 let DB_ACCOUNT_FAVO                 = Expression<Bool>("isFavo")
 let DB_ACCOUNT_ADDRESS              = Expression<String>("address")
-
 let DB_ACCOUNT_BASECHAIN            = Expression<String>("baseChain")
 let DB_ACCOUNT_HAS_PRIVATE          = Expression<Bool>("hasPrivateKey")
 let DB_ACCOUNT_RESOURCE             = Expression<String>("resource")
-//let DB_ACCOUNT_SEPC               = Expression<String>("spec")
 let DB_ACCOUNT_FROM_MNEMONIC        = Expression<Bool>("fromMnemonic")
 let DB_ACCOUNT_PATH                 = Expression<String>("path")
-
 let DB_ACCOUNT_IS_VALIDATOR         = Expression<Bool>("isValidator")
 let DB_ACCOUNT_SEQUENCE_NUMBER      = Expression<Int64>("sequenceNumber")
 let DB_ACCOUNT_ACCOUNT_NUMBER       = Expression<Int64>("accountNumber")
 let DB_ACCOUNT_FETCH_TIME           = Expression<Int64>("fetchTime")
 let DB_ACCOUNT_M_SIZE               = Expression<Int64>("msize")
-
 let DB_ACCOUNT_IMPORT_TIME          = Expression<Int64>("importTime")
 let DB_ACCOUNT_LAST_TOTAL           = Expression<String>("lastTotal")
 let DB_ACCOUNT_SORT_ORDER           = Expression<Int64>("sortOrder")
 let DB_ACCOUNT_PUSHALARM            = Expression<Bool>("pushAlarm")
 let DB_ACCOUNT_NEW_BIP              = Expression<Bool>("newBip")            //using alternative ket gen path or type(OKex)
 let DB_ACCOUNT_CUSTOM_PATH          = Expression<Int64>("customPath")
-
 let DB_ACCOUNT_MNEMONIC_ID          = Expression<Int64>("mnemonic_id")
-
-////DB for Password
-//let DB_PASSWORD = Table("passwd")
-//let DB_PASSWORD_ID                  = Expression<Int64>("id")
-//let DB_PASSWORD_RESOURCE            = Expression<String>("resource")
-
-
-//DB for Balance(Available)
-let DB_BALANCE = Table("balan")
-let DB_BALANCE_ID                   = Expression<Int64>("id")
-let DB_BALANCE_ACCOUNT_ID           = Expression<Int64>("accountId")
-let DB_BALANCE_DENOM                = Expression<String>("denom")
-let DB_BALANCE_AMOUNT               = Expression<String>("amount")
-let DB_BALANCE_FETCH_TIME           = Expression<Int64>("fetchTime")
-//Support BNB
-let DB_BALANCE_FROZEN               = Expression<String?>("frozen")
-let DB_BALANCE_LOCKED               = Expression<String?>("locked")
-
-
-//DB for Bonding
-let DB_BONDING = Table("bondi")
-
-
-//DB for UnBonding
-let DB_UNBONDING = Table("unbond")
 
 
 //DB for Mnemonic
