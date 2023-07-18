@@ -289,6 +289,7 @@
 "msg_okc_deprecated_msg" = "You selected deprecated path wallet.\nFor your convenience, highly recommend using current official address type.\n\n(You can add a wallet with default Address type in [Setting] > [Manage Mnemonic / Add Wallet])";
 "msg_no_supported_chain" = "This network is no longer operational.\n\nNote that Cosmostation Wallet is showing archived data only.";
 "msg_search_chain" = "Search by Chain or Token";
+"msg_not_support" = "\nThe address you are currently using will no longer be available.\n\nIf you wish to continue using your current wallet, we kindly recommend reviewing the wallet platforms recommended by the foundation.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -805,6 +806,7 @@
 "title_neutron_vote_single" = "Dao Vote (Single)";
 "title_neutron_vote_multi" = "Dao Vote (Multi)";
 "title_neutron_vote_overrule" = "Dao Vote (Overrule)";
+"title_not_support" = "Partial Service Termination Notice";
 
 
 "proposal_type_basic" = "Basic";
