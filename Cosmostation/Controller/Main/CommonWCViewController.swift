@@ -1629,7 +1629,7 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 
                 if (dappChainConfig != nil) {
                     privateKey = getBaseAccountKey(dappChainType: dappChainType!, account: account!)
-                    if (dappChainConfig!.etherAddressSupport || dappChainType == .XPLA_MAIN) {
+                    if (dappChainConfig!.etherAddressSupport || dappChainType == .INJECTIVE_MAIN || dappChainType == .XPLA_MAIN) {
                         data["address"].stringValue = WKey.getEthermintBech32Address(privateKey, dappChainConfig!.addressPrefix)
                     } else {
                         data["address"].stringValue = WKey.getTendermintBech32Address(privateKey, dappChainConfig!.addressPrefix)
