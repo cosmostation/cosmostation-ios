@@ -895,18 +895,17 @@ class CommonWCViewController: BaseViewController {
     
     func approveCosmosRequest() {
         let json = try? JSON(data: wcCosmosRequest!)
+        let chainId = json!["chainId"].rawString()
+        let dappChainType = WUtils.getChainTypeByChainId(chainId)
         let sortedJsonData = try? json!.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
-        let rawOrderdDocSha = sortedJsonData!.sha256()
         
         getKeyAsync(chainName: self.wcRequestChainName! ) { tuple in
-            if let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey) {
-                let pubkey: JSON = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
-                let signature: JSON = ["signature" : signature.base64EncodedString(), "pub_key" : pubkey]
-                let response: JSON = ["signed" : json!.rawValue, "signature":signature.rawValue]
-                self.moveToBackgroundIfNeedAndAction {
-                    self.interactor?.approveRequest(id: self.wcId!, result: [response]).cauterize()
-                    self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
-                }
+            let sig = self.getSignatureResponse(dappChainType!, tuple.privateKey, sortedJsonData!)
+            let signature: JSON = ["signature" : sig.signature, "pub_key" : sig.pubKey]
+            let response: JSON = ["signed" : json!.rawValue, "signature":signature.rawValue]
+            self.moveToBackgroundIfNeedAndAction {
+                self.interactor?.approveRequest(id: self.wcId!, result: [response]).cauterize()
+                self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
             }
         }
     }
@@ -914,6 +913,7 @@ class CommonWCViewController: BaseViewController {
     func approveCosmosDirectRequest() {
         if let json = try? JSON(data: wcCosmosRequest!),
            let chainId = json["chainId"].rawString(),
+           let dappChainType = WUtils.getChainTypeByChainId(chainId),
            let bodyString = json["bodyBytes"].rawString(),
            let bodyBase64Decoded = Data(base64Encoded: bodyString),
            let bodyBytes = try? Cosmos_Tx_V1beta1_TxBody.init(serializedData: bodyBase64Decoded),
@@ -928,14 +928,12 @@ class CommonWCViewController: BaseViewController {
             }
             
             getKeyAsync(chainName: WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId)) ) { tuple in
-                if let signature = try? ECDSA.compactsign(try! signDoc.serializedData().sha256(), privateKey: tuple.privateKey) {
-                    let pubkey: JSON = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
-                    let signature: JSON = ["signature" : signature.base64EncodedString(), "pub_key" : pubkey]
-                    let response: JSON = ["signed" : json.rawValue, "signature":signature.rawValue]
-                    self.moveToBackgroundIfNeedAndAction {
-                        self.interactor?.approveRequest(id: self.wcId!, result: response).cauterize()
-                        self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
-                    }
+                let sig = self.getSignatureResponse(dappChainType, tuple.privateKey, try! signDoc.serializedData())
+                let signature: JSON = ["signature" : sig.signature, "pub_key" : sig.pubKey]
+                let response: JSON = ["signed" : json.rawValue, "signature":signature.rawValue]
+                self.moveToBackgroundIfNeedAndAction {
+                    self.interactor?.approveRequest(id: self.wcId!, result: [response]).cauterize()
+                    self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
                 }
             }
         }
@@ -946,7 +944,7 @@ class CommonWCViewController: BaseViewController {
            let json = try? JSON(data: request.params.encoded) {
             var signDoc = json["signDoc"]
             let chainId = signDoc["chain_id"].rawString()
-            let chainType = WUtils.getChainTypeByChainId(chainId)
+            let dappChainType = WUtils.getChainTypeByChainId(chainId)
             let chainConfig = ChainFactory.getChainConfig(chainType)
             let denom = chainConfig?.stakeDenom
             if (signDoc["fee"].exists() && signDoc["fee"]["amount"].exists()) {
@@ -961,19 +959,10 @@ class CommonWCViewController: BaseViewController {
                 }
             }
             let sortedJsonData = try? signDoc.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
-            let rawOrderdDocSha = sortedJsonData!.sha256()
             getKeyAsync(chainName: WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId)) ) { tuple in
-                var sig: Data?
-                var pubkey: JSON?
-                if (chainType == .INJECTIVE_MAIN) {
-                    sig = try? ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: sortedJsonData!), privateKey: tuple.privateKey)
-                    pubkey = ["type" : INJECTIVE_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
-                } else {
-                    sig = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey)
-                    pubkey = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
-                }
-                let signature: JSON = ["signature" : sig?.base64EncodedString() as Any, "pub_key" : pubkey!]
-                let response: JSON = ["signed" : signDoc.rawValue, "signature":signature.dictionaryValue]
+                let sig = self.getSignatureResponse(dappChainType!, tuple.privateKey, sortedJsonData!)
+                let signature: JSON = ["signature" : sig.signature, "pub_key" : sig.pubKey]
+                let response: JSON = ["signed" : signDoc.rawValue, "signature" : signature.dictionaryValue]
                 self.moveToBackgroundIfNeedAndAction {
                     self.respondOnSign(request: request, response: AnyCodable(response))
                     self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
@@ -999,11 +988,9 @@ class CommonWCViewController: BaseViewController {
             }
             
             let privateKey = getBaseAccountKey(dappChainType: dappChainType, account: account!)
-            let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
-            if let signature = try? ECDSA.compactsign(try! signDoc.serializedData().sha256(), privateKey: privateKey) {
-                data["pub_key"] = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : publicKey.base64EncodedString()]
-                data["signature"].stringValue = signature.base64EncodedString()
-            }
+            let sig = self.getSignatureResponse(dappChainType, privateKey, try! signDoc.serializedData())
+            data["pub_key"] = sig.pubKey!
+            data["signature"].stringValue = sig.signature!
         }
         
         data["signed_doc"] = self.webToAppMessage!["params"]["doc"]
@@ -1020,14 +1007,12 @@ class CommonWCViewController: BaseViewController {
                 dappChainType = WUtils.getChainTypeByChainName(self.webToAppMessage?["params"]["chainName"].rawString())
             }
             let privateKey = getBaseAccountKey(dappChainType: dappChainType!, account: account!)
-            let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
             let sortedJsonData = try! self.webToAppMessage!["params"]["doc"].rawData(options: [.sortedKeys, .withoutEscapingSlashes])
-            let rawOrderdDocSha = sortedJsonData.sha256()
-            if let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: privateKey) {
-                data["pub_key"] = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : publicKey.base64EncodedString()]
-                data["signature"].stringValue = signature.base64EncodedString()
-                data["signed_doc"] = json
-            }
+            
+            let sig = self.getSignatureResponse(dappChainType!, privateKey, sortedJsonData)
+            data["pub_key"] = sig.pubKey!
+            data["signature"].stringValue = sig.signature!
+            data["signed_doc"] = json
         }
         
         let retVal = ["response": ["result": data], "message": webToAppMessage, "isCosmostation": true, "messageId": self.webToAppMessageId!]
@@ -1045,6 +1030,7 @@ class CommonWCViewController: BaseViewController {
             let signDoc = json["signDoc"]
             if let bodyString = signDoc["bodyBytes"].rawString(),
                let chainId = signDoc["chainId"].rawString(),
+               let dappChainType = WUtils.getChainTypeByChainId(chainId),
                let authInfoString = signDoc["authInfoBytes"].rawString(),
                let bodyBytes = try? Cosmos_Tx_V1beta1_TxBody.init(serializedData: Data.fromHex2(bodyString)!),
                let authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: Data.fromHex2(authInfoString)!) {
@@ -1056,20 +1042,36 @@ class CommonWCViewController: BaseViewController {
                 }
                 
                 getKeyAsync(chainName: WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId)) ) { tuple in
-                    if let signature = try? ECDSA.compactsign(try! signDoc.serializedData().sha256(), privateKey: tuple.privateKey) {
-                        let pubkey: JSON = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
-                        let signature: JSON = ["signature" : signature.base64EncodedString(), "pub_key" : pubkey]
-                        self.moveToBackgroundIfNeedAndAction {
-                            self.respondOnSign(request: request, response: AnyCodable(signature.dictionaryValue))
-                            self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
-                        }
+                    let sig = self.getSignatureResponse(dappChainType, tuple.privateKey, try! signDoc.serializedData())
+                    let signature: JSON = ["signature" : sig.signature, "pub_key" : sig.pubKey]
+                    self.moveToBackgroundIfNeedAndAction {
+                        self.respondOnSign(request: request, response: AnyCodable(signature.dictionaryValue))
+                        self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
                     }
                 }
             }
         }
     }
     
-    
+    func getSignatureResponse(_ dappChainType: ChainType, _ privateKey: Data, _ signData: Data) -> (signature: String?, pubKey: JSON?) {
+        var result: (String?, JSON?)
+        var sig: Data?
+        var pubkey: JSON?
+        let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
+        if (dappChainType == .EVMOS_MAIN || dappChainType == .CANTO_MAIN || dappChainType == .XPLA_MAIN) {
+            sig = try? ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: signData), privateKey: privateKey)
+            pubkey = ["type" : ETHERMINT_KEY_TYPE_PUBLIC, "value" : publicKey.base64EncodedString()]
+        } else if (dappChainType == .INJECTIVE_MAIN) {
+            sig = try? ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: signData), privateKey: privateKey)
+            pubkey = ["type" : INJECTIVE_KEY_TYPE_PUBLIC, "value" : publicKey.base64EncodedString()]
+        } else {
+            sig = try? ECDSA.compactsign(signData.sha256(), privateKey: privateKey)
+            pubkey = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : publicKey.base64EncodedString()]
+        }
+        result = (sig?.base64EncodedString(), pubkey)
+        return result
+    }
+
     func onShowPopupAccountSelect(_ chainType: ChainType) {
         let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
         popupVC.type = SELECT_POPUP_COSMOSTATION_GET_ACCOUNT
@@ -1627,7 +1629,11 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 
                 if (dappChainConfig != nil) {
                     privateKey = getBaseAccountKey(dappChainType: dappChainType!, account: account!)
-                    data["address"].stringValue = WKey.getDpAddress(dappChainConfig!, privateKey, 0)
+                    if (dappChainConfig!.etherAddressSupport || dappChainType == .XPLA_MAIN) {
+                        data["address"].stringValue = WKey.getEthermintBech32Address(privateKey, dappChainConfig!.addressPrefix)
+                    } else {
+                        data["address"].stringValue = WKey.getTendermintBech32Address(privateKey, dappChainConfig!.addressPrefix)
+                    }
                 } else {
                     privateKey = getPrivateKey(account: account!)
                     if let chain = BaseData.instance.mSupportConfig?.customChains.filter({ $0.chainId == chainId }).first {
@@ -1666,6 +1672,59 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 self.webToAppMessage = messageJSON
                 self.webToAppMessageId = bodyJSON["messageId"]
                 self.onShowPopupForRequest(WcRequestType.INJECT_SIGN_DIRECT, try! doc.rawData())
+            } else if (method == "cos_sendTransaction") {
+                let params = messageJSON["params"]
+                let chainId = params["chainName"].stringValue
+                let txBytes = params["txBytes"].stringValue
+                let mode = params["mode"].intValue
+                let chainType = WUtils.getChainTypeByChainId(chainId)
+                let chainConfig = ChainFactory.getChainConfig(chainType)
+                self.webToAppMessage = messageJSON
+                self.webToAppMessageId = bodyJSON["messageId"]
+                
+                guard let txData = Data(base64Encoded: txBytes) else {
+                    let retVal = ["response": ["error": "Not implemented"], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
+                    self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+                    return
+                }
+                
+                let request = Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+                    $0.mode = Cosmos_Tx_V1beta1_BroadcastMode(rawValue: mode) ?? Cosmos_Tx_V1beta1_BroadcastMode.unspecified
+                    $0.txBytes = txData
+                }
+                
+                let channel = BaseNetWork.getConnection(chainConfig)!
+                DispatchQueue.global().async {
+                    if let response = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel)
+                        .broadcastTx(request, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                        var txResponse = JSON()
+                        var data = JSON()
+                        data["code"].uInt32Value = response.txResponse.code
+                        data["codespace"].stringValue = response.txResponse.codespace
+                        data["data"].stringValue = response.txResponse.data
+                        data["event"].object = response.txResponse.events
+                        data["gas_wanted"].stringValue = String(response.txResponse.gasWanted)
+                        data["gas_used"].stringValue = String(response.txResponse.gasUsed)
+                        data["height"].stringValue = String(response.txResponse.height)
+                        data["txhash"].stringValue = response.txResponse.txhash
+                        data["info"].stringValue = response.txResponse.info
+                        data["logs"].object = response.txResponse.logs
+                        data["tx"].object = response.txResponse.tx
+                        data["timestamp"].stringValue = response.txResponse.timestamp
+                        data["raw_log"].stringValue = response.txResponse.rawLog
+                        txResponse["tx_response"] = data
+                        let retVal = ["response": ["result": txResponse], "message": self.webToAppMessage, "isCosmostation": true, "messageId": self.webToAppMessageId!]
+                        DispatchQueue.main.async {
+                            self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            let retVal = ["response": ["error": "Unknown"], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
+                            self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+                        }
+                    }
+                    try? channel.close().wait()
+                }
             } else {
                 let retVal = ["response": ["error": "Not implemented"], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
