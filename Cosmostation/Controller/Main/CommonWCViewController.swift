@@ -1629,7 +1629,11 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 
                 if (dappChainConfig != nil) {
                     privateKey = getBaseAccountKey(dappChainType: dappChainType!, account: account!)
-                    data["address"].stringValue = WKey.getDpAddress(dappChainConfig!, privateKey, 0)
+                    if (dappChainConfig!.etherAddressSupport || dappChainType == .XPLA_MAIN) {
+                        data["address"].stringValue = WKey.getEthermintBech32Address(privateKey, dappChainConfig!.addressPrefix)
+                    } else {
+                        data["address"].stringValue = WKey.getTendermintBech32Address(privateKey, dappChainConfig!.addressPrefix)
+                    }
                 } else {
                     privateKey = getPrivateKey(account: account!)
                     if let chain = BaseData.instance.mSupportConfig?.customChains.filter({ $0.chainId == chainId }).first {
@@ -1668,6 +1672,59 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 self.webToAppMessage = messageJSON
                 self.webToAppMessageId = bodyJSON["messageId"]
                 self.onShowPopupForRequest(WcRequestType.INJECT_SIGN_DIRECT, try! doc.rawData())
+            } else if (method == "cos_sendTransaction") {
+                let params = messageJSON["params"]
+                let chainId = params["chainName"].stringValue
+                let txBytes = params["txBytes"].stringValue
+                let mode = params["mode"].intValue
+                let chainType = WUtils.getChainTypeByChainId(chainId)
+                let chainConfig = ChainFactory.getChainConfig(chainType)
+                self.webToAppMessage = messageJSON
+                self.webToAppMessageId = bodyJSON["messageId"]
+                
+                guard let txData = Data(base64Encoded: txBytes) else {
+                    let retVal = ["response": ["error": "Not implemented"], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
+                    self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+                    return
+                }
+                
+                let request = Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+                    $0.mode = Cosmos_Tx_V1beta1_BroadcastMode(rawValue: mode) ?? Cosmos_Tx_V1beta1_BroadcastMode.unspecified
+                    $0.txBytes = txData
+                }
+                
+                let channel = BaseNetWork.getConnection(chainConfig)!
+                DispatchQueue.global().async {
+                    if let response = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel)
+                        .broadcastTx(request, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                        var txResponse = JSON()
+                        var data = JSON()
+                        data["code"].uInt32Value = response.txResponse.code
+                        data["codespace"].stringValue = response.txResponse.codespace
+                        data["data"].stringValue = response.txResponse.data
+                        data["event"].object = response.txResponse.events
+                        data["gas_wanted"].stringValue = String(response.txResponse.gasWanted)
+                        data["gas_used"].stringValue = String(response.txResponse.gasUsed)
+                        data["height"].stringValue = String(response.txResponse.height)
+                        data["txhash"].stringValue = response.txResponse.txhash
+                        data["info"].stringValue = response.txResponse.info
+                        data["logs"].object = response.txResponse.logs
+                        data["tx"].object = response.txResponse.tx
+                        data["timestamp"].stringValue = response.txResponse.timestamp
+                        data["raw_log"].stringValue = response.txResponse.rawLog
+                        txResponse["tx_response"] = data
+                        let retVal = ["response": ["result": txResponse], "message": self.webToAppMessage, "isCosmostation": true, "messageId": self.webToAppMessageId!]
+                        DispatchQueue.main.async {
+                            self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            let retVal = ["response": ["error": "Unknown"], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
+                            self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+                        }
+                    }
+                    try? channel.close().wait()
+                }
             } else {
                 let retVal = ["response": ["error": "Not implemented"], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
                 self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
