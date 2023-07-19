@@ -6,7 +6,7 @@ on:
     
 jobs:
   build-ios:
-    runs-on: macos-latest
+    runs-on: macos-11
     env:
       XC_WORKSPACE: ${{ 'Cosmostation.xcworkspace' }}
       XC_SCHEME: ${{ 'CosmostationDev' }}
