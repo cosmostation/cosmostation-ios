@@ -336,14 +336,6 @@ final class BaseData: NSObject{
         return UserDefaults.standard.string(forKey: KEY_PRE_EVENT_HIDE) ?? ICON_DEFAULT
     }
     
-    func setDBVersion(_ version: Int) {
-        UserDefaults.standard.set(version, forKey: KEY_DB_VERSION)
-    }
-    
-    func getDBVersion() -> Int {
-        return UserDefaults.standard.integer(forKey: KEY_DB_VERSION)
-    }
-    
     func getUserHiddenChains() -> Array<String>? {
         return UserDefaults.standard.stringArray(forKey: KEY_USER_HIDEN_CHAINS) ?? []
     }
@@ -398,6 +390,12 @@ extension BaseData {
             result.append(BaseAccount(row[BASEACCOUNT_ID], row[BASEACCOUNT_UUID], row[BASEACCOUNT_NAME], row[BASEACCOUNT_TYPE]))
         }
         return result
+    }
+    
+    
+    
+    public func selectAccount(_ id: Int64) -> BaseAccount? {
+        return selectAccounts().filter { $0.id == id }.first
     }
     
     @discardableResult
@@ -455,5 +453,28 @@ extension BaseData {
         return Keychain(service: "io.cosmostation")
             .synchronizable(false)
             .accessibility(.afterFirstUnlockThisDeviceOnly)
+    }
+}
+
+
+extension BaseData {
+    func setDBVersion(_ version: Int) {
+        UserDefaults.standard.set(version, forKey: KEY_DB_VERSION)
+    }
+    
+    func getDBVersion() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_DB_VERSION)
+    }
+    
+    func setLastAccount(_ account: BaseAccount) {
+        UserDefaults.standard.set(account.id, forKey: KEY_LAST_ACCOUNT)
+    }
+    
+    func getLastAccount() -> BaseAccount? {
+        let id = UserDefaults.standard.integer(forKey: KEY_LAST_ACCOUNT)
+        if let account = selectAccount(Int64(id)) {
+            return account
+        }
+        return selectAccounts().first
     }
 }

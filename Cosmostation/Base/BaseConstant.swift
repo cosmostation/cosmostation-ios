@@ -11,7 +11,7 @@ import SQLite
 
 let SUPPORT_BEP3_SWAP                   = true;
 
-let KEY_RECENT_ACCOUNT                  = "KEY_RECENT_ACCOUNT"
+//let KEY_RECENT_ACCOUNT                  = "KEY_RECENT_ACCOUNT"
 let KEY_RECENT_CHAIN                    = "KEY_RECENT_CHAIN"
 let KEY_RECENT_CHAIN_S                  = "KEY_RECENT_CHAIN_S"
 let KEY_ALL_VAL_SORT                    = "KEY_ALL_VAL_SORT"
@@ -38,6 +38,7 @@ let KEY_CUSTOM_ICON                     = "KEY_CUSTOM_ICON"
 let KEY_DB_VERSION                      = "KEY_DB_VERSION"
 let KEY_WC_WHITELIST                    = "KEY_WC_WHITELIST"
 let KEY_LANGUAGE                        = "KEY_LANGUAGE"
+let KEY_LAST_ACCOUNT                    = "KEY_LAST_ACCOUNT"
 
 let MINTSCAN_DEV_API_URL                = "https://dev.api.mintscan.io/";
 let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
@@ -58,7 +59,7 @@ let WALLET_API_SYNC_PUSH_URL            = CSS_URL + "v1/push/token/address";
 let WALLET_API_PUSH_STATUS_URL          = CSS_URL + "v1/push/alarm/status";
 
 
-let DB_VERSION                      = 2
+let DB_VERSION                          = 3
 
 //DB for Account
 let DB_ACCOUNT = Table("accnt")

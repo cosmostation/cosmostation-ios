@@ -35,7 +35,6 @@ class BaseViewController: UIViewController {
         waitAlert!.view.addConstraint(NSLayoutConstraint(item: lottieView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 120.0))
         clearBackgroundColor(of: waitAlert!.view)
         present(waitAlert!, animated: true, completion: nil)
-        
     }
     
     public func hideWait() {
@@ -52,7 +51,7 @@ class BaseViewController: UIViewController {
         }
         view.backgroundColor = .clear
         view.subviews.forEach { (subview) in
-            self.clearBackgroundColor(of: subview)
+            clearBackgroundColor(of: subview)
         }
     }
 }

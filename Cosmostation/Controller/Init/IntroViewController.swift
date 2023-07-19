@@ -25,18 +25,33 @@ class IntroViewController: BaseViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        showWait()
+        if (BaseData.instance.getDBVersion() < DB_VERSION) {
+            onUpdateMigration()
+        }
+        onAppVersionCheck()
+        onStartInit()
+    }
     
     func onUpdateMigration() {
-        showWait()
         Task {
-            let migrationResult = await migrationV2()
-            print("onUpdateMigration ", migrationResult)
+            let result = await migrationV2()
+            print("onUpdateMigration ", result)
+        }
+    }
+    
+    func onAppVersionCheck() {
+    }
+    
+    func onStartInit() {
+        if let account = BaseData.instance.getLastAccount() {
+            print("account ", account.name)
         }
     }
 }
 
 extension IntroViewController {
-    
     func migrationV2() async -> Bool {
         let keychain = BaseData.instance.getKeyChain()
         
@@ -69,6 +84,8 @@ extension IntroViewController {
             let password = KeychainWrapper.standard.string(forKey: "password")!
             try? keychain.set(password, key: "password")
         }
+        
+        BaseData.instance.setDBVersion(DB_VERSION)
         return true
     }
 }

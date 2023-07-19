@@ -70,6 +70,16 @@
 		04D279E32A66E18800AF046A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279E22A66E18800AF046A /* Lottie */; };
 		04D279E62A66E32A00AF046A /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D279E52A66E32A00AF046A /* loading.json */; };
 		04D279E72A66E32A00AF046A /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D279E52A66E32A00AF046A /* loading.json */; };
+		04D279EA2A67C96500AF046A /* ChainCosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279E92A67C96500AF046A /* ChainCosmos.swift */; };
+		04D279EB2A67C96500AF046A /* ChainCosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279E92A67C96500AF046A /* ChainCosmos.swift */; };
+		04D279ED2A67C96F00AF046A /* ChainKava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279EC2A67C96F00AF046A /* ChainKava.swift */; };
+		04D279EE2A67C96F00AF046A /* ChainKava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279EC2A67C96F00AF046A /* ChainKava.swift */; };
+		04D279F02A67C98E00AF046A /* ChainEthereum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279EF2A67C98E00AF046A /* ChainEthereum.swift */; };
+		04D279F12A67C98E00AF046A /* ChainEthereum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279EF2A67C98E00AF046A /* ChainEthereum.swift */; };
+		04D279F32A67C9A600AF046A /* ChainSui.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279F22A67C9A600AF046A /* ChainSui.swift */; };
+		04D279F42A67C9A600AF046A /* ChainSui.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279F22A67C9A600AF046A /* ChainSui.swift */; };
+		04D279F62A67C9B700AF046A /* ChainEvmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279F52A67C9B700AF046A /* ChainEvmos.swift */; };
+		04D279F72A67C9B700AF046A /* ChainEvmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279F52A67C9B700AF046A /* ChainEvmos.swift */; };
 		04D547EA2A6128CA001F1A4B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 04D547E92A6128CA001F1A4B /* SwiftyJSON */; };
 		04D547ED2A612914001F1A4B /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 04D547EC2A612914001F1A4B /* FirebaseMessaging */; };
 		04D547F02A612935001F1A4B /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 04D547EF2A612935001F1A4B /* AlamofireImage */; };
@@ -233,6 +243,11 @@
 		04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04D279DB2A66863C00AF046A /* BaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAccount.swift; sourceTree = "<group>"; };
 		04D279E52A66E32A00AF046A /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		04D279E92A67C96500AF046A /* ChainCosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCosmos.swift; sourceTree = "<group>"; };
+		04D279EC2A67C96F00AF046A /* ChainKava.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava.swift; sourceTree = "<group>"; };
+		04D279EF2A67C98E00AF046A /* ChainEthereum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainEthereum.swift; sourceTree = "<group>"; };
+		04D279F22A67C9A600AF046A /* ChainSui.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSui.swift; sourceTree = "<group>"; };
+		04D279F52A67C9B700AF046A /* ChainEvmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainEvmos.swift; sourceTree = "<group>"; };
 		04E165B928B61BE1000F12C0 /* MintscanAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanAsset.swift; sourceTree = "<group>"; };
 		04E165BC28B62133000F12C0 /* MintscanToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanToken.swift; sourceTree = "<group>"; };
 		04E25D2A276F23D9009B39BA /* xmas@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@3x.png"; sourceTree = "<group>"; };
@@ -365,6 +380,18 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		04D279E82A67C95500AF046A /* Chains */ = {
+			isa = PBXGroup;
+			children = (
+				04D279E92A67C96500AF046A /* ChainCosmos.swift */,
+				04D279EC2A67C96F00AF046A /* ChainKava.swift */,
+				04D279EF2A67C98E00AF046A /* ChainEthereum.swift */,
+				04D279F22A67C9A600AF046A /* ChainSui.swift */,
+				04D279F52A67C9B700AF046A /* ChainEvmos.swift */,
+			);
+			path = Chains;
+			sourceTree = "<group>";
+		};
 		04E25D29276F23C5009B39BA /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -463,6 +490,7 @@
 		E1945E26222E7C0600A1436F /* Cosmostation */ = {
 			isa = PBXGroup;
 			children = (
+				04D279E82A67C95500AF046A /* Chains */,
 				04D279E42A66E30B00AF046A /* Resource */,
 				04D279DE2A66D24600AF046A /* Legacy */,
 				28F8EFA3286EC19700162FC1 /* Fonts */,
@@ -864,6 +892,7 @@
 				1876EE8D2A4935EA00C53352 /* Cw20VaultDepositRes.swift in Sources */,
 				18FFB3DD281AF533004E65BB /* BinanceModel.swift in Sources */,
 				04E165BE28B62133000F12C0 /* MintscanToken.swift in Sources */,
+				04D279EB2A67C96500AF046A /* ChainCosmos.swift in Sources */,
 				18FFB3DF281AF533004E65BB /* BaseConstant.swift in Sources */,
 				047DCEE328855F4800253CAA /* MintscanMyVote.swift in Sources */,
 				18FFB41E281AF533004E65BB /* BinanceSegwitAddrCoder.swift in Sources */,
@@ -882,17 +911,20 @@
 				18FFB51E281AF533004E65BB /* BTCProtocolSerialization.m in Sources */,
 				18FFB520281AF533004E65BB /* MintscanProposalDetail.swift in Sources */,
 				047847C02962988300FD6A7E /* Cw20IcnsByNameReq.swift in Sources */,
+				04D279F12A67C98E00AF046A /* ChainEthereum.swift in Sources */,
 				15BF8483299D472A00B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */,
 				18FFB57A281AF533004E65BB /* WKey.swift in Sources */,
 				18FFB58B281AF533004E65BB /* BinanceInt+VarInt.swift in Sources */,
 				18FFB590281AF533004E65BB /* BnbToken.swift in Sources */,
 				18FFB591281AF533004E65BB /* AppDelegate.swift in Sources */,
 				18FFB59F281AF533004E65BB /* Signer.swift in Sources */,
+				04D279EE2A67C96F00AF046A /* ChainKava.swift in Sources */,
 				E1D4EA5C2871BCDE005C1ECF /* WDP.swift in Sources */,
 				1517346B2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
 				18FFB5B6281AF533004E65BB /* BTCMnemonic.m in Sources */,
 				18744704293094CB00849EE4 /* BundleExtension.swift in Sources */,
 				18FFB5C2281AF533004E65BB /* BinanceType.swift in Sources */,
+				04D279F72A67C9B700AF046A /* ChainEvmos.swift in Sources */,
 				18FFB5C5281AF533004E65BB /* Price.swift in Sources */,
 				18FFB5C6281AF533004E65BB /* Bytes.swift in Sources */,
 				18FFB5CA281AF533004E65BB /* StationNFTData.swift in Sources */,
@@ -903,6 +935,7 @@
 				047847CC2962C94800FD6A7E /* Cw20IcnsByAddressRes.swift in Sources */,
 				18FFB623281AF533004E65BB /* BinanceHexlify.swift in Sources */,
 				049B692029D1736B0027B82D /* MintscanV1Proposal.swift in Sources */,
+				04D279F42A67C9A600AF046A /* ChainSui.swift in Sources */,
 				18FFB664281AF533004E65BB /* StarnameAssets.swift in Sources */,
 				18FFB66B281AF533004E65BB /* Account.swift in Sources */,
 			);
@@ -931,6 +964,7 @@
 				E1945E542231256800A1436F /* BaseConstant.swift in Sources */,
 				046E9043268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift in Sources */,
 				045DAD842897BC14004ED9B4 /* MintscanMyVotes.swift in Sources */,
+				04D279EA2A67C96500AF046A /* ChainCosmos.swift in Sources */,
 				043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */,
 				0444442927ABDC5D00EB093E /* Cw20TransferReq.swift in Sources */,
 				046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */,
@@ -949,17 +983,20 @@
 				151734672A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */,
 				E16D9B1D2248E6A60019B7BB /* WKey.swift in Sources */,
 				046E9041268C4863002CFFE1 /* BinanceInt+VarInt.swift in Sources */,
+				04D279F02A67C98E00AF046A /* ChainEthereum.swift in Sources */,
 				15BF8482299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */,
 				E1F7F634234311F8000E597F /* BnbToken.swift in Sources */,
 				E1945E28222E7C0600A1436F /* AppDelegate.swift in Sources */,
 				18D4C19528C704B8003F230A /* WalletConnectManager.swift in Sources */,
 				28CE973625872B7C006DEBEE /* Signer.swift in Sources */,
 				E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
+				04D279ED2A67C96F00AF046A /* ChainKava.swift in Sources */,
 				E17748E32282D6AD003D8CD1 /* BTCMnemonic.m in Sources */,
 				046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */,
 				28FC030C2652662B001C0319 /* Price.swift in Sources */,
 				E16FACB12361ADFA00372052 /* Bytes.swift in Sources */,
 				047847C82962C93F00FD6A7E /* Cw20IcnsByAddressReq.swift in Sources */,
+				04D279F62A67C9B700AF046A /* ChainEvmos.swift in Sources */,
 				046BD22027788723002333B5 /* StationNFTData.swift in Sources */,
 				E1945E3F222E7E2900A1436F /* Bech32.swift in Sources */,
 				04E2A32727A581720045ED21 /* Cw20BalanceRes.swift in Sources */,
@@ -970,6 +1007,7 @@
 				049B691F29D1736B0027B82D /* MintscanV1Proposal.swift in Sources */,
 				04172B7A29F6819300D6279C /* Cw20VaultDepositReq.swift in Sources */,
 				047DCEE228855F4800253CAA /* MintscanMyVote.swift in Sources */,
+				04D279F32A67C9A600AF046A /* ChainSui.swift in Sources */,
 				28D765A2271585FA00730F47 /* StarnameAssets.swift in Sources */,
 				E1A82DD1224220910097CAEE /* Account.swift in Sources */,
 			);
