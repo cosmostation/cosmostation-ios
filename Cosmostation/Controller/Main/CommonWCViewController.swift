@@ -945,8 +945,8 @@ class CommonWCViewController: BaseViewController {
             var signDoc = json["signDoc"]
             let chainId = signDoc["chain_id"].rawString()
             let dappChainType = WUtils.getChainTypeByChainId(chainId)
-            let chainConfig = ChainFactory.getChainConfig(chainType)
-            let denom = chainConfig?.stakeDenom
+            let dappChainConfig = ChainFactory.getChainConfig(dappChainType)
+            let denom = dappChainConfig?.stakeDenom
             if (signDoc["fee"].exists() && signDoc["fee"]["amount"].exists()) {
                 let amounts = signDoc["fee"]["amount"].arrayValue
                 let gas = signDoc["fee"]["gas"].stringValue
@@ -1157,10 +1157,15 @@ class CommonWCViewController: BaseViewController {
     typealias KeyTuple = (privateKey: Data, publicKey: Data, bech32Data: Data)
     
     func getBaseAccountKey(dappChainType: ChainType, account: Account) -> Data {
-        let chainConfig = ChainFactory.getChainConfig(dappChainType)
-        let fullPath = chainConfig?.getHdPath(0, 0)
-        let seed = WKey.getSeedFromWords(BaseData.instance.selectMnemonicById(account.account_mnemonic_id)!)
-        return KeyFac.getPrivateKeyDataFromSeed(seed!, fullPath!)
+        if (account.account_has_private && account.account_from_mnemonic) {
+            let chainConfig = ChainFactory.getChainConfig(dappChainType)
+            let fullPath = chainConfig!.getHdPath(0, 0)
+            let seed = WKey.getSeedFromWords(BaseData.instance.selectMnemonicById(account.account_mnemonic_id)!)
+            return KeyFac.getPrivateKeyDataFromSeed(seed!, fullPath)
+        } else {
+            let key = KeychainWrapper.standard.string(forKey: account.getPrivateKeySha1())
+            return KeyFac.getPrivateFromString(key!)
+        }
     }
     
     func getKey(chainName: String) -> KeyTuple {
