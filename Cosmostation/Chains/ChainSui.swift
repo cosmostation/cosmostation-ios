@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+struct ChainSui: BaseChain  {
+    var name = "Sui"
+    var id = ""
+    
+    
+    var defaultKeyType = AccountKeyType(.SUI_Ed25519, "m/44'/784'/0'/0'/X'", true)
+    
+    func supportKeyTypes() -> Array<AccountKeyType> {
+        return [defaultKeyType]
+    }
+}

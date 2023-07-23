@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+//struct ChainEvmos: BaseChain  {
+//    var name: String
+//    var id: String
+//    
+//}
+

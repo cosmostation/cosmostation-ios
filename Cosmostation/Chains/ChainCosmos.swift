@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+struct ChainCosmos: BaseChain  {
+    var name = "Cosmos"
+    var id = "cosmoshub-4"
+    
+    
+    var defaultKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X", true)
+    
+    func supportKeyTypes() -> Array<AccountKeyType> {
+        return [defaultKeyType]
+    }
+}

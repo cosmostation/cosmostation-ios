@@ -80,6 +80,12 @@
 		04D279F42A67C9A600AF046A /* ChainSui.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279F22A67C9A600AF046A /* ChainSui.swift */; };
 		04D279F62A67C9B700AF046A /* ChainEvmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279F52A67C9B700AF046A /* ChainEvmos.swift */; };
 		04D279F72A67C9B700AF046A /* ChainEvmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279F52A67C9B700AF046A /* ChainEvmos.swift */; };
+		04D279F92A69159E00AF046A /* BaseChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279F82A69159E00AF046A /* BaseChain.swift */; };
+		04D279FA2A69159E00AF046A /* BaseChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279F82A69159E00AF046A /* BaseChain.swift */; };
+		04D279FD2A69215200AF046A /* PortfolioVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279FB2A69215200AF046A /* PortfolioVC.swift */; };
+		04D279FE2A69215200AF046A /* PortfolioVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279FB2A69215200AF046A /* PortfolioVC.swift */; };
+		04D279FF2A69215200AF046A /* PortfolioVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D279FC2A69215200AF046A /* PortfolioVC.xib */; };
+		04D27A002A69215200AF046A /* PortfolioVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D279FC2A69215200AF046A /* PortfolioVC.xib */; };
 		04D547EA2A6128CA001F1A4B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 04D547E92A6128CA001F1A4B /* SwiftyJSON */; };
 		04D547ED2A612914001F1A4B /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 04D547EC2A612914001F1A4B /* FirebaseMessaging */; };
 		04D547F02A612935001F1A4B /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 04D547EF2A612935001F1A4B /* AlamofireImage */; };
@@ -248,6 +254,9 @@
 		04D279EF2A67C98E00AF046A /* ChainEthereum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainEthereum.swift; sourceTree = "<group>"; };
 		04D279F22A67C9A600AF046A /* ChainSui.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSui.swift; sourceTree = "<group>"; };
 		04D279F52A67C9B700AF046A /* ChainEvmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainEvmos.swift; sourceTree = "<group>"; };
+		04D279F82A69159E00AF046A /* BaseChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChain.swift; sourceTree = "<group>"; };
+		04D279FB2A69215200AF046A /* PortfolioVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioVC.swift; sourceTree = "<group>"; };
+		04D279FC2A69215200AF046A /* PortfolioVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioVC.xib; sourceTree = "<group>"; };
 		04E165B928B61BE1000F12C0 /* MintscanAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanAsset.swift; sourceTree = "<group>"; };
 		04E165BC28B62133000F12C0 /* MintscanToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanToken.swift; sourceTree = "<group>"; };
 		04E25D2A276F23D9009B39BA /* xmas@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@3x.png"; sourceTree = "<group>"; };
@@ -383,6 +392,7 @@
 		04D279E82A67C95500AF046A /* Chains */ = {
 			isa = PBXGroup;
 			children = (
+				04D279F82A69159E00AF046A /* BaseChain.swift */,
 				04D279E92A67C96500AF046A /* ChainCosmos.swift */,
 				04D279EC2A67C96F00AF046A /* ChainKava.swift */,
 				04D279EF2A67C98E00AF046A /* ChainEthereum.swift */,
@@ -530,6 +540,8 @@
 			isa = PBXGroup;
 			children = (
 				E16D9B1122489AC20019B7BB /* Init */,
+				04D279FB2A69215200AF046A /* PortfolioVC.swift */,
+				04D279FC2A69215200AF046A /* PortfolioVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -733,6 +745,7 @@
 				18FFB674281AF533004E65BB /* new2022@3x.png in Resources */,
 				18FFB683281AF533004E65BB /* xmas@2x.png in Resources */,
 				0443B89928589B570027A6B9 /* Color.xcassets in Resources */,
+				04D27A002A69215200AF046A /* PortfolioVC.xib in Resources */,
 				04A116F228F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
 				04D279E72A66E32A00AF046A /* loading.json in Resources */,
 				04172B9629F7AE4000D6279C /* Roboto-Medium.ttf in Resources */,
@@ -774,6 +787,7 @@
 				04877305277C809200D9E201 /* new2022.png in Resources */,
 				04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */,
 				187446FF2930940F00849EE4 /* ApiKey.plist in Resources */,
+				04D279FF2A69215200AF046A /* PortfolioVC.xib in Resources */,
 				04D279E62A66E32A00AF046A /* loading.json in Resources */,
 				0443B8A2285C7F050027A6B9 /* Chain.xcassets in Resources */,
 				04E25D31276F23D9009B39BA /* new2022@2x.png in Resources */,
@@ -888,6 +902,7 @@
 				18D4C19628C704B8003F230A /* WalletConnectManager.swift in Sources */,
 				18FFB396281AF533004E65BB /* WUtils.swift in Sources */,
 				18FFB3A7281AF533004E65BB /* IntroViewController.swift in Sources */,
+				04D279FE2A69215200AF046A /* PortfolioVC.swift in Sources */,
 				1577DAC929B9F07800C360EC /* Board.swift in Sources */,
 				1876EE8D2A4935EA00C53352 /* Cw20VaultDepositRes.swift in Sources */,
 				18FFB3DD281AF533004E65BB /* BinanceModel.swift in Sources */,
@@ -901,6 +916,7 @@
 				18FFB43C281AF533004E65BB /* BinanceMessage.swift in Sources */,
 				E162430628C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
 				18FFB47D281AF533004E65BB /* BnbTicker.swift in Sources */,
+				04D279FA2A69159E00AF046A /* BaseChain.swift in Sources */,
 				04D279DD2A66863C00AF046A /* BaseAccount.swift in Sources */,
 				18FFB4BD281AF533004E65BB /* Cw20BalanceReq.swift in Sources */,
 				18F4129A286062FA0007E3F2 /* MWords.swift in Sources */,
@@ -960,6 +976,7 @@
 				E16D9B1522489B030019B7BB /* IntroViewController.swift in Sources */,
 				1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
 				046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */,
+				04D279FD2A69215200AF046A /* PortfolioVC.swift in Sources */,
 				1577DAC829B9F07800C360EC /* Board.swift in Sources */,
 				E1945E542231256800A1436F /* BaseConstant.swift in Sources */,
 				046E9043268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift in Sources */,
@@ -973,6 +990,7 @@
 				04172B7C29F6826200D6279C /* Cw20VaultDepositRes.swift in Sources */,
 				04E2A32527A57D270045ED21 /* Cw20BalanceReq.swift in Sources */,
 				28E3E3802671BE8D00BA89C2 /* Param.swift in Sources */,
+				04D279F92A69159E00AF046A /* BaseChain.swift in Sources */,
 				04D279DC2A66863C00AF046A /* BaseAccount.swift in Sources */,
 				181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */,
 				E17748E62282D782003D8CD1 /* BTCProtocolSerialization.m in Sources */,

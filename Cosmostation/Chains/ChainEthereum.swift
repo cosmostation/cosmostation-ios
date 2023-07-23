@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+//struct ChainEthereum: BaseChain  {
+//    var name: String
+//    var id: String
+//    
+//    
+//}
