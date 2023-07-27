@@ -1338,14 +1338,6 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
                 UIApplication.shared.open(URL(string: url.absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc"))!, options: [:])
                 decisionHandler(.cancel)
                 return
-            } else if (url.absoluteString.starts(with: "intent://wcV2")) {
-                let tempUrl = url.absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
-                if let range = tempUrl.range(of: "#Intent") {
-                    let trimmedUrl = String(tempUrl[..<range.lowerBound])
-                    UIApplication.shared.open(URL(string: trimmedUrl)!, options: [:])
-                    decisionHandler(.cancel)
-                }
-                return
             } else if (url.absoluteString.starts(with: "keplrwallet://wcV2")) {
                 UIApplication.shared.open(URL(string: url.absoluteString.removingPercentEncoding!.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc"))!, options: [:])
                 decisionHandler(.cancel)
@@ -1363,6 +1355,19 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
                 let newUrl = url.absoluteString.replacingOccurrences(of: "uri=", with: "")
                 UIApplication.shared.open(URL(string: newUrl.removingPercentEncoding!)!, options: [:])
                 decisionHandler(.cancel)
+                return
+            } else if (url.absoluteString.starts(with: "intent:")) {
+                var tempUrl: String = ""
+                if (url.absoluteString.contains("intent://wcV2")) {
+                    tempUrl = url.absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
+                } else if (url.absoluteString.contains("intent://wc")) {
+                    tempUrl = url.absoluteString.removingPercentEncoding!.replacingOccurrences(of: "intent://wc", with: "cosmostation://wc")
+                }
+                if let range = tempUrl.range(of: "#Intent") {
+                    let trimmedUrl = String(tempUrl[..<range.lowerBound])
+                    UIApplication.shared.open(URL(string: trimmedUrl)!, options: [:])
+                    decisionHandler(.cancel)
+                }
                 return
             }
         }
