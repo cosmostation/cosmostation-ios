@@ -902,7 +902,7 @@ class CommonWCViewController: BaseViewController {
         getKeyAsync(chainName: self.wcRequestChainName! ) { tuple in
             let sig = self.getSignatureResponse(dappChainType!, tuple.privateKey, sortedJsonData!)
             let signature: JSON = ["signature" : sig.signature, "pub_key" : sig.pubKey]
-            let response: JSON = ["signed" : json!.rawValue, "signature":signature.rawValue]
+            let response: JSON = ["signed" : json!.rawValue, "signDoc" : json!.rawValue, "signature":signature.rawValue]
             self.moveToBackgroundIfNeedAndAction {
                 self.interactor?.approveRequest(id: self.wcId!, result: [response]).cauterize()
                 self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
@@ -930,7 +930,7 @@ class CommonWCViewController: BaseViewController {
             getKeyAsync(chainName: WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId)) ) { tuple in
                 let sig = self.getSignatureResponse(dappChainType, tuple.privateKey, try! signDoc.serializedData())
                 let signature: JSON = ["signature" : sig.signature, "pub_key" : sig.pubKey]
-                let response: JSON = ["signed" : json.rawValue, "signature":signature.rawValue]
+                let response: JSON = ["signed" : json.rawValue, "signDoc" : json.rawValue, "signature":signature.rawValue]
                 self.moveToBackgroundIfNeedAndAction {
                     self.interactor?.approveRequest(id: self.wcId!, result: [response]).cauterize()
                     self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
@@ -962,7 +962,7 @@ class CommonWCViewController: BaseViewController {
             getKeyAsync(chainName: WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId)) ) { tuple in
                 let sig = self.getSignatureResponse(dappChainType!, tuple.privateKey, sortedJsonData!)
                 let signature: JSON = ["signature" : sig.signature, "pub_key" : sig.pubKey]
-                let response: JSON = ["signed" : signDoc.rawValue, "signature" : signature.dictionaryValue]
+                let response: JSON = ["signed" : signDoc.rawValue, "signDoc" : signDoc.rawValue, "signature" : signature.dictionaryValue]
                 self.moveToBackgroundIfNeedAndAction {
                     self.respondOnSign(request: request, response: AnyCodable(response))
                     self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
