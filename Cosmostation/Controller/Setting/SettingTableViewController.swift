@@ -332,7 +332,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     }
     
     func onShowNotice() {
-        guard let url = URL(string: "https://notice.mintscan.io/\(chainConfig.chainAPIName)") else { return }
+        guard let url = URL(string: MintscanUrl + "cosmostation/notice/all") else { return }
         self.onShowSafariWeb(url)
     }
     
