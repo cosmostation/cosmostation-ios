@@ -639,7 +639,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     @objc func onClickNoticeBoard() {
-        if let url = URL(string: "https://notice.mintscan.io/" + self.chainConfig!.chainAPIName + "/" + String(self.noticeCard.tag)) {
+        if let url = URL(string: MintscanUrl + "cosmostation/notice/" + self.chainConfig!.chainAPIName + "/" + String(self.noticeCard.tag)) {
             self.onShowSafariWeb(url)
         }
     }
