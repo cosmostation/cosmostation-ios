@@ -166,6 +166,8 @@ class ChainFactory {
             return .RIZON_MAIN
         case CHAIN_SECRET_S:
             return .SECRET_MAIN
+        case CHAIN_SEI_S:
+            return .SEI_MAIN
         case CHAIN_SENTINEL_S:
             return .SENTINEL_MAIN
         case CHAIN_SIF_S:
@@ -318,6 +320,8 @@ class ChainFactory {
             return ChainRizon(chainType)
         case .SECRET_MAIN:
             return ChainSecret(chainType)
+        case .SEI_MAIN:
+            return ChainSei(chainType)
         case .SENTINEL_MAIN:
             return ChainSentinel(chainType)
         case .SIF_MAIN:
@@ -440,6 +444,7 @@ let CHAIN_COREUM_S = "SUPPORT_CHAIN_COREUM"
 let CHAIN_NOBLE_S = "SUPPORT_CHAIN_NOBLE"
 let CHAIN_STAFI_S = "SUPPORT_CHAIN_STAFI"
 let CHAIN_NEUTRON_S = "SUPPORT_CHAIN_NEUTRON"
+let CHAIN_SEI_S = "SUPPORT_CHAIN_SEI"
 
 let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 let CHAIN_NEUTRON_TEST_S = "SUPPORT_CHAIN_NEUTRON_TEST"
