@@ -35,6 +35,7 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
         super.viewDidAppear(animated)
         //update okex chain
         BaseData.instance.upgradeAaccountAddressforPath()
+        BaseData.instance.changeAddressByShentu()
         
         if (BaseData.instance.getDBVersion() < DB_VERSION && !BaseData.instance.getUsingEnginerMode()) {
             onShowDBUpdate2()

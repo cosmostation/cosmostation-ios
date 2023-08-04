@@ -33,8 +33,8 @@ class ChainCertik: ChainConfig {
     var divideDecimal: Int16 = 6
     var displayDecimal: Int16 = 6
     
-    var addressPrefix = "certik"
-    var validatorPrefix = "certikvaloper"
+    var addressPrefix = "shentu"
+    var validatorPrefix = "shentuvaloper"
     var defaultPath = "m/44'/118'/0'/0/X"
     
     var etherAddressSupport = false
