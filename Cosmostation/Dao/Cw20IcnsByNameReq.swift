@@ -26,6 +26,19 @@ public struct Cw20IcnsByNameReq : Codable {
     }
 }
 
+public struct ArchwayIcnsByNameReq : Codable {
+    var resolve_record: AddressByArchwayNs?
+    
+    init(_ name: String) {
+        self.resolve_record = AddressByArchwayNs(name)
+    }
+    
+    func getEncode() -> Data {
+        let jsonEncoder = JSONEncoder()
+        return try! jsonEncoder.encode(self)
+    }
+}
+
 public struct AddressByIcns : Codable {
     var icns: String?
     
@@ -41,6 +54,15 @@ public struct AddressByStargzeNs : Codable {
     init(_ name: String) {
         let dpName = name.split(separator: ".")[0]
         self.name = String(dpName)
+    }
+}
+
+public struct AddressByArchwayNs : Codable {
+    var name: String?
+    
+    init(_ name: String) {
+        let dpName = name.split(separator: ".")[0]
+        self.name = dpName + ".arch"
     }
 }
 

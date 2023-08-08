@@ -396,7 +396,11 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             } else if (nameservice.type == .stargaze) {
                 cell?.chainImg.image = UIImage(named: "iconNsStargaze")
             } else if (nameservice.type == .icns_stargaze) {
-                cell?.chainImg.image = UIImage(named: "iconNsOsmo+Stargaze")
+                cell?.chainImg.image = UIImage(named: "iconNsOsmoStar")
+            } else if (nameservice.type == .archway) {
+                cell?.chainImg.image = UIImage(named: "iconNsArchway")
+            } else if (nameservice.type == .icns_archway) {
+                cell?.chainImg.image = UIImage(named: "iconNsOsmoArch")
             }
             cell?.chainTitle.text = nameservice.address
             return cell!

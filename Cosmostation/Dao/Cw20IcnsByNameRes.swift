@@ -11,3 +11,7 @@ import Foundation
 public struct Cw20IcnsByNameRes : Codable {
     let bech32_address: String
 }
+
+public struct ArchwayIcnsByNameRes: Codable {
+    let address: String
+}
