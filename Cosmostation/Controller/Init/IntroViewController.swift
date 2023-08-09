@@ -26,7 +26,7 @@ class IntroViewController: BaseViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        showWait()
+//        showWait()
         if (BaseData.instance.getDBVersion() < DB_VERSION) {
             onUpdateMigration()
         }
@@ -47,6 +47,19 @@ class IntroViewController: BaseViewController {
     func onStartInit() {
         if let account = BaseData.instance.getLastAccount() {
             print("account ", account.name)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+//                let portfolioVC = PortfolioVC(nibName: "PortfolioVC", bundle: nil)
+//                portfolioVC.hidesBottomBarWhenPushed = true
+//                self.navigationItem.title = ""
+//                self.navigationController?.pushViewController(portfolioVC, animated: true)
+                
+                
+                let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = mainTabVC
+                self.present(mainTabVC, animated: true, completion: nil)
+            })
         }
     }
 }
