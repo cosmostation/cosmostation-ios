@@ -1635,7 +1635,7 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 data["isKeystone"] = false
                 data["isEthermint"] = false
                 data["isLedger"] = false
-                data["name"].stringValue = self.account?.account_nick_name ?? ""
+                data["name"].stringValue = self.account?.getDpName() ?? ""
                 
                 if (dappChainConfig != nil) {
                     privateKey = getBaseAccountKey(dappChainType: dappChainType!, account: account!)

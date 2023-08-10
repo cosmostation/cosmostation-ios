@@ -45,7 +45,7 @@ class ChainKujira: ChainConfig {
     var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = true
-    var grpcUrl = "grpc-kujira.cosmostation.io"
+    var grpcUrl = "kujira"
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = ""
