@@ -137,7 +137,7 @@
 		18FFB307281AF533004E65BB /* BinanceProto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903C268C413A002CFFE1 /* BinanceProto.swift */; };
 		18FFB317281AF533004E65BB /* OkToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2EA324F52FE700247424 /* OkToken.swift */; };
 		18FFB31A281AF533004E65BB /* BinanceHexEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9048268C7C2B002CFFE1 /* BinanceHexEncoding.swift */; };
-		18FFB32F281AF533004E65BB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E4F222E842B00A1436F /* BaseViewController.swift */; };
+		18FFB32F281AF533004E65BB /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E4F222E842B00A1436F /* BaseVC.swift */; };
 		18FFB332281AF533004E65BB /* KeyFac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281008492696D979002986A6 /* KeyFac.swift */; };
 		18FFB341281AF533004E65BB /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E086268C0A6700088391 /* RIPEMD160.swift */; };
 		18FFB396281AF533004E65BB /* WUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE722448E940097CAEE /* WUtils.swift */; };
@@ -197,8 +197,8 @@
 		E159805D2A6F5EFE0032892B /* PortfolioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15980592A6F5EFE0032892B /* PortfolioCell.xib */; };
 		E15980602A722CFF0032892B /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159805F2A722CFF0032892B /* CardView.swift */; };
 		E15980612A722CFF0032892B /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159805F2A722CFF0032892B /* CardView.swift */; };
-		E15980802A83A8CE0032892B /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159807F2A83A8CE0032892B /* BaseNavigationController.swift */; };
-		E15980812A83A8CE0032892B /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159807F2A83A8CE0032892B /* BaseNavigationController.swift */; };
+		E15980802A83A8CE0032892B /* BaseNavi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159807F2A83A8CE0032892B /* BaseNavi.swift */; };
+		E15980812A83A8CE0032892B /* BaseNavi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159807F2A83A8CE0032892B /* BaseNavi.swift */; };
 		E159808A2A83A96E0032892B /* bg3.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980822A83A96D0032892B /* bg3.png */; };
 		E159808B2A83A96E0032892B /* bg3.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980822A83A96D0032892B /* bg3.png */; };
 		E159808C2A83A96E0032892B /* bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980832A83A96D0032892B /* bg1.png */; };
@@ -236,7 +236,7 @@
 		E1945E28222E7C0600A1436F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E27222E7C0600A1436F /* AppDelegate.swift */; };
 		E1945E3E222E7E2900A1436F /* SegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E3C222E7E2900A1436F /* SegwitAddrCoder.swift */; };
 		E1945E3F222E7E2900A1436F /* Bech32.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E3D222E7E2900A1436F /* Bech32.swift */; };
-		E1945E50222E842B00A1436F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E4F222E842B00A1436F /* BaseViewController.swift */; };
+		E1945E50222E842B00A1436F /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E4F222E842B00A1436F /* BaseVC.swift */; };
 		E1945E52223124F000A1436F /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E51223124F000A1436F /* BaseData.swift */; };
 		E1945E542231256800A1436F /* BaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E532231256800A1436F /* BaseConstant.swift */; };
 		E1A82DD1224220910097CAEE /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD0224220910097CAEE /* Account.swift */; };
@@ -337,7 +337,7 @@
 		E15980582A6F5EFE0032892B /* PortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCell.swift; sourceTree = "<group>"; };
 		E15980592A6F5EFE0032892B /* PortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCell.xib; sourceTree = "<group>"; };
 		E159805F2A722CFF0032892B /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		E159807F2A83A8CE0032892B /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		E159807F2A83A8CE0032892B /* BaseNavi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavi.swift; sourceTree = "<group>"; };
 		E15980822A83A96D0032892B /* bg3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg3.png; sourceTree = "<group>"; };
 		E15980832A83A96D0032892B /* bg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg1.png; sourceTree = "<group>"; };
 		E15980842A83A96D0032892B /* bg4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg4.png; sourceTree = "<group>"; };
@@ -366,7 +366,7 @@
 		E1945E33222E7C0800A1436F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1945E3C222E7E2900A1436F /* SegwitAddrCoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegwitAddrCoder.swift; sourceTree = "<group>"; };
 		E1945E3D222E7E2900A1436F /* Bech32.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bech32.swift; sourceTree = "<group>"; };
-		E1945E4F222E842B00A1436F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		E1945E4F222E842B00A1436F /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		E1945E51223124F000A1436F /* BaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
 		E1945E532231256800A1436F /* BaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConstant.swift; sourceTree = "<group>"; };
 		E1A82DD0224220910097CAEE /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
@@ -640,8 +640,8 @@
 			isa = PBXGroup;
 			children = (
 				E1945E27222E7C0600A1436F /* AppDelegate.swift */,
-				E159807F2A83A8CE0032892B /* BaseNavigationController.swift */,
-				E1945E4F222E842B00A1436F /* BaseViewController.swift */,
+				E159807F2A83A8CE0032892B /* BaseNavi.swift */,
+				E1945E4F222E842B00A1436F /* BaseVC.swift */,
 				E1945E51223124F000A1436F /* BaseData.swift */,
 				E1945E532231256800A1436F /* BaseConstant.swift */,
 				04D279DB2A66863C00AF046A /* BaseAccount.swift */,
@@ -1024,7 +1024,7 @@
 				18FFB317281AF533004E65BB /* OkToken.swift in Sources */,
 				18FFB31A281AF533004E65BB /* BinanceHexEncoding.swift in Sources */,
 				1876EE8C2A4935AB00C53352 /* Cw20VaultDepositReq.swift in Sources */,
-				18FFB32F281AF533004E65BB /* BaseViewController.swift in Sources */,
+				18FFB32F281AF533004E65BB /* BaseVC.swift in Sources */,
 				E159805B2A6F5EFE0032892B /* PortfolioCell.swift in Sources */,
 				18FFB332281AF533004E65BB /* KeyFac.swift in Sources */,
 				151734682A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */,
@@ -1092,7 +1092,7 @@
 				04D279F42A67C9A600AF046A /* ChainSui.swift in Sources */,
 				18FFB664281AF533004E65BB /* StarnameAssets.swift in Sources */,
 				18FFB66B281AF533004E65BB /* Account.swift in Sources */,
-				E15980812A83A8CE0032892B /* BaseNavigationController.swift in Sources */,
+				E15980812A83A8CE0032892B /* BaseNavi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1109,7 +1109,7 @@
 				046E9049268C7C2B002CFFE1 /* BinanceHexEncoding.swift in Sources */,
 				04E165BA28B61BE1000F12C0 /* MintscanAsset.swift in Sources */,
 				E159805A2A6F5EFE0032892B /* PortfolioCell.swift in Sources */,
-				E1945E50222E842B00A1436F /* BaseViewController.swift in Sources */,
+				E1945E50222E842B00A1436F /* BaseVC.swift in Sources */,
 				2810084A2696D979002986A6 /* KeyFac.swift in Sources */,
 				0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */,
 				E1A82DE822448E940097CAEE /* WUtils.swift in Sources */,
@@ -1175,7 +1175,7 @@
 				04D279F32A67C9A600AF046A /* ChainSui.swift in Sources */,
 				28D765A2271585FA00730F47 /* StarnameAssets.swift in Sources */,
 				E1A82DD1224220910097CAEE /* Account.swift in Sources */,
-				E15980802A83A8CE0032892B /* BaseNavigationController.swift in Sources */,
+				E15980802A83A8CE0032892B /* BaseNavi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

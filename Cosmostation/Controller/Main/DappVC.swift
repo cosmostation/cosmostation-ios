@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DappVC: BaseViewController {
+class DappVC: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()

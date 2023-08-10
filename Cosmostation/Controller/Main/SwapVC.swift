@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SwapVC: BaseViewController {
+class SwapVC: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()

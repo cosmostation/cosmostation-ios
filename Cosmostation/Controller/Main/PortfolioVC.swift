@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PortfolioVC: BaseViewController {
+class PortfolioVC: BaseVC {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,6 +19,23 @@ class PortfolioVC: BaseViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "PortfolioCell", bundle: nil), forCellReuseIdentifier: "PortfolioCell")
+        
+//        self.navigationController?.hidesBarsOnSwipe = true
+//        print("PortfolioVC ", self.navigationController?.hidesBarsOnSwipe)
+//        self.navigationController?.navigationBar.tintColor = .white
+//        self.navigationController?.title = "Hello"
+//        self.navigationItem.title = "asdasd"
+//        self.navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .search, target: self, action: nil)]
+//        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: nil)]
+//        
+//        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationItem.largeTitleDisplayMode = .always
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
 }

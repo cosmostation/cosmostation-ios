@@ -11,7 +11,7 @@ import Alamofire
 import Firebase
 import SwiftKeychainWrapper
 
-class IntroViewController: BaseViewController {
+class IntroViewController: BaseVC {
     
     @IBOutlet weak var bottomLogoView: UIView!
     @IBOutlet weak var bottomControlView: UIView!
