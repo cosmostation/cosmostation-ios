@@ -10,9 +10,16 @@ import UIKit
 
 class PortfolioCell: UITableViewCell {
 
+    @IBOutlet weak var rootView: CardView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = .none
+        selectionStyle = .none
+        rootView.setBlur()
+    }
+    
+    override func prepareForReuse() {
+        rootView.setBlur()
     }
     
 }

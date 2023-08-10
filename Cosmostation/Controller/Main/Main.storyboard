@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,9 +15,11 @@
                 <tabBarController storyboardIdentifier="MainTabVC" automaticallyAdjustsScrollViewInsets="NO" id="SSb-PO-cH1" customClass="MainTabVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="vpF-lr-HBZ"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UJT-4n-H2H">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="UJT-4n-H2H">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                        <color key="barTintColor" systemColor="systemPinkColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="qzR-G4-Lik" kind="relationship" relationship="viewControllers" id="J9R-0A-CKm"/>
@@ -34,23 +37,38 @@
             <objects>
                 <viewController storyboardIdentifier="PortfolioVC" id="Y6W-OH-hqX" customClass="PortfolioVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Q91-ap-MJ8">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Q91-ap-MJ8" secondAttribute="trailing" id="1zy-gQ-Shq"/>
+                            <constraint firstItem="Q91-ap-MJ8" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="G7b-nK-DDO"/>
+                            <constraint firstItem="Q91-ap-MJ8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="On6-iG-TbR"/>
+                            <constraint firstAttribute="bottom" secondItem="Q91-ap-MJ8" secondAttribute="bottom" id="g5m-sR-ThQ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9SV-qU-pID"/>
+                    <connections>
+                        <outlet property="tableView" destination="Q91-ap-MJ8" id="oMt-ad-R0J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2932" y="2115"/>
         </scene>
-        <!--View Controller-->
+        <!--SwapVC-->
         <scene sceneID="EKC-P2-87t">
             <objects>
-                <viewController id="hg3-fN-cph" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SwapVC" id="hg3-fN-cph" customClass="SwapVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Ch-jF-f0E">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Z1L-6p-fyC"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -61,12 +79,12 @@
             </objects>
             <point key="canvasLocation" x="-1811" y="2115"/>
         </scene>
-        <!--View Controller-->
+        <!--DappVC-->
         <scene sceneID="YhM-5O-Wg8">
             <objects>
-                <viewController id="GBW-9t-Xwt" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DappVC" id="GBW-9t-Xwt" customClass="DappVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j6A-y5-86P">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="qpm-qz-fV6"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -77,12 +95,12 @@
             </objects>
             <point key="canvasLocation" x="-579" y="2115"/>
         </scene>
-        <!--View Controller-->
+        <!--SettingsVC-->
         <scene sceneID="NWB-pI-DfZ">
             <objects>
-                <viewController id="1nr-LY-SDx" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsVC" id="1nr-LY-SDx" customClass="SettingsVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ksh-4t-0mY">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Cp1-VK-FoG"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -93,11 +111,13 @@
             </objects>
             <point key="canvasLocation" x="497" y="2115"/>
         </scene>
-        <!--11111-->
+        <!--Chains-->
         <scene sceneID="auC-Sl-Hk9">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qzR-G4-Lik" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="11111" id="Hx0-eU-13i"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qzR-G4-Lik" customClass="BaseNavigationController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Chains" id="Hx0-eU-13i">
+                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="os0-aX-3Bn">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -112,11 +132,13 @@
             </objects>
             <point key="canvasLocation" x="-2918.320610687023" y="1343.661971830986"/>
         </scene>
-        <!--22222-->
+        <!--Swaps-->
         <scene sceneID="xY6-Wy-5LL">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oIO-Jl-Gzw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="22222" id="OSh-f6-eNA"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oIO-Jl-Gzw" customClass="BaseNavigationController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Swaps" id="OSh-f6-eNA">
+                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ezW-XT-UEG">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -131,11 +153,13 @@
             </objects>
             <point key="canvasLocation" x="-1811" y="1344"/>
         </scene>
-        <!--33333-->
+        <!--Dapps-->
         <scene sceneID="isP-hV-qqt">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eDv-Z6-ECi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="33333" id="JXE-5i-UPJ"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eDv-Z6-ECi" customClass="BaseNavigationController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Dapps" id="JXE-5i-UPJ">
+                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BM4-96-t5i">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -150,11 +174,13 @@
             </objects>
             <point key="canvasLocation" x="-578" y="1344"/>
         </scene>
-        <!--44444-->
+        <!--Settings-->
         <scene sceneID="fgP-oN-GFJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O3B-T0-BlA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="44444" id="q6q-M2-MFp"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O3B-T0-BlA" customClass="BaseNavigationController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" id="q6q-M2-MFp">
+                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="epb-fg-63Q">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -170,4 +196,9 @@
             <point key="canvasLocation" x="497" y="1344"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
