@@ -290,6 +290,9 @@
 "msg_no_supported_chain" = "This network is no longer operational.\n\nNote that Cosmostation Wallet is showing archived data only.";
 "msg_search_chain" = "Search by Chain or Token";
 "msg_not_support" = "\nThe address you are currently using will no longer be available.\n\nIf you wish to continue using your current wallet, we kindly recommend reviewing the wallet platforms recommended by the foundation.";
+"msg_granter_empty" = "RECEIVE GRANT TO START AUTHZ";
+"msg_grantee_empty" = "GIVE GRANT TO START AUTHZ";
+"msg_grant_empty_msg" = "You do not have any grants at the moment\nPlease manage your grants from a web wallet";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -943,6 +946,7 @@
 "error_no_staking" = "The chain does not support staking.";
 "error_not_dao_member" = "You are not this Dao member.";
 "error_can_not_revote" = "Can not revote.";
+"error_no_selected_grant" = "Select the grant to revoke.";
 
 
 "alert_title_no_private_key" = "No Private Key";

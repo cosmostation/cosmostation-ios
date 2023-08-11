@@ -46,5 +46,31 @@ class AuthzGrantListViewController: BaseViewController {
 }
 
 extension WUtils {
-    
+    static func setAuthzType(_ grant: Cosmos_Authz_V1beta1_GrantAuthorization) -> String {
+        let grantTypeUrl = grant.authorization.typeURL
+        let authorizationValue = grant.authorization.value
+        
+        if (grantTypeUrl.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+            let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: authorizationValue)
+            if genericAuth.msg.contains("Send") { return "Send" }
+            else if genericAuth.msg.contains("Delegate") { return "Delegate" }
+            else if genericAuth.msg.contains("Undelegate") { return "Undelegate" }
+            else if genericAuth.msg.contains("Redelegate") { return "Redelegate" }
+            else if genericAuth.msg == "/cosmos.gov.v1beta1.MsgVote" { return "Vote" }
+            else if genericAuth.msg == "/cosmos.gov.v1beta1.MsgVoteWeighted" { return "Vote Weighted" }
+            else if genericAuth.msg.contains("WithdrawDelegatorReward") { return "Claim Reward" }
+            else if genericAuth.msg.contains("WithdrawValidatorCommission") { return "Claim Commission" }
+            else { return "Unknown" }
+            
+        } else if (grantTypeUrl.contains(Cosmos_Bank_V1beta1_SendAuthorization.protoMessageName)) {
+            return "Send"
+            
+        } else {
+            let stakeAuthz = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: authorizationValue)
+            if stakeAuthz.authorizationType == Cosmos_Staking_V1beta1_AuthorizationType.delegate { return " Delegate" }
+            else if stakeAuthz.authorizationType == Cosmos_Staking_V1beta1_AuthorizationType.undelegate { return " Undelegate" }
+            else if stakeAuthz.authorizationType == Cosmos_Staking_V1beta1_AuthorizationType.redelegate { return " Redelegate" }
+            else { return "Unknown" }
+        }
+    }
 }

@@ -87,6 +87,8 @@ extension AuthzGranterViewController: UITableViewDelegate, UITableViewDataSource
         if (store.state.granters.count == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"GranterEmptyViewCell") as? GranterEmptyViewCell
             cell?.rootCardView.backgroundColor = chainConfig?.chainColorBG
+            cell?.emptyGrantLabel.text = NSLocalizedString("msg_granter_empty", comment: "")
+            cell?.emptyGrantMsgLabel.text = NSLocalizedString("msg_grant_empty_msg", comment: "")
             return cell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"GranterViewCell") as? GranterViewCell

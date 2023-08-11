@@ -290,6 +290,9 @@
 "msg_no_supported_chain" = "このネットワークはもう機能しません。\n\nCosmostationウォレットはアーカイブされたデータのみを表示していますのでご注意ください。";
 "msg_search_chain" = "チェーンやトークンを検索してください。";
 "msg_not_support" = "\n現在接続しているアドレスはまもなくサポートが終了する予定です。\n\n現在のウォレットを使い続けるには、当財団が推奨するウォレットプラットフォームをご検討ください。";
+"msg_granter_empty" = "グラントを受け取り、AUTHZ を開始する";
+"msg_grantee_empty" = "グラントをください、AUTHZ を開始する";
+"msg_grant_empty_msg" = "現在、管理しているグラントがありません。\nウェブウォレットから管理してください";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -943,6 +946,7 @@
 "error_no_staking" = "このチェーンはステーキングをサポートしていません。";
 "error_not_dao_member" = "あなたはこのDAOのメンバーではありません。";
 "error_can_not_revote" = "再投票できません。";
+"error_no_selected_grant" = "キャンセルする権限を選択してください。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -72,8 +73,62 @@
                     <view key="view" contentMode="scaleToFill" id="8F8-Xu-aIy">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="712"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="v6F-PS-R7e">
+                                <rect key="frame" x="0.0" y="59" width="393" height="505"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="U3Y-ca-q2q" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
+                                <rect key="frame" x="166.66666666666666" y="326" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="NcD-kq-gBO"/>
+                                    <constraint firstAttribute="height" constant="60" id="Tj6-l8-hva"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xM0-V6-2Z1">
+                                <rect key="frame" x="16" y="580" width="361" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="APD-op-Skf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Revoke">
+                                    <color key="titleColor" name="photon"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="photon"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onClickRevoke:" destination="eBz-wI-3Ib" eventType="touchUpInside" id="bEh-Mb-xhz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JqM-yA-HTQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="v6F-PS-R7e" firstAttribute="top" secondItem="JqM-yA-HTQ" secondAttribute="top" id="0qe-mP-LUH"/>
+                            <constraint firstItem="JqM-yA-HTQ" firstAttribute="trailing" secondItem="v6F-PS-R7e" secondAttribute="trailing" id="27r-fg-qFr"/>
+                            <constraint firstItem="xM0-V6-2Z1" firstAttribute="top" secondItem="v6F-PS-R7e" secondAttribute="bottom" constant="16" id="CFt-vc-Uun"/>
+                            <constraint firstItem="v6F-PS-R7e" firstAttribute="leading" secondItem="JqM-yA-HTQ" secondAttribute="leading" id="HaD-X7-0aG"/>
+                            <constraint firstItem="JqM-yA-HTQ" firstAttribute="trailing" secondItem="xM0-V6-2Z1" secondAttribute="trailing" constant="16" id="N08-sT-hDp"/>
+                            <constraint firstItem="U3Y-ca-q2q" firstAttribute="centerY" secondItem="8F8-Xu-aIy" secondAttribute="centerY" id="RPy-sh-bqg"/>
+                            <constraint firstItem="xM0-V6-2Z1" firstAttribute="leading" secondItem="JqM-yA-HTQ" secondAttribute="leading" constant="16" id="gPk-OP-Wmz"/>
+                            <constraint firstItem="JqM-yA-HTQ" firstAttribute="bottom" secondItem="xM0-V6-2Z1" secondAttribute="bottom" constant="48" id="tHI-ps-L2i"/>
+                            <constraint firstItem="U3Y-ca-q2q" firstAttribute="centerX" secondItem="8F8-Xu-aIy" secondAttribute="centerX" id="u87-tj-wwN"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="granteeTableView" destination="v6F-PS-R7e" id="ska-DY-fhx"/>
+                        <outlet property="loadingImg" destination="U3Y-ca-q2q" id="d2J-88-r2S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8wK-YZ-6j1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -111,6 +166,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="loading_1" width="144" height="144"/>
+        <namedColor name="photon">
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

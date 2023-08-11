@@ -290,6 +290,9 @@
 "msg_no_supported_chain" = "이 네트워크는 더 이상 작동하지 않습니다.\n\n코스모스테이션 월렛은 보관된 데이터만 보여드리고 있으니 참고하세요.";
 "msg_search_chain" = "체인이나 토큰을 검색하세요";
 "msg_not_support" = "\n현재 접속하신 주소는 지원종료 될 예정입니다.\n\n현재 지갑을 계속 사용하시려면 재단에서 권장하는 지갑 플랫폼을 검토해 보시기 바랍니다.";
+"msg_granter_empty" = "권한을 받고 AUTHZ 시작하기";
+"msg_grantee_empty" = "권한을 주고 AUTHZ 시작하기";
+"msg_grant_empty_msg" = "현재 관리하고 있는 그랜트가 없습니다.\n웹지갑에서 그랜트를 관리하세요.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";
@@ -943,6 +946,7 @@
 "error_no_staking" = "해당 체인은 스테이킹을 지원하지 않습니다.";
 "error_not_dao_member" = "이 Dao의 회원이 아닙니다.";
 "error_can_not_revote" = "재투표 할 수 없습니다.";
+"error_no_selected_grant" = "취소할 권한을 선택하세요.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";
