@@ -13,10 +13,6 @@ class BaseNavi: UINavigationController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-//        UINavigationBar.appearance().backgroundColor = .clear
-//        UINavigationBar.appearance().barTintColor = .clear
-//        UINavigationBar.appearance().tintColor = .clear
-//        UINavigationBar.appearance().isTranslucent = true
     }
     
     func navigationController(_ navigationController: UINavigationController,

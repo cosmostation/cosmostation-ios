@@ -33,7 +33,7 @@ class BaseVC: UIViewController {
         waitAlert!.view.addConstraint(NSLayoutConstraint(item: lottieView, attribute: .centerY, relatedBy: .equal, toItem: waitAlert!.view, attribute: .centerY, multiplier: 1, constant: 0))
         waitAlert!.view.addConstraint(NSLayoutConstraint(item: lottieView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 120.0))
         waitAlert!.view.addConstraint(NSLayoutConstraint(item: lottieView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 120.0))
-        clearBackgroundColor(of: waitAlert!.view)
+        clearBackgroundColor(waitAlert!.view)
         present(waitAlert!, animated: true, completion: nil)
     }
     
@@ -43,15 +43,24 @@ class BaseVC: UIViewController {
         }
     }
     
-    
-    func clearBackgroundColor(of view: UIView) {
+    func clearBackgroundColor(_ view: UIView) {
         if let effectsView = view as? UIVisualEffectView {
             effectsView.removeFromSuperview()
             return
         }
         view.backgroundColor = .clear
         view.subviews.forEach { (subview) in
-            clearBackgroundColor(of: subview)
+            clearBackgroundColor(subview)
         }
+    }
+    
+    func leftBarButton(_ name: String, _ imge: UIImage? = nil) -> UIBarButtonItem {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "naviCon"), for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -16)
+        button.setTitle("Beakdoong", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)!
+        button.sizeToFit()
+        return UIBarButtonItem(customView: button)
     }
 }
