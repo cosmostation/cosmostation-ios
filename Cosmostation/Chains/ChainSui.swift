@@ -8,14 +8,19 @@
 
 import Foundation
 
-struct ChainSui: BaseChain  {
-    var name = "Sui"
-    var id = ""
-    
-    
-    var defaultKeyType = AccountKeyType(.SUI_Ed25519, "m/44'/784'/0'/0'/X'", true)
-    
-    func supportKeyTypes() -> Array<AccountKeyType> {
-        return [defaultKeyType]
-    }
-}
+//class ChainSui: BaseChain  {
+////    override var name = "Sui"
+////    override var id = ""
+////    var accountKeyType = AccountKeyType(.SUI_Ed25519, "m/44'/784'/0'/0'/X'")
+////
+////    var privateKey: Data = Data()
+////    var address: String = ""
+//    
+//    override var name: String {
+//        set {
+//            super.name = "Sui"
+//        }
+//    }
+//    
+//    
+//}

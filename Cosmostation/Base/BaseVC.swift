@@ -54,11 +54,11 @@ class BaseVC: UIViewController {
         }
     }
     
-    func leftBarButton(_ name: String, _ imge: UIImage? = nil) -> UIBarButtonItem {
+    func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "naviCon"), for: .normal)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -16)
-        button.setTitle("Beakdoong", for: .normal)
+        button.setTitle(name == nil ? "Account" : name, for: .normal)
         button.titleLabel?.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)!
         button.sizeToFit()
         return UIBarButtonItem(customView: button)

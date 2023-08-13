@@ -8,6 +8,7 @@
 
 import Foundation
 
+/*
 public func getStarNameChainImgUrl(_ uri: String?) -> URL {
     if let asset = getStarnameAssets().filter({ $0.uri == uri }).first {
         return URL(string: asset.chainImg!)!
@@ -155,3 +156,4 @@ public extension StarnameAsset {
     static let emy = StarnameAsset("E-Money", "asset:ngm", "NGM", "emoney.png", nil)
     static let lsk = StarnameAsset("LISK", "asset:lsk", "LSK", "lsk.png", nil)
 }
+*/

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
 
 public class BaseAccount {
     var id: Int64 = -1
@@ -27,6 +28,39 @@ public class BaseAccount {
         self.uuid = uuid
         self.name = name
         self.type = BaseAccountType(rawValue: type)!
+    }
+    
+    
+    var activeChains = [BaseChain]()
+    
+    func setActiveChains() {
+        activeChains.removeAll()
+        activeChains.append(ChainCosmos())
+        activeChains.append(ChainKava())
+        activeChains.append(ChainKava_Legacy())
+    }
+    
+    func setPrivateKeys() -> Data? {
+        setActiveChains()
+        
+        let keychain = BaseData.instance.getKeyChain()
+        if (type == .withMnemonic) {
+            if let secureData = try? keychain.getString(uuid.sha1()) {
+                let seed = secureData?.components(separatedBy: ":").last?.data(using: .utf8)
+                activeChains.forEach { chain in
+//                    chain.privateKey =
+                }
+                
+            }
+
+        } else if (type == .onlyPrivateKey) {
+            if let key = try? keychain.getString(uuid.sha1()) {
+                activeChains.forEach { chain in
+                    chain.privateKey = key!.data(using: .utf8)!
+                }
+            }
+        }
+        return nil
     }
     
     

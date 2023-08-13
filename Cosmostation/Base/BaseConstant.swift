@@ -257,6 +257,7 @@ let TOKEN_HTLC_KAVA_TEST_BTC                = "btcb"
 let SWAP_MEMO_CREATE                        = "Create Atomic Swap via Cosmostation iOS Wallet"
 let SWAP_MEMO_CLAIM                         = "Claim Atomic Swap via Cosmostation iOS Wallet"
 
+/*
 public enum ChainType: String {
     case COSMOS_MAIN
     case IRIS_MAIN
@@ -412,6 +413,7 @@ public enum ChainType: String {
 //        return false
 //    }
 }
+ */
 
 
 let BITCOINCASH    = "asset:bch";

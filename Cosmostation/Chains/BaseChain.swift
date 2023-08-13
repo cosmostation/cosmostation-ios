@@ -9,10 +9,13 @@
 import Foundation
 
 
-protocol BaseChain {
-    var name: String { get set }
-    var id: String { get set }
+class BaseChain {
+    var name: String!
+    var id: String!
+    var accountKeyType: AccountKeyType!
     
+    var privateKey: Data?
+    var address: String?
 }
 
 
@@ -20,12 +23,10 @@ protocol BaseChain {
 struct AccountKeyType {
     var pubkeyType: PubKeyType!
     var hdPath: String!
-    var isDefault: Bool!
     
-    init(_ pubkeyType: PubKeyType!, _ hdPath: String!, _ isDefault: Bool) {
+    init(_ pubkeyType: PubKeyType!, _ hdPath: String!) {
         self.pubkeyType = pubkeyType
         self.hdPath = hdPath
-        self.isDefault = isDefault
     }
 }
 

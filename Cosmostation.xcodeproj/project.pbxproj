@@ -13,6 +13,10 @@
 		04172B9429F7AE4000D6279C /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */; };
 		04172B9529F7AE4000D6279C /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */; };
 		04172B9629F7AE4000D6279C /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */; };
+		042296812A890C9B003C7630 /* ChainKava_Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava_Legacy.swift */; };
+		042296822A890C9B003C7630 /* ChainKava_Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava_Legacy.swift */; };
+		042296842A890CC4003C7630 /* ChainKava_EVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296832A890CC4003C7630 /* ChainKava_EVM.swift */; };
+		042296852A890CC4003C7630 /* ChainKava_EVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296832A890CC4003C7630 /* ChainKava_EVM.swift */; };
 		043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043031EC28C2136F005FF935 /* MintscanPath.swift */; };
 		043031EE28C2136F005FF935 /* MintscanPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043031EC28C2136F005FF935 /* MintscanPath.swift */; };
 		0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E086268C0A6700088391 /* RIPEMD160.swift */; };
@@ -196,8 +200,6 @@
 		E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */; };
 		E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */; };
 		E10EB59A2A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */; };
-		E10EB59C2A850AFA0054A9AF /* bg4.png in Resources */ = {isa = PBXBuildFile; fileRef = E10EB59B2A850AFA0054A9AF /* bg4.png */; };
-		E10EB59D2A850AFA0054A9AF /* bg4.png in Resources */ = {isa = PBXBuildFile; fileRef = E10EB59B2A850AFA0054A9AF /* bg4.png */; };
 		E10EB59F2A86217A0054A9AF /* bbbb.png in Resources */ = {isa = PBXBuildFile; fileRef = E10EB59E2A86217A0054A9AF /* bbbb.png */; };
 		E10EB5A02A86217A0054A9AF /* bbbb.png in Resources */ = {isa = PBXBuildFile; fileRef = E10EB59E2A86217A0054A9AF /* bbbb.png */; };
 		E1271B04224B17230083AF17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
@@ -263,6 +265,8 @@
 		04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20VaultDepositRes.swift; sourceTree = "<group>"; };
 		04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		042296802A890C9B003C7630 /* ChainKava_Legacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava_Legacy.swift; sourceTree = "<group>"; };
+		042296832A890CC4003C7630 /* ChainKava_EVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava_EVM.swift; sourceTree = "<group>"; };
 		043031EC28C2136F005FF935 /* MintscanPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanPath.swift; sourceTree = "<group>"; };
 		0437E086268C0A6700088391 /* RIPEMD160.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		0443B89728589B570027A6B9 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
@@ -344,7 +348,6 @@
 		E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
-		E10EB59B2A850AFA0054A9AF /* bg4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg4.png; path = ../../../../../Desktop/bg4.png; sourceTree = "<group>"; };
 		E10EB59E2A86217A0054A9AF /* bbbb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bbbb.png; sourceTree = "<group>"; };
 		E136D8A223039493001BEBB8 /* Cosmostation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cosmostation.entitlements; sourceTree = "<group>"; };
 		E15980582A6F5EFE0032892B /* PortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCell.swift; sourceTree = "<group>"; };
@@ -434,6 +437,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0422967E2A890C54003C7630 /* ClassEVM */ = {
+			isa = PBXGroup;
+			children = (
+				04D279EF2A67C98E00AF046A /* ChainEthereum.swift */,
+				042296832A890CC4003C7630 /* ChainKava_EVM.swift */,
+			);
+			path = ClassEVM;
+			sourceTree = "<group>";
+		};
+		0422967F2A890C63003C7630 /* ClassCosmos */ = {
+			isa = PBXGroup;
+			children = (
+				04D279E92A67C96500AF046A /* ChainCosmos.swift */,
+				04D279EC2A67C96F00AF046A /* ChainKava.swift */,
+				042296802A890C9B003C7630 /* ChainKava_Legacy.swift */,
+				04D279F52A67C9B700AF046A /* ChainEvmos.swift */,
+			);
+			path = ClassCosmos;
+			sourceTree = "<group>";
+		};
 		04D279DE2A66D24600AF046A /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,7 +474,6 @@
 				E15980832A83A96D0032892B /* bg1.png */,
 				E15980862A83A96D0032892B /* bg2.png */,
 				E15980822A83A96D0032892B /* bg3.png */,
-				E10EB59B2A850AFA0054A9AF /* bg4.png */,
 				E15980892A83A96E0032892B /* bg5.png */,
 				E15980852A83A96D0032892B /* bg6.png */,
 				E15980872A83A96E0032892B /* bg7.png */,
@@ -468,11 +490,9 @@
 			isa = PBXGroup;
 			children = (
 				04D279F82A69159E00AF046A /* BaseChain.swift */,
-				04D279E92A67C96500AF046A /* ChainCosmos.swift */,
-				04D279EC2A67C96F00AF046A /* ChainKava.swift */,
-				04D279EF2A67C98E00AF046A /* ChainEthereum.swift */,
+				0422967F2A890C63003C7630 /* ClassCosmos */,
+				0422967E2A890C54003C7630 /* ClassEVM */,
 				04D279F22A67C9A600AF046A /* ChainSui.swift */,
-				04D279F52A67C9B700AF046A /* ChainEvmos.swift */,
 			);
 			path = Chains;
 			sourceTree = "<group>";
@@ -873,7 +893,6 @@
 				18FFB674281AF533004E65BB /* new2022@3x.png in Resources */,
 				E10EB59A2A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				18FFB683281AF533004E65BB /* xmas@2x.png in Resources */,
-				E10EB59D2A850AFA0054A9AF /* bg4.png in Resources */,
 				0443B89928589B570027A6B9 /* Color.xcassets in Resources */,
 				04A116F228F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
 				04D279E72A66E32A00AF046A /* loading.json in Resources */,
@@ -926,7 +945,6 @@
 				04172B9329F7AE4000D6279C /* Roboto-Bold.ttf in Resources */,
 				04172B9529F7AE4000D6279C /* Roboto-Medium.ttf in Resources */,
 				E15980982A83A96E0032892B /* bg5.png in Resources */,
-				E10EB59C2A850AFA0054A9AF /* bg4.png in Resources */,
 				04877301277C6E0700D9E201 /* xmas@1x.png in Resources */,
 				04877305277C809200D9E201 /* new2022.png in Resources */,
 				E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
@@ -1043,6 +1061,7 @@
 			files = (
 				18FFB272281AF533004E65BB /* CKey.swift in Sources */,
 				047847C629629AD100FD6A7E /* Cw20IcnsByNameRes.swift in Sources */,
+				042296822A890C9B003C7630 /* ChainKava_Legacy.swift in Sources */,
 				18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */,
 				18FFB307281AF533004E65BB /* BinanceProto.swift in Sources */,
 				18FFB317281AF533004E65BB /* OkToken.swift in Sources */,
@@ -1057,6 +1076,7 @@
 				18D4C19628C704B8003F230A /* WalletConnectManager.swift in Sources */,
 				18FFB396281AF533004E65BB /* WUtils.swift in Sources */,
 				18FFB3A7281AF533004E65BB /* IntroViewController.swift in Sources */,
+				042296852A890CC4003C7630 /* ChainKava_EVM.swift in Sources */,
 				1577DAC929B9F07800C360EC /* Board.swift in Sources */,
 				0492AE922A83CC9B001360F0 /* SwapVC.swift in Sources */,
 				1876EE8D2A4935EA00C53352 /* Cw20VaultDepositRes.swift in Sources */,
@@ -1126,6 +1146,7 @@
 			files = (
 				285ADF0D272EE35F0023651F /* CKey.swift in Sources */,
 				047847C529629AD100FD6A7E /* Cw20IcnsByNameRes.swift in Sources */,
+				042296812A890C9B003C7630 /* ChainKava_Legacy.swift in Sources */,
 				E1945E52223124F000A1436F /* BaseData.swift in Sources */,
 				046E903D268C413A002CFFE1 /* BinanceProto.swift in Sources */,
 				04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */,
@@ -1140,6 +1161,7 @@
 				E16D9B1522489B030019B7BB /* IntroViewController.swift in Sources */,
 				1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
 				046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */,
+				042296842A890CC4003C7630 /* ChainKava_EVM.swift in Sources */,
 				1577DAC829B9F07800C360EC /* Board.swift in Sources */,
 				0492AE912A83CC9B001360F0 /* SwapVC.swift in Sources */,
 				E1945E542231256800A1436F /* BaseConstant.swift in Sources */,
