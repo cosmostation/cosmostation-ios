@@ -8,13 +8,16 @@
 
 import Foundation
 
-class ChainKava_Legacy: BaseChain  {
+class ChainKava118: BaseChain  {
     
     override init() {
         super.init()
         
+        isDefault = false
         name = "Kava"
         id = "kava_2222-10"
+        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        accountPrefix = "kava"
     }
 }

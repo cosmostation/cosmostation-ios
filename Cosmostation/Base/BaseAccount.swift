@@ -14,6 +14,7 @@ public class BaseAccount {
     var uuid: String = ""
     var name: String = ""
     var type: BaseAccountType = .none
+    var lastHDPath = "0"
     
     //using for generate new aacount
     init(_ name: String, _ type: BaseAccountType) {
@@ -36,32 +37,37 @@ public class BaseAccount {
     func setActiveChains() {
         activeChains.removeAll()
         activeChains.append(ChainCosmos())
-        activeChains.append(ChainKava())
-        activeChains.append(ChainKava_Legacy())
+        activeChains.append(ChainKava459())
+        activeChains.append(ChainKava60())
+        activeChains.append(ChainKava118())
     }
     
-    func setPrivateKeys() -> Data? {
+    func setSecureInfo() -> Bool {
         setActiveChains()
         
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
-            if let secureData = try? keychain.getString(uuid.sha1()) {
-                let seed = secureData?.components(separatedBy: ":").last?.data(using: .utf8)
+            if let secureData = try? keychain.getString(uuid.sha1()),
+               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 activeChains.forEach { chain in
-//                    chain.privateKey =
+                    chain.setInfoWithSeed(seed, lastHDPath)
                 }
-                
             }
 
         } else if (type == .onlyPrivateKey) {
-            if let key = try? keychain.getString(uuid.sha1()) {
+            if let secureKey = try? keychain.getString(uuid.sha1()) {
                 activeChains.forEach { chain in
-                    chain.privateKey = key!.data(using: .utf8)!
+                    chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
                 }
             }
         }
-        return nil
+        return true
     }
+    
+    
+    
+    
+    
     
     
 }

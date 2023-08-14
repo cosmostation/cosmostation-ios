@@ -13,10 +13,10 @@
 		04172B9429F7AE4000D6279C /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */; };
 		04172B9529F7AE4000D6279C /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */; };
 		04172B9629F7AE4000D6279C /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */; };
-		042296812A890C9B003C7630 /* ChainKava_Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava_Legacy.swift */; };
-		042296822A890C9B003C7630 /* ChainKava_Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava_Legacy.swift */; };
-		042296842A890CC4003C7630 /* ChainKava_EVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296832A890CC4003C7630 /* ChainKava_EVM.swift */; };
-		042296852A890CC4003C7630 /* ChainKava_EVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296832A890CC4003C7630 /* ChainKava_EVM.swift */; };
+		042296812A890C9B003C7630 /* ChainKava118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava118.swift */; };
+		042296822A890C9B003C7630 /* ChainKava118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava118.swift */; };
+		042296842A890CC4003C7630 /* ChainKavaEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296832A890CC4003C7630 /* ChainKavaEVM.swift */; };
+		042296852A890CC4003C7630 /* ChainKavaEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296832A890CC4003C7630 /* ChainKavaEVM.swift */; };
 		043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043031EC28C2136F005FF935 /* MintscanPath.swift */; };
 		043031EE28C2136F005FF935 /* MintscanPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043031EC28C2136F005FF935 /* MintscanPath.swift */; };
 		0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E086268C0A6700088391 /* RIPEMD160.swift */; };
@@ -82,8 +82,8 @@
 		04D279E72A66E32A00AF046A /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D279E52A66E32A00AF046A /* loading.json */; };
 		04D279EA2A67C96500AF046A /* ChainCosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279E92A67C96500AF046A /* ChainCosmos.swift */; };
 		04D279EB2A67C96500AF046A /* ChainCosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279E92A67C96500AF046A /* ChainCosmos.swift */; };
-		04D279ED2A67C96F00AF046A /* ChainKava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279EC2A67C96F00AF046A /* ChainKava.swift */; };
-		04D279EE2A67C96F00AF046A /* ChainKava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279EC2A67C96F00AF046A /* ChainKava.swift */; };
+		04D279ED2A67C96F00AF046A /* ChainKava459.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279EC2A67C96F00AF046A /* ChainKava459.swift */; };
+		04D279EE2A67C96F00AF046A /* ChainKava459.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279EC2A67C96F00AF046A /* ChainKava459.swift */; };
 		04D279F02A67C98E00AF046A /* ChainEthereum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279EF2A67C98E00AF046A /* ChainEthereum.swift */; };
 		04D279F12A67C98E00AF046A /* ChainEthereum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279EF2A67C98E00AF046A /* ChainEthereum.swift */; };
 		04D279F32A67C9A600AF046A /* ChainSui.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279F22A67C9A600AF046A /* ChainSui.swift */; };
@@ -202,6 +202,12 @@
 		E10EB59A2A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */; };
 		E10EB59F2A86217A0054A9AF /* bbbb.png in Resources */ = {isa = PBXBuildFile; fileRef = E10EB59E2A86217A0054A9AF /* bbbb.png */; };
 		E10EB5A02A86217A0054A9AF /* bbbb.png in Resources */ = {isa = PBXBuildFile; fileRef = E10EB59E2A86217A0054A9AF /* bbbb.png */; };
+		E122DA1D2A8A158C006D1E7B /* ChainKava60.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DA1C2A8A158C006D1E7B /* ChainKava60.swift */; };
+		E122DA1E2A8A158C006D1E7B /* ChainKava60.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DA1C2A8A158C006D1E7B /* ChainKava60.swift */; };
+		E122DA212A8A18FB006D1E7B /* ed25519swift in Frameworks */ = {isa = PBXBuildFile; productRef = E122DA202A8A18FB006D1E7B /* ed25519swift */; };
+		E122DA232A8A1909006D1E7B /* ed25519swift in Frameworks */ = {isa = PBXBuildFile; productRef = E122DA222A8A1909006D1E7B /* ed25519swift */; };
+		E122DA262A8A19D2006D1E7B /* Blake2 in Frameworks */ = {isa = PBXBuildFile; productRef = E122DA252A8A19D2006D1E7B /* Blake2 */; };
+		E122DA282A8A19DF006D1E7B /* Blake2 in Frameworks */ = {isa = PBXBuildFile; productRef = E122DA272A8A19DF006D1E7B /* Blake2 */; };
 		E1271B04224B17230083AF17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
 		E159805A2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
 		E159805B2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
@@ -265,8 +271,8 @@
 		04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20VaultDepositRes.swift; sourceTree = "<group>"; };
 		04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		042296802A890C9B003C7630 /* ChainKava_Legacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava_Legacy.swift; sourceTree = "<group>"; };
-		042296832A890CC4003C7630 /* ChainKava_EVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava_EVM.swift; sourceTree = "<group>"; };
+		042296802A890C9B003C7630 /* ChainKava118.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava118.swift; sourceTree = "<group>"; };
+		042296832A890CC4003C7630 /* ChainKavaEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKavaEVM.swift; sourceTree = "<group>"; };
 		043031EC28C2136F005FF935 /* MintscanPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanPath.swift; sourceTree = "<group>"; };
 		0437E086268C0A6700088391 /* RIPEMD160.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		0443B89728589B570027A6B9 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
@@ -301,7 +307,7 @@
 		04D279DB2A66863C00AF046A /* BaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAccount.swift; sourceTree = "<group>"; };
 		04D279E52A66E32A00AF046A /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		04D279E92A67C96500AF046A /* ChainCosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCosmos.swift; sourceTree = "<group>"; };
-		04D279EC2A67C96F00AF046A /* ChainKava.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava.swift; sourceTree = "<group>"; };
+		04D279EC2A67C96F00AF046A /* ChainKava459.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava459.swift; sourceTree = "<group>"; };
 		04D279EF2A67C98E00AF046A /* ChainEthereum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainEthereum.swift; sourceTree = "<group>"; };
 		04D279F22A67C9A600AF046A /* ChainSui.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSui.swift; sourceTree = "<group>"; };
 		04D279F52A67C9B700AF046A /* ChainEvmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainEvmos.swift; sourceTree = "<group>"; };
@@ -349,6 +355,7 @@
 		E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
 		E10EB59E2A86217A0054A9AF /* bbbb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bbbb.png; sourceTree = "<group>"; };
+		E122DA1C2A8A158C006D1E7B /* ChainKava60.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava60.swift; sourceTree = "<group>"; };
 		E136D8A223039493001BEBB8 /* Cosmostation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cosmostation.entitlements; sourceTree = "<group>"; };
 		E15980582A6F5EFE0032892B /* PortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCell.swift; sourceTree = "<group>"; };
 		E15980592A6F5EFE0032892B /* PortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCell.xib; sourceTree = "<group>"; };
@@ -402,8 +409,10 @@
 			files = (
 				04D279D12A6508C500AF046A /* WalletConnect in Frameworks */,
 				EB85535FBF1815AEAECE43D4 /* Pods_CosmostationDev.framework in Frameworks */,
+				E122DA232A8A1909006D1E7B /* ed25519swift in Frameworks */,
 				04D547F22A612A93001F1A4B /* FirebaseMessaging in Frameworks */,
 				04D279C82A64E75E00AF046A /* KeychainAccess in Frameworks */,
+				E122DA282A8A19DF006D1E7B /* Blake2 in Frameworks */,
 				1876EE882A49352400C53352 /* GRPC in Frameworks */,
 				04D547F42A612AA7001F1A4B /* SwiftyJSON in Frameworks */,
 				1876EE8A2A49353100C53352 /* SwiftProtobuf in Frameworks */,
@@ -421,8 +430,10 @@
 			files = (
 				04D279CB2A6508A400AF046A /* WalletConnect in Frameworks */,
 				9EBDC03599A6A52BCFB81E33 /* Pods_Cosmostation.framework in Frameworks */,
+				E122DA212A8A18FB006D1E7B /* ed25519swift in Frameworks */,
 				04815BDE2A41DB120006A906 /* SwiftProtobuf in Frameworks */,
 				04D279C62A64E73C00AF046A /* KeychainAccess in Frameworks */,
+				E122DA262A8A19D2006D1E7B /* Blake2 in Frameworks */,
 				04D547ED2A612914001F1A4B /* FirebaseMessaging in Frameworks */,
 				04D547EA2A6128CA001F1A4B /* SwiftyJSON in Frameworks */,
 				04815BE12A41DB410006A906 /* GRPC in Frameworks */,
@@ -441,7 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				04D279EF2A67C98E00AF046A /* ChainEthereum.swift */,
-				042296832A890CC4003C7630 /* ChainKava_EVM.swift */,
+				042296832A890CC4003C7630 /* ChainKavaEVM.swift */,
 			);
 			path = ClassEVM;
 			sourceTree = "<group>";
@@ -450,8 +461,9 @@
 			isa = PBXGroup;
 			children = (
 				04D279E92A67C96500AF046A /* ChainCosmos.swift */,
-				04D279EC2A67C96F00AF046A /* ChainKava.swift */,
-				042296802A890C9B003C7630 /* ChainKava_Legacy.swift */,
+				04D279EC2A67C96F00AF046A /* ChainKava459.swift */,
+				E122DA1C2A8A158C006D1E7B /* ChainKava60.swift */,
+				042296802A890C9B003C7630 /* ChainKava118.swift */,
 				04D279F52A67C9B700AF046A /* ChainEvmos.swift */,
 			);
 			path = ClassCosmos;
@@ -793,6 +805,8 @@
 				04D279D42A6508C500AF046A /* WalletConnectPairing */,
 				04D279D92A65093600AF046A /* SQLite */,
 				04D279E22A66E18800AF046A /* Lottie */,
+				E122DA222A8A1909006D1E7B /* ed25519swift */,
+				E122DA272A8A19DF006D1E7B /* Blake2 */,
 			);
 			productName = Cosmostation;
 			productReference = 18FFB7D5281AF533004E65BB /* CosmostationDev.app */;
@@ -825,6 +839,8 @@
 				04D279CE2A6508A400AF046A /* WalletConnectPairing */,
 				04D279D72A65092B00AF046A /* SQLite */,
 				04D279E02A66E17B00AF046A /* Lottie */,
+				E122DA202A8A18FB006D1E7B /* ed25519swift */,
+				E122DA252A8A19D2006D1E7B /* Blake2 */,
 			);
 			productName = Cosmostation;
 			productReference = E1945E24222E7C0600A1436F /* Cosmostation.app */;
@@ -874,6 +890,8 @@
 				04D279C92A6508A400AF046A /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */,
 				04D279D62A65092B00AF046A /* XCRemoteSwiftPackageReference "SQLite" */,
 				04D279DF2A66E17B00AF046A /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				E122DA1F2A8A18FB006D1E7B /* XCRemoteSwiftPackageReference "ed25519swift" */,
+				E122DA242A8A19D2006D1E7B /* XCRemoteSwiftPackageReference "Blake2.swift" */,
 			);
 			productRefGroup = E1945E25222E7C0600A1436F /* Products */;
 			projectDirPath = "";
@@ -1061,7 +1079,8 @@
 			files = (
 				18FFB272281AF533004E65BB /* CKey.swift in Sources */,
 				047847C629629AD100FD6A7E /* Cw20IcnsByNameRes.swift in Sources */,
-				042296822A890C9B003C7630 /* ChainKava_Legacy.swift in Sources */,
+				042296822A890C9B003C7630 /* ChainKava118.swift in Sources */,
+				E122DA1E2A8A158C006D1E7B /* ChainKava60.swift in Sources */,
 				18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */,
 				18FFB307281AF533004E65BB /* BinanceProto.swift in Sources */,
 				18FFB317281AF533004E65BB /* OkToken.swift in Sources */,
@@ -1076,7 +1095,7 @@
 				18D4C19628C704B8003F230A /* WalletConnectManager.swift in Sources */,
 				18FFB396281AF533004E65BB /* WUtils.swift in Sources */,
 				18FFB3A7281AF533004E65BB /* IntroViewController.swift in Sources */,
-				042296852A890CC4003C7630 /* ChainKava_EVM.swift in Sources */,
+				042296852A890CC4003C7630 /* ChainKavaEVM.swift in Sources */,
 				1577DAC929B9F07800C360EC /* Board.swift in Sources */,
 				0492AE922A83CC9B001360F0 /* SwapVC.swift in Sources */,
 				1876EE8D2A4935EA00C53352 /* Cw20VaultDepositRes.swift in Sources */,
@@ -1113,7 +1132,7 @@
 				18FFB591281AF533004E65BB /* AppDelegate.swift in Sources */,
 				E15980A02A83A9D70032892B /* SlideOutTransition.swift in Sources */,
 				18FFB59F281AF533004E65BB /* Signer.swift in Sources */,
-				04D279EE2A67C96F00AF046A /* ChainKava.swift in Sources */,
+				04D279EE2A67C96F00AF046A /* ChainKava459.swift in Sources */,
 				E1D4EA5C2871BCDE005C1ECF /* WDP.swift in Sources */,
 				1517346B2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
 				18FFB5B6281AF533004E65BB /* BTCMnemonic.m in Sources */,
@@ -1146,7 +1165,8 @@
 			files = (
 				285ADF0D272EE35F0023651F /* CKey.swift in Sources */,
 				047847C529629AD100FD6A7E /* Cw20IcnsByNameRes.swift in Sources */,
-				042296812A890C9B003C7630 /* ChainKava_Legacy.swift in Sources */,
+				042296812A890C9B003C7630 /* ChainKava118.swift in Sources */,
+				E122DA1D2A8A158C006D1E7B /* ChainKava60.swift in Sources */,
 				E1945E52223124F000A1436F /* BaseData.swift in Sources */,
 				046E903D268C413A002CFFE1 /* BinanceProto.swift in Sources */,
 				04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */,
@@ -1161,7 +1181,7 @@
 				E16D9B1522489B030019B7BB /* IntroViewController.swift in Sources */,
 				1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
 				046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */,
-				042296842A890CC4003C7630 /* ChainKava_EVM.swift in Sources */,
+				042296842A890CC4003C7630 /* ChainKavaEVM.swift in Sources */,
 				1577DAC829B9F07800C360EC /* Board.swift in Sources */,
 				0492AE912A83CC9B001360F0 /* SwapVC.swift in Sources */,
 				E1945E542231256800A1436F /* BaseConstant.swift in Sources */,
@@ -1198,7 +1218,7 @@
 				28CE973625872B7C006DEBEE /* Signer.swift in Sources */,
 				E159809F2A83A9D70032892B /* SlideOutTransition.swift in Sources */,
 				E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
-				04D279ED2A67C96F00AF046A /* ChainKava.swift in Sources */,
+				04D279ED2A67C96F00AF046A /* ChainKava459.swift in Sources */,
 				E17748E32282D6AD003D8CD1 /* BTCMnemonic.m in Sources */,
 				046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */,
 				28FC030C2652662B001C0319 /* Price.swift in Sources */,
@@ -1607,6 +1627,22 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		E122DA1F2A8A18FB006D1E7B /* XCRemoteSwiftPackageReference "ed25519swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pebble8888/ed25519swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.7;
+			};
+		};
+		E122DA242A8A19D2006D1E7B /* XCRemoteSwiftPackageReference "Blake2.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tesseract-one/Blake2.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1719,6 +1755,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04815BDC2A41DB120006A906 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
 			productName = SwiftProtobuf;
+		};
+		E122DA202A8A18FB006D1E7B /* ed25519swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E122DA1F2A8A18FB006D1E7B /* XCRemoteSwiftPackageReference "ed25519swift" */;
+			productName = ed25519swift;
+		};
+		E122DA222A8A1909006D1E7B /* ed25519swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E122DA1F2A8A18FB006D1E7B /* XCRemoteSwiftPackageReference "ed25519swift" */;
+			productName = ed25519swift;
+		};
+		E122DA252A8A19D2006D1E7B /* Blake2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E122DA242A8A19D2006D1E7B /* XCRemoteSwiftPackageReference "Blake2.swift" */;
+			productName = Blake2;
+		};
+		E122DA272A8A19DF006D1E7B /* Blake2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E122DA242A8A19D2006D1E7B /* XCRemoteSwiftPackageReference "Blake2.swift" */;
+			productName = Blake2;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

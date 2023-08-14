@@ -12,10 +12,31 @@ import Foundation
 class BaseChain {
     var name: String!
     var id: String!
+    var isDefault = true
     var accountKeyType: AccountKeyType!
     
     var privateKey: Data?
+    var publicKey: Data?
     var address: String?
+    
+    var accountPrefix: String?
+    
+    
+    func getHDPath(_ lastPath: String) -> String {
+        return accountKeyType.hdPath.replacingOccurrences(of: "X", with: lastPath)
+    }
+    
+    func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
+        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
+    }
+    
+    func setInfoWithPrivateKey(_ priKey: Data) {
+        privateKey = priKey
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
+    }
 }
 
 

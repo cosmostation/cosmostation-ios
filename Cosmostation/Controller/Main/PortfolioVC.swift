@@ -24,12 +24,13 @@ class PortfolioVC: BaseVC {
         navigationItem.leftBarButtonItem = leftBarButton("AAA")
         
         initData()
+        
     }
     
     func initData() {
         let account = BaseData.instance.getLastAccount()
         print("account ", account)
-        account?.setPrivateKeys()
+        account?.setSecureInfo()
         
         
         
