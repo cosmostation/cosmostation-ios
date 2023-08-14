@@ -425,6 +425,7 @@
 "tx_authz_undelegate_1" = "委任解除数量を入力してください。";
 "tx_authz_redelegate_0" = "検証人を選択してください。";
 "tx_authz_redelegate_1" = "再委任数量を入力してください。";
+"tx_authz_revoke_0" = "キャンセルする権限を確認してください。";
 "tx_liquid_staking_0" = "ステーキング金額を入力してください";
 "tx_liquid_unstaking_0" = "未払金額を入力してください";
 "tx_liquid_unstaking_1" = "受信者のアドレスを入力してください";
@@ -796,6 +797,7 @@
 "title_authz_undelegate" = "Authz Undelegate";
 "title_authz_redelegate" = "Authz Redelegate";
 "title_authz_send" = "Authz Send";
+"title_authz_revoke" = "Authz Revoke";
 "title_liquid_staking" = "Liquid Staking";
 "title_liquid_unstaking" = "Liquid Unstaking";
 "title_liquid_redeem" = "Liquid Redeem";

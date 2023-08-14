@@ -425,6 +425,7 @@
 "tx_authz_undelegate_1" = "위임철회할 수량을 입력하세요";
 "tx_authz_redelegate_0" = "검증인을 선택하세요";
 "tx_authz_redelegate_1" = "재위임 할 수량을 입력하세요";
+"tx_authz_revoke_0" = "취소할 권한을 확인하세요";
 "tx_liquid_staking_0" = "수량을 입력하세요";
 "tx_liquid_unstaking_0" = "수량을 입력하세요";
 "tx_liquid_unstaking_1" = "받을 주소를 입력해주세요.";
@@ -796,6 +797,7 @@
 "title_authz_undelegate" = "Authz 위임철회 하기";
 "title_authz_redelegate" = "Authz 재위임 하기";
 "title_authz_send" = "Authz 전송하기";
+"title_authz_revoke" = "권한 취소하기";
 "title_liquid_staking" = "리퀴드 스테이킹";
 "title_liquid_unstaking" = "리퀴드 언스테이킹";
 "title_liquid_redeem" = "리퀴드 상환";

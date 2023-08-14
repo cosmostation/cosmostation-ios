@@ -146,6 +146,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
 
     var mGrant: Cosmos_Authz_V1beta1_Grant?
     var mGranterData: GranterData?
+    var mGrantees = Array<Cosmos_Authz_V1beta1_GrantAuthorization>()
     
     var mEthereumTransaction: EthereumTransaction?
     
@@ -448,6 +449,12 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                    MemoViewController(nibName: "MemoViewController", bundle: nil),
                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                    AuthzSend5ViewController(nibName: "AuthzSend5ViewController", bundle: nil)]
+           
+       } else if (mType == TASK_TYPE_AUTHZ_REVOKE) {
+           return [AuthzRevoke1ViewController(nibName: "AuthzRevoke1ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzRevoke4ViewController(nibName: "AuthzRevoke4ViewController", bundle: nil)]
            
        } else if (mType == TASK_TYPE_STRIDE_LIQUIDITY_STAKE) {
            return [StrideLiquid0ViewController(nibName: "StrideLiquid0ViewController", bundle: nil),

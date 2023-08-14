@@ -779,6 +779,13 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                self.chainType!)
             
+        } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_REVOKE) {
+            return Signer.genSimulateAuthzRevoke(auth, account!.account_pubkey_type,
+                                               self.pageHolderVC.mGrantees,
+                                               self.mFee, self.pageHolderVC.mMemo!,
+                                               self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                               self.chainType!)
+            
         } else if (pageHolderVC.mType == TASK_TYPE_STRIDE_LIQUIDITY_STAKE) {
             return Signer.genSimulateLiquidityStaking(auth, account!.account_pubkey_type,
                                                       self.account!.account_address,

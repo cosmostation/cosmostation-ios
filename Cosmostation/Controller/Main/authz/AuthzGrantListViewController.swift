@@ -73,4 +73,28 @@ extension WUtils {
             else { return "Unknown" }
         }
     }
+    
+    static func getAuthzGrantType(_ grant: Cosmos_Authz_V1beta1_GrantAuthorization) -> String {
+        let grantTypeUrl = grant.authorization.typeURL
+        let authorizationValue = grant.authorization.value
+
+        if (grantTypeUrl.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+            let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: authorizationValue)
+            return genericAuth.msg
+            
+        } else if (grantTypeUrl.contains(Cosmos_Bank_V1beta1_SendAuthorization.protoMessageName)) {
+            return "/cosmos.bank.v1beta1.MsgSend"
+            
+        } else {
+            let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: authorizationValue)
+            if (stakeAuth.authorizationType == Cosmos_Staking_V1beta1_AuthorizationType.delegate) {
+                return "/cosmos.staking.v1beta1.MsgDelegate";
+            } else if (stakeAuth.authorizationType == Cosmos_Staking_V1beta1_AuthorizationType.redelegate) {
+                return "/cosmos.staking.v1beta1.MsgRedelegate";
+            } else if (stakeAuth.authorizationType == Cosmos_Staking_V1beta1_AuthorizationType.undelegate) {
+                return "/cosmos.staking.v1beta1.MsgUndelegate";
+            }
+        }
+        return "Unknown"
+    }
 }

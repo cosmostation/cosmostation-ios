@@ -13,8 +13,7 @@ class AuthzGranteeViewController: BaseViewController {
     @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var granteeTableView: UITableView!
     
-    var grants = Array<Cosmos_Authz_V1beta1_GrantAuthorization>()
-    var selectedGrants = Array<Cosmos_Authz_V1beta1_GrantAuthorization>()
+    var mGrants = Array<(Bool, Cosmos_Authz_V1beta1_GrantAuthorization)>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,14 +51,18 @@ class AuthzGranteeViewController: BaseViewController {
             return
         }
         
-        if (self.selectedGrants.count <= 0) {
+        if (self.mGrants.filter({ $0.0 == true }).count <= 0 ) {
             self.onShowToast(NSLocalizedString("error_no_selected_grant", comment: ""))
             return
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mType = TASK_TYPE_AUTHZ_REVOKE
-//        txVC.mSwapInDenom = self.inputCoinDenom
+        self.mGrants.forEach { (isSelected, grant) in
+            if (isSelected == true) {
+                txVC.mGrantees.append(grant)
+            }
+        }
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }
@@ -72,10 +75,8 @@ class AuthzGranteeViewController: BaseViewController {
                 if let response = try? Cosmos_Authz_V1beta1_QueryClient(channel: channel).granterGrants(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     let now = Date().millisecondsSince1970
                     response.grants.forEach { grant in
-                        print("test1234 : ", grant.expiration.seconds * 1000)
-                        print("test12345 : ", now)
                         if (grant.expiration.seconds * 1000 >= now) {
-                            self.grants.append(grant)
+                            self.mGrants.append((false, grant))
                         }
                     }
                 }
@@ -90,15 +91,16 @@ class AuthzGranteeViewController: BaseViewController {
 }
 
 extension AuthzGranteeViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (self.grants.count == 0) {
+        if (self.mGrants.count == 0) {
             return 1
         }
-        return self.grants.count
+        return self.mGrants.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (self.grants.count == 0) {
+        if (self.mGrants.count == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"GranterEmptyViewCell") as? GranterEmptyViewCell
             cell?.rootCardView.backgroundColor = chainConfig?.chainColorBG
             cell?.emptyGrantLabel.text = NSLocalizedString("msg_grantee_empty", comment: "")
@@ -106,12 +108,13 @@ extension AuthzGranteeViewController: UITableViewDelegate, UITableViewDataSource
             return cell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"GranteeViewCell") as? GranteeViewCell
-            cell?.onBindView(self.grants[indexPath.row])
+            cell?.onBindView(mGrants[indexPath.row])
             return cell!
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.mGrants[indexPath.row].0.toggle()
+        self.granteeTableView.reloadRows(at: [indexPath], with: .none)
     }
 }

@@ -425,6 +425,7 @@
 "tx_authz_undelegate_1" = "Enter undelegation amount";
 "tx_authz_redelegate_0" = "Select validator";
 "tx_authz_redelegate_1" = "Enter redelegation amount";
+"tx_authz_revoke_0" = "Check the Grant to Revoke";
 "tx_liquid_staking_0" = "Enter staking amount";
 "tx_liquid_unstaking_0" = "Enter unstaking amount";
 "tx_liquid_unstaking_1" = "Enter recipient Address";
@@ -796,6 +797,7 @@
 "title_authz_undelegate" = "Authz Undelegate";
 "title_authz_redelegate" = "Authz Redelegate";
 "title_authz_send" = "Authz Send";
+"title_authz_revoke" = "Authz Revoke";
 "title_liquid_staking" = "Liquid Staking";
 "title_liquid_unstaking" = "Liquid Unstaking";
 "title_liquid_redeem" = "Liquid Redeem";

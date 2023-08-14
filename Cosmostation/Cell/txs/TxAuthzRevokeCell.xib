@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="223" id="KGk-i7-Jjw" customClass="TxAuthzRevokeCell" customModule="Cosmostation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="543" height="223"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="543" height="223"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTq-k4-hV9" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
+                        <rect key="frame" x="16" y="4" width="511" height="215"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnIconAuthz" translatesAutoresizingMaskIntoConstraints="NO" id="Pil-ib-KlV">
+                                <rect key="frame" x="16" y="16" width="28" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="hq7-ci-eq7"/>
+                                    <constraint firstAttribute="height" constant="28" id="vcv-AH-XrV"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grant Revoke" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5by-r3-9b1">
+                                <rect key="frame" x="50" y="21" width="92" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" name="_font05"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Granter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfX-6o-4my">
+                                <rect key="frame" x="16" y="60.000000000000007" width="43" height="14.333333333333336"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" name="_font04"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBw-04-806">
+                                <rect key="frame" x="16" y="80.333333333333329" width="6" height="14.333333333333329"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" name="_font05"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Grantee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEX-Pb-3XE">
+                                <rect key="frame" x="16.000000000000004" y="110.66666666666667" width="45.333333333333343" height="14.333333333333329"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" name="_font04"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAt-5C-W01">
+                                <rect key="frame" x="15.999999999999998" y="133" width="5.6666666666666661" height="35.666666666666657"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" name="_font05"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Grant Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDH-0g-aj0">
+                                <rect key="frame" x="16" y="184.66666666666666" width="63" height="14.333333333333343"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" name="_font04"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ad3-xH-SGg">
+                                <rect key="frame" x="489" y="184.66666666666666" width="6" height="15"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" name="_font05"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="_card_bg"/>
+                        <constraints>
+                            <constraint firstItem="eBw-04-806" firstAttribute="leading" secondItem="Pil-ib-KlV" secondAttribute="leading" id="3Cg-Jk-RVg"/>
+                            <constraint firstItem="WEX-Pb-3XE" firstAttribute="leading" secondItem="HfX-6o-4my" secondAttribute="leading" id="5Bb-7m-wae"/>
+                            <constraint firstItem="HfX-6o-4my" firstAttribute="top" secondItem="Pil-ib-KlV" secondAttribute="bottom" constant="16" id="5Jr-yb-Wgn"/>
+                            <constraint firstItem="hAt-5C-W01" firstAttribute="top" secondItem="WEX-Pb-3XE" secondAttribute="bottom" constant="8" id="8hr-m8-DOB"/>
+                            <constraint firstItem="WEX-Pb-3XE" firstAttribute="top" secondItem="eBw-04-806" secondAttribute="bottom" constant="16" id="Kus-1Y-qOQ"/>
+                            <constraint firstItem="IDH-0g-aj0" firstAttribute="top" secondItem="hAt-5C-W01" secondAttribute="bottom" constant="16" id="V1l-Bp-Sd7"/>
+                            <constraint firstItem="Pil-ib-KlV" firstAttribute="top" secondItem="KTq-k4-hV9" secondAttribute="top" constant="16" id="df4-9c-iJI"/>
+                            <constraint firstAttribute="bottom" secondItem="IDH-0g-aj0" secondAttribute="bottom" constant="16" id="gY8-Kv-E0y"/>
+                            <constraint firstItem="5by-r3-9b1" firstAttribute="leading" secondItem="Pil-ib-KlV" secondAttribute="trailing" constant="6" id="gYl-Hu-ghJ"/>
+                            <constraint firstItem="HfX-6o-4my" firstAttribute="leading" secondItem="Pil-ib-KlV" secondAttribute="leading" id="jbV-W0-dIx"/>
+                            <constraint firstItem="hAt-5C-W01" firstAttribute="leading" secondItem="WEX-Pb-3XE" secondAttribute="leading" id="u1G-jK-XXb"/>
+                            <constraint firstItem="IDH-0g-aj0" firstAttribute="leading" secondItem="hAt-5C-W01" secondAttribute="leading" id="u8B-H8-p2S"/>
+                            <constraint firstItem="Pil-ib-KlV" firstAttribute="leading" secondItem="KTq-k4-hV9" secondAttribute="leading" constant="16" id="uVE-VM-n9X"/>
+                            <constraint firstItem="eBw-04-806" firstAttribute="top" secondItem="HfX-6o-4my" secondAttribute="bottom" constant="6" id="uuP-uP-U4l"/>
+                            <constraint firstItem="Ad3-xH-SGg" firstAttribute="top" secondItem="IDH-0g-aj0" secondAttribute="top" id="v48-tj-neS"/>
+                            <constraint firstAttribute="trailing" secondItem="Ad3-xH-SGg" secondAttribute="trailing" constant="16" id="vqu-gW-ynV"/>
+                            <constraint firstItem="5by-r3-9b1" firstAttribute="centerY" secondItem="Pil-ib-KlV" secondAttribute="centerY" id="zPF-vB-Ru4"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
+                                <integer key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.29999999999999999"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="KTq-k4-hV9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="DvD-oG-oBj"/>
+                    <constraint firstItem="KTq-k4-hV9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="HXU-m0-m91"/>
+                    <constraint firstAttribute="bottom" secondItem="KTq-k4-hV9" secondAttribute="bottom" constant="4" id="hxI-ah-F0z"/>
+                    <constraint firstAttribute="trailing" secondItem="KTq-k4-hV9" secondAttribute="trailing" constant="16" id="oDP-ls-ueZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="grantTypeLabel" destination="Ad3-xH-SGg" id="mqn-xB-a7z"/>
+                <outlet property="granteeLabel" destination="hAt-5C-W01" id="MPF-LW-p0U"/>
+                <outlet property="granterLabel" destination="eBw-04-806" id="z7o-3K-vdu"/>
+                <outlet property="txIcon" destination="Pil-ib-KlV" id="R8x-v9-Vvl"/>
+            </connections>
+            <point key="canvasLocation" x="309.16030534351142" y="83.450704225352112"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="btnIconAuthz" width="20" height="20"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font04">
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

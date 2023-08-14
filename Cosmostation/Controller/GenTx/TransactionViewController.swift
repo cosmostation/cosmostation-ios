@@ -65,6 +65,7 @@ class TransactionViewController: UIViewController {
     // MARK: - for authz tx
     var mGrant: Cosmos_Authz_V1beta1_Grant?
     var mGranterData: GranterData?
+    var mGrantees = Array<Cosmos_Authz_V1beta1_GrantAuthorization>()
     
     var mChainId: String?
     
@@ -316,6 +317,11 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep5_1")
             self.titleLabel.text =  NSLocalizedString("title_authz_send", comment: "")
             
+        } else if (mType == TASK_TYPE_AUTHZ_REVOKE) {
+            stepDescription.text = NSLocalizedString("tx_authz_revoke_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            self.titleLabel.text =  NSLocalizedString("title_authz_revoke", comment: "")
+            
         } else if (mType == TASK_TYPE_STRIDE_LIQUIDITY_STAKE) {
             stepDescription.text = NSLocalizedString("tx_liquid_staking_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
@@ -444,6 +450,7 @@ class TransactionViewController: UIViewController {
             
             StepVc.mGrant = mGrant
             StepVc.mGranterData = mGranterData
+            StepVc.mGrantees = self.mGrantees
             
             StepVc.mChainId = mChainId
         }
@@ -640,6 +647,10 @@ class TransactionViewController: UIViewController {
                 } else if (mType == TASK_TYPE_AUTHZ_SEND) {
                     stepDescription.text = NSLocalizedString("tx_authz_send_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_1")
+                    
+                } else if (mType == TASK_TYPE_AUTHZ_REVOKE) {
+                    stepDescription.text = NSLocalizedString("tx_authz_revoke_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_1")
                     
                 } else if (mType == TASK_TYPE_STRIDE_LIQUIDITY_STAKE) {
                     stepDescription.text = NSLocalizedString("tx_liquid_staking_0", comment: "")
