@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import GRPC
+import NIO
 
 
 class BaseChain {
@@ -20,6 +22,13 @@ class BaseChain {
     var address: String?
     
     var accountPrefix: String?
+    
+    var grpcHost = ""
+    var grpcPort = 443
+    var cosmosBalances = [Cosmos_Base_V1beta1_Coin]()
+    var cosmosDelegations = [Cosmos_Staking_V1beta1_DelegationResponse]()
+    var cosmosUnbondings = [Cosmos_Staking_V1beta1_UnbondingDelegation]()
+    var cosmosRewards = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
     
     
     func getHDPath(_ lastPath: String) -> String {
@@ -36,6 +45,87 @@ class BaseChain {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
+    }
+    
+    
+    
+    
+    
+    func fetchData() {
+        print("fetchData ", Date().timeIntervalSince1970, " ",  self.address)
+        let group = DispatchGroup()
+        let channel = getConnection()
+
+        fetchBalance(group, channel)
+        fetchDelegation(group, channel)
+        fetchUnbondings(group, channel)
+        fetchRewards(group, channel)
+
+        group.notify(queue: .main) {
+//            try channel.close().wait()
+            try? channel.close().wait()
+
+            print("notify cosmosBalances", self.address, " ", self.cosmosBalances)
+//            print("notify cosmosDelegations", self.address, " ", self.cosmosDelegations)
+//
+//            print("notify ", String(describing: self))
+//            let value = ["chain": String(describing: self)]
+//            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: nil, userInfo: value)
+            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: String(describing: self), userInfo: nil)
+        }
+        
+    }
+    
+    func fetchBalance(_ group: DispatchGroup, _ channel: ClientConnection) {
+        group.enter()
+        let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
+        let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = address!; $0.pagination = page }
+        if let response = try? Cosmos_Bank_V1beta1_QueryNIOClient(channel: channel).allBalances(req, callOptions: getCallOptions()).response.wait() {
+            self.cosmosBalances = response.balances
+            group.leave()
+        }
+    }
+    
+    func fetchDelegation(_ group: DispatchGroup, _ channel: ClientConnection) {
+        group.enter()
+        let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = address! }
+        if let response = try? Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).delegatorDelegations(req, callOptions: getCallOptions()).response.wait() {
+            self.cosmosDelegations = response.delegationResponses
+            group.leave()
+        }
+    }
+    
+    func fetchUnbondings(_ group: DispatchGroup, _ channel: ClientConnection) {
+        group.enter()
+        let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = address! }
+        if let response = try? Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: getCallOptions()).response.wait() {
+            self.cosmosUnbondings = response.unbondingResponses
+            group.leave()
+        }
+    }
+    
+    func fetchRewards(_ group: DispatchGroup, _ channel: ClientConnection) {
+        group.enter()
+        let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = address! }
+        if let response = try? Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).delegationTotalRewards(req, callOptions: getCallOptions()).response.wait() {
+            self.cosmosRewards = response.rewards
+            group.leave()
+        }
+    }
+    
+    
+    
+    func getConnection() -> ClientConnection {
+//        let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+//        return ClientConnection.secure(group: group).connect(host: grpcHost, port: grpcPort)
+        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: grpcHost, port: grpcPort)
+    }
+    
+    func getCallOptions() -> CallOptions {
+        var callOptions = CallOptions()
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(8000))
+        return callOptions
     }
 }
 

@@ -8,6 +8,8 @@
 
 import Foundation
 import SwiftKeychainWrapper
+import GRPC
+import NIO
 
 public class BaseAccount {
     var id: Int64 = -1
@@ -42,7 +44,7 @@ public class BaseAccount {
         activeChains.append(ChainKava118())
     }
     
-    func setSecureInfo() -> Bool {
+    func setAddressInfo() -> Bool {
         setActiveChains()
         
         let keychain = BaseData.instance.getKeyChain()
@@ -50,25 +52,25 @@ public class BaseAccount {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 activeChains.forEach { chain in
-                    chain.setInfoWithSeed(seed, lastHDPath)
+                    Task {
+                        chain.setInfoWithSeed(seed, lastHDPath)
+                        chain.fetchData()
+                    }
                 }
             }
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 activeChains.forEach { chain in
-                    chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
+                    Task {
+                        chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
+                        chain.fetchData()
+                    }
                 }
             }
         }
         return true
     }
-    
-    
-    
-    
-    
-    
     
 }
 

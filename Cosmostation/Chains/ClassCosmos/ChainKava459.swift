@@ -18,5 +18,7 @@ class ChainKava459: BaseChain  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/459'/0'/0/X")
         accountPrefix = "kava"
+        
+        grpcHost = "grpc-kava.cosmostation.io"
     }
 }
