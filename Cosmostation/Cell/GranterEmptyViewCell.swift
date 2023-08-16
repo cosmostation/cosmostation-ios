@@ -11,10 +11,11 @@ import UIKit
 class GranterEmptyViewCell: UITableViewCell {
 
     @IBOutlet weak var rootCardView: CardView!
+    @IBOutlet weak var emptyGrantLabel: UILabel!
+    @IBOutlet weak var emptyGrantMsgLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
     }
-    
 }

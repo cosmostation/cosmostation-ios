@@ -877,7 +877,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickAuthz() {
-        let authzListVC = AuthzListViewController()
+        let authzListVC = UIStoryboard(name: "AuthzGrantList", bundle: nil).instantiateViewController(withIdentifier: "AuthzGrantListViewController") as! AuthzGrantListViewController
         authzListVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(authzListVC, animated: true)

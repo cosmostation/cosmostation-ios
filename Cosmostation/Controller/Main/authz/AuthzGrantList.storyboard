@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Authz Grant List View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="AuthzGrantListViewController" id="Y6W-OH-hqX" customClass="AuthzGrantListViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dgI-ne-IBA">
+                                <rect key="frame" x="130" y="67" width="133" height="32"/>
+                                <segments>
+                                    <segment title="grantee"/>
+                                    <segment title="granter"/>
+                                </segments>
+                                <connections>
+                                    <action selector="switchView:" destination="Y6W-OH-hqX" eventType="valueChanged" id="ZKr-Tq-lJc"/>
+                                </connections>
+                            </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y7U-rm-Jsy">
+                                <rect key="frame" x="0.0" y="106" width="393" height="712"/>
+                                <connections>
+                                    <segue destination="eBz-wI-3Ib" kind="embed" id="plM-Gr-6LJ"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pqj-kc-IJL">
+                                <rect key="frame" x="0.0" y="106" width="393" height="712"/>
+                                <connections>
+                                    <segue destination="9G8-QZ-wHM" kind="embed" id="VDK-6E-4Vx"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Y7U-rm-Jsy" firstAttribute="trailing" secondItem="pqj-kc-IJL" secondAttribute="trailing" id="4I3-yh-yjs"/>
+                            <constraint firstItem="Y7U-rm-Jsy" firstAttribute="bottom" secondItem="pqj-kc-IJL" secondAttribute="bottom" id="5DI-ml-A1g"/>
+                            <constraint firstItem="dgI-ne-IBA" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="BdP-Sd-PWF"/>
+                            <constraint firstItem="Y7U-rm-Jsy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="E5X-7B-p9q"/>
+                            <constraint firstItem="dgI-ne-IBA" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="NLS-Ys-7PM"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Y7U-rm-Jsy" secondAttribute="bottom" id="VSz-Au-459"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Y7U-rm-Jsy" secondAttribute="trailing" id="YEF-pb-gFt"/>
+                            <constraint firstItem="pqj-kc-IJL" firstAttribute="top" secondItem="dgI-ne-IBA" secondAttribute="bottom" constant="8" symbolic="YES" id="qzH-pN-ksg"/>
+                            <constraint firstItem="pqj-kc-IJL" firstAttribute="leading" secondItem="Y7U-rm-Jsy" secondAttribute="leading" id="ul2-Lp-BCT"/>
+                            <constraint firstItem="Y7U-rm-Jsy" firstAttribute="top" secondItem="dgI-ne-IBA" secondAttribute="bottom" constant="8" id="yje-CZ-x6B"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="AuthzSegment" destination="dgI-ne-IBA" id="XIz-ac-IiM"/>
+                        <outlet property="granteeView" destination="Y7U-rm-Jsy" id="8ZJ-mD-Qfg"/>
+                        <outlet property="granterView" destination="pqj-kc-IJL" id="jAM-of-M7N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140" y="-2"/>
+        </scene>
+        <!--Authz Grantee View Controller-->
+        <scene sceneID="R1d-c9-glr">
+            <objects>
+                <viewController id="eBz-wI-3Ib" customClass="AuthzGranteeViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8F8-Xu-aIy">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="712"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="v6F-PS-R7e">
+                                <rect key="frame" x="0.0" y="59" width="393" height="505"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="U3Y-ca-q2q" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
+                                <rect key="frame" x="166.66666666666666" y="326" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="NcD-kq-gBO"/>
+                                    <constraint firstAttribute="height" constant="60" id="Tj6-l8-hva"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xM0-V6-2Z1">
+                                <rect key="frame" x="16" y="580" width="361" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="APD-op-Skf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Revoke">
+                                    <color key="titleColor" name="photon"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="photon"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onClickRevoke:" destination="eBz-wI-3Ib" eventType="touchUpInside" id="bEh-Mb-xhz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JqM-yA-HTQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="v6F-PS-R7e" firstAttribute="top" secondItem="JqM-yA-HTQ" secondAttribute="top" id="0qe-mP-LUH"/>
+                            <constraint firstItem="JqM-yA-HTQ" firstAttribute="trailing" secondItem="v6F-PS-R7e" secondAttribute="trailing" id="27r-fg-qFr"/>
+                            <constraint firstItem="xM0-V6-2Z1" firstAttribute="top" secondItem="v6F-PS-R7e" secondAttribute="bottom" constant="16" id="CFt-vc-Uun"/>
+                            <constraint firstItem="v6F-PS-R7e" firstAttribute="leading" secondItem="JqM-yA-HTQ" secondAttribute="leading" id="HaD-X7-0aG"/>
+                            <constraint firstItem="JqM-yA-HTQ" firstAttribute="trailing" secondItem="xM0-V6-2Z1" secondAttribute="trailing" constant="16" id="N08-sT-hDp"/>
+                            <constraint firstItem="U3Y-ca-q2q" firstAttribute="centerY" secondItem="8F8-Xu-aIy" secondAttribute="centerY" id="RPy-sh-bqg"/>
+                            <constraint firstItem="xM0-V6-2Z1" firstAttribute="leading" secondItem="JqM-yA-HTQ" secondAttribute="leading" constant="16" id="gPk-OP-Wmz"/>
+                            <constraint firstItem="JqM-yA-HTQ" firstAttribute="bottom" secondItem="xM0-V6-2Z1" secondAttribute="bottom" constant="48" id="tHI-ps-L2i"/>
+                            <constraint firstItem="U3Y-ca-q2q" firstAttribute="centerX" secondItem="8F8-Xu-aIy" secondAttribute="centerX" id="u87-tj-wwN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="granteeTableView" destination="v6F-PS-R7e" id="ska-DY-fhx"/>
+                        <outlet property="loadingImg" destination="U3Y-ca-q2q" id="d2J-88-r2S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8wK-YZ-6j1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-991" y="608"/>
+        </scene>
+        <!--Authz Granter View Controller-->
+        <scene sceneID="5LH-l5-CTm">
+            <objects>
+                <viewController id="9G8-QZ-wHM" customClass="AuthzGranterViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OID-i7-6zT">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="712"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6I9-MD-HQm">
+                                <rect key="frame" x="0.0" y="59" width="393" height="619"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Soh-MS-aum"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Soh-MS-aum" firstAttribute="bottom" secondItem="6I9-MD-HQm" secondAttribute="bottom" id="AFD-LT-XPp"/>
+                            <constraint firstItem="Soh-MS-aum" firstAttribute="trailing" secondItem="6I9-MD-HQm" secondAttribute="trailing" id="LAV-Bt-qOD"/>
+                            <constraint firstItem="6I9-MD-HQm" firstAttribute="leading" secondItem="Soh-MS-aum" secondAttribute="leading" id="Qri-8v-hOR"/>
+                            <constraint firstItem="6I9-MD-HQm" firstAttribute="top" secondItem="Soh-MS-aum" secondAttribute="top" id="TUb-Dp-ahR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="granterTableView" destination="6I9-MD-HQm" id="dmv-wB-cl7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E55-jt-jwI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="828" y="654"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="loading_1" width="144" height="144"/>
+        <namedColor name="photon">
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
