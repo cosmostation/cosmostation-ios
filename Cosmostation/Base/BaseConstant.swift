@@ -342,6 +342,7 @@ public enum ChainType: String {
     case STAFI_MAIN
     case NEUTRON_MAIN
     case ARCHWAY_MAIN
+    case SEI_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -402,6 +403,7 @@ public enum ChainType: String {
         result.append(REGEN_MAIN)
         result.append(RIZON_MAIN)
         result.append(SECRET_MAIN)
+        result.append(SEI_MAIN)
         result.append(SENTINEL_MAIN)
         result.append(CERTIK_MAIN)
         result.append(SIF_MAIN)

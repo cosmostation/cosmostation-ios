@@ -354,6 +354,7 @@
 "guide_msg_noble" = "Noble is a Cosmos chain bringing native asset issuance to the IBC ecosystem.";
 "guide_msg_neutron" = "Neutron is a permissionless CosmWasm platform secured by Cosmos Hub’s Interchain Security.";
 "guide_msg_archway" = "Archway is a persmissionless smart contract blockchain designed to incentivize the deployments of dApps.";
+"guide_msg_sei" = "Sei is a Cosmos SDK-based layer 1 blockchain network designed for speed, security and scalability.";
 "guide_msg_stafi" = "StaFi Hub is a sovereign Cosmos SDK based blockchain designed for cross-chain liquid staking.";
 "guide_btn_home" = "Home Page";
 "guide_btn_blog" = "Official Blog";
