@@ -34,24 +34,24 @@ public class BaseAccount {
     }
     
     
-    var activeChains = [BaseChain]()
+    var allChains = [BaseChain]()
     
-    func setActiveChains() {
-        activeChains.removeAll()
-        activeChains.append(ChainCosmos())
-        activeChains.append(ChainKava459())
-        activeChains.append(ChainKava60())
-        activeChains.append(ChainKava118())
+    func setAllChains() {
+        allChains.removeAll()
+        allChains.append(ChainCosmos())
+        allChains.append(ChainKava459())
+        allChains.append(ChainKava60())
+        allChains.append(ChainKava118())
     }
     
     func setAddressInfo() -> Bool {
-        setActiveChains()
+        setAllChains()
         
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                activeChains.forEach { chain in
+                allChains.forEach { chain in
                     Task {
                         chain.setInfoWithSeed(seed, lastHDPath)
                         chain.fetchData()
@@ -61,7 +61,7 @@ public class BaseAccount {
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                activeChains.forEach { chain in
+                allChains.forEach { chain in
                     Task {
                         chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
                         chain.fetchData()

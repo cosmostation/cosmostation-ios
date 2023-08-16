@@ -12,6 +12,8 @@ class PortfolioVC: BaseVC {
 
     @IBOutlet weak var tableView: UITableView!
     
+    let searchController = UISearchController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,11 +22,7 @@ class PortfolioVC: BaseVC {
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "PortfolioCell", bundle: nil), forCellReuseIdentifier: "PortfolioCell")
         
-        
-        navigationItem.leftBarButtonItem = leftBarButton("AAA")
-        
         initData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,19 +42,27 @@ class PortfolioVC: BaseVC {
         print("onFetchDone ", getValue)
     }
     
-    
     func initData() {
         let account = BaseData.instance.getLastAccount()
         print("account ", account)
         account?.setAddressInfo()
         
-        
         navigationItem.leftBarButtonItem = leftBarButton(account?.name)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(clickSearch))
+    }
+    
+    @objc func clickSearch() {
+        print("clickSearch")
+        self.navigationItem.searchController = self.searchController
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50), execute: {
+            self.searchController.searchBar.becomeFirstResponder()
+        })
+        self.searchController.searchBar.delegate = self
     }
 
 }
 
-extension PortfolioVC: UITableViewDelegate, UITableViewDataSource {
+extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
     }
@@ -64,5 +70,17 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"PortfolioCell")
         return cell!
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("searchBar ", searchText)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("cancel")
+        UIView.animate(withDuration: 0.05, animations: {
+            self.navigationItem.searchController?.isActive = false
+            self.navigationItem.searchController = nil
+        })
     }
 }

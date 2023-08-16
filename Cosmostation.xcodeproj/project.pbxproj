@@ -582,6 +582,8 @@
 		E122DC5F2A8A4712006D1E7B /* tendermint_types_validator.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC482A8A4712006D1E7B /* tendermint_types_validator.pb.swift */; };
 		E122DC602A8A4712006D1E7B /* tendermint_abci_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC492A8A4712006D1E7B /* tendermint_abci_types.pb.swift */; };
 		E122DC612A8A4712006D1E7B /* tendermint_abci_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC492A8A4712006D1E7B /* tendermint_abci_types.pb.swift */; };
+		E122DC632A8CA052006D1E7B /* Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E122DC622A8CA052006D1E7B /* Resources.xcassets */; };
+		E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E122DC622A8CA052006D1E7B /* Resources.xcassets */; };
 		E1271B04224B17230083AF17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
 		E159805A2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
 		E159805B2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
@@ -917,6 +919,7 @@
 		E122DC472A8A4712006D1E7B /* tendermint_abci_types.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_abci_types.grpc.swift; sourceTree = "<group>"; };
 		E122DC482A8A4712006D1E7B /* tendermint_types_validator.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_types_validator.pb.swift; sourceTree = "<group>"; };
 		E122DC492A8A4712006D1E7B /* tendermint_abci_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_abci_types.pb.swift; sourceTree = "<group>"; };
+		E122DC622A8CA052006D1E7B /* Resources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resources.xcassets; sourceTree = "<group>"; };
 		E136D8A223039493001BEBB8 /* Cosmostation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cosmostation.entitlements; sourceTree = "<group>"; };
 		E15980582A6F5EFE0032892B /* PortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCell.swift; sourceTree = "<group>"; };
 		E15980592A6F5EFE0032892B /* PortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCell.xib; sourceTree = "<group>"; };
@@ -1055,6 +1058,7 @@
 				0443B89728589B570027A6B9 /* Color.xcassets */,
 				0443B8A1285C7F050027A6B9 /* Chain.xcassets */,
 				E16D9B182248C4880019B7BB /* Assets.xcassets */,
+				E122DC622A8CA052006D1E7B /* Resources.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1423,13 +1427,13 @@
 		E1945E26222E7C0600A1436F /* Cosmostation */ = {
 			isa = PBXGroup;
 			children = (
+				282121BA25FDE71C0016ABFE /* ProtoBuff */,
+				04D279DE2A66D24600AF046A /* Legacy */,
 				E15980562A6F5EDC0032892B /* UI */,
 				04D279E82A67C95500AF046A /* Chains */,
 				04D279E42A66E30B00AF046A /* Resource */,
-				04D279DE2A66D24600AF046A /* Legacy */,
 				28F8EFA3286EC19700162FC1 /* Fonts */,
 				04E25D29276F23C5009B39BA /* Icons */,
-				282121BA25FDE71C0016ABFE /* ProtoBuff */,
 				E1A82DE622448E800097CAEE /* Utils */,
 				E1A82DCF224220810097CAEE /* Dao */,
 				E1945E3B222E7DF600A1436F /* Crypto */,
@@ -1705,6 +1709,7 @@
 				E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				E15980972A83A96E0032892B /* bg0.png in Resources */,
 				E159808B2A83A96E0032892B /* bg3.png in Resources */,
+				E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */,
 				18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */,
 				04172B9429F7AE4000D6279C /* Roboto-Bold.ttf in Resources */,
 			);
@@ -1739,6 +1744,7 @@
 				E15980A32A83AB030032892B /* Main.storyboard in Resources */,
 				E10EB5902A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				0443B8A2285C7F050027A6B9 /* Chain.xcassets in Resources */,
+				E122DC632A8CA052006D1E7B /* Resources.xcassets in Resources */,
 				E10EB59F2A86217A0054A9AF /* bbbb.png in Resources */,
 				04E25D31276F23D9009B39BA /* new2022@2x.png in Resources */,
 				E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
