@@ -61,8 +61,13 @@ public struct AddressByArchwayNs : Codable {
     var name: String?
     
     init(_ name: String) {
-        let dpName = name.split(separator: ".")[0]
-        self.name = dpName + ".arch"
+        if (name.contains(".arch")) {
+            self.name = name
+        } else if (name.contains(".")) {
+            self.name = name + "arch"
+        } else {
+            self.name = name + ".arch"
+        }
     }
 }
 

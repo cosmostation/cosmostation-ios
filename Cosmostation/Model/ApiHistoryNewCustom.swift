@@ -393,7 +393,7 @@ public struct ApiHistoryNewCustom {
             }
             
             // osmosis msg type
-            else if (msgType.contains("osmosis.") && msgType.contains("gamm")) {
+            else if (msgType.contains("osmosis.") && msgType.contains("gamm") || msgType.contains("osmosis.") && msgType.contains("poolmanager")) {
                 if (msgType.contains("MsgSwapExactAmountIn")) {
                     result = NSLocalizedString("tx_coin_swap", comment: "")
                     
