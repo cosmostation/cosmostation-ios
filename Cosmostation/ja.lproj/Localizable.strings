@@ -233,6 +233,10 @@
 "str_incentive_amount" = "インセンティブ数量";
 "str_no_result" = "検索結果がありません";
 "str_smart_contract" = "スマートな契約です";
+"str_grantee" = "権限のある受益者です";
+"str_granter" = "権限授与者です";
+"str_grant_type" = "権限タイプです";
+"str_grant_revoke" = "権限の取り消しです";
 
 
 "btn_delegate" = "  委任する";

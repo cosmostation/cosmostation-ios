@@ -233,6 +233,10 @@
 "str_incentive_amount" = "Incentive Reward";
 "str_no_result" = "No Result";
 "str_smart_contract" = "Smart Contract";
+"str_grantee" = "Grantee";
+"str_granter" = "Granter";
+"str_grant_type" = "Grant Type";
+"str_grant_revoke" = "Grant Revoke";
 
 
 "btn_delegate" = "  Delegate";

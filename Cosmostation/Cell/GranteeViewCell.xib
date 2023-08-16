@@ -102,6 +102,7 @@
             <connections>
                 <outlet property="expirationLabel" destination="iLX-3p-d28" id="N6X-DV-EP3"/>
                 <outlet property="granteeAddressLabel" destination="zEe-d2-4sv" id="JGK-j9-ECH"/>
+                <outlet property="granteeTitleLabel" destination="dKq-8f-q5n" id="CkB-3i-sUV"/>
                 <outlet property="granteeTypeLabel" destination="BGd-BR-x8e" id="dnM-sZ-rVL"/>
                 <outlet property="rootCardView" destination="nIk-Sb-vuj" id="J5r-yM-31f"/>
             </connections>

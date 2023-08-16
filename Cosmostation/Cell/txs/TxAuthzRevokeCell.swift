@@ -11,8 +11,12 @@ import UIKit
 class TxAuthzRevokeCell: TxCell {
 
     @IBOutlet weak var txIcon: UIImageView!
+    @IBOutlet weak var txGrantRevokeLabel: UILabel!
+    @IBOutlet weak var granterTitleLabel: UILabel!
     @IBOutlet weak var granterLabel: UILabel!
+    @IBOutlet weak var granteeTitleLabel: UILabel!
     @IBOutlet weak var granteeLabel: UILabel!
+    @IBOutlet weak var typeTitleLabel: UILabel!
     @IBOutlet weak var grantTypeLabel: UILabel!
     
     override func awakeFromNib() {
@@ -23,6 +27,11 @@ class TxAuthzRevokeCell: TxCell {
     override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chainConfig.chainColor
+        
+        txGrantRevokeLabel.text = NSLocalizedString("str_grant_revoke", comment: "")
+        granterTitleLabel.text = NSLocalizedString("str_granter", comment: "")
+        granteeTitleLabel.text = NSLocalizedString("str_grantee", comment: "")
+        typeTitleLabel.text = NSLocalizedString("str_grant_type", comment: "")
         
         if let msg = try? Cosmos_Authz_V1beta1_MsgRevoke.init(serializedData: response.tx.body.messages[position].value) {
             granterLabel.text = msg.granter

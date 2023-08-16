@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTq-k4-hV9" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="16" y="4" width="511" height="215"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnIconAuthz" translatesAutoresizingMaskIntoConstraints="NO" id="Pil-ib-KlV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="authzIconRevoke" translatesAutoresizingMaskIntoConstraints="NO" id="Pil-ib-KlV">
                                 <rect key="frame" x="16" y="16" width="28" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="28" id="hq7-ci-eq7"/>
@@ -121,14 +121,18 @@
             <connections>
                 <outlet property="grantTypeLabel" destination="Ad3-xH-SGg" id="mqn-xB-a7z"/>
                 <outlet property="granteeLabel" destination="hAt-5C-W01" id="MPF-LW-p0U"/>
+                <outlet property="granteeTitleLabel" destination="WEX-Pb-3XE" id="3XE-gc-3PD"/>
                 <outlet property="granterLabel" destination="eBw-04-806" id="z7o-3K-vdu"/>
+                <outlet property="granterTitleLabel" destination="HfX-6o-4my" id="0I1-QC-nAi"/>
+                <outlet property="txGrantRevokeLabel" destination="5by-r3-9b1" id="6ct-JC-lbW"/>
                 <outlet property="txIcon" destination="Pil-ib-KlV" id="R8x-v9-Vvl"/>
+                <outlet property="typeTitleLabel" destination="IDH-0g-aj0" id="PQj-0o-1tv"/>
             </connections>
             <point key="canvasLocation" x="309.16030534351142" y="83.450704225352112"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="btnIconAuthz" width="20" height="20"/>
+        <image name="authzIconRevoke" width="20" height="20"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

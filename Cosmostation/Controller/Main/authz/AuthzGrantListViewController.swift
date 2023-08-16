@@ -23,6 +23,9 @@ class AuthzGrantListViewController: BaseViewController {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.AuthzSegment.selectedSegmentTintColor = chainConfig?.chainColor
+        
+        AuthzSegment.setTitle(NSLocalizedString("str_grantee", comment: ""), forSegmentAt: 0)
+        AuthzSegment.setTitle(NSLocalizedString("str_granter", comment: ""), forSegmentAt: 1)
     }
     
     @IBAction func switchView(_ sender: UISegmentedControl) {
@@ -38,8 +41,8 @@ class AuthzGrantListViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_liquid_staking", comment: "");
-        self.navigationItem.title = NSLocalizedString("title_liquid_staking", comment: "");
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_authz_list", comment: "");
+        self.navigationItem.title = NSLocalizedString("title_authz_list", comment: "");
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }

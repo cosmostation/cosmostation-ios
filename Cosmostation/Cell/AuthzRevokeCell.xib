@@ -102,7 +102,9 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="granteeAddressLabel" destination="qHo-G7-d72" id="fnk-5J-f1C"/>
+                <outlet property="granteeTitleLabel" destination="dl7-aD-wI4" id="ZkA-Pf-PqT"/>
                 <outlet property="granteeTypeLabel" destination="pnh-N3-DVz" id="y8b-lA-zGC"/>
+                <outlet property="typeLabel" destination="EgQ-jX-gS6" id="s05-yF-6zc"/>
             </connections>
             <point key="canvasLocation" x="93.89312977099236" y="-180.98591549295776"/>
         </tableViewCell>

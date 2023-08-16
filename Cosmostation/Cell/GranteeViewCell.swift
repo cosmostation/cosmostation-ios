@@ -11,6 +11,7 @@ import UIKit
 class GranteeViewCell: UITableViewCell {
 
     @IBOutlet weak var rootCardView: CardView!
+    @IBOutlet weak var granteeTitleLabel: UILabel!
     @IBOutlet weak var granteeAddressLabel: UILabel!
     @IBOutlet weak var granteeTypeLabel: UILabel!
     @IBOutlet weak var expirationLabel: UILabel!
@@ -21,6 +22,8 @@ class GranteeViewCell: UITableViewCell {
     }
     
     func onBindView(_ grant: (Bool, Cosmos_Authz_V1beta1_GrantAuthorization)) {
+        granteeTitleLabel.text = NSLocalizedString("str_grantee", comment: "")
+        
         if (grant.0 == true) {
             rootCardView.borderWidth = 1
             rootCardView.borderColor = UIColor.font05
