@@ -40,7 +40,7 @@ let KEY_WC_WHITELIST                    = "KEY_WC_WHITELIST"
 let KEY_LANGUAGE                        = "KEY_LANGUAGE"
 
 let MINTSCAN_DEV_API_URL                = "https://dev.api.mintscan.io/";
-let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
+let MINTSCAN_API_URL                    = "https://front.api.mintscan.io/";
 let CSS_URL                             = "https://api-wallet.cosmostation.io/";
 let NFT_INFURA                          = "https://ipfs.infura.io/ipfs/";
 
@@ -381,8 +381,6 @@ public enum ChainType: String {
         result.append(JUNO_MAIN)
         result.append(KAVA_MAIN)
         result.append(KI_MAIN)
-        result.append(KONSTELLATION_MAIN)
-        result.append(KUJIRA_MAIN)
         result.append(KYVE_MAIN)
         result.append(LIKECOIN_MAIN)
         result.append(LUM_MAIN)
@@ -406,7 +404,6 @@ public enum ChainType: String {
         result.append(SEI_MAIN)
         result.append(SENTINEL_MAIN)
         result.append(CERTIK_MAIN)
-        result.append(SIF_MAIN)
         result.append(SOMMELIER_MAIN)
         result.append(STAFI_MAIN)
         result.append(STARGAZE_MAIN)
@@ -425,6 +422,10 @@ public enum ChainType: String {
         result.append(NEUTRON_TEST)
         result.append(STATION_TEST)
         result.append(CERBERUS_MAIN)
+        result.append(KONSTELLATION_MAIN)
+        result.append(KUJIRA_MAIN)
+        result.append(SIF_MAIN)
+        
         return result
     }
     

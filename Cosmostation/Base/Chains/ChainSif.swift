@@ -44,7 +44,7 @@ class ChainSif: ChainConfig {
     var authzSupoort = true
     var moonPaySupoort = false
     var kadoMoneySupoort = false
-    var grpcUrl = "grpc-sifchain.cosmostation.io"
+    var grpcUrl = "sif"
     var grpcPort = 443
     var rpcUrl = ""
     var lcdUrl = ""
