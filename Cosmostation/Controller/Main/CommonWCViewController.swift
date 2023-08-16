@@ -431,7 +431,7 @@ class CommonWCViewController: BaseViewController {
             if (params[2].exists() && params[2]["fee"].exists() && params[2]["fee"]["amount"].exists()) {
                 let amounts = params[2]["fee"]["amount"].arrayValue
                 let gas = params[2]["fee"]["gas"].stringValue
-                let value = BigInt(NSDecimalNumber(string: gas).dividing(by: NSDecimalNumber(value: 40)).rounding(accordingToBehavior: NSDecimalNumberHandler(roundingMode: .plain, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)).stringValue)
+                let value = BigInt(NSDecimalNumber(string: gas).dividing(by: NSDecimalNumber(value: 40), withBehavior: WUtils.handler0).stringValue)
                 if (amounts.count == 0) {
                     params[2]["fee"]["amount"] = [["amount": String(value ?? "0"), "denom": denom]]
                 }
@@ -950,7 +950,7 @@ class CommonWCViewController: BaseViewController {
             if (signDoc["fee"].exists() && signDoc["fee"]["amount"].exists()) {
                 let amounts = signDoc["fee"]["amount"].arrayValue
                 let gas = signDoc["fee"]["gas"].stringValue
-                let value = BigInt(NSDecimalNumber(string: gas).dividing(by: NSDecimalNumber(value: 40)).rounding(accordingToBehavior: NSDecimalNumberHandler(roundingMode: .plain, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)).stringValue)
+                let value = BigInt(NSDecimalNumber(string: gas).dividing(by: NSDecimalNumber(value: 40), withBehavior: WUtils.handler0).stringValue)
                 if (amounts.count == 0) {
                     signDoc["fee"]["amount"] = [["amount": String(value ?? "0"), "denom": denom]]
                 }
