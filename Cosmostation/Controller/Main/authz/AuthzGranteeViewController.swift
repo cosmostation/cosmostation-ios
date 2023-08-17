@@ -114,6 +114,9 @@ extension AuthzGranteeViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (self.mGrants.count == 0) {
+            return
+        }
         self.mGrants[indexPath.row].0.toggle()
         self.granteeTableView.reloadRows(at: [indexPath], with: .none)
     }
