@@ -584,6 +584,10 @@
 		E122DC612A8A4712006D1E7B /* tendermint_abci_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC492A8A4712006D1E7B /* tendermint_abci_types.pb.swift */; };
 		E122DC632A8CA052006D1E7B /* Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E122DC622A8CA052006D1E7B /* Resources.xcassets */; };
 		E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E122DC622A8CA052006D1E7B /* Resources.xcassets */; };
+		E122DC662A8DBD28006D1E7B /* PortfolioHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC652A8DBD28006D1E7B /* PortfolioHeader.swift */; };
+		E122DC672A8DBD28006D1E7B /* PortfolioHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC652A8DBD28006D1E7B /* PortfolioHeader.swift */; };
+		E122DC692A8DBD3B006D1E7B /* PortfolioHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = E122DC682A8DBD3B006D1E7B /* PortfolioHeader.xib */; };
+		E122DC6A2A8DBD3B006D1E7B /* PortfolioHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = E122DC682A8DBD3B006D1E7B /* PortfolioHeader.xib */; };
 		E1271B04224B17230083AF17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
 		E159805A2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
 		E159805B2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
@@ -920,6 +924,8 @@
 		E122DC482A8A4712006D1E7B /* tendermint_types_validator.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_types_validator.pb.swift; sourceTree = "<group>"; };
 		E122DC492A8A4712006D1E7B /* tendermint_abci_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_abci_types.pb.swift; sourceTree = "<group>"; };
 		E122DC622A8CA052006D1E7B /* Resources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resources.xcassets; sourceTree = "<group>"; };
+		E122DC652A8DBD28006D1E7B /* PortfolioHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioHeader.swift; sourceTree = "<group>"; };
+		E122DC682A8DBD3B006D1E7B /* PortfolioHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioHeader.xib; sourceTree = "<group>"; };
 		E136D8A223039493001BEBB8 /* Cosmostation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cosmostation.entitlements; sourceTree = "<group>"; };
 		E15980582A6F5EFE0032892B /* PortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCell.swift; sourceTree = "<group>"; };
 		E15980592A6F5EFE0032892B /* PortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCell.xib; sourceTree = "<group>"; };
@@ -1362,6 +1368,8 @@
 			children = (
 				E15980582A6F5EFE0032892B /* PortfolioCell.swift */,
 				E15980592A6F5EFE0032892B /* PortfolioCell.xib */,
+				E122DC652A8DBD28006D1E7B /* PortfolioHeader.swift */,
+				E122DC682A8DBD3B006D1E7B /* PortfolioHeader.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1687,6 +1695,7 @@
 				E159805D2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
 				28F8EFB2286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
 				E10EB5A02A86217A0054A9AF /* bbbb.png in Resources */,
+				E122DC6A2A8DBD3B006D1E7B /* PortfolioHeader.xib in Resources */,
 				18FFB6C3281AF533004E65BB /* new2022@1x.png in Resources */,
 				18FFB6E2281AF533004E65BB /* Assets.xcassets in Resources */,
 				E15980912A83A96E0032892B /* bg6.png in Resources */,
@@ -1722,6 +1731,7 @@
 				04E25D2F276F23D9009B39BA /* new2022@3x.png in Resources */,
 				04E25D30276F23D9009B39BA /* xmas@2x.png in Resources */,
 				04A116F128F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
+				E122DC692A8DBD3B006D1E7B /* PortfolioHeader.xib in Resources */,
 				E15980922A83A96E0032892B /* bg2.png in Resources */,
 				1809C35129D16C80008884C1 /* injectScript.js in Resources */,
 				28F8EFB1286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
@@ -1859,6 +1869,7 @@
 				E122DBC82A8A468E006D1E7B /* cosmos_base_v1beta1_coin.pb.swift in Sources */,
 				E122DB9A2A8A468D006D1E7B /* cosmos_bank_v1beta1_genesis.pb.swift in Sources */,
 				E122DBC62A8A468E006D1E7B /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
+				E122DC672A8DBD28006D1E7B /* PortfolioHeader.swift in Sources */,
 				E122DB722A8A468D006D1E7B /* cosmos_consensus_v1_query.grpc.swift in Sources */,
 				E122DC552A8A4712006D1E7B /* tendermint_types_evidence.pb.swift in Sources */,
 				E122DB202A8A468D006D1E7B /* cosmos_group_v1_events.pb.swift in Sources */,
@@ -2132,6 +2143,7 @@
 				E122DBC72A8A468E006D1E7B /* cosmos_base_v1beta1_coin.pb.swift in Sources */,
 				E122DB992A8A468D006D1E7B /* cosmos_bank_v1beta1_genesis.pb.swift in Sources */,
 				E122DBC52A8A468E006D1E7B /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
+				E122DC662A8DBD28006D1E7B /* PortfolioHeader.swift in Sources */,
 				E122DB712A8A468D006D1E7B /* cosmos_consensus_v1_query.grpc.swift in Sources */,
 				E122DC542A8A4712006D1E7B /* tendermint_types_evidence.pb.swift in Sources */,
 				E122DB1F2A8A468D006D1E7B /* cosmos_group_v1_events.pb.swift in Sources */,
