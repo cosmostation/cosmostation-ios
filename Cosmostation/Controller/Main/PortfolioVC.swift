@@ -60,17 +60,16 @@ class PortfolioVC: BaseVC {
             navigationItem.leftBarButtonItem = leftBarButton(account?.name)
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(clickSearch))
         }
-        
-        
     }
     
     @objc func clickSearch() {
         print("clickSearch")
         self.navigationItem.searchController = self.searchController
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50), execute: {
-            self.searchController.searchBar.becomeFirstResponder()
+            self.navigationItem.searchController?.searchBar.isHidden = false
+            self.navigationItem.searchController?.searchBar.becomeFirstResponder()
         })
-        self.searchController.searchBar.delegate = self
+        self.navigationItem.searchController?.searchBar.delegate = self
     }
 
 }
@@ -101,12 +100,12 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.row == 0) {
+//        if (indexPath.row == 0) {
             return UITableView.automaticDimension
-        } else if (allChains[indexPath.row].hasValue()) {
-            return UITableView.automaticDimension
-        }
-        return 0
+//        } else if (allChains[indexPath.row].hasValue()) {
+//            return UITableView.automaticDimension
+//        }
+//        return 0
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -115,10 +114,9 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         print("cancel")
-        UIView.animate(withDuration: 0.05, animations: {
-            self.navigationItem.searchController?.isActive = false
-            self.navigationItem.searchController = nil
-        })
+        self.navigationItem.searchController?.isActive = false
+        self.navigationItem.searchController?.searchBar.isHidden = true
+        self.navigationItem.searchController = nil
     }
     
     

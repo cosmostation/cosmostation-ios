@@ -36,6 +36,8 @@ class PortfolioCell: UITableViewCell {
     func bindCosmosClassChain(_ chain: BaseChain) {
         nameLabel.text = chain.name
         
+        print("chain ", chain.cosmosBalances)
+        
     }
     
 }

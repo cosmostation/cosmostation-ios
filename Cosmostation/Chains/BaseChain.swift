@@ -9,6 +9,7 @@
 import Foundation
 import GRPC
 import NIO
+import SwiftProtobuf
 
 
 class BaseChain {
@@ -25,10 +26,12 @@ class BaseChain {
     
     var grpcHost = ""
     var grpcPort = 443
+    var cosmosAuth: Google_Protobuf_Any?
     var cosmosBalances = [Cosmos_Base_V1beta1_Coin]()
-    var cosmosDelegations = [Cosmos_Staking_V1beta1_DelegationResponse]()
-    var cosmosUnbondings = [Cosmos_Staking_V1beta1_UnbondingDelegation]()
-    var cosmosRewards = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
+    var cosmosVestings = [Cosmos_Base_V1beta1_Coin]()
+    var cosmosDelegations: [Cosmos_Staking_V1beta1_DelegationResponse]?
+    var cosmosUnbondings: [Cosmos_Staking_V1beta1_UnbondingDelegation]?
+    var cosmosRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]?
     
     
     func getHDPath(_ lastPath: String) -> String {
@@ -52,6 +55,7 @@ class BaseChain {
         let group = DispatchGroup()
         let channel = getConnection()
 
+        fetchAuth(group, channel)
         fetchBalance(group, channel)
         fetchDelegation(group, channel)
         fetchUnbondings(group, channel)
@@ -67,9 +71,19 @@ class BaseChain {
 //            print("notify ", String(describing: self))
 //            let value = ["chain": String(describing: self)]
 //            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: nil, userInfo: value)
+            WUtils.onParseVestingAccount(self)
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: String(describing: self), userInfo: nil)
         }
         
+    }
+    
+    func fetchAuth(_ group: DispatchGroup, _ channel: ClientConnection) {
+        group.enter()
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address! }
+        if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
+            self.cosmosAuth = response.account
+            group.leave()
+        }
     }
     
     func fetchBalance(_ group: DispatchGroup, _ channel: ClientConnection) {
@@ -110,7 +124,8 @@ class BaseChain {
     }
     
     func hasValue() -> Bool {
-        if (cosmosBalances.isEmpty || cosmosBalances.isEmpty || cosmosUnbondings.isEmpty || cosmosRewards.isEmpty) {
+        if (cosmosBalances.isEmpty == true || cosmosVestings.isEmpty == true ||
+            cosmosDelegations?.isEmpty == true || cosmosUnbondings?.isEmpty == true || cosmosRewards?.isEmpty == true) {
             return false
         }
         return true
@@ -118,8 +133,6 @@ class BaseChain {
     
     
     func getConnection() -> ClientConnection {
-//        let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-//        return ClientConnection.secure(group: group).connect(host: grpcHost, port: grpcPort)
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
         return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: grpcHost, port: grpcPort)
     }

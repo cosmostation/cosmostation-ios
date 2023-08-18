@@ -50,27 +50,21 @@
                                         <rect key="frame" x="0.0" y="0.0" width="62.666666666666664" height="16"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCb-NS-yvk">
-                                                <rect key="frame" x="0.0" y="2" width="9" height="14"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="14" id="aOf-1E-LkV"/>
-                                                </constraints>
+                                                <rect key="frame" x="0.0" y="0.0" width="9" height="16"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                                 <color key="textColor" name="_font01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="132,21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Wa-Nb-JYD">
                                                 <rect key="frame" x="10.999999999999996" y="0.0" width="51.666666666666657" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="16" id="iU5-JI-jcQ"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                                                 <color key="textColor" name="_font01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="9Wa-Nb-JYD" firstAttribute="centerY" secondItem="73L-jA-dly" secondAttribute="centerY" id="CSs-P6-KyN"/>
                                             <constraint firstAttribute="height" constant="16" id="Zq3-9k-cSu"/>
+                                            <constraint firstAttribute="bottom" secondItem="9Wa-Nb-JYD" secondAttribute="bottom" id="gTJ-lk-85a"/>
                                             <constraint firstAttribute="bottom" secondItem="WCb-NS-yvk" secondAttribute="bottom" id="q6P-Dx-FCJ"/>
                                         </constraints>
                                     </stackView>
@@ -171,7 +165,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font02">
-            <color red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

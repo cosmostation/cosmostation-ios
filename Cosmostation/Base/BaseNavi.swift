@@ -1,5 +1,5 @@
 //
-//  BaseNavigationControllerViewController.swift
+//  BaseNavi.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/08/09.
