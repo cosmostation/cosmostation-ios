@@ -13,6 +13,7 @@ class PortfolioVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     
     let searchController = UISearchController()
+    var allChains = [BaseChain]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class PortfolioVC: BaseVC {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "PortfolioCell", bundle: nil), forCellReuseIdentifier: "PortfolioCell")
+        tableView.rowHeight = UITableView.automaticDimension
         
         initData()
     }
@@ -38,17 +40,28 @@ class PortfolioVC: BaseVC {
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
-        let getValue = notification.object as! String
-        print("onFetchDone ", getValue)
+        let chainName = notification.object as! String
+        for i in 0..<allChains.count {
+            if (String(describing: allChains[i]) == chainName) {
+                self.tableView.beginUpdates()
+                tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
+                self.tableView.endUpdates()
+            }
+        }
     }
     
     func initData() {
-        let account = BaseData.instance.getLastAccount()
-        print("account ", account)
-        account?.setAddressInfo()
+        if let lastAccount = BaseData.instance.getLastAccount() {
+            account = lastAccount
+            allChains = account.setAllChains()
+            account?.setAddressInfo()
+            print("account ", account, " chain ", allChains.count)
+            
+            navigationItem.leftBarButtonItem = leftBarButton(account?.name)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(clickSearch))
+        }
         
-        navigationItem.leftBarButtonItem = leftBarButton(account?.name)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(clickSearch))
+        
     }
     
     @objc func clickSearch() {
@@ -65,7 +78,7 @@ class PortfolioVC: BaseVC {
 extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -78,12 +91,22 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return allChains.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"PortfolioCell")
-        return cell!
+        let cell = tableView.dequeueReusableCell(withIdentifier:"PortfolioCell") as! PortfolioCell
+        cell.bindCosmosClassChain(allChains[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.row == 0) {
+            return UITableView.automaticDimension
+        } else if (allChains[indexPath.row].hasValue()) {
+            return UITableView.automaticDimension
+        }
+        return 0
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

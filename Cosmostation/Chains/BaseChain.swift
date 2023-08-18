@@ -47,10 +47,6 @@ class BaseChain {
         address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
     }
     
-    
-    
-    
-    
     func fetchData() {
         print("fetchData ", Date().timeIntervalSince1970, " ",  self.address)
         let group = DispatchGroup()
@@ -65,7 +61,7 @@ class BaseChain {
 //            try channel.close().wait()
             try? channel.close().wait()
 
-            print("notify cosmosBalances", self.address, " ", self.cosmosBalances)
+//            print("notify cosmosBalances", self.address, " ", self.cosmosBalances)chain
 //            print("notify cosmosDelegations", self.address, " ", self.cosmosDelegations)
 //
 //            print("notify ", String(describing: self))
@@ -113,6 +109,12 @@ class BaseChain {
         }
     }
     
+    func hasValue() -> Bool {
+        if (cosmosBalances.isEmpty || cosmosBalances.isEmpty || cosmosUnbondings.isEmpty || cosmosRewards.isEmpty) {
+            return false
+        }
+        return true
+    }
     
     
     func getConnection() -> ClientConnection {

@@ -588,6 +588,8 @@
 		E122DC672A8DBD28006D1E7B /* PortfolioHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC652A8DBD28006D1E7B /* PortfolioHeader.swift */; };
 		E122DC692A8DBD3B006D1E7B /* PortfolioHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = E122DC682A8DBD3B006D1E7B /* PortfolioHeader.xib */; };
 		E122DC6A2A8DBD3B006D1E7B /* PortfolioHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = E122DC682A8DBD3B006D1E7B /* PortfolioHeader.xib */; };
+		E122DC6C2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */; };
+		E122DC6D2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */; };
 		E1271B04224B17230083AF17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
 		E159805A2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
 		E159805B2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
@@ -926,6 +928,7 @@
 		E122DC622A8CA052006D1E7B /* Resources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resources.xcassets; sourceTree = "<group>"; };
 		E122DC652A8DBD28006D1E7B /* PortfolioHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioHeader.swift; sourceTree = "<group>"; };
 		E122DC682A8DBD3B006D1E7B /* PortfolioHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioHeader.xib; sourceTree = "<group>"; };
+		E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetWork.swift; sourceTree = "<group>"; };
 		E136D8A223039493001BEBB8 /* Cosmostation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cosmostation.entitlements; sourceTree = "<group>"; };
 		E15980582A6F5EFE0032892B /* PortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCell.swift; sourceTree = "<group>"; };
 		E15980592A6F5EFE0032892B /* PortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCell.xib; sourceTree = "<group>"; };
@@ -1469,6 +1472,7 @@
 				E1945E51223124F000A1436F /* BaseData.swift */,
 				E1945E532231256800A1436F /* BaseConstant.swift */,
 				04D279DB2A66863C00AF046A /* BaseAccount.swift */,
+				E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2058,6 +2062,7 @@
 				18FFB59F281AF533004E65BB /* Signer.swift in Sources */,
 				E122DBCA2A8A468E006D1E7B /* cosmos_genutil_v1beta1_genesis.pb.swift in Sources */,
 				04D279EE2A67C96F00AF046A /* ChainKava459.swift in Sources */,
+				E122DC6D2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */,
 				E1D4EA5C2871BCDE005C1ECF /* WDP.swift in Sources */,
 				1517346B2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
 				E122DC282A8A468E006D1E7B /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */,
@@ -2332,6 +2337,7 @@
 				E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
 				E122DBC92A8A468E006D1E7B /* cosmos_genutil_v1beta1_genesis.pb.swift in Sources */,
 				04D279ED2A67C96F00AF046A /* ChainKava459.swift in Sources */,
+				E122DC6C2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */,
 				E17748E32282D6AD003D8CD1 /* BTCMnemonic.m in Sources */,
 				046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */,
 				E122DC272A8A468E006D1E7B /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */,

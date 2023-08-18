@@ -36,17 +36,16 @@ public class BaseAccount {
     
     var allChains = [BaseChain]()
     
-    func setAllChains() {
+    func setAllChains() -> [BaseChain] {
         allChains.removeAll()
         allChains.append(ChainCosmos())
         allChains.append(ChainKava459())
         allChains.append(ChainKava60())
         allChains.append(ChainKava118())
+        return allChains
     }
     
     func setAddressInfo() -> Bool {
-        setAllChains()
-        
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),

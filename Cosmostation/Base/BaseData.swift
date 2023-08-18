@@ -20,6 +20,9 @@ final class BaseData: NSObject{
     var database: Connection!
     var copySalt: String?
     
+    var prices = Array<Price>()
+    var mintscanAssets: [MintscanAsset]?
+    
     
     public override init() {
         super.init();
@@ -123,91 +126,7 @@ final class BaseData: NSObject{
         return NSLocalizedString("theme_system", comment: "")
     }
     
-    func setCurrency(_ currency : Int) {
-        UserDefaults.standard.set(currency, forKey: KEY_CURRENCY)
-    }
     
-    func getCurrency() -> Int {
-        return UserDefaults.standard.integer(forKey: KEY_CURRENCY)
-    }
-    
-    func getCurrencyString() -> String {
-        if (getCurrency() == 0) {
-            return NSLocalizedString("currency_usd", comment: "")
-        } else if (getCurrency() == 1) {
-            return NSLocalizedString("currency_eur", comment: "")
-        } else if (getCurrency() == 2) {
-            return NSLocalizedString("currency_krw", comment: "")
-        } else if (getCurrency() == 3) {
-            return NSLocalizedString("currency_jpy", comment: "")
-        } else if (getCurrency() == 4) {
-            return NSLocalizedString("currency_cny", comment: "")
-        } else if (getCurrency() == 5) {
-            return NSLocalizedString("currency_rub", comment: "")
-        } else if (getCurrency() == 6) {
-            return NSLocalizedString("currency_gbp", comment: "")
-        } else if (getCurrency() == 7) {
-            return NSLocalizedString("currency_inr", comment: "")
-        } else if (getCurrency() == 8) {
-            return NSLocalizedString("currency_brl", comment: "")
-        } else if (getCurrency() == 9) {
-            return NSLocalizedString("currency_idr", comment: "")
-        } else if (getCurrency() == 10) {
-            return NSLocalizedString("currency_dkk", comment: "")
-        } else if (getCurrency() == 11) {
-            return NSLocalizedString("currency_nok", comment: "")
-        } else if (getCurrency() == 12) {
-            return NSLocalizedString("currency_sek", comment: "")
-        } else if (getCurrency() == 13) {
-            return NSLocalizedString("currency_chf", comment: "")
-        } else if (getCurrency() == 14) {
-            return NSLocalizedString("currency_aud", comment: "")
-        } else if (getCurrency() == 15) {
-            return NSLocalizedString("currency_cad", comment: "")
-        } else if (getCurrency() == 16) {
-            return NSLocalizedString("currency_myr", comment: "")
-        }
-        return ""
-    }
-    
-    func getCurrencySymbol() -> String {
-        if (getCurrency() == 0) {
-            return NSLocalizedString("currency_usd_symbol", comment: "")
-        } else if (getCurrency() == 1) {
-            return NSLocalizedString("currency_eur_symbol", comment: "")
-        } else if (getCurrency() == 2) {
-            return NSLocalizedString("currency_krw_symbol", comment: "")
-        } else if (getCurrency() == 3) {
-            return NSLocalizedString("currency_jpy_symbol", comment: "")
-        } else if (getCurrency() == 4) {
-            return NSLocalizedString("currency_cny_symbol", comment: "")
-        } else if (getCurrency() == 5) {
-            return NSLocalizedString("currency_rub_symbol", comment: "")
-        } else if (getCurrency() == 6) {
-            return NSLocalizedString("currency_gbp_symbol", comment: "")
-        } else if (getCurrency() == 7) {
-            return NSLocalizedString("currency_inr_symbol", comment: "")
-        } else if (getCurrency() == 8) {
-            return NSLocalizedString("currency_brl_symbol", comment: "")
-        } else if (getCurrency() == 9) {
-            return NSLocalizedString("currency_idr_symbol", comment: "")
-        } else if (getCurrency() == 10) {
-            return NSLocalizedString("currency_dkk_symbol", comment: "")
-        } else if (getCurrency() == 11) {
-            return NSLocalizedString("currency_nok_symbol", comment: "")
-        } else if (getCurrency() == 12) {
-            return NSLocalizedString("currency_sek_symbol", comment: "")
-        } else if (getCurrency() == 13) {
-            return NSLocalizedString("currency_chf_symbol", comment: "")
-        } else if (getCurrency() == 14) {
-            return NSLocalizedString("currency_aud_symbol", comment: "")
-        } else if (getCurrency() == 15) {
-            return NSLocalizedString("currency_cad_symbol", comment: "")
-        } else if (getCurrency() == 16) {
-            return NSLocalizedString("currency_myr_symbol", comment: "")
-        }
-        return ""
-    }
     
     func setPriceChaingColor(_ value : Int) {
         UserDefaults.standard.set(value, forKey: KEY_PRICE_CHANGE_COLOR)
@@ -476,5 +395,106 @@ extension BaseData {
             return account
         }
         return selectAccounts().first
+    }
+    
+    
+    //Userdefault for Asset prices
+    func setLastPriceTime() {
+        let now = Date().millisecondsSince1970
+        UserDefaults.standard.set(String(now), forKey: KEY_LAST_PRICE_TIME)
+    }
+    
+    func needPriceUpdate() -> Bool {
+        if (BaseData.instance.prices.count <= 0) { return true }
+        let now = Date().millisecondsSince1970
+        let min: Int64 = 60000
+        let last = Int64(UserDefaults.standard.string(forKey: KEY_LAST_PRICE_TIME) ?? "0")! + (min * 2)
+        return last < now ? true : false
+    }
+    
+    func setCurrency(_ currency : Int) {
+        UserDefaults.standard.set(currency, forKey: KEY_CURRENCY)
+    }
+    
+    func getCurrency() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_CURRENCY)
+    }
+    
+    func getCurrencyString() -> String {
+        if (getCurrency() == 0) {
+            return NSLocalizedString("currency_usd", comment: "")
+        } else if (getCurrency() == 1) {
+            return NSLocalizedString("currency_eur", comment: "")
+        } else if (getCurrency() == 2) {
+            return NSLocalizedString("currency_krw", comment: "")
+        } else if (getCurrency() == 3) {
+            return NSLocalizedString("currency_jpy", comment: "")
+        } else if (getCurrency() == 4) {
+            return NSLocalizedString("currency_cny", comment: "")
+        } else if (getCurrency() == 5) {
+            return NSLocalizedString("currency_rub", comment: "")
+        } else if (getCurrency() == 6) {
+            return NSLocalizedString("currency_gbp", comment: "")
+        } else if (getCurrency() == 7) {
+            return NSLocalizedString("currency_inr", comment: "")
+        } else if (getCurrency() == 8) {
+            return NSLocalizedString("currency_brl", comment: "")
+        } else if (getCurrency() == 9) {
+            return NSLocalizedString("currency_idr", comment: "")
+        } else if (getCurrency() == 10) {
+            return NSLocalizedString("currency_dkk", comment: "")
+        } else if (getCurrency() == 11) {
+            return NSLocalizedString("currency_nok", comment: "")
+        } else if (getCurrency() == 12) {
+            return NSLocalizedString("currency_sek", comment: "")
+        } else if (getCurrency() == 13) {
+            return NSLocalizedString("currency_chf", comment: "")
+        } else if (getCurrency() == 14) {
+            return NSLocalizedString("currency_aud", comment: "")
+        } else if (getCurrency() == 15) {
+            return NSLocalizedString("currency_cad", comment: "")
+        } else if (getCurrency() == 16) {
+            return NSLocalizedString("currency_myr", comment: "")
+        }
+        return ""
+    }
+    
+    func getCurrencySymbol() -> String {
+        if (getCurrency() == 0) {
+            return NSLocalizedString("currency_usd_symbol", comment: "")
+        } else if (getCurrency() == 1) {
+            return NSLocalizedString("currency_eur_symbol", comment: "")
+        } else if (getCurrency() == 2) {
+            return NSLocalizedString("currency_krw_symbol", comment: "")
+        } else if (getCurrency() == 3) {
+            return NSLocalizedString("currency_jpy_symbol", comment: "")
+        } else if (getCurrency() == 4) {
+            return NSLocalizedString("currency_cny_symbol", comment: "")
+        } else if (getCurrency() == 5) {
+            return NSLocalizedString("currency_rub_symbol", comment: "")
+        } else if (getCurrency() == 6) {
+            return NSLocalizedString("currency_gbp_symbol", comment: "")
+        } else if (getCurrency() == 7) {
+            return NSLocalizedString("currency_inr_symbol", comment: "")
+        } else if (getCurrency() == 8) {
+            return NSLocalizedString("currency_brl_symbol", comment: "")
+        } else if (getCurrency() == 9) {
+            return NSLocalizedString("currency_idr_symbol", comment: "")
+        } else if (getCurrency() == 10) {
+            return NSLocalizedString("currency_dkk_symbol", comment: "")
+        } else if (getCurrency() == 11) {
+            return NSLocalizedString("currency_nok_symbol", comment: "")
+        } else if (getCurrency() == 12) {
+            return NSLocalizedString("currency_sek_symbol", comment: "")
+        } else if (getCurrency() == 13) {
+            return NSLocalizedString("currency_chf_symbol", comment: "")
+        } else if (getCurrency() == 14) {
+            return NSLocalizedString("currency_aud_symbol", comment: "")
+        } else if (getCurrency() == 15) {
+            return NSLocalizedString("currency_cad_symbol", comment: "")
+        } else if (getCurrency() == 16) {
+            return NSLocalizedString("currency_myr_symbol", comment: "")
+        }
+        return ""
     }
 }

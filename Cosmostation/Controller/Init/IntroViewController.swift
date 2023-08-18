@@ -31,6 +31,7 @@ class IntroViewController: BaseVC {
             onUpdateMigration()
         }
         onAppVersionCheck()
+        onPriceInfoCheck()
         onStartInit()
     }
     
@@ -42,6 +43,11 @@ class IntroViewController: BaseVC {
     }
     
     func onAppVersionCheck() {
+    }
+    
+    func onPriceInfoCheck() {
+        BaseNetWork().fetchPrices()
+        BaseNetWork().fetchAssets()
     }
     
     func onStartInit() {

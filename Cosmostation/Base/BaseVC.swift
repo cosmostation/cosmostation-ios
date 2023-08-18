@@ -17,6 +17,10 @@ public func print(_ items: Any..., separator: String = " ", terminator: String =
 }
 
 class BaseVC: UIViewController {
+    
+    var account: BaseAccount!
+    var chain: BaseChain!
+    
     var waitAlert: UIAlertController?
     
     
