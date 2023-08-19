@@ -33,10 +33,16 @@ class PortfolioCell: UITableViewCell {
         rootView.setBlur()
     }
     
-    func bindCosmosClassChain(_ chain: BaseChain) {
-        nameLabel.text = chain.name
+    func bindCosmosClassChain(_ baseChain: BaseChain) {
+        nameLabel.text = baseChain.name
+        currencyLabel.text = BaseData.instance.getCurrencySymbol()
         
-        print("chain ", chain.cosmosBalances)
+        if let msAsset = BaseData.instance.getAsset(baseChain.chainName, baseChain.stakeDenom) {
+            let priceChanged = BaseData.instance.priceChange(msAsset.coinGeckoId)
+            WDP.dpPriceChangeImg(priceImg, priceChanged)
+            WDP.dpPriceChanged(priceChangeLabel, priceChanged)
+            WDP.dpValue(valueLabel, baseChain.allValue())
+        }
         
     }
     

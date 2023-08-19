@@ -20,7 +20,7 @@ final class BaseData: NSObject{
     var database: Connection!
     var copySalt: String?
     
-    var prices = Array<Price>()
+    var mintscanPrices: [MintscanPrice]?
     var mintscanAssets: [MintscanAsset]?
     
     
@@ -30,6 +30,26 @@ final class BaseData: NSObject{
             self.initdb();
         }
     }
+    
+    
+    func getAsset(_ chainName: String, _ denom: String) -> MintscanAsset? {
+        return mintscanAssets?.filter({ $0.chain == chainName && $0.denom?.lowercased() == denom.lowercased() }).first
+    }
+    
+    func getPrice(_ geckoId: String?) -> NSDecimalNumber {
+        if let price = mintscanPrices?.filter({ $0.coinGeckoId == geckoId }).first {
+            return NSDecimalNumber.init(value: price.current_price ?? 0).rounding(accordingToBehavior: getDivideHandler(12))
+        }
+        return NSDecimalNumber.zero.rounding(accordingToBehavior: getDivideHandler(12))
+    }
+    
+    func priceChange(_ geckoId: String?) -> NSDecimalNumber {
+        if let price = mintscanPrices?.filter({ $0.coinGeckoId == geckoId }).first {
+            return NSDecimalNumber.init(value: price.daily_price_change_in_percent ?? 0).rounding(accordingToBehavior: handler2Down)
+        }
+        return NSDecimalNumber.zero.rounding(accordingToBehavior: getDivideHandler(2))
+    }
+    
     
     func setAllValidatorSort(_ sort : Int64) {
         UserDefaults.standard.set(sort, forKey: KEY_ALL_VAL_SORT)
@@ -128,13 +148,7 @@ final class BaseData: NSObject{
     
     
     
-    func setPriceChaingColor(_ value : Int) {
-        UserDefaults.standard.set(value, forKey: KEY_PRICE_CHANGE_COLOR)
-    }
     
-    func getPriceChaingColor() -> Int {
-        return UserDefaults.standard.integer(forKey: KEY_PRICE_CHANGE_COLOR)
-    }
     
     func setUsingAppLock(_ using : Bool) {
         UserDefaults.standard.set(using, forKey: KEY_USING_APP_LOCK)
@@ -405,7 +419,7 @@ extension BaseData {
     }
     
     func needPriceUpdate() -> Bool {
-        if (BaseData.instance.prices.count <= 0) { return true }
+        if (BaseData.instance.mintscanPrices == nil ) { return true }
         let now = Date().millisecondsSince1970
         let min: Int64 = 60000
         let last = Int64(UserDefaults.standard.string(forKey: KEY_LAST_PRICE_TIME) ?? "0")! + (min * 2)
@@ -496,5 +510,13 @@ extension BaseData {
             return NSLocalizedString("currency_myr_symbol", comment: "")
         }
         return ""
+    }
+    
+    func setPriceChaingColor(_ value : Int) {
+        UserDefaults.standard.set(value, forKey: KEY_PRICE_CHANGE_COLOR)
+    }
+    
+    func getPriceChaingColor() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_PRICE_CHANGE_COLOR)
     }
 }

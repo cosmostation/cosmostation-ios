@@ -16,6 +16,8 @@ class ChainKava118: BaseChain  {
         isDefault = false
         name = "Kava"
         id = "kava_2222-10"
+        chainName = "kava"
+        stakeDenom = "ukava"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         accountPrefix = "kava"

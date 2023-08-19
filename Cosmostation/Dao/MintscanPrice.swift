@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Price: Codable {
+public struct MintscanPrice: Codable {
     var coinGeckoId: String?
     var denom: String?
     var current_price: Double?

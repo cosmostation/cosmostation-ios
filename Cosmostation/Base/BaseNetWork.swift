@@ -18,10 +18,10 @@ class BaseNetWork {
             return
         }
         AF.request(BaseNetWork.getPricesUrl(), method: .get)
-            .responseDecodable(of: [Price].self, queue: .main, decoder: JSONDecoder()) { response in
+            .responseDecodable(of: [MintscanPrice].self, queue: .main, decoder: JSONDecoder()) { response in
             switch response.result {
             case .success(let value):
-                BaseData.instance.prices = value
+                BaseData.instance.mintscanPrices = value
                 BaseData.instance.setLastPriceTime()
 
             case .failure:

@@ -11,39 +11,8 @@ import UIKit
 import SwiftProtobuf
 
 
-public class WUtils {
-    
-    static let handler18 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 18, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static let handler18Up = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.up, scale: 18, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static let handler12 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 12, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static let handler8 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 8, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static let handler6 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 6, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static let handler4Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 4, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static let handler2 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.bankers, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static let handler2Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static let handler3Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 3, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static let handler0 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.bankers, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static let handler0Up = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.up, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static let handler0Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static let handler12Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 12, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
 
-    static let handler24Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 24, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    
-    static func getDivideHandler(_ decimal:Int16) -> NSDecimalNumberHandler{
-        return NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: decimal, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-    }
+public class WUtils {
     
 //    static func getAccountWithBnbAccountInfo(_ account: Account, _ accountInfo: BnbAccountInfo) -> Account {
 //        let result = account
@@ -224,24 +193,13 @@ public class WUtils {
 //        }
 //        return ""
 //    }
-//
-//    static func priceChange(_ geckoId: String) -> NSDecimalNumber {
-//        guard let coinPrice = BaseData.instance.getPrice(geckoId) else {
-//            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler2Down)
-//        }
-//        return NSDecimalNumber.init(value: coinPrice.daily_price_change_in_percent ?? 0).rounding(accordingToBehavior: handler2Down)
-//    }
-//
-//    static func price(_ geckoId: String) -> NSDecimalNumber {
-//        guard let coinPrice = BaseData.instance.getPrice(geckoId) else {
-//            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler12Down)
-//        }
-//        return NSDecimalNumber.init(value: coinPrice.current_price ?? 0).rounding(accordingToBehavior: handler12Down)
-//    }
-//
-//    static func assetValue(_ geckoId: String, _ amount: NSDecimalNumber, _ divider: Int16) -> NSDecimalNumber {
-//        return price(geckoId).multiplying(by: amount).multiplying(byPowerOf10: -divider, withBehavior: handler3Down)
-//    }
+    
+    
+    static func assetValue(_ geckoId: String?, _ amount: String?, _ decimals: Int16) -> NSDecimalNumber {
+        let price = BaseData.instance.getPrice(geckoId)
+        let amount = NSDecimalNumber(string: amount)
+        return price.multiplying(by: amount).multiplying(byPowerOf10: -decimals, withBehavior: getDivideHandler(3))
+    }
 //
 //    static func allAssetValue(_ chainConfig: ChainConfig?) -> NSDecimalNumber {
 //        guard let chainConfig = chainConfig else {
@@ -313,27 +271,27 @@ public class WUtils {
 //        return totalValue
 //    }
 //
-//    static func getNumberFormatter(_ divider: Int) -> NumberFormatter {
-//        let nf = NumberFormatter()
-//        nf.numberStyle = .decimal
-//        nf.minimumFractionDigits = divider
-//        nf.maximumFractionDigits = divider
-//        return nf
-//    }
-//
-//    static func getDpAttributedString(_ dpString: String, _ divider: Int, _ font: UIFont?) -> NSMutableAttributedString? {
-//        if (font == nil) { return nil }
-//        let endIndex    = dpString.index(dpString.endIndex, offsetBy: -divider)
-//        let preString   = dpString[..<endIndex]
-//        let postString  = dpString[endIndex...]
-//        let preAttrs    = [NSAttributedString.Key.font : font]
-//        let postAttrs   = [NSAttributedString.Key.font : font!.withSize(CGFloat(Int(Double(font!.pointSize) * 0.85)))]
-//
-//        let attributedString1 = NSMutableAttributedString(string:String(preString), attributes:preAttrs as [NSAttributedString.Key : Any])
-//        let attributedString2 = NSMutableAttributedString(string:String(postString), attributes:postAttrs as [NSAttributedString.Key : Any])
-//        attributedString1.append(attributedString2)
-//        return attributedString1
-//    }
+    static func getNumberFormatter(_ divider: Int) -> NumberFormatter {
+        let nf = NumberFormatter()
+        nf.numberStyle = .decimal
+        nf.minimumFractionDigits = divider
+        nf.maximumFractionDigits = divider
+        return nf
+    }
+
+    static func getDpAttributedString(_ dpString: String, _ divider: Int, _ font: UIFont?) -> NSMutableAttributedString? {
+        if (font == nil) { return nil }
+        let endIndex    = dpString.index(dpString.endIndex, offsetBy: -divider)
+        let preString   = dpString[..<endIndex]
+        let postString  = dpString[endIndex...]
+        let preAttrs    = [NSAttributedString.Key.font : font]
+        let postAttrs   = [NSAttributedString.Key.font : font!.withSize(CGFloat(Int(Double(font!.pointSize) * 0.85)))]
+
+        let attributedString1 = NSMutableAttributedString(string:String(preString), attributes:preAttrs as [NSAttributedString.Key : Any])
+        let attributedString2 = NSMutableAttributedString(string:String(postString), attributes:postAttrs as [NSAttributedString.Key : Any])
+        attributedString1.append(attributedString2)
+        return attributedString1
+    }
 //
 //
 //    static func displayGasRate(_ rate: NSDecimalNumber, font:UIFont, _ deciaml:Int) -> NSMutableAttributedString {

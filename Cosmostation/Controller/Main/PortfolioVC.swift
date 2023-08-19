@@ -100,12 +100,12 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if (indexPath.row == 0) {
+        if (indexPath.row == 0) {
             return UITableView.automaticDimension
-//        } else if (allChains[indexPath.row].hasValue()) {
-//            return UITableView.automaticDimension
-//        }
-//        return 0
+        } else if (allChains[indexPath.row].hasValue()) {
+            return UITableView.automaticDimension
+        }
+        return 0
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

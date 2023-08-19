@@ -163,7 +163,7 @@
 		18FFB59F281AF533004E65BB /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE973525872B7C006DEBEE /* Signer.swift */; };
 		18FFB5B6281AF533004E65BB /* BTCMnemonic.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E12282D6AD003D8CD1 /* BTCMnemonic.m */; };
 		18FFB5C2281AF533004E65BB /* BinanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903A268C401E002CFFE1 /* BinanceType.swift */; };
-		18FFB5C5281AF533004E65BB /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* Price.swift */; };
+		18FFB5C5281AF533004E65BB /* MintscanPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* MintscanPrice.swift */; };
 		18FFB5C6281AF533004E65BB /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16FACB02361ADFA00372052 /* Bytes.swift */; };
 		18FFB5CA281AF533004E65BB /* StationNFTData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD21F27788723002333B5 /* StationNFTData.swift */; };
 		18FFB5CF281AF533004E65BB /* Bech32.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E3D222E7E2900A1436F /* Bech32.swift */; };
@@ -192,7 +192,7 @@
 		28E3E3802671BE8D00BA89C2 /* Param.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E3E37F2671BE8D00BA89C2 /* Param.swift */; };
 		28F8EFB1286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */; };
 		28F8EFB2286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */; };
-		28FC030C2652662B001C0319 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* Price.swift */; };
+		28FC030C2652662B001C0319 /* MintscanPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* MintscanPrice.swift */; };
 		9EBDC03599A6A52BCFB81E33 /* Pods_Cosmostation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA3F07B8EA5FD2C04B9EB807 /* Pods_Cosmostation.framework */; };
 		E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */; };
 		E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */; };
@@ -728,7 +728,7 @@
 		28D765A1271585FA00730F47 /* StarnameAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameAssets.swift; sourceTree = "<group>"; };
 		28E3E37F2671BE8D00BA89C2 /* Param.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Param.swift; sourceTree = "<group>"; };
 		28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-VariableFont_wght.ttf"; sourceTree = "<group>"; };
-		28FC030B2652662B001C0319 /* Price.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
+		28FC030B2652662B001C0319 /* MintscanPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanPrice.swift; sourceTree = "<group>"; };
 		6ED0AF4867E1AFC41A279302 /* Pods-Cosmostation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.debug.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.debug.xcconfig"; sourceTree = "<group>"; };
 		9EC086EE8CB71A2FB9E32070 /* Pods-Cosmostation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.release.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.release.xcconfig"; sourceTree = "<group>"; };
 		B033DE716D0CD3ABABAD6866 /* Pods-CosmostationDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.release.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.release.xcconfig"; sourceTree = "<group>"; };
@@ -1503,7 +1503,7 @@
 				E1F7F633234311F8000E597F /* BnbToken.swift */,
 				284291A0264AA77C00130651 /* BnbTicker.swift */,
 				283D2EA324F52FE700247424 /* OkToken.swift */,
-				28FC030B2652662B001C0319 /* Price.swift */,
+				28FC030B2652662B001C0319 /* MintscanPrice.swift */,
 				28E3E37F2671BE8D00BA89C2 /* Param.swift */,
 				049B691E29D1736B0027B82D /* MintscanV1Proposal.swift */,
 				0479664F2757409700315D55 /* MintscanProposalDetail.swift */,
@@ -2083,7 +2083,7 @@
 				E122DB262A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
 				E122DB562A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				E122DB9C2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
-				18FFB5C5281AF533004E65BB /* Price.swift in Sources */,
+				18FFB5C5281AF533004E65BB /* MintscanPrice.swift in Sources */,
 				E122DB4A2A8A468D006D1E7B /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,
 				18FFB5C6281AF533004E65BB /* Bytes.swift in Sources */,
 				18FFB5CA281AF533004E65BB /* StationNFTData.swift in Sources */,
@@ -2342,7 +2342,7 @@
 				046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */,
 				E122DC272A8A468E006D1E7B /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */,
 				E122DAEF2A8A468D006D1E7B /* cosmos_staking_v1beta1_staking.pb.swift in Sources */,
-				28FC030C2652662B001C0319 /* Price.swift in Sources */,
+				28FC030C2652662B001C0319 /* MintscanPrice.swift in Sources */,
 				E122DBB72A8A468D006D1E7B /* cosmos_nft_v1beta1_tx.grpc.swift in Sources */,
 				E122DBDF2A8A468E006D1E7B /* cosmos_evidence_v1beta1_tx.pb.swift in Sources */,
 				E16FACB12361ADFA00372052 /* Bytes.swift in Sources */,

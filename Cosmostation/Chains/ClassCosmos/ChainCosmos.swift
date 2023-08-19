@@ -15,6 +15,8 @@ class ChainCosmos: BaseChain  {
         
         name = "Cosmos"
         id = "cosmoshub-4"
+        chainName = "cosmos"
+        stakeDenom = "uatom"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         accountPrefix = "cosmos"
