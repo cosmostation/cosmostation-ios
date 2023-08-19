@@ -72,6 +72,12 @@
 		04CB911F2A90C9D900375354 /* ChainAkash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB911D2A90C9D900375354 /* ChainAkash.swift */; };
 		04CB91212A90CA7D00375354 /* ChainJuno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91202A90CA7D00375354 /* ChainJuno.swift */; };
 		04CB91222A90CA7D00375354 /* ChainJuno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91202A90CA7D00375354 /* ChainJuno.swift */; };
+		04CB912D2A910B2A00375354 /* CosmosClassMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04CB912C2A910B2A00375354 /* CosmosClassMain.storyboard */; };
+		04CB912E2A910B2A00375354 /* CosmosClassMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04CB912C2A910B2A00375354 /* CosmosClassMain.storyboard */; };
+		04CB91302A910B4500375354 /* CosmosClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB912F2A910B4500375354 /* CosmosClassVC.swift */; };
+		04CB91312A910B4500375354 /* CosmosClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB912F2A910B4500375354 /* CosmosClassVC.swift */; };
+		04CB91332A910BDC00375354 /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91322A910BDC00375354 /* CardViewCell.swift */; };
+		04CB91342A910BDC00375354 /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91322A910BDC00375354 /* CardViewCell.swift */; };
 		04D279C62A64E73C00AF046A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279C52A64E73C00AF046A /* KeychainAccess */; };
 		04D279C82A64E75E00AF046A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279C72A64E75E00AF046A /* KeychainAccess */; };
 		04D279CB2A6508A400AF046A /* WalletConnect in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279CA2A6508A400AF046A /* WalletConnect */; };
@@ -698,6 +704,9 @@
 		04CB911A2A90C41E00375354 /* EvmClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmClass.swift; sourceTree = "<group>"; };
 		04CB911D2A90C9D900375354 /* ChainAkash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAkash.swift; sourceTree = "<group>"; };
 		04CB91202A90CA7D00375354 /* ChainJuno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainJuno.swift; sourceTree = "<group>"; };
+		04CB912C2A910B2A00375354 /* CosmosClassMain.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CosmosClassMain.storyboard; sourceTree = "<group>"; };
+		04CB912F2A910B4500375354 /* CosmosClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClassVC.swift; sourceTree = "<group>"; };
+		04CB91322A910BDC00375354 /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
 		04D279DB2A66863C00AF046A /* BaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAccount.swift; sourceTree = "<group>"; };
 		04D279E52A66E32A00AF046A /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		04D279E92A67C96500AF046A /* ChainCosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCosmos.swift; sourceTree = "<group>"; };
@@ -1058,6 +1067,15 @@
 			path = ClassCosmos;
 			sourceTree = "<group>";
 		};
+		04CB912B2A910B1500375354 /* CosmosClass */ = {
+			isa = PBXGroup;
+			children = (
+				04CB912C2A910B2A00375354 /* CosmosClassMain.storyboard */,
+				04CB912F2A910B4500375354 /* CosmosClassVC.swift */,
+			);
+			path = CosmosClass;
+			sourceTree = "<group>";
+		};
 		04D279DE2A66D24600AF046A /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
@@ -1397,6 +1415,7 @@
 			isa = PBXGroup;
 			children = (
 				E159805F2A722CFF0032892B /* CardView.swift */,
+				04CB91322A910BDC00375354 /* CardViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1413,6 +1432,7 @@
 		E15980A12A83AAF00032892B /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				04CB912B2A910B1500375354 /* CosmosClass */,
 				E15980A22A83AB030032892B /* Main.storyboard */,
 				E15980A82A83ADB60032892B /* MainTabVC.swift */,
 				E15980A52A83AC9E0032892B /* PortfolioVC.swift */,
@@ -1738,6 +1758,7 @@
 				E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				E15980972A83A96E0032892B /* bg0.png in Resources */,
 				E159808B2A83A96E0032892B /* bg3.png in Resources */,
+				04CB912E2A910B2A00375354 /* CosmosClassMain.storyboard in Resources */,
 				E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */,
 				18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */,
 				04172B9429F7AE4000D6279C /* Roboto-Bold.ttf in Resources */,
@@ -1764,6 +1785,7 @@
 				E15980982A83A96E0032892B /* bg5.png in Resources */,
 				04877301277C6E0700D9E201 /* xmas@1x.png in Resources */,
 				04877305277C809200D9E201 /* new2022.png in Resources */,
+				04CB912D2A910B2A00375354 /* CosmosClassMain.storyboard in Resources */,
 				E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				E15980942A83A96E0032892B /* bg7.png in Resources */,
 				04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */,
@@ -2103,6 +2125,7 @@
 				E122DB562A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				E122DB9C2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
 				18FFB5C5281AF533004E65BB /* MintscanPrice.swift in Sources */,
+				04CB91312A910B4500375354 /* CosmosClassVC.swift in Sources */,
 				E122DB4A2A8A468D006D1E7B /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,
 				18FFB5C6281AF533004E65BB /* Bytes.swift in Sources */,
 				18FFB5CA281AF533004E65BB /* StationNFTData.swift in Sources */,
@@ -2146,6 +2169,7 @@
 				E122DB6A2A8A468D006D1E7B /* cosmos_group_v1_query.pb.swift in Sources */,
 				E122DC202A8A468E006D1E7B /* cosmos_circuit_v1_tx.grpc.swift in Sources */,
 				E122DBD42A8A468E006D1E7B /* cosmos_crisis_module_v1_module.pb.swift in Sources */,
+				04CB91342A910BDC00375354 /* CardViewCell.swift in Sources */,
 				E122DAF82A8A468D006D1E7B /* cosmos_vesting_v1beta1_tx.pb.swift in Sources */,
 				E122DBB62A8A468D006D1E7B /* cosmos_tx_v1beta1_service.pb.swift in Sources */,
 				E15980812A83A8CE0032892B /* BaseNavi.swift in Sources */,
@@ -2382,6 +2406,7 @@
 				E122DB552A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				E122DB9B2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
 				046BD22027788723002333B5 /* StationNFTData.swift in Sources */,
+				04CB91302A910B4500375354 /* CosmosClassVC.swift in Sources */,
 				E122DB492A8A468D006D1E7B /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,
 				E1945E3F222E7E2900A1436F /* Bech32.swift in Sources */,
 				04E2A32727A581720045ED21 /* Cw20BalanceRes.swift in Sources */,
@@ -2425,6 +2450,7 @@
 				E122DB692A8A468D006D1E7B /* cosmos_group_v1_query.pb.swift in Sources */,
 				E122DC1F2A8A468E006D1E7B /* cosmos_circuit_v1_tx.grpc.swift in Sources */,
 				E122DBD32A8A468E006D1E7B /* cosmos_crisis_module_v1_module.pb.swift in Sources */,
+				04CB91332A910BDC00375354 /* CardViewCell.swift in Sources */,
 				E122DAF72A8A468D006D1E7B /* cosmos_vesting_v1beta1_tx.pb.swift in Sources */,
 				E122DBB52A8A468D006D1E7B /* cosmos_tx_v1beta1_service.pb.swift in Sources */,
 				E15980802A83A8CE0032892B /* BaseNavi.swift in Sources */,

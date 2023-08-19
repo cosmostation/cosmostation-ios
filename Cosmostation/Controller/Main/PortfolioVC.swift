@@ -123,6 +123,14 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
 //        return 0
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cosmosClassVC = UIStoryboard(name: "CosmosClassMain", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
+        cosmosClassVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(cosmosClassVC, animated: true)
+    }
+    
+    
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("searchBar ", searchText)
     }

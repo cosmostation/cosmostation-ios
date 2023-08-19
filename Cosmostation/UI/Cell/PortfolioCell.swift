@@ -10,7 +10,7 @@ import UIKit
 
 class PortfolioCell: UITableViewCell {
 
-    @IBOutlet weak var rootView: CardView!
+    @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -35,7 +35,7 @@ class PortfolioCell: UITableViewCell {
     
     func bindCosmosClassChain(_ chain: CosmosClass) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
-//        logoImg2.image =  UIImage.init(named: chain.logo2)
+        logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
         

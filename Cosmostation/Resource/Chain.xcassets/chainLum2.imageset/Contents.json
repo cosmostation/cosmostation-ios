@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "lum_side.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -26,7 +26,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="365" height="81"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyB-xM-Oo9" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyB-xM-Oo9" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="8" y="4" width="349" height="72"/>
                         <subviews>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainCosmos2" translatesAutoresizingMaskIntoConstraints="NO" id="LTW-RR-keU">

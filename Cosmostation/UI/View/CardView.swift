@@ -41,11 +41,12 @@ class CardView: UIView {
         blurView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.addSubview(blurView)
         
-        animator.stopAnimation(true)
-        animator.addAnimations {
-            self.blurView.effect = nil
-        }
-        animator.fractionComplete = animatorFraction
+//        animator.stopAnimation(true)
+//        animator.addAnimations {
+//            self.blurView.effect = nil
+//        }
+//        animator.fractionComplete = animatorFraction
+        setBlur()
         
     }
     
