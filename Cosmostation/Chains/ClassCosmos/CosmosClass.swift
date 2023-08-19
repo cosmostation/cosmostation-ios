@@ -261,7 +261,7 @@ class CosmosClass: BaseChain  {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(8000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(3000))
         return callOptions
     }
 }

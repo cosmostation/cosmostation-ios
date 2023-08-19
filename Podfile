@@ -8,11 +8,21 @@ def shared_pods
     pod 'HDWalletKit', git: 'https://github.com/cosmostation/HDWallet.git', branch: 'cosmostation-develop'
     pod 'WalletConnect', git: 'https://github.com/cosmostation/wallet-connect-swift.git', branch: 'cosmostation-develop'
     pod 'web3swift', git: 'https://github.com/cosmostation/web3swift.git', branch: 'cosmostation-develop'
-    pod 'Toast-Swift', '~> 4.0.0'
+    
+    pod 'MaterialComponents/BottomSheet'
+    pod 'MaterialComponents/TextControls+FilledTextAreas'
+    pod 'MaterialComponents/TextControls+FilledTextFields'
+    pod 'MaterialComponents/TextControls+OutlinedTextAreas'
+    pod 'MaterialComponents/TextControls+OutlinedTextFields'
+    pod 'MaterialComponents/AppBar'
+    pod 'MaterialComponents/Tabs+TabBarView'
+    pod 'MaterialComponents/Typography'
+    
+#    pod 'Toast-Swift', '~> 4.0.0'
 #    pod 'Floaty', '~> 4.1.0'
-    pod 'QRCode'
-    pod 'HPParallaxHeader'
-    pod 'IpfsApi'
+#    pod 'QRCode'
+#    pod 'HPParallaxHeader'
+#    pod 'IpfsApi'
 
     # replace keychainAccess with V2
     pod 'SwiftKeychainWrapper'
