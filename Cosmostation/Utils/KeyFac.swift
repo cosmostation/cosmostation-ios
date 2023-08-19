@@ -103,6 +103,15 @@ class KeyFac {
         return ""
     }
     
+    //Convert ether to betch style (Evmos, etc...)
+    static func convertEvmToBech32(_ ethAddress: String, _ prefix: String) -> String {
+        var address = ethAddress
+        if (address.starts(with: "0x")) {
+            address = address.replacingOccurrences(of: "0x", with: "")
+        }
+        return try! SegwitAddrCoder.shared.encode(prefix, Data.fromHex2(address)!)
+    }
+    
     
 //    static func getPrivateKeyDataFromSeed(_ seed: Data, _ fullpath: String) -> Data {
 //        if (BaseData.instance.getUsingEnginerMode()) {

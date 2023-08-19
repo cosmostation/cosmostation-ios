@@ -802,7 +802,7 @@ public class WUtils {
 //        BaseData.instance.updateBalances(accountId, snapBalance)
 //    }
 //
-    static func onParseVestingAccount(_ baseChain: BaseChain) {
+    static func onParseVestingAccount(_ baseChain: CosmosClass) {
         guard let authInfo = baseChain.cosmosAuth else { return }
         
         if (authInfo.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)),

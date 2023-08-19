@@ -8,9 +8,37 @@
 
 import Foundation
 
-//struct ChainEvmos: BaseChain  {
-//    var name: String
-//    var id: String
-//    
-//}
+class ChainEvmos: CosmosClass  {
+    
+    override init() {
+        super.init()
+        
+        name = "Evmos"
+        id = "evmos_9001-2"
+        logo1 = "chainEvmos"
+        logo2 = "chainEvmos2"
+        apiName = "evmos"
+        stakeDenom = "aevmos"
+        
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        accountPrefix = "evmos"
+        
+        grpcHost = "grpc-evmos.cosmostation.io"
+    }
+    
+    override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
+        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        let evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+        address = KeyFac.convertEvmToBech32(evmAddress, accountPrefix!)
+    }
+    
+    override func setInfoWithPrivateKey(_ priKey: Data) {
+        privateKey = priKey
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        let evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+        address = KeyFac.convertEvmToBech32(evmAddress, accountPrefix!)
+    }
+    
+}
 

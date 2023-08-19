@@ -11,9 +11,16 @@ import UIKit
 class PortfolioVC: BaseVC {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var totalValueLabel: UILabel!
     
     let searchController = UISearchController()
-    var allChains = [BaseChain]()
+    var allCosmosChains = [CosmosClass]()
+    var totalValue = NSDecimalNumber.zero {
+        didSet {
+            WDP.dpValue(totalValueLabel, totalValue)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +30,7 @@ class PortfolioVC: BaseVC {
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "PortfolioCell", bundle: nil), forCellReuseIdentifier: "PortfolioCell")
         tableView.rowHeight = UITableView.automaticDimension
+        
         
         initData()
     }
@@ -41,24 +49,31 @@ class PortfolioVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let chainName = notification.object as! String
-        for i in 0..<allChains.count {
-            if (String(describing: allChains[i]) == chainName) {
+        for i in 0..<allCosmosChains.count {
+            if (String(describing: allCosmosChains[i]) == chainName) {
                 self.tableView.beginUpdates()
                 tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
                 self.tableView.endUpdates()
             }
         }
+        var sum = NSDecimalNumber.zero
+        allCosmosChains.forEach { cosmosChain in
+            sum = sum.adding(cosmosChain.allValue())
+        }
+        totalValue = sum
     }
     
     func initData() {
         if let lastAccount = BaseData.instance.getLastAccount() {
             account = lastAccount
-            allChains = account.setAllChains()
+            allCosmosChains = account.setAllcosmosClassChains()
             account?.setAddressInfo()
-            print("account ", account, " chain ", allChains.count)
+            print("account ", account, " allCosmosChains ", allCosmosChains.count)
             
             navigationItem.leftBarButtonItem = leftBarButton(account?.name)
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(clickSearch))
+            
+            currencyLabel.text = BaseData.instance.getCurrencySymbol()
         }
     }
     
@@ -90,22 +105,22 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allChains.count
+        return allCosmosChains.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"PortfolioCell") as! PortfolioCell
-        cell.bindCosmosClassChain(allChains[indexPath.row])
+        cell.bindCosmosClassChain(allCosmosChains[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.row == 0) {
+//        if (indexPath.row == 0) {
+//            return UITableView.automaticDimension
+//        } else if (allCosmosChains[indexPath.row].hasValue()) {
             return UITableView.automaticDimension
-        } else if (allChains[indexPath.row].hasValue()) {
-            return UITableView.automaticDimension
-        }
-        return 0
+//        }
+//        return 0
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

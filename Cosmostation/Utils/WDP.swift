@@ -213,8 +213,6 @@ public class WDP {
         label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
     }
     
-    
-    
     static func priceUpImg(_ imgView: UIImageView) {
         if (BaseData.instance.getPriceChaingColor() > 0) {
             imgView.image =  UIImage.init(named: "iconPriceUpRed")

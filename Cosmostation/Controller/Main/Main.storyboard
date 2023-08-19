@@ -48,23 +48,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Dlp-Ea-tlm">
-                                <rect key="frame" x="113.66666666666667" y="133" width="165.66666666666663" height="35.333333333333343"/>
+                                <rect key="frame" x="163.66666666666666" y="133" width="65.666666666666657" height="35.333333333333343"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbb-cH-OhW">
-                                        <rect key="frame" x="0.0" y="0.0" width="15.333333333333334" height="35.333333333333336"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbb-cH-OhW">
+                                        <rect key="frame" x="0.0" y="0.0" width="5.666666666666667" height="35.333333333333336"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                         <color key="textColor" name="_font01"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="132,212.11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYI-Ew-zZT">
-                                        <rect key="frame" x="17.333333333333329" y="0.0" width="148.33333333333337" height="35.333333333333336"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYI-Ew-zZT">
+                                        <rect key="frame" x="7.6666666666666856" y="0.0" width="58" height="35.333333333333336"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="28"/>
                                         <color key="textColor" name="_font01"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="qy3-yF-keW">
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="qy3-yF-keW">
                                 <rect key="frame" x="141.33333333333334" y="176.33333333333334" width="110.33333333333334" height="16"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconPriceUpGreen" translatesAutoresizingMaskIntoConstraints="NO" id="Bkk-ju-qXX">
@@ -108,7 +108,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="9SV-qU-pID"/>
                     <connections>
+                        <outlet property="currencyLabel" destination="Kbb-cH-OhW" id="fx4-kX-1Jf"/>
                         <outlet property="tableView" destination="Q91-ap-MJ8" id="oMt-ad-R0J"/>
+                        <outlet property="totalValueLabel" destination="PYI-Ew-zZT" id="Uwe-AJ-ShA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

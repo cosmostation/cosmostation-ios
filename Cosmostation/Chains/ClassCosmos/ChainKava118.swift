@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainKava118: BaseChain  {
+class ChainKava118: CosmosClass  {
     
     override init() {
         super.init()
@@ -16,7 +16,9 @@ class ChainKava118: BaseChain  {
         isDefault = false
         name = "Kava"
         id = "kava_2222-10"
-        chainName = "kava"
+        logo1 = "chainKava"
+        logo2 = ""
+        apiName = "kava"
         stakeDenom = "ukava"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

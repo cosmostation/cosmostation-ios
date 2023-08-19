@@ -8,14 +8,16 @@
 
 import Foundation
 
-class ChainCosmos: BaseChain  {
+class ChainCosmos: CosmosClass  {
     
     override init() {
         super.init()
         
         name = "Cosmos"
         id = "cosmoshub-4"
-        chainName = "cosmos"
+        logo1 = "chainCosmos"
+        logo2 = "chainCosmos2"
+        apiName = "cosmos"
         stakeDenom = "uatom"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

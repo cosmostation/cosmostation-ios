@@ -34,15 +34,18 @@ public class BaseAccount {
     }
     
     
-    var allChains = [BaseChain]()
+    var cosmosClassChains = [CosmosClass]()
     
-    func setAllChains() -> [BaseChain] {
-        allChains.removeAll()
-        allChains.append(ChainCosmos())
-        allChains.append(ChainKava459())
-        allChains.append(ChainKava60())
-        allChains.append(ChainKava118())
-        return allChains
+    func setAllcosmosClassChains() -> [CosmosClass] {
+        cosmosClassChains.removeAll()
+        cosmosClassChains.append(ChainCosmos())
+        cosmosClassChains.append(ChainAkash())
+        cosmosClassChains.append(ChainEvmos())
+        cosmosClassChains.append(ChainKava459())
+        cosmosClassChains.append(ChainKava60())
+        cosmosClassChains.append(ChainKava118())
+        cosmosClassChains.append(ChainJuno())
+        return cosmosClassChains
     }
     
     func setAddressInfo() -> Bool {
@@ -50,7 +53,7 @@ public class BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                allChains.forEach { chain in
+                cosmosClassChains.forEach { chain in
                     Task {
                         chain.setInfoWithSeed(seed, lastHDPath)
                         chain.fetchData()
@@ -60,7 +63,7 @@ public class BaseAccount {
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                allChains.forEach { chain in
+                cosmosClassChains.forEach { chain in
                     Task {
                         chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
                         chain.fetchData()
