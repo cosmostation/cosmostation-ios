@@ -7,24 +7,37 @@
 //
 
 import UIKit
+import MaterialComponents
 
-class CosmosClassVC: UIViewController {
+class CosmosClassVC: BaseVC {
+    
+    @IBOutlet weak var tabbar: MDCTabBarView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        onSetTabbarView()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func onSetTabbarView() {
+        let coinTabBar = UITabBarItem(title: "Coins", image: nil, tag: 0)
+        let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 1)
+        tabbar.items = [ coinTabBar, historyTabBar]
+        tabbar.barTintColor = .clear
+        tabbar.selectionIndicatorStrokeColor = .white
+        tabbar.setTitleFont(.fontSize14Bold, for: .normal)
+        tabbar.setTitleFont(.fontSize14Bold, for: .selected)
+        tabbar.setTitleColor(.fontColor02, for: .normal)
+        tabbar.setTitleColor(.fontColor01, for: .selected)
+        tabbar.setSelectedItem(coinTabBar, animated: false)
+        tabbar.tabBarDelegate = self
+        tabbar.preferredLayoutStyle = .fixedClusteredLeading
     }
-    */
 
+}
+
+extension CosmosClassVC: MDCTabBarViewDelegate {
+    func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
+        print("tabBarView didSelect ")
+    }
 }

@@ -22,8 +22,8 @@ class CardViewCell: UIView {
         
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.layer.cornerRadius = 12
-        backgroundView.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
-        backgroundView.layer.borderWidth = 0.4
+        backgroundView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
+        backgroundView.layer.borderWidth = 0.5
         backgroundView.backgroundColor = .clear
         backgroundView.clipsToBounds = true
         backgroundView.layer.masksToBounds = false

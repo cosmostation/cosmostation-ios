@@ -651,6 +651,10 @@
 		E1945E50222E842B00A1436F /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E4F222E842B00A1436F /* BaseVC.swift */; };
 		E1945E52223124F000A1436F /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E51223124F000A1436F /* BaseData.swift */; };
 		E1945E542231256800A1436F /* BaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E532231256800A1436F /* BaseConstant.swift */; };
+		E19E8B3D2A92290800001BF5 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3C2A92290800001BF5 /* UIColor+Colors.swift */; };
+		E19E8B3E2A92290800001BF5 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3C2A92290800001BF5 /* UIColor+Colors.swift */; };
+		E19E8B402A92299700001BF5 /* UIFont+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */; };
+		E19E8B412A92299700001BF5 /* UIFont+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */; };
 		E1A82DD1224220910097CAEE /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD0224220910097CAEE /* Account.swift */; };
 		E1A82DE822448E940097CAEE /* WUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE722448E940097CAEE /* WUtils.swift */; };
 		E1D4EA582871584B005C1ECF /* FeeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA572871584B005C1ECF /* FeeInfo.swift */; };
@@ -985,6 +989,8 @@
 		E1945E4F222E842B00A1436F /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		E1945E51223124F000A1436F /* BaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
 		E1945E532231256800A1436F /* BaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConstant.swift; sourceTree = "<group>"; };
+		E19E8B3C2A92290800001BF5 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
+		E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Fonts.swift"; sourceTree = "<group>"; };
 		E1A82DD0224220910097CAEE /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		E1A82DE722448E940097CAEE /* WUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WUtils.swift; sourceTree = "<group>"; };
 		E1D4EA572871584B005C1ECF /* FeeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeInfo.swift; sourceTree = "<group>"; };
@@ -1396,6 +1402,8 @@
 				E159809A2A83A9A70032892B /* Transition */,
 				E159805E2A722CEA0032892B /* View */,
 				E15980572A6F5EE50032892B /* Cell */,
+				E19E8B3C2A92290800001BF5 /* UIColor+Colors.swift */,
+				E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1991,6 +1999,7 @@
 				E122DAEA2A8A468D006D1E7B /* cosmos_authz_v1beta1_tx.grpc.swift in Sources */,
 				E122DB5C2A8A468D006D1E7B /* cosmos_store_internal_kv_v1beta1_kv.pb.swift in Sources */,
 				E122DBA02A8A468D006D1E7B /* cosmos_authz_v1beta1_event.pb.swift in Sources */,
+				E19E8B3E2A92290800001BF5 /* UIColor+Colors.swift in Sources */,
 				E122DB182A8A468D006D1E7B /* cosmos_autocli_v1_query.pb.swift in Sources */,
 				04CB911C2A90C41E00375354 /* EvmClass.swift in Sources */,
 				1876EE8D2A4935EA00C53352 /* Cw20VaultDepositRes.swift in Sources */,
@@ -2045,6 +2054,7 @@
 				04D279DD2A66863C00AF046A /* BaseAccount.swift in Sources */,
 				18FFB4BD281AF533004E65BB /* Cw20BalanceReq.swift in Sources */,
 				18F4129A286062FA0007E3F2 /* MWords.swift in Sources */,
+				E19E8B412A92299700001BF5 /* UIFont+Fonts.swift in Sources */,
 				E122DC3A2A8A468E006D1E7B /* cosmos_store_v1beta1_commit_info.pb.swift in Sources */,
 				E122DB942A8A468D006D1E7B /* cosmos_store_snapshots_v1_snapshot.pb.swift in Sources */,
 				E122DBF82A8A468E006D1E7B /* cosmos_authz_v1beta1_query.pb.swift in Sources */,
@@ -2272,6 +2282,7 @@
 				E122DAE92A8A468D006D1E7B /* cosmos_authz_v1beta1_tx.grpc.swift in Sources */,
 				E122DB5B2A8A468D006D1E7B /* cosmos_store_internal_kv_v1beta1_kv.pb.swift in Sources */,
 				E122DB9F2A8A468D006D1E7B /* cosmos_authz_v1beta1_event.pb.swift in Sources */,
+				E19E8B3D2A92290800001BF5 /* UIColor+Colors.swift in Sources */,
 				E122DB172A8A468D006D1E7B /* cosmos_autocli_v1_query.pb.swift in Sources */,
 				04CB911B2A90C41E00375354 /* EvmClass.swift in Sources */,
 				E1945E542231256800A1436F /* BaseConstant.swift in Sources */,
@@ -2326,6 +2337,7 @@
 				04D279DC2A66863C00AF046A /* BaseAccount.swift in Sources */,
 				181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */,
 				E17748E62282D782003D8CD1 /* BTCProtocolSerialization.m in Sources */,
+				E19E8B402A92299700001BF5 /* UIFont+Fonts.swift in Sources */,
 				E122DC392A8A468E006D1E7B /* cosmos_store_v1beta1_commit_info.pb.swift in Sources */,
 				E122DB932A8A468D006D1E7B /* cosmos_store_snapshots_v1_snapshot.pb.swift in Sources */,
 				E122DBF72A8A468E006D1E7B /* cosmos_authz_v1beta1_query.pb.swift in Sources */,
