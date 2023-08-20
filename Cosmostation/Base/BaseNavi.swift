@@ -8,13 +8,18 @@
 
 import UIKit
 
-class BaseNavi: UINavigationController, UINavigationControllerDelegate {
+class BaseNavi: UINavigationController{
 
+    var isPushingViewController = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
+        self.interactivePopGestureRecognizer?.delegate = self
     }
-    
+}
+
+extension BaseNavi: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController,
                               animationControllerFor operation: UINavigationController.Operation,
                               from fromVC: UIViewController,
@@ -24,6 +29,19 @@ class BaseNavi: UINavigationController, UINavigationControllerDelegate {
         } else {
             return SlideOutTransition()
         }
+    }
+    
+    func navigationController(_ navigationController: UINavigationController,
+                              didShow viewController: UIViewController,
+                              animated: Bool) {
+        isPushingViewController = false
+    }
+}
+
+extension BaseNavi: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard gestureRecognizer is UIScreenEdgePanGestureRecognizer else { return true }
+        return viewControllers.count > 1 && !isPushingViewController
     }
 }
 

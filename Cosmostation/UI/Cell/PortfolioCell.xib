@@ -29,7 +29,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyB-xM-Oo9" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="8" y="4" width="349" height="72"/>
                         <subviews>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainCosmos2" translatesAutoresizingMaskIntoConstraints="NO" id="LTW-RR-keU">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainCosmos2" translatesAutoresizingMaskIntoConstraints="NO" id="LTW-RR-keU">
                                 <rect key="frame" x="12" y="12" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="ghf-GM-s10"/>
