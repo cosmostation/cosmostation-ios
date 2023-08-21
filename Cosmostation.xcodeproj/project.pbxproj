@@ -25,6 +25,18 @@
 		0443B8A2285C7F050027A6B9 /* Chain.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0443B8A1285C7F050027A6B9 /* Chain.xcassets */; };
 		0443B8A3285C7F050027A6B9 /* Chain.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0443B8A1285C7F050027A6B9 /* Chain.xcassets */; };
 		0444442927ABDC5D00EB093E /* Cw20TransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */; };
+		04527DB92A937CA2005F72D7 /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DB72A937CA2005F72D7 /* AssetCell.swift */; };
+		04527DBA2A937CA2005F72D7 /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DB72A937CA2005F72D7 /* AssetCell.swift */; };
+		04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04527DB82A937CA2005F72D7 /* AssetCell.xib */; };
+		04527DBC2A937CA2005F72D7 /* AssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04527DB82A937CA2005F72D7 /* AssetCell.xib */; };
+		04527DBF2A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DBD2A937CC1005F72D7 /* AssetCosmosClassCell.swift */; };
+		04527DC02A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DBD2A937CC1005F72D7 /* AssetCosmosClassCell.swift */; };
+		04527DC12A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04527DBE2A937CC1005F72D7 /* AssetCosmosClassCell.xib */; };
+		04527DC22A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04527DBE2A937CC1005F72D7 /* AssetCosmosClassCell.xib */; };
+		04527DC52A938FC9005F72D7 /* CosmosClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */; };
+		04527DC62A938FC9005F72D7 /* CosmosClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */; };
+		04527DC72A938FC9005F72D7 /* CosmosClassVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04527DC42A938FC9005F72D7 /* CosmosClassVC.xib */; };
+		04527DC82A938FC9005F72D7 /* CosmosClassVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04527DC42A938FC9005F72D7 /* CosmosClassVC.xib */; };
 		045DAD842897BC14004ED9B4 /* MintscanMyVotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD832897BC14004ED9B4 /* MintscanMyVotes.swift */; };
 		045DAD852897BC14004ED9B4 /* MintscanMyVotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD832897BC14004ED9B4 /* MintscanMyVotes.swift */; };
 		046BD22027788723002333B5 /* StationNFTData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD21F27788723002333B5 /* StationNFTData.swift */; };
@@ -72,10 +84,6 @@
 		04CB911F2A90C9D900375354 /* ChainAkash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB911D2A90C9D900375354 /* ChainAkash.swift */; };
 		04CB91212A90CA7D00375354 /* ChainJuno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91202A90CA7D00375354 /* ChainJuno.swift */; };
 		04CB91222A90CA7D00375354 /* ChainJuno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91202A90CA7D00375354 /* ChainJuno.swift */; };
-		04CB912D2A910B2A00375354 /* CosmosClassMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04CB912C2A910B2A00375354 /* CosmosClassMain.storyboard */; };
-		04CB912E2A910B2A00375354 /* CosmosClassMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04CB912C2A910B2A00375354 /* CosmosClassMain.storyboard */; };
-		04CB91302A910B4500375354 /* CosmosClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB912F2A910B4500375354 /* CosmosClassVC.swift */; };
-		04CB91312A910B4500375354 /* CosmosClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB912F2A910B4500375354 /* CosmosClassVC.swift */; };
 		04CB91332A910BDC00375354 /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91322A910BDC00375354 /* CardViewCell.swift */; };
 		04CB91342A910BDC00375354 /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91322A910BDC00375354 /* CardViewCell.swift */; };
 		04D279C62A64E73C00AF046A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279C52A64E73C00AF046A /* KeychainAccess */; };
@@ -678,6 +686,12 @@
 		0443B89728589B570027A6B9 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		0443B8A1285C7F050027A6B9 /* Chain.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Chain.xcassets; sourceTree = "<group>"; };
 		0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20TransferReq.swift; sourceTree = "<group>"; };
+		04527DB72A937CA2005F72D7 /* AssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
+		04527DB82A937CA2005F72D7 /* AssetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCell.xib; sourceTree = "<group>"; };
+		04527DBD2A937CC1005F72D7 /* AssetCosmosClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCosmosClassCell.swift; sourceTree = "<group>"; };
+		04527DBE2A937CC1005F72D7 /* AssetCosmosClassCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCosmosClassCell.xib; sourceTree = "<group>"; };
+		04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClassVC.swift; sourceTree = "<group>"; };
+		04527DC42A938FC9005F72D7 /* CosmosClassVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosClassVC.xib; sourceTree = "<group>"; };
 		045DAD832897BC14004ED9B4 /* MintscanMyVotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanMyVotes.swift; sourceTree = "<group>"; };
 		046BD21F27788723002333B5 /* StationNFTData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNFTData.swift; sourceTree = "<group>"; };
 		046E9036268C3F29002CFFE1 /* BinanceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceMessage.swift; sourceTree = "<group>"; };
@@ -708,8 +722,6 @@
 		04CB911A2A90C41E00375354 /* EvmClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmClass.swift; sourceTree = "<group>"; };
 		04CB911D2A90C9D900375354 /* ChainAkash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAkash.swift; sourceTree = "<group>"; };
 		04CB91202A90CA7D00375354 /* ChainJuno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainJuno.swift; sourceTree = "<group>"; };
-		04CB912C2A910B2A00375354 /* CosmosClassMain.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CosmosClassMain.storyboard; sourceTree = "<group>"; };
-		04CB912F2A910B4500375354 /* CosmosClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClassVC.swift; sourceTree = "<group>"; };
 		04CB91322A910BDC00375354 /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
 		04D279DB2A66863C00AF046A /* BaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAccount.swift; sourceTree = "<group>"; };
 		04D279E52A66E32A00AF046A /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
@@ -1076,8 +1088,8 @@
 		04CB912B2A910B1500375354 /* CosmosClass */ = {
 			isa = PBXGroup;
 			children = (
-				04CB912C2A910B2A00375354 /* CosmosClassMain.storyboard */,
-				04CB912F2A910B4500375354 /* CosmosClassVC.swift */,
+				04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */,
+				04527DC42A938FC9005F72D7 /* CosmosClassVC.xib */,
 			);
 			path = CosmosClass;
 			sourceTree = "<group>";
@@ -1415,6 +1427,10 @@
 				E15980592A6F5EFE0032892B /* PortfolioCell.xib */,
 				E122DC652A8DBD28006D1E7B /* PortfolioHeader.swift */,
 				E122DC682A8DBD3B006D1E7B /* PortfolioHeader.xib */,
+				04527DB72A937CA2005F72D7 /* AssetCell.swift */,
+				04527DB82A937CA2005F72D7 /* AssetCell.xib */,
+				04527DBD2A937CC1005F72D7 /* AssetCosmosClassCell.swift */,
+				04527DBE2A937CC1005F72D7 /* AssetCosmosClassCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1737,15 +1753,18 @@
 				18FFB683281AF533004E65BB /* xmas@2x.png in Resources */,
 				0443B89928589B570027A6B9 /* Color.xcassets in Resources */,
 				04A116F228F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
+				04527DC82A938FC9005F72D7 /* CosmosClassVC.xib in Resources */,
 				04D279E72A66E32A00AF046A /* loading.json in Resources */,
 				04172B9629F7AE4000D6279C /* Roboto-Medium.ttf in Resources */,
 				0443B8A3285C7F050027A6B9 /* Chain.xcassets in Resources */,
 				E159805D2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
 				28F8EFB2286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
 				E10EB5A02A86217A0054A9AF /* bbbb.png in Resources */,
+				04527DC22A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
 				E122DC6A2A8DBD3B006D1E7B /* PortfolioHeader.xib in Resources */,
 				18FFB6C3281AF533004E65BB /* new2022@1x.png in Resources */,
 				18FFB6E2281AF533004E65BB /* Assets.xcassets in Resources */,
+				04527DBC2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				E15980912A83A96E0032892B /* bg6.png in Resources */,
 				1809C35229D16C80008884C1 /* injectScript.js in Resources */,
 				18FFB6ED281AF533004E65BB /* xmas.png in Resources */,
@@ -1766,7 +1785,6 @@
 				E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				E15980972A83A96E0032892B /* bg0.png in Resources */,
 				E159808B2A83A96E0032892B /* bg3.png in Resources */,
-				04CB912E2A910B2A00375354 /* CosmosClassMain.storyboard in Resources */,
 				E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */,
 				18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */,
 				04172B9429F7AE4000D6279C /* Roboto-Bold.ttf in Resources */,
@@ -1791,9 +1809,10 @@
 				04172B9329F7AE4000D6279C /* Roboto-Bold.ttf in Resources */,
 				04172B9529F7AE4000D6279C /* Roboto-Medium.ttf in Resources */,
 				E15980982A83A96E0032892B /* bg5.png in Resources */,
+				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				04877301277C6E0700D9E201 /* xmas@1x.png in Resources */,
+				04527DC12A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
 				04877305277C809200D9E201 /* new2022.png in Resources */,
-				04CB912D2A910B2A00375354 /* CosmosClassMain.storyboard in Resources */,
 				E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				E15980942A83A96E0032892B /* bg7.png in Resources */,
 				04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */,
@@ -1815,6 +1834,7 @@
 				0443B89828589B570027A6B9 /* Color.xcassets in Resources */,
 				04F4061729ED119800CD88E4 /* Init.storyboard in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
+				04527DC72A938FC9005F72D7 /* CosmosClassVC.xib in Resources */,
 				18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1983,6 +2003,7 @@
 				E122DC2E2A8A468E006D1E7B /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
 				E122DBB42A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.grpc.swift in Sources */,
 				E122DBEE2A8A468E006D1E7B /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,
+				04527DBA2A937CA2005F72D7 /* AssetCell.swift in Sources */,
 				18FFB396281AF533004E65BB /* WUtils.swift in Sources */,
 				18FFB3A7281AF533004E65BB /* IntroViewController.swift in Sources */,
 				042296852A890CC4003C7630 /* ChainKavaEVM.swift in Sources */,
@@ -1997,6 +2018,7 @@
 				0492AE922A83CC9B001360F0 /* SwapVC.swift in Sources */,
 				E122DB302A8A468D006D1E7B /* cosmos_distribution_module_v1_module.pb.swift in Sources */,
 				E122DAEA2A8A468D006D1E7B /* cosmos_authz_v1beta1_tx.grpc.swift in Sources */,
+				04527DC62A938FC9005F72D7 /* CosmosClassVC.swift in Sources */,
 				E122DB5C2A8A468D006D1E7B /* cosmos_store_internal_kv_v1beta1_kv.pb.swift in Sources */,
 				E122DBA02A8A468D006D1E7B /* cosmos_authz_v1beta1_event.pb.swift in Sources */,
 				E19E8B3E2A92290800001BF5 /* UIColor+Colors.swift in Sources */,
@@ -2021,6 +2043,7 @@
 				E122DC062A8A468E006D1E7B /* cosmos_gov_v1_gov.pb.swift in Sources */,
 				E122DB702A8A468D006D1E7B /* cosmos_vesting_module_v1_module.pb.swift in Sources */,
 				E122DBC02A8A468E006D1E7B /* cosmos_app_v1alpha1_query.grpc.swift in Sources */,
+				04527DC02A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,
 				E122DB622A8A468D006D1E7B /* cosmos_distribution_v1beta1_distribution.pb.swift in Sources */,
 				E122DBD82A8A468E006D1E7B /* cosmos_store_streaming_abci_grpc.grpc.swift in Sources */,
 				18FFB3DF281AF533004E65BB /* BaseConstant.swift in Sources */,
@@ -2135,7 +2158,6 @@
 				E122DB562A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				E122DB9C2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
 				18FFB5C5281AF533004E65BB /* MintscanPrice.swift in Sources */,
-				04CB91312A910B4500375354 /* CosmosClassVC.swift in Sources */,
 				E122DB4A2A8A468D006D1E7B /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,
 				18FFB5C6281AF533004E65BB /* Bytes.swift in Sources */,
 				18FFB5CA281AF533004E65BB /* StationNFTData.swift in Sources */,
@@ -2266,6 +2288,7 @@
 				E122DC2D2A8A468E006D1E7B /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
 				E122DBB32A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.grpc.swift in Sources */,
 				E122DBED2A8A468E006D1E7B /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,
+				04527DB92A937CA2005F72D7 /* AssetCell.swift in Sources */,
 				1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
 				046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */,
 				042296842A890CC4003C7630 /* ChainKavaEVM.swift in Sources */,
@@ -2280,6 +2303,7 @@
 				0492AE912A83CC9B001360F0 /* SwapVC.swift in Sources */,
 				E122DB2F2A8A468D006D1E7B /* cosmos_distribution_module_v1_module.pb.swift in Sources */,
 				E122DAE92A8A468D006D1E7B /* cosmos_authz_v1beta1_tx.grpc.swift in Sources */,
+				04527DC52A938FC9005F72D7 /* CosmosClassVC.swift in Sources */,
 				E122DB5B2A8A468D006D1E7B /* cosmos_store_internal_kv_v1beta1_kv.pb.swift in Sources */,
 				E122DB9F2A8A468D006D1E7B /* cosmos_authz_v1beta1_event.pb.swift in Sources */,
 				E19E8B3D2A92290800001BF5 /* UIColor+Colors.swift in Sources */,
@@ -2304,6 +2328,7 @@
 				E122DC052A8A468E006D1E7B /* cosmos_gov_v1_gov.pb.swift in Sources */,
 				E122DB6F2A8A468D006D1E7B /* cosmos_vesting_module_v1_module.pb.swift in Sources */,
 				E122DBBF2A8A468E006D1E7B /* cosmos_app_v1alpha1_query.grpc.swift in Sources */,
+				04527DBF2A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,
 				E122DB612A8A468D006D1E7B /* cosmos_distribution_v1beta1_distribution.pb.swift in Sources */,
 				E122DBD72A8A468E006D1E7B /* cosmos_store_streaming_abci_grpc.grpc.swift in Sources */,
 				043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */,
@@ -2418,7 +2443,6 @@
 				E122DB552A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				E122DB9B2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
 				046BD22027788723002333B5 /* StationNFTData.swift in Sources */,
-				04CB91302A910B4500375354 /* CosmosClassVC.swift in Sources */,
 				E122DB492A8A468D006D1E7B /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,
 				E1945E3F222E7E2900A1436F /* Bech32.swift in Sources */,
 				04E2A32727A581720045ED21 /* Cw20BalanceRes.swift in Sources */,

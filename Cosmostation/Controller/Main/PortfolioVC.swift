@@ -31,7 +31,6 @@ class PortfolioVC: BaseVC {
         tableView.register(UINib(nibName: "PortfolioCell", bundle: nil), forCellReuseIdentifier: "PortfolioCell")
         tableView.rowHeight = UITableView.automaticDimension
         
-        
         initData()
     }
     
@@ -124,7 +123,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cosmosClassVC = UIStoryboard(name: "CosmosClassMain", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
+        let cosmosClassVC = CosmosClassVC(nibName: "CosmosClassVC", bundle: nil)
         cosmosClassVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(cosmosClassVC, animated: true)
     }
