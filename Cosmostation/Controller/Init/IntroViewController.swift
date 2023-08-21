@@ -54,6 +54,7 @@ class IntroViewController: BaseVC {
         print("onStartInit")
         if let account = BaseData.instance.getLastAccount() {
             print("account ", account.name)
+            BaseData.instance.baseAccount = account
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
                 let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC

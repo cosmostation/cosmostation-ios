@@ -20,6 +20,7 @@ final class BaseData: NSObject{
     var database: Connection!
     var copySalt: String?
     
+    var baseAccount: BaseAccount!
     var mintscanPrices: [MintscanPrice]?
     var mintscanAssets: [MintscanAsset]?
     

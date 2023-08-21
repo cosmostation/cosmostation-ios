@@ -63,17 +63,15 @@ class PortfolioVC: BaseVC {
     }
     
     func initData() {
-        if let lastAccount = BaseData.instance.getLastAccount() {
-            account = lastAccount
-            allCosmosChains = account.setAllcosmosClassChains()
-            account?.setAddressInfo()
-            print("account ", account, " allCosmosChains ", allCosmosChains.count)
-            
-            navigationItem.leftBarButtonItem = leftBarButton(account?.name)
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(clickSearch))
-            
-            currencyLabel.text = BaseData.instance.getCurrencySymbol()
-        }
+        baseAccount = BaseData.instance.baseAccount
+        allCosmosChains = baseAccount.setAllcosmosClassChains()
+        baseAccount?.setAddressInfo()
+        print("baseAccount ", baseAccount, " allCosmosChains ", allCosmosChains.count)
+
+        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(clickSearch))
+
+        currencyLabel.text = BaseData.instance.getCurrencySymbol()
     }
     
     @objc func clickSearch() {
@@ -124,6 +122,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cosmosClassVC = CosmosClassVC(nibName: "CosmosClassVC", bundle: nil)
+        cosmosClassVC.selectedPosition = indexPath.row
         cosmosClassVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(cosmosClassVC, animated: true)
     }
