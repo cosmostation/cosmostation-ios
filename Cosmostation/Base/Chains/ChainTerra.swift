@@ -64,7 +64,7 @@ class ChainTerra: ChainConfig {
     }
     
     func getInfoLink1() -> String {
-        return "https://www.terra.money/"
+        return ""
     }
 
     func getInfoLink2() -> String {
