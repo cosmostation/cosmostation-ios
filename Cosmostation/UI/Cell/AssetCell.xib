@@ -26,15 +26,15 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Pq-ad-7ll" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="8" y="4" width="385" height="68"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenAkash" translatesAutoresizingMaskIntoConstraints="NO" id="ipz-F5-jrm">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ipz-F5-jrm">
                                 <rect key="frame" x="16" y="14" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Krt-v5-jPb"/>
                                     <constraint firstAttribute="width" constant="40" id="uMG-4H-uYc"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MainDenom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pyp-9j-xZD">
-                                <rect key="frame" x="68" y="18" width="82.666666666666686" height="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symbol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pyp-9j-xZD">
+                                <rect key="frame" x="68" y="18" width="52.666666666666657" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="c6L-rW-nJa"/>
                                 </constraints>
@@ -42,8 +42,8 @@
                                 <color key="textColor" name="_font01"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12312312321" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qjd-eJ-FTR">
-                                <rect key="frame" x="266" y="17" width="105" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qjd-eJ-FTR">
+                                <rect key="frame" x="337.66666666666669" y="17" width="33.333333333333314" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="eTh-7p-u8S"/>
                                 </constraints>
@@ -60,7 +60,7 @@
                                 <color key="textColor" name="_font01"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Vd-yd-D3B">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Vd-yd-D3B">
                                 <rect key="frame" x="75.333333333333329" y="39" width="25" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="T2s-KT-KAE"/>
@@ -69,7 +69,7 @@
                                 <color key="textColor" name="_font01"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1.12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVP-Gq-Pzr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVP-Gq-Pzr">
                                 <rect key="frame" x="104.33333333333333" y="39" width="31.999999999999986" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="jdS-Ok-FZM"/>
@@ -88,7 +88,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYK-IH-fsX">
-                                <rect key="frame" x="327.66666666666669" y="41" width="6.3333333333333144" height="10"/>
+                                <rect key="frame" x="338.66666666666669" y="41" width="6.3333333333333144" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="T8v-RK-BtP"/>
                                 </constraints>
@@ -96,8 +96,8 @@
                                 <color key="textColor" name="_font02"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21321" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSK-H4-Id2">
-                                <rect key="frame" x="335" y="39" width="36" height="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSK-H4-Id2">
+                                <rect key="frame" x="346" y="39" width="25" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="90K-DK-QFl"/>
                                 </constraints>
@@ -156,7 +156,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="tokenAkash" width="22" height="22"/>
         <namedColor name="_font01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

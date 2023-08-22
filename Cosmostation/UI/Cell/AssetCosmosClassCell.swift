@@ -52,6 +52,9 @@ class AssetCosmosClassCell: UITableViewCell {
         let stakeDenom = baseChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             let value = baseChain.denomValue(stakeDenom)
+            coinImg.af.setImage(withURL: msAsset.assetImg())
+            symbolLabel.text = msAsset.symbol?.uppercased()
+            
             WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
             WDP.dpValue(value, valueCurrencyLabel, valueLabel)

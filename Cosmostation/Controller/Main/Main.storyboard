@@ -45,16 +45,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Nv-Ee-usG">
-                                <rect key="frame" x="36" y="123" width="321" height="56"/>
+                                <rect key="frame" x="48" y="123" width="297" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gep-QT-tbA">
-                                        <rect key="frame" x="128.33333333333334" y="0.0" width="64.666666666666657" height="15.333333333333334"/>
+                                        <rect key="frame" x="116.33333333333334" y="0.0" width="64.666666666666657" height="15.333333333333334"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_font02"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Dlp-Ea-tlm">
-                                        <rect key="frame" x="120.33333333333334" y="19.333333333333346" width="80.666666666666657" height="35.333333333333343"/>
+                                        <rect key="frame" x="108.33333333333334" y="19.333333333333346" width="80.666666666666657" height="35.333333333333343"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbb-cH-OhW">
                                                 <rect key="frame" x="0.0" y="0.0" width="20.666666666666668" height="35.333333333333336"/>
@@ -94,10 +94,10 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Q91-ap-MJ8" secondAttribute="trailing" id="1zy-gQ-Shq"/>
                             <constraint firstItem="Q91-ap-MJ8" firstAttribute="top" secondItem="8Nv-Ee-usG" secondAttribute="bottom" constant="8" id="L6P-2G-qgO"/>
                             <constraint firstItem="Q91-ap-MJ8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="On6-iG-TbR"/>
-                            <constraint firstItem="8Nv-Ee-usG" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="36" id="ekv-4X-i1V"/>
+                            <constraint firstItem="8Nv-Ee-usG" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="ekv-4X-i1V"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Q91-ap-MJ8" secondAttribute="bottom" id="g5m-sR-ThQ"/>
                             <constraint firstItem="8Nv-Ee-usG" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="19.999999999999986" id="o3v-y4-viA"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8Nv-Ee-usG" secondAttribute="trailing" constant="36" id="sKV-Zt-qZd"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8Nv-Ee-usG" secondAttribute="trailing" constant="48" id="sKV-Zt-qZd"/>
                             <constraint firstItem="8Nv-Ee-usG" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="sO9-Ta-hAP"/>
                         </constraints>
                     </view>

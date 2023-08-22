@@ -23,16 +23,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0An-sf-Sxo">
-                                <rect key="frame" x="36" y="79" width="321" height="56"/>
+                                <rect key="frame" x="48" y="79" width="297" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaX-Dh-cwU">
-                                        <rect key="frame" x="137" y="0.0" width="47.333333333333343" height="15.333333333333334"/>
+                                        <rect key="frame" x="124.99999999999999" y="0.0" width="47.333333333333329" height="15.333333333333334"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_font02"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="udo-UV-whi">
-                                        <rect key="frame" x="120.33333333333334" y="19.333333333333332" width="80.666666666666657" height="35.333333333333343"/>
+                                        <rect key="frame" x="108.33333333333334" y="19.333333333333332" width="80.666666666666657" height="35.333333333333343"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZk-Ok-B8N">
                                                 <rect key="frame" x="0.0" y="0.0" width="20.666666666666668" height="35.333333333333336"/>
@@ -92,20 +92,24 @@
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="LYC-Qm-hqh"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="top" secondItem="1V7-Iu-EPt" secondAttribute="top" id="N8q-3P-whm"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="leading" secondItem="1V7-Iu-EPt" secondAttribute="leading" id="ThK-hL-QAR"/>
-                            <constraint firstItem="0An-sf-Sxo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="36" id="aMa-zb-NXQ"/>
+                            <constraint firstItem="0An-sf-Sxo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="aMa-zb-NXQ"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="bottom" secondItem="1V7-Iu-EPt" secondAttribute="bottom" id="ekH-Tf-Guj"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="trailing" secondItem="1V7-Iu-EPt" secondAttribute="trailing" id="hnP-cd-CvJ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1V7-Iu-EPt" secondAttribute="trailing" id="iHy-1c-waq"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0An-sf-Sxo" secondAttribute="trailing" constant="36" id="kY3-s0-qOT"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0An-sf-Sxo" secondAttribute="trailing" constant="48" id="kY3-s0-qOT"/>
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ohN-uk-tdL"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="B5w-hK-wYy" secondAttribute="trailing" constant="8" id="wCv-gP-kEY"/>
                             <constraint firstItem="0An-sf-Sxo" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="wHS-MO-vwS"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addressLabel" destination="uaX-Dh-cwU" id="72j-Yh-d7s"/>
+                        <outlet property="addressLayer" destination="0An-sf-Sxo" id="vvx-aC-T9G"/>
                         <outlet property="assetList" destination="vYD-Wc-AXb" id="oUe-cP-Pyh"/>
+                        <outlet property="currencyLabel" destination="lZk-Ok-B8N" id="1rX-f3-fm9"/>
                         <outlet property="historyList" destination="1V7-Iu-EPt" id="VOm-jL-7Zo"/>
                         <outlet property="tabbar" destination="B5w-hK-wYy" id="Flj-2U-acs"/>
+                        <outlet property="totalValueLabel" destination="sqR-D5-yjj" id="zfC-nB-loW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -125,6 +129,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="aYH-Cl-c1y"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="AJM-90-cmx" secondAttribute="trailing" id="7GW-4W-rBg"/>
@@ -154,6 +159,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="nzP-Ug-Ff6"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="4Uf-kp-c8Q" secondAttribute="bottom" id="FEb-4f-3kM"/>

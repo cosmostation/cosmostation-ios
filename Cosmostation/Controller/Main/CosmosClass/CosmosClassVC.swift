@@ -11,18 +11,30 @@ import MaterialComponents
 
 class CosmosClassVC: BaseVC {
     
+    @IBOutlet weak var addressLayer: UIView!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var totalValueLabel: UILabel!
     @IBOutlet weak var tabbar: MDCTabBarView!
     @IBOutlet weak var assetList: UIView!
     @IBOutlet weak var historyList: UIView!
     
     var selectedPosition: Int!
-    var nativeCoins = Array<Cosmos_Base_V1beta1_Coin>()                // section 1
-    var ibcCoins = Array<Cosmos_Base_V1beta1_Coin>()                   // section 2
-    var bridgedCoins = Array<Cosmos_Base_V1beta1_Coin>()               // section 3
+    var selectedChain: CosmosClass!
+    var totalValue = NSDecimalNumber.zero {
+        didSet {
+            WDP.dpValue(totalValue, currencyLabel, totalValueLabel)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         onSetTabbarView()
+        
+        baseAccount = BaseData.instance.baseAccount
+        selectedChain = baseAccount.cosmosClassChains[selectedPosition]
+        totalValue = selectedChain.allValue()
+        addressLabel.text = selectedChain.address
     }
     
     func onSetTabbarView() {

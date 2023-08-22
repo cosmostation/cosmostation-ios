@@ -657,6 +657,8 @@
 		E16FACB12361ADFA00372052 /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16FACB02361ADFA00372052 /* Bytes.swift */; };
 		E17748E32282D6AD003D8CD1 /* BTCMnemonic.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E12282D6AD003D8CD1 /* BTCMnemonic.m */; };
 		E17748E62282D782003D8CD1 /* BTCProtocolSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E52282D782003D8CD1 /* BTCProtocolSerialization.m */; };
+		E18A4EBB2A95149100D8BC05 /* ChainAssetMantle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */; };
+		E18A4EBC2A95149100D8BC05 /* ChainAssetMantle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */; };
 		E1945E28222E7C0600A1436F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E27222E7C0600A1436F /* AppDelegate.swift */; };
 		E1945E3E222E7E2900A1436F /* SegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E3C222E7E2900A1436F /* SegwitAddrCoder.swift */; };
 		E1945E3F222E7E2900A1436F /* Bech32.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E3D222E7E2900A1436F /* Bech32.swift */; };
@@ -999,6 +1001,7 @@
 		E17748E22282D6AD003D8CD1 /* BTCMnemonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCMnemonic.h; sourceTree = "<group>"; };
 		E17748E42282D782003D8CD1 /* BTCProtocolSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCProtocolSerialization.h; sourceTree = "<group>"; };
 		E17748E52282D782003D8CD1 /* BTCProtocolSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCProtocolSerialization.m; sourceTree = "<group>"; };
+		E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAssetMantle.swift; sourceTree = "<group>"; };
 		E1945E24222E7C0600A1436F /* Cosmostation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cosmostation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1945E27222E7C0600A1436F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1945E33222E7C0800A1436F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1082,6 +1085,7 @@
 				04CB91172A90C30A00375354 /* CosmosClass.swift */,
 				04D279E92A67C96500AF046A /* ChainCosmos.swift */,
 				04CB911D2A90C9D900375354 /* ChainAkash.swift */,
+				E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */,
 				04D279EC2A67C96F00AF046A /* ChainKava459.swift */,
 				E122DA1C2A8A158C006D1E7B /* ChainKava60.swift */,
 				042296802A890C9B003C7630 /* ChainKava118.swift */,
@@ -2005,6 +2009,7 @@
 				18D4C19628C704B8003F230A /* WalletConnectManager.swift in Sources */,
 				E122DBCE2A8A468E006D1E7B /* cosmos_tx_v1beta1_tx.pb.swift in Sources */,
 				E122DB7E2A8A468D006D1E7B /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
+				E18A4EBC2A95149100D8BC05 /* ChainAssetMantle.swift in Sources */,
 				E122DC0A2A8A468E006D1E7B /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
 				E122DC2C2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_query.grpc.swift in Sources */,
 				E122DB422A8A468D006D1E7B /* cosmos_upgrade_module_v1_module.pb.swift in Sources */,
@@ -2292,6 +2297,7 @@
 				E16D9B1522489B030019B7BB /* IntroViewController.swift in Sources */,
 				E122DBCD2A8A468E006D1E7B /* cosmos_tx_v1beta1_tx.pb.swift in Sources */,
 				E122DB7D2A8A468D006D1E7B /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
+				E18A4EBB2A95149100D8BC05 /* ChainAssetMantle.swift in Sources */,
 				E122DC092A8A468E006D1E7B /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
 				E122DC2B2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_query.grpc.swift in Sources */,
 				E122DB412A8A468D006D1E7B /* cosmos_upgrade_module_v1_module.pb.swift in Sources */,

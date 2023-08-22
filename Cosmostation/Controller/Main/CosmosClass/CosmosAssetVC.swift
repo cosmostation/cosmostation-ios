@@ -109,10 +109,8 @@ extension CosmosAssetVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0) {
             return (nativeCoins.count > 0) ? 40 : 0
-
         } else if (section == 1) {
             return (ibcCoins.count > 0) ? 40 : 0
-
         } else if (section == 2) {
             return (bridgedCoins.count > 0) ? 40 : 0
         }
@@ -122,10 +120,8 @@ extension CosmosAssetVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
             return nativeCoins.count
-            
         } else if (section == 1) {
             return ibcCoins.count
-            
         } else if (section == 2) {
             return bridgedCoins.count
         }
@@ -139,24 +135,27 @@ extension CosmosAssetVC: UITableViewDelegate, UITableViewDataSource {
             return cell
             
         } else {
-            var coin: Cosmos_Base_V1beta1_Coin?
-            if (indexPath.section == 0) {
-                coin = nativeCoins[indexPath.row]
-            } else if (indexPath.section == 1) {
-                coin = ibcCoins[indexPath.row]
-            } else if (indexPath.section == 2) {
-                coin = bridgedCoins[indexPath.row]
-            }
             let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-            cell.bindCosmosClassAsset(selectedChain, coin!)
+            cell.bindCosmosClassAsset(selectedChain, getCoinBySection(indexPath)!)
             return cell
         }
+    }
+    
+    func getCoinBySection(_ indexPath: IndexPath) -> Cosmos_Base_V1beta1_Coin? {
+        if (indexPath.section == 0) {
+            return nativeCoins[indexPath.row]
+        } else if (indexPath.section == 1) {
+            return ibcCoins[indexPath.row]
+        } else if (indexPath.section == 2) {
+            return bridgedCoins[indexPath.row]
+        }
+        return nil
     }
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y + navigationController!.navigationBar.frame.size.height - cell.frame.origin.y
+            let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
             if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
                 maskCell(cell: cell, margin: Float(hiddenFrameHeight))
             }

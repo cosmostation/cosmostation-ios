@@ -97,6 +97,8 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        view.titleLabel.text = "Cosmos Class"
+        view.cntLabel.text = String(allCosmosChains.count)
         return view
     }
     
@@ -146,7 +148,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y + navigationController!.navigationBar.frame.size.height - cell.frame.origin.y
+            let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
             if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
                 maskCell(cell: cell, margin: Float(hiddenFrameHeight))
             }
