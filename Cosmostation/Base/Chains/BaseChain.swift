@@ -182,6 +182,8 @@ class ChainFactory {
             return .IOV_MAIN
         case CHAIN_STRIDE_S:
             return .STRIDE_MAIN
+        case CHAIN_TERRA_S:
+            return .TERRA_MAIN
         case CHAIN_TERITORI_S:
             return .TERITORI_MAIN
         case CHAIN_TGRADE_S:
@@ -336,6 +338,8 @@ class ChainFactory {
             return ChainStarname(chainType)
         case .STRIDE_MAIN:
             return ChainStride(chainType)
+        case .TERRA_MAIN:
+            return ChainTerra(chainType)
         case .TERITORI_MAIN:
             return ChainTeritori(chainType)
 //        case .TGRADE_MAIN:
@@ -445,6 +449,7 @@ let CHAIN_NOBLE_S = "SUPPORT_CHAIN_NOBLE"
 let CHAIN_STAFI_S = "SUPPORT_CHAIN_STAFI"
 let CHAIN_NEUTRON_S = "SUPPORT_CHAIN_NEUTRON"
 let CHAIN_SEI_S = "SUPPORT_CHAIN_SEI"
+let CHAIN_TERRA_S = "SUPPORT_CHAIN_TERRA"
 
 let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 let CHAIN_NEUTRON_TEST_S = "SUPPORT_CHAIN_NEUTRON_TEST"
