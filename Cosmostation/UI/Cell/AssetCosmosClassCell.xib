@@ -276,7 +276,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="bET-Il-OK9" secondAttribute="bottom" constant="4" id="aJc-sq-U4c"/>
-                    <constraint firstItem="bET-Il-OK9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="bS0-L1-Yak"/>
+                    <constraint firstItem="bET-Il-OK9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="bS0-L1-Yak"/>
                     <constraint firstItem="bET-Il-OK9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="etq-HF-C6s"/>
                     <constraint firstAttribute="trailing" secondItem="bET-Il-OK9" secondAttribute="trailing" constant="8" id="wGE-xO-ppP"/>
                 </constraints>

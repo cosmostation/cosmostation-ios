@@ -38,13 +38,13 @@ public class BaseAccount {
     
     func setAllcosmosClassChains() -> [CosmosClass] {
         cosmosClassChains.removeAll()
-        cosmosClassChains.append(ChainCosmos())
+//        cosmosClassChains.append(ChainCosmos())
         cosmosClassChains.append(ChainAkash())
-        cosmosClassChains.append(ChainEvmos())
-        cosmosClassChains.append(ChainKava459())
-        cosmosClassChains.append(ChainKava60())
-        cosmosClassChains.append(ChainKava118())
-        cosmosClassChains.append(ChainJuno())
+//        cosmosClassChains.append(ChainEvmos())
+//        cosmosClassChains.append(ChainKava459())
+//        cosmosClassChains.append(ChainKava60())
+//        cosmosClassChains.append(ChainKava118())
+//        cosmosClassChains.append(ChainJuno())
         return cosmosClassChains
     }
     

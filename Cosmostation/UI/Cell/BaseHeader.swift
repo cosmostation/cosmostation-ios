@@ -1,5 +1,5 @@
 //
-//  PortfolioHeader.swift
+//  BaseHeader.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/08/17.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class PortfolioHeader: UIView {
-    private let xibName = "PortfolioHeader"
+class BaseHeader: UIView {
+    private let xibName = "BaseHeader"
     
     override init(frame: CGRect) {
         super.init(frame: frame)

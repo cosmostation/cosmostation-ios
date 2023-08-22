@@ -30,6 +30,9 @@ class PortfolioVC: BaseVC {
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "PortfolioCell", bundle: nil), forCellReuseIdentifier: "PortfolioCell")
         tableView.rowHeight = UITableView.automaticDimension
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0.0
+        }
         
         initData()
     }
@@ -93,7 +96,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = PortfolioHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         return view
     }
     
@@ -121,7 +124,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cosmosClassVC = CosmosClassVC(nibName: "CosmosClassVC", bundle: nil)
+        let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
         cosmosClassVC.selectedPosition = indexPath.row
         cosmosClassVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(cosmosClassVC, animated: true)

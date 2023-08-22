@@ -42,6 +42,15 @@
                                 <color key="textColor" name="_font01"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12312312321" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qjd-eJ-FTR">
+                                <rect key="frame" x="266" y="17" width="105" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="eTh-7p-u8S"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                                <color key="textColor" name="_font01"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qk0-ex-tMn">
                                 <rect key="frame" x="68" y="41" width="6.3333333333333286" height="10"/>
                                 <constraints>
@@ -76,15 +85,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                                 <color key="textColor" name="_voteYes"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12312312321" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qjd-eJ-FTR">
-                                <rect key="frame" x="266" y="17" width="105" height="16"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="eTh-7p-u8S"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
-                                <color key="textColor" name="_font01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYK-IH-fsX">
@@ -141,7 +141,16 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="amountLabel" destination="Qjd-eJ-FTR" id="tyH-zz-Au1"/>
+                <outlet property="coinImg" destination="ipz-F5-jrm" id="nCp-E7-S7u"/>
+                <outlet property="priceChangeLabel" destination="JVP-Gq-Pzr" id="f8e-AD-7iF"/>
+                <outlet property="priceChangePercentLabel" destination="fLS-tf-qvc" id="iCM-H2-88Y"/>
+                <outlet property="priceCurrencyLabel" destination="qk0-ex-tMn" id="fMd-Vl-0RI"/>
+                <outlet property="priceLabel" destination="0Vd-yd-D3B" id="mQf-rx-J3p"/>
                 <outlet property="rootView" destination="3Pq-ad-7ll" id="9O8-1M-lQW"/>
+                <outlet property="symbolLabel" destination="Pyp-9j-xZD" id="Hq9-TC-bsU"/>
+                <outlet property="valueCurrencyLabel" destination="kYK-IH-fsX" id="s9R-Sb-Nva"/>
+                <outlet property="valueLabel" destination="vSK-H4-Id2" id="aXF-NG-KsS"/>
             </connections>
             <point key="canvasLocation" x="199.23664122137404" y="31.690140845070424"/>
         </tableViewCell>
