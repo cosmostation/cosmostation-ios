@@ -42,7 +42,7 @@ class ChainStride: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = true
-    var authzSupoort = true
+    var authzSupoort = false
     var moonPaySupoort = false
     var kadoMoneySupoort = false
     var grpcUrl = "grpc-stride.cosmostation.io"

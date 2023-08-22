@@ -363,6 +363,7 @@
 "guide_msg_archway" = "Archwayは、dAppの貢献度に応じてリワードが開発者に分配されるように設計されたスマートコントラクトブロックチェーンです。";
 "guide_msg_sei" = "Seiは速度、セキュリティ、および拡張性のために設計されたCosmosSDKベースのレイヤー1ブロックチェーンネットワークです。";
 "guide_msg_stafi" = "StaFi Hubはクロスチェーンリキッドステーキングのために設計されたCosmos SDKベースのブロックチェーンネットワークです。";
+"guide_msg_terra" = "Terraネットワークは、Terra ClassicでハードフォークされたCosmos SDKベースの非許可型ブロックチェーンネットワークです。";
 "guide_btn_home" = "ホームページ";
 "guide_btn_blog" = "公式ブログ";
 

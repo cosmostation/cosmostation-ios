@@ -2716,6 +2716,8 @@
 		1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */; };
 		1517346B2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */; };
 		151788EC282E078600A7D7CC /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
+		151E80262A936D11008A2FB2 /* ChainTerra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E80252A936D11008A2FB2 /* ChainTerra.swift */; };
+		151E80272A936D11008A2FB2 /* ChainTerra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E80252A936D11008A2FB2 /* ChainTerra.swift */; };
 		152AC22929ACAA36007AB276 /* PersisLiquid3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */; };
 		152AC22A29ACAA36007AB276 /* PersisLiquid3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */; };
 		153559982988FDE70055A1D3 /* ChainMars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153559972988FDE70055A1D3 /* ChainMars.swift */; };
@@ -5279,6 +5281,7 @@
 		151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingRes.swift; sourceTree = "<group>"; };
 		151788EA282E078600A7D7CC /* WalletStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStationCell.swift; sourceTree = "<group>"; };
 		151788EB282E078600A7D7CC /* WalletStationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStationCell.xib; sourceTree = "<group>"; };
+		151E80252A936D11008A2FB2 /* ChainTerra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainTerra.swift; sourceTree = "<group>"; };
 		152AC22829ACAA36007AB276 /* PersisLiquid3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersisLiquid3ViewController.xib; sourceTree = "<group>"; };
 		153559972988FDE70055A1D3 /* ChainMars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMars.swift; sourceTree = "<group>"; };
 		15378CC92A52A5D50017BE75 /* ChainArchway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainArchway.swift; sourceTree = "<group>"; };
@@ -6025,6 +6028,7 @@
 				0451FC96282A3B4200214FDA /* ChainStargaze.swift */,
 				0451FC55282A398E00214FDA /* ChainStarname.swift */,
 				04FC7F1E28C6FECD00F64841 /* ChainStride.swift */,
+				151E80252A936D11008A2FB2 /* ChainTerra.swift */,
 				04AA4B56290624B50027877B /* ChainTeritori.swift */,
 				04E165B628A0F873000F12C0 /* ChainTgrade.swift */,
 				0451FCB4282A3BD700214FDA /* ChainUmee.swift */,
@@ -10625,6 +10629,7 @@
 				04815E4A2A41E1480006A906 /* ibc_core_connection_v1_genesis.pb.swift in Sources */,
 				048160EE2A41E6520006A906 /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */,
 				048160172A41E1810006A906 /* cosmos_circuit_module_v1_module.pb.swift in Sources */,
+				151E80272A936D11008A2FB2 /* ChainTerra.swift in Sources */,
 				04DFE2EF2A0BD245005BD46C /* NeuSwap0ViewController.swift in Sources */,
 				E198292A290E97C200451A81 /* KavaLiquidity1ViewController.swift in Sources */,
 				048160212A41E1810006A906 /* cosmos_upgrade_v1beta1_tx.pb.swift in Sources */,
@@ -12190,6 +12195,7 @@
 				E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
 				04815C3C2A41DC430006A906 /* crescent_liquidstaking_v1beta1_query.grpc.swift in Sources */,
 				04F797CD2A4593050093B79B /* kava_issuance_v1beta1_tx.pb.swift in Sources */,
+				151E80262A936D11008A2FB2 /* ChainTerra.swift in Sources */,
 				E1FFB67E29F96F0B00E6A28A /* SubDaoCell.swift in Sources */,
 				04F7969C2A458EFB0093B79B /* osmosis_mint_v1beta1_genesis.pb.swift in Sources */,
 				04F796182A458EFB0093B79B /* osmosis_incentives_query.grpc.swift in Sources */,
