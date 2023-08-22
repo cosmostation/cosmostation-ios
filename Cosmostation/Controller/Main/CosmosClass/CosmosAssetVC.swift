@@ -135,6 +135,7 @@ extension CosmosAssetVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0 && indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
+            cell.bindCosmosStakeAsset(selectedChain)
             return cell
             
         } else {

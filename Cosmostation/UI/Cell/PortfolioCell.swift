@@ -37,13 +37,12 @@ class PortfolioCell: UITableViewCell {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
-        currencyLabel.text = BaseData.instance.getCurrencySymbol()
         
         if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom) {
             let priceChanged = BaseData.instance.priceChange(msAsset.coinGeckoId)
-            WDP.dpPriceChangeImg(priceImg, priceChanged)
-            WDP.dpPriceChanged(priceChangeLabel, priceChanged)
-            WDP.dpValue(valueLabel, chain.allValue())
+//            WDP.dpPriceChangeImg(priceImg, priceChanged)
+//            WDP.dpPriceChanged(priceChangeLabel, priceChanged)
+            WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
         }
     }
     

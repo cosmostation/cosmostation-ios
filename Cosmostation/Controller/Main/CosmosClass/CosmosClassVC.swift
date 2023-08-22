@@ -42,38 +42,7 @@ class CosmosClassVC: BaseVC {
         assetList.alpha = 1
         historyList.alpha = 0
     }
-    
-    
-
-
 }
-
-//extension CosmosClassVC: UITableViewDelegate, UITableViewDataSource {
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if (selectedTab == .assets) {
-//
-//        }
-//        return 0
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if (selectedTab == .assets) {
-//            if (indexPath.row == 0) {
-//                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
-//                return cell
-//            }
-//            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-//            return cell
-//
-//        } else {
-//
-//        }
-//        return UITableViewCell()
-//    }
-//
-//
-//}
 
 extension CosmosClassVC: MDCTabBarViewDelegate {
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {

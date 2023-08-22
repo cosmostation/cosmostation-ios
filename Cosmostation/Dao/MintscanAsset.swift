@@ -32,8 +32,8 @@ public struct MintscanAsset: Codable {
     var port: String?
     var counter_party: MintscanAssetCounterParty?
     
-    func assetImg() -> URL? {
-        return URL(string: ResourceBase + image!)
+    func assetImg() -> URL {
+        return URL(string: ResourceBase + image!) ?? URL(string: "")!
     }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AlamofireImage
 
 public class WDP {
 //    static func dpMainSymbol(_ chainConfig: ChainConfig?, _ label: UILabel?) {
@@ -90,9 +91,18 @@ public class WDP {
 //        return dpCoin(chainConfig, coin?.denom, coin?.amount, denomLabel, amountLabel)
 //    }
 //
-//    static func dpCoin(_ chainConfig: ChainConfig?, _ denom: String?, _ amount: String?, _ denomLabel: UILabel?, _ amountLabel: UILabel?) {
-//        if (chainConfig == nil || denom == nil || amount == nil || amountLabel == nil) { return }
-//        dpSymbol(chainConfig, denom, denomLabel)
+    
+    
+//    static func dpCoin(_ baseChain: BaseChain?, _ coin: Cosmos_Base_V1beta1_Coin?, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16? = 6) {
+    static func dpCoin(_ msAsset: MintscanAsset, _ coin: Cosmos_Base_V1beta1_Coin?, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
+        if (coin == nil || amountLabel == nil) { return }
+
+        let amount = NSDecimalNumber(string: coin?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
+        amountLabel?.attributedText = dpAmount(amount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
+        denomLabel?.text = msAsset.symbol?.uppercased()
+        coinImg?.af.setImage(withURL: msAsset.assetImg())
+
+
 //        if (chainConfig?.isGrpc == true) {
 //            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == denom }).first {
 //                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, msAsset.decimals, msAsset.decimals)
@@ -115,7 +125,7 @@ public class WDP {
 //                }
 //            }
 //        }
-//    }
+    }
 //
 //    static func dpBnbTxCoin(_ chainConfig: ChainConfig, _ coin:Coin, _ denomLabel: UILabel, _ amountLabel: UILabel) {
 //        if (coin.denom == BNB_MAIN_DENOM) {
@@ -127,58 +137,57 @@ public class WDP {
 //        amountLabel.attributedText = dpAmount(coin.amount, amountLabel.font, 8, 8)
 //    }
 //
-//    static func dpAmount(_ amount: String?, _ font: UIFont, _ inputPoint: Int16, _ dpPoint: Int16) -> NSMutableAttributedString {
-//        let nf = NumberFormatter()
-//        nf.roundingMode = .floor
-//        nf.numberStyle = .decimal
-//
-//        let number = WUtils.plainStringToDecimal(amount)
-//        var formatted: String?
-//        if (number == NSDecimalNumber.zero) {
-//            nf.minimumSignificantDigits = Int(dpPoint) + 1
-//            nf.maximumSignificantDigits = Int(dpPoint) + 1
-//            formatted = nf.string(from: NSDecimalNumber.zero)
-//
-//        } else {
-//            let calNumber = number.multiplying(byPowerOf10: -Int16(inputPoint))
-//            if (calNumber.compare(NSDecimalNumber.one).rawValue < 0) {
-//                var temp = ""
-//                let decimal = Array(String(calNumber.stringValue.split(separator: ".")[1]))
-//                for i in 0 ..< Int(dpPoint) {
-//                    if (decimal.count > i) {
-//                        temp = temp.appending(String(decimal[i]))
-//                    } else {
-//                        temp = temp.appending("0")
-//                    }
-//                }
-//                formatted = "0" + nf.decimalSeparator! + temp
-//
-//            } else {
-//                let count = calNumber.multiplying(by: NSDecimalNumber.one, withBehavior: WUtils.handler0Down).stringValue.count
-//                nf.minimumSignificantDigits = Int(dpPoint) + count
-//                nf.maximumSignificantDigits = Int(dpPoint) + count
-//                formatted = nf.string(from: calNumber)
-//            }
-//
-//        }
-//
-//        let added       = formatted!
-//        let endIndex    = added.index(added.endIndex, offsetBy: Int(-dpPoint))
-//
-//        let preString   = added[..<endIndex]
-//        let postString  = added[endIndex...]
-//
-//        let preAttrs = [NSAttributedString.Key.font : font]
-//        let postAttrs = [NSAttributedString.Key.font : font.withSize(CGFloat(Int(Double(font.pointSize) * 0.85)))]
-//
-//        let attributedString1 = NSMutableAttributedString(string:String(preString), attributes:preAttrs as [NSAttributedString.Key : Any])
-//        let attributedString2 = NSMutableAttributedString(string:String(postString), attributes:postAttrs as [NSAttributedString.Key : Any])
-//
-//        attributedString1.append(attributedString2)
-//        return attributedString1
-//    }
-//
-//
+    static func dpAmount(_ amount: String?, _ font: UIFont, _ showDecimal: Int16? = 6) -> NSMutableAttributedString {
+        let nf = NumberFormatter()
+        nf.roundingMode = .floor
+        nf.numberStyle = .decimal
+
+        let deciaml = Int(showDecimal!)
+        let number = NSDecimalNumber(string: amount)
+        var formatted: String?
+        if (number == NSDecimalNumber.zero) {
+            nf.minimumSignificantDigits = deciaml + 1
+            nf.maximumSignificantDigits = deciaml + 1
+            formatted = nf.string(from: NSDecimalNumber.zero)
+
+        } else {
+            if (number.compare(NSDecimalNumber.one).rawValue < 0) {
+                var temp = ""
+                let decimal = Array(String(number.stringValue.split(separator: ".")[1]))
+                for i in 0 ..< deciaml {
+                    if (decimal.count > i) {
+                        temp = temp.appending(String(decimal[i]))
+                    } else {
+                        temp = temp.appending("0")
+                    }
+                }
+                formatted = "0" + nf.decimalSeparator! + temp
+
+            } else {
+                let count = number.multiplying(by: NSDecimalNumber.one, withBehavior: getDivideHandler(0)).stringValue.count
+                nf.minimumSignificantDigits = deciaml + count
+                nf.maximumSignificantDigits = deciaml + count
+                formatted = nf.string(from: number)
+            }
+
+        }
+
+        let added       = formatted!
+        let endIndex    = added.index(added.endIndex, offsetBy: -deciaml)
+
+        let preString   = added[..<endIndex]
+        let postString  = added[endIndex...]
+
+        let preAttrs = [NSAttributedString.Key.font : font]
+        let postAttrs = [NSAttributedString.Key.font : font.withSize(CGFloat(Int(Double(font.pointSize) * 0.85)))]
+
+        let attributedString1 = NSMutableAttributedString(string:String(preString), attributes:preAttrs as [NSAttributedString.Key : Any])
+        let attributedString2 = NSMutableAttributedString(string:String(postString), attributes:postAttrs as [NSAttributedString.Key : Any])
+
+        attributedString1.append(attributedString2)
+        return attributedString1
+    }
+    
 //
 //    //display price & value
 //    static func dpAssetValue(_ geckoId: String, _ amount: NSDecimalNumber, _ divider: Int16, _ label: UILabel?) {
@@ -207,46 +216,85 @@ public class WDP {
 //        label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
 //    }
 //
-    static func dpValue(_ label: UILabel?, _ value: NSDecimalNumber) {
+    static func dpValue(_ value: NSDecimalNumber, _ currencyLabel: UILabel?, _ priceLabel: UILabel?) {
         let nf = WUtils.getNumberFormatter(3)
         let formatted = nf.string(from: value)!
-        label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
+        currencyLabel?.text = BaseData.instance.getCurrencySymbol()
+        priceLabel?.attributedText = WUtils.getDpAttributedString(formatted, 3, priceLabel?.font)
     }
     
-    static func priceUpImg(_ imgView: UIImageView) {
-        if (BaseData.instance.getPriceChaingColor() > 0) {
-            imgView.image =  UIImage.init(named: "iconPriceUpRed")
-        } else {
-            imgView.image =  UIImage.init(named: "iconPriceUpGreen")
-        }
-    }
-
-    static func priceDownImg(_ imgView: UIImageView) {
-        if (BaseData.instance.getPriceChaingColor() > 0) {
-            imgView.image =  UIImage.init(named: "iconPriceDownGreen")
-        } else {
-            imgView.image =  UIImage.init(named: "iconPriceDownRed")
-        }
-    }
-
-    static func dpPriceChangeImg(_ imgView: UIImageView, _ change: NSDecimalNumber) {
-        if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
-            priceUpImg(imgView)
-        } else if (change.compare(NSDecimalNumber.zero).rawValue < 0) {
-            priceDownImg(imgView)
-        }
+//    static func priceUpImg(_ imgView: UIImageView) {
+//        if (BaseData.instance.getPriceChaingColor() > 0) {
+//            imgView.image =  UIImage.init(named: "iconPriceUpRed")
+//        } else {
+//            imgView.image =  UIImage.init(named: "iconPriceUpGreen")
+//        }
+//    }
+//
+//    static func priceDownImg(_ imgView: UIImageView) {
+//        if (BaseData.instance.getPriceChaingColor() > 0) {
+//            imgView.image =  UIImage.init(named: "iconPriceDownGreen")
+//        } else {
+//            imgView.image =  UIImage.init(named: "iconPriceDownRed")
+//        }
+//    }
+//
+//    static func dpPriceChangeImg(_ imgView: UIImageView, _ change: NSDecimalNumber) {
+//        if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
+//            priceUpImg(imgView)
+//        } else if (change.compare(NSDecimalNumber.zero).rawValue < 0) {
+//            priceDownImg(imgView)
+//        }
+//    }
+    
+    static func dpPrice(_ msAsset: MintscanAsset, _ currencyLabel: UILabel?, _ priceLabel: UILabel?) {
+        let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+        let nf = WUtils.getNumberFormatter(3)
+        let formatted = nf.string(from: msPrice)!
+        currencyLabel?.text = BaseData.instance.getCurrencySymbol()
+        priceLabel?.attributedText = WUtils.getDpAttributedString(formatted, 3, priceLabel?.font)
     }
     
-    static func dpPriceChanged( _ label: UILabel?, _ priceChanged: NSDecimalNumber) {
+    static func dpPriceChanged(_ msAsset: MintscanAsset, _ valueLabel: UILabel?, _ percentLabel: UILabel?) {
+        let priceChanged = BaseData.instance.priceChange(msAsset.coinGeckoId)
         let nf = WUtils.getNumberFormatter(2)
         if (priceChanged.compare(NSDecimalNumber.zero).rawValue >= 0) {
             let formatted = nf.string(from: priceChanged)!
-            label?.attributedText = WUtils.getDpAttributedString(formatted, 2, label?.font)
+            valueLabel?.attributedText = WUtils.getDpAttributedString("+"+formatted, 2, valueLabel?.font)
+            dpPriceUpColor(valueLabel)
+            dpPriceUpColor(percentLabel)
         } else {
             let formatted = nf.string(from: priceChanged)!
-            label?.attributedText = WUtils.getDpAttributedString(formatted, 2, label?.font)
+            valueLabel?.attributedText = WUtils.getDpAttributedString(formatted, 2, valueLabel?.font)
+            dpPriceDownColor(valueLabel)
+            dpPriceDownColor(percentLabel)
         }
     }
+    
+    static func dpPriceUpColor(_ label: UILabel?) {
+        if (BaseData.instance.getPriceChaingColor() > 0) {
+            label?.textColor = UIColor(named: "_voteNo")
+        } else {
+            label?.textColor = UIColor(named: "_voteYes")
+        }
+    }
+
+    static func dpPriceDownColor(_ label: UILabel?) {
+        if (BaseData.instance.getPriceChaingColor() > 0) {
+            label?.textColor = UIColor(named: "_voteYes")
+        } else {
+            label?.textColor = UIColor(named: "_voteNo")
+        }
+    }
+
+//    static func setPriceColor(_ label: UILabel, _ change: NSDecimalNumber) {
+//        if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
+//            priceUpColor(label)
+//        } else if (change.compare(NSDecimalNumber.zero).rawValue < 0) {
+//            priceDownColor(label)
+//        }
+//    }
+    
 //
 //
 //
@@ -323,29 +371,7 @@ public class WDP {
 //
     
     
-//    static func priceUpColor(_ label: UILabel) {
-//        if (BaseData.instance.getPriceChaingColor() > 0) {
-//            label.textColor = UIColor(named: "_voteNo")
-//        } else {
-//            label.textColor = UIColor(named: "_voteYes")
-//        }
-//    }
-//
-//    static func priceDownColor(_ label: UILabel) {
-//        if (BaseData.instance.getPriceChaingColor() > 0) {
-//            label.textColor = UIColor(named: "_voteYes")
-//        } else {
-//            label.textColor = UIColor(named: "_voteNo")
-//        }
-//    }
-//
-//    static func setPriceColor(_ label: UILabel, _ change: NSDecimalNumber) {
-//        if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
-//            priceUpColor(label)
-//        } else if (change.compare(NSDecimalNumber.zero).rawValue < 0) {
-//            priceDownColor(label)
-//        }
-//    }
+
     
 
     

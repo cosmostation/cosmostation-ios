@@ -18,7 +18,7 @@ class PortfolioVC: BaseVC {
     var allCosmosChains = [CosmosClass]()
     var totalValue = NSDecimalNumber.zero {
         didSet {
-            WDP.dpValue(totalValueLabel, totalValue)
+            WDP.dpValue(totalValue, currencyLabel, totalValueLabel)
         }
     }
     

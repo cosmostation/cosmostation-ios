@@ -33,12 +33,13 @@ class AssetCell: UITableViewCell {
         coinImg.af.cancelImageRequest()
     }
     
-    func bindCosmosClassAsset(_ chain: CosmosClass, _ coin: Cosmos_Base_V1beta1_Coin) {
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, coin.denom) {
-            symbolLabel.text = msAsset.symbol?.uppercased()
-            if let url = msAsset.assetImg() {
-                coinImg.af.setImage(withURL: url)
-            }
+    func bindCosmosClassAsset(_ baseChain: CosmosClass, _ coin: Cosmos_Base_V1beta1_Coin) {
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, coin.denom) {
+            let value = baseChain.denomValue(coin.denom)
+            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, 6)
+            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
         }
     }
     
