@@ -50,6 +50,7 @@ class PortfolioVC: BaseVC {
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
+        print("onFetchDone ", Date().timeIntervalSince1970, " ", notification.object as! String)
         let chainName = notification.object as! String
         for i in 0..<allCosmosChains.count {
             if (String(describing: allCosmosChains[i]) == chainName) {
@@ -112,7 +113,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"PortfolioCell") as! PortfolioCell
-        cell.bindCosmosClassChain(allCosmosChains[indexPath.row])
+        cell.bindCosmosClassChain(baseAccount, allCosmosChains[indexPath.row])
         return cell
     }
     

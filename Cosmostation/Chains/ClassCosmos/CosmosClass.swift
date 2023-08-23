@@ -37,9 +37,9 @@ class CosmosClass: BaseChain  {
 
         group.notify(queue: .main) {
 //            try channel.close().wait()
-            try? channel.close().wait()
+//            try? channel.close().wait()
 
-//            print("notify cosmosBalances", self.address, " ", self.cosmosBalances)chain
+//            print("notify cosmosBalances", self.address)
 //            print("notify cosmosDelegations", self.address, " ", self.cosmosDelegations)
 //
 //            print("notify ", String(describing: self))
@@ -47,8 +47,8 @@ class CosmosClass: BaseChain  {
 //            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: nil, userInfo: value)
             
             
-            
-            
+//            try? channel.close().wait()  //make noti late
+            try? channel.close()
             WUtils.onParseVestingAccount(self)
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: String(describing: self), userInfo: nil)
         }
@@ -61,6 +61,8 @@ class CosmosClass: BaseChain  {
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosAuth = response.account
             group.leave()
+        } else {
+            group.leave()
         }
     }
     
@@ -71,6 +73,8 @@ class CosmosClass: BaseChain  {
         if let response = try? Cosmos_Bank_V1beta1_QueryNIOClient(channel: channel).allBalances(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosBalances = response.balances
             group.leave()
+        } else {
+            group.leave()
         }
     }
     
@@ -79,6 +83,8 @@ class CosmosClass: BaseChain  {
         let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = address! }
         if let response = try? Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).delegatorDelegations(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosDelegations = response.delegationResponses
+            group.leave()
+        } else {
             group.leave()
         }
     }
@@ -89,6 +95,8 @@ class CosmosClass: BaseChain  {
         if let response = try? Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosUnbondings = response.unbondingResponses
             group.leave()
+        } else {
+            group.leave()
         }
     }
     
@@ -97,6 +105,8 @@ class CosmosClass: BaseChain  {
         let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = address! }
         if let response = try? Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).delegationTotalRewards(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosRewards = response.rewards
+            group.leave()
+        } else {
             group.leave()
         }
     }

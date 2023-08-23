@@ -14,6 +14,7 @@ class PortfolioCell: UITableViewCell {
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var lagacyLayer: UIStackView!
     @IBOutlet weak var pathLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
@@ -25,18 +26,22 @@ class PortfolioCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         rootView.setBlur()
-        
-        pathLabel.isHidden = true
     }
     
     override func prepareForReuse() {
         rootView.setBlur()
+        lagacyLayer.isHidden = true
     }
     
-    func bindCosmosClassChain(_ chain: CosmosClass) {
+    func bindCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
+        
+        if (!chain.isDefault) {
+            lagacyLayer.isHidden = false
+            pathLabel.text = chain.getHDPath(account.lastHDPath)
+        }
         
         if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom) {
             let priceChanged = BaseData.instance.priceChange(msAsset.coinGeckoId)

@@ -23,7 +23,7 @@ class ChainPersistence750: CosmosClass  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/750'/0'/0/X")
         accountPrefix = "persistence"
         
-        grpcHost = "grpc-persistence-chain.cosmostation.io"
+        grpcHost = "grpc-persistence.cosmostation.io"
     }
     
 }
