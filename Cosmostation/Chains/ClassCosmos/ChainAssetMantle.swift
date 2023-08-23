@@ -7,3 +7,22 @@
 //
 
 import Foundation
+
+class ChainAssetMantle: CosmosClass  {
+    
+    override init() {
+        super.init()
+        
+        name = "AssetMantle"
+        logo1 = "chainAssetmantle"
+        logo2 = "chainAssetmantle2"
+        apiName = "asset-mantle"
+        stakeDenom = "umntl"
+        
+        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        accountPrefix = "mantle"
+        
+        grpcHost = "grpc-asset-mantle.cosmostation.io"
+    }
+    
+}

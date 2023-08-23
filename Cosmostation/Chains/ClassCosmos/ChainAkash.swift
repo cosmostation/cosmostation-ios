@@ -14,7 +14,6 @@ class ChainAkash: CosmosClass  {
         super.init()
         
         name = "Akash"
-        id = "akashnet-2"
         logo1 = "chainAkash"
         logo2 = "chainAkash2"
         apiName = "akash"

@@ -1,28 +1,28 @@
 //
-//  ChainEvmos.swift
+//  ChainInjective.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2023/07/19.
+//  Created by yongjoo jung on 2023/08/23.
 //  Copyright © 2023 wannabit. All rights reserved.
 //
 
 import Foundation
 
-class ChainEvmos: CosmosClass  {
+class ChainInjective: CosmosClass  {
     
     override init() {
         super.init()
         
-        name = "Evmos"
-        logo1 = "chainEvmos"
-        logo2 = "chainEvmos2"
-        apiName = "evmos"
-        stakeDenom = "aevmos"
+        name = "Injective"
+        logo1 = "chainInjective"
+        logo2 = "chainInjective2"
+        apiName = "injective"
+        stakeDenom = "inj"
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        accountPrefix = "evmos"
+        accountPrefix = "inj"
         
-        grpcHost = "grpc-evmos.cosmostation.io"
+        grpcHost = "grpc-injective.cosmostation.io"
     }
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
@@ -38,6 +38,4 @@ class ChainEvmos: CosmosClass  {
         let evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
         address = KeyFac.convertEvmToBech32(evmAddress, accountPrefix!)
     }
-    
 }
-

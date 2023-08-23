@@ -1,28 +1,28 @@
 //
-//  ChainEvmos.swift
+//  ChainCanto.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2023/07/19.
+//  Created by yongjoo jung on 2023/08/23.
 //  Copyright © 2023 wannabit. All rights reserved.
 //
 
 import Foundation
 
-class ChainEvmos: CosmosClass  {
+class ChainCanto: CosmosClass  {
     
     override init() {
         super.init()
         
-        name = "Evmos"
-        logo1 = "chainEvmos"
-        logo2 = "chainEvmos2"
-        apiName = "evmos"
-        stakeDenom = "aevmos"
+        name = "Canto"
+        logo1 = "chainCanto"
+        logo2 = "chainCanto2"
+        apiName = "canto"
+        stakeDenom = "acanto"
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        accountPrefix = "evmos"
+        accountPrefix = "canto"
         
-        grpcHost = "grpc-evmos.cosmostation.io"
+        grpcHost = "grpc-canto.cosmostation.io"
     }
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
@@ -40,4 +40,3 @@ class ChainEvmos: CosmosClass  {
     }
     
 }
-

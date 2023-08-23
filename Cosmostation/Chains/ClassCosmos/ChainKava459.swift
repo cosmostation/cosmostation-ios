@@ -14,7 +14,6 @@ class ChainKava459: CosmosClass  {
         super.init()
         
         name = "Kava"
-        id = "kava_2222-10"
         logo1 = "chainKava"
         logo2 = "chainKava2"
         apiName = "kava"

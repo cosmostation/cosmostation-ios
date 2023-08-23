@@ -15,7 +15,6 @@ class ChainKava60: CosmosClass  {
         
         isDefault = false
         name = "Kava"
-        id = "kava_2222-10"
         logo1 = "chainKava"
         logo2 = "chainKava2"
         apiName = "kava"
