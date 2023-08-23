@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Lottie
 
 class PortfolioVC: BaseVC {
 
+    @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
@@ -25,6 +27,12 @@ class PortfolioVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadingView.animation = LottieAnimation.named("loading2")
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.loopMode = .loop
+        loadingView.animationSpeed = 1.3
+        loadingView.play()
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -34,6 +42,7 @@ class PortfolioVC: BaseVC {
             tableView.sectionHeaderTopPadding = 0.0
         }
         
+//        showWait()
         initData()
     }
     
