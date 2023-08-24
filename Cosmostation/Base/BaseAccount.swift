@@ -16,48 +16,39 @@ public class BaseAccount {
     var uuid: String = ""
     var name: String = ""
     var type: BaseAccountType = .none
-    var lastHDPath = "0"
+    var lastHDPath = ""
     
     //using for generate new aacount
-    init(_ name: String, _ type: BaseAccountType) {
+    init(_ name: String, _ type: BaseAccountType, _ lastPath: String) {
         self.uuid = UUID().uuidString
         self.name = name
         self.type = type
+        self.lastHDPath = lastPath
     }
     
     //db query
-    init(_ id: Int64, _ uuid: String, _ name: String, _ type: Int64) {
+    init(_ id: Int64, _ uuid: String, _ name: String, _ type: Int64, _ lastPath: String) {
         self.id = id
         self.uuid = uuid
         self.name = name
         self.type = BaseAccountType(rawValue: type)!
+        self.lastHDPath = lastPath
     }
     
     
-    var cosmosClassChains = [CosmosClass]()
+    var displayCosmosClassChains = [CosmosClass]()
     
-    func setAllcosmosClassChains() -> [CosmosClass] {
-        cosmosClassChains.removeAll()
-        cosmosClassChains.append(ChainCosmos())
-        cosmosClassChains.append(ChainAkash())
-        cosmosClassChains.append(ChainAssetMantle())
-        cosmosClassChains.append(ChainAxelar())
-        cosmosClassChains.append(ChainCanto())
-        cosmosClassChains.append(ChainEvmos())
-        cosmosClassChains.append(ChainInjective())
-        cosmosClassChains.append(ChainJuno())
-        cosmosClassChains.append(ChainKava459())
-        cosmosClassChains.append(ChainKava60())
-        cosmosClassChains.append(ChainKava118())
-        cosmosClassChains.append(ChainKi())
-        cosmosClassChains.append(ChainLum880())
-        cosmosClassChains.append(ChainLum118())
-        cosmosClassChains.append(ChainPersistence118())
-        cosmosClassChains.append(ChainPersistence750())
-        cosmosClassChains.append(ChainSommelier())
-        cosmosClassChains.append(ChainStargaze())
-        cosmosClassChains.append(ChainUmee())
-        return cosmosClassChains
+    func setCosmosClassChains() -> [CosmosClass] {
+        displayCosmosClassChains.removeAll()
+        let toDpChainIds = BaseData.instance.getDisplayCosmosChainNames(self)
+        print("toDpChainIds ", toDpChainIds.count)
+        
+        toDpChainIds.forEach { id in
+            if let toDpChain = ALLCOSMOSCLASS().filter({ $0.id == id }).first {
+                displayCosmosClassChains.append(toDpChain)
+            }
+        }
+        return displayCosmosClassChains
     }
     
     func setAddressInfo() -> Bool {
@@ -65,7 +56,7 @@ public class BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                cosmosClassChains.forEach { chain in
+                displayCosmosClassChains.forEach { chain in
                     Task {
                         chain.setInfoWithSeed(seed, lastHDPath)
                         chain.fetchData()
@@ -75,7 +66,7 @@ public class BaseAccount {
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                cosmosClassChains.forEach { chain in
+                displayCosmosClassChains.forEach { chain in
                     Task {
                         chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
                         chain.fetchData()

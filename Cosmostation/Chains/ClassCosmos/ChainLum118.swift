@@ -15,6 +15,7 @@ class ChainLum118: CosmosClass  {
         
         isDefault = false
         name = "Lum"
+        id = "lum118"
         logo1 = "chainLum"
         logo2 = "chainLum2"
         apiName = "lum"

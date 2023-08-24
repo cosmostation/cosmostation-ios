@@ -311,17 +311,28 @@ extension BaseData {
                 table.column(BASEACCOUNT_UUID)
                 table.column(BASEACCOUNT_NAME)
                 table.column(BASEACCOUNT_TYPE)
+                table.column(BASEACCOUNT_LAST_PATH)
             }
             try self.database.run(accountTable)
+            
+            let refAddressTable = TABLE_REFADDRESS.create(ifNotExists: true) { table in
+                table.column(REFADDRESS_ID, primaryKey: true)
+                table.column(REFADDRESS_ACCOUNT_ID)
+                table.column(REFADDRESS_CHAIN_ID)
+                table.column(REFADDRESS_PUBKEY_TYPE)
+                table.column(REFADDRESS_DP_ADDRESS)
+                table.column(REFADDRESS_LAST_VALUE)
+            }
+            try self.database.run(refAddressTable)
             
         } catch { print(error) }
     }
     
-    //V2 version
+    //V2 version baseAccount
     public func selectAccounts() -> Array<BaseAccount> {
         var result = Array<BaseAccount>()
         for row in try! database.prepare(TABLE_BASEACCOUNT) {
-            result.append(BaseAccount(row[BASEACCOUNT_ID], row[BASEACCOUNT_UUID], row[BASEACCOUNT_NAME], row[BASEACCOUNT_TYPE]))
+            result.append(BaseAccount(row[BASEACCOUNT_ID], row[BASEACCOUNT_UUID], row[BASEACCOUNT_NAME], row[BASEACCOUNT_TYPE], row[BASEACCOUNT_LAST_PATH]))
         }
         return result
     }
@@ -336,9 +347,47 @@ extension BaseData {
     public func insertAccount(_ account: BaseAccount) -> Int64 {
         let toInsert = TABLE_BASEACCOUNT.insert(BASEACCOUNT_UUID <- account.uuid,
                                                 BASEACCOUNT_NAME <- account.name,
-                                                BASEACCOUNT_TYPE <- account.type.rawValue)
+                                                BASEACCOUNT_TYPE <- account.type.rawValue,
+                                                BASEACCOUNT_LAST_PATH <- account.lastHDPath)
         return try! database.run(toInsert)
     }
+    
+    //V2 version refAddress
+    public func selectRefAddresses(_ accountId: String) -> Array<RefAddress> {
+        var result = Array<RefAddress>()
+        let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == accountId)
+        for rowInfo in try! database.prepare(query) {
+            result.append(RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_ID],
+                                     rowInfo[REFADDRESS_PUBKEY_TYPE], rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_LAST_VALUE]))
+        }
+        return result
+    }
+    
+    @discardableResult
+    public func insertRefAddresses(_ refAddress: RefAddress) -> Int64 {
+        let toInsert = TABLE_REFADDRESS.insert(REFADDRESS_ACCOUNT_ID <- refAddress.accountId,
+                                               REFADDRESS_CHAIN_ID <- refAddress.chainId,
+                                               REFADDRESS_PUBKEY_TYPE <- refAddress.pubkeyType,
+                                               REFADDRESS_DP_ADDRESS <- refAddress.dpAddress,
+                                               REFADDRESS_LAST_VALUE <- refAddress.lastValue)
+        return try! database.run(toInsert)
+    }
+    
+    @discardableResult
+    public func updateRefAddresses(_ refAddress: RefAddress) -> Int? {
+        let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
+                                            REFADDRESS_CHAIN_ID == refAddress.chainId &&
+                                            REFADDRESS_PUBKEY_TYPE == refAddress.pubkeyType &&
+                                            REFADDRESS_DP_ADDRESS == refAddress.dpAddress)
+        if let address = try! database.pluck(query) {
+            let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])
+            return try? database.run(target.update(REFADDRESS_LAST_VALUE <- refAddress.lastValue))
+            
+        } else {
+            return Int(insertRefAddresses(refAddress))
+        }
+    }
+    
     
     
     
@@ -411,6 +460,22 @@ extension BaseData {
         }
         return selectAccounts().first
     }
+    
+    func setDisplayCosmosChainNames(_ baseAccount: BaseAccount, _ chainNames: [String])  {
+        if let encoded = try? JSONEncoder().encode(chainNames) {
+            UserDefaults.standard.setValue(encoded, forKey: String(baseAccount.id) + " " + KEY_DISPLAY_COSMOS_CHAINS)
+        }
+    }
+    
+    func getDisplayCosmosChainNames(_ baseAccount: BaseAccount) -> [String] {
+        if let savedData = UserDefaults.standard.object(forKey: String(baseAccount.id) + " " + KEY_DISPLAY_COSMOS_CHAINS) as? Data {
+            if let result = try? JSONDecoder().decode([String].self, from: savedData) {
+                return result
+            }
+        }
+        return DEFUAL_DISPALY_COSMOS
+    }
+    
     
     
     //Userdefault for Asset prices

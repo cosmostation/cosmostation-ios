@@ -26,7 +26,7 @@ class IntroViewController: BaseVC {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        showWait()
+        showWait()
         if (BaseData.instance.getDBVersion() < DB_VERSION) {
             onUpdateMigration()
         }
@@ -74,7 +74,7 @@ extension IntroViewController {
         wordsList.forEach { word in
             if let words = KeychainWrapper.standard.string(forKey: word.uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
                 let seed = KeyFac.getSeedFromWords(words)
-                let recoverAccount = BaseAccount(word.nickName, .withMnemonic)
+                let recoverAccount = BaseAccount(word.nickName, .withMnemonic, "0")
                 BaseData.instance.insertAccount(recoverAccount)
 
                 let newData = words + " : " + seed!.toHexString()
@@ -88,7 +88,7 @@ extension IntroViewController {
             if let pKey = KeychainWrapper.standard.string(forKey: account.getPrivateKeySha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
                 if (!pkeyList.contains(pKey)) {
                     pkeyList.append(pKey)
-                    let recoverAccount = BaseAccount(account.account_nick_name, .onlyPrivateKey)
+                    let recoverAccount = BaseAccount(account.account_nick_name, .onlyPrivateKey, "0")
                     BaseData.instance.insertAccount(recoverAccount)
                     try? keychain.set(pKey, key: recoverAccount.uuid.sha1())
                 }

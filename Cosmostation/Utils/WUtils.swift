@@ -803,7 +803,7 @@ public class WUtils {
 //    }
 //
     static func onParseVestingAccount(_ baseChain: CosmosClass) {
-        guard let authInfo = baseChain.cosmosAuth else { return }
+        let authInfo = baseChain.cosmosAuth
         
         if (authInfo.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)),
            let vestingAccount = try? Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: authInfo.value) {

@@ -39,6 +39,7 @@ let KEY_DB_VERSION                      = "KEY_DB_VERSION"
 let KEY_WC_WHITELIST                    = "KEY_WC_WHITELIST"
 let KEY_LANGUAGE                        = "KEY_LANGUAGE"
 let KEY_LAST_ACCOUNT                    = "KEY_LAST_ACCOUNT"
+let KEY_DISPLAY_COSMOS_CHAINS           = "KEY_DISPLAY_COSMOS_CHAINS"
 
 let MINTSCAN_DEV_API_URL                = "https://dev.api.mintscan.io/";
 let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
@@ -97,12 +98,22 @@ let DB_MNEMONIC_FAVO                = Expression<Bool>("isFavo")
 let DB_MNEMONIC_IMPORT_TIME         = Expression<Int64>("importTime")
 
 
-//V2 DB
-let TABLE_BASEACCOUNT = Table("BaseAccount")
-let BASEACCOUNT_ID    = Expression<Int64>("id")
-let BASEACCOUNT_UUID  = Expression<String>("uuid")
-let BASEACCOUNT_NAME  = Expression<String>("name")
-let BASEACCOUNT_TYPE  = Expression<Int64>("type")
+//V2 DB BaseAccount
+let TABLE_BASEACCOUNT       = Table("BaseAccount")
+let BASEACCOUNT_ID          = Expression<Int64>("id")
+let BASEACCOUNT_UUID        = Expression<String>("uuid")
+let BASEACCOUNT_NAME        = Expression<String>("name")
+let BASEACCOUNT_TYPE        = Expression<Int64>("type")
+let BASEACCOUNT_LAST_PATH   = Expression<String>("lastpath")
+
+//V2 DB Ref_Address
+let TABLE_REFADDRESS        = Table("BaseAddress")
+let REFADDRESS_ID           = Expression<Int64>("id")
+let REFADDRESS_ACCOUNT_ID   = Expression<String>("accountId")
+let REFADDRESS_CHAIN_ID     = Expression<String>("chainId")
+let REFADDRESS_PUBKEY_TYPE  = Expression<Int64>("pubkeyType")
+let REFADDRESS_DP_ADDRESS   = Expression<String>("dpAddress")
+let REFADDRESS_LAST_VALUE   = Expression<String>("lastValue")
 
 
 let COSMOS_AUTH_TYPE_OKEX_ACCOUNT           = "okexchain/EthAccount";

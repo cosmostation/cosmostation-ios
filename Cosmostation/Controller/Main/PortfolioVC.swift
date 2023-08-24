@@ -27,11 +27,12 @@ class PortfolioVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadingView.animation = LottieAnimation.named("loading2")
-        loadingView.contentMode = .scaleAspectFit
-        loadingView.loopMode = .loop
-        loadingView.animationSpeed = 1.3
-        loadingView.play()
+        loadingView.isHidden = true
+//        loadingView.animation = LottieAnimation.named("loading2")
+//        loadingView.contentMode = .scaleAspectFit
+//        loadingView.loopMode = .loop
+//        loadingView.animationSpeed = 1.3
+//        loadingView.play()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -77,7 +78,7 @@ class PortfolioVC: BaseVC {
     
     func initData() {
         baseAccount = BaseData.instance.baseAccount
-        allCosmosChains = baseAccount.setAllcosmosClassChains()
+        allCosmosChains = baseAccount.setCosmosClassChains()
         baseAccount?.setAddressInfo()
         print("baseAccount ", baseAccount, " allCosmosChains ", allCosmosChains.count)
 

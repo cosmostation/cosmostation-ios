@@ -17,12 +17,12 @@ class CosmosClass: BaseChain  {
     
     var grpcHost = ""
     var grpcPort = 443
-    var cosmosAuth: Google_Protobuf_Any?
-    var cosmosBalances = [Cosmos_Base_V1beta1_Coin]()
-    var cosmosVestings = [Cosmos_Base_V1beta1_Coin]()
-    var cosmosDelegations: [Cosmos_Staking_V1beta1_DelegationResponse]?
-    var cosmosUnbondings: [Cosmos_Staking_V1beta1_UnbondingDelegation]?
-    var cosmosRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]?
+    lazy var cosmosAuth = Google_Protobuf_Any.init()
+    lazy var cosmosBalances = Array<Cosmos_Base_V1beta1_Coin>()
+    lazy var cosmosVestings = Array<Cosmos_Base_V1beta1_Coin>()
+    lazy var cosmosDelegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
+    lazy var cosmosUnbondings = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
+    lazy var cosmosRewards = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
     
     func fetchData() {
         print("fetchData ", Date().timeIntervalSince1970, " ",  self.address)
@@ -168,7 +168,7 @@ class CosmosClass: BaseChain  {
     
     func delegationAmountSum() -> NSDecimalNumber {
         var sum = NSDecimalNumber.zero
-        cosmosDelegations?.forEach({ delegation in
+        cosmosDelegations.forEach({ delegation in
             sum = sum.adding(NSDecimalNumber(string: delegation.balance.amount))
         })
         return sum
@@ -185,7 +185,7 @@ class CosmosClass: BaseChain  {
     
     func unbondingAmountSum() -> NSDecimalNumber {
         var sum = NSDecimalNumber.zero
-        cosmosUnbondings?.forEach({ unbonding in
+        cosmosUnbondings.forEach({ unbonding in
             for entry in unbonding.entries {
                 sum = sum.adding(NSDecimalNumber(string: entry.balance))
             }
@@ -205,7 +205,7 @@ class CosmosClass: BaseChain  {
     
     func rewardAmountSum(_ denom: String) -> NSDecimalNumber {
         var result =  NSDecimalNumber.zero
-        cosmosRewards?.forEach({ reward in
+        cosmosRewards.forEach({ reward in
             result = result.adding(NSDecimalNumber(string: reward.reward.filter{ $0.denom == denom }.first?.amount ?? "0"))
         })
         return result.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(0))
@@ -222,7 +222,7 @@ class CosmosClass: BaseChain  {
     
     func rewardAllCoins() -> [Cosmos_Base_V1beta1_Coin] {
         var result = [Cosmos_Base_V1beta1_Coin]()
-        cosmosRewards?.forEach({ reward in
+        cosmosRewards.forEach({ reward in
             reward.reward.forEach { coin in
                 let calReward = Cosmos_Base_V1beta1_Coin.with {
                     $0.denom = coin.denom;
@@ -288,3 +288,30 @@ class CosmosClass: BaseChain  {
         return callOptions
     }
 }
+
+func ALLCOSMOSCLASS() -> [CosmosClass] {
+    var result = [CosmosClass]()
+    result.removeAll()
+    result.append(ChainCosmos())
+    result.append(ChainAkash())
+    result.append(ChainAssetMantle())
+    result.append(ChainAxelar())
+    result.append(ChainCanto())
+    result.append(ChainEvmos())
+    result.append(ChainInjective())
+    result.append(ChainJuno())
+    result.append(ChainKava459())
+    result.append(ChainKava60())
+    result.append(ChainKava118())
+    result.append(ChainKi())
+    result.append(ChainLum880())
+    result.append(ChainLum118())
+    result.append(ChainPersistence118())
+    result.append(ChainPersistence750())
+    result.append(ChainSommelier())
+    result.append(ChainStargaze())
+    result.append(ChainUmee())
+    return result
+}
+
+let DEFUAL_DISPALY_COSMOS = ["cosmos118", "axelar118", "kava459", "stargaze118", "Persistence118", "umee118", "canto60"]

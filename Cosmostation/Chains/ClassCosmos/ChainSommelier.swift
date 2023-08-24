@@ -14,6 +14,7 @@ class ChainSommelier: CosmosClass  {
         super.init()
         
         name = "Sommelier"
+        id = "sommelier118"
         logo1 = "chainSommelier"
         logo2 = "chainSommelier2"
         apiName = "sommelier"

@@ -102,6 +102,10 @@
 		049B692029D1736B0027B82D /* MintscanV1Proposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691E29D1736B0027B82D /* MintscanV1Proposal.swift */; };
 		04A116F128F7DB42003605E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */; };
 		04A116F228F7DB42003605E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */; };
+		04BA9BCD2A976EA2003E2404 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA9BCC2A976EA2003E2404 /* SkeletonView */; };
+		04BA9BCF2A976EAD003E2404 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA9BCE2A976EAD003E2404 /* SkeletonView */; };
+		04BA9BD12A978131003E2404 /* RefAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA9BD02A978131003E2404 /* RefAddress.swift */; };
+		04BA9BD22A978131003E2404 /* RefAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA9BD02A978131003E2404 /* RefAddress.swift */; };
 		04CB91182A90C30A00375354 /* CosmosClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91172A90C30A00375354 /* CosmosClass.swift */; };
 		04CB91192A90C30A00375354 /* CosmosClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91172A90C30A00375354 /* CosmosClass.swift */; };
 		04CB911B2A90C41E00375354 /* EvmClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB911A2A90C41E00375354 /* EvmClass.swift */; };
@@ -761,6 +765,7 @@
 		0492AE962A83CCB9001360F0 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		049B691E29D1736B0027B82D /* MintscanV1Proposal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanV1Proposal.swift; sourceTree = "<group>"; };
 		04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		04BA9BD02A978131003E2404 /* RefAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefAddress.swift; sourceTree = "<group>"; };
 		04CB91172A90C30A00375354 /* CosmosClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClass.swift; sourceTree = "<group>"; };
 		04CB911A2A90C41E00375354 /* EvmClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmClass.swift; sourceTree = "<group>"; };
 		04CB911D2A90C9D900375354 /* ChainAkash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAkash.swift; sourceTree = "<group>"; };
@@ -1068,6 +1073,7 @@
 				EB85535FBF1815AEAECE43D4 /* Pods_CosmostationDev.framework in Frameworks */,
 				E122DA232A8A1909006D1E7B /* ed25519swift in Frameworks */,
 				04D547F22A612A93001F1A4B /* FirebaseMessaging in Frameworks */,
+				04BA9BCF2A976EAD003E2404 /* SkeletonView in Frameworks */,
 				04D279C82A64E75E00AF046A /* KeychainAccess in Frameworks */,
 				E122DA282A8A19DF006D1E7B /* Blake2 in Frameworks */,
 				1876EE882A49352400C53352 /* GRPC in Frameworks */,
@@ -1089,6 +1095,7 @@
 				9EBDC03599A6A52BCFB81E33 /* Pods_Cosmostation.framework in Frameworks */,
 				E122DA212A8A18FB006D1E7B /* ed25519swift in Frameworks */,
 				04815BDE2A41DB120006A906 /* SwiftProtobuf in Frameworks */,
+				04BA9BCD2A976EA2003E2404 /* SkeletonView in Frameworks */,
 				04D279C62A64E73C00AF046A /* KeychainAccess in Frameworks */,
 				E122DA262A8A19D2006D1E7B /* Blake2 in Frameworks */,
 				04D547ED2A612914001F1A4B /* FirebaseMessaging in Frameworks */,
@@ -1593,6 +1600,7 @@
 				E1945E532231256800A1436F /* BaseConstant.swift */,
 				04D279DB2A66863C00AF046A /* BaseAccount.swift */,
 				E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */,
+				04BA9BD02A978131003E2404 /* RefAddress.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1707,6 +1715,7 @@
 				04D279E22A66E18800AF046A /* Lottie */,
 				E122DA222A8A1909006D1E7B /* ed25519swift */,
 				E122DA272A8A19DF006D1E7B /* Blake2 */,
+				04BA9BCE2A976EAD003E2404 /* SkeletonView */,
 			);
 			productName = Cosmostation;
 			productReference = 18FFB7D5281AF533004E65BB /* CosmostationDev.app */;
@@ -1741,6 +1750,7 @@
 				04D279E02A66E17B00AF046A /* Lottie */,
 				E122DA202A8A18FB006D1E7B /* ed25519swift */,
 				E122DA252A8A19D2006D1E7B /* Blake2 */,
+				04BA9BCC2A976EA2003E2404 /* SkeletonView */,
 			);
 			productName = Cosmostation;
 			productReference = E1945E24222E7C0600A1436F /* Cosmostation.app */;
@@ -1792,6 +1802,7 @@
 				04D279DF2A66E17B00AF046A /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				E122DA1F2A8A18FB006D1E7B /* XCRemoteSwiftPackageReference "ed25519swift" */,
 				E122DA242A8A19D2006D1E7B /* XCRemoteSwiftPackageReference "Blake2.swift" */,
+				04BA9BCB2A976EA2003E2404 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = E1945E25222E7C0600A1436F /* Products */;
 			projectDirPath = "";
@@ -2066,6 +2077,7 @@
 				E122DC0A2A8A468E006D1E7B /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
 				E122DC2C2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_query.grpc.swift in Sources */,
 				E122DB422A8A468D006D1E7B /* cosmos_upgrade_module_v1_module.pb.swift in Sources */,
+				04BA9BD22A978131003E2404 /* RefAddress.swift in Sources */,
 				E122DBDE2A8A468E006D1E7B /* cosmos_base_query_v1beta1_pagination.pb.swift in Sources */,
 				E122DC2E2A8A468E006D1E7B /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
 				E122DBB42A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.grpc.swift in Sources */,
@@ -2365,6 +2377,7 @@
 				E122DC092A8A468E006D1E7B /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
 				E122DC2B2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_query.grpc.swift in Sources */,
 				E122DB412A8A468D006D1E7B /* cosmos_upgrade_module_v1_module.pb.swift in Sources */,
+				04BA9BD12A978131003E2404 /* RefAddress.swift in Sources */,
 				E122DBDD2A8A468E006D1E7B /* cosmos_base_query_v1beta1_pagination.pb.swift in Sources */,
 				E122DC2D2A8A468E006D1E7B /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
 				E122DBB32A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.grpc.swift in Sources */,
@@ -2909,6 +2922,14 @@
 				minimumVersion = 1.16.0;
 			};
 		};
+		04BA9BCB2A976EA2003E2404 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.0;
+			};
+		};
 		04D279C42A64E73C00AF046A /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
@@ -2993,6 +3014,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04815BDF2A41DB410006A906 /* XCRemoteSwiftPackageReference "grpc-swift" */;
 			productName = GRPC;
+		};
+		04BA9BCC2A976EA2003E2404 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04BA9BCB2A976EA2003E2404 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
+		};
+		04BA9BCE2A976EAD003E2404 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04BA9BCB2A976EA2003E2404 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 		04D279C52A64E73C00AF046A /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
