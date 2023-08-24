@@ -44,7 +44,7 @@ class BaseChain {
     }
     
     
-    func allValue() -> NSDecimalNumber {
+    func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         return NSDecimalNumber.zero
     }
 }

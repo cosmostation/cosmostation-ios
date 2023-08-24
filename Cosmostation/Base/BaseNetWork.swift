@@ -19,16 +19,27 @@ class BaseNetWork {
         }
         AF.request(BaseNetWork.getPricesUrl(), method: .get)
             .responseDecodable(of: [MintscanPrice].self, queue: .main, decoder: JSONDecoder()) { response in
-            switch response.result {
-            case .success(let value):
-                BaseData.instance.mintscanPrices = value
-                BaseData.instance.setLastPriceTime()
-
-            case .failure:
-                print("fetchPrices error")
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.mintscanPrices = value
+                    BaseData.instance.setLastPriceTime()
+                    
+                case .failure:
+                    print("fetchPrices error")
+                }
+                NotificationCenter.default.post(name: Notification.Name("onFetchPrice"), object: nil, userInfo: nil)
             }
-            NotificationCenter.default.post(name: Notification.Name("onFetchPrice"), object: nil, userInfo: nil)
-        }
+        
+        AF.request(BaseNetWork.getUSDPricesUrl(), method: .get)
+            .responseDecodable(of: [MintscanPrice].self, queue: .main, decoder: JSONDecoder()) { response in
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.mintscanUSDPrices = value
+                    
+                case .failure:
+                    print("fetchUSDPrices error")
+                }
+            }
     }
     
     func fetchAssets() {
@@ -73,6 +84,10 @@ class BaseNetWork {
     static func getPricesUrl() -> String {
         let currency = BaseData.instance.getCurrencyString().lowercased()
         return MINTSCAN_API_URL + "v2/utils/market/prices?currency=" + currency
+    }
+    
+    static func getUSDPricesUrl() -> String {
+        return MINTSCAN_API_URL + "v2/utils/market/prices?currency=usd"
     }
     
     static func getMintscanAssetsUrl() -> String {

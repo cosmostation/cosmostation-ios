@@ -126,9 +126,9 @@ class CosmosClass: BaseChain  {
         return NSDecimalNumber(string: cosmosBalances.filter { $0.denom == denom }.first?.amount ?? "0")
     }
     
-    func balanceValue(_ denom: String) -> NSDecimalNumber {
+    func balanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = balanceAmount(denom)
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
             
@@ -136,10 +136,10 @@ class CosmosClass: BaseChain  {
         return NSDecimalNumber.zero
     }
     
-    func balanceValueSum() -> NSDecimalNumber {
+    func balanceValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
         var result =  NSDecimalNumber.zero
         cosmosBalances.forEach { balance in
-            result = result.adding(balanceValue(balance.denom))
+            result = result.adding(balanceValue(balance.denom, usd))
         }
         return result
     }
@@ -148,19 +148,19 @@ class CosmosClass: BaseChain  {
         return NSDecimalNumber(string: cosmosVestings.filter { $0.denom == denom }.first?.amount ?? "0")
     }
     
-    func vestingValue(_ denom: String) -> NSDecimalNumber {
+    func vestingValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = vestingAmount(denom)
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
         }
         return NSDecimalNumber.zero
     }
     
-    func vestingValueSum() -> NSDecimalNumber {
+    func vestingValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
         var result =  NSDecimalNumber.zero
         cosmosVestings.forEach { vesting in
-            result = result.adding(vestingValue(vesting.denom))
+            result = result.adding(vestingValue(vesting.denom, usd))
         }
         return result
     }
@@ -174,9 +174,9 @@ class CosmosClass: BaseChain  {
         return sum
     }
     
-    func delegationValueSum() -> NSDecimalNumber {
+    func delegationValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
         if let msAsset = BaseData.instance.getAsset(apiName, stakeDenom) {
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = delegationAmountSum()
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
         }
@@ -193,9 +193,9 @@ class CosmosClass: BaseChain  {
         return sum
     }
     
-    func unbondingValueSum() -> NSDecimalNumber {
+    func unbondingValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
         if let msAsset = BaseData.instance.getAsset(apiName, stakeDenom) {
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = unbondingAmountSum()
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
         }
@@ -211,9 +211,9 @@ class CosmosClass: BaseChain  {
         return result.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(0))
     }
     
-    func rewardValue(_ denom: String) -> NSDecimalNumber {
+    func rewardValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = rewardAmountSum(denom)
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
         }
@@ -248,11 +248,11 @@ class CosmosClass: BaseChain  {
     }
     
     
-    func rewardValueSum() -> NSDecimalNumber {
+    func rewardValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         rewardAllCoins().forEach { rewardCoin in
             if let msAsset = BaseData.instance.getAsset(apiName, rewardCoin.denom) {
-                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
                 let amount = NSDecimalNumber(string: rewardCoin.amount)
                 let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
                 result = result.adding(value)
@@ -261,19 +261,19 @@ class CosmosClass: BaseChain  {
         return result
     }
     
-    func denomValue(_ denom: String) -> NSDecimalNumber {
+    func denomValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if (denom == stakeDenom) {
-            return balanceValue(denom).adding(vestingValue(denom)).adding(rewardValue(denom))
-                .adding(delegationValueSum()).adding(unbondingValueSum())
+            return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
+                .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd))
             
         } else {
-            return balanceValue(denom).adding(vestingValue(denom)).adding(rewardValue(denom))
+            return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
         }
     }
     
-    override func allValue() -> NSDecimalNumber {
-        return balanceValueSum().adding(vestingValueSum())
-            .adding(delegationValueSum()).adding(unbondingValueSum()).adding(rewardValueSum())
+    override func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
+        return balanceValueSum(usd).adding(vestingValueSum(usd))
+            .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
     }
     
     

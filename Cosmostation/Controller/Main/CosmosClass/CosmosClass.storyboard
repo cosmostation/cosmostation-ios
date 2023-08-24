@@ -26,7 +26,7 @@
                                 <rect key="frame" x="48" y="79" width="297" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaX-Dh-cwU">
-                                        <rect key="frame" x="124.99999999999999" y="0.0" width="47.333333333333329" height="15.333333333333334"/>
+                                        <rect key="frame" x="48" y="0.0" width="201" height="15.333333333333334"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_font02"/>
                                         <nil key="highlightedColor"/>
@@ -55,7 +55,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="udo-UV-whi" firstAttribute="centerX" secondItem="0An-sf-Sxo" secondAttribute="centerX" id="2pz-Wi-oEA"/>
+                                    <constraint firstItem="uaX-Dh-cwU" firstAttribute="leading" secondItem="0An-sf-Sxo" secondAttribute="leading" constant="48" id="CzJ-B5-Xm8"/>
                                     <constraint firstAttribute="height" constant="56" id="LjO-Sz-SGM"/>
+                                    <constraint firstAttribute="trailing" secondItem="uaX-Dh-cwU" secondAttribute="trailing" constant="48" id="Rur-kK-ZtB"/>
                                     <constraint firstItem="udo-UV-whi" firstAttribute="top" secondItem="uaX-Dh-cwU" secondAttribute="bottom" constant="4" id="SCu-IQ-gef"/>
                                     <constraint firstItem="uaX-Dh-cwU" firstAttribute="centerX" secondItem="0An-sf-Sxo" secondAttribute="centerX" id="WQ4-eP-hKz"/>
                                     <constraint firstItem="uaX-Dh-cwU" firstAttribute="top" secondItem="0An-sf-Sxo" secondAttribute="top" id="YjE-iW-uZJ"/>

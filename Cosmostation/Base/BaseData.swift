@@ -21,6 +21,7 @@ final class BaseData: NSObject{
     var copySalt: String?
     
     var baseAccount: BaseAccount!
+    var mintscanUSDPrices: [MintscanPrice]?
     var mintscanPrices: [MintscanPrice]?
     var mintscanAssets: [MintscanAsset]?
     
@@ -37,11 +38,19 @@ final class BaseData: NSObject{
         return mintscanAssets?.filter({ $0.chain == chainName && $0.denom?.lowercased() == denom.lowercased() }).first
     }
     
-    func getPrice(_ geckoId: String?) -> NSDecimalNumber {
-        if let price = mintscanPrices?.filter({ $0.coinGeckoId == geckoId }).first {
-            return NSDecimalNumber.init(value: price.current_price ?? 0).rounding(accordingToBehavior: getDivideHandler(12))
+    func getPrice(_ geckoId: String?, _ usd: Bool? = false) -> NSDecimalNumber {
+        if (usd == true) {
+            if let price = mintscanUSDPrices?.filter({ $0.coinGeckoId == geckoId }).first {
+                return NSDecimalNumber.init(value: price.current_price ?? 0).rounding(accordingToBehavior: getDivideHandler(12))
+            }
+            return NSDecimalNumber.zero.rounding(accordingToBehavior: getDivideHandler(12))
+            
+        } else {
+            if let price = mintscanPrices?.filter({ $0.coinGeckoId == geckoId }).first {
+                return NSDecimalNumber.init(value: price.current_price ?? 0).rounding(accordingToBehavior: getDivideHandler(12))
+            }
+            return NSDecimalNumber.zero.rounding(accordingToBehavior: getDivideHandler(12))
         }
-        return NSDecimalNumber.zero.rounding(accordingToBehavior: getDivideHandler(12))
     }
     
     func priceChange(_ geckoId: String?) -> NSDecimalNumber {
