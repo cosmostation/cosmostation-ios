@@ -109,10 +109,10 @@ let BASEACCOUNT_LAST_PATH   = Expression<String>("lastpath")
 //V2 DB Ref_Address
 let TABLE_REFADDRESS        = Table("BaseAddress")
 let REFADDRESS_ID           = Expression<Int64>("id")
-let REFADDRESS_ACCOUNT_ID   = Expression<String>("accountId")
+let REFADDRESS_ACCOUNT_ID   = Expression<Int64>("accountId")
 let REFADDRESS_CHAIN_ID     = Expression<String>("chainId")
-let REFADDRESS_PUBKEY_TYPE  = Expression<Int64>("pubkeyType")
 let REFADDRESS_DP_ADDRESS   = Expression<String>("dpAddress")
+let REFADDRESS_LAST_AMOUNT  = Expression<String>("lastAmount")
 let REFADDRESS_LAST_VALUE   = Expression<String>("lastValue")
 
 

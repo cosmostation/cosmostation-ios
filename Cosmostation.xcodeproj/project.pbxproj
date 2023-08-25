@@ -106,6 +106,10 @@
 		04BA9BCF2A976EAD003E2404 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA9BCE2A976EAD003E2404 /* SkeletonView */; };
 		04BA9BD12A978131003E2404 /* RefAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA9BD02A978131003E2404 /* RefAddress.swift */; };
 		04BA9BD22A978131003E2404 /* RefAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA9BD02A978131003E2404 /* RefAddress.swift */; };
+		04BA9BD52A985771003E2404 /* ChainSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA9BD32A985771003E2404 /* ChainSelectVC.swift */; };
+		04BA9BD62A985771003E2404 /* ChainSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA9BD32A985771003E2404 /* ChainSelectVC.swift */; };
+		04BA9BD72A985771003E2404 /* ChainSelectVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA9BD42A985771003E2404 /* ChainSelectVC.xib */; };
+		04BA9BD82A985771003E2404 /* ChainSelectVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BA9BD42A985771003E2404 /* ChainSelectVC.xib */; };
 		04CB91182A90C30A00375354 /* CosmosClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91172A90C30A00375354 /* CosmosClass.swift */; };
 		04CB91192A90C30A00375354 /* CosmosClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91172A90C30A00375354 /* CosmosClass.swift */; };
 		04CB911B2A90C41E00375354 /* EvmClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB911A2A90C41E00375354 /* EvmClass.swift */; };
@@ -766,6 +770,8 @@
 		049B691E29D1736B0027B82D /* MintscanV1Proposal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanV1Proposal.swift; sourceTree = "<group>"; };
 		04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04BA9BD02A978131003E2404 /* RefAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefAddress.swift; sourceTree = "<group>"; };
+		04BA9BD32A985771003E2404 /* ChainSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSelectVC.swift; sourceTree = "<group>"; };
+		04BA9BD42A985771003E2404 /* ChainSelectVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChainSelectVC.xib; sourceTree = "<group>"; };
 		04CB91172A90C30A00375354 /* CosmosClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClass.swift; sourceTree = "<group>"; };
 		04CB911A2A90C41E00375354 /* EvmClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmClass.swift; sourceTree = "<group>"; };
 		04CB911D2A90C9D900375354 /* ChainAkash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAkash.swift; sourceTree = "<group>"; };
@@ -1530,6 +1536,8 @@
 				0492AE902A83CC9B001360F0 /* SwapVC.swift */,
 				0492AE932A83CCA9001360F0 /* DappVC.swift */,
 				0492AE962A83CCB9001360F0 /* SettingsVC.swift */,
+				04BA9BD32A985771003E2404 /* ChainSelectVC.swift */,
+				04BA9BD42A985771003E2404 /* ChainSelectVC.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1847,6 +1855,7 @@
 				18F4EAD22A4DA0A500CFBE2B /* ApiKey.plist in Resources */,
 				187447012930942400849EE4 /* ApiKeyDev.plist in Resources */,
 				E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
+				04BA9BD82A985771003E2404 /* ChainSelectVC.xib in Resources */,
 				18FFB77D281AF533004E65BB /* new2022@2x.png in Resources */,
 				E15980992A83A96E0032892B /* bg5.png in Resources */,
 				E15980932A83A96E0032892B /* bg2.png in Resources */,
@@ -1894,6 +1903,7 @@
 				E159808A2A83A96E0032892B /* bg3.png in Resources */,
 				04D279E62A66E32A00AF046A /* loading.json in Resources */,
 				E15980A32A83AB030032892B /* Main.storyboard in Resources */,
+				04BA9BD72A985771003E2404 /* ChainSelectVC.xib in Resources */,
 				E10EB5902A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				0443B8A2285C7F050027A6B9 /* Chain.xcassets in Resources */,
 				E122DC632A8CA052006D1E7B /* Resources.xcassets in Resources */,
@@ -2104,6 +2114,7 @@
 				E19E8B3E2A92290800001BF5 /* UIColor+Colors.swift in Sources */,
 				E122DB182A8A468D006D1E7B /* cosmos_autocli_v1_query.pb.swift in Sources */,
 				04CB911C2A90C41E00375354 /* EvmClass.swift in Sources */,
+				04BA9BD62A985771003E2404 /* ChainSelectVC.swift in Sources */,
 				1876EE8D2A4935EA00C53352 /* Cw20VaultDepositRes.swift in Sources */,
 				E122DC042A8A468E006D1E7B /* cosmos_bank_v1beta1_tx.grpc.swift in Sources */,
 				18FFB3DD281AF533004E65BB /* BinanceModel.swift in Sources */,
@@ -2404,6 +2415,7 @@
 				E19E8B3D2A92290800001BF5 /* UIColor+Colors.swift in Sources */,
 				E122DB172A8A468D006D1E7B /* cosmos_autocli_v1_query.pb.swift in Sources */,
 				04CB911B2A90C41E00375354 /* EvmClass.swift in Sources */,
+				04BA9BD52A985771003E2404 /* ChainSelectVC.swift in Sources */,
 				E1945E542231256800A1436F /* BaseConstant.swift in Sources */,
 				E122DC032A8A468E006D1E7B /* cosmos_bank_v1beta1_tx.grpc.swift in Sources */,
 				046E9043268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift in Sources */,

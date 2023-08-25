@@ -24,45 +24,34 @@ class CosmosClass: BaseChain  {
     lazy var cosmosUnbondings = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
     lazy var cosmosRewards = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
     
-    func fetchData() {
-        print("fetchData ", Date().timeIntervalSince1970, " ",  self.address)
-        let group = DispatchGroup()
+    
+    func fetchAuth() {
         let channel = getConnection()
-
-        fetchAuth(group, channel)
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address! }
+        if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
+            self.cosmosAuth = response.account
+            self.fetchData(channel)
+            
+        } else {
+            try? channel.close()
+            self.fetched = true
+            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.id, userInfo: nil)
+            
+        }
+    }
+    
+    func fetchData(_ channel: ClientConnection) {
+        let group = DispatchGroup()
         fetchBalance(group, channel)
         fetchDelegation(group, channel)
         fetchUnbondings(group, channel)
         fetchRewards(group, channel)
-
+        
         group.notify(queue: .main) {
-//            try channel.close().wait()
-//            try? channel.close().wait()
-
-//            print("notify cosmosBalances", self.address)
-//            print("notify cosmosDelegations", self.address, " ", self.cosmosDelegations)
-//
-//            print("notify ", String(describing: self))
-//            let value = ["chain": String(describing: self)]
-//            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: nil, userInfo: value)
-            
-            
-//            try? channel.close().wait()  //make noti late
             try? channel.close()
             WUtils.onParseVestingAccount(self)
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: String(describing: self), userInfo: nil)
-        }
-        
-    }
-    
-    func fetchAuth(_ group: DispatchGroup, _ channel: ClientConnection) {
-        group.enter()
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address! }
-        if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
-            self.cosmosAuth = response.account
-            group.leave()
-        } else {
-            group.leave()
+            self.fetched = true
+            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.id, userInfo: nil)
         }
     }
     
@@ -271,6 +260,11 @@ class CosmosClass: BaseChain  {
         }
     }
     
+    func allStakingDenomAmount() -> NSDecimalNumber {
+         return balanceAmount(stakeDenom).adding(vestingAmount(stakeDenom)).adding(delegationAmountSum())
+            .adding(unbondingAmountSum()).adding(rewardAmountSum(stakeDenom))
+    }
+    
     override func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         return balanceValueSum(usd).adding(vestingValueSum(usd))
             .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
@@ -284,7 +278,7 @@ class CosmosClass: BaseChain  {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(3000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
         return callOptions
     }
 }
@@ -314,4 +308,4 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     return result
 }
 
-let DEFUAL_DISPALY_COSMOS = ["cosmos118", "axelar118", "kava459", "stargaze118", "Persistence118", "umee118", "canto60"]
+let DEFUAL_DISPALY_COSMOS = ["cosmos118", "lum118", "axelar118", "kava459", "stargaze118"]

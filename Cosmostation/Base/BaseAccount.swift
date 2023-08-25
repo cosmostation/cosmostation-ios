@@ -35,48 +35,52 @@ public class BaseAccount {
         self.lastHDPath = lastPath
     }
     
+    var allCosmosClassChains = [CosmosClass]()
     
-    var displayCosmosClassChains = [CosmosClass]()
-    
-    func setCosmosClassChains() -> [CosmosClass] {
-        displayCosmosClassChains.removeAll()
-        let toDpChainIds = BaseData.instance.getDisplayCosmosChainNames(self)
-        print("toDpChainIds ", toDpChainIds.count)
-        
-        toDpChainIds.forEach { id in
-            if let toDpChain = ALLCOSMOSCLASS().filter({ $0.id == id }).first {
-                displayCosmosClassChains.append(toDpChain)
-            }
+    /*
+     Too Heavy Job
+     */
+    func initData(_ fetchAll: Bool? = false) {
+        allCosmosClassChains.removeAll()
+        ALLCOSMOSCLASS().forEach { chain in
+            allCosmosClassChains.append(chain)
         }
-        return displayCosmosClassChains
-    }
-    
-    func setAddressInfo() -> Bool {
+        
         let keychain = BaseData.instance.getKeyChain()
+        let toDisplayCosmosChainNames = BaseData.instance.getDisplayCosmosChainNames(self)
+        
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                displayCosmosClassChains.forEach { chain in
+                allCosmosClassChains.forEach { chain in
                     Task {
                         chain.setInfoWithSeed(seed, lastHDPath)
-                        chain.fetchData()
+                        if (fetchAll == true || toDisplayCosmosChainNames.contains(chain.id)) {
+                            chain.fetchAuth()
+                        }
                     }
                 }
             }
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                displayCosmosClassChains.forEach { chain in
+                allCosmosClassChains.forEach { chain in
                     Task {
                         chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
-                        chain.fetchData()
+                        if (fetchAll == true || toDisplayCosmosChainNames.contains(chain.id)) {
+                            chain.fetchAuth()
+                        }
                     }
                 }
             }
         }
-        return true
     }
     
+    func sortCosmosChain() {
+        allCosmosClassChains.sort {
+            return $0.allValue().compare($1.allValue()).rawValue > 0 ? true : false
+        }
+    }
 }
 
 

@@ -25,6 +25,9 @@ class BaseChain {
     var address: String?
     
     
+    var fetched = false
+    
+    
     
     
     func getHDPath(_ lastPath: String) -> String {

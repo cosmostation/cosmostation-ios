@@ -61,41 +61,54 @@ class PortfolioVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         print("onFetchDone ", Date().timeIntervalSince1970, " ", notification.object as! String)
-        let chainName = notification.object as! String
+        let id = notification.object as! String
         for i in 0..<allCosmosChains.count {
-            if (String(describing: allCosmosChains[i]) == chainName) {
-                self.tableView.beginUpdates()
-                tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
-                self.tableView.endUpdates()
+            if (allCosmosChains[i].id == id) {
+                DispatchQueue.main.async {
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
+                    self.tableView.endUpdates()
+                }
             }
         }
         var sum = NSDecimalNumber.zero
         allCosmosChains.forEach { cosmosChain in
             sum = sum.adding(cosmosChain.allValue())
         }
-        totalValue = sum
+        DispatchQueue.main.async {
+            self.totalValue = sum
+        }
     }
     
     func initData() {
         baseAccount = BaseData.instance.baseAccount
-        allCosmosChains = baseAccount.setCosmosClassChains()
-        baseAccount?.setAddressInfo()
+        baseAccount.initData()
+        
+//        allCosmosChains = baseAccount.allCosmosClassChains
+        
+//        allCosmosChains = baseAccount.setCosmosClassChains()
+//        baseAccount?.setAccountInfo()
         print("baseAccount ", baseAccount, " allCosmosChains ", allCosmosChains.count)
 
-        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
+//        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(clickSearch))
 
-        currencyLabel.text = BaseData.instance.getCurrencySymbol()
+//        currencyLabel.text = BaseData.instance.getCurrencySymbol()
     }
     
     @objc func clickSearch() {
         print("clickSearch")
-        self.navigationItem.searchController = self.searchController
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50), execute: {
-            self.navigationItem.searchController?.searchBar.isHidden = false
-            self.navigationItem.searchController?.searchBar.becomeFirstResponder()
-        })
-        self.navigationItem.searchController?.searchBar.delegate = self
+//        self.navigationItem.searchController = self.searchController
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50), execute: {
+//            self.navigationItem.searchController?.searchBar.isHidden = false
+//            self.navigationItem.searchController?.searchBar.becomeFirstResponder()
+//        })
+//        self.navigationItem.searchController?.searchBar.delegate = self
+        
+        
+        let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
+        chainSelectVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(chainSelectVC, animated: true)
     }
 
 }

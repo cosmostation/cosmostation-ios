@@ -328,8 +328,8 @@ extension BaseData {
                 table.column(REFADDRESS_ID, primaryKey: true)
                 table.column(REFADDRESS_ACCOUNT_ID)
                 table.column(REFADDRESS_CHAIN_ID)
-                table.column(REFADDRESS_PUBKEY_TYPE)
                 table.column(REFADDRESS_DP_ADDRESS)
+                table.column(REFADDRESS_LAST_AMOUNT)
                 table.column(REFADDRESS_LAST_VALUE)
             }
             try self.database.run(refAddressTable)
@@ -362,12 +362,12 @@ extension BaseData {
     }
     
     //V2 version refAddress
-    public func selectRefAddresses(_ accountId: String) -> Array<RefAddress> {
+    public func selectRefAddresses(_ accountId: Int64) -> Array<RefAddress> {
         var result = Array<RefAddress>()
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == accountId)
         for rowInfo in try! database.prepare(query) {
             result.append(RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_ID],
-                                     rowInfo[REFADDRESS_PUBKEY_TYPE], rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_LAST_VALUE]))
+                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_LAST_AMOUNT], rowInfo[REFADDRESS_LAST_VALUE]))
         }
         return result
     }
@@ -376,8 +376,8 @@ extension BaseData {
     public func insertRefAddresses(_ refAddress: RefAddress) -> Int64 {
         let toInsert = TABLE_REFADDRESS.insert(REFADDRESS_ACCOUNT_ID <- refAddress.accountId,
                                                REFADDRESS_CHAIN_ID <- refAddress.chainId,
-                                               REFADDRESS_PUBKEY_TYPE <- refAddress.pubkeyType,
                                                REFADDRESS_DP_ADDRESS <- refAddress.dpAddress,
+                                               REFADDRESS_LAST_AMOUNT <- refAddress.lastAmount,
                                                REFADDRESS_LAST_VALUE <- refAddress.lastValue)
         return try! database.run(toInsert)
     }
@@ -386,11 +386,11 @@ extension BaseData {
     public func updateRefAddresses(_ refAddress: RefAddress) -> Int? {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
                                             REFADDRESS_CHAIN_ID == refAddress.chainId &&
-                                            REFADDRESS_PUBKEY_TYPE == refAddress.pubkeyType &&
                                             REFADDRESS_DP_ADDRESS == refAddress.dpAddress)
         if let address = try! database.pluck(query) {
             let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])
-            return try? database.run(target.update(REFADDRESS_LAST_VALUE <- refAddress.lastValue))
+            return try? database.run(target.update(REFADDRESS_LAST_AMOUNT <- refAddress.lastAmount,
+                                                   REFADDRESS_LAST_VALUE <- refAddress.lastValue))
             
         } else {
             return Int(insertRefAddresses(refAddress))
