@@ -53,7 +53,7 @@ class ChainSelectVC: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         toDisplayCosmoses = BaseData.instance.getDisplayCosmosChainNames(baseAccount)
         loadingCntLabel.text = "0 / " + String(baseAccount.allCosmosClassChains.count)
-        baseAccount.initData(true)
+        baseAccount.initAllData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,10 +93,22 @@ class ChainSelectVC: BaseVC {
     }
 
     @IBAction func onClickConfirm(_ sender: BaseButton) {
-        print("onClickConfirm ", toDisplayCosmoses.count)
-        toDisplayCosmoses.forEach { string in
-            print("string ", string)
+        var toSaveCosmos = [String]()
+        baseAccount.allCosmosClassChains.sort {
+            if ($0.id == "cosmos118" && $1.id != "cosmos118") { return true }
+            return $0.allValue().compare($1.allValue()).rawValue > 0 ? true : false
         }
+        baseAccount.allCosmosClassChains.forEach { chain in
+            if (toDisplayCosmoses.contains(chain.id)) {
+                toSaveCosmos.append(chain.id)
+            }
+        }
+        
+        BaseData.instance.setDisplayCosmosChainNames(baseAccount, toSaveCosmos)
+        let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = mainTabVC
+        self.present(mainTabVC, animated: true, completion: nil)
     }
 }
 

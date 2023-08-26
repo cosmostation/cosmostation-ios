@@ -44,14 +44,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9UU-Dy-HgS" customClass="LottieAnimationView" customModule="Lottie">
-                                <rect key="frame" x="56.666666666666657" y="356" width="280" height="160"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="Gev-de-83L"/>
-                                    <constraint firstAttribute="height" constant="160" id="itk-BV-PJw"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Nv-Ee-usG">
                                 <rect key="frame" x="48" y="123" width="297" height="56"/>
                                 <subviews>
@@ -100,11 +92,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Q91-ap-MJ8" secondAttribute="trailing" id="1zy-gQ-Shq"/>
-                            <constraint firstItem="9UU-Dy-HgS" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="B60-7C-uLd"/>
                             <constraint firstItem="Q91-ap-MJ8" firstAttribute="top" secondItem="8Nv-Ee-usG" secondAttribute="bottom" constant="8" id="L6P-2G-qgO"/>
                             <constraint firstItem="Q91-ap-MJ8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="On6-iG-TbR"/>
                             <constraint firstItem="8Nv-Ee-usG" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="ekv-4X-i1V"/>
-                            <constraint firstItem="9UU-Dy-HgS" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="fyi-BX-6nF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Q91-ap-MJ8" secondAttribute="bottom" id="g5m-sR-ThQ"/>
                             <constraint firstItem="8Nv-Ee-usG" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="19.999999999999986" id="o3v-y4-viA"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8Nv-Ee-usG" secondAttribute="trailing" constant="48" id="sKV-Zt-qZd"/>
@@ -114,7 +104,6 @@
                     <navigationItem key="navigationItem" id="9SV-qU-pID"/>
                     <connections>
                         <outlet property="currencyLabel" destination="Kbb-cH-OhW" id="fx4-kX-1Jf"/>
-                        <outlet property="loadingView" destination="9UU-Dy-HgS" id="PSr-Rw-sBN"/>
                         <outlet property="tableView" destination="Q91-ap-MJ8" id="oMt-ad-R0J"/>
                         <outlet property="totalValueLabel" destination="PYI-Ew-zZT" id="Uwe-AJ-ShA"/>
                     </connections>

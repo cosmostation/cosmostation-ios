@@ -41,8 +41,8 @@
                         <constraint firstAttribute="height" constant="120" id="U5a-lU-u2r"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OnChain check your all asset " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPZ-vb-f7V">
-                    <rect key="frame" x="113.66666666666667" y="506.66666666666669" width="165.66666666666663" height="16.333333333333314"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking your all asset with onchain " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPZ-vb-f7V">
+                    <rect key="frame" x="91.666666666666671" y="506.66666666666669" width="209.66666666666663" height="16.333333333333314"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                     <color key="textColor" name="_font01"/>
                     <nil key="highlightedColor"/>

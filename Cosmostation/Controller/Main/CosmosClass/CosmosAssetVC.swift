@@ -38,7 +38,7 @@ class CosmosAssetVC: BaseVC {
         parentVC = self.parent as? CosmosClassVC
 
         baseAccount = BaseData.instance.baseAccount
-        selectedChain = baseAccount.allCosmosClassChains[parentVC.selectedPosition]
+        selectedChain = baseAccount.toDisplayCosmosChains[parentVC.selectedPosition]
         onSortAssets()
     }
     

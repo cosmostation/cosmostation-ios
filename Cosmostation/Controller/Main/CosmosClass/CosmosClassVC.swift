@@ -32,7 +32,7 @@ class CosmosClassVC: BaseVC {
         onSetTabbarView()
         
         baseAccount = BaseData.instance.baseAccount
-        selectedChain = baseAccount.allCosmosClassChains[selectedPosition]
+        selectedChain = baseAccount.toDisplayCosmosChains[selectedPosition]
         totalValue = selectedChain.allValue()
         addressLabel.text = selectedChain.address
     }

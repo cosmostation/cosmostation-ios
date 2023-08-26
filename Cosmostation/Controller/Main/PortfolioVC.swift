@@ -7,17 +7,13 @@
 //
 
 import UIKit
-import Lottie
 
 class PortfolioVC: BaseVC {
-
-    @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
     
     let searchController = UISearchController()
-    var allCosmosChains = [CosmosClass]()
     var totalValue = NSDecimalNumber.zero {
         didSet {
             WDP.dpValue(totalValue, currencyLabel, totalValueLabel)
@@ -27,13 +23,6 @@ class PortfolioVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadingView.isHidden = true
-//        loadingView.animation = LottieAnimation.named("loading2")
-//        loadingView.contentMode = .scaleAspectFit
-//        loadingView.loopMode = .loop
-//        loadingView.animationSpeed = 1.3
-//        loadingView.play()
-        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -42,8 +31,6 @@ class PortfolioVC: BaseVC {
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0.0
         }
-        
-//        showWait()
         initData()
     }
     
@@ -62,8 +49,8 @@ class PortfolioVC: BaseVC {
     @objc func onFetchDone(_ notification: NSNotification) {
         print("onFetchDone ", Date().timeIntervalSince1970, " ", notification.object as! String)
         let id = notification.object as! String
-        for i in 0..<allCosmosChains.count {
-            if (allCosmosChains[i].id == id) {
+        for i in 0..<baseAccount.toDisplayCosmosChains.count {
+            if (baseAccount.toDisplayCosmosChains[i].id == id) {
                 DispatchQueue.main.async {
                     self.tableView.beginUpdates()
                     self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
@@ -71,9 +58,10 @@ class PortfolioVC: BaseVC {
                 }
             }
         }
+
         var sum = NSDecimalNumber.zero
-        allCosmosChains.forEach { cosmosChain in
-            sum = sum.adding(cosmosChain.allValue())
+        baseAccount.toDisplayCosmosChains.forEach { chain in
+            sum = sum.adding(chain.allValue())
         }
         DispatchQueue.main.async {
             self.totalValue = sum
@@ -82,18 +70,11 @@ class PortfolioVC: BaseVC {
     
     func initData() {
         baseAccount = BaseData.instance.baseAccount
-        baseAccount.initData()
+        baseAccount.initDisplayData()
         
-//        allCosmosChains = baseAccount.allCosmosClassChains
-        
-//        allCosmosChains = baseAccount.setCosmosClassChains()
-//        baseAccount?.setAccountInfo()
-        print("baseAccount ", baseAccount, " allCosmosChains ", allCosmosChains.count)
-
-//        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
+        currencyLabel.text = BaseData.instance.getCurrencySymbol()
+        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(clickSearch))
-
-//        currencyLabel.text = BaseData.instance.getCurrencySymbol()
     }
     
     @objc func clickSearch() {
@@ -122,7 +103,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         view.titleLabel.text = "Cosmos Class"
-        view.cntLabel.text = String(allCosmosChains.count)
+        view.cntLabel.text = String(baseAccount.toDisplayCosmosChains.count)
         return view
     }
     
@@ -131,22 +112,17 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allCosmosChains.count
+        return baseAccount.toDisplayCosmosChains.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"PortfolioCell") as! PortfolioCell
-        cell.bindCosmosClassChain(baseAccount, allCosmosChains[indexPath.row])
+        cell.bindCosmosClassChain(baseAccount, baseAccount.toDisplayCosmosChains[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if (indexPath.row == 0) {
-//            return UITableView.automaticDimension
-//        } else if (allCosmosChains[indexPath.row].hasValue()) {
-            return UITableView.automaticDimension
-//        }
-//        return 0
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -35,30 +35,26 @@ public class BaseAccount {
         self.lastHDPath = lastPath
     }
     
-    var allCosmosClassChains = [CosmosClass]()
-    var toDisplayCosmosChainNames = [String]()
+    lazy var allCosmosClassChains = [CosmosClass]()
+    lazy var toDisplayCosmosChains = [CosmosClass]()
     
     /*
      Too Heavy Job
      */
-    func initData(_ fetchAll: Bool? = false) {
+    func initAllData() {
         allCosmosClassChains.removeAll()
         ALLCOSMOSCLASS().forEach { chain in
             allCosmosClassChains.append(chain)
         }
-        toDisplayCosmosChainNames = BaseData.instance.getDisplayCosmosChainNames(self)
         
         let keychain = BaseData.instance.getKeyChain()
-        
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 allCosmosClassChains.forEach { chain in
                     Task {
                         chain.setInfoWithSeed(seed, lastHDPath)
-                        if (fetchAll == true || toDisplayCosmosChainNames.contains(chain.id)) {
-                            chain.fetchAuth()
-                        }
+                        chain.fetchAuth()
                     }
                 }
             }
@@ -68,22 +64,57 @@ public class BaseAccount {
                 allCosmosClassChains.forEach { chain in
                     Task {
                         chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
-                        if (fetchAll == true || toDisplayCosmosChainNames.contains(chain.id)) {
-                            chain.fetchAuth()
-                        }
+                        chain.fetchAuth()
                     }
                 }
             }
         }
     }
     
+    func initDisplayData() {
+        toDisplayCosmosChains.removeAll()
+        let toDisplayNames = BaseData.instance.getDisplayCosmosChainNames(self)
+        toDisplayNames.forEach { chainId in
+            if let toDisplayChain = ALLCOSMOSCLASS().filter { $0.id == chainId }.first {
+                toDisplayCosmosChains.append(toDisplayChain)
+            }
+        }
+        let keychain = BaseData.instance.getKeyChain()
+        if (type == .withMnemonic) {
+            if let secureData = try? keychain.getString(uuid.sha1()),
+               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
+                toDisplayCosmosChains.forEach { chain in
+                    Task {
+                        chain.setInfoWithSeed(seed, lastHDPath)
+                        chain.fetchAuth()
+                    }
+                }
+            }
+
+        } else if (type == .onlyPrivateKey) {
+            if let secureKey = try? keychain.getString(uuid.sha1()) {
+                toDisplayCosmosChains.forEach { chain in
+                    Task {
+                        chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
+                        chain.fetchAuth()
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
+    
     func sortCosmosChain() {
         allCosmosClassChains.sort {
+            if ($0.id == "cosmos118" && $1.id != "cosmos118") { return true }
             return $0.allValue().compare($1.allValue()).rawValue > 0 ? true : false
         }
+        let toDisplayNames = BaseData.instance.getDisplayCosmosChainNames(self)
         allCosmosClassChains.sort {
             if ($0.id == "cosmos118" && $1.id != "cosmos118") { return true }
-            if (toDisplayCosmosChainNames.contains($0.id) == true && toDisplayCosmosChainNames.contains($1.id) == false) { return true }
+            if (toDisplayNames.contains($0.id) == true && toDisplayNames.contains($1.id) == false) { return true }
             return false
         }
     }

@@ -57,13 +57,13 @@ class IntroViewController: BaseVC {
             BaseData.instance.baseAccount = account
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
-//                let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
-//                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//                appDelegate.window?.rootViewController = mainTabVC
-//                self.present(mainTabVC, animated: true, completion: nil)
+                let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = mainTabVC
+                self.present(mainTabVC, animated: true, completion: nil)
                 
-                let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
-                self.navigationController?.pushViewController(chainSelectVC, animated: true)
+//                let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
+//                self.navigationController?.pushViewController(chainSelectVC, animated: true)
             })
         }
     }
