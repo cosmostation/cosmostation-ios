@@ -26,7 +26,7 @@ class IntroViewController: BaseVC {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        showWait()
+//        showWait()
         if (BaseData.instance.getDBVersion() < DB_VERSION) {
             onUpdateMigration()
         }

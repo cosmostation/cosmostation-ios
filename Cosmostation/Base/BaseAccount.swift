@@ -36,6 +36,7 @@ public class BaseAccount {
     }
     
     var allCosmosClassChains = [CosmosClass]()
+    var toDisplayCosmosChainNames = [String]()
     
     /*
      Too Heavy Job
@@ -45,9 +46,9 @@ public class BaseAccount {
         ALLCOSMOSCLASS().forEach { chain in
             allCosmosClassChains.append(chain)
         }
+        toDisplayCosmosChainNames = BaseData.instance.getDisplayCosmosChainNames(self)
         
         let keychain = BaseData.instance.getKeyChain()
-        let toDisplayCosmosChainNames = BaseData.instance.getDisplayCosmosChainNames(self)
         
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
@@ -79,6 +80,11 @@ public class BaseAccount {
     func sortCosmosChain() {
         allCosmosClassChains.sort {
             return $0.allValue().compare($1.allValue()).rawValue > 0 ? true : false
+        }
+        allCosmosClassChains.sort {
+            if ($0.id == "cosmos118" && $1.id != "cosmos118") { return true }
+            if (toDisplayCosmosChainNames.contains($0.id) == true && toDisplayCosmosChainNames.contains($1.id) == false) { return true }
+            return false
         }
     }
 }

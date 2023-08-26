@@ -647,6 +647,12 @@
 		E122DC6C2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */; };
 		E122DC6D2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */; };
 		E1271B04224B17230083AF17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
+		E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29732A98DA5300939AD2 /* SelectChainCell.swift */; };
+		E14E29762A98DA5300939AD2 /* SelectChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29732A98DA5300939AD2 /* SelectChainCell.swift */; };
+		E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14E29742A98DA5300939AD2 /* SelectChainCell.xib */; };
+		E14E29782A98DA5300939AD2 /* SelectChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14E29742A98DA5300939AD2 /* SelectChainCell.xib */; };
+		E14E297A2A99C2CA00939AD2 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29792A99C2CA00939AD2 /* BaseButton.swift */; };
+		E14E297B2A99C2CA00939AD2 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29792A99C2CA00939AD2 /* BaseButton.swift */; };
 		E159805A2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
 		E159805B2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
 		E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15980592A6F5EFE0032892B /* PortfolioCell.xib */; };
@@ -1021,6 +1027,9 @@
 		E122DC682A8DBD3B006D1E7B /* BaseHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseHeader.xib; sourceTree = "<group>"; };
 		E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetWork.swift; sourceTree = "<group>"; };
 		E136D8A223039493001BEBB8 /* Cosmostation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cosmostation.entitlements; sourceTree = "<group>"; };
+		E14E29732A98DA5300939AD2 /* SelectChainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChainCell.swift; sourceTree = "<group>"; };
+		E14E29742A98DA5300939AD2 /* SelectChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChainCell.xib; sourceTree = "<group>"; };
+		E14E29792A99C2CA00939AD2 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		E15980582A6F5EFE0032892B /* PortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCell.swift; sourceTree = "<group>"; };
 		E15980592A6F5EFE0032892B /* PortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCell.xib; sourceTree = "<group>"; };
 		E159805F2A722CFF0032892B /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -1504,6 +1513,8 @@
 				04527DB82A937CA2005F72D7 /* AssetCell.xib */,
 				04527DBD2A937CC1005F72D7 /* AssetCosmosClassCell.swift */,
 				04527DBE2A937CC1005F72D7 /* AssetCosmosClassCell.xib */,
+				E14E29732A98DA5300939AD2 /* SelectChainCell.swift */,
+				E14E29742A98DA5300939AD2 /* SelectChainCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1513,6 +1524,7 @@
 			children = (
 				E159805F2A722CFF0032892B /* CardView.swift */,
 				04CB91322A910BDC00375354 /* CardViewCell.swift */,
+				E14E29792A99C2CA00939AD2 /* BaseButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1843,6 +1855,7 @@
 				E122DC6A2A8DBD3B006D1E7B /* BaseHeader.xib in Resources */,
 				18FFB6C3281AF533004E65BB /* new2022@1x.png in Resources */,
 				18FFB6E2281AF533004E65BB /* Assets.xcassets in Resources */,
+				E14E29782A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
 				04527DBC2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				E15980912A83A96E0032892B /* bg6.png in Resources */,
 				1809C35229D16C80008884C1 /* injectScript.js in Resources */,
@@ -1915,6 +1928,7 @@
 				E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
 				E15980902A83A96E0032892B /* bg6.png in Resources */,
 				0443B89828589B570027A6B9 /* Color.xcassets in Resources */,
+				E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
 				047BA8D12A94756A00D3F7DD /* CosmosClass.storyboard in Resources */,
 				04F4061729ED119800CD88E4 /* Init.storyboard in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
@@ -2132,6 +2146,7 @@
 				E122DBBE2A8A468E006D1E7B /* cosmos_nft_module_v1_module.pb.swift in Sources */,
 				04D279EB2A67C96500AF046A /* ChainCosmos.swift in Sources */,
 				E122DB5A2A8A468D006D1E7B /* cosmos_staking_module_v1_module.pb.swift in Sources */,
+				E14E297B2A99C2CA00939AD2 /* BaseButton.swift in Sources */,
 				E122DC062A8A468E006D1E7B /* cosmos_gov_v1_gov.pb.swift in Sources */,
 				E122DB702A8A468D006D1E7B /* cosmos_vesting_module_v1_module.pb.swift in Sources */,
 				E122DBC02A8A468E006D1E7B /* cosmos_app_v1alpha1_query.grpc.swift in Sources */,
@@ -2214,6 +2229,7 @@
 				E122DB382A8A468D006D1E7B /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
 				15BF8483299D472A00B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */,
 				E122DB522A8A468D006D1E7B /* cosmos_group_v1_query.grpc.swift in Sources */,
+				E14E29762A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
 				18FFB57A281AF533004E65BB /* WKey.swift in Sources */,
 				E122DB442A8A468D006D1E7B /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				18FFB58B281AF533004E65BB /* BinanceInt+VarInt.swift in Sources */,
@@ -2433,6 +2449,7 @@
 				E122DBBD2A8A468E006D1E7B /* cosmos_nft_module_v1_module.pb.swift in Sources */,
 				04D279EA2A67C96500AF046A /* ChainCosmos.swift in Sources */,
 				E122DB592A8A468D006D1E7B /* cosmos_staking_module_v1_module.pb.swift in Sources */,
+				E14E297A2A99C2CA00939AD2 /* BaseButton.swift in Sources */,
 				E122DC052A8A468E006D1E7B /* cosmos_gov_v1_gov.pb.swift in Sources */,
 				E122DB6F2A8A468D006D1E7B /* cosmos_vesting_module_v1_module.pb.swift in Sources */,
 				E122DBBF2A8A468E006D1E7B /* cosmos_app_v1alpha1_query.grpc.swift in Sources */,
@@ -2515,6 +2532,7 @@
 				E122DB372A8A468D006D1E7B /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
 				15BF8482299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */,
 				E122DB512A8A468D006D1E7B /* cosmos_group_v1_query.grpc.swift in Sources */,
+				E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
 				E1F7F634234311F8000E597F /* BnbToken.swift in Sources */,
 				E122DB432A8A468D006D1E7B /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				E1945E28222E7C0600A1436F /* AppDelegate.swift in Sources */,

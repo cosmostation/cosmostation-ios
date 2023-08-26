@@ -9,6 +9,9 @@
 import UIKit
 
 extension UIColor {
+    static var primaryColor: UIColor {
+        UIColor(named: "_primary")!
+    }
     static var fontColor01: UIColor {
         UIColor(named: "_font01")!
     }

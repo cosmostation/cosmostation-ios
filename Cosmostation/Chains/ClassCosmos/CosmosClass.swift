@@ -100,17 +100,6 @@ class CosmosClass: BaseChain  {
         }
     }
     
-    func hasValue() -> Bool {
-//        if (cosmosBalances.isEmpty == true && cosmosVestings.isEmpty == true &&
-//            cosmosDelegations?.isEmpty == true && cosmosUnbondings?.isEmpty == true && cosmosRewards?.isEmpty == true) {
-//            return false
-//        }
-        if (cosmosBalances.isEmpty == true) {
-            return false
-        }
-        return true
-    }
-    
     func balanceAmount(_ denom: String) -> NSDecimalNumber {
         return NSDecimalNumber(string: cosmosBalances.filter { $0.denom == denom }.first?.amount ?? "0")
     }

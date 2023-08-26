@@ -12,9 +12,6 @@
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
         </array>
-        <array key="SpoqaHanSansNeo-Regular.otf">
-            <string>SpoqaHanSansNeo-Regular</string>
-        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -29,14 +26,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyB-xM-Oo9" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="8" y="4" width="349" height="72"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainCosmos2" translatesAutoresizingMaskIntoConstraints="NO" id="LTW-RR-keU">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault2" translatesAutoresizingMaskIntoConstraints="NO" id="LTW-RR-keU">
                                 <rect key="frame" x="12" y="12" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="ghf-GM-s10"/>
                                     <constraint firstAttribute="width" constant="48" id="z8j-xK-EPY"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainCosmos" translatesAutoresizingMaskIntoConstraints="NO" id="Suc-II-N3v">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="Suc-II-N3v">
                                 <rect key="frame" x="12" y="12" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="9DT-3o-hCW"/>
@@ -107,7 +104,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="0ZQ-Dv-w9d">
-                                        <rect key="frame" x="-16" y="16" width="36.666666666666664" height="16"/>
+                                        <rect key="frame" x="-15.666666666666629" y="16" width="36.333333333333336" height="16"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconPriceUpGreen" translatesAutoresizingMaskIntoConstraints="NO" id="YM0-Il-bEX">
                                                 <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -118,13 +115,13 @@
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxR-8k-pxy">
                                                 <rect key="frame" x="17" y="0.0" width="7.3333333333333321" height="16"/>
-                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Regular" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_font02"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQj-Md-LQ4">
-                                                <rect key="frame" x="25.333333333333371" y="0.0" width="11.333333333333336" height="16"/>
-                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Regular" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <rect key="frame" x="25.333333333333314" y="0.0" width="11" height="16"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_font02"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -176,8 +173,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="chainCosmos" width="192" height="192"/>
-        <image name="chainCosmos2" width="192" height="192"/>
+        <image name="chainDefault" width="192" height="192"/>
+        <image name="chainDefault2" width="192" height="192"/>
         <image name="iconPriceUpGreen" width="16" height="16"/>
         <namedColor name="_font01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
