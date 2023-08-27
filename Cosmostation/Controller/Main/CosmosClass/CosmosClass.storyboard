@@ -70,15 +70,22 @@
                                     <constraint firstAttribute="height" constant="42" id="ufE-z8-wM4"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdX-08-eE0">
+                                <rect key="frame" x="8" y="197" width="377" height="0.66666666666665719"/>
+                                <color key="backgroundColor" white="1" alpha="0.20277954931972789" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="UgD-In-4H3"/>
+                                </constraints>
+                            </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1V7-Iu-EPt">
-                                <rect key="frame" x="0.0" y="205" width="393" height="647"/>
+                                <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="HxN-8c-YJG" kind="embed" id="jJo-hB-wUK"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYD-Wc-AXb">
-                                <rect key="frame" x="0.0" y="205" width="393" height="647"/>
+                                <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
                                 <connections>
                                     <segue destination="EO6-oK-AmS" kind="embed" id="ZOz-Cm-L38"/>
                                 </connections>
@@ -89,16 +96,19 @@
                         <constraints>
                             <constraint firstItem="0An-sf-Sxo" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="47f-ZP-RPP"/>
                             <constraint firstItem="B5w-hK-wYy" firstAttribute="top" secondItem="0An-sf-Sxo" secondAttribute="bottom" constant="20" id="Fjz-ih-b7j"/>
-                            <constraint firstItem="1V7-Iu-EPt" firstAttribute="top" secondItem="B5w-hK-wYy" secondAttribute="bottom" constant="8" symbolic="YES" id="GXn-4Z-z5f"/>
                             <constraint firstItem="B5w-hK-wYy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="Gmd-pE-4tI"/>
+                            <constraint firstItem="fdX-08-eE0" firstAttribute="top" secondItem="B5w-hK-wYy" secondAttribute="bottom" id="KXG-Qi-buY"/>
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="LYC-Qm-hqh"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="top" secondItem="1V7-Iu-EPt" secondAttribute="top" id="N8q-3P-whm"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="leading" secondItem="1V7-Iu-EPt" secondAttribute="leading" id="ThK-hL-QAR"/>
+                            <constraint firstItem="1V7-Iu-EPt" firstAttribute="top" secondItem="fdX-08-eE0" secondAttribute="bottom" id="U1o-5R-277"/>
                             <constraint firstItem="0An-sf-Sxo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="aMa-zb-NXQ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fdX-08-eE0" secondAttribute="trailing" constant="8" id="df6-bS-rrS"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="bottom" secondItem="1V7-Iu-EPt" secondAttribute="bottom" id="ekH-Tf-Guj"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="trailing" secondItem="1V7-Iu-EPt" secondAttribute="trailing" id="hnP-cd-CvJ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1V7-Iu-EPt" secondAttribute="trailing" id="iHy-1c-waq"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0An-sf-Sxo" secondAttribute="trailing" constant="48" id="kY3-s0-qOT"/>
+                            <constraint firstItem="fdX-08-eE0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="ll6-wp-9Mc"/>
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ohN-uk-tdL"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="B5w-hK-wYy" secondAttribute="trailing" constant="8" id="wCv-gP-kEY"/>
                             <constraint firstItem="0An-sf-Sxo" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="wHS-MO-vwS"/>

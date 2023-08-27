@@ -24,7 +24,7 @@ class ChainLum118: CosmosClass  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         accountPrefix = "lum"
         
-        grpcHost = "grpc-lum-chain.cosmostation.io"
+        grpcHost = "grpc-lum.cosmostation.io"
     }
     
 }

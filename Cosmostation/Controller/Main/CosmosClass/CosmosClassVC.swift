@@ -35,6 +35,8 @@ class CosmosClassVC: BaseVC {
         selectedChain = baseAccount.toDisplayCosmosChains[selectedPosition]
         totalValue = selectedChain.allValue()
         addressLabel.text = selectedChain.address
+        
+        print("selectedChain address ", selectedChain.address)
     }
     
     func onSetTabbarView() {

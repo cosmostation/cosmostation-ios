@@ -99,7 +99,7 @@ public class WDP {
 
         let amount = NSDecimalNumber(string: coin?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
         amountLabel?.attributedText = dpAmount(amount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
-        denomLabel?.text = msAsset.symbol?.uppercased()
+        denomLabel?.text = msAsset.symbol
         coinImg?.af.setImage(withURL: msAsset.assetImg())
 
 
