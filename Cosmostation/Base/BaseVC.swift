@@ -8,6 +8,7 @@
 
 import UIKit
 import Lottie
+import SafariServices
 
 public func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
     #if DEBUG
@@ -45,6 +46,12 @@ class BaseVC: UIViewController {
         if (waitAlert != nil) {
             waitAlert?.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func onShowSafariWeb(_ url: URL) {
+        let safariViewController = SFSafariViewController(url: url)
+        safariViewController.modalPresentationStyle = .popover
+        present(safariViewController, animated: true, completion: nil)
     }
     
     func clearBackgroundColor(_ view: UIView) {

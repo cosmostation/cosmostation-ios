@@ -79,7 +79,9 @@ class BaseNetWork {
     
     
     
-    
+    static func getAccountHistoryUrl(_ chain: BaseChain, _ address: String) -> String {
+        return MINTSCAN_API_URL + "v1/" + chain.apiName + "/account/" + address + "/txs"
+    }
     
     static func getPricesUrl() -> String {
         let currency = BaseData.instance.getCurrencyString().lowercased()
@@ -92,5 +94,9 @@ class BaseNetWork {
     
     static func getMintscanAssetsUrl() -> String {
         return MINTSCAN_API_URL + "v3/assets"
+    }
+    
+    static func getTxDetailUrl(_ chain: BaseChain, _ txHash: String) -> URL? {
+        return URL(string: MintscanUrl + chain.apiName + "/transactions/" + txHash)
     }
 }

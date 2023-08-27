@@ -1061,41 +1061,27 @@
 "tx_starname_renew_account" = "Renew Account";
 "tx_starname_update_resource" = "Replace Address";
 
-"tx_kava_hard_deposit" = "Hard Lend\nDeposit";
-"tx_kava_hard_deposit2" = "Hard Lend Deposit";
-"tx_kava_hard_withdraw" = "Hard Lend\nWithdraw";
-"tx_kava_hard_withdraw2" = "Hard Lend Withdraw";
-"tx_kava_hard_borrow" = "Hard Lend\nBorrow";
-"tx_kava_hard_borrow2" = "Hard Lend Borrow";
-"tx_kava_hard_repay" = "Hard Lend\nRepay";
-"tx_kava_hard_repay2" = "Hard Lend Repay";
-"tx_kava_hard_liquidate" = "Hard Lend\nLiquidate";
-"tx_kava_hard_liquidate2" = "Hard Lend Liquidate";
-"tx_kava_hard_incentive" = "Hard Lend\nIncentive";
-"tx_kava_hard_incentive2" = "Hard Lend Incentive";
-"tx_kava_mint_incentive" = "USDX Minting\nIncentive";
-"tx_kava_delegator_incentive" = "Delegator\nIncentive";
-"tx_kava_delegator_incentive2" = "Delegator Incentive";
-"tx_kava_swap_incentive" = "Swap\nIncentive";
-"tx_kava_swap_incentive2" = "Swap Incentive";
-"tx_kava_save_incentive" = "Save\nIncentive";
-"tx_kava_save_incentive2" = "Save Incentive";
-"tx_kava_earn_incentive" = "Earn\nIncentive";
-"tx_kava_earn_incentive2" = "Earn Incentive";
-"tx_kava_incentive_claim_all" = "Claim\nIncentive";
+"tx_kava_hard_deposit" = "Hard Lend Deposit";
+"tx_kava_hard_withdraw" = "Hard Lend Withdraw";
+"tx_kava_hard_borrow" = "Hard Lend Borrow";
+"tx_kava_hard_repay" = "Hard Lend Repay";
+"tx_kava_hard_liquidate" = "Hard Lend Liquidate";
+"tx_kava_hard_incentive" = "Hard Lend Incentive";
+"tx_kava_mint_incentive" = "USDX Minting Incentive";
+"tx_kava_delegator_incentive" = "Delegator Incentive";
+"tx_kava_swap_incentive" = "Swap Incentive";
+"tx_kava_save_incentive" = "Save Incentive";
+"tx_kava_earn_incentive" = "Earn Incentive";
+"tx_kava_incentive_claim_all" = "Claim Incentive";
 "tx_kava_swap_token" = "Swap Coin";
-"tx_kava_swap_deposit" = "Swap Pool\nDeposit";
-"tx_kava_swap_deposit2" = "Swap Pool Deposit";
-"tx_kava_swap_withdraw" = "Swap Pool\nWithdraw";
-"tx_kava_swap_withdraw2" = "Swap Pool Withdraw";
+"tx_kava_swap_deposit" = "Swap Pool Deposit";
+"tx_kava_swap_withdraw" = "Swap Pool Withdraw";
 "tx_kava_auction_bid" = "Auction Bid";
-"tx_kava_save_deposit" = "Saving\nDeposit";
-"tx_kava_save_withdraw" = "Saving\nWithdraw";
-"tx_kava_earn_Deposit" = "Earn Liquidate\nDeposit";
-"tx_kava_earn_delegateDeposit" = "Earn Liquidate\nDelegate Deposit";
-"tx_kava_earn_delegateDeposit2" = "Earn Liquidate Delegate Deposit";
-"tx_kava_earn_withdraw" = "Earn Liquidate\nWithdraw";
-"tx_kava_earn_withdraw2" = "Earn Liquidate Withdraw";
+"tx_kava_save_deposit" = "Saving Deposit";
+"tx_kava_save_withdraw" = "Saving Withdraw";
+"tx_kava_earn_Deposit" = "Earn Liquidate Deposit";
+"tx_kava_earn_delegateDeposit" = "Earn Liquidate Delegate Deposit";
+"tx_kava_earn_withdraw" = "Earn Liquidate Withdraw";
 
 "tx_ibc_send" = "IBC Send";
 "tx_ibc_receive" = "IBC Received";
@@ -1148,9 +1134,9 @@
 "tx_desmos_delete_profile" = "Delete Profile";
 "tx_desmos_link_chain_account" = "Link Account";
 
-"tx_cosmwasm_store_code" = "Store\nContract Code";
-"tx_cosmwasm_instantiate" = "Instantiate\nContract";
-"tx_cosmwasm_execontract" = "Execute\nContract";
+"tx_cosmwasm_store_code" = "Store Contract Code";
+"tx_cosmwasm_instantiate" = "Instantiate Contract";
+"tx_cosmwasm_execontract" = "Execute Contract";
 
 "tx_ethereum_evm" = "Ethereum Tx";
 
@@ -1192,7 +1178,8 @@
 "tx_known" = "Unknown";
 
 
-"date_format" = "dd-MM-yyyy HH:mm:ss";
+"date_format" = "MMMM dd, yyyy";
+"full_time_format" = "dd-MM-yyyy HH:mm:ss";
 
 "new_account_restore" = "Restore with";
 "new_account_private_key" = "Private Key";

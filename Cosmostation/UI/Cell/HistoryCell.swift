@@ -1,0 +1,69 @@
+//
+//  HistoryCell.swift
+//  Cosmostation
+//
+//  Created by yongjoo jung on 2023/08/27.
+//  Copyright © 2023 wannabit. All rights reserved.
+//
+
+import UIKit
+
+class HistoryCell: UITableViewCell {
+    
+    @IBOutlet weak var rootView: CardViewCell!
+    @IBOutlet weak var failedLabel: UILabel!
+    @IBOutlet weak var msgsTitleLabel: UILabel!
+    @IBOutlet weak var hashLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var blockLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var denomLabel: UILabel!
+    @IBOutlet weak var coinCntLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        selectionStyle = .none
+        rootView.setBlur()
+    }
+    
+    override func prepareForReuse() {
+        rootView.setBlur()
+        failedLabel.isHidden = true
+        amountLabel.isHidden = true
+        denomLabel.isHidden = true
+        coinCntLabel.isHidden = true
+    }
+    
+    
+    func bindCosmosClassHistory(_ account: BaseAccount, _ chain: CosmosClass, _ history: MintscanHistory) {
+        failedLabel.isHidden = history.isSuccess()
+        msgsTitleLabel.text = history.getMsgType(chain.address!)
+        hashLabel.text = history.data?.txhash
+        timeLabel.text = WDP.dpTime(history.header?.timestamp)
+        if let height = history.data?.height {
+            blockLabel.text = "(" + String(height) + ")"
+            blockLabel.isHidden = false
+        } else {
+            blockLabel.isHidden = true
+        }
+        
+        if (NSLocalizedString("tx_vote", comment: "") == history.getMsgType(chain.address!)) {
+            denomLabel.text = history.getVoteOption()
+            return
+        }
+        
+        if let dpCoins = history.getDpCoin(chain) {
+            if (dpCoins.count > 0) {
+                if let msAsset = BaseData.instance.getAsset(chain.apiName, dpCoins[0].denom) {
+                    WDP.dpCoin(msAsset, dpCoins[0], nil, denomLabel, amountLabel, msAsset.decimals)
+                    amountLabel.isHidden = false
+                    denomLabel.isHidden = false
+                }
+            }
+            if (dpCoins.count > 1) {
+                coinCntLabel.text = "+" + String(dpCoins.count - 1)
+                coinCntLabel.isHidden = false
+            }
+        }
+    }
+}

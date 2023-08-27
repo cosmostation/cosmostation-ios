@@ -48,24 +48,24 @@ public class WUtils {
 //        return result;
 //    }
 //
-//    static func timeStringToDate(_ input: String) -> Date? {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-//
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-//        if let result = dateFormatter.date(from: input) {
-//            return result
-//        }
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-//        if let result = dateFormatter.date(from: input) {
-//            return result
-//        }
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'"
-//        if let result = dateFormatter.date(from: input) {
-//            return result
-//        }
-//        return nil
-//    }
+    static func timeStringToDate(_ input: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        if let result = dateFormatter.date(from: input) {
+            return result
+        }
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        if let result = dateFormatter.date(from: input) {
+            return result
+        }
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'"
+        if let result = dateFormatter.date(from: input) {
+            return result
+        }
+        return nil
+    }
 //
 //    static func timeInt64ToDate(_ input: Int64) -> Date? {
 //        return Date.init(milliseconds: Int(input))

@@ -1061,41 +1061,27 @@
 "tx_starname_renew_account" = "Account 갱신";
 "tx_starname_update_resource" = "주소 등록";
 
-"tx_kava_hard_deposit" = "하드 대출\n예치";
-"tx_kava_hard_deposit2" = "하드 대출 예치";
-"tx_kava_hard_withdraw" = "하드 대출\n출금";
-"tx_kava_hard_withdraw2" = "하드 대출 출금";
-"tx_kava_hard_borrow" = "하드 대출\n대출";
-"tx_kava_hard_borrow2" = "하드 대출 대출";
-"tx_kava_hard_repay" = "하드 대출\n상환";
-"tx_kava_hard_repay2" = "하드 대출 상환";
-"tx_kava_hard_liquidate" = "하드 대출\n청산";
-"tx_kava_hard_liquidate2" = "하드 대출 청산";
-"tx_kava_hard_incentive" = "인센티브\n하드 대출";
-"tx_kava_hard_incentive2" = "인센티브 하드 대출";
-"tx_kava_mint_incentive" = "인센티브\nUSDX 발행";
-"tx_kava_delegator_incentive" = "인센티브\n위임";
-"tx_kava_delegator_incentive2" = "인센티브 위임";
-"tx_kava_swap_incentive" = "인센티브\n스왑";
-"tx_kava_swap_incentive2" = "인센티브 스왑";
-"tx_kava_save_incentive" = "인센티브\n저축";
-"tx_kava_save_incentive2" = "인센티브 저축";
-"tx_kava_earn_incentive" = "인센티브\n어닝";
-"tx_kava_earn_incentive2" = "인센티브 어닝";
-"tx_kava_incentive_claim_all" = "인센티브\n청구";
+"tx_kava_hard_deposit" = "하드 대출 예치";
+"tx_kava_hard_withdraw" = "하드 대출 출금";
+"tx_kava_hard_borrow" = "하드 대출 대출";
+"tx_kava_hard_repay" = "하드 대출 상환";
+"tx_kava_hard_liquidate" = "하드 대출 청산";
+"tx_kava_hard_incentive" = "인센티브 하드 대출";
+"tx_kava_mint_incentive" = "인센티브 USDX 발행";
+"tx_kava_delegator_incentive" = "인센티브 위임";
+"tx_kava_swap_incentive" = "인센티브 스왑";
+"tx_kava_save_incentive" = "인센티브 저축";
+"tx_kava_earn_incentive" = "인센티브 어닝";
+"tx_kava_incentive_claim_all" = "인센티브 청구";
 "tx_kava_swap_token" = "코인 스왑";
-"tx_kava_swap_deposit" = "스왑풀\n예치";
-"tx_kava_swap_deposit2" = "스왑풀 예치";
-"tx_kava_swap_withdraw" = "스왑풀\n출금";
-"tx_kava_swap_withdraw2" = "스왑풀 출금";
+"tx_kava_swap_deposit" = "스왑풀 예치";
+"tx_kava_swap_withdraw" = "스왑풀 출금";
 "tx_kava_auction_bid" = "옥션 비딩";
-"tx_kava_save_deposit" = "저축\n예치";
-"tx_kava_save_withdraw" = "저축\n출금";
-"tx_kava_earn_Deposit" = "어닝 리퀴디티\n입금";
-"tx_kava_earn_delegateDeposit" = "어닝 리퀴디티\n위임 입금";
-"tx_kava_earn_delegateDeposit2" = "어닝 리퀴디티 위임 입금";
-"tx_kava_earn_withdraw" = "어닝 리퀴디티\n출금";
-"tx_kava_earn_withdraw2" = "어닝 리퀴디티 출금";
+"tx_kava_save_deposit" = "저축 예치";
+"tx_kava_save_withdraw" = "저축 출금";
+"tx_kava_earn_Deposit" = "어닝 리퀴디티 입금";
+"tx_kava_earn_delegateDeposit" = "어닝 리퀴디티 위임 입금";
+"tx_kava_earn_withdraw" = "어닝 리퀴디티 출금";
 
 "tx_ibc_send" = "IBC 보내기";
 "tx_ibc_receive" = "IBC 받기";
@@ -1148,9 +1134,9 @@
 "tx_desmos_delete_profile" = "Delete Profile";
 "tx_desmos_link_chain_account" = "계정 연결";
 
-"tx_cosmwasm_store_code" = "컨트랙트\n코드 저장";
-"tx_cosmwasm_instantiate" = "컨트랙트\n인스턴트화";
-"tx_cosmwasm_execontract" = "컨트랙트\n실행";
+"tx_cosmwasm_store_code" = "컨트랙트 코드 저장";
+"tx_cosmwasm_instantiate" = "컨트랙트 인스턴트화";
+"tx_cosmwasm_execontract" = "컨트랙트 실행";
 
 "tx_ethereum_evm" = "이더리움 Tx";
 
@@ -1192,7 +1178,8 @@
 "tx_known" = "알 수 없음";
 
 
-"date_format" = "yyyy-MM-dd HH:mm:ss";
+"date_format" = "yyyy-MM-dd";
+"full_time_format" = "yyyy-MM-dd HH:mm:ss";
 
 "new_account_restore" = "지갑 복원";
 "new_account_private_key" = "개인키";

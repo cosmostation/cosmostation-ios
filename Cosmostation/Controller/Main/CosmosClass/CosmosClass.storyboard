@@ -170,6 +170,9 @@
                             <constraint firstAttribute="trailing" secondItem="4Uf-kp-c8Q" secondAttribute="trailing" id="wJQ-Qi-EjC"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="4Uf-kp-c8Q" id="OJz-sS-fea"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1Y-jZ-iyp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

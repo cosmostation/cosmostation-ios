@@ -299,15 +299,41 @@ public class WDP {
 //
 //
 //    //display time
-//    static func dpTime(_ timeString: String?) -> String {
-//        if (timeString == nil) { return "-" }
-//        guard let date = WUtils.timeStringToDate(timeString!) else {
-//            return "-"
-//        }
-//        let localFormatter = DateFormatter()
-//        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
-//        return localFormatter.string(from: date)
-//    }
+    static func dpDate(_ timeString: String?) -> String {
+        if (timeString == nil) { return "-" }
+        guard let date = WUtils.timeStringToDate(timeString!) else {
+            return "-"
+        }
+        let localFormatter = DateFormatter()
+        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
+        return localFormatter.string(from: date)
+    }
+    
+    static func dpDate(_ milliseconds: Int) -> String {
+        let localFormatter = DateFormatter()
+        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
+        return localFormatter.string(from: Date(milliseconds: milliseconds))
+    }
+    
+    static func dpTime(_ timeString: String?) -> String {
+        if (timeString == nil) { return "-" }
+        guard let date = WUtils.timeStringToDate(timeString!) else {
+            return "-"
+        }
+        let localFormatter = DateFormatter()
+        localFormatter.dateFormat = NSLocalizedString("HH:mm:ss", comment: "")
+        return localFormatter.string(from: date)
+    }
+    
+    static func dpFullTime(_ timeString: String?) -> String {
+        if (timeString == nil) { return "-" }
+        guard let date = WUtils.timeStringToDate(timeString!) else {
+            return "-"
+        }
+        let localFormatter = DateFormatter()
+        localFormatter.dateFormat = NSLocalizedString("full_time_format", comment: "")
+        return localFormatter.string(from: date)
+    }
 //
 //    static func dpTime(_ timeInt: Int64?) -> String {
 //        if (timeInt == nil) { return "-" }
