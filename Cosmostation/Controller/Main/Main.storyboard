@@ -164,7 +164,7 @@
         <scene sceneID="auC-Sl-Hk9">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qzR-G4-Lik" customClass="BaseNavi" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Chains" id="Hx0-eU-13i">
+                    <tabBarItem key="tabBarItem" title="Chains" image="mainTabChains" id="Hx0-eU-13i">
                         <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -186,7 +186,7 @@
         <scene sceneID="xY6-Wy-5LL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oIO-Jl-Gzw" customClass="BaseNavi" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Swaps" id="OSh-f6-eNA">
+                    <tabBarItem key="tabBarItem" title="Swaps" image="mainTabSwap" id="OSh-f6-eNA">
                         <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -207,7 +207,7 @@
         <scene sceneID="isP-hV-qqt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eDv-Z6-ECi" customClass="BaseNavi" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dapps" id="JXE-5i-UPJ">
+                    <tabBarItem key="tabBarItem" title="Dapps" image="mainTabDapp" id="JXE-5i-UPJ">
                         <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -228,7 +228,7 @@
         <scene sceneID="fgP-oN-GFJ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O3B-T0-BlA" customClass="BaseNavi" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="q6q-M2-MFp">
+                    <tabBarItem key="tabBarItem" title="Settings" image="mainTabSetting" id="q6q-M2-MFp">
                         <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -247,6 +247,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="mainTabChains" width="24" height="24"/>
+        <image name="mainTabDapp" width="24" height="24"/>
+        <image name="mainTabSetting" width="24" height="24"/>
+        <image name="mainTabSwap" width="24" height="24"/>
         <namedColor name="_font01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

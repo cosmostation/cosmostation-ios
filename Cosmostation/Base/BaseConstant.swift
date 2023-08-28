@@ -42,7 +42,7 @@ let KEY_LAST_ACCOUNT                    = "KEY_LAST_ACCOUNT"
 let KEY_DISPLAY_COSMOS_CHAINS           = "KEY_DISPLAY_COSMOS_CHAINS"
 
 let MINTSCAN_DEV_API_URL                = "https://dev.api.mintscan.io/";
-let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
+let MINTSCAN_API_URL                    = "https://front.api.mintscan.io/";
 let CSS_URL                             = "https://api-wallet.cosmostation.io/";
 let NFT_INFURA                          = "https://ipfs.infura.io/ipfs/";
 

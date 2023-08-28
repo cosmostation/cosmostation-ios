@@ -75,7 +75,7 @@ public class BaseAccount {
         toDisplayCosmosChains.removeAll()
         let toDisplayNames = BaseData.instance.getDisplayCosmosChainNames(self)
         toDisplayNames.forEach { chainId in
-            if let toDisplayChain = ALLCOSMOSCLASS().filter { $0.id == chainId }.first {
+            if let toDisplayChain = ALLCOSMOSCLASS().filter({ $0.id == chainId }).first {
                 toDisplayCosmosChains.append(toDisplayChain)
             }
         }
