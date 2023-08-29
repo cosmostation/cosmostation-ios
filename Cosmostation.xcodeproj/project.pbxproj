@@ -166,6 +166,18 @@
 		04E2A32727A581720045ED21 /* Cw20BalanceRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32627A581720045ED21 /* Cw20BalanceRes.swift */; };
 		04F4061729ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
 		04F4061829ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
+		04FA74502A9D97A0001A2830 /* PincodeInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744B2A9D97A0001A2830 /* PincodeInputVC.swift */; };
+		04FA74512A9D97A0001A2830 /* PincodeInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744B2A9D97A0001A2830 /* PincodeInputVC.swift */; };
+		04FA74522A9D97A0001A2830 /* PincodeDecimalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744C2A9D97A0001A2830 /* PincodeDecimalVC.swift */; };
+		04FA74532A9D97A0001A2830 /* PincodeDecimalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744C2A9D97A0001A2830 /* PincodeDecimalVC.swift */; };
+		04FA74542A9D97A0001A2830 /* Pincode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04FA744D2A9D97A0001A2830 /* Pincode.storyboard */; };
+		04FA74552A9D97A0001A2830 /* Pincode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04FA744D2A9D97A0001A2830 /* Pincode.storyboard */; };
+		04FA74562A9D97A0001A2830 /* PincodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744E2A9D97A0001A2830 /* PincodeVC.swift */; };
+		04FA74572A9D97A0001A2830 /* PincodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744E2A9D97A0001A2830 /* PincodeVC.swift */; };
+		04FA74582A9D97A0001A2830 /* PincodeAlphabetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744F2A9D97A0001A2830 /* PincodeAlphabetVC.swift */; };
+		04FA74592A9D97A0001A2830 /* PincodeAlphabetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744F2A9D97A0001A2830 /* PincodeAlphabetVC.swift */; };
+		04FA745C2A9DEE51001A2830 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 04FA745B2A9DEE51001A2830 /* Toast */; };
+		04FA745E2A9DEE65001A2830 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 04FA745D2A9DEE65001A2830 /* Toast */; };
 		151734672A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
 		151734682A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
 		1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */; };
@@ -807,6 +819,11 @@
 		04E2A32627A581720045ED21 /* Cw20BalanceRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20BalanceRes.swift; sourceTree = "<group>"; };
 		04F4061529ED112100CD88E4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		04F4061629ED119800CD88E4 /* Init.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Init.storyboard; sourceTree = "<group>"; };
+		04FA744B2A9D97A0001A2830 /* PincodeInputVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PincodeInputVC.swift; sourceTree = "<group>"; };
+		04FA744C2A9D97A0001A2830 /* PincodeDecimalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PincodeDecimalVC.swift; sourceTree = "<group>"; };
+		04FA744D2A9D97A0001A2830 /* Pincode.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pincode.storyboard; sourceTree = "<group>"; };
+		04FA744E2A9D97A0001A2830 /* PincodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PincodeVC.swift; sourceTree = "<group>"; };
+		04FA744F2A9D97A0001A2830 /* PincodeAlphabetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PincodeAlphabetVC.swift; sourceTree = "<group>"; };
 		151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingReq.swift; sourceTree = "<group>"; };
 		151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingRes.swift; sourceTree = "<group>"; };
 		1577DAC729B9F07800C360EC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -1093,6 +1110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FA745E2A9DEE65001A2830 /* Toast in Frameworks */,
 				04D279D12A6508C500AF046A /* WalletConnect in Frameworks */,
 				EB85535FBF1815AEAECE43D4 /* Pods_CosmostationDev.framework in Frameworks */,
 				E122DA232A8A1909006D1E7B /* ed25519swift in Frameworks */,
@@ -1115,6 +1133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FA745C2A9DEE51001A2830 /* Toast in Frameworks */,
 				04D279CB2A6508A400AF046A /* WalletConnect in Frameworks */,
 				9EBDC03599A6A52BCFB81E33 /* Pods_Cosmostation.framework in Frameworks */,
 				E122DA212A8A18FB006D1E7B /* ed25519swift in Frameworks */,
@@ -1239,6 +1258,18 @@
 				04E25D2A276F23D9009B39BA /* xmas@3x.png */,
 			);
 			path = Icons;
+			sourceTree = "<group>";
+		};
+		04FA744A2A9D9735001A2830 /*  Pincode */ = {
+			isa = PBXGroup;
+			children = (
+				04FA744D2A9D97A0001A2830 /* Pincode.storyboard */,
+				04FA744E2A9D97A0001A2830 /* PincodeVC.swift */,
+				04FA744B2A9D97A0001A2830 /* PincodeInputVC.swift */,
+				04FA744C2A9D97A0001A2830 /* PincodeDecimalVC.swift */,
+				04FA744F2A9D97A0001A2830 /* PincodeAlphabetVC.swift */,
+			);
+			path = " Pincode";
 			sourceTree = "<group>";
 		};
 		1D72712946482FD8BAF942D7 /* Frameworks */ = {
@@ -1639,6 +1670,7 @@
 		E1945E3A222E7DD800A1436F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				04FA744A2A9D9735001A2830 /*  Pincode */,
 				E15980A12A83AAF00032892B /* Main */,
 				E16D9B1122489AC20019B7BB /* Init */,
 			);
@@ -1748,6 +1780,7 @@
 				E122DA222A8A1909006D1E7B /* ed25519swift */,
 				E122DA272A8A19DF006D1E7B /* Blake2 */,
 				04BA9BCE2A976EAD003E2404 /* SkeletonView */,
+				04FA745D2A9DEE65001A2830 /* Toast */,
 			);
 			productName = Cosmostation;
 			productReference = 18FFB7D5281AF533004E65BB /* CosmostationDev.app */;
@@ -1783,6 +1816,7 @@
 				E122DA202A8A18FB006D1E7B /* ed25519swift */,
 				E122DA252A8A19D2006D1E7B /* Blake2 */,
 				04BA9BCC2A976EA2003E2404 /* SkeletonView */,
+				04FA745B2A9DEE51001A2830 /* Toast */,
 			);
 			productName = Cosmostation;
 			productReference = E1945E24222E7C0600A1436F /* Cosmostation.app */;
@@ -1835,6 +1869,7 @@
 				E122DA1F2A8A18FB006D1E7B /* XCRemoteSwiftPackageReference "ed25519swift" */,
 				E122DA242A8A19D2006D1E7B /* XCRemoteSwiftPackageReference "Blake2.swift" */,
 				04BA9BCB2A976EA2003E2404 /* XCRemoteSwiftPackageReference "SkeletonView" */,
+				04FA745A2A9DEE51001A2830 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = E1945E25222E7C0600A1436F /* Products */;
 			projectDirPath = "";
@@ -1883,6 +1918,7 @@
 				E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				04BA9BD82A985771003E2404 /* ChainSelectVC.xib in Resources */,
 				18FFB77D281AF533004E65BB /* new2022@2x.png in Resources */,
+				04FA74552A9D97A0001A2830 /* Pincode.storyboard in Resources */,
 				E15980992A83A96E0032892B /* bg5.png in Resources */,
 				E15980932A83A96E0032892B /* bg2.png in Resources */,
 				18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */,
@@ -1913,6 +1949,7 @@
 				E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */,
 				1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */,
 				E1E0DBC82A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
+				04FA74542A9D97A0001A2830 /* Pincode.storyboard in Resources */,
 				04877304277C809200D9E201 /* xmas.png in Resources */,
 				E1D538292A96644F00FB0403 /* loading2.json in Resources */,
 				04172B9329F7AE4000D6279C /* Roboto-Bold.ttf in Resources */,
@@ -2055,6 +2092,7 @@
 				E122DB722A8A468D006D1E7B /* cosmos_consensus_v1_query.grpc.swift in Sources */,
 				E122DC552A8A4712006D1E7B /* tendermint_types_evidence.pb.swift in Sources */,
 				E122DB202A8A468D006D1E7B /* cosmos_group_v1_events.pb.swift in Sources */,
+				04FA74592A9D97A0001A2830 /* PincodeAlphabetVC.swift in Sources */,
 				E122DA1E2A8A158C006D1E7B /* ChainKava60.swift in Sources */,
 				18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */,
 				18FFB307281AF533004E65BB /* BinanceProto.swift in Sources */,
@@ -2189,6 +2227,8 @@
 				E122DC2A2A8A468E006D1E7B /* cosmos_tx_config_v1_config.pb.swift in Sources */,
 				18FFB47D281AF533004E65BB /* BnbTicker.swift in Sources */,
 				E122DB142A8A468D006D1E7B /* cosmos_auth_v1beta1_genesis.pb.swift in Sources */,
+				04FA74512A9D97A0001A2830 /* PincodeInputVC.swift in Sources */,
+				04FA74532A9D97A0001A2830 /* PincodeDecimalVC.swift in Sources */,
 				E122DBD62A8A468E006D1E7B /* cosmos_upgrade_v1beta1_query.pb.swift in Sources */,
 				E122DC3C2A8A468E006D1E7B /* cosmos_auth_v1beta1_query.grpc.swift in Sources */,
 				E122DB3E2A8A468D006D1E7B /* cosmos_mint_module_v1_module.pb.swift in Sources */,
@@ -2298,6 +2338,7 @@
 				E122DC5D2A8A4712006D1E7B /* tendermint_abci_types.grpc.swift in Sources */,
 				E122DB6E2A8A468D006D1E7B /* cosmos_evidence_v1beta1_evidence.pb.swift in Sources */,
 				E122DBE82A8A468E006D1E7B /* cosmos_authz_v1beta1_authz.pb.swift in Sources */,
+				04FA74572A9D97A0001A2830 /* PincodeVC.swift in Sources */,
 				047847C92962C93F00FD6A7E /* Cw20IcnsByAddressReq.swift in Sources */,
 				E122DB6C2A8A468D006D1E7B /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */,
 				E122DB0E2A8A468D006D1E7B /* cosmos_orm_v1_orm.pb.swift in Sources */,
@@ -2360,6 +2401,7 @@
 				E122DB712A8A468D006D1E7B /* cosmos_consensus_v1_query.grpc.swift in Sources */,
 				E122DC542A8A4712006D1E7B /* tendermint_types_evidence.pb.swift in Sources */,
 				E122DB1F2A8A468D006D1E7B /* cosmos_group_v1_events.pb.swift in Sources */,
+				04FA74582A9D97A0001A2830 /* PincodeAlphabetVC.swift in Sources */,
 				E122DA1D2A8A158C006D1E7B /* ChainKava60.swift in Sources */,
 				E1945E52223124F000A1436F /* BaseData.swift in Sources */,
 				046E903D268C413A002CFFE1 /* BinanceProto.swift in Sources */,
@@ -2494,6 +2536,8 @@
 				E122DC292A8A468E006D1E7B /* cosmos_tx_config_v1_config.pb.swift in Sources */,
 				28E3E3802671BE8D00BA89C2 /* Param.swift in Sources */,
 				E122DB132A8A468D006D1E7B /* cosmos_auth_v1beta1_genesis.pb.swift in Sources */,
+				04FA74502A9D97A0001A2830 /* PincodeInputVC.swift in Sources */,
+				04FA74522A9D97A0001A2830 /* PincodeDecimalVC.swift in Sources */,
 				E122DBD52A8A468E006D1E7B /* cosmos_upgrade_v1beta1_query.pb.swift in Sources */,
 				E122DC3B2A8A468E006D1E7B /* cosmos_auth_v1beta1_query.grpc.swift in Sources */,
 				E122DB3D2A8A468D006D1E7B /* cosmos_mint_module_v1_module.pb.swift in Sources */,
@@ -2603,6 +2647,7 @@
 				E122DC5C2A8A4712006D1E7B /* tendermint_abci_types.grpc.swift in Sources */,
 				E122DB6D2A8A468D006D1E7B /* cosmos_evidence_v1beta1_evidence.pb.swift in Sources */,
 				E122DBE72A8A468E006D1E7B /* cosmos_authz_v1beta1_authz.pb.swift in Sources */,
+				04FA74562A9D97A0001A2830 /* PincodeVC.swift in Sources */,
 				E1945E3E222E7E2900A1436F /* SegwitAddrCoder.swift in Sources */,
 				E122DB6B2A8A468D006D1E7B /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */,
 				E122DB0D2A8A468D006D1E7B /* cosmos_orm_v1_orm.pb.swift in Sources */,
@@ -3034,6 +3079,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		04FA745A2A9DEE51001A2830 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		E122DA1F2A8A18FB006D1E7B /* XCRemoteSwiftPackageReference "ed25519swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pebble8888/ed25519swift";
@@ -3162,6 +3215,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04D547EE2A612935001F1A4B /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
+		};
+		04FA745B2A9DEE51001A2830 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04FA745A2A9DEE51001A2830 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
+		04FA745D2A9DEE65001A2830 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04FA745A2A9DEE51001A2830 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 		1876EE872A49352400C53352 /* GRPC */ = {
 			isa = XCSwiftPackageProductDependency;

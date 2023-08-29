@@ -434,13 +434,9 @@
 
 
 
-"password_init1" = "Enter your new PIN";
-"password_init2" = "Verify your new PIN";
-"password_check" = "Enter PIN";
-"password_delete" = "Enter PIN";
-"password_tx" = "Enter PIN";
-"password_app_lock" = "Enter PIN";
-"password_init_warnning" = "This cannot be recovered if lost or forgotten.";
+"pincode_init1" = "Enter your new PIN";
+"pincode_init2" = "Verify your new PIN";
+"pincode_check" = "Enter PIN";
 "password_msg1" = "Losing your mnemonics could lead to loss of your assets.\nWe highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anybody else.";
 "password_msg2" = "Copy your mnemonics on a piece of paper and keep them in a secure location. You can later recover your wallet using your mnemonics.";
 "add_address_msg" = "You can watch any supported wallet address and its transaction history, however you will not be able to perform transactions with it. You can later add a mnemonic to this address to enable this functionality.";
@@ -817,7 +813,7 @@
 
 
 
-"error_password_fail" = "PIN number is not same. Please init PIN number again!";
+"error_two_pincode_differ" = "PIN number is not same. Please init PIN number again!";
 "error_no_clipboard" = "No text from clipboard.";
 "error_invalid_address_or_pubkey" = "Invalid Address, please check again.";
 "error_recover_mnemonic" = "Please insert valid mnemonics.";
@@ -833,7 +829,7 @@
 "error_invalid_address" = "Invalid Address, please check again.";
 "error_invalid_nameservice_address" = "The address of the registered name service is incorrect.";
 "error_self_send" = "Self sending is not support.";
-"error_invalid_password" = "Invalid PIN number";
+"error_invalid_pincode" = "Invalid PIN number";
 "error_not_enough_fee" = "No enough balance for fee.";
 "error_not_enough_balance_to_send" = "No enough balance for send.";
 "error_wasting_fee" = "Fee is bigger than reward. \nCoin would be wasted!";

@@ -434,13 +434,9 @@
 
 
 
-"password_init1" = "PIN 番号を入力してください。";
-"password_init2" = "再入力";
-"password_check" = "PIN 番号を入力してください。";
-"password_delete" = "PIN 番号を入力してください。";
-"password_tx" = "PIN 番号を入力してください。";
-"password_app_lock" = "PIN 番号を入力してください。";
-"password_init_warnning" = "紛失・お忘れの場合はお返しできません。";
+"pincode_init1" = "PIN 番号を入力してください。";
+"pincode_init2" = "再入力";
+"pincode_check" = "PIN 番号を入力してください。";
 "password_msg1" = "ニーモニックを失うと、資産の損失につながる可能性があります。\nオフラインの安全な場所に保管し、本人以外に接近ができないようにご注意ください。";
 "password_msg2" = "お客様の資産保護のため、ニーモニックを必ず紙に書いて別に保管してください。 これらの単語を使用してウォレットを復元できます。（ウォレット管理で再確認できます。）";
 "add_address_msg" = "観察モードに復旧単語入力なしでウォーレットの状態が確認できます。\n今後の設定で復旧単語を入力すると、転送などの活動が可能です。";
@@ -817,7 +813,7 @@
 
 
 
-"error_password_fail" = "入力した2つのパスワードが異なります。もう一度設定してください。";
+"error_two_pincode_differ" = "PIN番号が違います。 PIN番号を再度初期化してください。";
 "error_no_clipboard" = "クリップボードには何もありません。";
 "error_invalid_address_or_pubkey" = "アドレスが無効です。正確な文字を入力してください。";
 "error_recover_mnemonic" = "正しい復旧文字を入力してください。";
@@ -833,7 +829,7 @@
 "error_invalid_address" = "アドレスが無効です。正確な文字を入力してください。";
 "error_invalid_nameservice_address" = "登録されたネームサービスのアドレスが間違っています。.";
 "error_self_send" = "自分のアドレスには送信できません。";
-"error_invalid_password" = "PIN 番号が違います。";
+"error_invalid_pincode" = "PIN 番号が違います。";
 "error_not_enough_fee" = "Tx手数料を支払う利用可能金額が不足しています。";
 "error_not_enough_balance_to_send" = "バランスが十分ではありません。";
 "error_wasting_fee" = "要請する利子がTx手数料よりも低く、手数料の無駄です。";

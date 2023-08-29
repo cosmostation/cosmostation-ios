@@ -1,17 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "iconPlusLight.pdf",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "iconPlusDark.pdf",
+      "filename" : "plus.png",
       "idiom" : "universal"
     }
   ],

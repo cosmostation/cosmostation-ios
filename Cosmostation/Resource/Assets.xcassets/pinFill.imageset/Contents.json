@@ -1,17 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "pinBkLight.pdf",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "pinWhDark.pdf",
+      "filename" : "Group 1000001880.png",
       "idiom" : "universal"
     }
   ],

@@ -64,6 +64,11 @@ class IntroViewController: BaseVC {
                 
 //                let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
 //                self.navigationController?.pushViewController(chainSelectVC, animated: true)
+                
+//                let pincodeVC = UIStoryboard(name: "Pincode", bundle: nil).instantiateViewController(withIdentifier: "PincodeVC") as! PincodeVC
+//                pincodeVC.lockType = .ForDataCheck
+//                pincodeVC.modalPresentationStyle = .fullScreen
+//                self.present(pincodeVC, animated: true)
             })
         }
     }
