@@ -34,7 +34,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter PIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IU7-cV-zKb">
                                                 <rect key="frame" x="55.5" y="0.0" width="93" height="25.5"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="20"/>
-                                                <color key="textColor" name="_font01"/>
+                                                <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="opN-fq-PDI">
@@ -105,7 +105,7 @@
                             </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hcZ-lA-WpK"/>
-                        <color key="backgroundColor" name="_bgColor"/>
+                        <color key="backgroundColor" name="_colorBg"/>
                         <constraints>
                             <constraint firstItem="hcZ-lA-WpK" firstAttribute="trailing" secondItem="kwO-g6-mMG" secondAttribute="trailing" constant="30" id="Gio-UM-pGG"/>
                             <constraint firstItem="ivf-H9-JWH" firstAttribute="leading" secondItem="hcZ-lA-WpK" secondAttribute="leading" id="MPe-5S-DsX"/>
@@ -171,7 +171,7 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="1">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onDecimalClick:" destination="y5z-8b-3bq" eventType="touchUpInside" id="kEF-cF-Ta4"/>
@@ -185,7 +185,7 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="2">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onDecimalClick:" destination="y5z-8b-3bq" eventType="touchUpInside" id="nXB-Jz-rPD"/>
@@ -199,7 +199,7 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="3">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onDecimalClick:" destination="y5z-8b-3bq" eventType="touchUpInside" id="XUD-W6-YzJ"/>
@@ -218,7 +218,7 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="4">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onDecimalClick:" destination="y5z-8b-3bq" eventType="touchUpInside" id="roZ-Fq-Eb2"/>
@@ -232,7 +232,7 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="5">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onDecimalClick:" destination="y5z-8b-3bq" eventType="touchUpInside" id="Vag-A4-dfq"/>
@@ -246,7 +246,7 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="6">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onDecimalClick:" destination="y5z-8b-3bq" eventType="touchUpInside" id="qfP-Dh-YSM"/>
@@ -265,7 +265,7 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="7">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onDecimalClick:" destination="y5z-8b-3bq" eventType="touchUpInside" id="nCN-e2-3hz"/>
@@ -279,7 +279,7 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="8">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onDecimalClick:" destination="y5z-8b-3bq" eventType="touchUpInside" id="XRd-EY-2PM"/>
@@ -293,7 +293,7 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="9">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onDecimalClick:" destination="y5z-8b-3bq" eventType="touchUpInside" id="KZo-8f-dQ8"/>
@@ -323,7 +323,7 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Regular" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="0">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onDecimalClick:" destination="y5z-8b-3bq" eventType="touchUpInside" id="SnF-dM-2hY"/>
@@ -406,7 +406,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="45.5" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="NxQ-EA-GZN"/>
@@ -416,7 +416,7 @@
                                                         <rect key="frame" x="45.5" y="0.0" width="46" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="OL4-3H-aXs"/>
@@ -426,7 +426,7 @@
                                                         <rect key="frame" x="91.5" y="0.0" width="45.5" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="97F-uV-HVn"/>
@@ -436,7 +436,7 @@
                                                         <rect key="frame" x="137" y="0.0" width="46" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="68w-Yc-m4J"/>
@@ -446,7 +446,7 @@
                                                         <rect key="frame" x="183" y="0.0" width="45.5" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="Zqm-qu-6h3"/>
@@ -456,7 +456,7 @@
                                                         <rect key="frame" x="228.5" y="0.0" width="46" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="nqF-XK-3Sf"/>
@@ -466,7 +466,7 @@
                                                         <rect key="frame" x="274.5" y="0.0" width="45.5" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="Kes-ay-bYf"/>
@@ -481,7 +481,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="45.5" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="fLL-Ns-9dJ"/>
@@ -491,7 +491,7 @@
                                                         <rect key="frame" x="45.5" y="0.0" width="46" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="bDc-Ad-1Np"/>
@@ -501,7 +501,7 @@
                                                         <rect key="frame" x="91.5" y="0.0" width="45.5" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="fg4-st-ncA"/>
@@ -511,7 +511,7 @@
                                                         <rect key="frame" x="137" y="0.0" width="46" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="Tiu-lD-pK4"/>
@@ -521,7 +521,7 @@
                                                         <rect key="frame" x="183" y="0.0" width="45.5" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="QMH-R2-fHp"/>
@@ -531,7 +531,7 @@
                                                         <rect key="frame" x="228.5" y="0.0" width="46" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="rLv-EJ-WNa"/>
@@ -541,7 +541,7 @@
                                                         <rect key="frame" x="274.5" y="0.0" width="45.5" height="64"/>
                                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="A">
-                                                            <color key="titleColor" name="_font01"/>
+                                                            <color key="titleColor" name="_color01"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="pTp-5w-JTh"/>
@@ -559,7 +559,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="42.5" height="43"/>
                                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                                 <state key="normal" title="A">
-                                                                    <color key="titleColor" name="_font01"/>
+                                                                    <color key="titleColor" name="_color01"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="aZl-pC-wgw"/>
@@ -569,7 +569,7 @@
                                                                 <rect key="frame" x="42.5" y="0.0" width="42" height="43"/>
                                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                                 <state key="normal" title="A">
-                                                                    <color key="titleColor" name="_font01"/>
+                                                                    <color key="titleColor" name="_color01"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="y5F-PE-Q6a"/>
@@ -579,7 +579,7 @@
                                                                 <rect key="frame" x="84.5" y="0.0" width="42.5" height="43"/>
                                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                                 <state key="normal" title="A">
-                                                                    <color key="titleColor" name="_font01"/>
+                                                                    <color key="titleColor" name="_color01"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="ky9-PX-3B6"/>
@@ -589,7 +589,7 @@
                                                                 <rect key="frame" x="127" y="0.0" width="42" height="43"/>
                                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                                 <state key="normal" title="A">
-                                                                    <color key="titleColor" name="_font01"/>
+                                                                    <color key="titleColor" name="_color01"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="U5a-SP-OFn"/>
@@ -599,7 +599,7 @@
                                                                 <rect key="frame" x="169" y="0.0" width="42.5" height="43"/>
                                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                                 <state key="normal" title="A">
-                                                                    <color key="titleColor" name="_font01"/>
+                                                                    <color key="titleColor" name="_color01"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="PXl-7R-ZCN"/>
@@ -609,7 +609,7 @@
                                                                 <rect key="frame" x="211.5" y="0.0" width="42" height="43"/>
                                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                                 <state key="normal" title="A">
-                                                                    <color key="titleColor" name="_font01"/>
+                                                                    <color key="titleColor" name="_color01"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="D0i-Nc-yTg"/>
@@ -619,7 +619,7 @@
                                                                 <rect key="frame" x="253.5" y="0.0" width="42.5" height="43"/>
                                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                                 <state key="normal" title="A">
-                                                                    <color key="titleColor" name="_font01"/>
+                                                                    <color key="titleColor" name="_color01"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="E1f-HH-6F5"/>
@@ -645,7 +645,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="45" height="43"/>
                                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                                 <state key="normal" title="A">
-                                                                    <color key="titleColor" name="_font01"/>
+                                                                    <color key="titleColor" name="_color01"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="bpu-Ji-6Ug"/>
@@ -655,7 +655,7 @@
                                                                 <rect key="frame" x="45" y="0.0" width="45" height="43"/>
                                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                                 <state key="normal" title="A">
-                                                                    <color key="titleColor" name="_font01"/>
+                                                                    <color key="titleColor" name="_color01"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="zUP-im-pNj"/>
@@ -665,7 +665,7 @@
                                                                 <rect key="frame" x="90" y="0.0" width="45" height="43"/>
                                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                                 <state key="normal" title="A">
-                                                                    <color key="titleColor" name="_font01"/>
+                                                                    <color key="titleColor" name="_color01"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="Am0-Ab-3sd"/>
@@ -675,7 +675,7 @@
                                                                 <rect key="frame" x="135" y="0.0" width="45" height="43"/>
                                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                                 <state key="normal" title="A">
-                                                                    <color key="titleColor" name="_font01"/>
+                                                                    <color key="titleColor" name="_color01"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="yiz-JP-qjo"/>
@@ -685,7 +685,7 @@
                                                                 <rect key="frame" x="180" y="0.0" width="45" height="43"/>
                                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                                 <state key="normal" title="A">
-                                                                    <color key="titleColor" name="_font01"/>
+                                                                    <color key="titleColor" name="_color01"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="onAlphabetClick:" destination="4FT-cm-RxI" eventType="touchUpInside" id="vac-5a-5dM"/>
@@ -774,11 +774,11 @@
         <image name="pinDeleteWord" width="30" height="30"/>
         <image name="pinEmpty" width="24" height="24"/>
         <image name="pinPlus" width="24" height="24"/>
-        <namedColor name="_bgColor">
-            <color red="0.16862745098039217" green="0.16862745098039217" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="_font01">
+        <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorBg">
+            <color red="0.16862745098039217" green="0.16862745098039217" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
             <color red="0.33700001239776611" green="0.016000000759959221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

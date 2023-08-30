@@ -233,6 +233,7 @@
 "str_incentive_amount" = "인센티브 수량";
 "str_no_result" = "검색 결과가 없습니다";
 "str_smart_contract" = "스마트 컨트랙트";
+"str_account_name" = "계정 이름";
 
 
 "btn_delegate" = "  위임 하기";
@@ -703,6 +704,7 @@
 "title_wallet_detail" = "지갑 상세";
 "title_check_mnemonics" = "니모닉 확인";
 "title_check_privatekey" = "개인키 확인";
+"title_set_account_name" = "계정 이름 설정";
 "title_create" = "지갑 생성";
 "title_watch_wallet" = "관찰 지갑 등록";
 "title_restore_privatekey" = "개인키로 지갑복원";
@@ -937,6 +939,8 @@
 "error_no_staking" = "해당 체인은 스테이킹을 지원하지 않습니다.";
 "error_not_dao_member" = "이 Dao의 회원이 아닙니다.";
 "error_can_not_revote" = "재투표 할 수 없습니다.";
+"error_account_name" = "계정 이름을 정확히 입력하세요.";
+"error_alreay_exist_account_name" = "이미 존재하는 이름 입니다.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";

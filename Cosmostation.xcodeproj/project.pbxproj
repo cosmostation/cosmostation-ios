@@ -87,10 +87,6 @@
 		047DCEE328855F4800253CAA /* MintscanMyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DCEE128855F4800253CAA /* MintscanMyVote.swift */; };
 		04815BDE2A41DB120006A906 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 04815BDD2A41DB120006A906 /* SwiftProtobuf */; };
 		04815BE12A41DB410006A906 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 04815BE02A41DB410006A906 /* GRPC */; };
-		04877300277C6E0700D9E201 /* new2022@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048772FE277C6E0700D9E201 /* new2022@1x.png */; };
-		04877301277C6E0700D9E201 /* xmas@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048772FF277C6E0700D9E201 /* xmas@1x.png */; };
-		04877304277C809200D9E201 /* xmas.png in Resources */ = {isa = PBXBuildFile; fileRef = 04877302277C809200D9E201 /* xmas.png */; };
-		04877305277C809200D9E201 /* new2022.png in Resources */ = {isa = PBXBuildFile; fileRef = 04877303277C809200D9E201 /* new2022.png */; };
 		048DBCE2280EC5E90007275E /* MWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DBCE1280EC5E90007275E /* MWords.swift */; };
 		0492AE912A83CC9B001360F0 /* SwapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492AE902A83CC9B001360F0 /* SwapVC.swift */; };
 		0492AE922A83CC9B001360F0 /* SwapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492AE902A83CC9B001360F0 /* SwapVC.swift */; };
@@ -158,10 +154,6 @@
 		04E165BB28B61BE1000F12C0 /* MintscanAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165B928B61BE1000F12C0 /* MintscanAsset.swift */; };
 		04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165BC28B62133000F12C0 /* MintscanToken.swift */; };
 		04E165BE28B62133000F12C0 /* MintscanToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165BC28B62133000F12C0 /* MintscanToken.swift */; };
-		04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2A276F23D9009B39BA /* xmas@3x.png */; };
-		04E25D2F276F23D9009B39BA /* new2022@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2B276F23D9009B39BA /* new2022@3x.png */; };
-		04E25D30276F23D9009B39BA /* xmas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2C276F23D9009B39BA /* xmas@2x.png */; };
-		04E25D31276F23D9009B39BA /* new2022@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2D276F23D9009B39BA /* new2022@2x.png */; };
 		04E2A32527A57D270045ED21 /* Cw20BalanceReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32427A57D270045ED21 /* Cw20BalanceReq.swift */; };
 		04E2A32727A581720045ED21 /* Cw20BalanceRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32627A581720045ED21 /* Cw20BalanceRes.swift */; };
 		04F4061729ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
@@ -178,6 +170,12 @@
 		04FA74592A9D97A0001A2830 /* PincodeAlphabetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744F2A9D97A0001A2830 /* PincodeAlphabetVC.swift */; };
 		04FA745C2A9DEE51001A2830 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 04FA745B2A9DEE51001A2830 /* Toast */; };
 		04FA745E2A9DEE65001A2830 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 04FA745D2A9DEE65001A2830 /* Toast */; };
+		04FA74612A9F2BEB001A2830 /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74602A9F2BEB001A2830 /* TextInput.swift */; };
+		04FA74622A9F2BEB001A2830 /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74602A9F2BEB001A2830 /* TextInput.swift */; };
+		04FA74652A9F5833001A2830 /* CreateNameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA74632A9F5833001A2830 /* CreateNameVC.xib */; };
+		04FA74662A9F5833001A2830 /* CreateNameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA74632A9F5833001A2830 /* CreateNameVC.xib */; };
+		04FA74672A9F5833001A2830 /* CreateNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74642A9F5833001A2830 /* CreateNameVC.swift */; };
+		04FA74682A9F5833001A2830 /* CreateNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74642A9F5833001A2830 /* CreateNameVC.swift */; };
 		151734672A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
 		151734682A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
 		1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */; };
@@ -240,15 +238,7 @@
 		18FFB623281AF533004E65BB /* BinanceHexlify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903E268C45DC002CFFE1 /* BinanceHexlify.swift */; };
 		18FFB664281AF533004E65BB /* StarnameAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D765A1271585FA00730F47 /* StarnameAssets.swift */; };
 		18FFB66B281AF533004E65BB /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD0224220910097CAEE /* Account.swift */; };
-		18FFB674281AF533004E65BB /* new2022@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2B276F23D9009B39BA /* new2022@3x.png */; };
-		18FFB683281AF533004E65BB /* xmas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2C276F23D9009B39BA /* xmas@2x.png */; };
-		18FFB6C3281AF533004E65BB /* new2022@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048772FE277C6E0700D9E201 /* new2022@1x.png */; };
 		18FFB6E2281AF533004E65BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16D9B182248C4880019B7BB /* Assets.xcassets */; };
-		18FFB6ED281AF533004E65BB /* xmas.png in Resources */ = {isa = PBXBuildFile; fileRef = 04877302277C809200D9E201 /* xmas.png */; };
-		18FFB71D281AF533004E65BB /* xmas@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048772FF277C6E0700D9E201 /* xmas@1x.png */; };
-		18FFB74B281AF533004E65BB /* new2022.png in Resources */ = {isa = PBXBuildFile; fileRef = 04877303277C809200D9E201 /* new2022.png */; };
-		18FFB752281AF533004E65BB /* xmas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2A276F23D9009B39BA /* xmas@3x.png */; };
-		18FFB77D281AF533004E65BB /* new2022@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2D276F23D9009B39BA /* new2022@2x.png */; };
 		18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F2AE50227EC05100C87F3F /* InfoPlist.strings */; };
 		18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
 		2810084A2696D979002986A6 /* KeyFac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281008492696D979002986A6 /* KeyFac.swift */; };
@@ -783,10 +773,6 @@
 		047BA8D32A94777600D3F7DD /* CosmosAssetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosAssetVC.swift; sourceTree = "<group>"; };
 		047BA8D62A94778800D3F7DD /* CosmosHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosHistoryVC.swift; sourceTree = "<group>"; };
 		047DCEE128855F4800253CAA /* MintscanMyVote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanMyVote.swift; sourceTree = "<group>"; };
-		048772FE277C6E0700D9E201 /* new2022@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new2022@1x.png"; sourceTree = "<group>"; };
-		048772FF277C6E0700D9E201 /* xmas@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@1x.png"; sourceTree = "<group>"; };
-		04877302277C809200D9E201 /* xmas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmas.png; sourceTree = "<group>"; };
-		04877303277C809200D9E201 /* new2022.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new2022.png; sourceTree = "<group>"; };
 		048DBCE1280EC5E90007275E /* MWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWords.swift; sourceTree = "<group>"; };
 		0492AE902A83CC9B001360F0 /* SwapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapVC.swift; sourceTree = "<group>"; };
 		0492AE932A83CCA9001360F0 /* DappVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappVC.swift; sourceTree = "<group>"; };
@@ -811,10 +797,6 @@
 		04D279F82A69159E00AF046A /* BaseChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChain.swift; sourceTree = "<group>"; };
 		04E165B928B61BE1000F12C0 /* MintscanAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanAsset.swift; sourceTree = "<group>"; };
 		04E165BC28B62133000F12C0 /* MintscanToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanToken.swift; sourceTree = "<group>"; };
-		04E25D2A276F23D9009B39BA /* xmas@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@3x.png"; sourceTree = "<group>"; };
-		04E25D2B276F23D9009B39BA /* new2022@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new2022@3x.png"; sourceTree = "<group>"; };
-		04E25D2C276F23D9009B39BA /* xmas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@2x.png"; sourceTree = "<group>"; };
-		04E25D2D276F23D9009B39BA /* new2022@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new2022@2x.png"; sourceTree = "<group>"; };
 		04E2A32427A57D270045ED21 /* Cw20BalanceReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20BalanceReq.swift; sourceTree = "<group>"; };
 		04E2A32627A581720045ED21 /* Cw20BalanceRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20BalanceRes.swift; sourceTree = "<group>"; };
 		04F4061529ED112100CD88E4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -824,6 +806,9 @@
 		04FA744D2A9D97A0001A2830 /* Pincode.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pincode.storyboard; sourceTree = "<group>"; };
 		04FA744E2A9D97A0001A2830 /* PincodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PincodeVC.swift; sourceTree = "<group>"; };
 		04FA744F2A9D97A0001A2830 /* PincodeAlphabetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PincodeAlphabetVC.swift; sourceTree = "<group>"; };
+		04FA74602A9F2BEB001A2830 /* TextInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
+		04FA74632A9F5833001A2830 /* CreateNameVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateNameVC.xib; sourceTree = "<group>"; };
+		04FA74642A9F5833001A2830 /* CreateNameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNameVC.swift; sourceTree = "<group>"; };
 		151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingReq.swift; sourceTree = "<group>"; };
 		151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingRes.swift; sourceTree = "<group>"; };
 		1577DAC729B9F07800C360EC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -1230,6 +1215,12 @@
 				0443B8A1285C7F050027A6B9 /* Chain.xcassets */,
 				E16D9B182248C4880019B7BB /* Assets.xcassets */,
 				E122DC622A8CA052006D1E7B /* Resources.xcassets */,
+				E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */,
+				E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */,
+				E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */,
+				04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */,
+				04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */,
+				28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1245,22 +1236,7 @@
 			path = Chains;
 			sourceTree = "<group>";
 		};
-		04E25D29276F23C5009B39BA /* Icons */ = {
-			isa = PBXGroup;
-			children = (
-				04877303277C809200D9E201 /* new2022.png */,
-				048772FE277C6E0700D9E201 /* new2022@1x.png */,
-				04E25D2D276F23D9009B39BA /* new2022@2x.png */,
-				04E25D2B276F23D9009B39BA /* new2022@3x.png */,
-				04877302277C809200D9E201 /* xmas.png */,
-				048772FF277C6E0700D9E201 /* xmas@1x.png */,
-				04E25D2C276F23D9009B39BA /* xmas@2x.png */,
-				04E25D2A276F23D9009B39BA /* xmas@3x.png */,
-			);
-			path = Icons;
-			sourceTree = "<group>";
-		};
-		04FA744A2A9D9735001A2830 /*  Pincode */ = {
+		04FA744A2A9D9735001A2830 /* Pincode */ = {
 			isa = PBXGroup;
 			children = (
 				04FA744D2A9D97A0001A2830 /* Pincode.storyboard */,
@@ -1269,7 +1245,16 @@
 				04FA744C2A9D97A0001A2830 /* PincodeDecimalVC.swift */,
 				04FA744F2A9D97A0001A2830 /* PincodeAlphabetVC.swift */,
 			);
-			path = " Pincode";
+			path = Pincode;
+			sourceTree = "<group>";
+		};
+		04FA745F2A9F0AA5001A2830 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				04FA74642A9F5833001A2830 /* CreateNameVC.swift */,
+				04FA74632A9F5833001A2830 /* CreateNameVC.xib */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		1D72712946482FD8BAF942D7 /* Frameworks */ = {
@@ -1303,19 +1288,6 @@
 				E122DA2F2A8A4671006D1E7B /* Cosmos */,
 			);
 			path = ProtoBuff;
-			sourceTree = "<group>";
-		};
-		28F8EFA3286EC19700162FC1 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */,
-				E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */,
-				E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */,
-				04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */,
-				04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */,
-				28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		74DE208134C7AE8A99805D94 /* Pods */ = {
@@ -1564,6 +1536,7 @@
 		E159805E2A722CEA0032892B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04FA74602A9F2BEB001A2830 /* TextInput.swift */,
 				E159805F2A722CFF0032892B /* CardView.swift */,
 				04CB91322A910BDC00375354 /* CardViewCell.swift */,
 				E14E29792A99C2CA00939AD2 /* BaseButton.swift */,
@@ -1632,8 +1605,6 @@
 				E15980562A6F5EDC0032892B /* UI */,
 				04D279E82A67C95500AF046A /* Chains */,
 				04D279E42A66E30B00AF046A /* Resource */,
-				28F8EFA3286EC19700162FC1 /* Fonts */,
-				04E25D29276F23C5009B39BA /* Icons */,
 				E1A82DE622448E800097CAEE /* Utils */,
 				E1A82DCF224220810097CAEE /* Dao */,
 				E1945E3B222E7DF600A1436F /* Crypto */,
@@ -1670,7 +1641,8 @@
 		E1945E3A222E7DD800A1436F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				04FA744A2A9D9735001A2830 /*  Pincode */,
+				04FA745F2A9F0AA5001A2830 /* Setting */,
+				04FA744A2A9D9735001A2830 /* Pincode */,
 				E15980A12A83AAF00032892B /* Main */,
 				E16D9B1122489AC20019B7BB /* Init */,
 			);
@@ -1886,9 +1858,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18FFB674281AF533004E65BB /* new2022@3x.png in Resources */,
 				E10EB59A2A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
-				18FFB683281AF533004E65BB /* xmas@2x.png in Resources */,
 				0443B89928589B570027A6B9 /* Color.xcassets in Resources */,
 				04A116F228F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
 				04D279E72A66E32A00AF046A /* loading.json in Resources */,
@@ -1901,23 +1871,17 @@
 				04527DC22A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
 				E122DC6A2A8DBD3B006D1E7B /* BaseHeader.xib in Resources */,
 				E1E0DBC92A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
-				18FFB6C3281AF533004E65BB /* new2022@1x.png in Resources */,
 				18FFB6E2281AF533004E65BB /* Assets.xcassets in Resources */,
 				E14E29782A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
 				04527DBC2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				E15980912A83A96E0032892B /* bg6.png in Resources */,
 				1809C35229D16C80008884C1 /* injectScript.js in Resources */,
-				18FFB6ED281AF533004E65BB /* xmas.png in Resources */,
-				18FFB71D281AF533004E65BB /* xmas@1x.png in Resources */,
 				04F4061829ED119800CD88E4 /* Init.storyboard in Resources */,
 				E15980952A83A96E0032892B /* bg7.png in Resources */,
-				18FFB74B281AF533004E65BB /* new2022.png in Resources */,
-				18FFB752281AF533004E65BB /* xmas@3x.png in Resources */,
 				18F4EAD22A4DA0A500CFBE2B /* ApiKey.plist in Resources */,
 				187447012930942400849EE4 /* ApiKeyDev.plist in Resources */,
 				E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				04BA9BD82A985771003E2404 /* ChainSelectVC.xib in Resources */,
-				18FFB77D281AF533004E65BB /* new2022@2x.png in Resources */,
 				04FA74552A9D97A0001A2830 /* Pincode.storyboard in Resources */,
 				E15980992A83A96E0032892B /* bg5.png in Resources */,
 				E15980932A83A96E0032892B /* bg2.png in Resources */,
@@ -1927,6 +1891,7 @@
 				E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				E1D5382A2A96644F00FB0403 /* loading2.json in Resources */,
 				E15980972A83A96E0032892B /* bg0.png in Resources */,
+				04FA74662A9F5833001A2830 /* CreateNameVC.xib in Resources */,
 				E159808B2A83A96E0032892B /* bg3.png in Resources */,
 				E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */,
 				18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */,
@@ -1938,41 +1903,34 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04E25D2F276F23D9009B39BA /* new2022@3x.png in Resources */,
-				04E25D30276F23D9009B39BA /* xmas@2x.png in Resources */,
 				04A116F128F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
 				E122DC692A8DBD3B006D1E7B /* BaseHeader.xib in Resources */,
 				E15980922A83A96E0032892B /* bg2.png in Resources */,
 				1809C35129D16C80008884C1 /* injectScript.js in Resources */,
 				28F8EFB1286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
-				04877300277C6E0700D9E201 /* new2022@1x.png in Resources */,
 				E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */,
 				1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */,
 				E1E0DBC82A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
 				04FA74542A9D97A0001A2830 /* Pincode.storyboard in Resources */,
-				04877304277C809200D9E201 /* xmas.png in Resources */,
 				E1D538292A96644F00FB0403 /* loading2.json in Resources */,
 				04172B9329F7AE4000D6279C /* Roboto-Bold.ttf in Resources */,
 				04172B9529F7AE4000D6279C /* Roboto-Medium.ttf in Resources */,
 				E15980982A83A96E0032892B /* bg5.png in Resources */,
 				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
-				04877301277C6E0700D9E201 /* xmas@1x.png in Resources */,
 				04527DC12A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
-				04877305277C809200D9E201 /* new2022.png in Resources */,
 				E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				E15980942A83A96E0032892B /* bg7.png in Resources */,
-				04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */,
 				187446FF2930940F00849EE4 /* ApiKey.plist in Resources */,
 				E15980962A83A96E0032892B /* bg0.png in Resources */,
 				E159808A2A83A96E0032892B /* bg3.png in Resources */,
 				04D279E62A66E32A00AF046A /* loading.json in Resources */,
 				E15980A32A83AB030032892B /* Main.storyboard in Resources */,
 				04BA9BD72A985771003E2404 /* ChainSelectVC.xib in Resources */,
+				04FA74652A9F5833001A2830 /* CreateNameVC.xib in Resources */,
 				E10EB5902A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				0443B8A2285C7F050027A6B9 /* Chain.xcassets in Resources */,
 				E122DC632A8CA052006D1E7B /* Resources.xcassets in Resources */,
 				E10EB59F2A86217A0054A9AF /* bbbb.png in Resources */,
-				04E25D31276F23D9009B39BA /* new2022@2x.png in Resources */,
 				E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */,
 				E159808C2A83A96E0032892B /* bg1.png in Resources */,
@@ -2230,6 +2188,7 @@
 				04FA74512A9D97A0001A2830 /* PincodeInputVC.swift in Sources */,
 				04FA74532A9D97A0001A2830 /* PincodeDecimalVC.swift in Sources */,
 				E122DBD62A8A468E006D1E7B /* cosmos_upgrade_v1beta1_query.pb.swift in Sources */,
+				04FA74622A9F2BEB001A2830 /* TextInput.swift in Sources */,
 				E122DC3C2A8A468E006D1E7B /* cosmos_auth_v1beta1_query.grpc.swift in Sources */,
 				E122DB3E2A8A468D006D1E7B /* cosmos_mint_module_v1_module.pb.swift in Sources */,
 				E122DB642A8A468D006D1E7B /* cosmos_circuit_v1_query.pb.swift in Sources */,
@@ -2293,6 +2252,7 @@
 				18FFB590281AF533004E65BB /* BnbToken.swift in Sources */,
 				E122DB1A2A8A468D006D1E7B /* cosmos_distribution_v1beta1_query.grpc.swift in Sources */,
 				E122DC4D2A8A4712006D1E7B /* tendermint_p2p_types.pb.swift in Sources */,
+				04FA74682A9F5833001A2830 /* CreateNameVC.swift in Sources */,
 				E122DBD22A8A468E006D1E7B /* cosmos_circuit_v1_types.pb.swift in Sources */,
 				E122DBA42A8A468D006D1E7B /* cosmos_store_v1beta1_listening.pb.swift in Sources */,
 				E122DB982A8A468D006D1E7B /* cosmos_authz_module_v1_module.pb.swift in Sources */,
@@ -2539,6 +2499,7 @@
 				04FA74502A9D97A0001A2830 /* PincodeInputVC.swift in Sources */,
 				04FA74522A9D97A0001A2830 /* PincodeDecimalVC.swift in Sources */,
 				E122DBD52A8A468E006D1E7B /* cosmos_upgrade_v1beta1_query.pb.swift in Sources */,
+				04FA74612A9F2BEB001A2830 /* TextInput.swift in Sources */,
 				E122DC3B2A8A468E006D1E7B /* cosmos_auth_v1beta1_query.grpc.swift in Sources */,
 				E122DB3D2A8A468D006D1E7B /* cosmos_mint_module_v1_module.pb.swift in Sources */,
 				E122DB632A8A468D006D1E7B /* cosmos_circuit_v1_query.pb.swift in Sources */,
@@ -2602,6 +2563,7 @@
 				18D4C19528C704B8003F230A /* WalletConnectManager.swift in Sources */,
 				E122DB192A8A468D006D1E7B /* cosmos_distribution_v1beta1_query.grpc.swift in Sources */,
 				E122DC4C2A8A4712006D1E7B /* tendermint_p2p_types.pb.swift in Sources */,
+				04FA74672A9F5833001A2830 /* CreateNameVC.swift in Sources */,
 				E122DBD12A8A468E006D1E7B /* cosmos_circuit_v1_types.pb.swift in Sources */,
 				E122DBA32A8A468D006D1E7B /* cosmos_store_v1beta1_listening.pb.swift in Sources */,
 				E122DB972A8A468D006D1E7B /* cosmos_authz_module_v1_module.pb.swift in Sources */,

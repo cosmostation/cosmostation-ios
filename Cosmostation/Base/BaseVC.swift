@@ -8,6 +8,7 @@
 
 import UIKit
 import Lottie
+import Toast
 import SafariServices
 
 public func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
@@ -20,11 +21,14 @@ public func print(_ items: Any..., separator: String = " ", terminator: String =
 class BaseVC: UIViewController {
     
     var baseAccount: BaseAccount!
-//    var baseChain: BaseChain!
-    
     var waitAlert: UIAlertController?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setLocalizedString()
+    }
     
+    func setLocalizedString() { }
     
     public func showWait() {
         waitAlert = UIAlertController(title: "", message: "\n\n\n\n", preferredStyle: .alert)
@@ -73,5 +77,15 @@ class BaseVC: UIViewController {
         button.titleLabel?.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)!
         button.sizeToFit()
         return UIBarButtonItem(customView: button)
+    }
+    
+    func onShowToast(_ text: String, onView targetView: UIView? = nil) {
+        var style = ToastStyle()
+        style.backgroundColor = UIColor.gray
+        if let targetView = targetView {
+            targetView.makeToast(text, duration: 2.0, position: .bottom, style: style)
+        } else {
+            view.makeToast(text, duration: 2.0, position: .bottom, style: style)
+        }
     }
 }

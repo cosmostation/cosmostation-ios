@@ -23,7 +23,7 @@ class BaseButton: UIButton {
     func setup() {
         self.titleLabel?.font = .fontSize16Bold
         self.layer.cornerRadius = 8
-        self.backgroundColor = .primaryColor
+        self.backgroundColor = .colorPrimary
         self.tintColor = .white
         self.setTitleColor(.white, for: .normal)
     }

@@ -9,13 +9,16 @@
 import UIKit
 
 extension UIColor {
-    static var primaryColor: UIColor {
+    static var colorPrimary: UIColor {
         UIColor(named: "_primary")!
     }
-    static var fontColor01: UIColor {
-        UIColor(named: "_font01")!
+    static var color01: UIColor {
+        UIColor(named: "_color01")!
     }
-    static var fontColor02: UIColor {
-        UIColor(named: "_font02")!
+    static var color02: UIColor {
+        UIColor(named: "_color02")!
+    }
+    static var color03: UIColor {
+        UIColor(named: "_color03")!
     }
 }

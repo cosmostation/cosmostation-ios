@@ -233,6 +233,7 @@
 "str_incentive_amount" = "インセンティブ数量";
 "str_no_result" = "検索結果がありません";
 "str_smart_contract" = "スマートな契約です";
+"str_account_name" = "アカウント名";
 
 
 "btn_delegate" = "  委任する";
@@ -703,6 +704,7 @@
 "title_wallet_detail" = "Wallet Detail";
 "title_check_mnemonics" = "Check Mnemonics";
 "title_check_privatekey" = "Check Private Key";
+"title_set_account_name" = "Set Account Name";
 "title_create" = "Create Wallet";
 "title_watch_wallet" = "Add Watch Wallet";
 "title_restore_privatekey" = "Restore With PrivateKey";
@@ -937,6 +939,8 @@
 "error_no_staking" = "このチェーンはステーキングをサポートしていません。";
 "error_not_dao_member" = "あなたはこのDAOのメンバーではありません。";
 "error_can_not_revote" = "再投票できません。";
+"error_account_name" = "アカウント名を入力してください。";
+"error_alreay_exist_account_name" = "すでに存在する名前です。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

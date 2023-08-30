@@ -39,7 +39,7 @@
                                     <constraint firstAttribute="height" constant="14" id="yhz-e4-ven"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                                <color key="textColor" name="_font01"/>
+                                <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Iq-uR-UZX">
@@ -48,7 +48,7 @@
                                     <constraint firstAttribute="height" constant="10" id="JDd-sY-lGl"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
-                                <color key="textColor" name="_font01"/>
+                                <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBh-eE-Suk">
@@ -57,7 +57,7 @@
                                     <constraint firstAttribute="height" constant="12" id="dV6-Ub-Vyu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                                <color key="textColor" name="_font01"/>
+                                <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XzW-fd-XKQ">
@@ -84,7 +84,7 @@
                                     <constraint firstAttribute="height" constant="16" id="Oag-Vr-nRC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
-                                <color key="textColor" name="_font01"/>
+                                <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7eS-c5-c7d">
@@ -93,7 +93,7 @@
                                     <constraint firstAttribute="height" constant="10" id="uvQ-Uo-HFw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
-                                <color key="textColor" name="_font02"/>
+                                <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWP-3U-xJz">
@@ -102,7 +102,7 @@
                                     <constraint firstAttribute="height" constant="12" id="j3Y-We-tR9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                                <color key="textColor" name="_font02"/>
+                                <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXx-If-eqS">
@@ -121,13 +121,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9C-G8-y2w">
                                                 <rect key="frame" x="0.0" y="-0.33333333333334281" width="54" height="15.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                                                <color key="textColor" name="_font01"/>
+                                                <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PO5-pf-qVZ">
                                                 <rect key="frame" x="399" y="-1.3333333333333428" width="29" height="17.666666666666668"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                                                <color key="textColor" name="_font01"/>
+                                                <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -146,13 +146,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vesting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OT5-EQ-KkH">
                                                 <rect key="frame" x="0.0" y="-0.33333333333334281" width="43.333333333333336" height="15.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                                                <color key="textColor" name="_font01"/>
+                                                <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLx-qW-ZXD">
                                                 <rect key="frame" x="399" y="-1.3333333333333428" width="29" height="17.666666666666668"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                                                <color key="textColor" name="_font01"/>
+                                                <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -171,13 +171,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Staked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iK8-mJ-2E2">
                                                 <rect key="frame" x="0.0" y="0.33333333333334281" width="40.666666666666664" height="14"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                                                <color key="textColor" name="_font01"/>
+                                                <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1VO-fN-Q1X">
                                                 <rect key="frame" x="399" y="-0.66666666666665719" width="29" height="16.333333333333332"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                                                <color key="textColor" name="_font01"/>
+                                                <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -196,13 +196,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unstaking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIZ-Rm-3Ml">
                                                 <rect key="frame" x="0.0" y="-0.33333333333334281" width="59.666666666666664" height="15.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                                                <color key="textColor" name="_font01"/>
+                                                <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33Q-oJ-LnP">
                                                 <rect key="frame" x="399" y="-1.3333333333333428" width="29" height="17.666666666666668"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                                                <color key="textColor" name="_font01"/>
+                                                <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -221,13 +221,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward +3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4T-nz-xPc">
                                                 <rect key="frame" x="0.0" y="-0.33333333333334281" width="62.666666666666664" height="15.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                                                <color key="textColor" name="_font01"/>
+                                                <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBH-LP-7VW">
                                                 <rect key="frame" x="399" y="-1.3333333333333428" width="29" height="17.666666666666668"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                                                <color key="textColor" name="_font01"/>
+                                                <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -313,10 +313,10 @@
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="_font01">
+        <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="_font02">
+        <namedColor name="_color02">
             <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_voteYes">

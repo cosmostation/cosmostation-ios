@@ -109,10 +109,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="l7m-v0-lsb">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" name="_font05"/>
-                        <textAttributes key="titleTextAttributes">
-                            <offsetWrapper key="textShadowOffset" horizontal="1000" vertical="0.0"/>
-                        </textAttributes>
+                        <color key="tintColor" name="_color01"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -128,8 +125,8 @@
         <image name="bg_intro" width="375" height="812"/>
         <image name="cosmostaion" width="236" height="41"/>
         <image name="cosmostationLogo" width="192" height="46"/>
-        <namedColor name="_font05">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

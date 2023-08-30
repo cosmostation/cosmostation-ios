@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateNameVC" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="accountNameTextField" destination="q8V-Rs-FQh" id="Z4W-Ve-dgQ"/>
+                <outlet property="nextBtn" destination="chW-MQ-ddi" id="dfQ-3P-cPs"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q8V-Rs-FQh" customClass="MDCOutlinedTextField">
+                    <rect key="frame" x="8" y="71" width="374" height="54"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" name="_color01"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="kJc-Nl-xH3"/>
+                    </constraints>
+                    <color key="textColor" name="_color01"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chW-MQ-ddi" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="754" width="374" height="48"/>
+                    <color key="backgroundColor" name="_primary"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="SCP-0h-qbx"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Next">
+                        <color key="titleColor" name="_color01"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickNext:" destination="-1" eventType="touchUpInside" id="bhH-gt-pYr"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" name="_primary"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="chW-MQ-ddi" secondAttribute="bottom" constant="42" id="Q6S-Nw-y8G"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="chW-MQ-ddi" secondAttribute="trailing" constant="8" id="QGd-5S-eiv"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="q8V-Rs-FQh" secondAttribute="trailing" constant="8" id="aNI-3J-NEI"/>
+                <constraint firstItem="q8V-Rs-FQh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="qgf-Bz-DDc"/>
+                <constraint firstItem="q8V-Rs-FQh" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="24" id="tEu-N3-sYF"/>
+                <constraint firstItem="chW-MQ-ddi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="tfI-BV-S7P"/>
+            </constraints>
+            <point key="canvasLocation" x="140" y="20.616113744075829"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.33700001239776611" green="0.016000000759959221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

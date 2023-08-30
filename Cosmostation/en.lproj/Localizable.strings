@@ -233,6 +233,7 @@
 "str_incentive_amount" = "Incentive Reward";
 "str_no_result" = "No Result";
 "str_smart_contract" = "Smart Contract";
+"str_account_name" = "Account Name";
 
 
 "btn_delegate" = "  Delegate";
@@ -703,6 +704,7 @@
 "title_wallet_detail" = "Wallet Detail";
 "title_check_mnemonics" = "Check Mnemonics";
 "title_check_privatekey" = "Check Private Key";
+"title_set_account_name" = "Set Account Name";
 "title_create" = "Create Wallet";
 "title_watch_wallet" = "Add Watch Wallet";
 "title_restore_privatekey" = "Restore With PrivateKey";
@@ -937,6 +939,8 @@
 "error_no_staking" = "The chain does not support staking.";
 "error_not_dao_member" = "You are not this Dao member.";
 "error_can_not_revote" = "Can not revote.";
+"error_account_name" = "Please insert account name.";
+"error_alreay_exist_account_name" = "Already exist name.";
 
 
 "alert_title_no_private_key" = "No Private Key";

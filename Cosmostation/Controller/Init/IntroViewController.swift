@@ -18,6 +18,7 @@ class IntroViewController: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.view.addBackground()
         
         print("IntroViewController viewDidLoad")
         onUpdateMigration()
@@ -57,10 +58,10 @@ class IntroViewController: BaseVC {
             BaseData.instance.baseAccount = account
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
-                let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.window?.rootViewController = mainTabVC
-                self.present(mainTabVC, animated: true, completion: nil)
+//                let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
+//                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//                appDelegate.window?.rootViewController = mainTabVC
+//                self.present(mainTabVC, animated: true, completion: nil)
                 
 //                let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
 //                self.navigationController?.pushViewController(chainSelectVC, animated: true)
@@ -69,6 +70,10 @@ class IntroViewController: BaseVC {
 //                pincodeVC.lockType = .ForDataCheck
 //                pincodeVC.modalPresentationStyle = .fullScreen
 //                self.present(pincodeVC, animated: true)
+                
+                let createNameVC = CreateNameVC(nibName: "CreateNameVC", bundle: nil)
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(createNameVC, animated: true)
             })
         }
     }
