@@ -93,6 +93,7 @@
 "str_only_address" = "観察用ウォーレット";
 "str_address" = "アドレス";
 "str_mnemonic" = "ニモニック";
+"str_mnemonic_phrases" = "ニーモニック（回復文字）";
 "str_chainid" = "チェーン ID";
 "str_imported_date" = "登録日付";
 "str_imported_state" = "登録状態";
@@ -234,6 +235,9 @@
 "str_no_result" = "検索結果がありません";
 "str_smart_contract" = "スマートな契約です";
 "str_account_name" = "アカウント名";
+"str_privateKey" = "秘密鍵";
+"str_create_account" = "アカウント作成";
+"str_warnning" = "警告";
 
 
 "btn_delegate" = "  委任する";
@@ -290,6 +294,8 @@
 "msg_okc_deprecated_msg" = "そのアドレスはチェーンでそれ以上サポートしません。\n円滑な使用のために公式アドレスを生成して資産を異伝することを強くお勧めします。\n（設定>ウォレット追加メニューから公式アドレスを追加できます。）";
 "msg_no_supported_chain" = "このネットワークはもう機能しません。\n\nCosmostationウォレットはアーカイブされたデータのみを表示していますのでご注意ください。";
 "msg_search_chain" = "チェーンやトークンを検索してください。";
+"msg_mnemonic_wanning" = "このフレーズがアカウントを回復する唯一の方法です。 誰とも共有しないでください。 このニーモニックを失うと、資産の損失につながる可能性があります。";
+"msg_tap_to_mnemonic_copy" = "ニーモニックフレーズボックスをタップしてコピーします。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -443,7 +449,14 @@
 "add_address_msg" = "観察モードに復旧単語入力なしでウォーレットの状態が確認できます。\n今後の設定で復旧単語を入力すると、転送などの活動が可能です。";
 "add_address_hint" = "住所を入力してください。";
 
-"create_wallet" = "ウォーレット生成";
+
+"create_wallet" = "新しいアカウントを作成する";
+"create_wallet_msg" = "一連のニーモニックを使用してアカウントを作成する";
+"import_wallet" = "財布の復元";
+"import_mnemonic" = "ニーモニックに復元";
+"import_mnemonic_msg" = "ニーモニックを使用してアカウントを復元する";
+"import_private_key" = "秘密鍵で復元";
+"import_private_key_msg" = "秘密キーを使用してアカウントを復元する";
 "show_mnemonics" = "ニーモニックを見る";
 "prepare" = "準備中...";
 "address_copied" = "クリップボードにコピーしました";
@@ -687,7 +700,6 @@
 "ok" = "OK";
 "confirm" = "確認";
 "settings" = "設定";
-"warnning" = "警告";
 "continue" = "次";
 "wait" = "待って";
 "sign" = "サイン";
@@ -705,7 +717,7 @@
 "title_check_mnemonics" = "Check Mnemonics";
 "title_check_privatekey" = "Check Private Key";
 "title_set_account_name" = "Set Account Name";
-"title_create" = "Create Wallet";
+"title_create_account" = "Create Account";
 "title_watch_wallet" = "Add Watch Wallet";
 "title_restore_privatekey" = "Restore With PrivateKey";
 "title_restore" = "Restore With Mnemonic";
@@ -863,7 +875,7 @@
 "error_only_deposit_can_vote" = "ステーキング金額がありません。先にステーキングをしてください。";
 "error_min_1_validator" = "1個以上の検証人を選択してください。";
 "error_max_30_validator" = "最大 30 名の検証人が選択できます。";
-"error_invalid_private_Key" = "無効なプライベートキーです。";
+"error_invalid_private_Key" = "無効な秘密鍵です。";
 "error_simul_error" = "このTx は実行できません。";
 "error_reward_address_changed_title" = "利子アドレス変更";
 "error_reward_address_changed_msg" = "利子支給アドレスが変更されたアカウントです。コンパウンディング機能を使用できません。";

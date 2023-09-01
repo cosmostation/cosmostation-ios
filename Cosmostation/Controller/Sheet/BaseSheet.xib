@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaseSheet" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="sheetTableView" destination="y3H-2O-YKP" id="VMW-qX-frw"/>
+                <outlet property="sheetTitle" destination="fQz-pl-DzJ" id="21m-mP-QUY"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sheet Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQz-pl-DzJ">
+                    <rect key="frame" x="16" y="79" width="84.666666666666671" height="21.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <color key="textColor" name="_color01"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6T-Wd-Q5b">
+                    <rect key="frame" x="0.0" y="112.33333333333333" width="393" height="0.6666666666666714"/>
+                    <color key="backgroundColor" name="_divider"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="K1e-c9-jcx"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="y3H-2O-YKP">
+                    <rect key="frame" x="0.0" y="119" width="393" height="733"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="_colorBg"/>
+            <color key="tintColor" name="_primary"/>
+            <constraints>
+                <constraint firstItem="O6T-Wd-Q5b" firstAttribute="top" secondItem="fQz-pl-DzJ" secondAttribute="bottom" constant="12" id="0Kn-1d-5Et"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="y3H-2O-YKP" secondAttribute="trailing" id="H5B-W7-DJI"/>
+                <constraint firstAttribute="bottom" secondItem="y3H-2O-YKP" secondAttribute="bottom" id="It2-8q-kwj"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="O6T-Wd-Q5b" secondAttribute="trailing" id="ShF-fI-uEM"/>
+                <constraint firstItem="y3H-2O-YKP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VqD-RM-Zhg"/>
+                <constraint firstItem="y3H-2O-YKP" firstAttribute="top" secondItem="O6T-Wd-Q5b" secondAttribute="bottom" constant="6" id="c80-fa-xcu"/>
+                <constraint firstItem="O6T-Wd-Q5b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fbg-WD-fKn"/>
+                <constraint firstItem="fQz-pl-DzJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="lfK-98-Ddr"/>
+                <constraint firstItem="fQz-pl-DzJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="waU-4s-JD9"/>
+            </constraints>
+            <point key="canvasLocation" x="139.69465648854961" y="20.422535211267608"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorBg">
+            <color red="0.16862745098039217" green="0.16862745098039217" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_divider">
+            <color red="0.99999600649999998" green="1" blue="1" alpha="0.20232305463576158" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.33700001239776611" green="0.016000000759959221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

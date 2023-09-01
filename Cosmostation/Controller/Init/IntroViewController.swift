@@ -11,7 +11,7 @@ import Alamofire
 import Firebase
 import SwiftKeychainWrapper
 
-class IntroViewController: BaseVC {
+class IntroViewController: BaseVC, BaseSheetDelegate {
     
     @IBOutlet weak var bottomLogoView: UIView!
     @IBOutlet weak var bottomControlView: UIView!
@@ -53,30 +53,85 @@ class IntroViewController: BaseVC {
     
     func onStartInit() {
         print("onStartInit")
-        if let account = BaseData.instance.getLastAccount() {
-            print("account ", account.name)
-            BaseData.instance.baseAccount = account
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+        
+//        if let account = BaseData.instance.getLastAccount() {
+//            print("account ", account.name)
+//            BaseData.instance.baseAccount = account
+//
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
 //                let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
 //                let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //                appDelegate.window?.rootViewController = mainTabVC
 //                self.present(mainTabVC, animated: true, completion: nil)
+//
+////                let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
+////                self.navigationController?.pushViewController(chainSelectVC, animated: true)
+//
+////                let pincodeVC = UIStoryboard(name: "Pincode", bundle: nil).instantiateViewController(withIdentifier: "PincodeVC") as! PincodeVC
+////                pincodeVC.lockType = .ForDataCheck
+////                pincodeVC.modalPresentationStyle = .fullScreen
+////                self.present(pincodeVC, animated: true)
+//
+////                let createNameVC = CreateNameVC(nibName: "CreateNameVC", bundle: nil)
+////                self.navigationItem.title = ""
+////                self.navigationController?.pushViewController(createNameVC, animated: true)
+//            })
+//
+//        } else {
+//            UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut, animations: {
+//                self.bottomLogoView.alpha = 0.0
+//            }, completion: { (finished) -> Void in
+//                UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
+//                    self.bottomControlView.alpha = 1.0
+//                }, completion: nil)
+//            })
+//        }
+//        UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut, animations: {
+//            self.bottomLogoView.alpha = 0.0
+//        }, completion: { (finished) -> Void in
+//            UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
+//                self.bottomControlView.alpha = 1.0
+//            }, completion: nil)
+//        })
+//        let CreateMnemonicVC = CreateMnemonicVC(nibName: "CreateMnemonicVC", bundle: nil)
+//        self.navigationItem.title = ""
+//        self.navigationController?.pushViewController(CreateMnemonicVC, animated: true)
+    }
+    
+    
+    @IBAction func onClickCreate(_ sender: UIButton) {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.sheetDelegate = self
+        baseSheet.sheetType = .SelectNewAccount
+        onStartSheet(baseSheet)
+    }
+    
+    func onSelectSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+        if (sheetType == .SelectNewAccount) {
+            if (result.position == 0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    self.onNextVc(.create)
+                });
                 
-//                let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
-//                self.navigationController?.pushViewController(chainSelectVC, animated: true)
+            } else if (result.position == 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    self.onNextVc(.mnemonc)
+                });
                 
-//                let pincodeVC = UIStoryboard(name: "Pincode", bundle: nil).instantiateViewController(withIdentifier: "PincodeVC") as! PincodeVC
-//                pincodeVC.lockType = .ForDataCheck
-//                pincodeVC.modalPresentationStyle = .fullScreen
-//                self.present(pincodeVC, animated: true)
-                
-                let createNameVC = CreateNameVC(nibName: "CreateNameVC", bundle: nil)
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(createNameVC, animated: true)
-            })
+            } else if (result.position == 2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    self.onNextVc(.privateKey)
+                });
+            }
         }
     }
+    
+    func onNextVc(_ type: NewAccountType) {
+        let createNameVC = CreateNameVC(nibName: "CreateNameVC", bundle: nil)
+        createNameVC.newAccountType = type
+        self.navigationController?.pushViewController(createNameVC, animated: true)
+    }
+    
 }
 
 extension IntroViewController {

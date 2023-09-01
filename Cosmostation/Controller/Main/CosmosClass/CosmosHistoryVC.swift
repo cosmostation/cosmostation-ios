@@ -28,9 +28,7 @@ class CosmosHistoryVC: BaseVC {
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
         tableView.rowHeight = UITableView.automaticDimension
-        if #available(iOS 15.0, *) {
-            tableView.sectionHeaderTopPadding = 0.0
-        }
+        tableView.sectionHeaderTopPadding = 0.0
     }
     
     override func viewWillAppear(_ animated: Bool) {

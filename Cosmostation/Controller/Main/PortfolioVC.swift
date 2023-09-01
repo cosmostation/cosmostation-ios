@@ -28,9 +28,7 @@ class PortfolioVC: BaseVC {
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "PortfolioCell", bundle: nil), forCellReuseIdentifier: "PortfolioCell")
         tableView.rowHeight = UITableView.automaticDimension
-        if #available(iOS 15.0, *) {
-            tableView.sectionHeaderTopPadding = 0.0
-        }
+        tableView.sectionHeaderTopPadding = 0.0
         initData()
     }
     

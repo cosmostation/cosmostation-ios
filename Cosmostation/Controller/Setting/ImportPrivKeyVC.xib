@@ -14,10 +14,10 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateNameVC" customModule="Cosmostation" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImportPrivKeyVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
-                <outlet property="accountNameTextField" destination="q8V-Rs-FQh" id="Z4W-Ve-dgQ"/>
-                <outlet property="nextBtn" destination="chW-MQ-ddi" id="dfQ-3P-cPs"/>
+                <outlet property="nextBtn" destination="Ot4-dt-wqp" id="iPE-R9-ch7"/>
+                <outlet property="privKeyTextArea" destination="9It-RD-gfD" id="vvE-xM-Y2J"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,22 +26,19 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q8V-Rs-FQh" customClass="MDCOutlinedTextField">
-                    <rect key="frame" x="8" y="71" width="374" height="54"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9It-RD-gfD" customClass="MDCOutlinedTextArea">
+                    <rect key="frame" x="8" y="71" width="374" height="120"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_color01"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="54" id="kJc-Nl-xH3"/>
+                        <constraint firstAttribute="height" constant="120" id="Zhc-pE-1Vb"/>
                     </constraints>
-                    <color key="textColor" name="_color01"/>
-                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chW-MQ-ddi" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ot4-dt-wqp" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="8" y="752" width="374" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="54" id="SCP-0h-qbx"/>
+                        <constraint firstAttribute="height" constant="54" id="3tz-DV-dHf"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -50,7 +47,7 @@
                         <color key="titleColor" name="_color01"/>
                     </state>
                     <connections>
-                        <action selector="onClickNext:" destination="-1" eventType="touchUpInside" id="bhH-gt-pYr"/>
+                        <action selector="onClickNext:" destination="-1" eventType="touchUpInside" id="esa-oR-ZES"/>
                     </connections>
                 </button>
             </subviews>
@@ -58,12 +55,12 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="chW-MQ-ddi" secondAttribute="bottom" constant="38" id="Q6S-Nw-y8G"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="chW-MQ-ddi" secondAttribute="trailing" constant="8" id="QGd-5S-eiv"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="q8V-Rs-FQh" secondAttribute="trailing" constant="8" id="aNI-3J-NEI"/>
-                <constraint firstItem="q8V-Rs-FQh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="qgf-Bz-DDc"/>
-                <constraint firstItem="q8V-Rs-FQh" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="24" id="tEu-N3-sYF"/>
-                <constraint firstItem="chW-MQ-ddi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="tfI-BV-S7P"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9It-RD-gfD" secondAttribute="trailing" constant="8" id="ADe-Bx-8Ua"/>
+                <constraint firstItem="9It-RD-gfD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="EkU-K8-AKc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ot4-dt-wqp" secondAttribute="trailing" constant="8" id="IbQ-mK-sx3"/>
+                <constraint firstItem="Ot4-dt-wqp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="Wj3-BX-YHd"/>
+                <constraint firstAttribute="bottom" secondItem="Ot4-dt-wqp" secondAttribute="bottom" constant="38" id="Xot-0I-Y89"/>
+                <constraint firstItem="9It-RD-gfD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="24" id="p5o-DQ-36d"/>
             </constraints>
             <point key="canvasLocation" x="140" y="20.616113744075829"/>
         </view>

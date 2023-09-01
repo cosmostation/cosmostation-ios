@@ -28,9 +28,7 @@ class CosmosAssetVC: BaseVC {
         tableView.register(UINib(nibName: "AssetCosmosClassCell", bundle: nil), forCellReuseIdentifier: "AssetCosmosClassCell")
         tableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
         tableView.rowHeight = UITableView.automaticDimension
-        if #available(iOS 15.0, *) {
-            tableView.sectionHeaderTopPadding = 0.0
-        }
+        tableView.sectionHeaderTopPadding = 0.0
     }
     
     override func viewWillAppear(_ animated: Bool) {

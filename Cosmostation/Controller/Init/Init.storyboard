@@ -8,6 +8,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Intro View Controller-->
         <scene sceneID="tZD-Nf-yTD">
@@ -38,16 +43,18 @@
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lJg-IO-0Tm">
-                                <rect key="frame" x="0.0" y="674" width="390" height="120"/>
+                                <rect key="frame" x="0.0" y="686" width="390" height="120"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqM-8h-gAN">
-                                        <rect key="frame" x="16" y="70" width="358" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqM-8h-gAN" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="66" width="374" height="54"/>
+                                        <color key="backgroundColor" name="_primary"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="bHF-YG-cst"/>
+                                            <constraint firstAttribute="height" constant="54" id="bHF-YG-cst"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
-                                        <state key="normal" title="Start">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="START">
+                                            <color key="titleColor" name="_color01"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -61,16 +68,16 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="onClickCreate:" destination="Iiy-m2-uEE" eventType="touchUpInside" id="d1X-aA-XQh"/>
+                                            <action selector="onClickCreate:" destination="Iiy-m2-uEE" eventType="touchUpInside" id="YUg-Xi-gcg"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="yqM-8h-gAN" firstAttribute="leading" secondItem="lJg-IO-0Tm" secondAttribute="leading" constant="16" id="U8g-6Q-uA2"/>
+                                    <constraint firstItem="yqM-8h-gAN" firstAttribute="leading" secondItem="lJg-IO-0Tm" secondAttribute="leading" constant="8" id="U8g-6Q-uA2"/>
                                     <constraint firstAttribute="height" constant="120" id="W3c-rR-BUC"/>
                                     <constraint firstAttribute="bottom" secondItem="yqM-8h-gAN" secondAttribute="bottom" id="ag8-7c-Ziy"/>
-                                    <constraint firstAttribute="trailing" secondItem="yqM-8h-gAN" secondAttribute="trailing" constant="16" id="glc-El-udh"/>
+                                    <constraint firstAttribute="trailing" secondItem="yqM-8h-gAN" secondAttribute="trailing" constant="8" id="glc-El-udh"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -83,7 +90,7 @@
                             <constraint firstItem="vcc-qa-pnk" firstAttribute="top" secondItem="dIt-LH-x5i" secondAttribute="top" id="FGA-WU-2S4"/>
                             <constraint firstItem="lJg-IO-0Tm" firstAttribute="width" secondItem="dIt-LH-x5i" secondAttribute="width" id="Toc-m1-Zyt"/>
                             <constraint firstItem="vcc-qa-pnk" firstAttribute="leading" secondItem="vud-fA-pPm" secondAttribute="leading" id="gaJ-og-cGr"/>
-                            <constraint firstItem="vud-fA-pPm" firstAttribute="bottom" secondItem="lJg-IO-0Tm" secondAttribute="bottom" constant="16" id="h1k-fY-VhI"/>
+                            <constraint firstAttribute="bottom" secondItem="lJg-IO-0Tm" secondAttribute="bottom" constant="38" id="h1k-fY-VhI"/>
                             <constraint firstItem="x6t-zv-E8m" firstAttribute="width" secondItem="dIt-LH-x5i" secondAttribute="width" id="hbh-Pu-zNn"/>
                             <constraint firstItem="x6t-zv-E8m" firstAttribute="leading" secondItem="vud-fA-pPm" secondAttribute="leading" id="jA8-Zg-AXx"/>
                             <constraint firstItem="vud-fA-pPm" firstAttribute="trailing" secondItem="vcc-qa-pnk" secondAttribute="trailing" id="mOK-MQ-20t"/>
@@ -127,6 +134,9 @@
         <image name="cosmostationLogo" width="192" height="46"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.33700001239776611" green="0.016000000759959221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

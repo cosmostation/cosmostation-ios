@@ -462,6 +462,10 @@ extension BaseData {
         UserDefaults.standard.set(account.id, forKey: KEY_LAST_ACCOUNT)
     }
     
+    func setLastAccount(_ id: Int64) {
+        UserDefaults.standard.set(id, forKey: KEY_LAST_ACCOUNT)
+    }
+    
     func getLastAccount() -> BaseAccount? {
         let id = UserDefaults.standard.integer(forKey: KEY_LAST_ACCOUNT)
         if let account = selectAccount(Int64(id)) {

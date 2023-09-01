@@ -93,6 +93,7 @@
 "str_only_address" = "Only Address";
 "str_address" = "Address";
 "str_mnemonic" = "Mnemonic";
+"str_mnemonic_phrases" = "Mnemonic phrases";
 "str_chainid" = "Chain ID";
 "str_imported_date" = "Imported Date";
 "str_imported_state" = "Imported state";
@@ -234,6 +235,9 @@
 "str_no_result" = "No Result";
 "str_smart_contract" = "Smart Contract";
 "str_account_name" = "Account Name";
+"str_privateKey" = "Private Key";
+"str_create_account" = "Create Account";
+"str_warnning" = "Warnning";
 
 
 "btn_delegate" = "  Delegate";
@@ -290,6 +294,8 @@
 "msg_okc_deprecated_msg" = "You selected deprecated path wallet.\nFor your convenience, highly recommend using current official address type.\n\n(You can add a wallet with default Address type in [Setting] > [Manage Mnemonic / Add Wallet])";
 "msg_no_supported_chain" = "This network is no longer operational.\n\nNote that Cosmostation Wallet is showing archived data only.";
 "msg_search_chain" = "Search by Chain or Token";
+"msg_mnemonic_wanning" = "This phrase is the only way to recover your account. Do not share with anyone. Losing this mnemonics could lead to loss of your asset.";
+"msg_tap_to_mnemonic_copy" = "Tap mnemoniuc phrases box for copy.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -443,7 +449,14 @@
 "add_address_msg" = "You can watch any supported wallet address and its transaction history, however you will not be able to perform transactions with it. You can later add a mnemonic to this address to enable this functionality.";
 "add_address_hint" = "Wallet address";
 
-"create_wallet" = "Create Wallet";
+
+"create_wallet" = "Create a new account";
+"create_wallet_msg" = "Create an account with a set of mnemonics";
+"import_wallet" = "Import wallet";
+"import_mnemonic" = "Import Mnemonics";
+"import_mnemonic_msg" = "Restore an account with your mnemonics";
+"import_private_key" = "Import Private Key";
+"import_private_key_msg" = "Restore an account with your private key";
 "show_mnemonics" = "Show Mnemonics";
 "prepare" = "Preparing...";
 "address_copied" = "Address copied";
@@ -687,7 +700,6 @@
 "ok" = "OK";
 "confirm" = "Confirm";
 "settings" = "Settings";
-"warnning" = "Warnning";
 "continue" = "Continue";
 "wait" = "Wait";
 "sign" = "Sign";
@@ -705,7 +717,7 @@
 "title_check_mnemonics" = "Check Mnemonics";
 "title_check_privatekey" = "Check Private Key";
 "title_set_account_name" = "Set Account Name";
-"title_create" = "Create Wallet";
+"title_create_account" = "Create Account";
 "title_watch_wallet" = "Add Watch Wallet";
 "title_restore_privatekey" = "Restore With PrivateKey";
 "title_restore" = "Restore With Mnemonic";

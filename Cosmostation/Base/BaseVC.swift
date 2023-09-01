@@ -88,4 +88,28 @@ class BaseVC: UIViewController {
             view.makeToast(text, duration: 2.0, position: .bottom, style: style)
         }
     }
+    
+    func onStartSheet(_ baseSheet: BaseVC, _ height: CGFloat? = 320) {
+        guard let sheet = baseSheet.presentationController as? UISheetPresentationController else {
+            return
+        }
+        if #available(iOS 16.0, *) {
+            sheet.detents = [
+                .custom { _ in return height },
+                .custom { context in return context.maximumDetentValue * 0.6 }
+            ]
+        } else {
+            sheet.detents = [.medium()]
+        }
+        sheet.largestUndimmedDetentIdentifier = .large
+        sheet.prefersGrabberVisible = true
+        present(baseSheet, animated: true)
+    }
+    
+    func onStartMainTab() {
+        let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = mainTabVC
+        self.present(mainTabVC, animated: true, completion: nil)
+    }
 }

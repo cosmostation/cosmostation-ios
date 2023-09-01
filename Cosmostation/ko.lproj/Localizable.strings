@@ -93,6 +93,7 @@
 "str_only_address" = "관찰용 지갑";
 "str_address" = "주소";
 "str_mnemonic" = "니모닉";
+"str_mnemonic_phrases" = "니모닉 (복구문자)";
 "str_chainid" = "체인 아이디";
 "str_imported_date" = "등록 날짜";
 "str_imported_state" = "등록 상태";
@@ -234,6 +235,9 @@
 "str_no_result" = "검색 결과가 없습니다";
 "str_smart_contract" = "스마트 컨트랙트";
 "str_account_name" = "계정 이름";
+"str_privateKey" = "개인키";
+"str_create_account" = "계정 생성";
+"str_warnning" = "경고";
 
 
 "btn_delegate" = "  위임 하기";
@@ -290,6 +294,8 @@
 "msg_okc_deprecated_msg" = "해당 주소는 체인에서 더 이상 추가 지원을 하지 않습니다.\n원활한 사용을 위해 공식 주소를 생성하여 자산을 이전하는 것을 강력히 권장합니다.\n\n(설정>지갑 추가 메뉴를 통해 공식 주소를 추가할 수 있습니다.)";
 "msg_no_supported_chain" = "이 네트워크는 더 이상 작동하지 않습니다.\n\n코스모스테이션 월렛은 보관된 데이터만 보여드리고 있으니 참고하세요.";
 "msg_search_chain" = "체인이나 토큰을 검색하세요";
+"msg_mnemonic_wanning" = "이 문구는 계정을 복구하는 유일한 방법입니다. 누구와도 공유하지 마십시오. 이 니모닉을 분실하면 자산 손실로 이어질 수 있습니다.";
+"msg_tap_to_mnemonic_copy" = "복사하려면 니모닉 문구 상자를 탭하세요.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";
@@ -443,7 +449,14 @@
 "add_address_msg" = "관찰 모드로 니모닉 입력 없이 지갑의 상태를 확인할 수 있습니다.\n추후 설정에서 니모닉을 입력하면 송금 등의 활동이 가능합니다.";
 "add_address_hint" = "주소를 입력하세요.";
 
-"create_wallet" = "지갑 생성";
+
+"create_wallet" = "신규 계정 만들기";
+"create_wallet_msg" = "새 니모닉으로 신규 계정 만들기";
+"import_wallet" = "지갑 복원";
+"import_mnemonic" = "계정 복구 (니모닉)";
+"import_mnemonic_msg" = "기존 니모닉으로 계정 복구하기";
+"import_private_key" = "계정 복구 (개인키)";
+"import_private_key_msg" = "기존 개인키로 계정 복구하기";
 "show_mnemonics" = "니모닉 보기";
 "prepare" = "준비중 입니다..";
 "address_copied" = "클립보드에 복사하였습니다.";
@@ -687,7 +700,6 @@
 "ok" = "OK";
 "confirm" = "확인";
 "settings" = "설정";
-"warnning" = "경고";
 "continue" = "계속";
 "wait" = "기다리기";
 "sign" = "사인";
@@ -705,7 +717,7 @@
 "title_check_mnemonics" = "니모닉 확인";
 "title_check_privatekey" = "개인키 확인";
 "title_set_account_name" = "계정 이름 설정";
-"title_create" = "지갑 생성";
+"title_create_account" = "계정 생성";
 "title_watch_wallet" = "관찰 지갑 등록";
 "title_restore_privatekey" = "개인키로 지갑복원";
 "title_restore" = "니모닉으로 지갑복원";

@@ -46,9 +46,7 @@ class ChainSelectVC: BaseVC {
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "SelectChainCell", bundle: nil), forCellReuseIdentifier: "SelectChainCell")
         tableView.rowHeight = UITableView.automaticDimension
-        if #available(iOS 15.0, *) {
-            tableView.sectionHeaderTopPadding = 0.0
-        }
+        tableView.sectionHeaderTopPadding = 0.0
         
         baseAccount = BaseData.instance.baseAccount
         toDisplayCosmoses = BaseData.instance.getDisplayCosmosChainNames(baseAccount)

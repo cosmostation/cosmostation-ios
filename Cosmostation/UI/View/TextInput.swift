@@ -30,27 +30,23 @@ extension MDCOutlinedTextField {
 
 }
 
-//extension MDCOutlinedTextArea {
-//    func setup() {
-//        self.label.textColor = UIColor.base05
-//        self.tintColor = UIColor.text01
-//        self.containerRadius = 8
-//        self.setFloatingLabel(UIColor.primary, for: .editing)
-//        self.setFloatingLabel(UIColor.base04, for: .normal)
-//        self.setNormalLabel(UIColor.base04, for: .normal)
-//        self.setOutlineColor(UIColor.primary, for: .editing)
-//        self.setOutlineColor(UIColor.base03, for: .normal)
-//        self.textView.font = font5
-//        self.textView.returnKeyType = .done
-//        self.textView.enablesReturnKeyAutomatically = true
-//        self.textView.autocorrectionType = .no
-//        self.textView.autocapitalizationType = .none
-//        self.textView.smartInsertDeleteType = .no
-//        self.textView.textContentType = .init(rawValue: "")
-//        self.textView.keyboardType = .default
-//    }
-//
-//    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//        setup()
-//    }
-//}
+extension MDCOutlinedTextArea {
+    func setup() {
+        self.label.textColor = .color01
+        self.tintColor = .color01
+        self.containerRadius = 8
+        self.setFloatingLabel(.color01, for: .editing)
+        self.setFloatingLabel(.color03, for: .normal)
+        self.setNormalLabel(.color03, for: .normal)
+        self.setOutlineColor(.color01, for: .editing)
+        self.setOutlineColor(.color03, for: .normal)
+        self.textView.font = .fontSize16Bold
+        self.textView.returnKeyType = .done
+        self.textView.enablesReturnKeyAutomatically = true
+        self.textView.autocorrectionType = .no
+        self.textView.autocapitalizationType = .none
+        self.textView.smartInsertDeleteType = .no
+        self.textView.textContentType = .init(rawValue: "")
+        self.textView.keyboardType = .default
+    }
+}
