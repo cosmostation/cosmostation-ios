@@ -84,24 +84,47 @@
                                     <segue destination="HxN-8c-YJG" kind="embed" id="jJo-hB-wUK"/>
                                 </connections>
                             </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9R-os-Pfe">
+                                <rect key="frame" x="0.0" y="198" width="393" height="654"/>
+                                <connections>
+                                    <segue destination="DVQ-I1-owb" kind="embed" id="6Wk-zk-FDX"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AeT-wL-xQo">
+                                <rect key="frame" x="0.0" y="198" width="393" height="654"/>
+                                <connections>
+                                    <segue destination="yyO-ei-xsW" kind="embed" id="wiH-Nb-UO2"/>
+                                </connections>
+                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYD-Wc-AXb">
                                 <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
                                 <connections>
                                     <segue destination="EO6-oK-AmS" kind="embed" id="ZOz-Cm-L38"/>
                                 </connections>
                             </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s8b-hk-JN5">
+                                <rect key="frame" x="0.0" y="198" width="393" height="654"/>
+                                <connections>
+                                    <segue destination="yoF-DC-PBK" kind="embed" id="tOj-SA-aCs"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="AeT-wL-xQo" firstAttribute="bottom" secondItem="vYD-Wc-AXb" secondAttribute="bottom" id="0Hz-n7-Xey"/>
+                            <constraint firstItem="AeT-wL-xQo" firstAttribute="leading" secondItem="vYD-Wc-AXb" secondAttribute="leading" id="2Qf-LX-oQ8"/>
                             <constraint firstItem="0An-sf-Sxo" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="47f-ZP-RPP"/>
                             <constraint firstItem="B5w-hK-wYy" firstAttribute="top" secondItem="0An-sf-Sxo" secondAttribute="bottom" constant="20" id="Fjz-ih-b7j"/>
                             <constraint firstItem="B5w-hK-wYy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="Gmd-pE-4tI"/>
                             <constraint firstItem="fdX-08-eE0" firstAttribute="top" secondItem="B5w-hK-wYy" secondAttribute="bottom" id="KXG-Qi-buY"/>
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="LYC-Qm-hqh"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="top" secondItem="1V7-Iu-EPt" secondAttribute="top" id="N8q-3P-whm"/>
+                            <constraint firstItem="w9R-os-Pfe" firstAttribute="bottom" secondItem="1V7-Iu-EPt" secondAttribute="bottom" id="SCg-Vx-ADD"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="leading" secondItem="1V7-Iu-EPt" secondAttribute="leading" id="ThK-hL-QAR"/>
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="top" secondItem="fdX-08-eE0" secondAttribute="bottom" id="U1o-5R-277"/>
+                            <constraint firstItem="s8b-hk-JN5" firstAttribute="trailing" secondItem="1V7-Iu-EPt" secondAttribute="trailing" id="Wmx-7R-jkG"/>
+                            <constraint firstItem="s8b-hk-JN5" firstAttribute="top" secondItem="1V7-Iu-EPt" secondAttribute="top" id="Xoi-9e-rjM"/>
                             <constraint firstItem="0An-sf-Sxo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="aMa-zb-NXQ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fdX-08-eE0" secondAttribute="trailing" constant="8" id="df6-bS-rrS"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="bottom" secondItem="1V7-Iu-EPt" secondAttribute="bottom" id="ekH-Tf-Guj"/>
@@ -109,18 +132,29 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1V7-Iu-EPt" secondAttribute="trailing" id="iHy-1c-waq"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0An-sf-Sxo" secondAttribute="trailing" constant="48" id="kY3-s0-qOT"/>
                             <constraint firstItem="fdX-08-eE0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="ll6-wp-9Mc"/>
+                            <constraint firstItem="AeT-wL-xQo" firstAttribute="top" secondItem="vYD-Wc-AXb" secondAttribute="top" id="lm3-m2-072"/>
+                            <constraint firstItem="w9R-os-Pfe" firstAttribute="trailing" secondItem="1V7-Iu-EPt" secondAttribute="trailing" id="mow-QC-4Me"/>
+                            <constraint firstItem="AeT-wL-xQo" firstAttribute="trailing" secondItem="vYD-Wc-AXb" secondAttribute="trailing" id="njE-p9-K9x"/>
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ohN-uk-tdL"/>
+                            <constraint firstItem="w9R-os-Pfe" firstAttribute="leading" secondItem="vYD-Wc-AXb" secondAttribute="leading" id="pwm-qQ-Asm"/>
+                            <constraint firstItem="s8b-hk-JN5" firstAttribute="bottom" secondItem="1V7-Iu-EPt" secondAttribute="bottom" id="q9N-dM-6Hb"/>
+                            <constraint firstItem="w9R-os-Pfe" firstAttribute="leading" secondItem="1V7-Iu-EPt" secondAttribute="leading" id="rtJ-mK-PuR"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="B5w-hK-wYy" secondAttribute="trailing" constant="8" id="wCv-gP-kEY"/>
+                            <constraint firstItem="w9R-os-Pfe" firstAttribute="top" secondItem="1V7-Iu-EPt" secondAttribute="top" id="wGU-5v-yQm"/>
                             <constraint firstItem="0An-sf-Sxo" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="wHS-MO-vwS"/>
+                            <constraint firstItem="s8b-hk-JN5" firstAttribute="leading" secondItem="1V7-Iu-EPt" secondAttribute="leading" id="yvz-ew-R6n"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="aboutList" destination="s8b-hk-JN5" id="Oh4-Xj-F2z"/>
                         <outlet property="addressLabel" destination="uaX-Dh-cwU" id="72j-Yh-d7s"/>
                         <outlet property="addressLayer" destination="0An-sf-Sxo" id="vvx-aC-T9G"/>
-                        <outlet property="assetList" destination="vYD-Wc-AXb" id="oUe-cP-Pyh"/>
+                        <outlet property="coinList" destination="vYD-Wc-AXb" id="2gt-07-Njf"/>
                         <outlet property="currencyLabel" destination="lZk-Ok-B8N" id="1rX-f3-fm9"/>
                         <outlet property="historyList" destination="1V7-Iu-EPt" id="VOm-jL-7Zo"/>
+                        <outlet property="nftList" destination="w9R-os-Pfe" id="wBQ-Ep-oVj"/>
                         <outlet property="tabbar" destination="B5w-hK-wYy" id="Flj-2U-acs"/>
+                        <outlet property="tokenList" destination="AeT-wL-xQo" id="UY5-1J-uhG"/>
                         <outlet property="totalValueLabel" destination="sqR-D5-yjj" id="zfC-nB-loW"/>
                     </connections>
                 </viewController>
@@ -128,10 +162,10 @@
             </objects>
             <point key="canvasLocation" x="139.69465648854961" y="-2.1126760563380285"/>
         </scene>
-        <!--Cosmos AssetVC-->
+        <!--Cosmos CoinVC-->
         <scene sceneID="lAa-dm-dlk">
             <objects>
-                <viewController storyboardIdentifier="CosmosAssetVC" id="EO6-oK-AmS" customClass="CosmosAssetVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CosmosCoinVC" id="EO6-oK-AmS" customClass="CosmosCoinVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KVq-Tq-0JA">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="654.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -143,6 +177,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aYH-Cl-c1y"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="_primary"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="AJM-90-cmx" secondAttribute="trailing" id="7GW-4W-rBg"/>
                             <constraint firstAttribute="bottom" secondItem="AJM-90-cmx" secondAttribute="bottom" id="nzY-Yx-yyd"/>
@@ -156,7 +191,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UF-uO-RJr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-741" y="862"/>
+            <point key="canvasLocation" x="-1552" y="847"/>
+        </scene>
+        <!--Cosmos TokenVC-->
+        <scene sceneID="KcN-vG-E2e">
+            <objects>
+                <viewController storyboardIdentifier="CosmosTokenVC" id="yyO-ei-xsW" customClass="CosmosTokenVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6m4-W2-W09">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="654"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="_primary"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ctm-QY-5em" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-592" y="847"/>
+        </scene>
+        <!--Cosmos NftVC-->
+        <scene sceneID="hdU-jR-Mfl">
+            <objects>
+                <viewController storyboardIdentifier="CosmosNftVC" id="DVQ-I1-owb" customClass="CosmosNftVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xTc-W9-8tb">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="654"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="_primary"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H2G-9O-J1f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="274" y="845"/>
         </scene>
         <!--Cosmos HistoryVC-->
         <scene sceneID="KfQ-Sc-lHH">
@@ -200,6 +265,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nzP-Ug-Ff6"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="_primary"/>
                         <constraints>
                             <constraint firstItem="79U-Ag-E0L" firstAttribute="centerX" secondItem="nzP-Ug-Ff6" secondAttribute="centerX" id="2jj-o7-zA1"/>
                             <constraint firstItem="79U-Ag-E0L" firstAttribute="centerY" secondItem="nzP-Ug-Ff6" secondAttribute="centerY" id="7J3-Nx-Mm6"/>
@@ -216,7 +282,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1Y-jZ-iyp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057.2519083969464" y="873.59154929577471"/>
+            <point key="canvasLocation" x="1095" y="845"/>
+        </scene>
+        <!--Cosmos AboutVC-->
+        <scene sceneID="jux-jv-h4M">
+            <objects>
+                <viewController storyboardIdentifier="CosmosAboutVC" id="yoF-DC-PBK" customClass="CosmosAboutVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SNz-9m-n5z">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="654"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="_primary"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B1G-KE-SWP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1947" y="845"/>
         </scene>
     </scenes>
     <resources>
@@ -229,6 +310,9 @@
         </namedColor>
         <namedColor name="_font02">
             <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.33700001239776611" green="0.016000000759959221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

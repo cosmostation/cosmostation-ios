@@ -1,5 +1,5 @@
 //
-//  CosmosAssetVC.swift
+//  CosmosCoinVC.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/08/22.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CosmosAssetVC: BaseVC {
+class CosmosCoinVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -81,7 +81,7 @@ class CosmosAssetVC: BaseVC {
 }
 
 
-extension CosmosAssetVC: UITableViewDelegate, UITableViewDataSource {
+extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3

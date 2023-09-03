@@ -11,8 +11,8 @@ import UIKit
 class HistoryCell: UITableViewCell {
     
     @IBOutlet weak var rootView: CardViewCell!
-    @IBOutlet weak var failedLabel: UILabel!
     @IBOutlet weak var msgsTitleLabel: UILabel!
+    @IBOutlet weak var successImg: UIImageView!
     @IBOutlet weak var hashLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var blockLabel: UILabel!
@@ -28,7 +28,6 @@ class HistoryCell: UITableViewCell {
     
     override func prepareForReuse() {
         rootView.setBlur()
-        failedLabel.isHidden = true
         amountLabel.isHidden = true
         denomLabel.isHidden = true
         coinCntLabel.isHidden = true
@@ -36,7 +35,12 @@ class HistoryCell: UITableViewCell {
     
     
     func bindCosmosClassHistory(_ account: BaseAccount, _ chain: CosmosClass, _ history: MintscanHistory) {
-        failedLabel.isHidden = history.isSuccess()
+        if (history.isSuccess()) {
+            successImg.image = UIImage(named: "iconSuccess")
+        } else {
+            successImg.image = UIImage(named: "iconFail")
+        }
+        
         msgsTitleLabel.text = history.getMsgType(chain.address!)
         hashLabel.text = history.data?.txhash
         timeLabel.text = WDP.dpTime(history.header?.timestamp)

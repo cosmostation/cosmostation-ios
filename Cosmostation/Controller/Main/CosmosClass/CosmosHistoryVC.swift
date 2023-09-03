@@ -38,7 +38,6 @@ class CosmosHistoryVC: BaseVC {
 
         baseAccount = BaseData.instance.baseAccount
         selectedChain = baseAccount.toDisplayCosmosChains[parentVC.selectedPosition]
-        
         onRequestFetch()
     }
     

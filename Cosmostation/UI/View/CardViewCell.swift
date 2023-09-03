@@ -16,6 +16,11 @@ class CardViewCell: UIView {
     let animator = UIViewPropertyAnimator(duration: 0.5, curve: .linear)
     let animatorFraction = 0.82
     
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         backgroundColor = .clear
