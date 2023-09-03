@@ -12,6 +12,7 @@ import Alamofire
 class CosmosHistoryVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyDataView: UIView!
     
     var parentVC: CosmosClassVC!
     var selectedChain: CosmosClass!
@@ -69,7 +70,15 @@ class CosmosHistoryVC: BaseVC {
                     self.msHasMore = false
                     self.msHistoyID = 0
                 }
-                self.tableView.reloadData()
+                
+                if (self.msHistoryGroup.count > 0) {
+                    self.tableView.reloadData()
+                    self.tableView.isHidden = false
+                    self.emptyDataView.isHidden = true
+                } else {
+                    self.tableView.isHidden = true
+                    self.emptyDataView.isHidden = false
+                }
                 
             case .failure:
                 print("onFetchMsHistory error")

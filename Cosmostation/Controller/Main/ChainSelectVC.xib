@@ -33,26 +33,42 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JLa-MP-siQ" customClass="LottieAnimationView" customModule="Lottie">
-                    <rect key="frame" x="91.666666666666686" y="378.66666666666669" width="210" height="120"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPA-O6-iKd">
+                    <rect key="frame" x="76.666666666666686" y="338.66666666666669" width="240" height="200.00000000000006"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JLa-MP-siQ" customClass="LottieAnimationView" customModule="Lottie">
+                            <rect key="frame" x="30" y="0.0" width="180" height="110"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="180" id="7ed-oU-QdP"/>
+                                <constraint firstAttribute="height" constant="110" id="U5a-lU-u2r"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking your all asset with onchain " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPZ-vb-f7V">
+                            <rect key="frame" x="15" y="118" width="209.66666666666666" height="15.333333333333343"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmL-Mf-KXv">
+                            <rect key="frame" x="108.66666666666667" y="135.33333333333331" width="22.333333333333329" height="17.666666666666657"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="210" id="7ed-oU-QdP"/>
-                        <constraint firstAttribute="height" constant="120" id="U5a-lU-u2r"/>
+                        <constraint firstItem="JLa-MP-siQ" firstAttribute="top" secondItem="LPA-O6-iKd" secondAttribute="top" id="Ng2-kM-FKA"/>
+                        <constraint firstAttribute="width" constant="240" id="XNk-0V-FdE"/>
+                        <constraint firstItem="JLa-MP-siQ" firstAttribute="centerX" secondItem="LPA-O6-iKd" secondAttribute="centerX" id="YDL-RB-cGo"/>
+                        <constraint firstItem="PmL-Mf-KXv" firstAttribute="centerX" secondItem="LPA-O6-iKd" secondAttribute="centerX" id="kLg-cU-ST8"/>
+                        <constraint firstAttribute="height" constant="200" id="kqJ-vv-P6W"/>
+                        <constraint firstItem="hPZ-vb-f7V" firstAttribute="top" secondItem="JLa-MP-siQ" secondAttribute="bottom" constant="8" id="oFm-ed-ub1"/>
+                        <constraint firstItem="PmL-Mf-KXv" firstAttribute="top" secondItem="hPZ-vb-f7V" secondAttribute="bottom" constant="2" id="scg-Xw-zgI"/>
+                        <constraint firstItem="hPZ-vb-f7V" firstAttribute="centerX" secondItem="LPA-O6-iKd" secondAttribute="centerX" id="td1-12-Huj"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking your all asset with onchain " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPZ-vb-f7V">
-                    <rect key="frame" x="91.666666666666671" y="506.66666666666669" width="209.66666666666663" height="15.333333333333314"/>
-                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
-                    <color key="textColor" name="_color01"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmL-Mf-KXv">
-                    <rect key="frame" x="185.33333333333334" y="524" width="22.333333333333343" height="17.666666666666629"/>
-                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                    <color key="textColor" name="_color01"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xuQ-RN-hZP">
                     <rect key="frame" x="0.0" y="59" width="393" height="693"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -85,17 +101,13 @@
             <constraints>
                 <constraint firstItem="KTD-Fe-1GN" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="4Bv-uM-rxL"/>
                 <constraint firstItem="wYs-3p-dhB" firstAttribute="top" secondItem="xuQ-RN-hZP" secondAttribute="bottom" constant="8" id="C0i-R5-ELi"/>
-                <constraint firstItem="hPZ-vb-f7V" firstAttribute="top" secondItem="JLa-MP-siQ" secondAttribute="bottom" constant="8" id="CIM-ca-2Lb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="xuQ-RN-hZP" secondAttribute="top" id="CY6-SX-TZ3"/>
-                <constraint firstItem="JLa-MP-siQ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Dx9-XJ-mNL"/>
-                <constraint firstItem="PmL-Mf-KXv" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="GeZ-LT-Fp0"/>
+                <constraint firstItem="LPA-O6-iKd" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Ck8-i3-rnq"/>
+                <constraint firstItem="LPA-O6-iKd" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="FAD-4g-iux"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wYs-3p-dhB" secondAttribute="trailing" constant="8" id="Lhp-tZ-u2x"/>
-                <constraint firstItem="JLa-MP-siQ" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="Lls-Co-CP2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xuQ-RN-hZP" secondAttribute="trailing" id="bzx-w6-RHY"/>
                 <constraint firstAttribute="bottom" secondItem="wYs-3p-dhB" secondAttribute="bottom" constant="38" id="cjP-bE-9Hh"/>
-                <constraint firstItem="PmL-Mf-KXv" firstAttribute="top" secondItem="hPZ-vb-f7V" secondAttribute="bottom" constant="2" id="hWL-uR-ED7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KTD-Fe-1GN" secondAttribute="bottom" constant="34" id="keE-qJ-m2e"/>
-                <constraint firstItem="hPZ-vb-f7V" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="mB7-FZ-a5z"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="xuQ-RN-hZP" secondAttribute="leading" id="o84-51-hca"/>
                 <constraint firstItem="wYs-3p-dhB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="vIf-DD-MXC"/>
             </constraints>

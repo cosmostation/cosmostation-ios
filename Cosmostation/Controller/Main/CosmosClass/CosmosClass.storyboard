@@ -133,11 +133,11 @@
             <objects>
                 <viewController storyboardIdentifier="CosmosAssetVC" id="EO6-oK-AmS" customClass="CosmosAssetVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KVq-Tq-0JA">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="654.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="AJM-90-cmx">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="654.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -163,17 +163,46 @@
             <objects>
                 <viewController storyboardIdentifier="CosmosHistoryVC" id="HxN-8c-YJG" customClass="CosmosHistoryVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ihg-v3-xNz">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="654.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79U-Ag-E0L">
+                                <rect key="frame" x="76.666666666666686" y="275.66666666666669" width="240" height="128"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyData" translatesAutoresizingMaskIntoConstraints="NO" id="bEj-pE-Igr">
+                                        <rect key="frame" x="87.999999999999986" y="0.0" width="64.000000000000014" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="64" id="Cap-09-CPA"/>
+                                            <constraint firstAttribute="height" constant="64" id="vZe-lZ-2Xo"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZD-ac-XCB">
+                                        <rect key="frame" x="79.999999999999972" y="72" width="79.666666666666657" height="17.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                        <color key="textColor" name="_color01"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="bEj-pE-Igr" firstAttribute="top" secondItem="79U-Ag-E0L" secondAttribute="top" id="CNJ-rC-p3N"/>
+                                    <constraint firstItem="4ZD-ac-XCB" firstAttribute="centerX" secondItem="79U-Ag-E0L" secondAttribute="centerX" id="LSJ-56-OsT"/>
+                                    <constraint firstItem="4ZD-ac-XCB" firstAttribute="top" secondItem="bEj-pE-Igr" secondAttribute="bottom" constant="8" id="ZNo-SB-SAb"/>
+                                    <constraint firstItem="bEj-pE-Igr" firstAttribute="centerX" secondItem="79U-Ag-E0L" secondAttribute="centerX" id="nHF-lO-ASU"/>
+                                    <constraint firstAttribute="height" constant="128" id="qKd-Zz-zpf"/>
+                                    <constraint firstAttribute="width" constant="240" id="sSL-Pf-rRd"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4Uf-kp-c8Q">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="654.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nzP-Ug-Ff6"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="79U-Ag-E0L" firstAttribute="centerX" secondItem="nzP-Ug-Ff6" secondAttribute="centerX" id="2jj-o7-zA1"/>
+                            <constraint firstItem="79U-Ag-E0L" firstAttribute="centerY" secondItem="nzP-Ug-Ff6" secondAttribute="centerY" id="7J3-Nx-Mm6"/>
                             <constraint firstAttribute="bottom" secondItem="4Uf-kp-c8Q" secondAttribute="bottom" id="FEb-4f-3kM"/>
                             <constraint firstItem="4Uf-kp-c8Q" firstAttribute="leading" secondItem="Ihg-v3-xNz" secondAttribute="leading" id="Fkg-QA-Zyd"/>
                             <constraint firstItem="4Uf-kp-c8Q" firstAttribute="top" secondItem="Ihg-v3-xNz" secondAttribute="top" id="sw9-GL-bsD"/>
@@ -181,15 +210,20 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emptyDataView" destination="79U-Ag-E0L" id="VNQ-eN-zxw"/>
                         <outlet property="tableView" destination="4Uf-kp-c8Q" id="OJz-sS-fea"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1Y-jZ-iyp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1060" y="874"/>
+            <point key="canvasLocation" x="1057.2519083969464" y="873.59154929577471"/>
         </scene>
     </scenes>
     <resources>
+        <image name="imgEmptyData" width="240" height="240"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="_font01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
