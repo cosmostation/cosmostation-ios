@@ -86,6 +86,7 @@ class IntroViewController: BaseVC, BaseSheetDelegate {
                 }, completion: nil)
             })
         }
+        
 //        UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut, animations: {
 //            self.bottomLogoView.alpha = 0.0
 //        }, completion: { (finished) -> Void in

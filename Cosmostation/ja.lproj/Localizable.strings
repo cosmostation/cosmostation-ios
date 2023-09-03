@@ -239,8 +239,8 @@
 "str_create_account" = "アカウント作成";
 "str_warnning" = "警告";
 "str_select_account" = "アカウント選択";
-"str_account_with_privateKey" = "개인키 계정";
-"str_account_with_mnemonic" = "니모닉 계정";
+"str_account_with_privateKey" = "秘密鍵アカウント";
+"str_account_with_mnemonic" = "ニーモニックアカウント";
 
 
 "btn_delegate" = "  委任する";

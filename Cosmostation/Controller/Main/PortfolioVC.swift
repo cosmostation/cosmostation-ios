@@ -189,8 +189,21 @@ extension PortfolioVC: BaseSheetDelegate {
     }
 
     public func onSelectSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
-        print("onSelectSheet")
+        if let toAddcountId = Int64(result.param!) {
+            if (BaseData.instance.baseAccount.id != toAddcountId) {
+                showWait()
+                DispatchQueue.global().async {
+                    let toAccount = BaseData.instance.selectAccount(toAddcountId)
+                    BaseData.instance.setLastAccount(toAccount!.id)
+                    BaseData.instance.baseAccount = toAccount
+                    
+                    DispatchQueue.main.async(execute: {
+                        self.hideWait()
+                        self.onStartMainTab()
+                    });
+                }
+            }
+        }
     }
-
 }
 

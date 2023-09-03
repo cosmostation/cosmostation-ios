@@ -35,23 +35,10 @@ class SwitchAccountCell: UITableViewCell {
         }
         
         if (account.type == .withMnemonic) {
-            
+            addressLabel.text = NSLocalizedString("str_account_with_mnemonic", comment: "")
         } else if (account.type == .onlyPrivateKey) {
-            
+            addressLabel.text = NSLocalizedString("str_account_with_privateKey", comment: "")
         }
-//
-//        Task {
-//            if let baseAccount = await baseAccount.getBaseAddress(currentChain!) {
-//                addressLabel.text = baseAccount.address
-//                if (baseAccount.account_id == currentAddress.id) {
-//                    self.rootView.backgroundColor = .base02
-//                    self.checkedImg.isHidden = false
-//                } else {
-//                    self.rootView.backgroundColor = .base01
-//                    self.checkedImg.isHidden = true
-//                }
-//            }
-//        }
     }
     
 }

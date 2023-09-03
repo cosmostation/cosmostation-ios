@@ -71,7 +71,12 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        sheetDelegate?.onSelectSheet(sheetType, BaseSheetResult.init(indexPath.row, nil))
+        if (sheetType == .SwitchAccount) {
+            let result = BaseSheetResult.init(indexPath.row, String(BaseData.instance.selectAccounts()[indexPath.row].id))
+            sheetDelegate?.onSelectSheet(sheetType, result)
+        } else {
+            sheetDelegate?.onSelectSheet(sheetType, BaseSheetResult.init(indexPath.row, nil))
+        }
         dismiss(animated: true)
     }
     
