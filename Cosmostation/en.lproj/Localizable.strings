@@ -238,6 +238,9 @@
 "str_privateKey" = "Private Key";
 "str_create_account" = "Create Account";
 "str_warnning" = "Warnning";
+"str_select_account" = "Select Account";
+"str_account_with_privateKey" = "Private Key Account";
+"str_account_with_mnemonic" = "Mnemonic Account";
 
 
 "btn_delegate" = "  Delegate";
@@ -606,7 +609,6 @@
 "before_liquidation_price_format" = "Initial Liquidation %@ Price";
 "after_liquidation_price_format" = "Expected Liquidation %@ Price";
 "select_destination_chain" = "Select Destination Chain";
-"select_account" = "Select Account";
 "no_account" = "No valid account at %@";
 "testnet_warn_title" = "Testnet Warning";
 "testnet_warn_msg" = "This wallet is for testnet\n(Tokens in this wallet have NO value).\n\nCosmostation supports this testnet to give users the opportunity to use new features before being released on Mainnet. Please note that support for this testnet can be discontinued at any time.";
@@ -718,6 +720,7 @@
 "title_check_privatekey" = "Check Private Key";
 "title_set_account_name" = "Set Account Name";
 "title_create_account" = "Create Account";
+"title_select_account" = "Select Account";
 "title_watch_wallet" = "Add Watch Wallet";
 "title_restore_privatekey" = "Restore With PrivateKey";
 "title_restore" = "Restore With Mnemonic";

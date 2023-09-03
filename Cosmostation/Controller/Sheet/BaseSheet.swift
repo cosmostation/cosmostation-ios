@@ -25,13 +25,17 @@ class BaseSheet: BaseVC {
         sheetTableView.dataSource = self
         sheetTableView.separatorStyle = .none
         sheetTableView.register(UINib(nibName: "NewAccountCell", bundle: nil), forCellReuseIdentifier: "NewAccountCell")
-        sheetTableView.register(UINib(nibName: "SelectAccountCell", bundle: nil), forCellReuseIdentifier: "SelectAccountCell")
+        sheetTableView.register(UINib(nibName: "SwitchAccountCell", bundle: nil), forCellReuseIdentifier: "SwitchAccountCell")
         sheetTableView.sectionHeaderTopPadding = 0
     }
     
     func updateTitle() {
-        if (sheetType == .SelectNewAccount) {
+        if (sheetType == .NewAccountType) {
             sheetTitle.text = NSLocalizedString("title_create_account", comment: "")
+            
+        } else if (sheetType == .SwitchAccount) {
+            sheetTitle.text = NSLocalizedString("title_select_account", comment: "")
+            
         }
     }
 
@@ -41,17 +45,27 @@ class BaseSheet: BaseVC {
 extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (sheetType == .SelectNewAccount) {
+        if (sheetType == .NewAccountType) {
             return 3
+            
+        } else if (sheetType == .SwitchAccount) {
+            return BaseData.instance.selectAccounts().count
+            
         }
         return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (sheetType == .SelectNewAccount) {
+        if (sheetType == .NewAccountType) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"NewAccountCell") as? NewAccountCell
             cell?.onBindView(indexPath.row)
             return cell!
+            
+        } else if (sheetType == .SwitchAccount) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SwitchAccountCell") as? SwitchAccountCell
+            cell?.onBindAccount(BaseData.instance.selectAccounts()[indexPath.row])
+            return cell!
+            
         }
         return UITableViewCell()
     }
@@ -79,5 +93,6 @@ public struct BaseSheetResult {
 }
 
 public enum SheetType: Int {
-    case SelectNewAccount = 0
+    case NewAccountType = 0
+    case SwitchAccount = 1
 }

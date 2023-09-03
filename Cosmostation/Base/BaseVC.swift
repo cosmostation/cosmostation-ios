@@ -69,16 +69,6 @@ class BaseVC: UIViewController {
         }
     }
     
-    func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "naviCon"), for: .normal)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -16)
-        button.setTitle(name == nil ? "Account" : name, for: .normal)
-        button.titleLabel?.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)!
-        button.sizeToFit()
-        return UIBarButtonItem(customView: button)
-    }
-    
     func onShowToast(_ text: String, onView targetView: UIView? = nil) {
         var style = ToastStyle()
         style.backgroundColor = UIColor.gray
@@ -113,3 +103,5 @@ class BaseVC: UIViewController {
         self.present(mainTabVC, animated: true, completion: nil)
     }
 }
+
+

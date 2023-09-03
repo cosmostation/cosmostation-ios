@@ -238,6 +238,9 @@
 "str_privateKey" = "개인키";
 "str_create_account" = "계정 생성";
 "str_warnning" = "경고";
+"str_select_account" = "계정 선택";
+"str_account_with_privateKey" = "개인키 계정";
+"str_account_with_mnemonic" = "니모닉 계정";
 
 
 "btn_delegate" = "  위임 하기";
@@ -606,7 +609,6 @@
 "before_liquidation_price_format" = "현재 %@ 청산 가격";
 "after_liquidation_price_format" = "예상 %@ 청산 가격";
 "select_destination_chain" = "체인 선택";
-"select_account" = "계정 선택";
 "no_account" = "수신 가능한 %@ 지갑 없음";
 "testnet_warn_title" = "테스트넷 경고";
 "testnet_warn_msg" = "선택하신 지갑은 테스트넷을 위한 지갑입니다\n(해당 지갑의 토큰은 실제 가치가 없습니다).\n\n코스모스테이션은 사용자들이 각 체인의 고유한 기능들을 메인넷에 반영되기 이전에 확인하고 사용해 볼 수 있는 기회를 제공하기 위해 테스트넷을 지원합니다. 해당 테스트넷에 대한 지원은 언제든 중단될 수 있습니다.";
@@ -718,6 +720,7 @@
 "title_check_privatekey" = "개인키 확인";
 "title_set_account_name" = "계정 이름 설정";
 "title_create_account" = "계정 생성";
+"title_select_account" = "계정 선택";
 "title_watch_wallet" = "관찰 지갑 등록";
 "title_restore_privatekey" = "개인키로 지갑복원";
 "title_restore" = "니모닉으로 지갑복원";

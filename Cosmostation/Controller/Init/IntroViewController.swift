@@ -102,12 +102,12 @@ class IntroViewController: BaseVC, BaseSheetDelegate {
     @IBAction func onClickCreate(_ sender: UIButton) {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectNewAccount
+        baseSheet.sheetType = .NewAccountType
         onStartSheet(baseSheet)
     }
     
     func onSelectSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
-        if (sheetType == .SelectNewAccount) {
+        if (sheetType == .NewAccountType) {
             if (result.position == 0) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     self.onNextVc(.create)

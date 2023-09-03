@@ -166,3 +166,31 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
         return mask;
     }
 }
+
+extension PortfolioVC: BaseSheetDelegate {
+
+    //for main tabs accout display
+    func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "naviCon"), for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -16)
+        button.setTitle(name == nil ? "Account" : name, for: .normal)
+        button.titleLabel?.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)!
+        button.sizeToFit()
+        button.addTarget(self, action: #selector(onClickSwitchAccount(_:)), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }
+
+    @objc func onClickSwitchAccount(_ sender: UIButton) {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.sheetDelegate = self
+        baseSheet.sheetType = .SwitchAccount
+        onStartSheet(baseSheet)
+    }
+
+    public func onSelectSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+        print("onSelectSheet")
+    }
+
+}
+

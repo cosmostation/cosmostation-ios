@@ -238,6 +238,9 @@
 "str_privateKey" = "秘密鍵";
 "str_create_account" = "アカウント作成";
 "str_warnning" = "警告";
+"str_select_account" = "アカウント選択";
+"str_account_with_privateKey" = "개인키 계정";
+"str_account_with_mnemonic" = "니모닉 계정";
 
 
 "btn_delegate" = "  委任する";
@@ -606,7 +609,6 @@
 "before_liquidation_price_format" = "現在%@清算価格";
 "after_liquidation_price_format" = "予想%@清算価格";
 "select_destination_chain" = "チェイン選択";
-"select_account" = "アカウント選択";
 "no_account" = "受信可能な%@財布がありません。";
 "testnet_warn_title" = "テストネットの警告";
 "testnet_warn_msg" = "選択したウォレットはテストネット用のウォレットです（該当するウォレットのトークンは実際の価値はありません）。\nコスモステーションは、ユーザーが各チェーンのユニークな機能をメインネットに反映する前に確認して試す機会を提供するため、テストネットをサポートしています。 そのテストネットのサポートはいつでも中断される可能性があります。";
@@ -718,6 +720,7 @@
 "title_check_privatekey" = "Check Private Key";
 "title_set_account_name" = "Set Account Name";
 "title_create_account" = "Create Account";
+"title_select_account" = "Select Account";
 "title_watch_wallet" = "Add Watch Wallet";
 "title_restore_privatekey" = "Restore With PrivateKey";
 "title_restore" = "Restore With Mnemonic";

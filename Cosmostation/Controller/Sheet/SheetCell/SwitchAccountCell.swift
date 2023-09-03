@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectAccountCell: UITableViewCell {
+class SwitchAccountCell: UITableViewCell {
 
     @IBOutlet weak var rootView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -20,16 +20,26 @@ class SelectAccountCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        self.checkedImg.isHidden = true
-//        self.rootView.backgroundColor = .base01
-//        self.addressLabel.text = ""
-//    }
-//    
-//    func onBindAccount(_ currentAddress: BaseAccount, _ currentChain: ChainConfig?, _ baseAccount: BaseAccount) {
-//        nameLabel.text = baseAccount.name
-//        
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.checkedImg.isHidden = true
+    }
+    
+    func onBindAccount(_ account: BaseAccount) {
+        nameLabel.text = account.name
+        
+        if (account.name == BaseData.instance.baseAccount.name) {
+            self.checkedImg.isHidden = false
+        } else {
+            self.checkedImg.isHidden = true
+        }
+        
+        if (account.type == .withMnemonic) {
+            
+        } else if (account.type == .onlyPrivateKey) {
+            
+        }
+//
 //        Task {
 //            if let baseAccount = await baseAccount.getBaseAddress(currentChain!) {
 //                addressLabel.text = baseAccount.address
@@ -42,6 +52,6 @@ class SelectAccountCell: UITableViewCell {
 //                }
 //            }
 //        }
-//    }
+    }
     
 }
