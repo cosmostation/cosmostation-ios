@@ -54,38 +54,38 @@ class IntroViewController: BaseVC, BaseSheetDelegate {
     func onStartInit() {
         print("onStartInit")
         
-//        if let account = BaseData.instance.getLastAccount() {
-//            print("account ", account.name)
-//            BaseData.instance.baseAccount = account
-//
-//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
-//                let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
-//                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//                appDelegate.window?.rootViewController = mainTabVC
-//                self.present(mainTabVC, animated: true, completion: nil)
-//
-////                let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
-////                self.navigationController?.pushViewController(chainSelectVC, animated: true)
-//
-////                let pincodeVC = UIStoryboard(name: "Pincode", bundle: nil).instantiateViewController(withIdentifier: "PincodeVC") as! PincodeVC
-////                pincodeVC.lockType = .ForDataCheck
-////                pincodeVC.modalPresentationStyle = .fullScreen
-////                self.present(pincodeVC, animated: true)
-//
-////                let createNameVC = CreateNameVC(nibName: "CreateNameVC", bundle: nil)
-////                self.navigationItem.title = ""
-////                self.navigationController?.pushViewController(createNameVC, animated: true)
-//            })
-//
-//        } else {
-//            UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut, animations: {
-//                self.bottomLogoView.alpha = 0.0
-//            }, completion: { (finished) -> Void in
-//                UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
-//                    self.bottomControlView.alpha = 1.0
-//                }, completion: nil)
-//            })
-//        }
+        if let account = BaseData.instance.getLastAccount() {
+            print("account ", account.name)
+            BaseData.instance.baseAccount = account
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+                let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = mainTabVC
+                self.present(mainTabVC, animated: true, completion: nil)
+
+//                let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
+//                self.navigationController?.pushViewController(chainSelectVC, animated: true)
+
+//                let pincodeVC = UIStoryboard(name: "Pincode", bundle: nil).instantiateViewController(withIdentifier: "PincodeVC") as! PincodeVC
+//                pincodeVC.lockType = .ForDataCheck
+//                pincodeVC.modalPresentationStyle = .fullScreen
+//                self.present(pincodeVC, animated: true)
+
+//                let createNameVC = CreateNameVC(nibName: "CreateNameVC", bundle: nil)
+//                self.navigationItem.title = ""
+//                self.navigationController?.pushViewController(createNameVC, animated: true)
+            })
+
+        } else {
+            UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut, animations: {
+                self.bottomLogoView.alpha = 0.0
+            }, completion: { (finished) -> Void in
+                UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
+                    self.bottomControlView.alpha = 1.0
+                }, completion: nil)
+            })
+        }
 //        UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut, animations: {
 //            self.bottomLogoView.alpha = 0.0
 //        }, completion: { (finished) -> Void in
@@ -93,9 +93,9 @@ class IntroViewController: BaseVC, BaseSheetDelegate {
 //                self.bottomControlView.alpha = 1.0
 //            }, completion: nil)
 //        })
-//        let CreateMnemonicVC = CreateMnemonicVC(nibName: "CreateMnemonicVC", bundle: nil)
+//        let ImportMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
 //        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(CreateMnemonicVC, animated: true)
+//        self.navigationController?.pushViewController(ImportMnemonicCheckVC, animated: true)
     }
     
     

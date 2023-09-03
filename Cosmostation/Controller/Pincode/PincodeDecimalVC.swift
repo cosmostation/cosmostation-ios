@@ -30,7 +30,7 @@ class PincodeDecimalVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        overrideUserInterfaceStyle = BaseData.instance.getThemeType()
+//        overrideUserInterfaceStyle = BaseData.instance.getThemeType()
         
         self.decimalBtns = [self.deciamlBtn0, self.deciamlBtn1, self.deciamlBtn2,
                             self.deciamlBtn3, self.deciamlBtn4, self.deciamlBtn5,

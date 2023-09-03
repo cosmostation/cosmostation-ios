@@ -40,22 +40,24 @@ class CreateNameVC: BaseVC, PinDelegate, UITextFieldDelegate {
     @IBAction func onClickNext(_ sender: UIButton?) {
         let userInput = accountNameTextField.text?.trimmingCharacters(in: .whitespaces)
         if (onValidate(userInput)) {
-//            if (newAccountType == .create) {
-//                let createMnemonicVC = CreateMnemonicVC(nibName: "CreateMnemonicVC", bundle: nil)
-//                createMnemonicVC.accountName = userInput
-//                self.navigationController?.title = NSLocalizedString("vc_title_create_mnemonic", comment: "")
-//                self.navigationController?.pushViewController(createMnemonicVC, animated: true)
-//
-//            } else if (newAccountType == .privateKey) {
-//                let importPrivKeyVC = ImportPrivKeyVC(nibName: "ImportPrivKeyVC", bundle: nil)
-//                importPrivKeyVC.accountName = userInput
-//                self.navigationController?.pushViewController(importPrivKeyVC, animated: true)
-//
-//            } else if (newAccountType == .mnemonc) {
-//                let importMnemonicVC = ImportMnemonicVC(nibName: "ImportMnemonicVC", bundle: nil)
-//                importMnemonicVC.accountName = userInput
-//                self.navigationController?.pushViewController(importMnemonicVC, animated: true)
-//            }
+            if (newAccountType == .create) {
+                let createMnemonicVC = CreateMnemonicVC(nibName: "CreateMnemonicVC", bundle: nil)
+                createMnemonicVC.accountName = userInput
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(createMnemonicVC, animated: true)
+
+            } else if (newAccountType == .privateKey) {
+                let importPrivKeyVC = ImportPrivKeyVC(nibName: "ImportPrivKeyVC", bundle: nil)
+                importPrivKeyVC.accountName = userInput
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(importPrivKeyVC, animated: true)
+
+            } else if (newAccountType == .mnemonc) {
+                let importMnemonicVC = ImportMnemonicVC(nibName: "ImportMnemonicVC", bundle: nil)
+                importMnemonicVC.accountName = userInput
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(importMnemonicVC, animated: true)
+            }
         }
     }
     

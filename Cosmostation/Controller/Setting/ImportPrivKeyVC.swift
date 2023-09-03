@@ -40,7 +40,7 @@ class ImportPrivKeyVC: BaseVC, UITextViewDelegate {
     }
 
     @IBAction func onClickNext(_ sender: UIButton) {
-        let userInput = privKeyTextArea.textView.text.trimmingCharacters(in: .whitespaces)
+        let userInput = privKeyTextArea.textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         if (onValidate(userInput)) {
             onRestoreAccount(accountName, userInput)
         } else {

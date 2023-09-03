@@ -830,7 +830,7 @@
 "error_two_pincode_differ" = "PIN番号が違います。 PIN番号を再度初期化してください。";
 "error_no_clipboard" = "クリップボードには何もありません。";
 "error_invalid_address_or_pubkey" = "アドレスが無効です。正確な文字を入力してください。";
-"error_recover_mnemonic" = "正しい復旧文字を入力してください。";
+"error_invalid_menmonic" = "正しい復旧文字を入力してください。";
 "error_amount" = "金額を正確に入力してください。";
 "error_memo" = "メモを確認してください。 特定取引所またはウォレットはメモ入力が必要になります。";
 "error_only_fee_with_atom" = "今はATOMのみ手数料で設定可能です。";

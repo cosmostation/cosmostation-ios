@@ -142,9 +142,7 @@ class CreateMnemonicVC: BaseVC {
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-//        onCreateAccount(accountName, mnemonic)
-        
-        onCreateAccount("용주", mnemonic)
+        onCreateAccount(accountName, mnemonic)
     }
     
     @objc func onCopyMenmonics() {

@@ -830,7 +830,7 @@
 "error_two_pincode_differ" = "PIN number is not same. Please init PIN number again!";
 "error_no_clipboard" = "No text from clipboard.";
 "error_invalid_address_or_pubkey" = "Invalid Address, please check again.";
-"error_recover_mnemonic" = "Please insert valid mnemonics.";
+"error_invalid_menmonic" = "Please insert valid mnemonics.";
 "error_amount" = "Please enter valid amount.";
 "error_memo" = "Please enter valid memo.";
 "error_only_fee_with_atom" = "Now only support ATOM for fee.";

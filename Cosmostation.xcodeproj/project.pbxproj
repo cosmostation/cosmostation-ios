@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040732FD2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */; };
+		040732FE2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */; };
+		040732FF2AA44075001C63DD /* ImportMnemonicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */; };
+		040733002AA44075001C63DD /* ImportMnemonicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */; };
+		040733032AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040733012AA442B6001C63DD /* ImportMnemonicCheckVC.swift */; };
+		040733042AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040733012AA442B6001C63DD /* ImportMnemonicCheckVC.swift */; };
+		040733052AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040733022AA442B6001C63DD /* ImportMnemonicCheckVC.xib */; };
+		040733062AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040733022AA442B6001C63DD /* ImportMnemonicCheckVC.xib */; };
 		04172B7A29F6819300D6279C /* Cw20VaultDepositReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */; };
 		04172B7C29F6826200D6279C /* Cw20VaultDepositRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */; };
 		04172B9329F7AE4000D6279C /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */; };
@@ -747,6 +755,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportMnemonicVC.xib; sourceTree = "<group>"; };
+		040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMnemonicVC.swift; sourceTree = "<group>"; };
+		040733012AA442B6001C63DD /* ImportMnemonicCheckVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMnemonicCheckVC.swift; sourceTree = "<group>"; };
+		040733022AA442B6001C63DD /* ImportMnemonicCheckVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportMnemonicCheckVC.xib; sourceTree = "<group>"; };
 		04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20VaultDepositReq.swift; sourceTree = "<group>"; };
 		04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20VaultDepositRes.swift; sourceTree = "<group>"; };
 		04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -1285,6 +1297,10 @@
 				04FA74632A9F5833001A2830 /* CreateNameVC.xib */,
 				04FA74832AA0E2A8001A2830 /* CreateMnemonicVC.swift */,
 				04FA74842AA0E2A9001A2830 /* CreateMnemonicVC.xib */,
+				040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */,
+				040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */,
+				040733012AA442B6001C63DD /* ImportMnemonicCheckVC.swift */,
+				040733022AA442B6001C63DD /* ImportMnemonicCheckVC.xib */,
 				04FA747D2AA0CAA2001A2830 /* ImportPrivKeyVC.swift */,
 				04FA747E2AA0CAA3001A2830 /* ImportPrivKeyVC.xib */,
 			);
@@ -1925,6 +1941,7 @@
 				047BA8D22A94756A00D3F7DD /* CosmosClass.storyboard in Resources */,
 				E10EB5A02A86217A0054A9AF /* bbbb.png in Resources */,
 				04527DC22A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
+				040732FE2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */,
 				E122DC6A2A8DBD3B006D1E7B /* BaseHeader.xib in Resources */,
 				E1E0DBC92A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
 				18FFB6E2281AF533004E65BB /* Assets.xcassets in Resources */,
@@ -1936,6 +1953,7 @@
 				04F4061829ED119800CD88E4 /* Init.storyboard in Resources */,
 				04FA74882AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
 				E15980952A83A96E0032892B /* bg7.png in Resources */,
+				040733062AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
 				18F4EAD22A4DA0A500CFBE2B /* ApiKey.plist in Resources */,
 				187447012930942400849EE4 /* ApiKeyDev.plist in Resources */,
 				E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
@@ -1968,6 +1986,8 @@
 				E122DC692A8DBD3B006D1E7B /* BaseHeader.xib in Resources */,
 				04FA747B2AA0446A001A2830 /* NewAccountCell.xib in Resources */,
 				04FA746E2A9F8652001A2830 /* BaseSheet.xib in Resources */,
+				040733052AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
+				040732FD2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */,
 				04FA74872AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
 				E15980922A83A96E0032892B /* bg2.png in Resources */,
 				1809C35129D16C80008884C1 /* injectScript.js in Resources */,
@@ -2326,6 +2346,7 @@
 				E122DBA42A8A468D006D1E7B /* cosmos_store_v1beta1_listening.pb.swift in Sources */,
 				E122DB982A8A468D006D1E7B /* cosmos_authz_module_v1_module.pb.swift in Sources */,
 				E122DC5B2A8A4712006D1E7B /* tendermint_types_types.pb.swift in Sources */,
+				040733042AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */,
 				18FFB591281AF533004E65BB /* AppDelegate.swift in Sources */,
 				E15980A02A83A9D70032892B /* SlideOutTransition.swift in Sources */,
 				18FFB59F281AF533004E65BB /* Signer.swift in Sources */,
@@ -2356,6 +2377,7 @@
 				E122DBE62A8A468E006D1E7B /* cosmos_mint_v1beta1_query.pb.swift in Sources */,
 				E122DB262A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
 				E122DB562A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
+				040733002AA44075001C63DD /* ImportMnemonicVC.swift in Sources */,
 				E122DB9C2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
 				18FFB5C5281AF533004E65BB /* MintscanPrice.swift in Sources */,
 				E122DB4A2A8A468D006D1E7B /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,
@@ -2642,6 +2664,7 @@
 				E122DBA32A8A468D006D1E7B /* cosmos_store_v1beta1_listening.pb.swift in Sources */,
 				E122DB972A8A468D006D1E7B /* cosmos_authz_module_v1_module.pb.swift in Sources */,
 				E122DC5A2A8A4712006D1E7B /* tendermint_types_types.pb.swift in Sources */,
+				040733032AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */,
 				28CE973625872B7C006DEBEE /* Signer.swift in Sources */,
 				E159809F2A83A9D70032892B /* SlideOutTransition.swift in Sources */,
 				E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
@@ -2672,6 +2695,7 @@
 				E122DBE52A8A468E006D1E7B /* cosmos_mint_v1beta1_query.pb.swift in Sources */,
 				E122DB252A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
 				E122DB552A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
+				040732FF2AA44075001C63DD /* ImportMnemonicVC.swift in Sources */,
 				E122DB9B2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
 				046BD22027788723002333B5 /* StationNFTData.swift in Sources */,
 				E122DB492A8A468D006D1E7B /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,

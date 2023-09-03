@@ -830,7 +830,7 @@
 "error_two_pincode_differ" = "입력하신 두 패스워드가 다릅니다. 다시 설정해 주세요.";
 "error_no_clipboard" = "클립보드에 아무것도 없습니다.";
 "error_invalid_address_or_pubkey" = "부정확한 주소입니다.\n다시한번 확인해 주세요.";
-"error_recover_mnemonic" = "정확한 복구문자를 입력해 주세요.";
+"error_invalid_menmonic" = "정확한 복구문자를 입력해 주세요.";
 "error_amount" = "금액을 정확히 입력해 주세요.";
 "error_memo" = "메모를 정확히 입력해 주세요.";
 "error_only_fee_with_atom" = "지금은 ATOM만 수수료로 설정가능 합니다.";
