@@ -38,6 +38,11 @@ class PortfolioVC: BaseVC {
                                                name: Notification.Name("FetchData"), object: nil)
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        onUpdateTotal()
+//    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"),
@@ -45,7 +50,6 @@ class PortfolioVC: BaseVC {
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
-        print("onFetchDone ", Date().timeIntervalSince1970, " ", notification.object as! String)
         let id = notification.object as! String
         for i in 0..<baseAccount.toDisplayCosmosChains.count {
             if (baseAccount.toDisplayCosmosChains[i].id == id) {
@@ -56,7 +60,10 @@ class PortfolioVC: BaseVC {
                 }
             }
         }
-
+        onUpdateTotal()
+    }
+    
+    func onUpdateTotal() {
         var sum = NSDecimalNumber.zero
         baseAccount.toDisplayCosmosChains.forEach { chain in
             sum = sum.adding(chain.allValue())

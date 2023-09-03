@@ -70,7 +70,6 @@ class ChainSelectVC: BaseVC {
             self.loadingCntLabel.text = String(fetchedCnt) + " / " + String(self.baseAccount.allCosmosClassChains.count)
         }
         
-        
         if (baseAccount.allCosmosClassChains.filter { $0.fetched == false }.count == 0) {
             baseAccount.allCosmosClassChains.forEach { chain in
                 let address = RefAddress(baseAccount.id, chain.id, chain.address!,chain.allStakingDenomAmount().stringValue, chain.allValue(true).stringValue)

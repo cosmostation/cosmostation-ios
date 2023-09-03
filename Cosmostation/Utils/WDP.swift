@@ -95,7 +95,7 @@ public class WDP {
     
 //    static func dpCoin(_ baseChain: BaseChain?, _ coin: Cosmos_Base_V1beta1_Coin?, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16? = 6) {
     static func dpCoin(_ msAsset: MintscanAsset, _ coin: Cosmos_Base_V1beta1_Coin?, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
-        if (coin == nil || amountLabel == nil) { return }
+        if (coin == nil) { return }
 
         let amount = NSDecimalNumber(string: coin?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
         amountLabel?.attributedText = dpAmount(amount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
@@ -125,6 +125,14 @@ public class WDP {
 //                }
 //            }
 //        }
+    }
+    
+    static func dpToken(_ tokenInfo: MintscanToken?, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
+        if (tokenInfo == nil) { return }
+        let amount = tokenInfo!.getAmount().multiplying(byPowerOf10: -tokenInfo!.decimals!)
+        amountLabel?.attributedText = dpAmount(amount.stringValue, amountLabel!.font, showDecimal ?? tokenInfo!.decimals)
+        denomLabel?.text = tokenInfo!.symbol
+        coinImg?.af.setImage(withURL: tokenInfo!.assetImg())
     }
 //
 //    static func dpBnbTxCoin(_ chainConfig: ChainConfig, _ coin:Coin, _ denomLabel: UILabel, _ amountLabel: UILabel) {
@@ -248,7 +256,11 @@ public class WDP {
 //    }
     
     static func dpPrice(_ msAsset: MintscanAsset, _ currencyLabel: UILabel?, _ priceLabel: UILabel?) {
-        let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+        dpPrice(msAsset.coinGeckoId, currencyLabel, priceLabel)
+    }
+    
+    static func dpPrice(_ coinGeckoId: String?, _ currencyLabel: UILabel?, _ priceLabel: UILabel?) {
+        let msPrice = BaseData.instance.getPrice(coinGeckoId)
         let nf = WUtils.getNumberFormatter(3)
         let formatted = nf.string(from: msPrice)!
         currencyLabel?.text = BaseData.instance.getCurrencySymbol()
@@ -256,7 +268,11 @@ public class WDP {
     }
     
     static func dpPriceChanged(_ msAsset: MintscanAsset, _ valueLabel: UILabel?, _ percentLabel: UILabel?) {
-        let priceChanged = BaseData.instance.priceChange(msAsset.coinGeckoId)
+        dpPriceChanged(msAsset.coinGeckoId, valueLabel, percentLabel)
+    }
+    
+    static func dpPriceChanged(_ coinGeckoId: String?, _ valueLabel: UILabel?, _ percentLabel: UILabel?) {
+        let priceChanged = BaseData.instance.priceChange(coinGeckoId)
         let nf = WUtils.getNumberFormatter(2)
         if (priceChanged.compare(NSDecimalNumber.zero).rawValue >= 0) {
             let formatted = nf.string(from: priceChanged)!

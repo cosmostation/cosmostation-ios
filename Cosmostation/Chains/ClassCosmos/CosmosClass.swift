@@ -10,10 +10,14 @@ import Foundation
 import GRPC
 import NIO
 import SwiftProtobuf
+import Alamofire
 
 class CosmosClass: BaseChain  {
     
     var stakeDenom: String!
+    var supportCw20 = false
+    var supportErc20 = false
+    var supportNft = false
     
     var grpcHost = ""
     var grpcPort = 443
@@ -23,6 +27,8 @@ class CosmosClass: BaseChain  {
     lazy var cosmosDelegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     lazy var cosmosUnbondings = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
     lazy var cosmosRewards = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
+    
+    lazy var mintscanTokens = Array<MintscanToken>()
     
     
     func fetchAuth() {
@@ -41,7 +47,9 @@ class CosmosClass: BaseChain  {
     }
     
     func fetchData(_ channel: ClientConnection) {
+        if (supportCw20) { BaseNetWork().fetchCw20Info(self) }
         let group = DispatchGroup()
+    
         fetchBalance(group, channel)
         fetchDelegation(group, channel)
         fetchUnbondings(group, channel)
@@ -94,6 +102,34 @@ class CosmosClass: BaseChain  {
         let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = address! }
         if let response = try? Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).delegationTotalRewards(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosRewards = response.rewards
+            group.leave()
+        } else {
+            group.leave()
+        }
+    }
+    
+    func fetchAllCw20Balance() {
+        let channel = getConnection()
+        let group = DispatchGroup()
+        mintscanTokens.forEach { token in
+            Task { fetchCw20Balance(group, channel, token) }
+        }
+
+        group.notify(queue: .main) {
+            try? channel.close()
+            NotificationCenter.default.post(name: Notification.Name("FetchCw20Tokens"), object: nil, userInfo: nil)
+        }
+    }
+
+    func fetchCw20Balance(_ group: DispatchGroup, _ channel: ClientConnection, _ tokenInfo: MintscanToken) {
+        group.enter()
+        let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+            $0.address = tokenInfo.address!
+            $0.queryData = Cw20BalaceReq.init(address!).getEncode()
+        }
+        if let response = try? Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.wait() {
+            let cw20balance = try? JSONDecoder().decode(Cw20BalaceRes.self, from: response.data)
+            tokenInfo.setAmount(cw20balance?.balance ?? "0")
             group.leave()
         } else {
             group.leave()
@@ -181,6 +217,12 @@ class CosmosClass: BaseChain  {
     }
     
     
+    func allStakingDenomAmount() -> NSDecimalNumber {
+         return balanceAmount(stakeDenom).adding(vestingAmount(stakeDenom)).adding(delegationAmountSum())
+            .adding(unbondingAmountSum()).adding(rewardAmountSum(stakeDenom))
+    }
+    
+    
     func rewardAmountSum(_ denom: String) -> NSDecimalNumber {
         var result =  NSDecimalNumber.zero
         cosmosRewards.forEach({ reward in
@@ -249,14 +291,31 @@ class CosmosClass: BaseChain  {
         }
     }
     
-    func allStakingDenomAmount() -> NSDecimalNumber {
-         return balanceAmount(stakeDenom).adding(vestingAmount(stakeDenom)).adding(delegationAmountSum())
-            .adding(unbondingAmountSum()).adding(rewardAmountSum(stakeDenom))
+    func cw20Value(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
+        if let tokenInfo =  mintscanTokens.filter({ $0.address == address }).first {
+            let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+            return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: getDivideHandler(6))
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    func allCw20Value(_ usd: Bool? = false) -> NSDecimalNumber {
+        var result = NSDecimalNumber.zero
+        mintscanTokens.forEach { tokenInfo in
+            let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+            let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: getDivideHandler(6))
+            result = result.adding(value)
+        }
+        return result
     }
     
     override func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        return balanceValueSum(usd).adding(vestingValueSum(usd))
+        var result = balanceValueSum(usd).adding(vestingValueSum(usd))
             .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
+        if (supportCw20) {
+            result = result.adding(allCw20Value(usd))
+        }
+        return result
     }
     
     

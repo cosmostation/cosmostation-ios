@@ -1,13 +1,14 @@
 //
-//  Cw20BalanceQuery.swift
+//  Cosmwasm.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2022/01/29.
-//  Copyright © 2022 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2023/09/03.
+//  Copyright © 2023 wannabit. All rights reserved.
 //
 
 import Foundation
 
+//Cw20 balance query
 public struct Cw20BalaceReq : Codable {
     var balance: BalaceReq?
     
@@ -27,4 +28,8 @@ public struct BalaceReq : Codable {
     init(_ address: String) {
         self.address = address
     }
+}
+
+public struct Cw20BalaceRes : Codable {
+    var balance: String?
 }

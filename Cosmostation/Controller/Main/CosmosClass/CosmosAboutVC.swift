@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CosmosAboutVC: UIViewController {
+class CosmosAboutVC: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()

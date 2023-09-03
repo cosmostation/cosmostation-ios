@@ -43,14 +43,33 @@ class CosmosClassVC: BaseVC {
         print("selectedChain address ", selectedChain.address)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchCw20Done(_:)), name: Notification.Name("FetchCw20Tokens"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchCw20Tokens"), object: nil)
+    }
+    
+    @objc func onFetchCw20Done(_ notification: NSNotification) {
+        totalValue = selectedChain.allValue()
+    }
+    
     func onSetTabbarView() {
         let coinTabBar = UITabBarItem(title: "Coins", image: nil, tag: 0)
         let tokenTabBar = UITabBarItem(title: "Tokens", image: nil, tag: 1)
         let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 2)
         let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 3)
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 4)
-        tabbar.items = [ coinTabBar, tokenTabBar, historyTabBar]
+//        tabbar.items = [ coinTabBar, tokenTabBar, historyTabBar]
 //        tabbar.items = [ coinTabBar, tokenTabBar, nftTabBar, historyTabBar, aboutTabBar]
+        tabbar.items.append(coinTabBar)
+        if (selectedChain.supportCw20 || selectedChain.supportErc20) { tabbar.items.append(tokenTabBar) }
+        if (selectedChain.supportNft) { tabbar.items.append(nftTabBar) }
+        tabbar.items.append(historyTabBar)
+        tabbar.items.append(aboutTabBar)
         
         tabbar.barTintColor = .clear
         tabbar.selectionIndicatorStrokeColor = .white

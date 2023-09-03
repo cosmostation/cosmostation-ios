@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CosmosNftVC: UIViewController {
+class CosmosNftVC: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
