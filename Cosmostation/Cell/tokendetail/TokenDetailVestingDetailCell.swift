@@ -83,7 +83,7 @@ class TokenDetailVestingDetailCell: UITableViewCell {
         if (chainConfig.chainType == .NEUTRON_MAIN || chainConfig.chainType == .NEUTRON_TEST) {
             vestingCntLabel.text = String(1)
             vestingTime0.text = WDP.dpTime(baseData.mNeutronDuration)
-            vestingGap0.text = WDP.dpTimeGap(baseData.mNeutronDuration)
+            vestingGap0.text = WDP.dpTimeGapByNeutron(baseData.mNeutronDuration)
             vestingAmount0.attributedText = WDP.dpAmount(baseData.mNeutronVesting.stringValue, vestingAmount0.font!, 6, 6)
             
         } else {

@@ -264,6 +264,14 @@ public class WDP {
         return WUtils.getGapTime(date)
     }
     
+    static func dpTimeGapByNeutron(_ timeInt: Int64?) -> String {
+        if (timeInt == nil) { return "" }
+        guard let date = WUtils.timeInt64ToDate(timeInt!) else {
+            return ""
+        }
+        return WUtils.getGapTimeByNeutron(date)
+    }
+    
     static func okcDpTime(_ timeInt: Int64?) -> String {
         if (timeInt == nil) { return "-" }
         guard let date = WUtils.timeInt64ToDate(timeInt! + Int64(TimeZone.current.secondsFromGMT()) * 1000) else {
