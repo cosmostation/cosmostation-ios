@@ -11,6 +11,7 @@ import GRPC
 import NIO
 import SwiftProtobuf
 import Alamofire
+import SwiftyJSON
 
 class CosmosClass: BaseChain  {
     
@@ -31,12 +32,49 @@ class CosmosClass: BaseChain  {
     lazy var mintscanTokens = Array<MintscanToken>()
     
     
-    func fetchAuth() {
+    //For Legacy Lcd chains
+    lazy var lcdNodeInfo = JSON()
+    lazy var lcdAccountInfo = JSON()
+    
+    
+    lazy var lcdBeaconTokens = Array<JSON>()
+    
+    
+    override func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
+        var result = NSDecimalNumber.zero
+        if (self is ChainBinanceBeacon) {
+            result = lcdBalanceValue(stakeDenom, usd)
+            
+        } else {
+            result = balanceValueSum(usd).adding(vestingValueSum(usd))
+                .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
+            
+            if (supportCw20) {
+                result = result.adding(allCw20Value(usd))
+            }
+        }
+        return result
+    }
+    
+    func fetchData() {
+        if (self is ChainBinanceBeacon) {
+            fetchLcdData()
+        } else {
+            fetchGrpcData()
+        }
+    }
+}
+
+
+//about grpc
+extension CosmosClass {
+    
+    func fetchGrpcData() {
         let channel = getConnection()
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address! }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosAuth = response.account
-            self.fetchData(channel)
+            self.fetchMoreData(channel)
             
         } else {
             try? channel.close()
@@ -46,7 +84,7 @@ class CosmosClass: BaseChain  {
         }
     }
     
-    func fetchData(_ channel: ClientConnection) {
+    func fetchMoreData(_ channel: ClientConnection) {
         if (supportCw20) { BaseNetWork().fetchCw20Info(self) }
         let group = DispatchGroup()
     
@@ -309,15 +347,6 @@ class CosmosClass: BaseChain  {
         return result
     }
     
-    override func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        var result = balanceValueSum(usd).adding(vestingValueSum(usd))
-            .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
-        if (supportCw20) {
-            result = result.adding(allCw20Value(usd))
-        }
-        return result
-    }
-    
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
@@ -331,6 +360,117 @@ class CosmosClass: BaseChain  {
     }
 }
 
+
+//about legacy lcd
+extension CosmosClass {
+    
+    func fetchLcdData() {
+        let group = DispatchGroup()
+        
+        if (self is ChainBinanceBeacon) {
+            fetchNodeInfo(group)
+            fetchAccountInfo(group, address!)
+            fetchBeaconTokens(group)
+            fetchBeaconMiniTokens(group)
+        }
+        
+        group.notify(queue: .main) {
+            self.fetched = true
+            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.id, userInfo: nil)
+        }
+    }
+    
+    func fetchNodeInfo(_ group: DispatchGroup) {
+//        print("fetchNodeInfo Start ", BaseNetWork.lcdNodeInfoUrl(self))
+        group.enter()
+        AF.request(BaseNetWork.lcdNodeInfoUrl(self), method: .get)
+            .responseDecodable(of: JSON.self) { response in
+                switch response.result {
+                case .success(let value):
+                    self.lcdNodeInfo = value
+//                    print("fetchNodeInfo ", value)
+                case .failure:
+                    print("fetchNodeInfo error")
+                }
+                group.leave()
+            }
+    }
+    
+    func fetchAccountInfo(_ group: DispatchGroup, _ address: String) {
+//        print("fetchAccountInfo Start ", BaseNetWork.lcdAccountInfoUrl(self, address))
+        group.enter()
+        AF.request(BaseNetWork.lcdAccountInfoUrl(self, address), method: .get)
+            .responseDecodable(of: JSON.self) { response in
+                switch response.result {
+                case .success(let value):
+                    self.lcdAccountInfo = value
+                    print("fetchAccountInfo ", value)
+                case .failure:
+                    print("fetchAccountInfo error")
+                }
+                group.leave()
+            }
+    }
+    
+    func fetchBeaconTokens(_ group: DispatchGroup) {
+        group.enter()
+        AF.request(BaseNetWork.lcdBeaconTokenUrl(), method: .get, parameters: ["limit":"1000"])
+            .responseDecodable(of: [JSON].self) { response in
+                switch response.result {
+                case .success(let values):
+                    values.forEach { value in
+                        self.lcdBeaconTokens.append(value)
+                    }
+                case .failure:
+                    print("fetchBeaconTokens error")
+                }
+                group.leave()
+            }
+    }
+    
+    func fetchBeaconMiniTokens(_ group: DispatchGroup) {
+        group.enter()
+        AF.request(BaseNetWork.lcdBeaconMiniTokenUrl(), method: .get, parameters: ["limit":"1000"])
+            .responseDecodable(of: [JSON].self) { response in
+                switch response.result {
+                case .success(let values):
+                    values.forEach { value in
+                        self.lcdBeaconTokens.append(value)
+                    }
+                case .failure:
+                    print("fetchBeaconMiniTokens error")
+                }
+                group.leave()
+            }
+    }
+    
+    
+    func lcdBalanceAmount(_ denom: String) -> NSDecimalNumber {
+        if let balance = lcdAccountInfo["balances"].array?.filter({ $0["symbol"].string == denom }).first {
+            return NSDecimalNumber.init(string: balance["free"].string ?? "0")
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    func lcdBalanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
+        if (denom == stakeDenom) {
+            let amount = lcdBalanceAmount(denom)
+            let msPrice = BaseData.instance.getPrice(ChainBinanceBeacon.BNB_GECKO_ID, usd)
+            return msPrice.multiplying(by: amount, withBehavior: getDivideHandler(6))
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    func lcdBalanceValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
+        var result =  NSDecimalNumber.zero
+        lcdAccountInfo["balances"].array?.forEach({ balance in
+            result = result.adding(lcdBalanceValue(balance["denom"].stringValue, usd))
+        })
+        return result
+    }
+}
+
+
 func ALLCOSMOSCLASS() -> [CosmosClass] {
     var result = [CosmosClass]()
     result.removeAll()
@@ -338,6 +478,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainAkash())
     result.append(ChainAssetMantle())
     result.append(ChainAxelar())
+    result.append(ChainBinanceBeacon())
     result.append(ChainCanto())
     result.append(ChainEvmos())
     result.append(ChainInjective())

@@ -49,50 +49,74 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindCosmosStakeAsset(_ baseChain: CosmosClass) {
-        let stakeDenom = baseChain.stakeDenom!
-        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
-            let value = baseChain.denomValue(stakeDenom)
-            coinImg.af.setImage(withURL: msAsset.assetImg())
-            symbolLabel.text = msAsset.symbol?.uppercased()
+        if (baseChain is ChainBinanceBeacon) {
+            bindBeaconAsset(baseChain)
             
-            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
-            
-            let availableAmount = baseChain.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-            availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
-            
-            let vestingAmount = baseChain.vestingAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-            if (vestingAmount != NSDecimalNumber.zero) {
-                vestingLayer.isHidden = false
-                vestingLabel?.attributedText = WDP.dpAmount(vestingAmount.stringValue, vestingLabel!.font, 6)
-            }
-            
-            let stakingAmount = baseChain.delegationAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
-            stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
-            
-            let unStakingAmount = baseChain.unbondingAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
-            if (unStakingAmount != NSDecimalNumber.zero) {
-                unstakingLayer.isHidden = false
-                unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
-            }
-            
-            let rewardAmount = baseChain.rewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-            if (baseChain.rewardAllCoins().count > 0) {
-                rewardLayer.isHidden = false
-                if (baseChain.rewardOtherDenoms() > 0) {
-                    rewardTitle.text = "Reward + " + String(baseChain.rewardOtherDenoms())
-                } else {
-                    rewardTitle.text = "Reward"
+        } else {
+            let stakeDenom = baseChain.stakeDenom!
+            if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+                let value = baseChain.denomValue(stakeDenom)
+                coinImg.af.setImage(withURL: msAsset.assetImg())
+                symbolLabel.text = msAsset.symbol?.uppercased()
+                
+                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                
+                let availableAmount = baseChain.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
+                
+                let vestingAmount = baseChain.vestingAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                if (vestingAmount != NSDecimalNumber.zero) {
+                    vestingLayer.isHidden = false
+                    vestingLabel?.attributedText = WDP.dpAmount(vestingAmount.stringValue, vestingLabel!.font, 6)
                 }
-                rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
+                
+                let stakingAmount = baseChain.delegationAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
+                stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
+                
+                let unStakingAmount = baseChain.unbondingAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
+                if (unStakingAmount != NSDecimalNumber.zero) {
+                    unstakingLayer.isHidden = false
+                    unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
+                }
+                
+                let rewardAmount = baseChain.rewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                if (baseChain.rewardAllCoins().count > 0) {
+                    rewardLayer.isHidden = false
+                    if (baseChain.rewardOtherDenoms() > 0) {
+                        rewardTitle.text = "Reward + " + String(baseChain.rewardOtherDenoms())
+                    } else {
+                        rewardTitle.text = "Reward"
+                    }
+                    rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
+                }
+                
+                let totalAmount = availableAmount.adding(vestingAmount).adding(stakingAmount)
+                    .adding(unStakingAmount).adding(rewardAmount)
+                amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
             }
-            
-            let totalAmount = availableAmount.adding(vestingAmount).adding(stakingAmount)
-                .adding(unStakingAmount).adding(rewardAmount)
-            amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
         }
         
+    }
+    
+    func bindBeaconAsset(_ baseChain: CosmosClass) {
+        stakingTitle.text = "Locked"
+        vestingTitle.text = "Frozen"
+        vestingLayer.isHidden = false
+        
+        let stakeDenom = baseChain.stakeDenom!
+        let value = baseChain.lcdBalanceValue(stakeDenom)
+        coinImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(stakeDenom))
+        symbolLabel.text = stakeDenom.uppercased()
+        
+        WDP.dpPrice(ChainBinanceBeacon.BNB_GECKO_ID, priceCurrencyLabel, priceLabel)
+        WDP.dpPriceChanged(ChainBinanceBeacon.BNB_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+        WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+        
+        let availableAmount = baseChain.lcdBalanceAmount(stakeDenom)
+        availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 8)
+        amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
     }
     
 }

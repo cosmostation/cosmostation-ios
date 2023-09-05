@@ -43,12 +43,17 @@ class PortfolioCell: UITableViewCell {
             pathLabel.text = chain.getHDPath(account.lastHDPath)
         }
         
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom) {
-            let priceChanged = BaseData.instance.priceChange(msAsset.coinGeckoId)
-//            WDP.dpPriceChangeImg(priceImg, priceChanged)
-//            WDP.dpPriceChanged(priceChangeLabel, priceChanged)
-            WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
-        }
+        
+        WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
+        
+//        if (self is ChainBinanceBeacon) {
+//
+//        } else {
+//            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom) {
+//                let priceChanged = BaseData.instance.priceChange(msAsset.coinGeckoId)
+//                WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
+//            }
+//        }
     }
     
 }
