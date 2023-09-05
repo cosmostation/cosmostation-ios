@@ -404,7 +404,7 @@ extension CosmosClass {
                 switch response.result {
                 case .success(let value):
                     self.lcdAccountInfo = value
-                    print("fetchAccountInfo ", value)
+//                    print("fetchAccountInfo ", value)
                 case .failure:
                     print("fetchAccountInfo error")
                 }
