@@ -15,6 +15,8 @@
 		040733042AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040733012AA442B6001C63DD /* ImportMnemonicCheckVC.swift */; };
 		040733052AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040733022AA442B6001C63DD /* ImportMnemonicCheckVC.xib */; };
 		040733062AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040733022AA442B6001C63DD /* ImportMnemonicCheckVC.xib */; };
+		04117B7E2AA5860600637836 /* ChainOsmosis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04117B7D2AA5860600637836 /* ChainOsmosis.swift */; };
+		04117B7F2AA5860600637836 /* ChainOsmosis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04117B7D2AA5860600637836 /* ChainOsmosis.swift */; };
 		04172B7A29F6819300D6279C /* Cw20VaultDepositReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */; };
 		04172B7C29F6826200D6279C /* Cw20VaultDepositRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */; };
 		04172B9329F7AE4000D6279C /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */; };
@@ -779,6 +781,7 @@
 		040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMnemonicVC.swift; sourceTree = "<group>"; };
 		040733012AA442B6001C63DD /* ImportMnemonicCheckVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMnemonicCheckVC.swift; sourceTree = "<group>"; };
 		040733022AA442B6001C63DD /* ImportMnemonicCheckVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportMnemonicCheckVC.xib; sourceTree = "<group>"; };
+		04117B7D2AA5860600637836 /* ChainOsmosis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOsmosis.swift; sourceTree = "<group>"; };
 		04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20VaultDepositReq.swift; sourceTree = "<group>"; };
 		04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20VaultDepositRes.swift; sourceTree = "<group>"; };
 		04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -1240,6 +1243,7 @@
 				044ECB1F2A95DE5D0042DB3C /* ChainKi.swift */,
 				044ECB222A95DEB70042DB3C /* ChainLum880.swift */,
 				044ECB252A95DF1D0042DB3C /* ChainLum118.swift */,
+				04117B7D2AA5860600637836 /* ChainOsmosis.swift */,
 				044ECB282A95DF8C0042DB3C /* ChainPersistence118.swift */,
 				044ECB2B2A95DFCE0042DB3C /* ChainPersistence750.swift */,
 				044ECB2E2A95E1C90042DB3C /* ChainSommelier.swift */,
@@ -2364,6 +2368,7 @@
 				044ECB212A95DE5D0042DB3C /* ChainKi.swift in Sources */,
 				E122DB402A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
 				E122DC512A8A4712006D1E7B /* tendermint_crypto_proof.pb.swift in Sources */,
+				04117B7F2AA5860600637836 /* ChainOsmosis.swift in Sources */,
 				E122DC5F2A8A4712006D1E7B /* tendermint_types_validator.pb.swift in Sources */,
 				04FA74862AA0E2A9001A2830 /* CreateMnemonicVC.swift in Sources */,
 				E122DB242A8A468D006D1E7B /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,
@@ -2692,6 +2697,7 @@
 				044ECB202A95DE5D0042DB3C /* ChainKi.swift in Sources */,
 				E122DB3F2A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
 				E122DC502A8A4712006D1E7B /* tendermint_crypto_proof.pb.swift in Sources */,
+				04117B7E2AA5860600637836 /* ChainOsmosis.swift in Sources */,
 				E122DC5E2A8A4712006D1E7B /* tendermint_types_validator.pb.swift in Sources */,
 				04FA74852AA0E2A9001A2830 /* CreateMnemonicVC.swift in Sources */,
 				E122DB232A8A468D006D1E7B /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,

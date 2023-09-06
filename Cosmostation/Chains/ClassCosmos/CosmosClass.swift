@@ -348,6 +348,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainKi())
     result.append(ChainLum880())
     result.append(ChainLum118())
+    result.append(ChainOsmosis())
     result.append(ChainPersistence118())
     result.append(ChainPersistence750())
     result.append(ChainSommelier())
