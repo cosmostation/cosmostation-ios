@@ -54,7 +54,7 @@ public class BaseAccount {
                 allCosmosClassChains.forEach { chain in
                     Task {
                         chain.setInfoWithSeed(seed, lastHDPath)
-                        chain.fetchAuth()
+                        chain.fetchData()
                     }
                 }
             }
@@ -64,7 +64,7 @@ public class BaseAccount {
                 allCosmosClassChains.forEach { chain in
                     Task {
                         chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
-                        chain.fetchAuth()
+                        chain.fetchData()
                     }
                 }
             }
@@ -86,7 +86,7 @@ public class BaseAccount {
                 toDisplayCosmosChains.forEach { chain in
                     Task {
                         chain.setInfoWithSeed(seed, lastHDPath)
-                        chain.fetchAuth()
+                        chain.fetchData()
                     }
                 }
             }
@@ -96,7 +96,7 @@ public class BaseAccount {
                 toDisplayCosmosChains.forEach { chain in
                     Task {
                         chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
-                        chain.fetchAuth()
+                        chain.fetchData()
                     }
                 }
             }

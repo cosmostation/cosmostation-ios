@@ -100,3 +100,40 @@ class BaseNetWork {
         return URL(string: MintscanUrl + chain.apiName + "/transactions/" + txHash)
     }
 }
+
+
+//LCD call for legacy chains
+extension BaseNetWork {
+    
+    static func lcdNodeInfoUrl(_ chain: BaseChain) -> String {
+        if (chain is ChainBinanceBeacon) {
+            return ChainBinanceBeacon.lcdUrl + "api/v1/node-info"
+        }
+        return ""
+    }
+    
+    static func lcdAccountInfoUrl(_ chain: BaseChain, _ address: String) -> String {
+        if (chain is ChainBinanceBeacon) {
+            return ChainBinanceBeacon.lcdUrl + "api/v1/account/" + address
+        }
+        return ""
+    }
+    
+    
+    static func lcdBeaconTokenUrl() -> String {
+        return ChainBinanceBeacon.lcdUrl + "api/v1/tokens"
+    }
+    
+    static func lcdBeaconMiniTokenUrl() -> String {
+        return ChainBinanceBeacon.lcdUrl + "api/v1/mini/tokens"
+    }
+    
+//    static func lcdBeaconTicUrl() -> String {
+//        return ChainBinanceBeacon.lcdUrl + "api/v1/ticker/24hr"
+//    }
+//
+//    static func lcdBeaconMiniTicUrl() -> String {
+//        return ChainBinanceBeacon.lcdUrl + "api/v1/mini/ticker/24hr"
+//    }
+    
+}

@@ -17,6 +17,7 @@ def shared_pods
     pod 'MaterialComponents/AppBar'
     pod 'MaterialComponents/Tabs+TabBarView'
     pod 'MaterialComponents/Typography'
+    pod 'MaterialComponents/Buttons'
     
 #    pod 'Toast-Swift', '~> 4.0.0'
 #    pod 'Floaty', '~> 4.1.0'

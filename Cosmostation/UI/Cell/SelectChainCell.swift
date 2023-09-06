@@ -41,7 +41,12 @@ class SelectChainCell: UITableViewCell {
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
         pathLabel.text = chain.getHDPath(account.lastHDPath)
-        assetCntLabel.text = String(chain.cosmosBalances.count) + " Coins"
+//
+        if (chain is ChainBinanceBeacon) {
+            assetCntLabel.text = String(chain.lcdAccountInfo["balances"].arrayValue.count) + " Coins"
+        }  else {
+            assetCntLabel.text = String(chain.cosmosBalances.count) + " Coins"
+        }
         legacyLabel.isHidden = chain.isDefault
         
         WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)

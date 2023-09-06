@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+import SwiftyJSON
 
 class AssetCell: UITableViewCell {
     
@@ -49,6 +50,28 @@ class AssetCell: UITableViewCell {
         WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
         WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
         WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+    }
+    
+    
+    func bindBeaconAsset(_ baseChain: CosmosClass, _ coin: JSON) {
+        if let token = baseChain.lcdBeaconTokens.filter { $0["symbol"].string == coin["symbol"].string }.first {
+            let original_symbol = token["original_symbol"].stringValue
+            
+            symbolLabel.text = original_symbol
+            priceCurrencyLabel.text = token["name"].string
+            coinImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(original_symbol))
+            
+            let availableAmount = baseChain.lcdBalanceAmount(coin["symbol"].stringValue)
+            amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
+            
+//            priceCurrencyLabel.isHidden = true
+            priceLabel.isHidden = true
+            priceChangeLabel.isHidden = true
+            priceChangePercentLabel.isHidden = true
+            valueCurrencyLabel.isHidden = true
+            valueLabel.isHidden = true
+        }
+        
     }
     
 }

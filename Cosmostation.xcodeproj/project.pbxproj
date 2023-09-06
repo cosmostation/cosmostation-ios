@@ -245,13 +245,11 @@
 		18FFB41E281AF533004E65BB /* BinanceSegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9042268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift */; };
 		18FFB436281AF533004E65BB /* Cw20TransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */; };
 		18FFB43C281AF533004E65BB /* BinanceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9036268C3F29002CFFE1 /* BinanceMessage.swift */; };
-		18FFB47D281AF533004E65BB /* BnbTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284291A0264AA77C00130651 /* BnbTicker.swift */; };
 		18FFB4F8281AF533004E65BB /* Param.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E3E37F2671BE8D00BA89C2 /* Param.swift */; };
 		18FFB51E281AF533004E65BB /* BTCProtocolSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E52282D782003D8CD1 /* BTCProtocolSerialization.m */; };
 		18FFB520281AF533004E65BB /* MintscanProposalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479664F2757409700315D55 /* MintscanProposalDetail.swift */; };
 		18FFB57A281AF533004E65BB /* WKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1C2248E6A60019B7BB /* WKey.swift */; };
 		18FFB58B281AF533004E65BB /* BinanceInt+VarInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9040268C4863002CFFE1 /* BinanceInt+VarInt.swift */; };
-		18FFB590281AF533004E65BB /* BnbToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F7F633234311F8000E597F /* BnbToken.swift */; };
 		18FFB591281AF533004E65BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E27222E7C0600A1436F /* AppDelegate.swift */; };
 		18FFB59F281AF533004E65BB /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE973525872B7C006DEBEE /* Signer.swift */; };
 		18FFB5B6281AF533004E65BB /* BTCMnemonic.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E12282D6AD003D8CD1 /* BTCMnemonic.m */; };
@@ -269,7 +267,6 @@
 		18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
 		2810084A2696D979002986A6 /* KeyFac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281008492696D979002986A6 /* KeyFac.swift */; };
 		283D2EA424F52FE700247424 /* OkToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2EA324F52FE700247424 /* OkToken.swift */; };
-		284291A1264AA77C00130651 /* BnbTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284291A0264AA77C00130651 /* BnbTicker.swift */; };
 		285ADF0D272EE35F0023651F /* CKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285ADF0C272EE35F0023651F /* CKey.swift */; };
 		28CE973625872B7C006DEBEE /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE973525872B7C006DEBEE /* Signer.swift */; };
 		28D765A2271585FA00730F47 /* StarnameAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D765A1271585FA00730F47 /* StarnameAssets.swift */; };
@@ -737,6 +734,8 @@
 		E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16D9B182248C4880019B7BB /* Assets.xcassets */; };
 		E16D9B1D2248E6A60019B7BB /* WKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1C2248E6A60019B7BB /* WKey.swift */; };
 		E16FACB12361ADFA00372052 /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16FACB02361ADFA00372052 /* Bytes.swift */; };
+		E17638522AA7642800904DB4 /* ChainBinanceBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17638512AA7642800904DB4 /* ChainBinanceBeacon.swift */; };
+		E17638532AA7642800904DB4 /* ChainBinanceBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17638512AA7642800904DB4 /* ChainBinanceBeacon.swift */; };
 		E17748E32282D6AD003D8CD1 /* BTCMnemonic.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E12282D6AD003D8CD1 /* BTCMnemonic.m */; };
 		E17748E62282D782003D8CD1 /* BTCProtocolSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E52282D782003D8CD1 /* BTCProtocolSerialization.m */; };
 		E18A4EBB2A95149100D8BC05 /* ChainAssetMantle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */; };
@@ -772,7 +771,6 @@
 		E1E0DBCB2A9B1579006DA6BB /* MintscanHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E0DBCA2A9B1579006DA6BB /* MintscanHistory.swift */; };
 		E1E0DBCC2A9B1579006DA6BB /* MintscanHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E0DBCA2A9B1579006DA6BB /* MintscanHistory.swift */; };
 		E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F2AE50227EC05100C87F3F /* InfoPlist.strings */; };
-		E1F7F634234311F8000E597F /* BnbToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F7F633234311F8000E597F /* BnbToken.swift */; };
 		EB85535FBF1815AEAECE43D4 /* Pods_CosmostationDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE90772AFD2E77BC9578D8B2 /* Pods_CosmostationDev.framework */; };
 /* End PBXBuildFile section */
 
@@ -890,7 +888,6 @@
 		25F8C730296D31200008CCC8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		281008492696D979002986A6 /* KeyFac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFac.swift; sourceTree = "<group>"; };
 		283D2EA324F52FE700247424 /* OkToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkToken.swift; sourceTree = "<group>"; };
-		284291A0264AA77C00130651 /* BnbTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BnbTicker.swift; sourceTree = "<group>"; };
 		285ADF0C272EE35F0023651F /* CKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKey.swift; sourceTree = "<group>"; };
 		28CE973525872B7C006DEBEE /* Signer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signer.swift; sourceTree = "<group>"; };
 		28D765A1271585FA00730F47 /* StarnameAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameAssets.swift; sourceTree = "<group>"; };
@@ -1131,6 +1128,7 @@
 		E16D9B182248C4880019B7BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E16D9B1C2248E6A60019B7BB /* WKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKey.swift; sourceTree = "<group>"; };
 		E16FACB02361ADFA00372052 /* Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bytes.swift; sourceTree = "<group>"; };
+		E17638512AA7642800904DB4 /* ChainBinanceBeacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBinanceBeacon.swift; sourceTree = "<group>"; };
 		E17748D82282C612003D8CD1 /* Cosmostation-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cosmostation-Bridging-Header.h"; sourceTree = "<group>"; };
 		E17748E12282D6AD003D8CD1 /* BTCMnemonic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCMnemonic.m; sourceTree = "<group>"; };
 		E17748E22282D6AD003D8CD1 /* BTCMnemonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCMnemonic.h; sourceTree = "<group>"; };
@@ -1161,7 +1159,6 @@
 		E1F2AE4B227E865D00C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1F2AE4F227EC05100C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1F2AE51227EC06900C87F3F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E1F7F633234311F8000E597F /* BnbToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BnbToken.swift; sourceTree = "<group>"; };
 		FA3F07B8EA5FD2C04B9EB807 /* Pods_Cosmostation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cosmostation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1249,6 +1246,7 @@
 				044ECB2E2A95E1C90042DB3C /* ChainSommelier.swift */,
 				044ECB312A95E2160042DB3C /* ChainStargaze.swift */,
 				044ECB342A95E2590042DB3C /* ChainUmee.swift */,
+				E17638512AA7642800904DB4 /* ChainBinanceBeacon.swift */,
 			);
 			path = ClassCosmos;
 			sourceTree = "<group>";
@@ -1788,8 +1786,6 @@
 		E1A82DCF224220810097CAEE /* Dao */ = {
 			isa = PBXGroup;
 			children = (
-				E1F7F633234311F8000E597F /* BnbToken.swift */,
-				284291A0264AA77C00130651 /* BnbTicker.swift */,
 				283D2EA324F52FE700247424 /* OkToken.swift */,
 				28FC030B2652662B001C0319 /* MintscanPrice.swift */,
 				28E3E37F2671BE8D00BA89C2 /* Param.swift */,
@@ -2329,9 +2325,9 @@
 				E122DAF42A8A468D006D1E7B /* cosmos_consensus_v1_query.pb.swift in Sources */,
 				E11069B52AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				E122DB882A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.pb.swift in Sources */,
+				E17638532AA7642800904DB4 /* ChainBinanceBeacon.swift in Sources */,
 				E122DBEA2A8A468E006D1E7B /* cosmos_gov_v1beta1_gov.pb.swift in Sources */,
 				E122DC2A2A8A468E006D1E7B /* cosmos_tx_config_v1_config.pb.swift in Sources */,
-				18FFB47D281AF533004E65BB /* BnbTicker.swift in Sources */,
 				E122DB142A8A468D006D1E7B /* cosmos_auth_v1beta1_genesis.pb.swift in Sources */,
 				04FA74512A9D97A0001A2830 /* PincodeInputVC.swift in Sources */,
 				04FA74532A9D97A0001A2830 /* PincodeDecimalVC.swift in Sources */,
@@ -2400,7 +2396,6 @@
 				E122DB442A8A468D006D1E7B /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				18FFB58B281AF533004E65BB /* BinanceInt+VarInt.swift in Sources */,
 				E122DBBC2A8A468E006D1E7B /* cosmos_group_v1_tx.pb.swift in Sources */,
-				18FFB590281AF533004E65BB /* BnbToken.swift in Sources */,
 				E122DB1A2A8A468D006D1E7B /* cosmos_distribution_v1beta1_query.grpc.swift in Sources */,
 				E122DC4D2A8A4712006D1E7B /* tendermint_p2p_types.pb.swift in Sources */,
 				04FA74682A9F5833001A2830 /* CreateNameVC.swift in Sources */,
@@ -2643,7 +2638,6 @@
 				043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */,
 				0444442927ABDC5D00EB093E /* Cw20TransferReq.swift in Sources */,
 				046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */,
-				284291A1264AA77C00130651 /* BnbTicker.swift in Sources */,
 				E11069B82AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.pb.swift in Sources */,
 				E122DBF92A8A468E006D1E7B /* cosmos_genutil_module_v1_module.pb.swift in Sources */,
 				E122DBAD2A8A468D006D1E7B /* cosmos_params_module_v1_module.pb.swift in Sources */,
@@ -2658,6 +2652,7 @@
 				E11069B42AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				E122DB872A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.pb.swift in Sources */,
 				E122DBE92A8A468E006D1E7B /* cosmos_gov_v1beta1_gov.pb.swift in Sources */,
+				E17638522AA7642800904DB4 /* ChainBinanceBeacon.swift in Sources */,
 				E122DC292A8A468E006D1E7B /* cosmos_tx_config_v1_config.pb.swift in Sources */,
 				28E3E3802671BE8D00BA89C2 /* Param.swift in Sources */,
 				E122DB132A8A468D006D1E7B /* cosmos_auth_v1beta1_genesis.pb.swift in Sources */,
@@ -2725,7 +2720,6 @@
 				15BF8482299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */,
 				E122DB512A8A468D006D1E7B /* cosmos_group_v1_query.grpc.swift in Sources */,
 				E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
-				E1F7F634234311F8000E597F /* BnbToken.swift in Sources */,
 				E122DB432A8A468D006D1E7B /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				E1945E28222E7C0600A1436F /* AppDelegate.swift in Sources */,
 				E122DBBB2A8A468E006D1E7B /* cosmos_group_v1_tx.pb.swift in Sources */,
