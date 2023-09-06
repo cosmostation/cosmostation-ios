@@ -127,6 +127,23 @@ public class WUtils {
         }
     }
     
+    static func getGapTimeByNeutron(_ date: Date) -> String {
+        let minute = 60
+        let hour = 60 * minute
+        let day = 24 * hour
+        var gapTime = Int(Date().timeIntervalSince(date))
+        if (gapTime > 0) {
+            return "(0 days)"
+        } else {
+            gapTime = gapTime * -1
+            if gapTime < day {
+                return "H-\(gapTime / hour)"
+            } else {
+                return "D-\(gapTime / day)"
+            }
+        }
+    }
+    
     static func unbondingDateFromNow(_ date: UInt16) -> String {
         let localFormatter = DateFormatter()
         localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
