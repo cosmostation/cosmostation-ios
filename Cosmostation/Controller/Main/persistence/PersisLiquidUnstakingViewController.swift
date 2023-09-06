@@ -61,7 +61,7 @@ class PersisLiquidUnstakingViewController: BaseViewController {
         inputAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputAmount.font, 0, 6)
         WDP.dpSymbol(chainConfig, self.inputCoinDenom, inputDenom)
         let rate = NSDecimalNumber(string: self.cValue).multiplying(byPowerOf10: -18)
-        let redeemFee = NSDecimalNumber.init(string: "0.005")
+        let redeemFee = NSDecimalNumber.init(string: "0.01")
         let outAmount = NSDecimalNumber.one.dividing(by: rate, withBehavior: WUtils.handler12Down).subtracting(redeemFee)
         outputAmount.attributedText = WDP.dpAmount(outAmount.stringValue, outputAmount.font, 0, 6)
         WDP.dpSymbol(chainConfig, outputCoinDenom, outputDenom)

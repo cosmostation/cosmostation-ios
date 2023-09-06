@@ -53,10 +53,20 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_QueryClientProtocol: GRPCClient 
     callOptions: CallOptions?
   ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryDepositsRequest, Pstake_Liquidstakeibc_V1beta1_QueryDepositsResponse>
 
+  func lSMDeposits(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest, Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse>
+
   func unbondings(
     _ request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest, Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse>
+
+  func unbonding(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest, Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse>
 
   func userUnbondings(
     _ request: Pstake_Liquidstakeibc_V1beta1_QueryUserUnbondingsRequest,
@@ -67,6 +77,16 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_QueryClientProtocol: GRPCClient 
     _ request: Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest, Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse>
+
+  func depositAccountBalance(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest, Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse>
+
+  func exchangeRate(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest, Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse>
 }
 
 extension Pstake_Liquidstakeibc_V1beta1_QueryClientProtocol {
@@ -146,6 +166,24 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryClientProtocol {
     )
   }
 
+  /// Queries for all the deposits for a host chain.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to LSMDeposits.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func lSMDeposits(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest, Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse> {
+    return self.makeUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.lSMDeposits.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeLSMDepositsInterceptors() ?? []
+    )
+  }
+
   /// Queries all unbondings for a host chain.
   ///
   /// - Parameters:
@@ -161,6 +199,24 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeUnbondingsInterceptors() ?? []
+    )
+  }
+
+  /// Queries an unbonding for a host chain.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Unbonding.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func unbonding(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest, Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse> {
+    return self.makeUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.unbonding.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUnbondingInterceptors() ?? []
     )
   }
 
@@ -197,6 +253,42 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeValidatorUnbondingsInterceptors() ?? []
+    )
+  }
+
+  /// Queries for a host chain deposit account balance.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to DepositAccountBalance.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func depositAccountBalance(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest, Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse> {
+    return self.makeUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.depositAccountBalance.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDepositAccountBalanceInterceptors() ?? []
+    )
+  }
+
+  /// Queries for a host chain exchange rate between the host token and the stk token.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to ExchangeRate.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func exchangeRate(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest, Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse> {
+    return self.makeUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.exchangeRate.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeExchangeRateInterceptors() ?? []
     )
   }
 }
@@ -284,10 +376,20 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_QueryAsyncClientProtocol: GRPCCl
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryDepositsRequest, Pstake_Liquidstakeibc_V1beta1_QueryDepositsResponse>
 
+  func makeLsmdepositsCall(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest, Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse>
+
   func makeUnbondingsCall(
     _ request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest, Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse>
+
+  func makeUnbondingCall(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest, Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse>
 
   func makeUserUnbondingsCall(
     _ request: Pstake_Liquidstakeibc_V1beta1_QueryUserUnbondingsRequest,
@@ -298,6 +400,16 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_QueryAsyncClientProtocol: GRPCCl
     _ request: Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest, Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse>
+
+  func makeDepositAccountBalanceCall(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest, Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse>
+
+  func makeExchangeRateCall(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest, Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -358,6 +470,18 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryAsyncClientProtocol {
     )
   }
 
+  internal func makeLsmdepositsCall(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest, Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.lSMDeposits.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeLSMDepositsInterceptors() ?? []
+    )
+  }
+
   internal func makeUnbondingsCall(
     _ request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest,
     callOptions: CallOptions? = nil
@@ -367,6 +491,18 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeUnbondingsInterceptors() ?? []
+    )
+  }
+
+  internal func makeUnbondingCall(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest, Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.unbonding.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUnbondingInterceptors() ?? []
     )
   }
 
@@ -391,6 +527,30 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeValidatorUnbondingsInterceptors() ?? []
+    )
+  }
+
+  internal func makeDepositAccountBalanceCall(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest, Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.depositAccountBalance.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDepositAccountBalanceInterceptors() ?? []
+    )
+  }
+
+  internal func makeExchangeRateCall(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest, Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.exchangeRate.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeExchangeRateInterceptors() ?? []
     )
   }
 }
@@ -445,6 +605,18 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryAsyncClientProtocol {
     )
   }
 
+  internal func lSMDeposits(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.lSMDeposits.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeLSMDepositsInterceptors() ?? []
+    )
+  }
+
   internal func unbondings(
     _ request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest,
     callOptions: CallOptions? = nil
@@ -454,6 +626,18 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeUnbondingsInterceptors() ?? []
+    )
+  }
+
+  internal func unbonding(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.unbonding.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUnbondingInterceptors() ?? []
     )
   }
 
@@ -478,6 +662,30 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeValidatorUnbondingsInterceptors() ?? []
+    )
+  }
+
+  internal func depositAccountBalance(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.depositAccountBalance.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDepositAccountBalanceInterceptors() ?? []
+    )
+  }
+
+  internal func exchangeRate(
+    _ request: Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.exchangeRate.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeExchangeRateInterceptors() ?? []
     )
   }
 }
@@ -513,14 +721,26 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_QueryClientInterceptorFactoryPro
   /// - Returns: Interceptors to use when invoking 'deposits'.
   func makeDepositsInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryDepositsRequest, Pstake_Liquidstakeibc_V1beta1_QueryDepositsResponse>]
 
+  /// - Returns: Interceptors to use when invoking 'lSMDeposits'.
+  func makeLSMDepositsInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest, Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse>]
+
   /// - Returns: Interceptors to use when invoking 'unbondings'.
   func makeUnbondingsInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest, Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'unbonding'.
+  func makeUnbondingInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest, Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse>]
 
   /// - Returns: Interceptors to use when invoking 'userUnbondings'.
   func makeUserUnbondingsInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryUserUnbondingsRequest, Pstake_Liquidstakeibc_V1beta1_QueryUserUnbondingsResponse>]
 
   /// - Returns: Interceptors to use when invoking 'validatorUnbondings'.
   func makeValidatorUnbondingsInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest, Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'depositAccountBalance'.
+  func makeDepositAccountBalanceInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest, Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'exchangeRate'.
+  func makeExchangeRateInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest, Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse>]
 }
 
 internal enum Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata {
@@ -532,9 +752,13 @@ internal enum Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata {
       Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.hostChain,
       Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.hostChains,
       Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.deposits,
+      Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.lSMDeposits,
       Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.unbondings,
+      Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.unbonding,
       Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.userUnbondings,
       Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.validatorUnbondings,
+      Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.depositAccountBalance,
+      Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata.Methods.exchangeRate,
     ]
   )
 
@@ -563,9 +787,21 @@ internal enum Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata {
       type: GRPCCallType.unary
     )
 
+    internal static let lSMDeposits = GRPCMethodDescriptor(
+      name: "LSMDeposits",
+      path: "/pstake.liquidstakeibc.v1beta1.Query/LSMDeposits",
+      type: GRPCCallType.unary
+    )
+
     internal static let unbondings = GRPCMethodDescriptor(
       name: "Unbondings",
       path: "/pstake.liquidstakeibc.v1beta1.Query/Unbondings",
+      type: GRPCCallType.unary
+    )
+
+    internal static let unbonding = GRPCMethodDescriptor(
+      name: "Unbonding",
+      path: "/pstake.liquidstakeibc.v1beta1.Query/Unbonding",
       type: GRPCCallType.unary
     )
 
@@ -578,6 +814,18 @@ internal enum Pstake_Liquidstakeibc_V1beta1_QueryClientMetadata {
     internal static let validatorUnbondings = GRPCMethodDescriptor(
       name: "ValidatorUnbondings",
       path: "/pstake.liquidstakeibc.v1beta1.Query/ValidatorUnbondings",
+      type: GRPCCallType.unary
+    )
+
+    internal static let depositAccountBalance = GRPCMethodDescriptor(
+      name: "DepositAccountBalance",
+      path: "/pstake.liquidstakeibc.v1beta1.Query/DepositAccountBalance",
+      type: GRPCCallType.unary
+    )
+
+    internal static let exchangeRate = GRPCMethodDescriptor(
+      name: "ExchangeRate",
+      path: "/pstake.liquidstakeibc.v1beta1.Query/ExchangeRate",
       type: GRPCCallType.unary
     )
   }
@@ -601,14 +849,26 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_QueryProvider: CallHandlerProvid
   /// Queries for all the deposits for a host chain.
   func deposits(request: Pstake_Liquidstakeibc_V1beta1_QueryDepositsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_QueryDepositsResponse>
 
+  /// Queries for all the deposits for a host chain.
+  func lSMDeposits(request: Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse>
+
   /// Queries all unbondings for a host chain.
   func unbondings(request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse>
+
+  /// Queries an unbonding for a host chain.
+  func unbonding(request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse>
 
   /// Queries all unbondings for a delegator address.
   func userUnbondings(request: Pstake_Liquidstakeibc_V1beta1_QueryUserUnbondingsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_QueryUserUnbondingsResponse>
 
   /// Queries all validator unbondings for a host chain.
   func validatorUnbondings(request: Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse>
+
+  /// Queries for a host chain deposit account balance.
+  func depositAccountBalance(request: Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse>
+
+  /// Queries for a host chain exchange rate between the host token and the stk token.
+  func exchangeRate(request: Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse>
 }
 
 extension Pstake_Liquidstakeibc_V1beta1_QueryProvider {
@@ -659,6 +919,15 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryProvider {
         userFunction: self.deposits(request:context:)
       )
 
+    case "LSMDeposits":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest>(),
+        responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse>(),
+        interceptors: self.interceptors?.makeLSMDepositsInterceptors() ?? [],
+        userFunction: self.lSMDeposits(request:context:)
+      )
+
     case "Unbondings":
       return UnaryServerHandler(
         context: context,
@@ -666,6 +935,15 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryProvider {
         responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse>(),
         interceptors: self.interceptors?.makeUnbondingsInterceptors() ?? [],
         userFunction: self.unbondings(request:context:)
+      )
+
+    case "Unbonding":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest>(),
+        responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse>(),
+        interceptors: self.interceptors?.makeUnbondingInterceptors() ?? [],
+        userFunction: self.unbonding(request:context:)
       )
 
     case "UserUnbondings":
@@ -684,6 +962,24 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryProvider {
         responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse>(),
         interceptors: self.interceptors?.makeValidatorUnbondingsInterceptors() ?? [],
         userFunction: self.validatorUnbondings(request:context:)
+      )
+
+    case "DepositAccountBalance":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest>(),
+        responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse>(),
+        interceptors: self.interceptors?.makeDepositAccountBalanceInterceptors() ?? [],
+        userFunction: self.depositAccountBalance(request:context:)
+      )
+
+    case "ExchangeRate":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest>(),
+        responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse>(),
+        interceptors: self.interceptors?.makeExchangeRateInterceptors() ?? [],
+        userFunction: self.exchangeRate(request:context:)
       )
 
     default:
@@ -724,11 +1020,23 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_QueryAsyncProvider: CallHandlerP
     context: GRPCAsyncServerCallContext
   ) async throws -> Pstake_Liquidstakeibc_V1beta1_QueryDepositsResponse
 
+  /// Queries for all the deposits for a host chain.
+  @Sendable func lSMDeposits(
+    request: Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse
+
   /// Queries all unbondings for a host chain.
   @Sendable func unbondings(
     request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse
+
+  /// Queries an unbonding for a host chain.
+  @Sendable func unbonding(
+    request: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse
 
   /// Queries all unbondings for a delegator address.
   @Sendable func userUnbondings(
@@ -741,6 +1049,18 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_QueryAsyncProvider: CallHandlerP
     request: Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse
+
+  /// Queries for a host chain deposit account balance.
+  @Sendable func depositAccountBalance(
+    request: Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse
+
+  /// Queries for a host chain exchange rate between the host token and the stk token.
+  @Sendable func exchangeRate(
+    request: Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -798,6 +1118,15 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryAsyncProvider {
         wrapping: self.deposits(request:context:)
       )
 
+    case "LSMDeposits":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest>(),
+        responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse>(),
+        interceptors: self.interceptors?.makeLSMDepositsInterceptors() ?? [],
+        wrapping: self.lSMDeposits(request:context:)
+      )
+
     case "Unbondings":
       return GRPCAsyncServerHandler(
         context: context,
@@ -805,6 +1134,15 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryAsyncProvider {
         responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse>(),
         interceptors: self.interceptors?.makeUnbondingsInterceptors() ?? [],
         wrapping: self.unbondings(request:context:)
+      )
+
+    case "Unbonding":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest>(),
+        responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse>(),
+        interceptors: self.interceptors?.makeUnbondingInterceptors() ?? [],
+        wrapping: self.unbonding(request:context:)
       )
 
     case "UserUnbondings":
@@ -823,6 +1161,24 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryAsyncProvider {
         responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse>(),
         interceptors: self.interceptors?.makeValidatorUnbondingsInterceptors() ?? [],
         wrapping: self.validatorUnbondings(request:context:)
+      )
+
+    case "DepositAccountBalance":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest>(),
+        responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse>(),
+        interceptors: self.interceptors?.makeDepositAccountBalanceInterceptors() ?? [],
+        wrapping: self.depositAccountBalance(request:context:)
+      )
+
+    case "ExchangeRate":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest>(),
+        responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse>(),
+        interceptors: self.interceptors?.makeExchangeRateInterceptors() ?? [],
+        wrapping: self.exchangeRate(request:context:)
       )
 
     default:
@@ -849,9 +1205,17 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_QueryServerInterceptorFactoryPro
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeDepositsInterceptors() -> [ServerInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryDepositsRequest, Pstake_Liquidstakeibc_V1beta1_QueryDepositsResponse>]
 
+  /// - Returns: Interceptors to use when handling 'lSMDeposits'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeLSMDepositsInterceptors() -> [ServerInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest, Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse>]
+
   /// - Returns: Interceptors to use when handling 'unbondings'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeUnbondingsInterceptors() -> [ServerInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest, Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'unbonding'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUnbondingInterceptors() -> [ServerInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest, Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse>]
 
   /// - Returns: Interceptors to use when handling 'userUnbondings'.
   ///   Defaults to calling `self.makeInterceptors()`.
@@ -860,6 +1224,14 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_QueryServerInterceptorFactoryPro
   /// - Returns: Interceptors to use when handling 'validatorUnbondings'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeValidatorUnbondingsInterceptors() -> [ServerInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest, Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse>]
+
+  /// - Returns: Interceptors to use when handling 'depositAccountBalance'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeDepositAccountBalanceInterceptors() -> [ServerInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest, Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse>]
+
+  /// - Returns: Interceptors to use when handling 'exchangeRate'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeExchangeRateInterceptors() -> [ServerInterceptor<Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest, Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse>]
 }
 
 internal enum Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata {
@@ -871,9 +1243,13 @@ internal enum Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata {
       Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata.Methods.hostChain,
       Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata.Methods.hostChains,
       Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata.Methods.deposits,
+      Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata.Methods.lSMDeposits,
       Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata.Methods.unbondings,
+      Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata.Methods.unbonding,
       Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata.Methods.userUnbondings,
       Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata.Methods.validatorUnbondings,
+      Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata.Methods.depositAccountBalance,
+      Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata.Methods.exchangeRate,
     ]
   )
 
@@ -902,9 +1278,21 @@ internal enum Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata {
       type: GRPCCallType.unary
     )
 
+    internal static let lSMDeposits = GRPCMethodDescriptor(
+      name: "LSMDeposits",
+      path: "/pstake.liquidstakeibc.v1beta1.Query/LSMDeposits",
+      type: GRPCCallType.unary
+    )
+
     internal static let unbondings = GRPCMethodDescriptor(
       name: "Unbondings",
       path: "/pstake.liquidstakeibc.v1beta1.Query/Unbondings",
+      type: GRPCCallType.unary
+    )
+
+    internal static let unbonding = GRPCMethodDescriptor(
+      name: "Unbonding",
+      path: "/pstake.liquidstakeibc.v1beta1.Query/Unbonding",
       type: GRPCCallType.unary
     )
 
@@ -917,6 +1305,18 @@ internal enum Pstake_Liquidstakeibc_V1beta1_QueryServerMetadata {
     internal static let validatorUnbondings = GRPCMethodDescriptor(
       name: "ValidatorUnbondings",
       path: "/pstake.liquidstakeibc.v1beta1.Query/ValidatorUnbondings",
+      type: GRPCCallType.unary
+    )
+
+    internal static let depositAccountBalance = GRPCMethodDescriptor(
+      name: "DepositAccountBalance",
+      path: "/pstake.liquidstakeibc.v1beta1.Query/DepositAccountBalance",
+      type: GRPCCallType.unary
+    )
+
+    internal static let exchangeRate = GRPCMethodDescriptor(
+      name: "ExchangeRate",
+      path: "/pstake.liquidstakeibc.v1beta1.Query/ExchangeRate",
       type: GRPCCallType.unary
     )
   }

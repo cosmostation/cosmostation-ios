@@ -78,7 +78,7 @@ class PersisLiquid0ViewController: BaseViewController, UITextFieldDelegate {
         if (txType == TASK_TYPE_PERSIS_LIQUIDITY_STAKE) {
             outputDenom = "stk/uatom"
         } else if (txType == TASK_TYPE_PERSIS_LIQUIDITY_REDEEM) {
-            outputDenom = "uatom"
+            outputDenom = "ibc/C8A74ABBE2AF892E15680D916A7C22130585CE5704F9B17A10F184A90D53BECA"
         }
         outputDecimal = BaseData.instance.mMintscanAssets.filter({ $0.denom == outputDenom }).first?.decimals ?? 6
         WDP.dpSymbol(chainConfig, outputDenom, outputCoinName)
@@ -121,7 +121,7 @@ class PersisLiquid0ViewController: BaseViewController, UITextFieldDelegate {
         if (txType == TASK_TYPE_PERSIS_LIQUIDITY_STAKE) {
             userOutput = userInput.multiplying(by: rate, withBehavior: WUtils.handler12Down)
         } else if (txType == TASK_TYPE_PERSIS_LIQUIDITY_REDEEM) {
-            let redeemFee = userInput.multiplying(by: NSDecimalNumber.init(string: "0.005"))
+            let redeemFee = userInput.multiplying(by: NSDecimalNumber.init(string: "0.01"))
             userOutput = userInput.dividing(by: rate, withBehavior: WUtils.handler12Down).subtracting(redeemFee)
         }
         outputCoinAmountLabel.text = WUtils.decimalNumberToLocaleString(userOutput, outputDecimal)
@@ -195,9 +195,9 @@ class PersisLiquid0ViewController: BaseViewController, UITextFieldDelegate {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainConfig)!
-                let req = Pstake_Lscosmos_V1beta1_QueryCValueRequest.init()
-                if let response = try? Pstake_Lscosmos_V1beta1_QueryClient(channel: channel).cValue(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    self.cValue = response.cValue
+                let req = Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest.with { $0.chainID = "cosmoshub-4" }
+                if let response = try? Pstake_Liquidstakeibc_V1beta1_QueryClient(channel: channel).exchangeRate(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.cValue = response.rate
                 }
                 try channel.close().wait()
             } catch {

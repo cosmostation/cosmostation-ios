@@ -32,6 +32,12 @@ struct Pstake_Liquidstakeibc_V1beta1_Params {
   /// protocol fee address
   var feeAddress: String = String()
 
+  /// upper limit for the c value of a host chain
+  var upperCValueLimit: String = String()
+
+  /// lower limit for the c value of a host chain
+  var lowerCValueLimit: String = String()
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -50,6 +56,8 @@ extension Pstake_Liquidstakeibc_V1beta1_Params: SwiftProtobuf.Message, SwiftProt
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "admin_address"),
     2: .standard(proto: "fee_address"),
+    3: .standard(proto: "upper_c_value_limit"),
+    4: .standard(proto: "lower_c_value_limit"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -60,6 +68,8 @@ extension Pstake_Liquidstakeibc_V1beta1_Params: SwiftProtobuf.Message, SwiftProt
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.adminAddress) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.feeAddress) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.upperCValueLimit) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.lowerCValueLimit) }()
       default: break
       }
     }
@@ -72,12 +82,20 @@ extension Pstake_Liquidstakeibc_V1beta1_Params: SwiftProtobuf.Message, SwiftProt
     if !self.feeAddress.isEmpty {
       try visitor.visitSingularStringField(value: self.feeAddress, fieldNumber: 2)
     }
+    if !self.upperCValueLimit.isEmpty {
+      try visitor.visitSingularStringField(value: self.upperCValueLimit, fieldNumber: 3)
+    }
+    if !self.lowerCValueLimit.isEmpty {
+      try visitor.visitSingularStringField(value: self.lowerCValueLimit, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_Params, rhs: Pstake_Liquidstakeibc_V1beta1_Params) -> Bool {
     if lhs.adminAddress != rhs.adminAddress {return false}
     if lhs.feeAddress != rhs.feeAddress {return false}
+    if lhs.upperCValueLimit != rhs.upperCValueLimit {return false}
+    if lhs.lowerCValueLimit != rhs.lowerCValueLimit {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
