@@ -103,10 +103,10 @@ struct Pstake_Liquidstakeibc_V1beta1_HostChain {
     set {_uniqueStorage()._cValue = newValue}
   }
 
-  /// the hash of the next validator set
-  var nextValsetHash: Data {
-    get {return _storage._nextValsetHash}
-    set {_uniqueStorage()._nextValsetHash = newValue}
+  /// previous redemption rate
+  var lastCValue: String {
+    get {return _storage._lastCValue}
+    set {_uniqueStorage()._lastCValue = newValue}
   }
 
   /// undelegation epoch factor
@@ -121,11 +121,39 @@ struct Pstake_Liquidstakeibc_V1beta1_HostChain {
     set {_uniqueStorage()._active = newValue}
   }
 
+  /// factor limit for auto-compounding, daily periodic rate (APY / 365s)
+  var autoCompoundFactor: String {
+    get {return _storage._autoCompoundFactor}
+    set {_uniqueStorage()._autoCompoundFactor = newValue}
+  }
+
+  /// host chain flags
+  var flags: Pstake_Liquidstakeibc_V1beta1_HostChainFlags {
+    get {return _storage._flags ?? Pstake_Liquidstakeibc_V1beta1_HostChainFlags()}
+    set {_uniqueStorage()._flags = newValue}
+  }
+  /// Returns true if `flags` has been explicitly set.
+  var hasFlags: Bool {return _storage._flags != nil}
+  /// Clears the value of `flags`. Subsequent reads from it will return its default value.
+  mutating func clearFlags() {_uniqueStorage()._flags = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
   fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+struct Pstake_Liquidstakeibc_V1beta1_HostChainFlags {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var lsm: Bool = false
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
 }
 
 struct Pstake_Liquidstakeibc_V1beta1_HostChainLSParams {
@@ -238,13 +266,13 @@ struct Pstake_Liquidstakeibc_V1beta1_Validator {
   /// validator weight in the set
   var weight: String = String()
 
-  /// amount delegated by the module
+  /// amount delegated by the module to the validator
   var delegatedAmount: String = String()
 
-  /// total amount delegated to the validator (including amount not delegated by the module)
-  var totalAmount: String = String()
+  /// the validator token exchange rate, total bonded tokens divided by total shares issued
+  var exchangeRate: String = String()
 
-  /// the unbonding epoch number when the validator transistioned into the state
+  /// the unbonding epoch number when the validator transitioned into the state
   var unbondingEpoch: Int64 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -270,7 +298,7 @@ struct Pstake_Liquidstakeibc_V1beta1_Deposit {
   mutating func clearAmount() {self._amount = nil}
 
   /// epoch number of the deposit
-  var epoch: String = String()
+  var epoch: Int64 = 0
 
   /// state
   var state: Pstake_Liquidstakeibc_V1beta1_Deposit.DepositState = .depositPending
@@ -336,6 +364,97 @@ extension Pstake_Liquidstakeibc_V1beta1_Deposit.DepositState: CaseIterable {
     .depositSent,
     .depositReceived,
     .depositDelegating,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
+struct Pstake_Liquidstakeibc_V1beta1_LSMDeposit {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// deposit target chain
+  var chainID: String = String()
+
+  /// this is calculated when liquid staking [lsm_shares * validator_exchange_rate]
+  var amount: String = String()
+
+  /// LSM token shares, they are mapped 1:1 with the delegator shares that are tokenized
+  /// https://github.com/iqlusioninc/cosmos-sdk/pull/19
+  var shares: String = String()
+
+  /// LSM token denom
+  var denom: String = String()
+
+  /// LSM token ibc denom
+  var ibcDenom: String = String()
+
+  /// address of the delegator
+  var delegatorAddress: String = String()
+
+  /// state o the deposit
+  var state: Pstake_Liquidstakeibc_V1beta1_LSMDeposit.LSMDepositState = .depositPending
+
+  /// sequence id of the ibc transaction
+  var ibcSequenceID: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  enum LSMDepositState: SwiftProtobuf.Enum {
+    typealias RawValue = Int
+
+    /// no action has been initiated on the deposit
+    case depositPending // = 0
+
+    /// deposit sent to the host chain delegator address
+    case depositSent // = 1
+
+    /// deposit received by the host chain delegator address
+    case depositReceived // = 2
+
+    /// deposit started the untokenization process
+    case depositUntokenizing // = 3
+    case UNRECOGNIZED(Int)
+
+    init() {
+      self = .depositPending
+    }
+
+    init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .depositPending
+      case 1: self = .depositSent
+      case 2: self = .depositReceived
+      case 3: self = .depositUntokenizing
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    var rawValue: Int {
+      switch self {
+      case .depositPending: return 0
+      case .depositSent: return 1
+      case .depositReceived: return 2
+      case .depositUntokenizing: return 3
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
+
+  init() {}
+}
+
+#if swift(>=4.2)
+
+extension Pstake_Liquidstakeibc_V1beta1_LSMDeposit.LSMDepositState: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  static var allCases: [Pstake_Liquidstakeibc_V1beta1_LSMDeposit.LSMDepositState] = [
+    .depositPending,
+    .depositSent,
+    .depositReceived,
+    .depositUntokenizing,
   ]
 }
 
@@ -568,12 +687,15 @@ struct Pstake_Liquidstakeibc_V1beta1_KVUpdate {
 
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Pstake_Liquidstakeibc_V1beta1_HostChain: @unchecked Sendable {}
+extension Pstake_Liquidstakeibc_V1beta1_HostChainFlags: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_HostChainLSParams: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_ICAAccount: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_ICAAccount.ChannelState: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_Validator: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_Deposit: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_Deposit.DepositState: @unchecked Sendable {}
+extension Pstake_Liquidstakeibc_V1beta1_LSMDeposit: @unchecked Sendable {}
+extension Pstake_Liquidstakeibc_V1beta1_LSMDeposit.LSMDepositState: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_Unbonding: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_Unbonding.UnbondingState: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_UserUnbonding: @unchecked Sendable {}
@@ -597,11 +719,13 @@ extension Pstake_Liquidstakeibc_V1beta1_HostChain: SwiftProtobuf.Message, SwiftP
     7: .standard(proto: "delegation_account"),
     8: .standard(proto: "rewards_account"),
     9: .same(proto: "validators"),
-    11: .standard(proto: "minimum_deposit"),
-    12: .standard(proto: "c_value"),
-    13: .standard(proto: "next_valset_hash"),
-    14: .standard(proto: "unbonding_factor"),
-    15: .same(proto: "active"),
+    10: .standard(proto: "minimum_deposit"),
+    11: .standard(proto: "c_value"),
+    12: .standard(proto: "last_c_value"),
+    13: .standard(proto: "unbonding_factor"),
+    14: .same(proto: "active"),
+    15: .standard(proto: "auto_compound_factor"),
+    16: .same(proto: "flags"),
   ]
 
   fileprivate class _StorageClass {
@@ -616,9 +740,11 @@ extension Pstake_Liquidstakeibc_V1beta1_HostChain: SwiftProtobuf.Message, SwiftP
     var _validators: [Pstake_Liquidstakeibc_V1beta1_Validator] = []
     var _minimumDeposit: String = String()
     var _cValue: String = String()
-    var _nextValsetHash: Data = Data()
+    var _lastCValue: String = String()
     var _unbondingFactor: Int64 = 0
     var _active: Bool = false
+    var _autoCompoundFactor: String = String()
+    var _flags: Pstake_Liquidstakeibc_V1beta1_HostChainFlags? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -636,9 +762,11 @@ extension Pstake_Liquidstakeibc_V1beta1_HostChain: SwiftProtobuf.Message, SwiftP
       _validators = source._validators
       _minimumDeposit = source._minimumDeposit
       _cValue = source._cValue
-      _nextValsetHash = source._nextValsetHash
+      _lastCValue = source._lastCValue
       _unbondingFactor = source._unbondingFactor
       _active = source._active
+      _autoCompoundFactor = source._autoCompoundFactor
+      _flags = source._flags
     }
   }
 
@@ -666,11 +794,13 @@ extension Pstake_Liquidstakeibc_V1beta1_HostChain: SwiftProtobuf.Message, SwiftP
         case 7: try { try decoder.decodeSingularMessageField(value: &_storage._delegationAccount) }()
         case 8: try { try decoder.decodeSingularMessageField(value: &_storage._rewardsAccount) }()
         case 9: try { try decoder.decodeRepeatedMessageField(value: &_storage._validators) }()
-        case 11: try { try decoder.decodeSingularStringField(value: &_storage._minimumDeposit) }()
-        case 12: try { try decoder.decodeSingularStringField(value: &_storage._cValue) }()
-        case 13: try { try decoder.decodeSingularBytesField(value: &_storage._nextValsetHash) }()
-        case 14: try { try decoder.decodeSingularInt64Field(value: &_storage._unbondingFactor) }()
-        case 15: try { try decoder.decodeSingularBoolField(value: &_storage._active) }()
+        case 10: try { try decoder.decodeSingularStringField(value: &_storage._minimumDeposit) }()
+        case 11: try { try decoder.decodeSingularStringField(value: &_storage._cValue) }()
+        case 12: try { try decoder.decodeSingularStringField(value: &_storage._lastCValue) }()
+        case 13: try { try decoder.decodeSingularInt64Field(value: &_storage._unbondingFactor) }()
+        case 14: try { try decoder.decodeSingularBoolField(value: &_storage._active) }()
+        case 15: try { try decoder.decodeSingularStringField(value: &_storage._autoCompoundFactor) }()
+        case 16: try { try decoder.decodeSingularMessageField(value: &_storage._flags) }()
         default: break
         }
       }
@@ -711,20 +841,26 @@ extension Pstake_Liquidstakeibc_V1beta1_HostChain: SwiftProtobuf.Message, SwiftP
         try visitor.visitRepeatedMessageField(value: _storage._validators, fieldNumber: 9)
       }
       if !_storage._minimumDeposit.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._minimumDeposit, fieldNumber: 11)
+        try visitor.visitSingularStringField(value: _storage._minimumDeposit, fieldNumber: 10)
       }
       if !_storage._cValue.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._cValue, fieldNumber: 12)
+        try visitor.visitSingularStringField(value: _storage._cValue, fieldNumber: 11)
       }
-      if !_storage._nextValsetHash.isEmpty {
-        try visitor.visitSingularBytesField(value: _storage._nextValsetHash, fieldNumber: 13)
+      if !_storage._lastCValue.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._lastCValue, fieldNumber: 12)
       }
       if _storage._unbondingFactor != 0 {
-        try visitor.visitSingularInt64Field(value: _storage._unbondingFactor, fieldNumber: 14)
+        try visitor.visitSingularInt64Field(value: _storage._unbondingFactor, fieldNumber: 13)
       }
       if _storage._active != false {
-        try visitor.visitSingularBoolField(value: _storage._active, fieldNumber: 15)
+        try visitor.visitSingularBoolField(value: _storage._active, fieldNumber: 14)
       }
+      if !_storage._autoCompoundFactor.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._autoCompoundFactor, fieldNumber: 15)
+      }
+      try { if let v = _storage._flags {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 16)
+      } }()
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -745,13 +881,47 @@ extension Pstake_Liquidstakeibc_V1beta1_HostChain: SwiftProtobuf.Message, SwiftP
         if _storage._validators != rhs_storage._validators {return false}
         if _storage._minimumDeposit != rhs_storage._minimumDeposit {return false}
         if _storage._cValue != rhs_storage._cValue {return false}
-        if _storage._nextValsetHash != rhs_storage._nextValsetHash {return false}
+        if _storage._lastCValue != rhs_storage._lastCValue {return false}
         if _storage._unbondingFactor != rhs_storage._unbondingFactor {return false}
         if _storage._active != rhs_storage._active {return false}
+        if _storage._autoCompoundFactor != rhs_storage._autoCompoundFactor {return false}
+        if _storage._flags != rhs_storage._flags {return false}
         return true
       }
       if !storagesAreEqual {return false}
     }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pstake_Liquidstakeibc_V1beta1_HostChainFlags: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".HostChainFlags"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "lsm"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBoolField(value: &self.lsm) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.lsm != false {
+      try visitor.visitSingularBoolField(value: self.lsm, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_HostChainFlags, rhs: Pstake_Liquidstakeibc_V1beta1_HostChainFlags) -> Bool {
+    if lhs.lsm != rhs.lsm {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -875,7 +1045,7 @@ extension Pstake_Liquidstakeibc_V1beta1_Validator: SwiftProtobuf.Message, SwiftP
     2: .same(proto: "status"),
     3: .same(proto: "weight"),
     4: .standard(proto: "delegated_amount"),
-    5: .standard(proto: "total_amount"),
+    5: .standard(proto: "exchange_rate"),
     6: .standard(proto: "unbonding_epoch"),
   ]
 
@@ -889,7 +1059,7 @@ extension Pstake_Liquidstakeibc_V1beta1_Validator: SwiftProtobuf.Message, SwiftP
       case 2: try { try decoder.decodeSingularStringField(value: &self.status) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.weight) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.delegatedAmount) }()
-      case 5: try { try decoder.decodeSingularStringField(value: &self.totalAmount) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.exchangeRate) }()
       case 6: try { try decoder.decodeSingularInt64Field(value: &self.unbondingEpoch) }()
       default: break
       }
@@ -909,8 +1079,8 @@ extension Pstake_Liquidstakeibc_V1beta1_Validator: SwiftProtobuf.Message, SwiftP
     if !self.delegatedAmount.isEmpty {
       try visitor.visitSingularStringField(value: self.delegatedAmount, fieldNumber: 4)
     }
-    if !self.totalAmount.isEmpty {
-      try visitor.visitSingularStringField(value: self.totalAmount, fieldNumber: 5)
+    if !self.exchangeRate.isEmpty {
+      try visitor.visitSingularStringField(value: self.exchangeRate, fieldNumber: 5)
     }
     if self.unbondingEpoch != 0 {
       try visitor.visitSingularInt64Field(value: self.unbondingEpoch, fieldNumber: 6)
@@ -923,7 +1093,7 @@ extension Pstake_Liquidstakeibc_V1beta1_Validator: SwiftProtobuf.Message, SwiftP
     if lhs.status != rhs.status {return false}
     if lhs.weight != rhs.weight {return false}
     if lhs.delegatedAmount != rhs.delegatedAmount {return false}
-    if lhs.totalAmount != rhs.totalAmount {return false}
+    if lhs.exchangeRate != rhs.exchangeRate {return false}
     if lhs.unbondingEpoch != rhs.unbondingEpoch {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -948,7 +1118,7 @@ extension Pstake_Liquidstakeibc_V1beta1_Deposit: SwiftProtobuf.Message, SwiftPro
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._amount) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self.epoch) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.epoch) }()
       case 4: try { try decoder.decodeSingularEnumField(value: &self.state) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self.ibcSequenceID) }()
       default: break
@@ -967,8 +1137,8 @@ extension Pstake_Liquidstakeibc_V1beta1_Deposit: SwiftProtobuf.Message, SwiftPro
     try { if let v = self._amount {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     } }()
-    if !self.epoch.isEmpty {
-      try visitor.visitSingularStringField(value: self.epoch, fieldNumber: 3)
+    if self.epoch != 0 {
+      try visitor.visitSingularInt64Field(value: self.epoch, fieldNumber: 3)
     }
     if self.state != .depositPending {
       try visitor.visitSingularEnumField(value: self.state, fieldNumber: 4)
@@ -996,6 +1166,89 @@ extension Pstake_Liquidstakeibc_V1beta1_Deposit.DepositState: SwiftProtobuf._Pro
     1: .same(proto: "DEPOSIT_SENT"),
     2: .same(proto: "DEPOSIT_RECEIVED"),
     3: .same(proto: "DEPOSIT_DELEGATING"),
+  ]
+}
+
+extension Pstake_Liquidstakeibc_V1beta1_LSMDeposit: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".LSMDeposit"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "chain_id"),
+    2: .same(proto: "amount"),
+    3: .same(proto: "shares"),
+    4: .same(proto: "denom"),
+    5: .standard(proto: "ibc_denom"),
+    6: .standard(proto: "delegator_address"),
+    7: .same(proto: "state"),
+    8: .standard(proto: "ibc_sequence_id"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.amount) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.shares) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.denom) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.ibcDenom) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.delegatorAddress) }()
+      case 7: try { try decoder.decodeSingularEnumField(value: &self.state) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.ibcSequenceID) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.chainID.isEmpty {
+      try visitor.visitSingularStringField(value: self.chainID, fieldNumber: 1)
+    }
+    if !self.amount.isEmpty {
+      try visitor.visitSingularStringField(value: self.amount, fieldNumber: 2)
+    }
+    if !self.shares.isEmpty {
+      try visitor.visitSingularStringField(value: self.shares, fieldNumber: 3)
+    }
+    if !self.denom.isEmpty {
+      try visitor.visitSingularStringField(value: self.denom, fieldNumber: 4)
+    }
+    if !self.ibcDenom.isEmpty {
+      try visitor.visitSingularStringField(value: self.ibcDenom, fieldNumber: 5)
+    }
+    if !self.delegatorAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.delegatorAddress, fieldNumber: 6)
+    }
+    if self.state != .depositPending {
+      try visitor.visitSingularEnumField(value: self.state, fieldNumber: 7)
+    }
+    if !self.ibcSequenceID.isEmpty {
+      try visitor.visitSingularStringField(value: self.ibcSequenceID, fieldNumber: 8)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_LSMDeposit, rhs: Pstake_Liquidstakeibc_V1beta1_LSMDeposit) -> Bool {
+    if lhs.chainID != rhs.chainID {return false}
+    if lhs.amount != rhs.amount {return false}
+    if lhs.shares != rhs.shares {return false}
+    if lhs.denom != rhs.denom {return false}
+    if lhs.ibcDenom != rhs.ibcDenom {return false}
+    if lhs.delegatorAddress != rhs.delegatorAddress {return false}
+    if lhs.state != rhs.state {return false}
+    if lhs.ibcSequenceID != rhs.ibcSequenceID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pstake_Liquidstakeibc_V1beta1_LSMDeposit.LSMDepositState: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "DEPOSIT_PENDING"),
+    1: .same(proto: "DEPOSIT_SENT"),
+    2: .same(proto: "DEPOSIT_RECEIVED"),
+    3: .same(proto: "DEPOSIT_UNTOKENIZING"),
   ]
 }
 

@@ -50,28 +50,8 @@ class TxTokenSwapCell: TxCell {
             
             txPoolIdLabel.text = String(msg.routes[0].poolID)
             
-            var inCoin: Coin?
-            if response.txResponse.logs.count > position {
-                response.txResponse.logs[position].events.forEach { event in
-                    if (event.type == "transfer") {
-                        if (event.attributes.count >= 6) {
-                            let coin = String(event.attributes[2].value)
-                            if let range = coin.range(of: "[0-9]*", options: .regularExpression){
-                                let amount = String(coin[range])
-                                let denomIndex = coin.index(coin.startIndex, offsetBy: amount.count)
-                                let denom = String(coin[denomIndex...])
-                                inCoin = Coin.init(denom, amount)
-                            }
-                        }
-                    }
-                }
-            }
-            if (inCoin != nil) {
-                WDP.dpCoin(chainConfig, inCoin!, txSwapInDenomLabel, txSwapInAmountLabel)
-            } else {
-                txSwapInAmountLabel.text = ""
-                txSwapInDenomLabel.text = ""
-            }
+            var inCoin: Coin = Coin.init(msg.tokenIn.denom, msg.tokenIn.amount)
+            WDP.dpCoin(chainConfig, inCoin, txSwapInDenomLabel, txSwapInAmountLabel)
             
             var outCoin: Coin?
             if response.txResponse.logs.count > position {

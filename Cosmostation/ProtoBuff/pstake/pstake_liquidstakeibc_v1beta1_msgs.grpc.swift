@@ -48,6 +48,11 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_MsgClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStake, Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeResponse>
 
+  func liquidStakeLSM(
+    _ request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM, Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSMResponse>
+
   func liquidUnstake(
     _ request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidUnstake,
     callOptions: CallOptions?
@@ -57,6 +62,11 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_MsgClientProtocol: GRPCClient {
     _ request: Pstake_Liquidstakeibc_V1beta1_MsgRedeem,
     callOptions: CallOptions?
   ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_MsgRedeem, Pstake_Liquidstakeibc_V1beta1_MsgRedeemResponse>
+
+  func updateParams(
+    _ request: Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams, Pstake_Liquidstakeibc_V1beta1_MsgUpdateParamsResponse>
 }
 
 extension Pstake_Liquidstakeibc_V1beta1_MsgClientProtocol {
@@ -118,6 +128,24 @@ extension Pstake_Liquidstakeibc_V1beta1_MsgClientProtocol {
     )
   }
 
+  /// Unary call to LiquidStakeLSM
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to LiquidStakeLSM.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func liquidStakeLSM(
+    _ request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM, Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSMResponse> {
+    return self.makeUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.liquidStakeLSM.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeLiquidStakeLSMInterceptors() ?? []
+    )
+  }
+
   /// Unary call to LiquidUnstake
   ///
   /// - Parameters:
@@ -151,6 +179,24 @@ extension Pstake_Liquidstakeibc_V1beta1_MsgClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeRedeemInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to UpdateParams
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UpdateParams.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func updateParams(
+    _ request: Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams, Pstake_Liquidstakeibc_V1beta1_MsgUpdateParamsResponse> {
+    return self.makeUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.updateParams.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
     )
   }
 }
@@ -233,6 +279,11 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_MsgAsyncClientProtocol: GRPCClie
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStake, Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeResponse>
 
+  func makeLiquidStakeLsmCall(
+    _ request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM, Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSMResponse>
+
   func makeLiquidUnstakeCall(
     _ request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidUnstake,
     callOptions: CallOptions?
@@ -242,6 +293,11 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_MsgAsyncClientProtocol: GRPCClie
     _ request: Pstake_Liquidstakeibc_V1beta1_MsgRedeem,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_MsgRedeem, Pstake_Liquidstakeibc_V1beta1_MsgRedeemResponse>
+
+  func makeUpdateParamsCall(
+    _ request: Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams, Pstake_Liquidstakeibc_V1beta1_MsgUpdateParamsResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -290,6 +346,18 @@ extension Pstake_Liquidstakeibc_V1beta1_MsgAsyncClientProtocol {
     )
   }
 
+  internal func makeLiquidStakeLsmCall(
+    _ request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM, Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSMResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.liquidStakeLSM.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeLiquidStakeLSMInterceptors() ?? []
+    )
+  }
+
   internal func makeLiquidUnstakeCall(
     _ request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidUnstake,
     callOptions: CallOptions? = nil
@@ -311,6 +379,18 @@ extension Pstake_Liquidstakeibc_V1beta1_MsgAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeRedeemInterceptors() ?? []
+    )
+  }
+
+  internal func makeUpdateParamsCall(
+    _ request: Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams, Pstake_Liquidstakeibc_V1beta1_MsgUpdateParamsResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.updateParams.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
     )
   }
 }
@@ -353,6 +433,18 @@ extension Pstake_Liquidstakeibc_V1beta1_MsgAsyncClientProtocol {
     )
   }
 
+  internal func liquidStakeLSM(
+    _ request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM,
+    callOptions: CallOptions? = nil
+  ) async throws -> Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSMResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.liquidStakeLSM.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeLiquidStakeLSMInterceptors() ?? []
+    )
+  }
+
   internal func liquidUnstake(
     _ request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidUnstake,
     callOptions: CallOptions? = nil
@@ -374,6 +466,18 @@ extension Pstake_Liquidstakeibc_V1beta1_MsgAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeRedeemInterceptors() ?? []
+    )
+  }
+
+  internal func updateParams(
+    _ request: Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams,
+    callOptions: CallOptions? = nil
+  ) async throws -> Pstake_Liquidstakeibc_V1beta1_MsgUpdateParamsResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.updateParams.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
     )
   }
 }
@@ -406,11 +510,17 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_MsgClientInterceptorFactoryProto
   /// - Returns: Interceptors to use when invoking 'liquidStake'.
   func makeLiquidStakeInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStake, Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeResponse>]
 
+  /// - Returns: Interceptors to use when invoking 'liquidStakeLSM'.
+  func makeLiquidStakeLSMInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM, Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSMResponse>]
+
   /// - Returns: Interceptors to use when invoking 'liquidUnstake'.
   func makeLiquidUnstakeInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_MsgLiquidUnstake, Pstake_Liquidstakeibc_V1beta1_MsgLiquidUnstakeResponse>]
 
   /// - Returns: Interceptors to use when invoking 'redeem'.
   func makeRedeemInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_MsgRedeem, Pstake_Liquidstakeibc_V1beta1_MsgRedeemResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'updateParams'.
+  func makeUpdateParamsInterceptors() -> [ClientInterceptor<Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams, Pstake_Liquidstakeibc_V1beta1_MsgUpdateParamsResponse>]
 }
 
 internal enum Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata {
@@ -421,8 +531,10 @@ internal enum Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata {
       Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.registerHostChain,
       Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.updateHostChain,
       Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.liquidStake,
+      Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.liquidStakeLSM,
       Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.liquidUnstake,
       Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.redeem,
+      Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata.Methods.updateParams,
     ]
   )
 
@@ -445,6 +557,12 @@ internal enum Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata {
       type: GRPCCallType.unary
     )
 
+    internal static let liquidStakeLSM = GRPCMethodDescriptor(
+      name: "LiquidStakeLSM",
+      path: "/pstake.liquidstakeibc.v1beta1.Msg/LiquidStakeLSM",
+      type: GRPCCallType.unary
+    )
+
     internal static let liquidUnstake = GRPCMethodDescriptor(
       name: "LiquidUnstake",
       path: "/pstake.liquidstakeibc.v1beta1.Msg/LiquidUnstake",
@@ -454,6 +572,12 @@ internal enum Pstake_Liquidstakeibc_V1beta1_MsgClientMetadata {
     internal static let redeem = GRPCMethodDescriptor(
       name: "Redeem",
       path: "/pstake.liquidstakeibc.v1beta1.Msg/Redeem",
+      type: GRPCCallType.unary
+    )
+
+    internal static let updateParams = GRPCMethodDescriptor(
+      name: "UpdateParams",
+      path: "/pstake.liquidstakeibc.v1beta1.Msg/UpdateParams",
       type: GRPCCallType.unary
     )
   }
@@ -471,9 +595,13 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_MsgProvider: CallHandlerProvider
 
   func liquidStake(request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidStake, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeResponse>
 
+  func liquidStakeLSM(request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSMResponse>
+
   func liquidUnstake(request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidUnstake, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_MsgLiquidUnstakeResponse>
 
   func redeem(request: Pstake_Liquidstakeibc_V1beta1_MsgRedeem, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_MsgRedeemResponse>
+
+  func updateParams(request: Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams, context: StatusOnlyCallContext) -> EventLoopFuture<Pstake_Liquidstakeibc_V1beta1_MsgUpdateParamsResponse>
 }
 
 extension Pstake_Liquidstakeibc_V1beta1_MsgProvider {
@@ -515,6 +643,15 @@ extension Pstake_Liquidstakeibc_V1beta1_MsgProvider {
         userFunction: self.liquidStake(request:context:)
       )
 
+    case "LiquidStakeLSM":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM>(),
+        responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSMResponse>(),
+        interceptors: self.interceptors?.makeLiquidStakeLSMInterceptors() ?? [],
+        userFunction: self.liquidStakeLSM(request:context:)
+      )
+
     case "LiquidUnstake":
       return UnaryServerHandler(
         context: context,
@@ -531,6 +668,15 @@ extension Pstake_Liquidstakeibc_V1beta1_MsgProvider {
         responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_MsgRedeemResponse>(),
         interceptors: self.interceptors?.makeRedeemInterceptors() ?? [],
         userFunction: self.redeem(request:context:)
+      )
+
+    case "UpdateParams":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams>(),
+        responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_MsgUpdateParamsResponse>(),
+        interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? [],
+        userFunction: self.updateParams(request:context:)
       )
 
     default:
@@ -562,6 +708,11 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_MsgAsyncProvider: CallHandlerPro
     context: GRPCAsyncServerCallContext
   ) async throws -> Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeResponse
 
+  @Sendable func liquidStakeLSM(
+    request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSMResponse
+
   @Sendable func liquidUnstake(
     request: Pstake_Liquidstakeibc_V1beta1_MsgLiquidUnstake,
     context: GRPCAsyncServerCallContext
@@ -571,6 +722,11 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_MsgAsyncProvider: CallHandlerPro
     request: Pstake_Liquidstakeibc_V1beta1_MsgRedeem,
     context: GRPCAsyncServerCallContext
   ) async throws -> Pstake_Liquidstakeibc_V1beta1_MsgRedeemResponse
+
+  @Sendable func updateParams(
+    request: Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Pstake_Liquidstakeibc_V1beta1_MsgUpdateParamsResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -619,6 +775,15 @@ extension Pstake_Liquidstakeibc_V1beta1_MsgAsyncProvider {
         wrapping: self.liquidStake(request:context:)
       )
 
+    case "LiquidStakeLSM":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM>(),
+        responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSMResponse>(),
+        interceptors: self.interceptors?.makeLiquidStakeLSMInterceptors() ?? [],
+        wrapping: self.liquidStakeLSM(request:context:)
+      )
+
     case "LiquidUnstake":
       return GRPCAsyncServerHandler(
         context: context,
@@ -635,6 +800,15 @@ extension Pstake_Liquidstakeibc_V1beta1_MsgAsyncProvider {
         responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_MsgRedeemResponse>(),
         interceptors: self.interceptors?.makeRedeemInterceptors() ?? [],
         wrapping: self.redeem(request:context:)
+      )
+
+    case "UpdateParams":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams>(),
+        responseSerializer: ProtobufSerializer<Pstake_Liquidstakeibc_V1beta1_MsgUpdateParamsResponse>(),
+        interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? [],
+        wrapping: self.updateParams(request:context:)
       )
 
     default:
@@ -657,6 +831,10 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_MsgServerInterceptorFactoryProto
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeLiquidStakeInterceptors() -> [ServerInterceptor<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStake, Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeResponse>]
 
+  /// - Returns: Interceptors to use when handling 'liquidStakeLSM'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeLiquidStakeLSMInterceptors() -> [ServerInterceptor<Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSM, Pstake_Liquidstakeibc_V1beta1_MsgLiquidStakeLSMResponse>]
+
   /// - Returns: Interceptors to use when handling 'liquidUnstake'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeLiquidUnstakeInterceptors() -> [ServerInterceptor<Pstake_Liquidstakeibc_V1beta1_MsgLiquidUnstake, Pstake_Liquidstakeibc_V1beta1_MsgLiquidUnstakeResponse>]
@@ -664,6 +842,10 @@ internal protocol Pstake_Liquidstakeibc_V1beta1_MsgServerInterceptorFactoryProto
   /// - Returns: Interceptors to use when handling 'redeem'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeRedeemInterceptors() -> [ServerInterceptor<Pstake_Liquidstakeibc_V1beta1_MsgRedeem, Pstake_Liquidstakeibc_V1beta1_MsgRedeemResponse>]
+
+  /// - Returns: Interceptors to use when handling 'updateParams'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUpdateParamsInterceptors() -> [ServerInterceptor<Pstake_Liquidstakeibc_V1beta1_MsgUpdateParams, Pstake_Liquidstakeibc_V1beta1_MsgUpdateParamsResponse>]
 }
 
 internal enum Pstake_Liquidstakeibc_V1beta1_MsgServerMetadata {
@@ -674,8 +856,10 @@ internal enum Pstake_Liquidstakeibc_V1beta1_MsgServerMetadata {
       Pstake_Liquidstakeibc_V1beta1_MsgServerMetadata.Methods.registerHostChain,
       Pstake_Liquidstakeibc_V1beta1_MsgServerMetadata.Methods.updateHostChain,
       Pstake_Liquidstakeibc_V1beta1_MsgServerMetadata.Methods.liquidStake,
+      Pstake_Liquidstakeibc_V1beta1_MsgServerMetadata.Methods.liquidStakeLSM,
       Pstake_Liquidstakeibc_V1beta1_MsgServerMetadata.Methods.liquidUnstake,
       Pstake_Liquidstakeibc_V1beta1_MsgServerMetadata.Methods.redeem,
+      Pstake_Liquidstakeibc_V1beta1_MsgServerMetadata.Methods.updateParams,
     ]
   )
 
@@ -698,6 +882,12 @@ internal enum Pstake_Liquidstakeibc_V1beta1_MsgServerMetadata {
       type: GRPCCallType.unary
     )
 
+    internal static let liquidStakeLSM = GRPCMethodDescriptor(
+      name: "LiquidStakeLSM",
+      path: "/pstake.liquidstakeibc.v1beta1.Msg/LiquidStakeLSM",
+      type: GRPCCallType.unary
+    )
+
     internal static let liquidUnstake = GRPCMethodDescriptor(
       name: "LiquidUnstake",
       path: "/pstake.liquidstakeibc.v1beta1.Msg/LiquidUnstake",
@@ -707,6 +897,12 @@ internal enum Pstake_Liquidstakeibc_V1beta1_MsgServerMetadata {
     internal static let redeem = GRPCMethodDescriptor(
       name: "Redeem",
       path: "/pstake.liquidstakeibc.v1beta1.Msg/Redeem",
+      type: GRPCCallType.unary
+    )
+
+    internal static let updateParams = GRPCMethodDescriptor(
+      name: "UpdateParams",
+      path: "/pstake.liquidstakeibc.v1beta1.Msg/UpdateParams",
       type: GRPCCallType.unary
     )
   }

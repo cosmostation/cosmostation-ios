@@ -77,6 +77,20 @@ public struct ApiHistoryNewCustom {
                     return NSLocalizedString("tx_ibc_receive", comment: "")
                 }
                 
+                if (msgType0.contains("pstake.") && msgType0.contains("liquidstakeibc") || msgType0.contains("pstake.") && msgType0.contains("lscosmos")) {
+                    if (msgType0.contains("MsgLiquidStake")) {
+                        result = NSLocalizedString("tx_stride_liquid_stake", comment: "")
+                        
+                    } else if (msgType0.contains("MsgLiquidUnstake")) {
+                        result = NSLocalizedString("tx_stride_liquid_unstake", comment: "")
+                        
+                    } else if (msgType0.contains("MsgRedeem")) {
+                        result = NSLocalizedString("tx_persis_liquid_redeem", comment: "")
+                        
+                    } else if (msgType0.contains("MsgClaim")) {
+                        result = NSLocalizedString("tx_persis_liquid_claim", comment: "")
+                    }
+                }
             }
             
             var msgType = ""
@@ -789,7 +803,7 @@ public struct ApiHistoryNewCustom {
             }
             
             // persistence msg type
-            else if (msgType.contains("pstake.") && msgType.contains("lscosmos")) {
+            else if (msgType.contains("pstake.") && msgType.contains("lscosmos") || msgType.contains("pstake.") && msgType.contains("liquidstakeibc")) {
                 if (msgType.contains("MsgLiquidStake")) {
                     result = NSLocalizedString("tx_stride_liquid_stake", comment: "")
                     

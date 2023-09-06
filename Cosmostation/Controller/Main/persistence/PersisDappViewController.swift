@@ -52,9 +52,9 @@ class PersisDappViewController: BaseViewController {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainConfig)!
-                let req = Pstake_Lscosmos_V1beta1_QueryCValueRequest.init()
-                if let response = try? Pstake_Lscosmos_V1beta1_QueryClient(channel: channel).cValue(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    self.cValue = response.cValue
+                let req = Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest.with { $0.chainID = "cosmoshub-4" }
+                if let response = try? Pstake_Liquidstakeibc_V1beta1_QueryClient(channel: channel).exchangeRate(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.cValue = response.rate
                 }
                 try channel.close().wait()
             } catch {

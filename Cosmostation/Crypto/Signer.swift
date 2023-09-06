@@ -1942,12 +1942,12 @@ class Signer {
             $0.denom = coin.denom
             $0.amount = coin.amount
         }
-        let staking = Pstake_Lscosmos_V1beta1_MsgLiquidStake.with {
+        let staking = Pstake_Liquidstakeibc_V1beta1_MsgLiquidStake.with {
             $0.delegatorAddress = delegator_address
             $0.amount = amount
         }
         let anyMsg = Google_Protobuf_Any.with {
-            $0.typeURL = "/pstake.lscosmos.v1beta1.MsgLiquidStake"
+            $0.typeURL = "/pstake.liquidstakeibc.v1beta1.MsgLiquidStake"
             $0.value = try! staking.serializedData()
         }
         return [anyMsg]
@@ -1972,12 +1972,12 @@ class Signer {
             $0.denom = coin.denom
             $0.amount = coin.amount
         }
-        let reedem = Pstake_Lscosmos_V1beta1_MsgRedeem.with {
+        let reedem = Pstake_Liquidstakeibc_V1beta1_MsgRedeem.with {
             $0.delegatorAddress = delegator_address
             $0.amount = amount
         }
         let anyMsg = Google_Protobuf_Any.with {
-            $0.typeURL = "/pstake.lscosmos.v1beta1.MsgRedeem"
+            $0.typeURL = "/pstake.liquidstakeibc.v1beta1.MsgRedeem"
             $0.value = try! reedem.serializedData()
         }
         return [anyMsg]

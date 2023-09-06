@@ -47,6 +47,9 @@ struct Pstake_Liquidstakeibc_V1beta1_GenesisState {
   /// initial user unbondings
   var userUnbondings: [Pstake_Liquidstakeibc_V1beta1_UserUnbonding] = []
 
+  /// validator unbondings
+  var validatorUnbondings: [Pstake_Liquidstakeibc_V1beta1_ValidatorUnbonding] = []
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -70,6 +73,7 @@ extension Pstake_Liquidstakeibc_V1beta1_GenesisState: SwiftProtobuf.Message, Swi
     3: .same(proto: "deposits"),
     4: .same(proto: "unbondings"),
     5: .standard(proto: "user_unbondings"),
+    6: .standard(proto: "validator_unbondings"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -83,6 +87,7 @@ extension Pstake_Liquidstakeibc_V1beta1_GenesisState: SwiftProtobuf.Message, Swi
       case 3: try { try decoder.decodeRepeatedMessageField(value: &self.deposits) }()
       case 4: try { try decoder.decodeRepeatedMessageField(value: &self.unbondings) }()
       case 5: try { try decoder.decodeRepeatedMessageField(value: &self.userUnbondings) }()
+      case 6: try { try decoder.decodeRepeatedMessageField(value: &self.validatorUnbondings) }()
       default: break
       }
     }
@@ -108,6 +113,9 @@ extension Pstake_Liquidstakeibc_V1beta1_GenesisState: SwiftProtobuf.Message, Swi
     if !self.userUnbondings.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.userUnbondings, fieldNumber: 5)
     }
+    if !self.validatorUnbondings.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.validatorUnbondings, fieldNumber: 6)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -117,6 +125,7 @@ extension Pstake_Liquidstakeibc_V1beta1_GenesisState: SwiftProtobuf.Message, Swi
     if lhs.deposits != rhs.deposits {return false}
     if lhs.unbondings != rhs.unbondings {return false}
     if lhs.userUnbondings != rhs.userUnbondings {return false}
+    if lhs.validatorUnbondings != rhs.validatorUnbondings {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
