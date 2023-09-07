@@ -149,8 +149,11 @@ public struct Param {
             return inflation.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: bondingRate, withBehavior: WUtils.handler6)
             
         } else if (chain == .STARGAZE_MAIN) {
+            let blockPerYear = NSDecimalNumber.init(string: params?.minting_params?.params?.blocks_per_year)
+            let supplementAmount = NSDecimalNumber.init(string: params?.stargaze_alloc_params?.params?.supplement_amount[0].amount)
+            let annualSupplement = blockPerYear.multiplying(by: supplementAmount)
             let reductionFactor = NSDecimalNumber.one.subtracting(params?.stargaze_alloc_params?.getReduction() ?? NSDecimalNumber.zero)
-            return inflation.multiplying(by: calTax).multiplying(by: reductionFactor).dividing(by: bondingRate, withBehavior: WUtils.handler6)
+            return (NSDecimalNumber.init(string: params?.minting_annual_provisions).adding(annualSupplement)).multiplying(by: reductionFactor).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             
         } else if (chain == .EVMOS_MAIN || chain == .CANTO_MAIN) {
             let ap = NSDecimalNumber.init(string: params?.evmos_minting_epoch_provisions).multiplying(by: NSDecimalNumber.init(string: "365"))
@@ -1014,15 +1017,22 @@ public struct StargazeAllocParam {
         var result = NSDecimalNumber.zero
         result = result.adding(params?.distribution_proportions?.nft_incentives ?? NSDecimalNumber.zero)
         result = result.adding(params?.distribution_proportions?.developer_rewards ?? NSDecimalNumber.zero)
+        result = result.adding(params?.distribution_proportions?.community_pool ?? NSDecimalNumber.zero)
         return result
     }
     
     public struct Params {
         var distribution_proportions: DistributionProportions?
+        var supplement_amount = Array<Coin>()
         
         init(_ dictionary: NSDictionary?) {
             if let rawDistributionProportions = dictionary?["distribution_proportions"] as? NSDictionary {
                 self.distribution_proportions = DistributionProportions.init(rawDistributionProportions)
+            }
+            if let rawSupplementAmounts = dictionary?["supplement_amount"] as? Array<NSDictionary> {
+                for rawSupplementAmount in rawSupplementAmounts {
+                    self.supplement_amount.append(Coin.init(rawSupplementAmount))
+                }
             }
         }
     }
@@ -1030,6 +1040,7 @@ public struct StargazeAllocParam {
     public struct DistributionProportions {
         var nft_incentives: NSDecimalNumber?
         var developer_rewards: NSDecimalNumber?
+        var community_pool: NSDecimalNumber?
         
         init(_ dictionary: NSDictionary?) {
             if let incentives = dictionary?["nft_incentives"] as? String {
@@ -1037,6 +1048,9 @@ public struct StargazeAllocParam {
             }
             if let rewards = dictionary?["developer_rewards"] as? String {
                 self.developer_rewards = NSDecimalNumber.init(string: rewards)
+            }
+            if let communitys = dictionary?["community_pool"] as? String {
+                self.community_pool = NSDecimalNumber.init(string: communitys)
             }
         }
     }
