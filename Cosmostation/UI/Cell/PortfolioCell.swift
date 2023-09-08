@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class PortfolioCell: UITableViewCell {
 
@@ -25,11 +26,15 @@ class PortfolioCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
+        let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
+        valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
+        valueLabel.skeletonTextLineHeight = SkeletonTextLineHeight.relativeToFont
+//        rootView.setBlur()
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
+//        rootView.setBlur()
+        currencyLabel.text = ""
         lagacyLayer.isHidden = true
     }
     
@@ -43,8 +48,12 @@ class PortfolioCell: UITableViewCell {
             pathLabel.text = chain.getHDPath(account.lastHDPath)
         }
         
+        if (chain.fetched) {
+            valueLabel.hideSkeleton()
+            WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
+        }
         
-        WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
+//
         
 //        if (self is ChainBinanceBeacon) {
 //

@@ -8,6 +8,7 @@
 
 import UIKit
 import MaterialComponents
+import JJFloatingActionButton
 
 class CosmosClassVC: BaseVC {
     
@@ -39,6 +40,7 @@ class CosmosClassVC: BaseVC {
         totalValue = selectedChain.allValue()
         addressLabel.text = selectedChain.address
         onSetTabbarView()
+        onSetFabButton()
         
         print("selectedChain address ", selectedChain.address)
     }
@@ -90,9 +92,32 @@ class CosmosClassVC: BaseVC {
         historyList.alpha = 0
         aboutList.alpha = 0
     }
+    
+    func onSetFabButton() {
+        let actionButton = JJFloatingActionButton()
+        actionButton.handleSingleActionDirectly = false
+        actionButton.buttonImage = UIImage(named: "iconFab")
+        actionButton.buttonColor = .colorPrimary
+        actionButton.buttonImageSize = CGSize(width: 40, height: 40)
+        
+        actionButton.addItem(title: "item 1", image: UIImage(systemName: "star.fill")) { item in
+          // do something
+            print("aaa")
+        }
+        
+        actionButton.addItem(title: "item 2", image: UIImage(named: "star.fill")?.withRenderingMode(.alwaysTemplate)) { item in
+          // do something
+            print("bbb")
+        }
+        view.addSubview(actionButton)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+    }
 }
 
 extension CosmosClassVC: MDCTabBarViewDelegate {
+    
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
         if (item.tag == 0) {
             coinList.alpha = 1
