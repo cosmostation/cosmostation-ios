@@ -241,6 +241,7 @@
 "str_select_account" = "Select Account";
 "str_account_with_privateKey" = "Private Key Account";
 "str_account_with_mnemonic" = "Mnemonic Account";
+"str_copy" = "Copy";
 
 
 "btn_delegate" = "  Delegate";
@@ -299,6 +300,7 @@
 "msg_search_chain" = "Search by Chain or Token";
 "msg_mnemonic_wanning" = "This phrase is the only way to recover your account. Do not share with anyone. Losing this mnemonics could lead to loss of your asset.";
 "msg_tap_to_mnemonic_copy" = "Tap mnemoniuc phrases box for copy.";
+"msg_tap_box_to_copy" = "Tap the card to copy it.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -696,8 +698,6 @@
 "clear_all" = "Clear All";
 "delete" = "Delete";
 "close" = "Close";
-"copy" = "Copy";
-"share" = "Share";
 "cancel" = "Cancel";
 "ok" = "OK";
 "confirm" = "Confirm";

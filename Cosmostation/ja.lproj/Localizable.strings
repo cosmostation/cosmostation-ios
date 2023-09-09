@@ -241,6 +241,7 @@
 "str_select_account" = "アカウント選択";
 "str_account_with_privateKey" = "秘密鍵アカウント";
 "str_account_with_mnemonic" = "ニーモニックアカウント";
+"str_copy" = "コピー";
 
 
 "btn_delegate" = "  委任する";
@@ -299,6 +300,7 @@
 "msg_search_chain" = "チェーンやトークンを検索してください。";
 "msg_mnemonic_wanning" = "このフレーズがアカウントを回復する唯一の方法です。 誰とも共有しないでください。 このニーモニックを失うと、資産の損失につながる可能性があります。";
 "msg_tap_to_mnemonic_copy" = "ニーモニックフレーズボックスをタップしてコピーします。";
+"msg_tap_box_to_copy" = "カードをタップしてコピーします。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -696,8 +698,6 @@
 "clear_all" = "すべてクリア";
 "delete" = "消去";
 "close" = "閉じる";
-"copy" = "コピー";
-"share" = "共有";
 "cancel" = "キャンセル";
 "ok" = "OK";
 "confirm" = "確認";

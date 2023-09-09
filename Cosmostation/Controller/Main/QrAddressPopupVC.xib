@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QrAddressPopupVC" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="addressLabel" destination="wbX-h2-CAr" id="f61-mR-XD1"/>
+                <outlet property="chainNameLabel" destination="oBF-2o-bRk" id="WxI-jD-mxe"/>
+                <outlet property="rqImgView" destination="Xt9-i3-n96" id="tVn-CY-Whq"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="liZ-ax-1FD">
+                    <rect key="frame" x="12" y="101" width="369" height="500"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChainName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBF-2o-bRk">
+                            <rect key="frame" x="133.33333333333334" y="4" width="102.66666666666666" height="22.666666666666668"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="18"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgQrGuide" translatesAutoresizingMaskIntoConstraints="NO" id="jvu-Gn-DDF">
+                            <rect key="frame" x="24" y="54.666666666666657" width="321" height="321"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="jvu-Gn-DDF" secondAttribute="height" multiplier="1:1" id="9bn-Nf-mu0"/>
+                            </constraints>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xt9-i3-n96">
+                            <rect key="frame" x="36" y="66.666666666666657" width="297" height="297"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbX-h2-CAr">
+                            <rect key="frame" x="12" y="407.66666666666669" width="345" height="17"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Xt9-i3-n96" firstAttribute="leading" secondItem="jvu-Gn-DDF" secondAttribute="leading" constant="12" id="4fG-BV-IcQ"/>
+                        <constraint firstItem="jvu-Gn-DDF" firstAttribute="leading" secondItem="liZ-ax-1FD" secondAttribute="leading" constant="24" id="4iX-hN-eZw"/>
+                        <constraint firstItem="jvu-Gn-DDF" firstAttribute="top" secondItem="oBF-2o-bRk" secondAttribute="bottom" constant="28" id="QId-dJ-XpT"/>
+                        <constraint firstItem="oBF-2o-bRk" firstAttribute="centerX" secondItem="liZ-ax-1FD" secondAttribute="centerX" id="U0m-ML-znb"/>
+                        <constraint firstItem="Xt9-i3-n96" firstAttribute="centerX" secondItem="jvu-Gn-DDF" secondAttribute="centerX" id="UJv-Y5-4X7"/>
+                        <constraint firstAttribute="trailing" secondItem="wbX-h2-CAr" secondAttribute="trailing" constant="12" id="Uxn-OH-QwI"/>
+                        <constraint firstAttribute="height" constant="500" id="VDT-Ro-7CV"/>
+                        <constraint firstItem="wbX-h2-CAr" firstAttribute="top" secondItem="jvu-Gn-DDF" secondAttribute="bottom" constant="32" id="eOe-OW-pqV"/>
+                        <constraint firstItem="Xt9-i3-n96" firstAttribute="centerY" secondItem="jvu-Gn-DDF" secondAttribute="centerY" id="fAQ-mg-n5B"/>
+                        <constraint firstItem="wbX-h2-CAr" firstAttribute="leading" secondItem="liZ-ax-1FD" secondAttribute="leading" constant="12" id="hsC-yy-1ww"/>
+                        <constraint firstItem="Xt9-i3-n96" firstAttribute="trailing" secondItem="jvu-Gn-DDF" secondAttribute="trailing" constant="-12" id="jD5-ms-Spr"/>
+                        <constraint firstItem="Xt9-i3-n96" firstAttribute="bottom" secondItem="jvu-Gn-DDF" secondAttribute="bottom" constant="-12" id="lma-Ei-ZZZ"/>
+                        <constraint firstItem="jvu-Gn-DDF" firstAttribute="centerX" secondItem="liZ-ax-1FD" secondAttribute="centerX" id="nTQ-pe-8Ty"/>
+                        <constraint firstAttribute="trailing" secondItem="jvu-Gn-DDF" secondAttribute="trailing" constant="24" id="o4Y-DD-ZE9"/>
+                        <constraint firstItem="Xt9-i3-n96" firstAttribute="top" secondItem="jvu-Gn-DDF" secondAttribute="top" constant="12" id="xFv-3k-sJB"/>
+                        <constraint firstItem="oBF-2o-bRk" firstAttribute="top" secondItem="liZ-ax-1FD" secondAttribute="top" constant="4" id="xqA-Ae-4P4"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="_colorBg"/>
+            <color key="tintColor" name="_primary"/>
+            <constraints>
+                <constraint firstItem="liZ-ax-1FD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="42" id="G5r-8a-ZEr"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="liZ-ax-1FD" secondAttribute="trailing" constant="12" id="aGQ-eM-gx5"/>
+                <constraint firstItem="liZ-ax-1FD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="yVM-pf-xNh"/>
+            </constraints>
+            <point key="canvasLocation" x="48" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="imgQrGuide" width="235" height="235"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorBg">
+            <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.33700001239776611" green="0.016000000759959221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

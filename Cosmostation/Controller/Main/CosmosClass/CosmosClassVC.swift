@@ -43,6 +43,10 @@ class CosmosClassVC: BaseVC {
         onSetFabButton()
         
         print("selectedChain address ", selectedChain.address)
+        
+        let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
+        addressTap.cancelsTouchesInView = false
+        addressLayer.addGestureRecognizer(addressTap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +61,13 @@ class CosmosClassVC: BaseVC {
     
     @objc func onFetchCw20Done(_ notification: NSNotification) {
         totalValue = selectedChain.allValue()
+    }
+    
+    @objc func onShowAddress() {
+        let qrAddressVC = QrAddressVC(nibName: "QrAddressVC", bundle: nil)
+        qrAddressVC.selectedChain = selectedChain
+        qrAddressVC.modalPresentationStyle = .pageSheet
+        present(qrAddressVC, animated: true)
     }
     
     func onSetTabbarView() {
@@ -103,7 +114,6 @@ class CosmosClassVC: BaseVC {
         mainFab.itemAnimationConfiguration.closing = JJAnimationSettings(duration: 0.1, dampingRatio: 1.0, initialVelocity: 0.8, interItemDelay: 0.01)
         mainFab.configureDefaultItem { item in
             item.titlePosition = .leading
-
             item.titleLabel.font = .fontSize12Bold
             item.titleLabel.textColor = .color01
             item.buttonColor = .color01
@@ -126,7 +136,7 @@ class CosmosClassVC: BaseVC {
             print("Stake")
         }
         mainFab.addItem(title: "Receive", image: UIImage(named: "iconFabReceive")) { _ in
-            print("Receive")
+            self.onShowAddress()
         }
         mainFab.addItem(title: "Send", image: UIImage(named: "iconFabSend")) { _ in
             print("Send")

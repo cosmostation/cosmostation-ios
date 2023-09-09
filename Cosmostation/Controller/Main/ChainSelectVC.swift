@@ -64,6 +64,10 @@ class ChainSelectVC: BaseVC {
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
     }
     
+    override func setLocalizedString() {
+        confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
+    }
+    
     @objc func onFetchDone(_ notification: NSNotification) {
         let fetchedCnt = baseAccount.allCosmosClassChains.filter { $0.fetched == true }.count
         DispatchQueue.main.async {
@@ -75,16 +79,19 @@ class ChainSelectVC: BaseVC {
                 let address = RefAddress(baseAccount.id, chain.id, chain.address!,chain.allStakingDenomAmount().stringValue, chain.allValue(true).stringValue)
                 BaseData.instance.updateRefAddresses(address)
             }
-            baseAccount.sortCosmosChain()
-            loadingView.stop()
-            loadingView.isHidden = true
-            loadingMsgLabel.isHidden = true
-            loadingCntLabel.isHidden = true
-            powerLabel.isHidden = true
             
-            confirmBtn.isHidden = false
-            tableView.reloadData()
-            tableView.isHidden = false
+            DispatchQueue.main.async {
+                self.baseAccount.sortCosmosChain()
+                self.loadingView.stop()
+                self.loadingView.isHidden = true
+                self.loadingMsgLabel.isHidden = true
+                self.loadingCntLabel.isHidden = true
+                self.powerLabel.isHidden = true
+                
+                self.confirmBtn.isHidden = false
+                self.tableView.reloadData()
+                self.tableView.isHidden = false
+            }
         }
 
     }

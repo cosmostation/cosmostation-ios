@@ -53,11 +53,11 @@ class PortfolioVC: BaseVC {
         let id = notification.object as! String
         for i in 0..<baseAccount.toDisplayCosmosChains.count {
             if (baseAccount.toDisplayCosmosChains[i].id == id) {
-//                DispatchQueue.main.async {
-//                    self.tableView.beginUpdates()
+                DispatchQueue.main.async {
+                    self.tableView.beginUpdates()
                     self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
-//                    self.tableView.endUpdates()
-//                }
+                    self.tableView.endUpdates()
+                }
             }
         }
         onUpdateTotal()
@@ -135,6 +135,41 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
         cosmosClassVC.selectedPosition = indexPath.row
         cosmosClassVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(cosmosClassVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let selectedChain = baseAccount.toDisplayCosmosChains[indexPath.row]
+        let copy = UIAction(title: NSLocalizedString("str_copy", comment: ""), image: UIImage(systemName: "doc.on.doc")) { _ in
+            UIPasteboard.general.string = selectedChain.address!.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.onShowToast(NSLocalizedString("address_copied", comment: ""))
+        }
+        let share = UIAction(title: NSLocalizedString("str_share", comment: ""), image: UIImage(systemName: "square.and.arrow.up")) { _ in
+            let activityViewController = UIActivityViewController(activityItems: [selectedChain.address], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+        let qrAddressPopupVC = QrAddressPopupVC(nibName: "QrAddressPopupVC", bundle: nil)
+        qrAddressPopupVC.selectedChain = baseAccount.toDisplayCosmosChains[indexPath.row]
+        return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return qrAddressPopupVC }) { _ in
+            UIMenu(title: "", children: [copy, share])
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return makeTargetedPreview(for: configuration)
+    }
+    
+    func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return makeTargetedPreview(for: configuration)
+    }
+    
+    private func makeTargetedPreview(for configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let indexPath = configuration.identifier as? IndexPath else { return nil }
+        guard let cell = tableView.cellForRow(at: indexPath) as? PortfolioCell else { return nil }
+        
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = .clear
+        return UITargetedPreview(view: cell, parameters: parameters)
     }
     
     
