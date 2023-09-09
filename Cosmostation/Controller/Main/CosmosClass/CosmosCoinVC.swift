@@ -40,6 +40,10 @@ class CosmosCoinVC: BaseVC {
 
         baseAccount = BaseData.instance.baseAccount
         selectedChain = baseAccount.toDisplayCosmosChains[parentVC.selectedPosition]
+        nativeCoins.removeAll()
+        ibcCoins.removeAll()
+        bridgedCoins.removeAll()
+        lcdBalances.removeAll()
         onSortAssets()
     }
     

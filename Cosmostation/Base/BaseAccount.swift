@@ -108,12 +108,14 @@ public class BaseAccount {
     
     func sortCosmosChain() {
         allCosmosClassChains.sort {
-            if ($0.id == "cosmos118" && $1.id != "cosmos118") { return true }
+            if ($0.id == "cosmos118") { return true }
+            if ($1.id == "cosmos118") { return false }
             return $0.allValue().compare($1.allValue()).rawValue > 0 ? true : false
         }
         let toDisplayNames = BaseData.instance.getDisplayCosmosChainNames(self)
         allCosmosClassChains.sort {
-            if ($0.id == "cosmos118" && $1.id != "cosmos118") { return true }
+            if ($0.id == "cosmos118") { return true }
+            if ($1.id == "cosmos118") { return false }
             if (toDisplayNames.contains($0.id) == true && toDisplayNames.contains($1.id) == false) { return true }
             return false
         }

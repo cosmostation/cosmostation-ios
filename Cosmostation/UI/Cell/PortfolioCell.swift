@@ -16,11 +16,15 @@ class PortfolioCell: UITableViewCell {
     @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var lagacyLayer: UIStackView!
+    @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var pathLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
-    @IBOutlet weak var priceImg: UIImageView!
+    
+    @IBOutlet weak var priceCurrencyLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var priceChangeLabel: UILabel!
+    @IBOutlet weak var priceChangePercentLabel: UILabel!
     
     
     override func awakeFromNib() {
@@ -46,10 +50,30 @@ class PortfolioCell: UITableViewCell {
             lagacyLayer.isHidden = false
             pathLabel.text = chain.getHDPath(account.lastHDPath)
         }
+        if (chain is ChainKava60) {
+            tagLabel.text = "EVM"
+        } else {
+            tagLabel.text = "LEGACY"
+        }
         
         if (chain.fetched) {
             valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
+            
+//            if (chain is ChainBinanceBeacon) {
+//                WDP.dpPrice(ChainBinanceBeacon.BNB_GECKO_ID, priceCurrencyLabel, priceLabel)
+//                WDP.dpPriceChanged(ChainBinanceBeacon.BNB_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+//
+//            } else if (chain is ChainOktKeccak256) {
+//                WDP.dpPrice(ChainOktKeccak256.OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
+//                WDP.dpPriceChanged(ChainOktKeccak256.OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+//
+//            } else {
+//                if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
+//                    WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+//                    WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+//                }
+//            }
         }
     }
     

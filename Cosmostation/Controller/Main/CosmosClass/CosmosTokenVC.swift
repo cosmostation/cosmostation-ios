@@ -39,6 +39,7 @@ class CosmosTokenVC: BaseVC {
 
         baseAccount = BaseData.instance.baseAccount
         selectedChain = baseAccount.toDisplayCosmosChains[parentVC.selectedPosition]
+        mintscanTokens.removeAll()
         selectedChain.fetchAllCw20Balance()
     }
     

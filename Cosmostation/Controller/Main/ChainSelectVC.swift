@@ -99,7 +99,8 @@ class ChainSelectVC: BaseVC {
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         var toSaveCosmos = [String]()
         baseAccount.allCosmosClassChains.sort {
-            if ($0.id == "cosmos118" && $1.id != "cosmos118") { return true }
+            if ($0.id == "cosmos118") { return true }
+            if ($1.id == "cosmos118") { return false }
             return $0.allValue().compare($1.allValue()).rawValue > 0 ? true : false
         }
         baseAccount.allCosmosClassChains.forEach { chain in
@@ -107,7 +108,6 @@ class ChainSelectVC: BaseVC {
                 toSaveCosmos.append(chain.id)
             }
         }
-        
         BaseData.instance.setDisplayCosmosChainNames(baseAccount, toSaveCosmos)
         let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

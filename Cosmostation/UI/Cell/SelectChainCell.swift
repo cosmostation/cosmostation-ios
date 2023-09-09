@@ -41,15 +41,23 @@ class SelectChainCell: UITableViewCell {
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
         pathLabel.text = chain.getHDPath(account.lastHDPath)
-//
+        
         if (chain is ChainBinanceBeacon) {
             assetCntLabel.text = String(chain.lcdAccountInfo["balances"].arrayValue.count) + " Coins"
-        }  else {
+        } else if (chain is ChainOktKeccak256) {
+            assetCntLabel.text = String(chain.lcdAccountInfo["value","coins"].arrayValue.count) + " Coins"
+        } else {
             assetCntLabel.text = String(chain.cosmosBalances.count) + " Coins"
         }
         legacyLabel.isHidden = chain.isDefault
+        if (chain is ChainKava60) {
+            legacyLabel.text = "EVM"
+        } else {
+            legacyLabel.text = "LEGACY"
+        }
         
         WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
         selectSwitch.isOn = selectedList.contains(chain.id)
+        selectSwitch.isHidden = chain is ChainCosmos
     }
 }
