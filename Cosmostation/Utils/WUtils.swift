@@ -66,36 +66,36 @@ public class WUtils {
         }
         return nil
     }
-//
-//    static func timeInt64ToDate(_ input: Int64) -> Date? {
-//        return Date.init(milliseconds: Int(input))
-//    }
-//
-//    static func getGapTime(_ date: Date) -> String {
-//        let minute = 60
-//        let hour = 60 * minute
-//        let day = 24 * hour
-//        var gapTime = Int(Date().timeIntervalSince(date))
-//        if (gapTime > 0) {
-//            if gapTime < minute {
-//                return "\(gapTime) seconds ago"
-//            } else if gapTime < hour {
-//                return "\(gapTime / minute) minutes ago"
-//            } else if gapTime < day {
-//                return "\(gapTime / hour) hours ago"
-//            } else {
-//                return "\(gapTime / day) days ago"
-//            }
-//
-//        } else {
-//            gapTime = gapTime * -1
-//            if gapTime < day {
-//                return "H-\(gapTime / hour)"
-//            } else {
-//                return "D-\(gapTime / day)"
-//            }
-//        }
-//    }
+
+    static func timeInt64ToDate(_ input: Int64) -> Date? {
+        return Date.init(milliseconds: Int(input))
+    }
+
+    static func getGapTime(_ date: Date) -> String {
+        let minute = 60
+        let hour = 60 * minute
+        let day = 24 * hour
+        var gapTime = Int(Date().timeIntervalSince(date))
+        if (gapTime > 0) {
+            if gapTime < minute {
+                return "\(gapTime) seconds ago"
+            } else if gapTime < hour {
+                return "\(gapTime / minute) minutes ago"
+            } else if gapTime < day {
+                return "\(gapTime / hour) hours ago"
+            } else {
+                return "\(gapTime / day) days ago"
+            }
+
+        } else {
+            gapTime = gapTime * -1
+            if gapTime < day {
+                return "H-\(gapTime / hour)"
+            } else {
+                return "D-\(gapTime / day)"
+            }
+        }
+    }
 //
 //    static func unbondingDateFromNow(_ date: UInt16) -> String {
 //        let localFormatter = DateFormatter()

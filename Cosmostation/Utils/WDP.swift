@@ -362,27 +362,27 @@ public class WDP {
 //        return localFormatter.string(from: date)
 //    }
 //
-//    static func dpTimeGap(_ timeString: String?, _ bracket: Bool = true) -> String {
-//        if (timeString == nil) { return "" }
-//        guard let date = WUtils.timeStringToDate(timeString!) else {
-//            return ""
-//        }
-//        if (bracket) {
-//            return "(" + WUtils.getGapTime(date) + ")"
-//        }
-//        return WUtils.getGapTime(date)
-//    }
-//
-//    static func dpTimeGap(_ timeInt: Int64?, _ bracket: Bool = true) -> String {
-//        if (timeInt == nil) { return "" }
-//        guard let date = WUtils.timeInt64ToDate(timeInt!) else {
-//            return ""
-//        }
-//        if (bracket) {
-//            return "(" + WUtils.getGapTime(date) + ")"
-//        }
-//        return WUtils.getGapTime(date)
-//    }
+    static func dpTimeGap(_ timeString: String?, _ bracket: Bool = true) -> String {
+        if (timeString == nil) { return "" }
+        guard let date = WUtils.timeStringToDate(timeString!) else {
+            return ""
+        }
+        if (bracket) {
+            return "(" + WUtils.getGapTime(date) + ")"
+        }
+        return WUtils.getGapTime(date)
+    }
+
+    static func dpTimeGap(_ timeInt: Int64?, _ bracket: Bool = true) -> String {
+        if (timeInt == nil) { return "" }
+        guard let date = WUtils.timeInt64ToDate(timeInt!) else {
+            return ""
+        }
+        if (bracket) {
+            return "(" + WUtils.getGapTime(date) + ")"
+        }
+        return WUtils.getGapTime(date)
+    }
 //
 //    static func okcDpTime(_ timeInt: Int64?) -> String {
 //        if (timeInt == nil) { return "-" }

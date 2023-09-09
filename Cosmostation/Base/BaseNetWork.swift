@@ -77,7 +77,14 @@ class BaseNetWork {
     
     
     static func getAccountHistoryUrl(_ chain: BaseChain, _ address: String) -> String {
-        return MINTSCAN_API_URL + "v1/" + chain.apiName + "/account/" + address + "/txs"
+        if (chain is ChainBinanceBeacon) {
+            return ChainBinanceBeacon.lcdUrl + "api/v1/transactions"
+        } else if (chain is ChainOktKeccak256) {
+            return ""
+        } else {
+            return MINTSCAN_API_URL + "v1/" + chain.apiName + "/account/" + address + "/txs"
+        }
+        
     }
     
     static func getPricesUrl() -> String {
@@ -98,6 +105,11 @@ class BaseNetWork {
     }
     
     static func getTxDetailUrl(_ chain: BaseChain, _ txHash: String) -> URL? {
+        if (chain is ChainBinanceBeacon) {
+            return URL(string: ChainBinanceBeacon.explorer + "tx/" + txHash)
+        } else if (chain is ChainOktKeccak256) {
+//            return ChainOktKeccak256.lcdUrl + "node_info"
+        }
         return URL(string: MintscanUrl + chain.apiName + "/transactions/" + txHash)
     }
 }
