@@ -243,7 +243,6 @@
 		18FFB272281AF533004E65BB /* CKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285ADF0C272EE35F0023651F /* CKey.swift */; };
 		18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E51223124F000A1436F /* BaseData.swift */; };
 		18FFB307281AF533004E65BB /* BinanceProto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903C268C413A002CFFE1 /* BinanceProto.swift */; };
-		18FFB317281AF533004E65BB /* OkToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2EA324F52FE700247424 /* OkToken.swift */; };
 		18FFB31A281AF533004E65BB /* BinanceHexEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9048268C7C2B002CFFE1 /* BinanceHexEncoding.swift */; };
 		18FFB32F281AF533004E65BB /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E4F222E842B00A1436F /* BaseVC.swift */; };
 		18FFB332281AF533004E65BB /* KeyFac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281008492696D979002986A6 /* KeyFac.swift */; };
@@ -276,7 +275,6 @@
 		18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F2AE50227EC05100C87F3F /* InfoPlist.strings */; };
 		18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
 		2810084A2696D979002986A6 /* KeyFac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281008492696D979002986A6 /* KeyFac.swift */; };
-		283D2EA424F52FE700247424 /* OkToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2EA324F52FE700247424 /* OkToken.swift */; };
 		285ADF0D272EE35F0023651F /* CKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285ADF0C272EE35F0023651F /* CKey.swift */; };
 		28CE973625872B7C006DEBEE /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE973525872B7C006DEBEE /* Signer.swift */; };
 		28D765A2271585FA00730F47 /* StarnameAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D765A1271585FA00730F47 /* StarnameAssets.swift */; };
@@ -902,7 +900,6 @@
 		25F8C72F296D0D0B0008CCC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		25F8C730296D31200008CCC8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		281008492696D979002986A6 /* KeyFac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFac.swift; sourceTree = "<group>"; };
-		283D2EA324F52FE700247424 /* OkToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkToken.swift; sourceTree = "<group>"; };
 		285ADF0C272EE35F0023651F /* CKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKey.swift; sourceTree = "<group>"; };
 		28CE973525872B7C006DEBEE /* Signer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signer.swift; sourceTree = "<group>"; };
 		28D765A1271585FA00730F47 /* StarnameAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameAssets.swift; sourceTree = "<group>"; };
@@ -1806,7 +1803,6 @@
 		E1A82DCF224220810097CAEE /* Dao */ = {
 			isa = PBXGroup;
 			children = (
-				283D2EA324F52FE700247424 /* OkToken.swift */,
 				28FC030B2652662B001C0319 /* MintscanPrice.swift */,
 				28E3E37F2671BE8D00BA89C2 /* Param.swift */,
 				E1E0DBCA2A9B1579006DA6BB /* MintscanHistory.swift */,
@@ -2215,7 +2211,6 @@
 				18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */,
 				E1D6B8CF2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
 				18FFB307281AF533004E65BB /* BinanceProto.swift in Sources */,
-				18FFB317281AF533004E65BB /* OkToken.swift in Sources */,
 				E122DBDA2A8A468E006D1E7B /* cosmos_staking_v1beta1_query.grpc.swift in Sources */,
 				E122DBF42A8A468E006D1E7B /* cosmos_params_v1beta1_query.pb.swift in Sources */,
 				E122DB102A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
@@ -2557,7 +2552,6 @@
 				E122DC602A8A4712006D1E7B /* tendermint_abci_types.pb.swift in Sources */,
 				E122DB912A8A468D006D1E7B /* cosmos_slashing_v1beta1_query.pb.swift in Sources */,
 				E11069C02AA4C57600EB02CA /* cosmwasm_wasm_v1_ibc.pb.swift in Sources */,
-				283D2EA424F52FE700247424 /* OkToken.swift in Sources */,
 				E122DAF92A8A468D006D1E7B /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */,
 				E122DC312A8A468E006D1E7B /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
 				E122DBEF2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,

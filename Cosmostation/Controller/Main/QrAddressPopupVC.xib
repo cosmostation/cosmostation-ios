@@ -12,12 +12,16 @@
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
         </array>
+        <array key="SpoqaHanSansNeo-Regular.otf">
+            <string>SpoqaHanSansNeo-Regular</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QrAddressPopupVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="addressLabel" destination="wbX-h2-CAr" id="f61-mR-XD1"/>
                 <outlet property="chainNameLabel" destination="oBF-2o-bRk" id="WxI-jD-mxe"/>
+                <outlet property="hdPathLabel" destination="wfX-nN-dpn" id="NTI-oU-9mO"/>
                 <outlet property="rqImgView" destination="Xt9-i3-n96" id="tVn-CY-Whq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -51,16 +55,24 @@
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hd Path" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfX-nN-dpn">
+                            <rect key="frame" x="12" y="436.66666666666663" width="345" height="15.333333333333314"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Regular" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="Xt9-i3-n96" firstAttribute="leading" secondItem="jvu-Gn-DDF" secondAttribute="leading" constant="12" id="4fG-BV-IcQ"/>
                         <constraint firstItem="jvu-Gn-DDF" firstAttribute="leading" secondItem="liZ-ax-1FD" secondAttribute="leading" constant="24" id="4iX-hN-eZw"/>
+                        <constraint firstItem="wfX-nN-dpn" firstAttribute="top" secondItem="wbX-h2-CAr" secondAttribute="bottom" constant="12" id="B5r-yB-hX1"/>
                         <constraint firstItem="jvu-Gn-DDF" firstAttribute="top" secondItem="oBF-2o-bRk" secondAttribute="bottom" constant="28" id="QId-dJ-XpT"/>
                         <constraint firstItem="oBF-2o-bRk" firstAttribute="centerX" secondItem="liZ-ax-1FD" secondAttribute="centerX" id="U0m-ML-znb"/>
                         <constraint firstItem="Xt9-i3-n96" firstAttribute="centerX" secondItem="jvu-Gn-DDF" secondAttribute="centerX" id="UJv-Y5-4X7"/>
                         <constraint firstAttribute="trailing" secondItem="wbX-h2-CAr" secondAttribute="trailing" constant="12" id="Uxn-OH-QwI"/>
                         <constraint firstAttribute="height" constant="500" id="VDT-Ro-7CV"/>
+                        <constraint firstItem="wfX-nN-dpn" firstAttribute="trailing" secondItem="wbX-h2-CAr" secondAttribute="trailing" id="ZYq-Gi-dMQ"/>
                         <constraint firstItem="wbX-h2-CAr" firstAttribute="top" secondItem="jvu-Gn-DDF" secondAttribute="bottom" constant="32" id="eOe-OW-pqV"/>
                         <constraint firstItem="Xt9-i3-n96" firstAttribute="centerY" secondItem="jvu-Gn-DDF" secondAttribute="centerY" id="fAQ-mg-n5B"/>
                         <constraint firstItem="wbX-h2-CAr" firstAttribute="leading" secondItem="liZ-ax-1FD" secondAttribute="leading" constant="12" id="hsC-yy-1ww"/>
@@ -69,6 +81,7 @@
                         <constraint firstItem="jvu-Gn-DDF" firstAttribute="centerX" secondItem="liZ-ax-1FD" secondAttribute="centerX" id="nTQ-pe-8Ty"/>
                         <constraint firstAttribute="trailing" secondItem="jvu-Gn-DDF" secondAttribute="trailing" constant="24" id="o4Y-DD-ZE9"/>
                         <constraint firstItem="Xt9-i3-n96" firstAttribute="top" secondItem="jvu-Gn-DDF" secondAttribute="top" constant="12" id="xFv-3k-sJB"/>
+                        <constraint firstItem="wfX-nN-dpn" firstAttribute="leading" secondItem="wbX-h2-CAr" secondAttribute="leading" id="xlH-EU-lZM"/>
                         <constraint firstItem="oBF-2o-bRk" firstAttribute="top" secondItem="liZ-ax-1FD" secondAttribute="top" constant="4" id="xqA-Ae-4P4"/>
                     </constraints>
                 </view>

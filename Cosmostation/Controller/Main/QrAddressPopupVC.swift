@@ -13,6 +13,7 @@ class QrAddressPopupVC: BaseVC {
     @IBOutlet weak var chainNameLabel: UILabel!
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var hdPathLabel: UILabel!
     
     var selectedChain: BaseChain!
 
@@ -23,6 +24,12 @@ class QrAddressPopupVC: BaseVC {
         chainNameLabel.text = selectedChain.name + "  (" + baseAccount.name + ")"
         addressLabel.text = selectedChain.address
         addressLabel.adjustsFontSizeToFitWidth = true
+        if (baseAccount.type == .withMnemonic) {
+            hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
+            hdPathLabel.isHidden = false
+        } else {
+            hdPathLabel.isHidden = true
+        }
         
         if let qrImage = generateQrCode(selectedChain.address!) {
             rqImgView.image = UIImage(ciImage: qrImage)
