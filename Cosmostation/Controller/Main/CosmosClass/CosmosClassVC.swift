@@ -94,25 +94,48 @@ class CosmosClassVC: BaseVC {
     }
     
     func onSetFabButton() {
-        let actionButton = JJFloatingActionButton()
-        actionButton.handleSingleActionDirectly = false
-        actionButton.buttonImage = UIImage(named: "iconFab")
-        actionButton.buttonColor = .colorPrimary
-        actionButton.buttonImageSize = CGSize(width: 40, height: 40)
-        
-        actionButton.addItem(title: "item 1", image: UIImage(systemName: "star.fill")) { item in
-          // do something
-            print("aaa")
+        let mainFab = JJFloatingActionButton()
+        mainFab.handleSingleActionDirectly = false
+        mainFab.buttonImage = UIImage(named: "iconFab")
+        mainFab.buttonColor = .colorPrimary
+        mainFab.buttonImageSize = CGSize(width: 40, height: 40)
+        mainFab.itemAnimationConfiguration.opening = JJAnimationSettings(duration: 0.1, dampingRatio: 1.0, initialVelocity: 0.8, interItemDelay: 0.03)
+        mainFab.itemAnimationConfiguration.closing = JJAnimationSettings(duration: 0.1, dampingRatio: 1.0, initialVelocity: 0.8, interItemDelay: 0.01)
+        mainFab.configureDefaultItem { item in
+            item.titlePosition = .leading
+
+            item.titleLabel.font = .fontSize12Bold
+            item.titleLabel.textColor = .color01
+            item.buttonColor = .color01
+            item.buttonImageColor = .colorPrimary
+            item.imageSize = CGSize(width: 24, height: 24)
+
+//            item.layer.shadowColor = UIColor.black.cgColor
+//            item.layer.shadowOffset = CGSize(width: 0, height: 1)
+//            item.layer.shadowOpacity = Float(0.4)
+//            item.layer.shadowRadius = CGFloat(2)
         }
         
-        actionButton.addItem(title: "item 2", image: UIImage(named: "star.fill")?.withRenderingMode(.alwaysTemplate)) { item in
-          // do something
-            print("bbb")
+        mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
+            print("Governance")
         }
-        view.addSubview(actionButton)
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
-        actionButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
-        actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+        mainFab.addItem(title: "Reward Claim", image: UIImage(named: "iconFabClaim")) { _ in
+            print("Claim")
+        }
+        mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in
+            print("Stake")
+        }
+        mainFab.addItem(title: "Receive", image: UIImage(named: "iconFabReceive")) { _ in
+            print("Receive")
+        }
+        mainFab.addItem(title: "Send", image: UIImage(named: "iconFabSend")) { _ in
+            print("Send")
+        }
+        
+        view.addSubview(mainFab)
+        mainFab.translatesAutoresizingMaskIntoConstraints = false
+        mainFab.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        mainFab.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
     }
 }
 

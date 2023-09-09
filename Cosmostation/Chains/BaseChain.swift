@@ -26,6 +26,8 @@ class BaseChain {
     
     
     var fetched = false
+    var allValue: NSDecimalNumber?
+    var allUSDValue: NSDecimalNumber?
     
     
     
@@ -48,7 +50,18 @@ class BaseChain {
     
     
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        return NSDecimalNumber.zero
+        if (usd == true) {
+            guard let allUsdVlaue = allUSDValue else {
+                return NSDecimalNumber.zero
+            }
+            return allUsdVlaue
+            
+        } else {
+            guard let allValue = allValue else {
+                return NSDecimalNumber.zero
+            }
+            return allValue
+        }
     }
 }
 

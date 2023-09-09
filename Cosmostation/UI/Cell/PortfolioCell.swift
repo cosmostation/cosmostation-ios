@@ -28,12 +28,11 @@ class PortfolioCell: UITableViewCell {
         selectionStyle = .none
         let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
         valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
-        valueLabel.skeletonTextLineHeight = SkeletonTextLineHeight.relativeToFont
-//        rootView.setBlur()
+        rootView.setBlur()
     }
     
     override func prepareForReuse() {
-//        rootView.setBlur()
+        rootView.setBlur()
         currencyLabel.text = ""
         lagacyLayer.isHidden = true
     }
@@ -42,27 +41,16 @@ class PortfolioCell: UITableViewCell {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
-        
+
         if (!chain.isDefault) {
             lagacyLayer.isHidden = false
             pathLabel.text = chain.getHDPath(account.lastHDPath)
         }
         
         if (chain.fetched) {
-            valueLabel.hideSkeleton()
+            valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
         }
-        
-//
-        
-//        if (self is ChainBinanceBeacon) {
-//
-//        } else {
-//            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom) {
-//                let priceChanged = BaseData.instance.priceChange(msAsset.coinGeckoId)
-//                WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
-//            }
-//        }
     }
     
 }

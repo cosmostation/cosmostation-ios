@@ -53,11 +53,11 @@ class PortfolioVC: BaseVC {
         let id = notification.object as! String
         for i in 0..<baseAccount.toDisplayCosmosChains.count {
             if (baseAccount.toDisplayCosmosChains[i].id == id) {
-                DispatchQueue.main.async {
-                    self.tableView.beginUpdates()
+//                DispatchQueue.main.async {
+//                    self.tableView.beginUpdates()
                     self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
-                    self.tableView.endUpdates()
-                }
+//                    self.tableView.endUpdates()
+//                }
             }
         }
         onUpdateTotal()

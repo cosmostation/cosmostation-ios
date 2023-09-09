@@ -40,21 +40,21 @@ class CosmosClass: BaseChain  {
     lazy var lcdBeaconTokens = Array<JSON>()
     
     
-    override func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
-        if (self is ChainBinanceBeacon) {
-            result = lcdBalanceValue(stakeDenom, usd)
-            
-        } else {
-            result = balanceValueSum(usd).adding(vestingValueSum(usd))
-                .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
-            
-            if (supportCw20) {
-                result = result.adding(allCw20Value(usd))
-            }
-        }
-        return result
-    }
+//    override func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
+//        var result = NSDecimalNumber.zero
+////        if (self is ChainBinanceBeacon) {
+////            result = lcdBalanceValue(stakeDenom, usd)
+////
+////        } else {
+////            result = balanceValueSum(usd).adding(vestingValueSum(usd))
+////                .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
+////
+////            if (supportCw20) {
+////                result = result.adding(allCw20Value(usd))
+////            }
+////        }
+//        return result
+//    }
     
     func fetchData() {
         if (self is ChainBinanceBeacon) {
@@ -97,6 +97,7 @@ extension CosmosClass {
             try? channel.close()
             WUtils.onParseVestingAccount(self)
             self.fetched = true
+            self.setAllValue()
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.id, userInfo: nil)
         }
     }
@@ -155,6 +156,7 @@ extension CosmosClass {
 
         group.notify(queue: .main) {
             try? channel.close()
+            self.setAllValue()
             NotificationCenter.default.post(name: Notification.Name("FetchCw20Tokens"), object: nil, userInfo: nil)
         }
     }
@@ -346,6 +348,22 @@ extension CosmosClass {
         }
         return result
     }
+    
+    
+    func setAllValue() {
+        var result = NSDecimalNumber.zero
+        if (self is ChainBinanceBeacon) {
+            
+        } else {
+            result = balanceValueSum().adding(vestingValueSum()).adding(delegationValueSum()).adding(unbondingValueSum()).adding(rewardValueSum())
+            if (supportCw20) {
+                result = result.adding(allCw20Value())
+            }
+            self.allValue = result
+        }
+        //TODO USD value!!!!
+    }
+    
     
     
     func getConnection() -> ClientConnection {
