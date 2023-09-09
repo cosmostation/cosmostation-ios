@@ -48,6 +48,10 @@ public struct MintscanHistory: Codable {
             return result;
             
         } else {
+            if let firstMsgType = getMsgs()?[0]["@type"].string {
+                result = firstMsgType.components(separatedBy: ".").last?.replacingOccurrences(of: "Msg", with: "") ?? NSLocalizedString("tx_known", comment: "")
+            }
+            
             if (getMsgCnt() >= 2) {
                 var msgType0 = ""
                 var msgType1 = ""

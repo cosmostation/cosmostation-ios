@@ -36,28 +36,17 @@ class CosmosClass: BaseChain  {
     lazy var lcdNodeInfo = JSON()
     lazy var lcdAccountInfo = JSON()
     
-    
+    //For Bnb beacon Chain
     lazy var lcdBeaconTokens = Array<JSON>()
     
+    //For Okt Chain
+    lazy var lcdOktDeposits = JSON()
+    lazy var lcdOktWithdaws = JSON()
+    lazy var lcdOktTokens = Array<JSON>()
     
-//    override func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
-//        var result = NSDecimalNumber.zero
-////        if (self is ChainBinanceBeacon) {
-////            result = lcdBalanceValue(stakeDenom, usd)
-////
-////        } else {
-////            result = balanceValueSum(usd).adding(vestingValueSum(usd))
-////                .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
-////
-////            if (supportCw20) {
-////                result = result.adding(allCw20Value(usd))
-////            }
-////        }
-//        return result
-//    }
     
     func fetchData() {
-        if (self is ChainBinanceBeacon) {
+        if (self is ChainBinanceBeacon || self is ChainOktKeccak256 ) {
             fetchLcdData()
         } else {
             fetchGrpcData()
@@ -353,6 +342,10 @@ extension CosmosClass {
     func setAllValue() {
         var result = NSDecimalNumber.zero
         if (self is ChainBinanceBeacon) {
+            self.allValue = lcdBalanceValue(stakeDenom)
+            
+        } else if (self is ChainOktKeccak256) {
+            self.allValue = lcdBalanceValue(stakeDenom).adding(lcdOktDepositValue()).adding(lcdOktWithdrawValue())
             
         } else {
             result = balanceValueSum().adding(vestingValueSum()).adding(delegationValueSum()).adding(unbondingValueSum()).adding(rewardValueSum())
@@ -390,10 +383,19 @@ extension CosmosClass {
             fetchAccountInfo(group, address!)
             fetchBeaconTokens(group)
             fetchBeaconMiniTokens(group)
+            
+        } else if (self is ChainOktKeccak256) {
+            fetchNodeInfo(group)
+            fetchAccountInfo(group, address!)
+            fetchOktDeposited(group, address!)
+            fetchOktWithdraw(group, address!)
+            fetchOktTokens(group)
+            
         }
         
         group.notify(queue: .main) {
             self.fetched = true
+            self.setAllValue()
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.id, userInfo: nil)
         }
     }
@@ -431,6 +433,7 @@ extension CosmosClass {
     }
     
     func fetchBeaconTokens(_ group: DispatchGroup) {
+//        print("fetchBeaconTokens Start ", BaseNetWork.lcdBeaconTokenUrl())
         group.enter()
         AF.request(BaseNetWork.lcdBeaconTokenUrl(), method: .get, parameters: ["limit":"1000"])
             .responseDecodable(of: [JSON].self) { response in
@@ -447,6 +450,7 @@ extension CosmosClass {
     }
     
     func fetchBeaconMiniTokens(_ group: DispatchGroup) {
+//        print("fetchBeaconMiniTokens Start ", BaseNetWork.lcdBeaconMiniTokenUrl())
         group.enter()
         AF.request(BaseNetWork.lcdBeaconMiniTokenUrl(), method: .get, parameters: ["limit":"1000"])
             .responseDecodable(of: [JSON].self) { response in
@@ -462,30 +466,117 @@ extension CosmosClass {
             }
     }
     
+    func fetchOktDeposited(_ group: DispatchGroup, _ address: String) {
+//        print("fetchOktDeposited Start ", BaseNetWork.lcdOktDepositUrl(address))
+        group.enter()
+        AF.request(BaseNetWork.lcdOktDepositUrl(address), method: .get)
+            .responseDecodable(of: JSON.self) { response in
+                switch response.result {
+                case .success(let value):
+                    self.lcdOktDeposits = value
+//                    print("fetchOktDeposited ", value)
+                case .failure:
+                    print("fetchOktDeposited error")
+                }
+                group.leave()
+            }
+    }
+    
+    func fetchOktWithdraw(_ group: DispatchGroup, _ address: String) {
+//        print("fetchOktWithdraw Start ", BaseNetWork.lcdOktWithdrawUrl(address))
+        group.enter()
+        AF.request(BaseNetWork.lcdOktWithdrawUrl( address), method: .get)
+            .responseDecodable(of: JSON.self) { response in
+                switch response.result {
+                case .success(let value):
+                    self.lcdOktWithdaws = value
+//                    print("fetchOktWithdraw ", value)
+                case .failure:
+                    print("fetchOktWithdraw error")
+                }
+                group.leave()
+            }
+    }
+    
+    func fetchOktTokens(_ group: DispatchGroup) {
+//        print("fetchOktTokens Start ", BaseNetWork.lcdOktTokenUrl())
+        group.enter()
+        AF.request(BaseNetWork.lcdOktTokenUrl(), method: .get)
+            .responseDecodable(of: JSON.self) { response in
+                switch response.result {
+                case .success(let values):
+                    values["data"].array?.forEach({ value in
+                        self.lcdOktTokens.append(value)
+                    })
+//                    print("lcdOktTokens : ", self.lcdOktTokens.count)
+                    
+                case .failure:
+                    print("fetchOktTokens error")
+                }
+                group.leave()
+            }
+    }
+    
     
     func lcdBalanceAmount(_ denom: String) -> NSDecimalNumber {
-        if let balance = lcdAccountInfo["balances"].array?.filter({ $0["symbol"].string == denom }).first {
-            return NSDecimalNumber.init(string: balance["free"].string ?? "0")
+        if (self is ChainBinanceBeacon) {
+            if let balance = lcdAccountInfo["balances"].array?.filter({ $0["symbol"].string == denom }).first {
+                return NSDecimalNumber.init(string: balance["free"].string ?? "0")
+            }
+            
+        } else if (self is ChainOktKeccak256) {
+            if let balance = lcdAccountInfo["value","coins"].array?.filter({ $0["denom"].string == denom }).first {
+                return NSDecimalNumber.init(string: balance["amount"].string ?? "0")
+            }
+            
         }
         return NSDecimalNumber.zero
+        
     }
     
     func lcdBalanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if (denom == stakeDenom) {
             let amount = lcdBalanceAmount(denom)
-            let msPrice = BaseData.instance.getPrice(ChainBinanceBeacon.BNB_GECKO_ID, usd)
+            var msPrice = NSDecimalNumber.zero
+            if (self is ChainBinanceBeacon) {
+                msPrice = BaseData.instance.getPrice(ChainBinanceBeacon.BNB_GECKO_ID, usd)
+            } else if (self is ChainOktKeccak256) {
+                msPrice = BaseData.instance.getPrice(ChainOktKeccak256.OKT_GECKO_ID, usd)
+            }
             return msPrice.multiplying(by: amount, withBehavior: getDivideHandler(6))
         }
         return NSDecimalNumber.zero
     }
     
-    func lcdBalanceValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
-        var result =  NSDecimalNumber.zero
-        lcdAccountInfo["balances"].array?.forEach({ balance in
-            result = result.adding(lcdBalanceValue(balance["denom"].stringValue, usd))
-        })
-        return result
+    func lcdOktDepositAmount() -> NSDecimalNumber {
+        return NSDecimalNumber(string: lcdOktDeposits["tokens"].string ?? "0")
     }
+    
+    func lcdOktDepositValue(_ usd: Bool? = false) -> NSDecimalNumber {
+        let msPrice = BaseData.instance.getPrice(ChainOktKeccak256.OKT_GECKO_ID, usd)
+        let amount = lcdOktDepositAmount()
+        return msPrice.multiplying(by: amount, withBehavior: getDivideHandler(6))
+    }
+    
+    func lcdOktWithdrawAmount() -> NSDecimalNumber {
+        return NSDecimalNumber(string: lcdOktWithdaws["quantity"].string ?? "0")
+    }
+    
+    func lcdOktWithdrawValue(_ usd: Bool? = false) -> NSDecimalNumber {
+        let msPrice = BaseData.instance.getPrice(ChainOktKeccak256.OKT_GECKO_ID, usd)
+        let amount = lcdOktWithdrawAmount()
+        return msPrice.multiplying(by: amount, withBehavior: getDivideHandler(6))
+    }
+    
+    
+    
+//    func lcdBalanceValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
+//        var result =  NSDecimalNumber.zero
+//        lcdAccountInfo["balances"].array?.forEach({ balance in
+//            result = result.adding(lcdBalanceValue(balance["denom"].stringValue, usd))
+//        })
+//        return result
+//    }
 }
 
 
@@ -493,26 +584,27 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     var result = [CosmosClass]()
     result.removeAll()
     result.append(ChainCosmos())
-    result.append(ChainAkash())
-    result.append(ChainAssetMantle())
-    result.append(ChainAxelar())
+//    result.append(ChainAkash())
+//    result.append(ChainAssetMantle())
+//    result.append(ChainAxelar())
     result.append(ChainBinanceBeacon())
-    result.append(ChainCanto())
-    result.append(ChainEvmos())
-    result.append(ChainInjective())
-    result.append(ChainJuno())
-    result.append(ChainKava459())
-    result.append(ChainKava60())
-    result.append(ChainKava118())
-    result.append(ChainKi())
-    result.append(ChainLum880())
-    result.append(ChainLum118())
-    result.append(ChainOsmosis())
-    result.append(ChainPersistence118())
-    result.append(ChainPersistence750())
-    result.append(ChainSommelier())
-    result.append(ChainStargaze())
-    result.append(ChainUmee())
+//    result.append(ChainCanto())
+//    result.append(ChainEvmos())
+//    result.append(ChainInjective())
+//    result.append(ChainJuno())
+//    result.append(ChainKava459())
+//    result.append(ChainKava60())
+//    result.append(ChainKava118())
+//    result.append(ChainKi())
+//    result.append(ChainLum880())
+//    result.append(ChainLum118())
+    result.append(ChainOktKeccak256())
+//    result.append(ChainOsmosis())
+//    result.append(ChainPersistence118())
+//    result.append(ChainPersistence750())
+//    result.append(ChainSommelier())
+//    result.append(ChainStargaze())
+//    result.append(ChainUmee())
     return result
 }
 

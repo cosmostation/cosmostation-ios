@@ -45,55 +45,70 @@ class CosmosCoinVC: BaseVC {
     
     
     func onSortAssets() {
-        if (selectedChain is ChainBinanceBeacon) {
-            selectedChain.lcdAccountInfo["balances"].array?.forEach { balance in
-                lcdBalances.append(balance)
-            }
-            if (lcdBalances.filter { $0["symbol"].string == selectedChain.stakeDenom }.first == nil) {
-                lcdBalances.append(JSON(["symbol":"BNB", "free": "0"]))
-            }
-            lcdBalances.sort {
-                if ($0["symbol"].string == selectedChain.stakeDenom) { return true }
-                if ($1["symbol"].string == selectedChain.stakeDenom) { return false }
-                return false
-            }
-            
-        } else {
-            selectedChain.cosmosBalances.forEach { coin in
-                let coinType = BaseData.instance.getAsset(selectedChain.apiName, coin.denom)?.type
-                if (coinType == "staking" || coinType == "native") {
-                    nativeCoins.append(coin)
-                } else if (coinType == "bep" || coinType == "bridge") {
-                    bridgedCoins.append(coin)
-                } else if (coinType == "ibc") {
-                    ibcCoins.append(coin)
+        Task {
+            if (selectedChain is ChainBinanceBeacon) {
+                selectedChain.lcdAccountInfo["balances"].array?.forEach { balance in
+                    lcdBalances.append(balance)
+                }
+                if (lcdBalances.filter { $0["symbol"].string == selectedChain.stakeDenom }.first == nil) {
+                    lcdBalances.append(JSON(["symbol":"BNB", "free": "0"]))
+                }
+                lcdBalances.sort {
+                    if ($0["symbol"].string == selectedChain.stakeDenom) { return true }
+                    if ($1["symbol"].string == selectedChain.stakeDenom) { return false }
+                    return false
+                }
+                
+            } else if (selectedChain is ChainOktKeccak256) {
+                selectedChain.lcdAccountInfo["value","coins"].array?.forEach { balance in
+                    lcdBalances.append(balance)
+                }
+                if (lcdBalances.filter { $0["denom"].string == selectedChain.stakeDenom }.first == nil) {
+                    lcdBalances.append(JSON(["denom":"okt", "amount": "0"]))
+                }
+                lcdBalances.sort {
+                    if ($0["denom"].string == selectedChain.stakeDenom) { return true }
+                    if ($1["denom"].string == selectedChain.stakeDenom) { return false }
+                    return false
+                }
+                
+            } else {
+                selectedChain.cosmosBalances.forEach { coin in
+                    let coinType = BaseData.instance.getAsset(selectedChain.apiName, coin.denom)?.type
+                    if (coinType == "staking" || coinType == "native") {
+                        nativeCoins.append(coin)
+                    } else if (coinType == "bep" || coinType == "bridge") {
+                        bridgedCoins.append(coin)
+                    } else if (coinType == "ibc") {
+                        ibcCoins.append(coin)
+                    }
+                }
+                
+                if (nativeCoins.filter { $0.denom == selectedChain.stakeDenom }.first == nil) {
+                    nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = selectedChain.stakeDenom; $0.amount = "0" })
+                }
+                nativeCoins.sort {
+                    if ($0.denom == selectedChain.stakeDenom) { return true }
+                    if ($1.denom == selectedChain.stakeDenom) { return false }
+                    let value0 = selectedChain.balanceValue($0.denom)
+                    let value1 = selectedChain.balanceValue($1.denom)
+                    return value0.compare(value1).rawValue > 0 ? true : false
+                }
+                
+                ibcCoins.sort {
+                    let value0 = selectedChain.balanceValue($0.denom)
+                    let value1 = selectedChain.balanceValue($1.denom)
+                    return value0.compare(value1).rawValue > 0 ? true : false
+                }
+                
+                bridgedCoins.sort {
+                    let value0 = selectedChain.balanceValue($0.denom)
+                    let value1 = selectedChain.balanceValue($1.denom)
+                    return value0.compare(value1).rawValue > 0 ? true : false
                 }
             }
-            
-            if (nativeCoins.filter { $0.denom == selectedChain.stakeDenom }.first == nil) {
-                nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = selectedChain.stakeDenom; $0.amount = "0" })
-            }
-            nativeCoins.sort {
-                if ($0.denom == selectedChain.stakeDenom) { return true }
-                if ($1.denom == selectedChain.stakeDenom) { return false }
-                let value0 = selectedChain.balanceValue($0.denom)
-                let value1 = selectedChain.balanceValue($1.denom)
-                return value0.compare(value1).rawValue > 0 ? true : false
-            }
-
-            ibcCoins.sort {
-                let value0 = selectedChain.balanceValue($0.denom)
-                let value1 = selectedChain.balanceValue($1.denom)
-                return value0.compare(value1).rawValue > 0 ? true : false
-            }
-
-            bridgedCoins.sort {
-                let value0 = selectedChain.balanceValue($0.denom)
-                let value1 = selectedChain.balanceValue($1.denom)
-                return value0.compare(value1).rawValue > 0 ? true : false
-            }
+            tableView.reloadData()
         }
-        tableView.reloadData()
     }
 
 }
@@ -102,7 +117,7 @@ class CosmosCoinVC: BaseVC {
 extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (selectedChain is ChainBinanceBeacon) {
+        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOktKeccak256) {
             return 1
         } else {
             return 3
@@ -111,7 +126,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (selectedChain is ChainBinanceBeacon) {
+        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOktKeccak256) {
             view.titleLabel.text = "Native Coins"
             view.cntLabel.text = String(lcdBalances.count)
             
@@ -133,7 +148,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (selectedChain is ChainBinanceBeacon) {
+        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOktKeccak256) {
             return 40
             
         } else {
@@ -149,7 +164,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (selectedChain is ChainBinanceBeacon) {
+        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOktKeccak256) {
             return lcdBalances.count
             
         } else {
@@ -174,6 +189,8 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
             if (selectedChain is ChainBinanceBeacon) {
                 cell.bindBeaconAsset(selectedChain, lcdBalances[indexPath.row])
+            } else if (selectedChain is ChainOktKeccak256) {
+                cell.bindOktAsset(selectedChain, lcdBalances[indexPath.row])
             } else {
                 cell.bindCosmosClassAsset(selectedChain, getCoinBySection(indexPath)!)
             }

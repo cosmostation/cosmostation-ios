@@ -76,7 +76,7 @@ class ChainSelectVC: BaseVC {
         
         if (baseAccount.allCosmosClassChains.filter { $0.fetched == false }.count == 0) {
             baseAccount.allCosmosClassChains.forEach { chain in
-                let address = RefAddress(baseAccount.id, chain.id, chain.address!,chain.allStakingDenomAmount().stringValue, chain.allValue(true).stringValue)
+                let address = RefAddress(baseAccount.id, chain.id, chain.address!, chain.allStakingDenomAmount().stringValue, chain.allValue(true).stringValue)
                 BaseData.instance.updateRefAddresses(address)
             }
             

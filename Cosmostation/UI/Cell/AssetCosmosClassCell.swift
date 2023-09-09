@@ -52,6 +52,9 @@ class AssetCosmosClassCell: UITableViewCell {
         if (baseChain is ChainBinanceBeacon) {
             bindBeaconAsset(baseChain)
             
+        } else if (baseChain is ChainOktKeccak256) {
+            bindOktAsset(baseChain)
+            
         } else {
             let stakeDenom = baseChain.stakeDenom!
             if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
@@ -106,7 +109,7 @@ class AssetCosmosClassCell: UITableViewCell {
         vestingLayer.isHidden = false
         
         let stakeDenom = baseChain.stakeDenom!
-        let value = baseChain.lcdBalanceValue(stakeDenom)
+        let value = baseChain.allValue()
         coinImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(stakeDenom))
         symbolLabel.text = stakeDenom.uppercased()
         
@@ -117,6 +120,32 @@ class AssetCosmosClassCell: UITableViewCell {
         let availableAmount = baseChain.lcdBalanceAmount(stakeDenom)
         availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 8)
         amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
+    }
+    
+    func bindOktAsset(_ baseChain: CosmosClass) {
+        let stakeDenom = baseChain.stakeDenom!
+        let value = baseChain.allValue()
+        coinImg.af.setImage(withURL: ChainOktKeccak256.assetImg(stakeDenom))
+        symbolLabel.text = stakeDenom.uppercased()
+        
+        WDP.dpPrice(ChainOktKeccak256.OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
+        WDP.dpPriceChanged(ChainOktKeccak256.OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+        WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+        
+        let availableAmount = baseChain.lcdBalanceAmount(stakeDenom)
+        availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 18)
+        
+        let depositAmount = baseChain.lcdOktDepositAmount()
+        stakingLabel?.attributedText = WDP.dpAmount(depositAmount.stringValue, stakingLabel!.font, 18)
+        
+        let withdrawAmount = baseChain.lcdOktWithdrawAmount()
+        if (withdrawAmount != NSDecimalNumber.zero) {
+            unstakingLayer.isHidden = false
+            unstakingLabel?.attributedText = WDP.dpAmount(withdrawAmount.stringValue, unstakingLabel!.font, 18)
+        }
+        
+        let totalAmount = availableAmount.adding(depositAmount).adding(withdrawAmount)
+        amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 18)
     }
     
 }

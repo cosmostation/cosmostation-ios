@@ -101,6 +101,7 @@ public class WDP {
         amountLabel?.attributedText = dpAmount(amount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
         denomLabel?.text = msAsset.symbol
         coinImg?.af.setImage(withURL: msAsset.assetImg())
+        
 
 
 //        if (chainConfig?.isGrpc == true) {

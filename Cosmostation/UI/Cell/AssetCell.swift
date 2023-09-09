@@ -32,6 +32,7 @@ class AssetCell: UITableViewCell {
     override func prepareForReuse() {
         rootView.setBlur()
         coinImg.af.cancelImageRequest()
+        coinImg.image = UIImage(named: "tokenDefault")
     }
     
     func bindCosmosClassAsset(_ baseChain: CosmosClass, _ coin: Cosmos_Base_V1beta1_Coin) {
@@ -64,7 +65,6 @@ class AssetCell: UITableViewCell {
             let availableAmount = baseChain.lcdBalanceAmount(coin["symbol"].stringValue)
             amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
             
-//            priceCurrencyLabel.isHidden = true
             priceLabel.isHidden = true
             priceChangeLabel.isHidden = true
             priceChangePercentLabel.isHidden = true
@@ -72,6 +72,25 @@ class AssetCell: UITableViewCell {
             valueLabel.isHidden = true
         }
         
+    }
+    
+    func bindOktAsset(_ baseChain: CosmosClass, _ coin: JSON) {
+        if let token = baseChain.lcdOktTokens.filter { $0["symbol"].string == coin["denom"].string }.first {
+            let original_symbol = token["original_symbol"].stringValue
+            
+            symbolLabel.text = original_symbol.uppercased()
+            priceCurrencyLabel.text = token["description"].string
+            coinImg.af.setImage(withURL: ChainOktKeccak256.assetImg(original_symbol))
+            
+            let availableAmount = baseChain.lcdBalanceAmount(coin["denom"].stringValue)
+            amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
+            
+            priceLabel.isHidden = true
+            priceChangeLabel.isHidden = true
+            priceChangePercentLabel.isHidden = true
+            valueCurrencyLabel.isHidden = true
+            valueLabel.isHidden = true
+        }
     }
     
 }

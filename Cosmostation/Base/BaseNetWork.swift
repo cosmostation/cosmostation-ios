@@ -14,6 +14,7 @@ import SwiftyJSON
 class BaseNetWork {
     
     func fetchPrices() {
+        print("fetchPrices ", BaseNetWork.getPricesUrl())
         if (!BaseData.instance.needPriceUpdate()) { return }
         AF.request(BaseNetWork.getPricesUrl(), method: .get)
             .responseDecodable(of: [MintscanPrice].self, queue: .main, decoder: JSONDecoder()) { response in
@@ -108,6 +109,8 @@ extension BaseNetWork {
     static func lcdNodeInfoUrl(_ chain: BaseChain) -> String {
         if (chain is ChainBinanceBeacon) {
             return ChainBinanceBeacon.lcdUrl + "api/v1/node-info"
+        } else if (chain is ChainOktKeccak256) {
+            return ChainOktKeccak256.lcdUrl + "node_info"
         }
         return ""
     }
@@ -115,6 +118,8 @@ extension BaseNetWork {
     static func lcdAccountInfoUrl(_ chain: BaseChain, _ address: String) -> String {
         if (chain is ChainBinanceBeacon) {
             return ChainBinanceBeacon.lcdUrl + "api/v1/account/" + address
+        } else if (chain is ChainOktKeccak256) {
+            return ChainOktKeccak256.lcdUrl + "auth/accounts/" + address
         }
         return ""
     }
@@ -136,4 +141,14 @@ extension BaseNetWork {
 //        return ChainBinanceBeacon.lcdUrl + "api/v1/mini/ticker/24hr"
 //    }
     
+    static func lcdOktDepositUrl(_ address: String) -> String {
+        return ChainOktKeccak256.lcdUrl + "staking/delegators/" + address
+    }
+    
+    static func lcdOktWithdrawUrl(_ address: String) -> String {
+        return ChainOktKeccak256.lcdUrl + "staking/delegators/" + address + "/unbonding_delegations"
+    }
+    static func lcdOktTokenUrl() -> String {
+        return ChainOktKeccak256.lcdUrl + "tokens"
+    }
 }

@@ -14,7 +14,7 @@ class ChainBinanceBeacon: CosmosClass  {
         super.init()
         
         name = "BNB Beacon"
-        id = ""
+        id = "binanceBeacon"
         logo1 = "chainBnbBeacon"
         logo2 = "chainBnbBeacon2"
         apiName = ""
