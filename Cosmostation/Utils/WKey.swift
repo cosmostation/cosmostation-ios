@@ -267,11 +267,7 @@ class WKey {
 //        return EthereumAddress.init(data: address).string
 //    }
 //    
-//    //Convert betch to ether style
-//    static func convertBech32ToEvm(_ address: String) -> String {
-//        let data = try! SegwitAddrCoder.shared.decode2(program: address)
-//        return EthereumAddress.init(data: data!).string
-//    }
+    
 //    
 //    //Convert ether to betch style
 //    static func convertEvmToBech32(_ ethAddress: String, _ prefix: String) -> String {

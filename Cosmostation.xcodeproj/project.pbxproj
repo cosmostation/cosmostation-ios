@@ -700,6 +700,8 @@
 		E1271B04224B17230083AF17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
 		E131A3C32AACBE8A00943013 /* BeaconHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131A3C22AACBE8A00943013 /* BeaconHistory.swift */; };
 		E131A3C42AACBE8A00943013 /* BeaconHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131A3C22AACBE8A00943013 /* BeaconHistory.swift */; };
+		E131A3C62AACD0E000943013 /* OktHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131A3C52AACD0E000943013 /* OktHistory.swift */; };
+		E131A3C72AACD0E000943013 /* OktHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131A3C52AACD0E000943013 /* OktHistory.swift */; };
 		E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29732A98DA5300939AD2 /* SelectChainCell.swift */; };
 		E14E29762A98DA5300939AD2 /* SelectChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29732A98DA5300939AD2 /* SelectChainCell.swift */; };
 		E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14E29742A98DA5300939AD2 /* SelectChainCell.xib */; };
@@ -1118,6 +1120,7 @@
 		E122DC682A8DBD3B006D1E7B /* BaseHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseHeader.xib; sourceTree = "<group>"; };
 		E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetWork.swift; sourceTree = "<group>"; };
 		E131A3C22AACBE8A00943013 /* BeaconHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconHistory.swift; sourceTree = "<group>"; };
+		E131A3C52AACD0E000943013 /* OktHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktHistory.swift; sourceTree = "<group>"; };
 		E136D8A223039493001BEBB8 /* Cosmostation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cosmostation.entitlements; sourceTree = "<group>"; };
 		E14E29732A98DA5300939AD2 /* SelectChainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChainCell.swift; sourceTree = "<group>"; };
 		E14E29742A98DA5300939AD2 /* SelectChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChainCell.xib; sourceTree = "<group>"; };
@@ -1832,6 +1835,7 @@
 				1577DAC729B9F07800C360EC /* Board.swift */,
 				E11069C22AA4C5F400EB02CA /* Cosmwasm.swift */,
 				E131A3C22AACBE8A00943013 /* BeaconHistory.swift */,
+				E131A3C52AACD0E000943013 /* OktHistory.swift */,
 			);
 			path = Dao;
 			sourceTree = "<group>";
@@ -2276,6 +2280,7 @@
 				E122DC2C2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_query.grpc.swift in Sources */,
 				E122DB422A8A468D006D1E7B /* cosmos_upgrade_module_v1_module.pb.swift in Sources */,
 				04BA9BD22A978131003E2404 /* RefAddress.swift in Sources */,
+				E131A3C72AACD0E000943013 /* OktHistory.swift in Sources */,
 				E122DBDE2A8A468E006D1E7B /* cosmos_base_query_v1beta1_pagination.pb.swift in Sources */,
 				E122DC2E2A8A468E006D1E7B /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
 				E122DBB42A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.grpc.swift in Sources */,
@@ -2607,6 +2612,7 @@
 				E122DC2B2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_query.grpc.swift in Sources */,
 				E122DB412A8A468D006D1E7B /* cosmos_upgrade_module_v1_module.pb.swift in Sources */,
 				04BA9BD12A978131003E2404 /* RefAddress.swift in Sources */,
+				E131A3C62AACD0E000943013 /* OktHistory.swift in Sources */,
 				E122DBDD2A8A468E006D1E7B /* cosmos_base_query_v1beta1_pagination.pb.swift in Sources */,
 				E122DC2D2A8A468E006D1E7B /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
 				E122DBB32A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.grpc.swift in Sources */,

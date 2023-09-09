@@ -30,23 +30,13 @@ class PortfolioVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         initData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)),
-                                               name: Notification.Name("FetchData"), object: nil)
-    }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        onUpdateTotal()
-//    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"),
-                                                  object: nil)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {

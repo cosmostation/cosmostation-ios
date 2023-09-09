@@ -91,4 +91,21 @@ class HistoryCell: UITableViewCell {
         denomLabel.text = WDP.dpTimeGap(history.timeStamp)
         denomLabel.isHidden = false
     }
+    
+    func bindOktHistory(_ account: BaseAccount, _ chain: CosmosClass, _ history: OktHistory) {
+        if (history.state != "success") {
+            successImg.image = UIImage(named: "iconFail")
+        } else {
+            successImg.image = UIImage(named: "iconSuccess")
+        }
+        
+        msgsTitleLabel.text = history.height
+        hashLabel.text = history.txId
+        timeLabel.text = WDP.okcDpTime(Int64(history.transactionTime!))
+        blockLabel.isHidden = true
+        
+        denomLabel.text = WDP.okcDpTimeGap(Int64(history.transactionTime!))
+        denomLabel.isHidden = false
+        
+    }
 }

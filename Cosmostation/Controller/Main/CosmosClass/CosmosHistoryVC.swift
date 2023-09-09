@@ -22,8 +22,8 @@ class CosmosHistoryVC: BaseVC {
     var msHasMore = false
     let BATCH_CNT = 50
     
-    //For BNB Beacon chain
-    var beaconHistoey = Array<BeaconHistory>()
+    var beaconHistoey = Array<BeaconHistory>()  //For BNB Beacon chain
+    var oktHistoey = Array<OktHistory>()        //For OKT chain
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +51,7 @@ class CosmosHistoryVC: BaseVC {
             onFetchBnbHistory(selectedChain.address)
             
         } else if (selectedChain is ChainOktKeccak256) {
+            onFetchOktHistory(selectedChain.address)
             
         } else {
             msHistoyID = 0
@@ -123,6 +124,33 @@ class CosmosHistoryVC: BaseVC {
                 }
             }
     }
+    
+    func onFetchOktHistory(_ address: String?) {
+        let convertedAddress = KeyFac.convertBech32ToEvm(address!)
+        let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, convertedAddress)
+        AF.request(url, method: .get, parameters: [:])
+            .responseDecodable(of: OkHistoryRoot.self, queue: .main, decoder: JSONDecoder())  { response in
+                switch response.result {
+                case .success(let value):
+                    if let txs = value.data?[0].transactionLists {
+                        self.oktHistoey = txs
+                    }
+
+                    if (self.oktHistoey.count > 0) {
+                        self.tableView.reloadData()
+                        self.tableView.isHidden = false
+                        self.emptyDataView.isHidden = true
+                    } else {
+                        self.tableView.isHidden = true
+                        self.emptyDataView.isHidden = false
+                    }
+                    
+                    
+                case .failure:
+                    print("onFetchOktHistory error", response.error)
+                }
+            }
+    }
 
 }
 
@@ -144,6 +172,8 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
             view.cntLabel.text = String(beaconHistoey.count)
             
         } else if (selectedChain is ChainOktKeccak256) {
+            view.titleLabel.text = "History"
+            view.cntLabel.text = String(oktHistoey.count)
             
         } else {
             let today = WDP.dpDate(Int(Date().timeIntervalSince1970) * 1000)
@@ -166,7 +196,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
             return beaconHistoey.count
             
         } else if (selectedChain is ChainOktKeccak256) {
-            return 0
+            return oktHistoey.count
             
         } else {
             return msHistoryGroup[section].values.count
@@ -181,6 +211,8 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
             cell.bindBeaconHistory(baseAccount, selectedChain, history)
             
         } else if (selectedChain is ChainOktKeccak256) {
+            let history = oktHistoey[indexPath.row]
+            cell.bindOktHistory(baseAccount, selectedChain, history)
             
         } else {
             let history = msHistoryGroup[indexPath.section].values[indexPath.row]
@@ -205,6 +237,9 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
             self.onShowSafariWeb(url)
             
         } else if (selectedChain is ChainOktKeccak256) {
+            let history = oktHistoey[indexPath.row]
+            guard let url = BaseNetWork.getTxDetailUrl(selectedChain, history.txId!) else { return }
+            self.onShowSafariWeb(url)
             
         } else {
             let history = msHistoryGroup[indexPath.section].values[indexPath.row]

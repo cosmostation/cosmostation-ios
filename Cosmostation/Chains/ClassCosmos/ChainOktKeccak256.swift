@@ -26,7 +26,7 @@ class ChainOktKeccak256: CosmosClass  {
     }
     
     static let lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
-    static let explorer = "https://www.oklink.com/okexchain/"
+    static let explorer = "https://www.oklink.com/oktc/"
     static let OKT_GECKO_ID = "oec-token"
     
     

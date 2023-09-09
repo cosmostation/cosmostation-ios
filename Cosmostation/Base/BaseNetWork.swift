@@ -80,7 +80,7 @@ class BaseNetWork {
         if (chain is ChainBinanceBeacon) {
             return ChainBinanceBeacon.lcdUrl + "api/v1/transactions"
         } else if (chain is ChainOktKeccak256) {
-            return ""
+            return MINTSCAN_API_URL + "v1/utils/proxy/okc-transaction-list?device=IOS&chainShortName=okc&address=" + address + "&limit=50"
         } else {
             return MINTSCAN_API_URL + "v1/" + chain.apiName + "/account/" + address + "/txs"
         }
@@ -108,7 +108,7 @@ class BaseNetWork {
         if (chain is ChainBinanceBeacon) {
             return URL(string: ChainBinanceBeacon.explorer + "tx/" + txHash)
         } else if (chain is ChainOktKeccak256) {
-//            return ChainOktKeccak256.lcdUrl + "node_info"
+            return URL(string: ChainOktKeccak256.explorer + "tx/" + txHash)
         }
         return URL(string: MintscanUrl + chain.apiName + "/transactions/" + txHash)
     }
