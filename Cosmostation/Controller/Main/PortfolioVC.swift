@@ -207,7 +207,7 @@ extension PortfolioVC: BaseSheetDelegate {
         button.setImage(UIImage(named: "naviCon"), for: .normal)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -16)
         button.setTitle(name == nil ? "Account" : name, for: .normal)
-        button.titleLabel?.font = UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)!
+        button.titleLabel?.font = .fontSize16Bold
         button.sizeToFit()
         button.addTarget(self, action: #selector(onClickSwitchAccount(_:)), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
