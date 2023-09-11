@@ -19,6 +19,7 @@ class SettingBaseCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        setMsgLabel.isHidden = true
         rootView.setBlur()
     }
     
@@ -26,4 +27,96 @@ class SettingBaseCell: UITableViewCell {
         rootView.setBlur()
     }
     
+    func onBindSetAccount() {
+        setImg.image = UIImage(named: "setAccount")
+        setTitleLabel.text = NSLocalizedString("setting_account_title", comment: "")
+        setDetailLabel.text = BaseData.instance.baseAccount.name
+    }
+    
+    func onBindSetChain() {
+        setImg.image = UIImage(named: "setChain")
+        setTitleLabel.text = NSLocalizedString("setting_chain_title", comment: "")
+        let CosmosChainCnt = ALLCOSMOSCLASS().count
+        setDetailLabel.text = String(CosmosChainCnt)
+    }
+    
+    func onBindSetAddressBook() {
+        setImg.image = UIImage(named: "setAddressBook")
+        setTitleLabel.text = NSLocalizedString("setting_addressbook_title", comment: "")
+        setDetailLabel.text = "0"
+    }
+    
+    
+    func onBindSetLaungaue() {
+        setImg.image = UIImage(named: "setLanguage")
+        setTitleLabel.text = NSLocalizedString("setting_language_title", comment: "")
+        setDetailLabel.text = Language.getLanguages()[BaseData.instance.getLanguage()].description
+    }
+    
+    func onBindSetCurrency() {
+        setImg.image = UIImage(named: "setCurrency")
+        setTitleLabel.text = NSLocalizedString("setting_currecny_title", comment: "")
+        setDetailLabel.text = BaseData.instance.getCurrencyString()
+    }
+    
+    func onBindSetAutoPass() {
+//        setImg.image = UIImage(named: "setCurrency")
+        setTitleLabel.text = NSLocalizedString("setting_auto_pass_title", comment: "")
+        setDetailLabel.text = BaseData.instance.getAutoPassString()
+    }
+    
+    
+    
+    
+    func onBindSetMintscan() {
+        setImg.image = UIImage(named: "setCosmostation")
+        setTitleLabel.text = NSLocalizedString("setting_mintscan_title", comment: "")
+        setDetailLabel.text = ""
+    }
+    
+    func onBindSetHomePage() {
+        setImg.image = UIImage(named: "setCosmostation")
+        setTitleLabel.text = NSLocalizedString("setting_homepage_title", comment: "")
+        setDetailLabel.text = ""
+    }
+    
+    func onBindSetBlog() {
+        setImg.image = UIImage(named: "setBlog")
+        setTitleLabel.text = NSLocalizedString("setting_blog_title", comment: "")
+        setDetailLabel.text = ""
+    }
+    
+    func onBindSetTellegram() {
+        setImg.image = UIImage(named: "setTelegram")
+        setTitleLabel.text = NSLocalizedString("setting_telegram_title", comment: "")
+        setDetailLabel.text = ""
+    }
+    
+    
+    
+    func onBindSetTerm() {
+        setImg.image = UIImage(named: "setTerm")
+        setTitleLabel.text = NSLocalizedString("setting_term_title", comment: "")
+        setDetailLabel.text = ""
+    }
+    
+    func onBindSetPrivacy() {
+        setImg.image = UIImage(named: "setTerm")
+        setTitleLabel.text = NSLocalizedString("setting_privacy_title", comment: "")
+        setDetailLabel.text = ""
+    }
+    
+    func onBindSetGithub() {
+        setImg.image = UIImage(named: "setGithub")
+        setTitleLabel.text = NSLocalizedString("setting_github_title", comment: "")
+        setDetailLabel.text = ""
+    }
+    
+    func onBindSetVersion() {
+        setImg.image = UIImage(named: "setTerm")
+        setTitleLabel.text = NSLocalizedString("setting_version_title", comment: "")
+        if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
+            setDetailLabel.text = "v " + appVersion
+        }
+    }
 }

@@ -531,3 +531,40 @@ let GeckoUrl = "https://www.coingecko.com/en/coins/"
 
 //Neutron Contract Address
 let NEUTRON_VESTING_CONTRACT_ADDRESS = "neutron1h6828as2z5av0xqtlh4w9m75wxewapk8z9l2flvzc29zeyzhx6fqgp648z"
+
+
+
+
+public enum Language: Int {
+    case System = 0
+    case English = 1
+    case Korean = 2
+    case Japanese = 3
+    
+    public static func getLanguages() -> [Language] {
+        var result = Array<Language>()
+        result.append(.System)
+        result.append(.English)
+        result.append(.Korean)
+        result.append(.Japanese)
+        return result
+    }
+    
+    var languageCode: String {
+        switch self {
+        case .System: return Locale.current.languageCode ?? ""
+        case .English: return "en"
+        case .Korean: return "ko"
+        case .Japanese: return "ja"
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .System: return "System"
+        case .English: return "English(United States)"
+        case .Korean: return "한국어(대한민국)"
+        case .Japanese: return "日本語(日本)"
+        }
+    }
+}

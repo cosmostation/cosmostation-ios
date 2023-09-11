@@ -44,6 +44,16 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        if (section == 0) {
+            view.titleLabel.text = NSLocalizedString("setting_section_wallet", comment: "")
+        } else if (section == 1) {
+            view.titleLabel.text = NSLocalizedString("setting_section_general", comment: "")
+        } else if (section == 2) {
+            view.titleLabel.text = NSLocalizedString("setting_section_support", comment: "")
+        } else if (section == 3) {
+            view.titleLabel.text = NSLocalizedString("setting_section_about", comment: "")
+        }
+        view.cntLabel.text = ""
         return view
     }
     
@@ -52,15 +62,200 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        if (section == 0) {
+            return 3
+        } else if (section == 1) {
+            return 6
+        } else if (section == 2) {
+            return 4
+        } else if (section == 3) {
+            return 5
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"SettingBaseCell") as! SettingBaseCell
-        return cell
+        let baseCell = tableView.dequeueReusableCell(withIdentifier:"SettingBaseCell") as! SettingBaseCell
+        let priceCell = tableView.dequeueReusableCell(withIdentifier:"SettingPriceCell") as! SettingPriceCell
+        let switchCell = tableView.dequeueReusableCell(withIdentifier:"SettingSwitchCell") as! SettingSwitchCell
+        
+        if (indexPath.section == 0) {
+            if (indexPath.row == 0) {
+                baseCell.onBindSetAccount()
+                return baseCell
+                
+            } else if (indexPath.row == 1) {
+                baseCell.onBindSetChain()
+                return baseCell
+                
+            } else if (indexPath.row == 2) {
+                baseCell.onBindSetAddressBook()
+                return baseCell
+            }
+            
+        } else if (indexPath.section == 1) {
+            if (indexPath.row == 0) {
+                baseCell.onBindSetLaungaue()
+                return baseCell
+                
+            } else if (indexPath.row == 1) {
+                baseCell.onBindSetCurrency()
+                return baseCell
+                
+            } else if (indexPath.row == 2) {
+                priceCell.onBindSetDpPrice()
+                return priceCell
+                
+            } else if (indexPath.row == 3) {
+                switchCell.onBindSetNotification()
+                switchCell.actionToggle = { request in
+                    print("onBindSetNotification ", request)
+                }
+                return switchCell
+                
+            } else if (indexPath.row == 4) {
+                switchCell.onBindSetAppLock()
+                switchCell.actionToggle = { request in
+                    print("onBindSetAppLock ", request)
+                }
+                return switchCell
+                
+            } else if (indexPath.row == 5) {
+                baseCell.onBindSetAutoPass()
+                return baseCell
+            }
+            
+            
+        } else if (indexPath.section == 2) {
+            if (indexPath.row == 0) {
+                baseCell.onBindSetMintscan()
+                return baseCell
+                
+            } else if (indexPath.row == 1) {
+                baseCell.onBindSetHomePage()
+                return baseCell
+                
+            } else if (indexPath.row == 2) {
+                baseCell.onBindSetBlog()
+                return baseCell
+                
+            } else if (indexPath.row == 3) {
+                baseCell.onBindSetTellegram()
+                return baseCell
+                
+            }
+            
+        } else if (indexPath.section == 3) {
+            if (indexPath.row == 0) {
+                baseCell.onBindSetTerm()
+                return baseCell
+                
+            } else if (indexPath.row == 1) {
+                baseCell.onBindSetPrivacy()
+                return baseCell
+                
+            } else if (indexPath.row == 2) {
+                baseCell.onBindSetGithub()
+                return baseCell
+                
+            } else if (indexPath.row == 3) {
+                baseCell.onBindSetVersion()
+                return baseCell
+                
+            } else if (indexPath.row == 4) {
+                switchCell.onBindSetEngineerMode()
+                switchCell.actionToggle = { request in
+                    print("onBindSetAppLock ", request)
+                }
+                return switchCell
+            }
+        }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.section == 0) {
+            if (indexPath.row == 0) {
+                
+            } else if (indexPath.row == 1) {
+                
+            } else if (indexPath.row == 2) {
+                
+            }
+            
+        } else if (indexPath.section == 1) {
+            if (indexPath.row == 0) {
+                
+            } else if (indexPath.row == 1) {
+                
+            } else if (indexPath.row == 2) {
+                
+            } else if (indexPath.row == 5) {
+                
+            }
+            
+            
+        } else if (indexPath.section == 2) {
+            if (indexPath.row == 0) {
+                guard let url = URL(string: "https://www.mintscan.io/") else { return }
+                onShowSafariWeb(url)
+                
+            } else if (indexPath.row == 1) {
+                guard let url = URL(string: "https://www.cosmostation.io") else { return }
+                onShowSafariWeb(url)
+                
+            } else if (indexPath.row == 2) {
+                guard let url = URL(string: "https://medium.com/cosmostation") else { return }
+                onShowSafariWeb(url)
+                
+            } else if (indexPath.row == 3) {
+                let url = URL(string: "tg://resolve?domain=cosmostation")
+                if (UIApplication.shared.canOpenURL(url!)) {
+                    UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+                    
+                } else {
+                    let alert = UIAlertController(title: "", message: NSLocalizedString("error_no_telegram", comment: ""), preferredStyle: .alert)
+                    alert.overrideUserInterfaceStyle = .dark
+                    let action = UIAlertAction(title: "Download And Install", style: .default, handler: { _ in
+                        let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id686449807")
+                        if (UIApplication.shared.canOpenURL(urlAppStore!)) {
+                            UIApplication.shared.open(urlAppStore!, options: [:], completionHandler: nil)
+                        }
+                    })
+                    let actionCancel = UIAlertAction(title: NSLocalizedString("str_cancel", comment: ""), style: .cancel, handler: nil)
+                    alert.addAction(action)
+                    alert.addAction(actionCancel)
+                    self.present(alert, animated: true, completion: nil)
+                }
+                
+            }
+            
+        } else if (indexPath.section == 3) {
+            if (indexPath.row == 0) {
+                if (BaseData.instance.getLanguage() == 2) {
+                    guard let url = URL(string: "https://cosmostation.io/service_kr") else { return }
+                    onShowSafariWeb(url)
+                } else {
+                    guard let url = URL(string: "https://cosmostation.io/service_en") else { return }
+                    onShowSafariWeb(url)
+                }
+                
+            } else if (indexPath.row == 1) {
+                guard let url = URL(string: "https://cosmostation.io/privacy-policy") else { return }
+                onShowSafariWeb(url)
+                
+            } else if (indexPath.row == 2) {
+                guard let url = URL(string: "https://github.com/cosmostation/cosmostation-ios") else { return }
+                onShowSafariWeb(url)
+                
+            } else if (indexPath.row == 3) {
+                let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id1459830339")
+                if (UIApplication.shared.canOpenURL(urlAppStore!)) {
+                    UIApplication.shared.open(urlAppStore!, options: [:], completionHandler: nil)
+                }
+                
+            }
+        }
     }
     
     

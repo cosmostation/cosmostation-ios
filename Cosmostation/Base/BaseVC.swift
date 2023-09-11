@@ -25,6 +25,7 @@ class BaseVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Bundle.setLanguage(Language.getLanguages()[BaseData.instance.getLanguage()].languageCode)
         setLocalizedString()
     }
     

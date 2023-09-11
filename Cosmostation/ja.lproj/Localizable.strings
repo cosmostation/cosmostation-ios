@@ -242,6 +242,7 @@
 "str_account_with_privateKey" = "秘密鍵アカウント";
 "str_account_with_mnemonic" = "ニーモニックアカウント";
 "str_copy" = "コピー";
+"str_base_system" = "システム";
 
 
 "btn_delegate" = "  委任する";
@@ -368,6 +369,30 @@
 "guide_msg_stafi" = "StaFi Hubはクロスチェーンリキッドステーキングのために設計されたCosmos SDKベースのブロックチェーンネットワークです。";
 "guide_btn_home" = "ホームページ";
 "guide_btn_blog" = "公式ブログ";
+
+
+"setting_section_wallet" = "財布";
+"setting_section_general" = "一般";
+"setting_section_support" = "サポート";
+"setting_section_about" = "アプリ情報";
+"setting_account_title" = "アカウント管理";
+"setting_chain_title" = "チェーン管理";
+"setting_addressbook_title" = "連絡先の管理";
+"setting_language_title" = "言語";
+"setting_currecny_title" = "通貨";
+"setting_price_color_title" = "価格の色";
+"setting_notification_title" = "通知";
+"setting_app_lock_title" = "App Lock";
+"setting_auto_pass_title" = "Auto Pass";
+"setting_mintscan_title" = "Mintscan";
+"setting_homepage_title" = "HomePage";
+"setting_blog_title" = "Blog";
+"setting_telegram_title" = "Telegram";
+"setting_term_title" = "利用規約";
+"setting_privacy_title" = "個人情報保護";
+"setting_github_title" = "Github";
+"setting_version_title" = "稿";
+"setting_engineermode_title" = "Engineer Mode";
 
 
 "tx_set_memo" = "メモをにゅうりょくしてください。(オプション)。";
@@ -960,10 +985,6 @@
 
 "alert_title_no_private_key" = "観察モードウォーレット";
 "alert_msg_no_private_key" = "観察だけ可能なウォーレットです。すべてのトランザクションは復旧団子登録後、利用可能です。";
-
-"theme_system" = "システム";
-"theme_light" = "ライトモード";
-"theme_dark" = "ダークモード";
 
 "autopass_msg" = "最初PINコードを通過後に設定した時間の間、PINコードを自動に通過します。Tx 転送、個人データ確認に該当します。(アプリロックは常に作動します。)";
 "autopass_none" = "使用しない(お勧め)";

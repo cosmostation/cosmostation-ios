@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 class PushUtils {
     static let shared = PushUtils()
@@ -27,10 +28,15 @@ class PushUtils {
 //        }
     }
     
+    func getStatus() async throws -> JSON {
+        guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return JSON() }
+        return try await AF.request("\(WALLET_API_PUSH_STATUS_URL)/\(token)", method: .get).serializingDecodable(JSON.self).value
+    }
+    
     func updateStatus(enable: Bool) {
-        if (enable) {
-            sync()
-        }
+//        if (enable) {
+//            sync()
+//        }
         
         guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
         let parameters: Parameters = ["fcm_token": token, "subscribe": enable]

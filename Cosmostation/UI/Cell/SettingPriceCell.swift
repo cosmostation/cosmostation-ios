@@ -20,11 +20,26 @@ class SettingPriceCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        setMsgLabel.isHidden = true
         rootView.setBlur()
     }
     
     override func prepareForReuse() {
         rootView.setBlur()
+    }
+    
+    func onBindSetDpPrice() {
+        setImg.image = UIImage(named: "setPriceColor")
+        setTitleLabel.text = NSLocalizedString("setting_price_color_title", comment: "")
+        
+        if (BaseData.instance.getPriceChaingColor() > 0) {
+            upImg.image = UIImage.init(named: "iconPriceUpRed")
+            downImg.image = UIImage.init(named: "iconPriceDownGreen")
+        } else {
+            upImg.image = UIImage.init(named: "iconPriceUpGreen")
+            downImg.image = UIImage.init(named: "iconPriceDownRed")
+        }
+        
     }
     
 }

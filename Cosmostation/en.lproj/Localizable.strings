@@ -242,6 +242,7 @@
 "str_account_with_privateKey" = "Private Key Account";
 "str_account_with_mnemonic" = "Mnemonic Account";
 "str_copy" = "Copy";
+"str_base_system" = "System";
 
 
 "btn_delegate" = "  Delegate";
@@ -368,6 +369,30 @@
 "guide_msg_stafi" = "StaFi Hub is a sovereign Cosmos SDK based blockchain designed for cross-chain liquid staking.";
 "guide_btn_home" = "Home Page";
 "guide_btn_blog" = "Official Blog";
+
+
+"setting_section_wallet" = "Wallet";
+"setting_section_general" = "Genearal";
+"setting_section_support" = "Support";
+"setting_section_about" = "About";
+"setting_account_title" = "Account";
+"setting_chain_title" = "Chain";
+"setting_addressbook_title" = "Address Book";
+"setting_language_title" = "Language";
+"setting_currecny_title" = "Currency";
+"setting_price_color_title" = "Price Color";
+"setting_notification_title" = "Notification";
+"setting_app_lock_title" = "App Lock";
+"setting_auto_pass_title" = "Auto Pass";
+"setting_mintscan_title" = "Mintscan";
+"setting_homepage_title" = "HomePage";
+"setting_blog_title" = "Blog";
+"setting_telegram_title" = "Telegram";
+"setting_term_title" = "Term";
+"setting_privacy_title" = "Privacy";
+"setting_github_title" = "Github";
+"setting_version_title" = "Version";
+"setting_engineermode_title" = "Engineer Mode";
 
 
 "tx_set_memo" = "Insert memo (optional)";
@@ -960,10 +985,6 @@
 
 "alert_title_no_private_key" = "No Private Key";
 "alert_msg_no_private_key" = "This account has only address with watch mode.\nYou need to add mnemonics for generate transaction.";
-
-"theme_system" = "System";
-"theme_light" = "Light";
-"theme_dark" = "Dark";
 
 "autopass_msg" = "After passing the first pin code, it automatically passes through the pin code for a set time.\nTx transfer, personal data verification.\n(App lock always works.)";
 "autopass_none" = "Never (recommend)";

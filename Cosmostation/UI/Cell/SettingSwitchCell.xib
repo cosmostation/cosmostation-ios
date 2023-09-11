@@ -34,7 +34,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="2pq-66-nlW">
-                                <rect key="frame" x="64" y="17" width="50.333333333333343" height="38"/>
+                                <rect key="frame" x="64" y="17.666666666666671" width="50.333333333333343" height="37"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="osr-Xf-8KH">
                                         <rect key="frame" x="0.0" y="0.0" width="31.333333333333332" height="17.666666666666668"/>
@@ -43,7 +43,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNm-WB-qPm">
-                                        <rect key="frame" x="0.0" y="22.666666666666664" width="50.333333333333336" height="15.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="21.666666666666668" width="50.333333333333336" height="15.333333333333332"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color02"/>
                                         <nil key="highlightedColor"/>
@@ -51,8 +51,11 @@
                                 </subviews>
                             </stackView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBT-7l-KZ0">
-                                <rect key="frame" x="276" y="10.333333333333336" width="51" height="31"/>
+                                <rect key="frame" x="276" y="11" width="51" height="31"/>
                                 <color key="onTintColor" name="_primary"/>
+                                <connections>
+                                    <action selector="onToggle:" destination="KGk-i7-Jjw" eventType="valueChanged" id="ATc-Kh-9H3"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

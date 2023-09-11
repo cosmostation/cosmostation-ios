@@ -242,6 +242,7 @@
 "str_account_with_privateKey" = "개인키 계정";
 "str_account_with_mnemonic" = "니모닉 계정";
 "str_copy" = "복사";
+"str_base_system" = "시스템";
 
 
 "btn_delegate" = "  위임 하기";
@@ -368,6 +369,30 @@
 "guide_msg_stafi" = "StaFi Hub 는 크로스체인 리퀴드 스테이킹을 위해 설계된 Cosmos SDK 기반 블록체인 네트워크입니다.";
 "guide_btn_home" = "홈페이지";
 "guide_btn_blog" = "공식 블로그";
+
+
+"setting_section_wallet" = "지갑";
+"setting_section_general" = "일반";
+"setting_section_support" = "지원";
+"setting_section_about" = "앱 정보";
+"setting_account_title" = "계정 관리";
+"setting_chain_title" = "체인 관리";
+"setting_addressbook_title" = "주소록 관리";
+"setting_language_title" = "언어";
+"setting_currecny_title" = "통화";
+"setting_price_color_title" = "가격 색";
+"setting_notification_title" = "알람";
+"setting_app_lock_title" = "앱락";
+"setting_auto_pass_title" = "오토패스";
+"setting_mintscan_title" = "Mintscan";
+"setting_homepage_title" = "HomePage";
+"setting_blog_title" = "Blog";
+"setting_telegram_title" = "텔레그램";
+"setting_term_title" = "약관";
+"setting_privacy_title" = "개인정보 보호";
+"setting_github_title" = "Github";
+"setting_version_title" = "버전";
+"setting_engineermode_title" = "엔지니어 모드";
 
 
 "tx_set_memo" = "메모를 입력하세요 (선택사항)";
@@ -960,10 +985,6 @@
 
 "alert_title_no_private_key" = "관찰 모드 지갑";
 "alert_msg_no_private_key" = "관찰만 가능한 지갑입니다.\n모든 트랜잭션은 니모닉 등록 후 이용 가능합니다.";
-
-"theme_system" = "시스템";
-"theme_light" = "라이트";
-"theme_dark" = "다크";
 
 "autopass_msg" = "최초 핀코드를 통과한 이후 설정한 시간동안 핀코드를 자동으로 통과합니다.\nTx 전송, 개인 데이터 확인에 해당 됩니다.\n(앱 잠금은 항상 작동합니다.)";
 "autopass_none" = "사용 안함 (추천)";

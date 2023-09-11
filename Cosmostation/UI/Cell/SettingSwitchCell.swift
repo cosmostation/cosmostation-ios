@@ -19,11 +19,43 @@ class SettingSwitchCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        setMsgLabel.isHidden = true
         rootView.setBlur()
     }
     
     override func prepareForReuse() {
         rootView.setBlur()
+    }
+    
+    var actionToggle: ((Bool) -> Void)? = nil
+    @IBAction func onToggle(_ sender: UISwitch) {
+        actionToggle?(sender.isOn)
+    }
+    
+    func onBindSetNotification() {
+        setImg.image = UIImage(named: "setNoti")
+        setTitleLabel.text = NSLocalizedString("setting_notification_title", comment: "")
+        selectSwitch.isOn = false
+        Task {
+            if let status = try? await PushUtils.shared.getStatus() {
+                print("onBindSetNotification status ", status)
+                self.selectSwitch.isOn = status["subscribe"].bool ?? false
+            }
+        }
+    }
+    
+    func onBindSetAppLock() {
+        setImg.image = UIImage(named: "setAppLock")
+        setTitleLabel.text = NSLocalizedString("setting_app_lock_title", comment: "")
+        selectSwitch.isOn = BaseData.instance.getUsingAppLock()
+        
+    }
+    
+    func onBindSetEngineerMode() {
+        setImg.image = UIImage(named: "setPriceColor")
+        setTitleLabel.text = NSLocalizedString("setting_engineermode_title", comment: "")
+        selectSwitch.isOn = BaseData.instance.getUsingEnginerMode()
+        
     }
     
 }

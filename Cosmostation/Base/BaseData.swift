@@ -93,80 +93,12 @@ final class BaseData: NSObject{
         return UserDefaults.standard.bool(forKey: KEY_ACCOUNT_REFRESH_ALL)
     }
     
-    func setTheme(_ theme : Int) {
-        UserDefaults.standard.set(theme, forKey: KEY_THEME)
-    }
-    
-    func getTheme() -> Int {
-        return UserDefaults.standard.integer(forKey: KEY_THEME)
-    }
-    
-    func getThemeType() -> UIUserInterfaceStyle {
-        if (getTheme() == 1) {
-            return UIUserInterfaceStyle.light
-        } else if (getTheme() == 2) {
-            return UIUserInterfaceStyle.dark
-        } else {
-            return UIUserInterfaceStyle.unspecified
-        }
-    }
-    
-    func getThemeString() -> String {
-        if (getTheme() == 1) {
-            return NSLocalizedString("theme_light", comment: "")
-        } else if (getTheme() == 2) {
-            return NSLocalizedString("theme_dark", comment: "")
-        }
-        return NSLocalizedString("theme_system", comment: "")
-    }
-    
-    enum Language: Int, CustomStringConvertible {
-        case System = 0
-        case English = 1
-        case Korean = 2
-        case Japanese = 3
-        
-        var description: String {
-            switch self {
-            case .System: return Locale.current.languageCode ?? ""
-            case .English: return "en"
-            case .Korean: return "ko"
-            case .Japanese: return "ja"
-            }
-        }
-    }
-    
-    func setLanguage(_ language : Int) {
-        UserDefaults.standard.set(language, forKey: KEY_LANGUAGE)
-    }
-    
-    func getLanguage() -> Int {
-        return UserDefaults.standard.integer(forKey: KEY_LANGUAGE)
-    }
-    
-    func getLanguageType() -> String {
-        let lang = getLanguage()
-        if(lang == 1) {
-            return "English(United States)"
-        } else if(lang == 2) {
-            return "한국어(대한민국)"
-        } else if(lang == 3) {
-            return "日本語(日本)"
-        }
-        return NSLocalizedString("theme_system", comment: "")
-    }
     
     
+
     
     
-    
-    func setUsingAppLock(_ using : Bool) {
-        UserDefaults.standard.set(using, forKey: KEY_USING_APP_LOCK)
-    }
-    
-    func getUsingAppLock() -> Bool {
-        return UserDefaults.standard.bool(forKey: KEY_USING_APP_LOCK)
-    }
+
     
     func setUsingBioAuth(_ using : Bool) {
         UserDefaults.standard.set(using, forKey: KEY_USING_BIO_AUTH)
@@ -176,24 +108,7 @@ final class BaseData: NSObject{
         return UserDefaults.standard.bool(forKey: KEY_USING_BIO_AUTH)
     }
     
-    func setAutoPass(_ mode : Int) {
-        UserDefaults.standard.set(mode, forKey: KEY_AUTO_PASS)
-    }
     
-    func getAutoPass() -> Int {
-        return UserDefaults.standard.integer(forKey: KEY_AUTO_PASS)
-    }
-    
-    func getAutoPassString() -> String {
-        if (getAutoPass() == 1) {
-            return NSLocalizedString("autopass_5min", comment: "")
-        } else if (getAutoPass() == 2) {
-            return NSLocalizedString("autopass_10min", comment: "")
-        } else if (getAutoPass() == 3) {
-            return NSLocalizedString("autopass_30min", comment: "")
-        }
-        return NSLocalizedString("autopass_none", comment: "")
-    }
     
 //    func setLastPassTime() {
 //        let now = Date().millisecondsSince1970
@@ -228,13 +143,7 @@ final class BaseData: NSObject{
 //        return false
 //    }
     
-    func setUsingEnginerMode(_ using : Bool) {
-        UserDefaults.standard.set(using, forKey: KEY_ENGINER_MODE)
-    }
-    
-    func getUsingEnginerMode() -> Bool {
-        return UserDefaults.standard.bool(forKey: KEY_ENGINER_MODE)
-    }
+
     
     
     func setFCMToken(_ token : String) {
@@ -597,5 +506,48 @@ extension BaseData {
     
     func getPriceChaingColor() -> Int {
         return UserDefaults.standard.integer(forKey: KEY_PRICE_CHANGE_COLOR)
+    }
+    
+    func setLanguage(_ language: Int) {
+        UserDefaults.standard.set(language, forKey: KEY_LANGUAGE)
+    }
+    
+    func getLanguage() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_LANGUAGE)
+    }
+    
+    func setAutoPass(_ mode : Int) {
+        UserDefaults.standard.set(mode, forKey: KEY_AUTO_PASS)
+    }
+    
+    func getAutoPass() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_AUTO_PASS)
+    }
+    
+    func getAutoPassString() -> String {
+        if (getAutoPass() == 1) {
+            return NSLocalizedString("autopass_5min", comment: "")
+        } else if (getAutoPass() == 2) {
+            return NSLocalizedString("autopass_10min", comment: "")
+        } else if (getAutoPass() == 3) {
+            return NSLocalizedString("autopass_30min", comment: "")
+        }
+        return NSLocalizedString("autopass_none", comment: "")
+    }
+    
+    func setUsingAppLock(_ using : Bool) {
+        UserDefaults.standard.set(using, forKey: KEY_USING_APP_LOCK)
+    }
+    
+    func getUsingAppLock() -> Bool {
+        return UserDefaults.standard.bool(forKey: KEY_USING_APP_LOCK)
+    }
+    
+    func setUsingEnginerMode(_ using : Bool) {
+        UserDefaults.standard.set(using, forKey: KEY_ENGINER_MODE)
+    }
+    
+    func getUsingEnginerMode() -> Bool {
+        return UserDefaults.standard.bool(forKey: KEY_ENGINER_MODE)
     }
 }
