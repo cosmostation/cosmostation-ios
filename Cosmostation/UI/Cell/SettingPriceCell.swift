@@ -30,14 +30,14 @@ class SettingPriceCell: UITableViewCell {
     
     func onBindSetDpPrice() {
         setImg.image = UIImage(named: "setPriceColor")
-        setTitleLabel.text = NSLocalizedString("setting_price_color_title", comment: "")
+        setTitleLabel.text = NSLocalizedString("str_price_change_color", comment: "")
         
-        if (BaseData.instance.getPriceChaingColor() > 0) {
-            upImg.image = UIImage.init(named: "iconPriceUpRed")
-            downImg.image = UIImage.init(named: "iconPriceDownGreen")
-        } else {
+        if (BaseData.instance.getPriceChaingColor() == 0) {
             upImg.image = UIImage.init(named: "iconPriceUpGreen")
             downImg.image = UIImage.init(named: "iconPriceDownRed")
+        } else {
+            upImg.image = UIImage.init(named: "iconPriceUpRed")
+            downImg.image = UIImage.init(named: "iconPriceDownGreen")
         }
         
     }

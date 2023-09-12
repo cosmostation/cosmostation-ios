@@ -568,3 +568,89 @@ public enum Language: Int {
         }
     }
 }
+
+public enum Currency: Int {
+    case USD = 0
+    case EUR = 1
+    case KRW = 2
+    case JPY = 3
+    case CNY = 4
+    case RUB = 5
+    case GBP = 6
+    case INR = 7
+    case BRL = 8
+    case IDR = 9
+    case DKK = 10
+    case NOK = 11
+    case SEK = 12
+    case CHF = 13
+    case AUD = 14
+    case CAD = 15
+    case MYR = 16
+    
+    public static func getCurrencys() -> [Currency] {
+        var result = Array<Currency>()
+        result.append(.USD)
+        result.append(.EUR)
+        result.append(.KRW)
+        result.append(.JPY)
+        result.append(.CNY)
+        result.append(.RUB)
+        result.append(.GBP)
+        result.append(.INR)
+        result.append(.BRL)
+        result.append(.IDR)
+        result.append(.DKK)
+        result.append(.NOK)
+        result.append(.SEK)
+        result.append(.CHF)
+        result.append(.AUD)
+        result.append(.CAD)
+        result.append(.MYR)
+        return result
+    }
+    
+    var description: String {
+        switch self {
+        case .USD: return "USD"
+        case .EUR: return "EUR"
+        case .KRW: return "KRW"
+        case .JPY: return "JPY"
+        case .CNY: return "CNY"
+        case .RUB: return "RUB"
+        case .GBP: return "GBP"
+        case .INR: return "INR"
+        case .BRL: return "BRL"
+        case .IDR: return "IDR"
+        case .DKK: return "DKK"
+        case .NOK: return "NOK"
+        case .SEK: return "SEK"
+        case .CHF: return "CHF"
+        case .AUD: return "AUD"
+        case .CAD: return "CAD"
+        case .MYR: return "MYR"
+        }
+    }
+    
+    var symbol: String {
+        switch self {
+        case .USD: return "$"
+        case .EUR: return "€"
+        case .KRW: return "₩"
+        case .JPY: return "¥"
+        case .CNY: return "¥"
+        case .RUB: return "₽"
+        case .GBP: return "£"
+        case .INR: return "₹"
+        case .BRL: return "R$"
+        case .IDR: return "Rp"
+        case .DKK: return "Kr"
+        case .NOK: return "Kr"
+        case .SEK: return "Kr"
+        case .CHF: return "sFr"
+        case .AUD: return "AU$"
+        case .CAD: return "$"
+        case .MYR: return "RM"
+        }
+    }
+}

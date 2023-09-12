@@ -185,10 +185,22 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (indexPath.section == 1) {
             if (indexPath.row == 0) {
+                let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                baseSheet.sheetDelegate = self
+                baseSheet.sheetType = .SwitchLanguage
+                onStartSheet(baseSheet)
                 
             } else if (indexPath.row == 1) {
+                let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                baseSheet.sheetDelegate = self
+                baseSheet.sheetType = .SwitchCurrency
+                onStartSheet(baseSheet)
                 
             } else if (indexPath.row == 2) {
+                let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                baseSheet.sheetDelegate = self
+                baseSheet.sheetType = .SwitchPriceColor
+                onStartSheet(baseSheet)
                 
             } else if (indexPath.row == 5) {
                 
@@ -305,20 +317,32 @@ extension SettingsVC: BaseSheetDelegate {
     }
 
     public func onSelectSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
-        if let toAddcountId = Int64(result.param!) {
-            if (BaseData.instance.baseAccount.id != toAddcountId) {
-                showWait()
-                DispatchQueue.global().async {
-                    let toAccount = BaseData.instance.selectAccount(toAddcountId)
-                    BaseData.instance.setLastAccount(toAccount!.id)
-                    BaseData.instance.baseAccount = toAccount
-                    
-                    DispatchQueue.main.async(execute: {
-                        self.hideWait()
-                        self.onStartMainTab()
-                    });
+        if (sheetType == .SwitchAccount) {
+            if let toAddcountId = Int64(result.param!) {
+                if (BaseData.instance.baseAccount.id != toAddcountId) {
+                    showWait()
+                    DispatchQueue.global().async {
+                        let toAccount = BaseData.instance.selectAccount(toAddcountId)
+                        BaseData.instance.setLastAccount(toAccount!.id)
+                        BaseData.instance.baseAccount = toAccount
+                        
+                        DispatchQueue.main.async(execute: {
+                            self.hideWait()
+                            self.onStartMainTab()
+                        });
+                    }
                 }
             }
+            
+        } else if (sheetType == .SwitchLanguage) {
+            print("SwitchLanguage ", result.position)
+            
+        } else if (sheetType == .SwitchCurrency) {
+            print("SwitchCurrency ", result.position)
+            
+        } else if (sheetType == .SwitchPriceColor) {
+            print("SwitchPriceColor ", result.position)
+            
         }
     }
 }
