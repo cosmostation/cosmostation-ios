@@ -47,6 +47,9 @@ class BaseSheet: BaseVC {
             
         } else if (sheetType == .SwitchPriceColor) {
             sheetTitle.text = NSLocalizedString("str_price_change_color", comment: "")
+            
+        } else if (sheetType == .SwitchAutoPass) {
+            sheetTitle.text = NSLocalizedString("str_autopass", comment: "")
         }
     }
 
@@ -70,6 +73,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SwitchPriceColor) {
             return 2
+            
+        } else if (sheetType == .SwitchAutoPass) {
+            return AutoPass.getAutoPasses().count
             
         }
         return 0
@@ -99,6 +105,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SwitchPriceColor) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SwitchPriceDisplayCell") as? SwitchPriceDisplayCell
             cell?.onBindPriceDisplay(indexPath.row)
+            return cell!
+            
+        } else if (sheetType == .SwitchAutoPass) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
+            cell?.onBindAutoPass(indexPath.row)
             return cell!
             
         }
@@ -138,4 +149,5 @@ public enum SheetType: Int {
     case SwitchLanguage = 2
     case SwitchCurrency = 3
     case SwitchPriceColor = 4
+    case SwitchAutoPass = 5
 }

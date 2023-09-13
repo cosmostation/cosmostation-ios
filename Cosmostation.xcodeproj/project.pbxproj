@@ -226,6 +226,8 @@
 		04FAD9C52AB17FC000143A3E /* SwitchCurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9C22AB17FC000143A3E /* SwitchCurrencyCell.swift */; };
 		04FAD9C62AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9C32AB17FC000143A3E /* SwitchCurrencyCell.xib */; };
 		04FAD9C72AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9C32AB17FC000143A3E /* SwitchCurrencyCell.xib */; };
+		04FAD9CC2AB1B29B00143A3E /* UIStoryboard+StoryBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9CB2AB1B29B00143A3E /* UIStoryboard+StoryBoard.swift */; };
+		04FAD9CD2AB1B29B00143A3E /* UIStoryboard+StoryBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9CB2AB1B29B00143A3E /* UIStoryboard+StoryBoard.swift */; };
 		151734672A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
 		151734682A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
 		1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */; };
@@ -917,6 +919,7 @@
 		04FAD9B72AB0125400143A3E /* BaseSheetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseSheetCell.xib; sourceTree = "<group>"; };
 		04FAD9C22AB17FC000143A3E /* SwitchCurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCurrencyCell.swift; sourceTree = "<group>"; };
 		04FAD9C32AB17FC000143A3E /* SwitchCurrencyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchCurrencyCell.xib; sourceTree = "<group>"; };
+		04FAD9CB2AB1B29B00143A3E /* UIStoryboard+StoryBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+StoryBoard.swift"; sourceTree = "<group>"; };
 		151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingReq.swift; sourceTree = "<group>"; };
 		151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingRes.swift; sourceTree = "<group>"; };
 		1577DAC729B9F07800C360EC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -1693,6 +1696,7 @@
 				E15980572A6F5EE50032892B /* Cell */,
 				E19E8B3C2A92290800001BF5 /* UIColor+Colors.swift */,
 				E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */,
+				04FAD9CB2AB1B29B00143A3E /* UIStoryboard+StoryBoard.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2494,6 +2498,7 @@
 				18FFB58B281AF533004E65BB /* BinanceInt+VarInt.swift in Sources */,
 				E122DBBC2A8A468E006D1E7B /* cosmos_group_v1_tx.pb.swift in Sources */,
 				E122DB1A2A8A468D006D1E7B /* cosmos_distribution_v1beta1_query.grpc.swift in Sources */,
+				04FAD9CD2AB1B29B00143A3E /* UIStoryboard+StoryBoard.swift in Sources */,
 				E122DC4D2A8A4712006D1E7B /* tendermint_p2p_types.pb.swift in Sources */,
 				04FA74682A9F5833001A2830 /* CreateNameVC.swift in Sources */,
 				E122DBD22A8A468E006D1E7B /* cosmos_circuit_v1_types.pb.swift in Sources */,
@@ -2832,6 +2837,7 @@
 				E122DBBB2A8A468E006D1E7B /* cosmos_group_v1_tx.pb.swift in Sources */,
 				18D4C19528C704B8003F230A /* WalletConnectManager.swift in Sources */,
 				E122DB192A8A468D006D1E7B /* cosmos_distribution_v1beta1_query.grpc.swift in Sources */,
+				04FAD9CC2AB1B29B00143A3E /* UIStoryboard+StoryBoard.swift in Sources */,
 				E122DC4C2A8A4712006D1E7B /* tendermint_p2p_types.pb.swift in Sources */,
 				04FA74672A9F5833001A2830 /* CreateNameVC.swift in Sources */,
 				E122DBD12A8A468E006D1E7B /* cosmos_circuit_v1_types.pb.swift in Sources */,

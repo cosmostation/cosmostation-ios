@@ -17,8 +17,8 @@ class CreateNameVC: BaseVC, PinDelegate, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.isUserInteractionEnabled = false
-//        onCheckPinCodeInited()
+        view.isUserInteractionEnabled = false
+        onCheckPinCodeInited()
         
         accountNameTextField.setup()
         accountNameTextField.delegate = self
@@ -76,21 +76,18 @@ class CreateNameVC: BaseVC, PinDelegate, UITextFieldDelegate {
     func onCheckPinCodeInited() {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
             let keychain = BaseData.instance.getKeyChain()
-            let pincodeVC = UIStoryboard(name: "Pincode", bundle: nil).instantiateViewController(withIdentifier: "PincodeVC") as! PincodeVC
             if let pincode = try? keychain.getString("password"), pincode?.isEmpty == false {
-                pincodeVC.lockType = .ForDataCheck
+                let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+                self.present(pinVC, animated: true)
             } else {
-                pincodeVC.lockType = .ForInit
+                let pinVC = UIStoryboard.PincodeVC(self, .ForInit)
+                self.present(pinVC, animated: true)
             }
-            pincodeVC.modalPresentationStyle = .fullScreen
-            pincodeVC.pinDelegate = self
-            self.present(pincodeVC, animated: true)
         });
     }
     
     
     func pinResponse(_ request: LockType, _ result: UnLockResult) {
-        print("pinResponse ", result)
         if (result == .success) {
             view.isUserInteractionEnabled = true
         } else {

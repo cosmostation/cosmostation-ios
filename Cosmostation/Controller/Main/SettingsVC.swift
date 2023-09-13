@@ -10,6 +10,7 @@ import UIKit
 
 class SettingsVC: BaseVC {
     
+    
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -32,7 +33,6 @@ class SettingsVC: BaseVC {
         
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
     }
-
 }
 
 
@@ -124,7 +124,12 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 4) {
                 switchCell.onBindSetAppLock()
                 switchCell.actionToggle = { request in
-                    print("onBindSetAppLock ", request)
+                    if (request == false) {
+                        let pinVC = UIStoryboard.PincodeVC(self, .ForDisableAppLock)
+                        self.present(pinVC, animated: true)
+                    } else {
+                        BaseData.instance.setUsingAppLock(request)
+                    }
                 }
                 return switchCell
                 
@@ -173,7 +178,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 4) {
                 switchCell.onBindSetEngineerMode()
                 switchCell.actionToggle = { request in
-                    print("onBindSetAppLock ", request)
+                    print("onBindSetEngineerMode ", request)
                 }
                 return switchCell
             }
@@ -211,9 +216,11 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 onStartSheet(baseSheet)
                 
             } else if (indexPath.row == 5) {
-                
+                let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                baseSheet.sheetDelegate = self
+                baseSheet.sheetType = .SwitchAutoPass
+                onStartSheet(baseSheet)
             }
-            
             
         } else if (indexPath.section == 2) {
             if (indexPath.row == 0) {
@@ -280,7 +287,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-extension SettingsVC: BaseSheetDelegate {
+extension SettingsVC: BaseSheetDelegate, PinDelegate {
 
     //for main tabs accout display
     func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
@@ -331,27 +338,38 @@ extension SettingsVC: BaseSheetDelegate {
             if (BaseData.instance.getCurrency() != result.position) {
                 BaseData.instance.setCurrency(result.position!)
                 BaseNetWork().fetchPrices(true)
-                
-                DispatchQueue.main.async {
-                    self.tableView.beginUpdates()
-                    self.tableView.reloadRows(at: [IndexPath(row: 1, section: 1)], with: .none)
-                    self.tableView.endUpdates()
-                }
+                reloadRows(IndexPath(row: 1, section: 1))
             }
             
         } else if (sheetType == .SwitchPriceColor) {
             if (BaseData.instance.getPriceChaingColor() != result.position) {
                 BaseData.instance.setPriceChaingColor(result.position!)
-                
-                DispatchQueue.main.async {
-                    self.tableView.beginUpdates()
-                    self.tableView.reloadRows(at: [IndexPath(row: 1, section: 2)], with: .none)
-                    self.tableView.endUpdates()
-                }
+                reloadRows(IndexPath(row: 2, section: 1))
             }
             
+        } else if (sheetType == .SwitchAutoPass) {
+            if (BaseData.instance.getAutoPass() != result.position) {
+                BaseData.instance.setAutoPass(result.position!)
+                reloadRows(IndexPath(row: 5, section: 1))
+            }
         }
-//        else if (sheetType == .Auto) {
-//        }
+    }
+    
+    
+    func pinResponse(_ request: LockType, _ result: UnLockResult) {
+        if (request == .ForDisableAppLock) {
+            if (result == .success) {
+                BaseData.instance.setUsingAppLock(false)
+            }
+            reloadRows(IndexPath(row: 4, section: 1))
+        }
+    }
+    
+    func reloadRows(_ indexPath : IndexPath) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
+            self.tableView.beginUpdates()
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+            self.tableView.endUpdates()
+        })
     }
 }

@@ -14,7 +14,8 @@ import UserNotifications
 import Starscream
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, PinDelegate {
+    
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     var userInfo:[AnyHashable : Any]?
@@ -119,23 +120,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-//        if let topViewController = application.topViewController {
-//            if !topViewController.isKind(of: PasswordViewController.self) && BaseData.instance.isRequiredUnlock() {
-//                let passwordVC = UIStoryboard.passwordViewController(delegate: nil, target: PASSWORD_ACTION_APP_LOCK)
-//                passwordVC.isModalInPresentation = true
-//                topViewController.present(passwordVC, animated: true, completion: nil)
-//            }
-//        }
-//
-//        if (KeychainWrapper.standard.hasValue(forKey: BaseData.instance.copySalt!)) {
-//            KeychainWrapper.standard.removeObject(forKey: BaseData.instance.copySalt!)
-//        }
+        if let topVC = application.topViewController {
+            if !topVC.isKind(of: PincodeVC.self) && BaseData.instance.getUsingAppLock() {
+                let pinVC = UIStoryboard.PincodeVC(self, .ForAppLock)
+                topVC.present(pinVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    func pinResponse(_ request: LockType, _ result: UnLockResult) {
+        if result == .success {
+            
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-//        if let topViewController = application.topViewController, topViewController.isKind(of: PasswordViewController.self) {
-//            NotificationCenter.default.post(name: Notification.Name("ForeGround"), object: nil, userInfo: nil)
-//        }
+        if let topVC = application.topViewController, topVC.isKind(of: PincodeVC.self) {
+            NotificationCenter.default.post(name: Notification.Name("ForeGround"), object: nil, userInfo: nil)
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -187,24 +189,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 }
 
 extension UIApplication{
-//    var topViewController: UIViewController? {
-//        var pointedViewController = foregroundWindow?.rootViewController
-//        
-//        while pointedViewController?.presentedViewController != nil {
-//            switch pointedViewController?.presentedViewController {
-//            case let navagationController as UINavigationController:
-//                pointedViewController = navagationController.viewControllers.last
-//            case let tabBarController as UITabBarController:
-//                pointedViewController = tabBarController.selectedViewController
-//            default:
-//                pointedViewController = pointedViewController?.presentedViewController
-//            }
-//        }        
-//        if let navigationController = pointedViewController as? UINavigationController {
-//            pointedViewController = navigationController.viewControllers.last
-//        }
-//        return pointedViewController
-//    }
+    var topViewController: UIViewController? {
+        var pointedViewController = foregroundWindow?.rootViewController
+
+        while pointedViewController?.presentedViewController != nil {
+            switch pointedViewController?.presentedViewController {
+            case let navagationController as UINavigationController:
+                pointedViewController = navagationController.viewControllers.last
+            case let tabBarController as UITabBarController:
+                pointedViewController = tabBarController.selectedViewController
+            default:
+                pointedViewController = pointedViewController?.presentedViewController
+            }
+        }
+        if let navigationController = pointedViewController as? UINavigationController {
+            pointedViewController = navigationController.viewControllers.last
+        }
+        return pointedViewController
+    }
+
+    var foregroundWindow: UIWindow? {
+        windows.filter {$0.isKeyWindow}.first
+    }
 }
 
 //extension AppDelegate: WebSocketFactory {

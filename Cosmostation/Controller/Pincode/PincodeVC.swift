@@ -146,7 +146,7 @@ class PincodeVC: BaseVC {
     }
     
     func onCenceled() {
-        if (lockType == .ForDataCheck) {
+        if (lockType == .ForDataCheck || lockType == .ForDisableAppLock) {
             onFinishResult(.fail)
         }
     }
@@ -199,6 +199,7 @@ enum LockType: Int {
     case ForInit = 0
     case ForAppLock = 1
     case ForDataCheck = 2
+    case ForDisableAppLock = 3
     case Unknown = -1
 }
 

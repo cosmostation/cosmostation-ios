@@ -28,4 +28,13 @@ class BaseSheetCell: UITableViewCell {
         }
     }
     
+    func onBindAutoPass(_ position: Int) {
+        titleLabel.text = AutoPass.getAutoPasses()[position].description
+        if (BaseData.instance.getAutoPass() == position) {
+            checkedImg.isHidden = false
+        } else {
+            checkedImg.isHidden = true
+        }
+    }
+    
 }
