@@ -14,12 +14,12 @@ class ChainHumans: ChainConfig {
     var chainType = ChainType.HUMANS_MAIN
     var chainImg = UIImage(named: "chainHumans")
     var chainInfoImg = UIImage(named: "infoHumans")
-    var chainInfoTitle = "HUMANS.AI"
+    var chainInfoTitle = "HUMANS"
     var chainInfoMsg = NSLocalizedString("guide_msg_humans", comment: "")
     var chainColor = UIColor(named: "humans")!
     var chainColorBG = UIColor(named: "humans_bg")!
     var chainTitle = "(Humans Mainnet)"
-    var chainTitle2 = "HUMANS.AI"
+    var chainTitle2 = "HUMANS"
     var chainDBName = CHAIN_HUMANS_S
     var chainAPIName = "humans"
     var chainKoreanName = "휴먼스"
