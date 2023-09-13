@@ -112,6 +112,8 @@ class ChainFactory {
             return .FETCH_MAIN
         case CHAIN_GRAVITY_BRIDGE_S:
             return .GRAVITY_BRIDGE_MAIN
+        case CHAIN_HUMANS_S:
+            return .HUMANS_MAIN
         case CHAIN_INJECTIVE_S:
             return .INJECTIVE_MAIN
         case CHAIN_IXO_S:
@@ -268,6 +270,8 @@ class ChainFactory {
             return ChainFetchAi(chainType)
         case .GRAVITY_BRIDGE_MAIN:
             return ChainGravityBridge(chainType)
+        case .HUMANS_MAIN:
+            return ChainHumans(chainType)
         case .INJECTIVE_MAIN:
             return ChainInjective(chainType)
         case .IXO_MAIN:
@@ -450,6 +454,7 @@ let CHAIN_STAFI_S = "SUPPORT_CHAIN_STAFI"
 let CHAIN_NEUTRON_S = "SUPPORT_CHAIN_NEUTRON"
 let CHAIN_SEI_S = "SUPPORT_CHAIN_SEI"
 let CHAIN_TERRA_S = "SUPPORT_CHAIN_TERRA"
+let CHAIN_HUMANS_S = "SUPPORT_CHAIN_HUMANS"
 
 let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 let CHAIN_NEUTRON_TEST_S = "SUPPORT_CHAIN_NEUTRON_TEST"

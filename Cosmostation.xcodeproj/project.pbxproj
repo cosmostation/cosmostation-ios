@@ -2677,6 +2677,8 @@
 		1505BDD72AA87BD800AABD2F /* pstake_liquidstakeibc_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1505BDCA2AA87BD800AABD2F /* pstake_liquidstakeibc_v1beta1_query.grpc.swift */; };
 		1505BDD82AA87BD800AABD2F /* pstake_liquidstakeibc_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1505BDCB2AA87BD800AABD2F /* pstake_liquidstakeibc_v1beta1_query.pb.swift */; };
 		1505BDD92AA87BD800AABD2F /* pstake_liquidstakeibc_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1505BDCB2AA87BD800AABD2F /* pstake_liquidstakeibc_v1beta1_query.pb.swift */; };
+		1505BDDB2AB1A74D00AABD2F /* ChainHumans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1505BDDA2AB1A74D00AABD2F /* ChainHumans.swift */; };
+		1505BDDC2AB1A74D00AABD2F /* ChainHumans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1505BDDA2AB1A74D00AABD2F /* ChainHumans.swift */; };
 		150DB1F329ABCD2E00D0C7A2 /* PersisDapp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 150DB1F229ABCD2E00D0C7A2 /* PersisDapp.storyboard */; };
 		150DB1F429ABCD2E00D0C7A2 /* PersisDapp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 150DB1F229ABCD2E00D0C7A2 /* PersisDapp.storyboard */; };
 		150DB1F629ABCFD100D0C7A2 /* PersisDappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150DB1F529ABCFD100D0C7A2 /* PersisDappViewController.swift */; };
@@ -5232,6 +5234,7 @@
 		1505BDC92AA87BD800AABD2F /* pstake_liquidstakeibc_v1beta1_liquidstakeibc.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pstake_liquidstakeibc_v1beta1_liquidstakeibc.pb.swift; sourceTree = "<group>"; };
 		1505BDCA2AA87BD800AABD2F /* pstake_liquidstakeibc_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pstake_liquidstakeibc_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		1505BDCB2AA87BD800AABD2F /* pstake_liquidstakeibc_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pstake_liquidstakeibc_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		1505BDDA2AB1A74D00AABD2F /* ChainHumans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainHumans.swift; sourceTree = "<group>"; };
 		150DB1F229ABCD2E00D0C7A2 /* PersisDapp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PersisDapp.storyboard; sourceTree = "<group>"; };
 		150DB1F529ABCFD100D0C7A2 /* PersisDappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersisDappViewController.swift; sourceTree = "<group>"; };
 		15119C5629BF2F89004760DE /* ChainKyve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKyve.swift; sourceTree = "<group>"; };
@@ -5951,6 +5954,7 @@
 				0451FC87282A3AE000214FDA /* ChainEvmos.swift */,
 				0451FC4F282A390B00214FDA /* ChainFetchAi.swift */,
 				0451FC93282A3B3200214FDA /* ChainGravityBridge.swift */,
+				1505BDDA2AB1A74D00AABD2F /* ChainHumans.swift */,
 				0451FCA2282A3B7500214FDA /* ChainInjective.swift */,
 				0468BFA228C5EE7100CBC1C6 /* ChainIxo.swift */,
 				0451FC63282A3A2200214FDA /* ChainJuno.swift */,
@@ -9763,6 +9767,7 @@
 				04FCD3132930AB0400BA5349 /* StrideLiquid4ViewController.swift in Sources */,
 				04C5AEAE28633D39007627EA /* Vote1ViewController.swift in Sources */,
 				048160862A41E34E0006A906 /* tendermint_version_types.pb.swift in Sources */,
+				1505BDDC2AB1A74D00AABD2F /* ChainHumans.swift in Sources */,
 				18FFB362281AF533004E65BB /* TxDetailgRPCViewController.swift in Sources */,
 				04815FA32A41E1810006A906 /* cosmos_orm_query_v1alpha1_query.grpc.swift in Sources */,
 				048161042A41E6520006A906 /* desmos_profiles_v2_models_chain_links.pb.swift in Sources */,
@@ -11315,6 +11320,7 @@
 				150DB1F629ABCFD100D0C7A2 /* PersisDappViewController.swift in Sources */,
 				28B37D2A26D8EAFE008AACD2 /* PoolListViewController.swift in Sources */,
 				04815C1E2A41DC430006A906 /* crescent_lpfarm_v1beta1_query.grpc.swift in Sources */,
+				1505BDDB2AB1A74D00AABD2F /* ChainHumans.swift in Sources */,
 				0443B8662852F4F60027A6B9 /* SwitchAccountCell.swift in Sources */,
 				048162752A41F32F0006A906 /* cryptoorg_supply_v1_genesis.pb.swift in Sources */,
 				0454AE4A2928D71400EC657D /* TxEvmCell.swift in Sources */,

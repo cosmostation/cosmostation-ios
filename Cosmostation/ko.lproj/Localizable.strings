@@ -364,6 +364,7 @@
 "guide_msg_sei" = "Sei는 속도, 보안 및 확장성을 위해 설계된 Cosmos SDK 기반 레이어 1 블록체인 네트워크입니다.";
 "guide_msg_stafi" = "StaFi Hub 는 크로스체인 리퀴드 스테이킹을 위해 설계된 Cosmos SDK 기반 블록체인 네트워크입니다.";
 "guide_msg_terra" = "Terra 네트워크는 Terra Classic 에서 하드포크된 Cosmos SDK 기반 비허가형 블록체인 네트워크입니다.";
+"guide_msg_humans" = "Humans.ai는 AI 알고리즘과 AI 모델 생성을 독려하기 위해 설계된 분산형 AI 생태계입니다.";
 "guide_btn_home" = "홈페이지";
 "guide_btn_blog" = "공식 블로그";
 
