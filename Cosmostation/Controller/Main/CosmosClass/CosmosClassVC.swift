@@ -43,6 +43,9 @@ class CosmosClassVC: BaseVC {
         onSetFabButton()
         
         print("selectedChain address ", selectedChain.address)
+//        navigationController?.navigationBar.topItem?.title = baseAccount.name
+//        let backBarButtonItem = UIBarButtonItem(title: "Zedd", style: .plain, target: self, action: nil)
+//        self.navigationItem.backBarButtonItem = backBarButtonItem
         
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
         addressTap.cancelsTouchesInView = false

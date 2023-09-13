@@ -24,10 +24,10 @@ class ChainSelectVC: BaseVC {
         super.viewDidLoad()
         
 //        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg2")!)
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = UIImage(named: "bg2")
-        backgroundImage.contentMode =  .scaleToFill
-        self.view.insertSubview(backgroundImage, at: 0)
+//        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+//        backgroundImage.image = UIImage(named: "bg2")
+//        backgroundImage.contentMode =  .scaleToFill
+//        self.view.insertSubview(backgroundImage, at: 0)
         
         tableView.isHidden = true
         confirmBtn.isHidden = true

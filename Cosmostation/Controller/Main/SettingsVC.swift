@@ -29,7 +29,6 @@ class SettingsVC: BaseVC {
     
     func initData() {
         baseAccount = BaseData.instance.baseAccount
-        baseAccount.initDisplayData()
         
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
     }

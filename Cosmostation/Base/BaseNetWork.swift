@@ -14,7 +14,7 @@ import SwiftyJSON
 class BaseNetWork {
     
     func fetchPrices(_ force: Bool? = false) {
-        print("fetchPrices ", BaseNetWork.getPricesUrl())
+//        print("fetchPrices ", BaseNetWork.getPricesUrl())
         if (!BaseData.instance.needPriceUpdate() && force == false) { return }
         AF.request(BaseNetWork.getPricesUrl(), method: .get)
             .responseDecodable(of: [MintscanPrice].self, queue: .main, decoder: JSONDecoder()) { response in
@@ -22,6 +22,7 @@ class BaseNetWork {
                 case .success(let value):
                     BaseData.instance.mintscanPrices = value
                     BaseData.instance.setLastPriceTime()
+                    BaseData.instance.baseAccount.updateAllValue()
                     
                 case .failure:
                     print("fetchPrices error")
@@ -48,7 +49,7 @@ class BaseNetWork {
                 switch response.result {
                 case .success(let value):
                     BaseData.instance.mintscanAssets = value.assets
-                    print("mintscanAssets ", BaseData.instance.mintscanAssets?.count)
+//                    print("mintscanAssets ", BaseData.instance.mintscanAssets?.count)
                     
                     
                 case .failure:

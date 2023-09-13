@@ -104,7 +104,11 @@ public class BaseAccount {
     }
     
     
-    
+    func updateAllValue() {
+        toDisplayCosmosChains.forEach { chain in
+            chain.setAllValue()
+        }
+    }
     
     func sortCosmosChain() {
         allCosmosClassChains.sort {

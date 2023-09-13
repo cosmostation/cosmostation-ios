@@ -38,6 +38,7 @@ class PortfolioVC: BaseVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        onUpdateTotal()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -62,6 +63,7 @@ class PortfolioVC: BaseVC {
     
     @objc func onFetchPrice(_ notification: NSNotification) {
         tableView.reloadData()
+        onUpdateTotal()
     }
     
     func onUpdateTotal() {
@@ -80,22 +82,13 @@ class PortfolioVC: BaseVC {
         
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(clickSearch))
+        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(clickSearch))
     }
     
     @objc func clickSearch() {
-        print("clickSearch")
-//        self.navigationItem.searchController = self.searchController
-//        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50), execute: {
-//            self.navigationItem.searchController?.searchBar.isHidden = false
-//            self.navigationItem.searchController?.searchBar.becomeFirstResponder()
-//        })
-//        self.navigationItem.searchController?.searchBar.delegate = self
-        
-        
         let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
-        chainSelectVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(chainSelectVC, animated: true)
+        chainSelectVC.modalTransitionStyle = .coverVertical
+        self.present(chainSelectVC, animated: true)
     }
 
 }
@@ -143,6 +136,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
         let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
         cosmosClassVC.selectedPosition = indexPath.row
         cosmosClassVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.name)
         self.navigationController?.pushViewController(cosmosClassVC, animated: true)
     }
     
@@ -158,7 +152,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
             self.present(activityViewController, animated: true, completion: nil)
         }
         let qrAddressPopupVC = QrAddressPopupVC(nibName: "QrAddressPopupVC", bundle: nil)
-        qrAddressPopupVC.selectedChain = baseAccount.toDisplayCosmosChains[indexPath.row]
+        qrAddressPopupVC.selectedChain = selectedChain
         return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return qrAddressPopupVC }) { _ in
             UIMenu(title: "", children: [copy, share])
         }
@@ -179,19 +173,6 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
         let parameters = UIPreviewParameters()
         parameters.backgroundColor = .clear
         return UITargetedPreview(view: cell, parameters: parameters)
-    }
-    
-    
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("searchBar ", searchText)
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("cancel")
-        self.navigationItem.searchController?.isActive = false
-        self.navigationItem.searchController?.searchBar.isHidden = true
-        self.navigationItem.searchController = nil
     }
 }
 
