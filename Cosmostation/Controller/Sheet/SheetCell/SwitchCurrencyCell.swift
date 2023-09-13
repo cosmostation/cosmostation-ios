@@ -1,16 +1,17 @@
 //
-//  BaseSheetCell.swift
+//  SwitchCurrencyCell.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2023/09/12.
+//  Created by yongjoo jung on 2023/09/13.
 //  Copyright © 2023 wannabit. All rights reserved.
 //
 
 import UIKit
 
-class BaseSheetCell: UITableViewCell {
+class SwitchCurrencyCell: UITableViewCell {
     
     @IBOutlet weak var rootView: UIView!
+    @IBOutlet weak var currencyImg: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkedImg: UIImageView!
 
@@ -19,9 +20,11 @@ class BaseSheetCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
-    func onBindLanguage(_ position: Int) {
-        titleLabel.text = Language.getLanguages()[position].description
-        if (BaseData.instance.getLanguage() == position) {
+    func onBindCurrency(_ position: Int) {
+        titleLabel.text = Currency.getCurrencys()[position].description
+        
+        currencyImg.image = UIImage(named: "currency" + Currency.getCurrencys()[position].description)
+        if (BaseData.instance.getCurrency() == position) {
             checkedImg.isHidden = false
         } else {
             checkedImg.isHidden = true

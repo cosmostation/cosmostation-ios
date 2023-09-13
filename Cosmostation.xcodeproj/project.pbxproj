@@ -222,6 +222,10 @@
 		04FAD9B92AB0125400143A3E /* BaseSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9B62AB0125400143A3E /* BaseSheetCell.swift */; };
 		04FAD9BA2AB0125400143A3E /* BaseSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9B72AB0125400143A3E /* BaseSheetCell.xib */; };
 		04FAD9BB2AB0125400143A3E /* BaseSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9B72AB0125400143A3E /* BaseSheetCell.xib */; };
+		04FAD9C42AB17FC000143A3E /* SwitchCurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9C22AB17FC000143A3E /* SwitchCurrencyCell.swift */; };
+		04FAD9C52AB17FC000143A3E /* SwitchCurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9C22AB17FC000143A3E /* SwitchCurrencyCell.swift */; };
+		04FAD9C62AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9C32AB17FC000143A3E /* SwitchCurrencyCell.xib */; };
+		04FAD9C72AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9C32AB17FC000143A3E /* SwitchCurrencyCell.xib */; };
 		151734672A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
 		151734682A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
 		1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */; };
@@ -911,6 +915,8 @@
 		04FAD9B12AB011AC00143A3E /* SwitchPriceDisplayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchPriceDisplayCell.xib; sourceTree = "<group>"; };
 		04FAD9B62AB0125400143A3E /* BaseSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSheetCell.swift; sourceTree = "<group>"; };
 		04FAD9B72AB0125400143A3E /* BaseSheetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseSheetCell.xib; sourceTree = "<group>"; };
+		04FAD9C22AB17FC000143A3E /* SwitchCurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCurrencyCell.swift; sourceTree = "<group>"; };
+		04FAD9C32AB17FC000143A3E /* SwitchCurrencyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchCurrencyCell.xib; sourceTree = "<group>"; };
 		151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingReq.swift; sourceTree = "<group>"; };
 		151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingRes.swift; sourceTree = "<group>"; };
 		1577DAC729B9F07800C360EC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -1412,6 +1418,8 @@
 				04FA74712AA04416001A2830 /* SwitchAccountCell.xib */,
 				04FAD9B02AB011AC00143A3E /* SwitchPriceDisplayCell.swift */,
 				04FAD9B12AB011AC00143A3E /* SwitchPriceDisplayCell.xib */,
+				04FAD9C22AB17FC000143A3E /* SwitchCurrencyCell.swift */,
+				04FAD9C32AB17FC000143A3E /* SwitchCurrencyCell.xib */,
 			);
 			path = SheetCell;
 			sourceTree = "<group>";
@@ -2045,6 +2053,7 @@
 				E10EB59A2A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				0443B89928589B570027A6B9 /* Color.xcassets in Resources */,
 				04FAD9BB2AB0125400143A3E /* BaseSheetCell.xib in Resources */,
+				04FAD9C72AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
 				E11EAE1E2AAD87AD003BFC7F /* SettingPriceCell.xib in Resources */,
 				04A116F228F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
 				04D279E72A66E32A00AF046A /* loading.json in Resources */,
@@ -2109,6 +2118,7 @@
 				040733052AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
 				040732FD2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */,
 				04FA74872AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
+				04FAD9C62AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
 				E15980922A83A96E0032892B /* bg2.png in Resources */,
 				1809C35129D16C80008884C1 /* injectScript.js in Resources */,
 				28F8EFB1286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
@@ -2467,6 +2477,7 @@
 				E122DB042A8A468D006D1E7B /* cosmos_mint_v1beta1_tx.grpc.swift in Sources */,
 				E122DBFC2A8A468E006D1E7B /* cosmos_msg_v1_msg.pb.swift in Sources */,
 				E122DC022A8A468E006D1E7B /* cosmos_upgrade_v1beta1_tx.grpc.swift in Sources */,
+				04FAD9C52AB17FC000143A3E /* SwitchCurrencyCell.swift in Sources */,
 				E122DC002A8A468E006D1E7B /* cosmos_tx_signing_v1beta1_signing.pb.swift in Sources */,
 				E122DB162A8A468D006D1E7B /* cosmos_crisis_v1beta1_tx.pb.swift in Sources */,
 				E122DC142A8A468E006D1E7B /* cosmos_authz_v1beta1_query.grpc.swift in Sources */,
@@ -2804,6 +2815,7 @@
 				E122DB032A8A468D006D1E7B /* cosmos_mint_v1beta1_tx.grpc.swift in Sources */,
 				E122DBFB2A8A468E006D1E7B /* cosmos_msg_v1_msg.pb.swift in Sources */,
 				E122DC012A8A468E006D1E7B /* cosmos_upgrade_v1beta1_tx.grpc.swift in Sources */,
+				04FAD9C42AB17FC000143A3E /* SwitchCurrencyCell.swift in Sources */,
 				E122DBFF2A8A468E006D1E7B /* cosmos_tx_signing_v1beta1_signing.pb.swift in Sources */,
 				E122DB152A8A468D006D1E7B /* cosmos_crisis_v1beta1_tx.pb.swift in Sources */,
 				E122DC132A8A468E006D1E7B /* cosmos_authz_v1beta1_query.grpc.swift in Sources */,

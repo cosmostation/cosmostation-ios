@@ -52,7 +52,7 @@ class SettingSwitchCell: UITableViewCell {
     }
     
     func onBindSetEngineerMode() {
-        setImg.image = UIImage(named: "setPriceColor")
+        setImg.image = UIImage(named: "setEngineer")
         setTitleLabel.text = NSLocalizedString("setting_engineermode_title", comment: "")
         selectSwitch.isOn = BaseData.instance.getUsingEnginerMode()
         

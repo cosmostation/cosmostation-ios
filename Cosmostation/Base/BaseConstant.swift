@@ -654,3 +654,28 @@ public enum Currency: Int {
         }
     }
 }
+
+public enum AutoPass: Int {
+    case None = 0
+    case Min5 = 1
+    case Min10 = 2
+    case Min30 = 3
+    
+    public static func getAutoPasses() -> [AutoPass] {
+        var result = Array<AutoPass>()
+        result.append(.None)
+        result.append(.Min5)
+        result.append(.Min10)
+        result.append(.Min30)
+        return result
+    }
+    
+    var description: String {
+        switch self {
+        case .None: return NSLocalizedString("autopass_none", comment: "")
+        case .Min5: return NSLocalizedString("autopass_5min", comment: "")
+        case .Min10: return NSLocalizedString("autopass_10min", comment: "")
+        case .Min30: return NSLocalizedString("autopass_30min", comment: "")
+        }
+    }
+}

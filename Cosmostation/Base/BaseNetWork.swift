@@ -13,9 +13,9 @@ import SwiftyJSON
 
 class BaseNetWork {
     
-    func fetchPrices() {
+    func fetchPrices(_ force: Bool? = false) {
         print("fetchPrices ", BaseNetWork.getPricesUrl())
-        if (!BaseData.instance.needPriceUpdate()) { return }
+        if (!BaseData.instance.needPriceUpdate() && force == false) { return }
         AF.request(BaseNetWork.getPricesUrl(), method: .get)
             .responseDecodable(of: [MintscanPrice].self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
@@ -26,7 +26,7 @@ class BaseNetWork {
                 case .failure:
                     print("fetchPrices error")
                 }
-                NotificationCenter.default.post(name: Notification.Name("onFetchPrice"), object: nil, userInfo: nil)
+                NotificationCenter.default.post(name: Notification.Name("FetchPrice"), object: nil, userInfo: nil)
             }
         
         AF.request(BaseNetWork.getUSDPricesUrl(), method: .get)
@@ -54,7 +54,7 @@ class BaseNetWork {
                 case .failure:
                     print("fetchAssets error ", response.error)
                 }
-                NotificationCenter.default.post(name: Notification.Name("onFetchPrice"), object: nil, userInfo: nil)
+                NotificationCenter.default.post(name: Notification.Name("FetchAssets"), object: nil, userInfo: nil)
             }
     }
     

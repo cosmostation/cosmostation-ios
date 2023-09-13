@@ -60,7 +60,7 @@ class SettingBaseCell: UITableViewCell {
     }
     
     func onBindSetAutoPass() {
-//        setImg.image = UIImage(named: "setCurrency")
+        setImg.image = UIImage(named: "setAutoPass")
         setTitleLabel.text = NSLocalizedString("setting_auto_pass_title", comment: "")
         setDetailLabel.text = BaseData.instance.getAutoPassString()
     }
@@ -75,7 +75,7 @@ class SettingBaseCell: UITableViewCell {
     }
     
     func onBindSetHomePage() {
-        setImg.image = UIImage(named: "setCosmostation")
+        setImg.image = UIImage(named: "setHomepage")
         setTitleLabel.text = NSLocalizedString("setting_homepage_title", comment: "")
         setDetailLabel.text = ""
     }
@@ -101,7 +101,7 @@ class SettingBaseCell: UITableViewCell {
     }
     
     func onBindSetPrivacy() {
-        setImg.image = UIImage(named: "setTerm")
+        setImg.image = UIImage(named: "setPrivacy")
         setTitleLabel.text = NSLocalizedString("setting_privacy_title", comment: "")
         setDetailLabel.text = ""
     }
@@ -113,7 +113,7 @@ class SettingBaseCell: UITableViewCell {
     }
     
     func onBindSetVersion() {
-        setImg.image = UIImage(named: "setTerm")
+        setImg.image = UIImage(named: "setVersion")
         setTitleLabel.text = NSLocalizedString("setting_version_title", comment: "")
         if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
             setDetailLabel.text = "v " + appVersion

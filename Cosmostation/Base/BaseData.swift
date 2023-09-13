@@ -77,14 +77,6 @@ final class BaseData: NSObject{
         return Int64(UserDefaults.standard.integer(forKey: KEY_MY_VAL_SORT))
     }
     
-    func setLastTab(_ index : Int) {
-        UserDefaults.standard.set(index, forKey: KEY_LAST_TAB)
-    }
-    
-    func getLastTab() -> Int {
-        return UserDefaults.standard.integer(forKey: KEY_LAST_TAB)
-    }
-    
     func setNeedRefresh(_ refresh : Bool) {
         UserDefaults.standard.set(refresh, forKey: KEY_ACCOUNT_REFRESH_ALL)
     }
@@ -455,14 +447,7 @@ extension BaseData {
     }
     
     func getAutoPassString() -> String {
-        if (getAutoPass() == 1) {
-            return NSLocalizedString("autopass_5min", comment: "")
-        } else if (getAutoPass() == 2) {
-            return NSLocalizedString("autopass_10min", comment: "")
-        } else if (getAutoPass() == 3) {
-            return NSLocalizedString("autopass_30min", comment: "")
-        }
-        return NSLocalizedString("autopass_none", comment: "")
+        return AutoPass.getAutoPasses()[getAutoPass()].description
     }
     
     func setUsingAppLock(_ using : Bool) {
@@ -479,5 +464,13 @@ extension BaseData {
     
     func getUsingEnginerMode() -> Bool {
         return UserDefaults.standard.bool(forKey: KEY_ENGINER_MODE)
+    }
+    
+    func setLastTab(_ index : Int) {
+        UserDefaults.standard.set(index, forKey: KEY_LAST_TAB)
+    }
+    
+    func getLastTab() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_LAST_TAB)
     }
 }

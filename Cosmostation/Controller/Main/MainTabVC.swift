@@ -22,6 +22,13 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
         self.tabBar.layer.masksToBounds = true
         self.tabBar.layer.cornerRadius = 8
         self.tabBar.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
+        self.delegate = self
+        self.selectedIndex = BaseData.instance.getLastTab()
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        BaseData.instance.setLastTab(tabBarController.selectedIndex)
     }
 
 }
