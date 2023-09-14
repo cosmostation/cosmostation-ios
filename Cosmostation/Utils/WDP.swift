@@ -290,17 +290,17 @@ public class WDP {
     
     static func dpPriceUpColor(_ label: UILabel?) {
         if (BaseData.instance.getPriceChaingColor() > 0) {
-            label?.textColor = UIColor(named: "_voteNo")
+            label?.textColor = .colorRed
         } else {
-            label?.textColor = UIColor(named: "_voteYes")
+            label?.textColor = .colorGreen
         }
     }
 
     static func dpPriceDownColor(_ label: UILabel?) {
         if (BaseData.instance.getPriceChaingColor() > 0) {
-            label?.textColor = UIColor(named: "_voteYes")
+            label?.textColor = .colorGreen
         } else {
-            label?.textColor = UIColor(named: "_voteNo")
+            label?.textColor = .colorRed
         }
     }
 

@@ -15,5 +15,13 @@ class SwapVC: BaseVC {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let swapStartVC = SwapStartVC(nibName: "SwapStartVC", bundle: nil)
+        swapStartVC.modalTransitionStyle = .coverVertical
+        self.present(swapStartVC, animated: true)
+    }
 
 }

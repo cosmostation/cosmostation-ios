@@ -78,7 +78,6 @@ class PortfolioVC: BaseVC {
     
     func initData() {
         baseAccount = BaseData.instance.baseAccount
-        baseAccount.initDisplayData()
         
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)

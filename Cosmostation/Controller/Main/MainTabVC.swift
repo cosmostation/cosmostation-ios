@@ -9,11 +9,13 @@
 import UIKit
 
 class MainTabVC: UITabBarController, UITabBarControllerDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addBackground()
         print("MainTabVC viewDidLoad")
+        
+        BaseData.instance.baseAccount.initDisplayData()
         
 //        self.tabBar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
 //        self.tabBar.barTintColor = .blue
