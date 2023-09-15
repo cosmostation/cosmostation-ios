@@ -176,7 +176,6 @@ extension IntroViewController {
     
     func onShowNetworkAlert() {
         let alert = UIAlertController(title: NSLocalizedString("error_network", comment: ""), message: NSLocalizedString("error_network_msg", comment: ""), preferredStyle: .alert)
-//        alert.overrideUserInterfaceStyle = .dark
         let action = UIAlertAction(title: NSLocalizedString("retry", comment: ""), style: .default, handler: { _ in
             self.onAppVersionCheck()
         })
@@ -186,7 +185,6 @@ extension IntroViewController {
     
     func onShowDisableAlert() {
         let alert = UIAlertController(title: NSLocalizedString("error_disable", comment: ""), message: NSLocalizedString("error_disable_msg", comment: ""), preferredStyle: .alert)
-//        alert.overrideUserInterfaceStyle = .dark
         let action = UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: { _ in
             exit(-1)
         })
@@ -196,7 +194,6 @@ extension IntroViewController {
     
     func onShowUpdateAlert() {
         let alert = UIAlertController(title: NSLocalizedString("update_title", comment: ""), message: NSLocalizedString("update_msg", comment: ""), preferredStyle: .alert)
-//        alert.overrideUserInterfaceStyle = .dark
         let action = UIAlertAction(title: NSLocalizedString("go_appstore", comment: ""), style: .default, handler: { _ in
             let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id1459830339")
             if(UIApplication.shared.canOpenURL(urlAppStore!)) {
