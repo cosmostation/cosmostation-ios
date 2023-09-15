@@ -24,12 +24,11 @@ class SettingsVC: BaseVC {
         tableView.register(UINib(nibName: "SettingSwitchCell", bundle: nil), forCellReuseIdentifier: "SettingSwitchCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
-        initData()
+        initView()
     }
     
-    func initData() {
+    func initView() {
         baseAccount = BaseData.instance.baseAccount
-        
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
     }
 }
@@ -287,8 +286,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
 
 
 extension SettingsVC: BaseSheetDelegate, PinDelegate {
-
-    //for main tabs accout display
+    
     func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "naviCon"), for: .normal)
@@ -307,10 +305,10 @@ extension SettingsVC: BaseSheetDelegate, PinDelegate {
         onStartSheet(baseSheet)
     }
 
-    public func onSelectSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    public func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .SwitchAccount) {
             if let toAddcountId = Int64(result.param!) {
-                if (BaseData.instance.baseAccount.id != toAddcountId) {
+                if (BaseData.instance.baseAccount?.id != toAddcountId) {
                     showWait()
                     DispatchQueue.global().async {
                         let toAccount = BaseData.instance.selectAccount(toAddcountId)

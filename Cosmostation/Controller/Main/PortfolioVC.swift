@@ -29,7 +29,7 @@ class PortfolioVC: BaseVC {
         tableView.register(UINib(nibName: "PortfolioCell", bundle: nil), forCellReuseIdentifier: "PortfolioCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
-        initData()
+        initView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
@@ -45,6 +45,14 @@ class PortfolioVC: BaseVC {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchPrice"), object: nil)
+    }
+    
+    func initView() {
+        baseAccount = BaseData.instance.baseAccount
+        
+        currencyLabel.text = BaseData.instance.getCurrencySymbol()
+        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
+        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(clickSearch))
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
@@ -74,14 +82,6 @@ class PortfolioVC: BaseVC {
         DispatchQueue.main.async {
             self.totalValue = sum
         }
-    }
-    
-    func initData() {
-        baseAccount = BaseData.instance.baseAccount
-        
-        currencyLabel.text = BaseData.instance.getCurrencySymbol()
-        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
-        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(clickSearch))
     }
     
     @objc func clickSearch() {
@@ -176,8 +176,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
 }
 
 extension PortfolioVC: BaseSheetDelegate {
-
-    //for main tabs accout display
+    
     func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "naviCon"), for: .normal)
@@ -196,19 +195,21 @@ extension PortfolioVC: BaseSheetDelegate {
         onStartSheet(baseSheet)
     }
 
-    public func onSelectSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
-        if let toAddcountId = Int64(result.param!) {
-            if (BaseData.instance.baseAccount.id != toAddcountId) {
-                showWait()
-                DispatchQueue.global().async {
-                    let toAccount = BaseData.instance.selectAccount(toAddcountId)
-                    BaseData.instance.setLastAccount(toAccount!.id)
-                    BaseData.instance.baseAccount = toAccount
-                    
-                    DispatchQueue.main.async(execute: {
-                        self.hideWait()
-                        self.onStartMainTab()
-                    });
+    public func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+        if (sheetType == .SwitchAccount) {
+            if let toAddcountId = Int64(result.param!) {
+                if (BaseData.instance.baseAccount?.id != toAddcountId) {
+                    showWait()
+                    DispatchQueue.global().async {
+                        let toAccount = BaseData.instance.selectAccount(toAddcountId)
+                        BaseData.instance.setLastAccount(toAccount!.id)
+                        BaseData.instance.baseAccount = toAccount
+                        
+                        DispatchQueue.main.async(execute: {
+                            self.hideWait()
+                            self.onStartMainTab()
+                        });
+                    }
                 }
             }
         }

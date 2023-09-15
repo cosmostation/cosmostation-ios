@@ -234,6 +234,8 @@
 		04FAD9D32AB2032200143A3E /* SwapStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9CF2AB2032200143A3E /* SwapStartVC.xib */; };
 		04FAD9D52AB204FF00143A3E /* FixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9D42AB204FF00143A3E /* FixCardView.swift */; };
 		04FAD9D62AB204FF00143A3E /* FixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9D42AB204FF00143A3E /* FixCardView.swift */; };
+		04FAD9D82AB438C900143A3E /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9D72AB438C900143A3E /* DropDownView.swift */; };
+		04FAD9D92AB438C900143A3E /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9D72AB438C900143A3E /* DropDownView.swift */; };
 		151734672A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
 		151734682A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
 		1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */; };
@@ -929,6 +931,7 @@
 		04FAD9CE2AB2032200143A3E /* SwapStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapStartVC.swift; sourceTree = "<group>"; };
 		04FAD9CF2AB2032200143A3E /* SwapStartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwapStartVC.xib; sourceTree = "<group>"; };
 		04FAD9D42AB204FF00143A3E /* FixCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixCardView.swift; sourceTree = "<group>"; };
+		04FAD9D72AB438C900143A3E /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingReq.swift; sourceTree = "<group>"; };
 		151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingRes.swift; sourceTree = "<group>"; };
 		1577DAC729B9F07800C360EC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -1743,6 +1746,7 @@
 				04FAD9D42AB204FF00143A3E /* FixCardView.swift */,
 				04CB91322A910BDC00375354 /* CardViewCell.swift */,
 				E14E29792A99C2CA00939AD2 /* BaseButton.swift */,
+				04FAD9D72AB438C900143A3E /* DropDownView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2479,6 +2483,7 @@
 				04FA746D2A9F8652001A2830 /* BaseSheet.swift in Sources */,
 				044ECB212A95DE5D0042DB3C /* ChainKi.swift in Sources */,
 				E122DB402A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
+				04FAD9D92AB438C900143A3E /* DropDownView.swift in Sources */,
 				E122DC512A8A4712006D1E7B /* tendermint_crypto_proof.pb.swift in Sources */,
 				04117B7F2AA5860600637836 /* ChainOsmosis.swift in Sources */,
 				E122DC5F2A8A4712006D1E7B /* tendermint_types_validator.pb.swift in Sources */,
@@ -2820,6 +2825,7 @@
 				04FA746C2A9F8652001A2830 /* BaseSheet.swift in Sources */,
 				044ECB202A95DE5D0042DB3C /* ChainKi.swift in Sources */,
 				E122DB3F2A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
+				04FAD9D82AB438C900143A3E /* DropDownView.swift in Sources */,
 				E122DC502A8A4712006D1E7B /* tendermint_crypto_proof.pb.swift in Sources */,
 				04117B7E2AA5860600637836 /* ChainOsmosis.swift in Sources */,
 				E122DC5E2A8A4712006D1E7B /* tendermint_types_validator.pb.swift in Sources */,
@@ -3173,7 +3179,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 199;
+				CURRENT_PROJECT_VERSION = 250;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3185,7 +3191,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.9;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3205,7 +3211,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 199;
+				CURRENT_PROJECT_VERSION = 250;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3217,7 +3223,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.9;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

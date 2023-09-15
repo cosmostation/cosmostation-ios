@@ -28,7 +28,7 @@ class SwitchAccountCell: UITableViewCell {
     func onBindAccount(_ account: BaseAccount) {
         nameLabel.text = account.name
         
-        if (account.name == BaseData.instance.baseAccount.name) {
+        if (account.name == BaseData.instance.baseAccount?.name) {
             self.checkedImg.isHidden = false
         } else {
             self.checkedImg.isHidden = true

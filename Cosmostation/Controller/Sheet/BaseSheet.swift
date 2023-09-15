@@ -119,9 +119,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (sheetType == .SwitchAccount) {
             let result = BaseSheetResult.init(indexPath.row, String(BaseData.instance.selectAccounts()[indexPath.row].id))
-            sheetDelegate?.onSelectSheet(sheetType, result)
+            sheetDelegate?.onSelectedSheet(sheetType, result)
         } else {
-            sheetDelegate?.onSelectSheet(sheetType, BaseSheetResult.init(indexPath.row, nil))
+            sheetDelegate?.onSelectedSheet(sheetType, BaseSheetResult.init(indexPath.row, nil))
         }
         dismiss(animated: true)
     }
@@ -130,7 +130,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
 
 
 protocol BaseSheetDelegate {
-    func onSelectSheet(_ sheetType: SheetType?, _ result: BaseSheetResult)
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult)
 }
 
 public struct BaseSheetResult {

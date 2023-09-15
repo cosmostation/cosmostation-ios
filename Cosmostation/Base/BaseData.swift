@@ -20,7 +20,8 @@ final class BaseData: NSObject{
     var database: Connection!
     var copySalt: String?
     
-    var baseAccount: BaseAccount!
+    var reviewMode = true
+    var baseAccount: BaseAccount?
     var mintscanUSDPrices: [MintscanPrice]?
     var mintscanPrices: [MintscanPrice]?
     var mintscanAssets: [MintscanAsset]?

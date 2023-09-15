@@ -22,7 +22,9 @@ class BaseNetWork {
                 case .success(let value):
                     BaseData.instance.mintscanPrices = value
                     BaseData.instance.setLastPriceTime()
-                    BaseData.instance.baseAccount.updateAllValue()
+                    if let currnetAccount = BaseData.instance.baseAccount {
+                        currnetAccount.updateAllValue()
+                    }
                     
                 case .failure:
                     print("fetchPrices error")
