@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckPrivateKeyVC" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="checkBtn" destination="MMY-n5-KxC" id="ajg-Ea-KIx"/>
+                <outlet property="nameCardView" destination="4ZJ-sc-YH7" id="ljg-8r-EDq"/>
+                <outlet property="nameLabel" destination="lEY-Ki-6aw" id="tiF-AV-Nbt"/>
+                <outlet property="privateKeyLabel" destination="kdC-GY-rIK" id="cxg-fU-ngS"/>
+                <outlet property="privateKeyView" destination="E8X-w8-jig" id="fYX-hS-MjF"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ZJ-sc-YH7" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="67" width="377" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEY-Ki-6aw">
+                            <rect key="frame" x="20" y="23" width="99" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="cDU-0A-yEt"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="lEY-Ki-6aw" firstAttribute="leading" secondItem="4ZJ-sc-YH7" secondAttribute="leading" constant="20" id="Tsj-ii-5u2"/>
+                        <constraint firstItem="lEY-Ki-6aw" firstAttribute="centerY" secondItem="4ZJ-sc-YH7" secondAttribute="centerY" id="kuU-mt-lBa"/>
+                        <constraint firstAttribute="height" constant="60" id="yLV-K1-luT"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E8X-w8-jig" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="143" width="377" height="80"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="private key" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdC-GY-rIK">
+                            <rect key="frame" x="20" y="30" width="337" height="20.333333333333329"/>
+                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="D1E-75-9eN"/>
+                        <constraint firstItem="kdC-GY-rIK" firstAttribute="leading" secondItem="E8X-w8-jig" secondAttribute="leading" constant="20" id="Hdf-pl-sYx"/>
+                        <constraint firstAttribute="trailing" secondItem="kdC-GY-rIK" secondAttribute="trailing" constant="20" id="Y4N-Lv-YSv"/>
+                        <constraint firstItem="kdC-GY-rIK" firstAttribute="centerY" secondItem="E8X-w8-jig" secondAttribute="centerY" id="mly-Of-EDI"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap box for copy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KgZ-ft-yq0">
+                    <rect key="frame" x="148.33333333333334" y="239" width="96.666666666666657" height="15.333333333333343"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                    <color key="textColor" name="_color02"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMY-n5-KxC" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <color key="backgroundColor" name="_primary"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="WFJ-J7-4pM"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Confirm">
+                        <color key="titleColor" name="_color01"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="Jij-QI-LTc"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" name="_primary"/>
+            <constraints>
+                <constraint firstItem="KgZ-ft-yq0" firstAttribute="top" secondItem="E8X-w8-jig" secondAttribute="bottom" constant="16" id="2k6-HX-9p2"/>
+                <constraint firstItem="E8X-w8-jig" firstAttribute="top" secondItem="4ZJ-sc-YH7" secondAttribute="bottom" constant="16" id="7MK-pb-0KQ"/>
+                <constraint firstItem="4ZJ-sc-YH7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="90z-kD-dve"/>
+                <constraint firstItem="MMY-n5-KxC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="E9o-3L-H1q"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4ZJ-sc-YH7" secondAttribute="trailing" constant="8" id="KbO-S4-aTW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MMY-n5-KxC" secondAttribute="trailing" constant="8" id="M35-0J-Ftg"/>
+                <constraint firstItem="KgZ-ft-yq0" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ecu-Lz-0hW"/>
+                <constraint firstItem="E8X-w8-jig" firstAttribute="trailing" secondItem="4ZJ-sc-YH7" secondAttribute="trailing" id="lge-L0-Sz5"/>
+                <constraint firstItem="4ZJ-sc-YH7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="n7j-cO-XZi"/>
+                <constraint firstAttribute="bottom" secondItem="MMY-n5-KxC" secondAttribute="bottom" constant="38" id="pDi-4Z-7p8"/>
+                <constraint firstItem="E8X-w8-jig" firstAttribute="leading" secondItem="4ZJ-sc-YH7" secondAttribute="leading" id="vlu-IB-9V3"/>
+            </constraints>
+            <point key="canvasLocation" x="83" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

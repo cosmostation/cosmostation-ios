@@ -51,7 +51,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPq-mZ-R8l">
-                                <rect key="frame" x="297.33333333333331" y="18.666666666666668" width="34.666666666666686" height="15.333333333333332"/>
+                                <rect key="frame" x="293.33333333333331" y="18.666666666666668" width="34.666666666666686" height="15.333333333333332"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
@@ -60,7 +60,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="5Zx-AL-6xf" secondAttribute="bottom" constant="12" id="DKm-4F-dFY"/>
-                            <constraint firstAttribute="trailing" secondItem="LPq-mZ-R8l" secondAttribute="trailing" constant="12" id="DVV-Fy-6Co"/>
+                            <constraint firstAttribute="trailing" secondItem="LPq-mZ-R8l" secondAttribute="trailing" constant="16" id="DVV-Fy-6Co"/>
                             <constraint firstItem="pkQ-pO-Es3" firstAttribute="centerY" secondItem="oLi-9a-aZ7" secondAttribute="centerY" id="HSa-wu-IRz"/>
                             <constraint firstItem="pkQ-pO-Es3" firstAttribute="leading" secondItem="5Zx-AL-6xf" secondAttribute="trailing" constant="8" id="Ohv-P6-J1A"/>
                             <constraint firstItem="5Zx-AL-6xf" firstAttribute="centerY" secondItem="oLi-9a-aZ7" secondAttribute="centerY" id="Uet-fI-trR"/>
@@ -100,7 +100,7 @@
             <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.33700001239776611" green="0.016000000759959221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

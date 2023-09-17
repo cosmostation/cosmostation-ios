@@ -836,6 +836,14 @@
 		E1D6B8D22AA499A400177D30 /* CosmosNftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */; };
 		E1D6B8D42AA499B100177D30 /* CosmosAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */; };
 		E1D6B8D52AA499B100177D30 /* CosmosAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */; };
+		E1DF776F2AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF776D2AB74ED40028BD51 /* CheckMenmonicVC.swift */; };
+		E1DF77702AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF776D2AB74ED40028BD51 /* CheckMenmonicVC.swift */; };
+		E1DF77712AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DF776E2AB74ED40028BD51 /* CheckMenmonicVC.xib */; };
+		E1DF77722AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DF776E2AB74ED40028BD51 /* CheckMenmonicVC.xib */; };
+		E1DF77752AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF77732AB74EE80028BD51 /* CheckPrivateKeyVC.swift */; };
+		E1DF77762AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF77732AB74EE80028BD51 /* CheckPrivateKeyVC.swift */; };
+		E1DF77772AB74EE80028BD51 /* CheckPrivateKeyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DF77742AB74EE80028BD51 /* CheckPrivateKeyVC.xib */; };
+		E1DF77782AB74EE80028BD51 /* CheckPrivateKeyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DF77742AB74EE80028BD51 /* CheckPrivateKeyVC.xib */; };
 		E1E0DBC62A9B0FE3006DA6BB /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E0DBC42A9B0FE3006DA6BB /* HistoryCell.swift */; };
 		E1E0DBC72A9B0FE3006DA6BB /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E0DBC42A9B0FE3006DA6BB /* HistoryCell.swift */; };
 		E1E0DBC82A9B0FE3006DA6BB /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1E0DBC52A9B0FE3006DA6BB /* HistoryCell.xib */; };
@@ -1261,6 +1269,10 @@
 		E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTokenVC.swift; sourceTree = "<group>"; };
 		E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosNftVC.swift; sourceTree = "<group>"; };
 		E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosAboutVC.swift; sourceTree = "<group>"; };
+		E1DF776D2AB74ED40028BD51 /* CheckMenmonicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMenmonicVC.swift; sourceTree = "<group>"; };
+		E1DF776E2AB74ED40028BD51 /* CheckMenmonicVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckMenmonicVC.xib; sourceTree = "<group>"; };
+		E1DF77732AB74EE80028BD51 /* CheckPrivateKeyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPrivateKeyVC.swift; sourceTree = "<group>"; };
+		E1DF77742AB74EE80028BD51 /* CheckPrivateKeyVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckPrivateKeyVC.xib; sourceTree = "<group>"; };
 		E1E0DBC42A9B0FE3006DA6BB /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		E1E0DBC52A9B0FE3006DA6BB /* HistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
 		E1E0DBCA2A9B1579006DA6BB /* MintscanHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanHistory.swift; sourceTree = "<group>"; };
@@ -1449,6 +1461,10 @@
 				04FA747E2AA0CAA3001A2830 /* ImportPrivKeyVC.xib */,
 				04FAD9DA2AB6D8DC00143A3E /* AccountListVC.swift */,
 				04FAD9DB2AB6D8DC00143A3E /* AccountListVC.xib */,
+				E1DF776D2AB74ED40028BD51 /* CheckMenmonicVC.swift */,
+				E1DF776E2AB74ED40028BD51 /* CheckMenmonicVC.xib */,
+				E1DF77732AB74EE80028BD51 /* CheckPrivateKeyVC.swift */,
+				E1DF77742AB74EE80028BD51 /* CheckPrivateKeyVC.xib */,
 				04FAD9E02AB6D8ED00143A3E /* ChainListVC.swift */,
 				04FAD9E12AB6D8ED00143A3E /* ChainListVC.xib */,
 			);
@@ -2151,6 +2167,8 @@
 				E15980912A83A96E0032892B /* bg6.png in Resources */,
 				1809C35229D16C80008884C1 /* injectScript.js in Resources */,
 				04F4061829ED119800CD88E4 /* Init.storyboard in Resources */,
+				E1DF77782AB74EE80028BD51 /* CheckPrivateKeyVC.xib in Resources */,
+				E1DF77722AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,
 				04FA74882AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
 				E15980952A83A96E0032892B /* bg7.png in Resources */,
 				04FAD9EB2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */,
@@ -2221,6 +2239,7 @@
 				E11EAE112AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
 				187446FF2930940F00849EE4 /* ApiKey.plist in Resources */,
 				E15980962A83A96E0032892B /* bg0.png in Resources */,
+				E1DF77772AB74EE80028BD51 /* CheckPrivateKeyVC.xib in Resources */,
 				E18D73B82AB484AB00FCB1AA /* DappStartVC.xib in Resources */,
 				04FAD9B42AB011AC00143A3E /* SwitchPriceDisplayCell.xib in Resources */,
 				E159808A2A83A96E0032892B /* bg3.png in Resources */,
@@ -2250,6 +2269,7 @@
 				04F4061729ED119800CD88E4 /* Init.storyboard in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
 				18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */,
+				E1DF77712AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2582,6 +2602,7 @@
 				E122DB382A8A468D006D1E7B /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
 				15BF8483299D472A00B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */,
 				E122DB522A8A468D006D1E7B /* cosmos_group_v1_query.grpc.swift in Sources */,
+				E1DF77702AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
 				E14E29762A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
 				18FFB57A281AF533004E65BB /* WKey.swift in Sources */,
 				E122DB442A8A468D006D1E7B /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
@@ -2625,6 +2646,7 @@
 				044ECB182A95C2E40042DB3C /* ChainAxelar.swift in Sources */,
 				044ECB2D2A95DFCE0042DB3C /* ChainPersistence750.swift in Sources */,
 				E122DBE62A8A468E006D1E7B /* cosmos_mint_v1beta1_query.pb.swift in Sources */,
+				E1DF77762AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */,
 				E122DB262A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
 				04FAD9E32AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
 				E122DB562A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
@@ -2931,6 +2953,7 @@
 				E122DB372A8A468D006D1E7B /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
 				15BF8482299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */,
 				E122DB512A8A468D006D1E7B /* cosmos_group_v1_query.grpc.swift in Sources */,
+				E1DF776F2AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
 				E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
 				E122DB432A8A468D006D1E7B /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				E1945E28222E7C0600A1436F /* AppDelegate.swift in Sources */,
@@ -2974,6 +2997,7 @@
 				044ECB172A95C2E40042DB3C /* ChainAxelar.swift in Sources */,
 				044ECB2C2A95DFCE0042DB3C /* ChainPersistence750.swift in Sources */,
 				E122DBE52A8A468E006D1E7B /* cosmos_mint_v1beta1_query.pb.swift in Sources */,
+				E1DF77752AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */,
 				E122DB252A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
 				04FAD9E22AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
 				E122DB552A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,

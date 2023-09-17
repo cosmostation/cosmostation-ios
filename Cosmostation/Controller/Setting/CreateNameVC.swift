@@ -102,4 +102,5 @@ enum NewAccountType: Int {
     case create = 0
     case privateKey = 1
     case mnemonc = 2
+    case derive = 3
 }

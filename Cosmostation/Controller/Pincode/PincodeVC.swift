@@ -205,6 +205,8 @@ enum LockType: Int {
     case ForDataCheck = 2
     case ForDisableAppLock = 3
     case ForDeleteAccount = 4
+    case ForCheckMnemonic = 5
+    case ForCheckPrivateKey = 6
     case Unknown = -1
 }
 

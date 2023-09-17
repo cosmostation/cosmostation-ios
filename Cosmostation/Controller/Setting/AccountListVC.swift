@@ -16,6 +16,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
     var mnmonicAccounts = Array<BaseAccount>()
     var pkeyAccounts = Array<BaseAccount>()
     var toDeleteAccount: BaseAccount?
+    var toCheckAccount: BaseAccount?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +94,6 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
     }
     
     func onDeleted() {
-        print("onDeleted")
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
             let pinVC = UIStoryboard.PincodeVC(self, .ForDeleteAccount)
             self.present(pinVC, animated: true)
@@ -102,7 +102,6 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
     
     
     func pinResponse(_ request: LockType, _ result: UnLockResult) {
-        print("pinResponse ", request)
         if (result == .success) {
             if (request == .ForDeleteAccount) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
@@ -115,9 +114,28 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                         self.updateAccountsData()
                         self.tableView.reloadData()
                     }
-                    
+                });
+                
+            } else if (request == .ForCheckMnemonic) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    let checkMenmonicVC = CheckMenmonicVC(nibName: "CheckMenmonicVC", bundle: nil)
+                    checkMenmonicVC.toCheckAccount = self.toCheckAccount
+                    self.navigationItem.title = ""
+                    self.navigationController?.pushViewController(checkMenmonicVC, animated: true)
+                });
+                
+            } else if (request == .ForCheckPrivateKey) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    let checkPrivateKeyVC = CheckPrivateKeyVC(nibName: "CheckPrivateKeyVC", bundle: nil)
+                    checkPrivateKeyVC.toCheckAccount = self.toCheckAccount
+                    self.navigationItem.title = ""
+                    self.navigationController?.pushViewController(checkPrivateKeyVC, animated: true)
                 });
             }
+            
+        } else {
+            self.toDeleteAccount = nil
+            self.toCheckAccount = nil
         }
     }
     
@@ -185,25 +203,18 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource {
             self.onStartSheet(deleteAccountSheet)
         }
         cell.actionMnemonic = {
-//            if (self.accounts[indexPath.row].withMenmonic == true) {
-//                self.toShowAccount = self.accounts[indexPath.row]
-//                let pinVC = PincodeVC(nibName: "PincodeVC", bundle: nil)
-//                pinVC.request = .checkMnemonic
-//                pinVC.resultDelegate = self
-//                self.navigationController!.view.layer.add(self.moveinAni(), forKey: kCATransition)
-//                self.navigationController?.pushViewController(pinVC, animated: false)
-//
-//            } else {
-//                self.onShowToast(NSLocalizedString("error_only_private_key", comment: ""))
-//            }
+            self.toCheckAccount = account
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                let pinVC = UIStoryboard.PincodeVC(self, .ForCheckMnemonic)
+                self.present(pinVC, animated: true)
+            });
         }
         cell.actionPrivateKey = {
-//            self.toShowAccount = self.accounts[indexPath.row]
-//            let pinVC = PincodeVC(nibName: "PincodeVC", bundle: nil)
-//            pinVC.request = .checkPrivateKey
-//            pinVC.resultDelegate = self
-//            self.navigationController!.view.layer.add(self.moveinAni(), forKey: kCATransition)
-//            self.navigationController?.pushViewController(pinVC, animated: false)
+            self.toCheckAccount = account
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKey)
+                self.present(pinVC, animated: true)
+            });
         }
         
         return cell
