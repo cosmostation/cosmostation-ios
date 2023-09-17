@@ -140,7 +140,10 @@ extension CosmosClass {
         let channel = getConnection()
         let group = DispatchGroup()
         mintscanTokens.forEach { token in
-            Task { fetchCw20Balance(group, channel, token) }
+//            Task { fetchCw20Balance(group, channel, token) }
+            DispatchQueue.global().async {
+                self.fetchCw20Balance(group, channel, token)
+            }
         }
 
         group.notify(queue: .main) {

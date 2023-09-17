@@ -34,7 +34,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChainName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ymw-3N-L35">
-                                <rect key="frame" x="68" y="18" width="79.666666666666686" height="17.666666666666671"/>
+                                <rect key="frame" x="64" y="18" width="79.666666666666686" height="17.666666666666671"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
@@ -67,7 +67,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0x1656498b92cb764892768e2d7a2343534b6410f1c8a4a6e4a4deff3ff053d68a" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AvC-ON-HAr">
-                                <rect key="frame" x="68" y="43.666666666666664" width="340" height="15.333333333333336"/>
+                                <rect key="frame" x="64" y="43.666666666666664" width="344" height="15.333333333333336"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
@@ -92,7 +92,7 @@
                             <constraint firstItem="Ebr-sN-Lxe" firstAttribute="centerY" secondItem="DuX-mc-kc0" secondAttribute="centerY" id="Eiu-dr-d7D"/>
                             <constraint firstItem="dO5-Qb-vYj" firstAttribute="centerY" secondItem="Ymw-3N-L35" secondAttribute="centerY" id="MSx-5l-F8B"/>
                             <constraint firstItem="Ebr-sN-Lxe" firstAttribute="top" secondItem="DuX-mc-kc0" secondAttribute="top" constant="12" id="N4r-gp-jNe"/>
-                            <constraint firstItem="Ymw-3N-L35" firstAttribute="leading" secondItem="Ebr-sN-Lxe" secondAttribute="trailing" constant="8" id="Omu-iY-hr6"/>
+                            <constraint firstItem="Ymw-3N-L35" firstAttribute="leading" secondItem="Ebr-sN-Lxe" secondAttribute="trailing" constant="4" id="Omu-iY-hr6"/>
                             <constraint firstAttribute="trailing" secondItem="dO5-Qb-vYj" secondAttribute="trailing" constant="14" id="Vgu-6l-6bq"/>
                             <constraint firstItem="Ebr-sN-Lxe" firstAttribute="leading" secondItem="DuX-mc-kc0" secondAttribute="leading" constant="12" id="Ymb-Bh-53Y"/>
                             <constraint firstItem="AvC-ON-HAr" firstAttribute="leading" secondItem="Ymw-3N-L35" secondAttribute="leading" id="coH-vB-rG1"/>

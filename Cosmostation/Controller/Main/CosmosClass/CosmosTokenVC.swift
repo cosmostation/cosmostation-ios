@@ -39,7 +39,6 @@ class CosmosTokenVC: BaseVC {
 
         baseAccount = BaseData.instance.baseAccount
         selectedChain = baseAccount.toDisplayCosmosChains[parentVC.selectedPosition]
-        mintscanTokens.removeAll()
         selectedChain.fetchAllCw20Balance()
     }
     
@@ -50,6 +49,7 @@ class CosmosTokenVC: BaseVC {
     }
     
     @objc func onFetchCw20Done(_ notification: NSNotification) {
+        mintscanTokens.removeAll()
         onUpdateView()
     }
     
