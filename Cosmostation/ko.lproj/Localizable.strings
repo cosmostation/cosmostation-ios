@@ -251,6 +251,7 @@
 "str_delete_menmonic" = "니모닉 삭제";
 "str_delete_menmonic_msg" = "해당 니모닉을 백업하지 않았을 경우 영구히 다시 복원할 수 없습니다!\n\n또한 연결된 %@개의 지갑도 삭제됩니다.";
 "str_rename" = "이름 변경";
+"str_check_each_private_keys" = "체인별 개인키 확인";
 
 
 "btn_delegate" = "  위임 하기";

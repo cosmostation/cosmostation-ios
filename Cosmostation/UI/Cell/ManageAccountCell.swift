@@ -19,6 +19,7 @@ class ManageAccountCell: UITableViewCell {
     var actionRename: (() -> Void)? = nil
     var actionDelete: (() -> Void)? = nil
     var actionMnemonic: (() -> Void)? = nil
+    var actionPrivateKeys: (() -> Void)? = nil
     var actionPrivateKey: (() -> Void)? = nil
     
     override func awakeFromNib() {
@@ -42,6 +43,9 @@ class ManageAccountCell: UITableViewCell {
         let mnemonic = UIAction(title: NSLocalizedString("str_check_mnemonic", comment: ""), image: nil, handler: { _ in
             self.actionMnemonic?()
         })
+        let privateKeys = UIAction(title: NSLocalizedString("str_check_each_private_keys", comment: ""), image: nil, handler: { _ in
+            self.actionPrivateKeys?()
+        })
         let privateKey = UIAction(title: NSLocalizedString("str_check_private_key", comment: ""), image: nil, handler: { _ in
             self.actionPrivateKey?()
         })
@@ -56,7 +60,7 @@ class ManageAccountCell: UITableViewCell {
                                   image: nil,
                                   identifier: nil,
                                   options: .displayInline,
-                                  children: [rename, delete, mnemonic])
+                                  children: [rename, delete, mnemonic, privateKeys])
             
         } else {
             typeImg.image = UIImage(named: "iconPrivateKey")

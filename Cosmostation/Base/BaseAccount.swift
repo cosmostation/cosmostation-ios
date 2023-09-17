@@ -103,6 +103,8 @@ public class BaseAccount {
         }
     }
     
+
+    
     
     func updateAllValue() {
         toDisplayCosmosChains.forEach { chain in
@@ -123,6 +125,33 @@ public class BaseAccount {
             if (toDisplayNames.contains($0.id) == true && toDisplayNames.contains($1.id) == false) { return true }
             return false
         }
+    }
+}
+
+extension BaseAccount {
+    func initOnyKeyData() async -> [CosmosClass] {
+        allCosmosClassChains.removeAll()
+        ALLCOSMOSCLASS().forEach { chain in
+            allCosmosClassChains.append(chain)
+        }
+        
+        let keychain = BaseData.instance.getKeyChain()
+        if (type == .withMnemonic) {
+            if let secureData = try? keychain.getString(uuid.sha1()),
+               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
+                allCosmosClassChains.forEach { chain in
+                    chain.setInfoWithSeed(seed, lastHDPath)
+                }
+            }
+            
+        } else if (type == .onlyPrivateKey) {
+            if let secureKey = try? keychain.getString(uuid.sha1()) {
+                allCosmosClassChains.forEach { chain in
+                    chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                }
+            }
+        }
+        return allCosmosClassChains
     }
 }
 

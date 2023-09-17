@@ -124,6 +124,14 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                     self.navigationController?.pushViewController(checkMenmonicVC, animated: true)
                 });
                 
+            } else if (request == .ForCheckPrivateKeys) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    let checkPrivateKeysVC = CheckPrivateKeysVC(nibName: "CheckPrivateKeysVC", bundle: nil)
+                    checkPrivateKeysVC.toCheckAccount = self.toCheckAccount
+                    self.navigationItem.title = ""
+                    self.navigationController?.pushViewController(checkPrivateKeysVC, animated: true)
+                });
+                
             } else if (request == .ForCheckPrivateKey) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     let checkPrivateKeyVC = CheckPrivateKeyVC(nibName: "CheckPrivateKeyVC", bundle: nil)
@@ -206,6 +214,13 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource {
             self.toCheckAccount = account
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                 let pinVC = UIStoryboard.PincodeVC(self, .ForCheckMnemonic)
+                self.present(pinVC, animated: true)
+            });
+        }
+        cell.actionPrivateKeys = {
+            self.toCheckAccount = account
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKeys)
                 self.present(pinVC, animated: true)
             });
         }

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckPrivateKeysVC" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="checkBtn" destination="Mhd-Jd-5xO" id="d6y-ja-f7v"/>
+                <outlet property="lastPathLabel" destination="dmo-6S-geB" id="1aM-r4-hNd"/>
+                <outlet property="nameCardView" destination="UK9-n2-Qnb" id="cba-U7-yf1"/>
+                <outlet property="nameLabel" destination="lfV-f9-ECe" id="ZSr-q3-rI8"/>
+                <outlet property="tableView" destination="diG-9s-GXU" id="cq1-Ih-eq1"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UK9-n2-Qnb" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="67" width="377" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfV-f9-ECe">
+                            <rect key="frame" x="20" y="23" width="99" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="Dpl-ua-tQ5"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last HD Path : 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmo-6S-geB">
+                            <rect key="frame" x="250.66666666666671" y="23" width="106.33333333333334" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="ufu-U9-RMQ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="textColor" name="_color02"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="dmo-6S-geB" secondAttribute="trailing" constant="20" id="Fvt-9j-Qz7"/>
+                        <constraint firstItem="lfV-f9-ECe" firstAttribute="leading" secondItem="UK9-n2-Qnb" secondAttribute="leading" constant="20" id="K01-a8-k9t"/>
+                        <constraint firstAttribute="height" constant="60" id="moc-LX-A27"/>
+                        <constraint firstItem="lfV-f9-ECe" firstAttribute="centerY" secondItem="UK9-n2-Qnb" secondAttribute="centerY" id="oDu-FM-h8S"/>
+                        <constraint firstItem="dmo-6S-geB" firstAttribute="centerY" secondItem="UK9-n2-Qnb" secondAttribute="centerY" id="vkV-sp-ch0"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="diG-9s-GXU">
+                    <rect key="frame" x="0.0" y="135" width="393" height="617"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" name="_primary"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mhd-Jd-5xO" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <color key="backgroundColor" name="_primary"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="TMw-nT-N04"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Confirm">
+                        <color key="titleColor" name="_color01"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="VmD-AU-mxs"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" name="_primary"/>
+            <constraints>
+                <constraint firstItem="UK9-n2-Qnb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="1qf-7y-DFl"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="diG-9s-GXU" secondAttribute="leading" id="2uk-k2-WJM"/>
+                <constraint firstAttribute="bottom" secondItem="Mhd-Jd-5xO" secondAttribute="bottom" constant="38" id="7MQ-Iu-7gH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="diG-9s-GXU" secondAttribute="trailing" id="M3e-Mg-B4S"/>
+                <constraint firstItem="Mhd-Jd-5xO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="Sof-yq-Hyh"/>
+                <constraint firstItem="UK9-n2-Qnb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="ZVI-ib-rI1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UK9-n2-Qnb" secondAttribute="trailing" constant="8" id="fiA-Qs-Bmk"/>
+                <constraint firstItem="diG-9s-GXU" firstAttribute="top" secondItem="UK9-n2-Qnb" secondAttribute="bottom" constant="8" id="sbo-bS-FRf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Mhd-Jd-5xO" secondAttribute="trailing" constant="8" id="uh9-rE-8cy"/>
+                <constraint firstItem="Mhd-Jd-5xO" firstAttribute="top" secondItem="diG-9s-GXU" secondAttribute="bottom" constant="8" id="v2V-bQ-Q89"/>
+            </constraints>
+            <point key="canvasLocation" x="124" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

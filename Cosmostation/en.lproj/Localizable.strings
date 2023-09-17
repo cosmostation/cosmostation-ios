@@ -251,6 +251,7 @@
 "str_delete_menmonic" = "Delete Mnemonic";
 "str_delete_menmonic_msg" = "If you do not backup your mnemonics, you can not find it again!\n\nAnd %@ derived wallets will also be deleted";
 "str_rename" = "Change Name";
+"str_check_each_private_keys" = "Check private key for each chain";
 
 
 "btn_delegate" = "  Delegate";
