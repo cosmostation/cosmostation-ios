@@ -88,7 +88,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
     func onCheckPinforPrivateKeys(_ account: BaseAccount) {
         self.toCheckAccount = account
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-            let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKey)
+            let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKeys)
             self.present(pinVC, animated: true)
         });
     }
@@ -96,7 +96,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
     func onCheckPinforPrivateKey(_ account: BaseAccount) {
         self.toCheckAccount = account
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-            let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKeys)
+            let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKey)
             self.present(pinVC, animated: true)
         });
     }
@@ -243,10 +243,10 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource {
             self.onCheckPinforMnemonic(account)
         }
         cell.actionPrivateKeys = {
-            self.onCheckPinforPrivateKey(account)
+            self.onCheckPinforPrivateKeys(account)
         }
         cell.actionPrivateKey = {
-            self.onCheckPinforPrivateKeys(account)
+            self.onCheckPinforPrivateKey(account)
         }
         return cell
     }
