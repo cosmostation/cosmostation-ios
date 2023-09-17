@@ -21,10 +21,6 @@ class DappVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let url = URL(string: "https://dapps.cosmostation.io") {
-            webView.load(URLRequest(url: url))
-        }
     }
     
     func initView() {
@@ -53,6 +49,17 @@ class DappVC: BaseVC {
                 self.webView.customUserAgent = "Cosmostation/APP/iOS/DappTab/\(version) \(originUserAgent)"
             }
         }
+        
+        if let url = URL(string: "https://dapps.cosmostation.io") {
+            webView.load(URLRequest(url: url))
+        }
+    }
+    
+    func presentDapp(_ url: URL) {
+        let dappStartVC = DappStartVC(nibName: "DappStartVC", bundle: nil)
+        dappStartVC.url = url
+        dappStartVC.modalTransitionStyle = .coverVertical
+        self.present(dappStartVC, animated: true)
     }
 }
 
@@ -62,6 +69,7 @@ extension DappVC: WKNavigationDelegate, WKUIDelegate {
             if (url.host == "dapps.cosmostation.io") {
                 decisionHandler(.allow)
             } else {
+                self.presentDapp(url)
                 decisionHandler(.cancel)
             }
         } else {

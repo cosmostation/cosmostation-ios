@@ -786,6 +786,10 @@
 		E17748E62282D782003D8CD1 /* BTCProtocolSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E52282D782003D8CD1 /* BTCProtocolSerialization.m */; };
 		E18A4EBB2A95149100D8BC05 /* ChainAssetMantle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */; };
 		E18A4EBC2A95149100D8BC05 /* ChainAssetMantle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */; };
+		E18D73B62AB484AB00FCB1AA /* DappStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18D73B42AB484AB00FCB1AA /* DappStartVC.swift */; };
+		E18D73B72AB484AB00FCB1AA /* DappStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18D73B42AB484AB00FCB1AA /* DappStartVC.swift */; };
+		E18D73B82AB484AB00FCB1AA /* DappStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E18D73B52AB484AB00FCB1AA /* DappStartVC.xib */; };
+		E18D73B92AB484AB00FCB1AA /* DappStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E18D73B52AB484AB00FCB1AA /* DappStartVC.xib */; };
 		E1945E28222E7C0600A1436F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E27222E7C0600A1436F /* AppDelegate.swift */; };
 		E1945E3E222E7E2900A1436F /* SegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E3C222E7E2900A1436F /* SegwitAddrCoder.swift */; };
 		E1945E3F222E7E2900A1436F /* Bech32.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E3D222E7E2900A1436F /* Bech32.swift */; };
@@ -1204,6 +1208,8 @@
 		E17748E42282D782003D8CD1 /* BTCProtocolSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCProtocolSerialization.h; sourceTree = "<group>"; };
 		E17748E52282D782003D8CD1 /* BTCProtocolSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCProtocolSerialization.m; sourceTree = "<group>"; };
 		E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAssetMantle.swift; sourceTree = "<group>"; };
+		E18D73B42AB484AB00FCB1AA /* DappStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappStartVC.swift; sourceTree = "<group>"; };
+		E18D73B52AB484AB00FCB1AA /* DappStartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappStartVC.xib; sourceTree = "<group>"; };
 		E1945E24222E7C0600A1436F /* Cosmostation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cosmostation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1945E27222E7C0600A1436F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1945E33222E7C0800A1436F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1778,6 +1784,8 @@
 				04C6B9C42AAC59EC00B02A95 /* QrAddressPopupVC.xib */,
 				04FAD9CE2AB2032200143A3E /* SwapStartVC.swift */,
 				04FAD9CF2AB2032200143A3E /* SwapStartVC.xib */,
+				E18D73B42AB484AB00FCB1AA /* DappStartVC.swift */,
+				E18D73B52AB484AB00FCB1AA /* DappStartVC.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -2071,6 +2079,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E10EB59A2A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
+				E18D73B92AB484AB00FCB1AA /* DappStartVC.xib in Resources */,
 				0443B89928589B570027A6B9 /* Color.xcassets in Resources */,
 				04FAD9BB2AB0125400143A3E /* BaseSheetCell.xib in Resources */,
 				04FAD9C72AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
@@ -2159,6 +2168,7 @@
 				E11EAE112AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
 				187446FF2930940F00849EE4 /* ApiKey.plist in Resources */,
 				E15980962A83A96E0032892B /* bg0.png in Resources */,
+				E18D73B82AB484AB00FCB1AA /* DappStartVC.xib in Resources */,
 				04FAD9B42AB011AC00143A3E /* SwitchPriceDisplayCell.xib in Resources */,
 				E159808A2A83A96E0032892B /* bg3.png in Resources */,
 				04FAD9BA2AB0125400143A3E /* BaseSheetCell.xib in Resources */,
@@ -2397,6 +2407,7 @@
 				04BA9BD62A985771003E2404 /* ChainSelectVC.swift in Sources */,
 				1876EE8D2A4935EA00C53352 /* Cw20VaultDepositRes.swift in Sources */,
 				E122DC042A8A468E006D1E7B /* cosmos_bank_v1beta1_tx.grpc.swift in Sources */,
+				E18D73B72AB484AB00FCB1AA /* DappStartVC.swift in Sources */,
 				18FFB3DD281AF533004E65BB /* BinanceModel.swift in Sources */,
 				E11069BD2AA4C57600EB02CA /* cosmwasm_wasm_v1_genesis.pb.swift in Sources */,
 				047C10722AAC310600AFA159 /* QrAddressVC.swift in Sources */,
@@ -2739,6 +2750,7 @@
 				04BA9BD52A985771003E2404 /* ChainSelectVC.swift in Sources */,
 				E1945E542231256800A1436F /* BaseConstant.swift in Sources */,
 				E122DC032A8A468E006D1E7B /* cosmos_bank_v1beta1_tx.grpc.swift in Sources */,
+				E18D73B62AB484AB00FCB1AA /* DappStartVC.swift in Sources */,
 				046E9043268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift in Sources */,
 				E11069BC2AA4C57600EB02CA /* cosmwasm_wasm_v1_genesis.pb.swift in Sources */,
 				047C10712AAC310600AFA159 /* QrAddressVC.swift in Sources */,
