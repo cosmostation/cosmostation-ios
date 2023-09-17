@@ -63,7 +63,7 @@ public class BaseAccount {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 allCosmosClassChains.forEach { chain in
                     Task {
-                        chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
+                        chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         chain.fetchData()
                     }
                 }
@@ -95,7 +95,7 @@ public class BaseAccount {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 toDisplayCosmosChains.forEach { chain in
                     Task {
-                        chain.setInfoWithPrivateKey(secureKey!.hexadecimal!)
+                        chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         chain.fetchData()
                     }
                 }
