@@ -187,6 +187,10 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
+                let accountListVC = AccountListVC(nibName: "AccountListVC", bundle: nil)
+                accountListVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(accountListVC, animated: true)
                 
             } else if (indexPath.row == 1) {
                 
@@ -211,7 +215,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchPriceColor
-                onStartSheet(baseSheet)
+                onStartSheet(baseSheet, 240)
                 
             } else if (indexPath.row == 5) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)

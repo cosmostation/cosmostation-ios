@@ -102,7 +102,7 @@
 "str_copy_clipboard" = "クリップボードにコピー";
 "str_mnemonic_phrase" = "ニーモニック文句";
 "str_delete_mnemonic" = "ニーモニック削除";
-"str_add_wallet" = "ウォレット追加";
+"str_add_account" = "アカウントを追加";
 "str_import_mnemonic" = "ニーモニック復元";
 "str_create_mnemonic" = "ニーモニック生成";
 "str_derived_wallets" = "派生したウォレット数";
@@ -243,6 +243,14 @@
 "str_account_with_mnemonic" = "ニーモニックアカウント";
 "str_copy" = "コピー";
 "str_base_system" = "システム";
+"str_check_mnemonic" = "ニーモニックの確認";
+"str_check_private_key" = "プライベートキー確認";
+"str_delete_account" = "アカウントの削除";
+"str_delete_account_title" = "%@の削除";
+"str_delete_account_msg" = "アカウントのすべての情報が削除されます。\ nニーモニックまたは秘密鍵をバックアップしていない場合、そのウォレットを永久に復元することはできません！";
+"str_delete_menmonic" = "ニーモニック削除";
+"str_delete_menmonic_msg" = "ニーモニックをバックアップしないと、二度と復元することができません!\nまた、つながった%@個のウォレットも削除されます。";
+"str_rename" = "名前変更";
 
 
 "btn_delegate" = "  委任する";
@@ -526,8 +534,6 @@
 "sort_by_value" = "金額で並べ替え";
 "wallet_dash" = "財布 ";
 "with_mnemonic" = "ニーモニック付き";
-"check_mnemonic" = "ニーモニックの確認";
-"check_private_key" = "プライベートキー確認";
 "import_menmonic" = "ニーモニックをインポートします";
 "import_private_key" = "秘密キーをインポートします";
 "change_wallet_name" = "ウォレット名変更";
@@ -538,10 +544,6 @@
 "mnemonic_name" = "ニーモニック名";
 "share_text" = "アドレス共有";
 "share_qr" = "QRコード共有";
-"delete_wallet" = "ウォレット削除";
-"delete_wallet_msg" = "このウォレットに関するすべての情報が削除されます。復旧単語をバックアップしないと、ウォーレットを永久に復元できません。";
-"delete_menmonic" = "ニーモニック削除";
-"delete_menmonic_msg" = "ニーモニックをバックアップしないと、二度と復元することができません!\nまた、つながった%@個のウォレットも削除されます。";
 "ready" = "準備";
 "imported" = "登録済み";
 "override" = "オーバーライド";
@@ -724,7 +726,6 @@
 "close" = "閉じる";
 "cancel" = "キャンセル";
 "ok" = "OK";
-"confirm" = "確認";
 "settings" = "設定";
 "continue" = "次";
 "wait" = "待って";

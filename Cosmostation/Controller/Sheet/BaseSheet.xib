@@ -27,20 +27,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sheet Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQz-pl-DzJ">
-                    <rect key="frame" x="16" y="79" width="84.666666666666671" height="21.333333333333329"/>
+                    <rect key="frame" x="20" y="95" width="84.666666666666671" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                     <color key="textColor" name="_color01"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6T-Wd-Q5b">
-                    <rect key="frame" x="0.0" y="112.33333333333333" width="393" height="0.6666666666666714"/>
+                    <rect key="frame" x="0.0" y="135.33333333333337" width="393" height="0.33333333333331439"/>
                     <color key="backgroundColor" name="_divider"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="0.5" id="K1e-c9-jcx"/>
+                        <constraint firstAttribute="height" constant="0.29999999999999999" id="K1e-c9-jcx"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="y3H-2O-YKP">
-                    <rect key="frame" x="0.0" y="119" width="393" height="733"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="y3H-2O-YKP">
+                    <rect key="frame" x="0.0" y="135.66666666666669" width="393" height="716.33333333333326"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
@@ -48,15 +48,15 @@
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstItem="O6T-Wd-Q5b" firstAttribute="top" secondItem="fQz-pl-DzJ" secondAttribute="bottom" constant="12" id="0Kn-1d-5Et"/>
+                <constraint firstItem="O6T-Wd-Q5b" firstAttribute="top" secondItem="fQz-pl-DzJ" secondAttribute="bottom" constant="20" id="0Kn-1d-5Et"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="y3H-2O-YKP" secondAttribute="trailing" id="H5B-W7-DJI"/>
                 <constraint firstAttribute="bottom" secondItem="y3H-2O-YKP" secondAttribute="bottom" id="It2-8q-kwj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="O6T-Wd-Q5b" secondAttribute="trailing" id="ShF-fI-uEM"/>
                 <constraint firstItem="y3H-2O-YKP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VqD-RM-Zhg"/>
-                <constraint firstItem="y3H-2O-YKP" firstAttribute="top" secondItem="O6T-Wd-Q5b" secondAttribute="bottom" constant="6" id="c80-fa-xcu"/>
+                <constraint firstItem="y3H-2O-YKP" firstAttribute="top" secondItem="O6T-Wd-Q5b" secondAttribute="bottom" id="c80-fa-xcu"/>
                 <constraint firstItem="O6T-Wd-Q5b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fbg-WD-fKn"/>
-                <constraint firstItem="fQz-pl-DzJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="lfK-98-Ddr"/>
-                <constraint firstItem="fQz-pl-DzJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="waU-4s-JD9"/>
+                <constraint firstItem="fQz-pl-DzJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="lfK-98-Ddr"/>
+                <constraint firstItem="fQz-pl-DzJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="waU-4s-JD9"/>
             </constraints>
             <point key="canvasLocation" x="139.69465648854961" y="20.422535211267608"/>
         </view>
@@ -66,13 +66,13 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_colorBg">
-            <color red="0.16862745098039217" green="0.16862745098039217" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_divider">
-            <color red="0.99999600649999998" green="1" blue="1" alpha="0.20232305463576158" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="0.20200000703334808" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.33700001239776611" green="0.016000000759959221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

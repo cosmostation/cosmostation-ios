@@ -102,7 +102,7 @@
 "str_copy_clipboard" = "Copy to Clipboard";
 "str_mnemonic_phrase" = "Mnemonic Phrase";
 "str_delete_mnemonic" = "Delete Mnemonic";
-"str_add_wallet" = "Add Wallet";
+"str_add_account" = "Add account";
 "str_import_mnemonic" = "Import Mnemonic";
 "str_create_mnemonic" = "Create Mnemonic";
 "str_derived_wallets" = "Derived Wallets";
@@ -243,6 +243,14 @@
 "str_account_with_mnemonic" = "Mnemonic Account";
 "str_copy" = "Copy";
 "str_base_system" = "System";
+"str_check_mnemonic" = "Check Mnemonic";
+"str_check_private_key" = "Check PrivateKey";
+"str_delete_account" = "Delete Account";
+"str_delete_account_title" = "Delete %@ ";
+"str_delete_account_msg" = "All information in your account will be deleted.\nIf you have not backed up your mnemonic or private key, you will not be able to permanently restore your wallet!";
+"str_delete_menmonic" = "Delete Mnemonic";
+"str_delete_menmonic_msg" = "If you do not backup your mnemonics, you can not find it again!\n\nAnd %@ derived wallets will also be deleted";
+"str_rename" = "Change Name";
 
 
 "btn_delegate" = "  Delegate";
@@ -526,8 +534,6 @@
 "sort_by_value" = "By Value";
 "wallet_dash" = "Wallet ";
 "with_mnemonic" = "With Mnemonics ";
-"check_mnemonic" = "Check Mnemonic";
-"check_private_key" = "Check PrivateKey";
 "import_menmonic" = "Import Mnemonic";
 "import_private_key" = "Import PrivateKey";
 "change_wallet_name" = "Change Wallet Name";
@@ -538,10 +544,6 @@
 "mnemonic_name" = "Mnemonic name";
 "share_text" = "Share Text Address";
 "share_qr" = "Share QR Code Image";
-"delete_wallet" = "Delete Wallet";
-"delete_wallet_msg" = "All information about this wallet will be deleted. \nIf you do not backup your mnemonics, you can not find it again!";
-"delete_menmonic" = "Delete Mnemonic";
-"delete_menmonic_msg" = "If you do not backup your mnemonics, you can not find it again!\n\nAnd %@ derived wallets will also be deleted";
 "ready" = "Ready";
 "imported" = "Imported";
 "override" = "Override";
@@ -724,7 +726,6 @@
 "close" = "Close";
 "cancel" = "Cancel";
 "ok" = "OK";
-"confirm" = "Confirm";
 "settings" = "Settings";
 "continue" = "Continue";
 "wait" = "Wait";

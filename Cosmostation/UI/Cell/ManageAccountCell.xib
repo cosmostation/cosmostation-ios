@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="87" id="KGk-i7-Jjw" customClass="ManageAccountCell" customModule="Cosmostation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="499" height="87"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="499" height="87"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PU2-f0-znI" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
+                        <rect key="frame" x="8" y="4" width="483" height="79"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconMnemonic" translatesAutoresizingMaskIntoConstraints="NO" id="Q7b-SO-oPr">
+                                <rect key="frame" x="12" y="18" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="iNJ-8e-Sya"/>
+                                    <constraint firstAttribute="width" constant="32" id="ww6-1a-wJo"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WTw-aH-fUU">
+                                <rect key="frame" x="57.999999999999993" y="27" width="93.333333333333314" height="14"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCM-dq-7mh">
+                                        <rect key="frame" x="0.0" y="0.0" width="93.333333333333329" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="Ot7-xg-ZEa"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                        <color key="textColor" name="_color01"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5z9-og-ztW">
+                                        <rect key="frame" x="0.0" y="14" width="73.333333333333329" height="12"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="po4-Zh-V6T"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                        <color key="textColor" name="_color02"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9r-iw-IcR">
+                                <rect key="frame" x="435" y="12" width="48" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="azS-J6-yv4"/>
+                                    <constraint firstAttribute="width" constant="48" id="n3l-hb-hmz"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="iconHandle"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="WTw-aH-fUU" firstAttribute="leading" secondItem="Q7b-SO-oPr" secondAttribute="trailing" constant="14" id="Hp8-8w-aqy"/>
+                            <constraint firstItem="Q7b-SO-oPr" firstAttribute="leading" secondItem="PU2-f0-znI" secondAttribute="leading" constant="12" id="ZRo-i5-yx1"/>
+                            <constraint firstItem="B9r-iw-IcR" firstAttribute="centerY" secondItem="PU2-f0-znI" secondAttribute="centerY" id="aCP-xL-HYG"/>
+                            <constraint firstItem="WTw-aH-fUU" firstAttribute="centerY" secondItem="Q7b-SO-oPr" secondAttribute="centerY" id="ate-DJ-NYV"/>
+                            <constraint firstAttribute="trailing" secondItem="B9r-iw-IcR" secondAttribute="trailing" id="dOt-LF-AKu"/>
+                            <constraint firstAttribute="bottom" secondItem="Q7b-SO-oPr" secondAttribute="bottom" constant="18" id="hEg-kJ-Ugj"/>
+                            <constraint firstItem="Q7b-SO-oPr" firstAttribute="top" secondItem="PU2-f0-znI" secondAttribute="top" constant="18" id="tav-wx-COw"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="PU2-f0-znI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="107-1n-4r2"/>
+                    <constraint firstAttribute="bottom" secondItem="PU2-f0-znI" secondAttribute="bottom" constant="4" id="6ge-5t-I2e"/>
+                    <constraint firstItem="PU2-f0-znI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="rxX-d9-KZJ"/>
+                    <constraint firstAttribute="trailing" secondItem="PU2-f0-znI" secondAttribute="trailing" constant="8" id="xB4-xO-bhY"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" name="_primary"/>
+            <connections>
+                <outlet property="editBtn" destination="B9r-iw-IcR" id="XYp-Cv-MIC"/>
+                <outlet property="nameLabel" destination="SCM-dq-7mh" id="HPL-Jg-Q2K"/>
+                <outlet property="rootView" destination="PU2-f0-znI" id="kDP-OT-iJ1"/>
+                <outlet property="typeImg" destination="Q7b-SO-oPr" id="IkS-sU-m26"/>
+                <outlet property="typeLabel" destination="5z9-og-ztW" id="fNk-0e-kRU"/>
+            </connections>
+            <point key="canvasLocation" x="167.17557251908397" y="34.154929577464792"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="iconHandle" width="24" height="24"/>
+        <image name="iconMnemonic" width="24" height="24"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

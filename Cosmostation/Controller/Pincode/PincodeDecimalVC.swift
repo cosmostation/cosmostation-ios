@@ -65,7 +65,6 @@ class PincodeDecimalVC: UIViewController {
     }
     
     @IBAction func onDecimalClick(_ sender: UIButton) {
-        print("onDecimalClick ", sender.titleLabel?.text)
         NotificationCenter.default.post(name: Notification.Name("pinCodeClick"), object: nil, userInfo: ["input": (sender.titleLabel?.text)!])
     }
     

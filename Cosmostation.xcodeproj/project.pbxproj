@@ -236,6 +236,28 @@
 		04FAD9D62AB204FF00143A3E /* FixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9D42AB204FF00143A3E /* FixCardView.swift */; };
 		04FAD9D82AB438C900143A3E /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9D72AB438C900143A3E /* DropDownView.swift */; };
 		04FAD9D92AB438C900143A3E /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9D72AB438C900143A3E /* DropDownView.swift */; };
+		04FAD9DC2AB6D8DC00143A3E /* AccountListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9DA2AB6D8DC00143A3E /* AccountListVC.swift */; };
+		04FAD9DD2AB6D8DC00143A3E /* AccountListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9DA2AB6D8DC00143A3E /* AccountListVC.swift */; };
+		04FAD9DE2AB6D8DC00143A3E /* AccountListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9DB2AB6D8DC00143A3E /* AccountListVC.xib */; };
+		04FAD9DF2AB6D8DC00143A3E /* AccountListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9DB2AB6D8DC00143A3E /* AccountListVC.xib */; };
+		04FAD9E22AB6D8ED00143A3E /* ChainListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9E02AB6D8ED00143A3E /* ChainListVC.swift */; };
+		04FAD9E32AB6D8ED00143A3E /* ChainListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9E02AB6D8ED00143A3E /* ChainListVC.swift */; };
+		04FAD9E42AB6D8ED00143A3E /* ChainListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9E12AB6D8ED00143A3E /* ChainListVC.xib */; };
+		04FAD9E52AB6D8ED00143A3E /* ChainListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9E12AB6D8ED00143A3E /* ChainListVC.xib */; };
+		04FAD9E82AB6DBCE00143A3E /* ManageAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9E62AB6DBCE00143A3E /* ManageAccountCell.swift */; };
+		04FAD9E92AB6DBCE00143A3E /* ManageAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9E62AB6DBCE00143A3E /* ManageAccountCell.swift */; };
+		04FAD9EA2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9E72AB6DBCE00143A3E /* ManageAccountCell.xib */; };
+		04FAD9EB2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9E72AB6DBCE00143A3E /* ManageAccountCell.xib */; };
+		04FAD9EE2AB71D3300143A3E /* RenameSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9EC2AB71D3300143A3E /* RenameSheet.swift */; };
+		04FAD9EF2AB71D3300143A3E /* RenameSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9EC2AB71D3300143A3E /* RenameSheet.swift */; };
+		04FAD9F02AB71D3300143A3E /* RenameSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9ED2AB71D3300143A3E /* RenameSheet.xib */; };
+		04FAD9F12AB71D3300143A3E /* RenameSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9ED2AB71D3300143A3E /* RenameSheet.xib */; };
+		04FAD9F42AB71D5000143A3E /* DeleteAccountSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9F22AB71D5000143A3E /* DeleteAccountSheet.swift */; };
+		04FAD9F52AB71D5000143A3E /* DeleteAccountSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9F22AB71D5000143A3E /* DeleteAccountSheet.swift */; };
+		04FAD9F62AB71D5000143A3E /* DeleteAccountSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9F32AB71D5000143A3E /* DeleteAccountSheet.xib */; };
+		04FAD9F72AB71D5000143A3E /* DeleteAccountSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAD9F32AB71D5000143A3E /* DeleteAccountSheet.xib */; };
+		04FAD9F92AB7221600143A3E /* BaseRedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9F82AB7221600143A3E /* BaseRedButton.swift */; };
+		04FAD9FA2AB7221600143A3E /* BaseRedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAD9F82AB7221600143A3E /* BaseRedButton.swift */; };
 		151734672A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
 		151734682A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */; };
 		1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */; };
@@ -936,6 +958,17 @@
 		04FAD9CF2AB2032200143A3E /* SwapStartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwapStartVC.xib; sourceTree = "<group>"; };
 		04FAD9D42AB204FF00143A3E /* FixCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixCardView.swift; sourceTree = "<group>"; };
 		04FAD9D72AB438C900143A3E /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		04FAD9DA2AB6D8DC00143A3E /* AccountListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListVC.swift; sourceTree = "<group>"; };
+		04FAD9DB2AB6D8DC00143A3E /* AccountListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountListVC.xib; sourceTree = "<group>"; };
+		04FAD9E02AB6D8ED00143A3E /* ChainListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainListVC.swift; sourceTree = "<group>"; };
+		04FAD9E12AB6D8ED00143A3E /* ChainListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChainListVC.xib; sourceTree = "<group>"; };
+		04FAD9E62AB6DBCE00143A3E /* ManageAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAccountCell.swift; sourceTree = "<group>"; };
+		04FAD9E72AB6DBCE00143A3E /* ManageAccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageAccountCell.xib; sourceTree = "<group>"; };
+		04FAD9EC2AB71D3300143A3E /* RenameSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenameSheet.swift; sourceTree = "<group>"; };
+		04FAD9ED2AB71D3300143A3E /* RenameSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RenameSheet.xib; sourceTree = "<group>"; };
+		04FAD9F22AB71D5000143A3E /* DeleteAccountSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountSheet.swift; sourceTree = "<group>"; };
+		04FAD9F32AB71D5000143A3E /* DeleteAccountSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteAccountSheet.xib; sourceTree = "<group>"; };
+		04FAD9F82AB7221600143A3E /* BaseRedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRedButton.swift; sourceTree = "<group>"; };
 		151734662A208EC50014AAD6 /* Cw20NeutronVestingReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingReq.swift; sourceTree = "<group>"; };
 		151734692A2090640014AAD6 /* Cw20NeutronVestingRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20NeutronVestingRes.swift; sourceTree = "<group>"; };
 		1577DAC729B9F07800C360EC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -1414,6 +1447,10 @@
 				040733022AA442B6001C63DD /* ImportMnemonicCheckVC.xib */,
 				04FA747D2AA0CAA2001A2830 /* ImportPrivKeyVC.swift */,
 				04FA747E2AA0CAA3001A2830 /* ImportPrivKeyVC.xib */,
+				04FAD9DA2AB6D8DC00143A3E /* AccountListVC.swift */,
+				04FAD9DB2AB6D8DC00143A3E /* AccountListVC.xib */,
+				04FAD9E02AB6D8ED00143A3E /* ChainListVC.swift */,
+				04FAD9E12AB6D8ED00143A3E /* ChainListVC.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1424,6 +1461,10 @@
 				04FA74702AA043CF001A2830 /* SheetCell */,
 				04FA746A2A9F8652001A2830 /* BaseSheet.swift */,
 				04FA746B2A9F8652001A2830 /* BaseSheet.xib */,
+				04FAD9EC2AB71D3300143A3E /* RenameSheet.swift */,
+				04FAD9ED2AB71D3300143A3E /* RenameSheet.xib */,
+				04FAD9F22AB71D5000143A3E /* DeleteAccountSheet.swift */,
+				04FAD9F32AB71D5000143A3E /* DeleteAccountSheet.xib */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -1740,6 +1781,8 @@
 				E11EAE142AAD879A003BFC7F /* SettingSwitchCell.xib */,
 				E11EAE192AAD87AD003BFC7F /* SettingPriceCell.swift */,
 				E11EAE1A2AAD87AD003BFC7F /* SettingPriceCell.xib */,
+				04FAD9E62AB6DBCE00143A3E /* ManageAccountCell.swift */,
+				04FAD9E72AB6DBCE00143A3E /* ManageAccountCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1752,6 +1795,7 @@
 				04FAD9D42AB204FF00143A3E /* FixCardView.swift */,
 				04CB91322A910BDC00375354 /* CardViewCell.swift */,
 				E14E29792A99C2CA00939AD2 /* BaseButton.swift */,
+				04FAD9F82AB7221600143A3E /* BaseRedButton.swift */,
 				04FAD9D72AB438C900143A3E /* DropDownView.swift */,
 			);
 			path = View;
@@ -2102,18 +2146,22 @@
 				E14E29782A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
 				04FA746F2A9F8652001A2830 /* BaseSheet.xib in Resources */,
 				04527DBC2A937CA2005F72D7 /* AssetCell.xib in Resources */,
+				04FAD9F12AB71D3300143A3E /* RenameSheet.xib in Resources */,
 				04FAD9B52AB011AC00143A3E /* SwitchPriceDisplayCell.xib in Resources */,
 				E15980912A83A96E0032892B /* bg6.png in Resources */,
 				1809C35229D16C80008884C1 /* injectScript.js in Resources */,
 				04F4061829ED119800CD88E4 /* Init.storyboard in Resources */,
 				04FA74882AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
 				E15980952A83A96E0032892B /* bg7.png in Resources */,
+				04FAD9EB2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */,
+				04FAD9E52AB6D8ED00143A3E /* ChainListVC.xib in Resources */,
 				040733062AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
 				18F4EAD22A4DA0A500CFBE2B /* ApiKey.plist in Resources */,
 				187447012930942400849EE4 /* ApiKeyDev.plist in Resources */,
 				E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				04BA9BD82A985771003E2404 /* ChainSelectVC.xib in Resources */,
 				04FA74552A9D97A0001A2830 /* Pincode.storyboard in Resources */,
+				04FAD9DF2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				E15980992A83A96E0032892B /* bg5.png in Resources */,
 				E15980932A83A96E0032892B /* bg2.png in Resources */,
 				18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */,
@@ -2122,6 +2170,7 @@
 				E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				E1D5382A2A96644F00FB0403 /* loading2.json in Resources */,
 				04FA747C2AA0446A001A2830 /* NewAccountCell.xib in Resources */,
+				04FAD9F72AB71D5000143A3E /* DeleteAccountSheet.xib in Resources */,
 				E15980972A83A96E0032892B /* bg0.png in Resources */,
 				04FA74662A9F5833001A2830 /* CreateNameVC.xib in Resources */,
 				04FA74742AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
@@ -2145,6 +2194,7 @@
 				04FA747B2AA0446A001A2830 /* NewAccountCell.xib in Resources */,
 				E11EAE1D2AAD87AD003BFC7F /* SettingPriceCell.xib in Resources */,
 				04FA746E2A9F8652001A2830 /* BaseSheet.xib in Resources */,
+				04FAD9EA2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */,
 				040733052AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
 				040732FD2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */,
 				04FA74872AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
@@ -2152,10 +2202,12 @@
 				E15980922A83A96E0032892B /* bg2.png in Resources */,
 				1809C35129D16C80008884C1 /* injectScript.js in Resources */,
 				28F8EFB1286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
+				04FAD9F62AB71D5000143A3E /* DeleteAccountSheet.xib in Resources */,
 				E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */,
 				1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */,
 				04FA74812AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */,
 				E1E0DBC82A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
+				04FAD9F02AB71D3300143A3E /* RenameSheet.xib in Resources */,
 				04FA74542A9D97A0001A2830 /* Pincode.storyboard in Resources */,
 				E1D538292A96644F00FB0403 /* loading2.json in Resources */,
 				04172B9329F7AE4000D6279C /* Roboto-Bold.ttf in Resources */,
@@ -2163,6 +2215,7 @@
 				E15980982A83A96E0032892B /* bg5.png in Resources */,
 				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				04527DC12A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
+				04FAD9DE2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				E15980942A83A96E0032892B /* bg7.png in Resources */,
 				E11EAE112AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
@@ -2183,6 +2236,7 @@
 				E122DC632A8CA052006D1E7B /* Resources.xcassets in Resources */,
 				E10EB59F2A86217A0054A9AF /* bbbb.png in Resources */,
 				04FAD9D22AB2032200143A3E /* SwapStartVC.xib in Resources */,
+				04FAD9E42AB6D8ED00143A3E /* ChainListVC.xib in Resources */,
 				E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */,
 				04FA74732AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
@@ -2313,6 +2367,7 @@
 				E1D6B8CF2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
 				18FFB307281AF533004E65BB /* BinanceProto.swift in Sources */,
 				E122DBDA2A8A468E006D1E7B /* cosmos_staking_v1beta1_query.grpc.swift in Sources */,
+				04FAD9E92AB6DBCE00143A3E /* ManageAccountCell.swift in Sources */,
 				E122DBF42A8A468E006D1E7B /* cosmos_params_v1beta1_query.pb.swift in Sources */,
 				E122DB102A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
 				047BA8D82A94778800D3F7DD /* CosmosHistoryVC.swift in Sources */,
@@ -2323,6 +2378,7 @@
 				E122DB922A8A468D006D1E7B /* cosmos_slashing_v1beta1_query.pb.swift in Sources */,
 				E11069C12AA4C57600EB02CA /* cosmwasm_wasm_v1_ibc.pb.swift in Sources */,
 				18FFB31A281AF533004E65BB /* BinanceHexEncoding.swift in Sources */,
+				04FAD9F52AB71D5000143A3E /* DeleteAccountSheet.swift in Sources */,
 				E122DAFA2A8A468D006D1E7B /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */,
 				E122DC322A8A468E006D1E7B /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
 				E122DBF02A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,
@@ -2493,9 +2549,11 @@
 				E122DC182A8A468E006D1E7B /* cosmos_orm_v1alpha1_schema.pb.swift in Sources */,
 				04FA746D2A9F8652001A2830 /* BaseSheet.swift in Sources */,
 				044ECB212A95DE5D0042DB3C /* ChainKi.swift in Sources */,
+				04FAD9FA2AB7221600143A3E /* BaseRedButton.swift in Sources */,
 				E122DB402A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
 				04FAD9D92AB438C900143A3E /* DropDownView.swift in Sources */,
 				E122DC512A8A4712006D1E7B /* tendermint_crypto_proof.pb.swift in Sources */,
+				04FAD9DD2AB6D8DC00143A3E /* AccountListVC.swift in Sources */,
 				04117B7F2AA5860600637836 /* ChainOsmosis.swift in Sources */,
 				E122DC5F2A8A4712006D1E7B /* tendermint_types_validator.pb.swift in Sources */,
 				04FA74862AA0E2A9001A2830 /* CreateMnemonicVC.swift in Sources */,
@@ -2568,6 +2626,7 @@
 				044ECB2D2A95DFCE0042DB3C /* ChainPersistence750.swift in Sources */,
 				E122DBE62A8A468E006D1E7B /* cosmos_mint_v1beta1_query.pb.swift in Sources */,
 				E122DB262A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
+				04FAD9E32AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
 				E122DB562A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				040733002AA44075001C63DD /* ImportMnemonicVC.swift in Sources */,
 				E122DB9C2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
@@ -2621,6 +2680,7 @@
 				E122DBD42A8A468E006D1E7B /* cosmos_crisis_module_v1_module.pb.swift in Sources */,
 				04CB91342A910BDC00375354 /* CardViewCell.swift in Sources */,
 				E122DAF82A8A468D006D1E7B /* cosmos_vesting_v1beta1_tx.pb.swift in Sources */,
+				04FAD9EF2AB71D3300143A3E /* RenameSheet.swift in Sources */,
 				E122DBB62A8A468D006D1E7B /* cosmos_tx_v1beta1_service.pb.swift in Sources */,
 				E15980812A83A8CE0032892B /* BaseNavi.swift in Sources */,
 			);
@@ -2656,6 +2716,7 @@
 				E1D6B8CE2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
 				046E903D268C413A002CFFE1 /* BinanceProto.swift in Sources */,
 				04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */,
+				04FAD9E82AB6DBCE00143A3E /* ManageAccountCell.swift in Sources */,
 				E122DBD92A8A468E006D1E7B /* cosmos_staking_v1beta1_query.grpc.swift in Sources */,
 				E122DBF32A8A468E006D1E7B /* cosmos_params_v1beta1_query.pb.swift in Sources */,
 				E122DB0F2A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
@@ -2666,6 +2727,7 @@
 				E122DC602A8A4712006D1E7B /* tendermint_abci_types.pb.swift in Sources */,
 				E122DB912A8A468D006D1E7B /* cosmos_slashing_v1beta1_query.pb.swift in Sources */,
 				E11069C02AA4C57600EB02CA /* cosmwasm_wasm_v1_ibc.pb.swift in Sources */,
+				04FAD9F42AB71D5000143A3E /* DeleteAccountSheet.swift in Sources */,
 				E122DAF92A8A468D006D1E7B /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */,
 				E122DC312A8A468E006D1E7B /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
 				E122DBEF2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,
@@ -2836,9 +2898,11 @@
 				E122DC172A8A468E006D1E7B /* cosmos_orm_v1alpha1_schema.pb.swift in Sources */,
 				04FA746C2A9F8652001A2830 /* BaseSheet.swift in Sources */,
 				044ECB202A95DE5D0042DB3C /* ChainKi.swift in Sources */,
+				04FAD9F92AB7221600143A3E /* BaseRedButton.swift in Sources */,
 				E122DB3F2A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
 				04FAD9D82AB438C900143A3E /* DropDownView.swift in Sources */,
 				E122DC502A8A4712006D1E7B /* tendermint_crypto_proof.pb.swift in Sources */,
+				04FAD9DC2AB6D8DC00143A3E /* AccountListVC.swift in Sources */,
 				04117B7E2AA5860600637836 /* ChainOsmosis.swift in Sources */,
 				E122DC5E2A8A4712006D1E7B /* tendermint_types_validator.pb.swift in Sources */,
 				04FA74852AA0E2A9001A2830 /* CreateMnemonicVC.swift in Sources */,
@@ -2911,6 +2975,7 @@
 				044ECB2C2A95DFCE0042DB3C /* ChainPersistence750.swift in Sources */,
 				E122DBE52A8A468E006D1E7B /* cosmos_mint_v1beta1_query.pb.swift in Sources */,
 				E122DB252A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
+				04FAD9E22AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
 				E122DB552A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				040732FF2AA44075001C63DD /* ImportMnemonicVC.swift in Sources */,
 				E122DB9B2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
@@ -2964,6 +3029,7 @@
 				E122DBD32A8A468E006D1E7B /* cosmos_crisis_module_v1_module.pb.swift in Sources */,
 				04CB91332A910BDC00375354 /* CardViewCell.swift in Sources */,
 				E122DAF72A8A468D006D1E7B /* cosmos_vesting_v1beta1_tx.pb.swift in Sources */,
+				04FAD9EE2AB71D3300143A3E /* RenameSheet.swift in Sources */,
 				E122DBB52A8A468D006D1E7B /* cosmos_tx_v1beta1_service.pb.swift in Sources */,
 				E15980802A83A8CE0032892B /* BaseNavi.swift in Sources */,
 			);

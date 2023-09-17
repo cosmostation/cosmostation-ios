@@ -102,7 +102,7 @@
 "str_copy_clipboard" = "클립보드로 복사";
 "str_mnemonic_phrase" = "니모닉 문구";
 "str_delete_mnemonic" = "니모닉 삭제";
-"str_add_wallet" = "지갑 추가";
+"str_add_account" = "계정 추가";
 "str_import_mnemonic" = "니모닉 복원";
 "str_create_mnemonic" = "니모닉 생성";
 "str_derived_wallets" = "파생된 지갑 수";
@@ -243,6 +243,14 @@
 "str_account_with_mnemonic" = "니모닉 계정";
 "str_copy" = "복사";
 "str_base_system" = "시스템";
+"str_check_mnemonic" = "니모닉 확인";
+"str_check_private_key" = "개인키 확인";
+"str_delete_account" = "계정 삭제";
+"str_delete_account_title" = "%@ 삭제";
+"str_delete_account_msg" = "계정의 모든 정보가 삭제됩니다.\n니모닉 또는 개인키를 백업하지 않았을 경우 해당 지갑을 영구히 다시 복원할 수 없습니다!";
+"str_delete_menmonic" = "니모닉 삭제";
+"str_delete_menmonic_msg" = "해당 니모닉을 백업하지 않았을 경우 영구히 다시 복원할 수 없습니다!\n\n또한 연결된 %@개의 지갑도 삭제됩니다.";
+"str_rename" = "이름 변경";
 
 
 "btn_delegate" = "  위임 하기";
@@ -526,8 +534,6 @@
 "sort_by_value" = "금액으로 정렬";
 "wallet_dash" = "내 지갑 ";
 "with_mnemonic" = "전송 가능 지갑";
-"check_mnemonic" = "니모닉 확인";
-"check_private_key" = "개인키 확인";
 "import_menmonic" = "니모닉으로 복원";
 "import_private_key" = "개인키로 복원";
 "change_wallet_name" = "지갑 별칭 변경";
@@ -538,10 +544,6 @@
 "mnemonic_name" = "별칭";
 "share_text" = "\t\t주소 공유\t\t";
 "share_qr" = "\t\tQR 코드 공유\t\t";
-"delete_wallet" = "지갑 삭제";
-"delete_wallet_msg" = "지갑의 모든 정보가 삭제됩니다.\n니모닉을 백업하지 않았을 경우 해당 지갑을 영구히 다시 복원할 수 없습니다!";
-"delete_menmonic" = "니모닉 삭제";
-"delete_menmonic_msg" = "해당 니모닉을 백업하지 않았을 경우 영구히 다시 복원할 수 없습니다!\n\n또한 연결된 %@개의 지갑도 삭제됩니다.";
 "ready" = "준비 완료";
 "imported" = "등록됨";
 "override" = "덮어쓰기";
@@ -724,7 +726,6 @@
 "close" = "닫기";
 "cancel" = "취소";
 "ok" = "OK";
-"confirm" = "확인";
 "settings" = "설정";
 "continue" = "계속";
 "wait" = "기다리기";
@@ -748,6 +749,7 @@
 "title_watch_wallet" = "관찰 지갑 등록";
 "title_restore_privatekey" = "개인키로 지갑복원";
 "title_restore" = "니모닉으로 지갑복원";
+"title_path" = "지갑 선택";
 "title_path" = "지갑 선택";
 "title_delegate" = "위임하기";
 "title_undelegate" = "위임 철회 하기";

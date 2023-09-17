@@ -185,7 +185,7 @@ extension IntroViewController {
     
     func onShowDisableAlert() {
         let alert = UIAlertController(title: NSLocalizedString("error_disable", comment: ""), message: NSLocalizedString("error_disable_msg", comment: ""), preferredStyle: .alert)
-        let action = UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: { _ in
+        let action = UIAlertAction(title: NSLocalizedString("str_confirm", comment: ""), style: .default, handler: { _ in
             exit(-1)
         })
         alert.addAction(action)

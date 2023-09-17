@@ -263,6 +263,24 @@ extension BaseData {
         return try! database.run(toInsert)
     }
     
+    @discardableResult
+    public func updateAccount(_ account: BaseAccount) -> Int64 {
+        let target = TABLE_BASEACCOUNT.filter(BASEACCOUNT_ID == account.id)
+        return try! Int64(database.run(target.update(BASEACCOUNT_NAME <- account.name)))
+    }
+    
+    @discardableResult
+    public func deleteAccount(_ account: BaseAccount) -> Int? {
+        try? getKeyChain().remove(account.uuid.sha1())
+                                  
+        deleteRefAddresses(account.id)
+        
+        let query = TABLE_BASEACCOUNT.filter(BASEACCOUNT_ID == account.id)
+        return try? database.run(query.delete())
+    }
+    
+    
+    
     //V2 version refAddress
     public func selectRefAddresses(_ accountId: Int64) -> Array<RefAddress> {
         var result = Array<RefAddress>()
@@ -298,6 +316,13 @@ extension BaseData {
             return Int(insertRefAddresses(refAddress))
         }
     }
+    
+    @discardableResult
+    public func deleteRefAddresses(_ accountId: Int64) -> Int?  {
+        let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == accountId)
+        return try? database.run(query.delete())
+    }
+    
     
     
     

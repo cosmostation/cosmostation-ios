@@ -97,6 +97,13 @@ class BaseVC: UIViewController {
         present(baseSheet, animated: true)
     }
     
+    func onStartIntro() {
+        let IntroVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "IntroViewController") as! IntroViewController
+        let rootVC = UINavigationController(rootViewController: IntroVC)
+        UIApplication.shared.windows.first?.rootViewController = rootVC
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
+    }
+    
     func onStartMainTab() {
         let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
