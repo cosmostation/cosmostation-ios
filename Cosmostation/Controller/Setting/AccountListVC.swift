@@ -62,6 +62,45 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
         onStartSheet(baseSheet)
     }
     
+    func onShowRenameSheet(_ account: BaseAccount) {
+        let renameSheet = RenameSheet(nibName: "RenameSheet", bundle: nil)
+        renameSheet.toUpdateAccount = account
+        renameSheet.renameDelegate = self
+        self.onStartSheet(renameSheet, 240)
+    }
+    
+    func onShowDeleteSheet(_ account: BaseAccount) {
+        self.toDeleteAccount = account
+        let deleteAccountSheet = DeleteAccountSheet(nibName: "DeleteAccountSheet", bundle: nil)
+        deleteAccountSheet.toDeleteAccount = account
+        deleteAccountSheet.deleteDelegate = self
+        self.onStartSheet(deleteAccountSheet, 280)
+    }
+    
+    func onCheckPinforMnemonic(_ account: BaseAccount) {
+        self.toCheckAccount = account
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            let pinVC = UIStoryboard.PincodeVC(self, .ForCheckMnemonic)
+            self.present(pinVC, animated: true)
+        });
+    }
+    
+    func onCheckPinforPrivateKeys(_ account: BaseAccount) {
+        self.toCheckAccount = account
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKey)
+            self.present(pinVC, animated: true)
+        });
+    }
+    
+    func onCheckPinforPrivateKey(_ account: BaseAccount) {
+        self.toCheckAccount = account
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKeys)
+            self.present(pinVC, animated: true)
+        });
+    }
+    
     func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .NewAccountType) {
             if (result.position == 0) {
@@ -190,48 +229,25 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"ManageAccountCell") as! ManageAccountCell
-        
         var account: BaseAccount!
         if (indexPath.section == 0) { account = mnmonicAccounts[indexPath.row] }
         else { account = pkeyAccounts[indexPath.row] }
         cell.bindAccount(account)
-        
         cell.actionRename = {
-            let renameSheet = RenameSheet(nibName: "RenameSheet", bundle: nil)
-            renameSheet.toUpdateAccount = account
-            renameSheet.renameDelegate = self
-            self.onStartSheet(renameSheet, 240)
+            self.onShowRenameSheet(account)
         }
-        
         cell.actionDelete = {
-            self.toDeleteAccount = account
-            let deleteAccountSheet = DeleteAccountSheet(nibName: "DeleteAccountSheet", bundle: nil)
-            deleteAccountSheet.toDeleteAccount = account
-            deleteAccountSheet.deleteDelegate = self
-            self.onStartSheet(deleteAccountSheet)
+            self.onShowDeleteSheet(account)
         }
         cell.actionMnemonic = {
-            self.toCheckAccount = account
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                let pinVC = UIStoryboard.PincodeVC(self, .ForCheckMnemonic)
-                self.present(pinVC, animated: true)
-            });
+            self.onCheckPinforMnemonic(account)
         }
         cell.actionPrivateKeys = {
-            self.toCheckAccount = account
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKeys)
-                self.present(pinVC, animated: true)
-            });
+            self.onCheckPinforPrivateKey(account)
         }
         cell.actionPrivateKey = {
-            self.toCheckAccount = account
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKey)
-                self.present(pinVC, animated: true)
-            });
+            self.onCheckPinforPrivateKeys(account)
         }
-        
         return cell
     }
     
@@ -239,31 +255,16 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource {
         if (indexPath.section == 0) {
             let account = mnmonicAccounts[indexPath.row]
             let rename = UIAction(title: NSLocalizedString("str_rename", comment: ""), image: nil) { _ in
-                let renameSheet = RenameSheet(nibName: "RenameSheet", bundle: nil)
-                renameSheet.toUpdateAccount = account
-                renameSheet.renameDelegate = self
-                self.onStartSheet(renameSheet, 240)
+                self.onShowRenameSheet(account)
             }
             let delete = UIAction(title: NSLocalizedString("str_delete_account", comment: ""), image: nil) { _ in
-                self.toDeleteAccount = account
-                let deleteAccountSheet = DeleteAccountSheet(nibName: "DeleteAccountSheet", bundle: nil)
-                deleteAccountSheet.toDeleteAccount = account
-                deleteAccountSheet.deleteDelegate = self
-                self.onStartSheet(deleteAccountSheet)
+                self.onShowDeleteSheet(account)
             }
             let mnemonic = UIAction(title: NSLocalizedString("str_check_mnemonic", comment: ""), image: nil) { _ in
-                self.toCheckAccount = account
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    let pinVC = UIStoryboard.PincodeVC(self, .ForCheckMnemonic)
-                    self.present(pinVC, animated: true)
-                });
+                self.onCheckPinforMnemonic(account)
             }
             let privateKeys = UIAction(title: NSLocalizedString("str_check_each_private_keys", comment: ""), image: nil) { _ in
-                self.toCheckAccount = account
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKeys)
-                    self.present(pinVC, animated: true)
-                });
+                self.onCheckPinforPrivateKeys(account)
             }
             return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: nil) { _ in
                 UIMenu(title: "", children: [rename, delete, mnemonic, privateKeys])
@@ -272,24 +273,13 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource {
         } else if (indexPath.section == 1) {
             let account = pkeyAccounts[indexPath.row]
             let rename = UIAction(title: NSLocalizedString("str_rename", comment: ""), image: nil) { _ in
-                let renameSheet = RenameSheet(nibName: "RenameSheet", bundle: nil)
-                renameSheet.toUpdateAccount = account
-                renameSheet.renameDelegate = self
-                self.onStartSheet(renameSheet, 240)
+                self.onShowRenameSheet(account)
             }
             let delete = UIAction(title: NSLocalizedString("str_delete_account", comment: ""), image: nil) { _ in
-                self.toDeleteAccount = account
-                let deleteAccountSheet = DeleteAccountSheet(nibName: "DeleteAccountSheet", bundle: nil)
-                deleteAccountSheet.toDeleteAccount = account
-                deleteAccountSheet.deleteDelegate = self
-                self.onStartSheet(deleteAccountSheet)
+                self.onShowDeleteSheet(account)
             }
             let privateKey = UIAction(title: NSLocalizedString("str_check_private_key", comment: ""), image: nil) { _ in
-                self.toCheckAccount = account
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKey)
-                    self.present(pinVC, animated: true)
-                });
+                self.onCheckPinforPrivateKey(account)
             }
             return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: nil) { _ in
                 UIMenu(title: "", children: [rename, delete, privateKey])
