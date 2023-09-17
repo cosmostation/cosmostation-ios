@@ -235,6 +235,86 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        if (indexPath.section == 0) {
+            let account = mnmonicAccounts[indexPath.row]
+            let rename = UIAction(title: NSLocalizedString("str_rename", comment: ""), image: nil) { _ in
+                let renameSheet = RenameSheet(nibName: "RenameSheet", bundle: nil)
+                renameSheet.toUpdateAccount = account
+                renameSheet.renameDelegate = self
+                self.onStartSheet(renameSheet, 240)
+            }
+            let delete = UIAction(title: NSLocalizedString("str_delete_account", comment: ""), image: nil) { _ in
+                self.toDeleteAccount = account
+                let deleteAccountSheet = DeleteAccountSheet(nibName: "DeleteAccountSheet", bundle: nil)
+                deleteAccountSheet.toDeleteAccount = account
+                deleteAccountSheet.deleteDelegate = self
+                self.onStartSheet(deleteAccountSheet)
+            }
+            let mnemonic = UIAction(title: NSLocalizedString("str_check_mnemonic", comment: ""), image: nil) { _ in
+                self.toCheckAccount = account
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    let pinVC = UIStoryboard.PincodeVC(self, .ForCheckMnemonic)
+                    self.present(pinVC, animated: true)
+                });
+            }
+            let privateKeys = UIAction(title: NSLocalizedString("str_check_each_private_keys", comment: ""), image: nil) { _ in
+                self.toCheckAccount = account
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKeys)
+                    self.present(pinVC, animated: true)
+                });
+            }
+            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: nil) { _ in
+                UIMenu(title: "", children: [rename, delete, mnemonic, privateKeys])
+            }
+            
+        } else if (indexPath.section == 1) {
+            let account = pkeyAccounts[indexPath.row]
+            let rename = UIAction(title: NSLocalizedString("str_rename", comment: ""), image: nil) { _ in
+                let renameSheet = RenameSheet(nibName: "RenameSheet", bundle: nil)
+                renameSheet.toUpdateAccount = account
+                renameSheet.renameDelegate = self
+                self.onStartSheet(renameSheet, 240)
+            }
+            let delete = UIAction(title: NSLocalizedString("str_delete_account", comment: ""), image: nil) { _ in
+                self.toDeleteAccount = account
+                let deleteAccountSheet = DeleteAccountSheet(nibName: "DeleteAccountSheet", bundle: nil)
+                deleteAccountSheet.toDeleteAccount = account
+                deleteAccountSheet.deleteDelegate = self
+                self.onStartSheet(deleteAccountSheet)
+            }
+            let privateKey = UIAction(title: NSLocalizedString("str_check_private_key", comment: ""), image: nil) { _ in
+                self.toCheckAccount = account
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    let pinVC = UIStoryboard.PincodeVC(self, .ForCheckPrivateKey)
+                    self.present(pinVC, animated: true)
+                });
+            }
+            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: nil) { _ in
+                UIMenu(title: "", children: [rename, delete, privateKey])
+            }
+        }
+        return nil
+    }
+
+    func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return makeTargetedPreview(for: configuration)
+    }
+
+    func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return makeTargetedPreview(for: configuration)
+    }
+
+    private func makeTargetedPreview(for configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let indexPath = configuration.identifier as? IndexPath else { return nil }
+        guard let cell = tableView.cellForRow(at: indexPath) as? ManageAccountCell else { return nil }
+
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = .clear
+        return UITargetedPreview(view: cell, parameters: parameters)
+    }
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {
