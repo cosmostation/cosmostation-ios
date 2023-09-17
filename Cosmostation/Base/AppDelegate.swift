@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         BaseData.instance.copySalt = UUID().uuidString
         if UserDefaults.standard.object(forKey: "FirstInstall") == nil {
             KeychainWrapper.standard.removeAllKeys()
+            try? BaseData.instance.getKeyChain().removeAll()
             UserDefaults.standard.set(false, forKey: "FirstInstall")
             UserDefaults.standard.synchronize()
         }
