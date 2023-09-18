@@ -193,6 +193,10 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(accountListVC, animated: true)
                 
             } else if (indexPath.row == 1) {
+                let chainListVC = ChainListVC(nibName: "ChainListVC", bundle: nil)
+                chainListVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(chainListVC, animated: true)
                 
             } else if (indexPath.row == 2) {
                 

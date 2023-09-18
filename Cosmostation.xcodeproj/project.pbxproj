@@ -806,6 +806,10 @@
 		E17638532AA7642800904DB4 /* ChainBinanceBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17638512AA7642800904DB4 /* ChainBinanceBeacon.swift */; };
 		E17748E32282D6AD003D8CD1 /* BTCMnemonic.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E12282D6AD003D8CD1 /* BTCMnemonic.m */; };
 		E17748E62282D782003D8CD1 /* BTCProtocolSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E52282D782003D8CD1 /* BTCProtocolSerialization.m */; };
+		E1831BA42AB82FE60078A28B /* ManageChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1831BA22AB82FE60078A28B /* ManageChainCell.swift */; };
+		E1831BA52AB82FE60078A28B /* ManageChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1831BA22AB82FE60078A28B /* ManageChainCell.swift */; };
+		E1831BA62AB82FE60078A28B /* ManageChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1831BA32AB82FE60078A28B /* ManageChainCell.xib */; };
+		E1831BA72AB82FE60078A28B /* ManageChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1831BA32AB82FE60078A28B /* ManageChainCell.xib */; };
 		E18A4EBB2A95149100D8BC05 /* ChainAssetMantle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */; };
 		E18A4EBC2A95149100D8BC05 /* ChainAssetMantle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */; };
 		E18D73B62AB484AB00FCB1AA /* DappStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18D73B42AB484AB00FCB1AA /* DappStartVC.swift */; };
@@ -1256,6 +1260,8 @@
 		E17748E22282D6AD003D8CD1 /* BTCMnemonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCMnemonic.h; sourceTree = "<group>"; };
 		E17748E42282D782003D8CD1 /* BTCProtocolSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCProtocolSerialization.h; sourceTree = "<group>"; };
 		E17748E52282D782003D8CD1 /* BTCProtocolSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCProtocolSerialization.m; sourceTree = "<group>"; };
+		E1831BA22AB82FE60078A28B /* ManageChainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageChainCell.swift; sourceTree = "<group>"; };
+		E1831BA32AB82FE60078A28B /* ManageChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageChainCell.xib; sourceTree = "<group>"; };
 		E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAssetMantle.swift; sourceTree = "<group>"; };
 		E18D73B42AB484AB00FCB1AA /* DappStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappStartVC.swift; sourceTree = "<group>"; };
 		E18D73B52AB484AB00FCB1AA /* DappStartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappStartVC.xib; sourceTree = "<group>"; };
@@ -1805,6 +1811,8 @@
 				04FAD9E72AB6DBCE00143A3E /* ManageAccountCell.xib */,
 				E1DF777F2AB762010028BD51 /* CheckPrivateKeyCell.swift */,
 				E1DF77802AB762010028BD51 /* CheckPrivateKeyCell.xib */,
+				E1831BA22AB82FE60078A28B /* ManageChainCell.swift */,
+				E1831BA32AB82FE60078A28B /* ManageChainCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2209,6 +2217,7 @@
 				04FAD9F72AB71D5000143A3E /* DeleteAccountSheet.xib in Resources */,
 				E15980972A83A96E0032892B /* bg0.png in Resources */,
 				04FA74662A9F5833001A2830 /* CreateNameVC.xib in Resources */,
+				E1831BA72AB82FE60078A28B /* ManageChainCell.xib in Resources */,
 				04FA74742AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
 				E11EAE182AAD879A003BFC7F /* SettingSwitchCell.xib in Resources */,
 				E159808B2A83A96E0032892B /* bg3.png in Resources */,
@@ -2227,6 +2236,7 @@
 			files = (
 				04A116F128F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
 				E122DC692A8DBD3B006D1E7B /* BaseHeader.xib in Resources */,
+				E1831BA62AB82FE60078A28B /* ManageChainCell.xib in Resources */,
 				04FA747B2AA0446A001A2830 /* NewAccountCell.xib in Resources */,
 				E11EAE1D2AAD87AD003BFC7F /* SettingPriceCell.xib in Resources */,
 				04FA746E2A9F8652001A2830 /* BaseSheet.xib in Resources */,
@@ -2670,6 +2680,7 @@
 				E122DBE62A8A468E006D1E7B /* cosmos_mint_v1beta1_query.pb.swift in Sources */,
 				E1DF77762AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */,
 				E122DB262A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
+				E1831BA52AB82FE60078A28B /* ManageChainCell.swift in Sources */,
 				04FAD9E32AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
 				E122DB562A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				040733002AA44075001C63DD /* ImportMnemonicVC.swift in Sources */,
@@ -3023,6 +3034,7 @@
 				E122DBE52A8A468E006D1E7B /* cosmos_mint_v1beta1_query.pb.swift in Sources */,
 				E1DF77752AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */,
 				E122DB252A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
+				E1831BA42AB82FE60078A28B /* ManageChainCell.swift in Sources */,
 				04FAD9E22AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
 				E122DB552A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				040732FF2AA44075001C63DD /* ImportMnemonicVC.swift in Sources */,

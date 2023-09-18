@@ -252,6 +252,7 @@
 "str_delete_menmonic_msg" = "ニーモニックをバックアップしないと、二度と復元することができません!\nまた、つながった%@個のウォレットも削除されます。";
 "str_rename" = "名前変更";
 "str_check_each_private_keys" = "チェーンによる秘密鍵の確認";
+"str_add_custom_chain" = "カスタムチェーンの追加";
 
 
 "btn_delegate" = "  委任する";
