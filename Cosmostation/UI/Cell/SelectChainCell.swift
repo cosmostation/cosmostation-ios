@@ -10,7 +10,7 @@ import UIKit
 
 class SelectChainCell: UITableViewCell {
     
-    @IBOutlet weak var rootView: CardViewCell!
+    @IBOutlet weak var rootView: FixCardView!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -24,11 +24,6 @@ class SelectChainCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
-    }
-    
-    override func prepareForReuse() {
-        rootView.setBlur()
     }
     
     var actionToggle: ((Bool) -> Void)? = nil

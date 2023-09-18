@@ -28,6 +28,7 @@ class PincodeVC: BaseVC {
     var firstInput = ""
     var secondInput = ""
     var isConfirmMode = false
+    let authContext = LAContext()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,25 +39,53 @@ class PincodeVC: BaseVC {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onPincodeClicked(_:)), name: Notification.Name("pinCodeClick"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.OnDeleteClicked), name: Notification.Name("deleteClick"), object: nil)
-                                               
-                                               
-//        if (mTarget == PASSWORD_ACTION_APP_LOCK) {
-//            NotificationCenter.default.addObserver(self,
-//                                                   selector: #selector(self.onBioAuth),
-//                                                   name: Notification.Name("ForeGround"),
-//                                                   object: nil)
-//        } else if (mTarget == PASSWORD_ACTION_INTRO_LOCK || mTarget == PASSWORD_ACTION_DEEPLINK_LOCK ||
-//                   mTarget == PASSWORD_ACTION_SIMPLE_CHECK || mTarget == PASSWORD_ACTION_CHECK_TX) {
-//            self.onBioAuth()
-//        }
+        if (lockType == .ForAppLock) {
+            NotificationCenter.default.addObserver(self, selector: #selector(self.onBioAuth), name: Notification.Name("ForeGround"), object: nil)
+        }
         onUpdateView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if (lockType != .ForInit) {
+            if (isBioSupport()) {
+                onShowBio()
+            }
+        }
+    }
+    
+    
+    @objc func onBioAuth(_ notification: NSNotification) {
+        if (isBioSupport()) {
+            onShowBio()
+        }
+    }
+    
+    func isBioSupport() -> Bool {
+        return authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+    }
+    
+    func onShowBio() {
+        var localMsg = ""
+        if (authContext.biometryType == .faceID) {
+            localMsg = NSLocalizedString("faceID", comment: "")
+        } else if (authContext.biometryType == .touchID) {
+            localMsg = NSLocalizedString("touchID", comment: "")
+        }
+        self.authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: localMsg) { (success, error) in
+            if (success) {
+                DispatchQueue.main.async(execute: {
+                    self.onFinishResult(.success)
+                });
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("KeyboardClick"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("deleteClick"), object: nil)
-//        NotificationCenter.default.removeObserver(self, name: Notification.Name("ForeGround"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ForeGround"), object: nil)
     }
     
     func onUpdateView() {
@@ -146,9 +175,6 @@ class PincodeVC: BaseVC {
     }
     
     func onCenceled() {
-//        if (lockType == .ForDataCheck || lockType == .ForDisableAppLock || lockType == .ForDeleteAccount) {
-//            onFinishResult(.fail)
-//        }
         if (lockType == .ForInit || lockType == .ForAppLock ) {
             return
         }
@@ -201,13 +227,14 @@ class PincodeVC: BaseVC {
 
 enum LockType: Int {
     case ForInit = 0
-    case ForAppLock = 1
-    case ForDataCheck = 2
-    case ForDisableAppLock = 3
-    case ForDeleteAccount = 4
-    case ForCheckMnemonic = 5
-    case ForCheckPrivateKeys = 6
-    case ForCheckPrivateKey = 7
+    case ForIntroLock = 1
+    case ForAppLock = 2
+    case ForDataCheck = 3
+    case ForDisableAppLock = 4
+    case ForDeleteAccount = 5
+    case ForCheckMnemonic = 6
+    case ForCheckPrivateKeys = 7
+    case ForCheckPrivateKey = 8
     case Unknown = -1
 }
 

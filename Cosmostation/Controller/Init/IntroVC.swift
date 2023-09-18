@@ -12,7 +12,7 @@ import Firebase
 import SwiftKeychainWrapper
 import SwiftyJSON
 
-class IntroVC: BaseVC, BaseSheetDelegate {
+class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     
     @IBOutlet weak var bottomLogoView: UIView!
     @IBOutlet weak var bottomControlView: UIView!
@@ -21,14 +21,6 @@ class IntroVC: BaseVC, BaseSheetDelegate {
         super.viewDidLoad()
         self.navigationController?.view.addBackground()
         
-        print("IntroVC viewDidLoad")
-        onUpdateMigration()
-        
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-//        showWait()
         if (BaseData.instance.getDBVersion() < DB_VERSION) {
             onUpdateMigration()
         }
@@ -56,7 +48,7 @@ class IntroVC: BaseVC, BaseSheetDelegate {
                 if (!enable) {
                     //TODO Recover mode
                     self.onShowDisableAlert()
-                    
+
                 } else {
                     if (latestVersion > appVersion) {
                         self.onShowUpdateAlert()
@@ -81,13 +73,15 @@ class IntroVC: BaseVC, BaseSheetDelegate {
         onFetchMsData()
         if let account = BaseData.instance.getLastAccount() {
             BaseData.instance.baseAccount = account
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
-                let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.window?.rootViewController = mainTabVC
-                self.present(mainTabVC, animated: true, completion: nil)
-            })
+            if (BaseData.instance.getUsingAppLock()) {
+                let pinVC = UIStoryboard.PincodeVC(self, .ForIntroLock)
+                self.present(pinVC, animated: true)
+                
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+                    self.onStartMainTab()
+                })
+            }
 
         } else {
             UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut, animations: {
@@ -132,6 +126,14 @@ class IntroVC: BaseVC, BaseSheetDelegate {
         let createNameVC = CreateNameVC(nibName: "CreateNameVC", bundle: nil)
         createNameVC.newAccountType = type
         self.navigationController?.pushViewController(createNameVC, animated: true)
+    }
+    
+    func pinResponse(_ request: LockType, _ result: UnLockResult) {
+        if result == .success {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                self.onStartMainTab()
+            })
+        }
     }
     
 }
