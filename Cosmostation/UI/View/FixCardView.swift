@@ -13,7 +13,7 @@ class FixCardView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        backgroundColor = .color06
+        backgroundColor = UIColor.white.withAlphaComponent(0.05)
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 12
         layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor

@@ -10,9 +10,10 @@ import UIKit
 
 class QrAddressVC: BaseVC {
 
-    @IBOutlet weak var rootCardView: CardView!
     @IBOutlet weak var chainNameLabel: UILabel!
+    @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var rqImgView: UIImageView!
+    @IBOutlet weak var addressCardView: FixCardView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var tapToCopyLabel: UILabel!
     @IBOutlet weak var shareBtn: BaseButton!
@@ -26,6 +27,12 @@ class QrAddressVC: BaseVC {
         chainNameLabel.text = selectedChain.name + "  (" + baseAccount.name + ")"
         addressLabel.text = selectedChain.address
         addressLabel.adjustsFontSizeToFitWidth = true
+        if (baseAccount.type == .withMnemonic) {
+            hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
+            hdPathLabel.isHidden = false
+        } else {
+            hdPathLabel.isHidden = true
+        }
         
         if let qrImage = generateQrCode(selectedChain.address!) {
             rqImgView.image = UIImage(ciImage: qrImage)
@@ -35,7 +42,7 @@ class QrAddressVC: BaseVC {
         
         let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyAddress))
         copyTap.cancelsTouchesInView = false
-        rootCardView.addGestureRecognizer(copyTap)
+        addressCardView.addGestureRecognizer(copyTap)
     }
     
     override func setLocalizedString() {

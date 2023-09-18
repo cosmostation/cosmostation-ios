@@ -12,13 +12,17 @@
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
         </array>
+        <array key="SpoqaHanSansNeo-Regular.otf">
+            <string>SpoqaHanSansNeo-Regular</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QrAddressVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="addressCardView" destination="RWO-dd-aOf" id="r1Q-Ol-TTw"/>
                 <outlet property="addressLabel" destination="fUT-8v-eVv" id="NlG-XY-UtX"/>
                 <outlet property="chainNameLabel" destination="Log-Tr-ulL" id="YHl-Cg-y1U"/>
-                <outlet property="rootCardView" destination="7aF-zt-Egm" id="GSA-I1-U9S"/>
+                <outlet property="hdPathLabel" destination="dlg-eZ-rov" id="Uqb-lk-aRj"/>
                 <outlet property="rqImgView" destination="Hq3-0z-VB0" id="yvl-lM-8Ds"/>
                 <outlet property="shareBtn" destination="UkY-bX-F9E" id="jeE-4q-0pY"/>
                 <outlet property="tapToCopyLabel" destination="Grn-gw-zaI" id="aDj-wv-imR"/>
@@ -30,26 +34,33 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aF-zt-Egm" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="83" width="361" height="500"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChainName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Log-Tr-ulL">
+                    <rect key="frame" x="151" y="91" width="91.333333333333314" height="20.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <color key="textColor" name="_color01"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hd Path" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlg-eZ-rov">
+                    <rect key="frame" x="174.33333333333334" y="115.33333333333333" width="44.666666666666657" height="15.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Regular" family="Spoqa Han Sans Neo" pointSize="12"/>
+                    <color key="textColor" name="_color01"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgQrGuide" translatesAutoresizingMaskIntoConstraints="NO" id="i9d-Tg-NPS">
+                    <rect key="frame" x="32" y="146.66666666666663" width="329" height="329"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="i9d-Tg-NPS" secondAttribute="height" multiplier="1:1" id="pTr-S3-mfl"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hq3-0z-VB0">
+                    <rect key="frame" x="44" y="158.66666666666663" width="305" height="305"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWO-dd-aOf" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="12" y="495.66666666666674" width="369" height="48"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChainName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Log-Tr-ulL">
-                            <rect key="frame" x="135" y="24" width="91.333333333333314" height="20.333333333333329"/>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
-                            <color key="textColor" name="_color01"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgQrGuide" translatesAutoresizingMaskIntoConstraints="NO" id="i9d-Tg-NPS">
-                            <rect key="frame" x="24" y="72.333333333333343" width="313" height="313"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="i9d-Tg-NPS" secondAttribute="height" multiplier="1:1" id="pTr-S3-mfl"/>
-                            </constraints>
-                        </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hq3-0z-VB0">
-                            <rect key="frame" x="36" y="84.333333333333343" width="289" height="289"/>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUT-8v-eVv">
-                            <rect key="frame" x="12" y="417.33333333333331" width="337" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUT-8v-eVv">
+                            <rect key="frame" x="16" y="15" width="337" height="16.999999999999943"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -57,26 +68,11 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="Hq3-0z-VB0" firstAttribute="centerX" secondItem="i9d-Tg-NPS" secondAttribute="centerX" id="5Ap-b6-ia7"/>
-                        <constraint firstAttribute="trailing" secondItem="fUT-8v-eVv" secondAttribute="trailing" constant="12" id="BNQ-rV-RyU"/>
-                        <constraint firstItem="i9d-Tg-NPS" firstAttribute="leading" secondItem="7aF-zt-Egm" secondAttribute="leading" constant="24" id="DnP-Sc-ok9"/>
-                        <constraint firstItem="fUT-8v-eVv" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="bottom" constant="32" id="McX-8z-kgK"/>
-                        <constraint firstAttribute="trailing" secondItem="i9d-Tg-NPS" secondAttribute="trailing" constant="24" id="Ox7-ur-thT"/>
-                        <constraint firstItem="i9d-Tg-NPS" firstAttribute="top" secondItem="Log-Tr-ulL" secondAttribute="bottom" constant="28" id="RG4-UP-ltq"/>
-                        <constraint firstItem="fUT-8v-eVv" firstAttribute="leading" secondItem="7aF-zt-Egm" secondAttribute="leading" constant="12" id="TH7-Yl-x2l"/>
-                        <constraint firstItem="Hq3-0z-VB0" firstAttribute="trailing" secondItem="i9d-Tg-NPS" secondAttribute="trailing" constant="-12" id="XTL-1D-GaR"/>
-                        <constraint firstItem="i9d-Tg-NPS" firstAttribute="centerX" secondItem="7aF-zt-Egm" secondAttribute="centerX" id="ZtZ-6Y-jAe"/>
-                        <constraint firstItem="Hq3-0z-VB0" firstAttribute="leading" secondItem="i9d-Tg-NPS" secondAttribute="leading" constant="12" id="dCf-SL-W9i"/>
-                        <constraint firstItem="Hq3-0z-VB0" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="top" constant="12" id="fGd-9d-uM7"/>
-                        <constraint firstItem="Hq3-0z-VB0" firstAttribute="bottom" secondItem="i9d-Tg-NPS" secondAttribute="bottom" constant="-12" id="fWr-5T-EC2"/>
-                        <constraint firstItem="Log-Tr-ulL" firstAttribute="top" secondItem="7aF-zt-Egm" secondAttribute="top" constant="24" id="frM-3O-cKb"/>
-                        <constraint firstItem="Log-Tr-ulL" firstAttribute="centerX" secondItem="7aF-zt-Egm" secondAttribute="centerX" id="j5F-UX-9V1"/>
-                        <constraint firstItem="Hq3-0z-VB0" firstAttribute="centerY" secondItem="i9d-Tg-NPS" secondAttribute="centerY" id="jm2-YX-zoR"/>
-                        <constraint firstAttribute="height" constant="500" id="w6J-iH-sse"/>
+                        <constraint firstAttribute="height" constant="48" id="4er-TK-yan"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap box for copy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grn-gw-zaI">
-                    <rect key="frame" x="148.33333333333334" y="599" width="96.666666666666657" height="15.333333333333371"/>
+                    <rect key="frame" x="148.33333333333334" y="563.66666666666663" width="96.666666666666657" height="15.333333333333371"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                     <color key="textColor" name="_color02"/>
                     <nil key="highlightedColor"/>
@@ -101,14 +97,28 @@
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RWO-dd-aOf" secondAttribute="trailing" constant="12" id="1Wh-cf-VjN"/>
+                <constraint firstItem="Log-Tr-ulL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="3nQ-NV-BJB"/>
+                <constraint firstItem="Hq3-0z-VB0" firstAttribute="leading" secondItem="i9d-Tg-NPS" secondAttribute="leading" constant="12" id="6sa-ba-70U"/>
+                <constraint firstItem="Hq3-0z-VB0" firstAttribute="centerY" secondItem="i9d-Tg-NPS" secondAttribute="centerY" id="7sn-bR-IAR"/>
+                <constraint firstItem="dlg-eZ-rov" firstAttribute="top" secondItem="Log-Tr-ulL" secondAttribute="bottom" constant="4" id="8Gx-go-SPL"/>
+                <constraint firstItem="i9d-Tg-NPS" firstAttribute="top" secondItem="dlg-eZ-rov" secondAttribute="bottom" constant="16" id="9fY-X1-9Lz"/>
+                <constraint firstItem="i9d-Tg-NPS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="BiU-Tn-g69"/>
+                <constraint firstItem="Hq3-0z-VB0" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="top" constant="12" id="GLg-wo-OOL"/>
                 <constraint firstAttribute="bottom" secondItem="UkY-bX-F9E" secondAttribute="bottom" constant="38" id="GvJ-Hp-0lm"/>
-                <constraint firstItem="Grn-gw-zaI" firstAttribute="top" secondItem="7aF-zt-Egm" secondAttribute="bottom" constant="16" id="NR3-1e-bkc"/>
-                <constraint firstItem="7aF-zt-Egm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="24" id="PHs-aY-XOK"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7aF-zt-Egm" secondAttribute="trailing" constant="16" id="XW3-E9-V6J"/>
+                <constraint firstItem="RWO-dd-aOf" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="bottom" constant="20" id="IVc-Ra-SvO"/>
+                <constraint firstItem="Hq3-0z-VB0" firstAttribute="trailing" secondItem="i9d-Tg-NPS" secondAttribute="trailing" constant="-12" id="IeG-b7-CLD"/>
+                <constraint firstItem="RWO-dd-aOf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="J74-Xd-q58"/>
+                <constraint firstItem="Grn-gw-zaI" firstAttribute="top" secondItem="RWO-dd-aOf" secondAttribute="bottom" constant="20" id="S9V-Ex-DvI"/>
+                <constraint firstItem="Log-Tr-ulL" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="dKV-WF-mo9"/>
+                <constraint firstItem="dlg-eZ-rov" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="goE-BU-2Ln"/>
                 <constraint firstItem="Grn-gw-zaI" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ir3-2B-lFM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UkY-bX-F9E" secondAttribute="trailing" constant="8" id="kO7-Uc-gne"/>
-                <constraint firstItem="7aF-zt-Egm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="qFb-im-ayn"/>
+                <constraint firstItem="Hq3-0z-VB0" firstAttribute="centerX" secondItem="i9d-Tg-NPS" secondAttribute="centerX" id="oa5-jb-akV"/>
+                <constraint firstItem="i9d-Tg-NPS" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="pxN-0Q-B2Y"/>
                 <constraint firstItem="UkY-bX-F9E" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="uTc-Hw-inX"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="i9d-Tg-NPS" secondAttribute="trailing" constant="32" id="vLC-3h-oQc"/>
+                <constraint firstItem="Hq3-0z-VB0" firstAttribute="bottom" secondItem="i9d-Tg-NPS" secondAttribute="bottom" constant="-12" id="yle-MG-qLO"/>
             </constraints>
             <point key="canvasLocation" x="70.992366412213741" y="20.422535211267608"/>
         </view>
@@ -125,7 +135,7 @@
             <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.33700001239776611" green="0.016000000759959221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
