@@ -292,7 +292,7 @@
 		18FFB332281AF533004E65BB /* KeyFac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281008492696D979002986A6 /* KeyFac.swift */; };
 		18FFB341281AF533004E65BB /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E086268C0A6700088391 /* RIPEMD160.swift */; };
 		18FFB396281AF533004E65BB /* WUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE722448E940097CAEE /* WUtils.swift */; };
-		18FFB3A7281AF533004E65BB /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1422489B030019B7BB /* IntroViewController.swift */; };
+		18FFB3A7281AF533004E65BB /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1422489B030019B7BB /* IntroVC.swift */; };
 		18FFB3DD281AF533004E65BB /* BinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9038268C3F95002CFFE1 /* BinanceModel.swift */; };
 		18FFB3DF281AF533004E65BB /* BaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E532231256800A1436F /* BaseConstant.swift */; };
 		18FFB41E281AF533004E65BB /* BinanceSegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9042268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift */; };
@@ -798,7 +798,7 @@
 		E15980AA2A83ADB60032892B /* MainTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980A82A83ADB60032892B /* MainTabVC.swift */; };
 		E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */; };
 		E162430628C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */; };
-		E16D9B1522489B030019B7BB /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1422489B030019B7BB /* IntroViewController.swift */; };
+		E16D9B1522489B030019B7BB /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1422489B030019B7BB /* IntroVC.swift */; };
 		E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16D9B182248C4880019B7BB /* Assets.xcassets */; };
 		E16D9B1D2248E6A60019B7BB /* WKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1C2248E6A60019B7BB /* WKey.swift */; };
 		E16FACB12361ADFA00372052 /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16FACB02361ADFA00372052 /* Bytes.swift */; };
@@ -1246,7 +1246,7 @@
 		E15980A52A83AC9E0032892B /* PortfolioVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioVC.swift; sourceTree = "<group>"; };
 		E15980A82A83ADB60032892B /* MainTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabVC.swift; sourceTree = "<group>"; };
 		E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IbcTransferReq.swift; sourceTree = "<group>"; };
-		E16D9B1422489B030019B7BB /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		E16D9B1422489B030019B7BB /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		E16D9B182248C4880019B7BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E16D9B1C2248E6A60019B7BB /* WKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKey.swift; sourceTree = "<group>"; };
 		E16FACB02361ADFA00372052 /* Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bytes.swift; sourceTree = "<group>"; };
@@ -1461,16 +1461,6 @@
 		04FA745F2A9F0AA5001A2830 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				04FA74642A9F5833001A2830 /* CreateNameVC.swift */,
-				04FA74632A9F5833001A2830 /* CreateNameVC.xib */,
-				04FA74832AA0E2A8001A2830 /* CreateMnemonicVC.swift */,
-				04FA74842AA0E2A9001A2830 /* CreateMnemonicVC.xib */,
-				040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */,
-				040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */,
-				040733012AA442B6001C63DD /* ImportMnemonicCheckVC.swift */,
-				040733022AA442B6001C63DD /* ImportMnemonicCheckVC.xib */,
-				04FA747D2AA0CAA2001A2830 /* ImportPrivKeyVC.swift */,
-				04FA747E2AA0CAA3001A2830 /* ImportPrivKeyVC.xib */,
 				04FAD9DA2AB6D8DC00143A3E /* AccountListVC.swift */,
 				04FAD9DB2AB6D8DC00143A3E /* AccountListVC.xib */,
 				E1DF776D2AB74ED40028BD51 /* CheckMenmonicVC.swift */,
@@ -1870,7 +1860,17 @@
 			isa = PBXGroup;
 			children = (
 				04F4061629ED119800CD88E4 /* Init.storyboard */,
-				E16D9B1422489B030019B7BB /* IntroViewController.swift */,
+				E16D9B1422489B030019B7BB /* IntroVC.swift */,
+				04FA74642A9F5833001A2830 /* CreateNameVC.swift */,
+				04FA74632A9F5833001A2830 /* CreateNameVC.xib */,
+				04FA74832AA0E2A8001A2830 /* CreateMnemonicVC.swift */,
+				04FA74842AA0E2A9001A2830 /* CreateMnemonicVC.xib */,
+				040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */,
+				040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */,
+				040733012AA442B6001C63DD /* ImportMnemonicCheckVC.swift */,
+				040733022AA442B6001C63DD /* ImportMnemonicCheckVC.xib */,
+				04FA747D2AA0CAA2001A2830 /* ImportPrivKeyVC.swift */,
+				04FA747E2AA0CAA3001A2830 /* ImportPrivKeyVC.xib */,
 			);
 			path = Init;
 			sourceTree = "<group>";
@@ -2481,7 +2481,7 @@
 				E122DBEE2A8A468E006D1E7B /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,
 				04527DBA2A937CA2005F72D7 /* AssetCell.swift in Sources */,
 				18FFB396281AF533004E65BB /* WUtils.swift in Sources */,
-				18FFB3A7281AF533004E65BB /* IntroViewController.swift in Sources */,
+				18FFB3A7281AF533004E65BB /* IntroVC.swift in Sources */,
 				042296852A890CC4003C7630 /* ChainKavaEVM.swift in Sources */,
 				E122DB8E2A8A468D006D1E7B /* cosmos_msg_textual_v1_textual.pb.swift in Sources */,
 				E122DC532A8A4712006D1E7B /* tendermint_libs_bits_types.pb.swift in Sources */,
@@ -2819,7 +2819,7 @@
 				E122DB2B2A8A468D006D1E7B /* cosmos_autocli_v1_query.grpc.swift in Sources */,
 				E122DB012A8A468D006D1E7B /* cosmos_group_v1_types.pb.swift in Sources */,
 				E122DB4F2A8A468D006D1E7B /* cosmos_circuit_v1_tx.pb.swift in Sources */,
-				E16D9B1522489B030019B7BB /* IntroViewController.swift in Sources */,
+				E16D9B1522489B030019B7BB /* IntroVC.swift in Sources */,
 				E122DBCD2A8A468E006D1E7B /* cosmos_tx_v1beta1_tx.pb.swift in Sources */,
 				E122DB7D2A8A468D006D1E7B /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
 				E18A4EBB2A95149100D8BC05 /* ChainAssetMantle.swift in Sources */,

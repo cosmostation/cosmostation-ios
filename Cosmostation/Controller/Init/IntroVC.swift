@@ -1,5 +1,5 @@
 //
-//  IntroViewController.swift
+//  IntroVC.swift
 //  Cosmostation
 //
 //  Created by yongjoo on 25/03/2019.
@@ -12,7 +12,7 @@ import Firebase
 import SwiftKeychainWrapper
 import SwiftyJSON
 
-class IntroViewController: BaseVC, BaseSheetDelegate {
+class IntroVC: BaseVC, BaseSheetDelegate {
     
     @IBOutlet weak var bottomLogoView: UIView!
     @IBOutlet weak var bottomControlView: UIView!
@@ -21,7 +21,7 @@ class IntroViewController: BaseVC, BaseSheetDelegate {
         super.viewDidLoad()
         self.navigationController?.view.addBackground()
         
-        print("IntroViewController viewDidLoad")
+        print("IntroVC viewDidLoad")
         onUpdateMigration()
         
         
@@ -136,7 +136,7 @@ class IntroViewController: BaseVC, BaseSheetDelegate {
     
 }
 
-extension IntroViewController {
+extension IntroVC {
     func migrationV2() async -> Bool {
         let keychain = BaseData.instance.getKeyChain()
         

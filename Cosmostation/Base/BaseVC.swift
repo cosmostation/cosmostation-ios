@@ -98,7 +98,7 @@ class BaseVC: UIViewController {
     }
     
     func onStartIntro() {
-        let IntroVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "IntroViewController") as! IntroViewController
+        let IntroVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "IntroVC") as! IntroVC
         let rootVC = UINavigationController(rootViewController: IntroVC)
         UIApplication.shared.windows.first?.rootViewController = rootVC
         UIApplication.shared.windows.first?.makeKeyAndVisible()
