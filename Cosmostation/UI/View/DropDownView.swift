@@ -13,10 +13,10 @@ class DropDownView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        backgroundColor = .color02
+        backgroundColor = UIColor.white.withAlphaComponent(0.1)
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 12
-        layer.borderColor = UIColor.color03.cgColor
+        layer.borderColor = UIColor.color05.cgColor
         layer.borderWidth = 0.5
     }
 }
