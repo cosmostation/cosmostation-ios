@@ -45,8 +45,7 @@ let MINTSCAN_DEV_API_URL                = "https://dev.api.mintscan.io/";
 let MINTSCAN_API_URL                    = "https://front.api.mintscan.io/";
 let CSS_URL                             = "https://api-wallet.cosmostation.io/";
 let NFT_INFURA                          = "https://ipfs.infura.io/ipfs/";
-
-let DESMOS_AIRDROP_URL                  = "https://api.airdrop.desmos.network/";
+let SKIP_API_URL                        = "https://api.skip.money/";
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
 let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTuuCn";

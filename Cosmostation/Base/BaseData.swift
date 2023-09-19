@@ -11,6 +11,7 @@ import SQLite
 import SwiftKeychainWrapper
 import SwiftProtobuf
 import KeychainAccess
+import SwiftyJSON
 
 
 final class BaseData: NSObject{
@@ -21,6 +22,7 @@ final class BaseData: NSObject{
     var copySalt: String?
     
     var reviewMode = true
+    var mintscanChains: JSON?
     var baseAccount: BaseAccount?
     var mintscanUSDPrices: [MintscanPrice]?
     var mintscanPrices: [MintscanPrice]?

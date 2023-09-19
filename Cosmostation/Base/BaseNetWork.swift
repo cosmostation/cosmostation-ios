@@ -13,6 +13,19 @@ import SwiftyJSON
 
 class BaseNetWork {
     
+    func fetchChainList() {
+        AF.request(BaseNetWork.getSupportChains(), method: .get)
+            .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.mintscanChains = value
+                    
+                case .failure:
+                    print("fetchChainList error ", response.error)
+                }
+            }
+    }
+    
     func fetchPrices(_ force: Bool? = false) {
 //        print("fetchPrices ", BaseNetWork.getPricesUrl())
         if (!BaseData.instance.needPriceUpdate() && force == false) { return }
@@ -107,6 +120,10 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v3/assets/" +  chain.apiName + "/cw20"
     }
     
+    static func getSupportChains() -> String {
+        return MINTSCAN_API_URL + "v1/meta/support/chains"
+    }
+    
     static func getTxDetailUrl(_ chain: BaseChain, _ txHash: String) -> URL? {
         if (chain is ChainBinanceBeacon) {
             return URL(string: ChainBinanceBeacon.explorer + "tx/" + txHash)
@@ -114,6 +131,15 @@ class BaseNetWork {
             return URL(string: ChainOktKeccak256.explorer + "tx/" + txHash)
         }
         return URL(string: MintscanUrl + chain.apiName + "/transactions/" + txHash)
+    }
+    
+    
+    static func SkipChains() -> String {
+        return SKIP_API_URL + "v1/info/chains"
+    }
+    
+    static func SkipAssets() -> String {
+        return SKIP_API_URL + "v1/fungible/assets"
     }
 }
 

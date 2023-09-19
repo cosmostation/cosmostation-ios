@@ -140,7 +140,6 @@ extension CosmosClass {
         let channel = getConnection()
         let group = DispatchGroup()
         mintscanTokens.forEach { token in
-//            Task { fetchCw20Balance(group, channel, token) }
             DispatchQueue.global().async {
                 self.fetchCw20Balance(group, channel, token)
             }
@@ -583,7 +582,7 @@ extension CosmosClass {
 }
 
 
-func ALLCOSMOSCLASS() -> [CosmosClass] {
+func ALLCOSMOSCLASS(_ chainId: Bool? = false) -> [CosmosClass] {
     var result = [CosmosClass]()
     result.removeAll()
     result.append(ChainCosmos())
@@ -608,6 +607,13 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainSommelier())
     result.append(ChainStargaze())
     result.append(ChainUmee())
+    
+    if (chainId == true) {
+        result.forEach { chain in
+            let chainId = BaseData.instance.mintscanChains?["chains"].arrayValue.filter({ $0["chain"].stringValue == chain.apiName }).first?["chain_id"].stringValue
+            chain.chainId = chainId
+        }
+    }
     return result
 }
 

@@ -27,6 +27,8 @@
 		042296822A890C9B003C7630 /* ChainKava118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava118.swift */; };
 		042296842A890CC4003C7630 /* ChainKavaEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296832A890CC4003C7630 /* ChainKavaEVM.swift */; };
 		042296852A890CC4003C7630 /* ChainKavaEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296832A890CC4003C7630 /* ChainKavaEVM.swift */; };
+		042A17502AB97AD900EF31C9 /* RedFixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A174F2AB97AD900EF31C9 /* RedFixCardView.swift */; };
+		042A17512AB97AD900EF31C9 /* RedFixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A174F2AB97AD900EF31C9 /* RedFixCardView.swift */; };
 		043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043031EC28C2136F005FF935 /* MintscanPath.swift */; };
 		043031EE28C2136F005FF935 /* MintscanPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043031EC28C2136F005FF935 /* MintscanPath.swift */; };
 		0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E086268C0A6700088391 /* RIPEMD160.swift */; };
@@ -878,6 +880,7 @@
 		04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		042296802A890C9B003C7630 /* ChainKava118.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava118.swift; sourceTree = "<group>"; };
 		042296832A890CC4003C7630 /* ChainKavaEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKavaEVM.swift; sourceTree = "<group>"; };
+		042A174F2AB97AD900EF31C9 /* RedFixCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedFixCardView.swift; sourceTree = "<group>"; };
 		043031EC28C2136F005FF935 /* MintscanPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanPath.swift; sourceTree = "<group>"; };
 		0437E086268C0A6700088391 /* RIPEMD160.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		0443B89728589B570027A6B9 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
@@ -1827,6 +1830,7 @@
 				E14E29792A99C2CA00939AD2 /* BaseButton.swift */,
 				04FAD9F82AB7221600143A3E /* BaseRedButton.swift */,
 				04FAD9D72AB438C900143A3E /* DropDownView.swift */,
+				042A174F2AB97AD900EF31C9 /* RedFixCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2701,6 +2705,7 @@
 				04FA74572A9D97A0001A2830 /* PincodeVC.swift in Sources */,
 				047847C92962C93F00FD6A7E /* Cw20IcnsByAddressReq.swift in Sources */,
 				E122DB6C2A8A468D006D1E7B /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */,
+				042A17512AB97AD900EF31C9 /* RedFixCardView.swift in Sources */,
 				E122DB0E2A8A468D006D1E7B /* cosmos_orm_v1_orm.pb.swift in Sources */,
 				18FFB5CF281AF533004E65BB /* Bech32.swift in Sources */,
 				047BA8D52A94777600D3F7DD /* CosmosCoinVC.swift in Sources */,
@@ -3055,6 +3060,7 @@
 				E1945E3E222E7E2900A1436F /* SegwitAddrCoder.swift in Sources */,
 				E122DB6B2A8A468D006D1E7B /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */,
 				E122DB0D2A8A468D006D1E7B /* cosmos_orm_v1_orm.pb.swift in Sources */,
+				042A17502AB97AD900EF31C9 /* RedFixCardView.swift in Sources */,
 				E1D4EA582871584B005C1ECF /* FeeInfo.swift in Sources */,
 				047BA8D42A94777600D3F7DD /* CosmosCoinVC.swift in Sources */,
 				E122DBF52A8A468E006D1E7B /* cosmos_autocli_v1_options.pb.swift in Sources */,
