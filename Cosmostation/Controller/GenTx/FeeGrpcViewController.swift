@@ -101,6 +101,8 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     @objc func onClickFeeDenom (_ onClickDenom: UITapGestureRecognizer) {
+        // 23.8.20 side case for assetmantle simulte error skip simul only for assetmantle
+        if (chainType == .MANTLE_MAIN) { return }
         let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
         popupVC.type = SELECT_POPUP_FEE_DENOM
         popupVC.feeData = mFeeInfo[mSelectedFeeInfo].FeeDatas
@@ -119,9 +121,16 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // 23.8.20 side case for assetmantle simulte error skip simul only for assetmantle
+        if (chainType == .MANTLE_MAIN) {
+            self.onCalculateFees()
+            self.onUpdateView()
+            self.mSimulPassed = true
+            return
+        }
         if (self.pageHolderVC.mTransferType == TRANSFER_EVM) {
             self.onCalculateEvmFees(self.chainConfig!)
-            
+
         } else {
             self.mSimulPassed = false
             self.onCalculateFees()
@@ -775,6 +784,13 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                self.pageHolderVC.mGranterData.address,
                                                self.pageHolderVC.mRecipinetAddress!,
                                                self.pageHolderVC.mToSendAmount,
+                                               self.mFee, self.pageHolderVC.mMemo!,
+                                               self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                               self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_REVOKE) {
+            return Signer.genSimulateAuthzRevoke(auth, account!.account_pubkey_type,
+                                               self.pageHolderVC.mGrantees,
                                                self.mFee, self.pageHolderVC.mMemo!,
                                                self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                self.chainType!)

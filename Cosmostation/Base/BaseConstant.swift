@@ -40,7 +40,7 @@ let KEY_WC_WHITELIST                    = "KEY_WC_WHITELIST"
 let KEY_LANGUAGE                        = "KEY_LANGUAGE"
 
 let MINTSCAN_DEV_API_URL                = "https://dev.api.mintscan.io/";
-let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
+let MINTSCAN_API_URL                    = "https://front.api.mintscan.io/";
 let CSS_URL                             = "https://api-wallet.cosmostation.io/";
 let NFT_INFURA                          = "https://ipfs.infura.io/ipfs/";
 
@@ -200,6 +200,7 @@ let TASK_TYPE_AUTHZ_REDELEGATE              = "TASK_TYPE_AUTHZ_REDELEGATE";
 let TASK_TYPE_AUTHZ_CLAIM_REWARDS           = "TASK_TYPE_AUTHZ_CLAIM_REWARDS";
 let TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN       = "TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN";
 let TASK_TYPE_AUTHZ_VOTE                    = "TASK_TYPE_AUTHZ_VOTE";
+let TASK_TYPE_AUTHZ_REVOKE                  = "TASK_TYPE_AUTHZ_REVOKE";
 
 
 let TASK_TYPE_STRIDE_LIQUIDITY_STAKE        = "TASK_TYPE_STRIDE_LIQUIDITY_STAKE";
@@ -342,6 +343,8 @@ public enum ChainType: String {
     case STAFI_MAIN
     case NEUTRON_MAIN
     case ARCHWAY_MAIN
+    case SEI_MAIN
+    case TERRA_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -380,8 +383,6 @@ public enum ChainType: String {
         result.append(JUNO_MAIN)
         result.append(KAVA_MAIN)
         result.append(KI_MAIN)
-        result.append(KONSTELLATION_MAIN)
-        result.append(KUJIRA_MAIN)
         result.append(KYVE_MAIN)
         result.append(LIKECOIN_MAIN)
         result.append(LUM_MAIN)
@@ -402,14 +403,15 @@ public enum ChainType: String {
         result.append(REGEN_MAIN)
         result.append(RIZON_MAIN)
         result.append(SECRET_MAIN)
+        result.append(SEI_MAIN)
         result.append(SENTINEL_MAIN)
         result.append(CERTIK_MAIN)
-        result.append(SIF_MAIN)
         result.append(SOMMELIER_MAIN)
         result.append(STAFI_MAIN)
         result.append(STARGAZE_MAIN)
         result.append(IOV_MAIN)
         result.append(STRIDE_MAIN)
+        result.append(TERRA_MAIN)
         result.append(TERITORI_MAIN)
 //        result.append(TGRADE_MAIN)
         result.append(UMEE_MAIN)
@@ -423,6 +425,10 @@ public enum ChainType: String {
         result.append(NEUTRON_TEST)
         result.append(STATION_TEST)
         result.append(CERBERUS_MAIN)
+        result.append(KONSTELLATION_MAIN)
+        result.append(KUJIRA_MAIN)
+        result.append(SIF_MAIN)
+        
         return result
     }
     

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="RobotoMono-VariableFont_wght.ttf">
+            <string>RobotoMono-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="81" id="KGk-i7-Jjw" customClass="GranteeViewCell" customModule="Cosmostation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="549" height="81"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="549" height="81"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nIk-Sb-vuj" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
+                        <rect key="frame" x="12" y="4" width="525" height="73"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grantee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKq-8f-q5n">
+                                <rect key="frame" x="12.000000000000004" y="16" width="45.333333333333343" height="14.333333333333336"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" name="_font04"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEe-d2-4sv">
+                                <rect key="frame" x="73.333333333333343" y="23.333333333333332" width="435.66666666666663" height="0.0"/>
+                                <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="14"/>
+                                <color key="textColor" name="_font05"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Send" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGd-BR-x8e">
+                                <rect key="frame" x="12" y="38.333333333333336" width="33" height="18.666666666666664"/>
+                                <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="14"/>
+                                <color key="textColor" name="_font05"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D-365" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLX-3p-d28">
+                                <rect key="frame" x="472.66666666666669" y="39.666666666666664" width="36.333333333333314" height="16"/>
+                                <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
+                                <color key="textColor" name="_font05"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="_card_bg"/>
+                        <constraints>
+                            <constraint firstItem="BGd-BR-x8e" firstAttribute="top" secondItem="dKq-8f-q5n" secondAttribute="bottom" constant="8" id="0Nt-LA-w5B"/>
+                            <constraint firstAttribute="bottom" secondItem="BGd-BR-x8e" secondAttribute="bottom" constant="16" id="3cm-aC-8zJ"/>
+                            <constraint firstAttribute="trailing" secondItem="iLX-3p-d28" secondAttribute="trailing" constant="16" id="4gk-HX-fad"/>
+                            <constraint firstAttribute="trailing" secondItem="zEe-d2-4sv" secondAttribute="trailing" constant="16" id="TJZ-WH-4IM"/>
+                            <constraint firstItem="iLX-3p-d28" firstAttribute="centerY" secondItem="BGd-BR-x8e" secondAttribute="centerY" id="TTd-Z9-VYB"/>
+                            <constraint firstItem="zEe-d2-4sv" firstAttribute="leading" secondItem="dKq-8f-q5n" secondAttribute="trailing" constant="16" id="ThM-73-5lw"/>
+                            <constraint firstItem="dKq-8f-q5n" firstAttribute="top" secondItem="nIk-Sb-vuj" secondAttribute="top" constant="16" id="Zp3-4Y-huY"/>
+                            <constraint firstItem="BGd-BR-x8e" firstAttribute="leading" secondItem="dKq-8f-q5n" secondAttribute="leading" id="dbS-Th-Xa7"/>
+                            <constraint firstItem="dKq-8f-q5n" firstAttribute="leading" secondItem="nIk-Sb-vuj" secondAttribute="leading" constant="12" id="hGL-WV-JCB"/>
+                            <constraint firstItem="zEe-d2-4sv" firstAttribute="centerY" secondItem="dKq-8f-q5n" secondAttribute="centerY" id="zNm-Yz-leO"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
+                                <integer key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.29999999999999999"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.47843137254901957" green="0.49803921568627452" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="nIk-Sb-vuj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="0kp-B4-qaV"/>
+                    <constraint firstAttribute="trailing" secondItem="nIk-Sb-vuj" secondAttribute="trailing" constant="12" id="D80-Oe-kAt"/>
+                    <constraint firstAttribute="bottom" secondItem="nIk-Sb-vuj" secondAttribute="bottom" constant="4" id="fbc-Hb-zqk"/>
+                    <constraint firstItem="nIk-Sb-vuj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="mbz-RK-4KG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="expirationLabel" destination="iLX-3p-d28" id="N6X-DV-EP3"/>
+                <outlet property="granteeAddressLabel" destination="zEe-d2-4sv" id="JGK-j9-ECH"/>
+                <outlet property="granteeTitleLabel" destination="dKq-8f-q5n" id="CkB-3i-sUV"/>
+                <outlet property="granteeTypeLabel" destination="BGd-BR-x8e" id="dnM-sZ-rVL"/>
+                <outlet property="rootCardView" destination="nIk-Sb-vuj" id="J5r-yM-31f"/>
+            </connections>
+            <point key="canvasLocation" x="-101.5267175572519" y="-65.140845070422543"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font04">
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

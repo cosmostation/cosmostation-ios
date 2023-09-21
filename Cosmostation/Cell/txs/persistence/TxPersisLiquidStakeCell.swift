@@ -29,8 +29,8 @@ class TxPersisLiquidStakeCell: TxCell {
         
         let msgPoint = response.tx.body.messages[position]
         
-        if (msgPoint.typeURL.contains(Pstake_Lscosmos_V1beta1_MsgLiquidStake.protoMessageName)) {
-            if let msg = try? Pstake_Lscosmos_V1beta1_MsgLiquidStake.init(serializedData: msgPoint.value) {
+        if (msgPoint.typeURL.contains(Pstake_Liquidstakeibc_V1beta1_MsgLiquidStake.protoMessageName)) {
+            if let msg = try? Pstake_Liquidstakeibc_V1beta1_MsgLiquidStake.init(serializedData: msgPoint.value) {
                 txTitleLabel.text = NSLocalizedString("tx_stride_liquid_stake", comment: "")
                 delegatorLabel.text = msg.delegatorAddress
                 delegatorLabel.adjustsFontSizeToFitWidth = true
@@ -40,8 +40,8 @@ class TxPersisLiquidStakeCell: TxCell {
                 WDP.dpCoin(chainConfig, liquidCoin, denomOutLabel, amountOutLabel)
             }
             
-        } else if (msgPoint.typeURL.contains(Pstake_Lscosmos_V1beta1_MsgRedeem.protoMessageName)) {
-            if let msg = try? Pstake_Lscosmos_V1beta1_MsgLiquidStake.init(serializedData: msgPoint.value) {
+        } else if (msgPoint.typeURL.contains(Pstake_Liquidstakeibc_V1beta1_MsgRedeem.protoMessageName)) {
+            if let msg = try? Pstake_Liquidstakeibc_V1beta1_MsgLiquidStake.init(serializedData: msgPoint.value) {
                 txTitleLabel.text = NSLocalizedString("tx_persis_liquid_redeem", comment: "")
                 delegatorLabel.text = msg.delegatorAddress
                 delegatorLabel.adjustsFontSizeToFitWidth = true

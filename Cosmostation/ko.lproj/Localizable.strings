@@ -233,6 +233,10 @@
 "str_incentive_amount" = "인센티브 수량";
 "str_no_result" = "검색 결과가 없습니다";
 "str_smart_contract" = "스마트 컨트랙트";
+"str_grantee" = "대리인";
+"str_granter" = "권한 수여자";
+"str_grant_type" = "권한 타입";
+"str_grant_revoke" = "권한 취소";
 
 
 "btn_delegate" = "  위임 하기";
@@ -290,6 +294,9 @@
 "msg_no_supported_chain" = "이 네트워크는 더 이상 작동하지 않습니다.\n\n코스모스테이션 월렛은 보관된 데이터만 보여드리고 있으니 참고하세요.";
 "msg_search_chain" = "체인이나 토큰을 검색하세요";
 "msg_not_support" = "\n현재 접속하신 주소는 지원종료 될 예정입니다.\n\n현재 지갑을 계속 사용하시려면 재단에서 권장하는 지갑 플랫폼을 검토해 보시기 바랍니다.";
+"msg_granter_empty" = "권한을 받고 AUTHZ 시작하기";
+"msg_grantee_empty" = "권한을 주고 AUTHZ 시작하기";
+"msg_grant_empty_msg" = "현재 관리하고 있는 그랜트가 없습니다.\n웹지갑에서 그랜트를 관리하세요.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";
@@ -354,7 +361,9 @@
 "guide_msg_noble" = "Noble은 IBC 생태계 상 네이티브 토큰 발행을 위해 설계된 Cosmos SDK 기반 블록체인입니다.";
 "guide_msg_neutron" = "Neutron은 Cosmos 허브의 Interchain Security를 사용하는 비허가형 CosmWasm 플랫폼입니다.";
 "guide_msg_archway" = "Archway는 dApp들의 기여도에 따라 리워드가 개발자들에게 분배되도록 설계된 스마트 컨트랙트 블록체인입니다.";
+"guide_msg_sei" = "Sei는 속도, 보안 및 확장성을 위해 설계된 Cosmos SDK 기반 레이어 1 블록체인 네트워크입니다.";
 "guide_msg_stafi" = "StaFi Hub 는 크로스체인 리퀴드 스테이킹을 위해 설계된 Cosmos SDK 기반 블록체인 네트워크입니다.";
+"guide_msg_terra" = "Terra 네트워크는 Terra Classic 에서 하드포크된 Cosmos SDK 기반 비허가형 블록체인 네트워크입니다.";
 "guide_btn_home" = "홈페이지";
 "guide_btn_blog" = "공식 블로그";
 
@@ -422,6 +431,7 @@
 "tx_authz_undelegate_1" = "위임철회할 수량을 입력하세요";
 "tx_authz_redelegate_0" = "검증인을 선택하세요";
 "tx_authz_redelegate_1" = "재위임 할 수량을 입력하세요";
+"tx_authz_revoke_0" = "취소할 권한을 확인하세요";
 "tx_liquid_staking_0" = "수량을 입력하세요";
 "tx_liquid_unstaking_0" = "수량을 입력하세요";
 "tx_liquid_unstaking_1" = "받을 주소를 입력해주세요.";
@@ -793,6 +803,7 @@
 "title_authz_undelegate" = "Authz 위임철회 하기";
 "title_authz_redelegate" = "Authz 재위임 하기";
 "title_authz_send" = "Authz 전송하기";
+"title_authz_revoke" = "권한 취소하기";
 "title_liquid_staking" = "리퀴드 스테이킹";
 "title_liquid_unstaking" = "리퀴드 언스테이킹";
 "title_liquid_redeem" = "리퀴드 상환";
@@ -943,6 +954,7 @@
 "error_no_staking" = "해당 체인은 스테이킹을 지원하지 않습니다.";
 "error_not_dao_member" = "이 Dao의 회원이 아닙니다.";
 "error_can_not_revote" = "재투표 할 수 없습니다.";
+"error_no_selected_grant" = "취소할 권한을 선택하세요.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";

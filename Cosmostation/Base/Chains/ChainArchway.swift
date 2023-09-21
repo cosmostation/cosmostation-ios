@@ -71,3 +71,5 @@ class ChainArchway: ChainConfig {
         return "https://blog.archway.io/"
     }
 }
+
+let ARCHWAY_NS_CONTRACT_ADDRESS = "archway1275jwjpktae4y4y0cdq274a2m0jnpekhttnfuljm6n59wnpyd62qppqxq0"

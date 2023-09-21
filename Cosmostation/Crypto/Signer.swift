@@ -1832,6 +1832,38 @@ class Signer {
         return [anyMsg]
     }
     
+    //Tx for Authz Revoke
+    static func genAuthzRevoke(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                               _ grants: Array<Cosmos_Authz_V1beta1_GrantAuthorization>,
+                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let authzRevoke = genAuthzRevokeMsg(grants)
+        return getGrpcSignedTx(auth, pubkeyType, chainType, authzRevoke, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateAuthzRevoke(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+                                     _ grants: Array<Cosmos_Authz_V1beta1_GrantAuthorization>,
+                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let authzRevoke = genAuthzRevokeMsg(grants)
+        return getGrpcSimulateTx(auth, pubkeyType, chainType, authzRevoke, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genAuthzRevokeMsg(_ grants: Array<Cosmos_Authz_V1beta1_GrantAuthorization>) -> [Google_Protobuf_Any] {
+        var anyMsgs = Array<Google_Protobuf_Any>()
+        grants.forEach { grant in
+            let authzRevoke = Cosmos_Authz_V1beta1_MsgRevoke.with {
+                $0.granter = grant.granter
+                $0.grantee = grant.grantee
+                $0.msgTypeURL = WUtils.getAuthzGrantType(grant)
+            }
+            let anyMsg = Google_Protobuf_Any.with {
+                $0.typeURL = "/cosmos.authz.v1beta1.MsgRevoke"
+                $0.value = try! authzRevoke.serializedData()
+            }
+            anyMsgs.append(anyMsg)
+        }
+        return anyMsgs
+    }
+    
     
     //Tx for Liquidity Staking
     static func genLiquidityStaking(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
@@ -1910,12 +1942,12 @@ class Signer {
             $0.denom = coin.denom
             $0.amount = coin.amount
         }
-        let staking = Pstake_Lscosmos_V1beta1_MsgLiquidStake.with {
+        let staking = Pstake_Liquidstakeibc_V1beta1_MsgLiquidStake.with {
             $0.delegatorAddress = delegator_address
             $0.amount = amount
         }
         let anyMsg = Google_Protobuf_Any.with {
-            $0.typeURL = "/pstake.lscosmos.v1beta1.MsgLiquidStake"
+            $0.typeURL = "/pstake.liquidstakeibc.v1beta1.MsgLiquidStake"
             $0.value = try! staking.serializedData()
         }
         return [anyMsg]
@@ -1940,12 +1972,12 @@ class Signer {
             $0.denom = coin.denom
             $0.amount = coin.amount
         }
-        let reedem = Pstake_Lscosmos_V1beta1_MsgRedeem.with {
+        let reedem = Pstake_Liquidstakeibc_V1beta1_MsgRedeem.with {
             $0.delegatorAddress = delegator_address
             $0.amount = amount
         }
         let anyMsg = Google_Protobuf_Any.with {
-            $0.typeURL = "/pstake.lscosmos.v1beta1.MsgRedeem"
+            $0.typeURL = "/pstake.liquidstakeibc.v1beta1.MsgRedeem"
             $0.value = try! reedem.serializedData()
         }
         return [anyMsg]

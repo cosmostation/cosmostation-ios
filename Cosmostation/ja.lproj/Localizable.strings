@@ -233,6 +233,10 @@
 "str_incentive_amount" = "インセンティブ数量";
 "str_no_result" = "検索結果がありません";
 "str_smart_contract" = "スマートな契約です";
+"str_grantee" = "権限のある受益者です";
+"str_granter" = "権限授与者です";
+"str_grant_type" = "権限タイプです";
+"str_grant_revoke" = "権限の取り消しです";
 
 
 "btn_delegate" = "  委任する";
@@ -290,6 +294,9 @@
 "msg_no_supported_chain" = "このネットワークはもう機能しません。\n\nCosmostationウォレットはアーカイブされたデータのみを表示していますのでご注意ください。";
 "msg_search_chain" = "チェーンやトークンを検索してください。";
 "msg_not_support" = "\n現在接続しているアドレスはまもなくサポートが終了する予定です。\n\n現在のウォレットを使い続けるには、当財団が推奨するウォレットプラットフォームをご検討ください。";
+"msg_granter_empty" = "グラントを受け取り、AUTHZ を開始する";
+"msg_grantee_empty" = "グラントをください、AUTHZ を開始する";
+"msg_grant_empty_msg" = "現在、管理しているグラントがありません。\nウェブウォレットから管理してください";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -354,7 +361,9 @@
 "guide_msg_noble" = "NobleはIBC生態系上、ネイティブトークン発行のために設計されたCosmosSDKベースのブロックチェーンです。";
 "guide_msg_neutron" = "Neutronは、CosmosハブのInterchain Securityを使用する非許可型CosmWasmプラットフォームです。";
 "guide_msg_archway" = "Archwayは、dAppの貢献度に応じてリワードが開発者に分配されるように設計されたスマートコントラクトブロックチェーンです。";
+"guide_msg_sei" = "Seiは速度、セキュリティ、および拡張性のために設計されたCosmosSDKベースのレイヤー1ブロックチェーンネットワークです。";
 "guide_msg_stafi" = "StaFi Hubはクロスチェーンリキッドステーキングのために設計されたCosmos SDKベースのブロックチェーンネットワークです。";
+"guide_msg_terra" = "Terraネットワークは、Terra ClassicでハードフォークされたCosmos SDKベースの非許可型ブロックチェーンネットワークです。";
 "guide_btn_home" = "ホームページ";
 "guide_btn_blog" = "公式ブログ";
 
@@ -422,6 +431,7 @@
 "tx_authz_undelegate_1" = "委任解除数量を入力してください。";
 "tx_authz_redelegate_0" = "検証人を選択してください。";
 "tx_authz_redelegate_1" = "再委任数量を入力してください。";
+"tx_authz_revoke_0" = "キャンセルする権限を確認してください。";
 "tx_liquid_staking_0" = "ステーキング金額を入力してください";
 "tx_liquid_unstaking_0" = "未払金額を入力してください";
 "tx_liquid_unstaking_1" = "受信者のアドレスを入力してください";
@@ -793,6 +803,7 @@
 "title_authz_undelegate" = "Authz Undelegate";
 "title_authz_redelegate" = "Authz Redelegate";
 "title_authz_send" = "Authz Send";
+"title_authz_revoke" = "Authz Revoke";
 "title_liquid_staking" = "Liquid Staking";
 "title_liquid_unstaking" = "Liquid Unstaking";
 "title_liquid_redeem" = "Liquid Redeem";
@@ -943,6 +954,7 @@
 "error_no_staking" = "このチェーンはステーキングをサポートしていません。";
 "error_not_dao_member" = "あなたはこのDAOのメンバーではありません。";
 "error_can_not_revote" = "再投票できません。";
+"error_no_selected_grant" = "キャンセルする権限を選択してください。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

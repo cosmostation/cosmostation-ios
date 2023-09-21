@@ -119,6 +119,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         
         //for authz execute msg type
         self.txTableView.register(UINib(nibName: "TxAuthzExecCell", bundle: nil), forCellReuseIdentifier: "TxAuthzExecCell")
+        self.txTableView.register(UINib(nibName: "TxAuthzRevokeCell", bundle: nil), forCellReuseIdentifier: "TxAuthzRevokeCell")
         
         //for EVM tx
         self.txTableView.register(UINib(nibName: "TxEvmCell", bundle: nil), forCellReuseIdentifier: "TxEvmCell")
@@ -445,6 +446,10 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                     cell?.onBindMsg(chainConfig, mTxRespose!, indexPath.row - 1)
                     return cell!
                     
+                } else if (msg.typeURL.contains(Cosmos_Authz_V1beta1_MsgRevoke.protoMessageName)) {
+                    let cell = tableView.dequeueReusableCell(withIdentifier:"TxAuthzRevokeCell") as? TxCell
+                    cell?.onBindMsg(chainConfig, mTxRespose!, indexPath.row - 1)
+                    return cell!
                 }
                 
                 else if (msg.typeURL.contains(Stride_Stakeibc_MsgLiquidStake.protoMessageName) ||
@@ -455,8 +460,8 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                     
                 }
                 
-                else if (msg.typeURL.contains(Pstake_Lscosmos_V1beta1_MsgLiquidStake.protoMessageName) ||
-                         msg.typeURL.contains(Pstake_Lscosmos_V1beta1_MsgRedeem.protoMessageName)) {
+                else if (msg.typeURL.contains(Pstake_Liquidstakeibc_V1beta1_MsgLiquidStake.protoMessageName) ||
+                         msg.typeURL.contains(Pstake_Liquidstakeibc_V1beta1_MsgRedeem.protoMessageName)) {
                     let cell = tableView.dequeueReusableCell(withIdentifier:"TxPersisLiquidStakeCell") as? TxCell
                     cell?.onBindMsg(chainConfig, mTxRespose!, indexPath.row - 1)
                     return cell!

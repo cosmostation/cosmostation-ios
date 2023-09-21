@@ -111,7 +111,7 @@ struct Pstake_Liquidstakeibc_V1beta1_QueryDepositsRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var hostDenom: String = String()
+  var chainID: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -130,12 +130,36 @@ struct Pstake_Liquidstakeibc_V1beta1_QueryDepositsResponse {
   init() {}
 }
 
+struct Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var chainID: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var deposits: [Pstake_Liquidstakeibc_V1beta1_LSMDeposit] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 struct Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var hostDenom: String = String()
+  var chainID: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -152,6 +176,41 @@ struct Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
+}
+
+struct Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var chainID: String = String()
+
+  var epoch: Int64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unbonding: Pstake_Liquidstakeibc_V1beta1_Unbonding {
+    get {return _unbonding ?? Pstake_Liquidstakeibc_V1beta1_Unbonding()}
+    set {_unbonding = newValue}
+  }
+  /// Returns true if `unbonding` has been explicitly set.
+  var hasUnbonding: Bool {return self._unbonding != nil}
+  /// Clears the value of `unbonding`. Subsequent reads from it will return its default value.
+  mutating func clearUnbonding() {self._unbonding = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _unbonding: Pstake_Liquidstakeibc_V1beta1_Unbonding? = nil
 }
 
 struct Pstake_Liquidstakeibc_V1beta1_QueryUserUnbondingsRequest {
@@ -183,7 +242,7 @@ struct Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var hostDenom: String = String()
+  var chainID: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -202,6 +261,63 @@ struct Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse {
   init() {}
 }
 
+struct Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var chainID: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var balance: Cosmos_Base_V1beta1_Coin {
+    get {return _balance ?? Cosmos_Base_V1beta1_Coin()}
+    set {_balance = newValue}
+  }
+  /// Returns true if `balance` has been explicitly set.
+  var hasBalance: Bool {return self._balance != nil}
+  /// Clears the value of `balance`. Subsequent reads from it will return its default value.
+  mutating func clearBalance() {self._balance = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _balance: Cosmos_Base_V1beta1_Coin? = nil
+}
+
+struct Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var chainID: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var rate: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Pstake_Liquidstakeibc_V1beta1_QueryParamsRequest: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_QueryParamsResponse: @unchecked Sendable {}
@@ -211,12 +327,20 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryHostChainsRequest: @unchecked Senda
 extension Pstake_Liquidstakeibc_V1beta1_QueryHostChainsResponse: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_QueryDepositsRequest: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_QueryDepositsResponse: @unchecked Sendable {}
+extension Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest: @unchecked Sendable {}
+extension Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse: @unchecked Sendable {}
+extension Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest: @unchecked Sendable {}
+extension Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_QueryUserUnbondingsRequest: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_QueryUserUnbondingsResponse: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest: @unchecked Sendable {}
 extension Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse: @unchecked Sendable {}
+extension Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest: @unchecked Sendable {}
+extension Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse: @unchecked Sendable {}
+extension Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest: @unchecked Sendable {}
+extension Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -400,7 +524,7 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryHostChainsResponse: SwiftProtobuf.M
 extension Pstake_Liquidstakeibc_V1beta1_QueryDepositsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".QueryDepositsRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "host_denom"),
+    1: .standard(proto: "chain_id"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -409,21 +533,21 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryDepositsRequest: SwiftProtobuf.Mess
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.hostDenom) }()
+      case 1: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.hostDenom.isEmpty {
-      try visitor.visitSingularStringField(value: self.hostDenom, fieldNumber: 1)
+    if !self.chainID.isEmpty {
+      try visitor.visitSingularStringField(value: self.chainID, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryDepositsRequest, rhs: Pstake_Liquidstakeibc_V1beta1_QueryDepositsRequest) -> Bool {
-    if lhs.hostDenom != rhs.hostDenom {return false}
+    if lhs.chainID != rhs.chainID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -461,10 +585,10 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryDepositsResponse: SwiftProtobuf.Mes
   }
 }
 
-extension Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".QueryUnbondingsRequest"
+extension Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryLSMDepositsRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "host_denom"),
+    1: .standard(proto: "chain_id"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -473,21 +597,85 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest: SwiftProtobuf.Me
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.hostDenom) }()
+      case 1: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.hostDenom.isEmpty {
-      try visitor.visitSingularStringField(value: self.hostDenom, fieldNumber: 1)
+    if !self.chainID.isEmpty {
+      try visitor.visitSingularStringField(value: self.chainID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest, rhs: Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsRequest) -> Bool {
+    if lhs.chainID != rhs.chainID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryLSMDepositsResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "deposits"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.deposits) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.deposits.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.deposits, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse, rhs: Pstake_Liquidstakeibc_V1beta1_QueryLSMDepositsResponse) -> Bool {
+    if lhs.deposits != rhs.deposits {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryUnbondingsRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "chain_id"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.chainID.isEmpty {
+      try visitor.visitSingularStringField(value: self.chainID, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest, rhs: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsRequest) -> Bool {
-    if lhs.hostDenom != rhs.hostDenom {return false}
+    if lhs.chainID != rhs.chainID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -520,6 +708,80 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse: SwiftProtobuf.M
 
   static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse, rhs: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingsResponse) -> Bool {
     if lhs.unbondings != rhs.unbondings {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryUnbondingRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "chain_id"),
+    2: .same(proto: "epoch"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.epoch) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.chainID.isEmpty {
+      try visitor.visitSingularStringField(value: self.chainID, fieldNumber: 1)
+    }
+    if self.epoch != 0 {
+      try visitor.visitSingularInt64Field(value: self.epoch, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest, rhs: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingRequest) -> Bool {
+    if lhs.chainID != rhs.chainID {return false}
+    if lhs.epoch != rhs.epoch {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryUnbondingResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "unbonding"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._unbonding) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._unbonding {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse, rhs: Pstake_Liquidstakeibc_V1beta1_QueryUnbondingResponse) -> Bool {
+    if lhs._unbonding != rhs._unbonding {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -592,7 +854,7 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryUserUnbondingsResponse: SwiftProtob
 extension Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".QueryValidatorUnbondingRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "host_denom"),
+    1: .standard(proto: "chain_id"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -601,21 +863,21 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest: SwiftPro
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.hostDenom) }()
+      case 1: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.hostDenom.isEmpty {
-      try visitor.visitSingularStringField(value: self.hostDenom, fieldNumber: 1)
+    if !self.chainID.isEmpty {
+      try visitor.visitSingularStringField(value: self.chainID, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest, rhs: Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingRequest) -> Bool {
-    if lhs.hostDenom != rhs.hostDenom {return false}
+    if lhs.chainID != rhs.chainID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -648,6 +910,138 @@ extension Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse: SwiftPr
 
   static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse, rhs: Pstake_Liquidstakeibc_V1beta1_QueryValidatorUnbondingResponse) -> Bool {
     if lhs.validatorUnbondings != rhs.validatorUnbondings {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryDepositAccountBalanceRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "chain_id"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.chainID.isEmpty {
+      try visitor.visitSingularStringField(value: self.chainID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest, rhs: Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceRequest) -> Bool {
+    if lhs.chainID != rhs.chainID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryDepositAccountBalanceResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "balance"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._balance) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._balance {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse, rhs: Pstake_Liquidstakeibc_V1beta1_QueryDepositAccountBalanceResponse) -> Bool {
+    if lhs._balance != rhs._balance {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryExchangeRateRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "chain_id"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.chainID.isEmpty {
+      try visitor.visitSingularStringField(value: self.chainID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest, rhs: Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateRequest) -> Bool {
+    if lhs.chainID != rhs.chainID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryExchangeRateResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "rate"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.rate) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.rate.isEmpty {
+      try visitor.visitSingularStringField(value: self.rate, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse, rhs: Pstake_Liquidstakeibc_V1beta1_QueryExchangeRateResponse) -> Bool {
+    if lhs.rate != rhs.rate {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -202,9 +202,10 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
                 return;
                 
             } else {
-                fetchCnt = 2
+                fetchCnt = 3
                 onCheckIcnsNameService(recipientChainConfig, userInput!)
                 onCheckStargazeNameService(recipientChainConfig, userInput!)
+                onCheckArchwayNameService(recipientChainConfig, userInput!)
             }
         }
     }
@@ -351,6 +352,29 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         }
     }
     
+    func onCheckArchwayNameService(_ recipientChainConfig: ChainConfig, _ userInput: String) {
+        DispatchQueue.global().async {
+            do {
+                let nameReq = ArchwayIcnsByNameReq.init(userInput)
+                let channel = BaseNetWork.getConnection(recipientChainConfig)!
+                let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+                    $0.address = ARCHWAY_NS_CONTRACT_ADDRESS
+                    $0.queryData = nameReq.getEncode()
+                }
+                if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    if let matchedAddress = try? JSONDecoder().decode(ArchwayIcnsByNameRes.self, from: response.data).address {
+                        if (matchedAddress.isEmpty == false) {
+                            self.nameservices = [NameService.init(.archway, nameReq.resolve_record?.name, matchedAddress)]
+                        }
+                    }
+                }
+                try channel.close().wait()
+
+            } catch { print("onCheckArchwayNameService failed: \(error)") }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
     var fetchCnt = 0
     var nameservices = Array<NameService>()
     func onFetchFinished() {
@@ -362,7 +386,11 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
             return;
         }
         if (nameservices.count == 2 && (nameservices[0].address == nameservices[1].address)) {
-            nameservices[0].type = .icns_stargaze
+            if (recipientChainConfig.chainType == .ARCHWAY_MAIN) {
+                nameservices[0].type = .icns_archway
+            } else {
+                nameservices[0].type = .icns_stargaze
+            }
             nameservices.removeLast()
         }
         
@@ -381,6 +409,8 @@ enum NameServiceType: Int {
     case icns = 1
     case stargaze = 2
     case icns_stargaze = 3
+    case archway = 4
+    case icns_archway = 5
 }
 
 public struct NameService {

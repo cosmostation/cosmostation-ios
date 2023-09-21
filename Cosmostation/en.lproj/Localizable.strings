@@ -233,6 +233,10 @@
 "str_incentive_amount" = "Incentive Reward";
 "str_no_result" = "No Result";
 "str_smart_contract" = "Smart Contract";
+"str_grantee" = "Grantee";
+"str_granter" = "Granter";
+"str_grant_type" = "Grant Type";
+"str_grant_revoke" = "Grant Revoke";
 
 
 "btn_delegate" = "  Delegate";
@@ -290,6 +294,9 @@
 "msg_no_supported_chain" = "This network is no longer operational.\n\nNote that Cosmostation Wallet is showing archived data only.";
 "msg_search_chain" = "Search by Chain or Token";
 "msg_not_support" = "\nThe address you are currently using will no longer be available.\n\nIf you wish to continue using your current wallet, we kindly recommend reviewing the wallet platforms recommended by the foundation.";
+"msg_granter_empty" = "RECEIVE GRANT TO START AUTHZ";
+"msg_grantee_empty" = "GIVE GRANT TO START AUTHZ";
+"msg_grant_empty_msg" = "You do not have any grants at the moment\nPlease manage your grants from a web wallet";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -354,7 +361,9 @@
 "guide_msg_noble" = "Noble is a Cosmos chain bringing native asset issuance to the IBC ecosystem.";
 "guide_msg_neutron" = "Neutron is a permissionless CosmWasm platform secured by Cosmos Hub’s Interchain Security.";
 "guide_msg_archway" = "Archway is a persmissionless smart contract blockchain designed to incentivize the deployments of dApps.";
+"guide_msg_sei" = "Sei is a Cosmos SDK-based layer 1 blockchain network designed for speed, security and scalability.";
 "guide_msg_stafi" = "StaFi Hub is a sovereign Cosmos SDK based blockchain designed for cross-chain liquid staking.";
+"guide_msg_terra" = "Terra is a Cosmos SDK-based permissionless blockchain network hard forked from Terra Classic network.";
 "guide_btn_home" = "Home Page";
 "guide_btn_blog" = "Official Blog";
 
@@ -422,6 +431,7 @@
 "tx_authz_undelegate_1" = "Enter undelegation amount";
 "tx_authz_redelegate_0" = "Select validator";
 "tx_authz_redelegate_1" = "Enter redelegation amount";
+"tx_authz_revoke_0" = "Check the Grant to Revoke";
 "tx_liquid_staking_0" = "Enter staking amount";
 "tx_liquid_unstaking_0" = "Enter unstaking amount";
 "tx_liquid_unstaking_1" = "Enter recipient Address";
@@ -793,6 +803,7 @@
 "title_authz_undelegate" = "Authz Undelegate";
 "title_authz_redelegate" = "Authz Redelegate";
 "title_authz_send" = "Authz Send";
+"title_authz_revoke" = "Authz Revoke";
 "title_liquid_staking" = "Liquid Staking";
 "title_liquid_unstaking" = "Liquid Unstaking";
 "title_liquid_redeem" = "Liquid Redeem";
@@ -943,6 +954,7 @@
 "error_no_staking" = "The chain does not support staking.";
 "error_not_dao_member" = "You are not this Dao member.";
 "error_can_not_revote" = "Can not revote.";
+"error_no_selected_grant" = "Select the grant to revoke.";
 
 
 "alert_title_no_private_key" = "No Private Key";

@@ -431,12 +431,12 @@ class CommonWCViewController: BaseViewController {
             if (params[2].exists() && params[2]["fee"].exists() && params[2]["fee"]["amount"].exists()) {
                 let amounts = params[2]["fee"]["amount"].arrayValue
                 let gas = params[2]["fee"]["gas"].stringValue
-                let value = NSDecimalNumber(string: gas).dividing(by: NSDecimalNumber(value: 40))
+                let value = BigInt(NSDecimalNumber(string: gas).dividing(by: NSDecimalNumber(value: 40), withBehavior: WUtils.handler0).stringValue)
                 if (amounts.count == 0) {
-                    params[2]["fee"]["amount"] = [["amount": value.stringValue, "denom": denom]]
+                    params[2]["fee"]["amount"] = [["amount": String(value ?? "0"), "denom": denom]]
                 }
                 if amounts.count == 1 && amounts.contains(where: { $0["denom"].stringValue == denom && $0["amount"].stringValue == "0" }) {
-                    params[2]["fee"]["amount"] = [["amount": value.stringValue, "denom": denom]]
+                    params[2]["fee"]["amount"] = [["amount": String(value ?? "0"), "denom": denom]]
                 }
             }
             
@@ -950,12 +950,12 @@ class CommonWCViewController: BaseViewController {
             if (signDoc["fee"].exists() && signDoc["fee"]["amount"].exists()) {
                 let amounts = signDoc["fee"]["amount"].arrayValue
                 let gas = signDoc["fee"]["gas"].stringValue
-                let value = NSDecimalNumber(string: gas).dividing(by: NSDecimalNumber(value: 40))
+                let value = BigInt(NSDecimalNumber(string: gas).dividing(by: NSDecimalNumber(value: 40), withBehavior: WUtils.handler0).stringValue)
                 if (amounts.count == 0) {
-                    signDoc["fee"]["amount"] = [["amount": value.stringValue, "denom": denom]]
+                    signDoc["fee"]["amount"] = [["amount": String(value ?? "0"), "denom": denom]]
                 }
                 if amounts.count == 1 && amounts.contains(where: { $0["denom"].stringValue == denom && $0["amount"].stringValue == "0" }) {
-                    signDoc["fee"]["amount"] = [["amount": value.stringValue, "denom": denom]]
+                    signDoc["fee"]["amount"] = [["amount": String(value ?? "0"), "denom": denom]]
                 }
             }
             let sortedJsonData = try? signDoc.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
@@ -1346,6 +1346,12 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
 //                UIApplication.shared.open(url, options: [:])
 //                decisionHandler(.cancel)
 //                return
+                
+            } else if (url.absoluteString.starts(with: "keplrwalletwcv2://wcV2")) {
+                UIApplication.shared.open(URL(string: url.absoluteString.removingPercentEncoding!.replacingOccurrences(of: "keplrwalletwcv2://wcV2", with: "cosmostation://wc"))!, options: [:])
+                decisionHandler(.cancel)
+                return
+                
             } else if (url.absoluteString.range(of: "https://.*/wc", options: .regularExpression) != nil) {
                 let newUrl = url.absoluteString.replacingCharacters(in: url.absoluteString.range(of: "https://.*/wc", options: .regularExpression)!, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
                 UIApplication.shared.open(URL(string: newUrl.removingPercentEncoding!)!, options: [:])
@@ -1635,7 +1641,7 @@ extension CommonWCViewController: WKScriptMessageHandler {
                 data["isKeystone"] = false
                 data["isEthermint"] = false
                 data["isLedger"] = false
-                data["name"].stringValue = self.account?.account_nick_name ?? ""
+                data["name"].stringValue = self.account?.getDpName() ?? ""
                 
                 if (dappChainConfig != nil) {
                     privateKey = getBaseAccountKey(dappChainType: dappChainType!, account: account!)
