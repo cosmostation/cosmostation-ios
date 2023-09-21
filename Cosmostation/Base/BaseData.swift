@@ -1432,6 +1432,17 @@ final class BaseData : NSObject{
         }
     }
     
+    public func changeAddressByShentu() {
+        var shentuChainConfig = ChainFactory.getChainConfig(.CERTIK_MAIN)
+        var shentuAccounts = selectAllAccountsByChain(shentuChainConfig!.chainType)
+        shentuAccounts.forEach { account in
+            if (account.account_address.starts(with: "certik")) {
+                account.account_address = WKey.getAddressFromOpAddress(account.account_address, shentuChainConfig)
+                updateAccountAddress(account)
+            }
+        }
+    }
+    
     public func setPkeyUpdate(_ account :Account, _ wordSeedPairs: Array<WordSeedPair>) {
         if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
             let seed = wordSeedPairs.filter { $0.word == words }.first!.seed
