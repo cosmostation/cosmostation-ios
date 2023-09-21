@@ -61,7 +61,8 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
                     }
                 } else if (msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
                     //add forward path
-                    if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.chain }).first {
+                    if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.chain &&
+                        msAsset.beforeChain($0) == chainConfig?.chainAPIName }).first {
                         if !self.recipientableChains.contains(where: { $0.chainAPIName == sendable.chainAPIName }) {
                             self.recipientableChains.append(sendable)
                         }
