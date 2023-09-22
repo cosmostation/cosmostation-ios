@@ -848,6 +848,11 @@
 "title_neutron_vote_overrule" = "다오 투표 (오버롤)";
 "title_select_language" = "언어 선택";
 "title_select_currency" = "통화 선택";
+"title_select_input_chain" = "입력 체인 선택";
+"title_select_output_chain" = "출력 체인 선택";
+"title_select_input_asset" = "입력 자산 선택";
+"title_select_output_asset" = "출력 자산 선택";
+"title_select_slippage" = "슬리피지 선택";
 
 
 "proposal_type_basic" = "기본";

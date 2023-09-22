@@ -7,19 +7,27 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class BaseSheet: BaseVC {
     
     @IBOutlet weak var sheetTitle: UILabel!
+    @IBOutlet weak var sheetSearchBar: UISearchBar!
     @IBOutlet weak var sheetTableView: UITableView!
     
     var sheetType: SheetType?
     var sheetDelegate: BaseSheetDelegate?
+    
+    var swapChains = Array<JSON>()
+    var swapAssets = Array<JSON>()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         updateTitle()
+        
+        sheetSearchBar.backgroundImage = UIImage()
         
         sheetTableView.delegate = self
         sheetTableView.dataSource = self
@@ -29,7 +37,15 @@ class BaseSheet: BaseVC {
         sheetTableView.register(UINib(nibName: "SwitchAccountCell", bundle: nil), forCellReuseIdentifier: "SwitchAccountCell")
         sheetTableView.register(UINib(nibName: "SwitchCurrencyCell", bundle: nil), forCellReuseIdentifier: "SwitchCurrencyCell")
         sheetTableView.register(UINib(nibName: "SwitchPriceDisplayCell", bundle: nil), forCellReuseIdentifier: "SwitchPriceDisplayCell")
+        sheetTableView.register(UINib(nibName: "SelectSwapChainCell", bundle: nil), forCellReuseIdentifier: "SelectSwapChainCell")
+        sheetTableView.register(UINib(nibName: "SelectSwapAssetCell", bundle: nil), forCellReuseIdentifier: "SelectSwapAssetCell")
         sheetTableView.sectionHeaderTopPadding = 0
+        
+        
+//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        sheetTableView.addGestureRecognizer(tapGesture)
     }
     
     func updateTitle() {
@@ -50,7 +66,27 @@ class BaseSheet: BaseVC {
             
         } else if (sheetType == .SwitchAutoPass) {
             sheetTitle.text = NSLocalizedString("str_autopass", comment: "")
+            
+        } else if (sheetType == .SelectSwapInputChain) {
+            sheetTitle.text = NSLocalizedString("title_select_input_chain", comment: "")
+            
+        } else if (sheetType == .SelectSwapOutputChain) {
+            sheetTitle.text = NSLocalizedString("title_select_output_chain", comment: "")
+            
+        } else if (sheetType == .SelectSwapInputAsset) {
+            sheetTitle.text = NSLocalizedString("title_select_input_asset", comment: "")
+            
+        } else if (sheetType == .SelectSwapOutputAsset) {
+            sheetTitle.text = NSLocalizedString("title_select_output_asset", comment: "")
+            
+        } else if (sheetType == .SelectSwapSlippage) {
+            sheetTitle.text = NSLocalizedString("title_select_slippage", comment: "")
+            
         }
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 
 }
@@ -76,6 +112,14 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SwitchAutoPass) {
             return AutoPass.getAutoPasses().count
+            
+        } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
+            return swapChains.count
+            
+        } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
+            return swapAssets.count
+            
+        } else if (sheetType == .SelectSwapSlippage) {
             
         }
         return 0
@@ -112,6 +156,18 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindAutoPass(indexPath.row)
             return cell!
             
+        } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapChainCell") as? SelectSwapChainCell
+            cell?.onBindChain(swapChains[indexPath.row])
+            return cell!
+            
+        } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset)  {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapAssetCell") as? SelectSwapAssetCell
+            cell?.onBindAsset(swapAssets[indexPath.row])
+            return cell!
+            
+        } else if (sheetType == .SelectSwapSlippage) {
+            
         }
         return UITableViewCell()
     }
@@ -121,6 +177,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result = BaseSheetResult.init(indexPath.row, String(BaseData.instance.selectAccounts()[indexPath.row].id))
             sheetDelegate?.onSelectedSheet(sheetType, result)
         } else {
+            print("didSelectRowAt ", indexPath.row)
             sheetDelegate?.onSelectedSheet(sheetType, BaseSheetResult.init(indexPath.row, nil))
         }
         dismiss(animated: true)
@@ -150,4 +207,9 @@ public enum SheetType: Int {
     case SwitchCurrency = 3
     case SwitchPriceColor = 4
     case SwitchAutoPass = 5
+    case SelectSwapInputChain = 6
+    case SelectSwapOutputChain = 7
+    case SelectSwapInputAsset = 8
+    case SelectSwapOutputAsset = 9
+    case SelectSwapSlippage = 10
 }

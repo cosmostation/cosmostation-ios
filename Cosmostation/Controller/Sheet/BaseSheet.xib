@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaseSheet" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="sheetSearchBar" destination="XSr-gA-zxD" id="JBL-Gr-TwA"/>
                 <outlet property="sheetTableView" destination="y3H-2O-YKP" id="VMW-qX-frw"/>
                 <outlet property="sheetTitle" destination="fQz-pl-DzJ" id="21m-mP-QUY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -33,27 +34,40 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6T-Wd-Q5b">
-                    <rect key="frame" x="0.0" y="135.33333333333337" width="393" height="0.33333333333331439"/>
+                    <rect key="frame" x="0.0" y="139.33333333333334" width="393" height="0.66666666666665719"/>
                     <color key="backgroundColor" name="_divider"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="0.29999999999999999" id="K1e-c9-jcx"/>
+                        <constraint firstAttribute="height" constant="0.80000000000000004" id="K1e-c9-jcx"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="y3H-2O-YKP">
-                    <rect key="frame" x="0.0" y="135.66666666666669" width="393" height="716.33333333333326"/>
+                    <rect key="frame" x="0.0" y="140" width="393" height="712"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <searchBar hidden="YES" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="XSr-gA-zxD">
+                    <rect key="frame" x="153.33333333333337" y="77.333333333333329" width="235.66666666666663" height="55.999999999999986"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" name="_color01"/>
+                    <color key="barTintColor" name="_colorBg"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="lra-s4-dIz"/>
+                    </connections>
+                </searchBar>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstItem="O6T-Wd-Q5b" firstAttribute="top" secondItem="fQz-pl-DzJ" secondAttribute="bottom" constant="20" id="0Kn-1d-5Et"/>
+                <constraint firstItem="O6T-Wd-Q5b" firstAttribute="top" secondItem="fQz-pl-DzJ" secondAttribute="bottom" constant="24" id="3A3-y1-ijT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="y3H-2O-YKP" secondAttribute="trailing" id="H5B-W7-DJI"/>
                 <constraint firstAttribute="bottom" secondItem="y3H-2O-YKP" secondAttribute="bottom" id="It2-8q-kwj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="O6T-Wd-Q5b" secondAttribute="trailing" id="ShF-fI-uEM"/>
+                <constraint firstItem="XSr-gA-zxD" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.6" id="UJZ-nb-oWD"/>
                 <constraint firstItem="y3H-2O-YKP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VqD-RM-Zhg"/>
+                <constraint firstItem="XSr-gA-zxD" firstAttribute="centerY" secondItem="fQz-pl-DzJ" secondAttribute="centerY" id="Zb4-Bf-LSx"/>
                 <constraint firstItem="y3H-2O-YKP" firstAttribute="top" secondItem="O6T-Wd-Q5b" secondAttribute="bottom" id="c80-fa-xcu"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XSr-gA-zxD" secondAttribute="trailing" constant="4" id="cBA-jF-fRz"/>
                 <constraint firstItem="O6T-Wd-Q5b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fbg-WD-fKn"/>
                 <constraint firstItem="fQz-pl-DzJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="lfK-98-Ddr"/>
                 <constraint firstItem="fQz-pl-DzJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="waU-4s-JD9"/>
@@ -72,7 +86,7 @@
             <color red="1" green="1" blue="1" alpha="0.20200000703334808" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

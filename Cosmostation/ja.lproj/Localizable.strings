@@ -847,6 +847,11 @@
 "title_neutron_vote_overrule" = "Dao Vote (Overrule)";
 "title_select_language" = "Select Language";
 "title_select_currency" = "Select Currency";
+"title_select_input_chain" = "Select Input Chain";
+"title_select_output_chain" = "Select Output Chain";
+"title_select_input_asset" = "Select Input Asset";
+"title_select_output_asset" = "Select Output Asset";
+"title_select_slippage" = "Select Slippage";
 
 
 "proposal_type_basic" = "Basic";

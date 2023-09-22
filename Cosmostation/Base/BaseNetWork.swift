@@ -58,7 +58,7 @@ class BaseNetWork {
     }
     
     func fetchAssets() {
-//        print("fetchAssets Start ", BaseNetWork.getMintscanAssetsUrl())
+        print("fetchAssets Start ", BaseNetWork.getMintscanAssetsUrl())
         AF.request(BaseNetWork.getMintscanAssetsUrl(), method: .get)
             .responseDecodable(of: MintscanAssets.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
