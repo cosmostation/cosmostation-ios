@@ -47,6 +47,12 @@ class BaseVC: UIViewController {
         present(waitAlert!, animated: true, completion: nil)
     }
     
+    public func showWaitDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            self.showWait()
+        });
+    }
+    
     public func hideWait() {
         if (waitAlert != nil) {
             waitAlert?.dismiss(animated: true, completion: nil)

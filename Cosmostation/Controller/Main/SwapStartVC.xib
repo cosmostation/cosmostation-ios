@@ -67,14 +67,6 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QRb-vF-1tj" customClass="LottieAnimationView" customModule="Lottie">
-                    <rect key="frame" x="106.66666666666669" y="383.66666666666669" width="180" height="110"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="110" id="Mgh-R1-8tZ"/>
-                        <constraint firstAttribute="width" constant="180" id="kGO-sX-Kvc"/>
-                    </constraints>
-                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swap" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8D-1w-Zfs">
                     <rect key="frame" x="19.999999999999996" y="91" width="43.666666666666657" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
@@ -863,6 +855,14 @@
                         <action selector="onClickSwap:" destination="-1" eventType="touchUpInside" id="Ecs-gh-zxZ"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QRb-vF-1tj" customClass="LottieAnimationView" customModule="Lottie">
+                    <rect key="frame" x="106.66666666666669" y="383.66666666666669" width="180" height="110"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="Mgh-R1-8tZ"/>
+                        <constraint firstAttribute="width" constant="180" id="kGO-sX-Kvc"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="_colorBg"/>

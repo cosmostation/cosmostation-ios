@@ -45,7 +45,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <searchBar hidden="YES" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="XSr-gA-zxD">
-                    <rect key="frame" x="153.33333333333337" y="77.333333333333329" width="235.66666666666663" height="55.999999999999986"/>
+                    <rect key="frame" x="212" y="77.333333333333329" width="177" height="55.999999999999986"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_color01"/>
                     <color key="barTintColor" name="_colorBg"/>
@@ -63,7 +63,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="y3H-2O-YKP" secondAttribute="trailing" id="H5B-W7-DJI"/>
                 <constraint firstAttribute="bottom" secondItem="y3H-2O-YKP" secondAttribute="bottom" id="It2-8q-kwj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="O6T-Wd-Q5b" secondAttribute="trailing" id="ShF-fI-uEM"/>
-                <constraint firstItem="XSr-gA-zxD" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.6" id="UJZ-nb-oWD"/>
+                <constraint firstItem="XSr-gA-zxD" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.45" id="UJZ-nb-oWD"/>
                 <constraint firstItem="y3H-2O-YKP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VqD-RM-Zhg"/>
                 <constraint firstItem="XSr-gA-zxD" firstAttribute="centerY" secondItem="fQz-pl-DzJ" secondAttribute="centerY" id="Zb4-Bf-LSx"/>
                 <constraint firstItem="y3H-2O-YKP" firstAttribute="top" secondItem="O6T-Wd-Q5b" secondAttribute="bottom" id="c80-fa-xcu"/>

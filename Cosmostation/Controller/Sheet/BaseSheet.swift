@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class BaseSheet: BaseVC {
+class BaseSheet: BaseVC, UISearchBarDelegate {
     
     @IBOutlet weak var sheetTitle: UILabel!
     @IBOutlet weak var sheetSearchBar: UISearchBar!
@@ -20,6 +20,9 @@ class BaseSheet: BaseVC {
     
     var swapChains = Array<JSON>()
     var swapAssets = Array<JSON>()
+    var searchList = Array<JSON>()
+    var swapBalance = Array<Cosmos_Base_V1beta1_Coin>()
+    var swapBalanceChain: CosmosClass!
     
 
     override func viewDidLoad() {
@@ -28,6 +31,7 @@ class BaseSheet: BaseVC {
         updateTitle()
         
         sheetSearchBar.backgroundImage = UIImage()
+        sheetSearchBar.delegate = self
         
         sheetTableView.delegate = self
         sheetTableView.dataSource = self
@@ -43,9 +47,9 @@ class BaseSheet: BaseVC {
         
         
 //        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tapGesture.cancelsTouchesInView = false
-        sheetTableView.addGestureRecognizer(tapGesture)
+//        let tapDismiss = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+//        tapDismiss.cancelsTouchesInView = false
+//        view.addGestureRecognizer(tapDismiss)
     }
     
     func updateTitle() {
@@ -69,15 +73,23 @@ class BaseSheet: BaseVC {
             
         } else if (sheetType == .SelectSwapInputChain) {
             sheetTitle.text = NSLocalizedString("title_select_input_chain", comment: "")
+            sheetSearchBar.isHidden = false
+            searchList = swapChains
             
         } else if (sheetType == .SelectSwapOutputChain) {
             sheetTitle.text = NSLocalizedString("title_select_output_chain", comment: "")
+            sheetSearchBar.isHidden = false
+            searchList = swapChains
             
         } else if (sheetType == .SelectSwapInputAsset) {
             sheetTitle.text = NSLocalizedString("title_select_input_asset", comment: "")
+            sheetSearchBar.isHidden = false
+            searchList = swapAssets
             
         } else if (sheetType == .SelectSwapOutputAsset) {
             sheetTitle.text = NSLocalizedString("title_select_output_asset", comment: "")
+            sheetSearchBar.isHidden = false
+            searchList = swapAssets
             
         } else if (sheetType == .SelectSwapSlippage) {
             sheetTitle.text = NSLocalizedString("title_select_slippage", comment: "")
@@ -85,10 +97,35 @@ class BaseSheet: BaseVC {
         }
     }
     
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
+//    @objc func dismissKeyboard() {
+//        view.endEditing(true)
+//    }
 
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        sheetSearchBar.text = ""
+        sheetSearchBar.endEditing(true)
+        if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
+            searchList = swapChains
+        } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
+            searchList = swapAssets
+        }
+        sheetTableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
+            searchList = searchText.isEmpty ? swapChains : swapChains.filter { json in
+                return json["chain_name"].stringValue.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+            
+        } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
+            searchList = searchText.isEmpty ? swapAssets : swapAssets.filter { json in
+                return json["symbol"].stringValue.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+        }
+        sheetTableView.reloadData()
+    }
 }
 
 
@@ -114,10 +151,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             return AutoPass.getAutoPasses().count
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
-            return swapChains.count
+            return searchList.count
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
-            return swapAssets.count
+            return searchList.count
             
         } else if (sheetType == .SelectSwapSlippage) {
             
@@ -158,12 +195,12 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapChainCell") as? SelectSwapChainCell
-            cell?.onBindChain(swapChains[indexPath.row])
+            cell?.onBindChain(searchList[indexPath.row])
             return cell!
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset)  {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapAssetCell") as? SelectSwapAssetCell
-            cell?.onBindAsset(swapAssets[indexPath.row])
+            cell?.onBindAsset(swapBalanceChain, searchList[indexPath.row], swapBalance)
             return cell!
             
         } else if (sheetType == .SelectSwapSlippage) {
@@ -176,8 +213,16 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         if (sheetType == .SwitchAccount) {
             let result = BaseSheetResult.init(indexPath.row, String(BaseData.instance.selectAccounts()[indexPath.row].id))
             sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
+            let result = BaseSheetResult.init(indexPath.row, searchList[indexPath.row]["chain_id"].stringValue)
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset)  {
+            let result = BaseSheetResult.init(indexPath.row, searchList[indexPath.row]["denom"].stringValue)
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
         } else {
-            print("didSelectRowAt ", indexPath.row)
             sheetDelegate?.onSelectedSheet(sheetType, BaseSheetResult.init(indexPath.row, nil))
         }
         dismiss(animated: true)

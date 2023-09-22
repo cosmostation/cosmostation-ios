@@ -23,12 +23,17 @@ class SelectSwapAssetCell: UITableViewCell {
     }
     
     
-    func onBindAsset(_ asset: JSON) {
-        if let assetLogo = URL(string: asset["logo_uri"].stringValue) {
-            coinImg.af.setImage(withURL: assetLogo)
-        } else {
-            coinImg.image = UIImage(named: "tokenDefault")
-        }
+    func onBindAsset(_ chain: CosmosClass, _ asset: JSON, _ balances: [Cosmos_Base_V1beta1_Coin] ) {
         symbolLabel.text = asset["symbol"].stringValue
+        
+        if let coin = balances.filter({ $0.denom == asset["denom"].stringValue }).first,
+           let msAsset = BaseData.instance.getAsset(chain.apiName, asset["denom"].stringValue) {
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let amount = NSDecimalNumber(string: coin.amount)
+            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+            
+            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, msAsset.decimals)
+            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+        }
     }
 }
