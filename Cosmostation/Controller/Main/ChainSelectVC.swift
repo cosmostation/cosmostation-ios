@@ -23,19 +23,13 @@ class ChainSelectVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg2")!)
-//        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-//        backgroundImage.image = UIImage(named: "bg2")
-//        backgroundImage.contentMode =  .scaleToFill
-//        self.view.insertSubview(backgroundImage, at: 0)
-        
         tableView.isHidden = true
         confirmBtn.isHidden = true
         loadingMsgLabel.isHidden = false
         loadingCntLabel.isHidden = false
         powerLabel.isHidden = false
         loadingView.isHidden = false
-        loadingView.animation = LottieAnimation.named("loading2")
+        loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3

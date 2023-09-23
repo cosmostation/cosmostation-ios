@@ -34,7 +34,7 @@ class BaseVC: UIViewController {
     public func showWait() {
         waitAlert = UIAlertController(title: "", message: "\n\n\n\n", preferredStyle: .alert)
         let lottieView = LottieAnimationView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
-        lottieView.animation = LottieAnimation.named("loading2")
+        lottieView.animation = LottieAnimation.named("loading")
         lottieView.contentMode = .scaleAspectFit
         lottieView.loopMode = .loop
         lottieView.play()

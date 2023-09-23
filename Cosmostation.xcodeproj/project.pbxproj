@@ -19,10 +19,6 @@
 		04117B7F2AA5860600637836 /* ChainOsmosis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04117B7D2AA5860600637836 /* ChainOsmosis.swift */; };
 		04172B7A29F6819300D6279C /* Cw20VaultDepositReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */; };
 		04172B7C29F6826200D6279C /* Cw20VaultDepositRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */; };
-		04172B9329F7AE4000D6279C /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */; };
-		04172B9429F7AE4000D6279C /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */; };
-		04172B9529F7AE4000D6279C /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */; };
-		04172B9629F7AE4000D6279C /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */; };
 		042296812A890C9B003C7630 /* ChainKava118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava118.swift */; };
 		042296822A890C9B003C7630 /* ChainKava118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava118.swift */; };
 		042296842A890CC4003C7630 /* ChainKavaEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296832A890CC4003C7630 /* ChainKavaEVM.swift */; };
@@ -162,8 +158,6 @@
 		04D279DD2A66863C00AF046A /* BaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279DB2A66863C00AF046A /* BaseAccount.swift */; };
 		04D279E12A66E17B00AF046A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279E02A66E17B00AF046A /* Lottie */; };
 		04D279E32A66E18800AF046A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279E22A66E18800AF046A /* Lottie */; };
-		04D279E62A66E32A00AF046A /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D279E52A66E32A00AF046A /* loading.json */; };
-		04D279E72A66E32A00AF046A /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D279E52A66E32A00AF046A /* loading.json */; };
 		04D279EA2A67C96500AF046A /* ChainCosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279E92A67C96500AF046A /* ChainCosmos.swift */; };
 		04D279EB2A67C96500AF046A /* ChainCosmos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279E92A67C96500AF046A /* ChainCosmos.swift */; };
 		04D279ED2A67C96F00AF046A /* ChainKava459.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279EC2A67C96F00AF046A /* ChainKava459.swift */; };
@@ -335,8 +329,6 @@
 		28CE973625872B7C006DEBEE /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE973525872B7C006DEBEE /* Signer.swift */; };
 		28D765A2271585FA00730F47 /* StarnameAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D765A1271585FA00730F47 /* StarnameAssets.swift */; };
 		28E3E3802671BE8D00BA89C2 /* Param.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E3E37F2671BE8D00BA89C2 /* Param.swift */; };
-		28F8EFB1286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */; };
-		28F8EFB2286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */; };
 		28FC030C2652662B001C0319 /* MintscanPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* MintscanPrice.swift */; };
 		9EBDC03599A6A52BCFB81E33 /* Pods_Cosmostation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA3F07B8EA5FD2C04B9EB807 /* Pods_Cosmostation.framework */; };
 		E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */; };
@@ -345,8 +337,6 @@
 		E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */; };
 		E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */; };
 		E10EB59A2A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */; };
-		E10EB59F2A86217A0054A9AF /* bbbb.png in Resources */ = {isa = PBXBuildFile; fileRef = E10EB59E2A86217A0054A9AF /* bbbb.png */; };
-		E10EB5A02A86217A0054A9AF /* bbbb.png in Resources */ = {isa = PBXBuildFile; fileRef = E10EB59E2A86217A0054A9AF /* bbbb.png */; };
 		E11069B22AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11069AA2AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift */; };
 		E11069B32AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11069AA2AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift */; };
 		E11069B42AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11069AB2AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift */; };
@@ -784,20 +774,6 @@
 		E15980612A722CFF0032892B /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159805F2A722CFF0032892B /* CardView.swift */; };
 		E15980802A83A8CE0032892B /* BaseNavi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159807F2A83A8CE0032892B /* BaseNavi.swift */; };
 		E15980812A83A8CE0032892B /* BaseNavi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159807F2A83A8CE0032892B /* BaseNavi.swift */; };
-		E159808A2A83A96E0032892B /* bg3.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980822A83A96D0032892B /* bg3.png */; };
-		E159808B2A83A96E0032892B /* bg3.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980822A83A96D0032892B /* bg3.png */; };
-		E159808C2A83A96E0032892B /* bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980832A83A96D0032892B /* bg1.png */; };
-		E159808D2A83A96E0032892B /* bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980832A83A96D0032892B /* bg1.png */; };
-		E15980902A83A96E0032892B /* bg6.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980852A83A96D0032892B /* bg6.png */; };
-		E15980912A83A96E0032892B /* bg6.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980852A83A96D0032892B /* bg6.png */; };
-		E15980922A83A96E0032892B /* bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980862A83A96D0032892B /* bg2.png */; };
-		E15980932A83A96E0032892B /* bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980862A83A96D0032892B /* bg2.png */; };
-		E15980942A83A96E0032892B /* bg7.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980872A83A96E0032892B /* bg7.png */; };
-		E15980952A83A96E0032892B /* bg7.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980872A83A96E0032892B /* bg7.png */; };
-		E15980962A83A96E0032892B /* bg0.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980882A83A96E0032892B /* bg0.png */; };
-		E15980972A83A96E0032892B /* bg0.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980882A83A96E0032892B /* bg0.png */; };
-		E15980982A83A96E0032892B /* bg5.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980892A83A96E0032892B /* bg5.png */; };
-		E15980992A83A96E0032892B /* bg5.png in Resources */ = {isa = PBXBuildFile; fileRef = E15980892A83A96E0032892B /* bg5.png */; };
 		E159809C2A83A9C50032892B /* SlideInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159809B2A83A9C50032892B /* SlideInTransition.swift */; };
 		E159809D2A83A9C50032892B /* SlideInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159809B2A83A9C50032892B /* SlideInTransition.swift */; };
 		E159809F2A83A9D70032892B /* SlideOutTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159809E2A83A9D70032892B /* SlideOutTransition.swift */; };
@@ -840,12 +816,22 @@
 		E19E8B412A92299700001BF5 /* UIFont+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */; };
 		E1A82DD1224220910097CAEE /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD0224220910097CAEE /* Account.swift */; };
 		E1A82DE822448E940097CAEE /* WUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE722448E940097CAEE /* WUtils.swift */; };
+		E1BBF74C2ABEBE4100D3082F /* basebg01.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF7472ABEBE4000D3082F /* basebg01.png */; };
+		E1BBF74D2ABEBE4100D3082F /* basebg01.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF7472ABEBE4000D3082F /* basebg01.png */; };
+		E1BBF74E2ABEBE4100D3082F /* basebg04.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF7482ABEBE4100D3082F /* basebg04.png */; };
+		E1BBF74F2ABEBE4100D3082F /* basebg04.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF7482ABEBE4100D3082F /* basebg04.png */; };
+		E1BBF7502ABEBE4100D3082F /* basebg03.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF7492ABEBE4100D3082F /* basebg03.png */; };
+		E1BBF7512ABEBE4100D3082F /* basebg03.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF7492ABEBE4100D3082F /* basebg03.png */; };
+		E1BBF7522ABEBE4100D3082F /* basebg02.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF74A2ABEBE4100D3082F /* basebg02.png */; };
+		E1BBF7532ABEBE4100D3082F /* basebg02.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF74A2ABEBE4100D3082F /* basebg02.png */; };
+		E1BBF7542ABEBE4100D3082F /* basebg00.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF74B2ABEBE4100D3082F /* basebg00.png */; };
+		E1BBF7552ABEBE4100D3082F /* basebg00.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF74B2ABEBE4100D3082F /* basebg00.png */; };
 		E1D4EA582871584B005C1ECF /* FeeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA572871584B005C1ECF /* FeeInfo.swift */; };
 		E1D4EA592871584B005C1ECF /* FeeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA572871584B005C1ECF /* FeeInfo.swift */; };
 		E1D4EA5B2871BCDE005C1ECF /* WDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA5A2871BCDE005C1ECF /* WDP.swift */; };
 		E1D4EA5C2871BCDE005C1ECF /* WDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA5A2871BCDE005C1ECF /* WDP.swift */; };
-		E1D538292A96644F00FB0403 /* loading2.json in Resources */ = {isa = PBXBuildFile; fileRef = E1D538282A96644F00FB0403 /* loading2.json */; };
-		E1D5382A2A96644F00FB0403 /* loading2.json in Resources */ = {isa = PBXBuildFile; fileRef = E1D538282A96644F00FB0403 /* loading2.json */; };
+		E1D538292A96644F00FB0403 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = E1D538282A96644F00FB0403 /* loading.json */; };
+		E1D5382A2A96644F00FB0403 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = E1D538282A96644F00FB0403 /* loading.json */; };
 		E1D6B8CE2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */; };
 		E1D6B8CF2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */; };
 		E1D6B8D12AA499A400177D30 /* CosmosNftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */; };
@@ -886,8 +872,6 @@
 		04117B7D2AA5860600637836 /* ChainOsmosis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOsmosis.swift; sourceTree = "<group>"; };
 		04172B7929F6819300D6279C /* Cw20VaultDepositReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20VaultDepositReq.swift; sourceTree = "<group>"; };
 		04172B7B29F6826200D6279C /* Cw20VaultDepositRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20VaultDepositRes.swift; sourceTree = "<group>"; };
-		04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
-		04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		042296802A890C9B003C7630 /* ChainKava118.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava118.swift; sourceTree = "<group>"; };
 		042296832A890CC4003C7630 /* ChainKavaEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKavaEVM.swift; sourceTree = "<group>"; };
 		042A174F2AB97AD900EF31C9 /* RedFixCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedFixCardView.swift; sourceTree = "<group>"; };
@@ -956,7 +940,6 @@
 		04CB91202A90CA7D00375354 /* ChainJuno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainJuno.swift; sourceTree = "<group>"; };
 		04CB91322A910BDC00375354 /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
 		04D279DB2A66863C00AF046A /* BaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAccount.swift; sourceTree = "<group>"; };
-		04D279E52A66E32A00AF046A /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		04D279E92A67C96500AF046A /* ChainCosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCosmos.swift; sourceTree = "<group>"; };
 		04D279EC2A67C96F00AF046A /* ChainKava459.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava459.swift; sourceTree = "<group>"; };
 		04D279EF2A67C98E00AF046A /* ChainEthereum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainEthereum.swift; sourceTree = "<group>"; };
@@ -1028,7 +1011,6 @@
 		28CE973525872B7C006DEBEE /* Signer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signer.swift; sourceTree = "<group>"; };
 		28D765A1271585FA00730F47 /* StarnameAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameAssets.swift; sourceTree = "<group>"; };
 		28E3E37F2671BE8D00BA89C2 /* Param.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Param.swift; sourceTree = "<group>"; };
-		28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		28FC030B2652662B001C0319 /* MintscanPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanPrice.swift; sourceTree = "<group>"; };
 		6ED0AF4867E1AFC41A279302 /* Pods-Cosmostation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.debug.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.debug.xcconfig"; sourceTree = "<group>"; };
 		9EC086EE8CB71A2FB9E32070 /* Pods-Cosmostation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.release.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.release.xcconfig"; sourceTree = "<group>"; };
@@ -1037,7 +1019,6 @@
 		E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
-		E10EB59E2A86217A0054A9AF /* bbbb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bbbb.png; sourceTree = "<group>"; };
 		E11069AA2AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_tx.grpc.swift; sourceTree = "<group>"; };
 		E11069AB2AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_query.pb.swift; sourceTree = "<group>"; };
 		E11069AC2AA4C57600EB02CA /* cosmwasm_wasm_v1_proposal.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_proposal.pb.swift; sourceTree = "<group>"; };
@@ -1255,13 +1236,6 @@
 		E15980592A6F5EFE0032892B /* PortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCell.xib; sourceTree = "<group>"; };
 		E159805F2A722CFF0032892B /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		E159807F2A83A8CE0032892B /* BaseNavi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavi.swift; sourceTree = "<group>"; };
-		E15980822A83A96D0032892B /* bg3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg3.png; sourceTree = "<group>"; };
-		E15980832A83A96D0032892B /* bg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg1.png; sourceTree = "<group>"; };
-		E15980852A83A96D0032892B /* bg6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg6.png; sourceTree = "<group>"; };
-		E15980862A83A96D0032892B /* bg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg2.png; sourceTree = "<group>"; };
-		E15980872A83A96E0032892B /* bg7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg7.png; sourceTree = "<group>"; };
-		E15980882A83A96E0032892B /* bg0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg0.png; sourceTree = "<group>"; };
-		E15980892A83A96E0032892B /* bg5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg5.png; sourceTree = "<group>"; };
 		E159809B2A83A9C50032892B /* SlideInTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInTransition.swift; sourceTree = "<group>"; };
 		E159809E2A83A9D70032892B /* SlideOutTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutTransition.swift; sourceTree = "<group>"; };
 		E15980A22A83AB030032892B /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -1295,9 +1269,14 @@
 		E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Fonts.swift"; sourceTree = "<group>"; };
 		E1A82DD0224220910097CAEE /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		E1A82DE722448E940097CAEE /* WUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WUtils.swift; sourceTree = "<group>"; };
+		E1BBF7472ABEBE4000D3082F /* basebg01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg01.png; sourceTree = "<group>"; };
+		E1BBF7482ABEBE4100D3082F /* basebg04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg04.png; sourceTree = "<group>"; };
+		E1BBF7492ABEBE4100D3082F /* basebg03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg03.png; sourceTree = "<group>"; };
+		E1BBF74A2ABEBE4100D3082F /* basebg02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg02.png; sourceTree = "<group>"; };
+		E1BBF74B2ABEBE4100D3082F /* basebg00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg00.png; sourceTree = "<group>"; };
 		E1D4EA572871584B005C1ECF /* FeeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeInfo.swift; sourceTree = "<group>"; };
 		E1D4EA5A2871BCDE005C1ECF /* WDP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDP.swift; sourceTree = "<group>"; };
-		E1D538282A96644F00FB0403 /* loading2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading2.json; sourceTree = "<group>"; };
+		E1D538282A96644F00FB0403 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTokenVC.swift; sourceTree = "<group>"; };
 		E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosNftVC.swift; sourceTree = "<group>"; };
 		E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosAboutVC.swift; sourceTree = "<group>"; };
@@ -1434,17 +1413,9 @@
 		04D279E42A66E30B00AF046A /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				E15980882A83A96E0032892B /* bg0.png */,
-				E10EB59E2A86217A0054A9AF /* bbbb.png */,
-				E15980832A83A96D0032892B /* bg1.png */,
-				E15980862A83A96D0032892B /* bg2.png */,
-				E15980822A83A96D0032892B /* bg3.png */,
-				E15980892A83A96E0032892B /* bg5.png */,
-				E15980852A83A96D0032892B /* bg6.png */,
-				E15980872A83A96E0032892B /* bg7.png */,
+				E1BBF7462ABEBE3000D3082F /* BgImg */,
 				1809C35029D16C80008884C1 /* injectScript.js */,
-				04D279E52A66E32A00AF046A /* loading.json */,
-				E1D538282A96644F00FB0403 /* loading2.json */,
+				E1D538282A96644F00FB0403 /* loading.json */,
 				0443B89728589B570027A6B9 /* Color.xcassets */,
 				0443B8A1285C7F050027A6B9 /* Chain.xcassets */,
 				E16D9B182248C4880019B7BB /* Assets.xcassets */,
@@ -1452,9 +1423,6 @@
 				E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */,
 				E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */,
 				E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */,
-				04172B9129F7AE4000D6279C /* Roboto-Bold.ttf */,
-				04172B9229F7AE4000D6279C /* Roboto-Medium.ttf */,
-				28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -2047,6 +2015,18 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		E1BBF7462ABEBE3000D3082F /* BgImg */ = {
+			isa = PBXGroup;
+			children = (
+				E1BBF74B2ABEBE4100D3082F /* basebg00.png */,
+				E1BBF7472ABEBE4000D3082F /* basebg01.png */,
+				E1BBF74A2ABEBE4100D3082F /* basebg02.png */,
+				E1BBF7492ABEBE4100D3082F /* basebg03.png */,
+				E1BBF7482ABEBE4100D3082F /* basebg04.png */,
+			);
+			path = BgImg;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2188,22 +2168,21 @@
 			files = (
 				E10EB59A2A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				E18D73B92AB484AB00FCB1AA /* DappStartVC.xib in Resources */,
+				E1BBF7552ABEBE4100D3082F /* basebg00.png in Resources */,
 				0443B89928589B570027A6B9 /* Color.xcassets in Resources */,
 				04FAD9BB2AB0125400143A3E /* BaseSheetCell.xib in Resources */,
 				04FAD9C72AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
 				E11EAE1E2AAD87AD003BFC7F /* SettingPriceCell.xib in Resources */,
 				04A116F228F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
-				04D279E72A66E32A00AF046A /* loading.json in Resources */,
 				04A68C202ABDA3220041FA13 /* SelectSwapChainCell.xib in Resources */,
 				047C10742AAC310600AFA159 /* QrAddressVC.xib in Resources */,
-				04172B9629F7AE4000D6279C /* Roboto-Medium.ttf in Resources */,
 				0443B8A3285C7F050027A6B9 /* Chain.xcassets in Resources */,
+				E1BBF7532ABEBE4100D3082F /* basebg02.png in Resources */,
 				E159805D2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
-				28F8EFB2286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
 				047BA8D22A94756A00D3F7DD /* CosmosClass.storyboard in Resources */,
 				04C6B9C82AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */,
-				E10EB5A02A86217A0054A9AF /* bbbb.png in Resources */,
 				04527DC22A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
+				E1BBF74D2ABEBE4100D3082F /* basebg01.png in Resources */,
 				040732FE2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */,
 				E122DC6A2A8DBD3B006D1E7B /* BaseHeader.xib in Resources */,
 				E1E0DBC92A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
@@ -2213,13 +2192,11 @@
 				04527DBC2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				04FAD9F12AB71D3300143A3E /* RenameSheet.xib in Resources */,
 				04FAD9B52AB011AC00143A3E /* SwitchPriceDisplayCell.xib in Resources */,
-				E15980912A83A96E0032892B /* bg6.png in Resources */,
 				1809C35229D16C80008884C1 /* injectScript.js in Resources */,
 				04F4061829ED119800CD88E4 /* Init.storyboard in Resources */,
 				E1DF77782AB74EE80028BD51 /* CheckPrivateKeyVC.xib in Resources */,
 				E1DF77722AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,
 				04FA74882AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
-				E15980952A83A96E0032892B /* bg7.png in Resources */,
 				04FAD9EB2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */,
 				04FAD9E52AB6D8ED00143A3E /* ChainListVC.xib in Resources */,
 				040733062AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
@@ -2231,28 +2208,24 @@
 				04FA74552A9D97A0001A2830 /* Pincode.storyboard in Resources */,
 				04FAD9DF2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				E1DF77842AB762010028BD51 /* CheckPrivateKeyCell.xib in Resources */,
-				E15980992A83A96E0032892B /* bg5.png in Resources */,
-				E15980932A83A96E0032892B /* bg2.png in Resources */,
+				E1BBF74F2ABEBE4100D3082F /* basebg04.png in Resources */,
 				18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */,
 				E15980A42A83AB030032892B /* Main.storyboard in Resources */,
-				E159808D2A83A96E0032892B /* bg1.png in Resources */,
 				E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
-				E1D5382A2A96644F00FB0403 /* loading2.json in Resources */,
+				E1D5382A2A96644F00FB0403 /* loading.json in Resources */,
 				04FA747C2AA0446A001A2830 /* NewAccountCell.xib in Resources */,
 				E1DF777E2AB75F830028BD51 /* CheckPrivateKeysVC.xib in Resources */,
 				04FAD9F72AB71D5000143A3E /* DeleteAccountSheet.xib in Resources */,
-				E15980972A83A96E0032892B /* bg0.png in Resources */,
 				04FA74662A9F5833001A2830 /* CreateNameVC.xib in Resources */,
 				E1831BA72AB82FE60078A28B /* ManageChainCell.xib in Resources */,
 				04FA74742AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
 				E11EAE182AAD879A003BFC7F /* SettingSwitchCell.xib in Resources */,
-				E159808B2A83A96E0032892B /* bg3.png in Resources */,
 				04FA74822AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */,
 				E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */,
 				04FAD9D32AB2032200143A3E /* SwapStartVC.xib in Resources */,
 				E11EAE122AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
+				E1BBF7512ABEBE4100D3082F /* basebg03.png in Resources */,
 				18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */,
-				04172B9429F7AE4000D6279C /* Roboto-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2271,9 +2244,7 @@
 				040732FD2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */,
 				04FA74872AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
 				04FAD9C62AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
-				E15980922A83A96E0032892B /* bg2.png in Resources */,
 				1809C35129D16C80008884C1 /* injectScript.js in Resources */,
-				28F8EFB1286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
 				04FAD9F62AB71D5000143A3E /* DeleteAccountSheet.xib in Resources */,
 				E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */,
 				1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */,
@@ -2281,25 +2252,19 @@
 				E1E0DBC82A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
 				04FAD9F02AB71D3300143A3E /* RenameSheet.xib in Resources */,
 				04FA74542A9D97A0001A2830 /* Pincode.storyboard in Resources */,
-				E1D538292A96644F00FB0403 /* loading2.json in Resources */,
-				04172B9329F7AE4000D6279C /* Roboto-Bold.ttf in Resources */,
-				04172B9529F7AE4000D6279C /* Roboto-Medium.ttf in Resources */,
-				E15980982A83A96E0032892B /* bg5.png in Resources */,
+				E1D538292A96644F00FB0403 /* loading.json in Resources */,
 				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				04527DC12A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
 				04FAD9DE2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
-				E15980942A83A96E0032892B /* bg7.png in Resources */,
 				E11EAE112AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
 				187446FF2930940F00849EE4 /* ApiKey.plist in Resources */,
-				E15980962A83A96E0032892B /* bg0.png in Resources */,
 				E1DF77772AB74EE80028BD51 /* CheckPrivateKeyVC.xib in Resources */,
 				E18D73B82AB484AB00FCB1AA /* DappStartVC.xib in Resources */,
 				04FAD9B42AB011AC00143A3E /* SwitchPriceDisplayCell.xib in Resources */,
-				E159808A2A83A96E0032892B /* bg3.png in Resources */,
 				04FAD9BA2AB0125400143A3E /* BaseSheetCell.xib in Resources */,
-				04D279E62A66E32A00AF046A /* loading.json in Resources */,
 				E15980A32A83AB030032892B /* Main.storyboard in Resources */,
+				E1BBF74E2ABEBE4100D3082F /* basebg04.png in Resources */,
 				04A68C1F2ABDA3220041FA13 /* SelectSwapChainCell.xib in Resources */,
 				047C10732AAC310600AFA159 /* QrAddressVC.xib in Resources */,
 				04BA9BD72A985771003E2404 /* ChainSelectVC.xib in Resources */,
@@ -2308,16 +2273,16 @@
 				E10EB5902A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				0443B8A2285C7F050027A6B9 /* Chain.xcassets in Resources */,
 				E122DC632A8CA052006D1E7B /* Resources.xcassets in Resources */,
-				E10EB59F2A86217A0054A9AF /* bbbb.png in Resources */,
 				04FAD9D22AB2032200143A3E /* SwapStartVC.xib in Resources */,
 				04FAD9E42AB6D8ED00143A3E /* ChainListVC.xib in Resources */,
+				E1BBF7542ABEBE4100D3082F /* basebg00.png in Resources */,
 				E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */,
 				04FA74732AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
-				E159808C2A83A96E0032892B /* bg1.png in Resources */,
 				E1DF777D2AB75F830028BD51 /* CheckPrivateKeysVC.xib in Resources */,
+				E1BBF7502ABEBE4100D3082F /* basebg03.png in Resources */,
+				E1BBF7522ABEBE4100D3082F /* basebg02.png in Resources */,
 				E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
-				E15980902A83A96E0032892B /* bg6.png in Resources */,
 				0443B89828589B570027A6B9 /* Color.xcassets in Resources */,
 				E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
 				04C6B9C72AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */,
@@ -2325,6 +2290,7 @@
 				047BA8D12A94756A00D3F7DD /* CosmosClass.storyboard in Resources */,
 				04A68C252ABDA3350041FA13 /* SelectSwapAssetCell.xib in Resources */,
 				04F4061729ED119800CD88E4 /* Init.storyboard in Resources */,
+				E1BBF74C2ABEBE4100D3082F /* basebg01.png in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
 				18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */,
 				E1DF77712AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,

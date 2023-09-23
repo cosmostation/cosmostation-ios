@@ -101,7 +101,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         rootScrollView.isHidden = true
         swapBtn.isHidden = true
         loadingView.isHidden = false
-        loadingView.animation = LottieAnimation.named("loading2")
+        loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
@@ -211,6 +211,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         
         //From UI update
         fromAddressLabel.text = inputCosmosChain.address
+        print("address ", inputCosmosChain.address)
         
         if let inputChainLogo = URL(string: inputChain["logo_uri"].stringValue) {
             inputChainImg.af.setImage(withURL: inputChainLogo)
@@ -228,6 +229,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         inputAssetLabel.text = inputAssetSelected?["symbol"].stringValue
         
         let inputDenom = inputAssetSelected["denom"].stringValue
+        print("inputDenom ", inputDenom)
         if let inputBlance = self.inputBalances.filter({ $0.denom == inputDenom }).first,
             let inputMsAsset = BaseData.instance.getAsset(inputCosmosChain.apiName, inputDenom) {
             WDP.dpCoin(inputMsAsset, inputBlance, nil, nil, self.inputAvailableLabel, inputMsAsset.decimals)
@@ -238,6 +240,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         
         //To UI update
         toAddressLabel.text = outputCosmosChain.address
+        print("toAddressLabel ", outputCosmosChain.address)
         
         if let outputChainLogo = URL(string: outputChain["logo_uri"].stringValue) {
             outputChainImg.af.setImage(withURL: outputChainLogo)
@@ -256,6 +259,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         
     
         let outputDenom = outputAssetSelected["denom"].stringValue
+        print("outputDenom ", outputDenom)
         if let outputBalance = self.outputBalances.filter({ $0.denom == outputDenom }).first,
            let outputMsAsset = BaseData.instance.getAsset(outputCosmosChain.apiName, outputDenom) {
             WDP.dpCoin(outputMsAsset, outputBalance, nil, nil, self.outputBalanceLabel, outputMsAsset.decimals)
