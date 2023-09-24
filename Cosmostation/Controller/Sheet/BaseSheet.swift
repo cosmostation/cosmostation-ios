@@ -53,7 +53,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     }
     
     func updateTitle() {
-        if (sheetType == .NewAccountType) {
+        if (sheetType == .SelectCreateAccount) {
             sheetTitle.text = NSLocalizedString("title_create_account", comment: "")
             
         } else if (sheetType == .SwitchAccount) {
@@ -135,7 +135,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
 extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (sheetType == .NewAccountType) {
+        if (sheetType == .SelectCreateAccount) {
             return 3
             
         } else if (sheetType == .SwitchAccount) {
@@ -172,7 +172,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (sheetType == .NewAccountType) {
+        if (sheetType == .SelectCreateAccount) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
             cell?.onBindCreate(indexPath.row)
             return cell!
@@ -265,17 +265,20 @@ public struct BaseSheetResult {
 }
 
 public enum SheetType: Int {
-    case NewAccountType = 0
+    case SelectCreateAccount = 0
+    
     case SwitchAccount = 1
     case SwitchLanguage = 2
     case SwitchCurrency = 3
     case SwitchPriceColor = 4
     case SwitchAutoPass = 5
+    
     case SelectSwapInputChain = 6
     case SelectSwapOutputChain = 7
     case SelectSwapInputAsset = 8
     case SelectSwapOutputAsset = 9
     case SelectSwapSlippage = 10
+    
     case SelectDelegatedAction = 11
     case SelectUnbondingAction = 12
 }

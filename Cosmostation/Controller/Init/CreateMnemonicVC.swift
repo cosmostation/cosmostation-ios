@@ -81,14 +81,17 @@ class CreateMnemonicVC: BaseVC {
         wordCntBtn.showsMenuAsPrimaryAction = true
         wordCntBtn.overrideUserInterfaceStyle = .light
         let words_12 = UIAction(title: "12 Words", image: nil, handler: { _ in
+            self.wordCntBtn.setTitle("12 Words", for: .normal)
             self.bitsOfEntropy = 128
             self.onUpdateView()
         })
         let words_16 = UIAction(title: "16 Words", image: nil, handler: { _ in
+            self.wordCntBtn.setTitle("16 Words", for: .normal)
             self.bitsOfEntropy = 192
             self.onUpdateView()
         })
         let words_24 = UIAction(title: "24 Words", image: nil, handler: { _ in
+            self.wordCntBtn.setTitle("24 Words", for: .normal)
             self.bitsOfEntropy = 256
             self.onUpdateView()
         })

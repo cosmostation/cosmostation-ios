@@ -34,8 +34,8 @@ class CosmosCoinVC: BaseVC {
         tableView.sectionHeaderTopPadding = 0.0
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         parentVC = self.parent as? CosmosClassVC
 
         baseAccount = BaseData.instance.baseAccount

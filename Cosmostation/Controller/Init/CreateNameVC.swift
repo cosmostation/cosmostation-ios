@@ -13,7 +13,7 @@ class CreateNameVC: BaseVC, PinDelegate, UITextFieldDelegate {
     @IBOutlet weak var nextBtn: BaseButton!
     @IBOutlet weak var accountNameTextField: MDCOutlinedTextField!
     
-    var newAccountType: NewAccountType!
+    var SelectCreateAccount: SelectCreateAccount!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,19 +40,19 @@ class CreateNameVC: BaseVC, PinDelegate, UITextFieldDelegate {
     @IBAction func onClickNext(_ sender: UIButton?) {
         let userInput = accountNameTextField.text?.trimmingCharacters(in: .whitespaces)
         if (onValidate(userInput)) {
-            if (newAccountType == .create) {
+            if (SelectCreateAccount == .create) {
                 let createMnemonicVC = CreateMnemonicVC(nibName: "CreateMnemonicVC", bundle: nil)
                 createMnemonicVC.accountName = userInput
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(createMnemonicVC, animated: true)
 
-            } else if (newAccountType == .privateKey) {
+            } else if (SelectCreateAccount == .privateKey) {
                 let importPrivKeyVC = ImportPrivKeyVC(nibName: "ImportPrivKeyVC", bundle: nil)
                 importPrivKeyVC.accountName = userInput
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(importPrivKeyVC, animated: true)
 
-            } else if (newAccountType == .mnemonc) {
+            } else if (SelectCreateAccount == .mnemonc) {
                 let importMnemonicVC = ImportMnemonicVC(nibName: "ImportMnemonicVC", bundle: nil)
                 importMnemonicVC.accountName = userInput
                 self.navigationItem.title = ""
@@ -98,7 +98,7 @@ class CreateNameVC: BaseVC, PinDelegate, UITextFieldDelegate {
     }
 }
 
-enum NewAccountType: Int {
+enum SelectCreateAccount: Int {
     case create = 0
     case privateKey = 1
     case mnemonc = 2

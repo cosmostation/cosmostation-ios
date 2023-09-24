@@ -99,12 +99,12 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     @IBAction func onClickCreate(_ sender: UIButton) {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .NewAccountType
+        baseSheet.sheetType = .SelectCreateAccount
         onStartSheet(baseSheet)
     }
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
-        if (sheetType == .NewAccountType) {
+        if (sheetType == .SelectCreateAccount) {
             if (result.position == 0) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     self.onNextVc(.create)
@@ -123,9 +123,9 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
         }
     }
     
-    func onNextVc(_ type: NewAccountType) {
+    func onNextVc(_ type: SelectCreateAccount) {
         let createNameVC = CreateNameVC(nibName: "CreateNameVC", bundle: nil)
-        createNameVC.newAccountType = type
+        createNameVC.SelectCreateAccount = type
         self.navigationController?.pushViewController(createNameVC, animated: true)
     }
     
