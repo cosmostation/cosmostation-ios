@@ -303,6 +303,12 @@ public class WDP {
             label?.textColor = .colorRed
         }
     }
+    
+    static func dpPercent(_ amount: String, _ valueLabel: UILabel?) {
+//        let nf = WUtils.getNumberFormatter(2)
+//        let formatted = nf.string(from: amount)!
+        valueLabel?.attributedText = WUtils.getDpAttributedString(amount, 2, valueLabel?.font)
+    }
 
 //    static func setPriceColor(_ label: UILabel, _ change: NSDecimalNumber) {
 //        if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
@@ -401,6 +407,25 @@ public class WDP {
         }
         return WUtils.getGapTime(date)
     }
+    
+    static func protoDpTime(_ timeInt: Int64?) -> String {
+        if (timeInt == nil) { return "-" }
+        guard let date = WUtils.timeInt64ToDate(timeInt! * 1000) else {
+            return "-"
+        }
+        let localFormatter = DateFormatter()
+        localFormatter.dateFormat = NSLocalizedString("full_time_format", comment: "")
+        return localFormatter.string(from: date)
+    }
+
+    static func protoDpTimeGap(_ timeInt: Int64?) -> String {
+        if (timeInt == nil) { return "" }
+        guard let date = WUtils.timeInt64ToDate(timeInt! * 1000) else {
+            return ""
+        }
+        return WUtils.getGapTime(date)
+    }
+    
 //
 //    static func dpPath(_ path: String) -> String {
 //        return path.replacingOccurrences(of: "bnb-beacon-chain", with: "binance")

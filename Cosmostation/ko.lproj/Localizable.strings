@@ -182,6 +182,10 @@
 "str_vote_reject_by_no" = "정족수가 충족 되었지만, 찬성률을 넘기지 못했습니다.";
 "str_vote_pass_by_yes" = "정족수가 충족 되었고, 찬성률을 넘겼습니다.";
 "str_synchronize_name_service" = "네임서비스 동기화";
+"str_start_stake" = "스테이킹 시작";
+"str_reward_address" = "이자 받는 주소";
+"str_my_delegations" = "내 스테이킹";
+"str_my_unbondings" = "내 언스테이킹";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";
@@ -853,6 +857,7 @@
 "title_select_input_asset" = "입력 자산 선택";
 "title_select_output_asset" = "출력 자산 선택";
 "title_select_slippage" = "슬리피지 선택";
+"title_staking_info" = "스테이킹 정보";
 
 
 "proposal_type_basic" = "기본";

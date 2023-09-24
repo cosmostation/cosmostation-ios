@@ -130,9 +130,9 @@ public class BaseAccount {
 
 extension BaseAccount {
     
-    func initOnyKeyData(_ chainId: Bool? = false) async -> [CosmosClass] {
+    func initOnyKeyData() async -> [CosmosClass] {
         allCosmosClassChains.removeAll()
-        ALLCOSMOSCLASS(chainId).forEach { chain in
+        ALLCOSMOSCLASS().forEach { chain in
             allCosmosClassChains.append(chain)
         }
         

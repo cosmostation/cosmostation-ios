@@ -784,6 +784,26 @@
 		E15980A72A83AC9E0032892B /* PortfolioVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980A52A83AC9E0032892B /* PortfolioVC.swift */; };
 		E15980A92A83ADB60032892B /* MainTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980A82A83ADB60032892B /* MainTabVC.swift */; };
 		E15980AA2A83ADB60032892B /* MainTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980A82A83ADB60032892B /* MainTabVC.swift */; };
+		E15F2CF82ABF0DCE00BAE105 /* basebg05.png in Resources */ = {isa = PBXBuildFile; fileRef = E15F2CF62ABF0DCE00BAE105 /* basebg05.png */; };
+		E15F2CF92ABF0DCE00BAE105 /* basebg05.png in Resources */ = {isa = PBXBuildFile; fileRef = E15F2CF62ABF0DCE00BAE105 /* basebg05.png */; };
+		E15F2CFA2ABF0DCE00BAE105 /* basebg06.png in Resources */ = {isa = PBXBuildFile; fileRef = E15F2CF72ABF0DCE00BAE105 /* basebg06.png */; };
+		E15F2CFB2ABF0DCE00BAE105 /* basebg06.png in Resources */ = {isa = PBXBuildFile; fileRef = E15F2CF72ABF0DCE00BAE105 /* basebg06.png */; };
+		E15F2CFE2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2CFC2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift */; };
+		E15F2CFF2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2CFC2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift */; };
+		E15F2D002ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2CFD2ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib */; };
+		E15F2D012ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2CFD2ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib */; };
+		E15F2D042ABF105B00BAE105 /* StakeRewardAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2D022ABF105B00BAE105 /* StakeRewardAddressCell.swift */; };
+		E15F2D052ABF105B00BAE105 /* StakeRewardAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2D022ABF105B00BAE105 /* StakeRewardAddressCell.swift */; };
+		E15F2D062ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2D032ABF105B00BAE105 /* StakeRewardAddressCell.xib */; };
+		E15F2D072ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2D032ABF105B00BAE105 /* StakeRewardAddressCell.xib */; };
+		E15F2D0A2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2D082ABF107300BAE105 /* StakeDelegateCell.swift */; };
+		E15F2D0B2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2D082ABF107300BAE105 /* StakeDelegateCell.swift */; };
+		E15F2D0C2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2D092ABF107300BAE105 /* StakeDelegateCell.xib */; };
+		E15F2D0D2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2D092ABF107300BAE105 /* StakeDelegateCell.xib */; };
+		E15F2D102ABF108500BAE105 /* StakeUnbondingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2D0E2ABF108500BAE105 /* StakeUnbondingCell.swift */; };
+		E15F2D112ABF108500BAE105 /* StakeUnbondingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2D0E2ABF108500BAE105 /* StakeUnbondingCell.swift */; };
+		E15F2D122ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2D0F2ABF108500BAE105 /* StakeUnbondingCell.xib */; };
+		E15F2D132ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2D0F2ABF108500BAE105 /* StakeUnbondingCell.xib */; };
 		E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */; };
 		E162430628C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */; };
 		E16D9B1522489B030019B7BB /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1422489B030019B7BB /* IntroVC.swift */; };
@@ -1241,6 +1261,16 @@
 		E15980A22A83AB030032892B /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E15980A52A83AC9E0032892B /* PortfolioVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioVC.swift; sourceTree = "<group>"; };
 		E15980A82A83ADB60032892B /* MainTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabVC.swift; sourceTree = "<group>"; };
+		E15F2CF62ABF0DCE00BAE105 /* basebg05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg05.png; sourceTree = "<group>"; };
+		E15F2CF72ABF0DCE00BAE105 /* basebg06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg06.png; sourceTree = "<group>"; };
+		E15F2CFC2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosStakingInfoVC.swift; sourceTree = "<group>"; };
+		E15F2CFD2ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosStakingInfoVC.xib; sourceTree = "<group>"; };
+		E15F2D022ABF105B00BAE105 /* StakeRewardAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StakeRewardAddressCell.swift; sourceTree = "<group>"; };
+		E15F2D032ABF105B00BAE105 /* StakeRewardAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StakeRewardAddressCell.xib; sourceTree = "<group>"; };
+		E15F2D082ABF107300BAE105 /* StakeDelegateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StakeDelegateCell.swift; sourceTree = "<group>"; };
+		E15F2D092ABF107300BAE105 /* StakeDelegateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StakeDelegateCell.xib; sourceTree = "<group>"; };
+		E15F2D0E2ABF108500BAE105 /* StakeUnbondingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StakeUnbondingCell.swift; sourceTree = "<group>"; };
+		E15F2D0F2ABF108500BAE105 /* StakeUnbondingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StakeUnbondingCell.xib; sourceTree = "<group>"; };
 		E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IbcTransferReq.swift; sourceTree = "<group>"; };
 		E16D9B1422489B030019B7BB /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		E16D9B182248C4880019B7BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1397,6 +1427,8 @@
 				E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */,
 				047BA8D62A94778800D3F7DD /* CosmosHistoryVC.swift */,
 				E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */,
+				E15F2CFC2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift */,
+				E15F2CFD2ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib */,
 			);
 			path = CosmosClass;
 			sourceTree = "<group>";
@@ -1804,6 +1836,12 @@
 				E1DF77802AB762010028BD51 /* CheckPrivateKeyCell.xib */,
 				E1831BA22AB82FE60078A28B /* ManageChainCell.swift */,
 				E1831BA32AB82FE60078A28B /* ManageChainCell.xib */,
+				E15F2D022ABF105B00BAE105 /* StakeRewardAddressCell.swift */,
+				E15F2D032ABF105B00BAE105 /* StakeRewardAddressCell.xib */,
+				E15F2D082ABF107300BAE105 /* StakeDelegateCell.swift */,
+				E15F2D092ABF107300BAE105 /* StakeDelegateCell.xib */,
+				E15F2D0E2ABF108500BAE105 /* StakeUnbondingCell.swift */,
+				E15F2D0F2ABF108500BAE105 /* StakeUnbondingCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2023,6 +2061,8 @@
 				E1BBF74A2ABEBE4100D3082F /* basebg02.png */,
 				E1BBF7492ABEBE4100D3082F /* basebg03.png */,
 				E1BBF7482ABEBE4100D3082F /* basebg04.png */,
+				E15F2CF62ABF0DCE00BAE105 /* basebg05.png */,
+				E15F2CF72ABF0DCE00BAE105 /* basebg06.png */,
 			);
 			path = BgImg;
 			sourceTree = "<group>";
@@ -2175,6 +2215,7 @@
 				E11EAE1E2AAD87AD003BFC7F /* SettingPriceCell.xib in Resources */,
 				04A116F228F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
 				04A68C202ABDA3220041FA13 /* SelectSwapChainCell.xib in Resources */,
+				E15F2CFB2ABF0DCE00BAE105 /* basebg06.png in Resources */,
 				047C10742AAC310600AFA159 /* QrAddressVC.xib in Resources */,
 				0443B8A3285C7F050027A6B9 /* Chain.xcassets in Resources */,
 				E1BBF7532ABEBE4100D3082F /* basebg02.png in Resources */,
@@ -2197,6 +2238,7 @@
 				E1DF77782AB74EE80028BD51 /* CheckPrivateKeyVC.xib in Resources */,
 				E1DF77722AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,
 				04FA74882AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
+				E15F2D0D2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */,
 				04FAD9EB2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */,
 				04FAD9E52AB6D8ED00143A3E /* ChainListVC.xib in Resources */,
 				040733062AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
@@ -2207,10 +2249,13 @@
 				04BA9BD82A985771003E2404 /* ChainSelectVC.xib in Resources */,
 				04FA74552A9D97A0001A2830 /* Pincode.storyboard in Resources */,
 				04FAD9DF2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
+				E15F2CF92ABF0DCE00BAE105 /* basebg05.png in Resources */,
 				E1DF77842AB762010028BD51 /* CheckPrivateKeyCell.xib in Resources */,
 				E1BBF74F2ABEBE4100D3082F /* basebg04.png in Resources */,
 				18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */,
+				E15F2D072ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
 				E15980A42A83AB030032892B /* Main.storyboard in Resources */,
+				E15F2D132ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */,
 				E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				E1D5382A2A96644F00FB0403 /* loading.json in Resources */,
 				04FA747C2AA0446A001A2830 /* NewAccountCell.xib in Resources */,
@@ -2224,6 +2269,7 @@
 				E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */,
 				04FAD9D32AB2032200143A3E /* SwapStartVC.xib in Resources */,
 				E11EAE122AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
+				E15F2D012ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
 				E1BBF7512ABEBE4100D3082F /* basebg03.png in Resources */,
 				18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */,
 			);
@@ -2255,6 +2301,7 @@
 				E1D538292A96644F00FB0403 /* loading.json in Resources */,
 				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				04527DC12A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
+				E15F2CF82ABF0DCE00BAE105 /* basebg05.png in Resources */,
 				04FAD9DE2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				E11EAE112AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
@@ -2270,6 +2317,7 @@
 				04BA9BD72A985771003E2404 /* ChainSelectVC.xib in Resources */,
 				04FA74652A9F5833001A2830 /* CreateNameVC.xib in Resources */,
 				E11EAE172AAD879A003BFC7F /* SettingSwitchCell.xib in Resources */,
+				E15F2D122ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */,
 				E10EB5902A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				0443B8A2285C7F050027A6B9 /* Chain.xcassets in Resources */,
 				E122DC632A8CA052006D1E7B /* Resources.xcassets in Resources */,
@@ -2277,12 +2325,15 @@
 				04FAD9E42AB6D8ED00143A3E /* ChainListVC.xib in Resources */,
 				E1BBF7542ABEBE4100D3082F /* basebg00.png in Resources */,
 				E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
+				E15F2D0C2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */,
 				E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */,
 				04FA74732AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
 				E1DF777D2AB75F830028BD51 /* CheckPrivateKeysVC.xib in Resources */,
 				E1BBF7502ABEBE4100D3082F /* basebg03.png in Resources */,
 				E1BBF7522ABEBE4100D3082F /* basebg02.png in Resources */,
+				E15F2D002ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
 				E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
+				E15F2CFA2ABF0DCE00BAE105 /* basebg06.png in Resources */,
 				0443B89828589B570027A6B9 /* Color.xcassets in Resources */,
 				E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
 				04C6B9C72AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */,
@@ -2293,6 +2344,7 @@
 				E1BBF74C2ABEBE4100D3082F /* basebg01.png in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
 				18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */,
+				E15F2D062ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
 				E1DF77712AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2411,6 +2463,7 @@
 				E1D6B8CF2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
 				18FFB307281AF533004E65BB /* BinanceProto.swift in Sources */,
 				E122DBDA2A8A468E006D1E7B /* cosmos_staking_v1beta1_query.grpc.swift in Sources */,
+				E15F2D052ABF105B00BAE105 /* StakeRewardAddressCell.swift in Sources */,
 				04FAD9E92AB6DBCE00143A3E /* ManageAccountCell.swift in Sources */,
 				E122DBF42A8A468E006D1E7B /* cosmos_params_v1beta1_query.pb.swift in Sources */,
 				E122DB102A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
@@ -2465,6 +2518,7 @@
 				E122DAEC2A8A468D006D1E7B /* cosmos_base_reflection_v1beta1_reflection.grpc.swift in Sources */,
 				E122DBC22A8A468E006D1E7B /* cosmos_consensus_module_v1_module.pb.swift in Sources */,
 				18FFB341281AF533004E65BB /* RIPEMD160.swift in Sources */,
+				E15F2D0B2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */,
 				E122DB322A8A468D006D1E7B /* cosmos_bank_v1beta1_tx.pb.swift in Sources */,
 				E122DC1A2A8A468E006D1E7B /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
 				E122DB2C2A8A468D006D1E7B /* cosmos_autocli_v1_query.grpc.swift in Sources */,
@@ -2607,6 +2661,7 @@
 				E122DB242A8A468D006D1E7B /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,
 				E122DB962A8A468D006D1E7B /* cosmos_gov_v1_tx.pb.swift in Sources */,
 				044ECB1E2A95DE000042DB3C /* ChainInjective.swift in Sources */,
+				E15F2CFF2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift in Sources */,
 				18FFB51E281AF533004E65BB /* BTCProtocolSerialization.m in Sources */,
 				18FFB520281AF533004E65BB /* MintscanProposalDetail.swift in Sources */,
 				04CB91222A90CA7D00375354 /* ChainJuno.swift in Sources */,
@@ -2680,6 +2735,7 @@
 				04FAD9E32AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
 				E122DB562A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				040733002AA44075001C63DD /* ImportMnemonicVC.swift in Sources */,
+				E15F2D112ABF108500BAE105 /* StakeUnbondingCell.swift in Sources */,
 				E122DB9C2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
 				18FFB5C5281AF533004E65BB /* MintscanPrice.swift in Sources */,
 				E122DB4A2A8A468D006D1E7B /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,
@@ -2769,6 +2825,7 @@
 				E1D6B8CE2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
 				046E903D268C413A002CFFE1 /* BinanceProto.swift in Sources */,
 				04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */,
+				E15F2D042ABF105B00BAE105 /* StakeRewardAddressCell.swift in Sources */,
 				04FAD9E82AB6DBCE00143A3E /* ManageAccountCell.swift in Sources */,
 				E122DBD92A8A468E006D1E7B /* cosmos_staking_v1beta1_query.grpc.swift in Sources */,
 				E122DBF32A8A468E006D1E7B /* cosmos_params_v1beta1_query.pb.swift in Sources */,
@@ -2823,6 +2880,7 @@
 				E122DAEB2A8A468D006D1E7B /* cosmos_base_reflection_v1beta1_reflection.grpc.swift in Sources */,
 				E122DBC12A8A468E006D1E7B /* cosmos_consensus_module_v1_module.pb.swift in Sources */,
 				E1A82DE822448E940097CAEE /* WUtils.swift in Sources */,
+				E15F2D0A2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */,
 				E122DB312A8A468D006D1E7B /* cosmos_bank_v1beta1_tx.pb.swift in Sources */,
 				E122DC192A8A468E006D1E7B /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
 				E122DB2B2A8A468D006D1E7B /* cosmos_autocli_v1_query.grpc.swift in Sources */,
@@ -2965,6 +3023,7 @@
 				E122DB232A8A468D006D1E7B /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,
 				E122DB952A8A468D006D1E7B /* cosmos_gov_v1_tx.pb.swift in Sources */,
 				044ECB1D2A95DE000042DB3C /* ChainInjective.swift in Sources */,
+				E15F2CFE2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift in Sources */,
 				151734672A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */,
 				E16D9B1D2248E6A60019B7BB /* WKey.swift in Sources */,
 				04CB91212A90CA7D00375354 /* ChainJuno.swift in Sources */,
@@ -3038,6 +3097,7 @@
 				04FAD9E22AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
 				E122DB552A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				040732FF2AA44075001C63DD /* ImportMnemonicVC.swift in Sources */,
+				E15F2D102ABF108500BAE105 /* StakeUnbondingCell.swift in Sources */,
 				E122DB9B2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
 				046BD22027788723002333B5 /* StationNFTData.swift in Sources */,
 				E122DB492A8A468D006D1E7B /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,

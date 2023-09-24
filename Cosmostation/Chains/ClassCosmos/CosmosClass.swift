@@ -107,7 +107,11 @@ extension CosmosClass {
         group.enter()
         let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = address! }
         if let response = try? Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).delegatorDelegations(req, callOptions: getCallOptions()).response.wait() {
-            self.cosmosDelegations = response.delegationResponses
+            response.delegationResponses.forEach { delegation in
+                if (delegation.balance.amount != "0") {
+                    self.cosmosDelegations.append(delegation)
+                }
+            }
             group.leave()
         } else {
             group.leave()
@@ -581,8 +585,15 @@ extension CosmosClass {
 //    }
 }
 
+extension CosmosClass {
+    
+    func monikerImg(_ opAddress: String) -> URL {
+        return URL(string: ResourceBase + apiName + "/moniker/" + opAddress + ".png") ?? URL(string: "")!
+    }
+}
 
-func ALLCOSMOSCLASS(_ chainId: Bool? = false) -> [CosmosClass] {
+
+func ALLCOSMOSCLASS() -> [CosmosClass] {
     var result = [CosmosClass]()
     result.removeAll()
     result.append(ChainCosmos())
@@ -608,11 +619,9 @@ func ALLCOSMOSCLASS(_ chainId: Bool? = false) -> [CosmosClass] {
     result.append(ChainStargaze())
     result.append(ChainUmee())
     
-    if (chainId == true) {
-        result.forEach { chain in
-            let chainId = BaseData.instance.mintscanChains?["chains"].arrayValue.filter({ $0["chain"].stringValue == chain.apiName }).first?["chain_id"].stringValue
-            chain.chainId = chainId
-        }
+    result.forEach { chain in
+        let chainId = BaseData.instance.mintscanChains?["chains"].arrayValue.filter({ $0["chain"].stringValue == chain.apiName }).first?["chain_id"].stringValue
+        chain.chainId = chainId
     }
     return result
 }

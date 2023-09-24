@@ -182,6 +182,10 @@
 "str_vote_reject_by_no" = "定足数は確定したが、過半数がNOに投票した。";
 "str_vote_pass_by_yes" = "定足数が確定し、過半数が賛成票を投じた。";
 "str_synchronize_name_service" = "ネームサービス同期";
+"str_start_stake" = "ステーキング開始";
+"str_reward_address" = "利息を受ける住所";
+"str_my_delegations" = "私のステーキング";
+"str_my_unbondings" = "私のステーキング解除";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -852,6 +856,7 @@
 "title_select_input_asset" = "Select Input Asset";
 "title_select_output_asset" = "Select Output Asset";
 "title_select_slippage" = "Select Slippage";
+"title_staking_info" = "Staking Info";
 
 
 "proposal_type_basic" = "Basic";

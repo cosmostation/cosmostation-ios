@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CosmosStakingInfoVC" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="loadingView" destination="0j9-dh-zkZ" id="tJu-oj-Kbd"/>
+                <outlet property="stakeBtn" destination="624-lZ-p19" id="qCq-7O-hF7"/>
+                <outlet property="tableView" destination="EAi-3C-2oH" id="FVH-am-ZB0"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EAi-3C-2oH">
+                    <rect key="frame" x="0.0" y="59" width="393" height="693"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="624-lZ-p19" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <color key="backgroundColor" name="_primary"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="wFl-SE-Stx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Stake Now">
+                        <color key="titleColor" name="_color01"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickStake:" destination="-1" eventType="touchUpInside" id="HP6-Ku-omX"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0j9-dh-zkZ" customClass="LottieAnimationView" customModule="Lottie">
+                    <rect key="frame" x="106.66666666666669" y="383.66666666666669" width="180" height="110"/>
+                    <viewLayoutGuide key="safeArea" id="34w-X3-WNs"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="8VS-cT-5Na"/>
+                        <constraint firstAttribute="width" constant="180" id="IPU-hX-Rkc"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" name="_primary"/>
+            <constraints>
+                <constraint firstItem="0j9-dh-zkZ" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="1TP-xI-Q0p"/>
+                <constraint firstItem="EAi-3C-2oH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5xq-78-PPh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EAi-3C-2oH" secondAttribute="trailing" id="Ads-i0-sKN"/>
+                <constraint firstItem="624-lZ-p19" firstAttribute="top" secondItem="EAi-3C-2oH" secondAttribute="bottom" constant="8" id="QZb-Mn-mbH"/>
+                <constraint firstItem="624-lZ-p19" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="VtP-PC-MkV"/>
+                <constraint firstAttribute="bottom" secondItem="624-lZ-p19" secondAttribute="bottom" constant="38" id="XAw-yA-Cmf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="624-lZ-p19" secondAttribute="trailing" constant="8" id="qzY-XD-JmH"/>
+                <constraint firstItem="0j9-dh-zkZ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="wPb-Ht-7gb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="EAi-3C-2oH" secondAttribute="leading" id="yfT-f1-Xa6"/>
+            </constraints>
+            <point key="canvasLocation" x="60" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

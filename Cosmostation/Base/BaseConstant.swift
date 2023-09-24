@@ -680,4 +680,4 @@ public enum AutoPass: Int {
 }
 
 
-let BASE_BG_IMG = ["basebg00", "basebg01", "basebg02", "basebg03", "basebg04"]
+let BASE_BG_IMG = ["basebg00", "basebg01", "basebg02", "basebg03", "basebg04", "basebg05", "basebg06"]

@@ -113,7 +113,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         outputValueLabel?.text = ""
         
         Task {
-            allCosmosChains = await baseAccount.initOnyKeyData(true)
+            allCosmosChains = await baseAccount.initOnyKeyData()
             let sChains = try? await fetchSkipChains()
             sChains?["chains"].arrayValue.forEach({ sChain in
                 if (allCosmosChains.filter { $0.chainId == sChain["chain_id"].stringValue }.count > 0 ) {
@@ -432,6 +432,7 @@ extension SwapStartVC {
         let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = address; $0.pagination = page }
         return try? await Cosmos_Bank_V1beta1_QueryNIOClient(channel: channel).allBalances(req).response.get().balances
     }
+    
     
     func getConnection(_ chain: CosmosClass) -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)

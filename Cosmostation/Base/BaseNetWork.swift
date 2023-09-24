@@ -14,7 +14,7 @@ import SwiftyJSON
 class BaseNetWork {
     
     func fetchChainList() {
-        AF.request(BaseNetWork.getSupportChains(), method: .get)
+        AF.request(BaseNetWork.msSupportChains(), method: .get)
             .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let value):
@@ -27,9 +27,9 @@ class BaseNetWork {
     }
     
     func fetchPrices(_ force: Bool? = false) {
-//        print("fetchPrices ", BaseNetWork.getPricesUrl())
+//        print("fetchPrices ", BaseNetWork.msPricesUrl())
         if (!BaseData.instance.needPriceUpdate() && force == false) { return }
-        AF.request(BaseNetWork.getPricesUrl(), method: .get)
+        AF.request(BaseNetWork.msPricesUrl(), method: .get)
             .responseDecodable(of: [MintscanPrice].self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let value):
@@ -45,7 +45,7 @@ class BaseNetWork {
                 NotificationCenter.default.post(name: Notification.Name("FetchPrice"), object: nil, userInfo: nil)
             }
         
-        AF.request(BaseNetWork.getUSDPricesUrl(), method: .get)
+        AF.request(BaseNetWork.msUSDPricesUrl(), method: .get)
             .responseDecodable(of: [MintscanPrice].self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let value):
@@ -58,8 +58,8 @@ class BaseNetWork {
     }
     
     func fetchAssets() {
-        print("fetchAssets Start ", BaseNetWork.getMintscanAssetsUrl())
-        AF.request(BaseNetWork.getMintscanAssetsUrl(), method: .get)
+        print("fetchAssets Start ", BaseNetWork.msAssetsUrl())
+        AF.request(BaseNetWork.msAssetsUrl(), method: .get)
             .responseDecodable(of: MintscanAssets.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let value):
@@ -75,8 +75,8 @@ class BaseNetWork {
     }
     
     func fetchCw20Info(_ chain: CosmosClass) {
-//        print("fetchCw20Info Start ",  BaseNetWork.getMintscanCw20InfoUrl(chain))
-        AF.request(BaseNetWork.getMintscanCw20InfoUrl(chain), method: .get)
+//        print("fetchCw20Info Start ",  BaseNetWork.msCw20InfoUrl(chain))
+        AF.request(BaseNetWork.msCw20InfoUrl(chain), method: .get)
             .responseDecodable(of: MintscanTokens.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let value):
@@ -100,28 +100,31 @@ class BaseNetWork {
         } else {
             return MINTSCAN_API_URL + "v1/" + chain.apiName + "/account/" + address + "/txs"
         }
-        
     }
     
-    static func getPricesUrl() -> String {
+    static func msPricesUrl() -> String {
         let currency = BaseData.instance.getCurrencyString().lowercased()
         return MINTSCAN_API_URL + "v2/utils/market/prices?currency=" + currency
     }
     
-    static func getUSDPricesUrl() -> String {
+    static func msUSDPricesUrl() -> String {
         return MINTSCAN_API_URL + "v2/utils/market/prices?currency=usd"
     }
     
-    static func getMintscanAssetsUrl() -> String {
+    static func msAssetsUrl() -> String {
         return MINTSCAN_API_URL + "v3/assets"
     }
     
-    static func getMintscanCw20InfoUrl(_ chain: BaseChain) -> String {
+    static func msCw20InfoUrl(_ chain: BaseChain) -> String {
         return MINTSCAN_API_URL + "v3/assets/" +  chain.apiName + "/cw20"
     }
     
-    static func getSupportChains() -> String {
+    static func msSupportChains() -> String {
         return MINTSCAN_API_URL + "v1/meta/support/chains"
+    }
+    
+    static func msChainParam(_ chain: BaseChain) -> String {
+        return MINTSCAN_API_URL + "v2/utils/params/" + chain.apiName
     }
     
     static func getTxDetailUrl(_ chain: BaseChain, _ txHash: String) -> URL? {

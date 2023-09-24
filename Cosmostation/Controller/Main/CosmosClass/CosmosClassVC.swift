@@ -73,6 +73,13 @@ class CosmosClassVC: BaseVC {
         present(qrAddressVC, animated: true)
     }
     
+    func onStakeInfo() {
+        let stakingInfoVC = CosmosStakingInfoVC(nibName: "CosmosStakingInfoVC", bundle: nil)
+        stakingInfoVC.selectedChain = selectedChain
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+    }
+    
     func onSetTabbarView() {
         let coinTabBar = UITabBarItem(title: "Coins", image: nil, tag: 0)
         let tokenTabBar = UITabBarItem(title: "Tokens", image: nil, tag: 1)
@@ -136,7 +143,7 @@ class CosmosClassVC: BaseVC {
             print("Claim")
         }
         mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in
-            print("Stake")
+            self.onStakeInfo()
         }
         mainFab.addItem(title: "Receive", image: UIImage(named: "iconFabReceive")) { _ in
             self.onShowAddress()

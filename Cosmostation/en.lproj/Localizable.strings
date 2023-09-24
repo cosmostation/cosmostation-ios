@@ -182,6 +182,10 @@
 "str_vote_reject_by_no" = "The quorum is established, but the majority has voted NO.";
 "str_vote_pass_by_yes" = "The quorum is established, and the majority has voted YES.";
 "str_synchronize_name_service" = "Synchronize NameService";
+"str_start_stake" = "Start Stake";
+"str_reward_address" = "Reward Address";
+"str_my_delegations" = "My Stakings";
+"str_my_unbondings" = "My Unstakings";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -852,6 +856,7 @@
 "title_select_input_asset" = "Select Input Asset";
 "title_select_output_asset" = "Select Output Asset";
 "title_select_slippage" = "Select Slippage";
+"title_staking_info" = "Staking Info";
 
 
 "proposal_type_basic" = "Basic";
