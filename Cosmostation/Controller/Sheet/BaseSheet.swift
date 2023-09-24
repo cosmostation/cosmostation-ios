@@ -37,7 +37,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.dataSource = self
         sheetTableView.separatorStyle = .none
         sheetTableView.register(UINib(nibName: "BaseSheetCell", bundle: nil), forCellReuseIdentifier: "BaseSheetCell")
-        sheetTableView.register(UINib(nibName: "NewAccountCell", bundle: nil), forCellReuseIdentifier: "NewAccountCell")
+        sheetTableView.register(UINib(nibName: "BaseMsgSheetCell", bundle: nil), forCellReuseIdentifier: "BaseMsgSheetCell")
         sheetTableView.register(UINib(nibName: "SwitchAccountCell", bundle: nil), forCellReuseIdentifier: "SwitchAccountCell")
         sheetTableView.register(UINib(nibName: "SwitchCurrencyCell", bundle: nil), forCellReuseIdentifier: "SwitchCurrencyCell")
         sheetTableView.register(UINib(nibName: "SwitchPriceDisplayCell", bundle: nil), forCellReuseIdentifier: "SwitchPriceDisplayCell")
@@ -93,6 +93,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SelectSwapSlippage) {
             sheetTitle.text = NSLocalizedString("title_select_slippage", comment: "")
+            
+        } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectUnbondingAction) {
+            sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
             
         }
     }
@@ -158,14 +161,20 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectSwapSlippage) {
             
+        } else if (sheetType == .SelectDelegatedAction) {
+            return 4
+            
+        } else if (sheetType == .SelectUnbondingAction) {
+            return 1
+            
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (sheetType == .NewAccountType) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"NewAccountCell") as? NewAccountCell
-            cell?.onBindView(indexPath.row)
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindCreate(indexPath.row)
             return cell!
             
         } else if (sheetType == .SwitchAccount) {
@@ -204,6 +213,16 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             return cell!
             
         } else if (sheetType == .SelectSwapSlippage) {
+            
+        } else if (sheetType == .SelectDelegatedAction) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindDelegate(indexPath.row)
+            return cell!
+            
+        } else if (sheetType == .SelectUnbondingAction) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindUndelegate(indexPath.row)
+            return cell!
             
         }
         return UITableViewCell()
@@ -257,4 +276,6 @@ public enum SheetType: Int {
     case SelectSwapInputAsset = 8
     case SelectSwapOutputAsset = 9
     case SelectSwapSlippage = 10
+    case SelectDelegatedAction = 11
+    case SelectUnbondingAction = 12
 }

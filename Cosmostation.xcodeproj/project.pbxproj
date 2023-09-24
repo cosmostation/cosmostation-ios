@@ -208,10 +208,10 @@
 		04FA74742AA04417001A2830 /* SwitchAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA74712AA04416001A2830 /* SwitchAccountCell.xib */; };
 		04FA74752AA04417001A2830 /* SwitchAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74722AA04417001A2830 /* SwitchAccountCell.swift */; };
 		04FA74762AA04417001A2830 /* SwitchAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74722AA04417001A2830 /* SwitchAccountCell.swift */; };
-		04FA74792AA0446A001A2830 /* NewAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74772AA0446A001A2830 /* NewAccountCell.swift */; };
-		04FA747A2AA0446A001A2830 /* NewAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74772AA0446A001A2830 /* NewAccountCell.swift */; };
-		04FA747B2AA0446A001A2830 /* NewAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA74782AA0446A001A2830 /* NewAccountCell.xib */; };
-		04FA747C2AA0446A001A2830 /* NewAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA74782AA0446A001A2830 /* NewAccountCell.xib */; };
+		04FA74792AA0446A001A2830 /* BaseMsgSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74772AA0446A001A2830 /* BaseMsgSheetCell.swift */; };
+		04FA747A2AA0446A001A2830 /* BaseMsgSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74772AA0446A001A2830 /* BaseMsgSheetCell.swift */; };
+		04FA747B2AA0446A001A2830 /* BaseMsgSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA74782AA0446A001A2830 /* BaseMsgSheetCell.xib */; };
+		04FA747C2AA0446A001A2830 /* BaseMsgSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA74782AA0446A001A2830 /* BaseMsgSheetCell.xib */; };
 		04FA747F2AA0CAA3001A2830 /* ImportPrivKeyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA747D2AA0CAA2001A2830 /* ImportPrivKeyVC.swift */; };
 		04FA74802AA0CAA3001A2830 /* ImportPrivKeyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA747D2AA0CAA2001A2830 /* ImportPrivKeyVC.swift */; };
 		04FA74812AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA747E2AA0CAA3001A2830 /* ImportPrivKeyVC.xib */; };
@@ -982,8 +982,8 @@
 		04FA746B2A9F8652001A2830 /* BaseSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseSheet.xib; sourceTree = "<group>"; };
 		04FA74712AA04416001A2830 /* SwitchAccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchAccountCell.xib; sourceTree = "<group>"; };
 		04FA74722AA04417001A2830 /* SwitchAccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchAccountCell.swift; sourceTree = "<group>"; };
-		04FA74772AA0446A001A2830 /* NewAccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAccountCell.swift; sourceTree = "<group>"; };
-		04FA74782AA0446A001A2830 /* NewAccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewAccountCell.xib; sourceTree = "<group>"; };
+		04FA74772AA0446A001A2830 /* BaseMsgSheetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMsgSheetCell.swift; sourceTree = "<group>"; };
+		04FA74782AA0446A001A2830 /* BaseMsgSheetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseMsgSheetCell.xib; sourceTree = "<group>"; };
 		04FA747D2AA0CAA2001A2830 /* ImportPrivKeyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportPrivKeyVC.swift; sourceTree = "<group>"; };
 		04FA747E2AA0CAA3001A2830 /* ImportPrivKeyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportPrivKeyVC.xib; sourceTree = "<group>"; };
 		04FA74832AA0E2A8001A2830 /* CreateMnemonicVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMnemonicVC.swift; sourceTree = "<group>"; };
@@ -1518,8 +1518,8 @@
 			children = (
 				04FAD9B62AB0125400143A3E /* BaseSheetCell.swift */,
 				04FAD9B72AB0125400143A3E /* BaseSheetCell.xib */,
-				04FA74772AA0446A001A2830 /* NewAccountCell.swift */,
-				04FA74782AA0446A001A2830 /* NewAccountCell.xib */,
+				04FA74772AA0446A001A2830 /* BaseMsgSheetCell.swift */,
+				04FA74782AA0446A001A2830 /* BaseMsgSheetCell.xib */,
 				04FA74722AA04417001A2830 /* SwitchAccountCell.swift */,
 				04FA74712AA04416001A2830 /* SwitchAccountCell.xib */,
 				04FAD9B02AB011AC00143A3E /* SwitchPriceDisplayCell.swift */,
@@ -2258,7 +2258,7 @@
 				E15F2D132ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */,
 				E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				E1D5382A2A96644F00FB0403 /* loading.json in Resources */,
-				04FA747C2AA0446A001A2830 /* NewAccountCell.xib in Resources */,
+				04FA747C2AA0446A001A2830 /* BaseMsgSheetCell.xib in Resources */,
 				E1DF777E2AB75F830028BD51 /* CheckPrivateKeysVC.xib in Resources */,
 				04FAD9F72AB71D5000143A3E /* DeleteAccountSheet.xib in Resources */,
 				04FA74662A9F5833001A2830 /* CreateNameVC.xib in Resources */,
@@ -2282,7 +2282,7 @@
 				04A116F128F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
 				E122DC692A8DBD3B006D1E7B /* BaseHeader.xib in Resources */,
 				E1831BA62AB82FE60078A28B /* ManageChainCell.xib in Resources */,
-				04FA747B2AA0446A001A2830 /* NewAccountCell.xib in Resources */,
+				04FA747B2AA0446A001A2830 /* BaseMsgSheetCell.xib in Resources */,
 				E11EAE1D2AAD87AD003BFC7F /* SettingPriceCell.xib in Resources */,
 				04FA746E2A9F8652001A2830 /* BaseSheet.xib in Resources */,
 				04FAD9EA2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */,
@@ -2705,7 +2705,7 @@
 				18FFB59F281AF533004E65BB /* Signer.swift in Sources */,
 				044ECB272A95DF1D0042DB3C /* ChainLum118.swift in Sources */,
 				E122DBCA2A8A468E006D1E7B /* cosmos_genutil_v1beta1_genesis.pb.swift in Sources */,
-				04FA747A2AA0446A001A2830 /* NewAccountCell.swift in Sources */,
+				04FA747A2AA0446A001A2830 /* BaseMsgSheetCell.swift in Sources */,
 				04D279EE2A67C96F00AF046A /* ChainKava459.swift in Sources */,
 				04C6B9CB2AAC91F900B02A95 /* ChainOktKeccak256.swift in Sources */,
 				E122DC6D2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */,
@@ -3067,7 +3067,7 @@
 				E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
 				044ECB262A95DF1D0042DB3C /* ChainLum118.swift in Sources */,
 				E122DBC92A8A468E006D1E7B /* cosmos_genutil_v1beta1_genesis.pb.swift in Sources */,
-				04FA74792AA0446A001A2830 /* NewAccountCell.swift in Sources */,
+				04FA74792AA0446A001A2830 /* BaseMsgSheetCell.swift in Sources */,
 				04D279ED2A67C96F00AF046A /* ChainKava459.swift in Sources */,
 				04C6B9CA2AAC91F900B02A95 /* ChainOktKeccak256.swift in Sources */,
 				E122DC6C2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */,

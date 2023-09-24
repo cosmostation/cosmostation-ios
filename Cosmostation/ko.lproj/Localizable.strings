@@ -38,7 +38,6 @@
 "str_claim_comission" = "청구 수수료";
 "str_one_click" = "원 클릭";
 "str_claim_reward_all" = "이자 모두 받기";
-"str_compounding" = "컴파운딩";
 "str_wallet" = "지갑";
 "str_general" = "일반";
 "str_support" = "지원";
@@ -510,9 +509,16 @@
 "wallet_delete_complete" = "삭제 완료!";
 
 
-
-
-
+"str_unstake" = "Unstake";
+"str_unstake_msg" = "언스테이킹을 시작합니다.";
+"str_switch_validator" = "Switch Validator";
+"str_switch_validator_msg" = "스테이킹중인 자산의 검증인을 변경합니다.";
+"str_cliam_reward" = "Claim Rewards";
+"str_cliam_reward_msg" = "쌓인 이자를 받습니다.";
+"str_compounding" = "Compunding";
+"str_compounding_msg" = "쌓인 이자를 즉시 스테이킹 합니다.";
+"str_cancel_unbonding" = "Cancel Unbonding";
+"str_cancel_unbonding_msg" = "언스테이킹을 취소하고 즉시 스테이킹 상태로 되돌립니다.";
 
 
 
@@ -858,6 +864,7 @@
 "title_select_output_asset" = "출력 자산 선택";
 "title_select_slippage" = "슬리피지 선택";
 "title_staking_info" = "스테이킹 정보";
+"title_select_options" = "옵션 선택";
 
 
 "proposal_type_basic" = "기본";

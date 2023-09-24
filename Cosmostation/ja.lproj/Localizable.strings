@@ -36,7 +36,6 @@
 "str_claim_reward" = "請求報酬";
 "str_claim_rewards" = "請求報酬";
 "str_claim_comission" = "請求補償";
-"str_compounding" = "コンパウンディング";
 "str_claim_reward_all" = "利子をすべてもうらう";
 "str_one_click" = "ワンクリック";
 "str_wallet" = "ウォーレット";
@@ -510,6 +509,18 @@
 "wallet_delete_complete" = "削除完了！";
 
 
+"str_unstake" = "Unstake";
+"str_unstake_msg" = "アンステーキングを開始します。";
+"str_switch_validator" = "Switch Validator";
+"str_switch_validator_msg" = "ステーキング中の資産の検証者を変更します。";
+"str_cliam_reward" = "Claim Rewards";
+"str_cliam_reward_msg" = "積み重ねられた利子を受け取ります。";
+"str_compounding" = "Compunding";
+"str_compounding_msg" = "積み上げ利子をすぐにステーキングします。";
+"str_cancel_unbonding" = "Cancel Unbonding";
+"str_cancel_unbonding_msg" = "アンステーキングをキャンセルし、すぐにステーキング状態に戻ります。";
+
+
 
 
 
@@ -857,6 +868,7 @@
 "title_select_output_asset" = "Select Output Asset";
 "title_select_slippage" = "Select Slippage";
 "title_staking_info" = "Staking Info";
+"title_select_options" = "Select Options";
 
 
 "proposal_type_basic" = "Basic";

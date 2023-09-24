@@ -36,7 +36,6 @@
 "str_claim_reward" = "Claim Reward";
 "str_claim_rewards" = "Claim Rewards";
 "str_claim_comission" = "Claim Commission";
-"str_compounding" = "Compounding";
 "str_claim_reward_all" = "Claim All Rewards";
 "str_one_click" = "One Click";
 "str_wallet" = "Wallet";
@@ -510,6 +509,18 @@
 "wallet_delete_complete" = "Delete Completed!";
 
 
+"str_unstake" = "Unstake";
+"str_unstake_msg" = "Start unstaking.";
+"str_switch_validator" = "Switch Validator";
+"str_switch_validator_msg" = "Continue staking with changing validators.";
+"str_cliam_reward" = "Claim Rewards";
+"str_cliam_reward_msg" = "You receive accumulated rewards.";
+"str_compounding" = "Compunding";
+"str_compounding_msg" = "Immediately stake the accumulated rewards.";
+"str_cancel_unbonding" = "Cancel Unbonding";
+"str_cancel_unbonding_msg" = "Cancel unstaking and immediately make staked state.";
+
+
 
 
 
@@ -857,6 +868,7 @@
 "title_select_output_asset" = "Select Output Asset";
 "title_select_slippage" = "Select Slippage";
 "title_staking_info" = "Staking Info";
+"title_select_options" = "Select Options";
 
 
 "proposal_type_basic" = "Basic";

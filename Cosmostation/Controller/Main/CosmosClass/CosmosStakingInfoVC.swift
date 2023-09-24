@@ -203,6 +203,23 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         return UITableView.automaticDimension;
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.section == 0) {
+            
+        } else if (indexPath.section == 1) {
+            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+            baseSheet.sheetDelegate = self
+            baseSheet.sheetType = .SelectDelegatedAction
+            onStartSheet(baseSheet)
+            
+        } else if (indexPath.section == 2) {
+            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+            baseSheet.sheetDelegate = self
+            baseSheet.sheetType = .SelectUnbondingAction
+            onStartSheet(baseSheet, 240)
+        }
+    }
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {
@@ -224,6 +241,22 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
         mask.locations = [NSNumber(value: location), NSNumber(value: location)]
         return mask;
+    }
+}
+
+extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
+    
+    public func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+        if (sheetType == .SelectDelegatedAction) {
+            print("SelectDelegatedAction ", result.position)
+            
+        } else if (sheetType == .SelectUnbondingAction) {
+            print("SelectUnbondingAction ", result.position)
+            
+        }
+    }
+    
+    func pinResponse(_ request: LockType, _ result: UnLockResult) {
     }
 }
 

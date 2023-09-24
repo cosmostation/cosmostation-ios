@@ -74,7 +74,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oF3-1v-R8d">
-                                <rect key="frame" x="392" y="52.666666666666664" width="9" height="12.666666666666664"/>
+                                <rect key="frame" x="392" y="53.666666666666664" width="9" height="12.666666666666664"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
@@ -158,7 +158,7 @@
                             <constraint firstItem="Rzc-v1-qDf" firstAttribute="top" secondItem="pw0-In-5pT" secondAttribute="bottom" constant="4" id="aHl-K5-WDs"/>
                             <constraint firstAttribute="trailing" secondItem="d9T-0n-dBs" secondAttribute="trailing" constant="14" id="b2A-1c-Sg0"/>
                             <constraint firstItem="6EU-7C-FIC" firstAttribute="top" secondItem="oPB-jM-OzH" secondAttribute="top" constant="18" id="kgw-gz-y4O"/>
-                            <constraint firstItem="oF3-1v-R8d" firstAttribute="centerY" secondItem="8rY-mF-njK" secondAttribute="centerY" id="kiQ-lg-YYa"/>
+                            <constraint firstItem="oF3-1v-R8d" firstAttribute="centerY" secondItem="8rY-mF-njK" secondAttribute="centerY" constant="1" id="kiQ-lg-YYa"/>
                             <constraint firstItem="d9T-0n-dBs" firstAttribute="top" secondItem="XLx-kQ-fWj" secondAttribute="bottom" constant="14" id="lHc-aB-oNi"/>
                             <constraint firstItem="XLx-kQ-fWj" firstAttribute="top" secondItem="6EU-7C-FIC" secondAttribute="bottom" constant="24" id="mPP-0I-Eex"/>
                             <constraint firstAttribute="trailing" secondItem="XLx-kQ-fWj" secondAttribute="trailing" constant="14" id="pHq-0e-ym3"/>
