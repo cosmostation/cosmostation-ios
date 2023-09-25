@@ -174,7 +174,7 @@
 "str_voting_end_time" = "投票終了時間";
 "str_request_amount" = "請求金額";
 "str_voting_description" = "説明";
-"str_voting_period" = "投票期間の提案";
+"str_voting_period" = "完成した提案書";
 "str_vote_proposals" = "提案";
 "str_vote_reject_by_qourum" = "定足数が満たされていません。 もっと多くの投票が必要です。";
 "str_vote_reject_by_veto" = "定足数は決まっているが、拒否権はある。";
@@ -185,6 +185,7 @@
 "str_reward_address" = "利息を受ける住所";
 "str_my_delegations" = "私のステーキング";
 "str_my_unbondings" = "私のステーキング解除";
+"str_start_vote" = "投票する";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";

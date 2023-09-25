@@ -23,9 +23,22 @@ class BaseButton: UIButton {
     func setup() {
         self.titleLabel?.font = .fontSize16Bold
         self.layer.cornerRadius = 8
-        self.backgroundColor = .colorPrimary
-        self.tintColor = .white
-        self.setTitleColor(.white, for: .normal)
+        
+        if (self.isEnabled) {
+            self.backgroundColor = .colorPrimary
+            self.tintColor = .white
+            self.setTitleColor(.white, for: .normal)
+        } else {
+            self.backgroundColor = .color05
+            self.setTitleColor(.color03, for: .normal)
+        }
+        
+    }
+    
+    override var isEnabled: Bool {
+        didSet {
+            setup()
+        }
     }
 
 }

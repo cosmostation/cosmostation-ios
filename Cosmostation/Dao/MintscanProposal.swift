@@ -1,5 +1,5 @@
 //
-//  MintscanV1Proposal.swift
+//  MintscanProposal.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/03/27.
@@ -8,9 +8,10 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 
-public struct MintscanV1Proposal {
+public struct MintscanProposal {
     
     var id: UInt64?
     var title: String?
@@ -25,28 +26,26 @@ public struct MintscanV1Proposal {
     var no: NSDecimalNumber = NSDecimalNumber.zero
     var no_with_veto: NSDecimalNumber = NSDecimalNumber.zero
     
-    
-    init(_ dictionary: NSDictionary?) {
-        if let rawId = dictionary?["id"] as? String {
-            self.id = UInt64(rawId)
-        }
-        self.title = dictionary?["title"] as? String
-        self.description = dictionary?["description"] as? String
-        self.proposal_type = dictionary?["proposal_type"] as? String
-        self.proposal_status = dictionary?["proposal_status"] as? String
-        self.voting_start_time = dictionary?["voting_start_time"] as? String
-        self.voting_end_time = dictionary?["voting_end_time"] as? String
-        self.is_expedited = dictionary?["is_expedited"] as? Bool ?? false
-        if let rawYes = dictionary?["yes"] as? String {
+    init(_ json: JSON?) {
+        self.id = json?["id"].uInt64Value
+        self.title = json?["title"].stringValue
+        self.description = json?["description"].stringValue
+        self.proposal_type = json?["proposal_type"].stringValue
+        self.proposal_status = json?["proposal_status"].stringValue
+        self.voting_start_time = json?["voting_start_time"].stringValue
+        self.voting_end_time = json?["voting_end_time"].stringValue
+        self.is_expedited = json?["is_expedited"].boolValue ?? false
+        
+        if let rawYes = json?["yes"].stringValue {
             self.yes = NSDecimalNumber.init(string: rawYes)
         }
-        if let rawAbstain = dictionary?["abstain"] as? String {
+        if let rawAbstain = json?["abstain"].stringValue {
             self.abstain = NSDecimalNumber.init(string: rawAbstain)
         }
-        if let rawNo = dictionary?["no"] as? String {
+        if let rawNo = json?["no"].stringValue {
             self.no = NSDecimalNumber.init(string: rawNo)
         }
-        if let rawNowithVeto = dictionary?["no_with_veto"] as? String {
+        if let rawNowithVeto = json?["no_with_veto"].stringValue {
             self.no_with_veto = NSDecimalNumber.init(string: rawNowithVeto)
         }
     }

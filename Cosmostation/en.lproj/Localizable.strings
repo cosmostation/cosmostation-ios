@@ -175,7 +175,7 @@
 "str_request_amount" = "Request Amount";
 "str_voting_description" = "Description";
 "str_voting_period" = "Voting Period Proposals";
-"str_vote_proposals" = "Proposals";
+"str_vote_proposals" = "Finished Proposals";
 "str_vote_reject_by_qourum" = "The quorum is NOT established, need more votes.";
 "str_vote_reject_by_veto" = "The quorum is established, but VETO.";
 "str_vote_reject_by_no" = "The quorum is established, but the majority has voted NO.";
@@ -185,6 +185,7 @@
 "str_reward_address" = "Reward Address";
 "str_my_delegations" = "My Stakings";
 "str_my_unbondings" = "My Unstakings";
+"str_start_vote" = "Start Vote";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";

@@ -73,6 +73,13 @@ class CosmosClassVC: BaseVC {
         present(qrAddressVC, animated: true)
     }
     
+    func onProposalList() {
+        let proposalsVC = CosmosProposalsVC(nibName: "CosmosProposalsVC", bundle: nil)
+        proposalsVC.selectedChain = selectedChain
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(proposalsVC, animated: true)
+    }
+    
     func onStakeInfo() {
         let stakingInfoVC = CosmosStakingInfoVC(nibName: "CosmosStakingInfoVC", bundle: nil)
         stakingInfoVC.selectedChain = selectedChain
@@ -137,7 +144,7 @@ class CosmosClassVC: BaseVC {
         }
         
         mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
-            print("Governance")
+            self.onProposalList()
         }
         mainFab.addItem(title: "Reward Claim", image: UIImage(named: "iconFabClaim")) { _ in
             print("Claim")

@@ -7,6 +7,19 @@
 //
 
 import Foundation
+import SwiftyJSON
+
+public struct MintscanMyVotes {
+    var proposal_id: UInt64?
+    var votes = Array<MintscanMyVote>()
+    
+    init(_ json: JSON?) {
+        self.proposal_id = json?["proposal_id"].uInt64Value
+        json?["votes"].arrayValue.forEach({ vote in
+            self.votes.append(MintscanMyVote(vote))
+        })
+    }
+}
 
 public struct MintscanMyVote {
     var voter: String?
@@ -15,12 +28,12 @@ public struct MintscanMyVote {
     var timestamp: String?
     var answer: String?
     
-    init(_ dictionary: NSDictionary?) {
-        self.voter = dictionary?["voter"] as? String
-        self.option = dictionary?["option"] as? String
-        self.tx_hash = dictionary?["tx_hash"] as? String
-        self.timestamp = dictionary?["timestamp"] as? String
-        self.answer = dictionary?["answer"] as? String
+    init(_ json: JSON?) {
+        self.voter = json?["voter"].stringValue
+        self.option = json?["option"].stringValue
+        self.tx_hash = json?["tx_hash"].stringValue
+        self.timestamp = json?["timestamp"].stringValue
+        self.answer = json?["answer"].stringValue
     }
 }
 

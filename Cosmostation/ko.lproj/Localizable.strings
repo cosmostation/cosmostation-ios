@@ -174,8 +174,8 @@
 "str_voting_end_time" = "투표 종료 시간";
 "str_request_amount" = "요청 금액";
 "str_voting_description" = "설명";
-"str_voting_period" = "Voting Period Proposals";
-"str_vote_proposals" = "Proposals";
+"str_voting_period" = "투표 진행 목록";
+"str_vote_proposals" = "투표 완료 목록";
 "str_vote_reject_by_qourum" = "정족수가 충족되지 못했습니다. 더 많은 투표가 필요합니다.";
 "str_vote_reject_by_veto" = "정족수가 충족 되었지만, VETO 상태입니다.";
 "str_vote_reject_by_no" = "정족수가 충족 되었지만, 찬성률을 넘기지 못했습니다.";
@@ -185,6 +185,7 @@
 "str_reward_address" = "이자 받는 주소";
 "str_my_delegations" = "내 스테이킹";
 "str_my_unbondings" = "내 언스테이킹";
+"str_start_vote" = "투표 하기";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";

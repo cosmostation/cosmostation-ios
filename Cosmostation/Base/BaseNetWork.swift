@@ -127,6 +127,14 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v2/utils/params/" + chain.apiName
     }
     
+    static func msProposals(_ chain: BaseChain) -> String {
+        return MINTSCAN_API_URL + "v1/" + chain.apiName + "/proposals"
+    }
+    
+    static func msMyVoteHistory(_ chain: BaseChain, _ address: String) -> String {
+        return MINTSCAN_API_URL + "v1/" + chain.apiName + "/account/" + address + "/votes"
+    }
+    
     static func getTxDetailUrl(_ chain: BaseChain, _ txHash: String) -> URL? {
         if (chain is ChainBinanceBeacon) {
             return URL(string: ChainBinanceBeacon.explorer + "tx/" + txHash)
