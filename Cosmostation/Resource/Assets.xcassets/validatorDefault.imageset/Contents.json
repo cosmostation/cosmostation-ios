@@ -1,17 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "iconValidatorNoneLight.pdf",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "iconValidatorNoneDark.pdf",
+      "filename" : "Group 1000002139.pdf",
       "idiom" : "universal"
     }
   ],
