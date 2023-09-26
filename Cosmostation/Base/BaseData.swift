@@ -37,8 +37,8 @@ final class BaseData: NSObject{
     }
     
     
-    func getAsset(_ chainName: String, _ denom: String) -> MintscanAsset? {
-        return mintscanAssets?.filter({ $0.chain == chainName && $0.denom?.lowercased() == denom.lowercased() }).first
+    func getAsset(_ chainApiName: String, _ denom: String) -> MintscanAsset? {
+        return mintscanAssets?.filter({ $0.chain == chainApiName && $0.denom?.lowercased() == denom.lowercased() }).first
     }
     
     func getPrice(_ geckoId: String?, _ usd: Bool? = false) -> NSDecimalNumber {

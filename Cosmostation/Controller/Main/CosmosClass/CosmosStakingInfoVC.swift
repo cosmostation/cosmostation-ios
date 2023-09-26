@@ -23,7 +23,6 @@ class CosmosStakingInfoVC: BaseVC {
     
     var selectedChain: CosmosClass!
     var rewardAddress: String?
-    var chainParam: JSON?
     var validators = Array<Cosmos_Staking_V1beta1_Validator>()
     var delegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     var unbondings = Array<UnbondingEntry>()
@@ -68,13 +67,11 @@ class CosmosStakingInfoVC: BaseVC {
         
         Task {
             let channel = getConnection(selectedChain)
-            if let param = try? await fetchChainParam(selectedChain),
-               let rewardaddr = try? await fetchRewardAddress(channel, selectedChain.address!),
+            if let rewardaddr = try? await fetchRewardAddress(channel, selectedChain.address!),
                let bonded = try? await fetchBondedValidator(channel),
                let unbonding = try? await fetchUnbondingValidator(channel),
                let unbonded = try? await fetchUnbondedValidator(channel) {
                 
-                chainParam = param
                 rewardAddress = rewardaddr
                 validators.append(contentsOf: bonded ?? [])
                 validators.append(contentsOf: unbonding ?? [])
@@ -263,11 +260,6 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
 }
 
 extension CosmosStakingInfoVC {
-    
-    func fetchChainParam(_ chain: BaseChain) async throws -> JSON {
-        print("fetchChainParam ", BaseNetWork.msChainParam(chain))
-        return try await AF.request(BaseNetWork.msChainParam(chain), method: .get).serializingDecodable(JSON.self).value
-    }
     
     func fetchBondedValidator(_ channel: ClientConnection) async throws -> [Cosmos_Staking_V1beta1_Validator]? {
         let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 300 }

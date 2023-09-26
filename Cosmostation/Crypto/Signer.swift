@@ -221,7 +221,8 @@ class Signer {
         }
     }
     
-    static func genClaimStakingRewardMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) -> [Google_Protobuf_Any] {
+    static func genClaimStakingRewardMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, 
+                                         _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) -> [Google_Protobuf_Any] {
         var anyMsgs = [Google_Protobuf_Any]()
         for reward in rewards {
             let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {

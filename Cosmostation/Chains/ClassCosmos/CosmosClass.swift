@@ -30,6 +30,7 @@ class CosmosClass: BaseChain  {
     lazy var cosmosRewards = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
     
     lazy var mintscanTokens = Array<MintscanToken>()
+    lazy var mintscanChainParam = JSON()
     
     
     //For Legacy Lcd chains
@@ -46,12 +47,94 @@ class CosmosClass: BaseChain  {
     
     
     func fetchData() {
+        Task {
+            if let rawParam = try? await self.fetchChainParam() {
+                mintscanChainParam = rawParam
+            }
+            if (supportCw20) {
+                if let cw20s = try? await self.fetchCw20Info() {
+                    mintscanTokens = cw20s.assets!
+                }
+            }
+        }
         if (self is ChainBinanceBeacon || self is ChainOktKeccak256 ) {
             fetchLcdData()
         } else {
             fetchGrpcData()
         }
     }
+    
+    
+    
+    func isTxFeePayable() -> Bool {
+        var result = false
+        getMinTxFeeAmounts().forEach { minFee in
+            if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+                result = true
+            }
+        }
+        return result
+    }
+    
+    func getMinTxFeeAmounts() -> [Cosmos_Base_V1beta1_Coin] {
+        var result = [Cosmos_Base_V1beta1_Coin]()
+        let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
+        let feeDatas = getFeeInfos()[0].FeeDatas
+        feeDatas.forEach { feeData in
+            let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: handler0Up)
+            result.append(Cosmos_Base_V1beta1_Coin.with {  $0.denom = feeData.denom!; $0.amount = amount.stringValue })
+        }
+        return result
+    }
+    
+    func getFeeInfos() -> [FeeInfo] {
+        var result = [FeeInfo]()
+        mintscanChainParam["gas_price"]["rate"].arrayValue.forEach { rate in
+            result.append(FeeInfo.init(rate.stringValue))
+        }
+        if (result.count == 1) {
+            result[0].title = NSLocalizedString("str_fixed", comment: "")
+            result[0].msg = NSLocalizedString("fee_speed_title_fixed", comment: "")
+        } else if (result.count == 2) {
+            result[1].title = NSLocalizedString("str_average", comment: "")
+            result[1].msg = NSLocalizedString("fee_speed_title_average", comment: "")
+            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+                result[0].title = NSLocalizedString("str_zero", comment: "")
+                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
+            } else {
+                result[0].title = NSLocalizedString("str_tiny", comment: "")
+                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
+            }
+        } else if (result.count == 3) {
+            result[2].title = NSLocalizedString("str_average", comment: "")
+            result[2].msg = NSLocalizedString("fee_speed_title_average", comment: "")
+            result[1].title = NSLocalizedString("str_low", comment: "")
+            result[1].msg = NSLocalizedString("fee_speed_title_low", comment: "")
+            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+                result[0].title = NSLocalizedString("str_zero", comment: "")
+                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
+            } else {
+                result[0].title = NSLocalizedString("str_tiny", comment: "")
+                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
+            }
+        }
+        return result
+    }
+}
+
+//about mintscan api
+extension CosmosClass {
+    
+    func fetchChainParam() async throws -> JSON {
+//        print("fetchChainParam ", BaseNetWork.msChainParam(self))
+        return try await AF.request(BaseNetWork.msChainParam(self), method: .get).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchCw20Info() async throws -> MintscanTokens {
+//        print("fetchCw20Info ", BaseNetWork.msCw20InfoUrl(self))
+        return try await AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get).serializingDecodable(MintscanTokens.self).value
+    }
+    
 }
 
 
@@ -74,7 +157,6 @@ extension CosmosClass {
     }
     
     func fetchMoreData(_ channel: ClientConnection) {
-        if (supportCw20) { BaseNetWork().fetchCw20Info(self) }
         let group = DispatchGroup()
     
         fetchBalance(group, channel)

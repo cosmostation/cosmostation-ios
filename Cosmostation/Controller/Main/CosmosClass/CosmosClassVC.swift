@@ -9,6 +9,7 @@
 import UIKit
 import MaterialComponents
 import JJFloatingActionButton
+import SwiftyJSON
 
 class CosmosClassVC: BaseVC {
     
@@ -71,6 +72,17 @@ class CosmosClassVC: BaseVC {
         qrAddressVC.selectedChain = selectedChain
         qrAddressVC.modalPresentationStyle = .pageSheet
         present(qrAddressVC, animated: true)
+    }
+    
+    func onClaimTx() {
+        if (selectedChain.cosmosRewards.count == 0) {
+            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+            return
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
     }
     
     func onProposalList() {
@@ -146,8 +158,8 @@ class CosmosClassVC: BaseVC {
         mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
             self.onProposalList()
         }
-        mainFab.addItem(title: "Reward Claim", image: UIImage(named: "iconFabClaim")) { _ in
-            print("Claim")
+        mainFab.addItem(title: "Claim Reward All", image: UIImage(named: "iconFabClaim")) { _ in
+            self.onClaimTx()
         }
         mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in
             self.onStakeInfo()

@@ -58,35 +58,17 @@ class BaseNetWork {
     }
     
     func fetchAssets() {
-        print("fetchAssets Start ", BaseNetWork.msAssetsUrl())
+//        print("fetchAssets Start ", BaseNetWork.msAssetsUrl())
         AF.request(BaseNetWork.msAssetsUrl(), method: .get)
             .responseDecodable(of: MintscanAssets.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let value):
                     BaseData.instance.mintscanAssets = value.assets
 //                    print("mintscanAssets ", BaseData.instance.mintscanAssets?.count)
-                    
-                    
                 case .failure:
                     print("fetchAssets error ", response.error)
                 }
                 NotificationCenter.default.post(name: Notification.Name("FetchAssets"), object: nil, userInfo: nil)
-            }
-    }
-    
-    func fetchCw20Info(_ chain: CosmosClass) {
-//        print("fetchCw20Info Start ",  BaseNetWork.msCw20InfoUrl(chain))
-        AF.request(BaseNetWork.msCw20InfoUrl(chain), method: .get)
-            .responseDecodable(of: MintscanTokens.self, queue: .main, decoder: JSONDecoder()) { response in
-                switch response.result {
-                case .success(let value):
-                    if let tokens = value.assets {
-                        chain.mintscanTokens = tokens
-                    }
-                    
-                case .failure:
-                    print("fetchCw20Info error ", response.error)
-                }
             }
     }
     
