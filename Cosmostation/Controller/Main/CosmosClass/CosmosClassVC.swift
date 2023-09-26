@@ -83,6 +83,9 @@ class CosmosClassVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
+        let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
+        claimRewards.modalTransitionStyle = .coverVertical
+        self.present(claimRewards, animated: true)
     }
     
     func onProposalList() {

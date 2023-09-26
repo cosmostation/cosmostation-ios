@@ -268,13 +268,13 @@ extension CosmosStakingInfoVC {
     }
     
     func fetchUnbondedValidator(_ channel: ClientConnection) async throws -> [Cosmos_Staking_V1beta1_Validator]? {
-        let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 300 }
+        let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
         let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_UNBONDED" }
         return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).validators(req).response.get().validators
     }
     
     func fetchUnbondingValidator(_ channel: ClientConnection) async throws -> [Cosmos_Staking_V1beta1_Validator]? {
-        let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 300 }
+        let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
         let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_UNBONDING" }
         return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).validators(req).response.get().validators
     }

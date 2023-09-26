@@ -856,6 +856,10 @@
 		E1D4EA5C2871BCDE005C1ECF /* WDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA5A2871BCDE005C1ECF /* WDP.swift */; };
 		E1D538292A96644F00FB0403 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = E1D538282A96644F00FB0403 /* loading.json */; };
 		E1D5382A2A96644F00FB0403 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = E1D538282A96644F00FB0403 /* loading.json */; };
+		E1D5A3E42AC33B8000453914 /* CosmosClaimRewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D5A3E22AC33B8000453914 /* CosmosClaimRewards.swift */; };
+		E1D5A3E52AC33B8000453914 /* CosmosClaimRewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D5A3E22AC33B8000453914 /* CosmosClaimRewards.swift */; };
+		E1D5A3E62AC33B8000453914 /* CosmosClaimRewards.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D5A3E32AC33B8000453914 /* CosmosClaimRewards.xib */; };
+		E1D5A3E72AC33B8000453914 /* CosmosClaimRewards.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D5A3E32AC33B8000453914 /* CosmosClaimRewards.xib */; };
 		E1D6B8CE2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */; };
 		E1D6B8CF2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */; };
 		E1D6B8D12AA499A400177D30 /* CosmosNftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */; };
@@ -1313,6 +1317,8 @@
 		E1D4EA572871584B005C1ECF /* FeeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeInfo.swift; sourceTree = "<group>"; };
 		E1D4EA5A2871BCDE005C1ECF /* WDP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDP.swift; sourceTree = "<group>"; };
 		E1D538282A96644F00FB0403 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		E1D5A3E22AC33B8000453914 /* CosmosClaimRewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClaimRewards.swift; sourceTree = "<group>"; };
+		E1D5A3E32AC33B8000453914 /* CosmosClaimRewards.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosClaimRewards.xib; sourceTree = "<group>"; };
 		E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTokenVC.swift; sourceTree = "<group>"; };
 		E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosNftVC.swift; sourceTree = "<group>"; };
 		E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosAboutVC.swift; sourceTree = "<group>"; };
@@ -1426,6 +1432,7 @@
 		04CB912B2A910B1500375354 /* CosmosClass */ = {
 			isa = PBXGroup;
 			children = (
+				E1D5A3E12AC33A5600453914 /* GenTx */,
 				047BA8D02A94756A00D3F7DD /* CosmosClass.storyboard */,
 				04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */,
 				047BA8D32A94777600D3F7DD /* CosmosCoinVC.swift */,
@@ -2075,6 +2082,15 @@
 			path = BgImg;
 			sourceTree = "<group>";
 		};
+		E1D5A3E12AC33A5600453914 /* GenTx */ = {
+			isa = PBXGroup;
+			children = (
+				E1D5A3E22AC33B8000453914 /* CosmosClaimRewards.swift */,
+				E1D5A3E32AC33B8000453914 /* CosmosClaimRewards.xib */,
+			);
+			path = GenTx;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2277,6 +2293,7 @@
 				E11EAE182AAD879A003BFC7F /* SettingSwitchCell.xib in Resources */,
 				04FA74822AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */,
 				E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */,
+				E1D5A3E72AC33B8000453914 /* CosmosClaimRewards.xib in Resources */,
 				04FAD9D32AB2032200143A3E /* SwapStartVC.xib in Resources */,
 				E11EAE122AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
 				E15F2D012ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
@@ -2316,6 +2333,7 @@
 				E15F2CF82ABF0DCE00BAE105 /* basebg05.png in Resources */,
 				04FAD9DE2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
+				E1D5A3E62AC33B8000453914 /* CosmosClaimRewards.xib in Resources */,
 				E11EAE112AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
 				187446FF2930940F00849EE4 /* ApiKey.plist in Resources */,
 				E1DF77772AB74EE80028BD51 /* CheckPrivateKeyVC.xib in Resources */,
@@ -2550,6 +2568,7 @@
 				E122DC2E2A8A468E006D1E7B /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
 				E122DBB42A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.grpc.swift in Sources */,
 				E122DBEE2A8A468E006D1E7B /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,
+				E1D5A3E52AC33B8000453914 /* CosmosClaimRewards.swift in Sources */,
 				04527DBA2A937CA2005F72D7 /* AssetCell.swift in Sources */,
 				18FFB396281AF533004E65BB /* WUtils.swift in Sources */,
 				18FFB3A7281AF533004E65BB /* IntroVC.swift in Sources */,
@@ -2912,6 +2931,7 @@
 				E122DC2D2A8A468E006D1E7B /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
 				E122DBB32A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.grpc.swift in Sources */,
 				E122DBED2A8A468E006D1E7B /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,
+				E1D5A3E42AC33B8000453914 /* CosmosClaimRewards.swift in Sources */,
 				04527DB92A937CA2005F72D7 /* AssetCell.swift in Sources */,
 				1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
 				046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */,
