@@ -723,34 +723,36 @@ public class WUtils {
 //    }
 //
 //
-//    //address, accountnumber, sequencenumber
-//    static func onParseAuthGrpc(_ response :Cosmos_Auth_V1beta1_QueryAccountResponse) -> (String?, UInt64?, UInt64?) {
-//        var rawAccount = response.account
+    //address, accountnumber, sequencenumber
+    static func onParseAuthGrpc(_ response :Cosmos_Auth_V1beta1_QueryAccountResponse) -> (address: String?, accountNum: UInt64?, sequenceNum: UInt64?) {
+        var rawAccount = response.account
 //        if (rawAccount.typeURL.contains(Desmos_Profiles_V3_Profile.protoMessageName)),
 //            let account = try? Desmos_Profiles_V3_Profile.init(serializedData: rawAccount.value).account {
 //            rawAccount = account
 //        }
-//
-//        if (rawAccount.typeURL.contains(Cosmos_Auth_V1beta1_BaseAccount.protoMessageName)),
-//           let auth = try? Cosmos_Auth_V1beta1_BaseAccount.init(serializedData: rawAccount.value) {
-//            return (auth.address, auth.accountNumber, auth.sequence)
-//
-//        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)),
-//                  let auth = try? Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value) {
-//            let baseAccount = auth.baseVestingAccount.baseAccount
-//            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
-//
-//        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)),
-//                  let auth = try? Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value){
-//            let baseAccount = auth.baseVestingAccount.baseAccount
-//            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
-//
-//        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)),
-//                  let auth = try? Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value) {
-//            let baseAccount = auth.baseVestingAccount.baseAccount
-//            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
-//
-//        } else if (rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)),
+
+        if (rawAccount.typeURL.contains(Cosmos_Auth_V1beta1_BaseAccount.protoMessageName)),
+           let auth = try? Cosmos_Auth_V1beta1_BaseAccount.init(serializedData: rawAccount.value) {
+            return (auth.address, auth.accountNumber, auth.sequence)
+
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)),
+                  let auth = try? Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value) {
+            let baseAccount = auth.baseVestingAccount.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)),
+                  let auth = try? Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value){
+            let baseAccount = auth.baseVestingAccount.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)),
+                  let auth = try? Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value) {
+            let baseAccount = auth.baseVestingAccount.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+
+        } 
+        
+//        else if (rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)),
 //                  let auth = try? Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value) {
 //            let baseAccount = auth.baseAccount
 //            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
@@ -765,9 +767,9 @@ public class WUtils {
 //            let baseAccount = auth.baseVestingAccount.baseAccount
 //            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
 //        }
-//
-//        return (nil, nil, nil)
-//    }
+
+        return (nil, nil, nil)
+    }
 //
 //
 //    static func onParseAuthAccount(_ chain: ChainType, _ accountId: Int64) {

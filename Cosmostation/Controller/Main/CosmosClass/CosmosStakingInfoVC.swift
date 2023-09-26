@@ -88,6 +88,7 @@ class CosmosStakingInfoVC: BaseVC {
                 }
                 
                 rewards = selectedChain.cosmosRewards
+                print("rewards ", rewards)
                 
                 validators.sort {
                     if ($0.description_p.moniker == "Cosmostation") { return true }
@@ -257,12 +258,14 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
     }
     
     func pinResponse(_ request: LockType, _ result: UnLockResult) {
+        
     }
 }
 
 extension CosmosStakingInfoVC {
     
     func fetchChainParam(_ chain: BaseChain) async throws -> JSON {
+        print("fetchChainParam ", BaseNetWork.msChainParam(chain))
         return try await AF.request(BaseNetWork.msChainParam(chain), method: .get).serializingDecodable(JSON.self).value
     }
     
