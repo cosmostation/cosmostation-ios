@@ -11,9 +11,6 @@ import Lottie
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class CosmosStakingInfoVC: BaseVC {
     
@@ -51,7 +48,7 @@ class CosmosStakingInfoVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        onFetchData()
+        onUpdateview()
     }
     
     override func setLocalizedString() {
@@ -59,51 +56,35 @@ class CosmosStakingInfoVC: BaseVC {
         stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
     }
     
-    func onFetchData() {
-        validators.removeAll()
-        delegations.removeAll()
-        unbondings.removeAll()
-        rewards.removeAll()
-        
+    func onUpdateview() {
         Task {
-            let channel = getConnection(selectedChain)
-            if let rewardaddr = try? await fetchRewardAddress(channel, selectedChain.address!),
-               let bonded = try? await fetchBondedValidator(channel),
-               let unbonding = try? await fetchUnbondingValidator(channel),
-               let unbonded = try? await fetchUnbondedValidator(channel) {
-                
-                rewardAddress = rewardaddr
-                validators.append(contentsOf: bonded ?? [])
-                validators.append(contentsOf: unbonding ?? [])
-                validators.append(contentsOf: unbonded ?? [])
-                
-                delegations = selectedChain.cosmosDelegations
-                selectedChain.cosmosUnbondings.forEach { unbonding in
-                    unbonding.entries.forEach { entry in
-                        unbondings.append(UnbondingEntry.init(validatorAddress: unbonding.validatorAddress, entry: entry))
-                    }
+            rewardAddress = selectedChain.rewardAddress
+            validators = selectedChain.cosmosValidators
+            delegations = selectedChain.cosmosDelegations
+            rewards = selectedChain.cosmosRewards
+            
+            selectedChain.cosmosUnbondings.forEach { unbonding in
+                unbonding.entries.forEach { entry in
+                    unbondings.append(UnbondingEntry.init(validatorAddress: unbonding.validatorAddress, entry: entry))
                 }
-                
-                rewards = selectedChain.cosmosRewards
-                print("rewards ", rewards)
-                
-                validators.sort {
-                    if ($0.description_p.moniker == "Cosmostation") { return true }
-                    if ($1.description_p.moniker == "Cosmostation") { return false }
-                    if ($0.jailed && !$1.jailed) { return false }
-                    if (!$0.jailed && $1.jailed) { return true }
-                    return Double($0.tokens)! > Double($1.tokens)!
-                }
-                
-                cosmostationValAddress = validators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
-                delegations.sort {
-                    if ($0.delegation.validatorAddress == cosmostationValAddress) { return true }
-                    if ($1.delegation.validatorAddress == cosmostationValAddress) { return false }
-                    return Double($0.balance.amount)! > Double($1.balance.amount)!
-                }
-                unbondings.sort {
-                    return $0.entry.creationHeight < $1.entry.creationHeight
-                }
+            }
+            
+            validators.sort {
+                if ($0.description_p.moniker == "Cosmostation") { return true }
+                if ($1.description_p.moniker == "Cosmostation") { return false }
+                if ($0.jailed && !$1.jailed) { return false }
+                if (!$0.jailed && $1.jailed) { return true }
+                return Double($0.tokens)! > Double($1.tokens)!
+            }
+            
+            cosmostationValAddress = validators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
+            delegations.sort {
+                if ($0.delegation.validatorAddress == cosmostationValAddress) { return true }
+                if ($1.delegation.validatorAddress == cosmostationValAddress) { return false }
+                return Double($0.balance.amount)! > Double($1.balance.amount)!
+            }
+            unbondings.sort {
+                return $0.entry.creationHeight < $1.entry.creationHeight
             }
             
             DispatchQueue.main.async {
@@ -256,38 +237,6 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
     
     func pinResponse(_ request: LockType, _ result: UnLockResult) {
         
-    }
-}
-
-extension CosmosStakingInfoVC {
-    
-    func fetchBondedValidator(_ channel: ClientConnection) async throws -> [Cosmos_Staking_V1beta1_Validator]? {
-        let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 300 }
-        let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_BONDED" }
-        return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).validators(req).response.get().validators
-    }
-    
-    func fetchUnbondedValidator(_ channel: ClientConnection) async throws -> [Cosmos_Staking_V1beta1_Validator]? {
-        let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
-        let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_UNBONDED" }
-        return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).validators(req).response.get().validators
-    }
-    
-    func fetchUnbondingValidator(_ channel: ClientConnection) async throws -> [Cosmos_Staking_V1beta1_Validator]? {
-        let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
-        let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_UNBONDING" }
-        return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).validators(req).response.get().validators
-    }
-    
-    func fetchRewardAddress(_ channel: ClientConnection, _ address: String) async throws -> String? {
-        let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = address }
-        return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).delegatorWithdrawAddress(req).response.get().withdrawAddress.replacingOccurrences(of: "\"", with: "")
-    }
-    
-    
-    func getConnection(_ chain: CosmosClass) -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.grpcHost, port: chain.grpcPort)
     }
 }
 

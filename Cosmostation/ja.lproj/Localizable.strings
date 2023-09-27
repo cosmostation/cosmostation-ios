@@ -110,7 +110,7 @@
 "str_path" = "HD 経路 :";
 "str_displayed_chain" = "表示されたチェーン";
 "str_hidden_chain" = "隠されたチェーン";
-"str_qr_scan" = "スキャン";
+"str_qr_scan" = "QRスキャン";
 "str_switch_wallet" = "ウォレット切り替え";
 "str_edit_token_list" = "トークンの編集";
 "str_recipient_chain" = "受信チェーン";

@@ -22,7 +22,9 @@ class CosmosClass: BaseChain  {
     
     var grpcHost = ""
     var grpcPort = 443
+    lazy var rewardAddress = ""
     lazy var cosmosAuth = Google_Protobuf_Any.init()
+    lazy var cosmosValidators = Array<Cosmos_Staking_V1beta1_Validator>()
     lazy var cosmosBalances = Array<Cosmos_Base_V1beta1_Coin>()
     lazy var cosmosVestings = Array<Cosmos_Base_V1beta1_Coin>()
     lazy var cosmosDelegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
@@ -66,20 +68,76 @@ class CosmosClass: BaseChain  {
     
     
     
+    func fetchStakeData() {
+        if (cosmosValidators.count > 0) { return }
+        Task {
+            let channel = getConnection()
+            if let rewardaddr = try? await fetchRewardAddress(channel),
+               let bonded = try? await fetchBondedValidator(channel),
+               let unbonding = try? await fetchUnbondingValidator(channel),
+               let unbonded = try? await fetchUnbondedValidator(channel) {
+                
+                rewardAddress = rewardaddr ?? ""
+                
+                cosmosValidators.append(contentsOf: bonded ?? [])
+                cosmosValidators.append(contentsOf: unbonding ?? [])
+                cosmosValidators.append(contentsOf: unbonded ?? [])
+            }
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: Notification.Name("FetchStakeData"), object: self.id, userInfo: nil)
+            }
+        }
+    }
+    
+    
+    
+    func getInitFee() -> Cosmos_Tx_V1beta1_Fee? {
+        var feeCoin: Cosmos_Base_V1beta1_Coin?
+        getDefaultFeeCoins().forEach { minFee in
+            if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+                feeCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = minFee.denom; $0.amount = minFee.amount}
+                return
+            }
+        }
+        if (feeCoin != nil) {
+            return Cosmos_Tx_V1beta1_Fee.with {
+                $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
+                $0.amount = [feeCoin!]
+            }
+        }
+        return nil
+    }
+    
+    func getFeeBasePosition() -> Int {
+        return mintscanChainParam["gas_price"]["base"].intValue
+    }
+    
     func isTxFeePayable() -> Bool {
         var result = false
-        getMinTxFeeAmounts().forEach { minFee in
+        getDefaultFeeCoins().forEach { minFee in
             if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
                 result = true
+                return
             }
         }
         return result
     }
     
-    func getMinTxFeeAmounts() -> [Cosmos_Base_V1beta1_Coin] {
+//    func getMinFeeCoins() -> [Cosmos_Base_V1beta1_Coin] {
+//        var result = [Cosmos_Base_V1beta1_Coin]()
+//        let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
+//        let feeDatas = getFeeInfos()[0].FeeDatas
+//        feeDatas.forEach { feeData in
+//            let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: handler0Up)
+//            result.append(Cosmos_Base_V1beta1_Coin.with {  $0.denom = feeData.denom!; $0.amount = amount.stringValue })
+//        }
+//        return result
+//    }
+    
+    func getDefaultFeeCoins() -> [Cosmos_Base_V1beta1_Coin] {
         var result = [Cosmos_Base_V1beta1_Coin]()
         let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
-        let feeDatas = getFeeInfos()[0].FeeDatas
+        let feeDatas = getFeeInfos()[getFeeBasePosition()].FeeDatas
         feeDatas.forEach { feeData in
             let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: handler0Up)
             result.append(Cosmos_Base_V1beta1_Coin.with {  $0.denom = feeData.denom!; $0.amount = amount.stringValue })
@@ -126,7 +184,7 @@ class CosmosClass: BaseChain  {
 extension CosmosClass {
     
     func fetchChainParam() async throws -> JSON {
-//        print("fetchChainParam ", BaseNetWork.msChainParam(self))
+        print("fetchChainParam ", BaseNetWork.msChainParam(self))
         return try await AF.request(BaseNetWork.msChainParam(self), method: .get).serializingDecodable(JSON.self).value
     }
     
@@ -140,6 +198,29 @@ extension CosmosClass {
 
 //about grpc
 extension CosmosClass {
+    
+    func fetchBondedValidator(_ channel: ClientConnection) async throws -> [Cosmos_Staking_V1beta1_Validator]? {
+        let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 300 }
+        let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_BONDED" }
+        return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).validators(req).response.get().validators
+    }
+    
+    func fetchUnbondedValidator(_ channel: ClientConnection) async throws -> [Cosmos_Staking_V1beta1_Validator]? {
+        let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
+        let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_UNBONDED" }
+        return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).validators(req).response.get().validators
+    }
+    
+    func fetchUnbondingValidator(_ channel: ClientConnection) async throws -> [Cosmos_Staking_V1beta1_Validator]? {
+        let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
+        let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_UNBONDING" }
+        return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).validators(req).response.get().validators
+    }
+    
+    func fetchRewardAddress(_ channel: ClientConnection) async throws -> String? {
+        let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = address! }
+        return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).delegatorWithdrawAddress(req).response.get().withdrawAddress.replacingOccurrences(of: "\"", with: "")
+    }
     
     func fetchGrpcData() {
         let channel = getConnection()
@@ -380,7 +461,7 @@ extension CosmosClass {
                 result.append(coin.denom)
             }
         }
-        result.removeAll { $0 == stakeDenom}
+        result.removeAll { $0 == stakeDenom }
         return result.count
     }
     
@@ -394,6 +475,21 @@ extension CosmosClass {
                 let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
                 result = result.adding(value)
             }
+        }
+        return result
+    }
+    
+    func claimableRewards() -> [Cosmos_Distribution_V1beta1_DelegationDelegatorReward] {
+        var result = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
+        cosmosRewards.forEach { reward in
+            for i in 0..<reward.reward.count {
+                let rewardAmount = NSDecimalNumber(string: reward.reward[i].amount).multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(0))
+                if (rewardAmount.compare(NSDecimalNumber.one).rawValue > 0) {
+                    result.append(reward)
+                    break
+                }
+            }
+            return
         }
         return result
     }

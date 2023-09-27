@@ -42,6 +42,7 @@ class CosmosClassVC: BaseVC {
         addressLabel.text = selectedChain.address
         onSetTabbarView()
         onSetFabButton()
+        selectedChain.fetchStakeData()
         
         print("selectedChain address ", selectedChain.address)
 //        navigationController?.navigationBar.topItem?.title = baseAccount.name
@@ -56,15 +57,21 @@ class CosmosClassVC: BaseVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchCw20Done(_:)), name: Notification.Name("FetchCw20Tokens"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchStakeDone(_:)), name: Notification.Name("FetchStakeData"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchCw20Tokens"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchStakeData"), object: nil)
     }
     
     @objc func onFetchCw20Done(_ notification: NSNotification) {
         totalValue = selectedChain.allValue()
+    }
+    
+    @objc func onFetchStakeDone(_ notification: NSNotification) {
+        print("onFetchStakeDone")
     }
     
     @objc func onShowAddress() {
@@ -84,6 +91,7 @@ class CosmosClassVC: BaseVC {
             return
         }
         let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
+        claimRewards.selectedChain = selectedChain
         claimRewards.modalTransitionStyle = .coverVertical
         self.present(claimRewards, animated: true)
     }
@@ -162,10 +170,14 @@ class CosmosClassVC: BaseVC {
             self.onProposalList()
         }
         mainFab.addItem(title: "Claim Reward All", image: UIImage(named: "iconFabClaim")) { _ in
-            self.onClaimTx()
+            if (self.selectedChain.cosmosValidators.count > 0) {
+                self.onClaimTx()
+            }
         }
         mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in
-            self.onStakeInfo()
+            if (self.selectedChain.cosmosValidators.count > 0) {
+                self.onStakeInfo()
+            }
         }
         mainFab.addItem(title: "Receive", image: UIImage(named: "iconFabReceive")) { _ in
             self.onShowAddress()

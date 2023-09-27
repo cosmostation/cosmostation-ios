@@ -110,7 +110,7 @@
 "str_path" = "HD Path :";
 "str_displayed_chain" = "Displayed Chains";
 "str_hidden_chain" = "Hidden Chains";
-"str_qr_scan" = "Scan";
+"str_qr_scan" = "QR Scan";
 "str_switch_wallet" = "Switch Wallet";
 "str_edit_token_list" = "Edit Token List";
 "str_recipient_chain" = "Recipient Chain";

@@ -210,15 +210,18 @@ class Signer {
 //    }
     
     //Tx for Common Claim Staking Reward2
-    static func genClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genClaimRewardsTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                       _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain, _ isSimul: Bool? = false) -> (Cosmos_Tx_V1beta1_BroadcastTxRequest?, Cosmos_Tx_V1beta1_SimulateRequest?)  {
+                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest?  {
         let claimRewardMsg = genClaimStakingRewardMsg(auth, rewards)
-        if (isSimul == true) {
-            return (nil, getSimulateTx(auth, claimRewardMsg, fee, memo, baseChain))
-        } else {
-            return (getSignedTx(auth, claimRewardMsg, fee, memo, baseChain), nil)
-        }
+        return getSignedTx(auth, claimRewardMsg, fee, memo, baseChain)
+    }
+    
+    static func genClaimRewardsSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                      _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
+                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest? {
+        let claimRewardMsg = genClaimStakingRewardMsg(auth, rewards)
+        return getSimulateTx(auth, claimRewardMsg, fee, memo, baseChain)
     }
     
     static func genClaimStakingRewardMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, 
