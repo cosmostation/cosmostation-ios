@@ -14,6 +14,7 @@ class StakeUnbondingCell: UITableViewCell {
     
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg: UIImageView!
+    @IBOutlet weak var jailedImg: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var finishGapLabel: UILabel!
     @IBOutlet weak var finishTimeLabel: UILabel!
@@ -38,6 +39,7 @@ class StakeUnbondingCell: UITableViewCell {
         
         logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
         nameLabel.text = validator.description_p.moniker
+        jailedImg.isHidden = !validator.jailed
         
         let stakeDenom = baseChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {

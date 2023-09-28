@@ -33,6 +33,13 @@
                                     <constraint firstAttribute="height" constant="40" id="gnv-8c-sfy"/>
                                 </constraints>
                             </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jailedImg" translatesAutoresizingMaskIntoConstraints="NO" id="OiQ-uj-Xjt">
+                                <rect key="frame" x="16" y="14" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="1TQ-if-6GR"/>
+                                    <constraint firstAttribute="height" constant="40" id="UL5-Fg-n6L"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haF-lh-o1R">
                                 <rect key="frame" x="68" y="27" width="100" height="14"/>
                                 <constraints>
@@ -155,8 +162,10 @@
                             <constraint firstItem="6EU-7C-FIC" firstAttribute="top" secondItem="oPB-jM-OzH" secondAttribute="top" constant="14" id="kgw-gz-y4O"/>
                             <constraint firstItem="oF3-1v-R8d" firstAttribute="centerY" secondItem="8rY-mF-njK" secondAttribute="centerY" constant="1" id="kiQ-lg-YYa"/>
                             <constraint firstItem="d9T-0n-dBs" firstAttribute="top" secondItem="XLx-kQ-fWj" secondAttribute="bottom" constant="14" id="lHc-aB-oNi"/>
+                            <constraint firstItem="OiQ-uj-Xjt" firstAttribute="centerY" secondItem="6EU-7C-FIC" secondAttribute="centerY" id="mII-Cz-zqi"/>
                             <constraint firstItem="XLx-kQ-fWj" firstAttribute="top" secondItem="6EU-7C-FIC" secondAttribute="bottom" constant="14" id="mPP-0I-Eex"/>
                             <constraint firstAttribute="trailing" secondItem="XLx-kQ-fWj" secondAttribute="trailing" constant="14" id="pHq-0e-ym3"/>
+                            <constraint firstItem="OiQ-uj-Xjt" firstAttribute="centerX" secondItem="6EU-7C-FIC" secondAttribute="centerX" id="rQo-My-kPf"/>
                             <constraint firstItem="XLx-kQ-fWj" firstAttribute="leading" secondItem="oPB-jM-OzH" secondAttribute="leading" constant="14" id="rix-fL-4ql"/>
                             <constraint firstItem="erp-pN-u7p" firstAttribute="leading" secondItem="haF-lh-o1R" secondAttribute="trailing" constant="24" id="tUX-rU-4I3"/>
                         </constraints>
@@ -175,6 +184,7 @@
             <connections>
                 <outlet property="commLabel" destination="8rY-mF-njK" id="tVU-lR-iO5"/>
                 <outlet property="commPercentLabel" destination="oF3-1v-R8d" id="B2J-an-nBt"/>
+                <outlet property="jailedImg" destination="OiQ-uj-Xjt" id="MQy-7b-DMG"/>
                 <outlet property="logoImg" destination="6EU-7C-FIC" id="CLV-da-I42"/>
                 <outlet property="nameLabel" destination="haF-lh-o1R" id="Dia-Fs-7lc"/>
                 <outlet property="rewardLabel" destination="eU2-D9-d1o" id="CeR-X6-rTS"/>
@@ -188,6 +198,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="jailedImg" width="44" height="44"/>
         <image name="validatorDefault" width="40" height="40"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

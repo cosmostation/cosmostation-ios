@@ -58,7 +58,7 @@ class CosmosClaimRewards: BaseVC, MemoDelegate, BaseSheetDelegate {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        claimableRewards = selectedChain.claimableRewards()
+//        claimableRewards = selectedChain.claimableRewards()
         feeInfos = selectedChain.getFeeInfos()
         feeSegments.removeAllSegments()
         for i in 0..<feeInfos.count {
@@ -78,6 +78,7 @@ class CosmosClaimRewards: BaseVC, MemoDelegate, BaseSheetDelegate {
     
     override func setLocalizedString() {
         claimBtn.setTitle(NSLocalizedString("tx_get_reward", comment: ""), for: .normal)
+        memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
     }
     
     func onUpdateView() {
@@ -167,10 +168,12 @@ class CosmosClaimRewards: BaseVC, MemoDelegate, BaseSheetDelegate {
     func onMemoInserted(_ memo: String) {
         txMemo = memo
         if (txMemo.isEmpty) {
-            memoLabel.text = "-"
+            memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+            memoLabel.textColor = .color03
             return
         }
         memoLabel.text = txMemo
+        memoLabel.textColor = .color01
     }
     
     @IBAction func onClickClaim(_ sender: BaseButton) {

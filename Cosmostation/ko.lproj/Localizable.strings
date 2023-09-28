@@ -317,6 +317,7 @@
 "msg_mnemonic_wanning" = "이 문구는 계정을 복구하는 유일한 방법입니다. 누구와도 공유하지 마십시오. 이 니모닉을 분실하면 자산 손실로 이어질 수 있습니다.";
 "msg_tap_to_mnemonic_copy" = "복사하려면 니모닉 문구 상자를 탭하세요.";
 "msg_tap_box_to_copy" = "복사하려면 카드를 탭하세요.";
+"msg_tap_for_add_memo" = "메모를 추가려면 탭하세요.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";

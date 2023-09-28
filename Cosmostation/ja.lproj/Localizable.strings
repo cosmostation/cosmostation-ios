@@ -317,6 +317,7 @@
 "msg_mnemonic_wanning" = "このフレーズがアカウントを回復する唯一の方法です。 誰とも共有しないでください。 このニーモニックを失うと、資産の損失につながる可能性があります。";
 "msg_tap_to_mnemonic_copy" = "ニーモニックフレーズボックスをタップしてコピーします。";
 "msg_tap_box_to_copy" = "カードをタップしてコピーします。";
+"msg_tap_for_add_memo" = "タップしてメモを追加します。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";

@@ -127,10 +127,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCo-cU-raa" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="512.66666666666663" width="377" height="63.333333333333371"/>
+                    <rect key="frame" x="8" y="508.66666666666669" width="377" height="67.333333333333314"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2e-jD-YrS">
-                            <rect key="frame" x="12" y="14" width="99.333333333333329" height="14"/>
+                            <rect key="frame" x="12" y="13.999999999999943" width="99.333333333333329" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="vnM-a2-kDl"/>
                             </constraints>
@@ -139,9 +139,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jr9-S0-wqm">
-                            <rect key="frame" x="12" y="36" width="353" height="15.333333333333336"/>
+                            <rect key="frame" x="12" y="35.999999999999943" width="353" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                            <color key="textColor" name="_color01"/>
+                            <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -150,7 +150,7 @@
                         <constraint firstItem="Jr9-S0-wqm" firstAttribute="leading" secondItem="nCo-cU-raa" secondAttribute="leading" constant="12" id="7I4-7d-Erg"/>
                         <constraint firstItem="E2e-jD-YrS" firstAttribute="leading" secondItem="nCo-cU-raa" secondAttribute="leading" constant="12" id="Q3O-Si-lBp"/>
                         <constraint firstItem="E2e-jD-YrS" firstAttribute="top" secondItem="nCo-cU-raa" secondAttribute="top" constant="14" id="a6I-Qq-656"/>
-                        <constraint firstAttribute="bottom" secondItem="Jr9-S0-wqm" secondAttribute="bottom" constant="12" id="iJI-3B-txm"/>
+                        <constraint firstAttribute="bottom" secondItem="Jr9-S0-wqm" secondAttribute="bottom" constant="16" id="iJI-3B-txm"/>
                         <constraint firstItem="Jr9-S0-wqm" firstAttribute="top" secondItem="E2e-jD-YrS" secondAttribute="bottom" constant="8" id="vZR-GF-OR6"/>
                         <constraint firstAttribute="trailing" secondItem="Jr9-S0-wqm" secondAttribute="trailing" constant="12" id="zwe-4J-cFH"/>
                     </constraints>
@@ -344,6 +344,9 @@
         </namedColor>
         <namedColor name="_color02">
             <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color03">
+            <color red="0.54100000858306885" green="0.60000002384185791" blue="0.68199998140335083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color05">
             <color red="0.31400001049041748" green="0.32199999690055847" blue="0.40400001406669617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

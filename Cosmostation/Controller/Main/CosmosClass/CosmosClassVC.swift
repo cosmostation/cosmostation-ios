@@ -91,6 +91,7 @@ class CosmosClassVC: BaseVC {
             return
         }
         let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
+        claimRewards.claimableRewards = selectedChain.claimableRewards()
         claimRewards.selectedChain = selectedChain
         claimRewards.modalTransitionStyle = .coverVertical
         self.present(claimRewards, animated: true)

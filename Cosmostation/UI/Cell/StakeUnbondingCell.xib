@@ -33,6 +33,13 @@
                                     <constraint firstAttribute="height" constant="40" id="Ud3-7v-I0L"/>
                                 </constraints>
                             </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jailedImg" translatesAutoresizingMaskIntoConstraints="NO" id="ErB-SR-gm1">
+                                <rect key="frame" x="16" y="14" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="DI5-2z-gEX"/>
+                                    <constraint firstAttribute="height" constant="40" id="Spn-xV-HG0"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="659-G8-gAa">
                                 <rect key="frame" x="68" y="27" width="120" height="14"/>
                                 <constraints>
@@ -100,6 +107,7 @@
                         <constraints>
                             <constraint firstItem="lgF-zq-vl0" firstAttribute="top" secondItem="kdI-qs-5GN" secondAttribute="bottom" constant="14" id="0Gy-Od-DpE"/>
                             <constraint firstItem="f1F-DA-iOC" firstAttribute="trailing" secondItem="omQ-3r-SPd" secondAttribute="trailing" id="6uQ-0m-SNk"/>
+                            <constraint firstItem="ErB-SR-gm1" firstAttribute="centerX" secondItem="Vz0-03-qtW" secondAttribute="centerX" id="Dsb-jG-qUC"/>
                             <constraint firstItem="Vz0-03-qtW" firstAttribute="leading" secondItem="OH0-YD-EIK" secondAttribute="leading" constant="16" id="NO1-EM-QYX"/>
                             <constraint firstAttribute="trailing" secondItem="omQ-3r-SPd" secondAttribute="trailing" constant="14" id="Sba-dg-ysz"/>
                             <constraint firstItem="659-G8-gAa" firstAttribute="centerY" secondItem="Vz0-03-qtW" secondAttribute="centerY" id="X2p-st-AOp"/>
@@ -109,6 +117,7 @@
                             <constraint firstAttribute="trailing" secondItem="lgF-zq-vl0" secondAttribute="trailing" constant="14" id="cOA-bV-IR7"/>
                             <constraint firstItem="lgF-zq-vl0" firstAttribute="leading" secondItem="OH0-YD-EIK" secondAttribute="leading" constant="14" id="fBS-Hf-oga"/>
                             <constraint firstAttribute="trailing" secondItem="kdI-qs-5GN" secondAttribute="trailing" constant="14" id="fy4-Dm-vVu"/>
+                            <constraint firstItem="ErB-SR-gm1" firstAttribute="centerY" secondItem="Vz0-03-qtW" secondAttribute="centerY" id="ihM-MA-VWL"/>
                             <constraint firstItem="omQ-3r-SPd" firstAttribute="top" secondItem="OH0-YD-EIK" secondAttribute="top" constant="18" id="jXB-WH-25v"/>
                             <constraint firstItem="f1F-DA-iOC" firstAttribute="top" secondItem="omQ-3r-SPd" secondAttribute="bottom" constant="4" id="lSZ-rp-zla"/>
                             <constraint firstItem="kdI-qs-5GN" firstAttribute="leading" secondItem="OH0-YD-EIK" secondAttribute="leading" constant="14" id="oqg-vY-kKR"/>
@@ -129,6 +138,7 @@
             <connections>
                 <outlet property="finishGapLabel" destination="omQ-3r-SPd" id="k30-ON-A3O"/>
                 <outlet property="finishTimeLabel" destination="f1F-DA-iOC" id="PSL-zG-QWS"/>
+                <outlet property="jailedImg" destination="ErB-SR-gm1" id="S7r-ev-gKF"/>
                 <outlet property="logoImg" destination="Vz0-03-qtW" id="CkT-dq-5Og"/>
                 <outlet property="nameLabel" destination="659-G8-gAa" id="RzA-o8-r2p"/>
                 <outlet property="rootView" destination="OH0-YD-EIK" id="GrV-a5-ao4"/>
@@ -139,6 +149,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="jailedImg" width="44" height="44"/>
         <image name="validatorDefault" width="40" height="40"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
