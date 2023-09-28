@@ -63,11 +63,11 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
 
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         let userInput = memoTextArea.textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        memoDelegate?.onMemoInserted(userInput)
+        memoDelegate?.onUpdateMemoView(userInput)
         dismiss(animated: true)
     }
 }
 
 protocol MemoDelegate {
-    func onMemoInserted(_ memo: String)
+    func onUpdateMemoView(_ memo: String)
 }

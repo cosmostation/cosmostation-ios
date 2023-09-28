@@ -29,8 +29,6 @@ class StakeDelegateCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        logoImg.layer.cornerRadius = logoImg.frame.height/2
-        logoImg.clipsToBounds = true
         rootView.setBlur()
     }
     

@@ -69,14 +69,6 @@ class CosmosStakingInfoVC: BaseVC {
                 }
             }
             
-            validators.sort {
-                if ($0.description_p.moniker == "Cosmostation") { return true }
-                if ($1.description_p.moniker == "Cosmostation") { return false }
-                if ($0.jailed && !$1.jailed) { return false }
-                if (!$0.jailed && $1.jailed) { return true }
-                return Double($0.tokens)! > Double($1.tokens)!
-            }
-            
             cosmostationValAddress = validators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
             delegations.sort {
                 if ($0.delegation.validatorAddress == cosmostationValAddress) { return true }
@@ -100,7 +92,14 @@ class CosmosStakingInfoVC: BaseVC {
     }
     
     @IBAction func onClickStake(_ sender: BaseButton) {
-        
+//        if (selectedChain.isTxFeePayable() == false) {
+//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+//            return
+//        }
+        let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
+        delegate.selectedChain = selectedChain
+        delegate.modalTransitionStyle = .coverVertical
+        self.present(delegate, animated: true)
     }
 }
 

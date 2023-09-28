@@ -258,6 +258,7 @@
 "str_check_each_private_keys" = "Check private key for each chain";
 "str_add_custom_chain" = "Add Custom Chain";
 "str_select_coin_for_fee" = "Select coin to use as Tx fee";
+"str_stake" = "Stake";
 
 
 "btn_delegate" = "  Delegate";
@@ -317,7 +318,8 @@
 "msg_mnemonic_wanning" = "This phrase is the only way to recover your account. Do not share with anyone. Losing this mnemonics could lead to loss of your asset.";
 "msg_tap_to_mnemonic_copy" = "Tap mnemoniuc phrases box for copy.";
 "msg_tap_box_to_copy" = "Tap the card to copy it.";
-"msg_tap_for_add_memo" = "Tap to add  memo.";
+"msg_tap_for_add_memo" = "Tap to add memo.";
+"msg_tap_for_add_amount" = "Tap to add amount.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";

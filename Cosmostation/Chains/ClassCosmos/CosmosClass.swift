@@ -82,8 +82,17 @@ class CosmosClass: BaseChain  {
                 cosmosValidators.append(contentsOf: bonded ?? [])
                 cosmosValidators.append(contentsOf: unbonding ?? [])
                 cosmosValidators.append(contentsOf: unbonded ?? [])
+                
+                cosmosValidators.sort {
+                    if ($0.description_p.moniker == "Cosmostation") { return true }
+                    if ($1.description_p.moniker == "Cosmostation") { return false }
+                    if ($0.jailed && !$1.jailed) { return false }
+                    if (!$0.jailed && $1.jailed) { return true }
+                    return Double($0.tokens)! > Double($1.tokens)!
+                }
             }
             DispatchQueue.main.async {
+                try? channel.close()
                 NotificationCenter.default.post(name: Notification.Name("FetchStakeData"), object: self.id, userInfo: nil)
             }
         }

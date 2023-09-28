@@ -258,6 +258,7 @@
 "str_check_each_private_keys" = "체인별 개인키 확인";
 "str_add_custom_chain" = "커스텀 체인 추가";
 "str_select_coin_for_fee" = "Tx 수수료로 사용할 코인 선택";
+"str_stake" = "스테이크";
 
 
 "btn_delegate" = "  위임 하기";
@@ -318,6 +319,7 @@
 "msg_tap_to_mnemonic_copy" = "복사하려면 니모닉 문구 상자를 탭하세요.";
 "msg_tap_box_to_copy" = "복사하려면 카드를 탭하세요.";
 "msg_tap_for_add_memo" = "메모를 추가려면 탭하세요.";
+"msg_tap_for_add_amount" = "수량을 입력하시려면 탭하세요.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";
@@ -1023,7 +1025,7 @@
 "tx_send" = "보내기";
 "tx_receive" = "받기";
 "tx_transfer" = "전송하기";
-"tx_delegate" = "위임";
+"tx_delegate" = "스테이킹";
 "tx_undelegate" = "위임 철회";
 "tx_cancel_undelegate" = "위임 철회 취소";
 "tx_redelegate" = "재위임";

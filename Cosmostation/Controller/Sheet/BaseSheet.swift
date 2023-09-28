@@ -23,7 +23,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var swapAssets = Array<JSON>()
     var searchList = Array<JSON>()
     var swapBalance = Array<Cosmos_Base_V1beta1_Coin>()
+    
     var feeDatas = Array<FeeData>()
+    var validators = Array<Cosmos_Staking_V1beta1_Validator>()
+    var searchValidators = Array<Cosmos_Staking_V1beta1_Validator>()
     
 
     override func viewDidLoad() {
@@ -44,7 +47,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SwitchPriceDisplayCell", bundle: nil), forCellReuseIdentifier: "SwitchPriceDisplayCell")
         sheetTableView.register(UINib(nibName: "SelectSwapChainCell", bundle: nil), forCellReuseIdentifier: "SelectSwapChainCell")
         sheetTableView.register(UINib(nibName: "SelectSwapAssetCell", bundle: nil), forCellReuseIdentifier: "SelectSwapAssetCell")
+        
         sheetTableView.register(UINib(nibName: "SelectFeeCoinCell", bundle: nil), forCellReuseIdentifier: "SelectFeeCoinCell")
+        sheetTableView.register(UINib(nibName: "SelectValidatorCell", bundle: nil), forCellReuseIdentifier: "SelectValidatorCell")
         sheetTableView.sectionHeaderTopPadding = 0
         
         
@@ -101,6 +106,11 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SelectFeeCoin) {
             sheetTitle.text = NSLocalizedString("str_select_coin_for_fee", comment: "")
+            
+        } else if (sheetType == .SelectValidator) {
+            sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
+            sheetSearchBar.isHidden = false
+            searchValidators = validators
         }
         
         
@@ -118,6 +128,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             searchList = swapChains
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
             searchList = swapAssets
+        } else if (sheetType == .SelectValidator) {
+            searchValidators = validators
         }
         sheetTableView.reloadData()
     }
@@ -131,6 +143,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
             searchList = searchText.isEmpty ? swapAssets : swapAssets.filter { json in
                 return json["symbol"].stringValue.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+        } else if (sheetType == .SelectValidator) {
+            searchValidators = searchText.isEmpty ? validators : validators.filter { validator in
+                return validator.description_p.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
         }
         sheetTableView.reloadData()
@@ -175,6 +191,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectFeeCoin) {
             return feeDatas.count
+            
+        } else if (sheetType == .SelectValidator) {
+            return searchValidators.count
             
         }
         return 0
@@ -237,6 +256,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectFeeCoinCell") as? SelectFeeCoinCell
             cell?.onBindFeeCoin(targetChain, feeDatas[indexPath.row])
             return cell!
+            
+        } else if (sheetType == .SelectValidator) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
+            cell?.onBindValidator(targetChain, searchValidators[indexPath.row])
+            return cell!
         }
         return UITableViewCell()
     }
@@ -252,6 +276,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset)  {
             let result = BaseSheetResult.init(indexPath.row, searchList[indexPath.row]["denom"].stringValue)
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if (sheetType == .SelectValidator) {
+            let result = BaseSheetResult.init(indexPath.row, searchValidators[indexPath.row].operatorAddress)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else {
@@ -296,4 +324,5 @@ public enum SheetType: Int {
     case SelectUnbondingAction = 12
     
     case SelectFeeCoin = 13
+    case SelectValidator = 14
 }

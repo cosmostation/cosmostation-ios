@@ -258,6 +258,7 @@
 "str_check_each_private_keys" = "チェーンによる秘密鍵の確認";
 "str_add_custom_chain" = "カスタムチェーンの追加";
 "str_select_coin_for_fee" = "Tx手数料として使用するコインの選択";
+"str_stake" = "ステーク";
 
 
 "btn_delegate" = "  委任する";
@@ -318,6 +319,7 @@
 "msg_tap_to_mnemonic_copy" = "ニーモニックフレーズボックスをタップしてコピーします。";
 "msg_tap_box_to_copy" = "カードをタップしてコピーします。";
 "msg_tap_for_add_memo" = "タップしてメモを追加します。";
+"msg_tap_for_add_amount" = "タップして金額を追加します。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";

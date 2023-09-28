@@ -45,37 +45,29 @@ class Signer {
 //        return [anyMsg]
 //    }
 //    
-//    //Tx for Common Delegate
-//    static func genSignedDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                        _ toValAddress: String, _ amount: Coin,
-//                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let deleMsg = genDelegateMsg(auth, toValAddress, amount)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                          _ toValAddress: String, _ amount: Coin,
-//                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let deleMsg = genDelegateMsg(auth, toValAddress, amount)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genDelegateMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toValAddress: String, _ amount: Coin) -> [Google_Protobuf_Any] {
-//        let toCoin = Cosmos_Base_V1beta1_Coin.with {
-//            $0.denom = amount.denom
-//            $0.amount = amount.amount
-//        }
-//        let deleMsg = Cosmos_Staking_V1beta1_MsgDelegate.with {
-//            $0.delegatorAddress = WUtils.onParseAuthGrpc(auth).0!
-//            $0.validatorAddress = toValAddress
-//            $0.amount = toCoin
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/cosmos.staking.v1beta1.MsgDelegate"
-//            $0.value = try! deleMsg.serializedData()
-//        }
-//        return [anyMsg]
-//    }
+    //Tx for Common Delegate
+    static func genDelegateTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                              _ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate,
+                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let deleMsg = genDelegateMsg(auth, toDelegate)
+        return getSignedTx(auth, deleMsg, fee, memo, baseChain)
+    }
+    
+    static func genDelegateTxSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                   _ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate,
+                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let deleMsg = genDelegateMsg(auth, toDelegate)
+        return getSimulateTx(auth, deleMsg, fee, memo, baseChain)
+    }
+    
+    static func genDelegateMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                               _ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/cosmos.staking.v1beta1.MsgDelegate"
+            $0.value = try! toDelegate.serializedData()
+        }
+        return [anyMsg]
+    }
 //    
 //    //Tx for Tgrade Delegate
 //    static func genSignedTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
@@ -209,7 +201,7 @@ class Signer {
 //        return anyMsgs
 //    }
     
-    //Tx for Common Claim Staking Reward2
+    //Tx for Common Claim Staking Rewards
     static func genClaimRewardsTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                       _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                       _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest?  {

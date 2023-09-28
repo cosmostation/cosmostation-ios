@@ -58,7 +58,6 @@ class CosmosClaimRewards: BaseVC, MemoDelegate, BaseSheetDelegate {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-//        claimableRewards = selectedChain.claimableRewards()
         feeInfos = selectedChain.getFeeInfos()
         feeSegments.removeAllSegments()
         for i in 0..<feeInfos.count {
@@ -66,12 +65,12 @@ class CosmosClaimRewards: BaseVC, MemoDelegate, BaseSheetDelegate {
         }
         selectedFeeInfo = selectedChain.getFeeBasePosition()
         feeSegments.selectedSegmentIndex = selectedFeeInfo
-        
         txFee = selectedChain.getInitFee()
+        
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
-        onUpdateView() 
+        onInitView()
         onUpdateFeeView()
         onSimul()
     }
@@ -81,7 +80,7 @@ class CosmosClaimRewards: BaseVC, MemoDelegate, BaseSheetDelegate {
         memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
     }
     
-    func onUpdateView() {
+    func onInitView() {
         let cosmostationValAddress = selectedChain.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
         if (claimableRewards.filter { $0.validatorAddress == cosmostationValAddress }.count > 0) {
             validatorsLabel.text = "Cosmostation"
@@ -148,16 +147,6 @@ class CosmosClaimRewards: BaseVC, MemoDelegate, BaseSheetDelegate {
         onStartSheet(baseSheet, 240)
     }
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
-        if (sheetType == .SelectFeeCoin) {
-            if let position = result.position, 
-                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
-                txFee.amount[0].denom = selectedDenom
-                onSimul()
-            }
-        }
-    }
-    
     @objc func onClickMemo() {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
@@ -165,7 +154,7 @@ class CosmosClaimRewards: BaseVC, MemoDelegate, BaseSheetDelegate {
         self.onStartSheet(memoSheet)
     }
     
-    func onMemoInserted(_ memo: String) {
+    func onUpdateMemoView(_ memo: String) {
         txMemo = memo
         if (txMemo.isEmpty) {
             memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
@@ -174,6 +163,16 @@ class CosmosClaimRewards: BaseVC, MemoDelegate, BaseSheetDelegate {
         }
         memoLabel.text = txMemo
         memoLabel.textColor = .color01
+    }
+    
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+        if (sheetType == .SelectFeeCoin) {
+            if let position = result.position,
+                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
+                txFee.amount[0].denom = selectedDenom
+                onSimul()
+            }
+        }
     }
     
     @IBAction func onClickClaim(_ sender: BaseButton) {
