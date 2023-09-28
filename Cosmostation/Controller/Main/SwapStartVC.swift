@@ -291,7 +291,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.swapAssets = inputAssetList
         baseSheet.swapBalance = inputBalances
-        baseSheet.swapBalanceChain = inputCosmosChain
+        baseSheet.targetChain = inputCosmosChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapInputAsset
         onStartSheet(baseSheet, 680)
@@ -311,7 +311,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.swapAssets = outputAssetList
         baseSheet.swapBalance = outputBalances
-        baseSheet.swapBalanceChain = outputCosmosChain
+        baseSheet.targetChain = outputCosmosChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapOutputAsset
         onStartSheet(baseSheet, 680)

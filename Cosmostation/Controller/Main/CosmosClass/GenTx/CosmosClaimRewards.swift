@@ -13,7 +13,7 @@ import GRPC
 import NIO
 import SwiftProtobuf
 
-class CosmosClaimRewards: BaseVC, MemoDelegate {
+class CosmosClaimRewards: BaseVC, MemoDelegate, BaseSheetDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -42,6 +42,7 @@ class CosmosClaimRewards: BaseVC, MemoDelegate {
     
     var selectedChain: CosmosClass!
     var feeInfos = [FeeInfo]()
+    var selectedFeeInfo = 0
     var claimableRewards = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
     var txFee: Cosmos_Tx_V1beta1_Fee!
     var txMemo = ""
@@ -57,53 +58,22 @@ class CosmosClaimRewards: BaseVC, MemoDelegate {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-//        self.mFeeInfo = BaseData.instance.mParam!.getFeeInfos()
-        
         claimableRewards = selectedChain.claimableRewards()
-        
         feeInfos = selectedChain.getFeeInfos()
-        print("feeInfos ", feeInfos)
         feeSegments.removeAllSegments()
         for i in 0..<feeInfos.count {
             feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
         }
-        feeSegments.selectedSegmentIndex = selectedChain.getFeeBasePosition()
-//        selectedFeeInfo = selectedChain.getFeeBasePosition()
-//        feeSegments.selectedSegmentIndex = selectedFeeInfo
+        selectedFeeInfo = selectedChain.getFeeBasePosition()
+        feeSegments.selectedSegmentIndex = selectedFeeInfo
         
         txFee = selectedChain.getInitFee()
-        
-        
-//        let affordableFeesCoins = selectedChain.getMinFeeCoins()
-//        print("availableFeesCoins ", affordableFeesCoins)
-////        affordableFeesCoins.forEach { affordableFee in
-////            selectedChain.cosmosBalances.filter { <#Cosmos_Base_V1beta1_Coin#> in
-////                <#code#>
-////            }
-////        }
-//        
-//        selectedChain.getInitFee()
-//        print("selectedChain ", selectedChain.getInitFee())
-        
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
         onUpdateView() 
         onUpdateFeeView()
-        
-        loadingView.isHidden = false
-        Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!),
-                let simul = try? await simulateTx(channel, auth!) {
-                DispatchQueue.main.async {
-                    self.onUpdateWithSimul(simul)
-                }
-                
-            } else{
-                print("Handle Error")
-            }
-        }
+        onSimul()
     }
     
     override func setLocalizedString() {
@@ -136,12 +106,6 @@ class CosmosClaimRewards: BaseVC, MemoDelegate {
     }
     
     func onUpdateFeeView() {
-        print("onUpdateFeeView")
-        
-        print("txFee ", txFee.gasLimit)
-        print("txFee ", txFee.amount[0].denom)
-        print("txFee ", txFee.amount[0].amount)
-        
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
             feeSelectLabel.text = msAsset.symbol
             WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
@@ -153,32 +117,44 @@ class CosmosClaimRewards: BaseVC, MemoDelegate {
     }
     
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
-        print("simul ", simul)
-        print("simul ", simul?.gasInfo.gasUsed)
-        
         if let toGas = simul?.gasInfo.gasUsed {
             let aaa = Double(toGas)
             txFee.gasLimit = UInt64(aaa * 1.5)
-            print("txFee.gasLimit ", txFee.gasLimit)
+            if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
+                let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
+                let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0)
+                txFee.amount[0].amount = feeCoinAmount!.stringValue
+            }
         }
-        
-        
-//        feeInfos[]
-        
-        
-//        Double(from: simul?.gasInfo.gasUsed)
-//
-//        txFee.gasLimit = UInt64(Double(simul?.gasInfo.gasUsed)! * 1.5)
         onUpdateFeeView()
+        view.isUserInteractionEnabled = true
         loadingView.isHidden = true
+        claimBtn.isEnabled = true
     }
     
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
-        print("feeSegmentSelected ", sender.selectedSegmentIndex)
+        selectedFeeInfo = sender.selectedSegmentIndex
+        onSimul()
     }
     
     @objc func onSelectFeeCoin() {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.targetChain = selectedChain
+        baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
+        baseSheet.sheetDelegate = self
+        baseSheet.sheetType = .SelectFeeCoin
+        onStartSheet(baseSheet, 240)
+    }
+    
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+        if (sheetType == .SelectFeeCoin) {
+            if let position = result.position, 
+                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
+                txFee.amount[0].denom = selectedDenom
+                onSimul()
+            }
+        }
     }
     
     @objc func onClickMemo() {
@@ -199,6 +175,24 @@ class CosmosClaimRewards: BaseVC, MemoDelegate {
     
     @IBAction func onClickClaim(_ sender: BaseButton) {
         
+    }
+    
+    func onSimul() {
+        view.isUserInteractionEnabled = false
+        claimBtn.isEnabled = false
+        loadingView.isHidden = false
+        Task {
+            let channel = getConnection()
+            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+                let simul = try? await simulateTx(channel, auth!) {
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(simul)
+                }
+                
+            } else{
+                print("Handle Error")
+            }
+        }
     }
 }
 

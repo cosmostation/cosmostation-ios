@@ -257,6 +257,7 @@
 "str_rename" = "이름 변경";
 "str_check_each_private_keys" = "체인별 개인키 확인";
 "str_add_custom_chain" = "커스텀 체인 추가";
+"str_select_coin_for_fee" = "Tx 수수료로 사용할 코인 선택";
 
 
 "btn_delegate" = "  위임 하기";

@@ -18,11 +18,12 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var sheetType: SheetType?
     var sheetDelegate: BaseSheetDelegate?
     
+    var targetChain: CosmosClass!
     var swapChains = Array<JSON>()
     var swapAssets = Array<JSON>()
     var searchList = Array<JSON>()
     var swapBalance = Array<Cosmos_Base_V1beta1_Coin>()
-    var swapBalanceChain: CosmosClass!
+    var feeDatas = Array<FeeData>()
     
 
     override func viewDidLoad() {
@@ -43,6 +44,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SwitchPriceDisplayCell", bundle: nil), forCellReuseIdentifier: "SwitchPriceDisplayCell")
         sheetTableView.register(UINib(nibName: "SelectSwapChainCell", bundle: nil), forCellReuseIdentifier: "SelectSwapChainCell")
         sheetTableView.register(UINib(nibName: "SelectSwapAssetCell", bundle: nil), forCellReuseIdentifier: "SelectSwapAssetCell")
+        sheetTableView.register(UINib(nibName: "SelectFeeCoinCell", bundle: nil), forCellReuseIdentifier: "SelectFeeCoinCell")
         sheetTableView.sectionHeaderTopPadding = 0
         
         
@@ -97,7 +99,11 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectUnbondingAction) {
             sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
             
+        } else if (sheetType == .SelectFeeCoin) {
+            sheetTitle.text = NSLocalizedString("str_select_coin_for_fee", comment: "")
         }
+        
+        
     }
     
 //    @objc func dismissKeyboard() {
@@ -167,6 +173,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectUnbondingAction) {
             return 1
             
+        } else if (sheetType == .SelectFeeCoin) {
+            return feeDatas.count
+            
         }
         return 0
     }
@@ -209,7 +218,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset)  {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapAssetCell") as? SelectSwapAssetCell
-            cell?.onBindAsset(swapBalanceChain, searchList[indexPath.row], swapBalance)
+            cell?.onBindAsset(targetChain, searchList[indexPath.row], swapBalance)
             return cell!
             
         } else if (sheetType == .SelectSwapSlippage) {
@@ -224,6 +233,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindUndelegate(indexPath.row)
             return cell!
             
+        } else if (sheetType == .SelectFeeCoin) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectFeeCoinCell") as? SelectFeeCoinCell
+            cell?.onBindFeeCoin(targetChain, feeDatas[indexPath.row])
+            return cell!
         }
         return UITableViewCell()
     }
@@ -281,4 +294,6 @@ public enum SheetType: Int {
     
     case SelectDelegatedAction = 11
     case SelectUnbondingAction = 12
+    
+    case SelectFeeCoin = 13
 }

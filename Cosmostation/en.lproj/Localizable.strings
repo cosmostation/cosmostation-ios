@@ -257,6 +257,7 @@
 "str_rename" = "Change Name";
 "str_check_each_private_keys" = "Check private key for each chain";
 "str_add_custom_chain" = "Add Custom Chain";
+"str_select_coin_for_fee" = "Select coin to use as Tx fee";
 
 
 "btn_delegate" = "  Delegate";

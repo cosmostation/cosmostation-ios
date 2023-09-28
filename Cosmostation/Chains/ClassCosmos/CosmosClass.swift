@@ -93,12 +93,14 @@ class CosmosClass: BaseChain  {
     
     func getInitFee() -> Cosmos_Tx_V1beta1_Fee? {
         var feeCoin: Cosmos_Base_V1beta1_Coin?
-        getDefaultFeeCoins().forEach { minFee in
+        for i in 0..<getDefaultFeeCoins().count {
+            let minFee = getDefaultFeeCoins()[i]
             if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
                 feeCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = minFee.denom; $0.amount = minFee.amount}
-                return
+                break
             }
         }
+        
         if (feeCoin != nil) {
             return Cosmos_Tx_V1beta1_Fee.with {
                 $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
@@ -122,17 +124,6 @@ class CosmosClass: BaseChain  {
         }
         return result
     }
-    
-//    func getMinFeeCoins() -> [Cosmos_Base_V1beta1_Coin] {
-//        var result = [Cosmos_Base_V1beta1_Coin]()
-//        let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
-//        let feeDatas = getFeeInfos()[0].FeeDatas
-//        feeDatas.forEach { feeData in
-//            let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: handler0Up)
-//            result.append(Cosmos_Base_V1beta1_Coin.with {  $0.denom = feeData.denom!; $0.amount = amount.stringValue })
-//        }
-//        return result
-//    }
     
     func getDefaultFeeCoins() -> [Cosmos_Base_V1beta1_Coin] {
         var result = [Cosmos_Base_V1beta1_Coin]()
@@ -779,7 +770,8 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainAssetMantle())
     result.append(ChainAxelar())
     result.append(ChainBinanceBeacon())
-    result.append(ChainCanto())
+//    result.append(ChainCanto())
+    result.append(ChainCrescent())
     result.append(ChainEvmos())
     result.append(ChainInjective())
     result.append(ChainJuno())

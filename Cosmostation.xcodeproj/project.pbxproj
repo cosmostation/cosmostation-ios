@@ -157,6 +157,12 @@
 		04CB91222A90CA7D00375354 /* ChainJuno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91202A90CA7D00375354 /* ChainJuno.swift */; };
 		04CB91332A910BDC00375354 /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91322A910BDC00375354 /* CardViewCell.swift */; };
 		04CB91342A910BDC00375354 /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91322A910BDC00375354 /* CardViewCell.swift */; };
+		04CFF02F2AC502BC00FB3187 /* ChainCrescent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF02E2AC502BC00FB3187 /* ChainCrescent.swift */; };
+		04CFF0302AC502BC00FB3187 /* ChainCrescent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF02E2AC502BC00FB3187 /* ChainCrescent.swift */; };
+		04CFF0332AC58D4400FB3187 /* SelectFeeCoinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF0312AC58D4400FB3187 /* SelectFeeCoinCell.swift */; };
+		04CFF0342AC58D4400FB3187 /* SelectFeeCoinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF0312AC58D4400FB3187 /* SelectFeeCoinCell.swift */; };
+		04CFF0352AC58D4400FB3187 /* SelectFeeCoinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CFF0322AC58D4400FB3187 /* SelectFeeCoinCell.xib */; };
+		04CFF0362AC58D4400FB3187 /* SelectFeeCoinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CFF0322AC58D4400FB3187 /* SelectFeeCoinCell.xib */; };
 		04D279C62A64E73C00AF046A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279C52A64E73C00AF046A /* KeychainAccess */; };
 		04D279C82A64E75E00AF046A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279C72A64E75E00AF046A /* KeychainAccess */; };
 		04D279CB2A6508A400AF046A /* WalletConnect in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279CA2A6508A400AF046A /* WalletConnect */; };
@@ -981,6 +987,9 @@
 		04CB911D2A90C9D900375354 /* ChainAkash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAkash.swift; sourceTree = "<group>"; };
 		04CB91202A90CA7D00375354 /* ChainJuno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainJuno.swift; sourceTree = "<group>"; };
 		04CB91322A910BDC00375354 /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
+		04CFF02E2AC502BC00FB3187 /* ChainCrescent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCrescent.swift; sourceTree = "<group>"; };
+		04CFF0312AC58D4400FB3187 /* SelectFeeCoinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFeeCoinCell.swift; sourceTree = "<group>"; };
+		04CFF0322AC58D4400FB3187 /* SelectFeeCoinCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectFeeCoinCell.xib; sourceTree = "<group>"; };
 		04D279DB2A66863C00AF046A /* BaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAccount.swift; sourceTree = "<group>"; };
 		04D279E92A67C96500AF046A /* ChainCosmos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCosmos.swift; sourceTree = "<group>"; };
 		04D279EC2A67C96F00AF046A /* ChainKava459.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava459.swift; sourceTree = "<group>"; };
@@ -1420,6 +1429,7 @@
 				E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */,
 				044ECB162A95C2E40042DB3C /* ChainAxelar.swift */,
 				044ECB192A95C33F0042DB3C /* ChainCanto.swift */,
+				04CFF02E2AC502BC00FB3187 /* ChainCrescent.swift */,
 				04D279F52A67C9B700AF046A /* ChainEvmos.swift */,
 				044ECB1C2A95DE000042DB3C /* ChainInjective.swift */,
 				04CB91202A90CA7D00375354 /* ChainJuno.swift */,
@@ -1559,6 +1569,8 @@
 				04A68C1C2ABDA3220041FA13 /* SelectSwapChainCell.xib */,
 				04A68C212ABDA3350041FA13 /* SelectSwapAssetCell.swift */,
 				04A68C222ABDA3350041FA13 /* SelectSwapAssetCell.xib */,
+				04CFF0312AC58D4400FB3187 /* SelectFeeCoinCell.swift */,
+				04CFF0322AC58D4400FB3187 /* SelectFeeCoinCell.xib */,
 			);
 			path = SheetCell;
 			sourceTree = "<group>";
@@ -2293,6 +2305,7 @@
 				04FAD9DF2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				E15F2CF92ABF0DCE00BAE105 /* basebg05.png in Resources */,
 				E1DF77842AB762010028BD51 /* CheckPrivateKeyCell.xib in Resources */,
+				04CFF0362AC58D4400FB3187 /* SelectFeeCoinCell.xib in Resources */,
 				E1BBF74F2ABEBE4100D3082F /* basebg04.png in Resources */,
 				18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */,
 				E15F2D072ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
@@ -2345,6 +2358,7 @@
 				E1E0DBC82A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
 				04FAD9F02AB71D3300143A3E /* RenameSheet.xib in Resources */,
 				04FA74542A9D97A0001A2830 /* Pincode.storyboard in Resources */,
+				04CFF0352AC58D4400FB3187 /* SelectFeeCoinCell.xib in Resources */,
 				042DE8422AC4C518003F3EA4 /* TxMemoSheet.xib in Resources */,
 				E1D538292A96644F00FB0403 /* loading.json in Resources */,
 				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
@@ -2650,6 +2664,7 @@
 				E122DBD82A8A468E006D1E7B /* cosmos_store_streaming_abci_grpc.grpc.swift in Sources */,
 				18FFB3DF281AF533004E65BB /* BaseConstant.swift in Sources */,
 				047DCEE328855F4800253CAA /* MintscanMyVote.swift in Sources */,
+				04CFF0342AC58D4400FB3187 /* SelectFeeCoinCell.swift in Sources */,
 				18FFB41E281AF533004E65BB /* BinanceSegwitAddrCoder.swift in Sources */,
 				181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */,
 				E11069B92AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.pb.swift in Sources */,
@@ -2668,6 +2683,7 @@
 				E11069B52AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				E122DB882A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.pb.swift in Sources */,
 				E17638532AA7642800904DB4 /* ChainBinanceBeacon.swift in Sources */,
+				04CFF0302AC502BC00FB3187 /* ChainCrescent.swift in Sources */,
 				E122DBEA2A8A468E006D1E7B /* cosmos_gov_v1beta1_gov.pb.swift in Sources */,
 				E122DC2A2A8A468E006D1E7B /* cosmos_tx_config_v1_config.pb.swift in Sources */,
 				E122DB142A8A468D006D1E7B /* cosmos_auth_v1beta1_genesis.pb.swift in Sources */,
@@ -3015,6 +3031,7 @@
 				043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */,
 				0444442927ABDC5D00EB093E /* Cw20TransferReq.swift in Sources */,
 				046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */,
+				04CFF0332AC58D4400FB3187 /* SelectFeeCoinCell.swift in Sources */,
 				E11069B82AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.pb.swift in Sources */,
 				E122DBF92A8A468E006D1E7B /* cosmos_genutil_module_v1_module.pb.swift in Sources */,
 				E122DBAD2A8A468D006D1E7B /* cosmos_params_module_v1_module.pb.swift in Sources */,
@@ -3033,6 +3050,7 @@
 				E17638522AA7642800904DB4 /* ChainBinanceBeacon.swift in Sources */,
 				E122DC292A8A468E006D1E7B /* cosmos_tx_config_v1_config.pb.swift in Sources */,
 				28E3E3802671BE8D00BA89C2 /* Param.swift in Sources */,
+				04CFF02F2AC502BC00FB3187 /* ChainCrescent.swift in Sources */,
 				E122DB132A8A468D006D1E7B /* cosmos_auth_v1beta1_genesis.pb.swift in Sources */,
 				04FA74502A9D97A0001A2830 /* PincodeInputVC.swift in Sources */,
 				04FA74522A9D97A0001A2830 /* PincodeDecimalVC.swift in Sources */,

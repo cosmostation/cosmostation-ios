@@ -257,6 +257,7 @@
 "str_rename" = "名前変更";
 "str_check_each_private_keys" = "チェーンによる秘密鍵の確認";
 "str_add_custom_chain" = "カスタムチェーンの追加";
+"str_select_coin_for_fee" = "Tx手数料として使用するコインの選択";
 
 
 "btn_delegate" = "  委任する";
