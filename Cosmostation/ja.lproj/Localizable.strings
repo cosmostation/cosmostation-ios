@@ -153,7 +153,7 @@
 "str_tiny" = "最小";
 "str_select_coin" = "コインを選択します。";
 "str_unstaking_history" = "アンステーク履歴";
-"str_insert_amount" = "金額の挿入";
+"str_insert_amount" = "投入量";
 "str_estimate_withdraw_amount" = "出金額(est)";
 "str_tip" = "ヒント";
 "str_delegate_warn_title" = "委任について";

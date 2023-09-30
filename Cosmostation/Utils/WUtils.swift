@@ -273,6 +273,7 @@ public class WUtils {
 //
     static func getNumberFormatter(_ divider: Int) -> NumberFormatter {
         let nf = NumberFormatter()
+        nf.locale = Locale(identifier: "en_US")
         nf.numberStyle = .decimal
         nf.minimumFractionDigits = divider
         nf.maximumFractionDigits = divider

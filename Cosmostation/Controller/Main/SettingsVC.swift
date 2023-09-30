@@ -230,7 +230,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (indexPath.section == 2) {
             if (indexPath.row == 0) {
-                guard let url = URL(string: "https://www.mintscan.io/") else { return }
+                guard let url = URL(string: MintscanUrl) else { return }
                 onShowSafariWeb(url)
                 
             } else if (indexPath.row == 1) {

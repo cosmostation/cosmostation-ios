@@ -20,6 +20,9 @@ extension UITextField {
         guard let text = text else {
             return true
         }
+        if (text == "0" && !(string == "," || string == "." || string == "")) {
+            return false
+        }
         if (text.contains(".") || text.contains(",")) && string.contains(".") && range.length == 0 {
             return false
         }

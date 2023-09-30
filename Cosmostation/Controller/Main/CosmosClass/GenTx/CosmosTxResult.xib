@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CosmosTxResult" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="confirmBtn" destination="1bu-wC-h0h" id="cFT-xk-rTS"/>
+                <outlet property="failMintscanBtn" destination="2tx-uF-ZuO" id="agu-Lz-kr8"/>
+                <outlet property="failMsgLabel" destination="0TC-1f-UpP" id="BOL-XJ-bJi"/>
+                <outlet property="failView" destination="Ble-IY-3WY" id="jfx-hN-onM"/>
+                <outlet property="loadingView" destination="hj0-ZK-Txi" id="MeG-nN-Wab"/>
+                <outlet property="successMsgLabel" destination="iIh-lD-3P3" id="nlg-uW-CG3"/>
+                <outlet property="successView" destination="Lra-5A-Ue7" id="nDf-s4-lLn"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Result" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3P5-eh-euu">
+                    <rect key="frame" x="20" y="91" width="72.333333333333329" height="20.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <color key="textColor" name="_color01"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lra-5A-Ue7">
+                    <rect key="frame" x="66.666666666666686" y="338.66666666666669" width="260" height="200.00000000000006"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgTxSuccess" translatesAutoresizingMaskIntoConstraints="NO" id="piC-tQ-5nU">
+                            <rect key="frame" x="100" y="24" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="0j5-Pl-yBw"/>
+                                <constraint firstAttribute="width" constant="60" id="YQJ-jb-RbR"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUCCESS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kU-Bs-XSR">
+                            <rect key="frame" x="98.333333333333314" y="96" width="63" height="17.666666666666671"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The transaction is completed You can view details on Mintscan." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIh-lD-3P3">
+                            <rect key="frame" x="36" y="123.66666666666661" width="188" height="25.333333333333329"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
+                            <color key="textColor" name="_colorGreen"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNx-u3-W4Y">
+                            <rect key="frame" x="69" y="161" width="122" height="24"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="tintColor" name="_color01"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="View in Mintscan" image="iconArrowRight">
+                                <color key="titleColor" name="_color01"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickExplorer:" destination="-1" eventType="touchUpInside" id="Imh-k0-XyI"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="2kU-Bs-XSR" firstAttribute="top" secondItem="piC-tQ-5nU" secondAttribute="bottom" constant="12" id="5Jx-00-xKj"/>
+                        <constraint firstItem="iIh-lD-3P3" firstAttribute="top" secondItem="2kU-Bs-XSR" secondAttribute="bottom" constant="10" id="6qI-Ua-qgk"/>
+                        <constraint firstItem="ZNx-u3-W4Y" firstAttribute="centerX" secondItem="Lra-5A-Ue7" secondAttribute="centerX" id="B6d-JD-OlQ"/>
+                        <constraint firstItem="iIh-lD-3P3" firstAttribute="leading" secondItem="Lra-5A-Ue7" secondAttribute="leading" constant="36" id="GIi-Fb-Q58"/>
+                        <constraint firstItem="ZNx-u3-W4Y" firstAttribute="top" secondItem="iIh-lD-3P3" secondAttribute="bottom" constant="12" id="HaN-RF-Q32"/>
+                        <constraint firstItem="piC-tQ-5nU" firstAttribute="centerX" secondItem="Lra-5A-Ue7" secondAttribute="centerX" id="KOX-hI-QMe"/>
+                        <constraint firstItem="2kU-Bs-XSR" firstAttribute="centerX" secondItem="Lra-5A-Ue7" secondAttribute="centerX" id="VMh-1v-fhd"/>
+                        <constraint firstAttribute="height" constant="200" id="lYu-pe-mQC"/>
+                        <constraint firstAttribute="trailing" secondItem="iIh-lD-3P3" secondAttribute="trailing" constant="36" id="qN0-Yf-9iO"/>
+                        <constraint firstAttribute="width" constant="260" id="rnn-hh-Cwi"/>
+                        <constraint firstItem="piC-tQ-5nU" firstAttribute="top" secondItem="Lra-5A-Ue7" secondAttribute="top" constant="24" id="wFT-0C-qFH"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ble-IY-3WY">
+                    <rect key="frame" x="66.666666666666686" y="338.66666666666669" width="260" height="200.00000000000006"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgTxFail" translatesAutoresizingMaskIntoConstraints="NO" id="Xdq-Xc-biU">
+                            <rect key="frame" x="100" y="24" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="81L-dk-ETW"/>
+                                <constraint firstAttribute="height" constant="60" id="Ts2-yH-QLP"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAIL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgJ-q7-DpN">
+                            <rect key="frame" x="115.33333333333333" y="96" width="29.333333333333329" height="17.666666666666671"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The transaction is completed You can view details on Mintscan." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0TC-1f-UpP">
+                            <rect key="frame" x="36" y="123.66666666666661" width="188" height="25.333333333333329"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
+                            <color key="textColor" name="_colorRed"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tx-uF-ZuO">
+                            <rect key="frame" x="69" y="161" width="122" height="24"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="tintColor" name="_color01"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="View in Mintscan" image="iconArrowRight">
+                                <color key="titleColor" name="_color01"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickExplorer:" destination="-1" eventType="touchUpInside" id="U5j-L7-3rb"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Xdq-Xc-biU" firstAttribute="top" secondItem="Ble-IY-3WY" secondAttribute="top" constant="24" id="39D-do-HXZ"/>
+                        <constraint firstItem="0TC-1f-UpP" firstAttribute="leading" secondItem="Ble-IY-3WY" secondAttribute="leading" constant="36" id="86E-CT-Qio"/>
+                        <constraint firstItem="TgJ-q7-DpN" firstAttribute="top" secondItem="Xdq-Xc-biU" secondAttribute="bottom" constant="12" id="F5w-3A-agW"/>
+                        <constraint firstItem="TgJ-q7-DpN" firstAttribute="centerX" secondItem="Ble-IY-3WY" secondAttribute="centerX" id="GEw-Id-jny"/>
+                        <constraint firstAttribute="width" constant="260" id="HAP-D6-PDa"/>
+                        <constraint firstAttribute="trailing" secondItem="0TC-1f-UpP" secondAttribute="trailing" constant="36" id="Hh2-wk-98l"/>
+                        <constraint firstItem="0TC-1f-UpP" firstAttribute="top" secondItem="TgJ-q7-DpN" secondAttribute="bottom" constant="10" id="QQu-Qd-B9J"/>
+                        <constraint firstItem="2tx-uF-ZuO" firstAttribute="top" secondItem="0TC-1f-UpP" secondAttribute="bottom" constant="12" id="Tc4-xk-BFP"/>
+                        <constraint firstItem="Xdq-Xc-biU" firstAttribute="centerX" secondItem="Ble-IY-3WY" secondAttribute="centerX" id="Ufw-8I-V2e"/>
+                        <constraint firstItem="2tx-uF-ZuO" firstAttribute="centerX" secondItem="Ble-IY-3WY" secondAttribute="centerX" id="cxh-ec-LGN"/>
+                        <constraint firstAttribute="height" constant="200" id="dqQ-UZ-2jh"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bu-wC-h0h" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <color key="backgroundColor" name="_primary"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="z3n-SM-FyK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Confirm">
+                        <color key="titleColor" name="_color01"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="fE8-1r-esR"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hj0-ZK-Txi" customClass="LottieAnimationView" customModule="Lottie">
+                    <rect key="frame" x="106.66666666666669" y="383.66666666666669" width="180" height="110"/>
+                    <viewLayoutGuide key="safeArea" id="88a-UN-Kk4"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="H82-I0-cUC"/>
+                        <constraint firstAttribute="width" constant="180" id="e2x-TZ-C24"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="_colorBg"/>
+            <color key="tintColor" name="_primary"/>
+            <constraints>
+                <constraint firstItem="Lra-5A-Ue7" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="1Vj-bZ-zSg"/>
+                <constraint firstItem="1bu-wC-h0h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="Df8-pZ-Oex"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1bu-wC-h0h" secondAttribute="trailing" constant="8" id="FnF-z8-xaq"/>
+                <constraint firstItem="3P5-eh-euu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="JTL-gO-Uiz"/>
+                <constraint firstItem="Ble-IY-3WY" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="W9A-jR-nSb"/>
+                <constraint firstItem="Lra-5A-Ue7" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="cO7-kJ-ohl"/>
+                <constraint firstItem="3P5-eh-euu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="i5K-lp-G5m"/>
+                <constraint firstItem="hj0-ZK-Txi" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="kgS-A2-WdQ"/>
+                <constraint firstItem="Ble-IY-3WY" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="qDs-KG-0KL"/>
+                <constraint firstItem="hj0-ZK-Txi" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="s30-wa-Y49"/>
+                <constraint firstAttribute="bottom" secondItem="1bu-wC-h0h" secondAttribute="bottom" constant="38" id="tlF-XM-4yf"/>
+            </constraints>
+            <point key="canvasLocation" x="49.618320610687022" y="20.422535211267608"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconArrowRight" width="24" height="24"/>
+        <image name="imgTxFail" width="240" height="240"/>
+        <image name="imgTxSuccess" width="240" height="240"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorBg">
+            <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorGreen">
+            <color red="0.25499999523162842" green="1" blue="0.46299999952316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorRed">
+            <color red="1" green="0.30199998617172241" blue="0.21199999749660492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

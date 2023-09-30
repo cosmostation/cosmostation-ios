@@ -105,7 +105,7 @@ class CosmosClass: BaseChain  {
         for i in 0..<getDefaultFeeCoins().count {
             let minFee = getDefaultFeeCoins()[i]
             if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
-                feeCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = minFee.denom; $0.amount = minFee.amount}
+                feeCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = minFee.denom; $0.amount = minFee.amount }
                 break
             }
         }
@@ -118,6 +118,18 @@ class CosmosClass: BaseChain  {
         }
         return nil
     }
+    
+    func getBaseFee(_ position: Int, _ denom: String) -> Cosmos_Tx_V1beta1_Fee {
+        let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
+        let feeDatas = getFeeInfos()[position].FeeDatas
+        let rate = feeDatas.filter { $0.denom == denom }.first!.gasRate
+        let coinAmount = rate!.multiplying(by: gasAmount, withBehavior: handler0Up)
+        return Cosmos_Tx_V1beta1_Fee.with {
+            $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
+            $0.amount = [Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = coinAmount.stringValue }]
+        }
+    }
+    
     
     func getFeeBasePosition() -> Int {
         return mintscanChainParam["gas_price"]["base"].intValue

@@ -11,7 +11,6 @@ import MaterialComponents
 
 class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
     
-    
     @IBOutlet weak var memoTitle: UILabel!
     @IBOutlet weak var memoTextArea: MDCOutlinedTextArea!
     @IBOutlet weak var qrScanBtn: UIButton!
@@ -29,10 +28,10 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
         memoTextArea.textView.delegate = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        memoTextArea.textView.becomeFirstResponder()
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        memoTextArea.textView.becomeFirstResponder()
+//    }
     
     override func setLocalizedString() {
         memoTextArea.label.text = NSLocalizedString("tx_set_memo", comment: "")
@@ -63,11 +62,11 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
 
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         let userInput = memoTextArea.textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        memoDelegate?.onUpdateMemoView(userInput)
+        memoDelegate?.onInputedMemo(userInput)
         dismiss(animated: true)
     }
 }
 
 protocol MemoDelegate {
-    func onUpdateMemoView(_ memo: String)
+    func onInputedMemo(_ memo: String)
 }

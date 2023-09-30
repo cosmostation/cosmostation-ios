@@ -182,10 +182,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68g-kJ-Ibk" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="514.66666666666663" width="377" height="67.333333333333371"/>
+                    <rect key="frame" x="8" y="508.66666666666669" width="377" height="67.333333333333314"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rz0-Na-CfH">
-                            <rect key="frame" x="12" y="14" width="99.333333333333329" height="14"/>
+                            <rect key="frame" x="12" y="13.999999999999943" width="99.333333333333329" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="cF1-tf-IAA"/>
                             </constraints>
@@ -194,7 +194,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3w-OU-kaK">
-                            <rect key="frame" x="12" y="36" width="353" height="15.333333333333336"/>
+                            <rect key="frame" x="12" y="35.999999999999943" width="353" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
@@ -211,7 +211,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p7e-jS-jPp" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="592" width="377" height="150"/>
+                    <rect key="frame" x="8" y="586" width="377" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zt-w8-L71">
                             <rect key="frame" x="12" y="14" width="37.333333333333336" height="14"/>
@@ -343,7 +343,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k73-bx-pzg" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="766" width="377" height="54"/>
+                    <rect key="frame" x="8" y="760" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="av8-vr-Rd7"/>
@@ -376,7 +376,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DmO-rw-jj1" secondAttribute="trailing" constant="8" id="8by-Jc-EA0"/>
                 <constraint firstItem="p7e-jS-jPp" firstAttribute="top" secondItem="68g-kJ-Ibk" secondAttribute="bottom" constant="10" id="CUb-rn-Pcs"/>
                 <constraint firstItem="k73-bx-pzg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="GN2-wt-mhX"/>
-                <constraint firstItem="k73-bx-pzg" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" constant="-32" id="K9d-ha-WKh"/>
+                <constraint firstItem="k73-bx-pzg" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" constant="-38" id="K9d-ha-WKh"/>
                 <constraint firstItem="DmO-rw-jj1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="NDQ-xt-zOS"/>
                 <constraint firstItem="ASh-6v-gHm" firstAttribute="trailing" secondItem="DmO-rw-jj1" secondAttribute="trailing" id="NQC-6F-N1f"/>
                 <constraint firstItem="DmO-rw-jj1" firstAttribute="top" secondItem="LVB-sE-XCX" secondAttribute="bottom" constant="20" id="NVs-Nx-xZG"/>

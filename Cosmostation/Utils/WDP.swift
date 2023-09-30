@@ -154,6 +154,7 @@ public class WDP {
 //
     static func dpAmount(_ amount: String?, _ font: UIFont, _ showDecimal: Int16? = 6) -> NSMutableAttributedString {
         let nf = NumberFormatter()
+        nf.locale = Locale(identifier: "en_US")
         nf.roundingMode = .floor
         nf.numberStyle = .decimal
 

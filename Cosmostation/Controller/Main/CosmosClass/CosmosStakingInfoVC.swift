@@ -92,10 +92,10 @@ class CosmosStakingInfoVC: BaseVC {
     }
     
     @IBAction func onClickStake(_ sender: BaseButton) {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
         delegate.selectedChain = selectedChain
         delegate.modalTransitionStyle = .coverVertical

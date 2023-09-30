@@ -126,7 +126,7 @@
 "str_current_availabe" = "Current Amount";
 "str_remaining_availabe" = "Remaining Amount";
 "str_memo" = "Memo";
-"str_delegate_amount" = "Delegate Amount";
+"str_delegate_amount" = "Stake Amount";
 "str_delegate_to" = "Delegate To";
 "str_undelegate_amount" = "Undelegate Amount";
 "str_undelegate_from" = "Undelegate From";

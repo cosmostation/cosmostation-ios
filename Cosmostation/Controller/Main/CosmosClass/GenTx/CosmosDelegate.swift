@@ -13,7 +13,7 @@ import GRPC
 import NIO
 import SwiftProtobuf
 
-class CosmosDelegate: BaseVC, BaseSheetDelegate, MemoDelegate {
+class CosmosDelegate: BaseVC {
     
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -53,6 +53,7 @@ class CosmosDelegate: BaseVC, BaseSheetDelegate, MemoDelegate {
     var txFee: Cosmos_Tx_V1beta1_Fee!
     var txMemo = ""
     
+    var availableCoin: Cosmos_Base_V1beta1_Coin?
     var toValidator: Cosmos_Staking_V1beta1_Validator?
     var toCoin: Cosmos_Base_V1beta1_Coin?
 
@@ -99,6 +100,15 @@ class CosmosDelegate: BaseVC, BaseSheetDelegate, MemoDelegate {
         stakingAmountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
     }
     
+    @objc func onClickValidator() {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.targetChain = selectedChain
+        baseSheet.validators = selectedChain.cosmosValidators
+        baseSheet.sheetDelegate = self
+        baseSheet.sheetType = .SelectValidator
+        onStartSheet(baseSheet, 680)
+    }
+    
     func onUpdateValidatorView() {
         monikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
         monikerLabel.text = toValidator!.description_p.moniker
@@ -113,6 +123,7 @@ class CosmosDelegate: BaseVC, BaseSheetDelegate, MemoDelegate {
             commLabel.textColor = .color02
             commPercentLabel.textColor = .color02
         }
+        onSimul()
     }
     
     func onUpdateFeeView() {
@@ -124,23 +135,54 @@ class CosmosDelegate: BaseVC, BaseSheetDelegate, MemoDelegate {
             let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
-    }
-
-    @objc func onClickValidator() {
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.targetChain = selectedChain
-        baseSheet.validators = selectedChain.cosmosValidators
-        baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectValidator
-        onStartSheet(baseSheet, 680)
+        
+        
+        let stakeDenom = selectedChain.stakeDenom!
+        let balanceAmount = selectedChain.balanceAmount(stakeDenom)
+        let vestingAmount = selectedChain.vestingAmount(stakeDenom)
+        
+        if (txFee.amount[0].denom == stakeDenom) {
+            let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
+            if (feeAmount.uint64Value > balanceAmount.uint64Value) {
+                //ERROR short balance!!
+            }
+            let delegableAmount = balanceAmount.adding(vestingAmount).subtracting(feeAmount)
+            availableCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = delegableAmount.stringValue }
+            
+        } else {
+            //fee pay with another denom
+            let delegableAmount = balanceAmount.adding(vestingAmount)
+            availableCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = delegableAmount.stringValue }
+        }
     }
     
     @objc func onClickAmount() {
+        let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
+        amountSheet.selectedChain = selectedChain
+        amountSheet.availableCoin = availableCoin
+        amountSheet.existedAmount = toCoin?.amount
+        amountSheet.sheetDelegate = self
+        amountSheet.sheetType = .TxDelegate
+        self.onStartSheet(amountSheet)
+    }
+    
+    func onUpdateAmountView(_ amount: String) {
+        let stakeDenom = selectedChain.stakeDenom!
+        toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = amount }
         
+        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
+            WDP.dpCoin(msAsset, toCoin, nil, stakingDenomLabel, stakingAmountLabel, msAsset.decimals)
+            stakingAmountHintLabel.isHidden = true
+            stakingAmountLabel.isHidden = false
+            stakingDenomLabel.isHidden = false
+        }
+        onSimul()
     }
 
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeeInfo = sender.selectedSegmentIndex
+        txFee = selectedChain.getBaseFee(selectedFeeInfo, txFee.amount[0].denom)
+        onUpdateFeeView()
         onSimul()
     }
     
@@ -169,7 +211,64 @@ class CosmosDelegate: BaseVC, BaseSheetDelegate, MemoDelegate {
         }
         memoLabel.text = txMemo
         memoLabel.textColor = .color01
+        onSimul()
     }
+    
+    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
+        if let toGas = simul?.gasInfo.gasUsed {
+            txFee.gasLimit = UInt64(Double(toGas) * 1.5)
+            if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
+                let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
+                let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0)
+                txFee.amount[0].amount = feeCoinAmount!.stringValue
+            }
+        }
+        onUpdateFeeView()
+        view.isUserInteractionEnabled = true
+        loadingView.isHidden = true
+        stakeBtn.isEnabled = true
+    }
+    
+    @IBAction func onClickStake(_ sender: BaseButton) {
+        
+    }
+    
+    func onSimul() {
+        if (toCoin == nil ) { return }
+        view.isUserInteractionEnabled = false
+        stakeBtn.isEnabled = false
+        loadingView.isHidden = false
+        
+        toDelegate = Cosmos_Staking_V1beta1_MsgDelegate.with {
+            $0.delegatorAddress = selectedChain.address!
+            $0.validatorAddress = toValidator!.operatorAddress
+            $0.amount = toCoin!
+        }
+        
+        Task {
+            let channel = getConnection()
+            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+                do {
+                    let simul = try await simulateTx(channel, auth!)
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(simul)
+                    }
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        self.view.isUserInteractionEnabled = true
+                        self.loadingView.isHidden = true
+                        self.onShowToast("Error : " + "\n" + "\(error)")
+                        return
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+extension CosmosDelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .SelectValidator) {
@@ -185,17 +284,45 @@ class CosmosDelegate: BaseVC, BaseSheetDelegate, MemoDelegate {
         }
     }
     
-    @IBAction func onClickStake(_ sender: BaseButton) {
-        
+    func onInputedMemo(_ memo: String) {
+        onUpdateMemoView(memo)
     }
     
-    func onSimul() {
-        print("onSimul")
-        //check valide
+    func onInputedAmount(_ amount: String) {
+        onUpdateAmountView(amount)
     }
-
 }
 
 extension CosmosDelegate {
     
+    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
+        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
+    }
+    
+    func simulateTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+        let simulTx = Signer.genDelegateTxSimul(auth, toDelegate, txFee, txMemo, selectedChain)
+        do {
+            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
+        } catch {
+            throw error
+        }
+    }
+    
+    func broadcastTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+        let reqTx = Signer.genDelegateTx(auth, toDelegate, txFee, txMemo, selectedChain)
+        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
+    }
+    
+    
+    func getConnection() -> ClientConnection {
+        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.grpcHost, port: selectedChain.grpcPort)
+    }
+    
+    func getCallOptions() -> CallOptions {
+        var callOptions = CallOptions()
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        return callOptions
+    }
 }
