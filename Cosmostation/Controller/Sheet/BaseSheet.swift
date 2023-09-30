@@ -27,6 +27,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var feeDatas = Array<FeeData>()
     var validators = Array<Cosmos_Staking_V1beta1_Validator>()
     var searchValidators = Array<Cosmos_Staking_V1beta1_Validator>()
+    var delegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
+    var delegation: Cosmos_Staking_V1beta1_DelegationResponse!
     
 
     override func viewDidLoad() {
@@ -111,8 +113,16 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
             sheetSearchBar.isHidden = false
             searchValidators = validators
+            
+        } else if (sheetType == .SelectUnStakeValidator) {
+            sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
+            delegations = targetChain.cosmosDelegations
+            delegations.forEach { delegation in
+                if let validator = targetChain.cosmosValidators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
+                    validators.append(validator)
+                }
+            }
         }
-        
         
     }
     
@@ -195,6 +205,8 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectValidator) {
             return searchValidators.count
             
+        } else if (sheetType == .SelectUnStakeValidator) {
+            return validators.count
         }
         return 0
     }
@@ -261,6 +273,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
             cell?.onBindValidator(targetChain, searchValidators[indexPath.row])
             return cell!
+            
+        } else if (sheetType == .SelectUnStakeValidator) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
+            cell?.onBindUnstakeValidator(targetChain, validators[indexPath.row])
+            return cell!
         }
         return UITableViewCell()
     }
@@ -268,6 +285,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (sheetType == .SwitchAccount) {
             let result = BaseSheetResult.init(indexPath.row, String(BaseData.instance.selectAccounts()[indexPath.row].id))
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if (sheetType == .SelectDelegatedAction) {
+            let result = BaseSheetResult.init(indexPath.row, delegation.delegation.validatorAddress)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
@@ -280,6 +301,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectValidator) {
             let result = BaseSheetResult.init(indexPath.row, searchValidators[indexPath.row].operatorAddress)
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if (sheetType == .SelectUnStakeValidator) {
+            let result = BaseSheetResult.init(indexPath.row, validators[indexPath.row].operatorAddress)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else {
@@ -325,4 +350,5 @@ public enum SheetType: Int {
     
     case SelectFeeCoin = 13
     case SelectValidator = 14
+    case SelectUnStakeValidator = 15
 }

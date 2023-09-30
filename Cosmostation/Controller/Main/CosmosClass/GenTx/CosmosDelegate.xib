@@ -37,6 +37,7 @@
                 <outlet property="stakingAmountCardView" destination="ASh-6v-gHm" id="fCt-Lv-GZi"/>
                 <outlet property="stakingAmountHintLabel" destination="6qt-sc-93d" id="rWQ-d4-0nR"/>
                 <outlet property="stakingAmountLabel" destination="OSR-by-BAn" id="A3w-F2-RIq"/>
+                <outlet property="stakingAmountTitle" destination="520-LC-xI4" id="IVh-cu-nxS"/>
                 <outlet property="stakingDenomLabel" destination="l6p-02-1gp" id="WXc-cM-8K8"/>
                 <outlet property="titleLabel" destination="LVB-sE-XCX" id="5pP-Pd-s6f"/>
                 <outlet property="validatorCardView" destination="DmO-rw-jj1" id="s4r-b1-8wI"/>

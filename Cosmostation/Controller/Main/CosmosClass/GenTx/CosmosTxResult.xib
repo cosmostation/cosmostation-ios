@@ -32,7 +32,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Result" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3P5-eh-euu">
-                    <rect key="frame" x="20" y="91" width="72.333333333333329" height="20.333333333333329"/>
+                    <rect key="frame" x="160.33333333333334" y="77" width="72.333333333333343" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                     <color key="textColor" name="_color01"/>
                     <nil key="highlightedColor"/>
@@ -169,10 +169,11 @@
                 <constraint firstItem="Lra-5A-Ue7" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="1Vj-bZ-zSg"/>
                 <constraint firstItem="1bu-wC-h0h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="Df8-pZ-Oex"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1bu-wC-h0h" secondAttribute="trailing" constant="8" id="FnF-z8-xaq"/>
-                <constraint firstItem="3P5-eh-euu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="JTL-gO-Uiz"/>
                 <constraint firstItem="Ble-IY-3WY" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="W9A-jR-nSb"/>
+                <constraint firstItem="3P5-eh-euu" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="WzN-jr-aby"/>
                 <constraint firstItem="Lra-5A-Ue7" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="cO7-kJ-ohl"/>
-                <constraint firstItem="3P5-eh-euu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="i5K-lp-G5m"/>
+                <constraint firstItem="Lra-5A-Ue7" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ego-hm-aeX"/>
+                <constraint firstItem="3P5-eh-euu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="18" id="i5K-lp-G5m"/>
                 <constraint firstItem="hj0-ZK-Txi" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="kgS-A2-WdQ"/>
                 <constraint firstItem="Ble-IY-3WY" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="qDs-KG-0KL"/>
                 <constraint firstItem="hj0-ZK-Txi" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="s30-wa-Y49"/>

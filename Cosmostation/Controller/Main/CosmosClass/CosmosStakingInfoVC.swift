@@ -101,6 +101,18 @@ class CosmosStakingInfoVC: BaseVC {
         delegate.modalTransitionStyle = .coverVertical
         self.present(delegate, animated: true)
     }
+    
+    func onClickUnStake(_ valAddress: String) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let undelegate = CosmosUndelegate(nibName: "CosmosUndelegate", bundle: nil)
+        undelegate.selectedChain = selectedChain
+        undelegate.toValidator = validators.filter({ $0.operatorAddress == valAddress }).first
+        undelegate.modalTransitionStyle = .coverVertical
+        self.present(undelegate, animated: true)
+    }
 }
 
 
@@ -187,6 +199,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         } else if (indexPath.section == 1) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
+            baseSheet.delegation = delegations[indexPath.row]
             baseSheet.sheetType = .SelectDelegatedAction
             onStartSheet(baseSheet)
             
@@ -226,7 +239,22 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
     
     public func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .SelectDelegatedAction) {
-            print("SelectDelegatedAction ", result.position)
+            if (result.position == 0) {
+                print("SelectDelegatedAction unstake ", result.param)
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    self.onClickUnStake(result.param!)
+                });
+                
+            } else if (result.position == 1) {
+                print("SelectDelegatedAction switch")
+                
+            } else if (result.position == 2) {
+                print("SelectDelegatedAction claim")
+                
+            } else if (result.position == 3) {
+                print("SelectDelegatedAction compounding")
+                
+            }
             
         } else if (sheetType == .SelectUnbondingAction) {
             print("SelectUnbondingAction ", result.position)

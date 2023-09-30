@@ -259,6 +259,7 @@
 "str_add_custom_chain" = "カスタムチェーンの追加";
 "str_select_coin_for_fee" = "Tx手数料として使用するコインの選択";
 "str_stake" = "ステーク";
+"str_unstake" = "ステークを解除する";
 
 
 "btn_delegate" = "  委任する";

@@ -169,9 +169,6 @@ class CosmosClaimRewards: BaseVC {
     @IBAction func onClickClaim(_ sender: BaseButton) {
         let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
         self.present(pinVC, animated: true)
-//        let CosmosTxResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-//        CosmosTxResult.modalPresentationStyle = .fullScreen
-//        self.present(CosmosTxResult, animated: true)
     }
     
     func onSimul() {
@@ -234,24 +231,8 @@ extension CosmosClaimRewards: MemoDelegate, BaseSheetDelegate, PinDelegate {
                         txResult.broadcastTxResponse = response
                         txResult.modalPresentationStyle = .fullScreen
                         self.present(txResult, animated: true)
-                        
                     })
                 }
-                
-//                if let auth = try? await fetchAuth(channel, selectedChain.address!) {
-//                    do {
-//                        let broad = try await broadcastTx(channel, auth!)
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-//                            
-//                        })
-//                        
-//                    } catch {
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-//                            
-//                        })
-//                        
-//                    }
-//                }
             }
         }
     }
@@ -278,15 +259,6 @@ extension CosmosClaimRewards {
         let reqTx = Signer.genClaimRewardsTx(auth, claimableRewards, txFee, txMemo, selectedChain)
         return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
     }
-    
-//    func broadcastTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-//        let reqTx = Signer.genClaimRewardsTx(auth, claimableRewards, txFee, txMemo, selectedChain)
-//        do {
-//            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-//        } catch {
-//            throw error
-//        }
-//    }
     
     
     func getConnection() -> ClientConnection {

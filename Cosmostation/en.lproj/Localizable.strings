@@ -259,6 +259,7 @@
 "str_add_custom_chain" = "Add Custom Chain";
 "str_select_coin_for_fee" = "Select coin to use as Tx fee";
 "str_stake" = "Stake";
+"str_unstake" = "Unstake";
 
 
 "btn_delegate" = "  Delegate";
