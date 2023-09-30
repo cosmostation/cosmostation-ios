@@ -102,16 +102,40 @@ class CosmosStakingInfoVC: BaseVC {
         self.present(delegate, animated: true)
     }
     
-    func onClickUnStake(_ valAddress: String) {
+    func onClickUnStake(_ fromValAddress: String) {
         if (selectedChain.isTxFeePayable() == false) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         let undelegate = CosmosUndelegate(nibName: "CosmosUndelegate", bundle: nil)
         undelegate.selectedChain = selectedChain
-        undelegate.toValidator = validators.filter({ $0.operatorAddress == valAddress }).first
+        undelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
         undelegate.modalTransitionStyle = .coverVertical
         self.present(undelegate, animated: true)
+    }
+    
+    func onClickReStake(_ fromValAddress: String) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let redelegate = CosmosRedelegate(nibName: "CosmosRedelegate", bundle: nil)
+        redelegate.selectedChain = selectedChain
+        redelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
+        redelegate.modalTransitionStyle = .coverVertical
+        self.present(redelegate, animated: true)
+    }
+    
+    func onClickClaim(_ fromValAddress: String) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
+        claimRewards.claimableRewards = selectedChain.cosmosRewards.filter({ $0.validatorAddress == fromValAddress })
+        claimRewards.selectedChain = selectedChain
+        claimRewards.modalTransitionStyle = .coverVertical
+        self.present(claimRewards, animated: true)
     }
 }
 
@@ -240,16 +264,19 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
     public func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .SelectDelegatedAction) {
             if (result.position == 0) {
-                print("SelectDelegatedAction unstake ", result.param)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     self.onClickUnStake(result.param!)
                 });
                 
             } else if (result.position == 1) {
-                print("SelectDelegatedAction switch")
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    self.onClickReStake(result.param!)
+                });
                 
             } else if (result.position == 2) {
-                print("SelectDelegatedAction claim")
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    self.onClickClaim(result.param!)
+                });
                 
             } else if (result.position == 3) {
                 print("SelectDelegatedAction compounding")

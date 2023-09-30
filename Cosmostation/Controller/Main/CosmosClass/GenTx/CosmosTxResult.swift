@@ -46,6 +46,7 @@ class CosmosTxResult: BaseVC {
             confirmBtn.isEnabled = true
             return
         }
+        print("txhash ", broadcastTxResponse?.txhash)
         fetchTx()
     }
     

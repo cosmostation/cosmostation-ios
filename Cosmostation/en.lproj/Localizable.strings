@@ -260,6 +260,15 @@
 "str_select_coin_for_fee" = "Select coin to use as Tx fee";
 "str_stake" = "Stake";
 "str_unstake" = "Unstake";
+"str_unstake_msg" = "Start unstaking.";
+"str_switch_validator" = "Switch Validator";
+"str_switch_validator_msg" = "Continue staking with changing validators.";
+"str_cliam_reward" = "Claim Rewards";
+"str_cliam_reward_msg" = "You receive accumulated rewards.";
+"str_compounding" = "Compunding";
+"str_compounding_msg" = "Immediately stake the accumulated rewards.";
+"str_cancel_unbonding" = "Cancel Unbonding";
+"str_cancel_unbonding_msg" = "Cancel unstaking and immediately make staked state.";
 
 
 "btn_delegate" = "  Delegate";
@@ -515,16 +524,7 @@
 "wallet_delete_complete" = "Delete Completed!";
 
 
-"str_unstake" = "Unstake";
-"str_unstake_msg" = "Start unstaking.";
-"str_switch_validator" = "Switch Validator";
-"str_switch_validator_msg" = "Continue staking with changing validators.";
-"str_cliam_reward" = "Claim Rewards";
-"str_cliam_reward_msg" = "You receive accumulated rewards.";
-"str_compounding" = "Compunding";
-"str_compounding_msg" = "Immediately stake the accumulated rewards.";
-"str_cancel_unbonding" = "Cancel Unbonding";
-"str_cancel_unbonding_msg" = "Cancel unstaking and immediately make staked state.";
+
 
 
 

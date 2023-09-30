@@ -1,5 +1,5 @@
 //
-//  CosmosUndelegate.swift
+//  CosmosRedelegate.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/10/01.
@@ -13,21 +13,28 @@ import GRPC
 import NIO
 import SwiftProtobuf
 
-class CosmosUndelegate: BaseVC {
+class CosmosRedelegate: BaseVC {
     
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var validatorCardView: FixCardView!
-    @IBOutlet weak var monikerImg: UIImageView!
-    @IBOutlet weak var jailedImg: UIImageView!
-    @IBOutlet weak var monikerLabel: UILabel!
-    @IBOutlet weak var stakedLabel: UILabel!
+    @IBOutlet weak var fromCardView: FixCardView!
+    @IBOutlet weak var fromMonikerImg: UIImageView!
+    @IBOutlet weak var fromJailedImg: UIImageView!
+    @IBOutlet weak var fromMonikerLabel: UILabel!
+    @IBOutlet weak var fromStakedLabel: UILabel!
     
-    @IBOutlet weak var unStakingAmountCardView: FixCardView!
-    @IBOutlet weak var unStakingAmountTitle: UILabel!
-    @IBOutlet weak var unStakingAmountHintLabel: UILabel!
-    @IBOutlet weak var unStakingAmountLabel: UILabel!
-    @IBOutlet weak var unStakingDenomLabel: UILabel!
+    @IBOutlet weak var toCardView: FixCardView!
+    @IBOutlet weak var toMonikerImg: UIImageView!
+    @IBOutlet weak var toJailedImg: UIImageView!
+    @IBOutlet weak var toMonikerLabel: UILabel!
+    @IBOutlet weak var toCommLabel: UILabel!
+    @IBOutlet weak var toCommPercentLabel: UILabel!
+    
+    @IBOutlet weak var amountCardView: FixCardView!
+    @IBOutlet weak var amountTitle: UILabel!
+    @IBOutlet weak var amountHintLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var amountDenomLabel: UILabel!
     
     @IBOutlet weak var memoCardView: FixCardView!
     @IBOutlet weak var memoTitle: UILabel!
@@ -42,18 +49,19 @@ class CosmosUndelegate: BaseVC {
     @IBOutlet weak var feeValueLabel: UILabel!
     @IBOutlet weak var feeSegments: UISegmentedControl!
     
-    @IBOutlet weak var unStakeBtn: BaseButton!
+    @IBOutlet weak var reStakeBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedChain: CosmosClass!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
-    var toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate!
+    var toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate!
     var txFee: Cosmos_Tx_V1beta1_Fee!
     var txMemo = ""
     
     var availableCoin: Cosmos_Base_V1beta1_Coin?
     var fromValidator: Cosmos_Staking_V1beta1_Validator?
+    var toValidator: Cosmos_Staking_V1beta1_Validator?
     var toCoin: Cosmos_Base_V1beta1_Coin?
 
     override func viewDidLoad() {
@@ -77,8 +85,9 @@ class CosmosUndelegate: BaseVC {
         feeSegments.selectedSegmentIndex = selectedFeeInfo
         txFee = selectedChain.getInitFee()
         
-        validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
-        unStakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
+        fromCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickFromValidator)))
+        toCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToValidator)))
+        amountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
@@ -86,18 +95,26 @@ class CosmosUndelegate: BaseVC {
             fromValidator = selectedChain.cosmosValidators.filter { $0.operatorAddress == selectedChain.cosmosDelegations[0].delegation.validatorAddress }.first
         }
         
-        onUpdateValidatorView()
+        let cosmostation = selectedChain.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first
+        if (fromValidator?.operatorAddress == cosmostation?.operatorAddress) {
+            toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress != cosmostation!.operatorAddress }).first
+        } else {
+            toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress != fromValidator?.operatorAddress }).first
+        }
+        
+        onUpdateFromValidatorView()
+        onUpdateToValidatorView()
         onUpdateFeeView()
     }
     
     override func setLocalizedString() {
-        unStakingAmountTitle.text = NSLocalizedString("str_undelegate_amount", comment: "")
-        unStakingAmountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
+        amountTitle.text = NSLocalizedString("str_redelegate_amount", comment: "")
+        amountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
         memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
-        unStakeBtn.setTitle(NSLocalizedString("str_unstake", comment: ""), for: .normal)
+        reStakeBtn.setTitle(NSLocalizedString("str_switch_validator", comment: ""), for: .normal)
     }
     
-    @objc func onClickValidator() {
+    @objc func onClickFromValidator() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = selectedChain
         baseSheet.sheetDelegate = self
@@ -105,16 +122,42 @@ class CosmosUndelegate: BaseVC {
         onStartSheet(baseSheet, 680)
     }
     
-    func onUpdateValidatorView() {
-        monikerImg.af.setImage(withURL: selectedChain.monikerImg(fromValidator!.operatorAddress))
-        monikerLabel.text = fromValidator!.description_p.moniker
-        jailedImg.isHidden = !fromValidator!.jailed
+    func onUpdateFromValidatorView() {
+        fromMonikerImg.af.setImage(withURL: selectedChain.monikerImg(fromValidator!.operatorAddress))
+        fromMonikerLabel.text = fromValidator!.description_p.moniker
+        fromJailedImg.isHidden = !fromValidator!.jailed
         
         let stakeDenom = selectedChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
             let staked = selectedChain.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance.amount
             let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
-            stakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakedLabel!.font, 6)
+            fromStakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, fromStakedLabel!.font, 6)
+        }
+        onSimul()
+    }
+    
+    @objc func onClickToValidator() {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.targetChain = selectedChain
+        baseSheet.validators = selectedChain.cosmosValidators
+        baseSheet.sheetDelegate = self
+        baseSheet.sheetType = .SelectValidator
+        onStartSheet(baseSheet, 680)
+    }
+    
+    func onUpdateToValidatorView() {
+        toMonikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
+        toMonikerLabel.text = toValidator!.description_p.moniker
+        toJailedImg.isHidden = !toValidator!.jailed
+        
+        let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
+        toCommLabel?.attributedText = WDP.dpAmount(commission.stringValue, toCommLabel!.font, 2)
+        if (commission == NSDecimalNumber.zero) {
+            toCommLabel.textColor = .colorGreen
+            toCommPercentLabel.textColor = .colorGreen
+        } else {
+            toCommLabel.textColor = .color02
+            toCommPercentLabel.textColor = .color02
         }
         onSimul()
     }
@@ -138,7 +181,7 @@ class CosmosUndelegate: BaseVC {
         amountSheet.availableCoin = availableCoin
         amountSheet.existedAmount = toCoin?.amount
         amountSheet.sheetDelegate = self
-        amountSheet.sheetType = .TxUndelegate
+        amountSheet.sheetType = .TxRedelegate
         self.onStartSheet(amountSheet)
     }
     
@@ -147,15 +190,15 @@ class CosmosUndelegate: BaseVC {
         toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = amount }
         
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
-            WDP.dpCoin(msAsset, toCoin, nil, unStakingDenomLabel, unStakingAmountLabel, msAsset.decimals)
-            unStakingAmountHintLabel.isHidden = true
-            unStakingAmountLabel.isHidden = false
-            unStakingDenomLabel.isHidden = false
+            WDP.dpCoin(msAsset, toCoin, nil, amountDenomLabel, amountLabel, msAsset.decimals)
+            amountHintLabel.isHidden = true
+            amountLabel.isHidden = false
+            amountDenomLabel.isHidden = false
         }
         onSimul()
     }
-
-
+    
+    
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeeInfo = sender.selectedSegmentIndex
         txFee = selectedChain.getBaseFee(selectedFeeInfo, txFee.amount[0].denom)
@@ -203,23 +246,25 @@ class CosmosUndelegate: BaseVC {
         onUpdateFeeView()
         view.isUserInteractionEnabled = true
         loadingView.isHidden = true
-        unStakeBtn.isEnabled = true
+        reStakeBtn.isEnabled = true
     }
     
-    @IBAction func onClickUnstake(_ sender: BaseButton) {
+    @IBAction func onClickRestake(_ sender: BaseButton) {
         let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
         self.present(pinVC, animated: true)
     }
     
+    
     func onSimul() {
-        if (toCoin == nil) { return }
+        if (toCoin == nil ) { return }
         view.isUserInteractionEnabled = false
-        unStakeBtn.isEnabled = false
+        reStakeBtn.isEnabled = false
         loadingView.isHidden = false
         
-        toUndelegate = Cosmos_Staking_V1beta1_MsgUndelegate.with {
+        toRedelegate = Cosmos_Staking_V1beta1_MsgBeginRedelegate.with {
             $0.delegatorAddress = selectedChain.address!
-            $0.validatorAddress = fromValidator!.operatorAddress
+            $0.validatorSrcAddress = fromValidator!.operatorAddress
+            $0.validatorDstAddress = toValidator!.operatorAddress
             $0.amount = toCoin!
         }
         
@@ -243,18 +288,21 @@ class CosmosUndelegate: BaseVC {
             }
         }
     }
+
 }
 
-
-extension CosmosUndelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
-    
+extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
     func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .SelectUnStakeValidator) {
             if (fromValidator?.operatorAddress != result.param) {
                 fromValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == result.param}).first!
-                onUpdateValidatorView()
+                onUpdateFromValidatorView()
                 onUpdateFeeView()
             }
+            
+        } else if (sheetType == .SelectValidator) {
+            toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == result.param}).first!
+            onUpdateToValidatorView()
             
         } else if (sheetType == .SelectFeeCoin) {
             if let position = result.position,
@@ -276,7 +324,7 @@ extension CosmosUndelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
     func pinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
             view.isUserInteractionEnabled = false
-            unStakeBtn.isEnabled = false
+            reStakeBtn.isEnabled = false
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
@@ -298,8 +346,7 @@ extension CosmosUndelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
     
 }
 
-
-extension CosmosUndelegate {
+extension CosmosRedelegate {
     
     func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
@@ -307,7 +354,7 @@ extension CosmosUndelegate {
     }
     
     func simulateTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genUndelegateTxSimul(auth, toUndelegate, txFee, txMemo, selectedChain)
+        let simulTx = Signer.genRedelegateTxSimul(auth, toRedelegate, txFee, txMemo, selectedChain)
         do {
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
         } catch {
@@ -316,7 +363,7 @@ extension CosmosUndelegate {
     }
     
     func broadcastTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genUndelegateTx(auth, toUndelegate, txFee, txMemo, selectedChain)
+        let reqTx = Signer.genRedelegateTx(auth, toRedelegate, txFee, txMemo, selectedChain)
         return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
     }
     

@@ -260,6 +260,15 @@
 "str_select_coin_for_fee" = "Tx 수수료로 사용할 코인 선택";
 "str_stake" = "스테이크";
 "str_unstake" = "언스테이크";
+"str_unstake_msg" = "언스테이킹을 시작합니다.";
+"str_switch_validator" = "검증인 변경";
+"str_switch_validator_msg" = "스테이킹중인 자산의 검증인을 변경합니다.";
+"str_cliam_reward" = "이자 받기";
+"str_cliam_reward_msg" = "쌓인 이자를 받습니다.";
+"str_compounding" = "Compunding";
+"str_compounding_msg" = "쌓인 이자를 즉시 스테이킹 합니다.";
+"str_cancel_unbonding" = "Cancel Unbonding";
+"str_cancel_unbonding_msg" = "언스테이킹을 취소하고 즉시 스테이킹 상태로 되돌립니다.";
 
 
 "btn_delegate" = "  위임 하기";
@@ -515,16 +524,7 @@
 "wallet_delete_complete" = "삭제 완료!";
 
 
-"str_unstake" = "Unstake";
-"str_unstake_msg" = "언스테이킹을 시작합니다.";
-"str_switch_validator" = "Switch Validator";
-"str_switch_validator_msg" = "스테이킹중인 자산의 검증인을 변경합니다.";
-"str_cliam_reward" = "Claim Rewards";
-"str_cliam_reward_msg" = "쌓인 이자를 받습니다.";
-"str_compounding" = "Compunding";
-"str_compounding_msg" = "쌓인 이자를 즉시 스테이킹 합니다.";
-"str_cancel_unbonding" = "Cancel Unbonding";
-"str_cancel_unbonding_msg" = "언스테이킹을 취소하고 즉시 스테이킹 상태로 되돌립니다.";
+
 
 
 

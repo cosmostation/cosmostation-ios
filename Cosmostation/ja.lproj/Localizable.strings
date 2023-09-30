@@ -260,6 +260,15 @@
 "str_select_coin_for_fee" = "Tx手数料として使用するコインの選択";
 "str_stake" = "ステーク";
 "str_unstake" = "ステークを解除する";
+"str_unstake_msg" = "アンステーキングを開始します。";
+"str_switch_validator" = "スイッチバリデータ";
+"str_switch_validator_msg" = "ステーキング中の資産の検証者を変更します。";
+"str_cliam_reward" = "利息を受け取る";
+"str_cliam_reward_msg" = "積み重ねられた利子を受け取ります。";
+"str_compounding" = "Compunding";
+"str_compounding_msg" = "積み上げ利子をすぐにステーキングします。";
+"str_cancel_unbonding" = "Cancel Unbonding";
+"str_cancel_unbonding_msg" = "アンステーキングをキャンセルし、すぐにステーキング状態に戻ります。";
 
 
 "btn_delegate" = "  委任する";
@@ -515,16 +524,7 @@
 "wallet_delete_complete" = "削除完了！";
 
 
-"str_unstake" = "Unstake";
-"str_unstake_msg" = "アンステーキングを開始します。";
-"str_switch_validator" = "Switch Validator";
-"str_switch_validator_msg" = "ステーキング中の資産の検証者を変更します。";
-"str_cliam_reward" = "Claim Rewards";
-"str_cliam_reward_msg" = "積み重ねられた利子を受け取ります。";
-"str_compounding" = "Compunding";
-"str_compounding_msg" = "積み上げ利子をすぐにステーキングします。";
-"str_cancel_unbonding" = "Cancel Unbonding";
-"str_cancel_unbonding_msg" = "アンステーキングをキャンセルし、すぐにステーキング状態に戻ります。";
+
 
 
 
