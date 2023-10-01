@@ -225,6 +225,7 @@ class CosmosDelegate: BaseVC {
                 txFee.amount[0].amount = feeCoinAmount!.stringValue
             }
         }
+        
         onUpdateFeeView()
         view.isUserInteractionEnabled = true
         loadingView.isHidden = true

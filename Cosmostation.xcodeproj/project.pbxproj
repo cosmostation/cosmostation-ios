@@ -104,6 +104,178 @@
 		047842E52AC8B2D600462F1C /* CosmosRedelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842E22AC8B2D600462F1C /* CosmosRedelegate.swift */; };
 		047842E62AC8B2D600462F1C /* CosmosRedelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047842E32AC8B2D600462F1C /* CosmosRedelegate.xib */; };
 		047842E72AC8B2D600462F1C /* CosmosRedelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047842E32AC8B2D600462F1C /* CosmosRedelegate.xib */; };
+		047842FF2AC9918700462F1C /* ethermint_evm_v1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842EC2AC9918500462F1C /* ethermint_evm_v1_events.pb.swift */; };
+		047843002AC9918700462F1C /* ethermint_evm_v1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842EC2AC9918500462F1C /* ethermint_evm_v1_events.pb.swift */; };
+		047843012AC9918700462F1C /* ethermint_evm_v1_evm.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842ED2AC9918500462F1C /* ethermint_evm_v1_evm.pb.swift */; };
+		047843022AC9918700462F1C /* ethermint_evm_v1_evm.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842ED2AC9918500462F1C /* ethermint_evm_v1_evm.pb.swift */; };
+		047843032AC9918700462F1C /* ethermint_feemarket_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842EE2AC9918500462F1C /* ethermint_feemarket_v1_query.pb.swift */; };
+		047843042AC9918700462F1C /* ethermint_feemarket_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842EE2AC9918500462F1C /* ethermint_feemarket_v1_query.pb.swift */; };
+		047843052AC9918700462F1C /* ethermint_types_v1_dynamic_fee.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842EF2AC9918500462F1C /* ethermint_types_v1_dynamic_fee.pb.swift */; };
+		047843062AC9918700462F1C /* ethermint_types_v1_dynamic_fee.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842EF2AC9918500462F1C /* ethermint_types_v1_dynamic_fee.pb.swift */; };
+		047843072AC9918700462F1C /* ethermint_evm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F02AC9918500462F1C /* ethermint_evm_v1_query.pb.swift */; };
+		047843082AC9918700462F1C /* ethermint_evm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F02AC9918500462F1C /* ethermint_evm_v1_query.pb.swift */; };
+		047843092AC9918700462F1C /* ethermint_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F12AC9918500462F1C /* ethermint_crypto_v1_ethsecp256k1_keys.pb.swift */; };
+		0478430A2AC9918700462F1C /* ethermint_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F12AC9918500462F1C /* ethermint_crypto_v1_ethsecp256k1_keys.pb.swift */; };
+		0478430B2AC9918700462F1C /* ethermint_feemarket_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F22AC9918500462F1C /* ethermint_feemarket_v1_genesis.pb.swift */; };
+		0478430C2AC9918700462F1C /* ethermint_feemarket_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F22AC9918500462F1C /* ethermint_feemarket_v1_genesis.pb.swift */; };
+		0478430D2AC9918700462F1C /* ethermint_evm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F32AC9918500462F1C /* ethermint_evm_v1_tx.pb.swift */; };
+		0478430E2AC9918700462F1C /* ethermint_evm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F32AC9918500462F1C /* ethermint_evm_v1_tx.pb.swift */; };
+		0478430F2AC9918700462F1C /* ethermint_feemarket_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F42AC9918500462F1C /* ethermint_feemarket_v1_tx.pb.swift */; };
+		047843102AC9918700462F1C /* ethermint_feemarket_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F42AC9918500462F1C /* ethermint_feemarket_v1_tx.pb.swift */; };
+		047843112AC9918700462F1C /* ethermint_types_v1_account.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F52AC9918600462F1C /* ethermint_types_v1_account.pb.swift */; };
+		047843122AC9918700462F1C /* ethermint_types_v1_account.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F52AC9918600462F1C /* ethermint_types_v1_account.pb.swift */; };
+		047843132AC9918700462F1C /* ethermint_types_v1_web3.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F62AC9918600462F1C /* ethermint_types_v1_web3.pb.swift */; };
+		047843142AC9918700462F1C /* ethermint_types_v1_web3.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F62AC9918600462F1C /* ethermint_types_v1_web3.pb.swift */; };
+		047843152AC9918700462F1C /* ethermint_feemarket_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F72AC9918600462F1C /* ethermint_feemarket_v1_query.grpc.swift */; };
+		047843162AC9918700462F1C /* ethermint_feemarket_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F72AC9918600462F1C /* ethermint_feemarket_v1_query.grpc.swift */; };
+		047843172AC9918700462F1C /* ethermint_feemarket_v1_feemarket.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F82AC9918600462F1C /* ethermint_feemarket_v1_feemarket.pb.swift */; };
+		047843182AC9918700462F1C /* ethermint_feemarket_v1_feemarket.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F82AC9918600462F1C /* ethermint_feemarket_v1_feemarket.pb.swift */; };
+		047843192AC9918700462F1C /* ethermint_evm_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F92AC9918600462F1C /* ethermint_evm_v1_genesis.pb.swift */; };
+		0478431A2AC9918700462F1C /* ethermint_evm_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842F92AC9918600462F1C /* ethermint_evm_v1_genesis.pb.swift */; };
+		0478431B2AC9918700462F1C /* ethermint_feemarket_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842FA2AC9918600462F1C /* ethermint_feemarket_v1_tx.grpc.swift */; };
+		0478431C2AC9918700462F1C /* ethermint_feemarket_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842FA2AC9918600462F1C /* ethermint_feemarket_v1_tx.grpc.swift */; };
+		0478431D2AC9918700462F1C /* ethermint_types_v1_indexer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842FB2AC9918600462F1C /* ethermint_types_v1_indexer.pb.swift */; };
+		0478431E2AC9918700462F1C /* ethermint_types_v1_indexer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842FB2AC9918600462F1C /* ethermint_types_v1_indexer.pb.swift */; };
+		0478431F2AC9918700462F1C /* ethermint_evm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842FC2AC9918600462F1C /* ethermint_evm_v1_query.grpc.swift */; };
+		047843202AC9918700462F1C /* ethermint_evm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842FC2AC9918600462F1C /* ethermint_evm_v1_query.grpc.swift */; };
+		047843212AC9918700462F1C /* ethermint_feemarket_v1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842FD2AC9918600462F1C /* ethermint_feemarket_v1_events.pb.swift */; };
+		047843222AC9918700462F1C /* ethermint_feemarket_v1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842FD2AC9918600462F1C /* ethermint_feemarket_v1_events.pb.swift */; };
+		047843232AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842FE2AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift */; };
+		047843242AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842FE2AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift */; };
+		047843692AC991B300462F1C /* injective_exchange_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843262AC991A800462F1C /* injective_exchange_v1beta1_genesis.pb.swift */; };
+		0478436A2AC991B300462F1C /* injective_exchange_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843262AC991A800462F1C /* injective_exchange_v1beta1_genesis.pb.swift */; };
+		0478436B2AC991B300462F1C /* injective_exchange_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843272AC991A900462F1C /* injective_exchange_v1beta1_tx.grpc.swift */; };
+		0478436C2AC991B300462F1C /* injective_exchange_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843272AC991A900462F1C /* injective_exchange_v1beta1_tx.grpc.swift */; };
+		0478436D2AC991B300462F1C /* injective_peggy_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843282AC991A900462F1C /* injective_peggy_v1_genesis.pb.swift */; };
+		0478436E2AC991B300462F1C /* injective_peggy_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843282AC991A900462F1C /* injective_peggy_v1_genesis.pb.swift */; };
+		0478436F2AC991B300462F1C /* injective_insurance_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843292AC991A900462F1C /* injective_insurance_v1beta1_query.grpc.swift */; };
+		047843702AC991B300462F1C /* injective_insurance_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843292AC991A900462F1C /* injective_insurance_v1beta1_query.grpc.swift */; };
+		047843712AC991B300462F1C /* injective_tokenfactory_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478432A2AC991A900462F1C /* injective_tokenfactory_v1beta1_query.grpc.swift */; };
+		047843722AC991B300462F1C /* injective_tokenfactory_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478432A2AC991A900462F1C /* injective_tokenfactory_v1beta1_query.grpc.swift */; };
+		047843732AC991B300462F1C /* injective_wasmx_v1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478432B2AC991A900462F1C /* injective_wasmx_v1_events.pb.swift */; };
+		047843742AC991B300462F1C /* injective_wasmx_v1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478432B2AC991A900462F1C /* injective_wasmx_v1_events.pb.swift */; };
+		047843752AC991B300462F1C /* injective_exchange_v1beta1_exchange.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478432C2AC991A900462F1C /* injective_exchange_v1beta1_exchange.pb.swift */; };
+		047843762AC991B300462F1C /* injective_exchange_v1beta1_exchange.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478432C2AC991A900462F1C /* injective_exchange_v1beta1_exchange.pb.swift */; };
+		047843772AC991B300462F1C /* injective_ocr_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478432D2AC991A900462F1C /* injective_ocr_v1beta1_tx.pb.swift */; };
+		047843782AC991B300462F1C /* injective_ocr_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478432D2AC991A900462F1C /* injective_ocr_v1beta1_tx.pb.swift */; };
+		047843792AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478432E2AC991A900462F1C /* injective_insurance_v1beta1_tx.pb.swift */; };
+		0478437A2AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478432E2AC991A900462F1C /* injective_insurance_v1beta1_tx.pb.swift */; };
+		0478437B2AC991B300462F1C /* injective_wasmx_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478432F2AC991AA00462F1C /* injective_wasmx_v1_query.grpc.swift */; };
+		0478437C2AC991B300462F1C /* injective_wasmx_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478432F2AC991AA00462F1C /* injective_wasmx_v1_query.grpc.swift */; };
+		0478437D2AC991B300462F1C /* injective_peggy_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843302AC991AA00462F1C /* injective_peggy_v1_query.grpc.swift */; };
+		0478437E2AC991B300462F1C /* injective_peggy_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843302AC991AA00462F1C /* injective_peggy_v1_query.grpc.swift */; };
+		0478437F2AC991B300462F1C /* injective_peggy_v1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843312AC991AA00462F1C /* injective_peggy_v1_events.pb.swift */; };
+		047843802AC991B300462F1C /* injective_peggy_v1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843312AC991AA00462F1C /* injective_peggy_v1_events.pb.swift */; };
+		047843812AC991B300462F1C /* injective_auction_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843322AC991AA00462F1C /* injective_auction_v1beta1_query.pb.swift */; };
+		047843822AC991B300462F1C /* injective_auction_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843322AC991AA00462F1C /* injective_auction_v1beta1_query.pb.swift */; };
+		047843832AC991B300462F1C /* injective_auction_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843332AC991AA00462F1C /* injective_auction_v1beta1_genesis.pb.swift */; };
+		047843842AC991B300462F1C /* injective_auction_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843332AC991AA00462F1C /* injective_auction_v1beta1_genesis.pb.swift */; };
+		047843852AC991B300462F1C /* injective_exchange_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843342AC991AA00462F1C /* injective_exchange_v1beta1_query.grpc.swift */; };
+		047843862AC991B300462F1C /* injective_exchange_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843342AC991AA00462F1C /* injective_exchange_v1beta1_query.grpc.swift */; };
+		047843872AC991B300462F1C /* injective_auction_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843352AC991AA00462F1C /* injective_auction_v1beta1_tx.pb.swift */; };
+		047843882AC991B300462F1C /* injective_auction_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843352AC991AA00462F1C /* injective_auction_v1beta1_tx.pb.swift */; };
+		047843892AC991B300462F1C /* injective_types_v1beta1_account.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843362AC991AB00462F1C /* injective_types_v1beta1_account.pb.swift */; };
+		0478438A2AC991B300462F1C /* injective_types_v1beta1_account.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843362AC991AB00462F1C /* injective_types_v1beta1_account.pb.swift */; };
+		0478438B2AC991B300462F1C /* injective_peggy_v1_msgs.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843372AC991AB00462F1C /* injective_peggy_v1_msgs.grpc.swift */; };
+		0478438C2AC991B300462F1C /* injective_peggy_v1_msgs.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843372AC991AB00462F1C /* injective_peggy_v1_msgs.grpc.swift */; };
+		0478438D2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843382AC991AB00462F1C /* injective_peggy_v1_attestation.pb.swift */; };
+		0478438E2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843382AC991AB00462F1C /* injective_peggy_v1_attestation.pb.swift */; };
+		0478438F2AC991B300462F1C /* injective_ocr_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843392AC991AB00462F1C /* injective_ocr_v1beta1_query.grpc.swift */; };
+		047843902AC991B300462F1C /* injective_ocr_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843392AC991AB00462F1C /* injective_ocr_v1beta1_query.grpc.swift */; };
+		047843912AC991B300462F1C /* injective_oracle_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478433A2AC991AB00462F1C /* injective_oracle_v1beta1_query.pb.swift */; };
+		047843922AC991B300462F1C /* injective_oracle_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478433A2AC991AB00462F1C /* injective_oracle_v1beta1_query.pb.swift */; };
+		047843932AC991B300462F1C /* injective_exchange_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478433B2AC991AB00462F1C /* injective_exchange_v1beta1_query.pb.swift */; };
+		047843942AC991B300462F1C /* injective_exchange_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478433B2AC991AB00462F1C /* injective_exchange_v1beta1_query.pb.swift */; };
+		047843952AC991B300462F1C /* injective_peggy_v1_msgs.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478433C2AC991AC00462F1C /* injective_peggy_v1_msgs.pb.swift */; };
+		047843962AC991B300462F1C /* injective_peggy_v1_msgs.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478433C2AC991AC00462F1C /* injective_peggy_v1_msgs.pb.swift */; };
+		047843972AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478433D2AC991AC00462F1C /* injective_ocr_v1beta1_query.pb.swift */; };
+		047843982AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478433D2AC991AC00462F1C /* injective_ocr_v1beta1_query.pb.swift */; };
+		047843992AC991B300462F1C /* injective_tokenfactory_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478433E2AC991AC00462F1C /* injective_tokenfactory_v1beta1_query.pb.swift */; };
+		0478439A2AC991B300462F1C /* injective_tokenfactory_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478433E2AC991AC00462F1C /* injective_tokenfactory_v1beta1_query.pb.swift */; };
+		0478439B2AC991B300462F1C /* injective_peggy_v1_pool.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478433F2AC991AC00462F1C /* injective_peggy_v1_pool.pb.swift */; };
+		0478439C2AC991B300462F1C /* injective_peggy_v1_pool.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478433F2AC991AC00462F1C /* injective_peggy_v1_pool.pb.swift */; };
+		0478439D2AC991B300462F1C /* injective_wasmx_v1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843402AC991AD00462F1C /* injective_wasmx_v1_proposal.pb.swift */; };
+		0478439E2AC991B300462F1C /* injective_wasmx_v1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843402AC991AD00462F1C /* injective_wasmx_v1_proposal.pb.swift */; };
+		0478439F2AC991B300462F1C /* injective_wasmx_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843412AC991AD00462F1C /* injective_wasmx_v1_tx.pb.swift */; };
+		047843A02AC991B300462F1C /* injective_wasmx_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843412AC991AD00462F1C /* injective_wasmx_v1_tx.pb.swift */; };
+		047843A12AC991B300462F1C /* injective_auction_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843422AC991AD00462F1C /* injective_auction_v1beta1_tx.grpc.swift */; };
+		047843A22AC991B300462F1C /* injective_auction_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843422AC991AD00462F1C /* injective_auction_v1beta1_tx.grpc.swift */; };
+		047843A32AC991B300462F1C /* injective_wasmx_v1_wasmx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843432AC991AD00462F1C /* injective_wasmx_v1_wasmx.pb.swift */; };
+		047843A42AC991B300462F1C /* injective_wasmx_v1_wasmx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843432AC991AD00462F1C /* injective_wasmx_v1_wasmx.pb.swift */; };
+		047843A52AC991B300462F1C /* injective_peggy_v1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843442AC991AD00462F1C /* injective_peggy_v1_params.pb.swift */; };
+		047843A62AC991B300462F1C /* injective_peggy_v1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843442AC991AD00462F1C /* injective_peggy_v1_params.pb.swift */; };
+		047843A72AC991B300462F1C /* injective_exchange_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843452AC991AD00462F1C /* injective_exchange_v1beta1_tx.pb.swift */; };
+		047843A82AC991B300462F1C /* injective_exchange_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843452AC991AD00462F1C /* injective_exchange_v1beta1_tx.pb.swift */; };
+		047843A92AC991B300462F1C /* injective_auction_v1beta1_auction.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843462AC991AE00462F1C /* injective_auction_v1beta1_auction.pb.swift */; };
+		047843AA2AC991B300462F1C /* injective_auction_v1beta1_auction.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843462AC991AE00462F1C /* injective_auction_v1beta1_auction.pb.swift */; };
+		047843AB2AC991B300462F1C /* injective_insurance_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843472AC991AE00462F1C /* injective_insurance_v1beta1_genesis.pb.swift */; };
+		047843AC2AC991B300462F1C /* injective_insurance_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843472AC991AE00462F1C /* injective_insurance_v1beta1_genesis.pb.swift */; };
+		047843AD2AC991B300462F1C /* injective_ocr_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843482AC991AE00462F1C /* injective_ocr_v1beta1_tx.grpc.swift */; };
+		047843AE2AC991B300462F1C /* injective_ocr_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843482AC991AE00462F1C /* injective_ocr_v1beta1_tx.grpc.swift */; };
+		047843AF2AC991B300462F1C /* injective_tokenfactory_v1beta1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843492AC991AE00462F1C /* injective_tokenfactory_v1beta1_events.pb.swift */; };
+		047843B02AC991B300462F1C /* injective_tokenfactory_v1beta1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843492AC991AE00462F1C /* injective_tokenfactory_v1beta1_events.pb.swift */; };
+		047843B12AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478434A2AC991AE00462F1C /* injective_tokenfactory_v1beta1_tx.grpc.swift */; };
+		047843B22AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478434A2AC991AE00462F1C /* injective_tokenfactory_v1beta1_tx.grpc.swift */; };
+		047843B32AC991B300462F1C /* injective_peggy_v1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478434B2AC991AE00462F1C /* injective_peggy_v1_proposal.pb.swift */; };
+		047843B42AC991B300462F1C /* injective_peggy_v1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478434B2AC991AE00462F1C /* injective_peggy_v1_proposal.pb.swift */; };
+		047843B52AC991B300462F1C /* injective_oracle_v1beta1_oracle.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478434C2AC991AE00462F1C /* injective_oracle_v1beta1_oracle.pb.swift */; };
+		047843B62AC991B300462F1C /* injective_oracle_v1beta1_oracle.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478434C2AC991AE00462F1C /* injective_oracle_v1beta1_oracle.pb.swift */; };
+		047843B72AC991B300462F1C /* injective_types_v1beta1_tx_response.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478434D2AC991AF00462F1C /* injective_types_v1beta1_tx_response.pb.swift */; };
+		047843B82AC991B300462F1C /* injective_types_v1beta1_tx_response.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478434D2AC991AF00462F1C /* injective_types_v1beta1_tx_response.pb.swift */; };
+		047843B92AC991B300462F1C /* injective_oracle_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478434E2AC991AF00462F1C /* injective_oracle_v1beta1_query.grpc.swift */; };
+		047843BA2AC991B300462F1C /* injective_oracle_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478434E2AC991AF00462F1C /* injective_oracle_v1beta1_query.grpc.swift */; };
+		047843BB2AC991B300462F1C /* injective_peggy_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478434F2AC991AF00462F1C /* injective_peggy_v1_query.pb.swift */; };
+		047843BC2AC991B300462F1C /* injective_peggy_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478434F2AC991AF00462F1C /* injective_peggy_v1_query.pb.swift */; };
+		047843BD2AC991B300462F1C /* injective_ocr_v1beta1_ocr.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843502AC991AF00462F1C /* injective_ocr_v1beta1_ocr.pb.swift */; };
+		047843BE2AC991B300462F1C /* injective_ocr_v1beta1_ocr.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843502AC991AF00462F1C /* injective_ocr_v1beta1_ocr.pb.swift */; };
+		047843BF2AC991B300462F1C /* injective_oracle_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843512AC991AF00462F1C /* injective_oracle_v1beta1_tx.pb.swift */; };
+		047843C02AC991B300462F1C /* injective_oracle_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843512AC991AF00462F1C /* injective_oracle_v1beta1_tx.pb.swift */; };
+		047843C12AC991B300462F1C /* injective_wasmx_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843522AC991AF00462F1C /* injective_wasmx_v1_genesis.pb.swift */; };
+		047843C22AC991B300462F1C /* injective_wasmx_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843522AC991AF00462F1C /* injective_wasmx_v1_genesis.pb.swift */; };
+		047843C32AC991B300462F1C /* injective_wasmx_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843532AC991AF00462F1C /* injective_wasmx_v1_tx.grpc.swift */; };
+		047843C42AC991B300462F1C /* injective_wasmx_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843532AC991AF00462F1C /* injective_wasmx_v1_tx.grpc.swift */; };
+		047843C52AC991B300462F1C /* injective_peggy_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843542AC991B000462F1C /* injective_peggy_v1_types.pb.swift */; };
+		047843C62AC991B300462F1C /* injective_peggy_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843542AC991B000462F1C /* injective_peggy_v1_types.pb.swift */; };
+		047843C72AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843552AC991B000462F1C /* injective_tokenfactory_v1beta1_tx.pb.swift */; };
+		047843C82AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843552AC991B000462F1C /* injective_tokenfactory_v1beta1_tx.pb.swift */; };
+		047843C92AC991B300462F1C /* injective_auction_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843562AC991B000462F1C /* injective_auction_v1beta1_query.grpc.swift */; };
+		047843CA2AC991B300462F1C /* injective_auction_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843562AC991B000462F1C /* injective_auction_v1beta1_query.grpc.swift */; };
+		047843CB2AC991B300462F1C /* injective_peggy_v1_ethereum_signer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843572AC991B000462F1C /* injective_peggy_v1_ethereum_signer.pb.swift */; };
+		047843CC2AC991B300462F1C /* injective_peggy_v1_ethereum_signer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843572AC991B000462F1C /* injective_peggy_v1_ethereum_signer.pb.swift */; };
+		047843CD2AC991B300462F1C /* injective_tokenfactory_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843582AC991B000462F1C /* injective_tokenfactory_v1beta1_params.pb.swift */; };
+		047843CE2AC991B300462F1C /* injective_tokenfactory_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843582AC991B000462F1C /* injective_tokenfactory_v1beta1_params.pb.swift */; };
+		047843CF2AC991B300462F1C /* injective_insurance_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843592AC991B000462F1C /* injective_insurance_v1beta1_tx.grpc.swift */; };
+		047843D02AC991B300462F1C /* injective_insurance_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843592AC991B000462F1C /* injective_insurance_v1beta1_tx.grpc.swift */; };
+		047843D12AC991B300462F1C /* injective_exchange_v1beta1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478435A2AC991B000462F1C /* injective_exchange_v1beta1_events.pb.swift */; };
+		047843D22AC991B300462F1C /* injective_exchange_v1beta1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478435A2AC991B000462F1C /* injective_exchange_v1beta1_events.pb.swift */; };
+		047843D32AC991B300462F1C /* injective_tokenfactory_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478435B2AC991B100462F1C /* injective_tokenfactory_v1beta1_genesis.pb.swift */; };
+		047843D42AC991B300462F1C /* injective_tokenfactory_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478435B2AC991B100462F1C /* injective_tokenfactory_v1beta1_genesis.pb.swift */; };
+		047843D52AC991B300462F1C /* injective_oracle_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478435C2AC991B100462F1C /* injective_oracle_v1beta1_tx.grpc.swift */; };
+		047843D62AC991B300462F1C /* injective_oracle_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478435C2AC991B100462F1C /* injective_oracle_v1beta1_tx.grpc.swift */; };
+		047843D72AC991B300462F1C /* injective_tokenfactory_v1beta1_authorityMetadata.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478435D2AC991B100462F1C /* injective_tokenfactory_v1beta1_authorityMetadata.pb.swift */; };
+		047843D82AC991B300462F1C /* injective_tokenfactory_v1beta1_authorityMetadata.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478435D2AC991B100462F1C /* injective_tokenfactory_v1beta1_authorityMetadata.pb.swift */; };
+		047843D92AC991B300462F1C /* injective_insurance_v1beta1_insurance.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478435E2AC991B100462F1C /* injective_insurance_v1beta1_insurance.pb.swift */; };
+		047843DA2AC991B300462F1C /* injective_insurance_v1beta1_insurance.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478435E2AC991B100462F1C /* injective_insurance_v1beta1_insurance.pb.swift */; };
+		047843DB2AC991B300462F1C /* injective_ocr_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478435F2AC991B100462F1C /* injective_ocr_v1beta1_genesis.pb.swift */; };
+		047843DC2AC991B300462F1C /* injective_ocr_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478435F2AC991B100462F1C /* injective_ocr_v1beta1_genesis.pb.swift */; };
+		047843DD2AC991B300462F1C /* injective_exchange_v1beta1_authz.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843602AC991B100462F1C /* injective_exchange_v1beta1_authz.pb.swift */; };
+		047843DE2AC991B300462F1C /* injective_exchange_v1beta1_authz.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843602AC991B100462F1C /* injective_exchange_v1beta1_authz.pb.swift */; };
+		047843DF2AC991B300462F1C /* injective_wasmx_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843612AC991B100462F1C /* injective_wasmx_v1_query.pb.swift */; };
+		047843E02AC991B300462F1C /* injective_wasmx_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843612AC991B100462F1C /* injective_wasmx_v1_query.pb.swift */; };
+		047843E12AC991B300462F1C /* injective_oracle_v1beta1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843622AC991B200462F1C /* injective_oracle_v1beta1_events.pb.swift */; };
+		047843E22AC991B300462F1C /* injective_oracle_v1beta1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843622AC991B200462F1C /* injective_oracle_v1beta1_events.pb.swift */; };
+		047843E32AC991B300462F1C /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843632AC991B200462F1C /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift */; };
+		047843E42AC991B300462F1C /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843632AC991B200462F1C /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift */; };
+		047843E52AC991B300462F1C /* injective_oracle_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843642AC991B200462F1C /* injective_oracle_v1beta1_genesis.pb.swift */; };
+		047843E62AC991B300462F1C /* injective_oracle_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843642AC991B200462F1C /* injective_oracle_v1beta1_genesis.pb.swift */; };
+		047843E72AC991B300462F1C /* injective_insurance_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843652AC991B200462F1C /* injective_insurance_v1beta1_query.pb.swift */; };
+		047843E82AC991B300462F1C /* injective_insurance_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843652AC991B200462F1C /* injective_insurance_v1beta1_query.pb.swift */; };
+		047843E92AC991B300462F1C /* injective_oracle_v1beta1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843662AC991B200462F1C /* injective_oracle_v1beta1_proposal.pb.swift */; };
+		047843EA2AC991B300462F1C /* injective_oracle_v1beta1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843662AC991B200462F1C /* injective_oracle_v1beta1_proposal.pb.swift */; };
+		047843EB2AC991B300462F1C /* injective_peggy_v1_batch.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843672AC991B200462F1C /* injective_peggy_v1_batch.pb.swift */; };
+		047843EC2AC991B300462F1C /* injective_peggy_v1_batch.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843672AC991B200462F1C /* injective_peggy_v1_batch.pb.swift */; };
+		047843ED2AC991B300462F1C /* injective_types_v1beta1_tx_ext.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843682AC991B200462F1C /* injective_types_v1beta1_tx_ext.pb.swift */; };
+		047843EE2AC991B300462F1C /* injective_types_v1beta1_tx_ext.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047843682AC991B200462F1C /* injective_types_v1beta1_tx_ext.pb.swift */; };
 		047847BF2962988300FD6A7E /* Cw20IcnsByNameReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047847BE2962988300FD6A7E /* Cw20IcnsByNameReq.swift */; };
 		047847C02962988300FD6A7E /* Cw20IcnsByNameReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047847BE2962988300FD6A7E /* Cw20IcnsByNameReq.swift */; };
 		047847C529629AD100FD6A7E /* Cw20IcnsByNameRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047847C429629AD100FD6A7E /* Cw20IcnsByNameRes.swift */; };
@@ -986,6 +1158,92 @@
 		047842DD2AC8963100462F1C /* CosmosUndelegate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosUndelegate.xib; sourceTree = "<group>"; };
 		047842E22AC8B2D600462F1C /* CosmosRedelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosRedelegate.swift; sourceTree = "<group>"; };
 		047842E32AC8B2D600462F1C /* CosmosRedelegate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosRedelegate.xib; sourceTree = "<group>"; };
+		047842EC2AC9918500462F1C /* ethermint_evm_v1_events.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_evm_v1_events.pb.swift; sourceTree = "<group>"; };
+		047842ED2AC9918500462F1C /* ethermint_evm_v1_evm.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_evm_v1_evm.pb.swift; sourceTree = "<group>"; };
+		047842EE2AC9918500462F1C /* ethermint_feemarket_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_feemarket_v1_query.pb.swift; sourceTree = "<group>"; };
+		047842EF2AC9918500462F1C /* ethermint_types_v1_dynamic_fee.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_types_v1_dynamic_fee.pb.swift; sourceTree = "<group>"; };
+		047842F02AC9918500462F1C /* ethermint_evm_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_evm_v1_query.pb.swift; sourceTree = "<group>"; };
+		047842F12AC9918500462F1C /* ethermint_crypto_v1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_crypto_v1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
+		047842F22AC9918500462F1C /* ethermint_feemarket_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_feemarket_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		047842F32AC9918500462F1C /* ethermint_evm_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_evm_v1_tx.pb.swift; sourceTree = "<group>"; };
+		047842F42AC9918500462F1C /* ethermint_feemarket_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_feemarket_v1_tx.pb.swift; sourceTree = "<group>"; };
+		047842F52AC9918600462F1C /* ethermint_types_v1_account.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_types_v1_account.pb.swift; sourceTree = "<group>"; };
+		047842F62AC9918600462F1C /* ethermint_types_v1_web3.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_types_v1_web3.pb.swift; sourceTree = "<group>"; };
+		047842F72AC9918600462F1C /* ethermint_feemarket_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_feemarket_v1_query.grpc.swift; sourceTree = "<group>"; };
+		047842F82AC9918600462F1C /* ethermint_feemarket_v1_feemarket.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_feemarket_v1_feemarket.pb.swift; sourceTree = "<group>"; };
+		047842F92AC9918600462F1C /* ethermint_evm_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_evm_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		047842FA2AC9918600462F1C /* ethermint_feemarket_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_feemarket_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		047842FB2AC9918600462F1C /* ethermint_types_v1_indexer.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_types_v1_indexer.pb.swift; sourceTree = "<group>"; };
+		047842FC2AC9918600462F1C /* ethermint_evm_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_evm_v1_query.grpc.swift; sourceTree = "<group>"; };
+		047842FD2AC9918600462F1C /* ethermint_feemarket_v1_events.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_feemarket_v1_events.pb.swift; sourceTree = "<group>"; };
+		047842FE2AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ethermint_evm_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		047843262AC991A800462F1C /* injective_exchange_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_exchange_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		047843272AC991A900462F1C /* injective_exchange_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_exchange_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
+		047843282AC991A900462F1C /* injective_peggy_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		047843292AC991A900462F1C /* injective_insurance_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_insurance_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		0478432A2AC991A900462F1C /* injective_tokenfactory_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_tokenfactory_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		0478432B2AC991A900462F1C /* injective_wasmx_v1_events.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_wasmx_v1_events.pb.swift; sourceTree = "<group>"; };
+		0478432C2AC991A900462F1C /* injective_exchange_v1beta1_exchange.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_exchange_v1beta1_exchange.pb.swift; sourceTree = "<group>"; };
+		0478432D2AC991A900462F1C /* injective_ocr_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_ocr_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
+		0478432E2AC991A900462F1C /* injective_insurance_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_insurance_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
+		0478432F2AC991AA00462F1C /* injective_wasmx_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_wasmx_v1_query.grpc.swift; sourceTree = "<group>"; };
+		047843302AC991AA00462F1C /* injective_peggy_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_query.grpc.swift; sourceTree = "<group>"; };
+		047843312AC991AA00462F1C /* injective_peggy_v1_events.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_events.pb.swift; sourceTree = "<group>"; };
+		047843322AC991AA00462F1C /* injective_auction_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_auction_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		047843332AC991AA00462F1C /* injective_auction_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_auction_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		047843342AC991AA00462F1C /* injective_exchange_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_exchange_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		047843352AC991AA00462F1C /* injective_auction_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_auction_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
+		047843362AC991AB00462F1C /* injective_types_v1beta1_account.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_types_v1beta1_account.pb.swift; sourceTree = "<group>"; };
+		047843372AC991AB00462F1C /* injective_peggy_v1_msgs.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_msgs.grpc.swift; sourceTree = "<group>"; };
+		047843382AC991AB00462F1C /* injective_peggy_v1_attestation.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_attestation.pb.swift; sourceTree = "<group>"; };
+		047843392AC991AB00462F1C /* injective_ocr_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_ocr_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		0478433A2AC991AB00462F1C /* injective_oracle_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_oracle_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		0478433B2AC991AB00462F1C /* injective_exchange_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_exchange_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		0478433C2AC991AC00462F1C /* injective_peggy_v1_msgs.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_msgs.pb.swift; sourceTree = "<group>"; };
+		0478433D2AC991AC00462F1C /* injective_ocr_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_ocr_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		0478433E2AC991AC00462F1C /* injective_tokenfactory_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_tokenfactory_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		0478433F2AC991AC00462F1C /* injective_peggy_v1_pool.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_pool.pb.swift; sourceTree = "<group>"; };
+		047843402AC991AD00462F1C /* injective_wasmx_v1_proposal.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_wasmx_v1_proposal.pb.swift; sourceTree = "<group>"; };
+		047843412AC991AD00462F1C /* injective_wasmx_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_wasmx_v1_tx.pb.swift; sourceTree = "<group>"; };
+		047843422AC991AD00462F1C /* injective_auction_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_auction_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
+		047843432AC991AD00462F1C /* injective_wasmx_v1_wasmx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_wasmx_v1_wasmx.pb.swift; sourceTree = "<group>"; };
+		047843442AC991AD00462F1C /* injective_peggy_v1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_params.pb.swift; sourceTree = "<group>"; };
+		047843452AC991AD00462F1C /* injective_exchange_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_exchange_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
+		047843462AC991AE00462F1C /* injective_auction_v1beta1_auction.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_auction_v1beta1_auction.pb.swift; sourceTree = "<group>"; };
+		047843472AC991AE00462F1C /* injective_insurance_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_insurance_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		047843482AC991AE00462F1C /* injective_ocr_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_ocr_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
+		047843492AC991AE00462F1C /* injective_tokenfactory_v1beta1_events.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_tokenfactory_v1beta1_events.pb.swift; sourceTree = "<group>"; };
+		0478434A2AC991AE00462F1C /* injective_tokenfactory_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_tokenfactory_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
+		0478434B2AC991AE00462F1C /* injective_peggy_v1_proposal.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_proposal.pb.swift; sourceTree = "<group>"; };
+		0478434C2AC991AE00462F1C /* injective_oracle_v1beta1_oracle.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_oracle_v1beta1_oracle.pb.swift; sourceTree = "<group>"; };
+		0478434D2AC991AF00462F1C /* injective_types_v1beta1_tx_response.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_types_v1beta1_tx_response.pb.swift; sourceTree = "<group>"; };
+		0478434E2AC991AF00462F1C /* injective_oracle_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_oracle_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		0478434F2AC991AF00462F1C /* injective_peggy_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_query.pb.swift; sourceTree = "<group>"; };
+		047843502AC991AF00462F1C /* injective_ocr_v1beta1_ocr.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_ocr_v1beta1_ocr.pb.swift; sourceTree = "<group>"; };
+		047843512AC991AF00462F1C /* injective_oracle_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_oracle_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
+		047843522AC991AF00462F1C /* injective_wasmx_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_wasmx_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		047843532AC991AF00462F1C /* injective_wasmx_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_wasmx_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		047843542AC991B000462F1C /* injective_peggy_v1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_types.pb.swift; sourceTree = "<group>"; };
+		047843552AC991B000462F1C /* injective_tokenfactory_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_tokenfactory_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
+		047843562AC991B000462F1C /* injective_auction_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_auction_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		047843572AC991B000462F1C /* injective_peggy_v1_ethereum_signer.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_ethereum_signer.pb.swift; sourceTree = "<group>"; };
+		047843582AC991B000462F1C /* injective_tokenfactory_v1beta1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_tokenfactory_v1beta1_params.pb.swift; sourceTree = "<group>"; };
+		047843592AC991B000462F1C /* injective_insurance_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_insurance_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
+		0478435A2AC991B000462F1C /* injective_exchange_v1beta1_events.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_exchange_v1beta1_events.pb.swift; sourceTree = "<group>"; };
+		0478435B2AC991B100462F1C /* injective_tokenfactory_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_tokenfactory_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		0478435C2AC991B100462F1C /* injective_oracle_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_oracle_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
+		0478435D2AC991B100462F1C /* injective_tokenfactory_v1beta1_authorityMetadata.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_tokenfactory_v1beta1_authorityMetadata.pb.swift; sourceTree = "<group>"; };
+		0478435E2AC991B100462F1C /* injective_insurance_v1beta1_insurance.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_insurance_v1beta1_insurance.pb.swift; sourceTree = "<group>"; };
+		0478435F2AC991B100462F1C /* injective_ocr_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_ocr_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		047843602AC991B100462F1C /* injective_exchange_v1beta1_authz.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_exchange_v1beta1_authz.pb.swift; sourceTree = "<group>"; };
+		047843612AC991B100462F1C /* injective_wasmx_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_wasmx_v1_query.pb.swift; sourceTree = "<group>"; };
+		047843622AC991B200462F1C /* injective_oracle_v1beta1_events.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_oracle_v1beta1_events.pb.swift; sourceTree = "<group>"; };
+		047843632AC991B200462F1C /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
+		047843642AC991B200462F1C /* injective_oracle_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_oracle_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		047843652AC991B200462F1C /* injective_insurance_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_insurance_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		047843662AC991B200462F1C /* injective_oracle_v1beta1_proposal.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_oracle_v1beta1_proposal.pb.swift; sourceTree = "<group>"; };
+		047843672AC991B200462F1C /* injective_peggy_v1_batch.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_batch.pb.swift; sourceTree = "<group>"; };
+		047843682AC991B200462F1C /* injective_types_v1beta1_tx_ext.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_types_v1beta1_tx_ext.pb.swift; sourceTree = "<group>"; };
 		047847BE2962988300FD6A7E /* Cw20IcnsByNameReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IcnsByNameReq.swift; sourceTree = "<group>"; };
 		047847C429629AD100FD6A7E /* Cw20IcnsByNameRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IcnsByNameRes.swift; sourceTree = "<group>"; };
 		047847C72962C93F00FD6A7E /* Cw20IcnsByAddressReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IcnsByAddressReq.swift; sourceTree = "<group>"; };
@@ -1487,6 +1745,106 @@
 			path = ClassCosmos;
 			sourceTree = "<group>";
 		};
+		047842EB2AC9917000462F1C /* Ethermint */ = {
+			isa = PBXGroup;
+			children = (
+				047842F12AC9918500462F1C /* ethermint_crypto_v1_ethsecp256k1_keys.pb.swift */,
+				047842EC2AC9918500462F1C /* ethermint_evm_v1_events.pb.swift */,
+				047842ED2AC9918500462F1C /* ethermint_evm_v1_evm.pb.swift */,
+				047842F92AC9918600462F1C /* ethermint_evm_v1_genesis.pb.swift */,
+				047842FC2AC9918600462F1C /* ethermint_evm_v1_query.grpc.swift */,
+				047842F02AC9918500462F1C /* ethermint_evm_v1_query.pb.swift */,
+				047842FE2AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift */,
+				047842F32AC9918500462F1C /* ethermint_evm_v1_tx.pb.swift */,
+				047842FD2AC9918600462F1C /* ethermint_feemarket_v1_events.pb.swift */,
+				047842F82AC9918600462F1C /* ethermint_feemarket_v1_feemarket.pb.swift */,
+				047842F22AC9918500462F1C /* ethermint_feemarket_v1_genesis.pb.swift */,
+				047842F72AC9918600462F1C /* ethermint_feemarket_v1_query.grpc.swift */,
+				047842EE2AC9918500462F1C /* ethermint_feemarket_v1_query.pb.swift */,
+				047842FA2AC9918600462F1C /* ethermint_feemarket_v1_tx.grpc.swift */,
+				047842F42AC9918500462F1C /* ethermint_feemarket_v1_tx.pb.swift */,
+				047842F52AC9918600462F1C /* ethermint_types_v1_account.pb.swift */,
+				047842EF2AC9918500462F1C /* ethermint_types_v1_dynamic_fee.pb.swift */,
+				047842FB2AC9918600462F1C /* ethermint_types_v1_indexer.pb.swift */,
+				047842F62AC9918600462F1C /* ethermint_types_v1_web3.pb.swift */,
+			);
+			path = Ethermint;
+			sourceTree = "<group>";
+		};
+		047843252AC9919900462F1C /* Injective */ = {
+			isa = PBXGroup;
+			children = (
+				047843462AC991AE00462F1C /* injective_auction_v1beta1_auction.pb.swift */,
+				047843332AC991AA00462F1C /* injective_auction_v1beta1_genesis.pb.swift */,
+				047843562AC991B000462F1C /* injective_auction_v1beta1_query.grpc.swift */,
+				047843322AC991AA00462F1C /* injective_auction_v1beta1_query.pb.swift */,
+				047843422AC991AD00462F1C /* injective_auction_v1beta1_tx.grpc.swift */,
+				047843352AC991AA00462F1C /* injective_auction_v1beta1_tx.pb.swift */,
+				047843632AC991B200462F1C /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift */,
+				047843602AC991B100462F1C /* injective_exchange_v1beta1_authz.pb.swift */,
+				0478435A2AC991B000462F1C /* injective_exchange_v1beta1_events.pb.swift */,
+				0478432C2AC991A900462F1C /* injective_exchange_v1beta1_exchange.pb.swift */,
+				047843262AC991A800462F1C /* injective_exchange_v1beta1_genesis.pb.swift */,
+				047843342AC991AA00462F1C /* injective_exchange_v1beta1_query.grpc.swift */,
+				0478433B2AC991AB00462F1C /* injective_exchange_v1beta1_query.pb.swift */,
+				047843272AC991A900462F1C /* injective_exchange_v1beta1_tx.grpc.swift */,
+				047843452AC991AD00462F1C /* injective_exchange_v1beta1_tx.pb.swift */,
+				047843472AC991AE00462F1C /* injective_insurance_v1beta1_genesis.pb.swift */,
+				0478435E2AC991B100462F1C /* injective_insurance_v1beta1_insurance.pb.swift */,
+				047843292AC991A900462F1C /* injective_insurance_v1beta1_query.grpc.swift */,
+				047843652AC991B200462F1C /* injective_insurance_v1beta1_query.pb.swift */,
+				047843592AC991B000462F1C /* injective_insurance_v1beta1_tx.grpc.swift */,
+				0478432E2AC991A900462F1C /* injective_insurance_v1beta1_tx.pb.swift */,
+				0478435F2AC991B100462F1C /* injective_ocr_v1beta1_genesis.pb.swift */,
+				047843502AC991AF00462F1C /* injective_ocr_v1beta1_ocr.pb.swift */,
+				047843392AC991AB00462F1C /* injective_ocr_v1beta1_query.grpc.swift */,
+				0478433D2AC991AC00462F1C /* injective_ocr_v1beta1_query.pb.swift */,
+				047843482AC991AE00462F1C /* injective_ocr_v1beta1_tx.grpc.swift */,
+				0478432D2AC991A900462F1C /* injective_ocr_v1beta1_tx.pb.swift */,
+				047843622AC991B200462F1C /* injective_oracle_v1beta1_events.pb.swift */,
+				047843642AC991B200462F1C /* injective_oracle_v1beta1_genesis.pb.swift */,
+				0478434C2AC991AE00462F1C /* injective_oracle_v1beta1_oracle.pb.swift */,
+				047843662AC991B200462F1C /* injective_oracle_v1beta1_proposal.pb.swift */,
+				0478434E2AC991AF00462F1C /* injective_oracle_v1beta1_query.grpc.swift */,
+				0478433A2AC991AB00462F1C /* injective_oracle_v1beta1_query.pb.swift */,
+				0478435C2AC991B100462F1C /* injective_oracle_v1beta1_tx.grpc.swift */,
+				047843512AC991AF00462F1C /* injective_oracle_v1beta1_tx.pb.swift */,
+				047843382AC991AB00462F1C /* injective_peggy_v1_attestation.pb.swift */,
+				047843672AC991B200462F1C /* injective_peggy_v1_batch.pb.swift */,
+				047843572AC991B000462F1C /* injective_peggy_v1_ethereum_signer.pb.swift */,
+				047843312AC991AA00462F1C /* injective_peggy_v1_events.pb.swift */,
+				047843282AC991A900462F1C /* injective_peggy_v1_genesis.pb.swift */,
+				047843372AC991AB00462F1C /* injective_peggy_v1_msgs.grpc.swift */,
+				0478433C2AC991AC00462F1C /* injective_peggy_v1_msgs.pb.swift */,
+				047843442AC991AD00462F1C /* injective_peggy_v1_params.pb.swift */,
+				0478433F2AC991AC00462F1C /* injective_peggy_v1_pool.pb.swift */,
+				0478434B2AC991AE00462F1C /* injective_peggy_v1_proposal.pb.swift */,
+				047843302AC991AA00462F1C /* injective_peggy_v1_query.grpc.swift */,
+				0478434F2AC991AF00462F1C /* injective_peggy_v1_query.pb.swift */,
+				047843542AC991B000462F1C /* injective_peggy_v1_types.pb.swift */,
+				0478435D2AC991B100462F1C /* injective_tokenfactory_v1beta1_authorityMetadata.pb.swift */,
+				047843492AC991AE00462F1C /* injective_tokenfactory_v1beta1_events.pb.swift */,
+				0478435B2AC991B100462F1C /* injective_tokenfactory_v1beta1_genesis.pb.swift */,
+				047843582AC991B000462F1C /* injective_tokenfactory_v1beta1_params.pb.swift */,
+				0478432A2AC991A900462F1C /* injective_tokenfactory_v1beta1_query.grpc.swift */,
+				0478433E2AC991AC00462F1C /* injective_tokenfactory_v1beta1_query.pb.swift */,
+				0478434A2AC991AE00462F1C /* injective_tokenfactory_v1beta1_tx.grpc.swift */,
+				047843552AC991B000462F1C /* injective_tokenfactory_v1beta1_tx.pb.swift */,
+				047843362AC991AB00462F1C /* injective_types_v1beta1_account.pb.swift */,
+				047843682AC991B200462F1C /* injective_types_v1beta1_tx_ext.pb.swift */,
+				0478434D2AC991AF00462F1C /* injective_types_v1beta1_tx_response.pb.swift */,
+				0478432B2AC991A900462F1C /* injective_wasmx_v1_events.pb.swift */,
+				047843522AC991AF00462F1C /* injective_wasmx_v1_genesis.pb.swift */,
+				047843402AC991AD00462F1C /* injective_wasmx_v1_proposal.pb.swift */,
+				0478432F2AC991AA00462F1C /* injective_wasmx_v1_query.grpc.swift */,
+				047843612AC991B100462F1C /* injective_wasmx_v1_query.pb.swift */,
+				047843532AC991AF00462F1C /* injective_wasmx_v1_tx.grpc.swift */,
+				047843412AC991AD00462F1C /* injective_wasmx_v1_tx.pb.swift */,
+				047843432AC991AD00462F1C /* injective_wasmx_v1_wasmx.pb.swift */,
+			);
+			path = Injective;
+			sourceTree = "<group>";
+		};
 		04CB912B2A910B1500375354 /* CosmosClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -1642,6 +2000,8 @@
 		282121BA25FDE71C0016ABFE /* ProtoBuff */ = {
 			isa = PBXGroup;
 			children = (
+				047843252AC9919900462F1C /* Injective */,
+				047842EB2AC9917000462F1C /* Ethermint */,
 				E11069A92AA4C55F00EB02CA /* Cosmwasm */,
 				E122DC3D2A8A4701006D1E7B /* Tendermint */,
 				E122DA2F2A8A4671006D1E7B /* Cosmos */,
@@ -2571,10 +2931,12 @@
 				E122DB8C2A8A468D006D1E7B /* cosmos_crypto_multisig_keys.pb.swift in Sources */,
 				E122DAE82A8A468D006D1E7B /* cosmos_gov_v1_genesis.pb.swift in Sources */,
 				E122DBF22A8A468E006D1E7B /* cosmos_app_v1alpha1_query.pb.swift in Sources */,
+				047843A62AC991B300462F1C /* injective_peggy_v1_params.pb.swift in Sources */,
 				E122DBC82A8A468E006D1E7B /* cosmos_base_v1beta1_coin.pb.swift in Sources */,
 				042DE8412AC4C518003F3EA4 /* TxMemoSheet.swift in Sources */,
 				E122DB9A2A8A468D006D1E7B /* cosmos_bank_v1beta1_genesis.pb.swift in Sources */,
 				E122DBC62A8A468E006D1E7B /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
+				047843D62AC991B300462F1C /* injective_oracle_v1beta1_tx.grpc.swift in Sources */,
 				04FAD9D62AB204FF00143A3E /* FixCardView.swift in Sources */,
 				E11069BB2AA4C57600EB02CA /* cosmwasm_wasm_v1_types.pb.swift in Sources */,
 				044ECB1B2A95C33F0042DB3C /* ChainCanto.swift in Sources */,
@@ -2585,6 +2947,7 @@
 				E122DB202A8A468D006D1E7B /* cosmos_group_v1_events.pb.swift in Sources */,
 				04FA74592A9D97A0001A2830 /* PincodeAlphabetVC.swift in Sources */,
 				E122DA1E2A8A158C006D1E7B /* ChainKava60.swift in Sources */,
+				047843E42AC991B300462F1C /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift in Sources */,
 				E11069BF2AA4C57600EB02CA /* cosmwasm_wasm_v1_query.grpc.swift in Sources */,
 				18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */,
 				E1D6B8CF2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
@@ -2596,6 +2959,7 @@
 				E122DB102A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
 				047BA8D82A94778800D3F7DD /* CosmosHistoryVC.swift in Sources */,
 				E122DC082A8A468E006D1E7B /* cosmos_group_v1_genesis.pb.swift in Sources */,
+				047843CC2AC991B300462F1C /* injective_peggy_v1_ethereum_signer.pb.swift in Sources */,
 				E122DC4F2A8A4712006D1E7B /* tendermint_types_block.pb.swift in Sources */,
 				E122DBA82A8A468D006D1E7B /* cosmos_staking_v1beta1_tx.pb.swift in Sources */,
 				E122DC612A8A4712006D1E7B /* tendermint_abci_types.pb.swift in Sources */,
@@ -2605,8 +2969,10 @@
 				04FAD9F52AB71D5000143A3E /* DeleteAccountSheet.swift in Sources */,
 				E122DAFA2A8A468D006D1E7B /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */,
 				E122DC322A8A468E006D1E7B /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
+				047843C22AC991B300462F1C /* injective_wasmx_v1_genesis.pb.swift in Sources */,
 				E122DBF02A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,
 				04C6B9C62AAC59EC00B02A95 /* QrAddressPopupVC.swift in Sources */,
+				047843982AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
 				E1D6B8D22AA499A400177D30 /* CosmosNftVC.swift in Sources */,
 				E11069C42AA4C5F400EB02CA /* Cosmwasm.swift in Sources */,
 				E122DC342A8A468E006D1E7B /* cosmos_nft_v1beta1_query.pb.swift in Sources */,
@@ -2615,12 +2981,17 @@
 				E11EAE102AAD8786003BFC7F /* SettingBaseCell.swift in Sources */,
 				E122DB762A8A468D006D1E7B /* cosmos_app_v1alpha1_module.pb.swift in Sources */,
 				044ECB302A95E1C90042DB3C /* ChainSommelier.swift in Sources */,
+				047843B42AC991B300462F1C /* injective_peggy_v1_proposal.pb.swift in Sources */,
+				0478431A2AC9918700462F1C /* ethermint_evm_v1_genesis.pb.swift in Sources */,
 				E122DB122A8A468D006D1E7B /* cosmos_gov_v1_query.grpc.swift in Sources */,
 				E122DC572A8A4712006D1E7B /* tendermint_types_params.pb.swift in Sources */,
+				047843A82AC991B300462F1C /* injective_exchange_v1beta1_tx.pb.swift in Sources */,
 				E122DB482A8A468D006D1E7B /* cosmos_upgrade_v1beta1_tx.pb.swift in Sources */,
 				1876EE8C2A4935AB00C53352 /* Cw20VaultDepositReq.swift in Sources */,
 				E1DF777C2AB75F830028BD51 /* CheckPrivateKeysVC.swift in Sources */,
+				047843DA2AC991B300462F1C /* injective_insurance_v1beta1_insurance.pb.swift in Sources */,
 				E122DB1E2A8A468D006D1E7B /* cosmos_group_module_v1_module.pb.swift in Sources */,
+				047843122AC9918700462F1C /* ethermint_types_v1_account.pb.swift in Sources */,
 				E122DBDC2A8A468E006D1E7B /* cosmos_evidence_module_v1_module.pb.swift in Sources */,
 				E122DAFE2A8A468D006D1E7B /* cosmos_group_v1_tx.grpc.swift in Sources */,
 				044ECB362A95E2590042DB3C /* ChainUmee.swift in Sources */,
@@ -2648,23 +3019,31 @@
 				18FFB341281AF533004E65BB /* RIPEMD160.swift in Sources */,
 				E15F2D0B2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */,
 				E122DB322A8A468D006D1E7B /* cosmos_bank_v1beta1_tx.pb.swift in Sources */,
+				047843E02AC991B300462F1C /* injective_wasmx_v1_query.pb.swift in Sources */,
 				E122DC1A2A8A468E006D1E7B /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
 				E122DB2C2A8A468D006D1E7B /* cosmos_autocli_v1_query.grpc.swift in Sources */,
 				E122DB022A8A468D006D1E7B /* cosmos_group_v1_types.pb.swift in Sources */,
 				E122DB502A8A468D006D1E7B /* cosmos_circuit_v1_tx.pb.swift in Sources */,
+				047843242AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */,
 				18D4C19628C704B8003F230A /* WalletConnectManager.swift in Sources */,
+				047843222AC9918700462F1C /* ethermint_feemarket_v1_events.pb.swift in Sources */,
 				E122DBCE2A8A468E006D1E7B /* cosmos_tx_v1beta1_tx.pb.swift in Sources */,
 				E122DB7E2A8A468D006D1E7B /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
 				E18A4EBC2A95149100D8BC05 /* ChainAssetMantle.swift in Sources */,
 				E122DC0A2A8A468E006D1E7B /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
+				047843202AC9918700462F1C /* ethermint_evm_v1_query.grpc.swift in Sources */,
 				E122DC2C2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_query.grpc.swift in Sources */,
 				E122DB422A8A468D006D1E7B /* cosmos_upgrade_module_v1_module.pb.swift in Sources */,
+				047843762AC991B300462F1C /* injective_exchange_v1beta1_exchange.pb.swift in Sources */,
 				04BA9BD22A978131003E2404 /* RefAddress.swift in Sources */,
 				E131A3C72AACD0E000943013 /* OktHistory.swift in Sources */,
 				E122DBDE2A8A468E006D1E7B /* cosmos_base_query_v1beta1_pagination.pb.swift in Sources */,
+				047843A42AC991B300462F1C /* injective_wasmx_v1_wasmx.pb.swift in Sources */,
 				E122DC2E2A8A468E006D1E7B /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
+				0478439A2AC991B300462F1C /* injective_tokenfactory_v1beta1_query.pb.swift in Sources */,
 				E122DBB42A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.grpc.swift in Sources */,
 				E122DBEE2A8A468E006D1E7B /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,
+				047843E62AC991B300462F1C /* injective_oracle_v1beta1_genesis.pb.swift in Sources */,
 				E1D5A3E52AC33B8000453914 /* CosmosClaimRewards.swift in Sources */,
 				04527DBA2A937CA2005F72D7 /* AssetCell.swift in Sources */,
 				18FFB396281AF533004E65BB /* WUtils.swift in Sources */,
@@ -2684,8 +3063,11 @@
 				E122DB302A8A468D006D1E7B /* cosmos_distribution_module_v1_module.pb.swift in Sources */,
 				E122DAEA2A8A468D006D1E7B /* cosmos_authz_v1beta1_tx.grpc.swift in Sources */,
 				04527DC62A938FC9005F72D7 /* CosmosClassVC.swift in Sources */,
+				047843082AC9918700462F1C /* ethermint_evm_v1_query.pb.swift in Sources */,
 				E122DB5C2A8A468D006D1E7B /* cosmos_store_internal_kv_v1beta1_kv.pb.swift in Sources */,
 				E122DBA02A8A468D006D1E7B /* cosmos_authz_v1beta1_event.pb.swift in Sources */,
+				047843DC2AC991B300462F1C /* injective_ocr_v1beta1_genesis.pb.swift in Sources */,
+				047843822AC991B300462F1C /* injective_auction_v1beta1_query.pb.swift in Sources */,
 				E19E8B3E2A92290800001BF5 /* UIColor+Colors.swift in Sources */,
 				E122DB182A8A468D006D1E7B /* cosmos_autocli_v1_query.pb.swift in Sources */,
 				04CB911C2A90C41E00375354 /* EvmClass.swift in Sources */,
@@ -2696,6 +3078,7 @@
 				18FFB3DD281AF533004E65BB /* BinanceModel.swift in Sources */,
 				E11069BD2AA4C57600EB02CA /* cosmwasm_wasm_v1_genesis.pb.swift in Sources */,
 				047C10722AAC310600AFA159 /* QrAddressVC.swift in Sources */,
+				047843902AC991B300462F1C /* injective_ocr_v1beta1_query.grpc.swift in Sources */,
 				E122DBD02A8A468E006D1E7B /* cosmos_upgrade_v1beta1_upgrade.pb.swift in Sources */,
 				04FAD9D12AB2032200143A3E /* SwapStartVC.swift in Sources */,
 				04CB911F2A90C9D900375354 /* ChainAkash.swift in Sources */,
@@ -2703,6 +3086,7 @@
 				E1E0DBCC2A9B1579006DA6BB /* MintscanHistory.swift in Sources */,
 				E122DB902A8A468D006D1E7B /* cosmos_distribution_v1beta1_tx.pb.swift in Sources */,
 				E15980A72A83AC9E0032892B /* PortfolioVC.swift in Sources */,
+				047843E82AC991B300462F1C /* injective_insurance_v1beta1_query.pb.swift in Sources */,
 				04FA74762AA04417001A2830 /* SwitchAccountCell.swift in Sources */,
 				E122DB602A8A468D006D1E7B /* cosmos_distribution_v1beta1_query.pb.swift in Sources */,
 				04E165BE28B62133000F12C0 /* MintscanToken.swift in Sources */,
@@ -2719,8 +3103,10 @@
 				E122DC062A8A468E006D1E7B /* cosmos_gov_v1_gov.pb.swift in Sources */,
 				E122DB702A8A468D006D1E7B /* cosmos_vesting_module_v1_module.pb.swift in Sources */,
 				E122DBC02A8A468E006D1E7B /* cosmos_app_v1alpha1_query.grpc.swift in Sources */,
+				047843782AC991B300462F1C /* injective_ocr_v1beta1_tx.pb.swift in Sources */,
 				04527DC02A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,
 				E122DB622A8A468D006D1E7B /* cosmos_distribution_v1beta1_distribution.pb.swift in Sources */,
+				047843742AC991B300462F1C /* injective_wasmx_v1_events.pb.swift in Sources */,
 				E11EAE162AAD879A003BFC7F /* SettingSwitchCell.swift in Sources */,
 				E131A3C42AACBE8A00943013 /* BeaconHistory.swift in Sources */,
 				E122DBD82A8A468E006D1E7B /* cosmos_store_streaming_abci_grpc.grpc.swift in Sources */,
@@ -2730,29 +3116,43 @@
 				18FFB41E281AF533004E65BB /* BinanceSegwitAddrCoder.swift in Sources */,
 				181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */,
 				E11069B92AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.pb.swift in Sources */,
+				047843962AC991B300462F1C /* injective_peggy_v1_msgs.pb.swift in Sources */,
 				E122DBFA2A8A468E006D1E7B /* cosmos_genutil_module_v1_module.pb.swift in Sources */,
 				E122DBAE2A8A468D006D1E7B /* cosmos_params_module_v1_module.pb.swift in Sources */,
 				E122DB2A2A8A468D006D1E7B /* cosmos_query_v1_query.pb.swift in Sources */,
 				E122DB542A8A468D006D1E7B /* cosmos_gov_module_v1_module.pb.swift in Sources */,
 				E122DC382A8A468E006D1E7B /* cosmos_slashing_v1beta1_slashing.pb.swift in Sources */,
 				E122DBC42A8A468E006D1E7B /* cosmos_app_runtime_v1alpha1_module.pb.swift in Sources */,
+				047843A22AC991B300462F1C /* injective_auction_v1beta1_tx.grpc.swift in Sources */,
 				E122DAFC2A8A468D006D1E7B /* cosmos_gov_v1beta1_tx.pb.swift in Sources */,
+				047843B22AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.grpc.swift in Sources */,
+				047843D82AC991B300462F1C /* injective_tokenfactory_v1beta1_authorityMetadata.pb.swift in Sources */,
 				18FFB436281AF533004E65BB /* Cw20TransferReq.swift in Sources */,
+				047843002AC9918700462F1C /* ethermint_evm_v1_events.pb.swift in Sources */,
+				047843B02AC991B300462F1C /* injective_tokenfactory_v1beta1_events.pb.swift in Sources */,
 				18FFB43C281AF533004E65BB /* BinanceMessage.swift in Sources */,
 				04A68C1E2ABDA3220041FA13 /* SelectSwapChainCell.swift in Sources */,
+				047843E22AC991B300462F1C /* injective_oracle_v1beta1_events.pb.swift in Sources */,
 				E162430628C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
 				E122DAF42A8A468D006D1E7B /* cosmos_consensus_v1_query.pb.swift in Sources */,
+				047843DE2AC991B300462F1C /* injective_exchange_v1beta1_authz.pb.swift in Sources */,
 				E11069B52AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				04A1A8032AC80AA50014EF92 /* TxAmountSheet.swift in Sources */,
 				047842DF2AC8963100462F1C /* CosmosUndelegate.swift in Sources */,
+				047843AA2AC991B300462F1C /* injective_auction_v1beta1_auction.pb.swift in Sources */,
 				E122DB882A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.pb.swift in Sources */,
 				E17638532AA7642800904DB4 /* ChainBinanceBeacon.swift in Sources */,
 				04CFF0302AC502BC00FB3187 /* ChainCrescent.swift in Sources */,
+				047843022AC9918700462F1C /* ethermint_evm_v1_evm.pb.swift in Sources */,
 				E122DBEA2A8A468E006D1E7B /* cosmos_gov_v1beta1_gov.pb.swift in Sources */,
 				E122DC2A2A8A468E006D1E7B /* cosmos_tx_config_v1_config.pb.swift in Sources */,
+				047843C62AC991B300462F1C /* injective_peggy_v1_types.pb.swift in Sources */,
 				E122DB142A8A468D006D1E7B /* cosmos_auth_v1beta1_genesis.pb.swift in Sources */,
 				04FA74512A9D97A0001A2830 /* PincodeInputVC.swift in Sources */,
+				047843862AC991B300462F1C /* injective_exchange_v1beta1_query.grpc.swift in Sources */,
 				04FA74532A9D97A0001A2830 /* PincodeDecimalVC.swift in Sources */,
+				047843D02AC991B300462F1C /* injective_insurance_v1beta1_tx.grpc.swift in Sources */,
+				047843B62AC991B300462F1C /* injective_oracle_v1beta1_oracle.pb.swift in Sources */,
 				E122DBD62A8A468E006D1E7B /* cosmos_upgrade_v1beta1_query.pb.swift in Sources */,
 				04FA74622A9F2BEB001A2830 /* TextInput.swift in Sources */,
 				E122DC3C2A8A468E006D1E7B /* cosmos_auth_v1beta1_query.grpc.swift in Sources */,
@@ -2762,29 +3162,42 @@
 				04D279FA2A69159E00AF046A /* BaseChain.swift in Sources */,
 				E122DBAC2A8A468D006D1E7B /* cosmos_orm_query_v1alpha1_query.pb.swift in Sources */,
 				E122DC1C2A8A468E006D1E7B /* cosmos_crypto_keyring_v1_record.pb.swift in Sources */,
+				047843062AC9918700462F1C /* ethermint_types_v1_dynamic_fee.pb.swift in Sources */,
+				047843CA2AC991B300462F1C /* injective_auction_v1beta1_query.grpc.swift in Sources */,
 				E11069B72AA4C57600EB02CA /* cosmwasm_wasm_v1_proposal.pb.swift in Sources */,
 				04D279DD2A66863C00AF046A /* BaseAccount.swift in Sources */,
 				18F4129A286062FA0007E3F2 /* MWords.swift in Sources */,
 				E1DF77822AB762010028BD51 /* CheckPrivateKeyCell.swift in Sources */,
 				E19E8B412A92299700001BF5 /* UIFont+Fonts.swift in Sources */,
 				E122DC3A2A8A468E006D1E7B /* cosmos_store_v1beta1_commit_info.pb.swift in Sources */,
+				047843A02AC991B300462F1C /* injective_wasmx_v1_tx.pb.swift in Sources */,
 				E122DB942A8A468D006D1E7B /* cosmos_store_snapshots_v1_snapshot.pb.swift in Sources */,
+				047843182AC9918700462F1C /* ethermint_feemarket_v1_feemarket.pb.swift in Sources */,
+				0478437C2AC991B300462F1C /* injective_wasmx_v1_query.grpc.swift in Sources */,
 				E122DBF82A8A468E006D1E7B /* cosmos_authz_v1beta1_query.pb.swift in Sources */,
 				18FFB4F8281AF533004E65BB /* Param.swift in Sources */,
+				0478430C2AC9918700462F1C /* ethermint_feemarket_v1_genesis.pb.swift in Sources */,
 				E122DBE22A8A468E006D1E7B /* cosmos_gov_v1_tx.grpc.swift in Sources */,
 				E122DC262A8A468E006D1E7B /* cosmos_crypto_hd_v1_hd.pb.swift in Sources */,
 				E122DB462A8A468D006D1E7B /* cosmos_gov_v1beta1_genesis.pb.swift in Sources */,
 				E122DB582A8A468D006D1E7B /* cosmos_base_node_v1beta1_query.pb.swift in Sources */,
+				0478438C2AC991B300462F1C /* injective_peggy_v1_msgs.grpc.swift in Sources */,
+				047843EE2AC991B300462F1C /* injective_types_v1beta1_tx_ext.pb.swift in Sources */,
 				E122DB742A8A468D006D1E7B /* cosmos_nft_v1beta1_nft.pb.swift in Sources */,
 				0492AE952A83CCA9001360F0 /* DappVC.swift in Sources */,
+				0478437A2AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */,
 				E15980AA2A83ADB60032892B /* MainTabVC.swift in Sources */,
 				E1D4EA592871584B005C1ECF /* FeeInfo.swift in Sources */,
 				043031EE28C2136F005FF935 /* MintscanPath.swift in Sources */,
 				E122DB222A8A468D006D1E7B /* cosmos_crypto_ed25519_keys.pb.swift in Sources */,
 				E122DC182A8A468E006D1E7B /* cosmos_orm_v1alpha1_schema.pb.swift in Sources */,
+				047843D22AC991B300462F1C /* injective_exchange_v1beta1_events.pb.swift in Sources */,
 				04FA746D2A9F8652001A2830 /* BaseSheet.swift in Sources */,
+				047843C82AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.pb.swift in Sources */,
 				044ECB212A95DE5D0042DB3C /* ChainKi.swift in Sources */,
+				047843C02AC991B300462F1C /* injective_oracle_v1beta1_tx.pb.swift in Sources */,
 				04FAD9FA2AB7221600143A3E /* BaseRedButton.swift in Sources */,
+				0478438E2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
 				E122DB402A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
 				04FAD9D92AB438C900143A3E /* DropDownView.swift in Sources */,
 				E122DC512A8A4712006D1E7B /* tendermint_crypto_proof.pb.swift in Sources */,
@@ -2793,6 +3206,7 @@
 				E122DC5F2A8A4712006D1E7B /* tendermint_types_validator.pb.swift in Sources */,
 				04FA74862AA0E2A9001A2830 /* CreateMnemonicVC.swift in Sources */,
 				E122DB242A8A468D006D1E7B /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,
+				0478431E2AC9918700462F1C /* ethermint_types_v1_indexer.pb.swift in Sources */,
 				E122DB962A8A468D006D1E7B /* cosmos_gov_v1_tx.pb.swift in Sources */,
 				044ECB1E2A95DE000042DB3C /* ChainInjective.swift in Sources */,
 				E15F2CFF2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift in Sources */,
@@ -2801,6 +3215,8 @@
 				E122DBE42A8A468E006D1E7B /* cosmos_upgrade_v1beta1_query.grpc.swift in Sources */,
 				047847C02962988300FD6A7E /* Cw20IcnsByNameReq.swift in Sources */,
 				E122DAE42A8A468D006D1E7B /* cosmos_nft_v1beta1_query.grpc.swift in Sources */,
+				047843802AC991B300462F1C /* injective_peggy_v1_events.pb.swift in Sources */,
+				047843BA2AC991B300462F1C /* injective_oracle_v1beta1_query.grpc.swift in Sources */,
 				04D279F12A67C98E00AF046A /* ChainEthereum.swift in Sources */,
 				E122DAE02A8A468D006D1E7B /* cosmos_slashing_module_v1_module.pb.swift in Sources */,
 				E122DB042A8A468D006D1E7B /* cosmos_mint_v1beta1_tx.grpc.swift in Sources */,
@@ -2815,7 +3231,10 @@
 				E122DB4C2A8A468D006D1E7B /* cosmos_vesting_v1beta1_tx.grpc.swift in Sources */,
 				E122DB682A8A468D006D1E7B /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */,
 				E122DB382A8A468D006D1E7B /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
+				047843EC2AC991B300462F1C /* injective_peggy_v1_batch.pb.swift in Sources */,
+				047843EA2AC991B300462F1C /* injective_oracle_v1beta1_proposal.pb.swift in Sources */,
 				15BF8483299D472A00B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */,
+				0478436A2AC991B300462F1C /* injective_exchange_v1beta1_genesis.pb.swift in Sources */,
 				047842D92AC87C1000462F1C /* CosmosTxResult.swift in Sources */,
 				E122DB522A8A468D006D1E7B /* cosmos_group_v1_query.grpc.swift in Sources */,
 				E1DF77702AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
@@ -2823,8 +3242,10 @@
 				18FFB57A281AF533004E65BB /* WKey.swift in Sources */,
 				E122DB442A8A468D006D1E7B /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				18FFB58B281AF533004E65BB /* BinanceInt+VarInt.swift in Sources */,
+				047843842AC991B300462F1C /* injective_auction_v1beta1_genesis.pb.swift in Sources */,
 				E122DBBC2A8A468E006D1E7B /* cosmos_group_v1_tx.pb.swift in Sources */,
 				E122DB1A2A8A468D006D1E7B /* cosmos_distribution_v1beta1_query.grpc.swift in Sources */,
+				0478436E2AC991B300462F1C /* injective_peggy_v1_genesis.pb.swift in Sources */,
 				04449FC72ABD9287004CCD7C /* UITextField+DecimalCheck.swift in Sources */,
 				04FAD9CD2AB1B29B00143A3E /* UIStoryboard+StoryBoard.swift in Sources */,
 				E122DC4D2A8A4712006D1E7B /* tendermint_p2p_types.pb.swift in Sources */,
@@ -2832,39 +3253,55 @@
 				E122DBD22A8A468E006D1E7B /* cosmos_circuit_v1_types.pb.swift in Sources */,
 				E122DBA42A8A468D006D1E7B /* cosmos_store_v1beta1_listening.pb.swift in Sources */,
 				E122DB982A8A468D006D1E7B /* cosmos_authz_module_v1_module.pb.swift in Sources */,
+				0478431C2AC9918700462F1C /* ethermint_feemarket_v1_tx.grpc.swift in Sources */,
 				E122DC5B2A8A4712006D1E7B /* tendermint_types_types.pb.swift in Sources */,
 				040733042AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */,
+				047843922AC991B300462F1C /* injective_oracle_v1beta1_query.pb.swift in Sources */,
 				18FFB591281AF533004E65BB /* AppDelegate.swift in Sources */,
 				E15980A02A83A9D70032892B /* SlideOutTransition.swift in Sources */,
 				18FFB59F281AF533004E65BB /* Signer.swift in Sources */,
+				047843722AC991B300462F1C /* injective_tokenfactory_v1beta1_query.grpc.swift in Sources */,
 				044ECB272A95DF1D0042DB3C /* ChainLum118.swift in Sources */,
 				E122DBCA2A8A468E006D1E7B /* cosmos_genutil_v1beta1_genesis.pb.swift in Sources */,
 				04FA747A2AA0446A001A2830 /* BaseMsgSheetCell.swift in Sources */,
 				04D279EE2A67C96F00AF046A /* ChainKava459.swift in Sources */,
 				04C6B9CB2AAC91F900B02A95 /* ChainOktKeccak256.swift in Sources */,
 				E122DC6D2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */,
+				047843C42AC991B300462F1C /* injective_wasmx_v1_tx.grpc.swift in Sources */,
+				0478439C2AC991B300462F1C /* injective_peggy_v1_pool.pb.swift in Sources */,
 				E1D4EA5C2871BCDE005C1ECF /* WDP.swift in Sources */,
 				044ECB332A95E2160042DB3C /* ChainStargaze.swift in Sources */,
 				1517346B2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
 				E122DC282A8A468E006D1E7B /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */,
+				0478438A2AC991B300462F1C /* injective_types_v1beta1_account.pb.swift in Sources */,
+				047843AE2AC991B300462F1C /* injective_ocr_v1beta1_tx.grpc.swift in Sources */,
 				E122DAF02A8A468D006D1E7B /* cosmos_staking_v1beta1_staking.pb.swift in Sources */,
+				047843BC2AC991B300462F1C /* injective_peggy_v1_query.pb.swift in Sources */,
 				18FFB5B6281AF533004E65BB /* BTCMnemonic.m in Sources */,
+				047843702AC991B300462F1C /* injective_insurance_v1beta1_query.grpc.swift in Sources */,
 				E122DBB82A8A468D006D1E7B /* cosmos_nft_v1beta1_tx.grpc.swift in Sources */,
 				E122DBE02A8A468E006D1E7B /* cosmos_evidence_v1beta1_tx.pb.swift in Sources */,
+				0478430A2AC9918700462F1C /* ethermint_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */,
 				18744704293094CB00849EE4 /* BundleExtension.swift in Sources */,
 				0492AE982A83CCB9001360F0 /* SettingsVC.swift in Sources */,
 				E122DC162A8A468E006D1E7B /* cosmos_orm_module_v1alpha1_module.pb.swift in Sources */,
 				E122DB9E2A8A468D006D1E7B /* cosmos_circuit_module_v1_module.pb.swift in Sources */,
 				E122DB342A8A468D006D1E7B /* cosmos_evidence_v1beta1_query.grpc.swift in Sources */,
+				047843942AC991B300462F1C /* injective_exchange_v1beta1_query.pb.swift in Sources */,
 				E122DBB02A8A468D006D1E7B /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */,
 				E122DC242A8A468E006D1E7B /* cosmos_circuit_v1_query.grpc.swift in Sources */,
+				047843042AC9918700462F1C /* ethermint_feemarket_v1_query.pb.swift in Sources */,
 				18FFB5C2281AF533004E65BB /* BinanceType.swift in Sources */,
 				04D279F72A67C9B700AF046A /* ChainEvmos.swift in Sources */,
+				047843882AC991B300462F1C /* injective_auction_v1beta1_tx.pb.swift in Sources */,
 				044ECB182A95C2E40042DB3C /* ChainAxelar.swift in Sources */,
 				044ECB2D2A95DFCE0042DB3C /* ChainPersistence750.swift in Sources */,
 				E122DBE62A8A468E006D1E7B /* cosmos_mint_v1beta1_query.pb.swift in Sources */,
 				E1DF77762AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */,
 				E122DB262A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
+				047843B82AC991B300462F1C /* injective_types_v1beta1_tx_response.pb.swift in Sources */,
+				0478430E2AC9918700462F1C /* ethermint_evm_v1_tx.pb.swift in Sources */,
+				047843D42AC991B300462F1C /* injective_tokenfactory_v1beta1_genesis.pb.swift in Sources */,
 				E1831BA52AB82FE60078A28B /* ManageChainCell.swift in Sources */,
 				04FAD9E32AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
 				E122DB562A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
@@ -2883,6 +3320,7 @@
 				E122DB362A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
 				E122DAF62A8A468D006D1E7B /* cosmos_orm_query_v1alpha1_query.grpc.swift in Sources */,
 				E122DC5D2A8A4712006D1E7B /* tendermint_abci_types.grpc.swift in Sources */,
+				047843AC2AC991B300462F1C /* injective_insurance_v1beta1_genesis.pb.swift in Sources */,
 				E122DB6E2A8A468D006D1E7B /* cosmos_evidence_v1beta1_evidence.pb.swift in Sources */,
 				E122DBE82A8A468E006D1E7B /* cosmos_authz_v1beta1_authz.pb.swift in Sources */,
 				04FA74572A9D97A0001A2830 /* PincodeVC.swift in Sources */,
@@ -2890,24 +3328,30 @@
 				E122DB6C2A8A468D006D1E7B /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */,
 				042A17512AB97AD900EF31C9 /* RedFixCardView.swift in Sources */,
 				E122DB0E2A8A468D006D1E7B /* cosmos_orm_v1_orm.pb.swift in Sources */,
+				047843102AC9918700462F1C /* ethermint_feemarket_v1_tx.pb.swift in Sources */,
 				18FFB5CF281AF533004E65BB /* Bech32.swift in Sources */,
 				047BA8D52A94777600D3F7DD /* CosmosCoinVC.swift in Sources */,
 				E122DBF62A8A468E006D1E7B /* cosmos_autocli_v1_options.pb.swift in Sources */,
 				E122DB0C2A8A468D006D1E7B /* cosmos_consensus_v1_tx.grpc.swift in Sources */,
+				047843CE2AC991B300462F1C /* injective_tokenfactory_v1beta1_params.pb.swift in Sources */,
 				E122DB4E2A8A468D006D1E7B /* cosmos_crypto_secp256k1_keys.pb.swift in Sources */,
 				04FA74802AA0CAA3001A2830 /* ImportPrivKeyVC.swift in Sources */,
+				047843BE2AC991B300462F1C /* injective_ocr_v1beta1_ocr.pb.swift in Sources */,
 				E122DB062A8A468D006D1E7B /* cosmos_base_reflection_v2alpha1_reflection.grpc.swift in Sources */,
 				E159809D2A83A9C50032892B /* SlideInTransition.swift in Sources */,
 				E122DAE22A8A468D006D1E7B /* cosmos_bank_v1beta1_authz.pb.swift in Sources */,
 				E122DC4B2A8A4712006D1E7B /* tendermint_version_types.pb.swift in Sources */,
 				18FFB5F2281AF533004E65BB /* SegwitAddrCoder.swift in Sources */,
+				047843162AC9918700462F1C /* ethermint_feemarket_v1_query.grpc.swift in Sources */,
 				047847CC2962C94800FD6A7E /* Cw20IcnsByAddressRes.swift in Sources */,
 				04A68C242ABDA3350041FA13 /* SelectSwapAssetCell.swift in Sources */,
 				18FFB623281AF533004E65BB /* BinanceHexlify.swift in Sources */,
 				E15980612A722CFF0032892B /* CardView.swift in Sources */,
 				049B692029D1736B0027B82D /* MintscanProposal.swift in Sources */,
+				0478436C2AC991B300462F1C /* injective_exchange_v1beta1_tx.grpc.swift in Sources */,
 				E122DBCC2A8A468E006D1E7B /* cosmos_gov_v1beta1_tx.grpc.swift in Sources */,
 				E122DAF22A8A468D006D1E7B /* cosmos_app_v1alpha1_config.pb.swift in Sources */,
+				0478437E2AC991B300462F1C /* injective_peggy_v1_query.grpc.swift in Sources */,
 				04CB91192A90C30A00375354 /* CosmosClass.swift in Sources */,
 				E122DB3C2A8A468D006D1E7B /* cosmos_staking_v1beta1_query.pb.swift in Sources */,
 				E122DB282A8A468D006D1E7B /* cosmos_params_v1beta1_params.pb.swift in Sources */,
@@ -2917,6 +3361,7 @@
 				E122DC0E2A8A468E006D1E7B /* cosmos_tx_v1beta1_service.grpc.swift in Sources */,
 				04D279F42A67C9A600AF046A /* ChainSui.swift in Sources */,
 				E122DC1E2A8A468E006D1E7B /* cosmos_feegrant_v1beta1_query.pb.swift in Sources */,
+				0478439E2AC991B300462F1C /* injective_wasmx_v1_proposal.pb.swift in Sources */,
 				18FFB664281AF533004E65BB /* StarnameAssets.swift in Sources */,
 				18FFB66B281AF533004E65BB /* Account.swift in Sources */,
 				E122DB6A2A8A468D006D1E7B /* cosmos_group_v1_query.pb.swift in Sources */,
@@ -2927,6 +3372,7 @@
 				04FAD9EF2AB71D3300143A3E /* RenameSheet.swift in Sources */,
 				E122DBB62A8A468D006D1E7B /* cosmos_tx_v1beta1_service.pb.swift in Sources */,
 				E15980812A83A8CE0032892B /* BaseNavi.swift in Sources */,
+				047843142AC9918700462F1C /* ethermint_types_v1_web3.pb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2944,10 +3390,12 @@
 				E122DB8B2A8A468D006D1E7B /* cosmos_crypto_multisig_keys.pb.swift in Sources */,
 				E122DAE72A8A468D006D1E7B /* cosmos_gov_v1_genesis.pb.swift in Sources */,
 				E122DBF12A8A468E006D1E7B /* cosmos_app_v1alpha1_query.pb.swift in Sources */,
+				047843A52AC991B300462F1C /* injective_peggy_v1_params.pb.swift in Sources */,
 				E122DBC72A8A468E006D1E7B /* cosmos_base_v1beta1_coin.pb.swift in Sources */,
 				042DE8402AC4C518003F3EA4 /* TxMemoSheet.swift in Sources */,
 				E122DB992A8A468D006D1E7B /* cosmos_bank_v1beta1_genesis.pb.swift in Sources */,
 				E122DBC52A8A468E006D1E7B /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
+				047843D52AC991B300462F1C /* injective_oracle_v1beta1_tx.grpc.swift in Sources */,
 				04FAD9D52AB204FF00143A3E /* FixCardView.swift in Sources */,
 				E11069BA2AA4C57600EB02CA /* cosmwasm_wasm_v1_types.pb.swift in Sources */,
 				044ECB1A2A95C33F0042DB3C /* ChainCanto.swift in Sources */,
@@ -2958,6 +3406,7 @@
 				E122DB1F2A8A468D006D1E7B /* cosmos_group_v1_events.pb.swift in Sources */,
 				04FA74582A9D97A0001A2830 /* PincodeAlphabetVC.swift in Sources */,
 				E122DA1D2A8A158C006D1E7B /* ChainKava60.swift in Sources */,
+				047843E32AC991B300462F1C /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift in Sources */,
 				E11069BE2AA4C57600EB02CA /* cosmwasm_wasm_v1_query.grpc.swift in Sources */,
 				E1945E52223124F000A1436F /* BaseData.swift in Sources */,
 				E1D6B8CE2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
@@ -2969,6 +3418,7 @@
 				E122DBF32A8A468E006D1E7B /* cosmos_params_v1beta1_query.pb.swift in Sources */,
 				E122DB0F2A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
 				047BA8D72A94778800D3F7DD /* CosmosHistoryVC.swift in Sources */,
+				047843CB2AC991B300462F1C /* injective_peggy_v1_ethereum_signer.pb.swift in Sources */,
 				E122DC072A8A468E006D1E7B /* cosmos_group_v1_genesis.pb.swift in Sources */,
 				E122DC4E2A8A4712006D1E7B /* tendermint_types_block.pb.swift in Sources */,
 				E122DBA72A8A468D006D1E7B /* cosmos_staking_v1beta1_tx.pb.swift in Sources */,
@@ -2978,8 +3428,10 @@
 				04FAD9F42AB71D5000143A3E /* DeleteAccountSheet.swift in Sources */,
 				E122DAF92A8A468D006D1E7B /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */,
 				E122DC312A8A468E006D1E7B /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
+				047843C12AC991B300462F1C /* injective_wasmx_v1_genesis.pb.swift in Sources */,
 				E122DBEF2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,
 				04C6B9C52AAC59EC00B02A95 /* QrAddressPopupVC.swift in Sources */,
+				047843972AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
 				E1D6B8D12AA499A400177D30 /* CosmosNftVC.swift in Sources */,
 				E11069C32AA4C5F400EB02CA /* Cosmwasm.swift in Sources */,
 				E122DC332A8A468E006D1E7B /* cosmos_nft_v1beta1_query.pb.swift in Sources */,
@@ -2988,12 +3440,17 @@
 				E11EAE0F2AAD8786003BFC7F /* SettingBaseCell.swift in Sources */,
 				E122DB752A8A468D006D1E7B /* cosmos_app_v1alpha1_module.pb.swift in Sources */,
 				044ECB2F2A95E1C90042DB3C /* ChainSommelier.swift in Sources */,
+				047843B32AC991B300462F1C /* injective_peggy_v1_proposal.pb.swift in Sources */,
+				047843192AC9918700462F1C /* ethermint_evm_v1_genesis.pb.swift in Sources */,
 				E122DB112A8A468D006D1E7B /* cosmos_gov_v1_query.grpc.swift in Sources */,
 				E122DC562A8A4712006D1E7B /* tendermint_types_params.pb.swift in Sources */,
+				047843A72AC991B300462F1C /* injective_exchange_v1beta1_tx.pb.swift in Sources */,
 				E122DB472A8A468D006D1E7B /* cosmos_upgrade_v1beta1_tx.pb.swift in Sources */,
 				046E9049268C7C2B002CFFE1 /* BinanceHexEncoding.swift in Sources */,
 				E1DF777B2AB75F830028BD51 /* CheckPrivateKeysVC.swift in Sources */,
+				047843D92AC991B300462F1C /* injective_insurance_v1beta1_insurance.pb.swift in Sources */,
 				E122DB1D2A8A468D006D1E7B /* cosmos_group_module_v1_module.pb.swift in Sources */,
+				047843112AC9918700462F1C /* ethermint_types_v1_account.pb.swift in Sources */,
 				E122DBDB2A8A468E006D1E7B /* cosmos_evidence_module_v1_module.pb.swift in Sources */,
 				E122DAFD2A8A468D006D1E7B /* cosmos_group_v1_tx.grpc.swift in Sources */,
 				044ECB352A95E2590042DB3C /* ChainUmee.swift in Sources */,
@@ -3021,23 +3478,31 @@
 				E1A82DE822448E940097CAEE /* WUtils.swift in Sources */,
 				E15F2D0A2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */,
 				E122DB312A8A468D006D1E7B /* cosmos_bank_v1beta1_tx.pb.swift in Sources */,
+				047843DF2AC991B300462F1C /* injective_wasmx_v1_query.pb.swift in Sources */,
 				E122DC192A8A468E006D1E7B /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
 				E122DB2B2A8A468D006D1E7B /* cosmos_autocli_v1_query.grpc.swift in Sources */,
 				E122DB012A8A468D006D1E7B /* cosmos_group_v1_types.pb.swift in Sources */,
 				E122DB4F2A8A468D006D1E7B /* cosmos_circuit_v1_tx.pb.swift in Sources */,
+				047843232AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */,
 				E16D9B1522489B030019B7BB /* IntroVC.swift in Sources */,
+				047843212AC9918700462F1C /* ethermint_feemarket_v1_events.pb.swift in Sources */,
 				E122DBCD2A8A468E006D1E7B /* cosmos_tx_v1beta1_tx.pb.swift in Sources */,
 				E122DB7D2A8A468D006D1E7B /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
 				E18A4EBB2A95149100D8BC05 /* ChainAssetMantle.swift in Sources */,
 				E122DC092A8A468E006D1E7B /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
+				0478431F2AC9918700462F1C /* ethermint_evm_v1_query.grpc.swift in Sources */,
 				E122DC2B2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_query.grpc.swift in Sources */,
 				E122DB412A8A468D006D1E7B /* cosmos_upgrade_module_v1_module.pb.swift in Sources */,
+				047843752AC991B300462F1C /* injective_exchange_v1beta1_exchange.pb.swift in Sources */,
 				04BA9BD12A978131003E2404 /* RefAddress.swift in Sources */,
 				E131A3C62AACD0E000943013 /* OktHistory.swift in Sources */,
 				E122DBDD2A8A468E006D1E7B /* cosmos_base_query_v1beta1_pagination.pb.swift in Sources */,
+				047843A32AC991B300462F1C /* injective_wasmx_v1_wasmx.pb.swift in Sources */,
 				E122DC2D2A8A468E006D1E7B /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
+				047843992AC991B300462F1C /* injective_tokenfactory_v1beta1_query.pb.swift in Sources */,
 				E122DBB32A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.grpc.swift in Sources */,
 				E122DBED2A8A468E006D1E7B /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,
+				047843E52AC991B300462F1C /* injective_oracle_v1beta1_genesis.pb.swift in Sources */,
 				E1D5A3E42AC33B8000453914 /* CosmosClaimRewards.swift in Sources */,
 				04527DB92A937CA2005F72D7 /* AssetCell.swift in Sources */,
 				1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
@@ -3057,8 +3522,11 @@
 				E122DB2F2A8A468D006D1E7B /* cosmos_distribution_module_v1_module.pb.swift in Sources */,
 				E122DAE92A8A468D006D1E7B /* cosmos_authz_v1beta1_tx.grpc.swift in Sources */,
 				04527DC52A938FC9005F72D7 /* CosmosClassVC.swift in Sources */,
+				047843072AC9918700462F1C /* ethermint_evm_v1_query.pb.swift in Sources */,
 				E122DB5B2A8A468D006D1E7B /* cosmos_store_internal_kv_v1beta1_kv.pb.swift in Sources */,
 				E122DB9F2A8A468D006D1E7B /* cosmos_authz_v1beta1_event.pb.swift in Sources */,
+				047843DB2AC991B300462F1C /* injective_ocr_v1beta1_genesis.pb.swift in Sources */,
+				047843812AC991B300462F1C /* injective_auction_v1beta1_query.pb.swift in Sources */,
 				E19E8B3D2A92290800001BF5 /* UIColor+Colors.swift in Sources */,
 				E122DB172A8A468D006D1E7B /* cosmos_autocli_v1_query.pb.swift in Sources */,
 				04CB911B2A90C41E00375354 /* EvmClass.swift in Sources */,
@@ -3069,6 +3537,7 @@
 				046E9043268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift in Sources */,
 				E11069BC2AA4C57600EB02CA /* cosmwasm_wasm_v1_genesis.pb.swift in Sources */,
 				047C10712AAC310600AFA159 /* QrAddressVC.swift in Sources */,
+				0478438F2AC991B300462F1C /* injective_ocr_v1beta1_query.grpc.swift in Sources */,
 				E122DBCF2A8A468E006D1E7B /* cosmos_upgrade_v1beta1_upgrade.pb.swift in Sources */,
 				04FAD9D02AB2032200143A3E /* SwapStartVC.swift in Sources */,
 				04CB911E2A90C9D900375354 /* ChainAkash.swift in Sources */,
@@ -3076,6 +3545,7 @@
 				E1E0DBCB2A9B1579006DA6BB /* MintscanHistory.swift in Sources */,
 				E122DB8F2A8A468D006D1E7B /* cosmos_distribution_v1beta1_tx.pb.swift in Sources */,
 				E15980A62A83AC9E0032892B /* PortfolioVC.swift in Sources */,
+				047843E72AC991B300462F1C /* injective_insurance_v1beta1_query.pb.swift in Sources */,
 				04FA74752AA04417001A2830 /* SwitchAccountCell.swift in Sources */,
 				E122DB5F2A8A468D006D1E7B /* cosmos_distribution_v1beta1_query.pb.swift in Sources */,
 				044ECB232A95DEB70042DB3C /* ChainLum880.swift in Sources */,
@@ -3092,8 +3562,10 @@
 				E122DB6F2A8A468D006D1E7B /* cosmos_vesting_module_v1_module.pb.swift in Sources */,
 				E122DBBF2A8A468E006D1E7B /* cosmos_app_v1alpha1_query.grpc.swift in Sources */,
 				04527DBF2A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,
+				047843772AC991B300462F1C /* injective_ocr_v1beta1_tx.pb.swift in Sources */,
 				E122DB612A8A468D006D1E7B /* cosmos_distribution_v1beta1_distribution.pb.swift in Sources */,
 				E11EAE152AAD879A003BFC7F /* SettingSwitchCell.swift in Sources */,
+				047843732AC991B300462F1C /* injective_wasmx_v1_events.pb.swift in Sources */,
 				E131A3C32AACBE8A00943013 /* BeaconHistory.swift in Sources */,
 				E122DBD72A8A468E006D1E7B /* cosmos_store_streaming_abci_grpc.grpc.swift in Sources */,
 				043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */,
@@ -3103,29 +3575,43 @@
 				E11069B82AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.pb.swift in Sources */,
 				E122DBF92A8A468E006D1E7B /* cosmos_genutil_module_v1_module.pb.swift in Sources */,
 				E122DBAD2A8A468D006D1E7B /* cosmos_params_module_v1_module.pb.swift in Sources */,
+				047843952AC991B300462F1C /* injective_peggy_v1_msgs.pb.swift in Sources */,
 				E122DB292A8A468D006D1E7B /* cosmos_query_v1_query.pb.swift in Sources */,
 				E122DB532A8A468D006D1E7B /* cosmos_gov_module_v1_module.pb.swift in Sources */,
 				E122DC372A8A468E006D1E7B /* cosmos_slashing_v1beta1_slashing.pb.swift in Sources */,
 				E122DBC32A8A468E006D1E7B /* cosmos_app_runtime_v1alpha1_module.pb.swift in Sources */,
 				E122DAFB2A8A468D006D1E7B /* cosmos_gov_v1beta1_tx.pb.swift in Sources */,
 				E1D4EA5B2871BCDE005C1ECF /* WDP.swift in Sources */,
+				047843A12AC991B300462F1C /* injective_auction_v1beta1_tx.grpc.swift in Sources */,
 				04172B7C29F6826200D6279C /* Cw20VaultDepositRes.swift in Sources */,
+				047843B12AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.grpc.swift in Sources */,
+				047843D72AC991B300462F1C /* injective_tokenfactory_v1beta1_authorityMetadata.pb.swift in Sources */,
 				E122DAF32A8A468D006D1E7B /* cosmos_consensus_v1_query.pb.swift in Sources */,
+				047842FF2AC9918700462F1C /* ethermint_evm_v1_events.pb.swift in Sources */,
+				047843AF2AC991B300462F1C /* injective_tokenfactory_v1beta1_events.pb.swift in Sources */,
 				04A68C1D2ABDA3220041FA13 /* SelectSwapChainCell.swift in Sources */,
 				E11069B42AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift in Sources */,
+				047843E12AC991B300462F1C /* injective_oracle_v1beta1_events.pb.swift in Sources */,
 				E122DB872A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.pb.swift in Sources */,
 				E122DBE92A8A468E006D1E7B /* cosmos_gov_v1beta1_gov.pb.swift in Sources */,
+				047843DD2AC991B300462F1C /* injective_exchange_v1beta1_authz.pb.swift in Sources */,
 				E17638522AA7642800904DB4 /* ChainBinanceBeacon.swift in Sources */,
 				04A1A8022AC80AA50014EF92 /* TxAmountSheet.swift in Sources */,
 				047842DE2AC8963100462F1C /* CosmosUndelegate.swift in Sources */,
+				047843A92AC991B300462F1C /* injective_auction_v1beta1_auction.pb.swift in Sources */,
 				E122DC292A8A468E006D1E7B /* cosmos_tx_config_v1_config.pb.swift in Sources */,
 				28E3E3802671BE8D00BA89C2 /* Param.swift in Sources */,
 				04CFF02F2AC502BC00FB3187 /* ChainCrescent.swift in Sources */,
+				047843012AC9918700462F1C /* ethermint_evm_v1_evm.pb.swift in Sources */,
 				E122DB132A8A468D006D1E7B /* cosmos_auth_v1beta1_genesis.pb.swift in Sources */,
 				04FA74502A9D97A0001A2830 /* PincodeInputVC.swift in Sources */,
+				047843C52AC991B300462F1C /* injective_peggy_v1_types.pb.swift in Sources */,
 				04FA74522A9D97A0001A2830 /* PincodeDecimalVC.swift in Sources */,
 				E122DBD52A8A468E006D1E7B /* cosmos_upgrade_v1beta1_query.pb.swift in Sources */,
+				047843852AC991B300462F1C /* injective_exchange_v1beta1_query.grpc.swift in Sources */,
 				04FA74612A9F2BEB001A2830 /* TextInput.swift in Sources */,
+				047843CF2AC991B300462F1C /* injective_insurance_v1beta1_tx.grpc.swift in Sources */,
+				047843B52AC991B300462F1C /* injective_oracle_v1beta1_oracle.pb.swift in Sources */,
 				E122DC3B2A8A468E006D1E7B /* cosmos_auth_v1beta1_query.grpc.swift in Sources */,
 				E122DB3D2A8A468D006D1E7B /* cosmos_mint_module_v1_module.pb.swift in Sources */,
 				E122DB632A8A468D006D1E7B /* cosmos_circuit_v1_query.pb.swift in Sources */,
@@ -3135,29 +3621,42 @@
 				E122DC1B2A8A468E006D1E7B /* cosmos_crypto_keyring_v1_record.pb.swift in Sources */,
 				E11069B62AA4C57600EB02CA /* cosmwasm_wasm_v1_proposal.pb.swift in Sources */,
 				04D279DC2A66863C00AF046A /* BaseAccount.swift in Sources */,
+				047843052AC9918700462F1C /* ethermint_types_v1_dynamic_fee.pb.swift in Sources */,
+				047843C92AC991B300462F1C /* injective_auction_v1beta1_query.grpc.swift in Sources */,
 				181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */,
 				E17748E62282D782003D8CD1 /* BTCProtocolSerialization.m in Sources */,
 				E1DF77812AB762010028BD51 /* CheckPrivateKeyCell.swift in Sources */,
 				E19E8B402A92299700001BF5 /* UIFont+Fonts.swift in Sources */,
 				E122DC392A8A468E006D1E7B /* cosmos_store_v1beta1_commit_info.pb.swift in Sources */,
 				E122DB932A8A468D006D1E7B /* cosmos_store_snapshots_v1_snapshot.pb.swift in Sources */,
+				0478439F2AC991B300462F1C /* injective_wasmx_v1_tx.pb.swift in Sources */,
 				E122DBF72A8A468E006D1E7B /* cosmos_authz_v1beta1_query.pb.swift in Sources */,
+				047843172AC9918700462F1C /* ethermint_feemarket_v1_feemarket.pb.swift in Sources */,
+				0478437B2AC991B300462F1C /* injective_wasmx_v1_query.grpc.swift in Sources */,
 				E122DBE12A8A468E006D1E7B /* cosmos_gov_v1_tx.grpc.swift in Sources */,
 				E122DC252A8A468E006D1E7B /* cosmos_crypto_hd_v1_hd.pb.swift in Sources */,
+				0478430B2AC9918700462F1C /* ethermint_feemarket_v1_genesis.pb.swift in Sources */,
 				E122DB452A8A468D006D1E7B /* cosmos_gov_v1beta1_genesis.pb.swift in Sources */,
 				E122DB572A8A468D006D1E7B /* cosmos_base_node_v1beta1_query.pb.swift in Sources */,
 				E122DB732A8A468D006D1E7B /* cosmos_nft_v1beta1_nft.pb.swift in Sources */,
 				0492AE942A83CCA9001360F0 /* DappVC.swift in Sources */,
+				0478438B2AC991B300462F1C /* injective_peggy_v1_msgs.grpc.swift in Sources */,
+				047843ED2AC991B300462F1C /* injective_types_v1beta1_tx_ext.pb.swift in Sources */,
 				E15980A92A83ADB60032892B /* MainTabVC.swift in Sources */,
 				047847BF2962988300FD6A7E /* Cw20IcnsByNameReq.swift in Sources */,
+				047843792AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */,
 				048DBCE2280EC5E90007275E /* MWords.swift in Sources */,
 				18744703293094CB00849EE4 /* BundleExtension.swift in Sources */,
 				E122DB212A8A468D006D1E7B /* cosmos_crypto_ed25519_keys.pb.swift in Sources */,
 				E122DC172A8A468E006D1E7B /* cosmos_orm_v1alpha1_schema.pb.swift in Sources */,
 				04FA746C2A9F8652001A2830 /* BaseSheet.swift in Sources */,
+				047843D12AC991B300462F1C /* injective_exchange_v1beta1_events.pb.swift in Sources */,
 				044ECB202A95DE5D0042DB3C /* ChainKi.swift in Sources */,
+				047843C72AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.pb.swift in Sources */,
 				04FAD9F92AB7221600143A3E /* BaseRedButton.swift in Sources */,
+				047843BF2AC991B300462F1C /* injective_oracle_v1beta1_tx.pb.swift in Sources */,
 				E122DB3F2A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
+				0478438D2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
 				04FAD9D82AB438C900143A3E /* DropDownView.swift in Sources */,
 				E122DC502A8A4712006D1E7B /* tendermint_crypto_proof.pb.swift in Sources */,
 				04FAD9DC2AB6D8DC00143A3E /* AccountListVC.swift in Sources */,
@@ -3166,6 +3665,7 @@
 				04FA74852AA0E2A9001A2830 /* CreateMnemonicVC.swift in Sources */,
 				E122DB232A8A468D006D1E7B /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,
 				E122DB952A8A468D006D1E7B /* cosmos_gov_v1_tx.pb.swift in Sources */,
+				0478431D2AC9918700462F1C /* ethermint_types_v1_indexer.pb.swift in Sources */,
 				044ECB1D2A95DE000042DB3C /* ChainInjective.swift in Sources */,
 				E15F2CFE2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift in Sources */,
 				151734672A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */,
@@ -3174,6 +3674,8 @@
 				E122DBE32A8A468E006D1E7B /* cosmos_upgrade_v1beta1_query.grpc.swift in Sources */,
 				046E9041268C4863002CFFE1 /* BinanceInt+VarInt.swift in Sources */,
 				E122DAE32A8A468D006D1E7B /* cosmos_nft_v1beta1_query.grpc.swift in Sources */,
+				0478437F2AC991B300462F1C /* injective_peggy_v1_events.pb.swift in Sources */,
+				047843B92AC991B300462F1C /* injective_oracle_v1beta1_query.grpc.swift in Sources */,
 				04D279F02A67C98E00AF046A /* ChainEthereum.swift in Sources */,
 				E122DADF2A8A468D006D1E7B /* cosmos_slashing_module_v1_module.pb.swift in Sources */,
 				E122DB032A8A468D006D1E7B /* cosmos_mint_v1beta1_tx.grpc.swift in Sources */,
@@ -3188,7 +3690,10 @@
 				E122DB4B2A8A468D006D1E7B /* cosmos_vesting_v1beta1_tx.grpc.swift in Sources */,
 				E122DB672A8A468D006D1E7B /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */,
 				E122DB372A8A468D006D1E7B /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
+				047843EB2AC991B300462F1C /* injective_peggy_v1_batch.pb.swift in Sources */,
+				047843E92AC991B300462F1C /* injective_oracle_v1beta1_proposal.pb.swift in Sources */,
 				15BF8482299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */,
+				047843692AC991B300462F1C /* injective_exchange_v1beta1_genesis.pb.swift in Sources */,
 				047842D82AC87C1000462F1C /* CosmosTxResult.swift in Sources */,
 				E122DB512A8A468D006D1E7B /* cosmos_group_v1_query.grpc.swift in Sources */,
 				E1DF776F2AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
@@ -3196,8 +3701,10 @@
 				E122DB432A8A468D006D1E7B /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				E1945E28222E7C0600A1436F /* AppDelegate.swift in Sources */,
 				E122DBBB2A8A468E006D1E7B /* cosmos_group_v1_tx.pb.swift in Sources */,
+				047843832AC991B300462F1C /* injective_auction_v1beta1_genesis.pb.swift in Sources */,
 				18D4C19528C704B8003F230A /* WalletConnectManager.swift in Sources */,
 				E122DB192A8A468D006D1E7B /* cosmos_distribution_v1beta1_query.grpc.swift in Sources */,
+				0478436D2AC991B300462F1C /* injective_peggy_v1_genesis.pb.swift in Sources */,
 				04449FC62ABD9287004CCD7C /* UITextField+DecimalCheck.swift in Sources */,
 				04FAD9CC2AB1B29B00143A3E /* UIStoryboard+StoryBoard.swift in Sources */,
 				E122DC4C2A8A4712006D1E7B /* tendermint_p2p_types.pb.swift in Sources */,
@@ -3205,39 +3712,55 @@
 				E122DBD12A8A468E006D1E7B /* cosmos_circuit_v1_types.pb.swift in Sources */,
 				E122DBA32A8A468D006D1E7B /* cosmos_store_v1beta1_listening.pb.swift in Sources */,
 				E122DB972A8A468D006D1E7B /* cosmos_authz_module_v1_module.pb.swift in Sources */,
+				0478431B2AC9918700462F1C /* ethermint_feemarket_v1_tx.grpc.swift in Sources */,
 				E122DC5A2A8A4712006D1E7B /* tendermint_types_types.pb.swift in Sources */,
 				040733032AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */,
+				047843912AC991B300462F1C /* injective_oracle_v1beta1_query.pb.swift in Sources */,
 				28CE973625872B7C006DEBEE /* Signer.swift in Sources */,
 				E159809F2A83A9D70032892B /* SlideOutTransition.swift in Sources */,
 				E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
+				047843712AC991B300462F1C /* injective_tokenfactory_v1beta1_query.grpc.swift in Sources */,
 				044ECB262A95DF1D0042DB3C /* ChainLum118.swift in Sources */,
 				E122DBC92A8A468E006D1E7B /* cosmos_genutil_v1beta1_genesis.pb.swift in Sources */,
 				04FA74792AA0446A001A2830 /* BaseMsgSheetCell.swift in Sources */,
 				04D279ED2A67C96F00AF046A /* ChainKava459.swift in Sources */,
 				04C6B9CA2AAC91F900B02A95 /* ChainOktKeccak256.swift in Sources */,
 				E122DC6C2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */,
+				047843C32AC991B300462F1C /* injective_wasmx_v1_tx.grpc.swift in Sources */,
+				0478439B2AC991B300462F1C /* injective_peggy_v1_pool.pb.swift in Sources */,
 				E17748E32282D6AD003D8CD1 /* BTCMnemonic.m in Sources */,
 				044ECB322A95E2160042DB3C /* ChainStargaze.swift in Sources */,
 				046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */,
 				E122DC272A8A468E006D1E7B /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */,
+				047843892AC991B300462F1C /* injective_types_v1beta1_account.pb.swift in Sources */,
+				047843AD2AC991B300462F1C /* injective_ocr_v1beta1_tx.grpc.swift in Sources */,
 				E122DAEF2A8A468D006D1E7B /* cosmos_staking_v1beta1_staking.pb.swift in Sources */,
+				047843BB2AC991B300462F1C /* injective_peggy_v1_query.pb.swift in Sources */,
 				28FC030C2652662B001C0319 /* MintscanPrice.swift in Sources */,
+				0478436F2AC991B300462F1C /* injective_insurance_v1beta1_query.grpc.swift in Sources */,
 				E122DBB72A8A468D006D1E7B /* cosmos_nft_v1beta1_tx.grpc.swift in Sources */,
 				E122DBDF2A8A468E006D1E7B /* cosmos_evidence_v1beta1_tx.pb.swift in Sources */,
+				047843092AC9918700462F1C /* ethermint_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */,
 				E16FACB12361ADFA00372052 /* Bytes.swift in Sources */,
 				0492AE972A83CCB9001360F0 /* SettingsVC.swift in Sources */,
 				E122DC152A8A468E006D1E7B /* cosmos_orm_module_v1alpha1_module.pb.swift in Sources */,
 				E122DB9D2A8A468D006D1E7B /* cosmos_circuit_module_v1_module.pb.swift in Sources */,
 				E122DB332A8A468D006D1E7B /* cosmos_evidence_v1beta1_query.grpc.swift in Sources */,
+				047843932AC991B300462F1C /* injective_exchange_v1beta1_query.pb.swift in Sources */,
 				E122DBAF2A8A468D006D1E7B /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */,
 				E122DC232A8A468E006D1E7B /* cosmos_circuit_v1_query.grpc.swift in Sources */,
+				047843032AC9918700462F1C /* ethermint_feemarket_v1_query.pb.swift in Sources */,
 				047847C82962C93F00FD6A7E /* Cw20IcnsByAddressReq.swift in Sources */,
 				04D279F62A67C9B700AF046A /* ChainEvmos.swift in Sources */,
+				047843872AC991B300462F1C /* injective_auction_v1beta1_tx.pb.swift in Sources */,
 				044ECB172A95C2E40042DB3C /* ChainAxelar.swift in Sources */,
 				044ECB2C2A95DFCE0042DB3C /* ChainPersistence750.swift in Sources */,
 				E122DBE52A8A468E006D1E7B /* cosmos_mint_v1beta1_query.pb.swift in Sources */,
 				E1DF77752AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */,
 				E122DB252A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
+				047843B72AC991B300462F1C /* injective_types_v1beta1_tx_response.pb.swift in Sources */,
+				0478430D2AC9918700462F1C /* ethermint_evm_v1_tx.pb.swift in Sources */,
+				047843D32AC991B300462F1C /* injective_tokenfactory_v1beta1_genesis.pb.swift in Sources */,
 				E1831BA42AB82FE60078A28B /* ManageChainCell.swift in Sources */,
 				04FAD9E22AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
 				E122DB552A8A468D006D1E7B /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
@@ -3256,6 +3779,7 @@
 				E122DAF52A8A468D006D1E7B /* cosmos_orm_query_v1alpha1_query.grpc.swift in Sources */,
 				E122DC5C2A8A4712006D1E7B /* tendermint_abci_types.grpc.swift in Sources */,
 				E122DB6D2A8A468D006D1E7B /* cosmos_evidence_v1beta1_evidence.pb.swift in Sources */,
+				047843AB2AC991B300462F1C /* injective_insurance_v1beta1_genesis.pb.swift in Sources */,
 				E122DBE72A8A468E006D1E7B /* cosmos_authz_v1beta1_authz.pb.swift in Sources */,
 				04FA74562A9D97A0001A2830 /* PincodeVC.swift in Sources */,
 				E1945E3E222E7E2900A1436F /* SegwitAddrCoder.swift in Sources */,
@@ -3263,24 +3787,30 @@
 				E122DB0D2A8A468D006D1E7B /* cosmos_orm_v1_orm.pb.swift in Sources */,
 				042A17502AB97AD900EF31C9 /* RedFixCardView.swift in Sources */,
 				E1D4EA582871584B005C1ECF /* FeeInfo.swift in Sources */,
+				0478430F2AC9918700462F1C /* ethermint_feemarket_v1_tx.pb.swift in Sources */,
 				047BA8D42A94777600D3F7DD /* CosmosCoinVC.swift in Sources */,
 				E122DBF52A8A468E006D1E7B /* cosmos_autocli_v1_options.pb.swift in Sources */,
 				E122DB0B2A8A468D006D1E7B /* cosmos_consensus_v1_tx.grpc.swift in Sources */,
 				E122DB4D2A8A468D006D1E7B /* cosmos_crypto_secp256k1_keys.pb.swift in Sources */,
+				047843CD2AC991B300462F1C /* injective_tokenfactory_v1beta1_params.pb.swift in Sources */,
 				047847CB2962C94800FD6A7E /* Cw20IcnsByAddressRes.swift in Sources */,
 				04FA747F2AA0CAA3001A2830 /* ImportPrivKeyVC.swift in Sources */,
+				047843BD2AC991B300462F1C /* injective_ocr_v1beta1_ocr.pb.swift in Sources */,
 				E122DB052A8A468D006D1E7B /* cosmos_base_reflection_v2alpha1_reflection.grpc.swift in Sources */,
 				E159809C2A83A9C50032892B /* SlideInTransition.swift in Sources */,
 				E122DAE12A8A468D006D1E7B /* cosmos_bank_v1beta1_authz.pb.swift in Sources */,
 				E122DC4A2A8A4712006D1E7B /* tendermint_version_types.pb.swift in Sources */,
 				046E903F268C45DC002CFFE1 /* BinanceHexlify.swift in Sources */,
+				047843152AC9918700462F1C /* ethermint_feemarket_v1_query.grpc.swift in Sources */,
 				049B691F29D1736B0027B82D /* MintscanProposal.swift in Sources */,
 				04A68C232ABDA3350041FA13 /* SelectSwapAssetCell.swift in Sources */,
 				04172B7A29F6819300D6279C /* Cw20VaultDepositReq.swift in Sources */,
 				E15980602A722CFF0032892B /* CardView.swift in Sources */,
 				047DCEE228855F4800253CAA /* MintscanMyVote.swift in Sources */,
+				0478436B2AC991B300462F1C /* injective_exchange_v1beta1_tx.grpc.swift in Sources */,
 				E122DBCB2A8A468E006D1E7B /* cosmos_gov_v1beta1_tx.grpc.swift in Sources */,
 				E122DAF12A8A468D006D1E7B /* cosmos_app_v1alpha1_config.pb.swift in Sources */,
+				0478437D2AC991B300462F1C /* injective_peggy_v1_query.grpc.swift in Sources */,
 				04CB91182A90C30A00375354 /* CosmosClass.swift in Sources */,
 				E122DB3B2A8A468D006D1E7B /* cosmos_staking_v1beta1_query.pb.swift in Sources */,
 				E122DB272A8A468D006D1E7B /* cosmos_params_v1beta1_params.pb.swift in Sources */,
@@ -3290,6 +3820,7 @@
 				E122DC0D2A8A468E006D1E7B /* cosmos_tx_v1beta1_service.grpc.swift in Sources */,
 				04D279F32A67C9A600AF046A /* ChainSui.swift in Sources */,
 				E122DC1D2A8A468E006D1E7B /* cosmos_feegrant_v1beta1_query.pb.swift in Sources */,
+				0478439D2AC991B300462F1C /* injective_wasmx_v1_proposal.pb.swift in Sources */,
 				28D765A2271585FA00730F47 /* StarnameAssets.swift in Sources */,
 				E1A82DD1224220910097CAEE /* Account.swift in Sources */,
 				E122DB692A8A468D006D1E7B /* cosmos_group_v1_query.pb.swift in Sources */,
@@ -3300,6 +3831,7 @@
 				04FAD9EE2AB71D3300143A3E /* RenameSheet.swift in Sources */,
 				E122DBB52A8A468D006D1E7B /* cosmos_tx_v1beta1_service.pb.swift in Sources */,
 				E15980802A83A8CE0032892B /* BaseNavi.swift in Sources */,
+				047843132AC9918700462F1C /* ethermint_types_v1_web3.pb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

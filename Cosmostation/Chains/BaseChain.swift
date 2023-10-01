@@ -81,6 +81,7 @@ struct AccountKeyType {
 enum PubKeyType: Int {
     case ETH_Keccak256 = 0
     case COSMOS_Secp256k1 = 1
-    case SUI_Ed25519 = 2
+    case INJECTIVE_Secp256k1 = 2
+    case SUI_Ed25519 = 3
     case unknown = 99
 }

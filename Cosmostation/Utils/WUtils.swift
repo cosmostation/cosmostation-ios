@@ -751,19 +751,18 @@ public class WUtils {
             let baseAccount = auth.baseVestingAccount.baseAccount
             return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
 
+        } else if (rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)),
+                  let auth = try? Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value) {
+            let baseAccount = auth.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+
+        } else if (rawAccount.typeURL.contains(Ethermint_Types_V1_EthAccount.protoMessageName)),
+                    let auth = try? Ethermint_Types_V1_EthAccount.init(serializedData: rawAccount.value) {
+            let baseAccount = auth.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+
         } 
-        
-//        else if (rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)),
-//                  let auth = try? Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value) {
-//            let baseAccount = auth.baseAccount
-//            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
-//
-//        } else if (rawAccount.typeURL.contains(Ethermint_Types_V1_EthAccount.protoMessageName)),
-//                    let auth = try? Ethermint_Types_V1_EthAccount.init(serializedData: rawAccount.value) {
-//            let baseAccount = auth.baseAccount
-//            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
-//
-//        } else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)),
+//        else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)),
 //                  let auth = try? Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value){
 //            let baseAccount = auth.baseVestingAccount.baseAccount
 //            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)

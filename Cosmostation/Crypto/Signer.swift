@@ -2122,15 +2122,37 @@ class Signer {
         let mode = Cosmos_Tx_V1beta1_ModeInfo.with {
             $0.single = single
         }
-        let pub = Cosmos_Crypto_Secp256k1_PubKey.with {
-            $0.key = baseChain.publicKey!
+
+        var pubKey: Google_Protobuf_Any?
+        if (baseChain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
+            let pub = Injective_Crypto_V1beta1_Ethsecp256k1_PubKey.with {
+                $0.key = baseChain.publicKey!
+            }
+            pubKey = Google_Protobuf_Any.with {
+                $0.typeURL = "/injective.crypto.v1beta1.ethsecp256k1.PubKey"
+                $0.value = try! pub.serializedData()
+            }
+            
+        } else if (baseChain.accountKeyType.pubkeyType == .ETH_Keccak256) {
+            let pub = Ethermint_Crypto_V1_Ethsecp256k1_PubKey.with {
+                $0.key = baseChain.publicKey!
+            }
+            pubKey = Google_Protobuf_Any.with {
+                $0.typeURL = "/ethermint.crypto.v1.ethsecp256k1.PubKey"
+                $0.value = try! pub.serializedData()
+            }
+        } else {
+            let pub = Cosmos_Crypto_Secp256k1_PubKey.with {
+                $0.key = baseChain.publicKey!
+            }
+            pubKey = Google_Protobuf_Any.with {
+                $0.typeURL = "/cosmos.crypto.secp256k1.PubKey"
+                $0.value = try! pub.serializedData()
+            }
         }
-        let pubKey = Google_Protobuf_Any.with {
-            $0.typeURL = "/cosmos.crypto.secp256k1.PubKey"
-            $0.value = try! pub.serializedData()
-        }
+        
         return Cosmos_Tx_V1beta1_SignerInfo.with {
-            $0.publicKey = pubKey
+            $0.publicKey = pubKey!
             $0.modeInfo = mode
             $0.sequence = WUtils.onParseAuthGrpc(auth).2!
         }
@@ -2176,63 +2198,17 @@ class Signer {
     }
     
     static func getByteSingleSignatures(_ toSignByte: Data, _ baseChain: BaseChain) -> Data {
-        let hash = toSignByte.sha256()
-        let signedData = try! ECDSA.compactsign(hash, privateKey: baseChain.privateKey!)
-        return signedData
+        var hash: Data?
+        if (baseChain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1 || 
+            baseChain.accountKeyType.pubkeyType == .ETH_Keccak256) {
+            hash = Crypto.sha3keccak256(data: toSignByte)
+        } else {
+            hash = toSignByte.sha256()
+        }
+        return try! ECDSA.compactsign(hash!, privateKey: baseChain.privateKey!)
     }
     
 //
-//    static func getGrpcSignerInfos(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64, _ publicKey: Data, _ chainType: ChainType?) -> Cosmos_Tx_V1beta1_SignerInfo {
-//        let single = Cosmos_Tx_V1beta1_ModeInfo.Single.with {
-//            $0.mode = Cosmos_Tx_Signing_V1beta1_SignMode.direct
-//        }
-//        let mode = Cosmos_Tx_V1beta1_ModeInfo.with {
-//            $0.single = single
-//        }
-//        var pubKey: Google_Protobuf_Any?
-//        if (chainType == .INJECTIVE_MAIN) {
-//            let pub = Injective_Crypto_V1beta1_Ethsecp256k1_PubKey.with {
-//                $0.key = publicKey
-//            }
-//            pubKey = Google_Protobuf_Any.with {
-//                $0.typeURL = "/injective.crypto.v1beta1.ethsecp256k1.PubKey"
-//                $0.value = try! pub.serializedData()
-//            }
-//            
-//        } else if (chainType == .EVMOS_MAIN || chainType == .CANTO_MAIN) {
-//            let pub = Ethermint_Crypto_V1_Ethsecp256k1_PubKey.with {
-//                $0.key = publicKey
-//            }
-//            pubKey = Google_Protobuf_Any.with {
-//                $0.typeURL = "/ethermint.crypto.v1.ethsecp256k1.PubKey"
-//                $0.value = try! pub.serializedData()
-//            }
-//        
-//        } else if (chainType == .XPLA_MAIN && pubkeyType == 1) {
-//            let pub = Ethermint_Crypto_V1_Ethsecp256k1_PubKey.with {
-//                $0.key = publicKey
-//            }
-//            pubKey = Google_Protobuf_Any.with {
-//                $0.typeURL = "/ethermint.crypto.v1.ethsecp256k1.PubKey"
-//                $0.value = try! pub.serializedData()
-//            }
-//            
-//        } else {
-//            let pub = Cosmos_Crypto_Secp256k1_PubKey.with {
-//                $0.key = publicKey
-//            }
-//            pubKey = Google_Protobuf_Any.with {
-//                $0.typeURL = "/cosmos.crypto.secp256k1.PubKey"
-//                $0.value = try! pub.serializedData()
-//            }
-//        }
-//        return Cosmos_Tx_V1beta1_SignerInfo.with {
-//            $0.publicKey = pubKey!
-//            $0.modeInfo = mode
-//            $0.sequence = WUtils.onParseAuthGrpc(auth).2!
-//        }
-//    }
-//    
 //    static func getGrpcAuthInfo(_ signerInfo: Cosmos_Tx_V1beta1_SignerInfo, _ fee: Fee) -> Cosmos_Tx_V1beta1_AuthInfo{
 //        let feeCoin = Cosmos_Base_V1beta1_Coin.with {
 //            $0.denom = fee.amount[0].denom

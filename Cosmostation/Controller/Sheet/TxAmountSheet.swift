@@ -98,7 +98,9 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
                 return
             }
             let inputAmount = userInput.multiplying(byPowerOf10: msAsset.decimals!)
-            if (inputAmount != NSDecimalNumber.zero && UInt64(availableCoin.amount)! >= inputAmount.uint64Value) {
+            let availableAmount = NSDecimalNumber(string: availableCoin.amount)
+            if (inputAmount != NSDecimalNumber.zero &&
+                (availableAmount.compare(inputAmount).rawValue >= 0)) {
                 confirmBtn.isEnabled = true
                 invalidMsgLabel.isHidden = true
             } else {
