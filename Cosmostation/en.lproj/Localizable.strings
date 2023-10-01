@@ -186,6 +186,7 @@
 "str_my_delegations" = "My Stakings";
 "str_my_unbondings" = "My Unstakings";
 "str_start_vote" = "Start Vote";
+"str_transfer_asset" = "Asset Send";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -330,6 +331,7 @@
 "msg_tap_box_to_copy" = "Tap the card to copy it.";
 "msg_tap_for_add_memo" = "Tap to add memo.";
 "msg_tap_for_add_amount" = "Tap to add amount.";
+"msg_tap_for_add_address" = "Tap to add address.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";

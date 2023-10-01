@@ -210,7 +210,7 @@ extension CosmosClass {
     }
     
     func fetchCw20Info() async throws -> MintscanTokens {
-//        print("fetchCw20Info ", BaseNetWork.msCw20InfoUrl(self))
+        print("fetchCw20Info ", BaseNetWork.msCw20InfoUrl(self))
         return try await AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get).serializingDecodable(MintscanTokens.self).value
     }
     

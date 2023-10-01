@@ -186,6 +186,7 @@
 "str_my_delegations" = "私のステーキング";
 "str_my_unbondings" = "私のステーキング解除";
 "str_start_vote" = "投票する";
+"str_transfer_asset" = "資産転送";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -330,6 +331,7 @@
 "msg_tap_box_to_copy" = "カードをタップしてコピーします。";
 "msg_tap_for_add_memo" = "タップしてメモを追加します。";
 "msg_tap_for_add_amount" = "タップして金額を追加します。";
+"msg_tap_for_add_address" = "タップしてアドレスを追加します。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";

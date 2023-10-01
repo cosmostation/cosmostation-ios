@@ -91,7 +91,7 @@ class CosmosStakingInfoVC: BaseVC {
         tableView.reloadData()
     }
     
-    @IBAction func onClickStake(_ sender: BaseButton) {
+    @IBAction func onDelegateTx(_ sender: BaseButton) {
         if (selectedChain.isTxFeePayable() == false) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -102,7 +102,7 @@ class CosmosStakingInfoVC: BaseVC {
         self.present(delegate, animated: true)
     }
     
-    func onClickUnStake(_ fromValAddress: String) {
+    func onUndelegateTx(_ fromValAddress: String) {
         if (selectedChain.isTxFeePayable() == false) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -114,7 +114,7 @@ class CosmosStakingInfoVC: BaseVC {
         self.present(undelegate, animated: true)
     }
     
-    func onClickReStake(_ fromValAddress: String) {
+    func onRedelegateTx(_ fromValAddress: String) {
         if (selectedChain.isTxFeePayable() == false) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -126,7 +126,7 @@ class CosmosStakingInfoVC: BaseVC {
         self.present(redelegate, animated: true)
     }
     
-    func onClickClaim(_ fromValAddress: String) {
+    func onClaimRewardTx(_ fromValAddress: String) {
         if (selectedChain.isTxFeePayable() == false) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -265,17 +265,17 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
         if (sheetType == .SelectDelegatedAction) {
             if (result.position == 0) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onClickUnStake(result.param!)
+                    self.onUndelegateTx(result.param!)
                 });
                 
             } else if (result.position == 1) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onClickReStake(result.param!)
+                    self.onRedelegateTx(result.param!)
                 });
                 
             } else if (result.position == 2) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onClickClaim(result.param!)
+                    self.onClaimRewardTx(result.param!)
                 });
                 
             } else if (result.position == 3) {

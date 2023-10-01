@@ -81,7 +81,15 @@ class CosmosClassVC: BaseVC {
         present(qrAddressVC, animated: true)
     }
     
-    func onClaimTx() {
+    func onSendTx() {
+        let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
+        transfer.selectedChain = selectedChain
+        transfer.toSendDenom = selectedChain.stakeDenom
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+    }
+    
+    func onClaimRewardTx() {
         if (selectedChain.cosmosRewards.count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return
@@ -172,7 +180,7 @@ class CosmosClassVC: BaseVC {
         }
         mainFab.addItem(title: "Claim Reward All", image: UIImage(named: "iconFabClaim")) { _ in
             if (self.selectedChain.cosmosValidators.count > 0) {
-                self.onClaimTx()
+                self.onClaimRewardTx()
             }
         }
         mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in
@@ -184,7 +192,7 @@ class CosmosClassVC: BaseVC {
             self.onShowAddress()
         }
         mainFab.addItem(title: "Send", image: UIImage(named: "iconFabSend")) { _ in
-            print("Send")
+            self.onSendTx()
         }
         
         view.addSubview(mainFab)

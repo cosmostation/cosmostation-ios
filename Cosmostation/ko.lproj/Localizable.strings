@@ -186,6 +186,7 @@
 "str_my_delegations" = "내 스테이킹";
 "str_my_unbondings" = "내 언스테이킹";
 "str_start_vote" = "투표 하기";
+"str_transfer_asset" = "자산 전송";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";
@@ -330,6 +331,7 @@
 "msg_tap_box_to_copy" = "복사하려면 카드를 탭하세요.";
 "msg_tap_for_add_memo" = "메모를 추가려면 탭하세요.";
 "msg_tap_for_add_amount" = "수량을 입력하시려면 탭하세요.";
+"msg_tap_for_add_address" = "주소를 입력하시려면 탭하세요.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";

@@ -35,6 +35,16 @@ public struct MintscanAsset: Codable {
     func assetImg() -> URL {
         return URL(string: ResourceBase + image!) ?? URL(string: "")!
     }
+    
+    func beforeChain(_ chainApiName: String) -> String? {
+        let chainPath = path?.components(separatedBy: ">")
+        if let matched = chainPath?.lastIndex(of: chainApiName) {
+            if (matched > 0) {
+                return chainPath?[matched - 1]
+            }
+        }
+        return nil
+    }
 }
 
 public struct MintscanAssetCounterParty: Codable {
