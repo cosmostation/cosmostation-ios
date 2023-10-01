@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "stafi_side.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

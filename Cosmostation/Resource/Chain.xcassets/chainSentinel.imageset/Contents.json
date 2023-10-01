@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "sentinelChain.pdf",
+      "filename" : "sentinel.png",
       "idiom" : "universal"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }
