@@ -221,7 +221,7 @@ class CosmosDelegate: BaseVC {
             txFee.gasLimit = UInt64(Double(toGas) * 1.5)
             if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
-                let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0)
+                let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
                 txFee.amount[0].amount = feeCoinAmount!.stringValue
             }
         }
