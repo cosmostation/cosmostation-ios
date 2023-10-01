@@ -294,6 +294,10 @@
 		047844062AC9A46800462F1C /* ChainCoreum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047844042AC9A46800462F1C /* ChainCoreum.swift */; };
 		047844082AC9A4CA00462F1C /* ChainCryptoorg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047844072AC9A4CA00462F1C /* ChainCryptoorg.swift */; };
 		047844092AC9A4CA00462F1C /* ChainCryptoorg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047844072AC9A4CA00462F1C /* ChainCryptoorg.swift */; };
+		0478440C2AC9AA1000462F1C /* CosmosTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478440A2AC9AA1000462F1C /* CosmosTransfer.swift */; };
+		0478440D2AC9AA1000462F1C /* CosmosTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478440A2AC9AA1000462F1C /* CosmosTransfer.swift */; };
+		0478440E2AC9AA1000462F1C /* CosmosTransfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0478440B2AC9AA1000462F1C /* CosmosTransfer.xib */; };
+		0478440F2AC9AA1000462F1C /* CosmosTransfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0478440B2AC9AA1000462F1C /* CosmosTransfer.xib */; };
 		047847BF2962988300FD6A7E /* Cw20IcnsByNameReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047847BE2962988300FD6A7E /* Cw20IcnsByNameReq.swift */; };
 		047847C02962988300FD6A7E /* Cw20IcnsByNameReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047847BE2962988300FD6A7E /* Cw20IcnsByNameReq.swift */; };
 		047847C529629AD100FD6A7E /* Cw20IcnsByNameRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047847C429629AD100FD6A7E /* Cw20IcnsByNameRes.swift */; };
@@ -1271,6 +1275,8 @@
 		047844012AC9A42E00462F1C /* ChainComdex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainComdex.swift; sourceTree = "<group>"; };
 		047844042AC9A46800462F1C /* ChainCoreum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCoreum.swift; sourceTree = "<group>"; };
 		047844072AC9A4CA00462F1C /* ChainCryptoorg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCryptoorg.swift; sourceTree = "<group>"; };
+		0478440A2AC9AA1000462F1C /* CosmosTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTransfer.swift; sourceTree = "<group>"; };
+		0478440B2AC9AA1000462F1C /* CosmosTransfer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosTransfer.xib; sourceTree = "<group>"; };
 		047847BE2962988300FD6A7E /* Cw20IcnsByNameReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IcnsByNameReq.swift; sourceTree = "<group>"; };
 		047847C429629AD100FD6A7E /* Cw20IcnsByNameRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IcnsByNameRes.swift; sourceTree = "<group>"; };
 		047847C72962C93F00FD6A7E /* Cw20IcnsByAddressReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IcnsByAddressReq.swift; sourceTree = "<group>"; };
@@ -2549,6 +2555,8 @@
 		E1D5A3E12AC33A5600453914 /* GenTx */ = {
 			isa = PBXGroup;
 			children = (
+				0478440A2AC9AA1000462F1C /* CosmosTransfer.swift */,
+				0478440B2AC9AA1000462F1C /* CosmosTransfer.xib */,
 				0409D2F32AC5DC6D0021E192 /* CosmosDelegate.swift */,
 				0409D2F42AC5DC6D0021E192 /* CosmosDelegate.xib */,
 				047842DC2AC8963100462F1C /* CosmosUndelegate.swift */,
@@ -2754,6 +2762,7 @@
 				E1DF77842AB762010028BD51 /* CheckPrivateKeyCell.xib in Resources */,
 				04CFF0362AC58D4400FB3187 /* SelectFeeCoinCell.xib in Resources */,
 				E1BBF74F2ABEBE4100D3082F /* basebg04.png in Resources */,
+				0478440F2AC9AA1000462F1C /* CosmosTransfer.xib in Resources */,
 				047842E12AC8963100462F1C /* CosmosUndelegate.xib in Resources */,
 				18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */,
 				E15F2D072ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
@@ -2815,6 +2824,7 @@
 				E1D538292A96644F00FB0403 /* loading.json in Resources */,
 				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				0409D2FD2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
+				0478440E2AC9AA1000462F1C /* CosmosTransfer.xib in Resources */,
 				04527DC12A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
 				E15F2CF82ABF0DCE00BAE105 /* basebg05.png in Resources */,
 				04FAD9DE2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
@@ -3241,6 +3251,7 @@
 				04FAD9FA2AB7221600143A3E /* BaseRedButton.swift in Sources */,
 				0478438E2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
 				E122DB402A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
+				0478440D2AC9AA1000462F1C /* CosmosTransfer.swift in Sources */,
 				04FAD9D92AB438C900143A3E /* DropDownView.swift in Sources */,
 				E122DC512A8A4712006D1E7B /* tendermint_crypto_proof.pb.swift in Sources */,
 				04FAD9DD2AB6D8DC00143A3E /* AccountListVC.swift in Sources */,
@@ -3709,6 +3720,7 @@
 				E122DB3F2A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
 				0478438D2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
 				04FAD9D82AB438C900143A3E /* DropDownView.swift in Sources */,
+				0478440C2AC9AA1000462F1C /* CosmosTransfer.swift in Sources */,
 				E122DC502A8A4712006D1E7B /* tendermint_crypto_proof.pb.swift in Sources */,
 				04FAD9DC2AB6D8DC00143A3E /* AccountListVC.swift in Sources */,
 				04117B7E2AA5860600637836 /* ChainOsmosis.swift in Sources */,

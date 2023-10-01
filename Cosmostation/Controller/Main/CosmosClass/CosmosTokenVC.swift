@@ -32,23 +32,28 @@ class CosmosTokenVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchCw20Done(_:)),
-                                               name: Notification.Name("FetchCw20Tokens"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
         
         parentVC = self.parent as? CosmosClassVC
 
         baseAccount = BaseData.instance.baseAccount
         selectedChain = baseAccount.toDisplayCosmosChains[parentVC.selectedPosition]
-        selectedChain.fetchAllCw20Balance()
+        
+        if (selectedChain.supportCw20) {
+            selectedChain.fetchAllCw20Balance()
+            
+        } else if (selectedChain.supportErc20) {
+            selectedChain.fetchAllErc20Balance()
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchCw20Tokens"),
-                                                  object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
     }
     
-    @objc func onFetchCw20Done(_ notification: NSNotification) {
+    @objc func onFetchTokenDone(_ notification: NSNotification) {
         mintscanTokens.removeAll()
         onUpdateView()
     }
@@ -61,8 +66,8 @@ class CosmosTokenVC: BaseVC {
         }
         
         mintscanTokens.sort {
-            let value0 = selectedChain.cw20Value($0.address!)
-            let value1 = selectedChain.cw20Value($1.address!)
+            let value0 = selectedChain.tokenValue($0.address!)
+            let value1 = selectedChain.tokenValue($1.address!)
             return value0.compare(value1).rawValue > 0 ? true : false
         }
 
@@ -104,7 +109,7 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-        cell.bindCw20Token(selectedChain, mintscanTokens[indexPath.row])
+        cell.bindToken(selectedChain, mintscanTokens[indexPath.row])
         return cell
     }
     

@@ -45,8 +45,8 @@ class AssetCell: UITableViewCell {
         }
     }
     
-    func bindCw20Token(_ baseChain: CosmosClass, _ token: MintscanToken) {
-        let value = baseChain.cw20Value(token.address!)
+    func bindToken(_ baseChain: CosmosClass, _ token: MintscanToken) {
+        let value = baseChain.tokenValue(token.address!)
         WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
         WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
         WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)

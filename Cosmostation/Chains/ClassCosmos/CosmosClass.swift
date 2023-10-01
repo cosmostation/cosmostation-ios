@@ -12,6 +12,7 @@ import NIO
 import SwiftProtobuf
 import Alamofire
 import SwiftyJSON
+import web3swift
 
 class CosmosClass: BaseChain  {
     
@@ -22,6 +23,9 @@ class CosmosClass: BaseChain  {
     
     var grpcHost = ""
     var grpcPort = 443
+    
+    lazy var rpcURL = ""
+    
     lazy var rewardAddress = ""
     lazy var cosmosAuth = Google_Protobuf_Any.init()
     lazy var cosmosValidators = Array<Cosmos_Staking_V1beta1_Validator>()
@@ -56,6 +60,11 @@ class CosmosClass: BaseChain  {
             if (supportCw20) {
                 if let cw20s = try? await self.fetchCw20Info() {
                     mintscanTokens = cw20s.assets!
+                }
+            }
+            if (supportErc20) {
+                if let erc20s = try? await self.fetchErc20Info() {
+                    mintscanTokens = erc20s.assets!
                 }
             }
         }
@@ -205,6 +214,11 @@ extension CosmosClass {
         return try await AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get).serializingDecodable(MintscanTokens.self).value
     }
     
+    func fetchErc20Info() async throws -> MintscanTokens {
+        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
+        return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable(MintscanTokens.self).value
+    }
+    
 }
 
 
@@ -327,7 +341,7 @@ extension CosmosClass {
         group.notify(queue: .main) {
             try? channel.close()
             self.setAllValue()
-            NotificationCenter.default.post(name: Notification.Name("FetchCw20Tokens"), object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
         }
     }
 
@@ -340,6 +354,41 @@ extension CosmosClass {
         if let response = try? Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.wait() {
             let cw20balance = try? JSONDecoder().decode(Cw20BalaceRes.self, from: response.data)
             tokenInfo.setAmount(cw20balance?.balance ?? "0")
+            group.leave()
+        } else {
+            group.leave()
+        }
+    }
+    
+    func fetchAllErc20Balance() {
+        let group = DispatchGroup()
+        guard let url = URL(string: rpcURL) else { return }
+        guard let web3 = try? Web3.new(url) else { return }
+        var accountEthAddr: EthereumAddress!
+        if (address!.starts(with: "0x")) {
+            accountEthAddr = EthereumAddress.init(address!)
+        } else {
+            accountEthAddr = EthereumAddress.init(KeyFac.convertBech32ToEvm(address!))
+        }
+        
+        mintscanTokens.forEach { token in
+            DispatchQueue.global().async {
+                self.fetchErc20Balance(group, web3, accountEthAddr, token)
+            }
+        }
+        
+        group.notify(queue: .main) {
+            self.setAllValue()
+            NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
+        }
+    }
+    
+    func fetchErc20Balance(_ group: DispatchGroup, _ web3: web3?, _ accountEthAddr: EthereumAddress, _ tokenInfo: MintscanToken) {
+        group.enter()
+        let contractAddress = EthereumAddress.init(tokenInfo.address!)
+        let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
+        if let erc20Balance = try? erc20token.getBalance(account: accountEthAddr) {
+            tokenInfo.setAmount(String(erc20Balance))
             group.leave()
         } else {
             group.leave()
@@ -516,7 +565,7 @@ extension CosmosClass {
         }
     }
     
-    func cw20Value(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
+    func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if let tokenInfo =  mintscanTokens.filter({ $0.address == address }).first {
             let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
             return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: getDivideHandler(6))
@@ -524,7 +573,7 @@ extension CosmosClass {
         return NSDecimalNumber.zero
     }
     
-    func allCw20Value(_ usd: Bool? = false) -> NSDecimalNumber {
+    func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         mintscanTokens.forEach { tokenInfo in
             let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
@@ -545,8 +594,8 @@ extension CosmosClass {
             
         } else {
             result = balanceValueSum().adding(vestingValueSum()).adding(delegationValueSum()).adding(unbondingValueSum()).adding(rewardValueSum())
-            if (supportCw20) {
-                result = result.adding(allCw20Value())
+            if (supportCw20 || supportErc20) {
+                result = result.adding(allTokenValue())
             }
             self.allValue = result
         }

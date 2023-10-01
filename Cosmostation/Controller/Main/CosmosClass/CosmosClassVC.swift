@@ -56,17 +56,17 @@ class CosmosClassVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchCw20Done(_:)), name: Notification.Name("FetchCw20Tokens"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchStakeDone(_:)), name: Notification.Name("FetchStakeData"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchCw20Tokens"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchStakeData"), object: nil)
     }
     
-    @objc func onFetchCw20Done(_ notification: NSNotification) {
+    @objc func onFetchTokenDone(_ notification: NSNotification) {
         totalValue = selectedChain.allValue()
     }
     
