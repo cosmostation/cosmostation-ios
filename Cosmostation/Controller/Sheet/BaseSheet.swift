@@ -32,6 +32,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var cosmosChainList = Array<CosmosClass>()
     var nameservices = Array<NameService>()
     
+    var sendAddress: String!
+    var refAddress = Array<RefAddress>()
+    var addressBook = Array<String>()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -382,5 +386,6 @@ public enum SheetType: Int {
     case SelectValidator = 14
     case SelectUnStakeValidator = 15
     case SelectRecipientChain = 16
-    case SelectNameServiceAddress = 17
+    case SelectRecipientAddress = 17
+    case SelectNameServiceAddress = 18
 }

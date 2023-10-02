@@ -14,7 +14,7 @@ class ChainComdex: CosmosClass  {
         super.init()
         
         name = "Comdex"
-        id = "comdex118"
+        tag = "comdex118"
         logo1 = "chainComdex"
         logo2 = "chainComdex2"
         apiName = "comdex"

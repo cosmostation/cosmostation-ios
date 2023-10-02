@@ -14,7 +14,7 @@ class ChainEvmos: CosmosClass  {
         super.init()
         
         name = "Evmos"
-        id = "evmos60"
+        tag = "evmos60"
         logo1 = "chainEvmos"
         logo2 = "chainEvmos2"
         apiName = "evmos"

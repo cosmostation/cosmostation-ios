@@ -52,7 +52,7 @@ class SelectChainCell: UITableViewCell {
         }
         
         WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
-        selectSwitch.isOn = selectedList.contains(chain.id)
+        selectSwitch.isOn = selectedList.contains(chain.tag)
         selectSwitch.isHidden = chain is ChainCosmos
     }
 }

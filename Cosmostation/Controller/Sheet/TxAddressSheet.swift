@@ -70,7 +70,8 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
     }
     
     func onScanned(_ result: String) {
-        addressTextField.text = result
+        let address = result.components(separatedBy: "(MEMO)")[0]
+        addressTextField.text = address.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
@@ -124,8 +125,7 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
                 if let archway = try await checkArchwayname(userInput!) {
                     if let result = try? JSONDecoder().decode(JSON.self, from: archway.data) {
                         if (result["address"].stringValue.starts(with: prefix)) {
-                            nameservices.append(NameService.init("archway", userInput!, result.stringValue))
-                            
+                            nameservices.append(NameService.init("archway", userInput!, result["address"].stringValue))
                         }
                     }
                 }
@@ -134,7 +134,7 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
                     self.view.isUserInteractionEnabled = true
                     self.loadingView.isHidden = true
                     if (self.nameservices.count == 0) {
-                        self.onShowToast(NSLocalizedString("error_invalide_nameservice", comment: ""))
+                        self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                         
                     } else {
                         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
@@ -142,7 +142,6 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
                         baseSheet.sheetDelegate = self
                         baseSheet.sheetType = .SelectNameServiceAddress
                         self.onStartSheet(baseSheet)
-                        
                     }
                 }
             }

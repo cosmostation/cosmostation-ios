@@ -14,7 +14,7 @@ class ChainAxelar: CosmosClass  {
         super.init()
         
         name = "Axelar"
-        id = "axelar118"
+        tag = "axelar118"
         logo1 = "chainAxelar"
         logo2 = "chainAxelar2"
         apiName = "axelar"

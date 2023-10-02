@@ -403,13 +403,13 @@ extension BaseData {
         return selectAccounts().first
     }
     
-    func setDisplayCosmosChainNames(_ baseAccount: BaseAccount, _ chainNames: [String])  {
+    func setDisplayCosmosChainTags(_ baseAccount: BaseAccount, _ chainNames: [String])  {
         if let encoded = try? JSONEncoder().encode(chainNames) {
             UserDefaults.standard.setValue(encoded, forKey: String(baseAccount.id) + " " + KEY_DISPLAY_COSMOS_CHAINS)
         }
     }
     
-    func getDisplayCosmosChainNames(_ baseAccount: BaseAccount) -> [String] {
+    func getDisplayCosmosChainTags(_ baseAccount: BaseAccount) -> [String] {
         if let savedData = UserDefaults.standard.object(forKey: String(baseAccount.id) + " " + KEY_DISPLAY_COSMOS_CHAINS) as? Data {
             if let result = try? JSONDecoder().decode([String].self, from: savedData) {
                 return result

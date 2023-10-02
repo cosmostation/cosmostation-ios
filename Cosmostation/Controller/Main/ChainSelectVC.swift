@@ -18,7 +18,7 @@ class ChainSelectVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var confirmBtn: BaseButton!
     
-    var toDisplayCosmoses = [String]()
+    var toDisplayCosmosTags = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class ChainSelectVC: BaseVC {
         tableView.sectionHeaderTopPadding = 0.0
         
         baseAccount = BaseData.instance.baseAccount
-        toDisplayCosmoses = BaseData.instance.getDisplayCosmosChainNames(baseAccount)
+        toDisplayCosmosTags = BaseData.instance.getDisplayCosmosChainTags(baseAccount)
         loadingCntLabel.text = "0 / " + String(baseAccount.allCosmosClassChains.count)
         baseAccount.initAllData()
     }
@@ -70,7 +70,7 @@ class ChainSelectVC: BaseVC {
         
         if (baseAccount.allCosmosClassChains.filter { $0.fetched == false }.count == 0) {
             baseAccount.allCosmosClassChains.forEach { chain in
-                let address = RefAddress(baseAccount.id, chain.id, chain.address!, chain.allStakingDenomAmount().stringValue, chain.allValue(true).stringValue)
+                let address = RefAddress(baseAccount.id, chain.tag, chain.address!, chain.allStakingDenomAmount().stringValue, chain.allValue(true).stringValue)
                 BaseData.instance.updateRefAddresses(address)
             }
             
@@ -91,18 +91,18 @@ class ChainSelectVC: BaseVC {
     }
 
     @IBAction func onClickConfirm(_ sender: BaseButton) {
-        var toSaveCosmos = [String]()
+        var toSaveCosmosTag = [String]()
         baseAccount.allCosmosClassChains.sort {
-            if ($0.id == "cosmos118") { return true }
-            if ($1.id == "cosmos118") { return false }
+            if ($0.tag == "cosmos118") { return true }
+            if ($1.tag == "cosmos118") { return false }
             return $0.allValue().compare($1.allValue()).rawValue > 0 ? true : false
         }
         baseAccount.allCosmosClassChains.forEach { chain in
-            if (toDisplayCosmoses.contains(chain.id)) {
-                toSaveCosmos.append(chain.id)
+            if (toDisplayCosmosTags.contains(chain.tag)) {
+                toSaveCosmosTag.append(chain.tag)
             }
         }
-        BaseData.instance.setDisplayCosmosChainNames(baseAccount, toSaveCosmos)
+        BaseData.instance.setDisplayCosmosChainTags(baseAccount, toSaveCosmosTag)
         let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = mainTabVC
@@ -136,14 +136,14 @@ extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as! SelectChainCell
         let toBindChain = baseAccount.allCosmosClassChains[indexPath.row]
-        cell.bindCosmosClassChain(baseAccount, toBindChain, toDisplayCosmoses)
+        cell.bindCosmosClassChain(baseAccount, toBindChain, toDisplayCosmosTags)
         cell.actionToggle = { result in
             if (result) {
-                if (!self.toDisplayCosmoses.contains(toBindChain.id)) {
-                    self.toDisplayCosmoses.append(toBindChain.id)
+                if (!self.toDisplayCosmosTags.contains(toBindChain.tag)) {
+                    self.toDisplayCosmosTags.append(toBindChain.tag)
                 }
             } else {
-                self.toDisplayCosmoses.removeAll { $0 == toBindChain.id }
+                self.toDisplayCosmosTags.removeAll { $0 == toBindChain.tag }
             }
         }
         return cell

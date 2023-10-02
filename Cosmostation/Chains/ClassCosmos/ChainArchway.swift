@@ -14,7 +14,7 @@ class ChainArchway: CosmosClass  {
         super.init()
         
         name = "Archway"
-        id = "archway118"
+        tag = "archway118"
         logo1 = "chainArchway"
         logo2 = "chainArchway2"
         apiName = "archway"

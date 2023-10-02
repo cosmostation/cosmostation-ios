@@ -56,9 +56,9 @@ class PortfolioVC: BaseVC {
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
-        let id = notification.object as! String
+        let tag = notification.object as! String
         for i in 0..<baseAccount.toDisplayCosmosChains.count {
-            if (baseAccount.toDisplayCosmosChains[i].id == id) {
+            if (baseAccount.toDisplayCosmosChains[i].tag == tag) {
                 DispatchQueue.main.async {
                     self.tableView.beginUpdates()
                     self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)

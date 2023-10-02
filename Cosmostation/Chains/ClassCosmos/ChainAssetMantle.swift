@@ -14,7 +14,7 @@ class ChainAssetMantle: CosmosClass  {
         super.init()
         
         name = "AssetMantle"
-        id = "assetmantle118"
+        tag = "assetmantle118"
         logo1 = "chainAssetmantle"
         logo2 = "chainAssetmantle2"
         apiName = "asset-mantle"

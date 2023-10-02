@@ -15,7 +15,7 @@ class ChainOktKeccak256: CosmosClass  {
         
         isDefault = false
         name = "OKT"
-        id = "oktKeccak256"
+        tag = "oktKeccak256"
         logo1 = "chainOkt"
         logo2 = "chainOkt2"
         apiName = ""

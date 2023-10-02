@@ -11,7 +11,7 @@ import Foundation
 
 class BaseChain {
     var name: String!
-    var id: String!
+    var tag: String!
     var chainId: String!
     var logo1: String!
     var logo2: String!

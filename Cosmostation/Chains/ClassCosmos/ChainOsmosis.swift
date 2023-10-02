@@ -14,7 +14,7 @@ class ChainOsmosis: CosmosClass  {
         super.init()
         
         name = "Osmosis"
-        id = "osmosis118"
+        tag = "osmosis118"
         logo1 = "chainOsmosis"
         logo2 = "chainOsmosis2"
         apiName = "osmosis"

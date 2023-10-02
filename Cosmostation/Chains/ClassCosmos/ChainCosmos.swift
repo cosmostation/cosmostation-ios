@@ -14,7 +14,7 @@ class ChainCosmos: CosmosClass  {
         super.init()
         
         name = "Cosmos"
-        id = "cosmos118"
+        tag = "cosmos118"
         logo1 = "chainCosmos"
         logo2 = "chainCosmos2"
         apiName = "cosmos"

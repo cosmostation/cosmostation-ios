@@ -14,7 +14,7 @@ class ChainPersistence118: CosmosClass  {
         super.init()
         
         name = "Persistence"
-        id = "persistence118"
+        tag = "persistence118"
         logo1 = "chainPersistence"
         logo2 = "chainPersistence2"
         apiName = "persistence"

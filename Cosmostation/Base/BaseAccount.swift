@@ -73,9 +73,9 @@ public class BaseAccount {
     
     func initDisplayData() {
         toDisplayCosmosChains.removeAll()
-        let toDisplayNames = BaseData.instance.getDisplayCosmosChainNames(self)
-        toDisplayNames.forEach { chainId in
-            if let toDisplayChain = ALLCOSMOSCLASS().filter({ $0.id == chainId }).first {
+        let toDisplayChainTags = BaseData.instance.getDisplayCosmosChainTags(self)
+        toDisplayChainTags.forEach { chainTag in
+            if let toDisplayChain = ALLCOSMOSCLASS().filter({ $0.tag == chainTag }).first {
                 toDisplayCosmosChains.append(toDisplayChain)
             }
         }
@@ -114,15 +114,15 @@ public class BaseAccount {
     
     func sortCosmosChain() {
         allCosmosClassChains.sort {
-            if ($0.id == "cosmos118") { return true }
-            if ($1.id == "cosmos118") { return false }
+            if ($0.tag == "cosmos118") { return true }
+            if ($1.tag == "cosmos118") { return false }
             return $0.allValue().compare($1.allValue()).rawValue > 0 ? true : false
         }
-        let toDisplayNames = BaseData.instance.getDisplayCosmosChainNames(self)
+        let toDisplayChainTags = BaseData.instance.getDisplayCosmosChainTags(self)
         allCosmosClassChains.sort {
-            if ($0.id == "cosmos118") { return true }
-            if ($1.id == "cosmos118") { return false }
-            if (toDisplayNames.contains($0.id) == true && toDisplayNames.contains($1.id) == false) { return true }
+            if ($0.tag == "cosmos118") { return true }
+            if ($1.tag == "cosmos118") { return false }
+            if (toDisplayChainTags.contains($0.tag) == true && toDisplayChainTags.contains($1.tag) == false) { return true }
             return false
         }
     }

@@ -34,15 +34,15 @@
                     <color key="textColor" name="_color01"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3rT-hV-Iq2" customClass="MDCOutlinedTextField">
-                    <rect key="frame" x="20" y="147.33333333333334" width="353" height="54"/>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="3rT-hV-Iq2" customClass="MDCOutlinedTextField">
+                    <rect key="frame" x="10" y="147.33333333333334" width="373" height="54"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_color01"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="GHg-OD-sz2"/>
                     </constraints>
                     <color key="textColor" name="_color01"/>
-                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                 </textField>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HJ2-Tk-n1u">
@@ -116,8 +116,8 @@
                 <constraint firstItem="3rT-hV-Iq2" firstAttribute="top" secondItem="jOD-2l-DW3" secondAttribute="bottom" constant="32" id="Koo-nv-ek3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HJ2-Tk-n1u" secondAttribute="trailing" constant="20" id="OtH-s8-0Vk"/>
                 <constraint firstAttribute="bottom" secondItem="M0A-fG-KOH" secondAttribute="bottom" constant="38" id="gtb-SJ-MS1"/>
-                <constraint firstItem="3rT-hV-Iq2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="kpt-Z1-ruE"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3rT-hV-Iq2" secondAttribute="trailing" constant="20" id="laf-HP-2L0"/>
+                <constraint firstItem="3rT-hV-Iq2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="kpt-Z1-ruE"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3rT-hV-Iq2" secondAttribute="trailing" constant="10" id="laf-HP-2L0"/>
                 <constraint firstItem="M6l-wv-RsO" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="mWp-3a-IFf"/>
                 <constraint firstItem="HJ2-Tk-n1u" firstAttribute="top" secondItem="3rT-hV-Iq2" secondAttribute="bottom" constant="16" id="zmA-zG-9ni"/>
             </constraints>

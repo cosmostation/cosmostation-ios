@@ -14,7 +14,7 @@ class ChainCoreum: CosmosClass  {
         super.init()
         
         name = "Coreum"
-        id = "coreum990"
+        tag = "coreum990"
         logo1 = "chainCoreum"
         logo2 = "chainCoreum2"
         apiName = "coreum"

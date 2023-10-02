@@ -14,7 +14,7 @@ class ChainCryptoorg: CosmosClass  {
         super.init()
         
         name = "Crypto.org"
-        id = "crypto-org394"
+        tag = "crypto-org394"
         logo1 = "chainCryptoorg"
         logo2 = "chainCryptoorg2"
         apiName = "crypto-org"

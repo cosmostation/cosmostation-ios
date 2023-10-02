@@ -102,7 +102,7 @@ class CosmosClass: BaseChain  {
             }
             DispatchQueue.main.async {
                 try? channel.close()
-                NotificationCenter.default.post(name: Notification.Name("FetchStakeData"), object: self.id, userInfo: nil)
+                NotificationCenter.default.post(name: Notification.Name("FetchStakeData"), object: self.tag, userInfo: nil)
             }
         }
     }
@@ -258,7 +258,7 @@ extension CosmosClass {
         } else {
             try? channel.close()
             self.fetched = true
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.id, userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
             
         }
     }
@@ -276,7 +276,7 @@ extension CosmosClass {
             WUtils.onParseVestingAccount(self)
             self.fetched = true
             self.setAllValue()
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.id, userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }
     }
     
@@ -641,7 +641,7 @@ extension CosmosClass {
         group.notify(queue: .main) {
             self.fetched = true
             self.setAllValue()
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.id, userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }
     }
     
@@ -866,6 +866,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainShentu())
     result.append(ChainSommelier())
     result.append(ChainStargaze())
+    result.append(ChainStarname())
     result.append(ChainUmee())
     
     result.forEach { chain in

@@ -15,7 +15,7 @@ class ChainPersistence750: CosmosClass  {
         
         isDefault = false
         name = "Persistence"
-        id = "persistence750"
+        tag = "persistence750"
         logo1 = "chainPersistence"
         logo2 = "chainPersistence2"
         apiName = "persistence"

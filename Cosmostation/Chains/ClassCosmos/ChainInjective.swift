@@ -14,7 +14,7 @@ class ChainInjective: CosmosClass  {
         super.init()
         
         name = "Injective"
-        id = "injective60"
+        tag = "injective60"
         logo1 = "chainInjective"
         logo2 = "chainInjective2"
         apiName = "injective"

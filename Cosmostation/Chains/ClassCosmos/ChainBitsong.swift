@@ -14,7 +14,7 @@ class ChainBitsong: CosmosClass  {
         super.init()
         
         name = "Bitsong"
-        id = "bitsong639"
+        tag = "bitsong639"
         logo1 = "chainBitsong"
         logo2 = "chainBitsong2"
         apiName = "bitsong"

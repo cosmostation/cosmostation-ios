@@ -217,7 +217,7 @@ class CosmosTransfer: BaseVC {
         let addressSheet = TxAddressSheet(nibName: "TxAddressSheet", bundle: nil)
         addressSheet.selectedChain = selectedChain
         if (selectedRecipientAddress?.isEmpty == false) {
-            addressSheet.existedAddress = txMemo
+            addressSheet.existedAddress = selectedRecipientAddress
         }
         addressSheet.recipientChain = selectedRecipientChain
         addressSheet.addressDelegate = self

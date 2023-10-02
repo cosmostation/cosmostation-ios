@@ -14,7 +14,7 @@ class ChainBand: CosmosClass  {
         super.init()
         
         name = "Band"
-        id = "band494"
+        tag = "band494"
         logo1 = "chainBand"
         logo2 = "chainBand2"
         apiName = "band"

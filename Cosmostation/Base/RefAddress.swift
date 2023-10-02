@@ -22,7 +22,7 @@ public struct RefAddress {
         self.chainId = chainId
         self.dpAddress = dpAddress
         self.lastValue = lastValue
-        self.lastValue = lastValue
+        self.lastAmount = lastAmount
     }
     
     //db query
@@ -32,6 +32,6 @@ public struct RefAddress {
         self.chainId = chainId
         self.dpAddress = dpAddress
         self.lastValue = lastValue
-        self.lastValue = lastValue
+        self.lastAmount = lastAmount
     }
 }
