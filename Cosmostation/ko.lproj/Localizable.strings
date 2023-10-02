@@ -187,6 +187,7 @@
 "str_my_unbondings" = "내 언스테이킹";
 "str_start_vote" = "투표 하기";
 "str_transfer_asset" = "자산 전송";
+"str_ibc_transfer_asset" = "IBC 자산 전송";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";
@@ -873,6 +874,7 @@
 "title_select_slippage" = "슬리피지 선택";
 "title_staking_info" = "스테이킹 정보";
 "title_select_options" = "옵션 선택";
+"title_select_recipient_chain" = "수신 체인 선택";
 
 
 "proposal_type_basic" = "기본";

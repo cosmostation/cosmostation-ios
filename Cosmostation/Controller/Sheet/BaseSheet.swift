@@ -29,6 +29,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var searchValidators = Array<Cosmos_Staking_V1beta1_Validator>()
     var delegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     var delegation: Cosmos_Staking_V1beta1_DelegationResponse!
+    var cosmosChainList = Array<CosmosClass>()
     
 
     override func viewDidLoad() {
@@ -122,6 +123,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                     validators.append(validator)
                 }
             }
+            
+        } else if (sheetType == .SelectRecipientChain) {
+            sheetTitle.text = NSLocalizedString("title_select_recipient_chain", comment: "")
+            
         }
         
     }
@@ -207,6 +212,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectUnStakeValidator) {
             return validators.count
+            
+        } else if (sheetType == .SelectRecipientChain) {
+            return cosmosChainList.count
         }
         return 0
     }
@@ -278,6 +286,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
             cell?.onBindUnstakeValidator(targetChain, validators[indexPath.row])
             return cell!
+            
+        } else if (sheetType == .SelectRecipientChain) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapChainCell") as? SelectSwapChainCell
+            cell?.onBindCosmosChain(cosmosChainList[indexPath.row])
+            return cell!
         }
         return UITableViewCell()
     }
@@ -305,6 +318,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectUnStakeValidator) {
             let result = BaseSheetResult.init(indexPath.row, validators[indexPath.row].operatorAddress)
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if (sheetType == .SelectRecipientChain) {
+            let result = BaseSheetResult.init(indexPath.row, cosmosChainList[indexPath.row].chainId)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else {
@@ -351,4 +368,5 @@ public enum SheetType: Int {
     case SelectFeeCoin = 13
     case SelectValidator = 14
     case SelectUnStakeValidator = 15
+    case SelectRecipientChain = 16
 }

@@ -28,4 +28,12 @@ class SelectSwapChainCell: UITableViewCell {
         chainNameLabel.text = chain["chain_name"].stringValue.uppercased()
     }
     
+    
+    func onBindCosmosChain(_ chain: CosmosClass) {
+        chainLogoImg.image =  UIImage.init(named: chain.logo1)
+        chainNameLabel.text = chain.name.uppercased()
+    }
+    
+    
+//    SelectSwapOutputChain
 }

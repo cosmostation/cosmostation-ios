@@ -187,6 +187,7 @@
 "str_my_unbondings" = "私のステーキング解除";
 "str_start_vote" = "投票する";
 "str_transfer_asset" = "資産転送";
+"str_ibc_transfer_asset" = "IBC 資産転送";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -877,6 +878,7 @@
 "title_select_slippage" = "Select Slippage";
 "title_staking_info" = "Staking Info";
 "title_select_options" = "Select Options";
+"title_select_recipient_chain" = "Select Recipient Chain";
 
 
 "proposal_type_basic" = "Basic";

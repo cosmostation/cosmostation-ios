@@ -129,7 +129,9 @@ public class WDP {
     }
     
     static func dpCoin(_ msAsset: MintscanAsset, _ denom: String, _ amount: NSDecimalNumber, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
-        amountLabel?.attributedText = dpAmount(amount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
+        
+        let deAmount = amount.multiplying(byPowerOf10: -msAsset.decimals!)
+        amountLabel?.attributedText = dpAmount(deAmount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
         denomLabel?.text = msAsset.symbol
         coinImg?.af.setImage(withURL: msAsset.assetImg())
     }

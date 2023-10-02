@@ -54,7 +54,7 @@ class CosmosDelegate: BaseVC {
     var txFee: Cosmos_Tx_V1beta1_Fee!
     var txMemo = ""
     
-    var availableCoin: Cosmos_Base_V1beta1_Coin?
+    var availableAmount = NSDecimalNumber.zero
     var toValidator: Cosmos_Staking_V1beta1_Validator?
     var toCoin: Cosmos_Base_V1beta1_Coin?
 
@@ -145,24 +145,25 @@ class CosmosDelegate: BaseVC {
         
         if (txFee.amount[0].denom == stakeDenom) {
             let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
-            if (feeAmount.uint64Value > balanceAmount.uint64Value) {
+            if (feeAmount.compare(balanceAmount).rawValue > 0) {
                 //ERROR short balance!!
             }
-            let delegableAmount = balanceAmount.adding(vestingAmount).subtracting(feeAmount)
-            availableCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = delegableAmount.stringValue }
+            availableAmount = balanceAmount.adding(vestingAmount).subtracting(feeAmount)
             
         } else {
             //fee pay with another denom
-            let delegableAmount = balanceAmount.adding(vestingAmount)
-            availableCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = delegableAmount.stringValue }
+            availableAmount = balanceAmount.adding(vestingAmount)
         }
     }
     
     @objc func onClickAmount() {
         let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.availableCoin = availableCoin
-        amountSheet.existedAmount = toCoin?.amount
+        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
+        amountSheet.availableAmount = availableAmount
+        if let existedAmount = toCoin?.amount {
+            amountSheet.existedAmount = NSDecimalNumber(string: existedAmount)
+        }
         amountSheet.sheetDelegate = self
         amountSheet.sheetType = .TxDelegate
         self.onStartSheet(amountSheet)

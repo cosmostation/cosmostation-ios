@@ -31,6 +31,7 @@ class CosmosTransfer: BaseVC {
     @IBOutlet weak var toSendAssetCard: FixCardView!
     @IBOutlet weak var toSendAssetTitle: UILabel!
     @IBOutlet weak var toSendAssetImg: UIImageView!
+    @IBOutlet weak var toSendSymbolLabel: UILabel!
     @IBOutlet weak var toSendAssetHint: UILabel!
     @IBOutlet weak var toAssetAmountLabel: UILabel!
     @IBOutlet weak var toAssetDenomLabel: UILabel!
@@ -60,9 +61,11 @@ class CosmosTransfer: BaseVC {
     var txMemo = ""
     
     var toSendDenom: String!                        // coin denom or contract addresss
-    var toSendCoin: Cosmos_Base_V1beta1_Coin?
+//    var toSendCoin: Cosmos_Base_V1beta1_Coin?
     
-    var availableCoin: Cosmos_Base_V1beta1_Coin?
+//    var availableCoin: Cosmos_Base_V1beta1_Coin?
+    var availableAmount = NSDecimalNumber.zero
+    var toSendAmount = NSDecimalNumber.zero
     
     
     var recipientableChains = [CosmosClass]()
@@ -75,7 +78,11 @@ class CosmosTransfer: BaseVC {
     var selectedRecipientChain: CosmosClass!
     var selectedRecipientAddress: String!
     
+    var transferAssetType: TransferAssetType!
     
+    
+    var selectedMsAsset: MintscanAsset! //TO send Coin
+    var selectedMsToken: MintscanToken! //TO send Token
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,32 +107,56 @@ class CosmosTransfer: BaseVC {
         
         print("toSendDenom ", toSendDenom)
         
+        if let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom?.lowercased() == toSendDenom.lowercased() }).first {
+            selectedMsAsset = msAsset
+            transferAssetType = .CoinTransfer
+            
+        } else if let msToken = selectedChain.mintscanTokens.filter({ $0.address == toSendDenom }).first {
+            selectedMsToken = msToken
+            if (toSendDenom.starts(with: "0x")) {
+                transferAssetType = .Erc20Transfer
+            } else {
+                transferAssetType = .Cw20Transfer
+            }
+        }
+        
         allCosmosChains = ALLCOSMOSCLASS()
         
+        //Set Recipientable Chains by ms data
         recipientableChains.append(selectedChain)
         BaseData.instance.mintscanAssets?.forEach({ msAsset in
-            if (msAsset.chain == selectedChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {
-                //add backward path
-                if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.beforeChain(selectedChain.apiName) }).first {
-                    if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
-//                        print("sendable ", sendable.name)
-                        recipientableChains.append(sendable)
+            if (transferAssetType == .CoinTransfer) {
+                if (msAsset.chain == selectedChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {
+                    //add backward path
+                    if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.beforeChain(selectedChain.apiName) }).first {
+                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
+                            print("sendable ", sendable.name)
+                            recipientableChains.append(sendable)
+                        }
+                    }
+                    
+                } else if (msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
+                    //add forward path
+                    if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.chain }).first {
+                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
+                            print("sendable ", sendable.name)
+                            recipientableChains.append(sendable)
+                        }
                     }
                 }
                 
-            } else if (msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
-                //add forward path
-                if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.chain }).first {
-                    if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
-//                        print("sendable ", sendable.name)
-                        recipientableChains.append(sendable)
+            } else {
+                //add only forward path
+                if (msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
+                    if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.chain }).first {
+                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
+                            print("sendable ", sendable.name)
+                            recipientableChains.append(sendable)
+                        }
                     }
                 }
             }
         })
-        
-//        print("recipientableChains ", recipientableChains.count)
-        
         recipientableChains.sort {
             if ($0.name == selectedChain.name) { return true }
             if ($1.name == selectedChain.name) { return false }
@@ -133,12 +164,29 @@ class CosmosTransfer: BaseVC {
             if ($1.name == "Cosmos") { return false }
             return false
         }
-        
-//        recipientableChains.forEach { clcl in
-//            print("clcl ", clcl.name)
-//        }
-        
         selectedRecipientChain = recipientableChains[0]
+        
+        
+        //Set To Send Asset
+        if (transferAssetType == .CoinTransfer) {
+            if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, toSendDenom) {
+                toSendSymbolLabel.text = msAsset.symbol
+                toSendAssetImg.af.setImage(withURL: msAsset.assetImg())
+            }
+            
+        } else {
+            if let msToken = selectedChain.mintscanTokens.filter({ $0.address == toSendDenom }).first {
+                toSendSymbolLabel.text = msToken.symbol
+                toSendAssetImg.af.setImage(withURL: msToken.assetImg())
+            }
+        }
+        
+        
+        toChainCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToChain)))
+        toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
+        toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
+        feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
+        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
         onUpdateToChainView()
         onUpdateFeeView()
@@ -160,36 +208,63 @@ class CosmosTransfer: BaseVC {
     }
     
     
+    @objc func onClickToChain() {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.cosmosChainList = recipientableChains
+//        baseSheet.validators = selectedChain.cosmosValidators
+        baseSheet.sheetDelegate = self
+        baseSheet.sheetType = .SelectRecipientChain
+        onStartSheet(baseSheet, 680)
+    }
+    
     func onUpdateToChainView() {
         toChainImg.image =  UIImage.init(named: selectedRecipientChain.logo1)
         toChainLabel.text = selectedRecipientChain.name.uppercased()
+        
+        if (selectedChain.chainId == selectedRecipientChain.chainId) {
+            titleLabel.text = NSLocalizedString("str_transfer_asset", comment: "")
+        } else {
+            titleLabel.text = NSLocalizedString("str_ibc_transfer_asset", comment: "")
+        }
+    }
+    
+    @objc func onClickToAddress() {
     }
     
     func onUpdateToAddressView() {
+        if (selectedRecipientAddress.isEmpty) {
+            toAddressHint.isHidden = false
+            toAddressLabel.isHidden = true
+            
+        } else {
+            toAddressHint.isHidden = true
+            toAddressLabel.isHidden = false
+            toAddressLabel.text = selectedRecipientAddress
+            toAddressLabel.adjustsFontSizeToFitWidth = true
+        }
+    }
+    
+    @objc func onClickAmount() {
+        let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
+        amountSheet.selectedChain = selectedChain
+        amountSheet.transferAssetType = transferAssetType
+        if (transferAssetType == .CoinTransfer) {
+            amountSheet.msAsset = selectedMsAsset
+        } else {
+            amountSheet.msToken = selectedMsToken
+        }
+        amountSheet.availableAmount = availableAmount
+        if (toSendAmount != NSDecimalNumber.zero) {
+            amountSheet.existedAmount = toSendAmount
+        }
+        amountSheet.sheetDelegate = self
+        amountSheet.sheetType = .TxTransfer
+        self.onStartSheet(amountSheet)
         
     }
     
     func onUpdateAmountView() {
         
-    }
-    
-    func onUpdateFeeView() {
-        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
-            feeSelectLabel.text = msAsset.symbol
-            WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-            let amount = NSDecimalNumber(string: txFee.amount[0].amount)
-            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
-            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
-        }
-        
-        let stakeDenom = selectedChain.stakeDenom!
-        let balanceAmount = selectedChain.balanceAmount(stakeDenom)
-        if (txFee.amount[0].denom == stakeDenom) {
-            
-        } else {
-            
-        }
     }
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
@@ -206,6 +281,35 @@ class CosmosTransfer: BaseVC {
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeCoin
         onStartSheet(baseSheet, 240)
+    }
+    
+    func onUpdateFeeView() {
+        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
+            feeSelectLabel.text = msAsset.symbol
+            WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let amount = NSDecimalNumber(string: txFee.amount[0].amount)
+            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
+        }
+        
+        if (transferAssetType == .CoinTransfer) {
+            let balanceAmount = selectedChain.balanceAmount(toSendDenom)
+            if (txFee.amount[0].denom == toSendDenom) {
+                let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
+                if (feeAmount.compare(balanceAmount).rawValue > 0) {
+                    //ERROR short balance!!
+                }
+                availableAmount = balanceAmount.subtracting(feeAmount)
+                
+            } else {
+                availableAmount = balanceAmount
+            }
+            
+        } else {
+            availableAmount = selectedMsToken.getAmount()
+        }
+        
     }
     
     @objc func onClickMemo() {
@@ -249,6 +353,15 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                 txFee.amount[0].denom = selectedDenom
                 onSimul()
             }
+            
+        } else if (sheetType == .SelectRecipientChain) {
+            if (result.param != selectedRecipientChain.chainId) {
+                selectedRecipientChain = recipientableChains.filter({ $0.chainId == result.param }).first
+                selectedRecipientAddress = ""
+                onUpdateToChainView()
+                onUpdateToAddressView()
+            }
+            
         }
     }
     
@@ -263,4 +376,11 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     }
     
     
+}
+
+
+public enum TransferAssetType: Int {
+    case CoinTransfer = 0
+    case Cw20Transfer = 1
+    case Erc20Transfer = 2
 }

@@ -187,6 +187,7 @@
 "str_my_unbondings" = "My Unstakings";
 "str_start_vote" = "Start Vote";
 "str_transfer_asset" = "Asset Send";
+"str_ibc_transfer_asset" = "IBC Asset Send";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -877,6 +878,7 @@
 "title_select_slippage" = "Select Slippage";
 "title_staking_info" = "Staking Info";
 "title_select_options" = "Select Options";
+"title_select_recipient_chain" = "Select Recipient Chain";
 
 
 "proposal_type_basic" = "Basic";

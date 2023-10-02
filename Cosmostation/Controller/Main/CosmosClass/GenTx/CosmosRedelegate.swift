@@ -59,7 +59,7 @@ class CosmosRedelegate: BaseVC {
     var txFee: Cosmos_Tx_V1beta1_Fee!
     var txMemo = ""
     
-    var availableCoin: Cosmos_Base_V1beta1_Coin?
+    var availableAmount = NSDecimalNumber.zero
     var fromValidator: Cosmos_Staking_V1beta1_Validator?
     var toValidator: Cosmos_Staking_V1beta1_Validator?
     var toCoin: Cosmos_Base_V1beta1_Coin?
@@ -172,14 +172,19 @@ class CosmosRedelegate: BaseVC {
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
         
-        availableCoin = selectedChain.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance
+        if let delegated = selectedChain.cosmosDelegations.filter({ $0.delegation.validatorAddress == fromValidator?.operatorAddress }).first {
+            availableAmount = NSDecimalNumber(string: delegated.balance.amount)
+        }
     }
     
     @objc func onClickAmount() {
         let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.availableCoin = availableCoin
-        amountSheet.existedAmount = toCoin?.amount
+        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
+        amountSheet.availableAmount = availableAmount
+        if let existedAmount = toCoin?.amount {
+            amountSheet.existedAmount = NSDecimalNumber(string: existedAmount)
+        }
         amountSheet.sheetDelegate = self
         amountSheet.sheetType = .TxRedelegate
         self.onStartSheet(amountSheet)

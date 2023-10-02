@@ -13,38 +13,75 @@ import SwiftProtobuf
 import SwiftyJSON
 
 class Signer {
-//    //Tx for Common Denom Transfer
-//    static func genSimpleSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                              _ toAddress: String, _ amount: Array<Coin>,
-//                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType)  -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let sendMsg = genSendMsg(auth, toAddress, amount)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, sendMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func simulSimpleSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                _ toAddress: String, _ amount: Array<Coin>,
-//                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType)  -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let sendMsg = genSendMsg(auth, toAddress, amount)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, sendMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSendMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toAddress: String, _ amount: Array<Coin>) -> [Google_Protobuf_Any] {
-//        let sendCoin = Cosmos_Base_V1beta1_Coin.with {
-//            $0.denom = amount[0].denom
-//            $0.amount = amount[0].amount
-//        }
-//        let sendMsg = Cosmos_Bank_V1beta1_MsgSend.with {
-//            $0.fromAddress = WUtils.onParseAuthGrpc(auth).0!
-//            $0.toAddress = toAddress
-//            $0.amount = [sendCoin]
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/cosmos.bank.v1beta1.MsgSend"
-//            $0.value = try! sendMsg.serializedData()
-//        }
-//        return [anyMsg]
-//    }
-//    
+    //Tx for Transfer
+    static func genSendTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                              _ toSend: Cosmos_Bank_V1beta1_MsgSend,
+                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain)  -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let sendMsg = genSendMsg(auth, toSend)
+        return getSignedTx(auth, sendMsg, fee, memo, baseChain)
+    }
+    
+    static func genSendTxSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                _ toSend: Cosmos_Bank_V1beta1_MsgSend,
+                                _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain)  -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let sendMsg = genSendMsg(auth, toSend)
+        return getSimulateTx(auth, sendMsg, fee, memo, baseChain)
+    }
+    
+    static func genSendMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toSend: Cosmos_Bank_V1beta1_MsgSend) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/cosmos.bank.v1beta1.MsgSend"
+            $0.value = try! toSend.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Ibc Transfer
+    static func genIbcSendTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                             _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer,
+                             _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let ibcSendMsg = genIbcSendMsg(auth, ibcTransfer)
+        return getSignedTx(auth, ibcSendMsg, fee, memo, baseChain)
+    }
+    
+    static func genIbcSendTxSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                  _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer,
+                                  _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let ibcSendMsg = genIbcSendMsg(auth, ibcTransfer)
+        return getSimulateTx(auth, ibcSendMsg, fee, memo, baseChain)
+    }
+    
+    static func genIbcSendMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/ibc.applications.transfer.v1.MsgTransfer"
+            $0.value = try! ibcTransfer.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Wasm Exe
+    static func genWasmTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                          _ wasmContract: Cosmwasm_Wasm_V1_MsgExecuteContract,
+                          _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let wasmMsg = genWasmMsg(auth, wasmContract)
+        return getSignedTx(auth, wasmMsg, fee, memo, baseChain)
+    }
+    
+    static func genWasmTxSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                               _ wasmContract: Cosmwasm_Wasm_V1_MsgExecuteContract,
+                               _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let wasmMsg = genWasmMsg(auth, wasmContract)
+        return getSimulateTx(auth, wasmMsg, fee, memo, baseChain)
+    }
+    
+    static func genWasmMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ wasmContract: Cosmwasm_Wasm_V1_MsgExecuteContract) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
+            $0.value = try! wasmContract.serializedData()
+        }
+        return [anyMsg]
+    }
+    
     //Tx for Common Delegate
     static func genDelegateTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                               _ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate,
@@ -589,48 +626,8 @@ class Signer {
 //        return [anyMsg]
 //    }
 //    
-//    
-//    //for IBC Transfer custom msgs
-//    //Tx for Ibc Transfer
-//    static func genIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                           _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height,
-//                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let ibcTransferMsg = genIbcTransferMsg(auth, receiver, amount, path, lastHeight)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, ibcTransferMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func simulIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                             _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height,
-//                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let ibcTransferMsg = genIbcTransferMsg(auth, receiver, amount, path, lastHeight)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, ibcTransferMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genIbcTransferMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height) -> [Google_Protobuf_Any] {
-//        let re_timeout_height = Ibc_Core_Client_V1_Height.with {
-//            $0.revisionNumber = lastHeight.revisionNumber
-//            $0.revisionHeight = lastHeight.revisionHeight + 1000
-//        }
-//        let re_token = Cosmos_Base_V1beta1_Coin.with {
-//            $0.denom = amount[0].denom
-//            $0.amount = amount[0].amount
-//        }
-//        let ibcSendMsg = Ibc_Applications_Transfer_V1_MsgTransfer.with {
-//            $0.sender = WUtils.onParseAuthGrpc(auth).0!
-//            $0.receiver = receiver
-//            $0.sourcePort = path.port!
-//            $0.sourceChannel = path.channel!
-//            $0.timeoutHeight = re_timeout_height
-//            $0.timeoutTimestamp = 0
-//            $0.token = re_token
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/ibc.applications.transfer.v1.MsgTransfer"
-//            $0.value = try! ibcSendMsg.serializedData()
-//        }
-//        return [anyMsg]
-//    }
-//    
+//
+    
 //    //for IRIS custom msgs
 //    //Tx for Iris Issue Nft
 //    static func genSignedIssueNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
@@ -1430,68 +1427,7 @@ class Signer {
 //        
 //    }
 //    
-//    //for WASM custom msg
-//    //Tx for CW20 Transfer
-//    static func genWasmSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                            _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>,
-//                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let cw20Send = genCw20Send(auth, toAddress, contractAddress, amount)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, cw20Send, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func simulWasmSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                              _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>,
-//                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let cw20Send = genCw20Send(auth, toAddress, contractAddress, amount)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, cw20Send, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genCw20Send(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>) -> [Google_Protobuf_Any] {
-//        let exeContract = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-//            $0.sender = WUtils.onParseAuthGrpc(auth).0!
-//            $0.contract = contractAddress
-//            $0.msg  = Cw20TransferReq.init(toAddress, amount[0].amount).getEncode()
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
-//            $0.value = try! exeContract.serializedData()
-//        }
-//        return [anyMsg]
-//    }
-//    
-//    //Tx for CW20 IBC Transfer
-//    static func genWasmIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                               _ toAddress: String, _ cw20ContractAddress: String, _ amount: Array<Coin>, _ path: MintscanPath,
-//                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let jsonMsg : JSON = ["channel" : path.channel!, "remote_address" : toAddress, "timeout" : 900]
-//        let jsonMsgBase64 = try! jsonMsg.rawData(options: .sortedKeys).base64EncodedString()
-//        let innerMsg = Cw20IbcTransferReq.init(path.getIBCContract(), amount[0].amount, jsonMsgBase64).getEncode()
-//        let cw20IbcSend = genCw20IbcSend(auth, cw20ContractAddress, innerMsg)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, cw20IbcSend, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func simulWasmIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                 _ toAddress: String, _ cw20ContractAddress: String, _ amount: Array<Coin>, _ path: MintscanPath,
-//                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let jsonMsg : JSON = ["channel" : path.channel!, "remote_address" : toAddress, "timeout" : 900]
-//        let jsonMsgBase64 = try! jsonMsg.rawData(options: .sortedKeys).base64EncodedString()
-//        let innerMsg = Cw20IbcTransferReq.init(path.getIBCContract(), amount[0].amount, jsonMsgBase64).getEncode()
-//        let cw20IbcSend = genCw20IbcSend(auth, cw20ContractAddress, innerMsg)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, cw20IbcSend, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genCw20IbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ cw20ContractAddress: String, _ innerMsg: Data) -> [Google_Protobuf_Any] {
-//        let exeContract = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-//            $0.sender = WUtils.onParseAuthGrpc(auth).0!
-//            $0.contract = cw20ContractAddress
-//            $0.msg  = innerMsg
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
-//            $0.value = try! exeContract.serializedData()
-//        }
-//        return [anyMsg]
-//    }
+
 //    
 //    //AUTHz
 //    //Tx for Authz Claim Rewards
