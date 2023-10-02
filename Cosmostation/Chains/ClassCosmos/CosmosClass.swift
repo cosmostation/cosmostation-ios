@@ -566,7 +566,7 @@ extension CosmosClass {
     }
     
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if let tokenInfo =  mintscanTokens.filter({ $0.address == address }).first {
+        if let tokenInfo = mintscanTokens.filter({ $0.address == address }).first {
             let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
             return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: getDivideHandler(6))
         }

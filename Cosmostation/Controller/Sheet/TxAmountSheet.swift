@@ -64,7 +64,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
             if (transferAssetType == .CoinTransfer) {
                 if let msAsset = msAsset {
                     decimal = msAsset.decimals!
-                    WDP.dpCoin(msAsset, msAsset.denom!, availableAmount, nil, availableDenom, availableLabel, decimal)
+                    WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
                 }
                 
             } else {
@@ -79,7 +79,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
             availableTitle.text = NSLocalizedString("str_max_delegable", comment: "")
             if let msAsset = msAsset {
                 decimal = msAsset.decimals!
-                WDP.dpCoin(msAsset, msAsset.denom!, availableAmount, nil, availableDenom, availableLabel, decimal)
+                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             }
             
         } else if (sheetType == .TxUndelegate) {
@@ -87,7 +87,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
             availableTitle.text = NSLocalizedString("str_max_undelegable", comment: "")
             if let msAsset = msAsset {
                 decimal = msAsset.decimals!
-                WDP.dpCoin(msAsset, msAsset.denom!, availableAmount, nil, availableDenom, availableLabel, decimal)
+                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             }
             
         } else if (sheetType == .TxRedelegate) {
@@ -95,7 +95,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
             availableTitle.text = NSLocalizedString("str_max_redelegable", comment: "")
             if let msAsset = msAsset {
                 decimal = msAsset.decimals!
-                WDP.dpCoin(msAsset, msAsset.denom!, availableAmount, nil, availableDenom, availableLabel, decimal)
+                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             }
         }
         

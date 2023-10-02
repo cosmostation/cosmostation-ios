@@ -128,7 +128,7 @@ public class WDP {
 //        }
     }
     
-    static func dpCoin(_ msAsset: MintscanAsset, _ denom: String, _ amount: NSDecimalNumber, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
+    static func dpCoin(_ msAsset: MintscanAsset, _ amount: NSDecimalNumber, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
         
         let deAmount = amount.multiplying(byPowerOf10: -msAsset.decimals!)
         amountLabel?.attributedText = dpAmount(deAmount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
@@ -136,12 +136,15 @@ public class WDP {
         coinImg?.af.setImage(withURL: msAsset.assetImg())
     }
     
-    static func dpToken(_ tokenInfo: MintscanToken?, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
-        if (tokenInfo == nil) { return }
-        let amount = tokenInfo!.getAmount().multiplying(byPowerOf10: -tokenInfo!.decimals!)
-        amountLabel?.attributedText = dpAmount(amount.stringValue, amountLabel!.font, showDecimal ?? tokenInfo!.decimals)
-        denomLabel?.text = tokenInfo!.symbol
-        coinImg?.af.setImage(withURL: tokenInfo!.assetImg())
+    static func dpToken(_ msToken: MintscanToken, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
+        dpToken(msToken, msToken.getAmount(), coinImg, denomLabel, amountLabel, showDecimal)
+    }
+    
+    static func dpToken(_ msToken: MintscanToken, _ amount: NSDecimalNumber, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
+        let deAmount = amount.multiplying(byPowerOf10: -msToken.decimals!)
+        amountLabel?.attributedText = dpAmount(deAmount.stringValue, amountLabel!.font, showDecimal ?? msToken.decimals)
+        denomLabel?.text = msToken.symbol
+        coinImg?.af.setImage(withURL: msToken.assetImg())
     }
 //
 //    static func dpBnbTxCoin(_ chainConfig: ChainConfig, _ coin:Coin, _ denomLabel: UILabel, _ amountLabel: UILabel) {

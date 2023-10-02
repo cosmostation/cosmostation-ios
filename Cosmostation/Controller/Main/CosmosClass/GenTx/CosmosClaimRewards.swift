@@ -96,7 +96,7 @@ class CosmosClaimRewards: BaseVC {
         let stakeDenom = selectedChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
             let rewardAmount = selectedChain.rewardAmountSum(stakeDenom)
-            WDP.dpCoin(msAsset, stakeDenom, rewardAmount, nil, rewardDenomLabel, rewardAmountLabel, msAsset.decimals)
+            WDP.dpCoin(msAsset, rewardAmount, nil, rewardDenomLabel, rewardAmountLabel, msAsset.decimals)
         }
         if (selectedChain.rewardOtherDenoms() > 0) {
             rewardCntLabel.text = "+ " + String(selectedChain.rewardOtherDenoms())

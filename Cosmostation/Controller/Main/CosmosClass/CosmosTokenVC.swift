@@ -113,6 +113,14 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
+        transfer.selectedChain = selectedChain
+        transfer.toSendDenom = mintscanTokens[indexPath.row].address
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+    }
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {

@@ -263,8 +263,38 @@ class CosmosTransfer: BaseVC {
         
     }
     
-    func onUpdateAmountView() {
-        
+    func onUpdateAmountView(_ amount: String?) {
+        if (amount?.isEmpty == true) {
+            toSendAmount = NSDecimalNumber.zero
+            toSendAssetHint.isHidden = false
+            toAssetAmountLabel.isHidden = true
+            toAssetDenomLabel.isHidden = true
+            toAssetCurrencyLabel.isHidden = true
+            toAssetValueLabel.isHidden = true
+            
+        } else {
+            toSendAmount = NSDecimalNumber(string: amount)
+            if (transferAssetType == .CoinTransfer) {
+                let msPrice = BaseData.instance.getPrice(selectedMsAsset.coinGeckoId)
+                let value = msPrice.multiplying(by: toSendAmount).multiplying(byPowerOf10: -selectedMsAsset.decimals!, withBehavior: getDivideHandler(6))
+                
+                WDP.dpCoin(selectedMsAsset, toSendAmount, nil, toAssetDenomLabel, toAssetAmountLabel, selectedMsAsset.decimals)
+                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
+                
+            } else {
+                let msPrice = BaseData.instance.getPrice(selectedMsToken.coinGeckoId)
+                let value = msPrice.multiplying(by: toSendAmount).multiplying(byPowerOf10: -selectedMsToken.decimals!, withBehavior: getDivideHandler(6))
+                
+                WDP.dpToken(selectedMsToken, nil, toAssetDenomLabel, toAssetAmountLabel, selectedMsToken.decimals)
+                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
+            }
+            toSendAssetHint.isHidden = true
+            toAssetAmountLabel.isHidden = false
+            toAssetDenomLabel.isHidden = false
+            toAssetCurrencyLabel.isHidden = false
+            toAssetValueLabel.isHidden = false
+        }
+        onSimul()
     }
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
@@ -370,6 +400,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     }
     
     func onInputedAmount(_ amount: String) {
+        onUpdateAmountView(amount)
     }
     
     func pinResponse(_ request: LockType, _ result: UnLockResult) {

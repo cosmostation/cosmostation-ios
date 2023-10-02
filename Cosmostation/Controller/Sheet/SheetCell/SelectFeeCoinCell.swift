@@ -19,18 +19,26 @@ class SelectFeeCoinCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        amountLabel.isHidden = true
+        valueCurrencyLabel.isHidden = true
+        valueLabel.isHidden = true
     }
     
     
     func onBindFeeCoin(_ chain: CosmosClass, _ feeData: FeeData ) {
-        if let coin = chain.cosmosBalances.filter({ $0.denom == feeData.denom }).first,
-           let msAsset = BaseData.instance.getAsset(chain.apiName, feeData.denom!) {
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-            let amount = NSDecimalNumber(string: coin.amount)
-            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
-            
-            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, msAsset.decimals)
-            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+//        if let coin = chain.cosmosBalances.filter({ $0.denom == feeData.denom }).first,
+//           let msAsset = BaseData.instance.getAsset(chain.apiName, feeData.denom!) {
+//            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+//            let amount = NSDecimalNumber(string: coin.amount)
+//            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+//            
+//            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, msAsset.decimals)
+//            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+//        }
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, feeData.denom!) {
+            symbolLabel?.text = msAsset.symbol
+            coinImg?.af.setImage(withURL: msAsset.assetImg())
         }
         
     }

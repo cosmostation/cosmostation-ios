@@ -202,6 +202,26 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.section == 1) {
+//            return ibcCoins[indexPath.row]
+            let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
+            transfer.selectedChain = selectedChain
+            transfer.toSendDenom = ibcCoins[indexPath.row].denom
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
+            
+        } else if (indexPath.section == 2) {
+//            return bridgedCoins[indexPath.row]
+            let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
+            transfer.selectedChain = selectedChain
+            transfer.toSendDenom = bridgedCoins[indexPath.row].denom
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
+            
+        }
+    }
+    
     func getCoinBySection(_ indexPath: IndexPath) -> Cosmos_Base_V1beta1_Coin? {
         if (indexPath.section == 0) {
             return nativeCoins[indexPath.row]

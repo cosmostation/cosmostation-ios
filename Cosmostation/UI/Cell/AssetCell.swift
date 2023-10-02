@@ -55,7 +55,7 @@ class AssetCell: UITableViewCell {
     
     
     func bindBeaconAsset(_ baseChain: CosmosClass, _ coin: JSON) {
-        if let token = baseChain.lcdBeaconTokens.filter { $0["symbol"].string == coin["symbol"].string }.first {
+        if let token = baseChain.lcdBeaconTokens.filter({ $0["symbol"].string == coin["symbol"].string }).first {
             let original_symbol = token["original_symbol"].stringValue
             
             symbolLabel.text = original_symbol
@@ -75,7 +75,7 @@ class AssetCell: UITableViewCell {
     }
     
     func bindOktAsset(_ baseChain: CosmosClass, _ coin: JSON) {
-        if let token = baseChain.lcdOktTokens.filter { $0["symbol"].string == coin["denom"].string }.first {
+        if let token = baseChain.lcdOktTokens.filter({ $0["symbol"].string == coin["denom"].string }).first {
             let original_symbol = token["original_symbol"].stringValue
             
             symbolLabel.text = original_symbol.uppercased()
