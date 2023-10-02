@@ -32,8 +32,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var cosmosChainList = Array<CosmosClass>()
     var nameservices = Array<NameService>()
     
-    var sendAddress: String!
-    var refAddress = Array<RefAddress>()
+    var senderAddress: String!
+    var refAddresses = Array<RefAddress>()
     var addressBook = Array<String>()
     
 
@@ -59,6 +59,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SelectFeeCoinCell", bundle: nil), forCellReuseIdentifier: "SelectFeeCoinCell")
         sheetTableView.register(UINib(nibName: "SelectValidatorCell", bundle: nil), forCellReuseIdentifier: "SelectValidatorCell")
         sheetTableView.register(UINib(nibName: "SelectNameServiceCell", bundle: nil), forCellReuseIdentifier: "SelectNameServiceCell")
+        sheetTableView.register(UINib(nibName: "SelectRefAddressCell", bundle: nil), forCellReuseIdentifier: "SelectRefAddressCell")
         sheetTableView.sectionHeaderTopPadding = 0
         
         
@@ -66,6 +67,18 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
 //        let tapDismiss = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
 //        tapDismiss.cancelsTouchesInView = false
 //        view.addGestureRecognizer(tapDismiss)
+        
+//        print("senderAddress ", senderAddress)
+//        print("targetChain ", targetChain.accountPrefix)
+//        
+//        let ref = BaseData.instance.selectAllRefAddresses()
+//        print("ref ", ref.count)
+//        
+//        ref.forEach { refAddress in
+//            print("refAddress ", refAddress.chainTag, "  ", refAddress.dpAddress)
+//        }
+        
+ 
     }
     
     func updateTitle() {
@@ -133,6 +146,14 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectRecipientChain) {
             sheetTitle.text = NSLocalizedString("title_select_recipient_chain", comment: "")
             
+        } else if (sheetType == .SelectRecipientAddress) {
+            sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
+            BaseData.instance.selectAllRefAddresses().forEach { refAddress in
+                if (refAddress.dpAddress.starts(with: targetChain.accountPrefix!) &&
+                    refAddress.dpAddress != senderAddress) {
+                    refAddresses.append(refAddress)
+                }
+            }
         } else if (sheetType == .SelectNameServiceAddress) {
             sheetTitle.text = String(format: NSLocalizedString("title_select_nameservice", comment: ""), nameservices[0].name ?? "")
             
@@ -180,6 +201,38 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
 
 extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if (sheetType == .SelectRecipientAddress) {
+            return 2
+        }
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = BaseSheetHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+//        if (sheetType == .SelectRecipientAddress) {
+//            if (section == 0) {
+//                view.titleLabel.text = "My Account"
+//                view.cntLabel.text = String(refAddresses.count)
+//            } else {
+//                view.titleLabel.text = "Address Book"
+//                view.cntLabel.text = String(addressBook.count)
+//            }
+//        }
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        if (sheetType == .SelectRecipientAddress) {
+//            if (section == 0) {
+//                return (refAddresses.count > 0) ? 40 : 0
+//            } else if (section == 1) {
+//                return (addressBook.count > 0) ? 40 : 0
+//            }
+//        }
+        return 0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (sheetType == .SelectCreateAccount) {
             return 3
@@ -225,8 +278,16 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectRecipientChain) {
             return cosmosChainList.count
             
+        } else if (sheetType == .SelectRecipientAddress) {
+            if (section == 0) {
+                return refAddresses.count
+            } else {
+                return addressBook.count
+            }
+            
         } else if (sheetType == .SelectNameServiceAddress) {
             return nameservices.count
+            
         }
         return 0
     }
@@ -304,10 +365,20 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindCosmosChain(cosmosChainList[indexPath.row])
             return cell!
             
+        } else if (sheetType == .SelectRecipientAddress) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRefAddressCell") as? SelectRefAddressCell
+            if (indexPath.section == 0) {
+                cell?.onBindRefAddress(refAddresses[indexPath.row])
+            } else {
+                
+            }
+            return cell!
+            
         } else if (sheetType == .SelectNameServiceAddress) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectNameServiceCell") as? SelectNameServiceCell
             cell?.onBindNameservice(nameservices[indexPath.row])
             return cell!
+            
         }
         return UITableViewCell()
     }
@@ -339,6 +410,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectRecipientChain) {
             let result = BaseSheetResult.init(indexPath.row, cosmosChainList[indexPath.row].chainId)
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if (sheetType == .SelectRecipientAddress) {
+            let result = BaseSheetResult.init(indexPath.row, refAddresses[indexPath.row].dpAddress)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else {

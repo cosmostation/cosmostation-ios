@@ -27,3 +27,5 @@ class ChainArchway: CosmosClass  {
     }
     
 }
+
+let ARCH_NAME_SERVICE = "archway1275jwjpktae4y4y0cdq274a2m0jnpekhttnfuljm6n59wnpyd62qppqxq0"

@@ -27,3 +27,5 @@ class ChainOsmosis: CosmosClass  {
     }
     
 }
+
+let OSMO_NAME_SERVICE = "osmo1xk0s8xgktn9x5vwcgtjdxqzadg88fgn33p8u9cnpdxwemvxscvast52cdd"

@@ -271,6 +271,7 @@
 "str_compounding_msg" = "쌓인 이자를 즉시 스테이킹 합니다.";
 "str_cancel_unbonding" = "Cancel Unbonding";
 "str_cancel_unbonding_msg" = "언스테이킹을 취소하고 즉시 스테이킹 상태로 되돌립니다.";
+"str_address_book_list" = "주소록 확인";
 
 
 "btn_delegate" = "  위임 하기";

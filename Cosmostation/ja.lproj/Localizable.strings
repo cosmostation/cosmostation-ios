@@ -271,6 +271,7 @@
 "str_compounding_msg" = "積み上げ利子をすぐにステーキングします。";
 "str_cancel_unbonding" = "Cancel Unbonding";
 "str_cancel_unbonding_msg" = "アンステーキングをキャンセルし、すぐにステーキング状態に戻ります。";
+"str_address_book_list" = "アドレス帳リスト";
 
 
 "btn_delegate" = "  委任する";

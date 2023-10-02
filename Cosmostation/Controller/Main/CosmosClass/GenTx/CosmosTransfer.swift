@@ -62,8 +62,8 @@ class CosmosTransfer: BaseVC {
     
     var toSendDenom: String!                        // coin denom or contract addresss
     var transferAssetType: TransferAssetType!       // to send type
-    var selectedMsAsset: MintscanAsset!             // to send Coin
-    var selectedMsToken: MintscanToken!             // to send Token
+    var selectedMsAsset: MintscanAsset?             // to send Coin
+    var selectedMsToken: MintscanToken?             // to send Token
     var allCosmosChains = [CosmosClass]()
     
     var availableAmount = NSDecimalNumber.zero
@@ -269,17 +269,17 @@ class CosmosTransfer: BaseVC {
         } else {
             toSendAmount = NSDecimalNumber(string: amount)
             if (transferAssetType == .CoinTransfer) {
-                let msPrice = BaseData.instance.getPrice(selectedMsAsset.coinGeckoId)
-                let value = msPrice.multiplying(by: toSendAmount).multiplying(byPowerOf10: -selectedMsAsset.decimals!, withBehavior: getDivideHandler(6))
+                let msPrice = BaseData.instance.getPrice(selectedMsAsset!.coinGeckoId)
+                let value = msPrice.multiplying(by: toSendAmount).multiplying(byPowerOf10: -selectedMsAsset!.decimals!, withBehavior: getDivideHandler(6))
                 
-                WDP.dpCoin(selectedMsAsset, toSendAmount, nil, toAssetDenomLabel, toAssetAmountLabel, selectedMsAsset.decimals)
+                WDP.dpCoin(selectedMsAsset!, toSendAmount, nil, toAssetDenomLabel, toAssetAmountLabel, selectedMsAsset!.decimals)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
             } else {
-                let msPrice = BaseData.instance.getPrice(selectedMsToken.coinGeckoId)
-                let value = msPrice.multiplying(by: toSendAmount).multiplying(byPowerOf10: -selectedMsToken.decimals!, withBehavior: getDivideHandler(6))
+                let msPrice = BaseData.instance.getPrice(selectedMsToken!.coinGeckoId)
+                let value = msPrice.multiplying(by: toSendAmount).multiplying(byPowerOf10: -selectedMsToken!.decimals!, withBehavior: getDivideHandler(6))
                 
-                WDP.dpToken(selectedMsToken, nil, toAssetDenomLabel, toAssetAmountLabel, selectedMsToken.decimals)
+                WDP.dpToken(selectedMsToken!, nil, toAssetDenomLabel, toAssetAmountLabel, selectedMsToken!.decimals)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
             }
             toSendAssetHint.isHidden = true
@@ -331,7 +331,7 @@ class CosmosTransfer: BaseVC {
             }
             
         } else {
-            availableAmount = selectedMsToken.getAmount()
+            availableAmount = selectedMsToken!.getAmount()
         }
         
     }
@@ -355,15 +355,126 @@ class CosmosTransfer: BaseVC {
         onSimul()
     }
     
-    
-    
-    @IBAction func onClickSend(_ sender: BaseButton) {
-//        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
-//        self.present(pinVC, animated: true)
+    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
+        if let toGas = simul?.gasInfo.gasUsed {
+            txFee.gasLimit = UInt64(Double(toGas) * 1.5)
+            if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
+                let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
+                let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
+                txFee.amount[0].amount = feeCoinAmount!.stringValue
+            }
+        }
+        
+        onUpdateFeeView()
+        view.isUserInteractionEnabled = true
+        loadingView.isHidden = true
+        sendBtn.isEnabled = true
     }
     
-    func onSimul() {}
+    @IBAction func onClickSend(_ sender: BaseButton) {
+        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+        self.present(pinVC, animated: true)
+    }
     
+    func onSimul() {
+        if (toSendAmount == NSDecimalNumber.zero ) { return }
+        if (selectedRecipientAddress == nil || selectedRecipientAddress?.isEmpty == true) { return }
+        
+        view.isUserInteractionEnabled = false
+        sendBtn.isEnabled = false
+        loadingView.isHidden = false
+        
+        if (selectedChain.chainId != selectedRecipientChain.chainId) {
+            // IBC Send!
+            if (transferAssetType == .CoinTransfer) {
+                
+            } else if (transferAssetType == .Cw20Transfer) {
+                
+            }
+            
+        } else {
+            //Inchain Send!
+            if (transferAssetType == .CoinTransfer) {
+                inChainCoinSendSimul()
+                
+            } else if (transferAssetType == .Cw20Transfer) {
+                inChainWasmSendSimul()
+                
+            } else if (transferAssetType == .Erc20Transfer) {
+                
+            }
+            
+        }
+    }
+    
+    func inChainCoinSendSimul() {
+        Task {
+            let channel = getConnection()
+            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+                do {
+                    let simul = try await simulSendTx(channel, auth!, onBindSendMsg())
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(simul)
+                    }
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        self.view.isUserInteractionEnabled = true
+                        self.loadingView.isHidden = true
+                        self.onShowToast("Error : " + "\n" + "\(error)")
+                        return
+                    }
+                }
+            }
+        }
+    }
+    
+    func inChainWasmSendSimul() {
+        Task {
+            let channel = getConnection()
+            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+                do {
+                    let simul = try await simulCw20SendTx(channel, auth!, onBindCw20SendMsg())
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(simul)
+                    }
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        self.view.isUserInteractionEnabled = true
+                        self.loadingView.isHidden = true
+                        self.onShowToast("Error : " + "\n" + "\(error)")
+                        return
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
+     
+    func onBindSendMsg() -> Cosmos_Bank_V1beta1_MsgSend {
+        let sendCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = toSendDenom
+            $0.amount = toSendAmount.stringValue
+        }
+        return Cosmos_Bank_V1beta1_MsgSend.with {
+            $0.fromAddress = selectedChain.address!
+            $0.toAddress = selectedRecipientAddress!
+            $0.amount = [sendCoin]
+        }
+    }
+    
+    func onBindCw20SendMsg() -> Cosmwasm_Wasm_V1_MsgExecuteContract {
+        let msg: JSON = ["transfer" : ["recipient" : selectedRecipientAddress! , "amount" : toSendAmount.stringValue]]
+        let msgBase64 = try! msg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+        return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+            $0.sender = selectedChain.address!
+            $0.contract = selectedMsToken!.address!
+            $0.msg = Data(base64Encoded: msgBase64)!
+        }
+    }
 
 }
 
@@ -403,9 +514,123 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     }
     
     func pinResponse(_ request: LockType, _ result: UnLockResult) {
+        if (result == .success) {
+            view.isUserInteractionEnabled = false
+            sendBtn.isEnabled = false
+            loadingView.isHidden = false
+            
+            if (selectedChain.chainId != selectedRecipientChain.chainId) {
+                // IBC Send!
+                if (transferAssetType == .CoinTransfer) {
+                    
+                } else if (transferAssetType == .Cw20Transfer) {
+                    
+                }
+                
+            } else {
+                //Inchain Send!
+                if (transferAssetType == .CoinTransfer) {
+                    inChainCoinSend()
+                    
+                } else if (transferAssetType == .Cw20Transfer) {
+                    inChainCw20Send()
+                    
+                } else if (transferAssetType == .Erc20Transfer) {
+                    
+                }
+                
+            }
+        }
+    }
+    
+    func inChainCoinSend() {
+        Task {
+            let channel = getConnection()
+            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+               let response = try await broadcastSendTx(channel, auth!, onBindSendMsg()) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    self.loadingView.isHidden = true
+                    
+                    let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                    txResult.selectedChain = self.selectedChain
+                    txResult.broadcastTxResponse = response
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
+                })
+            }
+        }
+    }
+    
+    func inChainCw20Send() {
+        Task {
+            let channel = getConnection()
+            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+               let response = try await broadcastCw20SendTx(channel, auth!, onBindCw20SendMsg()) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    self.loadingView.isHidden = true
+                    
+                    let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                    txResult.selectedChain = self.selectedChain
+                    txResult.broadcastTxResponse = response
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
+                })
+            }
+        }
+    }
+    
+}
+
+extension CosmosTransfer {
+    
+    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
+        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
+    }
+    
+    //Simple Send
+    func simulSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toSend: Cosmos_Bank_V1beta1_MsgSend) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+        let simulTx = Signer.genSendTxSimul(auth, toSend, txFee, txMemo, selectedChain)
+        do {
+            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
+        } catch {
+            throw error
+        }
+    }
+    
+    func broadcastSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toSend: Cosmos_Bank_V1beta1_MsgSend) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+        let reqTx = Signer.genSendTx(auth, toSend, txFee, txMemo, selectedChain)
+        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
     }
     
     
+    //Wasm Send
+    func simulCw20SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+        let simulTx = Signer.genWasmTxSimul(auth, toWasmSend, txFee, txMemo, selectedChain)
+        do {
+            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
+        } catch {
+            throw error
+        }
+    }
+    
+    func broadcastCw20SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+        let reqTx = Signer.genWasmTx(auth, toWasmSend, txFee, txMemo, selectedChain)
+        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
+    }
+    
+    
+    
+    func getConnection() -> ClientConnection {
+        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.grpcHost, port: selectedChain.grpcPort)
+    }
+    
+    func getCallOptions() -> CallOptions {
+        var callOptions = CallOptions()
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        return callOptions
+    }
 }
 
 

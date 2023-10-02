@@ -509,6 +509,14 @@
 		04B789E62ACB140900E9BE88 /* SelectNameServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B789E32ACB140900E9BE88 /* SelectNameServiceCell.swift */; };
 		04B789E72ACB140900E9BE88 /* SelectNameServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B789E42ACB140900E9BE88 /* SelectNameServiceCell.xib */; };
 		04B789E82ACB140900E9BE88 /* SelectNameServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B789E42ACB140900E9BE88 /* SelectNameServiceCell.xib */; };
+		04B789EB2ACB336400E9BE88 /* SelectRefAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B789E92ACB336400E9BE88 /* SelectRefAddressCell.swift */; };
+		04B789EC2ACB336400E9BE88 /* SelectRefAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B789E92ACB336400E9BE88 /* SelectRefAddressCell.swift */; };
+		04B789ED2ACB336400E9BE88 /* SelectRefAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B789EA2ACB336400E9BE88 /* SelectRefAddressCell.xib */; };
+		04B789EE2ACB336400E9BE88 /* SelectRefAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B789EA2ACB336400E9BE88 /* SelectRefAddressCell.xib */; };
+		04B789F02ACB3FC900E9BE88 /* BaseSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B789EF2ACB3FC900E9BE88 /* BaseSheetHeader.swift */; };
+		04B789F12ACB3FC900E9BE88 /* BaseSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B789EF2ACB3FC900E9BE88 /* BaseSheetHeader.swift */; };
+		04B789F32ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B789F22ACB3FDC00E9BE88 /* BaseSheetHeader.xib */; };
+		04B789F42ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B789F22ACB3FDC00E9BE88 /* BaseSheetHeader.xib */; };
 		04BA9BCD2A976EA2003E2404 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA9BCC2A976EA2003E2404 /* SkeletonView */; };
 		04BA9BCF2A976EAD003E2404 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA9BCE2A976EAD003E2404 /* SkeletonView */; };
 		04BA9BD12A978131003E2404 /* RefAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA9BD02A978131003E2404 /* RefAddress.swift */; };
@@ -1540,6 +1548,10 @@
 		04B789E02ACAF6A900E9BE88 /* ChainStarname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStarname.swift; sourceTree = "<group>"; };
 		04B789E32ACB140900E9BE88 /* SelectNameServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNameServiceCell.swift; sourceTree = "<group>"; };
 		04B789E42ACB140900E9BE88 /* SelectNameServiceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectNameServiceCell.xib; sourceTree = "<group>"; };
+		04B789E92ACB336400E9BE88 /* SelectRefAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRefAddressCell.swift; sourceTree = "<group>"; };
+		04B789EA2ACB336400E9BE88 /* SelectRefAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectRefAddressCell.xib; sourceTree = "<group>"; };
+		04B789EF2ACB3FC900E9BE88 /* BaseSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSheetHeader.swift; sourceTree = "<group>"; };
+		04B789F22ACB3FDC00E9BE88 /* BaseSheetHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseSheetHeader.xib; sourceTree = "<group>"; };
 		04BA9BD02A978131003E2404 /* RefAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefAddress.swift; sourceTree = "<group>"; };
 		04BA9BD32A985771003E2404 /* ChainSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSelectVC.swift; sourceTree = "<group>"; };
 		04BA9BD42A985771003E2404 /* ChainSelectVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChainSelectVC.xib; sourceTree = "<group>"; };
@@ -2321,6 +2333,8 @@
 		04FA74702AA043CF001A2830 /* SheetCell */ = {
 			isa = PBXGroup;
 			children = (
+				04B789EF2ACB3FC900E9BE88 /* BaseSheetHeader.swift */,
+				04B789F22ACB3FDC00E9BE88 /* BaseSheetHeader.xib */,
 				04FAD9B62AB0125400143A3E /* BaseSheetCell.swift */,
 				04FAD9B72AB0125400143A3E /* BaseSheetCell.xib */,
 				04FA74772AA0446A001A2830 /* BaseMsgSheetCell.swift */,
@@ -2341,6 +2355,8 @@
 				0409D2FA2AC5ECDD0021E192 /* SelectValidatorCell.xib */,
 				04B789E32ACB140900E9BE88 /* SelectNameServiceCell.swift */,
 				04B789E42ACB140900E9BE88 /* SelectNameServiceCell.xib */,
+				04B789E92ACB336400E9BE88 /* SelectRefAddressCell.swift */,
+				04B789EA2ACB336400E9BE88 /* SelectRefAddressCell.xib */,
 			);
 			path = SheetCell;
 			sourceTree = "<group>";
@@ -3100,10 +3116,12 @@
 				047842E12AC8963100462F1C /* CosmosUndelegate.xib in Resources */,
 				18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */,
 				E15F2D072ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
+				04B789EE2ACB336400E9BE88 /* SelectRefAddressCell.xib in Resources */,
 				E15980A42A83AB030032892B /* Main.storyboard in Resources */,
 				E15F2D132ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */,
 				04A68C382AC156AA0041FA13 /* CosmosProposalCell.xib in Resources */,
 				E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
+				04B789F42ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,
 				042DE8432AC4C518003F3EA4 /* TxMemoSheet.xib in Resources */,
 				E1D5382A2A96644F00FB0403 /* loading.json in Resources */,
 				04FA747C2AA0446A001A2830 /* BaseMsgSheetCell.xib in Resources */,
@@ -3152,6 +3170,7 @@
 				04FA74812AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */,
 				E1E0DBC82A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
 				04A1A8042AC80AA50014EF92 /* TxAmountSheet.xib in Resources */,
+				04B789ED2ACB336400E9BE88 /* SelectRefAddressCell.xib in Resources */,
 				04FAD9F02AB71D3300143A3E /* RenameSheet.xib in Resources */,
 				04FA74542A9D97A0001A2830 /* Pincode.storyboard in Resources */,
 				04CFF0352AC58D4400FB3187 /* SelectFeeCoinCell.xib in Resources */,
@@ -3198,6 +3217,7 @@
 				0409D2F72AC5DC6D0021E192 /* CosmosDelegate.xib in Resources */,
 				04B789E72ACB140900E9BE88 /* SelectNameServiceCell.xib in Resources */,
 				E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
+				04B789F32ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,
 				E15F2CFA2ABF0DCE00BAE105 /* basebg06.png in Resources */,
 				0443B89828589B570027A6B9 /* Color.xcassets in Resources */,
 				E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
@@ -3414,6 +3434,7 @@
 				04B789D32ACAF59700E9BE88 /* iov_starname_v1beta1_genesis.pb.swift in Sources */,
 				E122DB0A2A8A468D006D1E7B /* cosmos_gov_v1_query.pb.swift in Sources */,
 				E122DB5E2A8A468D006D1E7B /* cosmos_nft_v1beta1_genesis.pb.swift in Sources */,
+				04B789F12ACB3FC900E9BE88 /* BaseSheetHeader.swift in Sources */,
 				04E165BB28B61BE1000F12C0 /* MintscanAsset.swift in Sources */,
 				04B7898A2ACAC9B100E9BE88 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
 				E122DAEC2A8A468D006D1E7B /* cosmos_base_reflection_v1beta1_reflection.grpc.swift in Sources */,
@@ -3495,6 +3516,7 @@
 				04B789C32ACAF59700E9BE88 /* iov_escrow_v1beta1_params.pb.swift in Sources */,
 				E11069BD2AA4C57600EB02CA /* cosmwasm_wasm_v1_genesis.pb.swift in Sources */,
 				047C10722AAC310600AFA159 /* QrAddressVC.swift in Sources */,
+				04B789EC2ACB336400E9BE88 /* SelectRefAddressCell.swift in Sources */,
 				047843902AC991B300462F1C /* injective_ocr_v1beta1_query.grpc.swift in Sources */,
 				E122DBD02A8A468E006D1E7B /* cosmos_upgrade_v1beta1_upgrade.pb.swift in Sources */,
 				04B789C52ACAF59700E9BE88 /* iov_escrow_v1beta1_tx.grpc.swift in Sources */,
@@ -3960,6 +3982,7 @@
 				04B789D22ACAF59700E9BE88 /* iov_starname_v1beta1_genesis.pb.swift in Sources */,
 				E122DB092A8A468D006D1E7B /* cosmos_gov_v1_query.pb.swift in Sources */,
 				E122DB5D2A8A468D006D1E7B /* cosmos_nft_v1beta1_genesis.pb.swift in Sources */,
+				04B789F02ACB3FC900E9BE88 /* BaseSheetHeader.swift in Sources */,
 				0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */,
 				04B789892ACAC9B100E9BE88 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
 				E122DAEB2A8A468D006D1E7B /* cosmos_base_reflection_v1beta1_reflection.grpc.swift in Sources */,
@@ -4041,6 +4064,7 @@
 				04B789C22ACAF59700E9BE88 /* iov_escrow_v1beta1_params.pb.swift in Sources */,
 				E11069BC2AA4C57600EB02CA /* cosmwasm_wasm_v1_genesis.pb.swift in Sources */,
 				047C10712AAC310600AFA159 /* QrAddressVC.swift in Sources */,
+				04B789EB2ACB336400E9BE88 /* SelectRefAddressCell.swift in Sources */,
 				0478438F2AC991B300462F1C /* injective_ocr_v1beta1_query.grpc.swift in Sources */,
 				E122DBCF2A8A468E006D1E7B /* cosmos_upgrade_v1beta1_upgrade.pb.swift in Sources */,
 				04B789C42ACAF59700E9BE88 /* iov_escrow_v1beta1_tx.grpc.swift in Sources */,

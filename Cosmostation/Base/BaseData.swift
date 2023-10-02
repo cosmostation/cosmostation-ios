@@ -284,6 +284,15 @@ extension BaseData {
     
     
     //V2 version refAddress
+    public func selectAllRefAddresses() -> Array<RefAddress> {
+        var result = Array<RefAddress>()
+        for rowInfo in try! database.prepare(TABLE_REFADDRESS) {
+            result.append(RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_ID],
+                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_LAST_AMOUNT], rowInfo[REFADDRESS_LAST_VALUE]))
+        }
+        return result
+    }
+    
     public func selectRefAddresses(_ accountId: Int64) -> Array<RefAddress> {
         var result = Array<RefAddress>()
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == accountId)
@@ -297,7 +306,7 @@ extension BaseData {
     @discardableResult
     public func insertRefAddresses(_ refAddress: RefAddress) -> Int64 {
         let toInsert = TABLE_REFADDRESS.insert(REFADDRESS_ACCOUNT_ID <- refAddress.accountId,
-                                               REFADDRESS_CHAIN_ID <- refAddress.chainId,
+                                               REFADDRESS_CHAIN_ID <- refAddress.chainTag,
                                                REFADDRESS_DP_ADDRESS <- refAddress.dpAddress,
                                                REFADDRESS_LAST_AMOUNT <- refAddress.lastAmount,
                                                REFADDRESS_LAST_VALUE <- refAddress.lastValue)
@@ -307,7 +316,7 @@ extension BaseData {
     @discardableResult
     public func updateRefAddresses(_ refAddress: RefAddress) -> Int? {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
-                                            REFADDRESS_CHAIN_ID == refAddress.chainId &&
+                                            REFADDRESS_CHAIN_ID == refAddress.chainTag &&
                                             REFADDRESS_DP_ADDRESS == refAddress.dpAddress)
         if let address = try! database.pluck(query) {
             let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])

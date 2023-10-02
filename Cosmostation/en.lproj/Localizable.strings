@@ -271,6 +271,7 @@
 "str_compounding_msg" = "Immediately stake the accumulated rewards.";
 "str_cancel_unbonding" = "Cancel Unbonding";
 "str_cancel_unbonding_msg" = "Cancel unstaking and immediately make staked state.";
+"str_address_book_list" = "Address Book List";
 
 
 "btn_delegate" = "  Delegate";

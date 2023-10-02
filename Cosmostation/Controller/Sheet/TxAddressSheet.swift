@@ -61,6 +61,12 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
     }
     
     @IBAction func onClickAddressBook(_ sender: UIButton) {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.sheetDelegate = self
+        baseSheet.senderAddress = selectedChain.address
+        baseSheet.targetChain = recipientChain
+        baseSheet.sheetType = .SelectRecipientAddress
+        self.onStartSheet(baseSheet)
     }
     
     @IBAction func onClickScan(_ sender: UIButton) {
@@ -151,8 +157,13 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
     
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
-        let nameservice = nameservices[result.position!]
-        addressTextField.text = nameservice.address
+        if (sheetType == .SelectNameServiceAddress) {
+            let nameservice = nameservices[result.position!]
+            addressTextField.text = nameservice.address
+            
+        } else if (sheetType == .SelectRecipientAddress) {
+            addressTextField.text = result.param
+        }
     }
     
     
@@ -164,7 +175,6 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
 protocol AddressDelegate {
     func onInputedAddress(_ address: String)
 }
-
 
 extension TxAddressSheet {
     
@@ -181,7 +191,7 @@ extension TxAddressSheet {
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         
         let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
-            $0.address = "osmo1xk0s8xgktn9x5vwcgtjdxqzadg88fgn33p8u9cnpdxwemvxscvast52cdd"
+            $0.address = OSMO_NAME_SERVICE
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
         return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.get()
@@ -194,7 +204,7 @@ extension TxAddressSheet {
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         
         let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
-            $0.address = "stars1fx74nkqkw2748av8j7ew7r3xt9cgjqduwn8m0ur5lhe49uhlsasszc5fhr"
+            $0.address = STARGAZE_NAME_SERVICE
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
         return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.get()
@@ -214,7 +224,7 @@ extension TxAddressSheet {
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         
         let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
-            $0.address = "archway1275jwjpktae4y4y0cdq274a2m0jnpekhttnfuljm6n59wnpyd62qppqxq0"
+            $0.address = ARCH_NAME_SERVICE
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
         return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.get()
