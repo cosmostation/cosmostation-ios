@@ -511,36 +511,36 @@ public class WUtils {
 //        return chainConfig.chainDBName
 //    }
 //
-//    static func getMintscanPath(_ fromChain: ChainConfig, _ toChain: ChainConfig, _ denom: String) -> MintscanPath? {
-//        let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom.lowercased() }).first
-//        let msTokens = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first
-//        var result: MintscanPath?
-//        BaseData.instance.mMintscanAssets.forEach { asset in
-//            if (msAsset != nil) {
-//                if (asset.chain == fromChain.chainAPIName &&
-//                    asset.beforeChain(fromChain) == toChain.chainAPIName &&
-//                    asset.denom.lowercased() == denom.lowercased()) {
-//                    result = MintscanPath.init(asset.channel, asset.port)
-//                    return
-//                }
-//                if (asset.chain == toChain.chainAPIName &&
-//                    asset.beforeChain(toChain) == fromChain.chainAPIName &&
-//                    asset.counter_party?.denom?.lowercased() == denom.lowercased()) {
-//                    result = MintscanPath.init(asset.counter_party!.channel!, asset.counter_party!.port!)
-//                    return
-//                }
-//
-//            } else if (msTokens != nil) {
-//                if (asset.chain == toChain.chainAPIName &&
-//                    asset.beforeChain(toChain) == fromChain.chainAPIName &&
-//                    asset.counter_party?.denom?.lowercased() == msTokens?.address.lowercased()) {
-//                    result = MintscanPath.init(asset.counter_party!.channel!, asset.counter_party!.port!)
-//                    return
-//                }
-//            }
-//        }
-//        return result
-//    }
+    static func getMintscanPath(_ fromChain: CosmosClass, _ toChain: CosmosClass, _ denom: String) -> MintscanPath? {
+        let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom?.lowercased() == denom.lowercased() }).first
+        let msToken = fromChain.mintscanTokens.filter({ $0.address == denom }).first
+        var result: MintscanPath?
+        BaseData.instance.mintscanAssets?.forEach { asset in
+            if (msAsset != nil) {
+                if (asset.chain == fromChain.apiName &&
+                    asset.beforeChain(fromChain.apiName) == toChain.apiName &&
+                    asset.denom?.lowercased() == denom.lowercased()) {
+                    result = MintscanPath.init(asset.channel!, asset.port!)
+                    return
+                }
+                if (asset.chain == toChain.apiName &&
+                    asset.beforeChain(toChain.apiName) == fromChain.apiName &&
+                    asset.counter_party?.denom?.lowercased() == denom.lowercased()) {
+                    result = MintscanPath.init(asset.counter_party!.channel!, asset.counter_party!.port!)
+                    return
+                }
+
+            } else if (msToken != nil) {
+                if (asset.chain == toChain.apiName &&
+                    asset.beforeChain(toChain.apiName) == fromChain.apiName &&
+                    asset.counter_party?.denom?.lowercased() == msToken?.address!.lowercased()) {
+                    result = MintscanPath.init(asset.counter_party!.channel!, asset.counter_party!.port!)
+                    return
+                }
+            }
+        }
+        return result
+    }
 //
 //    static func clearBackgroundColor(of view: UIView) {
 //        if let effectsView = view as? UIVisualEffectView {
