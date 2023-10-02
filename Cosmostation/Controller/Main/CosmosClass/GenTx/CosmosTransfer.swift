@@ -12,6 +12,8 @@ import SwiftyJSON
 import GRPC
 import NIO
 import SwiftProtobuf
+import web3swift
+import BigInt
 
 class CosmosTransfer: BaseVC {
     
@@ -72,6 +74,7 @@ class CosmosTransfer: BaseVC {
     var recipientableChains = [CosmosClass]()
     var selectedRecipientChain: CosmosClass!
     var selectedRecipientAddress: String?
+    var ethereumTransaction: EthereumTransaction?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -372,6 +375,13 @@ class CosmosTransfer: BaseVC {
         sendBtn.isEnabled = true
     }
     
+    func onUpdateWithEvmSimul() {
+        onUpdateFeeView()
+        view.isUserInteractionEnabled = true
+        loadingView.isHidden = true
+        sendBtn.isEnabled = true
+    }
+    
     @IBAction func onClickSend(_ sender: BaseButton) {
         let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
         self.present(pinVC, animated: true)
@@ -394,7 +404,7 @@ class CosmosTransfer: BaseVC {
                 inChainWasmSendSimul()
                 
             } else if (transferAssetType == .Erc20Transfer) {
-                
+                inChainEvmSendSimul()
             }
             
         } else {
@@ -451,6 +461,56 @@ class CosmosTransfer: BaseVC {
             }
         }
     }
+    
+    func inChainEvmSendSimul() {
+        Task {
+            guard let url = URL(string: selectedChain.rpcURL) else { return }
+            guard let web3 = try? Web3.new(url) else { return }
+            
+            let chainID = web3.provider.network?.chainID
+            let contractAddress = EthereumAddress.init(fromHex: selectedMsToken!.address!)
+            let senderAddress = EthereumAddress.init(fromHex: KeyFac.convertBech32ToEvm(selectedChain.address!))
+            let recipientAddress = EthereumAddress.init(fromHex: KeyFac.convertBech32ToEvm(selectedRecipientAddress!))
+            let erc20token = ERC20(web3: web3, provider: web3.provider, address: contractAddress!)
+            
+            let calSendAmount = toSendAmount.multiplying(byPowerOf10: -selectedMsToken!.decimals!)
+            
+            let nonce = try? web3.eth.getTransactionCount(address: senderAddress!)
+            let wTx = try? erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
+            let gasPrice = try? web3.eth.getGasPrice()
+            var tx: EthereumTransaction
+            var multipleGas: BigUInt
+            
+            if (selectedChain.tag == "evmos60") {
+                let eip1559 = EIP1559Envelope(to: contractAddress!, nonce: nonce!, chainID: chainID!, value: wTx!.transaction.value, data: wTx!.transaction.data,
+                                              maxPriorityFeePerGas: BigUInt(500000000),
+                                              maxFeePerGas: BigUInt(27500000000),
+                                              gasLimit: BigUInt(900000))
+                tx = EthereumTransaction(with: eip1559)
+                multipleGas = eip1559.maxFeePerGas
+            } else {
+                let legacy = LegacyEnvelope(to: contractAddress!, nonce: nonce!, chainID: chainID, value: wTx!.transaction.value, data: wTx!.transaction.data, 
+                                            gasPrice: gasPrice!, gasLimit: BigUInt(900000))
+                tx = EthereumTransaction(with: legacy)
+                multipleGas = legacy.gasPrice
+            }
+            
+            if let gasLimit = try? web3.eth.estimateGas(tx, transactionOptions: wTx?.transactionOptions) {
+                let newLimit = NSDecimalNumber(string: String(gasLimit)).multiplying(by: NSDecimalNumber(string: "1.3"), withBehavior: handler0Up)
+                tx.parameters.gasLimit = Web3.Utils.parseToBigUInt(newLimit.stringValue, decimals: 0)
+                txFee.gasLimit = UInt64(gasLimit)
+                txFee.amount[0].denom = selectedChain.stakeDenom
+                txFee.amount[0].amount = String(gasLimit.multiplied(by: multipleGas))
+                
+                ethereumTransaction = tx
+            }
+            
+            DispatchQueue.main.async {
+                self.onUpdateWithEvmSimul()
+            }
+        }
+    }
+    
     
     func ibcCoinSendSimul() {
         Task {
@@ -604,9 +664,9 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                 if (transferAssetType == .CoinTransfer) {
                     inChainCoinSend()
                 } else if (transferAssetType == .Cw20Transfer) {
-                    inChainCw20Send()
+                    inChainWasmSend()
                 } else if (transferAssetType == .Erc20Transfer) {
-                    
+                    inChainEvmSend()
                 }
                 
             } else {
@@ -614,7 +674,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                 if (transferAssetType == .CoinTransfer) {
                     ibcCoinSend()
                 } else if (transferAssetType == .Cw20Transfer) {
-                    ibcCw20Send()
+                    ibcWasmSend()
                 }
             }
         }
@@ -638,7 +698,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
         }
     }
     
-    func inChainCw20Send() {
+    func inChainWasmSend() {
         Task {
             let channel = getConnection()
             if let auth = try? await fetchAuth(channel, selectedChain.address!),
@@ -649,6 +709,29 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                     txResult.selectedChain = self.selectedChain
                     txResult.broadcastTxResponse = response
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
+                })
+            }
+        }
+    }
+    
+    func inChainEvmSend() {
+        Task {
+            guard let url = URL(string: selectedChain.rpcURL) else { return }
+            guard let web3 = try? Web3.new(url) else { return }
+            try? ethereumTransaction!.sign(privateKey: selectedChain.privateKey!)
+            
+            if let result = try? web3.eth.sendRawTransaction(ethereumTransaction!) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    print("result ", result)
+                    print("result hash ", result.hash)
+                    self.loadingView.isHidden = true
+                    
+                    let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                    txResult.resultType = .Evm
+                    txResult.selectedChain = self.selectedChain
+                    txResult.evmHash = result.hash
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
                 })
@@ -675,7 +758,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
         }
     }
     
-    func ibcCw20Send() {
+    func ibcWasmSend() {
         Task {
             let channel = getConnection()
             if let auth = try? await fetchAuth(channel, selectedChain.address!),
