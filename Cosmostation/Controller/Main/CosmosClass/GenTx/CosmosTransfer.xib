@@ -189,8 +189,8 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPK-zu-jqk">
-                                            <rect key="frame" x="384" y="58.666666666666636" width="7" height="15.333333333333336"/>
-                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                            <rect key="frame" x="384" y="60.999999999999993" width="7" height="12.666666666666664"/>
+                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                                             <color key="textColor" name="_color02"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -222,7 +222,7 @@
                                         <constraint firstAttribute="trailing" secondItem="535-Gl-KLj" secondAttribute="trailing" constant="12" id="iQe-LE-edr"/>
                                         <constraint firstItem="r5K-7O-YS6" firstAttribute="top" secondItem="NCa-lh-Sfz" secondAttribute="top" constant="14" id="ivN-yA-HMu"/>
                                         <constraint firstItem="HxS-2d-djc" firstAttribute="top" secondItem="r5K-7O-YS6" secondAttribute="bottom" constant="12" id="knS-Ev-Rb4"/>
-                                        <constraint firstItem="tHV-uV-cjr" firstAttribute="centerY" secondItem="kPK-zu-jqk" secondAttribute="centerY" id="tBi-k2-eRh"/>
+                                        <constraint firstItem="tHV-uV-cjr" firstAttribute="centerY" secondItem="kPK-zu-jqk" secondAttribute="centerY" constant="-1" id="tBi-k2-eRh"/>
                                         <constraint firstItem="r5K-7O-YS6" firstAttribute="leading" secondItem="NCa-lh-Sfz" secondAttribute="leading" constant="12" id="yS8-uB-Ym7"/>
                                         <constraint firstItem="tHV-uV-cjr" firstAttribute="top" secondItem="HxS-2d-djc" secondAttribute="bottom" constant="2" id="zEg-Zw-nrI"/>
                                     </constraints>
@@ -333,11 +333,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jf1-FL-vwC">
-                                            <rect key="frame" x="384" y="72.666666666666629" width="7" height="14"/>
+                                            <rect key="frame" x="384" y="73.666666666666629" width="7" height="14"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="14" id="BfO-mD-I7b"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                                             <color key="textColor" name="_color02"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -373,7 +373,7 @@
                                         <constraint firstAttribute="trailing" secondItem="mSu-LT-daI" secondAttribute="trailing" constant="12" id="8Vf-iA-8DU"/>
                                         <constraint firstAttribute="trailing" secondItem="Slu-GN-NfG" secondAttribute="trailing" constant="12" id="Beh-Yc-aga"/>
                                         <constraint firstItem="mSu-LT-daI" firstAttribute="top" secondItem="Slu-GN-NfG" secondAttribute="bottom" constant="14" id="Uxw-J1-3xI"/>
-                                        <constraint firstItem="2l3-SV-Ss1" firstAttribute="centerY" secondItem="Jf1-FL-vwC" secondAttribute="centerY" id="Y2I-rJ-uKr"/>
+                                        <constraint firstItem="2l3-SV-Ss1" firstAttribute="centerY" secondItem="Jf1-FL-vwC" secondAttribute="centerY" constant="-1" id="Y2I-rJ-uKr"/>
                                         <constraint firstItem="Xdb-M8-KdR" firstAttribute="top" secondItem="Slu-GN-NfG" secondAttribute="bottom" constant="12" id="YU3-Vp-r32"/>
                                         <constraint firstItem="Po1-t7-EL0" firstAttribute="centerY" secondItem="mSu-LT-daI" secondAttribute="centerY" id="bMZ-W8-67m"/>
                                         <constraint firstAttribute="trailing" secondItem="5NL-21-0ur" secondAttribute="trailing" constant="12" id="eT7-QC-jDs"/>

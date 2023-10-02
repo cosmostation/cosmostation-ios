@@ -322,7 +322,7 @@
 "msg_fee1" = "手数料はネットワークから請求される費用です。";
 "msg_fee2" = "Cosmostationウォーレット無料で使用可能で、支払ったトランザクション手数料は検証人とコミュニティープールに分配されます。";
 "msg_liquid_unstake" = "アンステークには、原産地チェーンによって設定された期間（14~28日）が必要です。\n\nスト資産をOsmosis Dexの元の資産に瞬時に変換できます。";
-"msg_address_nameservice" = "受信者アドレスまたはサービス名を挿入します";
+"msg_address_nameservice" = "アドレスまたはネームサービス";
 "msg_account_nickname_updated_with_nameservice" = "ネームサービス名でウォレット名を更新します";
 "msg_okc_deprecated_msg" = "そのアドレスはチェーンでそれ以上サポートしません。\n円滑な使用のために公式アドレスを生成して資産を異伝することを強くお勧めします。\n（設定>ウォレット追加メニューから公式アドレスを追加できます。）";
 "msg_no_supported_chain" = "このネットワークはもう機能しません。\n\nCosmostationウォレットはアーカイブされたデータのみを表示していますのでご注意ください。";
@@ -879,6 +879,7 @@
 "title_staking_info" = "Staking Info";
 "title_select_options" = "Select Options";
 "title_select_recipient_chain" = "Select Recipient Chain";
+"title_select_nameservice" = "Search Result %@ Nameservices";
 
 
 "proposal_type_basic" = "Basic";

@@ -61,28 +61,16 @@ class CosmosTransfer: BaseVC {
     var txMemo = ""
     
     var toSendDenom: String!                        // coin denom or contract addresss
-//    var toSendCoin: Cosmos_Base_V1beta1_Coin?
-    
-//    var availableCoin: Cosmos_Base_V1beta1_Coin?
-    var availableAmount = NSDecimalNumber.zero
-    var toSendAmount = NSDecimalNumber.zero
-    
-    
-    var recipientableChains = [CosmosClass]()
-//    var recipientableAccounts = Array<Account>()
-//    var mintscanAsset: MintscanAsset?
-//    var mintscanTokens: MintscanToken?
-    
+    var transferAssetType: TransferAssetType!       // to send type
+    var selectedMsAsset: MintscanAsset!             // to send Coin
+    var selectedMsToken: MintscanToken!             // to send Token
     var allCosmosChains = [CosmosClass]()
     
+    var availableAmount = NSDecimalNumber.zero
+    var toSendAmount = NSDecimalNumber.zero
+    var recipientableChains = [CosmosClass]()
     var selectedRecipientChain: CosmosClass!
-    var selectedRecipientAddress: String!
-    
-    var transferAssetType: TransferAssetType!
-    
-    
-    var selectedMsAsset: MintscanAsset! //TO send Coin
-    var selectedMsToken: MintscanToken! //TO send Token
+    var selectedRecipientAddress: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,8 +92,6 @@ class CosmosTransfer: BaseVC {
         selectedFeeInfo = selectedChain.getFeeBasePosition()
         feeSegments.selectedSegmentIndex = selectedFeeInfo
         txFee = selectedChain.getInitFee()
-        
-        print("toSendDenom ", toSendDenom)
         
         if let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom?.lowercased() == toSendDenom.lowercased() }).first {
             selectedMsAsset = msAsset
@@ -211,7 +197,6 @@ class CosmosTransfer: BaseVC {
     @objc func onClickToChain() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.cosmosChainList = recipientableChains
-//        baseSheet.validators = selectedChain.cosmosValidators
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectRecipientChain
         onStartSheet(baseSheet, 680)
@@ -229,10 +214,18 @@ class CosmosTransfer: BaseVC {
     }
     
     @objc func onClickToAddress() {
+        let addressSheet = TxAddressSheet(nibName: "TxAddressSheet", bundle: nil)
+        addressSheet.selectedChain = selectedChain
+        if (selectedRecipientAddress?.isEmpty == false) {
+            addressSheet.existedAddress = txMemo
+        }
+        addressSheet.recipientChain = selectedRecipientChain
+        addressSheet.addressDelegate = self
+        self.onStartSheet(addressSheet)
     }
     
     func onUpdateToAddressView() {
-        if (selectedRecipientAddress.isEmpty) {
+        if (selectedRecipientAddress?.isEmpty == true) {
             toAddressHint.isHidden = false
             toAddressLabel.isHidden = true
             
@@ -242,6 +235,7 @@ class CosmosTransfer: BaseVC {
             toAddressLabel.text = selectedRecipientAddress
             toAddressLabel.adjustsFontSizeToFitWidth = true
         }
+        onSimul()
     }
     
     @objc func onClickAmount() {
@@ -374,7 +368,7 @@ class CosmosTransfer: BaseVC {
 }
 
 
-extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
+extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, AddressDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .SelectFeeCoin) {
@@ -401,6 +395,11 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     
     func onInputedAmount(_ amount: String) {
         onUpdateAmountView(amount)
+    }
+    
+    func onInputedAddress(_ address: String) {
+        selectedRecipientAddress = address
+        onUpdateToAddressView()
     }
     
     func pinResponse(_ request: LockType, _ result: UnLockResult) {

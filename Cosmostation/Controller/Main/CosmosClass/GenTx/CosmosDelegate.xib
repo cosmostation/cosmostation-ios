@@ -288,11 +288,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRo-B2-ZpO">
-                            <rect key="frame" x="348" y="72.666666666666629" width="7.6666666666666856" height="14"/>
+                            <rect key="frame" x="348.66666666666669" y="73.666666666666629" width="7" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="ke3-2u-nre"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -322,7 +322,7 @@
                     </subviews>
                     <color key="backgroundColor" name="_color06"/>
                     <constraints>
-                        <constraint firstItem="XYP-WE-vf3" firstAttribute="centerY" secondItem="oRo-B2-ZpO" secondAttribute="centerY" id="6FR-nb-pCS"/>
+                        <constraint firstItem="XYP-WE-vf3" firstAttribute="centerY" secondItem="oRo-B2-ZpO" secondAttribute="centerY" constant="-1" id="6FR-nb-pCS"/>
                         <constraint firstItem="2zt-w8-L71" firstAttribute="top" secondItem="p7e-jS-jPp" secondAttribute="top" constant="14" id="CcC-tv-xy9"/>
                         <constraint firstItem="5b5-Bx-l1s" firstAttribute="top" secondItem="2zt-w8-L71" secondAttribute="bottom" constant="12" id="ChK-qf-DxH"/>
                         <constraint firstItem="crd-99-Hyw" firstAttribute="top" secondItem="ZnL-sm-lWx" secondAttribute="bottom" constant="14" id="EVV-aI-6fJ"/>

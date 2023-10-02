@@ -279,16 +279,16 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXc-o0-kW7">
-                            <rect key="frame" x="348" y="72.666666666666629" width="7.6666666666666856" height="14"/>
+                            <rect key="frame" x="349" y="73.666666666666629" width="7" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="Ob3-S8-Yto"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="56T-eR-V4g">
-                            <rect key="frame" x="357.66666666666669" y="72.666666666666629" width="7.3333333333333144" height="14"/>
+                            <rect key="frame" x="358" y="72.666666666666629" width="7" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="o2y-BJ-QBL"/>
                             </constraints>
@@ -328,7 +328,7 @@
                         <constraint firstItem="c23-6c-RrY" firstAttribute="leading" secondItem="xXY-TS-cxm" secondAttribute="leading" constant="12" id="pTi-hD-0YZ"/>
                         <constraint firstItem="KCB-vX-cnS" firstAttribute="top" secondItem="c23-6c-RrY" secondAttribute="bottom" constant="12" id="q3E-yI-Xhc"/>
                         <constraint firstItem="KCB-vX-cnS" firstAttribute="leading" secondItem="xXY-TS-cxm" secondAttribute="leading" constant="12" id="roG-tq-abT"/>
-                        <constraint firstItem="56T-eR-V4g" firstAttribute="centerY" secondItem="qXc-o0-kW7" secondAttribute="centerY" id="s0P-a7-0b5"/>
+                        <constraint firstItem="56T-eR-V4g" firstAttribute="centerY" secondItem="qXc-o0-kW7" secondAttribute="centerY" constant="-1" id="s0P-a7-0b5"/>
                         <constraint firstAttribute="trailing" secondItem="c23-6c-RrY" secondAttribute="trailing" constant="12" id="wFD-BZ-MXD"/>
                         <constraint firstItem="ZL0-CA-7tF" firstAttribute="top" secondItem="KCB-vX-cnS" secondAttribute="bottom" constant="14" id="wbt-cB-iVC"/>
                         <constraint firstItem="VwO-Xl-wM9" firstAttribute="leading" secondItem="xXY-TS-cxm" secondAttribute="leading" constant="12" id="xBl-E8-Wng"/>

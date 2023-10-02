@@ -232,11 +232,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBn-Zc-US6">
-                            <rect key="frame" x="369" y="72.5" width="8" height="14"/>
+                            <rect key="frame" x="370" y="73.5" width="7" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="KKb-k1-8Sm"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -274,7 +274,7 @@
                         <constraint firstItem="oQL-mr-Dlf" firstAttribute="centerY" secondItem="oQs-Qv-b8V" secondAttribute="centerY" id="NsY-sK-8MV"/>
                         <constraint firstItem="8Kl-sG-SkQ" firstAttribute="leading" secondItem="Yxj-Nf-2ba" secondAttribute="leading" constant="12" id="WIi-rt-6Se"/>
                         <constraint firstAttribute="height" constant="150" id="XP8-e2-AWI"/>
-                        <constraint firstItem="4BH-8a-162" firstAttribute="centerY" secondItem="IBn-Zc-US6" secondAttribute="centerY" id="fpQ-w3-epl"/>
+                        <constraint firstItem="4BH-8a-162" firstAttribute="centerY" secondItem="IBn-Zc-US6" secondAttribute="centerY" constant="-1" id="fpQ-w3-epl"/>
                         <constraint firstItem="USv-8B-2OX" firstAttribute="top" secondItem="bhO-Ub-f6h" secondAttribute="bottom" constant="12" id="gdc-QW-LpC"/>
                         <constraint firstItem="4BH-8a-162" firstAttribute="leading" secondItem="IBn-Zc-US6" secondAttribute="trailing" constant="2" id="ji2-3G-z3h"/>
                         <constraint firstItem="USv-8B-2OX" firstAttribute="leading" secondItem="Yxj-Nf-2ba" secondAttribute="leading" constant="12" id="kXR-Z1-RX0"/>

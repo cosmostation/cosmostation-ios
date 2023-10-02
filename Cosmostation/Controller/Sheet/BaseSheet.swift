@@ -30,6 +30,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var delegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     var delegation: Cosmos_Staking_V1beta1_DelegationResponse!
     var cosmosChainList = Array<CosmosClass>()
+    var nameservices = Array<NameService>()
     
 
     override func viewDidLoad() {
@@ -53,6 +54,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         
         sheetTableView.register(UINib(nibName: "SelectFeeCoinCell", bundle: nil), forCellReuseIdentifier: "SelectFeeCoinCell")
         sheetTableView.register(UINib(nibName: "SelectValidatorCell", bundle: nil), forCellReuseIdentifier: "SelectValidatorCell")
+        sheetTableView.register(UINib(nibName: "SelectNameServiceCell", bundle: nil), forCellReuseIdentifier: "SelectNameServiceCell")
         sheetTableView.sectionHeaderTopPadding = 0
         
         
@@ -126,6 +128,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SelectRecipientChain) {
             sheetTitle.text = NSLocalizedString("title_select_recipient_chain", comment: "")
+            
+        } else if (sheetType == .SelectNameServiceAddress) {
+            sheetTitle.text = String(format: NSLocalizedString("title_select_nameservice", comment: ""), nameservices[0].name ?? "")
             
         }
         
@@ -215,6 +220,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectRecipientChain) {
             return cosmosChainList.count
+            
+        } else if (sheetType == .SelectNameServiceAddress) {
+            return nameservices.count
         }
         return 0
     }
@@ -290,6 +298,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectRecipientChain) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapChainCell") as? SelectSwapChainCell
             cell?.onBindCosmosChain(cosmosChainList[indexPath.row])
+            return cell!
+            
+        } else if (sheetType == .SelectNameServiceAddress) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectNameServiceCell") as? SelectNameServiceCell
+            cell?.onBindNameservice(nameservices[indexPath.row])
             return cell!
         }
         return UITableViewCell()
@@ -369,4 +382,5 @@ public enum SheetType: Int {
     case SelectValidator = 14
     case SelectUnStakeValidator = 15
     case SelectRecipientChain = 16
+    case SelectNameServiceAddress = 17
 }

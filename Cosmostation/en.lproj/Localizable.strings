@@ -322,7 +322,7 @@
 "msg_fee1" = "Tx Fee is charged by the network.";
 "msg_fee2" = "Cosmostation Wallet service is free to use, and the Tx fee you pay is distributed to all validators and community pool.";
 "msg_liquid_unstake" = "Unstaking requires a period set by origin chain(14-28 days).\n\nYou can instantly convert st assets into original assets in Osmosis Dex.";
-"msg_address_nameservice" = "Insert recipient address or service name";
+"msg_address_nameservice" = "Address or NameService";
 "msg_account_nickname_updated_with_nameservice" = "update wallet name with nameservice name";
 "msg_okc_deprecated_msg" = "You selected deprecated path wallet.\nFor your convenience, highly recommend using current official address type.\n\n(You can add a wallet with default Address type in [Setting] > [Manage Mnemonic / Add Wallet])";
 "msg_no_supported_chain" = "This network is no longer operational.\n\nNote that Cosmostation Wallet is showing archived data only.";
@@ -879,6 +879,7 @@
 "title_staking_info" = "Staking Info";
 "title_select_options" = "Select Options";
 "title_select_recipient_chain" = "Select Recipient Chain";
+"title_select_nameservice" = "Search Result %@ Nameservices";
 
 
 "proposal_type_basic" = "Basic";

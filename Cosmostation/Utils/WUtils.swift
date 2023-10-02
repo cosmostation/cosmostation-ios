@@ -666,17 +666,24 @@ public class WUtils {
 //        return nil
 //    }
 //
-//    static func isValidChainAddress(_ chainConfig: ChainConfig?, _ address: String?) -> Bool {
-//        guard let chainConfig = chainConfig else { return false }
-//        if let address = address, address.starts(with: "0x") {
-//            if (WKey.isValidEthAddress(address) && chainConfig.chainType == .OKEX_MAIN) { return true }
-//            return false
-//        }
-//        if (!WKey.isValidateBech32(address ?? "")) { return false }
-//        let addressPrfix = chainConfig.addressPrefix + "1"
-//        if (address?.starts(with: addressPrfix) == true) { return true }
-//        return false
-//    }
+    static func isValidChainAddress(_ chain: CosmosClass, _ address: String?) -> Bool {
+        if (address?.isEmpty == true) {
+            return false
+        }
+        if (address!.starts(with: "0x")) {
+            //TODO
+            return false
+        }
+        guard let _ = try? Bech32().decode(address!) else {
+            return false
+        }
+        
+        if (!address!.starts(with: chain.accountPrefix! + "1")) {
+            return false
+        }
+        return true
+        
+    }
 //
 //    static func getChainsFromAddress(_ address: String?) -> ChainType? {
 //        if let address = address, address.starts(with: "0x") {
