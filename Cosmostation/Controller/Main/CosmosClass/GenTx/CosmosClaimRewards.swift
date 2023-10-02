@@ -95,13 +95,29 @@ class CosmosClaimRewards: BaseVC {
         
         let stakeDenom = selectedChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
-            let rewardAmount = selectedChain.rewardAmountSum(stakeDenom)
+            var rewardAmount = NSDecimalNumber.zero
+            claimableRewards.forEach { reward in
+                let rawAmount =  NSDecimalNumber(string: reward.reward.filter{ $0.denom == stakeDenom }.first?.amount ?? "0")
+                rewardAmount = rewardAmount.adding(rawAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(0)))
+            }
             WDP.dpCoin(msAsset, rewardAmount, nil, rewardDenomLabel, rewardAmountLabel, msAsset.decimals)
-        }
-        if (selectedChain.rewardOtherDenoms() > 0) {
-            rewardCntLabel.text = "+ " + String(selectedChain.rewardOtherDenoms())
-        } else {
-            rewardCntLabel.isHidden = true
+            
+            var anotherRewardDenom = Array<String>()
+            claimableRewards.forEach { reward in
+                reward.reward.filter { $0.denom != stakeDenom }.forEach { anotherRewards in
+                    let anotherAmount = NSDecimalNumber(string: anotherRewards.amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
+                    if (anotherAmount != NSDecimalNumber.zero) {
+                        if (!anotherRewardDenom.contains(anotherRewards.denom)) {
+                            anotherRewardDenom.append(anotherRewards.denom)
+                        }
+                    }
+                }
+            }
+            if (anotherRewardDenom.count > 0) {
+                rewardCntLabel.text = "+ " + String(anotherRewardDenom.count)
+            } else {
+                rewardCntLabel.isHidden = true
+            }
         }
     }
     

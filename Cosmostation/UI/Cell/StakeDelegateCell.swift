@@ -63,12 +63,21 @@ class StakeDelegateCell: UITableViewCell {
             let stakedAmount = NSDecimalNumber(string: delegation.balance.amount).multiplying(byPowerOf10: -msAsset.decimals!)
             stakingLabel?.attributedText = WDP.dpAmount(stakedAmount.stringValue, stakingLabel!.font, msAsset.decimals!)
             
-            if let rewards = baseChain.cosmosRewards.filter({ $0.validatorAddress == validator.operatorAddress }).first?.reward,
-               let mainDenomReward = rewards.filter({ $0.denom == stakeDenom }).first {
-                let mainDenomrewardAmount = NSDecimalNumber(string: mainDenomReward.amount).multiplying(byPowerOf10: -18).multiplying(byPowerOf10: -msAsset.decimals!)
-                rewardLabel?.attributedText = WDP.dpAmount(mainDenomrewardAmount.stringValue, rewardLabel!.font, msAsset.decimals!)
-                if (rewards.count > 2) {
-                    rewardTitle.text = "Reward + " + String(rewards.count - 1)
+            if let rewards = baseChain.cosmosRewards.filter({ $0.validatorAddress == validator.operatorAddress }).first?.reward {
+                if let mainDenomReward = rewards.filter({ $0.denom == stakeDenom }).first {
+                    let mainDenomrewardAmount = NSDecimalNumber(string: mainDenomReward.amount).multiplying(byPowerOf10: -18).multiplying(byPowerOf10: -msAsset.decimals!)
+                    rewardLabel?.attributedText = WDP.dpAmount(mainDenomrewardAmount.stringValue, rewardLabel!.font, msAsset.decimals!)
+                }
+                
+                var anotherCnt = 0
+                rewards.filter({ $0.denom != stakeDenom }).forEach { anotherRewards in
+                    let anotherAmount = NSDecimalNumber(string: anotherRewards.amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
+                    if (anotherAmount != NSDecimalNumber.zero) {
+                        anotherCnt = anotherCnt + 1
+                    }
+                }
+                if (anotherCnt > 0) {
+                    rewardTitle.text = "Reward + " + String(anotherCnt)
                 } else {
                     rewardTitle.text = "Reward"
                 }
@@ -81,3 +90,5 @@ class StakeDelegateCell: UITableViewCell {
     }
     
 }
+
+

@@ -487,7 +487,7 @@ extension CosmosClass {
         cosmosRewards.forEach({ reward in
             result = result.adding(NSDecimalNumber(string: reward.reward.filter{ $0.denom == denom }.first?.amount ?? "0"))
         })
-        return result.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(0))
+        return result.multiplying(byPowerOf10: -18, withBehavior: handler0Down)
     }
     
     func rewardValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
@@ -503,13 +503,14 @@ extension CosmosClass {
         var result = [Cosmos_Base_V1beta1_Coin]()
         cosmosRewards.forEach({ reward in
             reward.reward.forEach { coin in
-                let calReward = Cosmos_Base_V1beta1_Coin.with {
-                    $0.denom = coin.denom;
-                    $0.amount = NSDecimalNumber(string: coin.amount)
-                        .multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(0))
-                        .stringValue
+                let calAmount = NSDecimalNumber(string: coin.amount) .multiplying(byPowerOf10: -18, withBehavior: handler0Down)
+                if (calAmount != NSDecimalNumber.zero) {
+                    let calReward = Cosmos_Base_V1beta1_Coin.with {
+                        $0.denom = coin.denom;
+                        $0.amount = calAmount.stringValue
+                    }
+                    result.append(calReward)
                 }
-                result.append(calReward)
             }
         })
         return result
