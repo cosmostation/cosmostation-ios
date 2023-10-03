@@ -27,10 +27,12 @@ class PortfolioCell: UITableViewCell {
     @IBOutlet weak var priceChangePercentLabel: UILabel!
     
     
+    let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
+        
         valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
         rootView.setBlur()
     }
@@ -55,6 +57,7 @@ class PortfolioCell: UITableViewCell {
         } else {
             tagLabel.text = "LEGACY"
         }
+//        print("", chain.tag, "  ", chain.fetched)
         
         if (chain.fetched) {
             valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
@@ -74,6 +77,8 @@ class PortfolioCell: UITableViewCell {
 //                    WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
 //                }
 //            }
+        } else {
+            valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
         }
     }
     

@@ -33,10 +33,19 @@ class PortfolioVC: BaseVC {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
+        
+        
+//        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+//        self.tableView.tableHeaderView = searchBar
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+//        var contentOffset: CGPoint = self.tableView.contentOffset
+//        contentOffset.y += (self.tableView.tableHeaderView?.frame)!.height
+//        self.tableView.contentOffset = contentOffset
+        
         tableView.reloadData()
         onUpdateTotal()
     }
