@@ -48,7 +48,10 @@ class CosmosStakingInfoVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        onUpdateview()
+        
+        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "msgIconModify"), style: .plain, target: self, action: #selector(onRewardAddressTx))
+        
+        onFetchData()
     }
     
     override func setLocalizedString() {
@@ -56,7 +59,7 @@ class CosmosStakingInfoVC: BaseVC {
         stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
     }
     
-    func onUpdateview() {
+    func onFetchData() {
         Task {
             rewardAddress = selectedChain.rewardAddress
             validators = selectedChain.cosmosValidators
@@ -148,6 +151,10 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
+        if (selectedChain.rewardAddress != selectedChain.address) {
+            onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
+            return
+        }
         if let claimableReward = selectedChain.claimableRewards().filter({ $0.validatorAddress == fromValAddress }).first {
             let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
             compounding.claimableRewards = [claimableReward]
@@ -158,6 +165,19 @@ class CosmosStakingInfoVC: BaseVC {
         } else {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
         }
+    }
+    
+    
+    
+    @objc func onRewardAddressTx() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let rewardAddress = CosmosRewardAddress(nibName: "CosmosRewardAddress", bundle: nil)
+        rewardAddress.selectedChain = selectedChain
+        rewardAddress.modalTransitionStyle = .coverVertical
+        self.present(rewardAddress, animated: true)
     }
 }
 
@@ -241,6 +261,8 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
+            UIPasteboard.general.string = selectedChain.rewardAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.onShowToast(NSLocalizedString("address_copied", comment: ""))
             
         } else if (indexPath.section == 1) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)

@@ -20,6 +20,7 @@
                 <outlet property="addressTitle" destination="jOD-2l-DW3" id="1oh-cQ-3gl"/>
                 <outlet property="confirmBtn" destination="M0A-fG-KOH" id="aY6-e8-Tyv"/>
                 <outlet property="loadingView" destination="M6l-wv-RsO" id="kTw-Xd-Ey7"/>
+                <outlet property="selfBtn" destination="t7a-YC-Xad" id="rtF-IN-wmb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -48,6 +49,20 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HJ2-Tk-n1u">
                     <rect key="frame" x="155.66666666666663" y="217.33333333333334" width="217.33333333333337" height="28"/>
                     <subviews>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7a-YC-Xad">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="28"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="28" id="rZt-zE-YsU"/>
+                            </constraints>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Self">
+                                <fontDescription key="titleFontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="onClickSelf:" destination="-1" eventType="touchUpInside" id="XMe-8F-oAY"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fS-gt-GB2">
                             <rect key="frame" x="0.0" y="0.0" width="104.66666666666667" height="28"/>
                             <constraints>

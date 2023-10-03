@@ -313,34 +313,29 @@ class Signer {
 //        return anyMsgs
 //    }
 //    
-//    //Tx for Common Reward Address Change
-//    static func genSignedSetRewardAddressTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                                _ newRewardAddress: String,
-//                                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let setRewardAddressMsg = genSetRewardAddressMsg(auth, newRewardAddress)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, setRewardAddressMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateetRewardAddressTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                                 _ newRewardAddress: String,
-//                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let setRewardAddressMsg = genSetRewardAddressMsg(auth, newRewardAddress)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, setRewardAddressMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSetRewardAddressMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ newRewardAddress: String) -> [Google_Protobuf_Any] {
-//        let rewardAddressMsg = Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress.with {
-//            $0.delegatorAddress = WUtils.onParseAuthGrpc(auth).0!
-//            $0.withdrawAddress = newRewardAddress
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress"
-//            $0.value = try! rewardAddressMsg.serializedData()
-//        }
-//        return [anyMsg]
-//    }
-//    
-//    
+    //Tx for Common Reward Address Change
+    static func genRewardAddressTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                                _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,
+                                                _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let setRewardAddressMsg = genRewardAddressMsg(auth, setAddress)
+        return getSignedTx(auth, setRewardAddressMsg, fee, memo, baseChain)
+    }
+    
+    static func genRewardAddressTxSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                                 _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,
+                                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let setRewardAddressMsg = genRewardAddressMsg(auth, setAddress)
+        return getSimulateTx(auth, setRewardAddressMsg, fee, memo, baseChain)
+    }
+    
+    static func genRewardAddressMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress"
+            $0.value = try! setAddress.serializedData()
+        }
+        return [anyMsg]
+    }
+    
 //    //for Starname custom msgs
 //    //Tx for Starname Register Domain
 //    static func genSignedRegisterDomainMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,

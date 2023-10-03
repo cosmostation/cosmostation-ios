@@ -18,9 +18,11 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
     
     @IBOutlet weak var addressTitle: UILabel!
     @IBOutlet weak var addressTextField: MDCOutlinedTextField!
+    @IBOutlet weak var selfBtn: UIButton!
     @IBOutlet weak var confirmBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
+    var addressType: AddressSheetType = .DefaultTransfer
     var existedAddress: String?
     var selectedChain: CosmosClass!
     var recipientChain: CosmosClass!
@@ -40,6 +42,10 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        if (addressType == .RewardAddress) {
+            selfBtn.isHidden = false
+        }
+        
         addressTextField.setup()
         if let existedAddress = existedAddress {
             addressTextField.text = existedAddress
@@ -50,7 +56,12 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
     }
     
     override func setLocalizedString() {
-        addressTitle.text = NSLocalizedString("recipient_address", comment: "")
+        if (addressType == .RewardAddress) {
+            addressTitle.text = NSLocalizedString("str_reward_recipient_address", comment: "")
+        } else {
+            addressTitle.text = NSLocalizedString("recipient_address", comment: "")
+        }
+        
         addressTextField.label.text = NSLocalizedString("msg_address_nameservice", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
@@ -58,6 +69,10 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    @IBAction func onClickSelf(_ sender: Any) {
+        addressTextField.text = selectedChain.address
     }
     
     @IBAction func onClickAddressBook(_ sender: UIButton) {
@@ -86,10 +101,17 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return;
         }
-        
-        if (userInput == selectedChain.address) {
-            self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
-            return;
+        if (addressType != .RewardAddress) {
+            if (userInput == selectedChain.address) {
+                self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
+                return;
+            }
+            
+        } else {
+            if (userInput == selectedChain.rewardAddress) {
+                self.onShowToast(NSLocalizedString("error_same_reward_address", comment: ""))
+                return;
+            }
         }
         
         if (WUtils.isValidChainAddress(recipientChain, userInput)) {
@@ -241,6 +263,11 @@ extension TxAddressSheet {
         callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
         return callOptions
     }
+}
+
+public enum AddressSheetType: Int {
+    case RewardAddress = 0
+    case DefaultTransfer = -1
 }
 
 

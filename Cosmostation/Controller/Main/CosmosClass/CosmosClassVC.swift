@@ -114,6 +114,10 @@ class CosmosClassVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
+        if (selectedChain.rewardAddress != selectedChain.address) {
+            onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
+            return
+        }
         let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
         compounding.claimableRewards = selectedChain.claimableRewards()
         compounding.selectedChain = selectedChain

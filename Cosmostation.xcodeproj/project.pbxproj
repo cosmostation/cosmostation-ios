@@ -11,6 +11,10 @@
 		0402B7E72ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
 		0402B7E82ACC132200824B3F /* CosmosCompounding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7E52ACC132200824B3F /* CosmosCompounding.xib */; };
 		0402B7E92ACC132200824B3F /* CosmosCompounding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7E52ACC132200824B3F /* CosmosCompounding.xib */; };
+		0402B7EC2ACC248400824B3F /* CosmosRewardAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */; };
+		0402B7ED2ACC248400824B3F /* CosmosRewardAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */; };
+		0402B7EE2ACC248400824B3F /* CosmosRewardAddress.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7EB2ACC248400824B3F /* CosmosRewardAddress.xib */; };
+		0402B7EF2ACC248400824B3F /* CosmosRewardAddress.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7EB2ACC248400824B3F /* CosmosRewardAddress.xib */; };
 		040732FD2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */; };
 		040732FE2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */; };
 		040732FF2AA44075001C63DD /* ImportMnemonicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */; };
@@ -1297,6 +1301,8 @@
 /* Begin PBXFileReference section */
 		0402B7E42ACC132200824B3F /* CosmosCompounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosCompounding.swift; sourceTree = "<group>"; };
 		0402B7E52ACC132200824B3F /* CosmosCompounding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosCompounding.xib; sourceTree = "<group>"; };
+		0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosRewardAddress.swift; sourceTree = "<group>"; };
+		0402B7EB2ACC248400824B3F /* CosmosRewardAddress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosRewardAddress.xib; sourceTree = "<group>"; };
 		040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportMnemonicVC.xib; sourceTree = "<group>"; };
 		040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMnemonicVC.swift; sourceTree = "<group>"; };
 		040733012AA442B6001C63DD /* ImportMnemonicCheckVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMnemonicCheckVC.swift; sourceTree = "<group>"; };
@@ -2921,6 +2927,8 @@
 				E1D5A3E32AC33B8000453914 /* CosmosClaimRewards.xib */,
 				0402B7E42ACC132200824B3F /* CosmosCompounding.swift */,
 				0402B7E52ACC132200824B3F /* CosmosCompounding.xib */,
+				0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */,
+				0402B7EB2ACC248400824B3F /* CosmosRewardAddress.xib */,
 				047842D62AC87C1000462F1C /* CosmosTxResult.swift */,
 				047842D72AC87C1000462F1C /* CosmosTxResult.xib */,
 			);
@@ -3069,6 +3077,7 @@
 				E10EB59A2A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				E18D73B92AB484AB00FCB1AA /* DappStartVC.xib in Resources */,
 				E1BBF7552ABEBE4100D3082F /* basebg00.png in Resources */,
+				0402B7EF2ACC248400824B3F /* CosmosRewardAddress.xib in Resources */,
 				0443B89928589B570027A6B9 /* Color.xcassets in Resources */,
 				04FAD9BB2AB0125400143A3E /* BaseSheetCell.xib in Resources */,
 				04FAD9C72AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
@@ -3220,6 +3229,7 @@
 				04FA74732AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
 				E1DF777D2AB75F830028BD51 /* CheckPrivateKeysVC.xib in Resources */,
 				E1BBF7502ABEBE4100D3082F /* basebg03.png in Resources */,
+				0402B7EE2ACC248400824B3F /* CosmosRewardAddress.xib in Resources */,
 				E1BBF7522ABEBE4100D3082F /* basebg02.png in Resources */,
 				047842DA2AC87C1000462F1C /* CosmosTxResult.xib in Resources */,
 				E15F2D002ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
@@ -3493,6 +3503,7 @@
 				18FFB3A7281AF533004E65BB /* IntroVC.swift in Sources */,
 				042296852A890CC4003C7630 /* ChainKavaEVM.swift in Sources */,
 				E122DB8E2A8A468D006D1E7B /* cosmos_msg_textual_v1_textual.pb.swift in Sources */,
+				0402B7ED2ACC248400824B3F /* CosmosRewardAddress.swift in Sources */,
 				E122DC532A8A4712006D1E7B /* tendermint_libs_bits_types.pb.swift in Sources */,
 				E122DBEC2A8A468E006D1E7B /* cosmos_feegrant_module_v1_module.pb.swift in Sources */,
 				044ECB2A2A95DF8C0042DB3C /* ChainPersistence118.swift in Sources */,
@@ -4042,6 +4053,7 @@
 				046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */,
 				042296842A890CC4003C7630 /* ChainKavaEVM.swift in Sources */,
 				E122DB8D2A8A468D006D1E7B /* cosmos_msg_textual_v1_textual.pb.swift in Sources */,
+				0402B7EC2ACC248400824B3F /* CosmosRewardAddress.swift in Sources */,
 				E122DC522A8A4712006D1E7B /* tendermint_libs_bits_types.pb.swift in Sources */,
 				E122DBEB2A8A468E006D1E7B /* cosmos_feegrant_module_v1_module.pb.swift in Sources */,
 				044ECB292A95DF8C0042DB3C /* ChainPersistence118.swift in Sources */,

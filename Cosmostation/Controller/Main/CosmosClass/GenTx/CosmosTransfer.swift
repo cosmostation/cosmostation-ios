@@ -229,7 +229,8 @@ class CosmosTransfer: BaseVC {
     }
     
     func onUpdateToAddressView() {
-        if (selectedRecipientAddress?.isEmpty == true) {
+        if (selectedRecipientAddress == nil ||
+            selectedRecipientAddress?.isEmpty == true) {
             toAddressHint.isHidden = false
             toAddressLabel.isHidden = true
             
