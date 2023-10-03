@@ -267,9 +267,9 @@
 "str_switch_validator_msg" = "스테이킹중인 자산의 검증인을 변경합니다.";
 "str_cliam_reward" = "이자 받기";
 "str_cliam_reward_msg" = "쌓인 이자를 받습니다.";
-"str_compounding" = "Compunding";
+"str_compounding" = "컴파운딩";
 "str_compounding_msg" = "쌓인 이자를 즉시 스테이킹 합니다.";
-"str_cancel_unbonding" = "Cancel Unbonding";
+"str_cancel_unbonding" = "언스테이킹 취소";
 "str_cancel_unbonding_msg" = "언스테이킹을 취소하고 즉시 스테이킹 상태로 되돌립니다.";
 "str_address_book_list" = "주소록 확인";
 

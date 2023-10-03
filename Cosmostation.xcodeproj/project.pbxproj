@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0402B7E62ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
+		0402B7E72ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
+		0402B7E82ACC132200824B3F /* CosmosCompounding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7E52ACC132200824B3F /* CosmosCompounding.xib */; };
+		0402B7E92ACC132200824B3F /* CosmosCompounding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7E52ACC132200824B3F /* CosmosCompounding.xib */; };
 		040732FD2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */; };
 		040732FE2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */; };
 		040732FF2AA44075001C63DD /* ImportMnemonicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */; };
@@ -1291,6 +1295,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0402B7E42ACC132200824B3F /* CosmosCompounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosCompounding.swift; sourceTree = "<group>"; };
+		0402B7E52ACC132200824B3F /* CosmosCompounding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosCompounding.xib; sourceTree = "<group>"; };
 		040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportMnemonicVC.xib; sourceTree = "<group>"; };
 		040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMnemonicVC.swift; sourceTree = "<group>"; };
 		040733012AA442B6001C63DD /* ImportMnemonicCheckVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMnemonicCheckVC.swift; sourceTree = "<group>"; };
@@ -2913,6 +2919,8 @@
 				047842E32AC8B2D600462F1C /* CosmosRedelegate.xib */,
 				E1D5A3E22AC33B8000453914 /* CosmosClaimRewards.swift */,
 				E1D5A3E32AC33B8000453914 /* CosmosClaimRewards.xib */,
+				0402B7E42ACC132200824B3F /* CosmosCompounding.swift */,
+				0402B7E52ACC132200824B3F /* CosmosCompounding.xib */,
 				047842D62AC87C1000462F1C /* CosmosTxResult.swift */,
 				047842D72AC87C1000462F1C /* CosmosTxResult.xib */,
 			);
@@ -3135,6 +3143,7 @@
 				E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */,
 				E1D5A3E72AC33B8000453914 /* CosmosClaimRewards.xib in Resources */,
 				04FAD9D32AB2032200143A3E /* SwapStartVC.xib in Resources */,
+				0402B7E92ACC132200824B3F /* CosmosCompounding.xib in Resources */,
 				E11EAE122AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
 				0409D2FE2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
 				E15F2D012ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
@@ -3165,6 +3174,7 @@
 				1809C35129D16C80008884C1 /* injectScript.js in Resources */,
 				04FAD9F62AB71D5000143A3E /* DeleteAccountSheet.xib in Resources */,
 				E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */,
+				0402B7E82ACC132200824B3F /* CosmosCompounding.xib in Resources */,
 				1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */,
 				04A68C372AC156AA0041FA13 /* CosmosProposalCell.xib in Resources */,
 				04FA74812AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */,
@@ -3636,6 +3646,7 @@
 				04B789BF2ACAF59700E9BE88 /* iov_configuration_v1beta1_query.grpc.swift in Sources */,
 				E122DC262A8A468E006D1E7B /* cosmos_crypto_hd_v1_hd.pb.swift in Sources */,
 				E122DB462A8A468D006D1E7B /* cosmos_gov_v1beta1_genesis.pb.swift in Sources */,
+				0402B7E72ACC132200824B3F /* CosmosCompounding.swift in Sources */,
 				E122DB582A8A468D006D1E7B /* cosmos_base_node_v1beta1_query.pb.swift in Sources */,
 				0478438C2AC991B300462F1C /* injective_peggy_v1_msgs.grpc.swift in Sources */,
 				047843EE2AC991B300462F1C /* injective_types_v1beta1_tx_ext.pb.swift in Sources */,
@@ -4184,6 +4195,7 @@
 				04B789BE2ACAF59700E9BE88 /* iov_configuration_v1beta1_query.grpc.swift in Sources */,
 				E122DB572A8A468D006D1E7B /* cosmos_base_node_v1beta1_query.pb.swift in Sources */,
 				E122DB732A8A468D006D1E7B /* cosmos_nft_v1beta1_nft.pb.swift in Sources */,
+				0402B7E62ACC132200824B3F /* CosmosCompounding.swift in Sources */,
 				0492AE942A83CCA9001360F0 /* DappVC.swift in Sources */,
 				0478438B2AC991B300462F1C /* injective_peggy_v1_msgs.grpc.swift in Sources */,
 				047843ED2AC991B300462F1C /* injective_types_v1beta1_tx_ext.pb.swift in Sources */,

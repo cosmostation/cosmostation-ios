@@ -267,9 +267,9 @@
 "str_switch_validator_msg" = "ステーキング中の資産の検証者を変更します。";
 "str_cliam_reward" = "利息を受け取る";
 "str_cliam_reward_msg" = "積み重ねられた利子を受け取ります。";
-"str_compounding" = "Compunding";
+"str_compounding" = "配合";
 "str_compounding_msg" = "積み上げ利子をすぐにステーキングします。";
-"str_cancel_unbonding" = "Cancel Unbonding";
+"str_cancel_unbonding" = "アンステーキングのキャンセル";
 "str_cancel_unbonding_msg" = "アンステーキングをキャンセルし、すぐにステーキング状態に戻ります。";
 "str_address_book_list" = "アドレス帳リスト";
 

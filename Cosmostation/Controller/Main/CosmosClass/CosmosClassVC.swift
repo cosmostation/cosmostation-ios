@@ -90,7 +90,7 @@ class CosmosClassVC: BaseVC {
     }
     
     func onClaimRewardTx() {
-        if (selectedChain.cosmosRewards.count == 0) {
+        if (selectedChain.claimableRewards().count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return
         }
@@ -103,6 +103,22 @@ class CosmosClassVC: BaseVC {
         claimRewards.selectedChain = selectedChain
         claimRewards.modalTransitionStyle = .coverVertical
         self.present(claimRewards, animated: true)
+    }
+    
+    func onClaimCompoundingTx() {
+        if (selectedChain.claimableRewards().count == 0) {
+            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+            return
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
+        compounding.claimableRewards = selectedChain.claimableRewards()
+        compounding.selectedChain = selectedChain
+        compounding.modalTransitionStyle = .coverVertical
+        self.present(compounding, animated: true)
     }
     
     func onProposalList() {
@@ -177,6 +193,11 @@ class CosmosClassVC: BaseVC {
         
         mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
             self.onProposalList()
+        }
+        mainFab.addItem(title: "Compounding All", image: UIImage(named: "iconFabClaim")) { _ in
+            if (self.selectedChain.cosmosValidators.count > 0) {
+                self.onClaimCompoundingTx()
+            }
         }
         mainFab.addItem(title: "Claim Reward All", image: UIImage(named: "iconFabClaim")) { _ in
             if (self.selectedChain.cosmosValidators.count > 0) {

@@ -52,13 +52,6 @@ class StakeDelegateCell: UITableViewCell {
             
             let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
             commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
-            if (commission == NSDecimalNumber.zero) {
-                commLabel.textColor = .colorGreen
-                commPercentLabel.textColor = .colorGreen
-            } else {
-                commLabel.textColor = .color02
-                commPercentLabel.textColor = .color02
-            }
             
             let stakedAmount = NSDecimalNumber(string: delegation.balance.amount).multiplying(byPowerOf10: -msAsset.decimals!)
             stakingLabel?.attributedText = WDP.dpAmount(stakedAmount.stringValue, stakingLabel!.font, msAsset.decimals!)
@@ -67,6 +60,10 @@ class StakeDelegateCell: UITableViewCell {
                 if let mainDenomReward = rewards.filter({ $0.denom == stakeDenom }).first {
                     let mainDenomrewardAmount = NSDecimalNumber(string: mainDenomReward.amount).multiplying(byPowerOf10: -18).multiplying(byPowerOf10: -msAsset.decimals!)
                     rewardLabel?.attributedText = WDP.dpAmount(mainDenomrewardAmount.stringValue, rewardLabel!.font, msAsset.decimals!)
+                } else {
+                    rewardLabel?.attributedText = WDP.dpAmount("0", rewardLabel!.font, msAsset.decimals!)
+                    rewardTitle.text = "Reward"
+                    return
                 }
                 
                 var anotherCnt = 0

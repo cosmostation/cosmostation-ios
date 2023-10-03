@@ -60,13 +60,6 @@ class SelectValidatorCell: UITableViewCell {
             
             let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
             commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
-            if (commission == NSDecimalNumber.zero) {
-                commLabel.textColor = .colorGreen
-                commPercentLabel.textColor = .colorGreen
-            } else {
-                commLabel.textColor = .color02
-                commPercentLabel.textColor = .color02
-            }
         }
         
         vpTitle.isHidden = false

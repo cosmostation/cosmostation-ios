@@ -131,11 +131,33 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
-        claimRewards.claimableRewards = selectedChain.cosmosRewards.filter({ $0.validatorAddress == fromValAddress })
-        claimRewards.selectedChain = selectedChain
-        claimRewards.modalTransitionStyle = .coverVertical
-        self.present(claimRewards, animated: true)
+        if let claimableReward = selectedChain.claimableRewards().filter({ $0.validatorAddress == fromValAddress }).first {
+            let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
+            claimRewards.claimableRewards = [claimableReward]
+            claimRewards.selectedChain = selectedChain
+            claimRewards.modalTransitionStyle = .coverVertical
+            self.present(claimRewards, animated: true)
+            
+        } else {
+            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+        }
+    }
+    
+    func onCompoundingTx(_ fromValAddress: String) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if let claimableReward = selectedChain.claimableRewards().filter({ $0.validatorAddress == fromValAddress }).first {
+            let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
+            compounding.claimableRewards = [claimableReward]
+            compounding.selectedChain = selectedChain
+            compounding.modalTransitionStyle = .coverVertical
+            self.present(compounding, animated: true)
+            
+        } else {
+            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+        }
     }
 }
 
@@ -279,7 +301,9 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
                 });
                 
             } else if (result.position == 3) {
-                print("SelectDelegatedAction compounding")
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    self.onCompoundingTx(result.param!)
+                });
                 
             }
             

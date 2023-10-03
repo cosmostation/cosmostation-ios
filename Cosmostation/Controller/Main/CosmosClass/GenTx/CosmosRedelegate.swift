@@ -152,13 +152,6 @@ class CosmosRedelegate: BaseVC {
         
         let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
         toCommLabel?.attributedText = WDP.dpAmount(commission.stringValue, toCommLabel!.font, 2)
-        if (commission == NSDecimalNumber.zero) {
-            toCommLabel.textColor = .colorGreen
-            toCommPercentLabel.textColor = .colorGreen
-        } else {
-            toCommLabel.textColor = .color02
-            toCommPercentLabel.textColor = .color02
-        }
         onSimul()
     }
     

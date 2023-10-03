@@ -267,9 +267,9 @@
 "str_switch_validator_msg" = "Continue staking with changing validators.";
 "str_cliam_reward" = "Claim Rewards";
 "str_cliam_reward_msg" = "You receive accumulated rewards.";
-"str_compounding" = "Compunding";
+"str_compounding" = "Compounding";
 "str_compounding_msg" = "Immediately stake the accumulated rewards.";
-"str_cancel_unbonding" = "Cancel Unbonding";
+"str_cancel_unbonding" = "Cancel Unstaking";
 "str_cancel_unbonding_msg" = "Cancel unstaking and immediately make staked state.";
 "str_address_book_list" = "Address Book List";
 
