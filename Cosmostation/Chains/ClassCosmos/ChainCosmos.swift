@@ -25,5 +25,4 @@ class ChainCosmos: CosmosClass  {
         
         grpcHost = "grpc-cosmos.cosmostation.io"
     }
-    
 }
