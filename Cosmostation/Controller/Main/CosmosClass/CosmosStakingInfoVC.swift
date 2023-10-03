@@ -49,7 +49,7 @@ class CosmosStakingInfoVC: BaseVC {
         tableView.sectionHeaderTopPadding = 0.0
         
         
-        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "msgIconModify"), style: .plain, target: self, action: #selector(onRewardAddressTx))
+        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "msgIconModify"), style: .plain, target: self, action: #selector(onClickRewardAddressChange))
         
         onFetchData()
     }
@@ -167,17 +167,43 @@ class CosmosStakingInfoVC: BaseVC {
         }
     }
     
-    
-    
-    @objc func onRewardAddressTx() {
-        if (selectedChain.isTxFeePayable() == false) {
-            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
-        }
+    func onRewardAddressTx() {
         let rewardAddress = CosmosRewardAddress(nibName: "CosmosRewardAddress", bundle: nil)
         rewardAddress.selectedChain = selectedChain
         rewardAddress.modalTransitionStyle = .coverVertical
         self.present(rewardAddress, animated: true)
+    }
+    
+    @objc func onClickRewardAddressChange() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        let title = NSLocalizedString("reward_address_notice_title", comment: "")
+        let msg1 = NSLocalizedString("reward_address_notice_msg", comment: "")
+        let msg2 = NSLocalizedString("reward_address_notice_msg2", comment: "")
+        let msg = msg1 + msg2
+        let range = (msg as NSString).range(of: msg2)
+        let noticeAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        let attributedMessage: NSMutableAttributedString = NSMutableAttributedString(
+            string: msg,
+            attributes: [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12.0)
+            ]
+        )
+        attributedMessage.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 14.0), range: range)
+        attributedMessage.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range: range)
+        
+        noticeAlert.setValue(attributedMessage, forKey: "attributedMessage")
+        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
+        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default, handler: { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                self.onRewardAddressTx()
+            });
+            
+        }))
+        self.present(noticeAlert, animated: true)
     }
 }
 
