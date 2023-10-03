@@ -1,5 +1,5 @@
 //
-//  ChainCudos.swift
+//  ChainNoble.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/10/04.
@@ -8,22 +8,21 @@
 
 import Foundation
 
-class ChainCudos: CosmosClass  {
+class ChainNoble: CosmosClass  {
     
     override init() {
         super.init()
         
-        name = "Cudos"
-        tag = "cudos118"
-        logo1 = "chainCudos"
-        logo2 = "chainCudos2"
-        apiName = "cudos"
-        stakeDenom = "acudos"
+        name = "Noble"
+        tag = "noble118"
+        logo1 = "chainNoble"
+        logo2 = "chainNoble2"
+        apiName = "noble"
+        stakeDenom = "ustake"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "cudos"
+        accountPrefix = "noble"
         
-        grpcHost = "grpc-cudos.cosmostation.io"
+        grpcHost = "grpc-noble.cosmostation.io"
     }
 }
-

@@ -1,5 +1,5 @@
 //
-//  ChainCudos.swift
+//  ChainNyx.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/10/04.
@@ -8,22 +8,21 @@
 
 import Foundation
 
-class ChainCudos: CosmosClass  {
+class ChainNyx: CosmosClass  {
     
     override init() {
         super.init()
         
-        name = "Cudos"
-        tag = "cudos118"
-        logo1 = "chainCudos"
-        logo2 = "chainCudos2"
-        apiName = "cudos"
-        stakeDenom = "acudos"
+        name = "Nyx"
+        tag = "nyx118"
+        logo1 = "chainNyx"
+        logo2 = "chainNyx2"
+        apiName = "nyx"
+        stakeDenom = "unyx"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "cudos"
+        accountPrefix = "n"
         
-        grpcHost = "grpc-cudos.cosmostation.io"
+        grpcHost = "grpc-nyx.cosmostation.io"
     }
 }
-

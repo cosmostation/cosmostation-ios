@@ -1,5 +1,5 @@
 //
-//  ChainCudos.swift
+//  ChainQuasar.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/10/04.
@@ -8,22 +8,21 @@
 
 import Foundation
 
-class ChainCudos: CosmosClass  {
+class ChainQuasar: CosmosClass  {
     
     override init() {
         super.init()
         
-        name = "Cudos"
-        tag = "cudos118"
-        logo1 = "chainCudos"
-        logo2 = "chainCudos2"
-        apiName = "cudos"
-        stakeDenom = "acudos"
+        name = "Quasar"
+        tag = "quasar118"
+        logo1 = "chainQuasar"
+        logo2 = "chainQuasar2"
+        apiName = "quasar"
+        stakeDenom = "uqsr"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "cudos"
+        accountPrefix = "quasar"
         
-        grpcHost = "grpc-cudos.cosmostation.io"
+        grpcHost = "grpc-quasar.cosmostation.io"
     }
 }
-
