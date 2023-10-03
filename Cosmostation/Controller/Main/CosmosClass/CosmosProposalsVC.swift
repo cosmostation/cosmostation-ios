@@ -27,6 +27,9 @@ class CosmosProposalsVC: BaseVC {
     var myVotes = Array<MintscanMyVotes>()
     var toVoteList = Array<UInt64>()
     var isShowAll = false
+    
+    var showAll: UIBarButtonItem?
+    var filtered: UIBarButtonItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +51,24 @@ class CosmosProposalsVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
+        showAll = UIBarButtonItem(image: UIImage(named: "iconFilterOn"), style: .plain, target: self, action: #selector(onClickFilterOn))
+        filtered = UIBarButtonItem(image: UIImage(named: "iconFilterOff"), style: .plain, target: self, action: #selector(onClickFilterOff))
+        navigationItem.setRightBarButton(showAll, animated: true)
+        
         onFetchData()
+    }
+    
+    @objc func onClickFilterOn() {
+        navigationItem.setRightBarButton(filtered, animated: true)
+        isShowAll = !isShowAll
+        tableView.reloadData()
+        
+    }
+    
+    @objc func onClickFilterOff() {
+        navigationItem.setRightBarButton(showAll, animated: true)
+        isShowAll = !isShowAll
+        tableView.reloadData()
     }
     
     override func setLocalizedString() {
@@ -69,12 +89,16 @@ class CosmosProposalsVC: BaseVC {
                 proposals.forEach { proposal in
                     let msProposal = MintscanProposal(proposal)
                     if (msProposal.isVotingPeriod()) {
-                        if (msProposal.isScam()) { votingPeriods.append(msProposal) }
-                        else { filteredVotingPeriods.append(msProposal) }
+                        votingPeriods.append(msProposal)
+                        if (!msProposal.isScam()) {
+                            filteredVotingPeriods.append(msProposal)
+                        }
                         
                     } else {
-                        if (msProposal.isScam()) { etcPeriods.append(msProposal) }
-                        else { filteredEtcPeriods.append(msProposal) }
+                        etcPeriods.append(msProposal)
+                        if (!msProposal.isScam()) {
+                            filteredEtcPeriods.append(msProposal)
+                        }
                     }
                 }
                 votes["votes"].arrayValue.forEach { vote in
@@ -95,6 +119,22 @@ class CosmosProposalsVC: BaseVC {
     }
     
     @IBAction func onClickVote(_ sender: BaseButton) {
+        var toVoteProposals = [MintscanProposal]()
+        votingPeriods.forEach { proposal in
+            if (toVoteList.contains(proposal.id!)) {
+                toVoteProposals.append(proposal)
+            }
+        }
+        
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let vote = CosmosVote(nibName: "CosmosVote", bundle: nil)
+        vote.selectedChain = selectedChain
+        vote.toVoteProposals = toVoteProposals
+        vote.modalTransitionStyle = .coverVertical
+        self.present(vote, animated: true)
         
     }
 }
@@ -178,6 +218,26 @@ extension CosmosProposalsVC: UITableViewDelegate, UITableViewDataSource {
             }
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var proposalId: UInt64 = 0
+        if (indexPath.section == 0) {
+            if (isShowAll) {
+                proposalId = votingPeriods[indexPath.row].id!
+            } else {
+                proposalId = filteredVotingPeriods[indexPath.row].id!
+            }
+            
+        } else if (indexPath.section == 1) {
+            if (isShowAll) {
+                proposalId = etcPeriods[indexPath.row].id!
+            } else {
+                proposalId = filteredEtcPeriods[indexPath.row].id!
+            }
+        }
+        guard let url = BaseNetWork.getProposalDetailUrl(selectedChain, proposalId) else { return }
+        self.onShowSafariWeb(url)
     }
     
     

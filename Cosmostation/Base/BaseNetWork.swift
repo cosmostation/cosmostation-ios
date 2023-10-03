@@ -130,6 +130,10 @@ class BaseNetWork {
         return URL(string: MintscanUrl + chain.apiName + "/transactions/" + txHash)
     }
     
+    static func getProposalDetailUrl(_ chain: BaseChain, _ proposalId: UInt64) -> URL? {
+        return URL(string: MintscanUrl + chain.apiName + "/proposals/" + String(proposalId))
+    }
+    
     
     static func SkipChains() -> String {
         return SKIP_API_URL + "v1/info/chains"

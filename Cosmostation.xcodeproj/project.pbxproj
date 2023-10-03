@@ -15,6 +15,14 @@
 		0402B7ED2ACC248400824B3F /* CosmosRewardAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */; };
 		0402B7EE2ACC248400824B3F /* CosmosRewardAddress.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7EB2ACC248400824B3F /* CosmosRewardAddress.xib */; };
 		0402B7EF2ACC248400824B3F /* CosmosRewardAddress.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7EB2ACC248400824B3F /* CosmosRewardAddress.xib */; };
+		0402B7F22ACC38BA00824B3F /* CosmosVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7F02ACC38BA00824B3F /* CosmosVote.swift */; };
+		0402B7F32ACC38BA00824B3F /* CosmosVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7F02ACC38BA00824B3F /* CosmosVote.swift */; };
+		0402B7F42ACC38BA00824B3F /* CosmosVote.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7F12ACC38BA00824B3F /* CosmosVote.xib */; };
+		0402B7F52ACC38BA00824B3F /* CosmosVote.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7F12ACC38BA00824B3F /* CosmosVote.xib */; };
+		0402B7F82ACC3F1400824B3F /* VoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7F62ACC3F1400824B3F /* VoteCell.swift */; };
+		0402B7F92ACC3F1400824B3F /* VoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7F62ACC3F1400824B3F /* VoteCell.swift */; };
+		0402B7FA2ACC3F1400824B3F /* VoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7F72ACC3F1400824B3F /* VoteCell.xib */; };
+		0402B7FB2ACC3F1400824B3F /* VoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7F72ACC3F1400824B3F /* VoteCell.xib */; };
 		040732FD2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */; };
 		040732FE2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */; };
 		040732FF2AA44075001C63DD /* ImportMnemonicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */; };
@@ -1303,6 +1311,10 @@
 		0402B7E52ACC132200824B3F /* CosmosCompounding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosCompounding.xib; sourceTree = "<group>"; };
 		0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosRewardAddress.swift; sourceTree = "<group>"; };
 		0402B7EB2ACC248400824B3F /* CosmosRewardAddress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosRewardAddress.xib; sourceTree = "<group>"; };
+		0402B7F02ACC38BA00824B3F /* CosmosVote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosVote.swift; sourceTree = "<group>"; };
+		0402B7F12ACC38BA00824B3F /* CosmosVote.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosVote.xib; sourceTree = "<group>"; };
+		0402B7F62ACC3F1400824B3F /* VoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteCell.swift; sourceTree = "<group>"; };
+		0402B7F72ACC3F1400824B3F /* VoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteCell.xib; sourceTree = "<group>"; };
 		040732FB2AA44075001C63DD /* ImportMnemonicVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportMnemonicVC.xib; sourceTree = "<group>"; };
 		040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMnemonicVC.swift; sourceTree = "<group>"; };
 		040733012AA442B6001C63DD /* ImportMnemonicCheckVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMnemonicCheckVC.swift; sourceTree = "<group>"; };
@@ -2687,6 +2699,8 @@
 				E15F2D0F2ABF108500BAE105 /* StakeUnbondingCell.xib */,
 				04A68C332AC156AA0041FA13 /* CosmosProposalCell.swift */,
 				04A68C342AC156AA0041FA13 /* CosmosProposalCell.xib */,
+				0402B7F62ACC3F1400824B3F /* VoteCell.swift */,
+				0402B7F72ACC3F1400824B3F /* VoteCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2929,6 +2943,8 @@
 				0402B7E52ACC132200824B3F /* CosmosCompounding.xib */,
 				0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */,
 				0402B7EB2ACC248400824B3F /* CosmosRewardAddress.xib */,
+				0402B7F02ACC38BA00824B3F /* CosmosVote.swift */,
+				0402B7F12ACC38BA00824B3F /* CosmosVote.xib */,
 				047842D62AC87C1000462F1C /* CosmosTxResult.swift */,
 				047842D72AC87C1000462F1C /* CosmosTxResult.xib */,
 			);
@@ -3104,6 +3120,7 @@
 				04527DBC2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				04FAD9F12AB71D3300143A3E /* RenameSheet.xib in Resources */,
 				04FAD9B52AB011AC00143A3E /* SwitchPriceDisplayCell.xib in Resources */,
+				0402B7FB2ACC3F1400824B3F /* VoteCell.xib in Resources */,
 				1809C35229D16C80008884C1 /* injectScript.js in Resources */,
 				04F4061829ED119800CD88E4 /* Init.storyboard in Resources */,
 				047842E72AC8B2D600462F1C /* CosmosRedelegate.xib in Resources */,
@@ -3119,6 +3136,7 @@
 				18F4EAD22A4DA0A500CFBE2B /* ApiKey.plist in Resources */,
 				187447012930942400849EE4 /* ApiKeyDev.plist in Resources */,
 				E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
+				0402B7F52ACC38BA00824B3F /* CosmosVote.xib in Resources */,
 				04A68C262ABDA3350041FA13 /* SelectSwapAssetCell.xib in Resources */,
 				04BA9BD82A985771003E2404 /* ChainSelectVC.xib in Resources */,
 				04FA74552A9D97A0001A2830 /* Pincode.storyboard in Resources */,
@@ -3225,10 +3243,12 @@
 				E1BBF7542ABEBE4100D3082F /* basebg00.png in Resources */,
 				E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				E15F2D0C2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */,
+				0402B7FA2ACC3F1400824B3F /* VoteCell.xib in Resources */,
 				E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */,
 				04FA74732AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
 				E1DF777D2AB75F830028BD51 /* CheckPrivateKeysVC.xib in Resources */,
 				E1BBF7502ABEBE4100D3082F /* basebg03.png in Resources */,
+				0402B7F42ACC38BA00824B3F /* CosmosVote.xib in Resources */,
 				0402B7EE2ACC248400824B3F /* CosmosRewardAddress.xib in Resources */,
 				E1BBF7522ABEBE4100D3082F /* basebg02.png in Resources */,
 				047842DA2AC87C1000462F1C /* CosmosTxResult.xib in Resources */,
@@ -3402,6 +3422,7 @@
 				E122DC322A8A468E006D1E7B /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
 				04B789682ACAC9B100E9BE88 /* ibc_applications_fee_v1_query.pb.swift in Sources */,
 				047843C22AC991B300462F1C /* injective_wasmx_v1_genesis.pb.swift in Sources */,
+				0402B7F92ACC3F1400824B3F /* VoteCell.swift in Sources */,
 				E122DBF02A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,
 				04C6B9C62AAC59EC00B02A95 /* QrAddressPopupVC.swift in Sources */,
 				047843982AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
@@ -3724,6 +3745,7 @@
 				E1DF77702AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
 				04B789CB2ACAF59700E9BE88 /* iov_starname_v1beta1_query.grpc.swift in Sources */,
 				E14E29762A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
+				0402B7F32ACC38BA00824B3F /* CosmosVote.swift in Sources */,
 				04B789842ACAC9B100E9BE88 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
 				18FFB57A281AF533004E65BB /* WKey.swift in Sources */,
 				E122DB442A8A468D006D1E7B /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
@@ -3952,6 +3974,7 @@
 				E122DC312A8A468E006D1E7B /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
 				04B789672ACAC9B100E9BE88 /* ibc_applications_fee_v1_query.pb.swift in Sources */,
 				047843C12AC991B300462F1C /* injective_wasmx_v1_genesis.pb.swift in Sources */,
+				0402B7F82ACC3F1400824B3F /* VoteCell.swift in Sources */,
 				E122DBEF2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,
 				04C6B9C52AAC59EC00B02A95 /* QrAddressPopupVC.swift in Sources */,
 				047843972AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
@@ -4274,6 +4297,7 @@
 				E1DF776F2AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
 				04B789CA2ACAF59700E9BE88 /* iov_starname_v1beta1_query.grpc.swift in Sources */,
 				E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
+				0402B7F22ACC38BA00824B3F /* CosmosVote.swift in Sources */,
 				04B789832ACAC9B100E9BE88 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
 				E122DB432A8A468D006D1E7B /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				E1945E28222E7C0600A1436F /* AppDelegate.swift in Sources */,

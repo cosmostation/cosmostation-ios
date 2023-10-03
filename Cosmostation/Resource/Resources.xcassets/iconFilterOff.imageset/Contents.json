@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "not filter.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

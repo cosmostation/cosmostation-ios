@@ -15,15 +15,15 @@ import SwiftyJSON
 class Signer {
     //Tx for Transfer
     static func genSendTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                              _ toSend: Cosmos_Bank_V1beta1_MsgSend,
-                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain)  -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+                          _ toSend: Cosmos_Bank_V1beta1_MsgSend,
+                          _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain)  -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let sendMsg = genSendMsg(auth, toSend)
         return getSignedTx(auth, sendMsg, fee, memo, baseChain)
     }
     
-    static func genSendTxSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                _ toSend: Cosmos_Bank_V1beta1_MsgSend,
-                                _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain)  -> Cosmos_Tx_V1beta1_SimulateRequest {
+    static func genSendSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                             _ toSend: Cosmos_Bank_V1beta1_MsgSend,
+                             _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain)  -> Cosmos_Tx_V1beta1_SimulateRequest {
         let sendMsg = genSendMsg(auth, toSend)
         return getSimulateTx(auth, sendMsg, fee, memo, baseChain)
     }
@@ -44,9 +44,9 @@ class Signer {
         return getSignedTx(auth, ibcSendMsg, fee, memo, baseChain)
     }
     
-    static func genIbcSendTxSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                  _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer,
-                                  _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+    static func genIbcSendSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer,
+                                _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let ibcSendMsg = genIbcSendMsg(auth, ibcTransfer)
         return getSimulateTx(auth, ibcSendMsg, fee, memo, baseChain)
     }
@@ -67,9 +67,9 @@ class Signer {
         return getSignedTx(auth, wasmMsg, fee, memo, baseChain)
     }
     
-    static func genWasmTxSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                               _ wasmContract: Cosmwasm_Wasm_V1_MsgExecuteContract,
-                               _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+    static func genWasmSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                             _ wasmContract: Cosmwasm_Wasm_V1_MsgExecuteContract,
+                             _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let wasmMsg = genWasmMsg(auth, wasmContract)
         return getSimulateTx(auth, wasmMsg, fee, memo, baseChain)
     }
@@ -90,9 +90,9 @@ class Signer {
         return getSignedTx(auth, deleMsg, fee, memo, baseChain)
     }
     
-    static func genDelegateTxSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                   _ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate,
-                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+    static func genDelegateSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                 _ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate,
+                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let deleMsg = genDelegateMsg(auth, toDelegate)
         return getSimulateTx(auth, deleMsg, fee, memo, baseChain)
     }
@@ -105,43 +105,43 @@ class Signer {
         }
         return [anyMsg]
     }
-//    
-//    //Tx for Tgrade Delegate
-//    static func genSignedTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                        _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin,
-//                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let deleMsg = genTgradeDelegateMsg(auth, toValAddress, availableAmount, vestingAmount)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                          _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin,
-//                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let deleMsg = genTgradeDelegateMsg(auth, toValAddress, availableAmount, vestingAmount)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genTgradeDelegateMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin) -> [Google_Protobuf_Any] {
-//        let availableCoin = Cosmos_Base_V1beta1_Coin.with {
-//            $0.denom = availableAmount.denom
-//            $0.amount = availableAmount.amount
-//        }
-//        let vestingCoin = Cosmos_Base_V1beta1_Coin.with {
-//            $0.denom = vestingAmount.denom
-//            $0.amount = vestingAmount.amount
-//        }
-//        let deleMsg = Confio_Poe_V1beta1_MsgDelegate.with {
-//            $0.operatorAddress = toValAddress
-//            $0.amount = availableCoin
-//            $0.vestingAmount = vestingCoin
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/confio.poe.v1beta1.MsgDelegate"
-//            $0.value = try! deleMsg.serializedData()
-//        }
-//        return [anyMsg]
-//    }
-//    
+    //
+    //    //Tx for Tgrade Delegate
+    //    static func genSignedTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+    //                                        _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin,
+    //                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+    //        let deleMsg = genTgradeDelegateMsg(auth, toValAddress, availableAmount, vestingAmount)
+    //        return getGrpcSignedTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
+    //    }
+    //
+    //    static func genSimulateTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+    //                                          _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin,
+    //                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+    //        let deleMsg = genTgradeDelegateMsg(auth, toValAddress, availableAmount, vestingAmount)
+    //        return getGrpcSimulateTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
+    //    }
+    //
+    //    static func genTgradeDelegateMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin) -> [Google_Protobuf_Any] {
+    //        let availableCoin = Cosmos_Base_V1beta1_Coin.with {
+    //            $0.denom = availableAmount.denom
+    //            $0.amount = availableAmount.amount
+    //        }
+    //        let vestingCoin = Cosmos_Base_V1beta1_Coin.with {
+    //            $0.denom = vestingAmount.denom
+    //            $0.amount = vestingAmount.amount
+    //        }
+    //        let deleMsg = Confio_Poe_V1beta1_MsgDelegate.with {
+    //            $0.operatorAddress = toValAddress
+    //            $0.amount = availableCoin
+    //            $0.vestingAmount = vestingCoin
+    //        }
+    //        let anyMsg = Google_Protobuf_Any.with {
+    //            $0.typeURL = "/confio.poe.v1beta1.MsgDelegate"
+    //            $0.value = try! deleMsg.serializedData()
+    //        }
+    //        return [anyMsg]
+    //    }
+    //
     //Tx for Common UnDelegate
     static func genUndelegateTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                 _ toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate,
@@ -150,9 +150,9 @@ class Signer {
         return getSignedTx(auth, undeleMsg, fee, memo, baseChain)
     }
     
-    static func genUndelegateTxSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                     _ toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate,
-                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+    static func genUndelegateSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                   _ toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate,
+                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let undeleMsg = genUndelegateMsg(auth, toUndelegate)
         return getSimulateTx(auth, undeleMsg, fee, memo, baseChain)
     }
@@ -165,18 +165,18 @@ class Signer {
         return [anyMsg]
     }
     
-
+    
     //Tx for Common ReDelegate
-    static func genRedelegateTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, 
+    static func genRedelegateTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                 _ toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate,
                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let redeleMsg = genRedelegateMsg(auth, toRedelegate)
         return getSignedTx(auth, redeleMsg, fee, memo, baseChain)
     }
     
-    static func genRedelegateTxSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                     _ toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate,
-                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+    static func genRedelegateSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                   _ toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate,
+                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let redeleMsg = genRedelegateMsg(auth, toRedelegate)
         return getSimulateTx(auth, redeleMsg, fee, memo, baseChain)
     }
@@ -191,20 +191,20 @@ class Signer {
     
     //Tx for Common Claim Staking Rewards
     static func genClaimRewardsTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                      _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest  {
+                                  _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
+                                  _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest  {
         let claimRewardMsg = genClaimStakingRewardMsg(auth, rewards)
         return getSignedTx(auth, claimRewardMsg, fee, memo, baseChain)
     }
     
     static func genClaimRewardsSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                      _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+                                     _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
+                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let claimRewardMsg = genClaimStakingRewardMsg(auth, rewards)
         return getSimulateTx(auth, claimRewardMsg, fee, memo, baseChain)
     }
     
-    static func genClaimStakingRewardMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, 
+    static func genClaimStakingRewardMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                          _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) -> [Google_Protobuf_Any] {
         var anyMsgs = [Google_Protobuf_Any]()
         for reward in rewards {
@@ -238,7 +238,7 @@ class Signer {
         return getSimulateTx(auth, reinvestMsg, fee, memo, baseChain)
     }
     
-    static func genCompoundingMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, 
+    static func genCompoundingMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                   _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                   _ stakingDenom: String) -> [Google_Protobuf_Any] {
         var anyMsgs = [Google_Protobuf_Any]()
@@ -272,47 +272,31 @@ class Signer {
         return anyMsgs
     }
     
-//
-//    //Tx for Common Vote
-//    static func genSignedVoteTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                    _ proposals: Array<MintscanProposalDetail>,
-//                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let voteMsg = genVoteMsg(auth, proposals)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, voteMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateVoteTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                      _ proposals: Array<MintscanProposalDetail>,
-//                                      _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let voteMsg = genVoteMsg(auth, proposals)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, voteMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genVoteMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ proposals: Array<MintscanProposalDetail>) -> [Google_Protobuf_Any] {
-//        var anyMsgs = Array<Google_Protobuf_Any>()
-//        proposals.forEach { proposal in
-//            let voteMsg = Cosmos_Gov_V1beta1_MsgVote.with {
-//                $0.voter = WUtils.onParseAuthGrpc(auth).0!
-//                $0.proposalID = UInt64(proposal.id!)!
-//                if (proposal.getMyVote() == "Yes") {
-//                    $0.option = Cosmos_Gov_V1beta1_VoteOption.yes
-//                } else if (proposal.getMyVote() == "No") {
-//                    $0.option = Cosmos_Gov_V1beta1_VoteOption.no
-//                } else if (proposal.getMyVote() == "NoWithVeto") {
-//                    $0.option = Cosmos_Gov_V1beta1_VoteOption.noWithVeto
-//                } else if (proposal.getMyVote() == "Abstain") {
-//                    $0.option = Cosmos_Gov_V1beta1_VoteOption.abstain
-//                }
-//            }
-//            let anyMsg = Google_Protobuf_Any.with {
-//                $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
-//                $0.value = try! voteMsg.serializedData()
-//            }
-//            anyMsgs.append(anyMsg)
-//        }
-//        return anyMsgs
-//    }
-//    
+    //Tx for Common Vote
+    static func genVotesTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ votes: [Cosmos_Gov_V1beta1_MsgVote],
+                           _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let voteMsg = genVoteMsg(auth, votes)
+        return getSignedTx(auth, voteMsg, fee, memo, baseChain)
+    }
+    
+    static func genVotesSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ votes: [Cosmos_Gov_V1beta1_MsgVote],
+                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let voteMsg = genVoteMsg(auth, votes)
+        return getSimulateTx(auth, voteMsg, fee, memo, baseChain)
+    }
+    
+    static func genVoteMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ votes: [Cosmos_Gov_V1beta1_MsgVote]) -> [Google_Protobuf_Any] {
+        var anyMsgs = Array<Google_Protobuf_Any>()
+        votes.forEach { vote in
+            let anyMsg = Google_Protobuf_Any.with {
+                $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
+                $0.value = try! vote.serializedData()
+            }
+            anyMsgs.append(anyMsg)
+        }
+        return anyMsgs
+    }
+    
     //Tx for Common Reward Address Change
     static func genRewardAddressTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                                 _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,

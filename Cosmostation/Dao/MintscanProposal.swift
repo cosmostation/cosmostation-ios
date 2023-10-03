@@ -103,4 +103,6 @@ public struct MintscanProposal {
         }
         return UIImage.init(named: "ImgGovFailed")
     }
+    
+    var toVoteOption: Cosmos_Gov_V1beta1_VoteOption?
 }

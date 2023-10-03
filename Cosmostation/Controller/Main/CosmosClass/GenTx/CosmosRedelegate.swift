@@ -353,7 +353,7 @@ extension CosmosRedelegate {
     }
     
     func simulateTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genRedelegateTxSimul(auth, toRedelegate, txFee, txMemo, selectedChain)
+        let simulTx = Signer.genRedelegateSimul(auth, toRedelegate, txFee, txMemo, selectedChain)
         do {
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
         } catch {
