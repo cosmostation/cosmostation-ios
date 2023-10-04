@@ -40,19 +40,19 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWS-yr-INN">
                     <rect key="frame" x="240.33333333333334" y="99" width="60.333333333333343" height="15.333333333333329"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                    <color key="textColor" name="_color01"/>
+                    <color key="textColor" name="_color02"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byc-5K-Nvw">
                     <rect key="frame" x="308.66666666666669" y="99" width="25" height="15.333333333333329"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                    <color key="textColor" name="_color02"/>
+                    <color key="textColor" name="_color01"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f88-dg-zIG">
                     <rect key="frame" x="337.66666666666669" y="101" width="35.333333333333314" height="12.666666666666671"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
-                    <color key="textColor" name="_color02"/>
+                    <color key="textColor" name="_color01"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CF2-3W-xza" customClass="MDCOutlinedTextField">
@@ -75,7 +75,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="diw-xy-oH0">
                     <rect key="frame" x="211" y="217.33333333333334" width="162" height="28"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ix-ar-V7w">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ix-ar-V7w">
                             <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="28" id="Ws0-jn-XOa"/>
@@ -90,7 +90,7 @@
                                 <action selector="onClickQuarter:" destination="-1" eventType="touchUpInside" id="6J6-Fr-10j"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9f-pC-QH7">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9f-pC-QH7">
                             <rect key="frame" x="56.666666666666686" y="0.0" width="48.666666666666657" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="28" id="aN3-xD-4ZA"/>
@@ -104,7 +104,7 @@
                                 <action selector="onClickHalf:" destination="-1" eventType="touchUpInside" id="UlN-MX-p1O"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8l-PW-DDk">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8l-PW-DDk">
                             <rect key="frame" x="113.33333333333333" y="0.0" width="48.666666666666671" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="28" id="73U-OB-ANQ"/>
@@ -119,6 +119,11 @@
                             </connections>
                         </button>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="m9f-pC-QH7" firstAttribute="centerY" secondItem="diw-xy-oH0" secondAttribute="centerY" id="3uD-Xf-WhG"/>
+                        <constraint firstItem="4Ix-ar-V7w" firstAttribute="centerY" secondItem="diw-xy-oH0" secondAttribute="centerY" id="5ZB-ce-YbW"/>
+                        <constraint firstItem="E8l-PW-DDk" firstAttribute="centerY" secondItem="diw-xy-oH0" secondAttribute="centerY" id="hpc-Sa-d1g"/>
+                    </constraints>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXm-zH-8sz" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="8" y="766" width="377" height="48"/>
