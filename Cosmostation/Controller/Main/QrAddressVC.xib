@@ -46,7 +46,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hd Path" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ox2-57-jxw">
                             <rect key="frame" x="0.0" y="1.3333333333333428" width="54.666666666666664" height="17.666666666666668"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                            <color key="textColor" name="_color01"/>
+                            <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SJQ-1Q-Ggp">
@@ -100,16 +100,21 @@
                     </constraints>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgQrGuide" translatesAutoresizingMaskIntoConstraints="NO" id="i9d-Tg-NPS">
-                    <rect key="frame" x="32" y="155.33333333333337" width="329" height="329"/>
+                    <rect key="frame" x="54" y="155.33333333333337" width="285" height="285"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="i9d-Tg-NPS" secondAttribute="height" multiplier="1:1" id="pTr-S3-mfl"/>
                     </constraints>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hq3-0z-VB0">
-                    <rect key="frame" x="44" y="167.33333333333337" width="305" height="305"/>
+                    <rect key="frame" x="66" y="167.33333333333337" width="261" height="261"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWO-dd-aOf" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="504.33333333333326" width="369" height="48"/>
+                    <rect key="frame" x="12" y="460.33333333333331" width="369" height="48"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUT-8v-eVv">
                             <rect key="frame" x="16" y="15" width="337" height="16.999999999999943"/>
@@ -125,7 +130,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap box for copy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grn-gw-zaI">
-                    <rect key="frame" x="148.33333333333334" y="572.33333333333337" width="96.666666666666657" height="15.333333333333371"/>
+                    <rect key="frame" x="148.33333333333334" y="528.33333333333337" width="96.666666666666657" height="15.333333333333371"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                     <color key="textColor" name="_color02"/>
                     <nil key="highlightedColor"/>
@@ -155,7 +160,7 @@
                 <constraint firstItem="VyT-AB-xel" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="5rC-8L-Zsp"/>
                 <constraint firstItem="Hq3-0z-VB0" firstAttribute="leading" secondItem="i9d-Tg-NPS" secondAttribute="leading" constant="12" id="6sa-ba-70U"/>
                 <constraint firstItem="Hq3-0z-VB0" firstAttribute="centerY" secondItem="i9d-Tg-NPS" secondAttribute="centerY" id="7sn-bR-IAR"/>
-                <constraint firstItem="i9d-Tg-NPS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="BiU-Tn-g69"/>
+                <constraint firstItem="i9d-Tg-NPS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="54" id="BiU-Tn-g69"/>
                 <constraint firstItem="Hq3-0z-VB0" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="top" constant="12" id="GLg-wo-OOL"/>
                 <constraint firstAttribute="bottom" secondItem="UkY-bX-F9E" secondAttribute="bottom" constant="38" id="GvJ-Hp-0lm"/>
                 <constraint firstItem="RWO-dd-aOf" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="bottom" constant="20" id="IVc-Ra-SvO"/>
@@ -170,7 +175,7 @@
                 <constraint firstItem="i9d-Tg-NPS" firstAttribute="top" secondItem="VyT-AB-xel" secondAttribute="bottom" constant="16" id="pEB-bU-T6W"/>
                 <constraint firstItem="i9d-Tg-NPS" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="pxN-0Q-B2Y"/>
                 <constraint firstItem="UkY-bX-F9E" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="uTc-Hw-inX"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="i9d-Tg-NPS" secondAttribute="trailing" constant="32" id="vLC-3h-oQc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="i9d-Tg-NPS" secondAttribute="trailing" constant="54" id="vLC-3h-oQc"/>
                 <constraint firstItem="Hq3-0z-VB0" firstAttribute="bottom" secondItem="i9d-Tg-NPS" secondAttribute="bottom" constant="-12" id="yle-MG-qLO"/>
             </constraints>
             <point key="canvasLocation" x="70.992366412213741" y="20.422535211267608"/>

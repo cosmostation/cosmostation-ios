@@ -15,7 +15,7 @@ class DropDownView: UIView {
         
         backgroundColor = UIColor.white.withAlphaComponent(0.1)
         translatesAutoresizingMaskIntoConstraints = false
-        layer.cornerRadius = 12
+        layer.cornerRadius = 8
         layer.borderColor = UIColor.color05.cgColor
         layer.borderWidth = 0.5
     }

@@ -27,7 +27,7 @@ class QrAddressVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        chainNameLabel.text = selectedChain.name + "  (" + baseAccount.name + ")"
+        chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
         addressLabel.text = selectedChain.address
         addressLabel.adjustsFontSizeToFitWidth = true
         if (baseAccount.type == .withMnemonic) {
