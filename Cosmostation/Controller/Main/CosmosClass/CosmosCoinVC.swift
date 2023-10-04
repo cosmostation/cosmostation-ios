@@ -39,7 +39,7 @@ class CosmosCoinVC: BaseVC {
         parentVC = self.parent as? CosmosClassVC
 
         baseAccount = BaseData.instance.baseAccount
-        selectedChain = baseAccount.toDisplayCosmosChains[parentVC.selectedPosition]
+        selectedChain = parentVC.selectedChain
         nativeCoins.removeAll()
         ibcCoins.removeAll()
         bridgedCoins.removeAll()

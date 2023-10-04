@@ -41,7 +41,7 @@ class CosmosHistoryVC: BaseVC {
         parentVC = self.parent as? CosmosClassVC
 
         baseAccount = BaseData.instance.baseAccount
-        selectedChain = baseAccount.toDisplayCosmosChains[parentVC.selectedPosition]
+        selectedChain = parentVC.selectedChain
         msHistoryGroup.removeAll()
         beaconHistoey.removeAll()
         oktHistoey.removeAll()

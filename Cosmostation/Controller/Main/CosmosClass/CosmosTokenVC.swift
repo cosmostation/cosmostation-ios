@@ -37,7 +37,7 @@ class CosmosTokenVC: BaseVC {
         parentVC = self.parent as? CosmosClassVC
 
         baseAccount = BaseData.instance.baseAccount
-        selectedChain = baseAccount.toDisplayCosmosChains[parentVC.selectedPosition]
+        selectedChain = parentVC.selectedChain
         
         if (selectedChain.supportCw20) {
             selectedChain.fetchAllCw20Balance()

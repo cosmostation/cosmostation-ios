@@ -25,7 +25,6 @@ class CosmosClassVC: BaseVC {
     @IBOutlet weak var historyList: UIView!
     @IBOutlet weak var aboutList: UIView!
     
-    var selectedPosition: Int!
     var selectedChain: CosmosClass!
     var totalValue = NSDecimalNumber.zero {
         didSet {
@@ -37,7 +36,6 @@ class CosmosClassVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        selectedChain = baseAccount.toDisplayCosmosChains[selectedPosition]
         totalValue = selectedChain.allValue()
         addressLabel.text = selectedChain.address
         onSetTabbarView()
@@ -45,9 +43,6 @@ class CosmosClassVC: BaseVC {
         selectedChain.fetchStakeData()
         
         print("selectedChain address ", selectedChain.address)
-//        navigationController?.navigationBar.topItem?.title = baseAccount.name
-//        let backBarButtonItem = UIBarButtonItem(title: "Zedd", style: .plain, target: self, action: nil)
-//        self.navigationItem.backBarButtonItem = backBarButtonItem
         
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
         addressTap.cancelsTouchesInView = false

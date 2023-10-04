@@ -13,12 +13,14 @@ class PortfolioVC: BaseVC {
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
     
-    let searchController = UISearchController()
+    var toDisplayCosmosChains = [CosmosClass]()
+    var searchCosmosChains = [CosmosClass]()
     var totalValue = NSDecimalNumber.zero {
         didSet {
             WDP.dpValue(totalValue, currencyLabel, totalValueLabel)
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,22 +31,29 @@ class PortfolioVC: BaseVC {
         tableView.register(UINib(nibName: "PortfolioCell", bundle: nil), forCellReuseIdentifier: "PortfolioCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
-        initView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
         
         
-//        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
-//        self.tableView.tableHeaderView = searchBar
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+        searchBar.searchTextField.textColor = .color01
+        searchBar.tintColor = UIColor.white
+        searchBar.barTintColor = UIColor.clear
+        searchBar.searchTextField.font = .fontSize14Bold
+        searchBar.backgroundImage = UIImage()
+        searchBar.delegate = self
+        tableView.tableHeaderView = searchBar
+        
+        initView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        var contentOffset: CGPoint = self.tableView.contentOffset
-//        contentOffset.y += (self.tableView.tableHeaderView?.frame)!.height
-//        self.tableView.contentOffset = contentOffset
+        var contentOffset: CGPoint = tableView.contentOffset
+        contentOffset.y += (tableView.tableHeaderView?.frame)!.height
+        tableView.contentOffset = contentOffset
         
         tableView.reloadData()
         onUpdateTotal()
@@ -58,6 +67,8 @@ class PortfolioVC: BaseVC {
     
     func initView() {
         baseAccount = BaseData.instance.baseAccount
+        toDisplayCosmosChains = baseAccount.toDisplayCosmosChains
+        searchCosmosChains = toDisplayCosmosChains
         
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
@@ -66,8 +77,8 @@ class PortfolioVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
-        for i in 0..<baseAccount.toDisplayCosmosChains.count {
-            if (baseAccount.toDisplayCosmosChains[i].tag == tag) {
+        for i in 0..<toDisplayCosmosChains.count {
+            if (toDisplayCosmosChains[i].tag == tag) {
                 DispatchQueue.main.async {
                     self.tableView.beginUpdates()
                     self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
@@ -85,7 +96,7 @@ class PortfolioVC: BaseVC {
     
     func onUpdateTotal() {
         var sum = NSDecimalNumber.zero
-        baseAccount.toDisplayCosmosChains.forEach { chain in
+        toDisplayCosmosChains.forEach { chain in
             sum = sum.adding(chain.allValue())
         }
         DispatchQueue.main.async {
@@ -127,12 +138,12 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return baseAccount.toDisplayCosmosChains.count
+        return searchCosmosChains.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"PortfolioCell") as! PortfolioCell
-        cell.bindCosmosClassChain(baseAccount, baseAccount.toDisplayCosmosChains[indexPath.row])
+        cell.bindCosmosClassChain(baseAccount, searchCosmosChains[indexPath.row])
         return cell
     }
     
@@ -141,21 +152,22 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (searchCosmosChains[indexPath.row].fetched == false) { return }
         let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
-        cosmosClassVC.selectedPosition = indexPath.row
+        cosmosClassVC.selectedChain = searchCosmosChains[indexPath.row]
         cosmosClassVC.hidesBottomBarWhenPushed = true
         self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.name)
         self.navigationController?.pushViewController(cosmosClassVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        let selectedChain = baseAccount.toDisplayCosmosChains[indexPath.row]
+        let selectedChain = searchCosmosChains[indexPath.row]
         let copy = UIAction(title: NSLocalizedString("str_copy", comment: ""), image: UIImage(systemName: "doc.on.doc")) { _ in
             UIPasteboard.general.string = selectedChain.address!.trimmingCharacters(in: .whitespacesAndNewlines)
             self.onShowToast(NSLocalizedString("address_copied", comment: ""))
         }
         let share = UIAction(title: NSLocalizedString("str_share", comment: ""), image: UIImage(systemName: "square.and.arrow.up")) { _ in
-            let activityViewController = UIActivityViewController(activityItems: [selectedChain.address], applicationActivities: nil)
+            let activityViewController = UIActivityViewController(activityItems: [selectedChain.address!], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
         }
@@ -164,6 +176,20 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
         return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return qrAddressPopupVC }) { _ in
             UIMenu(title: "", children: [copy, share])
         }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.endEditing(true)
+        searchCosmosChains = toDisplayCosmosChains
+        tableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchCosmosChains = searchText.isEmpty ? toDisplayCosmosChains : toDisplayCosmosChains.filter { cosmosChain in
+            return cosmosChain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
