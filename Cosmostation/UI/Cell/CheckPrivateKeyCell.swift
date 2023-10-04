@@ -26,6 +26,8 @@ class CheckPrivateKeyCell: UITableViewCell {
     
     override func prepareForReuse() {
         rootView.setBlur()
+        evmLabel.isHidden = true
+        deprecatedLabel.isHidden = true
     }
     
     

@@ -85,7 +85,7 @@ class CosmosProposalCell: UITableViewCell {
                 }
             }
         } else {
-            self.myVoteImg.image = UIImage.init(named: "imgNotVoted")
+            self.myVoteImg.image = UIImage.init(named: "imgMyVoteNone")
         }
     }
 }

@@ -24,49 +24,49 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaA-TM-1v1" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
-                        <rect key="frame" x="8" y="4" width="434" height="72"/>
+                        <rect key="frame" x="8" y="4" width="434" height="64"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgVoteAbstain" translatesAutoresizingMaskIntoConstraints="NO" id="JuI-gf-uwO">
-                                <rect key="frame" x="8" y="12" width="48" height="48"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgMyVoteNone" translatesAutoresizingMaskIntoConstraints="NO" id="JuI-gf-uwO">
+                                <rect key="frame" x="8" y="12" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="rFA-qd-euk"/>
-                                    <constraint firstAttribute="height" constant="48" id="unD-ph-p7G"/>
+                                    <constraint firstAttribute="width" constant="40" id="rFA-qd-euk"/>
+                                    <constraint firstAttribute="height" constant="40" id="unD-ph-p7G"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsP-so-393">
-                                <rect key="frame" x="68" y="17" width="296" height="17.666666666666671"/>
+                                <rect key="frame" x="60" y="17" width="304" height="17.666666666666671"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjN-1v-Aah">
-                                <rect key="frame" x="68" y="40.666666666666664" width="50.333333333333343" height="15.333333333333336"/>
+                                <rect key="frame" x="60" y="40.666666666666664" width="50.333333333333343" height="15.333333333333336"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_expedited_proposal" translatesAutoresizingMaskIntoConstraints="NO" id="Lrn-Vh-K8f">
-                                <rect key="frame" x="122.33333333333334" y="42.333333333333336" width="12" height="12"/>
+                                <rect key="frame" x="114.33333333333333" y="42.333333333333336" width="12" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="12" id="eio-hl-2GN"/>
                                     <constraint firstAttribute="height" constant="12" id="sHk-3k-5NG"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImgGovPassed" translatesAutoresizingMaskIntoConstraints="NO" id="xK0-0G-d5i">
-                                <rect key="frame" x="68" y="44.333333333333336" width="8" height="8"/>
+                                <rect key="frame" x="60" y="44.333333333333336" width="8" height="8"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="8" id="RMf-uj-x9e"/>
                                     <constraint firstAttribute="height" constant="8" id="Uax-FH-Tlg"/>
                                 </constraints>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rejected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geH-vr-GNk">
-                                <rect key="frame" x="78" y="40.666666666666664" width="51.666666666666657" height="15.333333333333336"/>
+                                <rect key="frame" x="70" y="40.666666666666664" width="51.666666666666657" height="15.333333333333336"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5lf-Bi-Sxx">
-                                <rect key="frame" x="375" y="20.666666666666671" width="51" height="31"/>
+                                <rect key="frame" x="375" y="16.666666666666671" width="51" height="31"/>
                                 <color key="onTintColor" name="_primary"/>
                                 <connections>
                                     <action selector="onToggle:" destination="KGk-i7-Jjw" eventType="valueChanged" id="UdA-dH-wNu"/>
@@ -121,7 +121,7 @@
     <resources>
         <image name="ImgGovPassed" width="6" height="6"/>
         <image name="icon_expedited_proposal" width="24" height="24"/>
-        <image name="imgVoteAbstain" width="40" height="40"/>
+        <image name="imgMyVoteNone" width="40" height="40"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
