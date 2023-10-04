@@ -184,9 +184,9 @@ class CosmosTransfer: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let gap = UIScreen.main.bounds.size.height - 750
+        let gap = UIScreen.main.bounds.size.height - 740
         if (gap > 0) { midGapConstraint.constant = gap }
-        else { midGapConstraint.constant = 60 }
+        else { midGapConstraint.constant = 50 }
     }
     
     override func setLocalizedString() {
@@ -197,6 +197,11 @@ class CosmosTransfer: BaseVC {
         sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
     }
     
+    @IBAction func onClickScan(_ sender: UIButton) {
+        let qrScanVC = QrScanVC(nibName: "QrScanVC", bundle: nil)
+        qrScanVC.scanDelegate = self
+        present(qrScanVC, animated: true)
+    }
     
     @objc func onClickToChain() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
@@ -348,7 +353,7 @@ class CosmosTransfer: BaseVC {
         self.onStartSheet(memoSheet)
     }
     
-    func onUpdateMemoView(_ memo: String) {
+    func onUpdateMemoView(_ memo: String, _ skipSimul: Bool? = false) {
         txMemo = memo
         if (txMemo.isEmpty) {
             memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
@@ -357,7 +362,10 @@ class CosmosTransfer: BaseVC {
         }
         memoLabel.text = txMemo
         memoLabel.textColor = .color01
-        onSimul()
+        
+        if (skipSimul == true) {
+            onSimul()
+        }
     }
     
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
@@ -620,7 +628,7 @@ class CosmosTransfer: BaseVC {
 }
 
 
-extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, AddressDelegate, PinDelegate {
+extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, AddressDelegate, QrScanDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .SelectFeeCoin) {
@@ -652,6 +660,29 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     func onInputedAddress(_ address: String) {
         selectedRecipientAddress = address
         onUpdateToAddressView()
+    }
+    
+    func onScanned(_ result: String) {
+        let scanedString = result.components(separatedBy: "(MEMO)")
+        if (scanedString[0].isEmpty == true || scanedString[0].count < 5) {
+            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+            return;
+        }
+        if (scanedString[0] == selectedChain.address) {
+            self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
+            return;
+        }
+        
+        if (WUtils.isValidChainAddress(selectedRecipientChain, scanedString[0])) {
+            selectedRecipientAddress = scanedString[0]
+            if (scanedString.count > 1) {
+                onUpdateMemoView(scanedString[1], true)
+            }
+            onUpdateToAddressView()
+            
+        } else {
+            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+        }
     }
     
     func pinResponse(_ request: LockType, _ result: UnLockResult) {

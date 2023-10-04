@@ -198,7 +198,7 @@ class CosmosClassVC: BaseVC {
         mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
             self.onProposalList()
         }
-        mainFab.addItem(title: "Compounding All", image: UIImage(named: "iconFabClaim")) { _ in
+        mainFab.addItem(title: "Compounding All", image: UIImage(named: "iconFabCompounding")) { _ in
             if (self.selectedChain.cosmosValidators.count > 0) {
                 self.onClaimCompoundingTx()
             }

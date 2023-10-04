@@ -49,7 +49,7 @@ class CosmosStakingInfoVC: BaseVC {
         tableView.sectionHeaderTopPadding = 0.0
         
         
-        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "msgIconModify"), style: .plain, target: self, action: #selector(onClickRewardAddressChange))
+        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconRewardAddress"), style: .plain, target: self, action: #selector(onClickRewardAddressChange))
         
         onFetchData()
     }
