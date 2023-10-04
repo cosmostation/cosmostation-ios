@@ -13,7 +13,6 @@ class ChainSecre529: CosmosClass  {
     override init() {
         super.init()
         
-        isDefault = false
         name = "Secret"
         tag = "secret529"
         logo1 = "chainSecret"

@@ -122,6 +122,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             })
             skipAssets = try? await fetchSkipAssets()
             
+            // $0.isDefault 예외처리 확인 카바
             inputChain = skipChains.filter({ $0["chain_name"].stringValue == "cosmoshub" }).first!
             inputCosmosChain = self.allCosmosChains.filter({ $0.chainId == inputChain["chain_id"].stringValue && $0.isDefault == true }).first!
             skipAssets?["chain_to_assets_map"][inputChain["chain_id"].stringValue]["assets"].arrayValue.forEach({ json in

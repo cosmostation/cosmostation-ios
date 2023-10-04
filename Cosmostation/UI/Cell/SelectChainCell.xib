@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,7 +41,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="dua-OE-6x2">
-                                <rect key="frame" x="63.999999999999993" y="17.666666666666671" width="125.33333333333331" height="37"/>
+                                <rect key="frame" x="64" y="18.333333333333332" width="79.666666666666686" height="35.666666666666671"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChainName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brX-jS-Hp5">
                                         <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="17.666666666666668"/>
@@ -49,20 +49,38 @@
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wC6-dE-gcs">
-                                        <rect key="frame" x="0.0" y="21.666666666666668" width="125.33333333333333" height="15.333333333333332"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wC6-dE-gcs">
+                                        <rect key="frame" x="0.0" y="21.666666666666668" width="73.333333333333329" height="14.000000000000004"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="m/118/0/0/1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z6Y-lL-ijC">
-                                                <rect key="frame" x="0.0" y="0.0" width="73.333333333333329" height="15.333333333333334"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="73.333333333333329" height="14"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_color02"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEGACY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7SN-0a-O8E">
-                                                <rect key="frame" x="77.333333333333343" y="0.0" width="48" height="15.333333333333334"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deprecated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpI-Ap-xV9">
+                                                <rect key="frame" x="73.333333333333343" y="0.0" width="68" height="14"/>
                                                 <color key="backgroundColor" red="0.29803921570000003" green="0.29411764709999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="48" id="Fg3-OH-ggz"/>
+                                                    <constraint firstAttribute="height" constant="14" id="HdJ-XB-32K"/>
+                                                    <constraint firstAttribute="width" constant="68" id="ZOY-xX-Yjz"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                                <color key="textColor" name="_color02"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVM Compat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndV-0P-jRq">
+                                                <rect key="frame" x="73.333333333333343" y="0.0" width="73" height="14"/>
+                                                <color key="backgroundColor" red="0.29803921570000003" green="0.29411764709999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="14" id="CDa-CC-7n7"/>
+                                                    <constraint firstAttribute="width" constant="73" id="fJf-KJ-3NY"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                                                 <color key="textColor" name="_color02"/>
@@ -156,11 +174,12 @@
             <connections>
                 <outlet property="assetCntLabel" destination="2nt-Q9-wQJ" id="Xwp-Kz-B8I"/>
                 <outlet property="currencyLabel" destination="rov-M3-rhY" id="9Wx-ky-ELK"/>
-                <outlet property="legacyLabel" destination="7SN-0a-O8E" id="q5r-XN-KPU"/>
+                <outlet property="deprecatedLabel" destination="IpI-Ap-xV9" id="RSR-jt-qjs"/>
+                <outlet property="evmLabel" destination="ndV-0P-jRq" id="XiU-wb-BIO"/>
+                <outlet property="hdPathLabel" destination="Z6Y-lL-ijC" id="dJP-LA-n0A"/>
                 <outlet property="logoImg1" destination="hCI-tl-W78" id="2VQ-sE-GlK"/>
                 <outlet property="logoImg2" destination="6Qf-wv-brJ" id="JgW-7O-Sen"/>
                 <outlet property="nameLabel" destination="brX-jS-Hp5" id="Yys-Q4-sYo"/>
-                <outlet property="pathLabel" destination="Z6Y-lL-ijC" id="WxZ-eS-jrB"/>
                 <outlet property="rootView" destination="YJ2-PH-o0E" id="wqz-3V-ZzS"/>
                 <outlet property="selectSwitch" destination="RVS-46-9Te" id="31h-jw-1zc"/>
                 <outlet property="valueLabel" destination="Zh3-K6-yqb" id="CWJ-C7-fQu"/>

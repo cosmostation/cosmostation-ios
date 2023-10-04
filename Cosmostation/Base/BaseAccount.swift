@@ -43,12 +43,12 @@ public class BaseAccount {
      */
     func initAllData() {
         allCosmosClassChains.removeAll()
-        ALLCOSMOSCLASS().forEach { chain in
-            allCosmosClassChains.append(chain)
-        }
         
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
+            ALLCOSMOSCLASS().forEach { chain in
+                allCosmosClassChains.append(chain)
+            }
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 allCosmosClassChains.forEach { chain in
@@ -60,6 +60,9 @@ public class BaseAccount {
             }
 
         } else if (type == .onlyPrivateKey) {
+            ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
+                allCosmosClassChains.append(chain)
+            }
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 allCosmosClassChains.forEach { chain in
                     Task {
@@ -74,13 +77,13 @@ public class BaseAccount {
     func initDisplayData() {
         toDisplayCosmosChains.removeAll()
         let toDisplayChainTags = BaseData.instance.getDisplayCosmosChainTags(self)
-        toDisplayChainTags.forEach { chainTag in
-            if let toDisplayChain = ALLCOSMOSCLASS().filter({ $0.tag == chainTag }).first {
-                toDisplayCosmosChains.append(toDisplayChain)
-            }
-        }
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
+            toDisplayChainTags.forEach { chainTag in
+                if let toDisplayChain = ALLCOSMOSCLASS().filter({ $0.tag == chainTag }).first {
+                    toDisplayCosmosChains.append(toDisplayChain)
+                }
+            }
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 toDisplayCosmosChains.forEach { chain in
@@ -92,6 +95,11 @@ public class BaseAccount {
             }
 
         } else if (type == .onlyPrivateKey) {
+            toDisplayChainTags.forEach { chainTag in
+                if let toDisplayChain = ALLCOSMOSCLASS().filter({ $0.isDefault == true }).filter({ $0.tag == chainTag }).first {
+                    toDisplayCosmosChains.append(toDisplayChain)
+                }
+            }
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 toDisplayCosmosChains.forEach { chain in
                     Task {
@@ -132,12 +140,12 @@ extension BaseAccount {
     
     func initOnyKeyData() async -> [CosmosClass] {
         allCosmosClassChains.removeAll()
-        ALLCOSMOSCLASS().forEach { chain in
-            allCosmosClassChains.append(chain)
-        }
         
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
+            ALLCOSMOSCLASS().forEach { chain in
+                allCosmosClassChains.append(chain)
+            }
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 allCosmosClassChains.forEach { chain in
@@ -146,6 +154,9 @@ extension BaseAccount {
             }
             
         } else if (type == .onlyPrivateKey) {
+            ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
+                allCosmosClassChains.append(chain)
+            }
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 allCosmosClassChains.forEach { chain in
                     chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)

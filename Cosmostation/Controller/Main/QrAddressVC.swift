@@ -12,6 +12,9 @@ class QrAddressVC: BaseVC {
 
     @IBOutlet weak var chainNameLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
+    @IBOutlet weak var tagLayer: UIStackView!
+    @IBOutlet weak var deprecatedLabel: UILabel!
+    @IBOutlet weak var evmLabel: UILabel!
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressCardView: FixCardView!
     @IBOutlet weak var addressLabel: UILabel!
@@ -29,9 +32,28 @@ class QrAddressVC: BaseVC {
         addressLabel.adjustsFontSizeToFitWidth = true
         if (baseAccount.type == .withMnemonic) {
             hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
-            hdPathLabel.isHidden = false
+            
+            if (selectedChain.accountKeyType.pubkeyType == .ETH_Keccak256
+                || selectedChain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
+                if (selectedChain.accountKeyType.hdPath == "m/44'/60'/0'/0/X") {
+                    tagLayer.isHidden = false
+                    evmLabel.isHidden = false
+                }
+            } else if (selectedChain.isDefault == false) {
+                tagLayer.isHidden = false
+                deprecatedLabel.isHidden = false
+            }
+            
         } else {
-            hdPathLabel.isHidden = true
+            hdPathLabel.text = ""
+            
+            if (selectedChain.accountKeyType.pubkeyType == .ETH_Keccak256
+                || selectedChain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
+                if (selectedChain.accountKeyType.hdPath == "m/44'/60'/0'/0/X") {
+                    tagLayer.isHidden = false
+                    evmLabel.isHidden = false
+                }
+            }
         }
         
         if let qrImage = generateQrCode(selectedChain.address!) {

@@ -36,8 +36,13 @@ class SettingBaseCell: UITableViewCell {
     func onBindSetChain() {
         setImg.image = UIImage(named: "setChain")
         setTitleLabel.text = NSLocalizedString("setting_chain_title", comment: "")
-        let CosmosChainCnt = ALLCOSMOSCLASS().count
-        setDetailLabel.text = String(CosmosChainCnt)
+        var chainNames = [String]()
+        ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { baseChain in
+            if (!chainNames.contains(baseChain.name)) {
+                chainNames.append(baseChain.name)
+            }
+        }
+        setDetailLabel.text = String(chainNames.count)
     }
     
     func onBindSetAddressBook() {

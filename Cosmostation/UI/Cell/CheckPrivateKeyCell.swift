@@ -13,8 +13,9 @@ class CheckPrivateKeyCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var tagLabel: UILabel!
-    @IBOutlet weak var pathLabel: UILabel!
+    @IBOutlet weak var evmLabel: UILabel!
+    @IBOutlet weak var deprecatedLabel: UILabel!
+    @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var pkeyLabel: UILabel!
 
     override func awakeFromNib() {
@@ -32,13 +33,14 @@ class CheckPrivateKeyCell: UITableViewCell {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         
-        pathLabel.text = chain.getHDPath(account.lastHDPath)
-        tagLabel.isHidden = chain.isDefault
-        
-        if (chain is ChainKava60) {
-            tagLabel.text = "EVM"
-        } else {
-            tagLabel.text = "LEGACY"
+        hdPathLabel.text = chain.getHDPath(account.lastHDPath)
+        if (chain.accountKeyType.pubkeyType == .ETH_Keccak256
+            || chain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
+            if (chain.accountKeyType.hdPath == "m/44'/60'/0'/0/X") {
+                evmLabel.isHidden = false
+            }
+        } else if (!chain.isDefault) {
+            deprecatedLabel.isHidden = false
         }
         pkeyLabel.text = "0x" + chain.privateKey!.toHexString()
         

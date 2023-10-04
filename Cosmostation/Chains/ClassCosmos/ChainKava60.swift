@@ -13,7 +13,6 @@ class ChainKava60: CosmosClass  {
     override init() {
         super.init()
         
-        isDefault = false
         name = "Kava"
         tag = "kava60"
         logo1 = "chainKava"

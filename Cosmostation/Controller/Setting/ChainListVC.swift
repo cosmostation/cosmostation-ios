@@ -41,8 +41,10 @@ class ChainListVC: BaseVC {
     
     func onUpdateView() {
         allCosmosChains.removeAll()
-        ALLCOSMOSCLASS().forEach { chain in
-            allCosmosChains.append(chain)
+        ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
+            if (!allCosmosChains.contains { $0.name == chain.name }) {
+                allCosmosChains.append(chain)
+            }
         }
         tableView.reloadData()
     }

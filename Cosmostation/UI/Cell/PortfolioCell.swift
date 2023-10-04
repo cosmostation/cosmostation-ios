@@ -15,9 +15,9 @@ class PortfolioCell: UITableViewCell {
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var lagacyLayer: UIStackView!
-    @IBOutlet weak var tagLabel: UILabel!
-    @IBOutlet weak var pathLabel: UILabel!
+    @IBOutlet weak var tagLayer: UIStackView!
+    @IBOutlet weak var deprecatedLabel: UILabel!
+    @IBOutlet weak var evmLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
@@ -40,7 +40,9 @@ class PortfolioCell: UITableViewCell {
     override func prepareForReuse() {
         rootView.setBlur()
         currencyLabel.text = ""
-        lagacyLayer.isHidden = true
+        tagLayer.isHidden = true
+        deprecatedLabel.isHidden = true
+        evmLabel.isHidden = true
     }
     
     func bindCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass) {
@@ -48,16 +50,17 @@ class PortfolioCell: UITableViewCell {
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
 
-        if (!chain.isDefault) {
-            lagacyLayer.isHidden = false
-            pathLabel.text = chain.getHDPath(account.lastHDPath)
+        if (chain.accountKeyType.pubkeyType == .ETH_Keccak256 
+            || chain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
+            if (chain.accountKeyType.hdPath == "m/44'/60'/0'/0/X") {
+                tagLayer.isHidden = false
+                evmLabel.isHidden = false
+            }
+            
+        } else if (!chain.isDefault) {
+            tagLayer.isHidden = false
+            deprecatedLabel.isHidden = false
         }
-        if (chain is ChainKava60) {
-            tagLabel.text = "EVM"
-        } else {
-            tagLabel.text = "LEGACY"
-        }
-//        print("", chain.tag, "  ", chain.fetched)
         
         if (chain.fetched) {
             valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
