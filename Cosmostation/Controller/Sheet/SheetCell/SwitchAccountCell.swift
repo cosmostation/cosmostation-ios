@@ -10,6 +10,7 @@ import UIKit
 class SwitchAccountCell: UITableViewCell {
 
     @IBOutlet weak var rootView: UIView!
+    @IBOutlet weak var typeImg: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var checkedImg: UIImageView!
@@ -35,8 +36,10 @@ class SwitchAccountCell: UITableViewCell {
         }
         
         if (account.type == .withMnemonic) {
+            typeImg.image = UIImage(named: "iconMnemonic")
             addressLabel.text = NSLocalizedString("str_account_with_mnemonic", comment: "")
         } else if (account.type == .onlyPrivateKey) {
+            typeImg.image = UIImage(named: "iconPrivateKey")
             addressLabel.text = NSLocalizedString("str_account_with_privateKey", comment: "")
         }
     }
