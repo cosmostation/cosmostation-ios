@@ -27,8 +27,10 @@ class BaseChain {
     
     
     var fetched = false
-    var allValue: NSDecimalNumber?
-    var allUSDValue: NSDecimalNumber?
+    var allCoinValue = NSDecimalNumber.zero
+    var allCoinUSDValue = NSDecimalNumber.zero
+    var allTokenValue = NSDecimalNumber.zero
+    var allTokenUSDValue = NSDecimalNumber.zero
     
     
     
@@ -52,16 +54,9 @@ class BaseChain {
     
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if (usd == true) {
-            guard let allUsdVlaue = allUSDValue else {
-                return NSDecimalNumber.zero
-            }
-            return allUsdVlaue
-            
+            return allCoinUSDValue.adding(allTokenUSDValue)
         } else {
-            guard let allValue = allValue else {
-                return NSDecimalNumber.zero
-            }
-            return allValue
+            return allCoinValue.adding(allTokenValue)
         }
     }
 }

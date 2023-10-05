@@ -198,7 +198,7 @@ public class WUtils {
     static func assetValue(_ geckoId: String?, _ amount: String?, _ decimals: Int16) -> NSDecimalNumber {
         let price = BaseData.instance.getPrice(geckoId)
         let amount = NSDecimalNumber(string: amount)
-        return price.multiplying(by: amount).multiplying(byPowerOf10: -decimals, withBehavior: getDivideHandler(3))
+        return price.multiplying(by: amount).multiplying(byPowerOf10: -decimals, withBehavior: handler3Down)
     }
 //
 //    static func allAssetValue(_ chainConfig: ChainConfig?) -> NSDecimalNumber {

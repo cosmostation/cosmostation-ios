@@ -31,7 +31,7 @@ class SelectFeeCoinCell: UITableViewCell {
 //           let msAsset = BaseData.instance.getAsset(chain.apiName, feeData.denom!) {
 //            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
 //            let amount = NSDecimalNumber(string: coin.amount)
-//            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+//            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
 //            
 //            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, msAsset.decimals)
 //            WDP.dpValue(value, valueCurrencyLabel, valueLabel)

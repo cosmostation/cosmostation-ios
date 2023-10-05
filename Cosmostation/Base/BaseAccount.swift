@@ -35,102 +35,103 @@ public class BaseAccount {
         self.lastHDPath = lastPath
     }
     
+    lazy var toDisplayCTags = [String]()
     lazy var allCosmosClassChains = [CosmosClass]()
-    lazy var toDisplayCosmosChains = [CosmosClass]()
     
-    /*
-     Too Heavy Job
-     */
-    func initAllData() {
-        allCosmosClassChains.removeAll()
-        
+    func initAccount() {
+        toDisplayCTags = BaseData.instance.getDisplayCosmosChainTags(self.id)
+        allCosmosClassChains = ALLCOSMOSCLASS()
+        sortCosmosChains()
+    }
+    
+    func getDisplayCosmosChains() -> [CosmosClass] {
+        return allCosmosClassChains.filter { cosmosChain in
+            toDisplayCTags.contains(cosmosChain.tag)
+        }
+    }
+    
+    func fetchDisplayCosmosChains() {
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
-            ALLCOSMOSCLASS().forEach { chain in
-                allCosmosClassChains.append(chain)
-            }
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                allCosmosClassChains.forEach { chain in
+                getDisplayCosmosChains().forEach { chain in
                     Task {
-                        chain.setInfoWithSeed(seed, lastHDPath)
-                        chain.fetchData()
+                        if (chain.address == nil) {
+                            chain.setInfoWithSeed(seed, lastHDPath)
+                        }
+                        chain.fetchData(id)
                     }
                 }
             }
 
         } else if (type == .onlyPrivateKey) {
-            ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
-                allCosmosClassChains.append(chain)
-            }
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                allCosmosClassChains.forEach { chain in
+                getDisplayCosmosChains().forEach { chain in
                     Task {
-                        chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
-                        chain.fetchData()
+                        if (chain.address == nil) {
+                            chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                        }
+                        chain.fetchData(id)
                     }
                 }
             }
         }
     }
     
-    func initDisplayData() {
-        toDisplayCosmosChains.removeAll()
-        let toDisplayChainTags = BaseData.instance.getDisplayCosmosChainTags(self)
+    func fetchAllCosmosChains() {
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
-            toDisplayChainTags.forEach { chainTag in
-                if let toDisplayChain = ALLCOSMOSCLASS().filter({ $0.tag == chainTag }).first {
-                    toDisplayCosmosChains.append(toDisplayChain)
-                }
-            }
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                toDisplayCosmosChains.forEach { chain in
+                allCosmosClassChains.forEach { chain in
                     Task {
-                        chain.setInfoWithSeed(seed, lastHDPath)
-                        chain.fetchData()
+                        if (chain.address == nil) {
+                            chain.setInfoWithSeed(seed, lastHDPath)
+                        }
+                        if (chain.fetched == false) {
+                            chain.fetchData(id)
+                        }
                     }
                 }
             }
 
         } else if (type == .onlyPrivateKey) {
-            toDisplayChainTags.forEach { chainTag in
-                if let toDisplayChain = ALLCOSMOSCLASS().filter({ $0.isDefault == true }).filter({ $0.tag == chainTag }).first {
-                    toDisplayCosmosChains.append(toDisplayChain)
-                }
-            }
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                toDisplayCosmosChains.forEach { chain in
+                allCosmosClassChains.forEach { chain in
                     Task {
-                        chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
-                        chain.fetchData()
+                        if (chain.address == nil) {
+                            chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                        }
+                        if (chain.fetched == false) {
+                            chain.fetchData(id)
+                        }
                     }
                 }
             }
         }
     }
-    
-
-    
     
     func updateAllValue() {
-        toDisplayCosmosChains.forEach { chain in
-            chain.setAllValue()
+        getDisplayCosmosChains().forEach { chain in
+            chain.allCoinValue = chain.allCoinValue()
+            chain.allCoinUSDValue = chain.allCoinValue(true)
+            chain.allTokenValue = chain.allTokenValue()
+            chain.allTokenUSDValue = chain.allTokenValue(true)
         }
     }
     
-    func sortCosmosChain() {
+    func sortCosmosChains() {
         allCosmosClassChains.sort {
             if ($0.tag == "cosmos118") { return true }
             if ($1.tag == "cosmos118") { return false }
-            return $0.allValue().compare($1.allValue()).rawValue > 0 ? true : false
+//            return $0.allValue().compare($1.allValue()).rawValue > 0 ? true : false
+            return false
         }
-        let toDisplayChainTags = BaseData.instance.getDisplayCosmosChainTags(self)
         allCosmosClassChains.sort {
             if ($0.tag == "cosmos118") { return true }
             if ($1.tag == "cosmos118") { return false }
-            if (toDisplayChainTags.contains($0.tag) == true && toDisplayChainTags.contains($1.tag) == false) { return true }
+            if (toDisplayCTags.contains($0.tag) == true && toDisplayCTags.contains($1.tag) == false) { return true }
             return false
         }
     }

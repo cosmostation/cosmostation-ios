@@ -39,5 +39,8 @@ extension UIColor {
     static var colorGreen: UIColor {
         UIColor(named: "_colorGreen")!
     }
+    static var colorBg: UIColor {
+        UIColor(named: "_colorBg")!
+    }
 }
 

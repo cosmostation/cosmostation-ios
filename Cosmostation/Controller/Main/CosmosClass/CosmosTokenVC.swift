@@ -40,10 +40,10 @@ class CosmosTokenVC: BaseVC {
         selectedChain = parentVC.selectedChain
         
         if (selectedChain.supportCw20) {
-            selectedChain.fetchAllCw20Balance()
+            selectedChain.fetchAllCw20Balance(baseAccount.id)
             
         } else if (selectedChain.supportErc20) {
-            selectedChain.fetchAllErc20Balance()
+            selectedChain.fetchAllErc20Balance(baseAccount.id)
         }
         
     }

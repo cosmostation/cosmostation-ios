@@ -184,9 +184,9 @@ class CosmosTransfer: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let gap = UIScreen.main.bounds.size.height - 740
+        let gap = UIScreen.main.bounds.size.height - 750
         if (gap > 0) { midGapConstraint.constant = gap }
-        else { midGapConstraint.constant = 50 }
+        else { midGapConstraint.constant = 60 }
     }
     
     override func setLocalizedString() {
@@ -280,14 +280,14 @@ class CosmosTransfer: BaseVC {
             toSendAmount = NSDecimalNumber(string: amount)
             if (transferAssetType == .CoinTransfer) {
                 let msPrice = BaseData.instance.getPrice(selectedMsAsset!.coinGeckoId)
-                let value = msPrice.multiplying(by: toSendAmount).multiplying(byPowerOf10: -selectedMsAsset!.decimals!, withBehavior: getDivideHandler(6))
+                let value = msPrice.multiplying(by: toSendAmount).multiplying(byPowerOf10: -selectedMsAsset!.decimals!, withBehavior: handler6)
                 
                 WDP.dpCoin(selectedMsAsset!, toSendAmount, nil, toAssetDenomLabel, toAssetAmountLabel, selectedMsAsset!.decimals)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
             } else {
                 let msPrice = BaseData.instance.getPrice(selectedMsToken!.coinGeckoId)
-                let value = msPrice.multiplying(by: toSendAmount).multiplying(byPowerOf10: -selectedMsToken!.decimals!, withBehavior: getDivideHandler(6))
+                let value = msPrice.multiplying(by: toSendAmount).multiplying(byPowerOf10: -selectedMsToken!.decimals!, withBehavior: handler6)
                 
                 WDP.dpToken(selectedMsToken!, toSendAmount, nil, toAssetDenomLabel, toAssetAmountLabel, selectedMsToken!.decimals)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
@@ -323,7 +323,7 @@ class CosmosTransfer: BaseVC {
             WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let amount = NSDecimalNumber(string: txFee.amount[0].amount)
-            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
         

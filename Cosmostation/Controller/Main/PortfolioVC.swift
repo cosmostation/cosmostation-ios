@@ -36,14 +36,14 @@ class PortfolioVC: BaseVC {
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
         
         
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
-        searchBar.searchTextField.textColor = .color01
-        searchBar.tintColor = UIColor.white
-        searchBar.barTintColor = UIColor.clear
-        searchBar.searchTextField.font = .fontSize14Bold
-        searchBar.backgroundImage = UIImage()
-        searchBar.delegate = self
-        tableView.tableHeaderView = searchBar
+//        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+//        searchBar.searchTextField.textColor = .color01
+//        searchBar.tintColor = UIColor.white
+//        searchBar.barTintColor = UIColor.clear
+//        searchBar.searchTextField.font = .fontSize14Bold
+//        searchBar.backgroundImage = UIImage()
+//        searchBar.delegate = self
+//        tableView.tableHeaderView = searchBar
         
         initView()
     }
@@ -51,9 +51,9 @@ class PortfolioVC: BaseVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        var contentOffset: CGPoint = tableView.contentOffset
-        contentOffset.y += (tableView.tableHeaderView?.frame)!.height
-        tableView.contentOffset = contentOffset
+//        var contentOffset: CGPoint = tableView.contentOffset
+//        contentOffset.y += (tableView.tableHeaderView?.frame)!.height + 20
+//        tableView.contentOffset = contentOffset
         
         tableView.reloadData()
         onUpdateTotal()
@@ -67,7 +67,9 @@ class PortfolioVC: BaseVC {
     
     func initView() {
         baseAccount = BaseData.instance.baseAccount
-        toDisplayCosmosChains = baseAccount.toDisplayCosmosChains
+        baseAccount.fetchDisplayCosmosChains()
+        
+        toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
         searchCosmosChains = toDisplayCosmosChains
         
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
@@ -77,8 +79,8 @@ class PortfolioVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
-        for i in 0..<toDisplayCosmosChains.count {
-            if (toDisplayCosmosChains[i].tag == tag) {
+        for i in 0..<searchCosmosChains.count {
+            if (searchCosmosChains[i].tag == tag) {
                 DispatchQueue.main.async {
                     self.tableView.beginUpdates()
                     self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
@@ -121,7 +123,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         view.titleLabel.text = "Cosmos Class"
-        view.cntLabel.text = String(baseAccount.toDisplayCosmosChains.count)
+        view.cntLabel.text = String(toDisplayCosmosChains.count)
         return view
     }
     

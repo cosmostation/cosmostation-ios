@@ -185,7 +185,7 @@ public class WDP {
                 formatted = "0" + nf.decimalSeparator! + temp
 
             } else {
-                let count = number.multiplying(by: NSDecimalNumber.one, withBehavior: getDivideHandler(0)).stringValue.count
+                let count = number.multiplying(by: NSDecimalNumber.one, withBehavior: handler0Down).stringValue.count
                 nf.minimumSignificantDigits = deciaml + count
                 nf.maximumSignificantDigits = deciaml + count
                 formatted = nf.string(from: number)
@@ -237,10 +237,18 @@ public class WDP {
 //        label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
 //    }
 //
+    
     static func dpValue(_ value: NSDecimalNumber, _ currencyLabel: UILabel?, _ priceLabel: UILabel?) {
         let nf = WUtils.getNumberFormatter(3)
         let formatted = nf.string(from: value)!
         currencyLabel?.text = BaseData.instance.getCurrencySymbol()
+        priceLabel?.attributedText = WUtils.getDpAttributedString(formatted, 3, priceLabel?.font)
+    }
+    
+    static func dpUSDValue(_ value: NSDecimalNumber, _ currencyLabel: UILabel?, _ priceLabel: UILabel?) {
+        let nf = WUtils.getNumberFormatter(3)
+        let formatted = nf.string(from: value)!
+        currencyLabel?.text = "$"
         priceLabel?.attributedText = WUtils.getDpAttributedString(formatted, 3, priceLabel?.font)
     }
     

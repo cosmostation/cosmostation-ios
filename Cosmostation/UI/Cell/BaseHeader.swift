@@ -32,6 +32,7 @@ class BaseHeader: UIView {
         self.addSubview(view)
     }
     
+    @IBOutlet weak var rootView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cntLabel: UILabel!
 

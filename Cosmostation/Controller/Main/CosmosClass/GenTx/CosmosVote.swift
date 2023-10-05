@@ -132,7 +132,7 @@ class CosmosVote: BaseVC {
             WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let amount = NSDecimalNumber(string: txFee.amount[0].amount)
-            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
     }

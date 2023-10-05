@@ -109,10 +109,12 @@ let BASEACCOUNT_LAST_PATH   = Expression<String>("lastpath")
 let TABLE_REFADDRESS        = Table("BaseAddress")
 let REFADDRESS_ID           = Expression<Int64>("id")
 let REFADDRESS_ACCOUNT_ID   = Expression<Int64>("accountId")
-let REFADDRESS_CHAIN_ID     = Expression<String>("chainId")
+let REFADDRESS_CHAIN_TAG    = Expression<String>("chainTag")
 let REFADDRESS_DP_ADDRESS   = Expression<String>("dpAddress")
-let REFADDRESS_LAST_AMOUNT  = Expression<String>("lastAmount")
-let REFADDRESS_LAST_VALUE   = Expression<String>("lastValue")
+let REFADDRESS_MAIN_AMOUNT  = Expression<String>("lastMainAmount")
+let REFADDRESS_MAIN_VALUE   = Expression<String>("lastMainAValue")
+let REFADDRESS_TOKEN_VALUE  = Expression<String>("lastTokenAValue")
+let REFADDRESS_COIN_CNT     = Expression<Int64>("lastCoinCnt")
 
 
 let COSMOS_AUTH_TYPE_OKEX_ACCOUNT           = "okexchain/EthAccount";

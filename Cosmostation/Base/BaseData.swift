@@ -44,15 +44,15 @@ final class BaseData: NSObject{
     func getPrice(_ geckoId: String?, _ usd: Bool? = false) -> NSDecimalNumber {
         if (usd == true) {
             if let price = mintscanUSDPrices?.filter({ $0.coinGeckoId == geckoId }).first {
-                return NSDecimalNumber.init(value: price.current_price ?? 0).rounding(accordingToBehavior: getDivideHandler(12))
+                return NSDecimalNumber.init(value: price.current_price ?? 0).rounding(accordingToBehavior: handler12Down)
             }
-            return NSDecimalNumber.zero.rounding(accordingToBehavior: getDivideHandler(12))
+            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler12Down)
             
         } else {
             if let price = mintscanPrices?.filter({ $0.coinGeckoId == geckoId }).first {
-                return NSDecimalNumber.init(value: price.current_price ?? 0).rounding(accordingToBehavior: getDivideHandler(12))
+                return NSDecimalNumber.init(value: price.current_price ?? 0).rounding(accordingToBehavior: handler12Down)
             }
-            return NSDecimalNumber.zero.rounding(accordingToBehavior: getDivideHandler(12))
+            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler12Down)
         }
     }
     
@@ -60,7 +60,7 @@ final class BaseData: NSObject{
         if let price = mintscanPrices?.filter({ $0.coinGeckoId == geckoId }).first {
             return NSDecimalNumber.init(value: price.daily_price_change_in_percent ?? 0).rounding(accordingToBehavior: handler2Down)
         }
-        return NSDecimalNumber.zero.rounding(accordingToBehavior: getDivideHandler(2))
+        return NSDecimalNumber.zero.rounding(accordingToBehavior: handler2Down)
     }
     
     
@@ -231,10 +231,12 @@ extension BaseData {
             let refAddressTable = TABLE_REFADDRESS.create(ifNotExists: true) { table in
                 table.column(REFADDRESS_ID, primaryKey: true)
                 table.column(REFADDRESS_ACCOUNT_ID)
-                table.column(REFADDRESS_CHAIN_ID)
+                table.column(REFADDRESS_CHAIN_TAG)
                 table.column(REFADDRESS_DP_ADDRESS)
-                table.column(REFADDRESS_LAST_AMOUNT)
-                table.column(REFADDRESS_LAST_VALUE)
+                table.column(REFADDRESS_MAIN_AMOUNT)
+                table.column(REFADDRESS_MAIN_VALUE)
+                table.column(REFADDRESS_TOKEN_VALUE)
+                table.column(REFADDRESS_COIN_CNT)
             }
             try self.database.run(refAddressTable)
             
@@ -287,8 +289,9 @@ extension BaseData {
     public func selectAllRefAddresses() -> Array<RefAddress> {
         var result = Array<RefAddress>()
         for rowInfo in try! database.prepare(TABLE_REFADDRESS) {
-            result.append(RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_ID],
-                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_LAST_AMOUNT], rowInfo[REFADDRESS_LAST_VALUE]))
+            result.append(RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_TAG],
+                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], rowInfo[REFADDRESS_MAIN_VALUE], 
+                                     rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT]))
         }
         return result
     }
@@ -297,31 +300,60 @@ extension BaseData {
         var result = Array<RefAddress>()
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == accountId)
         for rowInfo in try! database.prepare(query) {
-            result.append(RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_ID],
-                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_LAST_AMOUNT], rowInfo[REFADDRESS_LAST_VALUE]))
+            result.append(RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_TAG],
+                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], rowInfo[REFADDRESS_MAIN_VALUE], 
+                                     rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT]))
         }
         return result
+    }
+    
+    public func selectRefAddress(_ accountId: Int64, _ chainTag: String, _ address: String) -> RefAddress? {
+        let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == accountId &&
+                                            REFADDRESS_CHAIN_TAG == chainTag &&
+                                            REFADDRESS_DP_ADDRESS == address)
+        if let rowInfo = try! database.pluck(query) {
+            return RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_TAG],
+                              rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], rowInfo[REFADDRESS_MAIN_VALUE],
+                              rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT])
+        }
+        return nil
     }
     
     @discardableResult
     public func insertRefAddresses(_ refAddress: RefAddress) -> Int64 {
         let toInsert = TABLE_REFADDRESS.insert(REFADDRESS_ACCOUNT_ID <- refAddress.accountId,
-                                               REFADDRESS_CHAIN_ID <- refAddress.chainTag,
+                                               REFADDRESS_CHAIN_TAG <- refAddress.chainTag,
                                                REFADDRESS_DP_ADDRESS <- refAddress.dpAddress,
-                                               REFADDRESS_LAST_AMOUNT <- refAddress.lastAmount,
-                                               REFADDRESS_LAST_VALUE <- refAddress.lastValue)
+                                               REFADDRESS_MAIN_AMOUNT <- refAddress.lastMainAmount,
+                                               REFADDRESS_MAIN_VALUE <- refAddress.lastMainValue,
+                                               REFADDRESS_TOKEN_VALUE <- refAddress.lastTokenValue,
+                                               REFADDRESS_COIN_CNT <- refAddress.lastCoinCnt)
         return try! database.run(toInsert)
     }
     
     @discardableResult
-    public func updateRefAddresses(_ refAddress: RefAddress) -> Int? {
+    public func updateRefAddressesMain(_ refAddress: RefAddress) -> Int? {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
-                                            REFADDRESS_CHAIN_ID == refAddress.chainTag &&
+                                            REFADDRESS_CHAIN_TAG == refAddress.chainTag &&
                                             REFADDRESS_DP_ADDRESS == refAddress.dpAddress)
         if let address = try! database.pluck(query) {
             let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])
-            return try? database.run(target.update(REFADDRESS_LAST_AMOUNT <- refAddress.lastAmount,
-                                                   REFADDRESS_LAST_VALUE <- refAddress.lastValue))
+            return try? database.run(target.update(REFADDRESS_MAIN_AMOUNT <- refAddress.lastMainAmount,
+                                                   REFADDRESS_MAIN_VALUE <- refAddress.lastMainValue,
+                                                   REFADDRESS_COIN_CNT <- refAddress.lastCoinCnt))
+        } else {
+            return Int(insertRefAddresses(refAddress))
+        }
+    }
+    
+    @discardableResult
+    public func updateRefAddressesToken(_ refAddress: RefAddress) -> Int? {
+        let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
+                                            REFADDRESS_CHAIN_TAG == refAddress.chainTag &&
+                                            REFADDRESS_DP_ADDRESS == refAddress.dpAddress)
+        if let address = try! database.pluck(query) {
+            let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])
+            return try? database.run(target.update(REFADDRESS_TOKEN_VALUE <- refAddress.lastTokenValue))
             
         } else {
             return Int(insertRefAddresses(refAddress))
@@ -412,14 +444,14 @@ extension BaseData {
         return selectAccounts().first
     }
     
-    func setDisplayCosmosChainTags(_ baseAccount: BaseAccount, _ chainNames: [String])  {
+    func setDisplayCosmosChainTags(_ id: Int64, _ chainNames: [String])  {
         if let encoded = try? JSONEncoder().encode(chainNames) {
-            UserDefaults.standard.setValue(encoded, forKey: String(baseAccount.id) + " " + KEY_DISPLAY_COSMOS_CHAINS)
+            UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + KEY_DISPLAY_COSMOS_CHAINS)
         }
     }
     
-    func getDisplayCosmosChainTags(_ baseAccount: BaseAccount) -> [String] {
-        if let savedData = UserDefaults.standard.object(forKey: String(baseAccount.id) + " " + KEY_DISPLAY_COSMOS_CHAINS) as? Data {
+    func getDisplayCosmosChainTags(_ id: Int64) -> [String] {
+        if let savedData = UserDefaults.standard.object(forKey: String(id) + " " + KEY_DISPLAY_COSMOS_CHAINS) as? Data {
             if let result = try? JSONDecoder().decode([String].self, from: savedData) {
                 return result
             }

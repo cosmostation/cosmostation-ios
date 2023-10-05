@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class SelectChainCell: UITableViewCell {
     
@@ -17,15 +18,34 @@ class SelectChainCell: UITableViewCell {
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var deprecatedLabel: UILabel!
     @IBOutlet weak var evmLabel: UILabel!
+    @IBOutlet weak var valueLayer: UIStackView!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var assetCntLayer: UIStackView!
     @IBOutlet weak var assetCntLabel: UILabel!
-    @IBOutlet weak var selectSwitch: UISwitch!
+    
+    
+//    let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
     
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+//        valueLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+//        assetCntLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
     }
+    
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//        print("setSelected ", selected)
+//        if (selected) {
+////            rootView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
+//            rootView.layer.borderColor = UIColor.red.cgColor
+//            
+//        } else {
+//            rootView.layer.borderColor = UIColor.green.cgColor
+//        }
+//    }
+    
     
     override func prepareForReuse() {
         deprecatedLabel.isHidden = true
@@ -41,14 +61,13 @@ class SelectChainCell: UITableViewCell {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
-        hdPathLabel.text = chain.getHDPath(account.lastHDPath)
         
-        if (chain is ChainBinanceBeacon) {
-            assetCntLabel.text = String(chain.lcdAccountInfo["balances"].arrayValue.count) + " Coins"
-        } else if (chain is ChainOktKeccak256) {
-            assetCntLabel.text = String(chain.lcdAccountInfo["value","coins"].arrayValue.count) + " Coins"
+        if (selectedList.contains(chain.tag)) {
+            rootView.layer.borderColor = UIColor.colorPrimary.cgColor
+            rootView.backgroundColor = UIColor.colorPrimary.withAlphaComponent(0.05)
         } else {
-            assetCntLabel.text = String(chain.cosmosBalances.count) + " Coins"
+            rootView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
+            rootView.backgroundColor = UIColor.white.withAlphaComponent(0.05)
         }
         
         if (account.type == .withMnemonic) {
@@ -74,8 +93,30 @@ class SelectChainCell: UITableViewCell {
             }
         }
         
-        WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
-        selectSwitch.isOn = selectedList.contains(chain.tag)
-        selectSwitch.isHidden = chain is ChainCosmos
+        if let addess = chain.address, 
+            let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag, addess) {
+//            print("refAddress ", refAddress)
+            WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
+            assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"
+            
+//            valueLayer.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//            assetCntLayer.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            
+            
+        } else {
+//            valueLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+//            assetCntLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+        }
+        
+        //            let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag, addess)
+        //            print("refAddress ", refAddress?.lastUsdValue())
+        //            refAddress.v
+        //
+        //            WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
+        
+//        let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag, chain.address!)
+//        print("refAddress ", refAddress)
+//        
+//        print("", chain.name, "  ")
     }
 }

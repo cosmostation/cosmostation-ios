@@ -52,7 +52,7 @@ class CosmosClass: BaseChain  {
     lazy var lcdOktTokens = Array<JSON>()
     
     
-    func fetchData() {
+    func fetchData(_ id: Int64) {
         Task {
             if let rawParam = try? await self.fetchChainParam() {
                 mintscanChainParam = rawParam
@@ -69,9 +69,9 @@ class CosmosClass: BaseChain  {
             }
         }
         if (self is ChainBinanceBeacon || self is ChainOktKeccak256 ) {
-            fetchLcdData()
+            fetchLcdData(id)
         } else {
-            fetchGrpcData()
+            fetchGrpcData(id)
         }
     }
     
@@ -138,7 +138,6 @@ class CosmosClass: BaseChain  {
             $0.amount = [Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = coinAmount.stringValue }]
         }
     }
-    
     
     func getFeeBasePosition() -> Int {
         return mintscanChainParam["gas_price"]["base"].intValue
@@ -248,12 +247,12 @@ extension CosmosClass {
         return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).delegatorWithdrawAddress(req).response.get().withdrawAddress.replacingOccurrences(of: "\"", with: "")
     }
     
-    func fetchGrpcData() {
+    func fetchGrpcData(_ id: Int64) {
         let channel = getConnection()
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address! }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosAuth = response.account
-            self.fetchMoreData(channel)
+            self.fetchMoreData(channel, id)
             
         } else {
             try? channel.close()
@@ -263,7 +262,7 @@ extension CosmosClass {
         }
     }
     
-    func fetchMoreData(_ channel: ClientConnection) {
+    func fetchMoreData(_ channel: ClientConnection, _ id: Int64) {
         let group = DispatchGroup()
     
         fetchBalance(group, channel)
@@ -275,7 +274,13 @@ extension CosmosClass {
             try? channel.close()
             WUtils.onParseVestingAccount(self)
             self.fetched = true
-            self.setAllValue()
+            self.allCoinValue = self.allCoinValue()
+            self.allCoinUSDValue = self.allCoinValue(true)
+            
+            let refAddress = RefAddress(id, self.tag, self.address!, self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue, "", Int64(self.cosmosBalances.count))
+            BaseData.instance.updateRefAddressesMain(refAddress)
+            
+            
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }
     }
@@ -329,7 +334,7 @@ extension CosmosClass {
         }
     }
     
-    func fetchAllCw20Balance() {
+    func fetchAllCw20Balance(_ id: Int64) {
         let channel = getConnection()
         let group = DispatchGroup()
         mintscanTokens.forEach { token in
@@ -340,7 +345,11 @@ extension CosmosClass {
 
         group.notify(queue: .main) {
             try? channel.close()
-            self.setAllValue()
+            self.allTokenValue = self.allTokenValue()
+            self.allTokenUSDValue = self.allTokenValue(true)
+            let refAddress = RefAddress(id, self.tag, self.address!, "", "", self.allTokenUSDValue.stringValue, -1)
+            BaseData.instance.updateRefAddressesToken(refAddress)
+            
             NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
         }
     }
@@ -360,7 +369,7 @@ extension CosmosClass {
         }
     }
     
-    func fetchAllErc20Balance() {
+    func fetchAllErc20Balance(_ id: Int64) {
         let group = DispatchGroup()
         guard let url = URL(string: rpcURL) else { return }
         guard let web3 = try? Web3.new(url) else { return }
@@ -378,7 +387,11 @@ extension CosmosClass {
         }
         
         group.notify(queue: .main) {
-            self.setAllValue()
+            self.allTokenValue = self.allTokenValue()
+            self.allTokenUSDValue = self.allTokenValue(true)
+            
+            let refAddress = RefAddress(id, self.tag, self.address!, "", "", self.allTokenUSDValue.stringValue, -1)
+            BaseData.instance.updateRefAddressesToken(refAddress)
             NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
         }
     }
@@ -403,7 +416,7 @@ extension CosmosClass {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = balanceAmount(denom)
-            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             
         }
         return NSDecimalNumber.zero
@@ -425,7 +438,7 @@ extension CosmosClass {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = vestingAmount(denom)
-            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
         }
         return NSDecimalNumber.zero
     }
@@ -451,7 +464,7 @@ extension CosmosClass {
         if let msAsset = BaseData.instance.getAsset(apiName, stakeDenom) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = delegationAmountSum()
-            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
         }
         return NSDecimalNumber.zero
     }
@@ -470,7 +483,7 @@ extension CosmosClass {
         if let msAsset = BaseData.instance.getAsset(apiName, stakeDenom) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = unbondingAmountSum()
-            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
         }
         return NSDecimalNumber.zero
     }
@@ -494,7 +507,7 @@ extension CosmosClass {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = rewardAmountSum(denom)
-            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
         }
         return NSDecimalNumber.zero
     }
@@ -534,7 +547,7 @@ extension CosmosClass {
             if let msAsset = BaseData.instance.getAsset(apiName, rewardCoin.denom) {
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
                 let amount = NSDecimalNumber(string: rewardCoin.amount)
-                let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+                let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
                 result = result.adding(value)
             }
         }
@@ -545,7 +558,7 @@ extension CosmosClass {
         var result = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
         cosmosRewards.forEach { reward in
             for i in 0..<reward.reward.count {
-                let rewardAmount = NSDecimalNumber(string: reward.reward[i].amount).multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(0))
+                let rewardAmount = NSDecimalNumber(string: reward.reward[i].amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
                 if (rewardAmount.compare(NSDecimalNumber.one).rawValue > 0) {
                     result.append(reward)
                     break
@@ -569,7 +582,7 @@ extension CosmosClass {
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if let tokenInfo = mintscanTokens.filter({ $0.address == address }).first {
             let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-            return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: getDivideHandler(6))
+            return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
         }
         return NSDecimalNumber.zero
     }
@@ -578,29 +591,23 @@ extension CosmosClass {
         var result = NSDecimalNumber.zero
         mintscanTokens.forEach { tokenInfo in
             let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-            let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: getDivideHandler(6))
+            let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
             result = result.adding(value)
         }
         return result
     }
     
     
-    func setAllValue() {
-        var result = NSDecimalNumber.zero
+    func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if (self is ChainBinanceBeacon) {
-            self.allValue = lcdBalanceValue(stakeDenom)
+            return lcdBalanceValue(stakeDenom, usd)
             
         } else if (self is ChainOktKeccak256) {
-            self.allValue = lcdBalanceValue(stakeDenom).adding(lcdOktDepositValue()).adding(lcdOktWithdrawValue())
+            return lcdBalanceValue(stakeDenom, usd).adding(lcdOktDepositValue(usd) ).adding(lcdOktWithdrawValue(usd))
             
         } else {
-            result = balanceValueSum().adding(vestingValueSum()).adding(delegationValueSum()).adding(unbondingValueSum()).adding(rewardValueSum())
-            if (supportCw20 || supportErc20) {
-                result = result.adding(allTokenValue())
-            }
-            self.allValue = result
+            return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
         }
-        //TODO USD value!!!!
     }
     
     
@@ -621,7 +628,7 @@ extension CosmosClass {
 //about legacy lcd
 extension CosmosClass {
     
-    func fetchLcdData() {
+    func fetchLcdData(_ id: Int64) {
         let group = DispatchGroup()
         
         if (self is ChainBinanceBeacon) {
@@ -636,12 +643,20 @@ extension CosmosClass {
             fetchOktDeposited(group, address!)
             fetchOktWithdraw(group, address!)
             fetchOktTokens(group)
-            
         }
         
         group.notify(queue: .main) {
             self.fetched = true
-            self.setAllValue()
+            self.allCoinValue = self.allCoinValue()
+            self.allCoinUSDValue = self.allCoinValue(true)
+            
+            if (self is ChainBinanceBeacon) {
+                let refAddress = RefAddress(id, self.tag, self.address!, self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue, "", Int64(self.lcdAccountInfo["balances"].array?.count ?? 0))
+                BaseData.instance.updateRefAddressesMain(refAddress)
+            } else if (self is ChainOktKeccak256) {
+                let refAddress = RefAddress(id, self.tag, self.address!, self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue, "", Int64(self.lcdAccountInfo["value","coins"].array?.count ?? 0))
+                BaseData.instance.updateRefAddressesMain(refAddress)
+            }
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }
     }
@@ -764,6 +779,11 @@ extension CosmosClass {
     }
     
     
+    
+    func lcdAllStakingDenomAmount() -> NSDecimalNumber {
+        return lcdBalanceAmount(stakeDenom).adding(lcdOktDepositAmount()).adding(lcdOktWithdrawAmount())
+    }
+    
     func lcdBalanceAmount(_ denom: String) -> NSDecimalNumber {
         if (self is ChainBinanceBeacon) {
             if let balance = lcdAccountInfo["balances"].array?.filter({ $0["symbol"].string == denom }).first {
@@ -789,7 +809,7 @@ extension CosmosClass {
             } else if (self is ChainOktKeccak256) {
                 msPrice = BaseData.instance.getPrice(ChainOktKeccak256.OKT_GECKO_ID, usd)
             }
-            return msPrice.multiplying(by: amount, withBehavior: getDivideHandler(6))
+            return msPrice.multiplying(by: amount, withBehavior: handler6)
         }
         return NSDecimalNumber.zero
     }
@@ -801,7 +821,7 @@ extension CosmosClass {
     func lcdOktDepositValue(_ usd: Bool? = false) -> NSDecimalNumber {
         let msPrice = BaseData.instance.getPrice(ChainOktKeccak256.OKT_GECKO_ID, usd)
         let amount = lcdOktDepositAmount()
-        return msPrice.multiplying(by: amount, withBehavior: getDivideHandler(6))
+        return msPrice.multiplying(by: amount, withBehavior: handler6)
     }
     
     func lcdOktWithdrawAmount() -> NSDecimalNumber {
@@ -811,7 +831,7 @@ extension CosmosClass {
     func lcdOktWithdrawValue(_ usd: Bool? = false) -> NSDecimalNumber {
         let msPrice = BaseData.instance.getPrice(ChainOktKeccak256.OKT_GECKO_ID, usd)
         let amount = lcdOktWithdrawAmount()
-        return msPrice.multiplying(by: amount, withBehavior: getDivideHandler(6))
+        return msPrice.multiplying(by: amount, withBehavior: handler6)
     }
     
     
@@ -837,44 +857,44 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     var result = [CosmosClass]()
     result.removeAll()
     result.append(ChainCosmos())
-    result.append(ChainAkash())
-    result.append(ChainArchway())
-    result.append(ChainAssetMantle())
-    result.append(ChainAxelar())
-    result.append(ChainBand())
-    result.append(ChainBitcana())
-    result.append(ChainBitsong())
-//    result.append(ChainCanto())
-    result.append(ChainChihuahua())
-    result.append(ChainComdex())
-    result.append(ChainCoreum())
-    result.append(ChainCrescent())
-    result.append(ChainCryptoorg())
-    result.append(ChainCudos())
-    result.append(ChainDesmos())
-    result.append(ChainEmoney())
+//    result.append(ChainAkash())
+//    result.append(ChainArchway())
+//    result.append(ChainAssetMantle())
+//    result.append(ChainAxelar())
+//    result.append(ChainBand())
+//    result.append(ChainBitcana())
+//    result.append(ChainBitsong())
+////    result.append(ChainCanto())
+//    result.append(ChainChihuahua())
+//    result.append(ChainComdex())
+//    result.append(ChainCoreum())
+//    result.append(ChainCrescent())
+//    result.append(ChainCryptoorg())
+//    result.append(ChainCudos())
+//    result.append(ChainDesmos())
+//    result.append(ChainEmoney())
     result.append(ChainEvmos())
     result.append(ChainFetchAi())
     result.append(ChainGravityBridge())
-    result.append(ChainInjective())
-    result.append(ChainIxo())
+//    result.append(ChainInjective())
+//    result.append(ChainIxo())
     result.append(ChainJuno())
-    result.append(ChainKava459())
-    result.append(ChainKava60())
-    result.append(ChainKava118())
-    result.append(ChainKi())
-    result.append(ChainKyve())
-    result.append(ChainLike())
-    result.append(ChainLum880())
-    result.append(ChainLum118())
-    result.append(ChainMars())
-    result.append(ChainMedibloc())
-    result.append(ChainNeutron())
-    result.append(ChainNoble())
-    result.append(ChainNyx())
-    result.append(ChainOmniflix())
-    result.append(ChainOnomy())
-    result.append(ChainOsmosis())
+//    result.append(ChainKava459())
+//    result.append(ChainKava60())
+//    result.append(ChainKava118())
+//    result.append(ChainKi())
+//    result.append(ChainKyve())
+//    result.append(ChainLike())
+//    result.append(ChainLum880())
+//    result.append(ChainLum118())
+//    result.append(ChainMars())
+//    result.append(ChainMedibloc())
+//    result.append(ChainNeutron())
+//    result.append(ChainNoble())
+//    result.append(ChainNyx())
+//    result.append(ChainOmniflix())
+//    result.append(ChainOnomy())
+//    result.append(ChainOsmosis())
     result.append(ChainPassage())
     result.append(ChainPersistence118())
     result.append(ChainPersistence750())
@@ -894,10 +914,10 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainStarname())
     result.append(ChainStride())
     result.append(ChainTerra())
-    result.append(ChainTeritori())
-    result.append(ChainUmee())
-    result.append(ChainXpla())
-    result.append(ChainXplaKeccak256())
+//    result.append(ChainTeritori())
+//    result.append(ChainUmee())
+//    result.append(ChainXpla())
+//    result.append(ChainXplaKeccak256())
     
     result.append(ChainBinanceBeacon())
     result.append(ChainOktKeccak256())
@@ -909,4 +929,4 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     return result
 }
 
-let DEFUAL_DISPALY_COSMOS = ["cosmos118", "lum118", "axelar118", "kava459", "stargaze118"]
+let DEFUAL_DISPALY_COSMOS = ["cosmos118", "juno118", "evmos60", "binanceBeacon"]

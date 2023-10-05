@@ -97,7 +97,7 @@ class CosmosCompounding: BaseVC {
             var rewardAmount = NSDecimalNumber.zero
             claimableRewards.forEach { reward in
                 let rawAmount =  NSDecimalNumber(string: reward.reward.filter{ $0.denom == stakeDenom }.first?.amount ?? "0")
-                rewardAmount = rewardAmount.adding(rawAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(0)))
+                rewardAmount = rewardAmount.adding(rawAmount.multiplying(byPowerOf10: -18, withBehavior: handler0Down))
             }
             WDP.dpCoin(msAsset, rewardAmount, nil, rewardDenomLabel, rewardAmountLabel, msAsset.decimals)
         }
@@ -145,7 +145,7 @@ class CosmosCompounding: BaseVC {
             WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let amount = NSDecimalNumber(string: txFee.amount[0].amount)
-            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(6))
+            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
     }
