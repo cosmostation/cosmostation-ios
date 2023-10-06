@@ -25,27 +25,14 @@ class SelectChainCell: UITableViewCell {
     @IBOutlet weak var assetCntLabel: UILabel!
     
     
-//    let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
+    let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
     
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-//        valueLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
-//        assetCntLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+        valueLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+        assetCntLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
     }
-    
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//        print("setSelected ", selected)
-//        if (selected) {
-////            rootView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
-//            rootView.layer.borderColor = UIColor.red.cgColor
-//            
-//        } else {
-//            rootView.layer.borderColor = UIColor.green.cgColor
-//        }
-//    }
-    
     
     override func prepareForReuse() {
         deprecatedLabel.isHidden = true
@@ -92,20 +79,21 @@ class SelectChainCell: UITableViewCell {
                 }
             }
         }
+        print("chain ", chain.name, "  ", chain.address)
         
         if let addess = chain.address, 
             let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag, addess) {
-//            print("refAddress ", refAddress)
+            print("refAddress ", refAddress)
             WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
             assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"
             
-//            valueLayer.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-//            assetCntLayer.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            valueLayer.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            assetCntLayer.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             
             
         } else {
-//            valueLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
-//            assetCntLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+            valueLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+            assetCntLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
         }
         
         //            let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag, addess)
