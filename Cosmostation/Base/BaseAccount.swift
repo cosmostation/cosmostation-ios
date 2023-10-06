@@ -64,7 +64,9 @@ public class BaseAccount {
                         if (chain.address == nil) {
                             chain.setInfoWithSeed(seed, lastHDPath)
                         }
-                        chain.fetchData(id)
+                        if (chain.fetched == false) {
+                            chain.fetchData(id)
+                        }
                     }
                 }
             }
@@ -76,7 +78,9 @@ public class BaseAccount {
                         if (chain.address == nil) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
-                        chain.fetchData(id)
+                        if (chain.fetched == false) {
+                            chain.fetchData(id)
+                        }
                     }
                 }
             }
@@ -164,7 +168,9 @@ extension BaseAccount {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 allCosmosClassChains.forEach { chain in
-                    chain.setInfoWithSeed(seed, lastHDPath)
+                    if (chain.address == nil) {
+                        chain.setInfoWithSeed(seed, lastHDPath)
+                    }
                 }
             }
             
@@ -174,7 +180,9 @@ extension BaseAccount {
             }
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 allCosmosClassChains.forEach { chain in
-                    chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                    if (chain.address == nil) {
+                        chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                    }
                 }
             }
         }

@@ -524,10 +524,12 @@ class CosmosTransfer: BaseVC {
     func ibcCoinSendSimul() {
         Task {
             let channel = getConnection()
+            let recipientChannel = getRecipientConnection()
             if let auth = try? await fetchAuth(channel, selectedChain.address!),
-               let ibcClient = try? await fetchIbcClient(channel) {
+               let ibcClient = try? await fetchIbcClient(channel),
+               let lastBlock = try? await fetchLastBlock(recipientChannel) {
                 do {
-                    let simul = try await simulIbcSendTx(channel, auth!, onBindIbcSend(ibcClient!))
+                    let simul = try await simulIbcSendTx(channel, auth!, onBindIbcSend(ibcClient!, lastBlock!))
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simul)
                     }
@@ -591,11 +593,12 @@ class CosmosTransfer: BaseVC {
         }
     }
     
-    func onBindIbcSend(_ ibcClient: Ibc_Core_Channel_V1_QueryChannelClientStateResponse) -> Ibc_Applications_Transfer_V1_MsgTransfer {
+    func onBindIbcSend(_ ibcClient: Ibc_Core_Channel_V1_QueryChannelClientStateResponse,
+                       _ lastBlock: Cosmos_Base_Tendermint_V1beta1_GetLatestBlockResponse) -> Ibc_Applications_Transfer_V1_MsgTransfer {
         let latestHeight = try! Ibc_Lightclients_Tendermint_V1_ClientState.init(serializedData: ibcClient.identifiedClientState.clientState.value).latestHeight
         let height = Ibc_Core_Client_V1_Height.with {
             $0.revisionNumber = latestHeight.revisionNumber
-            $0.revisionHeight = latestHeight.revisionHeight + 1000
+            $0.revisionHeight = UInt64(lastBlock.block.header.height + 200)
         }
         let sendCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = toSendDenom
@@ -756,8 +759,6 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             
             if let result = try? web3.eth.sendRawTransaction(ethereumTransaction!) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    print("result ", result)
-                    print("result hash ", result.hash)
                     self.loadingView.isHidden = true
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -774,9 +775,11 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     func ibcCoinSend() {
         Task {
             let channel = getConnection()
+            let recipientChannel = getRecipientConnection()
             if let auth = try? await fetchAuth(channel, selectedChain.address!),
                let ibcClient = try? await fetchIbcClient(channel),
-               let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(ibcClient!)) {
+               let lastBlock = try? await fetchLastBlock(recipientChannel),
+               let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(ibcClient!, lastBlock!)) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     self.loadingView.isHidden = true
                     
@@ -822,7 +825,12 @@ extension CosmosTransfer {
             $0.channelID = mintscanPath!.channel!
             $0.portID = mintscanPath!.port!
         }
-        return try? await Ibc_Core_Channel_V1_QueryNIOClient(channel: channel).channelClientState(req).response.get()
+        return try? await Ibc_Core_Channel_V1_QueryNIOClient(channel: channel).channelClientState(req, callOptions: getCallOptions()).response.get()
+    }
+    
+    func fetchLastBlock(_ channel: ClientConnection) async throws -> Cosmos_Base_Tendermint_V1beta1_GetLatestBlockResponse? {
+        let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
+        return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: channel).getLatestBlock(req, callOptions: getCallOptions()).response.get()
     }
     
     
@@ -893,6 +901,11 @@ extension CosmosTransfer {
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
         return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.grpcHost, port: selectedChain.grpcPort)
+    }
+    
+    func getRecipientConnection() -> ClientConnection {
+        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedRecipientChain.grpcHost, port: selectedRecipientChain.grpcPort)
     }
     
     func getCallOptions() -> CallOptions {

@@ -170,6 +170,78 @@
 		046E9041268C4863002CFFE1 /* BinanceInt+VarInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9040268C4863002CFFE1 /* BinanceInt+VarInt.swift */; };
 		046E9043268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9042268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift */; };
 		046E9049268C7C2B002CFFE1 /* BinanceHexEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9048268C7C2B002CFFE1 /* BinanceHexEncoding.swift */; };
+		046EA7A32AD0499900A2FCE7 /* stride_vesting_vesting.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA75E2AD0499300A2FCE7 /* stride_vesting_vesting.pb.swift */; };
+		046EA7A42AD0499900A2FCE7 /* stride_vesting_vesting.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA75E2AD0499300A2FCE7 /* stride_vesting_vesting.pb.swift */; };
+		046EA7A92AD0499900A2FCE7 /* stride_vesting_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA7612AD0499300A2FCE7 /* stride_vesting_tx.pb.swift */; };
+		046EA7AA2AD0499900A2FCE7 /* stride_vesting_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA7612AD0499300A2FCE7 /* stride_vesting_tx.pb.swift */; };
+		046EA7FB2AD0499900A2FCE7 /* stride_vesting_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA78A2AD0499800A2FCE7 /* stride_vesting_tx.grpc.swift */; };
+		046EA7FC2AD0499900A2FCE7 /* stride_vesting_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA78A2AD0499800A2FCE7 /* stride_vesting_tx.grpc.swift */; };
+		046EA8552AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8052AD04A1F00A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift */; };
+		046EA8562AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8052AD04A1F00A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift */; };
+		046EA85F2AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA80A2AD04A1F00A2FCE7 /* desmos_profiles_v3_msgs_app_links.pb.swift */; };
+		046EA8602AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA80A2AD04A1F00A2FCE7 /* desmos_profiles_v3_msgs_app_links.pb.swift */; };
+		046EA8652AD04A2500A2FCE7 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA80D2AD04A2000A2FCE7 /* desmos_profiles_v3_query_dtag_requests.pb.swift */; };
+		046EA8662AD04A2500A2FCE7 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA80D2AD04A2000A2FCE7 /* desmos_profiles_v3_query_dtag_requests.pb.swift */; };
+		046EA86D2AD04A2500A2FCE7 /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8112AD04A2000A2FCE7 /* desmos_profiles_v3_query_chain_links.pb.swift */; };
+		046EA86E2AD04A2500A2FCE7 /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8112AD04A2000A2FCE7 /* desmos_profiles_v3_query_chain_links.pb.swift */; };
+		046EA86F2AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8122AD04A2000A2FCE7 /* desmos_profiles_v1beta1_models_chain_links.pb.swift */; };
+		046EA8702AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8122AD04A2000A2FCE7 /* desmos_profiles_v1beta1_models_chain_links.pb.swift */; };
+		046EA8732AD04A2500A2FCE7 /* desmos_profiles_v3_query_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8142AD04A2000A2FCE7 /* desmos_profiles_v3_query_app_links.pb.swift */; };
+		046EA8742AD04A2500A2FCE7 /* desmos_profiles_v3_query_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8142AD04A2000A2FCE7 /* desmos_profiles_v3_query_app_links.pb.swift */; };
+		046EA8752AD04A2500A2FCE7 /* desmos_profiles_v2_models_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8152AD04A2000A2FCE7 /* desmos_profiles_v2_models_chain_links.pb.swift */; };
+		046EA8762AD04A2500A2FCE7 /* desmos_profiles_v2_models_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8152AD04A2000A2FCE7 /* desmos_profiles_v2_models_chain_links.pb.swift */; };
+		046EA8772AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8162AD04A2000A2FCE7 /* desmos_profiles_v3_msgs_params.pb.swift */; };
+		046EA8782AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8162AD04A2000A2FCE7 /* desmos_profiles_v3_msgs_params.pb.swift */; };
+		046EA8792AD04A2500A2FCE7 /* desmos_profiles_v3_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8172AD04A2000A2FCE7 /* desmos_profiles_v3_query.grpc.swift */; };
+		046EA87A2AD04A2500A2FCE7 /* desmos_profiles_v3_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8172AD04A2000A2FCE7 /* desmos_profiles_v3_query.grpc.swift */; };
+		046EA87B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8182AD04A2000A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift */; };
+		046EA87C2AD04A2500A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8182AD04A2000A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift */; };
+		046EA8812AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA81B2AD04A2100A2FCE7 /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift */; };
+		046EA8822AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA81B2AD04A2100A2FCE7 /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift */; };
+		046EA8832AD04A2500A2FCE7 /* desmos_profiles_v2_models_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA81C2AD04A2100A2FCE7 /* desmos_profiles_v2_models_dtag_requests.pb.swift */; };
+		046EA8842AD04A2500A2FCE7 /* desmos_profiles_v2_models_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA81C2AD04A2100A2FCE7 /* desmos_profiles_v2_models_dtag_requests.pb.swift */; };
+		046EA8852AD04A2500A2FCE7 /* desmos_profiles_v2_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA81D2AD04A2100A2FCE7 /* desmos_profiles_v2_models_app_links.pb.swift */; };
+		046EA8862AD04A2500A2FCE7 /* desmos_profiles_v2_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA81D2AD04A2100A2FCE7 /* desmos_profiles_v2_models_app_links.pb.swift */; };
+		046EA88B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8202AD04A2100A2FCE7 /* desmos_profiles_v3_models_params.pb.swift */; };
+		046EA88C2AD04A2500A2FCE7 /* desmos_profiles_v3_models_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8202AD04A2100A2FCE7 /* desmos_profiles_v3_models_params.pb.swift */; };
+		046EA88F2AD04A2500A2FCE7 /* desmos_profiles_v3_msg_server.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8222AD04A2100A2FCE7 /* desmos_profiles_v3_msg_server.pb.swift */; };
+		046EA8902AD04A2500A2FCE7 /* desmos_profiles_v3_msg_server.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8222AD04A2100A2FCE7 /* desmos_profiles_v3_msg_server.pb.swift */; };
+		046EA8A32AD04A2500A2FCE7 /* desmos_profiles_v2_models_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA82C2AD04A2200A2FCE7 /* desmos_profiles_v2_models_params.pb.swift */; };
+		046EA8A42AD04A2500A2FCE7 /* desmos_profiles_v2_models_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA82C2AD04A2200A2FCE7 /* desmos_profiles_v2_models_params.pb.swift */; };
+		046EA8AB2AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8302AD04A2200A2FCE7 /* desmos_profiles_v3_msgs_profile.pb.swift */; };
+		046EA8AC2AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8302AD04A2200A2FCE7 /* desmos_profiles_v3_msgs_profile.pb.swift */; };
+		046EA8B12AD04A2600A2FCE7 /* desmos_profiles_v3_query_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8332AD04A2300A2FCE7 /* desmos_profiles_v3_query_profile.pb.swift */; };
+		046EA8B22AD04A2600A2FCE7 /* desmos_profiles_v3_query_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8332AD04A2300A2FCE7 /* desmos_profiles_v3_query_profile.pb.swift */; };
+		046EA8B52AD04A2600A2FCE7 /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8352AD04A2300A2FCE7 /* desmos_profiles_v3_models_chain_links.pb.swift */; };
+		046EA8B62AD04A2600A2FCE7 /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8352AD04A2300A2FCE7 /* desmos_profiles_v3_models_chain_links.pb.swift */; };
+		046EA8B92AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8372AD04A2300A2FCE7 /* desmos_profiles_v1beta1_models_relationships.pb.swift */; };
+		046EA8BA2AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8372AD04A2300A2FCE7 /* desmos_profiles_v1beta1_models_relationships.pb.swift */; };
+		046EA8BB2AD04A2600A2FCE7 /* desmos_profiles_v3_client_cli.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8382AD04A2300A2FCE7 /* desmos_profiles_v3_client_cli.pb.swift */; };
+		046EA8BC2AD04A2600A2FCE7 /* desmos_profiles_v3_client_cli.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8382AD04A2300A2FCE7 /* desmos_profiles_v3_client_cli.pb.swift */; };
+		046EA8BD2AD04A2600A2FCE7 /* desmos_profiles_v3_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8392AD04A2300A2FCE7 /* desmos_profiles_v3_genesis.pb.swift */; };
+		046EA8BE2AD04A2600A2FCE7 /* desmos_profiles_v3_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8392AD04A2300A2FCE7 /* desmos_profiles_v3_genesis.pb.swift */; };
+		046EA8C32AD04A2600A2FCE7 /* desmos_profiles_v3_models_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA83C2AD04A2300A2FCE7 /* desmos_profiles_v3_models_dtag_requests.pb.swift */; };
+		046EA8C42AD04A2600A2FCE7 /* desmos_profiles_v3_models_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA83C2AD04A2300A2FCE7 /* desmos_profiles_v3_models_dtag_requests.pb.swift */; };
+		046EA8D32AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8442AD04A2400A2FCE7 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift */; };
+		046EA8D42AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8442AD04A2400A2FCE7 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift */; };
+		046EA8D72AD04A2600A2FCE7 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8462AD04A2400A2FCE7 /* desmos_profiles_v3_models_app_links.pb.swift */; };
+		046EA8D82AD04A2600A2FCE7 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8462AD04A2400A2FCE7 /* desmos_profiles_v3_models_app_links.pb.swift */; };
+		046EA8DF2AD04A2600A2FCE7 /* desmos_profiles_v3_models_packets.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA84A2AD04A2400A2FCE7 /* desmos_profiles_v3_models_packets.pb.swift */; };
+		046EA8E02AD04A2600A2FCE7 /* desmos_profiles_v3_models_packets.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA84A2AD04A2400A2FCE7 /* desmos_profiles_v3_models_packets.pb.swift */; };
+		046EA8E12AD04A2600A2FCE7 /* desmos_profiles_v3_query_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA84B2AD04A2500A2FCE7 /* desmos_profiles_v3_query_params.pb.swift */; };
+		046EA8E22AD04A2600A2FCE7 /* desmos_profiles_v3_query_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA84B2AD04A2500A2FCE7 /* desmos_profiles_v3_query_params.pb.swift */; };
+		046EA8E32AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA84C2AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_profile.pb.swift */; };
+		046EA8E42AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA84C2AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_profile.pb.swift */; };
+		046EA8E72AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA84E2AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_chain_links.pb.swift */; };
+		046EA8E82AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA84E2AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_chain_links.pb.swift */; };
+		046EA8EB2AD04A2600A2FCE7 /* desmos_profiles_v3_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8502AD04A2500A2FCE7 /* desmos_profiles_v3_query.pb.swift */; };
+		046EA8EC2AD04A2600A2FCE7 /* desmos_profiles_v3_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8502AD04A2500A2FCE7 /* desmos_profiles_v3_query.pb.swift */; };
+		046EA8ED2AD04A2600A2FCE7 /* desmos_profiles_module_v1_module.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8512AD04A2500A2FCE7 /* desmos_profiles_module_v1_module.pb.swift */; };
+		046EA8EE2AD04A2600A2FCE7 /* desmos_profiles_module_v1_module.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8512AD04A2500A2FCE7 /* desmos_profiles_module_v1_module.pb.swift */; };
+		046EA8EF2AD04A2600A2FCE7 /* desmos_profiles_v3_msg_server.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8522AD04A2500A2FCE7 /* desmos_profiles_v3_msg_server.grpc.swift */; };
+		046EA8F02AD04A2600A2FCE7 /* desmos_profiles_v3_msg_server.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8522AD04A2500A2FCE7 /* desmos_profiles_v3_msg_server.grpc.swift */; };
+		046EA8F32AD04A2600A2FCE7 /* desmos_profiles_v2_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8542AD04A2500A2FCE7 /* desmos_profiles_v2_models_profile.pb.swift */; };
+		046EA8F42AD04A2600A2FCE7 /* desmos_profiles_v2_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8542AD04A2500A2FCE7 /* desmos_profiles_v2_models_profile.pb.swift */; };
 		047842D82AC87C1000462F1C /* CosmosTxResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842D62AC87C1000462F1C /* CosmosTxResult.swift */; };
 		047842D92AC87C1000462F1C /* CosmosTxResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047842D62AC87C1000462F1C /* CosmosTxResult.swift */; };
 		047842DA2AC87C1000462F1C /* CosmosTxResult.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047842D72AC87C1000462F1C /* CosmosTxResult.xib */; };
@@ -1459,6 +1531,42 @@
 		046E9040268C4863002CFFE1 /* BinanceInt+VarInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinanceInt+VarInt.swift"; sourceTree = "<group>"; };
 		046E9042268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceSegwitAddrCoder.swift; sourceTree = "<group>"; };
 		046E9048268C7C2B002CFFE1 /* BinanceHexEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceHexEncoding.swift; sourceTree = "<group>"; };
+		046EA75E2AD0499300A2FCE7 /* stride_vesting_vesting.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_vesting_vesting.pb.swift; sourceTree = "<group>"; };
+		046EA7612AD0499300A2FCE7 /* stride_vesting_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_vesting_tx.pb.swift; sourceTree = "<group>"; };
+		046EA78A2AD0499800A2FCE7 /* stride_vesting_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_vesting_tx.grpc.swift; sourceTree = "<group>"; };
+		046EA8052AD04A1F00A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_models_app_links.pb.swift; sourceTree = "<group>"; };
+		046EA80A2AD04A1F00A2FCE7 /* desmos_profiles_v3_msgs_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msgs_app_links.pb.swift; sourceTree = "<group>"; };
+		046EA80D2AD04A2000A2FCE7 /* desmos_profiles_v3_query_dtag_requests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query_dtag_requests.pb.swift; sourceTree = "<group>"; };
+		046EA8112AD04A2000A2FCE7 /* desmos_profiles_v3_query_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query_chain_links.pb.swift; sourceTree = "<group>"; };
+		046EA8122AD04A2000A2FCE7 /* desmos_profiles_v1beta1_models_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_models_chain_links.pb.swift; sourceTree = "<group>"; };
+		046EA8142AD04A2000A2FCE7 /* desmos_profiles_v3_query_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query_app_links.pb.swift; sourceTree = "<group>"; };
+		046EA8152AD04A2000A2FCE7 /* desmos_profiles_v2_models_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v2_models_chain_links.pb.swift; sourceTree = "<group>"; };
+		046EA8162AD04A2000A2FCE7 /* desmos_profiles_v3_msgs_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msgs_params.pb.swift; sourceTree = "<group>"; };
+		046EA8172AD04A2000A2FCE7 /* desmos_profiles_v3_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query.grpc.swift; sourceTree = "<group>"; };
+		046EA8182AD04A2000A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_models_profile.pb.swift; sourceTree = "<group>"; };
+		046EA81B2AD04A2100A2FCE7 /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_models_dtag_requests.pb.swift; sourceTree = "<group>"; };
+		046EA81C2AD04A2100A2FCE7 /* desmos_profiles_v2_models_dtag_requests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v2_models_dtag_requests.pb.swift; sourceTree = "<group>"; };
+		046EA81D2AD04A2100A2FCE7 /* desmos_profiles_v2_models_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v2_models_app_links.pb.swift; sourceTree = "<group>"; };
+		046EA8202AD04A2100A2FCE7 /* desmos_profiles_v3_models_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_models_params.pb.swift; sourceTree = "<group>"; };
+		046EA8222AD04A2100A2FCE7 /* desmos_profiles_v3_msg_server.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msg_server.pb.swift; sourceTree = "<group>"; };
+		046EA82C2AD04A2200A2FCE7 /* desmos_profiles_v2_models_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v2_models_params.pb.swift; sourceTree = "<group>"; };
+		046EA8302AD04A2200A2FCE7 /* desmos_profiles_v3_msgs_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msgs_profile.pb.swift; sourceTree = "<group>"; };
+		046EA8332AD04A2300A2FCE7 /* desmos_profiles_v3_query_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query_profile.pb.swift; sourceTree = "<group>"; };
+		046EA8352AD04A2300A2FCE7 /* desmos_profiles_v3_models_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_models_chain_links.pb.swift; sourceTree = "<group>"; };
+		046EA8372AD04A2300A2FCE7 /* desmos_profiles_v1beta1_models_relationships.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_models_relationships.pb.swift; sourceTree = "<group>"; };
+		046EA8382AD04A2300A2FCE7 /* desmos_profiles_v3_client_cli.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_client_cli.pb.swift; sourceTree = "<group>"; };
+		046EA8392AD04A2300A2FCE7 /* desmos_profiles_v3_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_genesis.pb.swift; sourceTree = "<group>"; };
+		046EA83C2AD04A2300A2FCE7 /* desmos_profiles_v3_models_dtag_requests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_models_dtag_requests.pb.swift; sourceTree = "<group>"; };
+		046EA8442AD04A2400A2FCE7 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msgs_dtag_requests.pb.swift; sourceTree = "<group>"; };
+		046EA8462AD04A2400A2FCE7 /* desmos_profiles_v3_models_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_models_app_links.pb.swift; sourceTree = "<group>"; };
+		046EA84A2AD04A2400A2FCE7 /* desmos_profiles_v3_models_packets.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_models_packets.pb.swift; sourceTree = "<group>"; };
+		046EA84B2AD04A2500A2FCE7 /* desmos_profiles_v3_query_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query_params.pb.swift; sourceTree = "<group>"; };
+		046EA84C2AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_models_profile.pb.swift; sourceTree = "<group>"; };
+		046EA84E2AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msgs_chain_links.pb.swift; sourceTree = "<group>"; };
+		046EA8502AD04A2500A2FCE7 /* desmos_profiles_v3_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query.pb.swift; sourceTree = "<group>"; };
+		046EA8512AD04A2500A2FCE7 /* desmos_profiles_module_v1_module.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_module_v1_module.pb.swift; sourceTree = "<group>"; };
+		046EA8522AD04A2500A2FCE7 /* desmos_profiles_v3_msg_server.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msg_server.grpc.swift; sourceTree = "<group>"; };
+		046EA8542AD04A2500A2FCE7 /* desmos_profiles_v2_models_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v2_models_profile.pb.swift; sourceTree = "<group>"; };
 		047842D62AC87C1000462F1C /* CosmosTxResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTxResult.swift; sourceTree = "<group>"; };
 		047842D72AC87C1000462F1C /* CosmosTxResult.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosTxResult.xib; sourceTree = "<group>"; };
 		047842DC2AC8963100462F1C /* CosmosUndelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosUndelegate.swift; sourceTree = "<group>"; };
@@ -2188,6 +2296,56 @@
 			path = ClassCosmos;
 			sourceTree = "<group>";
 		};
+		046EA7192AD0495B00A2FCE7 /* Stride */ = {
+			isa = PBXGroup;
+			children = (
+				046EA78A2AD0499800A2FCE7 /* stride_vesting_tx.grpc.swift */,
+				046EA7612AD0499300A2FCE7 /* stride_vesting_tx.pb.swift */,
+				046EA75E2AD0499300A2FCE7 /* stride_vesting_vesting.pb.swift */,
+			);
+			path = Stride;
+			sourceTree = "<group>";
+		};
+		046EA71A2AD0496500A2FCE7 /* Desmos */ = {
+			isa = PBXGroup;
+			children = (
+				046EA8512AD04A2500A2FCE7 /* desmos_profiles_module_v1_module.pb.swift */,
+				046EA8052AD04A1F00A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift */,
+				046EA8122AD04A2000A2FCE7 /* desmos_profiles_v1beta1_models_chain_links.pb.swift */,
+				046EA81B2AD04A2100A2FCE7 /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift */,
+				046EA84C2AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_profile.pb.swift */,
+				046EA8372AD04A2300A2FCE7 /* desmos_profiles_v1beta1_models_relationships.pb.swift */,
+				046EA81D2AD04A2100A2FCE7 /* desmos_profiles_v2_models_app_links.pb.swift */,
+				046EA8152AD04A2000A2FCE7 /* desmos_profiles_v2_models_chain_links.pb.swift */,
+				046EA81C2AD04A2100A2FCE7 /* desmos_profiles_v2_models_dtag_requests.pb.swift */,
+				046EA82C2AD04A2200A2FCE7 /* desmos_profiles_v2_models_params.pb.swift */,
+				046EA8542AD04A2500A2FCE7 /* desmos_profiles_v2_models_profile.pb.swift */,
+				046EA8382AD04A2300A2FCE7 /* desmos_profiles_v3_client_cli.pb.swift */,
+				046EA8392AD04A2300A2FCE7 /* desmos_profiles_v3_genesis.pb.swift */,
+				046EA8462AD04A2400A2FCE7 /* desmos_profiles_v3_models_app_links.pb.swift */,
+				046EA8352AD04A2300A2FCE7 /* desmos_profiles_v3_models_chain_links.pb.swift */,
+				046EA83C2AD04A2300A2FCE7 /* desmos_profiles_v3_models_dtag_requests.pb.swift */,
+				046EA84A2AD04A2400A2FCE7 /* desmos_profiles_v3_models_packets.pb.swift */,
+				046EA8202AD04A2100A2FCE7 /* desmos_profiles_v3_models_params.pb.swift */,
+				046EA8182AD04A2000A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift */,
+				046EA8522AD04A2500A2FCE7 /* desmos_profiles_v3_msg_server.grpc.swift */,
+				046EA8222AD04A2100A2FCE7 /* desmos_profiles_v3_msg_server.pb.swift */,
+				046EA80A2AD04A1F00A2FCE7 /* desmos_profiles_v3_msgs_app_links.pb.swift */,
+				046EA84E2AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_chain_links.pb.swift */,
+				046EA8442AD04A2400A2FCE7 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift */,
+				046EA8162AD04A2000A2FCE7 /* desmos_profiles_v3_msgs_params.pb.swift */,
+				046EA8302AD04A2200A2FCE7 /* desmos_profiles_v3_msgs_profile.pb.swift */,
+				046EA8142AD04A2000A2FCE7 /* desmos_profiles_v3_query_app_links.pb.swift */,
+				046EA8112AD04A2000A2FCE7 /* desmos_profiles_v3_query_chain_links.pb.swift */,
+				046EA80D2AD04A2000A2FCE7 /* desmos_profiles_v3_query_dtag_requests.pb.swift */,
+				046EA84B2AD04A2500A2FCE7 /* desmos_profiles_v3_query_params.pb.swift */,
+				046EA8332AD04A2300A2FCE7 /* desmos_profiles_v3_query_profile.pb.swift */,
+				046EA8172AD04A2000A2FCE7 /* desmos_profiles_v3_query.grpc.swift */,
+				046EA8502AD04A2500A2FCE7 /* desmos_profiles_v3_query.pb.swift */,
+			);
+			path = Desmos;
+			sourceTree = "<group>";
+		};
 		047842EB2AC9917000462F1C /* Ethermint */ = {
 			isa = PBXGroup;
 			children = (
@@ -2539,13 +2697,15 @@
 		282121BA25FDE71C0016ABFE /* ProtoBuff */ = {
 			isa = PBXGroup;
 			children = (
+				E122DA2F2A8A4671006D1E7B /* Cosmos */,
+				046EA71A2AD0496500A2FCE7 /* Desmos */,
+				047843252AC9919900462F1C /* Injective */,
+				046EA7192AD0495B00A2FCE7 /* Stride */,
 				04B789A32ACAF58800E9BE88 /* Starname */,
 				04B788FA2ACAC99F00E9BE88 /* Ibc */,
-				047843252AC9919900462F1C /* Injective */,
 				047842EB2AC9917000462F1C /* Ethermint */,
 				E11069A92AA4C55F00EB02CA /* Cosmwasm */,
 				E122DC3D2A8A4701006D1E7B /* Tendermint */,
-				E122DA2F2A8A4671006D1E7B /* Cosmos */,
 			);
 			path = ProtoBuff;
 			sourceTree = "<group>";
@@ -3534,9 +3694,11 @@
 				E15F2D052ABF105B00BAE105 /* StakeRewardAddressCell.swift in Sources */,
 				04FAD9E92AB6DBCE00143A3E /* ManageAccountCell.swift in Sources */,
 				E122DBF42A8A468E006D1E7B /* cosmos_params_v1beta1_query.pb.swift in Sources */,
+				046EA8822AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift in Sources */,
 				E122DB102A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
 				047BA8D82A94778800D3F7DD /* CosmosHistoryVC.swift in Sources */,
 				04B789DB2ACAF59700E9BE88 /* iov_configuration_v1beta1_query.pb.swift in Sources */,
+				046EA8EE2AD04A2600A2FCE7 /* desmos_profiles_module_v1_module.pb.swift in Sources */,
 				E122DC082A8A468E006D1E7B /* cosmos_group_v1_genesis.pb.swift in Sources */,
 				047843CC2AC991B300462F1C /* injective_peggy_v1_ethereum_signer.pb.swift in Sources */,
 				E122DC4F2A8A4712006D1E7B /* tendermint_types_block.pb.swift in Sources */,
@@ -3551,6 +3713,7 @@
 				0402B8442ACC85AD00824B3F /* ChainSei.swift in Sources */,
 				E122DAFA2A8A468D006D1E7B /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */,
 				04B789542ACAC9B100E9BE88 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */,
+				046EA8862AD04A2500A2FCE7 /* desmos_profiles_v2_models_app_links.pb.swift in Sources */,
 				E122DC322A8A468E006D1E7B /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
 				0402B8012ACC747A00824B3F /* ChainDesmos.swift in Sources */,
 				0402B8472ACC85F300824B3F /* ChainSentinel.swift in Sources */,
@@ -3577,6 +3740,7 @@
 				E122DB122A8A468D006D1E7B /* cosmos_gov_v1_query.grpc.swift in Sources */,
 				E122DC572A8A4712006D1E7B /* tendermint_types_params.pb.swift in Sources */,
 				04B7895C2ACAC9B100E9BE88 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
+				046EA8F02AD04A2600A2FCE7 /* desmos_profiles_v3_msg_server.grpc.swift in Sources */,
 				047843A82AC991B300462F1C /* injective_exchange_v1beta1_tx.pb.swift in Sources */,
 				E122DB482A8A468D006D1E7B /* cosmos_upgrade_v1beta1_tx.pb.swift in Sources */,
 				04B7899C2ACAC9B100E9BE88 /* ibc_core_connection_v1_query.grpc.swift in Sources */,
@@ -3617,9 +3781,12 @@
 				E122DAEC2A8A468D006D1E7B /* cosmos_base_reflection_v1beta1_reflection.grpc.swift in Sources */,
 				E122DBC22A8A468E006D1E7B /* cosmos_consensus_module_v1_module.pb.swift in Sources */,
 				18FFB341281AF533004E65BB /* RIPEMD160.swift in Sources */,
+				046EA8F42AD04A2600A2FCE7 /* desmos_profiles_v2_models_profile.pb.swift in Sources */,
 				E15F2D0B2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */,
 				047843F72AC9A23000462F1C /* ChainBitcana.swift in Sources */,
+				046EA8B62AD04A2600A2FCE7 /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */,
 				0402B83D2ACC850400824B3F /* ChainSecret118.swift in Sources */,
+				046EA8B22AD04A2600A2FCE7 /* desmos_profiles_v3_query_profile.pb.swift in Sources */,
 				E122DB322A8A468D006D1E7B /* cosmos_bank_v1beta1_tx.pb.swift in Sources */,
 				047843E02AC991B300462F1C /* injective_wasmx_v1_query.pb.swift in Sources */,
 				E122DC1A2A8A468E006D1E7B /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
@@ -3628,6 +3795,7 @@
 				E122DB022A8A468D006D1E7B /* cosmos_group_v1_types.pb.swift in Sources */,
 				04B7898E2ACAC9B100E9BE88 /* ibc_core_connection_v1_tx.pb.swift in Sources */,
 				04B7897C2ACAC9B100E9BE88 /* ibc_core_channel_v1_channel.pb.swift in Sources */,
+				046EA8E02AD04A2600A2FCE7 /* desmos_profiles_v3_models_packets.pb.swift in Sources */,
 				E122DB502A8A468D006D1E7B /* cosmos_circuit_v1_tx.pb.swift in Sources */,
 				047843242AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */,
 				18D4C19628C704B8003F230A /* WalletConnectManager.swift in Sources */,
@@ -3657,6 +3825,7 @@
 				E122DBEE2A8A468E006D1E7B /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,
 				047843E62AC991B300462F1C /* injective_oracle_v1beta1_genesis.pb.swift in Sources */,
 				E1D5A3E52AC33B8000453914 /* CosmosClaimRewards.swift in Sources */,
+				046EA87A2AD04A2500A2FCE7 /* desmos_profiles_v3_query.grpc.swift in Sources */,
 				04B789462ACAC9B100E9BE88 /* ibc_applications_fee_v1_metadata.pb.swift in Sources */,
 				04527DBA2A937CA2005F72D7 /* AssetCell.swift in Sources */,
 				18FFB396281AF533004E65BB /* WUtils.swift in Sources */,
@@ -3679,6 +3848,7 @@
 				E122DB662A8A468D006D1E7B /* cosmos_crisis_v1beta1_genesis.pb.swift in Sources */,
 				0492AE922A83CC9B001360F0 /* SwapVC.swift in Sources */,
 				E122DB302A8A468D006D1E7B /* cosmos_distribution_module_v1_module.pb.swift in Sources */,
+				046EA8AC2AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */,
 				E122DAEA2A8A468D006D1E7B /* cosmos_authz_v1beta1_tx.grpc.swift in Sources */,
 				0402B82E2ACC7BD700824B3F /* ChainProvenance.swift in Sources */,
 				04527DC62A938FC9005F72D7 /* CosmosClassVC.swift in Sources */,
@@ -3707,21 +3877,25 @@
 				04FAD9D12AB2032200143A3E /* SwapStartVC.swift in Sources */,
 				04CB911F2A90C9D900375354 /* ChainAkash.swift in Sources */,
 				E122DB842A8A468D006D1E7B /* cosmos_evidence_v1beta1_genesis.pb.swift in Sources */,
+				046EA8782AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_params.pb.swift in Sources */,
 				E1E0DBCC2A9B1579006DA6BB /* MintscanHistory.swift in Sources */,
 				04B7894E2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift in Sources */,
 				E122DB902A8A468D006D1E7B /* cosmos_distribution_v1beta1_tx.pb.swift in Sources */,
 				04B789562ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift in Sources */,
 				04B789E62ACB140900E9BE88 /* SelectNameServiceCell.swift in Sources */,
 				E15980A72A83AC9E0032892B /* PortfolioVC.swift in Sources */,
+				046EA8BE2AD04A2600A2FCE7 /* desmos_profiles_v3_genesis.pb.swift in Sources */,
 				047843E82AC991B300462F1C /* injective_insurance_v1beta1_query.pb.swift in Sources */,
 				04FA74762AA04417001A2830 /* SwitchAccountCell.swift in Sources */,
 				04B789362ACAC9B100E9BE88 /* ibc_lightclients_localhost_v2_localhost.pb.swift in Sources */,
+				046EA8662AD04A2500A2FCE7 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */,
 				E122DB602A8A468D006D1E7B /* cosmos_distribution_v1beta1_query.pb.swift in Sources */,
 				04E165BE28B62133000F12C0 /* MintscanToken.swift in Sources */,
 				044ECB242A95DEB70042DB3C /* ChainLum880.swift in Sources */,
 				E122DB782A8A468D006D1E7B /* cosmos_reflection_v1_reflection.grpc.swift in Sources */,
 				E1657B0C2AD0159D00264A21 /* SecButton.swift in Sources */,
 				E122DAEE2A8A468D006D1E7B /* cosmos_mint_v1beta1_genesis.pb.swift in Sources */,
+				046EA8562AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
 				E122DB862A8A468D006D1E7B /* cosmos_consensus_v1_tx.pb.swift in Sources */,
 				04B789CD2ACAF59700E9BE88 /* iov_starname_v1beta1_query.pb.swift in Sources */,
 				047843FD2AC9A37600462F1C /* ChainShentu.swift in Sources */,
@@ -3736,6 +3910,7 @@
 				E14E297B2A99C2CA00939AD2 /* BaseButton.swift in Sources */,
 				E122DC062A8A468E006D1E7B /* cosmos_gov_v1_gov.pb.swift in Sources */,
 				E122DB702A8A468D006D1E7B /* cosmos_vesting_module_v1_module.pb.swift in Sources */,
+				046EA88C2AD04A2500A2FCE7 /* desmos_profiles_v3_models_params.pb.swift in Sources */,
 				E122DBC02A8A468E006D1E7B /* cosmos_app_v1alpha1_query.grpc.swift in Sources */,
 				047843782AC991B300462F1C /* injective_ocr_v1beta1_tx.pb.swift in Sources */,
 				04527DC02A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,
@@ -3753,6 +3928,7 @@
 				E11069B92AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.pb.swift in Sources */,
 				04B789DF2ACAF59700E9BE88 /* iov_escrow_v1beta1_genesis.pb.swift in Sources */,
 				047843962AC991B300462F1C /* injective_peggy_v1_msgs.pb.swift in Sources */,
+				046EA8742AD04A2500A2FCE7 /* desmos_profiles_v3_query_app_links.pb.swift in Sources */,
 				E122DBFA2A8A468E006D1E7B /* cosmos_genutil_module_v1_module.pb.swift in Sources */,
 				E122DBAE2A8A468D006D1E7B /* cosmos_params_module_v1_module.pb.swift in Sources */,
 				E122DB2A2A8A468D006D1E7B /* cosmos_query_v1_query.pb.swift in Sources */,
@@ -3830,6 +4006,8 @@
 				0478438C2AC991B300462F1C /* injective_peggy_v1_msgs.grpc.swift in Sources */,
 				0402B8042ACC74CD00824B3F /* ChainEmoney.swift in Sources */,
 				047843EE2AC991B300462F1C /* injective_types_v1beta1_tx_ext.pb.swift in Sources */,
+				046EA8762AD04A2500A2FCE7 /* desmos_profiles_v2_models_chain_links.pb.swift in Sources */,
+				046EA8E42AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_profile.pb.swift in Sources */,
 				E122DB742A8A468D006D1E7B /* cosmos_nft_v1beta1_nft.pb.swift in Sources */,
 				0492AE952A83CCA9001360F0 /* DappVC.swift in Sources */,
 				0478437A2AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */,
@@ -3840,6 +4018,7 @@
 				E122DB222A8A468D006D1E7B /* cosmos_crypto_ed25519_keys.pb.swift in Sources */,
 				E122DC182A8A468E006D1E7B /* cosmos_orm_v1alpha1_schema.pb.swift in Sources */,
 				047843D22AC991B300462F1C /* injective_exchange_v1beta1_events.pb.swift in Sources */,
+				046EA8842AD04A2500A2FCE7 /* desmos_profiles_v2_models_dtag_requests.pb.swift in Sources */,
 				04FA746D2A9F8652001A2830 /* BaseSheet.swift in Sources */,
 				047843C82AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.pb.swift in Sources */,
 				044ECB212A95DE5D0042DB3C /* ChainKi.swift in Sources */,
@@ -3863,6 +4042,7 @@
 				04CB91222A90CA7D00375354 /* ChainJuno.swift in Sources */,
 				E122DBE42A8A468E006D1E7B /* cosmos_upgrade_v1beta1_query.grpc.swift in Sources */,
 				047847C02962988300FD6A7E /* Cw20IcnsByNameReq.swift in Sources */,
+				046EA8E22AD04A2600A2FCE7 /* desmos_profiles_v3_query_params.pb.swift in Sources */,
 				E122DAE42A8A468D006D1E7B /* cosmos_nft_v1beta1_query.grpc.swift in Sources */,
 				047843802AC991B300462F1C /* injective_peggy_v1_events.pb.swift in Sources */,
 				04B789762ACAC9B100E9BE88 /* ibc_core_client_v1_query.pb.swift in Sources */,
@@ -3878,8 +4058,10 @@
 				E122DB162A8A468D006D1E7B /* cosmos_crisis_v1beta1_tx.pb.swift in Sources */,
 				E122DC142A8A468E006D1E7B /* cosmos_authz_v1beta1_query.grpc.swift in Sources */,
 				E122DBA22A8A468D006D1E7B /* cosmos_gov_v1beta1_query.grpc.swift in Sources */,
+				046EA8A42AD04A2500A2FCE7 /* desmos_profiles_v2_models_params.pb.swift in Sources */,
 				E122DB2E2A8A468D006D1E7B /* cosmos_ics23_v1_proofs.pb.swift in Sources */,
 				E122DB4C2A8A468D006D1E7B /* cosmos_vesting_v1beta1_tx.grpc.swift in Sources */,
+				046EA8C42AD04A2600A2FCE7 /* desmos_profiles_v3_models_dtag_requests.pb.swift in Sources */,
 				E122DB682A8A468D006D1E7B /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */,
 				E122DB382A8A468D006D1E7B /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
 				0402B8532ACC875900824B3F /* ChainTeritori.swift in Sources */,
@@ -3895,6 +4077,7 @@
 				E1DF77702AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
 				04B789CB2ACAF59700E9BE88 /* iov_starname_v1beta1_query.grpc.swift in Sources */,
 				E14E29762A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
+				046EA7A42AD0499900A2FCE7 /* stride_vesting_vesting.pb.swift in Sources */,
 				0402B7F32ACC38BA00824B3F /* CosmosVote.swift in Sources */,
 				04B789842ACAC9B100E9BE88 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
 				18FFB57A281AF533004E65BB /* WKey.swift in Sources */,
@@ -3918,8 +4101,10 @@
 				E122DBA42A8A468D006D1E7B /* cosmos_store_v1beta1_listening.pb.swift in Sources */,
 				E122DB982A8A468D006D1E7B /* cosmos_authz_module_v1_module.pb.swift in Sources */,
 				0402B8372ACC7CB300824B3F /* ChainRegen.swift in Sources */,
+				046EA86E2AD04A2500A2FCE7 /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */,
 				0478431C2AC9918700462F1C /* ethermint_feemarket_v1_tx.grpc.swift in Sources */,
 				E122DC5B2A8A4712006D1E7B /* tendermint_types_types.pb.swift in Sources */,
+				046EA8BA2AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */,
 				040733042AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */,
 				04B789962ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */,
 				047843922AC991B300462F1C /* injective_oracle_v1beta1_query.pb.swift in Sources */,
@@ -3937,6 +4122,7 @@
 				047844002AC9A3DF00462F1C /* ChainChihuahua.swift in Sources */,
 				04D279EE2A67C96F00AF046A /* ChainKava459.swift in Sources */,
 				04C6B9CB2AAC91F900B02A95 /* ChainOktKeccak256.swift in Sources */,
+				046EA8BC2AD04A2600A2FCE7 /* desmos_profiles_v3_client_cli.pb.swift in Sources */,
 				E122DC6D2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */,
 				047843C42AC991B300462F1C /* injective_wasmx_v1_tx.grpc.swift in Sources */,
 				0478439C2AC991B300462F1C /* injective_peggy_v1_pool.pb.swift in Sources */,
@@ -3951,7 +4137,10 @@
 				047843BC2AC991B300462F1C /* injective_peggy_v1_query.pb.swift in Sources */,
 				18FFB5B6281AF533004E65BB /* BTCMnemonic.m in Sources */,
 				047843702AC991B300462F1C /* injective_insurance_v1beta1_query.grpc.swift in Sources */,
+				046EA7AA2AD0499900A2FCE7 /* stride_vesting_tx.pb.swift in Sources */,
 				04B7895A2ACAC9B100E9BE88 /* ibc_applications_fee_v1_genesis.pb.swift in Sources */,
+				046EA8602AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */,
+				046EA8702AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_chain_links.pb.swift in Sources */,
 				E122DBB82A8A468D006D1E7B /* cosmos_nft_v1beta1_tx.grpc.swift in Sources */,
 				04B789402ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift in Sources */,
 				E122DBE02A8A468E006D1E7B /* cosmos_evidence_v1beta1_tx.pb.swift in Sources */,
@@ -3979,6 +4168,7 @@
 				E1DF77762AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */,
 				E122DB262A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
 				047843B82AC991B300462F1C /* injective_types_v1beta1_tx_response.pb.swift in Sources */,
+				046EA8EC2AD04A2600A2FCE7 /* desmos_profiles_v3_query.pb.swift in Sources */,
 				0478430E2AC9918700462F1C /* ethermint_evm_v1_tx.pb.swift in Sources */,
 				047843D42AC991B300462F1C /* injective_tokenfactory_v1beta1_genesis.pb.swift in Sources */,
 				E1831BA52AB82FE60078A28B /* ManageChainCell.swift in Sources */,
@@ -3988,6 +4178,7 @@
 				E15F2D112ABF108500BAE105 /* StakeUnbondingCell.swift in Sources */,
 				E122DB9C2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
 				18FFB5C5281AF533004E65BB /* MintscanPrice.swift in Sources */,
+				046EA8902AD04A2500A2FCE7 /* desmos_profiles_v3_msg_server.pb.swift in Sources */,
 				0402B8132ACC76C100824B3F /* ChainLike.swift in Sources */,
 				0402B8342ACC7C6600824B3F /* ChainQuicksilver.swift in Sources */,
 				0402B84A2ACC864100824B3F /* ChainStafi.swift in Sources */,
@@ -4002,6 +4193,7 @@
 				E122DC122A8A468E006D1E7B /* cosmos_nft_v1beta1_tx.pb.swift in Sources */,
 				E122DB362A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
 				E122DAF62A8A468D006D1E7B /* cosmos_orm_query_v1alpha1_query.grpc.swift in Sources */,
+				046EA8E82AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_chain_links.pb.swift in Sources */,
 				E122DC5D2A8A4712006D1E7B /* tendermint_abci_types.grpc.swift in Sources */,
 				047844062AC9A46800462F1C /* ChainCoreum.swift in Sources */,
 				04B7894C2ACAC9B100E9BE88 /* ibc_applications_transfer_v1_genesis.pb.swift in Sources */,
@@ -4017,6 +4209,7 @@
 				18FFB5CF281AF533004E65BB /* Bech32.swift in Sources */,
 				047BA8D52A94777600D3F7DD /* CosmosCoinVC.swift in Sources */,
 				E122DBF62A8A468E006D1E7B /* cosmos_autocli_v1_options.pb.swift in Sources */,
+				046EA8D42AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */,
 				E122DB0C2A8A468D006D1E7B /* cosmos_consensus_v1_tx.grpc.swift in Sources */,
 				047843CE2AC991B300462F1C /* injective_tokenfactory_v1beta1_params.pb.swift in Sources */,
 				E122DB4E2A8A468D006D1E7B /* cosmos_crypto_secp256k1_keys.pb.swift in Sources */,
@@ -4029,6 +4222,7 @@
 				E122DAE22A8A468D006D1E7B /* cosmos_bank_v1beta1_authz.pb.swift in Sources */,
 				E122DC4B2A8A4712006D1E7B /* tendermint_version_types.pb.swift in Sources */,
 				18FFB5F2281AF533004E65BB /* SegwitAddrCoder.swift in Sources */,
+				046EA87C2AD04A2500A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift in Sources */,
 				047843162AC9918700462F1C /* ethermint_feemarket_v1_query.grpc.swift in Sources */,
 				047847CC2962C94800FD6A7E /* Cw20IcnsByAddressRes.swift in Sources */,
 				04A68C242ABDA3350041FA13 /* SelectSwapAssetCell.swift in Sources */,
@@ -4039,12 +4233,14 @@
 				0478436C2AC991B300462F1C /* injective_exchange_v1beta1_tx.grpc.swift in Sources */,
 				E122DBCC2A8A468E006D1E7B /* cosmos_gov_v1beta1_tx.grpc.swift in Sources */,
 				E122DAF22A8A468D006D1E7B /* cosmos_app_v1alpha1_config.pb.swift in Sources */,
+				046EA8D82AD04A2600A2FCE7 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */,
 				04B789622ACAC9B100E9BE88 /* ibc_core_connection_v1_tx.grpc.swift in Sources */,
 				0478437E2AC991B300462F1C /* injective_peggy_v1_query.grpc.swift in Sources */,
 				04CB91192A90C30A00375354 /* CosmosClass.swift in Sources */,
 				0402B81F2ACC7A4800824B3F /* ChainNoble.swift in Sources */,
 				E122DB3C2A8A468D006D1E7B /* cosmos_staking_v1beta1_query.pb.swift in Sources */,
 				E122DB282A8A468D006D1E7B /* cosmos_params_v1beta1_params.pb.swift in Sources */,
+				046EA7FC2AD0499900A2FCE7 /* stride_vesting_tx.grpc.swift in Sources */,
 				E122DB082A8A468D006D1E7B /* cosmos_auth_v1beta1_query.pb.swift in Sources */,
 				E122DC592A8A4712006D1E7B /* tendermint_crypto_keys.pb.swift in Sources */,
 				E122DC222A8A468E006D1E7B /* cosmos_mint_v1beta1_tx.pb.swift in Sources */,
@@ -4118,9 +4314,11 @@
 				E15F2D042ABF105B00BAE105 /* StakeRewardAddressCell.swift in Sources */,
 				04FAD9E82AB6DBCE00143A3E /* ManageAccountCell.swift in Sources */,
 				E122DBD92A8A468E006D1E7B /* cosmos_staking_v1beta1_query.grpc.swift in Sources */,
+				046EA8812AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift in Sources */,
 				E122DBF32A8A468E006D1E7B /* cosmos_params_v1beta1_query.pb.swift in Sources */,
 				E122DB0F2A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
 				04B789DA2ACAF59700E9BE88 /* iov_configuration_v1beta1_query.pb.swift in Sources */,
+				046EA8ED2AD04A2600A2FCE7 /* desmos_profiles_module_v1_module.pb.swift in Sources */,
 				047BA8D72A94778800D3F7DD /* CosmosHistoryVC.swift in Sources */,
 				047843CB2AC991B300462F1C /* injective_peggy_v1_ethereum_signer.pb.swift in Sources */,
 				E122DC072A8A468E006D1E7B /* cosmos_group_v1_genesis.pb.swift in Sources */,
@@ -4135,6 +4333,7 @@
 				0402B8432ACC85AD00824B3F /* ChainSei.swift in Sources */,
 				E122DAF92A8A468D006D1E7B /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */,
 				04B789532ACAC9B100E9BE88 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */,
+				046EA8852AD04A2500A2FCE7 /* desmos_profiles_v2_models_app_links.pb.swift in Sources */,
 				E122DC312A8A468E006D1E7B /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
 				0402B8002ACC747A00824B3F /* ChainDesmos.swift in Sources */,
 				0402B8462ACC85F300824B3F /* ChainSentinel.swift in Sources */,
@@ -4161,6 +4360,7 @@
 				E122DB112A8A468D006D1E7B /* cosmos_gov_v1_query.grpc.swift in Sources */,
 				E122DC562A8A4712006D1E7B /* tendermint_types_params.pb.swift in Sources */,
 				04B7895B2ACAC9B100E9BE88 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
+				046EA8EF2AD04A2600A2FCE7 /* desmos_profiles_v3_msg_server.grpc.swift in Sources */,
 				047843A72AC991B300462F1C /* injective_exchange_v1beta1_tx.pb.swift in Sources */,
 				E122DB472A8A468D006D1E7B /* cosmos_upgrade_v1beta1_tx.pb.swift in Sources */,
 				04B7899B2ACAC9B100E9BE88 /* ibc_core_connection_v1_query.grpc.swift in Sources */,
@@ -4201,9 +4401,12 @@
 				E122DAEB2A8A468D006D1E7B /* cosmos_base_reflection_v1beta1_reflection.grpc.swift in Sources */,
 				E122DBC12A8A468E006D1E7B /* cosmos_consensus_module_v1_module.pb.swift in Sources */,
 				E1A82DE822448E940097CAEE /* WUtils.swift in Sources */,
+				046EA8F32AD04A2600A2FCE7 /* desmos_profiles_v2_models_profile.pb.swift in Sources */,
 				E15F2D0A2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */,
 				047843F62AC9A23000462F1C /* ChainBitcana.swift in Sources */,
+				046EA8B52AD04A2600A2FCE7 /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */,
 				0402B83C2ACC850400824B3F /* ChainSecret118.swift in Sources */,
+				046EA8B12AD04A2600A2FCE7 /* desmos_profiles_v3_query_profile.pb.swift in Sources */,
 				E122DB312A8A468D006D1E7B /* cosmos_bank_v1beta1_tx.pb.swift in Sources */,
 				047843DF2AC991B300462F1C /* injective_wasmx_v1_query.pb.swift in Sources */,
 				E122DC192A8A468E006D1E7B /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
@@ -4212,6 +4415,7 @@
 				E122DB012A8A468D006D1E7B /* cosmos_group_v1_types.pb.swift in Sources */,
 				04B7898D2ACAC9B100E9BE88 /* ibc_core_connection_v1_tx.pb.swift in Sources */,
 				04B7897B2ACAC9B100E9BE88 /* ibc_core_channel_v1_channel.pb.swift in Sources */,
+				046EA8DF2AD04A2600A2FCE7 /* desmos_profiles_v3_models_packets.pb.swift in Sources */,
 				E122DB4F2A8A468D006D1E7B /* cosmos_circuit_v1_tx.pb.swift in Sources */,
 				047843232AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */,
 				E16D9B1522489B030019B7BB /* IntroVC.swift in Sources */,
@@ -4241,6 +4445,7 @@
 				E122DBED2A8A468E006D1E7B /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,
 				047843E52AC991B300462F1C /* injective_oracle_v1beta1_genesis.pb.swift in Sources */,
 				E1D5A3E42AC33B8000453914 /* CosmosClaimRewards.swift in Sources */,
+				046EA8792AD04A2500A2FCE7 /* desmos_profiles_v3_query.grpc.swift in Sources */,
 				04B789452ACAC9B100E9BE88 /* ibc_applications_fee_v1_metadata.pb.swift in Sources */,
 				04527DB92A937CA2005F72D7 /* AssetCell.swift in Sources */,
 				1517346A2A2090640014AAD6 /* Cw20NeutronVestingRes.swift in Sources */,
@@ -4263,6 +4468,7 @@
 				E122DB652A8A468D006D1E7B /* cosmos_crisis_v1beta1_genesis.pb.swift in Sources */,
 				0492AE912A83CC9B001360F0 /* SwapVC.swift in Sources */,
 				E122DB2F2A8A468D006D1E7B /* cosmos_distribution_module_v1_module.pb.swift in Sources */,
+				046EA8AB2AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */,
 				E122DAE92A8A468D006D1E7B /* cosmos_authz_v1beta1_tx.grpc.swift in Sources */,
 				0402B82D2ACC7BD700824B3F /* ChainProvenance.swift in Sources */,
 				04527DC52A938FC9005F72D7 /* CosmosClassVC.swift in Sources */,
@@ -4291,21 +4497,25 @@
 				04FAD9D02AB2032200143A3E /* SwapStartVC.swift in Sources */,
 				04CB911E2A90C9D900375354 /* ChainAkash.swift in Sources */,
 				E122DB832A8A468D006D1E7B /* cosmos_evidence_v1beta1_genesis.pb.swift in Sources */,
+				046EA8772AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_params.pb.swift in Sources */,
 				E1E0DBCB2A9B1579006DA6BB /* MintscanHistory.swift in Sources */,
 				04B7894D2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift in Sources */,
 				E122DB8F2A8A468D006D1E7B /* cosmos_distribution_v1beta1_tx.pb.swift in Sources */,
 				04B789552ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift in Sources */,
 				04B789E52ACB140900E9BE88 /* SelectNameServiceCell.swift in Sources */,
 				E15980A62A83AC9E0032892B /* PortfolioVC.swift in Sources */,
+				046EA8BD2AD04A2600A2FCE7 /* desmos_profiles_v3_genesis.pb.swift in Sources */,
 				047843E72AC991B300462F1C /* injective_insurance_v1beta1_query.pb.swift in Sources */,
 				04FA74752AA04417001A2830 /* SwitchAccountCell.swift in Sources */,
 				04B789352ACAC9B100E9BE88 /* ibc_lightclients_localhost_v2_localhost.pb.swift in Sources */,
+				046EA8652AD04A2500A2FCE7 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */,
 				E122DB5F2A8A468D006D1E7B /* cosmos_distribution_v1beta1_query.pb.swift in Sources */,
 				044ECB232A95DEB70042DB3C /* ChainLum880.swift in Sources */,
 				E122DB772A8A468D006D1E7B /* cosmos_reflection_v1_reflection.grpc.swift in Sources */,
 				E122DAED2A8A468D006D1E7B /* cosmos_mint_v1beta1_genesis.pb.swift in Sources */,
 				E1657B0B2AD0159D00264A21 /* SecButton.swift in Sources */,
 				E122DB852A8A468D006D1E7B /* cosmos_consensus_v1_tx.pb.swift in Sources */,
+				046EA8552AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
 				E122DBBD2A8A468E006D1E7B /* cosmos_nft_module_v1_module.pb.swift in Sources */,
 				04B789CC2ACAF59700E9BE88 /* iov_starname_v1beta1_query.pb.swift in Sources */,
 				047843FC2AC9A37600462F1C /* ChainShentu.swift in Sources */,
@@ -4320,6 +4530,7 @@
 				E122DC052A8A468E006D1E7B /* cosmos_gov_v1_gov.pb.swift in Sources */,
 				E122DB6F2A8A468D006D1E7B /* cosmos_vesting_module_v1_module.pb.swift in Sources */,
 				E122DBBF2A8A468E006D1E7B /* cosmos_app_v1alpha1_query.grpc.swift in Sources */,
+				046EA88B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_params.pb.swift in Sources */,
 				04527DBF2A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,
 				047843772AC991B300462F1C /* injective_ocr_v1beta1_tx.pb.swift in Sources */,
 				E122DB612A8A468D006D1E7B /* cosmos_distribution_v1beta1_distribution.pb.swift in Sources */,
@@ -4337,6 +4548,7 @@
 				E122DBAD2A8A468D006D1E7B /* cosmos_params_module_v1_module.pb.swift in Sources */,
 				04B789DE2ACAF59700E9BE88 /* iov_escrow_v1beta1_genesis.pb.swift in Sources */,
 				047843952AC991B300462F1C /* injective_peggy_v1_msgs.pb.swift in Sources */,
+				046EA8732AD04A2500A2FCE7 /* desmos_profiles_v3_query_app_links.pb.swift in Sources */,
 				E122DB292A8A468D006D1E7B /* cosmos_query_v1_query.pb.swift in Sources */,
 				E122DB532A8A468D006D1E7B /* cosmos_gov_module_v1_module.pb.swift in Sources */,
 				E122DC372A8A468E006D1E7B /* cosmos_slashing_v1beta1_slashing.pb.swift in Sources */,
@@ -4414,6 +4626,8 @@
 				0478438B2AC991B300462F1C /* injective_peggy_v1_msgs.grpc.swift in Sources */,
 				0402B8032ACC74CD00824B3F /* ChainEmoney.swift in Sources */,
 				047843ED2AC991B300462F1C /* injective_types_v1beta1_tx_ext.pb.swift in Sources */,
+				046EA8752AD04A2500A2FCE7 /* desmos_profiles_v2_models_chain_links.pb.swift in Sources */,
+				046EA8E32AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_profile.pb.swift in Sources */,
 				E15980A92A83ADB60032892B /* MainTabVC.swift in Sources */,
 				047847BF2962988300FD6A7E /* Cw20IcnsByNameReq.swift in Sources */,
 				047843792AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */,
@@ -4424,6 +4638,7 @@
 				E122DC172A8A468E006D1E7B /* cosmos_orm_v1alpha1_schema.pb.swift in Sources */,
 				04FA746C2A9F8652001A2830 /* BaseSheet.swift in Sources */,
 				047843D12AC991B300462F1C /* injective_exchange_v1beta1_events.pb.swift in Sources */,
+				046EA8832AD04A2500A2FCE7 /* desmos_profiles_v2_models_dtag_requests.pb.swift in Sources */,
 				044ECB202A95DE5D0042DB3C /* ChainKi.swift in Sources */,
 				047843C72AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.pb.swift in Sources */,
 				04FAD9F92AB7221600143A3E /* BaseRedButton.swift in Sources */,
@@ -4447,6 +4662,7 @@
 				04CB91212A90CA7D00375354 /* ChainJuno.swift in Sources */,
 				E122DBE32A8A468E006D1E7B /* cosmos_upgrade_v1beta1_query.grpc.swift in Sources */,
 				046E9041268C4863002CFFE1 /* BinanceInt+VarInt.swift in Sources */,
+				046EA8E12AD04A2600A2FCE7 /* desmos_profiles_v3_query_params.pb.swift in Sources */,
 				E122DAE32A8A468D006D1E7B /* cosmos_nft_v1beta1_query.grpc.swift in Sources */,
 				0478437F2AC991B300462F1C /* injective_peggy_v1_events.pb.swift in Sources */,
 				04B789752ACAC9B100E9BE88 /* ibc_core_client_v1_query.pb.swift in Sources */,
@@ -4462,8 +4678,10 @@
 				E122DB152A8A468D006D1E7B /* cosmos_crisis_v1beta1_tx.pb.swift in Sources */,
 				E122DC132A8A468E006D1E7B /* cosmos_authz_v1beta1_query.grpc.swift in Sources */,
 				E122DBA12A8A468D006D1E7B /* cosmos_gov_v1beta1_query.grpc.swift in Sources */,
+				046EA8A32AD04A2500A2FCE7 /* desmos_profiles_v2_models_params.pb.swift in Sources */,
 				E122DB2D2A8A468D006D1E7B /* cosmos_ics23_v1_proofs.pb.swift in Sources */,
 				E122DB4B2A8A468D006D1E7B /* cosmos_vesting_v1beta1_tx.grpc.swift in Sources */,
+				046EA8C32AD04A2600A2FCE7 /* desmos_profiles_v3_models_dtag_requests.pb.swift in Sources */,
 				E122DB672A8A468D006D1E7B /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */,
 				E122DB372A8A468D006D1E7B /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
 				0402B8522ACC875900824B3F /* ChainTeritori.swift in Sources */,
@@ -4479,6 +4697,7 @@
 				E1DF776F2AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
 				04B789CA2ACAF59700E9BE88 /* iov_starname_v1beta1_query.grpc.swift in Sources */,
 				E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
+				046EA7A32AD0499900A2FCE7 /* stride_vesting_vesting.pb.swift in Sources */,
 				0402B7F22ACC38BA00824B3F /* CosmosVote.swift in Sources */,
 				04B789832ACAC9B100E9BE88 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
 				E122DB432A8A468D006D1E7B /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
@@ -4502,8 +4721,10 @@
 				E122DBA32A8A468D006D1E7B /* cosmos_store_v1beta1_listening.pb.swift in Sources */,
 				E122DB972A8A468D006D1E7B /* cosmos_authz_module_v1_module.pb.swift in Sources */,
 				0402B8362ACC7CB300824B3F /* ChainRegen.swift in Sources */,
+				046EA86D2AD04A2500A2FCE7 /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */,
 				0478431B2AC9918700462F1C /* ethermint_feemarket_v1_tx.grpc.swift in Sources */,
 				E122DC5A2A8A4712006D1E7B /* tendermint_types_types.pb.swift in Sources */,
+				046EA8B92AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */,
 				040733032AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */,
 				04B789952ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */,
 				047843912AC991B300462F1C /* injective_oracle_v1beta1_query.pb.swift in Sources */,
@@ -4521,6 +4742,7 @@
 				047843FF2AC9A3DF00462F1C /* ChainChihuahua.swift in Sources */,
 				04D279ED2A67C96F00AF046A /* ChainKava459.swift in Sources */,
 				04C6B9CA2AAC91F900B02A95 /* ChainOktKeccak256.swift in Sources */,
+				046EA8BB2AD04A2600A2FCE7 /* desmos_profiles_v3_client_cli.pb.swift in Sources */,
 				E122DC6C2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */,
 				047843C32AC991B300462F1C /* injective_wasmx_v1_tx.grpc.swift in Sources */,
 				0478439B2AC991B300462F1C /* injective_peggy_v1_pool.pb.swift in Sources */,
@@ -4535,7 +4757,10 @@
 				047843BB2AC991B300462F1C /* injective_peggy_v1_query.pb.swift in Sources */,
 				28FC030C2652662B001C0319 /* MintscanPrice.swift in Sources */,
 				0478436F2AC991B300462F1C /* injective_insurance_v1beta1_query.grpc.swift in Sources */,
+				046EA7A92AD0499900A2FCE7 /* stride_vesting_tx.pb.swift in Sources */,
 				04B789592ACAC9B100E9BE88 /* ibc_applications_fee_v1_genesis.pb.swift in Sources */,
+				046EA85F2AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */,
+				046EA86F2AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_chain_links.pb.swift in Sources */,
 				E122DBB72A8A468D006D1E7B /* cosmos_nft_v1beta1_tx.grpc.swift in Sources */,
 				04B7893F2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift in Sources */,
 				E122DBDF2A8A468E006D1E7B /* cosmos_evidence_v1beta1_tx.pb.swift in Sources */,
@@ -4563,6 +4788,7 @@
 				E1DF77752AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */,
 				E122DB252A8A468D006D1E7B /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
 				047843B72AC991B300462F1C /* injective_types_v1beta1_tx_response.pb.swift in Sources */,
+				046EA8EB2AD04A2600A2FCE7 /* desmos_profiles_v3_query.pb.swift in Sources */,
 				0478430D2AC9918700462F1C /* ethermint_evm_v1_tx.pb.swift in Sources */,
 				047843D32AC991B300462F1C /* injective_tokenfactory_v1beta1_genesis.pb.swift in Sources */,
 				E1831BA42AB82FE60078A28B /* ManageChainCell.swift in Sources */,
@@ -4572,6 +4798,7 @@
 				E15F2D102ABF108500BAE105 /* StakeUnbondingCell.swift in Sources */,
 				E122DB9B2A8A468D006D1E7B /* cosmos_bank_module_v1_module.pb.swift in Sources */,
 				046BD22027788723002333B5 /* StationNFTData.swift in Sources */,
+				046EA88F2AD04A2500A2FCE7 /* desmos_profiles_v3_msg_server.pb.swift in Sources */,
 				0402B8122ACC76C100824B3F /* ChainLike.swift in Sources */,
 				0402B8332ACC7C6600824B3F /* ChainQuicksilver.swift in Sources */,
 				0402B8492ACC864100824B3F /* ChainStafi.swift in Sources */,
@@ -4586,6 +4813,7 @@
 				E122DB352A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
 				E122DAF52A8A468D006D1E7B /* cosmos_orm_query_v1alpha1_query.grpc.swift in Sources */,
 				E122DC5C2A8A4712006D1E7B /* tendermint_abci_types.grpc.swift in Sources */,
+				046EA8E72AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_chain_links.pb.swift in Sources */,
 				E122DB6D2A8A468D006D1E7B /* cosmos_evidence_v1beta1_evidence.pb.swift in Sources */,
 				047844052AC9A46800462F1C /* ChainCoreum.swift in Sources */,
 				04B7894B2ACAC9B100E9BE88 /* ibc_applications_transfer_v1_genesis.pb.swift in Sources */,
@@ -4601,6 +4829,7 @@
 				047BA8D42A94777600D3F7DD /* CosmosCoinVC.swift in Sources */,
 				E122DBF52A8A468E006D1E7B /* cosmos_autocli_v1_options.pb.swift in Sources */,
 				E122DB0B2A8A468D006D1E7B /* cosmos_consensus_v1_tx.grpc.swift in Sources */,
+				046EA8D32AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */,
 				E122DB4D2A8A468D006D1E7B /* cosmos_crypto_secp256k1_keys.pb.swift in Sources */,
 				047843CD2AC991B300462F1C /* injective_tokenfactory_v1beta1_params.pb.swift in Sources */,
 				047847CB2962C94800FD6A7E /* Cw20IcnsByAddressRes.swift in Sources */,
@@ -4613,6 +4842,7 @@
 				E122DAE12A8A468D006D1E7B /* cosmos_bank_v1beta1_authz.pb.swift in Sources */,
 				E122DC4A2A8A4712006D1E7B /* tendermint_version_types.pb.swift in Sources */,
 				046E903F268C45DC002CFFE1 /* BinanceHexlify.swift in Sources */,
+				046EA87B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift in Sources */,
 				047843152AC9918700462F1C /* ethermint_feemarket_v1_query.grpc.swift in Sources */,
 				049B691F29D1736B0027B82D /* MintscanProposal.swift in Sources */,
 				04A68C232ABDA3350041FA13 /* SelectSwapAssetCell.swift in Sources */,
@@ -4623,12 +4853,14 @@
 				0478436B2AC991B300462F1C /* injective_exchange_v1beta1_tx.grpc.swift in Sources */,
 				E122DBCB2A8A468E006D1E7B /* cosmos_gov_v1beta1_tx.grpc.swift in Sources */,
 				E122DAF12A8A468D006D1E7B /* cosmos_app_v1alpha1_config.pb.swift in Sources */,
+				046EA8D72AD04A2600A2FCE7 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */,
 				04B789612ACAC9B100E9BE88 /* ibc_core_connection_v1_tx.grpc.swift in Sources */,
 				0478437D2AC991B300462F1C /* injective_peggy_v1_query.grpc.swift in Sources */,
 				04CB91182A90C30A00375354 /* CosmosClass.swift in Sources */,
 				0402B81E2ACC7A4800824B3F /* ChainNoble.swift in Sources */,
 				E122DB3B2A8A468D006D1E7B /* cosmos_staking_v1beta1_query.pb.swift in Sources */,
 				E122DB272A8A468D006D1E7B /* cosmos_params_v1beta1_params.pb.swift in Sources */,
+				046EA7FB2AD0499900A2FCE7 /* stride_vesting_tx.grpc.swift in Sources */,
 				E122DB072A8A468D006D1E7B /* cosmos_auth_v1beta1_query.pb.swift in Sources */,
 				E122DC582A8A4712006D1E7B /* tendermint_crypto_keys.pb.swift in Sources */,
 				E122DC212A8A468E006D1E7B /* cosmos_mint_v1beta1_tx.pb.swift in Sources */,
