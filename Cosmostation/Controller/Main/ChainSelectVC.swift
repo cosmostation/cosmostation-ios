@@ -20,6 +20,7 @@ class ChainSelectVC: BaseVC {
     @IBOutlet weak var selectBtn: SecButton!
     @IBOutlet weak var confirmBtn: BaseButton!
     
+    var delegate: ChainSelectDelegate?
     var toDisplayCosmosTags = [String]()
     var allCosmosChains = [CosmosClass]()
     
@@ -31,7 +32,6 @@ class ChainSelectVC: BaseVC {
 //        loadingView.loopMode = .loop
 //        loadingView.animationSpeed = 1.3
 //        loadingView.play()
-        confirmBtn.isHidden = false
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -57,6 +57,15 @@ class ChainSelectVC: BaseVC {
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if (allCosmosChains.filter { $0.fetched == false }.count == 0) {
+            DispatchQueue.main.async {
+                self.selectBtn.isEnabled = true
+            }
+        }
+    }
+    
     override func setLocalizedString() {
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
@@ -72,7 +81,7 @@ class ChainSelectVC: BaseVC {
                 }
             }
         }
-        if (baseAccount.allCosmosClassChains.filter { $0.fetched == false }.count == 0) {
+        if (allCosmosChains.filter { $0.fetched == false }.count == 0) {
             DispatchQueue.main.async {
                 self.selectBtn.isEnabled = true
             }
@@ -96,6 +105,7 @@ class ChainSelectVC: BaseVC {
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         BaseData.instance.setDisplayCosmosChainTags(baseAccount.id, toDisplayCosmosTags)
         baseAccount.toDisplayCTags = toDisplayCosmosTags
+        delegate?.onChainSelected()
         dismiss(animated: true)
     }
 }
@@ -146,4 +156,8 @@ extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+}
+
+protocol ChainSelectDelegate {
+    func onChainSelected()
 }

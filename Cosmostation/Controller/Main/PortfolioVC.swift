@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PortfolioVC: BaseVC {
+class PortfolioVC: BaseVC, ChainSelectDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
@@ -50,13 +50,19 @@ class PortfolioVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("PortfolioVC viewWillAppear")
         
 //        var contentOffset: CGPoint = tableView.contentOffset
 //        contentOffset.y += (tableView.tableHeaderView?.frame)!.height
 //        tableView.contentOffset = contentOffset
         
-        tableView.reloadData()
-        onUpdateTotal()
+//        tableView.reloadData()
+//        onUpdateTotal()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("PortfolioVC viewDidAppear")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -74,7 +80,7 @@ class PortfolioVC: BaseVC {
         
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
-        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(clickSearch))
+        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(onClickChainSelect))
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
@@ -106,10 +112,20 @@ class PortfolioVC: BaseVC {
         }
     }
     
-    @objc func clickSearch() {
+    @objc func onClickChainSelect() {
         let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
+        chainSelectVC.delegate = self
         chainSelectVC.modalTransitionStyle = .coverVertical
         self.present(chainSelectVC, animated: true)
+    }
+    
+    func onChainSelected() {
+        baseAccount.loadDisplayCTags()
+        baseAccount.fetchDisplayCosmosChains()
+        toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
+        searchCosmosChains = toDisplayCosmosChains
+        tableView.reloadData()
+        onUpdateTotal()
     }
 
 }

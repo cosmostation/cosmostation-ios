@@ -38,8 +38,12 @@ public class BaseAccount {
     lazy var toDisplayCTags = [String]()
     lazy var allCosmosClassChains = [CosmosClass]()
     
-    func initAccount() {
+    func loadDisplayCTags() {
         toDisplayCTags = BaseData.instance.getDisplayCosmosChainTags(self.id)
+    }
+    
+    func initAccount() {
+        loadDisplayCTags()
         allCosmosClassChains = ALLCOSMOSCLASS()
         initSortCosmosChains()
     }
