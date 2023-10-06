@@ -52,7 +52,7 @@ class PortfolioVC: BaseVC {
         super.viewWillAppear(animated)
         
 //        var contentOffset: CGPoint = tableView.contentOffset
-//        contentOffset.y += (tableView.tableHeaderView?.frame)!.height + 20
+//        contentOffset.y += (tableView.tableHeaderView?.frame)!.height
 //        tableView.contentOffset = contentOffset
         
         tableView.reloadData()
@@ -183,6 +183,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.endEditing(true)
+        searchBar.resignFirstResponder()
         searchCosmosChains = toDisplayCosmosChains
         tableView.reloadData()
     }

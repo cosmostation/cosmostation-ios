@@ -251,21 +251,16 @@ extension CosmosClass {
         let channel = getConnection()
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address! }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
-            print("", self.name, " ", response.account)
             self.cosmosAuth = response.account
             self.fetchMoreData(channel, id)
             
         } else {
-            print("", self.name, " no Auth")
             try? channel.close()
             self.fetched = true
-            
-            let refAddress = RefAddress(id, self.tag, self.address!, "0", "-1", "0", 0)
-            print("", self.name, " notify")
-            BaseData.instance.updateRefAddressesMain(refAddress)
-            
+            BaseData.instance.updateRefAddressesMain(
+                RefAddress(id, self.tag, self.address!, 
+                           nil, nil, nil, nil))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
-            
         }
     }
     
@@ -284,11 +279,10 @@ extension CosmosClass {
             self.allCoinValue = self.allCoinValue()
             self.allCoinUSDValue = self.allCoinValue(true)
             
-            let refAddress = RefAddress(id, self.tag, self.address!, self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue, "", Int64(self.cosmosBalances.count))
-            print("", self.name, " notify")
-            BaseData.instance.updateRefAddressesMain(refAddress)
-            
-            
+            BaseData.instance.updateRefAddressesMain(
+                RefAddress(id, self.tag, self.address!,
+                           self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                           nil, self.cosmosBalances.count))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }
     }
@@ -355,9 +349,10 @@ extension CosmosClass {
             try? channel.close()
             self.allTokenValue = self.allTokenValue()
             self.allTokenUSDValue = self.allTokenValue(true)
-            let refAddress = RefAddress(id, self.tag, self.address!, "", "", self.allTokenUSDValue.stringValue, -1)
-            BaseData.instance.updateRefAddressesToken(refAddress)
             
+            BaseData.instance.updateRefAddressesToken(
+                RefAddress(id, self.tag, self.address!,
+                           nil, nil, self.allTokenUSDValue.stringValue, nil))
             NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
         }
     }
@@ -398,8 +393,9 @@ extension CosmosClass {
             self.allTokenValue = self.allTokenValue()
             self.allTokenUSDValue = self.allTokenValue(true)
             
-            let refAddress = RefAddress(id, self.tag, self.address!, "", "", self.allTokenUSDValue.stringValue, -1)
-            BaseData.instance.updateRefAddressesToken(refAddress)
+            BaseData.instance.updateRefAddressesToken(
+                RefAddress(id, self.tag, self.address!,
+                           nil, nil, self.allTokenUSDValue.stringValue, nil))
             NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
         }
     }
@@ -659,12 +655,17 @@ extension CosmosClass {
             self.allCoinUSDValue = self.allCoinValue(true)
             
             if (self is ChainBinanceBeacon) {
-                let refAddress = RefAddress(id, self.tag, self.address!, self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue, "", Int64(self.lcdAccountInfo["balances"].array?.count ?? 0))
-                print("ChainBinanceBeacon notify")
-                BaseData.instance.updateRefAddressesMain(refAddress)
+                BaseData.instance.updateRefAddressesMain(
+                    RefAddress(id, self.tag, self.address!,
+                               self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                               nil, self.lcdAccountInfo["balances"].array?.count))
+                
             } else if (self is ChainOktKeccak256) {
-                let refAddress = RefAddress(id, self.tag, self.address!, self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue, "", Int64(self.lcdAccountInfo["value","coins"].array?.count ?? 0))
-                BaseData.instance.updateRefAddressesMain(refAddress)
+                let refAddress =
+                BaseData.instance.updateRefAddressesMain(
+                    RefAddress(id, self.tag, self.address!,
+                               self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                               nil, self.lcdAccountInfo["value","coins"].array?.count))
             }
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }

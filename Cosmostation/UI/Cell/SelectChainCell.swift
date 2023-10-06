@@ -79,11 +79,11 @@ class SelectChainCell: UITableViewCell {
                 }
             }
         }
-        print("chain ", chain.name, "  ", chain.address)
+//        print("chain ", chain.name, "  ", chain.address)
         
         if let addess = chain.address, 
             let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag, addess) {
-            print("refAddress ", refAddress)
+//            print("refAddress ", refAddress)
             WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
             assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"
             
