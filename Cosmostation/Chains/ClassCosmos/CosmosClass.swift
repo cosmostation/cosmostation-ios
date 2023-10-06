@@ -204,17 +204,17 @@ class CosmosClass: BaseChain  {
 extension CosmosClass {
     
     func fetchChainParam() async throws -> JSON {
-        print("fetchChainParam ", BaseNetWork.msChainParam(self))
+//        print("fetchChainParam ", BaseNetWork.msChainParam(self))
         return try await AF.request(BaseNetWork.msChainParam(self), method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchCw20Info() async throws -> MintscanTokens {
-        print("fetchCw20Info ", BaseNetWork.msCw20InfoUrl(self))
+//        print("fetchCw20Info ", BaseNetWork.msCw20InfoUrl(self))
         return try await AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get).serializingDecodable(MintscanTokens.self).value
     }
     
     func fetchErc20Info() async throws -> MintscanTokens {
-        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
+//        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
         return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable(MintscanTokens.self).value
     }
     

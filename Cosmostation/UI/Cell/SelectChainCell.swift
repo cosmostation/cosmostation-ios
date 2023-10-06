@@ -50,11 +50,11 @@ class SelectChainCell: UITableViewCell {
         nameLabel.text = chain.name.uppercased()
         
         if (selectedList.contains(chain.tag)) {
-            rootView.layer.borderColor = UIColor.colorPrimary.cgColor
-            rootView.backgroundColor = UIColor.colorPrimary.withAlphaComponent(0.05)
+            rootView.layer.borderWidth = 1.0
+            rootView.layer.borderColor = UIColor.white.cgColor
         } else {
+            rootView.layer.borderWidth = 0.5
             rootView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
-            rootView.backgroundColor = UIColor.white.withAlphaComponent(0.05)
         }
         
         if (account.type == .withMnemonic) {
@@ -81,8 +81,7 @@ class SelectChainCell: UITableViewCell {
         }
 //        print("chain ", chain.name, "  ", chain.address)
         
-        if let addess = chain.address, 
-            let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag, addess) {
+        if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
 //            print("refAddress ", refAddress)
             WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
             assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"

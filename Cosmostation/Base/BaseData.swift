@@ -307,10 +307,9 @@ extension BaseData {
         return result
     }
     
-    public func selectRefAddress(_ accountId: Int64, _ chainTag: String, _ address: String) -> RefAddress? {
+    public func selectRefAddress(_ accountId: Int64, _ chainTag: String) -> RefAddress? {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == accountId &&
-                                            REFADDRESS_CHAIN_TAG == chainTag &&
-                                            REFADDRESS_DP_ADDRESS == address)
+                                            REFADDRESS_CHAIN_TAG == chainTag)
         if let rowInfo = try! database.pluck(query) {
             return RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_TAG],
                               rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], rowInfo[REFADDRESS_MAIN_VALUE],

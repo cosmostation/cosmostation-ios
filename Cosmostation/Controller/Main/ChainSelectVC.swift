@@ -16,9 +16,8 @@ class ChainSelectVC: BaseVC {
     @IBOutlet weak var loadingMsgLabel: UILabel!
     @IBOutlet weak var loadingCntLabel: UILabel!
     @IBOutlet weak var powerLabel: UILabel!
-    @IBOutlet weak var orderBtn: UIButton!
-    @IBOutlet weak var reloadBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var selectBtn: SecButton!
     @IBOutlet weak var confirmBtn: BaseButton!
     
     var toDisplayCosmosTags = [String]()
@@ -74,42 +73,30 @@ class ChainSelectVC: BaseVC {
             }
         }
         if (baseAccount.allCosmosClassChains.filter { $0.fetched == false }.count == 0) {
-            print("ALL Loaded!!")
+            DispatchQueue.main.async {
+                self.selectBtn.isEnabled = true
+            }
         }
     }
     
-    @IBAction func onClickOrder(_ sender: UIButton) {
-        print("onClickOrder")
-        baseAccount.sortCosmosChains()
+    @IBAction func onClickValuable(_ sender: SecButton) {
+        baseAccount.reSortCosmosChains()
         allCosmosChains = baseAccount.allCosmosClassChains
+        
+        toDisplayCosmosTags.removeAll()
+        toDisplayCosmosTags.append("cosmos118")
+        allCosmosChains.forEach { chian in
+            if (chian.allCoinUSDValue != NSDecimalNumber.zero && chian.tag != "cosmos118") {
+                toDisplayCosmosTags.append(chian.tag)
+            }
+        }
         tableView.reloadData()
-        
-        
-    }
-    @IBAction func onClickReload(_ sender: UIButton) {
-        print("onClickReload")
-        
-        
     }
     
-
     @IBAction func onClickConfirm(_ sender: BaseButton) {
-//        var toSaveCosmosTag = [String]()
-//        baseAccount.allCosmosClassChains.sort {
-//            if ($0.tag == "cosmos118") { return true }
-//            if ($1.tag == "cosmos118") { return false }
-//            return $0.allValue().compare($1.allValue()).rawValue > 0 ? true : false
-//        }
-//        baseAccount.allCosmosClassChains.forEach { chain in
-//            if (toDisplayCosmosTags.contains(chain.tag)) {
-//                toSaveCosmosTag.append(chain.tag)
-//            }
-//        }
-//        BaseData.instance.setDisplayCosmosChainTags(baseAccount, toSaveCosmosTag)
-//        let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as! MainTabVC
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        appDelegate.window?.rootViewController = mainTabVC
-//        self.present(mainTabVC, animated: true, completion: nil)
+        BaseData.instance.setDisplayCosmosChainTags(baseAccount.id, toDisplayCosmosTags)
+        baseAccount.toDisplayCTags = toDisplayCosmosTags
+        dismiss(animated: true)
     }
 }
 

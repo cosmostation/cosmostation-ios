@@ -41,7 +41,7 @@ public class BaseAccount {
     func initAccount() {
         toDisplayCTags = BaseData.instance.getDisplayCosmosChainTags(self.id)
         allCosmosClassChains = ALLCOSMOSCLASS()
-        sortCosmosChains()
+        initSortCosmosChains()
     }
     
     func getDisplayCosmosChains() -> [CosmosClass] {
@@ -121,17 +121,28 @@ public class BaseAccount {
         }
     }
     
-    func sortCosmosChains() {
+    func initSortCosmosChains() {
         allCosmosClassChains.sort {
             if ($0.tag == "cosmos118") { return true }
             if ($1.tag == "cosmos118") { return false }
-            return $0.allCoinUSDValue.compare($1.allCoinUSDValue).rawValue > 0 ? true : false
+            let ref0 = BaseData.instance.selectRefAddress(id, $0.tag)?.lastUsdValue() ?? NSDecimalNumber.zero
+            let ref1 = BaseData.instance.selectRefAddress(id, $1.tag)?.lastUsdValue() ?? NSDecimalNumber.zero
+            return ref0.compare(ref1).rawValue > 0 ? true : false
+            
         }
         allCosmosClassChains.sort {
             if ($0.tag == "cosmos118") { return true }
             if ($1.tag == "cosmos118") { return false }
             if (toDisplayCTags.contains($0.tag) == true && toDisplayCTags.contains($1.tag) == false) { return true }
             return false
+        }
+    }
+    
+    func reSortCosmosChains() {
+        allCosmosClassChains.sort {
+            if ($0.tag == "cosmos118") { return true }
+            if ($1.tag == "cosmos118") { return false }
+            return $0.allCoinUSDValue.compare($1.allCoinUSDValue).rawValue > 0 ? true : false
         }
     }
 }
