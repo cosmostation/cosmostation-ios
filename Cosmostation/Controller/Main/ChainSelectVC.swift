@@ -20,7 +20,7 @@ class ChainSelectVC: BaseVC {
     @IBOutlet weak var selectBtn: SecButton!
     @IBOutlet weak var confirmBtn: BaseButton!
     
-    var delegate: ChainSelectDelegate?
+    var onChainSelected: (() -> Void)? = nil
     var toDisplayCosmosTags = [String]()
     var allCosmosChains = [CosmosClass]()
     
@@ -41,6 +41,7 @@ class ChainSelectVC: BaseVC {
         tableView.sectionHeaderTopPadding = 0.0
         
         baseAccount = BaseData.instance.baseAccount
+        baseAccount.initSortCosmosChains()
         baseAccount.fetchAllCosmosChains()
         allCosmosChains = baseAccount.allCosmosClassChains
         
@@ -105,7 +106,7 @@ class ChainSelectVC: BaseVC {
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         BaseData.instance.setDisplayCosmosChainTags(baseAccount.id, toDisplayCosmosTags)
         baseAccount.toDisplayCTags = toDisplayCosmosTags
-        delegate?.onChainSelected()
+        onChainSelected?()
         dismiss(animated: true)
     }
 }
@@ -143,6 +144,7 @@ extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.row == 0) { return }
         let chain = allCosmosChains[indexPath.row]
         if (toDisplayCosmosTags.contains(chain.tag)) {
             toDisplayCosmosTags.removeAll { $0 == chain.tag }
@@ -155,9 +157,4 @@ extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource {
             self.tableView.endUpdates()
         }
     }
-    
-}
-
-protocol ChainSelectDelegate {
-    func onChainSelected()
 }

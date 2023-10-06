@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PortfolioVC: BaseVC, ChainSelectDelegate {
+class PortfolioVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
@@ -114,8 +114,10 @@ class PortfolioVC: BaseVC, ChainSelectDelegate {
     
     @objc func onClickChainSelect() {
         let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
-        chainSelectVC.delegate = self
         chainSelectVC.modalTransitionStyle = .coverVertical
+        chainSelectVC.onChainSelected = {
+            self.onChainSelected()
+        }
         self.present(chainSelectVC, animated: true)
     }
     
