@@ -21,6 +21,9 @@ class CosmosClass: BaseChain  {
     var supportErc20 = false
     var supportNft = false
     
+    var evmCompatible = false
+    var evmAddress: String?
+    
     var grpcHost = ""
     var grpcPort = 443
     
@@ -68,7 +71,7 @@ class CosmosClass: BaseChain  {
                 }
             }
         }
-        if (self is ChainBinanceBeacon || self is ChainOktKeccak256 ) {
+        if (self is ChainBinanceBeacon || self is ChainOkt996Keccak ) {
             fetchLcdData(id)
         } else {
             fetchGrpcData(id)
@@ -607,7 +610,7 @@ extension CosmosClass {
         if (self is ChainBinanceBeacon) {
             return lcdBalanceValue(stakeDenom, usd)
             
-        } else if (self is ChainOktKeccak256) {
+        } else if (self is ChainOkt996Keccak) {
             return lcdBalanceValue(stakeDenom, usd).adding(lcdOktDepositValue(usd) ).adding(lcdOktWithdrawValue(usd))
             
         } else {
@@ -642,7 +645,7 @@ extension CosmosClass {
             fetchBeaconTokens(group)
             fetchBeaconMiniTokens(group)
             
-        } else if (self is ChainOktKeccak256) {
+        } else if (self is ChainOkt996Keccak) {
             fetchNodeInfo(group)
             fetchAccountInfo(group, address!)
             fetchOktDeposited(group, address!)
@@ -661,7 +664,7 @@ extension CosmosClass {
                                self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                                nil, self.lcdAccountInfo["balances"].array?.count))
                 
-            } else if (self is ChainOktKeccak256) {
+            } else if (self is ChainOkt996Keccak) {
                 let refAddress =
                 BaseData.instance.updateRefAddressesMain(
                     RefAddress(id, self.tag, self.address!,
@@ -801,7 +804,7 @@ extension CosmosClass {
                 return NSDecimalNumber.init(string: balance["free"].string ?? "0")
             }
             
-        } else if (self is ChainOktKeccak256) {
+        } else if (self is ChainOkt996Keccak) {
             if let balance = lcdAccountInfo["value","coins"].array?.filter({ $0["denom"].string == denom }).first {
                 return NSDecimalNumber.init(string: balance["amount"].string ?? "0")
             }
@@ -816,9 +819,9 @@ extension CosmosClass {
             let amount = lcdBalanceAmount(denom)
             var msPrice = NSDecimalNumber.zero
             if (self is ChainBinanceBeacon) {
-                msPrice = BaseData.instance.getPrice(ChainBinanceBeacon.BNB_GECKO_ID, usd)
-            } else if (self is ChainOktKeccak256) {
-                msPrice = BaseData.instance.getPrice(ChainOktKeccak256.OKT_GECKO_ID, usd)
+                msPrice = BaseData.instance.getPrice(BNB_GECKO_ID, usd)
+            } else if (self is ChainOkt996Keccak) {
+                msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
             }
             return msPrice.multiplying(by: amount, withBehavior: handler6)
         }
@@ -830,7 +833,7 @@ extension CosmosClass {
     }
     
     func lcdOktDepositValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        let msPrice = BaseData.instance.getPrice(ChainOktKeccak256.OKT_GECKO_ID, usd)
+        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
         let amount = lcdOktDepositAmount()
         return msPrice.multiplying(by: amount, withBehavior: handler6)
     }
@@ -840,7 +843,7 @@ extension CosmosClass {
     }
     
     func lcdOktWithdrawValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        let msPrice = BaseData.instance.getPrice(ChainOktKeccak256.OKT_GECKO_ID, usd)
+        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
         let amount = lcdOktWithdrawAmount()
         return msPrice.multiplying(by: amount, withBehavior: handler6)
     }
@@ -868,70 +871,71 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     var result = [CosmosClass]()
     result.removeAll()
     result.append(ChainCosmos())
-    result.append(ChainAkash())
-    result.append(ChainArchway())
-    result.append(ChainAssetMantle())
-    result.append(ChainAxelar())
-    result.append(ChainBand())
-    result.append(ChainBitcana())
-    result.append(ChainBitsong())
-//    result.append(ChainCanto())
-    result.append(ChainChihuahua())
-    result.append(ChainComdex())
-    result.append(ChainCoreum())
-    result.append(ChainCrescent())
-    result.append(ChainCryptoorg())
-    result.append(ChainCudos())
-    result.append(ChainDesmos())
-    result.append(ChainEmoney())
-    result.append(ChainEvmos())
-    result.append(ChainFetchAi())
-    result.append(ChainGravityBridge())
-    result.append(ChainInjective())
-    result.append(ChainIxo())
-    result.append(ChainJuno())
-    result.append(ChainKava459())
-    result.append(ChainKava60())
-    result.append(ChainKava118())
-    result.append(ChainKi())
-    result.append(ChainKyve())
-    result.append(ChainLike())
-    result.append(ChainLum880())
-    result.append(ChainLum118())
-    result.append(ChainMars())
-    result.append(ChainMedibloc())
-    result.append(ChainNeutron())
-    result.append(ChainNoble())
-    result.append(ChainNyx())
-    result.append(ChainOmniflix())
-    result.append(ChainOnomy())
-    result.append(ChainOsmosis())
-    result.append(ChainPassage())
-    result.append(ChainPersistence118())
-    result.append(ChainPersistence750())
-    result.append(ChainProvenance())
-    result.append(ChainQuasar())
-    result.append(ChainQuicksilver())
-    result.append(ChainRegen())
-    result.append(ChainRizon())
-    result.append(ChainSecret118())
-    result.append(ChainSecre529())
-    result.append(ChainSei())
-    result.append(ChainSentinel())
-    result.append(ChainShentu())
-    result.append(ChainSommelier())
-    result.append(ChainStafi())
-    result.append(ChainStargaze())
-    result.append(ChainStarname())
-    result.append(ChainStride())
-    result.append(ChainTerra())
-    result.append(ChainTeritori())
-    result.append(ChainUmee())
-    result.append(ChainXpla())
-    result.append(ChainXplaKeccak256())
+//    result.append(ChainAkash())
+//    result.append(ChainArchway())
+//    result.append(ChainAssetMantle())
+//    result.append(ChainAxelar())
+//    result.append(ChainBand())
+//    result.append(ChainBitcana())
+//    result.append(ChainBitsong())
+//    result.append(ChainChihuahua())
+//    result.append(ChainComdex())
+//    result.append(ChainCoreum())
+//    result.append(ChainCrescent())
+//    result.append(ChainCryptoorg())
+//    result.append(ChainCudos())
+//    result.append(ChainDesmos())
+//    result.append(ChainEmoney())
+//    result.append(ChainEvmos())
+//    result.append(ChainFetchAi())
+//    result.append(ChainGravityBridge())
+//    result.append(ChainInjective())
+//    result.append(ChainIxo())
+//    result.append(ChainJuno())
+//    result.append(ChainKava459())
+//    result.append(ChainKava60())
+//    result.append(ChainKava118())
+//    result.append(ChainKi())
+//    result.append(ChainKyve())
+//    result.append(ChainLike())
+//    result.append(ChainLum880())
+//    result.append(ChainLum118())
+//    result.append(ChainMars())
+//    result.append(ChainMedibloc())
+//    result.append(ChainNeutron())
+//    result.append(ChainNoble())
+//    result.append(ChainNyx())
+//    result.append(ChainOmniflix())
+//    result.append(ChainOnomy())
+//    result.append(ChainOsmosis())
+//    result.append(ChainPassage())
+//    result.append(ChainPersistence118())
+//    result.append(ChainPersistence750())
+//    result.append(ChainProvenance())
+//    result.append(ChainQuasar())
+//    result.append(ChainQuicksilver())
+//    result.append(ChainRegen())
+//    result.append(ChainRizon())
+//    result.append(ChainSecret118())
+//    result.append(ChainSecre529())
+//    result.append(ChainSei())
+//    result.append(ChainSentinel())
+//    result.append(ChainShentu())
+//    result.append(ChainSommelier())
+//    result.append(ChainStafi())
+//    result.append(ChainStargaze())
+//    result.append(ChainStarname())
+//    result.append(ChainStride())
+//    result.append(ChainTerra())
+//    result.append(ChainTeritori())
+//    result.append(ChainUmee())
+//    result.append(ChainXpla())
+//    result.append(ChainXplaKeccak256())
     
     result.append(ChainBinanceBeacon())
-    result.append(ChainOktKeccak256())
+    result.append(ChainOkt60Keccak())
+    result.append(ChainOkt996Secp())
+    result.append(ChainOkt996Keccak())
     
     result.forEach { chain in
         let chainId = BaseData.instance.mintscanChains?["chains"].arrayValue.filter({ $0["chain"].stringValue == chain.apiName }).first?["chain_id"].stringValue
@@ -940,4 +944,4 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     return result
 }
 
-let DEFUAL_DISPALY_COSMOS = ["cosmos118", "juno118", "evmos60", "binanceBeacon"]
+let DEFUAL_DISPALY_COSMOS = ["cosmos118", "okt60_Keccak", "okt996_Secp", "okt996_Keccak", "binanceBeacon"]

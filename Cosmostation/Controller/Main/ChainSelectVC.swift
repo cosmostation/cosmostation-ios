@@ -104,6 +104,7 @@ class ChainSelectVC: BaseVC {
     }
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
+        baseAccount.reSortCosmosChains()
         BaseData.instance.setDisplayCosmosChainTags(baseAccount.id, toDisplayCosmosTags)
         baseAccount.toDisplayCTags = toDisplayCosmosTags
         onChainSelected?()

@@ -51,7 +51,6 @@ class BaseChain {
         address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
     }
     
-    
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if (usd == true) {
             return allCoinUSDValue.adding(allTokenUSDValue)

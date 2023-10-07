@@ -76,8 +76,8 @@ class BaseNetWork {
     
     static func getAccountHistoryUrl(_ chain: BaseChain, _ address: String) -> String {
         if (chain is ChainBinanceBeacon) {
-            return ChainBinanceBeacon.lcdUrl + "api/v1/transactions"
-        } else if (chain is ChainOktKeccak256) {
+            return BNB_BEACON_LCD + "api/v1/transactions"
+        } else if (chain is ChainOkt996Keccak) {
             return MINTSCAN_API_URL + "v1/utils/proxy/okc-transaction-list?device=IOS&chainShortName=okc&address=" + address + "&limit=50"
         } else {
             return MINTSCAN_API_URL + "v1/" + chain.apiName + "/account/" + address + "/txs"
@@ -123,9 +123,9 @@ class BaseNetWork {
     
     static func getTxDetailUrl(_ chain: BaseChain, _ txHash: String) -> URL? {
         if (chain is ChainBinanceBeacon) {
-            return URL(string: ChainBinanceBeacon.explorer + "tx/" + txHash)
-        } else if (chain is ChainOktKeccak256) {
-            return URL(string: ChainOktKeccak256.explorer + "tx/" + txHash)
+            return URL(string: BNB_BEACON_EXPLORER + "tx/" + txHash)
+        } else if (chain is ChainOkt996Keccak) {
+            return URL(string: OKT_EXPLORER + "tx/" + txHash)
         }
         return URL(string: MintscanUrl + chain.apiName + "/transactions/" + txHash)
     }
@@ -150,47 +150,47 @@ extension BaseNetWork {
     
     static func lcdNodeInfoUrl(_ chain: BaseChain) -> String {
         if (chain is ChainBinanceBeacon) {
-            return ChainBinanceBeacon.lcdUrl + "api/v1/node-info"
-        } else if (chain is ChainOktKeccak256) {
-            return ChainOktKeccak256.lcdUrl + "node_info"
+            return BNB_BEACON_LCD + "api/v1/node-info"
+        } else if (chain is ChainOkt996Keccak) {
+            return OKT_LCD + "node_info"
         }
         return ""
     }
     
     static func lcdAccountInfoUrl(_ chain: BaseChain, _ address: String) -> String {
         if (chain is ChainBinanceBeacon) {
-            return ChainBinanceBeacon.lcdUrl + "api/v1/account/" + address
-        } else if (chain is ChainOktKeccak256) {
-            return ChainOktKeccak256.lcdUrl + "auth/accounts/" + address
+            return BNB_BEACON_LCD + "api/v1/account/" + address
+        } else if (chain is ChainOkt996Keccak) {
+            return OKT_LCD + "auth/accounts/" + address
         }
         return ""
     }
     
     
     static func lcdBeaconTokenUrl() -> String {
-        return ChainBinanceBeacon.lcdUrl + "api/v1/tokens"
+        return BNB_BEACON_LCD + "api/v1/tokens"
     }
     
     static func lcdBeaconMiniTokenUrl() -> String {
-        return ChainBinanceBeacon.lcdUrl + "api/v1/mini/tokens"
+        return BNB_BEACON_LCD + "api/v1/mini/tokens"
     }
     
 //    static func lcdBeaconTicUrl() -> String {
-//        return ChainBinanceBeacon.lcdUrl + "api/v1/ticker/24hr"
+//        return BNB_BEACON_LCD + "api/v1/ticker/24hr"
 //    }
 //
 //    static func lcdBeaconMiniTicUrl() -> String {
-//        return ChainBinanceBeacon.lcdUrl + "api/v1/mini/ticker/24hr"
+//        return BNB_BEACON_LCD + "api/v1/mini/ticker/24hr"
 //    }
     
     static func lcdOktDepositUrl(_ address: String) -> String {
-        return ChainOktKeccak256.lcdUrl + "staking/delegators/" + address
+        return OKT_LCD + "staking/delegators/" + address
     }
     
     static func lcdOktWithdrawUrl(_ address: String) -> String {
-        return ChainOktKeccak256.lcdUrl + "staking/delegators/" + address + "/unbonding_delegations"
+        return OKT_LCD + "staking/delegators/" + address + "/unbonding_delegations"
     }
     static func lcdOktTokenUrl() -> String {
-        return ChainOktKeccak256.lcdUrl + "tokens"
+        return OKT_LCD + "tokens"
     }
 }

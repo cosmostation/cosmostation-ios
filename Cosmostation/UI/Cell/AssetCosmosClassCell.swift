@@ -52,7 +52,7 @@ class AssetCosmosClassCell: UITableViewCell {
         if (baseChain is ChainBinanceBeacon) {
             bindBeaconAsset(baseChain)
             
-        } else if (baseChain is ChainOktKeccak256) {
+        } else if (baseChain is ChainOkt996Keccak) {
             bindOktAsset(baseChain)
             
         } else {
@@ -113,8 +113,8 @@ class AssetCosmosClassCell: UITableViewCell {
         coinImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(stakeDenom))
         symbolLabel.text = stakeDenom.uppercased()
         
-        WDP.dpPrice(ChainBinanceBeacon.BNB_GECKO_ID, priceCurrencyLabel, priceLabel)
-        WDP.dpPriceChanged(ChainBinanceBeacon.BNB_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+        WDP.dpPrice(BNB_GECKO_ID, priceCurrencyLabel, priceLabel)
+        WDP.dpPriceChanged(BNB_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
         WDP.dpValue(value, valueCurrencyLabel, valueLabel)
         
         let availableAmount = baseChain.lcdBalanceAmount(stakeDenom)
@@ -125,11 +125,11 @@ class AssetCosmosClassCell: UITableViewCell {
     func bindOktAsset(_ baseChain: CosmosClass) {
         let stakeDenom = baseChain.stakeDenom!
         let value = baseChain.allValue()
-        coinImg.af.setImage(withURL: ChainOktKeccak256.assetImg(stakeDenom))
+        coinImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(stakeDenom))
         symbolLabel.text = stakeDenom.uppercased()
         
-        WDP.dpPrice(ChainOktKeccak256.OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
-        WDP.dpPriceChanged(ChainOktKeccak256.OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+        WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
+        WDP.dpPriceChanged(OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
         WDP.dpValue(value, valueCurrencyLabel, valueLabel)
         
         let availableAmount = baseChain.lcdBalanceAmount(stakeDenom)

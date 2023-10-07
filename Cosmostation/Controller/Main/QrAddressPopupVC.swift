@@ -18,7 +18,7 @@ class QrAddressPopupVC: BaseVC {
     @IBOutlet weak var deprecatedLabel: UILabel!
     @IBOutlet weak var evmLabel: UILabel!
     
-    var selectedChain: BaseChain!
+    var selectedChain: CosmosClass!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +30,10 @@ class QrAddressPopupVC: BaseVC {
         if (baseAccount.type == .withMnemonic) {
             hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
             
-            if (selectedChain.accountKeyType.pubkeyType == .ETH_Keccak256
-                || selectedChain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
-                if (selectedChain.accountKeyType.hdPath == "m/44'/60'/0'/0/X") {
-                    tagLayer.isHidden = false
-                    evmLabel.isHidden = false
-                }
+            if (selectedChain.evmCompatible) {
+                tagLayer.isHidden = false
+                evmLabel.isHidden = false
+                
             } else if (selectedChain.isDefault == false) {
                 tagLayer.isHidden = false
                 deprecatedLabel.isHidden = false
@@ -44,12 +42,10 @@ class QrAddressPopupVC: BaseVC {
         } else {
             hdPathLabel.text = ""
             
-            if (selectedChain.accountKeyType.pubkeyType == .ETH_Keccak256
-                || selectedChain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
-                if (selectedChain.accountKeyType.hdPath == "m/44'/60'/0'/0/X") {
-                    tagLayer.isHidden = false
-                    evmLabel.isHidden = false
-                }
+            if (selectedChain.evmCompatible) {
+                tagLayer.isHidden = false
+                evmLabel.isHidden = false
+                
             }
         }
         

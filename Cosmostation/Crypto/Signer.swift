@@ -1972,17 +1972,7 @@ class Signer {
             $0.tx = simulateTx
         }
     }
-//
-//    static func getGrpcSimulateTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64, _ chainType: ChainType, _ msgAnys: Array<Google_Protobuf_Any>, _ privateKey: Data, _ publicKey: Data, _ fee: Fee, _ memo: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let txBody = getGrpcTxBody(msgAnys, memo)
-//        let signerInfo = getGrpcSignerInfos(auth, pubkeyType, publicKey, chainType)
-//        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-//        let simulateTx = getGrpcSimulTxs(auth, pubkeyType, txBody, authInfo, privateKey, chainType)
-//        return Cosmos_Tx_V1beta1_SimulateRequest.with {
-//            $0.tx = simulateTx
-//        }
-//    }
-//    
+    
     static func getTxBody(_ msgAnys: [Google_Protobuf_Any], _ memo: String) -> Cosmos_Tx_V1beta1_TxBody {
         return Cosmos_Tx_V1beta1_TxBody.with {
             $0.memo = memo

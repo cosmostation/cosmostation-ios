@@ -22,6 +22,7 @@ class ChainXplaKeccak256: CosmosClass  {
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         accountPrefix = "xpla"
+        evmCompatible = true
         
         grpcHost = "grpc-xpla.cosmostation.io"
     }
@@ -29,14 +30,14 @@ class ChainXplaKeccak256: CosmosClass  {
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
         privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        let evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        address = KeyFac.convertEvmToBech32(evmAddress, accountPrefix!)
+        evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+        address = KeyFac.convertEvmToBech32(evmAddress!, accountPrefix!)
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        let evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        address = KeyFac.convertEvmToBech32(evmAddress, accountPrefix!)
+        evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+        address = KeyFac.convertEvmToBech32(evmAddress!, accountPrefix!)
     }
 }

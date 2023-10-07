@@ -66,7 +66,7 @@ class CosmosTransfer: BaseVC {
     var transferAssetType: TransferAssetType!       // to send type
     var selectedMsAsset: MintscanAsset?             // to send Coin
     var selectedMsToken: MintscanToken?             // to send Token
-    var mintscanPath: MintscanPath?                // to IBC send path
+    var mintscanPath: MintscanPath?                 // to IBC send path
     var allCosmosChains = [CosmosClass]()
     
     var availableAmount = NSDecimalNumber.zero

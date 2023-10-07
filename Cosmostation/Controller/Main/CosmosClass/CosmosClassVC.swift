@@ -77,11 +77,21 @@ class CosmosClassVC: BaseVC {
     }
     
     func onSendTx() {
-        let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
-        transfer.selectedChain = selectedChain
-        transfer.toSendDenom = selectedChain.stakeDenom
-        transfer.modalTransitionStyle = .coverVertical
-        self.present(transfer, animated: true)
+        if (selectedChain is ChainBinanceBeacon ||
+            selectedChain is ChainOkt996Keccak) {
+            let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
+            transfer.selectedChain = selectedChain
+            transfer.toSendDenom = selectedChain.stakeDenom
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
+            
+        } else {
+            let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
+            transfer.selectedChain = selectedChain
+            transfer.toSendDenom = selectedChain.stakeDenom
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
+        }
     }
     
     func onClaimRewardTx() {

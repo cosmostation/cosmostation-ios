@@ -49,13 +49,10 @@ class PortfolioCell: UITableViewCell {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
-
-        if (chain.accountKeyType.pubkeyType == .ETH_Keccak256 
-            || chain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
-            if (chain.accountKeyType.hdPath == "m/44'/60'/0'/0/X") {
-                tagLayer.isHidden = false
-                evmLabel.isHidden = false
-            }
+        
+        if (chain.evmCompatible) {
+            tagLayer.isHidden = false
+            evmLabel.isHidden = false
             
         } else if (!chain.isDefault) {
             tagLayer.isHidden = false
@@ -67,12 +64,12 @@ class PortfolioCell: UITableViewCell {
             WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
             
 //            if (chain is ChainBinanceBeacon) {
-//                WDP.dpPrice(ChainBinanceBeacon.BNB_GECKO_ID, priceCurrencyLabel, priceLabel)
-//                WDP.dpPriceChanged(ChainBinanceBeacon.BNB_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+//                WDP.dpPrice(BNB_GECKO_ID, priceCurrencyLabel, priceLabel)
+//                WDP.dpPriceChanged(BNB_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
 //
-//            } else if (chain is ChainOktKeccak256) {
-//                WDP.dpPrice(ChainOktKeccak256.OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
-//                WDP.dpPriceChanged(ChainOktKeccak256.OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+//            } else if (chain is ChainOkt996Keccak) {
+//                WDP.dpPrice(ChainOkt996Keccak.OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
+//                WDP.dpPriceChanged(ChainOkt996Keccak.OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
 //
 //            } else {
 //                if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {

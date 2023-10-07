@@ -80,7 +80,7 @@ class AssetCell: UITableViewCell {
             
             symbolLabel.text = original_symbol.uppercased()
             priceCurrencyLabel.text = token["description"].string
-            coinImg.af.setImage(withURL: ChainOktKeccak256.assetImg(original_symbol))
+            coinImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(original_symbol))
             
             let availableAmount = baseChain.lcdBalanceAmount(coin["denom"].stringValue)
             amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)

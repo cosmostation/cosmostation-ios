@@ -32,10 +32,10 @@ class ManageChainCell: UITableViewCell {
         
         if (chain is ChainBinanceBeacon) {
             typeLabel.text = "LCD"
-            endpointLabel.text = ChainBinanceBeacon.lcdUrl
-        } else if (chain is ChainOktKeccak256) {
+            endpointLabel.text = BNB_BEACON_LCD
+        } else if (chain is ChainOkt996Keccak) {
             typeLabel.text = "LCD"
-            endpointLabel.text = ChainOktKeccak256.lcdUrl
+            endpointLabel.text = OKT_LCD
         } else {
             typeLabel.text = "GRPC"
             endpointLabel.text = chain.grpcHost + " : " +  String(chain.grpcPort)

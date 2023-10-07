@@ -104,16 +104,16 @@ class KeyFac {
         return ""
     }
     
-    //Convert ether to bech style (Evmos, etc...)
+    //Convert ethered Address to bech32 style
     static func convertEvmToBech32(_ ethAddress: String, _ prefix: String) -> String {
         var address = ethAddress
         if (address.starts(with: "0x")) {
             address = address.replacingOccurrences(of: "0x", with: "")
         }
-        return try! SegwitAddrCoder.shared.encode(prefix, Data.fromHex2(address)!)
+        return try! SegwitAddrCoder.shared.encode(prefix, Data.fromHex(address)!)
     }
     
-    //Convert bech to ether style
+    //Convert bech32ed Address to ether style
     static func convertBech32ToEvm(_ address: String) -> String {
         let data = try! SegwitAddrCoder.shared.decode(address)
         return EthereumAddress.init(data!)!.address

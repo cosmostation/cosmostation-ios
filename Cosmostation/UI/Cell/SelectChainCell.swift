@@ -60,11 +60,8 @@ class SelectChainCell: UITableViewCell {
         if (account.type == .withMnemonic) {
             hdPathLabel.text = chain.getHDPath(account.lastHDPath)
             
-            if (chain.accountKeyType.pubkeyType == .ETH_Keccak256
-                || chain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
-                if (chain.accountKeyType.hdPath == "m/44'/60'/0'/0/X") {
-                    evmLabel.isHidden = false
-                }
+            if (chain.evmCompatible) {
+                evmLabel.isHidden = false
             } else if (!chain.isDefault) {
                 deprecatedLabel.isHidden = false
             }
@@ -72,11 +69,8 @@ class SelectChainCell: UITableViewCell {
         } else {
             hdPathLabel.text = ""
             
-            if (chain.accountKeyType.pubkeyType == .ETH_Keccak256
-                || chain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
-                if (chain.accountKeyType.hdPath == "m/44'/60'/0'/0/X") {
-                    evmLabel.isHidden = false
-                }
+            if (chain.evmCompatible) {
+                evmLabel.isHidden = false
             }
         }
 //        print("chain ", chain.name, "  ", chain.address)

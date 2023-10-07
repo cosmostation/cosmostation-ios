@@ -77,7 +77,6 @@ class CosmosRewardAddress: BaseVC {
     }
     
     func onInitView() {
-        print("onInitView ", selectedChain.rewardAddress)
         currentAddressLabel.text = selectedChain.rewardAddress
         currentAddressLabel.adjustsFontSizeToFitWidth = true
     }

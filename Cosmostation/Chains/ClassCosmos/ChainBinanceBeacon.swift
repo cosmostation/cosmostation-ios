@@ -25,13 +25,12 @@ class ChainBinanceBeacon: CosmosClass  {
         accountPrefix = "bnb"
     }
     
-    static let lcdUrl = "https://dex.binance.org/"
-    static let explorer = "https://explorer.bnbchain.org/"
-    static let BNB_GECKO_ID = "binancecoin"
-    
-    
     static func assetImg(_ original_symbol: String) -> URL {
         return URL(string: ResourceBase + "bnb-beacon-chain/asset/" + original_symbol.lowercased() + ".png") ?? URL(string: "")!
     }
     
 }
+
+let BNB_BEACON_LCD = "https://dex.binance.org/"
+let BNB_BEACON_EXPLORER = "https://explorer.bnbchain.org/"
+let BNB_GECKO_ID = "binancecoin"
