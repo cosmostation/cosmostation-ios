@@ -15,7 +15,7 @@ class ChainBinanceBeacon: CosmosClass  {
         
         name = "BNB Beacon"
         tag = "binanceBeacon"
-        chainId = "binance-chain-tigris"
+        chainId = "Binance-Chain-Tigris"
         logo1 = "chainBnbBeacon"
         logo2 = "chainBnbBeacon2"
         apiName = ""
@@ -33,4 +33,5 @@ class ChainBinanceBeacon: CosmosClass  {
 
 let BNB_BEACON_LCD = "https://dex.binance.org/"
 let BNB_BEACON_EXPLORER = "https://explorer.bnbchain.org/"
+let BNB_BEACON_BASE_FEE = "0.000075"
 let BNB_GECKO_ID = "binancecoin"

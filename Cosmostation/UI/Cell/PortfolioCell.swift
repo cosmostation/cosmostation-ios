@@ -67,7 +67,7 @@ class PortfolioCell: UITableViewCell {
 //                WDP.dpPrice(BNB_GECKO_ID, priceCurrencyLabel, priceLabel)
 //                WDP.dpPriceChanged(BNB_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
 //
-//            } else if (chain is ChainOkt996Keccak) {
+//            } else if (chain is ChainOkt60Keccak) {
 //                WDP.dpPrice(ChainOkt996Keccak.OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
 //                WDP.dpPriceChanged(ChainOkt996Keccak.OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
 //

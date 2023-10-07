@@ -9,6 +9,7 @@
 import Foundation
 import HDWalletKit
 import CryptoSwift
+import web3swift
 
 public class BinanceMessage {
     
@@ -62,7 +63,8 @@ public class BinanceMessage {
     private var crossChain: Bool = true
     
     
-    private var key: PrivateKey!
+//    private var key: PrivateKey!
+    private var key: Data = Data()
     private var publicKey: Data = Data()
     private var signerAddress: String = ""
     private var sequence: Int = 0
@@ -72,10 +74,10 @@ public class BinanceMessage {
     
     
 
-    private init(type: MessageType, _ privateKey: PrivateKey, _ signerAddress: String, _ sequence: Int, _ accountNumber: Int, _ chainId: String) {
+    private init(type: MessageType, _ privateKey: Data, _ signerAddress: String, _ sequence: Int, _ accountNumber: Int, _ chainId: String) {
         self.type = type
         self.key = privateKey
-        self.publicKey = key.publicKey.data
+        self.publicKey = SECP256K1.privateToPublic(privateKey: key, compressed: true)!
         self.signerAddress = signerAddress
         self.sequence = sequence
         self.accountNumber = accountNumber
@@ -84,7 +86,7 @@ public class BinanceMessage {
     
     
     public static func transfer(symbol: String, amount: Double, toAddress: String, memo: String,
-                                privateKey: PrivateKey, signerAddress: String, sequence: Int, accountNumber: Int, chainId: String) -> BinanceMessage {
+                                privateKey: Data, signerAddress: String, sequence: Int, accountNumber: Int, chainId: String) -> BinanceMessage {
         let message = BinanceMessage(type: .transfer, privateKey, signerAddress, sequence, accountNumber, chainId)
         message.symbol = symbol
         message.amount = amount
@@ -96,7 +98,7 @@ public class BinanceMessage {
     public static func createHtlc(toAddress: String, otherFrom: String, otherTo: String,
                                    timestamp: Int64, randomNumberHash: String, sendAmount: Int64, sendDenom: String,
                                    expectedIncom: String, heightSpan: Int64, crossChain: Bool, memo: String,
-                                   privateKey: PrivateKey, signerAddress: String, sequence: Int, accountNumber: Int, chainId: String) -> BinanceMessage {
+                                   privateKey: Data, signerAddress: String, sequence: Int, accountNumber: Int, chainId: String) -> BinanceMessage {
         let message = BinanceMessage(type: .createHtlc, privateKey, signerAddress, sequence, accountNumber, chainId)
         message.toAddress = toAddress
         message.senderOtherChain = otherFrom
@@ -117,7 +119,7 @@ public class BinanceMessage {
     }
     
     public static func claimHtlc(randomNumber: String, swapId: String, memo: String,
-                                 privateKey: PrivateKey, signerAddress: String, sequence: Int, accountNumber: Int, chainId: String) -> BinanceMessage {
+                                 privateKey: Data, signerAddress: String, sequence: Int, accountNumber: Int, chainId: String) -> BinanceMessage {
         let message = BinanceMessage(type: .claimHtlc, privateKey, signerAddress, sequence, accountNumber, chainId)
         message.randomNumber = randomNumber
         message.swapID = swapId
@@ -126,7 +128,7 @@ public class BinanceMessage {
     }
     
     public static func refundHtlc(swapId: String, memo: String,
-                                  privateKey: PrivateKey, signerAddress: String, sequence: Int, accountNumber: Int, chainId: String) -> BinanceMessage {
+                                  privateKey: Data, signerAddress: String, sequence: Int, accountNumber: Int, chainId: String) -> BinanceMessage {
         let message = BinanceMessage(type: .refundHtlc, privateKey, signerAddress, sequence, accountNumber, chainId)
         message.swapID = swapId
         message.memo = memo
@@ -237,7 +239,7 @@ public class BinanceMessage {
     private func signature() -> Data {
         let json = self.json(for: .signature)
         let data = Data(json.utf8)
-        return self.sign(self.key.raw, data)
+        return self.sign(self.key, data)
     }
     
     private func json(for type: MessageType) -> String {

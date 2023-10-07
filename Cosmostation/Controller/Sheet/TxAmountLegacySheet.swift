@@ -1,15 +1,16 @@
 //
-//  TxAmountSheet.swift
+//  TxAmountLegacySheet.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2023/09/30.
+//  Created by yongjoo jung on 2023/10/07.
 //  Copyright © 2023 wannabit. All rights reserved.
 //
 
 import UIKit
 import MaterialComponents
+import SwiftyJSON
 
-class TxAmountSheet: BaseVC, UITextFieldDelegate {
+class TxAmountLegacySheet: BaseVC, UITextFieldDelegate {
     
     @IBOutlet weak var amountTitle: UILabel!
     @IBOutlet weak var availableTitle: UILabel!
@@ -19,20 +20,15 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var invalidMsgLabel: UILabel!
     @IBOutlet weak var confirmBtn: BaseButton!
     
-    
-    var sheetType: AmountSheetType?
-    var sheetDelegate: AmountSheetDelegate?
+    var sheetDelegate: LegacyAmountSheetDelegate?
     var selectedChain: CosmosClass!
-    var msAsset: MintscanAsset?
-    var msToken: MintscanToken?
     var transferAssetType: TransferAssetType?
+    var tokenInfo: JSON!
     var availableAmount: NSDecimalNumber!
     var existedAmount: NSDecimalNumber?
     
     
     var decimal: Int16!
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +39,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
         amountTextField.setup()
         amountTextField.keyboardType = .decimalPad
         if let existedAmount = existedAmount {
-            amountTextField.text = existedAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal)).stringValue
+            amountTextField.text = existedAmount.stringValue
         }
         amountTextField.delegate = self
         amountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -57,47 +53,16 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
     }
     
     func onUpdateView() {
-        if (sheetType == .TxTransfer) {
-            amountTextField.label.text = NSLocalizedString("str_send_amount", comment: "")
-            availableTitle.text = NSLocalizedString("str_max_availabe", comment: "")
-            if (transferAssetType == .CoinTransfer) {
-                if let msAsset = msAsset {
-                    decimal = msAsset.decimals!
-                    WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
-                }
-                
-            } else {
-                if let msToken = msToken {
-                    decimal = msToken.decimals!
-                    WDP.dpToken(msToken, nil, availableDenom, availableLabel, decimal)
-                }
-            }
+        if (selectedChain is ChainBinanceBeacon) {
+            decimal = 8
+            availableDenom.text = tokenInfo["original_symbol"].stringValue.uppercased()
+            availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 8)
             
-        } else if (sheetType == .TxDelegate) {
-            amountTextField.label.text = NSLocalizedString("str_delegate_amount", comment: "")
-            availableTitle.text = NSLocalizedString("str_max_delegable", comment: "")
-            if let msAsset = msAsset {
-                decimal = msAsset.decimals!
-                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
-            }
-            
-        } else if (sheetType == .TxUndelegate) {
-            amountTextField.label.text = NSLocalizedString("str_undelegate_amount", comment: "")
-            availableTitle.text = NSLocalizedString("str_max_undelegable", comment: "")
-            if let msAsset = msAsset {
-                decimal = msAsset.decimals!
-                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
-            }
-            
-        } else if (sheetType == .TxRedelegate) {
-            amountTextField.label.text = NSLocalizedString("str_redelegate_amount", comment: "")
-            availableTitle.text = NSLocalizedString("str_max_redelegable", comment: "")
-            if let msAsset = msAsset {
-                decimal = msAsset.decimals!
-                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
-            }
+        }  else if (selectedChain is ChainOkt60Keccak) {
+            decimal = 18
+            availableDenom.text = tokenInfo["original_symbol"].stringValue.uppercased()
+            availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 18)
         }
-        
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -127,9 +92,8 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
                 invalidMsgLabel.isHidden = false
                 return
             }
-            let inputAmount = userInput.multiplying(byPowerOf10: decimal)
-            if (inputAmount != NSDecimalNumber.zero &&
-                (availableAmount.compare(inputAmount).rawValue >= 0)) {
+            if (userInput != NSDecimalNumber.zero &&
+                (availableAmount.compare(userInput).rawValue >= 0)) {
                 confirmBtn.isEnabled = true
                 invalidMsgLabel.isHidden = true
             } else {
@@ -140,19 +104,19 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
     }
     
     @IBAction func onClickQuarter(_ sender: UIButton) {
-        let quarterAmount = availableAmount.multiplying(by: NSDecimalNumber(0.25)).multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+        let quarterAmount = availableAmount.multiplying(by: NSDecimalNumber(0.25), withBehavior: getDivideHandler(decimal))
         amountTextField.text = quarterAmount.stringValue
         onUpdateAmountView()
     }
     
     @IBAction func onClickHalf(_ sender: UIButton) {
-        let halfAmount = availableAmount.dividing(by: NSDecimalNumber(2)).multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+        let halfAmount = availableAmount.dividing(by: NSDecimalNumber(2), withBehavior: getDivideHandler(decimal))
         amountTextField.text = halfAmount.stringValue
         onUpdateAmountView()
     }
     
     @IBAction func onClickMax(_ sender: UIButton) {
-        let maxAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+        let maxAmount = availableAmount.dividing(by: NSDecimalNumber(1), withBehavior: getDivideHandler(decimal))
         amountTextField.text = maxAmount.stringValue
         onUpdateAmountView()
     }
@@ -160,7 +124,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         if let text = amountTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             .replacingOccurrences(of: ",", with: ".")  {
-            let userInput = NSDecimalNumber(string: text).multiplying(byPowerOf10: decimal)
+            let userInput = NSDecimalNumber(string: text)
             sheetDelegate?.onInputedAmount(userInput.stringValue)
             dismiss(animated: true)
         }
@@ -171,16 +135,6 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
     }
 }
 
-
-
-
-protocol AmountSheetDelegate {
+protocol LegacyAmountSheetDelegate {
     func onInputedAmount(_ amount: String)
-}
-
-public enum AmountSheetType: Int {
-    case TxTransfer = 0
-    case TxDelegate = 1
-    case TxUndelegate = 2
-    case TxRedelegate = 3
 }

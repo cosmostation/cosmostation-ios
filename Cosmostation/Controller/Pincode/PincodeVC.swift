@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 import Toast
 import CryptoSwift
 import SwiftKeychainWrapper

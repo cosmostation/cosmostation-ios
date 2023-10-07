@@ -9,11 +9,8 @@
 import UIKit
 import Lottie
 import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
-import web3swift
-import BigInt
+import Alamofire
+import AlamofireImage
 
 class LegacyTransfer: BaseVC {
     
@@ -39,14 +36,12 @@ class LegacyTransfer: BaseVC {
     @IBOutlet weak var memoTitle: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
     
-    @IBOutlet weak var feeSelectView: DropDownView!
     @IBOutlet weak var feeSelectImg: UIImageView!
     @IBOutlet weak var feeSelectLabel: UILabel!
     @IBOutlet weak var feeAmountLabel: UILabel!
     @IBOutlet weak var feeDenomLabel: UILabel!
     @IBOutlet weak var feeCurrencyLabel: UILabel!
     @IBOutlet weak var feeValueLabel: UILabel!
-    @IBOutlet weak var feeSegments: UISegmentedControl!
     
     @IBOutlet weak var sendBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
@@ -56,11 +51,30 @@ class LegacyTransfer: BaseVC {
     var selectedChain: CosmosClass!
     
     var toSendDenom: String!
+    
+    var stakeDenom: String!
+    
+    
+    var availableAmount = NSDecimalNumber.zero
+    var toSendAmount = NSDecimalNumber.zero
+    var recipientAddress: String?
+    var txMemo = ""
+    
+    var tokenInfo: JSON!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        print("selectedChain ", selectedChain.tag)
+        print("lcdAccountInfo ", selectedChain.lcdAccountInfo)
+        
+        print("toSendDenom ", toSendDenom)
+        
+        print("chainId ", selectedChain.chainId)
+        
         baseAccount = BaseData.instance.baseAccount
+        
+        stakeDenom = selectedChain.stakeDenom
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -68,6 +82,43 @@ class LegacyTransfer: BaseVC {
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
         loadingView.play()
+        
+        //display to send asset info
+        if (selectedChain is ChainBinanceBeacon) {
+            tokenInfo = selectedChain.lcdBeaconTokens.filter({ $0["symbol"].string == toSendDenom }).first!
+            let original_symbol = tokenInfo["original_symbol"].stringValue
+            toSendAssetImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(original_symbol))
+            toSendSymbolLabel.text = original_symbol.uppercased()
+            
+            let available = selectedChain.lcdBalanceAmount(toSendDenom)
+            if (toSendDenom == stakeDenom) {
+                availableAmount = available.subtracting(NSDecimalNumber(string: BNB_BEACON_BASE_FEE))
+            } else {
+                availableAmount = available
+            }
+            print("availableAmount ", availableAmount)
+            
+        } else if (selectedChain is ChainOkt60Keccak) {
+            tokenInfo = selectedChain.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
+            let original_symbol = tokenInfo["original_symbol"].stringValue
+            toSendAssetImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(original_symbol))
+            toSendSymbolLabel.text = original_symbol.uppercased()
+            
+            let available = selectedChain.lcdBalanceAmount(toSendDenom)
+            if (toSendDenom == stakeDenom) {
+                availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
+            } else {
+                availableAmount = available
+            }
+            print("availableAmount ", availableAmount)
+            
+        }
+        
+        toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
+        toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
+        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
+        
+        onUpdateFeeView()
     }
     
     override func setLocalizedString() {
@@ -80,27 +131,245 @@ class LegacyTransfer: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let gap = UIScreen.main.bounds.size.height - 640
+        let gap = UIScreen.main.bounds.size.height - 600
         if (gap > 0) { midGapConstraint.constant = gap }
         else { midGapConstraint.constant = 60 }
     }
     
     @IBAction func onClickScan(_ sender: UIButton) {
-//        let qrScanVC = QrScanVC(nibName: "QrScanVC", bundle: nil)
-//        qrScanVC.scanDelegate = self
-//        present(qrScanVC, animated: true)
+        let qrScanVC = QrScanVC(nibName: "QrScanVC", bundle: nil)
+        qrScanVC.scanDelegate = self
+        present(qrScanVC, animated: true)
+    }
+    
+    @objc func onClickAmount() {
+        let amountSheet = TxAmountLegacySheet(nibName: "TxAmountLegacySheet", bundle: nil)
+        amountSheet.selectedChain = selectedChain
+        amountSheet.tokenInfo = tokenInfo
+        amountSheet.availableAmount = availableAmount
+        if (toSendAmount != NSDecimalNumber.zero) {
+            amountSheet.existedAmount = toSendAmount
+        }
+        amountSheet.sheetDelegate = self
+        self.onStartSheet(amountSheet)
+    }
+    
+    func onUpdateAmountView(_ amount: String?) {
+        toSendAssetHint.isHidden = false
+        toAssetAmountLabel.isHidden = true
+        toAssetDenomLabel.isHidden = true
+        toAssetCurrencyLabel.isHidden = true
+        toAssetValueLabel.isHidden = true
+        
+        if (amount?.isEmpty == true) {
+            toSendAmount = NSDecimalNumber.zero
+            
+        } else {
+            toSendAmount = NSDecimalNumber(string: amount)
+            
+            if (selectedChain is ChainBinanceBeacon) {
+                toAssetDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
+                toAssetAmountLabel?.attributedText = WDP.dpAmount(toSendAmount.stringValue, toAssetAmountLabel!.font, 8)
+                toSendAssetHint.isHidden = true
+                toAssetAmountLabel.isHidden = false
+                toAssetDenomLabel.isHidden = false
+                
+                if (toSendDenom == stakeDenom) {
+                    let msPrice = BaseData.instance.getPrice(BNB_GECKO_ID)
+                    let toSendValue = msPrice.multiplying(by: toSendAmount, withBehavior: handler6)
+                    WDP.dpValue(toSendValue, toAssetCurrencyLabel, toAssetValueLabel)
+                    toAssetCurrencyLabel.isHidden = false
+                    toAssetValueLabel.isHidden = false
+                }
+                
+            } else if (selectedChain is ChainOkt60Keccak) {
+                toAssetDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
+                toAssetAmountLabel?.attributedText = WDP.dpAmount(toSendAmount.stringValue, toAssetAmountLabel!.font, 18)
+                toSendAssetHint.isHidden = true
+                toAssetAmountLabel.isHidden = false
+                toAssetDenomLabel.isHidden = false
+                
+                if (toSendDenom == stakeDenom) {
+                    let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
+                    let toSendValue = msPrice.multiplying(by: toSendAmount, withBehavior: handler6)
+                    WDP.dpValue(toSendValue, toAssetCurrencyLabel, toAssetValueLabel)
+                    toAssetCurrencyLabel.isHidden = false
+                    toAssetValueLabel.isHidden = false
+                }
+            }
+        }
+        onValidate()
     }
     
     
-    @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
-//        selectedFeeInfo = sender.selectedSegmentIndex
-//        txFee = selectedChain.getBaseFee(selectedFeeInfo, txFee.amount[0].denom)
-//        onUpdateFeeView()
-//        onSimul()
+    @objc func onClickToAddress() {
+        let addressSheet = TxAddressSheet(nibName: "TxAddressSheet", bundle: nil)
+        addressSheet.selectedChain = selectedChain
+        if (recipientAddress?.isEmpty == false) {
+            addressSheet.existedAddress = recipientAddress
+        }
+        addressSheet.recipientChain = selectedChain
+        addressSheet.addressDelegate = self
+        self.onStartSheet(addressSheet)
+    }
+    
+    func onUpdateToAddressView() {
+        if (recipientAddress == nil ||
+            recipientAddress?.isEmpty == true) {
+            toAddressHint.isHidden = false
+            toAddressLabel.isHidden = true
+            
+        } else {
+            toAddressHint.isHidden = true
+            toAddressLabel.isHidden = false
+            toAddressLabel.text = recipientAddress
+            toAddressLabel.adjustsFontSizeToFitWidth = true
+        }
+        onValidate()
+    }
+    
+    @objc func onClickMemo() {
+        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
+        memoSheet.existedMemo = txMemo
+        memoSheet.memoDelegate = self
+        self.onStartSheet(memoSheet)
+    }
+    
+    func onUpdateMemoView(_ memo: String) {
+        txMemo = memo
+        if (txMemo.isEmpty) {
+            memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+            memoLabel.textColor = .color03
+            return
+        }
+        memoLabel.text = txMemo
+        memoLabel.textColor = .color01
+    }
+    
+    func onUpdateFeeView() {
+        if (selectedChain is ChainBinanceBeacon) {
+            feeSelectImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(stakeDenom))
+            feeSelectLabel.text = stakeDenom.uppercased()
+            
+            let msPrice = BaseData.instance.getPrice(BNB_GECKO_ID)
+            let feeAmount = NSDecimalNumber(string: BNB_BEACON_BASE_FEE)
+            let feeValue = msPrice.multiplying(by: feeAmount, withBehavior: handler6)
+            feeAmountLabel?.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 8)
+            feeDenomLabel.text = stakeDenom.uppercased()
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            
+        } else if (selectedChain is ChainOkt60Keccak) {
+            feeSelectImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(stakeDenom))
+            feeSelectLabel.text = stakeDenom.uppercased()
+            
+            let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
+            let feeAmount = NSDecimalNumber(string: OKT_BASE_FEE)
+            let feeValue = msPrice.multiplying(by: feeAmount, withBehavior: handler6)
+            feeAmountLabel?.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 18)
+            feeDenomLabel.text = stakeDenom.uppercased()
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+        }
     }
     
     @IBAction func onClickSend(_ sender: BaseButton) {
-//        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
-//        self.present(pinVC, animated: true)
+        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+        self.present(pinVC, animated: true)
+    }
+    
+    func onValidate() {
+        sendBtn.isEnabled = false
+        if (toSendAmount == NSDecimalNumber.zero ) { return }
+        if (recipientAddress == nil || recipientAddress?.isEmpty == true) { return }
+        if (txMemo.count > 300) { return }
+        sendBtn.isEnabled = true
+    }
+}
+
+
+extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelegate , QrScanDelegate, PinDelegate {
+    
+    func onInputedAmount(_ amount: String) {
+        onUpdateAmountView(amount)
+    }
+    
+    func onInputedAddress(_ address: String) {
+        recipientAddress = address
+        onUpdateToAddressView()
+    }
+    
+    func onInputedMemo(_ memo: String) {
+        onUpdateMemoView(memo)
+    }
+    
+    func onScanned(_ result: String) {
+        let scanedString = result.components(separatedBy: "(MEMO)")
+        if (scanedString[0].isEmpty == true || scanedString[0].count < 5) {
+            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+            return;
+        }
+        if (scanedString[0] == selectedChain.address) {
+            self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
+            return;
+        }
+        
+        if (WUtils.isValidChainAddress(selectedChain, scanedString[0])) {
+            recipientAddress = scanedString[0]
+            if (scanedString.count > 1) {
+                onUpdateMemoView(scanedString[1])
+            }
+            onUpdateToAddressView()
+            
+        } else {
+            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+        }
+    }
+    
+    func pinResponse(_ request: LockType, _ result: UnLockResult) {
+        if (result == .success) {
+            view.isUserInteractionEnabled = false
+            sendBtn.isEnabled = false
+            loadingView.isHidden = false
+            
+            if (selectedChain is ChainBinanceBeacon) {
+                Task {
+                    if let response = try? await broadcastBnbSendTx() {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                            self.loadingView.isHidden = true
+                            
+                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                            txResult.selectedChain = self.selectedChain
+                            txResult.bnbBeaconResult = response?.arrayValue[0]
+                            txResult.modalPresentationStyle = .fullScreen
+                            self.present(txResult, animated: true)
+                            
+                        });
+                    }
+                }
+                
+            } else if (selectedChain is ChainOkt60Keccak) {
+                
+            }
+        }
+    }
+}
+
+extension LegacyTransfer {
+    
+    func broadcastBnbSendTx() async throws -> JSON? {
+        let bnbMsg = BinanceMessage.transfer(symbol: self.toSendDenom,
+                                             amount: (self.toSendAmount).doubleValue,
+                                             toAddress: self.recipientAddress!,
+                                             memo: self.txMemo,
+                                             privateKey: self.selectedChain.privateKey!,
+                                             signerAddress: self.selectedChain.address!,
+                                             sequence: self.selectedChain.lcdAccountInfo["sequence"].intValue,
+                                             accountNumber: self.selectedChain.lcdAccountInfo["account_number"].intValue,
+                                             chainId: self.selectedChain.chainId)
+        
+        var encoding: ParameterEncoding = URLEncoding.default
+        encoding = HexEncoding(data: try bnbMsg.encode())
+        let param: Parameters = ["address": self.selectedChain.address!]
+        
+        return try? await AF.request(BaseNetWork.broadcastUrl(self.selectedChain), method: .post, parameters: param, encoding: encoding, headers: [:]).serializingDecodable(JSON.self).value
     }
 }

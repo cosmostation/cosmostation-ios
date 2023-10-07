@@ -71,7 +71,7 @@ class CosmosClass: BaseChain  {
                 }
             }
         }
-        if (self is ChainBinanceBeacon || self is ChainOkt996Keccak ) {
+        if (self is ChainBinanceBeacon || self is ChainOkt60Keccak ) {
             fetchLcdData(id)
         } else {
             fetchGrpcData(id)
@@ -610,7 +610,7 @@ extension CosmosClass {
         if (self is ChainBinanceBeacon) {
             return lcdBalanceValue(stakeDenom, usd)
             
-        } else if (self is ChainOkt996Keccak) {
+        } else if (self is ChainOkt60Keccak) {
             return lcdBalanceValue(stakeDenom, usd).adding(lcdOktDepositValue(usd) ).adding(lcdOktWithdrawValue(usd))
             
         } else {
@@ -645,7 +645,7 @@ extension CosmosClass {
             fetchBeaconTokens(group)
             fetchBeaconMiniTokens(group)
             
-        } else if (self is ChainOkt996Keccak) {
+        } else if (self is ChainOkt60Keccak) {
             fetchNodeInfo(group)
             fetchAccountInfo(group, address!)
             fetchOktDeposited(group, address!)
@@ -662,14 +662,14 @@ extension CosmosClass {
                 BaseData.instance.updateRefAddressesMain(
                     RefAddress(id, self.tag, self.address!,
                                self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                               nil, self.lcdAccountInfo["balances"].array?.count))
+                               nil, self.lcdAccountInfo.bnbCoins?.count))
                 
-            } else if (self is ChainOkt996Keccak) {
+            } else if (self is ChainOkt60Keccak) {
                 let refAddress =
                 BaseData.instance.updateRefAddressesMain(
                     RefAddress(id, self.tag, self.address!,
                                self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                               nil, self.lcdAccountInfo["value","coins"].array?.count))
+                               nil, self.lcdAccountInfo.oktCoins?.count))
             }
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }
@@ -800,12 +800,12 @@ extension CosmosClass {
     
     func lcdBalanceAmount(_ denom: String) -> NSDecimalNumber {
         if (self is ChainBinanceBeacon) {
-            if let balance = lcdAccountInfo["balances"].array?.filter({ $0["symbol"].string == denom }).first {
+            if let balance = lcdAccountInfo.bnbCoins?.filter({ $0["symbol"].string == denom }).first {
                 return NSDecimalNumber.init(string: balance["free"].string ?? "0")
             }
             
-        } else if (self is ChainOkt996Keccak) {
-            if let balance = lcdAccountInfo["value","coins"].array?.filter({ $0["denom"].string == denom }).first {
+        } else if (self is ChainOkt60Keccak) {
+            if let balance = lcdAccountInfo.oktCoins?.filter({ $0["denom"].string == denom }).first {
                 return NSDecimalNumber.init(string: balance["amount"].string ?? "0")
             }
             
@@ -820,7 +820,7 @@ extension CosmosClass {
             var msPrice = NSDecimalNumber.zero
             if (self is ChainBinanceBeacon) {
                 msPrice = BaseData.instance.getPrice(BNB_GECKO_ID, usd)
-            } else if (self is ChainOkt996Keccak) {
+            } else if (self is ChainOkt60Keccak) {
                 msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
             }
             return msPrice.multiplying(by: amount, withBehavior: handler6)
@@ -938,8 +938,9 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainOkt996Keccak())
     
     result.forEach { chain in
-        let chainId = BaseData.instance.mintscanChains?["chains"].arrayValue.filter({ $0["chain"].stringValue == chain.apiName }).first?["chain_id"].stringValue
-        chain.chainId = chainId
+        if let chainId = BaseData.instance.mintscanChains?["chains"].arrayValue.filter({ $0["chain"].stringValue == chain.apiName }).first?["chain_id"].stringValue {
+            chain.chainId = chainId
+        }
     }
     return result
 }

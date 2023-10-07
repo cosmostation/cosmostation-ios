@@ -51,7 +51,7 @@ class CosmosCoinVC: BaseVC {
     func onSortAssets() {
         Task {
             if (selectedChain is ChainBinanceBeacon) {
-                selectedChain.lcdAccountInfo["balances"].array?.forEach { balance in
+                selectedChain.lcdAccountInfo.bnbCoins?.forEach { balance in
                     lcdBalances.append(balance)
                 }
                 if (lcdBalances.filter { $0["symbol"].string == selectedChain.stakeDenom }.first == nil) {
@@ -63,8 +63,8 @@ class CosmosCoinVC: BaseVC {
                     return false
                 }
                 
-            } else if (selectedChain is ChainOkt996Keccak) {
-                selectedChain.lcdAccountInfo["value","coins"].array?.forEach { balance in
+            } else if (selectedChain is ChainOkt60Keccak) {
+                selectedChain.lcdAccountInfo.oktCoins?.forEach { balance in
                     lcdBalances.append(balance)
                 }
                 if (lcdBalances.filter { $0["denom"].string == selectedChain.stakeDenom }.first == nil) {
@@ -121,7 +121,7 @@ class CosmosCoinVC: BaseVC {
 extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt60Keccak) {
             return 1
         } else {
             return 3
@@ -130,7 +130,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt60Keccak) {
             view.titleLabel.text = "Native Coins"
             view.cntLabel.text = String(lcdBalances.count)
             
@@ -152,7 +152,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt60Keccak) {
             return 40
             
         } else {
@@ -168,7 +168,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt60Keccak) {
             return lcdBalances.count
             
         } else {
@@ -193,7 +193,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
             if (selectedChain is ChainBinanceBeacon) {
                 cell.bindBeaconAsset(selectedChain, lcdBalances[indexPath.row])
-            } else if (selectedChain is ChainOkt996Keccak) {
+            } else if (selectedChain is ChainOkt60Keccak) {
                 cell.bindOktAsset(selectedChain, lcdBalances[indexPath.row])
             } else {
                 cell.bindCosmosClassAsset(selectedChain, getCoinBySection(indexPath)!)
@@ -203,6 +203,28 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (selectedChain is ChainBinanceBeacon) {
+            if (indexPath.section == 0 && indexPath.row != 0) {
+                let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
+                transfer.selectedChain = selectedChain
+                transfer.toSendDenom = lcdBalances[indexPath.row]["symbol"].stringValue
+                transfer.modalTransitionStyle = .coverVertical
+                self.present(transfer, animated: true)
+            }
+            return
+            
+        } else if (selectedChain is ChainOkt60Keccak) {
+            if (indexPath.section == 0 && indexPath.row != 0) {
+                let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
+                transfer.selectedChain = selectedChain
+                transfer.toSendDenom = lcdBalances[indexPath.row]["denom"].stringValue
+                transfer.modalTransitionStyle = .coverVertical
+                self.present(transfer, animated: true)
+            }
+            return
+            
+        }
+        
         if (indexPath.section == 1) {
 //            return ibcCoins[indexPath.row]
             let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
@@ -255,4 +277,25 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
         mask.locations = [NSNumber(value: location), NSNumber(value: location)]
         return mask;
     }
+}
+
+
+
+extension JSON {
+    var bnbCoins: [JSON]? {
+        return self["balances"].array
+    }
+    
+    func bnbCoin(_ position: Int) -> JSON? {
+        return bnbCoins?[position]
+    }
+    
+    var oktCoins: [JSON]? {
+        return self["value","coins"].array
+    }
+    
+    func oktCoin(_ position: Int) -> JSON? {
+        return oktCoins?[position]
+    }
+    
 }

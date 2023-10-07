@@ -78,7 +78,7 @@ class CosmosClassVC: BaseVC {
     
     func onSendTx() {
         if (selectedChain is ChainBinanceBeacon ||
-            selectedChain is ChainOkt996Keccak) {
+            selectedChain is ChainOkt60Keccak) {
             let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
             transfer.selectedChain = selectedChain
             transfer.toSendDenom = selectedChain.stakeDenom

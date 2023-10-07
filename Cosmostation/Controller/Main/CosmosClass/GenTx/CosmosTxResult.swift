@@ -31,6 +31,8 @@ class CosmosTxResult: BaseVC {
     var txResponse: Cosmos_Tx_V1beta1_GetTxResponse?
     var fetchCnt = 10
     
+    var bnbBeaconResult: JSON!
+    
     var evmHash: String?
     var evmRecipient: TransactionReceipt?
 
@@ -47,14 +49,40 @@ class CosmosTxResult: BaseVC {
         loadingView.play()
         
         if (resultType == .Cosmos) {
-            guard (broadcastTxResponse?.txhash) != nil else {
-                loadingView.isHidden = true
-                failView.isHidden = false
-                failMsgLabel.text = broadcastTxResponse?.rawLog
-                confirmBtn.isEnabled = true
-                return
+            if (selectedChain is ChainBinanceBeacon) {
+                guard bnbBeaconResult != nil else {
+                    loadingView.isHidden = true
+                    failView.isHidden = false
+                    confirmBtn.isEnabled = true
+                    return
+                }
+                
+                if (bnbBeaconResult["code"].intValue != 0) {
+                    loadingView.isHidden = true
+                    failView.isHidden = false
+                    failMsgLabel.text = bnbBeaconResult?["log"].stringValue
+                    confirmBtn.isEnabled = true
+                    return
+                    
+                } else {
+                    loadingView.isHidden = true
+                    confirmBtn.isEnabled = true
+                    successView.isHidden = false
+                }
+                
+            } else if (selectedChain is ChainOkt60Keccak) {
+                
+                
+            } else {
+                guard (broadcastTxResponse?.txhash) != nil else {
+                    loadingView.isHidden = true
+                    failView.isHidden = false
+                    failMsgLabel.text = broadcastTxResponse?.rawLog
+                    confirmBtn.isEnabled = true
+                    return
+                }
+                fetchTx()
             }
-            fetchTx()
             
         } else {
             guard evmHash != nil else {
@@ -171,8 +199,16 @@ class CosmosTxResult: BaseVC {
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
         if (self.resultType == .Cosmos) {
-            guard let url = BaseNetWork.getTxDetailUrl(selectedChain, broadcastTxResponse!.txhash) else { return }
-            self.onShowSafariWeb(url)
+            if (selectedChain is ChainBinanceBeacon) {
+                guard let url = BaseNetWork.getTxDetailUrl(selectedChain, bnbBeaconResult!["hash"].stringValue) else { return }
+                self.onShowSafariWeb(url)
+                
+            } else if (selectedChain is ChainOkt60Keccak) {
+                
+            } else {
+                guard let url = BaseNetWork.getTxDetailUrl(selectedChain, broadcastTxResponse!.txhash) else { return }
+                self.onShowSafariWeb(url)
+            }
         } else {
             guard let url = BaseNetWork.getTxDetailUrl(selectedChain, evmHash!) else { return }
             self.onShowSafariWeb(url)

@@ -52,7 +52,7 @@ class AssetCosmosClassCell: UITableViewCell {
         if (baseChain is ChainBinanceBeacon) {
             bindBeaconAsset(baseChain)
             
-        } else if (baseChain is ChainOkt996Keccak) {
+        } else if (baseChain is ChainOkt60Keccak) {
             bindOktAsset(baseChain)
             
         } else {
