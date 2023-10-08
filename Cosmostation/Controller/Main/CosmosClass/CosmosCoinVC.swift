@@ -62,13 +62,15 @@ class CosmosCoinVC: BaseVC {
     } 
     
     @objc func onFetchDone(_ notification: NSNotification) {
-        refresher.endRefreshing()
         let tag = notification.object as! String
-        nativeCoins.removeAll()
-        ibcCoins.removeAll()
-        bridgedCoins.removeAll()
-        lcdBalances.removeAll()
-        onSortAssets()
+        if (selectedChain.tag == tag) {
+            refresher.endRefreshing()
+            nativeCoins.removeAll()
+            ibcCoins.removeAll()
+            bridgedCoins.removeAll()
+            lcdBalances.removeAll()
+            onSortAssets()
+        }
     }
     
     @objc func onRequestFetch() {
@@ -146,6 +148,46 @@ class CosmosCoinVC: BaseVC {
             }
             tableView.reloadData()
         }
+    }
+    
+    func onBepSelectDialog(_ denom: String) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("bep3_tranfser", comment: ""), style: UIAlertAction.Style.default, handler: { _ in
+            self.onStartBep3TransferVC(denom)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("simple_tranfser", comment: ""), style: UIAlertAction.Style.default, handler: { _ in
+            if (self.selectedChain is ChainBinanceBeacon) {
+                self.onStartLegacyTransferVC(denom)
+            } else {
+                self.onStartTransferVC(denom)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func onStartBep3TransferVC(_ denom: String) {
+        let transfer = Bep3Transfer(nibName: "Bep3Transfer", bundle: nil)
+        transfer.fromChain = selectedChain
+        transfer.toSendDenom = denom
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+    }
+    
+    func onStartTransferVC(_ denom: String) {
+        let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
+        transfer.selectedChain = selectedChain
+        transfer.toSendDenom = denom
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+    }
+    
+    func onStartLegacyTransferVC(_ denom: String) {
+        let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
+        transfer.selectedChain = selectedChain
+        transfer.toSendDenom = denom
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
     }
 
 }
@@ -237,43 +279,41 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (selectedChain is ChainBinanceBeacon) {
-            if (indexPath.section == 0 && indexPath.row != 0) {
-                let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
-                transfer.selectedChain = selectedChain
-                transfer.toSendDenom = lcdBalances[indexPath.row]["symbol"].stringValue
-                transfer.modalTransitionStyle = .coverVertical
-                self.present(transfer, animated: true)
+            let sendDenom = lcdBalances[indexPath.row]["symbol"].stringValue
+            if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
+                onBepSelectDialog(sendDenom)
+            } else{
+                onStartLegacyTransferVC(lcdBalances[indexPath.row]["symbol"].stringValue)
             }
             return
             
         } else if (selectedChain is ChainOkt60Keccak) {
-            if (indexPath.section == 0 && indexPath.row != 0) {
-                let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
-                transfer.selectedChain = selectedChain
-                transfer.toSendDenom = lcdBalances[indexPath.row]["denom"].stringValue
-                transfer.modalTransitionStyle = .coverVertical
-                self.present(transfer, animated: true)
+            onStartLegacyTransferVC(lcdBalances[indexPath.row]["symbol"].stringValue)
+            return
+            
+        } else if (selectedChain is ChainKava60) {
+            if (indexPath.section == 0) {
+                onStartTransferVC(selectedChain.stakeDenom)
+            } else if (indexPath.section == 1) {
+                onStartTransferVC(ibcCoins[indexPath.row].denom)
+            } else if (indexPath.section == 2) {
+                let sendDenom = bridgedCoins[indexPath.row].denom
+                if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
+                    onBepSelectDialog(sendDenom)
+                } else{
+                    onStartTransferVC(sendDenom)
+                }
             }
             return
             
-        }
-        
-        if (indexPath.section == 1) {
-//            return ibcCoins[indexPath.row]
-            let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
-            transfer.selectedChain = selectedChain
-            transfer.toSendDenom = ibcCoins[indexPath.row].denom
-            transfer.modalTransitionStyle = .coverVertical
-            self.present(transfer, animated: true)
-            
-        } else if (indexPath.section == 2) {
-//            return bridgedCoins[indexPath.row]
-            let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
-            transfer.selectedChain = selectedChain
-            transfer.toSendDenom = bridgedCoins[indexPath.row].denom
-            transfer.modalTransitionStyle = .coverVertical
-            self.present(transfer, animated: true)
-            
+        } else {
+            if (indexPath.section == 0) {
+                onStartTransferVC(selectedChain.stakeDenom)
+            } else if (indexPath.section == 1) {
+                onStartTransferVC(ibcCoins[indexPath.row].denom)
+            } else if (indexPath.section == 2) {
+                onStartTransferVC(bridgedCoins[indexPath.row].denom)
+            }
         }
     }
     

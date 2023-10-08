@@ -60,6 +60,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SelectValidatorCell", bundle: nil), forCellReuseIdentifier: "SelectValidatorCell")
         sheetTableView.register(UINib(nibName: "SelectNameServiceCell", bundle: nil), forCellReuseIdentifier: "SelectNameServiceCell")
         sheetTableView.register(UINib(nibName: "SelectRefAddressCell", bundle: nil), forCellReuseIdentifier: "SelectRefAddressCell")
+        sheetTableView.register(UINib(nibName: "SelectBepRecipientCell", bundle: nil), forCellReuseIdentifier: "SelectBepRecipientCell")
         sheetTableView.sectionHeaderTopPadding = 0
         
         
@@ -157,6 +158,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectNameServiceAddress) {
             sheetTitle.text = String(format: NSLocalizedString("title_select_nameservice", comment: ""), nameservices[0].name ?? "")
             
+        } else if (sheetType == .SelectBepRecipientAddress) {
+            sheetTitle.text = NSLocalizedString("str_recipient_address", comment: "")
         }
         
     }
@@ -288,6 +291,8 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectNameServiceAddress) {
             return nameservices.count
             
+        } else if (sheetType == .SelectBepRecipientAddress) {
+            return cosmosChainList.count
         }
         return 0
     }
@@ -379,6 +384,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindNameservice(nameservices[indexPath.row])
             return cell!
             
+        } else if (sheetType == .SelectBepRecipientAddress) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectBepRecipientCell") as? SelectBepRecipientCell
+            cell?.onBindBepRecipient(cosmosChainList[indexPath.row])
+            return cell!
         }
         return UITableViewCell()
     }
@@ -414,6 +423,28 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectRecipientAddress) {
             let result = BaseSheetResult.init(indexPath.row, refAddresses[indexPath.row].dpAddress)
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if (sheetType == .SelectBepRecipientAddress) {
+            print("SelectBepRecipientAddress ", indexPath.row)
+            let chain = cosmosChainList[indexPath.row]
+            if (chain is ChainBinanceBeacon) {
+                let availableAmount = chain.lcdBalanceAmount(chain.stakeDenom)
+                let fee = NSDecimalNumber(string: BNB_BEACON_BASE_FEE)
+                if (availableAmount.compare(fee).rawValue < 0) {
+                    onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                    dismiss(animated: true)
+                }
+                
+            } else {
+                let availableAmount = chain.balanceAmount(chain.stakeDenom)
+                let fee = NSDecimalNumber(string: KAVA_BASE_FEE)
+                if (availableAmount.compare(fee).rawValue < 0) {
+                    onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                    dismiss(animated: true)
+                }
+            }
+            let result = BaseSheetResult.init(indexPath.row, chain.address)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else {
@@ -463,4 +494,5 @@ public enum SheetType: Int {
     case SelectRecipientChain = 16
     case SelectRecipientAddress = 17
     case SelectNameServiceAddress = 18
+    case SelectBepRecipientAddress = 19
 }

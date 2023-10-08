@@ -47,15 +47,9 @@ class LegacyTransfer: BaseVC {
     @IBOutlet weak var sendBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    
-    
     var selectedChain: CosmosClass!
-    
     var toSendDenom: String!
-    
     var stakeDenom: String!
-    
-    
     var availableAmount = NSDecimalNumber.zero
     var toSendAmount = NSDecimalNumber.zero
     var recipientAddress: String?

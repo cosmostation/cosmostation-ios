@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,15 +26,15 @@
                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bET-Il-OK9" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="8" y="4" width="456" height="237.33333333333331"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Kc-td-ZgN">
-                                <rect key="frame" x="16" y="14" width="40" height="40"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="3Kc-td-ZgN">
+                                <rect key="frame" x="16" y="14" width="36" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="lti-GW-v2E"/>
-                                    <constraint firstAttribute="height" constant="40" id="ucF-kk-ShO"/>
+                                    <constraint firstAttribute="width" constant="36" id="lti-GW-v2E"/>
+                                    <constraint firstAttribute="height" constant="36" id="ucF-kk-ShO"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symbol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRz-KV-t60">
-                                <rect key="frame" x="68" y="18" width="52.666666666666657" height="14"/>
+                                <rect key="frame" x="64" y="18" width="52.666666666666657" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="yhz-e4-ven"/>
                                 </constraints>
@@ -43,7 +43,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Iq-uR-UZX">
-                                <rect key="frame" x="68" y="41" width="6.3333333333333286" height="10"/>
+                                <rect key="frame" x="64" y="41" width="6.3333333333333286" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="JDd-sY-lGl"/>
                                 </constraints>
@@ -52,7 +52,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBh-eE-Suk">
-                                <rect key="frame" x="75.333333333333329" y="39" width="25" height="12"/>
+                                <rect key="frame" x="71.333333333333329" y="39" width="25" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="dV6-Ub-Vyu"/>
                                 </constraints>
@@ -61,7 +61,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XzW-fd-XKQ">
-                                <rect key="frame" x="104.33333333333333" y="39" width="31.999999999999986" height="12"/>
+                                <rect key="frame" x="100.33333333333333" y="39" width="31.999999999999986" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="OVN-n8-OQm"/>
                                 </constraints>
@@ -70,7 +70,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hx9-FM-kgM">
-                                <rect key="frame" x="137.33333333333334" y="41" width="9" height="10"/>
+                                <rect key="frame" x="133.33333333333334" y="41" width="9" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="pdY-6v-zGc"/>
                                 </constraints>
@@ -106,7 +106,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXx-If-eqS">
-                                <rect key="frame" x="14" y="66" width="428" height="0.6666666666666714"/>
+                                <rect key="frame" x="14" y="62" width="428" height="0.6666666666666643"/>
                                 <color key="backgroundColor" name="_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="Lcg-a2-dEd"/>
@@ -313,6 +313,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="tokenDefault" width="22" height="22"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -320,7 +321,7 @@
             <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_divider">
-            <color red="0.99999600649999998" green="1" blue="1" alpha="0.20232305463576158" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="0.20200000703334808" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_voteYes">
             <color red="0.030999999493360519" green="0.81999999284744263" blue="0.32199999690055847" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

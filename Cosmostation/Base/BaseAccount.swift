@@ -120,6 +120,39 @@ public class BaseAccount {
         }
     }
     
+    func fetchTargetCosmosChains(_ targetChains: [CosmosClass]) {
+        let keychain = BaseData.instance.getKeyChain()
+        if (type == .withMnemonic) {
+            if let secureData = try? keychain.getString(uuid.sha1()),
+               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
+                targetChains.forEach { chain in
+                    Task {
+                        if (chain.address == nil) {
+                            chain.setInfoWithSeed(seed, lastHDPath)
+                        }
+                        if (chain.fetched == false) {
+                            chain.fetchData(id)
+                        }
+                    }
+                }
+            }
+            
+        } else if (type == .onlyPrivateKey) {
+            if let secureKey = try? keychain.getString(uuid.sha1()) {
+                targetChains.forEach { chain in
+                    Task {
+                        if (chain.address == nil) {
+                            chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                        }
+                        if (chain.fetched == false) {
+                            chain.fetchData(id)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     func updateAllValue() {
         getDisplayCosmosChains().forEach { chain in
             chain.allCoinValue = chain.allCoinValue()

@@ -8,22 +8,28 @@
 
 import Foundation
 
-class ChainKava118: CosmosClass  {
+class ChainKava118: ChainKava60  {
     
     override init() {
         super.init()
         
         isDefault = false
-        name = "Kava"
         tag = "kava118"
-        logo1 = "chainKava"
-        logo2 = "chainKava2"
-        apiName = "kava"
-        stakeDenom = "ukava"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         accountPrefix = "kava"
-        
-        grpcHost = "grpc-kava.cosmostation.io"
+        evmCompatible = false
+    }
+    
+    override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
+        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
+    }
+    
+    override func setInfoWithPrivateKey(_ priKey: Data) {
+        privateKey = priKey
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
     }
 }

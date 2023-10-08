@@ -41,3 +41,6 @@ class ChainKava60: CosmosClass  {
         address = KeyFac.convertEvmToBech32(evmAddress!, accountPrefix!)
     }
 }
+
+let KAVA_LCD = "https://lcd-kava.cosmostation.io/"
+let KAVA_BASE_FEE = "12500"

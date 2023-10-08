@@ -27,14 +27,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="352" height="68"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="91v-bp-tFE">
-                                <rect key="frame" x="16" y="14" width="40" height="40"/>
+                                <rect key="frame" x="20" y="18" width="32" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="s7f-AS-rl8"/>
-                                    <constraint firstAttribute="width" constant="40" id="z7r-EU-3DT"/>
+                                    <constraint firstAttribute="height" constant="32" id="s7f-AS-rl8"/>
+                                    <constraint firstAttribute="width" constant="32" id="z7r-EU-3DT"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symbol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1J-rU-Uri">
-                                <rect key="frame" x="68" y="25.333333333333329" width="52.666666666666657" height="17.666666666666671"/>
+                                <rect key="frame" x="64" y="25.333333333333329" width="52.666666666666657" height="17.666666666666671"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
@@ -83,7 +83,7 @@
                             <constraint firstItem="bXy-iJ-dza" firstAttribute="leading" secondItem="cua-SJ-dFe" secondAttribute="trailing" constant="1" id="JPb-qE-jGM"/>
                             <constraint firstItem="bXy-iJ-dza" firstAttribute="top" secondItem="hcY-hD-n6V" secondAttribute="bottom" constant="6" id="Nil-Lv-VT8"/>
                             <constraint firstItem="bXy-iJ-dza" firstAttribute="firstBaseline" secondItem="cua-SJ-dFe" secondAttribute="firstBaseline" id="QDB-41-oNS"/>
-                            <constraint firstItem="91v-bp-tFE" firstAttribute="leading" secondItem="cK2-qH-ugJ" secondAttribute="leading" constant="16" id="V2p-8n-Bq0"/>
+                            <constraint firstItem="91v-bp-tFE" firstAttribute="leading" secondItem="cK2-qH-ugJ" secondAttribute="leading" constant="20" id="V2p-8n-Bq0"/>
                             <constraint firstAttribute="bottom" secondItem="UUG-kk-dbP" secondAttribute="bottom" id="YYq-qq-J7R"/>
                             <constraint firstAttribute="height" constant="68" id="bta-Te-B5s"/>
                             <constraint firstAttribute="trailing" secondItem="UUG-kk-dbP" secondAttribute="trailing" constant="12" id="n1j-aj-gqo"/>

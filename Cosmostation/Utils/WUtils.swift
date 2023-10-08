@@ -14,6 +14,39 @@ import SwiftProtobuf
 
 public class WUtils {
     
+    static func getHtlcSwappableCoin(_ chain: BaseChain) -> Array<String> {
+        var result = Array<String>()
+        if (chain is ChainBinanceBeacon) {
+            result.append(TOKEN_HTLC_BINANCE_BNB)
+            result.append(TOKEN_HTLC_BINANCE_BTCB)
+            result.append(TOKEN_HTLC_BINANCE_XRPB)
+            result.append(TOKEN_HTLC_BINANCE_BUSD)
+            
+        } else if (chain is ChainKava60) {
+            result.append(TOKEN_HTLC_KAVA_BNB)
+            result.append(TOKEN_HTLC_KAVA_BTCB)
+            result.append(TOKEN_HTLC_KAVA_XRPB)
+            result.append(TOKEN_HTLC_KAVA_BUSD)
+            
+        }
+        return result
+    }
+    
+    static func isHtlcSwappableCoin(_ chain: BaseChain, _ denom: String?) -> Bool {
+        if (chain is ChainBinanceBeacon) {
+            if (denom == TOKEN_HTLC_BINANCE_BNB) { return true }
+            if (denom == TOKEN_HTLC_BINANCE_BTCB) { return true }
+            if (denom == TOKEN_HTLC_BINANCE_XRPB) { return true }
+            if (denom == TOKEN_HTLC_BINANCE_BUSD) { return true }
+        }  else if (chain is ChainKava60) {
+            if (denom == TOKEN_HTLC_KAVA_BNB) { return true }
+            if (denom == TOKEN_HTLC_KAVA_BTCB) { return true }
+            if (denom == TOKEN_HTLC_KAVA_XRPB) { return true }
+            if (denom == TOKEN_HTLC_KAVA_BUSD) { return true }
+        }
+        return false
+    }
+    
 //    static func getAccountWithBnbAccountInfo(_ account: Account, _ accountInfo: BnbAccountInfo) -> Account {
 //        let result = account
 //        result.account_address = accountInfo.address

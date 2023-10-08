@@ -182,7 +182,7 @@ class WKey {
 //    static func getRandomNumnerHash(_ randomNumner: String, _ timeStamp: Int64) -> String {
 //        let timeStampData = withUnsafeBytes(of: timeStamp.bigEndian) { Data($0) }
 //        let originHex = randomNumner + timeStampData.hexEncodedString()
-//        let hash = Data.fromHex2(originHex)!.sha256()
+//        let hash = HDWalletKit.Data.fromHex(originHex)!.sha256()
 //        return hash.hexEncodedString()
 //    }
 //    

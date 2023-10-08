@@ -202,4 +202,14 @@ extension BaseNetWork {
         }
         return ""
     }
+    
+    
+    static func swapIdBep3Url(_ toChain: BaseChain, _ id: String) -> String {
+        if (toChain is ChainBinanceBeacon) {
+            return BNB_BEACON_LCD + "api/v1/atomic-swaps/" + id
+        } else if (toChain is ChainKava60) {
+            return KAVA_LCD + "kava/bep3/v1beta1/atomicswap/" + id
+        }
+        return ""
+    }
 }
