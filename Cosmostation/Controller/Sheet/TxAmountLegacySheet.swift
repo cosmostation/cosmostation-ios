@@ -50,6 +50,8 @@ class TxAmountLegacySheet: BaseVC, UITextFieldDelegate {
     override func setLocalizedString() {
         amountTitle.text = NSLocalizedString("str_insert_amount", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
+        amountTextField.label.text = NSLocalizedString("str_send_amount", comment: "")
+        availableTitle.text = NSLocalizedString("str_max_availabe", comment: "")
     }
     
     func onUpdateView() {

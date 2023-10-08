@@ -13,6 +13,7 @@ import SwiftyJSON
 import GRPC
 import NIO
 import SwiftProtobuf
+import web3swift
 
 class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDelegate, BaseSheetDelegate {
     
@@ -111,6 +112,14 @@ class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDel
             if (userInput == selectedChain.rewardAddress) {
                 self.onShowToast(NSLocalizedString("error_same_reward_address", comment: ""))
                 return;
+            }
+        }
+            
+        if (recipientChain is ChainOkt60Keccak) {
+            if let evmAddess = EthereumAddress.init(userInput!) {
+                addressDelegate?.onInputedAddress(userInput!)
+                dismiss(animated: true)
+                return
             }
         }
         

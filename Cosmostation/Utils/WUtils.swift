@@ -162,37 +162,16 @@ public class WUtils {
 //        }
 //    }
 //
-//    static func getFormattedNumber(_ amount: NSDecimalNumber, _ dpPoint:Int16) -> String {
-//        let nf = NumberFormatter()
-//        nf.minimumFractionDigits = Int(dpPoint)
-//        nf.locale = Locale(identifier: "en_US")
-//        nf.numberStyle = .decimal
-//
-//        let formatted = nf.string(from: amount)?.replacingOccurrences(of: ",", with: "" )
-//        return formatted!
-//    }
-//
-//    static func tokenCnt(_ chainType: ChainType?) -> String {
-//        if (isGRPC(chainType)) {
-//            return String(BaseData.instance.mMyBalances_gRPC.count)
-//        } else {
-//            return String(BaseData.instance.mBalances.count)
-//        }
-//    }
-//
-//    static func getGeckoId(_ chainConfig: ChainConfig?) -> String {
-//        guard let chainConfig = chainConfig else { return "" }
-//        if let msAsset = BaseData.instance.getMSAsset(chainConfig, chainConfig.stakeDenom) {
-//            return msAsset.coinGeckoId
-//        }
-//        if (chainConfig.chainType == .BINANCE_MAIN) {
-//            return BNB_GECKO_ID
-//
-//        } else if (chainConfig.chainType == .OKEX_MAIN) {
-//            return OKT_GECKO_ID
-//        }
-//        return ""
-//    }
+    //for okt ("0.1"  -> "0.10000000000000000")
+    static func getFormattedNumber(_ amount: NSDecimalNumber, _ dpPoint:Int16) -> String {
+        let nf = NumberFormatter()
+        nf.minimumFractionDigits = Int(dpPoint)
+        nf.locale = Locale(identifier: "en_US")
+        nf.numberStyle = .decimal
+
+        let formatted = nf.string(from: amount)?.replacingOccurrences(of: ",", with: "" )
+        return formatted!
+    }
     
     
     static func assetValue(_ geckoId: String?, _ amount: String?, _ decimals: Int16) -> NSDecimalNumber {

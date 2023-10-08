@@ -58,6 +58,9 @@ class QrAddressVC: BaseVC {
             chainLogo?.addToCenter(of: rqImgView)
         }
         
+        print("address ", selectedChain.address)
+        print("address ", selectedChain.evmAddress)
+        
         let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyAddress))
         copyTap.cancelsTouchesInView = false
         addressCardView.addGestureRecognizer(copyTap)

@@ -701,6 +701,10 @@
 		04CD24542AD1621800497EF5 /* TxAmountLegacySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD24512AD1621800497EF5 /* TxAmountLegacySheet.swift */; };
 		04CD24552AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CD24522AD1621800497EF5 /* TxAmountLegacySheet.xib */; };
 		04CD24562AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CD24522AD1621800497EF5 /* TxAmountLegacySheet.xib */; };
+		04CD245C2AD1CB4300497EF5 /* L_Tx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD245B2AD1CB4300497EF5 /* L_Tx.swift */; };
+		04CD245D2AD1CB4300497EF5 /* L_Tx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD245B2AD1CB4300497EF5 /* L_Tx.swift */; };
+		04CD245F2AD1CD2F00497EF5 /* L_Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD245E2AD1CD2F00497EF5 /* L_Generator.swift */; };
+		04CD24602AD1CD2F00497EF5 /* L_Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD245E2AD1CD2F00497EF5 /* L_Generator.swift */; };
 		04CFF02F2AC502BC00FB3187 /* ChainCrescent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF02E2AC502BC00FB3187 /* ChainCrescent.swift */; };
 		04CFF0302AC502BC00FB3187 /* ChainCrescent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF02E2AC502BC00FB3187 /* ChainCrescent.swift */; };
 		04CFF0332AC58D4400FB3187 /* SelectFeeCoinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF0312AC58D4400FB3187 /* SelectFeeCoinCell.swift */; };
@@ -1805,6 +1809,8 @@
 		04CD244E2AD1279900497EF5 /* ChainOkt60Keccak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOkt60Keccak.swift; sourceTree = "<group>"; };
 		04CD24512AD1621800497EF5 /* TxAmountLegacySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAmountLegacySheet.swift; sourceTree = "<group>"; };
 		04CD24522AD1621800497EF5 /* TxAmountLegacySheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxAmountLegacySheet.xib; sourceTree = "<group>"; };
+		04CD245B2AD1CB4300497EF5 /* L_Tx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_Tx.swift; sourceTree = "<group>"; };
+		04CD245E2AD1CD2F00497EF5 /* L_Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_Generator.swift; sourceTree = "<group>"; };
 		04CFF02E2AC502BC00FB3187 /* ChainCrescent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCrescent.swift; sourceTree = "<group>"; };
 		04CFF0312AC58D4400FB3187 /* SelectFeeCoinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFeeCoinCell.swift; sourceTree = "<group>"; };
 		04CFF0322AC58D4400FB3187 /* SelectFeeCoinCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectFeeCoinCell.xib; sourceTree = "<group>"; };
@@ -2569,9 +2575,19 @@
 			path = CosmosClass;
 			sourceTree = "<group>";
 		};
+		04CD24572AD1C98900497EF5 /* LModel */ = {
+			isa = PBXGroup;
+			children = (
+				04CD245B2AD1CB4300497EF5 /* L_Tx.swift */,
+				04CD245E2AD1CD2F00497EF5 /* L_Generator.swift */,
+			);
+			path = LModel;
+			sourceTree = "<group>";
+		};
 		04D279DE2A66D24600AF046A /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
+				04CD24572AD1C98900497EF5 /* LModel */,
 				048DBCE1280EC5E90007275E /* MWords.swift */,
 				E1A82DD0224220910097CAEE /* Account.swift */,
 			);
@@ -4004,6 +4020,7 @@
 				E122DC102A8A468E006D1E7B /* cosmos_feegrant_v1beta1_feegrant.pb.swift in Sources */,
 				04D279FA2A69159E00AF046A /* BaseChain.swift in Sources */,
 				E122DBAC2A8A468D006D1E7B /* cosmos_orm_query_v1alpha1_query.pb.swift in Sources */,
+				04CD245D2AD1CB4300497EF5 /* L_Tx.swift in Sources */,
 				04B789702ACAC9B100E9BE88 /* ibc_applications_transfer_v1_tx.pb.swift in Sources */,
 				E122DC1C2A8A468E006D1E7B /* cosmos_crypto_keyring_v1_record.pb.swift in Sources */,
 				047843062AC9918700462F1C /* ethermint_types_v1_dynamic_fee.pb.swift in Sources */,
@@ -4262,6 +4279,7 @@
 				E122DAF22A8A468D006D1E7B /* cosmos_app_v1alpha1_config.pb.swift in Sources */,
 				046EA8D82AD04A2600A2FCE7 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */,
 				04B789622ACAC9B100E9BE88 /* ibc_core_connection_v1_tx.grpc.swift in Sources */,
+				04CD24602AD1CD2F00497EF5 /* L_Generator.swift in Sources */,
 				0478437E2AC991B300462F1C /* injective_peggy_v1_query.grpc.swift in Sources */,
 				04CB91192A90C30A00375354 /* CosmosClass.swift in Sources */,
 				0402B81F2ACC7A4800824B3F /* ChainNoble.swift in Sources */,
@@ -4627,6 +4645,7 @@
 				E122DBAB2A8A468D006D1E7B /* cosmos_orm_query_v1alpha1_query.pb.swift in Sources */,
 				E122DC1B2A8A468E006D1E7B /* cosmos_crypto_keyring_v1_record.pb.swift in Sources */,
 				E11069B62AA4C57600EB02CA /* cosmwasm_wasm_v1_proposal.pb.swift in Sources */,
+				04CD245C2AD1CB4300497EF5 /* L_Tx.swift in Sources */,
 				04B7896F2ACAC9B100E9BE88 /* ibc_applications_transfer_v1_tx.pb.swift in Sources */,
 				04D279DC2A66863C00AF046A /* BaseAccount.swift in Sources */,
 				047843052AC9918700462F1C /* ethermint_types_v1_dynamic_fee.pb.swift in Sources */,
@@ -4885,6 +4904,7 @@
 				E122DAF12A8A468D006D1E7B /* cosmos_app_v1alpha1_config.pb.swift in Sources */,
 				046EA8D72AD04A2600A2FCE7 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */,
 				04B789612ACAC9B100E9BE88 /* ibc_core_connection_v1_tx.grpc.swift in Sources */,
+				04CD245F2AD1CD2F00497EF5 /* L_Generator.swift in Sources */,
 				0478437D2AC991B300462F1C /* injective_peggy_v1_query.grpc.swift in Sources */,
 				04CB91182A90C30A00375354 /* CosmosClass.swift in Sources */,
 				0402B81E2ACC7A4800824B3F /* ChainNoble.swift in Sources */,

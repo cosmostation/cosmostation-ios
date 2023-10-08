@@ -44,7 +44,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXO-X3-3JZ">
-                                <rect key="frame" x="0.0" y="67.666666666666671" width="461" height="0.3333333333333286"/>
+                                <rect key="frame" x="12" y="67.666666666666671" width="437" height="0.3333333333333286"/>
                                 <color key="backgroundColor" name="_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="UyD-Lt-hl8"/>
@@ -55,10 +55,10 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="68" id="0rw-5C-CNa"/>
                             <constraint firstAttribute="bottom" secondItem="cXO-X3-3JZ" secondAttribute="bottom" id="HBx-Mf-SD0"/>
-                            <constraint firstItem="cXO-X3-3JZ" firstAttribute="leading" secondItem="1SP-6V-hBJ" secondAttribute="leading" id="O4a-W0-cVl"/>
+                            <constraint firstItem="cXO-X3-3JZ" firstAttribute="leading" secondItem="1SP-6V-hBJ" secondAttribute="leading" constant="12" id="O4a-W0-cVl"/>
                             <constraint firstItem="ar1-2F-hDG" firstAttribute="leading" secondItem="1SP-6V-hBJ" secondAttribute="leading" constant="20.000000000000007" id="amS-Dg-u0l"/>
                             <constraint firstItem="ar1-2F-hDG" firstAttribute="centerY" secondItem="1SP-6V-hBJ" secondAttribute="centerY" id="aru-CK-0pm"/>
-                            <constraint firstAttribute="trailing" secondItem="cXO-X3-3JZ" secondAttribute="trailing" id="rN0-Fk-Psv"/>
+                            <constraint firstAttribute="trailing" secondItem="cXO-X3-3JZ" secondAttribute="trailing" constant="12" id="rN0-Fk-Psv"/>
                         </constraints>
                     </view>
                 </subviews>

@@ -34,7 +34,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6T-Wd-Q5b">
-                    <rect key="frame" x="0.0" y="139.33333333333334" width="393" height="0.66666666666665719"/>
+                    <rect key="frame" x="12" y="139.33333333333334" width="369" height="0.66666666666665719"/>
                     <color key="backgroundColor" name="_divider"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.80000000000000004" id="K1e-c9-jcx"/>
@@ -62,13 +62,13 @@
                 <constraint firstItem="O6T-Wd-Q5b" firstAttribute="top" secondItem="fQz-pl-DzJ" secondAttribute="bottom" constant="24" id="3A3-y1-ijT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="y3H-2O-YKP" secondAttribute="trailing" id="H5B-W7-DJI"/>
                 <constraint firstAttribute="bottom" secondItem="y3H-2O-YKP" secondAttribute="bottom" id="It2-8q-kwj"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="O6T-Wd-Q5b" secondAttribute="trailing" id="ShF-fI-uEM"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="O6T-Wd-Q5b" secondAttribute="trailing" constant="12" id="ShF-fI-uEM"/>
                 <constraint firstItem="XSr-gA-zxD" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.45" id="UJZ-nb-oWD"/>
                 <constraint firstItem="y3H-2O-YKP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VqD-RM-Zhg"/>
                 <constraint firstItem="XSr-gA-zxD" firstAttribute="centerY" secondItem="fQz-pl-DzJ" secondAttribute="centerY" id="Zb4-Bf-LSx"/>
                 <constraint firstItem="y3H-2O-YKP" firstAttribute="top" secondItem="O6T-Wd-Q5b" secondAttribute="bottom" id="c80-fa-xcu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XSr-gA-zxD" secondAttribute="trailing" constant="4" id="cBA-jF-fRz"/>
-                <constraint firstItem="O6T-Wd-Q5b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fbg-WD-fKn"/>
+                <constraint firstItem="O6T-Wd-Q5b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="fbg-WD-fKn"/>
                 <constraint firstItem="fQz-pl-DzJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="lfK-98-Ddr"/>
                 <constraint firstItem="fQz-pl-DzJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="waU-4s-JD9"/>
             </constraints>

@@ -40,7 +40,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hi-8A-LBO">
-                                <rect key="frame" x="0.0" y="67.666666666666671" width="479" height="0.3333333333333286"/>
+                                <rect key="frame" x="12" y="67.666666666666671" width="455" height="0.3333333333333286"/>
                                 <color key="backgroundColor" name="_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="XF5-Bu-Uqu"/>
@@ -50,9 +50,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="68" id="3d7-XG-dw2"/>
-                            <constraint firstItem="0hi-8A-LBO" firstAttribute="leading" secondItem="XLI-1B-3fF" secondAttribute="leading" id="6XJ-HZ-XcE"/>
+                            <constraint firstItem="0hi-8A-LBO" firstAttribute="leading" secondItem="XLI-1B-3fF" secondAttribute="leading" constant="12" id="6XJ-HZ-XcE"/>
                             <constraint firstItem="jME-JU-dSO" firstAttribute="centerY" secondItem="XLI-1B-3fF" secondAttribute="centerY" id="D2Q-jH-hCE"/>
-                            <constraint firstAttribute="trailing" secondItem="0hi-8A-LBO" secondAttribute="trailing" id="EOB-CB-ABb"/>
+                            <constraint firstAttribute="trailing" secondItem="0hi-8A-LBO" secondAttribute="trailing" constant="12" id="EOB-CB-ABb"/>
                             <constraint firstAttribute="trailing" secondItem="jME-JU-dSO" secondAttribute="trailing" constant="16" id="UrV-iw-tl6"/>
                             <constraint firstItem="ylT-zJ-P2D" firstAttribute="centerY" secondItem="XLI-1B-3fF" secondAttribute="centerY" id="Zox-qf-Txe"/>
                             <constraint firstAttribute="bottom" secondItem="0hi-8A-LBO" secondAttribute="bottom" id="c1H-5H-rxW"/>

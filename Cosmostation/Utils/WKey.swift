@@ -14,10 +14,6 @@ import web3swift
 
 class WKey {
     
-    public static func getbnbPkey(_ data: Data) -> PrivateKey{
-        return PrivateKey.init(pk: data.hexEncodedString(), coin: .bitcoin)!
-    }
-    
 //
 //    static func getSeedFromWords(_ words: MWords) -> Data? {
 //        return BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)

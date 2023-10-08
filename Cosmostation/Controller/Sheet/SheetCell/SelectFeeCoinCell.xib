@@ -67,7 +67,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iaJ-zp-PEf">
-                                <rect key="frame" x="0.0" y="67.333333333333329" width="342" height="0.6666666666666714"/>
+                                <rect key="frame" x="12" y="67.333333333333329" width="318" height="0.6666666666666714"/>
                                 <color key="backgroundColor" name="_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.80000000000000004" id="a97-tg-8qT"/>
@@ -79,10 +79,10 @@
                             <constraint firstItem="bRo-Lz-mHb" firstAttribute="firstBaseline" secondItem="NMi-Br-qb2" secondAttribute="firstBaseline" id="4WH-dY-lYt"/>
                             <constraint firstItem="bRo-Lz-mHb" firstAttribute="leading" secondItem="NMi-Br-qb2" secondAttribute="trailing" constant="1" id="89k-iV-afr"/>
                             <constraint firstItem="ALV-Vy-jzi" firstAttribute="top" secondItem="CTc-1l-5E4" secondAttribute="top" constant="17" id="FCp-QY-dLM"/>
-                            <constraint firstAttribute="trailing" secondItem="iaJ-zp-PEf" secondAttribute="trailing" id="T11-7o-cwk"/>
+                            <constraint firstAttribute="trailing" secondItem="iaJ-zp-PEf" secondAttribute="trailing" constant="12" id="T11-7o-cwk"/>
                             <constraint firstItem="Aai-a1-fkF" firstAttribute="centerY" secondItem="CTc-1l-5E4" secondAttribute="centerY" id="TXE-Sr-ce5"/>
                             <constraint firstAttribute="height" constant="68" id="WuR-Fe-ZOB"/>
-                            <constraint firstItem="iaJ-zp-PEf" firstAttribute="leading" secondItem="CTc-1l-5E4" secondAttribute="leading" id="Yog-1V-JFU"/>
+                            <constraint firstItem="iaJ-zp-PEf" firstAttribute="leading" secondItem="CTc-1l-5E4" secondAttribute="leading" constant="12" id="Yog-1V-JFU"/>
                             <constraint firstAttribute="trailing" secondItem="bRo-Lz-mHb" secondAttribute="trailing" constant="14" id="c1p-UO-Tcj"/>
                             <constraint firstItem="07y-m4-n1V" firstAttribute="leading" secondItem="Aai-a1-fkF" secondAttribute="trailing" constant="12" id="dPf-rd-aUY"/>
                             <constraint firstItem="07y-m4-n1V" firstAttribute="centerY" secondItem="Aai-a1-fkF" secondAttribute="centerY" id="j3A-w7-kbr"/>

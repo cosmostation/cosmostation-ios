@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twU-Qp-AUC">
-                                <rect key="frame" x="0.0" y="67.333333333333329" width="436" height="0.6666666666666714"/>
+                                <rect key="frame" x="12" y="67.333333333333329" width="412" height="0.6666666666666714"/>
                                 <color key="backgroundColor" name="_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.80000000000000004" id="UGI-Eu-8h8"/>
@@ -51,10 +51,10 @@
                         <constraints>
                             <constraint firstItem="tEu-zy-dIU" firstAttribute="centerY" secondItem="7qq-NQ-L0T" secondAttribute="centerY" id="00X-5L-gVZ"/>
                             <constraint firstItem="tEu-zy-dIU" firstAttribute="leading" secondItem="7qq-NQ-L0T" secondAttribute="leading" constant="12" id="Pre-6A-s2n"/>
-                            <constraint firstItem="twU-Qp-AUC" firstAttribute="leading" secondItem="7qq-NQ-L0T" secondAttribute="leading" id="TEb-xp-KXv"/>
+                            <constraint firstItem="twU-Qp-AUC" firstAttribute="leading" secondItem="7qq-NQ-L0T" secondAttribute="leading" constant="12" id="TEb-xp-KXv"/>
                             <constraint firstAttribute="bottom" secondItem="twU-Qp-AUC" secondAttribute="bottom" id="drz-kO-Fhq"/>
                             <constraint firstItem="dbq-mK-EMK" firstAttribute="leading" secondItem="tEu-zy-dIU" secondAttribute="trailing" constant="12" id="o0a-YS-raF"/>
-                            <constraint firstAttribute="trailing" secondItem="twU-Qp-AUC" secondAttribute="trailing" id="xsZ-VM-1ec"/>
+                            <constraint firstAttribute="trailing" secondItem="twU-Qp-AUC" secondAttribute="trailing" constant="12" id="xsZ-VM-1ec"/>
                             <constraint firstAttribute="height" constant="68" id="y5O-nO-NNT"/>
                             <constraint firstItem="dbq-mK-EMK" firstAttribute="centerY" secondItem="tEu-zy-dIU" secondAttribute="centerY" id="yva-BX-uzK"/>
                         </constraints>

@@ -21,6 +21,7 @@
                 <outlet property="failMsgLabel" destination="0TC-1f-UpP" id="BOL-XJ-bJi"/>
                 <outlet property="failView" destination="Ble-IY-3WY" id="jfx-hN-onM"/>
                 <outlet property="loadingView" destination="hj0-ZK-Txi" id="MeG-nN-Wab"/>
+                <outlet property="successMintscanBtn" destination="ZNx-u3-W4Y" id="6rK-UE-RCK"/>
                 <outlet property="successMsgLabel" destination="iIh-lD-3P3" id="nlg-uW-CG3"/>
                 <outlet property="successView" destination="Lra-5A-Ue7" id="nDf-s4-lLn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

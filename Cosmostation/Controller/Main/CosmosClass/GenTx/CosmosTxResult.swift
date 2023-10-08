@@ -18,6 +18,7 @@ class CosmosTxResult: BaseVC {
     
     @IBOutlet weak var successView: UIView!
     @IBOutlet weak var successMsgLabel: UILabel!
+    @IBOutlet weak var successMintscanBtn: UIButton!
     @IBOutlet weak var failView: UIView!
     @IBOutlet weak var failMsgLabel: UILabel!
     @IBOutlet weak var failMintscanBtn: UIButton!
@@ -31,7 +32,7 @@ class CosmosTxResult: BaseVC {
     var txResponse: Cosmos_Tx_V1beta1_GetTxResponse?
     var fetchCnt = 10
     
-    var bnbBeaconResult: JSON!
+    var legacyResult: JSON!
     
     var evmHash: String?
     var evmRecipient: TransactionReceipt?
@@ -50,17 +51,19 @@ class CosmosTxResult: BaseVC {
         
         if (resultType == .Cosmos) {
             if (selectedChain is ChainBinanceBeacon) {
-                guard bnbBeaconResult != nil else {
+                successMintscanBtn.setTitle("View Explorer", for: .normal)
+                failMintscanBtn.setTitle("View Explorer", for: .normal)
+                guard legacyResult != nil else {
                     loadingView.isHidden = true
                     failView.isHidden = false
                     confirmBtn.isEnabled = true
                     return
                 }
                 
-                if (bnbBeaconResult["code"].intValue != 0) {
+                if (legacyResult["code"].intValue != 0) {
                     loadingView.isHidden = true
                     failView.isHidden = false
-                    failMsgLabel.text = bnbBeaconResult?["log"].stringValue
+                    failMsgLabel.text = legacyResult?["log"].stringValue
                     confirmBtn.isEnabled = true
                     return
                     
@@ -71,6 +74,26 @@ class CosmosTxResult: BaseVC {
                 }
                 
             } else if (selectedChain is ChainOkt60Keccak) {
+                successMintscanBtn.setTitle("View Explorer", for: .normal)
+                failMintscanBtn.setTitle("View Explorer", for: .normal)
+                guard legacyResult != nil else {
+                    loadingView.isHidden = true
+                    failView.isHidden = false
+                    confirmBtn.isEnabled = true
+                    return
+                }
+                
+                if (legacyResult["code"].int != nil) {
+                    loadingView.isHidden = true
+                    failView.isHidden = false
+                    failMsgLabel.text = legacyResult?["raw_log"].stringValue
+                    confirmBtn.isEnabled = true
+                    
+                } else {
+                    loadingView.isHidden = true
+                    confirmBtn.isEnabled = true
+                    successView.isHidden = false
+                }
                 
                 
             } else {
@@ -200,10 +223,12 @@ class CosmosTxResult: BaseVC {
     @IBAction func onClickExplorer(_ sender: UIButton) {
         if (self.resultType == .Cosmos) {
             if (selectedChain is ChainBinanceBeacon) {
-                guard let url = BaseNetWork.getTxDetailUrl(selectedChain, bnbBeaconResult!["hash"].stringValue) else { return }
+                guard let url = BaseNetWork.getTxDetailUrl(selectedChain, legacyResult!["hash"].stringValue) else { return }
                 self.onShowSafariWeb(url)
                 
             } else if (selectedChain is ChainOkt60Keccak) {
+                guard let url = BaseNetWork.getTxDetailUrl(selectedChain, legacyResult!["txhash"].stringValue) else { return }
+                self.onShowSafariWeb(url)
                 
             } else {
                 guard let url = BaseNetWork.getTxDetailUrl(selectedChain, broadcastTxResponse!.txhash) else { return }

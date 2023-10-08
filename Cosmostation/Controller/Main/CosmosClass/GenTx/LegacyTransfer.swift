@@ -11,6 +11,7 @@ import Lottie
 import SwiftyJSON
 import Alamofire
 import AlamofireImage
+import web3swift
 
 class LegacyTransfer: BaseVC {
     
@@ -65,15 +66,7 @@ class LegacyTransfer: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        print("selectedChain ", selectedChain.tag)
-        print("lcdAccountInfo ", selectedChain.lcdAccountInfo)
-        
-        print("toSendDenom ", toSendDenom)
-        
-        print("chainId ", selectedChain.chainId)
-        
         baseAccount = BaseData.instance.baseAccount
-        
         stakeDenom = selectedChain.stakeDenom
         
         loadingView.isHidden = true
@@ -222,9 +215,22 @@ class LegacyTransfer: BaseVC {
         } else {
             toAddressHint.isHidden = true
             toAddressLabel.isHidden = false
-            toAddressLabel.text = recipientAddress
+            if (selectedChain is ChainOkt60Keccak) {
+                if (recipientAddress!.starts(with: "0x")) {
+                    let evmAddess = recipientAddress
+                    recipientAddress = KeyFac.convertEvmToBech32(evmAddess!, "ex")
+                    toAddressLabel.text = recipientAddress! + "\n(" + evmAddess! + ")"
+                    
+                } else {
+                    toAddressLabel.text = recipientAddress
+                }
+                
+            } else {
+                toAddressLabel.text = recipientAddress
+            }
             toAddressLabel.adjustsFontSizeToFitWidth = true
         }
+        
         onValidate()
     }
     
@@ -330,24 +336,37 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
             sendBtn.isEnabled = false
             loadingView.isHidden = false
             
-            if (selectedChain is ChainBinanceBeacon) {
-                Task {
+            Task {
+                if (selectedChain is ChainBinanceBeacon) {
                     if let response = try? await broadcastBnbSendTx() {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+//                            print("response ", response)
                             self.loadingView.isHidden = true
                             
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                             txResult.selectedChain = self.selectedChain
-                            txResult.bnbBeaconResult = response?.arrayValue[0]
+                            txResult.legacyResult = response?.arrayValue[0]
+                            txResult.modalPresentationStyle = .fullScreen
+                            self.present(txResult, animated: true)
+                            
+                        });
+                    }
+                    
+                } else if (selectedChain is ChainOkt60Keccak) {
+                    if let response = try? await broadcastOktSendTx() {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                            print("response ", response)
+                            self.loadingView.isHidden = true
+                            
+                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                            txResult.selectedChain = self.selectedChain
+                            txResult.legacyResult = response
                             txResult.modalPresentationStyle = .fullScreen
                             self.present(txResult, animated: true)
                             
                         });
                     }
                 }
-                
-            } else if (selectedChain is ChainOkt60Keccak) {
-                
             }
         }
     }
@@ -372,4 +391,19 @@ extension LegacyTransfer {
         
         return try? await AF.request(BaseNetWork.broadcastUrl(self.selectedChain), method: .post, parameters: param, encoding: encoding, headers: [:]).serializingDecodable(JSON.self).value
     }
+    
+    
+    func broadcastOktSendTx() async throws -> JSON? {
+        
+        let sendCoin = L_Coin(toSendDenom, WUtils.getFormattedNumber(toSendAmount, 18))
+        let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(NSDecimalNumber(string: OKT_BASE_FEE), 18))
+        let fee = L_Fee(BASE_GAS_AMOUNT, [gasCoin])
+        
+        let okMsg = L_Generator.oktSendMsg(selectedChain.address!, recipientAddress!, [sendCoin])
+        let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
+        let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
+        
+        return try? await AF.request(BaseNetWork.broadcastUrl(self.selectedChain), method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
+    }
+    
 }

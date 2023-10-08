@@ -58,7 +58,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sqq-Ia-4lr">
-                                <rect key="frame" x="0.0" y="67.333333333333329" width="492" height="0.6666666666666714"/>
+                                <rect key="frame" x="12" y="67.333333333333329" width="468" height="0.6666666666666714"/>
                                 <color key="backgroundColor" name="_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.80000000000000004" id="5hu-SX-XxZ"/>
@@ -72,8 +72,8 @@
                             <constraint firstItem="yhV-Bh-6Ry" firstAttribute="leading" secondItem="Z1f-7x-Fdx" secondAttribute="trailing" constant="12" id="ALq-Qz-L2z"/>
                             <constraint firstItem="aSU-qz-oNw" firstAttribute="centerY" secondItem="HmY-5l-a46" secondAttribute="centerY" id="E7V-Hk-1lp"/>
                             <constraint firstItem="yhV-Bh-6Ry" firstAttribute="centerY" secondItem="HmY-5l-a46" secondAttribute="centerY" id="LmJ-bN-3a4"/>
-                            <constraint firstItem="sqq-Ia-4lr" firstAttribute="leading" secondItem="HmY-5l-a46" secondAttribute="leading" id="Vgc-9a-M45"/>
-                            <constraint firstAttribute="trailing" secondItem="sqq-Ia-4lr" secondAttribute="trailing" id="XCK-4x-NAV"/>
+                            <constraint firstItem="sqq-Ia-4lr" firstAttribute="leading" secondItem="HmY-5l-a46" secondAttribute="leading" constant="12" id="Vgc-9a-M45"/>
+                            <constraint firstAttribute="trailing" secondItem="sqq-Ia-4lr" secondAttribute="trailing" constant="12" id="XCK-4x-NAV"/>
                             <constraint firstItem="Z1f-7x-Fdx" firstAttribute="leading" secondItem="HmY-5l-a46" secondAttribute="leading" constant="12" id="egB-dj-SwS"/>
                             <constraint firstAttribute="trailing" secondItem="aSU-qz-oNw" secondAttribute="trailing" constant="16" id="hwh-Wn-uK4"/>
                             <constraint firstItem="Z1f-7x-Fdx" firstAttribute="centerY" secondItem="HmY-5l-a46" secondAttribute="centerY" id="zY8-s0-xnc"/>

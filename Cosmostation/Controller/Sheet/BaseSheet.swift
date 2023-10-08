@@ -210,26 +210,26 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseSheetHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-//        if (sheetType == .SelectRecipientAddress) {
-//            if (section == 0) {
-//                view.titleLabel.text = "My Account"
-//                view.cntLabel.text = String(refAddresses.count)
-//            } else {
-//                view.titleLabel.text = "Address Book"
-//                view.cntLabel.text = String(addressBook.count)
-//            }
-//        }
+        if (sheetType == .SelectRecipientAddress) {
+            if (section == 0) {
+                view.titleLabel.text = "My Account"
+                view.cntLabel.text = String(refAddresses.count)
+            } else {
+                view.titleLabel.text = "Address Book"
+                view.cntLabel.text = String(addressBook.count)
+            }
+        }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if (sheetType == .SelectRecipientAddress) {
-//            if (section == 0) {
-//                return (refAddresses.count > 0) ? 40 : 0
-//            } else if (section == 1) {
-//                return (addressBook.count > 0) ? 40 : 0
-//            }
-//        }
+        if (sheetType == .SelectRecipientAddress) {
+            if (section == 0) {
+                return (refAddresses.count > 0) ? 40 : 0
+            } else if (section == 1) {
+                return (addressBook.count > 0) ? 40 : 0
+            }
+        }
         return 0
     }
     

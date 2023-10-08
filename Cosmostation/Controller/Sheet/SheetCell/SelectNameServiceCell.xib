@@ -34,7 +34,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWi-vz-jyv">
-                                <rect key="frame" x="39.999999999999993" y="11.999999999999998" width="80.333333333333314" height="16.333333333333329"/>
+                                <rect key="frame" x="39.999999999999993" y="12.333333333333332" width="80.333333333333314" height="15.333333333333332"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCW-z1-Wkx">
-                                <rect key="frame" x="0.0" y="67.333333333333329" width="398" height="0.6666666666666714"/>
+                                <rect key="frame" x="12" y="67.333333333333329" width="374" height="0.6666666666666714"/>
                                 <color key="backgroundColor" name="_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.80000000000000004" id="Utj-hz-xSZ"/>
@@ -60,9 +60,9 @@
                             <constraint firstAttribute="trailing" secondItem="G20-gM-cgl" secondAttribute="trailing" constant="12" id="ET2-iT-DKf"/>
                             <constraint firstItem="gWi-vz-jyv" firstAttribute="centerY" secondItem="Ehe-he-YEc" secondAttribute="centerY" id="fHy-ni-X3Q"/>
                             <constraint firstAttribute="bottom" secondItem="aCW-z1-Wkx" secondAttribute="bottom" id="fwX-Kv-qvn"/>
-                            <constraint firstAttribute="trailing" secondItem="aCW-z1-Wkx" secondAttribute="trailing" id="iRL-lP-kDE"/>
+                            <constraint firstAttribute="trailing" secondItem="aCW-z1-Wkx" secondAttribute="trailing" constant="12" id="iRL-lP-kDE"/>
                             <constraint firstAttribute="height" constant="68" id="qWK-DH-Z7L"/>
-                            <constraint firstItem="aCW-z1-Wkx" firstAttribute="leading" secondItem="8IJ-q8-t7I" secondAttribute="leading" id="t3D-he-qK1"/>
+                            <constraint firstItem="aCW-z1-Wkx" firstAttribute="leading" secondItem="8IJ-q8-t7I" secondAttribute="leading" constant="12" id="t3D-he-qK1"/>
                             <constraint firstItem="G20-gM-cgl" firstAttribute="leading" secondItem="8IJ-q8-t7I" secondAttribute="leading" constant="12" id="vsQ-1m-GgW"/>
                             <constraint firstItem="Ehe-he-YEc" firstAttribute="top" secondItem="8IJ-q8-t7I" secondAttribute="top" constant="10" id="wCK-Ei-kaa"/>
                             <constraint firstItem="Ehe-he-YEc" firstAttribute="leading" secondItem="8IJ-q8-t7I" secondAttribute="leading" constant="12" id="xiE-kW-ilg"/>
