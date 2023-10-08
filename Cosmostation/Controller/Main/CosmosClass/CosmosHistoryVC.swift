@@ -15,6 +15,7 @@ class CosmosHistoryVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyDataView: UIView!
     
+    var refresher: UIRefreshControl!
     var parentVC: CosmosClassVC!
     var selectedChain: CosmosClass!
     var msHistoryGroup = Array<MintscanHistoryGroup>()
@@ -34,6 +35,11 @@ class CosmosHistoryVC: BaseVC {
         tableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
+        
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
+        refresher.tintColor = .color01
+        tableView.addSubview(refresher)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,6 +52,11 @@ class CosmosHistoryVC: BaseVC {
         beaconHistoey.removeAll()
         oktHistoey.removeAll()
         onRequestFetch()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        refresher.endRefreshing()
     }
     
     @objc func onRequestFetch() {
@@ -64,8 +75,7 @@ class CosmosHistoryVC: BaseVC {
     
     func onFetchMsHistory(_ address: String?, _ id: Int64) {
         let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, address!)
-        AF.request(url, method: .get, parameters: ["limit":String(BATCH_CNT), "from":String(id)])
-            .responseDecodable(of: [MintscanHistory].self, queue: .main, decoder: JSONDecoder()) { response in
+        AF.request(url, method: .get, parameters: ["limit":String(BATCH_CNT), "from":String(id)]).responseDecodable(of: [MintscanHistory].self, queue: .main, decoder: JSONDecoder()) { response in
             switch response.result {
             case .success(let value):
                 if (id == 0) { self.msHistoryGroup.removeAll() }
@@ -98,59 +108,55 @@ class CosmosHistoryVC: BaseVC {
             case .failure:
                 print("onFetchMsHistory error")
             }
+            self.refresher.endRefreshing()
         }
     }
     
     func onFetchBnbHistory(_ address: String?) {
         let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, address!)
-        AF.request(url, method: .get, parameters: ["address": address!, "startTime" : Date().Stringmilli3MonthAgo, "endTime" : Date().millisecondsSince1970])
-            .responseDecodable(of: BeaconHistories.self, queue: .main, decoder: JSONDecoder())  { response in
-                switch response.result {
-                case .success(let value):
-                    if let txs = value.tx {
-                        self.beaconHistoey = txs
-                    }
-                    
-                    if (self.beaconHistoey.count > 0) {
-                        self.tableView.reloadData()
-                        self.tableView.isHidden = false
-                        self.emptyDataView.isHidden = true
-                    } else {
-                        self.tableView.isHidden = true
-                        self.emptyDataView.isHidden = false
-                    }
-                    
-                    
-                case .failure:
-                    print("onFetchBnbHistory error")
+        AF.request(url, method: .get, parameters: ["address": address!, "startTime" : Date().Stringmilli3MonthAgo, "endTime" : Date().millisecondsSince1970]).responseDecodable(of: BeaconHistories.self, queue: .main, decoder: JSONDecoder())  { response in
+            switch response.result {
+            case .success(let value):
+                if let txs = value.tx {
+                    self.beaconHistoey = txs
                 }
+                
+                if (self.beaconHistoey.count > 0) {
+                    self.tableView.reloadData()
+                    self.emptyDataView.isHidden = true
+                } else {
+                    self.emptyDataView.isHidden = false
+                }
+                
+            case .failure:
+                print("onFetchBnbHistory error")
             }
+            self.refresher.endRefreshing()
+        }
     }
     
     func onFetchOktHistory(_ evmAddress: String) {
         let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, evmAddress)
-        AF.request(url, method: .get, parameters: [:])
-            .responseDecodable(of: OkHistoryRoot.self, queue: .main, decoder: JSONDecoder())  { response in
-                switch response.result {
-                case .success(let value):
-                    if let txs = value.data?[0].transactionLists {
-                        self.oktHistoey = txs
-                    }
-
-                    if (self.oktHistoey.count > 0) {
-                        self.tableView.reloadData()
-                        self.tableView.isHidden = false
-                        self.emptyDataView.isHidden = true
-                    } else {
-                        self.tableView.isHidden = true
-                        self.emptyDataView.isHidden = false
-                    }
-                    
-                    
-                case .failure:
-                    print("onFetchOktHistory error", response.error)
+        AF.request(url, method: .get, parameters: [:]).responseDecodable(of: OkHistoryRoot.self, queue: .main, decoder: JSONDecoder())  { response in
+            switch response.result {
+            case .success(let value):
+                if let txs = value.data?[0].transactionLists {
+                    self.oktHistoey = txs
                 }
+                
+                if (self.oktHistoey.count > 0) {
+                    self.tableView.reloadData()
+                    self.emptyDataView.isHidden = true
+                } else {
+                    self.emptyDataView.isHidden = false
+                }
+                
+                
+            case .failure:
+                print("onFetchOktHistory error", response.error)
             }
+            self.refresher.endRefreshing()
+        }
     }
 
 }
