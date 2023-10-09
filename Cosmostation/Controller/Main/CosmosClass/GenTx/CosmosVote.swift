@@ -205,22 +205,41 @@ extension CosmosVote: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"VoteCell") as! VoteCell
         cell.onBindVote(toVoteProposals[indexPath.row])
-        cell.actionToggle = { result, tag in
-            if (result == false) {
-                self.toVoteProposals[indexPath.row].toVoteOption = nil
-                
+//        cell.actionToggle = { result, tag in
+//            if (result == false) {
+//                self.toVoteProposals[indexPath.row].toVoteOption = nil
+//                
+//            } else {
+//                if (tag == 0) {
+//                    self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.yes
+//                } else if (tag == 1) {
+//                    self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.no
+//                } else if (tag == 2) {
+//                    self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.noWithVeto
+//                } else if (tag == 3) {
+//                    self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.abstain
+//                } else {
+//                    self.toVoteProposals[indexPath.row].toVoteOption = nil
+//                }
+//            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
+//                self.tableView.beginUpdates()
+//                self.tableView.reloadRows(at: [indexPath], with: .none)
+//                self.tableView.endUpdates()
+//                self.onSimul()
+//            })
+//        }
+        cell.actionToggle = { tag in
+            if (tag == 0) {
+                self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.yes
+            } else if (tag == 1) {
+                self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.no
+            } else if (tag == 2) {
+                self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.noWithVeto
+            } else if (tag == 3) {
+                self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.abstain
             } else {
-                if (tag == 0) {
-                    self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.yes
-                } else if (tag == 1) {
-                    self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.no
-                } else if (tag == 2) {
-                    self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.noWithVeto
-                } else if (tag == 3) {
-                    self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.abstain
-                } else {
-                    self.toVoteProposals[indexPath.row].toVoteOption = nil
-                }
+                self.toVoteProposals[indexPath.row].toVoteOption = nil
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
                 self.tableView.beginUpdates()

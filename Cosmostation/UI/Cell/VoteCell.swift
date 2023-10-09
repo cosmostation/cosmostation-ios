@@ -12,52 +12,77 @@ class VoteCell: UITableViewCell {
     
     @IBOutlet weak var rootView: FixCardView!
     @IBOutlet weak var titleLabel: UILabel!
-
-    @IBOutlet weak var yesSwitch: UISwitch!
-    @IBOutlet weak var noSwitch: UISwitch!
-    @IBOutlet weak var vetoSwitch: UISwitch!
-    @IBOutlet weak var abstainSwitch: UISwitch!
+    @IBOutlet weak var timeLabel: UILabel!
+    
+//    @IBOutlet weak var yesSwitch: UISwitch!
+//    @IBOutlet weak var noSwitch: UISwitch!
+//    @IBOutlet weak var vetoSwitch: UISwitch!
+//    @IBOutlet weak var abstainSwitch: UISwitch!
+    
+    @IBOutlet weak var yesBtn: UIButton!
+    @IBOutlet weak var noBtn: UIButton!
+    @IBOutlet weak var vetoBtn: UIButton!
+    @IBOutlet weak var abstainBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        yesSwitch.tag = 0
-        yesSwitch.isOn = false
-        noSwitch.tag = 1
-        noSwitch.isOn = false
-        vetoSwitch.tag = 2
-        vetoSwitch.isOn = false
-        abstainSwitch.tag = 3
-        abstainSwitch.isOn = false
+        
+        yesBtn.tag = 0
+        noBtn.tag = 1
+        vetoBtn.tag = 2
+        abstainBtn.tag = 3
+        yesBtn.setImage(nil, for: .normal)
+        noBtn.setImage(nil, for: .normal)
+        vetoBtn.setImage(nil, for: .normal)
+        abstainBtn.setImage(nil, for: .normal)
+        yesBtn.layer.borderWidth = 1
+        noBtn.layer.borderWidth = 1
+        vetoBtn.layer.borderWidth = 1
+        abstainBtn.layer.borderWidth = 1
+        yesBtn.layer.borderColor = UIColor.color05.cgColor
+        noBtn.layer.borderColor = UIColor.color05.cgColor
+        vetoBtn.layer.borderColor = UIColor.color05.cgColor
+        abstainBtn.layer.borderColor = UIColor.color05.cgColor
     }
     
     override func prepareForReuse() {
-        yesSwitch.isOn = false
-        noSwitch.isOn = false
-        vetoSwitch.isOn = false
-        abstainSwitch.isOn = false
+        yesBtn.setImage(nil, for: .normal)
+        noBtn.setImage(nil, for: .normal)
+        vetoBtn.setImage(nil, for: .normal)
+        abstainBtn.setImage(nil, for: .normal)
+        yesBtn.layer.borderColor = UIColor.color05.cgColor
+        noBtn.layer.borderColor = UIColor.color05.cgColor
+        vetoBtn.layer.borderColor = UIColor.color05.cgColor
+        abstainBtn.layer.borderColor = UIColor.color05.cgColor
     }
     
-    var actionToggle: ((Bool, Int) -> Void)? = nil
-    @IBAction func onToggle(_ sender: UISwitch) {
-        actionToggle?(sender.isOn, sender.tag)
+    var actionToggle: ((Int) -> Void)? = nil
+    @IBAction func onClickVote(_ sender: UIButton) {
+        actionToggle?(sender.tag)
     }
     
     
     func onBindVote(_ proposal: MintscanProposal) {
         let title = "# ".appending(String(proposal.id!)).appending("  ").appending(proposal.title ?? "")
         titleLabel.text = title
+        timeLabel.text = WDP.dpTime(proposal.voting_end_time).appending(" ").appending(WDP.dpTimeGap(proposal.voting_end_time))
+        
         if (proposal.toVoteOption == Cosmos_Gov_V1beta1_VoteOption.yes) {
-            yesSwitch.isOn = true
+            yesBtn.setImage(UIImage(named: "iconCheck"), for: .normal)
+            yesBtn.layer.borderColor = UIColor.white.cgColor
             
         } else if (proposal.toVoteOption == Cosmos_Gov_V1beta1_VoteOption.no) {
-            noSwitch.isOn = true
+            noBtn.setImage(UIImage(named: "iconCheck"), for: .normal)
+            noBtn.layer.borderColor = UIColor.white.cgColor
             
         } else if (proposal.toVoteOption == Cosmos_Gov_V1beta1_VoteOption.noWithVeto) {
-            vetoSwitch.isOn = true
+            vetoBtn.setImage(UIImage(named: "iconCheck"), for: .normal)
+            vetoBtn.layer.borderColor = UIColor.white.cgColor
             
         } else if (proposal.toVoteOption == Cosmos_Gov_V1beta1_VoteOption.abstain) {
-            abstainSwitch.isOn = true
+            abstainBtn.setImage(UIImage(named: "iconCheck"), for: .normal)
+            abstainBtn.layer.borderColor = UIColor.white.cgColor
             
         }
     }
