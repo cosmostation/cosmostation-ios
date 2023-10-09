@@ -95,12 +95,19 @@ public class WDP {
     
 //    static func dpCoin(_ baseChain: BaseChain?, _ coin: Cosmos_Base_V1beta1_Coin?, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16? = 6) {
     static func dpCoin(_ msAsset: MintscanAsset, _ coin: Cosmos_Base_V1beta1_Coin?, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
-        if (coin == nil) { return }
+        if (coin == nil) {
+            amountLabel?.attributedText = dpAmount("0", amountLabel!.font, showDecimal ?? msAsset.decimals)
+            denomLabel?.text = msAsset.symbol
+            coinImg?.af.setImage(withURL: msAsset.assetImg())
+            
+        } else {
+            let amount = NSDecimalNumber(string: coin?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
+            amountLabel?.attributedText = dpAmount(amount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
+            denomLabel?.text = msAsset.symbol
+            coinImg?.af.setImage(withURL: msAsset.assetImg())
+        }
 
-        let amount = NSDecimalNumber(string: coin?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
-        amountLabel?.attributedText = dpAmount(amount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
-        denomLabel?.text = msAsset.symbol
-        coinImg?.af.setImage(withURL: msAsset.assetImg())
+        
         
 
 

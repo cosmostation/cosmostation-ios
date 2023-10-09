@@ -26,13 +26,13 @@ class SelectSwapAssetCell: UITableViewCell {
     func onBindAsset(_ chain: CosmosClass, _ asset: JSON, _ balances: [Cosmos_Base_V1beta1_Coin] ) {
         symbolLabel.text = asset["symbol"].stringValue
         
-        if let coin = balances.filter({ $0.denom == asset["denom"].stringValue }).first,
-           let msAsset = BaseData.instance.getAsset(chain.apiName, asset["denom"].stringValue) {
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-            let amount = NSDecimalNumber(string: coin.amount)
-            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
-            
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, asset["denom"].stringValue) {
+            let coin = balances.filter({ $0.denom == asset["denom"].stringValue }).first
             WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, msAsset.decimals)
+            
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let amount = NSDecimalNumber(string: coin?.amount ?? "0")
+            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             WDP.dpValue(value, valueCurrencyLabel, valueLabel)
         }
     }

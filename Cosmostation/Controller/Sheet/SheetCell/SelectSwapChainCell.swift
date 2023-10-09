@@ -19,14 +19,14 @@ class SelectSwapChainCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
-    func onBindChain(_ chain: JSON) {
-        if let chainLogo = URL(string: chain["logo_uri"].stringValue) {
-            chainLogoImg.af.setImage(withURL: chainLogo)
-        } else {
-            chainLogoImg.image = UIImage(named: "chainDefault")
-        }
-        chainNameLabel.text = chain["chain_name"].stringValue.uppercased()
-    }
+//    func onBindChain(_ chain: CosmosClass) {
+//        if let chainLogo = URL(string: chain["logo_uri"].stringValue) {
+//            chainLogoImg.af.setImage(withURL: chainLogo)
+//        } else {
+//            chainLogoImg.image = UIImage(named: "chainDefault")
+//        }
+//        chainNameLabel.text = chain["chain_name"].stringValue.uppercased()
+//    }
     
     
     func onBindCosmosChain(_ chain: CosmosClass) {

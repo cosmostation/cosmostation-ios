@@ -19,14 +19,15 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var sheetDelegate: BaseSheetDelegate?
     
     var targetChain: CosmosClass!
-    var swapChains = Array<JSON>()
+    var swapChains = Array<CosmosClass>()
+    var swapChainsSearch = Array<CosmosClass>()
     var swapAssets = Array<JSON>()
-    var searchList = Array<JSON>()
+    var swapAssetsSearch = Array<JSON>()
     var swapBalance = Array<Cosmos_Base_V1beta1_Coin>()
     
     var feeDatas = Array<FeeData>()
     var validators = Array<Cosmos_Staking_V1beta1_Validator>()
-    var searchValidators = Array<Cosmos_Staking_V1beta1_Validator>()
+    var validatorsSearch = Array<Cosmos_Staking_V1beta1_Validator>()
     var delegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     var delegation: Cosmos_Staking_V1beta1_DelegationResponse!
     var cosmosChainList = Array<CosmosClass>()
@@ -104,22 +105,42 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectSwapInputChain) {
             sheetTitle.text = NSLocalizedString("title_select_input_chain", comment: "")
             sheetSearchBar.isHidden = false
-            searchList = swapChains
+            swapChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                return $0.name < $1.name
+            }
+            swapChainsSearch = swapChains
             
         } else if (sheetType == .SelectSwapOutputChain) {
             sheetTitle.text = NSLocalizedString("title_select_output_chain", comment: "")
             sheetSearchBar.isHidden = false
-            searchList = swapChains
+            swapChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                return $0.name < $1.name
+            }
+            swapChainsSearch = swapChains
             
         } else if (sheetType == .SelectSwapInputAsset) {
             sheetTitle.text = NSLocalizedString("title_select_input_asset", comment: "")
             sheetSearchBar.isHidden = false
-            searchList = swapAssets
+            swapAssets.sort {
+                if ($0["symbol"] == "ATOM") { return true }
+                if ($1["symbol"] == "ATOM") { return false }
+                return $0["symbol"].stringValue < $1["symbol"].stringValue
+            }
+            swapAssetsSearch = swapAssets
             
         } else if (sheetType == .SelectSwapOutputAsset) {
             sheetTitle.text = NSLocalizedString("title_select_output_asset", comment: "")
             sheetSearchBar.isHidden = false
-            searchList = swapAssets
+            swapAssets.sort {
+                if ($0["symbol"] == "ATOM") { return true }
+                if ($1["symbol"] == "ATOM") { return false }
+                return $0["symbol"].stringValue < $1["symbol"].stringValue
+            }
+            swapAssetsSearch = swapAssets
             
         } else if (sheetType == .SelectSwapSlippage) {
             sheetTitle.text = NSLocalizedString("title_select_slippage", comment: "")
@@ -133,7 +154,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectValidator) {
             sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
             sheetSearchBar.isHidden = false
-            searchValidators = validators
+            validatorsSearch = validators
             
         } else if (sheetType == .SelectUnStakeValidator) {
             sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
@@ -173,27 +194,27 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetSearchBar.text = ""
         sheetSearchBar.endEditing(true)
         if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
-            searchList = swapChains
+            swapChainsSearch = swapChains
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
-            searchList = swapAssets
+            swapAssetsSearch = swapAssets
         } else if (sheetType == .SelectValidator) {
-            searchValidators = validators
+            validatorsSearch = validators
         }
         sheetTableView.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
-            searchList = searchText.isEmpty ? swapChains : swapChains.filter { json in
-                return json["chain_name"].stringValue.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            swapChainsSearch = searchText.isEmpty ? swapChains : swapChains.filter { chain in
+                return chain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
-            searchList = searchText.isEmpty ? swapAssets : swapAssets.filter { json in
+            swapAssetsSearch = searchText.isEmpty ? swapAssets : swapAssets.filter { json in
                 return json["symbol"].stringValue.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
         } else if (sheetType == .SelectValidator) {
-            searchValidators = searchText.isEmpty ? validators : validators.filter { validator in
+            validatorsSearch = searchText.isEmpty ? validators : validators.filter { validator in
                 return validator.description_p.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
         }
@@ -256,10 +277,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             return AutoPass.getAutoPasses().count
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
-            return searchList.count
+            return swapChainsSearch.count
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
-            return searchList.count
+            return swapAssetsSearch.count
             
         } else if (sheetType == .SelectSwapSlippage) {
             
@@ -273,7 +294,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             return feeDatas.count
             
         } else if (sheetType == .SelectValidator) {
-            return searchValidators.count
+            return validatorsSearch.count
             
         } else if (sheetType == .SelectUnStakeValidator) {
             return validators.count
@@ -330,12 +351,12 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapChainCell") as? SelectSwapChainCell
-            cell?.onBindChain(searchList[indexPath.row])
+            cell?.onBindCosmosChain(swapChainsSearch[indexPath.row])
             return cell!
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset)  {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapAssetCell") as? SelectSwapAssetCell
-            cell?.onBindAsset(targetChain, searchList[indexPath.row], swapBalance)
+            cell?.onBindAsset(targetChain, swapAssetsSearch[indexPath.row], swapBalance)
             return cell!
             
         } else if (sheetType == .SelectSwapSlippage) {
@@ -357,7 +378,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectValidator) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
-            cell?.onBindValidator(targetChain, searchValidators[indexPath.row])
+            cell?.onBindValidator(targetChain, validatorsSearch[indexPath.row])
             return cell!
             
         } else if (sheetType == .SelectUnStakeValidator) {
@@ -402,15 +423,15 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
-            let result = BaseSheetResult.init(indexPath.row, searchList[indexPath.row]["chain_id"].stringValue)
+            let result = BaseSheetResult.init(indexPath.row, swapChainsSearch[indexPath.row].chainId)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset)  {
-            let result = BaseSheetResult.init(indexPath.row, searchList[indexPath.row]["denom"].stringValue)
+            let result = BaseSheetResult.init(indexPath.row, swapAssetsSearch[indexPath.row]["denom"].stringValue)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectValidator) {
-            let result = BaseSheetResult.init(indexPath.row, searchValidators[indexPath.row].operatorAddress)
+            let result = BaseSheetResult.init(indexPath.row, validatorsSearch[indexPath.row].operatorAddress)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectUnStakeValidator) {

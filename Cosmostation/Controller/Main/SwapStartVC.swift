@@ -69,17 +69,15 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var swapBtn: BaseButton!
     
     var allCosmosChains = Array<CosmosClass>()
-    var skipChains = Array<JSON>()              //inapp support chain for skip
+    var skipChains = Array<CosmosClass>()       //inapp support chain for skip
     var skipAssets: JSON?
     
     
-    var inputChain: JSON!
     var inputCosmosChain: CosmosClass!
     var inputAssetList = Array<JSON>()
     var inputAssetSelected: JSON!
     var inputBalances = Array<Cosmos_Base_V1beta1_Coin>()
     
-    var outputChain: JSON!
     var outputCosmosChain: CosmosClass!
     var outputAssetList = Array<JSON>()
     var outputAssetSelected: JSON!
@@ -115,47 +113,50 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         Task {
             allCosmosChains = await baseAccount.initOnyKeyData()
             let sChains = try? await fetchSkipChains()
+//            print("sChains ", sChains)
             sChains?["chains"].arrayValue.forEach({ sChain in
-                if (allCosmosChains.filter { $0.chainId == sChain["chain_id"].stringValue }.count > 0 ) {
-                    skipChains.append(sChain)
+                if let skipChain = allCosmosChains.filter({ $0.chainId == sChain["chain_id"].stringValue && $0.isDefault == true }).first {
+                    skipChains.append(skipChain)
                 }
             })
             skipAssets = try? await fetchSkipAssets()
+            print("skipChains ", skipChains.count)
+//            print("skipAssets ", skipAssets)
             
             // $0.isDefault 예외처리 확인 카바
-            inputChain = skipChains.filter({ $0["chain_name"].stringValue == "cosmoshub" }).first!
-            inputCosmosChain = self.allCosmosChains.filter({ $0.chainId == inputChain["chain_id"].stringValue && $0.isDefault == true }).first!
-            skipAssets?["chain_to_assets_map"][inputChain["chain_id"].stringValue]["assets"].arrayValue.forEach({ json in
+            inputCosmosChain = skipChains.filter({ $0.tag == "cosmos118" }).first!
+            skipAssets?["chain_to_assets_map"][inputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
                 if BaseData.instance.getAsset(inputCosmosChain.apiName, json["denom"].stringValue) != nil {
                     inputAssetList.append(json)
                 }
             })
+//            print("inputAssetList ", inputAssetList.count)
+//            print("inputAssetList ", inputAssetList)
             inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first!
             
-//            outputChain = skipChains.filter({ $0["chain_name"].stringValue == "akash" }).first!
-//            outputCosmosChain = allCosmosChains.filter({ $0.chainId == outputChain["chain_id"].stringValue && $0.isDefault == true }).first!
-//            skipAssets?["chain_to_assets_map"][outputChain["chain_id"].stringValue]["assets"].arrayValue.forEach({ json in
-//                if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
-//                    outputAssetList.append(json)
-//                }
-//            })
-//            outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first!
-//            
-//            let inputChannel = getConnection(inputCosmosChain)
-//            if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.address!),
-//                let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.address!) {
-//                    inputBalances = WUtils.onParseAvailableCoins(inputAuth, inputBal)
-//            }
-//            
-//            let outputChannel = getConnection(outputCosmosChain)
-//            if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.address!),
-//                let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.address!) {
-//                    outputBalances = WUtils.onParseAvailableCoins(outputAuth, outputBal)
-//            }
-//            
-//            DispatchQueue.main.async {
-//                self.onInitView()
-//            }
+            outputCosmosChain = skipChains.filter({ $0.tag == "akash118" }).first!
+            skipAssets?["chain_to_assets_map"][outputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
+                if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
+                    outputAssetList.append(json)
+                }
+            })
+            outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first!
+            
+            let inputChannel = getConnection(inputCosmosChain)
+            if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.address!),
+                let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.address!) {
+                    inputBalances = WUtils.onParseAvailableCoins(inputAuth, inputBal)
+            }
+            
+            let outputChannel = getConnection(outputCosmosChain)
+            if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.address!),
+                let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.address!) {
+                    outputBalances = WUtils.onParseAvailableCoins(outputAuth, outputBal)
+            }
+            
+            DispatchQueue.main.async {
+                self.onInitView()
+            }
         }
         
         inputChainView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onInputChain)))
@@ -212,21 +213,15 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         
         //From UI update
         fromAddressLabel.text = inputCosmosChain.address
-        print("address ", inputCosmosChain.address)
-        
-        if let inputChainLogo = URL(string: inputChain["logo_uri"].stringValue) {
-            inputChainImg.af.setImage(withURL: inputChainLogo)
-        } else {
-            inputChainImg.image = UIImage(named: "chainDefault")
-        }
-        inputChainLabel.text = inputChain["chain_name"].stringValue.uppercased()
+        inputChainImg.image = UIImage(named: inputCosmosChain.logo1)
+        inputChainLabel.text = inputCosmosChain.name.uppercased()
+        print("fromAddress ", inputCosmosChain.address)
         
         if let inputAssetLogo = URL(string: inputAssetSelected?["logo_uri"].stringValue ?? "") {
             inputAssetImg.af.setImage(withURL: inputAssetLogo)
         } else {
             inputAssetImg.image = UIImage(named: "tokenDefault")
         }
-        
         inputAssetLabel.text = inputAssetSelected?["symbol"].stringValue
         
         let inputDenom = inputAssetSelected["denom"].stringValue
@@ -241,21 +236,15 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         
         //To UI update
         toAddressLabel.text = outputCosmosChain.address
-        print("toAddressLabel ", outputCosmosChain.address)
-        
-        if let outputChainLogo = URL(string: outputChain["logo_uri"].stringValue) {
-            outputChainImg.af.setImage(withURL: outputChainLogo)
-        } else {
-            outputChainImg.image = UIImage(named: "chainDefault")
-        }
-        outputChainLabel.text = outputChain["chain_name"].stringValue.uppercased()
+        outputChainImg.image = UIImage(named: outputCosmosChain.logo1)
+        outputChainLabel.text = outputCosmosChain.name.uppercased()
+        print("toAddress ", outputCosmosChain.address)
         
         if let outputAssetLogo = URL(string: outputAssetSelected?["logo_uri"].stringValue ?? "") {
             outputAssetImg.af.setImage(withURL: outputAssetLogo)
         } else {
             outputAssetImg.image = UIImage(named: "tokenDefault")
         }
-        
         outputAssetLabel.text = outputAssetSelected?["symbol"].stringValue
         
     
@@ -281,7 +270,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @objc func onInputChain() {
         dismissKeyboard()
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.swapChains = skipChains
+        baseSheet.swapChains = skipChains.filter({ $0.tag != outputCosmosChain.tag })
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapInputChain
         onStartSheet(baseSheet, 680)
@@ -301,7 +290,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @objc func onOutputChain() {
         dismissKeyboard()
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.swapChains = skipChains
+        baseSheet.swapChains = skipChains.filter({ $0.tag != inputCosmosChain.tag })
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapOutputChain
         onStartSheet(baseSheet, 680)
@@ -345,17 +334,17 @@ extension SwapStartVC: BaseSheetDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .SelectSwapInputChain) {
-            if (inputChain["chain_id"].stringValue != result.param) {
+            if (inputCosmosChain.chainId != result.param) {
                 loadingView.isHidden = false
                 Task {
-                    inputChain = skipChains.filter({ $0["chain_id"].stringValue == result.param }).first!
-                    inputCosmosChain = self.allCosmosChains.filter({ $0.chainId == inputChain["chain_id"].stringValue && $0.isDefault == true }).first!
-                    skipAssets?["chain_to_assets_map"][inputChain["chain_id"].stringValue]["assets"].arrayValue.forEach({ json in
+                    inputCosmosChain = skipChains.filter({ $0.chainId == result.param }).first!
+                    inputAssetList.removeAll()
+                    skipAssets?["chain_to_assets_map"][inputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
                         if BaseData.instance.getAsset(inputCosmosChain.apiName, json["denom"].stringValue) != nil {
                             inputAssetList.append(json)
                         }
                     })
-                    inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first!
+                    inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first ?? inputAssetList[0]
                     
                     let inputChannel = getConnection(inputCosmosChain)
                     if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.address!),
@@ -370,17 +359,17 @@ extension SwapStartVC: BaseSheetDelegate {
             }
             
         } else if (sheetType == .SelectSwapOutputChain) {
-            if (outputChain["chain_id"].stringValue != result.param) {
+            if (outputCosmosChain.chainId != result.param) {
                 loadingView.isHidden = false
                 Task {
-                    outputChain = skipChains.filter({ $0["chain_id"].stringValue == result.param }).first!
-                    outputCosmosChain = allCosmosChains.filter({ $0.chainId == outputChain["chain_id"].stringValue && $0.isDefault == true }).first!
-                    skipAssets?["chain_to_assets_map"][outputChain["chain_id"].stringValue]["assets"].arrayValue.forEach({ json in
+                    outputCosmosChain = skipChains.filter({ $0.chainId == result.param}).first!
+                    outputAssetList.removeAll()
+                    skipAssets?["chain_to_assets_map"][outputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
                         if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
                             outputAssetList.append(json)
                         }
                     })
-                    outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first!
+                    outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first ?? outputAssetList[0]
                     
                     let outputChannel = getConnection(outputCosmosChain)
                     if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.address!),
@@ -415,10 +404,12 @@ extension SwapStartVC: BaseSheetDelegate {
 extension SwapStartVC {
     
     func fetchSkipChains() async throws -> JSON {
+        print("fetchSkipChains ", BaseNetWork.SkipChains())
         return try await AF.request(BaseNetWork.SkipChains(), method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchSkipAssets() async throws -> JSON {
+        print("fetchSkipAssets ", BaseNetWork.SkipAssets())
         return try await AF.request(BaseNetWork.SkipAssets(), method: .get).serializingDecodable(JSON.self).value
     }
     
