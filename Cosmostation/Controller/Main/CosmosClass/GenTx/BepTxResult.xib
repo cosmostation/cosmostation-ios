@@ -19,10 +19,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BepTxResult" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="claimChainImg" destination="oLw-Tb-c2i" id="LxU-pK-6uS"/>
+                <outlet property="claimTxBtn" destination="zJZ-bk-MFq" id="fKb-cN-fq9"/>
                 <outlet property="confirmBtn" destination="wrf-r7-yFp" id="syF-nt-3ZZ"/>
                 <outlet property="loadingLayer" destination="dOL-2A-hcH" id="72P-eh-dlN"/>
                 <outlet property="loadingMsgLabel" destination="7O4-iN-SPo" id="5hZ-PN-jSW"/>
                 <outlet property="loadingView" destination="oaT-Cb-Cqe" id="0Fr-1x-qS5"/>
+                <outlet property="sendChainimg" destination="Fje-x5-ijR" id="wtY-1C-nZS"/>
+                <outlet property="sendTxBtn" destination="FUt-3V-3Jh" id="pYC-NU-AMN"/>
+                <outlet property="successLayer" destination="9rb-VW-E6K" id="o6u-Xp-IwR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -46,7 +51,7 @@
                         <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="Xoa-Wc-VOa"/>
                     </connections>
                 </button>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOL-2A-hcH">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOL-2A-hcH">
                     <rect key="frame" x="76.666666666666686" y="338.66666666666669" width="240" height="200.00000000000006"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oaT-Cb-Cqe" customClass="LottieAnimationView" customModule="Lottie">
@@ -57,8 +62,8 @@
                                 <constraint firstAttribute="width" constant="180" id="YF5-Bm-KwF"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking your all asset with onchain " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7O4-iN-SPo">
-                            <rect key="frame" x="15" y="121.99999999999999" width="209.66666666666666" height="15.333333333333329"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7O4-iN-SPo">
+                            <rect key="frame" x="117.33333333333333" y="121.99999999999999" width="5.3333333333333286" height="15.333333333333329"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -74,6 +79,79 @@
                         <constraint firstAttribute="width" constant="240" id="mFK-Y2-1Pc"/>
                     </constraints>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-VW-E6K">
+                    <rect key="frame" x="66.666666666666686" y="308.66666666666669" width="260" height="260.00000000000006"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgTxSuccess" translatesAutoresizingMaskIntoConstraints="NO" id="1PY-E7-0H3">
+                            <rect key="frame" x="100" y="24" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="i4R-k7-2LA"/>
+                                <constraint firstAttribute="height" constant="60" id="xvH-UX-bsR"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUCCESS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zjp-IR-hZK">
+                            <rect key="frame" x="98.333333333333314" y="96" width="63" height="17.666666666666671"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="Fje-x5-ijR">
+                            <rect key="frame" x="50" y="130.66666666666663" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="0xb-Uh-tyM"/>
+                                <constraint firstAttribute="width" constant="30" id="QXd-J8-Q5R"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FUt-3V-3Jh">
+                            <rect key="frame" x="90" y="133.66666666666663" width="110" height="24"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="tintColor" name="_color01"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Check Send Tx" image="iconArrowRight">
+                                <color key="titleColor" name="_color01"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickSendTx:" destination="-1" eventType="touchUpInside" id="ure-T0-7W2"/>
+                            </connections>
+                        </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="oLw-Tb-c2i">
+                            <rect key="frame" x="50" y="174.66666666666663" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="GlE-hX-upI"/>
+                                <constraint firstAttribute="height" constant="30" id="J0R-XI-Shd"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJZ-bk-MFq">
+                            <rect key="frame" x="88" y="177.66666666666663" width="114" height="24"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="tintColor" name="_color01"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Check Claim Tx" image="iconArrowRight">
+                                <color key="titleColor" name="_color01"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickClaimTx:" destination="-1" eventType="touchUpInside" id="7aD-wu-q5F"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="1PY-E7-0H3" firstAttribute="centerX" secondItem="9rb-VW-E6K" secondAttribute="centerX" id="3Bd-kV-GVM"/>
+                        <constraint firstItem="Zjp-IR-hZK" firstAttribute="centerX" secondItem="9rb-VW-E6K" secondAttribute="centerX" id="5hy-d2-iBu"/>
+                        <constraint firstItem="zJZ-bk-MFq" firstAttribute="centerX" secondItem="9rb-VW-E6K" secondAttribute="centerX" constant="15" id="723-KP-3wm"/>
+                        <constraint firstItem="Fje-x5-ijR" firstAttribute="leading" secondItem="oLw-Tb-c2i" secondAttribute="leading" id="7sb-Sa-A79"/>
+                        <constraint firstItem="zJZ-bk-MFq" firstAttribute="top" secondItem="FUt-3V-3Jh" secondAttribute="bottom" constant="20" id="8EU-fq-yWF"/>
+                        <constraint firstItem="Zjp-IR-hZK" firstAttribute="top" secondItem="1PY-E7-0H3" secondAttribute="bottom" constant="12" id="9Hu-3q-o7x"/>
+                        <constraint firstItem="Fje-x5-ijR" firstAttribute="centerY" secondItem="FUt-3V-3Jh" secondAttribute="centerY" id="A71-Vj-Mbq"/>
+                        <constraint firstAttribute="width" constant="260" id="HGF-yB-kvi"/>
+                        <constraint firstAttribute="height" constant="260" id="XPS-Ca-epQ"/>
+                        <constraint firstItem="1PY-E7-0H3" firstAttribute="top" secondItem="9rb-VW-E6K" secondAttribute="top" constant="24" id="bsY-nM-eES"/>
+                        <constraint firstItem="zJZ-bk-MFq" firstAttribute="leading" secondItem="oLw-Tb-c2i" secondAttribute="trailing" constant="8" id="lKt-al-Lby"/>
+                        <constraint firstItem="FUt-3V-3Jh" firstAttribute="top" secondItem="Zjp-IR-hZK" secondAttribute="bottom" constant="20" id="qrt-UZ-FkH"/>
+                        <constraint firstItem="FUt-3V-3Jh" firstAttribute="centerX" secondItem="9rb-VW-E6K" secondAttribute="centerX" constant="15" id="sls-ud-l3j"/>
+                        <constraint firstItem="oLw-Tb-c2i" firstAttribute="centerY" secondItem="zJZ-bk-MFq" secondAttribute="centerY" id="tox-P8-7XS"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="_colorBg"/>
@@ -83,12 +161,17 @@
                 <constraint firstItem="dOL-2A-hcH" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="7Xh-2v-SHz"/>
                 <constraint firstAttribute="bottom" secondItem="wrf-r7-yFp" secondAttribute="bottom" constant="38" id="Hc0-M2-Xbz"/>
                 <constraint firstItem="dOL-2A-hcH" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="mSW-al-lhk"/>
+                <constraint firstItem="9rb-VW-E6K" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="oxk-Ov-ABf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wrf-r7-yFp" secondAttribute="trailing" constant="8" id="rF5-dO-yeK"/>
+                <constraint firstItem="9rb-VW-E6K" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="us4-F8-NpP"/>
             </constraints>
             <point key="canvasLocation" x="140" y="20"/>
         </view>
     </objects>
     <resources>
+        <image name="chainDefault" width="192" height="192"/>
+        <image name="iconArrowRight" width="24" height="24"/>
+        <image name="imgTxSuccess" width="240" height="240"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -299,15 +299,15 @@ class Signer {
     
     //Tx for Common Reward Address Change
     static func genRewardAddressTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                                _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,
-                                                _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+                                   _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,
+                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let setRewardAddressMsg = genRewardAddressMsg(auth, setAddress)
         return getSignedTx(auth, setRewardAddressMsg, fee, memo, baseChain)
     }
     
     static func genRewardAddressTxSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                                 _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,
-                                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+                                        _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,
+                                        _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let setRewardAddressMsg = genRewardAddressMsg(auth, setAddress)
         return getSimulateTx(auth, setRewardAddressMsg, fee, memo, baseChain)
     }
@@ -1327,45 +1327,29 @@ class Signer {
 //            $0.value = try! earnWithdraw.serializedData()
 //        }
 //    }
-//    
-//    //Tx for Kava Create HTLC Swap
-//    static func genSignedKavaCreateHTLCSwap(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                            _ from: String, _ to: String, _ sendCoin: Array<Coin>, _ timeStamp: Int64, _ randomNumberHash: String,
-//                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let createAtomicSwap = Kava_Bep3_V1beta1_MsgCreateAtomicSwap.with {
-//            $0.from = from
-//            $0.to = WUtils.getDuputyAdddress(sendCoin[0].denom).0
-//            $0.senderOtherChain = WUtils.getDuputyAdddress(sendCoin[0].denom).1
-//            $0.recipientOtherChain = to
-//            $0.randomNumberHash = randomNumberHash
-//            $0.timestamp = timeStamp
-//            $0.amount = [Cosmos_Base_V1beta1_Coin.with { $0.denom = sendCoin[0].denom; $0.amount = sendCoin[0].amount }]
-//            $0.heightSpan = 24686
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/kava.bep3.v1beta1.MsgCreateAtomicSwap"
-//            $0.value = try! createAtomicSwap.serializedData()
-//        }
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, [anyMsg], privateKey, publicKey, fee, memo)
-//    }
-//    
-//    //Tx for Kava Claim HTLC Swap
-//    static func genSignedKavaClaimHTLCSwap(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                           _ from: String, _ swapID: String, _ randomNumber: String,
-//                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let claimAtomicSwap = Kava_Bep3_V1beta1_MsgClaimAtomicSwap.with {
-//            $0.from = from
-//            $0.swapID = swapID
-//            $0.randomNumber = randomNumber
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/kava.bep3.v1beta1.MsgClaimAtomicSwap"
-//            $0.value = try! claimAtomicSwap.serializedData()
-//        }
-//        return getGrpcSignedTx2(auth, pubkeyType, chainId, [anyMsg], privateKey, publicKey, fee, memo)
-//        
-//    }
-//    
+    
+    //Tx for Kava Create HTLC Swap
+    static func genKavaCreateHTLCSwap(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                      _ createAtomicSwap: Kava_Bep3_V1beta1_MsgCreateAtomicSwap,
+                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let swapCreateMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/kava.bep3.v1beta1.MsgCreateAtomicSwap"
+            $0.value = try! createAtomicSwap.serializedData()
+        }
+        return getSignedTx(auth, [swapCreateMsg], fee, memo, baseChain)
+    }
+    
+    //Tx for Kava Claim HTLC Swap
+    static func genKavaClaimHTLCSwapTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                       _ claimAtomicSwap: Kava_Bep3_V1beta1_MsgClaimAtomicSwap,
+                                       _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let swapClaimMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/kava.bep3.v1beta1.MsgClaimAtomicSwap"
+            $0.value = try! claimAtomicSwap.serializedData()
+        }
+        return getSignedTx(auth, [swapClaimMsg], fee, memo, baseChain)
+    }
+    
 
 //    
 //    //AUTHz

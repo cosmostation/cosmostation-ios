@@ -78,8 +78,6 @@ class CosmosClass: BaseChain  {
         }
     }
     
-    
-    
     func fetchStakeData() {
         if (cosmosValidators.count > 0) { return }
         Task {
@@ -109,8 +107,6 @@ class CosmosClass: BaseChain  {
             }
         }
     }
-    
-    
     
     func getInitFee() -> Cosmos_Tx_V1beta1_Fee? {
         var feeCoin: Cosmos_Base_V1beta1_Coin?

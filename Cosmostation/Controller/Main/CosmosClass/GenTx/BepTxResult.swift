@@ -20,11 +20,25 @@ class BepTxResult: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var loadingMsgLabel: UILabel!
     @IBOutlet weak var confirmBtn: BaseButton!
+    @IBOutlet weak var successLayer: UIView!
+    @IBOutlet weak var sendChainimg: UIImageView!
+    @IBOutlet weak var sendTxBtn: UIButton!
+    @IBOutlet weak var claimChainImg: UIImageView!
+    @IBOutlet weak var claimTxBtn: UIButton!
     
     var fromChain: CosmosClass!
     var toChain: CosmosClass!
     var toSendDenom: String!
     var toSendAmount = NSDecimalNumber.zero
+    
+    var timeStamp: Int64!
+    var randomNumber: String!
+    var randomNumberHash: String!
+    var swapId: String!
+    var sendTxHash: String?
+    var claimTxHash: String?
+    var swapIdFetchCnt = 15
+    var claimTxFetchCnt = 15
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +50,13 @@ class BepTxResult: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        print("fromChain ", fromChain.address)
-        print("toChain ", toChain.address)
-        print("toSendDenom ", toSendDenom)
-        print("toSendAmount ", toSendAmount)
-        
         loadingMsgLabel.text = NSLocalizedString("msg_htlc_swap_progress_0", comment: "")
+        
+        if (fromChain is ChainBinanceBeacon) {
+            btoK_FetchBnbAuth()
+        } else {
+            ktob_FetchKavaAuth()
+        }
     }
     
     func onUpdateProgress(_ step: Int) {
@@ -54,29 +69,39 @@ class BepTxResult: BaseVC {
         }
     }
     
-    
-    @IBAction func onClickConfirm(_ sender: BaseButton) {
+    func onUpdateview() {
+        loadingView.stop()
+        loadingLayer.isHidden = true
         
+        successLayer.isHidden = false
+        sendChainimg.image =  UIImage.init(named: fromChain.logo1)
+        claimChainImg.image =  UIImage.init(named: toChain.logo1)
+        claimTxBtn.isEnabled = true
     }
     
+    @IBAction func onClickSendTx(_ sender: UIButton) {
+        guard let url = BaseNetWork.getTxDetailUrl(fromChain, sendTxHash!) else { return }
+        self.onShowSafariWeb(url)
+    }
     
-    var timeStamp: Int64!
-    var randomNumber: String!
-    var randomNumberHash: String!
+    @IBAction func onClickClaimTx(_ sender: UIButton) {
+        guard let url = BaseNetWork.getTxDetailUrl(toChain, claimTxHash!) else { return }
+        self.onShowSafariWeb(url)
+    }
     
-//    var bnbAuth = JSON()
+    @IBAction func onClickConfirm(_ sender: BaseButton) {
+        onStartMainTab()
+    }
 }
 
 //BNB to KAVA
 extension BepTxResult {
-    
-    
-    func fetchBnbAuth() {
+    func btoK_FetchBnbAuth() {
         AF.request(BaseNetWork.lcdAccountInfoUrl(fromChain, fromChain.address!), method: .get).responseDecodable(of: JSON.self) { response in
             switch response.result {
             case .success(let value):
                 DispatchQueue.main.async(execute: {
-                    self.creatBepSend(value)
+                    self.btoK_CreatBepSend(value)
                 });
                 
             case .failure:
@@ -85,7 +110,7 @@ extension BepTxResult {
         }
     }
     
-    func creatBepSend(_ bnbAuth: JSON) {
+    func btoK_CreatBepSend(_ bnbAuth: JSON) {
         timeStamp = Date().millisecondsSince1970 / 1000
         randomNumber = KeyFac.generateRandomBytes()
         randomNumberHash = KeyFac.getRandomNumnerHash(randomNumber, timeStamp)
@@ -105,21 +130,19 @@ extension BepTxResult {
                                                signerAddress: fromChain.address!,
                                                sequence: bnbAuth["sequence"].intValue,
                                                accountNumber: bnbAuth["account_number"].intValue,
-                                               chainId: toChain.chainId!)
+                                               chainId: fromChain.chainId!)
         
         var encoding: ParameterEncoding = URLEncoding.default
         encoding = HexEncoding(data: try! bnbMsg.encode())
         let param: Parameters = ["address": fromChain.address!]
         
         AF.request(BaseNetWork.broadcastUrl(fromChain), method: .post, parameters: param, encoding: encoding).responseDecodable(of: JSON.self)  { response in
-            print("response ", response)
             switch response.result {
-            case .success(let res):
-                let sendTxHash = res.arrayValue[0]["hash"].stringValue
-                print("sendTxHash ", sendTxHash)
-                
+            case .success(let value):
                 DispatchQueue.main.async(execute: {
-//                    self.onFetchSwapId()
+                    self.sendTxHash = value.arrayValue[0]["hash"].stringValue
+                    self.swapId = KeyFac.getSwapId(self.toChain, self.toSendDenom, self.randomNumberHash, self.fromChain.address!)
+                    self.btoK_FetchBtoKSwapId()
                 });
 
             case .failure(let error):
@@ -128,25 +151,87 @@ extension BepTxResult {
         }
     }
     
-    
-    func fetchBtoKSwapId() {
+    func btoK_FetchBtoKSwapId() {
         onUpdateProgress(1)
-        let swapId = KeyFac.getSwapId(toChain, toSendDenom, randomNumberHash, fromChain.address!)
-        let url = BaseNetWork.swapIdBep3Url(toChain, swapId!)
-        print("swapId ", swapId)
-        print("url ", swapId)
-        
+        let url = BaseNetWork.swapIdBep3Url(toChain, swapId)
         AF.request(url, method: .get).responseDecodable(of: JSON.self) { response in
+            self.swapIdFetchCnt = self.swapIdFetchCnt - 1
             switch response.result {
             case .success(let value):
-                print("fetchBtoKSwapId ", value)
-//                DispatchQueue.main.async(execute: {
-//                    self.creatBepSend(value)
-//                });
+                if (value["code"].intValue != 0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                        if (self.swapIdFetchCnt > 0) {
+                            self.btoK_FetchBtoKSwapId()
+                        } else {
+                            self.onShowMoreSwapWait()
+                        }
+                    })
+                    
+                } else {
+                    self.btoK_FetchKavaAuth()
+                }
                 
             case .failure:
-                print("fetchBtoKSwapId error")
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                    if (self.swapIdFetchCnt > 0) {
+                        self.btoK_FetchBtoKSwapId()
+                    } else {
+                        self.onShowMoreSwapWait()
+                    }
+                })
             }
+        }
+    }
+    
+    func btoK_FetchKavaAuth() {
+        onUpdateProgress(2)
+        let channel = getConnection()
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = toChain.address! }
+        if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
+            self.btoK_CreateBepClaim(response)
+        }
+    }
+    
+    func btoK_CreateBepClaim(_ auth :Cosmos_Auth_V1beta1_QueryAccountResponse) {
+        let claimAtomicSwap = Kava_Bep3_V1beta1_MsgClaimAtomicSwap.with {
+            $0.from = toChain.address!
+            $0.swapID = swapId
+            $0.randomNumber = randomNumber
+        }
+        let feeCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = "ukava"
+            $0.amount = KAVA_BASE_FEE
+        }
+        let txFee = Cosmos_Tx_V1beta1_Fee.with {
+            $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
+            $0.amount = [feeCoin]
+        }
+        let reqTx = Signer.genKavaClaimHTLCSwapTx(auth, claimAtomicSwap, txFee, SWAP_MEMO_CLAIM, toChain)
+        if let response = try? Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getConnection()).broadcastTx(reqTx, callOptions: getCallOptions()).response.wait() {
+            self.claimTxHash = response.txResponse.txhash
+            self.btoK_FetchClaimTx()
+        }
+    }
+    
+    func btoK_FetchClaimTx() {
+        onUpdateProgress(3)
+        claimTxFetchCnt = claimTxFetchCnt - 1
+        let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = claimTxHash! }
+        if let response = try? Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getConnection()).getTx(req, callOptions: getCallOptions()).response.wait() {
+            DispatchQueue.main.async {
+                self.onUpdateview()
+            }
+            
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                if (self.claimTxFetchCnt > 0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                        self.btoK_FetchClaimTx()
+                    })
+                } else {
+                    self.onShowMoreClaimWait()
+                }
+            })
         }
     }
     
@@ -154,7 +239,158 @@ extension BepTxResult {
 
 //KAVA to BNB
 extension BepTxResult {
+    func ktob_FetchKavaAuth() {
+        let channel = getConnection()
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = fromChain.address! }
+        if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
+            self.ktob_CreatBepSend(response)
+        }
+    }
     
+    func ktob_CreatBepSend(_ auth :Cosmos_Auth_V1beta1_QueryAccountResponse) {
+        timeStamp = Date().millisecondsSince1970 / 1000
+        randomNumber = KeyFac.generateRandomBytes()
+        randomNumberHash = KeyFac.getRandomNumnerHash(randomNumber, timeStamp)
+        
+        let createAtomicSwap = Kava_Bep3_V1beta1_MsgCreateAtomicSwap.with {
+            $0.from = fromChain.address!
+            $0.to = fromKavaDuputyAdddress(toSendDenom)!.0
+            $0.senderOtherChain = fromKavaDuputyAdddress(toSendDenom)!.1
+            $0.recipientOtherChain = toChain.address!
+            $0.randomNumberHash = randomNumberHash
+            $0.timestamp = timeStamp
+            $0.amount = [Cosmos_Base_V1beta1_Coin.with { $0.denom = toSendDenom; $0.amount = toSendAmount.stringValue }]
+            $0.heightSpan = 24686
+        }
+        let feeCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = "ukava"
+            $0.amount = KAVA_BASE_FEE
+        }
+        let txFee = Cosmos_Tx_V1beta1_Fee.with {
+            $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
+            $0.amount = [feeCoin]
+        }
+        let reqTx = Signer.genKavaCreateHTLCSwap(auth, createAtomicSwap, txFee, SWAP_MEMO_CLAIM, fromChain)
+        if let response = try? Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getConnection()).broadcastTx(reqTx, callOptions: getCallOptions()).response.wait() {
+            self.sendTxHash = response.txResponse.txhash
+            
+            self.swapId = KeyFac.getSwapId(self.toChain, self.toSendDenom, self.randomNumberHash, self.fromChain.address!)
+            self.ktob_FetchBtoKSwapId()
+        }
+    }
+    
+    func ktob_FetchBtoKSwapId() {
+        onUpdateProgress(1)
+        let url = BaseNetWork.swapIdBep3Url(toChain, swapId)
+        AF.request(url, method: .get).responseDecodable(of: JSON.self) { response in
+            self.swapIdFetchCnt = self.swapIdFetchCnt - 1
+            switch response.result {
+            case .success(let value):
+                if (value["code"].intValue != 0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                        if (self.swapIdFetchCnt > 0) {
+                            self.ktob_FetchBtoKSwapId()
+                        } else {
+                            self.onShowMoreSwapWait()
+                        }
+                    })
+                    
+                } else {
+                    self.ktob_FetchBnbAuth()
+                }
+                
+            case .failure:
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                    if (self.swapIdFetchCnt > 0) {
+                        self.ktob_FetchBtoKSwapId()
+                    } else {
+                        self.onShowMoreSwapWait()
+                    }
+                })
+            }
+        }
+    }
+    
+    func ktob_FetchBnbAuth() {
+        onUpdateProgress(2)
+        AF.request(BaseNetWork.lcdAccountInfoUrl(toChain, toChain.address!), method: .get).responseDecodable(of: JSON.self) { response in
+            switch response.result {
+            case .success(let value):
+                DispatchQueue.main.async(execute: {
+                    self.ktob_CreateBepClaim(value)
+                });
+                
+            case .failure:
+                print("ktob_FetchBnbAuth error")
+            }
+        }
+    }
+    
+    func ktob_CreateBepClaim(_ bnbAuth: JSON) {
+        onUpdateProgress(3)
+        let bnbMsg = BinanceMessage.claimHtlc(randomNumber: randomNumber,
+                                              swapId: swapId,
+                                              memo: SWAP_MEMO_CLAIM,
+                                              privateKey: toChain.privateKey!,
+                                              signerAddress: toChain.address!,
+                                              sequence: bnbAuth["sequence"].intValue,
+                                              accountNumber: bnbAuth["account_number"].intValue,
+                                              chainId: toChain.chainId)
+        
+        var encoding: ParameterEncoding = URLEncoding.default
+        encoding = HexEncoding(data: try! bnbMsg.encode())
+        let param: Parameters = ["address": toChain.address!]
+        
+        AF.request(BaseNetWork.broadcastUrl(toChain), method: .post, parameters: param, encoding: encoding).responseDecodable(of: JSON.self)  { response in
+            switch response.result {
+            case .success(let value):
+                DispatchQueue.main.async(execute: {
+                    self.claimTxHash = value.arrayValue[0]["hash"].stringValue
+                    self.onUpdateview()
+                });
+
+            case .failure(let error):
+                print("ktob_createBepClaim error ", error)
+            }
+        }
+    }
+}
+
+
+extension BepTxResult {
+    func onShowMoreSwapWait() {
+        let noticeAlert = UIAlertController(title: NSLocalizedString("more_wait_swap_title", comment: ""), message: NSLocalizedString("more_wait_swap_msg", comment: ""), preferredStyle: .alert)
+        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
+            self.dismiss(animated: true, completion: nil)
+            self.onStartMainTab()
+        }))
+        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("wait", comment: ""), style: .default, handler: { _ in
+            self.swapIdFetchCnt = 15
+            if (self.fromChain is ChainBinanceBeacon) {
+                self.btoK_FetchBtoKSwapId()
+            } else {
+                self.ktob_FetchBtoKSwapId()
+            }
+        }))
+        self.present(noticeAlert, animated: true, completion: nil)
+    }
+    
+    func onShowMoreClaimWait() {
+        let noticeAlert = UIAlertController(title: NSLocalizedString("more_wait_swap_title", comment: ""), message: NSLocalizedString("more_wait_swap_msg", comment: ""), preferredStyle: .alert)
+        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
+            self.dismiss(animated: true, completion: nil)
+            self.onStartMainTab()
+        }))
+        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("wait", comment: ""), style: .default, handler: { _ in
+            self.claimTxFetchCnt = 15
+            if (self.fromChain is ChainBinanceBeacon) {
+                self.btoK_FetchClaimTx()
+            } else {
+                
+            }
+        }))
+        self.present(noticeAlert, animated: true, completion: nil)
+    }
     
     func fromBnbDuputyAdddress(_ denom: String) -> (String, String)? {
         if (denom == TOKEN_HTLC_BINANCE_BNB) {
@@ -180,5 +416,16 @@ extension BepTxResult {
             return (KAVA_MAIN_BUSD_DEPUTY, BINANCE_MAIN_BUSD_DEPUTY)
         }
         return nil
+    }
+    
+    func getConnection() -> ClientConnection {
+        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: "grpc-kava.cosmostation.io", port: 443)
+    }
+    
+    func getCallOptions() -> CallOptions {
+        var callOptions = CallOptions()
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        return callOptions
     }
 }
