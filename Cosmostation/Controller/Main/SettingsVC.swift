@@ -10,7 +10,6 @@ import UIKit
 
 class SettingsVC: BaseVC {
     
-    
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {

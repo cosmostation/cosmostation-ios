@@ -132,30 +132,30 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             })
             inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first!
             
-            outputChain = skipChains.filter({ $0["chain_name"].stringValue == "akash" }).first!
-            outputCosmosChain = allCosmosChains.filter({ $0.chainId == outputChain["chain_id"].stringValue && $0.isDefault == true }).first!
-            skipAssets?["chain_to_assets_map"][outputChain["chain_id"].stringValue]["assets"].arrayValue.forEach({ json in
-                if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
-                    outputAssetList.append(json)
-                }
-            })
-            outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first!
-            
-            let inputChannel = getConnection(inputCosmosChain)
-            if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.address!),
-                let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.address!) {
-                    inputBalances = WUtils.onParseAvailableCoins(inputAuth, inputBal)
-            }
-            
-            let outputChannel = getConnection(outputCosmosChain)
-            if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.address!),
-                let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.address!) {
-                    outputBalances = WUtils.onParseAvailableCoins(outputAuth, outputBal)
-            }
-            
-            DispatchQueue.main.async {
-                self.onInitView()
-            }
+//            outputChain = skipChains.filter({ $0["chain_name"].stringValue == "akash" }).first!
+//            outputCosmosChain = allCosmosChains.filter({ $0.chainId == outputChain["chain_id"].stringValue && $0.isDefault == true }).first!
+//            skipAssets?["chain_to_assets_map"][outputChain["chain_id"].stringValue]["assets"].arrayValue.forEach({ json in
+//                if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
+//                    outputAssetList.append(json)
+//                }
+//            })
+//            outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first!
+//            
+//            let inputChannel = getConnection(inputCosmosChain)
+//            if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.address!),
+//                let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.address!) {
+//                    inputBalances = WUtils.onParseAvailableCoins(inputAuth, inputBal)
+//            }
+//            
+//            let outputChannel = getConnection(outputCosmosChain)
+//            if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.address!),
+//                let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.address!) {
+//                    outputBalances = WUtils.onParseAvailableCoins(outputAuth, outputBal)
+//            }
+//            
+//            DispatchQueue.main.async {
+//                self.onInitView()
+//            }
         }
         
         inputChainView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onInputChain)))

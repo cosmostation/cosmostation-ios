@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,13 +28,12 @@
                     <connections>
                         <segue destination="qzR-G4-Lik" kind="relationship" relationship="viewControllers" id="J9R-0A-CKm"/>
                         <segue destination="oIO-Jl-Gzw" kind="relationship" relationship="viewControllers" id="qZt-b7-p93"/>
-                        <segue destination="eDv-Z6-ECi" kind="relationship" relationship="viewControllers" id="gpb-PN-X7a"/>
                         <segue destination="O3B-T0-BlA" kind="relationship" relationship="viewControllers" id="fbs-oI-Ema"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Crl-1o-R2n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1121.3740458015266" y="555.63380281690138"/>
+            <point key="canvasLocation" x="-1811" y="453"/>
         </scene>
         <!--PortfolioVC-->
         <scene sceneID="s0d-6b-0kx">
@@ -113,70 +112,37 @@
             </objects>
             <point key="canvasLocation" x="-2932.06106870229" y="2114.7887323943664"/>
         </scene>
-        <!--SwapVC-->
+        <!--ServiceVC-->
         <scene sceneID="EKC-P2-87t">
             <objects>
-                <viewController storyboardIdentifier="SwapVC" id="hg3-fN-cph" customClass="SwapVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ServiceVC" id="hg3-fN-cph" customClass="ServiceVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Ch-jF-f0E">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ro6-GB-9co">
-                                <rect key="frame" x="153" y="423" width="75" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <action selector="onClickTest:" destination="hg3-fN-cph" eventType="touchUpInside" id="GLd-uY-xm5"/>
-                                </connections>
-                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="E17-5O-bYS">
+                                <rect key="frame" x="0.0" y="111" width="393" height="658"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="_primary"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Z1L-6p-fyC"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ro6-GB-9co" firstAttribute="centerX" secondItem="Z1L-6p-fyC" secondAttribute="centerX" id="10a-10-L2u"/>
-                            <constraint firstItem="ro6-GB-9co" firstAttribute="centerY" secondItem="Z1L-6p-fyC" secondAttribute="centerY" id="4zy-Fh-gzM"/>
+                            <constraint firstItem="E17-5O-bYS" firstAttribute="top" secondItem="Z1L-6p-fyC" secondAttribute="top" constant="8" id="48Y-6y-r3U"/>
+                            <constraint firstItem="Z1L-6p-fyC" firstAttribute="bottom" secondItem="E17-5O-bYS" secondAttribute="bottom" id="Fdd-WR-cUm"/>
+                            <constraint firstItem="Z1L-6p-fyC" firstAttribute="trailing" secondItem="E17-5O-bYS" secondAttribute="trailing" id="ipg-Jj-eKB"/>
+                            <constraint firstItem="E17-5O-bYS" firstAttribute="leading" secondItem="Z1L-6p-fyC" secondAttribute="leading" id="xqW-Ed-9bf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ofT-Qf-ESe"/>
+                    <connections>
+                        <outlet property="tableView" destination="E17-5O-bYS" id="9rv-fW-0fc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LlC-1g-KQI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1811" y="2115"/>
-        </scene>
-        <!--DappVC-->
-        <scene sceneID="YhM-5O-Wg8">
-            <objects>
-                <viewController storyboardIdentifier="DappVC" id="GBW-9t-Xwt" customClass="DappVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="j6A-y5-86P">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2WX-ke-o9q">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="qpm-qz-fV6"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="qpm-qz-fV6" firstAttribute="top" secondItem="2WX-ke-o9q" secondAttribute="top" id="9lB-rV-VHr"/>
-                            <constraint firstItem="2WX-ke-o9q" firstAttribute="leading" secondItem="qpm-qz-fV6" secondAttribute="leading" id="leY-Qn-o8F"/>
-                            <constraint firstItem="qpm-qz-fV6" firstAttribute="bottom" secondItem="2WX-ke-o9q" secondAttribute="bottom" id="yj6-vb-Oxw"/>
-                            <constraint firstItem="qpm-qz-fV6" firstAttribute="trailing" secondItem="2WX-ke-o9q" secondAttribute="trailing" id="zLr-Wh-rej"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="fwN-nK-U6C"/>
-                    <connections>
-                        <outlet property="webView" destination="2WX-ke-o9q" id="BKw-Ej-LC8"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="A6d-8F-dZh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-579" y="2115"/>
         </scene>
         <!--SettingsVC-->
         <scene sceneID="NWB-pI-DfZ">
@@ -208,7 +174,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X6Q-i2-EYk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="497" y="2115"/>
+            <point key="canvasLocation" x="-608" y="2115"/>
         </scene>
         <!--Chains-->
         <scene sceneID="auC-Sl-Hk9">
@@ -232,11 +198,11 @@
             </objects>
             <point key="canvasLocation" x="-2918.320610687023" y="1343.661971830986"/>
         </scene>
-        <!--Swaps-->
+        <!--Service-->
         <scene sceneID="xY6-Wy-5LL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oIO-Jl-Gzw" customClass="BaseNavi" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Swaps" image="mainTabSwap" id="OSh-f6-eNA">
+                    <tabBarItem key="tabBarItem" title="Service" image="mainTabService" id="OSh-f6-eNA">
                         <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -253,28 +219,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P5d-GV-DeN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1811" y="1344"/>
-        </scene>
-        <!--Dapps-->
-        <scene sceneID="isP-hV-qqt">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eDv-Z6-ECi" customClass="BaseNavi" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dapps" image="mainTabDapp" id="JXE-5i-UPJ">
-                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBarItem>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BM4-96-t5i">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" name="_color01"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="GBW-9t-Xwt" kind="relationship" relationship="rootViewController" id="7mb-YZ-RzN"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rBs-vh-q9Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-578" y="1344"/>
         </scene>
         <!--Settings-->
         <scene sceneID="fgP-oN-GFJ">
@@ -296,15 +240,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OgA-Lj-70P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="497" y="1344"/>
+            <point key="canvasLocation" x="-607" y="1344"/>
         </scene>
     </scenes>
     <color key="tintColor" name="_primary"/>
     <resources>
         <image name="mainTabChains" width="24" height="24"/>
-        <image name="mainTabDapp" width="24" height="24"/>
+        <image name="mainTabService" width="24" height="24"/>
         <image name="mainTabSetting" width="24" height="24"/>
-        <image name="mainTabSwap" width="24" height="24"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -312,7 +255,7 @@
             <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

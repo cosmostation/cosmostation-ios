@@ -14,13 +14,9 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         self.view.addBackground()
         
-//        BaseData.instance.baseAccount?.initDisplayData()
         BaseData.instance.baseAccount?.initAccount()
         
-//        self.tabBar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-//        self.tabBar.barTintColor = .blue
         self.tabBar.tintColor = .white
-
         self.tabBar.layer.masksToBounds = true
         self.tabBar.layer.cornerRadius = 8
         self.tabBar.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]

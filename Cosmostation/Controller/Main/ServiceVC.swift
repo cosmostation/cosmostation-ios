@@ -1,5 +1,5 @@
 //
-//  SwapVC.swift
+//  ServiceVC.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/08/09.
@@ -8,37 +8,73 @@
 
 import UIKit
 
-class SwapVC: BaseVC {
+class ServiceVC: BaseVC {
+    
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initView()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "ServiceCell", bundle: nil), forCellReuseIdentifier: "ServiceCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderTopPadding = 0.0
         
-//        let swapStartVC = SwapStartVC(nibName: "SwapStartVC", bundle: nil)
-//        swapStartVC.modalTransitionStyle = .coverVertical
-//        self.present(swapStartVC, animated: true)
+        initView()
     }
     
     func initView() {
         baseAccount = BaseData.instance.baseAccount
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
     }
-    
-    @IBAction func onClickTest(_ sender: UIButton) {
-        let swapStartVC = SwapStartVC(nibName: "SwapStartVC", bundle: nil)
-        swapStartVC.modalTransitionStyle = .coverVertical
-        self.present(swapStartVC, animated: true)
-    }
+}
 
+extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.row == 1 && BaseData.instance.reviewMode) {
+            return 0
+        }
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"ServiceCell") as! ServiceCell
+        if (indexPath.row == 0) {
+            cell.tempTitle.text =  "SWAP"
+        } else if (indexPath.row == 1) {
+            cell.tempTitle.text =  "Dapp"
+        } else {
+            cell.tempTitle.text =  "Buy"
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.row == 0) {
+            let swapStartVC = SwapStartVC(nibName: "SwapStartVC", bundle: nil)
+            swapStartVC.modalTransitionStyle = .coverVertical
+            self.present(swapStartVC, animated: true)
+            
+        } else if (indexPath.row == 1) {
+            let dappStartVC = DappStartVC(nibName: "DappStartVC", bundle: nil)
+            dappStartVC.modalTransitionStyle = .coverVertical
+            self.present(dappStartVC, animated: true)
+            
+        } else {
+            //display moon pay or 
+        }
+    }
 }
 
 
-extension SwapVC: BaseSheetDelegate {
+extension ServiceVC: BaseSheetDelegate {
     
     func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
         let button = UIButton(type: .system)
