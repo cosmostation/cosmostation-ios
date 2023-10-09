@@ -63,7 +63,7 @@ class CosmosCoinVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
-        if (selectedChain.tag == tag) {
+        if (selectedChain != nil && selectedChain.tag == tag) {
             refresher.endRefreshing()
             nativeCoins.removeAll()
             ibcCoins.removeAll()
