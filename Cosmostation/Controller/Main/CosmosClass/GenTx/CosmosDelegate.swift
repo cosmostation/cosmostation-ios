@@ -112,6 +112,7 @@ class CosmosDelegate: BaseVC {
     }
     
     func onUpdateValidatorView() {
+        monikerImg.image = UIImage(named: "validatorDefault")
         monikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
         monikerLabel.text = toValidator!.description_p.moniker
         jailedImg.isHidden = !toValidator!.jailed

@@ -12,19 +12,11 @@
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
         </array>
-        <array key="SpoqaHanSansNeo-Medium.otf">
-            <string>SpoqaHanSansNeo-Medium</string>
-        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChainSelectVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="confirmBtn" destination="wYs-3p-dhB" id="7A0-FR-vpx"/>
-                <outlet property="loadingCntLabel" destination="PmL-Mf-KXv" id="vbe-sr-Qs1"/>
-                <outlet property="loadingLayer" destination="LPA-O6-iKd" id="tJD-Le-iS1"/>
-                <outlet property="loadingMsgLabel" destination="hPZ-vb-f7V" id="HRa-Ji-pJa"/>
-                <outlet property="loadingView" destination="JLa-MP-siQ" id="sWg-eg-KCB"/>
-                <outlet property="powerLabel" destination="KTD-Fe-1GN" id="3El-pk-8ru"/>
                 <outlet property="selectBtn" destination="opE-nc-fiJ" id="9nE-MF-go0"/>
                 <outlet property="tableView" destination="xuQ-RN-hZP" id="VBg-z1-8Bl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -80,62 +72,16 @@
                         </button>
                     </subviews>
                 </stackView>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPA-O6-iKd">
-                    <rect key="frame" x="76.666666666666686" y="338.66666666666669" width="240" height="200.00000000000006"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JLa-MP-siQ" customClass="LottieAnimationView" customModule="Lottie">
-                            <rect key="frame" x="30" y="0.0" width="180" height="110"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="180" id="7ed-oU-QdP"/>
-                                <constraint firstAttribute="height" constant="110" id="U5a-lU-u2r"/>
-                            </constraints>
-                        </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking your all asset with onchain " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPZ-vb-f7V">
-                            <rect key="frame" x="15" y="118" width="209.66666666666666" height="15.333333333333343"/>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
-                            <color key="textColor" name="_color01"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmL-Mf-KXv">
-                            <rect key="frame" x="108.66666666666667" y="135.33333333333331" width="22.333333333333329" height="17.666666666666657"/>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                            <color key="textColor" name="_color01"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="JLa-MP-siQ" firstAttribute="top" secondItem="LPA-O6-iKd" secondAttribute="top" id="Ng2-kM-FKA"/>
-                        <constraint firstAttribute="width" constant="240" id="XNk-0V-FdE"/>
-                        <constraint firstItem="JLa-MP-siQ" firstAttribute="centerX" secondItem="LPA-O6-iKd" secondAttribute="centerX" id="YDL-RB-cGo"/>
-                        <constraint firstItem="PmL-Mf-KXv" firstAttribute="centerX" secondItem="LPA-O6-iKd" secondAttribute="centerX" id="kLg-cU-ST8"/>
-                        <constraint firstAttribute="height" constant="200" id="kqJ-vv-P6W"/>
-                        <constraint firstItem="hPZ-vb-f7V" firstAttribute="top" secondItem="JLa-MP-siQ" secondAttribute="bottom" constant="8" id="oFm-ed-ub1"/>
-                        <constraint firstItem="PmL-Mf-KXv" firstAttribute="top" secondItem="hPZ-vb-f7V" secondAttribute="bottom" constant="2" id="scg-Xw-zgI"/>
-                        <constraint firstItem="hPZ-vb-f7V" firstAttribute="centerX" secondItem="LPA-O6-iKd" secondAttribute="centerX" id="td1-12-Huj"/>
-                    </constraints>
-                </view>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered By Cosmostation Web3 Infrastructure" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTD-Fe-1GN">
-                    <rect key="frame" x="95.333333333333329" y="753.66666666666663" width="202.66666666666669" height="30.333333333333371"/>
-                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                    <color key="textColor" name="_color01"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstItem="KTD-Fe-1GN" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="4Bv-uM-rxL"/>
-                <constraint firstItem="LPA-O6-iKd" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Ck8-i3-rnq"/>
-                <constraint firstItem="LPA-O6-iKd" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="FAD-4g-iux"/>
+                <constraint firstItem="xuQ-RN-hZP" firstAttribute="top" secondItem="Llq-eZ-xLQ" secondAttribute="bottom" constant="8" id="Nxw-eq-aVn"/>
                 <constraint firstItem="AeY-wO-fuu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="STn-mX-ql6"/>
                 <constraint firstAttribute="bottom" secondItem="AeY-wO-fuu" secondAttribute="bottom" constant="38" id="XkB-nF-ffm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xuQ-RN-hZP" secondAttribute="trailing" id="bzx-w6-RHY"/>
                 <constraint firstItem="AeY-wO-fuu" firstAttribute="top" secondItem="xuQ-RN-hZP" secondAttribute="bottom" constant="8" id="fQU-jr-XR8"/>
-                <constraint firstItem="xuQ-RN-hZP" firstAttribute="top" secondItem="Llq-eZ-xLQ" secondAttribute="bottom" constant="8" id="kJ9-Lx-nao"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KTD-Fe-1GN" secondAttribute="bottom" constant="34" id="keE-qJ-m2e"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AeY-wO-fuu" secondAttribute="trailing" constant="8" id="maw-DC-M1Z"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="xuQ-RN-hZP" secondAttribute="leading" id="o84-51-hca"/>
                 <constraint firstItem="Llq-eZ-xLQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="oyp-XO-Xwr"/>

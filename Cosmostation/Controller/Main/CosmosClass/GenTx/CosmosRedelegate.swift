@@ -123,6 +123,7 @@ class CosmosRedelegate: BaseVC {
     }
     
     func onUpdateFromValidatorView() {
+        fromMonikerImg.image = UIImage(named: "validatorDefault")
         fromMonikerImg.af.setImage(withURL: selectedChain.monikerImg(fromValidator!.operatorAddress))
         fromMonikerLabel.text = fromValidator!.description_p.moniker
         fromJailedImg.isHidden = !fromValidator!.jailed
@@ -146,6 +147,7 @@ class CosmosRedelegate: BaseVC {
     }
     
     func onUpdateToValidatorView() {
+        toMonikerImg.image = UIImage(named: "validatorDefault")
         toMonikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
         toMonikerLabel.text = toValidator!.description_p.moniker
         toJailedImg.isHidden = !toValidator!.jailed

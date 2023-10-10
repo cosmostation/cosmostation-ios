@@ -11,27 +11,19 @@ import Lottie
 
 class ChainSelectVC: BaseVC {
     
-    @IBOutlet weak var loadingLayer: UIView!
-    @IBOutlet weak var loadingView: LottieAnimationView!
-    @IBOutlet weak var loadingMsgLabel: UILabel!
-    @IBOutlet weak var loadingCntLabel: UILabel!
-    @IBOutlet weak var powerLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectBtn: SecButton!
     @IBOutlet weak var confirmBtn: BaseButton!
     
+    var searchBar: UISearchBar?
+    
     var onChainSelected: (() -> Void)? = nil
     var toDisplayCosmosTags = [String]()
     var allCosmosChains = [CosmosClass]()
+    var searchCosmosChains = [CosmosClass]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        loadingView.animation = LottieAnimation.named("loading")
-//        loadingView.contentMode = .scaleAspectFit
-//        loadingView.loopMode = .loop
-//        loadingView.animationSpeed = 1.3
-//        loadingView.play()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -40,10 +32,24 @@ class ChainSelectVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
+        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+        searchBar?.searchTextField.textColor = .color01
+        searchBar?.tintColor = UIColor.white
+        searchBar?.barTintColor = UIColor.clear
+        searchBar?.searchTextField.font = .fontSize14Bold
+        searchBar?.backgroundImage = UIImage()
+        searchBar?.delegate = self
+        tableView.tableHeaderView = searchBar
+        
+        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        dismissTap.cancelsTouchesInView = false
+        view.addGestureRecognizer(dismissTap)
+        
         baseAccount = BaseData.instance.baseAccount
         baseAccount.initSortCosmosChains()
         baseAccount.fetchAllCosmosChains()
         allCosmosChains = baseAccount.allCosmosClassChains
+        searchCosmosChains = allCosmosChains
         
         toDisplayCosmosTags = BaseData.instance.getDisplayCosmosChainTags(baseAccount.id)
     }
@@ -71,10 +77,14 @@ class ChainSelectVC: BaseVC {
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
+    @objc func dismissKeyboard() {
+        searchBar?.endEditing(true)
+    }
+    
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
-        for i in 0..<allCosmosChains.count {
-            if (allCosmosChains[i].tag == tag) {
+        for i in 0..<searchCosmosChains.count {
+            if (searchCosmosChains[i].tag == tag) {
                 DispatchQueue.main.async {
                     self.tableView.beginUpdates()
                     self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
@@ -113,7 +123,7 @@ class ChainSelectVC: BaseVC {
 }
 
 
-extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource {
+extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -131,22 +141,21 @@ extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource {
         return 40
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allCosmosChains.count
+        return searchCosmosChains.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as! SelectChainCell
-        let toBindChain = allCosmosChains[indexPath.row]
+        let toBindChain = searchCosmosChains[indexPath.row]
         cell.bindCosmosClassChain(baseAccount, toBindChain, toDisplayCosmosTags)
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (indexPath.row == 0) { return }
-        let chain = allCosmosChains[indexPath.row]
+        let chain = searchCosmosChains[indexPath.row]
+        if (chain.tag == "cosmos118") { return }
         if (toDisplayCosmosTags.contains(chain.tag)) {
             toDisplayCosmosTags.removeAll { $0 == chain.tag }
         } else {
@@ -157,5 +166,16 @@ extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource {
             self.tableView.reloadRows(at: [indexPath], with: .none)
             self.tableView.endUpdates()
         }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar?.endEditing(true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchCosmosChains = searchText.isEmpty ? allCosmosChains : allCosmosChains.filter { cosmosChain in
+            return cosmosChain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        tableView.reloadData()
     }
 }

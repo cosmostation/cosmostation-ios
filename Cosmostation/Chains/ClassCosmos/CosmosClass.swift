@@ -941,4 +941,4 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     return result
 }
 
-let DEFUAL_DISPALY_COSMOS = ["cosmos118", "okt60_Keccak", "okt996_Secp", "okt996_Keccak", "binanceBeacon"]
+let DEFUAL_DISPALY_COSMOS = ["cosmos118", "neutron118", "kava459", "osmosis118", "akash118", "stargaze118"]

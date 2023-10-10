@@ -65,10 +65,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.sectionHeaderTopPadding = 0
         
         
-//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
-//        let tapDismiss = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-//        tapDismiss.cancelsTouchesInView = false
-//        view.addGestureRecognizer(tapDismiss)
+        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        dismissTap.cancelsTouchesInView = false
+        view.addGestureRecognizer(dismissTap)
         
 //        print("senderAddress ", senderAddress)
 //        print("targetChain ", targetChain.accountPrefix)
@@ -185,24 +184,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         
     }
     
-//    @objc func dismissKeyboard() {
-//        view.endEditing(true)
-//    }
-
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        sheetSearchBar.text = ""
+    @objc func dismissKeyboard() {
         sheetSearchBar.endEditing(true)
-        if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
-            swapChainsSearch = swapChains
-        } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
-            swapAssetsSearch = swapAssets
-        } else if (sheetType == .SelectValidator) {
-            validatorsSearch = validators
-        }
-        sheetTableView.reloadData()
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
             swapChainsSearch = searchText.isEmpty ? swapChains : swapChains.filter { chain in

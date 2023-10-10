@@ -9,9 +9,13 @@
 import UIKit
 
 class PortfolioVC: BaseVC {
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
+    
+    var refresher: UIRefreshControl!
+    var searchBar: UISearchBar?
     
     var toDisplayCosmosChains = [CosmosClass]()
     var searchCosmosChains = [CosmosClass]()
@@ -20,7 +24,6 @@ class PortfolioVC: BaseVC {
             WDP.dpValue(totalValue, currencyLabel, totalValueLabel)
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,37 +35,39 @@ class PortfolioVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
+        refresher.tintColor = .color01
+        tableView.addSubview(refresher)
+        
+        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+        searchBar?.searchTextField.textColor = .color01
+        searchBar?.tintColor = UIColor.white
+        searchBar?.barTintColor = UIColor.clear
+        searchBar?.searchTextField.font = .fontSize14Bold
+        searchBar?.backgroundImage = UIImage()
+        searchBar?.delegate = self
+        tableView.tableHeaderView = searchBar
+        
+        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        dismissTap.cancelsTouchesInView = false
+        view.addGestureRecognizer(dismissTap)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
-        
-        
-//        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
-//        searchBar.searchTextField.textColor = .color01
-//        searchBar.tintColor = UIColor.white
-//        searchBar.barTintColor = UIColor.clear
-//        searchBar.searchTextField.font = .fontSize14Bold
-//        searchBar.backgroundImage = UIImage()
-//        searchBar.delegate = self
-//        tableView.tableHeaderView = searchBar
         
         initView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("PortfolioVC viewWillAppear")
-        
-//        var contentOffset: CGPoint = tableView.contentOffset
-//        contentOffset.y += (tableView.tableHeaderView?.frame)!.height
-//        tableView.contentOffset = contentOffset
-        
-//        tableView.reloadData()
-//        onUpdateTotal()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("PortfolioVC viewDidAppear")
+        var contentOffset: CGPoint = tableView.contentOffset
+        if (contentOffset == CGPoint(x: 0, y: 0) && 
+            tableView.tableHeaderView != nil &&
+            searchBar?.text?.isEmpty == true) {
+            contentOffset.y += (tableView.tableHeaderView?.frame)!.height
+            tableView.contentOffset = contentOffset
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -81,6 +86,24 @@ class PortfolioVC: BaseVC {
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
         navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(onClickChainSelect))
+    }
+    
+    @objc func dismissKeyboard() {
+        searchBar?.endEditing(true)
+    }
+    
+    @objc func onRequestFetch() {
+        if (toDisplayCosmosChains.filter { $0.fetched == false }.count > 0) {
+            refresher.endRefreshing()
+        } else {
+            BaseNetWork().fetchPrices()
+            toDisplayCosmosChains.forEach { chain in
+                chain.fetched = false
+            }
+            baseAccount.fetchDisplayCosmosChains()
+            tableView.reloadData()
+            refresher.endRefreshing()
+        }
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
@@ -132,7 +155,7 @@ class PortfolioVC: BaseVC {
 
 }
 
-extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -198,12 +221,8 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
         }
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        searchBar.endEditing(true)
-        searchBar.resignFirstResponder()
-        searchCosmosChains = toDisplayCosmosChains
-        tableView.reloadData()
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar?.endEditing(true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
