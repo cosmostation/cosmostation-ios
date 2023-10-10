@@ -346,7 +346,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                     if (self.pageHolderVC.mTransferType == TRANSFER_IBC_SIMPLE || self.pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
                         self.onFetchIbcClientState(response)
                     } else {
-                        self.onBroadcastTx(response, nil)
+                        self.onBroadcastTx(response, nil, nil)
                     }
                 }
                 try channel.close().wait()
@@ -366,7 +366,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                 }
                 if let response = try? Ibc_Core_Channel_V1_QueryClient(channel: channel).channelClientState(req).response.wait() {
                     let clientState = try! Ibc_Lightclients_Tendermint_V1_ClientState.init(serializedData: response.identifiedClientState.clientState.value)
-                    self.onBroadcastTx(auth, clientState.latestHeight)
+                    self.onFetchLatestBlock(auth,clientState.latestHeight)
                 }
                 try channel.close().wait()
             } catch {
@@ -375,7 +375,23 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         }
     }
     
-    func onBroadcastTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?, _ height: Ibc_Core_Client_V1_Height?) {
+    func onFetchLatestBlock(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ height: Ibc_Core_Client_V1_Height?) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.pageHolderVC.mRecipinetChainConfig)!
+                let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
+                if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getLatestBlock(req).response.wait() {
+                    self.onBroadcastTx(auth, height, response.block)
+                }
+                try channel.close().wait()
+            } catch {
+                self.onShowToast(NSLocalizedString("error_network", comment: ""))
+                print("onFetchLastBlock failed: \(error)")
+            }
+        }
+    }
+    
+    func onBroadcastTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?, _ height: Ibc_Core_Client_V1_Height?, _ latest: Tendermint_Types_Block?) {
         DispatchQueue.global().async {
             var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest?
             if (self.pageHolderVC.mTransferType == TRANSFER_SIMPLE) {
@@ -387,7 +403,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             } else if (self.pageHolderVC.mTransferType == TRANSFER_IBC_SIMPLE) {
                 reqTx = Signer.genIbcSend(auth!, self.account!.account_pubkey_type,
                                           self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mToSendAmount,
-                                          self.pageHolderVC.mMintscanPath!, height!,
+                                          self.pageHolderVC.mMintscanPath!, height!, latest!,
                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
                 

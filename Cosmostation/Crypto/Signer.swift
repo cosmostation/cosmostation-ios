@@ -649,23 +649,23 @@ class Signer {
     //for IBC Transfer custom msgs
     //Tx for Ibc Transfer
     static func genIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-                           _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height,
+                           _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height, _ latest: Tendermint_Types_Block,
                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let ibcTransferMsg = genIbcTransferMsg(auth, receiver, amount, path, lastHeight)
+        let ibcTransferMsg = genIbcTransferMsg(auth, receiver, amount, path, lastHeight, latest)
         return getGrpcSignedTx(auth, pubkeyType, chainType, ibcTransferMsg, privateKey, publicKey, fee, memo)
     }
     
     static func simulIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-                             _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height,
+                             _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height, _ latest: Tendermint_Types_Block,
                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let ibcTransferMsg = genIbcTransferMsg(auth, receiver, amount, path, lastHeight)
+        let ibcTransferMsg = genIbcTransferMsg(auth, receiver, amount, path, lastHeight, latest)
         return getGrpcSimulateTx(auth, pubkeyType, chainType, ibcTransferMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genIbcTransferMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height) -> [Google_Protobuf_Any] {
+    static func genIbcTransferMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height, _ latest: Tendermint_Types_Block) -> [Google_Protobuf_Any] {
         let re_timeout_height = Ibc_Core_Client_V1_Height.with {
             $0.revisionNumber = lastHeight.revisionNumber
-            $0.revisionHeight = lastHeight.revisionHeight + 1000
+            $0.revisionHeight = UInt64(latest.header.height + 200)
         }
         let re_token = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = amount[0].denom

@@ -639,8 +639,14 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     @objc func onClickNoticeBoard() {
-        if let url = URL(string: MintscanUrl + "cosmostation/notice/" + self.chainConfig!.chainAPIName + "/" + String(self.noticeCard.tag)) {
-            self.onShowSafariWeb(url)
+        if (chainType == .CERBERUS_MAIN || chainType == .KUJIRA_MAIN || chainType == .KONSTELLATION_MAIN || chainType == .SIF_MAIN) {
+            if let url = URL(string: MintscanUrl + "cosmostation/notice/" + self.chainConfig!.chainAPIName + "/" + String(self.noticeCard.tag)) {
+                self.onShowSafariWeb(url)
+            }
+        } else {
+            if let url = URL(string: MintscanUrl + "information/notice/" + self.chainConfig!.chainAPIName + "/" + String(self.noticeCard.tag)) {
+                self.onShowSafariWeb(url)
+            }
         }
     }
     
