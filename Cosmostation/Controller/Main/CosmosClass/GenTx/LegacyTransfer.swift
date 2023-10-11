@@ -71,13 +71,13 @@ class LegacyTransfer: BaseVC {
         loadingView.play()
         
         //display to send asset info
-        if (selectedChain is ChainBinanceBeacon) {
-            tokenInfo = selectedChain.lcdBeaconTokens.filter({ $0["symbol"].string == toSendDenom }).first!
+        if let bnbChain = selectedChain as? ChainBinanceBeacon {
+            tokenInfo = bnbChain.lcdBeaconTokens.filter({ $0["symbol"].string == toSendDenom }).first!
             let original_symbol = tokenInfo["original_symbol"].stringValue
             toSendAssetImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(original_symbol))
             toSendSymbolLabel.text = original_symbol.uppercased()
             
-            let available = selectedChain.lcdBalanceAmount(toSendDenom)
+            let available = bnbChain.lcdBalanceAmount(toSendDenom)
             if (toSendDenom == stakeDenom) {
                 availableAmount = available.subtracting(NSDecimalNumber(string: BNB_BEACON_BASE_FEE))
             } else {
@@ -85,19 +85,18 @@ class LegacyTransfer: BaseVC {
             }
             print("availableAmount ", availableAmount)
             
-        } else if (selectedChain is ChainOkt60Keccak) {
-            tokenInfo = selectedChain.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
+        } else if let okChain = selectedChain as? ChainOkt60Keccak {
+            tokenInfo = okChain.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
             let original_symbol = tokenInfo["original_symbol"].stringValue
             toSendAssetImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(original_symbol))
             toSendSymbolLabel.text = original_symbol.uppercased()
             
-            let available = selectedChain.lcdBalanceAmount(toSendDenom)
+            let available = okChain.lcdBalanceAmount(toSendDenom)
             if (toSendDenom == stakeDenom) {
                 availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
             } else {
                 availableAmount = available
             }
-            print("availableAmount ", availableAmount)
             
         }
         
@@ -334,7 +333,6 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
                 if (selectedChain is ChainBinanceBeacon) {
                     if let response = try? await broadcastBnbSendTx() {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-//                            print("response ", response)
                             self.loadingView.isHidden = true
                             
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -369,14 +367,15 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
 extension LegacyTransfer {
     
     func broadcastBnbSendTx() async throws -> JSON? {
+        let bnbChain = selectedChain as! ChainBinanceBeacon
         let bnbMsg = BinanceMessage.transfer(symbol: self.toSendDenom,
                                              amount: (self.toSendAmount).doubleValue,
                                              toAddress: self.recipientAddress!,
                                              memo: self.txMemo,
                                              privateKey: self.selectedChain.privateKey!,
                                              signerAddress: self.selectedChain.address!,
-                                             sequence: self.selectedChain.lcdAccountInfo["sequence"].intValue,
-                                             accountNumber: self.selectedChain.lcdAccountInfo["account_number"].intValue,
+                                             sequence: bnbChain.lcdAccountInfo["sequence"].intValue,
+                                             accountNumber: bnbChain.lcdAccountInfo["account_number"].intValue,
                                              chainId: self.selectedChain.chainId)
         
         var encoding: ParameterEncoding = URLEncoding.default

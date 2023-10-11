@@ -55,41 +55,42 @@ class AssetCell: UITableViewCell {
     
     
     func bindBeaconAsset(_ baseChain: CosmosClass, _ coin: JSON) {
-        if let token = baseChain.lcdBeaconTokens.filter({ $0["symbol"].string == coin["symbol"].string }).first {
-            let original_symbol = token["original_symbol"].stringValue
-            
-            symbolLabel.text = original_symbol
-            priceCurrencyLabel.text = token["name"].string
-            coinImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(original_symbol))
-            
-            let availableAmount = baseChain.lcdBalanceAmount(coin["symbol"].stringValue)
-            amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
-            
-            priceLabel.isHidden = true
-            priceChangeLabel.isHidden = true
-            priceChangePercentLabel.isHidden = true
-            valueCurrencyLabel.isHidden = true
-            valueLabel.isHidden = true
+        if let bnbChain = baseChain as? ChainBinanceBeacon,
+            let token = bnbChain.lcdBeaconTokens.filter({ $0["symbol"].string == coin["symbol"].string }).first {
+                let original_symbol = token["original_symbol"].stringValue
+                
+                symbolLabel.text = original_symbol
+                priceCurrencyLabel.text = token["name"].string
+                coinImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(original_symbol))
+                
+                let availableAmount = bnbChain.lcdBalanceAmount(coin["symbol"].stringValue)
+                amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
+                
+                priceLabel.isHidden = true
+                priceChangeLabel.isHidden = true
+                priceChangePercentLabel.isHidden = true
+                valueCurrencyLabel.isHidden = true
+                valueLabel.isHidden = true
         }
-        
     }
     
     func bindOktAsset(_ baseChain: CosmosClass, _ coin: JSON) {
-        if let token = baseChain.lcdOktTokens.filter({ $0["symbol"].string == coin["denom"].string }).first {
-            let original_symbol = token["original_symbol"].stringValue
-            
-            symbolLabel.text = original_symbol.uppercased()
-            priceCurrencyLabel.text = token["description"].string
-            coinImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(original_symbol))
-            
-            let availableAmount = baseChain.lcdBalanceAmount(coin["denom"].stringValue)
-            amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
-            
-            priceLabel.isHidden = true
-            priceChangeLabel.isHidden = true
-            priceChangePercentLabel.isHidden = true
-            valueCurrencyLabel.isHidden = true
-            valueLabel.isHidden = true
+        if let oktChain = baseChain as? ChainOkt60Keccak,
+           let token = oktChain.lcdOktTokens.filter({ $0["symbol"].string == coin["denom"].string }).first {
+                let original_symbol = token["original_symbol"].stringValue
+                
+                symbolLabel.text = original_symbol.uppercased()
+                priceCurrencyLabel.text = token["description"].string
+                coinImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(original_symbol))
+                
+                let availableAmount = oktChain.lcdBalanceAmount(coin["denom"].stringValue)
+                amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
+                
+                priceLabel.isHidden = true
+                priceChangeLabel.isHidden = true
+                priceChangePercentLabel.isHidden = true
+                valueCurrencyLabel.isHidden = true
+                valueLabel.isHidden = true
         }
     }
     

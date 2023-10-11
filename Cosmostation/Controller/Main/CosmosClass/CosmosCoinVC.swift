@@ -85,29 +85,29 @@ class CosmosCoinVC: BaseVC {
     
     func onSortAssets() {
         Task {
-            if (selectedChain is ChainBinanceBeacon) {
-                selectedChain.lcdAccountInfo.bnbCoins?.forEach { balance in
+            if let bnbChain = selectedChain as? ChainBinanceBeacon {
+                bnbChain.lcdAccountInfo.bnbCoins?.forEach { balance in
                     lcdBalances.append(balance)
                 }
-                if (lcdBalances.filter { $0["symbol"].string == selectedChain.stakeDenom }.first == nil) {
+                if (lcdBalances.filter { $0["symbol"].string == bnbChain.stakeDenom }.first == nil) {
                     lcdBalances.append(JSON(["symbol":"BNB", "free": "0"]))
                 }
                 lcdBalances.sort {
-                    if ($0["symbol"].string == selectedChain.stakeDenom) { return true }
-                    if ($1["symbol"].string == selectedChain.stakeDenom) { return false }
+                    if ($0["symbol"].string == bnbChain.stakeDenom) { return true }
+                    if ($1["symbol"].string == bnbChain.stakeDenom) { return false }
                     return false
                 }
                 
-            } else if (selectedChain is ChainOkt60Keccak) {
-                selectedChain.lcdAccountInfo.oktCoins?.forEach { balance in
+            } else if let oktChain = selectedChain as? ChainOkt60Keccak {
+                oktChain.lcdAccountInfo.oktCoins?.forEach { balance in
                     lcdBalances.append(balance)
                 }
-                if (lcdBalances.filter { $0["denom"].string == selectedChain.stakeDenom }.first == nil) {
+                if (lcdBalances.filter { $0["denom"].string == oktChain.stakeDenom }.first == nil) {
                     lcdBalances.append(JSON(["denom":"okt", "amount": "0"]))
                 }
                 lcdBalances.sort {
-                    if ($0["denom"].string == selectedChain.stakeDenom) { return true }
-                    if ($1["denom"].string == selectedChain.stakeDenom) { return false }
+                    if ($0["denom"].string == oktChain.stakeDenom) { return true }
+                    if ($1["denom"].string == oktChain.stakeDenom) { return false }
                     return false
                 }
                 
@@ -288,7 +288,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             return
             
         } else if (selectedChain is ChainOkt60Keccak) {
-            onStartLegacyTransferVC(lcdBalances[indexPath.row]["symbol"].stringValue)
+            onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
             return
             
         } else if (selectedChain is ChainKava60) {

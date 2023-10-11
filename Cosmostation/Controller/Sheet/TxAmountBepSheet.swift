@@ -51,9 +51,9 @@ class TxAmountBepSheet: BaseVC, UITextFieldDelegate {
     }
     
     func onUpdateView() {
-        if (fromChain is ChainBinanceBeacon) {
+        if let bnbChain = fromChain as? ChainBinanceBeacon {
             decimal = 8
-            if let tokenInfo = fromChain.lcdBeaconTokens.filter({ $0["symbol"].string == toSendDenom }).first {
+            if let tokenInfo = bnbChain.lcdBeaconTokens.filter({ $0["symbol"].string == toSendDenom }).first {
                 availableDenom.text = tokenInfo["original_symbol"].stringValue.uppercased()
                 availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, decimal)
             }

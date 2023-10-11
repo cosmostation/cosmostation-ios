@@ -52,6 +52,7 @@ class Bep3Transfer: BaseVC {
     
     var availableAmount = NSDecimalNumber.zero
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,20 +67,22 @@ class Bep3Transfer: BaseVC {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         
+        
         if (fromChain is ChainBinanceBeacon) {
+            let bnbChain = fromChain as! ChainBinanceBeacon
             toChains = baseAccount.allCosmosClassChains.filter { $0.name == "Kava" }
             fromChainImg.image = UIImage.init(named: "chainBnbBeacon")
             fromChainLabel.text = "BNB Beacon"
             
             toChainImg.image = UIImage.init(named: "chainKava")
             toChainLabel.text = "Kava"
-            if let tokenInfo = fromChain.lcdBeaconTokens.filter({ $0["symbol"].string == toSendDenom }).first {
+            if let tokenInfo = bnbChain.lcdBeaconTokens.filter({ $0["symbol"].string == toSendDenom }).first {
                 let original_symbol = tokenInfo["original_symbol"].stringValue
                 toSendAssetImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(original_symbol))
                 toSendSymbolLabel.text = original_symbol.uppercased()
             }
             
-            let available = fromChain.lcdBalanceAmount(toSendDenom)
+            let available = bnbChain.lcdBalanceAmount(toSendDenom)
             if (toSendDenom == fromChain.stakeDenom) {
                 availableAmount = available.subtracting(NSDecimalNumber(string: BNB_BEACON_BASE_FEE))
             } else {
@@ -187,11 +190,12 @@ class Bep3Transfer: BaseVC {
             toSendAmount = NSDecimalNumber(string: amount)
             
             if (fromChain is ChainBinanceBeacon) {
-                if let tokenInfo = fromChain.lcdBeaconTokens.filter({ $0["symbol"].string == toSendDenom }).first {
+                let bnbChain = fromChain as! ChainBinanceBeacon
+                if let tokenInfo = bnbChain.lcdBeaconTokens.filter({ $0["symbol"].string == toSendDenom }).first {
                     toAssetDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
                     toAssetAmountLabel?.attributedText = WDP.dpAmount(toSendAmount.stringValue, toAssetAmountLabel!.font, 8)
                     
-                    if (toSendDenom == fromChain.stakeDenom) {
+                    if (toSendDenom == bnbChain.stakeDenom) {
                         let msPrice = BaseData.instance.getPrice(BNB_GECKO_ID)
                         let toSendValue = msPrice.multiplying(by: toSendAmount, withBehavior: handler6)
                         WDP.dpValue(toSendValue, toAssetCurrencyLabel, toAssetValueLabel)

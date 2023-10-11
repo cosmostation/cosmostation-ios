@@ -42,20 +42,6 @@ class CosmosClass: BaseChain  {
     lazy var mintscanTokens = Array<MintscanToken>()
     lazy var mintscanChainParam = JSON()
     
-    
-    //For Legacy Lcd chains
-    lazy var lcdNodeInfo = JSON()
-    lazy var lcdAccountInfo = JSON()
-    
-    //For Bnb beacon Chain
-    lazy var lcdBeaconTokens = Array<JSON>()
-    
-    //For Okt Chain
-    lazy var lcdOktDeposits = JSON()
-    lazy var lcdOktWithdaws = JSON()
-    lazy var lcdOktTokens = Array<JSON>()
-    
-    
     func fetchData(_ id: Int64) {
         Task {
             if let rawParam = try? await self.fetchChainParam() {
@@ -72,11 +58,7 @@ class CosmosClass: BaseChain  {
                 }
             }
         }
-        if (self is ChainBinanceBeacon || self is ChainOkt60Keccak ) {
-            fetchLcdData(id)
-        } else {
-            fetchGrpcData(id)
-        }
+        fetchGrpcData(id)
     }
     
     func fetchStakeData() {
@@ -197,6 +179,10 @@ class CosmosClass: BaseChain  {
             }
         }
         return result
+    }
+    
+    func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
+        return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
     }
 }
 
@@ -605,17 +591,17 @@ extension CosmosClass {
     }
     
     
-    func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        if (self is ChainBinanceBeacon) {
-            return lcdBalanceValue(stakeDenom, usd)
-            
-        } else if (self is ChainOkt60Keccak) {
-            return lcdBalanceValue(stakeDenom, usd).adding(lcdOktDepositValue(usd) ).adding(lcdOktWithdrawValue(usd))
-            
-        } else {
-            return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
-        }
-    }
+//    func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
+////        if (self is ChainBinanceBeacon) {
+////            return lcdBalanceValue(stakeDenom, usd)
+////            
+////        } else if (self is ChainOkt60Keccak) {
+////            return lcdBalanceValue(stakeDenom, usd).adding(lcdOktDepositValue(usd) ).adding(lcdOktWithdrawValue(usd))
+////            
+////        } else {
+//            return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
+////        }
+//    }
     
     
     
@@ -631,7 +617,7 @@ extension CosmosClass {
     }
 }
 
-
+/*
 //about legacy lcd
 extension CosmosClass {
     
@@ -857,6 +843,8 @@ extension CosmosClass {
 //        return result
 //    }
 }
+*/
+
 
 extension CosmosClass {
     

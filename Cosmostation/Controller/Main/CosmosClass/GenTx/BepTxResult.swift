@@ -76,7 +76,7 @@ class BepTxResult: BaseVC {
         successLayer.isHidden = false
         sendChainimg.image =  UIImage.init(named: fromChain.logo1)
         claimChainImg.image =  UIImage.init(named: toChain.logo1)
-        claimTxBtn.isEnabled = true
+        confirmBtn.isEnabled = true
     }
     
     @IBAction func onClickSendTx(_ sender: UIButton) {

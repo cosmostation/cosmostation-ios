@@ -27,19 +27,21 @@ class L_Generator {
     
     
     static func postData(_ msgs: [L_Msg], _ fee: L_Fee, _ memo: String, _ baseChain: CosmosClass) -> Data {
+        guard let oktChain = baseChain as? ChainOkt60Keccak else {
+            return Data()
+        }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
         
-        let chainId = baseChain.chainId!
-        let accNum = baseChain.lcdAccountInfo["value","account_number"].uInt64Value
-        let seqNum = baseChain.lcdAccountInfo["value","sequence"].uInt64Value
+        let chainId = oktChain.chainId!
+        let accNum = oktChain.lcdAccountInfo["value","account_number"].uInt64Value
+        let seqNum = oktChain.lcdAccountInfo["value","sequence"].uInt64Value
         
         let stdMsg = getToSignMsg(chainId, String(accNum), String(seqNum), msgs, fee, memo)
         let toSignData = try! encoder.encode(stdMsg)
         let signatures = genSignatures(toSignData, String(accNum), String(seqNum), baseChain)
         let stdTx = genSignedTx(msgs, fee, memo, signatures!)
         let postTx = L_PostTx.init("sync", stdTx.value)
-        
         return try! encoder.encode(postTx)
     }
     

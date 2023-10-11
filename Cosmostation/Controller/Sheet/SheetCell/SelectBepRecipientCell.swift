@@ -21,11 +21,11 @@ class SelectBepRecipientCell: UITableViewCell {
     }
     
     func onBindBepRecipient(_ chain: CosmosClass) {
-        if (chain is ChainBinanceBeacon) {
-            chainImg.image =  UIImage.init(named: chain.logo1)
+        if let bnbChain = chain as? ChainBinanceBeacon {
+            chainImg.image =  UIImage.init(named: bnbChain.logo1)
             addressLabel.text = chain.address
             
-            let availableAmount = chain.lcdBalanceAmount(chain.stakeDenom)
+            let availableAmount = bnbChain.lcdBalanceAmount(bnbChain.stakeDenom)
             availableAmountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableAmountLabel!.font, 8)
             availableDenomLabel.text = "BNB"
             

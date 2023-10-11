@@ -434,8 +434,8 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectBepRecipientAddress) {
             print("SelectBepRecipientAddress ", indexPath.row)
             let chain = cosmosChainList[indexPath.row]
-            if (chain is ChainBinanceBeacon) {
-                let availableAmount = chain.lcdBalanceAmount(chain.stakeDenom)
+            if let bnbChain = chain as? ChainBinanceBeacon {
+                let availableAmount = bnbChain.lcdBalanceAmount(bnbChain.stakeDenom)
                 let fee = NSDecimalNumber(string: BNB_BEACON_BASE_FEE)
                 if (availableAmount.compare(fee).rawValue < 0) {
                     onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
