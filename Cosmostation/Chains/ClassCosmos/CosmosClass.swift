@@ -206,6 +206,24 @@ class CosmosClass: BaseChain  {
         return result
     }
     
+    
+    
+    
+    func allStakingDenomAmount() -> NSDecimalNumber {
+         return balanceAmount(stakeDenom).adding(vestingAmount(stakeDenom)).adding(delegationAmountSum())
+            .adding(unbondingAmountSum()).adding(rewardAmountSum(stakeDenom))
+    }
+    
+    func denomValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
+        if (denom == stakeDenom) {
+            return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
+                .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd))
+            
+        } else {
+            return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
+        }
+    }
+    
     func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
         return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
     }
@@ -348,13 +366,15 @@ extension CosmosClass {
 
     func fetchCw20Balance(_ group: DispatchGroup, _ channel: ClientConnection, _ tokenInfo: MintscanToken) {
         group.enter()
+        let query: JSON = ["balance" : ["address" : address!]]
+        let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
             $0.address = tokenInfo.address!
-            $0.queryData = Cw20BalaceReq.init(address!).getEncode()
+            $0.queryData = Data(base64Encoded: queryBase64)!
         }
         if let response = try? Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.wait() {
-            let cw20balance = try? JSONDecoder().decode(Cw20BalaceRes.self, from: response.data)
-            tokenInfo.setAmount(cw20balance?.balance ?? "0")
+            let cw20balance = try? JSONDecoder().decode(JSON.self, from: response.data)
+            tokenInfo.setAmount(cw20balance?["balance"].string ?? "0")
             group.leave()
         } else {
             group.leave()
@@ -482,12 +502,6 @@ extension CosmosClass {
     }
     
     
-    func allStakingDenomAmount() -> NSDecimalNumber {
-         return balanceAmount(stakeDenom).adding(vestingAmount(stakeDenom)).adding(delegationAmountSum())
-            .adding(unbondingAmountSum()).adding(rewardAmountSum(stakeDenom))
-    }
-    
-    
     func rewardAmountSum(_ denom: String) -> NSDecimalNumber {
         var result =  NSDecimalNumber.zero
         cosmosRewards.forEach({ reward in
@@ -562,15 +576,6 @@ extension CosmosClass {
         return result
     }
     
-    func denomValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if (denom == stakeDenom) {
-            return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
-                .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd))
-            
-        } else {
-            return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
-        }
-    }
     
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if let tokenInfo = mintscanTokens.filter({ $0.address == address }).first {

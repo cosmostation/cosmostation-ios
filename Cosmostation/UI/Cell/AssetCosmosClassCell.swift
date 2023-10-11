@@ -156,18 +156,33 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindNeutron(_ baseChain: CosmosClass) {
-        stakingTitle.text = "Vault Deposited"
-        let stakeDenom = baseChain.stakeDenom!
-        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
-            coinImg.af.setImage(withURL: msAsset.assetImg())
-            symbolLabel.text = msAsset.symbol?.uppercased()
-            
-            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-            
-            let availableAmount = baseChain.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-            availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
+        if let neutronChain = baseChain as? ChainNeutron {
+            stakingTitle.text = "Vault Deposited"
+            let stakeDenom = neutronChain.stakeDenom!
+            if let msAsset = BaseData.instance.getAsset(neutronChain.apiName, stakeDenom) {
+                let value = neutronChain.denomValue(stakeDenom)
+                coinImg.af.setImage(withURL: msAsset.assetImg())
+                symbolLabel.text = msAsset.symbol?.uppercased()
+                
+                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                
+                let availableAmount = neutronChain.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
+                
+                let vestingAmount = neutronChain.neutronVestingAmount().multiplying(byPowerOf10: -msAsset.decimals!)
+                if (vestingAmount != NSDecimalNumber.zero) {
+                    vestingLayer.isHidden = false
+                    vestingLabel?.attributedText = WDP.dpAmount(vestingAmount.stringValue, vestingLabel!.font, 6)
+                }
+                
+                let depositedAmount = neutronChain.neutronDeposited.multiplying(byPowerOf10: -msAsset.decimals!)
+                stakingLabel?.attributedText = WDP.dpAmount(depositedAmount.stringValue, stakingLabel!.font, 6)
+                
+                let totalAmount = availableAmount.adding(vestingAmount).adding(depositedAmount)
+                amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
+            }
         }
-        
     }
 }

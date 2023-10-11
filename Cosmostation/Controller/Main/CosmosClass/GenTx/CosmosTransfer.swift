@@ -140,7 +140,6 @@ class CosmosTransfer: BaseVC {
                 if (msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
                     if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.chain }).first {
                         if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
-                            print("sendable ", sendable.name)
                             recipientableChains.append(sendable)
                         }
                     }
