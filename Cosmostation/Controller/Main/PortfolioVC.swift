@@ -54,9 +54,6 @@ class PortfolioVC: BaseVC {
         dismissTap.cancelsTouchesInView = false
         view.addGestureRecognizer(dismissTap)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
-        
         initView()
     }
     
@@ -69,6 +66,8 @@ class PortfolioVC: BaseVC {
             contentOffset.y += (tableView.tableHeaderView?.frame)!.height
             tableView.contentOffset = contentOffset
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -109,6 +108,7 @@ class PortfolioVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
+        print("onFetchDone ", tag)
         for i in 0..<searchCosmosChains.count {
             if (searchCosmosChains[i].tag == tag) {
                 DispatchQueue.main.async {

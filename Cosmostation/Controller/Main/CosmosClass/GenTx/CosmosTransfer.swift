@@ -909,7 +909,7 @@ extension CosmosTransfer {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
 }
