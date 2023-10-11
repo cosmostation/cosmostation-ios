@@ -55,6 +55,9 @@ class AssetCosmosClassCell: UITableViewCell {
         } else if (baseChain is ChainOkt60Keccak) {
             bindOktAsset(baseChain)
             
+        } else if (baseChain is ChainNeutron) {
+            bindNeutron(baseChain)
+            
         } else {
             let stakeDenom = baseChain.stakeDenom!
             if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
@@ -148,4 +151,19 @@ class AssetCosmosClassCell: UITableViewCell {
         amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 18)
     }
     
+    func bindNeutron(_ baseChain: CosmosClass) {
+        stakingTitle.text = "Vault Deposited"
+        let stakeDenom = baseChain.stakeDenom!
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+            coinImg.af.setImage(withURL: msAsset.assetImg())
+            symbolLabel.text = msAsset.symbol?.uppercased()
+            
+            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+            
+            let availableAmount = baseChain.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+            availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
+        }
+        
+    }
 }

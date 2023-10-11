@@ -23,6 +23,7 @@ class ChainBinanceBeacon: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/714'/0'/0/X")
         accountPrefix = "bnb"
+        supportStaking = false
     }
     
     static func assetImg(_ original_symbol: String) -> URL {

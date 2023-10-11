@@ -23,6 +23,7 @@ class ChainOkt60Keccak: CosmosClass  {
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         accountPrefix = "ex"
+        supportStaking = false
         evmCompatible = true
     }
     

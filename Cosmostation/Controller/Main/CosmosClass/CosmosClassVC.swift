@@ -218,14 +218,7 @@ class CosmosClassVC: BaseVC {
             }
         }
         
-        
-        if (selectedChain is ChainBinanceBeacon ||
-            selectedChain is ChainOkt60Keccak ||
-            selectedChain is ChainStafi ||
-            selectedChain is ChainNeutron ||
-            selectedChain is ChainNoble) {
-            
-        } else {
+        if (selectedChain.supportStaking) {
             mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
                 self.onProposalList()
             }

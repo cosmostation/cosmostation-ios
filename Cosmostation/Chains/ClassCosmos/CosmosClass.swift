@@ -20,6 +20,7 @@ class CosmosClass: BaseChain  {
     var supportCw20 = false
     var supportErc20 = false
     var supportNft = false
+    var supportStaking = true
     
     var evmCompatible = false
     var evmAddress: String?
@@ -267,9 +268,11 @@ extension CosmosClass {
         let group = DispatchGroup()
     
         fetchBalance(group, channel)
-        fetchDelegation(group, channel)
-        fetchUnbondings(group, channel)
-        fetchRewards(group, channel)
+        if (self.supportStaking) {
+            fetchDelegation(group, channel)
+            fetchUnbondings(group, channel)
+            fetchRewards(group, channel)
+        }
         
         group.notify(queue: .main) {
             try? channel.close()
