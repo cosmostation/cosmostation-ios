@@ -12,6 +12,7 @@ import Lottie
 class ChainSelectVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchEmptyLayer: UIView!
     @IBOutlet weak var selectBtn: SecButton!
     @IBOutlet weak var confirmBtn: BaseButton!
     
@@ -176,6 +177,7 @@ extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource, UISearchBar
         searchCosmosChains = searchText.isEmpty ? allCosmosChains : allCosmosChains.filter { cosmosChain in
             return cosmosChain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
+        searchEmptyLayer.isHidden = searchCosmosChains.count > 0
         tableView.reloadData()
     }
 }

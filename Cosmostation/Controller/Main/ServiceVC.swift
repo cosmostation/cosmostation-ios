@@ -33,6 +33,21 @@ class ServiceVC: BaseVC {
 
 extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        view.titleLabel.text = "Service List"
+        view.cntLabel.text = ""
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
@@ -46,13 +61,7 @@ extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"ServiceCell") as! ServiceCell
-        if (indexPath.row == 0) {
-            cell.tempTitle.text =  "SWAP"
-        } else if (indexPath.row == 1) {
-            cell.tempTitle.text =  "Dapp"
-        } else {
-            cell.tempTitle.text =  "Buy"
-        }
+        cell.onBindService(indexPath.row)
         return cell
     }
     

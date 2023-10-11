@@ -11,6 +11,7 @@ import UIKit
 class PortfolioVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchEmptyLayer: UIView!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
     
@@ -229,6 +230,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
         searchCosmosChains = searchText.isEmpty ? toDisplayCosmosChains : toDisplayCosmosChains.filter { cosmosChain in
             return cosmosChain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
+        searchEmptyLayer.isHidden = searchCosmosChains.count > 0
         tableView.reloadData()
     }
     

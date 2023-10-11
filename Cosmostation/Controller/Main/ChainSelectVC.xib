@@ -17,6 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChainSelectVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="confirmBtn" destination="wYs-3p-dhB" id="7A0-FR-vpx"/>
+                <outlet property="searchEmptyLayer" destination="3nE-VK-8AS" id="vKc-jo-w9n"/>
                 <outlet property="selectBtn" destination="opE-nc-fiJ" id="9nE-MF-go0"/>
                 <outlet property="tableView" destination="xuQ-RN-hZP" id="VBg-z1-8Bl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -72,6 +73,33 @@
                         </button>
                     </subviews>
                 </stackView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3nE-VK-8AS">
+                    <rect key="frame" x="76.666666666666686" y="374.66666666666669" width="240" height="128"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyData" translatesAutoresizingMaskIntoConstraints="NO" id="NRU-bE-WDJ">
+                            <rect key="frame" x="87.999999999999986" y="0.0" width="64.000000000000014" height="64"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="64" id="fI0-dg-WYC"/>
+                                <constraint firstAttribute="height" constant="64" id="qWd-Py-9MX"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Searched" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cf4-cq-13Z">
+                            <rect key="frame" x="76.333333333333343" y="72" width="87.333333333333343" height="17.666666666666671"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="cf4-cq-13Z" firstAttribute="centerX" secondItem="3nE-VK-8AS" secondAttribute="centerX" id="73u-gV-cOS"/>
+                        <constraint firstItem="NRU-bE-WDJ" firstAttribute="centerX" secondItem="3nE-VK-8AS" secondAttribute="centerX" id="7z1-e0-4l7"/>
+                        <constraint firstAttribute="height" constant="128" id="QIf-xl-hko"/>
+                        <constraint firstItem="cf4-cq-13Z" firstAttribute="top" secondItem="NRU-bE-WDJ" secondAttribute="bottom" constant="8" id="jsT-Bv-3oe"/>
+                        <constraint firstItem="NRU-bE-WDJ" firstAttribute="top" secondItem="3nE-VK-8AS" secondAttribute="top" id="u9h-b0-jXM"/>
+                        <constraint firstAttribute="width" constant="240" id="xLB-S0-IHC"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="_colorBg"/>
@@ -79,10 +107,12 @@
             <constraints>
                 <constraint firstItem="xuQ-RN-hZP" firstAttribute="top" secondItem="Llq-eZ-xLQ" secondAttribute="bottom" constant="8" id="Nxw-eq-aVn"/>
                 <constraint firstItem="AeY-wO-fuu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="STn-mX-ql6"/>
+                <constraint firstItem="3nE-VK-8AS" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="TCa-bw-myK"/>
                 <constraint firstAttribute="bottom" secondItem="AeY-wO-fuu" secondAttribute="bottom" constant="38" id="XkB-nF-ffm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xuQ-RN-hZP" secondAttribute="trailing" id="bzx-w6-RHY"/>
                 <constraint firstItem="AeY-wO-fuu" firstAttribute="top" secondItem="xuQ-RN-hZP" secondAttribute="bottom" constant="8" id="fQU-jr-XR8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AeY-wO-fuu" secondAttribute="trailing" constant="8" id="maw-DC-M1Z"/>
+                <constraint firstItem="3nE-VK-8AS" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="o7P-2T-p5C"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="xuQ-RN-hZP" secondAttribute="leading" id="o84-51-hca"/>
                 <constraint firstItem="Llq-eZ-xLQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="oyp-XO-Xwr"/>
                 <constraint firstItem="Llq-eZ-xLQ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="uM9-gF-hcB"/>
@@ -91,6 +121,7 @@
         </view>
     </objects>
     <resources>
+        <image name="imgEmptyData" width="240" height="240"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -12,6 +12,9 @@
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
         </array>
+        <array key="SpoqaHanSansNeo-Regular.otf">
+            <string>SpoqaHanSansNeo-Regular</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -24,20 +27,110 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1eF-cQ-8SA" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
-                        <rect key="frame" x="8" y="4" width="424" height="140"/>
+                        <rect key="frame" x="8" y="4" width="424" height="150"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Nq-JN-alm">
-                                <rect key="frame" x="16" y="14.000000000000002" width="50" height="17.666666666666671"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgServiceBuy" translatesAutoresizingMaskIntoConstraints="NO" id="TrW-i0-4qE">
+                                <rect key="frame" x="92" y="8" width="332" height="142"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="142" id="0Ng-Ca-jar"/>
+                                    <constraint firstAttribute="width" constant="332" id="Jka-h9-2Fn"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Nq-JN-alm">
+                                <rect key="frame" x="16" y="14.000000000000002" width="296.66666666666669" height="17.666666666666671"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJn-CR-xqA">
+                                <rect key="frame" x="16" y="39.666666666666664" width="296.66666666666669" height="15.333333333333336"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                <color key="textColor" name="_color02"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWz-rN-L3h">
+                                <rect key="frame" x="15.999999999999996" y="108.66666666666667" width="40.666666666666657" height="15.333333333333329"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Regular" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                <color key="textColor" name="_color01"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="iqk-XQ-A0s">
+                                <rect key="frame" x="14" y="134" width="0.0" height="0.0"/>
+                                <subviews>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgService_Skip" translatesAutoresizingMaskIntoConstraints="NO" id="Gba-fl-Dvb">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="9Zb-gN-hU3"/>
+                                            <constraint firstAttribute="height" constant="18" id="AHM-4s-Erb"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgService_1inch" translatesAutoresizingMaskIntoConstraints="NO" id="y4u-L2-xQJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="4ou-qC-79j"/>
+                                            <constraint firstAttribute="width" constant="45" id="nag-jh-3nF"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgService_squid" translatesAutoresizingMaskIntoConstraints="NO" id="f7E-eF-WZm">
+                                        <rect key="frame" x="0.0" y="0.0" width="82" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="EFc-4c-i16"/>
+                                            <constraint firstAttribute="width" constant="82" id="Xko-2C-QT3"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgService_osmos" translatesAutoresizingMaskIntoConstraints="NO" id="rq0-Xz-XcS">
+                                        <rect key="frame" x="0.0" y="0.0" width="67" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="7xj-If-DmT"/>
+                                            <constraint firstAttribute="width" constant="67" id="blg-p2-ovr"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgService_kava" translatesAutoresizingMaskIntoConstraints="NO" id="i9a-si-YXx">
+                                        <rect key="frame" x="0.0" y="0.0" width="46" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="No2-oY-rqB"/>
+                                            <constraint firstAttribute="height" constant="18" id="Qnp-jc-5i6"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgService_neutron" translatesAutoresizingMaskIntoConstraints="NO" id="Hk3-pI-0oP">
+                                        <rect key="frame" x="0.0" y="0.0" width="93" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="93" id="7oF-bg-5yn"/>
+                                            <constraint firstAttribute="height" constant="18" id="Sh4-H6-iaq"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgService_moonpay" translatesAutoresizingMaskIntoConstraints="NO" id="gkj-3J-b5l">
+                                        <rect key="frame" x="0.0" y="0.0" width="93" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="93" id="Yyq-dW-S0Y"/>
+                                            <constraint firstAttribute="height" constant="18" id="kEu-r1-yhO"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgService_kado" translatesAutoresizingMaskIntoConstraints="NO" id="8bI-wx-kCa">
+                                        <rect key="frame" x="0.0" y="0.0" width="59" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="BMi-Y3-4zM"/>
+                                            <constraint firstAttribute="width" constant="59" id="dSg-c7-G6e"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="140" id="IPG-AL-UFM"/>
+                            <constraint firstItem="iqk-XQ-A0s" firstAttribute="leading" secondItem="1eF-cQ-8SA" secondAttribute="leading" constant="14" id="2ie-fA-FeH"/>
+                            <constraint firstAttribute="bottom" secondItem="iqk-XQ-A0s" secondAttribute="bottom" constant="16" id="8Xj-VF-mDa"/>
+                            <constraint firstItem="pJn-CR-xqA" firstAttribute="trailing" secondItem="8Nq-JN-alm" secondAttribute="trailing" id="C8T-kj-7at"/>
+                            <constraint firstAttribute="height" constant="150" id="IPG-AL-UFM"/>
                             <constraint firstItem="8Nq-JN-alm" firstAttribute="top" secondItem="1eF-cQ-8SA" secondAttribute="top" constant="14.000000000000002" id="J3A-UO-Cjb"/>
+                            <constraint firstAttribute="bottom" secondItem="TrW-i0-4qE" secondAttribute="bottom" id="QM8-Lr-SGr"/>
+                            <constraint firstItem="8Nq-JN-alm" firstAttribute="width" secondItem="1eF-cQ-8SA" secondAttribute="width" multiplier="0.7" id="WZJ-N8-LH3"/>
+                            <constraint firstAttribute="trailing" secondItem="TrW-i0-4qE" secondAttribute="trailing" id="XnW-3p-Ilt"/>
+                            <constraint firstItem="pJn-CR-xqA" firstAttribute="leading" secondItem="8Nq-JN-alm" secondAttribute="leading" id="XzJ-pS-uAq"/>
+                            <constraint firstItem="pJn-CR-xqA" firstAttribute="top" secondItem="8Nq-JN-alm" secondAttribute="bottom" constant="8" id="Yms-bW-GGh"/>
                             <constraint firstItem="8Nq-JN-alm" firstAttribute="leading" secondItem="1eF-cQ-8SA" secondAttribute="leading" constant="15.999999999999996" id="ZYW-qm-K4d"/>
+                            <constraint firstItem="PWz-rN-L3h" firstAttribute="leading" secondItem="1eF-cQ-8SA" secondAttribute="leading" constant="16" id="d9z-Xu-8lN"/>
+                            <constraint firstItem="iqk-XQ-A0s" firstAttribute="top" secondItem="PWz-rN-L3h" secondAttribute="bottom" constant="9.9999999999999858" id="jO9-Vy-3JE"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -53,15 +146,38 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" name="_primary"/>
             <connections>
+                <outlet property="msgLabel" destination="pJn-CR-xqA" id="hRe-PT-ZBw"/>
                 <outlet property="rootView" destination="1eF-cQ-8SA" id="X88-bJ-xvk"/>
-                <outlet property="tempTitle" destination="8Nq-JN-alm" id="2ku-yI-K9C"/>
+                <outlet property="serviceImg" destination="TrW-i0-4qE" id="tUz-LR-3dS"/>
+                <outlet property="serviceListLabel" destination="PWz-rN-L3h" id="fax-4B-fBu"/>
+                <outlet property="tag1inch" destination="y4u-L2-xQJ" id="pXd-gT-SG0"/>
+                <outlet property="tagkado" destination="8bI-wx-kCa" id="rfi-L7-ecd"/>
+                <outlet property="tagkava" destination="i9a-si-YXx" id="q1P-X4-hWM"/>
+                <outlet property="tagmoonpay" destination="gkj-3J-b5l" id="UWY-b7-PZF"/>
+                <outlet property="tagneutron" destination="Hk3-pI-0oP" id="QTz-zK-1qQ"/>
+                <outlet property="tagosmo" destination="rq0-Xz-XcS" id="FOp-Fk-8Cn"/>
+                <outlet property="tagskip" destination="Gba-fl-Dvb" id="7gl-DI-KCl"/>
+                <outlet property="tagsquid" destination="f7E-eF-WZm" id="jx0-G4-4Vy"/>
+                <outlet property="titleLabel" destination="8Nq-JN-alm" id="sAF-MF-gSO"/>
             </connections>
             <point key="canvasLocation" x="204.58015267175571" y="56.338028169014088"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="imgServiceBuy" width="702" height="300"/>
+        <image name="imgService_1inch" width="90" height="36"/>
+        <image name="imgService_Skip" width="92" height="36"/>
+        <image name="imgService_kado" width="118" height="36"/>
+        <image name="imgService_kava" width="92" height="36"/>
+        <image name="imgService_moonpay" width="160" height="36"/>
+        <image name="imgService_neutron" width="186" height="36"/>
+        <image name="imgService_osmos" width="134" height="36"/>
+        <image name="imgService_squid" width="164" height="36"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
             <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

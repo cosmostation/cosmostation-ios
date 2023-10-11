@@ -186,12 +186,13 @@ class CosmosClassVC: BaseVC {
         mainFab.buttonImageSize = CGSize(width: 40, height: 40)
         mainFab.itemAnimationConfiguration.opening = JJAnimationSettings(duration: 0.1, dampingRatio: 1.0, initialVelocity: 0.8, interItemDelay: 0.03)
         mainFab.itemAnimationConfiguration.closing = JJAnimationSettings(duration: 0.1, dampingRatio: 1.0, initialVelocity: 0.8, interItemDelay: 0.01)
+        mainFab.overlayView.backgroundColor = UIColor(white: 0, alpha: 0.6)
         mainFab.configureDefaultItem { item in
             item.titlePosition = .leading
             item.titleLabel.font = .fontSize12Bold
             item.titleLabel.textColor = .color01
-            item.buttonColor = .color01
-            item.buttonImageColor = .colorPrimary
+            item.buttonColor = .color08
+            item.buttonImageColor = .color01
             item.imageSize = CGSize(width: 24, height: 24)
 
 //            item.layer.shadowColor = UIColor.black.cgColor
@@ -200,29 +201,61 @@ class CosmosClassVC: BaseVC {
 //            item.layer.shadowRadius = CGFloat(2)
         }
         
-        mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
-            self.onProposalList()
-        }
-        mainFab.addItem(title: "Compounding All", image: UIImage(named: "iconFabCompounding")) { _ in
-            if (self.selectedChain.cosmosValidators.count > 0) {
-                self.onClaimCompoundingTx()
+        
+        
+        if (selectedChain is ChainNeutron) {
+            mainFab.addItem(title: "Vault", image: UIImage(named: "iconFabVault")) { _ in
+                print("Vault")
+            }
+            mainFab.addItem(title: "Dao", image: UIImage(named: "iconFabDao")) { _ in
+                print("Dao")
+            }
+            
+        } else if (selectedChain is ChainKava118 ||
+                   selectedChain is ChainKava459) {
+            mainFab.addItem(title: "DeFi", image: UIImage(named: "iconFabDefi")) { _ in
+                print("DeFi")
             }
         }
-        mainFab.addItem(title: "Claim Reward All", image: UIImage(named: "iconFabClaim")) { _ in
-            if (self.selectedChain.cosmosValidators.count > 0) {
-                self.onClaimRewardTx()
+        
+        
+        if (selectedChain is ChainBinanceBeacon ||
+            selectedChain is ChainOkt60Keccak ||
+            selectedChain is ChainStafi ||
+            selectedChain is ChainNeutron ||
+            selectedChain is ChainNoble) {
+            
+        } else {
+            mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
+                self.onProposalList()
+            }
+            mainFab.addItem(title: "Compounding All", image: UIImage(named: "iconFabCompounding")) { _ in
+                if (self.selectedChain.cosmosValidators.count > 0) {
+                    self.onClaimCompoundingTx()
+                }
+            }
+            mainFab.addItem(title: "Claim Reward All", image: UIImage(named: "iconFabClaim")) { _ in
+                if (self.selectedChain.cosmosValidators.count > 0) {
+                    self.onClaimRewardTx()
+                }
+            }
+            mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in
+                if (self.selectedChain.cosmosValidators.count > 0) {
+                    self.onStakeInfo()
+                }
             }
         }
-        mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in
-            if (self.selectedChain.cosmosValidators.count > 0) {
-                self.onStakeInfo()
+        
+        if (mainFab.items.count < 4) {
+            mainFab.addItem(title: "Receive", image: UIImage(named: "iconFabReceive")) { _ in
+                self.onShowAddress()
             }
         }
-        mainFab.addItem(title: "Receive", image: UIImage(named: "iconFabReceive")) { _ in
-            self.onShowAddress()
-        }
-        mainFab.addItem(title: "Send", image: UIImage(named: "iconFabSend")) { _ in
-            self.onSendTx()
+        
+        if (mainFab.items.count < 4) {
+            mainFab.addItem(title: "Send", image: UIImage(named: "iconFabSend")) { _ in
+                self.onSendTx()
+            }
         }
         
         view.addSubview(mainFab)

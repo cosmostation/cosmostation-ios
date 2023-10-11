@@ -33,6 +33,12 @@ extension UIColor {
     static var color07: UIColor {
         UIColor(named: "_color07")!
     }
+    static var color08: UIColor {
+        UIColor(named: "_color08")!
+    }
+    static var color09: UIColor {
+        UIColor(named: "_color09")!
+    }
     static var colorRed: UIColor {
         UIColor(named: "_colorRed")!
     }
