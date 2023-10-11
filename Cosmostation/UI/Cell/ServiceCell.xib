@@ -12,6 +12,9 @@
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
         </array>
+        <array key="SpoqaHanSansNeo-Medium.otf">
+            <string>SpoqaHanSansNeo-Medium</string>
+        </array>
         <array key="SpoqaHanSansNeo-Regular.otf">
             <string>SpoqaHanSansNeo-Regular</string>
         </array>
@@ -42,9 +45,9 @@
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJn-CR-xqA">
-                                <rect key="frame" x="16" y="39.666666666666664" width="296.66666666666669" height="15.333333333333336"/>
-                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJn-CR-xqA">
+                                <rect key="frame" x="16" y="37.666666666666664" width="296.66666666666669" height="15.333333333333336"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -54,7 +57,7 @@
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="iqk-XQ-A0s">
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iqk-XQ-A0s">
                                 <rect key="frame" x="14" y="134" width="0.0" height="0.0"/>
                                 <subviews>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgService_Skip" translatesAutoresizingMaskIntoConstraints="NO" id="Gba-fl-Dvb">
@@ -100,9 +103,9 @@
                                         </constraints>
                                     </imageView>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgService_moonpay" translatesAutoresizingMaskIntoConstraints="NO" id="gkj-3J-b5l">
-                                        <rect key="frame" x="0.0" y="0.0" width="93" height="18"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="18"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="93" id="Yyq-dW-S0Y"/>
+                                            <constraint firstAttribute="width" constant="80" id="Yyq-dW-S0Y"/>
                                             <constraint firstAttribute="height" constant="18" id="kEu-r1-yhO"/>
                                         </constraints>
                                     </imageView>
@@ -127,7 +130,7 @@
                             <constraint firstItem="8Nq-JN-alm" firstAttribute="width" secondItem="1eF-cQ-8SA" secondAttribute="width" multiplier="0.7" id="WZJ-N8-LH3"/>
                             <constraint firstAttribute="trailing" secondItem="TrW-i0-4qE" secondAttribute="trailing" id="XnW-3p-Ilt"/>
                             <constraint firstItem="pJn-CR-xqA" firstAttribute="leading" secondItem="8Nq-JN-alm" secondAttribute="leading" id="XzJ-pS-uAq"/>
-                            <constraint firstItem="pJn-CR-xqA" firstAttribute="top" secondItem="8Nq-JN-alm" secondAttribute="bottom" constant="8" id="Yms-bW-GGh"/>
+                            <constraint firstItem="pJn-CR-xqA" firstAttribute="top" secondItem="8Nq-JN-alm" secondAttribute="bottom" constant="6" id="Yms-bW-GGh"/>
                             <constraint firstItem="8Nq-JN-alm" firstAttribute="leading" secondItem="1eF-cQ-8SA" secondAttribute="leading" constant="15.999999999999996" id="ZYW-qm-K4d"/>
                             <constraint firstItem="PWz-rN-L3h" firstAttribute="leading" secondItem="1eF-cQ-8SA" secondAttribute="leading" constant="16" id="d9z-Xu-8lN"/>
                             <constraint firstItem="iqk-XQ-A0s" firstAttribute="top" secondItem="PWz-rN-L3h" secondAttribute="bottom" constant="9.9999999999999858" id="jO9-Vy-3JE"/>
