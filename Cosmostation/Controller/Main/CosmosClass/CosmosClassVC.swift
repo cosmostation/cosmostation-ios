@@ -40,7 +40,9 @@ class CosmosClassVC: BaseVC {
         addressLabel.text = selectedChain.address
         onSetTabbarView()
         onSetFabButton()
-        selectedChain.fetchStakeData()
+        if (selectedChain.supportStaking) {
+            selectedChain.fetchStakeData()
+        }
         
         print("selectedChain address ", selectedChain.address)
         

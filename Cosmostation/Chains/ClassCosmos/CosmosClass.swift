@@ -61,6 +61,31 @@ class CosmosClass: BaseChain  {
         fetchGrpcData(id)
     }
     
+    func fetchPropertyData(_ channel: ClientConnection, _ id: Int64) {
+        let group = DispatchGroup()
+    
+        fetchBalance(group, channel)
+        if (self.supportStaking) {
+            fetchDelegation(group, channel)
+            fetchUnbondings(group, channel)
+            fetchRewards(group, channel)
+        }
+        
+        group.notify(queue: .main) {
+            try? channel.close()
+            WUtils.onParseVestingAccount(self)
+            self.fetched = true
+            self.allCoinValue = self.allCoinValue()
+            self.allCoinUSDValue = self.allCoinValue(true)
+            
+            BaseData.instance.updateRefAddressesMain(
+                RefAddress(id, self.tag, self.address!,
+                           self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                           nil, self.cosmosBalances.count))
+            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+        }
+    }
+    
     func fetchStakeData() {
         if (cosmosValidators.count > 0) { return }
         Task {
@@ -238,7 +263,7 @@ extension CosmosClass {
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address! }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosAuth = response.account
-            self.fetchMoreData(channel, id)
+            self.fetchPropertyData(channel, id)
             
         } else {
             try? channel.close()
@@ -246,31 +271,6 @@ extension CosmosClass {
             BaseData.instance.updateRefAddressesMain(
                 RefAddress(id, self.tag, self.address!, 
                            nil, nil, nil, nil))
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
-        }
-    }
-    
-    func fetchMoreData(_ channel: ClientConnection, _ id: Int64) {
-        let group = DispatchGroup()
-    
-        fetchBalance(group, channel)
-        if (self.supportStaking) {
-            fetchDelegation(group, channel)
-            fetchUnbondings(group, channel)
-            fetchRewards(group, channel)
-        }
-        
-        group.notify(queue: .main) {
-            try? channel.close()
-            WUtils.onParseVestingAccount(self)
-            self.fetched = true
-            self.allCoinValue = self.allCoinValue()
-            self.allCoinUSDValue = self.allCoinValue(true)
-            
-            BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.address!,
-                           self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                           nil, self.cosmosBalances.count))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }
     }
@@ -591,20 +591,6 @@ extension CosmosClass {
     }
     
     
-//    func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-////        if (self is ChainBinanceBeacon) {
-////            return lcdBalanceValue(stakeDenom, usd)
-////            
-////        } else if (self is ChainOkt60Keccak) {
-////            return lcdBalanceValue(stakeDenom, usd).adding(lcdOktDepositValue(usd) ).adding(lcdOktWithdrawValue(usd))
-////            
-////        } else {
-//            return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
-////        }
-//    }
-    
-    
-    
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
         return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: grpcHost, port: grpcPort)
@@ -616,235 +602,6 @@ extension CosmosClass {
         return callOptions
     }
 }
-
-/*
-//about legacy lcd
-extension CosmosClass {
-    
-    func fetchLcdData(_ id: Int64) {
-        let group = DispatchGroup()
-        
-        if (self is ChainBinanceBeacon) {
-            fetchNodeInfo(group)
-            fetchAccountInfo(group, address!)
-            fetchBeaconTokens(group)
-            fetchBeaconMiniTokens(group)
-            
-        } else if (self is ChainOkt60Keccak) {
-            fetchNodeInfo(group)
-            fetchAccountInfo(group, address!)
-            fetchOktDeposited(group, address!)
-            fetchOktWithdraw(group, address!)
-            fetchOktTokens(group)
-        }
-        
-        group.notify(queue: .main) {
-            self.fetched = true
-            self.allCoinValue = self.allCoinValue()
-            self.allCoinUSDValue = self.allCoinValue(true)
-            
-            if (self is ChainBinanceBeacon) {
-                BaseData.instance.updateRefAddressesMain(
-                    RefAddress(id, self.tag, self.address!,
-                               self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                               nil, self.lcdAccountInfo.bnbCoins?.count))
-                
-            } else if (self is ChainOkt60Keccak) {
-                let refAddress =
-                BaseData.instance.updateRefAddressesMain(
-                    RefAddress(id, self.tag, self.address!,
-                               self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                               nil, self.lcdAccountInfo.oktCoins?.count))
-            }
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
-        }
-    }
-    
-    func fetchNodeInfo(_ group: DispatchGroup) {
-//        print("fetchNodeInfo Start ", BaseNetWork.lcdNodeInfoUrl(self))
-        group.enter()
-        AF.request(BaseNetWork.lcdNodeInfoUrl(self), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let value):
-                    self.lcdNodeInfo = value
-//                    print("fetchNodeInfo ", value)
-                case .failure:
-                    print("fetchNodeInfo error")
-                }
-                group.leave()
-            }
-    }
-    
-    func fetchAccountInfo(_ group: DispatchGroup, _ address: String) {
-//        print("fetchAccountInfo Start ", BaseNetWork.lcdAccountInfoUrl(self, address))
-        group.enter()
-        AF.request(BaseNetWork.lcdAccountInfoUrl(self, address), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let value):
-                    self.lcdAccountInfo = value
-//                    print("fetchAccountInfo ", value)
-                case .failure:
-                    print("fetchAccountInfo error")
-                }
-                group.leave()
-            }
-    }
-    
-    func fetchBeaconTokens(_ group: DispatchGroup) {
-//        print("fetchBeaconTokens Start ", BaseNetWork.lcdBeaconTokenUrl())
-        group.enter()
-        AF.request(BaseNetWork.lcdBeaconTokenUrl(), method: .get, parameters: ["limit":"1000"])
-            .responseDecodable(of: [JSON].self) { response in
-                switch response.result {
-                case .success(let values):
-                    values.forEach { value in
-                        self.lcdBeaconTokens.append(value)
-                    }
-                case .failure:
-                    print("fetchBeaconTokens error")
-                }
-                group.leave()
-            }
-    }
-    
-    func fetchBeaconMiniTokens(_ group: DispatchGroup) {
-//        print("fetchBeaconMiniTokens Start ", BaseNetWork.lcdBeaconMiniTokenUrl())
-        group.enter()
-        AF.request(BaseNetWork.lcdBeaconMiniTokenUrl(), method: .get, parameters: ["limit":"1000"])
-            .responseDecodable(of: [JSON].self) { response in
-                switch response.result {
-                case .success(let values):
-                    values.forEach { value in
-                        self.lcdBeaconTokens.append(value)
-                    }
-                case .failure:
-                    print("fetchBeaconMiniTokens error")
-                }
-                group.leave()
-            }
-    }
-    
-    func fetchOktDeposited(_ group: DispatchGroup, _ address: String) {
-//        print("fetchOktDeposited Start ", BaseNetWork.lcdOktDepositUrl(address))
-        group.enter()
-        AF.request(BaseNetWork.lcdOktDepositUrl(address), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let value):
-                    self.lcdOktDeposits = value
-//                    print("fetchOktDeposited ", value)
-                case .failure:
-                    print("fetchOktDeposited error")
-                }
-                group.leave()
-            }
-    }
-    
-    func fetchOktWithdraw(_ group: DispatchGroup, _ address: String) {
-//        print("fetchOktWithdraw Start ", BaseNetWork.lcdOktWithdrawUrl(address))
-        group.enter()
-        AF.request(BaseNetWork.lcdOktWithdrawUrl( address), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let value):
-                    self.lcdOktWithdaws = value
-//                    print("fetchOktWithdraw ", value)
-                case .failure:
-                    print("fetchOktWithdraw error")
-                }
-                group.leave()
-            }
-    }
-    
-    func fetchOktTokens(_ group: DispatchGroup) {
-//        print("fetchOktTokens Start ", BaseNetWork.lcdOktTokenUrl())
-        group.enter()
-        AF.request(BaseNetWork.lcdOktTokenUrl(), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let values):
-                    values["data"].array?.forEach({ value in
-                        self.lcdOktTokens.append(value)
-                    })
-//                    print("lcdOktTokens : ", self.lcdOktTokens.count)
-                    
-                case .failure:
-                    print("fetchOktTokens error")
-                }
-                group.leave()
-            }
-    }
-    
-    
-    
-    func lcdAllStakingDenomAmount() -> NSDecimalNumber {
-        return lcdBalanceAmount(stakeDenom).adding(lcdOktDepositAmount()).adding(lcdOktWithdrawAmount())
-    }
-    
-    func lcdBalanceAmount(_ denom: String) -> NSDecimalNumber {
-        if (self is ChainBinanceBeacon) {
-            if let balance = lcdAccountInfo.bnbCoins?.filter({ $0["symbol"].string == denom }).first {
-                return NSDecimalNumber.init(string: balance["free"].string ?? "0")
-            }
-            
-        } else if (self is ChainOkt60Keccak) {
-            if let balance = lcdAccountInfo.oktCoins?.filter({ $0["denom"].string == denom }).first {
-                return NSDecimalNumber.init(string: balance["amount"].string ?? "0")
-            }
-            
-        }
-        return NSDecimalNumber.zero
-        
-    }
-    
-    func lcdBalanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if (denom == stakeDenom) {
-            let amount = lcdBalanceAmount(denom)
-            var msPrice = NSDecimalNumber.zero
-            if (self is ChainBinanceBeacon) {
-                msPrice = BaseData.instance.getPrice(BNB_GECKO_ID, usd)
-            } else if (self is ChainOkt60Keccak) {
-                msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
-            }
-            return msPrice.multiplying(by: amount, withBehavior: handler6)
-        }
-        return NSDecimalNumber.zero
-    }
-    
-    func lcdOktDepositAmount() -> NSDecimalNumber {
-        return NSDecimalNumber(string: lcdOktDeposits["tokens"].string ?? "0")
-    }
-    
-    func lcdOktDepositValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
-        let amount = lcdOktDepositAmount()
-        return msPrice.multiplying(by: amount, withBehavior: handler6)
-    }
-    
-    func lcdOktWithdrawAmount() -> NSDecimalNumber {
-        return NSDecimalNumber(string: lcdOktWithdaws["quantity"].string ?? "0")
-    }
-    
-    func lcdOktWithdrawValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
-        let amount = lcdOktWithdrawAmount()
-        return msPrice.multiplying(by: amount, withBehavior: handler6)
-    }
-    
-    
-    
-//    func lcdBalanceValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
-//        var result =  NSDecimalNumber.zero
-//        lcdAccountInfo["balances"].array?.forEach({ balance in
-//            result = result.adding(lcdBalanceValue(balance["denom"].stringValue, usd))
-//        })
-//        return result
-//    }
-}
-*/
-
 
 extension CosmosClass {
     

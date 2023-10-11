@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import GRPC
+import NIO
+import SwiftProtobuf
 
 class ChainNeutron: CosmosClass  {
     
@@ -25,5 +28,25 @@ class ChainNeutron: CosmosClass  {
         supportStaking = false
         
         grpcHost = "grpc-neutron.cosmostation.io"
+    }
+    
+    override func fetchPropertyData(_ channel: ClientConnection, _ id: Int64) {
+        let group = DispatchGroup()
+        
+        fetchBalance(group, channel)
+        
+        group.notify(queue: .main) {
+            try? channel.close()
+            WUtils.onParseVestingAccount(self)
+            self.fetched = true
+            self.allCoinValue = self.allCoinValue()
+            self.allCoinUSDValue = self.allCoinValue(true)
+            
+            BaseData.instance.updateRefAddressesMain(
+                RefAddress(id, self.tag, self.address!,
+                           self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                           nil, self.cosmosBalances.count))
+            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+        }
     }
 }
