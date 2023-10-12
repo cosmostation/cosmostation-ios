@@ -37,4 +37,12 @@ class BaseSheetCell: UITableViewCell {
         }
     }
     
+    func onBindVault(_ position: Int) {
+        if (position == 0) {
+            titleLabel.text = NSLocalizedString("title_vaults_deposit", comment: "")
+        } else {
+            titleLabel.text = NSLocalizedString("title_vaults_withdraw", comment: "")
+        }
+    }
+    
 }

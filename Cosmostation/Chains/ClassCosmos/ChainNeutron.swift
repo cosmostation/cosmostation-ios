@@ -111,6 +111,8 @@ extension ChainNeutron {
                 self.neutronDeposited = NSDecimalNumber(string: amount)
             }
             group.leave()
+        } else {
+            group.leave()
         }
     }
     
@@ -126,6 +128,8 @@ extension ChainNeutron {
             if let vestingInfo = try? JSONDecoder().decode(JSON.self, from: response.data) {
                 self.neutronVesting = vestingInfo
             }
+            group.leave()
+        } else {
             group.leave()
         }
     }

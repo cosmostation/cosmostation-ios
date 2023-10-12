@@ -207,10 +207,10 @@ class CosmosClassVC: BaseVC {
         
         if (selectedChain is ChainNeutron) {
             mainFab.addItem(title: "Vault", image: UIImage(named: "iconFabVault")) { _ in
-                print("Vault")
+                self.onNeutronVault()
             }
             mainFab.addItem(title: "Dao", image: UIImage(named: "iconFabDao")) { _ in
-                print("Dao")
+                self.onNeutronProposals()
             }
             
         } else if (selectedChain is ChainKava118 ||
@@ -260,7 +260,7 @@ class CosmosClassVC: BaseVC {
     }
 }
 
-extension CosmosClassVC: MDCTabBarViewDelegate {
+extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
     
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
         if (item.tag == 0) {
@@ -298,5 +298,52 @@ extension CosmosClassVC: MDCTabBarViewDelegate {
             historyList.alpha = 0
             aboutList.alpha = 1
         }
+    }
+    
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+        if (sheetType == .SelectNeutronVault) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                if (result.position == 0) {
+                    self.onNeutronVaultDeposit()
+                } else if (result.position == 1) {
+                    self.onNeutronVaultwithdraw()
+                }
+            });
+        }
+    }
+}
+
+
+extension CosmosClassVC {
+    
+    func onNeutronVault() {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.sheetDelegate = self
+        baseSheet.sheetType = .SelectNeutronVault
+        onStartSheet(baseSheet, 240)
+    }
+    
+    func onNeutronVaultDeposit() {
+        let transfer = NeutronVault(nibName: "NeutronVault", bundle: nil)
+        transfer.selectedChain = selectedChain as? ChainNeutron
+        transfer.vaultType = .Deposit
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+    }
+    
+    func onNeutronVaultwithdraw() {
+        let transfer = NeutronVault(nibName: "NeutronVault", bundle: nil)
+        transfer.selectedChain = selectedChain as? ChainNeutron
+        transfer.vaultType = .Withdraw
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+    }
+    
+    func onNeutronProposals() {
+        let proposalsVC = NeutronPrpposals(nibName: "NeutronPrpposals", bundle: nil)
+        proposalsVC.selectedChain = selectedChain as? ChainNeutron
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(proposalsVC, animated: true)
+        
     }
 }

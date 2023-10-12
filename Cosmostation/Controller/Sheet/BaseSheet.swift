@@ -180,6 +180,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SelectBepRecipientAddress) {
             sheetTitle.text = NSLocalizedString("str_recipient_address", comment: "")
+            
+        } else if (sheetType == .SelectNeutronVault) {
+            sheetTitle.text = NSLocalizedString("title_select_vaults", comment: "")
         }
         
     }
@@ -299,6 +302,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectBepRecipientAddress) {
             return cosmosChainList.count
+            
+        } else if (sheetType == .SelectNeutronVault) {
+            return 2
         }
         return 0
     }
@@ -394,6 +400,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectBepRecipientCell") as? SelectBepRecipientCell
             cell?.onBindBepRecipient(cosmosChainList[indexPath.row])
             return cell!
+            
+        } else if (sheetType == .SelectNeutronVault) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
+            cell?.onBindVault(indexPath.row)
+            return cell!
         }
         return UITableViewCell()
     }
@@ -432,7 +443,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectBepRecipientAddress) {
-            print("SelectBepRecipientAddress ", indexPath.row)
             let chain = cosmosChainList[indexPath.row]
             if let bnbChain = chain as? ChainBinanceBeacon {
                 let availableAmount = bnbChain.lcdBalanceAmount(bnbChain.stakeDenom)
@@ -501,4 +511,7 @@ public enum SheetType: Int {
     case SelectRecipientAddress = 17
     case SelectNameServiceAddress = 18
     case SelectBepRecipientAddress = 19
+    
+    
+    case SelectNeutronVault = 20
 }

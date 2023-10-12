@@ -15,6 +15,14 @@
 		0400EE892AD425F9007BA97F /* DappDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0400EE862AD425F9007BA97F /* DappDetailVC.swift */; };
 		0400EE8A2AD425F9007BA97F /* DappDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0400EE872AD425F9007BA97F /* DappDetailVC.xib */; };
 		0400EE8B2AD425F9007BA97F /* DappDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0400EE872AD425F9007BA97F /* DappDetailVC.xib */; };
+		0400EE8F2AD7B08E007BA97F /* NeutronVault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0400EE8D2AD7B08E007BA97F /* NeutronVault.swift */; };
+		0400EE902AD7B08E007BA97F /* NeutronVault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0400EE8D2AD7B08E007BA97F /* NeutronVault.swift */; };
+		0400EE912AD7B08E007BA97F /* NeutronVault.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0400EE8E2AD7B08E007BA97F /* NeutronVault.xib */; };
+		0400EE922AD7B08E007BA97F /* NeutronVault.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0400EE8E2AD7B08E007BA97F /* NeutronVault.xib */; };
+		0400EE952AD7E99B007BA97F /* NeutronPrpposals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0400EE932AD7E99B007BA97F /* NeutronPrpposals.swift */; };
+		0400EE962AD7E99B007BA97F /* NeutronPrpposals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0400EE932AD7E99B007BA97F /* NeutronPrpposals.swift */; };
+		0400EE972AD7E99B007BA97F /* NeutronPrpposals.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0400EE942AD7E99B007BA97F /* NeutronPrpposals.xib */; };
+		0400EE982AD7E99B007BA97F /* NeutronPrpposals.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0400EE942AD7E99B007BA97F /* NeutronPrpposals.xib */; };
 		0402B7E62ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
 		0402B7E72ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
 		0402B7E82ACC132200824B3F /* CosmosCompounding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7E52ACC132200824B3F /* CosmosCompounding.xib */; };
@@ -1495,6 +1503,10 @@
 		0400EE812AD41FC5007BA97F /* ServiceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceCell.xib; sourceTree = "<group>"; };
 		0400EE862AD425F9007BA97F /* DappDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappDetailVC.swift; sourceTree = "<group>"; };
 		0400EE872AD425F9007BA97F /* DappDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappDetailVC.xib; sourceTree = "<group>"; };
+		0400EE8D2AD7B08E007BA97F /* NeutronVault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronVault.swift; sourceTree = "<group>"; };
+		0400EE8E2AD7B08E007BA97F /* NeutronVault.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronVault.xib; sourceTree = "<group>"; };
+		0400EE932AD7E99B007BA97F /* NeutronPrpposals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronPrpposals.swift; sourceTree = "<group>"; };
+		0400EE942AD7E99B007BA97F /* NeutronPrpposals.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronPrpposals.xib; sourceTree = "<group>"; };
 		0402B7E42ACC132200824B3F /* CosmosCompounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosCompounding.swift; sourceTree = "<group>"; };
 		0402B7E52ACC132200824B3F /* CosmosCompounding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosCompounding.xib; sourceTree = "<group>"; };
 		0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosRewardAddress.swift; sourceTree = "<group>"; };
@@ -2286,6 +2298,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0400EE8C2AD7B05A007BA97F /* Neutron */ = {
+			isa = PBXGroup;
+			children = (
+				0400EE8D2AD7B08E007BA97F /* NeutronVault.swift */,
+				0400EE8E2AD7B08E007BA97F /* NeutronVault.xib */,
+			);
+			path = Neutron;
+			sourceTree = "<group>";
+		};
+		0400EE992AD7E9BD007BA97F /* Neutron */ = {
+			isa = PBXGroup;
+			children = (
+				0400EE932AD7E99B007BA97F /* NeutronPrpposals.swift */,
+				0400EE942AD7E99B007BA97F /* NeutronPrpposals.xib */,
+			);
+			path = Neutron;
+			sourceTree = "<group>";
+		};
 		0422967E2A890C54003C7630 /* ClassEVM */ = {
 			isa = PBXGroup;
 			children = (
@@ -2611,6 +2641,7 @@
 			isa = PBXGroup;
 			children = (
 				E1D5A3E12AC33A5600453914 /* GenTx */,
+				0400EE992AD7E9BD007BA97F /* Neutron */,
 				047BA8D02A94756A00D3F7DD /* CosmosClass.storyboard */,
 				04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */,
 				047BA8D32A94777600D3F7DD /* CosmosCoinVC.swift */,
@@ -3323,6 +3354,7 @@
 		E1D5A3E12AC33A5600453914 /* GenTx */ = {
 			isa = PBXGroup;
 			children = (
+				0400EE8C2AD7B05A007BA97F /* Neutron */,
 				0478440A2AC9AA1000462F1C /* CosmosTransfer.swift */,
 				0478440B2AC9AA1000462F1C /* CosmosTransfer.xib */,
 				0409D2F32AC5DC6D0021E192 /* CosmosDelegate.swift */,
@@ -3556,6 +3588,7 @@
 				0478440F2AC9AA1000462F1C /* CosmosTransfer.xib in Resources */,
 				047842E12AC8963100462F1C /* CosmosUndelegate.xib in Resources */,
 				18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */,
+				0400EE982AD7E99B007BA97F /* NeutronPrpposals.xib in Resources */,
 				E15F2D072ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
 				04B789EE2ACB336400E9BE88 /* SelectRefAddressCell.xib in Resources */,
 				E15980A42A83AB030032892B /* Main.storyboard in Resources */,
@@ -3578,6 +3611,7 @@
 				0400EE8B2AD425F9007BA97F /* DappDetailVC.xib in Resources */,
 				E1D5A3E72AC33B8000453914 /* CosmosClaimRewards.xib in Resources */,
 				04FAD9D32AB2032200143A3E /* SwapStartVC.xib in Resources */,
+				0400EE922AD7B08E007BA97F /* NeutronVault.xib in Resources */,
 				0402B7E92ACC132200824B3F /* CosmosCompounding.xib in Resources */,
 				E11EAE122AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
 				0409D2FE2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
@@ -3613,6 +3647,7 @@
 				0400EE8A2AD425F9007BA97F /* DappDetailVC.xib in Resources */,
 				E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */,
 				0402B7E82ACC132200824B3F /* CosmosCompounding.xib in Resources */,
+				0400EE912AD7B08E007BA97F /* NeutronVault.xib in Resources */,
 				1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */,
 				04CD24652AD2E2D500497EF5 /* Bep3Transfer.xib in Resources */,
 				04A68C372AC156AA0041FA13 /* CosmosProposalCell.xib in Resources */,
@@ -3681,6 +3716,7 @@
 				042DE8482AC4CD01003F3EA4 /* QrScanVC.xib in Resources */,
 				E1DF77832AB762010028BD51 /* CheckPrivateKeyCell.xib in Resources */,
 				047BA8D12A94756A00D3F7DD /* CosmosClass.storyboard in Resources */,
+				0400EE972AD7E99B007BA97F /* NeutronPrpposals.xib in Resources */,
 				04A68C252ABDA3350041FA13 /* SelectSwapAssetCell.xib in Resources */,
 				04F4061729ED119800CD88E4 /* Init.storyboard in Resources */,
 				E1BBF74C2ABEBE4100D3082F /* basebg01.png in Resources */,
@@ -3865,6 +3901,8 @@
 				04B789922ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */,
 				044ECB302A95E1C90042DB3C /* ChainSommelier.swift in Sources */,
 				047843B42AC991B300462F1C /* injective_peggy_v1_proposal.pb.swift in Sources */,
+				0400EE962AD7E99B007BA97F /* NeutronPrpposals.swift in Sources */,
+				0400EE902AD7B08E007BA97F /* NeutronVault.swift in Sources */,
 				04B789982ACAC9B100E9BE88 /* ibc_core_client_v1_query.grpc.swift in Sources */,
 				0478431A2AC9918700462F1C /* ethermint_evm_v1_genesis.pb.swift in Sources */,
 				E122DB122A8A468D006D1E7B /* cosmos_gov_v1_query.grpc.swift in Sources */,
@@ -4501,6 +4539,8 @@
 				04B789912ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */,
 				044ECB2F2A95E1C90042DB3C /* ChainSommelier.swift in Sources */,
 				047843B32AC991B300462F1C /* injective_peggy_v1_proposal.pb.swift in Sources */,
+				0400EE952AD7E99B007BA97F /* NeutronPrpposals.swift in Sources */,
+				0400EE8F2AD7B08E007BA97F /* NeutronVault.swift in Sources */,
 				04B789972ACAC9B100E9BE88 /* ibc_core_client_v1_query.grpc.swift in Sources */,
 				047843192AC9918700462F1C /* ethermint_evm_v1_genesis.pb.swift in Sources */,
 				E122DB112A8A468D006D1E7B /* cosmos_gov_v1_query.grpc.swift in Sources */,

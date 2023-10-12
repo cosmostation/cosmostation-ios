@@ -877,6 +877,7 @@
 "title_select_options" = "옵션 선택";
 "title_select_recipient_chain" = "수신 체인 선택";
 "title_select_nameservice" = "%@ 네임서비스 검색 결과";
+"title_select_vaults" = "볼트 선택";
 
 
 "proposal_type_basic" = "기본";

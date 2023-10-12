@@ -1756,7 +1756,7 @@ class Signer {
 //    
 //    
 //    //Tx for Neutron
-//    static func genNeutronVaultDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+//    static func genVaultDepositTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
 //                                        _ contractAddress: String, _ amount: Array<Coin>,
 //                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
 //        let depositCoin = Cosmos_Base_V1beta1_Coin.with {
@@ -1768,8 +1768,8 @@ class Signer {
 //        let contractMsg = genWasmMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!, [depositCoin])
 //        return getGrpcSignedTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
 //    }
-//    
-//    static func simulNeutronVaultDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
+    
+//    static func genVaultDepositSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
 //                                        _ contractAddress: String, _ amount: Array<Coin>,
 //                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
 //        let depositCoin = Cosmos_Base_V1beta1_Coin.with {
@@ -1781,7 +1781,9 @@ class Signer {
 //        let contractMsg = genWasmMsg(auth, contractAddress, Data(base64Encoded: jsonMsgBase64)!, [depositCoin])
 //        return getGrpcSimulateTx(auth, pubkeyType, chainType, contractMsg, privateKey, publicKey, fee, memo)
 //    }
-//    
+    
+    
+//
 //    
 //    static func genNeutronVaultWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
 //                                         _ contractAddress: String, _ amount: Array<Coin>,

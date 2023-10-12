@@ -96,6 +96,23 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
                 decimal = msAsset.decimals!
                 WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             }
+            
+        } else if (sheetType == .TxVaultDeposit) {
+            amountTextField.label.text = NSLocalizedString("str_deposit_amount", comment: "")
+            availableTitle.text = NSLocalizedString("str_max_depositable", comment: "")
+            if let msAsset = msAsset {
+                decimal = msAsset.decimals!
+                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
+            }
+            
+        } else if (sheetType == .TxVaultWithdraw) {
+            amountTextField.label.text = NSLocalizedString("str_withdraw_amount", comment: "")
+            availableTitle.text = NSLocalizedString("str_max_withdrawable", comment: "")
+            if let msAsset = msAsset {
+                decimal = msAsset.decimals!
+                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
+            }
+            
         }
         
     }
@@ -183,4 +200,7 @@ public enum AmountSheetType: Int {
     case TxDelegate = 1
     case TxUndelegate = 2
     case TxRedelegate = 3
+    
+    case TxVaultDeposit = 4
+    case TxVaultWithdraw = 5
 }

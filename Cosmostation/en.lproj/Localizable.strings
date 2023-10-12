@@ -881,6 +881,7 @@
 "title_select_options" = "Select Options";
 "title_select_recipient_chain" = "Select Recipient Chain";
 "title_select_nameservice" = "Search Result %@ Nameservices";
+"title_select_vaults" = "Select Vault";
 
 
 "proposal_type_basic" = "Basic";
