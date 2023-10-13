@@ -656,16 +656,19 @@ class Signer {
     }
     
     static func simulIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-                             _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height, _ latest: Tendermint_Types_Block,
+                             _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height?, _ latest: Tendermint_Types_Block?,
                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let ibcTransferMsg = genIbcTransferMsg(auth, receiver, amount, path, lastHeight, latest)
         return getGrpcSimulateTx(auth, pubkeyType, chainType, ibcTransferMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genIbcTransferMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height, _ latest: Tendermint_Types_Block) -> [Google_Protobuf_Any] {
-        let re_timeout_height = Ibc_Core_Client_V1_Height.with {
-            $0.revisionNumber = lastHeight.revisionNumber
-            $0.revisionHeight = UInt64(latest.header.height + 200)
+    static func genIbcTransferMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height?, _ latest: Tendermint_Types_Block?) -> [Google_Protobuf_Any] {
+        var re_timeout_height: Ibc_Core_Client_V1_Height?  = nil
+        if let height = lastHeight, let latest = latest {
+            re_timeout_height = Ibc_Core_Client_V1_Height.with {
+                $0.revisionNumber = height.revisionNumber
+                $0.revisionHeight = UInt64(latest.header.height + 200)
+            }
         }
         let re_token = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = amount[0].denom
@@ -676,7 +679,7 @@ class Signer {
             $0.receiver = receiver
             $0.sourcePort = path.port!
             $0.sourceChannel = path.channel!
-            $0.timeoutHeight = re_timeout_height
+            $0.timeoutHeight = re_timeout_height ?? Ibc_Core_Client_V1_Height()
             $0.timeoutTimestamp = 0
             $0.token = re_token
         }

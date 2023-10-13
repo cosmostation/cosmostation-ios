@@ -313,7 +313,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     
     func onSimulateGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?, _ height: Ibc_Core_Client_V1_Height?, _ latest: Tendermint_Types_Block?) {
         DispatchQueue.global().async {
-            let simulateReq = self.genSimulateReq(auth!, self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, height, latest!)
+            let simulateReq = self.genSimulateReq(auth!, self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, height, latest)
             
             do {
                 let channel = BaseNetWork.getConnection(self.chainConfig)!
@@ -347,7 +347,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         }
     }
     
-    func genSimulateReq(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ privateKey: Data, _ publicKey: Data, _ height: Ibc_Core_Client_V1_Height?, _ latest: Tendermint_Types_Block)  -> Cosmos_Tx_V1beta1_SimulateRequest? {
+    func genSimulateReq(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ privateKey: Data, _ publicKey: Data, _ height: Ibc_Core_Client_V1_Height?, _ latest: Tendermint_Types_Block?)  -> Cosmos_Tx_V1beta1_SimulateRequest? {
         if (pageHolderVC.mType == TASK_TYPE_TRANSFER) {
             if (pageHolderVC.mTransferType == TRANSFER_SIMPLE) {
                 return Signer.simulSimpleSend(auth, account!.account_pubkey_type,
@@ -357,7 +357,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             } else if (pageHolderVC.mTransferType == TRANSFER_IBC_SIMPLE) {
                 return Signer.simulIbcSend(auth, account!.account_pubkey_type,
                                            pageHolderVC.mRecipinetAddress!, pageHolderVC.mToSendAmount,
-                                           pageHolderVC.mMintscanPath!, height!, latest,
+                                           pageHolderVC.mMintscanPath!, height, latest,
                                            mFee, pageHolderVC.mMemo!, privateKey, publicKey, chainType!)
                 
             } else if (pageHolderVC.mTransferType == TRANSFER_WASM) {
