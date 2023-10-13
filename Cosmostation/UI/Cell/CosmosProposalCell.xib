@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
         </array>
@@ -33,6 +36,15 @@
                                     <constraint firstAttribute="height" constant="40" id="unD-ph-p7G"/>
                                 </constraints>
                             </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8al-dL-sB4">
+                                <rect key="frame" x="-2" y="25" width="60" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="g3M-fF-Jg2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
+                                <color key="textColor" name="_voteYes"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsP-so-393">
                                 <rect key="frame" x="60" y="17" width="304" height="17.666666666666671"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
@@ -87,10 +99,12 @@
                             <constraint firstItem="xK0-0G-d5i" firstAttribute="leading" secondItem="JsP-so-393" secondAttribute="leading" id="W1T-ml-EtZ"/>
                             <constraint firstItem="Lrn-Vh-K8f" firstAttribute="leading" secondItem="gjN-1v-Aah" secondAttribute="trailing" constant="4" id="YOe-Hh-tDL"/>
                             <constraint firstItem="JsP-so-393" firstAttribute="top" secondItem="RaA-TM-1v1" secondAttribute="top" constant="17" id="c9g-DR-x3J"/>
+                            <constraint firstItem="8al-dL-sB4" firstAttribute="centerX" secondItem="JuI-gf-uwO" secondAttribute="centerX" id="cbd-lv-fQt"/>
                             <constraint firstItem="JsP-so-393" firstAttribute="leading" secondItem="JuI-gf-uwO" secondAttribute="trailing" constant="12" id="d9x-E3-EQG"/>
                             <constraint firstAttribute="bottom" secondItem="JuI-gf-uwO" secondAttribute="bottom" constant="12" id="fEf-OX-Bfs"/>
                             <constraint firstItem="gjN-1v-Aah" firstAttribute="top" secondItem="JsP-so-393" secondAttribute="bottom" constant="6" id="kzP-dS-iBz"/>
                             <constraint firstItem="xK0-0G-d5i" firstAttribute="centerY" secondItem="geH-vr-GNk" secondAttribute="centerY" id="xGS-e5-zWU"/>
+                            <constraint firstItem="8al-dL-sB4" firstAttribute="centerY" secondItem="JuI-gf-uwO" secondAttribute="centerY" id="xtb-lR-4jS"/>
                             <constraint firstAttribute="trailing" secondItem="5lf-Bi-Sxx" secondAttribute="trailing" constant="10" id="zzN-FA-T9n"/>
                         </constraints>
                     </view>
@@ -108,6 +122,7 @@
             <connections>
                 <outlet property="expectedImg" destination="Lrn-Vh-K8f" id="U1y-nk-x9g"/>
                 <outlet property="myVoteImg" destination="JuI-gf-uwO" id="hc8-z0-Tbo"/>
+                <outlet property="myVoteNumber" destination="8al-dL-sB4" id="mD9-3I-r6T"/>
                 <outlet property="rootView" destination="RaA-TM-1v1" id="9mm-19-ZiT"/>
                 <outlet property="selectSwitch" destination="5lf-Bi-Sxx" id="NTn-eV-ZBg"/>
                 <outlet property="statusImg" destination="xK0-0G-d5i" id="7uF-3K-Rf6"/>
@@ -130,6 +145,9 @@
         </namedColor>
         <namedColor name="_primary">
             <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_voteYes">
+            <color red="0.030999999493360519" green="0.81999999284744263" blue="0.32199999690055847" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class CosmosProposalCell: UITableViewCell {
     
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var myVoteImg: UIImageView!
+    @IBOutlet weak var myVoteNumber: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var expectedImg: UIImageView!
@@ -31,6 +33,7 @@ class CosmosProposalCell: UITableViewCell {
         selectSwitch.isHidden = true
         selectSwitch.isOn = false
         timeLabel.isHidden = true
+        myVoteNumber.isHidden = true
         expectedImg.isHidden = true
         statusImg.isHidden = true
         statusLabel.isHidden = true
@@ -87,5 +90,70 @@ class CosmosProposalCell: UITableViewCell {
         } else {
             self.myVoteImg.image = UIImage.init(named: "imgMyVoteNone")
         }
+    }
+    
+    func onBindNeutronDao(_ module: JSON, _ proposal: JSON, _ myVotes: [JSON], _ toVote: [Int64]) {
+        let id = proposal["id"].int64Value
+        let contents = proposal["proposal"]
+        
+        titleLabel.text = "# ".appending(String(id)).appending("  ").appending(contents["title"].stringValue)
+        
+        let status = contents["status"].stringValue.lowercased()
+        if (status == "open") {
+            selectSwitch.isHidden = false
+            let expirationTime = contents["expiration"]["at_time"].int64Value
+            if (expirationTime > 0) {
+                let time = expirationTime / 1000000
+                timeLabel.text = WDP.dpFullTime(time).appending(" ").appending(WDP.dpTimeGap(time))
+            }
+            let expirationHeight = contents["expiration"]["at_height"].int64Value
+            if (expirationHeight > 0) {
+                timeLabel.text = "Expiration at : " + String(expirationHeight) + " Block"
+            }
+            timeLabel.isHidden = false
+            selectSwitch.isOn = toVote.contains(id)
+            
+        } else {
+            selectSwitch.isHidden = true
+            if (status == "passed" || status == "executed") {
+                statusImg.image = UIImage.init(named: "ImgGovPassed")
+            } else if (status == "rejected" || status == "failed" || status == "execution_failed") {
+                statusImg.image = UIImage.init(named: "ImgGovRejected")
+            }
+            statusImg.isHidden = false
+            statusLabel.text = status.uppercased()
+            statusLabel.isHidden = false
+            
+        }
+        
+        if let myVote = myVotes.filter({$0["contract_address"].stringValue == module["address"].stringValue && $0["proposal_id"].int64Value == id }).first {
+            let myOption = myVote["option"].stringValue.lowercased()
+            if (myOption == "yes") {
+                myVoteImg.image = UIImage.init(named: "imgVoteYes")
+                myVoteImg.isHidden = false
+                return
+                
+            } else if (myOption == "no") {
+                myVoteImg.image = UIImage.init(named: "imgVoteNo")
+                myVoteImg.isHidden = false
+                return
+                
+            } else if (myOption == "abstain") {
+                myVoteImg.image = UIImage.init(named: "imgVoteAbstain")
+                myVoteImg.isHidden = false
+                return
+                
+            } else {
+                myVoteNumber.text = "Option " + myOption
+                myVoteNumber.isHidden = false
+                myVoteImg.isHidden = true
+                return
+            }
+            
+        } else {
+            myVoteImg.image = UIImage.init(named: "imgMyVoteNone")
+            myVoteImg.isHidden = false
+        }
+        
     }
 }

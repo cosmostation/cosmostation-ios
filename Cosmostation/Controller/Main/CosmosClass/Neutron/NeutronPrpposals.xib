@@ -43,6 +43,9 @@
                     <state key="normal" title="Vote Now">
                         <color key="titleColor" name="_color01"/>
                     </state>
+                    <connections>
+                        <action selector="onClickVote:" destination="-1" eventType="touchUpInside" id="pQP-0y-0l0"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JpO-lr-BZi" customClass="LottieAnimationView" customModule="Lottie">
                     <rect key="frame" x="106.66666666666669" y="383.66666666666669" width="180" height="110"/>
