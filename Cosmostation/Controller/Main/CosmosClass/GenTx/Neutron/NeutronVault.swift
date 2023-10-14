@@ -309,9 +309,8 @@ extension NeutronVault {
         return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
     }
     
-    //Deposit
     func simulVaultTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, toWasmSend, txFee, txMemo, selectedChain)
+        let simulTx = Signer.genWasmSimul(auth, [toWasmSend], txFee, txMemo, selectedChain)
         do {
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
         } catch {
@@ -320,7 +319,7 @@ extension NeutronVault {
     }
     
     func broadcastVaultTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, toWasmSend, txFee, txMemo, selectedChain)
+        let reqTx = Signer.genWasmTx(auth, [toWasmSend], txFee, txMemo, selectedChain)
         return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
     }
     

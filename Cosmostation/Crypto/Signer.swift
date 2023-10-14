@@ -61,25 +61,29 @@ class Signer {
     
     //Tx for Wasm Exe
     static func genWasmTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                          _ wasmContract: Cosmwasm_Wasm_V1_MsgExecuteContract,
+                          _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract],
                           _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let wasmMsg = genWasmMsg(auth, wasmContract)
+        let wasmMsg = genWasmMsg(auth, wasmContracts)
         return getSignedTx(auth, wasmMsg, fee, memo, baseChain)
     }
     
     static func genWasmSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                             _ wasmContract: Cosmwasm_Wasm_V1_MsgExecuteContract,
+                             _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract],
                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let wasmMsg = genWasmMsg(auth, wasmContract)
+        let wasmMsg = genWasmMsg(auth, wasmContracts)
         return getSimulateTx(auth, wasmMsg, fee, memo, baseChain)
     }
     
-    static func genWasmMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ wasmContract: Cosmwasm_Wasm_V1_MsgExecuteContract) -> [Google_Protobuf_Any] {
-        let anyMsg = Google_Protobuf_Any.with {
-            $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
-            $0.value = try! wasmContract.serializedData()
+    static func genWasmMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract]) -> [Google_Protobuf_Any] {
+        var result = [Google_Protobuf_Any]()
+        wasmContracts.forEach { msg in
+            let anyMsg = Google_Protobuf_Any.with {
+                $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
+                $0.value = try! msg.serializedData()
+            }
+            result.append(anyMsg)
         }
-        return [anyMsg]
+        return result
     }
     
     //Tx for Common Delegate

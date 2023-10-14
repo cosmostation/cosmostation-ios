@@ -1450,6 +1450,14 @@
 		E19E8B412A92299700001BF5 /* UIFont+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */; };
 		E1A82DD1224220910097CAEE /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD0224220910097CAEE /* Account.swift */; };
 		E1A82DE822448E940097CAEE /* WUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE722448E940097CAEE /* WUtils.swift */; };
+		E1B44B1F2ADA41CD0073C88A /* NeutronSingleVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B44B1D2ADA41CD0073C88A /* NeutronSingleVoteCell.swift */; };
+		E1B44B202ADA41CD0073C88A /* NeutronSingleVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B44B1D2ADA41CD0073C88A /* NeutronSingleVoteCell.swift */; };
+		E1B44B212ADA41CD0073C88A /* NeutronSingleVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B44B1E2ADA41CD0073C88A /* NeutronSingleVoteCell.xib */; };
+		E1B44B222ADA41CD0073C88A /* NeutronSingleVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B44B1E2ADA41CD0073C88A /* NeutronSingleVoteCell.xib */; };
+		E1B44B252ADA41DE0073C88A /* NeutronMultiVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B44B232ADA41DE0073C88A /* NeutronMultiVoteCell.swift */; };
+		E1B44B262ADA41DE0073C88A /* NeutronMultiVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B44B232ADA41DE0073C88A /* NeutronMultiVoteCell.swift */; };
+		E1B44B272ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B44B242ADA41DE0073C88A /* NeutronMultiVoteCell.xib */; };
+		E1B44B282ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B44B242ADA41DE0073C88A /* NeutronMultiVoteCell.xib */; };
 		E1BBF74C2ABEBE4100D3082F /* basebg01.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF7472ABEBE4000D3082F /* basebg01.png */; };
 		E1BBF74D2ABEBE4100D3082F /* basebg01.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF7472ABEBE4000D3082F /* basebg01.png */; };
 		E1BBF74E2ABEBE4100D3082F /* basebg04.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BBF7482ABEBE4100D3082F /* basebg04.png */; };
@@ -2224,6 +2232,10 @@
 		E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Fonts.swift"; sourceTree = "<group>"; };
 		E1A82DD0224220910097CAEE /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		E1A82DE722448E940097CAEE /* WUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WUtils.swift; sourceTree = "<group>"; };
+		E1B44B1D2ADA41CD0073C88A /* NeutronSingleVoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronSingleVoteCell.swift; sourceTree = "<group>"; };
+		E1B44B1E2ADA41CD0073C88A /* NeutronSingleVoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronSingleVoteCell.xib; sourceTree = "<group>"; };
+		E1B44B232ADA41DE0073C88A /* NeutronMultiVoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronMultiVoteCell.swift; sourceTree = "<group>"; };
+		E1B44B242ADA41DE0073C88A /* NeutronMultiVoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronMultiVoteCell.xib; sourceTree = "<group>"; };
 		E1BBF7472ABEBE4000D3082F /* basebg01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg01.png; sourceTree = "<group>"; };
 		E1BBF7482ABEBE4100D3082F /* basebg04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg04.png; sourceTree = "<group>"; };
 		E1BBF7492ABEBE4100D3082F /* basebg03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg03.png; sourceTree = "<group>"; };
@@ -3132,6 +3144,10 @@
 				04A68C342AC156AA0041FA13 /* CosmosProposalCell.xib */,
 				0402B7F62ACC3F1400824B3F /* VoteCell.swift */,
 				0402B7F72ACC3F1400824B3F /* VoteCell.xib */,
+				E1B44B1D2ADA41CD0073C88A /* NeutronSingleVoteCell.swift */,
+				E1B44B1E2ADA41CD0073C88A /* NeutronSingleVoteCell.xib */,
+				E1B44B232ADA41DE0073C88A /* NeutronMultiVoteCell.swift */,
+				E1B44B242ADA41DE0073C88A /* NeutronMultiVoteCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -3617,6 +3633,7 @@
 				E11EAE182AAD879A003BFC7F /* SettingSwitchCell.xib in Resources */,
 				04FA74822AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */,
 				E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */,
+				E1B44B222ADA41CD0073C88A /* NeutronSingleVoteCell.xib in Resources */,
 				0400EE8B2AD425F9007BA97F /* DappDetailVC.xib in Resources */,
 				E1D5A3E72AC33B8000453914 /* CosmosClaimRewards.xib in Resources */,
 				04FAD9D32AB2032200143A3E /* SwapStartVC.xib in Resources */,
@@ -3626,6 +3643,7 @@
 				0409D2FE2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
 				E15F2D012ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
 				E1BBF7512ABEBE4100D3082F /* basebg03.png in Resources */,
+				E1B44B282ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */,
 				047842DB2AC87C1000462F1C /* CosmosTxResult.xib in Resources */,
 				18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */,
 			);
@@ -3674,6 +3692,7 @@
 				0409D2FD2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
 				0478440E2AC9AA1000462F1C /* CosmosTransfer.xib in Resources */,
 				0400EE842AD41FC5007BA97F /* ServiceCell.xib in Resources */,
+				E1B44B272ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */,
 				04527DC12A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
 				E15F2CF82ABF0DCE00BAE105 /* basebg05.png in Resources */,
 				04FAD9DE2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
@@ -3720,6 +3739,7 @@
 				04B789F32ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,
 				0400EE9E2AD9B434007BA97F /* NeutronVote.xib in Resources */,
 				E15F2CFA2ABF0DCE00BAE105 /* basebg06.png in Resources */,
+				E1B44B212ADA41CD0073C88A /* NeutronSingleVoteCell.xib in Resources */,
 				0443B89828589B570027A6B9 /* Color.xcassets in Resources */,
 				E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
 				04C6B9C72AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */,
@@ -3948,6 +3968,7 @@
 				04FAD9B32AB011AC00143A3E /* SwitchPriceDisplayCell.swift in Sources */,
 				E122DBB22A8A468D006D1E7B /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift in Sources */,
 				04B7897A2ACAC9B100E9BE88 /* ibc_applications_transfer_v1_query.pb.swift in Sources */,
+				E1B44B202ADA41CD0073C88A /* NeutronSingleVoteCell.swift in Sources */,
 				04FAD9B92AB0125400143A3E /* BaseSheetCell.swift in Sources */,
 				151734682A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */,
 				E122DB002A8A468D006D1E7B /* cosmos_reflection_v1_reflection.pb.swift in Sources */,
@@ -4003,6 +4024,7 @@
 				04BA9BD22A978131003E2404 /* RefAddress.swift in Sources */,
 				E131A3C72AACD0E000943013 /* OktHistory.swift in Sources */,
 				E122DBDE2A8A468E006D1E7B /* cosmos_base_query_v1beta1_pagination.pb.swift in Sources */,
+				E1B44B262ADA41DE0073C88A /* NeutronMultiVoteCell.swift in Sources */,
 				04B789D72ACAF59700E9BE88 /* iov_escrow_v1beta1_events.pb.swift in Sources */,
 				04B789862ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */,
 				047843A42AC991B300462F1C /* injective_wasmx_v1_wasmx.pb.swift in Sources */,
@@ -4587,6 +4609,7 @@
 				04FAD9B22AB011AC00143A3E /* SwitchPriceDisplayCell.swift in Sources */,
 				E122DBB12A8A468D006D1E7B /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift in Sources */,
 				04B789792ACAC9B100E9BE88 /* ibc_applications_transfer_v1_query.pb.swift in Sources */,
+				E1B44B1F2ADA41CD0073C88A /* NeutronSingleVoteCell.swift in Sources */,
 				04FAD9B82AB0125400143A3E /* BaseSheetCell.swift in Sources */,
 				2810084A2696D979002986A6 /* KeyFac.swift in Sources */,
 				E122DAFF2A8A468D006D1E7B /* cosmos_reflection_v1_reflection.pb.swift in Sources */,
@@ -4642,6 +4665,7 @@
 				04BA9BD12A978131003E2404 /* RefAddress.swift in Sources */,
 				E131A3C62AACD0E000943013 /* OktHistory.swift in Sources */,
 				E122DBDD2A8A468E006D1E7B /* cosmos_base_query_v1beta1_pagination.pb.swift in Sources */,
+				E1B44B252ADA41DE0073C88A /* NeutronMultiVoteCell.swift in Sources */,
 				04B789D62ACAF59700E9BE88 /* iov_escrow_v1beta1_events.pb.swift in Sources */,
 				04B789852ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */,
 				047843A32AC991B300462F1C /* injective_wasmx_v1_wasmx.pb.swift in Sources */,

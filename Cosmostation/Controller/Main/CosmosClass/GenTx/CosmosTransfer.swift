@@ -851,7 +851,7 @@ extension CosmosTransfer {
     
     //Wasm Send
     func simulCw20SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, toWasmSend, txFee, txMemo, selectedChain)
+        let simulTx = Signer.genWasmSimul(auth, [toWasmSend], txFee, txMemo, selectedChain)
         do {
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
         } catch {
@@ -860,7 +860,7 @@ extension CosmosTransfer {
     }
     
     func broadcastCw20SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, toWasmSend, txFee, txMemo, selectedChain)
+        let reqTx = Signer.genWasmTx(auth, [toWasmSend], txFee, txMemo, selectedChain)
         return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
     }
     
@@ -883,7 +883,7 @@ extension CosmosTransfer {
     
     //Wasm ibc Send
     func simulCw20IbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, ibcWasmSend, txFee, txMemo, selectedChain)
+        let simulTx = Signer.genWasmSimul(auth, [ibcWasmSend], txFee, txMemo, selectedChain)
         do {
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
         } catch {
@@ -892,7 +892,7 @@ extension CosmosTransfer {
     }
     
     func broadcastCw20IbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, ibcWasmSend, txFee, txMemo, selectedChain)
+        let reqTx = Signer.genWasmTx(auth, [ibcWasmSend], txFee, txMemo, selectedChain)
         return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
     }
     

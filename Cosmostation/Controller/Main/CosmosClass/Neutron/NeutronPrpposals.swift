@@ -63,6 +63,12 @@ class NeutronPrpposals: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
+        let vote = NeutronVote(nibName: "NeutronVote", bundle: nil)
+        vote.selectedChain = selectedChain
+        vote.toSingleProposals = neutronProposals[0].1.filter { toVoteSingle.contains($0["id"].int64Value) }
+        vote.toMultiProposals = neutronProposals[1].1.filter { toVoteMulti.contains($0["id"].int64Value) }
+        vote.modalTransitionStyle = .coverVertical
+        self.present(vote, animated: true)
     }
     
     func onFetchData() {
