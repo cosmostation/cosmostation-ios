@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -81,31 +81,31 @@
                                 <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <segue destination="HxN-8c-YJG" kind="embed" id="jJo-hB-wUK"/>
+                                    <segue destination="HxN-8c-YJG" kind="embed" identifier="embedHistoryVC" id="jJo-hB-wUK"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9R-os-Pfe">
                                 <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
                                 <connections>
-                                    <segue destination="DVQ-I1-owb" kind="embed" id="6Wk-zk-FDX"/>
+                                    <segue destination="DVQ-I1-owb" kind="embed" identifier="embedNftVC" id="6Wk-zk-FDX"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AeT-wL-xQo">
                                 <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
                                 <connections>
-                                    <segue destination="yyO-ei-xsW" kind="embed" id="wiH-Nb-UO2"/>
+                                    <segue destination="yyO-ei-xsW" kind="embed" identifier="embedTokenVC" id="wiH-Nb-UO2"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYD-Wc-AXb">
                                 <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
                                 <connections>
-                                    <segue destination="EO6-oK-AmS" kind="embed" id="ZOz-Cm-L38"/>
+                                    <segue destination="EO6-oK-AmS" kind="embed" identifier="embedCoinVC" id="ZOz-Cm-L38"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s8b-hk-JN5">
                                 <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
                                 <connections>
-                                    <segue destination="yoF-DC-PBK" kind="embed" id="tOj-SA-aCs"/>
+                                    <segue destination="yoF-DC-PBK" kind="embed" identifier="embedAboutVC" id="tOj-SA-aCs"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -361,7 +361,7 @@
             <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.33700001239776611" green="0.016000000759959221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

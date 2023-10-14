@@ -13,13 +13,13 @@ class CosmosTokenVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyDataView: UIView!
     
-    var parentVC: CosmosClassVC!
     var selectedChain: CosmosClass!
-    
     var mintscanTokens = Array<MintscanToken>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        baseAccount = BaseData.instance.baseAccount
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -28,24 +28,19 @@ class CosmosTokenVC: BaseVC {
         tableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
+        
+        Task {
+            if (selectedChain.supportCw20) {
+                selectedChain.fetchAllCw20Balance(baseAccount.id)
+            } else if (selectedChain.supportErc20) {
+                selectedChain.fetchAllErc20Balance(baseAccount.id)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
-        
-        parentVC = self.parent as? CosmosClassVC
-
-        baseAccount = BaseData.instance.baseAccount
-        selectedChain = parentVC.selectedChain
-        
-        if (selectedChain.supportCw20) {
-            selectedChain.fetchAllCw20Balance(baseAccount.id)
-            
-        } else if (selectedChain.supportErc20) {
-            selectedChain.fetchAllErc20Balance(baseAccount.id)
-        }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -54,8 +49,10 @@ class CosmosTokenVC: BaseVC {
     }
     
     @objc func onFetchTokenDone(_ notification: NSNotification) {
-        mintscanTokens.removeAll()
-        onUpdateView()
+        DispatchQueue.main.async {
+            self.mintscanTokens.removeAll()
+            self.onUpdateView()
+        }
     }
     
     func onUpdateView() {

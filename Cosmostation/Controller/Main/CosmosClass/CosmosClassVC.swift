@@ -32,6 +32,28 @@ class CosmosClassVC: BaseVC {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "embedCoinVC") {
+            let target = segue.destination as! CosmosCoinVC
+            target.selectedChain = selectedChain
+        } else if (segue.identifier == "embedTokenVC") {
+            let target = segue.destination as! CosmosTokenVC
+            target.selectedChain = selectedChain
+        } else if (segue.identifier == "embedNftVC") {
+//            let target = segue.destination as! CosmosCoinVC
+//            target.selectedChain = selectedChain
+        } else if (segue.identifier == "embedHistoryVC") {
+            let target = segue.destination as! CosmosHistoryVC
+            target.selectedChain = selectedChain
+        } else if (segue.identifier == "embedAboutVC") {
+//            let target = segue.destination as! CosmosCoinVC
+//            target.selectedChain = selectedChain
+        }
+    }
+    
+    
+    //embedCoinVC
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -311,6 +333,8 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             });
         }
     }
+    
+    
 }
 
 

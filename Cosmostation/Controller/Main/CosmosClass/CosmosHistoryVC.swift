@@ -14,9 +14,8 @@ class CosmosHistoryVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyDataView: UIView!
-    
     var refresher: UIRefreshControl!
-    var parentVC: CosmosClassVC!
+    
     var selectedChain: CosmosClass!
     var msHistoryGroup = Array<MintscanHistoryGroup>()
     var msHistoyID: Int64 = 0
@@ -29,6 +28,8 @@ class CosmosHistoryVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        baseAccount = BaseData.instance.baseAccount
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -40,17 +41,7 @@ class CosmosHistoryVC: BaseVC {
         refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        parentVC = self.parent as? CosmosClassVC
-
-        baseAccount = BaseData.instance.baseAccount
-        selectedChain = parentVC.selectedChain
-        msHistoryGroup.removeAll()
-        beaconHistoey.removeAll()
-        oktHistoey.removeAll()
+        
         onRequestFetch()
     }
     

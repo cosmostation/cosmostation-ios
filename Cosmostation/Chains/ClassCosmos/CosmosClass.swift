@@ -243,7 +243,7 @@ extension CosmosClass {
     }
     
     func fetchErc20Info() async throws -> MintscanTokens {
-//        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
+        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
         return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable(MintscanTokens.self).value
     }
     
@@ -621,7 +621,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.removeAll()
     result.append(ChainCosmos())
     result.append(ChainAkash())
-    result.append(ChainArchway())
+//    result.append(ChainArchway())
 //    result.append(ChainAssetMantle())
 //    result.append(ChainAxelar())
 //    result.append(ChainBand())
@@ -635,15 +635,15 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
 //    result.append(ChainCudos())
 //    result.append(ChainDesmos())
 //    result.append(ChainEmoney())
-//    result.append(ChainEvmos())
+    result.append(ChainEvmos())
 //    result.append(ChainFetchAi())
 //    result.append(ChainGravityBridge())
 //    result.append(ChainInjective())
 //    result.append(ChainIxo())
 //    result.append(ChainJuno())
-//    result.append(ChainKava459())
-//    result.append(ChainKava60())
-//    result.append(ChainKava118())
+    result.append(ChainKava459())
+    result.append(ChainKava60())
+    result.append(ChainKava118())
 //    result.append(ChainKi())
 //    result.append(ChainKyve())
 //    result.append(ChainLike())
@@ -651,7 +651,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
 //    result.append(ChainLum118())
 //    result.append(ChainMars())
 //    result.append(ChainMedibloc())
-    result.append(ChainNeutron())
+//    result.append(ChainNeutron())
 //    result.append(ChainNoble())
 //    result.append(ChainNyx())
 //    result.append(ChainOmniflix())
@@ -673,7 +673,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
 //    result.append(ChainSommelier())
 //    result.append(ChainStafi())
 //    result.append(ChainStargaze())
-//    result.append(ChainStarname())
+    result.append(ChainStarname())
 //    result.append(ChainStride())
 //    result.append(ChainTerra())
 //    result.append(ChainTeritori())

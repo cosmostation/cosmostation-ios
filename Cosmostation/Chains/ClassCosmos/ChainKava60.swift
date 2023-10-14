@@ -23,8 +23,10 @@ class ChainKava60: CosmosClass  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         accountPrefix = "kava"
         evmCompatible = true
+        supportErc20 = true
         
         grpcHost = "grpc-kava.cosmostation.io"
+        rpcURL = "https://rpc-kava-app.cosmostation.io"
     }
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {

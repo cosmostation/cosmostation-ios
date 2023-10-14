@@ -12,19 +12,19 @@ import SwiftyJSON
 class CosmosCoinVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
-    
     var refresher: UIRefreshControl!
-    var parentVC: CosmosClassVC!
-    var selectedChain: CosmosClass!
     
+    var selectedChain: CosmosClass!
     var nativeCoins = Array<Cosmos_Base_V1beta1_Coin>()                 // section 1
     var ibcCoins = Array<Cosmos_Base_V1beta1_Coin>()                    // section 2
     var bridgedCoins = Array<Cosmos_Base_V1beta1_Coin>()                // section 3
     
     var lcdBalances = Array<JSON>()                                     // section 1 for legacy lcd
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        baseAccount = BaseData.instance.baseAccount
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -39,20 +39,12 @@ class CosmosCoinVC: BaseVC {
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+        onSortAssets()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        parentVC = self.parent as? CosmosClassVC
-
-        baseAccount = BaseData.instance.baseAccount
-        selectedChain = parentVC.selectedChain
-        nativeCoins.removeAll()
-        ibcCoins.removeAll()
-        bridgedCoins.removeAll()
-        lcdBalances.removeAll()
-        onSortAssets()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
