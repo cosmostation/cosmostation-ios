@@ -1,5 +1,5 @@
 //
-//  NeutronPrpposals.swift
+//  NeutronPrpposalsVC.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/10/12.
@@ -15,7 +15,7 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-class NeutronPrpposals: BaseVC {
+class NeutronPrpposalsVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var voteBtn: BaseButton!
@@ -93,7 +93,7 @@ class NeutronPrpposals: BaseVC {
 
 }
 
-extension NeutronPrpposals: UITableViewDelegate, UITableViewDataSource {
+extension NeutronPrpposalsVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if (neutronProposals.count > 1) {
@@ -197,7 +197,7 @@ extension NeutronPrpposals: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-extension NeutronPrpposals {
+extension NeutronPrpposalsVC {
     func fetchProposals(_ group: DispatchGroup, _ channel: ClientConnection, _ contAddress: String) {
         group.enter()
         let query: JSON = ["reverse_proposals" : JSON()]

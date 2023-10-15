@@ -14,7 +14,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NeutronPrpposals" customModule="Cosmostation" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NeutronPrpposalsVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="loadingView" destination="JpO-lr-BZi" id="i2T-nO-XvI"/>
                 <outlet property="tableView" destination="yzn-qk-wLs" id="i8d-KL-q1t"/>

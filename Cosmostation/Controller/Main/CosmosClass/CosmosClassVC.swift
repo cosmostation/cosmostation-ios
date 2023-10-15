@@ -174,8 +174,6 @@ class CosmosClassVC: BaseVC {
         let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 2)
         let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 3)
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 4)
-//        tabbar.items = [ coinTabBar, tokenTabBar, historyTabBar]
-//        tabbar.items = [ coinTabBar, tokenTabBar, nftTabBar, historyTabBar, aboutTabBar]
         tabbar.items.append(coinTabBar)
         if (selectedChain.supportCw20 || selectedChain.supportErc20) { tabbar.items.append(tokenTabBar) }
         if (selectedChain.supportNft) { tabbar.items.append(nftTabBar) }
@@ -235,10 +233,9 @@ class CosmosClassVC: BaseVC {
                 self.onNeutronProposals()
             }
             
-        } else if (selectedChain is ChainKava118 ||
-                   selectedChain is ChainKava459) {
+        } else if (selectedChain is ChainKava118 || selectedChain is ChainKava459) {
             mainFab.addItem(title: "DeFi", image: UIImage(named: "iconFabDefi")) { _ in
-                print("DeFi")
+                self.onKavaDefi()
             }
         }
         
@@ -364,10 +361,16 @@ extension CosmosClassVC {
     }
     
     func onNeutronProposals() {
-        let proposalsVC = NeutronPrpposals(nibName: "NeutronPrpposals", bundle: nil)
+        let proposalsVC = NeutronPrpposalsVC(nibName: "NeutronPrpposalsVC", bundle: nil)
         proposalsVC.selectedChain = selectedChain as? ChainNeutron
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(proposalsVC, animated: true)
-        
+    }
+    
+    func onKavaDefi() {
+        let defiVC = KavaDefiVC(nibName: "KavaDefiVC", bundle: nil)
+        defiVC.selectedChain = selectedChain as? ChainKava60
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(defiVC, animated: true)
     }
 }

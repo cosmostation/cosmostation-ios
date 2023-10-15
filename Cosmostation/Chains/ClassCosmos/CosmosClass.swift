@@ -651,7 +651,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
 //    result.append(ChainLum118())
 //    result.append(ChainMars())
 //    result.append(ChainMedibloc())
-//    result.append(ChainNeutron())
+    result.append(ChainNeutron())
 //    result.append(ChainNoble())
 //    result.append(ChainNyx())
 //    result.append(ChainOmniflix())

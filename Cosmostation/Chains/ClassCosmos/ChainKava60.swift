@@ -44,5 +44,10 @@ class ChainKava60: CosmosClass  {
     }
 }
 
+let KAVA_MAIN_DENOM = "ukava"
+let KAVA_HARD_DENOM = "hard"
+let KAVA_USDX_DENOM = "usdx"
+let KAVA_SWAP_DENOM = "swp"
+
 let KAVA_LCD = "https://lcd-kava.cosmostation.io/"
 let KAVA_BASE_FEE = "12500"
