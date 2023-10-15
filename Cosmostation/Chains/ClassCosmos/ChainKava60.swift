@@ -51,3 +51,6 @@ let KAVA_SWAP_DENOM = "swp"
 
 let KAVA_LCD = "https://lcd-kava.cosmostation.io/"
 let KAVA_BASE_FEE = "12500"
+
+let KAVA_CDP_IMG_URL        = ResourceBase + "kava/module/mint/";
+let KAVA_HARD_POOL_IMG_URL  = ResourceBase + "kava/module/lend/";

@@ -272,6 +272,10 @@
 "str_cancel_unbonding" = "アンステーキングのキャンセル";
 "str_cancel_unbonding_msg" = "アンステーキングをキャンセルし、すぐにステーキング状態に戻ります。";
 "str_address_book_list" = "アドレス帳リスト";
+"str_deposit_denom" = "%@ イェチ";
+"str_withdraw_denom" = "%@ 出金";
+"str_borrow_denom" = "%@ ローン";
+"str_repay_denom" = "%@ 返済";
 
 
 "btn_delegate" = "  委任する";
@@ -882,6 +886,8 @@
 "title_select_recipient_chain" = "Select Recipient Chain";
 "title_select_nameservice" = "Search Result %@ Nameservices";
 "title_select_vaults" = "Select Vault";
+"title_hardpool_list" = "Lending Pool List";
+"title_select_hardpool_action" = "Select Hard Lending";
 
 
 "proposal_type_basic" = "Basic";

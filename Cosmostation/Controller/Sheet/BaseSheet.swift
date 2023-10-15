@@ -37,6 +37,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var refAddresses = Array<RefAddress>()
     var addressBook = Array<String>()
     
+    var hardMarketDenom: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -183,6 +184,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SelectNeutronVault) {
             sheetTitle.text = NSLocalizedString("title_select_vaults", comment: "")
+            
+        } else if (sheetType == .SelectHardAction) {
+            sheetTitle.text = NSLocalizedString("title_select_hardpool_action", comment: "")
+            
         }
         
     }
@@ -305,6 +310,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectNeutronVault) {
             return 2
+            
+        } else if (sheetType == .SelectHardAction) {
+            return 4
         }
         return 0
     }
@@ -405,6 +413,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
             cell?.onBindVault(indexPath.row)
             return cell!
+            
+        } else if (sheetType == .SelectHardAction) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
+            cell?.onBindHard(indexPath.row, hardMarketDenom)
+            return cell!
         }
         return UITableViewCell()
     }
@@ -463,6 +476,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result = BaseSheetResult.init(indexPath.row, chain.address)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if (sheetType == .SelectHardAction) {
+            let result = BaseSheetResult.init(indexPath.row, hardMarketDenom)
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
         } else {
             sheetDelegate?.onSelectedSheet(sheetType, BaseSheetResult.init(indexPath.row, nil))
         }
@@ -512,6 +529,7 @@ public enum SheetType: Int {
     case SelectNameServiceAddress = 18
     case SelectBepRecipientAddress = 19
     
-    
     case SelectNeutronVault = 20
+    
+    case SelectHardAction = 21
 }

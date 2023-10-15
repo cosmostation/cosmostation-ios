@@ -272,6 +272,10 @@
 "str_cancel_unbonding" = "Cancel Unstaking";
 "str_cancel_unbonding_msg" = "Cancel unstaking and immediately make staked state.";
 "str_address_book_list" = "Address Book List";
+"str_deposit_denom" = "Deposit %@";
+"str_withdraw_denom" = "Withdraw %@";
+"str_borrow_denom" = "Borrow %@";
+"str_repay_denom" = "Repay %@";
 
 
 "btn_delegate" = "  Delegate";
@@ -882,6 +886,8 @@
 "title_select_recipient_chain" = "Select Recipient Chain";
 "title_select_nameservice" = "Search Result %@ Nameservices";
 "title_select_vaults" = "Select Vault";
+"title_hardpool_list" = "Lending Pool List";
+"title_select_hardpool_action" = "Select Hard Lending";
 
 
 "proposal_type_basic" = "Basic";

@@ -233,7 +233,7 @@ class CosmosClass: BaseChain  {
 extension CosmosClass {
     
     func fetchChainParam() async throws -> JSON {
-//        print("fetchChainParam ", BaseNetWork.msChainParam(self))
+        print("fetchChainParam ", BaseNetWork.msChainParam(self))
         return try await AF.request(BaseNetWork.msChainParam(self), method: .get).serializingDecodable(JSON.self).value
     }
     
@@ -616,6 +616,7 @@ extension CosmosClass {
 }
 
 
+
 func ALLCOSMOSCLASS() -> [CosmosClass] {
     var result = [CosmosClass]()
     result.removeAll()
@@ -695,3 +696,19 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
 }
 
 let DEFUAL_DISPALY_COSMOS = ["cosmos118", "neutron118", "kava459", "osmosis118", "akash118", "stargaze118", "crypto-org394", "gravity-bridge118", "passage118"]
+
+extension Cosmos_Base_V1beta1_Coin {
+    func getAmount() -> NSDecimalNumber {
+        return NSDecimalNumber(string: amount)
+    }
+    
+    init (_ denom: String, _ amount: String) {
+        self.denom = denom
+        self.amount = amount
+    }
+    
+    init (_ denom: String, _ amount: NSDecimalNumber) {
+        self.denom = denom
+        self.amount = amount.stringValue
+    }
+}

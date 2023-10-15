@@ -29,6 +29,11 @@ class BaseVC: UIViewController {
         setLocalizedString()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setLocalizedString()
+    }
+    
     func setLocalizedString() { }
     
     public func showWait() {

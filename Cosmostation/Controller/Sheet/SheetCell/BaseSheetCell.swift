@@ -45,4 +45,19 @@ class BaseSheetCell: UITableViewCell {
         }
     }
     
+    func onBindHard(_ position: Int, _ denom: String?) {
+        if let symbol = BaseData.instance.mintscanAssets?.filter({ $0.denom == denom }).first?.symbol {
+            if (position == 0) {
+                titleLabel.text = String(format: NSLocalizedString("str_deposit_denom", comment: ""), symbol)
+            } else if (position == 1) {
+                titleLabel.text = String(format: NSLocalizedString("str_withdraw_denom", comment: ""), symbol)
+            } else if (position == 2) {
+                titleLabel.text = String(format: NSLocalizedString("str_borrow_denom", comment: ""), symbol)
+            } else if (position == 3) {
+                titleLabel.text = String(format: NSLocalizedString("str_repay_denom", comment: ""), symbol)
+            }
+        }
+        
+    }
+    
 }

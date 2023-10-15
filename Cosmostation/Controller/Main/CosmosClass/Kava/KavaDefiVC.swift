@@ -20,14 +20,15 @@ class KavaDefiVC: BaseVC {
     
     var selectedChain: ChainKava60!
     var incentive: Kava_Incentive_V1beta1_QueryRewardsResponse?
+    var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
         
-        tableView.isHidden = false
-        loadingView.isHidden = true
+        tableView.isHidden = true
+        loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
         loadingView.loopMode = .loop
@@ -38,9 +39,9 @@ class KavaDefiVC: BaseVC {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "KavaIncentiveCell", bundle: nil), forCellReuseIdentifier: "KavaIncentiveCell")
+        tableView.register(UINib(nibName: "KavaDefiCell", bundle: nil), forCellReuseIdentifier: "KavaDefiCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
-        
         
         onFetchData()
     }
@@ -52,15 +53,19 @@ class KavaDefiVC: BaseVC {
     func onFetchData() {
         Task {
             let channel = getConnection()
-            if let incentive = try? await fetchIncentive(channel, selectedChain.address!) {
+            if let incentive = try? await fetchIncentive(channel, selectedChain.address!),
+               let pricefeed = try? await fetchPriceFeed(channel) {
                 self.incentive = incentive
+                self.priceFeed = pricefeed
                 
                 DispatchQueue.main.async {
+                    self.tableView.isHidden = false
+                    self.loadingView.isHidden = true
                     self.tableView.reloadData()
                 }
                 
             } else {
-                print("error")
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -70,22 +75,51 @@ class KavaDefiVC: BaseVC {
 extension KavaDefiVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.row == 0) {
+            if (incentive == nil || incentive?.allIncentiveCoins().count == 0) {
+                return 0
+            }
+        }
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"KavaIncentiveCell") as! KavaIncentiveCell
-        cell.onBindIncentive(selectedChain, incentive)
-        return cell
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"KavaIncentiveCell") as! KavaIncentiveCell
+            cell.onBindIncentive(selectedChain, incentive)
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"KavaDefiCell") as! KavaDefiCell
+            cell.onBindKava(indexPath.row)
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
             let claimRewards = KavaClaimIncentives(nibName: "KavaClaimIncentives", bundle: nil)
             claimRewards.incentive = incentive
             claimRewards.selectedChain = selectedChain
             claimRewards.modalTransitionStyle = .coverVertical
             self.present(claimRewards, animated: true)
+            
+        } else if (indexPath.row == 1) {
+            //mint
+            
+        } else if (indexPath.row == 2) {
+            let lendListVC = KavaLendListVC(nibName: "KavaLendListVC", bundle: nil)
+            lendListVC.selectedChain = selectedChain
+            lendListVC.priceFeed = priceFeed
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(lendListVC, animated: true)
+            
+        } else if (indexPath.row == 3) {
+            //swap
         }
     }
 }
@@ -103,6 +137,11 @@ extension KavaDefiVC {
         return try? await Kava_Incentive_V1beta1_QueryNIOClient(channel: channel).rewardFactors(req, callOptions: getCallOptions()).response.get()
     }
     
+    func fetchPriceFeed(_ channel: ClientConnection) async throws -> Kava_Pricefeed_V1beta1_QueryPricesResponse? {
+        let req = Kava_Pricefeed_V1beta1_QueryPricesRequest()
+        return try? await Kava_Pricefeed_V1beta1_QueryNIOClient(channel: channel).prices(req, callOptions: getCallOptions()).response.get()
+    }
+    
     
     
     
@@ -117,3 +156,17 @@ extension KavaDefiVC {
         return callOptions
     }
 }
+
+
+extension Kava_Pricefeed_V1beta1_QueryPricesResponse {
+    
+    func getKavaOraclePrice(_ marketId: String?) -> NSDecimalNumber {
+        if let price = prices.filter({ $0.marketID == marketId }).first {
+            return NSDecimalNumber.init(string: price.price).multiplying(byPowerOf10: -18, withBehavior: handler6)
+        }
+        return NSDecimalNumber.zero
+    }
+}
+
+
+
