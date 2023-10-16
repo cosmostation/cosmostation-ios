@@ -72,7 +72,7 @@
                                 <constraint firstAttribute="width" constant="28" id="Emt-Ov-mvr"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="COIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekw-c2-1Oo">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekw-c2-1Oo">
                             <rect key="frame" x="64" y="45.666666666666671" width="34.666666666666657" height="17"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                             <color key="textColor" name="_color01"/>
@@ -120,6 +120,7 @@
                         <constraint firstItem="e2H-WD-zbc" firstAttribute="leading" secondItem="bJV-zj-3g6" secondAttribute="trailing" constant="2" id="QMN-u8-7KF"/>
                         <constraint firstItem="AQQ-Yh-yzX" firstAttribute="centerY" secondItem="1q6-r2-pjB" secondAttribute="centerY" id="TYN-KA-SwZ"/>
                         <constraint firstItem="1q6-r2-pjB" firstAttribute="top" secondItem="SJv-Lw-rZt" secondAttribute="bottom" constant="12" id="VDO-Fc-5XN"/>
+                        <constraint firstItem="Ekw-c2-1Oo" firstAttribute="leading" secondItem="1q6-r2-pjB" secondAttribute="trailing" constant="16" id="bI2-Dh-USe"/>
                         <constraint firstItem="0pr-Eh-OTD" firstAttribute="leading" secondItem="fb3-uU-xlk" secondAttribute="trailing" constant="2" id="dvi-rB-qb1"/>
                         <constraint firstItem="e2H-WD-zbc" firstAttribute="centerY" secondItem="bJV-zj-3g6" secondAttribute="centerY" id="ecC-lG-AyB"/>
                         <constraint firstAttribute="height" constant="86" id="f5i-we-PwC"/>

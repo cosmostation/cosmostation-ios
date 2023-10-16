@@ -121,6 +121,8 @@
 "str_max_redelegable" = "Max Redelegable :";
 "str_max_depositable" = "Max Depositable :";
 "str_max_withdrawable" = "Max Withdrawable :";
+"str_max_borrowable" = "Max Borrowable :";
+"str_max_repayable" = "Max Repayable :";
 "str_tx_fee" = "Tx Fee";
 "str_send_amount" = "Send Amount";
 "str_current_availabe" = "Current Amount";
@@ -290,8 +292,10 @@
 "btn_credefi" = "  Crescent De-Fi";
 "btn_claim_incentive" = "Claim Incentive";
 "btn_nameservice" = " Starname Service";
-"btn_deposit" = " Deposit";
-"btn_withdraw" = " Withdraw";
+"btn_deposit" = "Deposit";
+"btn_withdraw" = "Withdraw";
+"btn_borrow" = "Borrow";
+"btn_repay" = "Repay";
 "btn_vote_validator" = " Vote for Validator";
 "btn_profile" = "  Profile";
 "btn_buy_moonpay" = "  Buy %@";

@@ -28,12 +28,8 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
     var transferAssetType: TransferAssetType?
     var availableAmount: NSDecimalNumber!
     var existedAmount: NSDecimalNumber?
-    
-    
     var decimal: Int16!
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -113,6 +109,39 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
                 WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             }
             
+        }
+        
+        else if (sheetType == .TxHardDeposit) {
+            amountTextField.label.text = NSLocalizedString("str_deposit_amount", comment: "")
+            availableTitle.text = NSLocalizedString("str_max_depositable", comment: "")
+            if let msAsset = msAsset {
+                decimal = msAsset.decimals!
+                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
+            }
+            
+        } else if (sheetType == .TxHardWithdraw) {
+            amountTextField.label.text = NSLocalizedString("str_withdraw_amount", comment: "")
+            availableTitle.text = NSLocalizedString("str_max_withdrawable", comment: "")
+            if let msAsset = msAsset {
+                decimal = msAsset.decimals!
+                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
+            }
+            
+        } else if (sheetType == .TxHardBorrow) {
+            amountTextField.label.text = NSLocalizedString("str_borrow_amount", comment: "")
+            availableTitle.text = NSLocalizedString("str_max_borrowable", comment: "")
+            if let msAsset = msAsset {
+                decimal = msAsset.decimals!
+                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
+            }
+            
+        } else if (sheetType == .TxHardRepay) {
+            amountTextField.label.text = NSLocalizedString("str_repay_amount", comment: "")
+            availableTitle.text = NSLocalizedString("str_max_repayable", comment: "")
+            if let msAsset = msAsset {
+                decimal = msAsset.decimals!
+                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
+            }
         }
         
     }
@@ -203,4 +232,9 @@ public enum AmountSheetType: Int {
     
     case TxVaultDeposit = 4
     case TxVaultWithdraw = 5
+    
+    case TxHardDeposit = 6
+    case TxHardWithdraw = 7
+    case TxHardBorrow = 8
+    case TxHardRepay = 9
 }

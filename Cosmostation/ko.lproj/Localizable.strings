@@ -121,6 +121,8 @@
 "str_max_redelegable" = "최대 가능 :";
 "str_max_depositable" = "최대 입금 가능 :";
 "str_max_withdrawable" = "최대 출금 가능 :";
+"str_max_borrowable" = "최대 대출 가능 :";
+"str_max_repayable" = "최대 상환 가능 :";
 "str_tx_fee" = "Tx 수수료";
 "str_send_amount" = "송금 수량";
 "str_current_availabe" = "현재 수량";
@@ -290,8 +292,10 @@
 "btn_credefi" = "  Crescent De-Fi";
 "btn_claim_incentive" = "인센티브 청구";
 "btn_nameservice" = " 스타네임 서비스";
-"btn_deposit" = " 예치";
-"btn_withdraw" = " 회수";
+"btn_deposit" = "예치";
+"btn_withdraw" = "출금";
+"btn_borrow" = "대출";
+"btn_repay" = "상환";
 "btn_vote_validator" = " 검증인 선출";
 "btn_profile" = "  프로파일";
 "btn_buy_moonpay" = "  %@ 구입";

@@ -121,6 +121,8 @@
 "str_max_redelegable" = "最大再委任可能量 :";
 "str_max_depositable" = "最大入金可能 :";
 "str_max_withdrawable" = "最大引き出し可能 :";
+"str_max_borrowable" = "最大借入可能額 :";
+"str_max_repayable" = "最大返済可能額 :";
 "str_tx_fee" = "Tx手数料";
 "str_send_amount" = "転送数量";
 "str_current_availabe" = "現在使用可能数量";
@@ -290,8 +292,10 @@
 "btn_credefi" = "  Crescent De-Fi";
 "btn_claim_incentive" = "インセンティブ請求";
 "btn_nameservice" = "  スターネームサービス";
-"btn_deposit" = "  ステーキング";
-"btn_withdraw" = "  撤退";
+"btn_deposit" = "イェチ";
+"btn_withdraw" = "出金";
+"btn_borrow" = "ローン";
+"btn_repay" = "返済";
 "btn_vote_validator" = "  検証人投票";
 "btn_profile" = "  プロフィール";
 "btn_buy_moonpay" = " %@ 購入";

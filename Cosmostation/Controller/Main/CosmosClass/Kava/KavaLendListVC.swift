@@ -114,9 +114,16 @@ class KavaLendListVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
+        let depositedAmount = hardMyDeposit?.filter({ $0.denom == denom }).first?.getAmount() ?? NSDecimalNumber.zero
+        if (depositedAmount.compare(NSDecimalNumber.zero).rawValue <= 0) {
+            onShowToast(NSLocalizedString("error_not_enough_to_withdraw", comment: ""))
+            return
+        }
         let hardAction = KavaHardAction(nibName: "KavaHardAction", bundle: nil)
         hardAction.hardActionType = .Withdraw
         hardAction.selectedChain = selectedChain
+        hardAction.hardMyDeposit = hardMyDeposit
+        hardAction.hardMarket = hardParams?.getHardMoneyMarket(denom)
         hardAction.modalTransitionStyle = .coverVertical
         self.present(hardAction, animated: true)
     }
@@ -126,9 +133,18 @@ class KavaLendListVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
+        let borrowable = getRemainBorrowableAmount(denom)
+        if (borrowable.compare(NSDecimalNumber.zero).rawValue < 0) {
+            onShowToast(NSLocalizedString("error_no_borrowable_asset", comment: ""))
+            return
+        }
         let hardAction = KavaHardAction(nibName: "KavaHardAction", bundle: nil)
         hardAction.hardActionType = .Borrow
         hardAction.selectedChain = selectedChain
+        hardAction.hardMyDeposit = hardMyDeposit
+        hardAction.hardMyBorrow = hardMyBorrow
+        hardAction.hardMarket = hardParams?.getHardMoneyMarket(denom)
+        hardAction.hardBorrowableAmount = borrowable
         hardAction.modalTransitionStyle = .coverVertical
         self.present(hardAction, animated: true)
     }
@@ -138,11 +154,48 @@ class KavaLendListVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
+        let borrowedAmount = hardMyBorrow?.filter({ $0.denom == denom }).first?.getAmount() ?? NSDecimalNumber.zero
+        if (borrowedAmount.compare(NSDecimalNumber.zero).rawValue <= 0) {
+            onShowToast(NSLocalizedString("error_no_repay_asset", comment: ""))
+            return
+        }
         let hardAction = KavaHardAction(nibName: "KavaHardAction", bundle: nil)
         hardAction.hardActionType = .Repay
         hardAction.selectedChain = selectedChain
+        hardAction.hardMyDeposit = hardMyDeposit
+        hardAction.hardMyBorrow = hardMyBorrow
+        hardAction.hardMarket = hardParams?.getHardMoneyMarket(denom)
         hardAction.modalTransitionStyle = .coverVertical
         self.present(hardAction, animated: true)
+    }
+    
+    func getRemainBorrowableAmount(_ denom: String) -> NSDecimalNumber {
+        var totalLTVValue = NSDecimalNumber.zero
+        var totalBorrowedValue = NSDecimalNumber.zero
+        hardMyDeposit?.forEach({ coin in
+            let decimal         = BaseData.instance.mintscanAssets?.filter({ $0.denom == coin.denom }).first?.decimals ?? 6
+            let LTV             = hardParams!.getLTV(coin.denom)
+            let marketIdPrice   = priceFeed!.getKavaOraclePrice(hardParams!.getSpotMarketId(coin.denom))
+            let depositValue    = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: handler12Down)
+            let ltvValue        = depositValue.multiplying(by: LTV)
+            totalLTVValue       = totalLTVValue.adding(ltvValue)
+        })
+        hardMyBorrow?.forEach ({ coin in
+            let decimal         = BaseData.instance.mintscanAssets?.filter({ $0.denom == coin.denom }).first?.decimals ?? 6
+            let marketIdPrice   = priceFeed!.getKavaOraclePrice(hardParams!.getSpotMarketId(coin.denom))
+            let borrowValue     = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: handler12Down)
+            totalBorrowedValue = totalBorrowedValue.adding(borrowValue)
+        })
+        
+        
+        totalLTVValue = totalLTVValue.multiplying(by: NSDecimalNumber.init(string: "0.9"), withBehavior: handler0Down)
+        let tempBorrowAbleValue  = totalLTVValue.subtracting(totalBorrowedValue)
+        let totalBorrowAbleValue = tempBorrowAbleValue.compare(NSDecimalNumber.zero).rawValue > 0 ? tempBorrowAbleValue : NSDecimalNumber.zero
+        
+        let oraclePrice = priceFeed!.getKavaOraclePrice(hardParams!.getSpotMarketId(denom))
+        let decimal = BaseData.instance.mintscanAssets?.filter({ $0.denom == denom }).first?.decimals ?? 6
+        let totalBorrowAbleAmount = totalBorrowAbleValue.multiplying(byPowerOf10: decimal, withBehavior: handler12Down).dividing(by: oraclePrice, withBehavior: handler0Down)
+        return totalBorrowAbleAmount.compare(NSDecimalNumber.zero).rawValue > 0 ? totalBorrowAbleAmount : NSDecimalNumber.zero
     }
 
 }
@@ -199,7 +252,6 @@ extension KavaLendListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
                 } else if (result.position == 3) {
                     self.onRepayHardTx(result.param!)
                 }
-//                let aa = HardActionType.init(rawValue: result.position!)
             });
         }
         
@@ -274,5 +326,11 @@ extension Kava_Hard_V1beta1_Params {
             return market.spotMarketID
         }
         return ""
+    }
+}
+
+extension Kava_Hard_V1beta1_MoneyMarket {
+    public func getLTV(_ denom: String) -> NSDecimalNumber {
+        NSDecimalNumber.init(string: borrowLimit.loanToValue).multiplying(byPowerOf10: -18)
     }
 }
