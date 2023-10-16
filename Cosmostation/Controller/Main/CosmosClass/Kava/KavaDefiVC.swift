@@ -119,7 +119,11 @@ extension KavaDefiVC: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(lendListVC, animated: true)
             
         } else if (indexPath.row == 3) {
-            //swap
+            let swapListVC = KavaSwapListVC(nibName: "KavaSwapListVC", bundle: nil)
+            swapListVC.selectedChain = selectedChain
+            swapListVC.priceFeed = priceFeed
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(swapListVC, animated: true)
         }
     }
 }

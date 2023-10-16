@@ -60,4 +60,12 @@ class BaseSheetCell: UITableViewCell {
         
     }
     
+    func onBindSwp(_ position: Int) {
+        if (position == 0) {
+            titleLabel.text = NSLocalizedString("title_pool_join", comment: "")
+        } else if (position == 1) {
+            titleLabel.text = NSLocalizedString("title_pool_exit", comment: "")
+        }
+    }
+    
 }

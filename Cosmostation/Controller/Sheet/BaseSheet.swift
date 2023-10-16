@@ -38,6 +38,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var addressBook = Array<String>()
     
     var hardMarketDenom: String?
+    var swpName: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -188,6 +189,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectHardAction) {
             sheetTitle.text = NSLocalizedString("title_select_hardpool_action", comment: "")
             
+        } else if (sheetType == .SelectSwpAction) {
+            sheetTitle.text = NSLocalizedString("title_select_swappool_action", comment: "")
+            
         }
         
     }
@@ -313,6 +317,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectHardAction) {
             return 4
+            
+        } else if (sheetType == .SelectSwpAction) {
+            return 2
         }
         return 0
     }
@@ -418,6 +425,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
             cell?.onBindHard(indexPath.row, hardMarketDenom)
             return cell!
+            
+        } else if (sheetType == .SelectSwpAction) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
+            cell?.onBindSwp(indexPath.row)
+            return cell!
         }
         return UITableViewCell()
     }
@@ -480,6 +492,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result = BaseSheetResult.init(indexPath.row, hardMarketDenom)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if (sheetType == .SelectSwpAction) {
+            let result = BaseSheetResult.init(indexPath.row, swpName)
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
         } else {
             sheetDelegate?.onSelectedSheet(sheetType, BaseSheetResult.init(indexPath.row, nil))
         }
@@ -532,4 +548,5 @@ public enum SheetType: Int {
     case SelectNeutronVault = 20
     
     case SelectHardAction = 21
+    case SelectSwpAction = 22
 }

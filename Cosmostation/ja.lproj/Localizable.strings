@@ -342,6 +342,9 @@
 "msg_tap_for_add_memo" = "タップしてメモを追加します。";
 "msg_tap_for_add_amount" = "タップして金額を追加します。";
 "msg_tap_for_add_address" = "タップしてアドレスを追加します。";
+"msg_kava_mint_msg" = "CDPモジュールを使用して、担保型USDXミンティング機能を利用してみてください。";
+"msg_kava_lend_msg" = "HARDランディングプラットフォームを利用して資産を預け、LTVに基づいて他の資産を貸し出して利用することができます。";
+"msg_kava_swap_msg" = "KAVAプラットフォーム上のAMM方式の資産スワッププールに流動性を提供します。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -892,6 +895,8 @@
 "title_select_vaults" = "Select Vault";
 "title_hardpool_list" = "Lending Pool List";
 "title_select_hardpool_action" = "Select Hard Lending";
+"title_swappool_list" = "Swap Pool List";
+"title_select_swappool_action" = "Select Swp Pool";
 
 
 "proposal_type_basic" = "Basic";

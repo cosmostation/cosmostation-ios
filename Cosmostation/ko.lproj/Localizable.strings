@@ -342,6 +342,9 @@
 "msg_tap_for_add_memo" = "메모를 추가려면 탭하세요.";
 "msg_tap_for_add_amount" = "수량을 입력하시려면 탭하세요.";
 "msg_tap_for_add_address" = "주소를 입력하시려면 탭하세요.";
+"msg_kava_mint_msg" = "CDP 모듈을 이용하여 담보형 USDX 민팅 기능을 이용해보세요.";
+"msg_kava_lend_msg" = "Hard 랜딩 플랫폼을 이용하여 자산을 예치하고 LTV를 근거로 다른 자산을 대출받아 이용하실 수 있습니다.";
+"msg_kava_swap_msg" = "KAVA 플랫폼 상의 AMM 방식의 자산 스왑 풀에 유동성을 공급하세요. ";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";
@@ -888,6 +891,8 @@
 "title_select_vaults" = "볼트 선택";
 "title_hardpool_list" = "하드 랜딩 리스트";
 "title_select_hardpool_action" = "하드 랜딩 선택";
+"title_swappool_list" = "스왑 풀 리스트";
+"title_select_swappool_action" = "스왑 풀 선택";
 
 
 "proposal_type_basic" = "기본";

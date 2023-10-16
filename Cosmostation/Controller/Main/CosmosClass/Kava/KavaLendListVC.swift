@@ -256,9 +256,6 @@ extension KavaLendListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
         }
         
     }
-    
-    
-    
 }
 
 

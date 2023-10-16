@@ -11,6 +11,7 @@ import UIKit
 class KavaDefiCell: UITableViewCell {
     
     @IBOutlet weak var rootView: CardViewCell!
+    @IBOutlet weak var defiImg: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var msgLabel: UILabel!
 
@@ -26,16 +27,19 @@ class KavaDefiCell: UITableViewCell {
     
     func onBindKava(_ position: Int) {
         if (position == 1) {
-            titleLabel.text = "Minting"
-            msgLabel.text = "CDP를 이용해 당신의 자산을 담보 잡혀서 USDX를 민팅해보세요."
+            defiImg.image = UIImage(named: "imgKavaMint")
+            titleLabel.text = "MINT"
+            msgLabel.text = NSLocalizedString("msg_kava_mint_msg", comment: "")
             
         } else if (position == 2) {
-            titleLabel.text = "Lending"
-            msgLabel.text = "하드 랜딩풀을 이용해서 필요로하는 종류의 자산을 대출 합니다."
+            defiImg.image = UIImage(named: "imgKavaLend")
+            titleLabel.text = "LEND"
+            msgLabel.text = NSLocalizedString("msg_kava_lend_msg", comment: "")
             
         } else if (position == 3) {
-            titleLabel.text = "Swap Pool"
-            msgLabel.text = "스왑풀에 유동성을 공급하고 인샌티브를 받으세요"
+            defiImg.image = UIImage(named: "imgKavaSwap")
+            titleLabel.text = "SWAP POOL"
+            msgLabel.text = NSLocalizedString("msg_kava_swap_msg", comment: "")
             
         }
     }

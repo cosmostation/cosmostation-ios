@@ -342,6 +342,9 @@
 "msg_tap_for_add_memo" = "Tap to add memo.";
 "msg_tap_for_add_amount" = "Tap to add amount.";
 "msg_tap_for_add_address" = "Tap to add address.";
+"msg_kava_mint_msg" = "Use the collateralized USDX minting function using the CDP module.";
+"msg_kava_lend_msg" = "Use the HARD landing platform to deposit assets and borrow other assets based on LTV.";
+"msg_kava_swap_msg" = "Provide liquidity to AMM-style asset swap pools on the KAVA platform.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -892,6 +895,8 @@
 "title_select_vaults" = "Select Vault";
 "title_hardpool_list" = "Lending Pool List";
 "title_select_hardpool_action" = "Select Hard Lending";
+"title_swappool_list" = "Swap Pool List";
+"title_select_swappool_action" = "Select Swp Pool";
 
 
 "proposal_type_basic" = "Basic";
