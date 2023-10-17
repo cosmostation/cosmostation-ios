@@ -14,6 +14,7 @@ class CosmosProposalCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var myVoteImg: UIImageView!
     @IBOutlet weak var myVoteNumber: UILabel!
+    @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var expectedImg: UIImageView!
@@ -46,8 +47,8 @@ class CosmosProposalCell: UITableViewCell {
     }
     
     func onBindProposal(_ proposal: MintscanProposal, _ myVotes: [MintscanMyVotes], _ toVote: [UInt64]) {
-        let title = "# ".appending(String(proposal.id!)).appending("  ").appending(proposal.title ?? "")
-        titleLabel.text = title
+        idLabel.text = "# ".appending(String(proposal.id!) + ".")
+        titleLabel.text = proposal.title
         
         if (proposal.isVotingPeriod()) {
             selectSwitch.isHidden = false
@@ -58,7 +59,7 @@ class CosmosProposalCell: UITableViewCell {
             
         } else {
             selectSwitch.isHidden = true
-            statusLabel.text = proposal.onProposalStatusTxt()
+            statusLabel.text = proposal.onProposalStatusTxt().uppercased()
             statusImg.image = proposal.onProposalStatusImg()
             statusLabel.isHidden = false
             statusImg.isHidden = false
@@ -95,8 +96,8 @@ class CosmosProposalCell: UITableViewCell {
     func onBindNeutronDao(_ module: JSON, _ proposal: JSON, _ myVotes: [JSON], _ toVote: [Int64]) {
         let id = proposal["id"].int64Value
         let contents = proposal["proposal"]
-        
-        titleLabel.text = "# ".appending(String(id)).appending("  ").appending(contents["title"].stringValue)
+        idLabel.text = "# ".appending(String(id) + ".")
+        titleLabel.text = contents["title"].stringValue
         
         let status = contents["status"].stringValue.lowercased()
         if (status == "open") {

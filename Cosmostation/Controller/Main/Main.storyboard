@@ -47,22 +47,22 @@
                                 <rect key="frame" x="48" y="123" width="297" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gep-QT-tbA">
-                                        <rect key="frame" x="119.66666666666667" y="0.0" width="57.666666666666671" height="14"/>
+                                        <rect key="frame" x="116.33333333333334" y="0.0" width="64.666666666666657" height="15.333333333333334"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color02"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Dlp-Ea-tlm">
-                                        <rect key="frame" x="110" y="17.999999999999996" width="77" height="32.666666666666657"/>
+                                        <rect key="frame" x="108.33333333333334" y="19.333333333333346" width="80.666666666666657" height="35.333333333333343"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbb-cH-OhW">
-                                                <rect key="frame" x="0.0" y="0.0" width="20.333333333333332" height="32.666666666666664"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="20.666666666666668" height="35.333333333333336"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                 <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYI-Ew-zZT">
-                                                <rect key="frame" x="22.333333333333339" y="0.0" width="54.666666666666657" height="32.666666666666664"/>
+                                                <rect key="frame" x="22.666666666666657" y="0.0" width="58" height="35.333333333333336"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="28"/>
                                                 <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
@@ -98,7 +98,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Searched" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C80-Ou-x2t">
-                                        <rect key="frame" x="78.999999999999986" y="72" width="82.000000000000014" height="16.333333333333329"/>
+                                        <rect key="frame" x="76.333333333333343" y="72" width="87.333333333333343" height="17.666666666666671"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
@@ -151,7 +151,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="E17-5O-bYS">
-                                <rect key="frame" x="0.0" y="111" width="393" height="658"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" name="_primary"/>
                             </tableView>
@@ -159,7 +159,7 @@
                         <viewLayoutGuide key="safeArea" id="Z1L-6p-fyC"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="E17-5O-bYS" firstAttribute="top" secondItem="Z1L-6p-fyC" secondAttribute="top" constant="8" id="48Y-6y-r3U"/>
+                            <constraint firstItem="E17-5O-bYS" firstAttribute="top" secondItem="Z1L-6p-fyC" secondAttribute="top" id="48Y-6y-r3U"/>
                             <constraint firstItem="Z1L-6p-fyC" firstAttribute="bottom" secondItem="E17-5O-bYS" secondAttribute="bottom" id="Fdd-WR-cUm"/>
                             <constraint firstItem="Z1L-6p-fyC" firstAttribute="trailing" secondItem="E17-5O-bYS" secondAttribute="trailing" id="ipg-Jj-eKB"/>
                             <constraint firstItem="E17-5O-bYS" firstAttribute="leading" secondItem="Z1L-6p-fyC" secondAttribute="leading" id="xqW-Ed-9bf"/>
@@ -183,7 +183,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="oEI-tb-rax">
-                                <rect key="frame" x="0.0" y="111" width="393" height="658"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" name="_primary"/>
                             </tableView>
@@ -193,7 +193,7 @@
                         <constraints>
                             <constraint firstItem="Cp1-VK-FoG" firstAttribute="trailing" secondItem="oEI-tb-rax" secondAttribute="trailing" id="3OQ-CR-uC9"/>
                             <constraint firstItem="oEI-tb-rax" firstAttribute="bottom" secondItem="Cp1-VK-FoG" secondAttribute="bottom" id="Mqf-Np-WGc"/>
-                            <constraint firstItem="oEI-tb-rax" firstAttribute="top" secondItem="Cp1-VK-FoG" secondAttribute="top" constant="8" id="RnC-de-FK5"/>
+                            <constraint firstItem="oEI-tb-rax" firstAttribute="top" secondItem="Cp1-VK-FoG" secondAttribute="top" id="RnC-de-FK5"/>
                             <constraint firstItem="Cp1-VK-FoG" firstAttribute="leading" secondItem="oEI-tb-rax" secondAttribute="leading" id="xLv-sT-45x"/>
                         </constraints>
                     </view>

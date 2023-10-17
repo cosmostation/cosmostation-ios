@@ -52,18 +52,18 @@
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wC6-dE-gcs">
-                                        <rect key="frame" x="0.0" y="23.666666666666668" width="73.333333333333329" height="14.000000000000004"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wC6-dE-gcs">
+                                        <rect key="frame" x="0.0" y="23.666666666666668" width="73" height="14.000000000000004"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="m/118/0/0/1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z6Y-lL-ijC">
-                                                <rect key="frame" x="0.0" y="0.0" width="73.333333333333329" height="14"/>
-                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="73" height="14"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_color02"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deprecated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpI-Ap-xV9">
-                                                <rect key="frame" x="73.333333333333343" y="0.0" width="68" height="14"/>
-                                                <color key="backgroundColor" red="0.29803921570000003" green="0.29411764709999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="73" y="0.0" width="68" height="14"/>
+                                                <color key="backgroundColor" name="_color06"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="14" id="HdJ-XB-32K"/>
                                                     <constraint firstAttribute="width" constant="68" id="ZOY-xX-Yjz"/>
@@ -79,7 +79,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVM Compat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndV-0P-jRq">
-                                                <rect key="frame" x="73.333333333333343" y="0.0" width="73" height="14"/>
+                                                <rect key="frame" x="73" y="0.0" width="73" height="14"/>
                                                 <color key="backgroundColor" red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="14" id="CDa-CC-7n7"/>
@@ -105,7 +105,7 @@
                                 </userDefinedRuntimeAttributes>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Jde-5J-Cym">
-                                <rect key="frame" x="272.33333333333331" y="18.000000000000004" width="74.666666666666686" height="36.333333333333343"/>
+                                <rect key="frame" x="266.33333333333331" y="18.000000000000004" width="74.666666666666686" height="36.333333333333343"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Wne-VH-zt3">
                                         <rect key="frame" x="0.0" y="0.0" width="74.666666666666671" height="16"/>
@@ -141,7 +141,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Coin" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nt-Q9-wQJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="38" height="15.333333333333334"/>
-                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_color02"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -176,7 +176,7 @@
                             <constraint firstAttribute="bottom" secondItem="hCI-tl-W78" secondAttribute="bottom" constant="12" id="UEt-nI-x6y"/>
                             <constraint firstItem="6Qf-wv-brJ" firstAttribute="width" secondItem="hCI-tl-W78" secondAttribute="width" id="UFX-09-Qx9"/>
                             <constraint firstItem="dua-OE-6x2" firstAttribute="leading" secondItem="hCI-tl-W78" secondAttribute="trailing" constant="4" id="dyb-zp-ucO"/>
-                            <constraint firstAttribute="trailing" secondItem="Jde-5J-Cym" secondAttribute="trailing" constant="10" id="fjG-hy-w4y"/>
+                            <constraint firstAttribute="trailing" secondItem="Jde-5J-Cym" secondAttribute="trailing" constant="16" id="fjG-hy-w4y"/>
                             <constraint firstItem="6Qf-wv-brJ" firstAttribute="centerX" secondItem="hCI-tl-W78" secondAttribute="centerX" id="hoM-aB-6DI"/>
                             <constraint firstItem="Jde-5J-Cym" firstAttribute="centerY" secondItem="YJ2-PH-o0E" secondAttribute="centerY" id="jw4-gt-QiZ"/>
                         </constraints>
@@ -217,6 +217,9 @@
         </namedColor>
         <namedColor name="_color02">
             <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color06">
+            <color red="0.27500000596046448" green="0.27799999713897705" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

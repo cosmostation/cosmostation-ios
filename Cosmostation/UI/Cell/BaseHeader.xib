@@ -30,13 +30,13 @@
                     <rect key="frame" x="0.0" y="418.66666666666669" width="393" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDh-Lm-y6q">
-                            <rect key="frame" x="16" y="12.333333333333314" width="26.666666666666671" height="15.333333333333336"/>
+                            <rect key="frame" x="16" y="18.333333333333314" width="26.666666666666671" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJZ-P6-Z4b">
-                            <rect key="frame" x="46.666666666666664" y="12.333333333333314" width="7" height="15.333333333333336"/>
+                            <rect key="frame" x="46.666666666666664" y="18.333333333333314" width="7" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="VDh-Lm-y6q" firstAttribute="centerY" secondItem="cob-d6-Z4o" secondAttribute="centerY" id="RYW-eJ-U4L"/>
+                        <constraint firstItem="VDh-Lm-y6q" firstAttribute="centerY" secondItem="cob-d6-Z4o" secondAttribute="centerY" constant="6" id="RYW-eJ-U4L"/>
                         <constraint firstItem="XJZ-P6-Z4b" firstAttribute="centerY" secondItem="VDh-Lm-y6q" secondAttribute="centerY" id="UrR-eV-YEe"/>
                         <constraint firstItem="VDh-Lm-y6q" firstAttribute="leading" secondItem="cob-d6-Z4o" secondAttribute="leading" constant="16" id="XcM-Oc-Bg7"/>
                         <constraint firstItem="XJZ-P6-Z4b" firstAttribute="leading" secondItem="VDh-Lm-y6q" secondAttribute="trailing" constant="4" id="bKH-ib-yme"/>

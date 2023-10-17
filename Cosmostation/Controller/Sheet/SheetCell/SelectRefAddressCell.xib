@@ -46,7 +46,7 @@
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deprecated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8c-K1-bjh">
                                         <rect key="frame" x="0.0" y="0.0" width="68" height="12"/>
-                                        <color key="backgroundColor" red="0.29803921570000003" green="0.29411764709999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" name="_color06"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="68" id="QrN-Vw-lgl"/>
                                             <constraint firstAttribute="height" constant="12" id="zGW-64-sEJ"/>
@@ -159,11 +159,14 @@
         <namedColor name="_color03">
             <color red="0.54100000858306885" green="0.60000002384185791" blue="0.68199998140335083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="_color06">
+            <color red="0.27500000596046448" green="0.27799999713897705" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="_divider">
             <color red="1" green="1" blue="1" alpha="0.20200000703334808" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

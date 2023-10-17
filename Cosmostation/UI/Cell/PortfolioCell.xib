@@ -52,12 +52,12 @@
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nwD-TS-P8w">
-                                        <rect key="frame" x="0.0" y="17.666666666666668" width="0.0" height="0.0"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="nwD-TS-P8w">
+                                        <rect key="frame" x="2" y="17.666666666666668" width="0.0" height="0.0"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deprecated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79d-Eg-kfT">
                                                 <rect key="frame" x="0.0" y="0.0" width="68" height="14"/>
-                                                <color key="backgroundColor" red="0.29803921568627451" green="0.29411764705882354" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" name="_color06"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="68" id="0xV-Hf-55e"/>
                                                     <constraint firstAttribute="height" constant="14" id="q7w-GD-ccR"/>
@@ -94,7 +94,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="OeQ-XM-yfu" firstAttribute="leading" secondItem="0dM-2b-jCf" secondAttribute="leading" constant="4" id="QJx-Sw-UFF"/>
-                                    <constraint firstItem="nwD-TS-P8w" firstAttribute="leading" secondItem="0dM-2b-jCf" secondAttribute="leading" id="ZZn-QH-0US"/>
+                                    <constraint firstItem="nwD-TS-P8w" firstAttribute="leading" secondItem="0dM-2b-jCf" secondAttribute="leading" constant="2" id="ZZn-QH-0US"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ND0-To-8uz">
@@ -246,6 +246,9 @@
         </namedColor>
         <namedColor name="_color02">
             <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color06">
+            <color red="0.27500000596046448" green="0.27799999713897705" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_voteYes">
             <color red="0.030999999493360519" green="0.81999999284744263" blue="0.32199999690055847" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
