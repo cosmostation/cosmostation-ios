@@ -87,8 +87,10 @@ class CosmosClassVC: BaseVC {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        let tabVC = (self.parent)?.parent as? MainTabVC
-        tabVC?.hideChainBgImg()
+        if (self.isMovingFromParent) {
+            let tabVC = (self.parent)?.parent as? MainTabVC
+            tabVC?.hideChainBgImg()
+        }
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchStakeData"), object: nil)
     }

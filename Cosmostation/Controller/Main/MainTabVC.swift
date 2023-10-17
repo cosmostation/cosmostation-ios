@@ -31,6 +31,7 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
     
     var chainImg: UIImageView?
     func showChainBgImage(_ uiImge: UIImage) {
+        if (chainImg?.isHidden == false) { return }
         let width = UIScreen.main.bounds.size.width
         let height = UIScreen.main.bounds.size.height
         let x = CGFloat.random(in: -150..<(width-150))
