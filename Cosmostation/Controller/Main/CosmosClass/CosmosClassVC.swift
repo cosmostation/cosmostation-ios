@@ -79,8 +79,16 @@ class CosmosClassVC: BaseVC {
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchStakeDone(_:)), name: Notification.Name("FetchStakeData"), object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let tabVC = (self.parent)?.parent as? MainTabVC
+        tabVC?.showChainBgImage(UIImage(named: selectedChain.logo1)!)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        let tabVC = (self.parent)?.parent as? MainTabVC
+        tabVC?.hideChainBgImg()
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchStakeData"), object: nil)
     }

@@ -28,7 +28,30 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         BaseData.instance.setLastTab(tabBarController.selectedIndex)
     }
-
+    
+    var chainImg: UIImageView?
+    func showChainBgImage(_ uiImge: UIImage) {
+        let width = UIScreen.main.bounds.size.width
+        let height = UIScreen.main.bounds.size.height
+        let x = CGFloat.random(in: -150..<(width-150))
+        let y = CGFloat.random(in: 300..<(height-150))
+        chainImg = UIImageView(frame: CGRectMake(x, y, 300, 300))
+        chainImg?.image = uiImge
+        chainImg?.contentMode = .scaleToFill
+        chainImg?.alpha = 0
+        
+        view.addSubview(chainImg!)
+        view.insertSubview(chainImg!, at: 1)
+        
+        UIView.animate(withDuration: 3, animations: {
+            self.chainImg?.alpha = 0.05
+            self.chainImg?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+        })
+    }
+    
+    func hideChainBgImg() {
+        chainImg?.isHidden = true
+    }
 }
 
 
