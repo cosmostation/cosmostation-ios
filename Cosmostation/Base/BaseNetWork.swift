@@ -130,6 +130,15 @@ class BaseNetWork {
         return URL(string: MintscanUrl + chain.apiName + "/transactions/" + txHash)
     }
     
+    static func getAccountDetailUrl(_ chain: BaseChain) -> URL? {
+        if (chain is ChainBinanceBeacon) {
+            return URL(string: BNB_BEACON_EXPLORER + "address/" + chain.address!)
+        } else if (chain is ChainOkt60Keccak) {
+            return URL(string: OKT_EXPLORER + "address/" + chain.address!)
+        }
+        return URL(string: MintscanUrl + chain.apiName + "/account/" + chain.address!)
+    }
+    
     static func getProposalDetailUrl(_ chain: BaseChain, _ proposalId: UInt64) -> URL? {
         return URL(string: MintscanUrl + chain.apiName + "/proposals/" + String(proposalId))
     }

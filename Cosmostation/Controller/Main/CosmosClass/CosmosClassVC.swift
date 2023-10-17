@@ -51,9 +51,6 @@ class CosmosClassVC: BaseVC {
         }
     }
     
-    
-    //embedCoinVC
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,6 +68,9 @@ class CosmosClassVC: BaseVC {
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
         addressTap.cancelsTouchesInView = false
         addressLayer.addGestureRecognizer(addressTap)
+        
+        
+        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconMintscanExplorer"), style: .plain, target: self, action: #selector(onClickExplorer))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,6 +106,11 @@ class CosmosClassVC: BaseVC {
         qrAddressVC.selectedChain = selectedChain
         qrAddressVC.modalPresentationStyle = .pageSheet
         present(qrAddressVC, animated: true)
+    }
+    
+    @objc func onClickExplorer() {
+        guard let url = BaseNetWork.getAccountDetailUrl(selectedChain) else { return }
+        self.onShowSafariWeb(url)
     }
     
     func onSendTx() {
