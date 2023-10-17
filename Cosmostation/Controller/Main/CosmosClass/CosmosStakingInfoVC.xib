@@ -16,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CosmosStakingInfoVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="emptyStakeImg" destination="wWP-Dn-0KN" id="eBo-ZH-6Xd"/>
                 <outlet property="loadingView" destination="0j9-dh-zkZ" id="tJu-oj-Kbd"/>
                 <outlet property="stakeBtn" destination="624-lZ-p19" id="qCq-7O-hF7"/>
                 <outlet property="tableView" destination="EAi-3C-2oH" id="FVH-am-ZB0"/>
@@ -56,17 +57,23 @@
                         <constraint firstAttribute="width" constant="180" id="IPU-hX-Rkc"/>
                     </constraints>
                 </view>
+                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyStake" translatesAutoresizingMaskIntoConstraints="NO" id="wWP-Dn-0KN">
+                    <rect key="frame" x="98.333333333333329" y="288.66666666666669" width="196.33333333333337" height="220"/>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
                 <constraint firstItem="0j9-dh-zkZ" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="1TP-xI-Q0p"/>
+                <constraint firstItem="wWP-Dn-0KN" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="2J4-Uw-Cj9"/>
                 <constraint firstItem="EAi-3C-2oH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5xq-78-PPh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EAi-3C-2oH" secondAttribute="trailing" id="Ads-i0-sKN"/>
+                <constraint firstItem="wWP-Dn-0KN" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" constant="-40" id="NX0-kp-VSC"/>
                 <constraint firstItem="624-lZ-p19" firstAttribute="top" secondItem="EAi-3C-2oH" secondAttribute="bottom" constant="8" id="QZb-Mn-mbH"/>
                 <constraint firstItem="624-lZ-p19" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="VtP-PC-MkV"/>
                 <constraint firstAttribute="bottom" secondItem="624-lZ-p19" secondAttribute="bottom" constant="38" id="XAw-yA-Cmf"/>
+                <constraint firstItem="wWP-Dn-0KN" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="bCS-QP-xs0"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="624-lZ-p19" secondAttribute="trailing" constant="8" id="qzY-XD-JmH"/>
                 <constraint firstItem="0j9-dh-zkZ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="wPb-Ht-7gb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="EAi-3C-2oH" secondAttribute="leading" id="yfT-f1-Xa6"/>
@@ -75,6 +82,7 @@
         </view>
     </objects>
     <resources>
+        <image name="imgEmptyStake" width="220" height="220"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

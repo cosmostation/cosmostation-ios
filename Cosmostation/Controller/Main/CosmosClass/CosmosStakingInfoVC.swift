@@ -17,6 +17,7 @@ class CosmosStakingInfoVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var stakeBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
+    @IBOutlet weak var emptyStakeImg: UIImageView!
     
     var selectedChain: CosmosClass!
     var rewardAddress: String?
@@ -92,6 +93,9 @@ class CosmosStakingInfoVC: BaseVC {
         loadingView.isHidden = true
         tableView.isHidden = false
         tableView.reloadData()
+        if (delegations.count == 0 || unbondings.count == 0) {
+            emptyStakeImg.isHidden = false
+        }
     }
     
     @IBAction func onDelegateTx(_ sender: BaseButton) {
