@@ -189,10 +189,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pb7-rR-zvB" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="508.66666666666669" width="377" height="67.333333333333314"/>
+                    <rect key="frame" x="8" y="516.66666666666663" width="377" height="67.333333333333371"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dM-d3-2Xd">
-                            <rect key="frame" x="12" y="13.999999999999943" width="99.333333333333329" height="14"/>
+                            <rect key="frame" x="12" y="14" width="99.333333333333329" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="o7G-Nz-YBS"/>
                             </constraints>
@@ -201,7 +201,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcj-4k-Mru">
-                            <rect key="frame" x="12" y="35.999999999999943" width="353" height="15.333333333333336"/>
+                            <rect key="frame" x="12" y="36" width="353" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
@@ -218,7 +218,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUW-uc-ab1" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="586" width="377" height="150"/>
+                    <rect key="frame" x="8" y="594" width="377" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qy-RR-8p8">
                             <rect key="frame" x="12" y="14" width="37.333333333333336" height="14"/>
@@ -378,7 +378,7 @@
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstItem="TO1-Ab-eU9" firstAttribute="top" secondItem="KUW-uc-ab1" secondAttribute="bottom" constant="24" id="2ex-h1-80o"/>
+                <constraint firstItem="TO1-Ab-eU9" firstAttribute="top" secondItem="KUW-uc-ab1" secondAttribute="bottom" constant="16" id="2ex-h1-80o"/>
                 <constraint firstItem="KUW-uc-ab1" firstAttribute="trailing" secondItem="TO1-Ab-eU9" secondAttribute="trailing" id="3Tf-j6-LJY"/>
                 <constraint firstItem="edk-qv-HKO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="3hf-8z-hTc"/>
                 <constraint firstItem="Iid-Ow-Z2y" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="3il-Q8-WKD"/>

@@ -117,7 +117,7 @@ class LegacyTransfer: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let gap = UIScreen.main.bounds.size.height - 600
+        let gap = UIScreen.main.bounds.size.height - 590
         if (gap > 0) { midGapConstraint.constant = gap }
         else { midGapConstraint.constant = 60 }
     }

@@ -132,7 +132,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASh-6v-gHm" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="203.33333333333334" width="377" height="67.333333333333343"/>
+                    <rect key="frame" x="8" y="197.33333333333334" width="377" height="67.333333333333343"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Staking Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="520-LC-xI4">
                             <rect key="frame" x="11.999999999999993" y="14" width="111.33333333333331" height="14"/>
@@ -183,10 +183,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68g-kJ-Ibk" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="508.66666666666669" width="377" height="67.333333333333314"/>
+                    <rect key="frame" x="8" y="516.66666666666663" width="377" height="67.333333333333371"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rz0-Na-CfH">
-                            <rect key="frame" x="12" y="13.999999999999943" width="99.333333333333329" height="14"/>
+                            <rect key="frame" x="12" y="14" width="99.333333333333329" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="cF1-tf-IAA"/>
                             </constraints>
@@ -195,7 +195,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3w-OU-kaK">
-                            <rect key="frame" x="12" y="35.999999999999943" width="353" height="15.333333333333336"/>
+                            <rect key="frame" x="12" y="36" width="353" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
@@ -212,7 +212,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p7e-jS-jPp" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="586" width="377" height="150"/>
+                    <rect key="frame" x="8" y="594" width="377" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zt-w8-L71">
                             <rect key="frame" x="12" y="14" width="37.333333333333336" height="14"/>
@@ -288,7 +288,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRo-B2-ZpO">
-                            <rect key="frame" x="348.66666666666669" y="73.666666666666629" width="7" height="14"/>
+                            <rect key="frame" x="350.33333333333331" y="73.666666666666629" width="5.6666666666666856" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="ke3-2u-nre"/>
                             </constraints>
@@ -297,7 +297,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYP-WE-vf3">
-                            <rect key="frame" x="357.66666666666669" y="72.666666666666629" width="7.3333333333333144" height="14"/>
+                            <rect key="frame" x="358" y="72.666666666666629" width="7" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="JMi-XM-DgL"/>
                             </constraints>
@@ -382,11 +382,11 @@
                 <constraint firstItem="ASh-6v-gHm" firstAttribute="trailing" secondItem="DmO-rw-jj1" secondAttribute="trailing" id="NQC-6F-N1f"/>
                 <constraint firstItem="DmO-rw-jj1" firstAttribute="top" secondItem="LVB-sE-XCX" secondAttribute="bottom" constant="20" id="NVs-Nx-xZG"/>
                 <constraint firstItem="LVB-sE-XCX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Oit-qb-drV"/>
-                <constraint firstItem="k73-bx-pzg" firstAttribute="top" secondItem="p7e-jS-jPp" secondAttribute="bottom" constant="24" id="RUI-xl-Zr1"/>
+                <constraint firstItem="k73-bx-pzg" firstAttribute="top" secondItem="p7e-jS-jPp" secondAttribute="bottom" constant="16" id="RUI-xl-Zr1"/>
                 <constraint firstItem="68g-kJ-Ibk" firstAttribute="leading" secondItem="k73-bx-pzg" secondAttribute="leading" id="UDF-1s-d8m"/>
                 <constraint firstItem="p7e-jS-jPp" firstAttribute="trailing" secondItem="k73-bx-pzg" secondAttribute="trailing" id="Uzq-nM-f34"/>
                 <constraint firstItem="iDw-Oj-80O" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="lQu-DD-Fpf"/>
-                <constraint firstItem="ASh-6v-gHm" firstAttribute="top" secondItem="DmO-rw-jj1" secondAttribute="bottom" constant="16" id="mM9-LO-X7G"/>
+                <constraint firstItem="ASh-6v-gHm" firstAttribute="top" secondItem="DmO-rw-jj1" secondAttribute="bottom" constant="10" id="mM9-LO-X7G"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k73-bx-pzg" secondAttribute="trailing" constant="8" id="pHE-Ia-rtf"/>
                 <constraint firstItem="68g-kJ-Ibk" firstAttribute="trailing" secondItem="k73-bx-pzg" secondAttribute="trailing" id="qGE-ka-qqC"/>
                 <constraint firstItem="LVB-sE-XCX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="sTc-D4-DmD"/>
@@ -413,7 +413,7 @@
             <color red="0.31400001049041748" green="0.32199999690055847" blue="0.40400001406669617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color06">
-            <color red="0.25499999523162842" green="0.25499999523162842" blue="0.3449999988079071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.27500000596046448" green="0.27799999713897705" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_colorBg">
             <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

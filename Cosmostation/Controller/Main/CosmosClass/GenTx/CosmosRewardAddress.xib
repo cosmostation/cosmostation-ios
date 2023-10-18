@@ -78,7 +78,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kTq-Ak-aYQ" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="204.66666666666666" width="377" height="69.333333333333343"/>
+                    <rect key="frame" x="8" y="198.66666666666666" width="377" height="69.333333333333343"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Reward Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9V9-XB-Nof">
                             <rect key="frame" x="12.000000000000007" y="14" width="124.66666666666669" height="14"/>
@@ -115,10 +115,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3z-Rs-jwr" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="508.66666666666669" width="377" height="67.333333333333314"/>
+                    <rect key="frame" x="8" y="516.66666666666663" width="377" height="67.333333333333371"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVt-Gm-2pd">
-                            <rect key="frame" x="12" y="13.999999999999943" width="99.333333333333329" height="14"/>
+                            <rect key="frame" x="12" y="14" width="99.333333333333329" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="gG7-43-nr1"/>
                             </constraints>
@@ -127,7 +127,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJA-LR-b5d">
-                            <rect key="frame" x="12" y="35.999999999999943" width="353" height="15.333333333333336"/>
+                            <rect key="frame" x="12" y="36" width="353" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
@@ -144,7 +144,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V74-LA-Cxy" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="586" width="377" height="150"/>
+                    <rect key="frame" x="8" y="594" width="377" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjK-EB-kFx">
                             <rect key="frame" x="12" y="14" width="37.333333333333336" height="14"/>
@@ -307,7 +307,7 @@
                 <constraint firstItem="kR5-dq-8h3" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="2IS-FU-4KM"/>
                 <constraint firstItem="kTq-Ak-aYQ" firstAttribute="trailing" secondItem="7Cz-bK-tO3" secondAttribute="trailing" id="4bx-cg-JC3"/>
                 <constraint firstItem="Z3z-Rs-jwr" firstAttribute="trailing" secondItem="V74-LA-Cxy" secondAttribute="trailing" id="5gZ-5l-MiO"/>
-                <constraint firstItem="kTq-Ak-aYQ" firstAttribute="top" secondItem="7Cz-bK-tO3" secondAttribute="bottom" constant="16" id="A9G-JM-oog"/>
+                <constraint firstItem="kTq-Ak-aYQ" firstAttribute="top" secondItem="7Cz-bK-tO3" secondAttribute="bottom" constant="10" id="A9G-JM-oog"/>
                 <constraint firstItem="Z3z-Rs-jwr" firstAttribute="leading" secondItem="V74-LA-Cxy" secondAttribute="leading" id="BAf-6g-o4G"/>
                 <constraint firstItem="KZR-fs-dBQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="G3s-uc-49J"/>
                 <constraint firstItem="Z3z-Rs-jwr" firstAttribute="leading" secondItem="Wrl-qY-aCx" secondAttribute="leading" id="Izv-7g-te9"/>
@@ -318,7 +318,7 @@
                 <constraint firstItem="7Cz-bK-tO3" firstAttribute="top" secondItem="KZR-fs-dBQ" secondAttribute="bottom" constant="20" id="dTF-ey-c8v"/>
                 <constraint firstItem="kR5-dq-8h3" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="hNG-Ib-2RG"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7Cz-bK-tO3" secondAttribute="trailing" constant="8" id="j6l-Bs-wrQ"/>
-                <constraint firstItem="Wrl-qY-aCx" firstAttribute="top" secondItem="V74-LA-Cxy" secondAttribute="bottom" constant="24" id="l6r-th-4jq"/>
+                <constraint firstItem="Wrl-qY-aCx" firstAttribute="top" secondItem="V74-LA-Cxy" secondAttribute="bottom" constant="16" id="l6r-th-4jq"/>
                 <constraint firstItem="kTq-Ak-aYQ" firstAttribute="leading" secondItem="7Cz-bK-tO3" secondAttribute="leading" id="na2-fI-sFi"/>
                 <constraint firstAttribute="bottom" secondItem="Wrl-qY-aCx" secondAttribute="bottom" constant="38" id="sFf-at-kAt"/>
                 <constraint firstItem="V74-LA-Cxy" firstAttribute="top" secondItem="Z3z-Rs-jwr" secondAttribute="bottom" constant="10" id="vSg-G9-COY"/>
@@ -343,7 +343,7 @@
             <color red="0.31400001049041748" green="0.32199999690055847" blue="0.40400001406669617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color06">
-            <color red="0.25499999523162842" green="0.25499999523162842" blue="0.3449999988079071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.27500000596046448" green="0.27799999713897705" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_colorBg">
             <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

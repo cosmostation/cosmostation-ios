@@ -101,10 +101,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nC2-od-R1T" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="508.66666666666669" width="377" height="67.333333333333314"/>
+                    <rect key="frame" x="8" y="516.66666666666663" width="377" height="67.333333333333371"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hR-4N-oxy">
-                            <rect key="frame" x="12" y="13.999999999999943" width="99.333333333333329" height="14"/>
+                            <rect key="frame" x="12" y="14" width="99.333333333333329" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="Zva-D5-UIy"/>
                             </constraints>
@@ -113,7 +113,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI4-lr-XRb">
-                            <rect key="frame" x="12" y="35.999999999999943" width="353" height="15.333333333333336"/>
+                            <rect key="frame" x="12" y="36" width="353" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
@@ -130,7 +130,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A1W-7M-5Z1" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="586" width="377" height="150"/>
+                    <rect key="frame" x="8" y="594" width="377" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTH-QN-E6F">
                             <rect key="frame" x="12" y="14" width="37.333333333333336" height="14"/>
@@ -206,7 +206,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iv1-FB-pcp">
-                            <rect key="frame" x="348.66666666666669" y="73.666666666666629" width="7" height="14"/>
+                            <rect key="frame" x="350.33333333333331" y="73.666666666666629" width="5.6666666666666856" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="tot-1h-LY4"/>
                             </constraints>
@@ -215,7 +215,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6i7-li-e6b">
-                            <rect key="frame" x="357.66666666666669" y="72.666666666666629" width="7.3333333333333144" height="14"/>
+                            <rect key="frame" x="358" y="72.666666666666629" width="7" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="dpf-DB-WYO"/>
                             </constraints>
@@ -295,7 +295,7 @@
                 <constraint firstItem="A1W-7M-5Z1" firstAttribute="trailing" secondItem="ktY-Rl-Anr" secondAttribute="trailing" id="CSK-mx-cnE"/>
                 <constraint firstItem="nC2-od-R1T" firstAttribute="trailing" secondItem="ktY-Rl-Anr" secondAttribute="trailing" id="D5J-kf-i0I"/>
                 <constraint firstAttribute="bottom" secondItem="ktY-Rl-Anr" secondAttribute="bottom" constant="38" id="LQ2-rw-w71"/>
-                <constraint firstItem="ktY-Rl-Anr" firstAttribute="top" secondItem="A1W-7M-5Z1" secondAttribute="bottom" constant="24" id="PSC-l8-QUO"/>
+                <constraint firstItem="ktY-Rl-Anr" firstAttribute="top" secondItem="A1W-7M-5Z1" secondAttribute="bottom" constant="16" id="PSC-l8-QUO"/>
                 <constraint firstItem="Hmh-wn-xqU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="RTJ-z4-lV8"/>
                 <constraint firstItem="2Ck-JE-kZg" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="Uqf-nT-815"/>
                 <constraint firstItem="jIo-Bb-ROf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="VYo-IM-Jg2"/>

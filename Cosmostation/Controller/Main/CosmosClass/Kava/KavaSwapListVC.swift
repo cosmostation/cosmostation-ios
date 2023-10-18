@@ -90,10 +90,16 @@ class KavaSwapListVC: BaseVC {
     
     func onDepositSwpTx(_ denom: String) {
         print("onDepositSwpTx ", denom)
+        let swpAction = KavaSwpAction(nibName: "KavaSwpAction", bundle: nil)
+        swpAction.modalTransitionStyle = .coverVertical
+        self.present(swpAction, animated: true)
     }
     
     func onWithdrawSwpTx(_ denom: String) {
         print("onWithdrawSwpTx ", denom)
+        let swpAction = KavaSwpAction(nibName: "KavaSwpAction", bundle: nil)
+        swpAction.modalTransitionStyle = .coverVertical
+        self.present(swpAction, animated: true)
     }
 
 }

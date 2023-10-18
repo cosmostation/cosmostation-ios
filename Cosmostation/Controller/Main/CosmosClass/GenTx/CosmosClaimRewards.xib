@@ -50,7 +50,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F9k-cg-NNt" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="108.5" width="398" height="120"/>
+                    <rect key="frame" x="8" y="108.5" width="398" height="110"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validators" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MCh-MA-9Il">
                             <rect key="frame" x="12" y="14" width="59.5" height="14"/>
@@ -115,8 +115,8 @@
                         <constraint firstItem="MCh-MA-9Il" firstAttribute="leading" secondItem="F9k-cg-NNt" secondAttribute="leading" constant="12" id="Af4-Wu-h2b"/>
                         <constraint firstItem="5Wb-gW-NEu" firstAttribute="centerY" secondItem="cXn-QP-OIi" secondAttribute="centerY" id="B0O-M6-UgB"/>
                         <constraint firstItem="fSq-dV-6KS" firstAttribute="top" secondItem="7V3-Qc-95H" secondAttribute="bottom" constant="2" id="E8V-td-YmQ"/>
-                        <constraint firstAttribute="height" constant="120" id="Fhw-1a-Lkz"/>
                         <constraint firstItem="cXn-QP-OIi" firstAttribute="top" secondItem="MCh-MA-9Il" secondAttribute="bottom" constant="32" id="PtH-d8-eLy"/>
+                        <constraint firstAttribute="bottom" secondItem="cXn-QP-OIi" secondAttribute="bottom" constant="36" id="R8B-Z0-Q7X"/>
                         <constraint firstItem="MCh-MA-9Il" firstAttribute="top" secondItem="F9k-cg-NNt" secondAttribute="top" constant="14" id="TFa-bz-GsP"/>
                         <constraint firstItem="B9e-uk-AFQ" firstAttribute="top" secondItem="5Wb-gW-NEu" secondAttribute="bottom" constant="2" id="aCK-2d-90j"/>
                         <constraint firstItem="7V3-Qc-95H" firstAttribute="centerY" secondItem="MCh-MA-9Il" secondAttribute="centerY" id="giA-G6-rBg"/>
@@ -127,7 +127,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCo-cU-raa" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="552.5" width="398" height="67.5"/>
+                    <rect key="frame" x="8" y="560.5" width="398" height="67.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2e-jD-YrS">
                             <rect key="frame" x="12" y="14" width="99.5" height="14"/>
@@ -156,7 +156,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yxj-Nf-2ba" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="630" width="398" height="150"/>
+                    <rect key="frame" x="8" y="638" width="398" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhO-Ub-f6h">
                             <rect key="frame" x="12" y="14" width="37.5" height="14"/>
@@ -330,7 +330,7 @@
                 <constraint firstAttribute="bottom" secondItem="HvH-3i-GUl" secondAttribute="bottom" constant="38" id="kMq-XZ-IrV"/>
                 <constraint firstItem="nCo-cU-raa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="knP-ZD-1cf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HvH-3i-GUl" secondAttribute="trailing" constant="8" id="r6R-ss-hyU"/>
-                <constraint firstItem="HvH-3i-GUl" firstAttribute="top" secondItem="Yxj-Nf-2ba" secondAttribute="bottom" constant="24" id="v5x-g9-oed"/>
+                <constraint firstItem="HvH-3i-GUl" firstAttribute="top" secondItem="Yxj-Nf-2ba" secondAttribute="bottom" constant="16" id="v5x-g9-oed"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Yxj-Nf-2ba" secondAttribute="trailing" constant="8" id="xgg-sN-kh5"/>
             </constraints>
             <point key="canvasLocation" x="139.69465648854961" y="20.422535211267608"/>
@@ -352,7 +352,7 @@
             <color red="0.31400001049041748" green="0.32199999690055847" blue="0.40400001406669617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color06">
-            <color red="0.25499999523162842" green="0.25499999523162842" blue="0.3449999988079071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.27500000596046448" green="0.27799999713897705" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_colorBg">
             <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -43,16 +43,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compounding Rewards" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qv0-0a-ZZi">
-                    <rect key="frame" x="20" y="79" width="169.33333333333334" height="18.666666666666671"/>
+                    <rect key="frame" x="20" y="79" width="183.66666666666666" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                     <color key="textColor" name="_color01"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fd-0a-H8Z" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="117.66666666666669" width="377" height="100"/>
+                    <rect key="frame" x="8" y="119.33333333333331" width="377" height="94"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validators" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2WH-PZ-tey">
-                            <rect key="frame" x="12" y="13.999999999999986" width="53" height="14"/>
+                            <rect key="frame" x="12.000000000000004" y="14.000000000000014" width="59.333333333333343" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="bN0-Br-v5W"/>
                             </constraints>
@@ -61,19 +61,19 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name " textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YyB-IM-1HI">
-                            <rect key="frame" x="331.66666666666669" y="13.999999999999986" width="33.333333333333314" height="14"/>
+                            <rect key="frame" x="328.66666666666669" y="13.333333333333329" width="36.333333333333314" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 1" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7u-Zl-0iz">
-                            <rect key="frame" x="350.33333333333331" y="29.999999999999989" width="14.666666666666686" height="11.666666666666668"/>
+                            <rect key="frame" x="350.66666666666669" y="30.666666666666675" width="14.333333333333314" height="12.666666666666668"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compounding Rewards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ms9-de-ism">
-                            <rect key="frame" x="12" y="59.999999999999986" width="127" height="14"/>
+                            <rect key="frame" x="12" y="60.000000000000014" width="137.66666666666666" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="Wn9-n0-5Wy"/>
                             </constraints>
@@ -82,7 +82,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBV-4J-Own">
-                            <rect key="frame" x="307" y="58.999999999999986" width="23.666666666666686" height="16"/>
+                            <rect key="frame" x="302.66666666666669" y="59.000000000000014" width="25" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="a7U-wi-2BB"/>
                             </constraints>
@@ -91,7 +91,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nw0-dO-sKC">
-                            <rect key="frame" x="332.66666666666669" y="58.999999999999986" width="32.333333333333314" height="16"/>
+                            <rect key="frame" x="329.66666666666669" y="59.000000000000014" width="35.333333333333314" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="bz8-i1-jkx"/>
                             </constraints>
@@ -108,20 +108,20 @@
                         <constraint firstItem="Nw0-dO-sKC" firstAttribute="centerY" secondItem="Ms9-de-ism" secondAttribute="centerY" id="JOf-Np-hAr"/>
                         <constraint firstItem="YyB-IM-1HI" firstAttribute="centerY" secondItem="2WH-PZ-tey" secondAttribute="centerY" id="KAm-4G-6tR"/>
                         <constraint firstItem="2WH-PZ-tey" firstAttribute="top" secondItem="3fd-0a-H8Z" secondAttribute="top" constant="14" id="W4K-1D-1FP"/>
-                        <constraint firstAttribute="height" constant="100" id="a4E-ny-E6d"/>
                         <constraint firstItem="a7u-Zl-0iz" firstAttribute="trailing" secondItem="YyB-IM-1HI" secondAttribute="trailing" id="bQB-iK-aWs"/>
                         <constraint firstItem="a7u-Zl-0iz" firstAttribute="top" secondItem="YyB-IM-1HI" secondAttribute="bottom" constant="2" id="cMf-da-Ks8"/>
                         <constraint firstItem="Ms9-de-ism" firstAttribute="top" secondItem="2WH-PZ-tey" secondAttribute="bottom" constant="32" id="csw-kY-yIO"/>
                         <constraint firstItem="2WH-PZ-tey" firstAttribute="leading" secondItem="3fd-0a-H8Z" secondAttribute="leading" constant="12" id="qxf-YA-Rm1"/>
                         <constraint firstItem="Ms9-de-ism" firstAttribute="leading" secondItem="2WH-PZ-tey" secondAttribute="leading" id="sDe-Hm-e02"/>
+                        <constraint firstAttribute="bottom" secondItem="Ms9-de-ism" secondAttribute="bottom" constant="20" id="x3Q-iC-9CL"/>
                         <constraint firstAttribute="trailing" secondItem="YyB-IM-1HI" secondAttribute="trailing" constant="12" id="ykN-5b-A4H"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyK-aX-IDE" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="510" width="377" height="66"/>
+                    <rect key="frame" x="8" y="516.66666666666663" width="377" height="67.333333333333371"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQw-BE-k7n">
-                            <rect key="frame" x="12" y="14" width="89" height="14"/>
+                            <rect key="frame" x="12" y="14" width="99.333333333333329" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="W7Q-E5-xJn"/>
                             </constraints>
@@ -130,7 +130,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmu-p2-AYj">
-                            <rect key="frame" x="12" y="36" width="353" height="14"/>
+                            <rect key="frame" x="12" y="36" width="353" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
@@ -147,10 +147,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCB-ly-HBC" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="586" width="377" height="150"/>
+                    <rect key="frame" x="8" y="594" width="377" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wd0-hx-wTh">
-                            <rect key="frame" x="12" y="14" width="36.333333333333336" height="14"/>
+                            <rect key="frame" x="12" y="14" width="37.333333333333336" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="GrH-lK-FIb"/>
                             </constraints>
@@ -205,7 +205,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxs-wW-Feo">
-                            <rect key="frame" x="307" y="54.666666666666629" width="23.666666666666686" height="16"/>
+                            <rect key="frame" x="302.66666666666669" y="54.666666666666629" width="25" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="8Ae-LT-MEQ"/>
                             </constraints>
@@ -214,7 +214,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwm-fG-LPe">
-                            <rect key="frame" x="332.66666666666669" y="54.666666666666629" width="32.333333333333314" height="16"/>
+                            <rect key="frame" x="329.66666666666669" y="54.666666666666629" width="35.333333333333314" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="qJj-a9-kM4"/>
                             </constraints>
@@ -321,7 +321,7 @@
                 <constraint firstItem="Qv0-0a-ZZi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="nlt-8j-NRX"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tH0-2E-Slt" secondAttribute="trailing" constant="8" id="nrA-Nl-Tcc"/>
                 <constraint firstItem="nyK-aX-IDE" firstAttribute="trailing" secondItem="sCB-ly-HBC" secondAttribute="trailing" id="qox-0M-Beo"/>
-                <constraint firstItem="tH0-2E-Slt" firstAttribute="top" secondItem="sCB-ly-HBC" secondAttribute="bottom" constant="24" id="raJ-Pc-cmk"/>
+                <constraint firstItem="tH0-2E-Slt" firstAttribute="top" secondItem="sCB-ly-HBC" secondAttribute="bottom" constant="16" id="raJ-Pc-cmk"/>
                 <constraint firstItem="nyK-aX-IDE" firstAttribute="leading" secondItem="sCB-ly-HBC" secondAttribute="leading" id="zYe-22-Qbe"/>
             </constraints>
             <point key="canvasLocation" x="139.69465648854961" y="19.718309859154932"/>
@@ -343,7 +343,7 @@
             <color red="0.31400001049041748" green="0.32199999690055847" blue="0.40400001406669617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color06">
-            <color red="0.25499999523162842" green="0.25499999523162842" blue="0.3449999988079071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.27500000596046448" green="0.27799999713897705" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_colorBg">
             <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
