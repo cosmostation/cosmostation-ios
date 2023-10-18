@@ -93,7 +93,7 @@ class CosmosStakingInfoVC: BaseVC {
         loadingView.isHidden = true
         tableView.isHidden = false
         tableView.reloadData()
-        if (delegations.count == 0 || unbondings.count == 0) {
+        if (delegations.count == 0 && unbondings.count == 0) {
             emptyStakeImg.isHidden = false
         }
     }

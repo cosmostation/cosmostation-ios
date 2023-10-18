@@ -12,6 +12,9 @@
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
         </array>
+        <array key="SpoqaHanSansNeo-Medium.otf">
+            <string>SpoqaHanSansNeo-Medium</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Bep3Transfer" customModule="Cosmostation" customModuleProvider="target">
@@ -54,11 +57,11 @@
                     <rect key="frame" x="8" y="119.33333333333331" width="377" height="86"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From Chain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Em3-MH-fyF">
-                            <rect key="frame" x="12" y="14.000000000000014" width="67.666666666666671" height="14"/>
+                            <rect key="frame" x="12" y="14.000000000000014" width="65.666666666666671" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="knq-aO-4Jl"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -83,11 +86,11 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Chain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6J-0V-ZeP">
-                            <rect key="frame" x="222.66666666666666" y="14.000000000000014" width="50.666666666666657" height="14"/>
+                            <rect key="frame" x="222.66666666666666" y="14.000000000000014" width="49.333333333333343" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="ZRP-4u-FUV"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -128,11 +131,11 @@
                     <rect key="frame" x="8" y="215.33333333333337" width="377" height="86"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Send Asset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xi-nP-cwa">
-                            <rect key="frame" x="12" y="14" width="81.333333333333329" height="14"/>
+                            <rect key="frame" x="12" y="14" width="79" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="I6b-q1-Vk8"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -174,8 +177,8 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add Amount" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGS-ev-3ts">
-                            <rect key="frame" x="253.33333333333329" y="46.333333333333343" width="111.66666666666666" height="15.333333333333336"/>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <rect key="frame" x="256.33333333333331" y="46.333333333333343" width="108.66666666666669" height="15.333333333333336"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -205,11 +208,11 @@
                     <rect key="frame" x="8" y="311.33333333333331" width="377" height="69.666666666666686"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ro-x4-fdF">
-                            <rect key="frame" x="12.000000000000007" y="14" width="105.66666666666669" height="14"/>
+                            <rect key="frame" x="12" y="14" width="102" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="cG8-5I-koF"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -220,8 +223,8 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add address" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZ6-N9-MWR">
-                            <rect key="frame" x="11.999999999999993" y="36" width="111.33333333333331" height="17.666666666666671"/>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <rect key="frame" x="12" y="36" width="108" height="17.666666666666671"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
                         </label>

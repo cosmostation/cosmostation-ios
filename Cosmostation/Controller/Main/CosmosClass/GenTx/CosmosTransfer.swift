@@ -43,6 +43,7 @@ class CosmosTransfer: BaseVC {
     @IBOutlet weak var memoCardView: FixCardView!
     @IBOutlet weak var memoTitle: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
+    @IBOutlet weak var memoHintLabel: UILabel!
     
     @IBOutlet weak var feeSelectView: DropDownView!
     @IBOutlet weak var feeSelectImg: UIImageView!
@@ -192,7 +193,7 @@ class CosmosTransfer: BaseVC {
         titleLabel.text = NSLocalizedString("str_transfer_asset", comment: "")
         toAddressHint.text = NSLocalizedString("msg_tap_for_add_address", comment: "")
         toSendAssetHint.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
-        memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+        memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
         sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
     }
     
@@ -355,13 +356,13 @@ class CosmosTransfer: BaseVC {
     func onUpdateMemoView(_ memo: String, _ skipSimul: Bool? = false) {
         txMemo = memo
         if (txMemo.isEmpty) {
-            memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
-            memoLabel.textColor = .color03
-            return
+            memoLabel.isHidden = true
+            memoHintLabel.isHidden = false
+        } else {
+            memoLabel.text = txMemo
+            memoLabel.isHidden = false
+            memoHintLabel.isHidden = true
         }
-        memoLabel.text = txMemo
-        memoLabel.textColor = .color01
-        
         if (skipSimul == true) {
             onSimul()
         }
@@ -634,6 +635,9 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .SelectFeeCoin) {
+            print("position ", result.position)
+            print("feeInfos ", feeInfos)
+            print("feeInfos[selectedFeeInfo] ", feeInfos[selectedFeeInfo])
             if let position = result.position,
                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
                 txFee.amount[0].denom = selectedDenom

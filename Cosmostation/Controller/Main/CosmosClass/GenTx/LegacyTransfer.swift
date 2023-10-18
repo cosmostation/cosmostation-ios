@@ -36,6 +36,7 @@ class LegacyTransfer: BaseVC {
     @IBOutlet weak var memoCardView: FixCardView!
     @IBOutlet weak var memoTitle: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
+    @IBOutlet weak var memoHintLabel: UILabel!
     
     @IBOutlet weak var feeSelectImg: UIImageView!
     @IBOutlet weak var feeSelectLabel: UILabel!
@@ -111,7 +112,7 @@ class LegacyTransfer: BaseVC {
         titleLabel.text = NSLocalizedString("str_transfer_asset", comment: "")
         toAddressHint.text = NSLocalizedString("msg_tap_for_add_address", comment: "")
         toSendAssetHint.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
-        memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+        memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
         sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
     }
     
@@ -237,12 +238,13 @@ class LegacyTransfer: BaseVC {
     func onUpdateMemoView(_ memo: String) {
         txMemo = memo
         if (txMemo.isEmpty) {
-            memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
-            memoLabel.textColor = .color03
-            return
+            memoLabel.isHidden = true
+            memoHintLabel.isHidden = false
+        } else {
+            memoLabel.text = txMemo
+            memoLabel.isHidden = false
+            memoHintLabel.isHidden = true
         }
-        memoLabel.text = txMemo
-        memoLabel.textColor = .color01
     }
     
     func onUpdateFeeView() {

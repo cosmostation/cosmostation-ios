@@ -30,6 +30,7 @@ class KavaHardAction: BaseVC {
     @IBOutlet weak var memoCardView: FixCardView!
     @IBOutlet weak var memoTitle: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
+    @IBOutlet weak var memoHintLabel: UILabel!
     
     @IBOutlet weak var feeSelectView: DropDownView!
     @IBOutlet weak var feeSelectImg: UIImageView!
@@ -143,7 +144,7 @@ class KavaHardAction: BaseVC {
             
         }
         toHardAssetHint.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
-        memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+        memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
     }
     
     @objc func onClickAmount() {
@@ -202,12 +203,13 @@ class KavaHardAction: BaseVC {
     func onUpdateMemoView(_ memo: String) {
         txMemo = memo
         if (txMemo.isEmpty) {
-            memoLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
-            memoLabel.textColor = .color03
-            return
+            memoLabel.isHidden = true
+            memoHintLabel.isHidden = false
+        } else {
+            memoLabel.text = txMemo
+            memoLabel.isHidden = false
+            memoHintLabel.isHidden = true
         }
-        memoLabel.text = txMemo
-        memoLabel.textColor = .color01
         onSimul()
     }
     

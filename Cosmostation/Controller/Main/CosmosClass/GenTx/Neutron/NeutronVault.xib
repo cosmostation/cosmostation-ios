@@ -12,6 +12,9 @@
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
         </array>
+        <array key="SpoqaHanSansNeo-Medium.otf">
+            <string>SpoqaHanSansNeo-Medium</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NeutronVault" customModule="Cosmostation" customModuleProvider="target">
@@ -27,6 +30,7 @@
                 <outlet property="feeValueLabel" destination="6i7-li-e6b" id="5my-BW-lxh"/>
                 <outlet property="loadingView" destination="2Ck-JE-kZg" id="cwt-et-Xe5"/>
                 <outlet property="memoCardView" destination="nC2-od-R1T" id="jb4-1P-VEH"/>
+                <outlet property="memoHintLabel" destination="CSZ-iC-Tgi" id="lAo-AT-HjC"/>
                 <outlet property="memoLabel" destination="gI4-lr-XRb" id="uQP-gb-bCR"/>
                 <outlet property="memoTitle" destination="0hR-4N-oxy" id="pjZ-JN-PCV"/>
                 <outlet property="titleLabel" destination="jIo-Bb-ROf" id="YUD-eS-dH2"/>
@@ -53,17 +57,17 @@
                     <rect key="frame" x="8" y="119.33333333333334" width="377" height="67.333333333333343"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Deposit Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssi-Ky-tZC">
-                            <rect key="frame" x="12" y="14.000000000000014" width="112" height="14"/>
+                            <rect key="frame" x="12.000000000000007" y="14.000000000000014" width="108.66666666666669" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="PzA-PH-OgG"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Li4-27-cf4">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add Amount" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Li4-27-cf4">
                             <rect key="frame" x="12" y="36.000000000000014" width="353" height="15.333333333333336"/>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -104,17 +108,23 @@
                     <rect key="frame" x="8" y="516.66666666666663" width="377" height="67.333333333333371"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hR-4N-oxy">
-                            <rect key="frame" x="12" y="14" width="99.333333333333329" height="14"/>
+                            <rect key="frame" x="12" y="14" width="96" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="Zva-D5-UIy"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI4-lr-XRb">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI4-lr-XRb">
                             <rect key="frame" x="12" y="36" width="353" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add memo" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSZ-iC-Tgi">
+                            <rect key="frame" x="12" y="36" width="99.666666666666671" height="15.333333333333336"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -124,6 +134,8 @@
                         <constraint firstItem="0hR-4N-oxy" firstAttribute="top" secondItem="nC2-od-R1T" secondAttribute="top" constant="14" id="7Zn-XD-8GO"/>
                         <constraint firstAttribute="bottom" secondItem="gI4-lr-XRb" secondAttribute="bottom" constant="16" id="Jly-6k-Zo7"/>
                         <constraint firstItem="0hR-4N-oxy" firstAttribute="leading" secondItem="nC2-od-R1T" secondAttribute="leading" constant="12" id="QR8-i8-IlK"/>
+                        <constraint firstItem="CSZ-iC-Tgi" firstAttribute="leading" secondItem="gI4-lr-XRb" secondAttribute="leading" id="YOg-kz-dCj"/>
+                        <constraint firstItem="CSZ-iC-Tgi" firstAttribute="centerY" secondItem="gI4-lr-XRb" secondAttribute="centerY" id="naA-8y-HjB"/>
                         <constraint firstAttribute="trailing" secondItem="gI4-lr-XRb" secondAttribute="trailing" constant="12" id="qsg-gt-dXR"/>
                         <constraint firstItem="gI4-lr-XRb" firstAttribute="leading" secondItem="nC2-od-R1T" secondAttribute="leading" constant="12" id="wdp-4o-7Fh"/>
                         <constraint firstItem="gI4-lr-XRb" firstAttribute="top" secondItem="0hR-4N-oxy" secondAttribute="bottom" constant="8" id="yaC-js-3uh"/>
@@ -133,11 +145,11 @@
                     <rect key="frame" x="8" y="594" width="377" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTH-QN-E6F">
-                            <rect key="frame" x="12" y="14" width="37.333333333333336" height="14"/>
+                            <rect key="frame" x="12" y="14" width="36" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="3JW-dC-05A"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
