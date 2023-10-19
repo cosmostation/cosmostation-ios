@@ -635,12 +635,10 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .SelectFeeCoin) {
-            print("position ", result.position)
-            print("feeInfos ", feeInfos)
-            print("feeInfos[selectedFeeInfo] ", feeInfos[selectedFeeInfo])
             if let position = result.position,
                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
                 txFee.amount[0].denom = selectedDenom
+                onUpdateFeeView()
                 onSimul()
             }
             

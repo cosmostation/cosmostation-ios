@@ -222,6 +222,7 @@ extension KavaClaimIncentives: MemoDelegate, BaseSheetDelegate, PinDelegate {
             if let position = result.position,
                 let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
                 txFee.amount[0].denom = selectedDenom
+                onUpdateFeeView()
                 onSimul()
             }
         }
