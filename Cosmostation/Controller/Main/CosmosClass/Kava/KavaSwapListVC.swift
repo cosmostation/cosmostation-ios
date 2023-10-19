@@ -21,6 +21,7 @@ class KavaSwapListVC: BaseVC {
     var selectedChain: ChainKava60!
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var swapParam: Kava_Swap_V1beta1_Params?
+    var swapList = [Kava_Swap_V1beta1_PoolResponse]()
     var swapMyList = [Kava_Swap_V1beta1_PoolResponse]()
     var swapOtherList = [Kava_Swap_V1beta1_PoolResponse]()
     var swapMyDeposit: [Kava_Swap_V1beta1_DepositResponse]?
@@ -75,6 +76,7 @@ class KavaSwapListVC: BaseVC {
                         }
                     }
                 })
+                swapList = swapPools ?? []
                 swapMyDeposit = myDeposit
                 DispatchQueue.main.async {
                     self.tableView.isHidden = false
@@ -89,15 +91,20 @@ class KavaSwapListVC: BaseVC {
     }
     
     func onDepositSwpTx(_ denom: String) {
-        print("onDepositSwpTx ", denom)
-        let swpAction = KavaSwpAction(nibName: "KavaSwpAction", bundle: nil)
+        let swpAction = KavaSwapAction(nibName: "KavaSwapAction", bundle: nil)
+        swpAction.selectedChain = selectedChain
+        swpAction.swapPool = swapList.filter({ $0.name == denom }).first!
+        swpAction.swpActionType = .Deposit
         swpAction.modalTransitionStyle = .coverVertical
         self.present(swpAction, animated: true)
     }
     
     func onWithdrawSwpTx(_ denom: String) {
-        print("onWithdrawSwpTx ", denom)
-        let swpAction = KavaSwpAction(nibName: "KavaSwpAction", bundle: nil)
+        let swpAction = KavaSwapAction(nibName: "KavaSwapAction", bundle: nil)
+        swpAction.selectedChain = selectedChain
+        swpAction.swapPool = swapList.filter({ $0.name == denom }).first!
+        swpAction.myDeposit = swapMyDeposit?.filter({ $0.poolID == denom }).first!
+        swpAction.swpActionType = .Withdraw
         swpAction.modalTransitionStyle = .coverVertical
         self.present(swpAction, animated: true)
     }

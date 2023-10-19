@@ -31,7 +31,7 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKx-9x-cb8">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKx-9x-cb8">
                     <rect key="frame" x="20" y="95" width="63" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                     <color key="textColor" name="_color01"/>
@@ -56,7 +56,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o3E-fO-Ury" customClass="MDCOutlinedTextField">
-                    <rect key="frame" x="20" y="147.33333333333334" width="353" height="54"/>
+                    <rect key="frame" x="20" y="131.33333333333334" width="353" height="54"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_color01"/>
                     <constraints>
@@ -67,7 +67,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                 </textField>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid Amount" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRL-WB-5SK">
-                    <rect key="frame" x="19.999999999999993" y="221.33333333333334" width="90.333333333333314" height="15.333333333333343"/>
+                    <rect key="frame" x="19.999999999999993" y="205.33333333333334" width="90.333333333333314" height="15.333333333333343"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                     <color key="textColor" name="_warnRed"/>
                     <nil key="highlightedColor"/>
@@ -89,7 +89,7 @@
                     </connections>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="y0l-MK-cTw">
-                    <rect key="frame" x="211" y="217.33333333333334" width="162" height="28"/>
+                    <rect key="frame" x="211" y="201.33333333333334" width="162" height="28"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pgr-91-mCj">
                             <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="28"/>
@@ -159,7 +159,7 @@
                 <constraint firstItem="xqU-s6-lfU" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" constant="-38" id="eLz-6y-Irg"/>
                 <constraint firstItem="KRL-WB-5SK" firstAttribute="top" secondItem="o3E-fO-Ury" secondAttribute="bottom" constant="20" id="gJf-0H-uDj"/>
                 <constraint firstItem="o3E-fO-Ury" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="kUt-Pc-alm"/>
-                <constraint firstItem="o3E-fO-Ury" firstAttribute="top" secondItem="VKx-9x-cb8" secondAttribute="bottom" constant="32" id="pa8-po-4hs"/>
+                <constraint firstItem="o3E-fO-Ury" firstAttribute="top" secondItem="VKx-9x-cb8" secondAttribute="bottom" constant="16" id="pa8-po-4hs"/>
                 <constraint firstItem="KRL-WB-5SK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="rZh-Ed-hhX"/>
                 <constraint firstItem="y0l-MK-cTw" firstAttribute="top" secondItem="o3E-fO-Ury" secondAttribute="bottom" constant="16" id="xX7-HF-TLS"/>
                 <constraint firstItem="zb2-dK-pRY" firstAttribute="centerY" secondItem="GqX-GO-7bw" secondAttribute="centerY" id="yMM-dT-NfC"/>

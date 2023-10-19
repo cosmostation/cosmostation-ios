@@ -17,7 +17,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KavaHardAction" customModule="Cosmostation" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KavaLendAction" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="feeAmountLabel" destination="ndf-Ht-Flc" id="8vu-u4-mtI"/>
                 <outlet property="feeCurrencyLabel" destination="wiu-Q3-Uk4" id="hs3-ec-5fi"/>

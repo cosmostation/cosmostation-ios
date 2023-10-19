@@ -36,7 +36,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="3rT-hV-Iq2" customClass="MDCOutlinedTextField">
-                    <rect key="frame" x="10" y="147.33333333333334" width="373" height="54"/>
+                    <rect key="frame" x="10" y="131.33333333333334" width="373" height="54"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_color01"/>
                     <constraints>
@@ -47,7 +47,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                 </textField>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HJ2-Tk-n1u">
-                    <rect key="frame" x="155.66666666666663" y="217.33333333333334" width="217.33333333333337" height="28"/>
+                    <rect key="frame" x="155.66666666666663" y="201.33333333333334" width="217.33333333333337" height="28"/>
                     <subviews>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7a-YC-Xad">
                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="28"/>
@@ -128,7 +128,7 @@
                 <constraint firstItem="M0A-fG-KOH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="FAy-AI-vq1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="M0A-fG-KOH" secondAttribute="trailing" constant="8" id="GOu-69-mbg"/>
                 <constraint firstItem="jOD-2l-DW3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Iwe-Iu-aaa"/>
-                <constraint firstItem="3rT-hV-Iq2" firstAttribute="top" secondItem="jOD-2l-DW3" secondAttribute="bottom" constant="32" id="Koo-nv-ek3"/>
+                <constraint firstItem="3rT-hV-Iq2" firstAttribute="top" secondItem="jOD-2l-DW3" secondAttribute="bottom" constant="16" id="Koo-nv-ek3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HJ2-Tk-n1u" secondAttribute="trailing" constant="20" id="OtH-s8-0Vk"/>
                 <constraint firstAttribute="bottom" secondItem="M0A-fG-KOH" secondAttribute="bottom" constant="38" id="gtb-SJ-MS1"/>
                 <constraint firstItem="3rT-hV-Iq2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="kpt-Z1-ruE"/>

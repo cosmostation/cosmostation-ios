@@ -1047,67 +1047,53 @@ class Signer {
         }
         return [anyMsg]
     }
-//    
-//    //Tx for Kava Swap Deposit
-//    static func genSignedKavaSwapDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                         _ depositor: String, _ token_a: Coin, _ token_b: Coin, _ slippage: String, _ deadline: Int64,
-//                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let swapDeposit = genKavaSwapDeposit(depositor, token_a, token_b, slippage, deadline)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, swapDeposit, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateKavaSwapDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                           _ depositor: String, _ token_a: Coin, _ token_b: Coin, _ slippage: String, _ deadline: Int64,
-//                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let swapDeposit = genKavaSwapDeposit(depositor, token_a, token_b, slippage, deadline)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, swapDeposit, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genKavaSwapDeposit(_ depositor: String, _ token_a: Coin, _ token_b: Coin, _ slippage: String, _ deadline: Int64) -> [Google_Protobuf_Any] {
-//        let swapDeposit = Kava_Swap_V1beta1_MsgDeposit.with {
-//            $0.depositor = depositor
-//            $0.tokenA = Cosmos_Base_V1beta1_Coin.with { $0.denom = token_a.denom; $0.amount = token_a.amount }
-//            $0.tokenB = Cosmos_Base_V1beta1_Coin.with { $0.denom = token_b.denom; $0.amount = token_b.amount }
-//            $0.slippage = slippage
-//            $0.deadline = deadline
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/kava.swap.v1beta1.MsgDeposit"
-//            $0.value = try! swapDeposit.serializedData()
-//        }
-//        return [anyMsg]
-//    }
-//    
-//    //Tx for Kava Swap Withdraw
-//    static func genSignedKavaSwapWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                          _ from: String, _ shares: String, _ min_token_a: Coin, _ min_token_b: Coin, _ deadline: Int64,
-//                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let swapWithdraw = genKavaSwapWithdraw(from, shares, min_token_a, min_token_b, deadline)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, swapWithdraw, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateKavaSwapWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                            _ from: String, _ shares: String, _ min_token_a: Coin, _ min_token_b: Coin, _ deadline: Int64,
-//                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let swapWithdraw = genKavaSwapWithdraw(from, shares, min_token_a, min_token_b, deadline)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, swapWithdraw, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genKavaSwapWithdraw(_ from: String, _ shares: String, _ min_token_a: Coin, _ min_token_b: Coin, _ deadline: Int64) -> [Google_Protobuf_Any] {
-//        let swapWithdraw = Kava_Swap_V1beta1_MsgWithdraw.with {
-//            $0.from = from
-//            $0.shares = shares
-//            $0.minTokenA = Cosmos_Base_V1beta1_Coin.with { $0.denom = min_token_a.denom; $0.amount = min_token_a.amount }
-//            $0.minTokenB = Cosmos_Base_V1beta1_Coin.with { $0.denom = min_token_b.denom; $0.amount = min_token_b.amount }
-//            $0.deadline = deadline
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/kava.swap.v1beta1.MsgWithdraw"
-//            $0.value = try! swapWithdraw.serializedData()
-//        }
-//        return [anyMsg]
-//    }
-//    
+    
+    //Tx for Kava Swap Deposit
+    static func genKavaSwpDepositTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                    _ toDeposit: Kava_Swap_V1beta1_MsgDeposit,
+                                    _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let depositMsg = genKavaSwpDepositMsg(toDeposit)
+        return getSignedTx(auth, depositMsg, fee, memo, baseChain)
+    }
+    
+    static func geKavaSwpDepositSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                      _ toDeposit: Kava_Swap_V1beta1_MsgDeposit,
+                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let depositMsg = genKavaSwpDepositMsg(toDeposit)
+        return getSimulateTx(auth, depositMsg, fee, memo, baseChain)
+    }
+    
+    static func genKavaSwpDepositMsg(_ toDeposit: Kava_Swap_V1beta1_MsgDeposit) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/kava.swap.v1beta1.MsgDeposit"
+            $0.value = try! toDeposit.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Kava Swap Withdraw
+    static func genKavaSwpwithdrawTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                     _ toWithdraw: Kava_Swap_V1beta1_MsgWithdraw,
+                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let withdrawMsg = genKavaSwpWithdrawMsg(toWithdraw)
+        return getSignedTx(auth, withdrawMsg, fee, memo, baseChain)
+    }
+    
+    static func geKavaSwpWithdrawSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                       _ toWithdraw: Kava_Swap_V1beta1_MsgWithdraw,
+                                       _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let withdrawMsg = genKavaSwpWithdrawMsg(toWithdraw)
+        return getSimulateTx(auth, withdrawMsg, fee, memo, baseChain)
+    }
+    
+    static func genKavaSwpWithdrawMsg(_ toWithdraw: Kava_Swap_V1beta1_MsgWithdraw) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/kava.swap.v1beta1.MsgWithdraw"
+            $0.value = try! toWithdraw.serializedData()
+        }
+        return [anyMsg]
+    }
+    
 //    //Tx for Kava Swap Exact For Tokens
 //    static func genSignedKavaSwapExactForTokens(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
 //                                                _ requester: String, _ swapIn: Coin, _ swapOut: Coin, _ slippage: String, _ deadline: Int64,

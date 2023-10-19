@@ -31,7 +31,7 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igf-FW-49w">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igf-FW-49w">
                     <rect key="frame" x="20" y="95" width="63" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                     <color key="textColor" name="_color01"/>
@@ -56,7 +56,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AOq-QX-DZA" customClass="MDCOutlinedTextField">
-                    <rect key="frame" x="20" y="147.33333333333334" width="353" height="54"/>
+                    <rect key="frame" x="20" y="131.33333333333334" width="353" height="54"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_color01"/>
                     <constraints>
@@ -67,7 +67,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                 </textField>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid Amount" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82w-SM-1AY">
-                    <rect key="frame" x="19.999999999999993" y="221.33333333333334" width="90.333333333333314" height="15.333333333333343"/>
+                    <rect key="frame" x="19.999999999999993" y="205.33333333333334" width="90.333333333333314" height="15.333333333333343"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                     <color key="textColor" name="_warnRed"/>
                     <nil key="highlightedColor"/>
@@ -89,7 +89,7 @@
                     </connections>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vVe-Bj-zp1">
-                    <rect key="frame" x="211" y="221.33333333333334" width="162" height="28"/>
+                    <rect key="frame" x="211" y="205.33333333333334" width="162" height="28"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wp-5y-XYm">
                             <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="28"/>
@@ -162,7 +162,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vVe-Bj-zp1" secondAttribute="trailing" constant="20" id="mqp-ws-W6G"/>
                 <constraint firstItem="igf-FW-49w" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="o5Z-pt-gz9"/>
                 <constraint firstItem="0nj-dt-e13" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="oxM-pq-6Ry"/>
-                <constraint firstItem="AOq-QX-DZA" firstAttribute="top" secondItem="igf-FW-49w" secondAttribute="bottom" constant="32" id="qkj-YE-d1Y"/>
+                <constraint firstItem="AOq-QX-DZA" firstAttribute="top" secondItem="igf-FW-49w" secondAttribute="bottom" constant="16" id="qkj-YE-d1Y"/>
             </constraints>
             <point key="canvasLocation" x="36" y="20"/>
         </view>

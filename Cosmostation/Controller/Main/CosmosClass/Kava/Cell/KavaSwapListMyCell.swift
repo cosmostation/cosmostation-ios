@@ -46,6 +46,7 @@ class KavaSwapListMyCell: UITableViewCell {
             coin2Img?.af.setImage(withURL: msAsset2.assetImg())
             
             marketNameLabel.text = msAsset1.symbol! + " : " + msAsset2.symbol!
+            marketNameLabel.adjustsFontSizeToFitWidth = true
             
             let coin1Price = BaseData.instance.getPrice(msAsset1.coinGeckoId, true)
             let coin2Price = BaseData.instance.getPrice(msAsset2.coinGeckoId, true)

@@ -101,7 +101,7 @@ class KavaLendListVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        let hardAction = KavaHardAction(nibName: "KavaHardAction", bundle: nil)
+        let hardAction = KavaLendAction(nibName: "KavaLendAction", bundle: nil)
         hardAction.hardActionType = .Deposit
         hardAction.selectedChain = selectedChain
         hardAction.hardMarket = hardParams?.getHardMoneyMarket(denom)
@@ -119,7 +119,7 @@ class KavaLendListVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_to_withdraw", comment: ""))
             return
         }
-        let hardAction = KavaHardAction(nibName: "KavaHardAction", bundle: nil)
+        let hardAction = KavaLendAction(nibName: "KavaLendAction", bundle: nil)
         hardAction.hardActionType = .Withdraw
         hardAction.selectedChain = selectedChain
         hardAction.hardMyDeposit = hardMyDeposit
@@ -138,7 +138,7 @@ class KavaLendListVC: BaseVC {
             onShowToast(NSLocalizedString("error_no_borrowable_asset", comment: ""))
             return
         }
-        let hardAction = KavaHardAction(nibName: "KavaHardAction", bundle: nil)
+        let hardAction = KavaLendAction(nibName: "KavaLendAction", bundle: nil)
         hardAction.hardActionType = .Borrow
         hardAction.selectedChain = selectedChain
         hardAction.hardMyDeposit = hardMyDeposit
@@ -159,7 +159,7 @@ class KavaLendListVC: BaseVC {
             onShowToast(NSLocalizedString("error_no_repay_asset", comment: ""))
             return
         }
-        let hardAction = KavaHardAction(nibName: "KavaHardAction", bundle: nil)
+        let hardAction = KavaLendAction(nibName: "KavaLendAction", bundle: nil)
         hardAction.hardActionType = .Repay
         hardAction.selectedChain = selectedChain
         hardAction.hardMyDeposit = hardMyDeposit

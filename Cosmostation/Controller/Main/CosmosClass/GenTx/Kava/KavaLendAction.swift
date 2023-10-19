@@ -1,5 +1,5 @@
 //
-//  KavaHardAction.swift
+//  KavaLendAction.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/10/15.
@@ -13,7 +13,7 @@ import GRPC
 import NIO
 import SwiftProtobuf
 
-class KavaHardAction: BaseVC {
+class KavaLendAction: BaseVC {
     
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -52,7 +52,7 @@ class KavaHardAction: BaseVC {
     
     var hardActionType: HardActionType!                     // to action type
     var hardMarket: Kava_Hard_V1beta1_MoneyMarket!
-    var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
+//    var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var hardTotalBorrow: [Cosmos_Base_V1beta1_Coin]?
     var hardMyDeposit: [Cosmos_Base_V1beta1_Coin]?
     var hardMyBorrow: [Cosmos_Base_V1beta1_Coin]?
@@ -402,7 +402,7 @@ class KavaHardAction: BaseVC {
 }
 
 
-extension KavaHardAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
+extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .SelectFeeCoin) {
@@ -503,7 +503,7 @@ extension KavaHardAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
 }
 
 
-extension KavaHardAction {
+extension KavaLendAction {
     
     func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }

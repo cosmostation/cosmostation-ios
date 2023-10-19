@@ -142,6 +142,13 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
                 decimal = msAsset.decimals!
                 WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             }
+            
+        } else if (sheetType == .TxSwpWithdraw) {
+            decimal = 6
+            amountTextField.label.text = NSLocalizedString("str_withdraw_amount", comment: "")
+            availableTitle.text = NSLocalizedString("str_max_withdrawable", comment: "")
+            availableLabel.attributedText = WDP.dpAmount(availableAmount.multiplying(byPowerOf10: -decimal).stringValue, availableLabel.font, decimal)
+            availableDenom.text = "Share"
         }
         
     }
@@ -237,4 +244,6 @@ public enum AmountSheetType: Int {
     case TxHardWithdraw = 7
     case TxHardBorrow = 8
     case TxHardRepay = 9
+    
+    case TxSwpWithdraw = 10
 }
