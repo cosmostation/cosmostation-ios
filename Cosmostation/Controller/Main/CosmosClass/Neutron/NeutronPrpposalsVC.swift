@@ -82,11 +82,11 @@ class NeutronPrpposalsVC: BaseVC {
         fetchMyVotes(group, selectedChain.address!)
         
         group.notify(queue: .main) {
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 self.tableView.isHidden = false
                 self.loadingView.isHidden = true
                 self.tableView.reloadData()
-            }
+//            }
             
         }
     }

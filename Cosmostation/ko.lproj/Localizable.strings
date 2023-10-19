@@ -893,6 +893,8 @@
 "title_select_hardpool_action" = "하드 랜딩 선택";
 "title_swappool_list" = "스왑 풀 리스트";
 "title_select_swappool_action" = "스왑 풀 선택";
+"title_mint_list" = "민팅 목록";
+"title_select_mint_action" = "민팅 선택";
 
 
 "proposal_type_basic" = "기본";

@@ -109,7 +109,11 @@ extension KavaDefiVC: UITableViewDelegate, UITableViewDataSource {
             self.present(claimRewards, animated: true)
             
         } else if (indexPath.row == 1) {
-            //mint
+            let mintListVC = KavaMintListVC(nibName: "KavaMintListVC", bundle: nil)
+            mintListVC.selectedChain = selectedChain
+            mintListVC.priceFeed = priceFeed
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(mintListVC, animated: true)
             
         } else if (indexPath.row == 2) {
             let lendListVC = KavaLendListVC(nibName: "KavaLendListVC", bundle: nil)

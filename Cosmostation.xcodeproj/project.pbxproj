@@ -246,6 +246,36 @@
 		0438A7E32AE0E9FA006FA213 /* TxAmountLpSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7E02AE0E9FA006FA213 /* TxAmountLpSheet.swift */; };
 		0438A7E42AE0E9FA006FA213 /* TxAmountLpSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0438A7E12AE0E9FA006FA213 /* TxAmountLpSheet.xib */; };
 		0438A7E52AE0E9FA006FA213 /* TxAmountLpSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0438A7E12AE0E9FA006FA213 /* TxAmountLpSheet.xib */; };
+		0438A7EC2AE123E7006FA213 /* basebg02.png in Resources */ = {isa = PBXBuildFile; fileRef = 0438A7E92AE123E7006FA213 /* basebg02.png */; };
+		0438A7ED2AE123E7006FA213 /* basebg02.png in Resources */ = {isa = PBXBuildFile; fileRef = 0438A7E92AE123E7006FA213 /* basebg02.png */; };
+		0438A7EE2AE123E7006FA213 /* basebg00.png in Resources */ = {isa = PBXBuildFile; fileRef = 0438A7EA2AE123E7006FA213 /* basebg00.png */; };
+		0438A7EF2AE123E7006FA213 /* basebg00.png in Resources */ = {isa = PBXBuildFile; fileRef = 0438A7EA2AE123E7006FA213 /* basebg00.png */; };
+		0438A7F02AE123E7006FA213 /* basebg01.png in Resources */ = {isa = PBXBuildFile; fileRef = 0438A7EB2AE123E7006FA213 /* basebg01.png */; };
+		0438A7F12AE123E7006FA213 /* basebg01.png in Resources */ = {isa = PBXBuildFile; fileRef = 0438A7EB2AE123E7006FA213 /* basebg01.png */; };
+		0438A7F42AE1316B006FA213 /* KavaMintListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7F22AE1316B006FA213 /* KavaMintListVC.swift */; };
+		0438A7F52AE1316B006FA213 /* KavaMintListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7F22AE1316B006FA213 /* KavaMintListVC.swift */; };
+		0438A7F62AE1316B006FA213 /* KavaMintListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0438A7F32AE1316B006FA213 /* KavaMintListVC.xib */; };
+		0438A7F72AE1316B006FA213 /* KavaMintListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0438A7F32AE1316B006FA213 /* KavaMintListVC.xib */; };
+		0438A7FE2AE135B1006FA213 /* kava_cdp_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7F82AE135AF006FA213 /* kava_cdp_v1beta1_genesis.pb.swift */; };
+		0438A7FF2AE135B1006FA213 /* kava_cdp_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7F82AE135AF006FA213 /* kava_cdp_v1beta1_genesis.pb.swift */; };
+		0438A8002AE135B1006FA213 /* kava_cdp_v1beta1_cdp.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7F92AE135B0006FA213 /* kava_cdp_v1beta1_cdp.pb.swift */; };
+		0438A8012AE135B1006FA213 /* kava_cdp_v1beta1_cdp.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7F92AE135B0006FA213 /* kava_cdp_v1beta1_cdp.pb.swift */; };
+		0438A8022AE135B1006FA213 /* kava_cdp_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7FA2AE135B0006FA213 /* kava_cdp_v1beta1_tx.grpc.swift */; };
+		0438A8032AE135B1006FA213 /* kava_cdp_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7FA2AE135B0006FA213 /* kava_cdp_v1beta1_tx.grpc.swift */; };
+		0438A8042AE135B1006FA213 /* kava_cdp_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7FB2AE135B0006FA213 /* kava_cdp_v1beta1_tx.pb.swift */; };
+		0438A8052AE135B1006FA213 /* kava_cdp_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7FB2AE135B0006FA213 /* kava_cdp_v1beta1_tx.pb.swift */; };
+		0438A8062AE135B1006FA213 /* kava_cdp_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7FC2AE135B0006FA213 /* kava_cdp_v1beta1_query.grpc.swift */; };
+		0438A8072AE135B1006FA213 /* kava_cdp_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7FC2AE135B0006FA213 /* kava_cdp_v1beta1_query.grpc.swift */; };
+		0438A8082AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7FD2AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift */; };
+		0438A8092AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7FD2AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift */; };
+		0438A8182AE15270006FA213 /* KavaMintListMyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A8162AE15270006FA213 /* KavaMintListMyCell.swift */; };
+		0438A8192AE15270006FA213 /* KavaMintListMyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A8162AE15270006FA213 /* KavaMintListMyCell.swift */; };
+		0438A81A2AE15270006FA213 /* KavaMintListMyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0438A8172AE15270006FA213 /* KavaMintListMyCell.xib */; };
+		0438A81B2AE15270006FA213 /* KavaMintListMyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0438A8172AE15270006FA213 /* KavaMintListMyCell.xib */; };
+		0438A81E2AE15283006FA213 /* KavaMintListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A81C2AE15283006FA213 /* KavaMintListCell.swift */; };
+		0438A81F2AE15283006FA213 /* KavaMintListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A81C2AE15283006FA213 /* KavaMintListCell.swift */; };
+		0438A8202AE15283006FA213 /* KavaMintListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0438A81D2AE15283006FA213 /* KavaMintListCell.xib */; };
+		0438A8212AE15283006FA213 /* KavaMintListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0438A81D2AE15283006FA213 /* KavaMintListCell.xib */; };
 		0443B89828589B570027A6B9 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0443B89728589B570027A6B9 /* Color.xcassets */; };
 		0443B89928589B570027A6B9 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0443B89728589B570027A6B9 /* Color.xcassets */; };
 		0443B8A2285C7F050027A6B9 /* Chain.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0443B8A1285C7F050027A6B9 /* Chain.xcassets */; };
@@ -1500,12 +1530,6 @@
 		E15980A72A83AC9E0032892B /* PortfolioVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980A52A83AC9E0032892B /* PortfolioVC.swift */; };
 		E15980A92A83ADB60032892B /* MainTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980A82A83ADB60032892B /* MainTabVC.swift */; };
 		E15980AA2A83ADB60032892B /* MainTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980A82A83ADB60032892B /* MainTabVC.swift */; };
-		E15E047F2ADE9E190044B77F /* basebg01.png in Resources */ = {isa = PBXBuildFile; fileRef = E15E047C2ADE9E190044B77F /* basebg01.png */; };
-		E15E04802ADE9E190044B77F /* basebg01.png in Resources */ = {isa = PBXBuildFile; fileRef = E15E047C2ADE9E190044B77F /* basebg01.png */; };
-		E15E04822ADE9E3F0044B77F /* basebg02.png in Resources */ = {isa = PBXBuildFile; fileRef = E15E04812ADE9E3F0044B77F /* basebg02.png */; };
-		E15E04832ADE9E3F0044B77F /* basebg02.png in Resources */ = {isa = PBXBuildFile; fileRef = E15E04812ADE9E3F0044B77F /* basebg02.png */; };
-		E15E04852ADE9ED30044B77F /* basebg00.png in Resources */ = {isa = PBXBuildFile; fileRef = E15E04842ADE9ED30044B77F /* basebg00.png */; };
-		E15E04862ADE9ED30044B77F /* basebg00.png in Resources */ = {isa = PBXBuildFile; fileRef = E15E04842ADE9ED30044B77F /* basebg00.png */; };
 		E15F2CF82ABF0DCE00BAE105 /* basebg05.png in Resources */ = {isa = PBXBuildFile; fileRef = E15F2CF62ABF0DCE00BAE105 /* basebg05.png */; };
 		E15F2CF92ABF0DCE00BAE105 /* basebg05.png in Resources */ = {isa = PBXBuildFile; fileRef = E15F2CF62ABF0DCE00BAE105 /* basebg05.png */; };
 		E15F2CFA2ABF0DCE00BAE105 /* basebg06.png in Resources */ = {isa = PBXBuildFile; fileRef = E15F2CF72ABF0DCE00BAE105 /* basebg06.png */; };
@@ -1736,6 +1760,21 @@
 		0437E086268C0A6700088391 /* RIPEMD160.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		0438A7E02AE0E9FA006FA213 /* TxAmountLpSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAmountLpSheet.swift; sourceTree = "<group>"; };
 		0438A7E12AE0E9FA006FA213 /* TxAmountLpSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxAmountLpSheet.xib; sourceTree = "<group>"; };
+		0438A7E92AE123E7006FA213 /* basebg02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg02.png; sourceTree = "<group>"; };
+		0438A7EA2AE123E7006FA213 /* basebg00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg00.png; sourceTree = "<group>"; };
+		0438A7EB2AE123E7006FA213 /* basebg01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg01.png; sourceTree = "<group>"; };
+		0438A7F22AE1316B006FA213 /* KavaMintListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaMintListVC.swift; sourceTree = "<group>"; };
+		0438A7F32AE1316B006FA213 /* KavaMintListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaMintListVC.xib; sourceTree = "<group>"; };
+		0438A7F82AE135AF006FA213 /* kava_cdp_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_cdp_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		0438A7F92AE135B0006FA213 /* kava_cdp_v1beta1_cdp.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_cdp_v1beta1_cdp.pb.swift; sourceTree = "<group>"; };
+		0438A7FA2AE135B0006FA213 /* kava_cdp_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_cdp_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
+		0438A7FB2AE135B0006FA213 /* kava_cdp_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_cdp_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
+		0438A7FC2AE135B0006FA213 /* kava_cdp_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_cdp_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		0438A7FD2AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_cdp_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		0438A8162AE15270006FA213 /* KavaMintListMyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaMintListMyCell.swift; sourceTree = "<group>"; };
+		0438A8172AE15270006FA213 /* KavaMintListMyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaMintListMyCell.xib; sourceTree = "<group>"; };
+		0438A81C2AE15283006FA213 /* KavaMintListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaMintListCell.swift; sourceTree = "<group>"; };
+		0438A81D2AE15283006FA213 /* KavaMintListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaMintListCell.xib; sourceTree = "<group>"; };
 		0443B89728589B570027A6B9 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		0443B8A1285C7F050027A6B9 /* Chain.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Chain.xcassets; sourceTree = "<group>"; };
 		0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20TransferReq.swift; sourceTree = "<group>"; };
@@ -2349,9 +2388,6 @@
 		E15980A22A83AB030032892B /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E15980A52A83AC9E0032892B /* PortfolioVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioVC.swift; sourceTree = "<group>"; };
 		E15980A82A83ADB60032892B /* MainTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabVC.swift; sourceTree = "<group>"; };
-		E15E047C2ADE9E190044B77F /* basebg01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg01.png; sourceTree = "<group>"; };
-		E15E04812ADE9E3F0044B77F /* basebg02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg02.png; sourceTree = "<group>"; };
-		E15E04842ADE9ED30044B77F /* basebg00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg00.png; sourceTree = "<group>"; };
 		E15F2CF62ABF0DCE00BAE105 /* basebg05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg05.png; sourceTree = "<group>"; };
 		E15F2CF72ABF0DCE00BAE105 /* basebg06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg06.png; sourceTree = "<group>"; };
 		E15F2CFC2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosStakingInfoVC.swift; sourceTree = "<group>"; };
@@ -2498,6 +2534,8 @@
 				0400EECB2ADBBC12007BA97F /* Cell */,
 				0400EEAD2ADBB3C5007BA97F /* KavaDefiVC.swift */,
 				0400EEAE2ADBB3C5007BA97F /* KavaDefiVC.xib */,
+				0438A7F22AE1316B006FA213 /* KavaMintListVC.swift */,
+				0438A7F32AE1316B006FA213 /* KavaMintListVC.xib */,
 				0400EEF12ADBEEF5007BA97F /* KavaLendListVC.swift */,
 				0400EEF22ADBEEF5007BA97F /* KavaLendListVC.xib */,
 				0400EF212ADD4737007BA97F /* KavaSwapListVC.swift */,
@@ -2513,6 +2551,10 @@
 				0400EECD2ADBBC43007BA97F /* KavaIncentiveCell.xib */,
 				0400EEEB2ADBE40D007BA97F /* KavaDefiCell.swift */,
 				0400EEEC2ADBE40D007BA97F /* KavaDefiCell.xib */,
+				0438A8162AE15270006FA213 /* KavaMintListMyCell.swift */,
+				0438A8172AE15270006FA213 /* KavaMintListMyCell.xib */,
+				0438A81C2AE15283006FA213 /* KavaMintListCell.swift */,
+				0438A81D2AE15283006FA213 /* KavaMintListCell.xib */,
 				0400EF0F2ADBF763007BA97F /* KavaLendListMyCell.swift */,
 				0400EF102ADBF763007BA97F /* KavaLendListMyCell.xib */,
 				0400EF152ADBF774007BA97F /* KavaLendListCell.swift */,
@@ -2924,6 +2966,12 @@
 				0400EF382ADD49BB007BA97F /* kava_swap_v1beta1_swap.pb.swift */,
 				0400EF332ADD49BA007BA97F /* kava_swap_v1beta1_tx.grpc.swift */,
 				0400EF342ADD49BA007BA97F /* kava_swap_v1beta1_tx.pb.swift */,
+				0438A7F92AE135B0006FA213 /* kava_cdp_v1beta1_cdp.pb.swift */,
+				0438A7F82AE135AF006FA213 /* kava_cdp_v1beta1_genesis.pb.swift */,
+				0438A7FC2AE135B0006FA213 /* kava_cdp_v1beta1_query.grpc.swift */,
+				0438A7FD2AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift */,
+				0438A7FA2AE135B0006FA213 /* kava_cdp_v1beta1_tx.grpc.swift */,
+				0438A7FB2AE135B0006FA213 /* kava_cdp_v1beta1_tx.pb.swift */,
 			);
 			path = Kava;
 			sourceTree = "<group>";
@@ -3595,9 +3643,9 @@
 		E1BBF7462ABEBE3000D3082F /* BgImg */ = {
 			isa = PBXGroup;
 			children = (
-				E15E04842ADE9ED30044B77F /* basebg00.png */,
-				E15E047C2ADE9E190044B77F /* basebg01.png */,
-				E15E04812ADE9E3F0044B77F /* basebg02.png */,
+				0438A7EA2AE123E7006FA213 /* basebg00.png */,
+				0438A7EB2AE123E7006FA213 /* basebg01.png */,
+				0438A7E92AE123E7006FA213 /* basebg02.png */,
 				E1BBF7492ABEBE4100D3082F /* basebg03.png */,
 				E1BBF7482ABEBE4100D3082F /* basebg04.png */,
 				E15F2CF62ABF0DCE00BAE105 /* basebg05.png */,
@@ -3791,13 +3839,13 @@
 				04FAD9C72AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
 				E11EAE1E2AAD87AD003BFC7F /* SettingPriceCell.xib in Resources */,
 				04A116F228F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
-				E15E04802ADE9E190044B77F /* basebg01.png in Resources */,
 				0400EF502ADF7EF4007BA97F /* KavaSwapAction.xib in Resources */,
 				04A68C202ABDA3220041FA13 /* SelectSwapChainCell.xib in Resources */,
 				04A68C322AC13A560041FA13 /* CosmosProposalsVC.xib in Resources */,
 				0400EEF62ADBEEF5007BA97F /* KavaLendListVC.xib in Resources */,
 				0400EEB22ADBB3C5007BA97F /* KavaDefiVC.xib in Resources */,
 				E15F2CFB2ABF0DCE00BAE105 /* basebg06.png in Resources */,
+				0438A7EF2AE123E7006FA213 /* basebg00.png in Resources */,
 				047C10742AAC310600AFA159 /* QrAddressVC.xib in Resources */,
 				0409D2F82AC5DC6D0021E192 /* CosmosDelegate.xib in Resources */,
 				0443B8A3285C7F050027A6B9 /* Chain.xcassets in Resources */,
@@ -3806,14 +3854,15 @@
 				0400EED12ADBBC43007BA97F /* KavaIncentiveCell.xib in Resources */,
 				04C6B9C82AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */,
 				04527DC22A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
+				0438A7F12AE123E7006FA213 /* basebg01.png in Resources */,
 				04CD24662AD2E2D500497EF5 /* Bep3Transfer.xib in Resources */,
 				040732FE2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */,
 				E122DC6A2A8DBD3B006D1E7B /* BaseHeader.xib in Resources */,
 				E1E0DBC92A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
 				18FFB6E2281AF533004E65BB /* Assets.xcassets in Resources */,
 				E14E29782A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
+				0438A7ED2AE123E7006FA213 /* basebg02.png in Resources */,
 				04FA746F2A9F8652001A2830 /* BaseSheet.xib in Resources */,
-				E15E04832ADE9E3F0044B77F /* basebg02.png in Resources */,
 				0400EE852AD41FC5007BA97F /* ServiceCell.xib in Resources */,
 				04527DBC2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				04FAD9F12AB71D3300143A3E /* RenameSheet.xib in Resources */,
@@ -3858,7 +3907,9 @@
 				E15980A42A83AB030032892B /* Main.storyboard in Resources */,
 				04CD24562AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */,
 				E15F2D132ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */,
+				0438A7F72AE1316B006FA213 /* KavaMintListVC.xib in Resources */,
 				04A68C382AC156AA0041FA13 /* CosmosProposalCell.xib in Resources */,
+				0438A81B2AE15270006FA213 /* KavaMintListMyCell.xib in Resources */,
 				E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				04B789F42ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,
 				042DE8432AC4C518003F3EA4 /* TxMemoSheet.xib in Resources */,
@@ -3882,8 +3933,8 @@
 				04FAD9D32AB2032200143A3E /* SwapStartVC.xib in Resources */,
 				0400EE922AD7B08E007BA97F /* NeutronVault.xib in Resources */,
 				0400EF202ADC1D99007BA97F /* KavaLendAction.xib in Resources */,
-				E15E04862ADE9ED30044B77F /* basebg00.png in Resources */,
 				0402B7E92ACC132200824B3F /* CosmosCompounding.xib in Resources */,
+				0438A8212AE15283006FA213 /* KavaMintListCell.xib in Resources */,
 				E11EAE122AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
 				0409D2FE2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
 				E15F2D012ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
@@ -3918,7 +3969,7 @@
 				1809C35129D16C80008884C1 /* injectScript.js in Resources */,
 				04FAD9F62AB71D5000143A3E /* DeleteAccountSheet.xib in Resources */,
 				04CD247E2AD308C800497EF5 /* SelectBepRecipientCell.xib in Resources */,
-				E15E04852ADE9ED30044B77F /* basebg00.png in Resources */,
+				0438A8202AE15283006FA213 /* KavaMintListCell.xib in Resources */,
 				0400EE8A2AD425F9007BA97F /* DappDetailVC.xib in Resources */,
 				E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */,
 				0402B7E82ACC132200824B3F /* CosmosCompounding.xib in Resources */,
@@ -3929,14 +3980,15 @@
 				04FA74812AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */,
 				E1E0DBC82A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
 				04A1A8042AC80AA50014EF92 /* TxAmountSheet.xib in Resources */,
+				0438A7F02AE123E7006FA213 /* basebg01.png in Resources */,
 				04CD248A2AD31E2000497EF5 /* BepTxResult.xib in Resources */,
 				04B789ED2ACB336400E9BE88 /* SelectRefAddressCell.xib in Resources */,
 				0400EF1F2ADC1D99007BA97F /* KavaLendAction.xib in Resources */,
 				04FAD9F02AB71D3300143A3E /* RenameSheet.xib in Resources */,
 				04FA74542A9D97A0001A2830 /* Pincode.storyboard in Resources */,
+				0438A81A2AE15270006FA213 /* KavaMintListMyCell.xib in Resources */,
 				04CFF0352AC58D4400FB3187 /* SelectFeeCoinCell.xib in Resources */,
 				042DE8422AC4C518003F3EA4 /* TxMemoSheet.xib in Resources */,
-				E15E047F2ADE9E190044B77F /* basebg01.png in Resources */,
 				E1D538292A96644F00FB0403 /* loading.json in Resources */,
 				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				0409D2FD2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
@@ -3953,7 +4005,7 @@
 				E11EAE112AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
 				187446FF2930940F00849EE4 /* ApiKey.plist in Resources */,
 				E1DF77772AB74EE80028BD51 /* CheckPrivateKeyVC.xib in Resources */,
-				E15E04822ADE9E3F0044B77F /* basebg02.png in Resources */,
+				0438A7EC2AE123E7006FA213 /* basebg02.png in Resources */,
 				E18D73B82AB484AB00FCB1AA /* DappStartVC.xib in Resources */,
 				04FAD9B42AB011AC00143A3E /* SwitchPriceDisplayCell.xib in Resources */,
 				04FAD9BA2AB0125400143A3E /* BaseSheetCell.xib in Resources */,
@@ -3961,6 +4013,7 @@
 				E15980A32A83AB030032892B /* Main.storyboard in Resources */,
 				E1BBF74E2ABEBE4100D3082F /* basebg04.png in Resources */,
 				04A68C1F2ABDA3220041FA13 /* SelectSwapChainCell.xib in Resources */,
+				0438A7EE2AE123E7006FA213 /* basebg00.png in Resources */,
 				0438A7E42AE0E9FA006FA213 /* TxAmountLpSheet.xib in Resources */,
 				047C10732AAC310600AFA159 /* QrAddressVC.xib in Resources */,
 				04BA9BD72A985771003E2404 /* ChainSelectVC.xib in Resources */,
@@ -3986,6 +4039,7 @@
 				0402B7F42ACC38BA00824B3F /* CosmosVote.xib in Resources */,
 				0402B7EE2ACC248400824B3F /* CosmosRewardAddress.xib in Resources */,
 				047842DA2AC87C1000462F1C /* CosmosTxResult.xib in Resources */,
+				0438A7F62AE1316B006FA213 /* KavaMintListVC.xib in Resources */,
 				E15F2D002ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
 				0400EEF52ADBEEF5007BA97F /* KavaLendListVC.xib in Resources */,
 				047842E62AC8B2D600462F1C /* CosmosRedelegate.xib in Resources */,
@@ -4122,10 +4176,12 @@
 				042DE8412AC4C518003F3EA4 /* TxMemoSheet.swift in Sources */,
 				E122DB9A2A8A468D006D1E7B /* cosmos_bank_v1beta1_genesis.pb.swift in Sources */,
 				E122DBC62A8A468E006D1E7B /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
+				0438A8032AE135B1006FA213 /* kava_cdp_v1beta1_tx.grpc.swift in Sources */,
 				0402B7FE2ACC741700824B3F /* ChainCudos.swift in Sources */,
 				047843D62AC991B300462F1C /* injective_oracle_v1beta1_tx.grpc.swift in Sources */,
 				04FAD9D62AB204FF00143A3E /* FixCardView.swift in Sources */,
 				0400EE9D2AD9B434007BA97F /* NeutronVote.swift in Sources */,
+				0438A7F52AE1316B006FA213 /* KavaMintListVC.swift in Sources */,
 				0402B8502ACC86B300824B3F /* ChainTerra.swift in Sources */,
 				E11069BB2AA4C57600EB02CA /* cosmwasm_wasm_v1_types.pb.swift in Sources */,
 				E122DC672A8DBD28006D1E7B /* BaseHeader.swift in Sources */,
@@ -4143,6 +4199,7 @@
 				04B789722ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift in Sources */,
 				0400EED62ADBC9E6007BA97F /* KavaClaimIncentives.swift in Sources */,
 				18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */,
+				0438A8192AE15270006FA213 /* KavaMintListMyCell.swift in Sources */,
 				E1D6B8CF2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
 				18FFB307281AF533004E65BB /* BinanceProto.swift in Sources */,
 				E122DBDA2A8A468E006D1E7B /* cosmos_staking_v1beta1_query.grpc.swift in Sources */,
@@ -4235,6 +4292,7 @@
 				E1B44B202ADA41CD0073C88A /* NeutronSingleVoteCell.swift in Sources */,
 				04FAD9B92AB0125400143A3E /* BaseSheetCell.swift in Sources */,
 				151734682A208EC50014AAD6 /* Cw20NeutronVestingReq.swift in Sources */,
+				0438A8052AE135B1006FA213 /* kava_cdp_v1beta1_tx.pb.swift in Sources */,
 				E122DB002A8A468D006D1E7B /* cosmos_reflection_v1_reflection.pb.swift in Sources */,
 				E122DB8A2A8A468D006D1E7B /* cosmos_gov_v1beta1_query.pb.swift in Sources */,
 				E122DBFE2A8A468E006D1E7B /* cosmos_staking_v1beta1_authz.pb.swift in Sources */,
@@ -4339,6 +4397,7 @@
 				047843822AC991B300462F1C /* injective_auction_v1beta1_query.pb.swift in Sources */,
 				0402B80A2ACC758B00824B3F /* ChainGravityBridge.swift in Sources */,
 				E19E8B3E2A92290800001BF5 /* UIColor+Colors.swift in Sources */,
+				0438A7FF2AE135B1006FA213 /* kava_cdp_v1beta1_genesis.pb.swift in Sources */,
 				04B7893A2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift in Sources */,
 				E122DB182A8A468D006D1E7B /* cosmos_autocli_v1_query.pb.swift in Sources */,
 				04CB911C2A90C41E00375354 /* EvmClass.swift in Sources */,
@@ -4502,9 +4561,11 @@
 				046EA8E42AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_profile.pb.swift in Sources */,
 				0400EEEE2ADBE40D007BA97F /* KavaDefiCell.swift in Sources */,
 				E122DB742A8A468D006D1E7B /* cosmos_nft_v1beta1_nft.pb.swift in Sources */,
+				0438A81F2AE15283006FA213 /* KavaMintListCell.swift in Sources */,
 				0478437A2AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */,
 				E15980AA2A83ADB60032892B /* MainTabVC.swift in Sources */,
 				047843F12AC9A11D00462F1C /* ChainBand.swift in Sources */,
+				0438A8072AE135B1006FA213 /* kava_cdp_v1beta1_query.grpc.swift in Sources */,
 				E1D4EA592871584B005C1ECF /* FeeInfo.swift in Sources */,
 				043031EE28C2136F005FF935 /* MintscanPath.swift in Sources */,
 				E122DB222A8A468D006D1E7B /* cosmos_crypto_ed25519_keys.pb.swift in Sources */,
@@ -4517,6 +4578,7 @@
 				047843C02AC991B300462F1C /* injective_oracle_v1beta1_tx.pb.swift in Sources */,
 				04FAD9FA2AB7221600143A3E /* BaseRedButton.swift in Sources */,
 				0478438E2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
+				0438A8092AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */,
 				E122DB402A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
 				0478440D2AC9AA1000462F1C /* CosmosTransfer.swift in Sources */,
 				04FAD9D92AB438C900143A3E /* DropDownView.swift in Sources */,
@@ -4563,6 +4625,7 @@
 				0402B8532ACC875900824B3F /* ChainTeritori.swift in Sources */,
 				047843EC2AC991B300462F1C /* injective_peggy_v1_batch.pb.swift in Sources */,
 				047843EA2AC991B300462F1C /* injective_oracle_v1beta1_proposal.pb.swift in Sources */,
+				0438A8012AE135B1006FA213 /* kava_cdp_v1beta1_cdp.pb.swift in Sources */,
 				15BF8483299D472A00B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */,
 				0478436A2AC991B300462F1C /* injective_exchange_v1beta1_genesis.pb.swift in Sources */,
 				0402B8282ACC7B2600824B3F /* ChainOnomy.swift in Sources */,
@@ -4802,10 +4865,12 @@
 				042DE8402AC4C518003F3EA4 /* TxMemoSheet.swift in Sources */,
 				E122DB992A8A468D006D1E7B /* cosmos_bank_v1beta1_genesis.pb.swift in Sources */,
 				E122DBC52A8A468E006D1E7B /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
+				0438A8022AE135B1006FA213 /* kava_cdp_v1beta1_tx.grpc.swift in Sources */,
 				0402B7FD2ACC741700824B3F /* ChainCudos.swift in Sources */,
 				047843D52AC991B300462F1C /* injective_oracle_v1beta1_tx.grpc.swift in Sources */,
 				04FAD9D52AB204FF00143A3E /* FixCardView.swift in Sources */,
 				0400EE9C2AD9B434007BA97F /* NeutronVote.swift in Sources */,
+				0438A7F42AE1316B006FA213 /* KavaMintListVC.swift in Sources */,
 				0402B84F2ACC86B300824B3F /* ChainTerra.swift in Sources */,
 				E11069BA2AA4C57600EB02CA /* cosmwasm_wasm_v1_types.pb.swift in Sources */,
 				E122DC662A8DBD28006D1E7B /* BaseHeader.swift in Sources */,
@@ -4823,6 +4888,7 @@
 				04B789712ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift in Sources */,
 				0400EED52ADBC9E6007BA97F /* KavaClaimIncentives.swift in Sources */,
 				E1945E52223124F000A1436F /* BaseData.swift in Sources */,
+				0438A8182AE15270006FA213 /* KavaMintListMyCell.swift in Sources */,
 				E1D6B8CE2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
 				046E903D268C413A002CFFE1 /* BinanceProto.swift in Sources */,
 				04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */,
@@ -4915,6 +4981,7 @@
 				E1B44B1F2ADA41CD0073C88A /* NeutronSingleVoteCell.swift in Sources */,
 				04FAD9B82AB0125400143A3E /* BaseSheetCell.swift in Sources */,
 				2810084A2696D979002986A6 /* KeyFac.swift in Sources */,
+				0438A8042AE135B1006FA213 /* kava_cdp_v1beta1_tx.pb.swift in Sources */,
 				E122DAFF2A8A468D006D1E7B /* cosmos_reflection_v1_reflection.pb.swift in Sources */,
 				E122DB892A8A468D006D1E7B /* cosmos_gov_v1beta1_query.pb.swift in Sources */,
 				E122DBFD2A8A468E006D1E7B /* cosmos_staking_v1beta1_authz.pb.swift in Sources */,
@@ -5019,6 +5086,7 @@
 				047843812AC991B300462F1C /* injective_auction_v1beta1_query.pb.swift in Sources */,
 				0402B8092ACC758B00824B3F /* ChainGravityBridge.swift in Sources */,
 				E19E8B3D2A92290800001BF5 /* UIColor+Colors.swift in Sources */,
+				0438A7FE2AE135B1006FA213 /* kava_cdp_v1beta1_genesis.pb.swift in Sources */,
 				04B789392ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift in Sources */,
 				E122DB172A8A468D006D1E7B /* cosmos_autocli_v1_query.pb.swift in Sources */,
 				04CB911B2A90C41E00375354 /* EvmClass.swift in Sources */,
@@ -5182,9 +5250,11 @@
 				E15980A92A83ADB60032892B /* MainTabVC.swift in Sources */,
 				0400EEED2ADBE40D007BA97F /* KavaDefiCell.swift in Sources */,
 				047847BF2962988300FD6A7E /* Cw20IcnsByNameReq.swift in Sources */,
+				0438A81E2AE15283006FA213 /* KavaMintListCell.swift in Sources */,
 				047843792AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */,
 				048DBCE2280EC5E90007275E /* MWords.swift in Sources */,
 				047843F02AC9A11D00462F1C /* ChainBand.swift in Sources */,
+				0438A8062AE135B1006FA213 /* kava_cdp_v1beta1_query.grpc.swift in Sources */,
 				18744703293094CB00849EE4 /* BundleExtension.swift in Sources */,
 				E122DB212A8A468D006D1E7B /* cosmos_crypto_ed25519_keys.pb.swift in Sources */,
 				E122DC172A8A468E006D1E7B /* cosmos_orm_v1alpha1_schema.pb.swift in Sources */,
@@ -5197,6 +5267,7 @@
 				047843BF2AC991B300462F1C /* injective_oracle_v1beta1_tx.pb.swift in Sources */,
 				E122DB3F2A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
 				0478438D2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
+				0438A8082AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */,
 				04FAD9D82AB438C900143A3E /* DropDownView.swift in Sources */,
 				0478440C2AC9AA1000462F1C /* CosmosTransfer.swift in Sources */,
 				E122DC502A8A4712006D1E7B /* tendermint_crypto_proof.pb.swift in Sources */,
@@ -5243,6 +5314,7 @@
 				0402B8522ACC875900824B3F /* ChainTeritori.swift in Sources */,
 				047843EB2AC991B300462F1C /* injective_peggy_v1_batch.pb.swift in Sources */,
 				047843E92AC991B300462F1C /* injective_oracle_v1beta1_proposal.pb.swift in Sources */,
+				0438A8002AE135B1006FA213 /* kava_cdp_v1beta1_cdp.pb.swift in Sources */,
 				15BF8482299BC85300B74F85 /* Cw20StargazeNsByAddressReq.swift in Sources */,
 				047843692AC991B300462F1C /* injective_exchange_v1beta1_genesis.pb.swift in Sources */,
 				0402B8272ACC7B2600824B3F /* ChainOnomy.swift in Sources */,

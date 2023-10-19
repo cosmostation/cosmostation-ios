@@ -63,11 +63,11 @@ extension UIView {
         let width = UIScreen.main.bounds.size.width
         let height = UIScreen.main.bounds.size.height
 
-        let imageViewBackground = UIImageView(frame: CGRectMake(0, 0, width, height))
-        imageViewBackground.image = UIImage(named: BASE_BG_IMG[num])
-        imageViewBackground.contentMode = .scaleToFill
+        let bgImg = UIImageView(frame: CGRectMake(0, 0, width, height))
+        bgImg.image = UIImage(named: BASE_BG_IMG[num])
+        bgImg.contentMode = .scaleToFill
 
-        self.addSubview(imageViewBackground)
-        self.sendSubviewToBack(imageViewBackground)
+        self.addSubview(bgImg)
+        self.sendSubviewToBack(bgImg)
     }
 }
