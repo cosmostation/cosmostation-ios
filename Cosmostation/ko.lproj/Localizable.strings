@@ -664,8 +664,9 @@
 
 "current_price_format" = "현재 %@ 가격";
 "liquidation_price_format" = "청산 %@ 가격";
-"debt_value_format" = "나의 %@ 부채 가치";
-"collateral_value_format" = "나의 %@ 담보 가치";
+"debt_value_format" = "나의 현재 부채";
+"ltv_value_format" = "나의 부채 한도";
+"collateral_value_format" = "나의 담보 가치";
 "withdrawable_format" = "출금 가능 %@";
 "before_liquidation_price_format" = "현재 %@ 청산 가격";
 "after_liquidation_price_format" = "예상 %@ 청산 가격";

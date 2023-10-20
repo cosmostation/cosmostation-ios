@@ -669,8 +669,9 @@
 
 "current_price_format" = "現在%@価格";
 "liquidation_price_format" = "清算%@価格";
-"debt_value_format" = "私の%@負債価値";
-"collateral_value_format" = "私の%@担保価値";
+"debt_value_format" = "私の借金";
+"ltv_value_format" = "私のLTV";
+"collateral_value_format" = "私の担保価値";
 "withdrawable_format" = "引き出し式%@";
 "before_liquidation_price_format" = "現在%@清算価格";
 "after_liquidation_price_format" = "予想%@清算価格";

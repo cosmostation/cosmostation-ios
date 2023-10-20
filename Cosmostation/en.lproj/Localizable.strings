@@ -669,8 +669,9 @@
 
 "current_price_format" = "Current %@ Price";
 "liquidation_price_format" = "Liquidation %@ Price";
-"debt_value_format" = "My %@ Debt Value";
-"collateral_value_format" = "My %@ Collateral Value";
+"debt_value_format" = "My Debt";
+"ltv_value_format" = "My LTV";
+"collateral_value_format" = "My Collateral Value";
 "withdrawable_format" = "Withdrawable %@";
 "before_liquidation_price_format" = "Initial Liquidation %@ Price";
 "after_liquidation_price_format" = "Expected Liquidation %@ Price";

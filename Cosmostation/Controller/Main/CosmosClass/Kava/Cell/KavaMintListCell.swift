@@ -15,6 +15,8 @@ class KavaMintListCell: UITableViewCell {
     @IBOutlet weak var marketImg: UIImageView!
     @IBOutlet weak var marketTypeLabel: UILabel!
     @IBOutlet weak var marketPairLabel: UILabel!
+    @IBOutlet weak var minCollateralRate: UILabel!
+    @IBOutlet weak var liquidationPenalty: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,6 +35,7 @@ class KavaMintListCell: UITableViewCell {
         marketImg.af.setImage(withURL: URL(string: url)!)
         marketTypeLabel.text = collateralParam?.type.uppercased()
         marketPairLabel.text = collateralParam?.spotMarketID.uppercased()
-        
+        minCollateralRate.attributedText = WDP.dpAmount(collateralParam!.getDpLiquidationRatio().stringValue, minCollateralRate.font, 2)
+        liquidationPenalty.attributedText = WDP.dpAmount(collateralParam!.getDpLiquidationPenalty().stringValue, liquidationPenalty.font, 2)
     }
 }

@@ -67,6 +67,12 @@ class KavaLendListCell: UITableViewCell {
         let myBorrowValue = myBorrowAmount.multiplying(byPowerOf10: -msAsset.decimals!).multiplying(by: marketIdPrice, withBehavior: handler12Down)
         WDP.dpCoin(msAsset, myBorrowAmount, nil, borrowDenomLabel, borrowAmountLabel, msAsset.decimals!)
         WDP.dpValue(myBorrowValue, nil, borrowValueLabel)
+        
+//        if (myDepositAmount != NSDecimalNumber.zero || myBorrowAmount != NSDecimalNumber.zero) {
+//            rootView.backgroundView.backgroundColor = UIColor.red.withAlphaComponent(0.05)
+//        } else {
+//            rootView.backgroundView.backgroundColor = .clear
+//        }
     }
     
     
