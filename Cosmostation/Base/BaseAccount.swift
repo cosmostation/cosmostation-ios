@@ -93,7 +93,7 @@ public class BaseAccount {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 allCosmosClassChains.forEach { chain in
-                    Task {
+                    Task(priority: .medium) {
                         if (chain.address == nil) {
                             chain.setInfoWithSeed(seed, lastHDPath)
                         }
@@ -107,7 +107,7 @@ public class BaseAccount {
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 allCosmosClassChains.forEach { chain in
-                    Task {
+                    Task(priority: .medium) {
                         if (chain.address == nil) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }

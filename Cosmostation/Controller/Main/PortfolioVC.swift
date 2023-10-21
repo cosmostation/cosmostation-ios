@@ -48,7 +48,7 @@ class PortfolioVC: BaseVC {
         searchBar?.searchTextField.font = .fontSize14Bold
         searchBar?.backgroundImage = UIImage()
         searchBar?.delegate = self
-        tableView.tableHeaderView = searchBar
+//        tableView.tableHeaderView = searchBar
         
         let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         dismissTap.cancelsTouchesInView = false
@@ -78,9 +78,8 @@ class PortfolioVC: BaseVC {
     
     func initView() {
         baseAccount = BaseData.instance.baseAccount
-        baseAccount.fetchDisplayCosmosChains()
-        
         toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
+        onUpdateSearchBar()
         searchCosmosChains = toDisplayCosmosChains
         
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
@@ -149,9 +148,20 @@ class PortfolioVC: BaseVC {
         baseAccount.loadDisplayCTags()
         baseAccount.fetchDisplayCosmosChains()
         toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
+        onUpdateSearchBar()
         searchCosmosChains = toDisplayCosmosChains
         tableView.reloadData()
         onUpdateTotal()
+    }
+    
+    func onUpdateSearchBar() {
+        if (toDisplayCosmosChains.count < 10) {
+            tableView.tableHeaderView = nil
+            tableView.headerView(forSection: 0)?.layoutSubviews()
+        } else {
+            tableView.tableHeaderView = searchBar
+            tableView.headerView(forSection: 0)?.layoutSubviews()
+        }
     }
 
 }

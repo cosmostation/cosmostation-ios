@@ -147,7 +147,8 @@ extension IntroVC {
         wordsList.forEach { word in
             if let words = KeychainWrapper.standard.string(forKey: word.uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
                 let seed = KeyFac.getSeedFromWords(words)
-                let recoverAccount = BaseAccount(word.nickName, .withMnemonic, "0")
+                let nickName = word.nickName.isEmpty ? "Wallet" : word.nickName
+                let recoverAccount = BaseAccount(nickName, .withMnemonic, "0")
                 BaseData.instance.insertAccount(recoverAccount)
 
                 let newData = words + " : " + seed!.toHexString()
@@ -161,7 +162,8 @@ extension IntroVC {
             if let pKey = KeychainWrapper.standard.string(forKey: account.getPrivateKeySha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
                 if (!pkeyList.contains(pKey)) {
                     pkeyList.append(pKey)
-                    let recoverAccount = BaseAccount(account.account_nick_name, .onlyPrivateKey, "0")
+                    let nickName = account.account_nick_name.isEmpty  ? "Wallet" : account.account_nick_name
+                    let recoverAccount = BaseAccount(nickName, .onlyPrivateKey, "0")
                     BaseData.instance.insertAccount(recoverAccount)
                     try? keychain.set(pKey, key: recoverAccount.uuid.sha1())
                 }
