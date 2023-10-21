@@ -149,6 +149,22 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
             availableTitle.text = NSLocalizedString("str_max_withdrawable", comment: "")
             availableLabel.attributedText = WDP.dpAmount(availableAmount.multiplying(byPowerOf10: -decimal).stringValue, availableLabel.font, decimal)
             availableDenom.text = "Share"
+            
+        } else if (sheetType == .TxMintCreateCollateral) {
+            amountTextField.label.text = NSLocalizedString("str_collateral_amount", comment: "")
+            availableTitle.text = NSLocalizedString("str_max_availabe", comment: "")
+            if let msAsset = msAsset {
+                decimal = msAsset.decimals!
+                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
+            }
+            
+        } else if (sheetType == .TxMintCreatePrincipal) {
+            amountTextField.label.text = NSLocalizedString("str_principal_amount", comment: "")
+            availableTitle.text = NSLocalizedString("str_max_availabe", comment: "")
+            if let msAsset = msAsset {
+                decimal = msAsset.decimals!
+                WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
+            }
         }
         
     }
@@ -214,7 +230,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
         if let text = amountTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             .replacingOccurrences(of: ",", with: ".")  {
             let userInput = NSDecimalNumber(string: text).multiplying(byPowerOf10: decimal)
-            sheetDelegate?.onInputedAmount(userInput.stringValue)
+            sheetDelegate?.onInputedAmount(sheetType, userInput.stringValue)
             dismiss(animated: true)
         }
     }
@@ -228,7 +244,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
 
 
 protocol AmountSheetDelegate {
-    func onInputedAmount(_ amount: String)
+    func onInputedAmount(_ type: AmountSheetType?, _ amount: String)
 }
 
 public enum AmountSheetType: Int {
@@ -246,4 +262,7 @@ public enum AmountSheetType: Int {
     case TxHardRepay = 9
     
     case TxSwpWithdraw = 10
+    
+    case TxMintCreateCollateral = 11
+    case TxMintCreatePrincipal = 12
 }

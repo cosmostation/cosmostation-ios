@@ -236,6 +236,8 @@
 "str_withdraw_amount" = "Withdraw Amount";
 "str_borrow_amount" = "Borrow Amount";
 "str_repay_amount" = "Repay Amount";
+"str_collateral_amount" = "Collateral Amount";
+"str_principal_amount" = "Principal Amount";
 "str_token_in" = "Token In";
 "str_token_out" = "Token Out";
 "str_multiplier_name" = "Multiplier Name";
@@ -277,6 +279,7 @@
 "str_deposit_denom" = "Deposit %@";
 "str_withdraw_denom" = "Withdraw %@";
 "str_borrow_denom" = "Borrow %@";
+"str_draw_debt_denom" = "Draw Debt %@";
 "str_repay_denom" = "Repay %@";
 
 

@@ -321,7 +321,7 @@ extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
         onUpdateMemoView(memo)
     }
     
-    func onInputedAmount(_ amount: String) {
+    func onInputedAmount(_ type: AmountSheetType?, _ amount: String) {
         onUpdateAmountView(amount)
     }
     

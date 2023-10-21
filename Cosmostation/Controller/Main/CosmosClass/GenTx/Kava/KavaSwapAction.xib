@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -56,20 +56,20 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swp Action" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsB-WF-U9Q">
-                    <rect key="frame" x="20" y="40" width="88" height="20.333333333333329"/>
+                    <rect key="frame" x="20" y="68" width="88" height="20.5"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                     <color key="textColor" name="_color01"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VxT-Ph-kHc" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="80.333333333333314" width="398" height="150"/>
+                    <rect key="frame" x="8" y="108.5" width="398" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Deposit Assets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l71-S1-2GA">
-                            <rect key="frame" x="12" y="14" width="99.333333333333329" height="14"/>
+                            <rect key="frame" x="12" y="14" width="99.5" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="ms9-p3-Yll"/>
                             </constraints>
@@ -85,75 +85,75 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1g-Al-vJA">
-                            <rect key="frame" x="64" y="45.333333333333343" width="34.666666666666657" height="17.666666666666671"/>
+                            <rect key="frame" x="64" y="45" width="35" height="18"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjX-ZH-iNl">
-                            <rect key="frame" x="301" y="38" width="33.333333333333314" height="20.333333333333329"/>
+                            <rect key="frame" x="301" y="38" width="33.5" height="20.5"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUe-UX-tbp">
-                            <rect key="frame" x="336.33333333333331" y="39.333333333333343" width="49.666666666666686" height="17.666666666666671"/>
+                            <rect key="frame" x="336.5" y="39.5" width="49.5" height="18"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ygz-bJ-DOC">
-                            <rect key="frame" x="370.33333333333331" y="62.666666666666664" width="6.3333333333333144" height="12.666666666666664"/>
+                            <rect key="frame" x="370" y="63" width="6.5" height="13"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWk-tj-6Wp">
-                            <rect key="frame" x="378.66666666666669" y="60.333333333333336" width="7.3333333333333144" height="15.333333333333336"/>
+                            <rect key="frame" x="378.5" y="60.5" width="7.5" height="15.5"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8a-Q0-03p">
-                            <rect key="frame" x="12" y="88.000000000000014" width="374" height="0.6666666666666714"/>
+                            <rect key="frame" x="12" y="88" width="374" height="0.5"/>
                             <color key="backgroundColor" name="_color05"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="3yh-H9-NLp"/>
                             </constraints>
                         </view>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="BcG-pF-ooP">
-                            <rect key="frame" x="20" y="104.66666666666667" width="28" height="28.000000000000014"/>
+                            <rect key="frame" x="20" y="104.5" width="28" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="28" id="ghS-6C-B67"/>
                                 <constraint firstAttribute="height" constant="28" id="kUM-Qg-Ilf"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u77-Dp-P7l">
-                            <rect key="frame" x="64" y="109.66666666666667" width="34.666666666666657" height="17.666666666666671"/>
+                            <rect key="frame" x="64" y="109.5" width="35" height="18"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdH-6s-gUI">
-                            <rect key="frame" x="301" y="102.66666666666667" width="33.333333333333314" height="20.333333333333329"/>
+                            <rect key="frame" x="301" y="102.5" width="33.5" height="20.5"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i2d-gr-UNF">
-                            <rect key="frame" x="336.33333333333331" y="104.00000000000001" width="49.666666666666686" height="17.666666666666671"/>
+                            <rect key="frame" x="336.5" y="104" width="49.5" height="18"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdQ-tT-KaC">
-                            <rect key="frame" x="370.33333333333331" y="127.33333333333333" width="6.3333333333333144" height="12.666666666666671"/>
+                            <rect key="frame" x="370" y="127.50000000000001" width="6.5" height="12.999999999999986"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQb-9X-9bD">
-                            <rect key="frame" x="378.66666666666669" y="125.00000000000001" width="7.3333333333333144" height="15.333333333333329"/>
+                            <rect key="frame" x="378.5" y="125" width="7.5" height="15.5"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
@@ -194,10 +194,10 @@
                     </constraints>
                 </view>
                 <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fcQ-64-JnJ">
-                    <rect key="frame" x="244" y="246.33333333333337" width="162" height="28"/>
+                    <rect key="frame" x="244.5" y="274.5" width="161.5" height="28"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czI-mw-yae">
-                            <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="28"/>
+                            <rect key="frame" x="0.0" y="0.0" width="48.5" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="28" id="ssi-uS-Mwd"/>
                             </constraints>
@@ -211,7 +211,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="511-pV-PJ1">
-                            <rect key="frame" x="56.666666666666686" y="0.0" width="48.666666666666657" height="28"/>
+                            <rect key="frame" x="56.5" y="0.0" width="48.5" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="28" id="ctL-av-nBC"/>
                             </constraints>
@@ -225,7 +225,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2l-Zp-2ap">
-                            <rect key="frame" x="113.33333333333333" y="0.0" width="48.666666666666671" height="28"/>
+                            <rect key="frame" x="113" y="0.0" width="48.5" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="28" id="5iB-I0-lJd"/>
                             </constraints>
@@ -246,10 +246,10 @@
                     </constraints>
                 </stackView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waR-nc-btW" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="80.333333333333329" width="398" height="42"/>
+                    <rect key="frame" x="8" y="108.5" width="398" height="42"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Withdraw Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrH-Q0-Njl">
-                            <rect key="frame" x="11.999999999999993" y="14" width="107.33333333333331" height="14"/>
+                            <rect key="frame" x="12" y="14" width="107.5" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="hx3-2X-e6p"/>
                             </constraints>
@@ -258,13 +258,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMs-Dn-omq">
-                            <rect key="frame" x="352.66666666666669" y="10.999999999999998" width="33.333333333333314" height="20.333333333333329"/>
+                            <rect key="frame" x="352.5" y="11" width="33.5" height="20.5"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add Amount" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ne5-V2-wDF">
-                            <rect key="frame" x="277.33333333333331" y="13.333333333333343" width="108.66666666666669" height="15.333333333333336"/>
+                            <rect key="frame" x="277" y="13.5" width="109" height="15.5"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
@@ -283,7 +283,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zy6-ic-Ort" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="400.66666666666669" width="398" height="67.333333333333314"/>
+                    <rect key="frame" x="8" y="560.5" width="398" height="67.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dx1-RY-mLb">
                             <rect key="frame" x="12" y="14" width="96" height="14"/>
@@ -295,13 +295,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GjY-Ef-d1c">
-                            <rect key="frame" x="12" y="36" width="374" height="15.333333333333336"/>
+                            <rect key="frame" x="12" y="36" width="374" height="15.5"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add memo" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FwN-HL-H4N">
-                            <rect key="frame" x="12" y="36" width="99.666666666666671" height="15.333333333333336"/>
+                            <rect key="frame" x="12" y="36" width="100" height="15.5"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
@@ -320,7 +320,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQ7-A1-usX" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="478" width="398" height="150"/>
+                    <rect key="frame" x="8" y="638" width="398" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7S-SP-46d">
                             <rect key="frame" x="12" y="14" width="36" height="14"/>
@@ -332,14 +332,14 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhb-Rg-kYl">
-                            <rect key="frame" x="12" y="40" width="374" height="0.6666666666666643"/>
+                            <rect key="frame" x="12" y="40" width="374" height="0.5"/>
                             <color key="backgroundColor" name="_color05"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="6sX-wn-Xcn"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PGJ-cE-hCa" customClass="DropDownView" customModule="Cosmostation" customModuleProvider="target">
-                            <rect key="frame" x="12" y="52.666666666666629" width="164.33333333333334" height="32"/>
+                            <rect key="frame" x="12" y="52.5" width="164.5" height="32"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="QRp-q7-h0e">
                                     <rect key="frame" x="8" y="5" width="22" height="22"/>
@@ -349,7 +349,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xH-wd-Pdu">
-                                    <rect key="frame" x="34" y="9" width="29.666666666666671" height="14"/>
+                                    <rect key="frame" x="34" y="9" width="30" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="14" id="wzY-pf-XZC"/>
                                     </constraints>
@@ -358,7 +358,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowDown" translatesAutoresizingMaskIntoConstraints="NO" id="olU-Pz-QAF">
-                                    <rect key="frame" x="138.33333333333334" y="7" width="18" height="18"/>
+                                    <rect key="frame" x="138.5" y="7" width="18" height="18"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="18" id="dhf-kP-2wq"/>
                                         <constraint firstAttribute="width" constant="18" id="qzl-jY-eNN"/>
@@ -378,7 +378,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBG-b2-eFB">
-                            <rect key="frame" x="323.66666666666669" y="54.666666666666629" width="25" height="16"/>
+                            <rect key="frame" x="323.5" y="54.5" width="25" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="j9t-Qh-Xkb"/>
                             </constraints>
@@ -387,7 +387,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqX-iD-1eC">
-                            <rect key="frame" x="350.66666666666669" y="54.666666666666629" width="35.333333333333314" height="16"/>
+                            <rect key="frame" x="350.5" y="54.5" width="35.5" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="s4B-0d-7ry"/>
                             </constraints>
@@ -396,7 +396,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwe-CA-dNX">
-                            <rect key="frame" x="370.33333333333331" y="73.666666666666629" width="6.3333333333333144" height="14"/>
+                            <rect key="frame" x="370" y="73.5" width="6.5" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="n9J-HB-eNj"/>
                             </constraints>
@@ -405,7 +405,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nx6-Bv-y8N">
-                            <rect key="frame" x="378.66666666666669" y="72.666666666666629" width="7.3333333333333144" height="14"/>
+                            <rect key="frame" x="378.5" y="72.5" width="7.5" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="57o-tR-OgL"/>
                             </constraints>
@@ -414,7 +414,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sXy-H2-ZJx">
-                            <rect key="frame" x="12" y="98.666666666666629" width="374" height="32"/>
+                            <rect key="frame" x="12" y="98.5" width="374" height="32"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <segments>
                                 <segment title="Tiny"/>
@@ -452,7 +452,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OI4-G0-LkX" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="644" width="398" height="54"/>
+                    <rect key="frame" x="8" y="804" width="398" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="UgI-sB-yWk"/>
@@ -467,7 +467,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r1F-jn-uRi" customClass="LottieAnimationView" customModule="Lottie">
-                    <rect key="frame" x="117" y="323" width="180" height="110"/>
+                    <rect key="frame" x="117" y="400" width="180" height="110"/>
                     <viewLayoutGuide key="safeArea" id="yc1-kN-fkK"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>

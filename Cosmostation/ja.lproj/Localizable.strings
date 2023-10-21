@@ -236,6 +236,8 @@
 "str_withdraw_amount" = "出金金額";
 "str_borrow_amount" = "貸出金額";
 "str_repay_amount" = "返済額";
+"str_collateral_amount" = "担保数量";
+"str_principal_amount" = "ローン数量";
 "str_token_in" = "Token イン";
 "str_token_out" = "Token アウト";
 "str_multiplier_name" = "受信方法";
@@ -277,6 +279,7 @@
 "str_deposit_denom" = "%@ イェチ";
 "str_withdraw_denom" = "%@ 出金";
 "str_borrow_denom" = "%@ ローン";
+"str_draw_debt_denom" = "%@ ローン";
 "str_repay_denom" = "%@ 返済";
 
 

@@ -68,4 +68,16 @@ class BaseSheetCell: UITableViewCell {
         }
     }
     
+    func onBindMint(_ position: Int, _ type: String) {
+        if (position == 0) {
+            titleLabel.text = String(format: NSLocalizedString("str_deposit_denom", comment: ""), type)
+        } else if (position == 1) {
+            titleLabel.text = String(format: NSLocalizedString("str_withdraw_denom", comment: ""), type)
+        } else if (position == 2) {
+            titleLabel.text = String(format: NSLocalizedString("str_draw_debt_denom", comment: ""), type)
+        } else if (position == 3) {
+            titleLabel.text = String(format: NSLocalizedString("str_repay_denom", comment: ""), type)
+        }
+    }
+    
 }

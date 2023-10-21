@@ -58,7 +58,6 @@ class KavaMintListVC: BaseVC {
             let channel = getConnection()
             if let cdpParam = try? await fetchMintParam(channel),
                let myCdps = try? await fetchMyCdps(channel, selectedChain.address!) {
-//               let myCdps = try? await fetchMyCdps(channel, "kava18utzytkj0unzevcm4jzxncu95prc8x5wqcnt9n") {
                 
                 cdpParam?.collateralParams.forEach({ collateralParam in
                     if (myCdps?.filter({ $0.type == collateralParam.type }).count ?? 0 > 0) {
@@ -81,9 +80,42 @@ class KavaMintListVC: BaseVC {
         }
     }
 
+    
+    func onCreateCdpTx(_ type: String) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let mintCreate = KavaMintCreateAction(nibName: "KavaMintCreateAction", bundle: nil)
+        mintCreate.selectedChain = selectedChain
+        mintCreate.collateralParam = cdpParam!.collateralParams.filter({ $0.type == type }).first!
+        mintCreate.priceFeed = priceFeed
+        mintCreate.modalTransitionStyle = .coverVertical
+        self.present(mintCreate, animated: true)
+    }
+    
+    func onDepositCdpTx(_ type: String) {
+        print("onDepositCdpTx ", type)
+        
+    }
+    
+    func onWithdrawCdpTx(_ type: String) {
+        print("onWithdrawCdpTx ", type)
+        
+    }
+    
+    func onDrawDebtCdpTx(_ type: String) {
+        print("onDrawDebtCdpTx ", type)
+        
+    }
+    
+    func onRepayCdpTx(_ type: String) {
+        print("onRepayCdpTx ", type)
+        
+    }
 }
 
-extension KavaMintListVC: UITableViewDelegate, UITableViewDataSource {
+extension KavaMintListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -110,6 +142,35 @@ extension KavaMintListVC: UITableViewDelegate, UITableViewDataSource {
             let collateralParam = otherCollateralParamList[indexPath.row]
             cell?.onBindCdp(collateralParam)
             return cell!
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.section == 0) {
+            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+            baseSheet.cdpType = myCollateralParamList[indexPath.row].type
+            baseSheet.sheetDelegate = self
+            baseSheet.sheetType = .SelectMintAction
+            onStartSheet(baseSheet)
+            
+        } else {
+            onCreateCdpTx(otherCollateralParamList[indexPath.row].type)
+        }
+    }
+    
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+        if (sheetType == .SelectMintAction) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                if (result.position == 0) {
+                    self.onDepositCdpTx(result.param!)
+                } else if (result.position == 1) {
+                    self.onWithdrawCdpTx(result.param!)
+                } else if (result.position == 2) {
+                    self.onDrawDebtCdpTx(result.param!)
+                } else if (result.position == 3) {
+                    self.onRepayCdpTx(result.param!)
+                }
+            });
         }
     }
     
@@ -163,6 +224,16 @@ extension Kava_Cdp_V1beta1_CollateralParam {
     public func getDpLiquidationPenalty() -> NSDecimalNumber {
         return getLiquidationPenaltyAmount().multiplying(byPowerOf10: 2, withBehavior: handler2)
     }
+    
+    public func getExpectCollateralUsdxValue(_ collateralAmount: NSDecimalNumber, _ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse) -> NSDecimalNumber {
+        let collateralPrice = priceFeed.getKavaOraclePrice(liquidationMarketID)
+        let collateralValue = collateralAmount.multiplying(by: collateralPrice).multiplying(byPowerOf10: -Int16(conversionFactor)!, withBehavior: handler6)
+        return collateralValue.multiplying(byPowerOf10: 6, withBehavior: handler0)
+    }
+    
+    public func getExpectUsdxLTV(_ collateralAmount: NSDecimalNumber, _ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse) -> NSDecimalNumber {
+        return getExpectCollateralUsdxValue(collateralAmount, priceFeed).dividing(by: getLiquidationRatioAmount(), withBehavior: handler0)
+    }
 }
 
 extension Kava_Cdp_V1beta1_CDPResponse {
@@ -171,17 +242,17 @@ extension Kava_Cdp_V1beta1_CDPResponse {
         return collateral.getAmount()
     }
     
-    public func getCollateralUsdxValue() -> NSDecimalNumber {
+    public func getCollateralUsdxAmount() -> NSDecimalNumber {
         return collateralValue.getAmount().multiplying(byPowerOf10: -6, withBehavior: handler6)
     }
     
 //    public func getCollateralValue(_ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse) -> NSDecimalNumber {
 //        let principalPrice = priceFeed.getKavaOraclePrice("usdx:usd")
-//        return getCollateralUsdxValue().multiplying(by: principalPrice).multiplying(byPowerOf10: -6, withBehavior: handler6)
+//        return getCollateralUsdxAmount().multiplying(by: principalPrice).multiplying(byPowerOf10: -6, withBehavior: handler6)
 //    }
     
     public func getUsdxLTV(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam) -> NSDecimalNumber {
-        return getCollateralUsdxValue().dividing(by: collateralParam.getLiquidationRatioAmount())
+        return getCollateralUsdxAmount().dividing(by: collateralParam.getLiquidationRatioAmount())
     }
     
     public func getPrincipalAmount() -> NSDecimalNumber {

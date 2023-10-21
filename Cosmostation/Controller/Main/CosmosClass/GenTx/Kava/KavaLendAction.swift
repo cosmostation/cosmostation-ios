@@ -415,7 +415,7 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
         }
     }
     
-    func onInputedAmount(_ amount: String) {
+    func onInputedAmount(_ type: AmountSheetType?, _ amount: String) {
         onUpdateAmountView(amount)
     }
     

@@ -236,6 +236,8 @@
 "str_withdraw_amount" = "출금 금액";
 "str_borrow_amount" = "대출 금액";
 "str_repay_amount" = "상환 금액";
+"str_collateral_amount" = "담보 수량";
+"str_principal_amount" = "대출 수량";
 "str_token_in" = "Token In";
 "str_token_out" = "Token Out";
 "str_multiplier_name" = "수신 방식";
@@ -277,6 +279,7 @@
 "str_deposit_denom" = "%@ 예치";
 "str_withdraw_denom" = "%@ 출금";
 "str_borrow_denom" = "%@ 대출";
+"str_draw_debt_denom" = "%@ 대출";
 "str_repay_denom" = "%@ 상환";
 
 

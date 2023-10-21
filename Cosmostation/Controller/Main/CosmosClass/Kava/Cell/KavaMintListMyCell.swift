@@ -57,7 +57,7 @@ class KavaMintListMyCell: UITableViewCell {
         currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), collateralParam!.denom.uppercased())
         liquidatePriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), collateralParam!.denom.uppercased())
         
-        let collateralValue = myCdp!.getCollateralUsdxValue()
+        let collateralValue = myCdp!.getCollateralUsdxAmount()
         let ltv = myCdp!.getUsdxLTV(collateralParam!)
         let borrowedValue = myCdp!.getDebtUsdxValue()
         WDP.dpValue(collateralValue, nil, collateralValueLabel)

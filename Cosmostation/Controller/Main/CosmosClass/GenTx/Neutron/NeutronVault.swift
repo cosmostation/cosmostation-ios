@@ -276,7 +276,7 @@ extension NeutronVault: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, Pi
         onUpdateMemoView(memo)
     }
     
-    func onInputedAmount(_ amount: String) {
+    func onInputedAmount(_ type: AmountSheetType?, _ amount: String) {
         onUpdateAmountView(amount)
     }
     
