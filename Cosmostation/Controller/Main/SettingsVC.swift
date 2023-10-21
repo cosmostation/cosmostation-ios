@@ -68,7 +68,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-            return 3
+            return 4
         } else if (section == 1) {
             return 6
         } else if (section == 2) {
@@ -90,10 +90,14 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 return baseCell
                 
             } else if (indexPath.row == 1) {
-                baseCell.onBindSetChain()
+                baseCell.onBindImportQR()
                 return baseCell
                 
             } else if (indexPath.row == 2) {
+                baseCell.onBindSetChain()
+                return baseCell
+                
+            } else if (indexPath.row == 3) {
                 baseCell.onBindSetAddressBook()
                 return baseCell
             }
@@ -192,12 +196,16 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(accountListVC, animated: true)
                 
             } else if (indexPath.row == 1) {
+                //QR
+                
+            } else if (indexPath.row == 2) {
                 let chainListVC = ChainListVC(nibName: "ChainListVC", bundle: nil)
                 chainListVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(chainListVC, animated: true)
                 
-            } else if (indexPath.row == 2) {
+            } else if (indexPath.row == 3) {
+                //REF
                 
             }
             

@@ -13,7 +13,7 @@ class ChainCryptoorg: CosmosClass  {
     override init() {
         super.init()
         
-        name = "Crypto.org"
+        name = "Cronos POS"
         tag = "crypto-org394"
         logo1 = "chainCryptoorg"
         logo2 = "chainCryptoorg2"

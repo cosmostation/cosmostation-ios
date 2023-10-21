@@ -422,6 +422,7 @@
 "setting_section_support" = "지원";
 "setting_section_about" = "앱 정보";
 "setting_account_title" = "계정 관리";
+"setting_qr_import_account" = "QR로 계정 추가";
 "setting_chain_title" = "체인 관리";
 "setting_addressbook_title" = "주소록 관리";
 "setting_language_title" = "언어";

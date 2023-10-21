@@ -422,6 +422,7 @@
 "setting_section_support" = "Support";
 "setting_section_about" = "About";
 "setting_account_title" = "Account";
+"setting_qr_import_account" = "Import account with QR scan";
 "setting_chain_title" = "Chain";
 "setting_addressbook_title" = "Address Book";
 "setting_language_title" = "Language";
