@@ -1510,6 +1510,8 @@
 		E12E9D2B2AE2B4A700336449 /* KavaMintAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E9D282AE2B4A700336449 /* KavaMintAction.swift */; };
 		E12E9D2C2AE2B4A700336449 /* KavaMintAction.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D292AE2B4A700336449 /* KavaMintAction.xib */; };
 		E12E9D2D2AE2B4A700336449 /* KavaMintAction.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D292AE2B4A700336449 /* KavaMintAction.xib */; };
+		E12E9D2F2AE415D900336449 /* loadingSmall.json in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D2E2AE415D900336449 /* loadingSmall.json */; };
+		E12E9D302AE415D900336449 /* loadingSmall.json in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D2E2AE415D900336449 /* loadingSmall.json */; };
 		E131A3C32AACBE8A00943013 /* BeaconHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131A3C22AACBE8A00943013 /* BeaconHistory.swift */; };
 		E131A3C42AACBE8A00943013 /* BeaconHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131A3C22AACBE8A00943013 /* BeaconHistory.swift */; };
 		E131A3C62AACD0E000943013 /* OktHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131A3C52AACD0E000943013 /* OktHistory.swift */; };
@@ -2385,6 +2387,7 @@
 		E12E9D232AE2B49900336449 /* KavaMintCreateAction.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaMintCreateAction.xib; sourceTree = "<group>"; };
 		E12E9D282AE2B4A700336449 /* KavaMintAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaMintAction.swift; sourceTree = "<group>"; };
 		E12E9D292AE2B4A700336449 /* KavaMintAction.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaMintAction.xib; sourceTree = "<group>"; };
+		E12E9D2E2AE415D900336449 /* loadingSmall.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingSmall.json; sourceTree = "<group>"; };
 		E131A3C22AACBE8A00943013 /* BeaconHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconHistory.swift; sourceTree = "<group>"; };
 		E131A3C52AACD0E000943013 /* OktHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktHistory.swift; sourceTree = "<group>"; };
 		E136D8A223039493001BEBB8 /* Cosmostation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cosmostation.entitlements; sourceTree = "<group>"; };
@@ -3008,6 +3011,7 @@
 				E1BBF7462ABEBE3000D3082F /* BgImg */,
 				1809C35029D16C80008884C1 /* injectScript.js */,
 				E1D538282A96644F00FB0403 /* loading.json */,
+				E12E9D2E2AE415D900336449 /* loadingSmall.json */,
 				0443B89728589B570027A6B9 /* Color.xcassets */,
 				0443B8A1285C7F050027A6B9 /* Chain.xcassets */,
 				E16D9B182248C4880019B7BB /* Assets.xcassets */,
@@ -3908,6 +3912,7 @@
 				04A68C262ABDA3350041FA13 /* SelectSwapAssetCell.xib in Resources */,
 				04BA9BD82A985771003E2404 /* ChainSelectVC.xib in Resources */,
 				04FA74552A9D97A0001A2830 /* Pincode.storyboard in Resources */,
+				E12E9D302AE415D900336449 /* loadingSmall.json in Resources */,
 				04B789A22ACAEB5F00E9BE88 /* TxAddressSheet.xib in Resources */,
 				04FAD9DF2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				E15F2CF92ABF0DCE00BAE105 /* basebg05.png in Resources */,
@@ -4063,6 +4068,7 @@
 				047842E62AC8B2D600462F1C /* CosmosRedelegate.xib in Resources */,
 				0409D2F72AC5DC6D0021E192 /* CosmosDelegate.xib in Resources */,
 				04B789E72ACB140900E9BE88 /* SelectNameServiceCell.xib in Resources */,
+				E12E9D2F2AE415D900336449 /* loadingSmall.json in Resources */,
 				E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
 				04CD24842AD312BD00497EF5 /* TxAmountBepSheet.xib in Resources */,
 				04B789F32ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,

@@ -15,6 +15,7 @@ class ChainSelectVC: BaseVC {
     @IBOutlet weak var searchEmptyLayer: UIView!
     @IBOutlet weak var selectBtn: SecButton!
     @IBOutlet weak var confirmBtn: BaseButton!
+    @IBOutlet weak var loadingView: LottieAnimationView!
     
     var searchBar: UISearchBar?
     
@@ -25,6 +26,13 @@ class ChainSelectVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadingView.isHidden = false
+        loadingView.animation = LottieAnimation.named("loadingSmall")
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.loopMode = .loop
+        loadingView.animationSpeed = 1.3
+        loadingView.play()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -70,6 +78,8 @@ class ChainSelectVC: BaseVC {
         if (allCosmosChains.filter { $0.fetched == false }.count == 0) {
             DispatchQueue.main.async {
                 self.selectBtn.isEnabled = true
+                self.loadingView.stop()
+                self.loadingView.isHidden = true
             }
         }
     }
@@ -96,6 +106,8 @@ class ChainSelectVC: BaseVC {
         if (allCosmosChains.filter { $0.fetched == false }.count == 0) {
             DispatchQueue.main.async {
                 self.selectBtn.isEnabled = true
+                self.loadingView.stop()
+                self.loadingView.isHidden = true
             }
         }
     }
@@ -107,7 +119,7 @@ class ChainSelectVC: BaseVC {
         toDisplayCosmosTags.removeAll()
         toDisplayCosmosTags.append("cosmos118")
         allCosmosChains.forEach { chian in
-            if (chian.allCoinUSDValue != NSDecimalNumber.zero && chian.tag != "cosmos118") {
+            if (chian.allCoinUSDValue.compare(NSDecimalNumber(string: "10")).rawValue > 0 && chian.tag != "cosmos118") {
                 toDisplayCosmosTags.append(chian.tag)
             }
         }
