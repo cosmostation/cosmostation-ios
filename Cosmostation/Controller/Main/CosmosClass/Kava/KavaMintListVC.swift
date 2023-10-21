@@ -95,23 +95,63 @@ class KavaMintListVC: BaseVC {
     }
     
     func onDepositCdpTx(_ type: String) {
-        print("onDepositCdpTx ", type)
-        
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let mintAction = KavaMintAction(nibName: "KavaMintAction", bundle: nil)
+        mintAction.selectedChain = selectedChain
+        mintAction.mintActionType = .Deposit
+        mintAction.collateralParam = cdpParam!.collateralParams.filter({ $0.type == type }).first!
+        mintAction.myCdp = myCdp?.filter({ $0.type == type }).first!
+        mintAction.priceFeed = priceFeed
+        mintAction.modalTransitionStyle = .coverVertical
+        self.present(mintAction, animated: true)
     }
     
     func onWithdrawCdpTx(_ type: String) {
-        print("onWithdrawCdpTx ", type)
-        
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let mintAction = KavaMintAction(nibName: "KavaMintAction", bundle: nil)
+        mintAction.selectedChain = selectedChain
+        mintAction.mintActionType = .Withdraw
+        mintAction.collateralParam = cdpParam!.collateralParams.filter({ $0.type == type }).first!
+        mintAction.myCdp = myCdp?.filter({ $0.type == type }).first!
+        mintAction.priceFeed = priceFeed
+        mintAction.modalTransitionStyle = .coverVertical
+        self.present(mintAction, animated: true)
     }
     
     func onDrawDebtCdpTx(_ type: String) {
-        print("onDrawDebtCdpTx ", type)
-        
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let mintAction = KavaMintAction(nibName: "KavaMintAction", bundle: nil)
+        mintAction.selectedChain = selectedChain
+        mintAction.mintActionType = .DrawDebt
+        mintAction.collateralParam = cdpParam!.collateralParams.filter({ $0.type == type }).first!
+        mintAction.myCdp = myCdp?.filter({ $0.type == type }).first!
+        mintAction.priceFeed = priceFeed
+        mintAction.modalTransitionStyle = .coverVertical
+        self.present(mintAction, animated: true)
     }
     
     func onRepayCdpTx(_ type: String) {
-        print("onRepayCdpTx ", type)
-        
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let mintAction = KavaMintAction(nibName: "KavaMintAction", bundle: nil)
+        mintAction.selectedChain = selectedChain
+        mintAction.mintActionType = .Repay
+        mintAction.collateralParam = cdpParam!.collateralParams.filter({ $0.type == type }).first!
+        mintAction.myCdp = myCdp?.filter({ $0.type == type }).first!
+        mintAction.priceFeed = priceFeed
+        mintAction.modalTransitionStyle = .coverVertical
+        self.present(mintAction, animated: true)
     }
 }
 

@@ -70,13 +70,13 @@ class BaseSheetCell: UITableViewCell {
     
     func onBindMint(_ position: Int, _ type: String) {
         if (position == 0) {
-            titleLabel.text = String(format: NSLocalizedString("str_deposit_denom", comment: ""), type)
+            titleLabel.text = String(format: NSLocalizedString("str_deposit_denom", comment: ""), type.components(separatedBy: "-").first?.uppercased() ?? "")
         } else if (position == 1) {
-            titleLabel.text = String(format: NSLocalizedString("str_withdraw_denom", comment: ""), type)
+            titleLabel.text = String(format: NSLocalizedString("str_withdraw_denom", comment: ""), type.components(separatedBy: "-").first?.uppercased() ?? "")
         } else if (position == 2) {
-            titleLabel.text = String(format: NSLocalizedString("str_draw_debt_denom", comment: ""), type)
+            titleLabel.text = String(format: NSLocalizedString("str_draw_debt_denom", comment: ""), "USDX")
         } else if (position == 3) {
-            titleLabel.text = String(format: NSLocalizedString("str_repay_denom", comment: ""), type)
+            titleLabel.text = String(format: NSLocalizedString("str_repay_denom", comment: ""), "USDX")
         }
     }
     

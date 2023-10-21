@@ -111,7 +111,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
             
         }
         
-        else if (sheetType == .TxHardDeposit) {
+        else if (sheetType == .TxHardDeposit || sheetType == .TxMintDeposit) {
             amountTextField.label.text = NSLocalizedString("str_deposit_amount", comment: "")
             availableTitle.text = NSLocalizedString("str_max_depositable", comment: "")
             if let msAsset = msAsset {
@@ -119,7 +119,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
                 WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             }
             
-        } else if (sheetType == .TxHardWithdraw) {
+        } else if (sheetType == .TxHardWithdraw || sheetType == .TxMintWithdraw) {
             amountTextField.label.text = NSLocalizedString("str_withdraw_amount", comment: "")
             availableTitle.text = NSLocalizedString("str_max_withdrawable", comment: "")
             if let msAsset = msAsset {
@@ -127,7 +127,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
                 WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             }
             
-        } else if (sheetType == .TxHardBorrow) {
+        } else if (sheetType == .TxHardBorrow || sheetType == .TxMintDrawDebt) {
             amountTextField.label.text = NSLocalizedString("str_borrow_amount", comment: "")
             availableTitle.text = NSLocalizedString("str_max_borrowable", comment: "")
             if let msAsset = msAsset {
@@ -135,7 +135,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
                 WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             }
             
-        } else if (sheetType == .TxHardRepay) {
+        } else if (sheetType == .TxHardRepay || sheetType == .TxMintRepay) {
             amountTextField.label.text = NSLocalizedString("str_repay_amount", comment: "")
             availableTitle.text = NSLocalizedString("str_max_repayable", comment: "")
             if let msAsset = msAsset {
@@ -265,4 +265,8 @@ public enum AmountSheetType: Int {
     
     case TxMintCreateCollateral = 11
     case TxMintCreatePrincipal = 12
+    case TxMintDeposit = 13
+    case TxMintWithdraw = 14
+    case TxMintDrawDebt = 15
+    case TxMintRepay = 16
 }

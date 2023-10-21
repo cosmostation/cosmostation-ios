@@ -813,10 +813,10 @@
 "title_cdp_detail" = "CDP Status";
 "title_harvest_detail" = "Hard Lend Status";
 "title_create_cdp" = "Open CDP";
-"title_deposit_cdp" = "DEPOSIT COLLATERAL";
-"title_withdraw_cdp" = "WITHDRAW COLLATERAL";
-"title_drawdebt_cdp" = "BORROW MORE USDX";
-"title_repay_cdp" = "REPAY USDX";
+"title_deposit_cdp" = "Deposit Collateral";
+"title_withdraw_cdp" = "Withdraw Collateral";
+"title_drawdebt_cdp" = "Borrow More USDX";
+"title_repay_cdp" = "Repay USDX";
 "title_deposit_harvest" = "Deposit Harvest";
 "title_withdraw_harvest" = "Withdraw Harvest";
 "title_reward_harvest" = "Claim Hard Incentive";

@@ -155,7 +155,7 @@ class KavaLendAction: BaseVC {
         if (toAmount != NSDecimalNumber.zero) {
             amountSheet.existedAmount = toAmount
         }
-        amountSheet.sheetDelegate = self
+        
         if (hardActionType == .Deposit) {
             amountSheet.sheetType = .TxHardDeposit
         } else if (hardActionType == .Withdraw) {
@@ -165,6 +165,7 @@ class KavaLendAction: BaseVC {
         } else if (hardActionType == .Repay) {
             amountSheet.sheetType = .TxHardRepay
         }
+        amountSheet.sheetDelegate = self
         self.onStartSheet(amountSheet)
     }
     
