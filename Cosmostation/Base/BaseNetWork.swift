@@ -151,6 +151,14 @@ class BaseNetWork {
     static func SkipAssets() -> String {
         return SKIP_API_URL + "v1/fungible/assets"
     }
+    
+    static func SkipRoutes() -> String {
+        return SKIP_API_URL + "v1/fungible/route"
+    }
+    
+    static func SkipMsg() -> String {
+        return SKIP_API_URL + "v1/fungible/msgs"
+    }
 }
 
 

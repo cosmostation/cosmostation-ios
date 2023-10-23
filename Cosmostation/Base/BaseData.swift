@@ -28,6 +28,9 @@ final class BaseData: NSObject{
     var mintscanPrices: [MintscanPrice]?
     var mintscanAssets: [MintscanAsset]?
     
+    var skipChains: JSON?
+    var skipAssets: JSON?
+    
     
     public override init() {
         super.init();
@@ -141,13 +144,7 @@ final class BaseData: NSObject{
 
     
     
-    func setFCMToken(_ token : String) {
-        UserDefaults.standard.set(token, forKey: KEY_FCM_TOKEN)
-    }
-    
-    func getFCMToken() -> String {
-        return UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) ?? ""
-    }
+
     
 //    func setKavaWarn() {
 //        let remindTime = Calendar.current.date(byAdding: .day, value: 3, to: Date())?.millisecondsSince1970
@@ -419,6 +416,14 @@ extension BaseData {
 
 
 extension BaseData {
+    func setFCMToken(_ token : String) {
+        UserDefaults.standard.set(token, forKey: KEY_FCM_TOKEN)
+    }
+    
+    func getFCMToken() -> String {
+        return UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) ?? ""
+    }
+    
     func setDBVersion(_ version: Int) {
         UserDefaults.standard.set(version, forKey: KEY_DB_VERSION)
     }
