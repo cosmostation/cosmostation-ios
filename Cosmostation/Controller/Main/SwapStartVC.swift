@@ -71,17 +71,14 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     var skipChains = Array<CosmosClass>()       //inapp support chain for skip
     var skipAssets: JSON?
     
-    
     var inputCosmosChain: CosmosClass!
     var inputAssetList = Array<JSON>()
     var inputAssetSelected: JSON!
-    var inputBalances = Array<Cosmos_Base_V1beta1_Coin>()
     var inputMsAsset: MintscanAsset!
     
     var outputCosmosChain: CosmosClass!
     var outputAssetList = Array<JSON>()
     var outputAssetSelected: JSON!
-    var outputBalances = Array<Cosmos_Base_V1beta1_Coin>()
     var outputMsAsset: MintscanAsset!
     
     var availableAmount = NSDecimalNumber.zero
@@ -134,8 +131,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             } else {
                 skipAssets = BaseData.instance.skipAssets
             }
-            print("skipChains ", skipChains.count)
-            print("skipAssets ", skipAssets?["chain_to_assets_map"].count)
+//            print("skipChains ", skipChains.count)
+//            print("skipAssets ", skipAssets?["chain_to_assets_map"].count)
             
             // $0.isDefault 예외처리 확인 카바
             inputCosmosChain = skipChains.filter({ $0.tag == "cosmos118" }).first!
@@ -144,8 +141,6 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                     inputAssetList.append(json)
                 }
             })
-//            print("inputAssetList ", inputAssetList.count)
-//            print("inputAssetList ", inputAssetList)
             inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first!
             
             outputCosmosChain = skipChains.filter({ $0.tag == "akash118" }).first!
@@ -160,16 +155,20 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.address!),
                let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.address!),
                let inputParam = try? await inputCosmosChain.fetchChainParam() {
-                inputBalances = WUtils.onParseAvailableCoins(inputAuth, inputBal)
                 inputCosmosChain.mintscanChainParam = inputParam
+                inputCosmosChain.cosmosAuth = inputAuth!
+                inputCosmosChain.cosmosBalances = inputBal!
+                WUtils.onParseVestingAccount(inputCosmosChain)
             }
             
             let outputChannel = getConnection(outputCosmosChain)
             if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.address!),
                let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.address!),
                let outputParam = try? await outputCosmosChain.fetchChainParam() {
-                outputBalances = WUtils.onParseAvailableCoins(outputAuth, outputBal)
                 outputCosmosChain.mintscanChainParam = outputParam
+                outputCosmosChain.cosmosAuth = outputAuth!
+                outputCosmosChain.cosmosBalances = outputBal!
+                WUtils.onParseVestingAccount(outputCosmosChain)
             }
             
             DispatchQueue.main.async {
@@ -185,7 +184,6 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
 
         inputAmountTextField.delegate = self
         inputAmountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -208,28 +206,15 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     }
     
     func onInitView() {
-        print("onInitView")
-//        loadingView.stop()
-        loadingView.isHidden = true
-        
         titleLabel.isHidden = false
         slippageBtn.isHidden = false
         rootScrollView.isHidden = false
         swapBtn.isHidden = false
-        
-        
-//        print("inputChain ", inputChain)
-//        print("inputAssetSelected ", inputAssetSelected)
-//
-//        print("outputChain ", outputChain)
-//        print("outputAssetSelected ", outputAssetSelected)
-        
         onReadyToUserInsert()
     }
     
     func onReadyToUserInsert() {
         loadingView.isHidden = true
-        
         txFee = inputCosmosChain.getInitFee()
         
         //From UI update
@@ -244,23 +229,18 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         inputAssetImg.af.setImage(withURL: inputMsAsset.assetImg())
         inputAssetLabel.text = inputMsAsset.symbol
         
-        if let inputBlance = self.inputBalances.filter({ $0.denom == inputDenom }).first {
-            if (txFee.amount[0].denom == inputDenom) {
-                let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
-                if (feeAmount.compare(inputBlance.getAmount()).rawValue >= 0) {
-                    availableAmount = NSDecimalNumber.zero
-                } else {
-                    availableAmount = inputBlance.getAmount().subtracting(feeAmount)
-                }
-                
+        let inputBlance = inputCosmosChain.balanceAmount(inputDenom)
+        if (txFee.amount[0].denom == inputDenom) {
+            let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
+            if (feeAmount.compare(inputBlance).rawValue >= 0) {
+                availableAmount = NSDecimalNumber.zero
             } else {
-                availableAmount = inputBlance.getAmount()
+                availableAmount = inputBlance.subtracting(feeAmount)
             }
-            
         } else {
-            availableAmount = NSDecimalNumber.zero
+            availableAmount = inputBlance
         }
-        WDP.dpCoin(inputMsAsset, availableAmount, nil, nil, self.inputAvailableLabel, inputMsAsset.decimals)
+        WDP.dpCoin(inputMsAsset, availableAmount, nil, nil, inputAvailableLabel, inputMsAsset.decimals)
         
         
         //To UI update
@@ -274,11 +254,9 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         outputMsAsset = BaseData.instance.getAsset(outputCosmosChain.apiName, outputDenom)!
         outputAssetImg.af.setImage(withURL: outputMsAsset.assetImg())
         outputAssetLabel.text = outputMsAsset.symbol
-        if let outputBalance = self.outputBalances.filter({ $0.denom == outputDenom }).first {
-            WDP.dpCoin(outputMsAsset, outputBalance, nil, nil, self.outputBalanceLabel, outputMsAsset.decimals)
-        } else {
-            self.outputBalanceLabel.text = "0"
-        }
+        
+        let outputBalance = outputCosmosChain.balanceAmount(outputDenom)
+        WDP.dpCoin(outputMsAsset, outputBalance, nil, nil, outputBalanceLabel, outputMsAsset.decimals)
         
         inputAmountTextField.text = ""
         inputValueCurrency.text = ""
@@ -303,7 +281,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         dismissKeyboard()
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.swapAssets = inputAssetList
-        baseSheet.swapBalance = inputBalances
+        baseSheet.swapBalance = inputCosmosChain.cosmosBalances
         baseSheet.targetChain = inputCosmosChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapInputAsset
@@ -323,7 +301,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         dismissKeyboard()
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.swapAssets = outputAssetList
-        baseSheet.swapBalance = outputBalances
+        baseSheet.swapBalance = outputCosmosChain.cosmosBalances
         baseSheet.targetChain = outputCosmosChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapOutputAsset
@@ -381,8 +359,10 @@ extension SwapStartVC: BaseSheetDelegate {
                     if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.address!),
                        let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.address!),
                        let inputParam = try? await inputCosmosChain.fetchChainParam() {
-                        inputBalances = WUtils.onParseAvailableCoins(inputAuth, inputBal)
                         inputCosmosChain.mintscanChainParam = inputParam
+                        inputCosmosChain.cosmosAuth = inputAuth!
+                        inputCosmosChain.cosmosBalances = inputBal!
+                        WUtils.onParseVestingAccount(inputCosmosChain)
                     }
                     
                     DispatchQueue.main.async {
@@ -408,8 +388,10 @@ extension SwapStartVC: BaseSheetDelegate {
                     if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.address!),
                        let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.address!),
                        let outputParam = try? await outputCosmosChain.fetchChainParam() {
-                        outputBalances = WUtils.onParseAvailableCoins(outputAuth, outputBal)
                         outputCosmosChain.mintscanChainParam = outputParam
+                        outputCosmosChain.cosmosAuth = outputAuth!
+                        outputCosmosChain.cosmosBalances = outputBal!
+                        WUtils.onParseVestingAccount(outputCosmosChain)
                     }
                     
                     DispatchQueue.main.async {

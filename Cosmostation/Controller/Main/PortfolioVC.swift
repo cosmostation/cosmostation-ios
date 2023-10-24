@@ -48,7 +48,6 @@ class PortfolioVC: BaseVC {
         searchBar?.searchTextField.font = .fontSize14Bold
         searchBar?.backgroundImage = UIImage()
         searchBar?.delegate = self
-//        tableView.tableHeaderView = searchBar
         
         let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         dismissTap.cancelsTouchesInView = false

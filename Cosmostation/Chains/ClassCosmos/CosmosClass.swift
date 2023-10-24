@@ -125,7 +125,6 @@ class CosmosClass: BaseChain  {
                 break
             }
         }
-        
         if (feeCoin != nil) {
             return Cosmos_Tx_V1beta1_Fee.with {
                 $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
