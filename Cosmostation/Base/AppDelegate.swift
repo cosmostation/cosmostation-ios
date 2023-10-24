@@ -131,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-    func pinResponse(_ request: LockType, _ result: UnLockResult) {
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if result == .success {
             
         }

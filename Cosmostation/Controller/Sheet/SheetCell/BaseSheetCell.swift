@@ -80,4 +80,14 @@ class BaseSheetCell: UITableViewCell {
         }
     }
     
+    func onSkipSwapSlippage(_ position: Int) {
+        if (position == 0) {
+            titleLabel.text = "1%"
+        } else if (position == 1) {
+            titleLabel.text = "3%"
+        } else if (position == 2) {
+            titleLabel.text = "5%"
+        }
+    }
+    
 }

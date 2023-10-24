@@ -325,7 +325,7 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
         }
     }
     
-    func pinResponse(_ request: LockType, _ result: UnLockResult) {
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
             view.isUserInteractionEnabled = false
             sendBtn.isEnabled = false

@@ -129,7 +129,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
         self.navigationController?.pushViewController(createNameVC, animated: true)
     }
     
-    func pinResponse(_ request: LockType, _ result: UnLockResult) {
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if result == .success {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                 self.onStartMainTab()

@@ -20,6 +20,7 @@ class ServiceCell: UITableViewCell {
     @IBOutlet weak var tag1inch: UIImageView!
     @IBOutlet weak var tagsquid: UIImageView!
     @IBOutlet weak var tagosmo: UIImageView!
+    @IBOutlet weak var tagAstroport: UIImageView!
     @IBOutlet weak var tagkava: UIImageView!
     @IBOutlet weak var tagneutron: UIImageView!
     @IBOutlet weak var tagmoonpay: UIImageView!
@@ -36,6 +37,7 @@ class ServiceCell: UITableViewCell {
         tag1inch.isHidden = true
         tagsquid.isHidden = true
         tagosmo.isHidden = true
+        tagAstroport.isHidden = true
         tagkava.isHidden = true
         tagneutron.isHidden = true
         tagmoonpay.isHidden = true
@@ -48,6 +50,7 @@ class ServiceCell: UITableViewCell {
             serviceImg.image = UIImage(named: "imgServiceSwap")
             tagskip.isHidden = false
             tagosmo.isHidden = false
+            tagAstroport.isHidden = false
             
             titleLabel.text = "COIN SWAP"
             msgLabel.text = "Exchange the coins you have for a \nvariety of different coins"

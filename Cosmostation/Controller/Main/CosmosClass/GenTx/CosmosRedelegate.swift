@@ -325,7 +325,7 @@ extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
         onUpdateAmountView(amount)
     }
     
-    func pinResponse(_ request: LockType, _ result: UnLockResult) {
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
             view.isUserInteractionEnabled = false
             reStakeBtn.isEnabled = false

@@ -215,7 +215,7 @@ class PincodeVC: BaseVC {
     }
     
     func onFinishResult(_ result: UnLockResult) {
-        pinDelegate?.pinResponse(lockType, result)
+        pinDelegate?.onPinResponse(lockType, result)
         if let navigationController = self.navigationController {
             navigationController.popViewController(animated: false)
         } else {
@@ -243,6 +243,6 @@ enum UnLockResult: Int {
 }
 
 protocol PinDelegate {
-    func pinResponse(_ request: LockType, _ result: UnLockResult)
+    func onPinResponse(_ request: LockType, _ result: UnLockResult)
 }
 

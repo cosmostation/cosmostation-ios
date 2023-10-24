@@ -369,7 +369,7 @@ extension SettingsVC: BaseSheetDelegate, PinDelegate {
     }
     
     
-    func pinResponse(_ request: LockType, _ result: UnLockResult) {
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (request == .ForDisableAppLock) {
             if (result == .success) {
                 BaseData.instance.setUsingAppLock(false)

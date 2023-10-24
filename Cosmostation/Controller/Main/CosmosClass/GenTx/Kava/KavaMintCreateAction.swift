@@ -318,7 +318,7 @@ extension KavaMintCreateAction: BaseSheetDelegate, MemoDelegate, AmountSheetDele
         onUpdateMemoView(memo)
     }
     
-    func pinResponse(_ request: LockType, _ result: UnLockResult) {
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
             view.isUserInteractionEnabled = false
             cdpBtn.isEnabled = false

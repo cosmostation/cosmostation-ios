@@ -365,7 +365,7 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
         }
     }
     
-    func pinResponse(_ request: LockType, _ result: UnLockResult) {
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         
     }
 }

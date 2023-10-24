@@ -19,6 +19,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var slippageBtn: UIButton!
+    @IBOutlet weak var midGapConstraint1: NSLayoutConstraint!
+    @IBOutlet weak var midGapConstraint2: NSLayoutConstraint!
     
     @IBOutlet weak var rootScrollView: UIScrollView!
     @IBOutlet weak var inputCardView: FixCardView!
@@ -52,9 +54,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var errorMsgLabel: UILabel!
     
     @IBOutlet weak var descriptionCardView: FixCardView!
-    @IBOutlet weak var descriptionTitleLabel: UILabel!
-    @IBOutlet weak var guaranteeAmountLabel: UILabel!
-    @IBOutlet weak var guaranteeDenomLabel: UILabel!
+    @IBOutlet weak var slippageLabel: UILabel!
     @IBOutlet weak var rateInputAmountLanel: UILabel!
     @IBOutlet weak var rateInputDenomLabel: UILabel!
     @IBOutlet weak var rateOutputAmountLanel: UILabel!
@@ -64,12 +64,12 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var venueLabel: UILabel!
     
     @IBOutlet weak var loadingView: LottieAnimationView!
-    
     @IBOutlet weak var swapBtn: BaseButton!
     
     var allCosmosChains = Array<CosmosClass>()
     var skipChains = Array<CosmosClass>()       //inapp support chain for skip
     var skipAssets: JSON?
+    var skipSlippage = "1"
     
     var inputCosmosChain: CosmosClass!
     var inputAssetList = Array<JSON>()
@@ -85,7 +85,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     var toActionAmount = NSDecimalNumber.zero
     
     var txFee: Cosmos_Tx_V1beta1_Fee!
-    var txMemo = ""
+    var toMsg: JSON?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,11 +102,6 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
         loadingView.play()
-        
-        inputValueCurrency?.text = BaseData.instance.getCurrencySymbol()
-        inputValueLabel?.text = ""
-        outputValueCurrency?.text = BaseData.instance.getCurrencySymbol()
-        outputValueLabel?.text = ""
         
         Task {
             allCosmosChains = await baseAccount.initOnyKeyData()
@@ -143,7 +138,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             })
             inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first!
             
-            outputCosmosChain = skipChains.filter({ $0.tag == "akash118" }).first!
+            outputCosmosChain = skipChains.filter({ $0.tag == "neutron118" }).first!
             skipAssets?["chain_to_assets_map"][outputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
                 if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
                     outputAssetList.append(json)
@@ -156,7 +151,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.address!),
                let inputParam = try? await inputCosmosChain.fetchChainParam() {
                 inputCosmosChain.mintscanChainParam = inputParam
-                inputCosmosChain.cosmosAuth = inputAuth!
+                inputCosmosChain.cosmosAuth = inputAuth?.account ?? Google_Protobuf_Any()
                 inputCosmosChain.cosmosBalances = inputBal!
                 WUtils.onParseVestingAccount(inputCosmosChain)
             }
@@ -166,7 +161,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.address!),
                let outputParam = try? await outputCosmosChain.fetchChainParam() {
                 outputCosmosChain.mintscanChainParam = outputParam
-                outputCosmosChain.cosmosAuth = outputAuth!
+                outputCosmosChain.cosmosAuth = outputAuth?.account ?? Google_Protobuf_Any()
                 outputCosmosChain.cosmosBalances = outputBal!
                 WUtils.onParseVestingAccount(outputCosmosChain)
             }
@@ -186,23 +181,16 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         inputAmountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        textField.shouldChange(charactersIn: range, replacementString: string, displayDecimal: inputAssetSelected["decimals"].int16Value)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        if let text = inputAmountTextField.text?.trimmingCharacters(in: .whitespaces)  {
-            print("text ", text)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let gap = UIScreen.main.bounds.size.height - 740
+        if (gap > 0) {
+            midGapConstraint1.constant = gap
+            midGapConstraint2.constant = gap + 40
+        } else {
+            midGapConstraint1.constant = 60
+            midGapConstraint2.constant = 70
         }
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
     
     func onInitView() {
@@ -214,17 +202,21 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     }
     
     func onReadyToUserInsert() {
+        toMsg = nil
+        swapBtn.isEnabled = false
+        
         loadingView.isHidden = true
-        txFee = inputCosmosChain.getInitFee()
+        txFee = getBaseFee()
+//        print("txFee ", txFee)
         
         //From UI update
         fromAddressLabel.text = inputCosmosChain.address
         inputChainImg.image = UIImage(named: inputCosmosChain.logo1)
         inputChainLabel.text = inputCosmosChain.name.uppercased()
-        print("fromAddress ", inputCosmosChain.address)
+//        print("fromAddress ", inputCosmosChain.address)
         
         let inputDenom = inputAssetSelected["denom"].stringValue
-        print("inputDenom ", inputDenom)
+//        print("inputDenom ", inputDenom)
         inputMsAsset = BaseData.instance.getAsset(inputCosmosChain.apiName, inputDenom)!
         inputAssetImg.af.setImage(withURL: inputMsAsset.assetImg())
         inputAssetLabel.text = inputMsAsset.symbol
@@ -247,10 +239,10 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         toAddressLabel.text = outputCosmosChain.address
         outputChainImg.image = UIImage(named: outputCosmosChain.logo1)
         outputChainLabel.text = outputCosmosChain.name.uppercased()
-        print("toAddress ", outputCosmosChain.address)
+//        print("toAddress ", outputCosmosChain.address)
         
         let outputDenom = outputAssetSelected["denom"].stringValue
-        print("outputDenom ", outputDenom)
+//        print("outputDenom ", outputDenom)
         outputMsAsset = BaseData.instance.getAsset(outputCosmosChain.apiName, outputDenom)!
         outputAssetImg.af.setImage(withURL: outputMsAsset.assetImg())
         outputAssetLabel.text = outputMsAsset.symbol
@@ -261,7 +253,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         inputAmountTextField.text = ""
         inputValueCurrency.text = ""
         inputValueLabel.text = ""
-        outputAmountLabel.text = "0"
+        outputAmountLabel.text = ""
         outputValueCurrency.text = ""
         outputValueLabel.text = ""
         errorCardView.isHidden = true
@@ -271,7 +263,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @objc func onInputChain() {
         dismissKeyboard()
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.swapChains = skipChains.filter({ $0.tag != outputCosmosChain.tag })
+        baseSheet.swapChains = skipChains
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapInputChain
         onStartSheet(baseSheet, 680)
@@ -291,7 +283,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @objc func onOutputChain() {
         dismissKeyboard()
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.swapChains = skipChains.filter({ $0.tag != inputCosmosChain.tag })
+        baseSheet.swapChains = skipChains
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapOutputChain
         onStartSheet(baseSheet, 680)
@@ -310,36 +302,312 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     
     
     @IBAction func onClickSlippage(_ sender: UIButton) {
+        toMsg = nil
         dismissKeyboard()
-        print("onClickSlippage")
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.sheetDelegate = self
+        baseSheet.sheetType = .SelectSwapSlippage
+        onStartSheet(baseSheet)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        textField.shouldChange(charactersIn: range, replacementString: string, displayDecimal: inputMsAsset.decimals!)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        onUpdateAmountView()
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     @IBAction func onClickHalf(_ sender: UIButton) {
+        let halfAmount = availableAmount.dividing(by: NSDecimalNumber(2)).multiplying(byPowerOf10: -inputMsAsset.decimals!, withBehavior: getDivideHandler(inputMsAsset.decimals!))
+        inputAmountTextField.text = halfAmount.stringValue
+        onUpdateAmountView()
     }
     
     @IBAction func onClickMax(_ sender: UIButton) {
+        let maxAmount = availableAmount.multiplying(byPowerOf10: -inputMsAsset.decimals!, withBehavior: getDivideHandler(inputMsAsset.decimals!))
+        inputAmountTextField.text = maxAmount.stringValue
+        onUpdateAmountView()
+    }
+    
+    func onUpdateAmountView() {
+        toMsg = nil
+        if let text = inputAmountTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: ",", with: ".")  {
+            swapBtn.isEnabled = false
+            if (text.isEmpty) {
+                outputAmountLabel.text = ""
+                inputInvalidLabel.isHidden = false
+                descriptionCardView.isHidden = true
+                return
+            }
+            let userInput = NSDecimalNumber(string: text)
+            if (NSDecimalNumber.notANumber == userInput) {
+                outputAmountLabel.text = ""
+                inputInvalidLabel.isHidden = false
+                descriptionCardView.isHidden = true
+                return
+            }
+            let inputAmount = userInput.multiplying(byPowerOf10: inputMsAsset.decimals!)
+            if (inputAmount == NSDecimalNumber.zero || (availableAmount.compare(inputAmount).rawValue < 0)) {
+                outputAmountLabel.text = ""
+                inputInvalidLabel.isHidden = false
+                descriptionCardView.isHidden = true
+                return
+            }
+            inputInvalidLabel.isHidden = true
+            Task {
+                let route = try await fetchSkipRoute(inputAmount.stringValue)
+//                print("route ", route)
+                if (route["code"].int != nil) {
+                    descriptionCardView.isHidden = true
+                    errorCardView.isHidden = false
+                    errorMsgLabel.text = route["message"].stringValue
+                    return
+                    
+                } else if (route["amount_in"].stringValue == inputAmount.stringValue) {
+                    let msg = try await fetchSkipMsg(route)
+//                    print("msg ", msg)
+                    if (msg["msgs"].arrayValue.count == 1) {
+                        let slippage = NSDecimalNumber(string: "100").subtracting(NSDecimalNumber(string: skipSlippage))
+                        let outputAmount = NSDecimalNumber(string: route["amount_out"].stringValue).multiplying(by: slippage).multiplying(byPowerOf10: -2, withBehavior: handler0Down)
+                        WDP.dpCoin(outputMsAsset, outputAmount, nil, nil, outputAmountLabel, outputMsAsset.decimals)
+                        
+                        slippageLabel.text = skipSlippage + "%"
+                        
+                        let swapRate = outputAmount.dividing(by: inputAmount, withBehavior: handler6).multiplying(byPowerOf10: (inputMsAsset.decimals! - outputMsAsset.decimals!))
+                        rateInputDenomLabel.text = inputMsAsset.symbol
+                        rateInputAmountLanel.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, rateInputAmountLanel.font, 6)
+                        rateOutputDenomLabel.text = outputMsAsset.symbol
+                        rateOutputAmountLanel.attributedText = WDP.dpAmount(swapRate.stringValue, rateOutputAmountLanel.font, 6)
+                        
+                        if let feeMsAsset = BaseData.instance.getAsset(inputCosmosChain.apiName, txFee.amount[0].denom) {
+                            WDP.dpCoin(feeMsAsset, txFee.amount[0], nil, feeDenomLabel, feeAmountLanel, feeMsAsset.decimals)
+                        }
+                        
+                        venueLabel.text = route["swap_venue"]["name"].stringValue
+                        
+                        let inputMsPrice = BaseData.instance.getPrice(inputMsAsset.coinGeckoId)
+                        let inputValue = inputMsPrice.multiplying(by: inputAmount).multiplying(byPowerOf10: -inputMsAsset.decimals!, withBehavior: handler6)
+                        WDP.dpValue(inputValue, inputValueCurrency, inputValueLabel)
+                        
+                        let outputMsPrice = BaseData.instance.getPrice(outputMsAsset.coinGeckoId)
+                        let outputValue = outputMsPrice.multiplying(by: outputAmount).multiplying(byPowerOf10: -outputMsAsset.decimals!, withBehavior: handler6)
+                        WDP.dpValue(outputValue, outputValueCurrency, outputValueLabel)
+                        
+                        descriptionCardView.isHidden = false
+                        onSimul(route, msg)
+                        
+                    } else {
+                        //TODO msgs2개 이상일때 에러처리??
+                        descriptionCardView.isHidden = true
+                        errorCardView.isHidden = false
+                        errorMsgLabel.text = "No Route"
+                    }
+                    
+                }
+            }
+            
+        }
     }
     
     @IBAction func onSwapToggle(_ sender: UIButton) {
-        print("onSwapToggle")
+        let tempChain = inputCosmosChain
+        let tempAssetList = inputAssetList
+        let tempAssetSelected = inputAssetSelected
+        let tempMsAsset = inputMsAsset
+        
+        inputCosmosChain = outputCosmosChain
+        inputAssetList = outputAssetList
+        inputAssetSelected = outputAssetSelected
+        inputMsAsset = outputMsAsset
+        
+        outputCosmosChain = tempChain
+        outputAssetList = tempAssetList
+        outputAssetSelected = tempAssetSelected
+        outputMsAsset = tempMsAsset
+        
+        onReadyToUserInsert()
     }
     
     @IBAction func onClickSwap(_ sender: UIButton) {
-        print("onClickSwap")
+        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+        self.present(pinVC, animated: true)
     }
     
     
-    func onBindSkipRouteReq() -> JSON {
-        return JSON()
+    func onBindSkipRouteReq(_ amount: String) -> JSON {
+        var routeReq = JSON()
+        routeReq["amount_in"].stringValue = amount
+        routeReq["source_asset_chain_id"].stringValue = inputCosmosChain.chainId
+        routeReq["source_asset_denom"].stringValue = inputMsAsset.denom!
+        routeReq["dest_asset_chain_id"].stringValue = outputCosmosChain.chainId
+        routeReq["dest_asset_denom"].stringValue = outputMsAsset.denom!
+        routeReq["cumulative_affiliate_fee_bps"] = "100"
+        routeReq["client_id"] = "cosmostation"
+        return routeReq
     }
     
-    func onBindSkipMsgReq() -> JSON {
-        return JSON()
+    func onBindSkipMsgReq(_ route: JSON) -> JSON {
+        var msgReq = JSON()
+        var address_list = [String]()
+        route["chain_ids"].array?.forEach({ chain_Id in
+            if let address = allCosmosChains.filter({ $0.chainId == chain_Id.stringValue && $0.isDefault == true }).first?.address {
+                address_list.append(address)
+            }
+        })
+        msgReq["address_list"].arrayObject = address_list
+        msgReq["slippage_tolerance_percent"].stringValue = skipSlippage
+        msgReq["amount_in"] = route["amount_in"]
+        msgReq["source_asset_chain_id"] = route["source_asset_chain_id"]
+        msgReq["source_asset_denom"] = route["source_asset_denom"]
+        msgReq["amount_out"] = route["amount_out"]
+        msgReq["dest_asset_chain_id"] = route["dest_asset_chain_id"]
+        msgReq["dest_asset_denom"] = route["dest_asset_denom"]
+        msgReq["operations"] = route["operations"]
+        msgReq["client_id"] = "cosmostation"
+        if let affiliate = getAffiliate(route["swap_venue"])  {
+            msgReq["affiliates"].arrayObject = affiliate
+        }
+        return msgReq
+    }
+    
+    func getBaseFee() -> Cosmos_Tx_V1beta1_Fee {
+        let baseFeePosition = inputCosmosChain.getFeeBasePosition()
+        let minFee = inputCosmosChain.getDefaultFeeCoins()[baseFeePosition]
+        let feeCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = minFee.denom; $0.amount = minFee.amount }
+        return Cosmos_Tx_V1beta1_Fee.with {
+            $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
+            $0.amount = [feeCoin]
+        }
+    }
+    
+    func getAffiliate(_ venue: JSON) -> [JSON]? {
+        if (venue["chain_id"].stringValue.contains("osmosis")) {
+            var affiliate = JSON()
+            affiliate["address"].stringValue = "osmo1clpqr4nrk4khgkxj78fcwwh6dl3uw4epasmvnj"
+            affiliate["basis_points_fee"].stringValue = "100"
+            return [affiliate]
+        } else if (venue["chain_id"].stringValue.contains("neutron")) {
+            var affiliate = JSON()
+            affiliate["address"].stringValue = "neutron1clpqr4nrk4khgkxj78fcwwh6dl3uw4ep35p7l8"
+            affiliate["basis_points_fee"].stringValue = "100"
+            return [affiliate]
+        }
+        return nil
+    }
+    
+    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?, _ msg: JSON) {
+        if let toGas = simul?.gasInfo.gasUsed {
+            txFee.gasLimit = UInt64(Double(toGas) * 1.5)
+            let baseFeePosition = inputCosmosChain.getFeeBasePosition()
+            if let gasRate = inputCosmosChain.getFeeInfos()[baseFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
+                let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
+                let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
+                txFee.amount[0].amount = feeCoinAmount!.stringValue
+            }
+        }
+        if let feeMsAsset = BaseData.instance.getAsset(inputCosmosChain.apiName, txFee.amount[0].denom) {
+            WDP.dpCoin(feeMsAsset, txFee.amount[0], nil, feeDenomLabel, feeAmountLanel, feeMsAsset.decimals)
+        }
+        toMsg = msg
+        swapBtn.isEnabled = true
+    }
+    
+    func onSimul(_ route: JSON, _ msg: JSON) {
+        swapBtn.isEnabled = false
+        let msgs = msg["msgs"].arrayValue[0]
+        if (msgs["msg_type_url"].stringValue == "/ibc.applications.transfer.v1.MsgTransfer") {
+            let inner_mag = try? JSON(data: Data(msgs["msg"].stringValue.utf8))
+//            print("inner_mag ", inner_mag)
+            Task {
+                let channel = getConnection(inputCosmosChain)
+                if let auth = try? await fetchAuth(channel, inputCosmosChain.address!) {
+                    do {
+                        let simul = try await simulIbcSendTx(channel, auth!, onBindIbcSend(inner_mag!))
+                        DispatchQueue.main.async {
+                            self.onUpdateWithSimul(simul, msg)
+                        }
+                        
+                    } catch {
+                        DispatchQueue.main.async {
+                            self.view.isUserInteractionEnabled = true
+                            self.loadingView.isHidden = true
+                            self.onShowToast("Error : " + "\n" + "\(error)")
+                            self.toMsg = nil
+                            self.swapBtn.isEnabled = false
+                            return
+                        }
+                    }
+                }
+            }
+            
+        } else if (msgs["msg_type_url"].stringValue == "/cosmwasm.wasm.v1.MsgExecuteContract") {
+            let inner_mag = try? JSON(data: Data(msgs["msg"].stringValue.utf8))
+//            print("inner_mag ", inner_mag)
+            Task {
+                let channel = getConnection(inputCosmosChain)
+                if let auth = try? await fetchAuth(channel, inputCosmosChain.address!) {
+                    do {
+                        let simul = try await simulWasmTx(channel, auth!, onBindWasm(inner_mag!))
+                        DispatchQueue.main.async {
+                            self.onUpdateWithSimul(simul, msg)
+                        }
+                        
+                    } catch {
+                        DispatchQueue.main.async {
+                            self.view.isUserInteractionEnabled = true
+                            self.loadingView.isHidden = true
+                            self.onShowToast("Error : " + "\n" + "\(error)")
+                            self.toMsg = nil
+                            self.swapBtn.isEnabled = false
+                            return
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func onBindIbcSend(_ innerMsg: JSON) -> Ibc_Applications_Transfer_V1_MsgTransfer {
+        let sendCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = innerMsg["token"]["denom"].stringValue
+            $0.amount = innerMsg["token"]["amount"].stringValue
+        }
+        return Ibc_Applications_Transfer_V1_MsgTransfer.with {
+            $0.sender = innerMsg["sender"].stringValue
+            $0.receiver = innerMsg["receiver"].stringValue
+            $0.sourceChannel = innerMsg["source_channel"].stringValue
+            $0.sourcePort = innerMsg["source_port"].stringValue
+            $0.timeoutTimestamp = innerMsg["timeout_timestamp"].uInt64Value
+            $0.token = sendCoin
+            $0.memo = innerMsg["memo"].stringValue
+        }
+    }
+    
+    func onBindWasm(_ innerMsg: JSON) -> Cosmwasm_Wasm_V1_MsgExecuteContract {
+        let jsonMsgBase64 = try! innerMsg["msg"].rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+        let fundCoin = Cosmos_Base_V1beta1_Coin.init(innerMsg["funds"].arrayValue[0]["denom"].stringValue, innerMsg["funds"].arrayValue[0]["amount"].stringValue)
+        
+        return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+            $0.sender = innerMsg["sender"].stringValue
+            $0.contract = innerMsg["contract"].stringValue
+            $0.msg = Data(base64Encoded: jsonMsgBase64)!
+            $0.funds = [fundCoin]
+        }
     }
     
 }
 
-extension SwapStartVC: BaseSheetDelegate {
+extension SwapStartVC: BaseSheetDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
         if (sheetType == .SelectSwapInputChain) {
@@ -360,7 +628,7 @@ extension SwapStartVC: BaseSheetDelegate {
                        let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.address!),
                        let inputParam = try? await inputCosmosChain.fetchChainParam() {
                         inputCosmosChain.mintscanChainParam = inputParam
-                        inputCosmosChain.cosmosAuth = inputAuth!
+                        inputCosmosChain.cosmosAuth = inputAuth?.account ?? Google_Protobuf_Any()
                         inputCosmosChain.cosmosBalances = inputBal!
                         WUtils.onParseVestingAccount(inputCosmosChain)
                     }
@@ -389,7 +657,7 @@ extension SwapStartVC: BaseSheetDelegate {
                        let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.address!),
                        let outputParam = try? await outputCosmosChain.fetchChainParam() {
                         outputCosmosChain.mintscanChainParam = outputParam
-                        outputCosmosChain.cosmosAuth = outputAuth!
+                        outputCosmosChain.cosmosAuth = outputAuth?.account ?? Google_Protobuf_Any()
                         outputCosmosChain.cosmosBalances = outputBal!
                         WUtils.onParseVestingAccount(outputCosmosChain)
                     }
@@ -413,6 +681,62 @@ extension SwapStartVC: BaseSheetDelegate {
                 onReadyToUserInsert()
             }
             
+        } else if (sheetType == .SelectSwapSlippage) {
+            if (result.position == 0) {
+                skipSlippage = "1"
+            } else if (result.position == 1) {
+                skipSlippage = "2"
+            } else if (result.position == 2) {
+                skipSlippage = "5"
+            }
+            onUpdateAmountView()
+        }
+    }
+    
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
+        if (result == .success) {
+            view.isUserInteractionEnabled = false
+            swapBtn.isEnabled = false
+            loadingView.isHidden = false
+            
+            let msgs = toMsg!["msgs"].arrayValue[0]
+            if (msgs["msg_type_url"].stringValue == "/ibc.applications.transfer.v1.MsgTransfer") {
+                let inner_mag = try? JSON(data: Data(msgs["msg"].stringValue.utf8))
+                Task {
+                    let channel = getConnection(inputCosmosChain)
+                    if let auth = try? await fetchAuth(channel, inputCosmosChain.address!),
+                       let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(inner_mag!)) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                            self.loadingView.isHidden = true
+                            
+                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                            txResult.selectedChain = self.inputCosmosChain
+                            txResult.broadcastTxResponse = response
+                            txResult.modalPresentationStyle = .fullScreen
+                            self.present(txResult, animated: true)
+                        })
+                    }
+                }
+                
+            } else if (msgs["msg_type_url"].stringValue == "/cosmwasm.wasm.v1.MsgExecuteContract") {
+                let inner_mag = try? JSON(data: Data(msgs["msg"].stringValue.utf8))
+                Task {
+                    let channel = getConnection(inputCosmosChain)
+                    if let auth = try? await fetchAuth(channel, inputCosmosChain.address!),
+                       let response = try await broadcastWasmTx(channel, auth!, onBindWasm(inner_mag!)) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                            self.loadingView.isHidden = true
+                            
+                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                            txResult.selectedChain = self.inputCosmosChain
+                            txResult.broadcastTxResponse = response
+                            txResult.modalPresentationStyle = .fullScreen
+                            self.present(txResult, animated: true)
+                        })
+                    }
+                }
+            }
+            
         }
     }
 }
@@ -421,42 +745,29 @@ extension SwapStartVC: BaseSheetDelegate {
 extension SwapStartVC {
     
     func fetchSkipChains() async throws -> JSON {
-        print("fetchSkipChains ", BaseNetWork.SkipChains())
+//        print("fetchSkipChains ", BaseNetWork.SkipChains())
         return try await AF.request(BaseNetWork.SkipChains(), method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchSkipAssets() async throws -> JSON {
-        print("fetchSkipAssets ", BaseNetWork.SkipAssets())
+//        print("fetchSkipAssets ", BaseNetWork.SkipAssets())
         return try await AF.request(BaseNetWork.SkipAssets(), method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchSkipRoute() async throws -> JSON {
-        let json = onBindSkipRouteReq()
+    func fetchSkipRoute(_ amount: String) async throws -> JSON {
+        let json = onBindSkipRouteReq(amount)
         return try await AF.request(BaseNetWork.SkipRoutes(), method: .post, parameters: json.dictionaryObject!, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
     
-    func fetchSkipMsg() async throws -> JSON {
-        let json = onBindSkipMsgReq()
+    func fetchSkipMsg(_ route: JSON) async throws -> JSON {
+        let json = onBindSkipMsgReq(route)
         return try await AF.request(BaseNetWork.SkipMsg(), method: .post, parameters: json.dictionaryObject!, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
     
     
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Google_Protobuf_Any? {
+    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get().account
-    }
-    
-    func fetchIbcClient(_ channel: ClientConnection, _ msPath: MintscanPath) async throws -> Ibc_Core_Channel_V1_QueryChannelClientStateResponse? {
-        let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
-            $0.channelID = msPath.channel!
-            $0.portID = msPath.port!
-        }
-        return try? await Ibc_Core_Channel_V1_QueryNIOClient(channel: channel).channelClientState(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchLastBlock(_ channel: ClientConnection) async throws -> Cosmos_Base_Tendermint_V1beta1_GetLatestBlockResponse? {
-        let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
-        return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: channel).getLatestBlock(req, callOptions: getCallOptions()).response.get()
+        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
     }
     
     func fetchBalances(_ channel: ClientConnection, _ address: String) async throws -> [Cosmos_Base_V1beta1_Coin]? {
@@ -465,6 +776,35 @@ extension SwapStartVC {
         return try? await Cosmos_Bank_V1beta1_QueryNIOClient(channel: channel).allBalances(req, callOptions: getCallOptions()).response.get().balances
     }
     
+    //ibc Send
+    func simulIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+        let simulTx = Signer.genIbcSendSimul(auth, ibcTransfer, txFee, "", inputCosmosChain)
+        do {
+            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
+        } catch {
+            throw error
+        }
+    }
+    
+    func broadcastIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+        let reqTx = Signer.genIbcSendTx(auth, ibcTransfer, txFee, "", inputCosmosChain)
+        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
+    }
+    
+    //Wasm
+    func simulWasmTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasm: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+        let simulTx = Signer.genWasmSimul(auth, [toWasm], txFee, "", inputCosmosChain)
+        do {
+            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
+        } catch {
+            throw error
+        }
+    }
+    
+    func broadcastWasmTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasm: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+        let reqTx = Signer.genWasmTx(auth, [toWasm], txFee, "", inputCosmosChain)
+        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
+    }
     
     func getConnection(_ chain: CosmosClass) -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)

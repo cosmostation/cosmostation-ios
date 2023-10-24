@@ -284,6 +284,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             return swapAssetsSearch.count
             
         } else if (sheetType == .SelectSwapSlippage) {
+            return 3
             
         } else if (sheetType == .SelectDelegatedAction) {
             return 4
@@ -373,6 +374,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             return cell!
             
         } else if (sheetType == .SelectSwapSlippage) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
+            cell?.onSkipSwapSlippage(indexPath.row)
+            return cell!
             
         } else if (sheetType == .SelectDelegatedAction) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell

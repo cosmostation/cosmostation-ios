@@ -88,6 +88,13 @@
                                             <constraint firstAttribute="width" constant="67" id="blg-p2-ovr"/>
                                         </constraints>
                                     </imageView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgService_astroport" translatesAutoresizingMaskIntoConstraints="NO" id="Fsp-cT-uCU">
+                                        <rect key="frame" x="0.0" y="0.0" width="67" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="67" id="NxD-WW-VWH"/>
+                                            <constraint firstAttribute="height" constant="18" id="pqk-C9-c6h"/>
+                                        </constraints>
+                                    </imageView>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgService_kava" translatesAutoresizingMaskIntoConstraints="NO" id="i9a-si-YXx">
                                         <rect key="frame" x="0.0" y="0.0" width="46" height="18"/>
                                         <constraints>
@@ -154,6 +161,7 @@
                 <outlet property="serviceImg" destination="TrW-i0-4qE" id="tUz-LR-3dS"/>
                 <outlet property="serviceListLabel" destination="PWz-rN-L3h" id="fax-4B-fBu"/>
                 <outlet property="tag1inch" destination="y4u-L2-xQJ" id="pXd-gT-SG0"/>
+                <outlet property="tagAstroport" destination="Fsp-cT-uCU" id="gnZ-6q-zdO"/>
                 <outlet property="tagkado" destination="8bI-wx-kCa" id="rfi-L7-ecd"/>
                 <outlet property="tagkava" destination="i9a-si-YXx" id="q1P-X4-hWM"/>
                 <outlet property="tagmoonpay" destination="gkj-3J-b5l" id="UWY-b7-PZF"/>
@@ -170,6 +178,7 @@
         <image name="imgServiceBuy" width="702" height="300"/>
         <image name="imgService_1inch" width="90" height="36"/>
         <image name="imgService_Skip" width="92" height="36"/>
+        <image name="imgService_astroport" width="142" height="36"/>
         <image name="imgService_kado" width="118" height="36"/>
         <image name="imgService_kava" width="92" height="36"/>
         <image name="imgService_moonpay" width="160" height="36"/>

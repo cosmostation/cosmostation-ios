@@ -247,7 +247,7 @@ extension Bep3Transfer: BaseSheetDelegate, BepAmountSheetDelegate, PinDelegate {
         onUpdateAmountView(amount)
     }
     
-    func pinResponse(_ request: LockType, _ result: UnLockResult) {
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                 let bepResult = BepTxResult(nibName: "BepTxResult", bundle: nil)
