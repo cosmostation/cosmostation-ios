@@ -191,16 +191,15 @@ public class BaseAccount {
 extension BaseAccount {
     
     func initOnyKeyData() async -> [CosmosClass] {
-        allCosmosClassChains.removeAll()
-        
+        var result = [CosmosClass]()
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
             ALLCOSMOSCLASS().forEach { chain in
-                allCosmosClassChains.append(chain)
+                result.append(chain)
             }
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                allCosmosClassChains.forEach { chain in
+                result.forEach { chain in
                     if (chain.address == nil) {
                         chain.setInfoWithSeed(seed, lastHDPath)
                     }
@@ -209,17 +208,17 @@ extension BaseAccount {
             
         } else if (type == .onlyPrivateKey) {
             ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
-                allCosmosClassChains.append(chain)
+                result.append(chain)
             }
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                allCosmosClassChains.forEach { chain in
+                result.forEach { chain in
                     if (chain.address == nil) {
                         chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                     }
                 }
             }
         }
-        return allCosmosClassChains
+        return result
     }
 }
 

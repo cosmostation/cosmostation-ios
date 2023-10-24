@@ -103,6 +103,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        
         Task {
             allCosmosChains = await baseAccount.initOnyKeyData()
             
@@ -170,6 +171,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                 self.onInitView()
             }
         }
+        
         
         inputChainView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onInputChain)))
         inputAssetView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onInputAsset)))
