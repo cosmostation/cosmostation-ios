@@ -15,7 +15,7 @@ import NIO
 import SwiftProtobuf
 import web3swift
 
-class TxAddressSheet: BaseVC, UITextViewDelegate, QrScanDelegate, UITextFieldDelegate, BaseSheetDelegate {
+class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var addressTitle: UILabel!
     @IBOutlet weak var addressTextField: MDCOutlinedTextField!

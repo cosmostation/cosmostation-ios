@@ -118,7 +118,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 3) {
                 switchCell.onBindSetNotification()
                 switchCell.actionToggle = { request in
-                    print("onBindSetNotification ", request)
+//                    print("onBindSetNotification ", request)
 //                    PushUtils.shared.updateStatus(enable: request)
                 }
                 return switchCell
@@ -197,7 +197,9 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(accountListVC, animated: true)
                 
             } else if (indexPath.row == 1) {
-                //QR
+                let qrScanVC = QrScanVC(nibName: "QrScanVC", bundle: nil)
+                qrScanVC.scanDelegate = self
+                present(qrScanVC, animated: true)
                 
             } else if (indexPath.row == 2) {
                 let chainListVC = ChainListVC(nibName: "ChainListVC", bundle: nil)
@@ -301,7 +303,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-extension SettingsVC: BaseSheetDelegate, PinDelegate {
+extension SettingsVC: BaseSheetDelegate, QrScanDelegate, PinDelegate {
     
     func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
         let button = UIButton(type: .system)
@@ -377,6 +379,12 @@ extension SettingsVC: BaseSheetDelegate, PinDelegate {
             reloadRows(IndexPath(row: 4, section: 1))
         }
     }
+    
+    func onScanned(_ result: String) {
+        let scanedStr = result
+        print("scanedStr ", scanedStr)
+    }
+    
     
     func reloadRows(_ indexPath : IndexPath) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
