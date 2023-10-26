@@ -395,10 +395,6 @@ public struct Params {
     
     var cudos_minting_params: CudosMintingParam?
     
-    var axelar_key_mgmt_relative_inflation_rate: String?
-    var axelar_external_chain_voting_inflation_rate: String?
-    var axelar_evm_chains = Array<String>()
-    
     var sommelier_apy: SommelierApy?
     
     var omniflix_alloc_params: OmniflixAllocParams?
@@ -556,18 +552,6 @@ public struct Params {
         
         if let rawCudosMintingParam = dictionary?["cudos_minting_params"] as? NSDictionary {
             self.cudos_minting_params = CudosMintingParam.init(rawCudosMintingParam)
-        }
-        
-        if let rawAxelarKeyMgmtRelativeInflationRate = dictionary?["axelar_key_mgmt_relative_inflation_rate"] as? String {
-            self.axelar_key_mgmt_relative_inflation_rate = rawAxelarKeyMgmtRelativeInflationRate
-        }
-        if let rawAxelarExternalChainVotingInflationRate = dictionary?["axelar_external_chain_voting_inflation_rate"] as? String {
-            self.axelar_external_chain_voting_inflation_rate = rawAxelarExternalChainVotingInflationRate
-        }
-        if let rawAxelarEvmChains = dictionary?["axelar_evm_chains"] as? Array<String> {
-            for rawAxelarEvmChain in rawAxelarEvmChains {
-                self.axelar_evm_chains.append(rawAxelarEvmChain)
-            }
         }
         
         if let rawSommelierApy = dictionary?["sommelier_apy"] as? NSDictionary {
