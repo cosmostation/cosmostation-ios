@@ -191,7 +191,7 @@ class CosmosClassVC: BaseVC {
         if (selectedChain.supportCw20 || selectedChain.supportErc20) { tabbar.items.append(tokenTabBar) }
         if (selectedChain.supportNft) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(historyTabBar)
-        tabbar.items.append(aboutTabBar)
+        if (!selectedChain.mintscanChainParam.isEmpty) { tabbar.items.append(aboutTabBar) }
         
         tabbar.barTintColor = .clear
         tabbar.selectionIndicatorStrokeColor = .white
@@ -229,11 +229,6 @@ class CosmosClassVC: BaseVC {
             item.buttonColor = .color08
             item.buttonImageColor = .color01
             item.imageSize = CGSize(width: 24, height: 24)
-
-//            item.layer.shadowColor = UIColor.black.cgColor
-//            item.layer.shadowOffset = CGSize(width: 0, height: 1)
-//            item.layer.shadowOpacity = Float(0.4)
-//            item.layer.shadowRadius = CGFloat(2)
         }
         
         
