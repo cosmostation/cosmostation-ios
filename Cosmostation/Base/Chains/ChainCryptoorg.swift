@@ -14,12 +14,12 @@ class ChainCryptoorg: ChainConfig {
     var chainType = ChainType.CRYPTO_MAIN
     var chainImg = UIImage(named: "chainCryptoorg")
     var chainInfoImg = UIImage(named: "infoCryptoorg")
-    var chainInfoTitle = "CRYPTO.ORG"
+    var chainInfoTitle = "CRONOS POS"
     var chainInfoMsg = NSLocalizedString("guide_msg_crypto", comment: "")
     var chainColor = UIColor(named: "cryptoorg")!
     var chainColorBG = UIColor(named: "cryptoorg_bg")!
-    var chainTitle = "(Crypto.org Mainnet)"
-    var chainTitle2 = "CRYPTO.ORG"
+    var chainTitle = "(Cronos POS Mainnet)"
+    var chainTitle2 = "CRONOS POS"
     var chainDBName = CHAIN_CRYPTO_S
     var chainAPIName = "crypto-org"
     var chainKoreanName = "크립토오알지"
