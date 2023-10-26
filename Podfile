@@ -19,7 +19,7 @@ def shared_pods
     pod 'Firebase/Messaging', '8.1'
     pod 'HPParallaxHeader'
     pod 'IpfsApi'
-    pod 'WalletConnectSwiftV2', '1.3.0'
+    pod 'WalletConnectSwiftV2', '1.9.0'
 end
 
 target 'Cosmostation' do
