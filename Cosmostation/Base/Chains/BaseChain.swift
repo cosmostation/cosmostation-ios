@@ -104,6 +104,8 @@ class ChainFactory {
             return .CUDOS_MAIN
         case CHAIN_DESMOS_S:
             return .DESMOS_MAIN
+        case CHAIN_DYDX_S:
+            return .DYDX_MAIN
         case CHAIN_EMONEY_S:
             return .EMONEY_MAIN
         case CHAIN_EVMOS_S:
@@ -260,6 +262,8 @@ class ChainFactory {
             return ChainCudos(chainType)
         case .DESMOS_MAIN:
             return ChainDesmos(chainType)
+        case .DYDX_MAIN:
+            return ChainDydx(chainType)
         case .EMONEY_MAIN:
             return ChainEmoney(chainType)
         case .EVMOS_MAIN:
@@ -450,6 +454,7 @@ let CHAIN_STAFI_S = "SUPPORT_CHAIN_STAFI"
 let CHAIN_NEUTRON_S = "SUPPORT_CHAIN_NEUTRON"
 let CHAIN_SEI_S = "SUPPORT_CHAIN_SEI"
 let CHAIN_TERRA_S = "SUPPORT_CHAIN_TERRA"
+let CHAIN_DYDX_S = "SUPPORT_CHAIN_DYDX"
 
 let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 let CHAIN_NEUTRON_TEST_S = "SUPPORT_CHAIN_NEUTRON_TEST"

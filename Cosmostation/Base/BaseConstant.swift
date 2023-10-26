@@ -345,6 +345,7 @@ public enum ChainType: String {
     case ARCHWAY_MAIN
     case SEI_MAIN
     case TERRA_MAIN
+    case DYDX_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -374,6 +375,7 @@ public enum ChainType: String {
         result.append(CRYPTO_MAIN)
         result.append(CUDOS_MAIN)
         result.append(DESMOS_MAIN)
+        result.append(DYDX_MAIN)
         result.append(EMONEY_MAIN)
         result.append(EVMOS_MAIN)
         result.append(FETCH_MAIN)
