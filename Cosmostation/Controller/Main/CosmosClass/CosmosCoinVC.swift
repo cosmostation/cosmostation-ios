@@ -39,9 +39,6 @@ class CosmosCoinVC: BaseVC {
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
         
-        
-        print("", selectedChain.address, "  ", selectedChain.evmAddress)
-        
         onSortAssets()
     }
     
@@ -273,6 +270,10 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         if (selectedChain is ChainBinanceBeacon) {
             let sendDenom = lcdBalances[indexPath.row]["symbol"].stringValue
             if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {

@@ -346,9 +346,7 @@ extension CosmosClass {
         let channel = getConnection()
         let group = DispatchGroup()
         mintscanTokens.forEach { token in
-            DispatchQueue.global().async {
-                self.fetchCw20Balance(group, channel, token)
-            }
+            fetchCw20Balance(group, channel, token)
         }
 
         group.notify(queue: .main) {
@@ -365,18 +363,20 @@ extension CosmosClass {
 
     func fetchCw20Balance(_ group: DispatchGroup, _ channel: ClientConnection, _ tokenInfo: MintscanToken) {
         group.enter()
-        let query: JSON = ["balance" : ["address" : address!]]
-        let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-        let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
-            $0.address = tokenInfo.address!
-            $0.queryData = Data(base64Encoded: queryBase64)!
-        }
-        if let response = try? Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.wait() {
-            let cw20balance = try? JSONDecoder().decode(JSON.self, from: response.data)
-            tokenInfo.setAmount(cw20balance?["balance"].string ?? "0")
-            group.leave()
-        } else {
-            group.leave()
+        DispatchQueue.global().async {
+            let query: JSON = ["balance" : ["address" : self.address!]]
+            let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+            let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+                $0.address = tokenInfo.address!
+                $0.queryData = Data(base64Encoded: queryBase64)!
+            }
+            if let response = try? Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: self.getCallOptions()).response.wait() {
+                let cw20balance = try? JSONDecoder().decode(JSON.self, from: response.data)
+                tokenInfo.setAmount(cw20balance?["balance"].string ?? "0")
+                group.leave()
+            } else {
+                group.leave()
+            }
         }
     }
     
@@ -392,9 +392,7 @@ extension CosmosClass {
         }
         
         mintscanTokens.forEach { token in
-            DispatchQueue.global().async {
-                self.fetchErc20Balance(group, web3, accountEthAddr, token)
-            }
+            fetchErc20Balance(group, web3, accountEthAddr, token)
         }
         
         group.notify(queue: .main) {
@@ -410,13 +408,15 @@ extension CosmosClass {
     
     func fetchErc20Balance(_ group: DispatchGroup, _ web3: web3?, _ accountEthAddr: EthereumAddress, _ tokenInfo: MintscanToken) {
         group.enter()
-        let contractAddress = EthereumAddress.init(tokenInfo.address!)
-        let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
-        if let erc20Balance = try? erc20token.getBalance(account: accountEthAddr) {
-            tokenInfo.setAmount(String(erc20Balance))
-            group.leave()
-        } else {
-            group.leave()
+        DispatchQueue.global().async {
+            let contractAddress = EthereumAddress.init(tokenInfo.address!)
+            let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
+            if let erc20Balance = try? erc20token.getBalance(account: accountEthAddr) {
+                tokenInfo.setAmount(String(erc20Balance))
+                group.leave()
+            } else {
+                group.leave()
+            }
         }
     }
     
@@ -627,6 +627,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainBand())
     result.append(ChainBitcana())
     result.append(ChainBitsong())
+    result.append(ChainCanto())
     result.append(ChainChihuahua())
     result.append(ChainComdex())
     result.append(ChainCoreum())

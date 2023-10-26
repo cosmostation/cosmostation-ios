@@ -25,6 +25,7 @@ class PortfolioVC: BaseVC {
             WDP.dpValue(totalValue, currencyLabel, totalValueLabel)
         }
     }
+    var detailChainTag = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +68,7 @@ class PortfolioVC: BaseVC {
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
+        onUpdateRow(detailChainTag)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -107,6 +109,15 @@ class PortfolioVC: BaseVC {
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
         print("onFetchDone ", tag)
+        onUpdateRow(tag)
+    }
+    
+    @objc func onFetchPrice(_ notification: NSNotification) {
+        tableView.reloadData()
+        onUpdateTotal()
+    }
+    
+    func onUpdateRow(_ tag: String) {
         for i in 0..<searchCosmosChains.count {
             if (searchCosmosChains[i].tag == tag) {
                 DispatchQueue.main.async {
@@ -116,11 +127,6 @@ class PortfolioVC: BaseVC {
                 }
             }
         }
-        onUpdateTotal()
-    }
-    
-    @objc func onFetchPrice(_ notification: NSNotification) {
-        tableView.reloadData()
         onUpdateTotal()
     }
     
@@ -206,6 +212,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (searchCosmosChains[indexPath.row].fetched == false) { return }
+        detailChainTag = searchCosmosChains[indexPath.row].tag
         let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
         cosmosClassVC.selectedChain = searchCosmosChains[indexPath.row]
         cosmosClassVC.hidesBottomBarWhenPushed = true

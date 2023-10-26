@@ -12,6 +12,7 @@ class CosmosTokenVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyDataView: UIView!
+    var refresher: UIRefreshControl!
     
     var selectedChain: CosmosClass!
     var mintscanTokens = Array<MintscanToken>()
@@ -29,22 +30,12 @@ class CosmosTokenVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-//        Task {
-//            if (selectedChain.supportCw20) {
-//                selectedChain.fetchAllCw20Balance(baseAccount.id)
-//            } else if (selectedChain.supportErc20) {
-//                selectedChain.fetchAllErc20Balance(baseAccount.id)
-//            }
-//        }
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
+        refresher.tintColor = .color01
+        tableView.addSubview(refresher)
         
-        
-        DispatchQueue.global().async {
-            if (self.selectedChain.supportCw20) {
-                self.selectedChain.fetchAllCw20Balance(self.baseAccount.id)
-            } else if (self.selectedChain.supportErc20) {
-                self.selectedChain.fetchAllErc20Balance(self.baseAccount.id)
-            }
-        }
+        onRequestFetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +46,21 @@ class CosmosTokenVC: BaseVC {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        refresher.endRefreshing()
+    }
+    
+    @objc func onRequestFetch() {
+        Task {
+            if (selectedChain.supportCw20) {
+                selectedChain.fetchAllCw20Balance(baseAccount.id)
+            } else if (selectedChain.supportErc20) {
+                selectedChain.fetchAllErc20Balance(baseAccount.id)
+            }
+        }
     }
     
     @objc func onFetchTokenDone(_ notification: NSNotification) {
@@ -85,6 +91,8 @@ class CosmosTokenVC: BaseVC {
             tableView.isHidden = true
             emptyDataView.isHidden = false
         }
+        
+        refresher.endRefreshing()
     }
 }
 

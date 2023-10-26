@@ -114,7 +114,6 @@ class CosmosTransfer: BaseVC {
                     //add backward path
                     if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.beforeChain(selectedChain.apiName) }).first {
                         if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
-                            print("sendable ", sendable.name)
                             recipientableChains.append(sendable)
                         }
                     }
@@ -123,7 +122,6 @@ class CosmosTransfer: BaseVC {
                     //add forward path
                     if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.chain }).first {
                         if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
-                            print("sendable ", sendable.name)
                             recipientableChains.append(sendable)
                         }
                     }
