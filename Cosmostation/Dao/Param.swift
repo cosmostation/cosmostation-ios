@@ -78,16 +78,6 @@ public struct Param {
                 return thisInfaltion.dividing(by: creInitSupply, withBehavior: WUtils.handler18)
             }
             
-        } else if (chainType == .AXELAR_MAIN) {
-            let baseInflation = NSDecimalNumber.init(string: params?.minting_inflation)
-            let keyManageRate = NSDecimalNumber.init(string: params?.axelar_key_mgmt_relative_inflation_rate)
-            let externalRate = NSDecimalNumber.init(string: params?.axelar_external_chain_voting_inflation_rate)
-            let evmChainCnt = NSDecimalNumber.init(value: params?.axelar_evm_chains.count ?? 0)
-            
-            let keyManageInflation = baseInflation.multiplying(by: keyManageRate)
-            let externalEvmInflation = externalRate.multiplying(by: evmChainCnt)
-            return baseInflation.adding(keyManageInflation).adding(externalEvmInflation)
-            
         } else if (chainType == .CUDOS_MAIN) {
             if let inflation = params?.cudos_minting_params?.inflation {
                 return NSDecimalNumber.init(string: inflation)
@@ -165,10 +155,6 @@ public struct Param {
             if let ap = params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time > now }).first?.amount {
                 return ap.multiplying(by: getCrescentRewardFact()).multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             }
-        } else if (chain == .AXELAR_MAIN) {
-            let ap = getMainSupply().multiplying(by: inflation)
-            return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
-            
         } else if (chain == .TERITORI_MAIN) {
             if let stakingDistribution = params?.teritori_minting_params?.params?.distribution_proportions?.staking {
                 return inflation.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: bondingRate, withBehavior: WUtils.handler6)
@@ -210,6 +196,8 @@ public struct Param {
                     return ap.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
                 }
                 return NSDecimalNumber.zero
+            } else if (chain == .AXELAR_MAIN) {
+                return inflation.multiplying(by: calTax).dividing(by: bondingRate, withBehavior: WUtils.handler6)
             } else {
                 return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             }
@@ -407,10 +395,6 @@ public struct Params {
     
     var cudos_minting_params: CudosMintingParam?
     
-    var axelar_key_mgmt_relative_inflation_rate: String?
-    var axelar_external_chain_voting_inflation_rate: String?
-    var axelar_evm_chains = Array<String>()
-    
     var sommelier_apy: SommelierApy?
     
     var omniflix_alloc_params: OmniflixAllocParams?
@@ -568,18 +552,6 @@ public struct Params {
         
         if let rawCudosMintingParam = dictionary?["cudos_minting_params"] as? NSDictionary {
             self.cudos_minting_params = CudosMintingParam.init(rawCudosMintingParam)
-        }
-        
-        if let rawAxelarKeyMgmtRelativeInflationRate = dictionary?["axelar_key_mgmt_relative_inflation_rate"] as? String {
-            self.axelar_key_mgmt_relative_inflation_rate = rawAxelarKeyMgmtRelativeInflationRate
-        }
-        if let rawAxelarExternalChainVotingInflationRate = dictionary?["axelar_external_chain_voting_inflation_rate"] as? String {
-            self.axelar_external_chain_voting_inflation_rate = rawAxelarExternalChainVotingInflationRate
-        }
-        if let rawAxelarEvmChains = dictionary?["axelar_evm_chains"] as? Array<String> {
-            for rawAxelarEvmChain in rawAxelarEvmChains {
-                self.axelar_evm_chains.append(rawAxelarEvmChain)
-            }
         }
         
         if let rawSommelierApy = dictionary?["sommelier_apy"] as? NSDictionary {
