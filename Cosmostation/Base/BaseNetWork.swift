@@ -110,7 +110,7 @@ class BaseNetWork {
     }
     
     static func msChainParam(_ chain: BaseChain) -> String {
-        return MINTSCAN_API_URL + "v2/utils/params/" + chain.apiName
+        return MINTSCAN_API_URL + "v10/utils/params/" + chain.apiName
     }
     
     static func msProposals(_ chain: BaseChain) -> String {

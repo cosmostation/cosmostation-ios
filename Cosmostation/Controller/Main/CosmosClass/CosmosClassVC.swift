@@ -46,8 +46,8 @@ class CosmosClassVC: BaseVC {
             let target = segue.destination as! CosmosHistoryVC
             target.selectedChain = selectedChain
         } else if (segue.identifier == "embedAboutVC") {
-//            let target = segue.destination as! CosmosCoinVC
-//            target.selectedChain = selectedChain
+            let target = segue.destination as! CosmosAboutVC
+            target.selectedChain = selectedChain
         }
     }
     

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+        <array key="SpoqaHanSansNeo-Medium.otf">
+            <string>SpoqaHanSansNeo-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="115" id="KGk-i7-Jjw" customClass="AboutStakingCell" customModule="Cosmostation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="421" height="115"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="421" height="115"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fhd-1u-NfF" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
+                        <rect key="frame" x="8" y="4" width="405" height="107"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="K8J-q5-mCc">
+                                <rect key="frame" x="14" y="14" width="377" height="96"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dh-Se-Zli">
+                                        <rect key="frame" x="0.0" y="0.0" width="377" height="15"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unbonding Times" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZQ-hI-kBt">
+                                                <rect key="frame" x="0.0" y="0.0" width="101" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color02"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axp-Z4-dNi">
+                                                <rect key="frame" x="352" y="0.0" width="25" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color01"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="DBd-Ae-LqO"/>
+                                            <constraint firstItem="FZQ-hI-kBt" firstAttribute="leading" secondItem="9dh-Se-Zli" secondAttribute="leading" id="Nfl-er-P5O"/>
+                                            <constraint firstAttribute="trailing" secondItem="axp-Z4-dNi" secondAttribute="trailing" id="NiI-jq-uhl"/>
+                                            <constraint firstItem="axp-Z4-dNi" firstAttribute="centerY" secondItem="9dh-Se-Zli" secondAttribute="centerY" id="aQ8-4z-ezc"/>
+                                            <constraint firstItem="FZQ-hI-kBt" firstAttribute="centerY" secondItem="9dh-Se-Zli" secondAttribute="centerY" id="oOM-wl-aMa"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0LQ-Su-hdQ">
+                                        <rect key="frame" x="0.0" y="23" width="377" height="15"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inflation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hot-CW-Aea">
+                                                <rect key="frame" x="0.0" y="0.0" width="48.333333333333336" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color02"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctx-qJ-Chi">
+                                                <rect key="frame" x="339" y="0.0" width="25" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color01"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05A-C6-sGu">
+                                                <rect key="frame" x="366" y="0.0" width="11" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color01"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="ctx-qJ-Chi" firstAttribute="centerY" secondItem="hot-CW-Aea" secondAttribute="centerY" id="QEK-2o-dPu"/>
+                                            <constraint firstItem="05A-C6-sGu" firstAttribute="leading" secondItem="ctx-qJ-Chi" secondAttribute="trailing" constant="2" id="SjN-uI-fnN"/>
+                                            <constraint firstAttribute="trailing" secondItem="05A-C6-sGu" secondAttribute="trailing" id="VYu-g8-gUJ"/>
+                                            <constraint firstAttribute="height" constant="15" id="cHX-V7-gI1"/>
+                                            <constraint firstItem="hot-CW-Aea" firstAttribute="centerY" secondItem="0LQ-Su-hdQ" secondAttribute="centerY" id="k3H-55-XiQ"/>
+                                            <constraint firstItem="hot-CW-Aea" firstAttribute="leading" secondItem="0LQ-Su-hdQ" secondAttribute="leading" id="kje-G7-fpt"/>
+                                            <constraint firstItem="05A-C6-sGu" firstAttribute="firstBaseline" secondItem="ctx-qJ-Chi" secondAttribute="firstBaseline" id="yEK-ZP-fpX"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OWb-YV-QGI">
+                                        <rect key="frame" x="0.0" y="46" width="377" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Staking APR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWj-FZ-3bo">
+                                                <rect key="frame" x="0.0" y="0.0" width="68.666666666666671" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color02"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbq-7H-jw1">
+                                                <rect key="frame" x="339" y="2" width="25" height="10"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color01"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Lg-WU-Qsk">
+                                                <rect key="frame" x="366" y="0.0" width="11" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color01"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="AWj-FZ-3bo" firstAttribute="leading" secondItem="OWb-YV-QGI" secondAttribute="leading" id="1HJ-V4-YYD"/>
+                                            <constraint firstAttribute="trailing" secondItem="0Lg-WU-Qsk" secondAttribute="trailing" id="H7y-7R-HcW"/>
+                                            <constraint firstItem="0Lg-WU-Qsk" firstAttribute="leading" secondItem="gbq-7H-jw1" secondAttribute="trailing" constant="2" id="UlU-kw-EdY"/>
+                                            <constraint firstItem="AWj-FZ-3bo" firstAttribute="centerY" secondItem="OWb-YV-QGI" secondAttribute="centerY" id="l7X-la-TCY"/>
+                                            <constraint firstItem="gbq-7H-jw1" firstAttribute="centerY" secondItem="AWj-FZ-3bo" secondAttribute="centerY" id="qAb-Pk-JpB"/>
+                                            <constraint firstAttribute="height" constant="15" id="su9-cA-6kn"/>
+                                            <constraint firstItem="0Lg-WU-Qsk" firstAttribute="firstBaseline" secondItem="gbq-7H-jw1" secondAttribute="firstBaseline" id="wlT-xe-sGj"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="K8J-q5-mCc" firstAttribute="leading" secondItem="Fhd-1u-NfF" secondAttribute="leading" constant="14" id="AmZ-aT-83r"/>
+                            <constraint firstAttribute="trailing" secondItem="K8J-q5-mCc" secondAttribute="trailing" constant="14" id="Dah-NU-kE1"/>
+                            <constraint firstItem="K8J-q5-mCc" firstAttribute="top" secondItem="Fhd-1u-NfF" secondAttribute="top" constant="14" id="hql-5U-9Iz"/>
+                            <constraint firstAttribute="bottom" secondItem="K8J-q5-mCc" secondAttribute="bottom" constant="14" id="yI0-J4-Czu"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Fhd-1u-NfF" secondAttribute="bottom" constant="4" id="IXI-2x-rNJ"/>
+                    <constraint firstItem="Fhd-1u-NfF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="QW6-kp-w8Z"/>
+                    <constraint firstAttribute="trailing" secondItem="Fhd-1u-NfF" secondAttribute="trailing" constant="8" id="XRt-if-wDJ"/>
+                    <constraint firstItem="Fhd-1u-NfF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="p3i-Ej-OQd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" name="_primary"/>
+            <connections>
+                <outlet property="inflationLabel" destination="ctx-qJ-Chi" id="pcn-Dw-90P"/>
+                <outlet property="inflationTitle" destination="hot-CW-Aea" id="R7L-zJ-mBu"/>
+                <outlet property="rootView" destination="Fhd-1u-NfF" id="dVg-ZS-dkM"/>
+                <outlet property="stakingAprLabel" destination="gbq-7H-jw1" id="D4n-CF-7mF"/>
+                <outlet property="stakingAprTitle" destination="AWj-FZ-3bo" id="1VW-Uk-fCp"/>
+                <outlet property="unbondingTimeLabel" destination="axp-Z4-dNi" id="8SC-bi-Reb"/>
+                <outlet property="unbondingTimeTitle" destination="FZQ-hI-kBt" id="gYv-9e-MYe"/>
+            </connections>
+            <point key="canvasLocation" x="206.87022900763358" y="13.732394366197184"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
