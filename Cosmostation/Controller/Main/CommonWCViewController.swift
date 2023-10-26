@@ -259,7 +259,7 @@ class CommonWCViewController: BaseViewController {
                 return true
             }
         }
-        if wcURL != nil && wcURL == currentV2PairingUri {
+        if currentV2PairingUri != nil {
             return true
         }
         return false
@@ -1418,13 +1418,13 @@ extension CommonWCViewController {
     func setUpAuthSubscribing() {
         Sign.instance.sessionProposalPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] sessionProposal in
+            .sink { [weak self] sessionProposal, context in
                 self?.didApproveSession(proposal: sessionProposal)
             }.store(in: &publishers)
 
         Sign.instance.sessionRequestPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] sessionRequest in
+            .sink { [weak self] sessionRequest, context in
                 self?.showSessionRequest(sessionRequest)
             }.store(in: &publishers)
     }
@@ -1515,22 +1515,20 @@ extension CommonWCViewController {
         self.wcV2CurrentProposal = proposal
         self.accountChainSet.removeAll()
         self.accountSelectedSet.removeAll()
-        self.accountChainSet = Set(proposal.requiredNamespaces.flatMap { $0.value.chains }.map { $0.reference })
+        self.accountChainSet = Set(proposal.requiredNamespaces.flatMap { $0.value.chains ?? Set() }.map { $0.reference })
         self.lastAccountAction = { _ in
             var sessionNamespaces = [String: SessionNamespace]()
             proposal.requiredNamespaces.forEach { namespaces in
                 let caip2Namespace = namespaces.key
                 let proposalNamespace = namespaces.value
-                let accounts = Set(namespaces.value.chains.filter { chain in
+                
+                let accounts = Set(namespaces.value.chains!.filter { chain in
                     self.accountMap[WUtils.getChainDBName(WUtils.getChainTypeByChainId(chain.reference))] != nil
                 }.compactMap { chain in
                     WalletConnectSwiftV2.Account(chainIdentifier: chain.absoluteString, address: self.accountMap[WUtils.getChainDBName(WUtils.getChainTypeByChainId(chain.reference))]!.account_address
                     )
                 })
-                let extensions: [SessionNamespace.Extension]? = proposalNamespace.extensions?.map { element in
-                    return SessionNamespace.Extension(accounts: accounts, methods: element.methods, events: element.events)
-                }
-                let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events, extensions: extensions)
+                let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
                 sessionNamespaces[caip2Namespace] = sessionNamespace
             }
             self.approve(proposalId:  proposal.id, namespaces: sessionNamespaces)
