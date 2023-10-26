@@ -37,12 +37,11 @@ class SelectRefAddressCell: UITableViewCell {
     func onBindRefAddress(_ refAddress: RefAddress) {
         addressLabel.text = refAddress.dpAddress
         let all = ALLCOSMOSCLASS()
-        
         if let chain = all.filter({ $0.tag == refAddress.chainTag }).first {
             if (chain.evmCompatible) {
                 evmLabel.isHidden = false
-                evmAddressLabel.text = "(" + KeyFac.convertBech32ToEvm(refAddress.dpAddress) + ")"
-                evmAddressLabel.isHidden = false
+//                evmAddressLabel.text = "(" + KeyFac.convertBech32ToEvm(refAddress.dpAddress) + ")"
+//                evmAddressLabel.isHidden = false
                 
             } else if (!chain.isDefault) {
                 deprecatedLabel.isHidden = false
@@ -52,6 +51,27 @@ class SelectRefAddressCell: UITableViewCell {
         if let account = BaseData.instance.selectAccount(refAddress.accountId) {
             accountNameLabel.text = account.name
         }
+    }
+    
+    func onBindEvmRefAddress(_ refAddress: RefAddress) {
+        addressLabel.text = refAddress.dpAddress
+        evmAddressLabel.text = "(" + KeyFac.convertBech32ToEvm(refAddress.dpAddress) + ")"
+        evmAddressLabel.isHidden = false
+        
+        let all = ALLCOSMOSCLASS()
+        if let chain = all.filter({ $0.tag == refAddress.chainTag }).first {
+            if (chain.evmCompatible) {
+                evmLabel.isHidden = false
+                
+            } else if (!chain.isDefault) {
+                deprecatedLabel.isHidden = false
+            }
+        }
+        
+        if let account = BaseData.instance.selectAccount(refAddress.accountId) {
+            accountNameLabel.text = account.name
+        }
+        
     }
     
 }

@@ -29,11 +29,20 @@ class CosmosTokenVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        Task {
-            if (selectedChain.supportCw20) {
-                selectedChain.fetchAllCw20Balance(baseAccount.id)
-            } else if (selectedChain.supportErc20) {
-                selectedChain.fetchAllErc20Balance(baseAccount.id)
+//        Task {
+//            if (selectedChain.supportCw20) {
+//                selectedChain.fetchAllCw20Balance(baseAccount.id)
+//            } else if (selectedChain.supportErc20) {
+//                selectedChain.fetchAllErc20Balance(baseAccount.id)
+//            }
+//        }
+        
+        
+        DispatchQueue.global().async {
+            if (self.selectedChain.supportCw20) {
+                self.selectedChain.fetchAllCw20Balance(self.baseAccount.id)
+            } else if (self.selectedChain.supportErc20) {
+                self.selectedChain.fetchAllErc20Balance(self.baseAccount.id)
             }
         }
     }
@@ -77,7 +86,6 @@ class CosmosTokenVC: BaseVC {
             emptyDataView.isHidden = false
         }
     }
-
 }
 
 
@@ -91,6 +99,10 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (selectedChain.supportCw20) {
             view.titleLabel.text = "Cw20 Tokens"
+            view.cntLabel.text = String(mintscanTokens.count)
+        }
+        if (selectedChain.supportErc20) {
+            view.titleLabel.text = "Erc20 Tokens"
             view.cntLabel.text = String(mintscanTokens.count)
         }
         return view
@@ -111,11 +123,24 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
-        transfer.selectedChain = selectedChain
-        transfer.toSendDenom = mintscanTokens[indexPath.row].address
-        transfer.modalTransitionStyle = .coverVertical
-        self.present(transfer, animated: true)
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (selectedChain.supportCw20) {
+            let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
+            transfer.selectedChain = selectedChain
+            transfer.toSendDenom = mintscanTokens[indexPath.row].address
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
+            
+        } else if (selectedChain.supportErc20) {
+            let transfer = EvmTransfer(nibName: "EvmTransfer", bundle: nil)
+            transfer.selectedChain = selectedChain
+            transfer.toSendDenom = mintscanTokens[indexPath.row].address
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
+        }
     }
     
     

@@ -556,6 +556,11 @@
 
 
 
+
+
+
+
+
 "recipient_address" = "받을 주소";
 "reward_claim_top_16" = "이자량 순서대로 최대 16검증인으로부터 이자를 청구 합니다.";
 "add_mnemonic" = "니모닉 추가";
@@ -787,7 +792,6 @@
 "title_watch_wallet" = "관찰 지갑 등록";
 "title_restore_privatekey" = "개인키로 지갑복원";
 "title_restore" = "니모닉으로 지갑복원";
-"title_path" = "지갑 선택";
 "title_path" = "지갑 선택";
 "title_delegate" = "위임하기";
 "title_undelegate" = "위임 철회 하기";
@@ -1038,6 +1042,7 @@
 "error_can_not_revote" = "재투표 할 수 없습니다.";
 "error_account_name" = "계정 이름을 정확히 입력하세요.";
 "error_alreay_exist_account_name" = "이미 존재하는 이름 입니다.";
+"error_recipient_not_support_evm" = "받을 주소는 EVM을 지원하지 않습니다.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";

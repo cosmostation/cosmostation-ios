@@ -1042,6 +1042,7 @@
 "error_can_not_revote" = "再投票できません。";
 "error_account_name" = "アカウント名を入力してください。";
 "error_alreay_exist_account_name" = "すでに存在する名前です。";
+"error_recipient_not_support_evm" = "受信するアドレスはEVMをサポートしていません。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

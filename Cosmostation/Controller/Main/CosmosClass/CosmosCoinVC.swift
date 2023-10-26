@@ -39,6 +39,9 @@ class CosmosCoinVC: BaseVC {
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
         
+        
+        print("", selectedChain.address, "  ", selectedChain.evmAddress)
+        
         onSortAssets()
     }
     

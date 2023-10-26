@@ -23,7 +23,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
     @IBOutlet weak var confirmBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var addressType: AddressSheetType = .DefaultTransfer
+    var addressSheetType: AddressSheetType = .DefaultTransfer
     var existedAddress: String?
     var selectedChain: CosmosClass!
     var recipientChain: CosmosClass!
@@ -43,7 +43,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        if (addressType == .RewardAddress) {
+        if (addressSheetType == .RewardAddress) {
             selfBtn.isHidden = false
         }
         
@@ -57,7 +57,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
     }
     
     override func setLocalizedString() {
-        if (addressType == .RewardAddress) {
+        if (addressSheetType == .RewardAddress) {
             addressTitle.text = NSLocalizedString("str_reward_recipient_address", comment: "")
         } else {
             addressTitle.text = NSLocalizedString("recipient_address", comment: "")
@@ -81,7 +81,11 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
         baseSheet.sheetDelegate = self
         baseSheet.senderAddress = selectedChain.address
         baseSheet.targetChain = recipientChain
-        baseSheet.sheetType = .SelectRecipientAddress
+        if (addressSheetType == .EvmTransfer) {
+            baseSheet.sheetType = .SelectRecipientEvmAddress
+        } else if (addressSheetType == .DefaultTransfer) {
+            baseSheet.sheetType = .SelectRecipientAddress
+        }
         self.onStartSheet(baseSheet)
     }
     
@@ -102,18 +106,53 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return;
         }
-        if (addressType != .RewardAddress) {
-            if (userInput == selectedChain.address) {
-                self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
-                return;
-            }
-            
-        } else {
+        if (addressSheetType == .RewardAddress) {
             if (userInput == selectedChain.rewardAddress) {
                 self.onShowToast(NSLocalizedString("error_same_reward_address", comment: ""))
                 return;
             }
+            
+        } else {
+            if (userInput == selectedChain.address) {
+                self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
+                return;
+            }
         }
+        
+        //받는 계정의 펍키 타입이 ethsecp256k1 일때만 통과시켜 줘야한다. 아니면 받는애한테 락된다.
+        if (addressSheetType == .EvmTransfer && recipientChain is ChainKava60) {
+            var kavaBechAddress = ""
+            if (WUtils.isValidChainAddress(recipientChain, userInput)) {
+                kavaBechAddress = userInput!
+            } else if (userInput?.starts(with: "0x") == true) {
+                if let evmAddess = EthereumAddress.init(userInput!) {
+                    kavaBechAddress = KeyFac.convertEvmToBech32(evmAddess.address, "kava")
+                }
+            }
+            if (WUtils.isValidChainAddress(recipientChain, kavaBechAddress)) {
+                Task {
+                    let channel = getConnection(ChainKava118())
+                    if let recipientAuth = try? await self.fetchAuth(channel, kavaBechAddress) {
+                        if (WUtils.onParseAuthPubkeyType(recipientAuth)?.contains("ethsecp256k1") == true) {
+                            DispatchQueue.main.async {
+                                self.addressDelegate?.onInputedAddress(userInput!)
+                                self.dismiss(animated: true)
+                            }
+                            return
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        self.onShowToast(NSLocalizedString("error_recipient_not_support_evm", comment: ""))
+                    }
+                }
+                
+            } else {
+                self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+            }
+            return;
+        }
+        
+        
             
         if (recipientChain is ChainOkt60Keccak) {
             if let evmAddess = EthereumAddress.init(userInput!) {
@@ -194,6 +233,9 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             
         } else if (sheetType == .SelectRecipientAddress) {
             addressTextField.text = result.param
+            
+        } else if (sheetType == .SelectRecipientEvmAddress) {
+            addressTextField.text = result.param
         }
     }
     
@@ -208,6 +250,11 @@ protocol AddressDelegate {
 }
 
 extension TxAddressSheet {
+    
+    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
+        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
+    }
     
     func checkStarname(_ inputName: String) async throws -> Starnamed_X_Starname_V1beta1_QueryStarnameResponse? {
         let channel = getConnection(ChainStarname())
@@ -269,13 +316,14 @@ extension TxAddressSheet {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
 }
 
 public enum AddressSheetType: Int {
     case RewardAddress = 0
+    case EvmTransfer = 1
     case DefaultTransfer = -1
 }
 

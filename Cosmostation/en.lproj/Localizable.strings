@@ -1042,6 +1042,7 @@
 "error_can_not_revote" = "Can not revote.";
 "error_account_name" = "Please insert account name.";
 "error_alreay_exist_account_name" = "Already exist name.";
+"error_recipient_not_support_evm" = "The receiving address does not support EVM.";
 
 
 "alert_title_no_private_key" = "No Private Key";

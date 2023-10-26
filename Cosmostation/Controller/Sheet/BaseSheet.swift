@@ -178,6 +178,29 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                     refAddresses.append(refAddress)
                 }
             }
+            refAddresses.sort {
+                if let account0 = BaseData.instance.selectAccount($0.accountId),
+                   let account1 = BaseData.instance.selectAccount($1.accountId) {
+                    return account0.name < account1.name
+                }
+                return false
+            }
+            
+        } else if (sheetType == .SelectRecipientEvmAddress) {
+            sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
+            BaseData.instance.selectAllRefAddresses().forEach { refAddress in
+                if (refAddress.chainTag == targetChain.tag && refAddress.dpAddress != senderAddress) {
+                    refAddresses.append(refAddress)
+                }
+            }
+            refAddresses.sort {
+                if let account0 = BaseData.instance.selectAccount($0.accountId),
+                   let account1 = BaseData.instance.selectAccount($1.accountId) {
+                    return account0.name < account1.name
+                }
+                return false
+            }
+            
         } else if (sheetType == .SelectNameServiceAddress) {
             sheetTitle.text = String(format: NSLocalizedString("title_select_nameservice", comment: ""), nameservices[0].name ?? "")
             
@@ -227,7 +250,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
 extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (sheetType == .SelectRecipientAddress) {
+        if (sheetType == .SelectRecipientAddress || sheetType == .SelectRecipientEvmAddress) {
             return 2
         }
         return 1
@@ -235,7 +258,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseSheetHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (sheetType == .SelectRecipientAddress) {
+        if (sheetType == .SelectRecipientAddress || sheetType == .SelectRecipientEvmAddress) {
             if (section == 0) {
                 view.titleLabel.text = "My Account"
                 view.cntLabel.text = String(refAddresses.count)
@@ -248,7 +271,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (sheetType == .SelectRecipientAddress) {
+        if (sheetType == .SelectRecipientAddress || sheetType == .SelectRecipientEvmAddress) {
             if (section == 0) {
                 return (refAddresses.count > 0) ? 40 : 0
             } else if (section == 1) {
@@ -304,7 +327,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectRecipientChain) {
             return cosmosChainList.count
             
-        } else if (sheetType == .SelectRecipientAddress) {
+        } else if (sheetType == .SelectRecipientAddress || sheetType == .SelectRecipientEvmAddress) {
             if (section == 0) {
                 return refAddresses.count
             } else {
@@ -417,6 +440,15 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             }
             return cell!
             
+        } else if (sheetType == .SelectRecipientEvmAddress) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRefAddressCell") as? SelectRefAddressCell
+            if (indexPath.section == 0) {
+                cell?.onBindEvmRefAddress(refAddresses[indexPath.row])
+            } else {
+                
+            }
+            return cell!
+            
         } else if (sheetType == .SelectNameServiceAddress) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectNameServiceCell") as? SelectNameServiceCell
             cell?.onBindNameservice(nameservices[indexPath.row])
@@ -480,7 +512,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result = BaseSheetResult.init(indexPath.row, cosmosChainList[indexPath.row].chainId)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
-        } else if (sheetType == .SelectRecipientAddress) {
+        } else if (sheetType == .SelectRecipientAddress || sheetType == .SelectRecipientEvmAddress) {
             let result = BaseSheetResult.init(indexPath.row, refAddresses[indexPath.row].dpAddress)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
@@ -563,12 +595,13 @@ public enum SheetType: Int {
     case SelectUnStakeValidator = 15
     case SelectRecipientChain = 16
     case SelectRecipientAddress = 17
-    case SelectNameServiceAddress = 18
-    case SelectBepRecipientAddress = 19
+    case SelectRecipientEvmAddress = 18
+    case SelectNameServiceAddress = 19
+    case SelectBepRecipientAddress = 20
     
-    case SelectNeutronVault = 20
+    case SelectNeutronVault = 21
     
-    case SelectHardAction = 21
-    case SelectSwpAction = 22
-    case SelectMintAction = 23
+    case SelectHardAction = 22
+    case SelectSwpAction = 23
+    case SelectMintAction = 24
 }

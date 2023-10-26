@@ -96,7 +96,7 @@ class CosmosRewardAddress: BaseVC {
             addressSheet.existedAddress = newRewardAddress?.withdrawAddress
         }
         addressSheet.recipientChain = selectedChain
-        addressSheet.addressType = .RewardAddress
+        addressSheet.addressSheetType = .RewardAddress
         addressSheet.addressDelegate = self
         self.onStartSheet(addressSheet)
     }
