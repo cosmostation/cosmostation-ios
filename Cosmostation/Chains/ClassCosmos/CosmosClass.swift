@@ -639,6 +639,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainEvmos())
     result.append(ChainFetchAi())
     result.append(ChainGravityBridge())
+    result.append(ChainHumans())
     result.append(ChainInjective())
     result.append(ChainIxo())
     result.append(ChainJuno())
@@ -686,6 +687,10 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainOkt60Keccak())
     result.append(ChainOkt996Secp())
     result.append(ChainOkt996Keccak())
+    
+    
+    //    result.append(ChainCelestia())
+    //    result.append(ChainDydx())
     
     result.forEach { chain in
         if let chainId = BaseData.instance.mintscanChains?["chains"].arrayValue.filter({ $0["chain"].stringValue == chain.apiName }).first?["chain_id"].stringValue {

@@ -63,8 +63,6 @@ class CosmosClassVC: BaseVC {
             selectedChain.fetchStakeData()
         }
         
-        print("selectedChain address ", selectedChain.address)
-        
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
         addressTap.cancelsTouchesInView = false
         addressLayer.addGestureRecognizer(addressTap)
