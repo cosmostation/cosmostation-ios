@@ -364,6 +364,7 @@
 "guide_msg_sei" = "Sei is a Cosmos SDK-based layer 1 blockchain network designed for speed, security and scalability.";
 "guide_msg_stafi" = "StaFi Hub is a sovereign Cosmos SDK based blockchain designed for cross-chain liquid staking.";
 "guide_msg_terra" = "Terra is a Cosmos SDK-based permissionless blockchain network hard forked from Terra Classic network.";
+"guide_msg_dydx" = "dYdX is a standalone Cosmos appchain designed for a decentralized exchange that supports zero-fee perpetual trading.";
 "guide_msg_mintstation" = "MintStation";
 "guide_btn_home" = "Home Page";
 "guide_btn_blog" = "Official Blog";
