@@ -350,7 +350,7 @@ public enum ChainType: String {
     case IRIS_TEST
     case ALTHEA_TEST
     case CRESCENT_TEST
-    case STATION_TEST
+    case MINTSTATION_TEST
     case NEUTRON_TEST
     
     static func SUPPRT_CHAIN() -> Array<ChainType> {
@@ -422,8 +422,8 @@ public enum ChainType: String {
 //        result.append(IRIS_TEST)
 //        result.append(ALTHEA_TEST)
 //        result.append(CRESCENT_TEST)
+        result.append(MINTSTATION_TEST)
         result.append(NEUTRON_TEST)
-        result.append(STATION_TEST)
         result.append(CERBERUS_MAIN)
         result.append(KONSTELLATION_MAIN)
         result.append(KUJIRA_MAIN)
