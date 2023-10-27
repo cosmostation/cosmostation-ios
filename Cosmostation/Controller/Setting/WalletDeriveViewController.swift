@@ -160,9 +160,11 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         } else {
             mSearchRes = mDerives.filter({ derive in
                 if let chainConfig = ChainFactory.getChainConfig(derive.chaintype) {
-                    return [chainConfig.chainAPIName, chainConfig.chainKoreanName, chainConfig.stakeSymbol].filter { str in
-                        str.localizedStandardContains(trimmedString.lowercased())
-                    }.count > 0
+                    let keywords = [chainConfig.chainType == .CRYPTO_MAIN ? "cronos pos" : chainConfig.chainAPIName,
+                                        chainConfig.chainKoreanName,
+                                        chainConfig.stakeSymbol]
+                        
+                        return keywords.contains { $0.localizedStandardContains(trimmedString.lowercased()) }
                 } else {
                     return false
                 }

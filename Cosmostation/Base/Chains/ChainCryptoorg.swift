@@ -22,7 +22,7 @@ class ChainCryptoorg: ChainConfig {
     var chainTitle2 = "CRONOS POS"
     var chainDBName = CHAIN_CRYPTO_S
     var chainAPIName = "crypto-org"
-    var chainKoreanName = "크립토오알지"
+    var chainKoreanName = "크로노스포스"
     var chainIdPrefix = "crypto-org-"
     
     var stakeDenomImg = UIImage(named: "tokenCryptoorg")
