@@ -58,7 +58,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletPersisCell", bundle: nil), forCellReuseIdentifier: "WalletPersisCell")
         self.walletTableView.register(UINib(nibName: "WalletNeutronCell", bundle: nil), forCellReuseIdentifier: "WalletNeutronCell")
         self.walletTableView.register(UINib(nibName: "WalletNobleCell", bundle: nil), forCellReuseIdentifier: "WalletNobleCell")
-        self.walletTableView.register(UINib(nibName: "WalletStationCell", bundle: nil), forCellReuseIdentifier: "WalletStationCell")
         self.walletTableView.register(UINib(nibName: "WalletBaseChainCell", bundle: nil), forCellReuseIdentifier: "WalletBaseChainCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
@@ -198,8 +197,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 return onSetNobleItems(tableView, indexPath);
             } else if (chainType == .NEUTRON_MAIN || chainType == .NEUTRON_TEST) {
                 return onSetNeutronItems(tableView, indexPath);
-            } else if (chainType == .STATION_TEST) {
-                return onSetStationItems(tableView, indexPath);
             }
             
             else {
@@ -568,26 +565,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
 
         } else if (indexPath.row == 1) {
             return onBindPriceCell(tableView)
-
-        } else {
-            return onBindGuideCell(tableView)
-        }
-    }
-    
-    func onSetStationItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
-        if (indexPath.row == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletStationCell") as? WalletStationCell
-            cell?.updateView(account, chainConfig)
-            cell?.actionDelegate = { self.onClickValidatorList() }
-            cell?.actionVote = { self.onClickVoteList() }
-            cell?.actionWC = { self.onClickWalletConect() }
-            return cell!
-
-        } else if (indexPath.row == 1) {
-            return onBindPriceCell(tableView)
-
-        } else if (indexPath.row == 2) {
-            return onBindMintingCell(tableView)
 
         } else {
             return onBindGuideCell(tableView)

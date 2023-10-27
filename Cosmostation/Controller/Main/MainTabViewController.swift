@@ -273,7 +273,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             
             
         } else if (self.mChainType == .COSMOS_TEST || self.mChainType == .IRIS_TEST || self.mChainType == .ALTHEA_TEST ||
-                   self.mChainType == .CRESCENT_TEST || self.mChainType == .STATION_TEST) {
+                   self.mChainType == .CRESCENT_TEST) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
