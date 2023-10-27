@@ -904,6 +904,7 @@
 "title_select_swappool_action" = "Select Swp Pool";
 "title_mint_list" = "Mint Market List";
 "title_select_mint_action" = "Select Mint Market";
+"title_buy_crypto" = "クリプト購入";
 
 
 "proposal_type_basic" = "Basic";

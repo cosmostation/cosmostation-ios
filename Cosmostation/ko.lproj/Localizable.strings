@@ -904,6 +904,7 @@
 "title_select_swappool_action" = "스왑 풀 선택";
 "title_mint_list" = "민팅 목록";
 "title_select_mint_action" = "민팅 선택";
+"title_buy_crypto" = "크립토 구매";
 
 
 "proposal_type_basic" = "기본";

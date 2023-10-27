@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class ServiceVC: BaseVC {
     
@@ -28,6 +30,51 @@ class ServiceVC: BaseVC {
     func initView() {
         baseAccount = BaseData.instance.baseAccount
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
+    }
+    
+    func onOpenMoonpay() {
+        var query = "?apiKey=" + MOON_PAY_PUBLICK
+        let param = ["api_key" : query] as [String : Any]
+        AF.request(CSS_MOON_PAY, method: .post, parameters: param, encoding: JSONEncoding.default).responseDecodable(of: JSON.self)  { response in
+            switch response.result {
+            case .success(let res):
+                if let signauture = res["signature"].string {
+                    let signauture2 = signauture.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                        let urlMoonpay = URL(string: MOON_PAY_URL + query + "&signature=" + signauture2!)
+                        if (UIApplication.shared.canOpenURL(urlMoonpay!)) {
+                            UIApplication.shared.open(urlMoonpay!, options: [:], completionHandler: nil)
+                        }
+                    });
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                        self.onShowToast(NSLocalizedString("error_network_msg", comment: ""))
+                    });
+                }
+                
+            case .failure(let error):
+                self.onShowToast("\(error)")
+            }
+        }
+    }
+    
+    func onOpenKado() {
+        let query = "?apiKey=" + KADO_PAY_PUBLICK
+        let urlKadoMoney = URL(string: KADO_PAY_URL + query)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            if (UIApplication.shared.canOpenURL(urlKadoMoney!)) {
+                UIApplication.shared.open(urlKadoMoney!, options: [:], completionHandler: nil)
+            }
+        });
+    }
+    
+    func onOpenBinance() {
+        let binanceUrl = URL(string: BINANCE_BUY_URL)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            if (UIApplication.shared.canOpenURL(binanceUrl!)) {
+                UIApplication.shared.open(binanceUrl!, options: [:], completionHandler: nil)
+            }
+        });
     }
 }
 
@@ -77,7 +124,10 @@ extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
             self.present(dappStartVC, animated: true)
             
         } else {
-            //display moon pay or 
+            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+            baseSheet.sheetDelegate = self
+            baseSheet.sheetType = .SelectBuyCrypto
+            onStartSheet(baseSheet)
         }
     }
 }
@@ -120,6 +170,16 @@ extension ServiceVC: BaseSheetDelegate {
                     }
                 }
             }
+            
+        } else if (sheetType == .SelectBuyCrypto) {
+            if (result.position == 0) {
+                onOpenMoonpay()
+            } else if (result.position == 1) {
+                onOpenKado()
+            } else if (result.position == 2) {
+                onOpenBinance()
+            }
+            
         }
     }
 }
