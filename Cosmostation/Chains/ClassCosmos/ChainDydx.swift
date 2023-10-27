@@ -13,16 +13,16 @@ class ChainDydx: CosmosClass  {
     override init() {
         super.init()
         
-//        name = "Dydx"
-//        tag = "dydx118"
-//        logo1 = "chainDydx"
-//        logo2 = "chainDydx2"
-//        apiName = "dydx"
-//        stakeDenom = ""
-//        
-//        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-//        accountPrefix = ""
-//        
-//        grpcHost = ""
+        name = "Dydx"
+        tag = "dydx118"
+        logo1 = "chainDydx"
+        logo2 = "chainDydx2"
+        apiName = "dydx"
+        stakeDenom = "adydx"
+        
+        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        accountPrefix = "dydx"
+        
+        grpcHost = "grpc-dydx.cosmostation.io"
     }
 }
