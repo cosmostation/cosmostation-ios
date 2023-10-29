@@ -67,7 +67,7 @@ class CosmosRewardAddress: BaseVC {
         }
         selectedFeeInfo = selectedChain.getFeeBasePosition()
         feeSegments.selectedSegmentIndex = selectedFeeInfo
-        txFee = selectedChain.getInitFee()
+        txFee = selectedChain.getInitPayableFee()
         
         newAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
@@ -138,7 +138,7 @@ class CosmosRewardAddress: BaseVC {
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeeInfo = sender.selectedSegmentIndex
-        txFee = selectedChain.getBaseFee(selectedFeeInfo, txFee.amount[0].denom)
+        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
         onUpdateFeeView()
         onSimul()
     }

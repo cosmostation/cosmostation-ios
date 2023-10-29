@@ -10,7 +10,6 @@ import Foundation
 
 public struct FeeInfo {
     var title = ""
-    var msg = ""
     var FeeDatas = Array<FeeData>()
     
     init(_ data: String?) {

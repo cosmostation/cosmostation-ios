@@ -80,7 +80,7 @@ class KavaMintAction: BaseVC {
         }
         selectedFeeInfo = selectedChain.getFeeBasePosition()
         feeSegments.selectedSegmentIndex = selectedFeeInfo
-        txFee = selectedChain.getInitFee()
+        txFee = selectedChain.getInitPayableFee()
         
         collateralMsAsset = BaseData.instance.getAsset(selectedChain.apiName, collateralParam.denom)!
         principalMsAsset = BaseData.instance.getAsset(selectedChain.apiName, "usdx")!
@@ -251,7 +251,7 @@ class KavaMintAction: BaseVC {
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeeInfo = sender.selectedSegmentIndex
-        txFee = selectedChain.getBaseFee(selectedFeeInfo, txFee.amount[0].denom)
+        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
         onUpdateFeeView()
         onSimul()
     }

@@ -483,8 +483,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     }
     
     func getBaseFee() -> Cosmos_Tx_V1beta1_Fee {
-        let baseFeePosition = inputCosmosChain.getFeeBasePosition()
-        let minFee = inputCosmosChain.getDefaultFeeCoins()[baseFeePosition]
+        let minFee = inputCosmosChain.getDefaultFeeCoins()[0]
         let feeCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = minFee.denom; $0.amount = minFee.amount }
         return Cosmos_Tx_V1beta1_Fee.with {
             $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!

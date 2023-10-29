@@ -78,7 +78,7 @@ class CosmosDelegate: BaseVC {
         }
         selectedFeeInfo = selectedChain.getFeeBasePosition()
         feeSegments.selectedSegmentIndex = selectedFeeInfo
-        txFee = selectedChain.getInitFee()
+        txFee = selectedChain.getInitPayableFee()
         
         validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
         stakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
@@ -123,34 +123,6 @@ class CosmosDelegate: BaseVC {
         onSimul()
     }
     
-    func onUpdateFeeView() {
-        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
-            feeSelectLabel.text = msAsset.symbol
-            WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-            let amount = NSDecimalNumber(string: txFee.amount[0].amount)
-            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
-            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
-        }
-        
-        
-        let stakeDenom = selectedChain.stakeDenom!
-        let balanceAmount = selectedChain.balanceAmount(stakeDenom)
-        let vestingAmount = selectedChain.vestingAmount(stakeDenom)
-        
-        if (txFee.amount[0].denom == stakeDenom) {
-            let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
-            if (feeAmount.compare(balanceAmount).rawValue > 0) {
-                //ERROR short balance!!
-            }
-            availableAmount = balanceAmount.adding(vestingAmount).subtracting(feeAmount)
-            
-        } else {
-            //fee pay with another denom
-            availableAmount = balanceAmount.adding(vestingAmount)
-        }
-    }
-    
     @objc func onClickAmount() {
         let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
@@ -179,7 +151,7 @@ class CosmosDelegate: BaseVC {
 
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeeInfo = sender.selectedSegmentIndex
-        txFee = selectedChain.getBaseFee(selectedFeeInfo, txFee.amount[0].denom)
+        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
         onUpdateFeeView()
         onSimul()
     }
@@ -191,6 +163,34 @@ class CosmosDelegate: BaseVC {
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeCoin
         onStartSheet(baseSheet, 240)
+    }
+    
+    func onUpdateFeeView() {
+        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
+            feeSelectLabel.text = msAsset.symbol
+            WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let amount = NSDecimalNumber(string: txFee.amount[0].amount)
+            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
+        }
+        
+        
+        let stakeDenom = selectedChain.stakeDenom!
+        let balanceAmount = selectedChain.balanceAmount(stakeDenom)
+        let vestingAmount = selectedChain.vestingAmount(stakeDenom)
+        
+        if (txFee.amount[0].denom == stakeDenom) {
+            let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
+            if (feeAmount.compare(balanceAmount).rawValue > 0) {
+                //ERROR short balance!!
+            }
+            availableAmount = balanceAmount.adding(vestingAmount).subtracting(feeAmount)
+            
+        } else {
+            //fee pay with another denom
+            availableAmount = balanceAmount.adding(vestingAmount)
+        }
     }
     
     @objc func onClickMemo() {

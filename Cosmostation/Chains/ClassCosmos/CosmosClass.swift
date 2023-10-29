@@ -14,7 +14,7 @@ import Alamofire
 import SwiftyJSON
 import web3swift
 
-class CosmosClass: BaseChain  {
+class CosmosClass: BaseChain {
     
     var stakeDenom: String!
     var supportCw20 = false
@@ -116,98 +116,6 @@ class CosmosClass: BaseChain  {
         }
     }
     
-    func getInitFee() -> Cosmos_Tx_V1beta1_Fee? {
-        var feeCoin: Cosmos_Base_V1beta1_Coin?
-        for i in 0..<getDefaultFeeCoins().count {
-            let minFee = getDefaultFeeCoins()[i]
-            if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
-                feeCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = minFee.denom; $0.amount = minFee.amount }
-                break
-            }
-        }
-        if (feeCoin != nil) {
-            return Cosmos_Tx_V1beta1_Fee.with {
-                $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
-                $0.amount = [feeCoin!]
-            }
-        }
-        return nil
-    }
-    
-    func getBaseFee(_ position: Int, _ denom: String) -> Cosmos_Tx_V1beta1_Fee {
-        let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
-        let feeDatas = getFeeInfos()[position].FeeDatas
-        let rate = feeDatas.filter { $0.denom == denom }.first!.gasRate
-        let coinAmount = rate!.multiplying(by: gasAmount, withBehavior: handler0Up)
-        return Cosmos_Tx_V1beta1_Fee.with {
-            $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
-            $0.amount = [Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = coinAmount.stringValue }]
-        }
-    }
-    
-    func getFeeBasePosition() -> Int {
-        return mintscanChainParam["gas_price"]["base"].intValue
-    }
-    
-    func isTxFeePayable() -> Bool {
-        var result = false
-        getDefaultFeeCoins().forEach { minFee in
-            if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
-                result = true
-                return
-            }
-        }
-        return result
-    }
-    
-    func getDefaultFeeCoins() -> [Cosmos_Base_V1beta1_Coin] {
-        var result = [Cosmos_Base_V1beta1_Coin]()
-        let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
-        let feeDatas = getFeeInfos()[getFeeBasePosition()].FeeDatas
-        feeDatas.forEach { feeData in
-            let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: handler0Up)
-            result.append(Cosmos_Base_V1beta1_Coin.with {  $0.denom = feeData.denom!; $0.amount = amount.stringValue })
-        }
-        return result
-    }
-    
-    func getFeeInfos() -> [FeeInfo] {
-        var result = [FeeInfo]()
-        mintscanChainParam["gas_price"]["rate"].arrayValue.forEach { rate in
-            result.append(FeeInfo.init(rate.stringValue))
-        }
-        if (result.count == 1) {
-            result[0].title = NSLocalizedString("str_fixed", comment: "")
-            result[0].msg = NSLocalizedString("fee_speed_title_fixed", comment: "")
-        } else if (result.count == 2) {
-            result[1].title = NSLocalizedString("str_average", comment: "")
-            result[1].msg = NSLocalizedString("fee_speed_title_average", comment: "")
-            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
-                result[0].title = NSLocalizedString("str_zero", comment: "")
-                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
-            } else {
-                result[0].title = NSLocalizedString("str_tiny", comment: "")
-                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
-            }
-        } else if (result.count == 3) {
-            result[2].title = NSLocalizedString("str_average", comment: "")
-            result[2].msg = NSLocalizedString("fee_speed_title_average", comment: "")
-            result[1].title = NSLocalizedString("str_low", comment: "")
-            result[1].msg = NSLocalizedString("fee_speed_title_low", comment: "")
-            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
-                result[0].title = NSLocalizedString("str_zero", comment: "")
-                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
-            } else {
-                result[0].title = NSLocalizedString("str_tiny", comment: "")
-                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
-            }
-        }
-        return result
-    }
-    
-    
-    
-    
     func allStakingDenomAmount() -> NSDecimalNumber {
          return balanceAmount(stakeDenom).adding(vestingAmount(stakeDenom)).adding(delegationAmountSum())
             .adding(unbondingAmountSum()).adding(rewardAmountSum(stakeDenom))
@@ -226,7 +134,121 @@ class CosmosClass: BaseChain  {
     func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
         return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
     }
+    
+    func monikerImg(_ opAddress: String) -> URL {
+        return URL(string: ResourceBase + apiName + "/moniker/" + opAddress + ".png") ?? URL(string: "")!
+    }
 }
+
+//gas fee
+extension CosmosClass {
+    
+    func getChainParam() -> JSON {
+        return mintscanChainParam["params"]["chainlist_params"]
+    }
+    
+    func isGasSimulable() -> Bool {
+        return getChainParam()["isSimulable"].bool ?? true
+    }
+    
+    func feeThreshold() -> String? {
+        return nil
+    }
+    
+    func gasMultiply() -> NSDecimalNumber {
+        if let mutiply = getChainParam()["simul_gas_multiply"].string {
+            return NSDecimalNumber(string: mutiply)
+        }
+        return NSDecimalNumber(string: "1.2")
+    }
+    
+    func getFeeInfos() -> [FeeInfo] {
+        var result = [FeeInfo]()
+        getChainParam()["fee"]["rate"].arrayValue.forEach { rate in
+            result.append(FeeInfo.init(rate.stringValue))
+        }
+        if (result.count == 1) {
+            result[0].title = NSLocalizedString("str_fixed", comment: "")
+        } else if (result.count == 2) {
+            result[1].title = NSLocalizedString("str_average", comment: "")
+            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+                result[0].title = NSLocalizedString("str_zero", comment: "")
+            } else {
+                result[0].title = NSLocalizedString("str_tiny", comment: "")
+            }
+        } else if (result.count == 3) {
+            result[2].title = NSLocalizedString("str_average", comment: "")
+            result[1].title = NSLocalizedString("str_low", comment: "")
+            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+                result[0].title = NSLocalizedString("str_zero", comment: "")
+            } else {
+                result[0].title = NSLocalizedString("str_tiny", comment: "")
+            }
+        }
+        return result
+    }
+    
+    func getFeeBasePosition() -> Int {
+        return getChainParam()["fee"]["base"].intValue
+    }
+    
+    //get chainlist suggest fees array
+    func getDefaultFeeCoins() -> [Cosmos_Base_V1beta1_Coin] {
+        var result = [Cosmos_Base_V1beta1_Coin]()
+        let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
+        let feeDatas = getFeeInfos()[getFeeBasePosition()].FeeDatas
+        feeDatas.forEach { feeData in
+            let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: handler0Up)
+            result.append(Cosmos_Base_V1beta1_Coin.with {  $0.denom = feeData.denom!; $0.amount = amount.stringValue })
+        }
+        return result
+    }
+    
+    //get first payable fee with this account
+    func getInitPayableFee() -> Cosmos_Tx_V1beta1_Fee? {
+        var feeCoin: Cosmos_Base_V1beta1_Coin?
+        for i in 0..<getDefaultFeeCoins().count {
+            let minFee = getDefaultFeeCoins()[i]
+            if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+                feeCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = minFee.denom; $0.amount = minFee.amount }
+                break
+            }
+        }
+        if (feeCoin != nil) {
+            return Cosmos_Tx_V1beta1_Fee.with {
+                $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
+                $0.amount = [feeCoin!]
+            }
+        }
+        return nil
+    }
+    
+    // check account payable with lowest fee
+    func isTxFeePayable() -> Bool {
+        var result = false
+        getDefaultFeeCoins().forEach { minFee in
+            if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+                result = true
+                return
+            }
+        }
+        return result
+    }
+    
+    //get user selected fee
+    func getUserSelectedFee(_ position: Int, _ denom: String) -> Cosmos_Tx_V1beta1_Fee {
+        let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
+        let feeDatas = getFeeInfos()[position].FeeDatas
+        let rate = feeDatas.filter { $0.denom == denom }.first!.gasRate
+        let coinAmount = rate!.multiplying(by: gasAmount, withBehavior: handler0Up)
+        return Cosmos_Tx_V1beta1_Fee.with {
+            $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
+            $0.amount = [Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = coinAmount.stringValue }]
+        }
+    }
+    
+}
+
 
 //about mintscan api
 extension CosmosClass {
@@ -606,14 +628,6 @@ extension CosmosClass {
         return callOptions
     }
 }
-
-extension CosmosClass {
-    
-    func monikerImg(_ opAddress: String) -> URL {
-        return URL(string: ResourceBase + apiName + "/moniker/" + opAddress + ".png") ?? URL(string: "")!
-    }
-}
-
 
 
 func ALLCOSMOSCLASS() -> [CosmosClass] {
