@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+        <array key="SpoqaHanSansNeo-Medium.otf">
+            <string>SpoqaHanSansNeo-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="KGk-i7-Jjw" customClass="SelectAccountCell" customModule="Cosmostation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="533" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="533" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i8w-3u-POV">
+                        <rect key="frame" x="0.0" y="0.0" width="533" height="68"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconMnemonic" translatesAutoresizingMaskIntoConstraints="NO" id="582-wr-oSa">
+                                <rect key="frame" x="12" y="18" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="L2I-hv-r5I"/>
+                                    <constraint firstAttribute="width" constant="32" id="ibH-EP-u9N"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="F0D-Yn-Hzh">
+                                <rect key="frame" x="48" y="25.333333333333329" width="473" height="17.666666666666671"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itr-io-nvY">
+                                        <rect key="frame" x="0.0" y="0.0" width="55.333333333333336" height="17.666666666666668"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                        <color key="textColor" name="_color01"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="3Zx-xm-573">
+                                        <rect key="frame" x="0.0" y="17.666666666666668" width="0.0" height="0.0"/>
+                                        <subviews>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deprecated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P71-ET-Hyo">
+                                                <rect key="frame" x="0.0" y="0.0" width="68" height="14"/>
+                                                <color key="backgroundColor" name="_color06"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="14" id="7Oy-XM-CRF"/>
+                                                    <constraint firstAttribute="width" constant="68" id="c9k-Y2-jGt"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                                <color key="textColor" name="_color02"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVM Compat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xt3-Zh-lRm">
+                                                <rect key="frame" x="0.0" y="0.0" width="73" height="14"/>
+                                                <color key="backgroundColor" red="0.48627450979999998" green="0.30980392159999998" blue="0.98823529409999999" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="73" id="ikk-Wb-iOx"/>
+                                                    <constraint firstAttribute="height" constant="14" id="qHh-p8-zBd"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                                <color key="textColor" name="_color01"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <viewLayoutGuide key="safeArea" id="njM-hq-vo0"/>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kIj-Jq-BPQ">
+                                <rect key="frame" x="8" y="67.333333333333329" width="513" height="0.6666666666666714"/>
+                                <viewLayoutGuide key="safeArea" id="i3g-bu-c74"/>
+                                <color key="backgroundColor" name="_divider"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.80000000000000004" id="Gco-aY-WSa"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="F0D-Yn-Hzh" firstAttribute="leading" secondItem="582-wr-oSa" secondAttribute="trailing" constant="4" id="1fd-dN-YfV"/>
+                            <constraint firstItem="582-wr-oSa" firstAttribute="leading" secondItem="i8w-3u-POV" secondAttribute="leading" constant="12" id="5dA-vg-7AQ"/>
+                            <constraint firstItem="kIj-Jq-BPQ" firstAttribute="bottom" secondItem="i8w-3u-POV" secondAttribute="bottom" id="OES-IA-Hev"/>
+                            <constraint firstItem="kIj-Jq-BPQ" firstAttribute="leading" secondItem="i8w-3u-POV" secondAttribute="leading" constant="8" id="TdR-7t-UvH"/>
+                            <constraint firstAttribute="trailing" secondItem="F0D-Yn-Hzh" secondAttribute="trailing" constant="12" id="Zim-6b-xkO"/>
+                            <constraint firstAttribute="trailing" secondItem="kIj-Jq-BPQ" secondAttribute="trailing" constant="12" id="j0a-zf-k2q"/>
+                            <constraint firstItem="582-wr-oSa" firstAttribute="centerY" secondItem="i8w-3u-POV" secondAttribute="centerY" id="qRS-gg-SZQ"/>
+                            <constraint firstAttribute="height" constant="68" id="szZ-9R-xx0"/>
+                            <constraint firstItem="F0D-Yn-Hzh" firstAttribute="centerY" secondItem="i8w-3u-POV" secondAttribute="centerY" id="xCK-wS-uzg"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="i8w-3u-POV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5Cp-cl-gNN"/>
+                    <constraint firstAttribute="trailing" secondItem="i8w-3u-POV" secondAttribute="trailing" id="Bpr-bB-VbB"/>
+                    <constraint firstItem="i8w-3u-POV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="LP9-wz-cQP"/>
+                    <constraint firstAttribute="bottom" secondItem="i8w-3u-POV" secondAttribute="bottom" id="NGS-zv-cad"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" name="_primary"/>
+            <connections>
+                <outlet property="addressLabel" destination="Itr-io-nvY" id="Xau-fc-ezU"/>
+                <outlet property="deprecatedLabel" destination="P71-ET-Hyo" id="Zhu-Gg-mJh"/>
+                <outlet property="evmLabel" destination="xt3-Zh-lRm" id="uFB-ey-tQK"/>
+                <outlet property="tagLayer" destination="3Zx-xm-573" id="G20-mB-BE3"/>
+                <outlet property="typeImg" destination="582-wr-oSa" id="s39-wv-Rh1"/>
+            </connections>
+            <point key="canvasLocation" x="219.08396946564883" y="29.577464788732396"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="iconMnemonic" width="24" height="24"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color06">
+            <color red="0.27500000596046448" green="0.27799999713897705" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_divider">
+            <color red="1" green="1" blue="1" alpha="0.20200000703334808" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

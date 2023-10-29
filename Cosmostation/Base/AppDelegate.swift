@@ -10,7 +10,7 @@ import UIKit
 import SwiftKeychainWrapper
 import Firebase
 import UserNotifications
-//import WalletConnectSwiftV2
+import WalletConnectSwiftV2
 import Starscream
 
 @UIApplicationMain
@@ -79,18 +79,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     private func initWalletConnectV2() {
-//        let metadata = AppMetadata(
-//            name: NSLocalizedString("wc_peer_name", comment: ""),
-//            description: NSLocalizedString("wc_peer_desc", comment: ""),
-//            url: NSLocalizedString("wc_peer_url", comment: ""),
-//            icons: [])
-//
-//        Networking.configure(projectId: Bundle.main.WALLET_CONNECT_API_KEY, socketFactory: self)
-//        Pair.configure(metadata: metadata)
-//#if DEBUG
-//        try? Pair.instance.cleanup()
-//        try? Sign.instance.cleanup()
-//#endif
+        let metadata = AppMetadata(
+            name: NSLocalizedString("wc_peer_name", comment: ""),
+            description: NSLocalizedString("wc_peer_desc", comment: ""),
+            url: NSLocalizedString("wc_peer_url", comment: ""),
+            icons: [])
+
+        Networking.configure(projectId: Bundle.main.WALLET_CONNECT_API_KEY, socketFactory: self)
+        Pair.configure(metadata: metadata)
+#if DEBUG
+        try? Pair.instance.cleanup()
+        try? Sign.instance.cleanup()
+#endif
     }
     
     func requestToken() {
@@ -104,12 +104,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-//        if (url.scheme == "cosmostation") {
-//            if (application.topViewController is CommonWCViewController || application.topViewController is SBCardPopupViewController) {
-//                if let wcVC = application.topViewController as? CommonWCViewController {
-//                    wcVC.processQuery(host: url.host, query: url.query)
-//                }
-//            } else {
+        print("scheme : ", url.scheme)
+        if (url.scheme == "cosmostation") {
+            if (application.topViewController is DappDetailVC) {
+                if let wcVC = application.topViewController as? DappDetailVC {
+                    wcVC.processQuery(host: url.host, query: url.query)
+                }
+            } 
+            
+//            else {
 //                scheme = url
 //                if let mainVC = UIApplication.shared.foregroundWindow?.rootViewController as? MainTabViewController {
 //                    mainVC.processScheme()
@@ -118,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //                    application.topViewController!.present(emptyWcVc, animated: true, completion: nil)
 //                }
 //            }
-//        }
+        }
         return false
     }
 
@@ -216,13 +219,13 @@ extension UIApplication{
     }
 }
 
-//extension AppDelegate: WebSocketFactory {
-//    func create(with url: URL) -> WalletConnectSwiftV2.WebSocketConnecting {
-//        return WebSocket(request: URLRequest(url: url))
-//    }
-//}
-//
-//extension WebSocket: WebSocketConnecting { }
+extension AppDelegate: WebSocketFactory {
+    func create(with url: URL) -> WalletConnectSwiftV2.WebSocketConnecting {
+        return WebSocket(request: URLRequest(url: url))
+    }
+}
+
+extension WebSocket: WebSocketConnecting { }
 
 // MARK: - Firebase
 

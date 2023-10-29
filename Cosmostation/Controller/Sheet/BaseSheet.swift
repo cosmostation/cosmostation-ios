@@ -40,6 +40,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var hardMarketDenom: String?
     var swpName: String?
     var cdpType: String?
+    
+    var selectChains = Array<CosmosClass>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +61,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SwitchPriceDisplayCell", bundle: nil), forCellReuseIdentifier: "SwitchPriceDisplayCell")
         sheetTableView.register(UINib(nibName: "SelectSwapChainCell", bundle: nil), forCellReuseIdentifier: "SelectSwapChainCell")
         sheetTableView.register(UINib(nibName: "SelectSwapAssetCell", bundle: nil), forCellReuseIdentifier: "SelectSwapAssetCell")
+        sheetTableView.register(UINib(nibName: "SelectAccountCell", bundle: nil), forCellReuseIdentifier: "SelectAccountCell")
         
         sheetTableView.register(UINib(nibName: "SelectFeeCoinCell", bundle: nil), forCellReuseIdentifier: "SelectFeeCoinCell")
         sheetTableView.register(UINib(nibName: "SelectValidatorCell", bundle: nil), forCellReuseIdentifier: "SelectValidatorCell")
@@ -219,8 +222,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectMintAction) {
             sheetTitle.text = NSLocalizedString("title_select_mint_action", comment: "")
             
+        } else if (sheetType == .SelectAccount) {
+            sheetTitle.text = NSLocalizedString("title_select_wallet", comment: "")
         }
-        
     }
     
     @objc func dismissKeyboard() {
@@ -351,6 +355,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectMintAction) {
             return 4
+            
+        } else if (sheetType == .SelectAccount) {
+            return selectChains.count
         }
         return 0
     }
@@ -479,6 +486,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindMint(indexPath.row, cdpType!)
             return cell!
             
+        } else if (sheetType == .SelectAccount) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
+            cell?.onBindChains(selectChains[indexPath.row])
+            return cell!
+            
         }
         return UITableViewCell()
     }
@@ -549,6 +561,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result = BaseSheetResult.init(indexPath.row, cdpType)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if (sheetType == .SelectAccount) {
+            let result = BaseSheetResult.init(indexPath.row, selectChains[indexPath.row].address)
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
         } else {
             sheetDelegate?.onSelectedSheet(sheetType, BaseSheetResult.init(indexPath.row, nil))
         }
@@ -604,4 +620,6 @@ public enum SheetType: Int {
     case SelectHardAction = 22
     case SelectSwpAction = 23
     case SelectMintAction = 24
+    
+    case SelectAccount = 30
 }

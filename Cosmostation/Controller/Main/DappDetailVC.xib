@@ -1,30 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DappDetailVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="dappUrlLabel" destination="jkL-YJ-8nS" id="w6A-ZA-xpX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webView" destination="ET7-vF-dJg" id="5G6-av-55w"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWB-hR-diP">
+                    <rect key="frame" x="0.0" y="59" width="393" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIa-20-eov">
+                            <rect key="frame" x="8" y="12" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="gjg-5a-DpZ"/>
+                                <constraint firstAttribute="height" constant="40" id="kLU-Ir-yFG"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="btnBack"/>
+                            <connections>
+                                <action selector="onBack:" destination="-1" eventType="touchUpInside" id="5M1-Nx-Nxu"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dapp Url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkL-YJ-8nS">
+                            <rect key="frame" x="166.66666666666666" y="12" width="59.666666666666657" height="40"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" name="_colorBg"/>
+                    <constraints>
+                        <constraint firstItem="jkL-YJ-8nS" firstAttribute="top" secondItem="nWB-hR-diP" secondAttribute="top" constant="12" id="Otu-v4-kHx"/>
+                        <constraint firstItem="uIa-20-eov" firstAttribute="top" secondItem="nWB-hR-diP" secondAttribute="top" constant="12" id="ZYo-Ze-t5w"/>
+                        <constraint firstItem="jkL-YJ-8nS" firstAttribute="centerX" secondItem="nWB-hR-diP" secondAttribute="centerX" id="his-KI-fUG"/>
+                        <constraint firstItem="uIa-20-eov" firstAttribute="leading" secondItem="nWB-hR-diP" secondAttribute="leading" constant="8" id="jfD-Gb-tw7"/>
+                        <constraint firstAttribute="bottom" secondItem="uIa-20-eov" secondAttribute="bottom" constant="12" id="vXg-b4-0Fz"/>
+                        <constraint firstAttribute="bottom" secondItem="jkL-YJ-8nS" secondAttribute="bottom" constant="12" id="xIO-l7-c6O"/>
+                    </constraints>
+                </view>
+                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ET7-vF-dJg">
+                    <rect key="frame" x="0.0" y="123" width="393" height="695"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <wkWebViewConfiguration key="configuration">
+                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                        <wkPreferences key="preferences"/>
+                    </wkWebViewConfiguration>
+                </wkWebView>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
-            <point key="canvasLocation" x="77" y="21"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nWB-hR-diP" secondAttribute="trailing" id="148-mo-e5q"/>
+                <constraint firstItem="nWB-hR-diP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Set-VF-mfe"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ET7-vF-dJg" secondAttribute="trailing" id="XVC-lW-XqC"/>
+                <constraint firstItem="ET7-vF-dJg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ZBb-rl-clX"/>
+                <constraint firstItem="nWB-hR-diP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="jeQ-wb-fCW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ET7-vF-dJg" secondAttribute="bottom" id="mF0-AU-Vto"/>
+                <constraint firstItem="ET7-vF-dJg" firstAttribute="top" secondItem="nWB-hR-diP" secondAttribute="bottom" id="sSO-7u-coC"/>
+            </constraints>
+            <point key="canvasLocation" x="75.572519083969468" y="20.422535211267608"/>
         </view>
     </objects>
     <resources>
+        <image name="btnBack" width="24" height="24"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="_colorBg">
             <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

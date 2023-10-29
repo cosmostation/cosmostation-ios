@@ -904,6 +904,7 @@
 "title_select_swappool_action" = "Select Swp Pool";
 "title_mint_list" = "Mint Market List";
 "title_select_mint_action" = "Select Mint Market";
+"title_select_wallet" = "Select Wallet";
 
 
 "proposal_type_basic" = "Basic";
@@ -1043,6 +1044,7 @@
 "error_account_name" = "Please insert account name.";
 "error_alreay_exist_account_name" = "Already exist name.";
 "error_recipient_not_support_evm" = "The receiving address does not support EVM.";
+"error_no_display" = "Please activate the account to use the dApp.";
 
 
 "alert_title_no_private_key" = "No Private Key";
@@ -1246,3 +1248,9 @@
 "new_account_address" = "Address";
 
 "private_key_restore_priv_key" = "Private Key";
+
+
+"wc_peer_name" = "Cosmostation";
+"wc_peer_desc" = "Cosmostation Wallet iOS";
+"wc_peer_url" = "https://cosmostation.io";
+"wc_request_responsed" = "Responsed for Request";
