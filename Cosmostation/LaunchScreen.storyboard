@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,18 +20,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cosmostaion" translatesAutoresizingMaskIntoConstraints="NO" id="GPe-QH-ejp">
-                                <rect key="frame" x="96" y="239" width="236" height="41"/>
+                                <rect key="frame" x="74" y="389.66666666666669" width="280" height="80"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cosmostationLogo" translatesAutoresizingMaskIntoConstraints="NO" id="TkH-JF-SCg">
-                                <rect key="frame" x="118" y="830" width="192" height="46"/>
+                                <rect key="frame" x="109.66666666666669" y="864" width="209" height="12"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="CpL-84-w9F" firstAttribute="top" secondItem="GPe-QH-ejp" secondAttribute="bottom" constant="-280" id="6wl-dt-09R"/>
                             <constraint firstItem="CpL-84-w9F" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="Hqj-2S-3C3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CpL-84-w9F" secondAttribute="trailing" id="JOU-xC-cjo"/>
+                            <constraint firstItem="GPe-QH-ejp" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-40" id="JTX-h8-3zS"/>
                             <constraint firstItem="CpL-84-w9F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QXp-8I-xJk"/>
                             <constraint firstItem="GPe-QH-ejp" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="R2D-3h-mFm"/>
                             <constraint firstAttribute="top" secondItem="CpL-84-w9F" secondAttribute="top" id="Sq3-RG-SJe"/>
@@ -46,8 +46,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg_intro" width="375" height="812"/>
-        <image name="cosmostaion" width="236" height="41"/>
-        <image name="cosmostationLogo" width="192" height="46"/>
+        <image name="bg_intro" width="750" height="1624"/>
+        <image name="cosmostaion" width="280" height="80"/>
+        <image name="cosmostationLogo" width="209" height="12"/>
     </resources>
 </document>

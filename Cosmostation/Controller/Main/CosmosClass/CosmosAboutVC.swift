@@ -121,4 +121,27 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        for cell in tableView.visibleCells {
+            let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
+            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
+                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
+            }
+        }
+    }
+
+    func maskCell(cell: UITableViewCell, margin: Float) {
+        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
+        cell.layer.masksToBounds = true
+    }
+
+    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
+        let mask = CAGradientLayer()
+        mask.frame = cell.bounds
+        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
+        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
+        return mask;
+    }
 }

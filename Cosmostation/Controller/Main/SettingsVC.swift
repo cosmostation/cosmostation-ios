@@ -383,6 +383,8 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, PinDelegate {
     func onScanned(_ result: String) {
         let scanedStr = result
         print("scanedStr ", scanedStr)
+        
+        
     }
     
     
