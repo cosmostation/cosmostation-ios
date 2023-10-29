@@ -1,5 +1,5 @@
 //
-//  DeriveNameSheet.swift
+//  CreateNameSheet.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/10/29.
@@ -9,27 +9,24 @@
 import UIKit
 import MaterialComponents
 
-class DeriveNameSheet: BaseVC, UITextFieldDelegate {
+class CreateNameSheet: BaseVC, UITextFieldDelegate {
     
-    @IBOutlet weak var deriveTitle: UILabel!
-    @IBOutlet weak var deriveMsgLabel: UILabel!
+    @IBOutlet weak var createNameLabel: UILabel!
     @IBOutlet weak var accountNameTextField: MDCOutlinedTextField!
     @IBOutlet weak var confirmBtn: BaseButton!
     
-    var deriveNameDelegate: DeriveNameDelegate?
+    var createNameDelegate: CreateNameDelegate?
     var mNemonics: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         accountNameTextField.setup()
-        accountNameTextField.text = ""
         accountNameTextField.delegate = self
     }
     
     override func setLocalizedString() {
-        deriveTitle.text = NSLocalizedString("str_create_another_account", comment: "")
-        deriveMsgLabel.text = NSLocalizedString("msg_create_another_msg", comment: "")
+        createNameLabel.text = NSLocalizedString("title_set_account_name", comment: "")
         accountNameTextField.label.text = NSLocalizedString("str_account_name", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
@@ -51,11 +48,13 @@ class DeriveNameSheet: BaseVC, UITextFieldDelegate {
             onShowToast(NSLocalizedString("error_alreay_exist_account_name", comment: ""))
             return
         }
-        deriveNameDelegate?.onNameConfirmed(userInput!, mNemonics)
+        createNameDelegate?.onNameConfirmed(userInput!, mNemonics)
         dismiss(animated: true)
     }
+
 }
 
-protocol DeriveNameDelegate {
+protocol CreateNameDelegate {
     func onNameConfirmed(_ name: String, _ mnemonic: String)
 }
+

@@ -1548,6 +1548,14 @@
 		E131F4432AEE680E00E760A0 /* DeriveNameSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131F4402AEE680E00E760A0 /* DeriveNameSheet.swift */; };
 		E131F4442AEE680E00E760A0 /* DeriveNameSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E131F4412AEE680E00E760A0 /* DeriveNameSheet.xib */; };
 		E131F4452AEE680E00E760A0 /* DeriveNameSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E131F4412AEE680E00E760A0 /* DeriveNameSheet.xib */; };
+		E131F4482AEE9BC000E760A0 /* QrImportCheckKeySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131F4462AEE9BC000E760A0 /* QrImportCheckKeySheet.swift */; };
+		E131F4492AEE9BC000E760A0 /* QrImportCheckKeySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131F4462AEE9BC000E760A0 /* QrImportCheckKeySheet.swift */; };
+		E131F44A2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E131F4472AEE9BC000E760A0 /* QrImportCheckKeySheet.xib */; };
+		E131F44B2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E131F4472AEE9BC000E760A0 /* QrImportCheckKeySheet.xib */; };
+		E131F44E2AEEAAB800E760A0 /* CreateNameSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131F44C2AEEAAB800E760A0 /* CreateNameSheet.swift */; };
+		E131F44F2AEEAAB800E760A0 /* CreateNameSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131F44C2AEEAAB800E760A0 /* CreateNameSheet.swift */; };
+		E131F4502AEEAAB800E760A0 /* CreateNameSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E131F44D2AEEAAB800E760A0 /* CreateNameSheet.xib */; };
+		E131F4512AEEAAB800E760A0 /* CreateNameSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E131F44D2AEEAAB800E760A0 /* CreateNameSheet.xib */; };
 		E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29732A98DA5300939AD2 /* SelectChainCell.swift */; };
 		E14E29762A98DA5300939AD2 /* SelectChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29732A98DA5300939AD2 /* SelectChainCell.swift */; };
 		E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14E29742A98DA5300939AD2 /* SelectChainCell.xib */; };
@@ -2446,6 +2454,10 @@
 		E131A3C52AACD0E000943013 /* OktHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktHistory.swift; sourceTree = "<group>"; };
 		E131F4402AEE680E00E760A0 /* DeriveNameSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeriveNameSheet.swift; sourceTree = "<group>"; };
 		E131F4412AEE680E00E760A0 /* DeriveNameSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeriveNameSheet.xib; sourceTree = "<group>"; };
+		E131F4462AEE9BC000E760A0 /* QrImportCheckKeySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrImportCheckKeySheet.swift; sourceTree = "<group>"; };
+		E131F4472AEE9BC000E760A0 /* QrImportCheckKeySheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QrImportCheckKeySheet.xib; sourceTree = "<group>"; };
+		E131F44C2AEEAAB800E760A0 /* CreateNameSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNameSheet.swift; sourceTree = "<group>"; };
+		E131F44D2AEEAAB800E760A0 /* CreateNameSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateNameSheet.xib; sourceTree = "<group>"; };
 		E136D8A223039493001BEBB8 /* Cosmostation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cosmostation.entitlements; sourceTree = "<group>"; };
 		E14E29732A98DA5300939AD2 /* SelectChainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChainCell.swift; sourceTree = "<group>"; };
 		E14E29742A98DA5300939AD2 /* SelectChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChainCell.xib; sourceTree = "<group>"; };
@@ -3150,10 +3162,14 @@
 				04FA74702AA043CF001A2830 /* SheetCell */,
 				04FA746A2A9F8652001A2830 /* BaseSheet.swift */,
 				04FA746B2A9F8652001A2830 /* BaseSheet.xib */,
+				E131F44C2AEEAAB800E760A0 /* CreateNameSheet.swift */,
+				E131F44D2AEEAAB800E760A0 /* CreateNameSheet.xib */,
 				04FAD9EC2AB71D3300143A3E /* RenameSheet.swift */,
 				04FAD9ED2AB71D3300143A3E /* RenameSheet.xib */,
 				E131F4402AEE680E00E760A0 /* DeriveNameSheet.swift */,
 				E131F4412AEE680E00E760A0 /* DeriveNameSheet.xib */,
+				E131F4462AEE9BC000E760A0 /* QrImportCheckKeySheet.swift */,
+				E131F4472AEE9BC000E760A0 /* QrImportCheckKeySheet.xib */,
 				04FAD9F22AB71D5000143A3E /* DeleteAccountSheet.swift */,
 				04FAD9F32AB71D5000143A3E /* DeleteAccountSheet.xib */,
 				042DE83E2AC4C518003F3EA4 /* TxMemoSheet.swift */,
@@ -3953,6 +3969,7 @@
 				04C940D72AEA571C00415256 /* basebg06.png in Resources */,
 				04CD244A2AD11D3400497EF5 /* LegacyTransfer.xib in Resources */,
 				E131F4452AEE680E00E760A0 /* DeriveNameSheet.xib in Resources */,
+				E131F4512AEEAAB800E760A0 /* CreateNameSheet.xib in Resources */,
 				04FAD9BB2AB0125400143A3E /* BaseSheetCell.xib in Resources */,
 				0438A7E52AE0E9FA006FA213 /* TxAmountLpSheet.xib in Resources */,
 				04CD248B2AD31E2000497EF5 /* BepTxResult.xib in Resources */,
@@ -4014,6 +4031,7 @@
 				04BA9BD82A985771003E2404 /* ChainSelectVC.xib in Resources */,
 				04FA74552A9D97A0001A2830 /* Pincode.storyboard in Resources */,
 				E12E9D302AE415D900336449 /* loadingSmall.json in Resources */,
+				E131F44B2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */,
 				04B789A22ACAEB5F00E9BE88 /* TxAddressSheet.xib in Resources */,
 				04FAD9DF2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				04C940BF2AE92EBE00415256 /* EvmTransfer.xib in Resources */,
@@ -4127,6 +4145,7 @@
 				E1D538292A96644F00FB0403 /* loading.json in Resources */,
 				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				0409D2FD2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
+				E131F44A2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */,
 				0478440E2AC9AA1000462F1C /* CosmosTransfer.xib in Resources */,
 				0400EF132ADBF763007BA97F /* KavaLendListMyCell.xib in Resources */,
 				0400EE842AD41FC5007BA97F /* ServiceCell.xib in Resources */,
@@ -4185,6 +4204,7 @@
 				04B789F32ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,
 				0400EE9E2AD9B434007BA97F /* NeutronVote.xib in Resources */,
 				04C940D92AEA579C00415256 /* basebg05.png in Resources */,
+				E131F4502AEEAAB800E760A0 /* CreateNameSheet.xib in Resources */,
 				E1B44B212ADA41CD0073C88A /* NeutronSingleVoteCell.xib in Resources */,
 				0443B89828589B570027A6B9 /* Color.xcassets in Resources */,
 				E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
@@ -4355,6 +4375,7 @@
 				047843CC2AC991B300462F1C /* injective_peggy_v1_ethereum_signer.pb.swift in Sources */,
 				E122DC4F2A8A4712006D1E7B /* tendermint_types_block.pb.swift in Sources */,
 				E122DBA82A8A468D006D1E7B /* cosmos_staking_v1beta1_tx.pb.swift in Sources */,
+				E131F44F2AEEAAB800E760A0 /* CreateNameSheet.swift in Sources */,
 				E122DC612A8A4712006D1E7B /* tendermint_abci_types.pb.swift in Sources */,
 				E122DB922A8A468D006D1E7B /* cosmos_slashing_v1beta1_query.pb.swift in Sources */,
 				04B789902ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */,
@@ -4474,6 +4495,7 @@
 				E122DB502A8A468D006D1E7B /* cosmos_circuit_v1_tx.pb.swift in Sources */,
 				04CD247D2AD308C800497EF5 /* SelectBepRecipientCell.swift in Sources */,
 				047843242AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */,
+				E131F4492AEE9BC000E760A0 /* QrImportCheckKeySheet.swift in Sources */,
 				18D4C19628C704B8003F230A /* WalletConnectManager.swift in Sources */,
 				047843222AC9918700462F1C /* ethermint_feemarket_v1_events.pb.swift in Sources */,
 				04B789322ACAC9B100E9BE88 /* ibc_applications_fee_v1_tx.pb.swift in Sources */,
@@ -5058,6 +5080,7 @@
 				047843CB2AC991B300462F1C /* injective_peggy_v1_ethereum_signer.pb.swift in Sources */,
 				E122DC072A8A468E006D1E7B /* cosmos_group_v1_genesis.pb.swift in Sources */,
 				E122DC4E2A8A4712006D1E7B /* tendermint_types_block.pb.swift in Sources */,
+				E131F44E2AEEAAB800E760A0 /* CreateNameSheet.swift in Sources */,
 				E122DBA72A8A468D006D1E7B /* cosmos_staking_v1beta1_tx.pb.swift in Sources */,
 				E122DC602A8A4712006D1E7B /* tendermint_abci_types.pb.swift in Sources */,
 				04B7898F2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */,
@@ -5177,6 +5200,7 @@
 				E122DB4F2A8A468D006D1E7B /* cosmos_circuit_v1_tx.pb.swift in Sources */,
 				04CD247C2AD308C800497EF5 /* SelectBepRecipientCell.swift in Sources */,
 				047843232AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */,
+				E131F4482AEE9BC000E760A0 /* QrImportCheckKeySheet.swift in Sources */,
 				E16D9B1522489B030019B7BB /* IntroVC.swift in Sources */,
 				047843212AC9918700462F1C /* ethermint_feemarket_v1_events.pb.swift in Sources */,
 				04B789312ACAC9B100E9BE88 /* ibc_applications_fee_v1_tx.pb.swift in Sources */,

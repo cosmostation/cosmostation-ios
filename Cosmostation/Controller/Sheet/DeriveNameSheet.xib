@@ -35,7 +35,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="286-vh-AYK">
-                    <rect key="frame" x="20" y="123" width="353" height="123"/>
+                    <rect key="frame" x="20" y="123.33333333333331" width="353" height="123"/>
                     <mutableString key="text">You can create a new account using the same mnemonic, but with a different HD Path.
 In general, there is a possibility that it may not be compatible with other wallets, and it is recommended to be used only by those with background knowledge of crypto keys and HD Path.</mutableString>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
@@ -43,7 +43,7 @@ In general, there is a possibility that it may not be compatible with other wall
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KQn-ji-iW3" customClass="MDCOutlinedTextField">
-                    <rect key="frame" x="20" y="262" width="353" height="54"/>
+                    <rect key="frame" x="20" y="262.33333333333331" width="353" height="54"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_color01"/>
                     <constraints>
@@ -79,7 +79,7 @@ In general, there is a possibility that it may not be compatible with other wall
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KQn-ji-iW3" secondAttribute="trailing" constant="20" id="61b-GP-97f"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="R1i-4B-edb" secondAttribute="trailing" constant="20" id="8Xj-OB-b8I"/>
                 <constraint firstItem="ZWZ-cH-zSq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="9w2-dA-Y3O"/>
-                <constraint firstItem="286-vh-AYK" firstAttribute="top" secondItem="ZWZ-cH-zSq" secondAttribute="bottom" constant="7.6666666666666714" id="FYa-N2-jcb"/>
+                <constraint firstItem="286-vh-AYK" firstAttribute="top" secondItem="ZWZ-cH-zSq" secondAttribute="bottom" constant="8" id="FYa-N2-jcb"/>
                 <constraint firstItem="KQn-ji-iW3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="GpJ-YL-MJA"/>
                 <constraint firstItem="ZWZ-cH-zSq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="JFA-s1-RlQ"/>
                 <constraint firstItem="286-vh-AYK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="O6A-b3-oEX"/>

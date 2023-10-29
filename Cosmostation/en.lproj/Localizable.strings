@@ -350,6 +350,7 @@
 "msg_kava_lend_msg" = "Use the HARD landing platform to deposit assets and borrow other assets based on LTV.";
 "msg_kava_swap_msg" = "Provide liquidity to AMM-style asset swap pools on the KAVA platform.";
 "msg_create_another_msg" = "You can create a new account using the same mnemonic, but with a different HD Path.\n\nIn general, there is a possibility that it may not be compatible with other wallets, and it is recommended to be used only by those with background knowledge of crypto keys and HD Path.";
+"msg_enter_encription_key" = "Enter the Encryption Key displayed on the screen to restore your account.";
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
 "guide_msg_iris" = "Interchain service infrastructure \nfor a distributed business ecosystem";
@@ -1045,6 +1046,8 @@
 "error_account_name" = "Please insert account name.";
 "error_alreay_exist_account_name" = "Already exist name.";
 "error_recipient_not_support_evm" = "The receiving address does not support EVM.";
+"error_decrytion" = "Decryption Error";
+"error_unknown_qr_code" = "Unknown QR Code.";
 
 
 "alert_title_no_private_key" = "No Private Key";

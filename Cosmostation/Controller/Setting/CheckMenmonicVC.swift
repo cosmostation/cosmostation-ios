@@ -113,9 +113,15 @@ class CheckMenmonicVC: BaseVC, DeriveNameDelegate {
     }
     
     @IBAction func onClickCreate(_ sender: UIButton) {
-        let deriveNameSheet = DeriveNameSheet(nibName: "DeriveNameSheet", bundle: nil)
-        deriveNameSheet.deriveNameDelegate = self
-        self.onStartSheet(deriveNameSheet)
+        let keychain = BaseData.instance.getKeyChain()
+        if let secureData = try? keychain.getString(toCheckAccount.uuid.sha1()),
+           let mnemonic = secureData?.components(separatedBy: ":").first?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) {
+            let deriveNameSheet = DeriveNameSheet(nibName: "DeriveNameSheet", bundle: nil)
+            deriveNameSheet.mNemonics = mnemonic
+            deriveNameSheet.deriveNameDelegate = self
+            self.onStartSheet(deriveNameSheet)
+            
+        }
     }
     
     @IBAction func onClickCheck(_ sender: UIButton) {
@@ -131,17 +137,13 @@ class CheckMenmonicVC: BaseVC, DeriveNameDelegate {
         }
     }
 
-    func onNameConfirmed(_ name: String) {
-        let keychain = BaseData.instance.getKeyChain()
-        if let secureData = try? keychain.getString(toCheckAccount.uuid.sha1()),
-           let mnemonic = secureData?.components(separatedBy: ":").first?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                let importMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
-                importMnemonicCheckVC.accountName = name
-                importMnemonicCheckVC.mnemonic = mnemonic
-                self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
-            });
-        }
+    func onNameConfirmed(_ name: String, _ mnemonic: String) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            let importMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
+            importMnemonicCheckVC.accountName = name
+            importMnemonicCheckVC.mnemonic = mnemonic
+            self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
+        });
     }
     
 }
