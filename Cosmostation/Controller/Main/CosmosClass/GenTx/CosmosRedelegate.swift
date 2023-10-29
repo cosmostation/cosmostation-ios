@@ -270,6 +270,9 @@ class CosmosRedelegate: BaseVC {
             $0.validatorDstAddress = toValidator!.operatorAddress
             $0.amount = toCoin!
         }
+        if (selectedChain.isGasSimulable() == false) {
+            return onUpdateWithSimul(nil)
+        }
         
         Task {
             let channel = getConnection()

@@ -176,6 +176,9 @@ class CosmosCompounding: BaseVC {
         view.isUserInteractionEnabled = false
         compoundingBtn.isEnabled = false
         loadingView.isHidden = false
+        if (selectedChain.isGasSimulable() == false) {
+            return onUpdateWithSimul(nil)
+        }
         Task {
             let channel = getConnection()
             if let auth = try? await fetchAuth(channel, selectedChain.address!) {

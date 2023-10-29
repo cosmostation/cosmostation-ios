@@ -173,6 +173,9 @@ class CosmosVote: BaseVC {
             }
             toVote.append(voteMsg)
         }
+        if (selectedChain.isGasSimulable() == false) {
+            return onUpdateWithSimul(nil)
+        }
         
         Task {
             let channel = getConnection()

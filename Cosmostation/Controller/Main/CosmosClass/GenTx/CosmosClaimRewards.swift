@@ -193,6 +193,9 @@ class CosmosClaimRewards: BaseVC {
         view.isUserInteractionEnabled = false
         claimBtn.isEnabled = false
         loadingView.isHidden = false
+        if (selectedChain.isGasSimulable() == false) {
+            return onUpdateWithSimul(nil)
+        }
         Task {
             let channel = getConnection()
             if let auth = try? await fetchAuth(channel, selectedChain.address!) {

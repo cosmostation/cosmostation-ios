@@ -188,6 +188,9 @@ class CosmosRewardAddress: BaseVC {
         view.isUserInteractionEnabled = false
         changeBtn.isEnabled = false
         loadingView.isHidden = false
+        if (selectedChain.isGasSimulable() == false) {
+            return onUpdateWithSimul(nil)
+        }
         Task {
             let channel = getConnection()
             if let auth = try? await fetchAuth(channel, selectedChain.address!) {

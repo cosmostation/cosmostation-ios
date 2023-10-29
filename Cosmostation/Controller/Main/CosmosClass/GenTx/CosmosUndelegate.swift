@@ -230,6 +230,9 @@ class CosmosUndelegate: BaseVC {
             $0.validatorAddress = fromValidator!.operatorAddress
             $0.amount = toCoin!
         }
+        if (selectedChain.isGasSimulable() == false) {
+            return onUpdateWithSimul(nil)
+        }
         
         Task {
             let channel = getConnection()

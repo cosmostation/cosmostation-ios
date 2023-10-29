@@ -395,6 +395,10 @@ class CosmosTransfer: BaseVC {
         sendBtn.isEnabled = false
         loadingView.isHidden = false
         
+        if (selectedChain.isGasSimulable() == false) {
+            return onUpdateWithSimul(nil)
+        }
+        
         if (selectedChain.chainId == selectedRecipientChain.chainId) {
             //Inchain Send!
             if (transferAssetType == .CoinTransfer) {
