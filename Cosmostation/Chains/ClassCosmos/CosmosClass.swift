@@ -155,11 +155,11 @@ extension CosmosClass {
         return nil
     }
     
-    func gasMultiply() -> NSDecimalNumber {
-        if let mutiply = getChainParam()["simul_gas_multiply"].string {
-            return NSDecimalNumber(string: mutiply)
+    func gasMultiply() -> Double {
+        if let mutiply = getChainParam()["simul_gas_multiply"].double {
+            return mutiply
         }
-        return NSDecimalNumber(string: "1.2")
+        return 1.2
     }
     
     func getFeeInfos() -> [FeeInfo] {

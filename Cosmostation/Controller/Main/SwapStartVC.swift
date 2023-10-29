@@ -508,7 +508,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?, _ msg: JSON) {
         if let toGas = simul?.gasInfo.gasUsed {
-            txFee.gasLimit = UInt64(Double(toGas) * 1.5)
+            txFee.gasLimit = UInt64(Double(toGas) * inputCosmosChain.gasMultiply())
             let baseFeePosition = inputCosmosChain.getFeeBasePosition()
             if let gasRate = inputCosmosChain.getFeeInfos()[baseFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
