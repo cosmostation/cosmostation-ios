@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,6 +20,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckMenmonicVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="checkBtn" destination="d4M-4D-FwG" id="niL-6v-84G"/>
+                <outlet property="createBtn" destination="1Hu-Ua-MfL" id="lkj-7M-r6k"/>
                 <outlet property="lastPathLabel" destination="8DB-o4-DSz" id="SsR-GJ-LtC"/>
                 <outlet property="nameCardView" destination="bgp-2O-tQS" id="2CL-Js-EG6"/>
                 <outlet property="nameLabel" destination="qBL-79-RGq" id="Saw-CM-FeY"/>
@@ -66,10 +67,7 @@
                     <rect key="frame" x="8" y="67" width="377" height="60"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBL-79-RGq">
-                            <rect key="frame" x="20" y="23" width="99" height="14"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="14" id="HbX-K0-woD"/>
-                            </constraints>
+                            <rect key="frame" x="20" y="21.333333333333329" width="99" height="17.666666666666671"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -967,36 +965,56 @@
                     <color key="textColor" name="_color02"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4M-4D-FwG" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
-                    <color key="backgroundColor" name="_primary"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="54" id="uUP-5m-jTk"/>
-                    </constraints>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Confirm">
-                        <color key="titleColor" name="_color01"/>
-                    </state>
-                    <connections>
-                        <action selector="onClickCheck:" destination="-1" eventType="touchUpInside" id="ikh-je-4uP"/>
-                    </connections>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pJO-zF-TqB">
+                    <rect key="frame" x="8" y="698" width="377" height="116"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hu-Ua-MfL" customClass="SecButton" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="377" height="54"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="QAh-fF-QwP"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Create Another Account">
+                                <color key="titleColor" name="_color05"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickCreate:" destination="-1" eventType="touchUpInside" id="qMW-Tk-mt3"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4M-4D-FwG" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="62" width="377" height="54"/>
+                            <color key="backgroundColor" name="_primary"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="uUP-5m-jTk"/>
+                            </constraints>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Confirm">
+                                <color key="titleColor" name="_color01"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickCheck:" destination="-1" eventType="touchUpInside" id="ikh-je-4uP"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstItem="d4M-4D-FwG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="EdS-91-NDM"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pJO-zF-TqB" secondAttribute="trailing" constant="8" id="5c4-Am-XtA"/>
                 <constraint firstItem="aEA-tS-jfz" firstAttribute="top" secondItem="bgp-2O-tQS" secondAttribute="bottom" constant="16" id="Ff7-G8-82x"/>
+                <constraint firstAttribute="bottom" secondItem="pJO-zF-TqB" secondAttribute="bottom" constant="38" id="OGS-0t-irR"/>
                 <constraint firstItem="ymD-Mc-FU6" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="aTz-UQ-uXD"/>
-                <constraint firstAttribute="bottom" secondItem="d4M-4D-FwG" secondAttribute="bottom" constant="38" id="fEC-gq-VWS"/>
                 <constraint firstItem="ymD-Mc-FU6" firstAttribute="top" secondItem="aEA-tS-jfz" secondAttribute="bottom" constant="16" id="jOo-hP-tc6"/>
                 <constraint firstItem="aEA-tS-jfz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="jhV-Fl-VAG"/>
                 <constraint firstItem="bgp-2O-tQS" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="mNr-dH-cJJ"/>
                 <constraint firstItem="bgp-2O-tQS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="oqW-dK-lTS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aEA-tS-jfz" secondAttribute="trailing" constant="8" id="rbu-Z5-fxW"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="d4M-4D-FwG" secondAttribute="trailing" constant="8" id="sLM-Ac-sG0"/>
+                <constraint firstItem="pJO-zF-TqB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="wK3-ks-dLc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bgp-2O-tQS" secondAttribute="trailing" constant="8" id="zuw-C7-27K"/>
             </constraints>
             <point key="canvasLocation" x="138" y="21"/>
@@ -1008,6 +1026,9 @@
         </namedColor>
         <namedColor name="_color02">
             <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color05">
+            <color red="0.31400001049041748" green="0.32199999690055847" blue="0.40400001406669617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
             <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

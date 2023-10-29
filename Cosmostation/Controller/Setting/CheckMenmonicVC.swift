@@ -8,8 +8,9 @@
 
 import UIKit
 
-class CheckMenmonicVC: BaseVC {
+class CheckMenmonicVC: BaseVC, DeriveNameDelegate {
     
+    @IBOutlet weak var createBtn: SecButton!
     @IBOutlet weak var checkBtn: BaseButton!
     
     @IBOutlet weak var nameCardView: CardView!
@@ -66,6 +67,7 @@ class CheckMenmonicVC: BaseVC {
     
     override func setLocalizedString() {
         navigationItem.title = NSLocalizedString("title_check_mnemonics", comment: "")
+        createBtn.setTitle(NSLocalizedString("str_create_another_account", comment: ""), for: .normal)
         checkBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
@@ -110,6 +112,12 @@ class CheckMenmonicVC: BaseVC {
         }
     }
     
+    @IBAction func onClickCreate(_ sender: UIButton) {
+        let deriveNameSheet = DeriveNameSheet(nibName: "DeriveNameSheet", bundle: nil)
+        deriveNameSheet.deriveNameDelegate = self
+        self.onStartSheet(deriveNameSheet)
+    }
+    
     @IBAction func onClickCheck(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -117,10 +125,23 @@ class CheckMenmonicVC: BaseVC {
     @objc func onCopyMnemonic() {
         let keychain = BaseData.instance.getKeyChain()
         if let secureData = try? keychain.getString(toCheckAccount.uuid.sha1()),
-           let menmonic = secureData?.components(separatedBy: ":").first?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) {
-            UIPasteboard.general.string = menmonic.trimmingCharacters(in: .whitespacesAndNewlines)
+           let mnemonic = secureData?.components(separatedBy: ":").first?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) {
+            UIPasteboard.general.string = mnemonic.trimmingCharacters(in: .whitespacesAndNewlines)
             self.onShowToast(NSLocalizedString("mnemonic_copied", comment: ""))
         }
     }
 
+    func onNameConfirmed(_ name: String) {
+        let keychain = BaseData.instance.getKeyChain()
+        if let secureData = try? keychain.getString(toCheckAccount.uuid.sha1()),
+           let mnemonic = secureData?.components(separatedBy: ":").first?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                let importMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
+                importMnemonicCheckVC.accountName = name
+                importMnemonicCheckVC.mnemonic = mnemonic
+                self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
+            });
+        }
+    }
+    
 }
