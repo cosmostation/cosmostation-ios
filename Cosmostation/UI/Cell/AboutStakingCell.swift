@@ -37,12 +37,11 @@ class AboutStakingCell: UITableViewCell {
         
         
         let nf = WUtils.getNumberFormatter(2)
-        
-        let inflation = json["params"]["minting_inflation"]["inflation"].stringValue
+        let inflation = json["params"]["minting_inflation"]["inflation"].string ?? "0"
         let formatInflation = nf.string(from: NSDecimalNumber(string: inflation).multiplying(byPowerOf10: 2))!
         inflationLabel.attributedText = WUtils.getDpAttributedString(formatInflation, 2, inflationLabel.font)
         
-        let apr = json["params"]["apr"].stringValue
+        let apr = json["params"]["apr"].string ?? "0"
         let formatApr = nf.string(from: NSDecimalNumber(string: apr).multiplying(byPowerOf10: 2))!
         stakingAprLabel.attributedText = WUtils.getDpAttributedString(formatApr, 2, stakingAprLabel.font)
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T4X-xR-oqI">
-    <device id="retina6_0" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T4X-xR-oqI">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,20 +19,20 @@
             <objects>
                 <viewController storyboardIdentifier="IntroVC" id="Iiy-m2-uEE" customClass="IntroVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dIt-LH-x5i">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_intro" translatesAutoresizingMaskIntoConstraints="NO" id="vcc-qa-pnk">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cosmostaion" translatesAutoresizingMaskIntoConstraints="NO" id="cbE-1V-uMw">
-                                <rect key="frame" x="77" y="239" width="236" height="41"/>
+                                <rect key="frame" x="47.666666666666657" y="356" width="280" height="80"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6t-zv-E8m">
-                                <rect key="frame" x="0.0" y="714" width="390" height="80"/>
+                                <rect key="frame" x="0.0" y="682" width="375" height="80"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cosmostationLogo" translatesAutoresizingMaskIntoConstraints="NO" id="XjD-1M-Zvz">
-                                        <rect key="frame" x="99" y="34" width="192" height="46"/>
+                                        <rect key="frame" x="83" y="68" width="209" height="12"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -43,10 +43,10 @@
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lJg-IO-0Tm">
-                                <rect key="frame" x="0.0" y="686" width="390" height="120"/>
+                                <rect key="frame" x="0.0" y="654" width="375" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqM-8h-gAN" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="66" width="374" height="54"/>
+                                        <rect key="frame" x="8" y="66" width="359" height="54"/>
                                         <color key="backgroundColor" name="_primary"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="54" id="bHF-YG-cst"/>
@@ -93,9 +93,9 @@
                             <constraint firstAttribute="bottom" secondItem="lJg-IO-0Tm" secondAttribute="bottom" constant="38" id="h1k-fY-VhI"/>
                             <constraint firstItem="x6t-zv-E8m" firstAttribute="width" secondItem="dIt-LH-x5i" secondAttribute="width" id="hbh-Pu-zNn"/>
                             <constraint firstItem="x6t-zv-E8m" firstAttribute="leading" secondItem="vud-fA-pPm" secondAttribute="leading" id="jA8-Zg-AXx"/>
+                            <constraint firstItem="cbE-1V-uMw" firstAttribute="centerY" secondItem="dIt-LH-x5i" secondAttribute="centerY" constant="-10" id="kBa-E9-6Yr"/>
                             <constraint firstItem="vud-fA-pPm" firstAttribute="trailing" secondItem="vcc-qa-pnk" secondAttribute="trailing" id="mOK-MQ-20t"/>
                             <constraint firstItem="vud-fA-pPm" firstAttribute="bottom" secondItem="x6t-zv-E8m" secondAttribute="bottom" constant="16" id="p4U-P8-RBY"/>
-                            <constraint firstItem="vcc-qa-pnk" firstAttribute="top" secondItem="cbE-1V-uMw" secondAttribute="bottom" constant="-280" id="rZ5-Ri-fs3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="o1U-PM-Vyg"/>
@@ -114,7 +114,7 @@
                 <navigationController storyboardIdentifier="StartNavigation" automaticallyAdjustsScrollViewInsets="NO" id="T4X-xR-oqI" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="l7m-v0-lsb">
-                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" name="_color01"/>
                     </navigationBar>
@@ -129,9 +129,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg_intro" width="375" height="812"/>
-        <image name="cosmostaion" width="236" height="41"/>
-        <image name="cosmostationLogo" width="192" height="46"/>
+        <image name="bg_intro" width="750" height="1624"/>
+        <image name="cosmostaion" width="280" height="80"/>
+        <image name="cosmostationLogo" width="209" height="12"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

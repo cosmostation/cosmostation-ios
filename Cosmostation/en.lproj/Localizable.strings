@@ -190,6 +190,7 @@
 "str_start_vote" = "Start Vote";
 "str_transfer_asset" = "Asset Send";
 "str_ibc_transfer_asset" = "IBC Asset Send";
+"str_create_another_account" = "Create Another Account";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -348,7 +349,8 @@
 "msg_kava_mint_msg" = "Use the collateralized USDX minting function using the CDP module.";
 "msg_kava_lend_msg" = "Use the HARD landing platform to deposit assets and borrow other assets based on LTV.";
 "msg_kava_swap_msg" = "Provide liquidity to AMM-style asset swap pools on the KAVA platform.";
-
+"msg_create_another_msg" = "You can create a new account using the same mnemonic, but with a different HD Path.\n\nIn general, there is a possibility that it may not be compatible with other wallets, and it is recommended to be used only by those with background knowledge of crypto keys and HD Path.";
+"msg_enter_encription_key" = "Enter the Encryption Key displayed on the screen to restore your account.";
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
 "guide_msg_iris" = "Interchain service infrastructure \nfor a distributed business ecosystem";
@@ -905,6 +907,7 @@
 "title_mint_list" = "Mint Market List";
 "title_select_mint_action" = "Select Mint Market";
 "title_select_wallet" = "Select Wallet";
+"title_buy_crypto" = "Buy Crypto";
 
 
 "proposal_type_basic" = "Basic";
@@ -1044,7 +1047,12 @@
 "error_account_name" = "Please insert account name.";
 "error_alreay_exist_account_name" = "Already exist name.";
 "error_recipient_not_support_evm" = "The receiving address does not support EVM.";
+<<<<<<< HEAD
 "error_no_display" = "Please activate the account to use the dApp.";
+=======
+"error_decrytion" = "Decryption Error";
+"error_unknown_qr_code" = "Unknown QR Code.";
+>>>>>>> yong-v2
 
 
 "alert_title_no_private_key" = "No Private Key";

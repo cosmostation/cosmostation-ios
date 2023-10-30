@@ -84,7 +84,7 @@ class KavaMintCreateAction: BaseVC {
         }
         selectedFeeInfo = selectedChain.getFeeBasePosition()
         feeSegments.selectedSegmentIndex = selectedFeeInfo
-        txFee = selectedChain.getInitFee()
+        txFee = selectedChain.getInitPayableFee()
         
         collateralMsAsset = BaseData.instance.getAsset(selectedChain.apiName, collateralParam.denom)!
         collateralSymbolLabel.text = collateralMsAsset.symbol
@@ -182,7 +182,7 @@ class KavaMintCreateAction: BaseVC {
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeeInfo = sender.selectedSegmentIndex
-        txFee = selectedChain.getBaseFee(selectedFeeInfo, txFee.amount[0].denom)
+        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
         onUpdateFeeView()
         onSimul()
     }
@@ -229,7 +229,7 @@ class KavaMintCreateAction: BaseVC {
     
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
         if let toGas = simul?.gasInfo.gasUsed {
-            txFee.gasLimit = UInt64(Double(toGas) * 1.5)
+            txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
             if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)

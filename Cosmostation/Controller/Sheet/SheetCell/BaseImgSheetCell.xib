@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="75" id="KGk-i7-Jjw" customClass="BaseImgSheetCell" customModule="Cosmostation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="474" height="75"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="474" height="75"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2u-xS-Q7a">
+                        <rect key="frame" x="0.0" y="0.0" width="474" height="68"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyData" translatesAutoresizingMaskIntoConstraints="NO" id="njU-d5-RAB">
+                                <rect key="frame" x="12" y="14" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="SYd-yk-Wdz"/>
+                                    <constraint firstAttribute="height" constant="40" id="f2H-mB-kpx"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="3nA-dI-VyX">
+                                <rect key="frame" x="64" y="15.666666666666664" width="398" height="37"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuC-aV-l5s">
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="17.666666666666668"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                        <color key="textColor" name="_color01"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVr-9e-lc5">
+                                        <rect key="frame" x="0.0" y="21.666666666666671" width="398" height="15.333333333333336"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                        <color key="textColor" name="_color02"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsE-tn-BW1">
+                                <rect key="frame" x="12" y="67.333333333333329" width="450" height="0.6666666666666714"/>
+                                <color key="backgroundColor" name="_divider"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.80000000000000004" id="DeR-me-6iE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="dsE-tn-BW1" secondAttribute="trailing" constant="12" id="BEI-Ed-bur"/>
+                            <constraint firstItem="dsE-tn-BW1" firstAttribute="leading" secondItem="g2u-xS-Q7a" secondAttribute="leading" constant="12" id="BF9-kP-nu2"/>
+                            <constraint firstItem="3nA-dI-VyX" firstAttribute="centerY" secondItem="g2u-xS-Q7a" secondAttribute="centerY" id="H2Z-kx-Wzm"/>
+                            <constraint firstItem="njU-d5-RAB" firstAttribute="centerY" secondItem="g2u-xS-Q7a" secondAttribute="centerY" id="L17-kx-dx2"/>
+                            <constraint firstAttribute="height" constant="68" id="Mme-kz-ZpU"/>
+                            <constraint firstItem="3nA-dI-VyX" firstAttribute="leading" secondItem="njU-d5-RAB" secondAttribute="trailing" constant="12" id="NRX-fL-si7"/>
+                            <constraint firstAttribute="trailing" secondItem="3nA-dI-VyX" secondAttribute="trailing" constant="12" id="PTg-gq-9Ji"/>
+                            <constraint firstAttribute="bottom" secondItem="dsE-tn-BW1" secondAttribute="bottom" id="TVx-yp-kXU"/>
+                            <constraint firstItem="njU-d5-RAB" firstAttribute="leading" secondItem="g2u-xS-Q7a" secondAttribute="leading" constant="12" id="mbz-Fa-TnT"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="g2u-xS-Q7a" secondAttribute="bottom" id="44I-ye-E8T"/>
+                    <constraint firstItem="g2u-xS-Q7a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZZs-es-fzX"/>
+                    <constraint firstAttribute="trailing" secondItem="g2u-xS-Q7a" secondAttribute="trailing" id="fC8-Hd-xiN"/>
+                    <constraint firstItem="g2u-xS-Q7a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="pyr-hS-Zwe"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" name="_primary"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="AVr-9e-lc5" id="nve-iT-OTH"/>
+                <outlet property="imgView" destination="njU-d5-RAB" id="R4p-V6-KRG"/>
+                <outlet property="titleLabel" destination="fuC-aV-l5s" id="82S-fo-RJ5"/>
+            </connections>
+            <point key="canvasLocation" x="53.435114503816791" y="31.338028169014088"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="imgEmptyData" width="240" height="240"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_divider">
+            <color red="1" green="1" blue="1" alpha="0.20200000703334808" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

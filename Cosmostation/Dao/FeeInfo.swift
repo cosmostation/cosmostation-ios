@@ -10,13 +10,12 @@ import Foundation
 
 public struct FeeInfo {
     var title = ""
-    var msg = ""
     var FeeDatas = Array<FeeData>()
     
     init(_ data: String?) {
         if (data == nil) { return }
         for rawData in data!.split(separator: ",") {
-            self.FeeDatas.append(FeeData.init(String(rawData)))
+            self.FeeDatas.append(FeeData.init(String(rawData).trimmingCharacters(in: .whitespaces)))
         }
     }
 }

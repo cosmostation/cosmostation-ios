@@ -190,6 +190,7 @@
 "str_start_vote" = "投票する";
 "str_transfer_asset" = "資産転送";
 "str_ibc_transfer_asset" = "IBC 資産転送";
+"str_create_another_account" = "別のアカウントを作成";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -348,6 +349,8 @@
 "msg_kava_mint_msg" = "CDPモジュールを使用して、担保型USDXミンティング機能を利用してみてください。";
 "msg_kava_lend_msg" = "HARDランディングプラットフォームを利用して資産を預け、LTVに基づいて他の資産を貸し出して利用することができます。";
 "msg_kava_swap_msg" = "KAVAプラットフォーム上のAMM方式の資産スワッププールに流動性を提供します。";
+"msg_create_another_msg" = "同じニーモニックを使用して、異なる HD パスを使用して新しいアカウントを作成できます。\n\n一般に、他のウォレットと互換性がない可能性があり、暗号キーと HD パスの予備知識がある人のみが使用することをお勧めします。";
+"msg_enter_encription_key" = "アカウントを復元するには、画面に表示される暗号化キーを入力してください。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -905,6 +908,7 @@
 "title_mint_list" = "Mint Market List";
 "title_select_mint_action" = "Select Mint Market";
 "title_select_wallet" = "Select Wallet";
+"title_buy_crypto" = "クリプト購入";
 
 
 "proposal_type_basic" = "Basic";
@@ -1044,6 +1048,8 @@
 "error_account_name" = "アカウント名を入力してください。";
 "error_alreay_exist_account_name" = "すでに存在する名前です。";
 "error_recipient_not_support_evm" = "受信するアドレスはEVMをサポートしていません。";
+"error_decrytion" = "復号化エラー";
+"error_unknown_qr_code" = "未知のQRコードです。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

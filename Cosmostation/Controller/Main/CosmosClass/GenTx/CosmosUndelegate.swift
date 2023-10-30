@@ -76,7 +76,7 @@ class CosmosUndelegate: BaseVC {
         }
         selectedFeeInfo = selectedChain.getFeeBasePosition()
         feeSegments.selectedSegmentIndex = selectedFeeInfo
-        txFee = selectedChain.getInitFee()
+        txFee = selectedChain.getInitPayableFee()
         
         validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
         unStakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
@@ -165,7 +165,7 @@ class CosmosUndelegate: BaseVC {
 
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeeInfo = sender.selectedSegmentIndex
-        txFee = selectedChain.getBaseFee(selectedFeeInfo, txFee.amount[0].denom)
+        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
         onUpdateFeeView()
         onSimul()
     }
@@ -201,7 +201,7 @@ class CosmosUndelegate: BaseVC {
     
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
         if let toGas = simul?.gasInfo.gasUsed {
-            txFee.gasLimit = UInt64(Double(toGas) * 1.5)
+            txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
             if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
@@ -229,6 +229,9 @@ class CosmosUndelegate: BaseVC {
             $0.delegatorAddress = selectedChain.address!
             $0.validatorAddress = fromValidator!.operatorAddress
             $0.amount = toCoin!
+        }
+        if (selectedChain.isGasSimulable() == false) {
+            return onUpdateWithSimul(nil)
         }
         
         Task {

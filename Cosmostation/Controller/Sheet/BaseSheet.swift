@@ -56,6 +56,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.separatorStyle = .none
         sheetTableView.register(UINib(nibName: "BaseSheetCell", bundle: nil), forCellReuseIdentifier: "BaseSheetCell")
         sheetTableView.register(UINib(nibName: "BaseMsgSheetCell", bundle: nil), forCellReuseIdentifier: "BaseMsgSheetCell")
+        sheetTableView.register(UINib(nibName: "BaseImgSheetCell", bundle: nil), forCellReuseIdentifier: "BaseImgSheetCell")
         sheetTableView.register(UINib(nibName: "SwitchAccountCell", bundle: nil), forCellReuseIdentifier: "SwitchAccountCell")
         sheetTableView.register(UINib(nibName: "SwitchCurrencyCell", bundle: nil), forCellReuseIdentifier: "SwitchCurrencyCell")
         sheetTableView.register(UINib(nibName: "SwitchPriceDisplayCell", bundle: nil), forCellReuseIdentifier: "SwitchPriceDisplayCell")
@@ -224,6 +225,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SelectAccount) {
             sheetTitle.text = NSLocalizedString("title_select_wallet", comment: "")
+            
+        } else if (sheetType == .SelectBuyCrypto) {
+            sheetTitle.text = NSLocalizedString("title_buy_crypto", comment: "")
+            
         }
     }
     
@@ -358,6 +363,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectAccount) {
             return selectChains.count
+            
+        } else if (sheetType == .SelectBuyCrypto) {
+            return 3
+            
         }
         return 0
     }
@@ -491,6 +500,12 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindChains(selectChains[indexPath.row])
             return cell!
             
+        } else if (sheetType == .SelectBuyCrypto) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseImgSheetCell") as? BaseImgSheetCell
+            cell?.onBindBuyCrypto(indexPath.row)
+
+            return cell!
+            
         }
         return UITableViewCell()
     }
@@ -620,6 +635,7 @@ public enum SheetType: Int {
     case SelectHardAction = 22
     case SelectSwpAction = 23
     case SelectMintAction = 24
+    case SelectBuyCrypto = 25
     
     case SelectAccount = 30
 }

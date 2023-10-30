@@ -66,7 +66,7 @@ class CosmosClaimRewards: BaseVC {
         }
         selectedFeeInfo = selectedChain.getFeeBasePosition()
         feeSegments.selectedSegmentIndex = selectedFeeInfo
-        txFee = selectedChain.getInitFee()
+        txFee = selectedChain.getInitPayableFee()
         
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
@@ -144,7 +144,7 @@ class CosmosClaimRewards: BaseVC {
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeeInfo = sender.selectedSegmentIndex
-        txFee = selectedChain.getBaseFee(selectedFeeInfo, txFee.amount[0].denom)
+        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
         onUpdateFeeView()
         onSimul()
     }
@@ -171,7 +171,7 @@ class CosmosClaimRewards: BaseVC {
     
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
         if let toGas = simul?.gasInfo.gasUsed {
-            txFee.gasLimit = UInt64(Double(toGas) * 1.5)
+            txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
             if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
@@ -193,6 +193,9 @@ class CosmosClaimRewards: BaseVC {
         view.isUserInteractionEnabled = false
         claimBtn.isEnabled = false
         loadingView.isHidden = false
+        if (selectedChain.isGasSimulable() == false) {
+            return onUpdateWithSimul(nil)
+        }
         Task {
             let channel = getConnection()
             if let auth = try? await fetchAuth(channel, selectedChain.address!) {
