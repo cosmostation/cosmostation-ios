@@ -907,6 +907,7 @@
 "title_select_swappool_action" = "스왑 풀 선택";
 "title_mint_list" = "민팅 목록";
 "title_select_mint_action" = "민팅 선택";
+"title_select_wallet" = "지갑 선택";
 "title_buy_crypto" = "크립토 구매";
 
 
@@ -1047,8 +1048,12 @@
 "error_account_name" = "계정 이름을 정확히 입력하세요.";
 "error_alreay_exist_account_name" = "이미 존재하는 이름 입니다.";
 "error_recipient_not_support_evm" = "받을 주소는 EVM을 지원하지 않습니다.";
+<<<<<<< HEAD
+"error_no_display" = "dApp을 사용하기 위해 어카운트에 주소를 활성화하세요.";
+=======
 "error_decrytion" = "복호화 에러";
 "error_unknown_qr_code" = "알수 없는 QR Code 입니다.";
+>>>>>>> yong-v2
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";
@@ -1252,3 +1257,9 @@
 "new_account_address" = "주소";
 
 "private_key_restore_priv_key" = "개인키";
+
+
+"wc_peer_name" = "Cosmostation";
+"wc_peer_desc" = "Cosmostation Wallet iOS";
+"wc_peer_url" = "https://cosmostation.io";
+"wc_request_responsed" = "전송 완료";

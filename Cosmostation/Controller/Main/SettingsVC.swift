@@ -427,7 +427,7 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, CreateNameDelegate, QrI
             let createNameSheet = CreateNameSheet(nibName: "CreateNameSheet", bundle: nil)
             createNameSheet.mNemonics = mnemonic
             createNameSheet.createNameDelegate = self
-            onStartSheet(createNameSheet, 240)
+            self.onStartSheet(createNameSheet, 240)
         });
     }
 }

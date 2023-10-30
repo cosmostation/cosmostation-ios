@@ -907,6 +907,7 @@
 "title_select_swappool_action" = "Select Swp Pool";
 "title_mint_list" = "Mint Market List";
 "title_select_mint_action" = "Select Mint Market";
+"title_select_wallet" = "Select Wallet";
 "title_buy_crypto" = "クリプト購入";
 
 
@@ -1252,3 +1253,9 @@
 "new_account_address" = "アドレス";
 
 "private_key_restore_priv_key" = "プライベートキー";
+
+
+"wc_peer_name" = "Cosmostation";
+"wc_peer_desc" = "Cosmostation Wallet iOS";
+"wc_peer_url" = "https://cosmostation.io";
+"wc_request_responsed" = "リクエストに応答しました";
