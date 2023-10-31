@@ -274,10 +274,8 @@ class CosmosClassVC: BaseVC {
             }
         }
         
-        if (mainFab.items.count < 4) {
-            mainFab.addItem(title: "Send", image: UIImage(named: "iconFabSend")) { _ in
-                self.onSendTx()
-            }
+        mainFab.addItem(title: "Send", image: UIImage(named: "iconFabSend")) { _ in
+            self.onSendTx()
         }
         
         view.addSubview(mainFab)

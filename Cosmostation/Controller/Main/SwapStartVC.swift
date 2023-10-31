@@ -50,6 +50,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var outputValueLabel: UILabel!
     @IBOutlet weak var outputBalanceLabel: UILabel!
     
+    @IBOutlet weak var toggleBtn: UIButton!
+    
     @IBOutlet weak var errorCardView: RedFixCardView!
     @IBOutlet weak var errorMsgLabel: UILabel!
     
@@ -206,6 +208,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     func onReadyToUserInsert() {
         toMsg = nil
         swapBtn.isEnabled = false
+        toggleBtn.isEnabled = true
         
         loadingView.isHidden = true
         txFee = getBaseFee()
@@ -345,6 +348,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         toMsg = nil
         if let text = inputAmountTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: ",", with: ".")  {
             swapBtn.isEnabled = false
+            toggleBtn.isEnabled = false
             if (text.isEmpty) {
                 outputAmountLabel.text = ""
                 inputInvalidLabel.isHidden = false
@@ -521,10 +525,12 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         }
         toMsg = msg
         swapBtn.isEnabled = true
+        toggleBtn.isEnabled = true
     }
     
     func onSimul(_ route: JSON, _ msg: JSON) {
         swapBtn.isEnabled = false
+        toggleBtn.isEnabled = false
         let msgs = msg["msgs"].arrayValue[0]
         if (msgs["msg_type_url"].stringValue == "/ibc.applications.transfer.v1.MsgTransfer") {
             let inner_mag = try? JSON(data: Data(msgs["msg"].stringValue.utf8))
@@ -545,6 +551,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                             self.onShowToast("Error : " + "\n" + "\(error)")
                             self.toMsg = nil
                             self.swapBtn.isEnabled = false
+                            self.toggleBtn.isEnabled = true
                             return
                         }
                     }
@@ -570,6 +577,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                             self.onShowToast("Error : " + "\n" + "\(error)")
                             self.toMsg = nil
                             self.swapBtn.isEnabled = false
+                            self.toggleBtn.isEnabled = true
                             return
                         }
                     }

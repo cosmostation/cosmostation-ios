@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -34,10 +34,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symbol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pyp-9j-xZD">
-                                <rect key="frame" x="64" y="18" width="52.666666666666657" height="14"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="14" id="c6L-rW-nJa"/>
-                                </constraints>
+                                <rect key="frame" x="64" y="16" width="52.666666666666657" height="17.666666666666671"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
@@ -110,7 +107,7 @@
                         <constraints>
                             <constraint firstItem="ipz-F5-jrm" firstAttribute="centerY" secondItem="3Pq-ad-7ll" secondAttribute="centerY" id="2Lw-0X-uaz"/>
                             <constraint firstItem="qk0-ex-tMn" firstAttribute="leading" secondItem="Pyp-9j-xZD" secondAttribute="leading" id="5rQ-bm-J74"/>
-                            <constraint firstItem="Pyp-9j-xZD" firstAttribute="top" secondItem="3Pq-ad-7ll" secondAttribute="top" constant="18" id="6BP-Bi-LDF"/>
+                            <constraint firstItem="Pyp-9j-xZD" firstAttribute="top" secondItem="3Pq-ad-7ll" secondAttribute="top" constant="16" id="6BP-Bi-LDF"/>
                             <constraint firstItem="0Vd-yd-D3B" firstAttribute="leading" secondItem="qk0-ex-tMn" secondAttribute="trailing" constant="1" id="9jU-aQ-fPf"/>
                             <constraint firstItem="Qjd-eJ-FTR" firstAttribute="centerY" secondItem="Pyp-9j-xZD" secondAttribute="centerY" id="BKc-MH-PkN"/>
                             <constraint firstItem="qk0-ex-tMn" firstAttribute="firstBaseline" secondItem="0Vd-yd-D3B" secondAttribute="firstBaseline" id="Bby-Lt-KNG"/>
