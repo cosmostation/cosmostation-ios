@@ -10,19 +10,19 @@ import Foundation
 
 class ChainCelestia: CosmosClass  {
     
-//    override init() {
-//        super.init()
-//        
-//        name = "Celestia"
-//        tag = "Celestia118"
-//        logo1 = "chainCelestia"
-//        logo2 = "chainCelestia"
-//        apiName = ""
-//        stakeDenom = ""
-//
-//        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-//        accountPrefix = ""
-//
-//        grpcHost = ""
-//    }
+    override init() {
+        super.init()
+        
+        name = "Celestia"
+        tag = "Celestia118"
+        logo1 = "chainCelestia"
+        logo2 = "chainCelestia"
+        apiName = "celestia"
+        stakeDenom = "utia"
+
+        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        accountPrefix = "celestia"
+
+        grpcHost = "grpc-celestia.cosmostation.io"
+    }
 }

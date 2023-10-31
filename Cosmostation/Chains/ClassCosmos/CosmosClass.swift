@@ -654,6 +654,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainBitcana())
     result.append(ChainBitsong())
     result.append(ChainCanto())
+    result.append(ChainCelestia())
     result.append(ChainChihuahua())
     result.append(ChainComdex())
     result.append(ChainCoreum())
@@ -715,8 +716,6 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainOkt996Secp())
     result.append(ChainOkt996Keccak())
     
-    
-    //    result.append(ChainCelestia())
         
     
     result.forEach { chain in

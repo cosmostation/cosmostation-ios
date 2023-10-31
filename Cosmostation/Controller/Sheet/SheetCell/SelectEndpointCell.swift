@@ -40,12 +40,13 @@ class SelectEndpointCell: UITableViewCell {
         let port = Int(endpoint["url"].stringValue.components(separatedBy: ":")[1].trimmingCharacters(in: .whitespaces)) ?? 443
 //        print("host ", host)
 //        print("port ", port)
+        
         Task {
+            let channel = getConnection(host, port)
             do {
-                let channel = getConnection(host, port)
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest.init()
-                let nodeInfo = try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: channel).getNodeInfo(req).response.get()
-                if (nodeInfo?.defaultNodeInfo.network == chain.chainId) {
+                let nodeInfo = try await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: channel).getNodeInfo(req, callOptions: getCallOptions()).response.get()
+                if (nodeInfo.defaultNodeInfo.network == chain.chainId) {
                     gapTime = CFAbsoluteTimeGetCurrent() - checkTime
                     let gapFormat = WUtils.getNumberFormatter(4).string(from: gapTime! as NSNumber)
                     if (gapTime! <= 1.2) {
@@ -58,6 +59,7 @@ class SelectEndpointCell: UITableViewCell {
                     self.speedTimeLabel.text = gapFormat
                     
                 } else {
+                    try? channel.close()
                     DispatchQueue.main.async {
                         self.speedImg.image = UIImage.init(named: "ImgGovRejected")
                         self.speedTimeLabel.text = "ChainID Failed"
@@ -65,6 +67,7 @@ class SelectEndpointCell: UITableViewCell {
                 }
                 
             } catch {
+                try? channel.close()
                 DispatchQueue.main.async {
                     self.speedImg.image = UIImage.init(named: "ImgGovRejected")
                     self.speedTimeLabel.text = "Unknown"
@@ -80,7 +83,7 @@ class SelectEndpointCell: UITableViewCell {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(3500))
         return callOptions
     }
 }
