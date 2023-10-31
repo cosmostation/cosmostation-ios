@@ -58,6 +58,7 @@
                                 <constraint firstAttribute="height" constant="54" id="Bym-Uq-yUl"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                            <color key="tintColor" name="_color01"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" title="Select Valuables">
                                 <color key="titleColor" name="_color05"/>

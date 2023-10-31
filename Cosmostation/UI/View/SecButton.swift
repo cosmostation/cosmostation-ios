@@ -21,14 +21,15 @@ class SecButton: UIButton {
     }
     
     func setup() {
-        self.titleLabel?.font = .fontSize16Bold
+//        self.titleLabel?.font = .fontSize16Bold
         self.layer.cornerRadius = 8
         self.layer.borderWidth = 1
+        self.titleLabel?.textAlignment = .center
         
         if (self.isEnabled) {
             self.backgroundColor = .white.withAlphaComponent(0)
-            self.layer.borderColor = UIColor.colorPrimary.cgColor
-            self.setTitleColor(.colorPrimary, for: .normal)
+            self.layer.borderColor = UIColor.color01.cgColor
+            self.setTitleColor(.color01, for: .normal)
         } else {
             self.backgroundColor = .white.withAlphaComponent(0)
             self.layer.borderWidth = 1

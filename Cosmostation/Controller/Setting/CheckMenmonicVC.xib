@@ -965,16 +965,17 @@
                     <color key="textColor" name="_color02"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pJO-zF-TqB">
-                    <rect key="frame" x="8" y="698" width="377" height="116"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pJO-zF-TqB">
+                    <rect key="frame" x="8" y="760" width="377" height="54"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hu-Ua-MfL" customClass="SecButton" customModule="Cosmostation" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="377" height="54"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1Hu-Ua-MfL" customClass="SecButton" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="184.66666666666666" height="54"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="54" id="QAh-fF-QwP"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="tintColor" name="_color01"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" title="Create Another Account">
                                 <color key="titleColor" name="_color05"/>
@@ -984,7 +985,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4M-4D-FwG" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="62" width="377" height="54"/>
+                            <rect key="frame" x="192.66666666666663" y="0.0" width="184.33333333333337" height="54"/>
                             <color key="backgroundColor" name="_primary"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="54" id="uUP-5m-jTk"/>
