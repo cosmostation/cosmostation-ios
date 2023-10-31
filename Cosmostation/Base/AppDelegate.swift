@@ -14,13 +14,31 @@ import WalletConnectSwiftV2
 import Starscream
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, PinDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, PinDelegate, MessagingDelegate {
     
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     var userInfo:[AnyHashable : Any]?
     var scheme: URL?
-
+    
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+      Messaging.messaging().apnsToken = deviceToken
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+      let dataDict: [String: String] = ["token": fcmToken ?? ""]
+      NotificationCenter.default.post(
+        name: Notification.Name("FCMToken"),
+        object: nil,
+        userInfo: dataDict
+      )
+        
+        if let token = fcmToken {
+            PushUtils.shared.updateTokenIfNeed(token: token)
+        }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         configureFirebase()
         initWalletConnectV2()
@@ -32,28 +50,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UserDefaults.standard.synchronize()
         }
         
-        UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            switch settings.authorizationStatus {
-            case .notDetermined:
-                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: { (granted, error) in
-                    DispatchQueue.main.async {
-                        if granted {
-                            UIApplication.shared.registerForRemoteNotifications()
-                        }
-                        self.requestToken()
-                    }
-                })
-            case .denied:
-                break
-            case .authorized, .provisional, .ephemeral:
-                DispatchQueue.main.async {
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-                self.requestToken()
-            }
-        }
         
+        
+        UNUserNotificationCenter.current().delegate = self
+
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+          options: authOptions,
+          completionHandler: { _, _ in }
+        )
+
+        application.registerForRemoteNotifications()
         
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
@@ -233,6 +240,7 @@ private extension AppDelegate {
     func configureFirebase() {
         if Bundle.main.bundleIdentifier == "io.wannabit.cosmostation" {
             FirebaseApp.configure()
+            Messaging.messaging().delegate = self
         }
     }
 }
