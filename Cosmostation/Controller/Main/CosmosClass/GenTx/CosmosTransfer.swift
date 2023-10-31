@@ -354,7 +354,8 @@ class CosmosTransfer: BaseVC {
             memoLabel.isHidden = false
             memoHintLabel.isHidden = true
         }
-        if (skipSimul == true) {
+        
+        if (skipSimul == false) {
             onSimul()
         }
     }

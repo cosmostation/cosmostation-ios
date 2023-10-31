@@ -14,9 +14,9 @@ class ChainCelestia: CosmosClass  {
         super.init()
         
         name = "Celestia"
-        tag = "Celestia118"
+        tag = "celestia118"
         logo1 = "chainCelestia"
-        logo2 = "chainCelestia"
+        logo2 = "chainCelestia2"
         apiName = "celestia"
         stakeDenom = "utia"
 

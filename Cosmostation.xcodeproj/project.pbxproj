@@ -1608,6 +1608,8 @@
 		E16200332AF0CFFD0008F397 /* SelectEndpointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16200302AF0CFFD0008F397 /* SelectEndpointCell.swift */; };
 		E16200342AF0CFFD0008F397 /* SelectEndpointCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16200312AF0CFFD0008F397 /* SelectEndpointCell.xib */; };
 		E16200352AF0CFFD0008F397 /* SelectEndpointCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16200312AF0CFFD0008F397 /* SelectEndpointCell.xib */; };
+		E16200372AF139C60008F397 /* AddressBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16200362AF139C60008F397 /* AddressBook.swift */; };
+		E16200382AF139C60008F397 /* AddressBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16200362AF139C60008F397 /* AddressBook.swift */; };
 		E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */; };
 		E162430628C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */; };
 		E1657B0B2AD0159D00264A21 /* SecButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1657B0A2AD0159D00264A21 /* SecButton.swift */; };
@@ -2497,6 +2499,7 @@
 		E15F2D0F2ABF108500BAE105 /* StakeUnbondingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StakeUnbondingCell.xib; sourceTree = "<group>"; };
 		E16200302AF0CFFD0008F397 /* SelectEndpointCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEndpointCell.swift; sourceTree = "<group>"; };
 		E16200312AF0CFFD0008F397 /* SelectEndpointCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectEndpointCell.xib; sourceTree = "<group>"; };
+		E16200362AF139C60008F397 /* AddressBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBook.swift; sourceTree = "<group>"; };
 		E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IbcTransferReq.swift; sourceTree = "<group>"; };
 		E1657B0A2AD0159D00264A21 /* SecButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecButton.swift; sourceTree = "<group>"; };
 		E16D9B1422489B030019B7BB /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
@@ -3712,6 +3715,7 @@
 				04D279DB2A66863C00AF046A /* BaseAccount.swift */,
 				E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */,
 				04BA9BD02A978131003E2404 /* RefAddress.swift */,
+				E16200362AF139C60008F397 /* AddressBook.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -4654,6 +4658,7 @@
 				046EA88C2AD04A2500A2FCE7 /* desmos_profiles_v3_models_params.pb.swift in Sources */,
 				E122DBC02A8A468E006D1E7B /* cosmos_app_v1alpha1_query.grpc.swift in Sources */,
 				047843782AC991B300462F1C /* injective_ocr_v1beta1_tx.pb.swift in Sources */,
+				E16200382AF139C60008F397 /* AddressBook.swift in Sources */,
 				04CD246F2AD2E99A00497EF5 /* kava_bep3_v1beta1_genesis.pb.swift in Sources */,
 				04527DC02A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,
 				0402B8402ACC857700824B3F /* ChainSecre529.swift in Sources */,
@@ -5362,6 +5367,7 @@
 				046EA88B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_params.pb.swift in Sources */,
 				04527DBF2A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,
 				047843772AC991B300462F1C /* injective_ocr_v1beta1_tx.pb.swift in Sources */,
+				E16200372AF139C60008F397 /* AddressBook.swift in Sources */,
 				04CD246E2AD2E99A00497EF5 /* kava_bep3_v1beta1_genesis.pb.swift in Sources */,
 				E122DB612A8A468D006D1E7B /* cosmos_distribution_v1beta1_distribution.pb.swift in Sources */,
 				0402B83F2ACC857700824B3F /* ChainSecre529.swift in Sources */,

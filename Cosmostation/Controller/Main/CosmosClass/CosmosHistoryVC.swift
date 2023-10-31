@@ -221,7 +221,9 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if (!(selectedChain is ChainBinanceBeacon) && !(selectedChain is ChainOkt60Keccak)) {
-            if (indexPath.section == self.msHistoryGroup.count - 1 && indexPath.row == self.msHistoryGroup.last!.values.count - 1) {
+            if (indexPath.section == self.msHistoryGroup.count - 1
+                && indexPath.row == self.msHistoryGroup.last!.values.count - 1
+                && msHasMore == true) {
                 msHasMore = false
                 onFetchMsHistory(selectedChain.address, msHistoyID)
             }
