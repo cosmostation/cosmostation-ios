@@ -2713,6 +2713,8 @@
 		15722B252AEAC3E700A49D3E /* ChainMintStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15722B232AEAC3E700A49D3E /* ChainMintStation.swift */; };
 		15722B272AEBB38100A49D3E /* ChainDydx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15722B262AEBB38100A49D3E /* ChainDydx.swift */; };
 		15722B282AEBB38100A49D3E /* ChainDydx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15722B262AEBB38100A49D3E /* ChainDydx.swift */; };
+		15722B2A2AF0CC8900A49D3E /* ChainCelestia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15722B292AF0CC8900A49D3E /* ChainCelestia.swift */; };
+		15722B2B2AF0CC8900A49D3E /* ChainCelestia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15722B292AF0CC8900A49D3E /* ChainCelestia.swift */; };
 		1575C2C629E6595D009BEE39 /* ChainStafi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1575C2C529E6595D009BEE39 /* ChainStafi.swift */; };
 		1575C2C729E6595D009BEE39 /* ChainStafi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1575C2C529E6595D009BEE39 /* ChainStafi.swift */; };
 		1575C2D029EFD95A009BEE39 /* WalletNobleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1575C2CE29EFD95A009BEE39 /* WalletNobleCell.swift */; };
@@ -5249,6 +5251,7 @@
 		156CDB8329E52B6A00D55BD2 /* WalletNeutronCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletNeutronCell.xib; sourceTree = "<group>"; };
 		15722B232AEAC3E700A49D3E /* ChainMintStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMintStation.swift; sourceTree = "<group>"; };
 		15722B262AEBB38100A49D3E /* ChainDydx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainDydx.swift; sourceTree = "<group>"; };
+		15722B292AF0CC8900A49D3E /* ChainCelestia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCelestia.swift; sourceTree = "<group>"; };
 		1575C2C529E6595D009BEE39 /* ChainStafi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStafi.swift; sourceTree = "<group>"; };
 		1575C2CE29EFD95A009BEE39 /* WalletNobleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNobleCell.swift; sourceTree = "<group>"; };
 		1575C2CF29EFD95A009BEE39 /* WalletNobleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletNobleCell.xib; sourceTree = "<group>"; };
@@ -5935,6 +5938,7 @@
 				0451FC90282A3B1C00214FDA /* ChainBitcana.swift */,
 				0451FC9C282A3B5B00214FDA /* ChainBitsong.swift */,
 				15E4258629962E8E00FBA119 /* ChainCanto.swift */,
+				15722B292AF0CC8900A49D3E /* ChainCelestia.swift */,
 				0451FCBA282A3C2B00214FDA /* ChainCerberus.swift */,
 				0451FC5B282A39C100214FDA /* ChainCertik.swift */,
 				0451FCA8282A3B9100214FDA /* ChainChihuahua.swift */,
@@ -10763,6 +10767,7 @@
 				04F794DE2A458DF90093B79B /* stride_claim_claim.pb.swift in Sources */,
 				18FFB608281AF533004E65BB /* ManageChainCell.swift in Sources */,
 				18FFB609281AF533004E65BB /* VoteListViewController.swift in Sources */,
+				15722B2B2AF0CC8900A49D3E /* ChainCelestia.swift in Sources */,
 				18FFB60A281AF533004E65BB /* WalletBnbCell.swift in Sources */,
 				04F7960F2A458EFA0093B79B /* osmosis_gamm_v1beta1_tx.grpc.swift in Sources */,
 				04F795F72A458EFA0093B79B /* osmosis_gamm_pool-models_balancer_tx_tx.grpc.swift in Sources */,
@@ -12315,6 +12320,7 @@
 				047847CB2962C94800FD6A7E /* Cw20IcnsByAddressRes.swift in Sources */,
 				048161E62A41F2640006A906 /* irismod_record_tx.grpc.swift in Sources */,
 				04F797D92A4593050093B79B /* kava_savings_v1beta1_query.pb.swift in Sources */,
+				15722B2A2AF0CC8900A49D3E /* ChainCelestia.swift in Sources */,
 				048162792A41F32F0006A906 /* cryptoorg_nft_transfer_v1_packet.pb.swift in Sources */,
 				E1CF42F023598AFE00907F45 /* ManageChainCell.swift in Sources */,
 				E1945E4C222E81C200A1436F /* VoteListViewController.swift in Sources */,

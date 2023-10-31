@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -88,7 +88,7 @@
                     <rect key="frame" x="0.0" y="54" width="414" height="726"/>
                     <subviews>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CyF-sG-1V1">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="911.33333333333337"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="926"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9XS-8n-xSe">
                                     <rect key="frame" x="12" y="12" width="390" height="230"/>
@@ -138,13 +138,13 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="NFT Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obC-Zp-rSc">
-                                    <rect key="frame" x="11.999999999999996" y="266" width="59.666666666666657" height="14.333333333333314"/>
+                                    <rect key="frame" x="12" y="266" width="72.666666666666671" height="18"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <color key="textColor" name="_font04"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ9-Sl-Wva">
-                                    <rect key="frame" x="12" y="284.33333333333331" width="390" height="36"/>
+                                    <rect key="frame" x="12" y="288" width="390" height="36"/>
                                     <color key="backgroundColor" name="_font02"/>
                                     <color key="tintColor" name="_font05"/>
                                     <constraints>
@@ -155,13 +155,13 @@
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" smartInsertDeleteType="no"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="NFT Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MsP-8T-6DM">
-                                    <rect key="frame" x="12" y="344.33333333333331" width="91.666666666666671" height="14.333333333333314"/>
+                                    <rect key="frame" x="12" y="348" width="111" height="18"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <color key="textColor" name="_font04"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tdc-15-LHr">
-                                    <rect key="frame" x="12" y="362.66666666666669" width="390" height="80"/>
+                                    <rect key="frame" x="12" y="370" width="390" height="80"/>
                                     <color key="backgroundColor" name="_font02"/>
                                     <color key="tintColor" name="_font05"/>
                                     <constraints>
@@ -172,13 +172,13 @@
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" smartInsertDeleteType="no"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom ID (Random Unique)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBi-Fe-hjN">
-                                    <rect key="frame" x="12" y="478.66666666666663" width="158" height="14.333333333333314"/>
+                                    <rect key="frame" x="12" y="486" width="191.66666666666666" height="18"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <color key="textColor" name="_font04"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xuw-HE-IMT">
-                                    <rect key="frame" x="12" y="497" width="390" height="36"/>
+                                    <rect key="frame" x="12" y="508" width="390" height="36"/>
                                     <color key="backgroundColor" name="_font02"/>
                                     <color key="tintColor" name="_font05"/>
                                     <constraints>
@@ -189,13 +189,13 @@
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" smartInsertDeleteType="no"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93j-8P-jQn">
-                                    <rect key="frame" x="12" y="557" width="76.333333333333329" height="14.333333333333371"/>
+                                    <rect key="frame" x="12" y="568" width="93.333333333333329" height="18"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <color key="textColor" name="_font04"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rp7-2c-Q9G">
-                                    <rect key="frame" x="12" y="575.33333333333337" width="390" height="36"/>
+                                    <rect key="frame" x="12" y="590" width="390" height="36"/>
                                     <color key="backgroundColor" name="_font02"/>
                                     <color key="tintColor" name="_font05"/>
                                     <constraints>
