@@ -546,4 +546,8 @@ extension BaseData {
     func getLastTab() -> Int {
         return UserDefaults.standard.integer(forKey: KEY_LAST_TAB)
     }
+    
+    func setGrpcEndpoint(_ chain : CosmosClass, _ endpoint: String) {
+        UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + chain.name)
+    }
 }

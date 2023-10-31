@@ -40,6 +40,7 @@ let KEY_WC_WHITELIST                    = "KEY_WC_WHITELIST"
 let KEY_LANGUAGE                        = "KEY_LANGUAGE"
 let KEY_LAST_ACCOUNT                    = "KEY_LAST_ACCOUNT"
 let KEY_DISPLAY_COSMOS_CHAINS           = "KEY_DISPLAY_COSMOS_CHAINS"
+let KEY_CHAIN_GRPC_ENDPOINT             = "KEY_CHAIN_GRPC_ENDPOINT"
 
 let MINTSCAN_DEV_API_URL                = "https://dev.api.mintscan.io/";
 let MINTSCAN_API_URL                    = "https://front.api.mintscan.io/";

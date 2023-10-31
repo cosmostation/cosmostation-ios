@@ -279,7 +279,8 @@ extension Bep3Transfer {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: "grpc-kava.cosmostation.io", port: 443)
+        let KavaChain = ChainKava60()
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: KavaChain.getGrpc().host, port: KavaChain.getGrpc().port)
     }
     
     func getCallOptions() -> CallOptions {

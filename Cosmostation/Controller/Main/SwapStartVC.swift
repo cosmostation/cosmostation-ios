@@ -809,7 +809,7 @@ extension SwapStartVC {
     
     func getConnection(_ chain: CosmosClass) -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.grpcHost, port: chain.grpcPort)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpc().0, port: chain.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

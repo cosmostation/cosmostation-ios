@@ -138,6 +138,16 @@ class CosmosClass: BaseChain {
     func monikerImg(_ opAddress: String) -> URL {
         return URL(string: ResourceBase + apiName + "/moniker/" + opAddress + ".png") ?? URL(string: "")!
     }
+    
+    
+    func getGrpc() -> (host: String, port: Int) {
+        if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + self.name),
+           let port = Int(endpoint.components(separatedBy: ":")[1].trimmingCharacters(in: .whitespaces)) {
+            let host = endpoint.components(separatedBy: ":")[0].trimmingCharacters(in: .whitespaces)
+            return (host, port)
+        }
+        return (grpcHost, grpcPort)
+    }
 }
 
 //gas fee
@@ -619,12 +629,12 @@ extension CosmosClass {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: grpcHost, port: grpcPort)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: getGrpc().host, port: getGrpc().port)
     }
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(3000))
         return callOptions
     }
 }
