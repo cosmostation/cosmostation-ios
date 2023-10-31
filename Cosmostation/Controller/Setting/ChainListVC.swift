@@ -8,12 +8,16 @@
 
 import UIKit
 
-class ChainListVC: BaseVC {
+class ChainListVC: BaseVC, BaseSheetDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchEmptyLayer: UIView!
     @IBOutlet weak var addChainBtn: BaseButton!
     
+    var searchBar: UISearchBar?
+    
     var allCosmosChains = [CosmosClass]()
+    var searchCosmosChains = [CosmosClass]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +29,29 @@ class ChainListVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
+        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+        searchBar?.searchTextField.textColor = .color01
+        searchBar?.tintColor = UIColor.white
+        searchBar?.barTintColor = UIColor.clear
+        searchBar?.searchTextField.font = .fontSize14Bold
+        searchBar?.backgroundImage = UIImage()
+        searchBar?.delegate = self
+        tableView.tableHeaderView = searchBar
+        
+        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        dismissTap.cancelsTouchesInView = false
+        view.addGestureRecognizer(dismissTap)
+        
         onUpdateView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        var contentOffset: CGPoint = tableView.contentOffset
+        contentOffset.y += (tableView.tableHeaderView?.frame)!.height
+        tableView.contentOffset = contentOffset
         tableView.isHidden = false
-        addChainBtn.isHidden = false
+//        addChainBtn.isHidden = false
     }
     
     override func setLocalizedString() {
@@ -46,7 +66,32 @@ class ChainListVC: BaseVC {
                 allCosmosChains.append(chain)
             }
         }
+        searchCosmosChains = allCosmosChains
         tableView.reloadData()
+    }
+    
+    @objc func dismissKeyboard() {
+        searchBar?.endEditing(true)
+    }
+    
+    func onDisplayEndPointSheet(_ position: Int) {
+        let chain = searchCosmosChains[position]
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.targetChain = chain
+        baseSheet.sheetDelegate = self
+        baseSheet.sheetType = .SwitchEndpoint
+        onStartSheet(baseSheet)
+    }
+    
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+        if (sheetType == .SwitchEndpoint) {
+            let chain = searchCosmosChains.filter { $0.name == result.param }.first!
+            let endpoint = chain.getChainParam()["grpc_endpoint"].arrayValue[result.position!]["url"].stringValue
+            BaseData.instance.setGrpcEndpoint(chain, endpoint)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     @IBAction func onClickAddChain(_ sender: UIButton) {
@@ -54,7 +99,7 @@ class ChainListVC: BaseVC {
 
 }
 
-extension ChainListVC: UITableViewDelegate, UITableViewDataSource {
+extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -62,20 +107,55 @@ extension ChainListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        if (section == 0) {
+            view.titleLabel.text = "Cosmos Class"
+            view.cntLabel.text = String(allCosmosChains.count)
+        }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
+        return 40
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allCosmosChains.count
+        return searchCosmosChains.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"ManageChainCell") as! ManageChainCell
-        cell.bindCosmosClassChain(allCosmosChains[indexPath.row])
+        cell.bindCosmosClassChain(searchCosmosChains[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let chain = searchCosmosChains[indexPath.row]
+        if (chain is ChainBinanceBeacon || chain is ChainOkt60Keccak) {
+            return
+        }
+        if (chain.getChainParam().isEmpty == true) {
+            Task {
+                if let rawParam = try? await chain.fetchChainParam() {
+                    chain.mintscanChainParam = rawParam
+                }
+                DispatchQueue.main.async {
+                    self.onDisplayEndPointSheet(indexPath.row)
+                }
+            }
+        } else {
+            self.onDisplayEndPointSheet(indexPath.row)
+        }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar?.endEditing(true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchCosmosChains = searchText.isEmpty ? allCosmosChains : allCosmosChains.filter { cosmosChain in
+            return cosmosChain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        searchEmptyLayer.isHidden = searchCosmosChains.count > 0
+        tableView.reloadData()
     }
 }

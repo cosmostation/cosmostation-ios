@@ -63,6 +63,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SelectSwapChainCell", bundle: nil), forCellReuseIdentifier: "SelectSwapChainCell")
         sheetTableView.register(UINib(nibName: "SelectSwapAssetCell", bundle: nil), forCellReuseIdentifier: "SelectSwapAssetCell")
         sheetTableView.register(UINib(nibName: "SelectAccountCell", bundle: nil), forCellReuseIdentifier: "SelectAccountCell")
+        sheetTableView.register(UINib(nibName: "SelectEndpointCell", bundle: nil), forCellReuseIdentifier: "SelectEndpointCell")
         
         sheetTableView.register(UINib(nibName: "SelectFeeCoinCell", bundle: nil), forCellReuseIdentifier: "SelectFeeCoinCell")
         sheetTableView.register(UINib(nibName: "SelectValidatorCell", bundle: nil), forCellReuseIdentifier: "SelectValidatorCell")
@@ -107,6 +108,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SwitchAutoPass) {
             sheetTitle.text = NSLocalizedString("str_autopass", comment: "")
+            
+        } else if (sheetType == .SwitchEndpoint) {
+            sheetTitle.text = NSLocalizedString("title_select_end_point", comment: "")
             
         } else if (sheetType == .SelectSwapInputChain) {
             sheetTitle.text = NSLocalizedString("title_select_input_chain", comment: "")
@@ -309,6 +313,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SwitchAutoPass) {
             return AutoPass.getAutoPasses().count
             
+        } else if (sheetType == .SwitchEndpoint) {
+            return targetChain.getChainParam()["grpc_endpoint"].arrayValue.count
+            
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
             return swapChainsSearch.count
             
@@ -400,6 +407,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SwitchAutoPass) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
             cell?.onBindAutoPass(indexPath.row)
+            return cell!
+            
+        } else if (sheetType == .SwitchEndpoint) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectEndpointCell") as? SelectEndpointCell
+            cell?.onBindEndpoint(indexPath.row, targetChain)
             return cell!
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
@@ -515,6 +527,17 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result = BaseSheetResult.init(indexPath.row, String(BaseData.instance.selectAccounts()[indexPath.row].id))
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if (sheetType == .SwitchEndpoint) {
+            let cell = sheetTableView.cellForRow(at: indexPath) as? SelectEndpointCell
+            if (cell?.gapTime != nil) {
+                let result = BaseSheetResult.init(indexPath.row, targetChain.name)
+                sheetDelegate?.onSelectedSheet(sheetType, result)
+                
+            } else {
+                onShowToast(NSLocalizedString("error_useless_end_point", comment: ""))
+                return
+            }
+            
         } else if (sheetType == .SelectDelegatedAction) {
             let result = BaseSheetResult.init(indexPath.row, delegation.delegation.validatorAddress)
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -611,31 +634,32 @@ public enum SheetType: Int {
     case SwitchCurrency = 3
     case SwitchPriceColor = 4
     case SwitchAutoPass = 5
+    case SwitchEndpoint = 6
     
-    case SelectSwapInputChain = 6
-    case SelectSwapOutputChain = 7
-    case SelectSwapInputAsset = 8
-    case SelectSwapOutputAsset = 9
-    case SelectSwapSlippage = 10
+    case SelectSwapInputChain = 21
+    case SelectSwapOutputChain = 22
+    case SelectSwapInputAsset = 23
+    case SelectSwapOutputAsset = 24
+    case SelectSwapSlippage = 25
     
-    case SelectDelegatedAction = 11
-    case SelectUnbondingAction = 12
+    case SelectDelegatedAction = 31
+    case SelectUnbondingAction = 32
     
-    case SelectFeeCoin = 13
-    case SelectValidator = 14
-    case SelectUnStakeValidator = 15
-    case SelectRecipientChain = 16
-    case SelectRecipientAddress = 17
-    case SelectRecipientEvmAddress = 18
-    case SelectNameServiceAddress = 19
-    case SelectBepRecipientAddress = 20
+    case SelectFeeCoin = 41
+    case SelectValidator = 42
+    case SelectUnStakeValidator = 43
+    case SelectRecipientChain = 44
+    case SelectRecipientAddress = 45
+    case SelectRecipientEvmAddress = 46
+    case SelectNameServiceAddress = 47
+    case SelectBepRecipientAddress = 48
     
-    case SelectNeutronVault = 21
+    case SelectNeutronVault = 51
     
-    case SelectHardAction = 22
-    case SelectSwpAction = 23
-    case SelectMintAction = 24
-    case SelectBuyCrypto = 25
+    case SelectHardAction = 61
+    case SelectSwpAction = 62
+    case SelectMintAction = 63
+    case SelectBuyCrypto = 64
     
-    case SelectAccount = 30
+    case SelectAccount = 71
 }

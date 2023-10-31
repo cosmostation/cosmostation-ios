@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,6 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChainListVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="addChainBtn" destination="FFM-gB-RsV" id="wBw-RT-K5R"/>
+                <outlet property="searchEmptyLayer" destination="nO1-yz-Whg" id="yoG-DF-QDI"/>
                 <outlet property="tableView" destination="Q8M-AH-yf3" id="jKJ-z0-umY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -26,8 +27,8 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Q8M-AH-yf3">
-                    <rect key="frame" x="0.0" y="59" width="393" height="693"/>
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Q8M-AH-yf3">
+                    <rect key="frame" x="0.0" y="59" width="393" height="793"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_primary"/>
                 </tableView>
@@ -47,23 +48,54 @@
                         <action selector="onClickAddChain:" destination="-1" eventType="touchUpInside" id="oJj-gU-TYW"/>
                     </connections>
                 </button>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nO1-yz-Whg">
+                    <rect key="frame" x="76.666666666666686" y="374.66666666666669" width="240" height="128"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyData" translatesAutoresizingMaskIntoConstraints="NO" id="8Rn-bc-tg5">
+                            <rect key="frame" x="87.999999999999986" y="0.0" width="64.000000000000014" height="64"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="64" id="3UT-nV-P4k"/>
+                                <constraint firstAttribute="height" constant="64" id="Idp-0f-ueP"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Searched" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MMq-I1-Gv9">
+                            <rect key="frame" x="76.333333333333343" y="72" width="87.333333333333343" height="17.666666666666671"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="Lmc-zj-Mv8"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="0jQ-cH-zXF"/>
+                        <constraint firstItem="MMq-I1-Gv9" firstAttribute="centerX" secondItem="nO1-yz-Whg" secondAttribute="centerX" id="FjW-Jb-dGB"/>
+                        <constraint firstItem="MMq-I1-Gv9" firstAttribute="top" secondItem="8Rn-bc-tg5" secondAttribute="bottom" constant="8" id="XNZ-lQ-dvc"/>
+                        <constraint firstAttribute="height" constant="128" id="iJh-FC-yW7"/>
+                        <constraint firstItem="8Rn-bc-tg5" firstAttribute="top" secondItem="nO1-yz-Whg" secondAttribute="top" id="pEZ-ZY-gEv"/>
+                        <constraint firstItem="8Rn-bc-tg5" firstAttribute="centerX" secondItem="nO1-yz-Whg" secondAttribute="centerX" id="r1j-dg-iEf"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="Q8M-AH-yf3" secondAttribute="bottom" id="0td-q6-IxX"/>
                 <constraint firstItem="FFM-gB-RsV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="CD1-VU-7Ow"/>
+                <constraint firstItem="nO1-yz-Whg" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="FAu-yb-zSD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FFM-gB-RsV" secondAttribute="trailing" constant="8" id="Kxe-nm-Toz"/>
                 <constraint firstItem="Q8M-AH-yf3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="L6K-UY-xmW"/>
                 <constraint firstItem="Q8M-AH-yf3" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="ZaF-WC-sMs"/>
+                <constraint firstItem="nO1-yz-Whg" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="dRG-eF-VGG"/>
                 <constraint firstAttribute="bottom" secondItem="FFM-gB-RsV" secondAttribute="bottom" constant="38" id="kou-ah-1S8"/>
                 <constraint firstItem="Q8M-AH-yf3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pcn-WX-kTp"/>
-                <constraint firstItem="FFM-gB-RsV" firstAttribute="top" secondItem="Q8M-AH-yf3" secondAttribute="bottom" constant="8" id="uhR-T2-xG6"/>
             </constraints>
             <point key="canvasLocation" x="138" y="20"/>
         </view>
     </objects>
     <resources>
+        <image name="imgEmptyData" width="240" height="240"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

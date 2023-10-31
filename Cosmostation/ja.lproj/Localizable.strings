@@ -909,6 +909,7 @@
 "title_select_mint_action" = "Select Mint Market";
 "title_select_wallet" = "Select Wallet";
 "title_buy_crypto" = "クリプト購入";
+"title_select_end_point" = "エンドポイントの選択";
 
 
 "proposal_type_basic" = "Basic";
@@ -1048,8 +1049,10 @@
 "error_account_name" = "アカウント名を入力してください。";
 "error_alreay_exist_account_name" = "すでに存在する名前です。";
 "error_recipient_not_support_evm" = "受信するアドレスはEVMをサポートしていません。";
+"error_no_display" = "dAppを使用するためにアカウントのアドレスを有効にしてください。";
 "error_decrytion" = "復号化エラー";
 "error_unknown_qr_code" = "未知のQRコードです。";
+"error_useless_end_point" = "使用できません。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

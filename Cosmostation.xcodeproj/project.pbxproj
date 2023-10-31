@@ -1604,6 +1604,10 @@
 		E15F2D112ABF108500BAE105 /* StakeUnbondingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2D0E2ABF108500BAE105 /* StakeUnbondingCell.swift */; };
 		E15F2D122ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2D0F2ABF108500BAE105 /* StakeUnbondingCell.xib */; };
 		E15F2D132ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2D0F2ABF108500BAE105 /* StakeUnbondingCell.xib */; };
+		E16200322AF0CFFD0008F397 /* SelectEndpointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16200302AF0CFFD0008F397 /* SelectEndpointCell.swift */; };
+		E16200332AF0CFFD0008F397 /* SelectEndpointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16200302AF0CFFD0008F397 /* SelectEndpointCell.swift */; };
+		E16200342AF0CFFD0008F397 /* SelectEndpointCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16200312AF0CFFD0008F397 /* SelectEndpointCell.xib */; };
+		E16200352AF0CFFD0008F397 /* SelectEndpointCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16200312AF0CFFD0008F397 /* SelectEndpointCell.xib */; };
 		E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */; };
 		E162430628C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */; };
 		E1657B0B2AD0159D00264A21 /* SecButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1657B0A2AD0159D00264A21 /* SecButton.swift */; };
@@ -2491,6 +2495,8 @@
 		E15F2D092ABF107300BAE105 /* StakeDelegateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StakeDelegateCell.xib; sourceTree = "<group>"; };
 		E15F2D0E2ABF108500BAE105 /* StakeUnbondingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StakeUnbondingCell.swift; sourceTree = "<group>"; };
 		E15F2D0F2ABF108500BAE105 /* StakeUnbondingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StakeUnbondingCell.xib; sourceTree = "<group>"; };
+		E16200302AF0CFFD0008F397 /* SelectEndpointCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEndpointCell.swift; sourceTree = "<group>"; };
+		E16200312AF0CFFD0008F397 /* SelectEndpointCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectEndpointCell.xib; sourceTree = "<group>"; };
 		E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IbcTransferReq.swift; sourceTree = "<group>"; };
 		E1657B0A2AD0159D00264A21 /* SecButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecButton.swift; sourceTree = "<group>"; };
 		E16D9B1422489B030019B7BB /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
@@ -3235,6 +3241,8 @@
 				04CD247B2AD308C800497EF5 /* SelectBepRecipientCell.xib */,
 				15F7EA162AED83CC00967ADB /* SelectAccountCell.swift */,
 				15F7EA172AED83CC00967ADB /* SelectAccountCell.xib */,
+				E16200302AF0CFFD0008F397 /* SelectEndpointCell.swift */,
+				E16200312AF0CFFD0008F397 /* SelectEndpointCell.xib */,
 			);
 			path = SheetCell;
 			sourceTree = "<group>";
@@ -3998,6 +4006,7 @@
 				0400EEF62ADBEEF5007BA97F /* KavaLendListVC.xib in Resources */,
 				0400EEB22ADBB3C5007BA97F /* KavaDefiVC.xib in Resources */,
 				0438A7EF2AE123E7006FA213 /* basebg00.png in Resources */,
+				E16200352AF0CFFD0008F397 /* SelectEndpointCell.xib in Resources */,
 				047C10742AAC310600AFA159 /* QrAddressVC.xib in Resources */,
 				0409D2F82AC5DC6D0021E192 /* CosmosDelegate.xib in Resources */,
 				0443B8A3285C7F050027A6B9 /* Chain.xcassets in Resources */,
@@ -4132,6 +4141,7 @@
 				0400EF4F2ADF7EF4007BA97F /* KavaSwapAction.xib in Resources */,
 				04B789A12ACAEB5F00E9BE88 /* TxAddressSheet.xib in Resources */,
 				0400EEEF2ADBE40D007BA97F /* KavaDefiCell.xib in Resources */,
+				E16200342AF0CFFD0008F397 /* SelectEndpointCell.xib in Resources */,
 				1809C35129D16C80008884C1 /* injectScript.js in Resources */,
 				E1CD6AF62AEAAEC200376909 /* AboutStakingCell.xib in Resources */,
 				04C940CD2AEA56C200415256 /* basebg02.png in Resources */,
@@ -4555,6 +4565,7 @@
 				042296852A890CC4003C7630 /* ChainKavaEVM.swift in Sources */,
 				E122DB8E2A8A468D006D1E7B /* cosmos_msg_textual_v1_textual.pb.swift in Sources */,
 				0402B7ED2ACC248400824B3F /* CosmosRewardAddress.swift in Sources */,
+				E16200332AF0CFFD0008F397 /* SelectEndpointCell.swift in Sources */,
 				0400EF062ADBF03B007BA97F /* kava_hard_v1beta1_hard.pb.swift in Sources */,
 				E122DC532A8A4712006D1E7B /* tendermint_libs_bits_types.pb.swift in Sources */,
 				E122DBEC2A8A468E006D1E7B /* cosmos_feegrant_module_v1_module.pb.swift in Sources */,
@@ -5262,6 +5273,7 @@
 				042296842A890CC4003C7630 /* ChainKavaEVM.swift in Sources */,
 				E122DB8D2A8A468D006D1E7B /* cosmos_msg_textual_v1_textual.pb.swift in Sources */,
 				0402B7EC2ACC248400824B3F /* CosmosRewardAddress.swift in Sources */,
+				E16200322AF0CFFD0008F397 /* SelectEndpointCell.swift in Sources */,
 				0400EF052ADBF03B007BA97F /* kava_hard_v1beta1_hard.pb.swift in Sources */,
 				E122DC522A8A4712006D1E7B /* tendermint_libs_bits_types.pb.swift in Sources */,
 				E122DBEB2A8A468E006D1E7B /* cosmos_feegrant_module_v1_module.pb.swift in Sources */,

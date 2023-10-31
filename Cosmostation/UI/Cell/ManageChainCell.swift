@@ -38,7 +38,7 @@ class ManageChainCell: UITableViewCell {
             endpointLabel.text = OKT_LCD
         } else {
             typeLabel.text = "GRPC"
-            endpointLabel.text = chain.grpcHost + " : " +  String(chain.grpcPort)
+            endpointLabel.text = chain.getGrpc().host + " : " +  String(chain.getGrpc().port)
         }
     }
     

@@ -908,6 +908,7 @@
 "title_select_mint_action" = "Select Mint Market";
 "title_select_wallet" = "Select Wallet";
 "title_buy_crypto" = "Buy Crypto";
+"title_select_end_point" = "Select End-Point";
 
 
 "proposal_type_basic" = "Basic";
@@ -1047,12 +1048,10 @@
 "error_account_name" = "Please insert account name.";
 "error_alreay_exist_account_name" = "Already exist name.";
 "error_recipient_not_support_evm" = "The receiving address does not support EVM.";
-<<<<<<< HEAD
 "error_no_display" = "Please activate the account to use the dApp.";
-=======
 "error_decrytion" = "Decryption Error";
 "error_unknown_qr_code" = "Unknown QR Code.";
->>>>>>> yong-v2
+"error_useless_end_point" = "can not use this.";
 
 
 "alert_title_no_private_key" = "No Private Key";
