@@ -365,6 +365,7 @@
 "guide_msg_stafi" = "StaFi Hub 는 크로스체인 리퀴드 스테이킹을 위해 설계된 Cosmos SDK 기반 블록체인 네트워크입니다.";
 "guide_msg_terra" = "Terra 네트워크는 Terra Classic 에서 하드포크된 Cosmos SDK 기반 비허가형 블록체인 네트워크입니다.";
 "guide_msg_dydx" = "dYdX는 수수료 없는 무기한 거래를 지원하는 탈중앙화 거래소를 위해 설계된 Cosmos SDK 기반 앱체인입니다.";
+"guide_msg_celestia" = "손쉬운 탈중앙화 어플리케이션 및 블록체인 배포를 가능하게 하는 모듈형 블록체인 네트워크.";
 "guide_msg_mintstation" = "MintStation";
 "guide_btn_home" = "홈페이지";
 "guide_btn_blog" = "공식 블로그";
