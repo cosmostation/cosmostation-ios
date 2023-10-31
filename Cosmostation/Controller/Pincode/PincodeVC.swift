@@ -46,7 +46,7 @@ class PincodeVC: BaseVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if (lockType != .ForInit) {
+        if (lockType != .ForInit && lockType != .ForAppLock) {
             if (isBioSupport()) {
                 onShowBio()
             }
