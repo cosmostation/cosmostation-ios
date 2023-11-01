@@ -209,8 +209,10 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(chainListVC, animated: true)
                 
             } else if (indexPath.row == 3) {
-                //REF
-                
+                let addressBookVC = AddressBookListVC(nibName: "AddressBookListVC", bundle: nil)
+                addressBookVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(addressBookVC, animated: true)
             }
             
         } else if (indexPath.section == 1) {

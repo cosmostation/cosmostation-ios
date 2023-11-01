@@ -36,6 +36,11 @@ class CosmosTxResult: BaseVC {
     
     var evmHash: String?
     var evmRecipient: TransactionReceipt?
+    
+    //for addressbook
+    var recipientChain: BaseChain?
+    var recipinetAddress: String?
+    var memo: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -213,6 +218,13 @@ class CosmosTxResult: BaseVC {
             }
         }))
         self.present(noticeAlert, animated: true)
+    }
+    
+    func onShowAddressBook() {
+        if (recipientChain != nil &&
+            recipinetAddress?.isEmpty == false) {
+            
+        }
     }
     
     

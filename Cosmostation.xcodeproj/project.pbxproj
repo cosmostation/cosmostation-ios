@@ -1610,6 +1610,18 @@
 		E16200352AF0CFFD0008F397 /* SelectEndpointCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16200312AF0CFFD0008F397 /* SelectEndpointCell.xib */; };
 		E16200372AF139C60008F397 /* AddressBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16200362AF139C60008F397 /* AddressBook.swift */; };
 		E16200382AF139C60008F397 /* AddressBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16200362AF139C60008F397 /* AddressBook.swift */; };
+		E162003B2AF242B70008F397 /* AddressBookSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16200392AF242B70008F397 /* AddressBookSheet.swift */; };
+		E162003C2AF242B70008F397 /* AddressBookSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16200392AF242B70008F397 /* AddressBookSheet.swift */; };
+		E162003D2AF242B70008F397 /* AddressBookSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E162003A2AF242B70008F397 /* AddressBookSheet.xib */; };
+		E162003E2AF242B70008F397 /* AddressBookSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E162003A2AF242B70008F397 /* AddressBookSheet.xib */; };
+		E16200412AF279560008F397 /* AddressBookListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162003F2AF279560008F397 /* AddressBookListVC.swift */; };
+		E16200422AF279560008F397 /* AddressBookListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162003F2AF279560008F397 /* AddressBookListVC.swift */; };
+		E16200432AF279560008F397 /* AddressBookListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16200402AF279560008F397 /* AddressBookListVC.xib */; };
+		E16200442AF279560008F397 /* AddressBookListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16200402AF279560008F397 /* AddressBookListVC.xib */; };
+		E162004D2AF27C250008F397 /* AddressBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162004B2AF27C250008F397 /* AddressBookCell.swift */; };
+		E162004E2AF27C250008F397 /* AddressBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162004B2AF27C250008F397 /* AddressBookCell.swift */; };
+		E162004F2AF27C250008F397 /* AddressBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E162004C2AF27C250008F397 /* AddressBookCell.xib */; };
+		E16200502AF27C250008F397 /* AddressBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E162004C2AF27C250008F397 /* AddressBookCell.xib */; };
 		E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */; };
 		E162430628C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */; };
 		E1657B0B2AD0159D00264A21 /* SecButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1657B0A2AD0159D00264A21 /* SecButton.swift */; };
@@ -2500,6 +2512,12 @@
 		E16200302AF0CFFD0008F397 /* SelectEndpointCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEndpointCell.swift; sourceTree = "<group>"; };
 		E16200312AF0CFFD0008F397 /* SelectEndpointCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectEndpointCell.xib; sourceTree = "<group>"; };
 		E16200362AF139C60008F397 /* AddressBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBook.swift; sourceTree = "<group>"; };
+		E16200392AF242B70008F397 /* AddressBookSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookSheet.swift; sourceTree = "<group>"; };
+		E162003A2AF242B70008F397 /* AddressBookSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressBookSheet.xib; sourceTree = "<group>"; };
+		E162003F2AF279560008F397 /* AddressBookListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookListVC.swift; sourceTree = "<group>"; };
+		E16200402AF279560008F397 /* AddressBookListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressBookListVC.xib; sourceTree = "<group>"; };
+		E162004B2AF27C250008F397 /* AddressBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookCell.swift; sourceTree = "<group>"; };
+		E162004C2AF27C250008F397 /* AddressBookCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressBookCell.xib; sourceTree = "<group>"; };
 		E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IbcTransferReq.swift; sourceTree = "<group>"; };
 		E1657B0A2AD0159D00264A21 /* SecButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecButton.swift; sourceTree = "<group>"; };
 		E16D9B1422489B030019B7BB /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
@@ -3173,6 +3191,8 @@
 				E1DF77742AB74EE80028BD51 /* CheckPrivateKeyVC.xib */,
 				04FAD9E02AB6D8ED00143A3E /* ChainListVC.swift */,
 				04FAD9E12AB6D8ED00143A3E /* ChainListVC.xib */,
+				E162003F2AF279560008F397 /* AddressBookListVC.swift */,
+				E16200402AF279560008F397 /* AddressBookListVC.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -3193,6 +3213,8 @@
 				E131F4472AEE9BC000E760A0 /* QrImportCheckKeySheet.xib */,
 				04FAD9F22AB71D5000143A3E /* DeleteAccountSheet.swift */,
 				04FAD9F32AB71D5000143A3E /* DeleteAccountSheet.xib */,
+				E16200392AF242B70008F397 /* AddressBookSheet.swift */,
+				E162003A2AF242B70008F397 /* AddressBookSheet.xib */,
 				042DE83E2AC4C518003F3EA4 /* TxMemoSheet.swift */,
 				042DE83F2AC4C518003F3EA4 /* TxMemoSheet.xib */,
 				04A1A8002AC80AA50014EF92 /* TxAmountSheet.swift */,
@@ -3561,6 +3583,8 @@
 				E1DF77802AB762010028BD51 /* CheckPrivateKeyCell.xib */,
 				E1831BA22AB82FE60078A28B /* ManageChainCell.swift */,
 				E1831BA32AB82FE60078A28B /* ManageChainCell.xib */,
+				E162004B2AF27C250008F397 /* AddressBookCell.swift */,
+				E162004C2AF27C250008F397 /* AddressBookCell.xib */,
 				E15F2D022ABF105B00BAE105 /* StakeRewardAddressCell.swift */,
 				E15F2D032ABF105B00BAE105 /* StakeRewardAddressCell.xib */,
 				E15F2D082ABF107300BAE105 /* StakeDelegateCell.swift */,
@@ -4080,6 +4104,8 @@
 				04C940D42AEA56FC00415256 /* basebg04.png in Resources */,
 				E15F2D132ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */,
 				0438A7F72AE1316B006FA213 /* KavaMintListVC.xib in Resources */,
+				E16200502AF27C250008F397 /* AddressBookCell.xib in Resources */,
+				E162003E2AF242B70008F397 /* AddressBookSheet.xib in Resources */,
 				04A68C382AC156AA0041FA13 /* CosmosProposalCell.xib in Resources */,
 				15B24C892AE9039A0009B359 /* TxSignRequestSheet.xib in Resources */,
 				0438A81B2AE15270006FA213 /* KavaMintListMyCell.xib in Resources */,
@@ -4113,6 +4139,7 @@
 				E1CD6B032AEAAEF200376909 /* AboutSocialsCell.xib in Resources */,
 				0438A8212AE15283006FA213 /* KavaMintListCell.xib in Resources */,
 				E11EAE122AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
+				E16200442AF279560008F397 /* AddressBookListVC.xib in Resources */,
 				0409D2FE2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
 				E15F2D012ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
 				E1B44B282ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */,
@@ -4130,6 +4157,7 @@
 				E1831BA62AB82FE60078A28B /* ManageChainCell.xib in Resources */,
 				04FA747B2AA0446A001A2830 /* BaseMsgSheetCell.xib in Resources */,
 				04C940B32AE8D48C00415256 /* aes.js in Resources */,
+				E162004F2AF27C250008F397 /* AddressBookCell.xib in Resources */,
 				E11EAE1D2AAD87AD003BFC7F /* SettingPriceCell.xib in Resources */,
 				04C940D02AEA56DE00415256 /* basebg03.png in Resources */,
 				04FA746E2A9F8652001A2830 /* BaseSheet.xib in Resources */,
@@ -4184,6 +4212,7 @@
 				0400EF132ADBF763007BA97F /* KavaLendListMyCell.xib in Resources */,
 				0400EE842AD41FC5007BA97F /* ServiceCell.xib in Resources */,
 				E1B44B272ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */,
+				E162003D2AF242B70008F397 /* AddressBookSheet.xib in Resources */,
 				04527DC12A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
 				04FAD9DE2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				0400EF2B2ADD48DB007BA97F /* KavaSwapListMyCell.xib in Resources */,
@@ -4243,6 +4272,7 @@
 				0443B89828589B570027A6B9 /* Color.xcassets in Resources */,
 				E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
 				04C6B9C72AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */,
+				E16200432AF279560008F397 /* AddressBookListVC.xib in Resources */,
 				042DE8482AC4CD01003F3EA4 /* QrScanVC.xib in Resources */,
 				E12E9D262AE2B49900336449 /* KavaMintCreateAction.xib in Resources */,
 				0400EEB12ADBB3C5007BA97F /* KavaDefiVC.xib in Resources */,
@@ -4376,6 +4406,7 @@
 				0400EE9D2AD9B434007BA97F /* NeutronVote.swift in Sources */,
 				0438A7F52AE1316B006FA213 /* KavaMintListVC.swift in Sources */,
 				0402B8502ACC86B300824B3F /* ChainTerra.swift in Sources */,
+				E162003C2AF242B70008F397 /* AddressBookSheet.swift in Sources */,
 				E11069BB2AA4C57600EB02CA /* cosmwasm_wasm_v1_types.pb.swift in Sources */,
 				E122DC672A8DBD28006D1E7B /* BaseHeader.swift in Sources */,
 				E122DB722A8A468D006D1E7B /* cosmos_consensus_v1_query.grpc.swift in Sources */,
@@ -4501,6 +4532,7 @@
 				04CD24482AD11D3400497EF5 /* LegacyTransfer.swift in Sources */,
 				04CD24752AD2E99A00497EF5 /* kava_bep3_v1beta1_query.pb.swift in Sources */,
 				04B789F12ACB3FC900E9BE88 /* BaseSheetHeader.swift in Sources */,
+				E162004E2AF27C250008F397 /* AddressBookCell.swift in Sources */,
 				04E165BB28B61BE1000F12C0 /* MintscanAsset.swift in Sources */,
 				04B7898A2ACAC9B100E9BE88 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
 				0400EF0E2ADBF03B007BA97F /* kava_hard_v1beta1_tx.grpc.swift in Sources */,
@@ -4788,6 +4820,7 @@
 				04FAD9FA2AB7221600143A3E /* BaseRedButton.swift in Sources */,
 				0478438E2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
 				0438A8092AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */,
+				E16200422AF279560008F397 /* AddressBookListVC.swift in Sources */,
 				E122DB402A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
 				0478440D2AC9AA1000462F1C /* CosmosTransfer.swift in Sources */,
 				04FAD9D92AB438C900143A3E /* DropDownView.swift in Sources */,
@@ -5085,6 +5118,7 @@
 				0400EE9C2AD9B434007BA97F /* NeutronVote.swift in Sources */,
 				0438A7F42AE1316B006FA213 /* KavaMintListVC.swift in Sources */,
 				0402B84F2ACC86B300824B3F /* ChainTerra.swift in Sources */,
+				E162003B2AF242B70008F397 /* AddressBookSheet.swift in Sources */,
 				E11069BA2AA4C57600EB02CA /* cosmwasm_wasm_v1_types.pb.swift in Sources */,
 				E122DC662A8DBD28006D1E7B /* BaseHeader.swift in Sources */,
 				E122DB712A8A468D006D1E7B /* cosmos_consensus_v1_query.grpc.swift in Sources */,
@@ -5210,6 +5244,7 @@
 				04CD24472AD11D3400497EF5 /* LegacyTransfer.swift in Sources */,
 				04CD24742AD2E99A00497EF5 /* kava_bep3_v1beta1_query.pb.swift in Sources */,
 				04B789F02ACB3FC900E9BE88 /* BaseSheetHeader.swift in Sources */,
+				E162004D2AF27C250008F397 /* AddressBookCell.swift in Sources */,
 				0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */,
 				04B789892ACAC9B100E9BE88 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
 				0400EF0D2ADBF03B007BA97F /* kava_hard_v1beta1_tx.grpc.swift in Sources */,
@@ -5497,6 +5532,7 @@
 				E122DB3F2A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
 				0478438D2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
 				0438A8082AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */,
+				E16200412AF279560008F397 /* AddressBookListVC.swift in Sources */,
 				04FAD9D82AB438C900143A3E /* DropDownView.swift in Sources */,
 				0478440C2AC9AA1000462F1C /* CosmosTransfer.swift in Sources */,
 				E122DC502A8A4712006D1E7B /* tendermint_crypto_proof.pb.swift in Sources */,

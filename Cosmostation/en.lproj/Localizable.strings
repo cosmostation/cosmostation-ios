@@ -282,6 +282,8 @@
 "str_borrow_denom" = "Borrow %@";
 "str_draw_debt_denom" = "Draw Debt %@";
 "str_repay_denom" = "Repay %@";
+"str_name" = "Name";
+"str_address_book_add" = "Add Address Book";
 
 
 "btn_delegate" = "  Delegate";
@@ -351,6 +353,7 @@
 "msg_kava_swap_msg" = "Provide liquidity to AMM-style asset swap pools on the KAVA platform.";
 "msg_create_another_msg" = "You can create a new account using the same mnemonic, but with a different HD Path.\n\nIn general, there is a possibility that it may not be compatible with other wallets, and it is recommended to be used only by those with background knowledge of crypto keys and HD Path.";
 "msg_enter_encription_key" = "Enter the Encryption Key displayed on the screen to restore your account.";
+"msg_addressbook_add" = "For convenience, you can register frequently used addresses.";
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
 "guide_msg_iris" = "Interchain service infrastructure \nfor a distributed business ecosystem";
@@ -619,7 +622,6 @@
 "guide_btn_communities" = "Communities";
 "guide_btn_guide" = "Guide";
 "guide_btn_qna" = "FAQ";
-"name" = "Name";
 "amount" = "Amount";
 "value" = "Value";
 "mintscan_explorer" = "Explorer";
@@ -1052,6 +1054,7 @@
 "error_decrytion" = "Decryption Error";
 "error_unknown_qr_code" = "Unknown QR Code.";
 "error_useless_end_point" = "can not use this.";
+"error_name" = "Please enter your name correctly.";
 
 
 "alert_title_no_private_key" = "No Private Key";

@@ -54,7 +54,7 @@ class SettingBaseCell: UITableViewCell {
     func onBindSetAddressBook() {
         setImg.image = UIImage(named: "setAddressBook")
         setTitleLabel.text = NSLocalizedString("setting_addressbook_title", comment: "")
-        setDetailLabel.text = "0"
+        setDetailLabel.text = String(BaseData.instance.selectAllAddressBooks().count)
     }
     
     

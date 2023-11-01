@@ -107,7 +107,7 @@ let BASEACCOUNT_NAME        = Expression<String>("name")
 let BASEACCOUNT_TYPE        = Expression<Int64>("type")
 let BASEACCOUNT_LAST_PATH   = Expression<String>("lastpath")
 
-//V2 DB Ref_Address
+//V2 DB Ref_Address(derived address from mnonics or privatekey)
 let TABLE_REFADDRESS        = Table("BaseAddress")
 let REFADDRESS_ID           = Expression<Int64>("id")
 let REFADDRESS_ACCOUNT_ID   = Expression<Int64>("accountId")
@@ -117,6 +117,15 @@ let REFADDRESS_MAIN_AMOUNT  = Expression<String>("lastMainAmount")
 let REFADDRESS_MAIN_VALUE   = Expression<String>("lastMainAValue")
 let REFADDRESS_TOKEN_VALUE  = Expression<String>("lastTokenAValue")
 let REFADDRESS_COIN_CNT     = Expression<Int64>("lastCoinCnt")
+
+//V2 DB Ref_Address
+let TABLE_ADDRESSBOOK       = Table("AddressBook")
+let ADDRESSBOOK_ID          = Expression<Int64>("id")
+let ADDRESSBOOK_NAME        = Expression<String>("bookName")
+let ADDRESSBOOK_CHAIN_NAME  = Expression<String>("chainName")
+let ADDRESSBOOK_ADDRESS     = Expression<String>("address")
+let ADDRESSBOOK_MEMO        = Expression<String>("memo")
+let ADDRESSBOOK_TIME        = Expression<Int64>("lasttime")
 
 
 let COSMOS_AUTH_TYPE_OKEX_ACCOUNT           = "okexchain/EthAccount";

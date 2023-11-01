@@ -282,6 +282,8 @@
 "str_borrow_denom" = "%@ 대출";
 "str_draw_debt_denom" = "%@ 대출";
 "str_repay_denom" = "%@ 상환";
+"str_name" = "이름";
+"str_address_book_add" = "주소록 추가";
 
 
 "btn_delegate" = "  위임 하기";
@@ -351,6 +353,7 @@
 "msg_kava_swap_msg" = "KAVA 플랫폼 상의 AMM 방식의 자산 스왑 풀에 유동성을 공급하세요.";
 "msg_create_another_msg" = "동일한 니모닉을 사용하지만, HD Path를 달리해서 새로운 계정을 만드실 수 있습니다.\n\n 일반적으로 다른 지갑들과 호환되지 않을 가능성이 있으며, 크립토 키와 HD Path에 대한 배경지식이 있으신 분들만 사용하시는것을 추천드립니다.";
 "msg_enter_encription_key" = "계정을 복원하기 위해 화면에 표시된 Encription Key를 입력하세요.";
+"msg_addressbook_add" = "편의를 위해 자주쓰는 주소를 등록하실 수 있습니다.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";
@@ -620,7 +623,6 @@
 "guide_btn_communities" = "Communities";
 "guide_btn_guide" = "가이드";
 "guide_btn_qna" = "도움말";
-"name" = "이름";
 "amount" = "수량";
 "value" = "금액";
 "mintscan_explorer" = "익스플로러";
@@ -1053,6 +1055,7 @@
 "error_decrytion" = "복호화 에러";
 "error_unknown_qr_code" = "알수 없는 QR Code 입니다.";
 "error_useless_end_point" = "사용할 수 없습니다.";
+"error_name" = "이름을 정확히 입력하세요.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";

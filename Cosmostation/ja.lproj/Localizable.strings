@@ -282,6 +282,8 @@
 "str_borrow_denom" = "%@ ローン";
 "str_draw_debt_denom" = "%@ ローン";
 "str_repay_denom" = "%@ 返済";
+"str_name" = "名前";
+"str_address_book_add" = "連絡先を追加";
 
 
 "btn_delegate" = "  委任する";
@@ -351,6 +353,8 @@
 "msg_kava_swap_msg" = "KAVAプラットフォーム上のAMM方式の資産スワッププールに流動性を提供します。";
 "msg_create_another_msg" = "同じニーモニックを使用して、異なる HD パスを使用して新しいアカウントを作成できます。\n\n一般に、他のウォレットと互換性がない可能性があり、暗号キーと HD パスの予備知識がある人のみが使用することをお勧めします。";
 "msg_enter_encription_key" = "アカウントを復元するには、画面に表示される暗号化キーを入力してください。";
+"msg_addressbook_add" = "便宜上、よく使うアドレスを登録できます。";
+
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -620,7 +624,6 @@
 "guide_btn_communities" = "Communities";
 "guide_btn_guide" = "Guide";
 "guide_btn_qna" = "FAQ";
-"name" = "名前";
 "amount" = "額";
 "value" = "価値";
 "mintscan_explorer" = "エキスプローラ―";
@@ -1053,6 +1056,7 @@
 "error_decrytion" = "復号化エラー";
 "error_unknown_qr_code" = "未知のQRコードです。";
 "error_useless_end_point" = "使用できません。";
+"error_name" = "名前を正確に入力してください。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

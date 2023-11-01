@@ -237,6 +237,17 @@ extension BaseData {
             }
             try self.database.run(refAddressTable)
             
+            
+            let addressBookTable = TABLE_ADDRESSBOOK.create(ifNotExists: true) { table in
+                table.column(ADDRESSBOOK_ID, primaryKey: true)
+                table.column(ADDRESSBOOK_NAME)
+                table.column(ADDRESSBOOK_CHAIN_NAME)
+                table.column(ADDRESSBOOK_ADDRESS)
+                table.column(ADDRESSBOOK_MEMO)
+                table.column(ADDRESSBOOK_TIME)
+            }
+            try self.database.run(addressBookTable)
+            
         } catch { print(error) }
     }
     
@@ -363,7 +374,53 @@ extension BaseData {
     }
     
     
+    //V2 version addressBook
+    public func selectAllAddressBooks() -> [AddressBook] {
+        var result = [AddressBook]()
+        for rowInfo in try! database.prepare(TABLE_ADDRESSBOOK) {
+            result.append(
+                AddressBook(rowInfo[ADDRESSBOOK_ID], rowInfo[ADDRESSBOOK_NAME], rowInfo[ADDRESSBOOK_CHAIN_NAME],
+                            rowInfo[ADDRESSBOOK_ADDRESS], rowInfo[ADDRESSBOOK_MEMO], rowInfo[ADDRESSBOOK_TIME]))
+        }
+        return result
+    }
     
+    public func selectAddressBooks(_ id: Int64) -> AddressBook? {
+        let query = TABLE_ADDRESSBOOK.filter(ADDRESSBOOK_ID == id)
+        if let rowInfo = try! database.pluck(query) {
+            return AddressBook(rowInfo[ADDRESSBOOK_ID], rowInfo[ADDRESSBOOK_NAME], rowInfo[ADDRESSBOOK_CHAIN_NAME],
+                               rowInfo[ADDRESSBOOK_ADDRESS], rowInfo[ADDRESSBOOK_MEMO], rowInfo[ADDRESSBOOK_TIME])
+        }
+        return nil
+    }
+    
+    @discardableResult
+    public func updateAddressBook(_ addressBook: AddressBook) -> Int? {
+        if (selectAddressBooks(addressBook.id) != nil) {
+            let target = TABLE_ADDRESSBOOK.filter(ADDRESSBOOK_ID == addressBook.id)
+            return try? database.run(target.update(ADDRESSBOOK_NAME <- addressBook.bookName,
+                                                  ADDRESSBOOK_MEMO <- addressBook.memo,
+                                                  ADDRESSBOOK_TIME <- addressBook.lastTime))
+        } else {
+            return Int(insertAddressBook(addressBook))
+        }
+    }
+    
+    @discardableResult
+    public func insertAddressBook(_ addressBook: AddressBook) -> Int64 {
+        let toInsert = TABLE_ADDRESSBOOK.insert(ADDRESSBOOK_NAME <- addressBook.bookName,
+                                                ADDRESSBOOK_CHAIN_NAME <- addressBook.chainName,
+                                                ADDRESSBOOK_ADDRESS <- addressBook.dpAddress,
+                                                ADDRESSBOOK_MEMO <- addressBook.memo,
+                                                ADDRESSBOOK_TIME <- addressBook.lastTime)
+        return try! database.run(toInsert)
+    }
+    
+    @discardableResult
+    public func deleteAddressBook(_ addressBookId: Int64) -> Int?  {
+        let query = TABLE_ADDRESSBOOK.filter(ADDRESSBOOK_ID == addressBookId)
+        return try? database.run(query.delete())
+    }
     
     
     //legacy
