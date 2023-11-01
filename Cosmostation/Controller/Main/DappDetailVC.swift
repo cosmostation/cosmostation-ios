@@ -20,7 +20,7 @@ import web3swift
 import GRPC
 import NIO
 
-class DappDetailVC: BaseVC, TxSignRequestDelegate, BaseSheetDelegate {
+class DappDetailVC: BaseVC, TxSignRequestDelegate {
     
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var dappUrlLabel: UILabel!
@@ -104,8 +104,35 @@ class DappDetailVC: BaseVC, TxSignRequestDelegate, BaseSheetDelegate {
         return false
     }
     
+    private func disconnect() {
+        if let interactor = interactor {
+            if (interactor.state == .connected) {
+                interactor.killSession().done { [weak self] in
+                    self?.interactor = nil
+                    if (self?.navigationController != nil) {
+                        self?.navigationController?.popViewController(animated: true)
+                    } else {
+                        self?.dismiss(animated: true)
+                    }
+                }.cauterize()
+                return
+            } else {
+                interactor.disconnect()
+                self.interactor = nil
+            }
+        }
+        
+        self.disconnectV2Sessions()
+        
+        if (self.navigationController != nil) {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true)
+        }
+    }
+    
     @IBAction func onBack(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        disconnect()
     }
     
     func connectSession() {
@@ -114,8 +141,9 @@ class DappDetailVC: BaseVC, TxSignRequestDelegate, BaseSheetDelegate {
             self.navigationController?.popViewController(animated: false)
             return
         }
+        
+        showWait()
         if (url.contains("@2")) {
-            showWait()
             connectWalletConnectV2(url: url)
         } else {
             connectWalletConnectV1(url: url)
@@ -160,13 +188,32 @@ class DappDetailVC: BaseVC, TxSignRequestDelegate, BaseSheetDelegate {
     private func processSessionRequest(peer: WCSessionRequestParam, chainId: Int) {
         let chainName = peer.peerMeta.name.lowercased()
         
-        var chains = Array<CosmosClass>()
-        baseAccount.getDisplayCosmosChains().forEach { chain in
-            if (chain.apiName == chainName) {
-                chains.append(chain)
+        if let chain = baseAccount.getDisplayCosmosChains().filter ({ $0.apiName == chainName }).first {
+            if (chain.isDefault == true && chain.accountKeyType.pubkeyType == .COSMOS_Secp256k1) {
+                self.selectedChain = chain
+                self.wcTrustAccount = WCTrustAccount.init(network: 459, address: chain.address ?? "")
+                self.interactor?.approveSession(accounts: [chain.address ?? ""], chainId: chainId).done { _ in }.cauterize()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
+                    self.hideWait()
+                })
+                return
+                
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
+                    self.hideWait()
+                    self.onShowToast(NSLocalizedString("error_no_display", comment: ""))
+                })
+                return
             }
+            
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
+                self.hideWait()
+                self.onShowToast(NSLocalizedString("error_no_display", comment: ""))
+            })
+            return
         }
-        showAccountSelect(chains, chainId)
     }
     
     func configureWalletConnect() {
@@ -191,56 +238,17 @@ class DappDetailVC: BaseVC, TxSignRequestDelegate, BaseSheetDelegate {
                 showRequestSign(WcRequestType.TRUST_TYPE, self.selectedChain, trustTx.transaction.data(using: .utf8)!)
             }
         }
+        
+        interactor.onDisconnect = { [weak self] (error) in
+            guard let self = self else { return }
+            self.navigationController?.popViewController(animated: false)
+        }
     }
     
     private func connectWalletConnectV2(url: String) {
         setUpAuthSubscribing()
         currentV2PairingUri = url
         pairClient(uri: WalletConnectURI(string: url)!)
-    }
-    
-    private func showAccountSelect(_ chains: Array<CosmosClass>, _ chainId: Int) {
-        if (chains.count > 1) {
-            self.wcV1ChainId = chainId
-            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-            baseSheet.sheetDelegate = self
-            baseSheet.selectChains = chains
-            baseSheet.sheetType = .SelectAccount
-            onStartSheet(baseSheet)
-            
-        } else if (chains.count == 1) {
-            self.showWait()
-            self.selectedChain = chains[0]
-            self.wcTrustAccount = WCTrustAccount.init(network: 459, address: chains[0].address ?? "")
-            self.interactor?.approveSession(accounts: [chains[0].address ?? ""], chainId: chainId).done { _ in }.cauterize()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
-                self.hideWait()
-            })
-            return
-            
-        } else {
-            self.showWait()
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
-                self.hideWait()
-                self.onShowToast(NSLocalizedString("error_no_display", comment: ""))
-            })
-            return
-        }
-    }
-    
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
-        self.showWait()
-        if let currentChain = baseAccount.getDisplayCosmosChains().filter({ $0.address == result.param }).first {
-            self.selectedChain = currentChain
-            self.wcTrustAccount = WCTrustAccount.init(network: 459, address: result.param ?? "")
-            self.interactor?.approveSession(accounts: [result.param ?? ""], chainId: self.wcV1ChainId ?? 0).done { _ in }.cauterize()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
-                self.hideWait()
-            })
-            return
-        }
     }
     
     private func showRequestSign(_ type: WcRequestType, _ line: CosmosClass, _ request: Data) {
@@ -692,6 +700,31 @@ extension DappDetailVC {
                 try await Sign.instance.approve(proposalId: proposalId, namespaces: namespaces)
             } catch {
                 print("Approve Session error: \(error)")
+            }
+        }
+    }
+    
+    @MainActor
+    private func reject(proposalId: String, reason: RejectionReason) {
+        Task {
+            do {
+                try await Sign.instance.reject(proposalId: proposalId, reason: reason)
+            } catch {
+                print("Reject Session error: \(error)")
+            }
+        }
+    }
+    
+    @MainActor
+    private func disconnectV2Sessions() {
+        Task {
+            do {
+                for pairing in Pair.instance.getPairings() {
+                    try await Pair.instance.disconnect(topic: pairing.topic)
+                    try await Sign.instance.disconnect(topic: pairing.topic)
+                }
+            } catch {
+                print("Disconnect error: \(error)")
             }
         }
     }
