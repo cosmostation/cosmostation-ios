@@ -39,13 +39,7 @@ class TxSignRequestSheet: BaseVC {
         do {
             if let json = try JSONSerialization.jsonObject(with: wcMsg!, options: []) as? [String: Any] {
                 let fee = json["fee"] as? [String: Any]
-                var amounts: [[String : String]]?
-//                if (wcRequestType == .TRUST_TYPE) {
-                    amounts = fee?["amounts"] as? [[String: String]]
-//                } else {
-                    amounts = fee?["amount"] as? [[String: String]]
-//                }
-                
+                var amounts = fee?["amounts"] as? [[String: String]] ?? fee?["amount"] as? [[String: String]]
                 let firstAmount = amounts?.first
                 let denom = firstAmount?["denom"]
                 let amount = firstAmount?["amount"]

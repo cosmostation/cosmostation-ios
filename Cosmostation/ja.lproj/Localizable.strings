@@ -640,7 +640,6 @@
 "wc_request_cancel_msg" = "\n内容をご確認の上、ご判断ください。注文をキャンセルしてください。";
 "wc_request_success" = "送信成功！";
 "wc_request_fail" = "送信失敗";
-"wc_request_responsed" = "リクエストに応答しました";
 "wc_connect_alert_title" = "ウォレットを接続";
 "wc_connect_alert_message" = "URL への接続を許可しますか?";
 "wc_connect_alert_message_warning" = "URLをもう一度確認してください。 「SETTING」→「接続の管理」でいつでも接続を管理できます。";

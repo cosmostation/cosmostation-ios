@@ -639,7 +639,6 @@
 "wc_request_cancel_msg" = "\n내용을 확인하시고 결정해 주시기 바랍니다.\n\n주문 취소.";
 "wc_request_success" = "사인 성공";
 "wc_request_fail" = "사인 실패";
-"wc_request_responsed" = "전송 완료";
 "wc_connect_alert_title" = "지갑 연결";
 "wc_connect_alert_message" = "다음 주소에 지갑을 연결 하시겠습니까?";
 "wc_connect_alert_message_warning" = "연결하려는 URL을 잘 확인해주세요. “설정” → “지갑 연결 관리” 메뉴에서 언제든 재설정 할 수 있습니다.";

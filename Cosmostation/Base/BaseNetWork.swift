@@ -26,6 +26,19 @@ class BaseNetWork {
             }
     }
     
+    func fetchSupportConfig() {
+        AF.request(BaseNetWork.msSupportConfigs(), method: .get)
+            .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.supportConfig = value
+                    
+                case .failure:
+                    print("fetchSupportConfig error ", response.error)
+                }
+            }
+    }
+    
     func fetchPrices(_ force: Bool? = false) {
 //        print("fetchPrices ", BaseNetWork.msPricesUrl())
         if (!BaseData.instance.needPriceUpdate() && force == false) { return }
@@ -72,8 +85,6 @@ class BaseNetWork {
             }
     }
     
-    
-    
     static func getAccountHistoryUrl(_ chain: BaseChain, _ address: String) -> String {
         if (chain is ChainBinanceBeacon) {
             return BNB_BEACON_LCD + "api/v1/transactions"
@@ -107,6 +118,10 @@ class BaseNetWork {
     
     static func msSupportChains() -> String {
         return MINTSCAN_API_URL + "v1/meta/support/chains"
+    }
+    
+    static func msSupportConfigs() -> String {
+        return ResourceDappBase + "config.json"
     }
     
     static func msChainParam(_ chain: BaseChain) -> String {
