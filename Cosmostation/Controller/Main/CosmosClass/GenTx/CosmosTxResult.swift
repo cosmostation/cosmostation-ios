@@ -227,7 +227,6 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
         if (recipientChain != nil && recipinetAddress?.isEmpty == false) {
             if let existed = BaseData.instance.selectAllAddressBooks().filter({ $0.dpAddress == recipinetAddress && $0.chainName == recipientChain?.name }).first {
                 if (existed.memo != memo) {
-                    print("case000")
                     let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
                     addressBookSheet.addressBook = existed
                     addressBookSheet.memo = memo
@@ -236,7 +235,6 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 }
                 
             } else {
-                print("case11111")
                 let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
                 addressBookSheet.recipientChain = recipientChain
                 addressBookSheet.recipinetAddress = recipinetAddress

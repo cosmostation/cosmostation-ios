@@ -35,11 +35,6 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         addressTextField.delegate = self
         memoTextField.delegate = self
         
-        print("addressBook ", addressBook)
-        print("recipientChain ", recipientChain)
-        print("recipinetAddress ", recipinetAddress)
-        print("memo ", memo)
-        
         if (addressBook != nil) {
             nameTextField.text = addressBook?.bookName
             addressTextField.text = addressBook?.dpAddress
@@ -50,9 +45,8 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
             }
             
         } else if (recipinetAddress != nil) {
-            addressTextField.text = addressBook?.dpAddress
-            memoTextField.text = addressBook?.memo
-            
+            addressTextField.text = recipinetAddress
+            memoTextField.text = memo
         }
     }
     
@@ -91,6 +85,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
                     addressBook!.bookName = nameInput!
                     addressBook!.dpAddress = addressInput!
                     addressBook!.memo = memoInput
+                    addressBook!.lastTime = Date().millisecondsSince1970
                     let result = BaseData.instance.updateAddressBook(addressBook!)
                     bookDelegate?.onAddressBookUpdated(result)
                     dismiss(animated: true)
@@ -100,6 +95,12 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
             
         } else if (recipinetAddress != nil) {
             //after tx ask mode
+            if (recipientChain != nil) {
+                let addressBook = AddressBook.init(nameInput!, recipientChain!.name, addressInput!, memoInput, Date().millisecondsSince1970)
+                let result = BaseData.instance.updateAddressBook(addressBook)
+                bookDelegate?.onAddressBookUpdated(result)
+                dismiss(animated: true)
+            }
             
         } else {
             //new add mode
