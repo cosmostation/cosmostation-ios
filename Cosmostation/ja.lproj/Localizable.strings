@@ -356,7 +356,7 @@
 "msg_create_another_msg" = "同じニーモニックを使用して、異なる HD パスを使用して新しいアカウントを作成できます。\n\n一般に、他のウォレットと互換性がない可能性があり、暗号キーと HD パスの予備知識がある人のみが使用することをお勧めします。";
 "msg_enter_encription_key" = "アカウントを復元するには、画面に表示される暗号化キーを入力してください。";
 "msg_addressbook_add" = "便宜上、よく使うアドレスを登録できます。";
-
+"msg_addressbook_updated" = "連絡先を更新しました。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";

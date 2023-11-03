@@ -668,6 +668,9 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                     txResult.selectedChain = self.selectedChain
+                    txResult.recipientChain = self.selectedRecipientChain
+                    txResult.recipinetAddress = self.selectedRecipientAddress
+                    txResult.memo = self.txMemo
                     txResult.broadcastTxResponse = response
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
@@ -686,6 +689,9 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                     txResult.selectedChain = self.selectedChain
+                    txResult.recipientChain = self.selectedRecipientChain
+                    txResult.recipinetAddress = self.selectedRecipientAddress
+                    txResult.memo = self.txMemo
                     txResult.broadcastTxResponse = response
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
@@ -708,6 +714,9 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                     txResult.selectedChain = self.selectedChain
+                    txResult.recipientChain = self.selectedRecipientChain
+                    txResult.recipinetAddress = self.selectedRecipientAddress
+                    txResult.memo = self.txMemo
                     txResult.broadcastTxResponse = response
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
@@ -726,6 +735,9 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                     txResult.selectedChain = self.selectedChain
+                    txResult.recipientChain = self.selectedRecipientChain
+                    txResult.recipinetAddress = self.selectedRecipientAddress
+                    txResult.memo = self.txMemo
                     txResult.broadcastTxResponse = response
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)

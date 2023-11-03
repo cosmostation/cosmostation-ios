@@ -90,7 +90,7 @@ extension AddressBookListVC: UITableViewDelegate, UITableViewDataSource, Address
             self.onShowEditSheet(book)
         })
         let delete = UIAction(title: NSLocalizedString("str_delete", comment: ""), image: nil, handler: { _ in
-            //            self.onShowDeleteSheet(account)
+            self.onDeleteBook(book)
         })
         return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: nil) { _ in
             UIMenu(title: "", children: [edit, delete])
@@ -118,6 +118,7 @@ extension AddressBookListVC: UITableViewDelegate, UITableViewDataSource, Address
         addressBookLsit = BaseData.instance.selectAllAddressBooks()
         tableView.reloadData()
     }
+    
     func onDeleted(_ book: AddressBook) {
         BaseData.instance.deleteAddressBook(book.id)
         addressBookLsit = BaseData.instance.selectAllAddressBooks()

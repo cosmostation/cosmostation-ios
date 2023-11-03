@@ -14,7 +14,7 @@ import NIO
 import SwiftProtobuf
 import web3swift
 
-class CosmosTxResult: BaseVC {
+class CosmosTxResult: BaseVC, AddressBookDelegate {
     
     @IBOutlet weak var successView: UIView!
     @IBOutlet weak var successMsgLabel: UILabel!
@@ -135,6 +135,9 @@ class CosmosTxResult: BaseVC {
                 
             } else {
                 successView.isHidden = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                    self.onShowAddressBook()
+                });
             }
             
         } else {
@@ -221,10 +224,31 @@ class CosmosTxResult: BaseVC {
     }
     
     func onShowAddressBook() {
-        if (recipientChain != nil &&
-            recipinetAddress?.isEmpty == false) {
-            
+        if (recipientChain != nil && recipinetAddress?.isEmpty == false) {
+            if let existed = BaseData.instance.selectAllAddressBooks().filter({ $0.dpAddress == recipinetAddress && $0.chainName == recipientChain?.name }).first {
+                if (existed.memo != memo) {
+                    print("case000")
+                    let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
+                    addressBookSheet.addressBook = existed
+                    addressBookSheet.memo = memo
+                    addressBookSheet.bookDelegate = self
+                    self.onStartSheet(addressBookSheet, 420)
+                }
+                
+            } else {
+                print("case11111")
+                let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
+                addressBookSheet.recipientChain = recipientChain
+                addressBookSheet.recipinetAddress = recipinetAddress
+                addressBookSheet.memo = memo
+                addressBookSheet.bookDelegate = self
+                self.onStartSheet(addressBookSheet, 420)
+            }
         }
+    }
+    
+    func onAddressBookUpdated(_ result: Int?) {
+        onShowToast(NSLocalizedString("msg_addressbook_updated", comment: ""))
     }
     
     

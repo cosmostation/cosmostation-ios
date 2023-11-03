@@ -35,14 +35,21 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         addressTextField.delegate = self
         memoTextField.delegate = self
         
+        print("addressBook ", addressBook)
+        print("recipientChain ", recipientChain)
+        print("recipinetAddress ", recipinetAddress)
+        print("memo ", memo)
+        
         if (addressBook != nil) {
-            print("11111")
             nameTextField.text = addressBook?.bookName
             addressTextField.text = addressBook?.dpAddress
-            memoTextField.text = addressBook?.memo
+            if (memo != nil) {
+                memoTextField.text = memo
+            } else {
+                memoTextField.text = addressBook?.memo
+            }
             
         } else if (recipinetAddress != nil) {
-            print("222222")
             addressTextField.text = addressBook?.dpAddress
             memoTextField.text = addressBook?.memo
             
