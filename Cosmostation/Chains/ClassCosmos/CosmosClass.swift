@@ -160,7 +160,7 @@ extension CosmosClass {
     }
     
     func isGasSimulable() -> Bool {
-        return getChainParam()["isSimulable"].bool ?? true
+        return getChainParam()["fee"]["isSimulable"].bool ?? true
     }
     
     func feeThreshold() -> String? {
@@ -168,7 +168,7 @@ extension CosmosClass {
     }
     
     func gasMultiply() -> Double {
-        if let mutiply = getChainParam()["simul_gas_multiply"].double {
+        if let mutiply = getChainParam()["fee"]["simul_gas_multiply"].double {
             return mutiply
         }
         return 1.2
