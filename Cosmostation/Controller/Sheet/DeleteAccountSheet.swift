@@ -30,7 +30,6 @@ class DeleteAccountSheet: BaseVC {
     @IBAction func onClickDelete(_ sender: UIButton) {
         deleteDelegate?.onDeleted()
         dismiss(animated: true)
-        
     }
 }
 

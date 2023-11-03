@@ -36,11 +36,13 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         memoTextField.delegate = self
         
         if (addressBook != nil) {
+            print("11111")
             nameTextField.text = addressBook?.bookName
             addressTextField.text = addressBook?.dpAddress
             memoTextField.text = addressBook?.memo
             
         } else if (recipinetAddress != nil) {
+            print("222222")
             addressTextField.text = addressBook?.dpAddress
             memoTextField.text = addressBook?.memo
             
@@ -76,11 +78,24 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         
         if (addressBook != nil) {
             //edit mode
+            let chain = ALLCOSMOSCLASS().filter { addressBook!.chainName == $0.name }.first
+            if (chain != nil) {
+                if (WUtils.isValidChainAddress(chain!, addressInput!)) {
+                    addressBook!.bookName = nameInput!
+                    addressBook!.dpAddress = addressInput!
+                    addressBook!.memo = memoInput
+                    let result = BaseData.instance.updateAddressBook(addressBook!)
+                    bookDelegate?.onAddressBookUpdated(result)
+                    dismiss(animated: true)
+                }
+            }
+            
             
         } else if (recipinetAddress != nil) {
             //after tx ask mode
             
         } else {
+            //new add mode
             let chain = ALLCOSMOSCLASS().filter { addressInput!.starts(with: $0.accountPrefix!) == true }.first
             if (chain != nil) {
                 if (WUtils.isValidChainAddress(chain!, addressInput!)) {
@@ -90,9 +105,9 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
                     dismiss(animated: true)
                 }
             }
-            onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-            return
         }
+        onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+        return
         
     }
 }

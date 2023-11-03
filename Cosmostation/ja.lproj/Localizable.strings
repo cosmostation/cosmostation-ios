@@ -191,6 +191,8 @@
 "str_transfer_asset" = "資産転送";
 "str_ibc_transfer_asset" = "IBC 資産転送";
 "str_create_another_account" = "別のアカウントを作成";
+"str_delete" = "消去";
+"str_delete_address_book" = "連絡先の削除";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -771,7 +773,6 @@
 "str_select_price_color" = "価格変動の色を選択してください";
 
 "clear_all" = "すべてクリア";
-"delete" = "消去";
 "close" = "閉じる";
 "cancel" = "キャンセル";
 "ok" = "OK";

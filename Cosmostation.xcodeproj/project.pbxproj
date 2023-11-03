@@ -859,6 +859,10 @@
 		04C940E12AEB92F800415256 /* BaseImgSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940DE2AEB92F800415256 /* BaseImgSheetCell.swift */; };
 		04C940E22AEB92F800415256 /* BaseImgSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C940DF2AEB92F800415256 /* BaseImgSheetCell.xib */; };
 		04C940E32AEB92F900415256 /* BaseImgSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C940DF2AEB92F800415256 /* BaseImgSheetCell.xib */; };
+		04C940E62AF4DAAE00415256 /* DeleteAddressBookSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940E42AF4DAAE00415256 /* DeleteAddressBookSheet.swift */; };
+		04C940E72AF4DAAE00415256 /* DeleteAddressBookSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940E42AF4DAAE00415256 /* DeleteAddressBookSheet.swift */; };
+		04C940E82AF4DAAE00415256 /* DeleteAddressBookSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C940E52AF4DAAE00415256 /* DeleteAddressBookSheet.xib */; };
+		04C940E92AF4DAAE00415256 /* DeleteAddressBookSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C940E52AF4DAAE00415256 /* DeleteAddressBookSheet.xib */; };
 		04CB91182A90C30A00375354 /* CosmosClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91172A90C30A00375354 /* CosmosClass.swift */; };
 		04CB91192A90C30A00375354 /* CosmosClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB91172A90C30A00375354 /* CosmosClass.swift */; };
 		04CB911B2A90C41E00375354 /* EvmClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CB911A2A90C41E00375354 /* EvmClass.swift */; };
@@ -2154,6 +2158,8 @@
 		04C940DB2AEA57D400415256 /* basebg01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg01.png; sourceTree = "<group>"; };
 		04C940DE2AEB92F800415256 /* BaseImgSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImgSheetCell.swift; sourceTree = "<group>"; };
 		04C940DF2AEB92F800415256 /* BaseImgSheetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseImgSheetCell.xib; sourceTree = "<group>"; };
+		04C940E42AF4DAAE00415256 /* DeleteAddressBookSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAddressBookSheet.swift; sourceTree = "<group>"; };
+		04C940E52AF4DAAE00415256 /* DeleteAddressBookSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteAddressBookSheet.xib; sourceTree = "<group>"; };
 		04CB91172A90C30A00375354 /* CosmosClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClass.swift; sourceTree = "<group>"; };
 		04CB911A2A90C41E00375354 /* EvmClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmClass.swift; sourceTree = "<group>"; };
 		04CB911D2A90C9D900375354 /* ChainAkash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAkash.swift; sourceTree = "<group>"; };
@@ -3215,6 +3221,8 @@
 				04FAD9F32AB71D5000143A3E /* DeleteAccountSheet.xib */,
 				E16200392AF242B70008F397 /* AddressBookSheet.swift */,
 				E162003A2AF242B70008F397 /* AddressBookSheet.xib */,
+				04C940E42AF4DAAE00415256 /* DeleteAddressBookSheet.swift */,
+				04C940E52AF4DAAE00415256 /* DeleteAddressBookSheet.xib */,
 				042DE83E2AC4C518003F3EA4 /* TxMemoSheet.swift */,
 				042DE83F2AC4C518003F3EA4 /* TxMemoSheet.xib */,
 				04A1A8002AC80AA50014EF92 /* TxAmountSheet.swift */,
@@ -4098,6 +4106,7 @@
 				0400EE982AD7E99B007BA97F /* NeutronPrpposalsVC.xib in Resources */,
 				E15F2D072ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
 				04B789EE2ACB336400E9BE88 /* SelectRefAddressCell.xib in Resources */,
+				04C940E92AF4DAAE00415256 /* DeleteAddressBookSheet.xib in Resources */,
 				E15980A42A83AB030032892B /* Main.storyboard in Resources */,
 				04CD24562AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */,
 				E1CD6AFD2AEAAEDC00376909 /* AboutRewardAddressCell.xib in Resources */,
@@ -4203,6 +4212,7 @@
 				04CFF0352AC58D4400FB3187 /* SelectFeeCoinCell.xib in Resources */,
 				042DE8422AC4C518003F3EA4 /* TxMemoSheet.xib in Resources */,
 				E1D538292A96644F00FB0403 /* loading.json in Resources */,
+				04C940E82AF4DAAE00415256 /* DeleteAddressBookSheet.xib in Resources */,
 				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				0409D2FD2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
 				15B24C882AE9039A0009B359 /* TxSignRequestSheet.xib in Resources */,
@@ -4903,6 +4913,7 @@
 				E122DBD22A8A468E006D1E7B /* cosmos_circuit_v1_types.pb.swift in Sources */,
 				0402B8102ACC765F00824B3F /* ChainIxo.swift in Sources */,
 				E122DBA42A8A468D006D1E7B /* cosmos_store_v1beta1_listening.pb.swift in Sources */,
+				04C940E72AF4DAAE00415256 /* DeleteAddressBookSheet.swift in Sources */,
 				E122DB982A8A468D006D1E7B /* cosmos_authz_module_v1_module.pb.swift in Sources */,
 				0402B8372ACC7CB300824B3F /* ChainRegen.swift in Sources */,
 				046EA86E2AD04A2500A2FCE7 /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */,
@@ -5615,6 +5626,7 @@
 				E122DBD12A8A468E006D1E7B /* cosmos_circuit_v1_types.pb.swift in Sources */,
 				0402B80F2ACC765F00824B3F /* ChainIxo.swift in Sources */,
 				E122DBA32A8A468D006D1E7B /* cosmos_store_v1beta1_listening.pb.swift in Sources */,
+				04C940E62AF4DAAE00415256 /* DeleteAddressBookSheet.swift in Sources */,
 				E122DB972A8A468D006D1E7B /* cosmos_authz_module_v1_module.pb.swift in Sources */,
 				0402B8362ACC7CB300824B3F /* ChainRegen.swift in Sources */,
 				046EA86D2AD04A2500A2FCE7 /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */,

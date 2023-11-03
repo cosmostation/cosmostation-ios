@@ -44,10 +44,23 @@ class AddressBookListVC: BaseVC {
         addressBookSheet.bookDelegate = self
         self.onStartSheet(addressBookSheet, 420)
     }
-
+    
+    func onShowEditSheet(_ book: AddressBook) {
+        let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
+        addressBookSheet.addressBook = book
+        addressBookSheet.bookDelegate = self
+        self.onStartSheet(addressBookSheet, 420)
+    }
+    
+    func onDeleteBook(_ book: AddressBook) {
+        let deleteAddressBookSheet = DeleteAddressBookSheet(nibName: "DeleteAddressBookSheet", bundle: nil)
+        deleteAddressBookSheet.addressBook = book
+        deleteAddressBookSheet.deleteDelegate = self
+        self.onStartSheet(deleteAddressBookSheet)
+    }
 }
 
-extension AddressBookListVC: UITableViewDelegate, UITableViewDataSource, AddressBookDelegate {
+extension AddressBookListVC: UITableViewDelegate, UITableViewDataSource, AddressBookDelegate, AddressBookDeleteDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return addressBookLsit.count
@@ -55,11 +68,60 @@ extension AddressBookListVC: UITableViewDelegate, UITableViewDataSource, Address
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"AddressBookCell") as! AddressBookCell
-        cell.bindAddressBook(addressBookLsit[indexPath.row])
+        let book = addressBookLsit[indexPath.row]
+        cell.bindAddressBook(book)
+        cell.actionEdit = {
+            self.onShowEditSheet(book)
+        }
+        cell.actionDelete = {
+            self.onDeleteBook(book)
+        }
         return cell
     }
     
-    func onAddressBookUpdated(_ result: Int?) {
-        print("onAddressBookUpdated ", result)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let book = addressBookLsit[indexPath.row]
+        onShowEditSheet(book)
     }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let book = addressBookLsit[indexPath.row]
+        let edit = UIAction(title: NSLocalizedString("str_edit", comment: ""), image: nil, handler: { _ in
+            self.onShowEditSheet(book)
+        })
+        let delete = UIAction(title: NSLocalizedString("str_delete", comment: ""), image: nil, handler: { _ in
+            //            self.onShowDeleteSheet(account)
+        })
+        return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: nil) { _ in
+            UIMenu(title: "", children: [edit, delete])
+        }
+    }
+
+    func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return makeTargetedPreview(for: configuration)
+    }
+
+    func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return makeTargetedPreview(for: configuration)
+    }
+
+    private func makeTargetedPreview(for configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let indexPath = configuration.identifier as? IndexPath else { return nil }
+        guard let cell = tableView.cellForRow(at: indexPath) as? AddressBookCell else { return nil }
+
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = .clear
+        return UITargetedPreview(view: cell, parameters: parameters)
+    }
+    
+    func onAddressBookUpdated(_ result: Int?) {
+        addressBookLsit = BaseData.instance.selectAllAddressBooks()
+        tableView.reloadData()
+    }
+    func onDeleted(_ book: AddressBook) {
+        BaseData.instance.deleteAddressBook(book.id)
+        addressBookLsit = BaseData.instance.selectAllAddressBooks()
+        tableView.reloadData()
+    }
+    
 }

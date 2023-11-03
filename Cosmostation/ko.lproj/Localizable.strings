@@ -191,6 +191,8 @@
 "str_transfer_asset" = "자산 전송";
 "str_ibc_transfer_asset" = "IBC 자산 전송";
 "str_create_another_account" = "다른 계정 생성";
+"str_delete" = "삭제";
+"str_delete_address_book" = "주소록 삭제";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";
@@ -770,7 +772,6 @@
 "str_select_price_color" = "가격 변동 색상을 선택하세요";
 
 "clear_all" = "전체 삭제";
-"delete" = "삭제";
 "close" = "닫기";
 "cancel" = "취소";
 "ok" = "OK";
