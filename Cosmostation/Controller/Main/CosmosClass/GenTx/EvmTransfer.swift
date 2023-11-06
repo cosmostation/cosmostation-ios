@@ -226,12 +226,10 @@ class EvmTransfer: BaseVC {
             }
             
             if let gasLimit = try? web3.eth.estimateGas(tx, transactionOptions: wTx?.transactionOptions) {
-                print("gasLimit ", gasLimit)
                 let newLimit = NSDecimalNumber(string: String(gasLimit)).multiplying(by: NSDecimalNumber(string: "1.3"), withBehavior: handler0Up)
                 tx.parameters.gasLimit = Web3.Utils.parseToBigUInt(newLimit.stringValue, decimals: 0)
                 ethereumTransaction = tx
                 
-                print("amount ", String(gasLimit.multiplied(by: multipleGas)))
                 feeAmount = NSDecimalNumber(string: String(gasLimit.multiplied(by: multipleGas)))
                 DispatchQueue.main.async {
                     self.onUpdateFeeView()

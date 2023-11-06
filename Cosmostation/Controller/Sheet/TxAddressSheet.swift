@@ -133,7 +133,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
                 Task {
                     let channel = getConnection(ChainKava118())
                     if let recipientAuth = try? await self.fetchAuth(channel, kavaBechAddress) {
-                        if (WUtils.onParseAuthPubkeyType(recipientAuth)?.contains("secp256k1") == false) {
+                        if (WUtils.onParseAuthPubkeyType(recipientAuth)?.contains("cosmos.crypto.secp256k1") == false) {
                             DispatchQueue.main.async {
                                 self.addressDelegate?.onInputedAddress(userInput!, nil)
                                 self.dismiss(animated: true)
