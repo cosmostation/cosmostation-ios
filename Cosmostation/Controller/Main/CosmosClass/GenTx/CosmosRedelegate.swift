@@ -298,21 +298,24 @@ class CosmosRedelegate: BaseVC {
 }
 
 extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectUnStakeValidator) {
-            if (fromValidator?.operatorAddress != result.param) {
-                fromValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == result.param}).first!
+            if let validatorAddress = result["validatorAddress"] as? String {
+                fromValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
                 onUpdateFromValidatorView()
                 onUpdateFeeView()
             }
             
         } else if (sheetType == .SelectValidator) {
-            toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == result.param}).first!
-            onUpdateToValidatorView()
+            if let validatorAddress = result["validatorAddress"] as? String {
+                toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                onUpdateToValidatorView()
+                onUpdateFeeView()
+            }
             
         } else if (sheetType == .SelectFeeCoin) {
-            if let position = result.position,
-                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
+            if let index = result["index"] as? Int,
+               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
                 txFee.amount[0].denom = selectedDenom
                 onUpdateFeeView()
                 onSimul()

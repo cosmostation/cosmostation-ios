@@ -198,19 +198,22 @@ extension KavaMintListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
         }
     }
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectMintAction) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                if (result.position == 0) {
-                    self.onDepositCdpTx(result.param!)
-                } else if (result.position == 1) {
-                    self.onWithdrawCdpTx(result.param!)
-                } else if (result.position == 2) {
-                    self.onDrawDebtCdpTx(result.param!)
-                } else if (result.position == 3) {
-                    self.onRepayCdpTx(result.param!)
-                }
-            });
+            if let cdpType = result["cdpType"] as? String,
+               let index = result["index"] as? Int {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    if (index == 0) {
+                        self.onDepositCdpTx(cdpType)
+                    } else if (index == 1) {
+                        self.onWithdrawCdpTx(cdpType)
+                    } else if (index == 2) {
+                        self.onDrawDebtCdpTx(cdpType)
+                    } else if (index == 3) {
+                        self.onRepayCdpTx(cdpType)
+                    }
+                });
+            }
         }
     }
     

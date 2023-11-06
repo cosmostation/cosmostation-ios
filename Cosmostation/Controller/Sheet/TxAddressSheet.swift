@@ -226,16 +226,22 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
     }
     
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectNameServiceAddress) {
-            let nameservice = nameservices[result.position!]
-            addressTextField.text = nameservice.address
+            if let index = result["index"] as? Int {
+                let nameservice = nameservices[index]
+                addressTextField.text = nameservice.address
+            }
             
         } else if (sheetType == .SelectRecipientAddress) {
-            addressTextField.text = result.param
+            if let address = result["address"] as? String {
+                addressTextField.text = address
+            }
             
         } else if (sheetType == .SelectRecipientEvmAddress) {
-            addressTextField.text = result.param
+            if let address = result["address"] as? String {
+                addressTextField.text = address
+            }
         }
     }
     

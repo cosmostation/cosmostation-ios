@@ -83,13 +83,16 @@ class ChainListVC: BaseVC, BaseSheetDelegate {
         onStartSheet(baseSheet)
     }
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SwitchEndpoint) {
-            let chain = searchCosmosChains.filter { $0.name == result.param }.first!
-            let endpoint = chain.getChainParam()["grpc_endpoint"].arrayValue[result.position!]["url"].stringValue
-            BaseData.instance.setGrpcEndpoint(chain, endpoint)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            if let index = result["index"] as? Int,
+               let chainName = result["chainName"] as? String {
+                let chain = searchCosmosChains.filter { $0.name == chainName }.first!
+                let endpoint = chain.getChainParam()["grpc_endpoint"].arrayValue[index]["url"].stringValue
+                BaseData.instance.setGrpcEndpoint(chain, endpoint)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }

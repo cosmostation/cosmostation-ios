@@ -152,15 +152,18 @@ extension KavaSwapListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
         onStartSheet(baseSheet, 240)
     }
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectSwpAction) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                if (result.position == 0) {
-                    self.onDepositSwpTx(result.param!)
-                } else if (result.position == 1) {
-                    self.onWithdrawSwpTx(result.param!)
-                }
-            });
+            if let swpName = result["swpName"] as? String,
+               let index = result["index"] as? Int {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    if (index == 0) {
+                        self.onDepositSwpTx(swpName)
+                    } else if (index == 1) {
+                        self.onWithdrawSwpTx(swpName)
+                    }
+                });
+            }
         }
     }
     

@@ -288,9 +288,9 @@ extension PortfolioVC: BaseSheetDelegate {
         onStartSheet(baseSheet)
     }
 
-    public func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SwitchAccount) {
-            if let toAddcountId = Int64(result.param!) {
+            if let toAddcountId = result["accountId"] as? Int64 {
                 if (BaseData.instance.baseAccount?.id != toAddcountId) {
                     showWait()
                     DispatchQueue.global().async {

@@ -326,9 +326,9 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, CreateNameDelegate, QrI
         onStartSheet(baseSheet)
     }
 
-    public func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SwitchAccount) {
-            if let toAddcountId = Int64(result.param!) {
+            if let toAddcountId = result["accountId"] as? Int64 {
                 if (BaseData.instance.baseAccount?.id != toAddcountId) {
                     showWait()
                     DispatchQueue.global().async {
@@ -345,30 +345,38 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, CreateNameDelegate, QrI
             }
             
         } else if (sheetType == .SwitchLanguage) {
-            if (BaseData.instance.getLanguage() != result.position) {
-                BaseData.instance.setLanguage(result.position!)
-                DispatchQueue.main.async {
-                    self.onStartMainTab()
+            if let index = result["index"] as? Int {
+                if (BaseData.instance.getLanguage() != index) {
+                    BaseData.instance.setLanguage(index)
+                    DispatchQueue.main.async {
+                        self.onStartMainTab()
+                    }
                 }
             }
             
         } else if (sheetType == .SwitchCurrency) {
-            if (BaseData.instance.getCurrency() != result.position) {
-                BaseData.instance.setCurrency(result.position!)
-                BaseNetWork().fetchPrices(true)
-                reloadRows(IndexPath(row: 1, section: 1))
+            if let index = result["index"] as? Int {
+                if (BaseData.instance.getCurrency() != index) {
+                    BaseData.instance.setCurrency(index)
+                    BaseNetWork().fetchPrices(true)
+                    reloadRows(IndexPath(row: 1, section: 1))
+                }
             }
             
         } else if (sheetType == .SwitchPriceColor) {
-            if (BaseData.instance.getPriceChaingColor() != result.position) {
-                BaseData.instance.setPriceChaingColor(result.position!)
-                reloadRows(IndexPath(row: 2, section: 1))
+            if let index = result["index"] as? Int {
+                if (BaseData.instance.getPriceChaingColor() != index) {
+                    BaseData.instance.setPriceChaingColor(index)
+                    reloadRows(IndexPath(row: 2, section: 1))
+                }
             }
             
         } else if (sheetType == .SwitchAutoPass) {
-            if (BaseData.instance.getAutoPass() != result.position) {
-                BaseData.instance.setAutoPass(result.position!)
-                reloadRows(IndexPath(row: 5, section: 1))
+            if let index = result["index"] as? Int {
+                if (BaseData.instance.getAutoPass() != index) {
+                    BaseData.instance.setAutoPass(index)
+                    reloadRows(IndexPath(row: 5, section: 1))
+                }
             }
         }
     }

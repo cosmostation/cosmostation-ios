@@ -276,10 +276,10 @@ extension NeutronVote: UITableViewDelegate, UITableViewDataSource {
 
 
 extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeCoin) {
-            if let position = result.position,
-                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
+            if let index = result["index"] as? Int,
+               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
                 txFee.amount[0].denom = selectedDenom
                 onUpdateFeeView()
                 onSimul()

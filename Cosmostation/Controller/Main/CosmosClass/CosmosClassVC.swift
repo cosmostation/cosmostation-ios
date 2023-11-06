@@ -325,15 +325,17 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
         }
     }
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectNeutronVault) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                if (result.position == 0) {
-                    self.onNeutronVaultDeposit()
-                } else if (result.position == 1) {
-                    self.onNeutronVaultwithdraw()
-                }
-            });
+            if let index = result["index"] as? Int {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    if (index == 0) {
+                        self.onNeutronVaultDeposit()
+                    } else if (index == 1) {
+                        self.onNeutronVaultwithdraw()
+                    }
+                });
+            }
         }
     }
     

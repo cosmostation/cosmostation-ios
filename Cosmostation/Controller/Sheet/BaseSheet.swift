@@ -40,8 +40,6 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var hardMarketDenom: String?
     var swpName: String?
     var cdpType: String?
-    
-    var selectChains = Array<CosmosClass>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -235,9 +233,6 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectMintAction) {
             sheetTitle.text = NSLocalizedString("title_select_mint_action", comment: "")
             
-        } else if (sheetType == .SelectAccount) {
-            sheetTitle.text = NSLocalizedString("title_select_wallet", comment: "")
-            
         } else if (sheetType == .SelectBuyCrypto) {
             sheetTitle.text = NSLocalizedString("title_buy_crypto", comment: "")
             
@@ -375,9 +370,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectMintAction) {
             return 4
-            
-        } else if (sheetType == .SelectAccount) {
-            return selectChains.count
             
         } else if (sheetType == .SelectBuyCrypto) {
             return 3
@@ -517,11 +509,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindMint(indexPath.row, cdpType!)
             return cell!
             
-        } else if (sheetType == .SelectAccount) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
-            cell?.onBindChains(selectChains[indexPath.row])
-            return cell!
-            
         } else if (sheetType == .SelectBuyCrypto) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseImgSheetCell") as? BaseImgSheetCell
             cell?.onBindBuyCrypto(indexPath.row)
@@ -534,13 +521,13 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (sheetType == .SwitchAccount) {
-            let result = BaseSheetResult.init(indexPath.row, String(BaseData.instance.selectAccounts()[indexPath.row].id))
+            let result: [String : Any] = ["index" : indexPath.row, "accountId" : BaseData.instance.selectAccounts()[indexPath.row].id]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SwitchEndpoint) {
             let cell = sheetTableView.cellForRow(at: indexPath) as? SelectEndpointCell
             if (cell?.gapTime != nil) {
-                let result = BaseSheetResult.init(indexPath.row, targetChain.name)
+                let result: [String : Any] = ["index" : indexPath.row, "chainName" : targetChain.name]
                 sheetDelegate?.onSelectedSheet(sheetType, result)
                 
             } else {
@@ -549,40 +536,40 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else if (sheetType == .SelectDelegatedAction) {
-            let result = BaseSheetResult.init(indexPath.row, delegation.delegation.validatorAddress)
+            let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : delegation.delegation.validatorAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
-            let result = BaseSheetResult.init(indexPath.row, swapChainsSearch[indexPath.row].chainId)
+            let result: [String : Any] = ["index" : indexPath.row, "chainId" : swapChainsSearch[indexPath.row].chainId]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset)  {
-            let result = BaseSheetResult.init(indexPath.row, swapAssetsSearch[indexPath.row]["denom"].stringValue)
+            let result: [String : Any] = ["index" : indexPath.row, "denom" : swapAssetsSearch[indexPath.row]["denom"].stringValue]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectValidator) {
-            let result = BaseSheetResult.init(indexPath.row, validatorsSearch[indexPath.row].operatorAddress)
+            let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : validatorsSearch[indexPath.row].operatorAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectUnStakeValidator) {
-            let result = BaseSheetResult.init(indexPath.row, validators[indexPath.row].operatorAddress)
+            let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : validators[indexPath.row].operatorAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectRecipientChain) {
-            let result = BaseSheetResult.init(indexPath.row, cosmosChainList[indexPath.row].chainId)
+            let result: [String : Any] = ["index" : indexPath.row, "chainId" : cosmosChainList[indexPath.row].chainId]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectRecipientAddress) {
             if (indexPath.section == 0) {
-                let result = BaseSheetResult.init(indexPath.row, refAddresses[indexPath.row].dpAddress)
+                let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].dpAddress]
                 sheetDelegate?.onSelectedSheet(sheetType, result)
             } else {
-                let result = BaseSheetResult.init(indexPath.row, addressBook[indexPath.row].dpAddress)
+                let result: [String : Any] = ["index" : indexPath.row, "address" : addressBook[indexPath.row].dpAddress]
                 sheetDelegate?.onSelectedSheet(sheetType, result)
             }
             
         } else if (sheetType == .SelectRecipientEvmAddress) {
-            let result = BaseSheetResult.init(indexPath.row, refAddresses[indexPath.row].dpAddress)
+            let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].dpAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectBepRecipientAddress) {
@@ -603,27 +590,25 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
                     dismiss(animated: true)
                 }
             }
-            let result = BaseSheetResult.init(indexPath.row, chain.address)
+            let result: [String : Any] = ["index" : indexPath.row, "address" : chain.address!]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectHardAction) {
-            let result = BaseSheetResult.init(indexPath.row, hardMarketDenom)
+            let result: [String : Any] = ["index" : indexPath.row, "denom" : hardMarketDenom!]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectSwpAction) {
-            let result = BaseSheetResult.init(indexPath.row, swpName)
+            let result: [String : Any] = ["index" : indexPath.row, "swpName" : swpName!]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectMintAction) {
-            let result = BaseSheetResult.init(indexPath.row, cdpType)
-            sheetDelegate?.onSelectedSheet(sheetType, result)
-            
-        } else if (sheetType == .SelectAccount) {
-            let result = BaseSheetResult.init(indexPath.row, selectChains[indexPath.row].address)
+            let result: [String : Any] = ["index" : indexPath.row, "cdpType" : cdpType!]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else {
-            sheetDelegate?.onSelectedSheet(sheetType, BaseSheetResult.init(indexPath.row, nil))
+//            sheetDelegate?.onSelectedSheet(sheetType, BaseSheetResult.init(indexPath.row, nil))
+            let result: [String : Any] = ["index" : indexPath.row]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
         }
         dismiss(animated: true)
     }
@@ -632,17 +617,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
 
 
 protocol BaseSheetDelegate {
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult)
-}
-
-public struct BaseSheetResult {
-    var position: Int?
-    var param: String?
-    
-    init(_ position: Int? = nil, _ param: String? = nil) {
-        self.position = position
-        self.param = param
-    }
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>)
 }
 
 public enum SheetType: Int {
@@ -679,6 +654,4 @@ public enum SheetType: Int {
     case SelectSwpAction = 62
     case SelectMintAction = 63
     case SelectBuyCrypto = 64
-    
-    case SelectAccount = 71
 }

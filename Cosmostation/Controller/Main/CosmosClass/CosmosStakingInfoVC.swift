@@ -335,32 +335,25 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
 
 extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
     
-    public func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectDelegatedAction) {
-            if (result.position == 0) {
+            if let index = result["index"] as? Int,
+               let valAddress = result["validatorAddress"] as? String {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onUndelegateTx(result.param!)
+                    if (index == 0) {
+                        self.onUndelegateTx(valAddress)
+                    } else if (index == 1) {
+                        self.onRedelegateTx(valAddress)
+                    } else if (index == 2) {
+                        self.onClaimRewardTx(valAddress)
+                    } else if (index == 3) {
+                        self.onCompoundingTx(valAddress)
+                    }
                 });
-                
-            } else if (result.position == 1) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onRedelegateTx(result.param!)
-                });
-                
-            } else if (result.position == 2) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onClaimRewardTx(result.param!)
-                });
-                
-            } else if (result.position == 3) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onCompoundingTx(result.param!)
-                });
-                
             }
             
         } else if (sheetType == .SelectUnbondingAction) {
-            print("SelectUnbondingAction ", result.position)
+//            print("SelectUnbondingAction ", result.position)
             
         }
     }
