@@ -15,9 +15,6 @@
         <array key="SpoqaHanSansNeo-Medium.otf">
             <string>SpoqaHanSansNeo-Medium</string>
         </array>
-        <array key="SpoqaHanSansNeo-Regular.otf">
-            <string>SpoqaHanSansNeo-Regular</string>
-        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -52,8 +49,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWz-rN-L3h">
-                                <rect key="frame" x="16" y="111.33333333333333" width="34" height="12.666666666666671"/>
-                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Regular" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                <rect key="frame" x="16.000000000000004" y="114" width="38.333333333333343" height="14"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="11"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -140,7 +137,7 @@
                             <constraint firstItem="pJn-CR-xqA" firstAttribute="top" secondItem="8Nq-JN-alm" secondAttribute="bottom" constant="6" id="Yms-bW-GGh"/>
                             <constraint firstItem="8Nq-JN-alm" firstAttribute="leading" secondItem="1eF-cQ-8SA" secondAttribute="leading" constant="15.999999999999996" id="ZYW-qm-K4d"/>
                             <constraint firstItem="PWz-rN-L3h" firstAttribute="leading" secondItem="1eF-cQ-8SA" secondAttribute="leading" constant="16" id="d9z-Xu-8lN"/>
-                            <constraint firstItem="iqk-XQ-A0s" firstAttribute="top" secondItem="PWz-rN-L3h" secondAttribute="bottom" constant="9.9999999999999858" id="jO9-Vy-3JE"/>
+                            <constraint firstItem="iqk-XQ-A0s" firstAttribute="top" secondItem="PWz-rN-L3h" secondAttribute="bottom" constant="6" id="jO9-Vy-3JE"/>
                         </constraints>
                     </view>
                 </subviews>

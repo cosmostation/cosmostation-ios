@@ -67,6 +67,15 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         return .leastNormalMagnitude
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.section == 1 && indexPath.row == 5) {
+            return 0
+        } else if (indexPath.section == 3 && indexPath.row == 4) {
+            return 0
+        }
+        return UITableView.automaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
             return 4

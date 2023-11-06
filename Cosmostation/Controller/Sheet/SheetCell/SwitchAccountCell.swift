@@ -19,6 +19,7 @@ class SwitchAccountCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        self.checkedImg.isHidden = true
     }
     
     override func prepareForReuse() {
