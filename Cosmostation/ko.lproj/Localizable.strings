@@ -938,7 +938,7 @@
 "error_not_undelegate" = "위임 해제할 수량이 없습니다.";
 "error_not_redelegate" = "재위임 할 수량이 없습니다.";
 "error_not_reward" = "쌓인 이자가 충분하지 않습니다.";
-"error_memo" = "메모를 정확히 입력해 주세요.";
+"error_memo_count" = "메모가 너무 깁니다.";
 "error_invalid_address" = "부정확한 주소입니다. 다시한번 확인해 주세요.";
 "error_invalid_nameservice_address" = "등록된 네임서비스의 주소가 부정확합니다.";
 "error_self_send" = "자기 자신의 주소로는 송금할 수 없습니다.";

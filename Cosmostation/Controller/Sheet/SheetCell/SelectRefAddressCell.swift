@@ -74,4 +74,11 @@ class SelectRefAddressCell: UITableViewCell {
         
     }
     
+    func onBindAddressBook(_ book: AddressBook) {
+        accountNameLabel.text = book.bookName
+        addressLabel.text = book.dpAddress
+        memoLabel.text = book.memo
+        memoLabel.isHidden = false
+    }
+    
 }

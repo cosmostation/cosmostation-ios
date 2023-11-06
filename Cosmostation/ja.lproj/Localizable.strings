@@ -938,7 +938,7 @@
 "error_not_undelegate" = "委任を解除する数量がありません。";
 "error_not_redelegate" = "再委任する数量がありません。";
 "error_not_reward" = "貯まった利子が十分ではありません。";
-"error_memo" = "メモを確認してください。 特定取引所またはウォレットはメモ入力が必要になります。";
+"error_memo_count" = "メモのサイズを確認してください。";
 "error_invalid_address" = "アドレスが無効です。正確な文字を入力してください。";
 "error_invalid_nameservice_address" = "登録されたネームサービスのアドレスが間違っています。.";
 "error_self_send" = "自分のアドレスには送信できません。";

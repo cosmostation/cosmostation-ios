@@ -35,7 +35,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     
     var senderAddress: String!
     var refAddresses = Array<RefAddress>()
-    var addressBook = Array<String>()
+    var addressBook = Array<AddressBook>()
     
     var hardMarketDenom: String?
     var swpName: String?
@@ -192,6 +192,13 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                     return account0.name < account1.name
                 }
                 return false
+            }
+            
+            BaseData.instance.selectAllAddressBooks().forEach { book in
+                if (book.chainName == targetChain.name &&
+                    book.dpAddress != senderAddress) {
+                    addressBook.append(book)
+                }
             }
             
         } else if (sheetType == .SelectRecipientEvmAddress) {
@@ -464,7 +471,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             if (indexPath.section == 0) {
                 cell?.onBindRefAddress(refAddresses[indexPath.row])
             } else {
-                
+                cell?.onBindAddressBook(addressBook[indexPath.row])
             }
             return cell!
             
@@ -562,7 +569,16 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result = BaseSheetResult.init(indexPath.row, cosmosChainList[indexPath.row].chainId)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
-        } else if (sheetType == .SelectRecipientAddress || sheetType == .SelectRecipientEvmAddress) {
+        } else if (sheetType == .SelectRecipientAddress) {
+            if (indexPath.section == 0) {
+                let result = BaseSheetResult.init(indexPath.row, refAddresses[indexPath.row].dpAddress)
+                sheetDelegate?.onSelectedSheet(sheetType, result)
+            } else {
+                let result = BaseSheetResult.init(indexPath.row, addressBook[indexPath.row].dpAddress)
+                sheetDelegate?.onSelectedSheet(sheetType, result)
+            }
+            
+        } else if (sheetType == .SelectRecipientEvmAddress) {
             let result = BaseSheetResult.init(indexPath.row, refAddresses[indexPath.row].dpAddress)
             sheetDelegate?.onSelectedSheet(sheetType, result)
             

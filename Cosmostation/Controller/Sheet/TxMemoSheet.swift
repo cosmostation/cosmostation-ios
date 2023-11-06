@@ -28,15 +28,8 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
         memoTextArea.textView.delegate = self
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        memoTextArea.textView.becomeFirstResponder()
-//    }
-    
     override func setLocalizedString() {
         memoTextArea.label.text = NSLocalizedString("tx_set_memo", comment: "")
-//        pasteBtn.setTitle(NSLocalizedString("str_paste", comment: ""), for: .normal)
-//        qrScanBtn.setTitle(NSLocalizedString("str_qr_scan", comment: ""), for: .normal)
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
@@ -62,6 +55,10 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
 
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         let userInput = memoTextArea.textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if (userInput.count > 200) {
+            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+            return
+        }
         memoDelegate?.onInputedMemo(userInput)
         dismiss(animated: true)
     }

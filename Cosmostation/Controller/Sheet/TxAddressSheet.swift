@@ -100,22 +100,22 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
         addressTextField.text = address.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
-    @IBAction func onClickConfirm(_ sender: BaseButton) {
+    @IBAction func onClickConfirm(_ sender: BaseButton?) {
         let userInput = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         if (userInput?.isEmpty == true || userInput?.count ?? 0 < 5) {
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-            return;
+            return
         }
         if (addressSheetType == .RewardAddress) {
             if (userInput == selectedChain.rewardAddress) {
                 self.onShowToast(NSLocalizedString("error_same_reward_address", comment: ""))
-                return;
+                return
             }
             
         } else {
             if (userInput == selectedChain.address) {
                 self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
-                return;
+                return
             }
         }
         

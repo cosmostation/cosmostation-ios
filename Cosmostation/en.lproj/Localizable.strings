@@ -938,7 +938,7 @@
 "error_not_undelegate" = "Nothing to undelegate.";
 "error_not_redelegate" = "Nothing to redelegate.";
 "error_not_reward" = "No enough reward to Claim.";
-"error_memo" = "Please insert validate memo.";
+"error_memo_count" = "Please check your memo size.";
 "error_invalid_address" = "Invalid Address, please check again.";
 "error_invalid_nameservice_address" = "The address of the registered name service is incorrect.";
 "error_self_send" = "Self sending is not support.";
