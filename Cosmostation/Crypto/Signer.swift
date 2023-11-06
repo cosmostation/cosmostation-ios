@@ -109,43 +109,7 @@ class Signer {
         }
         return [anyMsg]
     }
-    //
-    //    //Tx for Tgrade Delegate
-    //    static func genSignedTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-    //                                        _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin,
-    //                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-    //        let deleMsg = genTgradeDelegateMsg(auth, toValAddress, availableAmount, vestingAmount)
-    //        return getGrpcSignedTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
-    //    }
-    //
-    //    static func genSimulateTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-    //                                          _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin,
-    //                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-    //        let deleMsg = genTgradeDelegateMsg(auth, toValAddress, availableAmount, vestingAmount)
-    //        return getGrpcSimulateTx(auth, pubkeyType, chainType, deleMsg, privateKey, publicKey, fee, memo)
-    //    }
-    //
-    //    static func genTgradeDelegateMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin) -> [Google_Protobuf_Any] {
-    //        let availableCoin = Cosmos_Base_V1beta1_Coin.with {
-    //            $0.denom = availableAmount.denom
-    //            $0.amount = availableAmount.amount
-    //        }
-    //        let vestingCoin = Cosmos_Base_V1beta1_Coin.with {
-    //            $0.denom = vestingAmount.denom
-    //            $0.amount = vestingAmount.amount
-    //        }
-    //        let deleMsg = Confio_Poe_V1beta1_MsgDelegate.with {
-    //            $0.operatorAddress = toValAddress
-    //            $0.amount = availableCoin
-    //            $0.vestingAmount = vestingCoin
-    //        }
-    //        let anyMsg = Google_Protobuf_Any.with {
-    //            $0.typeURL = "/confio.poe.v1beta1.MsgDelegate"
-    //            $0.value = try! deleMsg.serializedData()
-    //        }
-    //        return [anyMsg]
-    //    }
-    //
+    
     //Tx for Common UnDelegate
     static func genUndelegateTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                 _ toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate,
@@ -165,6 +129,29 @@ class Signer {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgUndelegate"
             $0.value = try! toUndelegate.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Common CancelUnbonding
+    static func genCancelUnbondingTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                     _ toCancel: Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation,
+                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let cancelMsg = genCancelUnbondingMsg(auth, toCancel)
+        return getSignedTx(auth, cancelMsg, fee, memo, baseChain)
+    }
+    
+    static func genCancelUnbondingSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                        _ toCancel: Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation,
+                                        _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let cancelMsg = genCancelUnbondingMsg(auth, toCancel)
+        return getSimulateTx(auth, cancelMsg, fee, memo, baseChain)
+    }
+    
+    static func genCancelUnbondingMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toCancel: Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/cosmos.staking.v1beta1.MsgCancelUnbondingDelegation"
+            $0.value = try! toCancel.serializedData()
         }
         return [anyMsg]
     }

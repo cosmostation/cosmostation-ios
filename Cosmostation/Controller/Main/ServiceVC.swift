@@ -24,6 +24,8 @@ class ServiceVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
+//        print("daaa", BaseData.instance.reviewMode )
+        
         initView()
     }
     

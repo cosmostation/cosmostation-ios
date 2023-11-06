@@ -30,6 +30,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var validatorsSearch = Array<Cosmos_Staking_V1beta1_Validator>()
     var delegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     var delegation: Cosmos_Staking_V1beta1_DelegationResponse!
+    var unbondingEnrtyPosition: Int?
     var cosmosChainList = Array<CosmosClass>()
     var nameservices = Array<NameService>()
     
@@ -537,6 +538,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectDelegatedAction) {
             let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : delegation.delegation.validatorAddress]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if (sheetType == .SelectUnbondingAction) {
+            let result: [String : Any] = ["index" : indexPath.row, "entryPosition" : unbondingEnrtyPosition!]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {

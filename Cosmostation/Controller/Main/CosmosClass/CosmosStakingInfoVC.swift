@@ -49,7 +49,6 @@ class CosmosStakingInfoVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        
         navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconRewardAddress"), style: .plain, target: self, action: #selector(onClickRewardAddressChange))
         
         onFetchData()
@@ -169,6 +168,18 @@ class CosmosStakingInfoVC: BaseVC {
         } else {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
         }
+    }
+    
+    func onCancelUnbondingTx(_ position: Int) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let cancel = CosmosCancelUnbonding(nibName: "CosmosCancelUnbonding", bundle: nil)
+        cancel.selectedChain = selectedChain
+        cancel.unbondingEntry = unbondings[position]
+        cancel.modalTransitionStyle = .coverVertical
+        self.present(cancel, animated: true)
     }
     
     func onRewardAddressTx() {
@@ -304,6 +315,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         } else if (indexPath.section == 2) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
+            baseSheet.unbondingEnrtyPosition = indexPath.row
             baseSheet.sheetType = .SelectUnbondingAction
             onStartSheet(baseSheet, 240)
         }
@@ -353,8 +365,11 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
             }
             
         } else if (sheetType == .SelectUnbondingAction) {
-//            print("SelectUnbondingAction ", result.position)
-            
+            if let entryPosition = result["entryPosition"] as? Int {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    self.onCancelUnbondingTx(entryPosition)
+                });
+            }
         }
     }
     

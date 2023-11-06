@@ -963,6 +963,10 @@
 		04F048C82AF89B19002A809D /* SelectAddressBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F048C52AF89B19002A809D /* SelectAddressBookCell.swift */; };
 		04F048C92AF89B19002A809D /* SelectAddressBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F048C62AF89B19002A809D /* SelectAddressBookCell.xib */; };
 		04F048CA2AF89B19002A809D /* SelectAddressBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F048C62AF89B19002A809D /* SelectAddressBookCell.xib */; };
+		04F048CD2AF8D268002A809D /* CosmosCancelUnbonding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F048CB2AF8D268002A809D /* CosmosCancelUnbonding.swift */; };
+		04F048CE2AF8D268002A809D /* CosmosCancelUnbonding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F048CB2AF8D268002A809D /* CosmosCancelUnbonding.swift */; };
+		04F048CF2AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F048CC2AF8D268002A809D /* CosmosCancelUnbonding.xib */; };
+		04F048D02AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F048CC2AF8D268002A809D /* CosmosCancelUnbonding.xib */; };
 		04F4061729ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
 		04F4061829ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
 		04FA74502A9D97A0001A2830 /* PincodeInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744B2A9D97A0001A2830 /* PincodeInputVC.swift */; };
@@ -2201,6 +2205,8 @@
 		04E165BC28B62133000F12C0 /* MintscanToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanToken.swift; sourceTree = "<group>"; };
 		04F048C52AF89B19002A809D /* SelectAddressBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAddressBookCell.swift; sourceTree = "<group>"; };
 		04F048C62AF89B19002A809D /* SelectAddressBookCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAddressBookCell.xib; sourceTree = "<group>"; };
+		04F048CB2AF8D268002A809D /* CosmosCancelUnbonding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosCancelUnbonding.swift; sourceTree = "<group>"; };
+		04F048CC2AF8D268002A809D /* CosmosCancelUnbonding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosCancelUnbonding.xib; sourceTree = "<group>"; };
 		04F4061529ED112100CD88E4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		04F4061629ED119800CD88E4 /* Init.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Init.storyboard; sourceTree = "<group>"; };
 		04FA744B2A9D97A0001A2830 /* PincodeInputVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PincodeInputVC.swift; sourceTree = "<group>"; };
@@ -3855,6 +3861,8 @@
 				0409D2F42AC5DC6D0021E192 /* CosmosDelegate.xib */,
 				047842DC2AC8963100462F1C /* CosmosUndelegate.swift */,
 				047842DD2AC8963100462F1C /* CosmosUndelegate.xib */,
+				04F048CB2AF8D268002A809D /* CosmosCancelUnbonding.swift */,
+				04F048CC2AF8D268002A809D /* CosmosCancelUnbonding.xib */,
 				047842E22AC8B2D600462F1C /* CosmosRedelegate.swift */,
 				047842E32AC8B2D600462F1C /* CosmosRedelegate.xib */,
 				E1D5A3E22AC33B8000453914 /* CosmosClaimRewards.swift */,
@@ -4092,6 +4100,7 @@
 				04A68C262ABDA3350041FA13 /* SelectSwapAssetCell.xib in Resources */,
 				04BA9BD82A985771003E2404 /* ChainSelectVC.xib in Resources */,
 				04FA74552A9D97A0001A2830 /* Pincode.storyboard in Resources */,
+				04F048D02AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */,
 				E12E9D302AE415D900336449 /* loadingSmall.json in Resources */,
 				E131F44B2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */,
 				04B789A22ACAEB5F00E9BE88 /* TxAddressSheet.xib in Resources */,
@@ -4283,6 +4292,7 @@
 				E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
 				04C6B9C72AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */,
 				E16200432AF279560008F397 /* AddressBookListVC.xib in Resources */,
+				04F048CF2AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */,
 				042DE8482AC4CD01003F3EA4 /* QrScanVC.xib in Resources */,
 				E12E9D262AE2B49900336449 /* KavaMintCreateAction.xib in Resources */,
 				0400EEB12ADBB3C5007BA97F /* KavaDefiVC.xib in Resources */,
@@ -4471,6 +4481,7 @@
 				0402B8472ACC85F300824B3F /* ChainSentinel.swift in Sources */,
 				04B789682ACAC9B100E9BE88 /* ibc_applications_fee_v1_query.pb.swift in Sources */,
 				047843C22AC991B300462F1C /* injective_wasmx_v1_genesis.pb.swift in Sources */,
+				04F048CE2AF8D268002A809D /* CosmosCancelUnbonding.swift in Sources */,
 				E1CD6AFB2AEAAEDC00376909 /* AboutRewardAddressCell.swift in Sources */,
 				0402B7F92ACC3F1400824B3F /* VoteCell.swift in Sources */,
 				E122DBF02A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,
@@ -5184,6 +5195,7 @@
 				0402B8462ACC85F300824B3F /* ChainSentinel.swift in Sources */,
 				04B789672ACAC9B100E9BE88 /* ibc_applications_fee_v1_query.pb.swift in Sources */,
 				047843C12AC991B300462F1C /* injective_wasmx_v1_genesis.pb.swift in Sources */,
+				04F048CD2AF8D268002A809D /* CosmosCancelUnbonding.swift in Sources */,
 				E1CD6AFA2AEAAEDC00376909 /* AboutRewardAddressCell.swift in Sources */,
 				0402B7F82ACC3F1400824B3F /* VoteCell.swift in Sources */,
 				E122DBEF2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,

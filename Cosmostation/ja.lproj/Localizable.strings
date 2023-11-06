@@ -286,6 +286,7 @@
 "str_repay_denom" = "%@ 返済";
 "str_name" = "名前";
 "str_address_book_add" = "連絡先を追加";
+"str_cancle_unstake" = "アンステーキ解除";
 
 
 "btn_delegate" = "  委任する";
@@ -1058,6 +1059,7 @@
 "error_unknown_qr_code" = "未知のQRコードです。";
 "error_useless_end_point" = "使用できません。";
 "error_name" = "名前を正確に入力してください。";
+"error_not_support_cancel_unbonding" = "このチェーンはまだアンステーキングキャンセルをサポートしていません。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

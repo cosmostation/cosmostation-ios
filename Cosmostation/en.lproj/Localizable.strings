@@ -286,6 +286,7 @@
 "str_repay_denom" = "Repay %@";
 "str_name" = "Name";
 "str_address_book_add" = "Add Address Book";
+"str_cancle_unstake" = "Cancel Unstake";
 
 
 "btn_delegate" = "  Delegate";
@@ -1058,6 +1059,7 @@
 "error_unknown_qr_code" = "Unknown QR Code.";
 "error_useless_end_point" = "can not use this.";
 "error_name" = "Please enter your name correctly.";
+"error_not_support_cancel_unbonding" = "This chain does not yet support unstaking cancellation.";
 
 
 "alert_title_no_private_key" = "No Private Key";
