@@ -27,7 +27,7 @@ class ChainOkt996Secp: ChainOkt60Keccak {
         address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
         evmAddress = KeyFac.convertBech32ToEvm(address!)
         
-//        print("", tag, " ", address, "  ", evmAddress)
+        print("", tag, " ", address, "  ", evmAddress)
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {

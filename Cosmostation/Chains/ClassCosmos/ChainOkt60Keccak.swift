@@ -50,7 +50,7 @@ class ChainOkt60Keccak: CosmosClass  {
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
         address = KeyFac.convertEvmToBech32(evmAddress!, accountPrefix!)
         
-//        print("", tag, " ", address, "  ", evmAddress)
+        print("", tag, " ", address, "  ", evmAddress)
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
@@ -220,5 +220,5 @@ extension ChainOkt60Keccak {
 
 let OKT_LCD = "https://exchainrpc.okex.org/okexchain/v1/"
 let OKT_EXPLORER = "https://www.oklink.com/oktc/"
-let OKT_BASE_FEE = "0.00005"
+let OKT_BASE_FEE = "0.00008"
 let OKT_GECKO_ID = "oec-token"
