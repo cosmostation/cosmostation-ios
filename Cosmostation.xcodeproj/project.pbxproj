@@ -925,12 +925,6 @@
 		04CFF0362AC58D4400FB3187 /* SelectFeeCoinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CFF0322AC58D4400FB3187 /* SelectFeeCoinCell.xib */; };
 		04D279C62A64E73C00AF046A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279C52A64E73C00AF046A /* KeychainAccess */; };
 		04D279C82A64E75E00AF046A /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279C72A64E75E00AF046A /* KeychainAccess */; };
-		04D279CB2A6508A400AF046A /* WalletConnect in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279CA2A6508A400AF046A /* WalletConnect */; };
-		04D279CD2A6508A400AF046A /* WalletConnectAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279CC2A6508A400AF046A /* WalletConnectAuth */; };
-		04D279CF2A6508A400AF046A /* WalletConnectPairing in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279CE2A6508A400AF046A /* WalletConnectPairing */; };
-		04D279D12A6508C500AF046A /* WalletConnect in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279D02A6508C500AF046A /* WalletConnect */; };
-		04D279D32A6508C500AF046A /* WalletConnectAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279D22A6508C500AF046A /* WalletConnectAuth */; };
-		04D279D52A6508C500AF046A /* WalletConnectPairing in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279D42A6508C500AF046A /* WalletConnectPairing */; };
 		04D279D82A65092B00AF046A /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279D72A65092B00AF046A /* SQLite */; };
 		04D279DA2A65093600AF046A /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 04D279D92A65093600AF046A /* SQLite */; };
 		04D279DC2A66863C00AF046A /* BaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D279DB2A66863C00AF046A /* BaseAccount.swift */; };
@@ -2602,7 +2596,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				04FA745E2A9DEE65001A2830 /* Toast in Frameworks */,
-				04D279D12A6508C500AF046A /* WalletConnect in Frameworks */,
 				EB85535FBF1815AEAECE43D4 /* Pods_CosmostationDev.framework in Frameworks */,
 				E122DA232A8A1909006D1E7B /* ed25519swift in Frameworks */,
 				04D547F22A612A93001F1A4B /* FirebaseMessaging in Frameworks */,
@@ -2613,9 +2606,7 @@
 				04D547F42A612AA7001F1A4B /* SwiftyJSON in Frameworks */,
 				1876EE8A2A49353100C53352 /* SwiftProtobuf in Frameworks */,
 				04D547F62A612AE1001F1A4B /* AlamofireImage in Frameworks */,
-				04D279D32A6508C500AF046A /* WalletConnectAuth in Frameworks */,
 				04D279DA2A65093600AF046A /* SQLite in Frameworks */,
-				04D279D52A6508C500AF046A /* WalletConnectPairing in Frameworks */,
 				04D279E32A66E18800AF046A /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2625,7 +2616,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				04FA745C2A9DEE51001A2830 /* Toast in Frameworks */,
-				04D279CB2A6508A400AF046A /* WalletConnect in Frameworks */,
 				9EBDC03599A6A52BCFB81E33 /* Pods_Cosmostation.framework in Frameworks */,
 				E122DA212A8A18FB006D1E7B /* ed25519swift in Frameworks */,
 				04815BDE2A41DB120006A906 /* SwiftProtobuf in Frameworks */,
@@ -2636,9 +2626,7 @@
 				04D547EA2A6128CA001F1A4B /* SwiftyJSON in Frameworks */,
 				04815BE12A41DB410006A906 /* GRPC in Frameworks */,
 				04D547F02A612935001F1A4B /* AlamofireImage in Frameworks */,
-				04D279CD2A6508A400AF046A /* WalletConnectAuth in Frameworks */,
 				04D279D82A65092B00AF046A /* SQLite in Frameworks */,
-				04D279CF2A6508A400AF046A /* WalletConnectPairing in Frameworks */,
 				04D279E12A66E17B00AF046A /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3912,9 +3900,6 @@
 				04D547F32A612AA7001F1A4B /* SwiftyJSON */,
 				04D547F52A612AE1001F1A4B /* AlamofireImage */,
 				04D279C72A64E75E00AF046A /* KeychainAccess */,
-				04D279D02A6508C500AF046A /* WalletConnect */,
-				04D279D22A6508C500AF046A /* WalletConnectAuth */,
-				04D279D42A6508C500AF046A /* WalletConnectPairing */,
 				04D279D92A65093600AF046A /* SQLite */,
 				04D279E22A66E18800AF046A /* Lottie */,
 				E122DA222A8A1909006D1E7B /* ed25519swift */,
@@ -3948,9 +3933,6 @@
 				04D547EC2A612914001F1A4B /* FirebaseMessaging */,
 				04D547EF2A612935001F1A4B /* AlamofireImage */,
 				04D279C52A64E73C00AF046A /* KeychainAccess */,
-				04D279CA2A6508A400AF046A /* WalletConnect */,
-				04D279CC2A6508A400AF046A /* WalletConnectAuth */,
-				04D279CE2A6508A400AF046A /* WalletConnectPairing */,
 				04D279D72A65092B00AF046A /* SQLite */,
 				04D279E02A66E17B00AF046A /* Lottie */,
 				E122DA202A8A18FB006D1E7B /* ed25519swift */,
@@ -5859,7 +5841,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 199;
+				CURRENT_PROJECT_VERSION = 250;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5871,7 +5853,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.9;
+				MARKETING_VERSION = 1.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5892,7 +5874,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 199;
+				CURRENT_PROJECT_VERSION = 250;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5905,7 +5887,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.9;
+				MARKETING_VERSION = 1.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Cosmostation debug provisioning profile";
@@ -6057,7 +6039,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 1.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6089,7 +6071,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 1.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6269,36 +6251,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04D279C42A64E73C00AF046A /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
-		};
-		04D279CA2A6508A400AF046A /* WalletConnect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04D279C92A6508A400AF046A /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
-			productName = WalletConnect;
-		};
-		04D279CC2A6508A400AF046A /* WalletConnectAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04D279C92A6508A400AF046A /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
-			productName = WalletConnectAuth;
-		};
-		04D279CE2A6508A400AF046A /* WalletConnectPairing */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04D279C92A6508A400AF046A /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
-			productName = WalletConnectPairing;
-		};
-		04D279D02A6508C500AF046A /* WalletConnect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04D279C92A6508A400AF046A /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
-			productName = WalletConnect;
-		};
-		04D279D22A6508C500AF046A /* WalletConnectAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04D279C92A6508A400AF046A /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
-			productName = WalletConnectAuth;
-		};
-		04D279D42A6508C500AF046A /* WalletConnectPairing */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04D279C92A6508A400AF046A /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
-			productName = WalletConnectPairing;
 		};
 		04D279D72A65092B00AF046A /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;

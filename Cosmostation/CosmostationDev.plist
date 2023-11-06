@@ -8,33 +8,6 @@
 	<string>CosmostationDev</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIcons</key>
-	<dict>
-		<key>CFBundleAlternateIcons</key>
-		<dict>
-			<key>New2022</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>new2022</string>
-				</array>
-			</dict>
-			<key>Xmas</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>xmas</string>
-				</array>
-			</dict>
-		</dict>
-		<key>CFBundlePrimaryIcon</key>
-		<dict>
-			<key>CFBundleIconFiles</key>
-			<array/>
-			<key>UIPrerenderedIcon</key>
-			<false/>
-		</dict>
-	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
