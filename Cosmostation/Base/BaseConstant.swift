@@ -693,3 +693,7 @@ public enum AutoPass: Int {
 
 
 let BASE_BG_IMG = ["basebg00", "basebg01", "basebg02", "basebg03", "basebg04", "basebg05", "basebg06"]
+
+let QUOTES = ["quotes_01", "quotes_02", "quotes_03", "quotes_04", "quotes_05", "quotes_06", "quotes_07", "quotes_08", "quotes_09", "quotes_10",
+              "quotes_11", "quotes_12", "quotes_13", "quotes_14", "quotes_15", "quotes_16", "quotes_17", "quotes_18", "quotes_19", "quotes_20",
+              "quotes_21", "quotes_22", "quotes_23", "quotes_24", "quotes_25", "quotes_26", "quotes_27", "quotes_28", "quotes_29", "quotes_30", "quotes_31"]

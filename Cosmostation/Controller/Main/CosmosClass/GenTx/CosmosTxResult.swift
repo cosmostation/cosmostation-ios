@@ -23,6 +23,10 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
     @IBOutlet weak var failMsgLabel: UILabel!
     @IBOutlet weak var failMintscanBtn: UIButton!
     @IBOutlet weak var confirmBtn: BaseButton!
+    @IBOutlet weak var quotesLayer: UIView!
+    @IBOutlet weak var quotesMsgLabel: UILabel!
+    @IBOutlet weak var quotoesAutherLabel: UILabel!
+    
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var resultType: TxResultType = .Cosmos
@@ -61,7 +65,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 guard legacyResult != nil else {
                     loadingView.isHidden = true
                     failView.isHidden = false
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     return
                 }
                 
@@ -69,12 +73,12 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                     loadingView.isHidden = true
                     failView.isHidden = false
                     failMsgLabel.text = legacyResult?["log"].stringValue
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     return
                     
                 } else {
                     loadingView.isHidden = true
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     successView.isHidden = false
                 }
                 
@@ -84,7 +88,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 guard legacyResult != nil else {
                     loadingView.isHidden = true
                     failView.isHidden = false
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     return
                 }
                 
@@ -92,11 +96,11 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                     loadingView.isHidden = true
                     failView.isHidden = false
                     failMsgLabel.text = legacyResult?["raw_log"].stringValue
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     
                 } else {
                     loadingView.isHidden = true
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     successView.isHidden = false
                 }
                 
@@ -106,9 +110,10 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                     loadingView.isHidden = true
                     failView.isHidden = false
                     failMsgLabel.text = broadcastTxResponse?.rawLog
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     return
                 }
+                setQutoes()
                 fetchTx()
             }
             
@@ -117,7 +122,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 loadingView.isHidden = true
                 failView.isHidden = false
                 failMsgLabel.text = ""
-                confirmBtn.isEnabled = true
+                confirmBtn.isHidden = false
                 return
             }
             fetchEvmTx()
@@ -125,9 +130,10 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
     }
     
     func onUpdateView() {
+        quotesLayer.isHidden = true
         if (resultType == .Cosmos) {
             loadingView.isHidden = true
-            confirmBtn.isEnabled = true
+            confirmBtn.isHidden = false
             if (txResponse?.txResponse.code != 0) {
                 failView.isHidden = false
                 failMintscanBtn.isHidden = false
@@ -142,7 +148,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
             
         } else {
             loadingView.isHidden = true
-            confirmBtn.isEnabled = true
+            confirmBtn.isHidden = false
             if (evmRecipient!.status != .ok) {
                 failView.isHidden = false
                 failMintscanBtn.isHidden = false
@@ -274,6 +280,14 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
         }
     }
     
+    
+    func setQutoes() {
+        let num = Int.random(in: 0..<QUOTES.count)
+        let qutoe = NSLocalizedString(QUOTES[num], comment: "").components(separatedBy: "--")
+        quotesMsgLabel.text = qutoe[0]
+        quotoesAutherLabel.text = "- " + qutoe[1] + " -"
+        quotesLayer.isHidden = false
+    }
 }
 
 extension CosmosTxResult {

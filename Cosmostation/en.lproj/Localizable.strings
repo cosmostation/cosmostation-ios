@@ -925,6 +925,37 @@
 "proposal_type_systemhalt" = "System Halt";
 "proposal_type_communitytaxusage" = "Community Tax Usage";
 
+"quotes_01" = "Not competition, Just Connect. -- Jae Kwon";
+"quotes_02" = "I see Bitcoin as ultimately becoming a reserve currency for banks, playing much the same role as gold did in the early days of banking. Banks could issue digital cash with greater anonymity and lighter weight, more efficient transactions. -- Hal Finney";
+"quotes_03" = "Bitcoin is structure is very ingenious. The paper money disappears, and crypto-currencies are a much better way to transfer values than a piece of paper, that's for sure. -- Elon Musk";
+"quotes_04" = "I find that oftentimes the most ironic and entertaining outcome is the most likely. And the most entertaining outcome would be Dogecoin becoming the global new earth currency. -- Elon Musk";
+"quotes_05" = "Bitcoin is exciting because it shows how cheap it can be. Bitcoin is better than currency in that you don't have to be physically in the same place and, of course, for large transactions, currency can get pretty inconvenient. -- Bill Gates";
+"quotes_06" = "Bitcoin is a remarkable cryptographic achievement… The ability to create something which is not duplicable in the digital world has enormous value… Lots of people will build businesses on top of that. -- Eric Schmidt";
+"quotes_07" = "If crypto succeeds, it's not because it empowers better people. It's because it empowers better institutions. -- Vitalik Buterin";
+"quotes_08" = "When decentralised blockchain protocols start displacing the centralised web services that dominate the current Internet, we'll start to see real internet-based sovereignty. The future Internet will be decentralised. -- Olaf Carlson-Wee";
+"quotes_09" = "Blockchain technology isn't just a more efficient way to settle securities. It will fundamentally change market structures, and maybe even the architecture of the Internet itself. -- Abigail Johnson";
+"quotes_10" = "Cryptocurrency is such a powerful concept that it can almost overturn governments. -- Charles Lee";
+"quotes_11" = "The reason we are all here is that the current financial system is outdated. -- Charlie Shrem";
+"quotes_12" = "There are 3 eras of currency: Commodity based, politically based, and now, math-based. -- Chris Dixon";
+"quotes_13" = "If you don't believe it or don\'t get it, I don't have the time to try to convince you, sorry. -- Satoshi Nakamoto";
+"quotes_14" = "Mobile was Internet 2.0. It changed everything. Crypto is Internet 3.0. -- Gil Penchina";
+"quotes_15" = "Not understanding blockchain, it's going to smack you down and make you bleed. -- Mark Cuban";
+"quotes_16" = "Deploying more capital - Steady lads. -- Do Kwon";
+"quotes_17" = "Anything that can conceive of as a supply chain, blockchain can vastly improve its efficiency- it doesn’t matter if its people, numbers, data, money. -- Ginni Rometty, CEO of IBM";
+"quotes_18" = "Every informed person needs to know about Bitcoin because it might be one of the world’s most important developments.-- Leon Louw, Noble Peace Prize Nominee";
+"quotes_19" = "I see Bitcoin as ultimately becoming a reserve currency for banks, playing much the same role as gold did in the early days of banking. Banks could issue digital cash with greater anonymity and lighter weight, more efficient transactions. -- Hal Finney";
+"quotes_20" = "The old question “Is it in the database?” will be replaced by “Is it on the blockchain?” -- William Mougayar";
+"quotes_21" = "Whereas most technologies tend to automate workers on the periphery doing menial tasks, blockchains automate away the center. Instead of putting the taxi driver out of a job, blockchain puts Uber out of a job and lets the taxi drivers work with the customer directly. -- Vitalik Buterin";
+"quotes_22" = "In fact, blockchain has the potential to fundamentally change how we share information, buy and sell things, interact with government, prove our identity, and even verify the authenticity of everything - from the food we eat to the medicine we take to who we say we are. -- Julie Sweet";
+"quotes_23" = "Everything will be tokenized and connected by a blockchain one day. -- Fred Ehrsam";
+"quotes_24" = "The blockchain does one thing: It replaces third-party trust with mathematical proof that something happened. -- Adam Draper";
+"quotes_25" = "The blockchain is the financial challenge of our time. It is going to change the way that our financial world operates. -- Blythe Masters";
+"quotes_26" = "Blockchain is the tech. Bitcoin is merely the first mainstream manifestation of its potential. -- Marc Kenigsberg";
+"quotes_27" = "We have elected to put our money and faith in a mathematical framework that is free of politics and human error. -- Tyler Winkelvoss";
+"quotes_28" = "Bitcoin will do to banks what email did to the postal industry. -- Rick Falkvinge";
+"quotes_29" = "You can’t stop things like Bitcoin. It will be everywhere, and the world will have to readjust. World governments will have to readjust. -- John Mcafee";
+"quotes_30" = "Any time a country transitioned to a fiat currency, they collapsed. That’s just world history; you don’t have to know about cryptocurrency to know that. -- Nipsey Hussle";
+"quotes_31" = "It’s gold for nerds. -- Stephen Colbert";
 
 
 "error_two_pincode_differ" = "PIN number is not same. Please init PIN number again!";
