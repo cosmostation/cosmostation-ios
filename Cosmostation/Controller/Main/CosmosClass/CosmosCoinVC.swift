@@ -175,6 +175,7 @@ class CosmosCoinVC: BaseVC {
     }
     
     func onStartLegacyTransferVC(_ denom: String) {
+        print("onStartLegacyTransferVC")
         let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
         transfer.selectedChain = selectedChain
         transfer.toSendDenom = denom
@@ -270,10 +271,6 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (selectedChain.isTxFeePayable() == false) {
-            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
-        }
         if (selectedChain is ChainBinanceBeacon) {
             let sendDenom = lcdBalances[indexPath.row]["symbol"].stringValue
             if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
@@ -288,6 +285,10 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             return
             
         } else if (selectedChain is ChainKava60) {
+            if (selectedChain.isTxFeePayable() == false) {
+                onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                return
+            }
             if (indexPath.section == 0) {
                 onStartTransferVC(selectedChain.stakeDenom)
             } else if (indexPath.section == 1) {
@@ -303,6 +304,10 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             return
             
         } else {
+            if (selectedChain.isTxFeePayable() == false) {
+                onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                return
+            }
             if (indexPath.section == 0) {
                 onStartTransferVC(selectedChain.stakeDenom)
             } else if (indexPath.section == 1) {

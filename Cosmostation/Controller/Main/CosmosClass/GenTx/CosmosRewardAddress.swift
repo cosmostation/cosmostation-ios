@@ -227,7 +227,7 @@ extension CosmosRewardAddress: MemoDelegate, BaseSheetDelegate, AddressDelegate,
             }
         }
     }
-    func onInputedAddress(_ address: String) {
+    func onInputedAddress(_ address: String, _ memo: String?) {
         newRewardAddress = Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress.with {
             $0.delegatorAddress = selectedChain.address!
             $0.withdrawAddress = address

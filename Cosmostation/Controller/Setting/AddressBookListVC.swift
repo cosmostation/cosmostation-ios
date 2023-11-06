@@ -116,13 +116,17 @@ extension AddressBookListVC: UITableViewDelegate, UITableViewDataSource, Address
     
     func onAddressBookUpdated(_ result: Int?) {
         addressBookLsit = BaseData.instance.selectAllAddressBooks()
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func onDeleted(_ book: AddressBook) {
         BaseData.instance.deleteAddressBook(book.id)
         addressBookLsit = BaseData.instance.selectAllAddressBooks()
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
 }

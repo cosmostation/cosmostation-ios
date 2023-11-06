@@ -606,9 +606,12 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
         onUpdateAmountView(amount)
     }
     
-    func onInputedAddress(_ address: String) {
+    func onInputedAddress(_ address: String, _ memo: String?) {
         selectedRecipientAddress = address
         onUpdateToAddressView()
+        if (memo != nil && memo?.isEmpty == false) {
+            onUpdateMemoView(memo!)
+        }
     }
     
     func onScanned(_ result: String) {

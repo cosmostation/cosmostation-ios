@@ -135,7 +135,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
                     if let recipientAuth = try? await self.fetchAuth(channel, kavaBechAddress) {
                         if (WUtils.onParseAuthPubkeyType(recipientAuth)?.contains("secp256k1") == false) {
                             DispatchQueue.main.async {
-                                self.addressDelegate?.onInputedAddress(userInput!)
+                                self.addressDelegate?.onInputedAddress(userInput!, nil)
                                 self.dismiss(animated: true)
                             }
                             return
@@ -156,14 +156,14 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             
         if (recipientChain is ChainOkt60Keccak) {
             if let evmAddess = EthereumAddress.init(userInput!) {
-                addressDelegate?.onInputedAddress(userInput!)
+                addressDelegate?.onInputedAddress(userInput!, nil)
                 dismiss(animated: true)
                 return
             }
         }
         
         if (WUtils.isValidChainAddress(recipientChain, userInput)) {
-            addressDelegate?.onInputedAddress(userInput!)
+            addressDelegate?.onInputedAddress(userInput!, nil)
             dismiss(animated: true)
             
         } else {
@@ -235,7 +235,11 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             
         } else if (sheetType == .SelectRecipientAddress) {
             if let address = result["address"] as? String {
-                addressTextField.text = address
+                let memo = result["memo"] as? String
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                    self.addressDelegate?.onInputedAddress(address, memo)
+                    self.dismiss(animated: true)
+                });
             }
             
         } else if (sheetType == .SelectRecipientEvmAddress) {
@@ -245,14 +249,13 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
         }
     }
     
-    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 }
 
 protocol AddressDelegate {
-    func onInputedAddress(_ address: String)
+    func onInputedAddress(_ address: String, _ memo: String?)
 }
 
 extension TxAddressSheet {

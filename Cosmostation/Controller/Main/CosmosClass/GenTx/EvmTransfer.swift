@@ -250,7 +250,7 @@ extension EvmTransfer: AmountSheetDelegate, AddressDelegate, PinDelegate {
         onUpdateAmountView(amount)
     }
     
-    func onInputedAddress(_ address: String) {
+    func onInputedAddress(_ address: String, _ memo: String?) {
         selectedRecipientAddress = address
         onUpdateToAddressView()
     }

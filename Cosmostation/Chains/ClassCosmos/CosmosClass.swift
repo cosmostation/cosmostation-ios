@@ -601,9 +601,12 @@ extension CosmosClass {
         cosmosRewards.forEach { reward in
             for i in 0..<reward.reward.count {
                 let rewardAmount = NSDecimalNumber(string: reward.reward[i].amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
-                if (rewardAmount.compare(NSDecimalNumber.one).rawValue > 0) {
-                    result.append(reward)
-                    break
+                if let msAsset = BaseData.instance.getAsset(self.apiName, reward.reward[i].denom) {
+                    let calAmount = rewardAmount.multiplying(byPowerOf10: -msAsset.decimals!)
+                    if (calAmount.compare(NSDecimalNumber.init(string: "0.1")).rawValue > 0) {
+                        result.append(reward)
+                        break
+                    }
                 }
             }
             return

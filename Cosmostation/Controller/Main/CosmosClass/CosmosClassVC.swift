@@ -123,6 +123,10 @@ class CosmosClassVC: BaseVC {
             self.present(transfer, animated: true)
             
         } else {
+            if (selectedChain.isTxFeePayable() == false) {
+                onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                return
+            }
             let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
             transfer.selectedChain = selectedChain
             transfer.toSendDenom = selectedChain.stakeDenom
@@ -132,8 +136,12 @@ class CosmosClassVC: BaseVC {
     }
     
     func onClaimRewardTx() {
-        if (selectedChain.claimableRewards().count == 0) {
+        if (selectedChain.rewardAllCoins().count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+            return
+        }
+        if (selectedChain.claimableRewards().count == 0) {
+            onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
             return
         }
         if (selectedChain.isTxFeePayable() == false) {
@@ -148,8 +156,12 @@ class CosmosClassVC: BaseVC {
     }
     
     func onClaimCompoundingTx() {
-        if (selectedChain.claimableRewards().count == 0) {
+        if (selectedChain.rewardAllCoins().count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+            return
+        }
+        if (selectedChain.claimableRewards().count == 0) {
+            onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
             return
         }
         if (selectedChain.isTxFeePayable() == false) {

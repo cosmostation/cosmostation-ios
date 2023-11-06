@@ -293,9 +293,12 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
         onUpdateAmountView(amount)
     }
     
-    func onInputedAddress(_ address: String) {
+    func onInputedAddress(_ address: String, _ memo: String?) {
         recipientAddress = address
         onUpdateToAddressView()
+        if (memo != nil && memo?.isEmpty == false) {
+            onUpdateMemoView(memo!)
+        }
     }
     
     func onInputedMemo(_ memo: String) {

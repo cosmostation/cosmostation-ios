@@ -564,7 +564,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
                 let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].dpAddress]
                 sheetDelegate?.onSelectedSheet(sheetType, result)
             } else {
-                let result: [String : Any] = ["index" : indexPath.row, "address" : addressBook[indexPath.row].dpAddress]
+                let result: [String : Any] = ["index" : indexPath.row, "address" : addressBook[indexPath.row].dpAddress, "memo" : addressBook[indexPath.row].memo]
                 sheetDelegate?.onSelectedSheet(sheetType, result)
             }
             
@@ -606,7 +606,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else {
-//            sheetDelegate?.onSelectedSheet(sheetType, BaseSheetResult.init(indexPath.row, nil))
             let result: [String : Any] = ["index" : indexPath.row]
             sheetDelegate?.onSelectedSheet(sheetType, result)
         }
