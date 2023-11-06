@@ -69,6 +69,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SelectValidatorCell", bundle: nil), forCellReuseIdentifier: "SelectValidatorCell")
         sheetTableView.register(UINib(nibName: "SelectNameServiceCell", bundle: nil), forCellReuseIdentifier: "SelectNameServiceCell")
         sheetTableView.register(UINib(nibName: "SelectRefAddressCell", bundle: nil), forCellReuseIdentifier: "SelectRefAddressCell")
+        sheetTableView.register(UINib(nibName: "SelectAddressBookCell", bundle: nil), forCellReuseIdentifier: "SelectAddressBookCell")
         sheetTableView.register(UINib(nibName: "SelectBepRecipientCell", bundle: nil), forCellReuseIdentifier: "SelectBepRecipientCell")
         sheetTableView.sectionHeaderTopPadding = 0
         
@@ -467,13 +468,15 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             return cell!
             
         } else if (sheetType == .SelectRecipientAddress) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRefAddressCell") as? SelectRefAddressCell
             if (indexPath.section == 0) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRefAddressCell") as? SelectRefAddressCell
                 cell?.onBindRefAddress(refAddresses[indexPath.row])
+                return cell!
             } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAddressBookCell") as? SelectAddressBookCell
                 cell?.onBindAddressBook(addressBook[indexPath.row])
+                return cell!
             }
-            return cell!
             
         } else if (sheetType == .SelectRecipientEvmAddress) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRefAddressCell") as? SelectRefAddressCell

@@ -48,13 +48,15 @@ class CosmosClass: BaseChain {
                 mintscanChainParam = rawParam
             }
             if (supportCw20) {
-                if let cw20s = try? await self.fetchCw20Info() {
-                    mintscanTokens = cw20s.assets!
+                if let cw20s = try? await self.fetchCw20Info(),
+                   let ercs = cw20s.assets {
+                    mintscanTokens = ercs
                 }
             }
             if (supportErc20) {
-                if let erc20s = try? await self.fetchErc20Info() {
-                    mintscanTokens = erc20s.assets!
+                if let erc20s = try? await self.fetchErc20Info(),
+                   let ercs = erc20s.assets {
+                    mintscanTokens = ercs
                 }
             }
         }
