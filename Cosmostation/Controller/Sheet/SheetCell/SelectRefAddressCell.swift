@@ -35,7 +35,7 @@ class SelectRefAddressCell: UITableViewCell {
     }
     
     func onBindRefAddress(_ refAddress: RefAddress) {
-        addressLabel.text = refAddress.dpAddress
+        addressLabel.text = refAddress.bechAddress
         let all = ALLCOSMOSCLASS()
         if let chain = all.filter({ $0.tag == refAddress.chainTag }).first {
             if (chain.evmCompatible) {
@@ -54,8 +54,8 @@ class SelectRefAddressCell: UITableViewCell {
     }
     
     func onBindEvmRefAddress(_ refAddress: RefAddress) {
-        addressLabel.text = refAddress.dpAddress
-        evmAddressLabel.text = "(" + KeyFac.convertBech32ToEvm(refAddress.dpAddress) + ")"
+        addressLabel.text = refAddress.bechAddress
+        evmAddressLabel.text = "(" + KeyFac.convertBech32ToEvm(refAddress.bechAddress) + ")"
         evmAddressLabel.isHidden = false
         
         let all = ALLCOSMOSCLASS()

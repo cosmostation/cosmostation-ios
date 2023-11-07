@@ -39,12 +39,16 @@ class BaseChain {
         return accountKeyType.hdPath.replacingOccurrences(of: "X", with: lastPath)
     }
     
+    //get bech style info from seed
     func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
         privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
+        
+        print("", tag, " ", address)
     }
     
+    //get bech style info from privatekey
     func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)

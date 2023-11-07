@@ -181,8 +181,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectRecipientAddress) {
             sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
-                if (refAddress.dpAddress.starts(with: targetChain.accountPrefix!) &&
-                    refAddress.dpAddress != senderAddress) {
+                if (refAddress.bechAddress.starts(with: targetChain.accountPrefix!) &&
+                    refAddress.bechAddress != senderAddress) {
                     refAddresses.append(refAddress)
                 }
             }
@@ -204,7 +204,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectRecipientEvmAddress) {
             sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
-                if (refAddress.chainTag == targetChain.tag && refAddress.dpAddress != senderAddress) {
+                if (refAddress.chainTag == targetChain.tag && refAddress.bechAddress != senderAddress) {
                     refAddresses.append(refAddress)
                 }
             }
@@ -566,7 +566,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectRecipientAddress) {
             if (indexPath.section == 0) {
-                let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].dpAddress]
+                let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].bechAddress]
                 sheetDelegate?.onSelectedSheet(sheetType, result)
             } else {
                 let result: [String : Any] = ["index" : indexPath.row, "address" : addressBook[indexPath.row].dpAddress, "memo" : addressBook[indexPath.row].memo]
@@ -574,7 +574,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else if (sheetType == .SelectRecipientEvmAddress) {
-            let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].dpAddress]
+            let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].bechAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectBepRecipientAddress) {
