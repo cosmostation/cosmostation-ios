@@ -55,7 +55,7 @@ class CosmosHistoryVC: BaseVC {
             onFetchBnbHistory(selectedChain.address)
             
         } else if (selectedChain is ChainOkt60Keccak) {
-            onFetchOktHistory(selectedChain.evmAddress!)
+            onFetchOktHistory(selectedChain.evmAddress)
             
         } else {
             msHistoyID = 0

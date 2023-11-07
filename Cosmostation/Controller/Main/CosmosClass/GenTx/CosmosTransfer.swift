@@ -424,7 +424,7 @@ class CosmosTransfer: BaseVC {
     func inChainCoinSendSimul() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.address) {
                 do {
                     let simul = try await simulSendTx(channel, auth!, onBindSend())
                     DispatchQueue.main.async {
@@ -446,7 +446,7 @@ class CosmosTransfer: BaseVC {
     func inChainWasmSendSimul() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.address) {
                 do {
                     let simul = try await simulCw20SendTx(channel, auth!, onBindCw20Send())
                     DispatchQueue.main.async {
@@ -469,7 +469,7 @@ class CosmosTransfer: BaseVC {
         Task {
             let channel = getConnection()
             let recipientChannel = getRecipientConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+            if let auth = try? await fetchAuth(channel, selectedChain.address),
                let ibcClient = try? await fetchIbcClient(channel),
                let lastBlock = try? await fetchLastBlock(recipientChannel) {
                 do {
@@ -493,7 +493,7 @@ class CosmosTransfer: BaseVC {
     func ibcWasmSendSimul() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.address) {
                 do {
                     let simul = try await simulCw20IbcSendTx(channel, auth!, onBindCw20IbcSend())
                     DispatchQueue.main.async {
@@ -521,7 +521,7 @@ class CosmosTransfer: BaseVC {
             $0.amount = toSendAmount.stringValue
         }
         return Cosmos_Bank_V1beta1_MsgSend.with {
-            $0.fromAddress = selectedChain.address!
+            $0.fromAddress = selectedChain.address
             $0.toAddress = selectedRecipientAddress!
             $0.amount = [sendCoin]
         }
@@ -531,7 +531,7 @@ class CosmosTransfer: BaseVC {
         let msg: JSON = ["transfer" : ["recipient" : selectedRecipientAddress! , "amount" : toSendAmount.stringValue]]
         let msgBase64 = try! msg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-            $0.sender = selectedChain.address!
+            $0.sender = selectedChain.address
             $0.contract = selectedMsToken!.address!
             $0.msg = Data(base64Encoded: msgBase64)!
         }
@@ -549,7 +549,7 @@ class CosmosTransfer: BaseVC {
             $0.amount = toSendAmount.stringValue
         }
         return Ibc_Applications_Transfer_V1_MsgTransfer.with {
-            $0.sender = selectedChain.address!
+            $0.sender = selectedChain.address
             $0.receiver = selectedRecipientAddress!
             $0.sourceChannel = mintscanPath!.channel!
             $0.sourcePort = mintscanPath!.port!
@@ -566,7 +566,7 @@ class CosmosTransfer: BaseVC {
         let innerMsg: JSON = ["send" : ["contract" : mintscanPath!.getIBCContract(), "amount" : toSendAmount.stringValue, "msg" : jsonMsgBase64]]
         let innerMsgBase64 = try! innerMsg.rawData(options: [.sortedKeys]).base64EncodedString()
         return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-            $0.sender = selectedChain.address!
+            $0.sender = selectedChain.address
             $0.contract = selectedMsToken!.address!
             $0.msg = Data(base64Encoded: innerMsgBase64)!
         }
@@ -665,7 +665,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     func inChainCoinSend() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+            if let auth = try? await fetchAuth(channel, selectedChain.address),
                let response = try await broadcastSendTx(channel, auth!, onBindSend()) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     self.loadingView.isHidden = true
@@ -686,7 +686,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     func inChainWasmSend() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+            if let auth = try? await fetchAuth(channel, selectedChain.address),
                let response = try await broadcastCw20SendTx(channel, auth!, onBindCw20Send()) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     self.loadingView.isHidden = true
@@ -709,7 +709,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
         Task {
             let channel = getConnection()
             let recipientChannel = getRecipientConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+            if let auth = try? await fetchAuth(channel, selectedChain.address),
                let ibcClient = try? await fetchIbcClient(channel),
                let lastBlock = try? await fetchLastBlock(recipientChannel),
                let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(ibcClient!, lastBlock!)) {
@@ -732,7 +732,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     func ibcWasmSend() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+            if let auth = try? await fetchAuth(channel, selectedChain.address),
                let response = try await broadcastCw20IbcSendTx(channel, auth!, onBindCw20IbcSend()) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     self.loadingView.isHidden = true

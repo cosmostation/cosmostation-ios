@@ -197,7 +197,7 @@ class EvmTransfer: BaseVC {
             
             let chainID = web3.provider.network?.chainID
             let contractAddress = EthereumAddress.init(fromHex: selectedMsToken!.address!)
-            let senderAddress = EthereumAddress.init(fromHex: KeyFac.convertBech32ToEvm(selectedChain.address!))
+            let senderAddress = EthereumAddress.init(fromHex: KeyFac.convertBech32ToEvm(selectedChain.address))
             let recipientAddress = EthereumAddress.init(fromHex: KeyFac.convertBech32ToEvm(selectedRecipientAddress!))
             let erc20token = ERC20(web3: web3, provider: web3.provider, address: contractAddress!)
             let calSendAmount = toSendAmount.multiplying(byPowerOf10: -selectedMsToken!.decimals!)

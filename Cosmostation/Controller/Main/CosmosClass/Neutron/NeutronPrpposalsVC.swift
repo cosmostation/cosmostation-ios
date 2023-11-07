@@ -79,7 +79,7 @@ class NeutronPrpposalsVC: BaseVC {
             fetchProposals(group, channel, contAddress)
         }
         
-        fetchMyVotes(group, selectedChain.address!)
+        fetchMyVotes(group, selectedChain.address)
         
         group.notify(queue: .main) {
 //            DispatchQueue.main.async {

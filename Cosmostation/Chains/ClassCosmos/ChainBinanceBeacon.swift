@@ -52,7 +52,7 @@ extension ChainBinanceBeacon {
         let group = DispatchGroup()
         
         fetchNodeInfo(group)
-        fetchAccountInfo(group, address!)
+        fetchAccountInfo(group, address)
         fetchBeaconTokens(group)
         fetchBeaconMiniTokens(group)
         
@@ -62,7 +62,7 @@ extension ChainBinanceBeacon {
             self.allCoinUSDValue = self.allCoinValue(true)
             
             BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.address!,
+                RefAddress(id, self.tag, self.address, self.evmAddress,
                            self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                            nil, self.lcdAccountInfo.bnbCoins?.count))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)

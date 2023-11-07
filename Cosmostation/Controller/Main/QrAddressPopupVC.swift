@@ -49,7 +49,7 @@ class QrAddressPopupVC: BaseVC {
             }
         }
         
-        if let qrImage = generateQrCode(selectedChain.address!) {
+        if let qrImage = generateQrCode(selectedChain.address) {
             rqImgView.image = UIImage(ciImage: qrImage)
             let chainLogo = UIImage.init(named: selectedChain.logo1)
             chainLogo?.addToCenter(of: rqImgView)

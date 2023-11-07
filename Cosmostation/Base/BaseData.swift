@@ -236,6 +236,7 @@ extension BaseData {
                 table.column(REFADDRESS_COIN_CNT)
             }
             try self.database.run(refAddressTable)
+            _ = try? self.database.run(TABLE_REFADDRESS.addColumn(REFADDRESS_EVM_ADDRESS, defaultValue: ""))
             
             
             let addressBookTable = TABLE_ADDRESSBOOK.create(ifNotExists: true) { table in
@@ -247,6 +248,8 @@ extension BaseData {
                 table.column(ADDRESSBOOK_TIME)
             }
             try self.database.run(addressBookTable)
+            
+            
             
         } catch { print(error) }
     }
@@ -298,8 +301,8 @@ extension BaseData {
         var result = Array<RefAddress>()
         for rowInfo in try! database.prepare(TABLE_REFADDRESS) {
             result.append(RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_TAG],
-                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], rowInfo[REFADDRESS_MAIN_VALUE], 
-                                     rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT]))
+                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_EVM_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], 
+                                     rowInfo[REFADDRESS_MAIN_VALUE], rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT]))
         }
         return result
     }
@@ -309,8 +312,8 @@ extension BaseData {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == accountId)
         for rowInfo in try! database.prepare(query) {
             result.append(RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_TAG],
-                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], rowInfo[REFADDRESS_MAIN_VALUE], 
-                                     rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT]))
+                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_EVM_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], 
+                                     rowInfo[REFADDRESS_MAIN_VALUE], rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT]))
         }
         return result
     }
@@ -320,8 +323,8 @@ extension BaseData {
                                             REFADDRESS_CHAIN_TAG == chainTag)
         if let rowInfo = try! database.pluck(query) {
             return RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_TAG],
-                              rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], rowInfo[REFADDRESS_MAIN_VALUE],
-                              rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT])
+                              rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_EVM_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], 
+                              rowInfo[REFADDRESS_MAIN_VALUE], rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT])
         }
         return nil
     }

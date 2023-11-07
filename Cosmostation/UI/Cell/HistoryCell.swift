@@ -41,7 +41,7 @@ class HistoryCell: UITableViewCell {
             successImg.image = UIImage(named: "iconFail")
         }
         
-        msgsTitleLabel.text = history.getMsgType(chain.address!)
+        msgsTitleLabel.text = history.getMsgType(chain.address)
         hashLabel.text = history.data?.txhash
         timeLabel.text = WDP.dpTime(history.header?.timestamp)
         if let height = history.data?.height {
@@ -51,7 +51,7 @@ class HistoryCell: UITableViewCell {
             blockLabel.isHidden = true
         }
         
-        if (NSLocalizedString("tx_vote", comment: "") == history.getMsgType(chain.address!)) {
+        if (NSLocalizedString("tx_vote", comment: "") == history.getMsgType(chain.address)) {
             denomLabel.text = history.getVoteOption()
             return
         }
@@ -78,7 +78,7 @@ class HistoryCell: UITableViewCell {
             successImg.image = UIImage(named: "iconSuccess")
         }
         
-        msgsTitleLabel.text = history.getMsgType(chain.address!)
+        msgsTitleLabel.text = history.getMsgType(chain.address)
         hashLabel.text = history.txHash
         timeLabel.text = WDP.dpFullTime(history.timeStamp)
         if let height = history.blockHeight {

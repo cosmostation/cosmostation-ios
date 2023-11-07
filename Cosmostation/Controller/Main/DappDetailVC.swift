@@ -633,7 +633,7 @@ extension DappDetailVC {
                 let accounts = Set(namespaces.value.chains!.filter { chain in
                     baseAccount.getDisplayCosmosChains().filter({ $0.chainId == chain.reference }).first != nil
                 }.compactMap { chain in
-                    WalletConnectSwiftV2.Account(chainIdentifier: chain.absoluteString, address: self.selectedChain.address!)
+                    WalletConnectSwiftV2.Account(chainIdentifier: chain.absoluteString, address: self.selectedChain.address)
                 })
                 let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
                 sessionNamespaces[caip2Namespace] = sessionNamespace

@@ -265,7 +265,7 @@ class CosmosRedelegate: BaseVC {
         loadingView.isHidden = false
         
         toRedelegate = Cosmos_Staking_V1beta1_MsgBeginRedelegate.with {
-            $0.delegatorAddress = selectedChain.address!
+            $0.delegatorAddress = selectedChain.address
             $0.validatorSrcAddress = fromValidator!.operatorAddress
             $0.validatorDstAddress = toValidator!.operatorAddress
             $0.amount = toCoin!
@@ -276,7 +276,7 @@ class CosmosRedelegate: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.address) {
                 do {
                     let simul = try await simulateTx(channel, auth!)
                     DispatchQueue.main.async {
@@ -338,7 +338,7 @@ extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address!),
+                if let auth = try? await fetchAuth(channel, selectedChain.address),
                    let response = try await broadcastTx(channel, auth!) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                         self.loadingView.isHidden = true

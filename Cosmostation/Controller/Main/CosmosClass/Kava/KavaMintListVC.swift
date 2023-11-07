@@ -57,7 +57,7 @@ class KavaMintListVC: BaseVC {
         Task {
             let channel = getConnection()
             if let cdpParam = try? await fetchMintParam(channel),
-               let myCdps = try? await fetchMyCdps(channel, selectedChain.address!) {
+               let myCdps = try? await fetchMyCdps(channel, selectedChain.address) {
                 
                 cdpParam?.collateralParams.forEach({ collateralParam in
                     if (myCdps?.filter({ $0.type == collateralParam.type }).count ?? 0 > 0) {

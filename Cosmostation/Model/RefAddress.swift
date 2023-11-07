@@ -13,17 +13,19 @@ public struct RefAddress {
     var accountId: Int64 = -1
     var chainTag: String = ""
     var dpAddress: String = ""
-    var lastMainValue: String = "0"        // last coins total USD value
+    var evmAddress: String = ""
+    var lastMainValue: String = "0"         // last coins total USD value
     var lastMainAmount: String = "0"        // last main denom amount
-    var lastTokenValue: String = "0"       // last tokens total USD value
-    var lastCoinCnt: Int64 = 0               // last coin type counts
+    var lastTokenValue: String = "0"        // last tokens total USD value
+    var lastCoinCnt: Int64 = 0              // last coin type counts
     
     //create
-    init(_ accountId: Int64, _ chainTag: String, _ dpAddress: String,
+    init(_ accountId: Int64, _ chainTag: String, _ dpAddress: String, _ evmAddress: String,
          _ lastMainValue: String? = "0", _ lastMainAmount: String? = "0", _ lastTokenValue: String? = "0", _ lastCoinCnt: Int? = 0) {
         self.accountId = accountId
         self.chainTag = chainTag
         self.dpAddress = dpAddress
+        self.evmAddress = evmAddress
         if (lastMainValue != nil && !lastMainValue!.isEmpty) {
             self.lastMainValue = lastMainValue!
         }
@@ -39,11 +41,12 @@ public struct RefAddress {
     }
     
     //db query
-    init(_ id: Int64, _ accountId: Int64, _ chainTag: String, _ dpAddress: String, _ lastMainValue: String?, _ lastMainAmount: String?, _ lastTokenValue: String?, _ lastCoinCnt: Int64?) {
+    init(_ id: Int64, _ accountId: Int64, _ chainTag: String, _ dpAddress: String, _ evmAddress: String, _ lastMainValue: String?, _ lastMainAmount: String?, _ lastTokenValue: String?, _ lastCoinCnt: Int64?) {
         self.id = id
         self.accountId = accountId
         self.chainTag = chainTag
         self.dpAddress = dpAddress
+        self.evmAddress = evmAddress
         if (lastMainValue != nil && !lastMainValue!.isEmpty) {
             self.lastMainValue = lastMainValue!
         }

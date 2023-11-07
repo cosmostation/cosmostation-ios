@@ -58,7 +58,7 @@ class KavaSwapListVC: BaseVC {
         Task {
             let channel = getConnection()
             if var swapPools = try? await self.fetchSwapList(channel),
-               var myDeposit = try? await self.fetchSwapMyDeposit(channel, selectedChain.address!) {
+               var myDeposit = try? await self.fetchSwapMyDeposit(channel, selectedChain.address) {
                 myDeposit?.sort {
                     return $0.getUsdxAmount().compare($1.getUsdxAmount()).rawValue > 0 ? true : false
                 }

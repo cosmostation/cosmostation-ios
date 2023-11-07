@@ -88,16 +88,5 @@ class SelectChainCell: UITableViewCell {
             valueLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
             assetCntLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
         }
-        
-        //            let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag, addess)
-        //            print("refAddress ", refAddress?.lastUsdValue())
-        //            refAddress.v
-        //
-        //            WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
-        
-//        let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag, chain.address!)
-//        print("refAddress ", refAddress)
-//        
-//        print("", chain.name, "  ")
     }
 }

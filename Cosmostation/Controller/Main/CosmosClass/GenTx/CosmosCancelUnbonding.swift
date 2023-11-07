@@ -166,7 +166,7 @@ class CosmosCancelUnbonding: BaseVC {
         
         let toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = selectedChain.stakeDenom!; $0.amount = unbondingEntry.entry.balance }
         toCancel = Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation.with {
-            $0.delegatorAddress = selectedChain.address!
+            $0.delegatorAddress = selectedChain.address
             $0.validatorAddress = unbondingEntry.validatorAddress
             $0.creationHeight = unbondingEntry.entry.creationHeight
             $0.amount = toCoin
@@ -177,7 +177,7 @@ class CosmosCancelUnbonding: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.address) {
                 do {
                     let simul = try await simulateTx(channel, auth!)
                     DispatchQueue.main.async {
@@ -227,7 +227,7 @@ extension CosmosCancelUnbonding: BaseSheetDelegate, MemoDelegate, PinDelegate {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address!),
+                if let auth = try? await fetchAuth(channel, selectedChain.address),
                    let response = try await broadcastTx(channel, auth!) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                         self.loadingView.isHidden = true

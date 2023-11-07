@@ -25,7 +25,7 @@ class ChainOkt996Secp: ChainOkt60Keccak {
         privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
-        evmAddress = KeyFac.convertBech32ToEvm(address!)
+        evmAddress = KeyFac.convertBech32ToEvm(address)
         
         print("", tag, " ", address, "  ", evmAddress)
     }
@@ -34,6 +34,6 @@ class ChainOkt996Secp: ChainOkt60Keccak {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
-        evmAddress = KeyFac.convertBech32ToEvm(address!)
+        evmAddress = KeyFac.convertBech32ToEvm(address)
     }
 }

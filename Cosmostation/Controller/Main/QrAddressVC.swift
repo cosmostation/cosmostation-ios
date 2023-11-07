@@ -52,7 +52,7 @@ class QrAddressVC: BaseVC {
             }
         }
         
-        if let qrImage = generateQrCode(selectedChain.address!) {
+        if let qrImage = generateQrCode(selectedChain.address) {
             rqImgView.image = UIImage(ciImage: qrImage)
             let chainLogo = UIImage.init(named: selectedChain.logo1)
             chainLogo?.addToCenter(of: rqImgView)
@@ -78,7 +78,7 @@ class QrAddressVC: BaseVC {
     }
     
     @objc func onCopyAddress() {
-        UIPasteboard.general.string = selectedChain.address!.trimmingCharacters(in: .whitespacesAndNewlines)
+        UIPasteboard.general.string = selectedChain.address.trimmingCharacters(in: .whitespacesAndNewlines)
         self.onShowToast(NSLocalizedString("address_copied", comment: ""))
     }
 }

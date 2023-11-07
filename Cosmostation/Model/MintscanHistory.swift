@@ -862,7 +862,7 @@ public struct MintscanHistory: Codable {
                 data?.logs?.forEach({ log in
                     if let event = log["events"].array?.filter({ $0["type"].string == "transfer" }).first {
                         event["attributes"].array?.forEach({ attribute in
-                            if (attribute["value"].string == chain.address!) {
+                            if (attribute["value"].string == chain.address) {
                                 if let attribute = event["attributes"].array?.filter({ $0["key"].string == "amount" }).first {
                                     for rawAmount in attribute["value"].stringValue.components(separatedBy: ",") {
                                         if let range = rawAmount.range(of: "[0-9]*", options: .regularExpression) {

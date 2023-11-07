@@ -256,7 +256,7 @@ class KavaMintCreateAction: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.address) {
                 do {
                     let simul = try await simulCretaeTx(channel, auth!, onBindCreateMsg())
                     DispatchQueue.main.async {
@@ -285,7 +285,7 @@ class KavaMintCreateAction: BaseVC {
             $0.amount = toPrincipalAmount.stringValue
         }
         return Kava_Cdp_V1beta1_MsgCreateCDP.with {
-            $0.sender = selectedChain.address!
+            $0.sender = selectedChain.address
             $0.collateral = collateralCoin
             $0.principal = principalCoin
             $0.collateralType = collateralParam.type
@@ -326,7 +326,7 @@ extension KavaMintCreateAction: BaseSheetDelegate, MemoDelegate, AmountSheetDele
             
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address!),
+                if let auth = try? await fetchAuth(channel, selectedChain.address),
                    let response = try await broadcastCreateTx(channel, auth!, onBindCreateMsg()) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                         self.loadingView.isHidden = true

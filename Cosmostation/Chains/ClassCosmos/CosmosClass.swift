@@ -23,7 +23,7 @@ class CosmosClass: BaseChain {
     var supportStaking = true
     
     var evmCompatible = false
-    var evmAddress: String?
+    var evmAddress = ""
     
     var grpcHost = ""
     var grpcPort = 443
@@ -81,7 +81,7 @@ class CosmosClass: BaseChain {
             self.allCoinUSDValue = self.allCoinValue(true)
             
             BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.address!,
+                RefAddress(id, self.tag, self.address, self.evmAddress,
                            self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                            nil, self.cosmosBalances.count))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
@@ -307,13 +307,13 @@ extension CosmosClass {
     }
     
     func fetchRewardAddress(_ channel: ClientConnection) async throws -> String? {
-        let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = address! }
+        let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = address }
         return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).delegatorWithdrawAddress(req).response.get().withdrawAddress.replacingOccurrences(of: "\"", with: "")
     }
     
     func fetchGrpcData(_ id: Int64) {
         let channel = getConnection()
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address! }
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosAuth = response.account
             self.fetchPropertyData(channel, id)
@@ -322,7 +322,7 @@ extension CosmosClass {
             try? channel.close()
             self.fetched = true
             BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.address!, 
+                RefAddress(id, self.tag, self.address, self.evmAddress,
                            nil, nil, nil, nil))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }
@@ -331,7 +331,7 @@ extension CosmosClass {
     func fetchBalance(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()
         let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
-        let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = address!; $0.pagination = page }
+        let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = address; $0.pagination = page }
         if let response = try? Cosmos_Bank_V1beta1_QueryNIOClient(channel: channel).allBalances(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosBalances = response.balances
             group.leave()
@@ -342,7 +342,7 @@ extension CosmosClass {
     
     func fetchDelegation(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()
-        let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = address! }
+        let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = address }
         if let response = try? Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).delegatorDelegations(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosDelegations.removeAll()
             response.delegationResponses.forEach { delegation in
@@ -358,7 +358,7 @@ extension CosmosClass {
     
     func fetchUnbondings(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()
-        let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = address! }
+        let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = address }
         if let response = try? Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosUnbondings = response.unbondingResponses
             group.leave()
@@ -369,7 +369,7 @@ extension CosmosClass {
     
     func fetchRewards(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()
-        let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = address! }
+        let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = address }
         if let response = try? Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).delegationTotalRewards(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosRewards = response.rewards
             group.leave()
@@ -391,7 +391,7 @@ extension CosmosClass {
             self.allTokenUSDValue = self.allTokenValue(true)
             
             BaseData.instance.updateRefAddressesToken(
-                RefAddress(id, self.tag, self.address!,
+                RefAddress(id, self.tag, self.address, self.evmAddress,
                            nil, nil, self.allTokenUSDValue.stringValue, nil))
             NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
         }
@@ -400,7 +400,7 @@ extension CosmosClass {
     func fetchCw20Balance(_ group: DispatchGroup, _ channel: ClientConnection, _ tokenInfo: MintscanToken) {
         group.enter()
         DispatchQueue.global().async {
-            let query: JSON = ["balance" : ["address" : self.address!]]
+            let query: JSON = ["balance" : ["address" : self.address]]
             let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
                 $0.address = tokenInfo.address!
@@ -421,10 +421,10 @@ extension CosmosClass {
         guard let url = URL(string: rpcURL) else { return }
         guard let web3 = try? Web3.new(url) else { return }
         var accountEthAddr: EthereumAddress!
-        if (address!.starts(with: "0x")) {
-            accountEthAddr = EthereumAddress.init(address!)
+        if (address.starts(with: "0x")) {
+            accountEthAddr = EthereumAddress.init(address)
         } else {
-            accountEthAddr = EthereumAddress.init(KeyFac.convertBech32ToEvm(address!))
+            accountEthAddr = EthereumAddress.init(KeyFac.convertBech32ToEvm(address))
         }
         
         mintscanTokens.forEach { token in
@@ -436,7 +436,7 @@ extension CosmosClass {
             self.allTokenUSDValue = self.allTokenValue(true)
             
             BaseData.instance.updateRefAddressesToken(
-                RefAddress(id, self.tag, self.address!,
+                RefAddress(id, self.tag, self.address, self.evmAddress,
                            nil, nil, self.allTokenUSDValue.stringValue, nil))
             NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
         }
