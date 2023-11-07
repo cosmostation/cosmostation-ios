@@ -56,7 +56,12 @@ class CosmosClassVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         totalValue = selectedChain.allValue()
-        addressLabel.text = selectedChain.bechAddress
+        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60") {
+            addressLabel.text = selectedChain.evmAddress
+        } else {
+            addressLabel.text = selectedChain.bechAddress
+        }
+        
         onSetTabbarView()
         onSetFabButton()
         if (selectedChain.supportStaking) {
