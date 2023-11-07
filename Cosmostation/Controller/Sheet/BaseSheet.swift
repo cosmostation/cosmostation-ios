@@ -595,7 +595,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
                     dismiss(animated: true)
                 }
             }
-            let result: [String : Any] = ["index" : indexPath.row, "address" : chain.address]
+            let result: [String : Any] = ["index" : indexPath.row, "address" : chain.bechAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectHardAction) {

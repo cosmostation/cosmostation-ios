@@ -28,7 +28,7 @@ class QrAddressVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
-        addressLabel.text = selectedChain.address
+        addressLabel.text = selectedChain.bechAddress
         addressLabel.adjustsFontSizeToFitWidth = true
         if (baseAccount.type == .withMnemonic) {
             hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
@@ -52,14 +52,14 @@ class QrAddressVC: BaseVC {
             }
         }
         
-        if let qrImage = generateQrCode(selectedChain.address) {
+        if let qrImage = generateQrCode(selectedChain.bechAddress) {
             rqImgView.image = UIImage(ciImage: qrImage)
             let chainLogo = UIImage.init(named: selectedChain.logo1)
             chainLogo?.addToCenter(of: rqImgView)
         }
         
-        print("address ", selectedChain.address)
-        print("address ", selectedChain.evmAddress)
+        print("bechAddress ", selectedChain.bechAddress)
+        print("evmAddress ", selectedChain.evmAddress)
         
         let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyAddress))
         copyTap.cancelsTouchesInView = false
@@ -72,13 +72,13 @@ class QrAddressVC: BaseVC {
     }
 
     @IBAction func onClickShare(_ sender: BaseButton) {
-        let activityViewController = UIActivityViewController(activityItems: [selectedChain.address], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: [selectedChain.bechAddress], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
     }
     
     @objc func onCopyAddress() {
-        UIPasteboard.general.string = selectedChain.address.trimmingCharacters(in: .whitespacesAndNewlines)
+        UIPasteboard.general.string = selectedChain.bechAddress.trimmingCharacters(in: .whitespacesAndNewlines)
         self.onShowToast(NSLocalizedString("address_copied", comment: ""))
     }
 }

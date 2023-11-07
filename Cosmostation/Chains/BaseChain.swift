@@ -22,7 +22,6 @@ class BaseChain {
     var accountKeyType: AccountKeyType!
     var privateKey: Data?
     var publicKey: Data?
-    var address = ""
     
     
     var fetched = false

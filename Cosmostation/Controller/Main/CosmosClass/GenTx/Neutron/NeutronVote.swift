@@ -165,7 +165,7 @@ class NeutronVote: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                 do {
                     let simul = try await simulateTx(channel, auth!)
                     DispatchQueue.main.async {
@@ -190,7 +190,7 @@ class NeutronVote: BaseVC {
             let jsonMsg: JSON = ["vote" : ["proposal_id" : single["id"].int64Value, "vote" : single["myVote"].stringValue]]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.address
+                $0.sender = selectedChain.bechAddress
                 $0.contract = selectedChain.daosList[0]["proposal_modules"].arrayValue[0]["address"].stringValue
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
@@ -200,7 +200,7 @@ class NeutronVote: BaseVC {
             let jsonMsg: JSON = ["vote" : ["proposal_id" : multi["id"].int64Value, "vote" : ["option_id" : multi["myVote"].intValue ]]]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.address
+                $0.sender = selectedChain.bechAddress
                 $0.contract = selectedChain.daosList[0]["proposal_modules"].arrayValue[1]["address"].stringValue
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
@@ -298,7 +298,7 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                    let response = try await broadcastTx(channel, auth!) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                         self.loadingView.isHidden = true

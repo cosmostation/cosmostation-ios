@@ -62,7 +62,7 @@ class ChainNeutron: CosmosClass  {
                 self.allCoinUSDValue = self.allCoinValue(true)
                 
                 BaseData.instance.updateRefAddressesMain(
-                    RefAddress(id, self.tag, self.address, self.evmAddress,
+                    RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                                self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                                nil, self.cosmosBalances.count))
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
@@ -99,7 +99,7 @@ extension ChainNeutron {
     
     func fetchVaultDeposit(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()
-        let query: JSON = ["voting_power_at_height" : ["address" : address]]
+        let query: JSON = ["voting_power_at_height" : ["address" : bechAddress]]
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
             $0.address = vaultsList[0]["address"].stringValue
@@ -118,7 +118,7 @@ extension ChainNeutron {
     
     func fetchNeutronVesting(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()
-        let query: JSON = ["allocation" : ["address" : address]]
+        let query: JSON = ["allocation" : ["address" : bechAddress]]
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
             $0.address = NEUTRON_VESTING_CONTRACT_ADDRESS

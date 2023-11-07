@@ -31,7 +31,7 @@ class TxSignRequestSheet: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         self.urlLabel.text = url.query
         self.wcMsgTextView.text = wcMsg?.prettyJson
-        self.addressLabel.text = selectedChain.address
+        self.addressLabel.text = selectedChain.bechAddress
         
         initData()
     }

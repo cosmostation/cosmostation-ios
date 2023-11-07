@@ -56,7 +56,7 @@ class CosmosClassVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         totalValue = selectedChain.allValue()
-        addressLabel.text = selectedChain.address
+        addressLabel.text = selectedChain.bechAddress
         onSetTabbarView()
         onSetFabButton()
         if (selectedChain.supportStaking) {
@@ -168,7 +168,7 @@ class CosmosClassVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain.rewardAddress != selectedChain.address) {
+        if (selectedChain.rewardAddress != selectedChain.bechAddress) {
             onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
             return
         }

@@ -191,8 +191,8 @@ class DappDetailVC: BaseVC, TxSignRequestDelegate {
         if let chain = baseAccount.getDisplayCosmosChains().filter ({ $0.apiName == chainName }).first {
             if (chain.isDefault == true && chain.accountKeyType.pubkeyType == .COSMOS_Secp256k1) {
                 self.selectedChain = chain
-                self.wcTrustAccount = WCTrustAccount.init(network: 459, address: chain.address ?? "")
-                self.interactor?.approveSession(accounts: [chain.address ?? ""], chainId: chainId).done { _ in }.cauterize()
+                self.wcTrustAccount = WCTrustAccount.init(network: 459, address: chain.bechAddress ?? "")
+                self.interactor?.approveSession(accounts: [chain.bechAddress ?? ""], chainId: chainId).done { _ in }.cauterize()
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
                     self.hideWait()
@@ -441,7 +441,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 
                 if let currentChainWithChainName = baseAccount.getDisplayCosmosChains().filter({ $0.apiName == chainId }).first {
                     self.selectedChain = currentChainWithChainName
-                    data["address"].stringValue = currentChainWithChainName.address ?? ""
+                    data["address"].stringValue = currentChainWithChainName.bechAddress ?? ""
                     data["publicKey"].stringValue = currentChainWithChainName.publicKey!.toHexString()
                     
                     let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
@@ -449,7 +449,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                     
                 } else if let currentChainWithChainId = baseAccount.getDisplayCosmosChains().filter({ $0.chainId == chainId }).first {
                     self.selectedChain = currentChainWithChainId
-                    data["address"].stringValue = currentChainWithChainId.address ?? ""
+                    data["address"].stringValue = currentChainWithChainId.bechAddress ?? ""
                     data["publicKey"].stringValue = currentChainWithChainId.publicKey!.toHexString()
                     
                     let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
@@ -633,7 +633,7 @@ extension DappDetailVC {
                 let accounts = Set(namespaces.value.chains!.filter { chain in
                     baseAccount.getDisplayCosmosChains().filter({ $0.chainId == chain.reference }).first != nil
                 }.compactMap { chain in
-                    WalletConnectSwiftV2.Account(chainIdentifier: chain.absoluteString, address: self.selectedChain.address)
+                    WalletConnectSwiftV2.Account(chainIdentifier: chain.absoluteString, address: self.selectedChain.bechAddress)
                 })
                 let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
                 sessionNamespaces[caip2Namespace] = sessionNamespace
@@ -662,7 +662,7 @@ extension DappDetailVC {
         } else if request.method == "cosmos_getAccounts" {
             self.wcV2Request = request
             self.wcId = request.id.right
-            let v2Accounts = [["address": self.selectedChain.address, "pubkey": self.selectedChain.publicKey?.base64EncodedString(), "algo": "secp256k1"]]
+            let v2Accounts = [["address": self.selectedChain.bechAddress, "pubkey": self.selectedChain.publicKey?.base64EncodedString(), "algo": "secp256k1"]]
             self.respondOnSign(request: request, response: AnyCodable(v2Accounts))
         }
     }

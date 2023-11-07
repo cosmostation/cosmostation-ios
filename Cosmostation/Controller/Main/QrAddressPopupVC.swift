@@ -25,7 +25,7 @@ class QrAddressPopupVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
-        addressLabel.text = selectedChain.address
+        addressLabel.text = selectedChain.bechAddress
         addressLabel.adjustsFontSizeToFitWidth = true
         if (baseAccount.type == .withMnemonic) {
             hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
@@ -49,7 +49,7 @@ class QrAddressPopupVC: BaseVC {
             }
         }
         
-        if let qrImage = generateQrCode(selectedChain.address) {
+        if let qrImage = generateQrCode(selectedChain.bechAddress) {
             rqImgView.image = UIImage(ciImage: qrImage)
             let chainLogo = UIImage.init(named: selectedChain.logo1)
             chainLogo?.addToCenter(of: rqImgView)

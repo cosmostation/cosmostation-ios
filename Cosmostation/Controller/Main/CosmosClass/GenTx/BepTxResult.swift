@@ -97,7 +97,7 @@ class BepTxResult: BaseVC {
 //BNB to KAVA
 extension BepTxResult {
     func btoK_FetchBnbAuth() {
-        AF.request(BaseNetWork.lcdAccountInfoUrl(fromChain, fromChain.address), method: .get).responseDecodable(of: JSON.self) { response in
+        AF.request(BaseNetWork.lcdAccountInfoUrl(fromChain, fromChain.bechAddress), method: .get).responseDecodable(of: JSON.self) { response in
             switch response.result {
             case .success(let value):
                 DispatchQueue.main.async(execute: {
@@ -117,7 +117,7 @@ extension BepTxResult {
         
         let bnbMsg = BinanceMessage.createHtlc(toAddress: fromBnbDuputyAdddress(toSendDenom)!.0,
                                                otherFrom: fromBnbDuputyAdddress(toSendDenom)!.1,
-                                               otherTo: toChain.address,
+                                               otherTo: toChain.bechAddress,
                                                timestamp: timeStamp,
                                                randomNumberHash: randomNumberHash,
                                                sendAmount: toSendAmount.multiplying(byPowerOf10: 8).int64Value,
@@ -127,21 +127,21 @@ extension BepTxResult {
                                                crossChain: true,
                                                memo: SWAP_MEMO_CREATE,
                                                privateKey: fromChain.privateKey!,
-                                               signerAddress: fromChain.address,
+                                               signerAddress: fromChain.bechAddress,
                                                sequence: bnbAuth["sequence"].intValue,
                                                accountNumber: bnbAuth["account_number"].intValue,
                                                chainId: fromChain.chainId!)
         
         var encoding: ParameterEncoding = URLEncoding.default
         encoding = HexEncoding(data: try! bnbMsg.encode())
-        let param: Parameters = ["address": fromChain.address]
+        let param: Parameters = ["address": fromChain.bechAddress]
         
         AF.request(BaseNetWork.broadcastUrl(fromChain), method: .post, parameters: param, encoding: encoding).responseDecodable(of: JSON.self)  { response in
             switch response.result {
             case .success(let value):
                 DispatchQueue.main.async(execute: {
                     self.sendTxHash = value.arrayValue[0]["hash"].stringValue
-                    self.swapId = KeyFac.getSwapId(self.toChain, self.toSendDenom, self.randomNumberHash, self.fromChain.address)
+                    self.swapId = KeyFac.getSwapId(self.toChain, self.toSendDenom, self.randomNumberHash, self.fromChain.bechAddress)
                     self.btoK_FetchBtoKSwapId()
                 });
 
@@ -186,7 +186,7 @@ extension BepTxResult {
     func btoK_FetchKavaAuth() {
         onUpdateProgress(2)
         let channel = getConnection()
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = toChain.address }
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = toChain.bechAddress }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
             self.btoK_CreateBepClaim(response)
         }
@@ -194,7 +194,7 @@ extension BepTxResult {
     
     func btoK_CreateBepClaim(_ auth :Cosmos_Auth_V1beta1_QueryAccountResponse) {
         let claimAtomicSwap = Kava_Bep3_V1beta1_MsgClaimAtomicSwap.with {
-            $0.from = toChain.address
+            $0.from = toChain.bechAddress
             $0.swapID = swapId
             $0.randomNumber = randomNumber
         }
@@ -241,7 +241,7 @@ extension BepTxResult {
 extension BepTxResult {
     func ktob_FetchKavaAuth() {
         let channel = getConnection()
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = fromChain.address }
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = fromChain.bechAddress }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
             self.ktob_CreatBepSend(response)
         }
@@ -253,10 +253,10 @@ extension BepTxResult {
         randomNumberHash = KeyFac.getRandomNumnerHash(randomNumber, timeStamp)
         
         let createAtomicSwap = Kava_Bep3_V1beta1_MsgCreateAtomicSwap.with {
-            $0.from = fromChain.address
+            $0.from = fromChain.bechAddress
             $0.to = fromKavaDuputyAdddress(toSendDenom)!.0
             $0.senderOtherChain = fromKavaDuputyAdddress(toSendDenom)!.1
-            $0.recipientOtherChain = toChain.address
+            $0.recipientOtherChain = toChain.bechAddress
             $0.randomNumberHash = randomNumberHash
             $0.timestamp = timeStamp
             $0.amount = [Cosmos_Base_V1beta1_Coin.with { $0.denom = toSendDenom; $0.amount = toSendAmount.stringValue }]
@@ -274,7 +274,7 @@ extension BepTxResult {
         if let response = try? Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getConnection()).broadcastTx(reqTx, callOptions: getCallOptions()).response.wait() {
             self.sendTxHash = response.txResponse.txhash
             
-            self.swapId = KeyFac.getSwapId(self.toChain, self.toSendDenom, self.randomNumberHash, self.fromChain.address)
+            self.swapId = KeyFac.getSwapId(self.toChain, self.toSendDenom, self.randomNumberHash, self.fromChain.bechAddress)
             self.ktob_FetchBtoKSwapId()
         }
     }
@@ -313,7 +313,7 @@ extension BepTxResult {
     
     func ktob_FetchBnbAuth() {
         onUpdateProgress(2)
-        AF.request(BaseNetWork.lcdAccountInfoUrl(toChain, toChain.address), method: .get).responseDecodable(of: JSON.self) { response in
+        AF.request(BaseNetWork.lcdAccountInfoUrl(toChain, toChain.bechAddress), method: .get).responseDecodable(of: JSON.self) { response in
             switch response.result {
             case .success(let value):
                 DispatchQueue.main.async(execute: {
@@ -332,14 +332,14 @@ extension BepTxResult {
                                               swapId: swapId,
                                               memo: SWAP_MEMO_CLAIM,
                                               privateKey: toChain.privateKey!,
-                                              signerAddress: toChain.address,
+                                              signerAddress: toChain.bechAddress,
                                               sequence: bnbAuth["sequence"].intValue,
                                               accountNumber: bnbAuth["account_number"].intValue,
                                               chainId: toChain.chainId)
         
         var encoding: ParameterEncoding = URLEncoding.default
         encoding = HexEncoding(data: try! bnbMsg.encode())
-        let param: Parameters = ["address": toChain.address]
+        let param: Parameters = ["address": toChain.bechAddress]
         
         AF.request(BaseNetWork.broadcastUrl(toChain), method: .post, parameters: param, encoding: encoding).responseDecodable(of: JSON.self)  { response in
             switch response.result {

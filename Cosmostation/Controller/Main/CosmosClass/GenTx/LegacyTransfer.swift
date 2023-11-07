@@ -311,7 +311,7 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return;
         }
-        if (scanedString[0] == selectedChain.address) {
+        if (scanedString[0] == selectedChain.bechAddress) {
             self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
             return;
         }
@@ -378,14 +378,14 @@ extension LegacyTransfer {
                                              toAddress: self.recipientAddress!,
                                              memo: self.txMemo,
                                              privateKey: self.selectedChain.privateKey!,
-                                             signerAddress: self.selectedChain.address,
+                                             signerAddress: self.selectedChain.bechAddress,
                                              sequence: bnbChain.lcdAccountInfo["sequence"].intValue,
                                              accountNumber: bnbChain.lcdAccountInfo["account_number"].intValue,
                                              chainId: self.selectedChain.chainId)
         
         var encoding: ParameterEncoding = URLEncoding.default
         encoding = HexEncoding(data: try bnbMsg.encode())
-        let param: Parameters = ["address": self.selectedChain.address]
+        let param: Parameters = ["address": self.selectedChain.bechAddress]
         
         return try? await AF.request(BaseNetWork.broadcastUrl(self.selectedChain), method: .post, parameters: param, encoding: encoding, headers: [:]).serializingDecodable(JSON.self).value
     }
@@ -397,7 +397,7 @@ extension LegacyTransfer {
         let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(NSDecimalNumber(string: OKT_BASE_FEE), 18))
         let fee = L_Fee(BASE_GAS_AMOUNT, [gasCoin])
         
-        let okMsg = L_Generator.oktSendMsg(selectedChain.address, recipientAddress!, [sendCoin])
+        let okMsg = L_Generator.oktSendMsg(selectedChain.bechAddress, recipientAddress!, [sendCoin])
         let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
         let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
         

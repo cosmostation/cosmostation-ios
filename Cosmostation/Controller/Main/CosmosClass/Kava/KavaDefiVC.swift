@@ -53,7 +53,7 @@ class KavaDefiVC: BaseVC {
     func onFetchData() {
         Task {
             let channel = getConnection()
-            if let incentive = try? await fetchIncentive(channel, selectedChain.address),
+            if let incentive = try? await fetchIncentive(channel, selectedChain.bechAddress),
                let pricefeed = try? await fetchPriceFeed(channel) {
                 self.incentive = incentive
                 self.priceFeed = pricefeed

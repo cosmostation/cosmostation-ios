@@ -62,8 +62,8 @@ class KavaLendListVC: BaseVC {
                let hardInterestRate = try? await fetchLendingInterestRate(channel),
                let hardTotalDeposit = try? await fetchLendingTotalDeposit(channel),
                let hardTotalBorrow = try? await fetchLendingTotalBorrow(channel),
-               let myDeposit = try? await fetchLendingMyDeposit(channel, selectedChain.address),
-               let myBorrow = try? await fetchLendingMyBorrow(channel, selectedChain.address) {
+               let myDeposit = try? await fetchLendingMyDeposit(channel, selectedChain.bechAddress),
+               let myBorrow = try? await fetchLendingMyBorrow(channel, selectedChain.bechAddress) {
                 
                 self.hardParams = hardParam?.params
                 self.hardInterestRates = hardInterestRate?.interestRates

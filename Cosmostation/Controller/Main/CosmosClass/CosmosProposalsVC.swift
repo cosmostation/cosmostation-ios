@@ -85,7 +85,7 @@ class CosmosProposalsVC: BaseVC {
         
         Task {
             if let proposals = try? await fetchProposals(selectedChain),
-               let votes = try? await fetchMyVotes(selectedChain, selectedChain.address) {
+               let votes = try? await fetchMyVotes(selectedChain, selectedChain.bechAddress) {
                 proposals.forEach { proposal in
                     let msProposal = MintscanProposal(proposal)
                     if (msProposal.isVotingPeriod()) {

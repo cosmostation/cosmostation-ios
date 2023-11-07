@@ -154,7 +154,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain.rewardAddress != selectedChain.address) {
+        if (selectedChain.rewardAddress != selectedChain.bechAddress) {
             onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
             return
         }
@@ -246,7 +246,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0) {
-            if (rewardAddress?.isEmpty == true || rewardAddress == selectedChain.address) { return 0 }
+            if (rewardAddress?.isEmpty == true || rewardAddress == selectedChain.bechAddress) { return 0 }
             else  { return 40 }
         } else if (section == 1) {
             return (delegations.count > 0) ? 40 : 0
@@ -295,7 +295,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath.section == 0) {
-            if (rewardAddress?.isEmpty == true || rewardAddress == selectedChain.address) { return 0 }
+            if (rewardAddress?.isEmpty == true || rewardAddress == selectedChain.bechAddress) { return 0 }
         }
         return UITableView.automaticDimension;
     }

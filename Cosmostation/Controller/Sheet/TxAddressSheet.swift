@@ -73,13 +73,13 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
     }
     
     @IBAction func onClickSelf(_ sender: Any) {
-        addressTextField.text = selectedChain.address
+        addressTextField.text = selectedChain.bechAddress
     }
     
     @IBAction func onClickAddressBook(_ sender: UIButton) {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
-        baseSheet.senderAddress = selectedChain.address
+        baseSheet.senderAddress = selectedChain.bechAddress
         baseSheet.targetChain = recipientChain
         if (addressSheetType == .EvmTransfer) {
             baseSheet.sheetType = .SelectRecipientEvmAddress
@@ -113,7 +113,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             }
             
         } else {
-            if (userInput == selectedChain.address) {
+            if (userInput == selectedChain.bechAddress) {
                 self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
                 return
             }

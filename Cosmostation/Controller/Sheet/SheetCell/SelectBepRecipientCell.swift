@@ -23,7 +23,7 @@ class SelectBepRecipientCell: UITableViewCell {
     func onBindBepRecipient(_ chain: CosmosClass) {
         if let bnbChain = chain as? ChainBinanceBeacon {
             chainImg.image =  UIImage.init(named: bnbChain.logo1)
-            addressLabel.text = chain.address
+            addressLabel.text = chain.bechAddress
             
             let availableAmount = bnbChain.lcdBalanceAmount(bnbChain.stakeDenom)
             availableAmountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableAmountLabel!.font, 8)
@@ -31,7 +31,7 @@ class SelectBepRecipientCell: UITableViewCell {
             
         } else {
             chainImg.image =  UIImage.init(named: chain.logo1)
-            addressLabel.text = chain.address
+            addressLabel.text = chain.bechAddress
             
             let availableAmount = chain.balanceAmount(chain.stakeDenom).multiplying(byPowerOf10: -6)
             availableAmountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableAmountLabel!.font, 6)

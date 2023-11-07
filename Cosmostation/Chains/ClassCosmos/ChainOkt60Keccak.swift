@@ -48,16 +48,16 @@ class ChainOkt60Keccak: CosmosClass  {
         privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        address = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
         
-        print("", tag, " ", address, "  ", evmAddress)
+        print("", tag, " ", bechAddress, "  ", evmAddress)
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        address = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
     }
     
     
@@ -72,9 +72,9 @@ extension ChainOkt60Keccak {
         let group = DispatchGroup()
         
         fetchNodeInfo(group)
-        fetchAccountInfo(group, address)
-        fetchOktDeposited(group, address)
-        fetchOktWithdraw(group, address)
+        fetchAccountInfo(group, bechAddress)
+        fetchOktDeposited(group, bechAddress)
+        fetchOktWithdraw(group, bechAddress)
         fetchOktTokens(group)
         
         group.notify(queue: .main) {
@@ -84,7 +84,7 @@ extension ChainOkt60Keccak {
             
             let refAddress =
             BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.address, self.evmAddress,
+                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                            nil, self.lcdAccountInfo.oktCoins?.count))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)

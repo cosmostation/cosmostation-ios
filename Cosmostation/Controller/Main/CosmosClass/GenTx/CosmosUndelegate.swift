@@ -226,7 +226,7 @@ class CosmosUndelegate: BaseVC {
         loadingView.isHidden = false
         
         toUndelegate = Cosmos_Staking_V1beta1_MsgUndelegate.with {
-            $0.delegatorAddress = selectedChain.address
+            $0.delegatorAddress = selectedChain.bechAddress
             $0.validatorAddress = fromValidator!.operatorAddress
             $0.amount = toCoin!
         }
@@ -236,7 +236,7 @@ class CosmosUndelegate: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                 do {
                     let simul = try await simulateTx(channel, auth!)
                     DispatchQueue.main.async {
@@ -293,7 +293,7 @@ extension CosmosUndelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                    let response = try await broadcastTx(channel, auth!) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                         self.loadingView.isHidden = true

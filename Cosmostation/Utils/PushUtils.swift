@@ -52,7 +52,7 @@ class PushUtils {
         print("sync getDisplayCosmosChains count", account.getDisplayCosmosChains().count)
         if (account.getDisplayCosmosChains().count > 0) {
             let addresses = account.getDisplayCosmosChains().map { chain in
-                ["address": chain.address, "chain": chain.apiName]
+                ["address": chain.bechAddress, "chain": chain.apiName]
             }
             let parameters: Parameters = ["fcm_token": token, "accounts": addresses]
             AF.request(WALLET_API_SYNC_PUSH_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in

@@ -31,13 +31,13 @@ class ChainXplaKeccak256: CosmosClass  {
         privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        address = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        address = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
     }
 }

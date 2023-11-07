@@ -254,7 +254,7 @@ extension Bep3Transfer: BaseSheetDelegate, BepAmountSheetDelegate, PinDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                 let bepResult = BepTxResult(nibName: "BepTxResult", bundle: nil)
                 bepResult.fromChain = self.fromChain
-                bepResult.toChain = self.toChains.filter { $0.address == self.recipientAddress }.first!
+                bepResult.toChain = self.toChains.filter { $0.bechAddress == self.recipientAddress }.first!
                 bepResult.toSendDenom = self.toSendDenom
                 bepResult.toSendAmount = self.toSendAmount
                 bepResult.modalPresentationStyle = .fullScreen

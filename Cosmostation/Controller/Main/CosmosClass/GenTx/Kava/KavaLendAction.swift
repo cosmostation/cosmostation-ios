@@ -272,7 +272,7 @@ class KavaLendAction: BaseVC {
         if (hardActionType == .Deposit) {
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address) {
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                     do {
                         let simul = try await simulDepositTx(channel, auth!, onBindDepsoitMsg())
                         DispatchQueue.main.async {
@@ -293,7 +293,7 @@ class KavaLendAction: BaseVC {
         } else if (hardActionType == .Withdraw) {
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address) {
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                     do {
                         let simul = try await simulWithdrawTx(channel, auth!, onBindWithdrawMsg())
                         DispatchQueue.main.async {
@@ -314,7 +314,7 @@ class KavaLendAction: BaseVC {
         } else if (hardActionType == .Borrow) {
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address) {
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                     do {
                         let simul = try await simulBorrowTx(channel, auth!, onBindBorrowMsg())
                         DispatchQueue.main.async {
@@ -335,7 +335,7 @@ class KavaLendAction: BaseVC {
         } else if (hardActionType == .Repay) {
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address) {
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                     do {
                         let simul = try await simulRepayTx(channel, auth!, onBindRepayMsg())
                         DispatchQueue.main.async {
@@ -361,7 +361,7 @@ class KavaLendAction: BaseVC {
             $0.amount = toAmount.stringValue
         }
         return Kava_Hard_V1beta1_MsgDeposit.with {
-            $0.depositor = selectedChain.address
+            $0.depositor = selectedChain.bechAddress
             $0.amount = [depositCoin]
         }
     }
@@ -372,7 +372,7 @@ class KavaLendAction: BaseVC {
             $0.amount = toAmount.stringValue
         }
         return Kava_Hard_V1beta1_MsgWithdraw.with {
-            $0.depositor = selectedChain.address
+            $0.depositor = selectedChain.bechAddress
             $0.amount = [withdrawCoin]
         }
     }
@@ -383,7 +383,7 @@ class KavaLendAction: BaseVC {
             $0.amount = toAmount.stringValue
         }
         return Kava_Hard_V1beta1_MsgBorrow.with {
-            $0.borrower = selectedChain.address
+            $0.borrower = selectedChain.bechAddress
             $0.amount = [borrowCoin]
         }
     }
@@ -394,8 +394,8 @@ class KavaLendAction: BaseVC {
             $0.amount = toAmount.stringValue
         }
         return Kava_Hard_V1beta1_MsgRepay.with {
-            $0.sender = selectedChain.address
-            $0.owner = selectedChain.address
+            $0.sender = selectedChain.bechAddress
+            $0.owner = selectedChain.bechAddress
             $0.amount = [repayCoin]
         }
     }
@@ -433,7 +433,7 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             if (hardActionType == .Deposit) {
                 Task {
                     let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.address),
+                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                        let response = try await broadcastDepositTx(channel, auth!, onBindDepsoitMsg()) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                             self.loadingView.isHidden = true
@@ -450,7 +450,7 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             } else if (hardActionType == .Withdraw) {
                 Task {
                     let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.address),
+                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                        let response = try await broadcastWithdrawTx(channel, auth!, onBindWithdrawMsg()) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                             self.loadingView.isHidden = true
@@ -467,7 +467,7 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             } else if (hardActionType == .Borrow) {
                 Task {
                     let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.address),
+                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                        let response = try await broadcastBorrowTx(channel, auth!, onBindBorrowMsg()) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                             self.loadingView.isHidden = true
@@ -484,7 +484,7 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             } else if (hardActionType == .Repay) {
                 Task {
                     let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.address),
+                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                        let response = try await broadcastRepayTx(channel, auth!, onBindRepayMsg()) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                             self.loadingView.isHidden = true
