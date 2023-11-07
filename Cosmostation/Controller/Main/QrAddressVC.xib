@@ -21,6 +21,7 @@
             <connections>
                 <outlet property="addressCardView" destination="RWO-dd-aOf" id="r1Q-Ol-TTw"/>
                 <outlet property="addressLabel" destination="fUT-8v-eVv" id="NlG-XY-UtX"/>
+                <outlet property="addressToggleBtn" destination="hyI-r4-hqa" id="eXX-i7-V2n"/>
                 <outlet property="chainNameLabel" destination="Log-Tr-ulL" id="YHl-Cg-y1U"/>
                 <outlet property="deprecatedLabel" destination="aLh-WY-hHi" id="54c-uX-fev"/>
                 <outlet property="evmLabel" destination="WdH-PN-TbZ" id="bYz-z0-0tK"/>
@@ -164,6 +165,9 @@
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="iconExchange"/>
+                    <connections>
+                        <action selector="onAddressToggleClick:" destination="-1" eventType="touchUpInside" id="wpt-m3-ve8"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

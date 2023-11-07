@@ -222,12 +222,18 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let selectedChain = searchCosmosChains[indexPath.row]
+        var toDpAddress = ""
+        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60") {
+            toDpAddress = selectedChain.evmAddress
+        } else {
+            toDpAddress = selectedChain.bechAddress
+        }
         let copy = UIAction(title: NSLocalizedString("str_copy", comment: ""), image: UIImage(systemName: "doc.on.doc")) { _ in
-            UIPasteboard.general.string = selectedChain.bechAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+            UIPasteboard.general.string = toDpAddress.trimmingCharacters(in: .whitespacesAndNewlines)
             self.onShowToast(NSLocalizedString("address_copied", comment: ""))
         }
         let share = UIAction(title: NSLocalizedString("str_share", comment: ""), image: UIImage(systemName: "square.and.arrow.up")) { _ in
-            let activityViewController = UIActivityViewController(activityItems: [selectedChain.bechAddress], applicationActivities: nil)
+            let activityViewController = UIActivityViewController(activityItems: [toDpAddress], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
         }
