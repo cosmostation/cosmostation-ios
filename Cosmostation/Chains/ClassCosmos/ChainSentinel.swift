@@ -21,7 +21,7 @@ class ChainSentinel: CosmosClass  {
         stakeDenom = "udvpn"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "sent"
+        bechAccountPrefix = "sent"
         
         grpcHost = "grpc-sentinel.cosmostation.io"
     }

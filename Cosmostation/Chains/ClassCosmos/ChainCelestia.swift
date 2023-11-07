@@ -21,7 +21,7 @@ class ChainCelestia: CosmosClass  {
         stakeDenom = "utia"
 
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "celestia"
+        bechAccountPrefix = "celestia"
 
         grpcHost = "grpc-celestia.cosmostation.io"
     }

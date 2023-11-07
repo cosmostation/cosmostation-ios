@@ -21,7 +21,7 @@ class ChainDesmos: CosmosClass  {
         stakeDenom = "udsm"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/852'/0'/0/X")
-        accountPrefix = "desmos"
+        bechAccountPrefix = "desmos"
         
         grpcHost = "grpc-desmos.cosmostation.io"
     }

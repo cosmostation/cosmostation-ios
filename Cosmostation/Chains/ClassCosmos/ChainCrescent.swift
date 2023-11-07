@@ -21,7 +21,7 @@ class ChainCrescent: CosmosClass  {
         stakeDenom = "ucre"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "cre"
+        bechAccountPrefix = "cre"
         
         grpcHost = "grpc-crescent.cosmostation.io"
     }

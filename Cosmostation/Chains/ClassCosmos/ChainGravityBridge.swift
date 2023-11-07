@@ -21,7 +21,7 @@ class ChainGravityBridge: CosmosClass  {
         stakeDenom = "ugraviton"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "gravity"
+        bechAccountPrefix = "gravity"
         
         grpcHost = "grpc-gravity-bridge.cosmostation.io"
     }

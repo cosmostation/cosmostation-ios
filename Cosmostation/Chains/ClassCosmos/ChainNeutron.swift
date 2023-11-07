@@ -32,7 +32,7 @@ class ChainNeutron: CosmosClass  {
         stakeDenom = "untrn"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "neutron"
+        bechAccountPrefix = "neutron"
         supportStaking = false
         
         grpcHost = "grpc-neutron.cosmostation.io"

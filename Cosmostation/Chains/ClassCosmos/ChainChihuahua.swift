@@ -21,7 +21,7 @@ class ChainChihuahua: CosmosClass  {
         stakeDenom = "uhuahua"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "chihuahua"
+        bechAccountPrefix = "chihuahua"
         
         grpcHost = "grpc-chihuahua.cosmostation.io"
     }

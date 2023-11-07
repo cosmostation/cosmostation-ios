@@ -21,7 +21,7 @@ class ChainShentu: CosmosClass  {
         stakeDenom = "uctk"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "shentu"
+        bechAccountPrefix = "shentu"
         
         grpcHost = "grpc-shentu.cosmostation.io"
     }

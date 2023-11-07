@@ -21,7 +21,7 @@ class ChainStafi: CosmosClass  {
         stakeDenom = "ufis"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "stafi"
+        bechAccountPrefix = "stafi"
         supportStaking = false
         
         grpcHost = "grpc-stafi.cosmostation.io"

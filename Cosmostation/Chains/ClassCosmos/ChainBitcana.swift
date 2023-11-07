@@ -21,7 +21,7 @@ class ChainBitcana: CosmosClass  {
         stakeDenom = "ubcna"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "bcna"
+        bechAccountPrefix = "bcna"
         
         grpcHost = "grpc-bitcanna.cosmostation.io"
     }

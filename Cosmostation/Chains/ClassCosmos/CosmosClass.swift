@@ -17,6 +17,9 @@ import web3swift
 class CosmosClass: BaseChain {
     
     var stakeDenom: String!
+    var bechAccountPrefix: String?
+    
+    
     var supportCw20 = false
     var supportErc20 = false
     var supportNft = false
@@ -41,6 +44,22 @@ class CosmosClass: BaseChain {
     
     lazy var mintscanTokens = Array<MintscanToken>()
     lazy var mintscanChainParam = JSON()
+    
+    //get bech style info from seed
+    override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
+        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
+        
+        print("", tag, " ", address)
+    }
+    
+    //get bech style info from privatekey
+    override func setInfoWithPrivateKey(_ priKey: Data) {
+        privateKey = priKey
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
+    }
     
     func fetchData(_ id: Int64) {
         Task {

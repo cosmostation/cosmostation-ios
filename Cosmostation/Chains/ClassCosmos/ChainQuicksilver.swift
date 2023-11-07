@@ -21,7 +21,7 @@ class ChainQuicksilver: CosmosClass  {
         stakeDenom = "uqck"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "quick"
+        bechAccountPrefix = "quick"
         
         grpcHost = "grpc-quicksilver.cosmostation.io"
     }

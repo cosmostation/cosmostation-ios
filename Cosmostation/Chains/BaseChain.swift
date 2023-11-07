@@ -17,7 +17,6 @@ class BaseChain {
     var logo2: String!
     var isDefault = true
     var apiName: String!
-    var accountPrefix: String?
     
     
     var accountKeyType: AccountKeyType!
@@ -39,21 +38,10 @@ class BaseChain {
         return accountKeyType.hdPath.replacingOccurrences(of: "X", with: lastPath)
     }
     
-    //get bech style info from seed
-    func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
-        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
-        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
-        
-        print("", tag, " ", address)
-    }
     
-    //get bech style info from privatekey
-    func setInfoWithPrivateKey(_ priKey: Data) {
-        privateKey = priKey
-        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
-    }
+    func setInfoWithSeed(_ seed: Data, _ lastPath: String) { }
+    
+    func setInfoWithPrivateKey(_ priKey: Data) { }
     
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if (usd == true) {

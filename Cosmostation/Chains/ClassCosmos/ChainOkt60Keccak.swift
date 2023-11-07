@@ -31,7 +31,7 @@ class ChainOkt60Keccak: CosmosClass  {
         stakeDenom = "okt"
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        accountPrefix = "ex"
+        bechAccountPrefix = "ex"
         supportStaking = false
         evmCompatible = true
     }
@@ -48,7 +48,7 @@ class ChainOkt60Keccak: CosmosClass  {
         privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        address = KeyFac.convertEvmToBech32(evmAddress, accountPrefix!)
+        address = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
         
         print("", tag, " ", address, "  ", evmAddress)
     }
@@ -57,7 +57,7 @@ class ChainOkt60Keccak: CosmosClass  {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        address = KeyFac.convertEvmToBech32(evmAddress, accountPrefix!)
+        address = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
     }
     
     

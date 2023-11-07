@@ -78,7 +78,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         view.addGestureRecognizer(dismissTap)
         
 //        print("senderAddress ", senderAddress)
-//        print("targetChain ", targetChain.accountPrefix)
+//        print("targetChain ", targetChain.bechAccountPrefix)
 //        
 //        let ref = BaseData.instance.selectAllRefAddresses()
 //        print("ref ", ref.count)
@@ -181,7 +181,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectRecipientAddress) {
             sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
-                if (refAddress.bechAddress.starts(with: targetChain.accountPrefix!) &&
+                if (refAddress.bechAddress.starts(with: targetChain.bechAccountPrefix!) &&
                     refAddress.bechAddress != senderAddress) {
                     refAddresses.append(refAddress)
                 }

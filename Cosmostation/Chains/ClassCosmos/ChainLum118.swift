@@ -22,7 +22,7 @@ class ChainLum118: CosmosClass  {
         stakeDenom = "ulum"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "lum"
+        bechAccountPrefix = "lum"
         
         grpcHost = "grpc-lum.cosmostation.io"
     }

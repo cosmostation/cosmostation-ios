@@ -21,7 +21,7 @@ class ChainSecre529: CosmosClass  {
         stakeDenom = "uscrt"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/529'/0'/0/X")
-        accountPrefix = "secret"
+        bechAccountPrefix = "secret"
         
         grpcHost = "grpc-secret.cosmostation.io"
     }

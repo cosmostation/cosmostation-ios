@@ -21,7 +21,7 @@ class ChainUmee: CosmosClass {
         stakeDenom = "uumee"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "umee"
+        bechAccountPrefix = "umee"
         
         grpcHost = "grpc-umee.cosmostation.io"
     }

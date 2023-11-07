@@ -21,7 +21,7 @@ class ChainXpla: CosmosClass  {
         stakeDenom = "axpla"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/60'/0'/0/X")
-        accountPrefix = "xpla"
+        bechAccountPrefix = "xpla"
         
         grpcHost = "grpc-xpla.cosmostation.io"
     }

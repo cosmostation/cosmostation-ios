@@ -21,7 +21,7 @@ class ChainNyx: CosmosClass  {
         stakeDenom = "unyx"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "n"
+        bechAccountPrefix = "n"
         
         grpcHost = "grpc-nyx.cosmostation.io"
     }

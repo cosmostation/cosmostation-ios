@@ -304,7 +304,7 @@ public class WUtils {
             return false
         }
         
-        if (!address!.starts(with: chain.accountPrefix! + "1")) {
+        if (!address!.starts(with: chain.bechAccountPrefix! + "1")) {
             return false
         }
         return true

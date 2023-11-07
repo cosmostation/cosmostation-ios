@@ -21,7 +21,7 @@ class ChainOmniflix: CosmosClass  {
         stakeDenom = "uflix"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "omniflix"
+        bechAccountPrefix = "omniflix"
         
         grpcHost = "grpc-omniflix.cosmostation.io"
     }

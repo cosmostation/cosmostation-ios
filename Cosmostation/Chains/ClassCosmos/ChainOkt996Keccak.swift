@@ -17,7 +17,7 @@ class ChainOkt996Keccak: ChainOkt60Keccak  {
         tag = "okt996_Keccak"
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/996'/0'/0/X")
-        accountPrefix = "ex"
+        bechAccountPrefix = "ex"
         evmCompatible = false
     }
     

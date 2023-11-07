@@ -29,7 +29,7 @@ class ChainBinanceBeacon: CosmosClass  {
         stakeDenom = "BNB"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/714'/0'/0/X")
-        accountPrefix = "bnb"
+        bechAccountPrefix = "bnb"
         supportStaking = false
     }
     

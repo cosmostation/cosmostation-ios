@@ -21,7 +21,7 @@ class ChainBitsong: CosmosClass  {
         stakeDenom = "ubtsg"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/639'/0'/0/X")
-        accountPrefix = "bitsong"
+        bechAccountPrefix = "bitsong"
         
         grpcHost = "grpc-bitsong.cosmostation.io"
     }

@@ -21,7 +21,7 @@ class ChainComdex: CosmosClass  {
         stakeDenom = "ucmdx"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "comdex"
+        bechAccountPrefix = "comdex"
         
         grpcHost = "grpc-comdex.cosmostation.io"
     }

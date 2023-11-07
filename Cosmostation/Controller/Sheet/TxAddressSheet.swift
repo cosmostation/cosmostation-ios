@@ -171,7 +171,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             view.isUserInteractionEnabled = false
             loadingView.isHidden = false
             nameservices.removeAll()
-            let prefix = recipientChain.accountPrefix!
+            let prefix = recipientChain.bechAccountPrefix!
             
             Task {
                 if let starname = try await checkStarname(userInput!) {

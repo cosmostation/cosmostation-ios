@@ -21,7 +21,7 @@ class ChainRegen: CosmosClass  {
         stakeDenom = "uregen"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "regen"
+        bechAccountPrefix = "regen"
         
         grpcHost = "grpc-regen.cosmostation.io"
     }

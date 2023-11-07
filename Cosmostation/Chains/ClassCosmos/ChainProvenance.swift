@@ -21,7 +21,7 @@ class ChainProvenance: CosmosClass  {
         stakeDenom = "nhash"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/505'/0'/0/X")
-        accountPrefix = "pb"
+        bechAccountPrefix = "pb"
         
         grpcHost = "grpc-provenance.cosmostation.io"
     }
