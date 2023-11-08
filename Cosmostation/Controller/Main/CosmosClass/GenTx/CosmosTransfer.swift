@@ -112,7 +112,12 @@ class CosmosTransfer: BaseVC {
             if (transferAssetType == .CoinTransfer) {
                 if (msAsset.chain == selectedChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {
                     //add backward path
-                    if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.beforeChain(selectedChain.apiName) }).first {
+                    if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.beforeChain(selectedChain.apiName) && $0.evmCompatible == true }).first {
+                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
+                            recipientableChains.append(sendable)
+                        }
+                        
+                    } else if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.beforeChain(selectedChain.apiName) }).first {
                         if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
                             recipientableChains.append(sendable)
                         }
@@ -120,7 +125,12 @@ class CosmosTransfer: BaseVC {
                     
                 } else if (msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
                     //add forward path
-                    if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.chain }).first {
+                    if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.chain && $0.evmCompatible == true }).first {
+                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
+                            recipientableChains.append(sendable)
+                        }
+                        
+                    } else if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.chain }).first {
                         if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
                             recipientableChains.append(sendable)
                         }

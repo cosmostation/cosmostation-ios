@@ -463,18 +463,18 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectRecipientAddress) {
             if (indexPath.section == 0) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRefAddressCell") as? SelectRefAddressCell
-                cell?.onBindRefAddress(refAddresses[indexPath.row])
+                cell?.onBindRefAddress(targetChain, refAddresses[indexPath.row])
                 return cell!
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAddressBookCell") as? SelectAddressBookCell
-                cell?.onBindAddressBook(addressBook[indexPath.row])
+                cell?.onBindAddressBook(targetChain, addressBook[indexPath.row])
                 return cell!
             }
             
         } else if (sheetType == .SelectRecipientEvmAddress) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRefAddressCell") as? SelectRefAddressCell
             if (indexPath.section == 0) {
-                cell?.onBindEvmRefAddress(refAddresses[indexPath.row])
+                cell?.onBindEvmRefAddress(targetChain, refAddresses[indexPath.row])
             } else {
                 
             }
@@ -566,15 +566,20 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectRecipientAddress) {
             if (indexPath.section == 0) {
-                let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].bechAddress]
-                sheetDelegate?.onSelectedSheet(sheetType, result)
+                if (targetChain is ChainOkt60Keccak) {
+                    let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].evmAddress]
+                    sheetDelegate?.onSelectedSheet(sheetType, result)
+                } else {
+                    let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].bechAddress]
+                    sheetDelegate?.onSelectedSheet(sheetType, result)
+                }
             } else {
                 let result: [String : Any] = ["index" : indexPath.row, "address" : addressBook[indexPath.row].dpAddress, "memo" : addressBook[indexPath.row].memo]
                 sheetDelegate?.onSelectedSheet(sheetType, result)
             }
             
         } else if (sheetType == .SelectRecipientEvmAddress) {
-            let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].bechAddress]
+            let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].evmAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectBepRecipientAddress) {

@@ -119,29 +119,41 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             }
         }
         
-        //받는 계정의 펍키 타입이 코스모스타입이면 안된다. 받는애한테 락된다.
-        if (addressSheetType == .EvmTransfer && recipientChain is ChainKava60) {
+        if (addressSheetType == .EvmTransfer) {
+            var bechAddress = ""
             if (WUtils.isValidEvmAddress(userInput)) {
-                let kavaBechAddress = KeyFac.convertEvmToBech32(userInput!, recipientChain.bechAccountPrefix!)
+                bechAddress = KeyFac.convertEvmToBech32(userInput!, recipientChain.bechAccountPrefix!)
+                
+            } else if (WUtils.isValidBechAddress(recipientChain, userInput)) {
+                bechAddress = userInput!
+                
+            } else {
+                self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                return;
+            }
+            
+            //카바 시스템 코너 케이스 받는 계정의 펍키 타입이 코스모스타입이면 안된다. 받는애한테 락된다.
+            if (recipientChain is ChainKava60) {
                 Task {
                     let channel = getConnection(ChainKava60())
-                    if let recipientAuth = try? await self.fetchAuth(channel, kavaBechAddress) {
+                    if let recipientAuth = try? await self.fetchAuth(channel, bechAddress) {
                         if (WUtils.onParseAuthPubkeyType(recipientAuth)?.contains("cosmos.crypto.secp256k1") == false) {
                             DispatchQueue.main.async {
                                 self.addressDelegate?.onInputedAddress(userInput!, nil)
                                 self.dismiss(animated: true)
                             }
-                            return
                         }
                     }
                     DispatchQueue.main.async {
                         self.onShowToast(NSLocalizedString("error_recipient_not_support_evm", comment: ""))
                     }
                 }
+                return;
+                
             } else {
-                self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                self.addressDelegate?.onInputedAddress(userInput!, nil)
+                self.dismiss(animated: true)
             }
-            return;
         }
             
         if (recipientChain is ChainOkt60Keccak) {

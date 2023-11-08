@@ -32,7 +32,7 @@ class QrAddressVC: BaseVC {
         addressToggleBtn.isHidden = selectedChain.evmAddress.isEmpty
         chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
         
-        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60") {
+        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
             toDpAddress = selectedChain.evmAddress
         } else {
             toDpAddress = selectedChain.bechAddress

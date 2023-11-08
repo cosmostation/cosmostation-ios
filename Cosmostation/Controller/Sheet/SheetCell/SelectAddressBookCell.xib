@@ -39,8 +39,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Address" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lh7-US-WS0">
-                                <rect key="frame" x="20.000000000000004" y="37.666666666666664" width="47.333333333333343" height="15.333333333333336"/>
-                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                <rect key="frame" x="20" y="35.666666666666664" width="298" height="16.333333333333336"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="13"/>
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -54,12 +54,13 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="lh7-US-WS0" firstAttribute="top" secondItem="ScB-Pi-WFS" secondAttribute="bottom" constant="6" id="1Q7-tJ-BZW"/>
+                            <constraint firstItem="lh7-US-WS0" firstAttribute="top" secondItem="ScB-Pi-WFS" secondAttribute="bottom" constant="4" id="1Q7-tJ-BZW"/>
                             <constraint firstAttribute="bottom" secondItem="cv5-oW-T7w" secondAttribute="bottom" id="811-RV-ul0"/>
                             <constraint firstItem="ScB-Pi-WFS" firstAttribute="leading" secondItem="UKD-6N-ZJ8" secondAttribute="leading" constant="20" id="AU2-Ty-sqa"/>
                             <constraint firstItem="zlZ-61-PSD" firstAttribute="centerY" secondItem="ScB-Pi-WFS" secondAttribute="centerY" id="MRa-f9-y26"/>
                             <constraint firstAttribute="trailing" secondItem="cv5-oW-T7w" secondAttribute="trailing" constant="12" id="R6V-Wy-e0q"/>
                             <constraint firstItem="ScB-Pi-WFS" firstAttribute="top" secondItem="UKD-6N-ZJ8" secondAttribute="top" constant="14" id="UUr-LQ-zfj"/>
+                            <constraint firstAttribute="trailing" secondItem="lh7-US-WS0" secondAttribute="trailing" constant="20" id="iam-0j-ox1"/>
                             <constraint firstAttribute="height" constant="68" id="lxa-JA-nKD"/>
                             <constraint firstItem="lh7-US-WS0" firstAttribute="leading" secondItem="ScB-Pi-WFS" secondAttribute="leading" id="mOk-1k-vSe"/>
                             <constraint firstItem="cv5-oW-T7w" firstAttribute="leading" secondItem="UKD-6N-ZJ8" secondAttribute="leading" constant="12" id="o2L-3V-fOq"/>

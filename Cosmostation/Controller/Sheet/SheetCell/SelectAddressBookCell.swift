@@ -26,7 +26,7 @@ class SelectAddressBookCell: UITableViewCell {
         addressLabel.text = ""
     }
     
-    func onBindAddressBook(_ book: AddressBook) {
+    func onBindAddressBook(_ recipientChain: CosmosClass, _ book: AddressBook) {
         bookNameLabel.text = book.bookName
         addressLabel.text = book.dpAddress
         memoLabel.text = book.memo

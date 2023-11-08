@@ -33,8 +33,8 @@ class EvmTransfer: BaseVC {
     @IBOutlet weak var toAddressCardView: FixCardView!
     @IBOutlet weak var toAddressTitle: UILabel!
     @IBOutlet weak var toAddressHint: UILabel!
-    @IBOutlet weak var toAddressLabel: UILabel!
-    @IBOutlet weak var toEvmAddressLabel: UILabel!
+    @IBOutlet weak var toAddressMasterLabel: UILabel!
+    @IBOutlet weak var toAddressSlaveLabel: UILabel!
     
     @IBOutlet weak var feeCardView: FixCardView!
     @IBOutlet weak var feeSelectImg: UIImageView!
@@ -53,7 +53,9 @@ class EvmTransfer: BaseVC {
     
     var availableAmount = NSDecimalNumber.zero
     var toSendAmount = NSDecimalNumber.zero
-    var selectedRecipientAddress: String?
+    var userInputAddress: String?
+    var recipientBechAddress: String?
+    var recipientEvmAddress: String?
     var ethereumTransaction: EthereumTransaction?
     var feeAmount = NSDecimalNumber(string: "600000000000000")
 
@@ -86,7 +88,7 @@ class EvmTransfer: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let gap = UIScreen.main.bounds.size.height - 490
+        let gap = UIScreen.main.bounds.size.height - 510
         if (gap > 0) { midGapConstraint.constant = gap }
         else { midGapConstraint.constant = 60 }
     }
@@ -142,8 +144,8 @@ class EvmTransfer: BaseVC {
         let addressSheet = TxAddressSheet(nibName: "TxAddressSheet", bundle: nil)
         addressSheet.selectedChain = selectedChain
         addressSheet.recipientChain = selectedChain
-        if (selectedRecipientAddress?.isEmpty == false) {
-            addressSheet.existedAddress = selectedRecipientAddress
+        if (userInputAddress?.isEmpty == false) {
+            addressSheet.existedAddress = userInputAddress
         }
         addressSheet.addressSheetType = .EvmTransfer
         addressSheet.addressDelegate = self
@@ -151,20 +153,23 @@ class EvmTransfer: BaseVC {
     }
     
     func onUpdateToAddressView() {
-        if (selectedRecipientAddress == nil ||
-            selectedRecipientAddress?.isEmpty == true) {
+        if (userInputAddress == nil ||
+            userInputAddress?.isEmpty == true) {
+            recipientBechAddress = nil
+            recipientEvmAddress = nil
             toAddressHint.isHidden = false
-            toAddressLabel.isHidden = true
-            toEvmAddressLabel.isHidden = true
+            toAddressMasterLabel.isHidden = true
+            toAddressSlaveLabel.isHidden = true
             
         } else {
             toAddressHint.isHidden = true
-            toAddressLabel.isHidden = false
-            toAddressLabel.text = selectedRecipientAddress
-            toAddressLabel.adjustsFontSizeToFitWidth = true
-            toEvmAddressLabel.isHidden = false
-            toEvmAddressLabel.text = "(" + KeyFac.convertBech32ToEvm(selectedRecipientAddress!) + ")"
-            toEvmAddressLabel.adjustsFontSizeToFitWidth = true
+            toAddressMasterLabel.text = recipientEvmAddress
+            toAddressMasterLabel.isHidden = false
+            toAddressMasterLabel.adjustsFontSizeToFitWidth = true
+            
+            toAddressSlaveLabel.text = "(" + recipientBechAddress! + ")"
+            toAddressSlaveLabel.isHidden = false
+            toAddressSlaveLabel.adjustsFontSizeToFitWidth = true
         }
         onSimul()
     }
@@ -186,7 +191,7 @@ class EvmTransfer: BaseVC {
 
     func onSimul() {
         if (toSendAmount == NSDecimalNumber.zero ) { return }
-        if (selectedRecipientAddress == nil || selectedRecipientAddress?.isEmpty == true) { return }
+        if (recipientEvmAddress == nil || recipientEvmAddress?.isEmpty == true) { return }
         view.isUserInteractionEnabled = false
         sendBtn.isEnabled = false
         loadingView.isHidden = false
@@ -197,8 +202,10 @@ class EvmTransfer: BaseVC {
             
             let chainID = web3.provider.network?.chainID
             let contractAddress = EthereumAddress.init(fromHex: selectedMsToken!.address!)
-            let senderAddress = EthereumAddress.init(fromHex: KeyFac.convertBech32ToEvm(selectedChain.bechAddress))
-            let recipientAddress = EthereumAddress.init(fromHex: KeyFac.convertBech32ToEvm(selectedRecipientAddress!))
+//            let senderAddress = EthereumAddress.init(fromHex: KeyFac.convertBech32ToEvm(selectedChain.bechAddress))
+//            let recipientAddress = EthereumAddress.init(fromHex: KeyFac.convertBech32ToEvm(selectedRecipientAddress!))
+            let senderAddress = EthereumAddress.init(selectedChain.evmAddress)
+            let recipientAddress = EthereumAddress.init(recipientEvmAddress!)
             let erc20token = ERC20(web3: web3, provider: web3.provider, address: contractAddress!)
             let calSendAmount = toSendAmount.multiplying(byPowerOf10: -selectedMsToken!.decimals!)
             let nonce = try? web3.eth.getTransactionCount(address: senderAddress!)
@@ -249,7 +256,16 @@ extension EvmTransfer: AmountSheetDelegate, AddressDelegate, PinDelegate {
     }
     
     func onInputedAddress(_ address: String, _ memo: String?) {
-        selectedRecipientAddress = address
+        recipientEvmAddress = nil
+        userInputAddress = address
+        if (WUtils.isValidBechAddress(selectedChain, userInputAddress)) {
+            recipientBechAddress = userInputAddress
+            recipientEvmAddress = KeyFac.convertBech32ToEvm(userInputAddress!)
+        }
+        if (WUtils.isValidEvmAddress(userInputAddress)) {
+            recipientBechAddress = KeyFac.convertEvmToBech32(userInputAddress!, selectedChain.bechAccountPrefix!)
+            recipientEvmAddress = userInputAddress
+        }
         onUpdateToAddressView()
     }
     

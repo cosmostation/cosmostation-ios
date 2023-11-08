@@ -223,7 +223,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let selectedChain = searchCosmosChains[indexPath.row]
         var toDpAddress = ""
-        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60") {
+        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
             toDpAddress = selectedChain.evmAddress
         } else {
             toDpAddress = selectedChain.bechAddress
