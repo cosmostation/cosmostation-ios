@@ -17,7 +17,6 @@ class ChainKava118: ChainKava60  {
         tag = "kava118"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        bechAccountPrefix = "kava"
         evmCompatible = false
         supportErc20 = false
     }

@@ -113,25 +113,18 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             }
             
         } else {
-            if (userInput == selectedChain.bechAddress) {
+            if (userInput == selectedChain.bechAddress || userInput == selectedChain.evmAddress) {
                 self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
                 return
             }
         }
         
-        //받는 계정의 펍키 타입이 ethsecp256k1 일때만 통과시켜 줘야한다. 아니면 받는애한테 락된다.
+        //받는 계정의 펍키 타입이 코스모스타입이면 안된다. 받는애한테 락된다.
         if (addressSheetType == .EvmTransfer && recipientChain is ChainKava60) {
-            var kavaBechAddress = ""
-            if (WUtils.isValidBechAddress(recipientChain, userInput)) {
-                kavaBechAddress = userInput!
-            } else if (userInput?.starts(with: "0x") == true) {
-                if let evmAddess = EthereumAddress.init(userInput!) {
-                    kavaBechAddress = KeyFac.convertEvmToBech32(evmAddess.address, "kava")
-                }
-            }
-            if (WUtils.isValidBechAddress(recipientChain, kavaBechAddress)) {
+            if (WUtils.isValidEvmAddress(userInput)) {
+                let kavaBechAddress = KeyFac.convertEvmToBech32(userInput!, recipientChain.bechAccountPrefix!)
                 Task {
-                    let channel = getConnection(ChainKava118())
+                    let channel = getConnection(ChainKava60())
                     if let recipientAuth = try? await self.fetchAuth(channel, kavaBechAddress) {
                         if (WUtils.onParseAuthPubkeyType(recipientAuth)?.contains("cosmos.crypto.secp256k1") == false) {
                             DispatchQueue.main.async {
@@ -145,17 +138,14 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
                         self.onShowToast(NSLocalizedString("error_recipient_not_support_evm", comment: ""))
                     }
                 }
-                
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             }
             return;
         }
-        
-        
             
         if (recipientChain is ChainOkt60Keccak) {
-            if let evmAddess = EthereumAddress.init(userInput!) {
+            if (WUtils.isValidEvmAddress(userInput)) {
                 addressDelegate?.onInputedAddress(userInput!, nil)
                 dismiss(animated: true)
                 return
@@ -174,14 +164,6 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             let prefix = recipientChain.bechAccountPrefix!
             
             Task {
-                if let starname = try await checkStarname(userInput!) {
-                    starname.account.resources.forEach { resource in
-                        if (resource.resource.starts(with: prefix)) {
-                            nameservices.append(NameService.init("starname", userInput!, resource.resource))
-                        }
-                    }
-                }
-                
                 if let icns = try await checkOsmoname(userInput!, prefix) {
                     if let result = try? JSONDecoder().decode(JSON.self, from: icns.data) {
                         if (result["bech32_address"].stringValue.starts(with: prefix)) {
@@ -263,12 +245,6 @@ extension TxAddressSheet {
     func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
         return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func checkStarname(_ inputName: String) async throws -> Starnamed_X_Starname_V1beta1_QueryStarnameResponse? {
-        let channel = getConnection(ChainStarname())
-        let req = Starnamed_X_Starname_V1beta1_QueryStarnameRequest.with { $0.starname = inputName }
-        return try? await Starnamed_X_Starname_V1beta1_QueryNIOClient(channel: channel).starname(req, callOptions: getCallOptions()).response.get()
     }
     
     func checkOsmoname(_ inputName: String, _ prefix: String) async throws -> Cosmwasm_Wasm_V1_QuerySmartContractStateResponse? {

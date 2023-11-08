@@ -722,7 +722,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainSommelier())
     result.append(ChainStafi())
     result.append(ChainStargaze())
-    result.append(ChainStarname())
+//    result.append(ChainStarname())
     result.append(ChainStride())
     result.append(ChainTerra())
     result.append(ChainTeritori())
