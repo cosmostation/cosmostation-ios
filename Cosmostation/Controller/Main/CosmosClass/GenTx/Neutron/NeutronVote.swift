@@ -280,7 +280,7 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
         if (sheetType == .SelectFeeCoin) {
             if let index = result["index"] as? Int,
                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
-                txFee.amount[0].denom = selectedDenom
+                txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }

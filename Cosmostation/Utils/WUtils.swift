@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftProtobuf
+import web3swift
 
 
 
@@ -292,7 +293,7 @@ public class WUtils {
 //        return nil
 //    }
 //
-    static func isValidChainAddress(_ chain: CosmosClass, _ address: String?) -> Bool {
+    static func isValidBechAddress(_ chain: CosmosClass, _ address: String?) -> Bool {
         if (address?.isEmpty == true) {
             return false
         }
@@ -309,6 +310,16 @@ public class WUtils {
         }
         return true
         
+    }
+    
+    static func isValidEvmAddress(_ address: String?) -> Bool {
+        if (address?.isEmpty == true) {
+            return false
+        }
+        if let evmAddess = EthereumAddress.init(address!) {
+            return true
+        }
+        return false
     }
 //
 //    static func getChainsFromAddress(_ address: String?) -> ChainType? {

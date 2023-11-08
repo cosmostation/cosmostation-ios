@@ -581,7 +581,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
         if (sheetType == .SelectFeeCoin) {
             if let index = result["index"] as? Int,
                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
-                txFee.amount[0].denom = selectedDenom
+                txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }
@@ -625,7 +625,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             return;
         }
         
-        if (WUtils.isValidChainAddress(selectedRecipientChain, scanedString[0])) {
+        if (WUtils.isValidBechAddress(selectedRecipientChain, scanedString[0])) {
             selectedRecipientAddress = scanedString[0]
             if (scanedString.count > 1) {
                 onUpdateMemoView(scanedString[1], true)

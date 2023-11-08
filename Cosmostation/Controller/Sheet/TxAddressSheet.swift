@@ -122,14 +122,14 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
         //받는 계정의 펍키 타입이 ethsecp256k1 일때만 통과시켜 줘야한다. 아니면 받는애한테 락된다.
         if (addressSheetType == .EvmTransfer && recipientChain is ChainKava60) {
             var kavaBechAddress = ""
-            if (WUtils.isValidChainAddress(recipientChain, userInput)) {
+            if (WUtils.isValidBechAddress(recipientChain, userInput)) {
                 kavaBechAddress = userInput!
             } else if (userInput?.starts(with: "0x") == true) {
                 if let evmAddess = EthereumAddress.init(userInput!) {
                     kavaBechAddress = KeyFac.convertEvmToBech32(evmAddess.address, "kava")
                 }
             }
-            if (WUtils.isValidChainAddress(recipientChain, kavaBechAddress)) {
+            if (WUtils.isValidBechAddress(recipientChain, kavaBechAddress)) {
                 Task {
                     let channel = getConnection(ChainKava118())
                     if let recipientAuth = try? await self.fetchAuth(channel, kavaBechAddress) {
@@ -162,7 +162,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             }
         }
         
-        if (WUtils.isValidChainAddress(recipientChain, userInput)) {
+        if (WUtils.isValidBechAddress(recipientChain, userInput)) {
             addressDelegate?.onInputedAddress(userInput!, nil)
             dismiss(animated: true)
             

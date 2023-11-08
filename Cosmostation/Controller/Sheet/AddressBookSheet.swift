@@ -81,7 +81,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
             //edit mode
             let chain = ALLCOSMOSCLASS().filter { addressBook!.chainName == $0.name }.first
             if (chain != nil) {
-                if (WUtils.isValidChainAddress(chain!, addressInput!)) {
+                if (WUtils.isValidBechAddress(chain!, addressInput!)) {
                     addressBook!.bookName = nameInput!
                     addressBook!.dpAddress = addressInput!
                     addressBook!.memo = memoInput
@@ -106,7 +106,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
             //new add mode
             let chain = ALLCOSMOSCLASS().filter { addressInput!.starts(with: $0.bechAccountPrefix!) == true }.first
             if (chain != nil) {
-                if (WUtils.isValidChainAddress(chain!, addressInput!)) {
+                if (WUtils.isValidBechAddress(chain!, addressInput!)) {
                     let addressBook = AddressBook.init(nameInput!, chain!.name, addressInput!, memoInput, Date().millisecondsSince1970)
                     let result = BaseData.instance.updateAddressBook(addressBook)
                     bookDelegate?.onAddressBookUpdated(result)
