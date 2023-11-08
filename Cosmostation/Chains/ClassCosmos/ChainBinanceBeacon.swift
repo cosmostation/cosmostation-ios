@@ -37,6 +37,11 @@ class ChainBinanceBeacon: CosmosClass  {
         fetchLcdData(id)
     }
     
+    override func isTxFeePayable() -> Bool {
+        let availableAmount = lcdBalanceAmount(stakeDenom)
+        return availableAmount.compare(NSDecimalNumber(string: BNB_BEACON_BASE_FEE)).rawValue > 0
+    }
+    
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
         return lcdBalanceValue(stakeDenom, usd)
     }

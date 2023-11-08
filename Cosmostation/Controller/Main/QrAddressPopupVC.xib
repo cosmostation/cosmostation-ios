@@ -114,7 +114,7 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZh-Ce-tC6" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="476.66666666666669" width="369" height="54.000000000000057"/>
+                    <rect key="frame" x="12" y="480.66666666666669" width="369" height="54.000000000000057"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbX-h2-CAr">
                             <rect key="frame" x="8" y="18.333333333333314" width="353" height="17.666666666666671"/>
@@ -148,7 +148,7 @@
                 <constraint firstItem="jvu-Gn-DDF" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="SRc-hw-jJR"/>
                 <constraint firstItem="oBF-2o-bRk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="38" id="Tr3-3P-b3a"/>
                 <constraint firstItem="CzN-4r-kn9" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Ze5-7P-siN"/>
-                <constraint firstItem="jZh-Ce-tC6" firstAttribute="top" secondItem="jvu-Gn-DDF" secondAttribute="bottom" constant="20" id="b5I-q6-oRh"/>
+                <constraint firstItem="jZh-Ce-tC6" firstAttribute="top" secondItem="jvu-Gn-DDF" secondAttribute="bottom" constant="24" id="b5I-q6-oRh"/>
                 <constraint firstItem="jvu-Gn-DDF" firstAttribute="top" secondItem="CzN-4r-kn9" secondAttribute="bottom" constant="24" id="eeq-K9-wi4"/>
                 <constraint firstItem="jvu-Gn-DDF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="54" id="jX0-Sc-8BC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jvu-Gn-DDF" secondAttribute="trailing" constant="54" id="l86-xX-SQg"/>

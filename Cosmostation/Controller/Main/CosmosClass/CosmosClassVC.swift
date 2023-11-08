@@ -119,6 +119,10 @@ class CosmosClassVC: BaseVC {
     }
     
     func onSendTx() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         if (selectedChain is ChainBinanceBeacon ||
             selectedChain is ChainOkt60Keccak) {
             let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
@@ -128,10 +132,6 @@ class CosmosClassVC: BaseVC {
             self.present(transfer, animated: true)
             
         } else {
-            if (selectedChain.isTxFeePayable() == false) {
-                onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                return
-            }
             let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
             transfer.selectedChain = selectedChain
             transfer.toSendDenom = selectedChain.stakeDenom

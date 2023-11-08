@@ -36,14 +36,6 @@ class ChainOkt60Keccak: CosmosClass  {
         evmCompatible = true
     }
     
-    override func fetchData(_ id: Int64) {
-        fetchLcdData(id)
-    }
-    
-    override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        return lcdBalanceValue(stakeDenom, usd).adding(lcdOktDepositValue(usd)).adding(lcdOktWithdrawValue(usd))
-    }
-    
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
         privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
@@ -58,6 +50,19 @@ class ChainOkt60Keccak: CosmosClass  {
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
         bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+    }
+    
+    override func fetchData(_ id: Int64) {
+        fetchLcdData(id)
+    }
+    
+    override func isTxFeePayable() -> Bool {
+        let availableAmount = lcdBalanceAmount(stakeDenom)
+        return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
+    }
+    
+    override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
+        return lcdBalanceValue(stakeDenom, usd).adding(lcdOktDepositValue(usd)).adding(lcdOktWithdrawValue(usd))
     }
     
     

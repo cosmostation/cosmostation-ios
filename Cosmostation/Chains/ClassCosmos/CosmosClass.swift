@@ -62,7 +62,8 @@ class CosmosClass: BaseChain {
         bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
     }
     
-    func fetchData(_ id: Int64) {
+    //fetch account onchaindata from grpc
+    override func fetchData(_ id: Int64) {
         Task {
             if let rawParam = try? await self.fetchChainParam() {
                 mintscanChainParam = rawParam
@@ -81,6 +82,18 @@ class CosmosClass: BaseChain {
             }
         }
         fetchGrpcData(id)
+    }
+    
+    //check account payable with lowest fee
+    override func isTxFeePayable() -> Bool {
+        var result = false
+        getDefaultFeeCoins().forEach { minFee in
+            if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+                result = true
+                return
+            }
+        }
+        return result
     }
     
     func fetchPropertyData(_ channel: ClientConnection, _ id: Int64) {
@@ -160,7 +173,6 @@ class CosmosClass: BaseChain {
     func monikerImg(_ opAddress: String) -> URL {
         return URL(string: ResourceBase + apiName + "/moniker/" + opAddress + ".png") ?? URL(string: "")!
     }
-    
     
     func getGrpc() -> (host: String, port: Int) {
         if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + self.name) {
@@ -255,18 +267,6 @@ extension CosmosClass {
             }
         }
         return nil
-    }
-    
-    // check account payable with lowest fee
-    func isTxFeePayable() -> Bool {
-        var result = false
-        getDefaultFeeCoins().forEach { minFee in
-            if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
-                result = true
-                return
-            }
-        }
-        return result
     }
     
     //get user selected fee
@@ -440,15 +440,9 @@ extension CosmosClass {
         let group = DispatchGroup()
         guard let url = URL(string: rpcURL) else { return }
         guard let web3 = try? Web3.new(url) else { return }
-        var accountEthAddr: EthereumAddress!
-        if (bechAddress.starts(with: "0x")) {
-            accountEthAddr = EthereumAddress.init(bechAddress)
-        } else {
-            accountEthAddr = EthereumAddress.init(KeyFac.convertBech32ToEvm(bechAddress))
-        }
         
         mintscanTokens.forEach { token in
-            fetchErc20Balance(group, web3, accountEthAddr, token)
+            fetchErc20Balance(group, web3, EthereumAddress.init(evmAddress)!, token)
         }
         
         group.notify(queue: .main) {

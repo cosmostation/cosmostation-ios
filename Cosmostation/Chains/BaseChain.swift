@@ -30,17 +30,18 @@ class BaseChain {
     var allTokenValue = NSDecimalNumber.zero
     var allTokenUSDValue = NSDecimalNumber.zero
     
-    
-    
-    
     func getHDPath(_ lastPath: String) -> String {
         return accountKeyType.hdPath.replacingOccurrences(of: "X", with: lastPath)
     }
     
     
-    func setInfoWithSeed(_ seed: Data, _ lastPath: String) { }
+    func setInfoWithSeed(_ seed: Data, _ lastPath: String) {}
     
-    func setInfoWithPrivateKey(_ priKey: Data) { }
+    func setInfoWithPrivateKey(_ priKey: Data) {}
+    
+    func fetchData(_ id: Int64) {}
+    
+    func isTxFeePayable() -> Bool { return false }
     
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if (usd == true) {

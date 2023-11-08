@@ -118,7 +118,7 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWO-dd-aOf" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="474.33333333333331" width="369" height="53.999999999999943"/>
+                    <rect key="frame" x="12" y="478.33333333333331" width="369" height="53.999999999999943"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUT-8v-eVv">
                             <rect key="frame" x="8" y="18.333333333333371" width="353" height="17.666666666666671"/>
@@ -137,7 +137,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap box for copy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grn-gw-zaI">
-                    <rect key="frame" x="148.33333333333334" y="548.33333333333337" width="96.666666666666657" height="15.333333333333371"/>
+                    <rect key="frame" x="148.33333333333334" y="552.33333333333337" width="96.666666666666657" height="15.333333333333371"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                     <color key="textColor" name="_color02"/>
                     <nil key="highlightedColor"/>
@@ -182,7 +182,7 @@
                 <constraint firstItem="i9d-Tg-NPS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="54" id="BiU-Tn-g69"/>
                 <constraint firstItem="Hq3-0z-VB0" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="top" constant="12" id="GLg-wo-OOL"/>
                 <constraint firstAttribute="bottom" secondItem="UkY-bX-F9E" secondAttribute="bottom" constant="38" id="GvJ-Hp-0lm"/>
-                <constraint firstItem="RWO-dd-aOf" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="bottom" constant="20" id="IVc-Ra-SvO"/>
+                <constraint firstItem="RWO-dd-aOf" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="bottom" constant="24" id="IVc-Ra-SvO"/>
                 <constraint firstItem="Hq3-0z-VB0" firstAttribute="trailing" secondItem="i9d-Tg-NPS" secondAttribute="trailing" constant="-12" id="IeG-b7-CLD"/>
                 <constraint firstItem="RWO-dd-aOf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="J74-Xd-q58"/>
                 <constraint firstItem="VyT-AB-xel" firstAttribute="top" secondItem="Log-Tr-ulL" secondAttribute="bottom" constant="8" id="LCk-b9-iF1"/>

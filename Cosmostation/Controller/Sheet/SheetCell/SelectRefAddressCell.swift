@@ -40,8 +40,6 @@ class SelectRefAddressCell: UITableViewCell {
         if let chain = all.filter({ $0.tag == refAddress.chainTag }).first {
             if (chain.evmCompatible) {
                 evmLabel.isHidden = false
-//                evmAddressLabel.text = "(" + KeyFac.convertBech32ToEvm(refAddress.dpAddress) + ")"
-//                evmAddressLabel.isHidden = false
                 
             } else if (!chain.isDefault) {
                 deprecatedLabel.isHidden = false
@@ -55,14 +53,13 @@ class SelectRefAddressCell: UITableViewCell {
     
     func onBindEvmRefAddress(_ refAddress: RefAddress) {
         addressLabel.text = refAddress.bechAddress
-        evmAddressLabel.text = "(" + KeyFac.convertBech32ToEvm(refAddress.bechAddress) + ")"
+        evmAddressLabel.text = "(" + refAddress.evmAddress + ")"
         evmAddressLabel.isHidden = false
         
         let all = ALLCOSMOSCLASS()
         if let chain = all.filter({ $0.tag == refAddress.chainTag }).first {
             if (chain.evmCompatible) {
                 evmLabel.isHidden = false
-                
             } else if (!chain.isDefault) {
                 deprecatedLabel.isHidden = false
             }
@@ -73,12 +70,4 @@ class SelectRefAddressCell: UITableViewCell {
         }
         
     }
-    
-//    func onBindAddressBook(_ book: AddressBook) {
-//        accountNameLabel.text = book.bookName
-//        addressLabel.text = book.dpAddress
-//        memoLabel.text = book.memo
-//        memoLabel.isHidden = false
-//    }
-    
 }
