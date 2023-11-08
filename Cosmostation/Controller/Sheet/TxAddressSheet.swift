@@ -137,15 +137,15 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
                 Task {
                     let channel = getConnection(ChainKava60())
                     if let recipientAuth = try? await self.fetchAuth(channel, bechAddress) {
-                        if (WUtils.onParseAuthPubkeyType(recipientAuth)?.contains("cosmos.crypto.secp256k1") == false) {
-                            DispatchQueue.main.async {
+                        let pubKey = WUtils.onParseAuthPubkeyType(recipientAuth)
+                        DispatchQueue.main.async {
+                            if (pubKey == nil || pubKey?.contains("cosmos.crypto.secp256k1") == false) {
                                 self.addressDelegate?.onInputedAddress(userInput!, nil)
                                 self.dismiss(animated: true)
+                            } else {
+                                self.onShowToast(NSLocalizedString("error_recipient_not_support_evm", comment: ""))
                             }
                         }
-                    }
-                    DispatchQueue.main.async {
-                        self.onShowToast(NSLocalizedString("error_recipient_not_support_evm", comment: ""))
                     }
                 }
                 return;
