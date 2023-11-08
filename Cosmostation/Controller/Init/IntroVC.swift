@@ -79,7 +79,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
                 self.present(pinVC, animated: true)
                 
             } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(5000), execute: {
                     self.onStartMainTab()
                 })
             }

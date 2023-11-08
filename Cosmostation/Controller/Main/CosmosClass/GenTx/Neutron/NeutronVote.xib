@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -50,7 +50,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="b8o-a4-RaT">
-                    <rect key="frame" x="7" y="107.33333333333334" width="393" height="401.33333333333326"/>
+                    <rect key="frame" x="0.0" y="107.33333333333334" width="393" height="401.33333333333326"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDY-bt-PDv" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
@@ -261,12 +261,12 @@
                 <constraint firstItem="ZDY-bt-PDv" firstAttribute="leading" secondItem="SwL-Va-9Xi" secondAttribute="leading" id="aLz-lW-O4W"/>
                 <constraint firstItem="ZDY-bt-PDv" firstAttribute="leading" secondItem="Rnr-bF-6ZA" secondAttribute="leading" id="afr-hm-P80"/>
                 <constraint firstItem="GXp-jA-f0M" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="arg-W9-sdE"/>
-                <constraint firstItem="b8o-a4-RaT" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="7" id="azP-jM-x7O"/>
+                <constraint firstItem="b8o-a4-RaT" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="azP-jM-x7O"/>
                 <constraint firstItem="b8o-a4-RaT" firstAttribute="top" secondItem="oZK-cW-2hq" secondAttribute="bottom" constant="8" id="b4m-W7-Fsr"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Rnr-bF-6ZA" secondAttribute="trailing" constant="8" id="dyO-OI-ndz"/>
                 <constraint firstItem="ZDY-bt-PDv" firstAttribute="trailing" secondItem="SwL-Va-9Xi" secondAttribute="trailing" id="kbw-6r-N85"/>
                 <constraint firstItem="ZDY-bt-PDv" firstAttribute="trailing" secondItem="Rnr-bF-6ZA" secondAttribute="trailing" id="lKa-8D-RIR"/>
-                <constraint firstItem="b8o-a4-RaT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="7" id="lNT-tT-Hec"/>
+                <constraint firstItem="b8o-a4-RaT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lNT-tT-Hec"/>
                 <constraint firstItem="Rnr-bF-6ZA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="vgt-Ff-1YX"/>
             </constraints>
             <point key="canvasLocation" x="131" y="-11"/>
