@@ -41,7 +41,6 @@ class ImportMnemonicVC: BaseVC, UITextViewDelegate {
     
     @IBAction func onClickNext(_ sender: UIButton) {
         let userInput = mnemonicTextArea.textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        print("userInput ", userInput)
         if (onValidate(userInput)) {
             onStartCheckMenmonic(accountName, userInput)
         } else {

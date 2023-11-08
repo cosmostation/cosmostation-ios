@@ -119,7 +119,7 @@ class ChainSelectVC: BaseVC {
         toDisplayCosmosTags.removeAll()
         toDisplayCosmosTags.append("cosmos118")
         allCosmosChains.forEach { chian in
-            if (chian.allCoinUSDValue.compare(NSDecimalNumber(string: "10")).rawValue > 0 && chian.tag != "cosmos118") {
+            if (chian.allCoinUSDValue.compare(NSDecimalNumber.one).rawValue > 0 && chian.tag != "cosmos118") {
                 toDisplayCosmosTags.append(chian.tag)
             }
         }

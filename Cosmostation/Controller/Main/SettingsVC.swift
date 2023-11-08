@@ -129,7 +129,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 switchCell.onBindSetNotification()
                 switchCell.actionToggle = { request in
 //                    print("onBindSetNotification ", request)
-//                    PushUtils.shared.updateStatus(enable: request)
+                    PushUtils.shared.updateStatus(enable: request)
                 }
                 return switchCell
                 

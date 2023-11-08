@@ -41,8 +41,7 @@ class ChainOkt60Keccak: CosmosClass  {
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
         bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
-        
-        print("", tag, " ", bechAddress, "  ", evmAddress)
+//        print("", tag, " ", bechAddress, "  ", evmAddress)
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
