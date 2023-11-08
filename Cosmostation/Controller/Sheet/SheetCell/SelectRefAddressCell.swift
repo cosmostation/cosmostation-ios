@@ -13,7 +13,6 @@ class SelectRefAddressCell: UITableViewCell {
     @IBOutlet weak var accountNameLabel: UILabel!
     @IBOutlet weak var deprecatedLabel: UILabel!
     @IBOutlet weak var evmLabel: UILabel!
-    @IBOutlet weak var memoLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var evmAddressLabel: UILabel!
     
@@ -22,7 +21,6 @@ class SelectRefAddressCell: UITableViewCell {
         self.selectionStyle = .none
         deprecatedLabel.isHidden = true
         evmLabel.isHidden = true
-        memoLabel.isHidden = true
         evmAddressLabel.isHidden = true
     }
     
@@ -30,7 +28,6 @@ class SelectRefAddressCell: UITableViewCell {
         super.prepareForReuse()
         deprecatedLabel.isHidden = true
         evmLabel.isHidden = true
-        memoLabel.isHidden = true
         evmAddressLabel.isHidden = true
     }
     

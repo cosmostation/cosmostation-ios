@@ -171,7 +171,7 @@ class NeutronVault: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet)
+        self.onStartSheet(memoSheet, 260)
     }
     
     func onUpdateMemoView(_ memo: String) {

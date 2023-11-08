@@ -147,7 +147,7 @@ class EvmTransfer: BaseVC {
         }
         addressSheet.addressSheetType = .EvmTransfer
         addressSheet.addressDelegate = self
-        self.onStartSheet(addressSheet)
+        self.onStartSheet(addressSheet, 220)
     }
     
     func onUpdateToAddressView() {

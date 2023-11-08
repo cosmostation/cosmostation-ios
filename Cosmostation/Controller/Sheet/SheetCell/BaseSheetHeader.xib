@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,13 +29,13 @@
                     <rect key="frame" x="0.0" y="418.66666666666669" width="393" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQa-6i-gBu">
-                            <rect key="frame" x="20" y="12.333333333333314" width="26.666666666666671" height="15.333333333333336"/>
+                            <rect key="frame" x="20" y="14.333333333333314" width="26.666666666666671" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_primary"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHE-GJ-sqB">
-                            <rect key="frame" x="50.666666666666664" y="12.333333333333314" width="7" height="15.333333333333336"/>
+                            <rect key="frame" x="50.666666666666664" y="14.333333333333314" width="7" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
@@ -44,7 +44,7 @@
                     <color key="backgroundColor" name="_colorBg"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="cQa-6i-gBu" firstAttribute="centerY" secondItem="WUw-IE-uEN" secondAttribute="centerY" id="C5F-4i-d3W"/>
+                        <constraint firstItem="cQa-6i-gBu" firstAttribute="centerY" secondItem="WUw-IE-uEN" secondAttribute="centerY" constant="2" id="C5F-4i-d3W"/>
                         <constraint firstItem="AHE-GJ-sqB" firstAttribute="centerY" secondItem="cQa-6i-gBu" secondAttribute="centerY" id="XWs-RL-Wvd"/>
                         <constraint firstAttribute="height" constant="40" id="Y4F-vz-wXo"/>
                         <constraint firstItem="AHE-GJ-sqB" firstAttribute="leading" secondItem="cQa-6i-gBu" secondAttribute="trailing" constant="4" id="dWG-GN-CJb"/>

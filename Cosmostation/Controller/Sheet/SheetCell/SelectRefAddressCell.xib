@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,12 +32,6 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ylP-Qx-5FA">
                                 <rect key="frame" x="20" y="7.9999999999999982" width="99" height="21.333333333333329"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                                <color key="textColor" name="_color01"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXe-3x-u2J">
-                                <rect key="frame" x="384.66666666666669" y="11" width="36.333333333333314" height="15.333333333333336"/>
-                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -113,7 +107,6 @@
                             <constraint firstItem="z1D-Sj-mND" firstAttribute="leading" secondItem="ylP-Qx-5FA" secondAttribute="trailing" constant="4" id="0cx-Fn-Wi8"/>
                             <constraint firstAttribute="bottom" secondItem="f2M-eA-bQ2" secondAttribute="bottom" id="1Vf-YN-lVm"/>
                             <constraint firstItem="f2M-eA-bQ2" firstAttribute="top" secondItem="3NW-ad-cWJ" secondAttribute="bottom" constant="4" id="8U0-TP-sNV"/>
-                            <constraint firstAttribute="trailing" secondItem="OXe-3x-u2J" secondAttribute="trailing" constant="12" id="8oa-8C-4dm"/>
                             <constraint firstItem="ylP-Qx-5FA" firstAttribute="leading" secondItem="5D4-Ig-L21" secondAttribute="leading" constant="20" id="9Tf-Of-Ckf"/>
                             <constraint firstAttribute="height" constant="68" id="EQ4-kr-QwK"/>
                             <constraint firstItem="3NW-ad-cWJ" firstAttribute="top" secondItem="ylP-Qx-5FA" secondAttribute="bottom" constant="2" id="Jj6-XS-rOg"/>
@@ -121,7 +114,6 @@
                             <constraint firstItem="3NW-ad-cWJ" firstAttribute="leading" secondItem="5D4-Ig-L21" secondAttribute="leading" constant="19" id="Mlb-Kq-YVv"/>
                             <constraint firstAttribute="trailing" secondItem="f2M-eA-bQ2" secondAttribute="trailing" constant="12" id="a8b-x8-0dO"/>
                             <constraint firstItem="z1D-Sj-mND" firstAttribute="centerY" secondItem="ylP-Qx-5FA" secondAttribute="centerY" id="dQs-KV-PG0"/>
-                            <constraint firstItem="OXe-3x-u2J" firstAttribute="centerY" secondItem="ylP-Qx-5FA" secondAttribute="centerY" id="hbz-bU-9h2"/>
                             <constraint firstItem="f2M-eA-bQ2" firstAttribute="leading" secondItem="5D4-Ig-L21" secondAttribute="leading" constant="12" id="sAd-gc-xOd"/>
                             <constraint firstItem="ylP-Qx-5FA" firstAttribute="top" secondItem="5D4-Ig-L21" secondAttribute="top" constant="8" id="zcy-eV-gYv"/>
                         </constraints>
@@ -144,7 +136,6 @@
                 <outlet property="deprecatedLabel" destination="p8c-K1-bjh" id="1lN-Z1-Qah"/>
                 <outlet property="evmAddressLabel" destination="ZI4-HH-u0D" id="H5j-bw-dnG"/>
                 <outlet property="evmLabel" destination="ztm-p1-BQo" id="oNt-cD-G4L"/>
-                <outlet property="memoLabel" destination="OXe-3x-u2J" id="VWZ-h0-zVz"/>
             </connections>
             <point key="canvasLocation" x="93.89312977099236" y="28.169014084507044"/>
         </tableViewCell>
