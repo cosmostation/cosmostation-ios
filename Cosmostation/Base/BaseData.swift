@@ -230,6 +230,7 @@ extension BaseData {
                 table.column(REFADDRESS_ACCOUNT_ID)
                 table.column(REFADDRESS_CHAIN_TAG)
                 table.column(REFADDRESS_DP_ADDRESS)
+                table.column(REFADDRESS_EVM_ADDRESS)
                 table.column(REFADDRESS_MAIN_AMOUNT)
                 table.column(REFADDRESS_MAIN_VALUE)
                 table.column(REFADDRESS_TOKEN_VALUE)
