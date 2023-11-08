@@ -626,19 +626,28 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     
     func onScanned(_ result: String) {
         let scanedString = result.components(separatedBy: "(MEMO)")
-        if (scanedString[0].isEmpty == true || scanedString[0].count < 5) {
+        var addressScan = ""
+        var memoScan = ""
+        if (scanedString.count == 2) {
+            addressScan = scanedString[0].trimmingCharacters(in: .whitespaces)
+            memoScan = scanedString[1].trimmingCharacters(in: .whitespaces)
+        } else {
+            addressScan = scanedString[0].trimmingCharacters(in: .whitespaces)
+        }
+        
+        if (addressScan.isEmpty == true || addressScan.count < 5) {
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return;
         }
-        if (scanedString[0] == selectedChain.bechAddress) {
+        if (addressScan == selectedChain.bechAddress) {
             self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
             return;
         }
         
-        if (WUtils.isValidBechAddress(selectedRecipientChain, scanedString[0])) {
-            selectedRecipientAddress = scanedString[0]
+        if (WUtils.isValidBechAddress(selectedRecipientChain, addressScan)) {
+            selectedRecipientAddress = addressScan.trimmingCharacters(in: .whitespaces)
             if (scanedString.count > 1) {
-                onUpdateMemoView(scanedString[1], true)
+                onUpdateMemoView(memoScan.trimmingCharacters(in: .whitespaces), true)
             }
             onUpdateToAddressView()
             

@@ -312,6 +312,9 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
         if (memo != nil && memo?.isEmpty == false) {
             onUpdateMemoView(memo!)
         }
+        print("userInputAddress", userInputAddress)
+        print("recipientBechAddress", recipientBechAddress)
+        print("recipientEvmAddress", recipientEvmAddress)
     }
     
     func onInputedMemo(_ memo: String) {
@@ -322,39 +325,48 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
         recipientBechAddress = nil
         recipientEvmAddress = nil
         let scanedString = result.components(separatedBy: "(MEMO)")
-        if (scanedString[0].isEmpty == true || scanedString[0].count < 5) {
+        var addressScan = ""
+        var memoScan = ""
+        if (scanedString.count == 2) {
+            addressScan = scanedString[0].trimmingCharacters(in: .whitespaces)
+            memoScan = scanedString[1].trimmingCharacters(in: .whitespaces)
+        } else {
+            addressScan = scanedString[0].trimmingCharacters(in: .whitespaces)
+        }
+        
+        if (addressScan.isEmpty == true || addressScan.count < 5) {
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return;
         }
-        if (scanedString[0] == selectedChain.bechAddress || scanedString[0] == selectedChain.evmAddress) {
+        if (addressScan == selectedChain.bechAddress || addressScan == selectedChain.evmAddress) {
             self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
             return;
         }
         
         if (selectedChain is ChainBinanceBeacon) {
-            if (WUtils.isValidBechAddress(selectedChain, scanedString[0])) {
-                userInputAddress = scanedString[0]
-                recipientBechAddress = scanedString[0]
+            if (WUtils.isValidBechAddress(selectedChain, addressScan)) {
+                userInputAddress = addressScan
+                recipientBechAddress = addressScan
                 if (scanedString.count > 1) {
-                    onUpdateMemoView(scanedString[1])
+                    onUpdateMemoView(memoScan)
                 }
                 onUpdateToAddressView()
                 return
             }
             
         } else if (selectedChain is ChainOkt60Keccak) {
-            if (WUtils.isValidBechAddress(selectedChain, scanedString[0])) {
-                userInputAddress = scanedString[0]
+            if (WUtils.isValidBechAddress(selectedChain, addressScan)) {
+                userInputAddress = addressScan
                 recipientBechAddress = userInputAddress
                 recipientEvmAddress = KeyFac.convertBech32ToEvm(userInputAddress!)
                 return
             }
-            if (WUtils.isValidEvmAddress(scanedString[0])) {
-                userInputAddress = scanedString[0]
+            if (WUtils.isValidEvmAddress(addressScan)) {
+                userInputAddress = addressScan
                 recipientBechAddress = KeyFac.convertEvmToBech32(userInputAddress!, selectedChain.bechAccountPrefix!)
                 recipientEvmAddress = userInputAddress
                 if (scanedString.count > 1) {
-                    onUpdateMemoView(scanedString[1])
+                    onUpdateMemoView(memoScan)
                 }
                 onUpdateToAddressView()
                 return

@@ -50,7 +50,7 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
     }
     
     func onScanned(_ result: String) {
-        memoTextArea.textView.text = result
+        memoTextArea.textView.text = result.trimmingCharacters(in: .whitespaces)
     }
 
     @IBAction func onClickConfirm(_ sender: BaseButton) {
