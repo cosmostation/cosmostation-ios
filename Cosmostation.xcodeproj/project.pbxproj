@@ -909,6 +909,8 @@
 		04F048CE2AF8D268002A809D /* CosmosCancelUnbonding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F048CB2AF8D268002A809D /* CosmosCancelUnbonding.swift */; };
 		04F048CF2AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F048CC2AF8D268002A809D /* CosmosCancelUnbonding.xib */; };
 		04F048D02AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F048CC2AF8D268002A809D /* CosmosCancelUnbonding.xib */; };
+		04F048D42AFCADE5002A809D /* ChainFetchAi60Secp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F048D32AFCADE5002A809D /* ChainFetchAi60Secp.swift */; };
+		04F048D52AFCADE5002A809D /* ChainFetchAi60Secp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F048D32AFCADE5002A809D /* ChainFetchAi60Secp.swift */; };
 		04F4061729ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
 		04F4061829ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
 		04FA74502A9D97A0001A2830 /* PincodeInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744B2A9D97A0001A2830 /* PincodeInputVC.swift */; };
@@ -2097,6 +2099,7 @@
 		04F048C62AF89B19002A809D /* SelectAddressBookCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAddressBookCell.xib; sourceTree = "<group>"; };
 		04F048CB2AF8D268002A809D /* CosmosCancelUnbonding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosCancelUnbonding.swift; sourceTree = "<group>"; };
 		04F048CC2AF8D268002A809D /* CosmosCancelUnbonding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosCancelUnbonding.xib; sourceTree = "<group>"; };
+		04F048D32AFCADE5002A809D /* ChainFetchAi60Secp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFetchAi60Secp.swift; sourceTree = "<group>"; };
 		04F4061529ED112100CD88E4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		04F4061629ED119800CD88E4 /* Init.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Init.storyboard; sourceTree = "<group>"; };
 		04FA744B2A9D97A0001A2830 /* PincodeInputVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PincodeInputVC.swift; sourceTree = "<group>"; };
@@ -2629,6 +2632,7 @@
 				0402B8022ACC74CD00824B3F /* ChainEmoney.swift */,
 				04D279F52A67C9B700AF046A /* ChainEvmos.swift */,
 				0402B8052ACC751100824B3F /* ChainFetchAi.swift */,
+				04F048D32AFCADE5002A809D /* ChainFetchAi60Secp.swift */,
 				0402B8082ACC758B00824B3F /* ChainGravityBridge.swift */,
 				04C940C32AEA529900415256 /* ChainHumans.swift */,
 				044ECB1C2A95DE000042DB3C /* ChainInjective.swift */,
@@ -4236,6 +4240,7 @@
 				0402B7FE2ACC741700824B3F /* ChainCudos.swift in Sources */,
 				047843D62AC991B300462F1C /* injective_oracle_v1beta1_tx.grpc.swift in Sources */,
 				04FAD9D62AB204FF00143A3E /* FixCardView.swift in Sources */,
+				04F048D52AFCADE5002A809D /* ChainFetchAi60Secp.swift in Sources */,
 				0400EE9D2AD9B434007BA97F /* NeutronVote.swift in Sources */,
 				0438A7F52AE1316B006FA213 /* KavaMintListVC.swift in Sources */,
 				0402B8502ACC86B300824B3F /* ChainTerra.swift in Sources */,
@@ -4912,6 +4917,7 @@
 				0402B7FD2ACC741700824B3F /* ChainCudos.swift in Sources */,
 				047843D52AC991B300462F1C /* injective_oracle_v1beta1_tx.grpc.swift in Sources */,
 				04FAD9D52AB204FF00143A3E /* FixCardView.swift in Sources */,
+				04F048D42AFCADE5002A809D /* ChainFetchAi60Secp.swift in Sources */,
 				0400EE9C2AD9B434007BA97F /* NeutronVote.swift in Sources */,
 				0438A7F42AE1316B006FA213 /* KavaMintListVC.swift in Sources */,
 				0402B84F2ACC86B300824B3F /* ChainTerra.swift in Sources */,
@@ -5599,7 +5605,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 251;
+				CURRENT_PROJECT_VERSION = 252;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5632,7 +5638,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 251;
+				CURRENT_PROJECT_VERSION = 252;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5785,7 +5791,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 251;
+				CURRENT_PROJECT_VERSION = 252;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5818,7 +5824,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 251;
+				CURRENT_PROJECT_VERSION = 252;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

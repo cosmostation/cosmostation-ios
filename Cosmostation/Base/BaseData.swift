@@ -237,8 +237,6 @@ extension BaseData {
                 table.column(REFADDRESS_COIN_CNT)
             }
             try self.database.run(refAddressTable)
-            _ = try? self.database.run(TABLE_REFADDRESS.addColumn(REFADDRESS_EVM_ADDRESS, defaultValue: ""))
-            
             
             let addressBookTable = TABLE_ADDRESSBOOK.create(ifNotExists: true) { table in
                 table.column(ADDRESSBOOK_ID, primaryKey: true)

@@ -684,6 +684,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainEmoney())
     result.append(ChainEvmos())
     result.append(ChainFetchAi())
+    result.append(ChainFetchAi60Secp())
     result.append(ChainGravityBridge())
     result.append(ChainHumans())
     result.append(ChainInjective())
