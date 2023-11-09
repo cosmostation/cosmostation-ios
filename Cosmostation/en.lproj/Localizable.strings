@@ -644,7 +644,6 @@
 "wc_request_cancel_msg" = "\nPlease check the contents and decide.\n\nCancel Order.";
 "wc_request_success" = "Tx Success!";
 "wc_request_fail" = "Tx Fail";
-"wc_request_responsed" = "Responsed for Request";
 "wc_connect_alert_title" = "Connect Wallet";
 "wc_connect_alert_message" = "Allow connection to URL?";
 "wc_connect_alert_message_warning" = "Please double check the URL. You can always manage connections at “SETTING” → “Manage Connections”";

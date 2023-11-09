@@ -19,11 +19,10 @@ class TxSignRequestSheet: BaseVC {
     @IBOutlet weak var cancelBtn: BaseButton!
     @IBOutlet weak var confirmBtn: BaseButton!
     
-    var wcRequestType: WcRequestType!
     var url: URL!
     var wcMsg: Data?
     var selectedChain: CosmosClass!
-    var txSingRequestDelegate: TxSignRequestDelegate?
+    var completion: ((_ success: Bool) -> ())?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +39,7 @@ class TxSignRequestSheet: BaseVC {
         do {
             if let json = try JSONSerialization.jsonObject(with: wcMsg!, options: []) as? [String: Any] {
                 let fee = json["fee"] as? [String: Any]
-                var amounts: [[String : String]]?
-                if (wcRequestType == .TRUST_TYPE) {
-                    amounts = fee?["amounts"] as? [[String: String]]
-                } else {
-                    amounts = fee?["amount"] as? [[String: String]]
-                }
-                
+                var amounts = fee?["amounts"] as? [[String: String]] ?? fee?["amount"] as? [[String: String]]
                 let firstAmount = amounts?.first
                 let denom = firstAmount?["denom"]
                 let amount = firstAmount?["amount"]
@@ -61,20 +54,14 @@ class TxSignRequestSheet: BaseVC {
     }
     
     @IBAction func onClickCancel(_ sender: UIButton) {
-        txSingRequestDelegate?.onCancel(wcRequestType)
+        completion?(false)
         dismiss(animated: true)
     }
     
     @IBAction func onClickConfirm(_ sender: UIButton) {
-        txSingRequestDelegate?.onConfirm(wcRequestType)
+        completion?(true)
         dismiss(animated: true)
     }
-}
-
-protocol TxSignRequestDelegate {
-    func onCancel(_ type: WcRequestType)
-    
-    func onConfirm(_ type: WcRequestType)
 }
 
 extension Data {

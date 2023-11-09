@@ -23,6 +23,7 @@ final class BaseData: NSObject{
     
     var reviewMode = true
     var mintscanChains: JSON?
+    var supportConfig: JSON?
     var baseAccount: BaseAccount?
     var mintscanUSDPrices: [MintscanPrice]?
     var mintscanPrices: [MintscanPrice]?
