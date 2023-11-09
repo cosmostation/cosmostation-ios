@@ -30,7 +30,7 @@ class SettingBaseCell: UITableViewCell {
     func onBindSetAccount() {
         setImg.image = UIImage(named: "setAccount")
         setTitleLabel.text = NSLocalizedString("setting_account_title", comment: "")
-        setDetailLabel.text = BaseData.instance.baseAccount?.name
+        setDetailLabel.text = BaseData.instance.baseAccount?.getRefreshName()
     }
     
     func onBindImportQR() {

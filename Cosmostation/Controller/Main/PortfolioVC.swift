@@ -68,6 +68,7 @@ class PortfolioVC: BaseVC {
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
+        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
         onUpdateRow(detailChainTag)
     }
     
@@ -84,7 +85,6 @@ class PortfolioVC: BaseVC {
         searchCosmosChains = toDisplayCosmosChains
         
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
-        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
         navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(onClickChainSelect))
     }
     
@@ -216,7 +216,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
         let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
         cosmosClassVC.selectedChain = searchCosmosChains[indexPath.row]
         cosmosClassVC.hidesBottomBarWhenPushed = true
-        self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.name)
+        self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
         self.navigationController?.pushViewController(cosmosClassVC, animated: true)
     }
     

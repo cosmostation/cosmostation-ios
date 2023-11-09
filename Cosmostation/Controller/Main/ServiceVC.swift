@@ -24,14 +24,12 @@ class ServiceVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-//        print("daaa", BaseData.instance.reviewMode )
-        
-        initView()
+        baseAccount = BaseData.instance.baseAccount
     }
     
-    func initView() {
-        baseAccount = BaseData.instance.baseAccount
-        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
     }
     
     func onOpenMoonpay() {

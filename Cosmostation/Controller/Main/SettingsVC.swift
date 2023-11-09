@@ -24,12 +24,15 @@ class SettingsVC: BaseVC {
         tableView.register(UINib(nibName: "SettingSwitchCell", bundle: nil), forCellReuseIdentifier: "SettingSwitchCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
-        initView()
+        
+        baseAccount = BaseData.instance.baseAccount
     }
     
-    func initView() {
-        baseAccount = BaseData.instance.baseAccount
-        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        reloadRows(IndexPath(row: 0, section: 0))
+        reloadRows(IndexPath(row: 3, section: 0))
+        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
     }
 }
 
@@ -128,7 +131,6 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 3) {
                 switchCell.onBindSetNotification()
                 switchCell.actionToggle = { request in
-//                    print("onBindSetNotification ", request)
                     PushUtils.shared.updateStatus(enable: request)
                 }
                 return switchCell

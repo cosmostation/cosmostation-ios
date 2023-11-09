@@ -38,6 +38,11 @@ public class BaseAccount {
     lazy var toDisplayCTags = [String]()
     lazy var allCosmosClassChains = [CosmosClass]()
     
+    func getRefreshName() -> String {
+        self.name = BaseData.instance.selectAccount(id)?.name ?? ""
+        return self.name
+    }
+    
     func loadDisplayCTags() {
         toDisplayCTags = BaseData.instance.getDisplayCosmosChainTags(self.id)
     }
