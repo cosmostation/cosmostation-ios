@@ -34,7 +34,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WTw-aH-fUU">
-                                <rect key="frame" x="58" y="25.333333333333329" width="99" height="17.666666666666671"/>
+                                <rect key="frame" x="58" y="25.333333333333329" width="363" height="17.666666666666671"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCM-dq-7mh">
                                         <rect key="frame" x="0.0" y="0.0" width="99" height="17.666666666666668"/>
@@ -65,6 +65,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="B9r-iw-IcR" firstAttribute="leading" secondItem="WTw-aH-fUU" secondAttribute="trailing" constant="14" id="022-MN-u78"/>
                             <constraint firstItem="WTw-aH-fUU" firstAttribute="leading" secondItem="Q7b-SO-oPr" secondAttribute="trailing" constant="14" id="Hp8-8w-aqy"/>
                             <constraint firstItem="Q7b-SO-oPr" firstAttribute="leading" secondItem="PU2-f0-znI" secondAttribute="leading" constant="12" id="ZRo-i5-yx1"/>
                             <constraint firstItem="B9r-iw-IcR" firstAttribute="centerY" secondItem="PU2-f0-znI" secondAttribute="centerY" id="aCP-xL-HYG"/>

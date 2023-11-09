@@ -85,7 +85,19 @@ class PortfolioVC: BaseVC {
         searchCosmosChains = toDisplayCosmosChains
         
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
-        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(onClickChainSelect))
+
+        let searchBtn: UIButton = UIButton(type: .custom)
+        searchBtn.setImage(UIImage(named: "iconSearchChain"), for: .normal)
+        searchBtn.addTarget(self, action:  #selector(onClickChainSelect), for: .touchUpInside)
+        searchBtn.frame = CGRectMake(0, 0, 40, 30)
+        let searchBarBtn = UIBarButtonItem(customView: searchBtn)
+
+        let explorerBtn: UIButton = UIButton(type: .custom)
+        explorerBtn.setImage(UIImage(named: "iconMintscanExplorer"), for: .normal)
+        explorerBtn.addTarget(self, action:  #selector(onClickExplorer), for: .touchUpInside)
+        explorerBtn.frame = CGRectMake(0, 0, 30, 30)
+        let explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
+        navigationItem.rightBarButtonItems = [explorerBarBtn, searchBarBtn]
     }
     
     @objc func dismissKeyboard() {
@@ -147,6 +159,11 @@ class PortfolioVC: BaseVC {
             self.onChainSelected()
         }
         self.present(chainSelectVC, animated: true)
+    }
+    
+    @objc func onClickExplorer() {
+        guard let url = URL(string: MintscanUrl) else { return }
+        self.onShowSafariWeb(url)
     }
     
     func onChainSelected() {
