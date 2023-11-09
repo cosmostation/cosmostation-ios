@@ -13,7 +13,7 @@ class ChainUmee: CosmosClass {
     override init() {
         super.init()
         
-        name = "Umee"
+        name = "UX(Umee)"
         tag = "umee118"
         logo1 = "chainUmee"
         logo2 = "chainUmee2"
