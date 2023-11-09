@@ -124,11 +124,11 @@ class ImportMnemonicCheckVC: BaseVC {
         ethAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.color01 , range: ethRange)
         EthereumPathLabel.attributedText = ethAttributedString
 
-        let suiPath = "m/44'/784'/0'/0'/X'"
-        let dpSuiPath = suiPath.replacingOccurrences(of: "X", with: String(hdPath))
-        let suiRange = (suiPath as NSString).range(of: "X")
-        let suiAttributedString = NSMutableAttributedString(string: dpSuiPath)
-        suiAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.color01 , range: suiRange)
+        let kavaPath = "m/44'/459'/0'/0/X"
+        let dpKavaPath = kavaPath.replacingOccurrences(of: "X", with: String(hdPath))
+        let kavaRange = (dpKavaPath as NSString).range(of: "X")
+        let suiAttributedString = NSMutableAttributedString(string: dpKavaPath)
+        suiAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.color01 , range: kavaRange)
         suiPathLabel.attributedText = suiAttributedString
     }
     
