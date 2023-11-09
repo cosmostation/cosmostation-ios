@@ -58,7 +58,7 @@ class KavaSwapListVC: BaseVC {
         Task {
             let channel = getConnection()
             if var swapPools = try? await self.fetchSwapList(channel),
-               var myDeposit = try? await self.fetchSwapMyDeposit(channel, selectedChain.address!) {
+               var myDeposit = try? await self.fetchSwapMyDeposit(channel, selectedChain.bechAddress) {
                 myDeposit?.sort {
                     return $0.getUsdxAmount().compare($1.getUsdxAmount()).rawValue > 0 ? true : false
                 }
@@ -152,15 +152,18 @@ extension KavaSwapListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
         onStartSheet(baseSheet, 240)
     }
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectSwpAction) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                if (result.position == 0) {
-                    self.onDepositSwpTx(result.param!)
-                } else if (result.position == 1) {
-                    self.onWithdrawSwpTx(result.param!)
-                }
-            });
+            if let swpName = result["swpName"] as? String,
+               let index = result["index"] as? Int {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    if (index == 0) {
+                        self.onDepositSwpTx(swpName)
+                    } else if (index == 1) {
+                        self.onWithdrawSwpTx(swpName)
+                    }
+                });
+            }
         }
     }
     
@@ -191,7 +194,7 @@ extension KavaSwapListVC {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
     

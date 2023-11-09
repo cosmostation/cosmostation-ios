@@ -20,15 +20,25 @@ class QrAddressVC: BaseVC {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var tapToCopyLabel: UILabel!
     @IBOutlet weak var shareBtn: BaseButton!
+    @IBOutlet weak var addressToggleBtn: UIButton!
     
     var selectedChain: CosmosClass!
+    var toDpAddress = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        addressToggleBtn.isHidden = selectedChain.evmAddress.isEmpty
         chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
-        addressLabel.text = selectedChain.address
+        
+        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
+            toDpAddress = selectedChain.evmAddress
+        } else {
+            toDpAddress = selectedChain.bechAddress
+        }
+        
+        addressLabel.text = toDpAddress
         addressLabel.adjustsFontSizeToFitWidth = true
         if (baseAccount.type == .withMnemonic) {
             hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
@@ -44,7 +54,6 @@ class QrAddressVC: BaseVC {
             
         } else {
             hdPathLabel.text = ""
-            
             if (selectedChain.evmCompatible) {
                 tagLayer.isHidden = false
                 evmLabel.isHidden = false
@@ -52,14 +61,9 @@ class QrAddressVC: BaseVC {
             }
         }
         
-        if let qrImage = generateQrCode(selectedChain.address!) {
-            rqImgView.image = UIImage(ciImage: qrImage)
-            let chainLogo = UIImage.init(named: selectedChain.logo1)
-            chainLogo?.addToCenter(of: rqImgView)
-        }
-        
-        print("address ", selectedChain.address)
-        print("address ", selectedChain.evmAddress)
+//        print("bechAddress ", selectedChain.bechAddress)
+//        print("evmAddress ", selectedChain.evmAddress)
+        updateQrImage()
         
         let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyAddress))
         copyTap.cancelsTouchesInView = false
@@ -70,15 +74,37 @@ class QrAddressVC: BaseVC {
         shareBtn.setTitle(NSLocalizedString("str_share", comment: ""), for: .normal)
         tapToCopyLabel.text = NSLocalizedString("msg_tap_box_to_copy", comment: "")
     }
+    
+    func updateQrImage() {
+        if let qrImage = generateQrCode(toDpAddress) {
+            rqImgView.image = UIImage(ciImage: qrImage)
+            let chainLogo = UIImage.init(named: selectedChain.logo1)
+            chainLogo?.addToCenter(of: rqImgView)
+        }
+        view.isUserInteractionEnabled = true
+    }
 
     @IBAction func onClickShare(_ sender: BaseButton) {
-        let activityViewController = UIActivityViewController(activityItems: [selectedChain.address], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: [toDpAddress], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
     }
     
+    @IBAction func onAddressToggleClick(_ sender: UIButton) {
+        view.isUserInteractionEnabled = false
+        rqImgView.image = nil
+        if (toDpAddress == selectedChain.evmAddress) {
+            toDpAddress = selectedChain.bechAddress
+        } else {
+            toDpAddress = selectedChain.evmAddress
+        }
+        addressLabel.text = toDpAddress
+        addressLabel.adjustsFontSizeToFitWidth = true
+        updateQrImage()
+    }
+    
     @objc func onCopyAddress() {
-        UIPasteboard.general.string = selectedChain.address!.trimmingCharacters(in: .whitespacesAndNewlines)
+        UIPasteboard.general.string = toDpAddress.trimmingCharacters(in: .whitespacesAndNewlines)
         self.onShowToast(NSLocalizedString("address_copied", comment: ""))
     }
 }

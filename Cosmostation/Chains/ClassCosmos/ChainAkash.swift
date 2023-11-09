@@ -21,7 +21,7 @@ class ChainAkash: CosmosClass  {
         stakeDenom = "uakt"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "akash"
+        bechAccountPrefix = "akash"
         
         grpcHost = "grpc-akash.cosmostation.io"
     }

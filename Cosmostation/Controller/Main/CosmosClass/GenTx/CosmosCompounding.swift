@@ -108,7 +108,7 @@ class CosmosCompounding: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet)
+        self.onStartSheet(memoSheet, 260)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -181,7 +181,7 @@ class CosmosCompounding: BaseVC {
         }
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                 do {
                     let simul = try await simulateTx(channel, auth!)
                     DispatchQueue.main.async {
@@ -205,11 +205,11 @@ class CosmosCompounding: BaseVC {
 
 extension CosmosCompounding: MemoDelegate, BaseSheetDelegate, PinDelegate {
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeCoin) {
-            if let position = result.position,
-                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
-                txFee.amount[0].denom = selectedDenom
+            if let index = result["index"] as? Int,
+               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
+                txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }
@@ -227,7 +227,7 @@ extension CosmosCompounding: MemoDelegate, BaseSheetDelegate, PinDelegate {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address!),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                    let response = try await broadcastTx(channel, auth!) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                         self.loadingView.isHidden = true
@@ -273,7 +273,7 @@ extension CosmosCompounding {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
 }

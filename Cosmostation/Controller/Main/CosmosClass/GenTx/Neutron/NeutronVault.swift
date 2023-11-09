@@ -171,7 +171,7 @@ class NeutronVault: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet)
+        self.onStartSheet(memoSheet, 260)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -216,7 +216,7 @@ class NeutronVault: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                 do {
                     let simul = try await simulVaultTx(channel, auth!, onBindWasmMsg())
                     DispatchQueue.main.async {
@@ -241,7 +241,7 @@ class NeutronVault: BaseVC {
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             
             return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.address!
+                $0.sender = selectedChain.bechAddress
                 $0.contract = self.selectedChain.vaultsList[0]["address"].stringValue
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
                 $0.funds = [toCoin!]
@@ -250,7 +250,7 @@ class NeutronVault: BaseVC {
             let jsonMsg: JSON = ["unbond" : ["amount" : toCoin!.amount]]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.address!
+                $0.sender = selectedChain.bechAddress
                 $0.contract = self.selectedChain.vaultsList[0]["address"].stringValue
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
@@ -261,11 +261,11 @@ class NeutronVault: BaseVC {
 
 extension NeutronVault: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeCoin) {
-            if let position = result.position,
-                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
-                txFee.amount[0].denom = selectedDenom
+            if let index = result["index"] as? Int,
+               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
+                txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }
@@ -287,7 +287,7 @@ extension NeutronVault: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, Pi
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address!),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                    let response = try await broadcastVaultTx(channel, auth!, onBindWasmMsg()) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                         self.loadingView.isHidden = true

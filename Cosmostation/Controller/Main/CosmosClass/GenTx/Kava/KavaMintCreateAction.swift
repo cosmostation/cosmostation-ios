@@ -211,7 +211,7 @@ class KavaMintCreateAction: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet)
+        self.onStartSheet(memoSheet, 260)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -256,7 +256,7 @@ class KavaMintCreateAction: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                 do {
                     let simul = try await simulCretaeTx(channel, auth!, onBindCreateMsg())
                     DispatchQueue.main.async {
@@ -285,7 +285,7 @@ class KavaMintCreateAction: BaseVC {
             $0.amount = toPrincipalAmount.stringValue
         }
         return Kava_Cdp_V1beta1_MsgCreateCDP.with {
-            $0.sender = selectedChain.address!
+            $0.sender = selectedChain.bechAddress
             $0.collateral = collateralCoin
             $0.principal = principalCoin
             $0.collateralType = collateralParam.type
@@ -295,11 +295,11 @@ class KavaMintCreateAction: BaseVC {
 
 extension KavaMintCreateAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeCoin) {
-            if let position = result.position,
-               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
-                txFee.amount[0].denom = selectedDenom
+            if let index = result["index"] as? Int,
+               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
+                txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }
@@ -326,7 +326,7 @@ extension KavaMintCreateAction: BaseSheetDelegate, MemoDelegate, AmountSheetDele
             
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address!),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                    let response = try await broadcastCreateTx(channel, auth!, onBindCreateMsg()) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                         self.loadingView.isHidden = true
@@ -372,7 +372,7 @@ extension KavaMintCreateAction {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
     

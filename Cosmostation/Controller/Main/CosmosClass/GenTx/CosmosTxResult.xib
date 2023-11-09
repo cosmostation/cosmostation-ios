@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,6 +21,9 @@
                 <outlet property="failMsgLabel" destination="0TC-1f-UpP" id="BOL-XJ-bJi"/>
                 <outlet property="failView" destination="Ble-IY-3WY" id="jfx-hN-onM"/>
                 <outlet property="loadingView" destination="hj0-ZK-Txi" id="MeG-nN-Wab"/>
+                <outlet property="quotesLayer" destination="3Xb-aD-riv" id="suh-fV-AFV"/>
+                <outlet property="quotesMsgLabel" destination="uvM-NT-XKd" id="uLA-1h-Ajq"/>
+                <outlet property="quotoesAutherLabel" destination="LMz-lh-7Te" id="X7L-9o-Njg"/>
                 <outlet property="successMintscanBtn" destination="ZNx-u3-W4Y" id="6rK-UE-RCK"/>
                 <outlet property="successMsgLabel" destination="iIh-lD-3P3" id="nlg-uW-CG3"/>
                 <outlet property="successView" destination="Lra-5A-Ue7" id="nDf-s4-lLn"/>
@@ -138,7 +141,7 @@
                         <constraint firstAttribute="height" constant="200" id="dqQ-UZ-2jh"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bu-wC-h0h" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bu-wC-h0h" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="8" y="760" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
@@ -162,6 +165,32 @@
                         <constraint firstAttribute="width" constant="180" id="e2x-TZ-C24"/>
                     </constraints>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Xb-aD-riv">
+                    <rect key="frame" x="8" y="732.33333333333337" width="377" height="69.666666666666629"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uvM-NT-XKd">
+                            <rect key="frame" x="16" y="15.999999999999998" width="345" height="19.333333333333329"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMz-lh-7Te">
+                            <rect key="frame" x="354" y="35.333333333333258" width="7" height="18.333333333333329"/>
+                            <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="14"/>
+                            <color key="textColor" name="_color03"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="LMz-lh-7Te" secondAttribute="bottom" constant="16" id="5TR-Og-og2"/>
+                        <constraint firstItem="uvM-NT-XKd" firstAttribute="top" secondItem="3Xb-aD-riv" secondAttribute="top" constant="16" id="IMZ-nU-fvQ"/>
+                        <constraint firstItem="uvM-NT-XKd" firstAttribute="leading" secondItem="3Xb-aD-riv" secondAttribute="leading" constant="16" id="JIU-vq-6nt"/>
+                        <constraint firstAttribute="trailing" secondItem="LMz-lh-7Te" secondAttribute="trailing" constant="16" id="V4y-Z3-d1w"/>
+                        <constraint firstAttribute="trailing" secondItem="uvM-NT-XKd" secondAttribute="trailing" constant="16" id="YGq-BM-CPg"/>
+                        <constraint firstItem="LMz-lh-7Te" firstAttribute="top" secondItem="uvM-NT-XKd" secondAttribute="bottom" id="fVO-ls-g8w"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="_colorBg"/>
@@ -170,12 +199,15 @@
                 <constraint firstItem="Lra-5A-Ue7" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="1Vj-bZ-zSg"/>
                 <constraint firstItem="1bu-wC-h0h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="Df8-pZ-Oex"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1bu-wC-h0h" secondAttribute="trailing" constant="8" id="FnF-z8-xaq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="3Xb-aD-riv" secondAttribute="bottom" constant="16" id="Qor-J2-lhi"/>
                 <constraint firstItem="Ble-IY-3WY" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="W9A-jR-nSb"/>
                 <constraint firstItem="3P5-eh-euu" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="WzN-jr-aby"/>
+                <constraint firstItem="3Xb-aD-riv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="X80-Dt-2Af"/>
                 <constraint firstItem="Lra-5A-Ue7" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="cO7-kJ-ohl"/>
                 <constraint firstItem="Lra-5A-Ue7" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ego-hm-aeX"/>
                 <constraint firstItem="3P5-eh-euu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="18" id="i5K-lp-G5m"/>
                 <constraint firstItem="hj0-ZK-Txi" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="kgS-A2-WdQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3Xb-aD-riv" secondAttribute="trailing" constant="8" id="njG-Pz-uE0"/>
                 <constraint firstItem="Ble-IY-3WY" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="qDs-KG-0KL"/>
                 <constraint firstItem="hj0-ZK-Txi" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="s30-wa-Y49"/>
                 <constraint firstAttribute="bottom" secondItem="1bu-wC-h0h" secondAttribute="bottom" constant="38" id="tlF-XM-4yf"/>
@@ -189,6 +221,9 @@
         <image name="imgTxSuccess" width="240" height="240"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color03">
+            <color red="0.54100000858306885" green="0.60000002384185791" blue="0.68199998140335083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_colorBg">
             <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -24,12 +24,15 @@ class SettingsVC: BaseVC {
         tableView.register(UINib(nibName: "SettingSwitchCell", bundle: nil), forCellReuseIdentifier: "SettingSwitchCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
-        initView()
+        
+        baseAccount = BaseData.instance.baseAccount
     }
     
-    func initView() {
-        baseAccount = BaseData.instance.baseAccount
-        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        reloadRows(IndexPath(row: 0, section: 0))
+        reloadRows(IndexPath(row: 3, section: 0))
+        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
     }
 }
 
@@ -65,6 +68,15 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.section == 1 && indexPath.row == 5) {
+            return 0
+        } else if (indexPath.section == 3 && indexPath.row == 4) {
+            return 0
+        }
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -119,8 +131,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 3) {
                 switchCell.onBindSetNotification()
                 switchCell.actionToggle = { request in
-//                    print("onBindSetNotification ", request)
-//                    PushUtils.shared.updateStatus(enable: request)
+                    PushUtils.shared.updateStatus(enable: request)
                 }
                 return switchCell
                 
@@ -326,9 +337,9 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, CreateNameDelegate, QrI
         onStartSheet(baseSheet)
     }
 
-    public func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SwitchAccount) {
-            if let toAddcountId = Int64(result.param!) {
+            if let toAddcountId = result["accountId"] as? Int64 {
                 if (BaseData.instance.baseAccount?.id != toAddcountId) {
                     showWait()
                     DispatchQueue.global().async {
@@ -345,30 +356,38 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, CreateNameDelegate, QrI
             }
             
         } else if (sheetType == .SwitchLanguage) {
-            if (BaseData.instance.getLanguage() != result.position) {
-                BaseData.instance.setLanguage(result.position!)
-                DispatchQueue.main.async {
-                    self.onStartMainTab()
+            if let index = result["index"] as? Int {
+                if (BaseData.instance.getLanguage() != index) {
+                    BaseData.instance.setLanguage(index)
+                    DispatchQueue.main.async {
+                        self.onStartMainTab()
+                    }
                 }
             }
             
         } else if (sheetType == .SwitchCurrency) {
-            if (BaseData.instance.getCurrency() != result.position) {
-                BaseData.instance.setCurrency(result.position!)
-                BaseNetWork().fetchPrices(true)
-                reloadRows(IndexPath(row: 1, section: 1))
+            if let index = result["index"] as? Int {
+                if (BaseData.instance.getCurrency() != index) {
+                    BaseData.instance.setCurrency(index)
+                    BaseNetWork().fetchPrices(true)
+                    reloadRows(IndexPath(row: 1, section: 1))
+                }
             }
             
         } else if (sheetType == .SwitchPriceColor) {
-            if (BaseData.instance.getPriceChaingColor() != result.position) {
-                BaseData.instance.setPriceChaingColor(result.position!)
-                reloadRows(IndexPath(row: 2, section: 1))
+            if let index = result["index"] as? Int {
+                if (BaseData.instance.getPriceChaingColor() != index) {
+                    BaseData.instance.setPriceChaingColor(index)
+                    reloadRows(IndexPath(row: 2, section: 1))
+                }
             }
             
         } else if (sheetType == .SwitchAutoPass) {
-            if (BaseData.instance.getAutoPass() != result.position) {
-                BaseData.instance.setAutoPass(result.position!)
-                reloadRows(IndexPath(row: 5, section: 1))
+            if let index = result["index"] as? Int {
+                if (BaseData.instance.getAutoPass() != index) {
+                    BaseData.instance.setAutoPass(index)
+                    reloadRows(IndexPath(row: 5, section: 1))
+                }
             }
         }
     }

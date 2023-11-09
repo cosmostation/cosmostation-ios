@@ -68,6 +68,7 @@ class PortfolioVC: BaseVC {
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
+        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
         onUpdateRow(detailChainTag)
     }
     
@@ -84,7 +85,6 @@ class PortfolioVC: BaseVC {
         searchCosmosChains = toDisplayCosmosChains
         
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
-        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
         navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(onClickChainSelect))
     }
     
@@ -108,7 +108,7 @@ class PortfolioVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
-        print("onFetchDone ", tag)
+//        print("onFetchDone ", tag)
         onUpdateRow(tag)
     }
     
@@ -216,18 +216,24 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
         let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
         cosmosClassVC.selectedChain = searchCosmosChains[indexPath.row]
         cosmosClassVC.hidesBottomBarWhenPushed = true
-        self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.name)
+        self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
         self.navigationController?.pushViewController(cosmosClassVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let selectedChain = searchCosmosChains[indexPath.row]
+        var toDpAddress = ""
+        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
+            toDpAddress = selectedChain.evmAddress
+        } else {
+            toDpAddress = selectedChain.bechAddress
+        }
         let copy = UIAction(title: NSLocalizedString("str_copy", comment: ""), image: UIImage(systemName: "doc.on.doc")) { _ in
-            UIPasteboard.general.string = selectedChain.address!.trimmingCharacters(in: .whitespacesAndNewlines)
+            UIPasteboard.general.string = toDpAddress.trimmingCharacters(in: .whitespacesAndNewlines)
             self.onShowToast(NSLocalizedString("address_copied", comment: ""))
         }
         let share = UIAction(title: NSLocalizedString("str_share", comment: ""), image: UIImage(systemName: "square.and.arrow.up")) { _ in
-            let activityViewController = UIActivityViewController(activityItems: [selectedChain.address!], applicationActivities: nil)
+            let activityViewController = UIActivityViewController(activityItems: [toDpAddress], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
         }
@@ -288,9 +294,9 @@ extension PortfolioVC: BaseSheetDelegate {
         onStartSheet(baseSheet)
     }
 
-    public func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SwitchAccount) {
-            if let toAddcountId = Int64(result.param!) {
+            if let toAddcountId = result["accountId"] as? Int64 {
                 if (BaseData.instance.baseAccount?.id != toAddcountId) {
                     showWait()
                     DispatchQueue.global().async {

@@ -73,13 +73,13 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
     }
     
     @IBAction func onClickSelf(_ sender: Any) {
-        addressTextField.text = selectedChain.address
+        addressTextField.text = selectedChain.bechAddress
     }
     
     @IBAction func onClickAddressBook(_ sender: UIButton) {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
-        baseSheet.senderAddress = selectedChain.address
+        baseSheet.senderAddress = selectedChain.bechAddress
         baseSheet.targetChain = recipientChain
         if (addressSheetType == .EvmTransfer) {
             baseSheet.sheetType = .SelectRecipientEvmAddress
@@ -100,70 +100,72 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
         addressTextField.text = address.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
-    @IBAction func onClickConfirm(_ sender: BaseButton) {
+    @IBAction func onClickConfirm(_ sender: BaseButton?) {
         let userInput = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         if (userInput?.isEmpty == true || userInput?.count ?? 0 < 5) {
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-            return;
+            return
         }
         if (addressSheetType == .RewardAddress) {
             if (userInput == selectedChain.rewardAddress) {
                 self.onShowToast(NSLocalizedString("error_same_reward_address", comment: ""))
-                return;
+                return
             }
             
         } else {
-            if (userInput == selectedChain.address) {
+            if (userInput == selectedChain.bechAddress || userInput == selectedChain.evmAddress) {
                 self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
-                return;
+                return
             }
         }
         
-        //받는 계정의 펍키 타입이 ethsecp256k1 일때만 통과시켜 줘야한다. 아니면 받는애한테 락된다.
-        if (addressSheetType == .EvmTransfer && recipientChain is ChainKava60) {
-            var kavaBechAddress = ""
-            if (WUtils.isValidChainAddress(recipientChain, userInput)) {
-                kavaBechAddress = userInput!
-            } else if (userInput?.starts(with: "0x") == true) {
-                if let evmAddess = EthereumAddress.init(userInput!) {
-                    kavaBechAddress = KeyFac.convertEvmToBech32(evmAddess.address, "kava")
-                }
-            }
-            if (WUtils.isValidChainAddress(recipientChain, kavaBechAddress)) {
-                Task {
-                    let channel = getConnection(ChainKava118())
-                    if let recipientAuth = try? await self.fetchAuth(channel, kavaBechAddress) {
-                        if (WUtils.onParseAuthPubkeyType(recipientAuth)?.contains("ethsecp256k1") == true) {
-                            DispatchQueue.main.async {
-                                self.addressDelegate?.onInputedAddress(userInput!)
-                                self.dismiss(animated: true)
-                            }
-                            return
-                        }
-                    }
-                    DispatchQueue.main.async {
-                        self.onShowToast(NSLocalizedString("error_recipient_not_support_evm", comment: ""))
-                    }
-                }
+        if (addressSheetType == .EvmTransfer) {
+            var bechAddress = ""
+            if (WUtils.isValidEvmAddress(userInput)) {
+                bechAddress = KeyFac.convertEvmToBech32(userInput!, recipientChain.bechAccountPrefix!)
+                
+            } else if (WUtils.isValidBechAddress(recipientChain, userInput)) {
+                bechAddress = userInput!
                 
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                return;
             }
-            return;
+            
+            //카바 시스템 코너 케이스 받는 계정의 펍키 타입이 코스모스타입이면 안된다. 받는애한테 락된다.
+            if (recipientChain is ChainKava60) {
+                Task {
+                    let channel = getConnection(ChainKava60())
+                    if let recipientAuth = try? await self.fetchAuth(channel, bechAddress) {
+                        let pubKey = WUtils.onParseAuthPubkeyType(recipientAuth)
+                        DispatchQueue.main.async {
+                            if (pubKey == nil || pubKey?.contains("cosmos.crypto.secp256k1") == false) {
+                                self.addressDelegate?.onInputedAddress(userInput!, nil)
+                                self.dismiss(animated: true)
+                            } else {
+                                self.onShowToast(NSLocalizedString("error_recipient_not_support_evm", comment: ""))
+                            }
+                        }
+                    }
+                }
+                return;
+                
+            } else {
+                self.addressDelegate?.onInputedAddress(userInput!, nil)
+                self.dismiss(animated: true)
+            }
         }
-        
-        
             
         if (recipientChain is ChainOkt60Keccak) {
-            if let evmAddess = EthereumAddress.init(userInput!) {
-                addressDelegate?.onInputedAddress(userInput!)
+            if (WUtils.isValidEvmAddress(userInput)) {
+                addressDelegate?.onInputedAddress(userInput!, nil)
                 dismiss(animated: true)
                 return
             }
         }
         
-        if (WUtils.isValidChainAddress(recipientChain, userInput)) {
-            addressDelegate?.onInputedAddress(userInput!)
+        if (WUtils.isValidBechAddress(recipientChain, userInput)) {
+            addressDelegate?.onInputedAddress(userInput!, nil)
             dismiss(animated: true)
             
         } else {
@@ -171,17 +173,9 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             view.isUserInteractionEnabled = false
             loadingView.isHidden = false
             nameservices.removeAll()
-            let prefix = recipientChain.accountPrefix!
+            let prefix = recipientChain.bechAccountPrefix!
             
             Task {
-                if let starname = try await checkStarname(userInput!) {
-                    starname.account.resources.forEach { resource in
-                        if (resource.resource.starts(with: prefix)) {
-                            nameservices.append(NameService.init("starname", userInput!, resource.resource))
-                        }
-                    }
-                }
-                
                 if let icns = try await checkOsmoname(userInput!, prefix) {
                     if let result = try? JSONDecoder().decode(JSON.self, from: icns.data) {
                         if (result["bech32_address"].stringValue.starts(with: prefix)) {
@@ -226,19 +220,28 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
     }
     
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectNameServiceAddress) {
-            let nameservice = nameservices[result.position!]
-            addressTextField.text = nameservice.address
+            if let index = result["index"] as? Int {
+                let nameservice = nameservices[index]
+                addressTextField.text = nameservice.address
+            }
             
         } else if (sheetType == .SelectRecipientAddress) {
-            addressTextField.text = result.param
+            if let address = result["address"] as? String {
+                let memo = result["memo"] as? String
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                    self.addressDelegate?.onInputedAddress(address, memo)
+                    self.dismiss(animated: true)
+                });
+            }
             
         } else if (sheetType == .SelectRecipientEvmAddress) {
-            addressTextField.text = result.param
+            if let address = result["address"] as? String {
+                addressTextField.text = address
+            }
         }
     }
-    
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -246,7 +249,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
 }
 
 protocol AddressDelegate {
-    func onInputedAddress(_ address: String)
+    func onInputedAddress(_ address: String, _ memo: String?)
 }
 
 extension TxAddressSheet {
@@ -254,12 +257,6 @@ extension TxAddressSheet {
     func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
         return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func checkStarname(_ inputName: String) async throws -> Starnamed_X_Starname_V1beta1_QueryStarnameResponse? {
-        let channel = getConnection(ChainStarname())
-        let req = Starnamed_X_Starname_V1beta1_QueryStarnameRequest.with { $0.starname = inputName }
-        return try? await Starnamed_X_Starname_V1beta1_QueryNIOClient(channel: channel).starname(req, callOptions: getCallOptions()).response.get()
     }
     
     func checkOsmoname(_ inputName: String, _ prefix: String) async throws -> Cosmwasm_Wasm_V1_QuerySmartContractStateResponse? {

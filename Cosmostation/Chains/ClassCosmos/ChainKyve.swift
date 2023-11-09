@@ -21,7 +21,7 @@ class ChainKyve: CosmosClass  {
         stakeDenom = "ukyve"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "kyve"
+        bechAccountPrefix = "kyve"
         
         grpcHost = "grpc-kyve.cosmostation.io"
     }

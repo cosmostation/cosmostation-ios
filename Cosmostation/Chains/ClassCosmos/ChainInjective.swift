@@ -21,7 +21,7 @@ class ChainInjective: CosmosClass  {
         stakeDenom = "inj"
         
         accountKeyType = AccountKeyType(.INJECTIVE_Secp256k1, "m/44'/60'/0'/0/X")
-        accountPrefix = "inj"
+        bechAccountPrefix = "inj"
         
         grpcHost = "grpc-injective.cosmostation.io"
     }
@@ -30,13 +30,13 @@ class ChainInjective: CosmosClass  {
         privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        address = KeyFac.convertEvmToBech32(evmAddress!, accountPrefix!)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        address = KeyFac.convertEvmToBech32(evmAddress!, accountPrefix!)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
     }
 }

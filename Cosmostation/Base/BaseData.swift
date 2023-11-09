@@ -231,13 +231,13 @@ extension BaseData {
                 table.column(REFADDRESS_ACCOUNT_ID)
                 table.column(REFADDRESS_CHAIN_TAG)
                 table.column(REFADDRESS_DP_ADDRESS)
+                table.column(REFADDRESS_EVM_ADDRESS)
                 table.column(REFADDRESS_MAIN_AMOUNT)
                 table.column(REFADDRESS_MAIN_VALUE)
                 table.column(REFADDRESS_TOKEN_VALUE)
                 table.column(REFADDRESS_COIN_CNT)
             }
             try self.database.run(refAddressTable)
-            
             
             let addressBookTable = TABLE_ADDRESSBOOK.create(ifNotExists: true) { table in
                 table.column(ADDRESSBOOK_ID, primaryKey: true)
@@ -248,6 +248,8 @@ extension BaseData {
                 table.column(ADDRESSBOOK_TIME)
             }
             try self.database.run(addressBookTable)
+            
+            
             
         } catch { print(error) }
     }
@@ -299,8 +301,8 @@ extension BaseData {
         var result = Array<RefAddress>()
         for rowInfo in try! database.prepare(TABLE_REFADDRESS) {
             result.append(RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_TAG],
-                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], rowInfo[REFADDRESS_MAIN_VALUE], 
-                                     rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT]))
+                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_EVM_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], 
+                                     rowInfo[REFADDRESS_MAIN_VALUE], rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT]))
         }
         return result
     }
@@ -310,8 +312,8 @@ extension BaseData {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == accountId)
         for rowInfo in try! database.prepare(query) {
             result.append(RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_TAG],
-                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], rowInfo[REFADDRESS_MAIN_VALUE], 
-                                     rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT]))
+                                     rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_EVM_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], 
+                                     rowInfo[REFADDRESS_MAIN_VALUE], rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT]))
         }
         return result
     }
@@ -321,8 +323,8 @@ extension BaseData {
                                             REFADDRESS_CHAIN_TAG == chainTag)
         if let rowInfo = try! database.pluck(query) {
             return RefAddress(rowInfo[REFADDRESS_ID], rowInfo[REFADDRESS_ACCOUNT_ID], rowInfo[REFADDRESS_CHAIN_TAG],
-                              rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], rowInfo[REFADDRESS_MAIN_VALUE],
-                              rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT])
+                              rowInfo[REFADDRESS_DP_ADDRESS], rowInfo[REFADDRESS_EVM_ADDRESS], rowInfo[REFADDRESS_MAIN_AMOUNT], 
+                              rowInfo[REFADDRESS_MAIN_VALUE], rowInfo[REFADDRESS_TOKEN_VALUE], rowInfo[REFADDRESS_COIN_CNT])
         }
         return nil
     }
@@ -331,7 +333,8 @@ extension BaseData {
     public func insertRefAddresses(_ refAddress: RefAddress) -> Int64 {
         let toInsert = TABLE_REFADDRESS.insert(REFADDRESS_ACCOUNT_ID <- refAddress.accountId,
                                                REFADDRESS_CHAIN_TAG <- refAddress.chainTag,
-                                               REFADDRESS_DP_ADDRESS <- refAddress.dpAddress,
+                                               REFADDRESS_DP_ADDRESS <- refAddress.bechAddress,
+                                               REFADDRESS_EVM_ADDRESS <- refAddress.evmAddress,
                                                REFADDRESS_MAIN_AMOUNT <- refAddress.lastMainAmount,
                                                REFADDRESS_MAIN_VALUE <- refAddress.lastMainValue,
                                                REFADDRESS_TOKEN_VALUE <- refAddress.lastTokenValue,
@@ -343,7 +346,7 @@ extension BaseData {
     public func updateRefAddressesMain(_ refAddress: RefAddress) -> Int? {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
                                             REFADDRESS_CHAIN_TAG == refAddress.chainTag &&
-                                            REFADDRESS_DP_ADDRESS == refAddress.dpAddress)
+                                            REFADDRESS_DP_ADDRESS == refAddress.bechAddress)
         if let address = try! database.pluck(query) {
             let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])
             return try? database.run(target.update(REFADDRESS_MAIN_AMOUNT <- refAddress.lastMainAmount,
@@ -358,7 +361,7 @@ extension BaseData {
     public func updateRefAddressesToken(_ refAddress: RefAddress) -> Int? {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
                                             REFADDRESS_CHAIN_TAG == refAddress.chainTag &&
-                                            REFADDRESS_DP_ADDRESS == refAddress.dpAddress)
+                                            REFADDRESS_DP_ADDRESS == refAddress.bechAddress)
         if let address = try! database.pluck(query) {
             let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])
             return try? database.run(target.update(REFADDRESS_TOKEN_VALUE <- refAddress.lastTokenValue))

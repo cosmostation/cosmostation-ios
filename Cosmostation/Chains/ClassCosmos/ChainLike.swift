@@ -21,7 +21,7 @@ class ChainLike: CosmosClass  {
         stakeDenom = "nanolike"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "like"
+        bechAccountPrefix = "like"
         
         grpcHost = "grpc-likecoin.cosmostation.io"
     }

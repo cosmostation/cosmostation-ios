@@ -97,7 +97,6 @@ class KeyFac {
             
         } else if (pubKeyType == .SUI_Ed25519) {
             let data = Data([UInt8](Data(count: 1)) + pubKey)
-//            let hash = try! Blake2.hash(.b2b, size: 32, data: data)
             let hash = try! Blake2b.hash(size: 32, data: data)
             return "0x" + hash.toHexString()
         }

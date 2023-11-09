@@ -21,7 +21,7 @@ class ChainCoreum: CosmosClass  {
         stakeDenom = "ucore"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/990'/0'/0/X")
-        accountPrefix = "core"
+        bechAccountPrefix = "core"
         
         grpcHost = "grpc-coreum.cosmostation.io"
     }

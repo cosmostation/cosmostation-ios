@@ -62,8 +62,8 @@ class KavaLendListVC: BaseVC {
                let hardInterestRate = try? await fetchLendingInterestRate(channel),
                let hardTotalDeposit = try? await fetchLendingTotalDeposit(channel),
                let hardTotalBorrow = try? await fetchLendingTotalBorrow(channel),
-               let myDeposit = try? await fetchLendingMyDeposit(channel, selectedChain.address!),
-               let myBorrow = try? await fetchLendingMyBorrow(channel, selectedChain.address!) {
+               let myDeposit = try? await fetchLendingMyDeposit(channel, selectedChain.bechAddress),
+               let myBorrow = try? await fetchLendingMyBorrow(channel, selectedChain.bechAddress) {
                 
                 self.hardParams = hardParam?.params
                 self.hardInterestRates = hardInterestRate?.interestRates
@@ -240,19 +240,22 @@ extension KavaLendListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
         }
     }
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectHardAction) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                if (result.position == 0) {
-                    self.onDepositHardTx(result.param!)
-                } else if (result.position == 1) {
-                    self.onWithdrawHardTx(result.param!)
-                } else if (result.position == 2) {
-                    self.onBorrowHardTx(result.param!)
-                } else if (result.position == 3) {
-                    self.onRepayHardTx(result.param!)
-                }
-            });
+            if let denom = result["denom"] as? String,
+               let index = result["index"] as? Int {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    if (index == 0) {
+                        self.onDepositHardTx(denom)
+                    } else if (index == 1) {
+                        self.onWithdrawHardTx(denom)
+                    } else if (index == 2) {
+                        self.onBorrowHardTx(denom)
+                    } else if (index == 3) {
+                        self.onRepayHardTx(denom)
+                    }
+                });
+            }
         }
         
     }
@@ -299,7 +302,7 @@ extension KavaLendListVC {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
 }

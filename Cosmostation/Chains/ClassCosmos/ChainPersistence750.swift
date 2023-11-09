@@ -22,7 +22,7 @@ class ChainPersistence750: CosmosClass  {
         stakeDenom = "uxprt"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/750'/0'/0/X")
-        accountPrefix = "persistence"
+        bechAccountPrefix = "persistence"
         
         grpcHost = "grpc-persistence.cosmostation.io"
     }

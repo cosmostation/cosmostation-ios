@@ -112,7 +112,12 @@ class CosmosTransfer: BaseVC {
             if (transferAssetType == .CoinTransfer) {
                 if (msAsset.chain == selectedChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {
                     //add backward path
-                    if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.beforeChain(selectedChain.apiName) }).first {
+                    if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.beforeChain(selectedChain.apiName) && $0.evmCompatible == true }).first {
+                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
+                            recipientableChains.append(sendable)
+                        }
+                        
+                    } else if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.beforeChain(selectedChain.apiName) }).first {
                         if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
                             recipientableChains.append(sendable)
                         }
@@ -120,7 +125,12 @@ class CosmosTransfer: BaseVC {
                     
                 } else if (msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
                     //add forward path
-                    if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.chain }).first {
+                    if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.chain && $0.evmCompatible == true }).first {
+                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
+                            recipientableChains.append(sendable)
+                        }
+                        
+                    } else if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.chain }).first {
                         if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
                             recipientableChains.append(sendable)
                         }
@@ -221,7 +231,7 @@ class CosmosTransfer: BaseVC {
         }
         addressSheet.recipientChain = selectedRecipientChain
         addressSheet.addressDelegate = self
-        self.onStartSheet(addressSheet)
+        self.onStartSheet(addressSheet, 220)
     }
     
     func onUpdateToAddressView() {
@@ -341,7 +351,7 @@ class CosmosTransfer: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet)
+        self.onStartSheet(memoSheet, 260)
     }
     
     func onUpdateMemoView(_ memo: String, _ skipSimul: Bool? = false) {
@@ -424,7 +434,7 @@ class CosmosTransfer: BaseVC {
     func inChainCoinSendSimul() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                 do {
                     let simul = try await simulSendTx(channel, auth!, onBindSend())
                     DispatchQueue.main.async {
@@ -446,7 +456,7 @@ class CosmosTransfer: BaseVC {
     func inChainWasmSendSimul() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                 do {
                     let simul = try await simulCw20SendTx(channel, auth!, onBindCw20Send())
                     DispatchQueue.main.async {
@@ -469,7 +479,7 @@ class CosmosTransfer: BaseVC {
         Task {
             let channel = getConnection()
             let recipientChannel = getRecipientConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                let ibcClient = try? await fetchIbcClient(channel),
                let lastBlock = try? await fetchLastBlock(recipientChannel) {
                 do {
@@ -493,7 +503,7 @@ class CosmosTransfer: BaseVC {
     func ibcWasmSendSimul() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                 do {
                     let simul = try await simulCw20IbcSendTx(channel, auth!, onBindCw20IbcSend())
                     DispatchQueue.main.async {
@@ -521,7 +531,7 @@ class CosmosTransfer: BaseVC {
             $0.amount = toSendAmount.stringValue
         }
         return Cosmos_Bank_V1beta1_MsgSend.with {
-            $0.fromAddress = selectedChain.address!
+            $0.fromAddress = selectedChain.bechAddress
             $0.toAddress = selectedRecipientAddress!
             $0.amount = [sendCoin]
         }
@@ -531,7 +541,7 @@ class CosmosTransfer: BaseVC {
         let msg: JSON = ["transfer" : ["recipient" : selectedRecipientAddress! , "amount" : toSendAmount.stringValue]]
         let msgBase64 = try! msg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-            $0.sender = selectedChain.address!
+            $0.sender = selectedChain.bechAddress
             $0.contract = selectedMsToken!.address!
             $0.msg = Data(base64Encoded: msgBase64)!
         }
@@ -549,7 +559,7 @@ class CosmosTransfer: BaseVC {
             $0.amount = toSendAmount.stringValue
         }
         return Ibc_Applications_Transfer_V1_MsgTransfer.with {
-            $0.sender = selectedChain.address!
+            $0.sender = selectedChain.bechAddress
             $0.receiver = selectedRecipientAddress!
             $0.sourceChannel = mintscanPath!.channel!
             $0.sourcePort = mintscanPath!.port!
@@ -566,7 +576,7 @@ class CosmosTransfer: BaseVC {
         let innerMsg: JSON = ["send" : ["contract" : mintscanPath!.getIBCContract(), "amount" : toSendAmount.stringValue, "msg" : jsonMsgBase64]]
         let innerMsgBase64 = try! innerMsg.rawData(options: [.sortedKeys]).base64EncodedString()
         return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-            $0.sender = selectedChain.address!
+            $0.sender = selectedChain.bechAddress
             $0.contract = selectedMsToken!.address!
             $0.msg = Data(base64Encoded: innerMsgBase64)!
         }
@@ -577,23 +587,24 @@ class CosmosTransfer: BaseVC {
 
 extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, AddressDelegate, QrScanDelegate, PinDelegate {
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeCoin) {
-            if let position = result.position,
-               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
-                txFee.amount[0].denom = selectedDenom
+            if let index = result["index"] as? Int,
+               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
+                txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }
             
         } else if (sheetType == .SelectRecipientChain) {
-            if (result.param != selectedRecipientChain.chainId) {
-                selectedRecipientChain = recipientableChains.filter({ $0.chainId == result.param }).first
-                selectedRecipientAddress = ""
-                onUpdateToChainView()
-                onUpdateToAddressView()
+            if let chainId = result["chainId"] as? String {
+                if (chainId != selectedRecipientChain.chainId) {
+                    selectedRecipientChain = recipientableChains.filter({ $0.chainId == chainId }).first
+                    selectedRecipientAddress = ""
+                    onUpdateToChainView()
+                    onUpdateToAddressView()
+                }
             }
-            
         }
     }
     
@@ -605,26 +616,38 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
         onUpdateAmountView(amount)
     }
     
-    func onInputedAddress(_ address: String) {
+    func onInputedAddress(_ address: String, _ memo: String?) {
         selectedRecipientAddress = address
         onUpdateToAddressView()
+        if (memo != nil && memo?.isEmpty == false) {
+            onUpdateMemoView(memo!)
+        }
     }
     
     func onScanned(_ result: String) {
         let scanedString = result.components(separatedBy: "(MEMO)")
-        if (scanedString[0].isEmpty == true || scanedString[0].count < 5) {
+        var addressScan = ""
+        var memoScan = ""
+        if (scanedString.count == 2) {
+            addressScan = scanedString[0].trimmingCharacters(in: .whitespaces)
+            memoScan = scanedString[1].trimmingCharacters(in: .whitespaces)
+        } else {
+            addressScan = scanedString[0].trimmingCharacters(in: .whitespaces)
+        }
+        
+        if (addressScan.isEmpty == true || addressScan.count < 5) {
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return;
         }
-        if (scanedString[0] == selectedChain.address) {
+        if (addressScan == selectedChain.bechAddress) {
             self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
             return;
         }
         
-        if (WUtils.isValidChainAddress(selectedRecipientChain, scanedString[0])) {
-            selectedRecipientAddress = scanedString[0]
+        if (WUtils.isValidBechAddress(selectedRecipientChain, addressScan)) {
+            selectedRecipientAddress = addressScan.trimmingCharacters(in: .whitespaces)
             if (scanedString.count > 1) {
-                onUpdateMemoView(scanedString[1], true)
+                onUpdateMemoView(memoScan.trimmingCharacters(in: .whitespaces), true)
             }
             onUpdateToAddressView()
             
@@ -661,13 +684,16 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     func inChainCoinSend() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                let response = try await broadcastSendTx(channel, auth!, onBindSend()) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     self.loadingView.isHidden = true
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                     txResult.selectedChain = self.selectedChain
+                    txResult.recipientChain = self.selectedRecipientChain
+                    txResult.recipinetAddress = self.selectedRecipientAddress
+                    txResult.memo = self.txMemo
                     txResult.broadcastTxResponse = response
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
@@ -679,13 +705,16 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     func inChainWasmSend() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                let response = try await broadcastCw20SendTx(channel, auth!, onBindCw20Send()) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     self.loadingView.isHidden = true
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                     txResult.selectedChain = self.selectedChain
+                    txResult.recipientChain = self.selectedRecipientChain
+                    txResult.recipinetAddress = self.selectedRecipientAddress
+                    txResult.memo = self.txMemo
                     txResult.broadcastTxResponse = response
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
@@ -699,7 +728,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
         Task {
             let channel = getConnection()
             let recipientChannel = getRecipientConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                let ibcClient = try? await fetchIbcClient(channel),
                let lastBlock = try? await fetchLastBlock(recipientChannel),
                let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(ibcClient!, lastBlock!)) {
@@ -708,6 +737,9 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                     txResult.selectedChain = self.selectedChain
+                    txResult.recipientChain = self.selectedRecipientChain
+                    txResult.recipinetAddress = self.selectedRecipientAddress
+                    txResult.memo = self.txMemo
                     txResult.broadcastTxResponse = response
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
@@ -719,13 +751,16 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     func ibcWasmSend() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!),
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                let response = try await broadcastCw20IbcSendTx(channel, auth!, onBindCw20IbcSend()) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     self.loadingView.isHidden = true
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                     txResult.selectedChain = self.selectedChain
+                    txResult.recipientChain = self.selectedRecipientChain
+                    txResult.recipinetAddress = self.selectedRecipientAddress
+                    txResult.memo = self.txMemo
                     txResult.broadcastTxResponse = response
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)

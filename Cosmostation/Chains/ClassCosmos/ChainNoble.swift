@@ -21,7 +21,7 @@ class ChainNoble: CosmosClass  {
         stakeDenom = "ustake"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "noble"
+        bechAccountPrefix = "noble"
         supportStaking = false
         
         grpcHost = "grpc-noble.cosmostation.io"

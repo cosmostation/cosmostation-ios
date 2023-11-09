@@ -79,7 +79,7 @@ class NeutronPrpposalsVC: BaseVC {
             fetchProposals(group, channel, contAddress)
         }
         
-        fetchMyVotes(group, selectedChain.address!)
+        fetchMyVotes(group, selectedChain.bechAddress)
         
         group.notify(queue: .main) {
 //            DispatchQueue.main.async {
@@ -87,7 +87,8 @@ class NeutronPrpposalsVC: BaseVC {
                 self.loadingView.isHidden = true
                 self.tableView.reloadData()
 //            }
-            
+//            print("neutronProposals ", self.neutronProposals.count)
+//            print("neutronMyVotes ", self.neutronMyVotes.count)
         }
     }
 
@@ -237,7 +238,7 @@ extension NeutronPrpposalsVC {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
 }

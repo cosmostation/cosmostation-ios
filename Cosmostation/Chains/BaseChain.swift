@@ -17,13 +17,11 @@ class BaseChain {
     var logo2: String!
     var isDefault = true
     var apiName: String!
-    var accountPrefix: String?
     
     
     var accountKeyType: AccountKeyType!
     var privateKey: Data?
     var publicKey: Data?
-    var address: String?
     
     
     var fetched = false
@@ -32,24 +30,18 @@ class BaseChain {
     var allTokenValue = NSDecimalNumber.zero
     var allTokenUSDValue = NSDecimalNumber.zero
     
-    
-    
-    
     func getHDPath(_ lastPath: String) -> String {
         return accountKeyType.hdPath.replacingOccurrences(of: "X", with: lastPath)
     }
     
-    func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
-        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
-        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
-    }
     
-    func setInfoWithPrivateKey(_ priKey: Data) {
-        privateKey = priKey
-        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, accountPrefix)
-    }
+    func setInfoWithSeed(_ seed: Data, _ lastPath: String) {}
+    
+    func setInfoWithPrivateKey(_ priKey: Data) {}
+    
+    func fetchData(_ id: Int64) {}
+    
+    func isTxFeePayable() -> Bool { return false }
     
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if (usd == true) {

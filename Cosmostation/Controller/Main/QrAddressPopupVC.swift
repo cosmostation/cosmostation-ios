@@ -19,13 +19,20 @@ class QrAddressPopupVC: BaseVC {
     @IBOutlet weak var evmLabel: UILabel!
     
     var selectedChain: CosmosClass!
+    var toDpAddress = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
         chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
-        addressLabel.text = selectedChain.address
+        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
+            toDpAddress = selectedChain.evmAddress
+        } else {
+            toDpAddress = selectedChain.bechAddress
+        }
+        
+        addressLabel.text = toDpAddress
         addressLabel.adjustsFontSizeToFitWidth = true
         if (baseAccount.type == .withMnemonic) {
             hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
@@ -49,7 +56,7 @@ class QrAddressPopupVC: BaseVC {
             }
         }
         
-        if let qrImage = generateQrCode(selectedChain.address!) {
+        if let qrImage = generateQrCode(toDpAddress) {
             rqImgView.image = UIImage(ciImage: qrImage)
             let chainLogo = UIImage.init(named: selectedChain.logo1)
             chainLogo?.addToCenter(of: rqImgView)

@@ -21,7 +21,7 @@ class ChainArchway: CosmosClass  {
         stakeDenom = "aarch"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "archway"
+        bechAccountPrefix = "archway"
         
         grpcHost = "grpc-archway.cosmostation.io"
     }

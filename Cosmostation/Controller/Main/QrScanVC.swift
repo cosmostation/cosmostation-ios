@@ -115,11 +115,14 @@ class QrScanVC: UIViewController {
         if (self.navigationController != nil) {
             scanDelegate?.onScanned(stringData)
             self.navigationController?.popViewController(animated: false)
+            return
             
         } else {
             self.dismiss(animated: true) {
                 self.scanDelegate?.onScanned(stringData)
+                return
             }
+            return
             
         }
     }

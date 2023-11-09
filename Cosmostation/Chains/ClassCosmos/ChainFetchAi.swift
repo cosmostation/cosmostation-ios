@@ -21,7 +21,7 @@ class ChainFetchAi: CosmosClass  {
         stakeDenom = "afet"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "fetch"
+        bechAccountPrefix = "fetch"
         
         grpcHost = "grpc-fetchai.cosmostation.io"
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,6 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChainListVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="addChainBtn" destination="FFM-gB-RsV" id="wBw-RT-K5R"/>
+                <outlet property="loadingView" destination="fW9-e0-raX" id="YZB-At-Bzx"/>
                 <outlet property="searchEmptyLayer" destination="nO1-yz-Whg" id="yoG-DF-QDI"/>
                 <outlet property="tableView" destination="Q8M-AH-yf3" id="jKJ-z0-umY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -76,6 +77,15 @@
                         <constraint firstItem="8Rn-bc-tg5" firstAttribute="centerX" secondItem="nO1-yz-Whg" secondAttribute="centerX" id="r1j-dg-iEf"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fW9-e0-raX" customClass="LottieAnimationView" customModule="Lottie">
+                    <rect key="frame" x="106.66666666666669" y="383.66666666666669" width="180" height="110"/>
+                    <viewLayoutGuide key="safeArea" id="mnx-SF-cvv"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="eIF-7q-epn"/>
+                        <constraint firstAttribute="width" constant="180" id="kCk-SL-h7O"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -83,6 +93,7 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Q8M-AH-yf3" secondAttribute="bottom" id="0td-q6-IxX"/>
                 <constraint firstItem="FFM-gB-RsV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="CD1-VU-7Ow"/>
+                <constraint firstItem="fW9-e0-raX" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="CI4-Tx-Pm9"/>
                 <constraint firstItem="nO1-yz-Whg" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="FAu-yb-zSD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FFM-gB-RsV" secondAttribute="trailing" constant="8" id="Kxe-nm-Toz"/>
                 <constraint firstItem="Q8M-AH-yf3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="L6K-UY-xmW"/>
@@ -90,6 +101,7 @@
                 <constraint firstItem="nO1-yz-Whg" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="dRG-eF-VGG"/>
                 <constraint firstAttribute="bottom" secondItem="FFM-gB-RsV" secondAttribute="bottom" constant="38" id="kou-ah-1S8"/>
                 <constraint firstItem="Q8M-AH-yf3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pcn-WX-kTp"/>
+                <constraint firstItem="fW9-e0-raX" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="rds-G4-IkL"/>
             </constraints>
             <point key="canvasLocation" x="138" y="20"/>
         </view>

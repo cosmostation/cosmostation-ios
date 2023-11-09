@@ -175,6 +175,7 @@ class CosmosCoinVC: BaseVC {
     }
     
     func onStartLegacyTransferVC(_ denom: String) {
+        print("onStartLegacyTransferVC")
         let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
         transfer.selectedChain = selectedChain
         transfer.toSendDenom = denom
@@ -287,28 +288,23 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
             return
             
-        } else if (selectedChain is ChainKava60) {
-            if (indexPath.section == 0) {
-                onStartTransferVC(selectedChain.stakeDenom)
-            } else if (indexPath.section == 1) {
-                onStartTransferVC(ibcCoins[indexPath.row].denom)
-            } else if (indexPath.section == 2) {
-                let sendDenom = bridgedCoins[indexPath.row].denom
-                if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
-                    onBepSelectDialog(sendDenom)
-                } else{
-                    onStartTransferVC(sendDenom)
-                }
-            }
-            return
-            
         } else {
             if (indexPath.section == 0) {
                 onStartTransferVC(selectedChain.stakeDenom)
             } else if (indexPath.section == 1) {
                 onStartTransferVC(ibcCoins[indexPath.row].denom)
             } else if (indexPath.section == 2) {
-                onStartTransferVC(bridgedCoins[indexPath.row].denom)
+                if (selectedChain is ChainKava60) {
+                    let sendDenom = bridgedCoins[indexPath.row].denom
+                    if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
+                        onBepSelectDialog(sendDenom)
+                    } else {
+                        onStartTransferVC(sendDenom)
+                    }
+                    
+                } else {
+                    onStartTransferVC(bridgedCoins[indexPath.row].denom)
+                }
             }
         }
     }

@@ -21,7 +21,7 @@ class ChainTerra: CosmosClass  {
         stakeDenom = "uluna"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/330'/0'/0/X")
-        accountPrefix = "terra"
+        bechAccountPrefix = "terra"
         
         grpcHost = "grpc-terra.cosmostation.io"
     }

@@ -52,15 +52,15 @@ class CosmosHistoryVC: BaseVC {
     
     @objc func onRequestFetch() {
         if (selectedChain is ChainBinanceBeacon) {
-            onFetchBnbHistory(selectedChain.address)
+            onFetchBnbHistory(selectedChain.bechAddress)
             
         } else if (selectedChain is ChainOkt60Keccak) {
-            onFetchOktHistory(selectedChain.evmAddress!)
+            onFetchOktHistory(selectedChain.evmAddress)
             
         } else {
             msHistoyID = 0
             msHasMore = false
-            onFetchMsHistory(selectedChain.address, msHistoyID)
+            onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
         }
     }
     
@@ -225,7 +225,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
                 && indexPath.row == self.msHistoryGroup.last!.values.count - 1
                 && msHasMore == true) {
                 msHasMore = false
-                onFetchMsHistory(selectedChain.address, msHistoyID)
+                onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
             }
         }
     }

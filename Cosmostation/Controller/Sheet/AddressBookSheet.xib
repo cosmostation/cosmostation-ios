@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -50,29 +50,29 @@
                         <constraint firstAttribute="height" constant="54" id="xc7-oc-QWR"/>
                     </constraints>
                     <color key="textColor" name="_color01"/>
-                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sWI-nP-cw9" customClass="MDCOutlinedTextField">
-                    <rect key="frame" x="20" y="256.66666666666669" width="353" height="54"/>
+                    <rect key="frame" x="20" y="248.66666666666663" width="353" height="54"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_color01"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="abv-zl-C1n"/>
                     </constraints>
                     <color key="textColor" name="_color01"/>
-                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dJd-88-k40" customClass="MDCOutlinedTextField">
-                    <rect key="frame" x="20" y="334.66666666666669" width="353" height="54"/>
+                    <rect key="frame" x="20" y="318.66666666666669" width="353" height="54"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_color01"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="i4t-Un-llb"/>
                     </constraints>
                     <color key="textColor" name="_color01"/>
-                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zGw-2L-f2i" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
@@ -98,9 +98,9 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sWI-nP-cw9" secondAttribute="trailing" constant="20" id="4hu-9n-bGt"/>
                 <constraint firstItem="8uh-xB-uW7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="A7S-dG-3Z1"/>
-                <constraint firstItem="dJd-88-k40" firstAttribute="top" secondItem="sWI-nP-cw9" secondAttribute="bottom" constant="24" id="MuN-dA-grn"/>
+                <constraint firstItem="dJd-88-k40" firstAttribute="top" secondItem="sWI-nP-cw9" secondAttribute="bottom" constant="16" id="MuN-dA-grn"/>
                 <constraint firstItem="BUh-3h-7Iv" firstAttribute="top" secondItem="IWF-18-6Bc" secondAttribute="bottom" constant="8" id="Nsc-kH-1SF"/>
-                <constraint firstItem="sWI-nP-cw9" firstAttribute="top" secondItem="8uh-xB-uW7" secondAttribute="bottom" constant="24" id="OLX-Vl-ueO"/>
+                <constraint firstItem="sWI-nP-cw9" firstAttribute="top" secondItem="8uh-xB-uW7" secondAttribute="bottom" constant="16" id="OLX-Vl-ueO"/>
                 <constraint firstItem="IWF-18-6Bc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="QiW-Tu-N4v"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8uh-xB-uW7" secondAttribute="trailing" constant="20" id="SDB-nL-DSz"/>
                 <constraint firstItem="BUh-3h-7Iv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="V2s-Ed-Hh9"/>

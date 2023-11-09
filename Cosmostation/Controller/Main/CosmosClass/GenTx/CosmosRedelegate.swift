@@ -220,7 +220,7 @@ class CosmosRedelegate: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet)
+        self.onStartSheet(memoSheet, 260)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -265,7 +265,7 @@ class CosmosRedelegate: BaseVC {
         loadingView.isHidden = false
         
         toRedelegate = Cosmos_Staking_V1beta1_MsgBeginRedelegate.with {
-            $0.delegatorAddress = selectedChain.address!
+            $0.delegatorAddress = selectedChain.bechAddress
             $0.validatorSrcAddress = fromValidator!.operatorAddress
             $0.validatorDstAddress = toValidator!.operatorAddress
             $0.amount = toCoin!
@@ -276,7 +276,7 @@ class CosmosRedelegate: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                 do {
                     let simul = try await simulateTx(channel, auth!)
                     DispatchQueue.main.async {
@@ -298,22 +298,25 @@ class CosmosRedelegate: BaseVC {
 }
 
 extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectUnStakeValidator) {
-            if (fromValidator?.operatorAddress != result.param) {
-                fromValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == result.param}).first!
+            if let validatorAddress = result["validatorAddress"] as? String {
+                fromValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
                 onUpdateFromValidatorView()
                 onUpdateFeeView()
             }
             
         } else if (sheetType == .SelectValidator) {
-            toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == result.param}).first!
-            onUpdateToValidatorView()
+            if let validatorAddress = result["validatorAddress"] as? String {
+                toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                onUpdateToValidatorView()
+                onUpdateFeeView()
+            }
             
         } else if (sheetType == .SelectFeeCoin) {
-            if let position = result.position,
-                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
-                txFee.amount[0].denom = selectedDenom
+            if let index = result["index"] as? Int,
+               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
+                txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }
@@ -335,7 +338,7 @@ extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address!),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                    let response = try await broadcastTx(channel, auth!) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                         self.loadingView.isHidden = true
@@ -382,7 +385,7 @@ extension CosmosRedelegate {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
 }

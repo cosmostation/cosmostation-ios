@@ -21,7 +21,7 @@ class ChainTeritori: CosmosClass  {
         stakeDenom = "utori"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "tori"
+        bechAccountPrefix = "tori"
         
         grpcHost = "grpc-teritori.cosmostation.io"
     }

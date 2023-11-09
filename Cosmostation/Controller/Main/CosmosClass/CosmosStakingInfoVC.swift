@@ -49,7 +49,6 @@ class CosmosStakingInfoVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        
         navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconRewardAddress"), style: .plain, target: self, action: #selector(onClickRewardAddressChange))
         
         onFetchData()
@@ -155,7 +154,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain.rewardAddress != selectedChain.address) {
+        if (selectedChain.rewardAddress != selectedChain.bechAddress) {
             onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
             return
         }
@@ -169,6 +168,18 @@ class CosmosStakingInfoVC: BaseVC {
         } else {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
         }
+    }
+    
+    func onCancelUnbondingTx(_ position: Int) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let cancel = CosmosCancelUnbonding(nibName: "CosmosCancelUnbonding", bundle: nil)
+        cancel.selectedChain = selectedChain
+        cancel.unbondingEntry = unbondings[position]
+        cancel.modalTransitionStyle = .coverVertical
+        self.present(cancel, animated: true)
     }
     
     func onRewardAddressTx() {
@@ -235,7 +246,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0) {
-            if (rewardAddress?.isEmpty == true || rewardAddress == selectedChain.address) { return 0 }
+            if (rewardAddress?.isEmpty == true || rewardAddress == selectedChain.bechAddress) { return 0 }
             else  { return 40 }
         } else if (section == 1) {
             return (delegations.count > 0) ? 40 : 0
@@ -284,7 +295,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath.section == 0) {
-            if (rewardAddress?.isEmpty == true || rewardAddress == selectedChain.address) { return 0 }
+            if (rewardAddress?.isEmpty == true || rewardAddress == selectedChain.bechAddress) { return 0 }
         }
         return UITableView.automaticDimension;
     }
@@ -304,6 +315,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         } else if (indexPath.section == 2) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
+            baseSheet.unbondingEnrtyPosition = indexPath.row
             baseSheet.sheetType = .SelectUnbondingAction
             onStartSheet(baseSheet, 240)
         }
@@ -335,33 +347,29 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
 
 extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
     
-    public func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectDelegatedAction) {
-            if (result.position == 0) {
+            if let index = result["index"] as? Int,
+               let valAddress = result["validatorAddress"] as? String {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onUndelegateTx(result.param!)
+                    if (index == 0) {
+                        self.onUndelegateTx(valAddress)
+                    } else if (index == 1) {
+                        self.onRedelegateTx(valAddress)
+                    } else if (index == 2) {
+                        self.onClaimRewardTx(valAddress)
+                    } else if (index == 3) {
+                        self.onCompoundingTx(valAddress)
+                    }
                 });
-                
-            } else if (result.position == 1) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onRedelegateTx(result.param!)
-                });
-                
-            } else if (result.position == 2) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onClaimRewardTx(result.param!)
-                });
-                
-            } else if (result.position == 3) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onCompoundingTx(result.param!)
-                });
-                
             }
             
         } else if (sheetType == .SelectUnbondingAction) {
-            print("SelectUnbondingAction ", result.position)
-            
+            if let entryPosition = result["entryPosition"] as? Int {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    self.onCancelUnbondingTx(entryPosition)
+                });
+            }
         }
     }
     

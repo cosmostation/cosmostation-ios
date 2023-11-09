@@ -31,33 +31,37 @@ class ChainOkt60Keccak: CosmosClass  {
         stakeDenom = "okt"
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        accountPrefix = "ex"
+        bechAccountPrefix = "ex"
         supportStaking = false
         evmCompatible = true
-    }
-    
-    override func fetchData(_ id: Int64) {
-        fetchLcdData(id)
-    }
-    
-    override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        return lcdBalanceValue(stakeDenom, usd).adding(lcdOktDepositValue(usd)).adding(lcdOktWithdrawValue(usd))
     }
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
         privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        address = KeyFac.convertEvmToBech32(evmAddress!, accountPrefix!)
-        
-//        print("", tag, " ", address, "  ", evmAddress)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+//        print("", tag, " ", bechAddress, "  ", evmAddress)
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        address = KeyFac.convertEvmToBech32(evmAddress!, accountPrefix!)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+    }
+    
+    override func fetchData(_ id: Int64) {
+        fetchLcdData(id)
+    }
+    
+    override func isTxFeePayable() -> Bool {
+        let availableAmount = lcdBalanceAmount(stakeDenom)
+        return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
+    }
+    
+    override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
+        return lcdBalanceValue(stakeDenom, usd).adding(lcdOktDepositValue(usd)).adding(lcdOktWithdrawValue(usd))
     }
     
     
@@ -72,9 +76,9 @@ extension ChainOkt60Keccak {
         let group = DispatchGroup()
         
         fetchNodeInfo(group)
-        fetchAccountInfo(group, address!)
-        fetchOktDeposited(group, address!)
-        fetchOktWithdraw(group, address!)
+        fetchAccountInfo(group, bechAddress)
+        fetchOktDeposited(group, bechAddress)
+        fetchOktWithdraw(group, bechAddress)
         fetchOktTokens(group)
         
         group.notify(queue: .main) {
@@ -84,7 +88,7 @@ extension ChainOkt60Keccak {
             
             let refAddress =
             BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.address!,
+                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                            nil, self.lcdAccountInfo.oktCoins?.count))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
@@ -220,5 +224,5 @@ extension ChainOkt60Keccak {
 
 let OKT_LCD = "https://exchainrpc.okex.org/okexchain/v1/"
 let OKT_EXPLORER = "https://www.oklink.com/oktc/"
-let OKT_BASE_FEE = "0.00005"
+let OKT_BASE_FEE = "0.00008"
 let OKT_GECKO_ID = "oec-token"

@@ -21,7 +21,7 @@ class ChainAssetMantle: CosmosClass  {
         stakeDenom = "umntl"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "mantle"
+        bechAccountPrefix = "mantle"
         
         grpcHost = "grpc-asset-mantle.cosmostation.io"
     }

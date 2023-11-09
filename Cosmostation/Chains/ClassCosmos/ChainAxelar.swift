@@ -21,7 +21,7 @@ class ChainAxelar: CosmosClass  {
         stakeDenom = "uaxl"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "axelar"
+        bechAccountPrefix = "axelar"
         
         grpcHost = "grpc-axelar.cosmostation.io"
     }

@@ -56,7 +56,12 @@ class CosmosClassVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         totalValue = selectedChain.allValue()
-        addressLabel.text = selectedChain.address
+        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
+            addressLabel.text = selectedChain.evmAddress
+        } else {
+            addressLabel.text = selectedChain.bechAddress
+        }
+        
         onSetTabbarView()
         onSetFabButton()
         if (selectedChain.supportStaking) {
@@ -114,6 +119,10 @@ class CosmosClassVC: BaseVC {
     }
     
     func onSendTx() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         if (selectedChain is ChainBinanceBeacon ||
             selectedChain is ChainOkt60Keccak) {
             let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
@@ -132,8 +141,12 @@ class CosmosClassVC: BaseVC {
     }
     
     func onClaimRewardTx() {
-        if (selectedChain.claimableRewards().count == 0) {
+        if (selectedChain.rewardAllCoins().count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+            return
+        }
+        if (selectedChain.claimableRewards().count == 0) {
+            onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
             return
         }
         if (selectedChain.isTxFeePayable() == false) {
@@ -148,15 +161,19 @@ class CosmosClassVC: BaseVC {
     }
     
     func onClaimCompoundingTx() {
-        if (selectedChain.claimableRewards().count == 0) {
+        if (selectedChain.rewardAllCoins().count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+            return
+        }
+        if (selectedChain.claimableRewards().count == 0) {
+            onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
             return
         }
         if (selectedChain.isTxFeePayable() == false) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain.rewardAddress != selectedChain.address) {
+        if (selectedChain.rewardAddress != selectedChain.bechAddress) {
             onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
             return
         }
@@ -325,15 +342,17 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
         }
     }
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectNeutronVault) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                if (result.position == 0) {
-                    self.onNeutronVaultDeposit()
-                } else if (result.position == 1) {
-                    self.onNeutronVaultwithdraw()
-                }
-            });
+            if let index = result["index"] as? Int {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    if (index == 0) {
+                        self.onNeutronVaultDeposit()
+                    } else if (index == 1) {
+                        self.onNeutronVaultwithdraw()
+                    }
+                });
+            }
         }
     }
     

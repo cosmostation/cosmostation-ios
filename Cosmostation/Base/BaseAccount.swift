@@ -38,6 +38,11 @@ public class BaseAccount {
     lazy var toDisplayCTags = [String]()
     lazy var allCosmosClassChains = [CosmosClass]()
     
+    func getRefreshName() -> String {
+        self.name = BaseData.instance.selectAccount(id)?.name ?? ""
+        return self.name
+    }
+    
     func loadDisplayCTags() {
         toDisplayCTags = BaseData.instance.getDisplayCosmosChainTags(self.id)
     }
@@ -61,7 +66,7 @@ public class BaseAccount {
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 getDisplayCosmosChains().forEach { chain in
                     Task {
-                        if (chain.address == nil) {
+                        if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, lastHDPath)
                         }
                         if (chain.fetched == false) {
@@ -75,7 +80,7 @@ public class BaseAccount {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 getDisplayCosmosChains().forEach { chain in
                     Task {
-                        if (chain.address == nil) {
+                        if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
@@ -94,7 +99,7 @@ public class BaseAccount {
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 allCosmosClassChains.forEach { chain in
                     Task(priority: .medium) {
-                        if (chain.address == nil) {
+                        if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, lastHDPath)
                         }
                         if (chain.fetched == false) {
@@ -108,7 +113,7 @@ public class BaseAccount {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 allCosmosClassChains.forEach { chain in
                     Task(priority: .medium) {
-                        if (chain.address == nil) {
+                        if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
@@ -127,7 +132,7 @@ public class BaseAccount {
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 targetChains.forEach { chain in
                     Task {
-                        if (chain.address == nil) {
+                        if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, lastHDPath)
                         }
                         if (chain.fetched == false) {
@@ -141,7 +146,7 @@ public class BaseAccount {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 targetChains.forEach { chain in
                     Task {
-                        if (chain.address == nil) {
+                        if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
@@ -200,7 +205,7 @@ extension BaseAccount {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 result.forEach { chain in
-                    if (chain.address == nil) {
+                    if (chain.bechAddress.isEmpty) {
                         chain.setInfoWithSeed(seed, lastHDPath)
                     }
                 }
@@ -212,7 +217,7 @@ extension BaseAccount {
             }
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 result.forEach { chain in
-                    if (chain.address == nil) {
+                    if (chain.bechAddress.isEmpty) {
                         chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                     }
                 }

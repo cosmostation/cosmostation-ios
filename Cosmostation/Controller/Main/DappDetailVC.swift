@@ -179,8 +179,8 @@ class DappDetailVC: BaseVC {
         if let chain = baseAccount.getDisplayCosmosChains().filter ({ $0.apiName == chainName }).first,
            (chain.isDefault == true && chain.accountKeyType.pubkeyType == .COSMOS_Secp256k1) {
             self.selectedChain = chain
-            self.wcTrustAccount = WCTrustAccount.init(network: 459, address: chain.address ?? "")
-            self.interactor?.approveSession(accounts: [chain.address ?? ""], chainId: chainId).done { _ in }.cauterize()
+            self.wcTrustAccount = WCTrustAccount.init(network: 459, address: chain.bechAddress ?? "")
+            self.interactor?.approveSession(accounts: [chain.bechAddress ?? ""], chainId: chainId).done { _ in }.cauterize()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
                 self.hideWait()
@@ -402,7 +402,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 
                 if let currentChainWithChainName = baseAccount.getDisplayCosmosChains().filter({ $0.apiName == chainId }).first {
                     self.selectedChain = currentChainWithChainName
-                    data["address"].stringValue = currentChainWithChainName.address ?? ""
+                    data["address"].stringValue = currentChainWithChainName.bechAddress ?? ""
                     data["publicKey"].stringValue = currentChainWithChainName.publicKey!.toHexString()
                         
                     let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
@@ -410,7 +410,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                     
                 } else if let currentChainWithChainId = baseAccount.getDisplayCosmosChains().filter({ $0.chainId == chainId }).first {
                     self.selectedChain = currentChainWithChainId
-                    data["address"].stringValue = currentChainWithChainId.address ?? ""
+                    data["address"].stringValue = currentChainWithChainId.bechAddress ?? ""
                     data["publicKey"].stringValue = currentChainWithChainId.publicKey!.toHexString()
                     approveWebToApp(data, messageJSON, bodyJSON["messageId"])
                     
@@ -587,13 +587,17 @@ extension DappDetailVC {
         Sign.instance.sessionProposalPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sessionProposal, context in
-                self?.approveProposal(proposal: sessionProposal)
+                if self!.isViewLoaded && self?.view.window != nil {
+                    self?.approveProposal(proposal: sessionProposal)
+                }
             }.store(in: &publishers)
         
         Sign.instance.sessionRequestPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sessionRequest, context in
-                self?.showSessionRequest(request: sessionRequest)
+                if self!.isViewLoaded && self?.view.window != nil {
+                    self?.showSessionRequest(request: sessionRequest)
+                }
             }.store(in: &publishers)
     }
     
@@ -619,7 +623,7 @@ extension DappDetailVC {
                 let accounts = Set(namespaces.value.chains!.filter { chain in
                     baseAccount.getDisplayCosmosChains().filter({ $0.chainId == chain.reference }).first != nil
                 }.compactMap { chain in
-                    WalletConnectSwiftV2.Account(chainIdentifier: chain.absoluteString, address: self.selectedChain.address!)
+                    WalletConnectSwiftV2.Account(chainIdentifier: chain.absoluteString, address: self.selectedChain.bechAddress)
                 })
                 let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
                 sessionNamespaces[caip2Namespace] = sessionNamespace
@@ -642,7 +646,7 @@ extension DappDetailVC {
             self.showRequestSign(request.params.encoded, {self.approveV2CosmosDirectRequest(wcV2Request: request)}, {self.respondOnReject(request: request)})
             
         } else if request.method == "cosmos_getAccounts" {
-            let v2Accounts = [["address": self.selectedChain.address, "pubkey": self.selectedChain.publicKey?.base64EncodedString(), "algo": "secp256k1"]]
+            let v2Accounts = [["address": self.selectedChain.bechAddress, "pubkey": self.selectedChain.publicKey?.base64EncodedString(), "algo": "secp256k1"]]
             self.respondOnSign(request: request, response: AnyCodable(v2Accounts))
         }
     }

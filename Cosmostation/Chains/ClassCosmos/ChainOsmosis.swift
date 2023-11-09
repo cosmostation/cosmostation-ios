@@ -21,7 +21,7 @@ class ChainOsmosis: CosmosClass  {
         stakeDenom = "uosmo"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "osmo"
+        bechAccountPrefix = "osmo"
         
         grpcHost = "grpc-osmosis.cosmostation.io"
     }

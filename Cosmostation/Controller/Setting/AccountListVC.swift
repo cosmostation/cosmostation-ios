@@ -101,21 +101,17 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
         });
     }
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectCreateAccount) {
-            if (result.position == 0) {
+            if let index = result["index"] as? Int {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onNextVc(.create)
-                });
-                
-            } else if (result.position == 1) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onNextVc(.mnemonc)
-                });
-                
-            } else if (result.position == 2) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    self.onNextVc(.privateKey)
+                    if (index == 0) {
+                        self.onNextVc(.create)
+                    } else if (index == 1) {
+                        self.onNextVc(.mnemonc)
+                    } else if (index == 2) {
+                        self.onNextVc(.privateKey)
+                    }
                 });
             }
         }

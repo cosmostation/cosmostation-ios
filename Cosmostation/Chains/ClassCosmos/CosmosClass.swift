@@ -17,13 +17,17 @@ import web3swift
 class CosmosClass: BaseChain {
     
     var stakeDenom: String!
+    var bechAccountPrefix: String?
+    var bechAddress = ""
+    
+    
     var supportCw20 = false
     var supportErc20 = false
     var supportNft = false
     var supportStaking = true
     
     var evmCompatible = false
-    var evmAddress: String?
+    var evmAddress = ""
     
     var grpcHost = ""
     var grpcPort = 443
@@ -42,23 +46,53 @@ class CosmosClass: BaseChain {
     lazy var mintscanTokens = Array<MintscanToken>()
     lazy var mintscanChainParam = JSON()
     
-    func fetchData(_ id: Int64) {
+    //get bech style info from seed
+    override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
+        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
+//        print("", tag, " ", bechAddress)
+    }
+    
+    //get bech style info from privatekey
+    override func setInfoWithPrivateKey(_ priKey: Data) {
+        privateKey = priKey
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
+    }
+    
+    //fetch account onchaindata from grpc
+    override func fetchData(_ id: Int64) {
         Task {
             if let rawParam = try? await self.fetchChainParam() {
                 mintscanChainParam = rawParam
             }
             if (supportCw20) {
-                if let cw20s = try? await self.fetchCw20Info() {
-                    mintscanTokens = cw20s.assets!
+                if let cw20s = try? await self.fetchCw20Info(),
+                   let ercs = cw20s.assets {
+                    mintscanTokens = ercs
                 }
             }
             if (supportErc20) {
-                if let erc20s = try? await self.fetchErc20Info() {
-                    mintscanTokens = erc20s.assets!
+                if let erc20s = try? await self.fetchErc20Info(),
+                   let ercs = erc20s.assets {
+                    mintscanTokens = ercs
                 }
             }
         }
         fetchGrpcData(id)
+    }
+    
+    //check account payable with lowest fee
+    override func isTxFeePayable() -> Bool {
+        var result = false
+        getDefaultFeeCoins().forEach { minFee in
+            if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+                result = true
+                return
+            }
+        }
+        return result
     }
     
     func fetchPropertyData(_ channel: ClientConnection, _ id: Int64) {
@@ -79,7 +113,7 @@ class CosmosClass: BaseChain {
             self.allCoinUSDValue = self.allCoinValue(true)
             
             BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.address!,
+                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                            nil, self.cosmosBalances.count))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
@@ -139,7 +173,6 @@ class CosmosClass: BaseChain {
         return URL(string: ResourceBase + apiName + "/moniker/" + opAddress + ".png") ?? URL(string: "")!
     }
     
-    
     func getGrpc() -> (host: String, port: Int) {
         if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + self.name) {
             if (endpoint.components(separatedBy: ":").count == 2) {
@@ -160,7 +193,7 @@ extension CosmosClass {
     }
     
     func isGasSimulable() -> Bool {
-        return getChainParam()["isSimulable"].bool ?? true
+        return getChainParam()["fee"]["isSimulable"].bool ?? true
     }
     
     func feeThreshold() -> String? {
@@ -168,7 +201,7 @@ extension CosmosClass {
     }
     
     func gasMultiply() -> Double {
-        if let mutiply = getChainParam()["simul_gas_multiply"].double {
+        if let mutiply = getChainParam()["fee"]["simul_gas_multiply"].double {
             return mutiply
         }
         return 1.2
@@ -235,18 +268,6 @@ extension CosmosClass {
         return nil
     }
     
-    // check account payable with lowest fee
-    func isTxFeePayable() -> Bool {
-        var result = false
-        getDefaultFeeCoins().forEach { minFee in
-            if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
-                result = true
-                return
-            }
-        }
-        return result
-    }
-    
     //get user selected fee
     func getUserSelectedFee(_ position: Int, _ denom: String) -> Cosmos_Tx_V1beta1_Fee {
         let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
@@ -266,7 +287,7 @@ extension CosmosClass {
 extension CosmosClass {
     
     func fetchChainParam() async throws -> JSON {
-        print("fetchChainParam ", BaseNetWork.msChainParam(self))
+//        print("fetchChainParam ", BaseNetWork.msChainParam(self))
         return try await AF.request(BaseNetWork.msChainParam(self), method: .get).serializingDecodable(JSON.self).value
     }
     
@@ -276,7 +297,7 @@ extension CosmosClass {
     }
     
     func fetchErc20Info() async throws -> MintscanTokens {
-        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
+//        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
         return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable(MintscanTokens.self).value
     }
     
@@ -305,13 +326,13 @@ extension CosmosClass {
     }
     
     func fetchRewardAddress(_ channel: ClientConnection) async throws -> String? {
-        let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = address! }
+        let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = bechAddress }
         return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).delegatorWithdrawAddress(req).response.get().withdrawAddress.replacingOccurrences(of: "\"", with: "")
     }
     
     func fetchGrpcData(_ id: Int64) {
         let channel = getConnection()
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address! }
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = bechAddress }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosAuth = response.account
             self.fetchPropertyData(channel, id)
@@ -320,7 +341,7 @@ extension CosmosClass {
             try? channel.close()
             self.fetched = true
             BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.address!, 
+                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            nil, nil, nil, nil))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }
@@ -329,7 +350,7 @@ extension CosmosClass {
     func fetchBalance(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()
         let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
-        let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = address!; $0.pagination = page }
+        let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = bechAddress; $0.pagination = page }
         if let response = try? Cosmos_Bank_V1beta1_QueryNIOClient(channel: channel).allBalances(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosBalances = response.balances
             group.leave()
@@ -340,7 +361,7 @@ extension CosmosClass {
     
     func fetchDelegation(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()
-        let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = address! }
+        let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = bechAddress }
         if let response = try? Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).delegatorDelegations(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosDelegations.removeAll()
             response.delegationResponses.forEach { delegation in
@@ -356,7 +377,7 @@ extension CosmosClass {
     
     func fetchUnbondings(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()
-        let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = address! }
+        let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = bechAddress }
         if let response = try? Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosUnbondings = response.unbondingResponses
             group.leave()
@@ -367,7 +388,7 @@ extension CosmosClass {
     
     func fetchRewards(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()
-        let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = address! }
+        let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = bechAddress }
         if let response = try? Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).delegationTotalRewards(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosRewards = response.rewards
             group.leave()
@@ -389,7 +410,7 @@ extension CosmosClass {
             self.allTokenUSDValue = self.allTokenValue(true)
             
             BaseData.instance.updateRefAddressesToken(
-                RefAddress(id, self.tag, self.address!,
+                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            nil, nil, self.allTokenUSDValue.stringValue, nil))
             NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
         }
@@ -398,7 +419,7 @@ extension CosmosClass {
     func fetchCw20Balance(_ group: DispatchGroup, _ channel: ClientConnection, _ tokenInfo: MintscanToken) {
         group.enter()
         DispatchQueue.global().async {
-            let query: JSON = ["balance" : ["address" : self.address!]]
+            let query: JSON = ["balance" : ["address" : self.bechAddress]]
             let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
                 $0.address = tokenInfo.address!
@@ -418,15 +439,9 @@ extension CosmosClass {
         let group = DispatchGroup()
         guard let url = URL(string: rpcURL) else { return }
         guard let web3 = try? Web3.new(url) else { return }
-        var accountEthAddr: EthereumAddress!
-        if (address!.starts(with: "0x")) {
-            accountEthAddr = EthereumAddress.init(address!)
-        } else {
-            accountEthAddr = EthereumAddress.init(KeyFac.convertBech32ToEvm(address!))
-        }
         
         mintscanTokens.forEach { token in
-            fetchErc20Balance(group, web3, accountEthAddr, token)
+            fetchErc20Balance(group, web3, EthereumAddress.init(evmAddress)!, token)
         }
         
         group.notify(queue: .main) {
@@ -434,7 +449,7 @@ extension CosmosClass {
             self.allTokenUSDValue = self.allTokenValue(true)
             
             BaseData.instance.updateRefAddressesToken(
-                RefAddress(id, self.tag, self.address!,
+                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            nil, nil, self.allTokenUSDValue.stringValue, nil))
             NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
         }
@@ -599,9 +614,12 @@ extension CosmosClass {
         cosmosRewards.forEach { reward in
             for i in 0..<reward.reward.count {
                 let rewardAmount = NSDecimalNumber(string: reward.reward[i].amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
-                if (rewardAmount.compare(NSDecimalNumber.one).rawValue > 0) {
-                    result.append(reward)
-                    break
+                if let msAsset = BaseData.instance.getAsset(self.apiName, reward.reward[i].denom) {
+                    let calAmount = rewardAmount.multiplying(byPowerOf10: -msAsset.decimals!)
+                    if (calAmount.compare(NSDecimalNumber.init(string: "0.1")).rawValue > 0) {
+                        result.append(reward)
+                        break
+                    }
                 }
             }
             return
@@ -666,6 +684,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainEmoney())
     result.append(ChainEvmos())
     result.append(ChainFetchAi())
+    result.append(ChainFetchAi60Secp())
     result.append(ChainGravityBridge())
     result.append(ChainHumans())
     result.append(ChainInjective())
@@ -703,7 +722,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainSommelier())
     result.append(ChainStafi())
     result.append(ChainStargaze())
-    result.append(ChainStarname())
+//    result.append(ChainStarname())
     result.append(ChainStride())
     result.append(ChainTerra())
     result.append(ChainTeritori())
@@ -726,7 +745,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     return result
 }
 
-let DEFUAL_DISPALY_COSMOS = ["cosmos118", "neutron118", "kava459", "osmosis118", "akash118", "stargaze118", "crypto-org394", "gravity-bridge118", "passage118"]
+let DEFUAL_DISPALY_COSMOS = ["cosmos118", "neutron118", "kava459", "osmosis118", "dydx118", "crypto-org394", "celestia118"]
 
 extension Cosmos_Base_V1beta1_Coin {
     func getAmount() -> NSDecimalNumber {

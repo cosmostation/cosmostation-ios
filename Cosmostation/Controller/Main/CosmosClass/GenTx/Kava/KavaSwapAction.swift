@@ -246,7 +246,7 @@ class KavaSwapAction: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet)
+        self.onStartSheet(memoSheet, 260)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -319,7 +319,7 @@ class KavaSwapAction: BaseVC {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                     do {
                         let simul = try await simulDepositTx(channel, auth!, onBindDepsoitMsg())
                         DispatchQueue.main.async {
@@ -344,7 +344,7 @@ class KavaSwapAction: BaseVC {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.address!) {
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                     do {
                         let simul = try await simulWithdrawTx(channel, auth!, onBindWithdrawMsg())
                         DispatchQueue.main.async {
@@ -376,7 +376,7 @@ class KavaSwapAction: BaseVC {
             $0.amount = coin2ToAmount.stringValue
         }
         return Kava_Swap_V1beta1_MsgDeposit.with {
-            $0.depositor = selectedChain.address!
+            $0.depositor = selectedChain.bechAddress
             $0.tokenA = depositCoin1
             $0.tokenB = depositCoin2
             $0.slippage = slippage
@@ -391,7 +391,7 @@ class KavaSwapAction: BaseVC {
         let mintCoin2Amount = swapPool.coins[1].getAmount().multiplying(by: toWithdrawAmount).dividing(by: totalShares, withBehavior: handler0Down).multiplying(by: padding, withBehavior: handler0Down)
         let deadline = (Date().millisecondsSince1970 / 1000) + 300
         return  Kava_Swap_V1beta1_MsgWithdraw.with {
-            $0.from = selectedChain.address!
+            $0.from = selectedChain.bechAddress
             $0.shares = toWithdrawAmount.stringValue
             $0.minTokenA = Cosmos_Base_V1beta1_Coin.with { $0.denom = swapPool.coins[0].denom; $0.amount = mintCoin1Amount.stringValue }
             $0.minTokenB = Cosmos_Base_V1beta1_Coin.with { $0.denom = swapPool.coins[1].denom; $0.amount = mintCoin2Amount.stringValue }
@@ -404,11 +404,11 @@ class KavaSwapAction: BaseVC {
 extension KavaSwapAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, LpAmountSheetDelegate, PinDelegate {
     
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeCoin) {
-            if let position = result.position,
-               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[position].denom {
-                txFee.amount[0].denom = selectedDenom
+            if let index = result["index"] as? Int,
+               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
+                txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }
@@ -436,7 +436,7 @@ extension KavaSwapAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             if (swpActionType == .Deposit) {
                 Task {
                     let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.address!),
+                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                        let response = try await broadcastDepositTx(channel, auth!, onBindDepsoitMsg()) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                             self.loadingView.isHidden = true
@@ -453,7 +453,7 @@ extension KavaSwapAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             } else if (swpActionType == .Withdraw) {
                 Task {
                     let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.address!),
+                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                        let response = try await broadcastWithdrawTx(channel, auth!, onBindWithdrawMsg()) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                             self.loadingView.isHidden = true

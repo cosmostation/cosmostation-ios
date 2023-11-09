@@ -120,7 +120,7 @@ class Bep3Transfer: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
-        print("onFetchDone ", tag)
+//        print("onFetchDone ", tag)
     }
     
     func fetchData() {
@@ -236,10 +236,12 @@ class Bep3Transfer: BaseVC {
 }
 
 extension Bep3Transfer: BaseSheetDelegate, BepAmountSheetDelegate, PinDelegate {
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectBepRecipientAddress) {
-            recipientAddress = result.param
-            onUpdateToAddressView()
+            if let address = result["address"] as? String {
+                recipientAddress = address
+                onUpdateToAddressView()
+            }
         }
     }
     
@@ -252,7 +254,7 @@ extension Bep3Transfer: BaseSheetDelegate, BepAmountSheetDelegate, PinDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                 let bepResult = BepTxResult(nibName: "BepTxResult", bundle: nil)
                 bepResult.fromChain = self.fromChain
-                bepResult.toChain = self.toChains.filter { $0.address == self.recipientAddress }.first!
+                bepResult.toChain = self.toChains.filter { $0.bechAddress == self.recipientAddress }.first!
                 bepResult.toSendDenom = self.toSendDenom
                 bepResult.toSendAmount = self.toSendAmount
                 bepResult.modalPresentationStyle = .fullScreen

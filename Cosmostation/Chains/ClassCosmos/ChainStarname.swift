@@ -21,7 +21,7 @@ class ChainStarname: CosmosClass  {
         stakeDenom = "uiov"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/234'/0'/0/X")
-        accountPrefix = "star"
+        bechAccountPrefix = "star"
         
         grpcHost = "grpc-starname.cosmostation.io"
     }

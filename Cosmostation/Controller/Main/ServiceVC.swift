@@ -24,12 +24,12 @@ class ServiceVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        initView()
+        baseAccount = BaseData.instance.baseAccount
     }
     
-    func initView() {
-        baseAccount = BaseData.instance.baseAccount
-        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.name)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
     }
     
     func onOpenMoonpay() {
@@ -153,9 +153,9 @@ extension ServiceVC: BaseSheetDelegate {
         onStartSheet(baseSheet)
     }
 
-    public func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SwitchAccount) {
-            if let toAddcountId = Int64(result.param!) {
+            if let toAddcountId = result["accountId"] as? Int64 {
                 if (BaseData.instance.baseAccount?.id != toAddcountId) {
                     showWait()
                     DispatchQueue.global().async {
@@ -172,12 +172,14 @@ extension ServiceVC: BaseSheetDelegate {
             }
             
         } else if (sheetType == .SelectBuyCrypto) {
-            if (result.position == 0) {
-                onOpenMoonpay()
-            } else if (result.position == 1) {
-                onOpenKado()
-            } else if (result.position == 2) {
-                onOpenBinance()
+            if let index = result["index"] as? Int {
+                if (index == 0) {
+                    onOpenMoonpay()
+                } else if (index == 1) {
+                    onOpenKado()
+                } else if (index == 2) {
+                    onOpenBinance()
+                }
             }
             
         }

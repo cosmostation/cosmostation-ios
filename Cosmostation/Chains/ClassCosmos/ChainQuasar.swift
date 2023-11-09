@@ -21,7 +21,7 @@ class ChainQuasar: CosmosClass  {
         stakeDenom = "uqsr"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "quasar"
+        bechAccountPrefix = "quasar"
         
         grpcHost = "grpc-quasar.cosmostation.io"
     }

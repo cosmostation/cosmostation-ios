@@ -11,67 +11,74 @@ import UIKit
 class SelectRefAddressCell: UITableViewCell {
     
     @IBOutlet weak var accountNameLabel: UILabel!
-    @IBOutlet weak var deprecatedLabel: UILabel!
-    @IBOutlet weak var evmLabel: UILabel!
-    @IBOutlet weak var memoLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var evmAddressLabel: UILabel!
+    @IBOutlet weak var deprecatedTag: UILabel!
+    @IBOutlet weak var evmCompatTag: UILabel!
+    @IBOutlet weak var masterAddressLabel: UILabel!
+    @IBOutlet weak var slaveAddressabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        deprecatedLabel.isHidden = true
-        evmLabel.isHidden = true
-        memoLabel.isHidden = true
-        evmAddressLabel.isHidden = true
+        deprecatedTag.isHidden = true
+        evmCompatTag.isHidden = true
+        slaveAddressabel.isHidden = true
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        deprecatedLabel.isHidden = true
-        evmLabel.isHidden = true
-        memoLabel.isHidden = true
-        evmAddressLabel.isHidden = true
+        deprecatedTag.isHidden = true
+        evmCompatTag.isHidden = true
+        slaveAddressabel.isHidden = true
     }
     
-    func onBindRefAddress(_ refAddress: RefAddress) {
-        addressLabel.text = refAddress.dpAddress
-        let all = ALLCOSMOSCLASS()
-        if let chain = all.filter({ $0.tag == refAddress.chainTag }).first {
-            if (chain.evmCompatible) {
-                evmLabel.isHidden = false
-//                evmAddressLabel.text = "(" + KeyFac.convertBech32ToEvm(refAddress.dpAddress) + ")"
-//                evmAddressLabel.isHidden = false
-                
-            } else if (!chain.isDefault) {
-                deprecatedLabel.isHidden = false
-            }
-        }
-        
+    func onBindRefAddress(_ recipientChain: CosmosClass, _ refAddress: RefAddress) {
         if let account = BaseData.instance.selectAccount(refAddress.accountId) {
             accountNameLabel.text = account.name
         }
-    }
-    
-    func onBindEvmRefAddress(_ refAddress: RefAddress) {
-        addressLabel.text = refAddress.dpAddress
-        evmAddressLabel.text = "(" + KeyFac.convertBech32ToEvm(refAddress.dpAddress) + ")"
-        evmAddressLabel.isHidden = false
-        
         let all = ALLCOSMOSCLASS()
         if let chain = all.filter({ $0.tag == refAddress.chainTag }).first {
             if (chain.evmCompatible) {
-                evmLabel.isHidden = false
+                evmCompatTag.isHidden = false
                 
             } else if (!chain.isDefault) {
-                deprecatedLabel.isHidden = false
+                deprecatedTag.isHidden = false
+            }
+            
+            if (recipientChain is ChainOkt60Keccak) {
+                masterAddressLabel.text = refAddress.evmAddress
+                slaveAddressabel.text = "(" + refAddress.bechAddress + ")"
+                slaveAddressabel.isHidden = false
+                
+            } else if (chain.evmCompatible) {
+                masterAddressLabel.text = refAddress.bechAddress
+                slaveAddressabel.text = "(" + refAddress.evmAddress + ")"
+                slaveAddressabel.isHidden = false
+                
+            } else {
+                masterAddressLabel.text = refAddress.bechAddress
+                slaveAddressabel.isHidden = true
             }
         }
         
+
+    }
+    
+    func onBindEvmRefAddress(_ recipientChain: CosmosClass, _ refAddress: RefAddress) {
         if let account = BaseData.instance.selectAccount(refAddress.accountId) {
             accountNameLabel.text = account.name
         }
         
+        let all = ALLCOSMOSCLASS()
+        if let chain = all.filter({ $0.tag == refAddress.chainTag }).first {
+            if (chain.evmCompatible) {
+                evmCompatTag.isHidden = false
+            } else if (!chain.isDefault) {
+                deprecatedTag.isHidden = false
+            }
+        }
+        masterAddressLabel.text = refAddress.evmAddress
+        slaveAddressabel.text = "(" + refAddress.bechAddress + ")"
+        slaveAddressabel.isHidden = false
+        
     }
-    
 }

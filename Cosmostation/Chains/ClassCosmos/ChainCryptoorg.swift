@@ -21,7 +21,7 @@ class ChainCryptoorg: CosmosClass  {
         stakeDenom = "basecro"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/394'/0'/0/X")
-        accountPrefix = "cro"
+        bechAccountPrefix = "cro"
         
         grpcHost = "grpc-crypto-org.cosmostation.io"
     }

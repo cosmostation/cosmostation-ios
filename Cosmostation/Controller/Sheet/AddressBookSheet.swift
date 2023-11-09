@@ -38,12 +38,15 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         if (addressBook != nil) {
             nameTextField.text = addressBook?.bookName
             addressTextField.text = addressBook?.dpAddress
-            memoTextField.text = addressBook?.memo
+            if (memo != nil) {
+                memoTextField.text = memo
+            } else {
+                memoTextField.text = addressBook?.memo
+            }
             
         } else if (recipinetAddress != nil) {
-            addressTextField.text = addressBook?.dpAddress
-            memoTextField.text = addressBook?.memo
-            
+            addressTextField.text = recipinetAddress
+            memoTextField.text = memo
         }
     }
     
@@ -76,23 +79,43 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         
         if (addressBook != nil) {
             //edit mode
+            let chain = ALLCOSMOSCLASS().filter { addressBook!.chainName == $0.name }.first
+            if (chain != nil) {
+                if (WUtils.isValidBechAddress(chain!, addressInput!)) {
+                    addressBook!.bookName = nameInput!
+                    addressBook!.dpAddress = addressInput!
+                    addressBook!.memo = memoInput
+                    addressBook!.lastTime = Date().millisecondsSince1970
+                    let result = BaseData.instance.updateAddressBook(addressBook!)
+                    bookDelegate?.onAddressBookUpdated(result)
+                    dismiss(animated: true)
+                }
+            }
+            
             
         } else if (recipinetAddress != nil) {
             //after tx ask mode
+            if (recipientChain != nil) {
+                let addressBook = AddressBook.init(nameInput!, recipientChain!.name, addressInput!, memoInput, Date().millisecondsSince1970)
+                let result = BaseData.instance.updateAddressBook(addressBook)
+                bookDelegate?.onAddressBookUpdated(result)
+                dismiss(animated: true)
+            }
             
         } else {
-            let chain = ALLCOSMOSCLASS().filter { addressInput!.starts(with: $0.accountPrefix!) == true }.first
+            //new add mode
+            let chain = ALLCOSMOSCLASS().filter { addressInput!.starts(with: $0.bechAccountPrefix!) == true }.first
             if (chain != nil) {
-                if (WUtils.isValidChainAddress(chain!, addressInput!)) {
+                if (WUtils.isValidBechAddress(chain!, addressInput!)) {
                     let addressBook = AddressBook.init(nameInput!, chain!.name, addressInput!, memoInput, Date().millisecondsSince1970)
                     let result = BaseData.instance.updateAddressBook(addressBook)
                     bookDelegate?.onAddressBookUpdated(result)
                     dismiss(animated: true)
                 }
             }
-            onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-            return
         }
+        onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+        return
         
     }
 }

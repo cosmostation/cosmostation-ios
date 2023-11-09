@@ -21,7 +21,7 @@ class ChainMedibloc: CosmosClass  {
         stakeDenom = "umed"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/371'/0'/0/X")
-        accountPrefix = "panacea"
+        bechAccountPrefix = "panacea"
         
         grpcHost = "grpc-medibloc.cosmostation.io"
     }

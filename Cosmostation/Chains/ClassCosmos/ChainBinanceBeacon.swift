@@ -29,12 +29,17 @@ class ChainBinanceBeacon: CosmosClass  {
         stakeDenom = "BNB"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/714'/0'/0/X")
-        accountPrefix = "bnb"
+        bechAccountPrefix = "bnb"
         supportStaking = false
     }
     
     override func fetchData(_ id: Int64) {
         fetchLcdData(id)
+    }
+    
+    override func isTxFeePayable() -> Bool {
+        let availableAmount = lcdBalanceAmount(stakeDenom)
+        return availableAmount.compare(NSDecimalNumber(string: BNB_BEACON_BASE_FEE)).rawValue > 0
     }
     
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
@@ -52,7 +57,7 @@ extension ChainBinanceBeacon {
         let group = DispatchGroup()
         
         fetchNodeInfo(group)
-        fetchAccountInfo(group, address!)
+        fetchAccountInfo(group, bechAddress)
         fetchBeaconTokens(group)
         fetchBeaconMiniTokens(group)
         
@@ -62,7 +67,7 @@ extension ChainBinanceBeacon {
             self.allCoinUSDValue = self.allCoinValue(true)
             
             BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.address!,
+                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                            nil, self.lcdAccountInfo.bnbCoins?.count))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)

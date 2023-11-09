@@ -150,8 +150,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first!
             
             let inputChannel = getConnection(inputCosmosChain)
-            if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.address!),
-               let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.address!),
+            if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.bechAddress),
+               let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.bechAddress),
                let inputParam = try? await inputCosmosChain.fetchChainParam() {
                 inputCosmosChain.mintscanChainParam = inputParam
                 inputCosmosChain.cosmosAuth = inputAuth?.account ?? Google_Protobuf_Any()
@@ -160,8 +160,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             }
             
             let outputChannel = getConnection(outputCosmosChain)
-            if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.address!),
-               let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.address!),
+            if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.bechAddress),
+               let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.bechAddress),
                let outputParam = try? await outputCosmosChain.fetchChainParam() {
                 outputCosmosChain.mintscanChainParam = outputParam
                 outputCosmosChain.cosmosAuth = outputAuth?.account ?? Google_Protobuf_Any()
@@ -215,7 +215,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
 //        print("txFee ", txFee)
         
         //From UI update
-        fromAddressLabel.text = inputCosmosChain.address
+        fromAddressLabel.text = inputCosmosChain.bechAddress
         inputChainImg.image = UIImage(named: inputCosmosChain.logo1)
         inputChainLabel.text = inputCosmosChain.name.uppercased()
 //        print("fromAddress ", inputCosmosChain.address)
@@ -241,7 +241,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         
         
         //To UI update
-        toAddressLabel.text = outputCosmosChain.address
+        toAddressLabel.text = outputCosmosChain.bechAddress
         outputChainImg.image = UIImage(named: outputCosmosChain.logo1)
         outputChainLabel.text = outputCosmosChain.name.uppercased()
 //        print("toAddress ", outputCosmosChain.address)
@@ -466,7 +466,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         var msgReq = JSON()
         var address_list = [String]()
         route["chain_ids"].array?.forEach({ chain_Id in
-            if let address = allCosmosChains.filter({ $0.chainId == chain_Id.stringValue && $0.isDefault == true }).first?.address {
+            if let address = allCosmosChains.filter({ $0.chainId == chain_Id.stringValue && $0.isDefault == true }).first?.bechAddress {
                 address_list.append(address)
             }
         })
@@ -537,7 +537,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
 //            print("inner_mag ", inner_mag)
             Task {
                 let channel = getConnection(inputCosmosChain)
-                if let auth = try? await fetchAuth(channel, inputCosmosChain.address!) {
+                if let auth = try? await fetchAuth(channel, inputCosmosChain.bechAddress) {
                     do {
                         let simul = try await simulIbcSendTx(channel, auth!, onBindIbcSend(inner_mag!))
                         DispatchQueue.main.async {
@@ -563,7 +563,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
 //            print("inner_mag ", inner_mag)
             Task {
                 let channel = getConnection(inputCosmosChain)
-                if let auth = try? await fetchAuth(channel, inputCosmosChain.address!) {
+                if let auth = try? await fetchAuth(channel, inputCosmosChain.bechAddress) {
                     do {
                         let simul = try await simulWasmTx(channel, auth!, onBindWasm(inner_mag!))
                         DispatchQueue.main.async {
@@ -618,87 +618,97 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
 
 extension SwapStartVC: BaseSheetDelegate, PinDelegate {
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectSwapInputChain) {
-            if (inputCosmosChain.chainId != result.param) {
-                loadingView.isHidden = false
-                Task {
-                    inputCosmosChain = skipChains.filter({ $0.chainId == result.param }).first!
-                    inputAssetList.removeAll()
-                    skipAssets?["chain_to_assets_map"][inputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
-                        if BaseData.instance.getAsset(inputCosmosChain.apiName, json["denom"].stringValue) != nil {
-                            inputAssetList.append(json)
+            if let chainId = result["chainId"] as? String {
+                if (inputCosmosChain.chainId != chainId) {
+                    loadingView.isHidden = false
+                    Task {
+                        inputCosmosChain = skipChains.filter({ $0.chainId == chainId }).first!
+                        inputAssetList.removeAll()
+                        skipAssets?["chain_to_assets_map"][inputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
+                            if BaseData.instance.getAsset(inputCosmosChain.apiName, json["denom"].stringValue) != nil {
+                                inputAssetList.append(json)
+                            }
+                        })
+                        inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first ?? inputAssetList[0]
+                        
+                        let inputChannel = getConnection(inputCosmosChain)
+                        if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.bechAddress),
+                           let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.bechAddress),
+                           let inputParam = try? await inputCosmosChain.fetchChainParam() {
+                            inputCosmosChain.mintscanChainParam = inputParam
+                            inputCosmosChain.cosmosAuth = inputAuth?.account ?? Google_Protobuf_Any()
+                            inputCosmosChain.cosmosBalances = inputBal!
+                            WUtils.onParseVestingAccount(inputCosmosChain)
                         }
-                    })
-                    inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first ?? inputAssetList[0]
-                    
-                    let inputChannel = getConnection(inputCosmosChain)
-                    if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.address!),
-                       let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.address!),
-                       let inputParam = try? await inputCosmosChain.fetchChainParam() {
-                        inputCosmosChain.mintscanChainParam = inputParam
-                        inputCosmosChain.cosmosAuth = inputAuth?.account ?? Google_Protobuf_Any()
-                        inputCosmosChain.cosmosBalances = inputBal!
-                        WUtils.onParseVestingAccount(inputCosmosChain)
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.onReadyToUserInsert()
+                        
+                        DispatchQueue.main.async {
+                            self.onReadyToUserInsert()
+                        }
                     }
                 }
             }
             
         } else if (sheetType == .SelectSwapOutputChain) {
-            if (outputCosmosChain.chainId != result.param) {
-                loadingView.isHidden = false
-                Task {
-                    outputCosmosChain = skipChains.filter({ $0.chainId == result.param}).first!
-                    outputAssetList.removeAll()
-                    skipAssets?["chain_to_assets_map"][outputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
-                        if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
-                            outputAssetList.append(json)
+            if let chainId = result["chainId"] as? String {
+                if (outputCosmosChain.chainId != chainId) {
+                    loadingView.isHidden = false
+                    Task {
+                        outputCosmosChain = skipChains.filter({ $0.chainId == chainId }).first!
+                        outputAssetList.removeAll()
+                        skipAssets?["chain_to_assets_map"][outputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
+                            if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
+                                outputAssetList.append(json)
+                            }
+                        })
+                        outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first ?? outputAssetList[0]
+                        
+                        let outputChannel = getConnection(outputCosmosChain)
+                        if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.bechAddress),
+                           let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.bechAddress),
+                           let outputParam = try? await outputCosmosChain.fetchChainParam() {
+                            outputCosmosChain.mintscanChainParam = outputParam
+                            outputCosmosChain.cosmosAuth = outputAuth?.account ?? Google_Protobuf_Any()
+                            outputCosmosChain.cosmosBalances = outputBal!
+                            WUtils.onParseVestingAccount(outputCosmosChain)
                         }
-                    })
-                    outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first ?? outputAssetList[0]
-                    
-                    let outputChannel = getConnection(outputCosmosChain)
-                    if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.address!),
-                       let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.address!),
-                       let outputParam = try? await outputCosmosChain.fetchChainParam() {
-                        outputCosmosChain.mintscanChainParam = outputParam
-                        outputCosmosChain.cosmosAuth = outputAuth?.account ?? Google_Protobuf_Any()
-                        outputCosmosChain.cosmosBalances = outputBal!
-                        WUtils.onParseVestingAccount(outputCosmosChain)
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.onReadyToUserInsert()
+                        
+                        DispatchQueue.main.async {
+                            self.onReadyToUserInsert()
+                        }
                     }
                 }
             }
             
         } else if (sheetType == .SelectSwapInputAsset) {
-            if (inputAssetSelected["denom"].stringValue != result.param) {
-                inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == result.param }.first!
-                onReadyToUserInsert()
+            if let denom = result["denom"] as? String {
+                if (inputAssetSelected["denom"].stringValue != denom) {
+                    inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == denom }.first!
+                    onReadyToUserInsert()
+                }
             }
             
             
         } else if (sheetType == .SelectSwapOutputAsset) {
-            if (outputAssetSelected["denom"].stringValue != result.param) {
-                outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == result.param}.first!
-                onReadyToUserInsert()
+            if let denom = result["denom"] as? String {
+                if (outputAssetSelected["denom"].stringValue != denom) {
+                    outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == denom }.first!
+                    onReadyToUserInsert()
+                }
             }
             
         } else if (sheetType == .SelectSwapSlippage) {
-            if (result.position == 0) {
-                skipSlippage = "1"
-            } else if (result.position == 1) {
-                skipSlippage = "2"
-            } else if (result.position == 2) {
-                skipSlippage = "5"
+            if let index = result["index"] as? Int {
+                if (index == 0) {
+                    skipSlippage = "1"
+                } else if (index == 1) {
+                    skipSlippage = "2"
+                } else if (index == 2) {
+                    skipSlippage = "5"
+                }
+                onUpdateAmountView()
             }
-            onUpdateAmountView()
         }
     }
     
@@ -713,7 +723,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                 let inner_mag = try? JSON(data: Data(msgs["msg"].stringValue.utf8))
                 Task {
                     let channel = getConnection(inputCosmosChain)
-                    if let auth = try? await fetchAuth(channel, inputCosmosChain.address!),
+                    if let auth = try? await fetchAuth(channel, inputCosmosChain.bechAddress),
                        let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(inner_mag!)) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                             self.loadingView.isHidden = true
@@ -731,7 +741,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                 let inner_mag = try? JSON(data: Data(msgs["msg"].stringValue.utf8))
                 Task {
                     let channel = getConnection(inputCosmosChain)
-                    if let auth = try? await fetchAuth(channel, inputCosmosChain.address!),
+                    if let auth = try? await fetchAuth(channel, inputCosmosChain.bechAddress),
                        let response = try await broadcastWasmTx(channel, auth!, onBindWasm(inner_mag!)) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                             self.loadingView.isHidden = true

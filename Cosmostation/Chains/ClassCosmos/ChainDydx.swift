@@ -21,7 +21,7 @@ class ChainDydx: CosmosClass  {
         stakeDenom = "adydx"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "dydx"
+        bechAccountPrefix = "dydx"
         
         grpcHost = "grpc-dydx.cosmostation.io"
     }

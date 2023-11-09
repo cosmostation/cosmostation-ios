@@ -21,7 +21,7 @@ class ChainBand: CosmosClass  {
         stakeDenom = "uband"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/494'/0'/0/X")
-        accountPrefix = "band"
+        bechAccountPrefix = "band"
         
         grpcHost = "grpc-band.cosmostation.io"
     }

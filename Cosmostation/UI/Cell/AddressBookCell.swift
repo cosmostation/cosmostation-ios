@@ -15,6 +15,10 @@ class AddressBookCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var editBtn: UIButton!
+    
+    var actionEdit: (() -> Void)? = nil
+    var actionDelete: (() -> Void)? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,6 +39,20 @@ class AddressBookCell: UITableViewCell {
         memoLabel.text = book.memo
         addressLabel.text = book.dpAddress
         addressLabel.adjustsFontSizeToFitWidth = true
+        
+        
+        editBtn.showsMenuAsPrimaryAction = true
+        let edit = UIAction(title: NSLocalizedString("str_edit", comment: ""), image: nil, handler: { _ in
+            self.actionEdit?()
+        })
+        let delete = UIAction(title: NSLocalizedString("str_delete", comment: ""), image: nil, handler: { _ in
+            self.actionDelete?()
+        })
+        editBtn.menu = UIMenu(title: "",
+                              image: nil,
+                              identifier: nil,
+                              options: .displayInline,
+                              children: [edit, delete])
     }
     
 }

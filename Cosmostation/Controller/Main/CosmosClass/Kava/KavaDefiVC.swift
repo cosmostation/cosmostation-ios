@@ -53,7 +53,7 @@ class KavaDefiVC: BaseVC {
     func onFetchData() {
         Task {
             let channel = getConnection()
-            if let incentive = try? await fetchIncentive(channel, selectedChain.address!),
+            if let incentive = try? await fetchIncentive(channel, selectedChain.bechAddress),
                let pricefeed = try? await fetchPriceFeed(channel) {
                 self.incentive = incentive
                 self.priceFeed = pricefeed
@@ -160,7 +160,7 @@ extension KavaDefiVC {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
 }

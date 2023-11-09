@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Lottie
 
 class ChainListVC: BaseVC, BaseSheetDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchEmptyLayer: UIView!
     @IBOutlet weak var addChainBtn: BaseButton!
+    @IBOutlet weak var loadingView: LottieAnimationView!
     
     var searchBar: UISearchBar?
     
@@ -21,6 +23,13 @@ class ChainListVC: BaseVC, BaseSheetDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadingView.isHidden = true
+        loadingView.animation = LottieAnimation.named("loading")
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.loopMode = .loop
+        loadingView.animationSpeed = 1.3
+        loadingView.play()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -75,6 +84,7 @@ class ChainListVC: BaseVC, BaseSheetDelegate {
     }
     
     func onDisplayEndPointSheet(_ position: Int) {
+        loadingView.isHidden = true
         let chain = searchCosmosChains[position]
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = chain
@@ -83,13 +93,16 @@ class ChainListVC: BaseVC, BaseSheetDelegate {
         onStartSheet(baseSheet)
     }
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: BaseSheetResult) {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SwitchEndpoint) {
-            let chain = searchCosmosChains.filter { $0.name == result.param }.first!
-            let endpoint = chain.getChainParam()["grpc_endpoint"].arrayValue[result.position!]["url"].stringValue
-            BaseData.instance.setGrpcEndpoint(chain, endpoint)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            if let index = result["index"] as? Int,
+               let chainName = result["chainName"] as? String {
+                let chain = searchCosmosChains.filter { $0.name == chainName }.first!
+                let endpoint = chain.getChainParam()["grpc_endpoint"].arrayValue[index]["url"].stringValue
+                BaseData.instance.setGrpcEndpoint(chain, endpoint)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -133,6 +146,7 @@ extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
         if (chain is ChainBinanceBeacon || chain is ChainOkt60Keccak) {
             return
         }
+        loadingView.isHidden = false
         if (chain.getChainParam().isEmpty == true) {
             Task {
                 if let rawParam = try? await chain.fetchChainParam() {

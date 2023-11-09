@@ -21,7 +21,7 @@ class ChainJuno: CosmosClass  {
         stakeDenom = "ujuno"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        accountPrefix = "juno"
+        bechAccountPrefix = "juno"
         supportCw20 = true
         
         grpcHost = "grpc-juno.cosmostation.io"

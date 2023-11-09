@@ -19,6 +19,7 @@ class SwitchAccountCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        self.checkedImg.isHidden = true
     }
     
     override func prepareForReuse() {
@@ -29,7 +30,7 @@ class SwitchAccountCell: UITableViewCell {
     func onBindAccount(_ account: BaseAccount) {
         nameLabel.text = account.name
         
-        if (account.name == BaseData.instance.baseAccount?.name) {
+        if (account.id == BaseData.instance.baseAccount?.id) {
             self.checkedImg.isHidden = false
         } else {
             self.checkedImg.isHidden = true

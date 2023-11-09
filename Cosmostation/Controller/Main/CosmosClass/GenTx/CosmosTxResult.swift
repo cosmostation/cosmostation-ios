@@ -14,7 +14,7 @@ import NIO
 import SwiftProtobuf
 import web3swift
 
-class CosmosTxResult: BaseVC {
+class CosmosTxResult: BaseVC, AddressBookDelegate {
     
     @IBOutlet weak var successView: UIView!
     @IBOutlet weak var successMsgLabel: UILabel!
@@ -23,6 +23,10 @@ class CosmosTxResult: BaseVC {
     @IBOutlet weak var failMsgLabel: UILabel!
     @IBOutlet weak var failMintscanBtn: UIButton!
     @IBOutlet weak var confirmBtn: BaseButton!
+    @IBOutlet weak var quotesLayer: UIView!
+    @IBOutlet weak var quotesMsgLabel: UILabel!
+    @IBOutlet weak var quotoesAutherLabel: UILabel!
+    
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var resultType: TxResultType = .Cosmos
@@ -61,7 +65,7 @@ class CosmosTxResult: BaseVC {
                 guard legacyResult != nil else {
                     loadingView.isHidden = true
                     failView.isHidden = false
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     return
                 }
                 
@@ -69,12 +73,12 @@ class CosmosTxResult: BaseVC {
                     loadingView.isHidden = true
                     failView.isHidden = false
                     failMsgLabel.text = legacyResult?["log"].stringValue
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     return
                     
                 } else {
                     loadingView.isHidden = true
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     successView.isHidden = false
                 }
                 
@@ -84,7 +88,7 @@ class CosmosTxResult: BaseVC {
                 guard legacyResult != nil else {
                     loadingView.isHidden = true
                     failView.isHidden = false
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     return
                 }
                 
@@ -92,11 +96,11 @@ class CosmosTxResult: BaseVC {
                     loadingView.isHidden = true
                     failView.isHidden = false
                     failMsgLabel.text = legacyResult?["raw_log"].stringValue
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     
                 } else {
                     loadingView.isHidden = true
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     successView.isHidden = false
                 }
                 
@@ -106,9 +110,10 @@ class CosmosTxResult: BaseVC {
                     loadingView.isHidden = true
                     failView.isHidden = false
                     failMsgLabel.text = broadcastTxResponse?.rawLog
-                    confirmBtn.isEnabled = true
+                    confirmBtn.isHidden = false
                     return
                 }
+                setQutoes()
                 fetchTx()
             }
             
@@ -117,7 +122,7 @@ class CosmosTxResult: BaseVC {
                 loadingView.isHidden = true
                 failView.isHidden = false
                 failMsgLabel.text = ""
-                confirmBtn.isEnabled = true
+                confirmBtn.isHidden = false
                 return
             }
             fetchEvmTx()
@@ -125,9 +130,10 @@ class CosmosTxResult: BaseVC {
     }
     
     func onUpdateView() {
+        quotesLayer.isHidden = true
         if (resultType == .Cosmos) {
             loadingView.isHidden = true
-            confirmBtn.isEnabled = true
+            confirmBtn.isHidden = false
             if (txResponse?.txResponse.code != 0) {
                 failView.isHidden = false
                 failMintscanBtn.isHidden = false
@@ -135,11 +141,14 @@ class CosmosTxResult: BaseVC {
                 
             } else {
                 successView.isHidden = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                    self.onShowAddressBook()
+                });
             }
             
         } else {
             loadingView.isHidden = true
-            confirmBtn.isEnabled = true
+            confirmBtn.isHidden = false
             if (evmRecipient!.status != .ok) {
                 failView.isHidden = false
                 failMintscanBtn.isHidden = false
@@ -221,10 +230,29 @@ class CosmosTxResult: BaseVC {
     }
     
     func onShowAddressBook() {
-        if (recipientChain != nil &&
-            recipinetAddress?.isEmpty == false) {
-            
+        if (recipientChain != nil && recipinetAddress?.isEmpty == false) {
+            if let existed = BaseData.instance.selectAllAddressBooks().filter({ $0.dpAddress == recipinetAddress && $0.chainName == recipientChain?.name }).first {
+                if (existed.memo != memo) {
+                    let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
+                    addressBookSheet.addressBook = existed
+                    addressBookSheet.memo = memo
+                    addressBookSheet.bookDelegate = self
+                    self.onStartSheet(addressBookSheet, 420)
+                }
+                
+            } else {
+                let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
+                addressBookSheet.recipientChain = recipientChain
+                addressBookSheet.recipinetAddress = recipinetAddress
+                addressBookSheet.memo = memo
+                addressBookSheet.bookDelegate = self
+                self.onStartSheet(addressBookSheet, 420)
+            }
         }
+    }
+    
+    func onAddressBookUpdated(_ result: Int?) {
+        onShowToast(NSLocalizedString("msg_addressbook_updated", comment: ""))
     }
     
     
@@ -252,6 +280,14 @@ class CosmosTxResult: BaseVC {
         }
     }
     
+    
+    func setQutoes() {
+        let num = Int.random(in: 0..<QUOTES.count)
+        let qutoe = NSLocalizedString(QUOTES[num], comment: "").components(separatedBy: "--")
+        quotesMsgLabel.text = qutoe[0]
+        quotoesAutherLabel.text = "- " + qutoe[1] + " -"
+        quotesLayer.isHidden = false
+    }
 }
 
 extension CosmosTxResult {
@@ -273,7 +309,7 @@ extension CosmosTxResult {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
     
