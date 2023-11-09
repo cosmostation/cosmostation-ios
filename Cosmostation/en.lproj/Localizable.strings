@@ -439,6 +439,7 @@
 "setting_currecny_title" = "Currency";
 "setting_notification_title" = "Notification";
 "setting_app_lock_title" = "App Lock";
+"setting_bio_auth_title" = "Biometrics";
 "setting_auto_pass_title" = "Auto Pass";
 "setting_mintscan_title" = "Mintscan";
 "setting_homepage_title" = "HomePage";

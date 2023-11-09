@@ -439,6 +439,7 @@
 "setting_currecny_title" = "통화";
 "setting_notification_title" = "알람";
 "setting_app_lock_title" = "앱락";
+"setting_bio_auth_title" = "생채인식";
 "setting_auto_pass_title" = "오토패스";
 "setting_mintscan_title" = "Mintscan";
 "setting_homepage_title" = "HomePage";

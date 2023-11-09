@@ -47,7 +47,7 @@ class PincodeVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if (lockType != .ForInit && lockType != .ForAppLock) {
-            if (isBioSupport()) {
+            if (isBioSupport() && BaseData.instance.getUsingBioAuth()) {
                 onShowBio()
             }
         }
@@ -55,7 +55,7 @@ class PincodeVC: BaseVC {
     
     
     @objc func onBioAuth(_ notification: NSNotification) {
-        if (isBioSupport()) {
+        if (isBioSupport() && BaseData.instance.getUsingBioAuth()) {
             onShowBio()
         }
     }

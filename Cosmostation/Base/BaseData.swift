@@ -98,13 +98,7 @@ final class BaseData: NSObject{
     
 
     
-    func setUsingBioAuth(_ using : Bool) {
-        UserDefaults.standard.set(using, forKey: KEY_USING_BIO_AUTH)
-    }
-    
-    func getUsingBioAuth() -> Bool {
-        return UserDefaults.standard.bool(forKey: KEY_USING_BIO_AUTH)
-    }
+
     
     
     
@@ -589,6 +583,14 @@ extension BaseData {
     
     func getUsingAppLock() -> Bool {
         return UserDefaults.standard.bool(forKey: KEY_USING_APP_LOCK)
+    }
+    
+    func setUsingBioAuth(_ using : Bool) {
+        UserDefaults.standard.set(using, forKey: KEY_USING_BIO_AUTH)
+    }
+    
+    func getUsingBioAuth() -> Bool {
+        return UserDefaults.standard.bool(forKey: KEY_USING_BIO_AUTH)
     }
     
     func setUsingEnginerMode(_ using : Bool) {

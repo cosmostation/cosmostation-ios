@@ -103,7 +103,7 @@ class CosmosClassVC: BaseVC {
     }
     
     @objc func onFetchStakeDone(_ notification: NSNotification) {
-        print("onFetchStakeDone")
+//        print("onFetchStakeDone")
     }
     
     @objc func onShowAddress() {
