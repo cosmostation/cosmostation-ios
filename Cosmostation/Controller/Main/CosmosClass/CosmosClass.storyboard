@@ -31,36 +31,30 @@
                                         <color key="textColor" name="_font02"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="udo-UV-whi">
-                                        <rect key="frame" x="108.33333333333334" y="19.333333333333332" width="80.666666666666657" height="35.333333333333343"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZk-Ok-B8N">
-                                                <rect key="frame" x="0.0" y="0.0" width="20.666666666666668" height="35.333333333333336"/>
-                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
-                                                <color key="textColor" name="_font01"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqR-D5-yjj">
-                                                <rect key="frame" x="22.666666666666657" y="0.0" width="58" height="35.333333333333336"/>
-                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="28"/>
-                                                <color key="textColor" name="_font01"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="lZk-Ok-B8N" secondAttribute="bottom" constant="-7.1054273576010019e-15" id="nnP-ba-ZkW"/>
-                                        </constraints>
-                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqR-D5-yjj">
+                                        <rect key="frame" x="119.66666666666666" y="20.666666666666675" width="58" height="35.333333333333343"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="28"/>
+                                        <color key="textColor" name="_font01"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZk-Ok-B8N">
+                                        <rect key="frame" x="99.666666666666657" y="27.333333333333329" width="18" height="25.333333333333329"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="20"/>
+                                        <color key="textColor" name="_font01"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="udo-UV-whi" firstAttribute="centerX" secondItem="0An-sf-Sxo" secondAttribute="centerX" id="2pz-Wi-oEA"/>
+                                    <constraint firstItem="lZk-Ok-B8N" firstAttribute="firstBaseline" secondItem="sqR-D5-yjj" secondAttribute="firstBaseline" constant="-1" id="53s-bJ-ipy"/>
+                                    <constraint firstItem="sqR-D5-yjj" firstAttribute="centerX" secondItem="0An-sf-Sxo" secondAttribute="centerX" id="8gL-8U-P73"/>
                                     <constraint firstItem="uaX-Dh-cwU" firstAttribute="leading" secondItem="0An-sf-Sxo" secondAttribute="leading" constant="48" id="CzJ-B5-Xm8"/>
+                                    <constraint firstItem="sqR-D5-yjj" firstAttribute="leading" secondItem="lZk-Ok-B8N" secondAttribute="trailing" constant="2" id="G2C-A2-S6b"/>
                                     <constraint firstAttribute="height" constant="56" id="LjO-Sz-SGM"/>
                                     <constraint firstAttribute="trailing" secondItem="uaX-Dh-cwU" secondAttribute="trailing" constant="48" id="Rur-kK-ZtB"/>
-                                    <constraint firstItem="udo-UV-whi" firstAttribute="top" secondItem="uaX-Dh-cwU" secondAttribute="bottom" constant="4" id="SCu-IQ-gef"/>
                                     <constraint firstItem="uaX-Dh-cwU" firstAttribute="centerX" secondItem="0An-sf-Sxo" secondAttribute="centerX" id="WQ4-eP-hKz"/>
                                     <constraint firstItem="uaX-Dh-cwU" firstAttribute="top" secondItem="0An-sf-Sxo" secondAttribute="top" id="YjE-iW-uZJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="sqR-D5-yjj" secondAttribute="bottom" id="goY-j1-R3G"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5w-hK-wYy" customClass="MDCTabBarView">
