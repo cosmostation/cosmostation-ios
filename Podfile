@@ -20,7 +20,7 @@ def shared_pods
     pod 'MaterialComponents/Buttons'
     
     pod 'JJFloatingActionButton'
-    pod 'WalletConnectSwiftV2', '1.9.0'
+    pod 'WalletConnectSwiftV2', '1.9.1'
     
 #    pod 'Toast-Swift', '~> 4.0.0'
 #    pod 'Floaty', '~> 4.1.0'

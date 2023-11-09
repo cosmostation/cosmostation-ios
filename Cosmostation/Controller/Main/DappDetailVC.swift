@@ -587,7 +587,7 @@ extension DappDetailVC {
         Sign.instance.sessionProposalPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sessionProposal, context in
-                if self!.isViewLoaded && self?.view.window != nil {
+                if self?.isViewLoaded == true && self?.view.window != nil {
                     self?.approveProposal(proposal: sessionProposal)
                 }
             }.store(in: &publishers)
@@ -595,7 +595,7 @@ extension DappDetailVC {
         Sign.instance.sessionRequestPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sessionRequest, context in
-                if self!.isViewLoaded && self?.view.window != nil {
+                if self?.isViewLoaded == true && self?.view.window != nil {
                     self?.showSessionRequest(request: sessionRequest)
                 }
             }.store(in: &publishers)
