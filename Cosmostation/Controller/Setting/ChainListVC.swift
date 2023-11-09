@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Lottie
 
 class ChainListVC: BaseVC, BaseSheetDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchEmptyLayer: UIView!
     @IBOutlet weak var addChainBtn: BaseButton!
+    @IBOutlet weak var loadingView: LottieAnimationView!
     
     var searchBar: UISearchBar?
     
@@ -21,6 +23,13 @@ class ChainListVC: BaseVC, BaseSheetDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadingView.isHidden = true
+        loadingView.animation = LottieAnimation.named("loading")
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.loopMode = .loop
+        loadingView.animationSpeed = 1.3
+        loadingView.play()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -75,6 +84,7 @@ class ChainListVC: BaseVC, BaseSheetDelegate {
     }
     
     func onDisplayEndPointSheet(_ position: Int) {
+        loadingView.isHidden = true
         let chain = searchCosmosChains[position]
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = chain
@@ -136,6 +146,7 @@ extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
         if (chain is ChainBinanceBeacon || chain is ChainOkt60Keccak) {
             return
         }
+        loadingView.isHidden = false
         if (chain.getChainParam().isEmpty == true) {
             Task {
                 if let rawParam = try? await chain.fetchChainParam() {
