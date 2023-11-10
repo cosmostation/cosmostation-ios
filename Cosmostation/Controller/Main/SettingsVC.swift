@@ -85,7 +85,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         } else if (section == 1) {
             return 7
         } else if (section == 2) {
-            return 4
+            return 5
         } else if (section == 3) {
             return 5
         }
@@ -175,6 +175,10 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 
             } else if (indexPath.row == 3) {
                 baseCell.onBindSetTellegram()
+                return baseCell
+                
+            } else if (indexPath.row == 4) {
+                baseCell.onBindSetYoutube()
                 return baseCell
                 
             }
@@ -292,6 +296,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                     self.present(alert, animated: true, completion: nil)
                 }
                 
+            } else if (indexPath.row == 4) {
+                guard let url = URL(string: "https://www.youtube.com/@cosmostationio") else { return }
+                if (UIApplication.shared.canOpenURL(url)) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    onShowSafariWeb(url)
+                }
             }
             
         } else if (indexPath.section == 3) {

@@ -103,6 +103,12 @@ class SettingBaseCell: UITableViewCell {
         setDetailLabel.text = ""
     }
     
+    func onBindSetYoutube() {
+        setImg.image = UIImage(named: "setYoutube")
+        setTitleLabel.text = NSLocalizedString("setting_youtube_title", comment: "")
+        setDetailLabel.text = ""
+    }
+    
     
     
     func onBindSetTerm() {
