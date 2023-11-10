@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import SwiftyJSON
 
 public struct MintscanAssets: Codable {
@@ -25,6 +26,7 @@ public struct MintscanAsset: Codable {
     var description: String?
     var image: String?
     var coinGeckoId: String?
+    var color: String?
     
     var enable: Bool?
     var path: String?
@@ -44,6 +46,10 @@ public struct MintscanAsset: Codable {
             }
         }
         return nil
+    }
+    
+    func assetColor() -> UIColor {
+        return UIColor.init(hex: color ?? "#FFFFFF")!
     }
 }
 

@@ -98,12 +98,14 @@ public class WDP {
         if (coin == nil) {
             amountLabel?.attributedText = dpAmount("0", amountLabel!.font, showDecimal ?? msAsset.decimals)
             denomLabel?.text = msAsset.symbol
+            denomLabel?.textColor = msAsset.assetColor()
             coinImg?.af.setImage(withURL: msAsset.assetImg())
             
         } else {
             let amount = NSDecimalNumber(string: coin?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
             amountLabel?.attributedText = dpAmount(amount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
             denomLabel?.text = msAsset.symbol
+            denomLabel?.textColor = msAsset.assetColor()
             coinImg?.af.setImage(withURL: msAsset.assetImg())
         }
 
@@ -140,6 +142,7 @@ public class WDP {
         let deAmount = amount.multiplying(byPowerOf10: -msAsset.decimals!)
         amountLabel?.attributedText = dpAmount(deAmount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
         denomLabel?.text = msAsset.symbol
+        denomLabel?.textColor = msAsset.assetColor()
         coinImg?.af.setImage(withURL: msAsset.assetImg())
     }
     

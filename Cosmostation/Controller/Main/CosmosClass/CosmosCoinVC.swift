@@ -290,7 +290,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             if (indexPath.section == 0) {
-                onStartTransferVC(selectedChain.stakeDenom)
+                onStartTransferVC(getCoinBySection(indexPath)?.denom ?? selectedChain.stakeDenom)
             } else if (indexPath.section == 1) {
                 onStartTransferVC(ibcCoins[indexPath.row].denom)
             } else if (indexPath.section == 2) {

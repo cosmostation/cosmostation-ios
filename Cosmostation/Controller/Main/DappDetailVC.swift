@@ -402,7 +402,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 
                 if let currentChainWithChainName = baseAccount.getDisplayCosmosChains().filter({ $0.apiName == chainId }).first {
                     self.selectedChain = currentChainWithChainName
-                    data["address"].stringValue = currentChainWithChainName.bechAddress ?? ""
+                    data["address"].stringValue = currentChainWithChainName.bechAddress 
                     data["publicKey"].stringValue = currentChainWithChainName.publicKey!.toHexString()
                         
                     let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
@@ -410,7 +410,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                     
                 } else if let currentChainWithChainId = baseAccount.getDisplayCosmosChains().filter({ $0.chainId == chainId }).first {
                     self.selectedChain = currentChainWithChainId
-                    data["address"].stringValue = currentChainWithChainId.bechAddress ?? ""
+                    data["address"].stringValue = currentChainWithChainId.bechAddress 
                     data["publicKey"].stringValue = currentChainWithChainId.publicKey!.toHexString()
                     approveWebToApp(data, messageJSON, bodyJSON["messageId"])
                     
