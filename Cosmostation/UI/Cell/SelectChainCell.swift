@@ -18,10 +18,8 @@ class SelectChainCell: UITableViewCell {
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var valueLayer: UIStackView!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
-    @IBOutlet weak var assetCntLayer: UIStackView!
     @IBOutlet weak var assetCntLabel: UILabel!
     
     
@@ -30,11 +28,12 @@ class SelectChainCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        valueLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
-        assetCntLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+        valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+        assetCntLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
     }
     
     override func prepareForReuse() {
+        currencyLabel.text = ""
         legacyTag.isHidden = true
         evmCompatTag.isHidden = true
     }
@@ -75,16 +74,20 @@ class SelectChainCell: UITableViewCell {
         
         if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
 //            print("refAddress ", refAddress)
+            valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            assetCntLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
             assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"
             
-            valueLayer.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            assetCntLayer.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//            valueLayer.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//            assetCntLayer.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             
             
         } else {
-            valueLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
-            assetCntLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+//            valueLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+//            assetCntLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+            valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+            assetCntLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
         }
     }
 }

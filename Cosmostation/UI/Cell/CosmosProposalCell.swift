@@ -69,20 +69,20 @@ class CosmosProposalCell: UITableViewCell {
         
         if let rawVote = myVotes.filter({ $0.proposal_id == proposal.id }).first {
             if (rawVote.votes.count > 1) {
-                self.myVoteImg.image = UIImage.init(named: "imgVoteWeight")
+                self.myVoteImg.image = UIImage.init(named: "imgMyVoteWeight")
             } else {
                 let myVote = rawVote.votes[0]
                 if (myVote.option?.contains("OPTION_YES") == true) {
-                    self.myVoteImg.image = UIImage.init(named: "imgVoteYes")
+                    self.myVoteImg.image = UIImage.init(named: "imgMyVoteYes")
                     return
                 } else if (myVote.option?.contains("OPTION_NO_WITH_VETO") == true) {
-                    self.myVoteImg.image = UIImage.init(named: "imgVoteVeto")
+                    self.myVoteImg.image = UIImage.init(named: "imgMyVoteVeto")
                     return
                 } else if (myVote.option?.contains("OPTION_NO") == true) {
-                    self.myVoteImg.image = UIImage.init(named: "imgVoteNo")
+                    self.myVoteImg.image = UIImage.init(named: "imgMyVoteNo")
                     return
                 } else if (myVote.option?.contains("OPTION_ABSTAIN") == true) {
-                    self.myVoteImg.image = UIImage.init(named: "imgVoteAbstain")
+                    self.myVoteImg.image = UIImage.init(named: "imgMyVoteAbstain")
                     return
                 } else {
                     self.myVoteImg.image = nil
@@ -130,17 +130,17 @@ class CosmosProposalCell: UITableViewCell {
         if let myVote = myVotes.filter({$0["contract_address"].stringValue == module["address"].stringValue && $0["proposal_id"].int64Value == id }).first {
             let myOption = myVote["option"].stringValue.lowercased()
             if (myOption == "yes") {
-                myVoteImg.image = UIImage.init(named: "imgVoteYes")
+                myVoteImg.image = UIImage.init(named: "imgMyVoteYes")
                 myVoteImg.isHidden = false
                 return
                 
             } else if (myOption == "no") {
-                myVoteImg.image = UIImage.init(named: "imgVoteNo")
+                myVoteImg.image = UIImage.init(named: "imgMyVoteNo")
                 myVoteImg.isHidden = false
                 return
                 
             } else if (myOption == "abstain") {
-                myVoteImg.image = UIImage.init(named: "imgVoteAbstain")
+                myVoteImg.image = UIImage.init(named: "imgMyVoteAbstain")
                 myVoteImg.isHidden = false
                 return
                 
