@@ -13,8 +13,8 @@ class QrAddressVC: BaseVC {
     @IBOutlet weak var chainNameLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var tagLayer: UIStackView!
-    @IBOutlet weak var deprecatedLabel: UILabel!
-    @IBOutlet weak var evmLabel: UILabel!
+    @IBOutlet weak var legacyTag: UILabel!
+    @IBOutlet weak var evmCompatTag: UILabel!
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressCardView: FixCardView!
     @IBOutlet weak var addressLabel: UILabel!
@@ -45,18 +45,18 @@ class QrAddressVC: BaseVC {
             
             if (selectedChain.evmCompatible) {
                 tagLayer.isHidden = false
-                evmLabel.isHidden = false
+                evmCompatTag.isHidden = false
                 
             } else if (selectedChain.isDefault == false) {
                 tagLayer.isHidden = false
-                deprecatedLabel.isHidden = false
+                legacyTag.isHidden = false
             }
             
         } else {
             hdPathLabel.text = ""
             if (selectedChain.evmCompatible) {
                 tagLayer.isHidden = false
-                evmLabel.isHidden = false
+                evmCompatTag.isHidden = false
                 
             }
         }

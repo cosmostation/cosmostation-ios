@@ -16,8 +16,8 @@ class SelectChainCell: UITableViewCell {
     @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var deprecatedLabel: UILabel!
-    @IBOutlet weak var evmLabel: UILabel!
+    @IBOutlet weak var legacyTag: UILabel!
+    @IBOutlet weak var evmCompatTag: UILabel!
     @IBOutlet weak var valueLayer: UIStackView!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
@@ -35,8 +35,8 @@ class SelectChainCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        deprecatedLabel.isHidden = true
-        evmLabel.isHidden = true
+        legacyTag.isHidden = true
+        evmCompatTag.isHidden = true
     }
     
     var actionToggle: ((Bool) -> Void)? = nil
@@ -59,18 +59,16 @@ class SelectChainCell: UITableViewCell {
         
         if (account.type == .withMnemonic) {
             hdPathLabel.text = chain.getHDPath(account.lastHDPath)
-            
             if (chain.evmCompatible) {
-                evmLabel.isHidden = false
+                evmCompatTag.isHidden = false
             } else if (!chain.isDefault) {
-                deprecatedLabel.isHidden = false
+                legacyTag.isHidden = false
             }
             
         } else {
             hdPathLabel.text = ""
-            
             if (chain.evmCompatible) {
-                evmLabel.isHidden = false
+                evmCompatTag.isHidden = false
             }
         }
 //        print("chain ", chain.name, "  ", chain.address)

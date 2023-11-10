@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -55,7 +55,7 @@
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="nwD-TS-P8w">
                                         <rect key="frame" x="2" y="17.666666666666668" width="0.0" height="0.0"/>
                                         <subviews>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deprecated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79d-Eg-kfT">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79d-Eg-kfT">
                                                 <rect key="frame" x="0.0" y="0.0" width="68" height="14"/>
                                                 <color key="backgroundColor" name="_color06"/>
                                                 <constraints>
@@ -222,8 +222,8 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="currencyLabel" destination="WCb-NS-yvk" id="zbt-ln-Duw"/>
-                <outlet property="deprecatedLabel" destination="79d-Eg-kfT" id="xiN-R8-JvW"/>
-                <outlet property="evmLabel" destination="4wd-Cg-FLR" id="onK-aV-av7"/>
+                <outlet property="evmCompatTag" destination="4wd-Cg-FLR" id="4NW-Sc-fPd"/>
+                <outlet property="legacyTag" destination="79d-Eg-kfT" id="ND3-a1-weA"/>
                 <outlet property="logoImg1" destination="Suc-II-N3v" id="Eqg-23-cbT"/>
                 <outlet property="logoImg2" destination="LTW-RR-keU" id="q3H-w4-f1M"/>
                 <outlet property="nameLabel" destination="OeQ-XM-yfu" id="auZ-0Z-aPF"/>

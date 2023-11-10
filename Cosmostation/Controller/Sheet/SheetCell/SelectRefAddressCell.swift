@@ -11,7 +11,7 @@ import UIKit
 class SelectRefAddressCell: UITableViewCell {
     
     @IBOutlet weak var accountNameLabel: UILabel!
-    @IBOutlet weak var deprecatedTag: UILabel!
+    @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
     @IBOutlet weak var masterAddressLabel: UILabel!
     @IBOutlet weak var slaveAddressabel: UILabel!
@@ -19,14 +19,14 @@ class SelectRefAddressCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        deprecatedTag.isHidden = true
+        legacyTag.isHidden = true
         evmCompatTag.isHidden = true
         slaveAddressabel.isHidden = true
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        deprecatedTag.isHidden = true
+        legacyTag.isHidden = true
         evmCompatTag.isHidden = true
         slaveAddressabel.isHidden = true
     }
@@ -41,7 +41,7 @@ class SelectRefAddressCell: UITableViewCell {
                 evmCompatTag.isHidden = false
                 
             } else if (!chain.isDefault) {
-                deprecatedTag.isHidden = false
+                legacyTag.isHidden = false
             }
             
             if (recipientChain is ChainOkt60Keccak) {
@@ -73,7 +73,7 @@ class SelectRefAddressCell: UITableViewCell {
             if (chain.evmCompatible) {
                 evmCompatTag.isHidden = false
             } else if (!chain.isDefault) {
-                deprecatedTag.isHidden = false
+                legacyTag.isHidden = false
             }
         }
         masterAddressLabel.text = refAddress.evmAddress

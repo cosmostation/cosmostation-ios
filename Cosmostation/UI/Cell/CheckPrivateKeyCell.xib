@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -62,7 +62,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deprecated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bv9-CZ-uhs">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bv9-CZ-uhs">
                                         <rect key="frame" x="-68" y="0.0" width="68" height="14"/>
                                         <color key="backgroundColor" name="_color06"/>
                                         <constraints>
@@ -132,9 +132,9 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" name="_primary"/>
             <connections>
-                <outlet property="deprecatedLabel" destination="bv9-CZ-uhs" id="flM-gG-D5I"/>
-                <outlet property="evmLabel" destination="aax-EH-vmd" id="UCr-Lk-KQG"/>
+                <outlet property="evmCompatTag" destination="aax-EH-vmd" id="txD-yM-CHU"/>
                 <outlet property="hdPathLabel" destination="ws6-85-cqe" id="i9Z-Qa-X25"/>
+                <outlet property="legacyTag" destination="bv9-CZ-uhs" id="75l-bH-kzj"/>
                 <outlet property="logoImg1" destination="Ebr-sN-Lxe" id="sxD-DN-2ZC"/>
                 <outlet property="nameLabel" destination="Ymw-3N-L35" id="LKT-Ys-wp0"/>
                 <outlet property="pkeyLabel" destination="AvC-ON-HAr" id="13R-Vp-A9j"/>

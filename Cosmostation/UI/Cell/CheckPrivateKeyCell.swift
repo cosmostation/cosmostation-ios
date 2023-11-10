@@ -13,8 +13,8 @@ class CheckPrivateKeyCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var evmLabel: UILabel!
-    @IBOutlet weak var deprecatedLabel: UILabel!
+    @IBOutlet weak var legacyTag: UILabel!
+    @IBOutlet weak var evmCompatTag: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var pkeyLabel: UILabel!
 
@@ -26,8 +26,8 @@ class CheckPrivateKeyCell: UITableViewCell {
     
     override func prepareForReuse() {
         rootView.setBlur()
-        evmLabel.isHidden = true
-        deprecatedLabel.isHidden = true
+        evmCompatTag.isHidden = true
+        legacyTag.isHidden = true
     }
     
     
@@ -37,9 +37,9 @@ class CheckPrivateKeyCell: UITableViewCell {
         
         hdPathLabel.text = chain.getHDPath(account.lastHDPath)
         if (chain.evmCompatible) {
-            evmLabel.isHidden = false
+            evmCompatTag.isHidden = false
         } else if (!chain.isDefault) {
-            deprecatedLabel.isHidden = false
+            legacyTag.isHidden = false
         }
         pkeyLabel.text = "0x" + chain.privateKey!.toHexString()
         

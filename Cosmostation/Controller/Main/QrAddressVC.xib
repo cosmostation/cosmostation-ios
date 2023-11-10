@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,9 +23,9 @@
                 <outlet property="addressLabel" destination="fUT-8v-eVv" id="NlG-XY-UtX"/>
                 <outlet property="addressToggleBtn" destination="hyI-r4-hqa" id="eXX-i7-V2n"/>
                 <outlet property="chainNameLabel" destination="Log-Tr-ulL" id="YHl-Cg-y1U"/>
-                <outlet property="deprecatedLabel" destination="aLh-WY-hHi" id="54c-uX-fev"/>
-                <outlet property="evmLabel" destination="WdH-PN-TbZ" id="bYz-z0-0tK"/>
+                <outlet property="evmCompatTag" destination="WdH-PN-TbZ" id="kuX-ev-dk7"/>
                 <outlet property="hdPathLabel" destination="Ox2-57-jxw" id="4He-Nx-7jD"/>
+                <outlet property="legacyTag" destination="aLh-WY-hHi" id="F10-Ql-3gg"/>
                 <outlet property="rqImgView" destination="Hq3-0z-VB0" id="yvl-lM-8Ds"/>
                 <outlet property="shareBtn" destination="UkY-bX-F9E" id="jeE-4q-0pY"/>
                 <outlet property="tagLayer" destination="SJQ-1Q-Ggp" id="YeN-KF-G5F"/>
@@ -56,7 +56,7 @@
                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="SJQ-1Q-Ggp">
                             <rect key="frame" x="57" y="10.000000000000014" width="0.0" height="0.0"/>
                             <subviews>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deprecated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLh-WY-hHi">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLh-WY-hHi">
                                     <rect key="frame" x="0.0" y="0.0" width="68" height="14"/>
                                     <color key="backgroundColor" name="_color06"/>
                                     <constraints>

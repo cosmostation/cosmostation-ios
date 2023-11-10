@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -61,7 +61,7 @@
                                                 <color key="textColor" name="_color02"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deprecated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpI-Ap-xV9">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpI-Ap-xV9">
                                                 <rect key="frame" x="73" y="0.0" width="68" height="14"/>
                                                 <color key="backgroundColor" name="_color06"/>
                                                 <constraints>
@@ -196,9 +196,9 @@
                 <outlet property="assetCntLabel" destination="2nt-Q9-wQJ" id="Xwp-Kz-B8I"/>
                 <outlet property="assetCntLayer" destination="Ly1-Fx-WqW" id="dXY-1i-NRt"/>
                 <outlet property="currencyLabel" destination="rov-M3-rhY" id="9Wx-ky-ELK"/>
-                <outlet property="deprecatedLabel" destination="IpI-Ap-xV9" id="RSR-jt-qjs"/>
-                <outlet property="evmLabel" destination="ndV-0P-jRq" id="XiU-wb-BIO"/>
+                <outlet property="evmCompatTag" destination="ndV-0P-jRq" id="cMK-tp-STt"/>
                 <outlet property="hdPathLabel" destination="Z6Y-lL-ijC" id="dJP-LA-n0A"/>
+                <outlet property="legacyTag" destination="IpI-Ap-xV9" id="j0C-s1-jYh"/>
                 <outlet property="logoImg1" destination="hCI-tl-W78" id="2VQ-sE-GlK"/>
                 <outlet property="logoImg2" destination="6Qf-wv-brJ" id="JgW-7O-Sen"/>
                 <outlet property="nameLabel" destination="brX-jS-Hp5" id="Yys-Q4-sYo"/>

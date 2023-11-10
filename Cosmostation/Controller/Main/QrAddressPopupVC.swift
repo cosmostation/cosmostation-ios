@@ -15,8 +15,8 @@ class QrAddressPopupVC: BaseVC {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var tagLayer: UIStackView!
-    @IBOutlet weak var deprecatedLabel: UILabel!
-    @IBOutlet weak var evmLabel: UILabel!
+    @IBOutlet weak var legacyTag: UILabel!
+    @IBOutlet weak var evmCompatTag: UILabel!
     
     var selectedChain: CosmosClass!
     var toDpAddress = ""
@@ -39,11 +39,11 @@ class QrAddressPopupVC: BaseVC {
             
             if (selectedChain.evmCompatible) {
                 tagLayer.isHidden = false
-                evmLabel.isHidden = false
+                evmCompatTag.isHidden = false
                 
             } else if (selectedChain.isDefault == false) {
                 tagLayer.isHidden = false
-                deprecatedLabel.isHidden = false
+                legacyTag.isHidden = false
             }
             
         } else {
@@ -51,7 +51,7 @@ class QrAddressPopupVC: BaseVC {
             
             if (selectedChain.evmCompatible) {
                 tagLayer.isHidden = false
-                evmLabel.isHidden = false
+                evmCompatTag.isHidden = false
                 
             }
         }

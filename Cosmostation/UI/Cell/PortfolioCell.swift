@@ -16,8 +16,8 @@ class PortfolioCell: UITableViewCell {
     @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var tagLayer: UIStackView!
-    @IBOutlet weak var deprecatedLabel: UILabel!
-    @IBOutlet weak var evmLabel: UILabel!
+    @IBOutlet weak var legacyTag: UILabel!
+    @IBOutlet weak var evmCompatTag: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
@@ -41,8 +41,8 @@ class PortfolioCell: UITableViewCell {
         rootView.setBlur()
         currencyLabel.text = ""
         tagLayer.isHidden = true
-        deprecatedLabel.isHidden = true
-        evmLabel.isHidden = true
+        legacyTag.isHidden = true
+        evmCompatTag.isHidden = true
     }
     
     func bindCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass) {
@@ -52,11 +52,11 @@ class PortfolioCell: UITableViewCell {
         
         if (chain.evmCompatible) {
             tagLayer.isHidden = false
-            evmLabel.isHidden = false
+            evmCompatTag.isHidden = false
             
         } else if (!chain.isDefault) {
             tagLayer.isHidden = false
-            deprecatedLabel.isHidden = false
+            legacyTag.isHidden = false
         }
         
         if (chain.fetched) {
