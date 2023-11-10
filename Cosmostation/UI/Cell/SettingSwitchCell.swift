@@ -32,6 +32,12 @@ class SettingSwitchCell: UITableViewCell {
         actionToggle?(sender.isOn)
     }
     
+    func onBindHideLegacy() {
+        setImg.image = UIImage(named: "setHideLegacy")
+        setTitleLabel.text = NSLocalizedString("setting_hide_legacy", comment: "")
+        selectSwitch.isOn = BaseData.instance.getHideLegacy()
+    }
+    
     func onBindSetNotification() {
         setImg.image = UIImage(named: "setNoti")
         setTitleLabel.text = NSLocalizedString("setting_notification_title", comment: "")
@@ -48,7 +54,6 @@ class SettingSwitchCell: UITableViewCell {
         setImg.image = UIImage(named: "setAppLock")
         setTitleLabel.text = NSLocalizedString("setting_app_lock_title", comment: "")
         selectSwitch.isOn = BaseData.instance.getUsingAppLock()
-        
     }
     
     func onBindSetBioAuth() {

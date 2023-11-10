@@ -742,6 +742,9 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
             chain.chainId = chainId
         }
     }
+    if (BaseData.instance.getHideLegacy()) {
+        return result.filter({ $0.isDefault == true })
+    }
     return result
 }
 

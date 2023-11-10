@@ -433,6 +433,7 @@
 "setting_section_about" = "アプリ情報";
 "setting_account_title" = "アカウント管理";
 "setting_qr_import_account" = "QRスキャンでアカウントをインポート";
+"setting_hide_legacy" = "レガシーを隠す";
 "setting_chain_title" = "チェーン管理";
 "setting_addressbook_title" = "連絡先の管理";
 "setting_language_title" = "言語";
@@ -957,6 +958,7 @@
 "quotes_29" = "ビットコインのようなものを止めることはできません。それはどこにでも存在し、社会はそれに適応しなければなりません。あらゆる政府体制もそれに対応しなければなりません。-- John Mcafee";
 "quotes_30" = "どの国も、法定通貨システムへの移行時に崩壊してきました。 これは歴史の流れであり、暗号通貨に関する知識がなくても分かる事実です。-- Nipsey Hussle";
 "quotes_31" = "ナードたちのための黄金。-- Stephen Colbert";
+"quotes_32" = "ザ・タイムズ 2009/1月/3日、銀行の2番目の救済金融を控えているU.K. 財務大臣。 （ビットコインジェネシスブロックメモ） -- Satoshi Nakamoto";
 
 
 

@@ -81,7 +81,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-            return 4
+            return 5
         } else if (section == 1) {
             return 7
         } else if (section == 2) {
@@ -107,10 +107,23 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 return baseCell
                 
             } else if (indexPath.row == 2) {
+                switchCell.onBindHideLegacy()
+                switchCell.actionToggle = { request in
+                    if (request != BaseData.instance.getHideLegacy()) {
+                        BaseData.instance.setHideLegacy(request)
+                        DispatchQueue.main.async(execute: {
+                            self.hideWait()
+                            self.onStartMainTab()
+                        });
+                    }
+                }
+                return switchCell
+                
+            } else if (indexPath.row == 3) {
                 baseCell.onBindSetChain()
                 return baseCell
                 
-            } else if (indexPath.row == 3) {
+            } else if (indexPath.row == 4) {
                 baseCell.onBindSetAddressBook()
                 return baseCell
             }
@@ -224,13 +237,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 qrScanVC.scanDelegate = self
                 present(qrScanVC, animated: true)
                 
-            } else if (indexPath.row == 2) {
+            } else if (indexPath.row == 3) {
                 let chainListVC = ChainListVC(nibName: "ChainListVC", bundle: nil)
                 chainListVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(chainListVC, animated: true)
                 
-            } else if (indexPath.row == 3) {
+            } else if (indexPath.row == 4) {
                 let addressBookVC = AddressBookListVC(nibName: "AddressBookListVC", bundle: nil)
                 addressBookVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "disable deprecated path.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

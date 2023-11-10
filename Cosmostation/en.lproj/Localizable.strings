@@ -433,6 +433,7 @@
 "setting_section_about" = "About";
 "setting_account_title" = "Account";
 "setting_qr_import_account" = "Import account with QR scan";
+"setting_hide_legacy" = "Hide Legacy";
 "setting_chain_title" = "Chain";
 "setting_addressbook_title" = "Address Book";
 "setting_language_title" = "Language";
@@ -957,6 +958,8 @@
 "quotes_29" = "You can’t stop things like Bitcoin. It will be everywhere, and the world will have to readjust. World governments will have to readjust. -- John Mcafee";
 "quotes_30" = "Any time a country transitioned to a fiat currency, they collapsed. That’s just world history; you don’t have to know about cryptocurrency to know that. -- Nipsey Hussle";
 "quotes_31" = "It’s gold for nerds. -- Stephen Colbert";
+"quotes_32" = "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks. (Bitcoin genesis block memo) -- Satoshi Nakamoto";
+
 
 
 "error_two_pincode_differ" = "PIN number is not same. Please init PIN number again!";

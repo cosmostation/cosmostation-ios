@@ -433,6 +433,7 @@
 "setting_section_about" = "앱 정보";
 "setting_account_title" = "계정 관리";
 "setting_qr_import_account" = "QR로 계정 추가";
+"setting_hide_legacy" = "레가시 주소 숨김";
 "setting_chain_title" = "체인 관리";
 "setting_addressbook_title" = "주소록 관리";
 "setting_language_title" = "언어";
@@ -957,6 +958,7 @@
 "quotes_29" = "당신은 비트코인 같은 것을 막을 수 없다. 그것은 어디에나 있고, 세상에 거기에 적응해야 할 것이다. 모든 정부 체계들이 거기에 적응해야 할 것이다. -- John Mcafee";
 "quotes_30" = "어떤 나라든 법정 통화 체계로 전환할 때 붕괴해왔다. 이건 역사의 흐름으로, 암호화폐에 대한 지식이 없어도 알 수 있는 사실이다. -- Nipsey Hussle";
 "quotes_31" = "너드들을 위한 황금 -- Stephen Colbert";
+"quotes_32" = "더 타임스 2009/1월/3일, 은행들의 두 번째 구제금융을 앞두고 있는 U.K. 재무장관. (비트코인 제네시스 블럭 메모) -- Satoshi Nakamoto";
 
 
 

@@ -534,6 +534,14 @@ extension BaseData {
         return last < now ? true : false
     }
     
+    func setHideLegacy(_ hide : Bool) {
+        UserDefaults.standard.set(hide, forKey: KEY_HIDE_LEGACY)
+    }
+    
+    func getHideLegacy() -> Bool {
+        return UserDefaults.standard.bool(forKey: KEY_HIDE_LEGACY)
+    }
+    
     func setCurrency(_ currency : Int) {
         UserDefaults.standard.set(currency, forKey: KEY_CURRENCY)
     }
