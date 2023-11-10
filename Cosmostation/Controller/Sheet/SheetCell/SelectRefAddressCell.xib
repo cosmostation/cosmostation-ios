@@ -39,10 +39,10 @@
                                 <rect key="frame" x="123" y="25.333333333333332" width="0.0" height="0.0"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8c-K1-bjh">
-                                        <rect key="frame" x="0.0" y="0.0" width="68" height="12"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="12"/>
                                         <color key="backgroundColor" name="_color06"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="68" id="QrN-Vw-lgl"/>
+                                            <constraint firstAttribute="width" constant="44" id="QrN-Vw-lgl"/>
                                             <constraint firstAttribute="height" constant="12" id="zGW-64-sEJ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>

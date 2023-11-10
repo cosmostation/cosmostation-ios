@@ -56,10 +56,10 @@
                                         <rect key="frame" x="2" y="17.666666666666668" width="0.0" height="0.0"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79d-Eg-kfT">
-                                                <rect key="frame" x="0.0" y="0.0" width="68" height="14"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="44" height="14"/>
                                                 <color key="backgroundColor" name="_color06"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="68" id="0xV-Hf-55e"/>
+                                                    <constraint firstAttribute="width" constant="44" id="0xV-Hf-55e"/>
                                                     <constraint firstAttribute="height" constant="14" id="q7w-GD-ccR"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
