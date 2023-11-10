@@ -53,31 +53,17 @@ class PortfolioCell: UITableViewCell {
         if (chain.evmCompatible) {
             tagLayer.isHidden = false
             evmCompatTag.isHidden = false
-            
         } else if (!chain.isDefault) {
             tagLayer.isHidden = false
             legacyTag.isHidden = false
         }
         
         if (chain.fetched) {
+//            logoImg1.isHidden = false
             valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
-            
-//            if (chain is ChainBinanceBeacon) {
-//                WDP.dpPrice(BNB_GECKO_ID, priceCurrencyLabel, priceLabel)
-//                WDP.dpPriceChanged(BNB_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
-//
-//            } else if (chain is ChainOkt60Keccak) {
-//                WDP.dpPrice(ChainOkt996Keccak.OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
-//                WDP.dpPriceChanged(ChainOkt996Keccak.OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
-//
-//            } else {
-//                if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
-//                    WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
-//                    WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-//                }
-//            }
         } else {
+//            logoImg1.isHidden = true
             valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
         }
     }
