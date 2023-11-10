@@ -11,6 +11,7 @@ import Lottie
 
 class ChainSelectVC: BaseVC {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchEmptyLayer: UIView!
     @IBOutlet weak var selectBtn: SecButton!
@@ -85,6 +86,8 @@ class ChainSelectVC: BaseVC {
     }
     
     override func setLocalizedString() {
+        titleLabel.text = NSLocalizedString("title_select_wallet", comment: "")
+        selectBtn.setTitle(NSLocalizedString("str_select_valuables", comment: ""), for: .normal)
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     

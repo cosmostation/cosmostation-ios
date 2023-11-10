@@ -193,6 +193,7 @@
 "str_create_another_account" = "다른 계정 생성";
 "str_delete" = "삭제";
 "str_delete_address_book" = "주소록 삭제";
+"str_select_valuables" = "자산이 있는 지갑 선택";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";

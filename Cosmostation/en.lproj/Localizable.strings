@@ -193,6 +193,7 @@
 "str_create_another_account" = "Create Another Account";
 "str_delete" = "Delete";
 "str_delete_address_book" = "Delete Address Book";
+"str_select_valuables" = "Select Wallets with Asset";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";

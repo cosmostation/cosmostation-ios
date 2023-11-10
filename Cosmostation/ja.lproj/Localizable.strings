@@ -193,6 +193,7 @@
 "str_create_another_account" = "別のアカウントを作成";
 "str_delete" = "消去";
 "str_delete_address_book" = "連絡先の削除";
+"str_select_valuables" = "資産のある財布の選択";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
