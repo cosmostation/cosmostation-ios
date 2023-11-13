@@ -37,18 +37,22 @@ class BaseMsgSheetCell: UITableViewCell {
     
     func onBindDelegate(_ position: Int) {
         if (position == 0) {
+            titleLabel.text = NSLocalizedString("str_stake", comment: "")
+            descriptionLabel.text = NSLocalizedString("str_stake_msg", comment: "")
+            
+        } else if (position == 1) {
             titleLabel.text = NSLocalizedString("str_unstake", comment: "")
             descriptionLabel.text = NSLocalizedString("str_unstake_msg", comment: "")
             
-        } else if (position == 1) {
+        } else if (position == 2) {
             titleLabel.text = NSLocalizedString("str_switch_validator", comment: "")
             descriptionLabel.text = NSLocalizedString("str_switch_validator_msg", comment: "")
             
-        } else if (position == 2) {
+        } else if (position == 3) {
             titleLabel.text = NSLocalizedString("str_cliam_reward", comment: "")
             descriptionLabel.text = NSLocalizedString("str_cliam_reward_msg", comment: "")
             
-        } else if (position == 3) {
+        } else if (position == 4) {
             titleLabel.text = NSLocalizedString("str_compounding", comment: "")
             descriptionLabel.text = NSLocalizedString("str_compounding_msg", comment: "")
             

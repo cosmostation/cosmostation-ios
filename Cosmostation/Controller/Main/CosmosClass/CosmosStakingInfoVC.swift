@@ -97,13 +97,20 @@ class CosmosStakingInfoVC: BaseVC {
         }
     }
     
-    @IBAction func onDelegateTx(_ sender: BaseButton) {
+    @IBAction func onClickStake(_ sender: BaseButton) {
+        onDelegateTx(nil)
+    }
+    
+    func onDelegateTx(_ toValAddress: String?) {
         if (selectedChain.isTxFeePayable() == false) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
         delegate.selectedChain = selectedChain
+        if (toValAddress != nil) {
+            delegate.toValidator = validators.filter({ $0.operatorAddress == toValAddress }).first
+        }
         delegate.modalTransitionStyle = .coverVertical
         self.present(delegate, animated: true)
     }
@@ -353,12 +360,14 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
                let valAddress = result["validatorAddress"] as? String {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     if (index == 0) {
-                        self.onUndelegateTx(valAddress)
+                        self.onDelegateTx(valAddress)
                     } else if (index == 1) {
-                        self.onRedelegateTx(valAddress)
+                        self.onUndelegateTx(valAddress)
                     } else if (index == 2) {
-                        self.onClaimRewardTx(valAddress)
+                        self.onRedelegateTx(valAddress)
                     } else if (index == 3) {
+                        self.onClaimRewardTx(valAddress)
+                    } else if (index == 4) {
                         self.onCompoundingTx(valAddress)
                     }
                 });

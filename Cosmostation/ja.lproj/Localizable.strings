@@ -269,6 +269,7 @@
 "str_add_custom_chain" = "カスタムチェーンの追加";
 "str_select_coin_for_fee" = "Tx手数料として使用するコインの選択";
 "str_stake" = "ステーク";
+"str_stake_msg" = "ステーキング数量を追加します。";
 "str_unstake" = "ステークを解除する";
 "str_unstake_msg" = "アンステーキングを開始します。";
 "str_switch_validator" = "スイッチバリデータ";

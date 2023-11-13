@@ -269,6 +269,7 @@
 "str_add_custom_chain" = "커스텀 체인 추가";
 "str_select_coin_for_fee" = "Tx 수수료로 사용할 코인 선택";
 "str_stake" = "스테이크";
+"str_stake_msg" = "스테이킹 수량을 추가합니다.";
 "str_unstake" = "언스테이크";
 "str_unstake_msg" = "언스테이킹을 시작합니다.";
 "str_switch_validator" = "검증인 변경";

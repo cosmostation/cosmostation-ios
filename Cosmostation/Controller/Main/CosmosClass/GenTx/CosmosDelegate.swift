@@ -85,11 +85,12 @@ class CosmosDelegate: BaseVC {
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
-        
-        if let validator = selectedChain.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first {
-            toValidator = validator
-        } else {
-            toValidator = selectedChain.cosmosValidators[0]
+        if (toValidator == nil) {
+            if let validator = selectedChain.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first {
+                toValidator = validator
+            } else {
+                toValidator = selectedChain.cosmosValidators[0]
+            }
         }
         
         onUpdateValidatorView()

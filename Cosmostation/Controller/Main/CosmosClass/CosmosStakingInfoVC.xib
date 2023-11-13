@@ -45,7 +45,7 @@
                         <color key="titleColor" name="_color01"/>
                     </state>
                     <connections>
-                        <action selector="onDelegateTx:" destination="-1" eventType="touchUpInside" id="gea-Zw-ACK"/>
+                        <action selector="onClickStake:" destination="-1" eventType="touchUpInside" id="5x3-Os-J6d"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0j9-dh-zkZ" customClass="LottieAnimationView" customModule="Lottie">

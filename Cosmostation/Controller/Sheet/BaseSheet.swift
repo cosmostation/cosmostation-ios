@@ -330,7 +330,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             return 3
             
         } else if (sheetType == .SelectDelegatedAction) {
-            return 4
+            return 5
             
         } else if (sheetType == .SelectUnbondingAction) {
             return 1
