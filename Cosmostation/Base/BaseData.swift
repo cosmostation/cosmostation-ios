@@ -283,6 +283,7 @@ extension BaseData {
         try? getKeyChain().remove(account.uuid.sha1())
                                   
         deleteRefAddresses(account.id)
+        deleteDisplayCosmosChainTags(account.id)
         
         let query = TABLE_BASEACCOUNT.filter(BASEACCOUNT_ID == account.id)
         return try? database.run(query.delete())
@@ -516,6 +517,10 @@ extension BaseData {
             }
         }
         return DEFUAL_DISPALY_COSMOS
+    }
+    
+    func deleteDisplayCosmosChainTags(_ id: Int64)  {
+        UserDefaults.standard.removeObject(forKey: String(id) + " " + KEY_DISPLAY_COSMOS_CHAINS)
     }
     
     

@@ -49,7 +49,6 @@ class PushUtils {
     func sync() {
         guard let account = BaseData.instance.baseAccount else { return }
         guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
-        print("sync getDisplayCosmosChains count", account.getDisplayCosmosChains().count)
         if (account.getDisplayCosmosChains().count > 0) {
             let addresses = account.getDisplayCosmosChains().map { chain in
                 ["address": chain.bechAddress, "chain": chain.apiName]
