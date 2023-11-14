@@ -97,6 +97,12 @@ class SettingBaseCell: UITableViewCell {
         setDetailLabel.text = ""
     }
     
+    func onBindSetTwitter() {
+        setImg.image = UIImage(named: "setTwitter")
+        setTitleLabel.text = NSLocalizedString("setting_twitter_title", comment: "")
+        setDetailLabel.text = ""
+    }
+    
     func onBindSetTellegram() {
         setImg.image = UIImage(named: "setTelegram")
         setTitleLabel.text = NSLocalizedString("setting_telegram_title", comment: "")

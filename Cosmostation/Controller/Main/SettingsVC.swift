@@ -85,7 +85,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         } else if (section == 1) {
             return 7
         } else if (section == 2) {
-            return 5
+            return 6
         } else if (section == 3) {
             return 5
         }
@@ -187,10 +187,14 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 return baseCell
                 
             } else if (indexPath.row == 3) {
-                baseCell.onBindSetTellegram()
+                baseCell.onBindSetTwitter()
                 return baseCell
                 
             } else if (indexPath.row == 4) {
+                baseCell.onBindSetTellegram()
+                return baseCell
+                
+            } else if (indexPath.row == 5) {
                 baseCell.onBindSetYoutube()
                 return baseCell
                 
@@ -290,6 +294,14 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 onShowSafariWeb(url)
                 
             } else if (indexPath.row == 3) {
+                guard let url = URL(string: "https://twitter.com/CosmostationVD") else { return }
+                if (UIApplication.shared.canOpenURL(url)) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    onShowSafariWeb(url)
+                }
+                
+            } else if (indexPath.row == 4) {
                 let url = URL(string: "tg://resolve?domain=cosmostation")
                 if (UIApplication.shared.canOpenURL(url!)) {
                     UIApplication.shared.open(url!, options: [:], completionHandler: nil)
@@ -309,7 +321,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                     self.present(alert, animated: true, completion: nil)
                 }
                 
-            } else if (indexPath.row == 4) {
+            } else if (indexPath.row == 5) {
                 guard let url = URL(string: "https://www.youtube.com/@cosmostationio") else { return }
                 if (UIApplication.shared.canOpenURL(url)) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
