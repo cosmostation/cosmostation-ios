@@ -289,6 +289,7 @@
 "str_name" = "Name";
 "str_address_book_add" = "Add Address Book";
 "str_cancle_unstake" = "Cancel Unstake";
+"str_do_not_show_7_days" = "Don't show 7days";
 
 
 "btn_delegate" = "  Delegate";
@@ -360,6 +361,7 @@
 "msg_enter_encription_key" = "Enter the Encryption Key displayed on the screen to restore your account.";
 "msg_addressbook_add" = "For convenience, you can register frequently used addresses.";
 "msg_addressbook_updated" = "The address book has been updated.";
+"msg_swap_warn" = "Cosmostation Mobile is a non-custodial wallet service, so users are responsible for executing all transactions. Please always check the details accurately before sending a transaction. \n\nWe are not responsible for any losses resulting from transactions through the app.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";

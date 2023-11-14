@@ -626,4 +626,19 @@ extension BaseData {
     func setGrpcEndpoint(_ chain : CosmosClass, _ endpoint: String) {
         UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + chain.name)
     }
+    
+    func setSwapWarn() {
+        var dayComponent = DateComponents()
+        dayComponent.day = 7
+        let theCalendar = Calendar.current
+        let nextDate = theCalendar.date(byAdding: dayComponent, to: Date())
+        let nextTime = nextDate?.millisecondsSince1970 ?? 0
+        UserDefaults.standard.set(String(nextTime), forKey: KEY_SWAP_WARN)
+    }
+
+    func getSwapWarn() -> Bool {
+        let last = Int64(UserDefaults.standard.string(forKey: KEY_SWAP_WARN) ?? "0")!
+        let now = Date().millisecondsSince1970
+        return last < now
+    }
 }

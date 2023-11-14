@@ -289,6 +289,7 @@
 "str_name" = "名前";
 "str_address_book_add" = "連絡先を追加";
 "str_cancle_unstake" = "アンステーキ解除";
+"str_do_not_show_7_days" = "7日間表示しない";
 
 
 "btn_delegate" = "  委任する";
@@ -360,6 +361,7 @@
 "msg_enter_encription_key" = "アカウントを復元するには、画面に表示される暗号化キーを入力してください。";
 "msg_addressbook_add" = "便宜上、よく使うアドレスを登録できます。";
 "msg_addressbook_updated" = "連絡先を更新しました。";
+"msg_swap_warn" = "コスモステーションモバイルを非受託型ウォレットサービスとしてすべてのトランザクション実行の責任はユーザーにあります。 トランザクションを送信する前に常に内容を正確に確認して使用してください。 \n\nアプリによる取引による損失は一切責任を負いません。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";

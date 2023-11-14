@@ -289,6 +289,7 @@
 "str_name" = "이름";
 "str_address_book_add" = "주소록 추가";
 "str_cancle_unstake" = "언스테이킹 취소";
+"str_do_not_show_7_days" = "7일간 표시 안함";
 
 
 "btn_delegate" = "  위임 하기";
@@ -360,6 +361,7 @@
 "msg_enter_encription_key" = "계정을 복원하기 위해 화면에 표시된 Encription Key를 입력하세요.";
 "msg_addressbook_add" = "편의를 위해 자주쓰는 주소를 등록하실 수 있습니다.";
 "msg_addressbook_updated" = "주소록을 업데이트 하였습니다.";
+"msg_swap_warn" = "코스모스테이션 모바일을 비수탁형 지갑 서비스로 모든 트랜젝션 실행의 책임은 유저에게 있습니다. 트랜잭션을 보내기전에 항상 내용을 정확하게 확인하시고 사용해 주시길 바랍니다. \n\n앱을 통한 거래로 인한 손실은 책임지지 않습니다.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";

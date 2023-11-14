@@ -203,6 +203,12 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         rootScrollView.isHidden = false
         swapBtn.isHidden = false
         onReadyToUserInsert()
+        
+        if (BaseData.instance.getSwapWarn()) {
+            let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
+            warnSheet.noticeType = .SwapInitWarn
+            onStartSheet(warnSheet)
+        }
     }
     
     func onReadyToUserInsert() {
