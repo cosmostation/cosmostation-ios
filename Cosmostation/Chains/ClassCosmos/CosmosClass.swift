@@ -704,6 +704,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainGravityBridge())
     result.append(ChainHumans())
     result.append(ChainInjective())
+    result.append(ChainIris())
     result.append(ChainIxo())
     result.append(ChainJuno())
     result.append(ChainKava459())
