@@ -202,8 +202,6 @@ class EvmTransfer: BaseVC {
             
             let chainID = web3.provider.network?.chainID
             let contractAddress = EthereumAddress.init(fromHex: selectedMsToken!.address!)
-//            let senderAddress = EthereumAddress.init(fromHex: KeyFac.convertBech32ToEvm(selectedChain.bechAddress))
-//            let recipientAddress = EthereumAddress.init(fromHex: KeyFac.convertBech32ToEvm(selectedRecipientAddress!))
             let senderAddress = EthereumAddress.init(selectedChain.evmAddress)
             let recipientAddress = EthereumAddress.init(recipientEvmAddress!)
             let erc20token = ERC20(web3: web3, provider: web3.provider, address: contractAddress!)
@@ -232,19 +230,19 @@ class EvmTransfer: BaseVC {
                 multipleGas = legacy.gasPrice
             }
             
-            if let gasLimit = try? web3.eth.estimateGas(tx, transactionOptions: wTx?.transactionOptions) {
-                let newLimit = NSDecimalNumber(string: String(gasLimit)).multiplying(by: NSDecimalNumber(string: "1.3"), withBehavior: handler0Up)
-                tx.parameters.gasLimit = Web3.Utils.parseToBigUInt(newLimit.stringValue, decimals: 0)
-                ethereumTransaction = tx
-                
-                feeAmount = NSDecimalNumber(string: String(gasLimit.multiplied(by: multipleGas)))
-                DispatchQueue.main.async {
-                    self.onUpdateFeeView()
-                    self.view.isUserInteractionEnabled = true
-                    self.sendBtn.isEnabled = true
-                    self.loadingView.isHidden = true
-                }
+//            if let gasLimit = try? web3.eth.estimateGas(tx, transactionOptions: wTx?.transactionOptions) {
+//                print("gasLimit ", gasLimit)
+//                let newLimit = NSDecimalNumber(string: String(gasLimit)).multiplying(by: NSDecimalNumber(string: "1.3"), withBehavior: handler0Up)
+//                tx.parameters.gasLimit = Web3.Utils.parseToBigUInt(newLimit.stringValue, decimals: 0)
+            ethereumTransaction = tx
+            feeAmount = NSDecimalNumber(string: String(ethereumTransaction!.gasLimit.multiplied(by: multipleGas)))
+            DispatchQueue.main.async {
+                self.onUpdateFeeView()
+                self.view.isUserInteractionEnabled = true
+                self.sendBtn.isEnabled = true
+                self.loadingView.isHidden = true
             }
+//            }
         }
     }
 }
