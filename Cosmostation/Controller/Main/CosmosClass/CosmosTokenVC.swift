@@ -15,7 +15,8 @@ class CosmosTokenVC: BaseVC {
     var refresher: UIRefreshControl!
     
     var selectedChain: CosmosClass!
-    var mintscanTokens = Array<MintscanToken>()
+    var mintscanCw20Tokens = [MintscanToken]()
+    var mintscanErc20Tokens = [MintscanToken]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,25 +66,36 @@ class CosmosTokenVC: BaseVC {
     
     @objc func onFetchTokenDone(_ notification: NSNotification) {
         DispatchQueue.main.async {
-            self.mintscanTokens.removeAll()
+            self.mintscanCw20Tokens.removeAll()
+            self.mintscanErc20Tokens.removeAll()
             self.onUpdateView()
         }
     }
     
     func onUpdateView() {
-        selectedChain.mintscanTokens.forEach { tokenInfo in
+        selectedChain.mintscanCw20Tokens.forEach { tokenInfo in
             if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
-                mintscanTokens.append(tokenInfo)
+                mintscanCw20Tokens.append(tokenInfo)
             }
         }
+        mintscanCw20Tokens.sort {
+            let value0 = selectedChain.tokenValue($0.address!)
+            let value1 = selectedChain.tokenValue($1.address!)
+            return value0.compare(value1).rawValue > 0 ? true : false
+        }
         
-        mintscanTokens.sort {
+        selectedChain.mintscanErc20Tokens.forEach { tokenInfo in
+            if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
+                mintscanErc20Tokens.append(tokenInfo)
+            }
+        }
+        mintscanErc20Tokens.sort {
             let value0 = selectedChain.tokenValue($0.address!)
             let value1 = selectedChain.tokenValue($1.address!)
             return value0.compare(value1).rawValue > 0 ? true : false
         }
 
-        if (mintscanTokens.count > 0) {
+        if (mintscanCw20Tokens.count > 0 || mintscanErc20Tokens.count > 0) {
             tableView.reloadData()
             tableView.isHidden = false
             emptyDataView.isHidden = true
@@ -100,33 +112,44 @@ class CosmosTokenVC: BaseVC {
 extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (selectedChain.supportCw20) {
+        if (section == 0) {
             view.titleLabel.text = "Cw20 Tokens"
-            view.cntLabel.text = String(mintscanTokens.count)
-        }
-        if (selectedChain.supportErc20) {
+            view.cntLabel.text = String(mintscanCw20Tokens.count)
+        } else {
             view.titleLabel.text = "Erc20 Tokens"
-            view.cntLabel.text = String(mintscanTokens.count)
+            view.cntLabel.text = String(mintscanErc20Tokens.count)
         }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        if (section == 0 && mintscanCw20Tokens.count > 0) {
+            return 40
+        } else if (section == 1 && mintscanErc20Tokens.count > 0) {
+            return 40
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mintscanTokens.count
+        if (section == 0) {
+            return mintscanCw20Tokens.count
+        }
+        return mintscanErc20Tokens.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-        cell.bindToken(selectedChain, mintscanTokens[indexPath.row])
+        if (indexPath.section == 0) {
+            cell.bindToken(selectedChain, mintscanCw20Tokens[indexPath.row])
+        } else {
+            cell.bindToken(selectedChain, mintscanErc20Tokens[indexPath.row])
+        }
         return cell
     }
     
@@ -135,17 +158,17 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain.supportCw20) {
+        if (indexPath.section == 0) {
             let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
             transfer.selectedChain = selectedChain
-            transfer.toSendDenom = mintscanTokens[indexPath.row].address
+            transfer.toSendDenom = mintscanCw20Tokens[indexPath.row].address
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
             
-        } else if (selectedChain.supportErc20) {
+        } else {
             let transfer = EvmTransfer(nibName: "EvmTransfer", bundle: nil)
             transfer.selectedChain = selectedChain
-            transfer.toSendDenom = mintscanTokens[indexPath.row].address
+            transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].address
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
         }

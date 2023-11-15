@@ -99,7 +99,7 @@ class CosmosTransfer: BaseVC {
             selectedMsAsset = msAsset
             transferAssetType = .CoinTransfer
             
-        } else if let msToken = selectedChain.mintscanTokens.filter({ $0.address == toSendDenom }).first {
+        } else if let msToken = selectedChain.mintscanCw20Tokens.filter({ $0.address == toSendDenom }).first {
             selectedMsToken = msToken
             transferAssetType = .Cw20Transfer
         }
@@ -166,7 +166,7 @@ class CosmosTransfer: BaseVC {
             }
             
         } else {
-            if let msToken = selectedChain.mintscanTokens.filter({ $0.address == toSendDenom }).first {
+            if let msToken = selectedChain.mintscanCw20Tokens.filter({ $0.address == toSendDenom }).first {
                 toSendSymbolLabel.text = msToken.symbol
                 toSendAssetImg.af.setImage(withURL: msToken.assetImg())
             }

@@ -9,13 +9,9 @@
 import Foundation
 import SwiftyJSON
 
-public class MintscanTokens: Codable {
-    var assets: [MintscanToken]?
-}
-
 public class MintscanToken: Codable {
     var id: Int64?
-    var chainId: String?
+    var chainId: Int64?
     var chainName: String?
     var address: String?            //we handle contract address as denom
     var symbol: String?
@@ -24,8 +20,7 @@ public class MintscanToken: Codable {
     var display: Int16?
     var image: String?
     var coinGeckoId: String?
-    var default_show: Bool?
-    var total_supply: Int64?
+    var totalSupply: String?
     var amount: String?
     
     func setAmount(_ rawAmount: String) {
@@ -39,7 +34,6 @@ public class MintscanToken: Codable {
     func assetImg() -> URL {
         return URL(string: ResourceBase + image!) ?? URL(string: "")!
     }
-    
 }
 
 

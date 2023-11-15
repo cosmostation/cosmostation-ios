@@ -109,11 +109,11 @@ class BaseNetWork {
     }
     
     static func msCw20InfoUrl(_ chain: BaseChain) -> String {
-        return MINTSCAN_API_URL + "v3/assets/" +  chain.apiName + "/cw20"
+        return MINTSCAN_API_URL + "v10/assets/" +  chain.apiName + "/cw20/info"
     }
     
     static func msErc20InfoUrl(_ chain: BaseChain) -> String {
-        return MINTSCAN_API_URL + "v3/assets/" +  chain.apiName + "/erc20"
+        return MINTSCAN_API_URL + "v10/assets/" +  chain.apiName + "/erc20/info"
     }
     
     static func msSupportChains() -> String {

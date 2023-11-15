@@ -71,7 +71,7 @@ class EvmTransfer: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        selectedMsToken = selectedChain.mintscanTokens.filter({ $0.address == toSendDenom }).first!
+        selectedMsToken = selectedChain.mintscanErc20Tokens.filter({ $0.address == toSendDenom }).first!
         toSendAssetImg.af.setImage(withURL: selectedMsToken.assetImg())
         toSendSymbolLabel.text = selectedMsToken.symbol
         availableAmount = selectedMsToken.getAmount()

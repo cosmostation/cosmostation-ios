@@ -43,7 +43,8 @@ class CosmosClass: BaseChain {
     lazy var cosmosUnbondings = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
     lazy var cosmosRewards = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
     
-    lazy var mintscanTokens = Array<MintscanToken>()
+    lazy var mintscanCw20Tokens = [MintscanToken]()
+    lazy var mintscanErc20Tokens = [MintscanToken]()
     lazy var mintscanChainParam = JSON()
     
     //get bech style info from seed
@@ -68,15 +69,13 @@ class CosmosClass: BaseChain {
                 mintscanChainParam = rawParam
             }
             if (supportCw20) {
-                if let cw20s = try? await self.fetchCw20Info(),
-                   let ercs = cw20s.assets {
-                    mintscanTokens = ercs
+                if let cw20s = try? await self.fetchCw20Info() {
+                    mintscanCw20Tokens = cw20s
                 }
             }
             if (supportErc20) {
-                if let erc20s = try? await self.fetchErc20Info(),
-                   let ercs = erc20s.assets {
-                    mintscanTokens = ercs
+                if let erc20s = try? await self.fetchErc20Info() {
+                    mintscanErc20Tokens = erc20s
                 }
             }
         }
@@ -291,14 +290,14 @@ extension CosmosClass {
         return try await AF.request(BaseNetWork.msChainParam(self), method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchCw20Info() async throws -> MintscanTokens {
+    func fetchCw20Info() async throws -> [MintscanToken] {
 //        print("fetchCw20Info ", BaseNetWork.msCw20InfoUrl(self))
-        return try await AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get).serializingDecodable(MintscanTokens.self).value
+        return try await AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
     }
     
-    func fetchErc20Info() async throws -> MintscanTokens {
+    func fetchErc20Info() async throws -> [MintscanToken] {
 //        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
-        return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable(MintscanTokens.self).value
+        return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
     }
     
 }
@@ -400,7 +399,7 @@ extension CosmosClass {
     func fetchAllCw20Balance(_ id: Int64) {
         let channel = getConnection()
         let group = DispatchGroup()
-        mintscanTokens.forEach { token in
+        mintscanCw20Tokens.forEach { token in
             fetchCw20Balance(group, channel, token)
         }
 
@@ -439,8 +438,7 @@ extension CosmosClass {
         let group = DispatchGroup()
         guard let url = URL(string: rpcURL) else { return }
         guard let web3 = try? Web3.new(url) else { return }
-        
-        mintscanTokens.forEach { token in
+        mintscanErc20Tokens.forEach { token in
             fetchErc20Balance(group, web3, EthereumAddress.init(evmAddress)!, token)
         }
         
@@ -629,19 +627,36 @@ extension CosmosClass {
     
     
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if let tokenInfo = mintscanTokens.filter({ $0.address == address }).first {
-            let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-            return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+        if (supportCw20) {
+            if let tokenInfo = mintscanCw20Tokens.filter({ $0.address == address }).first {
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+            }
+        }
+        if (supportErc20) {
+            if let tokenInfo = mintscanErc20Tokens.filter({ $0.address == address }).first {
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+            }
         }
         return NSDecimalNumber.zero
     }
     
     func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
-        mintscanTokens.forEach { tokenInfo in
-            let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-            let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
-            result = result.adding(value)
+        if (supportCw20) {
+            mintscanCw20Tokens.forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
+            }
+        }
+        if (supportErc20) {
+            mintscanErc20Tokens.forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
+            }
         }
         return result
     }

@@ -140,7 +140,12 @@ public class WUtils {
     
     static func getMintscanPath(_ fromChain: CosmosClass, _ toChain: CosmosClass, _ denom: String) -> MintscanPath? {
         let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom?.lowercased() == denom.lowercased() }).first
-        let msToken = fromChain.mintscanTokens.filter({ $0.address == denom }).first
+        var msToken: MintscanToken?
+        if let tokenInfo = fromChain.mintscanCw20Tokens.filter({ $0.address == denom }).first {
+            msToken = tokenInfo
+        } else if let tokenInfo = fromChain.mintscanErc20Tokens.filter({ $0.address == denom }).first {
+            msToken = tokenInfo
+        }
         var result: MintscanPath?
         BaseData.instance.mintscanAssets?.forEach { asset in
             if (msAsset != nil) {
@@ -168,131 +173,8 @@ public class WUtils {
         }
         return result
     }
-//
-//    static func clearBackgroundColor(of view: UIView) {
-//        if let effectsView = view as? UIVisualEffectView {
-//            effectsView.removeFromSuperview()
-//            return
-//        }
-//        view.backgroundColor = .clear
-//        view.subviews.forEach { (subview) in
-//            self.clearBackgroundColor(of: subview)
-//        }
-//    }
-//
-//
-//
-//    static func getPasswordAni() -> CAAnimation{
-//        let transition:CATransition = CATransition()
-//        transition.duration = 0.3
-//        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-//        transition.type = CATransitionType.moveIn
-//        transition.subtype = CATransitionSubtype.fromTop
-//        return transition
-//    }
-//
-//    static func getSymbol(_ chainConfig: ChainConfig?, _ denom: String?) -> String {
-//        if (chainConfig == nil || denom == nil || denom?.isEmpty == true) { return "Unknown" }
-//        if (chainConfig!.stakeDenom == denom) {
-//            return chainConfig!.stakeSymbol
-//        }
-//        if (chainConfig?.isGrpc == true) {
-//            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() && $0.chain == chainConfig?.chainAPIName }).first {
-//                return msAsset.symbol
-//            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first {
-//                return msToken.symbol
-//            }
-//
-//        } else {
-//            if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first {
-//                return msToken.symbol
-//            } else {
-//                if (chainConfig!.chainType == .BINANCE_MAIN) {
-//                    if let bnbTokenInfo = BaseData.instance.bnbToken(denom) {
-//                        return bnbTokenInfo.original_symbol.uppercased()
-//                    }
-//
-//                } else if (chainConfig!.chainType == .OKEX_MAIN) {
-//                    if let okTokenInfo = BaseData.instance.okToken(denom) {
-//                        return okTokenInfo.original_symbol!.uppercased()
-//                    }
-//                }
-//            }
-//        }
-//        return "Unknown"
-//    }
-//
-//    static func getDPRawDollor(_ price:String, _ scale:Int, _ font:UIFont) -> NSMutableAttributedString {
-//        let nf = NumberFormatter()
-//        nf.minimumFractionDigits = scale
-//        nf.maximumFractionDigits = scale
-//        nf.numberStyle = .decimal
-//
-//        let handler = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: Int16(scale), raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
-//        let amount = plainStringToDecimal(price).rounding(accordingToBehavior: handler)
-//
-//        let added       = "$ " + nf.string(from: amount)!
-//        let endIndex    = added.index(added.endIndex, offsetBy: -scale)
-//
-//        let preString   = added[..<endIndex]
-//        let postString  = added[endIndex...]
-//
-//        let preAttrs = [NSAttributedString.Key.font : font]
-//        let postAttrs = [NSAttributedString.Key.font : font.withSize(CGFloat(Int(Double(font.pointSize) * 0.85)))]
-//
-//        let attributedString1 = NSMutableAttributedString(string:String(preString), attributes:preAttrs as [NSAttributedString.Key : Any])
-//        let attributedString2 = NSMutableAttributedString(string:String(postString), attributes:postAttrs as [NSAttributedString.Key : Any])
-//
-//        attributedString1.append(attributedString2)
-//        return attributedString1
-//    }
-//
-//    static func getMonikerImgUrl(_ chainConfig: ChainConfig?, _ opAddress: String) -> String {
-//        if (chainConfig == nil) { return "" }
-//        return ResourceBase + chainConfig!.chainAPIName + "/moniker/" + opAddress + ".png"
-//    }
-//
-//    static func getTxExplorer(_ chainConfig: ChainConfig?, _ hash: String) -> String {
-//        if (chainConfig == nil) { return "" }
-//        if (chainConfig?.chainType == .OKEX_MAIN) {
-//            return chainConfig!.explorerUrl + "tx/" + hash
-//        }
-//        return chainConfig!.explorerUrl + "txs/" + hash
-//    }
-//
-//    static func getAccountExplorer(_ chainConfig: ChainConfig?, _ address: String) -> String {
-//        if (chainConfig == nil) { return "" }
-//        if (chainConfig?.chainType == .OKEX_MAIN) {
-//            return chainConfig!.explorerUrl + "address/" + address
-//        }
-//        return chainConfig!.explorerUrl + "account/" + address
-//    }
-//
-//    static func getProposalExplorer(_ chainConfig: ChainConfig?, _ proposalId: UInt64) -> String {
-//        if (chainConfig == nil) { return "" }
-//        return chainConfig!.explorerUrl + "proposals/" + String(proposalId)
-//    }
-//
-//    static func getChainTypeByChainId(_ chainId: String?) -> ChainType? {
-//        let allConfigs = ChainFactory.SUPPRT_CONFIG()
-//        for i in 0..<allConfigs.count {
-//            if (chainId?.contains(allConfigs[i].chainIdPrefix) == true) {
-//                return allConfigs[i].chainType
-//            }
-//        }
-//        return nil
-//    }
-//
-//    static func getChainTypeByChainName(_ chainName: String?) -> ChainType? {
-//        let allConfigs = ChainFactory.SUPPRT_CONFIG()
-//        for i in 0..<allConfigs.count {
-//            if (chainName?.contains(allConfigs[i].chainAPIName) == true) {
-//                return allConfigs[i].chainType
-//            }
-//        }
-//        return nil
-//    }
-//
+    
+    
     static func isValidBechAddress(_ chain: CosmosClass, _ address: String?) -> Bool {
         if (address?.isEmpty == true) {
             return false
