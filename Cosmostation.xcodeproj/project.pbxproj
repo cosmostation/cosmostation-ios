@@ -1586,6 +1586,8 @@
 		E19E8B3E2A92290800001BF5 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3C2A92290800001BF5 /* UIColor+Colors.swift */; };
 		E19E8B402A92299700001BF5 /* UIFont+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */; };
 		E19E8B412A92299700001BF5 /* UIFont+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */; };
+		E1A05EC92B04D9710017B72B /* ChainIris.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A05EC82B04D9710017B72B /* ChainIris.swift */; };
+		E1A05ECA2B04D9710017B72B /* ChainIris.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A05EC82B04D9710017B72B /* ChainIris.swift */; };
 		E1A82DD1224220910097CAEE /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD0224220910097CAEE /* Account.swift */; };
 		E1A82DE822448E940097CAEE /* WUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE722448E940097CAEE /* WUtils.swift */; };
 		E1B44B1F2ADA41CD0073C88A /* NeutronSingleVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B44B1D2ADA41CD0073C88A /* NeutronSingleVoteCell.swift */; };
@@ -2445,6 +2447,7 @@
 		E1945E532231256800A1436F /* BaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConstant.swift; sourceTree = "<group>"; };
 		E19E8B3C2A92290800001BF5 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Fonts.swift"; sourceTree = "<group>"; };
+		E1A05EC82B04D9710017B72B /* ChainIris.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainIris.swift; sourceTree = "<group>"; };
 		E1A82DD0224220910097CAEE /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		E1A82DE722448E940097CAEE /* WUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WUtils.swift; sourceTree = "<group>"; };
 		E1B44B1D2ADA41CD0073C88A /* NeutronSingleVoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronSingleVoteCell.swift; sourceTree = "<group>"; };
@@ -2637,7 +2640,6 @@
 				0402B7FC2ACC741700824B3F /* ChainCudos.swift */,
 				0402B7FF2ACC747A00824B3F /* ChainDesmos.swift */,
 				04C940C62AEA545500415256 /* ChainDydx.swift */,
-				0402B80E2ACC765F00824B3F /* ChainIxo.swift */,
 				0402B8022ACC74CD00824B3F /* ChainEmoney.swift */,
 				04D279F52A67C9B700AF046A /* ChainEvmos.swift */,
 				0402B8052ACC751100824B3F /* ChainFetchAi.swift */,
@@ -2646,6 +2648,8 @@
 				0402B8082ACC758B00824B3F /* ChainGravityBridge.swift */,
 				04C940C32AEA529900415256 /* ChainHumans.swift */,
 				044ECB1C2A95DE000042DB3C /* ChainInjective.swift */,
+				E1A05EC82B04D9710017B72B /* ChainIris.swift */,
+				0402B80E2ACC765F00824B3F /* ChainIxo.swift */,
 				04CB91202A90CA7D00375354 /* ChainJuno.swift */,
 				04D279EC2A67C96F00AF046A /* ChainKava459.swift */,
 				E122DA1C2A8A158C006D1E7B /* ChainKava60.swift */,
@@ -4386,6 +4390,7 @@
 				E122DBC22A8A468E006D1E7B /* cosmos_consensus_module_v1_module.pb.swift in Sources */,
 				0400EF402ADD49BB007BA97F /* kava_swap_v1beta1_query.pb.swift in Sources */,
 				18FFB341281AF533004E65BB /* RIPEMD160.swift in Sources */,
+				E1A05ECA2B04D9710017B72B /* ChainIris.swift in Sources */,
 				046EA8F42AD04A2600A2FCE7 /* desmos_profiles_v2_models_profile.pb.swift in Sources */,
 				E15F2D0B2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */,
 				0400EF0A2ADBF03B007BA97F /* kava_hard_v1beta1_tx.pb.swift in Sources */,
@@ -5065,6 +5070,7 @@
 				0402B8242ACC7AE500824B3F /* ChainOmniflix.swift in Sources */,
 				E122DAEB2A8A468D006D1E7B /* cosmos_base_reflection_v1beta1_reflection.grpc.swift in Sources */,
 				E122DBC12A8A468E006D1E7B /* cosmos_consensus_module_v1_module.pb.swift in Sources */,
+				E1A05EC92B04D9710017B72B /* ChainIris.swift in Sources */,
 				0400EF3F2ADD49BB007BA97F /* kava_swap_v1beta1_query.pb.swift in Sources */,
 				E1A82DE822448E940097CAEE /* WUtils.swift in Sources */,
 				046EA8F32AD04A2600A2FCE7 /* desmos_profiles_v2_models_profile.pb.swift in Sources */,
