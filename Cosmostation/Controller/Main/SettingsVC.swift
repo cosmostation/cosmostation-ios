@@ -360,7 +360,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-extension SettingsVC: BaseSheetDelegate, QrScanDelegate, CreateNameDelegate, QrImportCheckKeyDelegate, PinDelegate {
+extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegate, PinDelegate {
     
     func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
         let button = UIButton(type: .system)
@@ -448,10 +448,10 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, CreateNameDelegate, QrI
     func onScanned(_ result: String) {
         let scanedStr = result.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         if let rawWords = BIP39.seedFromMmemonics(scanedStr, password: "", language: .english) {
-            let createNameSheet = CreateNameSheet(nibName: "CreateNameSheet", bundle: nil)
-            createNameSheet.mNemonics = scanedStr
-            createNameSheet.createNameDelegate = self
-            onStartSheet(createNameSheet, 240)
+            let importMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
+            importMnemonicCheckVC.mnemonic = scanedStr
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
             return
         }
         
@@ -467,6 +467,14 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, CreateNameDelegate, QrI
         onShowToast(NSLocalizedString("error_unknown_qr_code", comment: ""))
     }
     
+    func onQrImportConfirmed(_ mnemonic: String) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            let importMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
+            importMnemonicCheckVC.mnemonic = mnemonic
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
+        });
+    }
      
     func reloadRows(_ indexPath : IndexPath) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
@@ -475,23 +483,6 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, CreateNameDelegate, QrI
             self.tableView.endUpdates()
         })
     }
-    
-    func onNameConfirmed(_ name: String, _ mnemonic: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-            let importMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
-            importMnemonicCheckVC.accountName = name
-            importMnemonicCheckVC.mnemonic = mnemonic
-            importMnemonicCheckVC.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
-        });
-    }
-    
-    func onQrImportConfirmed(_ mnemonic: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-            let createNameSheet = CreateNameSheet(nibName: "CreateNameSheet", bundle: nil)
-            createNameSheet.mNemonics = mnemonic
-            createNameSheet.createNameDelegate = self
-            self.onStartSheet(createNameSheet, 240)
-        });
-    }
 }
+
+

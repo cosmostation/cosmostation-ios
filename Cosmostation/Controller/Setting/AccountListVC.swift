@@ -111,7 +111,10 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                         self.navigationController?.pushViewController(createMnemonicVC, animated: true)
                         
                     } else if (index == 1) {
-//                        self.onNextVc(.mnemonc)
+                        let importMnemonicVC = ImportMnemonicVC(nibName: "ImportMnemonicVC", bundle: nil)
+                        self.navigationItem.title = ""
+                        self.navigationController?.pushViewController(importMnemonicVC, animated: true)
+                        
                     } else if (index == 2) {
 //                        self.onNextVc(.privateKey)
                     }

@@ -194,6 +194,7 @@
 "str_delete" = "Delete";
 "str_delete_address_book" = "Delete Address Book";
 "str_select_valuables" = "Select Wallets with Asset";
+"str_select_hd_path" = "Select HD Path";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -290,6 +291,7 @@
 "str_address_book_add" = "Add Address Book";
 "str_cancle_unstake" = "Cancel Unstake";
 "str_do_not_show_7_days" = "Don't show 7days";
+"str_restore_wallets" = "Restore Wallets";
 
 
 "btn_delegate" = "  Delegate";
@@ -362,6 +364,7 @@
 "msg_addressbook_add" = "For convenience, you can register frequently used addresses.";
 "msg_addressbook_updated" = "The address book has been updated.";
 "msg_swap_warn" = "Cosmostation Mobile is a non-custodial wallet service, so users are responsible for executing all transactions. Please always check the details accurately before sending a transaction. \n\nWe are not responsible for any losses resulting from transactions through the app.";
+"msg_check_inputed_mnemonic" = "Please check the mnemonic you entered. \nJust so you know, don't share it with anyone. Losing this mnemonic can lead to loss of assets.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -807,6 +810,7 @@
 "title_watch_wallet" = "Add Watch Wallet";
 "title_restore_privatekey" = "Restore With PrivateKey";
 "title_restore" = "Restore With Mnemonic";
+"title_confirm_mnemonic_inputs" = "Check Entered Mnemonic";
 "title_path" = "Select Wallet";
 "title_delegate" = "Delegate To";
 "title_undelegate" = "Undelegate From";

@@ -12,6 +12,9 @@ class ImportMnemonicCheckVC: BaseVC {
     
     @IBOutlet weak var nextBtn: BaseButton!
     
+    @IBOutlet weak var inputCheckMsgCardView: CardView!
+    @IBOutlet weak var inputCheckMsgLabel: UILabel!
+    
     @IBOutlet weak var wordCardView: CardView!
     @IBOutlet weak var word00: UILabel!
     @IBOutlet weak var word01: UILabel!
@@ -45,12 +48,6 @@ class ImportMnemonicCheckVC: BaseVC {
     @IBOutlet weak var word17View: UIView!
     @IBOutlet weak var word18View: UIView!
     
-    @IBOutlet weak var hdPathCardView: CardView!
-    @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var cosmosPathLabel: UILabel!
-    @IBOutlet weak var EthereumPathLabel: UILabel!
-    @IBOutlet weak var suiPathLabel: UILabel!
-    
     
     var wordLabels: [UILabel] = [UILabel]()
     var accountName: String!
@@ -63,16 +60,12 @@ class ImportMnemonicCheckVC: BaseVC {
                       word12, word13, word14, word15, word16, word17, word18, word19, word20, word21, word22, word23]
         
         onUpdateView()
-        onUpdateHdPathView()
-        
-        let hdPathTap = UITapGestureRecognizer(target: self, action: #selector(onHdPathSelect))
-        hdPathTap.cancelsTouchesInView = false
-        hdPathCardView.addGestureRecognizer(hdPathTap)
     }
     
     override func setLocalizedString() {
         navigationItem.title = NSLocalizedString("title_restore", comment: "")
-        nextBtn.setTitle(NSLocalizedString("str_create_account", comment: ""), for: .normal)
+        inputCheckMsgLabel.text = NSLocalizedString("msg_check_inputed_mnemonic", comment: "")
+        nextBtn.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     func onUpdateView() {
@@ -107,91 +100,10 @@ class ImportMnemonicCheckVC: BaseVC {
         }
     }
     
-    func onUpdateHdPathView() {
-        hdPathLabel.text = "HD Path : " + String(hdPath)
-        
-        let cosmosPath = "m/44'/118'/0'/0/X"
-        let dpCosmosPath = cosmosPath.replacingOccurrences(of: "X", with: String(hdPath))
-        let cosmosRange = (cosmosPath as NSString).range(of: "X")
-        let cosmosAttributedString = NSMutableAttributedString(string: dpCosmosPath)
-        cosmosAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.color01 , range: cosmosRange)
-        cosmosPathLabel.attributedText = cosmosAttributedString
-
-        let ethPath = "m/44'/60'/0'/0/X"
-        let dpEthPath = ethPath.replacingOccurrences(of: "X", with: String(hdPath))
-        let ethRange = (ethPath as NSString).range(of: "X")
-        let ethAttributedString = NSMutableAttributedString(string: dpEthPath)
-        ethAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.color01 , range: ethRange)
-        EthereumPathLabel.attributedText = ethAttributedString
-
-        let kavaPath = "m/44'/459'/0'/0/X"
-        let dpKavaPath = kavaPath.replacingOccurrences(of: "X", with: String(hdPath))
-        let kavaRange = (dpKavaPath as NSString).range(of: "X")
-        let suiAttributedString = NSMutableAttributedString(string: dpKavaPath)
-        suiAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.color01 , range: kavaRange)
-        suiPathLabel.attributedText = suiAttributedString
-    }
-    
-    @objc func onHdPathSelect() {
-        let alert = UIAlertController(title: NSLocalizedString("select_hd_path", comment: ""), message: "\n\n\n\n\n\n", preferredStyle: .alert)
-        alert.overrideUserInterfaceStyle = .dark
-        let pickerFrame = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
-        alert.view.addSubview(pickerFrame)
-        pickerFrame.delegate = self
-        pickerFrame.dataSource = self
-        pickerFrame.selectRow(self.hdPath, inComponent: 0, animated: false)
-        
-        alert.addAction(UIAlertAction(title: NSLocalizedString("str_cancel", comment: ""), style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("str_confirm", comment: ""), style: .default, handler: { _ in
-            DispatchQueue.main.async(execute: {
-                self.onUpdateHdPathView()
-            })
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     @IBAction func onClickNext(_ sender: UIButton) {
-        onRestoreAccount(accountName, mnemonic)
+        let walletDeriveVC = WalletDeriveVC(nibName: "WalletDeriveVC", bundle: nil)
+        walletDeriveVC.mnemonic = mnemonic
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(walletDeriveVC, animated: true)
     }
-    
-    
-    func onRestoreAccount(_ name: String, _ mnemonic: String) {
-        showWait()
-        DispatchQueue.global().async {
-            let keychain = BaseData.instance.getKeyChain()
-            let seed = KeyFac.getSeedFromWords(mnemonic)
-            let newAccount = BaseAccount(name, .withMnemonic, String(self.hdPath))
-            let id = BaseData.instance.insertAccount(newAccount)
-            let newData = mnemonic + " : " + seed!.toHexString()
-            try? keychain.set(newData, key: newAccount.uuid.sha1())
-            BaseData.instance.setLastAccount(id)
-            BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
-
-            DispatchQueue.main.async(execute: {
-                self.hideWait()
-                self.onStartMainTab()
-            });
-        }
-    }
-}
-
-
-extension ImportMnemonicCheckVC: UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 10
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(row)
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.hdPath = row
-    }
-    
 }

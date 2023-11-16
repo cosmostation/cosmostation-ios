@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+        <array key="SpoqaHanSansNeo-Medium.otf">
+            <string>SpoqaHanSansNeo-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HdPathSheet" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="confirmBtn" destination="fMW-NY-Biz" id="VHd-rJ-r9r"/>
+                <outlet property="cosmosPathLabel" destination="em4-i8-bnh" id="E1q-3t-uDb"/>
+                <outlet property="ethereumPathLabel" destination="DZC-7K-T8u" id="IRo-n7-kFa"/>
+                <outlet property="hdPathMsgLabel" destination="NJF-pK-2xm" id="VaU-Ck-9V5"/>
+                <outlet property="hdPathTitle" destination="p1K-MC-Zv3" id="QTf-f4-TVc"/>
+                <outlet property="kavaPathLabel" destination="XZk-fi-8ou" id="LaR-pO-iqQ"/>
+                <outlet property="pickerView" destination="ZKL-EH-vKZ" id="mGJ-0J-gWe"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select HD Path" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1K-MC-Zv3">
+                    <rect key="frame" x="20" y="95" width="116" height="20.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <color key="textColor" name="_color01"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJF-pK-2xm">
+                    <rect key="frame" x="20" y="127.33333333333334" width="353" height="90.333333333333343"/>
+                    <string key="text">You can create a new account using the same mnemonic, but with a different HD Path.
+In general, there is a possibility that it may not be compatible with other wallets, and it is recommended to be used only by those with background knowledge of crypto keys and HD Path.</string>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                    <color key="textColor" name="_color02"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKL-EH-vKZ">
+                    <rect key="frame" x="20" y="234" width="353" height="180"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="180" id="Cmb-uW-gK1"/>
+                    </constraints>
+                </pickerView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PbB-gZ-dvc" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="20" y="425.66666666666669" width="353" height="128.00000000000006"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WFc-bm-gmY">
+                            <rect key="frame" x="8" y="16" width="337" height="92"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1kH-m4-5NM">
+                                    <rect key="frame" x="0.0" y="0.0" width="337" height="24"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IID-p2-I75">
+                                            <rect key="frame" x="0.0" y="0.0" width="79" height="24"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainCosmos" translatesAutoresizingMaskIntoConstraints="NO" id="8TF-MH-qih">
+                                                    <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_primary"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="Ugv-k7-4vN"/>
+                                                        <constraint firstAttribute="width" constant="24" id="nyJ-Y8-G0a"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cosmos" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umD-zd-sBj">
+                                                    <rect key="frame" x="26" y="3.3333333333333144" width="53" height="17.666666666666668"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                                    <color key="textColor" name="_color01"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="8TF-MH-qih" firstAttribute="leading" secondItem="IID-p2-I75" secondAttribute="leading" id="RWi-00-xvx"/>
+                                                <constraint firstItem="umD-zd-sBj" firstAttribute="leading" secondItem="8TF-MH-qih" secondAttribute="trailing" constant="2" id="e3W-LD-dih"/>
+                                                <constraint firstItem="umD-zd-sBj" firstAttribute="centerY" secondItem="IID-p2-I75" secondAttribute="centerY" id="e7Z-r0-U4Y"/>
+                                                <constraint firstAttribute="trailing" secondItem="umD-zd-sBj" secondAttribute="trailing" id="g5Z-RS-OW4"/>
+                                                <constraint firstAttribute="height" constant="24" id="nAN-Im-kIG"/>
+                                                <constraint firstItem="8TF-MH-qih" firstAttribute="centerY" secondItem="IID-p2-I75" secondAttribute="centerY" id="ve3-U0-3IL"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="m/44'/118'/0'/0/X" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="em4-i8-bnh">
+                                            <rect key="frame" x="217" y="3.3333333333333144" width="120" height="17.666666666666668"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                            <color key="textColor" name="_color02"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="em4-i8-bnh" firstAttribute="centerY" secondItem="IID-p2-I75" secondAttribute="centerY" id="A8s-gP-xXL"/>
+                                        <constraint firstItem="em4-i8-bnh" firstAttribute="centerY" secondItem="1kH-m4-5NM" secondAttribute="centerY" id="C3T-6A-x7y"/>
+                                        <constraint firstAttribute="trailing" secondItem="em4-i8-bnh" secondAttribute="trailing" id="MJA-5f-GmZ"/>
+                                        <constraint firstAttribute="height" constant="24" id="TRt-r8-tJI"/>
+                                        <constraint firstItem="IID-p2-I75" firstAttribute="leading" secondItem="1kH-m4-5NM" secondAttribute="leading" id="uZc-fI-cOU"/>
+                                        <constraint firstItem="IID-p2-I75" firstAttribute="centerY" secondItem="1kH-m4-5NM" secondAttribute="centerY" id="zhl-oO-ucX"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ucZ-ee-h4I">
+                                    <rect key="frame" x="0.0" y="34" width="337" height="24"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u7e-mb-Uvs">
+                                            <rect key="frame" x="0.0" y="0.0" width="91.666666666666671" height="24"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainEthereum" translatesAutoresizingMaskIntoConstraints="NO" id="2iM-Sx-vpr">
+                                                    <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_primary"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="5k1-pD-rsO"/>
+                                                        <constraint firstAttribute="width" constant="24" id="gNR-yF-6oO"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ethereum" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lf0-fz-flG">
+                                                    <rect key="frame" x="26" y="3.3333333333333144" width="65.666666666666671" height="17.666666666666668"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                                    <color key="textColor" name="_color01"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="1Zs-2v-VdD"/>
+                                                <constraint firstItem="Lf0-fz-flG" firstAttribute="centerY" secondItem="u7e-mb-Uvs" secondAttribute="centerY" id="Liv-iz-HJg"/>
+                                                <constraint firstItem="2iM-Sx-vpr" firstAttribute="centerY" secondItem="u7e-mb-Uvs" secondAttribute="centerY" id="MZS-4H-OmI"/>
+                                                <constraint firstAttribute="trailing" secondItem="Lf0-fz-flG" secondAttribute="trailing" id="XJy-b6-uFg"/>
+                                                <constraint firstItem="Lf0-fz-flG" firstAttribute="leading" secondItem="2iM-Sx-vpr" secondAttribute="trailing" constant="2" id="jh5-xc-0Mi"/>
+                                                <constraint firstItem="2iM-Sx-vpr" firstAttribute="leading" secondItem="u7e-mb-Uvs" secondAttribute="leading" id="xUU-te-IKS"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="m/44'/60'/0'/0/X" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZC-7K-T8u">
+                                            <rect key="frame" x="225.33333333333334" y="3.3333333333333144" width="111.66666666666666" height="17.666666666666668"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                            <color key="textColor" name="_color02"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="DZC-7K-T8u" secondAttribute="trailing" id="J2D-MP-eru"/>
+                                        <constraint firstItem="DZC-7K-T8u" firstAttribute="centerY" secondItem="u7e-mb-Uvs" secondAttribute="centerY" id="Jnn-es-TJB"/>
+                                        <constraint firstItem="DZC-7K-T8u" firstAttribute="centerY" secondItem="ucZ-ee-h4I" secondAttribute="centerY" id="g49-Ix-7vK"/>
+                                        <constraint firstItem="u7e-mb-Uvs" firstAttribute="centerY" secondItem="ucZ-ee-h4I" secondAttribute="centerY" id="h8K-Cf-ZHb"/>
+                                        <constraint firstAttribute="height" constant="24" id="xLd-Wj-VhA"/>
+                                        <constraint firstItem="u7e-mb-Uvs" firstAttribute="leading" secondItem="ucZ-ee-h4I" secondAttribute="leading" id="yve-Ie-HEm"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBY-dw-04Q">
+                                    <rect key="frame" x="0.0" y="68" width="337" height="24"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cUl-v2-rhg">
+                                            <rect key="frame" x="0.0" y="0.0" width="59" height="24"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainKava" translatesAutoresizingMaskIntoConstraints="NO" id="Kem-m1-BYR">
+                                                    <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_primary"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="4kb-0N-Mlq"/>
+                                                        <constraint firstAttribute="width" constant="24" id="W0x-FG-UPk"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kava" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMi-sZ-EDE">
+                                                    <rect key="frame" x="26" y="3.3333333333333144" width="33" height="17.666666666666668"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                                    <color key="textColor" name="_color01"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="Kem-m1-BYR" firstAttribute="leading" secondItem="cUl-v2-rhg" secondAttribute="leading" id="0pd-yQ-EZZ"/>
+                                                <constraint firstItem="Kem-m1-BYR" firstAttribute="centerY" secondItem="cUl-v2-rhg" secondAttribute="centerY" id="CTd-UJ-Rku"/>
+                                                <constraint firstAttribute="height" constant="24" id="UyJ-dO-ppy"/>
+                                                <constraint firstItem="lMi-sZ-EDE" firstAttribute="leading" secondItem="Kem-m1-BYR" secondAttribute="trailing" constant="2" id="ix9-nr-CYc"/>
+                                                <constraint firstAttribute="trailing" secondItem="lMi-sZ-EDE" secondAttribute="trailing" id="jnx-Jc-lL8"/>
+                                                <constraint firstItem="lMi-sZ-EDE" firstAttribute="centerY" secondItem="cUl-v2-rhg" secondAttribute="centerY" id="lKM-52-u8N"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="m/44'/459'/0'/0/X" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZk-fi-8ou">
+                                            <rect key="frame" x="217" y="3.3333333333333144" width="120" height="17.666666666666668"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                            <color key="textColor" name="_color02"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="cUl-v2-rhg" firstAttribute="centerY" secondItem="eBY-dw-04Q" secondAttribute="centerY" id="9A6-U7-hdC"/>
+                                        <constraint firstItem="XZk-fi-8ou" firstAttribute="centerY" secondItem="cUl-v2-rhg" secondAttribute="centerY" id="Big-9J-vOc"/>
+                                        <constraint firstAttribute="height" constant="24" id="Udz-Uf-eQ9"/>
+                                        <constraint firstAttribute="trailing" secondItem="XZk-fi-8ou" secondAttribute="trailing" id="luB-My-Byn"/>
+                                        <constraint firstItem="XZk-fi-8ou" firstAttribute="centerY" secondItem="eBY-dw-04Q" secondAttribute="centerY" id="oWU-Pb-Y5Q"/>
+                                        <constraint firstItem="cUl-v2-rhg" firstAttribute="leading" secondItem="eBY-dw-04Q" secondAttribute="leading" id="opw-sQ-wxN"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" name="_primary"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="WFc-bm-gmY" secondAttribute="bottom" constant="20" id="CBs-u7-qe3"/>
+                        <constraint firstItem="WFc-bm-gmY" firstAttribute="leading" secondItem="PbB-gZ-dvc" secondAttribute="leading" constant="8" id="GNa-be-XQP"/>
+                        <constraint firstItem="WFc-bm-gmY" firstAttribute="top" secondItem="PbB-gZ-dvc" secondAttribute="top" constant="16" id="H9k-S6-zsS"/>
+                        <constraint firstAttribute="trailing" secondItem="WFc-bm-gmY" secondAttribute="trailing" constant="8" id="cUh-fC-klR"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMW-NY-Biz" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="766" width="377" height="48"/>
+                    <color key="backgroundColor" name="_primary"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="gca-Qh-WrW"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Confirm">
+                        <color key="titleColor" name="_color01"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="96N-y7-JxW"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="_colorBg"/>
+            <color key="tintColor" name="_primary"/>
+            <constraints>
+                <constraint firstItem="p1K-MC-Zv3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="22Z-eA-Ewz"/>
+                <constraint firstItem="ZKL-EH-vKZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="2jA-0q-Ehy"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NJF-pK-2xm" secondAttribute="trailing" constant="20" id="3a2-ul-8Yg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PbB-gZ-dvc" secondAttribute="trailing" constant="20" id="3tp-30-2Qw"/>
+                <constraint firstItem="fMW-NY-Biz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="OM9-Vy-pep"/>
+                <constraint firstItem="p1K-MC-Zv3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="YDp-Ui-gMa"/>
+                <constraint firstItem="PbB-gZ-dvc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ahS-yI-5f8"/>
+                <constraint firstItem="NJF-pK-2xm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="dft-Uf-Xae"/>
+                <constraint firstItem="ZKL-EH-vKZ" firstAttribute="top" secondItem="NJF-pK-2xm" secondAttribute="bottom" constant="16" id="dhK-Yl-GhI"/>
+                <constraint firstItem="PbB-gZ-dvc" firstAttribute="top" secondItem="ZKL-EH-vKZ" secondAttribute="bottom" constant="12" id="fuz-Dc-8By"/>
+                <constraint firstItem="ZKL-EH-vKZ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-20" id="jnF-Xv-ci4"/>
+                <constraint firstAttribute="bottom" secondItem="fMW-NY-Biz" secondAttribute="bottom" constant="38" id="l1b-ji-71l"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fMW-NY-Biz" secondAttribute="trailing" constant="8" id="lxB-Or-jUJ"/>
+                <constraint firstItem="NJF-pK-2xm" firstAttribute="top" secondItem="p1K-MC-Zv3" secondAttribute="bottom" constant="12" id="oNY-td-Wcc"/>
+            </constraints>
+            <point key="canvasLocation" x="-127.48091603053435" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="chainCosmos" width="192" height="192"/>
+        <image name="chainEthereum" width="192" height="192"/>
+        <image name="chainKava" width="192" height="192"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorBg">
+            <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

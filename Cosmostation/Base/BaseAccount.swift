@@ -225,6 +225,20 @@ extension BaseAccount {
         }
         return result
     }
+    
+    func fetchForPreCreate(_ seed: Data) {
+        allCosmosClassChains = ALLCOSMOSCLASS()
+        allCosmosClassChains.forEach { chain in
+            Task(priority: .high) {
+                if (chain.bechAddress.isEmpty) {
+                    chain.setInfoWithSeed(seed, lastHDPath)
+                }
+                if (chain.fetched == false) {
+                    chain.fetchPreCreate()
+                }
+            }
+        }
+    }
 }
 
 

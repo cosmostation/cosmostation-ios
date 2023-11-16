@@ -41,6 +41,8 @@ class BaseChain {
     
     func fetchData(_ id: Int64) {}
     
+    func fetchPreCreate() {}
+    
     func isTxFeePayable() -> Bool { return false }
     
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
