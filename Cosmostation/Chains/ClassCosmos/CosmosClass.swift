@@ -119,9 +119,10 @@ class CosmosClass: BaseChain {
         }
     }
     
+    var stakeInfoTask: Task<(), Never>?
     func fetchStakeData() {
-        if (cosmosValidators.count > 0) { return }
-        Task {
+        if (cosmosValidators.count > 0 || stakeInfoTask?.hashValue != nil) { return }
+        stakeInfoTask = Task {
             let channel = getConnection()
             if let rewardaddr = try? await fetchRewardAddress(channel),
                let bonded = try? await fetchBondedValidator(channel),
