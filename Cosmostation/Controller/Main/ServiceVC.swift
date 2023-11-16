@@ -40,14 +40,14 @@ class ServiceVC: BaseVC {
             case .success(let res):
                 if let signauture = res["signature"].string {
                     let signauture2 = signauture.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         let urlMoonpay = URL(string: MOON_PAY_URL + query + "&signature=" + signauture2!)
                         if (UIApplication.shared.canOpenURL(urlMoonpay!)) {
                             UIApplication.shared.open(urlMoonpay!, options: [:], completionHandler: nil)
                         }
                     });
                 } else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.onShowToast(NSLocalizedString("error_network_msg", comment: ""))
                     });
                 }
@@ -61,7 +61,7 @@ class ServiceVC: BaseVC {
     func onOpenKado() {
         let query = "?apiKey=" + KADO_PAY_PUBLICK
         let urlKadoMoney = URL(string: KADO_PAY_URL + query)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
             if (UIApplication.shared.canOpenURL(urlKadoMoney!)) {
                 UIApplication.shared.open(urlKadoMoney!, options: [:], completionHandler: nil)
             }
@@ -70,7 +70,7 @@ class ServiceVC: BaseVC {
     
     func onOpenBinance() {
         let binanceUrl = URL(string: BINANCE_BUY_URL)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
             if (UIApplication.shared.canOpenURL(binanceUrl!)) {
                 UIApplication.shared.open(binanceUrl!, options: [:], completionHandler: nil)
             }

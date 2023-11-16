@@ -245,7 +245,7 @@ extension CosmosClaimRewards: MemoDelegate, BaseSheetDelegate, PinDelegate {
                 let channel = getConnection()
                 if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                    let response = try await broadcastTx(channel, auth!) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         
                         let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

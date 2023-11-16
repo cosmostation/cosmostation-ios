@@ -202,7 +202,7 @@ extension KavaMintListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
         if (sheetType == .SelectMintAction) {
             if let cdpType = result["cdpType"] as? String,
                let index = result["index"] as? Int {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     if (index == 0) {
                         self.onDepositCdpTx(cdpType)
                     } else if (index == 1) {

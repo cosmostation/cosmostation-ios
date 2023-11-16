@@ -251,7 +251,7 @@ extension Bep3Transfer: BaseSheetDelegate, BepAmountSheetDelegate, PinDelegate {
     
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                 let bepResult = BepTxResult(nibName: "BepTxResult", bundle: nil)
                 bepResult.fromChain = self.fromChain
                 bepResult.toChain = self.toChains.filter { $0.bechAddress == self.recipientAddress }.first!

@@ -65,7 +65,15 @@ class CheckMenmonicVC: BaseVC {
         wordCardView.addGestureRecognizer(copyTap)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setLocalizedString()
+        nameCardView.setBlur()
+        wordCardView.setBlur()
+    }
+    
     override func setLocalizedString() {
+        navigationItem.backButtonTitle = ""
         navigationItem.title = NSLocalizedString("title_check_mnemonics", comment: "")
         createBtn.setTitle(NSLocalizedString("str_create_another_account", comment: ""), for: .normal)
         checkBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
@@ -120,7 +128,6 @@ class CheckMenmonicVC: BaseVC {
             walletDeriveVC.mnemonic = mnemonic
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(walletDeriveVC, animated: true)
-            
         }
     }
     

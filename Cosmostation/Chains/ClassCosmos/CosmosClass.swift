@@ -88,6 +88,7 @@ class CosmosClass: BaseChain {
         let channel = getConnection()
         fetchBalance(group, channel)
         group.notify(queue: .main) {
+            try? channel.close()
             self.fetched = true
             NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
         }

@@ -53,7 +53,7 @@ class BaseVC: UIViewController {
     }
     
     public func showWaitDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
             self.showWait()
         });
     }

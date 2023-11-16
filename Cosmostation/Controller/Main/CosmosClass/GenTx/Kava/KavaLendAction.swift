@@ -435,7 +435,7 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                     let channel = getConnection()
                     if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                        let response = try await broadcastDepositTx(channel, auth!, onBindDepsoitMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -452,7 +452,7 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                     let channel = getConnection()
                     if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                        let response = try await broadcastWithdrawTx(channel, auth!, onBindWithdrawMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -469,7 +469,7 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                     let channel = getConnection()
                     if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                        let response = try await broadcastBorrowTx(channel, auth!, onBindBorrowMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -486,7 +486,7 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                     let channel = getConnection()
                     if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                        let response = try await broadcastRepayTx(channel, auth!, onBindRepayMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

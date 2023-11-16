@@ -48,11 +48,15 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
         selectedCosmosTags.append("cosmos118")
         
         if (mnemonic != nil) {
-            seed = KeyFac.getSeedFromWords(mnemonic!)
-            toAddAccount = BaseAccount("", .withMnemonic, String(self.hdPath))
-            toAddAccount.fetchForPreCreate(seed!, nil)
-            allCosmosChains = toAddAccount.allCosmosClassChains
-            onUpdateview()
+            DispatchQueue.global().async {
+                self.seed = KeyFac.getSeedFromWords(self.mnemonic!)
+                DispatchQueue.main.async(execute: {
+                    self.toAddAccount = BaseAccount("", .withMnemonic, String(self.hdPath))
+                    self.toAddAccount.fetchForPreCreate(self.seed!, nil)
+                    self.allCosmosChains = self.toAddAccount.allCosmosClassChains
+                    self.onUpdateview()
+                });
+            }
             
             let hdPathTap = UITapGestureRecognizer(target: self, action: #selector(onHdPathSelect))
             hdPathTap.cancelsTouchesInView = false
@@ -95,6 +99,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
             tableView.reloadData()
             tableView.isHidden = false
             loadingView.isHidden = true
+            confirmBtn.isEnabled = true
             
             hdPathLabel.text = String(hdPath)
         }

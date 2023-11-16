@@ -731,7 +731,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     let channel = getConnection(inputCosmosChain)
                     if let auth = try? await fetchAuth(channel, inputCosmosChain.bechAddress),
                        let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(inner_mag!)) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -749,7 +749,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     let channel = getConnection(inputCosmosChain)
                     if let auth = try? await fetchAuth(channel, inputCosmosChain.bechAddress),
                        let response = try await broadcastWasmTx(channel, auth!, onBindWasm(inner_mag!)) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

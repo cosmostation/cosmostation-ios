@@ -384,7 +384,7 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
             Task {
                 if (selectedChain is ChainBinanceBeacon) {
                     if let response = try? await broadcastBnbSendTx() {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -398,7 +398,7 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
                     
                 } else if (selectedChain is ChainOkt60Keccak) {
                     if let response = try? await broadcastOktSendTx() {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             print("response ", response)
                             self.loadingView.isHidden = true
                             

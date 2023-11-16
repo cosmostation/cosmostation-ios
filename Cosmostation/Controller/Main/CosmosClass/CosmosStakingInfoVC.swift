@@ -220,7 +220,7 @@ class CosmosStakingInfoVC: BaseVC {
         noticeAlert.setValue(attributedMessage, forKey: "attributedMessage")
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default, handler: { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                 self.onRewardAddressTx()
             });
             
@@ -358,7 +358,7 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
         if (sheetType == .SelectDelegatedAction) {
             if let index = result["index"] as? Int,
                let valAddress = result["validatorAddress"] as? String {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     if (index == 0) {
                         self.onDelegateTx(valAddress)
                     } else if (index == 1) {
@@ -375,7 +375,7 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
             
         } else if (sheetType == .SelectUnbondingAction) {
             if let entryPosition = result["entryPosition"] as? Int {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.onCancelUnbondingTx(entryPosition)
                 });
             }

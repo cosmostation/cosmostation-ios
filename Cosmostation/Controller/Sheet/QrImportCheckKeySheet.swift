@@ -58,7 +58,7 @@ class QrImportCheckKeySheet: BaseVC, UITextFieldDelegate {
         do {
             let decrypted = CryptoJS.AES().decrypt(toDecryptString, password: userInput!)
             if let json = try JSONSerialization.jsonObject(with: Data(decrypted.utf8), options: []) as? [String: Any] {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     if let mnemonic = json["mnemonic"] as? String {
                         self.qrImportCheckKeyDelegate?.onQrImportConfirmed(mnemonic)
@@ -70,7 +70,7 @@ class QrImportCheckKeySheet: BaseVC, UITextFieldDelegate {
             }
             
         } catch {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                 self.loadingView.isHidden = true
                 self.onShowToast(NSLocalizedString("error_decrytion", comment: ""))
             });

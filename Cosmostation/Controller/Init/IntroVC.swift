@@ -107,7 +107,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectCreateAccount) {
             if let index = result["index"] as? Int {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     if (index == 0) {
                         let createMnemonicVC = CreateMnemonicVC(nibName: "CreateMnemonicVC", bundle: nil)
                         self.navigationItem.title = ""
@@ -130,7 +130,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if result == .success {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                 self.onStartMainTab()
             })
         }
