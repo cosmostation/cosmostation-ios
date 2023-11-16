@@ -109,7 +109,10 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
             if let index = result["index"] as? Int {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     if (index == 0) {
-                        self.onNextVc(.create)
+                        let createMnemonicVC = CreateMnemonicVC(nibName: "CreateMnemonicVC", bundle: nil)
+                        self.navigationItem.title = ""
+                        self.navigationController?.pushViewController(createMnemonicVC, animated: true)
+                        
                     } else if (index == 1) {
                         self.onNextVc(.mnemonc)
                     } else if (index == 2) {

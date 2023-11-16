@@ -8,9 +8,10 @@
 import UIKit
 import web3swift
 
-class CreateMnemonicVC: BaseVC {
+class CreateMnemonicVC: BaseVC, PinDelegate, CreateNameDelegate {
     
     @IBOutlet weak var nextBtn: BaseButton!
+    @IBOutlet weak var warningCardView: CardView!
     @IBOutlet weak var warningTitleLabel: UILabel!
     @IBOutlet weak var warningMsgLabel: UILabel!
     @IBOutlet weak var mnemonicTitle: UILabel!
@@ -60,12 +61,19 @@ class CreateMnemonicVC: BaseVC {
         wordLabels = [word00, word01, word02, word03, word04, word05, word06, word07, word08, word09, word10, word11,
                       word12, word13, word14, word15, word16, word17, word18, word19, word20, word21, word22, word23]
         
-        onUpdateView()
         onSetWordCntButton()
+        onUpdateView()
+        onCheckPinCodeInited()
         
         let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyMenmonics))
         copyTap.cancelsTouchesInView = false
         wordCardView.addGestureRecognizer(copyTap)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        warningCardView.setBlur()
+        wordCardView.setBlur()
     }
     
     override func setLocalizedString() {
@@ -144,8 +152,36 @@ class CreateMnemonicVC: BaseVC {
         }
     }
     
+    func onCheckPinCodeInited() {
+        view.isUserInteractionEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            let keychain = BaseData.instance.getKeyChain()
+            if let pincode = try? keychain.getString("password"), pincode?.isEmpty == false {
+                let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+                self.present(pinVC, animated: true)
+            } else {
+                let pinVC = UIStoryboard.PincodeVC(self, .ForInit)
+                self.present(pinVC, animated: true)
+            }
+        });
+    }
+    
+    
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
+        if (result == .success) {
+            view.isUserInteractionEnabled = true
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                self.navigationController?.popViewController(animated: true)
+            });
+        }
+    }
+    
     @IBAction func onClickNext(_ sender: UIButton) {
-        onCreateAccount(accountName, mnemonic)
+        let createNameSheet = CreateNameSheet(nibName: "CreateNameSheet", bundle: nil)
+        createNameSheet.mNemonics = mnemonic
+        createNameSheet.createNameDelegate = self
+        onStartSheet(createNameSheet, 240)
     }
     
     @objc func onCopyMenmonics() {
@@ -153,7 +189,7 @@ class CreateMnemonicVC: BaseVC {
         onShowToast(NSLocalizedString("mnemonic_copied", comment: ""))
     }
     
-    func onCreateAccount(_ name: String, _ mnemonic: String) {
+    func onNameConfirmed(_ name: String, _ mnemonic: String) {
         showWait()
         DispatchQueue.global().async {
             let keychain = BaseData.instance.getKeyChain()
