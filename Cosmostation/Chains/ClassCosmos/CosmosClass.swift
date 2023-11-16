@@ -37,7 +37,6 @@ class CosmosClass: BaseChain {
     lazy var rewardAddress = ""
     lazy var cosmosAuth = Google_Protobuf_Any.init()
     lazy var cosmosValidators = Array<Cosmos_Staking_V1beta1_Validator>()
-//    lazy var cosmosBalances = Array<Cosmos_Base_V1beta1_Coin>()
     var cosmosBalances: [Cosmos_Base_V1beta1_Coin]?
     lazy var cosmosVestings = Array<Cosmos_Base_V1beta1_Coin>()
     lazy var cosmosDelegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()

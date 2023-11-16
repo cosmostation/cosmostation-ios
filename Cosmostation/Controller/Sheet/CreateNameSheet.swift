@@ -16,7 +16,8 @@ class CreateNameSheet: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var confirmBtn: BaseButton!
     
     var createNameDelegate: CreateNameDelegate?
-    var mNemonics: String!
+    var mnemonic: String?
+    var privateKeyString: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,13 +49,13 @@ class CreateNameSheet: BaseVC, UITextFieldDelegate {
             onShowToast(NSLocalizedString("error_alreay_exist_account_name", comment: ""))
             return
         }
-        createNameDelegate?.onNameConfirmed(userInput!, mNemonics)
+        createNameDelegate?.onNameConfirmed(userInput!, mnemonic, privateKeyString)
         dismiss(animated: true)
     }
 
 }
 
 protocol CreateNameDelegate {
-    func onNameConfirmed(_ name: String, _ mnemonic: String)
+    func onNameConfirmed(_ name: String, _ mnemonic: String?, _ privateKeyString: String?)
 }
 

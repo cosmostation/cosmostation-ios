@@ -119,17 +119,13 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
                         self.navigationController?.pushViewController(importMnemonicVC, animated: true)
                         
                     } else if (index == 2) {
-                        self.onNextVc(.privateKey)
+                        let importPrivKeyVC = ImportPrivKeyVC(nibName: "ImportPrivKeyVC", bundle: nil)
+                        self.navigationItem.title = ""
+                        self.navigationController?.pushViewController(importPrivKeyVC, animated: true)
                     }
                 });
             }
         }
-    }
-    
-    func onNextVc(_ type: SelectCreateAccount) {
-        let createNameVC = CreateNameVC(nibName: "CreateNameVC", bundle: nil)
-        createNameVC.SelectCreateAccount = type
-        self.navigationController?.pushViewController(createNameVC, animated: true)
     }
     
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {

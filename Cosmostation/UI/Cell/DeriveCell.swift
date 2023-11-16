@@ -66,9 +66,13 @@ class DeriveCell: UITableViewCell {
             }
             
         } else {
-            hdPathLabel.text = ""
             if (chain.evmCompatible) {
                 evmCompatTag.isHidden = false
+            }
+            if (chain is ChainOkt60Keccak || chain.tag == "kava60" || chain.tag == "xplaKeccak256") {
+                hdPathLabel.text = chain.evmAddress
+            } else {
+                hdPathLabel.text = chain.bechAddress
             }
         }
         

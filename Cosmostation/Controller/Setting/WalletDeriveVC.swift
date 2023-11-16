@@ -19,6 +19,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var mnemonic: String?
+    var privateKeyString: String?
     var seed: Data?
     var toAddAccount: BaseAccount!
     var hdPath = 0
@@ -49,7 +50,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
         if (mnemonic != nil) {
             seed = KeyFac.getSeedFromWords(mnemonic!)
             toAddAccount = BaseAccount("", .withMnemonic, String(self.hdPath))
-            toAddAccount.fetchForPreCreate(seed!)
+            toAddAccount.fetchForPreCreate(seed!, nil)
             allCosmosChains = toAddAccount.allCosmosClassChains
             onUpdateview()
             
@@ -57,9 +58,20 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
             hdPathTap.cancelsTouchesInView = false
             hdPathLayer.addGestureRecognizer(hdPathTap)
             
+        } else if (privateKeyString != nil) {
+            hdPathTitle.isHidden = true
+            hdPathLayer.isHidden = true
+            
+            toAddAccount = BaseAccount("", .onlyPrivateKey, "-1")
+            toAddAccount.fetchForPreCreate(nil, privateKeyString)
+            
+            allCosmosChains = toAddAccount.allCosmosClassChains
+            onUpdateview()
+            
         } else {
             hdPathTitle.isHidden = true
             hdPathLayer.isHidden = true
+            
         }
     }
     
@@ -122,7 +134,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
             
             toAddAccount = BaseAccount("", .withMnemonic, String(self.hdPath))
             toAddAccount.allCosmosClassChains.removeAll()
-            toAddAccount.fetchForPreCreate(seed!)
+            toAddAccount.fetchForPreCreate(seed!, nil)
             allCosmosChains = toAddAccount.allCosmosClassChains
             onUpdateview()
         }
@@ -130,23 +142,34 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
     
     @IBAction func onClickCreate(_ sender: UIButton) {
         let createNameSheet = CreateNameSheet(nibName: "CreateNameSheet", bundle: nil)
-        createNameSheet.mNemonics = mnemonic
+        createNameSheet.mnemonic = mnemonic
+        createNameSheet.privateKeyString = privateKeyString
         createNameSheet.createNameDelegate = self
         onStartSheet(createNameSheet, 240)
     }
     
-    func onNameConfirmed(_ name: String, _ mnemonic: String) {
+    func onNameConfirmed(_ name: String, _ mnemonic: String?, _ privateKeyString: String?) {
         loadingView.isHidden = false
         
         DispatchQueue.global().async {
             let keychain = BaseData.instance.getKeyChain()
-            let newAccount = BaseAccount(name, .withMnemonic, String(self.hdPath))
-            let id = BaseData.instance.insertAccount(newAccount)
-            let newData = mnemonic + " : " + self.seed!.toHexString()
-            try? keychain.set(newData, key: newAccount.uuid.sha1())
-            BaseData.instance.setLastAccount(id)
-            BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
-            BaseData.instance.setDisplayCosmosChainTags(id, self.selectedCosmosTags)
+            if (self.toAddAccount.type == .withMnemonic) {
+                let recoverAccount = BaseAccount(name, .withMnemonic, String(self.hdPath))
+                let id = BaseData.instance.insertAccount(recoverAccount)
+                let newData = mnemonic! + " : " + self.seed!.toHexString()
+                try? keychain.set(newData, key: recoverAccount.uuid.sha1())
+                BaseData.instance.setLastAccount(id)
+                BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
+                BaseData.instance.setDisplayCosmosChainTags(id, self.selectedCosmosTags)
+                
+            } else if (self.toAddAccount.type == .onlyPrivateKey) {
+                let recoverAccount = BaseAccount(name, .onlyPrivateKey, "0")
+                let id = BaseData.instance.insertAccount(recoverAccount)
+                try? keychain.set(privateKeyString!, key: recoverAccount.uuid.sha1())
+                BaseData.instance.setLastAccount(id)
+                BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
+                BaseData.instance.setDisplayCosmosChainTags(id, self.selectedCosmosTags)
+            }
             
             DispatchQueue.main.async(execute: {
                 self.loadingView.isHidden = true

@@ -179,7 +179,7 @@ class CreateMnemonicVC: BaseVC, PinDelegate, CreateNameDelegate {
     
     @IBAction func onClickNext(_ sender: UIButton) {
         let createNameSheet = CreateNameSheet(nibName: "CreateNameSheet", bundle: nil)
-        createNameSheet.mNemonics = mnemonic
+        createNameSheet.mnemonic = mnemonic
         createNameSheet.createNameDelegate = self
         onStartSheet(createNameSheet, 240)
     }
@@ -189,14 +189,14 @@ class CreateMnemonicVC: BaseVC, PinDelegate, CreateNameDelegate {
         onShowToast(NSLocalizedString("mnemonic_copied", comment: ""))
     }
     
-    func onNameConfirmed(_ name: String, _ mnemonic: String) {
+    func onNameConfirmed(_ name: String, _ mnemonic: String?, _ privateKeyString: String?) {
         showWait()
         DispatchQueue.global().async {
             let keychain = BaseData.instance.getKeyChain()
-            let seed = KeyFac.getSeedFromWords(mnemonic)
+            let seed = KeyFac.getSeedFromWords(mnemonic!)
             let newAccount = BaseAccount(name, .withMnemonic, "0")
             let id = BaseData.instance.insertAccount(newAccount)
-            let newData = mnemonic + " : " + seed!.toHexString()
+            let newData = mnemonic! + " : " + seed!.toHexString()
             try? keychain.set(newData, key: newAccount.uuid.sha1())
             BaseData.instance.setLastAccount(id)
             BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
