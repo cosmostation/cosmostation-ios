@@ -194,6 +194,7 @@
 "str_delete" = "消去";
 "str_delete_address_book" = "連絡先の削除";
 "str_select_valuables" = "資産のある財布の選択";
+"str_select_hd_path" = "HD Path 選択";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -290,6 +291,7 @@
 "str_address_book_add" = "連絡先を追加";
 "str_cancle_unstake" = "アンステーキ解除";
 "str_do_not_show_7_days" = "7日間表示しない";
+"str_restore_wallets" = "財布の復元";
 
 
 "btn_delegate" = "  委任する";
@@ -362,6 +364,7 @@
 "msg_addressbook_add" = "便宜上、よく使うアドレスを登録できます。";
 "msg_addressbook_updated" = "連絡先を更新しました。";
 "msg_swap_warn" = "コスモステーションモバイルを非受託型ウォレットサービスとしてすべてのトランザクション実行の責任はユーザーにあります。 トランザクションを送信する前に常に内容を正確に確認して使用してください。 \n\nアプリによる取引による損失は一切責任を負いません。";
+"msg_check_inputed_mnemonic" = "入力したニーモニックを確認してください。 \nご存知のように、誰とも共有しないでください。 このニーモニックを紛失すると、資産の損失につながる可能性があります。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -807,6 +810,7 @@
 "title_watch_wallet" = "Add Watch Wallet";
 "title_restore_privatekey" = "Restore With PrivateKey";
 "title_restore" = "Restore With Mnemonic";
+"title_confirm_mnemonic_inputs" = "Check Entered Mnemonic";
 "title_path" = "Select Wallet";
 "title_delegate" = "Delegate To";
 "title_undelegate" = "Undelegate From";

@@ -106,22 +106,23 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
             if let index = result["index"] as? Int {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     if (index == 0) {
-                        self.onNextVc(.create)
+                        let createMnemonicVC = CreateMnemonicVC(nibName: "CreateMnemonicVC", bundle: nil)
+                        self.navigationItem.title = ""
+                        self.navigationController?.pushViewController(createMnemonicVC, animated: true)
+                        
                     } else if (index == 1) {
-                        self.onNextVc(.mnemonc)
+                        let importMnemonicVC = ImportMnemonicVC(nibName: "ImportMnemonicVC", bundle: nil)
+                        self.navigationItem.title = ""
+                        self.navigationController?.pushViewController(importMnemonicVC, animated: true)
+                        
                     } else if (index == 2) {
-                        self.onNextVc(.privateKey)
+                        let importPrivKeyVC = ImportPrivKeyVC(nibName: "ImportPrivKeyVC", bundle: nil)
+                        self.navigationItem.title = ""
+                        self.navigationController?.pushViewController(importPrivKeyVC, animated: true)
                     }
                 });
             }
         }
-    }
-    
-    func onNextVc(_ type: SelectCreateAccount) {
-        let createNameVC = CreateNameVC(nibName: "CreateNameVC", bundle: nil)
-        createNameVC.SelectCreateAccount = type
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(createNameVC, animated: true)
     }
     
     func onRenamed() {

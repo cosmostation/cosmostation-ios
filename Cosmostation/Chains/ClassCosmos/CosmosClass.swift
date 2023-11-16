@@ -37,7 +37,7 @@ class CosmosClass: BaseChain {
     lazy var rewardAddress = ""
     lazy var cosmosAuth = Google_Protobuf_Any.init()
     lazy var cosmosValidators = Array<Cosmos_Staking_V1beta1_Validator>()
-    lazy var cosmosBalances = Array<Cosmos_Base_V1beta1_Coin>()
+    var cosmosBalances: [Cosmos_Base_V1beta1_Coin]?
     lazy var cosmosVestings = Array<Cosmos_Base_V1beta1_Coin>()
     lazy var cosmosDelegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     lazy var cosmosUnbondings = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
@@ -82,6 +82,17 @@ class CosmosClass: BaseChain {
         fetchGrpcData(id)
     }
     
+    //fetch only balance for add account check
+    override func fetchPreCreate() {
+        let group = DispatchGroup()
+        let channel = getConnection()
+        fetchBalance(group, channel)
+        group.notify(queue: .main) {
+            self.fetched = true
+            NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+        }
+    }
+    
     //check account payable with lowest fee
     override func isTxFeePayable() -> Bool {
         var result = false
@@ -114,7 +125,7 @@ class CosmosClass: BaseChain {
             BaseData.instance.updateRefAddressesMain(
                 RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                           nil, self.cosmosBalances.count))
+                           nil, self.cosmosBalances?.count))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }
     }
@@ -469,7 +480,7 @@ extension CosmosClass {
     }
     
     func balanceAmount(_ denom: String) -> NSDecimalNumber {
-        return NSDecimalNumber(string: cosmosBalances.filter { $0.denom == denom }.first?.amount ?? "0")
+        return NSDecimalNumber(string: cosmosBalances?.filter { $0.denom == denom }.first?.amount ?? "0")
     }
     
     func balanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
@@ -484,7 +495,7 @@ extension CosmosClass {
     
     func balanceValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
         var result =  NSDecimalNumber.zero
-        cosmosBalances.forEach { balance in
+        cosmosBalances?.forEach { balance in
             result = result.adding(balanceValue(balance.denom, usd))
         }
         return result
@@ -670,7 +681,7 @@ extension CosmosClass {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(3000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
 }

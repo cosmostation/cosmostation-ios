@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckMenmonicVC: BaseVC, DeriveNameDelegate {
+class CheckMenmonicVC: BaseVC {
     
     @IBOutlet weak var createBtn: SecButton!
     @IBOutlet weak var checkBtn: BaseButton!
@@ -116,10 +116,10 @@ class CheckMenmonicVC: BaseVC, DeriveNameDelegate {
         let keychain = BaseData.instance.getKeyChain()
         if let secureData = try? keychain.getString(toCheckAccount.uuid.sha1()),
            let mnemonic = secureData?.components(separatedBy: ":").first?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) {
-            let deriveNameSheet = DeriveNameSheet(nibName: "DeriveNameSheet", bundle: nil)
-            deriveNameSheet.mNemonics = mnemonic
-            deriveNameSheet.deriveNameDelegate = self
-            self.onStartSheet(deriveNameSheet)
+            let walletDeriveVC = WalletDeriveVC(nibName: "WalletDeriveVC", bundle: nil)
+            walletDeriveVC.mnemonic = mnemonic
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(walletDeriveVC, animated: true)
             
         }
     }
@@ -136,14 +136,4 @@ class CheckMenmonicVC: BaseVC, DeriveNameDelegate {
             self.onShowToast(NSLocalizedString("mnemonic_copied", comment: ""))
         }
     }
-
-    func onNameConfirmed(_ name: String, _ mnemonic: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-            let importMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
-            importMnemonicCheckVC.accountName = name
-            importMnemonicCheckVC.mnemonic = mnemonic
-            self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
-        });
-    }
-    
 }

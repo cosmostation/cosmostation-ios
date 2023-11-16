@@ -55,6 +55,15 @@ class ChainOkt60Keccak: CosmosClass  {
         fetchLcdData(id)
     }
     
+    override func fetchPreCreate() {
+        let group = DispatchGroup()
+        fetchAccountInfo(group, bechAddress)
+        group.notify(queue: .main) {
+            self.fetched = true
+            NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+        }
+    }
+    
     override func isTxFeePayable() -> Bool {
         let availableAmount = lcdBalanceAmount(stakeDenom)
         return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0

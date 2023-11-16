@@ -14,8 +14,6 @@ class ImportPrivKeyVC: BaseVC, UITextViewDelegate {
     @IBOutlet weak var nextBtn: BaseButton!
     @IBOutlet weak var privKeyTextArea: MDCOutlinedTextArea!
     
-    var accountName: String!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +40,11 @@ class ImportPrivKeyVC: BaseVC, UITextViewDelegate {
     @IBAction func onClickNext(_ sender: UIButton) {
         let userInput = privKeyTextArea.textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         if (onValidate(userInput)) {
-            onRestoreAccount(accountName, userInput)
+            let walletDeriveVC = WalletDeriveVC(nibName: "WalletDeriveVC", bundle: nil)
+            walletDeriveVC.privateKeyString = userInput
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(walletDeriveVC, animated: true)
+            
         } else {
             onShowToast(NSLocalizedString("error_invalid_private_Key", comment: ""))
         }
@@ -55,20 +57,20 @@ class ImportPrivKeyVC: BaseVC, UITextViewDelegate {
         return true
     }
 
-    func onRestoreAccount(_ name: String, _ privKey: String) {
-        showWait()
-        DispatchQueue.global().async {
-            let keychain = BaseData.instance.getKeyChain()
-            let recoverAccount = BaseAccount(name, .onlyPrivateKey, "0")
-            let id = BaseData.instance.insertAccount(recoverAccount)
-            try? keychain.set(privKey, key: recoverAccount.uuid.sha1())
-            BaseData.instance.setLastAccount(id)
-            BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
-            
-            DispatchQueue.main.async(execute: {
-                self.hideWait()
-                self.onStartMainTab()
-            });
-        }
-    }
+//    func onRestoreAccount(_ name: String, _ privKey: String) {
+//        showWait()
+//        DispatchQueue.global().async {
+//            let keychain = BaseData.instance.getKeyChain()
+//            let recoverAccount = BaseAccount(name, .onlyPrivateKey, "0")
+//            let id = BaseData.instance.insertAccount(recoverAccount)
+//            try? keychain.set(privKey, key: recoverAccount.uuid.sha1())
+//            BaseData.instance.setLastAccount(id)
+//            BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
+//            
+//            DispatchQueue.main.async(execute: {
+//                self.hideWait()
+//                self.onStartMainTab()
+//            });
+//        }
+//    }
 }

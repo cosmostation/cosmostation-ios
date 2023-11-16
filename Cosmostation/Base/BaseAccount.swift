@@ -50,6 +50,9 @@ public class BaseAccount {
     func initAccount() {
         loadDisplayCTags()
         allCosmosClassChains = ALLCOSMOSCLASS()
+        if (type == .onlyPrivateKey) {
+            allCosmosClassChains = ALLCOSMOSCLASS().filter({ $0.isDefault == true || $0.tag == "okt996_Secp"})
+        }
         initSortCosmosChains()
     }
     
@@ -98,7 +101,7 @@ public class BaseAccount {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 allCosmosClassChains.forEach { chain in
-                    Task(priority: .medium) {
+                    Task(priority: .high) {
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, lastHDPath)
                         }
@@ -112,7 +115,7 @@ public class BaseAccount {
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 allCosmosClassChains.forEach { chain in
-                    Task(priority: .medium) {
+                    Task(priority: .high) {
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
@@ -224,6 +227,35 @@ extension BaseAccount {
             }
         }
         return result
+    }
+    
+    func fetchForPreCreate(_ seed: Data? = nil, _ privateKeyString: String? = nil) {
+        if (type == .withMnemonic) {
+            allCosmosClassChains = ALLCOSMOSCLASS()
+            allCosmosClassChains.forEach { chain in
+                Task(priority: .high) {
+                    if (chain.bechAddress.isEmpty) {
+                        chain.setInfoWithSeed(seed!, lastHDPath)
+                    }
+                    if (chain.fetched == false) {
+                        chain.fetchPreCreate()
+                    }
+                }
+            }
+            
+        } else if (type == .onlyPrivateKey) {
+            allCosmosClassChains = ALLCOSMOSCLASS().filter({ $0.isDefault == true || $0.tag == "okt996_Secp"})
+            allCosmosClassChains.forEach { chain in
+                Task(priority: .medium) {
+                    if (chain.bechAddress.isEmpty) {
+                        chain.setInfoWithPrivateKey(Data.fromHex(privateKeyString!)!)
+                    }
+                    if (chain.fetched == false) {
+                        chain.fetchPreCreate()
+                    }
+                }
+            }
+        }
     }
 }
 

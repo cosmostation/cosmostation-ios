@@ -104,7 +104,7 @@ class CosmosCoinVC: BaseVC {
                 }
                 
             } else {
-                selectedChain.cosmosBalances.forEach { coin in
+                selectedChain.cosmosBalances?.forEach { coin in
                     let coinType = BaseData.instance.getAsset(selectedChain.apiName, coin.denom)?.type
                     if (coinType == "staking" || coinType == "native") {
                         nativeCoins.append(coin)
