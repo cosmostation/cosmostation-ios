@@ -20,7 +20,8 @@ class CosmosDelegate: BaseVC {
     @IBOutlet weak var validatorCardView: FixCardView!
     @IBOutlet weak var monikerImg: UIImageView!
     @IBOutlet weak var monikerLabel: UILabel!
-    @IBOutlet weak var jailedImg: UIImageView!
+    @IBOutlet weak var inactiveTag: UIImageView!
+    @IBOutlet weak var jailedTag: UIImageView!
     @IBOutlet weak var commLabel: UILabel!
     @IBOutlet weak var commPercentLabel: UILabel!
     
@@ -117,7 +118,11 @@ class CosmosDelegate: BaseVC {
         monikerImg.image = UIImage(named: "validatorDefault")
         monikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
         monikerLabel.text = toValidator!.description_p.moniker
-        jailedImg.isHidden = !toValidator!.jailed
+        if (toValidator!.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            inactiveTag.isHidden = toValidator!.status == .bonded
+        }
         
         let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
         commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)

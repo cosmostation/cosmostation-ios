@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,11 +38,18 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jailedImg" translatesAutoresizingMaskIntoConstraints="NO" id="63d-9l-EzU">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconValidatorInactive" translatesAutoresizingMaskIntoConstraints="NO" id="63d-9l-EzU">
                                 <rect key="frame" x="20" y="14" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="Ejr-Zq-qmR"/>
                                     <constraint firstAttribute="height" constant="40" id="u1a-5a-vEE"/>
+                                </constraints>
+                            </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconValidatorJailed" translatesAutoresizingMaskIntoConstraints="NO" id="g2K-LK-2sI">
+                                <rect key="frame" x="20" y="14" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0bD-Nx-pjr"/>
+                                    <constraint firstAttribute="width" constant="40" id="mO7-3q-kop"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u92-jr-XbG">
@@ -118,9 +125,11 @@
                             <constraint firstItem="63d-9l-EzU" firstAttribute="centerX" secondItem="JuI-6r-eD5" secondAttribute="centerX" id="KUX-jM-kYR"/>
                             <constraint firstItem="nrJ-ry-fpb" firstAttribute="centerY" secondItem="aFL-yA-qxh" secondAttribute="centerY" id="KeV-v8-QF4"/>
                             <constraint firstItem="nrJ-ry-fpb" firstAttribute="centerY" secondItem="JuI-6r-eD5" secondAttribute="centerY" id="MDn-aL-GXN"/>
+                            <constraint firstItem="g2K-LK-2sI" firstAttribute="centerX" secondItem="JuI-6r-eD5" secondAttribute="centerX" id="Rbp-1h-5Aa"/>
                             <constraint firstItem="4dS-bl-sQ5" firstAttribute="leading" secondItem="Zmb-hS-7Yg" secondAttribute="leading" id="RoV-nM-gKh"/>
                             <constraint firstItem="Zmb-hS-7Yg" firstAttribute="centerY" secondItem="FK9-T3-ajI" secondAttribute="centerY" id="VRS-XV-qgE"/>
                             <constraint firstItem="63d-9l-EzU" firstAttribute="centerY" secondItem="JuI-6r-eD5" secondAttribute="centerY" id="VuK-w7-Sn4"/>
+                            <constraint firstItem="g2K-LK-2sI" firstAttribute="centerY" secondItem="JuI-6r-eD5" secondAttribute="centerY" id="Zld-0d-ghR"/>
                             <constraint firstItem="u92-jr-XbG" firstAttribute="centerY" secondItem="LOh-cJ-So1" secondAttribute="centerY" id="c9v-c7-9Pl"/>
                             <constraint firstAttribute="bottom" secondItem="yAU-Kb-2oC" secondAttribute="bottom" id="gnG-BA-THh"/>
                             <constraint firstAttribute="trailing" secondItem="yAU-Kb-2oC" secondAttribute="trailing" constant="12" id="jR8-wD-OSY"/>
@@ -149,7 +158,8 @@
                 <outlet property="commLabel" destination="Wsf-sO-MQV" id="Cz4-Q9-7Cb"/>
                 <outlet property="commPercentLabel" destination="yHw-qk-bYE" id="a7i-Bj-exu"/>
                 <outlet property="commTitle" destination="4dS-bl-sQ5" id="cw6-27-J5o"/>
-                <outlet property="jailedImg" destination="63d-9l-EzU" id="hnz-zJ-i7N"/>
+                <outlet property="inactiveTag" destination="63d-9l-EzU" id="5Le-mA-Mk9"/>
+                <outlet property="jailedTag" destination="g2K-LK-2sI" id="vbP-NY-q4E"/>
                 <outlet property="logoImg" destination="JuI-6r-eD5" id="sGc-3Z-j3G"/>
                 <outlet property="nameLabel" destination="u92-jr-XbG" id="20Y-qa-Oh6"/>
                 <outlet property="stakingLabel" destination="aFL-yA-qxh" id="1rC-x1-Fp4"/>
@@ -161,7 +171,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="jailedImg" width="44" height="44"/>
+        <image name="iconValidatorInactive" width="40" height="40"/>
+        <image name="iconValidatorJailed" width="40" height="40"/>
         <image name="validatorDefault" width="40" height="40"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -19,7 +19,8 @@ class CosmosUndelegate: BaseVC {
     
     @IBOutlet weak var validatorCardView: FixCardView!
     @IBOutlet weak var monikerImg: UIImageView!
-    @IBOutlet weak var jailedImg: UIImageView!
+    @IBOutlet weak var inactiveTag: UIImageView!
+    @IBOutlet weak var jailedTag: UIImageView!
     @IBOutlet weak var monikerLabel: UILabel!
     @IBOutlet weak var stakedLabel: UILabel!
     
@@ -110,7 +111,11 @@ class CosmosUndelegate: BaseVC {
         monikerImg.image = UIImage(named: "validatorDefault")
         monikerImg.af.setImage(withURL: selectedChain.monikerImg(fromValidator!.operatorAddress))
         monikerLabel.text = fromValidator!.description_p.moniker
-        jailedImg.isHidden = !fromValidator!.jailed
+        if (fromValidator!.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            inactiveTag.isHidden = fromValidator!.status == .bonded
+        }
         
         let stakeDenom = selectedChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {

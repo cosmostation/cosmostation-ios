@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,7 +27,8 @@
                 <outlet property="feeSelectLabel" destination="Fy1-wT-m7B" id="gqX-s7-2r7"/>
                 <outlet property="feeSelectView" destination="KCB-vX-cnS" id="0F3-np-DBg"/>
                 <outlet property="feeValueLabel" destination="56T-eR-V4g" id="BCu-BG-Fnc"/>
-                <outlet property="jailedImg" destination="RtZ-Xj-R3E" id="flS-el-Mbq"/>
+                <outlet property="inactiveTag" destination="RtZ-Xj-R3E" id="crT-JH-y5o"/>
+                <outlet property="jailedTag" destination="5N5-hs-mW0" id="nd4-B7-RFT"/>
                 <outlet property="loadingView" destination="uVo-v5-3Z3" id="gy0-oW-Wok"/>
                 <outlet property="memoCardView" destination="2TM-KT-cVH" id="n3b-KK-hVO"/>
                 <outlet property="memoHintLabel" destination="zDo-zQ-9Wz" id="A9U-QE-8CL"/>
@@ -73,11 +74,18 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </imageView>
-                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jailedImg" translatesAutoresizingMaskIntoConstraints="NO" id="RtZ-Xj-R3E">
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconValidatorInactive" translatesAutoresizingMaskIntoConstraints="NO" id="RtZ-Xj-R3E">
                             <rect key="frame" x="12" y="14.000000000000014" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="I6d-2w-Zpe"/>
                                 <constraint firstAttribute="height" constant="40" id="LeU-7s-8VP"/>
+                            </constraints>
+                        </imageView>
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconValidatorJailed" translatesAutoresizingMaskIntoConstraints="NO" id="5N5-hs-mW0">
+                            <rect key="frame" x="12" y="14.000000000000014" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="Kpy-oi-18E"/>
+                                <constraint firstAttribute="height" constant="40" id="mKS-j5-y6f"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdJ-zJ-7JE">
@@ -115,6 +123,7 @@
                         <constraint firstItem="RtZ-Xj-R3E" firstAttribute="centerY" secondItem="KLi-3E-zye" secondAttribute="centerY" id="7Mx-gK-GEt"/>
                         <constraint firstItem="jnP-pp-lZx" firstAttribute="centerY" secondItem="NvI-Ow-sPD" secondAttribute="centerY" id="KQV-4T-X7S"/>
                         <constraint firstItem="RtZ-Xj-R3E" firstAttribute="centerX" secondItem="KLi-3E-zye" secondAttribute="centerX" id="Nlk-ku-MuT"/>
+                        <constraint firstItem="5N5-hs-mW0" firstAttribute="centerX" secondItem="KLi-3E-zye" secondAttribute="centerX" id="TX8-0G-zY8"/>
                         <constraint firstItem="TdJ-zJ-7JE" firstAttribute="leading" secondItem="KLi-3E-zye" secondAttribute="trailing" constant="12" id="VN2-sZ-vDl"/>
                         <constraint firstItem="jnP-pp-lZx" firstAttribute="top" secondItem="TdJ-zJ-7JE" secondAttribute="bottom" constant="4" id="VPd-V7-Jip"/>
                         <constraint firstItem="C9c-OD-Lcb" firstAttribute="centerY" secondItem="17D-ZY-Zbe" secondAttribute="centerY" id="WTt-QQ-FiV"/>
@@ -122,6 +131,7 @@
                         <constraint firstItem="KLi-3E-zye" firstAttribute="leading" secondItem="17D-ZY-Zbe" secondAttribute="leading" constant="12" id="YNb-bk-2QL"/>
                         <constraint firstItem="KLi-3E-zye" firstAttribute="centerY" secondItem="17D-ZY-Zbe" secondAttribute="centerY" id="dLQ-v7-MDt"/>
                         <constraint firstItem="TdJ-zJ-7JE" firstAttribute="top" secondItem="17D-ZY-Zbe" secondAttribute="top" constant="18" id="eCJ-EK-eBT"/>
+                        <constraint firstItem="5N5-hs-mW0" firstAttribute="centerY" secondItem="KLi-3E-zye" secondAttribute="centerY" id="keg-58-GaS"/>
                         <constraint firstAttribute="trailing" secondItem="C9c-OD-Lcb" secondAttribute="trailing" constant="16" id="lg8-oa-ERv"/>
                         <constraint firstItem="C9c-OD-Lcb" firstAttribute="leading" secondItem="NvI-Ow-sPD" secondAttribute="trailing" constant="16" id="rbw-Yq-aCH"/>
                     </constraints>
@@ -400,7 +410,8 @@
     </objects>
     <resources>
         <image name="iconArrowDown" width="24" height="24"/>
-        <image name="jailedImg" width="44" height="44"/>
+        <image name="iconValidatorInactive" width="40" height="40"/>
+        <image name="iconValidatorJailed" width="40" height="40"/>
         <image name="tokenDefault" width="22" height="22"/>
         <image name="validatorDefault" width="40" height="40"/>
         <namedColor name="_color01">

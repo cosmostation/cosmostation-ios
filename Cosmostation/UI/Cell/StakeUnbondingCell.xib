@@ -41,11 +41,18 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jailedImg" translatesAutoresizingMaskIntoConstraints="NO" id="ErB-SR-gm1">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconValidatorInactive" translatesAutoresizingMaskIntoConstraints="NO" id="ErB-SR-gm1">
                                 <rect key="frame" x="16" y="14" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="DI5-2z-gEX"/>
                                     <constraint firstAttribute="height" constant="40" id="Spn-xV-HG0"/>
+                                </constraints>
+                            </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconValidatorJailed" translatesAutoresizingMaskIntoConstraints="NO" id="tmb-T1-6pi">
+                                <rect key="frame" x="16" y="14" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3sq-Ic-UQK"/>
+                                    <constraint firstAttribute="width" constant="40" id="HdR-dx-e7R"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="659-G8-gAa">
@@ -115,8 +122,10 @@
                         <constraints>
                             <constraint firstItem="lgF-zq-vl0" firstAttribute="top" secondItem="kdI-qs-5GN" secondAttribute="bottom" constant="14" id="0Gy-Od-DpE"/>
                             <constraint firstItem="f1F-DA-iOC" firstAttribute="trailing" secondItem="omQ-3r-SPd" secondAttribute="trailing" id="6uQ-0m-SNk"/>
+                            <constraint firstItem="tmb-T1-6pi" firstAttribute="centerX" secondItem="Vz0-03-qtW" secondAttribute="centerX" id="7Kx-bg-1ZW"/>
                             <constraint firstItem="ErB-SR-gm1" firstAttribute="centerX" secondItem="Vz0-03-qtW" secondAttribute="centerX" id="Dsb-jG-qUC"/>
                             <constraint firstItem="Vz0-03-qtW" firstAttribute="leading" secondItem="OH0-YD-EIK" secondAttribute="leading" constant="16" id="NO1-EM-QYX"/>
+                            <constraint firstItem="tmb-T1-6pi" firstAttribute="centerY" secondItem="Vz0-03-qtW" secondAttribute="centerY" id="Qls-Mo-bpr"/>
                             <constraint firstAttribute="trailing" secondItem="omQ-3r-SPd" secondAttribute="trailing" constant="14" id="Sba-dg-ysz"/>
                             <constraint firstItem="659-G8-gAa" firstAttribute="centerY" secondItem="Vz0-03-qtW" secondAttribute="centerY" id="X2p-st-AOp"/>
                             <constraint firstItem="kdI-qs-5GN" firstAttribute="top" secondItem="Vz0-03-qtW" secondAttribute="bottom" constant="14" id="ZK1-87-nOK"/>
@@ -146,7 +155,8 @@
             <connections>
                 <outlet property="finishGapLabel" destination="omQ-3r-SPd" id="k30-ON-A3O"/>
                 <outlet property="finishTimeLabel" destination="f1F-DA-iOC" id="PSL-zG-QWS"/>
-                <outlet property="jailedImg" destination="ErB-SR-gm1" id="S7r-ev-gKF"/>
+                <outlet property="inactiveTag" destination="ErB-SR-gm1" id="Fed-hc-XtF"/>
+                <outlet property="jailedTag" destination="tmb-T1-6pi" id="FBf-1d-S01"/>
                 <outlet property="logoImg" destination="Vz0-03-qtW" id="CkT-dq-5Og"/>
                 <outlet property="nameLabel" destination="659-G8-gAa" id="RzA-o8-r2p"/>
                 <outlet property="rootView" destination="OH0-YD-EIK" id="GrV-a5-ao4"/>
@@ -157,7 +167,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="jailedImg" width="44" height="44"/>
+        <image name="iconValidatorInactive" width="40" height="40"/>
+        <image name="iconValidatorJailed" width="40" height="40"/>
         <image name="validatorDefault" width="40" height="40"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

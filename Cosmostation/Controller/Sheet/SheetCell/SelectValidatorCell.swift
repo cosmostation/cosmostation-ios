@@ -12,7 +12,8 @@ import AlamofireImage
 class SelectValidatorCell: UITableViewCell {
     
     @IBOutlet weak var logoImg: UIImageView!
-    @IBOutlet weak var jailedImg: UIImageView!
+    @IBOutlet weak var inactiveTag: UIImageView!
+    @IBOutlet weak var jailedTag: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var vpTitle: UILabel!
@@ -34,6 +35,8 @@ class SelectValidatorCell: UITableViewCell {
     override func prepareForReuse() {
         logoImg.af.cancelImageRequest()
         logoImg.image = UIImage(named: "validatorDefault")
+        inactiveTag.isHidden = true
+        jailedTag.isHidden = true
         
         vpTitle.isHidden = true
         vpLabel.isHidden = true
@@ -50,7 +53,11 @@ class SelectValidatorCell: UITableViewCell {
         
         logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
         nameLabel.text = validator.description_p.moniker
-        jailedImg.isHidden = !validator.jailed
+        if (validator.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            inactiveTag.isHidden = validator.status == .bonded
+        }
         
         let stakeDenom = baseChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
@@ -75,7 +82,11 @@ class SelectValidatorCell: UITableViewCell {
         
         logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
         nameLabel.text = validator.description_p.moniker
-        jailedImg.isHidden = !validator.jailed
+        if (validator.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            inactiveTag.isHidden = validator.status == .bonded
+        }
         
         let stakeDenom = baseChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {

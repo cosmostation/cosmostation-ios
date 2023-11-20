@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,7 +33,8 @@
                 <outlet property="feeSelectView" destination="FQc-CZ-UNb" id="dZA-aA-civ"/>
                 <outlet property="feeValueLabel" destination="4kN-aH-Q3u" id="Qqw-Gh-pjY"/>
                 <outlet property="fromCardView" destination="kaC-8P-uEg" id="5ep-f5-w9e"/>
-                <outlet property="fromJailedImg" destination="RwI-Om-k8H" id="O00-2Z-45W"/>
+                <outlet property="fromInactiveTag" destination="RwI-Om-k8H" id="QYz-UK-lWs"/>
+                <outlet property="fromJailedTag" destination="1g4-bC-0Tw" id="AVf-Ui-XP2"/>
                 <outlet property="fromMonikerImg" destination="c6z-Gm-cYP" id="XNk-bc-GOa"/>
                 <outlet property="fromMonikerLabel" destination="Vaa-lp-tpv" id="RtI-3j-cTW"/>
                 <outlet property="fromStakedLabel" destination="s8R-YL-3Pf" id="vVy-AY-E4l"/>
@@ -47,7 +48,8 @@
                 <outlet property="toCardView" destination="N3M-NJ-RMu" id="ZFp-hN-qot"/>
                 <outlet property="toCommLabel" destination="RtI-bg-VXU" id="f2A-AW-aTB"/>
                 <outlet property="toCommPercentLabel" destination="Y1h-l4-uuc" id="0E6-Li-TzL"/>
-                <outlet property="toJailedImg" destination="IzD-VR-oHJ" id="qCn-ey-SRc"/>
+                <outlet property="toInactiveTag" destination="IzD-VR-oHJ" id="cqA-DG-Sgr"/>
+                <outlet property="toJailedTag" destination="AfB-AF-mpK" id="M2h-cX-e7m"/>
                 <outlet property="toMonikerImg" destination="xrE-eA-kXd" id="aH2-DV-G6m"/>
                 <outlet property="toMonikerLabel" destination="di1-R4-34t" id="6O6-0t-EXs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -88,11 +90,18 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </imageView>
-                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jailedImg" translatesAutoresizingMaskIntoConstraints="NO" id="RwI-Om-k8H">
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconValidatorInactive" translatesAutoresizingMaskIntoConstraints="NO" id="RwI-Om-k8H">
                             <rect key="frame" x="12" y="34.000000000000014" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="6qv-qU-lyr"/>
                                 <constraint firstAttribute="height" constant="40" id="gnG-yt-Bsd"/>
+                            </constraints>
+                        </imageView>
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconValidatorJailed" translatesAutoresizingMaskIntoConstraints="NO" id="1g4-bC-0Tw">
+                            <rect key="frame" x="12" y="34.000000000000014" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="Aub-4P-dbX"/>
+                                <constraint firstAttribute="height" constant="40" id="fOw-hA-mZR"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vaa-lp-tpv">
@@ -138,7 +147,9 @@
                         <constraint firstItem="c6z-Gm-cYP" firstAttribute="top" secondItem="kaC-8P-uEg" secondAttribute="top" constant="34" id="gow-7X-Olg"/>
                         <constraint firstAttribute="trailing" secondItem="w2k-e4-iXp" secondAttribute="trailing" constant="16" id="iw1-FH-k0v"/>
                         <constraint firstItem="Vaa-lp-tpv" firstAttribute="leading" secondItem="c6z-Gm-cYP" secondAttribute="trailing" constant="12" id="jHH-x9-ucb"/>
+                        <constraint firstItem="1g4-bC-0Tw" firstAttribute="centerX" secondItem="c6z-Gm-cYP" secondAttribute="centerX" id="kWf-cr-vX1"/>
                         <constraint firstItem="RwI-Om-k8H" firstAttribute="centerY" secondItem="c6z-Gm-cYP" secondAttribute="centerY" id="kwe-cw-AGK"/>
+                        <constraint firstItem="1g4-bC-0Tw" firstAttribute="centerY" secondItem="c6z-Gm-cYP" secondAttribute="centerY" id="psD-RL-ZJ2"/>
                         <constraint firstItem="RwI-Om-k8H" firstAttribute="centerX" secondItem="c6z-Gm-cYP" secondAttribute="centerX" id="rZp-3W-IXS"/>
                         <constraint firstItem="Oew-z7-XDa" firstAttribute="centerY" secondItem="s8R-YL-3Pf" secondAttribute="centerY" id="yZb-7H-wRh"/>
                     </constraints>
@@ -167,11 +178,18 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </imageView>
-                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jailedImg" translatesAutoresizingMaskIntoConstraints="NO" id="IzD-VR-oHJ">
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconValidatorInactive" translatesAutoresizingMaskIntoConstraints="NO" id="IzD-VR-oHJ">
                             <rect key="frame" x="12" y="34" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="3Gt-L7-q0W"/>
                                 <constraint firstAttribute="height" constant="40" id="hrP-5g-7bj"/>
+                            </constraints>
+                        </imageView>
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconValidatorJailed" translatesAutoresizingMaskIntoConstraints="NO" id="AfB-AF-mpK">
+                            <rect key="frame" x="12" y="34" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="PlS-kq-ta9"/>
+                                <constraint firstAttribute="width" constant="40" id="g0h-dE-yhX"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="di1-R4-34t">
@@ -222,12 +240,14 @@
                         <constraint firstItem="5FL-CT-qGS" firstAttribute="leading" secondItem="Y1h-l4-uuc" secondAttribute="trailing" constant="16" id="add-nr-SEm"/>
                         <constraint firstItem="6Dy-bY-98l" firstAttribute="leading" secondItem="di1-R4-34t" secondAttribute="leading" id="anT-wE-EiC"/>
                         <constraint firstAttribute="height" constant="88" id="daq-7n-1JN"/>
+                        <constraint firstItem="AfB-AF-mpK" firstAttribute="centerX" secondItem="xrE-eA-kXd" secondAttribute="centerX" id="e3M-91-j2b"/>
                         <constraint firstItem="Y1h-l4-uuc" firstAttribute="centerY" secondItem="RtI-bg-VXU" secondAttribute="centerY" constant="1" id="f6h-G4-oyz"/>
                         <constraint firstItem="6Dy-bY-98l" firstAttribute="centerY" secondItem="RtI-bg-VXU" secondAttribute="centerY" id="jw7-0N-ZFH"/>
                         <constraint firstItem="5t9-Wb-UIQ" firstAttribute="top" secondItem="N3M-NJ-RMu" secondAttribute="top" constant="14" id="pYg-E8-Sug"/>
                         <constraint firstItem="IzD-VR-oHJ" firstAttribute="centerY" secondItem="xrE-eA-kXd" secondAttribute="centerY" id="qZp-pc-u3s"/>
                         <constraint firstItem="Y1h-l4-uuc" firstAttribute="leading" secondItem="RtI-bg-VXU" secondAttribute="trailing" constant="2" id="uht-uc-Kox"/>
                         <constraint firstItem="di1-R4-34t" firstAttribute="leading" secondItem="xrE-eA-kXd" secondAttribute="trailing" constant="12" id="z02-S5-iEH"/>
+                        <constraint firstItem="AfB-AF-mpK" firstAttribute="centerY" secondItem="xrE-eA-kXd" secondAttribute="centerY" id="zqw-Gx-SYy"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NsS-aG-eMb" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
@@ -504,7 +524,8 @@
     </objects>
     <resources>
         <image name="iconArrowDown" width="24" height="24"/>
-        <image name="jailedImg" width="44" height="44"/>
+        <image name="iconValidatorInactive" width="40" height="40"/>
+        <image name="iconValidatorJailed" width="40" height="40"/>
         <image name="tokenDefault" width="22" height="22"/>
         <image name="validatorDefault" width="40" height="40"/>
         <namedColor name="_color01">
