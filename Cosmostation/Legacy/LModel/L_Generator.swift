@@ -25,6 +25,39 @@ class L_Generator {
         return result
     }
     
+    static func oktDepositMsg(_ delegator: String, _ amount: L_Coin) -> L_Msg {
+        var value = L_Value.init()
+        value.delegator_address = delegator
+        value.quantity = amount
+        
+        var result = L_Msg.init()
+        result.type = "okexchain/staking/MsgDeposit"
+        result.value = value
+        return result
+    }
+    
+    static func oktWithdrawMsg(_ delegator: String, _ amount: L_Coin) -> L_Msg {
+        var value = L_Value.init()
+        value.delegator_address = delegator
+        value.quantity = amount
+        
+        var result = L_Msg.init()
+        result.type = "okexchain/staking/MsgWithdraw"
+        result.value = value
+        return result
+    }
+    
+    static func oktAddShareMsg(_ delegator: String, _ toVals: Array<String>) -> L_Msg {
+        var value = L_Value.init()
+        value.delegator_address = delegator
+        value.validator_addresses = toVals
+        
+        var result = L_Msg.init()
+        result.type = "okexchain/staking/MsgAddShares"
+        result.value = value
+        return result
+    }
+    
     
     static func postData(_ msgs: [L_Msg], _ fee: L_Fee, _ memo: String, _ baseChain: CosmosClass) -> Data {
         guard let oktChain = baseChain as? ChainOkt60Keccak else {

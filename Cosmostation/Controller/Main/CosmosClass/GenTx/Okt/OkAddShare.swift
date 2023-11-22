@@ -9,6 +9,8 @@
 import UIKit
 
 class OkAddShare: BaseVC {
+    
+    var selectedChain: CosmosClass!
 
     override func viewDidLoad() {
         super.viewDidLoad()

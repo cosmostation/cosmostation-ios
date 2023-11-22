@@ -198,6 +198,27 @@ class CosmosClassVC: BaseVC {
         self.navigationController?.pushViewController(stakingInfoVC, animated: true)
     }
     
+    func onOkDepositTx() {
+        let okDeposit = OkDeposit(nibName: "OkDeposit", bundle: nil)
+        okDeposit.selectedChain = selectedChain
+        okDeposit.modalTransitionStyle = .coverVertical
+        self.present(okDeposit, animated: true)
+    }
+    
+    func onOkWithdrawTx() {
+        let okWithdraw = OkWithdraw(nibName: "OkWithdraw", bundle: nil)
+        okWithdraw.selectedChain = selectedChain
+        okWithdraw.modalTransitionStyle = .coverVertical
+        self.present(okWithdraw, animated: true)
+    }
+    
+    func onOkAddShareTx() {
+        let okAddShare = OkAddShare(nibName: "OkAddShare", bundle: nil)
+        okAddShare.selectedChain = selectedChain
+        okAddShare.modalTransitionStyle = .coverVertical
+        self.present(okAddShare, animated: true)
+    }
+    
     func onSetTabbarView() {
         let coinTabBar = UITabBarItem(title: "Coins", image: nil, tag: 0)
         let tokenTabBar = UITabBarItem(title: "Tokens", image: nil, tag: 1)
@@ -261,6 +282,17 @@ class CosmosClassVC: BaseVC {
         } else if (selectedChain is ChainKava118 || selectedChain is ChainKava459) {
             mainFab.addItem(title: "DeFi", image: UIImage(named: "iconFabDefi")) { _ in
                 self.onKavaDefi()
+            }
+            
+        } else if (selectedChain is ChainOkt60Keccak) {
+            mainFab.addItem(title: "Select Validators", image: UIImage(named: "iconFabDefi")) { _ in
+                self.onOkAddShareTx()
+            }
+            mainFab.addItem(title: "Withdraw", image: UIImage(named: "iconFabDefi")) { _ in
+                self.onOkWithdrawTx()
+            }
+            mainFab.addItem(title: "Deposit", image: UIImage(named: "iconFabDefi")) { _ in
+                self.onOkDepositTx()
             }
         }
         

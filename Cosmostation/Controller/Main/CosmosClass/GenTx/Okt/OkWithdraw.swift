@@ -40,11 +40,173 @@ class OkWithdraw: BaseVC {
     
     @IBOutlet weak var withdrawBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
+    
+    var selectedChain: CosmosClass!
+    var stakeDenom: String!
+    var tokenInfo: JSON!
+    var availableAmount = NSDecimalNumber.zero
+    var toWithdrawAmount = NSDecimalNumber.zero
+    var txMemo = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        baseAccount = BaseData.instance.baseAccount
+        stakeDenom = selectedChain.stakeDenom
+        
+        if let okChain = selectedChain as? ChainOkt60Keccak {
+            tokenInfo = okChain.lcdOktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
+            let original_symbol = tokenInfo["original_symbol"].stringValue
+            toWithdrawAssetImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(original_symbol))
+            toWithdrawSymbolLabel.text = original_symbol.uppercased()
+            
+            let available = okChain.lcdOktDepositAmount()
+            availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
+        }
+        
+        toWithdrawAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
+        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
+        
+        onUpdateFeeView()
+    }
+    
+    override func setLocalizedString() {
+        titleLabel.text = NSLocalizedString("str_withdraw", comment: "")
+        toWithdrawAssetHint.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
+        memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+        withdrawBtn.setTitle(NSLocalizedString("str_withdraw", comment: ""), for: .normal)
+    }
+    
+    @objc func onClickAmount() {
+        let amountSheet = TxAmountLegacySheet(nibName: "TxAmountLegacySheet", bundle: nil)
+        amountSheet.selectedChain = selectedChain
+        amountSheet.tokenInfo = tokenInfo
+        amountSheet.availableAmount = availableAmount
+        if (toWithdrawAmount != NSDecimalNumber.zero) {
+            amountSheet.existedAmount = toWithdrawAmount
+        }
+        amountSheet.sheetDelegate = self
+        self.onStartSheet(amountSheet)
+    }
+    
+    func onUpdateAmountView(_ amount: String?) {
+        toWithdrawAssetHint.isHidden = false
+        toWithdrawAmountLabel.isHidden = true
+        toWithdrawDenomLabel.isHidden = true
+        toWithdrawCurrencyLabel.isHidden = true
+        toWithdrawValueLabel.isHidden = true
+        
+        if (amount?.isEmpty == true) {
+            toWithdrawAmount = NSDecimalNumber.zero
+            
+        } else {
+            toWithdrawAmount = NSDecimalNumber(string: amount)
+            toWithdrawDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
+            toWithdrawAmountLabel?.attributedText = WDP.dpAmount(toWithdrawAmount.stringValue, toWithdrawAmountLabel!.font, 18)
+            toWithdrawAssetHint.isHidden = true
+            toWithdrawAmountLabel.isHidden = false
+            toWithdrawDenomLabel.isHidden = false
+            
+            let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
+            let toSendValue = msPrice.multiplying(by: toWithdrawAmount, withBehavior: handler6)
+            WDP.dpValue(toSendValue, toWithdrawCurrencyLabel, toWithdrawValueLabel)
+            toWithdrawCurrencyLabel.isHidden = false
+            toWithdrawValueLabel.isHidden = false
+            
+        }
+        onValidate()
+    }
+    
+    @objc func onClickMemo() {
+        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
+        memoSheet.existedMemo = txMemo
+        memoSheet.memoDelegate = self
+        self.onStartSheet(memoSheet, 260)
+    }
+    
+    func onUpdateMemoView(_ memo: String) {
+        txMemo = memo
+        if (txMemo.isEmpty) {
+            memoLabel.isHidden = true
+            memoHintLabel.isHidden = false
+        } else {
+            memoLabel.text = txMemo
+            memoLabel.isHidden = false
+            memoHintLabel.isHidden = true
+        }
+    }
+    
+    func onUpdateFeeView() {
+        feeSelectImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(stakeDenom))
+        feeSelectLabel.text = stakeDenom.uppercased()
+        
+        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
+        let feeAmount = NSDecimalNumber(string: OKT_BASE_FEE)
+        let feeValue = msPrice.multiplying(by: feeAmount, withBehavior: handler6)
+        feeAmountLabel?.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 18)
+        feeDenomLabel.text = stakeDenom.uppercased()
+        WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
     }
 
     @IBAction func onClickWithdraw(_ sender: UIButton) {
+        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+        self.present(pinVC, animated: true)
+    }
+    
+    func onValidate() {
+        withdrawBtn.isEnabled = false
+        if (toWithdrawAmount == NSDecimalNumber.zero ) { return }
+        if (txMemo.count > 300) { return }
+        withdrawBtn.isEnabled = true
+    }
+}
+
+extension OkWithdraw: LegacyAmountSheetDelegate, MemoDelegate, PinDelegate {
+    func onInputedAmount(_ amount: String) {
+        onUpdateAmountView(amount)
+    }
+    
+    func onInputedMemo(_ memo: String) {
+        onUpdateMemoView(memo)
+    }
+    
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
+        if (result == .success) {
+            view.isUserInteractionEnabled = false
+            withdrawBtn.isEnabled = false
+            loadingView.isHidden = false
+            
+            Task {
+                if let response = try? await broadcastOktWithdrawTx() {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        print("response ", response)
+                        self.loadingView.isHidden = true
+                        
+                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                        txResult.selectedChain = self.selectedChain
+                        txResult.legacyResult = response
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                        
+                    });
+                }
+            }
+        }
+    }
+}
+
+extension OkWithdraw {
+    
+    func broadcastOktWithdrawTx() async throws -> JSON? {
+        
+        let depositCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(toWithdrawAmount, 18))
+        let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(NSDecimalNumber(string: OKT_BASE_FEE), 18))
+        let fee = L_Fee(BASE_GAS_AMOUNT, [gasCoin])
+        
+        let okMsg = L_Generator.oktWithdrawMsg(selectedChain.bechAddress, depositCoin)
+        let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
+        let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
+        
+        return try? await AF.request(BaseNetWork.broadcastUrl(self.selectedChain), method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
 }
