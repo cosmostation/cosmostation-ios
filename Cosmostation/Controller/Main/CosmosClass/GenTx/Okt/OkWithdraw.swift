@@ -41,12 +41,15 @@ class OkWithdraw: BaseVC {
     @IBOutlet weak var withdrawBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: ChainOkt60Keccak!
     var stakeDenom: String!
     var tokenInfo: JSON!
     var availableAmount = NSDecimalNumber.zero
     var toWithdrawAmount = NSDecimalNumber.zero
     var txMemo = ""
+    
+    var gasAmount = NSDecimalNumber(string: BASE_GAS_AMOUNT)
+    var gasFee = NSDecimalNumber(string: OKT_BASE_FEE)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,15 +57,11 @@ class OkWithdraw: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         stakeDenom = selectedChain.stakeDenom
         
-        if let okChain = selectedChain as? ChainOkt60Keccak {
-            tokenInfo = okChain.lcdOktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
-            let original_symbol = tokenInfo["original_symbol"].stringValue
-            toWithdrawAssetImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(original_symbol))
-            toWithdrawSymbolLabel.text = original_symbol.uppercased()
-            
-            let available = okChain.lcdOktDepositAmount()
-            availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
-        }
+        tokenInfo = selectedChain.lcdOktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
+        let original_symbol = tokenInfo["original_symbol"].stringValue
+        toWithdrawAssetImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(original_symbol))
+        toWithdrawSymbolLabel.text = original_symbol.uppercased()
+        availableAmount = selectedChain.lcdOktDepositAmount()
         
         toWithdrawAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
@@ -140,10 +139,22 @@ class OkWithdraw: BaseVC {
         feeSelectImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(stakeDenom))
         feeSelectLabel.text = stakeDenom.uppercased()
         
+        let existCnt = selectedChain.lcdOktDeposits["validator_address"].arrayValue.count
+        
+        
+        gasAmount = NSDecimalNumber(string: BASE_GAS_AMOUNT)
+        gasFee = NSDecimalNumber(string: OKT_BASE_FEE)
+        if (existCnt > 10) {
+            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "3"))
+            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "3"))
+        } else if (existCnt > 20) {
+            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "4"))
+            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "4"))
+        }
+        
         let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
-        let feeAmount = NSDecimalNumber(string: OKT_BASE_FEE)
-        let feeValue = msPrice.multiplying(by: feeAmount, withBehavior: handler6)
-        feeAmountLabel?.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 18)
+        let feeValue = msPrice.multiplying(by: gasFee, withBehavior: handler6)
+        feeAmountLabel?.attributedText = WDP.dpAmount(gasFee.stringValue, feeAmountLabel!.font, 18)
         feeDenomLabel.text = stakeDenom.uppercased()
         WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
     }
@@ -198,12 +209,11 @@ extension OkWithdraw: LegacyAmountSheetDelegate, MemoDelegate, PinDelegate {
 extension OkWithdraw {
     
     func broadcastOktWithdrawTx() async throws -> JSON? {
+        let withdrawCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(toWithdrawAmount, 18))
+        let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(gasFee, 18))
+        let fee = L_Fee(gasAmount.stringValue, [gasCoin])
         
-        let depositCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(toWithdrawAmount, 18))
-        let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(NSDecimalNumber(string: OKT_BASE_FEE), 18))
-        let fee = L_Fee(BASE_GAS_AMOUNT, [gasCoin])
-        
-        let okMsg = L_Generator.oktWithdrawMsg(selectedChain.bechAddress, depositCoin)
+        let okMsg = L_Generator.oktWithdrawMsg(selectedChain.bechAddress, withdrawCoin)
         let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
         let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
         

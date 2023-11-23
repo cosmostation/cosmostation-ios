@@ -306,6 +306,18 @@
 		04527DC22A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04527DBE2A937CC1005F72D7 /* AssetCosmosClassCell.xib */; };
 		04527DC52A938FC9005F72D7 /* CosmosClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */; };
 		04527DC62A938FC9005F72D7 /* CosmosClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */; };
+		046BF1C02B0F259C00BC1FC8 /* OktValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BF1BE2B0F259C00BC1FC8 /* OktValidatorCell.swift */; };
+		046BF1C12B0F259C00BC1FC8 /* OktValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BF1BE2B0F259C00BC1FC8 /* OktValidatorCell.swift */; };
+		046BF1C22B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BF1BF2B0F259C00BC1FC8 /* OktValidatorCell.xib */; };
+		046BF1C32B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BF1BF2B0F259C00BC1FC8 /* OktValidatorCell.xib */; };
+		046BF1C62B0F443100BC1FC8 /* OktSelectValidatorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BF1C42B0F443100BC1FC8 /* OktSelectValidatorSheet.swift */; };
+		046BF1C72B0F443100BC1FC8 /* OktSelectValidatorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BF1C42B0F443100BC1FC8 /* OktSelectValidatorSheet.swift */; };
+		046BF1C82B0F443100BC1FC8 /* OktSelectValidatorSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BF1C52B0F443100BC1FC8 /* OktSelectValidatorSheet.xib */; };
+		046BF1C92B0F443100BC1FC8 /* OktSelectValidatorSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BF1C52B0F443100BC1FC8 /* OktSelectValidatorSheet.xib */; };
+		046BF1CC2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BF1CA2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift */; };
+		046BF1CD2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BF1CA2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift */; };
+		046BF1CE2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BF1CB2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib */; };
+		046BF1CF2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BF1CB2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib */; };
 		046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9036268C3F29002CFFE1 /* BinanceMessage.swift */; };
 		046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9038268C3F95002CFFE1 /* BinanceModel.swift */; };
 		046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903A268C401E002CFFE1 /* BinanceType.swift */; };
@@ -1829,6 +1841,12 @@
 		04527DBD2A937CC1005F72D7 /* AssetCosmosClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCosmosClassCell.swift; sourceTree = "<group>"; };
 		04527DBE2A937CC1005F72D7 /* AssetCosmosClassCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCosmosClassCell.xib; sourceTree = "<group>"; };
 		04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClassVC.swift; sourceTree = "<group>"; };
+		046BF1BE2B0F259C00BC1FC8 /* OktValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktValidatorCell.swift; sourceTree = "<group>"; };
+		046BF1BF2B0F259C00BC1FC8 /* OktValidatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OktValidatorCell.xib; sourceTree = "<group>"; };
+		046BF1C42B0F443100BC1FC8 /* OktSelectValidatorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktSelectValidatorSheet.swift; sourceTree = "<group>"; };
+		046BF1C52B0F443100BC1FC8 /* OktSelectValidatorSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OktSelectValidatorSheet.xib; sourceTree = "<group>"; };
+		046BF1CA2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOktValidatorCell.swift; sourceTree = "<group>"; };
+		046BF1CB2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectOktValidatorCell.xib; sourceTree = "<group>"; };
 		046E9036268C3F29002CFFE1 /* BinanceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceMessage.swift; sourceTree = "<group>"; };
 		046E9038268C3F95002CFFE1 /* BinanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceModel.swift; sourceTree = "<group>"; };
 		046E903A268C401E002CFFE1 /* BinanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceType.swift; sourceTree = "<group>"; };
@@ -3145,6 +3163,8 @@
 				04C940E52AF4DAAE00415256 /* DeleteAddressBookSheet.xib */,
 				04FEDB562B06012D0095B7B6 /* HdPathSheet.swift */,
 				04FEDB572B06012D0095B7B6 /* HdPathSheet.xib */,
+				046BF1C42B0F443100BC1FC8 /* OktSelectValidatorSheet.swift */,
+				046BF1C52B0F443100BC1FC8 /* OktSelectValidatorSheet.xib */,
 				042DE83E2AC4C518003F3EA4 /* TxMemoSheet.swift */,
 				042DE83F2AC4C518003F3EA4 /* TxMemoSheet.xib */,
 				04A1A8002AC80AA50014EF92 /* TxAmountSheet.swift */,
@@ -3198,6 +3218,8 @@
 				04CD247B2AD308C800497EF5 /* SelectBepRecipientCell.xib */,
 				E16200302AF0CFFD0008F397 /* SelectEndpointCell.swift */,
 				E16200312AF0CFFD0008F397 /* SelectEndpointCell.xib */,
+				046BF1CA2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift */,
+				046BF1CB2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib */,
 			);
 			path = SheetCell;
 			sourceTree = "<group>";
@@ -3551,6 +3573,8 @@
 				E1CD6AF92AEAAEDC00376909 /* AboutRewardAddressCell.xib */,
 				E1CD6AFE2AEAAEF200376909 /* AboutSocialsCell.swift */,
 				E1CD6AFF2AEAAEF200376909 /* AboutSocialsCell.xib */,
+				046BF1BE2B0F259C00BC1FC8 /* OktValidatorCell.swift */,
+				046BF1BF2B0F259C00BC1FC8 /* OktValidatorCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -3945,6 +3969,7 @@
 				04C6B9C82AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */,
 				04527DC22A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
 				04CD24662AD2E2D500497EF5 /* Bep3Transfer.xib in Resources */,
+				046BF1CF2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib in Resources */,
 				040732FE2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */,
 				E122DC6A2A8DBD3B006D1E7B /* BaseHeader.xib in Resources */,
 				E1E0DBC92A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
@@ -3967,6 +3992,7 @@
 				04FA74882AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
 				E15F2D0D2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */,
 				04C940B42AE8D48C00415256 /* aes.js in Resources */,
+				046BF1C32B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */,
 				04FAD9EB2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */,
 				04FAD9E52AB6D8ED00143A3E /* ChainListVC.xib in Resources */,
 				0400EF262ADD4737007BA97F /* KavaSwapListVC.xib in Resources */,
@@ -4032,6 +4058,7 @@
 				04F048D82AFCD34A002A809D /* basebg06.png in Resources */,
 				E12E9D272AE2B49900336449 /* KavaMintCreateAction.xib in Resources */,
 				0400EF322ADD48E8007BA97F /* KavaSwapListCell.xib in Resources */,
+				046BF1C92B0F443100BC1FC8 /* OktSelectValidatorSheet.xib in Resources */,
 				E11EAE182AAD879A003BFC7F /* SettingSwitchCell.xib in Resources */,
 				04FA74822AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */,
 				E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */,
@@ -4075,6 +4102,7 @@
 				040733052AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
 				040732FD2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */,
 				047842E02AC8963100462F1C /* CosmosUndelegate.xib in Resources */,
+				046BF1C82B0F443100BC1FC8 /* OktSelectValidatorSheet.xib in Resources */,
 				04FA74872AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
 				04A68C312AC13A560041FA13 /* CosmosProposalsVC.xib in Resources */,
 				04CD24552AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */,
@@ -4100,6 +4128,7 @@
 				04FC656A2B0C8EA7008F2110 /* OkAddShare.xib in Resources */,
 				1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */,
 				04CD24652AD2E2D500497EF5 /* Bep3Transfer.xib in Resources */,
+				046BF1CE2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib in Resources */,
 				04A68C372AC156AA0041FA13 /* CosmosProposalCell.xib in Resources */,
 				04FA74812AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */,
 				E1CD6AFC2AEAAEDC00376909 /* AboutRewardAddressCell.xib in Resources */,
@@ -4175,6 +4204,7 @@
 				0409D2F72AC5DC6D0021E192 /* CosmosDelegate.xib in Resources */,
 				04B789E72ACB140900E9BE88 /* SelectNameServiceCell.xib in Resources */,
 				E12E9D2F2AE415D900336449 /* loadingSmall.json in Resources */,
+				046BF1C22B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */,
 				E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
 				04CD24842AD312BD00497EF5 /* TxAmountBepSheet.xib in Resources */,
 				04B789F32ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,
@@ -4390,6 +4420,7 @@
 				E11EAE102AAD8786003BFC7F /* SettingBaseCell.swift in Sources */,
 				E122DB762A8A468D006D1E7B /* cosmos_app_v1alpha1_module.pb.swift in Sources */,
 				04B789922ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */,
+				046BF1CD2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift in Sources */,
 				044ECB302A95E1C90042DB3C /* ChainSommelier.swift in Sources */,
 				047843B42AC991B300462F1C /* injective_peggy_v1_proposal.pb.swift in Sources */,
 				0400EE962AD7E99B007BA97F /* NeutronPrpposalsVC.swift in Sources */,
@@ -4456,6 +4487,7 @@
 				0400EF0A2ADBF03B007BA97F /* kava_hard_v1beta1_tx.pb.swift in Sources */,
 				047843F72AC9A23000462F1C /* ChainBitcana.swift in Sources */,
 				046EA8B62AD04A2600A2FCE7 /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */,
+				046BF1C12B0F259C00BC1FC8 /* OktValidatorCell.swift in Sources */,
 				04CD24832AD312BD00497EF5 /* TxAmountBepSheet.swift in Sources */,
 				0402B83D2ACC850400824B3F /* ChainSecret118.swift in Sources */,
 				046EA8B22AD04A2600A2FCE7 /* desmos_profiles_v3_query_profile.pb.swift in Sources */,
@@ -4803,6 +4835,7 @@
 				0478431C2AC9918700462F1C /* ethermint_feemarket_v1_tx.grpc.swift in Sources */,
 				E122DC5B2A8A4712006D1E7B /* tendermint_types_types.pb.swift in Sources */,
 				046EA8BA2AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */,
+				046BF1C72B0F443100BC1FC8 /* OktSelectValidatorSheet.swift in Sources */,
 				040733042AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */,
 				04B789962ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */,
 				047843922AC991B300462F1C /* injective_oracle_v1beta1_query.pb.swift in Sources */,
@@ -5075,6 +5108,7 @@
 				E11EAE0F2AAD8786003BFC7F /* SettingBaseCell.swift in Sources */,
 				E122DB752A8A468D006D1E7B /* cosmos_app_v1alpha1_module.pb.swift in Sources */,
 				04B789912ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */,
+				046BF1CC2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift in Sources */,
 				044ECB2F2A95E1C90042DB3C /* ChainSommelier.swift in Sources */,
 				047843B32AC991B300462F1C /* injective_peggy_v1_proposal.pb.swift in Sources */,
 				0400EE952AD7E99B007BA97F /* NeutronPrpposalsVC.swift in Sources */,
@@ -5141,6 +5175,7 @@
 				046EA8F32AD04A2600A2FCE7 /* desmos_profiles_v2_models_profile.pb.swift in Sources */,
 				E15F2D0A2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */,
 				0400EF092ADBF03B007BA97F /* kava_hard_v1beta1_tx.pb.swift in Sources */,
+				046BF1C02B0F259C00BC1FC8 /* OktValidatorCell.swift in Sources */,
 				047843F62AC9A23000462F1C /* ChainBitcana.swift in Sources */,
 				046EA8B52AD04A2600A2FCE7 /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */,
 				04CD24822AD312BD00497EF5 /* TxAmountBepSheet.swift in Sources */,
@@ -5488,6 +5523,7 @@
 				046EA86D2AD04A2500A2FCE7 /* desmos_profiles_v3_query_chain_links.pb.swift in Sources */,
 				0478431B2AC9918700462F1C /* ethermint_feemarket_v1_tx.grpc.swift in Sources */,
 				E122DC5A2A8A4712006D1E7B /* tendermint_types_types.pb.swift in Sources */,
+				046BF1C62B0F443100BC1FC8 /* OktSelectValidatorSheet.swift in Sources */,
 				046EA8B92AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */,
 				040733032AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */,
 				04B789952ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */,

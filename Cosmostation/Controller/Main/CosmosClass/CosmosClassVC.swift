@@ -68,6 +68,10 @@ class CosmosClassVC: BaseVC {
             selectedChain.fetchStakeData()
         }
         
+        if (selectedChain is ChainOkt60Keccak) {
+            (selectedChain as? ChainOkt60Keccak)?.fetchValidators()
+        }
+        
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
         addressTap.cancelsTouchesInView = false
         addressLayer.addGestureRecognizer(addressTap)
@@ -200,21 +204,21 @@ class CosmosClassVC: BaseVC {
     
     func onOkDepositTx() {
         let okDeposit = OkDeposit(nibName: "OkDeposit", bundle: nil)
-        okDeposit.selectedChain = selectedChain
+        okDeposit.selectedChain = selectedChain as? ChainOkt60Keccak
         okDeposit.modalTransitionStyle = .coverVertical
         self.present(okDeposit, animated: true)
     }
     
     func onOkWithdrawTx() {
         let okWithdraw = OkWithdraw(nibName: "OkWithdraw", bundle: nil)
-        okWithdraw.selectedChain = selectedChain
+        okWithdraw.selectedChain = selectedChain as? ChainOkt60Keccak
         okWithdraw.modalTransitionStyle = .coverVertical
         self.present(okWithdraw, animated: true)
     }
     
     func onOkAddShareTx() {
         let okAddShare = OkAddShare(nibName: "OkAddShare", bundle: nil)
-        okAddShare.selectedChain = selectedChain
+        okAddShare.selectedChain = selectedChain as? ChainOkt60Keccak
         okAddShare.modalTransitionStyle = .coverVertical
         self.present(okAddShare, animated: true)
     }
