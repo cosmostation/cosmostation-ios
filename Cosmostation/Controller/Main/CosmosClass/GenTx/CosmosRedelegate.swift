@@ -19,13 +19,15 @@ class CosmosRedelegate: BaseVC {
     
     @IBOutlet weak var fromCardView: FixCardView!
     @IBOutlet weak var fromMonikerImg: UIImageView!
-    @IBOutlet weak var fromJailedImg: UIImageView!
+    @IBOutlet weak var fromInactiveTag: UIImageView!
+    @IBOutlet weak var fromJailedTag: UIImageView!
     @IBOutlet weak var fromMonikerLabel: UILabel!
     @IBOutlet weak var fromStakedLabel: UILabel!
     
     @IBOutlet weak var toCardView: FixCardView!
     @IBOutlet weak var toMonikerImg: UIImageView!
-    @IBOutlet weak var toJailedImg: UIImageView!
+    @IBOutlet weak var toInactiveTag: UIImageView!
+    @IBOutlet weak var toJailedTag: UIImageView!
     @IBOutlet weak var toMonikerLabel: UILabel!
     @IBOutlet weak var toCommLabel: UILabel!
     @IBOutlet weak var toCommPercentLabel: UILabel!
@@ -127,7 +129,11 @@ class CosmosRedelegate: BaseVC {
         fromMonikerImg.image = UIImage(named: "validatorDefault")
         fromMonikerImg.af.setImage(withURL: selectedChain.monikerImg(fromValidator!.operatorAddress))
         fromMonikerLabel.text = fromValidator!.description_p.moniker
-        fromJailedImg.isHidden = !fromValidator!.jailed
+        if (fromValidator!.jailed) {
+            fromJailedTag.isHidden = false
+        } else {
+            fromInactiveTag.isHidden = fromValidator!.status == .bonded
+        }
         
         let stakeDenom = selectedChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
@@ -151,7 +157,11 @@ class CosmosRedelegate: BaseVC {
         toMonikerImg.image = UIImage(named: "validatorDefault")
         toMonikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
         toMonikerLabel.text = toValidator!.description_p.moniker
-        toJailedImg.isHidden = !toValidator!.jailed
+        if (toValidator!.jailed) {
+            toJailedTag.isHidden = false
+        } else {
+            toInactiveTag.isHidden = toValidator!.status == .bonded
+        }
         
         let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
         toCommLabel?.attributedText = WDP.dpAmount(commission.stringValue, toCommLabel!.font, 2)
@@ -340,7 +350,7 @@ extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
                 let channel = getConnection()
                 if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                    let response = try await broadcastTx(channel, auth!) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         
                         let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

@@ -156,7 +156,7 @@ extension KavaSwapListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
         if (sheetType == .SelectSwpAction) {
             if let swpName = result["swpName"] as? String,
                let index = result["index"] as? Int {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     if (index == 0) {
                         self.onDepositSwpTx(swpName)
                     } else if (index == 1) {

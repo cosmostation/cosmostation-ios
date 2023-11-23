@@ -686,7 +686,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             let channel = getConnection()
             if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                let response = try await broadcastSendTx(channel, auth!, onBindSend()) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -707,7 +707,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             let channel = getConnection()
             if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                let response = try await broadcastCw20SendTx(channel, auth!, onBindCw20Send()) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -732,7 +732,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                let ibcClient = try? await fetchIbcClient(channel),
                let lastBlock = try? await fetchLastBlock(recipientChannel),
                let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(ibcClient!, lastBlock!)) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -753,7 +753,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             let channel = getConnection()
             if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                let response = try await broadcastCw20IbcSendTx(channel, auth!, onBindCw20IbcSend()) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     
                     let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

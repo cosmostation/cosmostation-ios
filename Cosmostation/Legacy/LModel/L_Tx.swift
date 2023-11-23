@@ -17,6 +17,9 @@ public struct L_Value: Codable {
     var from_address: String?
     var to_address: String?
     var amount: [L_Coin]?
+    var delegator_address: String?
+    var validator_addresses: Array<String>?
+    var quantity: L_Coin?
 }
 
 public struct L_Coin: Codable {

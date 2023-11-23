@@ -68,6 +68,10 @@ class CosmosClassVC: BaseVC {
             selectedChain.fetchStakeData()
         }
         
+        if (selectedChain is ChainOkt60Keccak) {
+            (selectedChain as? ChainOkt60Keccak)?.fetchValidators()
+        }
+        
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
         addressTap.cancelsTouchesInView = false
         addressLayer.addGestureRecognizer(addressTap)
@@ -198,6 +202,27 @@ class CosmosClassVC: BaseVC {
         self.navigationController?.pushViewController(stakingInfoVC, animated: true)
     }
     
+    func onOkDepositTx() {
+        let okDeposit = OkDeposit(nibName: "OkDeposit", bundle: nil)
+        okDeposit.selectedChain = selectedChain as? ChainOkt60Keccak
+        okDeposit.modalTransitionStyle = .coverVertical
+        self.present(okDeposit, animated: true)
+    }
+    
+    func onOkWithdrawTx() {
+        let okWithdraw = OkWithdraw(nibName: "OkWithdraw", bundle: nil)
+        okWithdraw.selectedChain = selectedChain as? ChainOkt60Keccak
+        okWithdraw.modalTransitionStyle = .coverVertical
+        self.present(okWithdraw, animated: true)
+    }
+    
+    func onOkAddShareTx() {
+        let okAddShare = OkAddShare(nibName: "OkAddShare", bundle: nil)
+        okAddShare.selectedChain = selectedChain as? ChainOkt60Keccak
+        okAddShare.modalTransitionStyle = .coverVertical
+        self.present(okAddShare, animated: true)
+    }
+    
     func onSetTabbarView() {
         let coinTabBar = UITabBarItem(title: "Coins", image: nil, tag: 0)
         let tokenTabBar = UITabBarItem(title: "Tokens", image: nil, tag: 1)
@@ -261,6 +286,17 @@ class CosmosClassVC: BaseVC {
         } else if (selectedChain is ChainKava118 || selectedChain is ChainKava459) {
             mainFab.addItem(title: "DeFi", image: UIImage(named: "iconFabDefi")) { _ in
                 self.onKavaDefi()
+            }
+            
+        } else if (selectedChain is ChainOkt60Keccak) {
+            mainFab.addItem(title: "Select Validators", image: UIImage(named: "iconFabDefi")) { _ in
+                self.onOkAddShareTx()
+            }
+            mainFab.addItem(title: "Withdraw", image: UIImage(named: "iconFabDefi")) { _ in
+                self.onOkWithdrawTx()
+            }
+            mainFab.addItem(title: "Deposit", image: UIImage(named: "iconFabDefi")) { _ in
+                self.onOkDepositTx()
             }
         }
         
@@ -345,7 +381,7 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectNeutronVault) {
             if let index = result["index"] as? Int {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     if (index == 0) {
                         self.onNeutronVaultDeposit()
                     } else if (index == 1) {

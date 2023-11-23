@@ -31,7 +31,7 @@ class ImportMnemonicVC: BaseVC, UITextViewDelegate, PinDelegate {
     
     func onCheckPinCodeInited() {
         view.isUserInteractionEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
             let keychain = BaseData.instance.getKeyChain()
             if let pincode = try? keychain.getString("password"), pincode?.isEmpty == false {
                 let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
@@ -48,7 +48,7 @@ class ImportMnemonicVC: BaseVC, UITextViewDelegate, PinDelegate {
         if (result == .success) {
             view.isUserInteractionEnabled = true
         } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                 self.navigationController?.popViewController(animated: true)
             });
         }

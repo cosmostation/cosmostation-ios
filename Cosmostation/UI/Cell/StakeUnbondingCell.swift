@@ -14,7 +14,8 @@ class StakeUnbondingCell: UITableViewCell {
     
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg: UIImageView!
-    @IBOutlet weak var jailedImg: UIImageView!
+    @IBOutlet weak var inactiveTag: UIImageView!
+    @IBOutlet weak var jailedTag: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var finishGapLabel: UILabel!
     @IBOutlet weak var finishTimeLabel: UILabel!
@@ -31,13 +32,19 @@ class StakeUnbondingCell: UITableViewCell {
         rootView.setBlur()
         logoImg.af.cancelImageRequest()
         logoImg.image = UIImage(named: "validatorDefault")
+        inactiveTag.isHidden = true
+        jailedTag.isHidden = true
     }
     
     func onBindMyUnbonding(_ baseChain: CosmosClass, _ validator: Cosmos_Staking_V1beta1_Validator, _ unbonding: UnbondingEntry) {
         
         logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
         nameLabel.text = validator.description_p.moniker
-        jailedImg.isHidden = !validator.jailed
+        if (validator.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            inactiveTag.isHidden = validator.status == .bonded
+        }
         
         let stakeDenom = baseChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {

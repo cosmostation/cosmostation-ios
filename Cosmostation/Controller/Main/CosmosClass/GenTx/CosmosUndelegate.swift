@@ -19,7 +19,8 @@ class CosmosUndelegate: BaseVC {
     
     @IBOutlet weak var validatorCardView: FixCardView!
     @IBOutlet weak var monikerImg: UIImageView!
-    @IBOutlet weak var jailedImg: UIImageView!
+    @IBOutlet weak var inactiveTag: UIImageView!
+    @IBOutlet weak var jailedTag: UIImageView!
     @IBOutlet weak var monikerLabel: UILabel!
     @IBOutlet weak var stakedLabel: UILabel!
     
@@ -110,7 +111,11 @@ class CosmosUndelegate: BaseVC {
         monikerImg.image = UIImage(named: "validatorDefault")
         monikerImg.af.setImage(withURL: selectedChain.monikerImg(fromValidator!.operatorAddress))
         monikerLabel.text = fromValidator!.description_p.moniker
-        jailedImg.isHidden = !fromValidator!.jailed
+        if (fromValidator!.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            inactiveTag.isHidden = fromValidator!.status == .bonded
+        }
         
         let stakeDenom = selectedChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
@@ -295,7 +300,7 @@ extension CosmosUndelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
                 let channel = getConnection()
                 if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
                    let response = try await broadcastTx(channel, auth!) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         
                         let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

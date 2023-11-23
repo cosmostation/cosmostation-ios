@@ -41,11 +41,18 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jailedImg" translatesAutoresizingMaskIntoConstraints="NO" id="OiQ-uj-Xjt">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconValidatorInactive" translatesAutoresizingMaskIntoConstraints="NO" id="OiQ-uj-Xjt">
                                 <rect key="frame" x="16" y="14" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="1TQ-if-6GR"/>
                                     <constraint firstAttribute="height" constant="40" id="UL5-Fg-n6L"/>
+                                </constraints>
+                            </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconValidatorJailed" translatesAutoresizingMaskIntoConstraints="NO" id="g6Y-WS-Wef">
+                                <rect key="frame" x="16" y="14" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="8Cb-IR-Szh"/>
+                                    <constraint firstAttribute="height" constant="40" id="rRy-LE-ip9"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haF-lh-o1R">
@@ -172,6 +179,8 @@
                             <constraint firstItem="d9T-0n-dBs" firstAttribute="top" secondItem="XLx-kQ-fWj" secondAttribute="bottom" constant="14" id="lHc-aB-oNi"/>
                             <constraint firstItem="OiQ-uj-Xjt" firstAttribute="centerY" secondItem="6EU-7C-FIC" secondAttribute="centerY" id="mII-Cz-zqi"/>
                             <constraint firstItem="XLx-kQ-fWj" firstAttribute="top" secondItem="6EU-7C-FIC" secondAttribute="bottom" constant="14" id="mPP-0I-Eex"/>
+                            <constraint firstItem="g6Y-WS-Wef" firstAttribute="centerX" secondItem="6EU-7C-FIC" secondAttribute="centerX" id="mzp-Q9-ips"/>
+                            <constraint firstItem="g6Y-WS-Wef" firstAttribute="centerY" secondItem="6EU-7C-FIC" secondAttribute="centerY" id="nBx-1P-sg1"/>
                             <constraint firstAttribute="trailing" secondItem="XLx-kQ-fWj" secondAttribute="trailing" constant="14" id="pHq-0e-ym3"/>
                             <constraint firstItem="OiQ-uj-Xjt" firstAttribute="centerX" secondItem="6EU-7C-FIC" secondAttribute="centerX" id="rQo-My-kPf"/>
                             <constraint firstItem="XLx-kQ-fWj" firstAttribute="leading" secondItem="oPB-jM-OzH" secondAttribute="leading" constant="14" id="rix-fL-4ql"/>
@@ -192,7 +201,8 @@
             <connections>
                 <outlet property="commLabel" destination="8rY-mF-njK" id="tVU-lR-iO5"/>
                 <outlet property="commPercentLabel" destination="oF3-1v-R8d" id="B2J-an-nBt"/>
-                <outlet property="jailedImg" destination="OiQ-uj-Xjt" id="MQy-7b-DMG"/>
+                <outlet property="inactiveTag" destination="OiQ-uj-Xjt" id="Dhy-4m-6WE"/>
+                <outlet property="jailedTag" destination="g6Y-WS-Wef" id="neu-9e-Aw2"/>
                 <outlet property="logoImg" destination="6EU-7C-FIC" id="CLV-da-I42"/>
                 <outlet property="nameLabel" destination="haF-lh-o1R" id="Dia-Fs-7lc"/>
                 <outlet property="rewardLabel" destination="eU2-D9-d1o" id="CeR-X6-rTS"/>
@@ -206,7 +216,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="jailedImg" width="44" height="44"/>
+        <image name="iconValidatorInactive" width="40" height="40"/>
+        <image name="iconValidatorJailed" width="40" height="40"/>
         <image name="validatorDefault" width="40" height="40"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

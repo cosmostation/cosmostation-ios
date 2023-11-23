@@ -244,7 +244,7 @@ extension KavaLendListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
         if (sheetType == .SelectHardAction) {
             if let denom = result["denom"] as? String,
                let index = result["index"] as? Int {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     if (index == 0) {
                         self.onDepositHardTx(denom)
                     } else if (index == 1) {

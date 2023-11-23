@@ -58,7 +58,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="m/118/0/0/1" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dN5-og-xjh">
                                                 <rect key="frame" x="0.0" y="0.0" width="73" height="14"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="UEr-rp-crV"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="130" id="UEr-rp-crV"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_color02"/>

@@ -14,7 +14,8 @@ class StakeDelegateCell: UITableViewCell {
     
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg: UIImageView!
-    @IBOutlet weak var jailedImg: UIImageView!
+    @IBOutlet weak var inactiveTag: UIImageView!
+    @IBOutlet weak var jailedTag: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var vpTitle: UILabel!
     @IBOutlet weak var vpLabel: UILabel!
@@ -42,7 +43,11 @@ class StakeDelegateCell: UITableViewCell {
         
         logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
         nameLabel.text = validator.description_p.moniker
-        jailedImg.isHidden = !validator.jailed
+        if (validator.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            inactiveTag.isHidden = validator.status == .bonded
+        }
         
         let stakeDenom = baseChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {

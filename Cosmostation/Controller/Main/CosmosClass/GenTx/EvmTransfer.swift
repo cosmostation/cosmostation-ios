@@ -279,7 +279,7 @@ extension EvmTransfer: AmountSheetDelegate, AddressDelegate, PinDelegate {
                 try? ethereumTransaction!.sign(privateKey: selectedChain.privateKey!)
                 
                 if let result = try? web3.eth.sendRawTransaction(ethereumTransaction!) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         
                         let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

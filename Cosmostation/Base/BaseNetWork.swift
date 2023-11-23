@@ -222,8 +222,13 @@ extension BaseNetWork {
     static func lcdOktWithdrawUrl(_ address: String) -> String {
         return OKT_LCD + "staking/delegators/" + address + "/unbonding_delegations"
     }
+    
     static func lcdOktTokenUrl() -> String {
         return OKT_LCD + "tokens"
+    }
+    
+    static func lcdOktValidatorsUrl() -> String {
+        return OKT_LCD + "staking/validators"
     }
     
     static func broadcastUrl(_ chain: BaseChain) -> String {
