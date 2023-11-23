@@ -464,7 +464,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         routeReq["dest_asset_chain_id"].stringValue = outputCosmosChain.chainId
         routeReq["dest_asset_denom"].stringValue = outputMsAsset.denom!
         routeReq["cumulative_affiliate_fee_bps"] = "100"
-        routeReq["client_id"] = "cosmostation"
+        routeReq["client_id"] = "cosmostation_ios"
         return routeReq
     }
     
@@ -485,7 +485,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         msgReq["dest_asset_chain_id"] = route["dest_asset_chain_id"]
         msgReq["dest_asset_denom"] = route["dest_asset_denom"]
         msgReq["operations"] = route["operations"]
-        msgReq["client_id"] = "cosmostation"
+        msgReq["client_id"] = "cosmostation_ios"
         if let affiliate = getAffiliate(route["swap_venue"])  {
             msgReq["affiliates"].arrayObject = affiliate
         }
