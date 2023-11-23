@@ -129,6 +129,9 @@ class AssetCosmosClassCell: UITableViewCell {
     
     func bindOktAsset(_ baseChain: CosmosClass) {
         if let oktChain = baseChain as? ChainOkt60Keccak {
+            stakingTitle.text = "Deposited"
+            unstakingTitle.text = "Withdrawing"
+            
             let stakeDenom = baseChain.stakeDenom!
             let value = baseChain.allValue()
             coinImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(stakeDenom))

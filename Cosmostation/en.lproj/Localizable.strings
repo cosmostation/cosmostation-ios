@@ -292,6 +292,8 @@
 "str_cancle_unstake" = "Cancel Unstake";
 "str_do_not_show_7_days" = "Don't show 7days";
 "str_restore_wallets" = "Restore Wallets";
+"str_deposit" = "Deposit";
+"str_withdraw" = "Withdraw";
 
 
 "btn_delegate" = "  Delegate";
@@ -684,8 +686,6 @@
 "buy_select_fiat_msg" = "Please select a currency to make a purchase.";
 "permission_photo_title" = "Need Permission for Photo Library. Please enable with Settings";
 "tx_next" = "Next";
-"str_deposit" = "  Deposit %@";
-"str_withdraw" = "  Withdraw %@";
 "str_cannot_repay_partially" = "Cannot repay partially";
 "str_cannot_repay_all" = "Insufficient %@ to repay all";
 "str_no_more_3day" = "Hide 3 days";

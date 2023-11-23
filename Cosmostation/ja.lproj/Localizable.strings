@@ -292,6 +292,8 @@
 "str_cancle_unstake" = "アンステーキ解除";
 "str_do_not_show_7_days" = "7日間表示しない";
 "str_restore_wallets" = "財布の復元";
+"str_deposit" = "預金";
+"str_withdraw" = "出金";
 
 
 "btn_delegate" = "  委任する";
@@ -684,8 +686,6 @@
 "buy_select_fiat_msg" = "購入する通貨を選択してください。";
 "permission_photo_title" = "写真権限がありません。「設定」＞「権限」から活性化させてください。";
 "tx_next" = "次";
-"str_deposit" = "  %@ 入金";
-"str_withdraw" = "  %@ 出金";
 "str_cannot_repay_partially" = "一部返済不可";
 "str_cannot_repay_all" = "%@ が不足しているため、すべてを返済できません";
 "str_no_more_3day" = "3日間隠す";

@@ -18,6 +18,7 @@ class ChainOkt60Keccak: CosmosClass  {
     lazy var lcdOktDeposits = JSON()
     lazy var lcdOktWithdaws = JSON()
     lazy var lcdOktTokens = Array<JSON>()
+    lazy var lcdOktValidators = Array<JSON>()
     
     override init() {
         super.init()
@@ -27,7 +28,7 @@ class ChainOkt60Keccak: CosmosClass  {
         tag = "okt60_Keccak"
         logo1 = "chainOkt"
         logo2 = "chainOkt2"
-        apiName = ""
+        apiName = "okc"
         stakeDenom = "okt"
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
@@ -95,12 +96,36 @@ extension ChainOkt60Keccak {
             self.allCoinValue = self.allCoinValue()
             self.allCoinUSDValue = self.allCoinValue(true)
             
-            let refAddress =
             BaseData.instance.updateRefAddressesMain(
                 RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                            nil, self.lcdAccountInfo.oktCoins?.count))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+        }
+    }
+    
+    func fetchValidators() {
+        let group = DispatchGroup()
+        fetchOktValdators(group)
+        
+        group.notify(queue: .main) {
+            self.lcdOktValidators.sort {
+                if ($0["description"]["moniker"].stringValue == "Cosmostation") {
+                    return true
+                }
+                if ($1["description"]["moniker"].stringValue == "Cosmostation"){
+                    return false
+                }
+                if ($0["jailed"].boolValue && !$1["jailed"].boolValue) {
+                    return false
+                }
+                if (!$0["jailed"].boolValue && $1["jailed"].boolValue) {
+                    return true
+                }
+                return $0["delegator_shares"].doubleValue > $1["delegator_shares"].doubleValue
+            }
+            
+            NotificationCenter.default.post(name: Notification.Name("FetchStakeData"), object: self.tag, userInfo: nil)
         }
     }
     
@@ -160,7 +185,6 @@ extension ChainOkt60Keccak {
                 switch response.result {
                 case .success(let value):
                     self.lcdOktWithdaws = value
-//                    print("fetchOktWithdraw ", value)
                 case .failure:
                     print("fetchOktWithdraw error")
                 }
@@ -169,7 +193,6 @@ extension ChainOkt60Keccak {
     }
     
     func fetchOktTokens(_ group: DispatchGroup) {
-//        print("fetchOktTokens Start ", BaseNetWork.lcdOktTokenUrl())
         group.enter()
         AF.request(BaseNetWork.lcdOktTokenUrl(), method: .get)
             .responseDecodable(of: JSON.self) { response in
@@ -178,10 +201,26 @@ extension ChainOkt60Keccak {
                     values["data"].array?.forEach({ value in
                         self.lcdOktTokens.append(value)
                     })
-//                    print("lcdOktTokens : ", self.lcdOktTokens.count)
                     
                 case .failure:
                     print("fetchOktTokens error")
+                }
+                group.leave()
+            }
+    }
+    
+    func fetchOktValdators(_ group: DispatchGroup) {
+        group.enter()
+        AF.request(BaseNetWork.lcdOktValidatorsUrl(), method: .get, parameters: ["status":"all"])
+            .responseDecodable(of: [JSON].self) { response in
+                switch response.result {
+                case .success(let values):
+                    self.lcdOktValidators.removeAll()
+                    values.forEach { validator in
+                        self.lcdOktValidators.append(validator)
+                    }
+                case .failure:
+                    print("fetchOktValdators error")
                 }
                 group.leave()
             }

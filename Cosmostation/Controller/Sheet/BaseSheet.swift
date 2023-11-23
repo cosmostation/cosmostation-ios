@@ -33,6 +33,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var unbondingEnrtyPosition: Int?
     var cosmosChainList = Array<CosmosClass>()
     var nameservices = Array<NameService>()
+    var oktValidators = [JSON]()
     
     var senderAddress: String!
     var refAddresses = Array<RefAddress>()
