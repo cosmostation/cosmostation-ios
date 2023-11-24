@@ -477,7 +477,7 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
     }
      
     func reloadRows(_ indexPath : IndexPath) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
             self.tableView.beginUpdates()
             self.tableView.reloadRows(at: [indexPath], with: .none)
             self.tableView.endUpdates()

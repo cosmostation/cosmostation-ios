@@ -67,7 +67,7 @@ class CardViewCell: UIView {
     
     
     func setBlur() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
             self.animator.stopAnimation(true)
             self.animator.addAnimations {
                 self.blurView.effect = nil
