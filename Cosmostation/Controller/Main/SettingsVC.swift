@@ -471,6 +471,7 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
             let importMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
             importMnemonicCheckVC.mnemonic = mnemonic
+            importMnemonicCheckVC.hidesBottomBarWhenPushed = true
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
         });
