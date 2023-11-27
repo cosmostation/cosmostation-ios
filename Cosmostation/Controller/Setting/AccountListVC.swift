@@ -147,10 +147,10 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                         self.onShowRenameSheet(result["account"] as! BaseAccount)
                         
                     } else if (index == 1) {
-                        self.onCheckPinforMnemonic(result["account"] as! BaseAccount)
+                        self.onCheckPinforPrivateKey(result["account"] as! BaseAccount)
                         
                     } else if (index == 2) {
-                        self.onCheckPinforPrivateKey(result["account"] as! BaseAccount)
+                        self.onShowDeleteSheet(result["account"] as! BaseAccount)
                     }
                 });
             }
@@ -172,7 +172,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
             if (request == .ForDeleteAccount) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     BaseData.instance.deleteAccount(self.toDeleteAccount!)
                     if (BaseData.instance.baseAccount?.id == self.toDeleteAccount?.id) {
                         self.onStartIntro()
@@ -185,7 +185,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                 });
                 
             } else if (request == .ForCheckMnemonic) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     let checkMenmonicVC = CheckMenmonicVC(nibName: "CheckMenmonicVC", bundle: nil)
                     checkMenmonicVC.toCheckAccount = self.toCheckAccount
                     self.navigationItem.title = ""
@@ -193,7 +193,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                 });
                 
             } else if (request == .ForCheckPrivateKeys) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     let checkPrivateKeysVC = CheckPrivateKeysVC(nibName: "CheckPrivateKeysVC", bundle: nil)
                     checkPrivateKeysVC.toCheckAccount = self.toCheckAccount
                     self.navigationItem.title = ""
@@ -201,7 +201,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                 });
                 
             } else if (request == .ForCheckPrivateKey) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     let checkPrivateKeyVC = CheckPrivateKeyVC(nibName: "CheckPrivateKeyVC", bundle: nil)
                     checkPrivateKeyVC.toCheckAccount = self.toCheckAccount
                     self.navigationItem.title = ""

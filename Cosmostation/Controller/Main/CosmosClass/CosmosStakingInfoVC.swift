@@ -240,7 +240,8 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0) {
             view.titleLabel.text = NSLocalizedString("str_reward_address", comment: "")
-            view.cntLabel.text = ""
+            view.cntLabel.text = "(Changed)"
+            view.cntLabel.textColor = .colorPrimary
         } else if (section == 1) {
             view.titleLabel.text = NSLocalizedString("str_my_delegations", comment: "")
             view.cntLabel.text = String(delegations.count)
@@ -277,7 +278,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"StakeRewardAddressCell") as! StakeRewardAddressCell
-            cell.onBindRewardAddress(rewardAddress)
+            cell.onBindRewardAddress(selectedChain)
             return cell
             
         } else if (indexPath.section == 1) {

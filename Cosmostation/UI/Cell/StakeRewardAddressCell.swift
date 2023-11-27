@@ -23,8 +23,13 @@ class StakeRewardAddressCell: UITableViewCell {
         rootView.setBlur()
     }
     
-    func onBindRewardAddress(_ address: String?) {
-        rewardAddressLabel.text = address
+    func onBindRewardAddress(_ chain: CosmosClass) {
+        rewardAddressLabel.text = chain.rewardAddress
+        rewardAddressLabel.adjustsFontSizeToFitWidth = true
+        if (!chain.rewardAddress.isEmpty && chain.rewardAddress != chain.bechAddress) {
+            rootView.backgroundView.layer.borderWidth = 1
+            rootView.backgroundView.layer.borderColor = UIColor.colorPrimary.cgColor
+        }
     }
     
 }
