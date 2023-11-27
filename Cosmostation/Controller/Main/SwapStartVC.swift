@@ -709,7 +709,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                 if (index == 0) {
                     skipSlippage = "1"
                 } else if (index == 1) {
-                    skipSlippage = "2"
+                    skipSlippage = "3"
                 } else if (index == 2) {
                     skipSlippage = "5"
                 }
