@@ -217,8 +217,10 @@ extension BaseData {
                 table.column(BASEACCOUNT_NAME)
                 table.column(BASEACCOUNT_TYPE)
                 table.column(BASEACCOUNT_LAST_PATH)
+                table.column(BASEACCOUNT_ORDER)
             }
             try self.database.run(accountTable)
+            _ = try? self.database.run(TABLE_BASEACCOUNT.addColumn(BASEACCOUNT_ORDER, defaultValue: 999))
             
             let refAddressTable = TABLE_REFADDRESS.create(ifNotExists: true) { table in
                 table.column(REFADDRESS_ID, primaryKey: true)
@@ -249,15 +251,25 @@ extension BaseData {
     }
     
     //V2 version baseAccount
-    public func selectAccounts() -> Array<BaseAccount> {
-        var result = Array<BaseAccount>()
-        for row in try! database.prepare(TABLE_BASEACCOUNT) {
-            result.append(BaseAccount(row[BASEACCOUNT_ID], row[BASEACCOUNT_UUID], row[BASEACCOUNT_NAME], row[BASEACCOUNT_TYPE], row[BASEACCOUNT_LAST_PATH]))
-        }
+    public func selectAccounts() -> [BaseAccount] {
+        var result = [BaseAccount]()
+        result += selectAccounts(.withMnemonic)
+        result += selectAccounts(.onlyPrivateKey)
         return result
     }
     
-    
+    public func selectAccounts(_ type: BaseAccountType) -> [BaseAccount] {
+        var result = [BaseAccount]()
+        for row in try! database.prepare(TABLE_BASEACCOUNT) {
+            if (row[BASEACCOUNT_TYPE] == type.rawValue) {
+                result.append(BaseAccount(row[BASEACCOUNT_ID], row[BASEACCOUNT_UUID], row[BASEACCOUNT_NAME], row[BASEACCOUNT_TYPE], row[BASEACCOUNT_LAST_PATH], row[BASEACCOUNT_ORDER]))
+            }
+        }
+        result.sort {
+            return $0.order < $1.order
+        }
+        return result
+    }
     
     public func selectAccount(_ id: Int64) -> BaseAccount? {
         return selectAccounts().filter { $0.id == id }.first
@@ -268,14 +280,16 @@ extension BaseData {
         let toInsert = TABLE_BASEACCOUNT.insert(BASEACCOUNT_UUID <- account.uuid,
                                                 BASEACCOUNT_NAME <- account.name,
                                                 BASEACCOUNT_TYPE <- account.type.rawValue,
-                                                BASEACCOUNT_LAST_PATH <- account.lastHDPath)
+                                                BASEACCOUNT_LAST_PATH <- account.lastHDPath,
+                                                BASEACCOUNT_ORDER <- account.order)
         return try! database.run(toInsert)
     }
     
     @discardableResult
     public func updateAccount(_ account: BaseAccount) -> Int64 {
         let target = TABLE_BASEACCOUNT.filter(BASEACCOUNT_ID == account.id)
-        return try! Int64(database.run(target.update(BASEACCOUNT_NAME <- account.name)))
+        return try! Int64(database.run(target.update(BASEACCOUNT_NAME <- account.name,
+                                                     BASEACCOUNT_ORDER <- account.order)))
     }
     
     @discardableResult

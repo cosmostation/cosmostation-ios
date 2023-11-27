@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, DeleteDelegate {
-    
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addAccountBtn: BaseButton!
     
@@ -23,6 +24,9 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
+        tableView.dragInteractionEnabled = true
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "ManageAccountCell", bundle: nil), forCellReuseIdentifier: "ManageAccountCell")
         tableView.rowHeight = UITableView.automaticDimension
@@ -46,13 +50,8 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
     func updateAccountsData() {
         mnmonicAccounts.removeAll()
         pkeyAccounts.removeAll()
-        BaseData.instance.selectAccounts().forEach { account in
-            if (account.type == .withMnemonic) {
-                mnmonicAccounts.append(account)
-            } else if (account.type == .onlyPrivateKey) {
-                pkeyAccounts.append(account)
-            }
-        }
+        mnmonicAccounts = BaseData.instance.selectAccounts(.withMnemonic)
+        pkeyAccounts = BaseData.instance.selectAccounts(.onlyPrivateKey)
     }
 
     @IBAction func onClickNewAccount(_ sender: UIButton) {
@@ -104,7 +103,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectCreateAccount) {
             if let index = result["index"] as? Int {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     if (index == 0) {
                         let createMnemonicVC = CreateMnemonicVC(nibName: "CreateMnemonicVC", bundle: nil)
                         self.navigationItem.title = ""
@@ -119,6 +118,39 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                         let importPrivKeyVC = ImportPrivKeyVC(nibName: "ImportPrivKeyVC", bundle: nil)
                         self.navigationItem.title = ""
                         self.navigationController?.pushViewController(importPrivKeyVC, animated: true)
+                    }
+                });
+            }
+            
+        } else if (sheetType == .SelectOptionMnemonicAccount) {
+            if let index = result["index"] as? Int {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    if (index == 0) {
+                        self.onShowRenameSheet(result["account"] as! BaseAccount)
+                        
+                    } else if (index == 1) {
+                        self.onCheckPinforMnemonic(result["account"] as! BaseAccount)
+                        
+                    } else if (index == 2) {
+                        self.onCheckPinforPrivateKeys(result["account"] as! BaseAccount)
+                        
+                    } else if (index == 3) {
+                        self.onShowDeleteSheet(result["account"] as! BaseAccount)
+                    }
+                });
+            }
+            
+        } else if (sheetType == .SelectOptionPrivateKeyAccount) {
+            if let index = result["index"] as? Int {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    if (index == 0) {
+                        self.onShowRenameSheet(result["account"] as! BaseAccount)
+                        
+                    } else if (index == 1) {
+                        self.onCheckPinforMnemonic(result["account"] as! BaseAccount)
+                        
+                    } else if (index == 2) {
+                        self.onCheckPinforPrivateKey(result["account"] as! BaseAccount)
                     }
                 });
             }
@@ -186,7 +218,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
 }
 
 
-extension AccountListVC: UITableViewDelegate, UITableViewDataSource {
+extension AccountListVC: UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate  {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -226,82 +258,92 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"ManageAccountCell") as! ManageAccountCell
-        var account: BaseAccount!
-        if (indexPath.section == 0) { account = mnmonicAccounts[indexPath.row] }
-        else { account = pkeyAccounts[indexPath.row] }
-        cell.bindAccount(account)
-        cell.actionRename = {
-            self.onShowRenameSheet(account)
-        }
-        cell.actionDelete = {
-            self.onShowDeleteSheet(account)
-        }
-        cell.actionMnemonic = {
-            self.onCheckPinforMnemonic(account)
-        }
-        cell.actionPrivateKeys = {
-            self.onCheckPinforPrivateKeys(account)
-        }
-        cell.actionPrivateKey = {
-            self.onCheckPinforPrivateKey(account)
+        if (indexPath.section == 0) {
+            cell.bindAccount(mnmonicAccounts[indexPath.row])
+        } else {
+            cell.bindAccount(pkeyAccounts[indexPath.row])
         }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
-            let account = mnmonicAccounts[indexPath.row]
-            let rename = UIAction(title: NSLocalizedString("str_rename", comment: ""), image: nil) { _ in
-                self.onShowRenameSheet(account)
-            }
-            let delete = UIAction(title: NSLocalizedString("str_delete_account", comment: ""), image: nil) { _ in
-                self.onShowDeleteSheet(account)
-            }
-            let mnemonic = UIAction(title: NSLocalizedString("str_check_mnemonic", comment: ""), image: nil) { _ in
-                self.onCheckPinforMnemonic(account)
-            }
-            let privateKeys = UIAction(title: NSLocalizedString("str_check_each_private_keys", comment: ""), image: nil) { _ in
-                self.onCheckPinforPrivateKeys(account)
-            }
-            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: nil) { _ in
-                UIMenu(title: "", children: [rename, delete, mnemonic, privateKeys])
-            }
+            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+            baseSheet.sheetDelegate = self
+            baseSheet.selectedAccount = mnmonicAccounts[indexPath.row]
+            baseSheet.sheetType = .SelectOptionMnemonicAccount
+            onStartSheet(baseSheet)
             
         } else if (indexPath.section == 1) {
-            let account = pkeyAccounts[indexPath.row]
-            let rename = UIAction(title: NSLocalizedString("str_rename", comment: ""), image: nil) { _ in
-                self.onShowRenameSheet(account)
-            }
-            let delete = UIAction(title: NSLocalizedString("str_delete_account", comment: ""), image: nil) { _ in
-                self.onShowDeleteSheet(account)
-            }
-            let privateKey = UIAction(title: NSLocalizedString("str_check_private_key", comment: ""), image: nil) { _ in
-                self.onCheckPinforPrivateKey(account)
-            }
-            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: nil) { _ in
-                UIMenu(title: "", children: [rename, delete, privateKey])
-            }
+            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+            baseSheet.sheetDelegate = self
+            baseSheet.selectedAccount = pkeyAccounts[indexPath.row]
+            baseSheet.sheetType = .SelectOptionPrivateKeyAccount
+            onStartSheet(baseSheet)
         }
-        return nil
-    }
-
-    func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        return makeTargetedPreview(for: configuration)
-    }
-
-    func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        return makeTargetedPreview(for: configuration)
-    }
-
-    private func makeTargetedPreview(for configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        guard let indexPath = configuration.identifier as? IndexPath else { return nil }
-        guard let cell = tableView.cellForRow(at: indexPath) as? ManageAccountCell else { return nil }
-
-        let parameters = UIPreviewParameters()
-        parameters.backgroundColor = .clear
-        return UITargetedPreview(view: cell, parameters: parameters)
     }
     
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        if (indexPath.section == 0) {
+            let item = mnmonicAccounts[indexPath.row]
+            let itemProvider = NSItemProvider(object: StringProvider(string: String(item.id)))
+            let dragItem = UIDragItem(itemProvider: itemProvider)
+            dragItem.localObject = item
+            return [dragItem]
+            
+        } else {
+            let item = pkeyAccounts[indexPath.row]
+            let itemProvider = NSItemProvider(object: StringProvider(string: String(item.id)))
+            let dragItem = UIDragItem(itemProvider: itemProvider)
+            dragItem.localObject = item
+            return [dragItem]
+            
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        guard let destinationIndexPath = coordinator.destinationIndexPath,
+              let sourceIndexPath = coordinator.items[0].sourceIndexPath else {
+            return
+        }
+        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 0) {
+            let sourceItem = mnmonicAccounts[sourceIndexPath.row]
+            mnmonicAccounts.remove(at: sourceIndexPath.row)
+            mnmonicAccounts.insert(sourceItem, at: destinationIndexPath.row)
+            
+        } else if (sourceIndexPath.section == 1 && destinationIndexPath.section == 1) {
+            let sourceItem = pkeyAccounts[sourceIndexPath.row]
+            pkeyAccounts.remove(at: sourceIndexPath.row)
+            pkeyAccounts.insert(sourceItem, at: destinationIndexPath.row)
+        }
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            for i in 0..<self.mnmonicAccounts.count {
+                self.mnmonicAccounts[i].order = Int64(i)
+            }
+            
+            for i in 0..<self.pkeyAccounts.count {
+                self.pkeyAccounts[i].order = Int64(i)
+            }
+            self.mnmonicAccounts.forEach { account in
+                BaseData.instance.updateAccount(account)
+            }
+            self.pkeyAccounts.forEach { account in
+                BaseData.instance.updateAccount(account)
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        let parameters = UIDragPreviewParameters()
+        parameters.backgroundColor = .clear
+        return parameters
+    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {
@@ -323,5 +365,27 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource {
         mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
         mask.locations = [NSNumber(value: location), NSNumber(value: location)]
         return mask;
+    }
+}
+
+
+class StringProvider: NSObject, NSItemProviderWriting {
+    let string: String
+    init(string: String) {
+        self.string = string
+        super.init()
+    }
+
+    static var writableTypeIdentifiersForItemProvider: [String] {
+        return [(kUTTypeData) as String]
+    }
+
+    func loadData(
+        withTypeIdentifier typeIdentifier: String,
+        forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void
+    ) -> Progress? {
+        let data = string.data(using: .utf8)
+        completionHandler(data, nil)
+        return Progress(totalUnitCount: 100)
     }
 }
