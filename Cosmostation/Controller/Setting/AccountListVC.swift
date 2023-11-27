@@ -33,6 +33,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
         tableView.sectionHeaderTopPadding = 0.0
         
         updateAccountsData()
+        updateAccountsOrder()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,6 +46,21 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
     override func setLocalizedString() {
         navigationItem.title = NSLocalizedString("setting_account_title", comment: "")
         addAccountBtn.setTitle(NSLocalizedString("str_add_account", comment: ""), for: .normal)
+    }
+    
+    func updateAccountsOrder() {
+        for i in 0..<mnmonicAccounts.count {
+            mnmonicAccounts[i].order = Int64(i)
+        }
+        for i in 0..<self.pkeyAccounts.count {
+            pkeyAccounts[i].order = Int64(i) + 9000
+        }
+        mnmonicAccounts.forEach { account in
+            BaseData.instance.updateAccount(account)
+        }
+        pkeyAccounts.forEach { account in
+            BaseData.instance.updateAccount(account)
+        }
     }
     
     func updateAccountsData() {
@@ -323,19 +339,7 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource, UITableView
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
-            for i in 0..<self.mnmonicAccounts.count {
-                self.mnmonicAccounts[i].order = Int64(i)
-            }
-            
-            for i in 0..<self.pkeyAccounts.count {
-                self.pkeyAccounts[i].order = Int64(i)
-            }
-            self.mnmonicAccounts.forEach { account in
-                BaseData.instance.updateAccount(account)
-            }
-            self.pkeyAccounts.forEach { account in
-                BaseData.instance.updateAccount(account)
-            }
+            self.updateAccountsOrder()
         }
     }
     

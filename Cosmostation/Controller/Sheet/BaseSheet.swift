@@ -199,7 +199,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             refAddresses.sort {
                 if let account0 = BaseData.instance.selectAccount($0.accountId),
                    let account1 = BaseData.instance.selectAccount($1.accountId) {
-                    return account0.name < account1.name
+                    return account0.order < account1.order
                 }
                 return false
             }
@@ -221,7 +221,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             refAddresses.sort {
                 if let account0 = BaseData.instance.selectAccount($0.accountId),
                    let account1 = BaseData.instance.selectAccount($1.accountId) {
-                    return account0.name < account1.name
+                    return account0.order < account1.order
                 }
                 return false
             }
