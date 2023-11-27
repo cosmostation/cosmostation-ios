@@ -238,15 +238,18 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                     addressBookSheet.memo = memo
                     addressBookSheet.bookDelegate = self
                     self.onStartSheet(addressBookSheet, 420)
+                    return
                 }
-                
-            } else {
+            } 
+            
+            if (BaseData.instance.selectAllRefAddresses().filter { $0.bechAddress == recipinetAddress }.count == 0) {
                 let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
                 addressBookSheet.recipientChain = recipientChain
                 addressBookSheet.recipinetAddress = recipinetAddress
                 addressBookSheet.memo = memo
                 addressBookSheet.bookDelegate = self
                 self.onStartSheet(addressBookSheet, 420)
+                return
             }
         }
     }
