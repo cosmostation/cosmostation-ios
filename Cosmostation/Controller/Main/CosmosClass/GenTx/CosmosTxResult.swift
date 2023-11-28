@@ -260,7 +260,10 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
     
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
-        onStartMainTab()
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true) {
+            print("onClickConfirm dismissed.")
+            self.selectedChain.fetchData(self.baseAccount.id)
+        }
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
