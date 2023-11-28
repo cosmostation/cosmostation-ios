@@ -1104,6 +1104,7 @@
 "error_useless_end_point" = "使用できません。";
 "error_name" = "名前を正確に入力してください。";
 "error_not_support_cancel_unbonding" = "このチェーンはまだアンステーキングキャンセルをサポートしていません。";
+"error_wait_moment" = "しばらくお待ちください。 同期中です。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

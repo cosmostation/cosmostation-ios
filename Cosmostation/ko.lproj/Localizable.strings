@@ -1104,6 +1104,7 @@
 "error_useless_end_point" = "사용할 수 없습니다.";
 "error_name" = "이름을 정확히 입력하세요.";
 "error_not_support_cancel_unbonding" = "이 체인은 아직 언스테이킹 취소를 지원하지 않습니다.";
+"error_wait_moment" = "잠시만 기다려 주세요. 동기화중입니다.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";

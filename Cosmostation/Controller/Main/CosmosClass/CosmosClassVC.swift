@@ -210,6 +210,12 @@ class CosmosClassVC: BaseVC {
     }
     
     func onOkWithdrawTx() {
+        if let oktChain = selectedChain as? ChainOkt60Keccak {
+            if (oktChain.lcdOktDepositAmount().compare(NSDecimalNumber.zero).rawValue <= 0) {
+                self.onShowToast(NSLocalizedString("error_no_deposited_asset", comment: ""))
+                return
+            }
+        }
         let okWithdraw = OkWithdraw(nibName: "OkWithdraw", bundle: nil)
         okWithdraw.selectedChain = selectedChain as? ChainOkt60Keccak
         okWithdraw.modalTransitionStyle = .coverVertical
@@ -217,6 +223,12 @@ class CosmosClassVC: BaseVC {
     }
     
     func onOkAddShareTx() {
+        if let oktChain = selectedChain as? ChainOkt60Keccak {
+            if (oktChain.lcdOktDepositAmount().compare(NSDecimalNumber.zero).rawValue <= 0) {
+                self.onShowToast(NSLocalizedString("error_no_deposited_asset", comment: ""))
+                return
+            }
+        }
         let okAddShare = OkAddShare(nibName: "OkAddShare", bundle: nil)
         okAddShare.selectedChain = selectedChain as? ChainOkt60Keccak
         okAddShare.modalTransitionStyle = .coverVertical
@@ -289,14 +301,16 @@ class CosmosClassVC: BaseVC {
             }
             
         } else if (selectedChain is ChainOkt60Keccak) {
-            mainFab.addItem(title: "Select Validators", image: UIImage(named: "iconFabAddShare")) { _ in
-                self.onOkAddShareTx()
-            }
-            mainFab.addItem(title: "Withdraw", image: UIImage(named: "iconFabWithdraw")) { _ in
-                self.onOkWithdrawTx()
-            }
-            mainFab.addItem(title: "Deposit", image: UIImage(named: "iconFabDeposit")) { _ in
-                self.onOkDepositTx()
+            if let oktChain = selectedChain as? ChainOkt60Keccak {
+                mainFab.addItem(title: "Select Validators", image: UIImage(named: "iconFabAddShare")) { _ in
+                    self.onOkAddShareTx()
+                }
+                mainFab.addItem(title: "Withdraw", image: UIImage(named: "iconFabWithdraw")) { _ in
+                    self.onOkWithdrawTx()
+                }
+                mainFab.addItem(title: "Deposit", image: UIImage(named: "iconFabDeposit")) { _ in
+                    self.onOkDepositTx()
+                }
             }
         }
         
@@ -307,16 +321,22 @@ class CosmosClassVC: BaseVC {
             mainFab.addItem(title: "Compounding All", image: UIImage(named: "iconFabCompounding")) { _ in
                 if (self.selectedChain.cosmosValidators.count > 0) {
                     self.onClaimCompoundingTx()
+                } else {
+                    self.onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
                 }
             }
             mainFab.addItem(title: "Claim Reward All", image: UIImage(named: "iconFabClaim")) { _ in
                 if (self.selectedChain.cosmosValidators.count > 0) {
                     self.onClaimRewardTx()
+                } else {
+                    self.onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
                 }
             }
             mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in
                 if (self.selectedChain.cosmosValidators.count > 0) {
                     self.onStakeInfo()
+                } else {
+                    self.onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
                 }
             }
         }
