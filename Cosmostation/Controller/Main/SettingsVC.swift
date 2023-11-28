@@ -31,7 +31,7 @@ class SettingsVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         reloadRows(IndexPath(row: 0, section: 0))
-        reloadRows(IndexPath(row: 3, section: 0))
+        reloadRows(IndexPath(row: 4, section: 0))
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
     }
 }
