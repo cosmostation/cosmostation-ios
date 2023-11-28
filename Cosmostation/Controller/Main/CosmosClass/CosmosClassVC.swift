@@ -301,16 +301,14 @@ class CosmosClassVC: BaseVC {
             }
             
         } else if (selectedChain is ChainOkt60Keccak) {
-            if let oktChain = selectedChain as? ChainOkt60Keccak {
-                mainFab.addItem(title: "Select Validators", image: UIImage(named: "iconFabAddShare")) { _ in
-                    self.onOkAddShareTx()
-                }
-                mainFab.addItem(title: "Withdraw", image: UIImage(named: "iconFabWithdraw")) { _ in
-                    self.onOkWithdrawTx()
-                }
-                mainFab.addItem(title: "Deposit", image: UIImage(named: "iconFabDeposit")) { _ in
-                    self.onOkDepositTx()
-                }
+            mainFab.addItem(title: "Select Validators", image: UIImage(named: "iconFabAddShare")) { _ in
+                self.onOkAddShareTx()
+            }
+            mainFab.addItem(title: "Withdraw", image: UIImage(named: "iconFabWithdraw")) { _ in
+                self.onOkWithdrawTx()
+            }
+            mainFab.addItem(title: "Deposit", image: UIImage(named: "iconFabDeposit")) { _ in
+                self.onOkDepositTx()
             }
         }
         
