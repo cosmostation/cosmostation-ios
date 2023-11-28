@@ -104,7 +104,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
             
         } else {
             //new add mode
-            let chain = ALLCOSMOSCLASS().filter { addressInput!.starts(with: $0.bechAccountPrefix!) == true }.first
+            let chain = ALLCOSMOSCLASS().filter { addressInput!.starts(with: $0.bechAccountPrefix! + "1") == true }.first
             if (chain != nil) {
                 if (WUtils.isValidBechAddress(chain!, addressInput!)) {
                     let addressBook = AddressBook.init(nameInput!, chain!.name, addressInput!, memoInput, Date().millisecondsSince1970)

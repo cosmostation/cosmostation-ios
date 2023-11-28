@@ -178,7 +178,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             Task {
                 if let icns = try await checkOsmoname(userInput!, prefix) {
                     if let result = try? JSONDecoder().decode(JSON.self, from: icns.data) {
-                        if (result["bech32_address"].stringValue.starts(with: prefix)) {
+                        if (result["bech32_address"].stringValue.starts(with: prefix + "1")) {
                             nameservices.append(NameService.init("osmosis", userInput!, result["bech32_address"].stringValue))
                         }
                     }
@@ -186,7 +186,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
                 
                 if let stargaze = try await checkStargazename(userInput!) {
                     if let result = try? JSONDecoder().decode(JSON.self, from: stargaze.data) {
-                        if (result.stringValue.starts(with: prefix)) {
+                        if (result.stringValue.starts(with: prefix + "1")) {
                             nameservices.append(NameService.init("stargaze", userInput!, result.stringValue))
                         }
                     }
@@ -194,7 +194,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
                 
                 if let archway = try await checkArchwayname(userInput!) {
                     if let result = try? JSONDecoder().decode(JSON.self, from: archway.data) {
-                        if (result["address"].stringValue.starts(with: prefix)) {
+                        if (result["address"].stringValue.starts(with: prefix + "1")) {
                             nameservices.append(NameService.init("archway", userInput!, result["address"].stringValue))
                         }
                     }

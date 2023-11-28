@@ -191,7 +191,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectRecipientAddress) {
             sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
-                if (refAddress.bechAddress.starts(with: targetChain.bechAccountPrefix!) &&
+                if (refAddress.bechAddress.starts(with: targetChain.bechAccountPrefix! + "1") &&
                     refAddress.bechAddress != senderAddress) {
                     refAddresses.append(refAddress)
                 }
