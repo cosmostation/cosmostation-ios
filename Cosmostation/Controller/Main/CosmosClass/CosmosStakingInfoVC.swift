@@ -32,7 +32,6 @@ class CosmosStakingInfoVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         
-        tableView.isHidden = true
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
@@ -40,6 +39,7 @@ class CosmosStakingInfoVC: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -51,7 +51,7 @@ class CosmosStakingInfoVC: BaseVC {
         
         navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconRewardAddress"), style: .plain, target: self, action: #selector(onClickRewardAddressChange))
         
-        onFetchData()
+        onSetStakeData()
     }
     
     override func setLocalizedString() {
@@ -59,7 +59,24 @@ class CosmosStakingInfoVC: BaseVC {
         stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
     }
     
-    func onFetchData() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (selectedChain.tag == tag) {
+            onSetStakeData()
+        }
+    }
+    
+    func onSetStakeData() {
         Task {
             rewardAddress = selectedChain.rewardAddress
             validators = selectedChain.cosmosValidators

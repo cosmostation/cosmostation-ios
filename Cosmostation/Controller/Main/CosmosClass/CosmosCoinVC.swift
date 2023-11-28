@@ -185,7 +185,6 @@ class CosmosCoinVC: BaseVC {
     }
     
     func onStartLegacyTransferVC(_ denom: String) {
-        print("onStartLegacyTransferVC")
         let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
         transfer.selectedChain = selectedChain
         transfer.toSendDenom = denom
