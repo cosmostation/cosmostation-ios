@@ -47,6 +47,13 @@ class ServiceCell: UITableViewCell {
     
     func onBindService(_ position: Int) {
         if (position == 0) {
+            serviceImg.image = UIImage(named: "imgServiceMintscan")
+            
+            titleLabel.text = "MINTSCAN"
+            msgLabel.text = "Second generation blockchain analytics platform specialized in on-chain data visualization."
+            serviceListLabel.text = ""
+            
+        } else if (position == 1) {
             serviceImg.image = UIImage(named: "imgServiceSwap")
             tagskip.isHidden = false
             tagosmo.isHidden = false
@@ -57,7 +64,7 @@ class ServiceCell: UITableViewCell {
             serviceListLabel.text = "Supported APIs"
             
             
-        } else if (position == 1) {
+        } else if (position == 2) {
             serviceImg.image = UIImage(named: "imgServiceDapp")
             tagkava.isHidden = false
             tagneutron.isHidden = false
@@ -66,7 +73,7 @@ class ServiceCell: UITableViewCell {
             msgLabel.text = "Discover, Track & Trade Everything \nDeFi, NFT and Gaming"
             serviceListLabel.text = "Major dapps"
             
-        } else if (position == 2) {
+        } else if (position == 3) {
             serviceImg.image = UIImage(named: "imgServiceBuy")
             tagmoonpay.isHidden = false
             tagkado.isHidden = false

@@ -655,4 +655,23 @@ extension BaseData {
         let now = Date().millisecondsSince1970
         return last < now
     }
+    
+    func setInstallTime() {
+        var dayComponent = DateComponents()
+        dayComponent.day = 20
+        let theCalendar = Calendar.current
+        let nextDate = theCalendar.date(byAdding: dayComponent, to: Date())
+        let nextTime = nextDate?.millisecondsSince1970 ?? 0
+        UserDefaults.standard.set(String(nextTime), forKey: KEY_INSTALL_TIME)
+    }
+
+    func getInstallTime() -> Int64 {
+        return Int64(UserDefaults.standard.string(forKey: KEY_INSTALL_TIME) ?? "0")!
+    }
+    
+    func checkInstallTime() -> Bool {
+        let last = Int64(UserDefaults.standard.string(forKey: KEY_INSTALL_TIME) ?? "0")!
+        let now = Date().millisecondsSince1970
+        return last < now
+    }
 }

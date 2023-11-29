@@ -96,14 +96,18 @@ extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.row == 1 && BaseData.instance.reviewMode) {
-            return 0
+        if (indexPath.row == 0) {
+            return UITableView.automaticDimension
+        } else {
+            if (!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) {
+                return UITableView.automaticDimension
+            }
         }
-        return UITableView.automaticDimension
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -114,11 +118,15 @@ extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.row == 0) {
+            guard let url = URL(string: MintscanUrl) else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (indexPath.row == 1) {
             let swapStartVC = SwapStartVC(nibName: "SwapStartVC", bundle: nil)
             swapStartVC.modalTransitionStyle = .coverVertical
             self.present(swapStartVC, animated: true)
             
-        } else if (indexPath.row == 1) {
+        } else if (indexPath.row == 2) {
             let dappStartVC = DappStartVC(nibName: "DappStartVC", bundle: nil)
             dappStartVC.modalTransitionStyle = .coverVertical
             self.present(dappStartVC, animated: true)

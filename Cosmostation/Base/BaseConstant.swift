@@ -12,6 +12,7 @@ import SQLite
 let SUPPORT_BEP3_SWAP                   = true;
 
 //let KEY_RECENT_ACCOUNT                  = "KEY_RECENT_ACCOUNT"
+let KEY_INSTALL_TIME                    = "KEY_INSTALL_TIME"
 let KEY_RECENT_CHAIN                    = "KEY_RECENT_CHAIN"
 let KEY_RECENT_CHAIN_S                  = "KEY_RECENT_CHAIN_S"
 let KEY_ALL_VAL_SORT                    = "KEY_ALL_VAL_SORT"
