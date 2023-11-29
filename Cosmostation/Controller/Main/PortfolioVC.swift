@@ -134,11 +134,11 @@ class PortfolioVC: BaseVC {
     func onUpdateRow(_ tag: String) {
         for i in 0..<searchCosmosChains.count {
             if (searchCosmosChains[i].tag == tag) {
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
                     self.tableView.beginUpdates()
                     self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
                     self.tableView.endUpdates()
-                }
+                })
             }
         }
         onUpdateTotal()
