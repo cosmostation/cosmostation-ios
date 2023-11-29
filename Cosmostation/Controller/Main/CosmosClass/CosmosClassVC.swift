@@ -314,14 +314,14 @@ class CosmosClassVC: BaseVC {
             mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
                 self.onProposalList()
             }
-            mainFab.addItem(title: "Compounding All", image: UIImage(named: "iconFabCompounding")) { _ in
+            mainFab.addItem(title: "Compound All Rewards", image: UIImage(named: "iconFabCompounding")) { _ in
                 if (self.selectedChain.cosmosValidators.count > 0) {
                     self.onClaimCompoundingTx()
                 } else {
                     self.onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
                 }
             }
-            mainFab.addItem(title: "Claim Reward All", image: UIImage(named: "iconFabClaim")) { _ in
+            mainFab.addItem(title: "Claim All Rewards", image: UIImage(named: "iconFabClaim")) { _ in
                 if (self.selectedChain.cosmosValidators.count > 0) {
                     self.onClaimRewardTx()
                 } else {

@@ -35,7 +35,7 @@ class SettingSwitchCell: UITableViewCell {
     func onBindHideLegacy() {
         setImg.image = UIImage(named: "setHideLegacy")
         setTitleLabel.text = NSLocalizedString("setting_hide_legacy", comment: "")
-        selectSwitch.isOn = BaseData.instance.getHideLegacy()
+        selectSwitch.isOn = !BaseData.instance.getHideLegacy()
     }
     
     func onBindSetNotification() {

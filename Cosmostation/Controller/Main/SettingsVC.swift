@@ -109,8 +109,8 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 2) {
                 switchCell.onBindHideLegacy()
                 switchCell.actionToggle = { request in
-                    if (request != BaseData.instance.getHideLegacy()) {
-                        BaseData.instance.setHideLegacy(request)
+                    if (request == BaseData.instance.getHideLegacy()) {
+                        BaseData.instance.setHideLegacy(!request)
                         DispatchQueue.main.async(execute: {
                             self.hideWait()
                             self.onStartMainTab()
