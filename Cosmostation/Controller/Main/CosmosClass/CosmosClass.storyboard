@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -58,46 +58,46 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5w-hK-wYy" customClass="MDCTabBarView">
-                                <rect key="frame" x="8" y="155" width="377" height="42"/>
+                                <rect key="frame" x="8" y="151" width="377" height="48"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="ufE-z8-wM4"/>
+                                    <constraint firstAttribute="height" constant="48" id="ufE-z8-wM4"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdX-08-eE0">
-                                <rect key="frame" x="8" y="197" width="377" height="0.66666666666665719"/>
+                                <rect key="frame" x="8" y="199" width="377" height="0.66666666666665719"/>
                                 <color key="backgroundColor" white="1" alpha="0.20277954931972789" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="UgD-In-4H3"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1V7-Iu-EPt">
-                                <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
+                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="HxN-8c-YJG" kind="embed" identifier="embedHistoryVC" id="jJo-hB-wUK"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9R-os-Pfe">
-                                <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
+                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
                                 <connections>
                                     <segue destination="DVQ-I1-owb" kind="embed" identifier="embedNftVC" id="6Wk-zk-FDX"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AeT-wL-xQo">
-                                <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
+                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
                                 <connections>
                                     <segue destination="yyO-ei-xsW" kind="embed" identifier="embedTokenVC" id="wiH-Nb-UO2"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYD-Wc-AXb">
-                                <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
+                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
                                 <connections>
                                     <segue destination="EO6-oK-AmS" kind="embed" identifier="embedCoinVC" id="ZOz-Cm-L38"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s8b-hk-JN5">
-                                <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
+                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
                                 <connections>
                                     <segue destination="yoF-DC-PBK" kind="embed" identifier="embedAboutVC" id="tOj-SA-aCs"/>
                                 </connections>
@@ -109,7 +109,7 @@
                             <constraint firstItem="AeT-wL-xQo" firstAttribute="bottom" secondItem="vYD-Wc-AXb" secondAttribute="bottom" id="0Hz-n7-Xey"/>
                             <constraint firstItem="AeT-wL-xQo" firstAttribute="leading" secondItem="vYD-Wc-AXb" secondAttribute="leading" id="2Qf-LX-oQ8"/>
                             <constraint firstItem="0An-sf-Sxo" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="47f-ZP-RPP"/>
-                            <constraint firstItem="B5w-hK-wYy" firstAttribute="top" secondItem="0An-sf-Sxo" secondAttribute="bottom" constant="20" id="Fjz-ih-b7j"/>
+                            <constraint firstItem="B5w-hK-wYy" firstAttribute="top" secondItem="0An-sf-Sxo" secondAttribute="bottom" constant="16" id="Fjz-ih-b7j"/>
                             <constraint firstItem="B5w-hK-wYy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="Gmd-pE-4tI"/>
                             <constraint firstItem="fdX-08-eE0" firstAttribute="top" secondItem="B5w-hK-wYy" secondAttribute="bottom" id="KXG-Qi-buY"/>
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="LYC-Qm-hqh"/>

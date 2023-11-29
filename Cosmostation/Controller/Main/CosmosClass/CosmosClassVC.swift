@@ -255,10 +255,8 @@ class CosmosClassVC: BaseVC {
         tabbar.setTitleColor(.color02, for: .selected)
         tabbar.setSelectedItem(coinTabBar, animated: false)
         tabbar.tabBarDelegate = self
-        tabbar.bounces = false
-        tabbar.alwaysBounceVertical = false
-        tabbar.showsVerticalScrollIndicator = false
-        tabbar.preferredLayoutStyle = .fixedClusteredLeading
+        tabbar.preferredLayoutStyle = .fixed
+        tabbar.setContentPadding(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), for: .scrollable)
         
         coinList.alpha = 1
         tokenList.alpha = 0
