@@ -216,6 +216,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         swapBtn.isEnabled = false
         toggleBtn.isEnabled = true
         
+        view.isUserInteractionEnabled = true
         loadingView.isHidden = true
         txFee = getBaseFee()
 //        print("txFee ", txFee)
@@ -628,6 +629,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
         if (sheetType == .SelectSwapInputChain) {
             if let chainId = result["chainId"] as? String {
                 if (inputCosmosChain.chainId != chainId) {
+                    view.isUserInteractionEnabled = false
                     loadingView.isHidden = false
                     Task {
                         inputCosmosChain = skipChains.filter({ $0.chainId == chainId }).first!
@@ -660,6 +662,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
             if let chainId = result["chainId"] as? String {
                 if (outputCosmosChain.chainId != chainId) {
                     loadingView.isHidden = false
+                    view.isUserInteractionEnabled = false
                     Task {
                         outputCosmosChain = skipChains.filter({ $0.chainId == chainId }).first!
                         outputAssetList.removeAll()
@@ -720,8 +723,8 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
     
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
-            view.isUserInteractionEnabled = false
             swapBtn.isEnabled = false
+            view.isUserInteractionEnabled = false
             loadingView.isHidden = false
             
             let msgs = toMsg!["msgs"].arrayValue[0]
@@ -732,6 +735,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     if let auth = try? await fetchAuth(channel, inputCosmosChain.bechAddress),
                        let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(inner_mag!)) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                            self.view.isUserInteractionEnabled = true
                             self.loadingView.isHidden = true
                             
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -750,6 +754,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     if let auth = try? await fetchAuth(channel, inputCosmosChain.bechAddress),
                        let response = try await broadcastWasmTx(channel, auth!, onBindWasm(inner_mag!)) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                            self.view.isUserInteractionEnabled = true
                             self.loadingView.isHidden = true
                             
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
