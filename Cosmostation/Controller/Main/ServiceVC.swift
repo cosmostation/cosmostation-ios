@@ -100,14 +100,14 @@ extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if (indexPath.row == 0) {
+        if (indexPath.row == 0) {
             return UITableView.automaticDimension
-//        } else {
-//            if (!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) {
-//                return UITableView.automaticDimension
-//            }
-//        }
-//        return 0
+        } else {
+            if (!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) {
+                return UITableView.automaticDimension
+            }
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
