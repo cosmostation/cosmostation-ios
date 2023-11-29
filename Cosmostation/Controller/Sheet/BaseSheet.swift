@@ -42,6 +42,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var hardMarketDenom: String?
     var swpName: String?
     var cdpType: String?
+    
+    
+    var selectedAccount: BaseAccount?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +97,12 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     func updateTitle() {
         if (sheetType == .SelectCreateAccount) {
             sheetTitle.text = NSLocalizedString("title_create_account", comment: "")
+            
+        } else if (sheetType == .SelectOptionMnemonicAccount) {
+            sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
+            
+        } else if (sheetType == .SelectOptionPrivateKeyAccount) {
+            sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
             
         } else if (sheetType == .SwitchAccount) {
             sheetTitle.text = NSLocalizedString("title_select_account", comment: "")
@@ -182,7 +191,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectRecipientAddress) {
             sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
-                if (refAddress.bechAddress.starts(with: targetChain.bechAccountPrefix!) &&
+                if (refAddress.bechAddress.starts(with: targetChain.bechAccountPrefix! + "1") &&
                     refAddress.bechAddress != senderAddress) {
                     refAddresses.append(refAddress)
                 }
@@ -190,7 +199,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             refAddresses.sort {
                 if let account0 = BaseData.instance.selectAccount($0.accountId),
                    let account1 = BaseData.instance.selectAccount($1.accountId) {
-                    return account0.name < account1.name
+                    return account0.order < account1.order
                 }
                 return false
             }
@@ -212,7 +221,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             refAddresses.sort {
                 if let account0 = BaseData.instance.selectAccount($0.accountId),
                    let account1 = BaseData.instance.selectAccount($1.accountId) {
-                    return account0.name < account1.name
+                    return account0.order < account1.order
                 }
                 return false
             }
@@ -303,6 +312,12 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         if (sheetType == .SelectCreateAccount) {
             return 3
             
+        } else if (sheetType == .SelectOptionMnemonicAccount) {
+            return 4
+            
+        } else if (sheetType == .SelectOptionPrivateKeyAccount) {
+            return 3
+            
         } else if (sheetType == .SwitchAccount) {
             return BaseData.instance.selectAccounts().count
             
@@ -384,6 +399,16 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         if (sheetType == .SelectCreateAccount) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
             cell?.onBindCreate(indexPath.row)
+            return cell!
+            
+        } else if (sheetType == .SelectOptionMnemonicAccount) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindMnemonicAccount(indexPath.row)
+            return cell!
+            
+        } else if (sheetType == .SelectOptionPrivateKeyAccount) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindPrivateKeyAccount(indexPath.row)
             return cell!
             
         } else if (sheetType == .SwitchAccount) {
@@ -526,6 +551,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "accountId" : BaseData.instance.selectAccounts()[indexPath.row].id]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if (sheetType == .SelectOptionMnemonicAccount || sheetType == .SelectOptionPrivateKeyAccount) {
+            let result: [String : Any] = ["index" : indexPath.row, "account" : selectedAccount]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
         } else if (sheetType == .SwitchEndpoint) {
             let cell = sheetTableView.cellForRow(at: indexPath) as? SelectEndpointCell
             if (cell?.gapTime != nil) {
@@ -632,13 +661,15 @@ protocol BaseSheetDelegate {
 
 public enum SheetType: Int {
     case SelectCreateAccount = 0
+    case SelectOptionMnemonicAccount = 1
+    case SelectOptionPrivateKeyAccount = 2
     
-    case SwitchAccount = 1
-    case SwitchLanguage = 2
-    case SwitchCurrency = 3
-    case SwitchPriceColor = 4
-    case SwitchAutoPass = 5
-    case SwitchEndpoint = 6
+    case SwitchAccount = 11
+    case SwitchLanguage = 12
+    case SwitchCurrency = 13
+    case SwitchPriceColor = 14
+    case SwitchAutoPass = 15
+    case SwitchEndpoint = 16
     
     case SelectSwapInputChain = 21
     case SelectSwapOutputChain = 22

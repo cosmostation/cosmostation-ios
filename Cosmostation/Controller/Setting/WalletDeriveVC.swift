@@ -80,7 +80,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
     }
     
     override func setLocalizedString() {
-        navigationItem.title = NSLocalizedString("title_restore", comment: "")
+        navigationItem.title = NSLocalizedString("title_select_wallet", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_restore_wallets", comment: ""), for: .normal)
     }
     

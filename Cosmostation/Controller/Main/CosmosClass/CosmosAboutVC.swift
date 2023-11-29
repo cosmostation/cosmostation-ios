@@ -46,9 +46,10 @@ class CosmosAboutVC: BaseVC {
     
     @objc func onFetchStakeDone(_ notification: NSNotification) {
         DispatchQueue.main.async {
-            self.tableView.beginUpdates()
-            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .none)
-            self.tableView.endUpdates()
+//            self.tableView.beginUpdates()
+//            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .none)
+//            self.tableView.endUpdates()
+            self.tableView.reloadSections(IndexSet(2...2), with: .none)
         }
     }
 }
@@ -72,7 +73,12 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (section == 2) {
             view.titleLabel.text = "Reward Address"
-            view.cntLabel.text = ""
+            if (!selectedChain.rewardAddress.isEmpty && selectedChain.rewardAddress != selectedChain.bechAddress) {
+                view.cntLabel.text = "(Changed)"
+                view.cntLabel.textColor = .colorPrimary
+            } else {
+                view.cntLabel.text = ""
+            }
         }
         return view
     }

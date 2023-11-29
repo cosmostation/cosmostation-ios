@@ -8,9 +8,12 @@
 
 import UIKit
 import SwiftyJSON
+import Lottie
 
 class CosmosCoinVC: BaseVC {
     
+    
+    @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var tableView: UITableView!
     var refresher: UIRefreshControl!
     
@@ -25,6 +28,13 @@ class CosmosCoinVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        
+        loadingView.isHidden = false
+        loadingView.animation = LottieAnimation.named("loading")
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.loopMode = .loop
+        loadingView.animationSpeed = 1.3
+        loadingView.play()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -175,7 +185,6 @@ class CosmosCoinVC: BaseVC {
     }
     
     func onStartLegacyTransferVC(_ denom: String) {
-        print("onStartLegacyTransferVC")
         let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
         transfer.selectedChain = selectedChain
         transfer.toSendDenom = denom
@@ -237,9 +246,11 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt60Keccak) {
+            loadingView.isHidden = lcdBalances.count > 0
             return lcdBalances.count
             
         } else {
+            loadingView.isHidden = nativeCoins.count > 0 || ibcCoins.count > 0  || bridgedCoins.count > 0
             if (section == 0) {
                 return nativeCoins.count
             } else if (section == 1) {

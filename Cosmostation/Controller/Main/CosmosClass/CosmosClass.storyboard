@@ -38,7 +38,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZk-Ok-B8N">
-                                        <rect key="frame" x="99.666666666666657" y="27.333333333333329" width="18" height="25.333333333333329"/>
+                                        <rect key="frame" x="100.66666666666666" y="27.333333333333329" width="17" height="25.333333333333329"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="20"/>
                                         <color key="textColor" name="_font01"/>
                                         <nil key="highlightedColor"/>
@@ -58,46 +58,46 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5w-hK-wYy" customClass="MDCTabBarView">
-                                <rect key="frame" x="8" y="155" width="377" height="42"/>
+                                <rect key="frame" x="8" y="151" width="377" height="48"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="ufE-z8-wM4"/>
+                                    <constraint firstAttribute="height" constant="48" id="ufE-z8-wM4"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdX-08-eE0">
-                                <rect key="frame" x="8" y="197" width="377" height="0.66666666666665719"/>
+                                <rect key="frame" x="8" y="199" width="377" height="0.66666666666665719"/>
                                 <color key="backgroundColor" white="1" alpha="0.20277954931972789" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="UgD-In-4H3"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1V7-Iu-EPt">
-                                <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
+                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="HxN-8c-YJG" kind="embed" identifier="embedHistoryVC" id="jJo-hB-wUK"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9R-os-Pfe">
-                                <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
+                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
                                 <connections>
                                     <segue destination="DVQ-I1-owb" kind="embed" identifier="embedNftVC" id="6Wk-zk-FDX"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AeT-wL-xQo">
-                                <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
+                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
                                 <connections>
                                     <segue destination="yyO-ei-xsW" kind="embed" identifier="embedTokenVC" id="wiH-Nb-UO2"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYD-Wc-AXb">
-                                <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
+                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
                                 <connections>
                                     <segue destination="EO6-oK-AmS" kind="embed" identifier="embedCoinVC" id="ZOz-Cm-L38"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s8b-hk-JN5">
-                                <rect key="frame" x="0.0" y="197.66666666666669" width="393" height="654.33333333333326"/>
+                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
                                 <connections>
                                     <segue destination="yoF-DC-PBK" kind="embed" identifier="embedAboutVC" id="tOj-SA-aCs"/>
                                 </connections>
@@ -109,7 +109,7 @@
                             <constraint firstItem="AeT-wL-xQo" firstAttribute="bottom" secondItem="vYD-Wc-AXb" secondAttribute="bottom" id="0Hz-n7-Xey"/>
                             <constraint firstItem="AeT-wL-xQo" firstAttribute="leading" secondItem="vYD-Wc-AXb" secondAttribute="leading" id="2Qf-LX-oQ8"/>
                             <constraint firstItem="0An-sf-Sxo" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="47f-ZP-RPP"/>
-                            <constraint firstItem="B5w-hK-wYy" firstAttribute="top" secondItem="0An-sf-Sxo" secondAttribute="bottom" constant="20" id="Fjz-ih-b7j"/>
+                            <constraint firstItem="B5w-hK-wYy" firstAttribute="top" secondItem="0An-sf-Sxo" secondAttribute="bottom" constant="16" id="Fjz-ih-b7j"/>
                             <constraint firstItem="B5w-hK-wYy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="Gmd-pE-4tI"/>
                             <constraint firstItem="fdX-08-eE0" firstAttribute="top" secondItem="B5w-hK-wYy" secondAttribute="bottom" id="KXG-Qi-buY"/>
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="LYC-Qm-hqh"/>
@@ -164,6 +164,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="654.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XNO-GG-9I6" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="106.66666666666669" y="284.66666666666669" width="180" height="110"/>
+                                <viewLayoutGuide key="safeArea" id="yjO-JL-86A"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="Bmn-9P-hNi"/>
+                                    <constraint firstAttribute="width" constant="180" id="U30-MU-0c3"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="AJM-90-cmx">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="654.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -174,12 +183,15 @@
                         <color key="tintColor" name="_primary"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="AJM-90-cmx" secondAttribute="trailing" id="7GW-4W-rBg"/>
+                            <constraint firstItem="XNO-GG-9I6" firstAttribute="centerX" secondItem="aYH-Cl-c1y" secondAttribute="centerX" id="a2b-Nw-IFO"/>
                             <constraint firstAttribute="bottom" secondItem="AJM-90-cmx" secondAttribute="bottom" id="nzY-Yx-yyd"/>
+                            <constraint firstItem="XNO-GG-9I6" firstAttribute="centerY" secondItem="aYH-Cl-c1y" secondAttribute="centerY" id="osP-zO-6vc"/>
                             <constraint firstItem="AJM-90-cmx" firstAttribute="top" secondItem="KVq-Tq-0JA" secondAttribute="top" id="wwe-Bi-l9z"/>
                             <constraint firstItem="AJM-90-cmx" firstAttribute="leading" secondItem="KVq-Tq-0JA" secondAttribute="leading" id="zxi-7A-BeG"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loadingView" destination="XNO-GG-9I6" id="2vh-rS-NsE"/>
                         <outlet property="tableView" destination="AJM-90-cmx" id="sA3-VZ-SaC"/>
                     </connections>
                 </viewController>

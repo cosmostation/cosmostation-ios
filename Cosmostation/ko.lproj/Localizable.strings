@@ -442,7 +442,7 @@
 "setting_section_about" = "앱 정보";
 "setting_account_title" = "계정 관리";
 "setting_qr_import_account" = "QR로 계정 추가";
-"setting_hide_legacy" = "레가시 주소 숨김";
+"setting_hide_legacy" = "레거시 주소 활성화";
 "setting_chain_title" = "체인 관리";
 "setting_addressbook_title" = "주소록 관리";
 "setting_language_title" = "언어";
@@ -456,7 +456,7 @@
 "setting_blog_title" = "Blog";
 "setting_telegram_title" = "텔레그램";
 "setting_twitter_title" = "X(트위터)";
-"setting_youtube_title" = "유투브";
+"setting_youtube_title" = "유튜브";
 "setting_term_title" = "약관";
 "setting_privacy_title" = "개인정보 보호";
 "setting_github_title" = "Github";
@@ -1104,6 +1104,7 @@
 "error_useless_end_point" = "사용할 수 없습니다.";
 "error_name" = "이름을 정확히 입력하세요.";
 "error_not_support_cancel_unbonding" = "이 체인은 아직 언스테이킹 취소를 지원하지 않습니다.";
+"error_wait_moment" = "잠시만 기다려 주세요. 동기화중입니다.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";

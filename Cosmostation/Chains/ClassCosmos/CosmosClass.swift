@@ -253,10 +253,12 @@ extension CosmosClass {
     func getDefaultFeeCoins() -> [Cosmos_Base_V1beta1_Coin] {
         var result = [Cosmos_Base_V1beta1_Coin]()
         let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
-        let feeDatas = getFeeInfos()[getFeeBasePosition()].FeeDatas
-        feeDatas.forEach { feeData in
-            let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: handler0Up)
-            result.append(Cosmos_Base_V1beta1_Coin.with {  $0.denom = feeData.denom!; $0.amount = amount.stringValue })
+        if (getFeeInfos().count > 0) {
+            let feeDatas = getFeeInfos()[getFeeBasePosition()].FeeDatas
+            feeDatas.forEach { feeData in
+                let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: handler0Up)
+                result.append(Cosmos_Base_V1beta1_Coin.with {  $0.denom = feeData.denom!; $0.amount = amount.stringValue })
+            }
         }
         return result
     }
@@ -267,7 +269,7 @@ extension CosmosClass {
         for i in 0..<getDefaultFeeCoins().count {
             let minFee = getDefaultFeeCoins()[i]
             if (balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
-                feeCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = minFee.denom; $0.amount = minFee.amount }
+                feeCoin = minFee
                 break
             }
         }

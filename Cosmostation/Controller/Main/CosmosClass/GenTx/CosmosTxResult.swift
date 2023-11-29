@@ -58,6 +58,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        confirmBtn.isEnabled = false
         if (resultType == .Cosmos) {
             if (selectedChain is ChainBinanceBeacon) {
                 successMintscanBtn.setTitle("View Explorer", for: .normal)
@@ -65,7 +66,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 guard legacyResult != nil else {
                     loadingView.isHidden = true
                     failView.isHidden = false
-                    confirmBtn.isHidden = false
+                    confirmBtn.isEnabled = true
                     return
                 }
                 
@@ -73,13 +74,12 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                     loadingView.isHidden = true
                     failView.isHidden = false
                     failMsgLabel.text = legacyResult?["log"].stringValue
-                    confirmBtn.isHidden = false
+                    confirmBtn.isEnabled = true
                     return
-                    
                 } else {
                     loadingView.isHidden = true
-                    confirmBtn.isHidden = false
                     successView.isHidden = false
+                    confirmBtn.isEnabled = true
                 }
                 
             } else if (selectedChain is ChainOkt60Keccak) {
@@ -88,7 +88,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 guard legacyResult != nil else {
                     loadingView.isHidden = true
                     failView.isHidden = false
-                    confirmBtn.isHidden = false
+                    confirmBtn.isEnabled = true
                     return
                 }
                 
@@ -96,12 +96,12 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                     loadingView.isHidden = true
                     failView.isHidden = false
                     failMsgLabel.text = legacyResult?["raw_log"].stringValue
-                    confirmBtn.isHidden = false
+                    confirmBtn.isEnabled = true
                     
                 } else {
                     loadingView.isHidden = true
-                    confirmBtn.isHidden = false
                     successView.isHidden = false
+                    confirmBtn.isEnabled = true
                 }
                 
                 
@@ -110,7 +110,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                     loadingView.isHidden = true
                     failView.isHidden = false
                     failMsgLabel.text = broadcastTxResponse?.rawLog
-                    confirmBtn.isHidden = false
+                    confirmBtn.isEnabled = true
                     return
                 }
                 setQutoes()
@@ -122,7 +122,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 loadingView.isHidden = true
                 failView.isHidden = false
                 failMsgLabel.text = ""
-                confirmBtn.isHidden = false
+                confirmBtn.isEnabled = true
                 return
             }
             fetchEvmTx()
@@ -130,10 +130,9 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
     }
     
     func onUpdateView() {
-        quotesLayer.isHidden = true
         if (resultType == .Cosmos) {
             loadingView.isHidden = true
-            confirmBtn.isHidden = false
+            confirmBtn.isEnabled = true
             if (txResponse?.txResponse.code != 0) {
                 failView.isHidden = false
                 failMintscanBtn.isHidden = false
@@ -148,7 +147,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
             
         } else {
             loadingView.isHidden = true
-            confirmBtn.isHidden = false
+            confirmBtn.isEnabled = true
             if (evmRecipient!.status != .ok) {
                 failView.isHidden = false
                 failMintscanBtn.isHidden = false
@@ -170,6 +169,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 }
                 
             } catch {
+                self.confirmBtn.isEnabled = true
                 self.fetchCnt = self.fetchCnt - 1
                 if (self.fetchCnt > 0) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
@@ -198,6 +198,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 }
                 
             } catch {
+                self.confirmBtn.isEnabled = true
                 self.fetchCnt = self.fetchCnt - 1
                 if (self.fetchCnt > 0) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
@@ -238,15 +239,18 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                     addressBookSheet.memo = memo
                     addressBookSheet.bookDelegate = self
                     self.onStartSheet(addressBookSheet, 420)
+                    return
                 }
-                
-            } else {
+            } 
+            
+            if (BaseData.instance.selectAllRefAddresses().filter { $0.bechAddress == recipinetAddress }.count == 0) {
                 let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
                 addressBookSheet.recipientChain = recipientChain
                 addressBookSheet.recipinetAddress = recipinetAddress
                 addressBookSheet.memo = memo
                 addressBookSheet.bookDelegate = self
                 self.onStartSheet(addressBookSheet, 420)
+                return
             }
         }
     }
@@ -257,7 +261,9 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
     
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
-        onStartMainTab()
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true) {
+            self.selectedChain.fetchData(self.baseAccount.id)
+        }
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {

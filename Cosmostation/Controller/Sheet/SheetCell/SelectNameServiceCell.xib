@@ -26,15 +26,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8IJ-q8-t7I">
                         <rect key="frame" x="0.0" y="0.0" width="398" height="68"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="Ehe-he-YEc">
-                                <rect key="frame" x="12" y="10" width="20" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="QBH-m6-Adf"/>
-                                    <constraint firstAttribute="height" constant="20" id="TnT-iU-inJ"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWi-vz-jyv">
-                                <rect key="frame" x="39.999999999999993" y="12.333333333333332" width="80.333333333333314" height="15.333333333333332"/>
+                                <rect key="frame" x="12" y="12" width="80.333333333333329" height="16"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
@@ -55,17 +48,15 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="gWi-vz-jyv" firstAttribute="leading" secondItem="Ehe-he-YEc" secondAttribute="trailing" constant="8" id="AJm-Sz-zjk"/>
-                            <constraint firstItem="G20-gM-cgl" firstAttribute="top" secondItem="Ehe-he-YEc" secondAttribute="bottom" constant="8" id="DUZ-EQ-zbX"/>
+                            <constraint firstItem="gWi-vz-jyv" firstAttribute="top" secondItem="8IJ-q8-t7I" secondAttribute="top" constant="12" id="45B-cd-5gL"/>
                             <constraint firstAttribute="trailing" secondItem="G20-gM-cgl" secondAttribute="trailing" constant="12" id="ET2-iT-DKf"/>
-                            <constraint firstItem="gWi-vz-jyv" firstAttribute="centerY" secondItem="Ehe-he-YEc" secondAttribute="centerY" id="fHy-ni-X3Q"/>
+                            <constraint firstItem="gWi-vz-jyv" firstAttribute="leading" secondItem="8IJ-q8-t7I" secondAttribute="leading" constant="12" id="MLk-6r-Lln"/>
                             <constraint firstAttribute="bottom" secondItem="aCW-z1-Wkx" secondAttribute="bottom" id="fwX-Kv-qvn"/>
                             <constraint firstAttribute="trailing" secondItem="aCW-z1-Wkx" secondAttribute="trailing" constant="12" id="iRL-lP-kDE"/>
+                            <constraint firstItem="G20-gM-cgl" firstAttribute="top" secondItem="gWi-vz-jyv" secondAttribute="bottom" constant="10" id="kun-r8-UDG"/>
                             <constraint firstAttribute="height" constant="68" id="qWK-DH-Z7L"/>
                             <constraint firstItem="aCW-z1-Wkx" firstAttribute="leading" secondItem="8IJ-q8-t7I" secondAttribute="leading" constant="12" id="t3D-he-qK1"/>
                             <constraint firstItem="G20-gM-cgl" firstAttribute="leading" secondItem="8IJ-q8-t7I" secondAttribute="leading" constant="12" id="vsQ-1m-GgW"/>
-                            <constraint firstItem="Ehe-he-YEc" firstAttribute="top" secondItem="8IJ-q8-t7I" secondAttribute="top" constant="10" id="wCK-Ei-kaa"/>
-                            <constraint firstItem="Ehe-he-YEc" firstAttribute="leading" secondItem="8IJ-q8-t7I" secondAttribute="leading" constant="12" id="xiE-kW-ilg"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -82,14 +73,12 @@
             <color key="tintColor" name="_primary"/>
             <connections>
                 <outlet property="addressLabel" destination="G20-gM-cgl" id="iKN-4q-Oab"/>
-                <outlet property="chainLogoImg" destination="Ehe-he-YEc" id="tDz-JK-wku"/>
                 <outlet property="serviceLabel" destination="gWi-vz-jyv" id="sMb-2A-zX9"/>
             </connections>
             <point key="canvasLocation" x="198.47328244274809" y="29.225352112676056"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="chainDefault" width="192" height="192"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -32,7 +32,6 @@ class CosmosStakingInfoVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         
-        tableView.isHidden = true
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
@@ -40,6 +39,7 @@ class CosmosStakingInfoVC: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -51,7 +51,7 @@ class CosmosStakingInfoVC: BaseVC {
         
         navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconRewardAddress"), style: .plain, target: self, action: #selector(onClickRewardAddressChange))
         
-        onFetchData()
+        onSetStakeData()
     }
     
     override func setLocalizedString() {
@@ -59,7 +59,24 @@ class CosmosStakingInfoVC: BaseVC {
         stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
     }
     
-    func onFetchData() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (selectedChain.tag == tag) {
+            onSetStakeData()
+        }
+    }
+    
+    func onSetStakeData() {
         Task {
             rewardAddress = selectedChain.rewardAddress
             validators = selectedChain.cosmosValidators
@@ -240,7 +257,8 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0) {
             view.titleLabel.text = NSLocalizedString("str_reward_address", comment: "")
-            view.cntLabel.text = ""
+            view.cntLabel.text = "(Changed)"
+            view.cntLabel.textColor = .colorPrimary
         } else if (section == 1) {
             view.titleLabel.text = NSLocalizedString("str_my_delegations", comment: "")
             view.cntLabel.text = String(delegations.count)
@@ -277,7 +295,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"StakeRewardAddressCell") as! StakeRewardAddressCell
-            cell.onBindRewardAddress(rewardAddress)
+            cell.onBindRewardAddress(selectedChain)
             return cell
             
         } else if (indexPath.section == 1) {

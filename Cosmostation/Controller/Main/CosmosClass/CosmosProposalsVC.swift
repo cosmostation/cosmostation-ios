@@ -55,14 +55,13 @@ class CosmosProposalsVC: BaseVC {
         filtered = UIBarButtonItem(image: UIImage(named: "iconFilterOff"), style: .plain, target: self, action: #selector(onClickFilterOff))
         navigationItem.setRightBarButton(showAll, animated: true)
         
-        onFetchData()
+        onFetchVoteInfos()
     }
     
     @objc func onClickFilterOn() {
         navigationItem.setRightBarButton(filtered, animated: true)
         isShowAll = !isShowAll
         tableView.reloadData()
-        
     }
     
     @objc func onClickFilterOff() {
@@ -71,12 +70,29 @@ class CosmosProposalsVC: BaseVC {
         tableView.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (selectedChain.tag == tag) {
+            onFetchVoteInfos()
+        }
+    }
+    
     override func setLocalizedString() {
         navigationItem.title = NSLocalizedString("title_vote_list", comment: "")
         voteBtn.setTitle(NSLocalizedString("str_start_vote", comment: ""), for: .normal)
     }
     
-    func onFetchData() {
+    func onFetchVoteInfos() {
         votingPeriods.removeAll()
         etcPeriods.removeAll()
         filteredVotingPeriods.removeAll()

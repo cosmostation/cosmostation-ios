@@ -70,22 +70,14 @@ class SelectChainCell: UITableViewCell {
                 evmCompatTag.isHidden = false
             }
         }
-//        print("chain ", chain.name, "  ", chain.address)
         
         if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
-//            print("refAddress ", refAddress)
             valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             assetCntLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
             assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"
             
-//            valueLayer.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-//            assetCntLayer.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            
-            
         } else {
-//            valueLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
-//            assetCntLayer.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
             valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
             assetCntLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
         }

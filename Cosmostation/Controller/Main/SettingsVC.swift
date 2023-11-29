@@ -31,7 +31,7 @@ class SettingsVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         reloadRows(IndexPath(row: 0, section: 0))
-        reloadRows(IndexPath(row: 3, section: 0))
+        reloadRows(IndexPath(row: 4, section: 0))
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
     }
 }
@@ -109,8 +109,8 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 2) {
                 switchCell.onBindHideLegacy()
                 switchCell.actionToggle = { request in
-                    if (request != BaseData.instance.getHideLegacy()) {
-                        BaseData.instance.setHideLegacy(request)
+                    if (request == BaseData.instance.getHideLegacy()) {
+                        BaseData.instance.setHideLegacy(!request)
                         DispatchQueue.main.async(execute: {
                             self.hideWait()
                             self.onStartMainTab()

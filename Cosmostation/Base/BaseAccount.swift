@@ -17,6 +17,7 @@ public class BaseAccount {
     var name: String = ""
     var type: BaseAccountType = .none
     var lastHDPath = ""
+    var order: Int64 = 999
     
     //using for generate new aacount
     init(_ name: String, _ type: BaseAccountType, _ lastPath: String) {
@@ -27,12 +28,13 @@ public class BaseAccount {
     }
     
     //db query
-    init(_ id: Int64, _ uuid: String, _ name: String, _ type: Int64, _ lastPath: String) {
+    init(_ id: Int64, _ uuid: String, _ name: String, _ type: Int64, _ lastPath: String, _ order: Int64) {
         self.id = id
         self.uuid = uuid
         self.name = name
         self.type = BaseAccountType(rawValue: type)!
         self.lastHDPath = lastPath
+        self.order = order
     }
     
     lazy var toDisplayCTags = [String]()

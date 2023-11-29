@@ -86,18 +86,20 @@ class PortfolioVC: BaseVC {
         
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
 
-        let searchBtn: UIButton = UIButton(type: .custom)
-        searchBtn.setImage(UIImage(named: "iconSearchChain"), for: .normal)
-        searchBtn.addTarget(self, action:  #selector(onClickChainSelect), for: .touchUpInside)
-        searchBtn.frame = CGRectMake(0, 0, 40, 30)
-        let searchBarBtn = UIBarButtonItem(customView: searchBtn)
-
-        let explorerBtn: UIButton = UIButton(type: .custom)
-        explorerBtn.setImage(UIImage(named: "iconMintscanExplorer"), for: .normal)
-        explorerBtn.addTarget(self, action:  #selector(onClickExplorer), for: .touchUpInside)
-        explorerBtn.frame = CGRectMake(0, 0, 30, 30)
-        let explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
-        navigationItem.rightBarButtonItems = [explorerBarBtn, searchBarBtn]
+//        let searchBtn: UIButton = UIButton(type: .custom)
+//        searchBtn.setImage(UIImage(named: "iconSearchChain"), for: .normal)
+//        searchBtn.addTarget(self, action:  #selector(onClickChainSelect), for: .touchUpInside)
+//        searchBtn.frame = CGRectMake(0, 0, 40, 30)
+//        let searchBarBtn = UIBarButtonItem(customView: searchBtn)
+//
+//        let explorerBtn: UIButton = UIButton(type: .custom)
+//        explorerBtn.setImage(UIImage(named: "iconMintscanExplorer"), for: .normal)
+//        explorerBtn.addTarget(self, action:  #selector(onClickExplorer), for: .touchUpInside)
+//        explorerBtn.frame = CGRectMake(0, 0, 30, 30)
+//        let explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
+//        navigationItem.rightBarButtonItems = [explorerBarBtn, searchBarBtn]
+        
+        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(onClickChainSelect))
     }
     
     @objc func dismissKeyboard() {
@@ -132,11 +134,11 @@ class PortfolioVC: BaseVC {
     func onUpdateRow(_ tag: String) {
         for i in 0..<searchCosmosChains.count {
             if (searchCosmosChains[i].tag == tag) {
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
                     self.tableView.beginUpdates()
                     self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
                     self.tableView.endUpdates()
-                }
+                })
             }
         }
         onUpdateTotal()

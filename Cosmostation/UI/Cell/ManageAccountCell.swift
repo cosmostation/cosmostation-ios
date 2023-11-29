@@ -33,43 +33,11 @@ class ManageAccountCell: UITableViewCell {
     }
     
     func bindAccount(_ account: BaseAccount) {
-        editBtn.showsMenuAsPrimaryAction = true
-        let rename = UIAction(title: NSLocalizedString("str_rename", comment: ""), image: nil, handler: { _ in
-            self.actionRename?()
-        })
-        let delete = UIAction(title: NSLocalizedString("str_delete_account", comment: ""), image: nil, handler: { _ in
-            self.actionDelete?()
-        })
-        let mnemonic = UIAction(title: NSLocalizedString("str_check_mnemonic", comment: ""), image: nil, handler: { _ in
-            self.actionMnemonic?()
-        })
-        let privateKeys = UIAction(title: NSLocalizedString("str_check_each_private_keys", comment: ""), image: nil, handler: { _ in
-            self.actionPrivateKeys?()
-        })
-        let privateKey = UIAction(title: NSLocalizedString("str_check_private_key", comment: ""), image: nil, handler: { _ in
-            self.actionPrivateKey?()
-        })
-        
-        
-        
         nameLabel.text = account.name
-        
         if (account.type == .withMnemonic) {
             typeImg.image = UIImage(named: "iconMnemonic")
-            editBtn.menu = UIMenu(title: "",
-                                  image: nil,
-                                  identifier: nil,
-                                  options: .displayInline,
-                                  children: [rename, delete, mnemonic, privateKeys])
-            
         } else {
             typeImg.image = UIImage(named: "iconPrivateKey")
-            editBtn.menu = UIMenu(title: "",
-                                  image: nil,
-                                  identifier: nil,
-                                  options: .displayInline,
-                                  children: [rename, delete, privateKey])
-            
         }
     }
 }

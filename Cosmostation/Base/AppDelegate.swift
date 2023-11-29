@@ -21,8 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var userInfo:[AnyHashable : Any]?
     var scheme: URL?
     
-    func application(_ application: UIApplication,
-                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
       Messaging.messaging().apnsToken = deviceToken
     }
     
@@ -50,7 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UserDefaults.standard.synchronize()
         }
         
-        
+        if BaseData.instance.getInstallTime() == 0 {
+            BaseData.instance.setInstallTime()
+        }
         
         UNUserNotificationCenter.current().delegate = self
 

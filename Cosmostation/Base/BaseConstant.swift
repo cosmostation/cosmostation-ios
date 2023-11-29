@@ -12,6 +12,7 @@ import SQLite
 let SUPPORT_BEP3_SWAP                   = true;
 
 //let KEY_RECENT_ACCOUNT                  = "KEY_RECENT_ACCOUNT"
+let KEY_INSTALL_TIME                    = "KEY_INSTALL_TIME"
 let KEY_RECENT_CHAIN                    = "KEY_RECENT_CHAIN"
 let KEY_RECENT_CHAIN_S                  = "KEY_RECENT_CHAIN_S"
 let KEY_ALL_VAL_SORT                    = "KEY_ALL_VAL_SORT"
@@ -108,6 +109,7 @@ let BASEACCOUNT_UUID        = Expression<String>("uuid")
 let BASEACCOUNT_NAME        = Expression<String>("name")
 let BASEACCOUNT_TYPE        = Expression<Int64>("type")
 let BASEACCOUNT_LAST_PATH   = Expression<String>("lastpath")
+let BASEACCOUNT_ORDER       = Expression<Int64>("order")
 
 //V2 DB Ref_Address(derived address from mnonics or privatekey)
 let TABLE_REFADDRESS        = Table("BaseAddress")
