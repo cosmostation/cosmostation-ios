@@ -174,7 +174,8 @@ class PincodeVC: BaseVC {
     }
     
     func onCenceled() {
-        if (lockType == .ForInit || lockType == .ForAppLock ) {
+        //igonre backspace dismiss
+        if (lockType == .ForInit || lockType == .ForAppLock || lockType == .ForIntroLock) {
             return
         }
         onFinishResult(.fail)
