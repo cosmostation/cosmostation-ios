@@ -94,7 +94,7 @@ class AssetCell: UITableViewCell {
                 
                 let availableAmount = bnbChain.lcdBalanceAmount(coin["symbol"].stringValue)
                 amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
-                
+                amountLabel.isHidden = false
                 priceLabel.isHidden = true
                 priceChangeLabel.isHidden = true
                 priceChangePercentLabel.isHidden = true
@@ -112,7 +112,7 @@ class AssetCell: UITableViewCell {
                 
                 let availableAmount = oktChain.lcdBalanceAmount(coin["denom"].stringValue)
                 amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
-                
+                amountLabel.isHidden = false
                 priceLabel.isHidden = true
                 priceChangeLabel.isHidden = true
                 priceChangePercentLabel.isHidden = true

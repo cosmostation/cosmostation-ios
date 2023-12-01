@@ -106,10 +106,8 @@ class CosmosTokenVC: BaseVC {
             tableView.isHidden = false
             emptyDataView.isHidden = true
         } else {
-            tableView.isHidden = true
             emptyDataView.isHidden = false
         }
-        
         refresher.endRefreshing()
     }
 }
@@ -127,7 +125,11 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "Cw20 Tokens"
             view.cntLabel.text = String(mintscanCw20Tokens.count)
         } else {
-            view.titleLabel.text = "Erc20 Tokens"
+            if let okChain = selectedChain as? ChainOkt60Keccak {
+                view.titleLabel.text = "Kip20 Tokens"
+            } else {
+                view.titleLabel.text = "Erc20 Tokens"
+            }
             view.cntLabel.text = String(mintscanErc20Tokens.count)
         }
         return view

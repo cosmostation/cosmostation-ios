@@ -76,9 +76,15 @@ class EvmTransfer: BaseVC {
         toSendSymbolLabel.text = selectedMsToken.symbol
         availableAmount = selectedMsToken.getAmount()
         
-        let stakingAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom == selectedChain.stakeDenom }).first!
-        feeSelectImg.af.setImage(withURL: stakingAsset!.assetImg())
-        feeSelectLabel.text = stakingAsset!.symbol
+        if let okChain = selectedChain as? ChainOkt60Keccak {
+            feeSelectImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(selectedChain.stakeDenom))
+            feeSelectLabel.text = selectedChain.stakeDenom.uppercased()
+            
+        } else {
+            let stakingAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom == selectedChain.stakeDenom }).first!
+            feeSelectImg.af.setImage(withURL: stakingAsset!.assetImg())
+            feeSelectLabel.text = stakingAsset!.symbol
+        }
         
         toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
         toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
@@ -175,13 +181,23 @@ class EvmTransfer: BaseVC {
     }
     
     func onUpdateFeeView() {
-        let stakingAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom == selectedChain.stakeDenom }).first!
-        let calFeeAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: handler18)
-        let msPrice = BaseData.instance.getPrice(stakingAsset!.coinGeckoId)
-        let value = msPrice.multiplying(by: calFeeAmount, withBehavior: handler6)
-        feeAmountLabel.attributedText = WDP.dpAmount(calFeeAmount.stringValue, feeAmountLabel.font, 18)
-        feeDenomLabel.text = stakingAsset!.symbol
-        WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
+        if let okChain = selectedChain as? ChainOkt60Keccak {
+            let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
+            let feeAmount = NSDecimalNumber(string: OKT_BASE_FEE)
+            let feeValue = msPrice.multiplying(by: feeAmount, withBehavior: handler6)
+            feeAmountLabel?.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 18)
+            feeDenomLabel.text = selectedChain.stakeDenom.uppercased()
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            
+        } else {
+            let stakingAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom == selectedChain.stakeDenom }).first!
+            let calFeeAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: handler18)
+            let msPrice = BaseData.instance.getPrice(stakingAsset!.coinGeckoId)
+            let value = msPrice.multiplying(by: calFeeAmount, withBehavior: handler6)
+            feeAmountLabel.attributedText = WDP.dpAmount(calFeeAmount.stringValue, feeAmountLabel.font, 18)
+            feeDenomLabel.text = stakingAsset!.symbol
+            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
+        }
     }
     
     @IBAction func onClickSend(_ sender: BaseButton) {
