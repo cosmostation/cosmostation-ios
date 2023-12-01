@@ -42,11 +42,13 @@ class CosmosTokenVC: BaseVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleHideValue"), object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -70,6 +72,10 @@ class CosmosTokenVC: BaseVC {
             self.mintscanErc20Tokens.removeAll()
             self.onUpdateView()
         }
+    }
+    
+    @objc func onToggleValue(_ notification: NSNotification) {
+        tableView.reloadData()
     }
     
     func onUpdateView() {

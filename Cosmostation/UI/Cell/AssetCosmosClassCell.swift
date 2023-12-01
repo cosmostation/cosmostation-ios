@@ -21,6 +21,7 @@ class AssetCosmosClassCell: UITableViewCell {
     @IBOutlet weak var priceChangePercentLabel: UILabel!
     @IBOutlet weak var valueCurrencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var hidenValueLabel: UILabel!
     
     @IBOutlet weak var availableTitle: UILabel!
     @IBOutlet weak var availableLabel: UILabel!
@@ -41,11 +42,25 @@ class AssetCosmosClassCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         rootView.setBlur()
+        amountLabel.text = ""
+        valueCurrencyLabel.text = ""
+        valueLabel.text = ""
+        amountLabel.isHidden = true
+        valueCurrencyLabel.isHidden = true
+        valueLabel.isHidden = true
+        hidenValueLabel.isHidden = true
     }
     
     override func prepareForReuse() {
         rootView.setBlur()
         coinImg.af.cancelImageRequest()
+        amountLabel.text = ""
+        valueCurrencyLabel.text = ""
+        valueLabel.text = ""
+        amountLabel.isHidden = true
+        valueCurrencyLabel.isHidden = true
+        valueLabel.isHidden = true
+        hidenValueLabel.isHidden = true
     }
     
     func bindCosmosStakeAsset(_ baseChain: CosmosClass) {
@@ -67,7 +82,14 @@ class AssetCosmosClassCell: UITableViewCell {
                 
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
                 WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                if (BaseData.instance.getHideValue()) {
+                    hidenValueLabel.isHidden = false
+                } else {
+                    WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                    amountLabel.isHidden = false
+                    valueCurrencyLabel.isHidden = false
+                    valueLabel.isHidden = false
+                }
                 
                 let availableAmount = baseChain.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
                 availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
@@ -101,6 +123,14 @@ class AssetCosmosClassCell: UITableViewCell {
                 let totalAmount = availableAmount.adding(vestingAmount).adding(stakingAmount)
                     .adding(unStakingAmount).adding(rewardAmount)
                 amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
+                
+                if (BaseData.instance.getHideValue()) {
+                    availableLabel.text = "✱✱✱✱"
+                    vestingLabel.text = "✱✱✱✱"
+                    stakingLabel.text = "✱✱✱✱"
+                    unstakingLabel.text = "✱✱✱✱"
+                    rewardLabel.text = "✱✱✱✱"
+                }
             }
         }
         
@@ -119,11 +149,22 @@ class AssetCosmosClassCell: UITableViewCell {
             
             WDP.dpPrice(BNB_GECKO_ID, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(BNB_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
-            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
             
             let availableAmount = bnbChain.lcdBalanceAmount(stakeDenom)
             availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 8)
             amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
+            
+            if (BaseData.instance.getHideValue()) {
+                availableLabel.text = "✱✱✱✱"
+            }
         }
     }
     
@@ -139,7 +180,14 @@ class AssetCosmosClassCell: UITableViewCell {
             
             WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
-            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
             
             let availableAmount = oktChain.lcdBalanceAmount(stakeDenom)
             availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 18)
@@ -155,6 +203,12 @@ class AssetCosmosClassCell: UITableViewCell {
             
             let totalAmount = availableAmount.adding(depositAmount).adding(withdrawAmount)
             amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 18)
+            
+            if (BaseData.instance.getHideValue()) {
+                availableLabel.text = "✱✱✱✱"
+                stakingLabel.text = "✱✱✱✱"
+                unstakingLabel.text = "✱✱✱✱"
+            }
         }
     }
     
@@ -169,7 +223,14 @@ class AssetCosmosClassCell: UITableViewCell {
                 
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
                 WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                if (BaseData.instance.getHideValue()) {
+                    hidenValueLabel.isHidden = false
+                } else {
+                    WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                    amountLabel.isHidden = false
+                    valueCurrencyLabel.isHidden = false
+                    valueLabel.isHidden = false
+                }
                 
                 let availableAmount = neutronChain.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
                 availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
@@ -185,6 +246,12 @@ class AssetCosmosClassCell: UITableViewCell {
                 
                 let totalAmount = availableAmount.adding(vestingAmount).adding(depositedAmount)
                 amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
+                
+                if (BaseData.instance.getHideValue()) {
+                    availableLabel.text = "✱✱✱✱"
+                    vestingLabel.text = "✱✱✱✱"
+                    stakingLabel.text = "✱✱✱✱"
+                }
             }
         }
     }

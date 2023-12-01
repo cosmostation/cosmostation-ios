@@ -17,6 +17,7 @@ class CosmosClassVC: BaseVC {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
+    @IBOutlet weak var hideValueBtn: UIButton!
     @IBOutlet weak var tabbar: MDCTabBarView!
     
     @IBOutlet weak var coinList: UIView!
@@ -28,7 +29,14 @@ class CosmosClassVC: BaseVC {
     var selectedChain: CosmosClass!
     var totalValue = NSDecimalNumber.zero {
         didSet {
-            WDP.dpValue(totalValue, currencyLabel, totalValueLabel)
+            if (BaseData.instance.getHideValue()) {
+                currencyLabel.text = ""
+                totalValueLabel.font = .fontSize20Bold
+                totalValueLabel.text = "✱✱✱✱✱"
+            } else {
+                totalValueLabel.font = .fontSize28Bold
+                WDP.dpValue(totalValue, currencyLabel, totalValueLabel)
+            }
         }
     }
     
@@ -90,6 +98,11 @@ class CosmosClassVC: BaseVC {
         super.viewDidAppear(animated)
         let tabVC = (self.parent)?.parent as? MainTabVC
         tabVC?.showChainBgImage(UIImage(named: selectedChain.logo1)!)
+        if (BaseData.instance.getHideValue()) {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
+        } else {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOn"), for: .normal)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -108,6 +121,18 @@ class CosmosClassVC: BaseVC {
     
     @objc func onFetchStakeDone(_ notification: NSNotification) {
 //        print("onFetchStakeDone")
+    }
+    
+    
+    @IBAction func onClickHideValue(_ sender: UIButton) {
+        BaseData.instance.setHideValue(!BaseData.instance.getHideValue())
+        NotificationCenter.default.post(name: Notification.Name("ToggleHideValue"), object: nil, userInfo: nil)
+        if (BaseData.instance.getHideValue()) {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
+        } else {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOn"), for: .normal)
+        }
+        totalValue = selectedChain.allValue()
     }
     
     @objc func onShowAddress() {

@@ -50,7 +50,7 @@ class ServiceCell: UITableViewCell {
             serviceImg.image = UIImage(named: "imgServiceMintscan")
             
             titleLabel.text = "MINTSCAN"
-            msgLabel.text = "Second generation blockchain analytics platform specialized in on-chain data visualization."
+            msgLabel.text = "Second generation blockchain analytics \nplatform specialized in on-chain \ndata visualization."
             serviceListLabel.text = ""
             
         } else if (position == 1) {
