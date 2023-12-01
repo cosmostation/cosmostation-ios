@@ -26,7 +26,9 @@ class StakeDelegateCell: UITableViewCell {
     @IBOutlet weak var stakingLabel: UILabel!
     @IBOutlet weak var rewardTitle: UILabel!
     @IBOutlet weak var rewardLabel: UILabel!
-
+    @IBOutlet weak var estTitleLabel: UILabel!
+    @IBOutlet weak var estLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
@@ -65,6 +67,7 @@ class StakeDelegateCell: UITableViewCell {
                 if let mainDenomReward = rewards.filter({ $0.denom == stakeDenom }).first {
                     let mainDenomrewardAmount = NSDecimalNumber(string: mainDenomReward.amount).multiplying(byPowerOf10: -18).multiplying(byPowerOf10: -msAsset.decimals!)
                     rewardLabel?.attributedText = WDP.dpAmount(mainDenomrewardAmount.stringValue, rewardLabel!.font, msAsset.decimals!)
+                    
                 } else {
                     rewardLabel?.attributedText = WDP.dpAmount("0", rewardLabel!.font, msAsset.decimals!)
                     rewardTitle.text = "Reward"
@@ -88,7 +91,16 @@ class StakeDelegateCell: UITableViewCell {
                 rewardLabel?.attributedText = WDP.dpAmount("0", rewardLabel!.font, msAsset.decimals!)
                 rewardTitle.text = "Reward"
             }
+            
+            
+            //Display monthly est reward amount
+            let apr = NSDecimalNumber(string: baseChain.mintscanChainParam["params"]["apr"].string ?? "0")
+            let staked = NSDecimalNumber(string: delegation.balance.amount)
+            let comm = NSDecimalNumber.one.subtracting(NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18))
+            let est = staked.multiplying(by: apr).multiplying(by: comm, withBehavior: handler0).dividing(by: NSDecimalNumber.init(string: "12"), withBehavior: handler0).multiplying(byPowerOf10: -msAsset.decimals!)
+            estLabel?.attributedText = WDP.dpAmount(est.stringValue, estLabel!.font, msAsset.decimals!)
         }
+        
     }
     
 }
