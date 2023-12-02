@@ -447,6 +447,10 @@ extension CosmosClassVC {
     }
     
     func onNeutronVaultDeposit() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let transfer = NeutronVault(nibName: "NeutronVault", bundle: nil)
         transfer.selectedChain = selectedChain as? ChainNeutron
         transfer.vaultType = .Deposit
@@ -455,6 +459,10 @@ extension CosmosClassVC {
     }
     
     func onNeutronVaultwithdraw() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let transfer = NeutronVault(nibName: "NeutronVault", bundle: nil)
         transfer.selectedChain = selectedChain as? ChainNeutron
         transfer.vaultType = .Withdraw
