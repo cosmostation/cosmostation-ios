@@ -242,7 +242,7 @@ class NeutronVault: BaseVC {
             
             return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
                 $0.sender = selectedChain.bechAddress
-                $0.contract = self.selectedChain.vaultsList[0]["address"].stringValue
+                $0.contract = self.selectedChain.vaultsList?[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
                 $0.funds = [toCoin!]
             }
@@ -251,7 +251,7 @@ class NeutronVault: BaseVC {
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
                 $0.sender = selectedChain.bechAddress
-                $0.contract = self.selectedChain.vaultsList[0]["address"].stringValue
+                $0.contract = self.selectedChain.vaultsList?[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             

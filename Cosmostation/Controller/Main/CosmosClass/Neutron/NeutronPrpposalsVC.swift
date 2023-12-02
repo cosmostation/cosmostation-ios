@@ -74,7 +74,7 @@ class NeutronPrpposalsVC: BaseVC {
     func onFetchData() {
         let group = DispatchGroup()
         let channel = getConnection()
-        selectedChain.daosList[0]["proposal_modules"].arrayValue.forEach { pModules in
+        selectedChain.daosList?[0]["proposal_modules"].arrayValue.forEach { pModules in
             let contAddress = pModules["address"].stringValue
             fetchProposals(group, channel, contAddress)
         }
@@ -82,13 +82,9 @@ class NeutronPrpposalsVC: BaseVC {
         fetchMyVotes(group, selectedChain.bechAddress)
         
         group.notify(queue: .main) {
-//            DispatchQueue.main.async {
-                self.tableView.isHidden = false
-                self.loadingView.isHidden = true
-                self.tableView.reloadData()
-//            }
-//            print("neutronProposals ", self.neutronProposals.count)
-//            print("neutronMyVotes ", self.neutronMyVotes.count)
+            self.tableView.isHidden = false
+            self.loadingView.isHidden = true
+            self.tableView.reloadData()
         }
     }
 
@@ -105,7 +101,7 @@ extension NeutronPrpposalsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.titleLabel.text = selectedChain.daosList[0]["proposal_modules"].arrayValue[section]["name"].stringValue
+        view.titleLabel.text = selectedChain.daosList?[0]["proposal_modules"].arrayValue[section]["name"].stringValue
         view.cntLabel.text = String(neutronProposals[section].1.count)
         return view
     }
@@ -123,7 +119,7 @@ extension NeutronPrpposalsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"CosmosProposalCell") as! CosmosProposalCell
-        let module = selectedChain.daosList[0]["proposal_modules"].arrayValue[indexPath.section]
+        let module = selectedChain.daosList?[0]["proposal_modules"].arrayValue[indexPath.section]
         let proposal = neutronProposals[indexPath.section].1[indexPath.row]
         let toVote = indexPath.section == 0 ? toVoteSingle : toVoteMulti
         cell.onBindNeutronDao(module, proposal, neutronMyVotes, toVote)
@@ -158,7 +154,7 @@ extension NeutronPrpposalsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let module = selectedChain.daosList[0]["proposal_modules"].arrayValue[indexPath.section]
+        let module = selectedChain.daosList?[0]["proposal_modules"].arrayValue[indexPath.section]
         let proposal = neutronProposals[indexPath.section].1[indexPath.row]
         var moduleType = ""
         if (indexPath.section == 0) {
@@ -166,7 +162,7 @@ extension NeutronPrpposalsVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             moduleType = "multiple"
         }
-        let explorer = MintscanUrl + "neutron/dao/proposals/" + proposal["id"].stringValue + "/" + moduleType + "/" +  module["address"].stringValue
+        let explorer = MintscanUrl + "neutron/dao/proposals/" + proposal["id"].stringValue + "/" + moduleType + "/" +  module!["address"].stringValue
         if let url = URL(string: explorer) {
             self.onShowSafariWeb(url)
         }

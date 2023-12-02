@@ -93,7 +93,10 @@ class CosmosProposalCell: UITableViewCell {
         }
     }
     
-    func onBindNeutronDao(_ module: JSON, _ proposal: JSON, _ myVotes: [JSON], _ toVote: [Int64]) {
+    func onBindNeutronDao(_ module: JSON?, _ proposal: JSON, _ myVotes: [JSON], _ toVote: [Int64]) {
+        guard let module = module else {
+            return
+        }
         let id = proposal["id"].int64Value
         let contents = proposal["proposal"]
         idLabel.text = "# ".appending(String(id) + ".")
