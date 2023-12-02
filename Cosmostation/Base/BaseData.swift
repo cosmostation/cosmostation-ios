@@ -674,4 +674,12 @@ extension BaseData {
         let now = Date().millisecondsSince1970
         return last < now
     }
+    
+    func setHideValue(_ using : Bool) {
+        UserDefaults.standard.set(using, forKey: KEY_HIDE_VALUE)
+    }
+    
+    func getHideValue() -> Bool {
+        return UserDefaults.standard.bool(forKey: KEY_HIDE_VALUE)
+    }
 }

@@ -17,6 +17,7 @@ class CosmosClassVC: BaseVC {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
+    @IBOutlet weak var hideValueBtn: UIButton!
     @IBOutlet weak var tabbar: MDCTabBarView!
     
     @IBOutlet weak var coinList: UIView!
@@ -28,7 +29,14 @@ class CosmosClassVC: BaseVC {
     var selectedChain: CosmosClass!
     var totalValue = NSDecimalNumber.zero {
         didSet {
-            WDP.dpValue(totalValue, currencyLabel, totalValueLabel)
+            if (BaseData.instance.getHideValue()) {
+                currencyLabel.text = ""
+                totalValueLabel.font = .fontSize20Bold
+                totalValueLabel.text = "✱✱✱✱✱"
+            } else {
+                totalValueLabel.font = .fontSize28Bold
+                WDP.dpValue(totalValue, currencyLabel, totalValueLabel)
+            }
         }
     }
     
@@ -90,6 +98,11 @@ class CosmosClassVC: BaseVC {
         super.viewDidAppear(animated)
         let tabVC = (self.parent)?.parent as? MainTabVC
         tabVC?.showChainBgImage(UIImage(named: selectedChain.logo1)!)
+        if (BaseData.instance.getHideValue()) {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
+        } else {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOn"), for: .normal)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -108,6 +121,18 @@ class CosmosClassVC: BaseVC {
     
     @objc func onFetchStakeDone(_ notification: NSNotification) {
 //        print("onFetchStakeDone")
+    }
+    
+    
+    @IBAction func onClickHideValue(_ sender: UIButton) {
+        BaseData.instance.setHideValue(!BaseData.instance.getHideValue())
+        NotificationCenter.default.post(name: Notification.Name("ToggleHideValue"), object: nil, userInfo: nil)
+        if (BaseData.instance.getHideValue()) {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
+        } else {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOn"), for: .normal)
+        }
+        totalValue = selectedChain.allValue()
     }
     
     @objc func onShowAddress() {
@@ -203,6 +228,10 @@ class CosmosClassVC: BaseVC {
     }
     
     func onOkDepositTx() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let okDeposit = OkDeposit(nibName: "OkDeposit", bundle: nil)
         okDeposit.selectedChain = selectedChain as? ChainOkt60Keccak
         okDeposit.modalTransitionStyle = .coverVertical
@@ -216,6 +245,10 @@ class CosmosClassVC: BaseVC {
                 return
             }
         }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let okWithdraw = OkWithdraw(nibName: "OkWithdraw", bundle: nil)
         okWithdraw.selectedChain = selectedChain as? ChainOkt60Keccak
         okWithdraw.modalTransitionStyle = .coverVertical
@@ -228,6 +261,10 @@ class CosmosClassVC: BaseVC {
                 self.onShowToast(NSLocalizedString("error_no_deposited_asset", comment: ""))
                 return
             }
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
         }
         let okAddShare = OkAddShare(nibName: "OkAddShare", bundle: nil)
         okAddShare.selectedChain = selectedChain as? ChainOkt60Keccak
@@ -294,8 +331,10 @@ class CosmosClassVC: BaseVC {
             }
             
         } else if (selectedChain is ChainKava118 || selectedChain is ChainKava459) {
-            mainFab.addItem(title: "DeFi", image: UIImage(named: "iconFabDefi")) { _ in
-                self.onKavaDefi()
+            if (!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) {
+                mainFab.addItem(title: "DeFi", image: UIImage(named: "iconFabDefi")) { _ in
+                    self.onKavaDefi()
+                }
             }
             
         } else if (selectedChain is ChainOkt60Keccak) {
@@ -422,6 +461,10 @@ extension CosmosClassVC {
     }
     
     func onNeutronVaultDeposit() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let transfer = NeutronVault(nibName: "NeutronVault", bundle: nil)
         transfer.selectedChain = selectedChain as? ChainNeutron
         transfer.vaultType = .Deposit
@@ -430,6 +473,10 @@ extension CosmosClassVC {
     }
     
     func onNeutronVaultwithdraw() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let transfer = NeutronVault(nibName: "NeutronVault", bundle: nil)
         transfer.selectedChain = selectedChain as? ChainNeutron
         transfer.vaultType = .Withdraw

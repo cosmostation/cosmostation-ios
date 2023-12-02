@@ -42,11 +42,13 @@ class CosmosTokenVC: BaseVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleHideValue"), object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -70,6 +72,10 @@ class CosmosTokenVC: BaseVC {
             self.mintscanErc20Tokens.removeAll()
             self.onUpdateView()
         }
+    }
+    
+    @objc func onToggleValue(_ notification: NSNotification) {
+        tableView.reloadData()
     }
     
     func onUpdateView() {
@@ -100,10 +106,8 @@ class CosmosTokenVC: BaseVC {
             tableView.isHidden = false
             emptyDataView.isHidden = true
         } else {
-            tableView.isHidden = true
             emptyDataView.isHidden = false
         }
-        
         refresher.endRefreshing()
     }
 }
@@ -121,7 +125,11 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "Cw20 Tokens"
             view.cntLabel.text = String(mintscanCw20Tokens.count)
         } else {
-            view.titleLabel.text = "Erc20 Tokens"
+            if let okChain = selectedChain as? ChainOkt60Keccak {
+                view.titleLabel.text = "Kip20 Tokens"
+            } else {
+                view.titleLabel.text = "Erc20 Tokens"
+            }
             view.cntLabel.text = String(mintscanErc20Tokens.count)
         }
         return view

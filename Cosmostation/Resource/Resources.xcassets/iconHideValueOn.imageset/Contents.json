@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "not hide.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

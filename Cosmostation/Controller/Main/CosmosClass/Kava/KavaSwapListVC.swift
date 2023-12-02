@@ -91,6 +91,10 @@ class KavaSwapListVC: BaseVC {
     }
     
     func onDepositSwpTx(_ denom: String) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let swpAction = KavaSwapAction(nibName: "KavaSwapAction", bundle: nil)
         swpAction.selectedChain = selectedChain
         swpAction.swapPool = swapList.filter({ $0.name == denom }).first!
@@ -100,6 +104,10 @@ class KavaSwapListVC: BaseVC {
     }
     
     func onWithdrawSwpTx(_ denom: String) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let swpAction = KavaSwapAction(nibName: "KavaSwapAction", bundle: nil)
         swpAction.selectedChain = selectedChain
         swpAction.swapPool = swapList.filter({ $0.name == denom }).first!

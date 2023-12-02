@@ -44,6 +44,7 @@ let KEY_LAST_ACCOUNT                    = "KEY_LAST_ACCOUNT"
 let KEY_DISPLAY_COSMOS_CHAINS           = "KEY_DISPLAY_COSMOS_CHAINS"
 let KEY_CHAIN_GRPC_ENDPOINT             = "KEY_CHAIN_GRPC_ENDPOINT"
 let KEY_SWAP_WARN                       = "KEY_SWAP_WARN"
+let KEY_HIDE_VALUE                      = "KEY_HIDE_VALUE"
 
 let MINTSCAN_DEV_API_URL                = "https://dev.api.mintscan.io/";
 let MINTSCAN_API_URL                    = "https://front.api.mintscan.io/";

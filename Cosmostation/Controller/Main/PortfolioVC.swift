@@ -14,6 +14,7 @@ class PortfolioVC: BaseVC {
     @IBOutlet weak var searchEmptyLayer: UIView!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
+    @IBOutlet weak var hideValueBtn: UIButton!
     
     var refresher: UIRefreshControl!
     var searchBar: UISearchBar?
@@ -22,7 +23,14 @@ class PortfolioVC: BaseVC {
     var searchCosmosChains = [CosmosClass]()
     var totalValue = NSDecimalNumber.zero {
         didSet {
-            WDP.dpValue(totalValue, currencyLabel, totalValueLabel)
+            if (BaseData.instance.getHideValue()) {
+                currencyLabel.text = ""
+                totalValueLabel.font = .fontSize20Bold
+                totalValueLabel.text = "✱✱✱✱✱"
+            } else {
+                totalValueLabel.font = .fontSize28Bold
+                WDP.dpValue(totalValue, currencyLabel, totalValueLabel)
+            }
         }
     }
     var detailChainTag = ""
@@ -69,7 +77,7 @@ class PortfolioVC: BaseVC {
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
-        onUpdateRow(detailChainTag)
+        onUpdateVC()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -83,21 +91,7 @@ class PortfolioVC: BaseVC {
         toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
         onUpdateSearchBar()
         searchCosmosChains = toDisplayCosmosChains
-        
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
-
-//        let searchBtn: UIButton = UIButton(type: .custom)
-//        searchBtn.setImage(UIImage(named: "iconSearchChain"), for: .normal)
-//        searchBtn.addTarget(self, action:  #selector(onClickChainSelect), for: .touchUpInside)
-//        searchBtn.frame = CGRectMake(0, 0, 40, 30)
-//        let searchBarBtn = UIBarButtonItem(customView: searchBtn)
-//
-//        let explorerBtn: UIButton = UIButton(type: .custom)
-//        explorerBtn.setImage(UIImage(named: "iconMintscanExplorer"), for: .normal)
-//        explorerBtn.addTarget(self, action:  #selector(onClickExplorer), for: .touchUpInside)
-//        explorerBtn.frame = CGRectMake(0, 0, 30, 30)
-//        let explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
-//        navigationItem.rightBarButtonItems = [explorerBarBtn, searchBarBtn]
         
         navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(onClickChainSelect))
     }
@@ -122,12 +116,17 @@ class PortfolioVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
-//        print("onFetchDone ", tag)
         onUpdateRow(tag)
     }
     
     @objc func onFetchPrice(_ notification: NSNotification) {
         tableView.reloadData()
+        onUpdateTotal()
+    }
+    
+    func onUpdateVC() {
+        tableView.reloadData()
+        onUpdateHideValue()
         onUpdateTotal()
     }
     
@@ -144,6 +143,14 @@ class PortfolioVC: BaseVC {
         onUpdateTotal()
     }
     
+    func onUpdateHideValue() {
+        if (BaseData.instance.getHideValue()) {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
+        } else {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOn"), for: .normal)
+        }
+    }
+    
     func onUpdateTotal() {
         var sum = NSDecimalNumber.zero
         toDisplayCosmosChains.forEach { chain in
@@ -154,6 +161,11 @@ class PortfolioVC: BaseVC {
         }
     }
     
+    @IBAction func onClickHideValue(_ sender: UIButton) {
+        BaseData.instance.setHideValue(!BaseData.instance.getHideValue())
+        onUpdateVC()
+    }
+    
     @objc func onClickChainSelect() {
         let chainSelectVC = ChainSelectVC(nibName: "ChainSelectVC", bundle: nil)
         chainSelectVC.modalTransitionStyle = .coverVertical
@@ -161,11 +173,6 @@ class PortfolioVC: BaseVC {
             self.onChainSelected()
         }
         self.present(chainSelectVC, animated: true)
-    }
-    
-    @objc func onClickExplorer() {
-        guard let url = URL(string: MintscanUrl) else { return }
-        self.onShowSafariWeb(url)
     }
     
     func onChainSelected() {

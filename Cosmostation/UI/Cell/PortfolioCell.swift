@@ -54,11 +54,17 @@ class PortfolioCell: UITableViewCell {
         }
         
         if (chain.fetched) {
-//            logoImg1.isHidden = false
             valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
+            if (BaseData.instance.getHideValue()) {
+                currencyLabel.text = ""
+                valueLabel.font = .fontSize14Bold
+                valueLabel.text = "✱✱✱✱"
+            } else {
+                valueLabel.font = .fontSize16Bold
+                WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
+            }
+            
         } else {
-//            logoImg1.isHidden = true
             valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
         }
     }

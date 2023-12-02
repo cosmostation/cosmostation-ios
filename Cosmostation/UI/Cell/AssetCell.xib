@@ -102,6 +102,15 @@
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✱✱✱✱" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQq-Vq-20c">
+                                <rect key="frame" x="335" y="26" width="36" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="Om8-Xf-R5h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                <color key="textColor" name="_color01"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -111,6 +120,8 @@
                             <constraint firstItem="0Vd-yd-D3B" firstAttribute="leading" secondItem="qk0-ex-tMn" secondAttribute="trailing" constant="1" id="9jU-aQ-fPf"/>
                             <constraint firstItem="Qjd-eJ-FTR" firstAttribute="centerY" secondItem="Pyp-9j-xZD" secondAttribute="centerY" id="BKc-MH-PkN"/>
                             <constraint firstItem="qk0-ex-tMn" firstAttribute="firstBaseline" secondItem="0Vd-yd-D3B" secondAttribute="firstBaseline" constant="-0.5" id="Bby-Lt-KNG"/>
+                            <constraint firstAttribute="trailing" secondItem="SQq-Vq-20c" secondAttribute="trailing" constant="14" id="Brm-BP-0GU"/>
+                            <constraint firstItem="SQq-Vq-20c" firstAttribute="centerY" secondItem="3Pq-ad-7ll" secondAttribute="centerY" id="C9U-Qt-BR7"/>
                             <constraint firstItem="vSK-H4-Id2" firstAttribute="top" secondItem="Qjd-eJ-FTR" secondAttribute="bottom" constant="6" id="CSS-MH-4ob"/>
                             <constraint firstItem="JVP-Gq-Pzr" firstAttribute="leading" secondItem="0Vd-yd-D3B" secondAttribute="trailing" constant="3.9999999999999858" id="ESX-42-Tx4"/>
                             <constraint firstItem="fLS-tf-qvc" firstAttribute="firstBaseline" secondItem="JVP-Gq-Pzr" secondAttribute="firstBaseline" id="K78-1i-6CY"/>
@@ -140,6 +151,7 @@
             <connections>
                 <outlet property="amountLabel" destination="Qjd-eJ-FTR" id="tyH-zz-Au1"/>
                 <outlet property="coinImg" destination="ipz-F5-jrm" id="nCp-E7-S7u"/>
+                <outlet property="hidenValueLabel" destination="SQq-Vq-20c" id="N8K-Ba-qa8"/>
                 <outlet property="priceChangeLabel" destination="JVP-Gq-Pzr" id="f8e-AD-7iF"/>
                 <outlet property="priceChangePercentLabel" destination="fLS-tf-qvc" id="iCM-H2-88Y"/>
                 <outlet property="priceCurrencyLabel" destination="qk0-ex-tMn" id="fMd-Vl-0RI"/>

@@ -21,4 +21,10 @@ extension UIFont {
     static var fontSize16Bold: UIFont {
         UIFont(name: "SpoqaHanSansNeo-Bold", size: 16)!
     }
+    static var fontSize20Bold: UIFont {
+        UIFont(name: "SpoqaHanSansNeo-Bold", size: 20)!
+    }
+    static var fontSize28Bold: UIFont {
+        UIFont(name: "SpoqaHanSansNeo-Bold", size: 28)!
+    }
 }

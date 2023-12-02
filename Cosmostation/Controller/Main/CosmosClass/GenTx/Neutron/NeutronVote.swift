@@ -191,7 +191,7 @@ class NeutronVote: BaseVC {
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
                 $0.sender = selectedChain.bechAddress
-                $0.contract = selectedChain.daosList[0]["proposal_modules"].arrayValue[0]["address"].stringValue
+                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             result.append(msg)
@@ -201,7 +201,7 @@ class NeutronVote: BaseVC {
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
                 $0.sender = selectedChain.bechAddress
-                $0.contract = selectedChain.daosList[0]["proposal_modules"].arrayValue[1]["address"].stringValue
+                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[1]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             result.append(msg)

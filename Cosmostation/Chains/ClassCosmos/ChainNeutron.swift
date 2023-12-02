@@ -15,9 +15,10 @@ import SwiftyJSON
 
 class ChainNeutron: CosmosClass  {
     
-    lazy var vaultsList = [JSON]()
-    lazy var daosList = [JSON]()
-    
+//    lazy var vaultsList = [JSON]()
+//    lazy var daosList = [JSON]()
+    var vaultsList: [JSON]?
+    var daosList: [JSON]?
     var neutronDeposited = NSDecimalNumber.zero
     var neutronVesting: JSON?
     
@@ -38,15 +39,34 @@ class ChainNeutron: CosmosClass  {
         grpcHost = "grpc-neutron.cosmostation.io"
     }
     
+    override func fetchData(_ id: Int64) {
+        Task {
+            if let rawParam = try? await self.fetchChainParam() {
+                mintscanChainParam = rawParam
+                vaultsList = getChainParam()["vaults"].arrayValue
+                daosList = getChainParam()["daos"].arrayValue
+            }
+            if (supportCw20) {
+                if let cw20s = try? await self.fetchCw20Info() {
+                    mintscanCw20Tokens = cw20s
+                }
+            }
+            if (supportErc20) {
+                if let erc20s = try? await self.fetchErc20Info() {
+                    mintscanErc20Tokens = erc20s
+                }
+            }
+        }
+        fetchGrpcData(id)
+    }
+    
     override func fetchPropertyData(_ channel: ClientConnection, _ id: Int64) {
-        self.vaultsList = getChainParam()["vaults"].arrayValue
-        self.daosList = getChainParam()["daos"].arrayValue
         
         let group = DispatchGroup()
         
         fetchBalance(group, channel)
         fetchNeutronVesting(group, channel)
-        if (vaultsList.count > 0) {
+        if (vaultsList?.count ?? 0 > 0) {
             fetchVaultDeposit(group, channel)
         }
         
@@ -89,7 +109,7 @@ extension ChainNeutron {
         let query: JSON = ["voting_power_at_height" : ["address" : bechAddress]]
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
-            $0.address = vaultsList[0]["address"].stringValue
+            $0.address = vaultsList?[0]["address"].stringValue ?? ""
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
         if let response = try? Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.wait() {

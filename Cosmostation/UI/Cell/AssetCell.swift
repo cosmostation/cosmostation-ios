@@ -22,17 +22,32 @@ class AssetCell: UITableViewCell {
     @IBOutlet weak var priceChangePercentLabel: UILabel!
     @IBOutlet weak var valueCurrencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var hidenValueLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
         rootView.setBlur()
+        amountLabel.text = ""
+        valueCurrencyLabel.text = ""
+        valueLabel.text = ""
+        amountLabel.isHidden = true
+        valueCurrencyLabel.isHidden = true
+        valueLabel.isHidden = true
+        hidenValueLabel.isHidden = true
     }
     
     override func prepareForReuse() {
         rootView.setBlur()
         coinImg.af.cancelImageRequest()
         coinImg.image = UIImage(named: "tokenDefault")
+        amountLabel.text = ""
+        valueCurrencyLabel.text = ""
+        valueLabel.text = ""
+        amountLabel.isHidden = true
+        valueCurrencyLabel.isHidden = true
+        valueLabel.isHidden = true
+        hidenValueLabel.isHidden = true
     }
     
     func bindCosmosClassAsset(_ baseChain: CosmosClass, _ coin: Cosmos_Base_V1beta1_Coin) {
@@ -41,7 +56,14 @@ class AssetCell: UITableViewCell {
             WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, 6)
             WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
         }
     }
     
@@ -50,7 +72,14 @@ class AssetCell: UITableViewCell {
         WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
         WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
         WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
-        WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+        if (BaseData.instance.getHideValue()) {
+            hidenValueLabel.isHidden = false
+        } else {
+            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+            amountLabel.isHidden = false
+            valueCurrencyLabel.isHidden = false
+            valueLabel.isHidden = false
+        }
     }
     
     
@@ -65,12 +94,10 @@ class AssetCell: UITableViewCell {
                 
                 let availableAmount = bnbChain.lcdBalanceAmount(coin["symbol"].stringValue)
                 amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
-                
+                amountLabel.isHidden = false
                 priceLabel.isHidden = true
                 priceChangeLabel.isHidden = true
                 priceChangePercentLabel.isHidden = true
-                valueCurrencyLabel.isHidden = true
-                valueLabel.isHidden = true
         }
     }
     
@@ -85,12 +112,10 @@ class AssetCell: UITableViewCell {
                 
                 let availableAmount = oktChain.lcdBalanceAmount(coin["denom"].stringValue)
                 amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
-                
+                amountLabel.isHidden = false
                 priceLabel.isHidden = true
                 priceChangeLabel.isHidden = true
                 priceChangePercentLabel.isHidden = true
-                valueCurrencyLabel.isHidden = true
-                valueLabel.isHidden = true
         }
     }
     
