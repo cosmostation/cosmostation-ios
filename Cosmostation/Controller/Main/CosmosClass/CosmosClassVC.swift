@@ -228,6 +228,10 @@ class CosmosClassVC: BaseVC {
     }
     
     func onOkDepositTx() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let okDeposit = OkDeposit(nibName: "OkDeposit", bundle: nil)
         okDeposit.selectedChain = selectedChain as? ChainOkt60Keccak
         okDeposit.modalTransitionStyle = .coverVertical
@@ -241,6 +245,10 @@ class CosmosClassVC: BaseVC {
                 return
             }
         }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let okWithdraw = OkWithdraw(nibName: "OkWithdraw", bundle: nil)
         okWithdraw.selectedChain = selectedChain as? ChainOkt60Keccak
         okWithdraw.modalTransitionStyle = .coverVertical
@@ -253,6 +261,10 @@ class CosmosClassVC: BaseVC {
                 self.onShowToast(NSLocalizedString("error_no_deposited_asset", comment: ""))
                 return
             }
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
         }
         let okAddShare = OkAddShare(nibName: "OkAddShare", bundle: nil)
         okAddShare.selectedChain = selectedChain as? ChainOkt60Keccak
