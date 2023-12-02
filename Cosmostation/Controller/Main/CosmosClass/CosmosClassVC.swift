@@ -331,8 +331,10 @@ class CosmosClassVC: BaseVC {
             }
             
         } else if (selectedChain is ChainKava118 || selectedChain is ChainKava459) {
-            mainFab.addItem(title: "DeFi", image: UIImage(named: "iconFabDefi")) { _ in
-                self.onKavaDefi()
+            if (!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) {
+                mainFab.addItem(title: "DeFi", image: UIImage(named: "iconFabDefi")) { _ in
+                    self.onKavaDefi()
+                }
             }
             
         } else if (selectedChain is ChainOkt60Keccak) {
