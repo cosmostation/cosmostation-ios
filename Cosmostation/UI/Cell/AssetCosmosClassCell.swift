@@ -162,8 +162,14 @@ class AssetCosmosClassCell: UITableViewCell {
             availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 8)
             amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
             
+            //HardCode
+            vestingLabel?.attributedText = WDP.dpAmount("0", vestingLabel!.font, 8)
+            stakingLabel?.attributedText = WDP.dpAmount("0", stakingLabel!.font, 8)
+            
             if (BaseData.instance.getHideValue()) {
                 availableLabel.text = "✱✱✱✱"
+                vestingLabel.text = "✱✱✱✱"
+                stakingLabel.text = "✱✱✱✱"
             }
         }
     }
