@@ -122,9 +122,9 @@ extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
             self.onShowSafariWeb(url)
             
         } else if (indexPath.row == 1) {
-//            let swapStartVC = SwapStartVC(nibName: "SwapStartVC", bundle: nil)
-//            swapStartVC.modalTransitionStyle = .coverVertical
-//            self.present(swapStartVC, animated: true)
+            let claimStartVC = AllChainClaimStartVC(nibName: "AllChainClaimStartVC", bundle: nil)
+            claimStartVC.modalTransitionStyle = .coverVertical
+            self.present(claimStartVC, animated: true)
             
         } else if (indexPath.row == 2) {
             let swapStartVC = SwapStartVC(nibName: "SwapStartVC", bundle: nil)

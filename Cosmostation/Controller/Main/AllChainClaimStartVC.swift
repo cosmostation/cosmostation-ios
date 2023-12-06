@@ -7,24 +7,61 @@
 //
 
 import UIKit
+import Lottie
 
-class AllChainClaimStartVC: UIViewController {
+class AllChainClaimStartVC: BaseVC {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var cntLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var stakeBtn: BaseButton!
+    @IBOutlet weak var loadingView: LottieAnimationView!
+    @IBOutlet weak var emptyView: UIView!
+    
+    var toDisplayCosmosChains = [CosmosClass]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        baseAccount = BaseData.instance.baseAccount
+        toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
+        print("toDisplayCosmosChains ", toDisplayCosmosChains.count)
+        
+        loadingView.isHidden = false
+        loadingView.animation = LottieAnimation.named("loading")
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.loopMode = .loop
+        loadingView.animationSpeed = 1.3
+        loadingView.play()
+        
+        tableView.isHidden = true
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "ClaimAllChainCell", bundle: nil), forCellReuseIdentifier: "ClaimAllChainCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderTopPadding = 0.0
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    override func setLocalizedString() {
+//        navigationItem.title = NSLocalizedString("title_staking_info", comment: "")
+//        stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
     }
-    */
+    
+    
+    @IBAction func onClickClaim(_ sender: BaseButton) {
+    }
+    
+}
 
+extension AllChainClaimStartVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"ClaimAllChainCell") as! ClaimAllChainCell
+        return cell
+    }
+    
 }
