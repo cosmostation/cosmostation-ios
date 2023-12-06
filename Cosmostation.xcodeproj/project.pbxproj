@@ -1684,6 +1684,10 @@
 		E1E0DBC92A9B0FE3006DA6BB /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1E0DBC52A9B0FE3006DA6BB /* HistoryCell.xib */; };
 		E1E0DBCB2A9B1579006DA6BB /* MintscanHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E0DBCA2A9B1579006DA6BB /* MintscanHistory.swift */; };
 		E1E0DBCC2A9B1579006DA6BB /* MintscanHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E0DBCA2A9B1579006DA6BB /* MintscanHistory.swift */; };
+		E1ECE6BF2B1D992D00FDFD91 /* AllChainClaimStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECE6BD2B1D992D00FDFD91 /* AllChainClaimStartVC.swift */; };
+		E1ECE6C02B1D992D00FDFD91 /* AllChainClaimStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECE6BD2B1D992D00FDFD91 /* AllChainClaimStartVC.swift */; };
+		E1ECE6C12B1D992D00FDFD91 /* AllChainClaimStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1ECE6BE2B1D992D00FDFD91 /* AllChainClaimStartVC.xib */; };
+		E1ECE6C22B1D992D00FDFD91 /* AllChainClaimStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1ECE6BE2B1D992D00FDFD91 /* AllChainClaimStartVC.xib */; };
 		E1F2941C2AFE5246000550E8 /* ChainFetchAi60Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */; };
 		E1F2941D2AFE5246000550E8 /* ChainFetchAi60Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */; };
 		E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F2AE50227EC05100C87F3F /* InfoPlist.strings */; };
@@ -2529,6 +2533,8 @@
 		E1E0DBC42A9B0FE3006DA6BB /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		E1E0DBC52A9B0FE3006DA6BB /* HistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
 		E1E0DBCA2A9B1579006DA6BB /* MintscanHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanHistory.swift; sourceTree = "<group>"; };
+		E1ECE6BD2B1D992D00FDFD91 /* AllChainClaimStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChainClaimStartVC.swift; sourceTree = "<group>"; };
+		E1ECE6BE2B1D992D00FDFD91 /* AllChainClaimStartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllChainClaimStartVC.xib; sourceTree = "<group>"; };
 		E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFetchAi60Old.swift; sourceTree = "<group>"; };
 		E1F2AE4B227E865D00C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1F2AE4F227EC05100C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -3628,6 +3634,8 @@
 				E18D73B52AB484AB00FCB1AA /* DappStartVC.xib */,
 				0400EE862AD425F9007BA97F /* DappDetailVC.swift */,
 				0400EE872AD425F9007BA97F /* DappDetailVC.xib */,
+				E1ECE6BD2B1D992D00FDFD91 /* AllChainClaimStartVC.swift */,
+				E1ECE6BE2B1D992D00FDFD91 /* AllChainClaimStartVC.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -3952,6 +3960,7 @@
 				04CD248B2AD31E2000497EF5 /* BepTxResult.xib in Resources */,
 				04FAD9C72AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
 				E11EAE1E2AAD87AD003BFC7F /* SettingPriceCell.xib in Resources */,
+				E1ECE6C22B1D992D00FDFD91 /* AllChainClaimStartVC.xib in Resources */,
 				04A116F228F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
 				0400EF502ADF7EF4007BA97F /* KavaSwapAction.xib in Resources */,
 				04A68C202ABDA3220041FA13 /* SelectSwapChainCell.xib in Resources */,
@@ -4097,6 +4106,7 @@
 				E11EAE1D2AAD87AD003BFC7F /* SettingPriceCell.xib in Resources */,
 				04C940D02AEA56DE00415256 /* basebg03.png in Resources */,
 				04FA746E2A9F8652001A2830 /* BaseSheet.xib in Resources */,
+				E1ECE6C12B1D992D00FDFD91 /* AllChainClaimStartVC.xib in Resources */,
 				E1CD6AF02AEAAEA300376909 /* AboutDescriptionCell.xib in Resources */,
 				04FAD9EA2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */,
 				040733052AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
@@ -4325,6 +4335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1ECE6C02B1D992D00FDFD91 /* AllChainClaimStartVC.swift in Sources */,
 				18FFB272281AF533004E65BB /* CKey.swift in Sources */,
 				04B7896A2ACAC9B100E9BE88 /* ibc_applications_fee_v1_fee.pb.swift in Sources */,
 				042296822A890C9B003C7630 /* ChainKava118.swift in Sources */,
@@ -5013,6 +5024,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1ECE6BF2B1D992D00FDFD91 /* AllChainClaimStartVC.swift in Sources */,
 				285ADF0D272EE35F0023651F /* CKey.swift in Sources */,
 				04B789692ACAC9B100E9BE88 /* ibc_applications_fee_v1_fee.pb.swift in Sources */,
 				042296812A890C9B003C7630 /* ChainKava118.swift in Sources */,

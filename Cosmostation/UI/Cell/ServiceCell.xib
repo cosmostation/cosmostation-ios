@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,12 +46,6 @@
                                 <rect key="frame" x="16" y="37.666666666666664" width="296.66666666666669" height="15.333333333333336"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color02"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWz-rN-L3h">
-                                <rect key="frame" x="16.000000000000004" y="114" width="38.333333333333343" height="14"/>
-                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="11"/>
-                                <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iqk-XQ-A0s">
@@ -136,8 +130,6 @@
                             <constraint firstItem="pJn-CR-xqA" firstAttribute="leading" secondItem="8Nq-JN-alm" secondAttribute="leading" id="XzJ-pS-uAq"/>
                             <constraint firstItem="pJn-CR-xqA" firstAttribute="top" secondItem="8Nq-JN-alm" secondAttribute="bottom" constant="6" id="Yms-bW-GGh"/>
                             <constraint firstItem="8Nq-JN-alm" firstAttribute="leading" secondItem="1eF-cQ-8SA" secondAttribute="leading" constant="15.999999999999996" id="ZYW-qm-K4d"/>
-                            <constraint firstItem="PWz-rN-L3h" firstAttribute="leading" secondItem="1eF-cQ-8SA" secondAttribute="leading" constant="16" id="d9z-Xu-8lN"/>
-                            <constraint firstItem="iqk-XQ-A0s" firstAttribute="top" secondItem="PWz-rN-L3h" secondAttribute="bottom" constant="6" id="jO9-Vy-3JE"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -156,7 +148,6 @@
                 <outlet property="msgLabel" destination="pJn-CR-xqA" id="hRe-PT-ZBw"/>
                 <outlet property="rootView" destination="1eF-cQ-8SA" id="X88-bJ-xvk"/>
                 <outlet property="serviceImg" destination="TrW-i0-4qE" id="tUz-LR-3dS"/>
-                <outlet property="serviceListLabel" destination="PWz-rN-L3h" id="fax-4B-fBu"/>
                 <outlet property="tag1inch" destination="y4u-L2-xQJ" id="pXd-gT-SG0"/>
                 <outlet property="tagAstroport" destination="Fsp-cT-uCU" id="gnZ-6q-zdO"/>
                 <outlet property="tagkado" destination="8bI-wx-kCa" id="rfi-L7-ecd"/>
