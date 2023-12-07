@@ -640,6 +640,26 @@ extension CosmosClass {
         return result
     }
     
+    func valueableRewards() -> [Cosmos_Distribution_V1beta1_DelegationDelegatorReward] {
+        var result = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
+        cosmosRewards.forEach { reward in
+            var eachRewardValue = NSDecimalNumber.zero
+            for i in 0..<reward.reward.count {
+                let rewardAmount = NSDecimalNumber(string: reward.reward[i].amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
+                if let msAsset = BaseData.instance.getAsset(self.apiName, reward.reward[i].denom) {
+                    let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, true)
+                    let value = msPrice.multiplying(by: rewardAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+                    eachRewardValue = eachRewardValue.adding(value)
+                    if (eachRewardValue.compare(NSDecimalNumber.init(string: "0.1")).rawValue >= 0) {
+                        result.append(reward)
+                        break
+                    }
+                }
+            }
+        }
+        return result
+    }
+    
     
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if (supportCw20) {

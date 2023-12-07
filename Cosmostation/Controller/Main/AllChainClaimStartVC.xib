@@ -16,10 +16,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AllChainClaimStartVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="claimBtn" destination="Dgh-k9-een" id="B5f-rK-Kgz"/>
                 <outlet property="cntLabel" destination="u25-g7-qee" id="96J-rO-B9b"/>
                 <outlet property="emptyView" destination="ZSQ-BT-ahS" id="ked-Qk-Sga"/>
                 <outlet property="loadingView" destination="bjK-Jn-ka9" id="XwL-df-9vy"/>
-                <outlet property="stakeBtn" destination="Dgh-k9-een" id="1Iw-Pm-Y7d"/>
                 <outlet property="tableView" destination="4zJ-D0-k48" id="xJG-QH-ag6"/>
                 <outlet property="titleLabel" destination="IuO-un-Xkg" id="jwt-jE-aME"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
