@@ -346,6 +346,23 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        if (indexPath.section == 1) {
+            
+            let delegation = delegations[indexPath.row]
+            let rewards = selectedChain.cosmosRewards.filter { $0.validatorAddress == delegation.delegation.validatorAddress }
+                
+            let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
+            rewardListPopupVC.selectedChain = selectedChain
+            rewardListPopupVC.rewards = rewards
+            
+            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return rewardListPopupVC }) { _ in
+                UIMenu(title: "", children: [])
+            }
+        }
+        return nil
+    }
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {
@@ -367,6 +384,23 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
         mask.locations = [NSNumber(value: location), NSNumber(value: location)]
         return mask;
+    }
+    
+    func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return makeTargetedPreview(for: configuration)
+    }
+    
+    func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return makeTargetedPreview(for: configuration)
+    }
+    
+    private func makeTargetedPreview(for configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let indexPath = configuration.identifier as? IndexPath else { return nil }
+        guard let cell = tableView.cellForRow(at: indexPath) as? StakeDelegateCell else { return nil }
+        
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = .clear
+        return UITargetedPreview(view: cell, parameters: parameters)
     }
 }
 
