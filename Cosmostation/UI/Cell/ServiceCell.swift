@@ -14,7 +14,6 @@ class ServiceCell: UITableViewCell {
     @IBOutlet weak var serviceImg: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var msgLabel: UILabel!
-    @IBOutlet weak var serviceListLabel: UILabel!
     
     @IBOutlet weak var tagskip: UIImageView!
     @IBOutlet weak var tag1inch: UIImageView!
@@ -51,9 +50,14 @@ class ServiceCell: UITableViewCell {
             
             titleLabel.text = "MINTSCAN"
             msgLabel.text = "Second generation blockchain analytics \nplatform specialized in on-chain \ndata visualization."
-            serviceListLabel.text = ""
             
         } else if (position == 1) {
+            serviceImg.image = UIImage(named: "imgServiceClaim")
+            
+            titleLabel.text = "CLAIM REWARDS"
+            msgLabel.text = "Easily claim all rewards exceeding $1 \nacross Cosmos Chains with a single \nclick."
+            
+        } else if (position == 2) {
             serviceImg.image = UIImage(named: "imgServiceSwap")
             tagskip.isHidden = false
             tagosmo.isHidden = false
@@ -61,26 +65,22 @@ class ServiceCell: UITableViewCell {
             
             titleLabel.text = "COIN SWAP"
             msgLabel.text = "Exchange the coins you have for a \nvariety of different coins"
-            serviceListLabel.text = "Supported APIs"
             
-            
-        } else if (position == 2) {
+        } else if (position == 3) {
             serviceImg.image = UIImage(named: "imgServiceDapp")
             tagkava.isHidden = false
             tagneutron.isHidden = false
             
             titleLabel.text = "DAPP"
             msgLabel.text = "Discover, Track & Trade Everything \nDeFi, NFT and Gaming"
-            serviceListLabel.text = "Major dapps"
             
-        } else if (position == 3) {
+        } else if (position == 4) {
             serviceImg.image = UIImage(named: "imgServiceBuy")
             tagmoonpay.isHidden = false
             tagkado.isHidden = false
             
             titleLabel.text = "BUY CRYPTO"
             msgLabel.text = "The coins purchased can be used for\n online transactions and investments"
-            serviceListLabel.text = "Supported shops"
         }
         
     }

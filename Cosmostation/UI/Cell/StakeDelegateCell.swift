@@ -39,6 +39,8 @@ class StakeDelegateCell: UITableViewCell {
         rootView.setBlur()
         logoImg.af.cancelImageRequest()
         logoImg.image = UIImage(named: "validatorDefault")
+        jailedTag.isHidden = true
+        inactiveTag.isHidden = true
     }
     
     func onBindMyDelegate(_ baseChain: CosmosClass, _ validator: Cosmos_Staking_V1beta1_Validator, _ delegation: Cosmos_Staking_V1beta1_DelegationResponse) {

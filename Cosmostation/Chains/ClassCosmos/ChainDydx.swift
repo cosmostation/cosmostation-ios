@@ -26,3 +26,5 @@ class ChainDydx: CosmosClass  {
         grpcHost = "grpc-dydx.cosmostation.io"
     }
 }
+
+let DYDX_USDC_DENOM = "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5"

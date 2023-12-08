@@ -68,12 +68,14 @@ class CosmosCoinVC: BaseVC {
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
         if (selectedChain != nil && selectedChain.tag == tag) {
-            refresher.endRefreshing()
-            nativeCoins.removeAll()
-            ibcCoins.removeAll()
-            bridgedCoins.removeAll()
-            lcdBalances.removeAll()
-            onSortAssets()
+            DispatchQueue.main.async {
+                self.refresher.endRefreshing()
+                self.nativeCoins.removeAll()
+                self.ibcCoins.removeAll()
+                self.bridgedCoins.removeAll()
+                self.lcdBalances.removeAll()
+                self.onSortAssets()
+            }
         }
     }
     
@@ -337,6 +339,17 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
         return nil
     }
     
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        if (indexPath.section == 0 && indexPath.row == 0 && selectedChain.supportStaking == true && selectedChain.cosmosRewards.count > 0) {
+            let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
+            rewardListPopupVC.selectedChain = selectedChain
+            rewardListPopupVC.rewards = selectedChain.cosmosRewards
+            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return rewardListPopupVC }) { _ in
+                UIMenu(title: "", children: [])
+            }
+        }
+        return nil
+    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {
@@ -358,6 +371,23 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
         mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
         mask.locations = [NSNumber(value: location), NSNumber(value: location)]
         return mask;
+    }
+    
+    func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return makeTargetedPreview(for: configuration)
+    }
+    
+    func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return makeTargetedPreview(for: configuration)
+    }
+    
+    private func makeTargetedPreview(for configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let indexPath = configuration.identifier as? IndexPath else { return nil }
+        guard let cell = tableView.cellForRow(at: indexPath) as? AssetCosmosClassCell else { return nil }
+        
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = .clear
+        return UITargetedPreview(view: cell, parameters: parameters)
     }
 }
 
