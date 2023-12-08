@@ -33,4 +33,14 @@ class RewardDetailCell: UITableViewCell {
         valueLabel.text = ""
     }
     
+    func onBindRewardDetail(_ baseChain: CosmosClass, _ reward: Cosmos_Base_V1beta1_Coin) {
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, reward.denom) {
+            WDP.dpCoin(msAsset, reward, coinImg, symbolLabel, amountLabel, msAsset.decimals)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let amount = NSDecimalNumber(string: reward.amount)
+            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+        }
+    }
+    
 }
