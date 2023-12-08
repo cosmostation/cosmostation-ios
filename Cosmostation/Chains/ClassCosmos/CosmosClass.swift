@@ -753,6 +753,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainMars())
     result.append(ChainMedibloc())
     result.append(ChainNeutron())
+    result.append(ChainNibiru())
     result.append(ChainNoble())
     result.append(ChainNyx())
     result.append(ChainOmniflix())

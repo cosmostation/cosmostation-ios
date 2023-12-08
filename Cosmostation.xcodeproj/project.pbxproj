@@ -1047,6 +1047,8 @@
 		04FF6B992B21EB74009DCA89 /* RewardDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FF6B962B21EB74009DCA89 /* RewardDetailCell.swift */; };
 		04FF6B9A2B21EB74009DCA89 /* RewardDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FF6B972B21EB74009DCA89 /* RewardDetailCell.xib */; };
 		04FF6B9B2B21EB74009DCA89 /* RewardDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FF6B972B21EB74009DCA89 /* RewardDetailCell.xib */; };
+		04FF6B9D2B230FE1009DCA89 /* ChainNibiru.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FF6B9C2B230FE1009DCA89 /* ChainNibiru.swift */; };
+		04FF6B9E2B230FE1009DCA89 /* ChainNibiru.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FF6B9C2B230FE1009DCA89 /* ChainNibiru.swift */; };
 		15B24C862AE9039A0009B359 /* TxSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B24C842AE9039A0009B359 /* TxSignRequestSheet.swift */; };
 		15B24C872AE9039A0009B359 /* TxSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B24C842AE9039A0009B359 /* TxSignRequestSheet.swift */; };
 		15B24C882AE9039A0009B359 /* TxSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15B24C852AE9039A0009B359 /* TxSignRequestSheet.xib */; };
@@ -2224,6 +2226,7 @@
 		04FF6B912B21E101009DCA89 /* CosmosRewardListPopupVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosRewardListPopupVC.xib; sourceTree = "<group>"; };
 		04FF6B962B21EB74009DCA89 /* RewardDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardDetailCell.swift; sourceTree = "<group>"; };
 		04FF6B972B21EB74009DCA89 /* RewardDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardDetailCell.xib; sourceTree = "<group>"; };
+		04FF6B9C2B230FE1009DCA89 /* ChainNibiru.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainNibiru.swift; sourceTree = "<group>"; };
 		15B24C842AE9039A0009B359 /* TxSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxSignRequestSheet.swift; sourceTree = "<group>"; };
 		15B24C852AE9039A0009B359 /* TxSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxSignRequestSheet.xib; sourceTree = "<group>"; };
 		1809C35029D16C80008884C1 /* injectScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = injectScript.js; sourceTree = "<group>"; };
@@ -2734,6 +2737,7 @@
 				0402B8142ACC770300824B3F /* ChainMars.swift */,
 				0402B8172ACC774D00824B3F /* ChainMedibloc.swift */,
 				0402B81A2ACC79F900824B3F /* ChainNeutron.swift */,
+				04FF6B9C2B230FE1009DCA89 /* ChainNibiru.swift */,
 				0402B81D2ACC7A4800824B3F /* ChainNoble.swift */,
 				0402B8202ACC7A8700824B3F /* ChainNyx.swift */,
 				0402B8232ACC7AE500824B3F /* ChainOmniflix.swift */,
@@ -4777,6 +4781,7 @@
 				0400EEEE2ADBE40D007BA97F /* KavaDefiCell.swift in Sources */,
 				E122DB742A8A468D006D1E7B /* cosmos_nft_v1beta1_nft.pb.swift in Sources */,
 				0438A81F2AE15283006FA213 /* KavaMintListCell.swift in Sources */,
+				04FF6B9E2B230FE1009DCA89 /* ChainNibiru.swift in Sources */,
 				0478437A2AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */,
 				E15980AA2A83ADB60032892B /* MainTabVC.swift in Sources */,
 				047843F12AC9A11D00462F1C /* ChainBand.swift in Sources */,
@@ -5469,6 +5474,7 @@
 				E15980A92A83ADB60032892B /* MainTabVC.swift in Sources */,
 				0400EEED2ADBE40D007BA97F /* KavaDefiCell.swift in Sources */,
 				0438A81E2AE15283006FA213 /* KavaMintListCell.swift in Sources */,
+				04FF6B9D2B230FE1009DCA89 /* ChainNibiru.swift in Sources */,
 				047843792AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */,
 				048DBCE2280EC5E90007275E /* MWords.swift in Sources */,
 				047843F02AC9A11D00462F1C /* ChainBand.swift in Sources */,
