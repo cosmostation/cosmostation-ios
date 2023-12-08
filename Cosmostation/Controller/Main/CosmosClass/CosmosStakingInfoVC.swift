@@ -348,7 +348,6 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         if (indexPath.section == 1) {
-            
             let delegation = delegations[indexPath.row]
             let rewards = selectedChain.cosmosRewards.filter { $0.validatorAddress == delegation.delegation.validatorAddress }
                 

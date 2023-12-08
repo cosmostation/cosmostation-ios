@@ -17,6 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CosmosRewardListPopupVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="tableView" destination="O1m-7r-6Hq" id="ZkY-lC-ZyG"/>
+                <outlet property="titleLabel" destination="sEf-lJ-gCI" id="iI9-aS-hBD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

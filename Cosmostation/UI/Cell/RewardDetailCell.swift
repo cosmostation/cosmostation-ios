@@ -40,6 +40,9 @@ class RewardDetailCell: UITableViewCell {
             let amount = NSDecimalNumber(string: reward.amount)
             let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+            
+        } else {
+            symbolLabel.text = "Unknown"
         }
     }
     

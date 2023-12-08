@@ -10,6 +10,7 @@ import UIKit
 
 class CosmosRewardListPopupVC: BaseVC {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     var selectedChain: CosmosClass!
@@ -40,13 +41,15 @@ class CosmosRewardListPopupVC: BaseVC {
                 }
             }
         }
-        print("rewardCoins ", rewardCoins)
         
         rewardCoins.sort {
             if ($0.denom == selectedChain.stakeDenom) { return true }
             if ($1.denom == selectedChain.stakeDenom) { return false }
             if ($0.denom == DYDX_USDC_DENOM) { return true }
             if ($1.denom == DYDX_USDC_DENOM) { return false }
+            
+            if (BaseData.instance.getAsset(selectedChain.apiName, $0.denom) == nil) { return false }
+            if (BaseData.instance.getAsset(selectedChain.apiName, $1.denom) == nil) { return true }
             
             var value0 = NSDecimalNumber.zero
             var value1 = NSDecimalNumber.zero
@@ -63,7 +66,10 @@ class CosmosRewardListPopupVC: BaseVC {
             return value0.compare(value1).rawValue > 0 ? true : false
         }
     }
-
+    
+    override func setLocalizedString() {
+        titleLabel.text = NSLocalizedString("title_reward_detail_list", comment: "") + " (" + String(rewardCoins.count) + ")"
+    }
 }
 
 
