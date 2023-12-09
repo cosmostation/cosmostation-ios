@@ -361,6 +361,7 @@
 "msg_kava_mint_msg" = "Use the collateralized USDX minting function using the CDP module.";
 "msg_kava_lend_msg" = "Use the HARD landing platform to deposit assets and borrow other assets based on LTV.";
 "msg_kava_swap_msg" = "Provide liquidity to AMM-style asset swap pools on the KAVA platform.";
+"msg_kava_earn_msg" = "Earn KAVA. Take advantage of Farming strategies compound your earnings.";
 "msg_create_another_msg" = "You can create a new account using the same mnemonic, but with a different HD Path.\n\nIn general, there is a possibility that it may not be compatible with other wallets, and it is recommended to be used only by those with background knowledge of crypto keys and HD Path.";
 "msg_enter_encription_key" = "Enter the Encryption Key displayed on the screen to restore your account.";
 "msg_addressbook_add" = "For convenience, you can register frequently used addresses.";

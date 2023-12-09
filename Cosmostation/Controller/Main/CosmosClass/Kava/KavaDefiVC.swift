@@ -75,7 +75,7 @@ class KavaDefiVC: BaseVC {
 extension KavaDefiVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -128,6 +128,9 @@ extension KavaDefiVC: UITableViewDelegate, UITableViewDataSource {
             swapListVC.priceFeed = priceFeed
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(swapListVC, animated: true)
+            
+        } else if (indexPath.row == 4) {
+            
         }
     }
 }
