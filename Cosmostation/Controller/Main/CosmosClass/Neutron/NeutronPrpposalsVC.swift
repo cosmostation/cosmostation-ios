@@ -49,7 +49,24 @@ class NeutronPrpposalsVC: BaseVC {
         tableView.sectionHeaderTopPadding = 0.0
         
         Task {
-            onFetchData()
+            onFetchVoteInfos()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (selectedChain.tag == tag) {
+            onFetchVoteInfos()
         }
     }
     
@@ -71,7 +88,7 @@ class NeutronPrpposalsVC: BaseVC {
         self.present(vote, animated: true)
     }
     
-    func onFetchData() {
+    func onFetchVoteInfos() {
         let group = DispatchGroup()
         let channel = getConnection()
         selectedChain.daosList?[0]["proposal_modules"].arrayValue.forEach { pModules in
@@ -215,6 +232,7 @@ extension NeutronPrpposalsVC {
     func fetchMyVotes(_ group: DispatchGroup, _ voter: String)  {
         group.enter()
         let url = MINTSCAN_API_URL + "v1/" + selectedChain.apiName + "/dao/address/" + voter + "/votes"
+        print("url ", url)
         AF.request(url, method: .get).responseDecodable(of: [JSON].self) { response in
             switch response.result {
             case .success(let values):

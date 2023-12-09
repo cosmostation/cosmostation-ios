@@ -48,10 +48,6 @@ class NeutronVote: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        print("toSingleProposals ", toSingleProposals.count)
-//        print("toMultiProposals ", toMultiProposals.count)
-//        print("toSingleProposals ", toSingleProposals)
-        
         baseAccount = BaseData.instance.baseAccount
         
         loadingView.isHidden = true

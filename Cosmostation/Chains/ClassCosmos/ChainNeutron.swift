@@ -45,7 +45,6 @@ class ChainNeutron: CosmosClass  {
                 mintscanChainParam = rawParam
                 vaultsList = getChainParam()["vaults"].arrayValue
                 daosList = getChainParam()["daos"].arrayValue
-                fetchGrpcData(id)
             }
 //            if (supportCw20) {
 //                if let cw20s = try? await self.fetchCw20Info() {
@@ -58,6 +57,7 @@ class ChainNeutron: CosmosClass  {
 //                }
 //            }
         }
+        fetchGrpcData(id)
     }
     
     override func fetchPropertyData(_ channel: ClientConnection, _ id: Int64) {
@@ -66,9 +66,7 @@ class ChainNeutron: CosmosClass  {
         
         fetchBalance(group, channel)
         fetchNeutronVesting(group, channel)
-        if (vaultsList?.count ?? 0 > 0) {
-            fetchVaultDeposit(group, channel)
-        }
+        fetchVaultDeposit(group, channel)
         
         group.notify(queue: .main) {
             try? channel.close()
@@ -109,7 +107,7 @@ extension ChainNeutron {
         let query: JSON = ["voting_power_at_height" : ["address" : bechAddress]]
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
-            $0.address = vaultsList?[0]["address"].stringValue ?? ""
+            $0.address = NEUTRON_VAULT_ADDRESS
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
         if let response = try? Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.wait() {
@@ -173,4 +171,5 @@ extension ChainNeutron {
 }
 
 //Neutron Contract Address
+let NEUTRON_VAULT_ADDRESS = "neutron1qeyjez6a9dwlghf9d6cy44fxmsajztw257586akk6xn6k88x0gus5djz4e"
 let NEUTRON_VESTING_CONTRACT_ADDRESS = "neutron1h6828as2z5av0xqtlh4w9m75wxewapk8z9l2flvzc29zeyzhx6fqgp648z"
