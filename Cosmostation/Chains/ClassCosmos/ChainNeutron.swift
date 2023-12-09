@@ -45,19 +45,19 @@ class ChainNeutron: CosmosClass  {
                 mintscanChainParam = rawParam
                 vaultsList = getChainParam()["vaults"].arrayValue
                 daosList = getChainParam()["daos"].arrayValue
+                fetchGrpcData(id)
             }
-            if (supportCw20) {
-                if let cw20s = try? await self.fetchCw20Info() {
-                    mintscanCw20Tokens = cw20s
-                }
-            }
-            if (supportErc20) {
-                if let erc20s = try? await self.fetchErc20Info() {
-                    mintscanErc20Tokens = erc20s
-                }
-            }
+//            if (supportCw20) {
+//                if let cw20s = try? await self.fetchCw20Info() {
+//                    mintscanCw20Tokens = cw20s
+//                }
+//            }
+//            if (supportErc20) {
+//                if let erc20s = try? await self.fetchErc20Info() {
+//                    mintscanErc20Tokens = erc20s
+//                }
+//            }
         }
-        fetchGrpcData(id)
     }
     
     override func fetchPropertyData(_ channel: ClientConnection, _ id: Int64) {
