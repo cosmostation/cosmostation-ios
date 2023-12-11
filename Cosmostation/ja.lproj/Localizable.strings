@@ -928,6 +928,7 @@
 "title_buy_crypto" = "クリプト購入";
 "title_select_end_point" = "エンドポイントの選択";
 "title_reward_detail_list" = "Reward Detail";
+"title_earn_list" = "Earning List";
 
 
 "proposal_type_basic" = "Basic";
