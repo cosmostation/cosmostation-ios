@@ -40,7 +40,6 @@ class KavaEarnListMyCell: UITableViewCell {
             let availableAmount = chain.balanceAmount(chain.stakeDenom)
             WDP.dpCoin(kavaAsset, availableAmount, nil, myAvailableDenomLabel, myAvailableAmountLabel, kavaAsset.decimals)
         }
-        
     }
     
 }

@@ -942,60 +942,52 @@ class Signer {
         }
         return msgs
     }
-//    
-//    //Tx for Kava Earn Deposit
-//    static func genSignedKavaEarnDelegateDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                         _ depositor: String, _ validator: String, _ depositCoin: Coin,
-//                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let earnDelegateDepositMsg = getKavaEarnDelegateDeposit(depositor, validator, depositCoin)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, [earnDelegateDepositMsg], privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateKavaEarnDelegateMintDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                           _ depositor: String, _ validator: String, _ depositCoin: Coin,
-//                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let earnDelegateDepositMsg = getKavaEarnDelegateDeposit(depositor, validator, depositCoin)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, [earnDelegateDepositMsg], privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func getKavaEarnDelegateDeposit(_ depositor: String, _ validator: String, _ depositCoin: Coin) -> Google_Protobuf_Any {
-//        let earnDeposit = Kava_Router_V1beta1_MsgDelegateMintDeposit.with {
-//            $0.depositor = depositor
-//            $0.validator = validator
-//            $0.amount = Cosmos_Base_V1beta1_Coin.with { $0.denom = depositCoin.denom; $0.amount = depositCoin.amount }
-//        }
-//        return Google_Protobuf_Any.with {
-//            $0.typeURL = "/kava.router.v1beta1.MsgDelegateMintDeposit"
-//            $0.value = try! earnDeposit.serializedData()
-//        }
-//    }
-//    
-//    //Tx for Kava Earn Withdraw
-//    static func genSignedKavaEarnWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                          _ from: String, _ validator: String, _ depositCoin: Coin,
-//                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let earnWithdrawMsg = getKavaEarnWithdraw(from, validator, depositCoin)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, [earnWithdrawMsg], privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateKavaEarnWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                            _ from: String, _ validator: String, _ depositCoin: Coin,
-//                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let earnWithdrawMsg = getKavaEarnWithdraw(from, validator, depositCoin)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, [earnWithdrawMsg], privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func getKavaEarnWithdraw(_ from: String, _ validator: String, _ depositCoin: Coin) -> Google_Protobuf_Any {
-//        let earnWithdraw = Kava_Router_V1beta1_MsgWithdrawBurn.with {
-//            $0.from = from
-//            $0.validator = validator
-//            $0.amount = Cosmos_Base_V1beta1_Coin.with { $0.denom = depositCoin.denom; $0.amount = depositCoin.amount }
-//        }
-//        return Google_Protobuf_Any.with {
-//            $0.typeURL = "/kava.router.v1beta1.MsgWithdrawBurn"
-//            $0.value = try! earnWithdraw.serializedData()
-//        }
-//    }
+    
+    //Tx for Kava Earn Deposit
+    static func genKavaEarnDepositTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                     _ earnDeposit: Kava_Router_V1beta1_MsgDelegateMintDeposit,
+                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let earnDepositMsg = genKavaEarnDepositMsg(earnDeposit)
+        return getSignedTx(auth, earnDepositMsg, fee, memo, baseChain)
+    }
+    
+    static func genKavaEarnDepositSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                        _ earnDeposit: Kava_Router_V1beta1_MsgDelegateMintDeposit,
+                                        _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let earnDepositMsg = genKavaEarnDepositMsg(earnDeposit)
+        return getSimulateTx(auth, earnDepositMsg, fee, memo, baseChain)
+    }
+    
+    static func genKavaEarnDepositMsg(_ earnDeposit: Kava_Router_V1beta1_MsgDelegateMintDeposit) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/kava.router.v1beta1.MsgDelegateMintDeposit"
+            $0.value = try! earnDeposit.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Kava Earn Withdraw
+    static func genKavaEarnWithdrawTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                      _ earnWithdraw: Kava_Router_V1beta1_MsgWithdrawBurn,
+                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let earnWithdrawMsg = genKavaEarnWithdrawMsg(earnWithdraw)
+        return getSignedTx(auth, earnWithdrawMsg, fee, memo, baseChain)
+    }
+    
+    static func genKavaEarnWithdrawSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                         _ earnWithdraw: Kava_Router_V1beta1_MsgWithdrawBurn,
+                                         _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let earnWithdrawMsg = genKavaEarnWithdrawMsg(earnWithdraw)
+        return getSimulateTx(auth, earnWithdrawMsg, fee, memo, baseChain)
+    }
+    
+    static func genKavaEarnWithdrawMsg(_ earnWithdraw: Kava_Router_V1beta1_MsgWithdrawBurn) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/kava.router.v1beta1.MsgWithdrawBurn"
+            $0.value = try! earnWithdraw.serializedData()
+        }
+        return [anyMsg]
+    }
     
     //Tx for Kava Create HTLC Swap
     static func genKavaCreateHTLCSwap(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,

@@ -195,6 +195,8 @@
 "str_delete_address_book" = "Delete Address Book";
 "str_select_valuables" = "Select Wallets with Asset";
 "str_select_hd_path" = "Select HD Path";
+"str_to_add_amount" = "To Add Amount";
+"str_to_remove_amount" = "To Remove Amount";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -924,6 +926,7 @@
 "title_select_swappool_action" = "Select Swp Pool";
 "title_mint_list" = "Mint Market List";
 "title_select_mint_action" = "Select Mint Market";
+"title_select_earn_action" = "Select Earning Options";
 "title_select_wallet" = "Select Wallet";
 "title_buy_crypto" = "Buy Crypto";
 "title_select_end_point" = "Select End-Point";

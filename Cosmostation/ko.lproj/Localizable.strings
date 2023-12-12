@@ -195,6 +195,8 @@
 "str_delete_address_book" = "주소록 삭제";
 "str_select_valuables" = "자산이 있는 지갑 선택";
 "str_select_hd_path" = "HD Path 선택";
+"str_to_add_amount" = "추가 수량 입력";
+"str_to_remove_amount" = "출금 수량 입력";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";
@@ -924,6 +926,7 @@
 "title_select_swappool_action" = "스왑 풀 선택";
 "title_mint_list" = "민팅 목록";
 "title_select_mint_action" = "민팅 선택";
+"title_select_earn_action" = "어닝 선택";
 "title_select_wallet" = "지갑 선택";
 "title_buy_crypto" = "크립토 구매";
 "title_select_end_point" = "End-Point 선택";

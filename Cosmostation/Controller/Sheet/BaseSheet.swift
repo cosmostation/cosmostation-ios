@@ -42,6 +42,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var hardMarketDenom: String?
     var swpName: String?
     var cdpType: String?
+    var earnCoin: Cosmos_Base_V1beta1_Coin?
     
     
     var selectedAccount: BaseAccount?
@@ -244,6 +245,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectMintAction) {
             sheetTitle.text = NSLocalizedString("title_select_mint_action", comment: "")
             
+        } else if (sheetType == .SelectEarnAction) {
+            sheetTitle.text = NSLocalizedString("title_select_earn_action", comment: "")
+            
         } else if (sheetType == .SelectBuyCrypto) {
             sheetTitle.text = NSLocalizedString("title_buy_crypto", comment: "")
             
@@ -387,6 +391,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectMintAction) {
             return 4
+            
+        } else if (sheetType == .SelectEarnAction) {
+            return 2
             
         } else if (sheetType == .SelectBuyCrypto) {
             return 3
@@ -536,6 +543,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindMint(indexPath.row, cdpType!)
             return cell!
             
+        } else if (sheetType == .SelectEarnAction) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
+            cell?.onBindEarn(indexPath.row)
+            return cell!
+            
         } else if (sheetType == .SelectBuyCrypto) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseImgSheetCell") as? BaseImgSheetCell
             cell?.onBindBuyCrypto(indexPath.row)
@@ -645,6 +657,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "cdpType" : cdpType!]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if (sheetType == .SelectEarnAction) {
+            let result: [String : Any] = ["index" : indexPath.row, "targetCoin" : earnCoin!]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
         } else {
             let result: [String : Any] = ["index" : indexPath.row]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -694,5 +710,8 @@ public enum SheetType: Int {
     case SelectHardAction = 61
     case SelectSwpAction = 62
     case SelectMintAction = 63
-    case SelectBuyCrypto = 64
+    case SelectEarnAction = 64
+    
+    
+    case SelectBuyCrypto = 71
 }

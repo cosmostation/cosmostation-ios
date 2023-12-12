@@ -80,6 +80,14 @@ class BaseSheetCell: UITableViewCell {
         }
     }
     
+    func onBindEarn(_ position: Int) {
+        if (position == 0) {
+            titleLabel.text = NSLocalizedString("title_add_liquidity", comment: "")
+        } else {
+            titleLabel.text = NSLocalizedString("title_remove_liquidity", comment: "")
+        }
+    }
+    
     func onSkipSwapSlippage(_ position: Int) {
         if (position == 0) {
             titleLabel.text = "1%"
