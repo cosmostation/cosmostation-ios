@@ -1546,8 +1546,8 @@
 		E12E9D2B2AE2B4A700336449 /* KavaMintAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E9D282AE2B4A700336449 /* KavaMintAction.swift */; };
 		E12E9D2C2AE2B4A700336449 /* KavaMintAction.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D292AE2B4A700336449 /* KavaMintAction.xib */; };
 		E12E9D2D2AE2B4A700336449 /* KavaMintAction.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D292AE2B4A700336449 /* KavaMintAction.xib */; };
-		E12E9D2F2AE415D900336449 /* loadingSmall.json in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D2E2AE415D900336449 /* loadingSmall.json */; };
-		E12E9D302AE415D900336449 /* loadingSmall.json in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D2E2AE415D900336449 /* loadingSmall.json */; };
+		E12E9D2F2AE415D900336449 /* loadingSmallYellow.json in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */; };
+		E12E9D302AE415D900336449 /* loadingSmallYellow.json in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */; };
 		E131A3C32AACBE8A00943013 /* BeaconHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131A3C22AACBE8A00943013 /* BeaconHistory.swift */; };
 		E131A3C42AACBE8A00943013 /* BeaconHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131A3C22AACBE8A00943013 /* BeaconHistory.swift */; };
 		E131A3C62AACD0E000943013 /* OktHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131A3C52AACD0E000943013 /* OktHistory.swift */; };
@@ -1672,6 +1672,8 @@
 		E1945E50222E842B00A1436F /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E4F222E842B00A1436F /* BaseVC.swift */; };
 		E1945E52223124F000A1436F /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E51223124F000A1436F /* BaseData.swift */; };
 		E1945E542231256800A1436F /* BaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E532231256800A1436F /* BaseConstant.swift */; };
+		E19993EA2B295873000F4A6B /* loadingSmallWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = E19993E92B295873000F4A6B /* loadingSmallWhite.json */; };
+		E19993EB2B295873000F4A6B /* loadingSmallWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = E19993E92B295873000F4A6B /* loadingSmallWhite.json */; };
 		E19E8B3D2A92290800001BF5 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3C2A92290800001BF5 /* UIColor+Colors.swift */; };
 		E19E8B3E2A92290800001BF5 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3C2A92290800001BF5 /* UIColor+Colors.swift */; };
 		E19E8B402A92299700001BF5 /* UIFont+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */; };
@@ -2513,7 +2515,7 @@
 		E12E9D232AE2B49900336449 /* KavaMintCreateAction.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaMintCreateAction.xib; sourceTree = "<group>"; };
 		E12E9D282AE2B4A700336449 /* KavaMintAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaMintAction.swift; sourceTree = "<group>"; };
 		E12E9D292AE2B4A700336449 /* KavaMintAction.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaMintAction.xib; sourceTree = "<group>"; };
-		E12E9D2E2AE415D900336449 /* loadingSmall.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingSmall.json; sourceTree = "<group>"; };
+		E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingSmallYellow.json; sourceTree = "<group>"; };
 		E131A3C22AACBE8A00943013 /* BeaconHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconHistory.swift; sourceTree = "<group>"; };
 		E131A3C52AACD0E000943013 /* OktHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktHistory.swift; sourceTree = "<group>"; };
 		E131F4462AEE9BC000E760A0 /* QrImportCheckKeySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrImportCheckKeySheet.swift; sourceTree = "<group>"; };
@@ -2584,6 +2586,7 @@
 		E1945E4F222E842B00A1436F /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		E1945E51223124F000A1436F /* BaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
 		E1945E532231256800A1436F /* BaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConstant.swift; sourceTree = "<group>"; };
+		E19993E92B295873000F4A6B /* loadingSmallWhite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingSmallWhite.json; sourceTree = "<group>"; };
 		E19E8B3C2A92290800001BF5 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Fonts.swift"; sourceTree = "<group>"; };
 		E1A05EC82B04D9710017B72B /* ChainIris.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainIris.swift; sourceTree = "<group>"; };
@@ -3183,7 +3186,8 @@
 				1809C35029D16C80008884C1 /* injectScript.js */,
 				04C940B22AE8D48C00415256 /* aes.js */,
 				E1D538282A96644F00FB0403 /* loading.json */,
-				E12E9D2E2AE415D900336449 /* loadingSmall.json */,
+				E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */,
+				E19993E92B295873000F4A6B /* loadingSmallWhite.json */,
 				0443B89728589B570027A6B9 /* Color.xcassets */,
 				0443B8A1285C7F050027A6B9 /* Chain.xcassets */,
 				E16D9B182248C4880019B7BB /* Assets.xcassets */,
@@ -4142,7 +4146,7 @@
 				04FA74552A9D97A0001A2830 /* Pincode.storyboard in Resources */,
 				E13FC53D2B26BF9E0082C66E /* KavaEarnListVC.xib in Resources */,
 				04F048D02AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */,
-				E12E9D302AE415D900336449 /* loadingSmall.json in Resources */,
+				E12E9D302AE415D900336449 /* loadingSmallYellow.json in Resources */,
 				E131F44B2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */,
 				04B789A22ACAEB5F00E9BE88 /* TxAddressSheet.xib in Resources */,
 				04FAD9DF2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
@@ -4160,6 +4164,7 @@
 				E15980A42A83AB030032892B /* Main.storyboard in Resources */,
 				04CD24562AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */,
 				E1CD6AFD2AEAAEDC00376909 /* AboutRewardAddressCell.xib in Resources */,
+				E19993EB2B295873000F4A6B /* loadingSmallWhite.json in Resources */,
 				04FF6B9B2B21EB74009DCA89 /* RewardDetailCell.xib in Resources */,
 				04C940D42AEA56FC00415256 /* basebg04.png in Resources */,
 				E15F2D132ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */,
@@ -4345,7 +4350,7 @@
 				047842E62AC8B2D600462F1C /* CosmosRedelegate.xib in Resources */,
 				0409D2F72AC5DC6D0021E192 /* CosmosDelegate.xib in Resources */,
 				04B789E72ACB140900E9BE88 /* SelectNameServiceCell.xib in Resources */,
-				E12E9D2F2AE415D900336449 /* loadingSmall.json in Resources */,
+				E12E9D2F2AE415D900336449 /* loadingSmallYellow.json in Resources */,
 				046BF1C22B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */,
 				E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
 				04CD24842AD312BD00497EF5 /* TxAmountBepSheet.xib in Resources */,
@@ -4367,6 +4372,7 @@
 				E1DF77832AB762010028BD51 /* CheckPrivateKeyCell.xib in Resources */,
 				0400EED02ADBBC43007BA97F /* KavaIncentiveCell.xib in Resources */,
 				047BA8D12A94756A00D3F7DD /* CosmosClass.storyboard in Resources */,
+				E19993EA2B295873000F4A6B /* loadingSmallWhite.json in Resources */,
 				0400EE972AD7E99B007BA97F /* NeutronPrpposalsVC.xib in Resources */,
 				04A68C252ABDA3350041FA13 /* SelectSwapAssetCell.xib in Resources */,
 				04C940D32AEA56FC00415256 /* basebg04.png in Resources */,

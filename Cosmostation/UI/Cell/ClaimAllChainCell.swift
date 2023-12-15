@@ -24,10 +24,19 @@ class ClaimAllChainCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        
+        pendingView.isHidden = true
+        pendingView.animation = LottieAnimation.named("loadingSmallWhite")
+        pendingView.contentMode = .scaleAspectFit
+        pendingView.loopMode = .loop
+        pendingView.animationSpeed = 1.3
+        
+        stateImg.isHidden = true
     }
     
     override func prepareForReuse() {
-        
+        pendingView.isHidden = true
+        stateImg.isHidden = true
     }
     
     func onBindRewards(_ chain: CosmosClass, _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) {

@@ -54,7 +54,7 @@ class AllChainClaimStartVC: BaseVC {
     }
     
     override func setLocalizedString() {
-//        navigationItem.title = NSLocalizedString("title_staking_info", comment: "")
+        titleLabel.text = NSLocalizedString("title_claimable_chains", comment: "")
 //        stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
     }
     
@@ -79,6 +79,7 @@ class AllChainClaimStartVC: BaseVC {
             claimBtn.isEnabled = true
         }
     }
+    
     
     @IBAction func onClickClaim(_ sender: BaseButton) {
         

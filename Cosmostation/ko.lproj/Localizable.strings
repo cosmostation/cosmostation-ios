@@ -932,6 +932,7 @@
 "title_select_end_point" = "End-Point 선택";
 "title_reward_detail_list" = "리워드 상세";
 "title_earn_list" = "어닝 목록";
+"title_claimable_chains" = "리워드 대상 체인";
 
 
 "proposal_type_basic" = "기본";
