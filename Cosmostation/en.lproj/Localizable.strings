@@ -197,6 +197,7 @@
 "str_select_hd_path" = "Select HD Path";
 "str_to_add_amount" = "To Add Amount";
 "str_to_remove_amount" = "To Remove Amount";
+"str_claim_all" = "Claim All";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";

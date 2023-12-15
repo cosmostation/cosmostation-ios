@@ -197,6 +197,7 @@
 "str_select_hd_path" = "HD Path 선택";
 "str_to_add_amount" = "추가 수량 입력";
 "str_to_remove_amount" = "출금 수량 입력";
+"str_claim_all" = "모두 수령";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";

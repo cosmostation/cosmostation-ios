@@ -55,7 +55,7 @@ class ServiceCell: UITableViewCell {
             serviceImg.image = UIImage(named: "imgServiceClaim")
             
             titleLabel.text = "CLAIM REWARDS"
-            msgLabel.text = "Easily claim all rewards exceeding $1 \nacross Cosmos Chains with a single \nclick."
+            msgLabel.text = "Easily claim all rewards exceeding $0.1 \nacross Cosmos Chains with a single \nclick."
             
         } else if (position == 2) {
             serviceImg.image = UIImage(named: "imgServiceSwap")

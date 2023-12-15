@@ -245,6 +245,10 @@ extension CosmosClass {
         return result
     }
     
+    func getBaseFeeInfo() -> FeeInfo {
+        return getFeeInfos()[getFeeBasePosition()]
+    }
+    
     func getFeeBasePosition() -> Int {
         return getChainParam()["fee"]["base"].intValue
     }

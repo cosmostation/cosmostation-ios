@@ -197,6 +197,7 @@
 "str_select_hd_path" = "HD Path 選択";
 "str_to_add_amount" = "金額を追加";
 "str_to_remove_amount" = "削除量";
+"str_claim_all" = "すべてを請求する";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
