@@ -129,8 +129,17 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             } else {
                 skipAssets = BaseData.instance.skipAssets
             }
-//            print("skipChains ", skipChains.count)
-//            print("skipAssets ", skipAssets?["chain_to_assets_map"].count)
+            
+            
+            //Remove no supporting denom chain
+            let chainIds = skipChains.map { chain in
+                chain.chainId
+            }
+            chainIds.forEach { chainId in
+                if (skipAssets?["chain_to_assets_map"][chainId!]["assets"].arrayValue.count ?? 0 == 0) {
+                    skipChains = skipChains.filter({ $0.chainId != chainId })
+                }
+            }
             
             // $0.isDefault 예외처리 확인 카바
             inputCosmosChain = skipChains.filter({ $0.tag == "cosmos118" }).first!
