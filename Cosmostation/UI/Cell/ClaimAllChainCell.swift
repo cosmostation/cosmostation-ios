@@ -67,7 +67,7 @@ class ClaimAllChainCell: UITableViewCell {
     }
     
     func onBindRewards(_ chain: CosmosClass, _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                       _ txFee: Cosmos_Tx_V1beta1_Fee?, _ broadcasted: Bool, _ response: Cosmos_Base_Abci_V1beta1_TxResponse?) {
+                       _ txFee: Cosmos_Tx_V1beta1_Fee?, _ broadcasted: Bool, _ response: Cosmos_Tx_V1beta1_GetTxResponse?) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         if (chain.evmCompatible) {
@@ -129,6 +129,7 @@ class ClaimAllChainCell: UITableViewCell {
                 stateImg.isHidden = false
         }
         
+        print("UPUPUPUP", response)
         if (broadcasted == true && response != nil) {
             stateImg.image = UIImage(named: "iconClaimAllDone")
             pendingView.isHidden = true

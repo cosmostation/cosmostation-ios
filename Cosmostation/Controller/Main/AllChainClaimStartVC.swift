@@ -24,7 +24,7 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
     @IBOutlet weak var emptyView: UIView!
     
     var valueableRewards = [(CosmosClass, [Cosmos_Distribution_V1beta1_DelegationDelegatorReward], 
-                             Cosmos_Tx_V1beta1_Fee?, Bool, Cosmos_Base_Abci_V1beta1_TxResponse?)] ()
+                             Cosmos_Tx_V1beta1_Fee?, Bool, Cosmos_Tx_V1beta1_GetTxResponse?)] ()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,20 +164,36 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
                     let chain = valueableRewards[i].0
                     let rewards = valueableRewards[i].1
                     let txFee = valueableRewards[i].2
-                    if let response = try await broadcastClaimTx(chain, rewards, txFee!) {
-                        valueableRewards[i].4 = response
-                    }
                     
-                    DispatchQueue.main.async {
-                        self.tableView.beginUpdates()
-                        self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
-                        self.tableView.endUpdates()
-                        
-                        if (self.valueableRewards.filter { $0.4 == nil }.count == 0) {
-                            self.confirmBtn.isEnabled = true
-                        }
+                    let channel = getConnection(chain)
+                    if let auth = try await fetchAuth(channel, chain),
+                       let response = try await broadcastClaimTx(chain, channel, auth, rewards, txFee!) {
+                        self.checkTx(i, channel, response)
                     }
                 }
+            }
+        }
+    }
+    
+    func checkTx(_ position: Int, _ channel: ClientConnection, _ txResponse: Cosmos_Base_Abci_V1beta1_TxResponse) {
+        Task {
+            do {
+                let result = try await fetchTx(channel, txResponse)
+                valueableRewards[position].4 = result
+                DispatchQueue.main.async {
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadRows(at: [IndexPath(row: position, section: 0)], with: .none)
+                    self.tableView.endUpdates()
+                    
+                    if (self.valueableRewards.filter { $0.4 == nil }.count == 0) {
+                        self.confirmBtn.isEnabled = true
+                    }
+                }
+                
+            } catch {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
+                    self.checkTx(position, channel, txResponse)
+                });
             }
         }
     }
@@ -212,20 +228,25 @@ extension AllChainClaimStartVC {
         }
     }
     
-    func broadcastClaimTx(_ chain: CosmosClass, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward], _ fee: Cosmos_Tx_V1beta1_Fee) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let channel = getConnection(chain)
-        if let auth = try await fetchAuth(channel, chain) {
-            var tx = Signer.genClaimRewardsTx(auth, claimableRewards, fee, "", chain)
-            tx.mode = .sync
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(tx, callOptions: getCallOptions()).response.get().txResponse
-        } else {
-            return nil
-        }
+    func broadcastClaimTx(_ chain: CosmosClass, _ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                           _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward], _ fee: Cosmos_Tx_V1beta1_Fee) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+        let reqTx = Signer.genClaimRewardsTx(auth, claimableRewards, fee, "", chain)
+        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
+        
     }
     
     func fetchAuth(_ channel: ClientConnection, _ chain: CosmosClass) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = chain.bechAddress }
         return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
+    }
+    
+    func fetchTx(_ channel: ClientConnection, _ response: Cosmos_Base_Abci_V1beta1_TxResponse) async throws -> Cosmos_Tx_V1beta1_GetTxResponse? {
+        let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = response.txhash }
+        do {
+            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).getTx(req, callOptions: getCallOptions()).response.get()
+        } catch {
+            throw error
+        }
     }
     
     
