@@ -129,7 +129,6 @@ class ClaimAllChainCell: UITableViewCell {
                 stateImg.isHidden = false
         }
         
-        print("UPUPUPUP", response)
         if (broadcasted == true && response != nil) {
             stateImg.image = UIImage(named: "iconClaimAllDone")
             pendingView.isHidden = true
