@@ -149,15 +149,16 @@ extension KavaSwapListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.sheetDelegate = self
         if (indexPath.section == 0) {
+            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+            baseSheet.sheetDelegate = self
             baseSheet.swpName = swapMyDeposit?[indexPath.row].poolID
+            baseSheet.sheetType = .SelectSwpAction
+            onStartSheet(baseSheet, 240)
+            
         } else {
-            baseSheet.swpName = swapOtherList[indexPath.row].name
+            onDepositSwpTx(swapOtherList[indexPath.row].name)
         }
-        baseSheet.sheetType = .SelectSwpAction
-        onStartSheet(baseSheet, 240)
     }
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {

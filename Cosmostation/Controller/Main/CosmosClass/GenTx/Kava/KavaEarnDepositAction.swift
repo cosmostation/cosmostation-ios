@@ -1,8 +1,8 @@
 //
-//  NeutronVote.swift
+//  KavaEarnDepositAction.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2023/10/14.
+//  Created by yongjoo jung on 2023/12/12.
 //  Copyright © 2023 wannabit. All rights reserved.
 //
 
@@ -13,10 +13,23 @@ import GRPC
 import NIO
 import SwiftProtobuf
 
-class NeutronVote: BaseVC {
+class KavaEarnDepositAction: BaseVC {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var validatorCardView: FixCardView!
+    @IBOutlet weak var monikerImg: UIImageView!
+    @IBOutlet weak var monikerLabel: UILabel!
+    @IBOutlet weak var inactiveTag: UIImageView!
+    @IBOutlet weak var jailedTag: UIImageView!
+    @IBOutlet weak var commLabel: UILabel!
+    @IBOutlet weak var commPercentLabel: UILabel!
+    
+    @IBOutlet weak var addAmountCardView: FixCardView!
+    @IBOutlet weak var addAmountTitle: UILabel!
+    @IBOutlet weak var addAmountHintLabel: UILabel!
+    @IBOutlet weak var addAmountLabel: UILabel!
+    @IBOutlet weak var addDenomLabel: UILabel!
     
     @IBOutlet weak var memoCardView: FixCardView!
     @IBOutlet weak var memoTitle: UILabel!
@@ -32,18 +45,19 @@ class NeutronVote: BaseVC {
     @IBOutlet weak var feeValueLabel: UILabel!
     @IBOutlet weak var feeSegments: UISegmentedControl!
     
-    @IBOutlet weak var voteBtn: BaseButton!
+    @IBOutlet weak var addBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    
-    var selectedChain: ChainNeutron!
+    var selectedChain: ChainKava60!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
+    var toEarnDeposit: Kava_Router_V1beta1_MsgDelegateMintDeposit!
     var txFee: Cosmos_Tx_V1beta1_Fee!
     var txMemo = ""
     
-    var toSingleProposals = [JSON]()
-    var toMultiProposals = [JSON]()
+    var availableAmount = NSDecimalNumber.zero
+    var toValidator: Cosmos_Staking_V1beta1_Validator?
+    var toCoin: Cosmos_Base_V1beta1_Coin?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,41 +80,76 @@ class NeutronVote: BaseVC {
         feeSegments.selectedSegmentIndex = selectedFeeInfo
         txFee = selectedChain.getInitPayableFee()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(UINib(nibName: "NeutronSingleVoteCell", bundle: nil), forCellReuseIdentifier: "NeutronSingleVoteCell")
-        tableView.register(UINib(nibName: "NeutronMultiVoteCell", bundle: nil), forCellReuseIdentifier: "NeutronMultiVoteCell")
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.sectionHeaderTopPadding = 0.0
-        
+        validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
+        addAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
+        if (toValidator == nil) {
+            if let validator = selectedChain.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first {
+                toValidator = validator
+            } else {
+                toValidator = selectedChain.cosmosValidators[0]
+            }
+        }
+        
+        onUpdateValidatorView()
         onUpdateFeeView()
     }
     
     override func setLocalizedString() {
+        addAmountTitle.text = NSLocalizedString("str_to_add_amount", comment: "")
+        addAmountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
-        voteBtn.setTitle(NSLocalizedString("str_vote", comment: ""), for: .normal)
+        addBtn.setTitle(NSLocalizedString("title_add_liquidity", comment: ""), for: .normal)
     }
     
-    @objc func onClickMemo() {
-        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
-        memoSheet.existedMemo = txMemo
-        memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+    @objc func onClickValidator() {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.targetChain = selectedChain
+        baseSheet.validators = selectedChain.cosmosValidators
+        baseSheet.sheetDelegate = self
+        baseSheet.sheetType = .SelectValidator
+        onStartSheet(baseSheet, 680)
     }
     
-    func onUpdateMemoView(_ memo: String) {
-        txMemo = memo
-        if (txMemo.isEmpty) {
-            memoLabel.isHidden = true
-            memoHintLabel.isHidden = false
+    func onUpdateValidatorView() {
+        monikerImg.image = UIImage(named: "validatorDefault")
+        monikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
+        monikerLabel.text = toValidator!.description_p.moniker
+        if (toValidator!.jailed) {
+            jailedTag.isHidden = false
         } else {
-            memoLabel.text = txMemo
-            memoLabel.isHidden = false
-            memoHintLabel.isHidden = true
+            inactiveTag.isHidden = toValidator!.status == .bonded
+        }
+        
+        let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
+        commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
+        onSimul()
+    }
+    
+    @objc func onClickAmount() {
+        let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
+        amountSheet.selectedChain = selectedChain
+        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
+        amountSheet.availableAmount = availableAmount
+        if let existedAmount = toCoin?.amount {
+            amountSheet.existedAmount = NSDecimalNumber(string: existedAmount)
+        }
+        amountSheet.sheetDelegate = self
+        amountSheet.sheetType = .TxDelegate
+        self.onStartSheet(amountSheet)
+    }
+    
+    func onUpdateAmountView(_ amount: String) {
+        let stakeDenom = selectedChain.stakeDenom!
+        toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = amount }
+        
+        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
+            WDP.dpCoin(msAsset, toCoin, nil, addDenomLabel, addAmountLabel, msAsset.decimals)
+            addAmountHintLabel.isHidden = true
+            addAmountLabel.isHidden = false
+            addDenomLabel.isHidden = false
         }
         onSimul()
     }
@@ -130,6 +179,38 @@ class NeutronVote: BaseVC {
             let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
+        
+        let stakeDenom = selectedChain.stakeDenom!
+        let balanceAmount = selectedChain.balanceAmount(stakeDenom)
+        if (txFee.amount[0].denom == stakeDenom) {
+            let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
+            if (feeAmount.compare(balanceAmount).rawValue > 0) {
+                //ERROR short balance!!
+            }
+            availableAmount = balanceAmount.subtracting(feeAmount)
+        } else {
+            availableAmount = balanceAmount
+        }
+    }
+    
+    @objc func onClickMemo() {
+        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
+        memoSheet.existedMemo = txMemo
+        memoSheet.memoDelegate = self
+        self.onStartSheet(memoSheet, 260)
+    }
+    
+    func onUpdateMemoView(_ memo: String) {
+        txMemo = memo
+        if (txMemo.isEmpty) {
+            memoLabel.isHidden = true
+            memoHintLabel.isHidden = false
+        } else {
+            memoLabel.text = txMemo
+            memoLabel.isHidden = false
+            memoHintLabel.isHidden = true
+        }
+        onSimul()
     }
     
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
@@ -141,23 +222,32 @@ class NeutronVote: BaseVC {
                 txFee.amount[0].amount = feeCoinAmount!.stringValue
             }
         }
+        
         onUpdateFeeView()
         view.isUserInteractionEnabled = true
         loadingView.isHidden = true
-        voteBtn.isEnabled = true
+        addBtn.isEnabled = true
     }
     
-    @IBAction func onClickVote(_ sender: BaseButton) {
+    @IBAction func onClickAdd(_ sender: BaseButton) {
         let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
         self.present(pinVC, animated: true)
     }
     
     func onSimul() {
-        if (toSingleProposals.filter { $0["myVote"].string == nil }.count > 0) { return }
-        if (toMultiProposals.filter { $0["myVote"].int == nil }.count > 0) { return }
+        if (toCoin == nil ) { return }
         view.isUserInteractionEnabled = false
-        voteBtn.isEnabled = false
+        addBtn.isEnabled = false
         loadingView.isHidden = false
+        
+        toEarnDeposit = Kava_Router_V1beta1_MsgDelegateMintDeposit.with {
+            $0.depositor = selectedChain.bechAddress
+            $0.validator = toValidator!.operatorAddress
+            $0.amount = toCoin!
+        }
+        if (selectedChain.isGasSimulable() == false) {
+            return onUpdateWithSimul(nil)
+        }
         
         Task {
             let channel = getConnection()
@@ -179,101 +269,19 @@ class NeutronVote: BaseVC {
             }
         }
     }
-    
-    func onBindWasmMsg() -> [Cosmwasm_Wasm_V1_MsgExecuteContract] {
-        var result = [Cosmwasm_Wasm_V1_MsgExecuteContract]()
-        toSingleProposals.forEach { single in
-            let jsonMsg: JSON = ["vote" : ["proposal_id" : single["id"].int64Value, "vote" : single["myVote"].stringValue]]
-            let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-            let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.bechAddress
-                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[0]["address"].stringValue ?? ""
-                $0.msg  = Data(base64Encoded: jsonMsgBase64)!
-            }
-            result.append(msg)
-        }
-        toMultiProposals.forEach { multi in
-            let jsonMsg: JSON = ["vote" : ["proposal_id" : multi["id"].int64Value, "vote" : ["option_id" : multi["myVote"].intValue ]]]
-            let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-            let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.bechAddress
-                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[1]["address"].stringValue ?? ""
-                $0.msg  = Data(base64Encoded: jsonMsgBase64)!
-            }
-            result.append(msg)
-        }
-        return result
-    }
+
 }
 
-
-extension NeutronVote: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
+extension KavaEarnDepositAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (section == 0) {
-            return toSingleProposals.count
-        }
-        return toMultiProposals.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (indexPath.section == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"NeutronSingleVoteCell") as! NeutronSingleVoteCell
-            cell.onBindsingleVote(toSingleProposals[indexPath.row])
-            cell.actionToggle = { tag in
-                if (tag == 0) {
-                    self.toSingleProposals[indexPath.row]["myVote"] = "yes"
-                } else if (tag == 1) {
-                    self.toSingleProposals[indexPath.row]["myVote"] = "no"
-                } else if (tag == 2) {
-                    self.toSingleProposals[indexPath.row]["myVote"] = "abstain"
-                } else {
-                    self.toSingleProposals[indexPath.row].dictionaryObject?.removeValue(forKey: "myVote")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
-                    self.tableView.beginUpdates()
-                    self.tableView.reloadRows(at: [indexPath], with: .none)
-                    self.tableView.endUpdates()
-                    self.onSimul()
-                })
-            }
-            return cell
-            
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"NeutronMultiVoteCell") as! NeutronMultiVoteCell
-            cell.onBindmultiVote(toMultiProposals[indexPath.row])
-            cell.actionToggle = { tag in
-                if (tag == 0) {
-                    self.toMultiProposals[indexPath.row]["myVote"] = 0
-                } else if (tag == 1) {
-                    self.toMultiProposals[indexPath.row]["myVote"] = 1
-                } else if (tag == 2) {
-                    self.toMultiProposals[indexPath.row]["myVote"] = 2
-                } else if (tag == 3) {
-                    self.toMultiProposals[indexPath.row]["myVote"] = 3
-                } else {
-                    self.toMultiProposals[indexPath.row].dictionaryObject?.removeValue(forKey: "myVote")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
-                    self.tableView.beginUpdates()
-                    self.tableView.reloadRows(at: [indexPath], with: .none)
-                    self.tableView.endUpdates()
-                    self.onSimul()
-                })
-            }
-            return cell
-        }
-    }
-    
-}
-
-
-extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SelectFeeCoin) {
+        if (sheetType == .SelectValidator) {
+            if let validatorAddress = result["validatorAddress"] as? String {
+                toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                onUpdateValidatorView()
+            }
+            
+        } else if (sheetType == .SelectFeeCoin) {
             if let index = result["index"] as? Int,
                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
                 txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
@@ -287,10 +295,14 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
         onUpdateMemoView(memo)
     }
     
+    func onInputedAmount(_ type: AmountSheetType?, _ amount: String) {
+        onUpdateAmountView(amount)
+    }
+    
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
             view.isUserInteractionEnabled = false
-            voteBtn.isEnabled = false
+            addBtn.isEnabled = false
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
@@ -309,11 +321,9 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
             }
         }
     }
-    
 }
 
-
-extension NeutronVote {
+extension KavaEarnDepositAction {
     
     func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
@@ -321,7 +331,7 @@ extension NeutronVote {
     }
     
     func simulateTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, onBindWasmMsg(), txFee, txMemo, selectedChain)
+        let simulTx = Signer.genKavaEarnDepositSimul(auth, toEarnDeposit, txFee, txMemo, selectedChain)
         do {
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
         } catch {
@@ -330,10 +340,9 @@ extension NeutronVote {
     }
     
     func broadcastTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, onBindWasmMsg(), txFee, txMemo, selectedChain)
+        let reqTx = Signer.genKavaEarnDepositTx(auth, toEarnDeposit, txFee, txMemo, selectedChain)
         return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
     }
-    
     
     
     func getConnection() -> ClientConnection {
@@ -346,4 +355,5 @@ extension NeutronVote {
         callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
+    
 }

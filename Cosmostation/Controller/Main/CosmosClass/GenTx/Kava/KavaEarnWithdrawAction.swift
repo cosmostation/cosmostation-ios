@@ -1,8 +1,8 @@
 //
-//  NeutronVote.swift
+//  KavaEarnWithdrawAction.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2023/10/14.
+//  Created by yongjoo jung on 2023/12/12.
 //  Copyright © 2023 wannabit. All rights reserved.
 //
 
@@ -13,10 +13,15 @@ import GRPC
 import NIO
 import SwiftProtobuf
 
-class NeutronVote: BaseVC {
+class KavaEarnWithdrawAction: BaseVC {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var removeAmountCardView: FixCardView!
+    @IBOutlet weak var removeAmountTitle: UILabel!
+    @IBOutlet weak var removeAmountHintLabel: UILabel!
+    @IBOutlet weak var removeAmountLabel: UILabel!
+    @IBOutlet weak var removeDenomLabel: UILabel!
     
     @IBOutlet weak var memoCardView: FixCardView!
     @IBOutlet weak var memoTitle: UILabel!
@@ -32,18 +37,19 @@ class NeutronVote: BaseVC {
     @IBOutlet weak var feeValueLabel: UILabel!
     @IBOutlet weak var feeSegments: UISegmentedControl!
     
-    @IBOutlet weak var voteBtn: BaseButton!
+    @IBOutlet weak var removeBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    
-    var selectedChain: ChainNeutron!
+    var selectedChain: CosmosClass!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
+    var toEarnRemove: Kava_Router_V1beta1_MsgWithdrawBurn!
     var txFee: Cosmos_Tx_V1beta1_Fee!
     var txMemo = ""
     
-    var toSingleProposals = [JSON]()
-    var toMultiProposals = [JSON]()
+    var availableAmount = NSDecimalNumber.zero
+    var targetCoin: Cosmos_Base_V1beta1_Coin!
+    var toCoin: Cosmos_Base_V1beta1_Coin?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,14 +72,7 @@ class NeutronVote: BaseVC {
         feeSegments.selectedSegmentIndex = selectedFeeInfo
         txFee = selectedChain.getInitPayableFee()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(UINib(nibName: "NeutronSingleVoteCell", bundle: nil), forCellReuseIdentifier: "NeutronSingleVoteCell")
-        tableView.register(UINib(nibName: "NeutronMultiVoteCell", bundle: nil), forCellReuseIdentifier: "NeutronMultiVoteCell")
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.sectionHeaderTopPadding = 0.0
-        
+        removeAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
@@ -81,26 +80,34 @@ class NeutronVote: BaseVC {
     }
     
     override func setLocalizedString() {
+        titleLabel.text = NSLocalizedString("str_to_remove_amount", comment: "")
+        removeAmountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
-        voteBtn.setTitle(NSLocalizedString("str_vote", comment: ""), for: .normal)
+        removeBtn.setTitle(NSLocalizedString("title_remove_liquidity", comment: ""), for: .normal)
     }
     
-    @objc func onClickMemo() {
-        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
-        memoSheet.existedMemo = txMemo
-        memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+    @objc func onClickAmount() {
+        let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
+        amountSheet.selectedChain = selectedChain
+        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
+        amountSheet.availableAmount = availableAmount
+        if let existedAmount = toCoin?.amount {
+            amountSheet.existedAmount = NSDecimalNumber(string: existedAmount)
+        }
+        amountSheet.sheetDelegate = self
+        amountSheet.sheetType = .TxUndelegate
+        self.onStartSheet(amountSheet)
     }
     
-    func onUpdateMemoView(_ memo: String) {
-        txMemo = memo
-        if (txMemo.isEmpty) {
-            memoLabel.isHidden = true
-            memoHintLabel.isHidden = false
-        } else {
-            memoLabel.text = txMemo
-            memoLabel.isHidden = false
-            memoHintLabel.isHidden = true
+    func onUpdateAmountView(_ amount: String) {
+        let stakeDenom = selectedChain.stakeDenom!
+        toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = amount }
+        
+        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
+            WDP.dpCoin(msAsset, toCoin, nil, removeDenomLabel, removeAmountLabel, msAsset.decimals)
+            removeAmountHintLabel.isHidden = true
+            removeAmountLabel.isHidden = false
+            removeDenomLabel.isHidden = false
         }
         onSimul()
     }
@@ -130,6 +137,27 @@ class NeutronVote: BaseVC {
             let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
+        availableAmount = targetCoin.getAmount()
+    }
+    
+    @objc func onClickMemo() {
+        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
+        memoSheet.existedMemo = txMemo
+        memoSheet.memoDelegate = self
+        self.onStartSheet(memoSheet, 260)
+    }
+    
+    func onUpdateMemoView(_ memo: String) {
+        txMemo = memo
+        if (txMemo.isEmpty) {
+            memoLabel.isHidden = true
+            memoHintLabel.isHidden = false
+        } else {
+            memoLabel.text = txMemo
+            memoLabel.isHidden = false
+            memoHintLabel.isHidden = true
+        }
+        onSimul()
     }
     
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
@@ -144,20 +172,28 @@ class NeutronVote: BaseVC {
         onUpdateFeeView()
         view.isUserInteractionEnabled = true
         loadingView.isHidden = true
-        voteBtn.isEnabled = true
+        removeBtn.isEnabled = true
     }
     
-    @IBAction func onClickVote(_ sender: BaseButton) {
+    @IBAction func onClickRemove(_ sender: BaseButton) {
         let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
         self.present(pinVC, animated: true)
     }
     
     func onSimul() {
-        if (toSingleProposals.filter { $0["myVote"].string == nil }.count > 0) { return }
-        if (toMultiProposals.filter { $0["myVote"].int == nil }.count > 0) { return }
+        if (toCoin == nil) { return }
         view.isUserInteractionEnabled = false
-        voteBtn.isEnabled = false
+        removeBtn.isEnabled = false
         loadingView.isHidden = false
+        
+        toEarnRemove = Kava_Router_V1beta1_MsgWithdrawBurn.with {
+            $0.from = selectedChain.bechAddress
+            $0.validator = targetCoin.denom.replacingOccurrences(of: "bkava-", with: "")
+            $0.amount = toCoin!
+        }
+        if (selectedChain.isGasSimulable() == false) {
+            return onUpdateWithSimul(nil)
+        }
         
         Task {
             let channel = getConnection()
@@ -179,99 +215,10 @@ class NeutronVote: BaseVC {
             }
         }
     }
-    
-    func onBindWasmMsg() -> [Cosmwasm_Wasm_V1_MsgExecuteContract] {
-        var result = [Cosmwasm_Wasm_V1_MsgExecuteContract]()
-        toSingleProposals.forEach { single in
-            let jsonMsg: JSON = ["vote" : ["proposal_id" : single["id"].int64Value, "vote" : single["myVote"].stringValue]]
-            let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-            let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.bechAddress
-                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[0]["address"].stringValue ?? ""
-                $0.msg  = Data(base64Encoded: jsonMsgBase64)!
-            }
-            result.append(msg)
-        }
-        toMultiProposals.forEach { multi in
-            let jsonMsg: JSON = ["vote" : ["proposal_id" : multi["id"].int64Value, "vote" : ["option_id" : multi["myVote"].intValue ]]]
-            let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-            let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.bechAddress
-                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[1]["address"].stringValue ?? ""
-                $0.msg  = Data(base64Encoded: jsonMsgBase64)!
-            }
-            result.append(msg)
-        }
-        return result
-    }
 }
 
-
-extension NeutronVote: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
+extension KavaEarnWithdrawAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (section == 0) {
-            return toSingleProposals.count
-        }
-        return toMultiProposals.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (indexPath.section == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"NeutronSingleVoteCell") as! NeutronSingleVoteCell
-            cell.onBindsingleVote(toSingleProposals[indexPath.row])
-            cell.actionToggle = { tag in
-                if (tag == 0) {
-                    self.toSingleProposals[indexPath.row]["myVote"] = "yes"
-                } else if (tag == 1) {
-                    self.toSingleProposals[indexPath.row]["myVote"] = "no"
-                } else if (tag == 2) {
-                    self.toSingleProposals[indexPath.row]["myVote"] = "abstain"
-                } else {
-                    self.toSingleProposals[indexPath.row].dictionaryObject?.removeValue(forKey: "myVote")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
-                    self.tableView.beginUpdates()
-                    self.tableView.reloadRows(at: [indexPath], with: .none)
-                    self.tableView.endUpdates()
-                    self.onSimul()
-                })
-            }
-            return cell
-            
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"NeutronMultiVoteCell") as! NeutronMultiVoteCell
-            cell.onBindmultiVote(toMultiProposals[indexPath.row])
-            cell.actionToggle = { tag in
-                if (tag == 0) {
-                    self.toMultiProposals[indexPath.row]["myVote"] = 0
-                } else if (tag == 1) {
-                    self.toMultiProposals[indexPath.row]["myVote"] = 1
-                } else if (tag == 2) {
-                    self.toMultiProposals[indexPath.row]["myVote"] = 2
-                } else if (tag == 3) {
-                    self.toMultiProposals[indexPath.row]["myVote"] = 3
-                } else {
-                    self.toMultiProposals[indexPath.row].dictionaryObject?.removeValue(forKey: "myVote")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
-                    self.tableView.beginUpdates()
-                    self.tableView.reloadRows(at: [indexPath], with: .none)
-                    self.tableView.endUpdates()
-                    self.onSimul()
-                })
-            }
-            return cell
-        }
-    }
-    
-}
-
-
-extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeCoin) {
             if let index = result["index"] as? Int,
@@ -287,10 +234,14 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
         onUpdateMemoView(memo)
     }
     
+    func onInputedAmount(_ type: AmountSheetType?, _ amount: String) {
+        onUpdateAmountView(amount)
+    }
+    
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
             view.isUserInteractionEnabled = false
-            voteBtn.isEnabled = false
+            removeBtn.isEnabled = false
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
@@ -309,11 +260,10 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
             }
         }
     }
-    
 }
 
 
-extension NeutronVote {
+extension KavaEarnWithdrawAction {
     
     func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
@@ -321,7 +271,7 @@ extension NeutronVote {
     }
     
     func simulateTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, onBindWasmMsg(), txFee, txMemo, selectedChain)
+        let simulTx = Signer.genKavaEarnWithdrawSimul(auth, toEarnRemove, txFee, txMemo, selectedChain)
         do {
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
         } catch {
@@ -330,10 +280,9 @@ extension NeutronVote {
     }
     
     func broadcastTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, onBindWasmMsg(), txFee, txMemo, selectedChain)
+        let reqTx = Signer.genKavaEarnWithdrawTx(auth, toEarnRemove, txFee, txMemo, selectedChain)
         return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
     }
-    
     
     
     func getConnection() -> ClientConnection {
@@ -347,3 +296,4 @@ extension NeutronVote {
         return callOptions
     }
 }
+

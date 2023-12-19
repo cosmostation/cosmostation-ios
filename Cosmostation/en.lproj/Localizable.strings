@@ -195,6 +195,9 @@
 "str_delete_address_book" = "Delete Address Book";
 "str_select_valuables" = "Select Wallets with Asset";
 "str_select_hd_path" = "Select HD Path";
+"str_to_add_amount" = "To Add Amount";
+"str_to_remove_amount" = "To Remove Amount";
+"str_claim_all" = "Claim All";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -361,6 +364,7 @@
 "msg_kava_mint_msg" = "Use the collateralized USDX minting function using the CDP module.";
 "msg_kava_lend_msg" = "Use the HARD landing platform to deposit assets and borrow other assets based on LTV.";
 "msg_kava_swap_msg" = "Provide liquidity to AMM-style asset swap pools on the KAVA platform.";
+"msg_kava_earn_msg" = "Earn KAVA. Take advantage of Farming strategies compound your earnings.";
 "msg_create_another_msg" = "You can create a new account using the same mnemonic, but with a different HD Path.\n\nIn general, there is a possibility that it may not be compatible with other wallets, and it is recommended to be used only by those with background knowledge of crypto keys and HD Path.";
 "msg_enter_encription_key" = "Enter the Encryption Key displayed on the screen to restore your account.";
 "msg_addressbook_add" = "For convenience, you can register frequently used addresses.";
@@ -923,10 +927,13 @@
 "title_select_swappool_action" = "Select Swp Pool";
 "title_mint_list" = "Mint Market List";
 "title_select_mint_action" = "Select Mint Market";
+"title_select_earn_action" = "Select Earning Options";
 "title_select_wallet" = "Select Wallet";
 "title_buy_crypto" = "Buy Crypto";
 "title_select_end_point" = "Select End-Point";
 "title_reward_detail_list" = "Reward Detail";
+"title_earn_list" = "Earning List";
+"title_claimable_chains" = "Claimable Chains";
 
 
 "proposal_type_basic" = "Basic";

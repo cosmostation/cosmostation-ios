@@ -195,6 +195,9 @@
 "str_delete_address_book" = "連絡先の削除";
 "str_select_valuables" = "資産のある財布の選択";
 "str_select_hd_path" = "HD Path 選択";
+"str_to_add_amount" = "金額を追加";
+"str_to_remove_amount" = "削除量";
+"str_claim_all" = "すべてを請求する";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -361,6 +364,7 @@
 "msg_kava_mint_msg" = "CDPモジュールを使用して、担保型USDXミンティング機能を利用してみてください。";
 "msg_kava_lend_msg" = "HARDランディングプラットフォームを利用して資産を預け、LTVに基づいて他の資産を貸し出して利用することができます。";
 "msg_kava_swap_msg" = "KAVAプラットフォーム上のAMM方式の資産スワッププールに流動性を提供します。";
+"msg_kava_earn_msg" = "KAVAを獲得しましょう。 農業戦略を活用すると、収益がさらに高まります。";
 "msg_create_another_msg" = "同じニーモニックを使用して、異なる HD パスを使用して新しいアカウントを作成できます。\n\n一般に、他のウォレットと互換性がない可能性があり、暗号キーと HD パスの予備知識がある人のみが使用することをお勧めします。";
 "msg_enter_encription_key" = "アカウントを復元するには、画面に表示される暗号化キーを入力してください。";
 "msg_addressbook_add" = "便宜上、よく使うアドレスを登録できます。";
@@ -923,10 +927,13 @@
 "title_select_swappool_action" = "Select Swp Pool";
 "title_mint_list" = "Mint Market List";
 "title_select_mint_action" = "Select Mint Market";
+"title_select_earn_action" = "Select Earning Options";
 "title_select_wallet" = "Select Wallet";
 "title_buy_crypto" = "クリプト購入";
 "title_select_end_point" = "エンドポイントの選択";
 "title_reward_detail_list" = "Reward Detail";
+"title_earn_list" = "Earning List";
+"title_claimable_chains" = "リワード対象チェーン";
 
 
 "proposal_type_basic" = "Basic";

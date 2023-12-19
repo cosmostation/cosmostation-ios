@@ -29,7 +29,7 @@ class ChainSelectVC: BaseVC {
         super.viewDidLoad()
         
         loadingView.isHidden = false
-        loadingView.animation = LottieAnimation.named("loadingSmall")
+        loadingView.animation = LottieAnimation.named("loadingSmallYellow")
         loadingView.contentMode = .scaleAspectFit
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3

@@ -46,9 +46,6 @@ class CosmosAboutVC: BaseVC {
     
     @objc func onFetchStakeDone(_ notification: NSNotification) {
         DispatchQueue.main.async {
-//            self.tableView.beginUpdates()
-//            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .none)
-//            self.tableView.endUpdates()
             self.tableView.reloadSections(IndexSet(2...2), with: .none)
         }
     }

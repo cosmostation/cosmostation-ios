@@ -41,6 +41,10 @@ class KavaDefiCell: UITableViewCell {
             titleLabel.text = "SWAP POOL"
             msgLabel.text = NSLocalizedString("msg_kava_swap_msg", comment: "")
             
+        } else if (position == 4) {
+            defiImg.image = UIImage(named: "imgKavaEarn")
+            titleLabel.text = "EARN"
+            msgLabel.text = NSLocalizedString("msg_kava_earn_msg", comment: "")
         }
     }
     
