@@ -9,16 +9,18 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Lottie
 
 class CosmosHistoryVC: BaseVC {
     
+    @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyDataView: UIView!
     var refresher: UIRefreshControl!
     
     var selectedChain: CosmosClass!
     var msHistoryGroup = Array<MintscanHistoryGroup>()
-    var msHistoyID: Int64 = 0
+    var msHistoyID = ""
     var msHasMore = false
     let BATCH_CNT = 30
     
@@ -29,6 +31,13 @@ class CosmosHistoryVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        
+        loadingView.isHidden = false
+        loadingView.animation = LottieAnimation.named("loading")
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.loopMode = .loop
+        loadingView.animationSpeed = 1.3
+        loadingView.play()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -58,19 +67,18 @@ class CosmosHistoryVC: BaseVC {
             onFetchOktHistory(selectedChain.evmAddress)
             
         } else {
-            msHistoyID = 0
+            msHistoyID = ""
             msHasMore = false
             onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
         }
     }
     
-    func onFetchMsHistory(_ address: String?, _ id: Int64) {
+    func onFetchMsHistory(_ address: String?, _ id: String) {
         let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, address!)
-        print("url ", url)
-        AF.request(url, method: .get, parameters: ["limit":String(BATCH_CNT), "from":String(id)]).responseDecodable(of: [MintscanHistory].self, queue: .main, decoder: JSONDecoder()) { response in
+        AF.request(url, method: .get, parameters: ["limit":String(BATCH_CNT), "search_after":id]).responseDecodable(of: [MintscanHistory].self, queue: .main, decoder: JSONDecoder()) { response in
             switch response.result {
             case .success(let value):
-                if (id == 0) { self.msHistoryGroup.removeAll() }
+                if (id == "") { self.msHistoryGroup.removeAll() }
                 if (value.count > 0) {
                     value.forEach { history in
                         let headerDate  = WDP.dpDate(history.header?.timestamp)
@@ -80,12 +88,12 @@ class CosmosHistoryVC: BaseVC {
                             self.msHistoryGroup.append(MintscanHistoryGroup.init(headerDate, [history]))
                         }
                     }
-                    self.msHistoyID = value.last?.header?.id ?? 0
+                    self.msHistoyID = value.last?.search_after ?? ""
                     self.msHasMore = value.count >= self.BATCH_CNT
                     
                 } else {
                     self.msHasMore = false
-                    self.msHistoyID = 0
+                    self.msHistoyID = ""
                 }
                 
                 if (self.msHistoryGroup.count > 0) {
@@ -192,12 +200,15 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (selectedChain is ChainBinanceBeacon) {
+            loadingView.isHidden = beaconHistoey.count > 0
             return beaconHistoey.count
             
         } else if (selectedChain is ChainOkt60Keccak) {
+            loadingView.isHidden = oktHistoey.count > 0
             return oktHistoey.count
             
         } else {
+            loadingView.isHidden = msHistoryGroup[section].values.count > 0
             return msHistoryGroup[section].values.count
         }
         
@@ -221,14 +232,14 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if (!(selectedChain is ChainBinanceBeacon) && !(selectedChain is ChainOkt60Keccak)) {
-//            if (indexPath.section == self.msHistoryGroup.count - 1
-//                && indexPath.row == self.msHistoryGroup.last!.values.count - 1
-//                && msHasMore == true) {
-//                msHasMore = false
-//                onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
-//            }
-//        }
+        if (!(selectedChain is ChainBinanceBeacon) && !(selectedChain is ChainOkt60Keccak)) {
+            if (indexPath.section == self.msHistoryGroup.count - 1
+                && indexPath.row == self.msHistoryGroup.last!.values.count - 1
+                && msHasMore == true) {
+                msHasMore = false
+                onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

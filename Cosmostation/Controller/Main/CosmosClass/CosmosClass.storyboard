@@ -302,6 +302,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxe-k3-Aob" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="106.66666666666669" y="283.66666666666669" width="180" height="110"/>
+                                <viewLayoutGuide key="safeArea" id="cg0-eK-Ein"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="17n-lH-4cC"/>
+                                    <constraint firstAttribute="width" constant="180" id="X3w-DY-W7J"/>
+                                </constraints>
+                            </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79U-Ag-E0L">
                                 <rect key="frame" x="76.666666666666686" y="274.66666666666669" width="240" height="128"/>
                                 <subviews>
@@ -340,14 +349,17 @@
                         <constraints>
                             <constraint firstItem="79U-Ag-E0L" firstAttribute="centerX" secondItem="nzP-Ug-Ff6" secondAttribute="centerX" id="2jj-o7-zA1"/>
                             <constraint firstItem="79U-Ag-E0L" firstAttribute="centerY" secondItem="nzP-Ug-Ff6" secondAttribute="centerY" id="7J3-Nx-Mm6"/>
+                            <constraint firstItem="hxe-k3-Aob" firstAttribute="centerY" secondItem="nzP-Ug-Ff6" secondAttribute="centerY" id="C5R-K6-bib"/>
                             <constraint firstAttribute="bottom" secondItem="4Uf-kp-c8Q" secondAttribute="bottom" id="FEb-4f-3kM"/>
                             <constraint firstItem="4Uf-kp-c8Q" firstAttribute="leading" secondItem="Ihg-v3-xNz" secondAttribute="leading" id="Fkg-QA-Zyd"/>
+                            <constraint firstItem="hxe-k3-Aob" firstAttribute="centerX" secondItem="nzP-Ug-Ff6" secondAttribute="centerX" id="itV-Nb-PJO"/>
                             <constraint firstItem="4Uf-kp-c8Q" firstAttribute="top" secondItem="Ihg-v3-xNz" secondAttribute="top" id="sw9-GL-bsD"/>
                             <constraint firstAttribute="trailing" secondItem="4Uf-kp-c8Q" secondAttribute="trailing" id="wJQ-Qi-EjC"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emptyDataView" destination="79U-Ag-E0L" id="VNQ-eN-zxw"/>
+                        <outlet property="loadingView" destination="hxe-k3-Aob" id="03y-Mr-fDZ"/>
                         <outlet property="tableView" destination="4Uf-kp-c8Q" id="OJz-sS-fea"/>
                     </connections>
                 </viewController>

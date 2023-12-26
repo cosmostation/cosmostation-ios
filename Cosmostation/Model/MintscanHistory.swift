@@ -13,6 +13,7 @@ import SwiftyJSON
 public struct MintscanHistory: Codable {
     var header: MintscanHistoryHeader?
     var data: MintscanHistoryData?
+    var search_after: String?
     
     public func isSuccess() -> Bool {
         if let RawCode = self.data?.code {
@@ -599,6 +600,12 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgUpdateClient")) {
                     result = NSLocalizedString("tx_ibc_client_update", comment: "")
+                    
+                } else if (msgType.contains("MsgRecvPacket")) {
+                    result = NSLocalizedString("tx_ibc_receive", comment: "")
+                    
+                } else if (msgType.contains("MsgAcknowledgement")) {
+                    result = NSLocalizedString("tx_ibc_acknowledgement", comment: "")
                 }
                 
                 if (getMsgCnt() >= 2) {
