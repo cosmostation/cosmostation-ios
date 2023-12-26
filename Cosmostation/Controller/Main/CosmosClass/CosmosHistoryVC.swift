@@ -20,7 +20,7 @@ class CosmosHistoryVC: BaseVC {
     var msHistoryGroup = Array<MintscanHistoryGroup>()
     var msHistoyID: Int64 = 0
     var msHasMore = false
-    let BATCH_CNT = 50
+    let BATCH_CNT = 30
     
     var beaconHistoey = Array<BeaconHistory>()  //For BNB Beacon chain
     var oktHistoey = Array<OktHistory>()        //For OKT chain
@@ -66,6 +66,7 @@ class CosmosHistoryVC: BaseVC {
     
     func onFetchMsHistory(_ address: String?, _ id: Int64) {
         let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, address!)
+        print("url ", url)
         AF.request(url, method: .get, parameters: ["limit":String(BATCH_CNT), "from":String(id)]).responseDecodable(of: [MintscanHistory].self, queue: .main, decoder: JSONDecoder()) { response in
             switch response.result {
             case .success(let value):
@@ -220,14 +221,14 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if (!(selectedChain is ChainBinanceBeacon) && !(selectedChain is ChainOkt60Keccak)) {
-            if (indexPath.section == self.msHistoryGroup.count - 1
-                && indexPath.row == self.msHistoryGroup.last!.values.count - 1
-                && msHasMore == true) {
-                msHasMore = false
-                onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
-            }
-        }
+//        if (!(selectedChain is ChainBinanceBeacon) && !(selectedChain is ChainOkt60Keccak)) {
+//            if (indexPath.section == self.msHistoryGroup.count - 1
+//                && indexPath.row == self.msHistoryGroup.last!.values.count - 1
+//                && msHasMore == true) {
+//                msHasMore = false
+//                onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
+//            }
+//        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -91,7 +91,7 @@ class BaseNetWork {
         } else if (chain is ChainOkt60Keccak) {
             return MINTSCAN_API_URL + "v1/utils/proxy/okc-transaction-list?device=IOS&chainShortName=okc&address=" + address + "&limit=50"
         } else {
-            return MINTSCAN_API_URL + "v1/" + chain.apiName + "/account/" + address + "/txs"
+            return MINTSCAN_API_URL + "v10/" + chain.apiName + "/account/" + address + "/txs"
         }
     }
     

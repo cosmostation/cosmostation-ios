@@ -24,13 +24,7 @@ public struct MintscanHistory: Codable {
     }
     
     public func getMsgs() -> Array<JSON>? {
-        if let msgs = data?.tx?["body"]["messages"].array {
-            return msgs
-        }
-        if let msgs = data?.tx?["value"]["msg"].array {
-            return msgs
-        }
-        return nil
+        return data?.tx?["/cosmos-tx-v1beta1-Tx"]["body"]["messages"].array
     }
     
     
@@ -805,7 +799,9 @@ public struct MintscanHistory: Codable {
             }
 
             if (getMsgCnt() > 1) {
+                print("result ", result)
                 result = result +  " + " + String(getMsgCnt() - 1)
+                print("result ", result)
             }
             
         }
@@ -1018,11 +1014,11 @@ public struct MintscanHistoryData: Codable {
     var txhash: String?
     var codespace: String?
     var code: Int?
-    var data: String?
-    var raw_log: String?
+//    var data: String?
+//    var raw_log: String?
     var info: String?
-    var gas_wanted: String?
-    var gas_used: String?
+//    var gas_wanted: String?
+//    var gas_used: String?
     var timestamp: String?
     var tx: JSON?
     var logs: Array<JSON>?
