@@ -1136,7 +1136,7 @@
 "tx_redelegate" = "Redelegate";
 "tx_get_reward" = "Get Rewards";
 "tx_get_commission" = "Get Commission";
-"tx_fund_pool" = "Funding\nCommunity Pool";
+"tx_fund_pool" = "Funding Community Pool";
 "tx_change_reward_address" = "Edit Address";
 "tx_vote" = "Vote";
 "tx_submit_proposal" = "Proposal";
@@ -1146,8 +1146,8 @@
 "tx_authz_grant" = "Authz Grant";
 "tx_authz_revoke" = "Authz Revoke";
 "tx_authz_exe" = "Authz Execute";
-"tx_feegrant_allowance" = "Fee Grant\nAllowance";
-"tx_feegrant_revoke" = "Fee Grant\nRevoke";
+"tx_feegrant_allowance" = "Fee Grant Allowance";
+"tx_feegrant_revoke" = "Fee Grant Revoke";
 "tx_create_validator" = "Create Val";
 "tx_edit_validator" = "Edit Val";
 "tx_unjail_validator" = "Unjail Val";
@@ -1157,18 +1157,12 @@
 "tx_cancel_order" = "Cancel Order";
 "tx_issue_token" = "Issue Token";
 "tx_kava_post_price" = "Post Price";
-"tx_kava_create_cdp" = "CDP\nOpen";
-"tx_kava_create_cdp2" = "CDP Open";
-"tx_kava_deposit_cdp" = "CDP\nDeposit";
-"tx_kava_deposit_cdp2" = "CDP Deposit";
-"tx_kava_withdraw_cdp" = "CDP\nWithdraw";
-"tx_kava_withdraw_cdp2" = "CDP Withdraw";
-"tx_kava_drawdebt_cdp" = "CDP\nBorrow";
-"tx_kava_drawdebt_cdp2" = "CDP Borrow";
-"tx_kava_repaydebt_cdp" = "CDP\nRepay";
-"tx_kava_repaydebt_cdp2" = "CDP Repay";
-"tx_kava_liquidate_cdp" = "CDP\nLiquidate";
-"tx_kava_liquidate_cdp2" = "CDP Liquidate";
+"tx_kava_create_cdp" = "CDP Open";
+"tx_kava_deposit_cdp" = "CDP Deposit";
+"tx_kava_withdraw_cdp" = "CDP Withdraw";
+"tx_kava_drawdebt_cdp" = "CDP Borrow";
+"tx_kava_repaydebt_cdp" = "CDP Repay";
+"tx_kava_liquidate_cdp" = "CDP Liquidate";
 "tx_create_htlc" = "BEP3 Create";
 "tx_send_htlc" = "BEP3 Send";
 "tx_receive_htlc" = "BEP3 Receive";
@@ -1213,8 +1207,8 @@
 
 "tx_ibc_send" = "IBC Send";
 "tx_ibc_receive" = "IBC Received";
-"tx_ibc_client_update" = "IBC Client\nUpdate";
-"tx_ibc_acknowledgement" = "IBC Acknowledgement";
+"tx_ibc_client_update" = "IBC Client Update";
+"tx_ibc_acknowledgement" = "IBC Ack";
 
 "tx_create_pool" = "Create Pool";
 "tx_join_pool" = "Join Pool";
@@ -1265,6 +1259,7 @@
 "tx_cosmwasm_store_code" = "Store Contract Code";
 "tx_cosmwasm_instantiate" = "Instantiate Contract";
 "tx_cosmwasm_execontract" = "Execute Contract";
+"tx_cosmwasm" = "Wasm";
 
 "tx_ethereum_evm" = "Ethereum Tx";
 
