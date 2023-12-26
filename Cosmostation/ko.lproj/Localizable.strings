@@ -1130,6 +1130,7 @@
 "tx_send" = "보내기";
 "tx_receive" = "받기";
 "tx_transfer" = "전송하기";
+"tx_multi_send" = "멀티 전송";
 "tx_delegate" = "스테이킹";
 "tx_undelegate" = "위임 철회";
 "tx_cancel_undelegate" = "위임 철회 취소";

@@ -86,7 +86,7 @@ public struct MintscanHistory: Codable {
                     }
                     
                 } else if (msgType.contains("MsgMultiSend")) {
-                    result = NSLocalizedString("tx_transfer", comment: "")
+                    result = NSLocalizedString("tx_multi_send", comment: "")
                 }
                 
             } else if (msgType.contains("cosmos.") && msgType.contains("distribution")) {
@@ -656,14 +656,11 @@ public struct MintscanHistory: Codable {
         var result = Array<Cosmos_Base_V1beta1_Coin>()
         if (getMsgCnt() > 0) {
             var allReward = true
-            for msg in getMsgs()! {
-                var msgType = ""
-                if let rawMsgType = msg["@type"].string { msgType = rawMsgType }
-                if let rawMsgType = msg["type"].string { msgType = rawMsgType }
-                if (!msgType.contains("MsgWithdrawDelegatorReward")) {
+            getMsgs()?.forEach({ msg in
+                if (msg["@type"].string?.contains("MsgWithdrawDelegatorReward") == false) {
                     allReward = false
                 }
-            }
+            })
             if (allReward) {
                 data?.logs?.forEach({ log in
                     if let event = log["events"].array?.filter({ $0["type"].string == "transfer" }).first {
@@ -688,14 +685,11 @@ public struct MintscanHistory: Codable {
             
             
             var ibcReceived = false
-            for msg in getMsgs()! {
-                var msgType = ""
-                if let rawMsgType = msg["@type"].string { msgType = rawMsgType }
-                if let rawMsgType = msg["type"].string { msgType = rawMsgType }
-                if (msgType.contains("ibc") && msgType.contains("MsgRecvPacket")) {
+            getMsgs()?.forEach({ msg in
+                if (msg["@type"].string?.contains("ibc") == true && msg["@type"].string?.contains("MsgRecvPacket") == true) {
                     ibcReceived = true
                 }
-            }
+            })
             if (ibcReceived) {
                 data?.logs?.forEach({ log in
                     if let event = log["events"].array?.filter({ $0["type"].string == "transfer" }).first {
@@ -725,19 +719,19 @@ public struct MintscanHistory: Codable {
         
         //display re-invset amount
         if (getMsgCnt() == 2) {
-            var msgType0 = ""
-            var msgType1 = ""
-            if let rawMsgType = getMsgs()?[0]["@type"].string { msgType0 = rawMsgType }
-            if let rawMsgType = getMsgs()?[0]["type"].string { msgType0 = rawMsgType }
-            if let rawMsgType = getMsgs()?[1]["@type"].string { msgType1 = rawMsgType }
-            if let rawMsgType = getMsgs()?[1]["type"].string { msgType1 = rawMsgType }
-            if (msgType0.contains("MsgWithdrawDelegatorReward") && msgType1.contains("MsgDelegate")) {
-                if let rawAmount = getMsgs()?[1]["amount"] {
-                    let value = Cosmos_Base_V1beta1_Coin.with {
-                        $0.denom = rawAmount["denom"].stringValue
-                        $0.amount = rawAmount["amount"].stringValue
+            if let msgType0 = getMsgs()?[0]["@type"].string,
+               let msgType1 = getMsgs()?[1]["@type"].string,
+               msgType0.contains("MsgWithdrawDelegatorReward"),
+               msgType1.contains("MsgDelegate") {
+                if let msgValue1 = getMsgs()?[1][msgType1.replacingOccurrences(of: ".", with: "-")] {
+                    let rawAmount = msgValue1["amount"]
+                    if (!rawAmount.isEmpty) {
+                        let value = Cosmos_Base_V1beta1_Coin.with {
+                            $0.denom = rawAmount["denom"].stringValue
+                            $0.amount = rawAmount["amount"].stringValue
+                        }
+                        result.append(value)
                     }
-                    result.append(value)
                 }
                 return sortedCoins(chain, result)
             }
@@ -745,29 +739,29 @@ public struct MintscanHistory: Codable {
 
 
         if (getMsgCnt() == 0 || getMsgCnt() > 1) { return nil }
-
-        var msgType = ""
-        if let rawMsgType = getMsgs()?[0]["@type"].string { msgType = rawMsgType }
-        if let rawMsgType = getMsgs()?[0]["type"].string { msgType = rawMsgType }
-
-        if (msgType.contains("MsgSend")) {
-            if let rawAmounts = getMsgs()?[0]["amount"].array {
-                let value = Cosmos_Base_V1beta1_Coin.with {
-                    $0.denom = rawAmounts[0]["denom"].stringValue
-                    $0.amount = rawAmounts[0]["amount"].stringValue
+        if let firstMsg = getMsgs()?[0],
+           let msgType = firstMsg["@type"].string {
+            let msgValue = firstMsg[msgType.replacingOccurrences(of: ".", with: "-")]
+            
+            if (msgType.contains("MsgSend")) {
+                if let rawAmounts = msgValue["amount"].array {
+                    let value = Cosmos_Base_V1beta1_Coin.with {
+                        $0.denom = rawAmounts[0]["denom"].stringValue
+                        $0.amount = rawAmounts[0]["amount"].stringValue
+                    }
+                    result.append(value)
                 }
-                result.append(value)
-            }
-            if let rawAmounts = getMsgs()?[0]["value"]["amount"].array {
-                let value = Cosmos_Base_V1beta1_Coin.with {
-                    $0.denom = rawAmounts[0]["denom"].stringValue
-                    $0.amount = rawAmounts[0]["amount"].stringValue
+                if let rawAmounts = msgValue["value"]["amount"].array {
+                    let value = Cosmos_Base_V1beta1_Coin.with {
+                        $0.denom = rawAmounts[0]["denom"].stringValue
+                        $0.amount = rawAmounts[0]["amount"].stringValue
+                    }
+                    result.append(value)
                 }
-                result.append(value)
-            }
 
-        } else if (msgType.contains("MsgDelegate") || msgType.contains("MsgUndelegate") || msgType.contains("MsgBeginRedelegate")) {
-            if let rawAmount = getMsgs()?[0]["amount"] {
+            } else if (msgType.contains("MsgDelegate") || msgType.contains("MsgUndelegate") ||
+                       msgType.contains("MsgBeginRedelegate") || msgType.contains("MsgCancelUnbondingDelegation")) {
+                let rawAmount = msgValue["amount"]
                 if (!rawAmount.isEmpty) {
                     let value = Cosmos_Base_V1beta1_Coin.with {
                         $0.denom = rawAmount["denom"].stringValue
@@ -776,19 +770,8 @@ public struct MintscanHistory: Codable {
                     result.append(value)
                 }
 
-            }
-            if let rawAmount = getMsgs()?[0]["value"]["amount"] {
-                if (!rawAmount.isEmpty) {
-                    let value = Cosmos_Base_V1beta1_Coin.with {
-                        $0.denom = rawAmount["denom"].stringValue
-                        $0.amount = rawAmount["amount"].stringValue
-                    }
-                    result.append(value)
-                }
-            }
-
-        } else if (msgType.contains("ibc") && msgType.contains("MsgTransfer")) {
-            if let rawAmount = getMsgs()?[0]["token"] {
+            } else if (msgType.contains("ibc") && msgType.contains("MsgTransfer")) {
+                let rawAmount = msgValue["token"]
                 if (!rawAmount.isEmpty) {
                     let value = Cosmos_Base_V1beta1_Coin.with {
                         $0.denom = rawAmount["denom"].stringValue
@@ -803,11 +786,11 @@ public struct MintscanHistory: Codable {
     
     public func getVoteOption() -> String {
         var result = ""
-        var msgType = ""
-        if let rawMsgType = getMsgs()?[0]["@type"].string { msgType = rawMsgType }
-        if let rawMsgType = getMsgs()?[0]["type"].string { msgType = rawMsgType }
-        if (msgType.contains("MsgVote")) {
-            if let rawOption = getMsgs()?[0]["option"].string {
+        if let firstMsg = getMsgs()?[0],
+           let msgType = firstMsg["@type"].string,
+           msgType.contains("MsgVote") {
+            let msgValue = firstMsg[msgType.replacingOccurrences(of: ".", with: "-")]
+            if let rawOption = msgValue["option"].string {
                 if (rawOption == "VOTE_OPTION_YES") {
                     result = "YES"
                 } else if (rawOption == "VOTE_OPTION_ABSTAIN") {

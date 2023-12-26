@@ -1130,6 +1130,7 @@
 "tx_send" = "Send";
 "tx_receive" = "Received";
 "tx_transfer" = "Transfer";
+"tx_multi_send" = "Multi Send";
 "tx_delegate" = "Delegate";
 "tx_undelegate" = "Undelegate";
 "tx_cancel_undelegate" = "Cancel Undelegate";
