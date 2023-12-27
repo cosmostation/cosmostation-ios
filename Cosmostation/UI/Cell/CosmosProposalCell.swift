@@ -93,7 +93,7 @@ class CosmosProposalCell: UITableViewCell {
         }
     }
     
-    func onBindNeutronDao(_ module: JSON?, _ proposal: JSON, _ myVotes: [JSON], _ toVote: [Int64]) {
+    func onBindNeutronDao(_ module: JSON?, _ proposal: JSON, _ myVotes: [JSON]?, _ toVote: [Int64]) {
         guard let module = module else {
             return
         }
@@ -130,7 +130,7 @@ class CosmosProposalCell: UITableViewCell {
             
         }
         
-        if let myVote = myVotes.filter({$0["contract_address"].stringValue == module["address"].stringValue && $0["proposal_id"].int64Value == id }).first {
+        if let myVote = myVotes?.filter({$0["contract_address"].stringValue == module["address"].stringValue && $0["proposal_id"].int64Value == id }).first {
             let myOption = myVote["option"].stringValue.lowercased()
             if (myOption == "yes") {
                 myVoteImg.image = UIImage.init(named: "imgMyVoteYes")

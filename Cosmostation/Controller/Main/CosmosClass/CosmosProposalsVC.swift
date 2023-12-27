@@ -61,12 +61,14 @@ class CosmosProposalsVC: BaseVC {
     @objc func onClickFilterOn() {
         navigationItem.setRightBarButton(filtered, animated: true)
         isShowAll = !isShowAll
+        onShowToast(NSLocalizedString("msg_show_all_proposals", comment: ""))
         tableView.reloadData()
     }
     
     @objc func onClickFilterOff() {
         navigationItem.setRightBarButton(showAll, animated: true)
         isShowAll = !isShowAll
+        onShowToast(NSLocalizedString("msg_hide_scam_proposals", comment: ""))
         tableView.reloadData()
     }
     

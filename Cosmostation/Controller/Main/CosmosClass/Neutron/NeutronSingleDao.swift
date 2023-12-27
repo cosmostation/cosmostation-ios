@@ -29,6 +29,7 @@ class NeutronSingleDao: BaseVC {
     var etcPeriods = [JSON]()
     var filteredVotingPeriods = [JSON]()
     var filteredEtcPeriods = [JSON]()
+    var toVoteSingle = [Int64]()
     var isShowAll = false
 
     override func viewDidLoad() {
@@ -72,6 +73,11 @@ class NeutronSingleDao: BaseVC {
     
     @objc func onToggleFilter() {
         isShowAll = (self.parent as? NeutronDaoVC)?.isShowAll ?? false
+        if (isShowAll) {
+            onShowToast(NSLocalizedString("msg_show_all_proposals", comment: ""))
+        } else {
+            onShowToast(NSLocalizedString("msg_hide_scam_proposals", comment: ""))
+        }
         updateView()
     }
     
@@ -86,7 +92,15 @@ class NeutronSingleDao: BaseVC {
     }
     
     @IBAction func onClickVote(_ sender: BaseButton) {
-        
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let vote = NeutronVote(nibName: "NeutronVote", bundle: nil)
+        vote.selectedChain = selectedChain
+        vote.toSingleProposals = votingPeriods.filter { toVoteSingle.contains($0["id"].int64Value) }
+        vote.modalTransitionStyle = .coverVertical
+        self.present(vote, animated: true)
     }
 
 }
@@ -138,7 +152,62 @@ extension NeutronSingleDao: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"CosmosProposalCell") as! CosmosProposalCell
+        let module = selectedChain.daosList?[0]["proposal_modules"].arrayValue[indexPath.section]
+        var proposal: JSON!
+        if (indexPath.section == 0) {
+            if (isShowAll) {
+                proposal = votingPeriods[indexPath.row]
+            } else {
+                proposal = filteredVotingPeriods[indexPath.row]
+            }
+            cell.actionToggle = { request in
+                let id = proposal["id"].int64Value
+                if (request && !self.toVoteSingle.contains(id)) {
+                    self.toVoteSingle.append(id)
+                } else if (!request && self.toVoteSingle.contains(id)) {
+                    if let index = self.toVoteSingle.firstIndex(of: id) {
+                        self.toVoteSingle.remove(at: index)
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadRows(at: [indexPath], with: .none)
+                    self.tableView.endUpdates()
+                    self.voteBtn.isEnabled = !self.toVoteSingle.isEmpty
+                })
+            }
+            
+        } else {
+            if (isShowAll) {
+                proposal = etcPeriods[indexPath.row]
+            } else {
+                proposal = filteredEtcPeriods[indexPath.row]
+            }
+        }
+        cell.onBindNeutronDao(module, proposal, neutronMyVotes, toVoteSingle)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let contAddress = selectedChain.daosList?[0]["proposal_modules"][0]["address"].string ?? ""
+        var proposal: JSON!
+        if (indexPath.section == 0) {
+            if (isShowAll) {
+                proposal = votingPeriods[indexPath.row]
+            } else {
+                proposal = filteredVotingPeriods[indexPath.row]
+            }
+        } else {
+            if (isShowAll) {
+                proposal = etcPeriods[indexPath.row]
+            } else {
+                proposal = filteredEtcPeriods[indexPath.row]
+            }
+        }
+        let explorer = MintscanUrl + "neutron/dao/proposals/" + proposal["id"].stringValue + "/single/" + contAddress
+        if let url = URL(string: explorer) {
+            self.onShowSafariWeb(url)
+        }
     }
     
     

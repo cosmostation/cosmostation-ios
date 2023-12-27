@@ -29,6 +29,7 @@ class NeutronOverruleDao: BaseVC {
     var etcPeriods = [JSON]()
     var filteredVotingPeriods = [JSON]()
     var filteredEtcPeriods = [JSON]()
+    var toVoteOverrule = [Int64]()
     var isShowAll = false
 
     override func viewDidLoad() {
@@ -72,6 +73,11 @@ class NeutronOverruleDao: BaseVC {
     
     @objc func onToggleFilter() {
         isShowAll = (self.parent as? NeutronDaoVC)?.isShowAll ?? false
+        if (isShowAll) {
+            onShowToast(NSLocalizedString("msg_show_all_proposals", comment: ""))
+        } else {
+            onShowToast(NSLocalizedString("msg_hide_scam_proposals", comment: ""))
+        }
         updateView()
     }
     
@@ -86,6 +92,15 @@ class NeutronOverruleDao: BaseVC {
     }
     
     @IBAction func onClickVote(_ sender: BaseButton) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let vote = NeutronVote(nibName: "NeutronVote", bundle: nil)
+        vote.selectedChain = selectedChain
+        vote.toOverrruleProposals = votingPeriods.filter { toVoteOverrule.contains($0["id"].int64Value) }
+        vote.modalTransitionStyle = .coverVertical
+        self.present(vote, animated: true)
     }
 
 }
@@ -137,7 +152,62 @@ extension NeutronOverruleDao: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"CosmosProposalCell") as! CosmosProposalCell
+        let module = selectedChain.daosList?[0]["proposal_modules"].arrayValue[indexPath.section]
+        var proposal: JSON!
+        if (indexPath.section == 0) {
+            if (isShowAll) {
+                proposal = votingPeriods[indexPath.row]
+            } else {
+                proposal = filteredVotingPeriods[indexPath.row]
+            }
+            cell.actionToggle = { request in
+                let id = proposal["id"].int64Value
+                if (request && !self.toVoteOverrule.contains(id)) {
+                    self.toVoteOverrule.append(id)
+                } else if (!request && self.toVoteOverrule.contains(id)) {
+                    if let index = self.toVoteOverrule.firstIndex(of: id) {
+                        self.toVoteOverrule.remove(at: index)
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadRows(at: [indexPath], with: .none)
+                    self.tableView.endUpdates()
+                    self.voteBtn.isEnabled = !self.toVoteOverrule.isEmpty
+                })
+            }
+            
+        } else {
+            if (isShowAll) {
+                proposal = etcPeriods[indexPath.row]
+            } else {
+                proposal = filteredEtcPeriods[indexPath.row]
+            }
+        }
+        cell.onBindNeutronDao(module, proposal, neutronMyVotes, toVoteOverrule)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let contAddress = selectedChain.daosList?[0]["proposal_modules"][2]["address"].string ?? ""
+        var proposal: JSON!
+        if (indexPath.section == 0) {
+            if (isShowAll) {
+                proposal = votingPeriods[indexPath.row]
+            } else {
+                proposal = filteredVotingPeriods[indexPath.row]
+            }
+        } else {
+            if (isShowAll) {
+                proposal = etcPeriods[indexPath.row]
+            } else {
+                proposal = filteredEtcPeriods[indexPath.row]
+            }
+        }
+        let explorer = MintscanUrl + "neutron/dao/proposals/" + proposal["id"].stringValue + "/overrule/" +  contAddress
+        if let url = URL(string: explorer) {
+            self.onShowSafariWeb(url)
+        }
     }
     
     

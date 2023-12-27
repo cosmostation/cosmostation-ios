@@ -44,6 +44,7 @@ class NeutronVote: BaseVC {
     
     var toSingleProposals = [JSON]()
     var toMultiProposals = [JSON]()
+    var toOverrruleProposals = [JSON]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,6 +156,7 @@ class NeutronVote: BaseVC {
     func onSimul() {
         if (toSingleProposals.filter { $0["myVote"].string == nil }.count > 0) { return }
         if (toMultiProposals.filter { $0["myVote"].int == nil }.count > 0) { return }
+        if (toOverrruleProposals.filter { $0["myVote"].int == nil }.count > 0) { return }
         view.isUserInteractionEnabled = false
         voteBtn.isEnabled = false
         loadingView.isHidden = false
@@ -202,6 +204,16 @@ class NeutronVote: BaseVC {
             }
             result.append(msg)
         }
+        toOverrruleProposals.forEach { overrule in
+            let jsonMsg: JSON = ["vote" : ["proposal_id" : overrule["id"].int64Value, "vote" : overrule["myVote"].stringValue]]
+            let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+            let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+                $0.sender = selectedChain.bechAddress
+                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[2]["address"].stringValue ?? ""
+                $0.msg  = Data(base64Encoded: jsonMsgBase64)!
+            }
+            result.append(msg)
+        }
         return result
     }
 }
@@ -209,14 +221,16 @@ class NeutronVote: BaseVC {
 
 extension NeutronVote: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
             return toSingleProposals.count
+        } else if (section == 1) {
+            return toMultiProposals.count
         }
-        return toMultiProposals.count
+        return toOverrruleProposals.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -242,7 +256,7 @@ extension NeutronVote: UITableViewDelegate, UITableViewDataSource {
             }
             return cell
             
-        } else {
+        } else if (indexPath.section == 1)  {
             let cell = tableView.dequeueReusableCell(withIdentifier:"NeutronMultiVoteCell") as! NeutronMultiVoteCell
             cell.onBindmultiVote(toMultiProposals[indexPath.row])
             cell.actionToggle = { tag in
@@ -256,6 +270,28 @@ extension NeutronVote: UITableViewDelegate, UITableViewDataSource {
                     self.toMultiProposals[indexPath.row]["myVote"] = 3
                 } else {
                     self.toMultiProposals[indexPath.row].dictionaryObject?.removeValue(forKey: "myVote")
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadRows(at: [indexPath], with: .none)
+                    self.tableView.endUpdates()
+                    self.onSimul()
+                })
+            }
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"NeutronSingleVoteCell") as! NeutronSingleVoteCell
+            cell.onBindsingleVote(toOverrruleProposals[indexPath.row])
+            cell.actionToggle = { tag in
+                if (tag == 0) {
+                    self.toOverrruleProposals[indexPath.row]["myVote"] = "yes"
+                } else if (tag == 1) {
+                    self.toOverrruleProposals[indexPath.row]["myVote"] = "no"
+                } else if (tag == 2) {
+                    self.toOverrruleProposals[indexPath.row]["myVote"] = "abstain"
+                } else {
+                    self.toOverrruleProposals[indexPath.row].dictionaryObject?.removeValue(forKey: "myVote")
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
                     self.tableView.beginUpdates()
