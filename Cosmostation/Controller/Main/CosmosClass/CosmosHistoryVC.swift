@@ -96,6 +96,7 @@ class CosmosHistoryVC: BaseVC {
                     self.msHistoyID = ""
                 }
                 
+                self.loadingView.isHidden = true
                 if (self.msHistoryGroup.count > 0) {
                     self.tableView.reloadData()
                     self.tableView.isHidden = false
@@ -120,7 +121,7 @@ class CosmosHistoryVC: BaseVC {
                 if let txs = value.tx {
                     self.beaconHistoey = txs
                 }
-                
+                self.loadingView.isHidden = true
                 if (self.beaconHistoey.count > 0) {
                     self.tableView.reloadData()
                     self.emptyDataView.isHidden = true
@@ -143,7 +144,7 @@ class CosmosHistoryVC: BaseVC {
                 if let txs = value.data?[0].transactionLists {
                     self.oktHistoey = txs
                 }
-                
+                self.loadingView.isHidden = true
                 if (self.oktHistoey.count > 0) {
                     self.tableView.reloadData()
                     self.emptyDataView.isHidden = true
@@ -200,15 +201,12 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (selectedChain is ChainBinanceBeacon) {
-            loadingView.isHidden = beaconHistoey.count > 0
             return beaconHistoey.count
             
         } else if (selectedChain is ChainOkt60Keccak) {
-            loadingView.isHidden = oktHistoey.count > 0
             return oktHistoey.count
             
         } else {
-            loadingView.isHidden = msHistoryGroup[section].values.count > 0
             return msHistoryGroup[section].values.count
         }
         

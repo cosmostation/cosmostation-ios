@@ -213,6 +213,7 @@ extension NeutronPrpposalsVC: UITableViewDelegate, UITableViewDataSource {
 
 extension NeutronPrpposalsVC {
     func fetchProposals(_ group: DispatchGroup, _ channel: ClientConnection, _ contAddress: String) {
+        print("fetchProposals ", contAddress)
         group.enter()
         let query: JSON = ["reverse_proposals" : JSON()]
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
@@ -222,6 +223,8 @@ extension NeutronPrpposalsVC {
         }
         if let response = try? Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.wait(),
            let result = try? JSONDecoder().decode(JSON.self, from: response.data) {
+            print("response ", response)
+            print("result ", result)
             self.neutronProposals.append((contAddress, result["proposals"].arrayValue))
             group.leave()
         } else {
