@@ -90,6 +90,7 @@ class CosmosClassVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchStakeDone(_:)), name: Notification.Name("FetchStakeData"), object: nil)
     }
@@ -111,8 +112,16 @@ class CosmosClassVC: BaseVC {
             let tabVC = (self.parent)?.parent as? MainTabVC
             tabVC?.hideChainBgImg()
         }
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchStakeData"), object: nil)
+    }
+    
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (tag == selectedChain.tag) {
+            totalValue = selectedChain.allValue()
+        }
     }
     
     @objc func onFetchTokenDone(_ notification: NSNotification) {
