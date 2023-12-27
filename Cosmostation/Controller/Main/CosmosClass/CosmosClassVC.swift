@@ -485,11 +485,6 @@ extension CosmosClassVC {
     }
     
     func onNeutronProposals() {
-//        let proposalsVC = NeutronPrpposalsVC(nibName: "NeutronPrpposalsVC", bundle: nil)
-//        proposalsVC.selectedChain = selectedChain as? ChainNeutron
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(proposalsVC, animated: true)
-        
         let neutronDaoVC = UIStoryboard(name: "NeutronDao", bundle: nil).instantiateViewController(withIdentifier: "NeutronDaoVC") as! NeutronDaoVC
         neutronDaoVC.selectedChain = selectedChain as? ChainNeutron
         self.navigationItem.title = ""
