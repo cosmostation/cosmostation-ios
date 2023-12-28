@@ -156,7 +156,7 @@ class NeutronVote: BaseVC {
     func onSimul() {
         if (toSingleProposals.filter { $0["myVote"].string == nil }.count > 0) { return }
         if (toMultiProposals.filter { $0["myVote"].int == nil }.count > 0) { return }
-        if (toOverrruleProposals.filter { $0["myVote"].int == nil }.count > 0) { return }
+        if (toOverrruleProposals.filter { $0["myVote"].string == nil }.count > 0) { return }
         view.isUserInteractionEnabled = false
         voteBtn.isEnabled = false
         loadingView.isHidden = false

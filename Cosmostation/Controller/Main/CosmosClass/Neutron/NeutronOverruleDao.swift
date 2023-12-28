@@ -152,7 +152,7 @@ extension NeutronOverruleDao: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"CosmosProposalCell") as! CosmosProposalCell
-        let module = selectedChain.daosList?[0]["proposal_modules"].arrayValue[indexPath.section]
+        let module = selectedChain.daosList?[0]["proposal_modules"][2]
         var proposal: JSON!
         if (indexPath.section == 0) {
             if (isShowAll) {
