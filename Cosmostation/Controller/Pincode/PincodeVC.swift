@@ -64,7 +64,9 @@ class PincodeVC: BaseVC {
         return authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
     }
     
+    var cancelbio = false
     func onShowBio() {
+        if (cancelbio) { return }
         var localMsg = ""
         if (authContext.biometryType == .faceID) {
             localMsg = NSLocalizedString("faceID", comment: "")
@@ -76,6 +78,8 @@ class PincodeVC: BaseVC {
                 DispatchQueue.main.async(execute: {
                     self.onFinishResult(.success)
                 });
+            } else {
+                self.cancelbio = true
             }
         }
     }
