@@ -35,6 +35,9 @@ class ChainCanto: CosmosClass  {
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
         bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+        if (supportStaking) {
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
+        }
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
@@ -42,5 +45,8 @@ class ChainCanto: CosmosClass  {
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
         bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+        if (supportStaking) {
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
+        }
     }
 }

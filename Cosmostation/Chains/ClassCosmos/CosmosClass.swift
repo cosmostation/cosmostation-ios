@@ -18,9 +18,9 @@ class CosmosClass: BaseChain {
     
     var stakeDenom: String!
     var bechAccountPrefix: String?
-    var validatorPrefix: String?
     var bechAddress = ""
-    
+    var validatorPrefix: String?
+    var bechOpAddress: String?
     
     var supportCw20 = false
     var supportErc20 = false
@@ -43,6 +43,7 @@ class CosmosClass: BaseChain {
     lazy var cosmosDelegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     lazy var cosmosUnbondings = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
     lazy var cosmosRewards = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
+    lazy var cosmosCommissions = Array<Cosmos_Base_V1beta1_Coin>()
     
     lazy var mintscanCw20Tokens = [MintscanToken]()
     lazy var mintscanErc20Tokens = [MintscanToken]()
@@ -53,7 +54,9 @@ class CosmosClass: BaseChain {
         privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
-//        print("", tag, " ", bechAddress)
+        if (supportStaking) {
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
+        }
     }
     
     //get bech style info from privatekey
@@ -61,6 +64,9 @@ class CosmosClass: BaseChain {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
+        if (supportStaking) {
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
+        }
     }
     
     //fetch account onchaindata from grpc
@@ -115,6 +121,7 @@ class CosmosClass: BaseChain {
             fetchDelegation(group, channel)
             fetchUnbondings(group, channel)
             fetchRewards(group, channel)
+            fetchCommission(group, channel)
         }
         
         group.notify(queue: .main) {
@@ -165,21 +172,23 @@ class CosmosClass: BaseChain {
     
     func allStakingDenomAmount() -> NSDecimalNumber {
          return balanceAmount(stakeDenom).adding(vestingAmount(stakeDenom)).adding(delegationAmountSum())
-            .adding(unbondingAmountSum()).adding(rewardAmountSum(stakeDenom))
+            .adding(unbondingAmountSum()).adding(rewardAmountSum(stakeDenom)).adding(commissionAmount(stakeDenom))
     }
     
     func denomValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if (denom == stakeDenom) {
             return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
-                .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd))
+                .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(commissionValue(denom, usd))
             
         } else {
             return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
+                .adding(commissionValue(denom, usd))
         }
     }
     
     func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(rewardValueSum(usd))
+        return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(delegationValueSum(usd))
+            .adding(unbondingValueSum(usd)).adding(rewardValueSum(usd)).adding(commissionValueSum(usd))
     }
     
     func monikerImg(_ opAddress: String) -> URL {
@@ -416,6 +425,23 @@ extension CosmosClass {
         }
     }
     
+    func fetchCommission(_ group: DispatchGroup, _ channel: ClientConnection) {
+        if (bechOpAddress == nil) { return }
+        group.enter()
+        let req = Cosmos_Distribution_V1beta1_QueryValidatorCommissionRequest.with { $0.validatorAddress = bechOpAddress! }
+        if let response = try? Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).validatorCommission(req, callOptions: getCallOptions()).response.wait() {
+            self.cosmosCommissions.removeAll()
+            response.commission.commission.forEach { commi in
+                if (commi.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
+                    self.cosmosCommissions.append(Cosmos_Base_V1beta1_Coin(commi.denom, commi.getAmount()))
+                }
+            }
+            group.leave()
+        } else {
+            group.leave()
+        }
+    }
+    
     func fetchAllCw20Balance(_ id: Int64) {
         let channel = getConnection()
         let group = DispatchGroup()
@@ -603,16 +629,8 @@ extension CosmosClass {
     }
     
     func rewardOtherDenoms() -> Int {
-        var result = Array<String>()
-        rewardAllCoins().forEach { coin in
-            if (!result.contains(coin.denom)) {
-                result.append(coin.denom)
-            }
-        }
-        result.removeAll { $0 == stakeDenom }
-        return result.count
+        return rewardAllCoins().filter { $0.denom != stakeDenom }.count
     }
-    
     
     func rewardValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
@@ -664,6 +682,32 @@ extension CosmosClass {
         }
         return result
     }
+    
+    func commissionAmount(_ denom: String) -> NSDecimalNumber {
+        return cosmosCommissions.filter { $0.denom == denom }.first?.getAmount() ?? NSDecimalNumber.zero
+    }
+    
+    func commissionValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
+        if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
+            let amount = cosmosCommissions.filter { $0.denom == denom }.first?.getAmount() ?? NSDecimalNumber.zero
+            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    func commissionValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
+        var result =  NSDecimalNumber.zero
+        cosmosCommissions.forEach { commi in
+            result = result.adding(commissionValue(commi.denom, usd))
+        }
+        return result
+    }
+    
+    func commissionOtherDenoms() -> Int {
+        return cosmosCommissions.filter { $0.denom != stakeDenom }.count
+    }
+    
     
     
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
@@ -822,5 +866,12 @@ extension Cosmos_Base_V1beta1_Coin {
     init (_ denom: String, _ amount: NSDecimalNumber) {
         self.denom = denom
         self.amount = amount.stringValue
+    }
+}
+
+
+extension Cosmos_Base_V1beta1_DecCoin {
+    func getAmount() -> NSDecimalNumber {
+        return NSDecimalNumber(string: amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
     }
 }
