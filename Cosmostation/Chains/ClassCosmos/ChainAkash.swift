@@ -22,6 +22,7 @@ class ChainAkash: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "akash"
+        validatorPrefix = "akashvaloper"
         
         grpcHost = "grpc-akash.cosmostation.io"
     }

@@ -22,6 +22,7 @@ class ChainLike: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "like"
+        validatorPrefix = "likevaloper"
         
         grpcHost = "grpc-likecoin.cosmostation.io"
     }

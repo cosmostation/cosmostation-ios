@@ -22,6 +22,7 @@ class ChainFetchAi: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "fetch"
+        validatorPrefix = "fetchvaloper"
         
         grpcHost = "grpc-fetchai.cosmostation.io"
     }

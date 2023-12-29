@@ -22,6 +22,7 @@ class ChainProvenance: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/505'/0'/0/X")
         bechAccountPrefix = "pb"
+        validatorPrefix = "pbvaloper"
         
         grpcHost = "grpc-provenance.cosmostation.io"
     }

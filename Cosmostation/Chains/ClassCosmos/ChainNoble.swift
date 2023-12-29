@@ -22,6 +22,7 @@ class ChainNoble: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "noble"
+        validatorPrefix = "noblevaloper"
         supportStaking = false
         
         grpcHost = "grpc-noble.cosmostation.io"

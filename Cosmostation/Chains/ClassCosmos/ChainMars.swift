@@ -22,6 +22,7 @@ class ChainMars: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "mars"
+        validatorPrefix = "marsvaloper"
         
         grpcHost = "grpc-mars-protocol.cosmostation.io"
     }

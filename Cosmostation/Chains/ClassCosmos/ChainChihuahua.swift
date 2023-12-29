@@ -22,6 +22,7 @@ class ChainChihuahua: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "chihuahua"
+        validatorPrefix = "chihuahuavaloper"
         
         grpcHost = "grpc-chihuahua.cosmostation.io"
     }

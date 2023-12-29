@@ -22,6 +22,7 @@ class ChainQuasar: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "quasar"
+        validatorPrefix = "quasarvaloper"
         
         grpcHost = "grpc-quasar.cosmostation.io"
     }

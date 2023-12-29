@@ -22,6 +22,7 @@ class ChainHumans: CosmosClass  {
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         bechAccountPrefix = "human"
+        validatorPrefix = "humanvaloper"
         evmCompatible = true
         supportErc20 = false
         

@@ -22,6 +22,7 @@ class ChainUmee: CosmosClass {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "umee"
+        validatorPrefix = "umeevaloper"
         
         grpcHost = "grpc-umee.cosmostation.io"
     }

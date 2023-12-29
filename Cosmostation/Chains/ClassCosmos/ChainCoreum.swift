@@ -22,6 +22,7 @@ class ChainCoreum: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/990'/0'/0/X")
         bechAccountPrefix = "core"
+        validatorPrefix = "corevaloper"
         
         grpcHost = "grpc-coreum.cosmostation.io"
     }

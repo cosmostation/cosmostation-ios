@@ -22,6 +22,7 @@ class ChainAxelar: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "axelar"
+        validatorPrefix = "axelarvaloper"
         
         grpcHost = "grpc-axelar.cosmostation.io"
     }

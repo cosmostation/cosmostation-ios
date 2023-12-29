@@ -22,6 +22,7 @@ class ChainSommelier: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "somm"
+        validatorPrefix = "sommvaloper"
         
         grpcHost = "grpc-sommelier.cosmostation.io"
     }

@@ -22,6 +22,7 @@ class ChainMedibloc: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/371'/0'/0/X")
         bechAccountPrefix = "panacea"
+        validatorPrefix = "panaceavaloper"
         
         grpcHost = "grpc-medibloc.cosmostation.io"
     }

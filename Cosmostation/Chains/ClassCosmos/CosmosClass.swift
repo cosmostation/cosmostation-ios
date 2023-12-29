@@ -18,6 +18,7 @@ class CosmosClass: BaseChain {
     
     var stakeDenom: String!
     var bechAccountPrefix: String?
+    var validatorPrefix: String?
     var bechAddress = ""
     
     

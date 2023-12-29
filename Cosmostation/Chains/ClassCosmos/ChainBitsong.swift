@@ -22,6 +22,7 @@ class ChainBitsong: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/639'/0'/0/X")
         bechAccountPrefix = "bitsong"
+        validatorPrefix = "bitsongvaloper"
         
         grpcHost = "grpc-bitsong.cosmostation.io"
     }
