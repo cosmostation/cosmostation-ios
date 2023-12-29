@@ -1596,6 +1596,10 @@
 		E13FC5622B26F14D0082C66E /* KavaEarnListMyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13FC55F2B26F14D0082C66E /* KavaEarnListMyCell.swift */; };
 		E13FC5632B26F14D0082C66E /* KavaEarnListMyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13FC5602B26F14D0082C66E /* KavaEarnListMyCell.xib */; };
 		E13FC5642B26F14D0082C66E /* KavaEarnListMyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13FC5602B26F14D0082C66E /* KavaEarnListMyCell.xib */; };
+		E14577FC2B3EC50C00EEFA8E /* CosmosClaimCommission.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14577FA2B3EC50C00EEFA8E /* CosmosClaimCommission.swift */; };
+		E14577FD2B3EC50C00EEFA8E /* CosmosClaimCommission.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14577FA2B3EC50C00EEFA8E /* CosmosClaimCommission.swift */; };
+		E14577FE2B3EC50C00EEFA8E /* CosmosClaimCommission.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14577FB2B3EC50C00EEFA8E /* CosmosClaimCommission.xib */; };
+		E14577FF2B3EC50C00EEFA8E /* CosmosClaimCommission.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14577FB2B3EC50C00EEFA8E /* CosmosClaimCommission.xib */; };
 		E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29732A98DA5300939AD2 /* SelectChainCell.swift */; };
 		E14E29762A98DA5300939AD2 /* SelectChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29732A98DA5300939AD2 /* SelectChainCell.swift */; };
 		E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14E29742A98DA5300939AD2 /* SelectChainCell.xib */; };
@@ -2547,6 +2551,8 @@
 		E13FC55A2B26F13B0082C66E /* KavaEarnListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaEarnListCell.xib; sourceTree = "<group>"; };
 		E13FC55F2B26F14D0082C66E /* KavaEarnListMyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaEarnListMyCell.swift; sourceTree = "<group>"; };
 		E13FC5602B26F14D0082C66E /* KavaEarnListMyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaEarnListMyCell.xib; sourceTree = "<group>"; };
+		E14577FA2B3EC50C00EEFA8E /* CosmosClaimCommission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClaimCommission.swift; sourceTree = "<group>"; };
+		E14577FB2B3EC50C00EEFA8E /* CosmosClaimCommission.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosClaimCommission.xib; sourceTree = "<group>"; };
 		E14E29732A98DA5300939AD2 /* SelectChainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChainCell.swift; sourceTree = "<group>"; };
 		E14E29742A98DA5300939AD2 /* SelectChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChainCell.xib; sourceTree = "<group>"; };
 		E14E29792A99C2CA00939AD2 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
@@ -3921,6 +3927,8 @@
 				047842E32AC8B2D600462F1C /* CosmosRedelegate.xib */,
 				E1D5A3E22AC33B8000453914 /* CosmosClaimRewards.swift */,
 				E1D5A3E32AC33B8000453914 /* CosmosClaimRewards.xib */,
+				E14577FA2B3EC50C00EEFA8E /* CosmosClaimCommission.swift */,
+				E14577FB2B3EC50C00EEFA8E /* CosmosClaimCommission.xib */,
 				0402B7E42ACC132200824B3F /* CosmosCompounding.swift */,
 				0402B7E52ACC132200824B3F /* CosmosCompounding.xib */,
 				0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */,
@@ -4148,6 +4156,7 @@
 				18F4EAD22A4DA0A500CFBE2B /* ApiKey.plist in Resources */,
 				048F8DC02B28542F00432437 /* KavaEarnDepositAction.xib in Resources */,
 				187447012930942400849EE4 /* ApiKeyDev.plist in Resources */,
+				E14577FF2B3EC50C00EEFA8E /* CosmosClaimCommission.xib in Resources */,
 				E1CD6AF72AEAAEC200376909 /* AboutStakingCell.xib in Resources */,
 				E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				0400EE9F2AD9B434007BA97F /* NeutronVote.xib in Resources */,
@@ -4364,6 +4373,7 @@
 				0409D2F72AC5DC6D0021E192 /* CosmosDelegate.xib in Resources */,
 				04B789E72ACB140900E9BE88 /* SelectNameServiceCell.xib in Resources */,
 				E12E9D2F2AE415D900336449 /* loadingSmallYellow.json in Resources */,
+				E14577FE2B3EC50C00EEFA8E /* CosmosClaimCommission.xib in Resources */,
 				046BF1C22B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */,
 				E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
 				04CD24842AD312BD00497EF5 /* TxAmountBepSheet.xib in Resources */,
@@ -4575,6 +4585,7 @@
 				E122DBF02A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,
 				0400EEE82ADBE1D3007BA97F /* kava_pricefeed_v1beta1_query.grpc.swift in Sources */,
 				04C6B9C62AAC59EC00B02A95 /* QrAddressPopupVC.swift in Sources */,
+				E14577FD2B3EC50C00EEFA8E /* CosmosClaimCommission.swift in Sources */,
 				047843982AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
 				04B789802ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
 				E1D6B8D22AA499A400177D30 /* CosmosNftVC.swift in Sources */,
@@ -5288,6 +5299,7 @@
 				E122DBEF2A8A468E006D1E7B /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,
 				0400EEE72ADBE1D3007BA97F /* kava_pricefeed_v1beta1_query.grpc.swift in Sources */,
 				04C6B9C52AAC59EC00B02A95 /* QrAddressPopupVC.swift in Sources */,
+				E14577FC2B3EC50C00EEFA8E /* CosmosClaimCommission.swift in Sources */,
 				047843972AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
 				04B7897F2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
 				E1D6B8D12AA499A400177D30 /* CosmosNftVC.swift in Sources */,

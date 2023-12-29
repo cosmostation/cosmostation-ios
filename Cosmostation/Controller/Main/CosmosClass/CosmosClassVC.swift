@@ -222,6 +222,17 @@ class CosmosClassVC: BaseVC {
         self.present(compounding, animated: true)
     }
     
+    func onClaimCommissionTx() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let claimCommission = CosmosClaimCommission(nibName: "CosmosClaimCommission", bundle: nil)
+        claimCommission.selectedChain = selectedChain
+        claimCommission.modalTransitionStyle = .coverVertical
+        self.present(claimCommission, animated: true)
+    }
+    
     func onProposalList() {
         let proposalsVC = CosmosProposalsVC(nibName: "CosmosProposalsVC", bundle: nil)
         proposalsVC.selectedChain = selectedChain
@@ -361,6 +372,11 @@ class CosmosClassVC: BaseVC {
         if (selectedChain.supportStaking) {
             mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
                 self.onProposalList()
+            }
+            if (selectedChain.cosmosCommissions.count > 0) {
+                mainFab.addItem(title: "Claim Commission", image: UIImage(named: "iconFabCommission")) { _ in
+                    self.onClaimCommissionTx()
+                }
             }
             mainFab.addItem(title: "Compound All Rewards", image: UIImage(named: "iconFabCompounding")) { _ in
                 if (self.selectedChain.cosmosValidators.count > 0) {

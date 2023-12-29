@@ -22,7 +22,7 @@ class ChainCelestia: CosmosClass  {
 
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "celestia"
-        bechAccountPrefix = "celestiavaloper"
+        validatorPrefix = "celestiavaloper"
 
         grpcHost = "grpc-celestia.cosmostation.io"
     }
