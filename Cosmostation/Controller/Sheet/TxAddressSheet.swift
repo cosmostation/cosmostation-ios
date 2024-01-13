@@ -83,6 +83,8 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
         baseSheet.targetChain = recipientChain
         if (addressSheetType == .EvmTransfer) {
             baseSheet.sheetType = .SelectRecipientEvmAddress
+        } else if (addressSheetType == .RewardAddress) {
+            baseSheet.sheetType = .SelectRecipientAddress
         } else if (addressSheetType == .DefaultTransfer) {
             baseSheet.sheetType = .SelectRecipientAddress
         }
