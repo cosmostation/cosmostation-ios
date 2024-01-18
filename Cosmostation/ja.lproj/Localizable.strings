@@ -198,6 +198,8 @@
 "str_to_add_amount" = "金額を追加";
 "str_to_remove_amount" = "削除量";
 "str_claim_all" = "すべてを請求する";
+"str_big_loss" = "資産損失";
+"str_big_loss_msg" = "現在選択されているスワップを進めると、かなりの財産上の損害が予想されます。\n\n期待される入力/出力値を確認してから慎重に決定してください。";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";

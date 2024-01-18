@@ -198,6 +198,8 @@
 "str_to_add_amount" = "추가 수량 입력";
 "str_to_remove_amount" = "출금 수량 입력";
 "str_claim_all" = "모두 수령";
+"str_big_loss" = "자산 손실";
+"str_big_loss_msg" = "현재 선택하신 스왑을 진행하시면 상당한 재산상 손해가 예상됩니다.\n\n예상 입력, 출력 가치를 확인하신 후 신중히 결정해주세요.";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";
