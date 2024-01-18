@@ -78,7 +78,8 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
         if (baseAccount.getDisplayCosmosChains().filter { $0.fetched == false }.count == 0) {
             baseAccount.getDisplayCosmosChains().forEach { chain in
                 let valueableReward = chain.valueableRewards()
-                if (valueableReward.count > 0) {
+                let txFee = chain.getInitPayableFee()
+                if (valueableReward.count > 0 && txFee != nil) {
                     valueableRewards.append((chain, valueableReward, nil, false, nil))
                 }
             }
