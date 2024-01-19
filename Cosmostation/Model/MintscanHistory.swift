@@ -13,6 +13,7 @@ import SwiftyJSON
 public struct MintscanHistory: Codable {
     var header: MintscanHistoryHeader?
     var data: MintscanHistoryData?
+    var search_after: String?
     
     public func isSuccess() -> Bool {
         if let RawCode = self.data?.code {
@@ -24,13 +25,7 @@ public struct MintscanHistory: Codable {
     }
     
     public func getMsgs() -> Array<JSON>? {
-        if let msgs = data?.tx?["body"]["messages"].array {
-            return msgs
-        }
-        if let msgs = data?.tx?["value"]["msg"].array {
-            return msgs
-        }
-        return nil
+        return data?.tx?["/cosmos-tx-v1beta1-Tx"]["body"]["messages"].array
     }
     
     
@@ -43,51 +38,24 @@ public struct MintscanHistory: Codable {
     
     
     public func getMsgType(_ address: String) -> String {
-        var result = NSLocalizedString("tx_known", comment: "")
         if (getMsgCnt() == 0) {
-            return result;
-            
-        } else {
-            if let firstMsgType = getMsgs()?[0]["@type"].string {
-                result = firstMsgType.components(separatedBy: ".").last?.replacingOccurrences(of: "Msg", with: "") ?? NSLocalizedString("tx_known", comment: "")
+            return NSLocalizedString("tx_known", comment: "")
+        }
+        
+        if getMsgCnt() == 2,
+            let msgType0 = getMsgs()?[0]["@type"].string,
+            let msgType1 = getMsgs()?[1]["@type"].string {
+            if ((msgType0.contains("MsgWithdrawDelegatorReward") || msgType0.contains("MsgWithdrawDelegationReward")) && msgType1.contains("MsgDelegate")) {
+                return NSLocalizedString("tx_reinvest", comment: "")
             }
+        }
+        
+        var result = NSLocalizedString("tx_known", comment: "")
+        if let firstMsg = getMsgs()?[0],
+           let msgType = firstMsg["@type"].string {
+            result = msgType.components(separatedBy: ".").last?.replacingOccurrences(of: "Msg", with: "") ?? NSLocalizedString("tx_known", comment: "")
             
-            if (getMsgCnt() >= 2) {
-                var msgType0 = ""
-                var msgType1 = ""
-                
-                if let rawMsgType = getMsgs()?[0]["@type"].string {
-                    msgType0 = rawMsgType
-                }
-                if let rawMsgType = getMsgs()?[0]["type"].string {
-                    msgType0 = rawMsgType
-                }
-                if let rawMsgType = getMsgs()?[1]["@type"].string {
-                    msgType1 = rawMsgType
-                }
-                if let rawMsgType = getMsgs()?[1]["type"].string {
-                    msgType1 = rawMsgType
-                }
-                if ((msgType0.contains("MsgWithdrawDelegatorReward") || msgType0.contains("MsgWithdrawDelegationReward")) && msgType1.contains("MsgDelegate")) {
-                    return NSLocalizedString("tx_reinvest", comment: "")
-                }
-                
-                if (msgType1.contains("ibc") && msgType1.contains("MsgRecvPacket")) {
-                    return NSLocalizedString("tx_ibc_receive", comment: "")
-                }
-                
-            }
-            
-            var msgType = ""
-            if let rawMsgType = getMsgs()?[0]["@type"].string {
-                msgType = rawMsgType
-            }
-            if let rawMsgType = getMsgs()?[0]["type"].string {
-                msgType = rawMsgType
-            }
-            
-
-            // cosmos default msg type
+            let msgValue = firstMsg[msgType.replacingOccurrences(of: ".", with: "-")]
             if (msgType.contains("cosmos.") && msgType.contains("staking")) {
                 if (msgType.contains("MsgCreateValidator")) {
                     result = NSLocalizedString("tx_create_validator", comment: "")
@@ -106,28 +74,20 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgCancelUnbondingDelegation")) {
                     result = NSLocalizedString("tx_cancel_undelegate", comment: "")
-                    
                 }
-                
-                
                 
             } else if (msgType.contains("cosmos.") && msgType.contains("bank")) {
                 if (msgType.contains("MsgSend")) {
-                    if let senderAddr = getMsgs()?[0]["from_address"].string, senderAddr == address {
+                    if let senderAddr = msgValue["from_address"].string, senderAddr == address {
                         result = NSLocalizedString("tx_send", comment: "")
-                    } else if let senderAddr = getMsgs()?[0]["value"]["from_address"].string, senderAddr == address {
-                        result = NSLocalizedString("tx_send", comment: "")
-                    } else if let receiverAddr = getMsgs()?[0]["to_address"].string, receiverAddr == address {
-                        result = NSLocalizedString("tx_receive", comment: "")
-                    } else if let receiverAddr = getMsgs()?[0]["value"]["to_address"].string, receiverAddr == address {
+                    } else if let receiverAddr = msgValue["to_address"].string, receiverAddr == address {
                         result = NSLocalizedString("tx_receive", comment: "")
                     } else {
                         result = NSLocalizedString("tx_transfer", comment: "")
                     }
                     
                 } else if (msgType.contains("MsgMultiSend")) {
-                    result = NSLocalizedString("tx_transfer", comment: "")
-                    
+                    result = NSLocalizedString("tx_multi_send", comment: "")
                 }
                 
             } else if (msgType.contains("cosmos.") && msgType.contains("distribution")) {
@@ -142,7 +102,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgFundCommunityPool")) {
                     result = NSLocalizedString("tx_fund_pool", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("cosmos.") && msgType.contains("gov")) {
@@ -157,7 +116,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgVoteWeighted")) {
                     result = NSLocalizedString("tx_vote_weighted", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("cosmos.") && msgType.contains("authz")) {
@@ -169,44 +127,20 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgExec")) {
                     result = NSLocalizedString("tx_authz_exe", comment: "")
-                    if let innerMsgs = getMsgs()?[0]["msgs"].array, let inner0Type = innerMsgs[0]["@type"].string {
-                        var innerTx = NSLocalizedString("tx_known", comment: "")
-                        if (inner0Type.contains("MsgSend")) {
-                            innerTx = NSLocalizedString("tx_transfer", comment: "")
-                        } else if (inner0Type.contains("MsgDelegate")) {
-                            innerTx = NSLocalizedString("tx_delegate", comment: "")
-                        } else if (inner0Type.contains("MsgUndelegate")) {
-                            innerTx = NSLocalizedString("tx_undelegate", comment: "")
-                        } else if (inner0Type.contains("MsgBeginRedelegate")) {
-                            innerTx = NSLocalizedString("tx_redelegate", comment: "")
-                        } else if (inner0Type.contains("MsgVote")) {
-                            innerTx = NSLocalizedString("tx_vote", comment: "")
-                        } else if (inner0Type.contains("MsgWithdrawDelegatorReward")) {
-                            innerTx = NSLocalizedString("tx_get_reward", comment: "")
-                        } else if (inner0Type.contains("MsgWithdrawValidatorCommission")) {
-                            innerTx = NSLocalizedString("tx_get_commission", comment: "")
-                        }
-                        if (innerMsgs.count > 1) {
-                            innerTx = innerTx +  " + " + String(innerMsgs.count - 1)
-                        }
-                        result = result + "\n" + innerTx
-                    }
-                        
                 }
                 
             } else if (msgType.contains("cosmos.") && msgType.contains("slashing")) {
                 if (msgType.contains("MsgUnjail")) {
                     result = NSLocalizedString("tx_unjail_validator", comment: "")
-                    
                 }
             
             } else if (msgType.contains("cosmos.") && msgType.contains("feegrant")) {
                 if (msgType.contains("MsgGrantAllowance")) {
                     result = NSLocalizedString("tx_feegrant_allowance", comment: "")
+                    
                 } else if (msgType.contains("MsgRevokeAllowance")) {
                     result = NSLocalizedString("tx_feegrant_revoke", comment: "")
                 }
-
             }
             
             // stride msg type
@@ -219,23 +153,6 @@ public struct MintscanHistory: Codable {
                 }
             }
             
-            // ibc msg type
-            else if (msgType.contains("ibc.")) {
-                if (msgType.contains("MsgTransfer")) {
-                    result = NSLocalizedString("tx_ibc_send", comment: "")
-                    
-                } else if (msgType.contains("MsgUpdateClient")) {
-                    result = NSLocalizedString("tx_ibc_client_update", comment: "")
-                    
-                } else if (msgType.contains("MsgAcknowledgement")) {
-                    result = NSLocalizedString("tx_ibc_acknowledgement", comment: "")
-                    
-                } else if (msgType.contains("MsgRecvPacket")) {
-                    result = NSLocalizedString("tx_ibc_receive", comment: "")
-                    
-                }
-            }
-            
             // crescent msg type
             else if (msgType.contains("crescent.") && msgType.contains("liquidstaking")) {
                 if (msgType.contains("MsgLiquidStake")) {
@@ -243,7 +160,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgLiquidUnstake")) {
                     result = NSLocalizedString("tx_crescent_liquid_unstake", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("crescent.") && msgType.contains("liquidity")) {
@@ -270,7 +186,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgCancelAllOrders")) {
                     result = NSLocalizedString("tx_crescent_cancel_all_orders", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("crescent.") && msgType.contains("farming")) {
@@ -294,13 +209,11 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgAdvanceEpoch")) {
                     result = NSLocalizedString("tx_crescent_advance_epoch", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("crescent.") && msgType.contains("claim")) {
                 if (msgType.contains("MsgClaim")) {
                     result = NSLocalizedString("tx_crescent_claim", comment: "")
-                    
                 }
             }
             
@@ -310,9 +223,9 @@ public struct MintscanHistory: Codable {
                     result = NSLocalizedString("tx_nft_mint", comment: "")
                     
                 } else if (msgType.contains("MsgTransferNFT")) {
-                    if let senderAddr = getMsgs()?[0]["sender"].string, senderAddr == address {
+                    if let senderAddr = msgValue["sender"].string, senderAddr == address {
                         result = NSLocalizedString("tx_nft_send", comment: "")
-                    } else if let receiverAddr = getMsgs()?[0]["recipient"].string, receiverAddr == address {
+                    } else if let receiverAddr = msgValue["recipient"].string, receiverAddr == address {
                         result = NSLocalizedString("tx_nft_receive", comment: "")
                     } else {
                         result = NSLocalizedString("tx_nft_transfer", comment: "")
@@ -349,9 +262,9 @@ public struct MintscanHistory: Codable {
                     result = NSLocalizedString("tx_nft_mint", comment: "")
                     
                 } else if (msgType.contains("MsgTransferNFT")) {
-                    if let senderAddr = getMsgs()?[0]["sender"].string, senderAddr == address {
+                    if let senderAddr = msgValue["sender"].string, senderAddr == address {
                         result = NSLocalizedString("tx_nft_send", comment: "")
-                    } else if let receiverAddr = getMsgs()?[0]["recipient"].string, receiverAddr == address {
+                    } else if let receiverAddr = msgValue["recipient"].string, receiverAddr == address {
                         result = NSLocalizedString("tx_nft_receive", comment: "")
                     } else {
                         result = NSLocalizedString("tx_nft_transfer", comment: "")
@@ -362,7 +275,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgIssueDenom")) {
                     result = NSLocalizedString("tx_nft_issueDenom", comment: "")
-                    
                 }
             }
             
@@ -388,12 +300,11 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgReplaceAccountResources")) {
                     result = NSLocalizedString("tx_starname_update_resource", comment: "")
-                    
                 }
             }
             
             // osmosis msg type
-            else if (msgType.contains("osmosis.") && msgType.contains("gamm")) {
+            else if (msgType.contains("osmosis.")) {
                 if (msgType.contains("MsgSwapExactAmountIn")) {
                     result = NSLocalizedString("tx_coin_swap", comment: "")
                     
@@ -423,7 +334,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgCreateBalancerPool")) {
                     result = NSLocalizedString("tx_create_pool", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("osmosis.") && msgType.contains("lockup")) {
@@ -435,7 +345,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgBeginUnlocking")) {
                     result = NSLocalizedString("tx_osmosis_begin_unlucking", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("osmosis.") && msgType.contains("superfluid")) {
@@ -450,7 +359,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgLockAndSuperfluidDelegate")) {
                     result = NSLocalizedString("tx_osmosis_super_fluid_lockanddelegate", comment: "")
-                    
                 }
             }
             
@@ -464,13 +372,11 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgAddWriter")) {
                     result = NSLocalizedString("tx_med_add_writer", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("panacea.") && msgType.contains("did")) {
                 if (msgType.contains("MsgCreateDID")) {
                     result = NSLocalizedString("tx_med_create_did", comment: "")
-                    
                 }
             }
             
@@ -478,7 +384,6 @@ public struct MintscanHistory: Codable {
             else if (msgType.contains("rizonworld.") && msgType.contains("tokenswap")) {
                 if (msgType.contains("MsgCreateTokenswapRequest")) {
                     result = NSLocalizedString("tx_rizon_event_horizon", comment: "")
-                    
                 }
             }
             
@@ -492,47 +397,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgWithdrawWithinBatch")) {
                     result = NSLocalizedString("tx_exit_pool", comment: "")
-                    
-                }
-            }
-            
-            // sif msg type
-            else if (msgType.contains("sifnode.") && msgType.contains("clp")) {
-                if (msgType.contains("MsgRemoveLiquidity")) {
-                    result = NSLocalizedString("tx_remove_liquidity", comment: "")
-                    
-                } else if (msgType.contains("MsgCreatePool")) {
-                    result = NSLocalizedString("tx_create_pool", comment: "")
-                    
-                } else if (msgType.contains("MsgAddLiquidity")) {
-                    result = NSLocalizedString("tx_add_liquidity", comment: "")
-                    
-                } else if (msgType.contains("MsgSwap")) {
-                    result = NSLocalizedString("tx_coin_swap", comment: "")
-                    
-                } else if (msgType.contains("MsgDecommissionPool")) {
-                    
-                } else if (msgType.contains("MsgUnlockLiquidityRequest")) {
-                    
-                } else if (msgType.contains("MsgUpdateRewardsParamsRequest")) {
-                    
-                } else if (msgType.contains("MsgAddRewardPeriodRequest")) {
-                    
-                } else if (msgType.contains("MsgModifyPmtpRates")) {
-                    
-                } else if (msgType.contains("MsgUpdatePmtpParams")) {
-                    
-                } else if (msgType.contains("MsgUpdateStakingRewardParams")) {
-                    
-                }
-                
-            } else if (msgType.contains("sifnode.") && msgType.contains("dispensation")) {
-                if (msgType.contains("MsgCreateUserClaim")) {
-                    result = NSLocalizedString("tx_despensation_claim", comment: "")
-                    
-                } else if (msgType.contains("MsgRunDistribution")) {
-                    result = NSLocalizedString("tx_distribution_run", comment: "")
-                    
                 }
             }
             
@@ -556,64 +420,8 @@ public struct MintscanHistory: Codable {
                 } else if (msgType.contains("MsgUnblockUser")) {
                     result = NSLocalizedString("tx_desmos_delete_unblock_user", comment: "")
                     
-                } else if (msgType.contains("MsgRequestDTagTransfer")) {
-                    
-                } else if (msgType.contains("MsgCancelDTagTransferRequest")) {
-                    
-                } else if (msgType.contains("MsgAcceptDTagTransferRequest")) {
-                    
-                } else if (msgType.contains("MsgRefuseDTagTransferRequest")) {
-                    
                 } else if (msgType.contains("MsgLinkChainAccount")) {
                     result = NSLocalizedString("tx_desmos_link_chain_account", comment: "")
-                    
-                } else if (msgType.contains("MsgUnlinkChainAccount")) {
-                    
-                } else if (msgType.contains("MsgLinkApplication")) {
-                    
-                } else if (msgType.contains("MsgUnlinkApplication")) {
-                    
-                }
-            }
-            
-            // wasm msg type
-            else if (msgType.contains("cosmwasm.")) {
-                if (msgType.contains("MsgStoreCode")) {
-                    result = NSLocalizedString("tx_cosmwasm_store_code", comment: "")
-                    
-                } else if (msgType.contains("MsgInstantiateContract")) {
-                    result = NSLocalizedString("tx_cosmwasm_instantiate", comment: "")
-                    
-                } else if (msgType.contains("MsgExecuteContract")) {
-                    result = NSLocalizedString("tx_cosmwasm_execontract", comment: "")
-                    
-                } else if (msgType.contains("MsgMigrateContract")) {
-                    
-                } else if (msgType.contains("MsgUpdateAdmin")) {
-                    
-                } else if (msgType.contains("MsgClearAdmin")) {
-                    
-                } else if (msgType.contains("PinCodesProposal")) {
-                    
-                } else if (msgType.contains("UnpinCodesProposal")) {
-                    
-                } else if (msgType.contains("StoreCodeProposal")) {
-                    
-                } else if (msgType.contains("InstantiateContractProposal")) {
-                    
-                } else if (msgType.contains("MigrateContractProposal")) {
-                    
-                } else if (msgType.contains("UpdateAdminProposal")) {
-                    
-                } else if (msgType.contains("ClearAdminProposal")) {
-                    
-                }
-            }
-            
-            // evm msg type
-            else if (msgType.contains("ethermint.evm")) {
-                if (msgType.contains("MsgEthereumTx")) {
-                    result = NSLocalizedString("tx_ethereum_evm", comment: "")
                 }
             }
             
@@ -621,7 +429,6 @@ public struct MintscanHistory: Codable {
             else if (msgType.contains("kava.") && msgType.contains("auction")) {
                 if (msgType.contains("MsgPlaceBid")) {
                     result = NSLocalizedString("tx_kava_auction_bid", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("kava.") && msgType.contains("cdp")) {
@@ -642,7 +449,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgLiquidate")) {
                     result =  NSLocalizedString("tx_kava_liquidate_cdp", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("kava.") && msgType.contains("swap")) {
@@ -657,7 +463,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgSwapForExactTokens")) {
                     result = NSLocalizedString("tx_kava_swap_token", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("kava.") && msgType.contains("hard")) {
@@ -675,7 +480,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgLiquidate")) {
                     result = NSLocalizedString("tx_kava_hard_liquidate", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("kava.") && msgType.contains("savings")) {
@@ -684,7 +488,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgWithdraw")) {
                     result = NSLocalizedString("tx_kava_save_withdraw", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("kava.") && msgType.contains("incentive")) {
@@ -705,7 +508,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgClaimEarnReward")) {
                     result = NSLocalizedString("tx_kava_earn_incentive", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("kava.") && msgType.contains("bep3")) {
@@ -717,7 +519,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgRefundAtomicSwap")) {
                     result = NSLocalizedString("tx_kava_bep3_refund", comment: "")
-                    
                 }
                 
             } else if (msgType.contains("kava.") && msgType.contains("pricefeed")) {
@@ -734,7 +535,6 @@ public struct MintscanHistory: Codable {
                     
                 } else if (msgType.contains("MsgWithdrawBurn")) {
                     result = NSLocalizedString("tx_kava_earn_withdraw", comment: "")
-                    
                 }
             }
             
@@ -753,19 +553,6 @@ public struct MintscanHistory: Codable {
                 
                 } else if (msgType.contains("RouteIBCTransfersRequest")) {
                     result = NSLocalizedString("tx_axelar_route_ibc_request", comment: "")
-                
-                } else if (msgType.contains("ExecutePendingTransfersRequest")) {
-
-                } else if (msgType.contains("RegisterIBCPathRequest")) {
-
-                } else if (msgType.contains("AddCosmosBasedChainRequest")) {
-
-                } else if (msgType.contains("RegisterAssetRequest")) {
-
-                } else if (msgType.contains("RegisterFeeCollectorRequest")) {
-
-                } else if (msgType.contains("RetryIBCTransferRequest")) {
-
                 }
             }
             
@@ -803,7 +590,65 @@ public struct MintscanHistory: Codable {
                     result = NSLocalizedString("tx_persis_liquid_claim", comment: "")
                 }
             }
-
+            
+            
+            
+            // ibc msg type
+            else if (msgType.contains("ibc.")) {
+                if (msgType.contains("MsgTransfer")) {
+                    result = NSLocalizedString("tx_ibc_send", comment: "")
+                    
+                } else if (msgType.contains("MsgUpdateClient")) {
+                    result = NSLocalizedString("tx_ibc_client_update", comment: "")
+                    
+                } else if (msgType.contains("MsgRecvPacket")) {
+                    result = NSLocalizedString("tx_ibc_receive", comment: "")
+                    
+                } else if (msgType.contains("MsgAcknowledgement")) {
+                    result = NSLocalizedString("tx_ibc_acknowledgement", comment: "")
+                }
+                
+                if (getMsgCnt() >= 2) {
+                    getMsgs()?.forEach({ msg in
+                        if (msg["@type"].string?.contains("MsgAcknowledgement") == true) {
+                            result = NSLocalizedString("tx_ibc_acknowledgement", comment: "")
+                        }
+                    })
+                    getMsgs()?.forEach({ msg in
+                        if (msg["@type"].string?.contains("MsgRecvPacket") == true) {
+                            result = NSLocalizedString("tx_ibc_receive", comment: "")
+                        }
+                    })
+                }
+            }
+            
+            // wasm msg type
+            else if (msgType.contains("cosmwasm.")) {
+                if (msgType.contains("MsgStoreCode")) {
+                    result = NSLocalizedString("tx_cosmwasm_store_code", comment: "")
+                    
+                } else if (msgType.contains("MsgInstantiateContract")) {
+                    result = NSLocalizedString("tx_cosmwasm_instantiate", comment: "")
+                    
+                } else if (msgType.contains("MsgExecuteContract")) {
+                    if let wasmMsg = msgValue["msg__@stringify"].string,
+                       let wasmFunc = try? JSONDecoder().decode(JSON.self, from: wasmMsg.data(using: .utf8) ?? Data()) {
+                        let description = wasmFunc.dictionaryValue.keys.first ?? ""
+                        result = NSLocalizedString("tx_cosmwasm", comment: "") + " " + description
+                        result = result.replacingOccurrences(of: "_", with: " ").capitalized
+                    } else {
+                        result = NSLocalizedString("tx_cosmwasm_execontract", comment: "")
+                    }
+                }
+            }
+            
+            // evm msg type
+            else if (msgType.contains("ethermint.evm")) {
+                if (msgType.contains("MsgEthereumTx")) {
+                    result = NSLocalizedString("tx_ethereum_evm", comment: "")
+                }
+            }
+            
             if (getMsgCnt() > 1) {
                 result = result +  " + " + String(getMsgCnt() - 1)
             }
@@ -818,14 +663,11 @@ public struct MintscanHistory: Codable {
         var result = Array<Cosmos_Base_V1beta1_Coin>()
         if (getMsgCnt() > 0) {
             var allReward = true
-            for msg in getMsgs()! {
-                var msgType = ""
-                if let rawMsgType = msg["@type"].string { msgType = rawMsgType }
-                if let rawMsgType = msg["type"].string { msgType = rawMsgType }
-                if (!msgType.contains("MsgWithdrawDelegatorReward")) {
+            getMsgs()?.forEach({ msg in
+                if (msg["@type"].string?.contains("MsgWithdrawDelegatorReward") == false) {
                     allReward = false
                 }
-            }
+            })
             if (allReward) {
                 data?.logs?.forEach({ log in
                     if let event = log["events"].array?.filter({ $0["type"].string == "transfer" }).first {
@@ -850,14 +692,11 @@ public struct MintscanHistory: Codable {
             
             
             var ibcReceived = false
-            for msg in getMsgs()! {
-                var msgType = ""
-                if let rawMsgType = msg["@type"].string { msgType = rawMsgType }
-                if let rawMsgType = msg["type"].string { msgType = rawMsgType }
-                if (msgType.contains("ibc") && msgType.contains("MsgRecvPacket")) {
+            getMsgs()?.forEach({ msg in
+                if (msg["@type"].string?.contains("ibc") == true && msg["@type"].string?.contains("MsgRecvPacket") == true) {
                     ibcReceived = true
                 }
-            }
+            })
             if (ibcReceived) {
                 data?.logs?.forEach({ log in
                     if let event = log["events"].array?.filter({ $0["type"].string == "transfer" }).first {
@@ -887,19 +726,19 @@ public struct MintscanHistory: Codable {
         
         //display re-invset amount
         if (getMsgCnt() == 2) {
-            var msgType0 = ""
-            var msgType1 = ""
-            if let rawMsgType = getMsgs()?[0]["@type"].string { msgType0 = rawMsgType }
-            if let rawMsgType = getMsgs()?[0]["type"].string { msgType0 = rawMsgType }
-            if let rawMsgType = getMsgs()?[1]["@type"].string { msgType1 = rawMsgType }
-            if let rawMsgType = getMsgs()?[1]["type"].string { msgType1 = rawMsgType }
-            if (msgType0.contains("MsgWithdrawDelegatorReward") && msgType1.contains("MsgDelegate")) {
-                if let rawAmount = getMsgs()?[1]["amount"] {
-                    let value = Cosmos_Base_V1beta1_Coin.with {
-                        $0.denom = rawAmount["denom"].stringValue
-                        $0.amount = rawAmount["amount"].stringValue
+            if let msgType0 = getMsgs()?[0]["@type"].string,
+               let msgType1 = getMsgs()?[1]["@type"].string,
+               msgType0.contains("MsgWithdrawDelegatorReward"),
+               msgType1.contains("MsgDelegate") {
+                if let msgValue1 = getMsgs()?[1][msgType1.replacingOccurrences(of: ".", with: "-")] {
+                    let rawAmount = msgValue1["amount"]
+                    if (!rawAmount.isEmpty) {
+                        let value = Cosmos_Base_V1beta1_Coin.with {
+                            $0.denom = rawAmount["denom"].stringValue
+                            $0.amount = rawAmount["amount"].stringValue
+                        }
+                        result.append(value)
                     }
-                    result.append(value)
                 }
                 return sortedCoins(chain, result)
             }
@@ -907,29 +746,29 @@ public struct MintscanHistory: Codable {
 
 
         if (getMsgCnt() == 0 || getMsgCnt() > 1) { return nil }
-
-        var msgType = ""
-        if let rawMsgType = getMsgs()?[0]["@type"].string { msgType = rawMsgType }
-        if let rawMsgType = getMsgs()?[0]["type"].string { msgType = rawMsgType }
-
-        if (msgType.contains("MsgSend")) {
-            if let rawAmounts = getMsgs()?[0]["amount"].array {
-                let value = Cosmos_Base_V1beta1_Coin.with {
-                    $0.denom = rawAmounts[0]["denom"].stringValue
-                    $0.amount = rawAmounts[0]["amount"].stringValue
+        if let firstMsg = getMsgs()?[0],
+           let msgType = firstMsg["@type"].string {
+            let msgValue = firstMsg[msgType.replacingOccurrences(of: ".", with: "-")]
+            
+            if (msgType.contains("MsgSend")) {
+                if let rawAmounts = msgValue["amount"].array {
+                    let value = Cosmos_Base_V1beta1_Coin.with {
+                        $0.denom = rawAmounts[0]["denom"].stringValue
+                        $0.amount = rawAmounts[0]["amount"].stringValue
+                    }
+                    result.append(value)
                 }
-                result.append(value)
-            }
-            if let rawAmounts = getMsgs()?[0]["value"]["amount"].array {
-                let value = Cosmos_Base_V1beta1_Coin.with {
-                    $0.denom = rawAmounts[0]["denom"].stringValue
-                    $0.amount = rawAmounts[0]["amount"].stringValue
+                if let rawAmounts = msgValue["value"]["amount"].array {
+                    let value = Cosmos_Base_V1beta1_Coin.with {
+                        $0.denom = rawAmounts[0]["denom"].stringValue
+                        $0.amount = rawAmounts[0]["amount"].stringValue
+                    }
+                    result.append(value)
                 }
-                result.append(value)
-            }
 
-        } else if (msgType.contains("MsgDelegate") || msgType.contains("MsgUndelegate") || msgType.contains("MsgBeginRedelegate")) {
-            if let rawAmount = getMsgs()?[0]["amount"] {
+            } else if (msgType.contains("MsgDelegate") || msgType.contains("MsgUndelegate") ||
+                       msgType.contains("MsgBeginRedelegate") || msgType.contains("MsgCancelUnbondingDelegation")) {
+                let rawAmount = msgValue["amount"]
                 if (!rawAmount.isEmpty) {
                     let value = Cosmos_Base_V1beta1_Coin.with {
                         $0.denom = rawAmount["denom"].stringValue
@@ -938,19 +777,8 @@ public struct MintscanHistory: Codable {
                     result.append(value)
                 }
 
-            }
-            if let rawAmount = getMsgs()?[0]["value"]["amount"] {
-                if (!rawAmount.isEmpty) {
-                    let value = Cosmos_Base_V1beta1_Coin.with {
-                        $0.denom = rawAmount["denom"].stringValue
-                        $0.amount = rawAmount["amount"].stringValue
-                    }
-                    result.append(value)
-                }
-            }
-
-        } else if (msgType.contains("ibc") && msgType.contains("MsgTransfer")) {
-            if let rawAmount = getMsgs()?[0]["token"] {
+            } else if (msgType.contains("ibc") && msgType.contains("MsgTransfer")) {
+                let rawAmount = msgValue["token"]
                 if (!rawAmount.isEmpty) {
                     let value = Cosmos_Base_V1beta1_Coin.with {
                         $0.denom = rawAmount["denom"].stringValue
@@ -963,14 +791,13 @@ public struct MintscanHistory: Codable {
         return sortedCoins(chain, result)
     }
     
-    
     public func getVoteOption() -> String {
         var result = ""
-        var msgType = ""
-        if let rawMsgType = getMsgs()?[0]["@type"].string { msgType = rawMsgType }
-        if let rawMsgType = getMsgs()?[0]["type"].string { msgType = rawMsgType }
-        if (msgType.contains("MsgVote")) {
-            if let rawOption = getMsgs()?[0]["option"].string {
+        if let firstMsg = getMsgs()?[0],
+           let msgType = firstMsg["@type"].string,
+           msgType.contains("MsgVote") {
+            let msgValue = firstMsg[msgType.replacingOccurrences(of: ".", with: "-")]
+            if let rawOption = msgValue["option"].string {
                 if (rawOption == "VOTE_OPTION_YES") {
                     result = "YES"
                 } else if (rawOption == "VOTE_OPTION_ABSTAIN") {
@@ -1018,11 +845,7 @@ public struct MintscanHistoryData: Codable {
     var txhash: String?
     var codespace: String?
     var code: Int?
-    var data: String?
-    var raw_log: String?
     var info: String?
-    var gas_wanted: String?
-    var gas_used: String?
     var timestamp: String?
     var tx: JSON?
     var logs: Array<JSON>?

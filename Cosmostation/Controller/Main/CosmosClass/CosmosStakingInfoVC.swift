@@ -18,6 +18,7 @@ class CosmosStakingInfoVC: BaseVC {
     @IBOutlet weak var stakeBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var emptyStakeImg: UIImageView!
+    var refresher: UIRefreshControl!
     
     var selectedChain: CosmosClass!
     var rewardAddress: String?
@@ -49,6 +50,11 @@ class CosmosStakingInfoVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
+        refresher.tintColor = .color01
+        tableView.addSubview(refresher)
+        
         navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconRewardAddress"), style: .plain, target: self, action: #selector(onClickRewardAddressChange))
         
         onSetStakeData()
@@ -64,9 +70,20 @@ class CosmosStakingInfoVC: BaseVC {
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        refresher.endRefreshing()
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    @objc func onRequestFetch() {
+        if (selectedChain.fetched == false) {
+            refresher.endRefreshing()
+        } else {
+            DispatchQueue.global().async {
+                self.selectedChain.fetchData(self.baseAccount.id)
+            }
+        }
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
@@ -82,6 +99,7 @@ class CosmosStakingInfoVC: BaseVC {
             validators = selectedChain.cosmosValidators
             delegations = selectedChain.cosmosDelegations
             rewards = selectedChain.cosmosRewards
+            unbondings.removeAll()
             
             selectedChain.cosmosUnbondings.forEach { unbonding in
                 unbonding.entries.forEach { entry in
@@ -106,6 +124,7 @@ class CosmosStakingInfoVC: BaseVC {
     }
     
     func onUpdateView() {
+        refresher.endRefreshing()
         loadingView.isHidden = true
         tableView.isHidden = false
         tableView.reloadData()

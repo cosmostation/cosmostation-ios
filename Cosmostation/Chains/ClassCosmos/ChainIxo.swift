@@ -22,6 +22,7 @@ class ChainIxo: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "ixo"
+        validatorPrefix = "ixovaloper"
         
         grpcHost = "grpc-ixo.cosmostation.io"
     }

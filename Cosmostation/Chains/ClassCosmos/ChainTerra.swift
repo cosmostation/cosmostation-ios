@@ -22,6 +22,7 @@ class ChainTerra: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/330'/0'/0/X")
         bechAccountPrefix = "terra"
+        validatorPrefix = "terravaloper"
         supportCw20 = true
         
         grpcHost = "grpc-terra.cosmostation.io"

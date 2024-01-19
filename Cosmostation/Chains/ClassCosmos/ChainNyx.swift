@@ -22,6 +22,7 @@ class ChainNyx: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "n"
+        validatorPrefix = "nvaloper"
         
         grpcHost = "grpc-nyx.cosmostation.io"
     }

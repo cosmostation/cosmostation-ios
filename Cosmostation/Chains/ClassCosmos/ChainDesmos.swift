@@ -22,6 +22,7 @@ class ChainDesmos: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/852'/0'/0/X")
         bechAccountPrefix = "desmos"
+        validatorPrefix = "desmosvaloper"
         
         grpcHost = "grpc-desmos.cosmostation.io"
     }

@@ -103,6 +103,14 @@ class KeyFac {
         return ""
     }
     
+    static func getOpAddressFromAddress(_ address: String, _ validatorPrefix: String?) -> String? {
+        guard let prefix = validatorPrefix,
+              let decodedData = try? SegwitAddrCoder.shared.decode(address) else {
+            return nil
+        }
+        return try? SegwitAddrCoder.shared.encode(prefix, decodedData!)
+    }
+    
     //Convert ethered Address to bech32 style
     static func convertEvmToBech32(_ ethAddress: String, _ prefix: String) -> String {
         var address = ethAddress

@@ -22,6 +22,7 @@ class ChainLum880: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/880'/0'/0/X")
         bechAccountPrefix = "lum"
+        validatorPrefix = "lumvaloper"
         
         grpcHost = "grpc-lum.cosmostation.io"
     }

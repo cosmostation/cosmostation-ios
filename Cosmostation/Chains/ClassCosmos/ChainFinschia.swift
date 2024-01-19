@@ -22,6 +22,7 @@ class ChainFinschia: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/438'/0'/0/X")
         bechAccountPrefix = "link"
+        validatorPrefix = "linkvaloper"
         
         grpcHost = "grpc-finschia.cosmostation.io"
     }

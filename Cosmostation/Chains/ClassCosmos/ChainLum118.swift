@@ -8,23 +8,15 @@
 
 import Foundation
 
-class ChainLum118: CosmosClass  {
+class ChainLum118: ChainLum880  {
     
     override init() {
         super.init()
         
         isDefault = false
-        name = "Lum"
         tag = "lum118"
-        logo1 = "chainLum"
-        logo2 = "chainLum2"
-        apiName = "lum"
-        stakeDenom = "ulum"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        bechAccountPrefix = "lum"
-        
-        grpcHost = "grpc-lum.cosmostation.io"
     }
     
 }

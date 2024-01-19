@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -252,6 +252,31 @@
                                             <constraint firstItem="z4T-nz-xPc" firstAttribute="centerY" secondItem="Xr9-xN-j4y" secondAttribute="centerY" id="vod-QS-0LN"/>
                                         </constraints>
                                     </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e38-wk-FZl">
+                                        <rect key="frame" x="0.0" y="76.999999999999986" width="431" height="15"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commission" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0M-5q-Gzt">
+                                                <rect key="frame" x="0.0" y="-0.33333333333334281" width="70.333333333333329" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color01"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKV-rn-qg2">
+                                                <rect key="frame" x="406" y="-0.33333333333334281" width="25" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color01"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="dKV-rn-qg2" firstAttribute="centerY" secondItem="e38-wk-FZl" secondAttribute="centerY" id="5EW-8o-ezu"/>
+                                            <constraint firstAttribute="trailing" secondItem="dKV-rn-qg2" secondAttribute="trailing" id="APR-zP-izK"/>
+                                            <constraint firstItem="k0M-5q-Gzt" firstAttribute="leading" secondItem="e38-wk-FZl" secondAttribute="leading" id="CX2-aM-1kC"/>
+                                            <constraint firstItem="k0M-5q-Gzt" firstAttribute="centerY" secondItem="e38-wk-FZl" secondAttribute="centerY" id="WlM-iD-kky"/>
+                                            <constraint firstAttribute="height" constant="15" id="nbV-sZ-saH"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -302,6 +327,9 @@
                 <outlet property="availableLabel" destination="PO5-pf-qVZ" id="dtr-w3-xYL"/>
                 <outlet property="availableTitle" destination="a9C-G8-y2w" id="Rue-lT-6i4"/>
                 <outlet property="coinImg" destination="3Kc-td-ZgN" id="gNu-1u-YiH"/>
+                <outlet property="commissionLabel" destination="dKV-rn-qg2" id="0On-NW-1qI"/>
+                <outlet property="commissionLayer" destination="e38-wk-FZl" id="lhI-4A-O2M"/>
+                <outlet property="commissionTitle" destination="k0M-5q-Gzt" id="lph-7s-9gt"/>
                 <outlet property="hidenValueLabel" destination="rbP-it-mxZ" id="8H3-Me-xXm"/>
                 <outlet property="priceChangeLabel" destination="XzW-fd-XKQ" id="IYt-0Z-lXv"/>
                 <outlet property="priceChangePercentLabel" destination="hx9-FM-kgM" id="KZI-DF-ihQ"/>

@@ -22,6 +22,7 @@ class ChainCryptoorg: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/394'/0'/0/X")
         bechAccountPrefix = "cro"
+        validatorPrefix = "crocncl"
         
         grpcHost = "grpc-crypto-org.cosmostation.io"
     }

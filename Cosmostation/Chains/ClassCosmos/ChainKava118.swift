@@ -25,11 +25,17 @@ class ChainKava118: ChainKava60  {
         privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
+        if (supportStaking) {
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
+        }
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
+        if (supportStaking) {
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
+        }
     }
 }

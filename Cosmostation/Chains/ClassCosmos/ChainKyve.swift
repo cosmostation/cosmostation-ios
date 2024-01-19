@@ -22,6 +22,7 @@ class ChainKyve: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "kyve"
+        validatorPrefix = "kyvevaloper"
         
         grpcHost = "grpc-kyve.cosmostation.io"
     }

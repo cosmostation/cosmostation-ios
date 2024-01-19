@@ -22,6 +22,7 @@ class ChainSecre529: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/529'/0'/0/X")
         bechAccountPrefix = "secret"
+        validatorPrefix = "secretvaloper"
         
         grpcHost = "grpc-secret.cosmostation.io"
     }

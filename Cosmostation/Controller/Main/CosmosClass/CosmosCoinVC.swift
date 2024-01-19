@@ -12,7 +12,6 @@ import Lottie
 
 class CosmosCoinVC: BaseVC {
     
-    
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var tableView: UITableView!
     var refresher: UIRefreshControl!

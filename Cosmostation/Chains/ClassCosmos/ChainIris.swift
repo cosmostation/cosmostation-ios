@@ -22,6 +22,7 @@ class ChainIris: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "iaa"
+        validatorPrefix = "iva"
         
         grpcHost = "grpc-iris.cosmostation.io"
     }

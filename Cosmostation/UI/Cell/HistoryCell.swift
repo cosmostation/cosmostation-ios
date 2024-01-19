@@ -53,6 +53,8 @@ class HistoryCell: UITableViewCell {
         
         if (NSLocalizedString("tx_vote", comment: "") == history.getMsgType(chain.bechAddress)) {
             denomLabel.text = history.getVoteOption()
+            denomLabel.isHidden = false
+            denomLabel.textColor = .color01
             return
         }
         

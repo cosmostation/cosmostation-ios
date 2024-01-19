@@ -22,6 +22,7 @@ class ChainCrescent: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "cre"
+        validatorPrefix = "crevaloper"
         
         grpcHost = "grpc-crescent.cosmostation.io"
     }

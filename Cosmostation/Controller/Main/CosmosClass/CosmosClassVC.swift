@@ -90,6 +90,7 @@ class CosmosClassVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchStakeDone(_:)), name: Notification.Name("FetchStakeData"), object: nil)
     }
@@ -111,8 +112,16 @@ class CosmosClassVC: BaseVC {
             let tabVC = (self.parent)?.parent as? MainTabVC
             tabVC?.hideChainBgImg()
         }
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchStakeData"), object: nil)
+    }
+    
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (tag == selectedChain.tag) {
+            totalValue = selectedChain.allValue()
+        }
     }
     
     @objc func onFetchTokenDone(_ notification: NSNotification) {
@@ -211,6 +220,17 @@ class CosmosClassVC: BaseVC {
         compounding.selectedChain = selectedChain
         compounding.modalTransitionStyle = .coverVertical
         self.present(compounding, animated: true)
+    }
+    
+    func onClaimCommissionTx() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let claimCommission = CosmosClaimCommission(nibName: "CosmosClaimCommission", bundle: nil)
+        claimCommission.selectedChain = selectedChain
+        claimCommission.modalTransitionStyle = .coverVertical
+        self.present(claimCommission, animated: true)
     }
     
     func onProposalList() {
@@ -353,6 +373,11 @@ class CosmosClassVC: BaseVC {
             mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
                 self.onProposalList()
             }
+            if (selectedChain.cosmosCommissions.count > 0) {
+                mainFab.addItem(title: "Claim Commission", image: UIImage(named: "iconFabCommission")) { _ in
+                    self.onClaimCommissionTx()
+                }
+            }
             mainFab.addItem(title: "Compound All Rewards", image: UIImage(named: "iconFabCompounding")) { _ in
                 if (self.selectedChain.cosmosValidators.count > 0) {
                     self.onClaimCompoundingTx()
@@ -485,10 +510,10 @@ extension CosmosClassVC {
     }
     
     func onNeutronProposals() {
-        let proposalsVC = NeutronPrpposalsVC(nibName: "NeutronPrpposalsVC", bundle: nil)
-        proposalsVC.selectedChain = selectedChain as? ChainNeutron
+        let neutronDaoVC = UIStoryboard(name: "NeutronDao", bundle: nil).instantiateViewController(withIdentifier: "NeutronDaoVC") as! NeutronDaoVC
+        neutronDaoVC.selectedChain = selectedChain as? ChainNeutron
         self.navigationItem.title = ""
-        self.navigationController?.pushViewController(proposalsVC, animated: true)
+        self.navigationController?.pushViewController(neutronDaoVC, animated: true)
     }
     
     func onKavaDefi() {

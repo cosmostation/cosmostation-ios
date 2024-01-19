@@ -22,6 +22,7 @@ class ChainHumans: CosmosClass  {
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         bechAccountPrefix = "human"
+        validatorPrefix = "humanvaloper"
         evmCompatible = true
         supportErc20 = false
         
@@ -34,6 +35,9 @@ class ChainHumans: CosmosClass  {
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
         bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+        if (supportStaking) {
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
+        }
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
@@ -41,6 +45,9 @@ class ChainHumans: CosmosClass  {
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
         bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+        if (supportStaking) {
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
+        }
     }
     
 }

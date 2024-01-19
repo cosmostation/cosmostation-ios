@@ -22,6 +22,7 @@ class ChainStargaze: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "stars"
+        validatorPrefix = "starsvaloper"
         
         grpcHost = "grpc-stargaze.cosmostation.io"
     }

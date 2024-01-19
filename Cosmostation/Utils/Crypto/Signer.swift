@@ -212,6 +212,31 @@ class Signer {
         return anyMsgs
     }
     
+    //Tx for Common Claim Commission
+    static func genClaimCommissionTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                     _ commission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission,
+                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest  {
+        let claimCommissionMsg = genClaimCommissionMsg(auth, commission)
+        return getSignedTx(auth, claimCommissionMsg, fee, memo, baseChain)
+    }
+    
+    static func genClaimCommissionSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                        _ commission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission,
+                                        _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let claimCommissionMsg = genClaimCommissionMsg(auth, commission)
+        return getSimulateTx(auth, claimCommissionMsg, fee, memo, baseChain)
+    }
+    
+    static func genClaimCommissionMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                      _ commission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission"
+            $0.value = try! commission.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    
     //Tx for Common Re-Invest
     static func genCompoundingTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                  _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],

@@ -22,6 +22,7 @@ class ChainBitcana: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "bcna"
+        validatorPrefix = "bcnavaloper"
         
         grpcHost = "grpc-bitcanna.cosmostation.io"
     }

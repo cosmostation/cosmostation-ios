@@ -1,35 +1,36 @@
 //
-//  CosmosProposalsVC.swift
+//  NeutronMultiDao.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2023/09/25.
+//  Created by yongjoo jung on 2023/12/27.
 //  Copyright © 2023 wannabit. All rights reserved.
 //
 
 import UIKit
 import Lottie
+import SwiftyJSON
+import GRPC
+import NIO
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-class CosmosProposalsVC: BaseVC {
+class NeutronMultiDao: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var voteBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
+    @IBOutlet weak var emptyView: UIView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: ChainNeutron!
+    var neutronMyVotes: [JSON]?
     
-    var votingPeriods = Array<MintscanProposal>()
-    var etcPeriods = Array<MintscanProposal>()
-    var filteredVotingPeriods = Array<MintscanProposal>()
-    var filteredEtcPeriods = Array<MintscanProposal>()
-    var myVotes = Array<MintscanMyVotes>()
-    var toVoteList = Array<UInt64>()
+    var votingPeriods = [JSON]()
+    var etcPeriods = [JSON]()
+    var filteredVotingPeriods = [JSON]()
+    var filteredEtcPeriods = [JSON]()
+    var toVoteMulti = [Int64]()
     var isShowAll = false
-    
-    var showAll: UIBarButtonItem?
-    var filtered: UIBarButtonItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,113 +52,60 @@ class CosmosProposalsVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        showAll = UIBarButtonItem(image: UIImage(named: "iconFilterOn"), style: .plain, target: self, action: #selector(onClickFilterOn))
-        filtered = UIBarButtonItem(image: UIImage(named: "iconFilterOff"), style: .plain, target: self, action: #selector(onClickFilterOff))
-        navigationItem.setRightBarButton(showAll, animated: true)
-        
-        onFetchVoteInfos()
+        fetchProposals()
     }
     
-    @objc func onClickFilterOn() {
-        navigationItem.setRightBarButton(filtered, animated: true)
-        isShowAll = !isShowAll
-        onShowToast(NSLocalizedString("msg_show_all_proposals", comment: ""))
-        tableView.reloadData()
+    override func setLocalizedString() {
+        voteBtn.setTitle(NSLocalizedString("str_start_vote", comment: ""), for: .normal)
     }
     
-    @objc func onClickFilterOff() {
-        navigationItem.setRightBarButton(showAll, animated: true)
-        isShowAll = !isShowAll
-        onShowToast(NSLocalizedString("msg_hide_scam_proposals", comment: ""))
-        tableView.reloadData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        neutronMyVotes = (self.parent as? NeutronDaoVC)?.neutronMyVotes
+        isShowAll = (self.parent as? NeutronDaoVC)?.isShowAll ?? false
+        NotificationCenter.default.addObserver(self, selector: #selector(onToggleFilter), name: Notification.Name("ToggleFilter"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleFilter"), object: nil)
     }
     
-    @objc func onFetchDone(_ notification: NSNotification) {
-        let tag = notification.object as! String
-        if (selectedChain.tag == tag) {
-            onFetchVoteInfos()
+    @objc func onToggleFilter() {
+        isShowAll = (self.parent as? NeutronDaoVC)?.isShowAll ?? false
+        if (isShowAll) {
+            onShowToast(NSLocalizedString("msg_show_all_proposals", comment: ""))
+        } else {
+            onShowToast(NSLocalizedString("msg_hide_scam_proposals", comment: ""))
         }
+        updateView()
     }
     
-    override func setLocalizedString() {
-        navigationItem.title = NSLocalizedString("title_vote_list", comment: "")
-        voteBtn.setTitle(NSLocalizedString("str_start_vote", comment: ""), for: .normal)
-    }
-    
-    func onFetchVoteInfos() {
-        votingPeriods.removeAll()
-        etcPeriods.removeAll()
-        filteredVotingPeriods.removeAll()
-        filteredEtcPeriods.removeAll()
-        myVotes.removeAll()
-        
-        Task {
-            if let proposals = try? await fetchProposals(selectedChain),
-               let votes = try? await fetchMyVotes(selectedChain, selectedChain.bechAddress) {
-                proposals.forEach { proposal in
-                    let msProposal = MintscanProposal(proposal)
-                    if (msProposal.isVotingPeriod()) {
-                        votingPeriods.append(msProposal)
-                        if (!msProposal.isScam()) {
-                            filteredVotingPeriods.append(msProposal)
-                        }
-                        
-                    } else {
-                        etcPeriods.append(msProposal)
-                        if (!msProposal.isScam()) {
-                            filteredEtcPeriods.append(msProposal)
-                        }
-                    }
-                }
-                votes["votes"].arrayValue.forEach { vote in
-                    myVotes.append(MintscanMyVotes(vote))
-                }
-            }
-            
-            DispatchQueue.main.async {
-                self.onUpdateView()
-            }
-        }
-    }
-    
-    func onUpdateView() {
+    func updateView() {
         loadingView.isHidden = true
-        tableView.isHidden = false
-        tableView.reloadData()
+        if (votingPeriods.count == 0 && etcPeriods.count == 0) {
+            emptyView.isHidden = false
+        } else {
+            tableView.isHidden = false
+            tableView.reloadData()
+        }
     }
     
     @IBAction func onClickVote(_ sender: BaseButton) {
-        var toVoteProposals = [MintscanProposal]()
-        votingPeriods.forEach { proposal in
-            if (toVoteList.contains(proposal.id!)) {
-                toVoteProposals.append(proposal)
-            }
-        }
-        
         if (selectedChain.isTxFeePayable() == false) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        let vote = CosmosVote(nibName: "CosmosVote", bundle: nil)
+        let vote = NeutronVote(nibName: "NeutronVote", bundle: nil)
         vote.selectedChain = selectedChain
-        vote.toVoteProposals = toVoteProposals
+        vote.toMultiProposals = votingPeriods.filter { toVoteMulti.contains($0["id"].int64Value) }
         vote.modalTransitionStyle = .coverVertical
         self.present(vote, animated: true)
-        
     }
+
 }
 
-extension CosmosProposalsVC: UITableViewDelegate, UITableViewDataSource {
+extension NeutronMultiDao: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -204,58 +152,61 @@ extension CosmosProposalsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"CosmosProposalCell") as! CosmosProposalCell
+        let module = selectedChain.daosList?[0]["proposal_modules"][1]
+        var proposal: JSON!
         if (indexPath.section == 0) {
-            var proposal: MintscanProposal!
             if (isShowAll) {
                 proposal = votingPeriods[indexPath.row]
             } else {
                 proposal = filteredVotingPeriods[indexPath.row]
             }
-            cell.onBindProposal(proposal, myVotes, toVoteList)
             cell.actionToggle = { request in
-                if (request && !self.toVoteList.contains(proposal.id!)) {
-                    self.toVoteList.append(proposal.id!)
-                } else if (!request && self.toVoteList.contains(proposal.id!)) {
-                    if let index = self.toVoteList.firstIndex(of: proposal.id!) {
-                        self.toVoteList.remove(at: index)
+                let id = proposal["id"].int64Value
+                if (request && !self.toVoteMulti.contains(id)) {
+                    self.toVoteMulti.append(id)
+                } else if (!request && self.toVoteMulti.contains(id)) {
+                    if let index = self.toVoteMulti.firstIndex(of: id) {
+                        self.toVoteMulti.remove(at: index)
                     }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
                     self.tableView.beginUpdates()
                     self.tableView.reloadRows(at: [indexPath], with: .none)
                     self.tableView.endUpdates()
-                    self.voteBtn.isEnabled = !self.toVoteList.isEmpty
+                    self.voteBtn.isEnabled = !self.toVoteMulti.isEmpty
                 })
             }
-            
         } else {
             if (isShowAll) {
-                cell.onBindProposal(etcPeriods[indexPath.row], myVotes, toVoteList)
+                proposal = etcPeriods[indexPath.row]
             } else {
-                cell.onBindProposal(filteredEtcPeriods[indexPath.row], myVotes, toVoteList)
+                proposal = filteredEtcPeriods[indexPath.row]
             }
         }
+        cell.onBindNeutronDao(module, proposal, neutronMyVotes, toVoteMulti)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var proposalId: UInt64 = 0
+        let contAddress = selectedChain.daosList?[0]["proposal_modules"][1]["address"].string ?? ""
+        var proposal: JSON!
         if (indexPath.section == 0) {
             if (isShowAll) {
-                proposalId = votingPeriods[indexPath.row].id!
+                proposal = votingPeriods[indexPath.row]
             } else {
-                proposalId = filteredVotingPeriods[indexPath.row].id!
+                proposal = filteredVotingPeriods[indexPath.row]
             }
-            
-        } else if (indexPath.section == 1) {
+        } else {
             if (isShowAll) {
-                proposalId = etcPeriods[indexPath.row].id!
+                proposal = etcPeriods[indexPath.row]
             } else {
-                proposalId = filteredEtcPeriods[indexPath.row].id!
+                proposal = filteredEtcPeriods[indexPath.row]
             }
         }
-        guard let url = BaseNetWork.getProposalDetailUrl(selectedChain, proposalId) else { return }
-        self.onShowSafariWeb(url)
+        let explorer = MintscanUrl + "neutron/dao/proposals/" + proposal["id"].stringValue + "/multiple/" +  contAddress
+        if let url = URL(string: explorer) {
+            self.onShowSafariWeb(url)
+        }
     }
     
     
@@ -280,18 +231,53 @@ extension CosmosProposalsVC: UITableViewDelegate, UITableViewDataSource {
         mask.locations = [NSNumber(value: location), NSNumber(value: location)]
         return mask;
     }
-    
 }
 
-
-extension CosmosProposalsVC {
+extension NeutronMultiDao {
     
-    func fetchProposals(_ chain: BaseChain) async throws -> [JSON] {
-        return try await AF.request(BaseNetWork.msProposals(chain), method: .get).serializingDecodable([JSON].self).value
+    func fetchProposals() {
+        Task {
+            let contAddress = selectedChain.daosList?[0]["proposal_modules"][1]["address"].string ?? ""
+            let query: JSON = ["reverse_proposals" : JSON()]
+            let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+            let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+                $0.address = contAddress
+                $0.queryData = Data(base64Encoded: queryBase64)!
+            }
+            if let response = try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getConnection()).smartContractState(req, callOptions: getCallOptions()).response.get(),
+               let result = try? JSONDecoder().decode(JSON.self, from: response.data) {
+                self.votingPeriods.removeAll()
+                self.etcPeriods.removeAll()
+                result["proposals"].arrayValue.forEach { proposal in
+                    let title = proposal["proposal"]["title"].stringValue.lowercased()
+                    if (proposal["proposal"]["status"].stringValue.lowercased() == "open") {
+                        votingPeriods.append(proposal)
+                        if (!title.contains("airdrop") && !title.containsEmoji()) {
+                            filteredVotingPeriods.append(proposal)
+                        }
+                        
+                    } else {
+                        etcPeriods.append(proposal)
+                        if (!title.contains("airdrop") && !title.containsEmoji()) {
+                            filteredEtcPeriods.append(proposal)
+                        }
+                    }
+                }
+                DispatchQueue.main.async { self.updateView() }
+            } else {
+                DispatchQueue.main.async { self.updateView() }
+            }
+        }
     }
     
-    func fetchMyVotes(_ chain: BaseChain, _ address: String) async throws -> JSON {
-        return try await AF.request(BaseNetWork.msMyVoteHistory(chain, address), method: .get).serializingDecodable(JSON.self).value
+    func getConnection() -> ClientConnection {
+        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
     }
     
+    func getCallOptions() -> CallOptions {
+        var callOptions = CallOptions()
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
+        return callOptions
+    }
 }

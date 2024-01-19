@@ -22,6 +22,7 @@ class ChainBand: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/494'/0'/0/X")
         bechAccountPrefix = "band"
+        validatorPrefix = "bandvaloper"
         
         grpcHost = "grpc-band.cosmostation.io"
     }

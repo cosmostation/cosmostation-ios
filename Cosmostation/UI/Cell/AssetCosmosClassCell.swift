@@ -37,6 +37,9 @@ class AssetCosmosClassCell: UITableViewCell {
     @IBOutlet weak var rewardLayer: UIView!
     @IBOutlet weak var rewardTitle: UILabel!
     @IBOutlet weak var rewardLabel: UILabel!
+    @IBOutlet weak var commissionLayer: UIView!
+    @IBOutlet weak var commissionTitle: UILabel!
+    @IBOutlet weak var commissionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -120,8 +123,19 @@ class AssetCosmosClassCell: UITableViewCell {
                     rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
                 }
                 
+                let commissionAmount = baseChain.commissionAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                if (baseChain.cosmosCommissions.count > 0) {
+                    commissionLayer.isHidden = false
+                    if (baseChain.commissionOtherDenoms() > 0) {
+                        commissionTitle.text = "Commission + " + String(baseChain.commissionOtherDenoms())
+                    } else {
+                        commissionTitle.text = "Commission"
+                    }
+                    commissionLabel?.attributedText = WDP.dpAmount(commissionAmount.stringValue, commissionLabel!.font, 6)
+                }
+                
                 let totalAmount = availableAmount.adding(vestingAmount).adding(stakingAmount)
-                    .adding(unStakingAmount).adding(rewardAmount)
+                    .adding(unStakingAmount).adding(rewardAmount).adding(commissionAmount)
                 amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
                 
                 if (BaseData.instance.getHideValue()) {
@@ -130,6 +144,7 @@ class AssetCosmosClassCell: UITableViewCell {
                     stakingLabel.text = "✱✱✱✱"
                     unstakingLabel.text = "✱✱✱✱"
                     rewardLabel.text = "✱✱✱✱"
+                    commissionLabel.text = "✱✱✱✱"
                 }
             }
         }

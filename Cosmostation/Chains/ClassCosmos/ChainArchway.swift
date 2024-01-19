@@ -22,6 +22,7 @@ class ChainArchway: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "archway"
+        validatorPrefix = "archwayvaloper"
         
         grpcHost = "grpc-archway.cosmostation.io"
     }

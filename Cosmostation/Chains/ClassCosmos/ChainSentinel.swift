@@ -22,6 +22,7 @@ class ChainSentinel: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "sent"
+        validatorPrefix = "sentvaloper"
         
         grpcHost = "grpc-sentinel.cosmostation.io"
     }

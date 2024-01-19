@@ -426,7 +426,14 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                         WDP.dpValue(outputValue, outputValueCurrency, outputValueLabel)
                         
                         descriptionCardView.isHidden = false
+                        errorCardView.isHidden = true
                         onSimul(route, msg)
+                        
+                        let inValue = NSDecimalNumber(string: route["usd_amount_in"].string ?? "0")
+                        let outValue = NSDecimalNumber(string: route["usd_amount_out"].string ?? "0")
+                        if (inValue.multiplying(by: NSDecimalNumber(string: "0.9")).compare(outValue).rawValue > 0) {
+                            onShowbiglossPopup()
+                        }
                         
                     } else {
                         //TODO msgs2개 이상일때 에러처리??
@@ -542,6 +549,18 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         toMsg = msg
         swapBtn.isEnabled = true
         toggleBtn.isEnabled = true
+    }
+    
+    
+    var bigLossAlert: UIAlertController?
+    func onShowbiglossPopup() {
+        if (bigLossAlert != nil) {
+            bigLossAlert?.dismiss(animated: true, completion: nil)
+        }
+        
+        bigLossAlert = UIAlertController(title: NSLocalizedString("str_big_loss", comment: ""), message: NSLocalizedString("str_big_loss_msg", comment: ""), preferredStyle: .alert)
+        bigLossAlert!.addAction(UIAlertAction(title: NSLocalizedString("str_confirm", comment: ""), style: .default, handler: nil))
+        present(bigLossAlert!, animated: true, completion: nil)
     }
     
     func onSimul(_ route: JSON, _ msg: JSON) {

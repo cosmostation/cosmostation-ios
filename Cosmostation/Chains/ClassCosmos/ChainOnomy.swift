@@ -22,6 +22,7 @@ class ChainOnomy: CosmosClass  {
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "onomy"
+        validatorPrefix = "onomyvaloper"
         
         grpcHost = "grpc-onomy-protocol.cosmostation.io"
     }
