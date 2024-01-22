@@ -32,25 +32,34 @@ class TxSignRequestSheet: BaseVC {
         self.wcMsgTextView.text = wcMsg?.prettyJson
         self.addressLabel.text = selectedChain.bechAddress
         
-        initData()
+        initView()
     }
     
-    private func initData() {
-        do {
-            if let json = try JSONSerialization.jsonObject(with: wcMsg!, options: []) as? [String: Any] {
-                let fee = json["fee"] as? [String: Any]
-                var amounts = fee?["amounts"] as? [[String: String]] ?? fee?["amount"] as? [[String: String]]
-                let firstAmount = amounts?.first
-                let denom = firstAmount?["denom"]
-                let amount = firstAmount?["amount"]
-                
-                if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, denom ?? "") {
-                    let feeAmount = NSDecimalNumber(string: amount).multiplying(byPowerOf10: -msAsset.decimals!)
-                    feeAmountLabel?.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, msAsset.decimals)
-                    feeDenomLabel.text = msAsset.symbol
-                }
+    private func initView() {
+        if let msg = self.wcMsg,
+           let jsonObject = try? JSONSerialization.jsonObject(with: msg, options: []),
+           let json = jsonObject as? [String: Any] {
+            if let authInfoString = json["auth_info_bytes"] as? String,
+               let data = Data.dataFromHex(authInfoString),
+               let authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: data),
+               let amount = authInfo.fee.amount.first,
+               let msAsset = BaseData.instance.getAsset(selectedChain.apiName, amount.denom) {
+                let feeAmount = NSDecimalNumber(string: amount.amount).multiplying(byPowerOf10: -(msAsset.decimals ?? 6))
+                feeAmountLabel.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel.font, msAsset.decimals)
+                feeDenomLabel.text = msAsset.symbol
             }
-        } catch {}
+            
+            if let fee = json["fee"] as? [String: Any],
+               let amounts = fee["amounts"] as? [[String: String]] ?? fee["amount"] as? [[String: String]],
+               let firstAmount = amounts.first,
+               let denom = firstAmount["denom"],
+               let amount = firstAmount["amount"],
+               let msAsset = BaseData.instance.getAsset(selectedChain.apiName, denom) {
+                let feeAmount = NSDecimalNumber(string: amount).multiplying(byPowerOf10: -(msAsset.decimals ?? 6))
+                feeAmountLabel.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel.font, msAsset.decimals)
+                feeDenomLabel.text = msAsset.symbol
+            }
+        }
     }
     
     @IBAction func onClickCancel(_ sender: UIButton) {

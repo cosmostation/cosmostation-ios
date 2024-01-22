@@ -112,7 +112,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("scheme : ", url.scheme)
         if (url.scheme == "cosmostation") {
             if (application.topViewController is DappDetailVC) {
                 if let wcVC = application.topViewController as? DappDetailVC {

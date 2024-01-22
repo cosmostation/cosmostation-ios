@@ -83,7 +83,7 @@ class DappDetailVC: BaseVC {
             return true
         }
         
-        if currentV2PairingUri != nil {
+        if currentV2PairingUri == wcURL {
             return true
         }
         
@@ -316,8 +316,12 @@ class DappDetailVC: BaseVC {
     func updateFeeInfoInAminoMessage(_ webToAppMessage: JSON) -> JSON {
         var approveSignMessage = webToAppMessage
         let signDoc = approveSignMessage["params"]["doc"]
+        var isEditFee = true
+        if (approveSignMessage["isEditFee"] == false || approveSignMessage["params"]["isEditFee"] == false) {
+            isEditFee = false
+        }
         
-        if (signDoc["fee"].exists() && signDoc["fee"]["amount"].exists()) {
+        if (isEditFee == false && (signDoc["fee"]["amount"].isEmpty || signDoc["fee"]["gas"] == "0") || isEditFee == true) {
             let chainId = signDoc["chain_id"].stringValue
             if let targetChain = baseAccount.allCosmosClassChains.filter({ $0.chainId == chainId }).first {
                 if let gasRate = targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == targetChain.stakeDenom }).first {
@@ -325,7 +329,6 @@ class DappDetailVC: BaseVC {
                     let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
                     
                     approveSignMessage["params"]["doc"]["fee"]["amount"] = [["amount": String(feeCoinAmount!.stringValue), "denom": targetChain.stakeDenom]]
-                    approveSignMessage["params"]["doc"]["fee"]["gas"].stringValue = gasLimit.stringValue
                     return approveSignMessage
                 }
             }
@@ -353,7 +356,6 @@ class DappDetailVC: BaseVC {
                 if let gasRate = self.selectedChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == self.selectedChain.stakeDenom }).first {
                     let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
                     authInfo.fee.amount[0].amount = feeCoinAmount!.stringValue
-                    authInfo.fee.gasLimit = gasLimit.uint64Value
                     
                     let authInfoHex = try! authInfo.serializedData()
                     approveSignMessage["params"]["doc"]["auth_info_bytes"].stringValue = authInfoHex.toHexString()
@@ -516,6 +518,9 @@ extension DappDetailVC: WKScriptMessageHandler {
                 } else {
                     rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])
                 }
+                
+            } else if (method == "cos_addChain" || method == "cos_disconnect") {
+                approveWebToApp(true, messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "cos_activatedChainIds" || method == "ten_activatedChainIds") {
                 if let chainIds = BaseData.instance.supportConfig?["supportChainIds"].arrayValue[0] {
@@ -732,10 +737,20 @@ extension DappDetailVC {
     
     private func showSessionRequest(request: WalletConnectSwiftV2.Request) {
         if request.method == "cosmos_signAmino" {
-            self.showRequestSign(request.params.encoded, {self.approveV2CosmosAminoRequest(wcV2Request: request)}, {self.respondOnReject(request: request)})
+            if let json = try? JSON(data: request.encoded) {
+                let aminoMessage = self.updateFeeInfoInAminoWcMessage(json)
+                self.showRequestSign(try! aminoMessage["params"]["signDoc"].rawData(),
+                                     {self.approveV2CosmosAminoRequest(wcV2Request: request)},
+                                     {self.respondOnReject(request: request)})
+            }
             
         } else if request.method == "cosmos_signDirect" {
-            self.showRequestSign(request.params.encoded, {self.approveV2CosmosDirectRequest(wcV2Request: request)}, {self.respondOnReject(request: request)})
+            if let json = try? JSON(data: request.encoded) {
+                let directMessage = self.updateFeeInfoInDirectWcMessage(json)
+                self.showRequestSign(try! directMessage["params"]["signDoc"].rawData(),
+                                     {self.approveV2CosmosDirectRequest(wcV2Request: request)},
+                                     {self.respondOnReject(request: request)})
+            }
             
         } else if request.method == "cosmos_getAccounts" {
             let v2Accounts = [["address": self.selectedChain.bechAddress, "pubkey": self.selectedChain.publicKey?.base64EncodedString(), "algo": "secp256k1"]]
@@ -855,8 +870,12 @@ extension DappDetailVC {
     private func updateFeeInfoInAminoWcMessage(_ wcV2RequestMessage: JSON) -> JSON {
         var approveSignMessage = wcV2RequestMessage
         let signDoc = approveSignMessage["params"]["signDoc"]
+        var isEditFee = true
+        if (approveSignMessage["isEditFee"] == false || approveSignMessage["params"]["isEditFee"] == false) {
+            isEditFee = false
+        }
         
-        if (signDoc["fee"].exists() && signDoc["fee"]["amount"].exists()) {
+        if (isEditFee == false && (signDoc["fee"]["amount"].isEmpty || signDoc["fee"]["gas"] == "0") || isEditFee == true) {
             let chainId = signDoc["chain_id"].stringValue
             if let targetChain = baseAccount.allCosmosClassChains.filter({ $0.chainId == chainId }).first {
                 if let gasRate = targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == targetChain.stakeDenom }).first {
@@ -864,7 +883,6 @@ extension DappDetailVC {
                     let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
                     
                     approveSignMessage["params"]["signDoc"]["fee"]["amount"] = [["amount": String(feeCoinAmount!.stringValue), "denom": targetChain.stakeDenom]]
-                    approveSignMessage["params"]["signDoc"]["fee"]["gas"].stringValue = gasLimit.stringValue
                     return approveSignMessage
                 }
             }
@@ -881,7 +899,6 @@ extension DappDetailVC {
                 if let gasRate = self.selectedChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == self.selectedChain.stakeDenom }).first {
                     let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
                     authInfo.fee.amount[0].amount = feeCoinAmount!.stringValue
-                    authInfo.fee.gasLimit = gasLimit.uint64Value
                 }
                 let authInfoHex = try! authInfo.serializedData()
                 approveSignMessage["params"]["signDoc"]["authInfoBytes"].stringValue = authInfoHex.toHexString()
