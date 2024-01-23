@@ -21,6 +21,8 @@ class PortfolioVC: BaseVC {
     
     var toDisplayCosmosChains = [CosmosClass]()
     var searchCosmosChains = [CosmosClass]()
+    var toDisplayEvmChains = [EvmClass]()
+    var searchEvmChains = [EvmClass]()
     var totalValue = NSDecimalNumber.zero {
         didSet {
             if (BaseData.instance.getHideValue()) {
@@ -89,8 +91,14 @@ class PortfolioVC: BaseVC {
     func initView() {
         baseAccount = BaseData.instance.baseAccount
         toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
-        onUpdateSearchBar()
         searchCosmosChains = toDisplayCosmosChains
+        
+        
+        toDisplayEvmChains = baseAccount.getDisplayEvmChains()
+        searchEvmChains = toDisplayEvmChains
+        
+        
+        onUpdateSearchBar()
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
         
         navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(onClickChainSelect))
@@ -101,14 +109,16 @@ class PortfolioVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
-        if (toDisplayCosmosChains.filter { $0.fetched == false }.count > 0) {
+        if (toDisplayEvmChains.filter { $0.fetched == false }.count > 0 ||
+            toDisplayCosmosChains.filter { $0.fetched == false }.count > 0) {
             refresher.endRefreshing()
+            
         } else {
             BaseNetWork().fetchPrices()
-            toDisplayCosmosChains.forEach { chain in
-                chain.fetched = false
-            }
+            toDisplayEvmChains.forEach { $0.fetched = false }
+            toDisplayCosmosChains.forEach { $0.fetched = false }
             baseAccount.fetchDisplayCosmosChains()
+            baseAccount.fetchDisplayEvmChains()
             tableView.reloadData()
             refresher.endRefreshing()
         }
@@ -116,6 +126,7 @@ class PortfolioVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
+        print("onFetchDone ", tag)
         onUpdateRow(tag)
     }
     
@@ -131,11 +142,20 @@ class PortfolioVC: BaseVC {
     }
     
     func onUpdateRow(_ tag: String) {
+        for i in 0..<searchEvmChains.count {
+            if (searchEvmChains[i].tag == tag) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
+                    self.tableView.endUpdates()
+                })
+            }
+        }
         for i in 0..<searchCosmosChains.count {
             if (searchCosmosChains[i].tag == tag) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
                     self.tableView.beginUpdates()
-                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
+                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 1)], with: .none)
                     self.tableView.endUpdates()
                 })
             }
@@ -153,6 +173,9 @@ class PortfolioVC: BaseVC {
     
     func onUpdateTotal() {
         var sum = NSDecimalNumber.zero
+        toDisplayEvmChains.forEach { chain in
+            sum = sum.adding(chain.allValue())
+        }
         toDisplayCosmosChains.forEach { chain in
             sum = sum.adding(chain.allValue())
         }
@@ -179,14 +202,19 @@ class PortfolioVC: BaseVC {
         baseAccount.loadDisplayCTags()
         baseAccount.fetchDisplayCosmosChains()
         toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
-        onUpdateSearchBar()
         searchCosmosChains = toDisplayCosmosChains
+        
+        baseAccount.fetchDisplayEvmChains()
+        toDisplayEvmChains = baseAccount.getDisplayEvmChains()
+        searchEvmChains = toDisplayEvmChains
+        
+        onUpdateSearchBar()
         tableView.reloadData()
         onUpdateTotal()
     }
     
     func onUpdateSearchBar() {
-        if (toDisplayCosmosChains.count < 10) {
+        if (toDisplayEvmChains.count + toDisplayCosmosChains.count < 10) {
             tableView.tableHeaderView = nil
             tableView.headerView(forSection: 0)?.layoutSubviews()
         } else {
@@ -200,13 +228,18 @@ class PortfolioVC: BaseVC {
 extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.titleLabel.text = "Cosmos Class"
-        view.cntLabel.text = String(toDisplayCosmosChains.count)
+        if (section == 0) {
+            view.titleLabel.text = "Ethereum Class"
+            view.cntLabel.text = String(toDisplayEvmChains.count)
+        } else if (section == 1) {
+            view.titleLabel.text = "Cosmos Class"
+            view.cntLabel.text = String(toDisplayCosmosChains.count)
+        }
         return view
     }
     
@@ -223,12 +256,21 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchCosmosChains.count
+        if (section == 0) {
+            return searchEvmChains.count
+        } else if (section == 1) {
+            return searchCosmosChains.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"PortfolioCell") as! PortfolioCell
-        cell.bindCosmosClassChain(baseAccount, searchCosmosChains[indexPath.row])
+        if (indexPath.section == 0) {
+            cell.bindEvmClassChain(baseAccount, searchEvmChains[indexPath.row])
+        } else if (indexPath.section == 1) {
+            cell.bindCosmosClassChain(baseAccount, searchCosmosChains[indexPath.row])
+        }
         return cell
     }
     
@@ -237,22 +279,34 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (searchCosmosChains[indexPath.row].fetched == false) { return }
-        detailChainTag = searchCosmosChains[indexPath.row].tag
-        let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
-        cosmosClassVC.selectedChain = searchCosmosChains[indexPath.row]
-        cosmosClassVC.hidesBottomBarWhenPushed = true
-        self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
-        self.navigationController?.pushViewController(cosmosClassVC, animated: true)
+        if (indexPath.section == 0) {
+            //TODO detail for EVM
+            
+        } else if (indexPath.section == 1) {
+            if (searchCosmosChains[indexPath.row].fetched == false) { return }
+            detailChainTag = searchCosmosChains[indexPath.row].tag
+            let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
+            cosmosClassVC.selectedChain = searchCosmosChains[indexPath.row]
+            cosmosClassVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
+            self.navigationController?.pushViewController(cosmosClassVC, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        let selectedChain = searchCosmosChains[indexPath.row]
+        var selectedChain: BaseChain?
         var toDpAddress = ""
-        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
-            toDpAddress = selectedChain.evmAddress
-        } else {
-            toDpAddress = selectedChain.bechAddress
+        if (indexPath.section == 0) {
+            selectedChain = searchEvmChains[indexPath.row]
+            toDpAddress = (selectedChain as! EvmClass).evmAddress
+            
+        } else if (indexPath.section == 1) {
+            selectedChain = searchCosmosChains[indexPath.row]
+            if (selectedChain is ChainOkt60Keccak || selectedChain!.tag == "kava60" || selectedChain!.tag == "xplaKeccak256") {
+                toDpAddress = (selectedChain as! CosmosClass).evmAddress
+            } else {
+                toDpAddress = (selectedChain as! CosmosClass).bechAddress
+            }
         }
         let copy = UIAction(title: NSLocalizedString("str_copy", comment: ""), image: UIImage(systemName: "doc.on.doc")) { _ in
             UIPasteboard.general.string = toDpAddress.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -275,10 +329,13 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchEvmChains = searchText.isEmpty ? toDisplayEvmChains : toDisplayEvmChains.filter { evmChain in
+            return evmChain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
         searchCosmosChains = searchText.isEmpty ? toDisplayCosmosChains : toDisplayCosmosChains.filter { cosmosChain in
             return cosmosChain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
-        searchEmptyLayer.isHidden = searchCosmosChains.count > 0
+        searchEmptyLayer.isHidden = searchEvmChains.count + searchCosmosChains.count > 0
         tableView.reloadData()
     }
     

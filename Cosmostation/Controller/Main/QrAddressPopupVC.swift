@@ -18,7 +18,8 @@ class QrAddressPopupVC: BaseVC {
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
     
-    var selectedChain: CosmosClass!
+//    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var toDpAddress = ""
 
     override func viewDidLoad() {
@@ -26,36 +27,48 @@ class QrAddressPopupVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
-        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
+        
+        
+        if let selectedChain = selectedChain as? CosmosClass {
+            if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
+                toDpAddress = selectedChain.evmAddress
+            } else {
+                toDpAddress = selectedChain.bechAddress
+            }
+            
+            addressLabel.text = toDpAddress
+            addressLabel.adjustsFontSizeToFitWidth = true
+            if (baseAccount.type == .withMnemonic) {
+                hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
+                
+                if (selectedChain.evmCompatible) {
+                    tagLayer.isHidden = false
+                    evmCompatTag.isHidden = false
+                    
+                } else if (selectedChain.isDefault == false) {
+                    tagLayer.isHidden = false
+                    legacyTag.isHidden = false
+                }
+                
+            } else {
+                hdPathLabel.text = ""
+                
+                if (selectedChain.evmCompatible) {
+                    tagLayer.isHidden = false
+                    evmCompatTag.isHidden = false
+                }
+            }
+            
+        } else if let selectedChain = selectedChain as? EvmClass {
             toDpAddress = selectedChain.evmAddress
-        } else {
-            toDpAddress = selectedChain.bechAddress
-        }
-        
-        addressLabel.text = toDpAddress
-        addressLabel.adjustsFontSizeToFitWidth = true
-        if (baseAccount.type == .withMnemonic) {
-            hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
-            
-            if (selectedChain.evmCompatible) {
-                tagLayer.isHidden = false
-                evmCompatTag.isHidden = false
-                
-            } else if (selectedChain.isDefault == false) {
-                tagLayer.isHidden = false
-                legacyTag.isHidden = false
-            }
-            
-        } else {
-            hdPathLabel.text = ""
-            
-            if (selectedChain.evmCompatible) {
-                tagLayer.isHidden = false
-                evmCompatTag.isHidden = false
-                
+            addressLabel.text = toDpAddress
+            addressLabel.adjustsFontSizeToFitWidth = true
+            if (baseAccount.type == .withMnemonic) {
+                hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
+            } else {
+                hdPathLabel.text = ""
             }
         }
-        
         if let qrImage = generateQrCode(toDpAddress) {
             rqImgView.image = UIImage(ciImage: qrImage)
             let chainLogo = UIImage.init(named: selectedChain.logo1)

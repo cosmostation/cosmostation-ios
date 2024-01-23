@@ -69,4 +69,25 @@ class PortfolioCell: UITableViewCell {
         }
     }
     
+    func bindEvmClassChain(_ account: BaseAccount, _ chain: EvmClass) {
+        logoImg1.image =  UIImage.init(named: chain.logo1)
+        logoImg2.image =  UIImage.init(named: chain.logo2)
+        nameLabel.text = chain.name.uppercased()
+        
+        if (chain.fetched) {
+            valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            if (BaseData.instance.getHideValue()) {
+                currencyLabel.text = ""
+                valueLabel.font = .fontSize14Bold
+                valueLabel.text = "✱✱✱✱"
+            } else {
+                valueLabel.font = .fontSize16Bold
+                WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
+            }
+            
+        } else {
+            valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
+        }
+    }
+    
 }

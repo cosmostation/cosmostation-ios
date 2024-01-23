@@ -16,6 +16,7 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
         
         BaseData.instance.baseAccount?.initAccount()
         BaseData.instance.baseAccount?.fetchDisplayCosmosChains()
+        BaseData.instance.baseAccount?.fetchDisplayEvmChains()
         
         self.tabBar.tintColor = .white
         self.tabBar.layer.masksToBounds = true

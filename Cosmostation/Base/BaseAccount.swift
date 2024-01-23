@@ -40,6 +40,9 @@ public class BaseAccount {
     lazy var toDisplayCTags = [String]()
     lazy var allCosmosClassChains = [CosmosClass]()
     
+    
+    lazy var allEvmClassChains = [EvmClass]()
+    
     func getRefreshName() -> String {
         self.name = BaseData.instance.selectAccount(id)?.name ?? ""
         return self.name
@@ -56,8 +59,48 @@ public class BaseAccount {
             allCosmosClassChains = ALLCOSMOSCLASS().filter({ $0.isDefault == true || $0.tag == "okt996_Secp"})
         }
         initSortCosmosChains()
+        
+        allEvmClassChains = ALLEVMCLASS()
     }
     
+
+    
+    func updateAllValue() {
+        getDisplayCosmosChains().forEach { chain in
+            chain.allCoinValue = chain.allCoinValue()
+            chain.allCoinUSDValue = chain.allCoinValue(true)
+            chain.allTokenValue = chain.allTokenValue()
+            chain.allTokenUSDValue = chain.allTokenValue(true)
+        }
+    }
+    
+    func initSortCosmosChains() {
+        allCosmosClassChains.sort {
+            if ($0.tag == "cosmos118") { return true }
+            if ($1.tag == "cosmos118") { return false }
+            let ref0 = BaseData.instance.selectRefAddress(id, $0.tag)?.lastUsdValue() ?? NSDecimalNumber.zero
+            let ref1 = BaseData.instance.selectRefAddress(id, $1.tag)?.lastUsdValue() ?? NSDecimalNumber.zero
+            return ref0.compare(ref1).rawValue > 0 ? true : false
+            
+        }
+        allCosmosClassChains.sort {
+            if ($0.tag == "cosmos118") { return true }
+            if ($1.tag == "cosmos118") { return false }
+            if (toDisplayCTags.contains($0.tag) == true && toDisplayCTags.contains($1.tag) == false) { return true }
+            return false
+        }
+    }
+    
+    func reSortCosmosChains() {
+        allCosmosClassChains.sort {
+            if ($0.tag == "cosmos118") { return true }
+            if ($1.tag == "cosmos118") { return false }
+            return $0.allCoinUSDValue.compare($1.allCoinUSDValue).rawValue > 0 ? true : false
+        }
+    }
+}
+
+extension BaseAccount {
     func getDisplayCosmosChains() -> [CosmosClass] {
         return allCosmosClassChains.filter { cosmosChain in
             toDisplayCTags.contains(cosmosChain.tag)
@@ -162,40 +205,46 @@ public class BaseAccount {
             }
         }
     }
-    
-    func updateAllValue() {
-        getDisplayCosmosChains().forEach { chain in
-            chain.allCoinValue = chain.allCoinValue()
-            chain.allCoinUSDValue = chain.allCoinValue(true)
-            chain.allTokenValue = chain.allTokenValue()
-            chain.allTokenUSDValue = chain.allTokenValue(true)
-        }
+}
+
+extension BaseAccount {
+    func getDisplayEvmChains() -> [EvmClass] {
+        return allEvmClassChains
     }
     
-    func initSortCosmosChains() {
-        allCosmosClassChains.sort {
-            if ($0.tag == "cosmos118") { return true }
-            if ($1.tag == "cosmos118") { return false }
-            let ref0 = BaseData.instance.selectRefAddress(id, $0.tag)?.lastUsdValue() ?? NSDecimalNumber.zero
-            let ref1 = BaseData.instance.selectRefAddress(id, $1.tag)?.lastUsdValue() ?? NSDecimalNumber.zero
-            return ref0.compare(ref1).rawValue > 0 ? true : false
+    func fetchDisplayEvmChains() {
+        let keychain = BaseData.instance.getKeyChain()
+        if (type == .withMnemonic) {
+            if let secureData = try? keychain.getString(uuid.sha1()),
+               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
+                getDisplayEvmChains().forEach { chain in
+                    Task {
+                        if (chain.evmAddress.isEmpty) {
+                            chain.setInfoWithSeed(seed, lastHDPath)
+                        }
+                        if (chain.fetched == false) {
+                            chain.fetchData(id)
+                        }
+                    }
+                }
+            }
             
-        }
-        allCosmosClassChains.sort {
-            if ($0.tag == "cosmos118") { return true }
-            if ($1.tag == "cosmos118") { return false }
-            if (toDisplayCTags.contains($0.tag) == true && toDisplayCTags.contains($1.tag) == false) { return true }
-            return false
+        } else if (type == .onlyPrivateKey) {
+            if let secureKey = try? keychain.getString(uuid.sha1()) {
+                getDisplayEvmChains().forEach { chain in
+                    Task {
+                        if (chain.evmAddress.isEmpty) {
+                            chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                        }
+                        if (chain.fetched == false) {
+                            chain.fetchData(id)
+                        }
+                    }
+                }
+            }
         }
     }
     
-    func reSortCosmosChains() {
-        allCosmosClassChains.sort {
-            if ($0.tag == "cosmos118") { return true }
-            if ($1.tag == "cosmos118") { return false }
-            return $0.allCoinUSDValue.compare($1.allCoinUSDValue).rawValue > 0 ? true : false
-        }
-    }
 }
 
 extension BaseAccount {
