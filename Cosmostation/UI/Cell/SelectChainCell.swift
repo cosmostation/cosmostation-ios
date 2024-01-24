@@ -43,6 +43,38 @@ class SelectChainCell: UITableViewCell {
         actionToggle?(sender.isOn)
     }
     
+    func bindEvmClassChain(_ account: BaseAccount, _ chain: EvmClass, _ selectedList: [String]) {
+        logoImg1.image =  UIImage.init(named: chain.logo1)
+        logoImg2.image =  UIImage.init(named: chain.logo2)
+        nameLabel.text = chain.name.uppercased()
+        
+        if (selectedList.contains(chain.tag)) {
+            rootView.layer.borderWidth = 1.0
+            rootView.layer.borderColor = UIColor.white.cgColor
+        } else {
+            rootView.layer.borderWidth = 0.5
+            rootView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
+        }
+        
+        if (account.type == .withMnemonic) {
+            hdPathLabel.text = chain.getHDPath(account.lastHDPath)
+        } else {
+            hdPathLabel.text = ""
+        }
+        
+        if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
+            valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            assetCntLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
+            assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"
+            
+        } else {
+            valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+            assetCntLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+        }
+        
+    }
+    
     func bindCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass, _ selectedList: [String]) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         logoImg2.image =  UIImage.init(named: chain.logo2)

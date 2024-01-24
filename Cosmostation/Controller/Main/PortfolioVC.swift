@@ -19,10 +19,10 @@ class PortfolioVC: BaseVC {
     var refresher: UIRefreshControl!
     var searchBar: UISearchBar?
     
-    var toDisplayCosmosChains = [CosmosClass]()
-    var searchCosmosChains = [CosmosClass]()
     var toDisplayEvmChains = [EvmClass]()
     var searchEvmChains = [EvmClass]()
+    var toDisplayCosmosChains = [CosmosClass]()
+    var searchCosmosChains = [CosmosClass]()
     var totalValue = NSDecimalNumber.zero {
         didSet {
             if (BaseData.instance.getHideValue()) {
@@ -126,7 +126,7 @@ class PortfolioVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
-        print("onFetchDone ", tag)
+//        print("onFetchDone ", tag)
         onUpdateRow(tag)
     }
     

@@ -518,6 +518,25 @@ extension BaseData {
         return selectAccounts().first
     }
     
+    func setDisplayEvmChainTags(_ id: Int64, _ chainNames: [String])  {
+        if let encoded = try? JSONEncoder().encode(chainNames) {
+            UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS)
+        }
+    }
+    
+    func getDisplayEvmChainTags(_ id: Int64) -> [String] {
+        if let savedData = UserDefaults.standard.object(forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS) as? Data {
+            if let result = try? JSONDecoder().decode([String].self, from: savedData) {
+                return result
+            }
+        }
+        return DEFUAL_DISPALY_EVM
+    }
+    
+    func deleteDisplayEvmChainTags(_ id: Int64)  {
+        UserDefaults.standard.removeObject(forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS)
+    }
+    
     func setDisplayCosmosChainTags(_ id: Int64, _ chainNames: [String])  {
         if let encoded = try? JSONEncoder().encode(chainNames) {
             UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + KEY_DISPLAY_COSMOS_CHAINS)

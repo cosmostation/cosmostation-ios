@@ -45,6 +45,10 @@ class EvmClass: BaseChain  {
             self.fetched = true
             self.allCoinValue = self.allCoinValue()
             self.allCoinUSDValue = self.allCoinValue(true)
+            
+            BaseData.instance.updateRefAddressesMain(
+                RefAddress(id, self.tag, "", self.evmAddress,
+                           self.evmBalances.stringValue, self.allCoinUSDValue.stringValue, nil, 1))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }
     }
@@ -63,3 +67,6 @@ func ALLEVMCLASS() -> [EvmClass] {
     
     return result
 }
+
+let DEFUAL_DISPALY_EVM = ["ethereum60"]
+
