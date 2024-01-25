@@ -174,8 +174,11 @@ class PortfolioVC: BaseVC {
     func onUpdateTotal() {
         var sum = NSDecimalNumber.zero
         toDisplayEvmChains.forEach { chain in
-            sum = sum.adding(chain.allValue())
+            if (chain.tag == "kavaEvm60" && toDisplayCosmosChains.contains { $0.tag == "kava60"}) { } else {
+                sum = sum.adding(chain.allValue())
+            }
         }
+        
         toDisplayCosmosChains.forEach { chain in
             sum = sum.adding(chain.allValue())
         }
