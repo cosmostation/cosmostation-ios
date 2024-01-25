@@ -1732,6 +1732,16 @@
 		E1D6B8D22AA499A400177D30 /* CosmosNftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */; };
 		E1D6B8D42AA499B100177D30 /* CosmosAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */; };
 		E1D6B8D52AA499B100177D30 /* CosmosAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */; };
+		E1DBD3E02B620B760058E0DC /* EvmClass.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DBD3DF2B620B760058E0DC /* EvmClass.storyboard */; };
+		E1DBD3E12B620B760058E0DC /* EvmClass.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DBD3DF2B620B760058E0DC /* EvmClass.storyboard */; };
+		E1DBD3E42B6220C60058E0DC /* EvmAssetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DBD3E32B6220C60058E0DC /* EvmAssetVC.swift */; };
+		E1DBD3E52B6220C60058E0DC /* EvmAssetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DBD3E32B6220C60058E0DC /* EvmAssetVC.swift */; };
+		E1DBD3E72B6220DC0058E0DC /* EvmNftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DBD3E62B6220DC0058E0DC /* EvmNftVC.swift */; };
+		E1DBD3E82B6220DC0058E0DC /* EvmNftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DBD3E62B6220DC0058E0DC /* EvmNftVC.swift */; };
+		E1DBD3EA2B6220EE0058E0DC /* EvmHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DBD3E92B6220EE0058E0DC /* EvmHistoryVC.swift */; };
+		E1DBD3EB2B6220EE0058E0DC /* EvmHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DBD3E92B6220EE0058E0DC /* EvmHistoryVC.swift */; };
+		E1DBD3ED2B626BEE0058E0DC /* EvmClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DBD3EC2B626BEE0058E0DC /* EvmClassVC.swift */; };
+		E1DBD3EE2B626BEE0058E0DC /* EvmClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DBD3EC2B626BEE0058E0DC /* EvmClassVC.swift */; };
 		E1DF776F2AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF776D2AB74ED40028BD51 /* CheckMenmonicVC.swift */; };
 		E1DF77702AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF776D2AB74ED40028BD51 /* CheckMenmonicVC.swift */; };
 		E1DF77712AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DF776E2AB74ED40028BD51 /* CheckMenmonicVC.xib */; };
@@ -2627,6 +2637,11 @@
 		E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTokenVC.swift; sourceTree = "<group>"; };
 		E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosNftVC.swift; sourceTree = "<group>"; };
 		E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosAboutVC.swift; sourceTree = "<group>"; };
+		E1DBD3DF2B620B760058E0DC /* EvmClass.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = EvmClass.storyboard; path = Cosmostation/Controller/Main/EvmClass/EvmClass.storyboard; sourceTree = SOURCE_ROOT; };
+		E1DBD3E32B6220C60058E0DC /* EvmAssetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmAssetVC.swift; sourceTree = "<group>"; };
+		E1DBD3E62B6220DC0058E0DC /* EvmNftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmNftVC.swift; sourceTree = "<group>"; };
+		E1DBD3E92B6220EE0058E0DC /* EvmHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmHistoryVC.swift; sourceTree = "<group>"; };
+		E1DBD3EC2B626BEE0058E0DC /* EvmClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmClassVC.swift; sourceTree = "<group>"; };
 		E1DF776D2AB74ED40028BD51 /* CheckMenmonicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMenmonicVC.swift; sourceTree = "<group>"; };
 		E1DF776E2AB74ED40028BD51 /* CheckMenmonicVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckMenmonicVC.xib; sourceTree = "<group>"; };
 		E1DF77732AB74EE80028BD51 /* CheckPrivateKeyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPrivateKeyVC.swift; sourceTree = "<group>"; };
@@ -3081,21 +3096,6 @@
 				04B789042ACAC9AD00E9BE88 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */,
 			);
 			path = Ibc;
-			sourceTree = "<group>";
-		};
-		04C940B82AE92E6600415256 /* EthereumClass */ = {
-			isa = PBXGroup;
-			children = (
-				04C940B92AE92E9000415256 /* GenTx */,
-			);
-			path = EthereumClass;
-			sourceTree = "<group>";
-		};
-		04C940B92AE92E9000415256 /* GenTx */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = GenTx;
 			sourceTree = "<group>";
 		};
 		04CB912B2A910B1500375354 /* CosmosClass */ = {
@@ -3751,7 +3751,7 @@
 		E15980A12A83AAF00032892B /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				04C940B82AE92E6600415256 /* EthereumClass */,
+				E1DBD3E22B6220270058E0DC /* EvmClass */,
 				04CB912B2A910B1500375354 /* CosmosClass */,
 				E15980A22A83AB030032892B /* Main.storyboard */,
 				E15980A82A83ADB60032892B /* MainTabVC.swift */,
@@ -3949,6 +3949,18 @@
 			path = GenTx;
 			sourceTree = "<group>";
 		};
+		E1DBD3E22B6220270058E0DC /* EvmClass */ = {
+			isa = PBXGroup;
+			children = (
+				E1DBD3DF2B620B760058E0DC /* EvmClass.storyboard */,
+				E1DBD3EC2B626BEE0058E0DC /* EvmClassVC.swift */,
+				E1DBD3E32B6220C60058E0DC /* EvmAssetVC.swift */,
+				E1DBD3E62B6220DC0058E0DC /* EvmNftVC.swift */,
+				E1DBD3E92B6220EE0058E0DC /* EvmHistoryVC.swift */,
+			);
+			path = EvmClass;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4090,6 +4102,7 @@
 				048F8DC62B28544100432437 /* KavaEarnWithdrawAction.xib in Resources */,
 				04FEDB5B2B06012D0095B7B6 /* HdPathSheet.xib in Resources */,
 				04F048CA2AF89B19002A809D /* SelectAddressBookCell.xib in Resources */,
+				E1DBD3E12B620B760058E0DC /* EvmClass.storyboard in Resources */,
 				E12E9D2D2AE2B4A700336449 /* KavaMintAction.xib in Resources */,
 				0443B89928589B570027A6B9 /* Color.xcassets in Resources */,
 				04CD247F2AD308C800497EF5 /* SelectBepRecipientCell.xib in Resources */,
@@ -4310,6 +4323,7 @@
 				E1D538292A96644F00FB0403 /* loading.json in Resources */,
 				04C940E82AF4DAAE00415256 /* DeleteAddressBookSheet.xib in Resources */,
 				04FF6B942B21E101009DCA89 /* CosmosRewardListPopupVC.xib in Resources */,
+				E1DBD3E02B620B760058E0DC /* EvmClass.storyboard in Resources */,
 				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				04FC65642B0C8E77008F2110 /* OkWithdraw.xib in Resources */,
 				0409D2FD2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
@@ -4937,6 +4951,8 @@
 				04FAD9FA2AB7221600143A3E /* BaseRedButton.swift in Sources */,
 				0478438E2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
 				0438A8092AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */,
+				E1DBD3EB2B6220EE0058E0DC /* EvmHistoryVC.swift in Sources */,
+				E1DBD3EE2B626BEE0058E0DC /* EvmClassVC.swift in Sources */,
 				E16200422AF279560008F397 /* AddressBookListVC.swift in Sources */,
 				E13FC54C2B26C79A0082C66E /* kava_earn_v1beta1_proposal.pb.swift in Sources */,
 				E122DB402A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
@@ -5075,8 +5091,10 @@
 				E122DB9E2A8A468D006D1E7B /* cosmos_circuit_module_v1_module.pb.swift in Sources */,
 				E122DB342A8A468D006D1E7B /* cosmos_evidence_v1beta1_query.grpc.swift in Sources */,
 				048F8DBE2B28542F00432437 /* KavaEarnDepositAction.swift in Sources */,
+				E1DBD3E52B6220C60058E0DC /* EvmAssetVC.swift in Sources */,
 				047843942AC991B300462F1C /* injective_exchange_v1beta1_query.pb.swift in Sources */,
 				E122DBB02A8A468D006D1E7B /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */,
+				E1DBD3E82B6220DC0058E0DC /* EvmNftVC.swift in Sources */,
 				04B789662ACAC9B100E9BE88 /* ibc_core_channel_v1_tx.grpc.swift in Sources */,
 				04CD24792AD2E99A00497EF5 /* kava_bep3_v1beta1_tx.grpc.swift in Sources */,
 				E13FC54A2B26C79A0082C66E /* kava_earn_v1beta1_genesis.pb.swift in Sources */,
@@ -5651,6 +5669,8 @@
 				E122DB3F2A8A468D006D1E7B /* cosmos_store_streaming_abci_grpc.pb.swift in Sources */,
 				0478438D2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
 				0438A8082AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */,
+				E1DBD3EA2B6220EE0058E0DC /* EvmHistoryVC.swift in Sources */,
+				E1DBD3ED2B626BEE0058E0DC /* EvmClassVC.swift in Sources */,
 				E16200412AF279560008F397 /* AddressBookListVC.swift in Sources */,
 				E13FC54B2B26C79A0082C66E /* kava_earn_v1beta1_proposal.pb.swift in Sources */,
 				04FAD9D82AB438C900143A3E /* DropDownView.swift in Sources */,
@@ -5789,8 +5809,10 @@
 				E122DC152A8A468E006D1E7B /* cosmos_orm_module_v1alpha1_module.pb.swift in Sources */,
 				E122DB9D2A8A468D006D1E7B /* cosmos_circuit_module_v1_module.pb.swift in Sources */,
 				048F8DBD2B28542F00432437 /* KavaEarnDepositAction.swift in Sources */,
+				E1DBD3E42B6220C60058E0DC /* EvmAssetVC.swift in Sources */,
 				E122DB332A8A468D006D1E7B /* cosmos_evidence_v1beta1_query.grpc.swift in Sources */,
 				047843932AC991B300462F1C /* injective_exchange_v1beta1_query.pb.swift in Sources */,
+				E1DBD3E72B6220DC0058E0DC /* EvmNftVC.swift in Sources */,
 				E122DBAF2A8A468D006D1E7B /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */,
 				04B789652ACAC9B100E9BE88 /* ibc_core_channel_v1_tx.grpc.swift in Sources */,
 				E13FC5492B26C79A0082C66E /* kava_earn_v1beta1_genesis.pb.swift in Sources */,
