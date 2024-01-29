@@ -283,7 +283,13 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
-            //TODO detail for EVM
+            if (searchEvmChains[indexPath.row].fetched == false) { return }
+            detailChainTag = searchEvmChains[indexPath.row].tag
+            let evmClassVC = UIStoryboard(name: "EvmClass", bundle: nil).instantiateViewController(withIdentifier: "EvmClassVC") as! EvmClassVC
+            evmClassVC.selectedChain = searchEvmChains[indexPath.row]
+            evmClassVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
+            self.navigationController?.pushViewController(evmClassVC, animated: true)
             
         } else if (indexPath.section == 1) {
             if (searchCosmosChains[indexPath.row].fetched == false) { return }

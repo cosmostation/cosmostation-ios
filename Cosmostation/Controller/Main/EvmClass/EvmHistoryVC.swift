@@ -9,6 +9,8 @@
 import UIKit
 
 class EvmHistoryVC: BaseVC {
+    
+    var selectedChain: EvmClass!
 
     override func viewDidLoad() {
         super.viewDidLoad()

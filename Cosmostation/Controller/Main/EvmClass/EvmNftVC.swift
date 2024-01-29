@@ -9,6 +9,8 @@
 import UIKit
 
 class EvmNftVC: BaseVC {
+    
+    var selectedChain: EvmClass!
 
     override func viewDidLoad() {
         super.viewDidLoad()

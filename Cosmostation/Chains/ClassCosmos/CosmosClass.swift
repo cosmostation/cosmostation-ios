@@ -315,7 +315,7 @@ extension CosmosClass {
 extension CosmosClass {
     
     func fetchChainParam() async throws -> JSON {
-        print("fetchChainParam ", BaseNetWork.msChainParam(self))
+//        print("fetchChainParam ", BaseNetWork.msChainParam(self))
         return try await AF.request(BaseNetWork.msChainParam(self), method: .get).serializingDecodable(JSON.self).value
     }
     
@@ -325,7 +325,7 @@ extension CosmosClass {
     }
     
     func fetchErc20Info() async throws -> [MintscanToken] {
-        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
+//        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
         return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
     }
     

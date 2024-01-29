@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -87,19 +86,19 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W2h-nP-75G">
                                 <rect key="frame" x="0.0" y="199" width="393" height="653"/>
                                 <connections>
-                                    <segue destination="PEo-xb-PFQ" kind="embed" id="HN9-lW-sg4"/>
+                                    <segue destination="PEo-xb-PFQ" kind="embed" identifier="embedAssetVC" id="HN9-lW-sg4"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIO-da-bOO">
                                 <rect key="frame" x="0.0" y="199" width="393" height="653"/>
                                 <connections>
-                                    <segue destination="cVX-vz-y8y" kind="embed" id="fwm-Og-oSd"/>
+                                    <segue destination="cVX-vz-y8y" kind="embed" identifier="embedNftVC" id="fwm-Og-oSd"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJq-ks-FnM">
                                 <rect key="frame" x="0.0" y="199" width="393" height="653"/>
                                 <connections>
-                                    <segue destination="cCh-9s-T0D" kind="embed" id="58Y-95-YwA"/>
+                                    <segue destination="cCh-9s-T0D" kind="embed" identifier="embedHistoryVC" id="58Y-95-YwA"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -132,6 +131,17 @@
                             <constraint firstItem="BJq-ks-FnM" firstAttribute="leading" secondItem="W2h-nP-75G" secondAttribute="leading" id="xKv-gR-Vp8"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addressLabel" destination="Lo0-2d-dsg" id="dGm-ZR-b27"/>
+                        <outlet property="addressLayer" destination="Dpc-GE-4GN" id="thA-SK-CIz"/>
+                        <outlet property="assetList" destination="W2h-nP-75G" id="KKm-Qw-LcX"/>
+                        <outlet property="currencyLabel" destination="t80-pF-gTb" id="7gs-x3-WSy"/>
+                        <outlet property="hideValueBtn" destination="iyq-ej-XIn" id="aKc-Sw-dv0"/>
+                        <outlet property="historyList" destination="BJq-ks-FnM" id="O6J-K9-Mbg"/>
+                        <outlet property="nftList" destination="jIO-da-bOO" id="b5j-ZD-AnA"/>
+                        <outlet property="tabbar" destination="bUj-kd-BLh" id="f5z-Xh-w7Y"/>
+                        <outlet property="totalValueLabel" destination="1ad-XW-r7M" id="ZGl-BG-voV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -144,8 +154,36 @@
                     <view key="view" contentMode="scaleToFill" id="nLy-bl-AGc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4H-Bi-3DH" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="106.66666666666669" y="284" width="180" height="110"/>
+                                <viewLayoutGuide key="safeArea" id="4RK-vI-B5w"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="WPs-gY-yNF"/>
+                                    <constraint firstAttribute="height" constant="110" id="Zeg-Vr-hYU"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gta-em-KsN">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gr5-7R-732"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="leading" secondItem="gta-em-KsN" secondAttribute="leading" id="1kl-Zi-rdc"/>
+                            <constraint firstAttribute="top" secondItem="gta-em-KsN" secondAttribute="top" id="Giy-rz-CU7"/>
+                            <constraint firstItem="gta-em-KsN" firstAttribute="bottom" secondItem="nLy-bl-AGc" secondAttribute="bottom" id="RYf-m6-bet"/>
+                            <constraint firstItem="K4H-Bi-3DH" firstAttribute="centerX" secondItem="gr5-7R-732" secondAttribute="centerX" id="Vhj-J0-csb"/>
+                            <constraint firstAttribute="trailing" secondItem="gta-em-KsN" secondAttribute="trailing" id="on6-Gk-VFN"/>
+                            <constraint firstItem="K4H-Bi-3DH" firstAttribute="centerY" secondItem="gr5-7R-732" secondAttribute="centerY" id="t7j-Cy-3ba"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loadingView" destination="K4H-Bi-3DH" id="7tR-o6-N23"/>
+                        <outlet property="tableView" destination="gta-em-KsN" id="xlb-ae-gZc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ybs-Xy-xIy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -158,7 +196,8 @@
                     <view key="view" contentMode="scaleToFill" id="5bs-1l-niA">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="VZL-Xb-kee"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfO-Y8-RuQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -172,7 +211,8 @@
                     <view key="view" contentMode="scaleToFill" id="Xzi-HU-5xx">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="oAA-Wa-tbz"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YE4-Zn-YL2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -191,8 +231,5 @@
         <namedColor name="_primary">
             <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
