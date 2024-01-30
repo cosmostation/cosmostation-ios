@@ -18,6 +18,8 @@ class ChainKava_EVM: EvmClass  {
         logo1 = "chainKava"
         logo2 = "chainKava2"
         apiName = "kava"
+        
+        coinSymbol = "KAVA"
         coinGeckoId = "kava"
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")

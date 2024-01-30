@@ -127,4 +127,39 @@ class AssetCell: UITableViewCell {
         }
     }
     
+    
+    func bindEvmClassCoin(_ baseChain: EvmClass) {
+        symbolLabel.text = baseChain.coinSymbol
+        coinImg.image =  UIImage.init(named: baseChain.coinLogo)
+        
+        let dpAmount = baseChain.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
+        let value = baseChain.allCoinValue()
+        WDP.dpPrice(baseChain.coinGeckoId, priceCurrencyLabel, priceLabel)
+        WDP.dpPriceChanged(baseChain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+        amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
+        if (BaseData.instance.getHideValue()) {
+            hidenValueLabel.isHidden = false
+        } else {
+            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+            amountLabel.isHidden = false
+            valueCurrencyLabel.isHidden = false
+            valueLabel.isHidden = false
+        }
+    }
+    
+    func bindEvmClassToken(_ baseChain: EvmClass, _ token: MintscanToken) {
+        let value = baseChain.tokenValue(token.address!)
+        WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
+        WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
+        WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+        if (BaseData.instance.getHideValue()) {
+            hidenValueLabel.isHidden = false
+        } else {
+            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+            amountLabel.isHidden = false
+            valueCurrencyLabel.isHidden = false
+            valueLabel.isHidden = false
+        }
+    }
+    
 }

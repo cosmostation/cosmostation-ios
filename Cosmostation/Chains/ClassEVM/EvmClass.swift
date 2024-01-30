@@ -13,7 +13,9 @@ import BigInt
 
 class EvmClass: BaseChain  {
     
+    var coinSymbol = ""
     var coinGeckoId = ""
+    var coinLogo = ""
     var evmAddress = ""
     
     lazy var rpcURL = ""
