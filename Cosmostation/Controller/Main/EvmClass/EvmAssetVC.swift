@@ -14,6 +14,7 @@ class EvmAssetVC: BaseVC {
     
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var tableView: UITableView!
+    var refresher: UIRefreshControl!
     
     var selectedChain: EvmClass!
     var erc20Tokens = [MintscanToken]()
@@ -23,13 +24,6 @@ class EvmAssetVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.sectionHeaderTopPadding = 0.0
-        
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
@@ -37,7 +31,65 @@ class EvmAssetVC: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderTopPadding = 0.0
+        
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
+        refresher.tintColor = .color01
+        tableView.addSubview(refresher)
+        
         onSortAssets()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        refresher.endRefreshing()
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleHideValue"), object: nil)
+    }
+    
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (selectedChain != nil && selectedChain.tag == tag) {
+            DispatchQueue.main.async {
+                self.refresher.endRefreshing()
+                self.onSortAssets()
+            }
+        }
+    }
+    
+    @objc func onFetchTokenDone(_ notification: NSNotification) {
+        DispatchQueue.main.async {
+            self.refresher.endRefreshing()
+            self.onSortAssets()
+        }
+    }
+    
+    @objc func onToggleValue(_ notification: NSNotification) {
+        tableView.reloadData()
+    }
+    
+    @objc func onRequestFetch() {
+        if (selectedChain.fetched == false) {
+            refresher.endRefreshing()
+        } else {
+            DispatchQueue.global().async {
+                self.selectedChain.fetchData(self.baseAccount.id)
+            }
+        }
     }
     
     func onSortAssets() {

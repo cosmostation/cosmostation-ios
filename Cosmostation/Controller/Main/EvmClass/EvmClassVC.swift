@@ -110,6 +110,17 @@ class EvmClassVC: BaseVC {
         historyList.alpha = 0
     }
     
+    @IBAction func onClickHideValue(_ sender: UIButton) {
+        BaseData.instance.setHideValue(!BaseData.instance.getHideValue())
+        NotificationCenter.default.post(name: Notification.Name("ToggleHideValue"), object: nil, userInfo: nil)
+        if (BaseData.instance.getHideValue()) {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
+        } else {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOn"), for: .normal)
+        }
+        totalValue = selectedChain.allValue()
+    }
+    
     @objc func onShowAddress() {
         let qrAddressVC = QrAddressVC(nibName: "QrAddressVC", bundle: nil)
         qrAddressVC.selectedChain = selectedChain
