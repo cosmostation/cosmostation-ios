@@ -44,10 +44,10 @@ class EvmClass: BaseChain  {
             if let erc20s = try? await self.fetchErc20Info(),
                 let balance = try? await fetchBalance() {
                 mintscanErc20Tokens = erc20s
-                print("mintscanErc20Tokens ", mintscanErc20Tokens.count)
+//                print("mintscanErc20Tokens ", mintscanErc20Tokens.count)
                 
                 evmBalances = NSDecimalNumber(string: balance.description)
-                print("evmBalances ", evmBalances)
+//                print("evmBalances ", evmBalances)
             }
             
             DispatchQueue.main.async {
@@ -143,7 +143,7 @@ extension EvmClass {
             let erc20token = ERC20(web3: self.getWeb3Connection()!, provider: self.getWeb3Connection()!.provider, address: contractAddress!)
             if let erc20Balance = try? erc20token.getBalance(account: accountEthAddr) {
                 tokenInfo.setAmount(String(erc20Balance))
-                print("erc20Balance ", tokenInfo.symbol, "  ", erc20Balance)
+//                print("erc20Balance ", tokenInfo.symbol, "  ", erc20Balance)
                 group.leave()
             } else {
                 group.leave()

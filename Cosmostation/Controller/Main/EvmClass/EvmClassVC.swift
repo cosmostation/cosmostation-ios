@@ -59,6 +59,8 @@ class EvmClassVC: BaseVC {
         addressLabel.text = selectedChain.evmAddress
         
         onSetTabbarView()
+        
+        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconExplorer"), style: .plain, target: self, action: #selector(onClickExplorer))
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -85,6 +87,8 @@ class EvmClassVC: BaseVC {
         let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 1)
         let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 2)
         tabbar.items.append(assetTabBar)
+        tabbar.items.append(nftTabBar)
+        tabbar.items.append(historyTabBar)
         
         tabbar.barTintColor = .clear
         tabbar.selectionIndicatorStrokeColor = .white
@@ -100,6 +104,14 @@ class EvmClassVC: BaseVC {
         assetList.alpha = 1
         nftList.alpha = 0
         historyList.alpha = 0
+    }
+    
+    
+    
+    @objc func onClickExplorer() {
+        print("onClickExplorer")
+//        guard let url = BaseNetWork.getAccountDetailUrl(selectedChain) else { return }
+//        self.onShowSafariWeb(url)
     }
 }
 
