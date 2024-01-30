@@ -22,52 +22,66 @@ class QrAddressVC: BaseVC {
     @IBOutlet weak var shareBtn: BaseButton!
     @IBOutlet weak var addressToggleBtn: UIButton!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var toDpAddress = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        addressToggleBtn.isHidden = selectedChain.evmAddress.isEmpty
         chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
         
-        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
+        if let selectedChain = selectedChain as? CosmosClass {
+            addressToggleBtn.isHidden = selectedChain.evmAddress.isEmpty
+            if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
+                toDpAddress = selectedChain.evmAddress
+            } else {
+                toDpAddress = selectedChain.bechAddress
+            }
+            
+            addressLabel.text = toDpAddress
+            addressLabel.adjustsFontSizeToFitWidth = true
+            if (baseAccount.type == .withMnemonic) {
+                hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
+                
+                if (selectedChain.evmCompatible) {
+                    tagLayer.isHidden = false
+                    evmCompatTag.isHidden = false
+                    
+                } else if (selectedChain.isDefault == false) {
+                    tagLayer.isHidden = false
+                    legacyTag.isHidden = false
+                }
+                
+            } else {
+                hdPathLabel.text = ""
+                if (selectedChain.evmCompatible) {
+                    tagLayer.isHidden = false
+                    evmCompatTag.isHidden = false
+                    
+                }
+            }
+            
+            let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyAddress))
+            copyTap.cancelsTouchesInView = false
+            addressCardView.addGestureRecognizer(copyTap)
+            
+            
+        } else if let selectedChain = selectedChain as? EvmClass {
+            addressToggleBtn.isHidden = true
             toDpAddress = selectedChain.evmAddress
-        } else {
-            toDpAddress = selectedChain.bechAddress
-        }
-        
-        addressLabel.text = toDpAddress
-        addressLabel.adjustsFontSizeToFitWidth = true
-        if (baseAccount.type == .withMnemonic) {
-            hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
-            
-            if (selectedChain.evmCompatible) {
-                tagLayer.isHidden = false
-                evmCompatTag.isHidden = false
-                
-            } else if (selectedChain.isDefault == false) {
-                tagLayer.isHidden = false
-                legacyTag.isHidden = false
+            addressLabel.text = toDpAddress
+            addressLabel.adjustsFontSizeToFitWidth = true
+            if (baseAccount.type == .withMnemonic) {
+                hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
+            } else {
+                hdPathLabel.text = ""
             }
             
-        } else {
-            hdPathLabel.text = ""
-            if (selectedChain.evmCompatible) {
-                tagLayer.isHidden = false
-                evmCompatTag.isHidden = false
-                
-            }
         }
-        
+        updateQrImage()
 //        print("bechAddress ", selectedChain.bechAddress)
 //        print("evmAddress ", selectedChain.evmAddress)
-        updateQrImage()
-        
-        let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyAddress))
-        copyTap.cancelsTouchesInView = false
-        addressCardView.addGestureRecognizer(copyTap)
     }
     
     override func setLocalizedString() {
@@ -93,14 +107,16 @@ class QrAddressVC: BaseVC {
     @IBAction func onAddressToggleClick(_ sender: UIButton) {
         view.isUserInteractionEnabled = false
         rqImgView.image = nil
-        if (toDpAddress == selectedChain.evmAddress) {
-            toDpAddress = selectedChain.bechAddress
-        } else {
-            toDpAddress = selectedChain.evmAddress
+        if let selectedChain = selectedChain as? CosmosClass {
+            if (toDpAddress == selectedChain.evmAddress) {
+                toDpAddress = selectedChain.bechAddress
+            } else {
+                toDpAddress = selectedChain.evmAddress
+            }
+            addressLabel.text = toDpAddress
+            addressLabel.adjustsFontSizeToFitWidth = true
+            updateQrImage()
         }
-        addressLabel.text = toDpAddress
-        addressLabel.adjustsFontSizeToFitWidth = true
-        updateQrImage()
     }
     
     @objc func onCopyAddress() {

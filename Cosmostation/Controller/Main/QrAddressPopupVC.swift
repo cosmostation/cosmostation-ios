@@ -18,7 +18,6 @@ class QrAddressPopupVC: BaseVC {
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
     
-//    var selectedChain: CosmosClass!
     var selectedChain: BaseChain!
     var toDpAddress = ""
 

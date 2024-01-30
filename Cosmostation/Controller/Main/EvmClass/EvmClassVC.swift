@@ -60,6 +60,10 @@ class EvmClassVC: BaseVC {
         
         onSetTabbarView()
         
+        let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
+        addressTap.cancelsTouchesInView = false
+        addressLayer.addGestureRecognizer(addressTap)
+        
         navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconExplorer"), style: .plain, target: self, action: #selector(onClickExplorer))
     }
     
@@ -106,12 +110,16 @@ class EvmClassVC: BaseVC {
         historyList.alpha = 0
     }
     
-    
+    @objc func onShowAddress() {
+        let qrAddressVC = QrAddressVC(nibName: "QrAddressVC", bundle: nil)
+        qrAddressVC.selectedChain = selectedChain
+        qrAddressVC.modalPresentationStyle = .pageSheet
+        present(qrAddressVC, animated: true)
+    }
     
     @objc func onClickExplorer() {
-        print("onClickExplorer")
-//        guard let url = BaseNetWork.getAccountDetailUrl(selectedChain) else { return }
-//        self.onShowSafariWeb(url)
+        guard let url = URL(string:String(format: selectedChain.addressURL, selectedChain.evmAddress)) else { return }
+        self.onShowSafariWeb(url)
     }
 }
 

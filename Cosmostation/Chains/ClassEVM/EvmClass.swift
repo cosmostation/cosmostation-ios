@@ -19,6 +19,11 @@ class EvmClass: BaseChain  {
     var evmAddress = ""
     
     lazy var rpcURL = ""
+    lazy var explorerURL = ""
+    lazy var addressURL = ""
+    lazy var txURL = ""
+    
+    
     var web3: web3?
     var evmBalances = NSDecimalNumber.zero
     
