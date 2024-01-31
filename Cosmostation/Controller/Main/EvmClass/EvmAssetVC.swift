@@ -159,6 +159,14 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let transfer = EvmTransfer(nibName: "EvmTransfer", bundle: nil)
+//        transfer.selectedChain = selectedChain
+//        transfer.toSendDenom = denom
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {
             let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
