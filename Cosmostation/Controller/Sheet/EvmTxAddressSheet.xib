@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EvmTxAddressSheet" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="addressTextField" destination="dIX-Kg-Moe" id="bHN-41-Oyz"/>
+                <outlet property="confirmBtn" destination="Ba4-2t-Yeh" id="Amk-pk-FN7"/>
+                <outlet property="loadingView" destination="bkN-z2-WAY" id="uW3-K2-uvC"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="dIX-Kg-Moe" customClass="MDCOutlinedTextField">
+                    <rect key="frame" x="10" y="95" width="373" height="54"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" name="_color01"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="bzE-23-7b5"/>
+                    </constraints>
+                    <color key="textColor" name="_color01"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                </textField>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BH2-jK-Zij">
+                    <rect key="frame" x="155.66666666666663" y="165" width="217.33333333333337" height="28"/>
+                    <subviews>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GwM-i2-vaK">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="28"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="28" id="B3K-aH-Hxz"/>
+                            </constraints>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Self">
+                                <fontDescription key="titleFontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            </buttonConfiguration>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4QO-4p-yXn">
+                            <rect key="frame" x="0.0" y="0.0" width="104.66666666666667" height="28"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="28" id="rjW-VS-dZy"/>
+                            </constraints>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Address Book">
+                                <fontDescription key="titleFontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="onClickAddressBook:" destination="-1" eventType="touchUpInside" id="MLr-sj-gXm"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KES-cJ-0If">
+                            <rect key="frame" x="112.66666666666666" y="0.0" width="104.66666666666666" height="28"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="28" id="GIy-zy-tLw"/>
+                            </constraints>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="QR Scan">
+                                <fontDescription key="titleFontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="onClickScan:" destination="-1" eventType="touchUpInside" id="9Cw-uy-MnC"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ba4-2t-Yeh" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="766" width="377" height="48"/>
+                    <color key="backgroundColor" name="_primary"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="TVw-xG-IGn"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Confirm">
+                        <color key="titleColor" name="_color01"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="TS7-Lm-VfB"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bkN-z2-WAY" customClass="LottieAnimationView" customModule="Lottie">
+                    <rect key="frame" x="151.66666666666666" y="411" width="90" height="55"/>
+                    <viewLayoutGuide key="safeArea" id="e7q-C1-CTq"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="PhL-YZ-YRu"/>
+                        <constraint firstAttribute="height" constant="55" id="W4b-2y-Fn7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="_colorBg"/>
+            <color key="tintColor" name="_primary"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ba4-2t-Yeh" secondAttribute="trailing" constant="8" id="4LZ-NQ-fj0"/>
+                <constraint firstItem="dIX-Kg-Moe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="4tJ-4K-8wq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BH2-jK-Zij" secondAttribute="trailing" constant="20" id="6cn-8Y-Z1p"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="Ba4-2t-Yeh" secondAttribute="leading" constant="-8" id="CxJ-ED-p7q"/>
+                <constraint firstItem="BH2-jK-Zij" firstAttribute="top" secondItem="dIX-Kg-Moe" secondAttribute="bottom" constant="16" id="NYE-HN-NcJ"/>
+                <constraint firstAttribute="bottom" secondItem="Ba4-2t-Yeh" secondAttribute="bottom" constant="38" id="QqA-gQ-poO"/>
+                <constraint firstItem="bkN-z2-WAY" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="YNC-VH-xvH"/>
+                <constraint firstItem="dIX-Kg-Moe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="eBg-sx-LyB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dIX-Kg-Moe" secondAttribute="trailing" constant="10" id="nwn-fh-Qz4"/>
+                <constraint firstItem="bkN-z2-WAY" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="sTY-E4-mrs"/>
+            </constraints>
+            <point key="canvasLocation" x="-57" y="20"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorBg">
+            <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

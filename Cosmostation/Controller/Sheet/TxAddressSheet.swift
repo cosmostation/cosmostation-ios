@@ -82,11 +82,11 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
         baseSheet.senderAddress = selectedChain.bechAddress
         baseSheet.targetChain = recipientChain
         if (addressSheetType == .SelectAddress_CosmosErc20Transfer) {
-            baseSheet.sheetType = .SelectRecipientEvmAddress
+            baseSheet.sheetType = .SelectCosmosRecipientEvmAddress
         } else if (addressSheetType == .SelectAddress_CosmosDistribution) {
-            baseSheet.sheetType = .SelectRecipientAddress
+            baseSheet.sheetType = .SelectCosmosRecipientBechAddress
         } else if (addressSheetType == .SelectAddress_CosmosTransfer) {
-            baseSheet.sheetType = .SelectRecipientAddress
+            baseSheet.sheetType = .SelectCosmosRecipientBechAddress
         }
         self.onStartSheet(baseSheet)
     }
@@ -212,7 +212,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
                         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                         baseSheet.nameservices = self.nameservices
                         baseSheet.sheetDelegate = self
-                        baseSheet.sheetType = .SelectNameServiceAddress
+                        baseSheet.sheetType = .SelectCosmosNameServiceAddress
                         self.onStartSheet(baseSheet)
                     }
                 }
@@ -223,13 +223,13 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
     
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SelectNameServiceAddress) {
+        if (sheetType == .SelectCosmosNameServiceAddress) {
             if let index = result["index"] as? Int {
                 let nameservice = nameservices[index]
                 addressTextField.text = nameservice.address
             }
             
-        } else if (sheetType == .SelectRecipientAddress) {
+        } else if (sheetType == .SelectCosmosRecipientBechAddress) {
             if let address = result["address"] as? String {
                 let memo = result["memo"] as? String
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
@@ -238,7 +238,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
                 });
             }
             
-        } else if (sheetType == .SelectRecipientEvmAddress) {
+        } else if (sheetType == .SelectCosmosRecipientEvmAddress) {
             if let address = result["address"] as? String {
                 addressTextField.text = address
             }

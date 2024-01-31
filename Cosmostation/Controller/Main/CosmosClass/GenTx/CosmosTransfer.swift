@@ -208,7 +208,7 @@ class CosmosTransfer: BaseVC {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.cosmosChainList = recipientableChains
         baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectRecipientChain
+        baseSheet.sheetType = .SelectCosmosRecipientChain
         onStartSheet(baseSheet, 680)
     }
     
@@ -596,7 +596,7 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                 onSimul()
             }
             
-        } else if (sheetType == .SelectRecipientChain) {
+        } else if (sheetType == .SelectCosmosRecipientChain) {
             if let chainId = result["chainId"] as? String {
                 if (chainId != selectedRecipientChain.chainId) {
                     selectedRecipientChain = recipientableChains.filter({ $0.chainId == chainId }).first

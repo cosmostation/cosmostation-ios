@@ -31,7 +31,7 @@ class SelectRefAddressCell: UITableViewCell {
         slaveAddressabel.isHidden = true
     }
     
-    func onBindRefAddress(_ recipientChain: CosmosClass, _ refAddress: RefAddress) {
+    func onBindCosmosRefAddress(_ recipientChain: CosmosClass, _ refAddress: RefAddress) {
         if let account = BaseData.instance.selectAccount(refAddress.accountId) {
             accountNameLabel.text = account.name
         }
@@ -63,7 +63,7 @@ class SelectRefAddressCell: UITableViewCell {
 
     }
     
-    func onBindEvmRefAddress(_ recipientChain: CosmosClass, _ refAddress: RefAddress) {
+    func onBindCosmosEvmRefAddress(_ recipientChain: CosmosClass, _ refAddress: RefAddress) {
         if let account = BaseData.instance.selectAccount(refAddress.accountId) {
             accountNameLabel.text = account.name
         }
@@ -80,5 +80,13 @@ class SelectRefAddressCell: UITableViewCell {
         slaveAddressabel.text = "(" + refAddress.bechAddress + ")"
         slaveAddressabel.isHidden = false
         
+    }
+    
+    func onBindEvmRefAddress(_ refAddress: RefAddress) {
+        if let account = BaseData.instance.selectAccount(refAddress.accountId) {
+            accountNameLabel.text = account.name
+        }
+        masterAddressLabel.text = refAddress.evmAddress
+        masterAddressLabel.adjustsFontSizeToFitWidth = true
     }
 }
