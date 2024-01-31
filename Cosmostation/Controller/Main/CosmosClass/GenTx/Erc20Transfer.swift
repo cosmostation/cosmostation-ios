@@ -1,5 +1,5 @@
 //
-//  EvmTransfer.swift
+//  Erc20Transfer.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/10/25.
@@ -15,7 +15,7 @@ import SwiftProtobuf
 import web3swift
 import BigInt
 
-class EvmTransfer: BaseVC {
+class Erc20Transfer: BaseVC {
     
     @IBOutlet weak var midGapConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleLabel: UILabel!
@@ -153,7 +153,7 @@ class EvmTransfer: BaseVC {
         if (userInputAddress?.isEmpty == false) {
             addressSheet.existedAddress = userInputAddress
         }
-        addressSheet.addressSheetType = .EvmTransfer
+        addressSheet.addressSheetType = .Erc20Transfer
         addressSheet.addressDelegate = self
         self.onStartSheet(addressSheet, 220)
     }
@@ -263,7 +263,7 @@ class EvmTransfer: BaseVC {
     }
 }
 
-extension EvmTransfer: AmountSheetDelegate, AddressDelegate, PinDelegate {
+extension Erc20Transfer: AmountSheetDelegate, AddressDelegate, PinDelegate {
     
     func onInputedAmount(_ type: AmountSheetType?, _ amount: String) {
         onUpdateAmountView(amount)

@@ -174,7 +174,7 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             self.present(transfer, animated: true)
             
         } else {
-            let transfer = EvmTransfer(nibName: "EvmTransfer", bundle: nil)
+            let transfer = Erc20Transfer(nibName: "Erc20Transfer", bundle: nil)
             transfer.selectedChain = selectedChain
             transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].address
             transfer.modalTransitionStyle = .coverVertical

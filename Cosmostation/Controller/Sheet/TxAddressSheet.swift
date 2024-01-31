@@ -81,7 +81,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
         baseSheet.sheetDelegate = self
         baseSheet.senderAddress = selectedChain.bechAddress
         baseSheet.targetChain = recipientChain
-        if (addressSheetType == .EvmTransfer) {
+        if (addressSheetType == .Erc20Transfer) {
             baseSheet.sheetType = .SelectRecipientEvmAddress
         } else if (addressSheetType == .RewardAddress) {
             baseSheet.sheetType = .SelectRecipientAddress
@@ -121,7 +121,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             }
         }
         
-        if (addressSheetType == .EvmTransfer) {
+        if (addressSheetType == .Erc20Transfer) {
             var bechAddress = ""
             if (WUtils.isValidEvmAddress(userInput)) {
                 bechAddress = KeyFac.convertEvmToBech32(userInput!, recipientChain.bechAccountPrefix!)
@@ -322,7 +322,7 @@ extension TxAddressSheet {
 
 public enum AddressSheetType: Int {
     case RewardAddress = 0
-    case EvmTransfer = 1
+    case Erc20Transfer = 1
     case DefaultTransfer = -1
 }
 

@@ -817,10 +817,10 @@
 		04C940B42AE8D48C00415256 /* aes.js in Resources */ = {isa = PBXBuildFile; fileRef = 04C940B22AE8D48C00415256 /* aes.js */; };
 		04C940B62AE8D4A100415256 /* CryptoJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940B52AE8D4A100415256 /* CryptoJS.swift */; };
 		04C940B72AE8D4A100415256 /* CryptoJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940B52AE8D4A100415256 /* CryptoJS.swift */; };
-		04C940BC2AE92EBE00415256 /* EvmTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940BA2AE92EBE00415256 /* EvmTransfer.swift */; };
-		04C940BD2AE92EBE00415256 /* EvmTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940BA2AE92EBE00415256 /* EvmTransfer.swift */; };
-		04C940BE2AE92EBE00415256 /* EvmTransfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C940BB2AE92EBE00415256 /* EvmTransfer.xib */; };
-		04C940BF2AE92EBE00415256 /* EvmTransfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C940BB2AE92EBE00415256 /* EvmTransfer.xib */; };
+		04C940BC2AE92EBE00415256 /* Erc20Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940BA2AE92EBE00415256 /* Erc20Transfer.swift */; };
+		04C940BD2AE92EBE00415256 /* Erc20Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940BA2AE92EBE00415256 /* Erc20Transfer.swift */; };
+		04C940BE2AE92EBE00415256 /* Erc20Transfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C940BB2AE92EBE00415256 /* Erc20Transfer.xib */; };
+		04C940BF2AE92EBE00415256 /* Erc20Transfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C940BB2AE92EBE00415256 /* Erc20Transfer.xib */; };
 		04C940C12AEA352100415256 /* ChainCanto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940C02AEA352100415256 /* ChainCanto.swift */; };
 		04C940C22AEA352100415256 /* ChainCanto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940C02AEA352100415256 /* ChainCanto.swift */; };
 		04C940C42AEA529900415256 /* ChainHumans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940C32AEA529900415256 /* ChainHumans.swift */; };
@@ -2185,8 +2185,8 @@
 		04C6B9C92AAC91F900B02A95 /* ChainOkt996Keccak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOkt996Keccak.swift; sourceTree = "<group>"; };
 		04C940B22AE8D48C00415256 /* aes.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = aes.js; sourceTree = "<group>"; };
 		04C940B52AE8D4A100415256 /* CryptoJS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoJS.swift; sourceTree = "<group>"; };
-		04C940BA2AE92EBE00415256 /* EvmTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTransfer.swift; sourceTree = "<group>"; };
-		04C940BB2AE92EBE00415256 /* EvmTransfer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvmTransfer.xib; sourceTree = "<group>"; };
+		04C940BA2AE92EBE00415256 /* Erc20Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Erc20Transfer.swift; sourceTree = "<group>"; };
+		04C940BB2AE92EBE00415256 /* Erc20Transfer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Erc20Transfer.xib; sourceTree = "<group>"; };
 		04C940C02AEA352100415256 /* ChainCanto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCanto.swift; sourceTree = "<group>"; };
 		04C940C32AEA529900415256 /* ChainHumans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainHumans.swift; sourceTree = "<group>"; };
 		04C940C62AEA545500415256 /* ChainDydx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainDydx.swift; sourceTree = "<group>"; };
@@ -3038,6 +3038,13 @@
 				047843432AC991AD00462F1C /* injective_wasmx_v1_wasmx.pb.swift */,
 			);
 			path = Injective;
+			sourceTree = "<group>";
+		};
+		0494B3B82B6A26C80064BCD5 /* GenTx */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GenTx;
 			sourceTree = "<group>";
 		};
 		04B788FA2ACAC99F00E9BE88 /* Ibc */ = {
@@ -3941,8 +3948,8 @@
 				0402B7F12ACC38BA00824B3F /* CosmosVote.xib */,
 				047842D62AC87C1000462F1C /* CosmosTxResult.swift */,
 				047842D72AC87C1000462F1C /* CosmosTxResult.xib */,
-				04C940BA2AE92EBE00415256 /* EvmTransfer.swift */,
-				04C940BB2AE92EBE00415256 /* EvmTransfer.xib */,
+				04C940BA2AE92EBE00415256 /* Erc20Transfer.swift */,
+				04C940BB2AE92EBE00415256 /* Erc20Transfer.xib */,
 				04CD24452AD11D3400497EF5 /* LegacyTransfer.swift */,
 				04CD24462AD11D3400497EF5 /* LegacyTransfer.xib */,
 				04CD24612AD2E2D500497EF5 /* Bep3Transfer.swift */,
@@ -3956,6 +3963,7 @@
 		E1DBD3E22B6220270058E0DC /* EvmClass */ = {
 			isa = PBXGroup;
 			children = (
+				0494B3B82B6A26C80064BCD5 /* GenTx */,
 				E1DBD3DF2B620B760058E0DC /* EvmClass.storyboard */,
 				E1DBD3EC2B626BEE0058E0DC /* EvmClassVC.swift */,
 				E1DBD3E32B6220C60058E0DC /* EvmAssetVC.swift */,
@@ -4189,7 +4197,7 @@
 				E131F44B2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */,
 				04B789A22ACAEB5F00E9BE88 /* TxAddressSheet.xib in Resources */,
 				04FAD9DF2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
-				04C940BF2AE92EBE00415256 /* EvmTransfer.xib in Resources */,
+				04C940BF2AE92EBE00415256 /* Erc20Transfer.xib in Resources */,
 				04A1A8052AC80AA50014EF92 /* TxAmountSheet.xib in Resources */,
 				E1DF77842AB762010028BD51 /* CheckPrivateKeyCell.xib in Resources */,
 				04CFF0362AC58D4400FB3187 /* SelectFeeCoinCell.xib in Resources */,
@@ -4385,7 +4393,7 @@
 				0402B7EE2ACC248400824B3F /* CosmosRewardAddress.xib in Resources */,
 				04FEDB4E2B05D1340095B7B6 /* WalletDeriveVC.xib in Resources */,
 				047842DA2AC87C1000462F1C /* CosmosTxResult.xib in Resources */,
-				04C940BE2AE92EBE00415256 /* EvmTransfer.xib in Resources */,
+				04C940BE2AE92EBE00415256 /* Erc20Transfer.xib in Resources */,
 				0438A7F62AE1316B006FA213 /* KavaMintListVC.xib in Resources */,
 				E15F2D002ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
 				0400EEF52ADBEEF5007BA97F /* KavaLendListVC.xib in Resources */,
@@ -4870,7 +4878,7 @@
 				18FFB43C281AF533004E65BB /* BinanceMessage.swift in Sources */,
 				04A68C1E2ABDA3220041FA13 /* SelectSwapChainCell.swift in Sources */,
 				047843E22AC991B300462F1C /* injective_oracle_v1beta1_events.pb.swift in Sources */,
-				04C940BD2AE92EBE00415256 /* EvmTransfer.swift in Sources */,
+				04C940BD2AE92EBE00415256 /* Erc20Transfer.swift in Sources */,
 				047844032AC9A42E00462F1C /* ChainComdex.swift in Sources */,
 				0402B8192ACC774D00824B3F /* ChainMedibloc.swift in Sources */,
 				E122DAF42A8A468D006D1E7B /* cosmos_consensus_v1_query.pb.swift in Sources */,
@@ -5589,7 +5597,7 @@
 				04A68C1D2ABDA3220041FA13 /* SelectSwapChainCell.swift in Sources */,
 				E11069B42AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				047843E12AC991B300462F1C /* injective_oracle_v1beta1_events.pb.swift in Sources */,
-				04C940BC2AE92EBE00415256 /* EvmTransfer.swift in Sources */,
+				04C940BC2AE92EBE00415256 /* Erc20Transfer.swift in Sources */,
 				047844022AC9A42E00462F1C /* ChainComdex.swift in Sources */,
 				0402B8182ACC774D00824B3F /* ChainMedibloc.swift in Sources */,
 				E122DB872A8A468D006D1E7B /* cosmos_auth_v1beta1_tx.pb.swift in Sources */,
