@@ -161,8 +161,10 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let transfer = EvmTransfer(nibName: "EvmTransfer", bundle: nil)
-//        transfer.selectedChain = selectedChain
-//        transfer.toSendDenom = denom
+        transfer.selectedChain = selectedChain
+        if (indexPath.section == 1) {
+            transfer.selectedMsToken = erc20Tokens[indexPath.row]
+        }
         transfer.modalTransitionStyle = .coverVertical
         self.present(transfer, animated: true)
     }

@@ -97,11 +97,11 @@ class CosmosTransfer: BaseVC {
         
         if let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom?.lowercased() == toSendDenom.lowercased() }).first {
             selectedMsAsset = msAsset
-            transferAssetType = .CoinTransfer
+            transferAssetType = .CosmosCoinTransfer
             
         } else if let msToken = selectedChain.mintscanCw20Tokens.filter({ $0.address == toSendDenom }).first {
             selectedMsToken = msToken
-            transferAssetType = .Cw20Transfer
+            transferAssetType = .CosmosCw20Transfer
         }
         
         allCosmosChains = ALLCOSMOSCLASS()
@@ -109,7 +109,7 @@ class CosmosTransfer: BaseVC {
         //Set Recipientable Chains by ms data
         recipientableChains.append(selectedChain)
         BaseData.instance.mintscanAssets?.forEach({ msAsset in
-            if (transferAssetType == .CoinTransfer) {
+            if (transferAssetType == .CosmosCoinTransfer) {
                 if (msAsset.chain == selectedChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {
                     //add backward path
                     if let sendable = allCosmosChains.filter({ $0.apiName == msAsset.beforeChain(selectedChain.apiName) && $0.evmCompatible == true }).first {
@@ -159,7 +159,7 @@ class CosmosTransfer: BaseVC {
         
         
         //Set To Send Asset
-        if (transferAssetType == .CoinTransfer) {
+        if (transferAssetType == .CosmosCoinTransfer) {
             if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, toSendDenom) {
                 toSendSymbolLabel.text = msAsset.symbol
                 toSendAssetImg.af.setImage(withURL: msAsset.assetImg())
@@ -253,7 +253,7 @@ class CosmosTransfer: BaseVC {
         let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
         amountSheet.transferAssetType = transferAssetType
-        if (transferAssetType == .CoinTransfer) {
+        if (transferAssetType == .CosmosCoinTransfer) {
             amountSheet.msAsset = selectedMsAsset
         } else {
             amountSheet.msToken = selectedMsToken
@@ -279,7 +279,7 @@ class CosmosTransfer: BaseVC {
             
         } else {
             toSendAmount = NSDecimalNumber(string: amount)
-            if (transferAssetType == .CoinTransfer) {
+            if (transferAssetType == .CosmosCoinTransfer) {
                 let msPrice = BaseData.instance.getPrice(selectedMsAsset!.coinGeckoId)
                 let value = msPrice.multiplying(by: toSendAmount).multiplying(byPowerOf10: -selectedMsAsset!.decimals!, withBehavior: handler6)
                 
@@ -328,7 +328,7 @@ class CosmosTransfer: BaseVC {
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
         
-        if (transferAssetType == .CoinTransfer) {
+        if (transferAssetType == .CosmosCoinTransfer) {
             let balanceAmount = selectedChain.balanceAmount(toSendDenom)
             if (txFee.amount[0].denom == toSendDenom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
@@ -412,10 +412,10 @@ class CosmosTransfer: BaseVC {
         
         if (selectedChain.chainId == selectedRecipientChain.chainId) {
             //Inchain Send!
-            if (transferAssetType == .CoinTransfer) {
+            if (transferAssetType == .CosmosCoinTransfer) {
                 inChainCoinSendSimul()
                 
-            } else if (transferAssetType == .Cw20Transfer) {
+            } else if (transferAssetType == .CosmosCw20Transfer) {
                 inChainWasmSendSimul()
                 
             }
@@ -423,9 +423,9 @@ class CosmosTransfer: BaseVC {
         } else {
             // IBC Send!
             mintscanPath = WUtils.getMintscanPath(selectedChain, selectedRecipientChain, toSendDenom)
-            if (transferAssetType == .CoinTransfer) {
+            if (transferAssetType == .CosmosCoinTransfer) {
                 ibcCoinSendSimul()
-            } else if (transferAssetType == .Cw20Transfer) {
+            } else if (transferAssetType == .CosmosCw20Transfer) {
                 ibcWasmSendSimul()
             }
         }
@@ -664,17 +664,17 @@ extension CosmosTransfer: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             
             if (selectedChain.chainId == selectedRecipientChain.chainId) {
                 //Inchain Send!
-                if (transferAssetType == .CoinTransfer) {
+                if (transferAssetType == .CosmosCoinTransfer) {
                     inChainCoinSend()
-                } else if (transferAssetType == .Cw20Transfer) {
+                } else if (transferAssetType == .CosmosCw20Transfer) {
                     inChainWasmSend()
                 }
                 
             } else {
                 // IBC Send!
-                if (transferAssetType == .CoinTransfer) {
+                if (transferAssetType == .CosmosCoinTransfer) {
                     ibcCoinSend()
-                } else if (transferAssetType == .Cw20Transfer) {
+                } else if (transferAssetType == .CosmosCw20Transfer) {
                     ibcWasmSend()
                 }
             }
@@ -875,7 +875,7 @@ extension CosmosTransfer {
 
 
 public enum TransferAssetType: Int {
-    case CoinTransfer = 0
-    case Cw20Transfer = 1
-    case Erc20Transfer = 2
+    case CosmosCoinTransfer = 0
+    case CosmosCw20Transfer = 1
+    case CosmosErc20Transfer = 2
 }

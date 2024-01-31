@@ -56,7 +56,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
         if (sheetType == .TxTransfer) {
             amountTextField.label.text = NSLocalizedString("str_send_amount", comment: "")
             availableTitle.text = NSLocalizedString("str_max_availabe", comment: "")
-            if (transferAssetType == .CoinTransfer) {
+            if (transferAssetType == .CosmosCoinTransfer) {
                 if let msAsset = msAsset {
                     decimal = msAsset.decimals!
                     WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)

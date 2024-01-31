@@ -109,7 +109,7 @@ class Erc20Transfer: BaseVC {
     @objc func onClickAmount() {
         let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.transferAssetType = .Erc20Transfer
+        amountSheet.transferAssetType = .CosmosErc20Transfer
         amountSheet.msToken = selectedMsToken
         amountSheet.availableAmount = availableAmount
         if (toSendAmount != NSDecimalNumber.zero) {
@@ -153,7 +153,7 @@ class Erc20Transfer: BaseVC {
         if (userInputAddress?.isEmpty == false) {
             addressSheet.existedAddress = userInputAddress
         }
-        addressSheet.addressSheetType = .Erc20Transfer
+        addressSheet.addressSheetType = .SelectAddress_CosmosErc20Transfer
         addressSheet.addressDelegate = self
         self.onStartSheet(addressSheet, 220)
     }

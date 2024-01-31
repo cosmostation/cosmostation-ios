@@ -23,7 +23,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
     @IBOutlet weak var confirmBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var addressSheetType: AddressSheetType = .DefaultTransfer
+    var addressSheetType: AddressSheetType = .SelectAddress_CosmosTransfer
     var existedAddress: String?
     var selectedChain: CosmosClass!
     var recipientChain: CosmosClass!
@@ -43,7 +43,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        if (addressSheetType == .RewardAddress) {
+        if (addressSheetType == .SelectAddress_CosmosDistribution) {
             selfBtn.isHidden = false
         }
         
@@ -57,7 +57,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
     }
     
     override func setLocalizedString() {
-        if (addressSheetType == .RewardAddress) {
+        if (addressSheetType == .SelectAddress_CosmosDistribution) {
             addressTitle.text = NSLocalizedString("str_reward_recipient_address", comment: "")
         } else {
             addressTitle.text = NSLocalizedString("recipient_address", comment: "")
@@ -81,11 +81,11 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
         baseSheet.sheetDelegate = self
         baseSheet.senderAddress = selectedChain.bechAddress
         baseSheet.targetChain = recipientChain
-        if (addressSheetType == .Erc20Transfer) {
+        if (addressSheetType == .SelectAddress_CosmosErc20Transfer) {
             baseSheet.sheetType = .SelectRecipientEvmAddress
-        } else if (addressSheetType == .RewardAddress) {
+        } else if (addressSheetType == .SelectAddress_CosmosDistribution) {
             baseSheet.sheetType = .SelectRecipientAddress
-        } else if (addressSheetType == .DefaultTransfer) {
+        } else if (addressSheetType == .SelectAddress_CosmosTransfer) {
             baseSheet.sheetType = .SelectRecipientAddress
         }
         self.onStartSheet(baseSheet)
@@ -108,7 +108,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return
         }
-        if (addressSheetType == .RewardAddress) {
+        if (addressSheetType == .SelectAddress_CosmosDistribution) {
             if (userInput == selectedChain.rewardAddress) {
                 self.onShowToast(NSLocalizedString("error_same_reward_address", comment: ""))
                 return
@@ -121,7 +121,7 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             }
         }
         
-        if (addressSheetType == .Erc20Transfer) {
+        if (addressSheetType == .SelectAddress_CosmosErc20Transfer) {
             var bechAddress = ""
             if (WUtils.isValidEvmAddress(userInput)) {
                 bechAddress = KeyFac.convertEvmToBech32(userInput!, recipientChain.bechAccountPrefix!)
@@ -321,9 +321,9 @@ extension TxAddressSheet {
 }
 
 public enum AddressSheetType: Int {
-    case RewardAddress = 0
-    case Erc20Transfer = 1
-    case DefaultTransfer = -1
+    case SelectAddress_CosmosDistribution = 0
+    case SelectAddress_CosmosErc20Transfer = 1
+    case SelectAddress_CosmosTransfer = -1
 }
 
 
