@@ -69,7 +69,7 @@ class DeriveCell: UITableViewCell {
             if (chain.evmCompatible) {
                 evmCompatTag.isHidden = false
             }
-            if (chain is ChainOkt60Keccak || chain.tag == "kava60" || chain.tag == "xplaKeccak256") {
+            if (chain is ChainOkt60Keccak || chain.tag == "kava60" || chain.tag == "althea60" || chain.tag == "xplaKeccak256") {
                 hdPathLabel.text = chain.evmAddress
             } else {
                 hdPathLabel.text = chain.bechAddress

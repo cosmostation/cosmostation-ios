@@ -1141,6 +1141,10 @@
 		E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */; };
 		E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */; };
 		E10EB59A2A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */; };
+		E10FD3BB2B70D1ED00B57DB4 /* ChainAlthea60.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10FD3BA2B70D1ED00B57DB4 /* ChainAlthea60.swift */; };
+		E10FD3BC2B70D1ED00B57DB4 /* ChainAlthea60.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10FD3BA2B70D1ED00B57DB4 /* ChainAlthea60.swift */; };
+		E10FD3BE2B70D1F900B57DB4 /* ChainAlthea118.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10FD3BD2B70D1F900B57DB4 /* ChainAlthea118.swift */; };
+		E10FD3BF2B70D1F900B57DB4 /* ChainAlthea118.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10FD3BD2B70D1F900B57DB4 /* ChainAlthea118.swift */; };
 		E11069B22AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11069AA2AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift */; };
 		E11069B32AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11069AA2AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift */; };
 		E11069B42AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11069AB2AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift */; };
@@ -2349,6 +2353,8 @@
 		E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
+		E10FD3BA2B70D1ED00B57DB4 /* ChainAlthea60.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAlthea60.swift; sourceTree = "<group>"; };
+		E10FD3BD2B70D1F900B57DB4 /* ChainAlthea118.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAlthea118.swift; sourceTree = "<group>"; };
 		E11069AA2AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_tx.grpc.swift; sourceTree = "<group>"; };
 		E11069AB2AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_query.pb.swift; sourceTree = "<group>"; };
 		E11069AC2AA4C57600EB02CA /* cosmwasm_wasm_v1_proposal.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_proposal.pb.swift; sourceTree = "<group>"; };
@@ -2832,6 +2838,8 @@
 				04CB91172A90C30A00375354 /* CosmosClass.swift */,
 				04D279E92A67C96500AF046A /* ChainCosmos.swift */,
 				04CB911D2A90C9D900375354 /* ChainAkash.swift */,
+				E10FD3BD2B70D1F900B57DB4 /* ChainAlthea118.swift */,
+				E10FD3BA2B70D1ED00B57DB4 /* ChainAlthea60.swift */,
 				047843F22AC9A1B500462F1C /* ChainArchway.swift */,
 				E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */,
 				044ECB162A95C2E40042DB3C /* ChainAxelar.swift */,
@@ -5056,6 +5064,7 @@
 				E14E29762A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
 				046EA7A42AD0499900A2FCE7 /* stride_vesting_vesting.pb.swift in Sources */,
 				E12E9D252AE2B49900336449 /* KavaMintCreateAction.swift in Sources */,
+				E10FD3BF2B70D1F900B57DB4 /* ChainAlthea118.swift in Sources */,
 				048F8DC42B28544100432437 /* KavaEarnWithdrawAction.swift in Sources */,
 				0402B7F32ACC38BA00824B3F /* CosmosVote.swift in Sources */,
 				04B789842ACAC9B100E9BE88 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
@@ -5091,6 +5100,7 @@
 				040733042AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */,
 				04B789962ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */,
 				047843922AC991B300462F1C /* injective_oracle_v1beta1_query.pb.swift in Sources */,
+				E10FD3BC2B70D1ED00B57DB4 /* ChainAlthea60.swift in Sources */,
 				048427A92B3BE21200C8D7D8 /* NeutronSingleDao.swift in Sources */,
 				0402B80D2ACC75ED00824B3F /* ChainKyve.swift in Sources */,
 				04B789502ACAC9B100E9BE88 /* ibc_applications_fee_v1_tx.grpc.swift in Sources */,
@@ -5777,6 +5787,7 @@
 				E1DF776F2AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
 				E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
 				046EA7A32AD0499900A2FCE7 /* stride_vesting_vesting.pb.swift in Sources */,
+				E10FD3BE2B70D1F900B57DB4 /* ChainAlthea118.swift in Sources */,
 				048F8DC32B28544100432437 /* KavaEarnWithdrawAction.swift in Sources */,
 				E12E9D242AE2B49900336449 /* KavaMintCreateAction.swift in Sources */,
 				0402B7F22ACC38BA00824B3F /* CosmosVote.swift in Sources */,
@@ -5812,6 +5823,7 @@
 				046EA8B92AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */,
 				040733032AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */,
 				04B789952ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */,
+				E10FD3BB2B70D1ED00B57DB4 /* ChainAlthea60.swift in Sources */,
 				048427A82B3BE21200C8D7D8 /* NeutronSingleDao.swift in Sources */,
 				047843912AC991B300462F1C /* injective_oracle_v1beta1_query.pb.swift in Sources */,
 				0402B80C2ACC75ED00824B3F /* ChainKyve.swift in Sources */,

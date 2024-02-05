@@ -311,7 +311,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             
         } else if (indexPath.section == 1) {
             selectedChain = searchCosmosChains[indexPath.row]
-            if (selectedChain is ChainOkt60Keccak || selectedChain!.tag == "kava60" || selectedChain!.tag == "xplaKeccak256") {
+            if (selectedChain is ChainOkt60Keccak || selectedChain!.tag == "kava60" || selectedChain!.tag == "althea60" || selectedChain!.tag == "xplaKeccak256") {
                 toDpAddress = (selectedChain as! CosmosClass).evmAddress
             } else {
                 toDpAddress = (selectedChain as! CosmosClass).bechAddress

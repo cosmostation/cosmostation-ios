@@ -64,7 +64,7 @@ class CosmosClassVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         totalValue = selectedChain.allValue()
-        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
+        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "althea60" || selectedChain.tag == "xplaKeccak256") {
             addressLabel.text = selectedChain.evmAddress
         } else {
             addressLabel.text = selectedChain.bechAddress

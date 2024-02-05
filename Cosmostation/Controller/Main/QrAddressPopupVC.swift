@@ -29,7 +29,7 @@ class QrAddressPopupVC: BaseVC {
         
         
         if let selectedChain = selectedChain as? CosmosClass {
-            if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
+            if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "althea60" || selectedChain.tag == "xplaKeccak256") {
                 toDpAddress = selectedChain.evmAddress
             } else {
                 toDpAddress = selectedChain.bechAddress
