@@ -26,7 +26,11 @@ class ChainEthereum: EvmClass  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         rpcURL = "http://eth4.cosmostation.io/rpc"
-        explorerURL = "https://etherscan.io/"
+//        explorerURL = "https://etherscan.io/"
+        
+//        rpcURL = "https://rpc.ankr.com/eth_goerli"
+        explorerURL = "https://goerli.etherscan.io/"
+        
         addressURL = explorerURL + "address/%@"
         txURL = explorerURL + "tx/%@"
         

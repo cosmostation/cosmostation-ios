@@ -41,16 +41,23 @@ class EvmTransfer: BaseVC {
     @IBOutlet weak var feeValueLabel: UILabel!
     @IBOutlet weak var feeSegments: UISegmentedControl!
     
+    @IBOutlet weak var errorCardView: RedFixCardView!
+    @IBOutlet weak var errorMsgLabel: UILabel!
+    
     @IBOutlet weak var sendBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedChain: EvmClass!
     var selectedMsToken: MintscanToken?
     
+    
+    var selectedFee = 0
+    var feeAmount = NSDecimalNumber.zero
+    
     var availableAmount = NSDecimalNumber.zero
     var toSendAmount = NSDecimalNumber.zero
     var recipientAddress: String?
-    var ethereumTransaction: EthereumTransaction?
+    var ethereumTx: EthereumTransaction?
     var decimal: Int16 = 18
     var msPrice = NSDecimalNumber.zero
 
@@ -69,8 +76,9 @@ class EvmTransfer: BaseVC {
         toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
         toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
         
-        //set init fee
+        //set init fee UI
         feeSelectImg.image =  UIImage.init(named: selectedChain.coinLogo)
+        feeSelectLabel.text = selectedChain.coinSymbol
         feeDenomLabel.text = selectedChain.coinSymbol
         
         if (selectedMsToken == nil) {
@@ -92,6 +100,8 @@ class EvmTransfer: BaseVC {
             msPrice = BaseData.instance.getPrice(selectedMsToken!.coinGeckoId)
             
         }
+        
+        onSimul()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -170,26 +180,104 @@ class EvmTransfer: BaseVC {
     }
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
-        
+        selectedFee = sender.selectedSegmentIndex
+        onSimul()
     }
     
     func onUpdateFeeView() {
+        view.isUserInteractionEnabled = true
+        loadingView.isHidden = true
+        
+        if (feeAmount != NSDecimalNumber.zero) {
+            //TODO check available!!!!
+            let calFeeAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: handler18)
+            let value = msPrice.multiplying(by: calFeeAmount, withBehavior: handler6)
+            feeAmountLabel.attributedText = WDP.dpAmount(calFeeAmount.stringValue, feeAmountLabel.font, 18)
+            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
+            
+            feeCardView.isHidden = false
+            sendBtn.isEnabled = true
+            
+        } else {
+            // display ERROR
+            
+            feeCardView.isHidden = true
+            errorCardView.isHidden = false
+            sendBtn.isEnabled = false
+        }
     }
     
     @IBAction func onClickSend(_ sender: BaseButton) {
+        
     }
     
     func onSimul() {
+        if (toSendAmount == NSDecimalNumber.zero ) { return }
+        if (recipientAddress == nil || recipientAddress?.isEmpty == true) { return }
+        view.isUserInteractionEnabled = false
+        sendBtn.isEnabled = false
+        loadingView.isHidden = false
         
         DispatchQueue.global().async { [self] in
+            let web3 = selectedChain.getWeb3Connection()!
+            let chainID = web3.provider.network?.chainID
+            let senderAddress = EthereumAddress.init(selectedChain.evmAddress)
+            let recipientAddress = EthereumAddress.init(recipientAddress!)
+            let nonce = try? web3.eth.getTransactionCount(address: senderAddress!)
+            let calSendAmount = toSendAmount.multiplying(byPowerOf10: -decimal)
             
-            guard let url = URL(string: selectedChain.rpcURL) else { return }
-            guard let web3 = try? Web3.new(url) else { return }
+            var toAddress: EthereumAddress!
+            var wTx: WriteTransaction?
+            var gasLimit: BigUInt = 21000
+            feeAmount = NSDecimalNumber.zero
             
-//            web3.eth.
+            if (selectedMsToken == nil) {
+                toAddress = recipientAddress
+                wTx = web3.eth.sendETH(to: recipientAddress!, amount: calSendAmount.stringValue)
+                
+            } else {
+                toAddress = EthereumAddress.init(fromHex: selectedMsToken!.address!)
+                let erc20token = ERC20(web3: web3, provider: web3.provider, address: toAddress!)
+                wTx = try! erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
+            }
             
-            EIP1559Envelope(to: <#T##EthereumAddress#>, data: <#T##Data#>)
+            if let estimateGas = try? wTx!.estimateGas(transactionOptions: .defaultOptions) {
+                gasLimit = estimateGas
+            }
             
+            let oracle = Web3.Oracle.init(web3)
+            let bothFeesPercentiles = oracle.bothFeesPercentiles
+            print("bothFeesPercentiles ", bothFeesPercentiles)
+            if (bothFeesPercentiles?.baseFee.count ?? 0 > 0 && bothFeesPercentiles?.tip.count ?? 0 > 0) {
+                let baseFee = bothFeesPercentiles?.baseFee[selectedFee] ?? 27500000000
+                let tip = bothFeesPercentiles?.tip[selectedFee] ?? 500000000
+                let totalPerGas = baseFee + tip
+                let eip1559 = EIP1559Envelope(to: toAddress, nonce: nonce!, chainID: chainID!, value: wTx!.transaction.value,
+                                              data: wTx!.transaction.data, maxPriorityFeePerGas: tip, maxFeePerGas: baseFee, gasLimit: gasLimit)
+                ethereumTx = EthereumTransaction(with: eip1559)
+                feeAmount = NSDecimalNumber(string: String(gasLimit.multiplied(by: totalPerGas)))
+//                print("gasLimit ", legacy.gasLimit)
+//                print("totalPerGas ", totalPerGas)
+//                print("feeAmount ", feeAmount)
+                
+            } else {
+                var gasPrice: BigUInt = 27500000000
+                if let gasprice = try? web3.eth.getGasPrice() {
+                    gasPrice = gasprice
+                }
+//                print("gasPrice ", gasPrice)
+                let legacy = LegacyEnvelope(to: toAddress, nonce: nonce!, chainID: chainID, value: wTx!.transaction.value,
+                                            data: wTx!.transaction.data, gasPrice: gasPrice, gasLimit: gasLimit)
+                ethereumTx = EthereumTransaction(with: legacy)
+                feeAmount = NSDecimalNumber(string: String(gasLimit.multiplied(by: gasPrice)))
+//                print("gasLimit ", legacy.gasLimit)
+//                print("gasPrice ", gasPrice)
+//                print("feeAmount ", feeAmount)
+            }
+            
+            DispatchQueue.main.async {
+                self.onUpdateFeeView()
+            }
         }
     }
 
