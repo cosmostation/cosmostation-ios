@@ -638,6 +638,10 @@
 		0488D1522B6A433B00DDD2B7 /* EvmTxAmountSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0488D14F2B6A433B00DDD2B7 /* EvmTxAmountSheet.swift */; };
 		0488D1532B6A433B00DDD2B7 /* EvmTxAmountSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0488D1502B6A433B00DDD2B7 /* EvmTxAmountSheet.xib */; };
 		0488D1542B6A433B00DDD2B7 /* EvmTxAmountSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0488D1502B6A433B00DDD2B7 /* EvmTxAmountSheet.xib */; };
+		0488D1572B738C3300DDD2B7 /* EvmTxResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0488D1552B738C3300DDD2B7 /* EvmTxResult.swift */; };
+		0488D1582B738C3300DDD2B7 /* EvmTxResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0488D1552B738C3300DDD2B7 /* EvmTxResult.swift */; };
+		0488D1592B738C3300DDD2B7 /* EvmTxResult.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0488D1562B738C3300DDD2B7 /* EvmTxResult.xib */; };
+		0488D15A2B738C3300DDD2B7 /* EvmTxResult.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0488D1562B738C3300DDD2B7 /* EvmTxResult.xib */; };
 		048DBCE2280EC5E90007275E /* MWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DBCE1280EC5E90007275E /* MWords.swift */; };
 		048F8DBD2B28542F00432437 /* KavaEarnDepositAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F8DBB2B28542F00432437 /* KavaEarnDepositAction.swift */; };
 		048F8DBE2B28542F00432437 /* KavaEarnDepositAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F8DBB2B28542F00432437 /* KavaEarnDepositAction.swift */; };
@@ -2112,6 +2116,8 @@
 		0488D14A2B6A432900DDD2B7 /* EvmTxAddressSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvmTxAddressSheet.xib; sourceTree = "<group>"; };
 		0488D14F2B6A433B00DDD2B7 /* EvmTxAmountSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTxAmountSheet.swift; sourceTree = "<group>"; };
 		0488D1502B6A433B00DDD2B7 /* EvmTxAmountSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvmTxAmountSheet.xib; sourceTree = "<group>"; };
+		0488D1552B738C3300DDD2B7 /* EvmTxResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTxResult.swift; sourceTree = "<group>"; };
+		0488D1562B738C3300DDD2B7 /* EvmTxResult.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvmTxResult.xib; sourceTree = "<group>"; };
 		048DBCE1280EC5E90007275E /* MWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWords.swift; sourceTree = "<group>"; };
 		048F8DBB2B28542F00432437 /* KavaEarnDepositAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaEarnDepositAction.swift; sourceTree = "<group>"; };
 		048F8DBC2B28542F00432437 /* KavaEarnDepositAction.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaEarnDepositAction.xib; sourceTree = "<group>"; };
@@ -3071,6 +3077,8 @@
 			children = (
 				0494B3BF2B6A29AF0064BCD5 /* EvmTransfer.swift */,
 				0494B3C02B6A29AF0064BCD5 /* EvmTransfer.xib */,
+				0488D1552B738C3300DDD2B7 /* EvmTxResult.swift */,
+				0488D1562B738C3300DDD2B7 /* EvmTxResult.xib */,
 			);
 			path = GenTx;
 			sourceTree = "<group>";
@@ -4188,6 +4196,7 @@
 				0400EE852AD41FC5007BA97F /* ServiceCell.xib in Resources */,
 				04527DBC2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				04C940CE2AEA56C200415256 /* basebg02.png in Resources */,
+				0488D15A2B738C3300DDD2B7 /* EvmTxResult.xib in Resources */,
 				04FAD9F12AB71D3300143A3E /* RenameSheet.xib in Resources */,
 				04FAD9B52AB011AC00143A3E /* SwitchPriceDisplayCell.xib in Resources */,
 				0402B7FB2ACC3F1400824B3F /* VoteCell.xib in Resources */,
@@ -4350,6 +4359,7 @@
 				0402B7E82ACC132200824B3F /* CosmosCompounding.xib in Resources */,
 				0400EE912AD7B08E007BA97F /* NeutronVault.xib in Resources */,
 				04FC656A2B0C8EA7008F2110 /* OkAddShare.xib in Resources */,
+				0488D1592B738C3300DDD2B7 /* EvmTxResult.xib in Resources */,
 				1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */,
 				04CD24652AD2E2D500497EF5 /* Bep3Transfer.xib in Resources */,
 				046BF1CE2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib in Resources */,
@@ -5191,6 +5201,7 @@
 				E11069B32AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift in Sources */,
 				E1D6B8D52AA499B100177D30 /* CosmosAboutVC.swift in Sources */,
 				04B7894A2ACAC9B100E9BE88 /* ibc_core_channel_v1_query.pb.swift in Sources */,
+				0488D1582B738C3300DDD2B7 /* EvmTxResult.swift in Sources */,
 				E122DC0C2A8A468E006D1E7B /* cosmos_feegrant_v1beta1_genesis.pb.swift in Sources */,
 				E122DC122A8A468E006D1E7B /* cosmos_nft_v1beta1_tx.pb.swift in Sources */,
 				E122DB362A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
@@ -5914,6 +5925,7 @@
 				E1D6B8D42AA499B100177D30 /* CosmosAboutVC.swift in Sources */,
 				E122DC0B2A8A468E006D1E7B /* cosmos_feegrant_v1beta1_genesis.pb.swift in Sources */,
 				04B789492ACAC9B100E9BE88 /* ibc_core_channel_v1_query.pb.swift in Sources */,
+				0488D1572B738C3300DDD2B7 /* EvmTxResult.swift in Sources */,
 				E122DC112A8A468E006D1E7B /* cosmos_nft_v1beta1_tx.pb.swift in Sources */,
 				E122DB352A8A468D006D1E7B /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
 				E122DAF52A8A468D006D1E7B /* cosmos_orm_query_v1alpha1_query.grpc.swift in Sources */,

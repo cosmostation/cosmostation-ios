@@ -1117,6 +1117,7 @@
 "error_name" = "名前を正確に入力してください。";
 "error_not_support_cancel_unbonding" = "このチェーンはまだアンステーキングキャンセルをサポートしていません。";
 "error_wait_moment" = "しばらくお待ちください。 同期中です。";
+"error_evm_simul" = "ノードとのネットワークがスムーズではありません。 後でもう一度試してください。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";
