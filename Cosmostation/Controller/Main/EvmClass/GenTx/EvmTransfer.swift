@@ -196,19 +196,22 @@ class EvmTransfer: BaseVC {
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
             
             feeCardView.isHidden = false
+            errorCardView.isHidden = true
             sendBtn.isEnabled = true
             
         } else {
             // display ERROR
             
             feeCardView.isHidden = true
+            errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
             errorCardView.isHidden = false
             sendBtn.isEnabled = false
         }
     }
     
     @IBAction func onClickSend(_ sender: BaseButton) {
-        
+        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+        self.present(pinVC, animated: true)
     }
     
     func onSimul() {
@@ -233,7 +236,10 @@ class EvmTransfer: BaseVC {
             
             if (selectedMsToken == nil) {
                 toAddress = recipientAddress
-                wTx = web3.eth.sendETH(to: recipientAddress!, amount: calSendAmount.stringValue)
+                //NOTICE set value not work this web3swift version library
+                let amountssssss = Web3.Utils.parseToBigUInt(calSendAmount.stringValue, units: .eth)
+                wTx = web3.eth.sendETH(to: recipientAddress!, amount: "0")
+                wTx?.transaction.value = amountssssss!
                 
             } else {
                 toAddress = EthereumAddress.init(fromHex: selectedMsToken!.address!)
@@ -244,6 +250,8 @@ class EvmTransfer: BaseVC {
             if let estimateGas = try? wTx!.estimateGas(transactionOptions: .defaultOptions) {
                 gasLimit = estimateGas
             }
+            print("wTx ", wTx)
+            print("wTx ", wTx?.transaction.value)
             
             let oracle = Web3.Oracle.init(web3)
             let bothFeesPercentiles = oracle.bothFeesPercentiles
@@ -256,6 +264,8 @@ class EvmTransfer: BaseVC {
                                               data: wTx!.transaction.data, maxPriorityFeePerGas: tip, maxFeePerGas: baseFee, gasLimit: gasLimit)
                 ethereumTx = EthereumTransaction(with: eip1559)
                 feeAmount = NSDecimalNumber(string: String(gasLimit.multiplied(by: totalPerGas)))
+                
+                print("ethereumTx ", ethereumTx?.value)
 //                print("gasLimit ", legacy.gasLimit)
 //                print("totalPerGas ", totalPerGas)
 //                print("feeAmount ", feeAmount)
@@ -284,8 +294,7 @@ class EvmTransfer: BaseVC {
 }
 
 
-//extension EvmTransfer: AmountSheetDelegate, AddressDelegate, PinDelegate {
-extension EvmTransfer: AddressDelegate, EvmAmountSheetDelegate {
+extension EvmTransfer: AddressDelegate, EvmAmountSheetDelegate, PinDelegate {
     
     func onInputedAddress(_ address: String, _ memo: String?) {
         recipientAddress = address
@@ -293,8 +302,33 @@ extension EvmTransfer: AddressDelegate, EvmAmountSheetDelegate {
     }
     
     func onInputedAmount(_ amount: String) {
-        print("onInputedAmount ", amount)
         onUpdateAmountView(amount)
+    }
+    
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
+        if (result == .success) {
+            view.isUserInteractionEnabled = false
+            sendBtn.isEnabled = false
+            loadingView.isHidden = false
+            
+            DispatchQueue.global().async { [self] in
+                let web3 = selectedChain.getWeb3Connection()!
+                try? ethereumTx!.sign(privateKey: selectedChain.privateKey!)
+                if let result = try? web3.eth.sendRawTransaction(ethereumTx!) {
+                    print("result ", result)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        self.loadingView.isHidden = true
+                        
+                        let txResult = EvmTxResult(nibName: "EvmTxResult", bundle: nil)
+                        txResult.selectedChain = self.selectedChain
+                        txResult.evmHash = result.hash
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                    })
+                }
+            }
+            
+        }
     }
     
 }
