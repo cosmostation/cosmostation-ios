@@ -83,7 +83,9 @@ class EvmTxResult: BaseVC {
         Task {
             let web3 = selectedChain.getWeb3Connection()!
             do {
+                print("getTransactionReceipt ", evmHash)
                 let receiptTx = try web3.eth.getTransactionReceipt(evmHash!)
+                print("receiptTx ", receiptTx)
                 self.evmRecipient = receiptTx
                 DispatchQueue.main.async {
                     self.onUpdateView()

@@ -51,7 +51,7 @@ class EvmTransfer: BaseVC {
     var selectedMsToken: MintscanToken?
     
     
-    var selectedFee = 0
+    var selectedFee = 1
     var feeAmount = NSDecimalNumber.zero
     
     var availableAmount = NSDecimalNumber.zero
@@ -101,7 +101,7 @@ class EvmTransfer: BaseVC {
             
         }
         
-        onSimul()
+        feeSegments.selectedSegmentIndex = selectedFee
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -201,17 +201,11 @@ class EvmTransfer: BaseVC {
             
         } else {
             // display ERROR
-            
             feeCardView.isHidden = true
             errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
             errorCardView.isHidden = false
             sendBtn.isEnabled = false
         }
-    }
-    
-    @IBAction func onClickSend(_ sender: BaseButton) {
-        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
-        self.present(pinVC, animated: true)
     }
     
     func onSimul() {
@@ -232,57 +226,56 @@ class EvmTransfer: BaseVC {
             var toAddress: EthereumAddress!
             var wTx: WriteTransaction?
             var gasLimit: BigUInt = 21000
+            var value: BigUInt = 0
+            
             feeAmount = NSDecimalNumber.zero
             
             if (selectedMsToken == nil) {
                 toAddress = recipientAddress
-                //NOTICE set value not work this web3swift version library
-                let amountssssss = Web3.Utils.parseToBigUInt(calSendAmount.stringValue, units: .eth)
-                wTx = web3.eth.sendETH(to: recipientAddress!, amount: "0")
-                wTx?.transaction.value = amountssssss!
+                let contract = web3.contract(Web3.Utils.coldWalletABI, at: toAddress, abiVersion: 2)!
+                let amount = Web3.Utils.parseToBigUInt(calSendAmount.stringValue, units: .eth)
+                var options = TransactionOptions.defaultOptions
+                options.value = amount
+                options.from = senderAddress
+                options.gasPrice = .automatic
+                options.gasLimit = .automatic
+                value = amount!
+                wTx = contract.write("fallback", parameters: [AnyObject](), extraData: Data(), transactionOptions: options)!
+                
                 
             } else {
                 toAddress = EthereumAddress.init(fromHex: selectedMsToken!.address!)
                 let erc20token = ERC20(web3: web3, provider: web3.provider, address: toAddress!)
+                value = 0
                 wTx = try! erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
             }
             
             if let estimateGas = try? wTx!.estimateGas(transactionOptions: .defaultOptions) {
                 gasLimit = estimateGas
             }
-            print("wTx ", wTx)
-            print("wTx ", wTx?.transaction.value)
-            
+             
             let oracle = Web3.Oracle.init(web3)
             let bothFeesPercentiles = oracle.bothFeesPercentiles
             print("bothFeesPercentiles ", bothFeesPercentiles)
             if (bothFeesPercentiles?.baseFee.count ?? 0 > 0 && bothFeesPercentiles?.tip.count ?? 0 > 0) {
-                let baseFee = bothFeesPercentiles?.baseFee[selectedFee] ?? 27500000000
+                var baseFee = bothFeesPercentiles?.baseFee[selectedFee]
+                if (baseFee == nil || baseFee! < 21000000000) { baseFee = 21000000000 }
                 let tip = bothFeesPercentiles?.tip[selectedFee] ?? 500000000
-                let totalPerGas = baseFee + tip
-                let eip1559 = EIP1559Envelope(to: toAddress, nonce: nonce!, chainID: chainID!, value: wTx!.transaction.value,
-                                              data: wTx!.transaction.data, maxPriorityFeePerGas: tip, maxFeePerGas: baseFee, gasLimit: gasLimit)
+                let totalPerGas = baseFee! + tip
+                let eip1559 = EIP1559Envelope(to: toAddress, nonce: nonce!, chainID: chainID!, value: value,
+                                              data: wTx!.transaction.data, maxPriorityFeePerGas: tip, maxFeePerGas: baseFee!, gasLimit: gasLimit)
                 ethereumTx = EthereumTransaction(with: eip1559)
                 feeAmount = NSDecimalNumber(string: String(gasLimit.multiplied(by: totalPerGas)))
-                
-                print("ethereumTx ", ethereumTx?.value)
-//                print("gasLimit ", legacy.gasLimit)
-//                print("totalPerGas ", totalPerGas)
-//                print("feeAmount ", feeAmount)
                 
             } else {
                 var gasPrice: BigUInt = 27500000000
                 if let gasprice = try? web3.eth.getGasPrice() {
                     gasPrice = gasprice
                 }
-//                print("gasPrice ", gasPrice)
-                let legacy = LegacyEnvelope(to: toAddress, nonce: nonce!, chainID: chainID, value: wTx!.transaction.value,
+                let legacy = LegacyEnvelope(to: toAddress, nonce: nonce!, chainID: chainID, value: value,
                                             data: wTx!.transaction.data, gasPrice: gasPrice, gasLimit: gasLimit)
                 ethereumTx = EthereumTransaction(with: legacy)
                 feeAmount = NSDecimalNumber(string: String(gasLimit.multiplied(by: gasPrice)))
-//                print("gasLimit ", legacy.gasLimit)
-//                print("gasPrice ", gasPrice)
-//                print("feeAmount ", feeAmount)
             }
             
             DispatchQueue.main.async {
@@ -290,7 +283,11 @@ class EvmTransfer: BaseVC {
             }
         }
     }
-
+    
+    @IBAction func onClickSend(_ sender: BaseButton) {
+        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+        self.present(pinVC, animated: true)
+    }
 }
 
 
@@ -313,19 +310,19 @@ extension EvmTransfer: AddressDelegate, EvmAmountSheetDelegate, PinDelegate {
             
             DispatchQueue.global().async { [self] in
                 let web3 = selectedChain.getWeb3Connection()!
-                try? ethereumTx!.sign(privateKey: selectedChain.privateKey!)
-                if let result = try? web3.eth.sendRawTransaction(ethereumTx!) {
-                    print("result ", result)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                        self.loadingView.isHidden = true
-                        
-                        let txResult = EvmTxResult(nibName: "EvmTxResult", bundle: nil)
-                        txResult.selectedChain = self.selectedChain
-                        txResult.evmHash = result.hash
-                        txResult.modalPresentationStyle = .fullScreen
-                        self.present(txResult, animated: true)
-                    })
-                }
+                try! ethereumTx?.sign(privateKey: selectedChain.privateKey!)
+                print("ethereumTx ", ethereumTx)
+                let result = try? web3.eth.sendRawTransaction(ethereumTx!)
+                print("result ", result)
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                    self.loadingView.isHidden = true
+                    
+                    let txResult = EvmTxResult(nibName: "EvmTxResult", bundle: nil)
+                    txResult.selectedChain = self.selectedChain
+                    txResult.evmHash =  result?.hash
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
+                })
             }
             
         }
