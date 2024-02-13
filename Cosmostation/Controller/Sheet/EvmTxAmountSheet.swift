@@ -42,7 +42,7 @@ class EvmTxAmountSheet: BaseVC, UITextFieldDelegate {
             
         } else {
             availableDenom.text = selectedChain.coinSymbol
-            availableAmount = selectedChain.evmBalances
+            availableAmount = selectedChain.evmBalances.subtracting(EVM_BASE_FEE)
         }
         let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
         availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)

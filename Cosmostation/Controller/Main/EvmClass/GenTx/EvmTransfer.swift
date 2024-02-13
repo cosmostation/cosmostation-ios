@@ -86,7 +86,7 @@ class EvmTransfer: BaseVC {
             toSendAssetImg.image =  UIImage.init(named: selectedChain.coinLogo)
             toSendSymbolLabel.text = selectedChain.coinSymbol
             toAssetDenomLabel.text = selectedChain.coinSymbol
-            availableAmount = selectedChain.evmBalances
+            availableAmount = selectedChain.evmBalances.subtracting(EVM_BASE_FEE)
             decimal = 18
             msPrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
             
@@ -256,14 +256,13 @@ class EvmTransfer: BaseVC {
              
             let oracle = Web3.Oracle.init(web3)
             let bothFeesPercentiles = oracle.bothFeesPercentiles
-            print("bothFeesPercentiles ", bothFeesPercentiles)
+//            print("bothFeesPercentiles ", bothFeesPercentiles)
             if (bothFeesPercentiles?.baseFee.count ?? 0 > 0 && bothFeesPercentiles?.tip.count ?? 0 > 0) {
-                var baseFee = bothFeesPercentiles?.baseFee[selectedFee]
-                if (baseFee == nil || baseFee! < 21000000000) { baseFee = 21000000000 }
+                let baseFee = bothFeesPercentiles?.baseFee[selectedFee] ?? 27500000000
                 let tip = bothFeesPercentiles?.tip[selectedFee] ?? 500000000
-                let totalPerGas = baseFee! + tip
+                let totalPerGas = baseFee + tip
                 let eip1559 = EIP1559Envelope(to: toAddress, nonce: nonce!, chainID: chainID!, value: value,
-                                              data: wTx!.transaction.data, maxPriorityFeePerGas: tip, maxFeePerGas: baseFee!, gasLimit: gasLimit)
+                                              data: wTx!.transaction.data, maxPriorityFeePerGas: tip, maxFeePerGas: totalPerGas, gasLimit: gasLimit)
                 ethereumTx = EthereumTransaction(with: eip1559)
                 feeAmount = NSDecimalNumber(string: String(gasLimit.multiplied(by: totalPerGas)))
                 
@@ -311,15 +310,15 @@ extension EvmTransfer: AddressDelegate, EvmAmountSheetDelegate, PinDelegate {
             DispatchQueue.global().async { [self] in
                 let web3 = selectedChain.getWeb3Connection()!
                 try! ethereumTx?.sign(privateKey: selectedChain.privateKey!)
-                print("ethereumTx ", ethereumTx)
                 let result = try? web3.eth.sendRawTransaction(ethereumTx!)
-                print("result ", result)
+//                print("ethereumTx ", ethereumTx)
+//                print("result ", result)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
-                    
                     let txResult = EvmTxResult(nibName: "EvmTxResult", bundle: nil)
                     txResult.selectedChain = self.selectedChain
                     txResult.evmHash =  result?.hash
+                    txResult.evmRecipinetAddress = self.recipientAddress
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
                 })

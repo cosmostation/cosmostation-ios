@@ -70,6 +70,11 @@ class EvmClass: BaseChain  {
         }
     }
     
+    //check account payable with lowest fee
+    override func isTxFeePayable() -> Bool {
+        return evmBalances.compare(EVM_BASE_FEE).rawValue > 0
+    }
+    
     func getWeb3Connection() -> web3? {
         guard let url = URL(string: rpcURL) else { return  nil }
         if (self.web3 == nil || self.web3?.provider.session == nil) {
@@ -168,3 +173,4 @@ func ALLEVMCLASS() -> [EvmClass] {
 
 let DEFUAL_DISPALY_EVM = ["ethereum60"]
 
+let EVM_BASE_FEE = NSDecimalNumber.init(string: "588000000000000")

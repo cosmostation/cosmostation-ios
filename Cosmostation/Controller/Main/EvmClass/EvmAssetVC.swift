@@ -160,6 +160,10 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let transfer = EvmTransfer(nibName: "EvmTransfer", bundle: nil)
         transfer.selectedChain = selectedChain
         if (indexPath.section == 1) {

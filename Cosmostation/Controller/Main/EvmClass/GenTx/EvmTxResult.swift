@@ -11,7 +11,7 @@ import Lottie
 import SwiftyJSON
 import web3swift
 
-class EvmTxResult: BaseVC {
+class EvmTxResult: BaseVC, AddressBookDelegate {
     
     @IBOutlet weak var successView: UIView!
     @IBOutlet weak var successMsgLabel: UILabel!
@@ -28,6 +28,7 @@ class EvmTxResult: BaseVC {
     var selectedChain: EvmClass!
     var evmHash: String?
     var evmRecipient: TransactionReceipt?
+    var evmRecipinetAddress: String?
     var fetchCnt = 10
 
     override func viewDidLoad() {
@@ -51,6 +52,7 @@ class EvmTxResult: BaseVC {
             confirmBtn.isEnabled = true
             return
         }
+        setQutoes()
         fetchEvmTx()
     }
     
@@ -61,8 +63,12 @@ class EvmTxResult: BaseVC {
             failView.isHidden = false
             failExplorerBtn.isHidden = false
             failMsgLabel.text = evmRecipient?.logsBloom.debugDescription
+            
         } else {
             successView.isHidden = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                self.onCheckAddAddressBook()
+            });
         }
     }
     
@@ -83,9 +89,9 @@ class EvmTxResult: BaseVC {
         Task {
             let web3 = selectedChain.getWeb3Connection()!
             do {
-                print("getTransactionReceipt ", evmHash)
                 let receiptTx = try web3.eth.getTransactionReceipt(evmHash!)
-                print("receiptTx ", receiptTx)
+//                print("getTransactionReceipt ", evmHash)
+//                print("receiptTx ", receiptTx)
                 self.evmRecipient = receiptTx
                 DispatchQueue.main.async {
                     self.onUpdateView()
@@ -118,6 +124,28 @@ class EvmTxResult: BaseVC {
             self.fetchEvmTx()
         }))
         self.present(noticeAlert, animated: true)
+    }
+    
+    func onCheckAddAddressBook() {
+        if (evmRecipinetAddress?.isEmpty == false) {
+            if (BaseData.instance.selectAllAddressBooks().filter({ $0.dpAddress == evmRecipinetAddress && $0.chainName == selectedChain?.name }).count > 0) {
+                return
+            }
+            if (BaseData.instance.selectAllRefAddresses().filter ({ $0.evmAddress == evmRecipinetAddress }).count > 0) {
+                return
+            }
+            
+            //TODO show add adress book
+            let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
+            addressBookSheet.recipientChain = selectedChain
+            addressBookSheet.recipinetAddress = evmRecipinetAddress
+            addressBookSheet.bookDelegate = self
+            self.onStartSheet(addressBookSheet, 420)
+        }
+    }
+    
+    func onAddressBookUpdated(_ result: Int?) {
+        onShowToast(NSLocalizedString("msg_addressbook_updated", comment: ""))
     }
     
     func setQutoes() {
