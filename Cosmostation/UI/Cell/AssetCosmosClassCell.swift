@@ -115,8 +115,8 @@ class AssetCosmosClassCell: UITableViewCell {
                 let rewardAmount = baseChain.rewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
                 if (baseChain.rewardAllCoins().count > 0) {
                     rewardLayer.isHidden = false
-                    if (baseChain.rewardOtherDenoms() > 0) {
-                        rewardTitle.text = "Reward + " + String(baseChain.rewardOtherDenoms())
+                    if (baseChain.rewardOtherDenomTypeCnts() > 0) {
+                        rewardTitle.text = "Reward + " + String(baseChain.rewardOtherDenomTypeCnts())
                     } else {
                         rewardTitle.text = "Reward"
                     }

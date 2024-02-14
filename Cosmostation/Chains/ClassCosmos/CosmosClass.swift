@@ -628,8 +628,15 @@ extension CosmosClass {
         return result
     }
     
-    func rewardOtherDenoms() -> Int {
-        return rewardAllCoins().filter { $0.denom != stakeDenom }.count
+    func rewardOtherDenomTypeCnts() -> Int {
+//        return rewardAllCoins().filter { $0.denom != stakeDenom }.count
+        var denoms = [String]()
+        rewardAllCoins().filter { $0.denom != stakeDenom }.forEach { reward in
+            if (denoms.contains(reward.denom) == false) {
+                denoms.append(reward.denom)
+            }
+        }
+        return denoms.count
     }
     
     func rewardValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
