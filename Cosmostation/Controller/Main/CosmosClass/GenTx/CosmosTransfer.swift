@@ -407,6 +407,9 @@ class CosmosTransfer: BaseVC {
         loadingView.isHidden = false
         
         if (selectedChain.isGasSimulable() == false) {
+            if (selectedChain.chainId != selectedRecipientChain.chainId) {
+                mintscanPath = WUtils.getMintscanPath(selectedChain, selectedRecipientChain, toSendDenom)
+            }
             return onUpdateWithSimul(nil)
         }
         
