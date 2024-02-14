@@ -47,9 +47,7 @@
                 <outlet property="word15" destination="QP7-kH-olg" id="RlF-34-Aie"/>
                 <outlet property="word16" destination="sgY-GV-8PQ" id="G2k-tY-tqn"/>
                 <outlet property="word17" destination="uWe-zt-oPG" id="up9-QZ-VVH"/>
-                <outlet property="word17View" destination="O4M-fF-sMa" id="7SI-HM-HnD"/>
                 <outlet property="word18" destination="1hj-C9-ia2" id="JH2-71-3Yc"/>
-                <outlet property="word18View" destination="Q3K-wa-d2h" id="Ivt-qN-PS0"/>
                 <outlet property="word19" destination="0QD-xS-v3B" id="iOP-y8-uIg"/>
                 <outlet property="word20" destination="n2U-sE-DZD" id="POl-CF-hWt"/>
                 <outlet property="word21" destination="40f-Uq-REh" id="CcJ-5r-hUM"/>

@@ -48,8 +48,6 @@ class CreateMnemonicVC: BaseVC, PinDelegate, CreateNameDelegate {
     @IBOutlet weak var stack05: UIStackView!
     @IBOutlet weak var stack06: UIStackView!
     @IBOutlet weak var stack07: UIStackView!
-    @IBOutlet weak var word17View: UIView!
-    @IBOutlet weak var word18View: UIView!
     
     var wordLabels: [UILabel] = [UILabel]()
     var accountName: String!
@@ -93,8 +91,8 @@ class CreateMnemonicVC: BaseVC, PinDelegate, CreateNameDelegate {
             self.bitsOfEntropy = 128
             self.onUpdateView()
         })
-        let words_16 = UIAction(title: "16 Words", image: nil, handler: { _ in
-            self.wordCntBtn.setTitle("16 Words", for: .normal)
+        let words_18 = UIAction(title: "18 Words", image: nil, handler: { _ in
+            self.wordCntBtn.setTitle("18 Words", for: .normal)
             self.bitsOfEntropy = 192
             self.onUpdateView()
         })
@@ -109,13 +107,13 @@ class CreateMnemonicVC: BaseVC, PinDelegate, CreateNameDelegate {
                                      identifier: nil,
                                      options: .displayInline,
                                      preferredElementSize: .medium,
-                                     children: [words_12, words_16, words_24])
+                                     children: [words_12, words_18, words_24])
         } else {
             wordCntBtn.menu = UIMenu(title: "",
                                      image: nil,
                                      identifier: nil,
                                      options: .displayInline,
-                                     children: [words_12, words_16, words_24])
+                                     children: [words_12, words_18, words_24])
         }
     }
     
@@ -135,8 +133,6 @@ class CreateMnemonicVC: BaseVC, PinDelegate, CreateNameDelegate {
         } else if bitsOfEntropy == 192 {
             stack04.isHidden = false
             stack05.isHidden = false
-            word17View.isHidden = true
-            word18View.isHidden = true
             stack06.isHidden = true
             stack07.isHidden = true
             
@@ -144,8 +140,6 @@ class CreateMnemonicVC: BaseVC, PinDelegate, CreateNameDelegate {
         } else if bitsOfEntropy == 256 {
             stack04.isHidden = false
             stack05.isHidden = false
-            word17View.isHidden = false
-            word18View.isHidden = false
             stack06.isHidden = false
             stack07.isHidden = false
             
