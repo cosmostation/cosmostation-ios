@@ -62,10 +62,6 @@ class QrAddressVC: BaseVC {
                 }
             }
             
-            let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyAddress))
-            copyTap.cancelsTouchesInView = false
-            addressCardView.addGestureRecognizer(copyTap)
-            
             
         } else if let selectedChain = selectedChain as? EvmClass {
             addressToggleBtn.isHidden = true
@@ -80,6 +76,10 @@ class QrAddressVC: BaseVC {
             
         }
         updateQrImage()
+        
+        let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyAddress))
+        copyTap.cancelsTouchesInView = false
+        addressCardView.addGestureRecognizer(copyTap)
 //        print("bechAddress ", selectedChain.bechAddress)
 //        print("evmAddress ", selectedChain.evmAddress)
     }
