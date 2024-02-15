@@ -33,7 +33,7 @@ class ChainBinanceBeacon: CosmosClass  {
         supportStaking = false
     }
     
-    override func fetchData(_ id: Int64) {
+    override func fetchData(_ id: Int64) async {
         fetchLcdData(id)
     }
     

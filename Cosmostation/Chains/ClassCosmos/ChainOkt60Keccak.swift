@@ -55,11 +55,9 @@ class ChainOkt60Keccak: CosmosClass  {
         bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
     }
     
-    override func fetchData(_ id: Int64) {
-        Task {
-            if let erc20s = try? await self.fetchErc20Info() {
-                mintscanErc20Tokens = erc20s
-            }
+    override func fetchData(_ id: Int64) async {
+        if let erc20s = try? await self.fetchErc20Info() {
+            mintscanErc20Tokens = erc20s
         }
         fetchLcdData(id)
     }

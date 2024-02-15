@@ -80,8 +80,8 @@ class CosmosStakingInfoVC: BaseVC {
         if (selectedChain.fetched == false) {
             refresher.endRefreshing()
         } else {
-            DispatchQueue.global().async {
-                self.selectedChain.fetchData(self.baseAccount.id)
+            Task(priority: .high) {
+                await selectedChain.fetchData(baseAccount.id)
             }
         }
     }

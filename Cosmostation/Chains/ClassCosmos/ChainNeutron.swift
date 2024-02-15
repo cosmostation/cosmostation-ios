@@ -40,23 +40,11 @@ class ChainNeutron: CosmosClass  {
         grpcHost = "grpc-neutron.cosmostation.io"
     }
     
-    override func fetchData(_ id: Int64) {
-        Task {
-            if let rawParam = try? await self.fetchChainParam() {
-                mintscanChainParam = rawParam
-                vaultsList = getChainParam()["vaults"].arrayValue
-                daosList = getChainParam()["daos"].arrayValue
-            }
-//            if (supportCw20) {
-//                if let cw20s = try? await self.fetchCw20Info() {
-//                    mintscanCw20Tokens = cw20s
-//                }
-//            }
-//            if (supportErc20) {
-//                if let erc20s = try? await self.fetchErc20Info() {
-//                    mintscanErc20Tokens = erc20s
-//                }
-//            }
+    override func fetchData(_ id: Int64) async {
+        if let rawParam = try? await self.fetchChainParam() {
+            mintscanChainParam = rawParam
+            vaultsList = getChainParam()["vaults"].arrayValue
+            daosList = getChainParam()["daos"].arrayValue
         }
         fetchGrpcData(id)
     }

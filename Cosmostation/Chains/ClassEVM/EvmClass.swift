@@ -44,8 +44,8 @@ class EvmClass: BaseChain  {
     }
     
     //fetch account onchaindata from web3 info
-    override func fetchData(_ id: Int64) {
-        Task {
+    override func fetchData(_ id: Int64) async {
+//        Task {
             if let erc20s = try? await self.fetchErc20Info(),
                 let balance = try? await fetchBalance() {
                 mintscanErc20Tokens = erc20s
@@ -67,7 +67,7 @@ class EvmClass: BaseChain  {
                 
                 self.fetchAllErc20Balance(id)
             }
-        }
+//        }
     }
     
     //check account payable with lowest fee

@@ -74,7 +74,9 @@ class EvmTxResult: BaseVC, AddressBookDelegate {
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         self.presentingViewController?.presentingViewController?.dismiss(animated: true) {
-            self.selectedChain.fetchData(self.baseAccount.id)
+            Task {
+                await self.selectedChain.fetchData(self.baseAccount.id)
+            }
         }
     }
     

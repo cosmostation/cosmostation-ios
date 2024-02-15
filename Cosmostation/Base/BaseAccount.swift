@@ -100,7 +100,7 @@ extension BaseAccount {
                             chain.setInfoWithSeed(seed, lastHDPath)
                         }
                         if (chain.fetched == false) {
-                            chain.fetchData(id)
+                            await chain.fetchData(id)
                         }
                     }
                 }
@@ -114,7 +114,7 @@ extension BaseAccount {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
-                            chain.fetchData(id)
+                            await chain.fetchData(id)
                         }
                     }
                 }
@@ -133,7 +133,7 @@ extension BaseAccount {
                             chain.setInfoWithSeed(seed, lastHDPath)
                         }
                         if (chain.fetched == false) {
-                            chain.fetchData(id)
+                            await chain.fetchData(id)
                         }
                     }
                 }
@@ -147,7 +147,7 @@ extension BaseAccount {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
-                            chain.fetchData(id)
+                            await chain.fetchData(id)
                         }
                     }
                 }
@@ -166,7 +166,7 @@ extension BaseAccount {
                             chain.setInfoWithSeed(seed, lastHDPath)
                         }
                         if (chain.fetched == false) {
-                            chain.fetchData(id)
+                            await chain.fetchData(id)
                         }
                     }
                 }
@@ -180,7 +180,7 @@ extension BaseAccount {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
-                            chain.fetchData(id)
+                            await chain.fetchData(id)
                         }
                     }
                 }
@@ -232,7 +232,7 @@ extension BaseAccount {
                             chain.setInfoWithSeed(seed, lastHDPath)
                         }
                         if (chain.fetched == false) {
-                            chain.fetchData(id)
+                            await chain.fetchData(id)
                         }
                     }
                 }
@@ -246,7 +246,7 @@ extension BaseAccount {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
-                            chain.fetchData(id)
+                            await chain.fetchData(id)
                         }
                     }
                 }
@@ -265,7 +265,7 @@ extension BaseAccount {
                             chain.setInfoWithSeed(seed, lastHDPath)
                         }
                         if (chain.fetched == false) {
-                            chain.fetchData(id)
+                            await chain.fetchData(id)
                         }
                     }
                 }
@@ -279,7 +279,7 @@ extension BaseAccount {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
-                            chain.fetchData(id)
+                            await chain.fetchData(id)
                         }
                     }
                 }

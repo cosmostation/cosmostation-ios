@@ -70,20 +70,18 @@ class CosmosClass: BaseChain {
     }
     
     //fetch account onchaindata from grpc
-    override func fetchData(_ id: Int64) {
-        Task {
-            if let rawParam = try? await self.fetchChainParam() {
-                mintscanChainParam = rawParam
+    override func fetchData(_ id: Int64) async {
+        if let rawParam = try? await self.fetchChainParam() {
+            mintscanChainParam = rawParam
+        }
+        if (supportCw20) {
+            if let cw20s = try? await self.fetchCw20Info() {
+                mintscanCw20Tokens = cw20s
             }
-            if (supportCw20) {
-                if let cw20s = try? await self.fetchCw20Info() {
-                    mintscanCw20Tokens = cw20s
-                }
-            }
-            if (supportErc20) {
-                if let erc20s = try? await self.fetchErc20Info() {
-                    mintscanErc20Tokens = erc20s
-                }
+        }
+        if (supportErc20) {
+            if let erc20s = try? await self.fetchErc20Info() {
+                mintscanErc20Tokens = erc20s
             }
         }
         fetchGrpcData(id)
