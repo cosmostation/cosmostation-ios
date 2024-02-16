@@ -93,7 +93,6 @@ class PortfolioVC: BaseVC {
         toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
         searchCosmosChains = toDisplayCosmosChains
         
-        
         toDisplayEvmChains = baseAccount.getDisplayEvmChains()
         searchEvmChains = toDisplayEvmChains
         
@@ -282,11 +281,20 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
         if (indexPath.section == 0) {
             if (searchEvmChains[indexPath.row].fetched == false) { return }
             detailChainTag = searchEvmChains[indexPath.row].tag
-            let evmClassVC = UIStoryboard(name: "EvmClass", bundle: nil).instantiateViewController(withIdentifier: "EvmClassVC") as! EvmClassVC
-            evmClassVC.selectedChain = searchEvmChains[indexPath.row]
-            evmClassVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
-            self.navigationController?.pushViewController(evmClassVC, animated: true)
+            if (searchEvmChains[indexPath.row].supportCosmos) {
+                let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
+                cosmosClassVC.selectedChain = searchEvmChains[indexPath.row]
+                cosmosClassVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
+                self.navigationController?.pushViewController(cosmosClassVC, animated: true)
+                
+            } else {
+                let evmClassVC = UIStoryboard(name: "EvmClass", bundle: nil).instantiateViewController(withIdentifier: "EvmClassVC") as! EvmClassVC
+                evmClassVC.selectedChain = searchEvmChains[indexPath.row]
+                evmClassVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
+                self.navigationController?.pushViewController(evmClassVC, animated: true)
+            }
             
         } else if (indexPath.section == 1) {
             if (searchCosmosChains[indexPath.row].fetched == false) { return }
