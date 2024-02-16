@@ -60,9 +60,10 @@ class CosmosTokenVC: BaseVC {
         Task {
             if (selectedChain.supportCw20) {
                 selectedChain.fetchAllCw20Balance(baseAccount.id)
-            } else if (selectedChain.supportErc20) {
-                selectedChain.fetchAllErc20Balance(baseAccount.id)
-            }
+            } 
+//            else if (selectedChain.supportErc20) {
+//                selectedChain.fetchAllErc20Balance(baseAccount.id)
+//            }
         }
     }
     
@@ -90,11 +91,11 @@ class CosmosTokenVC: BaseVC {
             return value0.compare(value1).rawValue > 0 ? true : false
         }
         
-        selectedChain.mintscanErc20Tokens.forEach { tokenInfo in
-            if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
-                mintscanErc20Tokens.append(tokenInfo)
-            }
-        }
+//        selectedChain.mintscanErc20Tokens.forEach { tokenInfo in
+//            if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
+//                mintscanErc20Tokens.append(tokenInfo)
+//            }
+//        }
         mintscanErc20Tokens.sort {
             let value0 = selectedChain.tokenValue($0.address!)
             let value1 = selectedChain.tokenValue($1.address!)

@@ -90,17 +90,18 @@ class SelectChainCell: UITableViewCell {
         
         if (account.type == .withMnemonic) {
             hdPathLabel.text = chain.getHDPath(account.lastHDPath)
-            if (chain.evmCompatible) {
-                evmCompatTag.isHidden = false
-            } else if (!chain.isDefault) {
+//            if (chain.evmCompatible) {
+//                evmCompatTag.isHidden = false
+//            } else 
+            if (!chain.isDefault) {
                 legacyTag.isHidden = false
             }
             
         } else {
             hdPathLabel.text = ""
-            if (chain.evmCompatible) {
-                evmCompatTag.isHidden = false
-            }
+//            if (chain.evmCompatible) {
+//                evmCompatTag.isHidden = false
+//            }
         }
         
         if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {

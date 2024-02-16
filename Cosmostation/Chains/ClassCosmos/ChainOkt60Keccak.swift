@@ -34,10 +34,10 @@ class ChainOkt60Keccak: CosmosClass  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         bechAccountPrefix = "ex"
         supportStaking = false
-        evmCompatible = true
-        supportErc20 = true
+//        evmCompatible = true
+//        supportErc20 = true
         
-        rpcURL = "https://exchainrpc.okex.org"
+//        rpcURL = "https://exchainrpc.okex.org"
     }
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
@@ -56,9 +56,9 @@ class ChainOkt60Keccak: CosmosClass  {
     }
     
     override func fetchData(_ id: Int64) async {
-        if let erc20s = try? await self.fetchErc20Info() {
-            mintscanErc20Tokens = erc20s
-        }
+//        if let erc20s = try? await self.fetchErc20Info() {
+//            mintscanErc20Tokens = erc20s
+//        }
         fetchLcdData(id)
     }
     

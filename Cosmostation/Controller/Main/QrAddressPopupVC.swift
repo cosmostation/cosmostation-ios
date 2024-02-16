@@ -40,11 +40,12 @@ class QrAddressPopupVC: BaseVC {
             if (baseAccount.type == .withMnemonic) {
                 hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
                 
-                if (selectedChain.evmCompatible) {
-                    tagLayer.isHidden = false
-                    evmCompatTag.isHidden = false
-                    
-                } else if (selectedChain.isDefault == false) {
+//                if (selectedChain.evmCompatible) {
+//                    tagLayer.isHidden = false
+//                    evmCompatTag.isHidden = false
+//                    
+//                } else 
+                if (selectedChain.isDefault == false) {
                     tagLayer.isHidden = false
                     legacyTag.isHidden = false
                 }
@@ -52,10 +53,10 @@ class QrAddressPopupVC: BaseVC {
             } else {
                 hdPathLabel.text = ""
                 
-                if (selectedChain.evmCompatible) {
-                    tagLayer.isHidden = false
-                    evmCompatTag.isHidden = false
-                }
+//                if (selectedChain.evmCompatible) {
+//                    tagLayer.isHidden = false
+//                    evmCompatTag.isHidden = false
+//                }
             }
             
         } else if let selectedChain = selectedChain as? EvmClass {

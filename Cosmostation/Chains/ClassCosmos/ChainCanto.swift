@@ -23,11 +23,11 @@ class ChainCanto: CosmosClass  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         bechAccountPrefix = "canto"
         validatorPrefix = "cantovaloper"
-        evmCompatible = true
-        supportErc20 = true
+//        evmCompatible = true
+//        supportErc20 = true
         
         grpcHost = "grpc-canto.cosmostation.io"
-        rpcURL = "https://rpc-canto-app.cosmostation.io"
+//        rpcURL = "https://rpc-canto-app.cosmostation.io"
     }
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {

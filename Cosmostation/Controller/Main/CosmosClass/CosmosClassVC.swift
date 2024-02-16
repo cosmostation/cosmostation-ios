@@ -299,7 +299,8 @@ class CosmosClassVC: BaseVC {
         let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 3)
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 4)
         tabbar.items.append(coinTabBar)
-        if (selectedChain.supportCw20 || selectedChain.supportErc20) { tabbar.items.append(tokenTabBar) }
+//        if (selectedChain.supportCw20 || selectedChain.supportErc20) { tabbar.items.append(tokenTabBar) }
+        if (selectedChain.supportCw20) { tabbar.items.append(tokenTabBar) }
         if (selectedChain.supportNft) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(historyTabBar)
         if (!selectedChain.mintscanChainParam.isEmpty) { tabbar.items.append(aboutTabBar) }

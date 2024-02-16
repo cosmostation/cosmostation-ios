@@ -23,7 +23,7 @@ class ChainAlthea60: CosmosClass  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         bechAccountPrefix = "althea"
         validatorPrefix = "altheavaloper"
-        evmCompatible = true
+//        evmCompatible = true
         
 //        grpcHost = "grpc-kava.cosmostation.io"
 //        rpcURL = "https://rpc-kava-app.cosmostation.io"

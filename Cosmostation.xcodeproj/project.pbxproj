@@ -665,6 +665,8 @@
 		0494B3C22B6A29AF0064BCD5 /* EvmTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494B3BF2B6A29AF0064BCD5 /* EvmTransfer.swift */; };
 		0494B3C32B6A29AF0064BCD5 /* EvmTransfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494B3C02B6A29AF0064BCD5 /* EvmTransfer.xib */; };
 		0494B3C42B6A29AF0064BCD5 /* EvmTransfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494B3C02B6A29AF0064BCD5 /* EvmTransfer.xib */; };
+		04951DBF2B7F4C8900A03FB1 /* CosmosEvmClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04951DBE2B7F4C8900A03FB1 /* CosmosEvmClass.swift */; };
+		04951DC02B7F4C8900A03FB1 /* CosmosEvmClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04951DBE2B7F4C8900A03FB1 /* CosmosEvmClass.swift */; };
 		049B691F29D1736B0027B82D /* MintscanProposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691E29D1736B0027B82D /* MintscanProposal.swift */; };
 		049B692029D1736B0027B82D /* MintscanProposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691E29D1736B0027B82D /* MintscanProposal.swift */; };
 		04A116F128F7DB42003605E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */; };
@@ -2130,6 +2132,7 @@
 		0494B3B52B68FA930064BCD5 /* Token.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Token.xcassets; sourceTree = "<group>"; };
 		0494B3BF2B6A29AF0064BCD5 /* EvmTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmTransfer.swift; sourceTree = "<group>"; };
 		0494B3C02B6A29AF0064BCD5 /* EvmTransfer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvmTransfer.xib; sourceTree = "<group>"; };
+		04951DBE2B7F4C8900A03FB1 /* CosmosEvmClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosEvmClass.swift; sourceTree = "<group>"; };
 		049B691E29D1736B0027B82D /* MintscanProposal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanProposal.swift; sourceTree = "<group>"; };
 		04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A1A8002AC80AA50014EF92 /* TxAmountSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAmountSheet.swift; sourceTree = "<group>"; };
@@ -2832,6 +2835,7 @@
 			isa = PBXGroup;
 			children = (
 				04CB911A2A90C41E00375354 /* EvmClass.swift */,
+				04951DBE2B7F4C8900A03FB1 /* CosmosEvmClass.swift */,
 				04D279EF2A67C98E00AF046A /* ChainEthereum.swift */,
 				042296832A890CC4003C7630 /* ChainKavaEVM.swift */,
 			);
@@ -4870,6 +4874,7 @@
 				E122DB862A8A468D006D1E7B /* cosmos_consensus_v1_tx.pb.swift in Sources */,
 				047843FD2AC9A37600462F1C /* ChainShentu.swift in Sources */,
 				0400EF242ADD4737007BA97F /* KavaSwapListVC.swift in Sources */,
+				04951DC02B7F4C8900A03FB1 /* CosmosEvmClass.swift in Sources */,
 				04B7893C2ACAC9B100E9BE88 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
 				E122DBBE2A8A468E006D1E7B /* cosmos_nft_module_v1_module.pb.swift in Sources */,
 				E1E0DBC72A9B0FE3006DA6BB /* HistoryCell.swift in Sources */,
@@ -5594,6 +5599,7 @@
 				04C940E02AEB92F800415256 /* BaseImgSheetCell.swift in Sources */,
 				046EA8552AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
 				E122DBBD2A8A468E006D1E7B /* cosmos_nft_module_v1_module.pb.swift in Sources */,
+				04951DBF2B7F4C8900A03FB1 /* CosmosEvmClass.swift in Sources */,
 				047843FC2AC9A37600462F1C /* ChainShentu.swift in Sources */,
 				0400EF232ADD4737007BA97F /* KavaSwapListVC.swift in Sources */,
 				04B7893B2ACAC9B100E9BE88 /* ibc_core_client_v1_genesis.pb.swift in Sources */,

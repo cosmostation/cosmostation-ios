@@ -36,9 +36,11 @@ class CheckPrivateKeyCell: UITableViewCell {
         nameLabel.text = chain.name.uppercased()
         
         hdPathLabel.text = chain.getHDPath(account.lastHDPath)
-        if (chain.evmCompatible) {
-            evmCompatTag.isHidden = false
-        } else if (!chain.isDefault) {
+//        if (chain.evmCompatible) {
+//            evmCompatTag.isHidden = false
+//        } else 
+        
+        if (!chain.isDefault) {
             legacyTag.isHidden = false
         }
         pkeyLabel.text = "0x" + chain.privateKey!.toHexString()

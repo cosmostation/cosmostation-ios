@@ -186,32 +186,32 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
     }
     
     func fetchEvmTx() {
-        Task {
-            guard let url = URL(string: selectedChain.rpcURL) else { return }
-            guard let web3 = try? Web3.new(url) else { return }
-            
-            do {
-                let receiptTx = try web3.eth.getTransactionReceipt(evmHash!)
-                self.evmRecipient = receiptTx
-                DispatchQueue.main.async {
-                    self.onUpdateView()
-                }
-                
-            } catch {
-                self.confirmBtn.isEnabled = true
-                self.fetchCnt = self.fetchCnt - 1
-                if (self.fetchCnt > 0) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
-                        self.fetchEvmTx()
-                    });
-                    
-                } else {
-                    DispatchQueue.main.async {
-                        self.onShowMoreWait()
-                    }
-                }
-            }
-        }
+//        Task {
+//            guard let url = URL(string: selectedChain.rpcURL) else { return }
+//            guard let web3 = try? Web3.new(url) else { return }
+//            
+//            do {
+//                let receiptTx = try web3.eth.getTransactionReceipt(evmHash!)
+//                self.evmRecipient = receiptTx
+//                DispatchQueue.main.async {
+//                    self.onUpdateView()
+//                }
+//                
+//            } catch {
+//                self.confirmBtn.isEnabled = true
+//                self.fetchCnt = self.fetchCnt - 1
+//                if (self.fetchCnt > 0) {
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+//                        self.fetchEvmTx()
+//                    });
+//                    
+//                } else {
+//                    DispatchQueue.main.async {
+//                        self.onShowMoreWait()
+//                    }
+//                }
+//            }
+//        }
     }
     
     func onShowMoreWait() {

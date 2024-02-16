@@ -11,48 +11,64 @@ import web3swift
 import Alamofire
 import BigInt
 
-class EvmClass: BaseChain  {
+class EvmClass: CosmosClass {
+    
+    var supportCosmos = false
     
     var coinSymbol = ""
     var coinGeckoId = ""
     var coinLogo = ""
-    var evmAddress = ""
     
     lazy var rpcURL = ""
     lazy var explorerURL = ""
     lazy var addressURL = ""
     lazy var txURL = ""
     
-    
     var web3: web3?
     var evmBalances = NSDecimalNumber.zero
     
     lazy var mintscanErc20Tokens = [MintscanToken]()
     
-    //get bech style info from seed
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
         privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+        if (supportCosmos) {
+            bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+        }
+        if (supportStaking) {
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
+        }
     }
     
-    //get bech style info from privatekey
     override func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+        if (supportCosmos) {
+            bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
+        }
+        if (supportStaking) {
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
+        }
     }
     
     //fetch account onchaindata from web3 info
     override func fetchData(_ id: Int64) async {
-//        Task {
+        if (supportCosmos) {
+            if let rawParam = try? await self.fetchChainParam(),
+               let erc20s = try? await self.fetchErc20Info() {
+                mintscanChainParam = rawParam
+                mintscanErc20Tokens = erc20s
+            }
+            fetchGrpcData(id)
+            fetchAllErc20Balance(id)
+            
+        } else {
             if let erc20s = try? await self.fetchErc20Info(),
                 let balance = try? await fetchBalance() {
                 mintscanErc20Tokens = erc20s
-//                print("mintscanErc20Tokens ", mintscanErc20Tokens.count)
-                
                 evmBalances = NSDecimalNumber(string: balance.description)
-//                print("evmBalances ", evmBalances)
             }
             
             DispatchQueue.main.async {
@@ -67,7 +83,7 @@ class EvmClass: BaseChain  {
                 
                 self.fetchAllErc20Balance(id)
             }
-//        }
+        }
     }
     
     //check account payable with lowest fee
@@ -83,7 +99,16 @@ class EvmClass: BaseChain  {
         return web3
     }
     
-    func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
+    override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
+        if (supportCosmos) {
+            return super.allCoinValue(usd)
+        } else {
+            let msPrice = BaseData.instance.getPrice(coinGeckoId, usd)
+            return evmBalances.multiplying(by: msPrice).multiplying(byPowerOf10: -18, withBehavior: handler6)
+        }
+    }
+    
+    override func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if let tokenInfo = mintscanErc20Tokens.filter({ $0.address == address }).first {
             let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
             return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
@@ -91,7 +116,7 @@ class EvmClass: BaseChain  {
         return NSDecimalNumber.zero
     }
     
-    func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    override func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         mintscanErc20Tokens.forEach { tokenInfo in
             let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
@@ -101,18 +126,12 @@ class EvmClass: BaseChain  {
         return result
     }
     
-    func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        let msPrice = BaseData.instance.getPrice(coinGeckoId, usd)
-        return evmBalances.multiplying(by: msPrice).multiplying(byPowerOf10: -18, withBehavior: handler6)
-    }
-    
     deinit {
         web3 = nil
     }
 }
 
 extension EvmClass {
-    
     func fetchErc20Info() async throws -> [MintscanToken] {
         print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
         return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value

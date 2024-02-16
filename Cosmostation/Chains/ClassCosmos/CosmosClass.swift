@@ -23,17 +23,17 @@ class CosmosClass: BaseChain {
     var bechOpAddress: String?
     
     var supportCw20 = false
-    var supportErc20 = false
+//    var supportErc20 = false
     var supportNft = false
     var supportStaking = true
     
-    var evmCompatible = false
+//    var evmCompatible = false
     var evmAddress = ""
     
     var grpcHost = ""
     var grpcPort = 443
     
-    lazy var rpcURL = ""
+//    lazy var rpcURL = ""
     
     lazy var rewardAddress = ""
     lazy var cosmosAuth = Google_Protobuf_Any.init()
@@ -46,7 +46,7 @@ class CosmosClass: BaseChain {
     lazy var cosmosCommissions = Array<Cosmos_Base_V1beta1_Coin>()
     
     lazy var mintscanCw20Tokens = [MintscanToken]()
-    lazy var mintscanErc20Tokens = [MintscanToken]()
+//    lazy var mintscanErc20Tokens = [MintscanToken]()
     lazy var mintscanChainParam = JSON()
     
     //get bech style info from seed
@@ -79,11 +79,11 @@ class CosmosClass: BaseChain {
                 mintscanCw20Tokens = cw20s
             }
         }
-        if (supportErc20) {
-            if let erc20s = try? await self.fetchErc20Info() {
-                mintscanErc20Tokens = erc20s
-            }
-        }
+//        if (supportErc20) {
+//            if let erc20s = try? await self.fetchErc20Info() {
+//                mintscanErc20Tokens = erc20s
+//            }
+//        }
         fetchGrpcData(id)
     }
     
@@ -187,6 +187,41 @@ class CosmosClass: BaseChain {
     func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
         return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(delegationValueSum(usd))
             .adding(unbondingValueSum(usd)).adding(rewardValueSum(usd)).adding(commissionValueSum(usd))
+    }
+    
+    func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
+        if (supportCw20) {
+            if let tokenInfo = mintscanCw20Tokens.filter({ $0.address == address }).first {
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+            }
+        }
+//        if (supportErc20) {
+//            if let tokenInfo = mintscanErc20Tokens.filter({ $0.address == address }).first {
+//                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+//                return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+//            }
+//        }
+        return NSDecimalNumber.zero
+    }
+    
+    func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
+        var result = NSDecimalNumber.zero
+        if (supportCw20) {
+            mintscanCw20Tokens.forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
+            }
+        }
+//        if (supportErc20) {
+//            mintscanErc20Tokens.forEach { tokenInfo in
+//                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+//                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+//                result = result.adding(value)
+//            }
+//        }
+        return result
     }
     
     func monikerImg(_ opAddress: String) -> URL {
@@ -322,10 +357,10 @@ extension CosmosClass {
         return try await AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
     }
     
-    func fetchErc20Info() async throws -> [MintscanToken] {
-//        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
-        return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
-    }
+//    func fetchErc20Info() async throws -> [MintscanToken] {
+////        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
+//        return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
+//    }
     
 }
 
@@ -478,38 +513,38 @@ extension CosmosClass {
         }
     }
     
-    func fetchAllErc20Balance(_ id: Int64) {
-        let group = DispatchGroup()
-        guard let url = URL(string: rpcURL) else { return }
-        guard let web3 = try? Web3.new(url) else { return }
-        mintscanErc20Tokens.forEach { token in
-            fetchErc20Balance(group, web3, EthereumAddress.init(evmAddress)!, token)
-        }
-        
-        group.notify(queue: .main) {
-            self.allTokenValue = self.allTokenValue()
-            self.allTokenUSDValue = self.allTokenValue(true)
-            
-            BaseData.instance.updateRefAddressesToken(
-                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                           nil, nil, self.allTokenUSDValue.stringValue, nil))
-            NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
-        }
-    }
-    
-    func fetchErc20Balance(_ group: DispatchGroup, _ web3: web3?, _ accountEthAddr: EthereumAddress, _ tokenInfo: MintscanToken) {
-        group.enter()
-        DispatchQueue.global().async {
-            let contractAddress = EthereumAddress.init(tokenInfo.address!)
-            let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
-            if let erc20Balance = try? erc20token.getBalance(account: accountEthAddr) {
-                tokenInfo.setAmount(String(erc20Balance))
-                group.leave()
-            } else {
-                group.leave()
-            }
-        }
-    }
+//    func fetchAllErc20Balance(_ id: Int64) {
+//        let group = DispatchGroup()
+//        guard let url = URL(string: rpcURL) else { return }
+//        guard let web3 = try? Web3.new(url) else { return }
+//        mintscanErc20Tokens.forEach { token in
+//            fetchErc20Balance(group, web3, EthereumAddress.init(evmAddress)!, token)
+//        }
+//        
+//        group.notify(queue: .main) {
+//            self.allTokenValue = self.allTokenValue()
+//            self.allTokenUSDValue = self.allTokenValue(true)
+//            
+//            BaseData.instance.updateRefAddressesToken(
+//                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+//                           nil, nil, self.allTokenUSDValue.stringValue, nil))
+//            NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
+//        }
+//    }
+//    
+//    func fetchErc20Balance(_ group: DispatchGroup, _ web3: web3?, _ accountEthAddr: EthereumAddress, _ tokenInfo: MintscanToken) {
+//        group.enter()
+//        DispatchQueue.global().async {
+//            let contractAddress = EthereumAddress.init(tokenInfo.address!)
+//            let erc20token = ERC20(web3: web3!, provider: web3!.provider, address: contractAddress!)
+//            if let erc20Balance = try? erc20token.getBalance(account: accountEthAddr) {
+//                tokenInfo.setAmount(String(erc20Balance))
+//                group.leave()
+//            } else {
+//                group.leave()
+//            }
+//        }
+//    }
     
     func balanceAmount(_ denom: String) -> NSDecimalNumber {
         return NSDecimalNumber(string: cosmosBalances?.filter { $0.denom == denom }.first?.amount ?? "0")
@@ -714,43 +749,6 @@ extension CosmosClass {
     }
     
     
-    
-    func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if (supportCw20) {
-            if let tokenInfo = mintscanCw20Tokens.filter({ $0.address == address }).first {
-                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-                return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
-            }
-        }
-        if (supportErc20) {
-            if let tokenInfo = mintscanErc20Tokens.filter({ $0.address == address }).first {
-                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-                return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
-            }
-        }
-        return NSDecimalNumber.zero
-    }
-    
-    func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
-        if (supportCw20) {
-            mintscanCw20Tokens.forEach { tokenInfo in
-                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
-                result = result.adding(value)
-            }
-        }
-        if (supportErc20) {
-            mintscanErc20Tokens.forEach { tokenInfo in
-                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
-                result = result.adding(value)
-            }
-        }
-        return result
-    }
-    
-    
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
         return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: getGrpc().host, port: getGrpc().port)
@@ -769,15 +767,15 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.removeAll()
     result.append(ChainCosmos())
     result.append(ChainAkash())
-    result.append(ChainAlthea60())
-    result.append(ChainAlthea118())
+//    result.append(ChainAlthea60())
+//    result.append(ChainAlthea118())
     result.append(ChainArchway())
     result.append(ChainAssetMantle())
     result.append(ChainAxelar())
     result.append(ChainBand())
     result.append(ChainBitcana())
     result.append(ChainBitsong())
-    result.append(ChainCanto())
+//    result.append(ChainCanto())
     result.append(ChainCelestia())
     result.append(ChainChihuahua())
     result.append(ChainComdex())
@@ -788,19 +786,19 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainDesmos())
     result.append(ChainDydx())
     result.append(ChainEmoney())
-    result.append(ChainEvmos())
+//    result.append(ChainEvmos())
     result.append(ChainFetchAi())
     result.append(ChainFetchAi60Secp())
     result.append(ChainFetchAi60Old())
 //    result.append(ChainFinschia())
     result.append(ChainGravityBridge())
-    result.append(ChainHumans())
-    result.append(ChainInjective())
+//    result.append(ChainHumans())
+//    result.append(ChainInjective())
     result.append(ChainIris())
     result.append(ChainIxo())
     result.append(ChainJuno())
     result.append(ChainKava459())
-    result.append(ChainKava60())
+//    result.append(ChainKava60())
     result.append(ChainKava118())
     result.append(ChainKi())
     result.append(ChainKyve())
@@ -838,10 +836,10 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainTeritori())
     result.append(ChainUmee())
     result.append(ChainXpla())
-    result.append(ChainXplaKeccak256())
+//    result.append(ChainXplaKeccak256())
     
     result.append(ChainBinanceBeacon())
-    result.append(ChainOkt60Keccak())
+//    result.append(ChainOkt60Keccak())
     result.append(ChainOkt996Secp())
     result.append(ChainOkt996Keccak())
     

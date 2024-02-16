@@ -71,7 +71,7 @@ class Erc20Transfer: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        selectedMsToken = selectedChain.mintscanErc20Tokens.filter({ $0.address == toSendDenom }).first!
+//        selectedMsToken = selectedChain.mintscanErc20Tokens.filter({ $0.address == toSendDenom }).first!
         toSendAssetImg.af.setImage(withURL: selectedMsToken.assetImg())
         toSendSymbolLabel.text = selectedMsToken.symbol
         availableAmount = selectedMsToken.getAmount()
@@ -212,6 +212,7 @@ class Erc20Transfer: BaseVC {
         sendBtn.isEnabled = false
         loadingView.isHidden = false
         
+        /*
         DispatchQueue.global().async { [self] in
             guard let url = URL(string: selectedChain.rpcURL) else { return }
             guard let web3 = try? Web3.new(url) else { return }
@@ -260,6 +261,7 @@ class Erc20Transfer: BaseVC {
             }
 //            }
         }
+         */
     }
 }
 
@@ -289,24 +291,24 @@ extension Erc20Transfer: AmountSheetDelegate, AddressDelegate, PinDelegate {
             sendBtn.isEnabled = false
             loadingView.isHidden = false
             
-            DispatchQueue.global().async { [self] in
-                guard let url = URL(string: selectedChain.rpcURL) else { return }
-                guard let web3 = try? Web3.new(url) else { return }
-                try? ethereumTransaction!.sign(privateKey: selectedChain.privateKey!)
-                
-                if let result = try? web3.eth.sendRawTransaction(ethereumTransaction!) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                        self.loadingView.isHidden = true
-                        
-                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                        txResult.resultType = .Evm
-                        txResult.selectedChain = self.selectedChain
-                        txResult.evmHash = result.hash
-                        txResult.modalPresentationStyle = .fullScreen
-                        self.present(txResult, animated: true)
-                    })
-                }
-            }
+//            DispatchQueue.global().async { [self] in
+//                guard let url = URL(string: selectedChain.rpcURL) else { return }
+//                guard let web3 = try? Web3.new(url) else { return }
+//                try? ethereumTransaction!.sign(privateKey: selectedChain.privateKey!)
+//                
+//                if let result = try? web3.eth.sendRawTransaction(ethereumTransaction!) {
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+//                        self.loadingView.isHidden = true
+//                        
+//                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+//                        txResult.resultType = .Evm
+//                        txResult.selectedChain = self.selectedChain
+//                        txResult.evmHash = result.hash
+//                        txResult.modalPresentationStyle = .fullScreen
+//                        self.present(txResult, animated: true)
+//                    })
+//                }
+//            }
             
         }
     }

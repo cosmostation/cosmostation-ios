@@ -23,11 +23,11 @@ class ChainEvmos: CosmosClass  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         bechAccountPrefix = "evmos"
         validatorPrefix = "evmosvaloper"
-        evmCompatible = true
-        supportErc20 = true
+//        evmCompatible = true
+//        supportErc20 = true
         
         grpcHost = "grpc-evmos.cosmostation.io"
-        rpcURL = "https://rpc-evmos-app.cosmostation.io"
+//        rpcURL = "https://rpc-evmos-app.cosmostation.io"
     }
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {

@@ -44,22 +44,23 @@ class QrAddressVC: BaseVC {
             if (baseAccount.type == .withMnemonic) {
                 hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
                 
-                if (selectedChain.evmCompatible) {
-                    tagLayer.isHidden = false
-                    evmCompatTag.isHidden = false
-                    
-                } else if (selectedChain.isDefault == false) {
+//                if (selectedChain.evmCompatible) {
+//                    tagLayer.isHidden = false
+//                    evmCompatTag.isHidden = false
+//                    
+//                } else 
+                if (selectedChain.isDefault == false) {
                     tagLayer.isHidden = false
                     legacyTag.isHidden = false
                 }
                 
             } else {
                 hdPathLabel.text = ""
-                if (selectedChain.evmCompatible) {
-                    tagLayer.isHidden = false
-                    evmCompatTag.isHidden = false
-                    
-                }
+//                if (selectedChain.evmCompatible) {
+//                    tagLayer.isHidden = false
+//                    evmCompatTag.isHidden = false
+//                    
+//                }
             }
             
             

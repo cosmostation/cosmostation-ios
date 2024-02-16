@@ -59,16 +59,18 @@ class DeriveCell: UITableViewCell {
         
         if (account.type == .withMnemonic) {
             hdPathLabel.text = chain.getHDPath(account.lastHDPath)
-            if (chain.evmCompatible) {
-                evmCompatTag.isHidden = false
-            } else if (!chain.isDefault) {
+//            if (chain.evmCompatible) {
+//                evmCompatTag.isHidden = false
+//            } else 
+            
+            if (!chain.isDefault) {
                 legacyTag.isHidden = false
             }
             
         } else {
-            if (chain.evmCompatible) {
-                evmCompatTag.isHidden = false
-            }
+//            if (chain.evmCompatible) {
+//                evmCompatTag.isHidden = false
+//            }
             if (chain is ChainOkt60Keccak || chain.tag == "kava60" || chain.tag == "althea60" || chain.tag == "xplaKeccak256") {
                 hdPathLabel.text = chain.evmAddress
             } else {

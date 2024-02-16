@@ -17,8 +17,8 @@ class ChainAlthea118: ChainAlthea60  {
         tag = "althea118"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        evmCompatible = false
-        supportErc20 = false
+//        evmCompatible = false
+//        supportErc20 = false
     }
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {

@@ -16,8 +16,8 @@ class ChainKava459: ChainKava60  {
         tag = "kava459"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/459'/0'/0/X")
-        evmCompatible = false
-        supportErc20 = false
+//        evmCompatible = false
+//        supportErc20 = false
     }
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {

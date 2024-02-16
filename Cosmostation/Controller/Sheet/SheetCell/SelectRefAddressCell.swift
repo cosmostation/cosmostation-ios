@@ -37,10 +37,12 @@ class SelectRefAddressCell: UITableViewCell {
         }
         let all = ALLCOSMOSCLASS()
         if let chain = all.filter({ $0.tag == refAddress.chainTag }).first {
-            if (chain.evmCompatible) {
-                evmCompatTag.isHidden = false
-                
-            } else if (!chain.isDefault) {
+//            if (chain.evmCompatible) {
+//                evmCompatTag.isHidden = false
+//                
+//            } else 
+            
+            if (!chain.isDefault) {
                 legacyTag.isHidden = false
             }
             
@@ -49,12 +51,16 @@ class SelectRefAddressCell: UITableViewCell {
                 slaveAddressabel.text = "(" + refAddress.bechAddress + ")"
                 slaveAddressabel.isHidden = false
                 
-            } else if (chain.evmCompatible) {
-                masterAddressLabel.text = refAddress.bechAddress
-                slaveAddressabel.text = "(" + refAddress.evmAddress + ")"
-                slaveAddressabel.isHidden = false
-                
-            } else {
+            } 
+            
+//            else if (chain.evmCompatible) {
+//                masterAddressLabel.text = refAddress.bechAddress
+//                slaveAddressabel.text = "(" + refAddress.evmAddress + ")"
+//                slaveAddressabel.isHidden = false
+//                
+//            } 
+            
+            else {
                 masterAddressLabel.text = refAddress.bechAddress
                 slaveAddressabel.isHidden = true
             }
@@ -70,9 +76,10 @@ class SelectRefAddressCell: UITableViewCell {
         
         let all = ALLCOSMOSCLASS()
         if let chain = all.filter({ $0.tag == refAddress.chainTag }).first {
-            if (chain.evmCompatible) {
-                evmCompatTag.isHidden = false
-            } else if (!chain.isDefault) {
+//            if (chain.evmCompatible) {
+//                evmCompatTag.isHidden = false
+//            } else 
+            if (!chain.isDefault) {
                 legacyTag.isHidden = false
             }
         }

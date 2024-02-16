@@ -18,7 +18,7 @@ class ChainOkt996Keccak: ChainOkt60Keccak  {
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/996'/0'/0/X")
         bechAccountPrefix = "ex"
-        evmCompatible = false
+//        evmCompatible = false
     }
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
