@@ -299,6 +299,10 @@
 "str_restore_wallets" = "財布の復元";
 "str_deposit" = "預金";
 "str_withdraw" = "出金";
+"str_copy_evm_address" = "EVM スタイルのアドレスをコピー";
+"str_share_evm_address" = "EVM スタイルのアドレスを共有する";
+"str_copy_bech_address" = "Cosmos スタイルのアドレスをコピー";
+"str_share_bech_address" = "Cosmos スタイルのアドレスを共有する";
 
 
 "btn_delegate" = "  委任する";

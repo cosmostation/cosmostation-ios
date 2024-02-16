@@ -299,6 +299,10 @@
 "str_restore_wallets" = "Restore Wallets";
 "str_deposit" = "Deposit";
 "str_withdraw" = "Withdraw";
+"str_copy_evm_address" = "Copy Evm style address";
+"str_share_evm_address" = "Share Evm style address";
+"str_copy_bech_address" = "Copy Cosmos style address";
+"str_share_bech_address" = "Share Cosmos style address";
 
 
 "btn_delegate" = "  Delegate";

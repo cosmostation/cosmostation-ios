@@ -12,7 +12,6 @@ class QrAddressVC: BaseVC {
 
     @IBOutlet weak var chainNameLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var tagLayer: UIStackView!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
     @IBOutlet weak var rqImgView: UIImageView!
@@ -31,41 +30,9 @@ class QrAddressVC: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
         
-        if let selectedChain = selectedChain as? CosmosClass {
-            addressToggleBtn.isHidden = selectedChain.evmAddress.isEmpty
-            if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "althea60" || selectedChain.tag == "xplaKeccak256") {
-                toDpAddress = selectedChain.evmAddress
-            } else {
-                toDpAddress = selectedChain.bechAddress
-            }
-            
-            addressLabel.text = toDpAddress
-            addressLabel.adjustsFontSizeToFitWidth = true
-            if (baseAccount.type == .withMnemonic) {
-                hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
-                
-//                if (selectedChain.evmCompatible) {
-//                    tagLayer.isHidden = false
-//                    evmCompatTag.isHidden = false
-//                    
-//                } else 
-                if (selectedChain.isDefault == false) {
-                    tagLayer.isHidden = false
-                    legacyTag.isHidden = false
-                }
-                
-            } else {
-                hdPathLabel.text = ""
-//                if (selectedChain.evmCompatible) {
-//                    tagLayer.isHidden = false
-//                    evmCompatTag.isHidden = false
-//                    
-//                }
-            }
-            
-            
-        } else if let selectedChain = selectedChain as? EvmClass {
-            addressToggleBtn.isHidden = true
+        if let selectedChain = selectedChain as? EvmClass {
+            addressToggleBtn.isHidden = !selectedChain.supportCosmos
+            evmCompatTag.isHidden = !selectedChain.supportCosmos
             toDpAddress = selectedChain.evmAddress
             addressLabel.text = toDpAddress
             addressLabel.adjustsFontSizeToFitWidth = true
@@ -75,7 +42,23 @@ class QrAddressVC: BaseVC {
                 hdPathLabel.text = ""
             }
             
+        } else if let selectedChain = selectedChain as? CosmosClass {
+            addressToggleBtn.isHidden = true
+            toDpAddress = selectedChain.bechAddress
+            addressLabel.text = toDpAddress
+            addressLabel.adjustsFontSizeToFitWidth = true
+            
+            if (baseAccount.type == .withMnemonic) {
+                hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
+                if (selectedChain.isDefault == false) {
+                    legacyTag.isHidden = false
+                }
+                
+            } else {
+                hdPathLabel.text = ""
+            }
         }
+        
         updateQrImage()
         
         let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyAddress))
@@ -108,7 +91,7 @@ class QrAddressVC: BaseVC {
     @IBAction func onAddressToggleClick(_ sender: UIButton) {
         view.isUserInteractionEnabled = false
         rqImgView.image = nil
-        if let selectedChain = selectedChain as? CosmosClass {
+        if let selectedChain = selectedChain as? EvmClass {
             if (toDpAddress == selectedChain.evmAddress) {
                 toDpAddress = selectedChain.bechAddress
             } else {
@@ -135,8 +118,8 @@ extension UIImage {
         superView.addSubview(overlayImageView)
         
         let centerXConst = NSLayoutConstraint(item: overlayImageView, attribute: .centerX, relatedBy: .equal, toItem: superView, attribute: .centerX, multiplier: 1, constant: 0)
-        let width = NSLayoutConstraint(item: overlayImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80)
-        let height = NSLayoutConstraint(item: overlayImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80)
+        let width = NSLayoutConstraint(item: overlayImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width)
+        let height = NSLayoutConstraint(item: overlayImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height)
         let centerYConst = NSLayoutConstraint(item: overlayImageView, attribute: .centerY, relatedBy: .equal, toItem: superView, attribute: .centerY, multiplier: 1, constant: 0)
         
         NSLayoutConstraint.activate([width, height, centerXConst, centerYConst])

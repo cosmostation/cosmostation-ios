@@ -299,6 +299,10 @@
 "str_restore_wallets" = "지갑 복원";
 "str_deposit" = "예치";
 "str_withdraw" = "출금";
+"str_copy_evm_address" = "Evm형식 주소복사";
+"str_share_evm_address" = "Evm형식 주소공유";
+"str_copy_bech_address" = "Cosmos형식 주소복사";
+"str_share_bech_address" = "Cosmos형식 주소공유";
 
 
 "btn_delegate" = "  위임 하기";
