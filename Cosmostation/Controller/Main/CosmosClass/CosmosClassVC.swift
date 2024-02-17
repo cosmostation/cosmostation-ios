@@ -14,7 +14,8 @@ import SwiftyJSON
 class CosmosClassVC: BaseVC {
     
     @IBOutlet weak var addressLayer: UIView!
-    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var bechAddressLabel: UILabel!
+    @IBOutlet weak var evmAddessLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
     @IBOutlet weak var hideValueBtn: UIButton!
@@ -64,10 +65,12 @@ class CosmosClassVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         totalValue = selectedChain.allValue()
-        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "althea60" || selectedChain.tag == "xplaKeccak256") {
-            addressLabel.text = selectedChain.evmAddress
-        } else {
-            addressLabel.text = selectedChain.bechAddress
+        evmAddessLabel.alpha = 0.0
+        
+        bechAddressLabel.text = selectedChain.bechAddress
+        if (selectedChain is EvmClass) {
+            evmAddessLabel.text = selectedChain.evmAddress
+            starEvmAddressAnimation()
         }
         
         onSetTabbarView()
@@ -103,6 +106,9 @@ class CosmosClassVC: BaseVC {
             hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
         } else {
             hideValueBtn.setImage(UIImage.init(named: "iconHideValueOn"), for: .normal)
+        }
+        if (selectedChain is EvmClass) {
+            starEvmAddressAnimation()
         }
     }
     
@@ -299,8 +305,7 @@ class CosmosClassVC: BaseVC {
         let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 3)
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 4)
         tabbar.items.append(coinTabBar)
-//        if (selectedChain.supportCw20 || selectedChain.supportErc20) { tabbar.items.append(tokenTabBar) }
-        if (selectedChain.supportCw20) { tabbar.items.append(tokenTabBar) }
+        if (selectedChain.supportCw20 || selectedChain is EvmClass) { tabbar.items.append(tokenTabBar) }
         if (selectedChain.supportNft) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(historyTabBar)
         if (!selectedChain.mintscanChainParam.isEmpty) { tabbar.items.append(aboutTabBar) }
@@ -340,8 +345,6 @@ class CosmosClassVC: BaseVC {
             item.buttonImageColor = .color01
             item.imageSize = CGSize(width: 24, height: 24)
         }
-        
-        
         
         if (selectedChain is ChainNeutron) {
             mainFab.addItem(title: "Vault", image: UIImage(named: "iconFabVault")) { _ in
@@ -416,6 +419,30 @@ class CosmosClassVC: BaseVC {
         mainFab.translatesAutoresizingMaskIntoConstraints = false
         mainFab.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         mainFab.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+    }
+    
+    func starEvmAddressAnimation() {
+        bechAddressLabel.layer.removeAllAnimations()
+        evmAddessLabel.layer.removeAllAnimations()
+        bechAddressLabel.alpha = 0.0
+        evmAddessLabel.alpha = 1.0
+        
+        UIView.animateKeyframes(withDuration: 10.0,
+                                delay: 0,
+                                options: [.repeat, .calculationModeCubic]) {
+            UIView.addKeyframe(withRelativeStartTime: 4 / 16, relativeDuration: 1 / 16) { [weak self] in
+                self?.evmAddessLabel.alpha = 0.0
+            }
+            UIView.addKeyframe(withRelativeStartTime: 5 / 16, relativeDuration: 1 / 16) { [weak self] in
+                self?.bechAddressLabel.alpha = 1.0
+            }
+            UIView.addKeyframe(withRelativeStartTime: 14 / 16, relativeDuration: 1 / 16) { [weak self] in
+                self?.bechAddressLabel.alpha = 0.0
+            }
+            UIView.addKeyframe(withRelativeStartTime: 15 / 16, relativeDuration: 1 / 16) { [weak self] in
+                self?.evmAddessLabel.alpha = 1.0
+            }
+        }
     }
 }
 

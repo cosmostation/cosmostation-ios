@@ -233,7 +233,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0) {
-            view.titleLabel.text = "Ethereum Class"
+            view.titleLabel.text = "EVM Class"
             view.cntLabel.text = String(toDisplayEvmChains.count)
         } else if (section == 1) {
             view.titleLabel.text = "Cosmos Class"

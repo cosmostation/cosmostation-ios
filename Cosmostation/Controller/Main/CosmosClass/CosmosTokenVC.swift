@@ -36,7 +36,13 @@ class CosmosTokenVC: BaseVC {
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
         
-        onRequestFetch()
+        
+        if (selectedChain is EvmClass) {
+            onUpdateView()
+        } else {
+            onRequestFetch()
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,10 +66,9 @@ class CosmosTokenVC: BaseVC {
         Task {
             if (selectedChain.supportCw20) {
                 selectedChain.fetchAllCw20Balance(baseAccount.id)
-            } 
-//            else if (selectedChain.supportErc20) {
-//                selectedChain.fetchAllErc20Balance(baseAccount.id)
-//            }
+            } else if let evmChain = selectedChain as? EvmClass {
+                evmChain.fetchAllErc20Balance(baseAccount.id)
+            }
         }
     }
     
@@ -91,17 +96,19 @@ class CosmosTokenVC: BaseVC {
             return value0.compare(value1).rawValue > 0 ? true : false
         }
         
-//        selectedChain.mintscanErc20Tokens.forEach { tokenInfo in
-//            if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
-//                mintscanErc20Tokens.append(tokenInfo)
-//            }
-//        }
-        mintscanErc20Tokens.sort {
-            let value0 = selectedChain.tokenValue($0.address!)
-            let value1 = selectedChain.tokenValue($1.address!)
-            return value0.compare(value1).rawValue > 0 ? true : false
+        if let evmChain = selectedChain as? EvmClass {
+            evmChain.mintscanErc20Tokens.forEach { tokenInfo in
+                if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
+                    mintscanErc20Tokens.append(tokenInfo)
+                }
+            }
+            mintscanErc20Tokens.sort {
+                let value0 = selectedChain.tokenValue($0.address!)
+                let value1 = selectedChain.tokenValue($1.address!)
+                return value0.compare(value1).rawValue > 0 ? true : false
+            }
         }
-
+        
         if (mintscanCw20Tokens.count > 0 || mintscanErc20Tokens.count > 0) {
             tableView.reloadData()
             tableView.isHidden = false
