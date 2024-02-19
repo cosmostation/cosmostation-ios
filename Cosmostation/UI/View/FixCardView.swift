@@ -19,7 +19,6 @@ class FixCardView: UIView {
         layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
         layer.borderWidth = 0.5
         clipsToBounds = true
-        layer.masksToBounds = false
         layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
         layer.shadowOffset = CGSize(width: 1, height: 1)
         layer.shadowOpacity = 0.4

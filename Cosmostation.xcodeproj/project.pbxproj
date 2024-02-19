@@ -1742,6 +1742,10 @@
 		E1CD6B012AEAAEF200376909 /* AboutSocialsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD6AFE2AEAAEF200376909 /* AboutSocialsCell.swift */; };
 		E1CD6B022AEAAEF200376909 /* AboutSocialsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1CD6AFF2AEAAEF200376909 /* AboutSocialsCell.xib */; };
 		E1CD6B032AEAAEF200376909 /* AboutSocialsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1CD6AFF2AEAAEF200376909 /* AboutSocialsCell.xib */; };
+		E1D2FC642B81FCA30080B638 /* CommonTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D2FC622B81FCA30080B638 /* CommonTransfer.swift */; };
+		E1D2FC652B81FCA30080B638 /* CommonTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D2FC622B81FCA30080B638 /* CommonTransfer.swift */; };
+		E1D2FC662B81FCA30080B638 /* CommonTransfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D2FC632B81FCA30080B638 /* CommonTransfer.xib */; };
+		E1D2FC672B81FCA30080B638 /* CommonTransfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D2FC632B81FCA30080B638 /* CommonTransfer.xib */; };
 		E1D4EA582871584B005C1ECF /* FeeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA572871584B005C1ECF /* FeeInfo.swift */; };
 		E1D4EA592871584B005C1ECF /* FeeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA572871584B005C1ECF /* FeeInfo.swift */; };
 		E1D4EA5B2871BCDE005C1ECF /* WDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA5A2871BCDE005C1ECF /* WDP.swift */; };
@@ -2668,6 +2672,8 @@
 		E1CD6AF92AEAAEDC00376909 /* AboutRewardAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutRewardAddressCell.xib; sourceTree = "<group>"; };
 		E1CD6AFE2AEAAEF200376909 /* AboutSocialsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSocialsCell.swift; sourceTree = "<group>"; };
 		E1CD6AFF2AEAAEF200376909 /* AboutSocialsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutSocialsCell.xib; sourceTree = "<group>"; };
+		E1D2FC622B81FCA30080B638 /* CommonTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTransfer.swift; sourceTree = "<group>"; };
+		E1D2FC632B81FCA30080B638 /* CommonTransfer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonTransfer.xib; sourceTree = "<group>"; };
 		E1D4EA572871584B005C1ECF /* FeeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeInfo.swift; sourceTree = "<group>"; };
 		E1D4EA5A2871BCDE005C1ECF /* WDP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDP.swift; sourceTree = "<group>"; };
 		E1D538282A96644F00FB0403 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
@@ -3808,6 +3814,7 @@
 		E15980A12A83AAF00032892B /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				E1D2FC612B81FC7A0080B638 /* GenTx */,
 				E1DBD3E22B6220270058E0DC /* EvmClass */,
 				04CB912B2A910B1500375354 /* CosmosClass */,
 				E15980A22A83AB030032892B /* Main.storyboard */,
@@ -3966,6 +3973,15 @@
 				04F048D62AFCD34A002A809D /* basebg06.png */,
 			);
 			path = BgImg;
+			sourceTree = "<group>";
+		};
+		E1D2FC612B81FC7A0080B638 /* GenTx */ = {
+			isa = PBXGroup;
+			children = (
+				E1D2FC622B81FCA30080B638 /* CommonTransfer.swift */,
+				E1D2FC632B81FCA30080B638 /* CommonTransfer.xib */,
+			);
+			path = GenTx;
 			sourceTree = "<group>";
 		};
 		E1D5A3E12AC33A5600453914 /* GenTx */ = {
@@ -4274,6 +4290,7 @@
 				0438A81B2AE15270006FA213 /* KavaMintListMyCell.xib in Resources */,
 				E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				E1CD6AF12AEAAEA300376909 /* AboutDescriptionCell.xib in Resources */,
+				E1D2FC672B81FCA30080B638 /* CommonTransfer.xib in Resources */,
 				04B789F42ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,
 				042DE8432AC4C518003F3EA4 /* TxMemoSheet.xib in Resources */,
 				0400EF2C2ADD48DB007BA97F /* KavaSwapListMyCell.xib in Resources */,
@@ -4400,6 +4417,7 @@
 				E131F44A2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */,
 				0478440E2AC9AA1000462F1C /* CosmosTransfer.xib in Resources */,
 				0400EF132ADBF763007BA97F /* KavaLendListMyCell.xib in Resources */,
+				E1D2FC662B81FCA30080B638 /* CommonTransfer.xib in Resources */,
 				0400EE842AD41FC5007BA97F /* ServiceCell.xib in Resources */,
 				E1B44B272ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */,
 				E162003D2AF242B70008F397 /* AddressBookSheet.xib in Resources */,
@@ -5299,6 +5317,7 @@
 				04B7893E2ACAC9B100E9BE88 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */,
 				04B789E22ACAF6A900E9BE88 /* ChainStarname.swift in Sources */,
 				047843142AC9918700462F1C /* ethermint_types_v1_web3.pb.swift in Sources */,
+				E1D2FC652B81FCA30080B638 /* CommonTransfer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6024,6 +6043,7 @@
 				04B7893D2ACAC9B100E9BE88 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */,
 				04B789E12ACAF6A900E9BE88 /* ChainStarname.swift in Sources */,
 				047843132AC9918700462F1C /* ethermint_types_v1_web3.pb.swift in Sources */,
+				E1D2FC642B81FCA30080B638 /* CommonTransfer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
