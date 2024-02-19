@@ -31,6 +31,30 @@ class SelectRefAddressCell: UITableViewCell {
         slaveAddressabel.isHidden = true
     }
     
+    func onBindBechRefAddress(_ toChain: BaseChain, _ refAddress: RefAddress) {
+        if let account = BaseData.instance.selectAccount(refAddress.accountId) {
+            accountNameLabel.text = account.name
+        }
+        let allCosmos = ALLCOSMOSCLASS()
+        if let chain = allCosmos.filter({ $0.tag == refAddress.chainTag }).first {
+            legacyTag.isHidden = chain.isDefault
+        }
+        let allEvm = ALLEVMCLASS()
+//        if let chain = allEvm.filter({ $0.tag == refAddress.chainTag }).first {
+//            evmCompatTag.isHidden = false
+//        }
+        evmCompatTag.isHidden = allEvm.filter({ $0.tag == refAddress.chainTag }).count <= 0
+        masterAddressLabel.text = refAddress.bechAddress
+    }
+    
+    func onBindEvmRefAddress(_ toChain: BaseChain, _ refAddress: RefAddress) {
+        if let account = BaseData.instance.selectAccount(refAddress.accountId) {
+            accountNameLabel.text = account.name
+        }
+        masterAddressLabel.text = refAddress.evmAddress
+    }
+    
+    
     func onBindCosmosRefAddress(_ recipientChain: CosmosClass, _ refAddress: RefAddress) {
         if let account = BaseData.instance.selectAccount(refAddress.accountId) {
             accountNameLabel.text = account.name

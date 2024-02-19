@@ -308,11 +308,16 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             if (indexPath.section == 0) {
 //                onStartTransferVC(getCoinBySection(indexPath)?.denom ?? selectedChain.stakeDenom)
                 let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-                if (selectedChain is EvmClass) {
-                    transfer.sendType = .CosmosEVM_Coin
-                } else  {
-                    transfer.sendType = .Only_Cosmos_Coin
+                if (indexPath.row == 0) {
+                    if (selectedChain is EvmClass) {
+                        transfer.sendType = .CosmosEVM_Coin         //stake coin web3 and cosmos
+                    } else  {
+                        transfer.sendType = .Only_Cosmos_Coin       //no evm chain only cosmos
+                    }
+                } else {
+                    transfer.sendType = .Only_Cosmos_Coin           //native coin only cosmos
                 }
+                
                 transfer.fromChain = selectedChain
                 transfer.toSendDenom = nativeCoins[indexPath.row].denom
                 transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, nativeCoins[indexPath.row].denom)

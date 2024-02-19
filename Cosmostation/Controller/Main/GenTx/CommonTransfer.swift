@@ -53,8 +53,8 @@ class CommonTransfer: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var fromChain: BaseChain!
-    var toChain: BaseChain!
     var sendType: SendAssetType!
+    var txStyle: TxStyle = .COSMOS_STYLE            // .CosmosEVM_Coin is only change tx style
     
     var toSendDenom: String!                        // coin denom or contract addresss
     var toSendSymbol: String!                       // to send Asset's display symbol
@@ -64,8 +64,9 @@ class CommonTransfer: BaseVC {
     var allIbcChains = [CosmosClass]()
     var recipientableChains = [CosmosClass]()
     
-    
-    var recipientAddress: String?
+    var toChain: BaseChain!
+    var toAddress = ""
+    var toAmount = NSDecimalNumber.zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +83,10 @@ class CommonTransfer: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        // .CosmosEVM_Coin is only changble tx style
+        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20 || sendType == .CosmosEVM_ERC20) {
+            txStyle = .WEB3_STYLE
+        }
         
         if (sendType == .Only_Cosmos_Coin || sendType == .CosmosEVM_Coin) {
             toSendSymbol = toSendMsAsset.symbol
@@ -94,11 +99,11 @@ class CommonTransfer: BaseVC {
         }
         
         print("toSendSymbol ", toSendSymbol)
+        print("sendType ", sendType)
         titleLabel.text = String(format: NSLocalizedString("str_send_asset", comment: ""), toSendSymbol)
         
         
         recipientableChains.append(fromChain as! CosmosClass)
-        
         // check IBC support case for recipient chain
         if (sendType == .Only_Cosmos_Coin || sendType == .CosmosEVM_Coin || sendType == .Only_Cosmos_CW20) {
             allIbcChains = All_IBC_Chains()
@@ -141,15 +146,12 @@ class CommonTransfer: BaseVC {
             // only ibc support case chain selectable
             toChainCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToChain)))
         }
-        toChain = recipientableChains[0]
+        onUpdateToChain(recipientableChains[0])
         
         
         toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
         toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
-        
-        onUpdateToChain()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,16 +181,45 @@ class CommonTransfer: BaseVC {
         onStartSheet(baseSheet, 680)
     }
     
-    func onUpdateToChain() {
-        toChainImg.image =  UIImage.init(named: toChain.logo1)
+    func onUpdateToChain(_ chain: BaseChain) {
+        toChain = chain
+        toChainImg.image = UIImage.init(named: toChain.logo1)
         toChainLabel.text = toChain.name.uppercased()
     }
     
     
     @objc func onClickToAddress() {
+        let addressSheet = TxSendAddressSheet(nibName: "TxSendAddressSheet", bundle: nil)
+        addressSheet.fromChain = fromChain
+        addressSheet.toChain = toChain
+        addressSheet.sendType = sendType
+        addressSheet.senderBechAddress = (fromChain as? CosmosClass)?.bechAddress
+        addressSheet.senderEvmAddress = (fromChain as? EvmClass)?.evmAddress
+        addressSheet.existedAddress = toAddress
+        addressSheet.sendAddressDelegate = self
+        self.onStartSheet(addressSheet, 220)
     }
     
-    func onUpdateToAddressView() {
+    func onUpdateToAddressView(_ address: String) {
+        if (address.isEmpty == true) {
+            toAddress = ""
+            toAddressHint.isHidden = false
+            toAddressLabel.isHidden = true
+            
+        } else {
+            toAddress = address
+            toAddressHint.isHidden = true
+            toAddressLabel.isHidden = false
+            toAddressLabel.text = toAddress
+            toAddressLabel.adjustsFontSizeToFitWidth = true
+            if (sendType == .CosmosEVM_Coin) {
+                if (toAddress.starts(with: "0x")) {
+                    txStyle = .WEB3_STYLE
+                } else {
+                    txStyle = .COSMOS_STYLE
+                }
+            }
+        }
     }
     
     @objc func onClickAmount() {
@@ -218,19 +249,26 @@ class CommonTransfer: BaseVC {
 }
 
 
-extension CommonTransfer: BaseSheetDelegate {
+extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectCosmosRecipientChain) {
             if let chainId = result["chainId"] as? String {
                 if (chainId != toChain.chainId) {
-                    toChain = recipientableChains.filter({ $0.chainId == chainId }).first
-                    recipientAddress = ""
-                    onUpdateToChain()
-//                    onUpdateToAddressView()
+                    onUpdateToChain(recipientableChains.filter({ $0.chainId == chainId }).first!)
+                    onUpdateToAddressView("")
                 }
             }
         }
+    }
+    
+    func onInputedAddress(_ address: String, _ memo: String?) {
+        print("exsit ", toAddress, "address ", address, "    memo ", memo)
+        if ((toAddress.starts(with: "0x") && !address.starts(with: "0x")) ||
+            (!toAddress.starts(with: "0x") && address.starts(with: "0x"))) {
+            onUpdateAmountView("")                            //if send way changed, set amount zero for safe
+        }
+        onUpdateToAddressView(address)
     }
 }
 
@@ -240,6 +278,12 @@ public enum SendAssetType: Int {
     case Only_Cosmos_CW20 = 1               // support IBC, wasm send                 (cw20 tokens)
     case Only_EVM_Coin = 2                  // not support IBC, only support Web3 tx  (evm main coin)
     case Only_EVM_ERC20 = 3                 // not support IBC, only support Web3 tx  (erc20 tokens)
-    case CosmosEVM_Coin = 4                 // support IBC, bank send, Web3 tx        (staking)
+    case CosmosEVM_Coin = 4                 // support IBC, bank send, Web3 tx        (staking, both tx style)
     case CosmosEVM_ERC20 = 5                // not support IBC, only support Web3 tx  (erc20 tokens)
+}
+
+
+public enum TxStyle: Int {
+    case COSMOS_STYLE = 0
+    case WEB3_STYLE = 1
 }
