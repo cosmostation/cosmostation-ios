@@ -187,6 +187,12 @@ func ALLEVMCLASS() -> [EvmClass] {
     result.append(ChainEthereum())
     result.append(ChainKava_EVM())
     
+    //Add cosmos chain id for ibc
+    result.forEach { chain in
+        if let chainId = BaseData.instance.mintscanChains?["chains"].arrayValue.filter({ $0["chain"].stringValue == chain.apiName }).first?["chain_id"].stringValue {
+            chain.chainId = chainId
+        }
+    }
     return result
 }
 

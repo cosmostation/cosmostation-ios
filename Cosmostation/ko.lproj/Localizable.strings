@@ -189,6 +189,7 @@
 "str_my_unbondings" = "내 언스테이킹";
 "str_start_vote" = "투표 하기";
 "str_transfer_asset" = "자산 전송";
+"str_send_asset" = "%@ 전송";
 "str_ibc_transfer_asset" = "IBC 자산 전송";
 "str_create_another_account" = "다른 계정 생성";
 "str_delete" = "삭제";
@@ -200,6 +201,7 @@
 "str_claim_all" = "모두 수령";
 "str_big_loss" = "자산 손실";
 "str_big_loss_msg" = "현재 선택하신 스왑을 진행하시면 상당한 재산상 손해가 예상됩니다.\n\n예상 입력, 출력 가치를 확인하신 후 신중히 결정해주세요.";
+"str_memo_optional" = "메모 (선택)";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";

@@ -290,10 +290,73 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-        transfer.modalTransitionStyle = .coverVertical
-        self.present(transfer, animated: true)
-        return
+        
+        if (selectedChain is ChainBinanceBeacon) {
+            let sendDenom = lcdBalances[indexPath.row]["symbol"].stringValue
+            if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
+                onBepSelectDialog(sendDenom)
+            } else{
+                onStartLegacyTransferVC(lcdBalances[indexPath.row]["symbol"].stringValue)
+            }
+            return
+            
+        } else if (selectedChain is ChainOkt60Keccak) {
+            onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
+            return
+            
+        } else {
+            if (indexPath.section == 0) {
+//                onStartTransferVC(getCoinBySection(indexPath)?.denom ?? selectedChain.stakeDenom)
+                let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+                if (selectedChain is EvmClass) {
+                    transfer.sendType = .CosmosEVM_Coin
+                } else  {
+                    transfer.sendType = .Only_Cosmos_Coin
+                }
+                transfer.fromChain = selectedChain
+                transfer.toSendDenom = nativeCoins[indexPath.row].denom
+                transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, nativeCoins[indexPath.row].denom)
+                transfer.modalTransitionStyle = .coverVertical
+                self.present(transfer, animated: true)
+                return
+                
+            } else if (indexPath.section == 1) {
+//                onStartTransferVC(ibcCoins[indexPath.row].denom)
+                let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+                transfer.sendType = .Only_Cosmos_Coin
+                transfer.fromChain = selectedChain
+                transfer.toSendDenom = ibcCoins[indexPath.row].denom
+                transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, ibcCoins[indexPath.row].denom)
+                transfer.modalTransitionStyle = .coverVertical
+                self.present(transfer, animated: true)
+                return
+                
+                
+            } else if (indexPath.section == 2) {
+                if (selectedChain is ChainKava60) {
+                    let sendDenom = bridgedCoins[indexPath.row].denom
+                    if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
+                        onBepSelectDialog(sendDenom)
+                    } else {
+                        onStartTransferVC(sendDenom)
+                    }
+                    
+                } else {
+//                    onStartTransferVC(bridgedCoins[indexPath.row].denom)
+                    let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+                    transfer.sendType = .Only_Cosmos_Coin
+                    transfer.fromChain = selectedChain
+                    transfer.toSendDenom = bridgedCoins[indexPath.row].denom
+                    transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, bridgedCoins[indexPath.row].denom)
+                    transfer.modalTransitionStyle = .coverVertical
+                    self.present(transfer, animated: true)
+                    return
+                }
+            }
+        }
+        
+        
+        
         
         /*
         if (selectedChain.isTxFeePayable() == false) {

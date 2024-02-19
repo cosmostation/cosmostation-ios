@@ -15,7 +15,7 @@ class ChainKava_EVM: EvmClass  {
         
         supportCosmos = true
         
-        name = "Kava EVM"
+        name = "Kava"
         tag = "kavaEvm60"
         logo1 = "chainKava"
         logo2 = "chainKava2"

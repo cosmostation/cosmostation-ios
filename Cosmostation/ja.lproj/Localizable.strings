@@ -189,6 +189,7 @@
 "str_my_unbondings" = "私のステーキング解除";
 "str_start_vote" = "投票する";
 "str_transfer_asset" = "資産転送";
+"str_send_asset" = "%@ 転送";
 "str_ibc_transfer_asset" = "IBC 資産転送";
 "str_create_another_account" = "別のアカウントを作成";
 "str_delete" = "消去";
@@ -200,6 +201,7 @@
 "str_claim_all" = "すべてを請求する";
 "str_big_loss" = "資産損失";
 "str_big_loss_msg" = "現在選択されているスワップを進めると、かなりの財産上の損害が予想されます。\n\n期待される入力/出力値を確認してから慎重に決定してください。";
+"str_memo_optional" = "メモ（任意）";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
