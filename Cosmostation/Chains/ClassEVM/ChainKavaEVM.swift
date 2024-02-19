@@ -22,7 +22,7 @@ class ChainKava_EVM: EvmClass  {
         apiName = "kava"
         stakeDenom = "ukava"
         
-        //TODO delete for cosmos
+        //for EVM tx and display
         coinSymbol = "KAVA"
         coinGeckoId = "kava"
         coinLogo = "tokenKava"

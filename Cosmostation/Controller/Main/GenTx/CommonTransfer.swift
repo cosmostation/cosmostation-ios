@@ -72,9 +72,6 @@ class CommonTransfer: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        toChain = fromChain
-//        print("fromChain ", fromChain.tag)
-//        print("toChain ", toChain.tag)
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -86,6 +83,7 @@ class CommonTransfer: BaseVC {
         // .CosmosEVM_Coin is only changble tx style
         if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20 || sendType == .CosmosEVM_ERC20) {
             txStyle = .WEB3_STYLE
+            memoCardView.isHidden = true
         }
         
         if (sendType == .Only_Cosmos_Coin || sendType == .CosmosEVM_Coin) {
@@ -215,8 +213,10 @@ class CommonTransfer: BaseVC {
             if (sendType == .CosmosEVM_Coin) {
                 if (toAddress.starts(with: "0x")) {
                     txStyle = .WEB3_STYLE
+                    memoCardView.isHidden = true
                 } else {
                     txStyle = .COSMOS_STYLE
+                    memoCardView.isHidden = false
                 }
             }
         }
