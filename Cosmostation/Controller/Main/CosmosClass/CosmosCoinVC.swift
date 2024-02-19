@@ -289,6 +289,13 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+        return
+        
+        /*
         if (selectedChain.isTxFeePayable() == false) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -325,6 +332,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
+         */
     }
     
     func getCoinBySection(_ indexPath: IndexPath) -> Cosmos_Base_V1beta1_Coin? {
