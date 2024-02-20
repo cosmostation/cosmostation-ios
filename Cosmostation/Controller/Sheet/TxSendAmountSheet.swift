@@ -54,11 +54,16 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
             amountTextField.text = existedAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal)).stringValue
         }
         
-        if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20 || sendType == .Only_EVM_Coin) {
+        if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20) {
             WDP.dpToken(toSendMsToken, nil, availableDenom, availableLabel, decimal)
             
         } else if (sendType == .Only_Cosmos_Coin) {
             WDP.dpCoin(toSendMsAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
+            
+        } else if (sendType == .Only_EVM_Coin) {
+            availableDenom.text = (fromChain as! EvmClass).coinSymbol
+            let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+            availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
             
         } else if (sendType == .CosmosEVM_Coin) {
             if (txStyle == .WEB3_STYLE) {
@@ -69,6 +74,7 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
             } else if (txStyle == .COSMOS_STYLE) {
                 WDP.dpCoin(toSendMsAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             }
+            
         }
     }
     

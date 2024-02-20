@@ -8,6 +8,9 @@
 
 import UIKit
 import Lottie
+import SwiftyJSON
+import web3swift
+import BigInt
 
 class CommonTransfer: BaseVC {
     
@@ -71,11 +74,17 @@ class CommonTransfer: BaseVC {
     var toAmount = NSDecimalNumber.zero
     var toMemo = ""
     
+    var selectedFeePosition = 0
+    var cosmosFeeInfos = [FeeInfo]()
+    var cosmosTxFee: Cosmos_Tx_V1beta1_Fee!
+    
+    var evmGasPrice: [BigUInt] = [28000000000, 28000000000, 28000000000]
+    var evmGasLimit: BigUInt = 21000
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        toChain = fromChain
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -84,18 +93,28 @@ class CommonTransfer: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        toChain = fromChain
+        toChainImg.image = UIImage.init(named: toChain.logo1)
+        toChainLabel.text = toChain.name.uppercased()
+        
         // .CosmosEVM_Coin is only changble tx style
         if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20) {
             txStyle = .WEB3_STYLE
             memoCardView.isHidden = true
         }
         
+        // set init fee for set send available
+        onInitFee()
+        
         // set selected asset display symbol, sendable amount, display decimal
         if (sendType == .Only_Cosmos_Coin) {
-            //TODO check fee
             decimal = toSendMsAsset!.decimals
             toSendSymbol = toSendMsAsset!.symbol
             availableAmount = (fromChain as! CosmosClass).balanceAmount(toSendDenom)
+            if (cosmosTxFee.amount[0].denom == toSendDenom) {
+                let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
+                availableAmount = availableAmount.subtracting(feeAmount)
+            }
             
         } else if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20) {
             decimal = toSendMsToken!.decimals
@@ -103,13 +122,26 @@ class CommonTransfer: BaseVC {
             availableAmount = toSendMsToken!.getAmount()
             
         } else if (sendType == .Only_EVM_Coin) {
-            //TODO check fee
             decimal = 18
             toSendSymbol = (fromChain as! EvmClass).coinSymbol
-            availableAmount = (fromChain as! EvmClass).evmBalances
+            availableAmount = (fromChain as! EvmClass).evmBalances.subtracting(EVM_BASE_FEE)
             
         } else if (sendType == .CosmosEVM_Coin) {
-            onUpdateTxStyle()
+            if (txStyle == .WEB3_STYLE) {
+                decimal = 18
+                toSendSymbol = (fromChain as! EvmClass).coinSymbol
+                availableAmount = (fromChain as! EvmClass).evmBalances.subtracting(EVM_BASE_FEE)
+                memoCardView.isHidden = true
+                
+            } else if (txStyle == .COSMOS_STYLE) {
+                decimal = toSendMsAsset!.decimals
+                toSendSymbol = toSendMsAsset!.symbol
+                availableAmount = (fromChain as! CosmosClass).balanceAmount(toSendDenom)
+                if (cosmosTxFee.amount[0].denom == toSendDenom) {
+                    let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
+                    availableAmount = availableAmount.subtracting(feeAmount)
+                }
+            }
         }
         
         // set selected asset sendable amount
@@ -164,10 +196,10 @@ class CommonTransfer: BaseVC {
         }
         onUpdateToChain(recipientableChains[0])
         
-        
         toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
         toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
+        feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -188,24 +220,29 @@ class CommonTransfer: BaseVC {
         sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
     }
     
-    func onUpdateTxStyle() {
-        if (sendType == .CosmosEVM_Coin) {
+    func onUpdateTxStyle(_ style: TxStyle) {
+        print("onUpdateTxStyle ", "as : ", txStyle, "     is : ",style)
+        if (sendType == .CosmosEVM_Coin && style != txStyle) {
+            txStyle = style
             if (txStyle == .WEB3_STYLE) {
-                //TODO check fee
                 decimal = 18
                 toSendSymbol = (fromChain as! EvmClass).coinSymbol
-                availableAmount = (fromChain as! EvmClass).evmBalances
+                availableAmount = (fromChain as! EvmClass).evmBalances.subtracting(EVM_BASE_FEE)
                 memoCardView.isHidden = true
                 
             } else if (txStyle == .COSMOS_STYLE) {
-                //TODO check fee
                 decimal = toSendMsAsset!.decimals
                 toSendSymbol = toSendMsAsset!.symbol
                 availableAmount = (fromChain as! CosmosClass).balanceAmount(toSendDenom)
+                if (cosmosTxFee.amount[0].denom == toSendDenom) {
+                    let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
+                    availableAmount = availableAmount.subtracting(feeAmount)
+                }
                 memoCardView.isHidden = false
             }
+            onInitFee()
+            onUpdateAmountView("")
         }
-        onUpdateAmountView("")
     }
     
     
@@ -218,17 +255,16 @@ class CommonTransfer: BaseVC {
     }
     
     func onUpdateToChain(_ chain: BaseChain) {
-        if (sendType == .CosmosEVM_Coin && chain.tag != toChain.tag) {
-            if (chain.tag == fromChain.tag) {
-                txStyle = .COSMOS_STYLE         //set to cosmos style
-                onUpdateTxStyle()
+        if (chain.tag != toChain.tag) {
+            toChain = chain
+            toChainImg.image = UIImage.init(named: toChain.logo1)
+            toChainLabel.text = toChain.name.uppercased()
+            onUpdateToAddressView("")
+            
+            if (sendType == .CosmosEVM_Coin && fromChain.tag != toChain.tag) {
+                onUpdateTxStyle(.COSMOS_STYLE)
             }
         }
-        toChain = chain
-        toChainImg.image = UIImage.init(named: toChain.logo1)
-        toChainLabel.text = toChain.name.uppercased()
-        
-        onUpdateToAddressView("")
     }
     
     @objc func onClickToAddress() {
@@ -257,11 +293,9 @@ class CommonTransfer: BaseVC {
             toAddressLabel.adjustsFontSizeToFitWidth = true
             if (sendType == .CosmosEVM_Coin) {
                 if (toAddress.starts(with: "0x")) {
-                    txStyle = .WEB3_STYLE
-                    onUpdateTxStyle()
+                    onUpdateTxStyle(.WEB3_STYLE)
                 } else {
-                    txStyle = .COSMOS_STYLE
-                    onUpdateTxStyle()
+                    onUpdateTxStyle(.COSMOS_STYLE)
                 }
             }
         }
@@ -292,8 +326,7 @@ class CommonTransfer: BaseVC {
             
         } else {
             toAmount = NSDecimalNumber(string: amount)
-            print("amount ", amount)
-            if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20 || sendType == .Only_EVM_Coin) {
+            if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20) {
                 let msPrice = BaseData.instance.getPrice(toSendMsToken!.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
@@ -306,6 +339,15 @@ class CommonTransfer: BaseVC {
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpCoin(toSendMsAsset, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
+                
+            } else if (sendType == .Only_EVM_Coin) {
+                let msPrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
+                let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+                let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
+                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
+                
+                toAssetDenomLabel.text = (fromChain as! EvmClass).coinSymbol
+                toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                 
             } else if (sendType == .CosmosEVM_Coin) {
                 let msPrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
@@ -348,11 +390,77 @@ class CommonTransfer: BaseVC {
         }
     }
     
+    func onInitFee() {
+        if (txStyle == .WEB3_STYLE) {
+            selectedFeePosition = 1
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            
+            feeSelectImg.image =  UIImage.init(named: (fromChain as! EvmClass).coinLogo)
+            feeSelectLabel.text = (fromChain as! EvmClass).coinSymbol
+            feeDenomLabel.text = (fromChain as! EvmClass).coinSymbol
+            
+            let feePrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
+            let feeAmount = NSDecimalNumber(string: String(evmGasPrice[selectedFeePosition].multiplied(by: evmGasLimit)))
+            let feeDpAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(18))
+            let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
+            feeAmountLabel.attributedText = WDP.dpAmount(feeDpAmount.stringValue, feeAmountLabel!.font, 18)
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            
+        } else if (txStyle == .COSMOS_STYLE) {
+            cosmosFeeInfos = (fromChain as! CosmosClass).getFeeInfos()
+            feeSegments.removeAllSegments()
+            for i in 0..<cosmosFeeInfos.count {
+                feeSegments.insertSegment(withTitle: cosmosFeeInfos[i].title, at: i, animated: false)
+            }
+            selectedFeePosition = (fromChain as! CosmosClass).getFeeBasePosition()
+            cosmosTxFee = (fromChain as! CosmosClass).getInitPayableFee()
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            
+            if let feeAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
+                feeSelectImg.af.setImage(withURL: feeAsset.assetImg())
+                feeSelectLabel.text = feeAsset.symbol
+                feeDenomLabel.text = feeAsset.symbol
+                
+                let feePrice = BaseData.instance.getPrice(feeAsset.coinGeckoId)
+                let feeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
+                let feeDpAmount = feeAmount.multiplying(byPowerOf10: -feeAsset.decimals!, withBehavior: getDivideHandler(feeAsset.decimals!))
+                let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
+                feeAmountLabel.attributedText = WDP.dpAmount(feeDpAmount.stringValue, feeAmountLabel!.font, feeAsset.decimals!)
+                WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            }
+        }
+    }
+    
+    func onUpdateFeeView() {
+        if (txStyle == .WEB3_STYLE) {
+            feeSelectImg.image =  UIImage.init(named: (fromChain as! EvmClass).coinLogo)
+            feeSelectLabel.text = (fromChain as! EvmClass).coinSymbol
+            feeDenomLabel.text = (fromChain as! EvmClass).coinSymbol
+            
+            let feePrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
+            let feeAmount = NSDecimalNumber(string: String(evmGasPrice[selectedFeePosition].multiplied(by: evmGasLimit)))
+            let feeDpAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(18))
+            let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
+            feeAmountLabel.attributedText = WDP.dpAmount(feeDpAmount.stringValue, feeAmountLabel!.font, 18)
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            
+        } else if (txStyle == .COSMOS_STYLE) {
+            
+        }
+    }
+    
+    
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
 //        selectedFeeInfo = sender.selectedSegmentIndex
 //        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
 //        onUpdateFeeView()
 //        onSimul()
+    }
+    
+    @objc func onSelectFeeCoin() {
+        if (txStyle == .COSMOS_STYLE) {
+            // only cosmos style support multi type fee denom
+        }
     }
     
     @IBAction func onClickSend(_ sender: BaseButton) {
@@ -376,15 +484,13 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
     }
     
     func onInputedAddress(_ address: String, _ memo: String?) {
-        if (sendType == .CosmosEVM_Coin) {
-            if (toAddress.starts(with: "0x") && !address.starts(with: "0x")) {
-                txStyle = .COSMOS_STYLE
-                onUpdateTxStyle()
-            } else if (!toAddress.starts(with: "0x") && address.starts(with: "0x")) {
-                txStyle = .WEB3_STYLE
-                onUpdateTxStyle()
-            }
-        }
+//        if (sendType == .CosmosEVM_Coin) {
+//            if (toAddress.starts(with: "0x") && !address.starts(with: "0x")) {
+//                onUpdateTxStyle(.COSMOS_STYLE)
+//            } else if (!toAddress.starts(with: "0x") && address.starts(with: "0x")) {
+//                onUpdateTxStyle(.WEB3_STYLE)
+//            }
+//        }
         onUpdateToAddressView(address)
     }
     
@@ -404,7 +510,6 @@ public enum SendAssetType: Int {
     case Only_EVM_Coin = 2                  // not support IBC, only support Web3 tx  (evm main coin)
     case Only_EVM_ERC20 = 3                 // not support IBC, only support Web3 tx  (erc20 tokens)
     case CosmosEVM_Coin = 4                 // support IBC, bank send, Web3 tx        (staking, both tx style)
-//    case CosmosEVM_ERC20 = 5                // not support IBC, only support Web3 tx  (erc20 tokens)
 }
 
 

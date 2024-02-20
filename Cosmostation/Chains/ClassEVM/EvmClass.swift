@@ -57,9 +57,11 @@ class EvmClass: CosmosClass {
     override func fetchData(_ id: Int64) async {
         if (supportCosmos) {
             if let rawParam = try? await self.fetchChainParam(),
-               let erc20s = try? await self.fetchErc20Info() {
+               let erc20s = try? await self.fetchErc20Info(),
+               let balance = try? await fetchBalance() {
                 mintscanChainParam = rawParam
                 mintscanErc20Tokens = erc20s
+                evmBalances = NSDecimalNumber(string: balance.description)
             }
             fetchGrpcData(id)
             fetchAllErc20Balance(id)
