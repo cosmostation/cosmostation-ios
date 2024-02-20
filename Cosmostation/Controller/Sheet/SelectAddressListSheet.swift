@@ -39,7 +39,7 @@ class SelectAddressListSheet: BaseVC {
         
         print("sendType ", sendType)
         
-        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20 || sendType == .CosmosEVM_ERC20) {
+        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20) {
             //only support EVM address style
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
                 if (refAddress.chainTag == toChain.tag && refAddress.evmAddress != senderEvmAddress) {

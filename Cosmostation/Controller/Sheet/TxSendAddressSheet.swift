@@ -94,7 +94,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             return
         }
         
-        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20 || sendType == .CosmosEVM_ERC20) {
+        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20) {
             //only support EVM address style
             if (!WUtils.isValidEvmAddress(userInput)) {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))

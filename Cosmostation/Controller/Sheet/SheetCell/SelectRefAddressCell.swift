@@ -43,6 +43,7 @@ class SelectRefAddressCell: UITableViewCell {
 //        if let chain = allEvm.filter({ $0.tag == refAddress.chainTag }).first {
 //            evmCompatTag.isHidden = false
 //        }
+//        print("refAddress ", refAddress)
         evmCompatTag.isHidden = allEvm.filter({ $0.tag == refAddress.chainTag }).count <= 0
         masterAddressLabel.text = refAddress.bechAddress
     }

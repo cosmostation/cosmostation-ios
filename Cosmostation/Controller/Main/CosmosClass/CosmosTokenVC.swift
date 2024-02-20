@@ -182,7 +182,7 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-            transfer.sendType = .CosmosEVM_ERC20
+            transfer.sendType = .Only_EVM_ERC20
             transfer.fromChain = selectedChain
             transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].address
             transfer.toSendMsToken = mintscanErc20Tokens[indexPath.row]

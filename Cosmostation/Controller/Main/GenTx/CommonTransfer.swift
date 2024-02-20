@@ -63,15 +63,19 @@ class CommonTransfer: BaseVC {
     var ibcPath: MintscanPath?                      // to IBC send path
     var allIbcChains = [CosmosClass]()
     var recipientableChains = [CosmosClass]()
+    var availableAmount = NSDecimalNumber.zero
+    var decimal: Int16!
     
     var toChain: BaseChain!
     var toAddress = ""
     var toAmount = NSDecimalNumber.zero
+    var toMemo = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        toChain = fromChain
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -81,20 +85,34 @@ class CommonTransfer: BaseVC {
         loadingView.play()
         
         // .CosmosEVM_Coin is only changble tx style
-        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20 || sendType == .CosmosEVM_ERC20) {
+        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20) {
             txStyle = .WEB3_STYLE
             memoCardView.isHidden = true
         }
         
-        if (sendType == .Only_Cosmos_Coin || sendType == .CosmosEVM_Coin) {
-            toSendSymbol = toSendMsAsset.symbol
+        // set selected asset display symbol, sendable amount, display decimal
+        if (sendType == .Only_Cosmos_Coin) {
+            //TODO check fee
+            decimal = toSendMsAsset!.decimals
+            toSendSymbol = toSendMsAsset!.symbol
+            availableAmount = (fromChain as! CosmosClass).balanceAmount(toSendDenom)
             
-        } else if (sendType == .Only_Cosmos_CW20 || sendType == .CosmosEVM_ERC20 || sendType == .Only_EVM_ERC20) {
-            toSendSymbol = toSendMsToken.symbol
+        } else if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20) {
+            decimal = toSendMsToken!.decimals
+            toSendSymbol = toSendMsToken!.symbol
+            availableAmount = toSendMsToken!.getAmount()
             
-        } else if (sendType == .Only_EVM_Coin) { //eth, kava etc main coin send
+        } else if (sendType == .Only_EVM_Coin) {
+            //TODO check fee
+            decimal = 18
             toSendSymbol = (fromChain as! EvmClass).coinSymbol
+            availableAmount = (fromChain as! EvmClass).evmBalances
+            
+        } else if (sendType == .CosmosEVM_Coin) {
+            onUpdateTxStyle()
         }
+        
+        // set selected asset sendable amount
         
         print("toSendSymbol ", toSendSymbol)
         print("sendType ", sendType)
@@ -170,6 +188,26 @@ class CommonTransfer: BaseVC {
         sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
     }
     
+    func onUpdateTxStyle() {
+        if (sendType == .CosmosEVM_Coin) {
+            if (txStyle == .WEB3_STYLE) {
+                //TODO check fee
+                decimal = 18
+                toSendSymbol = (fromChain as! EvmClass).coinSymbol
+                availableAmount = (fromChain as! EvmClass).evmBalances
+                memoCardView.isHidden = true
+                
+            } else if (txStyle == .COSMOS_STYLE) {
+                //TODO check fee
+                decimal = toSendMsAsset!.decimals
+                toSendSymbol = toSendMsAsset!.symbol
+                availableAmount = (fromChain as! CosmosClass).balanceAmount(toSendDenom)
+                memoCardView.isHidden = false
+            }
+        }
+        onUpdateAmountView("")
+    }
+    
     
     @objc func onClickToChain() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
@@ -180,11 +218,18 @@ class CommonTransfer: BaseVC {
     }
     
     func onUpdateToChain(_ chain: BaseChain) {
+        if (sendType == .CosmosEVM_Coin && chain.tag != toChain.tag) {
+            if (chain.tag == fromChain.tag) {
+                txStyle = .COSMOS_STYLE         //set to cosmos style
+                onUpdateTxStyle()
+            }
+        }
         toChain = chain
         toChainImg.image = UIImage.init(named: toChain.logo1)
         toChainLabel.text = toChain.name.uppercased()
+        
+        onUpdateToAddressView("")
     }
-    
     
     @objc func onClickToAddress() {
         let addressSheet = TxSendAddressSheet(nibName: "TxSendAddressSheet", bundle: nil)
@@ -213,25 +258,94 @@ class CommonTransfer: BaseVC {
             if (sendType == .CosmosEVM_Coin) {
                 if (toAddress.starts(with: "0x")) {
                     txStyle = .WEB3_STYLE
-                    memoCardView.isHidden = true
+                    onUpdateTxStyle()
                 } else {
                     txStyle = .COSMOS_STYLE
-                    memoCardView.isHidden = false
+                    onUpdateTxStyle()
                 }
             }
         }
     }
     
     @objc func onClickAmount() {
+        let amountSheet = TxSendAmountSheet(nibName: "TxSendAmountSheet", bundle: nil)
+        amountSheet.fromChain = fromChain
+        amountSheet.sendType = sendType
+        amountSheet.txStyle = txStyle
+        amountSheet.toSendMsAsset = toSendMsAsset
+        amountSheet.toSendMsToken = toSendMsToken
+        amountSheet.availableAmount = availableAmount
+        amountSheet.existedAmount = toAmount
+        amountSheet.decimal = decimal
+        amountSheet.sheetDelegate = self
+        self.onStartSheet(amountSheet)
     }
     
     func onUpdateAmountView(_ amount: String?) {
+        if (amount?.isEmpty == true) {
+            toAmount = NSDecimalNumber.zero
+            toSendAssetHint.isHidden = false
+            toAssetAmountLabel.isHidden = true
+            toAssetDenomLabel.isHidden = true
+            toAssetCurrencyLabel.isHidden = true
+            toAssetValueLabel.isHidden = true
+            
+        } else {
+            toAmount = NSDecimalNumber(string: amount)
+            print("amount ", amount)
+            if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20 || sendType == .Only_EVM_Coin) {
+                let msPrice = BaseData.instance.getPrice(toSendMsToken!.coinGeckoId)
+                let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+                let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
+                WDP.dpToken(toSendMsToken!, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
+                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
+                
+            } else if (sendType == .Only_Cosmos_Coin) {
+                let msPrice = BaseData.instance.getPrice(toSendMsAsset!.coinGeckoId)
+                let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+                let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
+                WDP.dpCoin(toSendMsAsset, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
+                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
+                
+            } else if (sendType == .CosmosEVM_Coin) {
+                let msPrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
+                let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+                let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
+                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
+                
+                if (txStyle == .WEB3_STYLE) {
+                    toAssetDenomLabel.text = (fromChain as! EvmClass).coinSymbol
+                    toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
+                    
+                } else if (txStyle == .COSMOS_STYLE) {
+                    WDP.dpCoin(toSendMsAsset, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
+                }
+            }
+            toSendAssetHint.isHidden = true
+            toAssetAmountLabel.isHidden = false
+            toAssetDenomLabel.isHidden = false
+            toAssetCurrencyLabel.isHidden = false
+            toAssetValueLabel.isHidden = false
+        }
     }
     
     @objc func onClickMemo() {
+        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
+        memoSheet.existedMemo = toMemo
+        memoSheet.memoDelegate = self
+        self.onStartSheet(memoSheet, 260)
     }
     
     func onUpdateMemoView(_ memo: String) {
+        toMemo = memo
+        if (toMemo.isEmpty) {
+            memoLabel.isHidden = true
+            memoHintLabel.isHidden = false
+        } else {
+            memoLabel.text = toMemo
+            memoLabel.isHidden = false
+            memoHintLabel.isHidden = true
+        }
     }
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
@@ -249,26 +363,37 @@ class CommonTransfer: BaseVC {
 }
 
 
-extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate {
+extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountSheetDelegate, MemoDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectCosmosRecipientChain) {
             if let chainId = result["chainId"] as? String {
                 if (chainId != toChain.chainId) {
                     onUpdateToChain(recipientableChains.filter({ $0.chainId == chainId }).first!)
-                    onUpdateToAddressView("")
                 }
             }
         }
     }
     
     func onInputedAddress(_ address: String, _ memo: String?) {
-        print("exsit ", toAddress, "address ", address, "    memo ", memo)
-        if ((toAddress.starts(with: "0x") && !address.starts(with: "0x")) ||
-            (!toAddress.starts(with: "0x") && address.starts(with: "0x"))) {
-            onUpdateAmountView("")                            //if send way changed, set amount zero for safe
+        if (sendType == .CosmosEVM_Coin) {
+            if (toAddress.starts(with: "0x") && !address.starts(with: "0x")) {
+                txStyle = .COSMOS_STYLE
+                onUpdateTxStyle()
+            } else if (!toAddress.starts(with: "0x") && address.starts(with: "0x")) {
+                txStyle = .WEB3_STYLE
+                onUpdateTxStyle()
+            }
         }
         onUpdateToAddressView(address)
+    }
+    
+    func onInputedAmount(_ amount: String) {
+        onUpdateAmountView(amount)
+    }
+    
+    func onInputedMemo(_ memo: String) {
+        onUpdateMemoView(memo)
     }
 }
 
@@ -279,7 +404,7 @@ public enum SendAssetType: Int {
     case Only_EVM_Coin = 2                  // not support IBC, only support Web3 tx  (evm main coin)
     case Only_EVM_ERC20 = 3                 // not support IBC, only support Web3 tx  (erc20 tokens)
     case CosmosEVM_Coin = 4                 // support IBC, bank send, Web3 tx        (staking, both tx style)
-    case CosmosEVM_ERC20 = 5                // not support IBC, only support Web3 tx  (erc20 tokens)
+//    case CosmosEVM_ERC20 = 5                // not support IBC, only support Web3 tx  (erc20 tokens)
 }
 
 
