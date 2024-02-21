@@ -170,7 +170,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectUnbondingAction) {
             sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
             
-        } else if (sheetType == .SelectFeeCoin) {
+        } else if (sheetType == .SelectFeeDenom) {
             sheetTitle.text = NSLocalizedString("str_select_coin_for_fee", comment: "")
             
         } else if (sheetType == .SelectValidator) {
@@ -376,7 +376,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectUnbondingAction) {
             return 1
             
-        } else if (sheetType == .SelectFeeCoin) {
+        } else if (sheetType == .SelectFeeDenom) {
             return feeDatas.count
             
         } else if (sheetType == .SelectValidator) {
@@ -494,7 +494,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindUndelegate(indexPath.row)
             return cell!
             
-        } else if (sheetType == .SelectFeeCoin) {
+        } else if (sheetType == .SelectFeeDenom) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectFeeCoinCell") as? SelectFeeCoinCell
             cell?.onBindFeeCoin(targetChain, feeDatas[indexPath.row])
             return cell!
@@ -737,7 +737,7 @@ public enum SheetType: Int {
     case SelectDelegatedAction = 31
     case SelectUnbondingAction = 32
     
-    case SelectFeeCoin = 41
+    case SelectFeeDenom = 41
     case SelectValidator = 42
     case SelectUnStakeValidator = 43
     case SelectCosmosRecipientChain = 44

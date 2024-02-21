@@ -310,12 +310,12 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
                 let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
                 if (indexPath.row == 0) {
                     if (selectedChain is EvmClass) {
-                        transfer.sendType = .CosmosEVM_Coin         //stake coin web3 and cosmos
+                        transfer.sendType = .CosmosEVM_Coin         //stake coin web3-tx and cosmos-tx
                     } else  {
-                        transfer.sendType = .Only_Cosmos_Coin       //no evm chain only cosmos
+                        transfer.sendType = .Only_Cosmos_Coin       //no evm chain only cosmos-tx
                     }
                 } else {
-                    transfer.sendType = .Only_Cosmos_Coin           //native coin only cosmos
+                    transfer.sendType = .Only_Cosmos_Coin           //native(not stake) coin only cosmos-tx
                 }
                 
                 transfer.fromChain = selectedChain

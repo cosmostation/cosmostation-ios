@@ -22,6 +22,7 @@
                 <outlet property="errorCardView" destination="ZgU-La-hVa" id="yDY-JC-Wk1"/>
                 <outlet property="errorMsgLabel" destination="YTJ-r7-HWX" id="mQv-32-2BK"/>
                 <outlet property="feeAmountLabel" destination="IBW-hD-K6J" id="Yhu-bv-elK"/>
+                <outlet property="feeCardView" destination="L7B-9h-6dk" id="m2a-oF-txx"/>
                 <outlet property="feeCurrencyLabel" destination="NDP-Vh-3D0" id="uRD-dQ-Jju"/>
                 <outlet property="feeDenomLabel" destination="Eut-vZ-em3" id="UJX-s7-GRD"/>
                 <outlet property="feeSegments" destination="ZQD-7L-o46" id="bxF-cB-jS3"/>

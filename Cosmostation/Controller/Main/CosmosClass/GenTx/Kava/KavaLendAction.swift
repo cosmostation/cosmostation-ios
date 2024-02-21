@@ -227,7 +227,7 @@ class KavaLendAction: BaseVC {
         baseSheet.targetChain = selectedChain
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectFeeCoin
+        baseSheet.sheetType = .SelectFeeDenom
         onStartSheet(baseSheet, 240)
     }
     
@@ -406,7 +406,7 @@ class KavaLendAction: BaseVC {
 extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SelectFeeCoin) {
+        if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
                 txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)

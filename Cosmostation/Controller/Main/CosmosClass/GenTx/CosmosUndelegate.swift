@@ -180,7 +180,7 @@ class CosmosUndelegate: BaseVC {
         baseSheet.targetChain = selectedChain
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectFeeCoin
+        baseSheet.sheetType = .SelectFeeDenom
         onStartSheet(baseSheet, 240)
     }
     
@@ -273,7 +273,7 @@ extension CosmosUndelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
                 onSimul()
             }
             
-        } else if (sheetType == .SelectFeeCoin) {
+        } else if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
                 txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)

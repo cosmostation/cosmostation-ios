@@ -149,9 +149,10 @@
 "str_vote_agent" = "代理人による間接投票";
 "str_total_fee" = "合計料金";
 "str_fixed" = "固定";
-"str_average" = "平均";
+"str_average" = "平";
+"str_high" = "高";
 "str_zero" = "無料";
-"str_low" = "低い";
+"str_low" = "低";
 "str_tiny" = "最小";
 "str_select_coin" = "コインを選択します。";
 "str_unstaking_history" = "アンステーク履歴";

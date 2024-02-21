@@ -37,7 +37,7 @@ class SelectAddressListSheet: BaseVC {
         sheetTableView.register(UINib(nibName: "SelectAddressBookCell", bundle: nil), forCellReuseIdentifier: "SelectAddressBookCell")
         sheetTableView.sectionHeaderTopPadding = 0
         
-        print("sendType ", sendType)
+//        print("sendType ", sendType)
         
         if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20) {
             //only support EVM address style

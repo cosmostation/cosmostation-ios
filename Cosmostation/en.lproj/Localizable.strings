@@ -150,6 +150,7 @@
 "str_total_fee" = "Total Tx Fee";
 "str_fixed" = "Fixed";
 "str_average" = "Average";
+"str_high" = "High";
 "str_zero" = "Zero";
 "str_low" = "Low";
 "str_tiny" = "Tiny";

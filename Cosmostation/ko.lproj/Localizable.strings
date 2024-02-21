@@ -150,6 +150,7 @@
 "str_total_fee" = "Tx 수수료 합계";
 "str_fixed" = "고정";
 "str_average" = "평균";
+"str_high" = "높음";
 "str_zero" = "무료";
 "str_low" = "낮음";
 "str_tiny" = "최소";
