@@ -281,7 +281,6 @@ class CommonTransfer: BaseVC {
     
     
     func onUpdateTxStyle(_ style: TxStyle) {
-//        print("onUpdateTxStyle ", "as : ", txStyle, "     is : ",style)
         if (sendType == .CosmosEVM_Coin && style != txStyle) {
             txStyle = style
             if (txStyle == .WEB3_STYLE) {
@@ -535,8 +534,8 @@ class CommonTransfer: BaseVC {
     }
     
     @IBAction func onClickSend(_ sender: BaseButton) {
-//        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
-//        self.present(pinVC, animated: true)
+        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+        self.present(pinVC, animated: true)
     }
     
     func onSimul() {
@@ -645,6 +644,27 @@ extension CommonTransfer {
             }
         }
     }
+    
+    func evmSend() {
+        DispatchQueue.global().async { [self] in
+            let web3 = (fromChain as! EvmClass).getWeb3Connection()!
+            try! evmTx?.sign(privateKey: fromChain.privateKey!)
+            let result = try? web3.eth.sendRawTransaction(evmTx!)
+//            print("evmSend ethereumTx ", ethereumTx)
+//            print("evmSend result ", result)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                self.loadingView.isHidden = true
+                let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                txResult.txStyle = self.txStyle
+                txResult.fromChain = self.fromChain
+                txResult.toChain = self.toChain
+                txResult.toAddress = self.toAddress
+                txResult.evmHash = result?.hash
+                txResult.modalPresentationStyle = .fullScreen
+                self.present(txResult, animated: true)
+            })
+        }
+    }
 }
 
 //Cosmos style tx simul and broadcast
@@ -677,14 +697,15 @@ extension CommonTransfer {
                let response = try await broadcastSendTx(channel, auth!, onBindSend()) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
-//                    let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-//                    txResult.selectedChain = self.selectedChain
-//                    txResult.recipientChain = self.selectedRecipientChain
-//                    txResult.recipinetAddress = self.selectedRecipientAddress
-//                    txResult.memo = self.txMemo
-//                    txResult.broadcastTxResponse = response
-//                    txResult.modalPresentationStyle = .fullScreen
-//                    self.present(txResult, animated: true)
+                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                    txResult.txStyle = self.txStyle
+                    txResult.fromChain = self.fromChain
+                    txResult.toChain = self.toChain
+                    txResult.toAddress = self.toAddress
+                    txResult.toMemo = self.toMemo
+                    txResult.cosmosBroadcastTxResponse = response
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
                 })
             }
         }
@@ -732,14 +753,15 @@ extension CommonTransfer {
                let response = try await broadcastCw20SendTx(channel, auth!, onBindCw20Send()) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
-//                    let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-//                    txResult.selectedChain = self.selectedChain
-//                    txResult.recipientChain = self.selectedRecipientChain
-//                    txResult.recipinetAddress = self.selectedRecipientAddress
-//                    txResult.memo = self.txMemo
-//                    txResult.broadcastTxResponse = response
-//                    txResult.modalPresentationStyle = .fullScreen
-//                    self.present(txResult, animated: true)
+                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                    txResult.txStyle = self.txStyle
+                    txResult.fromChain = self.fromChain
+                    txResult.toChain = self.toChain
+                    txResult.toAddress = self.toAddress
+                    txResult.toMemo = self.toMemo
+                    txResult.cosmosBroadcastTxResponse = response
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
                 })
             }
         }
@@ -792,14 +814,15 @@ extension CommonTransfer {
                let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(ibcClient!, lastBlock!)) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
-//                    let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-//                    txResult.selectedChain = self.selectedChain
-//                    txResult.recipientChain = self.selectedRecipientChain
-//                    txResult.recipinetAddress = self.selectedRecipientAddress
-//                    txResult.memo = self.txMemo
-//                    txResult.broadcastTxResponse = response
-//                    txResult.modalPresentationStyle = .fullScreen
-//                    self.present(txResult, animated: true)
+                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                    txResult.txStyle = self.txStyle
+                    txResult.fromChain = self.fromChain
+                    txResult.toChain = self.toChain
+                    txResult.toAddress = self.toAddress
+                    txResult.toMemo = self.toMemo
+                    txResult.cosmosBroadcastTxResponse = response
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
                 })
             }
         }
@@ -857,14 +880,15 @@ extension CommonTransfer {
                let response = try await broadcastCw20IbcSendTx(channel, auth!, onBindCw20IbcSend()) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
-//                    let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-//                    txResult.selectedChain = self.selectedChain
-//                    txResult.recipientChain = self.selectedRecipientChain
-//                    txResult.recipinetAddress = self.selectedRecipientAddress
-//                    txResult.memo = self.txMemo
-//                    txResult.broadcastTxResponse = response
-//                    txResult.modalPresentationStyle = .fullScreen
-//                    self.present(txResult, animated: true)
+                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                    txResult.txStyle = self.txStyle
+                    txResult.fromChain = self.fromChain
+                    txResult.toChain = self.toChain
+                    txResult.toAddress = self.toAddress
+                    txResult.toMemo = self.toMemo
+                    txResult.cosmosBroadcastTxResponse = response
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
                 })
             }
         }
@@ -990,7 +1014,7 @@ extension CommonTransfer {
     }
 }
 
-extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountSheetDelegate, MemoDelegate {
+extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountSheetDelegate, MemoDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectCosmosRecipientChain) {
@@ -1010,13 +1034,6 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
     }
     
     func onInputedAddress(_ address: String, _ memo: String?) {
-//        if (sendType == .CosmosEVM_Coin) {
-//            if (toAddress.starts(with: "0x") && !address.starts(with: "0x")) {
-//                onUpdateTxStyle(.COSMOS_STYLE)
-//            } else if (!toAddress.starts(with: "0x") && address.starts(with: "0x")) {
-//                onUpdateTxStyle(.WEB3_STYLE)
-//            }
-//        }
         onUpdateToAddressView(address)
     }
     
@@ -1026,6 +1043,34 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
     
     func onInputedMemo(_ memo: String) {
         onUpdateMemoView(memo)
+    }
+    
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
+        if (result == .success) {
+            view.isUserInteractionEnabled = false
+            sendBtn.isEnabled = false
+            loadingView.isHidden = false
+            
+            if (txStyle == .WEB3_STYLE) {
+                evmSend()
+                
+            } else if (txStyle == .COSMOS_STYLE) {
+                if (fromChain.chainId == toChain.chainId) {         // Inchain Send!
+                    if (sendType == .Only_Cosmos_CW20) {            // Inchain CW20 Send!
+                        inChainWasmSend()
+                    } else {                                        // Inchain Coin Send!  (Only_Cosmos_Coin, CosmosEVM_Coin)
+                        inChainCoinSend()
+                    }
+                } else {                                            // IBC Send!
+                    ibcPath = WUtils.getMintscanPath((fromChain as! CosmosClass), (toChain as! CosmosClass), toSendDenom)
+                    if (sendType == .Only_Cosmos_CW20) {            // CW20 IBC Send!
+                        ibcWasmSend()
+                    } else {                                        // Coin IBC Send! (Only_Cosmos_Coin, CosmosEVM_Coin)
+                        ibcCoinSend()
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -159,7 +159,7 @@ class CosmosCoinVC: BaseVC {
         }
     }
     
-    func onBepSelectDialog(_ denom: String) {
+    func onBepSelectDialog(_ sendType: SendAssetType?, _ denom: String) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("bep3_tranfser", comment: ""), style: UIAlertAction.Style.default, handler: { _ in
@@ -169,7 +169,7 @@ class CosmosCoinVC: BaseVC {
             if (self.selectedChain is ChainBinanceBeacon) {
                 self.onStartLegacyTransferVC(denom)
             } else {
-                self.onStartTransferVC(denom)
+                self.onStartTransferVC(sendType!, denom)
             }
         }))
         self.present(alert, animated: true, completion: nil)
@@ -183,10 +183,12 @@ class CosmosCoinVC: BaseVC {
         self.present(transfer, animated: true)
     }
     
-    func onStartTransferVC(_ denom: String) {
-        let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
-        transfer.selectedChain = selectedChain
+    func onStartTransferVC(_ sendType: SendAssetType, _ denom: String) {
+        let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+        transfer.sendType = sendType
+        transfer.fromChain = selectedChain
         transfer.toSendDenom = denom
+        transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, denom)
         transfer.modalTransitionStyle = .coverVertical
         self.present(transfer, animated: true)
     }
@@ -290,11 +292,10 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
         if (selectedChain is ChainBinanceBeacon) {
             let sendDenom = lcdBalances[indexPath.row]["symbol"].stringValue
             if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
-                onBepSelectDialog(sendDenom)
+                onBepSelectDialog(nil, sendDenom)
             } else{
                 onStartLegacyTransferVC(lcdBalances[indexPath.row]["symbol"].stringValue)
             }
@@ -306,55 +307,35 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             if (indexPath.section == 0) {
-//                onStartTransferVC(getCoinBySection(indexPath)?.denom ?? selectedChain.stakeDenom)
-                let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+                var sendType: SendAssetType!
                 if (indexPath.row == 0) {
                     if (selectedChain is EvmClass) {
-                        transfer.sendType = .CosmosEVM_Coin         //stake coin web3-tx and cosmos-tx
+                        sendType = .CosmosEVM_Coin         //stake coin web3-tx and cosmos-tx
                     } else  {
-                        transfer.sendType = .Only_Cosmos_Coin       //no evm chain only cosmos-tx
+                        sendType = .Only_Cosmos_Coin       //no evm chain only cosmos-tx
                     }
                 } else {
-                    transfer.sendType = .Only_Cosmos_Coin           //native(not stake) coin only cosmos-tx
+                    sendType = .Only_Cosmos_Coin           //native(not stake) coin only cosmos-tx
                 }
-                
-                transfer.fromChain = selectedChain
-                transfer.toSendDenom = nativeCoins[indexPath.row].denom
-                transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, nativeCoins[indexPath.row].denom)
-                transfer.modalTransitionStyle = .coverVertical
-                self.present(transfer, animated: true)
+                onStartTransferVC(sendType, nativeCoins[indexPath.row].denom)
                 return
                 
             } else if (indexPath.section == 1) {
-//                onStartTransferVC(ibcCoins[indexPath.row].denom)
-                let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-                transfer.sendType = .Only_Cosmos_Coin
-                transfer.fromChain = selectedChain
-                transfer.toSendDenom = ibcCoins[indexPath.row].denom
-                transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, ibcCoins[indexPath.row].denom)
-                transfer.modalTransitionStyle = .coverVertical
-                self.present(transfer, animated: true)
+                onStartTransferVC(.Only_Cosmos_Coin, ibcCoins[indexPath.row].denom)
                 return
-                
                 
             } else if (indexPath.section == 2) {
                 if (selectedChain is ChainKava60) {
                     let sendDenom = bridgedCoins[indexPath.row].denom
                     if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
-                        onBepSelectDialog(sendDenom)
+                        onBepSelectDialog(.Only_Cosmos_Coin, sendDenom)
                     } else {
-                        onStartTransferVC(sendDenom)
+                        onStartTransferVC(.Only_Cosmos_Coin, sendDenom)
+                        return
                     }
                     
                 } else {
-//                    onStartTransferVC(bridgedCoins[indexPath.row].denom)
-                    let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-                    transfer.sendType = .Only_Cosmos_Coin
-                    transfer.fromChain = selectedChain
-                    transfer.toSendDenom = bridgedCoins[indexPath.row].denom
-                    transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, bridgedCoins[indexPath.row].denom)
-                    transfer.modalTransitionStyle = .coverVertical
-                    self.present(transfer, animated: true)
+                    onStartTransferVC(.Only_Cosmos_Coin, bridgedCoins[indexPath.row].denom)
                     return
                 }
             }

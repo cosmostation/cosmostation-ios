@@ -61,8 +61,8 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
         confirmBtn.isEnabled = false
         if (resultType == .Cosmos) {
             if (selectedChain is ChainBinanceBeacon) {
-                successMintscanBtn.setTitle("View Explorer", for: .normal)
-                failMintscanBtn.setTitle("View Explorer", for: .normal)
+                successMintscanBtn.setTitle("Check in Explorer", for: .normal)
+                failMintscanBtn.setTitle("Check in Explorer", for: .normal)
                 guard legacyResult != nil else {
                     loadingView.isHidden = true
                     failView.isHidden = false
@@ -83,8 +83,8 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 }
                 
             } else if (selectedChain is ChainOkt60Keccak) {
-                successMintscanBtn.setTitle("View Explorer", for: .normal)
-                failMintscanBtn.setTitle("View Explorer", for: .normal)
+                successMintscanBtn.setTitle("Check in Explorer", for: .normal)
+                failMintscanBtn.setTitle("Check in Explorer", for: .normal)
                 guard legacyResult != nil else {
                     loadingView.isHidden = true
                     failView.isHidden = false

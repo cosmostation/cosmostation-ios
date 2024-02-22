@@ -839,6 +839,12 @@
 		04C63D1D2B839D3900D4A366 /* TxSendAmountSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C63D1A2B839D3900D4A366 /* TxSendAmountSheet.swift */; };
 		04C63D1E2B839D3900D4A366 /* TxSendAmountSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C63D1B2B839D3900D4A366 /* TxSendAmountSheet.xib */; };
 		04C63D1F2B839D3900D4A366 /* TxSendAmountSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C63D1B2B839D3900D4A366 /* TxSendAmountSheet.xib */; };
+		04C63D222B86FE8C00D4A366 /* CommonTransferResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C63D202B86FE8C00D4A366 /* CommonTransferResult.swift */; };
+		04C63D232B86FE8C00D4A366 /* CommonTransferResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C63D202B86FE8C00D4A366 /* CommonTransferResult.swift */; };
+		04C63D242B86FE8C00D4A366 /* CommonTransferResult.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C63D212B86FE8C00D4A366 /* CommonTransferResult.xib */; };
+		04C63D252B86FE8C00D4A366 /* CommonTransferResult.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C63D212B86FE8C00D4A366 /* CommonTransferResult.xib */; };
+		04C63D272B87039D00D4A366 /* tx_loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 04C63D262B87039D00D4A366 /* tx_loading.json */; };
+		04C63D282B87039D00D4A366 /* tx_loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 04C63D262B87039D00D4A366 /* tx_loading.json */; };
 		04C6B9C52AAC59EC00B02A95 /* QrAddressPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6B9C32AAC59EB00B02A95 /* QrAddressPopupVC.swift */; };
 		04C6B9C62AAC59EC00B02A95 /* QrAddressPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6B9C32AAC59EB00B02A95 /* QrAddressPopupVC.swift */; };
 		04C6B9C72AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C6B9C42AAC59EC00B02A95 /* QrAddressPopupVC.xib */; };
@@ -2236,6 +2242,9 @@
 		04C63D152B83717A00D4A366 /* SelectAddressListSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAddressListSheet.xib; sourceTree = "<group>"; };
 		04C63D1A2B839D3900D4A366 /* TxSendAmountSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxSendAmountSheet.swift; sourceTree = "<group>"; };
 		04C63D1B2B839D3900D4A366 /* TxSendAmountSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxSendAmountSheet.xib; sourceTree = "<group>"; };
+		04C63D202B86FE8C00D4A366 /* CommonTransferResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTransferResult.swift; sourceTree = "<group>"; };
+		04C63D212B86FE8C00D4A366 /* CommonTransferResult.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonTransferResult.xib; sourceTree = "<group>"; };
+		04C63D262B87039D00D4A366 /* tx_loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tx_loading.json; sourceTree = "<group>"; };
 		04C6B9C32AAC59EB00B02A95 /* QrAddressPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrAddressPopupVC.swift; sourceTree = "<group>"; };
 		04C6B9C42AAC59EC00B02A95 /* QrAddressPopupVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QrAddressPopupVC.xib; sourceTree = "<group>"; };
 		04C6B9C92AAC91F900B02A95 /* ChainOkt996Keccak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOkt996Keccak.swift; sourceTree = "<group>"; };
@@ -3282,6 +3291,7 @@
 				E1D538282A96644F00FB0403 /* loading.json */,
 				E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */,
 				E19993E92B295873000F4A6B /* loadingSmallWhite.json */,
+				04C63D262B87039D00D4A366 /* tx_loading.json */,
 				0443B89728589B570027A6B9 /* Color.xcassets */,
 				0443B8A1285C7F050027A6B9 /* Chain.xcassets */,
 				0494B3B52B68FA930064BCD5 /* Token.xcassets */,
@@ -4004,6 +4014,8 @@
 			children = (
 				E1D2FC622B81FCA30080B638 /* CommonTransfer.swift */,
 				E1D2FC632B81FCA30080B638 /* CommonTransfer.xib */,
+				04C63D202B86FE8C00D4A366 /* CommonTransferResult.swift */,
+				04C63D212B86FE8C00D4A366 /* CommonTransferResult.xib */,
 			);
 			path = GenTx;
 			sourceTree = "<group>";
@@ -4262,6 +4274,7 @@
 				04FAD9EB2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */,
 				04FAD9E52AB6D8ED00143A3E /* ChainListVC.xib in Resources */,
 				0400EF262ADD4737007BA97F /* KavaSwapListVC.xib in Resources */,
+				04C63D282B87039D00D4A366 /* tx_loading.json in Resources */,
 				04B789E82ACB140900E9BE88 /* SelectNameServiceCell.xib in Resources */,
 				04C940E32AEB92F900415256 /* BaseImgSheetCell.xib in Resources */,
 				040733062AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
@@ -4274,6 +4287,7 @@
 				E14577FF2B3EC50C00EEFA8E /* CosmosClaimCommission.xib in Resources */,
 				E1CD6AF72AEAAEC200376909 /* AboutStakingCell.xib in Resources */,
 				0494B3C42B6A29AF0064BCD5 /* EvmTransfer.xib in Resources */,
+				04C63D252B86FE8C00D4A366 /* CommonTransferResult.xib in Resources */,
 				E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				0400EE9F2AD9B434007BA97F /* NeutronVote.xib in Resources */,
 				04CD24852AD312BD00497EF5 /* TxAmountBepSheet.xib in Resources */,
@@ -4395,6 +4409,7 @@
 				04FAD9C62AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
 				0400EF4F2ADF7EF4007BA97F /* KavaSwapAction.xib in Resources */,
 				04B789A12ACAEB5F00E9BE88 /* TxAddressSheet.xib in Resources */,
+				04C63D272B87039D00D4A366 /* tx_loading.json in Resources */,
 				0400EEEF2ADBE40D007BA97F /* KavaDefiCell.xib in Resources */,
 				E13FC5632B26F14D0082C66E /* KavaEarnListMyCell.xib in Resources */,
 				04FEDB5A2B06012D0095B7B6 /* HdPathSheet.xib in Resources */,
@@ -4505,6 +4520,7 @@
 				0400EEF52ADBEEF5007BA97F /* KavaLendListVC.xib in Resources */,
 				047842E62AC8B2D600462F1C /* CosmosRedelegate.xib in Resources */,
 				0409D2F72AC5DC6D0021E192 /* CosmosDelegate.xib in Resources */,
+				04C63D242B86FE8C00D4A366 /* CommonTransferResult.xib in Resources */,
 				04B789E72ACB140900E9BE88 /* SelectNameServiceCell.xib in Resources */,
 				E12E9D2F2AE415D900336449 /* loadingSmallYellow.json in Resources */,
 				E14577FE2B3EC50C00EEFA8E /* CosmosClaimCommission.xib in Resources */,
@@ -5137,6 +5153,7 @@
 				E12E9D252AE2B49900336449 /* KavaMintCreateAction.swift in Sources */,
 				E10FD3BF2B70D1F900B57DB4 /* ChainAlthea118.swift in Sources */,
 				048F8DC42B28544100432437 /* KavaEarnWithdrawAction.swift in Sources */,
+				04C63D232B86FE8C00D4A366 /* CommonTransferResult.swift in Sources */,
 				0402B7F32ACC38BA00824B3F /* CosmosVote.swift in Sources */,
 				04B789842ACAC9B100E9BE88 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
 				18FFB57A281AF533004E65BB /* WKey.swift in Sources */,
@@ -5866,6 +5883,7 @@
 				046EA7A32AD0499900A2FCE7 /* stride_vesting_vesting.pb.swift in Sources */,
 				E10FD3BE2B70D1F900B57DB4 /* ChainAlthea118.swift in Sources */,
 				048F8DC32B28544100432437 /* KavaEarnWithdrawAction.swift in Sources */,
+				04C63D222B86FE8C00D4A366 /* CommonTransferResult.swift in Sources */,
 				E12E9D242AE2B49900336449 /* KavaMintCreateAction.swift in Sources */,
 				0402B7F22ACC38BA00824B3F /* CosmosVote.swift in Sources */,
 				04B789832ACAC9B100E9BE88 /* ibc_core_client_v1_tx.grpc.swift in Sources */,

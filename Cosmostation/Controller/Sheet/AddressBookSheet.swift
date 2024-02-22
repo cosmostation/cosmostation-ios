@@ -35,6 +35,10 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         addressTextField.delegate = self
         memoTextField.delegate = self
         
+        if (recipientChain != nil && (recipientChain is EvmClass)) {
+            memoTextField.isHidden = true
+        }
+        
         if (addressBook != nil) {
             nameTextField.text = addressBook?.bookName
             addressTextField.text = addressBook?.dpAddress
