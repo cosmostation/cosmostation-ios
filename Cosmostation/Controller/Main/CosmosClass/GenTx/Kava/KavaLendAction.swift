@@ -44,7 +44,7 @@ class KavaLendAction: BaseVC {
     @IBOutlet weak var hardBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: ChainKava60!
+    var selectedChain: CosmosClass!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!

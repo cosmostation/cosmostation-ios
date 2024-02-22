@@ -16,7 +16,6 @@ class ChainKava_EVM: EvmClass  {
         supportCosmos = true
         
         name = "Kava"
-//        tag = "kavaEvm60"
         tag = "kava60"
         logo1 = "chainKava"
         logo2 = "chainKava2"
@@ -28,12 +27,14 @@ class ChainKava_EVM: EvmClass  {
         coinGeckoId = "kava"
         coinLogo = "tokenKava"
 
-        
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         bechAccountPrefix = "kava"
         validatorPrefix = "kavavaloper"
         
         grpcHost = "grpc-kava.cosmostation.io"
         rpcURL = "https://rpc-kava-app.cosmostation.io"
+        explorerURL = "https://kavascan.io/"
+        addressURL = explorerURL + "address/%@"
+        txURL = explorerURL + "tx/%@"
     }
 }

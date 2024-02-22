@@ -22,7 +22,6 @@ class TxAmountLegacySheet: BaseVC, UITextFieldDelegate {
     
     var sheetDelegate: LegacyAmountSheetDelegate?
     var selectedChain: CosmosClass!
-    var transferAssetType: TransferAssetType?
     var tokenInfo: JSON!
     var availableAmount: NSDecimalNumber!
     var existedAmount: NSDecimalNumber?

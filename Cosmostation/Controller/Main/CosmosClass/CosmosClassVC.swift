@@ -176,9 +176,11 @@ class CosmosClassVC: BaseVC {
             self.present(transfer, animated: true)
             
         } else {
-            let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
-            transfer.selectedChain = selectedChain
+            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+            transfer.sendType = (selectedChain is EvmClass) ? .CosmosEVM_Coin : .Only_Cosmos_Coin
+            transfer.fromChain = selectedChain
             transfer.toSendDenom = selectedChain.stakeDenom
+            transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom)
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
         }
@@ -546,7 +548,7 @@ extension CosmosClassVC {
     
     func onKavaDefi() {
         let defiVC = KavaDefiVC(nibName: "KavaDefiVC", bundle: nil)
-        defiVC.selectedChain = selectedChain as? ChainKava60
+        defiVC.selectedChain = selectedChain as? CosmosClass
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(defiVC, animated: true)
     }

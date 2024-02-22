@@ -88,6 +88,19 @@ class EvmClass: CosmosClass {
         }
     }
     
+    //fetch only balance for add account check
+    override func fetchPreCreate() {
+        Task {
+            if let balance = try? await fetchBalance() {
+                evmBalances = NSDecimalNumber(string: balance.description)
+            }
+            DispatchQueue.global().async {
+                self.fetched = true
+                NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+            }
+        }
+    }
+    
     //check account payable with lowest fee
     override func isTxFeePayable() -> Bool {
         return evmBalances.compare(EVM_BASE_FEE).rawValue > 0

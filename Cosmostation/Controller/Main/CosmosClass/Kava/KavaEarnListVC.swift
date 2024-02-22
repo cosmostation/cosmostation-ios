@@ -20,7 +20,7 @@ class KavaEarnListVC: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var earnBtn: BaseButton!
     
-    var selectedChain: ChainKava60!
+    var selectedChain: CosmosClass!
     var myDeposits = [Cosmos_Base_V1beta1_Coin]()
 
     override func viewDidLoad() {

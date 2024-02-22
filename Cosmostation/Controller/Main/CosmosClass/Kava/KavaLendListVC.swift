@@ -18,7 +18,7 @@ class KavaLendListVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: ChainKava60!
+    var selectedChain: CosmosClass!
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var hardParams: Kava_Hard_V1beta1_Params?
     var hardInterestRates: [Kava_Hard_V1beta1_MoneyMarketInterestRate]?

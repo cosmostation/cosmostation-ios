@@ -48,7 +48,7 @@ class KavaEarnDepositAction: BaseVC {
     @IBOutlet weak var addBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: ChainKava60!
+    var selectedChain: CosmosClass!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var toEarnDeposit: Kava_Router_V1beta1_MsgDelegateMintDeposit!

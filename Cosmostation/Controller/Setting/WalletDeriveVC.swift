@@ -24,6 +24,9 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
     var toAddAccount: BaseAccount!
     var hdPath = 0
     
+    var allEvmChains = [EvmClass]()
+    var selectedEvmTags = [String]()
+    
     var allCosmosChains = [CosmosClass]()
     var selectedCosmosTags = [String]()
 
@@ -44,7 +47,8 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        //add cosmos as default
+        //add default
+        selectedEvmTags.append("ethereum60")
         selectedCosmosTags.append("cosmos118")
         
         if (mnemonic != nil) {
@@ -53,6 +57,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
                 DispatchQueue.main.async(execute: {
                     self.toAddAccount = BaseAccount("", .withMnemonic, String(self.hdPath))
                     self.toAddAccount.fetchForPreCreate(self.seed!, nil)
+                    self.allEvmChains = self.toAddAccount.allEvmClassChains
                     self.allCosmosChains = self.toAddAccount.allCosmosClassChains
                     self.onUpdateview()
                 });
@@ -69,6 +74,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
             toAddAccount = BaseAccount("", .onlyPrivateKey, "-1")
             toAddAccount.fetchForPreCreate(nil, privateKeyString)
             
+            allEvmChains = toAddAccount.allEvmClassChains
             allCosmosChains = toAddAccount.allCosmosClassChains
             onUpdateview()
             
@@ -107,11 +113,20 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
+        for i in 0..<allEvmChains.count {
+            if (allEvmChains[i].tag == tag) {
+                DispatchQueue.main.async {
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
+                    self.tableView.endUpdates()
+                }
+            }
+        }
         for i in 0..<allCosmosChains.count {
             if (allCosmosChains[i].tag == tag) {
                 DispatchQueue.main.async {
                     self.tableView.beginUpdates()
-                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
+                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 1)], with: .none)
                     self.tableView.endUpdates()
                 }
             }
@@ -134,12 +149,16 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
     func onSelectedHDPath(_ path: Int) {
         if (hdPath != path) {
             hdPath = path
+            selectedEvmTags.removeAll()
+            selectedEvmTags.append("ethereum60")
             selectedCosmosTags.removeAll()
             selectedCosmosTags.append("cosmos118")
             
             toAddAccount = BaseAccount("", .withMnemonic, String(self.hdPath))
+            toAddAccount.allEvmClassChains.removeAll()
             toAddAccount.allCosmosClassChains.removeAll()
             toAddAccount.fetchForPreCreate(seed!, nil)
+            allEvmChains = toAddAccount.allEvmClassChains
             allCosmosChains = toAddAccount.allCosmosClassChains
             onUpdateview()
         }
@@ -165,6 +184,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
                 try? keychain.set(newData, key: recoverAccount.uuid.sha1())
                 BaseData.instance.setLastAccount(id)
                 BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
+                BaseData.instance.setDisplayEvmChainTags(id, self.selectedEvmTags)
                 BaseData.instance.setDisplayCosmosChainTags(id, self.selectedCosmosTags)
                 
             } else if (self.toAddAccount.type == .onlyPrivateKey) {
@@ -173,6 +193,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
                 try? keychain.set(privateKeyString!, key: recoverAccount.uuid.sha1())
                 BaseData.instance.setLastAccount(id)
                 BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
+                BaseData.instance.setDisplayEvmChainTags(id, self.selectedEvmTags)
                 BaseData.instance.setDisplayCosmosChainTags(id, self.selectedCosmosTags)
             }
             
@@ -190,13 +211,18 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
 extension WalletDeriveVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.titleLabel.text = "Cosmos Class"
-        view.cntLabel.text = String(allCosmosChains.count)
+        if (section == 0) {
+            view.titleLabel.text = "Evm Class"
+            view.cntLabel.text = String(allEvmChains.count)
+        } else if (section == 1) {
+            view.titleLabel.text = "Cosmos Class"
+            view.cntLabel.text = String(allCosmosChains.count)
+        }
         return view
     }
     
@@ -205,27 +231,52 @@ extension WalletDeriveVC: UITableViewDelegate, UITableViewDataSource, UISearchBa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allCosmosChains.count
+        if (section == 0) {
+            return allEvmChains.count
+        } else if (section == 1) {
+            return allCosmosChains.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"DeriveCell") as! DeriveCell
-        cell.bindCosmosClassChain(toAddAccount, allCosmosChains[indexPath.row], selectedCosmosTags)
+        if (indexPath.section == 0) {
+            cell.bindDeriveEvmClassChain(toAddAccount, allEvmChains[indexPath.row], selectedEvmTags)
+        } else if (indexPath.section == 1) {
+            cell.bindDeriveCosmosClassChain(toAddAccount, allCosmosChains[indexPath.row], selectedCosmosTags)
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let chain = allCosmosChains[indexPath.row]
-        if (chain.tag == "cosmos118") { return }
-        if (selectedCosmosTags.contains(chain.tag)) {
-            selectedCosmosTags.removeAll { $0 == chain.tag }
-        } else {
-            selectedCosmosTags.append(chain.tag)
-        }
-        DispatchQueue.main.async {
-            self.tableView.beginUpdates()
-            self.tableView.reloadRows(at: [indexPath], with: .none)
-            self.tableView.endUpdates()
+        if (indexPath.section == 0) {
+            let chain = allEvmChains[indexPath.row]
+            if (chain.tag == "ethereum60") { return }
+            if (selectedEvmTags.contains(chain.tag)) {
+                selectedEvmTags.removeAll { $0 == chain.tag }
+            } else {
+                selectedEvmTags.append(chain.tag)
+            }
+            DispatchQueue.main.async {
+                self.tableView.beginUpdates()
+                self.tableView.reloadRows(at: [indexPath], with: .none)
+                self.tableView.endUpdates()
+            }
+            
+        } else if (indexPath.section == 1) {
+            let chain = allCosmosChains[indexPath.row]
+            if (chain.tag == "cosmos118") { return }
+            if (selectedCosmosTags.contains(chain.tag)) {
+                selectedCosmosTags.removeAll { $0 == chain.tag }
+            } else {
+                selectedCosmosTags.append(chain.tag)
+            }
+            DispatchQueue.main.async {
+                self.tableView.beginUpdates()
+                self.tableView.reloadRows(at: [indexPath], with: .none)
+                self.tableView.endUpdates()
+            }
         }
     }
     

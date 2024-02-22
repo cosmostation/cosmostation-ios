@@ -325,7 +325,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
                 return
                 
             } else if (indexPath.section == 2) {
-                if (selectedChain is ChainKava60) {
+                if (selectedChain.tag.starts(with: "Kava")) {
                     let sendDenom = bridgedCoins[indexPath.row].denom
                     if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
                         onBepSelectDialog(.Only_Cosmos_Coin, sendDenom)

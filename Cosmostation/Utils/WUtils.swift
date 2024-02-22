@@ -23,7 +23,7 @@ public class WUtils {
             result.append(TOKEN_HTLC_BINANCE_XRPB)
             result.append(TOKEN_HTLC_BINANCE_BUSD)
             
-        } else if (chain is ChainKava60) {
+        } else if (chain.tag.starts(with: "Kava")) {
             result.append(TOKEN_HTLC_KAVA_BNB)
             result.append(TOKEN_HTLC_KAVA_BTCB)
             result.append(TOKEN_HTLC_KAVA_XRPB)
@@ -39,7 +39,7 @@ public class WUtils {
             if (denom == TOKEN_HTLC_BINANCE_BTCB) { return true }
             if (denom == TOKEN_HTLC_BINANCE_XRPB) { return true }
             if (denom == TOKEN_HTLC_BINANCE_BUSD) { return true }
-        }  else if (chain is ChainKava60) {
+        }  else if (chain.tag.starts(with: "Kava")) {
             if (denom == TOKEN_HTLC_KAVA_BNB) { return true }
             if (denom == TOKEN_HTLC_KAVA_BTCB) { return true }
             if (denom == TOKEN_HTLC_KAVA_XRPB) { return true }

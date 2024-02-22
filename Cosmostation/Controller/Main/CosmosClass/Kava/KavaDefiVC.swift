@@ -18,7 +18,7 @@ class KavaDefiVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: ChainKava60!
+    var selectedChain: CosmosClass!
     var incentive: Kava_Incentive_V1beta1_QueryRewardsResponse?
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
 

@@ -187,7 +187,7 @@ extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource, UISearchBar
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         view.rootView.backgroundColor = UIColor.colorBg
         if (section == 0) {
-            view.titleLabel.text = "Ethereum Class"
+            view.titleLabel.text = "Evm Class"
             view.cntLabel.text = String(baseAccount.allEvmClassChains.count)
         } else if (section == 1) {
             view.titleLabel.text = "Cosmos Class"

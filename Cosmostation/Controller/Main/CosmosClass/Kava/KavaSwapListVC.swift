@@ -18,7 +18,7 @@ class KavaSwapListVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: ChainKava60!
+    var selectedChain: CosmosClass!
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var swapParam: Kava_Swap_V1beta1_Params?
     var swapList = [Kava_Swap_V1beta1_PoolResponse]()

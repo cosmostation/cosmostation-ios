@@ -135,9 +135,9 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             }
             
             //카바 시스템 코너 케이스 받는 계정의 펍키 타입이 코스모스타입이면 안된다. 받는애한테 락된다.
-            if (recipientChain is ChainKava60) {
+            if (recipientChain.tag.starts(with: "Kava")) {
                 Task {
-                    let channel = getConnection(ChainKava60())
+                    let channel = getConnection(ChainKava459())
                     if let recipientAuth = try? await self.fetchAuth(channel, bechAddress) {
                         let pubKey = WUtils.onParseAuthPubkeyType(recipientAuth)
                         DispatchQueue.main.async {

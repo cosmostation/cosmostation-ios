@@ -349,6 +349,18 @@ extension BaseAccount {
     
     func fetchForPreCreate(_ seed: Data? = nil, _ privateKeyString: String? = nil) {
         if (type == .withMnemonic) {
+            allEvmClassChains = ALLEVMCLASS()
+            allEvmClassChains.forEach { chain in
+                Task(priority: .high) {
+                    if (chain.evmAddress.isEmpty) {
+                        chain.setInfoWithSeed(seed!, lastHDPath)
+                    }
+                    if (chain.fetched == false) {
+                        chain.fetchPreCreate()
+                    }
+                }
+            }
+            
             allCosmosClassChains = ALLCOSMOSCLASS()
             allCosmosClassChains.forEach { chain in
                 Task(priority: .high) {
@@ -362,6 +374,18 @@ extension BaseAccount {
             }
             
         } else if (type == .onlyPrivateKey) {
+            allEvmClassChains = ALLEVMCLASS()
+            allEvmClassChains.forEach { chain in
+                Task(priority: .high) {
+                    if (chain.evmAddress.isEmpty) {
+                        chain.setInfoWithPrivateKey(Data.fromHex(privateKeyString!)!)
+                    }
+                    if (chain.fetched == false) {
+                        chain.fetchPreCreate()
+                    }
+                }
+            }
+            
             allCosmosClassChains = ALLCOSMOSCLASS().filter({ $0.isDefault == true || $0.tag == "okt996_Secp"})
             allCosmosClassChains.forEach { chain in
                 Task(priority: .medium) {

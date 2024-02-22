@@ -95,9 +95,9 @@ class TxAmountBepSheet: BaseVC, UITextFieldDelegate {
             }
             
             var inputAmount = userInput
-            if (fromChain is ChainKava60) {
-                inputAmount = userInput.multiplying(byPowerOf10: decimal)
-            }
+//            if (fromChain is ChainKava60) {
+//                inputAmount = userInput.multiplying(byPowerOf10: decimal)
+//            }
             if (inputAmount != NSDecimalNumber.zero &&
                 (availableAmount.compare(inputAmount).rawValue >= 0)) {
                 confirmBtn.isEnabled = true
@@ -110,51 +110,51 @@ class TxAmountBepSheet: BaseVC, UITextFieldDelegate {
     }
     
     @IBAction func onClickQuarter(_ sender: UIButton) {
-        if (fromChain is ChainKava60) {
-            let quarterAmount = availableAmount.multiplying(by: NSDecimalNumber(0.25)).multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
-            amountTextField.text = quarterAmount.stringValue
-        } else {
+//        if (fromChain is ChainKava60) {
+//            let quarterAmount = availableAmount.multiplying(by: NSDecimalNumber(0.25)).multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+//            amountTextField.text = quarterAmount.stringValue
+//        } else {
             let quarterAmount = availableAmount.multiplying(by: NSDecimalNumber(0.25), withBehavior: getDivideHandler(decimal))
             amountTextField.text = quarterAmount.stringValue
-        }
+//        }
         onUpdateAmountView()
     }
     
     @IBAction func onClickHalf(_ sender: UIButton) {
-        if (fromChain is ChainKava60) {
-            let quarterAmount = availableAmount.dividing(by: NSDecimalNumber(2)).multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
-            amountTextField.text = quarterAmount.stringValue
-        } else {
+//        if (fromChain is ChainKava60) {
+//            let quarterAmount = availableAmount.dividing(by: NSDecimalNumber(2)).multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+//            amountTextField.text = quarterAmount.stringValue
+//        } else {
             let quarterAmount = availableAmount.dividing(by: NSDecimalNumber(2), withBehavior: getDivideHandler(decimal))
             amountTextField.text = quarterAmount.stringValue
-        }
+//        }
         onUpdateAmountView()
     }
     
     @IBAction func onClickMax(_ sender: UIButton) {
-        if (fromChain is ChainKava60) {
-            let quarterAmount = availableAmount.dividing(by: NSDecimalNumber(1)).multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
-            amountTextField.text = quarterAmount.stringValue
-        } else {
+//        if (fromChain is ChainKava60) {
+//            let quarterAmount = availableAmount.dividing(by: NSDecimalNumber(1)).multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+//            amountTextField.text = quarterAmount.stringValue
+//        } else {
             let quarterAmount = availableAmount.dividing(by: NSDecimalNumber(1), withBehavior: getDivideHandler(decimal))
             amountTextField.text = quarterAmount.stringValue
-        }
+//        }
         onUpdateAmountView()
     }
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         if let text = amountTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             .replacingOccurrences(of: ",", with: ".")  {
-            if (fromChain is ChainKava60) {
-                let userInput = NSDecimalNumber(string: text).multiplying(byPowerOf10: decimal)
-                sheetDelegate?.onInputedAmount(userInput.stringValue)
-                dismiss(animated: true)
-                
-            } else {
+//            if (fromChain is ChainKava60) {
+//                let userInput = NSDecimalNumber(string: text).multiplying(byPowerOf10: decimal)
+//                sheetDelegate?.onInputedAmount(userInput.stringValue)
+//                dismiss(animated: true)
+//                
+//            } else {
                 let userInput = NSDecimalNumber(string: text)
                 sheetDelegate?.onInputedAmount(userInput.stringValue)
                 dismiss(animated: true)
-            }
+//            }
         }
     }
 }

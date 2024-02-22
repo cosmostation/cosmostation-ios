@@ -27,11 +27,6 @@ class ChainEthereum: EvmClass  {
         
         rpcURL = "http://eth4.cosmostation.io/rpc"
         explorerURL = "https://etherscan.io/"
-        
-//        TEST_NET
-//        rpcURL = "https://rpc.ankr.com/eth_goerli"
-//        explorerURL = "https://goerli.etherscan.io/"
-        
         addressURL = explorerURL + "address/%@"
         txURL = explorerURL + "tx/%@"
         

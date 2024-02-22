@@ -709,7 +709,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     var result = [CosmosClass]()
     result.removeAll()
     result.append(ChainCosmos())
-    result.append(ChainAkash())
+//    result.append(ChainAkash())
 //    result.append(ChainAlthea60())
 //    result.append(ChainAlthea118())
 //    result.append(ChainArchway())
