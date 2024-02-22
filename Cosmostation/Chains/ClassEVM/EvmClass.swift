@@ -53,51 +53,68 @@ class EvmClass: CosmosClass {
         }
     }
     
-    //fetch account onchaindata from web3 info
-    override func fetchData(_ id: Int64) async {
+    override func fetchData(_ id: Int64) {
+        let group = DispatchGroup()
         if (supportCosmos) {
-            if let rawParam = try? await self.fetchChainParam(),
-               let erc20s = try? await self.fetchErc20Info(),
-               let balance = try? await fetchBalance() {
-                mintscanChainParam = rawParam
-                mintscanErc20Tokens = erc20s
-                evmBalances = NSDecimalNumber(string: balance.description)
-            }
-            fetchGrpcData(id)
-            fetchAllErc20Balance(id)
+            fetchChainParam2(group)
+            fetchErc20Info2(group)
+            fetchEvmBalance(group)
             
-        } else {
-            if let erc20s = try? await self.fetchErc20Info(),
-                let balance = try? await fetchBalance() {
-                mintscanErc20Tokens = erc20s
-                evmBalances = NSDecimalNumber(string: balance.description)
+            let channel = getConnection()
+            fetchAuth(group, channel)
+            fetchBalance(group, channel)
+            if (self.supportStaking) {
+                fetchDelegation(group, channel)
+                fetchUnbondings(group, channel)
+                fetchRewards(group, channel)
+                fetchCommission(group, channel)
             }
+            fetchAllErc20Balance2(group)
             
-            DispatchQueue.main.async {
+            group.notify(queue: .main) {
+                try? channel.close()
+                WUtils.onParseVestingAccount(self)
                 self.fetched = true
                 self.allCoinValue = self.allCoinValue()
                 self.allCoinUSDValue = self.allCoinValue(true)
+                self.allTokenValue = self.allTokenValue()
+                self.allTokenUSDValue = self.allTokenValue(true)
                 
-                BaseData.instance.updateRefAddressesMain(
-                    RefAddress(id, self.tag, "", self.evmAddress,
-                               self.evmBalances.stringValue, self.allCoinUSDValue.stringValue, nil, 1))
+                BaseData.instance.updateRefAddressesAllValue(
+                    RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+                               self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                               self.allTokenUSDValue.stringValue, self.cosmosBalances?.count))
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            }
+        } else {
+            fetchChainParam2(group)
+            fetchErc20Info2(group)
+            fetchEvmBalance(group)
+            fetchAllErc20Balance2(group)
+            
+            group.notify(queue: .main) {
+                self.fetched = true
+                self.allCoinValue = self.allCoinValue()
+                self.allCoinUSDValue = self.allCoinValue(true)
+                self.allTokenValue = self.allTokenValue()
+                self.allTokenUSDValue = self.allTokenValue(true)
                 
-                self.fetchAllErc20Balance(id)
+                BaseData.instance.updateRefAddressesAllValue(
+                    RefAddress(id, self.tag, "", self.evmAddress,
+                               self.evmBalances.stringValue, self.allCoinUSDValue.stringValue,
+                               self.allTokenUSDValue.stringValue, 1))
+                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
             }
         }
     }
     
     //fetch only balance for add account check
     override func fetchPreCreate() {
-        Task {
-            if let balance = try? await fetchBalance() {
-                evmBalances = NSDecimalNumber(string: balance.description)
-            }
-            DispatchQueue.global().async {
-                self.fetched = true
-                NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
-            }
+        let group = DispatchGroup()
+        fetchEvmBalance(group)
+        group.notify(queue: .main) {
+            self.fetched = true
+            NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
         }
     }
     
@@ -147,16 +164,36 @@ class EvmClass: CosmosClass {
 }
 
 extension EvmClass {
+    
     func fetchErc20Info() async throws -> [MintscanToken] {
 //        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
         return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
     }
     
-    func fetchBalance() async throws -> NSDecimalNumber {
+    func fetchErc20Info2(_ group: DispatchGroup) {
+        group.enter()
+        AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get)
+            .responseDecodable(of: [MintscanToken].self) { response in
+                switch response.result {
+                case .success(let value):
+                    self.mintscanErc20Tokens = value
+                case .failure:
+                    print("fetchErc20Info2 error")
+                }
+                group.leave()
+            }
+    }
+    
+    func fetchEvmBalance(_ group: DispatchGroup) {
+        group.enter()
         if let balance = try? getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(evmAddress)!) {
-            return NSDecimalNumber(string: balance?.description)
+            if (balance != nil) {
+                self.evmBalances = NSDecimalNumber(string: String(balance!))
+            }
+            group.leave()
+        } else {
+            group.leave()
         }
-        return NSDecimalNumber.zero
     }
 }
 
@@ -190,6 +227,14 @@ extension EvmClass {
                 group.leave()
             } else {
                 group.leave()
+            }
+        }
+    }
+    
+    func fetchAllErc20Balance2(_ group: DispatchGroup) {
+        mintscanErc20Tokens.forEach { token in
+            if (tag != "ethereum60" || token.isdefault == true) {
+                fetchErc20Balance(group, EthereumAddress.init(evmAddress)!, token)
             }
         }
     }

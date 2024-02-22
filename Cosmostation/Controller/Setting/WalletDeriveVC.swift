@@ -113,6 +113,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
+        print("onFetchDone ",tag)
         for i in 0..<allEvmChains.count {
             if (allEvmChains[i].tag == tag) {
                 DispatchQueue.main.async {

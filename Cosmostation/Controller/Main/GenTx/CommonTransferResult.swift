@@ -125,9 +125,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         self.presentingViewController?.presentingViewController?.dismiss(animated: true) {
-            Task {
-                await self.fromChain.fetchData(self.baseAccount.id)
-            }
+            self.fromChain.fetchData(self.baseAccount.id)
         }
     }
     

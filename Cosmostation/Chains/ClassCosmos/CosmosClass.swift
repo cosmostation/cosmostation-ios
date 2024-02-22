@@ -63,17 +63,35 @@ class CosmosClass: BaseChain {
         }
     }
     
-    //fetch account onchaindata from grpc
-    override func fetchData(_ id: Int64) async {
-        if let rawParam = try? await self.fetchChainParam() {
-            mintscanChainParam = rawParam
-        }
+    override func fetchData(_ id: Int64) {
+        let group = DispatchGroup()
+        fetchChainParam2(group)
         if (supportCw20) {
-            if let cw20s = try? await self.fetchCw20Info() {
-                mintscanCw20Tokens = cw20s
-            }
+            fetchCw20Info(group)
         }
-        fetchGrpcData(id)
+        
+        let channel = getConnection()
+        fetchAuth(group, channel)
+        fetchBalance(group, channel)
+        if (self.supportStaking) {
+            fetchDelegation(group, channel)
+            fetchUnbondings(group, channel)
+            fetchRewards(group, channel)
+            fetchCommission(group, channel)
+        }
+        group.notify(queue: .main) {
+            try? channel.close()
+            WUtils.onParseVestingAccount(self)
+            self.fetched = true
+            self.allCoinValue = self.allCoinValue()
+            self.allCoinUSDValue = self.allCoinValue(true)
+            
+            BaseData.instance.updateRefAddressesMain(
+                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+                           self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                           nil, self.cosmosBalances?.count))
+            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+        }
     }
     
     //fetch only balance for add account check
@@ -98,32 +116,6 @@ class CosmosClass: BaseChain {
             }
         }
         return result
-    }
-    
-    func fetchPropertyData(_ channel: ClientConnection, _ id: Int64) {
-        let group = DispatchGroup()
-    
-        fetchBalance(group, channel)
-        if (self.supportStaking) {
-            fetchDelegation(group, channel)
-            fetchUnbondings(group, channel)
-            fetchRewards(group, channel)
-            fetchCommission(group, channel)
-        }
-        
-        group.notify(queue: .main) {
-            try? channel.close()
-            WUtils.onParseVestingAccount(self)
-            self.fetched = true
-            self.allCoinValue = self.allCoinValue()
-            self.allCoinUSDValue = self.allCoinValue(true)
-            
-            let aa = BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                           self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                           nil, self.cosmosBalances?.count))
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
-        }
     }
     
     var stakeInfoTask: Task<(), Never>?
@@ -185,12 +177,6 @@ class CosmosClass: BaseChain {
                 return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
             }
         }
-//        if (supportErc20) {
-//            if let tokenInfo = mintscanErc20Tokens.filter({ $0.address == address }).first {
-//                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-//                return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
-//            }
-//        }
         return NSDecimalNumber.zero
     }
     
@@ -334,9 +320,32 @@ extension CosmosClass {
         return try await AF.request(BaseNetWork.msChainParam(self), method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchCw20Info() async throws -> [MintscanToken] {
-//        print("fetchCw20Info ", BaseNetWork.msCw20InfoUrl(self))
-        return try await AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
+    func fetchChainParam2(_ group: DispatchGroup) {
+        group.enter()
+        AF.request(BaseNetWork.msChainParam(self), method: .get)
+            .responseDecodable(of: JSON.self) { response in
+                switch response.result {
+                case .success(let value):
+                    self.mintscanChainParam = value
+                case .failure:
+                    print("fetchChainParam2 error")
+                }
+                group.leave()
+            }
+    }
+    
+    func fetchCw20Info(_ group: DispatchGroup) {
+        group.enter()
+        AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get)
+            .responseDecodable(of: [MintscanToken].self) { response in
+                switch response.result {
+                case .success(let value):
+                    self.mintscanCw20Tokens = value
+                case .failure:
+                    print("fetchCw20Info error")
+                }
+                group.leave()
+            }
     }
     
 }
@@ -368,20 +377,15 @@ extension CosmosClass {
         return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).delegatorWithdrawAddress(req).response.get().withdrawAddress.replacingOccurrences(of: "\"", with: "")
     }
     
-    func fetchGrpcData(_ id: Int64) {
+    func fetchAuth(_ group: DispatchGroup, _ channel: ClientConnection) {
+        group.enter()
         let channel = getConnection()
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = bechAddress }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosAuth = response.account
-            self.fetchPropertyData(channel, id)
-            
+            group.leave()
         } else {
-            try? channel.close()
-            self.fetched = true
-            BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                           nil, nil, nil, nil))
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            group.leave()
         }
     }
     
@@ -774,8 +778,8 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainTeritori())
     result.append(ChainUmee())
     result.append(ChainXpla())
-//    
-//    result.append(ChainBinanceBeacon())
+    
+    result.append(ChainBinanceBeacon())
 ////    result.append(ChainOkt60Keccak())
 //    result.append(ChainOkt996Secp())
 //    result.append(ChainOkt996Keccak())

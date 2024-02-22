@@ -125,7 +125,6 @@ class PortfolioVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
-//        print("onFetchDone ", tag)
         onUpdateRow(tag)
     }
     

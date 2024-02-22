@@ -55,11 +55,26 @@ class ChainOkt60Keccak: CosmosClass  {
         bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
     }
     
-    override func fetchData(_ id: Int64) async {
-//        if let erc20s = try? await self.fetchErc20Info() {
-//            mintscanErc20Tokens = erc20s
-//        }
-        fetchLcdData(id)
+    override func fetchData(_ id: Int64) {
+        let group = DispatchGroup()
+        
+        fetchNodeInfo(group)
+        fetchAccountInfo(group, bechAddress)
+        fetchOktDeposited(group, bechAddress)
+        fetchOktWithdraw(group, bechAddress)
+        fetchOktTokens(group)
+        
+        group.notify(queue: .main) {
+            self.fetched = true
+            self.allCoinValue = self.allCoinValue()
+            self.allCoinUSDValue = self.allCoinValue(true)
+            
+            BaseData.instance.updateRefAddressesMain(
+                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+                           self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                           nil, self.lcdAccountInfo.oktCoins?.count))
+            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+        }
     }
     
     override func fetchPreCreate() {
@@ -87,28 +102,6 @@ class ChainOkt60Keccak: CosmosClass  {
 }
 
 extension ChainOkt60Keccak {
-    
-    func fetchLcdData(_ id: Int64) {
-        let group = DispatchGroup()
-        
-        fetchNodeInfo(group)
-        fetchAccountInfo(group, bechAddress)
-        fetchOktDeposited(group, bechAddress)
-        fetchOktWithdraw(group, bechAddress)
-        fetchOktTokens(group)
-        
-        group.notify(queue: .main) {
-            self.fetched = true
-            self.allCoinValue = self.allCoinValue()
-            self.allCoinUSDValue = self.allCoinValue(true)
-            
-            BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                           self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                           nil, self.lcdAccountInfo.oktCoins?.count))
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
-        }
-    }
     
     func fetchValidators() {
         let group = DispatchGroup()

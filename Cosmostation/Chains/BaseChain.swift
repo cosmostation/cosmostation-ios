@@ -39,7 +39,7 @@ class BaseChain {
     
     func setInfoWithPrivateKey(_ priKey: Data) {}
     
-    func fetchData(_ id: Int64) async {}
+    func fetchData(_ id: Int64) {}
     
     func fetchPreCreate() {}
     

@@ -86,9 +86,7 @@ class EvmAssetVC: BaseVC {
         if (selectedChain.fetched == false) {
             refresher.endRefreshing()
         } else {
-            Task(priority: .high) {
-                await selectedChain.fetchData(baseAccount.id)
-            }
+            selectedChain.fetchData(baseAccount.id)
         }
     }
     

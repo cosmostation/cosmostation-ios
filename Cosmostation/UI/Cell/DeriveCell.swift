@@ -66,9 +66,14 @@ class DeriveCell: UITableViewCell {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
             
-            let dpAmount = chain.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
-            denomLabel.text = chain.coinSymbol
-            amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
+            if let stakeDenom = chain.stakeDenom, 
+                let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+                WDP.dpCoin(msAsset, chain.evmBalances, nil, denomLabel, amountLabel, msAsset.decimals)
+            } else {
+                let dpAmount = chain.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
+                denomLabel.text = chain.coinSymbol
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
+            }
             denomLabel.isHidden = false
             amountLabel.isHidden = false
             

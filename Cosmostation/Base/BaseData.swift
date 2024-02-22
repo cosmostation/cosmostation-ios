@@ -352,6 +352,21 @@ extension BaseData {
     }
     
     @discardableResult
+    public func updateRefAddressesAllValue(_ refAddress: RefAddress) -> Int? {
+        let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
+                                            REFADDRESS_CHAIN_TAG == refAddress.chainTag)
+        if let address = try! database.pluck(query) {
+            let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])
+            return try? database.run(target.update(REFADDRESS_MAIN_AMOUNT <- refAddress.lastMainAmount,
+                                                   REFADDRESS_MAIN_VALUE <- refAddress.lastMainValue,
+                                                   REFADDRESS_TOKEN_VALUE <- refAddress.lastTokenValue,
+                                                   REFADDRESS_COIN_CNT <- refAddress.lastCoinCnt))
+        } else {
+            return Int(insertRefAddresses(refAddress))
+        }
+    }
+    
+    @discardableResult
     public func updateRefAddressesMain(_ refAddress: RefAddress) -> Int? {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
                                             REFADDRESS_CHAIN_TAG == refAddress.chainTag)
