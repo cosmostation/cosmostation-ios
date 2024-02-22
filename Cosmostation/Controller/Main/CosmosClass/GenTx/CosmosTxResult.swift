@@ -14,7 +14,7 @@ import NIO
 import SwiftProtobuf
 import web3swift
 
-class CosmosTxResult: BaseVC, AddressBookDelegate {
+class CosmosTxResult: BaseVC {
     
     @IBOutlet weak var successView: UIView!
     @IBOutlet weak var successMsgLabel: UILabel!
@@ -40,11 +40,6 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
     
     var evmHash: String?
     var evmRecipient: TransactionReceipt?
-    
-    //for addressbook
-    var recipientChain: BaseChain?
-    var recipinetAddress: String?
-    var memo: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +47,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
         baseAccount = BaseData.instance.baseAccount
         
         loadingView.isHidden = false
-        loadingView.animation = LottieAnimation.named("loading")
+        loadingView.animation = LottieAnimation.named("tx_loading")
         loadingView.contentMode = .scaleAspectFit
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
@@ -140,9 +135,6 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 
             } else {
                 successView.isHidden = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-                    self.onShowAddressBook()
-                });
             }
             
         } else {
@@ -229,36 +221,6 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
         }))
         self.present(noticeAlert, animated: true)
     }
-    
-    func onShowAddressBook() {
-        if (recipientChain != nil && recipinetAddress?.isEmpty == false) {
-            if let existed = BaseData.instance.selectAllAddressBooks().filter({ $0.dpAddress == recipinetAddress && $0.chainName == recipientChain?.name }).first {
-                if (existed.memo != memo) {
-                    let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
-                    addressBookSheet.addressBook = existed
-                    addressBookSheet.memo = memo
-                    addressBookSheet.bookDelegate = self
-                    self.onStartSheet(addressBookSheet, 420)
-                    return
-                }
-            } 
-            
-            if (BaseData.instance.selectAllRefAddresses().filter { $0.bechAddress == recipinetAddress }.count == 0) {
-                let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
-                addressBookSheet.recipientChain = recipientChain
-                addressBookSheet.recipinetAddress = recipinetAddress
-                addressBookSheet.memo = memo
-                addressBookSheet.bookDelegate = self
-                self.onStartSheet(addressBookSheet, 420)
-                return
-            }
-        }
-    }
-    
-    func onAddressBookUpdated(_ result: Int?) {
-        onShowToast(NSLocalizedString("msg_addressbook_updated", comment: ""))
-    }
-    
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         self.presentingViewController?.presentingViewController?.dismiss(animated: true) {

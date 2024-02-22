@@ -1275,7 +1275,7 @@
 "tx_cosmwasm_execontract" = "Execute Contract";
 "tx_cosmwasm" = "Wasm";
 
-"tx_ethereum_evm" = "Ethereum Tx";
+"tx_ethereum_evm" = "Evm Tx";
 
 "tx_crescent_liquid_stake" = "Liquid Stake";
 "tx_crescent_liquid_unstake" = "Liquid Unstake";

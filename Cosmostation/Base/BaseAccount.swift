@@ -209,7 +209,7 @@ extension BaseAccount {
         allCosmosClassChains.sort {
             if ($0.tag == "cosmos118") { return true }
             if ($1.tag == "cosmos118") { return false }
-            return $0.allCoinUSDValue.compare($1.allCoinUSDValue).rawValue > 0 ? true : false
+            return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
         }
     }
 }
@@ -309,7 +309,7 @@ extension BaseAccount {
         allEvmClassChains.sort {
             if ($0.tag == "ethereum60") { return true }
             if ($1.tag == "ethereum60") { return false }
-            return $0.allCoinUSDValue.compare($1.allCoinUSDValue).rawValue > 0 ? true : false
+            return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
         }
     }
 }

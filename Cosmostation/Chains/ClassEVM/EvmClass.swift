@@ -164,7 +164,7 @@ extension EvmClass {
     func fetchAllErc20Balance(_ id: Int64) {
         let group = DispatchGroup()
         mintscanErc20Tokens.forEach { token in
-            if (token.isdefault == true) {
+            if (tag != "ethereum60" || token.isdefault == true) {
                 fetchErc20Balance(group, EthereumAddress.init(evmAddress)!, token)
             }
         }

@@ -1275,7 +1275,7 @@
 "tx_cosmwasm_execontract" = "컨트랙트 실행";
 "tx_cosmwasm" = "와즘";
 
-"tx_ethereum_evm" = "이더리움 Tx";
+"tx_ethereum_evm" = "Evm Tx";
 
 "tx_crescent_liquid_stake" = "유동성 스테이크";
 "tx_crescent_liquid_unstake" = "유동성 언스테이크";

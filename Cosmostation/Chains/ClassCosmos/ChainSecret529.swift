@@ -1,5 +1,5 @@
 //
-//  ChainSecre529.swift
+//  ChainSecret529.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/10/04.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainSecre529: CosmosClass  {
+class ChainSecret529: CosmosClass  {
     
     override init() {
         super.init()
