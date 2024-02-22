@@ -1,5 +1,5 @@
 //
-//  ChainKava_EVM.swift
+//  ChainKavaEVM.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2023/08/13.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainKava_EVM: EvmClass  {
+class ChainKavaEVM: EvmClass  {
     
     override init() {
         super.init()

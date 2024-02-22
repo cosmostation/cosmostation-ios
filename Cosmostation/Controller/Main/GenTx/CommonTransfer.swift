@@ -508,7 +508,7 @@ class CommonTransfer: BaseVC {
         view.isUserInteractionEnabled = true
         loadingView.isHidden = true
         if (txStyle == .WEB3_STYLE) {
-            guard let evmTx = evmTx else {
+            guard evmTx != nil else {
                 feeCardView.isHidden = true
                 errorCardView.isHidden = false
                 errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
@@ -591,12 +591,11 @@ extension CommonTransfer {
             var wTx: WriteTransaction?
             var value: BigUInt = 0
             
-            var feeAmount = NSDecimalNumber.zero
             if (sendType == .Only_EVM_ERC20) {
                 toAddress = EthereumAddress.init(fromHex: toSendMsToken.address!)
                 let erc20token = ERC20(web3: web3, provider: web3.provider, address: toAddress!)
                 value = 0
-                wTx = try! erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
+                wTx = try? erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
                 
             } else {
                 toAddress = recipientAddress
@@ -609,6 +608,11 @@ extension CommonTransfer {
                 options.gasLimit = .automatic
                 value = amount!
                 wTx = contract.write("fallback", parameters: [AnyObject](), extraData: Data(), transactionOptions: options)!
+            }
+            
+            if (wTx == nil) {
+                self.onUpdateFeeViewAfterSimul(nil)
+                return
             }
             
             if let estimateGas = try? wTx!.estimateGas(transactionOptions: .defaultOptions) {

@@ -187,7 +187,6 @@ extension EvmClass {
             let erc20token = ERC20(web3: self.getWeb3Connection()!, provider: self.getWeb3Connection()!.provider, address: contractAddress!)
             if let erc20Balance = try? erc20token.getBalance(account: accountEthAddr) {
                 tokenInfo.setAmount(String(erc20Balance))
-//                print("erc20Balance ", tokenInfo.symbol, "  ", erc20Balance)
                 group.leave()
             } else {
                 group.leave()
@@ -200,7 +199,13 @@ extension EvmClass {
 func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
-    result.append(ChainKava_EVM())
+//    result.append(ChainAltheaEVM())
+    result.append(ChainCantoEVM())
+    result.append(ChainEvmosEVM())
+    result.append(ChainHumansEVM())
+    result.append(ChainKavaEVM())
+    result.append(ChainOktEVM())
+    result.append(ChainXplaEVM())
     
     //Add cosmos chain id for ibc
     result.forEach { chain in
