@@ -122,7 +122,7 @@ class DeriveCell: UITableViewCell {
                 coinCntLabel.text = String(coinCnt) + " Coins"
                 coinCntLabel.isHidden = false
                 
-            } else if let oktChain = chain as? ChainOkt60Keccak {
+            } else if let oktChain = chain as? ChainOkt996Keccak {
                 let availableAmount = oktChain.lcdBalanceAmount(stakeDenom)
                 amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
                 denomLabel.text = stakeDenom.uppercased()

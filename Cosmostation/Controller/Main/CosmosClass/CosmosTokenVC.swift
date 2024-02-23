@@ -133,7 +133,7 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "Cw20 Tokens"
             view.cntLabel.text = String(mintscanCw20Tokens.count)
         } else {
-            if let okChain = selectedChain as? ChainOkt60Keccak {
+            if let okChain = selectedChain as? ChainOkt996Keccak {
                 view.titleLabel.text = "Kip20 Tokens"
             } else {
                 view.titleLabel.text = "Erc20 Tokens"

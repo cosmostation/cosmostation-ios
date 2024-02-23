@@ -41,7 +41,7 @@ class OkWithdraw: BaseVC {
     @IBOutlet weak var withdrawBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: ChainOkt60Keccak!
+    var selectedChain: ChainOkt996Keccak!
     var stakeDenom: String!
     var tokenInfo: JSON!
     var availableAmount = NSDecimalNumber.zero
@@ -59,7 +59,7 @@ class OkWithdraw: BaseVC {
         
         tokenInfo = selectedChain.lcdOktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
         let original_symbol = tokenInfo["original_symbol"].stringValue
-        toWithdrawAssetImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(original_symbol))
+        toWithdrawAssetImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(original_symbol))
         toWithdrawSymbolLabel.text = original_symbol.uppercased()
         availableAmount = selectedChain.lcdOktDepositAmount()
         
@@ -136,7 +136,7 @@ class OkWithdraw: BaseVC {
     }
     
     func onUpdateFeeView() {
-        feeSelectImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(stakeDenom))
+        feeSelectImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(stakeDenom))
         feeSelectLabel.text = stakeDenom.uppercased()
         
         let existCnt = selectedChain.lcdOktDeposits["validator_address"].arrayValue.count

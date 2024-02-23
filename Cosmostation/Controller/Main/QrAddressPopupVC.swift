@@ -17,6 +17,8 @@ class QrAddressPopupVC: BaseVC {
     @IBOutlet weak var tagLayer: UIStackView!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
+    @IBOutlet weak var keyTypeTag: UILabel!
+    
     
     var selectedChain: BaseChain!
     var toDpAddress = ""
@@ -50,6 +52,17 @@ class QrAddressPopupVC: BaseVC {
             } else {
                 hdPathLabel.text = ""
             }
+            
+            //for okt legacy 
+            if (selectedChain.tag == "okt996_Keccak") {
+                keyTypeTag.text = "ethsecp256k1"
+                keyTypeTag.isHidden = false
+                
+            } else if (selectedChain.tag == "okt996_Secp") {
+                keyTypeTag.text = "secp256k1"
+                keyTypeTag.isHidden = false
+            }
+            
         }
             
         if let qrImage = generateQrCode(toDpAddress) {

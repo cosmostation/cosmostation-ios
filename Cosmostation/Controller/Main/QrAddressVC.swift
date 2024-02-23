@@ -14,6 +14,7 @@ class QrAddressVC: BaseVC {
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
+    @IBOutlet weak var keyTypeTag: UILabel!
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressCardView: FixCardView!
     @IBOutlet weak var addressLabel: UILabel!
@@ -56,6 +57,16 @@ class QrAddressVC: BaseVC {
                 
             } else {
                 hdPathLabel.text = ""
+            }
+            
+            //for okt legacy
+            if (selectedChain.tag == "okt996_Keccak") {
+                keyTypeTag.text = "ethsecp256k1"
+                keyTypeTag.isHidden = false
+                
+            } else if (selectedChain.tag == "okt996_Secp") {
+                keyTypeTag.text = "secp256k1"
+                keyTypeTag.isHidden = false
             }
         }
         

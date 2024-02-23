@@ -89,10 +89,10 @@ class LegacyTransfer: BaseVC {
             }
             print("availableAmount ", availableAmount)
             
-        } else if let okChain = selectedChain as? ChainOkt60Keccak {
+        } else if let okChain = selectedChain as? ChainOkt996Keccak {
             tokenInfo = okChain.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
             let original_symbol = tokenInfo["original_symbol"].stringValue
-            toSendAssetImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(original_symbol))
+            toSendAssetImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(original_symbol))
             toSendSymbolLabel.text = original_symbol.uppercased()
             
             let available = okChain.lcdBalanceAmount(toSendDenom)
@@ -172,7 +172,7 @@ class LegacyTransfer: BaseVC {
                     toAssetValueLabel.isHidden = false
                 }
                 
-            } else if (selectedChain is ChainOkt60Keccak) {
+            } else if (selectedChain is ChainOkt996Keccak) {
                 toAssetDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
                 toAssetAmountLabel?.attributedText = WDP.dpAmount(toSendAmount.stringValue, toAssetAmountLabel!.font, 18)
                 toSendAssetHint.isHidden = true
@@ -218,7 +218,7 @@ class LegacyTransfer: BaseVC {
                 toAddressMasterLabel.text = recipientBechAddress
                 toAddressMasterLabel.isHidden = false
                 
-            } else if (selectedChain is ChainOkt60Keccak) {
+            } else if (selectedChain is ChainOkt996Keccak) {
                 toAddressMasterLabel.text = recipientEvmAddress
                 toAddressMasterLabel.isHidden = false
                 
@@ -262,8 +262,8 @@ class LegacyTransfer: BaseVC {
             feeDenomLabel.text = stakeDenom.uppercased()
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
-        } else if (selectedChain is ChainOkt60Keccak) {
-            feeSelectImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(stakeDenom))
+        } else if (selectedChain is ChainOkt996Keccak) {
+            feeSelectImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(stakeDenom))
             feeSelectLabel.text = stakeDenom.uppercased()
             
             let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
@@ -354,7 +354,7 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
                 return
             }
             
-        } else if (selectedChain is ChainOkt60Keccak) {
+        } else if (selectedChain is ChainOkt996Keccak) {
             if (WUtils.isValidBechAddress(selectedChain, addressScan)) {
                 userInputAddress = addressScan
                 recipientBechAddress = userInputAddress
@@ -396,7 +396,7 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
                         });
                     }
                     
-                } else if (selectedChain is ChainOkt60Keccak) {
+                } else if (selectedChain is ChainOkt996Keccak) {
                     if let response = try? await broadcastOktSendTx() {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             print("response ", response)

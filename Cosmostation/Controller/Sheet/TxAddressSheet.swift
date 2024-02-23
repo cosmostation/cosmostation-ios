@@ -158,13 +158,13 @@ class TxAddressSheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextViewDeleg
             }
         }
             
-        if (recipientChain is ChainOkt60Keccak) {
-            if (WUtils.isValidEvmAddress(userInput)) {
-                addressDelegate?.onInputedAddress(userInput!, nil)
-                dismiss(animated: true)
-                return
-            }
-        }
+//        if (recipientChain is ChainOkt60Keccak) {
+//            if (WUtils.isValidEvmAddress(userInput)) {
+//                addressDelegate?.onInputedAddress(userInput!, nil)
+//                dismiss(animated: true)
+//                return
+//            }
+//        }
         
         if (WUtils.isValidBechAddress(recipientChain, userInput)) {
             addressDelegate?.onInputedAddress(userInput!, nil)

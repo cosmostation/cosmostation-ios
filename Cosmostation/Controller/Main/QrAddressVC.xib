@@ -25,6 +25,7 @@
                 <outlet property="chainNameLabel" destination="Log-Tr-ulL" id="YHl-Cg-y1U"/>
                 <outlet property="evmCompatTag" destination="WdH-PN-TbZ" id="kuX-ev-dk7"/>
                 <outlet property="hdPathLabel" destination="Ox2-57-jxw" id="4He-Nx-7jD"/>
+                <outlet property="keyTypeTag" destination="qux-d4-7xh" id="xRx-4d-ZuL"/>
                 <outlet property="legacyTag" destination="aLh-WY-hHi" id="F10-Ql-3gg"/>
                 <outlet property="rqImgView" destination="Hq3-0z-VB0" id="yvl-lM-8Ds"/>
                 <outlet property="shareBtn" destination="UkY-bX-F9E" id="jeE-4q-0pY"/>
@@ -81,6 +82,23 @@
                                     </constraints>
                                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                     <color key="textColor" name="_color01"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="6"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qux-d4-7xh">
+                                    <rect key="frame" x="0.0" y="0.0" width="72" height="14"/>
+                                    <color key="backgroundColor" name="_color06"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="14" id="f4g-Kv-ucG"/>
+                                        <constraint firstAttribute="width" constant="72" id="kPF-NH-FgQ"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                    <color key="textColor" name="_color02"/>
                                     <nil key="highlightedColor"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

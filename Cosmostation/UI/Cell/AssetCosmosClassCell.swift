@@ -70,7 +70,7 @@ class AssetCosmosClassCell: UITableViewCell {
         if (baseChain is ChainBinanceBeacon) {
             bindBeaconAsset(baseChain)
             
-        } else if (baseChain is ChainOkt60Keccak) {
+        } else if (baseChain is ChainOkt996Keccak) {
             bindOktAsset(baseChain)
             
         } else if (baseChain is ChainNeutron) {
@@ -190,13 +190,13 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindOktAsset(_ baseChain: CosmosClass) {
-        if let oktChain = baseChain as? ChainOkt60Keccak {
+        if let oktChain = baseChain as? ChainOkt996Keccak {
             stakingTitle.text = "Deposited"
             unstakingTitle.text = "Withdrawing"
             
             let stakeDenom = baseChain.stakeDenom!
             let value = baseChain.allValue()
-            coinImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(stakeDenom))
+            coinImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(stakeDenom))
             symbolLabel.text = stakeDenom.uppercased()
             
             WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)

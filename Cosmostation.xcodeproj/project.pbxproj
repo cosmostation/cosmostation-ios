@@ -883,8 +883,6 @@
 		04CD244A2AD11D3400497EF5 /* LegacyTransfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CD24462AD11D3400497EF5 /* LegacyTransfer.xib */; };
 		04CD244C2AD125E600497EF5 /* ChainOkt996Secp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD244B2AD125E600497EF5 /* ChainOkt996Secp.swift */; };
 		04CD244D2AD125E600497EF5 /* ChainOkt996Secp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD244B2AD125E600497EF5 /* ChainOkt996Secp.swift */; };
-		04CD244F2AD1279900497EF5 /* ChainOkt60Keccak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD244E2AD1279900497EF5 /* ChainOkt60Keccak.swift */; };
-		04CD24502AD1279900497EF5 /* ChainOkt60Keccak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD244E2AD1279900497EF5 /* ChainOkt60Keccak.swift */; };
 		04CD24532AD1621800497EF5 /* TxAmountLegacySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD24512AD1621800497EF5 /* TxAmountLegacySheet.swift */; };
 		04CD24542AD1621800497EF5 /* TxAmountLegacySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CD24512AD1621800497EF5 /* TxAmountLegacySheet.swift */; };
 		04CD24552AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CD24522AD1621800497EF5 /* TxAmountLegacySheet.xib */; };
@@ -2242,7 +2240,6 @@
 		04CD24452AD11D3400497EF5 /* LegacyTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyTransfer.swift; sourceTree = "<group>"; };
 		04CD24462AD11D3400497EF5 /* LegacyTransfer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LegacyTransfer.xib; sourceTree = "<group>"; };
 		04CD244B2AD125E600497EF5 /* ChainOkt996Secp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOkt996Secp.swift; sourceTree = "<group>"; };
-		04CD244E2AD1279900497EF5 /* ChainOkt60Keccak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOkt60Keccak.swift; sourceTree = "<group>"; };
 		04CD24512AD1621800497EF5 /* TxAmountLegacySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAmountLegacySheet.swift; sourceTree = "<group>"; };
 		04CD24522AD1621800497EF5 /* TxAmountLegacySheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxAmountLegacySheet.xib; sourceTree = "<group>"; };
 		04CD245B2AD1CB4300497EF5 /* L_Tx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_Tx.swift; sourceTree = "<group>"; };
@@ -2924,7 +2921,6 @@
 				E17638512AA7642800904DB4 /* ChainBinanceBeacon.swift */,
 				04C6B9C92AAC91F900B02A95 /* ChainOkt996Keccak.swift */,
 				04CD244B2AD125E600497EF5 /* ChainOkt996Secp.swift */,
-				04CD244E2AD1279900497EF5 /* ChainOkt60Keccak.swift */,
 			);
 			path = ClassCosmos;
 			sourceTree = "<group>";
@@ -4701,7 +4697,6 @@
 				E1DF777C2AB75F830028BD51 /* CheckPrivateKeysVC.swift in Sources */,
 				047843DA2AC991B300462F1C /* injective_insurance_v1beta1_insurance.pb.swift in Sources */,
 				E122DB1E2A8A468D006D1E7B /* cosmos_group_module_v1_module.pb.swift in Sources */,
-				04CD24502AD1279900497EF5 /* ChainOkt60Keccak.swift in Sources */,
 				047843122AC9918700462F1C /* ethermint_types_v1_account.pb.swift in Sources */,
 				E122DBDC2A8A468E006D1E7B /* cosmos_evidence_module_v1_module.pb.swift in Sources */,
 				E122DAFE2A8A468D006D1E7B /* cosmos_group_v1_tx.grpc.swift in Sources */,
@@ -5427,7 +5422,6 @@
 				E1DF777B2AB75F830028BD51 /* CheckPrivateKeysVC.swift in Sources */,
 				047843D92AC991B300462F1C /* injective_insurance_v1beta1_insurance.pb.swift in Sources */,
 				E122DB1D2A8A468D006D1E7B /* cosmos_group_module_v1_module.pb.swift in Sources */,
-				04CD244F2AD1279900497EF5 /* ChainOkt60Keccak.swift in Sources */,
 				047843112AC9918700462F1C /* ethermint_types_v1_account.pb.swift in Sources */,
 				E122DBDB2A8A468E006D1E7B /* cosmos_evidence_module_v1_module.pb.swift in Sources */,
 				E122DAFD2A8A468D006D1E7B /* cosmos_group_v1_tx.grpc.swift in Sources */,

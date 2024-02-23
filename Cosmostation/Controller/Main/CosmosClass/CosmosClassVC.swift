@@ -79,8 +79,8 @@ class CosmosClassVC: BaseVC {
             selectedChain.fetchStakeData()
         }
         
-        if (selectedChain is ChainOkt60Keccak) {
-            (selectedChain as? ChainOkt60Keccak)?.fetchValidators()
+        if (selectedChain is ChainOkt996Keccak) {
+            (selectedChain as? ChainOkt996Keccak)?.fetchValidators()
         }
         
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
@@ -167,8 +167,7 @@ class CosmosClassVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain is ChainBinanceBeacon ||
-            selectedChain is ChainOkt60Keccak) {
+        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt996Keccak) {
             let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
             transfer.selectedChain = selectedChain
             transfer.toSendDenom = selectedChain.stakeDenom
@@ -261,13 +260,13 @@ class CosmosClassVC: BaseVC {
             return
         }
         let okDeposit = OkDeposit(nibName: "OkDeposit", bundle: nil)
-        okDeposit.selectedChain = selectedChain as? ChainOkt60Keccak
+        okDeposit.selectedChain = selectedChain as? ChainOkt996Keccak
         okDeposit.modalTransitionStyle = .coverVertical
         self.present(okDeposit, animated: true)
     }
     
     func onOkWithdrawTx() {
-        if let oktChain = selectedChain as? ChainOkt60Keccak {
+        if let oktChain = selectedChain as? ChainOkt996Keccak {
             if (oktChain.lcdOktDepositAmount().compare(NSDecimalNumber.zero).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_no_deposited_asset", comment: ""))
                 return
@@ -278,13 +277,13 @@ class CosmosClassVC: BaseVC {
             return
         }
         let okWithdraw = OkWithdraw(nibName: "OkWithdraw", bundle: nil)
-        okWithdraw.selectedChain = selectedChain as? ChainOkt60Keccak
+        okWithdraw.selectedChain = selectedChain as? ChainOkt996Keccak
         okWithdraw.modalTransitionStyle = .coverVertical
         self.present(okWithdraw, animated: true)
     }
     
     func onOkAddShareTx() {
-        if let oktChain = selectedChain as? ChainOkt60Keccak {
+        if let oktChain = selectedChain as? ChainOkt996Keccak {
             if (oktChain.lcdOktDepositAmount().compare(NSDecimalNumber.zero).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_no_deposited_asset", comment: ""))
                 return
@@ -295,7 +294,7 @@ class CosmosClassVC: BaseVC {
             return
         }
         let okAddShare = OkAddShare(nibName: "OkAddShare", bundle: nil)
-        okAddShare.selectedChain = selectedChain as? ChainOkt60Keccak
+        okAddShare.selectedChain = selectedChain as? ChainOkt996Keccak
         okAddShare.modalTransitionStyle = .coverVertical
         self.present(okAddShare, animated: true)
     }
@@ -363,7 +362,7 @@ class CosmosClassVC: BaseVC {
                 }
             }
             
-        } else if (selectedChain is ChainOkt60Keccak) {
+        } else if (selectedChain is ChainOkt996Keccak) {
             mainFab.addItem(title: "Select Validators", image: UIImage(named: "iconFabAddShare")) { _ in
                 self.onOkAddShareTx()
             }

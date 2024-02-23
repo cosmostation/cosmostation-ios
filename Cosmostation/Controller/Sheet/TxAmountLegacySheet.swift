@@ -59,7 +59,7 @@ class TxAmountLegacySheet: BaseVC, UITextFieldDelegate {
             availableDenom.text = tokenInfo["original_symbol"].stringValue.uppercased()
             availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 8)
             
-        }  else if (selectedChain is ChainOkt60Keccak) {
+        }  else if (selectedChain is ChainOkt996Keccak) {
             decimal = 18
             availableDenom.text = tokenInfo["original_symbol"].stringValue.uppercased()
             availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 18)

@@ -245,12 +245,12 @@ func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
 //    result.append(ChainAltheaEVM())
-    result.append(ChainCantoEVM())
-    result.append(ChainEvmosEVM())
-    result.append(ChainHumansEVM())
+//    result.append(ChainCantoEVM())
+//    result.append(ChainEvmosEVM())
+//    result.append(ChainHumansEVM())
     result.append(ChainKavaEVM())
     result.append(ChainOktEVM())
-    result.append(ChainXplaEVM())
+//    result.append(ChainXplaEVM())
     
     //Add cosmos chain id for ibc
     result.forEach { chain in

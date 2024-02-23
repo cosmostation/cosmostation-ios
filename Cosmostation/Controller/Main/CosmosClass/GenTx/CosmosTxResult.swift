@@ -77,7 +77,7 @@ class CosmosTxResult: BaseVC {
                     confirmBtn.isEnabled = true
                 }
                 
-            } else if (selectedChain is ChainOkt60Keccak) {
+            } else if (selectedChain is ChainOkt996Keccak) {
                 successMintscanBtn.setTitle("Check in Explorer", for: .normal)
                 failMintscanBtn.setTitle("Check in Explorer", for: .normal)
                 guard legacyResult != nil else {
@@ -236,7 +236,7 @@ class CosmosTxResult: BaseVC {
                 guard let url = BaseNetWork.getTxDetailUrl(selectedChain, legacyResult!["hash"].stringValue) else { return }
                 self.onShowSafariWeb(url)
                 
-            } else if (selectedChain is ChainOkt60Keccak) {
+            } else if (selectedChain is ChainOkt996Keccak) {
                 guard let url = BaseNetWork.getTxDetailUrl(selectedChain, legacyResult!["txhash"].stringValue) else { return }
                 self.onShowSafariWeb(url)
                 

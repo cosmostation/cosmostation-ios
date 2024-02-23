@@ -40,12 +40,9 @@ class SelectRefAddressCell: UITableViewCell {
             legacyTag.isHidden = chain.isDefault
         }
         let allEvm = ALLEVMCLASS()
-//        if let chain = allEvm.filter({ $0.tag == refAddress.chainTag }).first {
-//            evmCompatTag.isHidden = false
-//        }
-//        print("refAddress ", refAddress)
         evmCompatTag.isHidden = allEvm.filter({ $0.tag == refAddress.chainTag }).count <= 0
         masterAddressLabel.text = refAddress.bechAddress
+        masterAddressLabel.adjustsFontSizeToFitWidth = true
     }
     
     func onBindEvmRefAddress(_ toChain: BaseChain, _ refAddress: RefAddress) {
@@ -53,6 +50,7 @@ class SelectRefAddressCell: UITableViewCell {
             accountNameLabel.text = account.name
         }
         masterAddressLabel.text = refAddress.evmAddress
+        masterAddressLabel.adjustsFontSizeToFitWidth = true
     }
     
     
@@ -62,36 +60,11 @@ class SelectRefAddressCell: UITableViewCell {
         }
         let all = ALLCOSMOSCLASS()
         if let chain = all.filter({ $0.tag == refAddress.chainTag }).first {
-//            if (chain.evmCompatible) {
-//                evmCompatTag.isHidden = false
-//                
-//            } else 
-            
-            if (!chain.isDefault) {
-                legacyTag.isHidden = false
-            }
-            
-            if (recipientChain is ChainOkt60Keccak) {
-                masterAddressLabel.text = refAddress.evmAddress
-                slaveAddressabel.text = "(" + refAddress.bechAddress + ")"
-                slaveAddressabel.isHidden = false
-                
-            } 
-            
-//            else if (chain.evmCompatible) {
-//                masterAddressLabel.text = refAddress.bechAddress
-//                slaveAddressabel.text = "(" + refAddress.evmAddress + ")"
-//                slaveAddressabel.isHidden = false
-//                
-//            } 
-            
-            else {
-                masterAddressLabel.text = refAddress.bechAddress
-                slaveAddressabel.isHidden = true
-            }
+            legacyTag.isHidden = !chain.isDefault
         }
-        
-
+        masterAddressLabel.text = refAddress.bechAddress
+        masterAddressLabel.adjustsFontSizeToFitWidth = true
+        slaveAddressabel.isHidden = true
     }
     
     func onBindCosmosEvmRefAddress(_ recipientChain: CosmosClass, _ refAddress: RefAddress) {
@@ -101,14 +74,10 @@ class SelectRefAddressCell: UITableViewCell {
         
         let all = ALLCOSMOSCLASS()
         if let chain = all.filter({ $0.tag == refAddress.chainTag }).first {
-//            if (chain.evmCompatible) {
-//                evmCompatTag.isHidden = false
-//            } else 
-            if (!chain.isDefault) {
-                legacyTag.isHidden = false
-            }
+            legacyTag.isHidden = !chain.isDefault
         }
         masterAddressLabel.text = refAddress.evmAddress
+        masterAddressLabel.adjustsFontSizeToFitWidth = true
         slaveAddressabel.text = "(" + refAddress.bechAddress + ")"
         slaveAddressabel.isHidden = false
         

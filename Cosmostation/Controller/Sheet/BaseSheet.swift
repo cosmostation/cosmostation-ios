@@ -639,22 +639,22 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
-            if (indexPath.section == 0) {
-                if (targetChain is ChainOkt60Keccak) {
-                    let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].evmAddress]
-                    sheetDelegate?.onSelectedSheet(sheetType, result)
-                } else {
-                    let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].bechAddress]
-                    sheetDelegate?.onSelectedSheet(sheetType, result)
-                }
-            } else {
-                let result: [String : Any] = ["index" : indexPath.row, "address" : addressBook[indexPath.row].dpAddress, "memo" : addressBook[indexPath.row].memo]
-                sheetDelegate?.onSelectedSheet(sheetType, result)
-            }
+//            if (indexPath.section == 0) {
+//                if (targetChain is ChainOkt60Keccak) {
+//                    let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].evmAddress]
+//                    sheetDelegate?.onSelectedSheet(sheetType, result)
+//                } else {
+//                    let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].bechAddress]
+//                    sheetDelegate?.onSelectedSheet(sheetType, result)
+//                }
+//            } else {
+//                let result: [String : Any] = ["index" : indexPath.row, "address" : addressBook[indexPath.row].dpAddress, "memo" : addressBook[indexPath.row].memo]
+//                sheetDelegate?.onSelectedSheet(sheetType, result)
+//            }
             
         } else if (sheetType == .SelectCosmosRecipientEvmAddress) {
-            let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].evmAddress]
-            sheetDelegate?.onSelectedSheet(sheetType, result)
+//            let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].evmAddress]
+//            sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectBepRecipientAddress) {
             let chain = cosmosChainList[indexPath.row]

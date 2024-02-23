@@ -33,7 +33,7 @@ class ManageChainCell: UITableViewCell {
         if (chain is ChainBinanceBeacon) {
             typeLabel.text = "LCD"
             endpointLabel.text = BNB_BEACON_LCD
-        } else if (chain is ChainOkt60Keccak) {
+        } else if (chain is ChainOkt996Keccak) {
             typeLabel.text = "LCD"
             endpointLabel.text = OKT_LCD
         } else {
