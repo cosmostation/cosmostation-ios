@@ -335,6 +335,43 @@ extension BaseAccount {
 
 extension BaseAccount {
     
+    func initKeysforSwap() async -> [CosmosClass] {
+        var result = [CosmosClass]()
+        let keychain = BaseData.instance.getKeyChain()
+        if (type == .withMnemonic) {
+            ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
+                result.append(chain)
+            }
+            ALLEVMCLASS().filter({ $0.isDefault == true && $0.supportCosmos == true }).forEach { chain in
+                result.append(chain)
+            }
+            if let secureData = try? keychain.getString(uuid.sha1()),
+               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
+                result.forEach { chain in
+                    if (chain.bechAddress.isEmpty) {
+                        chain.setInfoWithSeed(seed, lastHDPath)
+                    }
+                }
+            }
+            
+        } else if (type == .onlyPrivateKey) {
+            ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
+                result.append(chain)
+            }
+            ALLEVMCLASS().filter({ $0.isDefault == true && $0.supportCosmos == true }).forEach { chain in
+                result.append(chain)
+            }
+            if let secureKey = try? keychain.getString(uuid.sha1()) {
+                result.forEach { chain in
+                    if (chain.bechAddress.isEmpty) {
+                        chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                    }
+                }
+            }
+        }
+        return result
+    }
+    
     func initOnyKeyData() async -> [CosmosClass] {
         var result = [CosmosClass]()
         let keychain = BaseData.instance.getKeyChain()
