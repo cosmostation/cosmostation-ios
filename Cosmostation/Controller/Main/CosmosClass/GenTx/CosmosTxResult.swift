@@ -224,7 +224,9 @@ class CosmosTxResult: BaseVC {
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         self.presentingViewController?.presentingViewController?.dismiss(animated: true) {
-            self.selectedChain.fetchData(self.baseAccount.id)
+            DispatchQueue.global().async {
+                self.selectedChain.fetchData(self.baseAccount.id)
+            }
         }
     }
     

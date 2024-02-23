@@ -86,7 +86,9 @@ class CosmosCoinVC: BaseVC {
         if (selectedChain.fetched == false) {
             refresher.endRefreshing()
         } else {
-            selectedChain.fetchData(baseAccount.id)
+            DispatchQueue.global().async {
+                self.selectedChain.fetchData(self.baseAccount.id)
+            }
         }
     }
     
