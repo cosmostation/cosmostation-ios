@@ -32,8 +32,8 @@ class ChainHumansEVM: EvmClass  {
         validatorPrefix = "humanvaloper"
         
         grpcHost = "grpc-humans.cosmostation.io"
-//        rpcURL = "https://rpc-humans-app.cosmostation.io"
-        rpcURL = "https://evm.humans.posthuman.digital"
+        rpcURL = "https://rpc-humans-evm.cosmostation.io"
+//        rpcURL = "https://evm.humans.posthuman.digital"
         explorerURL = "https://www.mintscan.io/humans/"
         addressURL = explorerURL + "address/%@"
         txURL = explorerURL + "tx/%@"

@@ -62,13 +62,6 @@ class EvmClass: CosmosClass {
             
             let channel = getConnection()
             fetchAuth(group, channel)
-            fetchBalance(group, channel)
-            if (self.supportStaking) {
-                fetchDelegation(group, channel)
-                fetchUnbondings(group, channel)
-                fetchRewards(group, channel)
-                fetchCommission(group, channel)
-            }
             
             group.notify(queue: .main) {
                 try? channel.close()

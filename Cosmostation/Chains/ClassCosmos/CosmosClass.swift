@@ -72,13 +72,7 @@ class CosmosClass: BaseChain {
         
         let channel = getConnection()
         fetchAuth(group, channel)
-        fetchBalance(group, channel)
-        if (self.supportStaking) {
-            fetchDelegation(group, channel)
-            fetchUnbondings(group, channel)
-            fetchRewards(group, channel)
-            fetchCommission(group, channel)
-        }
+        
         group.notify(queue: .main) {
             try? channel.close()
             WUtils.onParseVestingAccount(self)
@@ -384,6 +378,13 @@ extension CosmosClass {
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = bechAddress }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosAuth = response.account
+            fetchBalance(group, channel)
+            if (self.supportStaking) {
+                fetchDelegation(group, channel)
+                fetchUnbondings(group, channel)
+                fetchRewards(group, channel)
+                fetchCommission(group, channel)
+            }
             group.leave()
         } else {
             group.leave()
@@ -698,7 +699,7 @@ extension CosmosClass {
     
     
     func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+        let group = PlatformSupport.makeEventLoopGroup(loopCount: 4)
         return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: getGrpc().host, port: getGrpc().port)
     }
     

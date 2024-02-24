@@ -148,6 +148,10 @@ class ChainSelectVC: BaseVC {
                 self.loadingView.isHidden = true
             }
         }
+        
+//        searchEvmChains.filter { $0.fetched == false }.forEach { chain in
+//            print("chain ", chain.tag)
+//        }
     }
     
     
