@@ -23,7 +23,7 @@ public class WUtils {
             result.append(TOKEN_HTLC_BINANCE_XRPB)
             result.append(TOKEN_HTLC_BINANCE_BUSD)
             
-        } else if (chain.tag.starts(with: "Kava")) {
+        } else if (chain.tag.starts(with: "kava")) {
             result.append(TOKEN_HTLC_KAVA_BNB)
             result.append(TOKEN_HTLC_KAVA_BTCB)
             result.append(TOKEN_HTLC_KAVA_XRPB)
@@ -34,12 +34,13 @@ public class WUtils {
     }
     
     static func isHtlcSwappableCoin(_ chain: BaseChain, _ denom: String?) -> Bool {
+        print("chain ", chain.tag, "   ", denom)
         if (chain is ChainBinanceBeacon) {
             if (denom == TOKEN_HTLC_BINANCE_BNB) { return true }
             if (denom == TOKEN_HTLC_BINANCE_BTCB) { return true }
             if (denom == TOKEN_HTLC_BINANCE_XRPB) { return true }
             if (denom == TOKEN_HTLC_BINANCE_BUSD) { return true }
-        }  else if (chain.tag.starts(with: "Kava")) {
+        }  else if (chain.tag.starts(with: "kava")) {
             if (denom == TOKEN_HTLC_KAVA_BNB) { return true }
             if (denom == TOKEN_HTLC_KAVA_BTCB) { return true }
             if (denom == TOKEN_HTLC_KAVA_XRPB) { return true }

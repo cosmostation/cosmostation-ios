@@ -291,6 +291,10 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if (selectedChain.isTxFeePayable() == false) {
+//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+//            return
+//        }
         
         if (selectedChain is ChainBinanceBeacon) {
             let sendDenom = lcdBalances[indexPath.row]["symbol"].stringValue
@@ -325,10 +329,11 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
                 return
                 
             } else if (indexPath.section == 2) {
-                if (selectedChain.tag.starts(with: "Kava")) {
+                if (selectedChain.tag.starts(with: "kava") == true) {
                     let sendDenom = bridgedCoins[indexPath.row].denom
                     if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
                         onBepSelectDialog(.Only_Cosmos_Coin, sendDenom)
+                        return
                     } else {
                         onStartTransferVC(.Only_Cosmos_Coin, sendDenom)
                         return
@@ -340,48 +345,6 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        
-        
-        
-        
-        /*
-        if (selectedChain.isTxFeePayable() == false) {
-            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
-        }
-        if (selectedChain is ChainBinanceBeacon) {
-            let sendDenom = lcdBalances[indexPath.row]["symbol"].stringValue
-            if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
-                onBepSelectDialog(sendDenom)
-            } else{
-                onStartLegacyTransferVC(lcdBalances[indexPath.row]["symbol"].stringValue)
-            }
-            return
-            
-        } else if (selectedChain is ChainOkt996Keccak) {
-            onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
-            return
-            
-        } else {
-            if (indexPath.section == 0) {
-                onStartTransferVC(getCoinBySection(indexPath)?.denom ?? selectedChain.stakeDenom)
-            } else if (indexPath.section == 1) {
-                onStartTransferVC(ibcCoins[indexPath.row].denom)
-            } else if (indexPath.section == 2) {
-                if (selectedChain is ChainKava60) {
-                    let sendDenom = bridgedCoins[indexPath.row].denom
-                    if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
-                        onBepSelectDialog(sendDenom)
-                    } else {
-                        onStartTransferVC(sendDenom)
-                    }
-                    
-                } else {
-                    onStartTransferVC(bridgedCoins[indexPath.row].denom)
-                }
-            }
-        }
-         */
     }
     
     func getCoinBySection(_ indexPath: IndexPath) -> Cosmos_Base_V1beta1_Coin? {
