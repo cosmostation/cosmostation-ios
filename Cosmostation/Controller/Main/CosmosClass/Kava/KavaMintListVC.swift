@@ -18,7 +18,7 @@ class KavaMintListVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: ChainKava60!
+    var selectedChain: CosmosClass!
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var cdpParam: Kava_Cdp_V1beta1_Params?
     var myCollateralParamList = [Kava_Cdp_V1beta1_CollateralParam]()

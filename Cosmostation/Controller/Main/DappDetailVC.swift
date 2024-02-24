@@ -407,7 +407,7 @@ class DappDetailVC: BaseVC {
         var sig: Data?
         var pubkey: JSON?
         var type: String?
-        if (self.selectedChain is ChainEvmos || self.selectedChain is ChainXplaKeccak256 || self.selectedChain is ChainCanto) {
+        if (self.selectedChain is ChainEvmosEVM || self.selectedChain is ChainXplaEVM || self.selectedChain is ChainCantoEVM) {
             sig = try? ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: signData), privateKey: privateKey)
             type = ETHERMINT_KEY_TYPE_PUBLIC
             

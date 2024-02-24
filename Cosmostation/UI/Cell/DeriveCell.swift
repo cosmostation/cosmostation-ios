@@ -39,12 +39,52 @@ class DeriveCell: UITableViewCell {
         loadingLabel.isHidden = false
         amountLabel.isHidden = true
         denomLabel.isHidden = true
+        denomLabel.textColor = .color01
         coinCntLabel.isHidden = true
         reposeErrorLabel.isHidden = true
     }
     
+    func bindDeriveEvmClassChain(_ account: BaseAccount, _ chain: EvmClass, _ selectedList: [String]) {
+        logoImg1.image =  UIImage.init(named: chain.logo1)
+        logoImg2.image =  UIImage.init(named: chain.logo2)
+        nameLabel.text = chain.name.uppercased()
+        
+        if (selectedList.contains(chain.tag)) {
+            rootView.layer.borderWidth = 1.0
+            rootView.layer.borderColor = UIColor.white.cgColor
+        } else {
+            rootView.layer.borderWidth = 0.5
+            rootView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
+        }
+        if (account.type == .withMnemonic) {
+            hdPathLabel.text = chain.getHDPath(account.lastHDPath)
+        } else {
+            hdPathLabel.text = chain.evmAddress
+        }
+        
+        if (chain.fetched) {
+            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            loadingLabel.isHidden = true
+            
+            if let stakeDenom = chain.stakeDenom, 
+                let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+                WDP.dpCoin(msAsset, chain.evmBalances, nil, denomLabel, amountLabel, msAsset.decimals)
+            } else {
+                let dpAmount = chain.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
+                denomLabel.text = chain.coinSymbol
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
+            }
+            denomLabel.isHidden = false
+            amountLabel.isHidden = false
+            
+        } else {
+            loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
+            loadingLabel.isHidden = false
+        }
+    }
     
-    func bindCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass, _ selectedList: [String]) {
+    
+    func bindDeriveCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass, _ selectedList: [String]) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
@@ -59,21 +99,10 @@ class DeriveCell: UITableViewCell {
         
         if (account.type == .withMnemonic) {
             hdPathLabel.text = chain.getHDPath(account.lastHDPath)
-            if (chain.evmCompatible) {
-                evmCompatTag.isHidden = false
-            } else if (!chain.isDefault) {
-                legacyTag.isHidden = false
-            }
+            legacyTag.isHidden = chain.isDefault
             
         } else {
-            if (chain.evmCompatible) {
-                evmCompatTag.isHidden = false
-            }
-            if (chain is ChainOkt60Keccak || chain.tag == "kava60" || chain.tag == "althea60" || chain.tag == "xplaKeccak256") {
-                hdPathLabel.text = chain.evmAddress
-            } else {
-                hdPathLabel.text = chain.bechAddress
-            }
+            hdPathLabel.text = chain.bechAddress
         }
         
         if (chain.fetched) {
@@ -93,7 +122,7 @@ class DeriveCell: UITableViewCell {
                 coinCntLabel.text = String(coinCnt) + " Coins"
                 coinCntLabel.isHidden = false
                 
-            } else if let oktChain = chain as? ChainOkt60Keccak {
+            } else if let oktChain = chain as? ChainOkt996Keccak {
                 let availableAmount = oktChain.lcdBalanceAmount(stakeDenom)
                 amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
                 denomLabel.text = stakeDenom.uppercased()

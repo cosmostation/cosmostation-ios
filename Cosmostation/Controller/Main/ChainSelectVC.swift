@@ -79,11 +79,13 @@ class ChainSelectVC: BaseVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -110,6 +112,16 @@ class ChainSelectVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
+        onUpdateRow(tag)
+        
+    }
+    
+    @objc func onFetchTokenDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        onUpdateRow(tag)
+    }
+    
+    func onUpdateRow(_ tag: String) {
         for i in 0..<searchEvmChains.count {
             if (searchEvmChains[i].tag == tag) {
                 DispatchQueue.main.async {
@@ -137,6 +149,8 @@ class ChainSelectVC: BaseVC {
             }
         }
     }
+    
+    
     
     @IBAction func onClickValuable(_ sender: SecButton) {
         baseAccount.reSortEvmChains()
@@ -187,7 +201,7 @@ extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource, UISearchBar
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         view.rootView.backgroundColor = UIColor.colorBg
         if (section == 0) {
-            view.titleLabel.text = "Ethereum Class"
+            view.titleLabel.text = "Evm Class"
             view.cntLabel.text = String(baseAccount.allEvmClassChains.count)
         } else if (section == 1) {
             view.titleLabel.text = "Cosmos Class"

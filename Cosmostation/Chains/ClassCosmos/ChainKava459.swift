@@ -8,33 +8,34 @@
 
 import Foundation
 
-class ChainKava459: ChainKava60  {
+class ChainKava459: CosmosClass  {
     
     override init() {
         super.init()
         
+        isDefault = false
+        name = "Kava"
         tag = "kava459"
+        logo1 = "chainKava"
+        logo2 = "chainKava2"
+        apiName = "kava"
+        stakeDenom = "ukava"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/459'/0'/0/X")
-        evmCompatible = false
-        supportErc20 = false
-    }
-    
-    override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
-        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
-        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
-        if (supportStaking) {
-            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
-        }
-    }
-    
-    override func setInfoWithPrivateKey(_ priKey: Data) {
-        privateKey = priKey
-        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
-        if (supportStaking) {
-            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
-        }
+        bechAccountPrefix = "kava"
+        validatorPrefix = "kavavaloper"
+        
+        grpcHost = "grpc-kava.cosmostation.io"
     }
 }
+
+let KAVA_MAIN_DENOM = "ukava"
+let KAVA_HARD_DENOM = "hard"
+let KAVA_USDX_DENOM = "usdx"
+let KAVA_SWAP_DENOM = "swp"
+
+let KAVA_LCD = "https://lcd-kava.cosmostation.io/"
+let KAVA_BASE_FEE = "12500"
+
+let KAVA_CDP_IMG_URL        = ResourceBase + "kava/module/mint/";
+let KAVA_HARD_POOL_IMG_URL  = ResourceBase + "kava/module/lend/";

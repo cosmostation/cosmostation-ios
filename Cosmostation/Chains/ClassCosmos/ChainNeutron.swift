@@ -15,8 +15,6 @@ import SwiftyJSON
 
 class ChainNeutron: CosmosClass  {
     
-//    lazy var vaultsList = [JSON]()
-//    lazy var daosList = [JSON]()
     var vaultsList: [JSON]?
     var daosList: [JSON]?
     var neutronDeposited = NSDecimalNumber.zero
@@ -40,31 +38,27 @@ class ChainNeutron: CosmosClass  {
         grpcHost = "grpc-neutron.cosmostation.io"
     }
     
-    override func fetchData(_ id: Int64) async {
-        if let rawParam = try? await self.fetchChainParam() {
-            mintscanChainParam = rawParam
-            vaultsList = getChainParam()["vaults"].arrayValue
-            daosList = getChainParam()["daos"].arrayValue
-        }
-        fetchGrpcData(id)
-    }
-    
-    override func fetchPropertyData(_ channel: ClientConnection, _ id: Int64) {
-        
+    override func fetchData(_ id: Int64) {
         let group = DispatchGroup()
+        fetchChainParam2(group)
         
+        let channel = getConnection()
         fetchBalance(group, channel)
         fetchNeutronVesting(group, channel)
         fetchVaultDeposit(group, channel)
         
         group.notify(queue: .main) {
             try? channel.close()
+            
+            self.vaultsList = self.getChainParam()["vaults"].arrayValue
+            self.daosList = self.getChainParam()["daos"].arrayValue
+            
             WUtils.onParseVestingAccount(self)
             self.fetched = true
             self.allCoinValue = self.allCoinValue()
             self.allCoinUSDValue = self.allCoinValue(true)
             
-            BaseData.instance.updateRefAddressesMain(
+            BaseData.instance.updateRefAddressesCoinValue(
                 RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                            nil, self.cosmosBalances?.count))

@@ -90,10 +90,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
 //        print("ref ", ref.count)
 //        
 //        ref.forEach { refAddress in
-//            print("refAddress ", refAddress.chainTag, "  ", refAddress.dpAddress)
+//            print("refAddress ", refAddress.chainTag, "  ", refAddress.bechAddress , "  ", refAddress.evmAddress)
 //        }
-        
- 
     }
     
     func updateTitle() {
@@ -170,7 +168,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectUnbondingAction) {
             sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
             
-        } else if (sheetType == .SelectFeeCoin) {
+        } else if (sheetType == .SelectFeeDenom) {
             sheetTitle.text = NSLocalizedString("str_select_coin_for_fee", comment: "")
             
         } else if (sheetType == .SelectValidator) {
@@ -192,12 +190,13 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
             sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
-            BaseData.instance.selectAllRefAddresses().forEach { refAddress in
-                if (refAddress.bechAddress.starts(with: targetChain.bechAccountPrefix! + "1") &&
-                    refAddress.bechAddress != senderAddress) {
-                    refAddresses.append(refAddress)
+            BaseData.instance.selectAllRefAddresses().filter {
+                $0.bechAddress.starts(with: targetChain.bechAccountPrefix! + "1") &&
+                $0.bechAddress != senderAddress }.forEach { refAddress in
+                    if (refAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
+                        refAddresses.append(refAddress)
+                    }
                 }
-            }
             refAddresses.sort {
                 if let account0 = BaseData.instance.selectAccount($0.accountId),
                    let account1 = BaseData.instance.selectAccount($1.accountId) {
@@ -206,27 +205,11 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                 return false
             }
             
-            BaseData.instance.selectAllAddressBooks().forEach { book in
-                if (book.chainName == targetChain.name &&
-                    book.dpAddress != senderAddress) {
+            BaseData.instance.selectAllAddressBooks().filter { 
+                $0.dpAddress.starts(with: targetChain.bechAccountPrefix! + "1") &&
+                $0.dpAddress != senderAddress }.forEach { book in
                     addressBook.append(book)
                 }
-            }
-            
-        } else if (sheetType == .SelectCosmosRecipientEvmAddress) {
-            sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
-            BaseData.instance.selectAllRefAddresses().forEach { refAddress in
-                if (refAddress.chainTag == targetChain.tag && refAddress.bechAddress != senderAddress) {
-                    refAddresses.append(refAddress)
-                }
-            }
-            refAddresses.sort {
-                if let account0 = BaseData.instance.selectAccount($0.accountId),
-                   let account1 = BaseData.instance.selectAccount($1.accountId) {
-                    return account0.order < account1.order
-                }
-                return false
-            }
             
         } else if (sheetType == .SelectCosmosNameServiceAddress) {
             sheetTitle.text = String(format: NSLocalizedString("title_select_nameservice", comment: ""), nameservices[0].name ?? "")
@@ -252,26 +235,6 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectBuyCrypto) {
             sheetTitle.text = NSLocalizedString("title_buy_crypto", comment: "")
             
-        } else if (sheetType == .SelectEvmRecipientAddress) {
-            sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
-            BaseData.instance.selectAllRefAddresses().forEach { refAddress in
-                if (refAddress.chainTag == targetEvmChain.tag && refAddress.evmAddress != senderAddress) {
-                    refAddresses.append(refAddress)
-                }
-            }
-            refAddresses.sort {
-                if let account0 = BaseData.instance.selectAccount($0.accountId),
-                   let account1 = BaseData.instance.selectAccount($1.accountId) {
-                    return account0.order < account1.order
-                }
-                return false
-            }
-            
-            BaseData.instance.selectAllAddressBooks().forEach { book in
-                if (book.chainName == targetEvmChain.name && book.dpAddress != senderAddress) {
-                    addressBook.append(book)
-                }
-            }
         }
     }
     
@@ -302,7 +265,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
 extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (sheetType == .SelectCosmosRecipientBechAddress || sheetType == .SelectCosmosRecipientEvmAddress || sheetType == .SelectEvmRecipientAddress) {
+        if (sheetType == .SelectCosmosRecipientBechAddress) {
             return 2
         }
         return 1
@@ -310,7 +273,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseSheetHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (sheetType == .SelectCosmosRecipientBechAddress || sheetType == .SelectCosmosRecipientEvmAddress || sheetType == .SelectEvmRecipientAddress) {
+        if (sheetType == .SelectCosmosRecipientBechAddress) {
             if (section == 0) {
                 view.titleLabel.text = "My Account"
                 view.cntLabel.text = String(refAddresses.count)
@@ -323,7 +286,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (sheetType == .SelectCosmosRecipientBechAddress || sheetType == .SelectCosmosRecipientEvmAddress || sheetType == .SelectEvmRecipientAddress) {
+        if (sheetType == .SelectCosmosRecipientBechAddress) {
             if (section == 0) {
                 return (refAddresses.count > 0) ? 40 : 0
             } else if (section == 1) {
@@ -376,7 +339,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectUnbondingAction) {
             return 1
             
-        } else if (sheetType == .SelectFeeCoin) {
+        } else if (sheetType == .SelectFeeDenom) {
             return feeDatas.count
             
         } else if (sheetType == .SelectValidator) {
@@ -388,7 +351,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectCosmosRecipientChain) {
             return cosmosChainList.count
             
-        } else if (sheetType == .SelectCosmosRecipientBechAddress || sheetType == .SelectCosmosRecipientEvmAddress || sheetType == .SelectEvmRecipientAddress) {
+        } else if (sheetType == .SelectCosmosRecipientBechAddress) {
             if (section == 0) {
                 return refAddresses.count
             } else {
@@ -494,7 +457,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindUndelegate(indexPath.row)
             return cell!
             
-        } else if (sheetType == .SelectFeeCoin) {
+        } else if (sheetType == .SelectFeeDenom) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectFeeCoinCell") as? SelectFeeCoinCell
             cell?.onBindFeeCoin(targetChain, feeDatas[indexPath.row])
             return cell!
@@ -517,22 +480,13 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
             if (indexPath.section == 0) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRefAddressCell") as? SelectRefAddressCell
-                cell?.onBindCosmosRefAddress(targetChain, refAddresses[indexPath.row])
+                cell?.onBindBechRefAddress(targetChain, refAddresses[indexPath.row])
                 return cell!
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAddressBookCell") as? SelectAddressBookCell
-                cell?.onBindCosmosAddressBook(targetChain, addressBook[indexPath.row])
+                cell?.onBindBechAddressBook(targetChain, addressBook[indexPath.row])
                 return cell!
             }
-            
-        } else if (sheetType == .SelectCosmosRecipientEvmAddress) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRefAddressCell") as? SelectRefAddressCell
-            if (indexPath.section == 0) {
-                cell?.onBindCosmosEvmRefAddress(targetChain, refAddresses[indexPath.row])
-            } else {
-                
-            }
-            return cell!
             
         } else if (sheetType == .SelectCosmosNameServiceAddress) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectNameServiceCell") as? SelectNameServiceCell
@@ -572,20 +526,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectBuyCrypto) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseImgSheetCell") as? BaseImgSheetCell
             cell?.onBindBuyCrypto(indexPath.row)
-
             return cell!
-            
-        } else if (sheetType == .SelectEvmRecipientAddress) {
-            if (indexPath.section == 0) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRefAddressCell") as? SelectRefAddressCell
-                cell?.onBindEvmRefAddress(refAddresses[indexPath.row])
-                return cell!
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAddressBookCell") as? SelectAddressBookCell
-                cell?.onBindEvmAddressBook(addressBook[indexPath.row])
-                return cell!
-            }
-            
         }
         return UITableViewCell()
     }
@@ -640,21 +581,12 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
             if (indexPath.section == 0) {
-                if (targetChain is ChainOkt60Keccak) {
-                    let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].evmAddress]
-                    sheetDelegate?.onSelectedSheet(sheetType, result)
-                } else {
-                    let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].bechAddress]
-                    sheetDelegate?.onSelectedSheet(sheetType, result)
-                }
+                let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].bechAddress]
+                sheetDelegate?.onSelectedSheet(sheetType, result)
             } else {
                 let result: [String : Any] = ["index" : indexPath.row, "address" : addressBook[indexPath.row].dpAddress, "memo" : addressBook[indexPath.row].memo]
                 sheetDelegate?.onSelectedSheet(sheetType, result)
             }
-            
-        } else if (sheetType == .SelectCosmosRecipientEvmAddress) {
-            let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].evmAddress]
-            sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectBepRecipientAddress) {
             let chain = cosmosChainList[indexPath.row]
@@ -693,15 +625,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "targetCoin" : earnCoin!]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
-        }  else if (sheetType == .SelectEvmRecipientAddress) {
-            if (indexPath.section == 0) {
-                let result: [String : Any] = ["index" : indexPath.row, "address" : refAddresses[indexPath.row].evmAddress]
-                sheetDelegate?.onSelectedSheet(sheetType, result)
-            } else {
-                let result: [String : Any] = ["index" : indexPath.row, "address" : addressBook[indexPath.row].dpAddress]
-                sheetDelegate?.onSelectedSheet(sheetType, result)
-            }
-            
         } else {
             let result: [String : Any] = ["index" : indexPath.row]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -737,14 +660,13 @@ public enum SheetType: Int {
     case SelectDelegatedAction = 31
     case SelectUnbondingAction = 32
     
-    case SelectFeeCoin = 41
+    case SelectFeeDenom = 41
     case SelectValidator = 42
     case SelectUnStakeValidator = 43
     case SelectCosmosRecipientChain = 44
     case SelectCosmosRecipientBechAddress = 45
-    case SelectCosmosRecipientEvmAddress = 46
-    case SelectCosmosNameServiceAddress = 47
-    case SelectBepRecipientAddress = 48
+    case SelectCosmosNameServiceAddress = 46
+    case SelectBepRecipientAddress = 47
     
     case SelectNeutronVault = 51
     
@@ -755,6 +677,4 @@ public enum SheetType: Int {
     
     
     case SelectBuyCrypto = 71
-    
-    case SelectEvmRecipientAddress = 81
 }

@@ -150,6 +150,7 @@
 "str_total_fee" = "Total Tx Fee";
 "str_fixed" = "Fixed";
 "str_average" = "Average";
+"str_high" = "High";
 "str_zero" = "Zero";
 "str_low" = "Low";
 "str_tiny" = "Tiny";
@@ -189,6 +190,7 @@
 "str_my_unbondings" = "My Unstakings";
 "str_start_vote" = "Start Vote";
 "str_transfer_asset" = "Asset Send";
+"str_send_asset" = "Send %@";
 "str_ibc_transfer_asset" = "IBC Asset Send";
 "str_create_another_account" = "Create Another Account";
 "str_delete" = "Delete";
@@ -200,6 +202,8 @@
 "str_claim_all" = "Claim All";
 "str_big_loss" = "자산 손실";
 "str_big_loss_msg" = "If you proceed with the currently selected swap, significant property damage is expected.\n\nPlease check the expected input and output values and decide carefully.";
+"str_memo_optional" = "Memo (Optional)";
+"str_tx_result" = "Tx Result";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -299,6 +303,10 @@
 "str_restore_wallets" = "Restore Wallets";
 "str_deposit" = "Deposit";
 "str_withdraw" = "Withdraw";
+"str_copy_evm_address" = "Copy Evm style address";
+"str_share_evm_address" = "Share Evm style address";
+"str_copy_bech_address" = "Copy Cosmos style address";
+"str_share_bech_address" = "Share Cosmos style address";
 
 
 "btn_delegate" = "  Delegate";
@@ -1267,7 +1275,7 @@
 "tx_cosmwasm_execontract" = "Execute Contract";
 "tx_cosmwasm" = "Wasm";
 
-"tx_ethereum_evm" = "Ethereum Tx";
+"tx_ethereum_evm" = "Evm Tx";
 
 "tx_crescent_liquid_stake" = "Liquid Stake";
 "tx_crescent_liquid_unstake" = "Liquid Unstake";

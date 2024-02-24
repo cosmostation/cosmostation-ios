@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainSecret118: ChainSecre529  {
+class ChainSecret118: ChainSecret529  {
     
     override init() {
         super.init()

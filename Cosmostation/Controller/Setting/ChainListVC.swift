@@ -143,7 +143,7 @@ extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chain = searchCosmosChains[indexPath.row]
-        if (chain is ChainBinanceBeacon || chain is ChainOkt60Keccak) {
+        if (chain is ChainBinanceBeacon || chain is ChainOkt996Keccak) {
             return
         }
         loadingView.isHidden = false

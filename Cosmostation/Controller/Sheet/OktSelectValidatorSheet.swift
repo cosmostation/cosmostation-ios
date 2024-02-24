@@ -17,7 +17,7 @@ class OktSelectValidatorSheet: BaseVC {
     @IBOutlet weak var confirmBtn: BaseButton!
     
     var oktSelectValidatorDelegate: OktSelectValidatorDelegate?
-    var selectedChain: ChainOkt60Keccak!
+    var selectedChain: ChainOkt996Keccak!
     var allValidators = [JSON]()
     var existSelected = [JSON]()
     

@@ -420,7 +420,7 @@ extension BepTxResult {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        let KavaChain = ChainKava60()
+        let KavaChain = ChainKava459()
         return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: KavaChain.getGrpc().host, port: KavaChain.getGrpc().port)
     }
     

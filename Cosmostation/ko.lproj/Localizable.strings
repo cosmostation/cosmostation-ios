@@ -150,6 +150,7 @@
 "str_total_fee" = "Tx 수수료 합계";
 "str_fixed" = "고정";
 "str_average" = "평균";
+"str_high" = "높음";
 "str_zero" = "무료";
 "str_low" = "낮음";
 "str_tiny" = "최소";
@@ -189,6 +190,7 @@
 "str_my_unbondings" = "내 언스테이킹";
 "str_start_vote" = "투표 하기";
 "str_transfer_asset" = "자산 전송";
+"str_send_asset" = "%@ 전송";
 "str_ibc_transfer_asset" = "IBC 자산 전송";
 "str_create_another_account" = "다른 계정 생성";
 "str_delete" = "삭제";
@@ -200,6 +202,8 @@
 "str_claim_all" = "모두 수령";
 "str_big_loss" = "자산 손실";
 "str_big_loss_msg" = "현재 선택하신 스왑을 진행하시면 상당한 재산상 손해가 예상됩니다.\n\n예상 입력, 출력 가치를 확인하신 후 신중히 결정해주세요.";
+"str_memo_optional" = "메모 (선택)";
+"str_tx_result" = "Tx 결과";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";
@@ -299,6 +303,10 @@
 "str_restore_wallets" = "지갑 복원";
 "str_deposit" = "예치";
 "str_withdraw" = "출금";
+"str_copy_evm_address" = "Evm형식 주소복사";
+"str_share_evm_address" = "Evm형식 주소공유";
+"str_copy_bech_address" = "Cosmos형식 주소복사";
+"str_share_bech_address" = "Cosmos형식 주소공유";
 
 
 "btn_delegate" = "  위임 하기";
@@ -1267,7 +1275,7 @@
 "tx_cosmwasm_execontract" = "컨트랙트 실행";
 "tx_cosmwasm" = "와즘";
 
-"tx_ethereum_evm" = "이더리움 Tx";
+"tx_ethereum_evm" = "Evm Tx";
 
 "tx_crescent_liquid_stake" = "유동성 스테이크";
 "tx_crescent_liquid_unstake" = "유동성 언스테이크";

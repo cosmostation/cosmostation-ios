@@ -149,9 +149,10 @@
 "str_vote_agent" = "代理人による間接投票";
 "str_total_fee" = "合計料金";
 "str_fixed" = "固定";
-"str_average" = "平均";
+"str_average" = "平";
+"str_high" = "高";
 "str_zero" = "無料";
-"str_low" = "低い";
+"str_low" = "低";
 "str_tiny" = "最小";
 "str_select_coin" = "コインを選択します。";
 "str_unstaking_history" = "アンステーク履歴";
@@ -189,6 +190,7 @@
 "str_my_unbondings" = "私のステーキング解除";
 "str_start_vote" = "投票する";
 "str_transfer_asset" = "資産転送";
+"str_send_asset" = "%@ 転送";
 "str_ibc_transfer_asset" = "IBC 資産転送";
 "str_create_another_account" = "別のアカウントを作成";
 "str_delete" = "消去";
@@ -200,6 +202,8 @@
 "str_claim_all" = "すべてを請求する";
 "str_big_loss" = "資産損失";
 "str_big_loss_msg" = "現在選択されているスワップを進めると、かなりの財産上の損害が予想されます。\n\n期待される入力/出力値を確認してから慎重に決定してください。";
+"str_memo_optional" = "メモ（任意）";
+"str_tx_result" = "Tx 結果";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -299,6 +303,10 @@
 "str_restore_wallets" = "財布の復元";
 "str_deposit" = "預金";
 "str_withdraw" = "出金";
+"str_copy_evm_address" = "EVM スタイルのアドレスをコピー";
+"str_share_evm_address" = "EVM スタイルのアドレスを共有する";
+"str_copy_bech_address" = "Cosmos スタイルのアドレスをコピー";
+"str_share_bech_address" = "Cosmos スタイルのアドレスを共有する";
 
 
 "btn_delegate" = "  委任する";
@@ -1267,7 +1275,7 @@
 "tx_cosmwasm_execontract" = "Execute Contract";
 "tx_cosmwasm" = "Wasm";
 
-"tx_ethereum_evm" = "Ethereum Tx";
+"tx_ethereum_evm" = "Evm Tx";
 
 "tx_crescent_liquid_stake" = "Liquid Stake";
 "tx_crescent_liquid_unstake" = "Liquid Unstake";

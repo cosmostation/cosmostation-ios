@@ -45,10 +45,12 @@ class PortfolioCell: UITableViewCell {
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
         
-        if (chain.evmCompatible) {
-            tagLayer.isHidden = false
-            evmCompatTag.isHidden = false
-        } else if (!chain.isDefault) {
+//        if (chain.evmCompatible) {
+//            tagLayer.isHidden = false
+//            evmCompatTag.isHidden = false
+//        } else 
+        
+        if (!chain.isDefault) {
             tagLayer.isHidden = false
             legacyTag.isHidden = false
         }

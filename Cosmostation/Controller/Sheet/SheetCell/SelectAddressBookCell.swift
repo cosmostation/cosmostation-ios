@@ -26,14 +26,13 @@ class SelectAddressBookCell: UITableViewCell {
         addressLabel.text = ""
     }
     
-    func onBindCosmosAddressBook(_ recipientChain: CosmosClass, _ book: AddressBook) {
+    func onBindBechAddressBook(_ toChain: BaseChain, _ book: AddressBook) {
         bookNameLabel.text = book.bookName
         addressLabel.text = book.dpAddress
         memoLabel.text = book.memo
     }
     
-    
-    func onBindEvmAddressBook(_ book: AddressBook) {
+    func onBindEvmAddressBook(_ toChain: BaseChain, _ book: AddressBook) {
         bookNameLabel.text = book.bookName
         addressLabel.text = book.dpAddress
         memoLabel.text = ""

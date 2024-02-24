@@ -94,13 +94,13 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                getDisplayCosmosChains().forEach { chain in
-                    Task {
+                Task(priority: .high) {
+                    await getDisplayCosmosChains().concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
-                            chain.setInfoWithSeed(seed, lastHDPath)
+                            chain.setInfoWithSeed(seed, self.lastHDPath)
                         }
                         if (chain.fetched == false) {
-                            await chain.fetchData(id)
+                            chain.fetchData(self.id)
                         }
                     }
                 }
@@ -108,13 +108,13 @@ extension BaseAccount {
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                getDisplayCosmosChains().forEach { chain in
-                    Task {
+                Task(priority: .high) {
+                    await getDisplayCosmosChains().concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
-                            await chain.fetchData(id)
+                            chain.fetchData(self.id)
                         }
                     }
                 }
@@ -127,13 +127,13 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                allCosmosClassChains.forEach { chain in
-                    Task(priority: .high) {
+                Task {
+                    await allCosmosClassChains.concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
-                            chain.setInfoWithSeed(seed, lastHDPath)
+                            chain.setInfoWithSeed(seed, self.lastHDPath)
                         }
                         if (chain.fetched == false) {
-                            await chain.fetchData(id)
+                            chain.fetchData(self.id)
                         }
                     }
                 }
@@ -141,15 +141,16 @@ extension BaseAccount {
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                allCosmosClassChains.forEach { chain in
-                    Task(priority: .high) {
+                Task {
+                    await allCosmosClassChains.concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
-                            await chain.fetchData(id)
+                            chain.fetchData(self.id)
                         }
                     }
+                    
                 }
             }
         }
@@ -160,13 +161,13 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                targetChains.forEach { chain in
-                    Task {
+                Task {
+                    await targetChains.concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
-                            chain.setInfoWithSeed(seed, lastHDPath)
+                            chain.setInfoWithSeed(seed, self.lastHDPath)
                         }
                         if (chain.fetched == false) {
-                            await chain.fetchData(id)
+                            chain.fetchData(self.id)
                         }
                     }
                 }
@@ -174,13 +175,13 @@ extension BaseAccount {
             
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                targetChains.forEach { chain in
-                    Task {
+                Task {
+                    await targetChains.concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
-                            await chain.fetchData(id)
+                            chain.fetchData(self.id)
                         }
                     }
                 }
@@ -209,7 +210,7 @@ extension BaseAccount {
         allCosmosClassChains.sort {
             if ($0.tag == "cosmos118") { return true }
             if ($1.tag == "cosmos118") { return false }
-            return $0.allCoinUSDValue.compare($1.allCoinUSDValue).rawValue > 0 ? true : false
+            return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
         }
     }
 }
@@ -226,13 +227,13 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                getDisplayEvmChains().forEach { chain in
-                    Task {
+                Task(priority: .high) {
+                    await getDisplayEvmChains().concurrentForEach { chain in
                         if (chain.evmAddress.isEmpty) {
-                            chain.setInfoWithSeed(seed, lastHDPath)
+                            chain.setInfoWithSeed(seed, self.lastHDPath)
                         }
                         if (chain.fetched == false) {
-                            await chain.fetchData(id)
+                            chain.fetchData(self.id)
                         }
                     }
                 }
@@ -240,13 +241,13 @@ extension BaseAccount {
             
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                getDisplayEvmChains().forEach { chain in
-                    Task {
+                Task(priority: .high) {
+                    await getDisplayEvmChains().concurrentForEach { chain in
                         if (chain.evmAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
-                            await chain.fetchData(id)
+                            chain.fetchData(self.id)
                         }
                     }
                 }
@@ -259,13 +260,13 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                allEvmClassChains.forEach { chain in
-                    Task(priority: .high) {
+                Task {
+                    await allEvmClassChains.concurrentForEach { chain in
                         if (chain.evmAddress.isEmpty) {
-                            chain.setInfoWithSeed(seed, lastHDPath)
+                            chain.setInfoWithSeed(seed, self.lastHDPath)
                         }
                         if (chain.fetched == false) {
-                            await chain.fetchData(id)
+                            chain.fetchData(self.id)
                         }
                     }
                 }
@@ -273,13 +274,13 @@ extension BaseAccount {
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                allEvmClassChains.forEach { chain in
-                    Task(priority: .high) {
+                Task {
+                    await allEvmClassChains.concurrentForEach { chain in
                         if (chain.evmAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
                         if (chain.fetched == false) {
-                            await chain.fetchData(id)
+                            chain.fetchData(self.id)
                         }
                     }
                 }
@@ -309,12 +310,49 @@ extension BaseAccount {
         allEvmClassChains.sort {
             if ($0.tag == "ethereum60") { return true }
             if ($1.tag == "ethereum60") { return false }
-            return $0.allCoinUSDValue.compare($1.allCoinUSDValue).rawValue > 0 ? true : false
+            return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
         }
     }
 }
 
 extension BaseAccount {
+    
+    func initKeysforSwap() async -> [CosmosClass] {
+        var result = [CosmosClass]()
+        let keychain = BaseData.instance.getKeyChain()
+        if (type == .withMnemonic) {
+            ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
+                result.append(chain)
+            }
+            ALLEVMCLASS().filter({ $0.isDefault == true && $0.supportCosmos == true }).forEach { chain in
+                result.append(chain)
+            }
+            if let secureData = try? keychain.getString(uuid.sha1()),
+               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
+                result.forEach { chain in
+                    if (chain.bechAddress.isEmpty) {
+                        chain.setInfoWithSeed(seed, lastHDPath)
+                    }
+                }
+            }
+            
+        } else if (type == .onlyPrivateKey) {
+            ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
+                result.append(chain)
+            }
+            ALLEVMCLASS().filter({ $0.isDefault == true && $0.supportCosmos == true }).forEach { chain in
+                result.append(chain)
+            }
+            if let secureKey = try? keychain.getString(uuid.sha1()) {
+                result.forEach { chain in
+                    if (chain.bechAddress.isEmpty) {
+                        chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                    }
+                }
+            }
+        }
+        return result
+    }
     
     func initOnyKeyData() async -> [CosmosClass] {
         var result = [CosmosClass]()
@@ -349,11 +387,23 @@ extension BaseAccount {
     
     func fetchForPreCreate(_ seed: Data? = nil, _ privateKeyString: String? = nil) {
         if (type == .withMnemonic) {
+            allEvmClassChains = ALLEVMCLASS()
             allCosmosClassChains = ALLCOSMOSCLASS()
-            allCosmosClassChains.forEach { chain in
-                Task(priority: .high) {
+            Task(priority: .high) {
+                await allEvmClassChains.concurrentForEach { chain in
+                    if (chain.evmAddress.isEmpty) {
+                        chain.setInfoWithSeed(seed!, self.lastHDPath)
+//                        print("evmAddress ", chain.tag, "  ", chain.evmAddress)
+                    }
+                    if (chain.fetched == false) {
+                        chain.fetchPreCreate()
+                    }
+                }
+                
+                await allCosmosClassChains.concurrentForEach { chain in
                     if (chain.bechAddress.isEmpty) {
-                        chain.setInfoWithSeed(seed!, lastHDPath)
+                        chain.setInfoWithSeed(seed!, self.lastHDPath)
+//                        print("bechAddress ", chain.tag, "  ", chain.bechAddress)
                     }
                     if (chain.fetched == false) {
                         chain.fetchPreCreate()
@@ -362,9 +412,19 @@ extension BaseAccount {
             }
             
         } else if (type == .onlyPrivateKey) {
+            allEvmClassChains = ALLEVMCLASS()
             allCosmosClassChains = ALLCOSMOSCLASS().filter({ $0.isDefault == true || $0.tag == "okt996_Secp"})
-            allCosmosClassChains.forEach { chain in
-                Task(priority: .medium) {
+            Task(priority: .high) {
+                await allEvmClassChains.concurrentForEach { chain in
+                    if (chain.evmAddress.isEmpty) {
+                        chain.setInfoWithPrivateKey(Data.fromHex(privateKeyString!)!)
+                    }
+                    if (chain.fetched == false) {
+                        chain.fetchPreCreate()
+                    }
+                }
+                
+                await allCosmosClassChains.concurrentForEach { chain in
                     if (chain.bechAddress.isEmpty) {
                         chain.setInfoWithPrivateKey(Data.fromHex(privateKeyString!)!)
                     }
@@ -382,4 +442,19 @@ public enum BaseAccountType: Int64 {
     case withMnemonic = 0
     case onlyPrivateKey = 1
     case none = 2
+}
+
+
+extension Sequence {
+    func concurrentForEach(
+        _ operation: @escaping (Element) async -> Void
+    ) async {
+        await withTaskGroup(of: Void.self) { group in
+            for element in self {
+                group.addTask {
+                    await operation(element)
+                }
+            }
+        }
+    }
 }

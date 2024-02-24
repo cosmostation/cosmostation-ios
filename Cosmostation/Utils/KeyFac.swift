@@ -213,7 +213,7 @@ class KeyFac {
             let hash = Data.fromHex(add)!.sha256()
             return hash.hexEncodedString()
             
-        } else if (toChain is ChainKava60) {
+        } else if (toChain.tag.starts(with: "kava")) {
             var senderData: Data?
             if (toSendDenom == TOKEN_HTLC_BINANCE_BNB) {
                 senderData = try! SegwitAddrCoder.shared.decode(KAVA_MAIN_BNB_DEPUTY)

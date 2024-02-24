@@ -8,17 +8,14 @@
 
 import Foundation
 
-class ChainOkt996Secp: ChainOkt60Keccak {
+class ChainOkt996Secp: ChainOkt996Keccak {
     
     override init() {
         super.init()
         
-        isDefault = false
         tag = "okt996_Secp"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/996'/0'/0/X")
-        bechAccountPrefix = "ex"
-        evmCompatible = false
     }
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {

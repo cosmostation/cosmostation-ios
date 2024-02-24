@@ -48,7 +48,7 @@ class KavaEarnDepositAction: BaseVC {
     @IBOutlet weak var addBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: ChainKava60!
+    var selectedChain: CosmosClass!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var toEarnDeposit: Kava_Router_V1beta1_MsgDelegateMintDeposit!
@@ -166,7 +166,7 @@ class KavaEarnDepositAction: BaseVC {
         baseSheet.targetChain = selectedChain
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectFeeCoin
+        baseSheet.sheetType = .SelectFeeDenom
         onStartSheet(baseSheet, 240)
     }
     
@@ -281,7 +281,7 @@ extension KavaEarnDepositAction: BaseSheetDelegate, MemoDelegate, AmountSheetDel
                 onUpdateValidatorView()
             }
             
-        } else if (sheetType == .SelectFeeCoin) {
+        } else if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
                 txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)

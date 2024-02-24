@@ -63,7 +63,7 @@ class CosmosHistoryVC: BaseVC {
         if (selectedChain is ChainBinanceBeacon) {
             onFetchBnbHistory(selectedChain.bechAddress)
             
-        } else if (selectedChain is ChainOkt60Keccak) {
+        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             onFetchOktHistory(selectedChain.evmAddress)
             
         } else {
@@ -166,7 +166,8 @@ class CosmosHistoryVC: BaseVC {
 extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt60Keccak) {
+        if (selectedChain is ChainBinanceBeacon ||
+            selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             return 1
         } else {
             return msHistoryGroup.count
@@ -179,7 +180,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "History"
             view.cntLabel.text = String(beaconHistoey.count)
             
-        } else if (selectedChain is ChainOkt60Keccak) {
+        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             view.titleLabel.text = "History"
             view.cntLabel.text = String(oktHistoey.count)
             
@@ -203,7 +204,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
         if (selectedChain is ChainBinanceBeacon) {
             return beaconHistoey.count
             
-        } else if (selectedChain is ChainOkt60Keccak) {
+        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             return oktHistoey.count
             
         } else {
@@ -218,7 +219,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
             let history = beaconHistoey[indexPath.row]
             cell.bindBeaconHistory(baseAccount, selectedChain, history)
             
-        } else if (selectedChain is ChainOkt60Keccak) {
+        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             let history = oktHistoey[indexPath.row]
             cell.bindOktHistory(baseAccount, selectedChain, history)
             
@@ -230,7 +231,8 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if (!(selectedChain is ChainBinanceBeacon) && !(selectedChain is ChainOkt60Keccak)) {
+        if (!(selectedChain is ChainBinanceBeacon) &&
+            !(selectedChain is ChainOktEVM) && !(selectedChain is ChainOkt996Keccak)) {
             if (indexPath.section == self.msHistoryGroup.count - 1
                 && indexPath.row == self.msHistoryGroup.last!.values.count - 1
                 && msHasMore == true) {
@@ -246,7 +248,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
             guard let url = BaseNetWork.getTxDetailUrl(selectedChain, history.txHash!) else { return }
             self.onShowSafariWeb(url)
             
-        } else if (selectedChain is ChainOkt60Keccak) {
+        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             let history = oktHistoey[indexPath.row]
             guard let url = BaseNetWork.getTxDetailUrl(selectedChain, history.txId!) else { return }
             self.onShowSafariWeb(url)

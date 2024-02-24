@@ -70,9 +70,10 @@ class ClaimAllChainCell: UITableViewCell {
                        _ txFee: Cosmos_Tx_V1beta1_Fee?, _ broadcasted: Bool, _ response: Cosmos_Tx_V1beta1_GetTxResponse?) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
-        if (chain.evmCompatible) {
-            evmCompatTag.isHidden = false
-        } else if (!chain.isDefault) {
+//        if (chain.evmCompatible) {
+//            evmCompatTag.isHidden = false
+//        } else 
+        if (!chain.isDefault) {
             legacyTag.isHidden = false
         }
         
