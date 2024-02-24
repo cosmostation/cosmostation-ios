@@ -90,14 +90,11 @@ class CosmosRewardAddress: BaseVC {
     
     
     @objc func onClickToAddress() {
-        let addressSheet = TxAddressSheet(nibName: "TxAddressSheet", bundle: nil)
+        let addressSheet = TxAddressLegacySheet(nibName: "TxAddressLegacySheet", bundle: nil)
         addressSheet.selectedChain = selectedChain
-        if (newRewardAddress == nil) {
-            addressSheet.existedAddress = newRewardAddress?.withdrawAddress
-        }
-        addressSheet.recipientChain = selectedChain
-        addressSheet.addressSheetType = .SelectAddress_CosmosDistribution
-        addressSheet.addressDelegate = self
+        addressSheet.existedAddress = newRewardAddress?.withdrawAddress
+        addressSheet.addressLegacySheetType = .SelectAddress_CosmosDistribution
+        addressSheet.addressLegacyDelegate = self
         self.onStartSheet(addressSheet, 220)
     }
     
@@ -215,7 +212,7 @@ class CosmosRewardAddress: BaseVC {
 
 }
 
-extension CosmosRewardAddress: MemoDelegate, BaseSheetDelegate, AddressDelegate, PinDelegate {
+extension CosmosRewardAddress: AddressLegacyDelegate, MemoDelegate, BaseSheetDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeDenom) {

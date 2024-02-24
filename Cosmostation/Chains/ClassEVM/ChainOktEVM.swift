@@ -24,12 +24,28 @@ class ChainOktEVM: EvmClass  {
         coinLogo = "tokenOkt"
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        bechAccountPrefix = "ex"                                                                    //only case
+        supportStaking = false
         
         rpcURL = "https://exchainrpc.okex.org"
         explorerURL = "https://www.oklink.com/oktc/"
         addressURL = explorerURL + "address/%@"
         txURL = explorerURL + "tx/%@"
         
+    }
+    
+    override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
+        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)                     //only case
+    }
+    
+    override func setInfoWithPrivateKey(_ priKey: Data) {
+        privateKey = priKey
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)                     //only case
     }
     
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,10 +14,9 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TxAddressSheet" customModule="Cosmostation" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TxAddressLegacySheet" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="addressTextField" destination="3rT-hV-Iq2" id="hjj-75-o3D"/>
-                <outlet property="addressTitle" destination="jOD-2l-DW3" id="1oh-cQ-3gl"/>
                 <outlet property="confirmBtn" destination="M0A-fG-KOH" id="aY6-e8-Tyv"/>
                 <outlet property="loadingView" destination="M6l-wv-RsO" id="kTw-Xd-Ey7"/>
                 <outlet property="selfBtn" destination="t7a-YC-Xad" id="rtF-IN-wmb"/>
@@ -29,12 +28,6 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOD-2l-DW3">
-                    <rect key="frame" x="20" y="95" width="140.66666666666666" height="20.333333333333329"/>
-                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
-                    <color key="textColor" name="_color01"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="3rT-hV-Iq2" customClass="MDCOutlinedTextField">
                     <rect key="frame" x="10" y="95" width="373" height="54"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -126,11 +119,9 @@
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstItem="jOD-2l-DW3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="80m-BQ-Y3A"/>
                 <constraint firstItem="M6l-wv-RsO" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="Df9-5N-ruk"/>
                 <constraint firstItem="M0A-fG-KOH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="FAy-AI-vq1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="M0A-fG-KOH" secondAttribute="trailing" constant="8" id="GOu-69-mbg"/>
-                <constraint firstItem="jOD-2l-DW3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Iwe-Iu-aaa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HJ2-Tk-n1u" secondAttribute="trailing" constant="20" id="OtH-s8-0Vk"/>
                 <constraint firstAttribute="bottom" secondItem="M0A-fG-KOH" secondAttribute="bottom" constant="38" id="gtb-SJ-MS1"/>
                 <constraint firstItem="3rT-hV-Iq2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="kpt-Z1-ruE"/>

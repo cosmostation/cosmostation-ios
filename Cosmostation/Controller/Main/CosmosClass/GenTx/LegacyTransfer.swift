@@ -21,8 +21,7 @@ class LegacyTransfer: BaseVC {
     @IBOutlet weak var toAddressCardView: FixCardView!
     @IBOutlet weak var toAddressTitle: UILabel!
     @IBOutlet weak var toAddressHint: UILabel!
-    @IBOutlet weak var toAddressMasterLabel: UILabel!
-    @IBOutlet weak var toAddressSlaveLabel: UILabel!
+    @IBOutlet weak var toAddressLabel: UILabel!
     
     @IBOutlet weak var toSendAssetCard: FixCardView!
     @IBOutlet weak var toSendAssetTitle: UILabel!
@@ -54,9 +53,7 @@ class LegacyTransfer: BaseVC {
     var stakeDenom: String!
     var availableAmount = NSDecimalNumber.zero
     var toSendAmount = NSDecimalNumber.zero
-    var userInputAddress: String?
-    var recipientBechAddress: String?
-    var recipientEvmAddress: String?
+    var recipientAddress: String?
     var txMemo = ""
     
     var tokenInfo: JSON!
@@ -87,7 +84,6 @@ class LegacyTransfer: BaseVC {
             } else {
                 availableAmount = available
             }
-            print("availableAmount ", availableAmount)
             
         } else if let okChain = selectedChain as? ChainOkt996Keccak {
             tokenInfo = okChain.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
@@ -101,7 +97,6 @@ class LegacyTransfer: BaseVC {
             } else {
                 availableAmount = available
             }
-            
         }
         
         toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
@@ -193,40 +188,26 @@ class LegacyTransfer: BaseVC {
     
     
     @objc func onClickToAddress() {
-        let addressSheet = TxAddressSheet(nibName: "TxAddressSheet", bundle: nil)
+        let addressSheet = TxAddressLegacySheet(nibName: "TxAddressLegacySheet", bundle: nil)
         addressSheet.selectedChain = selectedChain
-        if (userInputAddress?.isEmpty == false) {
-            addressSheet.existedAddress = userInputAddress
-        }
-        addressSheet.recipientChain = selectedChain
-        addressSheet.addressDelegate = self
+        addressSheet.existedAddress = recipientAddress
+        addressSheet.addressLegacySheetType = .SelectAddress_CosmosLegacySend
+        addressSheet.addressLegacyDelegate = self
         self.onStartSheet(addressSheet, 220)
     }
     
-    func onUpdateToAddressView() {
-        if (userInputAddress == nil ||
-            userInputAddress?.isEmpty == true) {
-            recipientBechAddress = nil
-            recipientEvmAddress = nil
+    func onUpdateToAddressView(_ address: String) {
+        if (address.isEmpty == true) {
+            recipientAddress = ""
             toAddressHint.isHidden = false
-            toAddressMasterLabel.isHidden = true
-            toAddressSlaveLabel.isHidden = true
+            toAddressLabel.isHidden = true
             
         } else {
+            recipientAddress = address
             toAddressHint.isHidden = true
-            if (selectedChain is ChainBinanceBeacon) {
-                toAddressMasterLabel.text = recipientBechAddress
-                toAddressMasterLabel.isHidden = false
-                
-            } else if (selectedChain is ChainOkt996Keccak) {
-                toAddressMasterLabel.text = recipientEvmAddress
-                toAddressMasterLabel.isHidden = false
-                
-                toAddressSlaveLabel.text = "(" + recipientBechAddress! + ")"
-                toAddressSlaveLabel.isHidden = false
-            }
-            toAddressMasterLabel.adjustsFontSizeToFitWidth = true
-            toAddressSlaveLabel.adjustsFontSizeToFitWidth = true
+            toAddressLabel.isHidden = false
+            toAddressLabel.text = recipientAddress
+            toAddressLabel.adjustsFontSizeToFitWidth = true
         }
         onValidate()
     }
@@ -283,38 +264,24 @@ class LegacyTransfer: BaseVC {
     func onValidate() {
         sendBtn.isEnabled = false
         if (toSendAmount == NSDecimalNumber.zero ) { return }
-        if (recipientBechAddress == nil || recipientBechAddress?.isEmpty == true) { return }
+        if (recipientAddress?.isEmpty == true) { return }
         if (txMemo.count > 300) { return }
         sendBtn.isEnabled = true
     }
 }
 
 
-extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelegate , QrScanDelegate, PinDelegate {
+extension LegacyTransfer: LegacyAmountSheetDelegate, AddressLegacyDelegate, MemoDelegate , QrScanDelegate, PinDelegate {
     
     func onInputedAmount(_ amount: String) {
         onUpdateAmountView(amount)
     }
     
     func onInputedAddress(_ address: String, _ memo: String?) {
-        recipientBechAddress = nil
-        recipientEvmAddress = nil
-        userInputAddress = address
-        if (WUtils.isValidBechAddress(selectedChain, userInputAddress)) {
-            recipientBechAddress = userInputAddress
-            recipientEvmAddress = KeyFac.convertBech32ToEvm(userInputAddress!)
+        onUpdateToAddressView(address)
+        if let cMemo = memo {
+            onUpdateMemoView(cMemo)
         }
-        if (WUtils.isValidEvmAddress(userInputAddress)) {
-            recipientBechAddress = KeyFac.convertEvmToBech32(userInputAddress!, selectedChain.bechAccountPrefix!)
-            recipientEvmAddress = userInputAddress
-        }
-        onUpdateToAddressView()
-        if (memo != nil && memo?.isEmpty == false) {
-            onUpdateMemoView(memo!)
-        }
-        print("userInputAddress", userInputAddress)
-        print("recipientBechAddress", recipientBechAddress)
-        print("recipientEvmAddress", recipientEvmAddress)
     }
     
     func onInputedMemo(_ memo: String) {
@@ -322,8 +289,6 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
     }
     
     func onScanned(_ result: String) {
-        recipientBechAddress = nil
-        recipientEvmAddress = nil
         let scanedString = result.components(separatedBy: "(MEMO)")
         var addressScan = ""
         var memoScan = ""
@@ -343,34 +308,12 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
             return;
         }
         
-        if (selectedChain is ChainBinanceBeacon) {
-            if (WUtils.isValidBechAddress(selectedChain, addressScan)) {
-                userInputAddress = addressScan
-                recipientBechAddress = addressScan
-                if (scanedString.count > 1) {
-                    onUpdateMemoView(memoScan)
-                }
-                onUpdateToAddressView()
-                return
+        if (WUtils.isValidBechAddress(selectedChain, addressScan)) {
+            if (scanedString.count > 1) {
+                onUpdateMemoView(memoScan)
             }
-            
-        } else if (selectedChain is ChainOkt996Keccak) {
-            if (WUtils.isValidBechAddress(selectedChain, addressScan)) {
-                userInputAddress = addressScan
-                recipientBechAddress = userInputAddress
-                recipientEvmAddress = KeyFac.convertBech32ToEvm(userInputAddress!)
-                return
-            }
-            if (WUtils.isValidEvmAddress(addressScan)) {
-                userInputAddress = addressScan
-                recipientBechAddress = KeyFac.convertEvmToBech32(userInputAddress!, selectedChain.bechAccountPrefix!)
-                recipientEvmAddress = userInputAddress
-                if (scanedString.count > 1) {
-                    onUpdateMemoView(memoScan)
-                }
-                onUpdateToAddressView()
-                return
-            }
+            onUpdateToAddressView(addressScan)
+            return
         }
         self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
     }
@@ -399,7 +342,6 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, MemoDelegate, AddressDelega
                 } else if (selectedChain is ChainOkt996Keccak) {
                     if let response = try? await broadcastOktSendTx() {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            print("response ", response)
                             self.loadingView.isHidden = true
                             
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -422,7 +364,7 @@ extension LegacyTransfer {
         let bnbChain = selectedChain as! ChainBinanceBeacon
         let bnbMsg = BinanceMessage.transfer(symbol: self.toSendDenom,
                                              amount: (self.toSendAmount).doubleValue,
-                                             toAddress: self.recipientBechAddress!,
+                                             toAddress: self.recipientAddress!,
                                              memo: self.txMemo,
                                              privateKey: self.selectedChain.privateKey!,
                                              signerAddress: self.selectedChain.bechAddress,
@@ -439,12 +381,11 @@ extension LegacyTransfer {
     
     
     func broadcastOktSendTx() async throws -> JSON? {
-        
         let sendCoin = L_Coin(toSendDenom, WUtils.getFormattedNumber(toSendAmount, 18))
         let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(NSDecimalNumber(string: OKT_BASE_FEE), 18))
         let fee = L_Fee(BASE_GAS_AMOUNT, [gasCoin])
         
-        let okMsg = L_Generator.oktSendMsg(selectedChain.bechAddress, recipientBechAddress!, [sendCoin])
+        let okMsg = L_Generator.oktSendMsg(selectedChain.bechAddress, recipientAddress!, [sendCoin])
         let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
         let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
         

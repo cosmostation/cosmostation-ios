@@ -265,3 +265,17 @@ extension TxSendAddressSheet {
 protocol SendAddressDelegate {
     func onInputedAddress(_ address: String, _ memo: String?)
 }
+
+
+
+public struct NameService {
+    var type: String?
+    var name: String?
+    var address: String?
+    
+    init(_ type: String, _ name: String, _ address: String) {
+        self.type = type
+        self.name = name
+        self.address = address
+    }
+}

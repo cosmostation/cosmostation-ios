@@ -779,10 +779,10 @@
 		04B7899A2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7892F2ACAC9B000E9BE88 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift */; };
 		04B7899B2ACAC9B100E9BE88 /* ibc_core_connection_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B789302ACAC9B100E9BE88 /* ibc_core_connection_v1_query.grpc.swift */; };
 		04B7899C2ACAC9B100E9BE88 /* ibc_core_connection_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B789302ACAC9B100E9BE88 /* ibc_core_connection_v1_query.grpc.swift */; };
-		04B7899F2ACAEB5F00E9BE88 /* TxAddressSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7899D2ACAEB5F00E9BE88 /* TxAddressSheet.swift */; };
-		04B789A02ACAEB5F00E9BE88 /* TxAddressSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7899D2ACAEB5F00E9BE88 /* TxAddressSheet.swift */; };
-		04B789A12ACAEB5F00E9BE88 /* TxAddressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B7899E2ACAEB5F00E9BE88 /* TxAddressSheet.xib */; };
-		04B789A22ACAEB5F00E9BE88 /* TxAddressSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B7899E2ACAEB5F00E9BE88 /* TxAddressSheet.xib */; };
+		04B7899F2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7899D2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift */; };
+		04B789A02ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7899D2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift */; };
+		04B789A12ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B7899E2ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib */; };
+		04B789A22ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B7899E2ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib */; };
 		04B789E12ACAF6A900E9BE88 /* ChainStarname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B789E02ACAF6A900E9BE88 /* ChainStarname.swift */; };
 		04B789E22ACAF6A900E9BE88 /* ChainStarname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B789E02ACAF6A900E9BE88 /* ChainStarname.swift */; };
 		04B789E52ACB140900E9BE88 /* SelectNameServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B789E32ACB140900E9BE88 /* SelectNameServiceCell.swift */; };
@@ -2189,8 +2189,8 @@
 		04B7892E2ACAC9B000E9BE88 /* ibc_core_client_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_query.grpc.swift; sourceTree = "<group>"; };
 		04B7892F2ACAC9B000E9BE88 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_host_v1_query.pb.swift; sourceTree = "<group>"; };
 		04B789302ACAC9B100E9BE88 /* ibc_core_connection_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_query.grpc.swift; sourceTree = "<group>"; };
-		04B7899D2ACAEB5F00E9BE88 /* TxAddressSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAddressSheet.swift; sourceTree = "<group>"; };
-		04B7899E2ACAEB5F00E9BE88 /* TxAddressSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxAddressSheet.xib; sourceTree = "<group>"; };
+		04B7899D2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAddressLegacySheet.swift; sourceTree = "<group>"; };
+		04B7899E2ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxAddressLegacySheet.xib; sourceTree = "<group>"; };
 		04B789E02ACAF6A900E9BE88 /* ChainStarname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStarname.swift; sourceTree = "<group>"; };
 		04B789E32ACB140900E9BE88 /* SelectNameServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNameServiceCell.swift; sourceTree = "<group>"; };
 		04B789E42ACB140900E9BE88 /* SelectNameServiceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectNameServiceCell.xib; sourceTree = "<group>"; };
@@ -3355,8 +3355,8 @@
 				04CD24812AD312BD00497EF5 /* TxAmountBepSheet.xib */,
 				0438A7E02AE0E9FA006FA213 /* TxAmountLpSheet.swift */,
 				0438A7E12AE0E9FA006FA213 /* TxAmountLpSheet.xib */,
-				04B7899D2ACAEB5F00E9BE88 /* TxAddressSheet.swift */,
-				04B7899E2ACAEB5F00E9BE88 /* TxAddressSheet.xib */,
+				04B7899D2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift */,
+				04B7899E2ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib */,
 				15B24C842AE9039A0009B359 /* TxSignRequestSheet.swift */,
 				15B24C852AE9039A0009B359 /* TxSignRequestSheet.xib */,
 				04C63D0E2B836DD800D4A366 /* TxSendAddressSheet.swift */,
@@ -4243,7 +4243,7 @@
 				04F048D02AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */,
 				E12E9D302AE415D900336449 /* loadingSmallYellow.json in Resources */,
 				E131F44B2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */,
-				04B789A22ACAEB5F00E9BE88 /* TxAddressSheet.xib in Resources */,
+				04B789A22ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib in Resources */,
 				04FAD9DF2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				04A1A8052AC80AA50014EF92 /* TxAmountSheet.xib in Resources */,
 				E1DF77842AB762010028BD51 /* CheckPrivateKeyCell.xib in Resources */,
@@ -4346,7 +4346,7 @@
 				04CD24552AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */,
 				04FAD9C62AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
 				0400EF4F2ADF7EF4007BA97F /* KavaSwapAction.xib in Resources */,
-				04B789A12ACAEB5F00E9BE88 /* TxAddressSheet.xib in Resources */,
+				04B789A12ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib in Resources */,
 				04C63D272B87039D00D4A366 /* tx_loading.json in Resources */,
 				0400EEEF2ADBE40D007BA97F /* KavaDefiCell.xib in Resources */,
 				E13FC5632B26F14D0082C66E /* KavaEarnListMyCell.xib in Resources */,
@@ -5277,7 +5277,7 @@
 				E122DC1E2A8A468E006D1E7B /* cosmos_feegrant_v1beta1_query.pb.swift in Sources */,
 				0478439E2AC991B300462F1C /* injective_wasmx_v1_proposal.pb.swift in Sources */,
 				048F8DCA2B285EC900432437 /* kava_router_v1beta1_tx.grpc.swift in Sources */,
-				04B789A02ACAEB5F00E9BE88 /* TxAddressSheet.swift in Sources */,
+				04B789A02ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift in Sources */,
 				18FFB66B281AF533004E65BB /* Account.swift in Sources */,
 				E122DB6A2A8A468D006D1E7B /* cosmos_group_v1_query.pb.swift in Sources */,
 				E122DC202A8A468E006D1E7B /* cosmos_circuit_v1_tx.grpc.swift in Sources */,
@@ -6001,7 +6001,7 @@
 				E122DC1D2A8A468E006D1E7B /* cosmos_feegrant_v1beta1_query.pb.swift in Sources */,
 				0478439D2AC991B300462F1C /* injective_wasmx_v1_proposal.pb.swift in Sources */,
 				048F8DC92B285EC900432437 /* kava_router_v1beta1_tx.grpc.swift in Sources */,
-				04B7899F2ACAEB5F00E9BE88 /* TxAddressSheet.swift in Sources */,
+				04B7899F2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift in Sources */,
 				E1A82DD1224220910097CAEE /* Account.swift in Sources */,
 				E122DB692A8A468D006D1E7B /* cosmos_group_v1_query.pb.swift in Sources */,
 				E122DC1F2A8A468E006D1E7B /* cosmos_circuit_v1_tx.grpc.swift in Sources */,

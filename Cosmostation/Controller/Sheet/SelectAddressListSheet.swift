@@ -54,11 +54,14 @@ class SelectAddressListSheet: BaseVC {
             
         } else if (sendType == .Only_Cosmos_Coin || sendType == .Only_Cosmos_CW20) {
             //only support cosmos address style
-            BaseData.instance.selectAllRefAddresses().forEach { refAddress in
-                if (refAddress.bechAddress.starts(with: (toChain as! CosmosClass).bechAccountPrefix! + "1") && refAddress.bechAddress != senderBechAddress) {
-                    refBechAddresses.append(refAddress)
+            BaseData.instance.selectAllRefAddresses().filter {
+                $0.bechAddress.starts(with: (toChain as! CosmosClass).bechAccountPrefix! + "1") &&
+                $0.bechAddress != senderBechAddress }.forEach { refAddress in
+                    if (refBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
+                        refBechAddresses.append(refAddress)
+                    }
                 }
-            }
+            
             BaseData.instance.selectAllAddressBooks().forEach { book in
                 if (book.chainName == toChain.name && book.dpAddress != senderBechAddress) {
                     bechAddressBook.append(book)
@@ -67,11 +70,13 @@ class SelectAddressListSheet: BaseVC {
             
         } else if (sendType == .CosmosEVM_Coin) {
             //only support both address style
-            BaseData.instance.selectAllRefAddresses().forEach { refAddress in
-                if (refAddress.bechAddress.starts(with: (toChain as! CosmosClass).bechAccountPrefix! + "1") && refAddress.bechAddress != senderBechAddress) {
-                    refBechAddresses.append(refAddress)
+            BaseData.instance.selectAllRefAddresses().filter {
+                $0.bechAddress.starts(with: (toChain as! CosmosClass).bechAccountPrefix! + "1") &&
+                $0.bechAddress != senderBechAddress }.forEach { refAddress in
+                    if (refBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
+                        refBechAddresses.append(refAddress)
+                    }
                 }
-            }
             BaseData.instance.selectAllAddressBooks().forEach { book in
                 if (book.chainName == toChain.name && book.dpAddress != senderBechAddress) {
                     bechAddressBook.append(book)

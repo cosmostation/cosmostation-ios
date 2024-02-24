@@ -611,7 +611,9 @@ extension CommonTransfer {
             }
             
             if (wTx == nil) {
-                self.onUpdateFeeViewAfterSimul(nil)
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(nil)
+                }
                 return
             }
             

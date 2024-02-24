@@ -100,7 +100,7 @@ class EvmClass: CosmosClass {
                 self.allTokenUSDValue = self.allTokenValue(true)
                 
                 BaseData.instance.updateRefAddressesAllValue(
-                    RefAddress(id, self.tag, "", self.evmAddress,
+                    RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                                self.evmBalances.stringValue, self.allCoinUSDValue.stringValue,
                                self.allTokenUSDValue.stringValue, 1))
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
