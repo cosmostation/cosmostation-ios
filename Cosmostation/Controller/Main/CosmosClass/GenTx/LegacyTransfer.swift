@@ -85,6 +85,19 @@ class LegacyTransfer: BaseVC {
                 availableAmount = available
             }
             
+        } else if let okEvmChain = selectedChain as? ChainOktEVM {
+            tokenInfo = okEvmChain.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
+            let original_symbol = tokenInfo["original_symbol"].stringValue
+            toSendAssetImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(original_symbol))
+            toSendSymbolLabel.text = original_symbol.uppercased()
+            
+            let available = okEvmChain.lcdBalanceAmount(toSendDenom)
+            if (toSendDenom == stakeDenom) {
+                availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
+            } else {
+                availableAmount = available
+            }
+            
         } else if let okChain = selectedChain as? ChainOkt996Keccak {
             tokenInfo = okChain.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
             let original_symbol = tokenInfo["original_symbol"].stringValue
@@ -167,7 +180,7 @@ class LegacyTransfer: BaseVC {
                     toAssetValueLabel.isHidden = false
                 }
                 
-            } else if (selectedChain is ChainOkt996Keccak) {
+            } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
                 toAssetDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
                 toAssetAmountLabel?.attributedText = WDP.dpAmount(toSendAmount.stringValue, toAssetAmountLabel!.font, 18)
                 toSendAssetHint.isHidden = true
@@ -243,7 +256,7 @@ class LegacyTransfer: BaseVC {
             feeDenomLabel.text = stakeDenom.uppercased()
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
-        } else if (selectedChain is ChainOkt996Keccak) {
+        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             feeSelectImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(stakeDenom))
             feeSelectLabel.text = stakeDenom.uppercased()
             
@@ -339,7 +352,7 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, AddressLegacyDelegate, Memo
                         });
                     }
                     
-                } else if (selectedChain is ChainOkt996Keccak) {
+                } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
                     if let response = try? await broadcastOktSendTx() {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true

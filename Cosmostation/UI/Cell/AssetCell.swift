@@ -124,6 +124,25 @@ class AssetCell: UITableViewCell {
                 priceLabel.isHidden = true
                 priceChangeLabel.isHidden = true
                 priceChangePercentLabel.isHidden = true
+            
+        } else if let oktEvmChain = baseChain as? ChainOktEVM,
+                  let token = oktEvmChain.lcdOktTokens.filter({ $0["symbol"].string == coin["denom"].string }).first {
+            let original_symbol = token["original_symbol"].stringValue
+            
+            symbolLabel.text = original_symbol.uppercased()
+            priceCurrencyLabel.text = token["description"].string
+            coinImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(original_symbol))
+            
+            let availableAmount = oktEvmChain.lcdBalanceAmount(coin["denom"].stringValue)
+            amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                amountLabel.isHidden = false
+            }
+            priceLabel.isHidden = true
+            priceChangeLabel.isHidden = true
+            priceChangePercentLabel.isHidden = true
         }
     }
     

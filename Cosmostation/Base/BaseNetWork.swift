@@ -88,7 +88,7 @@ class BaseNetWork {
     static func getAccountHistoryUrl(_ chain: BaseChain, _ address: String) -> String {
         if (chain is ChainBinanceBeacon) {
             return BNB_BEACON_LCD + "api/v1/transactions"
-        } else if (chain is ChainOkt996Keccak) {
+        } else if (chain.tag.starts(with: "okt")) {
             return MINTSCAN_API_URL + "v1/utils/proxy/okc-transaction-list?device=IOS&chainShortName=okc&address=" + address + "&limit=50"
         } else {
             return MINTSCAN_API_URL + "v10/" + chain.apiName + "/account/" + address + "/txs"
@@ -139,7 +139,7 @@ class BaseNetWork {
     static func getTxDetailUrl(_ chain: BaseChain, _ txHash: String) -> URL? {
         if (chain is ChainBinanceBeacon) {
             return URL(string: BNB_BEACON_EXPLORER + "tx/" + txHash)
-        } else if (chain is ChainOkt996Keccak) {
+        } else if (chain.tag.starts(with: "okt")) {
             return URL(string: OKT_EXPLORER + "tx/" + txHash)
         }
         return URL(string: MintscanUrl + chain.apiName + "/transactions/" + txHash)
@@ -148,7 +148,7 @@ class BaseNetWork {
     static func getAccountDetailUrl(_ chain: CosmosClass) -> URL? {
         if (chain is ChainBinanceBeacon) {
             return URL(string: BNB_BEACON_EXPLORER + "address/" + chain.bechAddress)
-        } else if (chain is ChainOkt996Keccak) {
+        } else if (chain.tag.starts(with: "okt")) {
             return URL(string: OKT_EXPLORER + "address/" + chain.bechAddress)
         }
         return URL(string: MintscanUrl + chain.apiName + "/account/" + chain.bechAddress)
@@ -183,7 +183,7 @@ extension BaseNetWork {
     static func lcdNodeInfoUrl(_ chain: BaseChain) -> String {
         if (chain is ChainBinanceBeacon) {
             return BNB_BEACON_LCD + "api/v1/node-info"
-        } else if (chain is ChainOkt996Keccak) {
+        } else if (chain.tag.starts(with: "okt")) {
             return OKT_LCD + "node_info"
         }
         return ""
@@ -192,7 +192,7 @@ extension BaseNetWork {
     static func lcdAccountInfoUrl(_ chain: BaseChain, _ address: String) -> String {
         if (chain is ChainBinanceBeacon) {
             return BNB_BEACON_LCD + "api/v1/account/" + address
-        } else if (chain is ChainOkt996Keccak) {
+        } else if (chain.tag.starts(with: "okt")) {
             return OKT_LCD + "auth/accounts/" + address
         }
         return ""

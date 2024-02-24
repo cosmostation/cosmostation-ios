@@ -88,7 +88,7 @@ class CosmosClassVC: BaseVC {
         addressLayer.addGestureRecognizer(addressTap)
         
         
-        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconMintscanExplorer"), style: .plain, target: self, action: #selector(onClickExplorer))
+        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconExplorer"), style: .plain, target: self, action: #selector(onClickExplorer))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -309,7 +309,7 @@ class CosmosClassVC: BaseVC {
         if (selectedChain.supportCw20 || selectedChain is EvmClass) { tabbar.items.append(tokenTabBar) }
         if (selectedChain.supportNft) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(historyTabBar)
-        if (!selectedChain.mintscanChainParam.isEmpty) { tabbar.items.append(aboutTabBar) }
+        if (!selectedChain.mintscanChainParam.isEmpty && !(selectedChain is ChainOktEVM)) { tabbar.items.append(aboutTabBar) }
         
         tabbar.barTintColor = .clear
         tabbar.selectionIndicatorStrokeColor = .white
