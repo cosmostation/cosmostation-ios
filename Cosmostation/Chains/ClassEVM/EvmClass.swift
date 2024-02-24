@@ -69,7 +69,6 @@ class EvmClass: CosmosClass {
                 fetchRewards(group, channel)
                 fetchCommission(group, channel)
             }
-            fetchAllErc20Balance2(group)
             
             group.notify(queue: .main) {
                 try? channel.close()
@@ -77,32 +76,29 @@ class EvmClass: CosmosClass {
                 self.fetched = true
                 self.allCoinValue = self.allCoinValue()
                 self.allCoinUSDValue = self.allCoinValue(true)
-                self.allTokenValue = self.allTokenValue()
-                self.allTokenUSDValue = self.allTokenValue(true)
+                self.fetchAllErc20Balance(id)
                 
-                BaseData.instance.updateRefAddressesAllValue(
+                BaseData.instance.updateRefAddressesCoinValue(
                     RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                                self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                               self.allTokenUSDValue.stringValue, self.cosmosBalances?.count))
+                               nil, self.cosmosBalances?.count))
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
             }
         } else {
             fetchChainParam2(group)
             fetchErc20Info2(group)
             fetchEvmBalance(group)
-            fetchAllErc20Balance2(group)
             
             group.notify(queue: .main) {
                 self.fetched = true
                 self.allCoinValue = self.allCoinValue()
                 self.allCoinUSDValue = self.allCoinValue(true)
-                self.allTokenValue = self.allTokenValue()
-                self.allTokenUSDValue = self.allTokenValue(true)
+                self.fetchAllErc20Balance(id)
                 
-                BaseData.instance.updateRefAddressesAllValue(
+                BaseData.instance.updateRefAddressesCoinValue(
                     RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                                self.evmBalances.stringValue, self.allCoinUSDValue.stringValue,
-                               self.allTokenUSDValue.stringValue, 1))
+                               nil, 1))
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
             }
         }
@@ -166,7 +162,6 @@ class EvmClass: CosmosClass {
 extension EvmClass {
     
     func fetchErc20Info() async throws -> [MintscanToken] {
-//        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
         return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
     }
     
@@ -210,10 +205,10 @@ extension EvmClass {
             self.allTokenValue = self.allTokenValue()
             self.allTokenUSDValue = self.allTokenValue(true)
             
-            BaseData.instance.updateRefAddressesToken(
+            BaseData.instance.updateRefAddressesTokenValue(
                 RefAddress(id, self.tag, "", self.evmAddress,
                            nil, nil, self.allTokenUSDValue.stringValue, nil))
-            NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: self.tag, userInfo: nil)
         }
     }
     
@@ -227,14 +222,6 @@ extension EvmClass {
                 group.leave()
             } else {
                 group.leave()
-            }
-        }
-    }
-    
-    func fetchAllErc20Balance2(_ group: DispatchGroup) {
-        mintscanErc20Tokens.forEach { token in
-            if (tag != "ethereum60" || token.isdefault == true) {
-                fetchErc20Balance(group, EthereumAddress.init(evmAddress)!, token)
             }
         }
     }

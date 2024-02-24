@@ -66,7 +66,7 @@ class ChainOkt996Keccak: CosmosClass  {
             self.allCoinValue = self.allCoinValue()
             self.allCoinUSDValue = self.allCoinValue(true)
             
-            BaseData.instance.updateRefAddressesMain(
+            BaseData.instance.updateRefAddressesCoinValue(
                 RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                            nil, self.lcdAccountInfo.oktCoins?.count))

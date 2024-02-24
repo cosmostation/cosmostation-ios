@@ -85,8 +85,9 @@ class CosmosClass: BaseChain {
             self.fetched = true
             self.allCoinValue = self.allCoinValue()
             self.allCoinUSDValue = self.allCoinValue(true)
+            if (self.supportCw20) { self.fetchAllCw20Balance(id) }
             
-            BaseData.instance.updateRefAddressesMain(
+            BaseData.instance.updateRefAddressesCoinValue(
                 RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                            nil, self.cosmosBalances?.count))
@@ -468,10 +469,10 @@ extension CosmosClass {
             self.allTokenValue = self.allTokenValue()
             self.allTokenUSDValue = self.allTokenValue(true)
             
-            BaseData.instance.updateRefAddressesToken(
+            BaseData.instance.updateRefAddressesTokenValue(
                 RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            nil, nil, self.allTokenUSDValue.stringValue, nil))
-            NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name("FetchTokens"), object: self.tag, userInfo: nil)
         }
     }
 

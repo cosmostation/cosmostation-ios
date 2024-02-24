@@ -77,6 +77,7 @@ class PortfolioVC: BaseVC {
             tableView.contentOffset = contentOffset
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
         onUpdateVC()
@@ -85,6 +86,7 @@ class PortfolioVC: BaseVC {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchPrice"), object: nil)
     }
     
@@ -124,6 +126,11 @@ class PortfolioVC: BaseVC {
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        onUpdateRow(tag)
+    }
+    
+    @objc func onFetchTokenDone(_ notification: NSNotification) {
         let tag = notification.object as! String
         onUpdateRow(tag)
     }

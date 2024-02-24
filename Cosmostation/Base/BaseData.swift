@@ -367,7 +367,7 @@ extension BaseData {
     }
     
     @discardableResult
-    public func updateRefAddressesMain(_ refAddress: RefAddress) -> Int? {
+    public func updateRefAddressesCoinValue(_ refAddress: RefAddress) -> Int? {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
                                             REFADDRESS_CHAIN_TAG == refAddress.chainTag)
         if let address = try! database.pluck(query) {
@@ -381,7 +381,7 @@ extension BaseData {
     }
     
     @discardableResult
-    public func updateRefAddressesToken(_ refAddress: RefAddress) -> Int? {
+    public func updateRefAddressesTokenValue(_ refAddress: RefAddress) -> Int? {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
                                             REFADDRESS_CHAIN_TAG == refAddress.chainTag)
         if let address = try! database.pluck(query) {

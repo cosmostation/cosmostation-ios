@@ -79,11 +79,13 @@ class ChainSelectVC: BaseVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -110,6 +112,16 @@ class ChainSelectVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
+        onUpdateRow(tag)
+        
+    }
+    
+    @objc func onFetchTokenDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        onUpdateRow(tag)
+    }
+    
+    func onUpdateRow(_ tag: String) {
         for i in 0..<searchEvmChains.count {
             if (searchEvmChains[i].tag == tag) {
                 DispatchQueue.main.async {
@@ -137,6 +149,8 @@ class ChainSelectVC: BaseVC {
             }
         }
     }
+    
+    
     
     @IBAction func onClickValuable(_ sender: SecButton) {
         baseAccount.reSortEvmChains()

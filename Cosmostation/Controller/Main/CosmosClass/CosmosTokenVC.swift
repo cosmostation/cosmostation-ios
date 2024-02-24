@@ -37,11 +37,12 @@ class CosmosTokenVC: BaseVC {
         tableView.addSubview(refresher)
         
         
-        if (selectedChain is EvmClass) {
-            onUpdateView()
-        } else {
-            onRequestFetch()
-        }
+        onUpdateView()
+//        if (selectedChain is EvmClass) {
+//            onUpdateView()
+//        } else {
+//            onRequestFetch()
+//        }
         
     }
     

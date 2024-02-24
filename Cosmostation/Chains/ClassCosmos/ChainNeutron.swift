@@ -58,7 +58,7 @@ class ChainNeutron: CosmosClass  {
             self.allCoinValue = self.allCoinValue()
             self.allCoinUSDValue = self.allCoinValue(true)
             
-            BaseData.instance.updateRefAddressesMain(
+            BaseData.instance.updateRefAddressesCoinValue(
                 RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
                            nil, self.cosmosBalances?.count))

@@ -51,7 +51,6 @@ class ChainOktEVM: EvmClass  {
         fetchChainParam2(group)
         fetchErc20Info2(group)
         fetchEvmBalance(group)
-        fetchAllErc20Balance2(group)
         
         fetchNodeInfo(group)
         fetchAccountInfo(group, bechAddress)
@@ -63,13 +62,12 @@ class ChainOktEVM: EvmClass  {
             self.fetched = true
             self.allCoinValue = self.allCoinValue()
             self.allCoinUSDValue = self.allCoinValue(true)
-            self.allTokenValue = self.allTokenValue()
-            self.allTokenUSDValue = self.allTokenValue(true)
+            self.fetchAllErc20Balance(id)
             
-            BaseData.instance.updateRefAddressesMain(
+            BaseData.instance.updateRefAddressesCoinValue(
                 RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                            self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                           self.allTokenUSDValue.stringValue, self.lcdAccountInfo.oktCoins?.count))
+                           nil, self.lcdAccountInfo.oktCoins?.count))
             NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
         }
     }
