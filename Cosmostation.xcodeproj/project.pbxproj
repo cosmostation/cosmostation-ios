@@ -2836,12 +2836,12 @@
 			children = (
 				04CB911A2A90C41E00375354 /* EvmClass.swift */,
 				04D279EF2A67C98E00AF046A /* ChainEthereum.swift */,
+				04C63D322B87619900D4A366 /* ChainAltheaEVM.swift */,
+				04C63D382B87653C00D4A366 /* ChainCantoEVM.swift */,
+				04C63D2F2B875F1800D4A366 /* ChainEvmosEVM.swift */,
+				04C63D352B8762BF00D4A366 /* ChainHumansEVM.swift */,
 				042296832A890CC4003C7630 /* ChainKavaEVM.swift */,
 				04C63D2C2B87547400D4A366 /* ChainOktEVM.swift */,
-				04C63D2F2B875F1800D4A366 /* ChainEvmosEVM.swift */,
-				04C63D322B87619900D4A366 /* ChainAltheaEVM.swift */,
-				04C63D352B8762BF00D4A366 /* ChainHumansEVM.swift */,
-				04C63D382B87653C00D4A366 /* ChainCantoEVM.swift */,
 				04C63D3B2B8767A300D4A366 /* ChainXplaEVM.swift */,
 			);
 			path = ClassEVM;

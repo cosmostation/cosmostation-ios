@@ -232,12 +232,12 @@ func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
 //    result.append(ChainAltheaEVM())
-//    result.append(ChainCantoEVM())
-//    result.append(ChainEvmosEVM())
-//    result.append(ChainHumansEVM())
+    result.append(ChainCantoEVM())
+    result.append(ChainEvmosEVM())
+    result.append(ChainHumansEVM())
     result.append(ChainKavaEVM())
     result.append(ChainOktEVM())
-//    result.append(ChainXplaEVM())
+    result.append(ChainXplaEVM())
     
     //Add cosmos chain id for ibc
     result.forEach { chain in
@@ -248,6 +248,6 @@ func ALLEVMCLASS() -> [EvmClass] {
     return result
 }
 
-let DEFUAL_DISPALY_EVM = ["ethereum60"]
+let DEFUAL_DISPALY_EVM = ["ethereum60", "kava60"]
 
 let EVM_BASE_FEE = NSDecimalNumber.init(string: "588000000000000")
