@@ -32,7 +32,7 @@ class ChainKavaEVM: EvmClass  {
         validatorPrefix = "kavavaloper"
         
         grpcHost = "grpc-kava.cosmostation.io"
-        rpcURL = "https://rpc-kava-app.cosmostation.io"
+        evmRpcURL = "https://rpc-kava-app.cosmostation.io"
         explorerURL = "https://kavascan.io/"
         addressURL = explorerURL + "address/%@"
         txURL = explorerURL + "tx/%@"

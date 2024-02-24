@@ -32,7 +32,7 @@ class ChainAltheaEVM: EvmClass  {
         validatorPrefix = "altheavaloper"
         
         grpcHost = "grpc-althea.cosmostation.io"
-        rpcURL = "https://rpc-althea-app.cosmostation.io"
+        evmRpcURL = "https://rpc-althea-app.cosmostation.io"
         explorerURL = "https://www.mintscan.io/althea/"
         addressURL = explorerURL + "address/%@"
         txURL = explorerURL + "tx/%@"

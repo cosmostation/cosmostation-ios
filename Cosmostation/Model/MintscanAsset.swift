@@ -49,7 +49,10 @@ public struct MintscanAsset: Codable {
     }
     
     func assetColor() -> UIColor {
-        return UIColor.init(hex: color ?? "#FFFFFF")!
+        if (color == nil || color?.isEmpty == true) {
+            return UIColor.white
+        }
+        return UIColor.init(hex: color!) ?? UIColor.white
     }
 }
 

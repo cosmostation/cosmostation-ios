@@ -835,6 +835,8 @@
 		04C63D3A2B87653C00D4A366 /* ChainCantoEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C63D382B87653C00D4A366 /* ChainCantoEVM.swift */; };
 		04C63D3C2B8767A300D4A366 /* ChainXplaEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C63D3B2B8767A300D4A366 /* ChainXplaEVM.swift */; };
 		04C63D3D2B8767A300D4A366 /* ChainXplaEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C63D3B2B8767A300D4A366 /* ChainXplaEVM.swift */; };
+		04C63D3F2B8A1AA300D4A366 /* ChainDymensionEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C63D3E2B8A1AA300D4A366 /* ChainDymensionEVM.swift */; };
+		04C63D402B8A1AA300D4A366 /* ChainDymensionEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C63D3E2B8A1AA300D4A366 /* ChainDymensionEVM.swift */; };
 		04C6B9C52AAC59EC00B02A95 /* QrAddressPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6B9C32AAC59EB00B02A95 /* QrAddressPopupVC.swift */; };
 		04C6B9C62AAC59EC00B02A95 /* QrAddressPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6B9C32AAC59EB00B02A95 /* QrAddressPopupVC.swift */; };
 		04C6B9C72AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C6B9C42AAC59EC00B02A95 /* QrAddressPopupVC.xib */; };
@@ -2216,6 +2218,7 @@
 		04C63D352B8762BF00D4A366 /* ChainHumansEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainHumansEVM.swift; sourceTree = "<group>"; };
 		04C63D382B87653C00D4A366 /* ChainCantoEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCantoEVM.swift; sourceTree = "<group>"; };
 		04C63D3B2B8767A300D4A366 /* ChainXplaEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainXplaEVM.swift; sourceTree = "<group>"; };
+		04C63D3E2B8A1AA300D4A366 /* ChainDymensionEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainDymensionEVM.swift; sourceTree = "<group>"; };
 		04C6B9C32AAC59EB00B02A95 /* QrAddressPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrAddressPopupVC.swift; sourceTree = "<group>"; };
 		04C6B9C42AAC59EC00B02A95 /* QrAddressPopupVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QrAddressPopupVC.xib; sourceTree = "<group>"; };
 		04C6B9C92AAC91F900B02A95 /* ChainOkt996Keccak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOkt996Keccak.swift; sourceTree = "<group>"; };
@@ -2838,6 +2841,7 @@
 				04D279EF2A67C98E00AF046A /* ChainEthereum.swift */,
 				04C63D322B87619900D4A366 /* ChainAltheaEVM.swift */,
 				04C63D382B87653C00D4A366 /* ChainCantoEVM.swift */,
+				04C63D3E2B8A1AA300D4A366 /* ChainDymensionEVM.swift */,
 				04C63D2F2B875F1800D4A366 /* ChainEvmosEVM.swift */,
 				04C63D352B8762BF00D4A366 /* ChainHumansEVM.swift */,
 				042296832A890CC4003C7630 /* ChainKavaEVM.swift */,
@@ -4833,6 +4837,7 @@
 				E122DB5C2A8A468D006D1E7B /* cosmos_store_internal_kv_v1beta1_kv.pb.swift in Sources */,
 				E122DBA02A8A468D006D1E7B /* cosmos_authz_v1beta1_event.pb.swift in Sources */,
 				047843DC2AC991B300462F1C /* injective_ocr_v1beta1_genesis.pb.swift in Sources */,
+				04C63D402B8A1AA300D4A366 /* ChainDymensionEVM.swift in Sources */,
 				047843822AC991B300462F1C /* injective_auction_v1beta1_query.pb.swift in Sources */,
 				0402B80A2ACC758B00824B3F /* ChainGravityBridge.swift in Sources */,
 				E19E8B3E2A92290800001BF5 /* UIColor+Colors.swift in Sources */,
@@ -5557,6 +5562,7 @@
 				047843072AC9918700462F1C /* ethermint_evm_v1_query.pb.swift in Sources */,
 				E122DB5B2A8A468D006D1E7B /* cosmos_store_internal_kv_v1beta1_kv.pb.swift in Sources */,
 				E122DB9F2A8A468D006D1E7B /* cosmos_authz_v1beta1_event.pb.swift in Sources */,
+				04C63D3F2B8A1AA300D4A366 /* ChainDymensionEVM.swift in Sources */,
 				047843DB2AC991B300462F1C /* injective_ocr_v1beta1_genesis.pb.swift in Sources */,
 				047843812AC991B300462F1C /* injective_auction_v1beta1_query.pb.swift in Sources */,
 				0402B8092ACC758B00824B3F /* ChainGravityBridge.swift in Sources */,

@@ -32,7 +32,7 @@ class ChainXplaEVM: EvmClass  {
         validatorPrefix = "xplavaloper"
         
         grpcHost = "grpc-xpla.cosmostation.io"
-        rpcURL = "https://dimension-evm-rpc.xpla.dev"
+        evmRpcURL = "https://dimension-evm-rpc.xpla.dev"
         explorerURL = "https://www.mintscan.io/xpla/"
         addressURL = explorerURL + "address/%@"
         txURL = explorerURL + "tx/%@"

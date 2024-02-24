@@ -40,7 +40,7 @@ class ChainOktEVM: EvmClass  {
         bechAccountPrefix = "ex"
         supportStaking = false
         
-        rpcURL = "https://exchainrpc.okex.org"
+        evmRpcURL = "https://exchainrpc.okex.org"
         explorerURL = "https://www.oklink.com/oktc/"
         addressURL = explorerURL + "address/%@"
         txURL = explorerURL + "tx/%@"
@@ -50,7 +50,7 @@ class ChainOktEVM: EvmClass  {
         let group = DispatchGroup()
         fetchChainParam2(group)
         fetchErc20Info2(group)
-        fetchEvmBalance(group)
+//        fetchEvmBalance(group)
         
         fetchNodeInfo(group)
         fetchAccountInfo(group, bechAddress)
@@ -62,6 +62,7 @@ class ChainOktEVM: EvmClass  {
             self.fetched = true
             self.allCoinValue = self.allCoinValue()
             self.allCoinUSDValue = self.allCoinValue(true)
+//            self.fetchEvmBalance2()
             self.fetchAllErc20Balance(id)
             
             BaseData.instance.updateRefAddressesCoinValue(

@@ -92,12 +92,11 @@ class PortfolioVC: BaseVC {
     
     func initView() {
         baseAccount = BaseData.instance.baseAccount
-        toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
-        searchCosmosChains = toDisplayCosmosChains
-        
         toDisplayEvmChains = baseAccount.getDisplayEvmChains()
         searchEvmChains = toDisplayEvmChains
         
+        toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
+        searchCosmosChains = toDisplayCosmosChains
         
         onUpdateSearchBar()
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
@@ -118,8 +117,8 @@ class PortfolioVC: BaseVC {
             BaseNetWork().fetchPrices()
             toDisplayEvmChains.forEach { $0.fetched = false }
             toDisplayCosmosChains.forEach { $0.fetched = false }
-            baseAccount.fetchDisplayCosmosChains()
             baseAccount.fetchDisplayEvmChains()
+            baseAccount.fetchDisplayCosmosChains()
             tableView.reloadData()
             refresher.endRefreshing()
         }
@@ -205,13 +204,13 @@ class PortfolioVC: BaseVC {
     }
     
     func onChainSelected() {
-        baseAccount.fetchDisplayCosmosChains()
-        toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
-        searchCosmosChains = toDisplayCosmosChains
-        
         baseAccount.fetchDisplayEvmChains()
         toDisplayEvmChains = baseAccount.getDisplayEvmChains()
         searchEvmChains = toDisplayEvmChains
+        
+        baseAccount.fetchDisplayCosmosChains()
+        toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
+        searchCosmosChains = toDisplayCosmosChains
         
         onUpdateSearchBar()
         tableView.reloadData()

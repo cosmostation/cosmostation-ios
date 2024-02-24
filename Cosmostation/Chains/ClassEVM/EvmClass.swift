@@ -19,7 +19,7 @@ class EvmClass: CosmosClass {
     var coinGeckoId = ""
     var coinLogo = ""
     
-    lazy var rpcURL = ""
+    lazy var evmRpcURL = ""
     lazy var explorerURL = ""
     lazy var addressURL = ""
     lazy var txURL = ""
@@ -54,11 +54,13 @@ class EvmClass: CosmosClass {
     }
     
     override func fetchData(_ id: Int64) {
+        print("EVM fetchData ", tag)
         let group = DispatchGroup()
+        fetchChainParam2(group)
+        fetchErc20Info2(group)
+        
         if (supportCosmos) {
-            fetchChainParam2(group)
-            fetchErc20Info2(group)
-            fetchEvmBalance(group)
+//            fetchEvmBalance(group)
             
             let channel = getConnection()
             fetchAuth(group, channel)
@@ -69,6 +71,7 @@ class EvmClass: CosmosClass {
                 self.fetched = true
                 self.allCoinValue = self.allCoinValue()
                 self.allCoinUSDValue = self.allCoinValue(true)
+//                self.fetchEvmBalance2()
                 self.fetchAllErc20Balance(id)
                 
                 BaseData.instance.updateRefAddressesCoinValue(
@@ -78,8 +81,6 @@ class EvmClass: CosmosClass {
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
             }
         } else {
-            fetchChainParam2(group)
-            fetchErc20Info2(group)
             fetchEvmBalance(group)
             
             group.notify(queue: .main) {
@@ -109,11 +110,14 @@ class EvmClass: CosmosClass {
     
     //check account payable with lowest fee
     override func isTxFeePayable() -> Bool {
+        if (supportCosmos) {
+            return super.isTxFeePayable()
+        }
         return evmBalances.compare(EVM_BASE_FEE).rawValue > 0
     }
     
     func getWeb3Connection() -> web3? {
-        guard let url = URL(string: rpcURL) else { return  nil }
+        guard let url = URL(string: evmRpcURL) else { return  nil }
         if (self.web3 == nil || self.web3?.provider.session == nil) {
             return try? Web3.new(url)
         }
@@ -183,6 +187,14 @@ extension EvmClass {
             group.leave()
         }
     }
+    
+    func fetchEvmBalance2() {
+        DispatchQueue.global().async {
+            if let balance = try? self.getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
+                self.evmBalances = NSDecimalNumber(string: String(balance!))
+            }
+        }
+    }
 }
 
 extension EvmClass {
@@ -226,6 +238,7 @@ func ALLEVMCLASS() -> [EvmClass] {
     result.append(ChainEthereum())
 //    result.append(ChainAltheaEVM())
     result.append(ChainCantoEVM())
+    result.append(ChainDymensionEVM())
     result.append(ChainEvmosEVM())
     result.append(ChainHumansEVM())
     result.append(ChainKavaEVM())
@@ -241,6 +254,6 @@ func ALLEVMCLASS() -> [EvmClass] {
     return result
 }
 
-let DEFUAL_DISPALY_EVM = ["ethereum60", "kava60"]
+let DEFUAL_DISPALY_EVM = ["ethereum60", "Dymension60", "kava60"]
 
 let EVM_BASE_FEE = NSDecimalNumber.init(string: "588000000000000")
