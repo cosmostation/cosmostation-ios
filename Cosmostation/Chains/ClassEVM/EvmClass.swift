@@ -58,10 +58,9 @@ class EvmClass: CosmosClass {
         let group = DispatchGroup()
         fetchChainParam2(group)
         fetchErc20Info2(group)
+        fetchEvmBalance(group)
         
         if (supportCosmos) {
-//            fetchEvmBalance(group)
-            
             let channel = getConnection()
             fetchAuth(group, channel)
             
@@ -71,7 +70,6 @@ class EvmClass: CosmosClass {
                 self.fetched = true
                 self.allCoinValue = self.allCoinValue()
                 self.allCoinUSDValue = self.allCoinValue(true)
-//                self.fetchEvmBalance2()
                 self.fetchAllErc20Balance(id)
                 
                 BaseData.instance.updateRefAddressesCoinValue(
@@ -80,9 +78,8 @@ class EvmClass: CosmosClass {
                                nil, self.cosmosBalances?.count))
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
             }
-        } else {
-            fetchEvmBalance(group)
             
+        } else {
             group.notify(queue: .main) {
                 self.fetched = true
                 self.allCoinValue = self.allCoinValue()
@@ -117,11 +114,13 @@ class EvmClass: CosmosClass {
     }
     
     func getWeb3Connection() -> web3? {
-        guard let url = URL(string: evmRpcURL) else { return  nil }
-        if (self.web3 == nil || self.web3?.provider.session == nil) {
-            return try? Web3.new(url)
+        if (self.web3 != nil && self.web3?.provider.session != nil) {
+            return web3
+        } else {
+            guard let url = URL(string: evmRpcURL) else { return  nil }
+            self.web3 = try? Web3.new(url)
+            return web3
         }
-        return web3
     }
     
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
@@ -178,21 +177,12 @@ extension EvmClass {
     
     func fetchEvmBalance(_ group: DispatchGroup) {
         group.enter()
-        if let balance = try? getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(evmAddress)!) {
-            if (balance != nil) {
-                self.evmBalances = NSDecimalNumber(string: String(balance!))
-            }
-            group.leave()
-        } else {
-            group.leave()
-        }
-    }
-    
-    func fetchEvmBalance2() {
-        DispatchQueue.global().async {
+        Task.detached(priority: .high) {
             if let balance = try? self.getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
+                print(self.tag, " fetchEvmBalance DONE")
                 self.evmBalances = NSDecimalNumber(string: String(balance!))
             }
+            group.leave()
         }
     }
 }

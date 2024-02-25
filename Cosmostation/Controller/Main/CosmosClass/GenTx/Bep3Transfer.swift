@@ -125,7 +125,7 @@ class Bep3Transfer: BaseVC {
     
     func fetchData() {
         Task {
-            self.baseAccount.fetchTargetCosmosChains(toChains)
+            self.baseAccount.fetchBep3SupportChains(toChains)
             
             let channel = getConnection()
             if let swapParam = try? await fetchSwapParam(channel),

@@ -149,9 +149,15 @@ class ChainSelectVC: BaseVC {
             }
         }
         
+//        searchCosmosChains.filter { $0.fetched == false }.forEach { chain in
+//            print("chain ", chain.tag)
+//        }
+//        
 //        searchEvmChains.filter { $0.fetched == false }.forEach { chain in
 //            print("chain ", chain.tag)
 //        }
+//        print("searchCosmosChains ", searchCosmosChains.filter { $0.fetched == false })
+//        print("searchEvmChains ", searchEvmChains.filter { $0.fetched == false })
     }
     
     

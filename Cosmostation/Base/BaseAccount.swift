@@ -101,7 +101,7 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                Task {
+                Task(priority: .medium) {
                     await getDisplayCosmosChains().concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)
@@ -115,7 +115,7 @@ extension BaseAccount {
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                Task {
+                Task(priority: .medium) {
                     await getDisplayCosmosChains().concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
@@ -134,7 +134,7 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                Task(priority: .high) {
+                Task(priority: .medium) {
                     await allCosmosClassChains.concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)
@@ -148,7 +148,7 @@ extension BaseAccount {
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                Task(priority: .high) {
+                Task(priority: .medium) {
                     await allCosmosClassChains.concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
@@ -163,7 +163,7 @@ extension BaseAccount {
         }
     }
     
-    func fetchTargetCosmosChains(_ targetChains: [CosmosClass]) {
+    func fetchBep3SupportChains(_ targetChains: [CosmosClass]) {
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
@@ -234,7 +234,7 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                Task {
+                Task(priority: .high) {
                     await getDisplayEvmChains().concurrentForEach { chain in
                         if (chain.evmAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)
@@ -248,7 +248,7 @@ extension BaseAccount {
             
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                Task {
+                Task(priority: .high) {
                     await getDisplayEvmChains().concurrentForEach { chain in
                         if (chain.evmAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
