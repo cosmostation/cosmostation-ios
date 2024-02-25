@@ -15,6 +15,7 @@ class CheckPrivateKeyCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
+    @IBOutlet weak var keyTypeTag: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var pkeyLabel: UILabel!
 
@@ -28,6 +29,15 @@ class CheckPrivateKeyCell: UITableViewCell {
         rootView.setBlur()
         evmCompatTag.isHidden = true
         legacyTag.isHidden = true
+        keyTypeTag.isHidden = true
+    }
+    
+    func bindEvmClassPrivateKey(_ account: BaseAccount, _ chain: EvmClass) {
+        logoImg1.image =  UIImage.init(named: chain.logo1)
+        nameLabel.text = chain.name.uppercased()
+        
+        hdPathLabel.text = chain.getHDPath(account.lastHDPath)
+        pkeyLabel.text = "0x" + chain.privateKey!.toHexString()
     }
     
     
@@ -36,14 +46,16 @@ class CheckPrivateKeyCell: UITableViewCell {
         nameLabel.text = chain.name.uppercased()
         
         hdPathLabel.text = chain.getHDPath(account.lastHDPath)
-//        if (chain.evmCompatible) {
-//            evmCompatTag.isHidden = false
-//        } else 
-        
-        if (!chain.isDefault) {
-            legacyTag.isHidden = false
-        }
         pkeyLabel.text = "0x" + chain.privateKey!.toHexString()
         
+        legacyTag.isHidden = chain.isDefault
+        if (chain.tag == "okt996_Keccak") {
+            keyTypeTag.text = "ethsecp256k1"
+            keyTypeTag.isHidden = false
+            
+        } else if (chain.tag == "okt996_Secp") {
+            keyTypeTag.text = "secp256k1"
+            keyTypeTag.isHidden = false
+        }
     }
 }

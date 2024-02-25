@@ -361,16 +361,25 @@ extension BaseAccount {
         return result
     }
     
-    func initOnyKeyData() async -> [CosmosClass] {
-        var result = [CosmosClass]()
+    func initKeyforCheck() async -> ([EvmClass], [CosmosClass]) {
+        var evmResult = [EvmClass]()
+        var cosmosResult = [CosmosClass]()
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
+            ALLEVMCLASS().forEach { chain in
+                evmResult.append(chain)
+            }
             ALLCOSMOSCLASS().forEach { chain in
-                result.append(chain)
+                cosmosResult.append(chain)
             }
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                result.forEach { chain in
+                evmResult.forEach { chain in
+                    if (chain.evmAddress.isEmpty) {
+                        chain.setInfoWithSeed(seed, lastHDPath)
+                    }
+                }
+                cosmosResult.forEach { chain in
                     if (chain.bechAddress.isEmpty) {
                         chain.setInfoWithSeed(seed, lastHDPath)
                     }
@@ -378,18 +387,26 @@ extension BaseAccount {
             }
             
         } else if (type == .onlyPrivateKey) {
+            ALLEVMCLASS().forEach { chain in
+                evmResult.append(chain)
+            }
             ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
-                result.append(chain)
+                cosmosResult.append(chain)
             }
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                result.forEach { chain in
+                evmResult.forEach { chain in
+                    if (chain.evmAddress.isEmpty) {
+                        chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                    }
+                }
+                cosmosResult.forEach { chain in
                     if (chain.bechAddress.isEmpty) {
                         chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                     }
                 }
             }
         }
-        return result
+        return (evmResult, cosmosResult)
     }
     
     func fetchForPreCreate(_ seed: Data? = nil, _ privateKeyString: String? = nil) {
