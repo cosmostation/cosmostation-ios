@@ -73,6 +73,13 @@ public class BaseAccount {
 
     
     func updateAllValue() {
+        getDisplayEvmChains().forEach { chain in
+            chain.allCoinValue = chain.allCoinValue()
+            chain.allCoinUSDValue = chain.allCoinValue(true)
+            chain.allTokenValue = chain.allTokenValue()
+            chain.allTokenUSDValue = chain.allTokenValue(true)
+        }
+        
         getDisplayCosmosChains().forEach { chain in
             chain.allCoinValue = chain.allCoinValue()
             chain.allCoinUSDValue = chain.allCoinValue(true)
