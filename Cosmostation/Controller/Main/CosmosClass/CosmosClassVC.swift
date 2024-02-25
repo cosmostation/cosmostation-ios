@@ -75,6 +75,9 @@ class CosmosClassVC: BaseVC {
         
         onSetTabbarView()
         onSetFabButton()
+        if ((selectedChain as? EvmClass)?.supportCosmos == true) {
+            (selectedChain as? EvmClass)?.fetchEvmBalance2()
+        }
         if (selectedChain.supportStaking) {
             selectedChain.fetchStakeData()
         }
