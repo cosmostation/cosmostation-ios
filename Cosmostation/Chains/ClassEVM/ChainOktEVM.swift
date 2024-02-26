@@ -47,11 +47,9 @@ class ChainOktEVM: EvmClass  {
     }
     
     override func fetchData(_ id: Int64) {
-        print("OKT fetchData ", tag)
         let group = DispatchGroup()
         fetchChainParam2(group)
         fetchErc20Info2(group)
-//        fetchEvmBalance(group)
         
         fetchNodeInfo(group)
         fetchAccountInfo(group, bechAddress)
@@ -63,7 +61,6 @@ class ChainOktEVM: EvmClass  {
             self.fetched = true
             self.allCoinValue = self.allCoinValue()
             self.allCoinUSDValue = self.allCoinValue(true)
-//            self.fetchEvmBalance2()
             self.fetchAllErc20Balance(id)
             
             BaseData.instance.updateRefAddressesCoinValue(
@@ -121,7 +118,6 @@ extension ChainOktEVM {
     }
     
     func fetchNodeInfo(_ group: DispatchGroup) {
-//        print("fetchNodeInfo Start ", BaseNetWork.lcdNodeInfoUrl(self))
         group.enter()
         AF.request(BaseNetWork.lcdNodeInfoUrl(self), method: .get)
             .responseDecodable(of: JSON.self) { response in
@@ -137,7 +133,6 @@ extension ChainOktEVM {
     }
     
     func fetchAccountInfo(_ group: DispatchGroup, _ address: String) {
-//        print("fetchAccountInfo Start ", BaseNetWork.lcdAccountInfoUrl(self, address))
         group.enter()
         AF.request(BaseNetWork.lcdAccountInfoUrl(self, address), method: .get)
             .responseDecodable(of: JSON.self) { response in
@@ -153,7 +148,6 @@ extension ChainOktEVM {
     }
     
     func fetchOktDeposited(_ group: DispatchGroup, _ address: String) {
-//        print("fetchOktDeposited Start ", BaseNetWork.lcdOktDepositUrl(address))
         group.enter()
         AF.request(BaseNetWork.lcdOktDepositUrl(address), method: .get)
             .responseDecodable(of: JSON.self) { response in
@@ -169,7 +163,6 @@ extension ChainOktEVM {
     }
     
     func fetchOktWithdraw(_ group: DispatchGroup, _ address: String) {
-//        print("fetchOktWithdraw Start ", BaseNetWork.lcdOktWithdrawUrl(address))
         group.enter()
         AF.request(BaseNetWork.lcdOktWithdrawUrl( address), method: .get)
             .responseDecodable(of: JSON.self) { response in

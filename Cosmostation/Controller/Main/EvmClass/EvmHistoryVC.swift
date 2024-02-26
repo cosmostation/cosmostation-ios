@@ -14,19 +14,15 @@ class EvmHistoryVC: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        baseAccount = BaseData.instance.baseAccount
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func onClickExplorer(_ sender: UIButton) {
+        guard let url = URL(string:String(format: selectedChain.addressURL, selectedChain.evmAddress)) else { return }
+        self.onShowSafariWeb(url)
+        
     }
-    */
-
+    
 }

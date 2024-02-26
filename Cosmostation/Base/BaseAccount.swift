@@ -295,7 +295,6 @@ extension BaseAccount {
         }
     }
     
-    
     func initSortEvmChains() {
         allEvmClassChains.sort {
             if ($0.tag == "ethereum60") { return true }

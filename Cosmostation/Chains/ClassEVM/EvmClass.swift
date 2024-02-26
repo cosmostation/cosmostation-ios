@@ -54,7 +54,6 @@ class EvmClass: CosmosClass {
     }
     
     override func fetchData(_ id: Int64) {
-        print("EVM fetchData ", tag)
         let group = DispatchGroup()
         fetchChainParam2(group)
         fetchErc20Info2(group)
@@ -97,11 +96,15 @@ class EvmClass: CosmosClass {
     
     //fetch only balance for add account check
     override func fetchPreCreate() {
-        let group = DispatchGroup()
-        fetchEvmBalance(group)
-        group.notify(queue: .main) {
-            self.fetched = true
-            NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+        //Do not using Task, only DispatchQueue : make slow
+        DispatchQueue.global().async {
+            if let balance = try? self.getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
+                self.evmBalances = NSDecimalNumber(string: String(balance!))
+            }
+            DispatchQueue.main.async(execute: {
+                self.fetched = true
+                NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+            });
         }
     }
     
@@ -176,11 +179,12 @@ extension EvmClass {
     }
     
     func fetchEvmBalance(_ group: DispatchGroup) {
+        print("fetchEvmBalance START", self.tag)
         group.enter()
         Task.detached(priority: .high) {
             if let balance = try? self.getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
-                print(self.tag, " fetchEvmBalance DONE")
                 self.evmBalances = NSDecimalNumber(string: String(balance!))
+                print("fetchEvmBalance DONE", self.tag)
             }
             group.leave()
         }

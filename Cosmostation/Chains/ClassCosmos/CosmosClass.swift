@@ -64,7 +64,6 @@ class CosmosClass: BaseChain {
     }
     
     override func fetchData(_ id: Int64) {
-        print("COSMOS fetchData ", tag)
         let group = DispatchGroup()
         fetchChainParam2(group)
         if (supportCw20) {
@@ -378,7 +377,6 @@ extension CosmosClass {
         let channel = getConnection()
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = bechAddress }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
-            print("fetchAuth ", tag)
             self.cosmosAuth = response.account
             fetchBalance(group, channel)
             if (self.supportStaking) {

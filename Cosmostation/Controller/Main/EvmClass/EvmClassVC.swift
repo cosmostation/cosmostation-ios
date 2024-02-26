@@ -91,7 +91,7 @@ class EvmClassVC: BaseVC {
         let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 1)
         let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 2)
         tabbar.items.append(assetTabBar)
-        tabbar.items.append(nftTabBar)
+//        tabbar.items.append(nftTabBar)
         tabbar.items.append(historyTabBar)
         
         tabbar.barTintColor = .clear

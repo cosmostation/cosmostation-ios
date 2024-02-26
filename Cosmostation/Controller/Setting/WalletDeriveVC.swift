@@ -51,7 +51,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
         selectedCosmosTags.append("cosmos118")
         
         if (mnemonic != nil) {
-            DispatchQueue.global().async {
+            Task {
                 self.seed = KeyFac.getSeedFromWords(self.mnemonic!)
                 DispatchQueue.main.async(execute: {
                     self.toAddAccount = BaseAccount("", .withMnemonic, String(self.hdPath))
@@ -72,7 +72,6 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
             
             toAddAccount = BaseAccount("", .onlyPrivateKey, "-1")
             toAddAccount.fetchForPreCreate(nil, privateKeyString)
-            
             allEvmChains = toAddAccount.allEvmClassChains
             allCosmosChains = toAddAccount.allCosmosClassChains
             onUpdateview()

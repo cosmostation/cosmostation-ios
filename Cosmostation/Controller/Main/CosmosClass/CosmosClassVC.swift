@@ -158,8 +158,13 @@ class CosmosClassVC: BaseVC {
     }
     
     @objc func onClickExplorer() {
-        guard let url = BaseNetWork.getAccountDetailUrl(selectedChain) else { return }
-        self.onShowSafariWeb(url)
+        if let evmChain = selectedChain as? EvmClass {
+            guard let url = URL(string:String(format: evmChain.addressURL, evmChain.evmAddress)) else { return }
+            self.onShowSafariWeb(url)
+        } else {
+            guard let url = BaseNetWork.getAccountDetailUrl(selectedChain) else { return }
+            self.onShowSafariWeb(url)
+        }
     }
     
     func onSendTx() {
