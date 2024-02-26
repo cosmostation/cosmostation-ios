@@ -1040,8 +1040,8 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
     }
     
     func onInputedAddress(_ address: String, _ memo: String?) {
-        if let memo = memo {
-            toMemo = memo!
+        if let Memo = memo {
+            toMemo = Memo
             if (toMemo.isEmpty) {
                 memoLabel.isHidden = true
                 memoHintLabel.isHidden = false

@@ -248,6 +248,9 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (section == 0) {
+            return toDisplayEvmChains.count == 0 ? 0 : 40
+        }
         return 40
     }
     

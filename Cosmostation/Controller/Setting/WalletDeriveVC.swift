@@ -47,8 +47,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        //add default
-        selectedEvmTags.append("ethereum60")
+        //add only cosmos for default
         selectedCosmosTags.append("cosmos118")
         
         if (mnemonic != nil) {
@@ -151,7 +150,6 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
         if (hdPath != path) {
             hdPath = path
             selectedEvmTags.removeAll()
-            selectedEvmTags.append("ethereum60")
             selectedCosmosTags.removeAll()
             selectedCosmosTags.append("cosmos118")
             
@@ -253,7 +251,6 @@ extension WalletDeriveVC: UITableViewDelegate, UITableViewDataSource, UISearchBa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             let chain = allEvmChains[indexPath.row]
-            if (chain.tag == "ethereum60") { return }
             if (selectedEvmTags.contains(chain.tag)) {
                 selectedEvmTags.removeAll { $0 == chain.tag }
             } else {

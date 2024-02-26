@@ -166,9 +166,8 @@ class ChainSelectVC: BaseVC {
         baseAccount.reSortEvmChains()
         allEvmChains = baseAccount.allEvmClassChains
         toDisplayEvmTags.removeAll()
-        toDisplayEvmTags.append("ethereum60")
         allEvmChains.forEach { chian in
-            if (chian.allCoinUSDValue.compare(NSDecimalNumber.one).rawValue > 0 && chian.tag != "ethereum60") {
+            if (chian.allCoinUSDValue.compare(NSDecimalNumber.one).rawValue > 0) {
                 toDisplayEvmTags.append(chian.tag)
             }
         }
@@ -247,7 +246,6 @@ extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource, UISearchBar
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             let chain = searchEvmChains[indexPath.row]
-            if (chain.tag == "ethereum60") { return }
             if (toDisplayEvmTags.contains(chain.tag)) {
                 toDisplayEvmTags.removeAll { $0 == chain.tag }
             } else {
