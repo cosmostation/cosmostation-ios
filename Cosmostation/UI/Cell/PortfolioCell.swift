@@ -18,6 +18,8 @@ class PortfolioCell: UITableViewCell {
     @IBOutlet weak var tagLayer: UIStackView!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
+    @IBOutlet weak var cosmosTag: UILabel!
+    @IBOutlet weak var keyTypeTag: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
@@ -38,6 +40,8 @@ class PortfolioCell: UITableViewCell {
         tagLayer.isHidden = true
         legacyTag.isHidden = true
         evmCompatTag.isHidden = true
+        cosmosTag.isHidden = true
+        keyTypeTag.isHidden = true
     }
     
     func bindCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass) {
@@ -45,14 +49,18 @@ class PortfolioCell: UITableViewCell {
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
         
-//        if (chain.evmCompatible) {
-//            tagLayer.isHidden = false
-//            evmCompatTag.isHidden = false
-//        } else 
-        
         if (!chain.isDefault) {
             tagLayer.isHidden = false
             legacyTag.isHidden = false
+            //for okt legacy
+            if (chain.tag == "okt996_Keccak") {
+                keyTypeTag.text = "ethsecp256k1"
+                keyTypeTag.isHidden = false
+                
+            } else if (chain.tag == "okt996_Secp") {
+                keyTypeTag.text = "secp256k1"
+                keyTypeTag.isHidden = false
+            }
         }
         
         if (chain.fetched) {
@@ -75,6 +83,11 @@ class PortfolioCell: UITableViewCell {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
+        
+        if (chain.supportCosmos) {
+            tagLayer.isHidden = false
+            cosmosTag.isHidden = false
+        }
         
         if (chain.fetched) {
             valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)

@@ -14,6 +14,7 @@ class QrAddressVC: BaseVC {
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
+    @IBOutlet weak var cosmosTag: UILabel!
     @IBOutlet weak var keyTypeTag: UILabel!
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressCardView: FixCardView!
@@ -31,30 +32,27 @@ class QrAddressVC: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
         
-        if let selectedChain = selectedChain as? EvmClass {
-            addressToggleBtn.isHidden = !selectedChain.supportCosmos
-            evmCompatTag.isHidden = !selectedChain.supportCosmos
-            toDpAddress = selectedChain.evmAddress
+        if let evmChain = selectedChain as? EvmClass {
+            addressToggleBtn.isHidden = !evmChain.supportCosmos
+            cosmosTag.isHidden = !evmChain.supportCosmos
+            toDpAddress = evmChain.evmAddress
             addressLabel.text = toDpAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             if (baseAccount.type == .withMnemonic) {
-                hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
+                hdPathLabel.text = evmChain.getHDPath(baseAccount.lastHDPath)
             } else {
                 hdPathLabel.text = ""
             }
             
-        } else if let selectedChain = selectedChain as? CosmosClass {
+        } else if let cosmosChain = selectedChain as? CosmosClass {
             addressToggleBtn.isHidden = true
-            toDpAddress = selectedChain.bechAddress
+            legacyTag.isHidden = cosmosChain.isDefault
+            toDpAddress = cosmosChain.bechAddress
             addressLabel.text = toDpAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             
             if (baseAccount.type == .withMnemonic) {
-                hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
-                if (selectedChain.isDefault == false) {
-                    legacyTag.isHidden = false
-                }
-                
+                hdPathLabel.text = cosmosChain.getHDPath(baseAccount.lastHDPath)
             } else {
                 hdPathLabel.text = ""
             }

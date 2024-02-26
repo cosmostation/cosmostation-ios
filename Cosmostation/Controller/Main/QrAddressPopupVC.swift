@@ -17,6 +17,7 @@ class QrAddressPopupVC: BaseVC {
     @IBOutlet weak var tagLayer: UIStackView!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
+    @IBOutlet weak var cosmosTag: UILabel!
     @IBOutlet weak var keyTypeTag: UILabel!
     
     

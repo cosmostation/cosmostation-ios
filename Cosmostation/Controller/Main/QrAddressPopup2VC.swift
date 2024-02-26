@@ -14,6 +14,8 @@ class QrAddressPopup2VC: BaseVC {
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
+    @IBOutlet weak var cosmosTag: UILabel!
+    @IBOutlet weak var keyTypeTag: UILabel!
     
     @IBOutlet weak var evmQrImgView: UIImageView!
     @IBOutlet weak var evmAddressLabel: UILabel!

@@ -18,6 +18,8 @@ class SelectChainCell: UITableViewCell {
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
+    @IBOutlet weak var cosmosTag: UILabel!
+    @IBOutlet weak var keyTypeTag: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var assetCntLabel: UILabel!
@@ -36,6 +38,8 @@ class SelectChainCell: UITableViewCell {
         currencyLabel.text = ""
         legacyTag.isHidden = true
         evmCompatTag.isHidden = true
+        cosmosTag.isHidden = true
+        keyTypeTag.isHidden = true
     }
     
     var actionToggle: ((Bool) -> Void)? = nil
@@ -56,6 +60,10 @@ class SelectChainCell: UITableViewCell {
             rootView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
         }
         
+        if (chain.supportCosmos) {
+            cosmosTag.isHidden = false
+        }
+        
         if (account.type == .withMnemonic) {
             hdPathLabel.text = chain.getHDPath(account.lastHDPath)
         } else {
@@ -66,8 +74,7 @@ class SelectChainCell: UITableViewCell {
             valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             assetCntLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
-//            assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"
-//            let coinCnt = refAddress.lastCoinCnt
+            
             let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
             let tokenCnt = chain.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
             if (tokenCnt == 0) {
@@ -75,7 +82,6 @@ class SelectChainCell: UITableViewCell {
             } else {
                 assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
             }
-            
             
         } else {
             valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
@@ -99,25 +105,24 @@ class SelectChainCell: UITableViewCell {
         
         if (account.type == .withMnemonic) {
             hdPathLabel.text = chain.getHDPath(account.lastHDPath)
-//            if (chain.evmCompatible) {
-//                evmCompatTag.isHidden = false
-//            } else 
-            if (!chain.isDefault) {
-                legacyTag.isHidden = false
-            }
-            
         } else {
             hdPathLabel.text = ""
-//            if (chain.evmCompatible) {
-//                evmCompatTag.isHidden = false
-//            }
+        }
+        
+        legacyTag.isHidden = chain.isDefault
+        if (chain.tag == "okt996_Keccak") {
+            keyTypeTag.text = "ethsecp256k1"
+            keyTypeTag.isHidden = false
+            
+        } else if (chain.tag == "okt996_Secp") {
+            keyTypeTag.text = "secp256k1"
+            keyTypeTag.isHidden = false
         }
         
         if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
             valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             assetCntLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
-//            assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"
             
             let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
             if (chain.supportCw20) {
@@ -125,7 +130,7 @@ class SelectChainCell: UITableViewCell {
                 if (tokenCnt == 0) {
                     assetCntLabel.text = coinCntString
                 } else {
-                    assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString 
+                    assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
                 }
                 
             } else {

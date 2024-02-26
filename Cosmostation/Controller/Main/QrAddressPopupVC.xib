@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,6 +21,7 @@
             <connections>
                 <outlet property="addressLabel" destination="wbX-h2-CAr" id="f61-mR-XD1"/>
                 <outlet property="chainNameLabel" destination="oBF-2o-bRk" id="WxI-jD-mxe"/>
+                <outlet property="cosmosTag" destination="k7e-O4-BwU" id="OGl-5e-Jli"/>
                 <outlet property="evmCompatTag" destination="hjw-WT-XJi" id="oBC-B4-Wn7"/>
                 <outlet property="hdPathLabel" destination="wfX-nN-dpn" id="NTI-oU-9mO"/>
                 <outlet property="keyTypeTag" destination="4DZ-EN-zz6" id="iNU-hf-rgY"/>
@@ -76,6 +77,23 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="73" id="40Y-10-XBq"/>
                                         <constraint firstAttribute="height" constant="14" id="Ceg-01-GUL"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                    <color key="textColor" name="_color01"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="6"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COSMOS EVM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7e-O4-BwU">
+                                    <rect key="frame" x="0.0" y="0.0" width="73" height="14"/>
+                                    <color key="backgroundColor" red="0.054901960780000002" green="0.59607843140000005" blue="0.64705882349999999" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="73" id="Sia-x4-blu"/>
+                                        <constraint firstAttribute="height" constant="14" id="m3b-7z-jOv"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                     <color key="textColor" name="_color01"/>

@@ -18,6 +18,8 @@ class DeriveCell: UITableViewCell {
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
+    @IBOutlet weak var cosmosTag: UILabel!
+    @IBOutlet weak var keyTypeTag: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var denomLabel: UILabel!
     @IBOutlet weak var coinCntLabel: UILabel!
@@ -36,6 +38,8 @@ class DeriveCell: UITableViewCell {
     override func prepareForReuse() {
         legacyTag.isHidden = true
         evmCompatTag.isHidden = true
+        cosmosTag.isHidden = true
+        keyTypeTag.isHidden = true
         loadingLabel.isHidden = false
         amountLabel.isHidden = true
         denomLabel.isHidden = true
@@ -61,20 +65,13 @@ class DeriveCell: UITableViewCell {
         } else {
             hdPathLabel.text = chain.evmAddress
         }
+//        if (chain.supportCosmos) {
+//            cosmosTag.isHidden = false
+//        }
         
         if (chain.fetched) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
-            
-            if let stakeDenom = chain.stakeDenom, 
-                let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
-                WDP.dpCoin(msAsset, chain.evmBalances, nil, denomLabel, amountLabel, msAsset.decimals)
-            } else {
-                let dpAmount = chain.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
-                denomLabel.text = chain.coinSymbol
-                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
-            }
-            
             
             let dpAmount = chain.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
             denomLabel.text = chain.coinSymbol
@@ -86,8 +83,15 @@ class DeriveCell: UITableViewCell {
                 denomLabel.textColor = .color01
             }
             
+            if (chain.evmBalances != NSDecimalNumber.zero) {
+                coinCntLabel.text = "0 Coins"
+            } else {
+                coinCntLabel.text = "1 Coins"
+            }
+            
             denomLabel.isHidden = false
             amountLabel.isHidden = false
+            coinCntLabel.isHidden = false
             
         } else {
             loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
@@ -111,11 +115,19 @@ class DeriveCell: UITableViewCell {
         
         if (account.type == .withMnemonic) {
             hdPathLabel.text = chain.getHDPath(account.lastHDPath)
-            legacyTag.isHidden = chain.isDefault
-            
         } else {
-            hdPathLabel.text = chain.bechAddress
+            hdPathLabel.text = ""
         }
+        
+        legacyTag.isHidden = chain.isDefault
+//        if (chain.tag == "okt996_Keccak") {
+//            keyTypeTag.text = "ethsecp256k1"
+//            keyTypeTag.isHidden = false
+//            
+//        } else if (chain.tag == "okt996_Secp") {
+//            keyTypeTag.text = "secp256k1"
+//            keyTypeTag.isHidden = false
+//        }
         
         if (chain.fetched) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)

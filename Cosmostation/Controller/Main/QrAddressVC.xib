@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,6 +23,7 @@
                 <outlet property="addressLabel" destination="fUT-8v-eVv" id="NlG-XY-UtX"/>
                 <outlet property="addressToggleBtn" destination="hyI-r4-hqa" id="eXX-i7-V2n"/>
                 <outlet property="chainNameLabel" destination="Log-Tr-ulL" id="YHl-Cg-y1U"/>
+                <outlet property="cosmosTag" destination="OJk-zn-vY0" id="Djh-GU-bib"/>
                 <outlet property="evmCompatTag" destination="WdH-PN-TbZ" id="kuX-ev-dk7"/>
                 <outlet property="hdPathLabel" destination="Ox2-57-jxw" id="4He-Nx-7jD"/>
                 <outlet property="keyTypeTag" destination="qux-d4-7xh" id="xRx-4d-ZuL"/>
@@ -79,6 +80,23 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="73" id="FaM-5m-pkd"/>
                                         <constraint firstAttribute="height" constant="14" id="Ky7-N0-YQl"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                    <color key="textColor" name="_color01"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="6"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COSMOS EVM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJk-zn-vY0">
+                                    <rect key="frame" x="0.0" y="0.0" width="73" height="14"/>
+                                    <color key="backgroundColor" red="0.054901960780000002" green="0.59607843140000005" blue="0.64705882349999999" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="73" id="ANy-kS-Fq5"/>
+                                        <constraint firstAttribute="height" constant="14" id="z4e-M6-x0k"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                     <color key="textColor" name="_color01"/>

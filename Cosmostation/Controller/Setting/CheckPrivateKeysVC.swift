@@ -106,10 +106,10 @@ extension CheckPrivateKeysVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         var ptivateKeyString = ""
         if (indexPath.section == 0) {
-            let selectedChain = allCosmosChain[indexPath.row]
+            let selectedChain = allEvmChain[indexPath.row]
             ptivateKeyString = "0x" + selectedChain.privateKey!.toHexString().trimmingCharacters(in: .whitespacesAndNewlines)
         } else {
-            let selectedChain = allEvmChain[indexPath.row]
+            let selectedChain = allCosmosChain[indexPath.row]
             ptivateKeyString = "0x" + selectedChain.privateKey!.toHexString().trimmingCharacters(in: .whitespacesAndNewlines)
         }
         let copy = UIAction(title: NSLocalizedString("str_copy", comment: ""), image: UIImage(systemName: "doc.on.doc")) { _ in
