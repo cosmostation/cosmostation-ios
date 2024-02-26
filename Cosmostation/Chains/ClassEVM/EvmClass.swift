@@ -179,12 +179,10 @@ extension EvmClass {
     }
     
     func fetchEvmBalance(_ group: DispatchGroup) {
-        print("fetchEvmBalance START", self.tag)
         group.enter()
         Task.detached(priority: .high) {
             if let balance = try? self.getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
                 self.evmBalances = NSDecimalNumber(string: String(balance!))
-                print("fetchEvmBalance DONE", self.tag)
             }
             group.leave()
         }
@@ -231,13 +229,15 @@ func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
 //    result.append(ChainAltheaEVM())
-    result.append(ChainCantoEVM())
-    result.append(ChainDymensionEVM())
-    result.append(ChainEvmosEVM())
-    result.append(ChainHumansEVM())
-    result.append(ChainKavaEVM())
-    result.append(ChainOktEVM())
-    result.append(ChainXplaEVM())
+//    result.append(ChainCantoEVM())
+//    result.append(ChainDymensionEVM())
+//    result.append(ChainEvmosEVM())
+//    result.append(ChainHumansEVM())
+//    result.append(ChainKavaEVM())
+//    result.append(ChainOktEVM())
+////    result.append(ChainOptimism())
+////    result.append(ChainPolygon())
+//    result.append(ChainXplaEVM())
     
     //Add cosmos chain id for ibc
     result.forEach { chain in
