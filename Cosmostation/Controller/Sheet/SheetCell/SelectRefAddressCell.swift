@@ -49,10 +49,10 @@ class SelectRefAddressCell: UITableViewCell {
                 keyTypeTag.isHidden = false
             }
         }
-        let allEvm = ALLEVMCLASS()
-        if (allEvm.filter({ $0.tag == refAddress.chainTag }).count != 0) {
-            evmCompatTag.isHidden = false
-        }
+//        let allEvm = ALLEVMCLASS()
+//        if (allEvm.filter({ $0.tag == refAddress.chainTag }).count != 0) {
+//            evmCompatTag.isHidden = false
+//        }
         
         addressLabel.text = refAddress.bechAddress
         addressLabel.adjustsFontSizeToFitWidth = true
