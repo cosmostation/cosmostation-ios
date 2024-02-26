@@ -75,7 +75,7 @@ class EvmClass: CosmosClass {
                 BaseData.instance.updateRefAddressesCoinValue(
                     RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                                self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                               nil, self.cosmosBalances?.count))
+                               nil, self.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
             }
             
@@ -89,7 +89,7 @@ class EvmClass: CosmosClass {
                 BaseData.instance.updateRefAddressesCoinValue(
                     RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
                                self.evmBalances.stringValue, self.allCoinUSDValue.stringValue,
-                               nil, 1))
+                               nil, (self.evmBalances != NSDecimalNumber.zero ? 1 : 0) ))
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
             }
         }

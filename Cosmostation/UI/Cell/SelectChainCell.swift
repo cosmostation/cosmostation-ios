@@ -66,7 +66,16 @@ class SelectChainCell: UITableViewCell {
             valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             assetCntLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
-            assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"
+//            assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"
+//            let coinCnt = refAddress.lastCoinCnt
+            let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
+            let tokenCnt = chain.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
+            if (tokenCnt == 0) {
+                assetCntLabel.text = coinCntString
+            } else {
+                assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
+            }
+            
             
         } else {
             valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
@@ -108,7 +117,20 @@ class SelectChainCell: UITableViewCell {
             valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             assetCntLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
-            assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"
+//            assetCntLabel.text = String(refAddress.lastCoinCnt) + " Coins"
+            
+            let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
+            if (chain.supportCw20) {
+                let tokenCnt = chain.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
+                if (tokenCnt == 0) {
+                    assetCntLabel.text = coinCntString
+                } else {
+                    assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString 
+                }
+                
+            } else {
+                assetCntLabel.text = coinCntString
+            }
             
         } else {
             valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
