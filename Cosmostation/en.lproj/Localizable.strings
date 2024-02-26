@@ -378,6 +378,7 @@
 "msg_create_another_msg" = "You can create a new account using the same mnemonic, but with a different HD Path.\n\nIn general, there is a possibility that it may not be compatible with other wallets, and it is recommended to be used only by those with background knowledge of crypto keys and HD Path.";
 "msg_enter_encription_key" = "Enter the Encryption Key displayed on the screen to restore your account.";
 "msg_addressbook_add" = "For convenience, you can register frequently used addresses.";
+"msg_addressbook_memo_changed" = "The memo has changed compared to the existing address book.\nWould you like to update with new memo?";
 "msg_addressbook_updated" = "The address book has been updated.";
 "msg_swap_warn" = "Cosmostation Mobile is a non-custodial wallet service, so users are responsible for executing all transactions. Please always check the details accurately before sending a transaction. \n\nWe are not responsible for any losses resulting from transactions through the app.";
 "msg_check_inputed_mnemonic" = "Please check the mnemonic you entered. \nJust so you know, don't share it with anyone. Losing this mnemonic can lead to loss of assets.";

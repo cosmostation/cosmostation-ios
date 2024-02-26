@@ -78,7 +78,7 @@ enum PubKeyType: Int {
 func All_IBC_Chains() -> [CosmosClass] {
     var result = [CosmosClass]()
     result.append(contentsOf: ALLCOSMOSCLASS())
-    result.append(contentsOf:  ALLEVMCLASS().filter { $0.supportCosmos == true } )
+    result.append(contentsOf: ALLEVMCLASS().filter { $0.supportCosmos == true } )
     return result
 }
 

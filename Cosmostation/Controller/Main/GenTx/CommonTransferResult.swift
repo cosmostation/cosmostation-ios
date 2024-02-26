@@ -32,7 +32,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var fromChain: BaseChain!
     var toChain: BaseChain!
     var toAddress: String!
-    var toMemo: String?
+    var toMemo = ""
     var fetchCnt = 10
     
     var cosmosBroadcastTxResponse: Cosmos_Base_Abci_V1beta1_TxResponse?
@@ -143,19 +143,20 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     }
     
     func onCheckAddAddressBook() {
-        if let existed = BaseData.instance.selectAllAddressBooks().filter({ $0.dpAddress == toAddress && $0.chainName == toChain?.name }).first {
+        if let existed = BaseData.instance.selectAllAddressBooks().filter({ $0.dpAddress == toAddress }).first {
             if (existed.memo != toMemo) {
                 let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
+                addressBookSheet.addressBookType = .AfterTxEdit
                 addressBookSheet.addressBook = existed
                 addressBookSheet.memo = toMemo
                 addressBookSheet.bookDelegate = self
                 self.onStartSheet(addressBookSheet, 420)
                 return
             }
-        }
-        
-        if (BaseData.instance.selectAllRefAddresses().filter { $0.bechAddress == toAddress || $0.evmAddress == toAddress }.count == 0) {
+            
+        } else if (BaseData.instance.selectAllRefAddresses().filter { $0.bechAddress == toAddress || $0.evmAddress == toAddress }.count == 0) {
             let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
+            addressBookSheet.addressBookType = .AfterTxNew
             addressBookSheet.recipientChain = toChain
             addressBookSheet.recipinetAddress = toAddress
             addressBookSheet.memo = toMemo
