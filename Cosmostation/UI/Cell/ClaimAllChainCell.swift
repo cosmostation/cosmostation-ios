@@ -16,6 +16,7 @@ class ClaimAllChainCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
+    @IBOutlet weak var cosmosTag: UILabel!
     @IBOutlet weak var valueCurrencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
@@ -35,6 +36,7 @@ class ClaimAllChainCell: UITableViewCell {
         
         legacyTag.isHidden = true
         evmCompatTag.isHidden = true
+        cosmosTag.isHidden = true
         pendingView.isHidden = false
         pendingView.animation = LottieAnimation.named("loadingSmallYellow")
         pendingView.contentMode = .scaleAspectFit
@@ -55,6 +57,7 @@ class ClaimAllChainCell: UITableViewCell {
     override func prepareForReuse() {
         legacyTag.isHidden = true
         evmCompatTag.isHidden = true
+        cosmosTag.isHidden = true
         pendingView.isHidden = false
         stateImg.image = UIImage(named: "iconClaimAllReady")
         stateImg.isHidden = true
@@ -70,9 +73,14 @@ class ClaimAllChainCell: UITableViewCell {
                        _ txFee: Cosmos_Tx_V1beta1_Fee?, _ broadcasted: Bool, _ response: Cosmos_Tx_V1beta1_GetTxResponse?) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
-        if (chain.evmCompatible) {
-            evmCompatTag.isHidden = false
-        } else if (!chain.isDefault) {
+        
+        if let evmChain = (chain as? EvmClass) {
+            if (evmChain.supportCosmos) {
+                cosmosTag.isHidden = false
+            }
+        }
+        
+        if (!chain.isDefault) {
             legacyTag.isHidden = false
         }
         

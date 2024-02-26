@@ -23,11 +23,11 @@ class ChainHumans: CosmosClass  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         bechAccountPrefix = "human"
         validatorPrefix = "humanvaloper"
-        evmCompatible = true
-        supportErc20 = false
+//        evmCompatible = true
+//        supportErc20 = false
         
         grpcHost = "grpc-humans.cosmostation.io"
-        rpcURL = "https://rpc-humans-app.cosmostation.io"
+//        rpcURL = "https://rpc-humans-app.cosmostation.io"
     }
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {

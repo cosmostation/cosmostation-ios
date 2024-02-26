@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,8 +21,10 @@
             <connections>
                 <outlet property="addressLabel" destination="wbX-h2-CAr" id="f61-mR-XD1"/>
                 <outlet property="chainNameLabel" destination="oBF-2o-bRk" id="WxI-jD-mxe"/>
+                <outlet property="cosmosTag" destination="k7e-O4-BwU" id="OGl-5e-Jli"/>
                 <outlet property="evmCompatTag" destination="hjw-WT-XJi" id="oBC-B4-Wn7"/>
                 <outlet property="hdPathLabel" destination="wfX-nN-dpn" id="NTI-oU-9mO"/>
+                <outlet property="keyTypeTag" destination="4DZ-EN-zz6" id="iNU-hf-rgY"/>
                 <outlet property="legacyTag" destination="pJZ-zD-0YM" id="pE2-mn-haA"/>
                 <outlet property="rqImgView" destination="Xt9-i3-n96" id="tVn-CY-Whq"/>
                 <outlet property="tagLayer" destination="M6e-mZ-J57" id="33j-eY-Dyk"/>
@@ -35,13 +37,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChainName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBF-2o-bRk">
-                    <rect key="frame" x="145.33333333333334" y="97" width="102.66666666666666" height="22.666666666666671"/>
+                    <rect key="frame" x="145.33333333333334" y="75" width="102.66666666666666" height="22.666666666666671"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="18"/>
                     <color key="textColor" name="_color01"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CzN-4r-kn9">
-                    <rect key="frame" x="168" y="127.66666666666669" width="57" height="20"/>
+                    <rect key="frame" x="168" y="105.66666666666667" width="57" height="20"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hd Path" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfX-nN-dpn">
                             <rect key="frame" x="0.0" y="1.3333333333333286" width="53" height="17.666666666666668"/>
@@ -50,7 +52,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="M6e-mZ-J57">
-                            <rect key="frame" x="57" y="9.9999999999999858" width="0.0" height="0.0"/>
+                            <rect key="frame" x="57" y="10" width="0.0" height="0.0"/>
                             <subviews>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJZ-zD-0YM">
                                     <rect key="frame" x="0.0" y="0.0" width="44" height="14"/>
@@ -86,6 +88,40 @@
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                 </label>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COSMOS EVM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7e-O4-BwU">
+                                    <rect key="frame" x="0.0" y="0.0" width="73" height="14"/>
+                                    <color key="backgroundColor" red="0.054901960780000002" green="0.59607843140000005" blue="0.64705882349999999" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="73" id="Sia-x4-blu"/>
+                                        <constraint firstAttribute="height" constant="14" id="m3b-7z-jOv"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                    <color key="textColor" name="_color01"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="6"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4DZ-EN-zz6">
+                                    <rect key="frame" x="0.0" y="0.0" width="72" height="14"/>
+                                    <color key="backgroundColor" name="_color06"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="72" id="6qK-ND-jaz"/>
+                                        <constraint firstAttribute="height" constant="14" id="oh8-Z2-VZW"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                    <color key="textColor" name="_color02"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="6"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
                             </subviews>
                         </stackView>
                     </subviews>
@@ -100,21 +136,21 @@
                     </constraints>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgQrGuide" translatesAutoresizingMaskIntoConstraints="NO" id="jvu-Gn-DDF">
-                    <rect key="frame" x="54" y="171.66666666666663" width="285" height="285"/>
+                    <rect key="frame" x="54" y="149.66666666666663" width="285" height="285"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="jvu-Gn-DDF" secondAttribute="height" multiplier="1:1" id="9bn-Nf-mu0"/>
                     </constraints>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xt9-i3-n96">
-                    <rect key="frame" x="66" y="183.66666666666663" width="261" height="261"/>
+                    <rect key="frame" x="60" y="155.66666666666663" width="273" height="273"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <integer key="value" value="12"/>
+                            <integer key="value" value="6"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZh-Ce-tC6" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="480.66666666666669" width="369" height="54.000000000000057"/>
+                    <rect key="frame" x="12" y="458.66666666666669" width="369" height="54.000000000000057"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbX-h2-CAr">
                             <rect key="frame" x="8" y="18.333333333333314" width="353" height="17.666666666666671"/>
@@ -137,23 +173,23 @@
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstItem="Xt9-i3-n96" firstAttribute="bottom" secondItem="jvu-Gn-DDF" secondAttribute="bottom" constant="-12" id="0DH-ub-jLv"/>
+                <constraint firstItem="Xt9-i3-n96" firstAttribute="bottom" secondItem="jvu-Gn-DDF" secondAttribute="bottom" constant="-6" id="0DH-ub-jLv"/>
                 <constraint firstItem="Xt9-i3-n96" firstAttribute="centerX" secondItem="jvu-Gn-DDF" secondAttribute="centerX" id="0tw-yE-CQs"/>
                 <constraint firstItem="Xt9-i3-n96" firstAttribute="centerY" secondItem="jvu-Gn-DDF" secondAttribute="centerY" id="4n8-cj-hhs"/>
                 <constraint firstItem="CzN-4r-kn9" firstAttribute="top" secondItem="oBF-2o-bRk" secondAttribute="bottom" constant="8" id="8YL-ZQ-DNp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jZh-Ce-tC6" secondAttribute="trailing" constant="12" id="8v8-Sb-UYs"/>
                 <constraint firstItem="jZh-Ce-tC6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="9pd-q2-mvE"/>
-                <constraint firstItem="Xt9-i3-n96" firstAttribute="top" secondItem="jvu-Gn-DDF" secondAttribute="top" constant="12" id="Gsw-Hr-gyZ"/>
-                <constraint firstItem="Xt9-i3-n96" firstAttribute="trailing" secondItem="jvu-Gn-DDF" secondAttribute="trailing" constant="-12" id="IcJ-g8-2lt"/>
+                <constraint firstItem="Xt9-i3-n96" firstAttribute="top" secondItem="jvu-Gn-DDF" secondAttribute="top" constant="6" id="Gsw-Hr-gyZ"/>
+                <constraint firstItem="Xt9-i3-n96" firstAttribute="trailing" secondItem="jvu-Gn-DDF" secondAttribute="trailing" constant="-6" id="IcJ-g8-2lt"/>
                 <constraint firstItem="jvu-Gn-DDF" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="SRc-hw-jJR"/>
-                <constraint firstItem="oBF-2o-bRk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="38" id="Tr3-3P-b3a"/>
+                <constraint firstItem="oBF-2o-bRk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Tr3-3P-b3a"/>
                 <constraint firstItem="CzN-4r-kn9" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Ze5-7P-siN"/>
                 <constraint firstItem="jZh-Ce-tC6" firstAttribute="top" secondItem="jvu-Gn-DDF" secondAttribute="bottom" constant="24" id="b5I-q6-oRh"/>
                 <constraint firstItem="jvu-Gn-DDF" firstAttribute="top" secondItem="CzN-4r-kn9" secondAttribute="bottom" constant="24" id="eeq-K9-wi4"/>
                 <constraint firstItem="jvu-Gn-DDF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="54" id="jX0-Sc-8BC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jvu-Gn-DDF" secondAttribute="trailing" constant="54" id="l86-xX-SQg"/>
                 <constraint firstItem="oBF-2o-bRk" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="o3C-CE-a69"/>
-                <constraint firstItem="Xt9-i3-n96" firstAttribute="leading" secondItem="jvu-Gn-DDF" secondAttribute="leading" constant="12" id="taF-VT-TVS"/>
+                <constraint firstItem="Xt9-i3-n96" firstAttribute="leading" secondItem="jvu-Gn-DDF" secondAttribute="leading" constant="6" id="taF-VT-TVS"/>
             </constraints>
             <point key="canvasLocation" x="48" y="21"/>
         </view>

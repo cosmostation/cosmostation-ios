@@ -32,14 +32,19 @@ class AddressBookCell: UITableViewCell {
     }
     
     func bindAddressBook(_ book: AddressBook) {
-        if let chain = ALLCOSMOSCLASS().filter({ $0.name == book.chainName }).first {
-            logoImg1.image = UIImage.init(named: chain.logo1)
+        if (book.dpAddress.starts(with: "Ox")) {
+            memoLabel.isHidden = true
+            
+        } else {
+            memoLabel.isHidden = false
+            if let chain = All_IBC_Chains().filter({ $0.name == book.chainName }).first {
+                logoImg1.image = UIImage.init(named: chain.logo1)
+            }
         }
         nameLabel.text = book.bookName
         memoLabel.text = book.memo
         addressLabel.text = book.dpAddress
         addressLabel.adjustsFontSizeToFitWidth = true
-        
         
         editBtn.showsMenuAsPrimaryAction = true
         let edit = UIAction(title: NSLocalizedString("str_edit", comment: ""), image: nil, handler: { _ in

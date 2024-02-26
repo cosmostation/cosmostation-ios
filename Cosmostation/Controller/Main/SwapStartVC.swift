@@ -68,7 +68,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var swapBtn: BaseButton!
     
-    var allCosmosChains = Array<CosmosClass>()
+    var allSwapableChains = Array<CosmosClass>()
     var skipChains = Array<CosmosClass>()       //inapp support chain for skip
     var skipAssets: JSON?
     var skipSlippage = "1"
@@ -107,7 +107,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         
         
         Task {
-            allCosmosChains = await baseAccount.initOnyKeyData()
+            allSwapableChains = await baseAccount.initKeysforSwap()
             
             var sChains: JSON!
             if (BaseData.instance.skipChains == nil) {
@@ -118,7 +118,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             }
 //            print("sChains ", sChains)
             sChains?["chains"].arrayValue.forEach({ sChain in
-                if let skipChain = allCosmosChains.filter({ $0.chainId == sChain["chain_id"].stringValue && $0.isDefault == true }).first {
+                if let skipChain = allSwapableChains.filter({ $0.chainId == sChain["chain_id"].stringValue && $0.isDefault == true }).first {
                     skipChains.append(skipChain)
                 }
             })
@@ -489,7 +489,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         var msgReq = JSON()
         var address_list = [String]()
         route["chain_ids"].array?.forEach({ chain_Id in
-            if let address = allCosmosChains.filter({ $0.chainId == chain_Id.stringValue && $0.isDefault == true }).first?.bechAddress {
+            if let address = allSwapableChains.filter({ $0.chainId == chain_Id.stringValue && $0.isDefault == true }).first?.bechAddress {
                 address_list.append(address)
             }
         })

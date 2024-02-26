@@ -14,7 +14,8 @@ import SwiftyJSON
 class CosmosClassVC: BaseVC {
     
     @IBOutlet weak var addressLayer: UIView!
-    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var bechAddressLabel: UILabel!
+    @IBOutlet weak var evmAddessLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
     @IBOutlet weak var hideValueBtn: UIButton!
@@ -64,10 +65,12 @@ class CosmosClassVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         totalValue = selectedChain.allValue()
-        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
-            addressLabel.text = selectedChain.evmAddress
-        } else {
-            addressLabel.text = selectedChain.bechAddress
+        evmAddessLabel.alpha = 0.0
+        
+        bechAddressLabel.text = selectedChain.bechAddress
+        if (selectedChain is EvmClass) {
+            evmAddessLabel.text = selectedChain.evmAddress
+            starEvmAddressAnimation()
         }
         
         onSetTabbarView()
@@ -76,8 +79,8 @@ class CosmosClassVC: BaseVC {
             selectedChain.fetchStakeData()
         }
         
-        if (selectedChain is ChainOkt60Keccak) {
-            (selectedChain as? ChainOkt60Keccak)?.fetchValidators()
+        if (selectedChain is ChainOkt996Keccak) {
+            (selectedChain as? ChainOkt996Keccak)?.fetchValidators()
         }
         
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
@@ -85,7 +88,7 @@ class CosmosClassVC: BaseVC {
         addressLayer.addGestureRecognizer(addressTap)
         
         
-        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconMintscanExplorer"), style: .plain, target: self, action: #selector(onClickExplorer))
+        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconExplorer"), style: .plain, target: self, action: #selector(onClickExplorer))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +106,9 @@ class CosmosClassVC: BaseVC {
             hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
         } else {
             hideValueBtn.setImage(UIImage.init(named: "iconHideValueOn"), for: .normal)
+        }
+        if (selectedChain is EvmClass) {
+            starEvmAddressAnimation()
         }
     }
     
@@ -152,8 +158,13 @@ class CosmosClassVC: BaseVC {
     }
     
     @objc func onClickExplorer() {
-        guard let url = BaseNetWork.getAccountDetailUrl(selectedChain) else { return }
-        self.onShowSafariWeb(url)
+        if let evmChain = selectedChain as? EvmClass {
+            guard let url = URL(string:String(format: evmChain.addressURL, evmChain.evmAddress)) else { return }
+            self.onShowSafariWeb(url)
+        } else {
+            guard let url = BaseNetWork.getAccountDetailUrl(selectedChain) else { return }
+            self.onShowSafariWeb(url)
+        }
     }
     
     func onSendTx() {
@@ -161,8 +172,7 @@ class CosmosClassVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain is ChainBinanceBeacon ||
-            selectedChain is ChainOkt60Keccak) {
+        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt996Keccak) {
             let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
             transfer.selectedChain = selectedChain
             transfer.toSendDenom = selectedChain.stakeDenom
@@ -170,9 +180,11 @@ class CosmosClassVC: BaseVC {
             self.present(transfer, animated: true)
             
         } else {
-            let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
-            transfer.selectedChain = selectedChain
+            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+            transfer.sendType = (selectedChain is EvmClass) ? .CosmosEVM_Coin : .Only_Cosmos_Coin
+            transfer.fromChain = selectedChain
             transfer.toSendDenom = selectedChain.stakeDenom
+            transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom)
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
         }
@@ -253,13 +265,13 @@ class CosmosClassVC: BaseVC {
             return
         }
         let okDeposit = OkDeposit(nibName: "OkDeposit", bundle: nil)
-        okDeposit.selectedChain = selectedChain as? ChainOkt60Keccak
+        okDeposit.selectedChain = selectedChain as? ChainOkt996Keccak
         okDeposit.modalTransitionStyle = .coverVertical
         self.present(okDeposit, animated: true)
     }
     
     func onOkWithdrawTx() {
-        if let oktChain = selectedChain as? ChainOkt60Keccak {
+        if let oktChain = selectedChain as? ChainOkt996Keccak {
             if (oktChain.lcdOktDepositAmount().compare(NSDecimalNumber.zero).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_no_deposited_asset", comment: ""))
                 return
@@ -270,13 +282,13 @@ class CosmosClassVC: BaseVC {
             return
         }
         let okWithdraw = OkWithdraw(nibName: "OkWithdraw", bundle: nil)
-        okWithdraw.selectedChain = selectedChain as? ChainOkt60Keccak
+        okWithdraw.selectedChain = selectedChain as? ChainOkt996Keccak
         okWithdraw.modalTransitionStyle = .coverVertical
         self.present(okWithdraw, animated: true)
     }
     
     func onOkAddShareTx() {
-        if let oktChain = selectedChain as? ChainOkt60Keccak {
+        if let oktChain = selectedChain as? ChainOkt996Keccak {
             if (oktChain.lcdOktDepositAmount().compare(NSDecimalNumber.zero).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_no_deposited_asset", comment: ""))
                 return
@@ -287,7 +299,7 @@ class CosmosClassVC: BaseVC {
             return
         }
         let okAddShare = OkAddShare(nibName: "OkAddShare", bundle: nil)
-        okAddShare.selectedChain = selectedChain as? ChainOkt60Keccak
+        okAddShare.selectedChain = selectedChain as? ChainOkt996Keccak
         okAddShare.modalTransitionStyle = .coverVertical
         self.present(okAddShare, animated: true)
     }
@@ -299,10 +311,10 @@ class CosmosClassVC: BaseVC {
         let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 3)
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 4)
         tabbar.items.append(coinTabBar)
-        if (selectedChain.supportCw20 || selectedChain.supportErc20) { tabbar.items.append(tokenTabBar) }
+        if (selectedChain.supportCw20 || selectedChain is EvmClass) { tabbar.items.append(tokenTabBar) }
         if (selectedChain.supportNft) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(historyTabBar)
-        if (!selectedChain.mintscanChainParam.isEmpty) { tabbar.items.append(aboutTabBar) }
+        if (!selectedChain.mintscanChainParam.isEmpty && !(selectedChain is ChainOktEVM)) { tabbar.items.append(aboutTabBar) }
         
         tabbar.barTintColor = .clear
         tabbar.selectionIndicatorStrokeColor = .white
@@ -340,8 +352,6 @@ class CosmosClassVC: BaseVC {
             item.imageSize = CGSize(width: 24, height: 24)
         }
         
-        
-        
         if (selectedChain is ChainNeutron) {
             mainFab.addItem(title: "Vault", image: UIImage(named: "iconFabVault")) { _ in
                 self.onNeutronVault()
@@ -357,7 +367,7 @@ class CosmosClassVC: BaseVC {
                 }
             }
             
-        } else if (selectedChain is ChainOkt60Keccak) {
+        } else if (selectedChain is ChainOkt996Keccak) {
             mainFab.addItem(title: "Select Validators", image: UIImage(named: "iconFabAddShare")) { _ in
                 self.onOkAddShareTx()
             }
@@ -415,6 +425,30 @@ class CosmosClassVC: BaseVC {
         mainFab.translatesAutoresizingMaskIntoConstraints = false
         mainFab.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         mainFab.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+    }
+    
+    func starEvmAddressAnimation() {
+        bechAddressLabel.layer.removeAllAnimations()
+        evmAddessLabel.layer.removeAllAnimations()
+        bechAddressLabel.alpha = 0.0
+        evmAddessLabel.alpha = 1.0
+        
+        UIView.animateKeyframes(withDuration: 10.0,
+                                delay: 0,
+                                options: [.repeat, .calculationModeCubic]) {
+            UIView.addKeyframe(withRelativeStartTime: 4 / 16, relativeDuration: 1 / 16) { [weak self] in
+                self?.evmAddessLabel.alpha = 0.0
+            }
+            UIView.addKeyframe(withRelativeStartTime: 5 / 16, relativeDuration: 1 / 16) { [weak self] in
+                self?.bechAddressLabel.alpha = 1.0
+            }
+            UIView.addKeyframe(withRelativeStartTime: 14 / 16, relativeDuration: 1 / 16) { [weak self] in
+                self?.bechAddressLabel.alpha = 0.0
+            }
+            UIView.addKeyframe(withRelativeStartTime: 15 / 16, relativeDuration: 1 / 16) { [weak self] in
+                self?.evmAddessLabel.alpha = 1.0
+            }
+        }
     }
 }
 
@@ -518,7 +552,7 @@ extension CosmosClassVC {
     
     func onKavaDefi() {
         let defiVC = KavaDefiVC(nibName: "KavaDefiVC", bundle: nil)
-        defiVC.selectedChain = selectedChain as? ChainKava60
+        defiVC.selectedChain = selectedChain as? CosmosClass
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(defiVC, animated: true)
     }

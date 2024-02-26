@@ -18,6 +18,8 @@ class ChainListVC: BaseVC, BaseSheetDelegate {
     
     var searchBar: UISearchBar?
     
+    var allEvmChains = [EvmClass]()
+    var searchEvmChains = [EvmClass]()
     var allCosmosChains = [CosmosClass]()
     var searchCosmosChains = [CosmosClass]()
 
@@ -69,12 +71,21 @@ class ChainListVC: BaseVC, BaseSheetDelegate {
     }
     
     func onUpdateView() {
+        allEvmChains.removeAll()
+        ALLEVMCLASS().forEach { chain in
+            if (!allEvmChains.contains { $0.name == chain.name }) {
+                allEvmChains.append(chain)
+            }
+        }
+        
         allCosmosChains.removeAll()
         ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
-            if (!allCosmosChains.contains { $0.name == chain.name }) {
+            if (!allCosmosChains.contains { $0.name == chain.name } &&
+                !allEvmChains.contains { $0.name == chain.name }) {
                 allCosmosChains.append(chain)
             }
         }
+        searchEvmChains = allEvmChains
         searchCosmosChains = allCosmosChains
         tableView.reloadData()
     }
@@ -83,9 +94,8 @@ class ChainListVC: BaseVC, BaseSheetDelegate {
         searchBar?.endEditing(true)
     }
     
-    func onDisplayEndPointSheet(_ position: Int) {
+    func onDisplayEndPointSheet(_ chain: CosmosClass) {
         loadingView.isHidden = true
-        let chain = searchCosmosChains[position]
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = chain
         baseSheet.sheetDelegate = self
@@ -115,12 +125,15 @@ class ChainListVC: BaseVC, BaseSheetDelegate {
 extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0) {
+            view.titleLabel.text = "EVM Class"
+            view.cntLabel.text = String(allEvmChains.count)
+        } else if (section == 1) {
             view.titleLabel.text = "Cosmos Class"
             view.cntLabel.text = String(allCosmosChains.count)
         }
@@ -132,32 +145,59 @@ extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchCosmosChains.count
+        if (section == 0) {
+            return searchEvmChains.count
+        } else if (section == 1) {
+            return searchCosmosChains.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"ManageChainCell") as! ManageChainCell
-        cell.bindCosmosClassChain(searchCosmosChains[indexPath.row])
+        if (indexPath.section == 0) {
+            cell.bindManageEvmClassChain(searchEvmChains[indexPath.row])
+        }  else if (indexPath.section == 1) {
+            cell.bindManageCosmosClassChain(searchCosmosChains[indexPath.row])
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let chain = searchCosmosChains[indexPath.row]
-        if (chain is ChainBinanceBeacon || chain is ChainOkt60Keccak) {
-            return
-        }
-        loadingView.isHidden = false
-        if (chain.getChainParam().isEmpty == true) {
-            Task {
-                if let rawParam = try? await chain.fetchChainParam() {
-                    chain.mintscanChainParam = rawParam
-                }
-                DispatchQueue.main.async {
-                    self.onDisplayEndPointSheet(indexPath.row)
+        if (indexPath.section == 0) {
+            let chain = searchEvmChains[indexPath.row]
+            if (chain.supportCosmos && !(chain is ChainOktEVM)) {
+                loadingView.isHidden = false
+                if (chain.getChainParam().isEmpty == true) {
+                    Task {
+                        if let rawParam = try? await chain.fetchChainParam() {
+                            chain.mintscanChainParam = rawParam
+                            DispatchQueue.main.async {
+                                self.onDisplayEndPointSheet(chain)
+                            }
+                        }
+                    }
+                } else {
+                    self.onDisplayEndPointSheet(chain)
                 }
             }
-        } else {
-            self.onDisplayEndPointSheet(indexPath.row)
+            
+        } else if (indexPath.section == 1) {
+            let chain = searchCosmosChains[indexPath.row]
+            if (chain is ChainBinanceBeacon) { return }
+            loadingView.isHidden = false
+            if (chain.getChainParam().isEmpty == true) {
+                Task {
+                    if let rawParam = try? await chain.fetchChainParam() {
+                        chain.mintscanChainParam = rawParam
+                        DispatchQueue.main.async {
+                            self.onDisplayEndPointSheet(chain)
+                        }
+                    }
+                }
+            } else {
+                self.onDisplayEndPointSheet(chain)
+            }
         }
     }
     
@@ -166,10 +206,13 @@ extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchEvmChains = searchText.isEmpty ? allEvmChains : allEvmChains.filter { evmChain in
+            return evmChain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
         searchCosmosChains = searchText.isEmpty ? allCosmosChains : allCosmosChains.filter { cosmosChain in
             return cosmosChain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
-        searchEmptyLayer.isHidden = searchCosmosChains.count > 0
+        searchEmptyLayer.isHidden = searchEvmChains.count + searchCosmosChains.count > 0
         tableView.reloadData()
     }
 }

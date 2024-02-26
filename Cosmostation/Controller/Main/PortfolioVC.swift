@@ -19,6 +19,8 @@ class PortfolioVC: BaseVC {
     var refresher: UIRefreshControl!
     var searchBar: UISearchBar?
     
+    var toDisplayEvmChains = [EvmClass]()
+    var searchEvmChains = [EvmClass]()
     var toDisplayCosmosChains = [CosmosClass]()
     var searchCosmosChains = [CosmosClass]()
     var totalValue = NSDecimalNumber.zero {
@@ -75,6 +77,7 @@ class PortfolioVC: BaseVC {
             tableView.contentOffset = contentOffset
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
         onUpdateVC()
@@ -83,14 +86,19 @@ class PortfolioVC: BaseVC {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchPrice"), object: nil)
     }
     
     func initView() {
         baseAccount = BaseData.instance.baseAccount
+        toDisplayEvmChains = baseAccount.getDisplayEvmChains()
+        searchEvmChains = toDisplayEvmChains
+        
         toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
-        onUpdateSearchBar()
         searchCosmosChains = toDisplayCosmosChains
+        
+        onUpdateSearchBar()
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
         
         navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(onClickChainSelect))
@@ -101,13 +109,15 @@ class PortfolioVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
-        if (toDisplayCosmosChains.filter { $0.fetched == false }.count > 0) {
+        if (toDisplayEvmChains.filter { $0.fetched == false }.count > 0 ||
+            toDisplayCosmosChains.filter { $0.fetched == false }.count > 0) {
             refresher.endRefreshing()
+            
         } else {
             BaseNetWork().fetchPrices()
-            toDisplayCosmosChains.forEach { chain in
-                chain.fetched = false
-            }
+            toDisplayEvmChains.forEach { $0.fetched = false }
+            toDisplayCosmosChains.forEach { $0.fetched = false }
+            baseAccount.fetchDisplayEvmChains()
             baseAccount.fetchDisplayCosmosChains()
             tableView.reloadData()
             refresher.endRefreshing()
@@ -115,6 +125,11 @@ class PortfolioVC: BaseVC {
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        onUpdateRow(tag)
+    }
+    
+    @objc func onFetchTokenDone(_ notification: NSNotification) {
         let tag = notification.object as! String
         onUpdateRow(tag)
     }
@@ -131,11 +146,20 @@ class PortfolioVC: BaseVC {
     }
     
     func onUpdateRow(_ tag: String) {
+        for i in 0..<searchEvmChains.count {
+            if (searchEvmChains[i].tag == tag) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
+                    self.tableView.endUpdates()
+                })
+            }
+        }
         for i in 0..<searchCosmosChains.count {
             if (searchCosmosChains[i].tag == tag) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
                     self.tableView.beginUpdates()
-                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
+                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 1)], with: .none)
                     self.tableView.endUpdates()
                 })
             }
@@ -153,6 +177,10 @@ class PortfolioVC: BaseVC {
     
     func onUpdateTotal() {
         var sum = NSDecimalNumber.zero
+        toDisplayEvmChains.forEach { chain in
+            sum = sum.adding(chain.allValue())
+        }
+        
         toDisplayCosmosChains.forEach { chain in
             sum = sum.adding(chain.allValue())
         }
@@ -176,17 +204,21 @@ class PortfolioVC: BaseVC {
     }
     
     func onChainSelected() {
-        baseAccount.loadDisplayCTags()
+        baseAccount.fetchDisplayEvmChains()
+        toDisplayEvmChains = baseAccount.getDisplayEvmChains()
+        searchEvmChains = toDisplayEvmChains
+        
         baseAccount.fetchDisplayCosmosChains()
         toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
-        onUpdateSearchBar()
         searchCosmosChains = toDisplayCosmosChains
+        
+        onUpdateSearchBar()
         tableView.reloadData()
         onUpdateTotal()
     }
     
     func onUpdateSearchBar() {
-        if (toDisplayCosmosChains.count < 10) {
+        if (toDisplayEvmChains.count + toDisplayCosmosChains.count < 10) {
             tableView.tableHeaderView = nil
             tableView.headerView(forSection: 0)?.layoutSubviews()
         } else {
@@ -200,17 +232,25 @@ class PortfolioVC: BaseVC {
 extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.titleLabel.text = "Cosmos Class"
-        view.cntLabel.text = String(toDisplayCosmosChains.count)
+        if (section == 0) {
+            view.titleLabel.text = "EVM Class"
+            view.cntLabel.text = String(toDisplayEvmChains.count)
+        } else if (section == 1) {
+            view.titleLabel.text = "Cosmos Class"
+            view.cntLabel.text = String(toDisplayCosmosChains.count)
+        }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (section == 0) {
+            return toDisplayEvmChains.count == 0 ? 0 : 40
+        }
         return 40
     }
     
@@ -223,12 +263,21 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchCosmosChains.count
+        if (section == 0) {
+            return searchEvmChains.count
+        } else if (section == 1) {
+            return searchCosmosChains.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"PortfolioCell") as! PortfolioCell
-        cell.bindCosmosClassChain(baseAccount, searchCosmosChains[indexPath.row])
+        if (indexPath.section == 0) {
+            cell.bindEvmClassChain(baseAccount, searchEvmChains[indexPath.row])
+        } else if (indexPath.section == 1) {
+            cell.bindCosmosClassChain(baseAccount, searchCosmosChains[indexPath.row])
+        }
         return cell
     }
     
@@ -237,36 +286,101 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (searchCosmosChains[indexPath.row].fetched == false) { return }
-        detailChainTag = searchCosmosChains[indexPath.row].tag
-        let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
-        cosmosClassVC.selectedChain = searchCosmosChains[indexPath.row]
-        cosmosClassVC.hidesBottomBarWhenPushed = true
-        self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
-        self.navigationController?.pushViewController(cosmosClassVC, animated: true)
+        if (indexPath.section == 0) {
+            if (searchEvmChains[indexPath.row].fetched == false) { return }
+            detailChainTag = searchEvmChains[indexPath.row].tag
+            if (searchEvmChains[indexPath.row].supportCosmos) {
+                let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
+                cosmosClassVC.selectedChain = searchEvmChains[indexPath.row]
+                cosmosClassVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
+                self.navigationController?.pushViewController(cosmosClassVC, animated: true)
+                
+            } else {
+                let evmClassVC = UIStoryboard(name: "EvmClass", bundle: nil).instantiateViewController(withIdentifier: "EvmClassVC") as! EvmClassVC
+                evmClassVC.selectedChain = searchEvmChains[indexPath.row]
+                evmClassVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
+                self.navigationController?.pushViewController(evmClassVC, animated: true)
+            }
+            
+        } else if (indexPath.section == 1) {
+            if (searchCosmosChains[indexPath.row].fetched == false) { return }
+            detailChainTag = searchCosmosChains[indexPath.row].tag
+            let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
+            cosmosClassVC.selectedChain = searchCosmosChains[indexPath.row]
+            cosmosClassVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
+            self.navigationController?.pushViewController(cosmosClassVC, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        let selectedChain = searchCosmosChains[indexPath.row]
-        var toDpAddress = ""
-        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
-            toDpAddress = selectedChain.evmAddress
+        if (indexPath.section == 0) {
+            let selectedChain = searchEvmChains[indexPath.row]
+            if (selectedChain.supportCosmos) {
+                let toEvmAddress = selectedChain.evmAddress
+                let toBechAddress = selectedChain.bechAddress
+                let copyEvm = UIAction(title: NSLocalizedString("str_copy_evm_address", comment: ""), image: nil) { _ in
+                    UIPasteboard.general.string = toEvmAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+                    self.onShowToast(NSLocalizedString("address_copied", comment: ""))
+                }
+                let shareEvm = UIAction(title: NSLocalizedString("str_share_evm_address", comment: ""), image: nil) { _ in
+                    let activityViewController = UIActivityViewController(activityItems: [toEvmAddress], applicationActivities: nil)
+                    activityViewController.popoverPresentationController?.sourceView = self.view
+                    self.present(activityViewController, animated: true, completion: nil)
+                }
+                let copyBech = UIAction(title: NSLocalizedString("str_copy_bech_address", comment: ""), image: nil) { _ in
+                    UIPasteboard.general.string = toBechAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+                    self.onShowToast(NSLocalizedString("address_copied", comment: ""))
+                }
+                let shareBech = UIAction(title: NSLocalizedString("str_share_bech_address", comment: ""), image: nil) { _ in
+                    let activityViewController = UIActivityViewController(activityItems: [toBechAddress], applicationActivities: nil)
+                    activityViewController.popoverPresentationController?.sourceView = self.view
+                    self.present(activityViewController, animated: true, completion: nil)
+                }
+                let qrAddressPopup2VC = QrAddressPopup2VC(nibName: "QrAddressPopup2VC", bundle: nil)
+                qrAddressPopup2VC.selectedChain = selectedChain
+                return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return qrAddressPopup2VC }) { _ in
+                    UIMenu(title: "", children: [copyEvm, shareEvm, copyBech, shareBech])
+                }
+                
+            } else {
+                let toDpAddress = selectedChain.evmAddress
+                let copy = UIAction(title: NSLocalizedString("str_copy", comment: ""), image: UIImage(systemName: "doc.on.doc")) { _ in
+                    UIPasteboard.general.string = toDpAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+                    self.onShowToast(NSLocalizedString("address_copied", comment: ""))
+                }
+                let share = UIAction(title: NSLocalizedString("str_share", comment: ""), image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                    let activityViewController = UIActivityViewController(activityItems: [toDpAddress], applicationActivities: nil)
+                    activityViewController.popoverPresentationController?.sourceView = self.view
+                    self.present(activityViewController, animated: true, completion: nil)
+                }
+                let qrAddressPopupVC = QrAddressPopupVC(nibName: "QrAddressPopupVC", bundle: nil)
+                qrAddressPopupVC.selectedChain = selectedChain
+                return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return qrAddressPopupVC }) { _ in
+                    UIMenu(title: "", children: [copy, share])
+                }
+            }
+
+            
         } else {
-            toDpAddress = selectedChain.bechAddress
-        }
-        let copy = UIAction(title: NSLocalizedString("str_copy", comment: ""), image: UIImage(systemName: "doc.on.doc")) { _ in
-            UIPasteboard.general.string = toDpAddress.trimmingCharacters(in: .whitespacesAndNewlines)
-            self.onShowToast(NSLocalizedString("address_copied", comment: ""))
-        }
-        let share = UIAction(title: NSLocalizedString("str_share", comment: ""), image: UIImage(systemName: "square.and.arrow.up")) { _ in
-            let activityViewController = UIActivityViewController(activityItems: [toDpAddress], applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = self.view
-            self.present(activityViewController, animated: true, completion: nil)
-        }
-        let qrAddressPopupVC = QrAddressPopupVC(nibName: "QrAddressPopupVC", bundle: nil)
-        qrAddressPopupVC.selectedChain = selectedChain
-        return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return qrAddressPopupVC }) { _ in
-            UIMenu(title: "", children: [copy, share])
+            let selectedChain = searchCosmosChains[indexPath.row]
+            let toDpAddress = selectedChain.bechAddress
+            let copy = UIAction(title: NSLocalizedString("str_copy", comment: ""), image: UIImage(systemName: "doc.on.doc")) { _ in
+                UIPasteboard.general.string = toDpAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+                self.onShowToast(NSLocalizedString("address_copied", comment: ""))
+            }
+            let share = UIAction(title: NSLocalizedString("str_share", comment: ""), image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                let activityViewController = UIActivityViewController(activityItems: [toDpAddress], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+            let qrAddressPopupVC = QrAddressPopupVC(nibName: "QrAddressPopupVC", bundle: nil)
+            qrAddressPopupVC.selectedChain = selectedChain
+            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return qrAddressPopupVC }) { _ in
+                UIMenu(title: "", children: [copy, share])
+            }
         }
     }
     
@@ -275,10 +389,13 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchEvmChains = searchText.isEmpty ? toDisplayEvmChains : toDisplayEvmChains.filter { evmChain in
+            return evmChain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
         searchCosmosChains = searchText.isEmpty ? toDisplayCosmosChains : toDisplayCosmosChains.filter { cosmosChain in
             return cosmosChain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
-        searchEmptyLayer.isHidden = searchCosmosChains.count > 0
+        searchEmptyLayer.isHidden = searchEvmChains.count + searchCosmosChains.count > 0
         tableView.reloadData()
     }
     

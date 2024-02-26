@@ -12,9 +12,10 @@ class QrAddressVC: BaseVC {
 
     @IBOutlet weak var chainNameLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var tagLayer: UIStackView!
     @IBOutlet weak var legacyTag: UILabel!
     @IBOutlet weak var evmCompatTag: UILabel!
+    @IBOutlet weak var cosmosTag: UILabel!
+    @IBOutlet weak var keyTypeTag: UILabel!
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressCardView: FixCardView!
     @IBOutlet weak var addressLabel: UILabel!
@@ -22,52 +23,58 @@ class QrAddressVC: BaseVC {
     @IBOutlet weak var shareBtn: BaseButton!
     @IBOutlet weak var addressToggleBtn: UIButton!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var toDpAddress = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        addressToggleBtn.isHidden = selectedChain.evmAddress.isEmpty
         chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
         
-        if (selectedChain is ChainOkt60Keccak || selectedChain.tag == "kava60" || selectedChain.tag == "xplaKeccak256") {
-            toDpAddress = selectedChain.evmAddress
-        } else {
-            toDpAddress = selectedChain.bechAddress
-        }
-        
-        addressLabel.text = toDpAddress
-        addressLabel.adjustsFontSizeToFitWidth = true
-        if (baseAccount.type == .withMnemonic) {
-            hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
-            
-            if (selectedChain.evmCompatible) {
-                tagLayer.isHidden = false
-                evmCompatTag.isHidden = false
-                
-            } else if (selectedChain.isDefault == false) {
-                tagLayer.isHidden = false
-                legacyTag.isHidden = false
+        if let evmChain = selectedChain as? EvmClass {
+            addressToggleBtn.isHidden = !evmChain.supportCosmos
+            cosmosTag.isHidden = !evmChain.supportCosmos
+            toDpAddress = evmChain.evmAddress
+            addressLabel.text = toDpAddress
+            addressLabel.adjustsFontSizeToFitWidth = true
+            if (baseAccount.type == .withMnemonic) {
+                hdPathLabel.text = evmChain.getHDPath(baseAccount.lastHDPath)
+            } else {
+                hdPathLabel.text = ""
             }
             
-        } else {
-            hdPathLabel.text = ""
-            if (selectedChain.evmCompatible) {
-                tagLayer.isHidden = false
-                evmCompatTag.isHidden = false
+        } else if let cosmosChain = selectedChain as? CosmosClass {
+            addressToggleBtn.isHidden = true
+            legacyTag.isHidden = cosmosChain.isDefault
+            toDpAddress = cosmosChain.bechAddress
+            addressLabel.text = toDpAddress
+            addressLabel.adjustsFontSizeToFitWidth = true
+            
+            if (baseAccount.type == .withMnemonic) {
+                hdPathLabel.text = cosmosChain.getHDPath(baseAccount.lastHDPath)
+            } else {
+                hdPathLabel.text = ""
+            }
+            
+            //for okt legacy
+            if (selectedChain.tag == "okt996_Keccak") {
+                keyTypeTag.text = "ethsecp256k1"
+                keyTypeTag.isHidden = false
                 
+            } else if (selectedChain.tag == "okt996_Secp") {
+                keyTypeTag.text = "secp256k1"
+                keyTypeTag.isHidden = false
             }
         }
         
-//        print("bechAddress ", selectedChain.bechAddress)
-//        print("evmAddress ", selectedChain.evmAddress)
         updateQrImage()
         
         let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyAddress))
         copyTap.cancelsTouchesInView = false
         addressCardView.addGestureRecognizer(copyTap)
+//        print("bechAddress ", selectedChain.bechAddress)
+//        print("evmAddress ", selectedChain.evmAddress)
     }
     
     override func setLocalizedString() {
@@ -93,14 +100,16 @@ class QrAddressVC: BaseVC {
     @IBAction func onAddressToggleClick(_ sender: UIButton) {
         view.isUserInteractionEnabled = false
         rqImgView.image = nil
-        if (toDpAddress == selectedChain.evmAddress) {
-            toDpAddress = selectedChain.bechAddress
-        } else {
-            toDpAddress = selectedChain.evmAddress
+        if let selectedChain = selectedChain as? EvmClass {
+            if (toDpAddress == selectedChain.evmAddress) {
+                toDpAddress = selectedChain.bechAddress
+            } else {
+                toDpAddress = selectedChain.evmAddress
+            }
+            addressLabel.text = toDpAddress
+            addressLabel.adjustsFontSizeToFitWidth = true
+            updateQrImage()
         }
-        addressLabel.text = toDpAddress
-        addressLabel.adjustsFontSizeToFitWidth = true
-        updateQrImage()
     }
     
     @objc func onCopyAddress() {
@@ -118,8 +127,8 @@ extension UIImage {
         superView.addSubview(overlayImageView)
         
         let centerXConst = NSLayoutConstraint(item: overlayImageView, attribute: .centerX, relatedBy: .equal, toItem: superView, attribute: .centerX, multiplier: 1, constant: 0)
-        let width = NSLayoutConstraint(item: overlayImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80)
-        let height = NSLayoutConstraint(item: overlayImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80)
+        let width = NSLayoutConstraint(item: overlayImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width)
+        let height = NSLayoutConstraint(item: overlayImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height)
         let centerYConst = NSLayoutConstraint(item: overlayImageView, attribute: .centerY, relatedBy: .equal, toItem: superView, attribute: .centerY, multiplier: 1, constant: 0)
         
         NSLayoutConstraint.activate([width, height, centerXConst, centerYConst])

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainKava118: ChainKava60  {
+class ChainKava118: ChainKava459  {
     
     override init() {
         super.init()
@@ -17,25 +17,5 @@ class ChainKava118: ChainKava60  {
         tag = "kava118"
         
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        evmCompatible = false
-        supportErc20 = false
-    }
-    
-    override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
-        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
-        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
-        if (supportStaking) {
-            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
-        }
-    }
-    
-    override func setInfoWithPrivateKey(_ priKey: Data) {
-        privateKey = priKey
-        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
-        if (supportStaking) {
-            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
-        }
     }
 }

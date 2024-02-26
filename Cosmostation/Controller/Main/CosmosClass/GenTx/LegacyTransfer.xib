@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,8 +35,7 @@
                 <outlet property="titleLabel" destination="azL-QA-RNw" id="WVz-ZU-n7n"/>
                 <outlet property="toAddressCardView" destination="Qim-ua-3cg" id="pzz-Sk-Eal"/>
                 <outlet property="toAddressHint" destination="ztW-F7-Cd3" id="iKd-F9-vdl"/>
-                <outlet property="toAddressMasterLabel" destination="sMy-GF-tme" id="MCN-C1-oRm"/>
-                <outlet property="toAddressSlaveLabel" destination="xP0-WY-r5a" id="s2p-v7-acV"/>
+                <outlet property="toAddressLabel" destination="sMy-GF-tme" id="MCN-C1-oRm"/>
                 <outlet property="toAddressTitle" destination="hg2-OI-c5I" id="tzz-y3-s4a"/>
                 <outlet property="toAssetAmountLabel" destination="ybs-Jr-vop" id="3Pi-zX-fg2"/>
                 <outlet property="toAssetCurrencyLabel" destination="gy2-tJ-0B4" id="YML-oC-Udm"/>
@@ -168,23 +167,12 @@
                                             <color key="textColor" name="_color02"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="G1q-uD-OVs">
-                                            <rect key="frame" x="12" y="36" width="353" height="19.333333333333329"/>
-                                            <subviews>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MasterAddress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMy-GF-tme">
-                                                    <rect key="frame" x="0.0" y="0.0" width="101.66666666666667" height="0.0"/>
-                                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                                                    <color key="textColor" name="_color01"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SlaveAddress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xP0-WY-r5a">
-                                                    <rect key="frame" x="0.0" y="0.0" width="101.66666666666667" height="0.0"/>
-                                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                                                    <color key="textColor" name="_color02"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MasterAddress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMy-GF-tme">
+                                            <rect key="frame" x="12" y="35" width="108" height="17.666666666666671"/>
+                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                            <color key="textColor" name="_color01"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add address" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztW-F7-Cd3">
                                             <rect key="frame" x="12" y="36" width="108" height="15.333333333333336"/>
                                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
@@ -194,14 +182,13 @@
                                     </subviews>
                                     <color key="backgroundColor" name="_color06"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="G1q-uD-OVs" secondAttribute="bottom" constant="12" id="7IP-bm-WX7"/>
-                                        <constraint firstItem="G1q-uD-OVs" firstAttribute="leading" secondItem="Qim-ua-3cg" secondAttribute="leading" constant="12" id="8Zn-Yf-hx7"/>
+                                        <constraint firstItem="sMy-GF-tme" firstAttribute="trailing" secondItem="ztW-F7-Cd3" secondAttribute="trailing" id="7u7-JR-FQY"/>
                                         <constraint firstAttribute="bottom" secondItem="ztW-F7-Cd3" secondAttribute="bottom" constant="16" id="B1f-BH-ZRD"/>
+                                        <constraint firstItem="sMy-GF-tme" firstAttribute="centerY" secondItem="ztW-F7-Cd3" secondAttribute="centerY" id="Hbm-TF-bea"/>
                                         <constraint firstItem="ztW-F7-Cd3" firstAttribute="leading" secondItem="Qim-ua-3cg" secondAttribute="leading" constant="12" id="I9K-mC-z7q"/>
                                         <constraint firstItem="hg2-OI-c5I" firstAttribute="leading" secondItem="Qim-ua-3cg" secondAttribute="leading" constant="12" id="Ndd-ck-XTA"/>
-                                        <constraint firstAttribute="trailing" secondItem="G1q-uD-OVs" secondAttribute="trailing" constant="12" id="Uro-KC-Arg"/>
+                                        <constraint firstItem="sMy-GF-tme" firstAttribute="leading" secondItem="ztW-F7-Cd3" secondAttribute="leading" id="Xxz-1A-JJq"/>
                                         <constraint firstItem="hg2-OI-c5I" firstAttribute="top" secondItem="Qim-ua-3cg" secondAttribute="top" constant="14" id="nkj-D8-fCI"/>
-                                        <constraint firstItem="G1q-uD-OVs" firstAttribute="top" secondItem="hg2-OI-c5I" secondAttribute="bottom" constant="7.9999999999999858" id="qyw-RP-OAa"/>
                                         <constraint firstItem="ztW-F7-Cd3" firstAttribute="top" secondItem="hg2-OI-c5I" secondAttribute="bottom" constant="8" id="zaa-QV-X33"/>
                                     </constraints>
                                 </view>

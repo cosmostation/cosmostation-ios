@@ -73,3 +73,18 @@ enum PubKeyType: Int {
     case SUI_Ed25519 = 3
     case unknown = 99
 }
+
+
+func All_IBC_Chains() -> [CosmosClass] {
+    var result = [CosmosClass]()
+    result.append(contentsOf: ALLCOSMOSCLASS())
+    result.append(contentsOf: ALLEVMCLASS().filter { $0.supportCosmos == true } )
+    return result
+}
+
+//func AllChains() -> [CosmosClass] {
+//    var result = [CosmosClass]()
+//    result.append(contentsOf: ALLCOSMOSCLASS())
+//    result.append(contentsOf:  ALLEVMCLASS())
+//    return result
+//}

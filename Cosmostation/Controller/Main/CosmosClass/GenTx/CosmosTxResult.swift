@@ -14,7 +14,7 @@ import NIO
 import SwiftProtobuf
 import web3swift
 
-class CosmosTxResult: BaseVC, AddressBookDelegate {
+class CosmosTxResult: BaseVC {
     
     @IBOutlet weak var successView: UIView!
     @IBOutlet weak var successMsgLabel: UILabel!
@@ -40,11 +40,6 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
     
     var evmHash: String?
     var evmRecipient: TransactionReceipt?
-    
-    //for addressbook
-    var recipientChain: BaseChain?
-    var recipinetAddress: String?
-    var memo: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +47,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
         baseAccount = BaseData.instance.baseAccount
         
         loadingView.isHidden = false
-        loadingView.animation = LottieAnimation.named("loading")
+        loadingView.animation = LottieAnimation.named("tx_loading")
         loadingView.contentMode = .scaleAspectFit
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
@@ -61,8 +56,8 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
         confirmBtn.isEnabled = false
         if (resultType == .Cosmos) {
             if (selectedChain is ChainBinanceBeacon) {
-                successMintscanBtn.setTitle("View Explorer", for: .normal)
-                failMintscanBtn.setTitle("View Explorer", for: .normal)
+                successMintscanBtn.setTitle("Check in Explorer", for: .normal)
+                failMintscanBtn.setTitle("Check in Explorer", for: .normal)
                 guard legacyResult != nil else {
                     loadingView.isHidden = true
                     failView.isHidden = false
@@ -82,9 +77,9 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                     confirmBtn.isEnabled = true
                 }
                 
-            } else if (selectedChain is ChainOkt60Keccak) {
-                successMintscanBtn.setTitle("View Explorer", for: .normal)
-                failMintscanBtn.setTitle("View Explorer", for: .normal)
+            } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+                successMintscanBtn.setTitle("Check in Explorer", for: .normal)
+                failMintscanBtn.setTitle("Check in Explorer", for: .normal)
                 guard legacyResult != nil else {
                     loadingView.isHidden = true
                     failView.isHidden = false
@@ -140,9 +135,6 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 
             } else {
                 successView.isHidden = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-                    self.onShowAddressBook()
-                });
             }
             
         } else {
@@ -186,32 +178,32 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
     }
     
     func fetchEvmTx() {
-        Task {
-            guard let url = URL(string: selectedChain.rpcURL) else { return }
-            guard let web3 = try? Web3.new(url) else { return }
-            
-            do {
-                let receiptTx = try web3.eth.getTransactionReceipt(evmHash!)
-                self.evmRecipient = receiptTx
-                DispatchQueue.main.async {
-                    self.onUpdateView()
-                }
-                
-            } catch {
-                self.confirmBtn.isEnabled = true
-                self.fetchCnt = self.fetchCnt - 1
-                if (self.fetchCnt > 0) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
-                        self.fetchEvmTx()
-                    });
-                    
-                } else {
-                    DispatchQueue.main.async {
-                        self.onShowMoreWait()
-                    }
-                }
-            }
-        }
+//        Task {
+//            guard let url = URL(string: selectedChain.rpcURL) else { return }
+//            guard let web3 = try? Web3.new(url) else { return }
+//            
+//            do {
+//                let receiptTx = try web3.eth.getTransactionReceipt(evmHash!)
+//                self.evmRecipient = receiptTx
+//                DispatchQueue.main.async {
+//                    self.onUpdateView()
+//                }
+//                
+//            } catch {
+//                self.confirmBtn.isEnabled = true
+//                self.fetchCnt = self.fetchCnt - 1
+//                if (self.fetchCnt > 0) {
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+//                        self.fetchEvmTx()
+//                    });
+//                    
+//                } else {
+//                    DispatchQueue.main.async {
+//                        self.onShowMoreWait()
+//                    }
+//                }
+//            }
+//        }
     }
     
     func onShowMoreWait() {
@@ -230,39 +222,11 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
         self.present(noticeAlert, animated: true)
     }
     
-    func onShowAddressBook() {
-        if (recipientChain != nil && recipinetAddress?.isEmpty == false) {
-            if let existed = BaseData.instance.selectAllAddressBooks().filter({ $0.dpAddress == recipinetAddress && $0.chainName == recipientChain?.name }).first {
-                if (existed.memo != memo) {
-                    let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
-                    addressBookSheet.addressBook = existed
-                    addressBookSheet.memo = memo
-                    addressBookSheet.bookDelegate = self
-                    self.onStartSheet(addressBookSheet, 420)
-                    return
-                }
-            } 
-            
-            if (BaseData.instance.selectAllRefAddresses().filter { $0.bechAddress == recipinetAddress }.count == 0) {
-                let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
-                addressBookSheet.recipientChain = recipientChain
-                addressBookSheet.recipinetAddress = recipinetAddress
-                addressBookSheet.memo = memo
-                addressBookSheet.bookDelegate = self
-                self.onStartSheet(addressBookSheet, 420)
-                return
-            }
-        }
-    }
-    
-    func onAddressBookUpdated(_ result: Int?) {
-        onShowToast(NSLocalizedString("msg_addressbook_updated", comment: ""))
-    }
-    
-    
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         self.presentingViewController?.presentingViewController?.dismiss(animated: true) {
-            self.selectedChain.fetchData(self.baseAccount.id)
+            DispatchQueue.global().async {
+                self.selectedChain.fetchData(self.baseAccount.id)
+            }
         }
     }
     
@@ -272,7 +236,7 @@ class CosmosTxResult: BaseVC, AddressBookDelegate {
                 guard let url = BaseNetWork.getTxDetailUrl(selectedChain, legacyResult!["hash"].stringValue) else { return }
                 self.onShowSafariWeb(url)
                 
-            } else if (selectedChain is ChainOkt60Keccak) {
+            } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
                 guard let url = BaseNetWork.getTxDetailUrl(selectedChain, legacyResult!["txhash"].stringValue) else { return }
                 self.onShowSafariWeb(url)
                 

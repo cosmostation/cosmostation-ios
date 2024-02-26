@@ -19,6 +19,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var memoTextField: MDCOutlinedTextField!
     @IBOutlet weak var confirmBtn: BaseButton!
     
+    var addressBookType: AddressBookType?
     var bookDelegate: AddressBookDelegate?
     var addressBook: AddressBook?
     var recipientChain: BaseChain?
@@ -33,93 +34,150 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         memoTextField.setup()
         nameTextField.delegate = self
         addressTextField.delegate = self
+        addressTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         memoTextField.delegate = self
         
-        if (addressBook != nil) {
+        if (addressBookType == .ManualNew) {
+            
+            
+        } else if (addressBookType == .ManualEdit) {
             nameTextField.text = addressBook?.bookName
             addressTextField.text = addressBook?.dpAddress
-            if (memo != nil) {
-                memoTextField.text = memo
-            } else {
-                memoTextField.text = addressBook?.memo
-            }
+            memoTextField.text = addressBook?.memo
+            addressTextField.isEnabled = false
             
-        } else if (recipinetAddress != nil) {
+        } else if (addressBookType == .AfterTxEdit) {
+            nameTextField.text = addressBook?.bookName
+            addressTextField.text = addressBook?.dpAddress
+            memoTextField.text = memo
+            addressTextField.isEnabled = false
+            
+        } else if (addressBookType == .AfterTxNew) {
             addressTextField.text = recipinetAddress
             memoTextField.text = memo
+            addressTextField.isEnabled = false
+            memoTextField.isEnabled = false
         }
+        onUpdateView()
     }
     
     override func setLocalizedString() {
         addressBookTitle.text = NSLocalizedString("setting_addressbook_title", comment: "")
-        addressBookMsg.text = NSLocalizedString("msg_addressbook_add", comment: "")
         nameTextField.label.text = NSLocalizedString("str_name", comment: "")
         addressTextField.label.text = NSLocalizedString("str_address", comment: "")
         memoTextField.label.text = NSLocalizedString("str_memo", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
+        
+        if (addressBookType == .AfterTxEdit) {
+            addressBookMsg.text = NSLocalizedString("msg_addressbook_memo_changed", comment: "")
+        } else {
+            addressBookMsg.text = NSLocalizedString("msg_addressbook_add", comment: "")
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        onUpdateView()
+    }
+    
+    func onUpdateView() {
+        let addressInput = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if (WUtils.isValidEvmAddress(addressInput)) {
+            memoTextField.isHidden = true
+            
+        } else if let chain = All_IBC_Chains().filter({ addressInput!.starts(with: $0.bechAccountPrefix! + "1") == true }).first {
+            if (WUtils.isValidBechAddress(chain, addressInput!)) {
+                memoTextField.isHidden = false
+            }
+        }
+    }
+    
     @IBAction func onClickConfirm(_ sender: UIButton) {
         let nameInput = nameTextField.text?.trimmingCharacters(in: .whitespaces)
         if (nameInput?.isEmpty == true) {
             onShowToast(NSLocalizedString("error_name", comment: ""))
             return
         }
+        
         let addressInput = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        if (nameInput?.isEmpty == true) {
+        if (!onValidateAddress(addressInput)) {
             onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return
         }
-        let memoInput = memoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
-        if (addressBook != nil) {
-            //edit mode
-            let chain = ALLCOSMOSCLASS().filter { addressBook!.chainName == $0.name }.first
-            if (chain != nil) {
-                if (WUtils.isValidBechAddress(chain!, addressInput!)) {
-                    addressBook!.bookName = nameInput!
-                    addressBook!.dpAddress = addressInput!
-                    addressBook!.memo = memoInput
-                    addressBook!.lastTime = Date().millisecondsSince1970
-                    let result = BaseData.instance.updateAddressBook(addressBook!)
-                    bookDelegate?.onAddressBookUpdated(result)
-                    dismiss(animated: true)
-                }
-            }
-            
-            
-        } else if (recipinetAddress != nil) {
-            //after tx ask mode
-            if (recipientChain != nil) {
-                let addressBook = AddressBook.init(nameInput!, recipientChain!.name, addressInput!, memoInput, Date().millisecondsSince1970)
+        let memoInput = memoTextField.isHidden ? "" : memoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        
+        if (addressBookType == .ManualNew) {
+            if let targetChain = getRecipinetChain(addressInput) {
+                let addressBook = AddressBook.init(nameInput!, targetChain.name, addressInput!, memoInput, Date().millisecondsSince1970)
                 let result = BaseData.instance.updateAddressBook(addressBook)
                 bookDelegate?.onAddressBookUpdated(result)
                 dismiss(animated: true)
+                
+            } else {
+                print("Never")
+                onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                return
             }
             
-        } else {
-            //new add mode
-            let chain = ALLCOSMOSCLASS().filter { addressInput!.starts(with: $0.bechAccountPrefix! + "1") == true }.first
-            if (chain != nil) {
-                if (WUtils.isValidBechAddress(chain!, addressInput!)) {
-                    let addressBook = AddressBook.init(nameInput!, chain!.name, addressInput!, memoInput, Date().millisecondsSince1970)
-                    let result = BaseData.instance.updateAddressBook(addressBook)
-                    bookDelegate?.onAddressBookUpdated(result)
-                    dismiss(animated: true)
-                }
+        } else if (addressBookType == .ManualEdit || addressBookType == .AfterTxEdit) {
+            addressBook!.bookName = nameInput!
+            addressBook!.dpAddress = addressInput!
+            addressBook!.memo = memoInput
+            addressBook!.lastTime = Date().millisecondsSince1970
+            
+            let result = BaseData.instance.updateAddressBook(addressBook!)
+            bookDelegate?.onAddressBookUpdated(result)
+            dismiss(animated: true)
+            
+        } else if (addressBookType == .AfterTxNew) {
+            let addressBook = AddressBook.init(nameInput!, recipientChain!.name, addressInput!, memoInput, Date().millisecondsSince1970)
+            let result = BaseData.instance.updateAddressBook(addressBook)
+            bookDelegate?.onAddressBookUpdated(result)
+            dismiss(animated: true)
+        }
+    }
+    
+    func onValidateAddress(_ address: String?) -> Bool {
+        if (address?.isEmpty == true) {
+            return false
+        }
+        if (WUtils.isValidEvmAddress(address)) {
+            return true
+            
+        } else if let chain = All_IBC_Chains().filter({ address!.starts(with: $0.bechAccountPrefix! + "1") == true }).first {
+            if (WUtils.isValidBechAddress(chain, address!)) {
+                return true
             }
         }
-        onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-        return
-        
+        return false
+    }
+    
+    func getRecipinetChain(_ address: String?) -> BaseChain? {
+        if (address?.isEmpty == true) {
+            return nil
+        }
+        if (WUtils.isValidEvmAddress(address)) {
+            return ChainEthereum()
+        } else if let chain = All_IBC_Chains().filter({ address!.starts(with: $0.bechAccountPrefix! + "1") == true }).first {
+            return chain
+        }
+        return nil
     }
 }
 
 protocol AddressBookDelegate {
     func onAddressBookUpdated(_ result: Int?)
+}
+
+
+public enum AddressBookType: Int {
+    case ManualNew = 0
+    case ManualEdit = 1
+    case AfterTxNew = 2
+    case AfterTxEdit = 3
 }

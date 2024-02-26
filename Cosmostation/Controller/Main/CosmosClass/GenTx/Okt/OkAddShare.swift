@@ -35,7 +35,7 @@ class OkAddShare: BaseVC {
     @IBOutlet weak var voteBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: ChainOkt60Keccak!
+    var selectedChain: ChainOkt996Keccak!
     var stakeDenom: String!
     var tokenInfo: JSON!
     var txMemo = ""
@@ -109,7 +109,7 @@ class OkAddShare: BaseVC {
     }
     
     func onUpdateFeeView() {
-        feeSelectImg.af.setImage(withURL: ChainOkt60Keccak.assetImg(stakeDenom))
+        feeSelectImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(stakeDenom))
         feeSelectLabel.text = stakeDenom.uppercased()
         
         let existCnt = selectedChain.lcdOktDeposits["validator_address"].arrayValue.count

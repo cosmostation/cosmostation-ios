@@ -25,7 +25,6 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
     var selectedChain: CosmosClass!
     var msAsset: MintscanAsset?
     var msToken: MintscanToken?
-    var transferAssetType: TransferAssetType?
     var availableAmount: NSDecimalNumber!
     var existedAmount: NSDecimalNumber?
     var decimal: Int16!
@@ -53,23 +52,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
     }
     
     func onUpdateView() {
-        if (sheetType == .TxTransfer) {
-            amountTextField.label.text = NSLocalizedString("str_send_amount", comment: "")
-            availableTitle.text = NSLocalizedString("str_max_availabe", comment: "")
-            if (transferAssetType == .CoinTransfer) {
-                if let msAsset = msAsset {
-                    decimal = msAsset.decimals!
-                    WDP.dpCoin(msAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
-                }
-                
-            } else {
-                if let msToken = msToken {
-                    decimal = msToken.decimals!
-                    WDP.dpToken(msToken, nil, availableDenom, availableLabel, decimal)
-                }
-            }
-            
-        } else if (sheetType == .TxDelegate) {
+        if (sheetType == .TxDelegate) {
             amountTextField.label.text = NSLocalizedString("str_delegate_amount", comment: "")
             availableTitle.text = NSLocalizedString("str_max_delegable", comment: "")
             if let msAsset = msAsset {
@@ -248,7 +231,7 @@ protocol AmountSheetDelegate {
 }
 
 public enum AmountSheetType: Int {
-    case TxTransfer = 0
+//    case TxTransfer = 0
     case TxDelegate = 1
     case TxUndelegate = 2
     case TxRedelegate = 3

@@ -150,6 +150,7 @@
 "str_total_fee" = "Total Tx Fee";
 "str_fixed" = "Fixed";
 "str_average" = "Average";
+"str_high" = "High";
 "str_zero" = "Zero";
 "str_low" = "Low";
 "str_tiny" = "Tiny";
@@ -189,6 +190,7 @@
 "str_my_unbondings" = "My Unstakings";
 "str_start_vote" = "Start Vote";
 "str_transfer_asset" = "Asset Send";
+"str_send_asset" = "Send %@";
 "str_ibc_transfer_asset" = "IBC Asset Send";
 "str_create_another_account" = "Create Another Account";
 "str_delete" = "Delete";
@@ -200,6 +202,8 @@
 "str_claim_all" = "Claim All";
 "str_big_loss" = "자산 손실";
 "str_big_loss_msg" = "If you proceed with the currently selected swap, significant property damage is expected.\n\nPlease check the expected input and output values and decide carefully.";
+"str_memo_optional" = "Memo (Optional)";
+"str_tx_result" = "Tx Result";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -299,6 +303,10 @@
 "str_restore_wallets" = "Restore Wallets";
 "str_deposit" = "Deposit";
 "str_withdraw" = "Withdraw";
+"str_copy_evm_address" = "Copy Evm style address";
+"str_share_evm_address" = "Share Evm style address";
+"str_copy_bech_address" = "Copy Cosmos style address";
+"str_share_bech_address" = "Share Cosmos style address";
 
 
 "btn_delegate" = "  Delegate";
@@ -370,6 +378,7 @@
 "msg_create_another_msg" = "You can create a new account using the same mnemonic, but with a different HD Path.\n\nIn general, there is a possibility that it may not be compatible with other wallets, and it is recommended to be used only by those with background knowledge of crypto keys and HD Path.";
 "msg_enter_encription_key" = "Enter the Encryption Key displayed on the screen to restore your account.";
 "msg_addressbook_add" = "For convenience, you can register frequently used addresses.";
+"msg_addressbook_memo_changed" = "The memo has changed compared to the existing address book.\nWould you like to update with new memo?";
 "msg_addressbook_updated" = "The address book has been updated.";
 "msg_swap_warn" = "Cosmostation Mobile is a non-custodial wallet service, so users are responsible for executing all transactions. Please always check the details accurately before sending a transaction. \n\nWe are not responsible for any losses resulting from transactions through the app.";
 "msg_check_inputed_mnemonic" = "Please check the mnemonic you entered. \nJust so you know, don't share it with anyone. Losing this mnemonic can lead to loss of assets.";
@@ -451,7 +460,7 @@
 "setting_account_title" = "Account";
 "setting_qr_import_account" = "Import account with QR scan";
 "setting_hide_legacy" = "Enable Legacy Addresses";
-"setting_chain_title" = "Chain";
+"setting_chain_title" = "Manage Chains";
 "setting_addressbook_title" = "Address Book";
 "setting_language_title" = "Language";
 "setting_currecny_title" = "Currency";
@@ -1117,6 +1126,7 @@
 "error_name" = "Please enter your name correctly.";
 "error_not_support_cancel_unbonding" = "This chain does not yet support unstaking cancellation.";
 "error_wait_moment" = "Please wait for a moment. Synchronizing.";
+"error_evm_simul" = "Network with the node is not smooth. Please try again later.";
 
 
 "alert_title_no_private_key" = "No Private Key";
@@ -1266,7 +1276,7 @@
 "tx_cosmwasm_execontract" = "Execute Contract";
 "tx_cosmwasm" = "Wasm";
 
-"tx_ethereum_evm" = "Ethereum Tx";
+"tx_ethereum_evm" = "Evm Tx";
 
 "tx_crescent_liquid_stake" = "Liquid Stake";
 "tx_crescent_liquid_unstake" = "Liquid Unstake";

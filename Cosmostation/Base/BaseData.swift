@@ -352,10 +352,24 @@ extension BaseData {
     }
     
     @discardableResult
-    public func updateRefAddressesMain(_ refAddress: RefAddress) -> Int? {
+    public func updateRefAddressesAllValue(_ refAddress: RefAddress) -> Int? {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
-                                            REFADDRESS_CHAIN_TAG == refAddress.chainTag &&
-                                            REFADDRESS_DP_ADDRESS == refAddress.bechAddress)
+                                            REFADDRESS_CHAIN_TAG == refAddress.chainTag)
+        if let address = try! database.pluck(query) {
+            let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])
+            return try? database.run(target.update(REFADDRESS_MAIN_AMOUNT <- refAddress.lastMainAmount,
+                                                   REFADDRESS_MAIN_VALUE <- refAddress.lastMainValue,
+                                                   REFADDRESS_TOKEN_VALUE <- refAddress.lastTokenValue,
+                                                   REFADDRESS_COIN_CNT <- refAddress.lastCoinCnt))
+        } else {
+            return Int(insertRefAddresses(refAddress))
+        }
+    }
+    
+    @discardableResult
+    public func updateRefAddressesCoinValue(_ refAddress: RefAddress) -> Int? {
+        let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
+                                            REFADDRESS_CHAIN_TAG == refAddress.chainTag)
         if let address = try! database.pluck(query) {
             let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])
             return try? database.run(target.update(REFADDRESS_MAIN_AMOUNT <- refAddress.lastMainAmount,
@@ -367,10 +381,9 @@ extension BaseData {
     }
     
     @discardableResult
-    public func updateRefAddressesToken(_ refAddress: RefAddress) -> Int? {
+    public func updateRefAddressesTokenValue(_ refAddress: RefAddress) -> Int? {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
-                                            REFADDRESS_CHAIN_TAG == refAddress.chainTag &&
-                                            REFADDRESS_DP_ADDRESS == refAddress.bechAddress)
+                                            REFADDRESS_CHAIN_TAG == refAddress.chainTag)
         if let address = try! database.pluck(query) {
             let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])
             return try? database.run(target.update(REFADDRESS_TOKEN_VALUE <- refAddress.lastTokenValue))
@@ -516,6 +529,25 @@ extension BaseData {
             return account
         }
         return selectAccounts().first
+    }
+    
+    func setDisplayEvmChainTags(_ id: Int64, _ chainNames: [String])  {
+        if let encoded = try? JSONEncoder().encode(chainNames) {
+            UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS)
+        }
+    }
+    
+    func getDisplayEvmChainTags(_ id: Int64) -> [String] {
+        if let savedData = UserDefaults.standard.object(forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS) as? Data {
+            if let result = try? JSONDecoder().decode([String].self, from: savedData) {
+                return result
+            }
+        }
+        return DEFUAL_DISPALY_EVM
+    }
+    
+    func deleteDisplayEvmChainTags(_ id: Int64)  {
+        UserDefaults.standard.removeObject(forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS)
     }
     
     func setDisplayCosmosChainTags(_ id: Int64, _ chainNames: [String])  {

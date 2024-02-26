@@ -47,8 +47,6 @@ class CheckMenmonicVC: BaseVC {
     @IBOutlet weak var stack05: UIStackView!
     @IBOutlet weak var stack06: UIStackView!
     @IBOutlet weak var stack07: UIStackView!
-    @IBOutlet weak var word17View: UIView!
-    @IBOutlet weak var word18View: UIView!
     
     var wordLabels: [UILabel] = [UILabel]()
     var toCheckAccount: BaseAccount!
@@ -96,19 +94,15 @@ class CheckMenmonicVC: BaseVC {
                 stack06.isHidden = true
                 stack07.isHidden = true
 
-            } else if words.count == 16 {
+            } else if words.count == 18 {
                 stack04.isHidden = false
                 stack05.isHidden = false
-                word17View.isHidden = true
-                word18View.isHidden = true
                 stack06.isHidden = true
                 stack07.isHidden = true
 
             } else if words.count == 24 {
                 stack04.isHidden = false
                 stack05.isHidden = false
-                word17View.isHidden = false
-                word18View.isHidden = false
                 stack06.isHidden = false
                 stack07.isHidden = false
             }

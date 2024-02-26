@@ -150,6 +150,7 @@
 "str_total_fee" = "Tx 수수료 합계";
 "str_fixed" = "고정";
 "str_average" = "평균";
+"str_high" = "높음";
 "str_zero" = "무료";
 "str_low" = "낮음";
 "str_tiny" = "최소";
@@ -189,6 +190,7 @@
 "str_my_unbondings" = "내 언스테이킹";
 "str_start_vote" = "투표 하기";
 "str_transfer_asset" = "자산 전송";
+"str_send_asset" = "%@ 전송";
 "str_ibc_transfer_asset" = "IBC 자산 전송";
 "str_create_another_account" = "다른 계정 생성";
 "str_delete" = "삭제";
@@ -200,6 +202,8 @@
 "str_claim_all" = "모두 수령";
 "str_big_loss" = "자산 손실";
 "str_big_loss_msg" = "현재 선택하신 스왑을 진행하시면 상당한 재산상 손해가 예상됩니다.\n\n예상 입력, 출력 가치를 확인하신 후 신중히 결정해주세요.";
+"str_memo_optional" = "메모 (선택)";
+"str_tx_result" = "Tx 결과";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";
@@ -299,6 +303,10 @@
 "str_restore_wallets" = "지갑 복원";
 "str_deposit" = "예치";
 "str_withdraw" = "출금";
+"str_copy_evm_address" = "Evm형식 주소복사";
+"str_share_evm_address" = "Evm형식 주소공유";
+"str_copy_bech_address" = "Cosmos형식 주소복사";
+"str_share_bech_address" = "Cosmos형식 주소공유";
 
 
 "btn_delegate" = "  위임 하기";
@@ -370,6 +378,7 @@
 "msg_create_another_msg" = "동일한 니모닉을 사용하지만, HD Path를 달리해서 새로운 계정을 만드실 수 있습니다.\n\n일반적으로 다른 지갑들과 호환되지 않을 가능성이 있으며, 크립토 키와 HD Path에 대한 배경지식이 있으신 분들만 사용하시는것을 추천드립니다.";
 "msg_enter_encription_key" = "계정을 복원하기 위해 화면에 표시된 Encription Key를 입력하세요.";
 "msg_addressbook_add" = "편의를 위해 자주쓰는 주소를 등록하실 수 있습니다.";
+"msg_addressbook_memo_changed" = "기존 주소록과 비교해서 메모가 변경되었습니다.\n새로운 메모로 업데이트 하시겠습니까?";
 "msg_addressbook_updated" = "주소록을 업데이트 하였습니다.";
 "msg_swap_warn" = "코스모스테이션 모바일을 비수탁형 지갑 서비스로 모든 트랜젝션 실행의 책임은 유저에게 있습니다. 트랜잭션을 보내기전에 항상 내용을 정확하게 확인하시고 사용해 주시길 바랍니다. \n\n앱을 통한 거래로 인한 손실은 책임지지 않습니다.";
 "msg_check_inputed_mnemonic" = "입력하신 니모닉을 확인해 주세요. \n아시다시피, 누구와도 공유하지 마십시오. 이 니모닉을 분실하면 자산 손실로 이어질 수 있습니다.";
@@ -1117,6 +1126,7 @@
 "error_name" = "이름을 정확히 입력하세요.";
 "error_not_support_cancel_unbonding" = "이 체인은 아직 언스테이킹 취소를 지원하지 않습니다.";
 "error_wait_moment" = "잠시만 기다려 주세요. 동기화중입니다.";
+"error_evm_simul" = "노드와 통신이 원활하지 않습니다. 잠시후에 다시 시도해주세요.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";
@@ -1266,7 +1276,7 @@
 "tx_cosmwasm_execontract" = "컨트랙트 실행";
 "tx_cosmwasm" = "와즘";
 
-"tx_ethereum_evm" = "이더리움 Tx";
+"tx_ethereum_evm" = "Evm Tx";
 
 "tx_crescent_liquid_stake" = "유동성 스테이크";
 "tx_crescent_liquid_unstake" = "유동성 언스테이크";

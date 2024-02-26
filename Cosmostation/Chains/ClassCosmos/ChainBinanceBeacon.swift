@@ -34,7 +34,24 @@ class ChainBinanceBeacon: CosmosClass  {
     }
     
     override func fetchData(_ id: Int64) {
-        fetchLcdData(id)
+        let group = DispatchGroup()
+        
+        fetchNodeInfo(group)
+        fetchAccountInfo(group, bechAddress)
+        fetchBeaconTokens(group)
+        fetchBeaconMiniTokens(group)
+        
+        group.notify(queue: .main) {
+            self.fetched = true
+            self.allCoinValue = self.allCoinValue()
+            self.allCoinUSDValue = self.allCoinValue(true)
+            
+            BaseData.instance.updateRefAddressesCoinValue(
+                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+                           self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                           nil, self.lcdAccountInfo.bnbCoins?.count))
+            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+        }
     }
     
     override func fetchPreCreate() {
@@ -61,27 +78,6 @@ class ChainBinanceBeacon: CosmosClass  {
 }
 
 extension ChainBinanceBeacon {
-    
-    func fetchLcdData(_ id: Int64) {
-        let group = DispatchGroup()
-        
-        fetchNodeInfo(group)
-        fetchAccountInfo(group, bechAddress)
-        fetchBeaconTokens(group)
-        fetchBeaconMiniTokens(group)
-        
-        group.notify(queue: .main) {
-            self.fetched = true
-            self.allCoinValue = self.allCoinValue()
-            self.allCoinUSDValue = self.allCoinValue(true)
-            
-            BaseData.instance.updateRefAddressesMain(
-                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                           self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                           nil, self.lcdAccountInfo.bnbCoins?.count))
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
-        }
-    }
     
     func fetchNodeInfo(_ group: DispatchGroup) {
 //        print("fetchNodeInfo Start ", BaseNetWork.lcdNodeInfoUrl(self))

@@ -165,7 +165,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="tokenDefault" width="22" height="22"/>
+        <image name="tokenDefault" width="192" height="192"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

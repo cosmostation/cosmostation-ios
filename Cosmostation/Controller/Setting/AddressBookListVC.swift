@@ -41,12 +41,14 @@ class AddressBookListVC: BaseVC {
     
     @IBAction func onClickAdd(_ sender: UIButton) {
         let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
+        addressBookSheet.addressBookType = .ManualNew
         addressBookSheet.bookDelegate = self
         self.onStartSheet(addressBookSheet, 420)
     }
     
     func onShowEditSheet(_ book: AddressBook) {
         let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
+        addressBookSheet.addressBookType = .ManualEdit
         addressBookSheet.addressBook = book
         addressBookSheet.bookDelegate = self
         self.onStartSheet(addressBookSheet, 420)

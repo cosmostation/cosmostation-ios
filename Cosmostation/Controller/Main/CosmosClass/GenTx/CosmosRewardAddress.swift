@@ -90,14 +90,11 @@ class CosmosRewardAddress: BaseVC {
     
     
     @objc func onClickToAddress() {
-        let addressSheet = TxAddressSheet(nibName: "TxAddressSheet", bundle: nil)
+        let addressSheet = TxAddressLegacySheet(nibName: "TxAddressLegacySheet", bundle: nil)
         addressSheet.selectedChain = selectedChain
-        if (newRewardAddress == nil) {
-            addressSheet.existedAddress = newRewardAddress?.withdrawAddress
-        }
-        addressSheet.recipientChain = selectedChain
-        addressSheet.addressSheetType = .RewardAddress
-        addressSheet.addressDelegate = self
+        addressSheet.existedAddress = newRewardAddress?.withdrawAddress
+        addressSheet.addressLegacySheetType = .SelectAddress_CosmosDistribution
+        addressSheet.addressLegacyDelegate = self
         self.onStartSheet(addressSheet, 220)
     }
     
@@ -148,7 +145,7 @@ class CosmosRewardAddress: BaseVC {
         baseSheet.targetChain = selectedChain
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectFeeCoin
+        baseSheet.sheetType = .SelectFeeDenom
         onStartSheet(baseSheet, 240)
     }
     
@@ -215,10 +212,10 @@ class CosmosRewardAddress: BaseVC {
 
 }
 
-extension CosmosRewardAddress: MemoDelegate, BaseSheetDelegate, AddressDelegate, PinDelegate {
+extension CosmosRewardAddress: AddressLegacyDelegate, MemoDelegate, BaseSheetDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SelectFeeCoin) {
+        if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
                let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
                 txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
