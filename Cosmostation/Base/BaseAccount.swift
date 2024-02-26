@@ -423,7 +423,9 @@ extension BaseAccount {
                         chain.fetchPreCreate()
                     }
                 }
-                
+            }
+            
+            Task(priority: .medium) {
                 await allCosmosClassChains.concurrentForEach { chain in
                     if (chain.bechAddress.isEmpty) {
                         chain.setInfoWithSeed(seed!, self.lastHDPath)
@@ -447,7 +449,8 @@ extension BaseAccount {
                         chain.fetchPreCreate()
                     }
                 }
-                
+            }
+            Task(priority: .medium) {
                 await allCosmosClassChains.concurrentForEach { chain in
                     if (chain.bechAddress.isEmpty) {
                         chain.setInfoWithPrivateKey(Data.fromHex(privateKeyString!)!)

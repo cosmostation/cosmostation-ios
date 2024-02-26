@@ -74,6 +74,18 @@ class DeriveCell: UITableViewCell {
                 denomLabel.text = chain.coinSymbol
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
             }
+            
+            
+            let dpAmount = chain.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
+            denomLabel.text = chain.coinSymbol
+            amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
+            if let stakeDenom = chain.stakeDenom,
+               let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+                denomLabel.textColor = msAsset.assetColor()
+            } else {
+                denomLabel.textColor = .color01
+            }
+            
             denomLabel.isHidden = false
             amountLabel.isHidden = false
             

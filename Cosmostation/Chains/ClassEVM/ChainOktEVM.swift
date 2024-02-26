@@ -47,6 +47,7 @@ class ChainOktEVM: EvmClass  {
     }
     
     override func fetchData(_ id: Int64) {
+        print("OKT fetchData ", tag)
         let group = DispatchGroup()
         fetchChainParam2(group)
         fetchErc20Info2(group)
