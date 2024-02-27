@@ -317,6 +317,7 @@ extension CosmosClass {
     
     func fetchChainParam2(_ group: DispatchGroup) {
         group.enter()
+//        print("fetchChainParam2 ", BaseNetWork.msChainParam(self))
         AF.request(BaseNetWork.msChainParam(self), method: .get)
             .responseDecodable(of: JSON.self) { response in
                 switch response.result {

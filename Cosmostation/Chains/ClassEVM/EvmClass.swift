@@ -62,7 +62,6 @@ class EvmClass: CosmosClass {
         if (supportCosmos) {
             let channel = getConnection()
             fetchAuth(group, channel)
-            
             group.notify(queue: .main) {
                 try? channel.close()
                 WUtils.onParseVestingAccount(self)
@@ -161,10 +160,12 @@ class EvmClass: CosmosClass {
 extension EvmClass {
     
     func fetchErc20Info() async throws -> [MintscanToken] {
+//        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
         return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
     }
     
     func fetchErc20Info2(_ group: DispatchGroup) {
+//        print("fetchErc20Info2 ", BaseNetWork.msErc20InfoUrl(self))
         group.enter()
         AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get)
             .responseDecodable(of: [MintscanToken].self) { response in
@@ -179,12 +180,10 @@ extension EvmClass {
     }
     
     func fetchEvmBalance(_ group: DispatchGroup) {
-        group.enter()
-        Task.detached(priority: .high) {
+        DispatchQueue(label: "evmBalance", attributes: .concurrent).async(group: group) {
             if let balance = try? self.getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
                 self.evmBalances = NSDecimalNumber(string: String(balance!))
             }
-            group.leave()
         }
     }
 }
@@ -193,7 +192,7 @@ extension EvmClass {
     func fetchAllErc20Balance(_ id: Int64) {
         let group = DispatchGroup()
         mintscanErc20Tokens.forEach { token in
-            if (tag != "ethereum60" || token.isdefault == true) {
+            if (supportCosmos || token.isdefault == true) {
                 fetchErc20Balance(group, EthereumAddress.init(evmAddress)!, token)
             }
         }
@@ -229,15 +228,15 @@ func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
 //    result.append(ChainAltheaEVM())
-//    result.append(ChainCantoEVM())
-//    result.append(ChainDymensionEVM())
-//    result.append(ChainEvmosEVM())
-//    result.append(ChainHumansEVM())
-//    result.append(ChainKavaEVM())
-//    result.append(ChainOktEVM())
-////    result.append(ChainOptimism())
-////    result.append(ChainPolygon())
-//    result.append(ChainXplaEVM())
+    result.append(ChainCantoEVM())
+    result.append(ChainDymensionEVM())
+    result.append(ChainEvmosEVM())
+    result.append(ChainHumansEVM())
+    result.append(ChainKavaEVM())
+    result.append(ChainOktEVM())
+    result.append(ChainOptimism())
+    result.append(ChainPolygon())
+    result.append(ChainXplaEVM())
     
     //Add cosmos chain id for ibc
     result.forEach { chain in
