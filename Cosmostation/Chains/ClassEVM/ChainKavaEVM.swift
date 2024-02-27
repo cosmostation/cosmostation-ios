@@ -17,7 +17,7 @@ class ChainKavaEVM: EvmClass  {
         
         name = "Kava"
         tag = "kava60"
-        logo1 = "chainKava"
+        logo1 = "chainKavaEvm"
         logo2 = "chainKava2"
         apiName = "kava"
         stakeDenom = "ukava"

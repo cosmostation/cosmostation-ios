@@ -34,7 +34,7 @@ class QrAddressVC: BaseVC {
         
         if let evmChain = selectedChain as? EvmClass {
             addressToggleBtn.isHidden = !evmChain.supportCosmos
-            cosmosTag.isHidden = !evmChain.supportCosmos
+//            cosmosTag.isHidden = !evmChain.supportCosmos
             toDpAddress = evmChain.evmAddress
             addressLabel.text = toDpAddress
             addressLabel.adjustsFontSizeToFitWidth = true

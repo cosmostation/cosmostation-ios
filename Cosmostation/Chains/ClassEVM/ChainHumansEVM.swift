@@ -17,7 +17,7 @@ class ChainHumansEVM: EvmClass  {
         
         name = "Humans"
         tag = "humans60"
-        logo1 = "chainHumans"
+        logo1 = "chainHumansEvm"
         logo2 = "chainHumans2"
         apiName = "humans"
         stakeDenom = "aheart"

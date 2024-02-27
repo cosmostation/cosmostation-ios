@@ -39,7 +39,7 @@ class QrAddressPopup2VC: BaseVC {
         }
         
         if let selectedChain = selectedChain as? EvmClass {
-            cosmosTag.isHidden = false
+//            cosmosTag.isHidden = false
             
             evmAddress = selectedChain.evmAddress
             bechAddress = selectedChain.bechAddress

@@ -27,7 +27,7 @@ class ChainOktEVM: EvmClass  {
         
         name = "OKT"
         tag = "okt60_Keccak"
-        logo1 = "chainOkt"
+        logo1 = "chainOktEvm"
         logo2 = "chainOkt2"
         apiName = "okc"
         stakeDenom = "okt"

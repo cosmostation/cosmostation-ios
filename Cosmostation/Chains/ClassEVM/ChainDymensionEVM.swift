@@ -17,7 +17,7 @@ class ChainDymensionEVM: EvmClass  {
         
         name = "Dymension"
         tag = "dymension60"
-        logo1 = "chainDymension"
+        logo1 = "chainDymensionEvm"
         logo2 = "chainDymension2"
         apiName = "dymension"
         stakeDenom = "adym"

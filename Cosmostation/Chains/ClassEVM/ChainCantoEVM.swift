@@ -17,7 +17,7 @@ class ChainCantoEVM: EvmClass  {
         
         name = "Canto"
         tag = "canto60"
-        logo1 = "chainCanto"
+        logo1 = "chainCantoEvm"
         logo2 = "chainCanto2"
         apiName = "canto"
         stakeDenom = "acanto"

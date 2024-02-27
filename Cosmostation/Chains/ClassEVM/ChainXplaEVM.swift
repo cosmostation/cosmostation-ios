@@ -17,7 +17,7 @@ class ChainXplaEVM: EvmClass  {
         
         name = "Xpla"
         tag = "xplaKeccak256"
-        logo1 = "chainXpla"
+        logo1 = "chainXplaEvm"
         logo2 = "chainXpla2"
         apiName = "xpla"
         stakeDenom = "axpla"

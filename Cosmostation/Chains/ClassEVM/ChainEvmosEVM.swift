@@ -17,7 +17,7 @@ class ChainEvmosEVM: EvmClass  {
         
         name = "Evmos"
         tag = "evmos60"
-        logo1 = "chainEvmos"
+        logo1 = "chainEvmosEvm"
         logo2 = "chainEvmos2"
         apiName = "evmos"
         stakeDenom = "aevmos"

@@ -60,9 +60,9 @@ class SelectChainCell: UITableViewCell {
             rootView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
         }
         
-        if (chain.supportCosmos) {
-            cosmosTag.isHidden = false
-        }
+//        if (chain.supportCosmos) {
+//            cosmosTag.isHidden = false
+//        }
         
         if (account.type == .withMnemonic) {
             hdPathLabel.text = chain.getHDPath(account.lastHDPath)
