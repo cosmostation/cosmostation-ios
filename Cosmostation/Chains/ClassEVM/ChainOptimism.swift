@@ -19,14 +19,9 @@ class ChainOptimism: EvmClass  {
         logo2 = "chainOptimism2"
         apiName = "optimism"
         
-//        coinSymbol = "OP"
-//        coinGeckoId = "optimism"
-//        coinLogo = "tokenOp"
         coinSymbol = "ETH"
         coinGeckoId = "ethereum"
         coinLogo = "tokenEth_Op"
-        
-        
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
