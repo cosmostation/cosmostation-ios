@@ -620,6 +620,10 @@ extension CommonTransfer {
             if let estimateGas = try? wTx!.estimateGas(transactionOptions: .defaultOptions) {
                 evmGasLimit = estimateGas
             }
+            
+            if (sendType == .Only_EVM_ERC20 && (fromChain is EvmClass)) {
+                evmGasLimit = "90000"
+            }
              
             let oracle = Web3.Oracle.init(web3)
             let feeHistory = oracle.bothFeesPercentiles
