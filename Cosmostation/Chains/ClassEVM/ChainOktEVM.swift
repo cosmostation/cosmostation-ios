@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class ChainOktEVM: EvmClass  {
+class ChainOktEVM: EvmClass {
     
     //For Legacy Lcd chains
     lazy var lcdNodeInfo = JSON()
@@ -50,6 +50,7 @@ class ChainOktEVM: EvmClass  {
         let group = DispatchGroup()
         fetchChainParam2(group)
         fetchErc20Info2(group)
+        fetchEvmBalance(group)
         
         fetchNodeInfo(group)
         fetchAccountInfo(group, bechAddress)
