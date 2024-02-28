@@ -179,6 +179,15 @@ class CosmosClassVC: BaseVC {
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
             
+        } else if (selectedChain is ChainOktEVM) {
+            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+            transfer.sendType = .Only_EVM_Coin
+            transfer.fromChain = selectedChain
+            transfer.toSendDenom = selectedChain.stakeDenom
+            transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom)
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
+            
         } else {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
             transfer.sendType = (selectedChain is EvmClass) ? .CosmosEVM_Coin : .Only_Cosmos_Coin
