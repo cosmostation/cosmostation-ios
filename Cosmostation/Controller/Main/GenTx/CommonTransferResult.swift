@@ -19,6 +19,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     @IBOutlet weak var resultTitle: UILabel!
     @IBOutlet weak var successView: UIView!
     @IBOutlet weak var successExplorerBtn: UIButton!
+    @IBOutlet weak var successMsgLabel: UILabel!
     @IBOutlet weak var failView: UIView!
     @IBOutlet weak var failMsgLabel: UILabel!
     @IBOutlet weak var failExplorerBtn: UIButton!
@@ -81,10 +82,12 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
         resultTitle.text = NSLocalizedString("str_tx_result", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
         if (txStyle == .WEB3_STYLE) {
+            successMsgLabel.text = "The transaction is completed You can view details on Explorer."
             successExplorerBtn.setTitle("Check in Explorer", for: .normal)
             failExplorerBtn.setTitle("Check in Explorer", for: .normal)
             
         } else if (txStyle == .COSMOS_STYLE) {
+            successMsgLabel.text = "The transaction is completed You can view details on Mintscan."
             successExplorerBtn.setTitle("Check in Mintscan", for: .normal)
             failExplorerBtn.setTitle("Check in Mintscan", for: .normal)
         }
@@ -210,7 +213,7 @@ extension CommonTransferResult {
     }
     
     func fetchEvmTx() {
-        Task {
+        DispatchQueue.global().async { [self] in
             let web3 = (fromChain as! EvmClass).getWeb3Connection()!
             do {
                 let receiptTx = try web3.eth.getTransactionReceipt(evmHash!)
@@ -220,7 +223,9 @@ extension CommonTransferResult {
                 }
                 
             } catch {
-                self.confirmBtn.isEnabled = true
+                DispatchQueue.main.async {
+                    self.confirmBtn.isEnabled = true
+                }
                 self.fetchCnt = self.fetchCnt - 1
                 if (self.fetchCnt > 0) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
@@ -245,7 +250,7 @@ extension CommonTransferResult {
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("wait", comment: ""), style: .default, handler: { _ in
             self.fetchCnt = 10
             if (self.txStyle == .WEB3_STYLE) {
-                
+                self.fetchEvmTx()
             } else if (self.txStyle == .COSMOS_STYLE) {
                 self.fetchCosmosTx()
             }

@@ -26,10 +26,7 @@ class CosmosTxResult: BaseVC {
     @IBOutlet weak var quotesLayer: UIView!
     @IBOutlet weak var quotesMsgLabel: UILabel!
     @IBOutlet weak var quotoesAutherLabel: UILabel!
-    
     @IBOutlet weak var loadingView: LottieAnimationView!
-    
-    var resultType: TxResultType = .Cosmos
     
     var selectedChain: CosmosClass!
     var broadcastTxResponse: Cosmos_Base_Abci_V1beta1_TxResponse?
@@ -54,99 +51,74 @@ class CosmosTxResult: BaseVC {
         loadingView.play()
         
         confirmBtn.isEnabled = false
-        if (resultType == .Cosmos) {
-            if (selectedChain is ChainBinanceBeacon) {
-                successMintscanBtn.setTitle("Check in Explorer", for: .normal)
-                failMintscanBtn.setTitle("Check in Explorer", for: .normal)
-                guard legacyResult != nil else {
-                    loadingView.isHidden = true
-                    failView.isHidden = false
-                    confirmBtn.isEnabled = true
-                    return
-                }
-                
-                if (legacyResult["code"].intValue != 0) {
-                    loadingView.isHidden = true
-                    failView.isHidden = false
-                    failMsgLabel.text = legacyResult?["log"].stringValue
-                    confirmBtn.isEnabled = true
-                    return
-                } else {
-                    loadingView.isHidden = true
-                    successView.isHidden = false
-                    confirmBtn.isEnabled = true
-                }
-                
-            } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-                successMintscanBtn.setTitle("Check in Explorer", for: .normal)
-                failMintscanBtn.setTitle("Check in Explorer", for: .normal)
-                guard legacyResult != nil else {
-                    loadingView.isHidden = true
-                    failView.isHidden = false
-                    confirmBtn.isEnabled = true
-                    return
-                }
-                
-                if (legacyResult["code"].int != nil) {
-                    loadingView.isHidden = true
-                    failView.isHidden = false
-                    failMsgLabel.text = legacyResult?["raw_log"].stringValue
-                    confirmBtn.isEnabled = true
-                    
-                } else {
-                    loadingView.isHidden = true
-                    successView.isHidden = false
-                    confirmBtn.isEnabled = true
-                }
-                
-                
-            } else {
-                guard (broadcastTxResponse?.txhash) != nil else {
-                    loadingView.isHidden = true
-                    failView.isHidden = false
-                    failMsgLabel.text = broadcastTxResponse?.rawLog
-                    confirmBtn.isEnabled = true
-                    return
-                }
-                setQutoes()
-                fetchTx()
-            }
-            
-        } else {
-            guard evmHash != nil else {
+        if (selectedChain is ChainBinanceBeacon) {
+            successMintscanBtn.setTitle("Check in Explorer", for: .normal)
+            failMintscanBtn.setTitle("Check in Explorer", for: .normal)
+            guard legacyResult != nil else {
                 loadingView.isHidden = true
                 failView.isHidden = false
-                failMsgLabel.text = ""
                 confirmBtn.isEnabled = true
                 return
             }
-            fetchEvmTx()
+            
+            if (legacyResult["code"].intValue != 0) {
+                loadingView.isHidden = true
+                failView.isHidden = false
+                failMsgLabel.text = legacyResult?["log"].stringValue
+                confirmBtn.isEnabled = true
+                return
+            } else {
+                loadingView.isHidden = true
+                successView.isHidden = false
+                confirmBtn.isEnabled = true
+            }
+            
+        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+            successMintscanBtn.setTitle("Check in Explorer", for: .normal)
+            failMintscanBtn.setTitle("Check in Explorer", for: .normal)
+            guard legacyResult != nil else {
+                loadingView.isHidden = true
+                failView.isHidden = false
+                confirmBtn.isEnabled = true
+                return
+            }
+            
+            if (legacyResult["code"].int != nil) {
+                loadingView.isHidden = true
+                failView.isHidden = false
+                failMsgLabel.text = legacyResult?["raw_log"].stringValue
+                confirmBtn.isEnabled = true
+                
+            } else {
+                loadingView.isHidden = true
+                successView.isHidden = false
+                confirmBtn.isEnabled = true
+            }
+            
+            
+        } else {
+            guard (broadcastTxResponse?.txhash) != nil else {
+                loadingView.isHidden = true
+                failView.isHidden = false
+                failMsgLabel.text = broadcastTxResponse?.rawLog
+                confirmBtn.isEnabled = true
+                return
+            }
+            setQutoes()
+            fetchTx()
         }
     }
     
     func onUpdateView() {
-        if (resultType == .Cosmos) {
-            loadingView.isHidden = true
-            confirmBtn.isEnabled = true
-            if (txResponse?.txResponse.code != 0) {
-                failView.isHidden = false
-                failMintscanBtn.isHidden = false
-                failMsgLabel.text = txResponse?.txResponse.rawLog
-                
-            } else {
-                successView.isHidden = false
-            }
+        loadingView.isHidden = true
+        confirmBtn.isEnabled = true
+        if (txResponse?.txResponse.code != 0) {
+            failView.isHidden = false
+            failMintscanBtn.isHidden = false
+            failMsgLabel.text = txResponse?.txResponse.rawLog
             
         } else {
-            loadingView.isHidden = true
-            confirmBtn.isEnabled = true
-            if (evmRecipient!.status != .ok) {
-                failView.isHidden = false
-                failMintscanBtn.isHidden = false
-                failMsgLabel.text = evmRecipient?.logsBloom.debugDescription
-            } else {
-                successView.isHidden = false
-            }
+            successView.isHidden = false
         }
     }
     
@@ -177,35 +149,6 @@ class CosmosTxResult: BaseVC {
         }
     }
     
-    func fetchEvmTx() {
-//        Task {
-//            guard let url = URL(string: selectedChain.rpcURL) else { return }
-//            guard let web3 = try? Web3.new(url) else { return }
-//            
-//            do {
-//                let receiptTx = try web3.eth.getTransactionReceipt(evmHash!)
-//                self.evmRecipient = receiptTx
-//                DispatchQueue.main.async {
-//                    self.onUpdateView()
-//                }
-//                
-//            } catch {
-//                self.confirmBtn.isEnabled = true
-//                self.fetchCnt = self.fetchCnt - 1
-//                if (self.fetchCnt > 0) {
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
-//                        self.fetchEvmTx()
-//                    });
-//                    
-//                } else {
-//                    DispatchQueue.main.async {
-//                        self.onShowMoreWait()
-//                    }
-//                }
-//            }
-//        }
-    }
-    
     func onShowMoreWait() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("more_wait_title", comment: ""), message: NSLocalizedString("more_wait_msg", comment: ""), preferredStyle: .alert)
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
@@ -213,11 +156,7 @@ class CosmosTxResult: BaseVC {
         }))
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("wait", comment: ""), style: .default, handler: { _ in
             self.fetchCnt = 10
-            if (self.resultType == .Cosmos) {
-                self.fetchTx()
-            } else {
-                self.fetchEvmTx()
-            }
+            self.fetchTx()
         }))
         self.present(noticeAlert, animated: true)
     }
@@ -231,21 +170,16 @@ class CosmosTxResult: BaseVC {
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
-        if (self.resultType == .Cosmos) {
-            if (selectedChain is ChainBinanceBeacon) {
-                guard let url = BaseNetWork.getTxDetailUrl(selectedChain, legacyResult!["hash"].stringValue) else { return }
-                self.onShowSafariWeb(url)
-                
-            } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-                guard let url = BaseNetWork.getTxDetailUrl(selectedChain, legacyResult!["txhash"].stringValue) else { return }
-                self.onShowSafariWeb(url)
-                
-            } else {
-                guard let url = BaseNetWork.getTxDetailUrl(selectedChain, broadcastTxResponse!.txhash) else { return }
-                self.onShowSafariWeb(url)
-            }
+        if (selectedChain is ChainBinanceBeacon) {
+            guard let url = BaseNetWork.getTxDetailUrl(selectedChain, legacyResult!["hash"].stringValue) else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+            guard let url = BaseNetWork.getTxDetailUrl(selectedChain, legacyResult!["txhash"].stringValue) else { return }
+            self.onShowSafariWeb(url)
+            
         } else {
-            guard let url = BaseNetWork.getTxDetailUrl(selectedChain, evmHash!) else { return }
+            guard let url = BaseNetWork.getTxDetailUrl(selectedChain, broadcastTxResponse!.txhash) else { return }
             self.onShowSafariWeb(url)
         }
     }
@@ -283,10 +217,4 @@ extension CosmosTxResult {
         return callOptions
     }
     
-}
-
-
-public enum TxResultType: Int {
-    case Cosmos = 0
-    case Evm = 1
 }
