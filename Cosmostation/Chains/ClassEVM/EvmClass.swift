@@ -247,6 +247,6 @@ func ALLEVMCLASS() -> [EvmClass] {
     return result
 }
 
-let DEFUAL_DISPALY_EVM = ["ethereum60", "Dymension60", "kava60"]
+let DEFUAL_DISPALY_EVM = ["ethereum60", "dymension60", "kava60"]
 
 let EVM_BASE_FEE = NSDecimalNumber.init(string: "588000000000000")
