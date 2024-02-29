@@ -98,7 +98,7 @@ class EvmClass: CosmosClass {
         //Do not using Task, only DispatchQueue : make slow
         DispatchQueue.global().async {
             if let balance = try? self.getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
-                self.evmBalances = NSDecimalNumber(string: String(balance!))
+                self.evmBalances = NSDecimalNumber(string: String(balance ?? "0"))
             }
             DispatchQueue.main.async(execute: {
                 self.fetched = true
@@ -182,7 +182,7 @@ extension EvmClass {
     func fetchEvmBalance(_ group: DispatchGroup) {
         DispatchQueue(label: "evmBalance", attributes: .concurrent).async(group: group) {
             if let balance = try? self.getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
-                self.evmBalances = NSDecimalNumber(string: String(balance!))
+                self.evmBalances = NSDecimalNumber(string: String(balance ?? "0"))
             }
         }
     }
