@@ -86,7 +86,7 @@ class PortfolioCell: UITableViewCell {
         
         if (chain.supportCosmos) {
             tagLayer.isHidden = false
-            cosmosTag.isHidden = false
+//            cosmosTag.isHidden = false
         }
         
         if (chain.fetched) {

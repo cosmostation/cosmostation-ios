@@ -26,6 +26,7 @@
                 <outlet property="quotoesAutherLabel" destination="tjB-Hy-xiZ" id="bid-ds-96M"/>
                 <outlet property="resultTitle" destination="6br-xa-AHd" id="FcN-dX-IHj"/>
                 <outlet property="successExplorerBtn" destination="oYb-7A-Pw4" id="ODz-CA-Edb"/>
+                <outlet property="successMsgLabel" destination="j2Y-my-eNq" id="2Rk-Jo-as3"/>
                 <outlet property="successView" destination="Bmg-8Q-NhC" id="pxb-Zg-CfC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

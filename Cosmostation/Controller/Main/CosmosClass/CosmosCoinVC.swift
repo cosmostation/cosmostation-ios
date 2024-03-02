@@ -329,7 +329,8 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
         } else if (selectedChain is ChainOktEVM) {
             if (indexPath.section == 0) {
                 if (indexPath.row == 0) {
-                    onStartTransferVC(.CosmosEVM_Coin, lcdBalances[indexPath.row]["denom"].stringValue)
+                    //OKT EVM only support Ox style
+                    onStartTransferVC(.Only_EVM_Coin, lcdBalances[indexPath.row]["denom"].stringValue)
                 } else {
                     onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
                 }

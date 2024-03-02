@@ -74,11 +74,11 @@ class ClaimAllChainCell: UITableViewCell {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         
-        if let evmChain = (chain as? EvmClass) {
-            if (evmChain.supportCosmos) {
-                cosmosTag.isHidden = false
-            }
-        }
+//        if let evmChain = (chain as? EvmClass) {
+//            if (evmChain.supportCosmos) {
+//                cosmosTag.isHidden = false
+//            }
+//        }
         
         if (!chain.isDefault) {
             legacyTag.isHidden = false

@@ -47,7 +47,7 @@ class SelectAddressListSheet: BaseVC {
                 }
             }
             BaseData.instance.selectAllAddressBooks().forEach { book in
-                if (book.chainName == toChain.name && book.dpAddress.starts(with: "0x") && book.dpAddress != senderEvmAddress) {
+                if (book.dpAddress.starts(with: "0x") && book.dpAddress != senderEvmAddress) {
                     evmAddressBook.append(book)
                 }
             }
@@ -63,7 +63,7 @@ class SelectAddressListSheet: BaseVC {
                 }
             
             BaseData.instance.selectAllAddressBooks().forEach { book in
-                if (book.chainName == toChain.name && book.dpAddress != senderBechAddress) {
+                if (book.chainName == toChain.name && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
                     bechAddressBook.append(book)
                 }
             }
@@ -78,7 +78,7 @@ class SelectAddressListSheet: BaseVC {
                     }
                 }
             BaseData.instance.selectAllAddressBooks().forEach { book in
-                if (book.chainName == toChain.name && book.dpAddress != senderBechAddress) {
+                if (book.chainName == toChain.name && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
                     bechAddressBook.append(book)
                 }
             }
@@ -91,7 +91,7 @@ class SelectAddressListSheet: BaseVC {
                     }
                 }
                 BaseData.instance.selectAllAddressBooks().forEach { book in
-                    if (book.chainName == toChain.name && book.dpAddress.starts(with: "0x") && book.dpAddress != senderEvmAddress) {
+                    if (book.dpAddress.starts(with: "0x") && book.dpAddress != senderEvmAddress) {
                         evmAddressBook.append(book)
                     }
                 }

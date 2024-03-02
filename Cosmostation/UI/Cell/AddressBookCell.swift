@@ -32,7 +32,7 @@ class AddressBookCell: UITableViewCell {
     }
     
     func bindAddressBook(_ book: AddressBook) {
-        if (book.dpAddress.starts(with: "Ox")) {
+        if (book.dpAddress.starts(with: "0x")) {
             memoLabel.isHidden = true
             
         } else {

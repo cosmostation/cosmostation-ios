@@ -50,8 +50,8 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
     }
     
     func onInitView() {
-        if let existedAmount = existedAmount {
-            amountTextField.text = existedAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal)).stringValue
+        if (existedAmount != nil && existedAmount != NSDecimalNumber.zero) {
+            amountTextField.text = existedAmount!.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal)).stringValue
         }
         
         if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20) {

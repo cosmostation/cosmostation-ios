@@ -17,7 +17,7 @@ class ChainAltheaEVM: EvmClass  {
         
         name = "Althea"
         tag = "althea60"
-        logo1 = "chainAlthea"
+        logo1 = "chainAltheaEvm"
         logo2 = "chainAlthea2"
         apiName = "althea"
         stakeDenom = "ualtg"
