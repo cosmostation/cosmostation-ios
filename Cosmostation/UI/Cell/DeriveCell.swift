@@ -84,9 +84,9 @@ class DeriveCell: UITableViewCell {
             }
             
             if (chain.evmBalances != NSDecimalNumber.zero) {
-                coinCntLabel.text = "0 Coins"
-            } else {
                 coinCntLabel.text = "1 Coins"
+            } else {
+                coinCntLabel.text = "0 Coins"
             }
             
             denomLabel.isHidden = false
