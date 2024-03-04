@@ -89,7 +89,7 @@ class BaseNetWork {
         if (chain is ChainBinanceBeacon) {
             return BNB_BEACON_LCD + "api/v1/transactions"
         } else if (chain.tag.starts(with: "okt")) {
-            return MINTSCAN_API_URL + "v1/utils/proxy/okc-transaction-list?device=IOS&chainShortName=okc&address=" + address + "&limit=50"
+            return MINTSCAN_API_URL + "v10/utils/proxy/okc-transaction-list?device=IOS&chainShortName=okc&address=" + address + "&limit=50"
         } else {
             return MINTSCAN_API_URL + "v10/" + chain.apiName + "/account/" + address + "/txs"
         }
@@ -97,15 +97,15 @@ class BaseNetWork {
     
     static func msPricesUrl() -> String {
         let currency = BaseData.instance.getCurrencyString().lowercased()
-        return MINTSCAN_API_URL + "v2/utils/market/prices?currency=" + currency
+        return MINTSCAN_API_URL + "v10/utils/market/prices?currency=" + currency
     }
     
     static func msUSDPricesUrl() -> String {
-        return MINTSCAN_API_URL + "v2/utils/market/prices?currency=usd"
+        return MINTSCAN_API_URL + "v10/utils/market/prices?currency=usd"
     }
     
     static func msAssetsUrl() -> String {
-        return MINTSCAN_API_URL + "v3/assets"
+        return MINTSCAN_API_URL + "v10/assets"
     }
     
     static func msCw20InfoUrl(_ chain: BaseChain) -> String {
@@ -117,7 +117,7 @@ class BaseNetWork {
     }
     
     static func msSupportChains() -> String {
-        return MINTSCAN_API_URL + "v1/meta/support/chains"
+        return MINTSCAN_API_URL + "v10/meta/support/chains"
     }
     
     static func msSupportConfigs() -> String {
@@ -129,11 +129,11 @@ class BaseNetWork {
     }
     
     static func msProposals(_ chain: BaseChain) -> String {
-        return MINTSCAN_API_URL + "v1/" + chain.apiName + "/proposals"
+        return MINTSCAN_API_URL + "v10/" + chain.apiName + "/proposals"
     }
     
     static func msMyVoteHistory(_ chain: BaseChain, _ address: String) -> String {
-        return MINTSCAN_API_URL + "v1/" + chain.apiName + "/account/" + address + "/votes"
+        return MINTSCAN_API_URL + "v10/" + chain.apiName + "/account/" + address + "/votes"
     }
     
     static func getTxDetailUrl(_ chain: BaseChain, _ txHash: String) -> URL? {
