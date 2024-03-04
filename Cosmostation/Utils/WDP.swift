@@ -422,7 +422,7 @@ public class WDP {
 
     static func okcDpTime(_ timeInt: Int64?) -> String {
         if (timeInt == nil) { return "-" }
-        guard let date = WUtils.timeInt64ToDate(timeInt! + Int64(TimeZone.current.secondsFromGMT()) * 1000) else {
+        guard let date = WUtils.timeInt64ToDate(timeInt!) else {
             return "-"
         }
         let localFormatter = DateFormatter()
@@ -432,7 +432,7 @@ public class WDP {
 
     static func okcDpTimeGap(_ timeInt: Int64?) -> String {
         if (timeInt == nil) { return "" }
-        guard let date = WUtils.timeInt64ToDate(timeInt! + Int64(TimeZone.current.secondsFromGMT()) * 1000) else {
+        guard let date = WUtils.timeInt64ToDate(timeInt!) else {
             return ""
         }
         return WUtils.getGapTime(date)
