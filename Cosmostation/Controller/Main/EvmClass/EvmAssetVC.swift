@@ -160,18 +160,10 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        let transfer = EvmTransfer(nibName: "EvmTransfer", bundle: nil)
-//        transfer.selectedChain = selectedChain
-//        if (indexPath.section == 1) {
-//            transfer.selectedMsToken = erc20Tokens[indexPath.row]
-//        }
-//        transfer.modalTransitionStyle = .coverVertical
-//        self.present(transfer, animated: true)
-        
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         if (indexPath.section == 0) {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
             transfer.sendType = .Only_EVM_Coin
