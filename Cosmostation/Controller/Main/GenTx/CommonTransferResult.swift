@@ -82,12 +82,12 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
         resultTitle.text = NSLocalizedString("str_tx_result", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
         if (txStyle == .WEB3_STYLE) {
-            successMsgLabel.text = "The transaction is completed You can view details on Explorer."
+            successMsgLabel.text = evmHash
             successExplorerBtn.setTitle("Check in Explorer", for: .normal)
             failExplorerBtn.setTitle("Check in Explorer", for: .normal)
             
         } else if (txStyle == .COSMOS_STYLE) {
-            successMsgLabel.text = "The transaction is completed You can view details on Mintscan."
+            successMsgLabel.text = cosmosBroadcastTxResponse?.txhash
             successExplorerBtn.setTitle("Check in Mintscan", for: .normal)
             failExplorerBtn.setTitle("Check in Mintscan", for: .normal)
         }
