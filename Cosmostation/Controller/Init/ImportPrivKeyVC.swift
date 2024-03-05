@@ -56,21 +56,4 @@ class ImportPrivKeyVC: BaseVC, UITextViewDelegate {
         guard SECP256K1.verifyPrivateKey(privateKey: privateKeyData) else { return false }
         return true
     }
-
-//    func onRestoreAccount(_ name: String, _ privKey: String) {
-//        showWait()
-//        DispatchQueue.global().async {
-//            let keychain = BaseData.instance.getKeyChain()
-//            let recoverAccount = BaseAccount(name, .onlyPrivateKey, "0")
-//            let id = BaseData.instance.insertAccount(recoverAccount)
-//            try? keychain.set(privKey, key: recoverAccount.uuid.sha1())
-//            BaseData.instance.setLastAccount(id)
-//            BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
-//            
-//            DispatchQueue.main.async(execute: {
-//                self.hideWait()
-//                self.onStartMainTab()
-//            });
-//        }
-//    }
 }
