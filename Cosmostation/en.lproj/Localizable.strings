@@ -1129,6 +1129,7 @@
 "error_not_support_cancel_unbonding" = "This chain does not yet support unstaking cancellation.";
 "error_wait_moment" = "Please wait for a moment. Synchronizing.";
 "error_evm_simul" = "Network with the node is not smooth. Please try again later.";
+"error_tranfer_disabled" = "This chain does not support the transfer function.";
 
 
 "alert_title_no_private_key" = "No Private Key";

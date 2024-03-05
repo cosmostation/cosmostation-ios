@@ -1129,6 +1129,7 @@
 "error_not_support_cancel_unbonding" = "このチェーンはまだアンステーキングキャンセルをサポートしていません。";
 "error_wait_moment" = "しばらくお待ちください。 同期中です。";
 "error_evm_simul" = "ノードとのネットワークがスムーズではありません。 後でもう一度試してください。";
+"error_tranfer_disabled" = "このチェーンは伝達関数をサポートしていません。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

@@ -214,6 +214,10 @@ extension CosmosClass {
         return getChainParam()["fee"]["isSimulable"].bool ?? true
     }
     
+    func isBankLocked() -> Bool {
+        return getChainParam()["isBankLocked"].bool ?? false
+    }
+    
     func feeThreshold() -> String? {
         return nil
     }

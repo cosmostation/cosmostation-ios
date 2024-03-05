@@ -192,6 +192,10 @@ class CosmosClassVC: BaseVC {
     }
     
     func onSendTx() {
+        if (selectedChain.isBankLocked()) {
+            onShowToast(NSLocalizedString("error_tranfer_disabled", comment: ""))
+            return
+        }
         if (selectedChain.isTxFeePayable() == false) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return

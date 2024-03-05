@@ -1129,6 +1129,7 @@
 "error_not_support_cancel_unbonding" = "이 체인은 아직 언스테이킹 취소를 지원하지 않습니다.";
 "error_wait_moment" = "잠시만 기다려 주세요. 동기화중입니다.";
 "error_evm_simul" = "노드와 통신이 원활하지 않습니다. 잠시후에 다시 시도해주세요.";
+"error_tranfer_disabled" = "전송기능을 지원하지 않는 체인입니다.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";
