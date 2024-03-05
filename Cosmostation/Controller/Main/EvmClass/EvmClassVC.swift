@@ -42,13 +42,11 @@ class EvmClassVC: BaseVC {
     }
     
     var evmAssetVC: EvmAssetVC?
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "embedAssetVC") {
             let target = segue.destination as! EvmAssetVC
             target.selectedChain = selectedChain
             evmAssetVC = target
-            
         } else if (segue.identifier == "embedNftVC") {
             let target = segue.destination as! EvmNftVC
             target.selectedChain = selectedChain
@@ -129,7 +127,7 @@ class EvmClassVC: BaseVC {
     
     func onSetTabbarView() {
         let assetTabBar = UITabBarItem(title: "Assets", image: nil, tag: 0)
-        let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 1)
+//        let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 1)
         let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 2)
         tabbar.items.append(assetTabBar)
 //        tabbar.items.append(nftTabBar)

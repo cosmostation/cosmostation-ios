@@ -27,6 +27,9 @@ class CosmosClassVC: BaseVC {
     @IBOutlet weak var historyList: UIView!
     @IBOutlet weak var aboutList: UIView!
     
+    var addtokenBarBtn: UIBarButtonItem!
+    var explorerBarBtn: UIBarButtonItem!
+    
     var selectedChain: CosmosClass!
     var totalValue = NSDecimalNumber.zero {
         didSet {
@@ -87,8 +90,19 @@ class CosmosClassVC: BaseVC {
         addressTap.cancelsTouchesInView = false
         addressLayer.addGestureRecognizer(addressTap)
         
+        let addtokenBtn: UIButton = UIButton(type: .custom)
+        addtokenBtn.setImage(UIImage(named: "iconAddTokenInfo"), for: .normal)
+        addtokenBtn.addTarget(self, action:  #selector(onClickAddToken), for: .touchUpInside)
+        addtokenBtn.frame = CGRectMake(0, 0, 40, 30)
+        addtokenBarBtn = UIBarButtonItem(customView: addtokenBtn)
         
-        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconExplorer"), style: .plain, target: self, action: #selector(onClickExplorer))
+        let explorerBtn: UIButton = UIButton(type: .custom)
+        explorerBtn.setImage(UIImage(named: "iconExplorer"), for: .normal)
+        explorerBtn.addTarget(self, action:  #selector(onClickExplorer), for: .touchUpInside)
+        explorerBtn.frame = CGRectMake(0, 0, 30, 30)
+        explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
+        
+        navigationItem.rightBarButtonItems = [explorerBarBtn]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -168,6 +182,13 @@ class CosmosClassVC: BaseVC {
             guard let url = BaseNetWork.getAccountDetailUrl(selectedChain) else { return }
             self.onShowSafariWeb(url)
         }
+    }
+    
+    @objc func onClickAddToken() {
+        let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
+        warnSheet.selectedChain = selectedChain
+        warnSheet.noticeType = .TokenGithub
+        onStartSheet(warnSheet)
     }
     
     func onSendTx() {
@@ -473,6 +494,7 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             nftList.alpha = 0
             historyList.alpha = 0
             aboutList.alpha = 0
+            navigationItem.rightBarButtonItems = [explorerBarBtn]
             
         } else if (item.tag == 1) {
             coinList.alpha = 0
@@ -480,6 +502,7 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             nftList.alpha = 0
             historyList.alpha = 0
             aboutList.alpha = 0
+            navigationItem.rightBarButtonItems = [explorerBarBtn, addtokenBarBtn]
             
         } else if (item.tag == 2) {
             coinList.alpha = 0
@@ -487,6 +510,7 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             nftList.alpha = 1
             historyList.alpha = 0
             aboutList.alpha = 0
+            navigationItem.rightBarButtonItems = [explorerBarBtn]
             
         } else if (item.tag == 3) {
             coinList.alpha = 0
@@ -494,6 +518,7 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             nftList.alpha = 0
             historyList.alpha = 1
             aboutList.alpha = 0
+            navigationItem.rightBarButtonItems = [explorerBarBtn]
             
         } else if (item.tag == 4) {
             coinList.alpha = 0
@@ -501,6 +526,7 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             nftList.alpha = 0
             historyList.alpha = 0
             aboutList.alpha = 1
+            navigationItem.rightBarButtonItems = [explorerBarBtn]
         }
     }
     

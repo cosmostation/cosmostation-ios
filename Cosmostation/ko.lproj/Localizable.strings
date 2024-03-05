@@ -307,6 +307,7 @@
 "str_share_evm_address" = "Evm형식 주소공유";
 "str_copy_bech_address" = "Cosmos형식 주소복사";
 "str_share_bech_address" = "Cosmos형식 주소공유";
+"str_token_github" = "토큰 정보 확인";
 
 
 "btn_delegate" = "  위임 하기";
@@ -384,6 +385,7 @@
 "msg_check_inputed_mnemonic" = "입력하신 니모닉을 확인해 주세요. \n아시다시피, 누구와도 공유하지 마십시오. 이 니모닉을 분실하면 자산 손실로 이어질 수 있습니다.";
 "msg_show_all_proposals" = "모든 프로포절을 표시합니다.";
 "msg_hide_scam_proposals" = "스캠의심 프로포절을 필터합니다.";
+"msg_token_github" = "현재 사용하고 계신 체인에서는 커뮤니티에 알려진 토큰(cw20, erc20)을 보유한 경우 자동으로 토큰 목록에 표시됩니다.\n\n원하는 토큰 정보가 보이지 않는 경우, 아래 GitHub 링크를 통해 PR을 제출해주세요.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";
