@@ -306,6 +306,8 @@
 		04527DC22A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04527DBE2A937CC1005F72D7 /* AssetCosmosClassCell.xib */; };
 		04527DC52A938FC9005F72D7 /* CosmosClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */; };
 		04527DC62A938FC9005F72D7 /* CosmosClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */; };
+		046269072B9740F300648059 /* basebg04.png in Resources */ = {isa = PBXBuildFile; fileRef = 046269062B9740F300648059 /* basebg04.png */; };
+		046269082B9740F300648059 /* basebg04.png in Resources */ = {isa = PBXBuildFile; fileRef = 046269062B9740F300648059 /* basebg04.png */; };
 		046BF1C02B0F259C00BC1FC8 /* OktValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BF1BE2B0F259C00BC1FC8 /* OktValidatorCell.swift */; };
 		046BF1C12B0F259C00BC1FC8 /* OktValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BF1BE2B0F259C00BC1FC8 /* OktValidatorCell.swift */; };
 		046BF1C22B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BF1BF2B0F259C00BC1FC8 /* OktValidatorCell.xib */; };
@@ -863,8 +865,6 @@
 		04C940CE2AEA56C200415256 /* basebg02.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C940CC2AEA56C200415256 /* basebg02.png */; };
 		04C940D02AEA56DE00415256 /* basebg03.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C940CF2AEA56DE00415256 /* basebg03.png */; };
 		04C940D12AEA56DE00415256 /* basebg03.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C940CF2AEA56DE00415256 /* basebg03.png */; };
-		04C940D32AEA56FC00415256 /* basebg04.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C940D22AEA56FC00415256 /* basebg04.png */; };
-		04C940D42AEA56FC00415256 /* basebg04.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C940D22AEA56FC00415256 /* basebg04.png */; };
 		04C940D92AEA579C00415256 /* basebg05.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C940D82AEA579C00415256 /* basebg05.png */; };
 		04C940DA2AEA579C00415256 /* basebg05.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C940D82AEA579C00415256 /* basebg05.png */; };
 		04C940E02AEB92F800415256 /* BaseImgSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C940DE2AEB92F800415256 /* BaseImgSheetCell.swift */; };
@@ -1967,6 +1967,7 @@
 		04527DBD2A937CC1005F72D7 /* AssetCosmosClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCosmosClassCell.swift; sourceTree = "<group>"; };
 		04527DBE2A937CC1005F72D7 /* AssetCosmosClassCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCosmosClassCell.xib; sourceTree = "<group>"; };
 		04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClassVC.swift; sourceTree = "<group>"; };
+		046269062B9740F300648059 /* basebg04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg04.png; sourceTree = "<group>"; };
 		046BF1BE2B0F259C00BC1FC8 /* OktValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktValidatorCell.swift; sourceTree = "<group>"; };
 		046BF1BF2B0F259C00BC1FC8 /* OktValidatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OktValidatorCell.xib; sourceTree = "<group>"; };
 		046BF1C42B0F443100BC1FC8 /* OktSelectValidatorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktSelectValidatorSheet.swift; sourceTree = "<group>"; };
@@ -2248,7 +2249,6 @@
 		04C940C92AEA54BD00415256 /* ChainCelestia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCelestia.swift; sourceTree = "<group>"; };
 		04C940CC2AEA56C200415256 /* basebg02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg02.png; sourceTree = "<group>"; };
 		04C940CF2AEA56DE00415256 /* basebg03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg03.png; sourceTree = "<group>"; };
-		04C940D22AEA56FC00415256 /* basebg04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg04.png; sourceTree = "<group>"; };
 		04C940D82AEA579C00415256 /* basebg05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg05.png; sourceTree = "<group>"; };
 		04C940DE2AEB92F800415256 /* BaseImgSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImgSheetCell.swift; sourceTree = "<group>"; };
 		04C940DF2AEB92F800415256 /* BaseImgSheetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseImgSheetCell.xib; sourceTree = "<group>"; };
@@ -3985,7 +3985,7 @@
 				0472D4782B034E7200B9E6E8 /* basebg01.png */,
 				04C940CC2AEA56C200415256 /* basebg02.png */,
 				04C940CF2AEA56DE00415256 /* basebg03.png */,
-				04C940D22AEA56FC00415256 /* basebg04.png */,
+				046269062B9740F300648059 /* basebg04.png */,
 				04C940D82AEA579C00415256 /* basebg05.png */,
 				04F048D62AFCD34A002A809D /* basebg06.png */,
 				04E250DF2B8F035E007D5AA0 /* basebg07.png */,
@@ -4273,6 +4273,7 @@
 				04CD24852AD312BD00497EF5 /* TxAmountBepSheet.xib in Resources */,
 				0402B7F52ACC38BA00824B3F /* CosmosVote.xib in Resources */,
 				04A68C262ABDA3350041FA13 /* SelectSwapAssetCell.xib in Resources */,
+				046269082B9740F300648059 /* basebg04.png in Resources */,
 				04BA9BD82A985771003E2404 /* ChainSelectVC.xib in Resources */,
 				04FA74552A9D97A0001A2830 /* Pincode.storyboard in Resources */,
 				048427A62B3BE09900C8D7D8 /* NeutronDao.storyboard in Resources */,
@@ -4296,7 +4297,6 @@
 				E1CD6AFD2AEAAEDC00376909 /* AboutRewardAddressCell.xib in Resources */,
 				E19993EB2B295873000F4A6B /* loadingSmallWhite.json in Resources */,
 				04FF6B9B2B21EB74009DCA89 /* RewardDetailCell.xib in Resources */,
-				04C940D42AEA56FC00415256 /* basebg04.png in Resources */,
 				E15F2D132ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */,
 				0438A7F72AE1316B006FA213 /* KavaMintListVC.xib in Resources */,
 				0442224B2B96F2B60063F031 /* SelectDisplayTokenListSheet.xib in Resources */,
@@ -4411,6 +4411,7 @@
 				1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */,
 				04CD24652AD2E2D500497EF5 /* Bep3Transfer.xib in Resources */,
 				046BF1CE2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib in Resources */,
+				046269072B9740F300648059 /* basebg04.png in Resources */,
 				04A68C372AC156AA0041FA13 /* CosmosProposalCell.xib in Resources */,
 				04FA74812AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */,
 				E1CD6AFC2AEAAEDC00376909 /* AboutRewardAddressCell.xib in Resources */,
@@ -4522,7 +4523,6 @@
 				047BA8D12A94756A00D3F7DD /* CosmosClass.storyboard in Resources */,
 				E19993EA2B295873000F4A6B /* loadingSmallWhite.json in Resources */,
 				04A68C252ABDA3350041FA13 /* SelectSwapAssetCell.xib in Resources */,
-				04C940D32AEA56FC00415256 /* basebg04.png in Resources */,
 				04F4061729ED119800CD88E4 /* Init.storyboard in Resources */,
 				044222562B96F4370063F031 /* SelectDisplayTokenCell.xib in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
