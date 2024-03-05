@@ -742,7 +742,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainFetchAi())
     result.append(ChainFetchAi60Secp())
     result.append(ChainFetchAi60Old())
-//    result.append(ChainFinschia())
+    result.append(ChainFinschia())
     result.append(ChainGovgen())
     result.append(ChainGravityBridge())
     result.append(ChainInjective())
@@ -781,7 +781,6 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainSommelier())
     result.append(ChainStafi())
     result.append(ChainStargaze())
-//    result.append(ChainStarname())
     result.append(ChainStride())
     result.append(ChainTeritori())
     result.append(ChainTerra())
@@ -791,6 +790,10 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainBinanceBeacon())
     result.append(ChainOkt996Secp())
     result.append(ChainOkt996Keccak())
+    
+    
+    
+//    result.append(ChainStarname())
     
     
     result.forEach { chain in
