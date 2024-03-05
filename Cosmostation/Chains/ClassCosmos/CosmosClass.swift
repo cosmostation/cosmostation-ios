@@ -71,6 +71,12 @@ class CosmosClass: BaseChain {
         }
         
         let channel = getConnection()
+        cosmosBalances = nil
+        cosmosVestings.removeAll()
+        cosmosDelegations.removeAll()
+        cosmosUnbondings.removeAll()
+        cosmosRewards.removeAll()
+        cosmosCommissions.removeAll()
         fetchAuth(group, channel)
         
         group.notify(queue: .main) {
@@ -382,7 +388,6 @@ extension CosmosClass {
         let channel = getConnection()
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = bechAddress }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
-            self.cosmosVestings.removeAll()
             self.cosmosAuth = response.account
             fetchBalance(group, channel)
             if (self.supportStaking) {
@@ -413,7 +418,6 @@ extension CosmosClass {
         group.enter()
         let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = bechAddress }
         if let response = try? Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).delegatorDelegations(req, callOptions: getCallOptions()).response.wait() {
-            self.cosmosDelegations.removeAll()
             response.delegationResponses.forEach { delegation in
                 if (delegation.balance.amount != "0") {
                     self.cosmosDelegations.append(delegation)
@@ -452,7 +456,6 @@ extension CosmosClass {
         group.enter()
         let req = Cosmos_Distribution_V1beta1_QueryValidatorCommissionRequest.with { $0.validatorAddress = bechOpAddress! }
         if let response = try? Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).validatorCommission(req, callOptions: getCallOptions()).response.wait() {
-            self.cosmosCommissions.removeAll()
             response.commission.commission.forEach { commi in
                 if (commi.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
                     self.cosmosCommissions.append(Cosmos_Base_V1beta1_Coin(commi.denom, commi.getAmount()))

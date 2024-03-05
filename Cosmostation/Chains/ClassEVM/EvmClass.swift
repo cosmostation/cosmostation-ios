@@ -61,6 +61,12 @@ class EvmClass: CosmosClass {
         
         if (supportCosmos) {
             let channel = getConnection()
+            cosmosBalances = nil
+            cosmosVestings.removeAll()
+            cosmosDelegations.removeAll()
+            cosmosUnbondings.removeAll()
+            cosmosRewards.removeAll()
+            cosmosCommissions.removeAll()
             fetchAuth(group, channel)
             group.notify(queue: .main) {
                 try? channel.close()

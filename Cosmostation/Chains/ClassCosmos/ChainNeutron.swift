@@ -43,6 +43,9 @@ class ChainNeutron: CosmosClass  {
         fetchChainParam2(group)
         
         let channel = getConnection()
+        cosmosBalances = nil
+        neutronDeposited = NSDecimalNumber.zero
+        neutronVesting = nil
         fetchBalance(group, channel)
         fetchNeutronVesting(group, channel)
         fetchVaultDeposit(group, channel)
