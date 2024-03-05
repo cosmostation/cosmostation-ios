@@ -191,9 +191,21 @@ extension EvmClass {
 extension EvmClass {
     func fetchAllErc20Balance(_ id: Int64) {
         let group = DispatchGroup()
+        let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, tag)
         mintscanErc20Tokens.forEach { token in
-            if (supportCosmos || token.isdefault == true) {
+            if (supportCosmos) {
                 fetchErc20Balance(group, EthereumAddress.init(evmAddress)!, token)
+                
+            } else {
+                if (userDisplaytoken == nil) {
+                    if (token.isdefault == true) {
+                        fetchErc20Balance(group, EthereumAddress.init(evmAddress)!, token)
+                    }
+                } else {
+                    if (userDisplaytoken?.contains(token.address!) == true) {
+                        fetchErc20Balance(group, EthereumAddress.init(evmAddress)!, token)
+                    }
+                }
             }
         }
         

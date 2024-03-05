@@ -262,6 +262,14 @@
 		0438A81F2AE15283006FA213 /* KavaMintListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A81C2AE15283006FA213 /* KavaMintListCell.swift */; };
 		0438A8202AE15283006FA213 /* KavaMintListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0438A81D2AE15283006FA213 /* KavaMintListCell.xib */; };
 		0438A8212AE15283006FA213 /* KavaMintListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0438A81D2AE15283006FA213 /* KavaMintListCell.xib */; };
+		044222482B96F2B60063F031 /* SelectDisplayTokenListSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044222462B96F2B60063F031 /* SelectDisplayTokenListSheet.swift */; };
+		044222492B96F2B60063F031 /* SelectDisplayTokenListSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044222462B96F2B60063F031 /* SelectDisplayTokenListSheet.swift */; };
+		0442224A2B96F2B60063F031 /* SelectDisplayTokenListSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044222472B96F2B60063F031 /* SelectDisplayTokenListSheet.xib */; };
+		0442224B2B96F2B60063F031 /* SelectDisplayTokenListSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044222472B96F2B60063F031 /* SelectDisplayTokenListSheet.xib */; };
+		044222542B96F4370063F031 /* SelectDisplayTokenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044222522B96F4370063F031 /* SelectDisplayTokenCell.swift */; };
+		044222552B96F4370063F031 /* SelectDisplayTokenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044222522B96F4370063F031 /* SelectDisplayTokenCell.swift */; };
+		044222562B96F4370063F031 /* SelectDisplayTokenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044222532B96F4370063F031 /* SelectDisplayTokenCell.xib */; };
+		044222572B96F4370063F031 /* SelectDisplayTokenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044222532B96F4370063F031 /* SelectDisplayTokenCell.xib */; };
 		0443B89828589B570027A6B9 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0443B89728589B570027A6B9 /* Color.xcassets */; };
 		0443B89928589B570027A6B9 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0443B89728589B570027A6B9 /* Color.xcassets */; };
 		0443B8A2285C7F050027A6B9 /* Chain.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0443B8A1285C7F050027A6B9 /* Chain.xcassets */; };
@@ -1937,6 +1945,10 @@
 		0438A8172AE15270006FA213 /* KavaMintListMyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaMintListMyCell.xib; sourceTree = "<group>"; };
 		0438A81C2AE15283006FA213 /* KavaMintListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaMintListCell.swift; sourceTree = "<group>"; };
 		0438A81D2AE15283006FA213 /* KavaMintListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaMintListCell.xib; sourceTree = "<group>"; };
+		044222462B96F2B60063F031 /* SelectDisplayTokenListSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDisplayTokenListSheet.swift; sourceTree = "<group>"; };
+		044222472B96F2B60063F031 /* SelectDisplayTokenListSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDisplayTokenListSheet.xib; sourceTree = "<group>"; };
+		044222522B96F4370063F031 /* SelectDisplayTokenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDisplayTokenCell.swift; sourceTree = "<group>"; };
+		044222532B96F4370063F031 /* SelectDisplayTokenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDisplayTokenCell.xib; sourceTree = "<group>"; };
 		0443B89728589B570027A6B9 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		0443B8A1285C7F050027A6B9 /* Chain.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Chain.xcassets; sourceTree = "<group>"; };
 		04449FC52ABD9287004CCD7C /* UITextField+DecimalCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+DecimalCheck.swift"; sourceTree = "<group>"; };
@@ -3383,6 +3395,8 @@
 				04C63D152B83717A00D4A366 /* SelectAddressListSheet.xib */,
 				04C63D1A2B839D3900D4A366 /* TxSendAmountSheet.swift */,
 				04C63D1B2B839D3900D4A366 /* TxSendAmountSheet.xib */,
+				044222462B96F2B60063F031 /* SelectDisplayTokenListSheet.swift */,
+				044222472B96F2B60063F031 /* SelectDisplayTokenListSheet.xib */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -3424,6 +3438,8 @@
 				E16200312AF0CFFD0008F397 /* SelectEndpointCell.xib */,
 				046BF1CA2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift */,
 				046BF1CB2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib */,
+				044222522B96F4370063F031 /* SelectDisplayTokenCell.swift */,
+				044222532B96F4370063F031 /* SelectDisplayTokenCell.xib */,
 			);
 			path = SheetCell;
 			sourceTree = "<group>";
@@ -4283,6 +4299,7 @@
 				04C940D42AEA56FC00415256 /* basebg04.png in Resources */,
 				E15F2D132ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */,
 				0438A7F72AE1316B006FA213 /* KavaMintListVC.xib in Resources */,
+				0442224B2B96F2B60063F031 /* SelectDisplayTokenListSheet.xib in Resources */,
 				E16200502AF27C250008F397 /* AddressBookCell.xib in Resources */,
 				E162003E2AF242B70008F397 /* AddressBookSheet.xib in Resources */,
 				04A68C382AC156AA0041FA13 /* CosmosProposalCell.xib in Resources */,
@@ -4307,6 +4324,7 @@
 				04FA74662A9F5833001A2830 /* CreateNameVC.xib in Resources */,
 				E1831BA72AB82FE60078A28B /* ManageChainCell.xib in Resources */,
 				04FA74742AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
+				044222572B96F4370063F031 /* SelectDisplayTokenCell.xib in Resources */,
 				04F048D82AFCD34A002A809D /* basebg06.png in Resources */,
 				E12E9D272AE2B49900336449 /* KavaMintCreateAction.xib in Resources */,
 				0400EF322ADD48E8007BA97F /* KavaSwapListCell.xib in Resources */,
@@ -4350,6 +4368,7 @@
 				04FF6B9A2B21EB74009DCA89 /* RewardDetailCell.xib in Resources */,
 				04C940B32AE8D48C00415256 /* aes.js in Resources */,
 				E162004F2AF27C250008F397 /* AddressBookCell.xib in Resources */,
+				0442224A2B96F2B60063F031 /* SelectDisplayTokenListSheet.xib in Resources */,
 				04FEDB542B05DE230095B7B6 /* DeriveCell.xib in Resources */,
 				E11EAE1D2AAD87AD003BFC7F /* SettingPriceCell.xib in Resources */,
 				04C940D02AEA56DE00415256 /* basebg03.png in Resources */,
@@ -4505,6 +4524,7 @@
 				04A68C252ABDA3350041FA13 /* SelectSwapAssetCell.xib in Resources */,
 				04C940D32AEA56FC00415256 /* basebg04.png in Resources */,
 				04F4061729ED119800CD88E4 /* Init.storyboard in Resources */,
+				044222562B96F4370063F031 /* SelectDisplayTokenCell.xib in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
 				18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */,
 				E15F2D062ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
@@ -4903,6 +4923,7 @@
 				04C940E12AEB92F800415256 /* BaseImgSheetCell.swift in Sources */,
 				E13FC53B2B26BF9E0082C66E /* KavaEarnListVC.swift in Sources */,
 				046EA8562AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
+				044222552B96F4370063F031 /* SelectDisplayTokenCell.swift in Sources */,
 				E122DB862A8A468D006D1E7B /* cosmos_consensus_v1_tx.pb.swift in Sources */,
 				047843FD2AC9A37600462F1C /* ChainShentu.swift in Sources */,
 				0400EF242ADD4737007BA97F /* KavaSwapListVC.swift in Sources */,
@@ -5187,6 +5208,7 @@
 				0492AE982A83CCB9001360F0 /* SettingsVC.swift in Sources */,
 				E122DC162A8A468E006D1E7B /* cosmos_orm_module_v1alpha1_module.pb.swift in Sources */,
 				04FF6B992B21EB74009DCA89 /* RewardDetailCell.swift in Sources */,
+				044222492B96F2B60063F031 /* SelectDisplayTokenListSheet.swift in Sources */,
 				E122DB9E2A8A468D006D1E7B /* cosmos_circuit_module_v1_module.pb.swift in Sources */,
 				E122DB342A8A468D006D1E7B /* cosmos_evidence_v1beta1_query.grpc.swift in Sources */,
 				048F8DBE2B28542F00432437 /* KavaEarnDepositAction.swift in Sources */,
@@ -5630,6 +5652,7 @@
 				E122DB852A8A468D006D1E7B /* cosmos_consensus_v1_tx.pb.swift in Sources */,
 				E13FC53A2B26BF9E0082C66E /* KavaEarnListVC.swift in Sources */,
 				0400EEE92ADBE1D3007BA97F /* kava_pricefeed_v1beta1_query.pb.swift in Sources */,
+				044222542B96F4370063F031 /* SelectDisplayTokenCell.swift in Sources */,
 				04C940E02AEB92F800415256 /* BaseImgSheetCell.swift in Sources */,
 				046EA8552AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
 				E122DBBD2A8A468E006D1E7B /* cosmos_nft_module_v1_module.pb.swift in Sources */,
@@ -5914,6 +5937,7 @@
 				E16FACB12361ADFA00372052 /* Bytes.swift in Sources */,
 				0492AE972A83CCB9001360F0 /* SettingsVC.swift in Sources */,
 				04FF6B982B21EB74009DCA89 /* RewardDetailCell.swift in Sources */,
+				044222482B96F2B60063F031 /* SelectDisplayTokenListSheet.swift in Sources */,
 				E122DC152A8A468E006D1E7B /* cosmos_orm_module_v1alpha1_module.pb.swift in Sources */,
 				E122DB9D2A8A468D006D1E7B /* cosmos_circuit_module_v1_module.pb.swift in Sources */,
 				048F8DBD2B28542F00432437 /* KavaEarnDepositAction.swift in Sources */,

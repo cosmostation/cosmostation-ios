@@ -131,7 +131,10 @@ class CosmosClassVC: BaseVC {
     }
     
     @objc func onFetchTokenDone(_ notification: NSNotification) {
-        totalValue = selectedChain.allValue()
+        let tag = notification.object as! String
+        if (tag == selectedChain.tag) {
+            totalValue = selectedChain.allValue()
+        }
     }
     
     @objc func onFetchStakeDone(_ notification: NSNotification) {

@@ -24,6 +24,9 @@ class EvmClassVC: BaseVC {
     @IBOutlet weak var nftList: UIView!
     @IBOutlet weak var historyList: UIView!
     
+    var addtokenBarBtn: UIBarButtonItem!
+    var explorerBarBtn: UIBarButtonItem!
+    
     var selectedChain: EvmClass!
     var totalValue = NSDecimalNumber.zero {
         didSet {
@@ -38,10 +41,14 @@ class EvmClassVC: BaseVC {
         }
     }
     
+    var evmAssetVC: EvmAssetVC?
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "embedAssetVC") {
             let target = segue.destination as! EvmAssetVC
             target.selectedChain = selectedChain
+            evmAssetVC = target
+            
         } else if (segue.identifier == "embedNftVC") {
             let target = segue.destination as! EvmNftVC
             target.selectedChain = selectedChain
@@ -64,7 +71,25 @@ class EvmClassVC: BaseVC {
         addressTap.cancelsTouchesInView = false
         addressLayer.addGestureRecognizer(addressTap)
         
-        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconExplorer"), style: .plain, target: self, action: #selector(onClickExplorer))
+        let addtokenBtn: UIButton = UIButton(type: .custom)
+        addtokenBtn.setImage(UIImage(named: "iconAddToken"), for: .normal)
+        addtokenBtn.addTarget(self, action:  #selector(onClickAddToken), for: .touchUpInside)
+        addtokenBtn.frame = CGRectMake(0, 0, 40, 30)
+        addtokenBarBtn = UIBarButtonItem(customView: addtokenBtn)
+        
+        let explorerBtn: UIButton = UIButton(type: .custom)
+        explorerBtn.setImage(UIImage(named: "iconExplorer"), for: .normal)
+        explorerBtn.addTarget(self, action:  #selector(onClickExplorer), for: .touchUpInside)
+        explorerBtn.frame = CGRectMake(0, 0, 30, 30)
+        explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
+        
+        navigationItem.rightBarButtonItems = [explorerBarBtn, addtokenBarBtn]
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -83,6 +108,22 @@ class EvmClassVC: BaseVC {
         if (self.isMovingFromParent) {
             let tabVC = (self.parent)?.parent as? MainTabVC
             tabVC?.hideChainBgImg()
+        }
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
+    }
+    
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (tag == selectedChain.tag) {
+            totalValue = selectedChain.allValue()
+        }
+    }
+    
+    @objc func onFetchTokenDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (tag == selectedChain.tag) {
+            totalValue = selectedChain.allValue()
         }
     }
     
@@ -132,6 +173,12 @@ class EvmClassVC: BaseVC {
         guard let url = URL(string:String(format: selectedChain.addressURL, selectedChain.evmAddress)) else { return }
         self.onShowSafariWeb(url)
     }
+    
+    @objc func onClickAddToken() {
+        if (evmAssetVC != nil) {
+            evmAssetVC?.onShowTokenListSheet()
+        }
+    }
 }
 
 
@@ -142,17 +189,19 @@ extension EvmClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             assetList.alpha = 1
             nftList.alpha = 0
             historyList.alpha = 0
+            navigationItem.rightBarButtonItems = [explorerBarBtn, addtokenBarBtn]
             
         } else if (item.tag == 1) {
             assetList.alpha = 0
             nftList.alpha = 1
             historyList.alpha = 0
+            navigationItem.rightBarButtonItems = [explorerBarBtn]
             
         } else if (item.tag == 2) {
             assetList.alpha = 0
             nftList.alpha = 0
             historyList.alpha = 1
-            
+            navigationItem.rightBarButtonItems = [explorerBarBtn]
         }
     }
     
