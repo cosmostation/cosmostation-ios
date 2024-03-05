@@ -32,7 +32,7 @@ class ChainEvmosEVM: EvmClass  {
         validatorPrefix = "evmosvaloper"
         
         grpcHost = "grpc-evmos.cosmostation.io"
-        evmRpcURL = "https://rpc-evmos-app.cosmostation.io"
+        evmRpcURL = "https://rpc-evmos-evm.cosmostation.io"
         explorerURL = "https://www.mintscan.io/evmos/"
         addressURL = explorerURL + "address/%@"
         txURL = explorerURL + "tx/%@"

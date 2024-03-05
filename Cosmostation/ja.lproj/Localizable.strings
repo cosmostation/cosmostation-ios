@@ -307,6 +307,7 @@
 "str_share_evm_address" = "EVM スタイルのアドレスを共有する";
 "str_copy_bech_address" = "Cosmos スタイルのアドレスをコピー";
 "str_share_bech_address" = "Cosmos スタイルのアドレスを共有する";
+"str_token_github" = "토큰 정보 확인";
 
 
 "btn_delegate" = "  委任する";
@@ -384,6 +385,7 @@
 "msg_check_inputed_mnemonic" = "入力したニーモニックを確認してください。 \nご存知のように、誰とも共有しないでください。 このニーモニックを紛失すると、資産の損失につながる可能性があります。";
 "msg_show_all_proposals" = "すべての提案を表示します。";
 "msg_hide_scam_proposals" = "詐欺の疑いのある提案を除外します。";
+"msg_token_github" = "現時点では、選択したチェーンにトークンを手動で追加する必要はありません。 Cosmostation Wallet には、既存の数量を持つすべてのトークン (CW20、ERC20) の情報が表示されます。\n\nトークンを保持しているのにそれが表示されない場合は、以下の Github リンクから PR を送信してみてください。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -1127,6 +1129,7 @@
 "error_not_support_cancel_unbonding" = "このチェーンはまだアンステーキングキャンセルをサポートしていません。";
 "error_wait_moment" = "しばらくお待ちください。 同期中です。";
 "error_evm_simul" = "ノードとのネットワークがスムーズではありません。 後でもう一度試してください。";
+"error_tranfer_disabled" = "このチェーンは伝達関数をサポートしていません。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

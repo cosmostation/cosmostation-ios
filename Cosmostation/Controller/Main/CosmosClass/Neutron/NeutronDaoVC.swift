@@ -91,7 +91,7 @@ class NeutronDaoVC: BaseVC {
 
     
     public func fetchMyVotes(_ voter: String)  {
-        let url = MINTSCAN_API_URL + "v1/" + selectedChain.apiName + "/dao/address/" + voter + "/votes"
+        let url = MINTSCAN_API_URL + "v10/" + selectedChain.apiName + "/dao/address/" + voter + "/votes"
         AF.request(url, method: .get).responseDecodable(of: [JSON].self) { response in
             switch response.result {
             case .success(let values):

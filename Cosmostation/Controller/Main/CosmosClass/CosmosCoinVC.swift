@@ -308,11 +308,14 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (selectedChain.isBankLocked()) {
+            onShowToast(NSLocalizedString("error_tranfer_disabled", comment: ""))
+            return
+        }
         if (selectedChain.isTxFeePayable() == false) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        
         if (selectedChain is ChainBinanceBeacon) {
             let sendDenom = lcdBalances[indexPath.row]["symbol"].stringValue
             if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {

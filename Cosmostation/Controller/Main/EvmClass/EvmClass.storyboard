@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -215,18 +215,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jV7-Ar-gkC">
-                                <rect key="frame" x="66.666666666666686" y="239" width="260" height="200"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hkt-Od-f9Q">
+                                <rect key="frame" x="66.666666666666686" y="179" width="260" height="200"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgNoneExplorer" translatesAutoresizingMaskIntoConstraints="NO" id="KsS-pt-BMm">
-                                        <rect key="frame" x="70" y="24" width="120" height="120"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgNotSupportHistory" translatesAutoresizingMaskIntoConstraints="NO" id="f5P-W8-QvN">
+                                        <rect key="frame" x="100" y="24" width="60" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="3hd-aI-mgg"/>
-                                            <constraint firstAttribute="height" constant="120" id="eAJ-RD-Pfg"/>
+                                            <constraint firstAttribute="height" constant="60" id="ibe-oU-2XX"/>
+                                            <constraint firstAttribute="width" constant="60" id="l17-ul-ELj"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7m-QC-tOC">
-                                        <rect key="frame" x="70.333333333333314" y="156" width="119" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check Tx History" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sM-OO-J9H">
+                                        <rect key="frame" x="72.666666666666686" y="96" width="114.33333333333331" height="17.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                        <color key="textColor" name="_color01"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psL-K8-lru">
+                                        <rect key="frame" x="36" y="123.66666666666667" width="188" height="25.333333333333329"/>
+                                        <string key="text">You can check the flow of 
+assets on the block explorer</string>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                        <color key="textColor" name="_color02"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jmf-Jq-dUy">
+                                        <rect key="frame" x="70.333333333333314" y="161" width="119" height="24"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="tintColor" name="_color01"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -234,26 +248,31 @@
                                             <color key="titleColor" name="_color01"/>
                                         </state>
                                         <connections>
-                                            <action selector="onClickExplorer:" destination="cCh-9s-T0D" eventType="touchUpInside" id="Vlp-7e-frL"/>
+                                            <action selector="onClickExplorer:" destination="cCh-9s-T0D" eventType="touchUpInside" id="Moh-QU-adE"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="KsS-pt-BMm" firstAttribute="top" secondItem="jV7-Ar-gkC" secondAttribute="top" constant="24" id="5On-H1-CP6"/>
-                                    <constraint firstItem="A7m-QC-tOC" firstAttribute="top" secondItem="KsS-pt-BMm" secondAttribute="bottom" constant="12" id="HnS-qW-w78"/>
-                                    <constraint firstItem="A7m-QC-tOC" firstAttribute="centerX" secondItem="jV7-Ar-gkC" secondAttribute="centerX" id="bya-Wl-Zj9"/>
-                                    <constraint firstItem="KsS-pt-BMm" firstAttribute="centerX" secondItem="jV7-Ar-gkC" secondAttribute="centerX" id="ddP-LE-Py4"/>
-                                    <constraint firstAttribute="width" constant="260" id="qDX-nv-HFy"/>
-                                    <constraint firstAttribute="height" constant="200" id="qME-ir-Nl0"/>
+                                    <constraint firstAttribute="trailing" secondItem="psL-K8-lru" secondAttribute="trailing" constant="36" id="3PM-pd-9nL"/>
+                                    <constraint firstItem="2sM-OO-J9H" firstAttribute="top" secondItem="f5P-W8-QvN" secondAttribute="bottom" constant="12" id="8lR-WX-nqD"/>
+                                    <constraint firstItem="Jmf-Jq-dUy" firstAttribute="top" secondItem="psL-K8-lru" secondAttribute="bottom" constant="12" id="CQu-zO-SbV"/>
+                                    <constraint firstItem="psL-K8-lru" firstAttribute="leading" secondItem="Hkt-Od-f9Q" secondAttribute="leading" constant="36" id="IZ2-iS-BYZ"/>
+                                    <constraint firstItem="psL-K8-lru" firstAttribute="top" secondItem="2sM-OO-J9H" secondAttribute="bottom" constant="10" id="N8E-h6-Gin"/>
+                                    <constraint firstAttribute="width" constant="260" id="Y1S-3E-rAL"/>
+                                    <constraint firstItem="f5P-W8-QvN" firstAttribute="top" secondItem="Hkt-Od-f9Q" secondAttribute="top" constant="24" id="c2c-Ou-9t0"/>
+                                    <constraint firstItem="2sM-OO-J9H" firstAttribute="centerX" secondItem="Hkt-Od-f9Q" secondAttribute="centerX" id="dbt-mO-X4e"/>
+                                    <constraint firstAttribute="height" constant="200" id="pVs-An-AhI"/>
+                                    <constraint firstItem="f5P-W8-QvN" firstAttribute="centerX" secondItem="Hkt-Od-f9Q" secondAttribute="centerX" id="q3p-U2-26s"/>
+                                    <constraint firstItem="Jmf-Jq-dUy" firstAttribute="centerX" secondItem="Hkt-Od-f9Q" secondAttribute="centerX" id="xef-Qu-ABj"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oAA-Wa-tbz"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="jV7-Ar-gkC" firstAttribute="centerY" secondItem="oAA-Wa-tbz" secondAttribute="centerY" id="9Fq-Kc-vbD"/>
-                            <constraint firstItem="jV7-Ar-gkC" firstAttribute="centerX" secondItem="oAA-Wa-tbz" secondAttribute="centerX" id="GCP-Y8-QPJ"/>
+                            <constraint firstItem="Hkt-Od-f9Q" firstAttribute="centerX" secondItem="oAA-Wa-tbz" secondAttribute="centerX" id="Q5d-GO-F8h"/>
+                            <constraint firstItem="Hkt-Od-f9Q" firstAttribute="centerY" secondItem="oAA-Wa-tbz" secondAttribute="centerY" constant="-60" id="gyk-Bm-CM2"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -265,7 +284,7 @@
     <resources>
         <image name="iconArrowRight" width="24" height="24"/>
         <image name="iconHideValueOn" width="24" height="24"/>
-        <image name="imgNoneExplorer" width="120" height="120"/>
+        <image name="imgNotSupportHistory" width="60" height="60"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

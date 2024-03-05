@@ -34,7 +34,6 @@ public class WUtils {
     }
     
     static func isHtlcSwappableCoin(_ chain: BaseChain, _ denom: String?) -> Bool {
-        print("chain ", chain.tag, "   ", denom)
         if (chain is ChainBinanceBeacon) {
             if (denom == TOKEN_HTLC_BINANCE_BNB) { return true }
             if (denom == TOKEN_HTLC_BINANCE_BTCB) { return true }

@@ -10,14 +10,15 @@ import UIKit
 import SwiftyJSON
 import Lottie
 
-class EvmAssetVC: BaseVC {
+class EvmAssetVC: BaseVC, SelectTokensListDelegate {
     
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var tableView: UITableView!
     var refresher: UIRefreshControl!
     
     var selectedChain: EvmClass!
-    var erc20Tokens = [MintscanToken]()
+    var allErc20Tokens = [MintscanToken]()
+    var toDisplayErc20Tokens = [MintscanToken]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,23 +94,56 @@ class EvmAssetVC: BaseVC {
     }
     
     func onSortAssets() {
-        erc20Tokens.removeAll()
+        allErc20Tokens.removeAll()
+        toDisplayErc20Tokens.removeAll()
         Task {
-            selectedChain.mintscanErc20Tokens.forEach { tokens in
-                if (tokens.getAmount() != NSDecimalNumber.zero) {
-                    erc20Tokens.append(tokens)
+            allErc20Tokens = selectedChain.mintscanErc20Tokens
+            allErc20Tokens = allErc20Tokens.sorted { $0.symbol!.lowercased() < $1.symbol!.lowercased() }
+            
+            if let userCustomTokens = BaseData.instance.getDisplayErc20s(baseAccount.id, selectedChain.tag) {
+                allErc20Tokens.sort {
+                    if (userCustomTokens.contains($0.address!) && !userCustomTokens.contains($1.address!)) { return true }
+                    if (!userCustomTokens.contains($0.address!) && userCustomTokens.contains($1.address!)) { return false }
+                    let value0 = selectedChain.tokenValue($0.address!)
+                    let value1 = selectedChain.tokenValue($1.address!)
+                    return value0.compare(value1).rawValue > 0 ? true : false
+                }
+                allErc20Tokens.forEach { tokens in
+                    if (userCustomTokens.contains(tokens.address!)) {
+                        toDisplayErc20Tokens.append(tokens)
+                    }
+                }
+                
+            } else {
+                allErc20Tokens.sort {
+                    let value0 = selectedChain.tokenValue($0.address!)
+                    let value1 = selectedChain.tokenValue($1.address!)
+                    return value0.compare(value1).rawValue > 0 ? true : false
+                }
+                allErc20Tokens.forEach { tokens in
+                    if (tokens.getAmount() != NSDecimalNumber.zero) {
+                        toDisplayErc20Tokens.append(tokens)
+                    }
                 }
             }
-            erc20Tokens.sort {
-                let value0 = selectedChain.tokenValue($0.address!)
-                let value1 = selectedChain.tokenValue($1.address!)
-                return value0.compare(value1).rawValue > 0 ? true : false
-            }
+            
             loadingView.isHidden = true
             tableView.reloadData()
         }
     }
-
+    
+    func onShowTokenListSheet()  {
+        let tokenListSheet = SelectDisplayTokenListSheet(nibName: "SelectDisplayTokenListSheet", bundle: nil)
+        tokenListSheet.selectedChain = selectedChain
+        tokenListSheet.allErc20Tokens = allErc20Tokens
+        tokenListSheet.toDisplayErc20Tokens = toDisplayErc20Tokens.map { $0.address! }
+        tokenListSheet.tokensListDelegate = self
+        onStartSheet(tokenListSheet, 680)
+    }
+    
+    func onTokensSelected(_ result: [String]) {
+        onRequestFetch()
+    }
 }
 
 
@@ -126,7 +160,7 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
             view.cntLabel.text = "1"
         } else {
             view.titleLabel.text = "Tokens"
-            view.cntLabel.text = String(erc20Tokens.count)
+            view.cntLabel.text = String(toDisplayErc20Tokens.count)
         }
         return view
     }
@@ -134,7 +168,7 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0) {
             return 40
-        } else if (section == 1 && erc20Tokens.count > 0) {
+        } else if (section == 1 && toDisplayErc20Tokens.count > 0) {
             return 40
         }
         return 0
@@ -144,7 +178,7 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
         if (section == 0) {
             return 1
         } else if (section == 1) {
-            return erc20Tokens.count
+            return toDisplayErc20Tokens.count
         }
         return 0
     }
@@ -154,24 +188,16 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
         if (indexPath.section == 0) {
             cell.bindEvmClassCoin(selectedChain)
         } else {
-            cell.bindEvmClassToken(selectedChain, erc20Tokens[indexPath.row])
+            cell.bindEvmClassToken(selectedChain, toDisplayErc20Tokens[indexPath.row])
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        let transfer = EvmTransfer(nibName: "EvmTransfer", bundle: nil)
-//        transfer.selectedChain = selectedChain
-//        if (indexPath.section == 1) {
-//            transfer.selectedMsToken = erc20Tokens[indexPath.row]
-//        }
-//        transfer.modalTransitionStyle = .coverVertical
-//        self.present(transfer, animated: true)
-        
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         if (indexPath.section == 0) {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
             transfer.sendType = .Only_EVM_Coin
@@ -182,15 +208,19 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
             return
             
         } else {
+            let token = toDisplayErc20Tokens[indexPath.row]
+            if (token.getAmount() == NSDecimalNumber.zero) {
+                onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+                return
+            }
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
             transfer.sendType = .Only_EVM_ERC20
             transfer.fromChain = selectedChain
-            transfer.toSendDenom = erc20Tokens[indexPath.row].address
-            transfer.toSendMsToken = erc20Tokens[indexPath.row]
+            transfer.toSendDenom = token.address
+            transfer.toSendMsToken = token
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
             return
-            
         }
     }
     

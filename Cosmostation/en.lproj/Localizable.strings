@@ -307,6 +307,7 @@
 "str_share_evm_address" = "Share Evm style address";
 "str_copy_bech_address" = "Copy Cosmos style address";
 "str_share_bech_address" = "Share Cosmos style address";
+"str_token_github" = "토큰 정보 확인";
 
 
 "btn_delegate" = "  Delegate";
@@ -384,6 +385,7 @@
 "msg_check_inputed_mnemonic" = "Please check the mnemonic you entered. \nJust so you know, don't share it with anyone. Losing this mnemonic can lead to loss of assets.";
 "msg_show_all_proposals" = "Show all proposals.";
 "msg_hide_scam_proposals" = "Filters out suspected of scam proposals.";
+"msg_token_github" = "Currently, the selected chain does not need to manually add tokens to the chain. Cosmostation Wallet displays information for all tokens (CW20, ERC20) with existing quantity.\n\nIf you hold the token but do not see it, try submitting the PR through the Github link below.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -1127,6 +1129,7 @@
 "error_not_support_cancel_unbonding" = "This chain does not yet support unstaking cancellation.";
 "error_wait_moment" = "Please wait for a moment. Synchronizing.";
 "error_evm_simul" = "Network with the node is not smooth. Please try again later.";
+"error_tranfer_disabled" = "This chain does not support the transfer function.";
 
 
 "alert_title_no_private_key" = "No Private Key";

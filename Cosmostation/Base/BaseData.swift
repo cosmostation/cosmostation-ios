@@ -550,6 +550,28 @@ extension BaseData {
         UserDefaults.standard.removeObject(forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS)
     }
     
+    func setDisplayErc20s(_ id: Int64, _ chainTag: String, _ contractAddress: [String])  {
+        if let encoded = try? JSONEncoder().encode(contractAddress) {
+            UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + chainTag + " " + KEY_DISPLAY_ERC20_TOKENS)
+        }
+    }
+    
+    func getDisplayErc20s(_ id: Int64, _ chainTag: String) -> [String]? {
+        if let savedData = UserDefaults.standard.object(forKey: String(id) + " " + chainTag + " " + KEY_DISPLAY_ERC20_TOKENS) as? Data {
+            if let result = try? JSONDecoder().decode([String].self, from: savedData) {
+                return result
+            }
+        }
+        return nil
+    }
+    
+    func deleteDisplayErc20s(_ id: Int64)  {
+        ALLEVMCLASS().forEach { evmChain in
+            UserDefaults.standard.removeObject(forKey: String(id) + " " + evmChain.tag + " " + KEY_DISPLAY_ERC20_TOKENS)
+        }
+    }
+    
+    
     func setDisplayCosmosChainTags(_ id: Int64, _ chainNames: [String])  {
         if let encoded = try? JSONEncoder().encode(chainNames) {
             UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + KEY_DISPLAY_COSMOS_CHAINS)

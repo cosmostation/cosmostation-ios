@@ -214,6 +214,10 @@ extension CosmosClass {
         return getChainParam()["fee"]["isSimulable"].bool ?? true
     }
     
+    func isBankLocked() -> Bool {
+        return getChainParam()["isBankLocked"].bool ?? false
+    }
+    
     func feeThreshold() -> String? {
         return nil
     }
@@ -378,6 +382,7 @@ extension CosmosClass {
         let channel = getConnection()
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = bechAddress }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
+            self.cosmosVestings.removeAll()
             self.cosmosAuth = response.account
             fetchBalance(group, channel)
             if (self.supportStaking) {
@@ -737,7 +742,8 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainFetchAi())
     result.append(ChainFetchAi60Secp())
     result.append(ChainFetchAi60Old())
-//    result.append(ChainFinschia())
+    result.append(ChainFinschia())
+    result.append(ChainGovgen())
     result.append(ChainGravityBridge())
     result.append(ChainInjective())
     result.append(ChainIris())
@@ -775,7 +781,6 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainSommelier())
     result.append(ChainStafi())
     result.append(ChainStargaze())
-//    result.append(ChainStarname())
     result.append(ChainStride())
     result.append(ChainTeritori())
     result.append(ChainTerra())
@@ -785,6 +790,10 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainBinanceBeacon())
     result.append(ChainOkt996Secp())
     result.append(ChainOkt996Keccak())
+    
+    
+    
+//    result.append(ChainStarname())
     
     
     result.forEach { chain in

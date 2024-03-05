@@ -11,89 +11,7 @@ import UIKit
 import AlamofireImage
 
 public class WDP {
-//    static func dpMainSymbol(_ chainConfig: ChainConfig?, _ label: UILabel?) {
-//        label?.text = chainConfig?.stakeSymbol
-//        label?.textColor = chainConfig?.chainColor
-//    }
-//
-//    static func dpSymbol(_ chainConfig: ChainConfig?, _ denom: String?, _ denomLabel: UILabel?) {
-//        denomLabel?.text = WUtils.getSymbol(chainConfig, denom)
-//        if (chainConfig?.stakeDenom == denom) {
-//            denomLabel?.textColor = chainConfig?.chainColor
-//            return
-//        }
-//        if (chainConfig?.chainType == .KAVA_MAIN) {
-//            if (denom == KAVA_HARD_DENOM) {
-//                denomLabel?.textColor = UIColor.init(named: "kava_hard")
-//                return
-//            } else if (denom == KAVA_USDX_DENOM) {
-//                denomLabel?.textColor = UIColor.init(named: "kava_usdx")
-//                return
-//            } else if (denom == KAVA_SWAP_DENOM) {
-//                denomLabel?.textColor = UIColor.init(named: "kava_swp")
-//                return
-//            }
-//
-//        } else if (chainConfig?.chainType == .OSMOSIS_MAIN) {
-//            if (denom == OSMOSIS_ION_DENOM) {
-//                denomLabel?.textColor = UIColor.init(named: "osmosis_ion")
-//                return
-//            }
-//
-//        } else if (chainConfig?.chainType == .CRESCENT_MAIN) {
-//            if (denom == CRESCENT_BCRE_DENOM) {
-//                denomLabel?.textColor = UIColor.init(named: "crescent_bcre")
-//                return
-//            }
-//
-//        } else if (chainConfig?.chainType == .NYX_MAIN) {
-//            if (denom == NYX_NYM_DENOM) {
-//                denomLabel?.textColor = UIColor.init(named: "nyx_nym")
-//                return
-//            }
-//        }
-//        denomLabel?.textColor = UIColor.font05
-//    }
-//
-//    static func dpSymbolImg(_ chainConfig: ChainConfig?, _ denom: String?, _ imgView: UIImageView?) {
-//        if (chainConfig == nil || denom?.isEmpty == true) {
-//            imgView?.image = UIImage(named: "tokenDefault")
-//            return
-//        }
-//        if (chainConfig?.stakeDenom == denom) {
-//            imgView?.image = chainConfig?.stakeDenomImg
-//            return
-//        }
-//        if chainConfig?.isGrpc == true {
-//            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
-//                if let assetImgeUrl = msAsset.assetImg() {
-//                    imgView?.af_setImage(withURL: assetImgeUrl)
-//                    return
-//                }
-//            }
-//
-//        } else {
-//            if (chainConfig?.chainType == .BINANCE_MAIN) {
-//                if let bnbTokenInfo = BaseData.instance.bnbToken(denom) {
-//                    imgView?.af_setImage(withURL: bnbTokenInfo.assetImg())
-//                }
-//
-//            } else if (chainConfig?.chainType == .OKEX_MAIN) {
-//                if let okTokenInfo = BaseData.instance.okToken(denom) {
-//                    imgView?.af_setImage(withURL: okTokenInfo.assetImg())
-//                }
-//            }
-//        }
-//        imgView?.image = UIImage(named: "tokenDefault")!
-//    }
-//
-//    static func dpCoin(_ chainConfig: ChainConfig?, _ coin: Coin?, _ denomLabel: UILabel?, _ amountLabel: UILabel?) {
-//        return dpCoin(chainConfig, coin?.denom, coin?.amount, denomLabel, amountLabel)
-//    }
-//
     
-    
-//    static func dpCoin(_ baseChain: BaseChain?, _ coin: Cosmos_Base_V1beta1_Coin?, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16? = 6) {
     static func dpCoin(_ msAsset: MintscanAsset, _ coin: Cosmos_Base_V1beta1_Coin?, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
         if (coin == nil) {
             amountLabel?.attributedText = dpAmount("0", amountLabel!.font, showDecimal ?? msAsset.decimals)
@@ -108,33 +26,6 @@ public class WDP {
             denomLabel?.textColor = msAsset.assetColor()
             coinImg?.af.setImage(withURL: msAsset.assetImg())
         }
-
-        
-        
-
-
-//        if (chainConfig?.isGrpc == true) {
-//            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == denom }).first {
-//                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, msAsset.decimals, msAsset.decimals)
-//            }
-//            else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first {
-//                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, msToken.decimals, msToken.decimals)
-//            }
-//            else {
-//                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
-//            }
-//
-//        } else {
-//            if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.address == denom }).first {
-//                amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, msToken.decimals, msToken.decimals)
-//            } else {
-//                if (chainConfig?.chainType == .BINANCE_MAIN) {
-//                    amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, 0, 8)
-//                } else if (chainConfig?.chainType == .OKEX_MAIN ) {
-//                    amountLabel!.attributedText = dpAmount(amount, amountLabel!.font, 0, 18)
-//                }
-//            }
-//        }
     }
     
     static func dpCoin(_ msAsset: MintscanAsset, _ amount: NSDecimalNumber, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
@@ -156,17 +47,7 @@ public class WDP {
         denomLabel?.text = msToken.symbol
         coinImg?.af.setImage(withURL: msToken.assetImg())
     }
-//
-//    static func dpBnbTxCoin(_ chainConfig: ChainConfig, _ coin:Coin, _ denomLabel: UILabel, _ amountLabel: UILabel) {
-//        if (coin.denom == BNB_MAIN_DENOM) {
-//            WDP.dpMainSymbol(chainConfig, denomLabel)
-//        } else {
-//            denomLabel.textColor = UIColor.font05
-//            denomLabel.text = coin.denom.uppercased()
-//        }
-//        amountLabel.attributedText = dpAmount(coin.amount, amountLabel.font, 8, 8)
-//    }
-//
+    
     static func dpAmount(_ amount: String?, _ font: UIFont, _ showDecimal: Int16? = 6) -> NSMutableAttributedString {
         let nf = NumberFormatter()
         nf.locale = Locale(identifier: "en_US")
@@ -422,7 +303,7 @@ public class WDP {
 
     static func okcDpTime(_ timeInt: Int64?) -> String {
         if (timeInt == nil) { return "-" }
-        guard let date = WUtils.timeInt64ToDate(timeInt! + Int64(TimeZone.current.secondsFromGMT()) * 1000) else {
+        guard let date = WUtils.timeInt64ToDate(timeInt!) else {
             return "-"
         }
         let localFormatter = DateFormatter()
@@ -432,7 +313,7 @@ public class WDP {
 
     static func okcDpTimeGap(_ timeInt: Int64?) -> String {
         if (timeInt == nil) { return "" }
-        guard let date = WUtils.timeInt64ToDate(timeInt! + Int64(TimeZone.current.secondsFromGMT()) * 1000) else {
+        guard let date = WUtils.timeInt64ToDate(timeInt!) else {
             return ""
         }
         return WUtils.getGapTime(date)

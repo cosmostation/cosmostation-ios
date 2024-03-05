@@ -15,7 +15,7 @@ class NoticeSheet: BaseVC {
     @IBOutlet weak var subBtn: SecButton!
     @IBOutlet weak var okBtn: BaseButton!
     
-    
+    var selectedChain: BaseChain!
     var noticeType: NoticeType?
     
     override func viewDidLoad() {
@@ -23,10 +23,16 @@ class NoticeSheet: BaseVC {
     }
     
     override func setLocalizedString() {
-        noticeTitleLabel.text = NSLocalizedString("str_warnning", comment: "")
-        noticeMsgLabel.text = NSLocalizedString("msg_swap_warn", comment: "")
         if (noticeType == .SwapInitWarn) {
+            noticeTitleLabel.text = NSLocalizedString("str_warnning", comment: "")
+            noticeMsgLabel.text = NSLocalizedString("msg_swap_warn", comment: "")
             subBtn.setTitle(NSLocalizedString("str_do_not_show_7_days", comment: ""), for: .normal)
+            okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
+            
+        } else if (noticeType == .TokenGithub) {
+            noticeTitleLabel.text = NSLocalizedString("str_token_github", comment: "")
+            noticeMsgLabel.text = NSLocalizedString("msg_token_github", comment: "")
+            subBtn.setTitle(NSLocalizedString("setting_github_title", comment: ""), for: .normal)
             okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
         }
     }
@@ -35,6 +41,17 @@ class NoticeSheet: BaseVC {
         if (noticeType == .SwapInitWarn) {
             BaseData.instance.setSwapWarn()
             dismiss(animated: true)
+            
+        } else if (noticeType == .TokenGithub) {
+            if (selectedChain is EvmClass) {
+                let rawUrl = "https://github.com/cosmostation/chainlist/blob/main/chain/" + selectedChain.apiName + "/erc20.json"
+                guard let url = URL(string: rawUrl) else { return }
+                self.onShowSafariWeb(url)
+            } else {
+                let rawUrl = "https://github.com/cosmostation/chainlist/blob/main/chain/" + selectedChain.apiName + "/cw20.json"
+                guard let url = URL(string: rawUrl) else { return }
+                self.onShowSafariWeb(url)
+            }
         }
     }
     
@@ -46,4 +63,5 @@ class NoticeSheet: BaseVC {
 
 public enum NoticeType: Int {
     case SwapInitWarn = 0
+    case TokenGithub = 1
 }
