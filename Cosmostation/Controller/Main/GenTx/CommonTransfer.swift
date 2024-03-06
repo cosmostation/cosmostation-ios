@@ -516,6 +516,11 @@ class CommonTransfer: BaseVC {
             }
             
         } else if (txStyle == .COSMOS_STYLE) {
+            if ((fromChain as! CosmosClass).isGasSimulable() == false) {
+                onUpdateFeeView()
+                sendBtn.isEnabled = true
+                return
+            }
             guard let toGas = simul?.gasInfo.gasUsed else {
                 feeCardView.isHidden = true
                 errorCardView.isHidden = false
