@@ -334,7 +334,7 @@ extension CosmosClass {
                 case .success(let value):
                     self.mintscanChainParam = value
                 case .failure:
-                    print("fetchChainParam2 error")
+                    print("fetchChainParam2 error", self.tag)
                 }
                 group.leave()
             }
@@ -342,13 +342,14 @@ extension CosmosClass {
     
     func fetchCw20Info(_ group: DispatchGroup) {
         group.enter()
+//        print("fetchCw20Info ", BaseNetWork.msCw20InfoUrl(self))
         AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get)
             .responseDecodable(of: [MintscanToken].self) { response in
                 switch response.result {
                 case .success(let value):
                     self.mintscanCw20Tokens = value
                 case .failure:
-                    print("fetchCw20Info error")
+                    print("fetchCw20Info error", self.tag)
                 }
                 group.leave()
             }
