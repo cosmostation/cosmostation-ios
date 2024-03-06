@@ -580,7 +580,9 @@ extension CommonTransfer {
     func evmSendSimul() {
         evmTx = nil
         DispatchQueue.global().async { [self] in
-            let web3 = (fromChain as! EvmClass).getWeb3Connection()!
+            guard let web3 = (fromChain as! EvmClass).getWeb3Connection() else {
+                return
+            }
             let chainID = web3.provider.network?.chainID
             let senderAddress = EthereumAddress.init((fromChain as! EvmClass).evmAddress)
             let recipientAddress = EthereumAddress.init(toAddress)
@@ -653,7 +655,9 @@ extension CommonTransfer {
     
     func evmSend() {
         DispatchQueue.global().async { [self] in
-            let web3 = (fromChain as! EvmClass).getWeb3Connection()!
+            guard let web3 = (fromChain as! EvmClass).getWeb3Connection() else {
+                return
+            }
             try! evmTx?.sign(privateKey: fromChain.privateKey!)
             let result = try? web3.eth.sendRawTransaction(evmTx!)
 //            print("evmSend ethereumTx ", ethereumTx)

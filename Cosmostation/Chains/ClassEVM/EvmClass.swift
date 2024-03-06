@@ -230,13 +230,13 @@ extension EvmClass {
         group.enter()
         DispatchQueue.global().async {
             let contractAddress = EthereumAddress.init(tokenInfo.address!)
-            let erc20token = ERC20(web3: self.getWeb3Connection()!, provider: self.getWeb3Connection()!.provider, address: contractAddress!)
-            if let erc20Balance = try? erc20token.getBalance(account: accountEthAddr) {
-                tokenInfo.setAmount(String(erc20Balance))
-                group.leave()
-            } else {
-                group.leave()
+            if let connection = self.getWeb3Connection() {
+                let erc20token = ERC20(web3: connection, provider: connection.provider, address: contractAddress!)
+                if let erc20Balance = try? erc20token.getBalance(account: accountEthAddr) {
+                    tokenInfo.setAmount(String(erc20Balance))
+                }
             }
+            group.leave()
         }
     }
 }
