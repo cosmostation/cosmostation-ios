@@ -117,7 +117,7 @@ class BaseNetWork {
     }
     
     static func msSupportChains() -> String {
-        return MINTSCAN_API_URL + "v1/meta/support/chains"
+        return MINTSCAN_API_URL + "v10/meta/support/chains"
     }
     
     static func msSupportConfigs() -> String {
