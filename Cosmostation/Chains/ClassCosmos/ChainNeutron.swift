@@ -34,6 +34,7 @@ class ChainNeutron: CosmosClass  {
         bechAccountPrefix = "neutron"
         validatorPrefix = "neutronvaloper"
         supportStaking = false
+        supportCw20 = true
         
         grpcHost = "grpc-neutron.cosmostation.io"
     }
