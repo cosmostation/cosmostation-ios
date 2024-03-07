@@ -69,7 +69,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var swapBtn: BaseButton!
     
     var allSwapableChains = Array<CosmosClass>()
-    var skipChains = Array<CosmosClass>()       //inapp support chain for skip
+    var skipChains = Array<CosmosClass>()               //inapp support chain for skip
     var skipAssets: JSON?
     var skipSlippage = "1"
     
@@ -109,27 +109,27 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         Task {
             allSwapableChains = await baseAccount.initKeysforSwap()
             
-            var sChains: JSON!
-            if (BaseData.instance.skipChains == nil) {
+            var sChains: JSON?
+            if (BaseData.instance.needSwapInfoUpdate()) {
                 sChains = try? await fetchSkipChains()
-                BaseData.instance.skipChains = sChains
+                skipAssets = try? await fetchSkipAssets()
+                
+                if (sChains != nil && skipAssets != nil) {
+                    BaseData.instance.setLastSwapInfoTime()
+                    BaseData.instance.setSkipChainInfo(sChains)
+                    BaseData.instance.setSkipAssetInfo(skipAssets)
+                }
+                
             } else {
-                sChains = BaseData.instance.skipChains
+                sChains = BaseData.instance.getSkipChainInfo()
+                skipAssets = BaseData.instance.getSkipAssetInfo()
             }
-//            print("sChains ", sChains)
+            
             sChains?["chains"].arrayValue.forEach({ sChain in
                 if let skipChain = allSwapableChains.filter({ $0.chainId == sChain["chain_id"].stringValue && $0.isDefault == true }).first {
                     skipChains.append(skipChain)
                 }
             })
-            
-            if (BaseData.instance.skipAssets == nil) {
-                skipAssets = try? await fetchSkipAssets()
-                BaseData.instance.skipAssets = skipAssets
-            } else {
-                skipAssets = BaseData.instance.skipAssets
-            }
-            
             
             //Remove no supporting denom chain
             let chainIds = skipChains.map { chain in

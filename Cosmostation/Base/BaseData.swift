@@ -29,10 +29,6 @@ final class BaseData: NSObject{
     var mintscanPrices: [MintscanPrice]?
     var mintscanAssets: [MintscanAsset]?
     
-    var skipChains: JSON?
-    var skipAssets: JSON?
-    
-    
     public override init() {
         super.init();
         if database == nil {
@@ -693,6 +689,41 @@ extension BaseData {
     
     func setGrpcEndpoint(_ chain : CosmosClass, _ endpoint: String) {
         UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + chain.name)
+    }
+    
+    //Skip swap info
+    func setLastSwapInfoTime() {
+        let now = Date().millisecondsSince1970
+        UserDefaults.standard.set(String(now), forKey: KEY_SWAP_INFO_TIME)
+    }
+    
+    func needSwapInfoUpdate() -> Bool {
+        let now = Date().millisecondsSince1970
+        let day: Int64 = 86400000
+        let last = Int64(UserDefaults.standard.string(forKey: KEY_SWAP_INFO_TIME) ?? "0")! + (day * 3)
+        return last < now ? true : false
+    }
+    
+    func setSkipChainInfo(_ json: JSON?) {
+        UserDefaults.standard.setValue(json.encoded, forKey: KEY_SKIP_CHAIN_INFO)
+    }
+    
+    func getSkipChainInfo() -> JSON? {
+        if let savedData = UserDefaults.standard.object(forKey: KEY_SKIP_CHAIN_INFO) as? Data {
+            return try? JSON.init(data: savedData)
+        }
+        return nil
+    }
+    
+    func setSkipAssetInfo(_ json: JSON?) {
+        UserDefaults.standard.setValue(json.encoded, forKey: KEY_SKIP_ASSET_INFO)
+    }
+    
+    func getSkipAssetInfo() -> JSON? {
+        if let savedData = UserDefaults.standard.object(forKey: KEY_SKIP_ASSET_INFO) as? Data {
+            return try? JSON.init(data: savedData)
+        }
+        return nil
     }
     
     func setSwapWarn() {
