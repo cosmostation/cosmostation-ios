@@ -20,11 +20,11 @@ class ChainAltheaEVM: EvmClass  {
         logo1 = "chainAltheaEvm"
         logo2 = "chainAlthea2"
         apiName = "althea"
-        stakeDenom = "ualtg"
+        stakeDenom = "aalthea"
         
         //for EVM tx and display
         coinSymbol = "ALTG"
-        coinGeckoId = ""
+        coinGeckoId = "althea"
         coinLogo = "tokenAltg"
 
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
