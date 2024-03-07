@@ -141,22 +141,26 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                 }
             }
             
+            
+            //check user last seelcted ui info
+            let lastSwapSet = BaseData.instance.getLastSwapSet()
+            
             // $0.isDefault 예외처리 확인 카바
-            inputCosmosChain = skipChains.filter({ $0.tag == "cosmos118" }).first!
+            inputCosmosChain = skipChains.filter({ $0.tag == lastSwapSet[0] }).first ?? skipChains.filter({ $0.tag == "cosmos118" }).first!
             skipAssets?["chain_to_assets_map"][inputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
                 if BaseData.instance.getAsset(inputCosmosChain.apiName, json["denom"].stringValue) != nil {
                     inputAssetList.append(json)
                 }
             })
-            inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first!
+            inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == lastSwapSet[1] }.first ?? inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first!
             
-            outputCosmosChain = skipChains.filter({ $0.tag == "neutron118" }).first!
+            outputCosmosChain = skipChains.filter({ $0.tag == lastSwapSet[2] }).first ?? skipChains.filter({ $0.tag == "neutron118" }).first!
             skipAssets?["chain_to_assets_map"][outputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
                 if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
                     outputAssetList.append(json)
                 }
             })
-            outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first!
+            outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == lastSwapSet[3] }.first ?? outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first!
             
             let inputChannel = getConnection(inputCosmosChain)
             if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.bechAddress),
@@ -279,6 +283,9 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         outputValueLabel.text = ""
         errorCardView.isHidden = true
         descriptionCardView.isHidden = true
+        
+        //save last user ui
+        BaseData.instance.setLastSwapSet([inputCosmosChain.tag, inputAssetSelected["denom"].stringValue, outputCosmosChain.tag, outputAssetSelected["denom"].stringValue])
     }
     
     @objc func onInputChain() {

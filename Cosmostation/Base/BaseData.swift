@@ -36,7 +36,6 @@ final class BaseData: NSObject{
         }
     }
     
-    
     func getAsset(_ chainApiName: String, _ denom: String) -> MintscanAsset? {
         return mintscanAssets?.filter({ $0.chain == chainApiName && $0.denom?.lowercased() == denom.lowercased() }).first
     }
@@ -740,6 +739,25 @@ extension BaseData {
         let now = Date().millisecondsSince1970
         return last < now
     }
+    
+    // set user last seleted swap ui for convenience
+    // [fromChainTag, fromChainDenom, toChainTag, toChainDenom]
+    func setLastSwapSet(_ swapSet: [String]) {
+        if let encoded = try? JSONEncoder().encode(swapSet) {
+            UserDefaults.standard.setValue(encoded, forKey: KEY_SWAP_USER_SET)
+        }
+    }
+    
+    func getLastSwapSet() -> [String] {
+        if let savedData = UserDefaults.standard.object(forKey: KEY_SWAP_USER_SET) as? Data {
+            if let result = try? JSONDecoder().decode([String].self, from: savedData) {
+                return result
+            }
+        }
+        return ["", "", "", ""]
+    }
+    
+    
     
     func setInstallTime() {
         var dayComponent = DateComponents()
