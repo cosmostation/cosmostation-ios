@@ -240,7 +240,7 @@ extension ChainOkt996Keccak {
     func lcdBalanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if (denom == stakeDenom) {
             let amount = lcdBalanceAmount(denom)
-            var msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
+            let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
             return msPrice.multiplying(by: amount, withBehavior: handler6)
         }
         return NSDecimalNumber.zero

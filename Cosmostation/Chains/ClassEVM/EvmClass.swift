@@ -61,6 +61,7 @@ class EvmClass: CosmosClass {
         
         if (supportCosmos) {
             let channel = getConnection()
+            cosmosAuth = nil
             cosmosBalances = nil
             cosmosVestings.removeAll()
             cosmosDelegations.removeAll()
@@ -68,6 +69,8 @@ class EvmClass: CosmosClass {
             cosmosRewards.removeAll()
             cosmosCommissions.removeAll()
             fetchAuth(group, channel)
+            fetchBalance(group, channel)
+            
             group.notify(queue: .main) {
                 try? channel.close()
                 WUtils.onParseVestingAccount(self)

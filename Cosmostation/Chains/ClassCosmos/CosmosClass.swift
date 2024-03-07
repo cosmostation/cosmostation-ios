@@ -30,15 +30,16 @@ class CosmosClass: BaseChain {
     var grpcHost = ""
     var grpcPort = 443
     
-    lazy var rewardAddress = ""
-    lazy var cosmosAuth = Google_Protobuf_Any.init()
-    lazy var cosmosValidators = Array<Cosmos_Staking_V1beta1_Validator>()
+    
+    var cosmosAuth: Google_Protobuf_Any?
     var cosmosBalances: [Cosmos_Base_V1beta1_Coin]?
     lazy var cosmosVestings = Array<Cosmos_Base_V1beta1_Coin>()
     lazy var cosmosDelegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     lazy var cosmosUnbondings = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
     lazy var cosmosRewards = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
     lazy var cosmosCommissions = Array<Cosmos_Base_V1beta1_Coin>()
+    lazy var rewardAddress = ""
+    lazy var cosmosValidators = Array<Cosmos_Staking_V1beta1_Validator>()
     
     lazy var mintscanCw20Tokens = [MintscanToken]()
     lazy var mintscanChainParam = JSON()
@@ -71,6 +72,7 @@ class CosmosClass: BaseChain {
         }
         
         let channel = getConnection()
+        cosmosAuth = nil
         cosmosBalances = nil
         cosmosVestings.removeAll()
         cosmosDelegations.removeAll()
@@ -78,6 +80,7 @@ class CosmosClass: BaseChain {
         cosmosRewards.removeAll()
         cosmosCommissions.removeAll()
         fetchAuth(group, channel)
+        fetchBalance(group, channel)
         
         group.notify(queue: .main) {
             try? channel.close()
@@ -389,7 +392,6 @@ extension CosmosClass {
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = bechAddress }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosAuth = response.account
-            fetchBalance(group, channel)
             if (self.supportStaking) {
                 fetchDelegation(group, channel)
                 fetchUnbondings(group, channel)

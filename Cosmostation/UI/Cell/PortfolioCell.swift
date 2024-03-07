@@ -88,7 +88,7 @@ class PortfolioCell: UITableViewCell {
             loadingLabel.isHidden = true
             
             if (!(chain is ChainOkt996Keccak) && !(chain is ChainBinanceBeacon)) {
-                if (chain.cosmosAuth.typeURL.isEmpty) {
+                if (chain.cosmosBalances == nil) {
                     reposeErrorLabel.isHidden = false
                     return
                 }
@@ -121,7 +121,7 @@ class PortfolioCell: UITableViewCell {
             loadingLabel.isHidden = true
             
             if (!(chain is ChainOktEVM)) {
-                if (chain.supportCosmos && chain.cosmosAuth.typeURL.isEmpty) {
+                if (chain.supportCosmos && chain.cosmosBalances == nil) {
                     reposeErrorLabel.isHidden = false
                     return
                 }
