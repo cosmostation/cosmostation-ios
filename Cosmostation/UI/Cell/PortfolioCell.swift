@@ -86,10 +86,14 @@ class PortfolioCell: UITableViewCell {
         if (chain.fetched) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
-            if (chain.cosmosAuth.typeURL.isEmpty) {
-                reposeErrorLabel.isHidden = false
-                return
+            
+            if (!(chain is ChainOkt996Keccak) && !(chain is ChainBinanceBeacon)) {
+                if (chain.cosmosAuth.typeURL.isEmpty) {
+                    reposeErrorLabel.isHidden = false
+                    return
+                }
             }
+            
             if (BaseData.instance.getHideValue()) {
                 currencyLabel.text = ""
                 valueLabel.font = .fontSize14Bold
@@ -116,10 +120,13 @@ class PortfolioCell: UITableViewCell {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
             
-            if (chain.supportCosmos && chain.cosmosAuth.typeURL.isEmpty) {
-                reposeErrorLabel.isHidden = false
-                return
+            if (!(chain is ChainOktEVM)) {
+                if (chain.supportCosmos && chain.cosmosAuth.typeURL.isEmpty) {
+                    reposeErrorLabel.isHidden = false
+                    return
+                }
             }
+            
             if (chain.web3 == nil) {
                 reposeErrorLabel.isHidden = false
                 return

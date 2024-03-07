@@ -289,7 +289,9 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
         if (indexPath.section == 0) {
             let selectedChain = searchEvmChains[indexPath.row]
             if (selectedChain.fetched == false) { return }
-            if (selectedChain.supportCosmos && selectedChain.cosmosAuth.typeURL.isEmpty) { return }
+            if (!(selectedChain is ChainOktEVM)) {
+                if (selectedChain.supportCosmos && selectedChain.cosmosAuth.typeURL.isEmpty) { return }
+            }
             if (selectedChain.web3 == nil) { return }
             detailChainTag = selectedChain.tag
             if (selectedChain.supportCosmos) {
@@ -310,7 +312,9 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
         } else if (indexPath.section == 1) {
             let selectedChain = searchCosmosChains[indexPath.row]
             if (selectedChain.fetched == false) { return }
-            if (selectedChain.cosmosAuth.typeURL.isEmpty) { return }
+            if (!(selectedChain is ChainOkt996Keccak) && !(selectedChain is ChainBinanceBeacon)) {
+                if (selectedChain.cosmosAuth.typeURL.isEmpty) { return }
+            }
             detailChainTag = selectedChain.tag
             let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
             cosmosClassVC.selectedChain = selectedChain
