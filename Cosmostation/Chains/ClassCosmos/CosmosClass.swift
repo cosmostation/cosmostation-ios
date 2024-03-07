@@ -386,7 +386,6 @@ extension CosmosClass {
     
     func fetchAuth(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()
-        let channel = getConnection()
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = bechAddress }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
             self.cosmosAuth = response.account
