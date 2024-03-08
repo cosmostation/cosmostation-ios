@@ -226,6 +226,12 @@ class PortfolioVC: BaseVC {
             tableView.headerView(forSection: 0)?.layoutSubviews()
         }
     }
+    
+    func onNodedownPopup() {
+        let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
+        warnSheet.noticeType = .NodeDownGuide
+        onStartSheet(warnSheet)
+    }
 
 }
 
@@ -290,9 +296,15 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             let selectedChain = searchEvmChains[indexPath.row]
             if (selectedChain.fetched == false) { return }
             if (!(selectedChain is ChainOktEVM)) {
-                if (selectedChain.supportCosmos && selectedChain.cosmosBalances == nil) { return }
+                if (selectedChain.supportCosmos && selectedChain.cosmosBalances == nil) {
+                    onNodedownPopup()
+                    return
+                }
             }
-            if (selectedChain.web3 == nil) { return }
+            if (selectedChain.web3 == nil) {
+                onNodedownPopup()
+                return
+            }
             detailChainTag = selectedChain.tag
             if (selectedChain.supportCosmos) {
                 let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
@@ -313,7 +325,10 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             let selectedChain = searchCosmosChains[indexPath.row]
             if (selectedChain.fetched == false) { return }
             if (!(selectedChain is ChainOkt996Keccak) && !(selectedChain is ChainBinanceBeacon)) {
-                if (selectedChain.cosmosBalances == nil) { return }
+                if (selectedChain.cosmosBalances == nil) {
+                    onNodedownPopup()
+                    return
+                }
             }
             detailChainTag = selectedChain.tag
             let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
