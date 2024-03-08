@@ -631,9 +631,21 @@ extension CommonTransfer {
             let oracle = Web3.Oracle.init(web3)
             let feeHistory = oracle.bothFeesPercentiles
             if (feeHistory?.baseFee.count ?? 0 > 0 && feeHistory?.tip.count ?? 0 > 0) {
-                evmGasPrice[0] = (feeHistory?.baseFee[0] ?? 27500000000) + (feeHistory?.tip[0] ?? 500000000)
-                evmGasPrice[1] = (feeHistory?.baseFee[1] ?? 27500000000) + (feeHistory?.tip[1] ?? 500000000)
-                evmGasPrice[2] = (feeHistory?.baseFee[2] ?? 27500000000) + (feeHistory?.tip[2] ?? 500000000)
+                if (feeHistory?.baseFee[0] == nil || feeHistory!.baseFee[0] < 275000000) {
+                    evmGasPrice[0] = (feeHistory?.baseFee[0] ?? 27500000000) + (feeHistory?.tip[0] ?? 500000000)
+                } else {
+                    evmGasPrice[0] = feeHistory!.baseFee[0] + (feeHistory?.tip[0] ?? 500000000)
+                }
+                if (feeHistory?.baseFee[1] == nil || feeHistory!.baseFee[1] < 275000000) {
+                    evmGasPrice[1] = (feeHistory?.baseFee[1] ?? 27500000000) + (feeHistory?.tip[1] ?? 500000000)
+                } else {
+                    evmGasPrice[1] = feeHistory!.baseFee[1] + (feeHistory?.tip[1] ?? 500000000)
+                }
+                if (feeHistory?.baseFee[2] == nil || feeHistory!.baseFee[2] < 275000000) {
+                    evmGasPrice[2] = (feeHistory?.baseFee[2] ?? 27500000000) + (feeHistory?.tip[2] ?? 500000000)
+                } else {
+                    evmGasPrice[2] = feeHistory!.baseFee[2] + (feeHistory?.tip[2] ?? 500000000)
+                }
                 let tip = feeHistory?.tip[selectedFeePosition] ?? 500000000
                 let eip1559 = EIP1559Envelope(to: toAddress, nonce: nonce!, chainID: chainID!, value: value,
                                               data: wTx!.transaction.data, maxPriorityFeePerGas: tip,
