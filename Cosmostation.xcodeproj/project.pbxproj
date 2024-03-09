@@ -1700,6 +1700,8 @@
 		E16200502AF27C250008F397 /* AddressBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E162004C2AF27C250008F397 /* AddressBookCell.xib */; };
 		E1657B0B2AD0159D00264A21 /* SecButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1657B0A2AD0159D00264A21 /* SecButton.swift */; };
 		E1657B0C2AD0159D00264A21 /* SecButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1657B0A2AD0159D00264A21 /* SecButton.swift */; };
+		E165ED382B98C9D500C15809 /* basebg09.png in Resources */ = {isa = PBXBuildFile; fileRef = E165ED372B98C9D400C15809 /* basebg09.png */; };
+		E165ED392B98C9D500C15809 /* basebg09.png in Resources */ = {isa = PBXBuildFile; fileRef = E165ED372B98C9D400C15809 /* basebg09.png */; };
 		E16D9B1522489B030019B7BB /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1422489B030019B7BB /* IntroVC.swift */; };
 		E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16D9B182248C4880019B7BB /* Assets.xcassets */; };
 		E16D9B1D2248E6A60019B7BB /* WKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1C2248E6A60019B7BB /* WKey.swift */; };
@@ -2657,6 +2659,7 @@
 		E162004B2AF27C250008F397 /* AddressBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookCell.swift; sourceTree = "<group>"; };
 		E162004C2AF27C250008F397 /* AddressBookCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressBookCell.xib; sourceTree = "<group>"; };
 		E1657B0A2AD0159D00264A21 /* SecButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecButton.swift; sourceTree = "<group>"; };
+		E165ED372B98C9D400C15809 /* basebg09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg09.png; sourceTree = "<group>"; };
 		E16D9B1422489B030019B7BB /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		E16D9B182248C4880019B7BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E16D9B1C2248E6A60019B7BB /* WKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKey.swift; sourceTree = "<group>"; };
@@ -3994,6 +3997,7 @@
 				04F048D62AFCD34A002A809D /* basebg06.png */,
 				04E250DF2B8F035E007D5AA0 /* basebg07.png */,
 				04E250E02B8F035E007D5AA0 /* basebg08.png */,
+				E165ED372B98C9D400C15809 /* basebg09.png */,
 			);
 			path = BgImg;
 			sourceTree = "<group>";
@@ -4349,6 +4353,7 @@
 				E1CD6B032AEAAEF200376909 /* AboutSocialsCell.xib in Resources */,
 				0438A8212AE15283006FA213 /* KavaMintListCell.xib in Resources */,
 				04951DC62B7F6E6200A03FB1 /* QrAddressPopup2VC.xib in Resources */,
+				E165ED392B98C9D500C15809 /* basebg09.png in Resources */,
 				E11EAE122AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
 				E16200442AF279560008F397 /* AddressBookListVC.xib in Resources */,
 				0409D2FE2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
@@ -4531,6 +4536,7 @@
 				044222562B96F4370063F031 /* SelectDisplayTokenCell.xib in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
 				18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */,
+				E165ED382B98C9D500C15809 /* basebg09.png in Resources */,
 				E15F2D062ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
 				E1DF77712AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,
 				E12E9D2C2AE2B4A700336449 /* KavaMintAction.xib in Resources */,
@@ -6117,7 +6123,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 263;
+				CURRENT_PROJECT_VERSION = 264;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6129,7 +6135,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.4;
+				MARKETING_VERSION = 1.10.5;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6150,7 +6156,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 263;
+				CURRENT_PROJECT_VERSION = 264;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6163,7 +6169,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.4;
+				MARKETING_VERSION = 1.10.5;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Cosmostation debug provisioning profile";
@@ -6303,7 +6309,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 263;
+				CURRENT_PROJECT_VERSION = 264;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6317,7 +6323,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.4;
+				MARKETING_VERSION = 1.10.5;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6336,7 +6342,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 263;
+				CURRENT_PROJECT_VERSION = 264;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6350,7 +6356,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.4;
+				MARKETING_VERSION = 1.10.5;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

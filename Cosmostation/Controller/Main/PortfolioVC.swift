@@ -226,6 +226,12 @@ class PortfolioVC: BaseVC {
             tableView.headerView(forSection: 0)?.layoutSubviews()
         }
     }
+    
+    func onNodedownPopup() {
+        let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
+        warnSheet.noticeType = .NodeDownGuide
+        onStartSheet(warnSheet)
+    }
 
 }
 
@@ -287,11 +293,22 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
-            if (searchEvmChains[indexPath.row].fetched == false) { return }
-            detailChainTag = searchEvmChains[indexPath.row].tag
-            if (searchEvmChains[indexPath.row].supportCosmos) {
+            let selectedChain = searchEvmChains[indexPath.row]
+            if (selectedChain.fetched == false) { return }
+            if (!(selectedChain is ChainOktEVM)) {
+                if (selectedChain.supportCosmos && selectedChain.cosmosBalances == nil) {
+                    onNodedownPopup()
+                    return
+                }
+            }
+            if (selectedChain.web3 == nil) {
+                onNodedownPopup()
+                return
+            }
+            detailChainTag = selectedChain.tag
+            if (selectedChain.supportCosmos) {
                 let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
-                cosmosClassVC.selectedChain = searchEvmChains[indexPath.row]
+                cosmosClassVC.selectedChain = selectedChain
                 cosmosClassVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
                 self.navigationController?.pushViewController(cosmosClassVC, animated: true)
@@ -305,10 +322,17 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             }
             
         } else if (indexPath.section == 1) {
-            if (searchCosmosChains[indexPath.row].fetched == false) { return }
-            detailChainTag = searchCosmosChains[indexPath.row].tag
+            let selectedChain = searchCosmosChains[indexPath.row]
+            if (selectedChain.fetched == false) { return }
+            if (!(selectedChain is ChainOkt996Keccak) && !(selectedChain is ChainBinanceBeacon)) {
+                if (selectedChain.cosmosBalances == nil) {
+                    onNodedownPopup()
+                    return
+                }
+            }
+            detailChainTag = selectedChain.tag
             let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
-            cosmosClassVC.selectedChain = searchCosmosChains[indexPath.row]
+            cosmosClassVC.selectedChain = selectedChain
             cosmosClassVC.hidesBottomBarWhenPushed = true
             self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
             self.navigationController?.pushViewController(cosmosClassVC, animated: true)

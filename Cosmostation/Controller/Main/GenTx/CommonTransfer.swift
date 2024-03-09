@@ -516,6 +516,11 @@ class CommonTransfer: BaseVC {
             }
             
         } else if (txStyle == .COSMOS_STYLE) {
+            if ((fromChain as! CosmosClass).isGasSimulable() == false) {
+                onUpdateFeeView()
+                sendBtn.isEnabled = true
+                return
+            }
             guard let toGas = simul?.gasInfo.gasUsed else {
                 feeCardView.isHidden = true
                 errorCardView.isHidden = false
@@ -580,7 +585,9 @@ extension CommonTransfer {
     func evmSendSimul() {
         evmTx = nil
         DispatchQueue.global().async { [self] in
-            let web3 = (fromChain as! EvmClass).getWeb3Connection()!
+            guard let web3 = (fromChain as! EvmClass).getWeb3Connection() else {
+                return
+            }
             let chainID = web3.provider.network?.chainID
             let senderAddress = EthereumAddress.init((fromChain as! EvmClass).evmAddress)
             let recipientAddress = EthereumAddress.init(toAddress)
@@ -624,9 +631,21 @@ extension CommonTransfer {
             let oracle = Web3.Oracle.init(web3)
             let feeHistory = oracle.bothFeesPercentiles
             if (feeHistory?.baseFee.count ?? 0 > 0 && feeHistory?.tip.count ?? 0 > 0) {
-                evmGasPrice[0] = (feeHistory?.baseFee[0] ?? 27500000000) + (feeHistory?.tip[0] ?? 500000000)
-                evmGasPrice[1] = (feeHistory?.baseFee[1] ?? 27500000000) + (feeHistory?.tip[1] ?? 500000000)
-                evmGasPrice[2] = (feeHistory?.baseFee[2] ?? 27500000000) + (feeHistory?.tip[2] ?? 500000000)
+                if (feeHistory?.baseFee[0] == nil || feeHistory!.baseFee[0] < 275000000) {
+                    evmGasPrice[0] = (feeHistory?.baseFee[0] ?? 27500000000) + (feeHistory?.tip[0] ?? 500000000)
+                } else {
+                    evmGasPrice[0] = feeHistory!.baseFee[0] + (feeHistory?.tip[0] ?? 500000000)
+                }
+                if (feeHistory?.baseFee[1] == nil || feeHistory!.baseFee[1] < 275000000) {
+                    evmGasPrice[1] = (feeHistory?.baseFee[1] ?? 27500000000) + (feeHistory?.tip[1] ?? 500000000)
+                } else {
+                    evmGasPrice[1] = feeHistory!.baseFee[1] + (feeHistory?.tip[1] ?? 500000000)
+                }
+                if (feeHistory?.baseFee[2] == nil || feeHistory!.baseFee[2] < 275000000) {
+                    evmGasPrice[2] = (feeHistory?.baseFee[2] ?? 27500000000) + (feeHistory?.tip[2] ?? 500000000)
+                } else {
+                    evmGasPrice[2] = feeHistory!.baseFee[2] + (feeHistory?.tip[2] ?? 500000000)
+                }
                 let tip = feeHistory?.tip[selectedFeePosition] ?? 500000000
                 let eip1559 = EIP1559Envelope(to: toAddress, nonce: nonce!, chainID: chainID!, value: value,
                                               data: wTx!.transaction.data, maxPriorityFeePerGas: tip,
@@ -653,7 +672,9 @@ extension CommonTransfer {
     
     func evmSend() {
         DispatchQueue.global().async { [self] in
-            let web3 = (fromChain as! EvmClass).getWeb3Connection()!
+            guard let web3 = (fromChain as! EvmClass).getWeb3Connection() else {
+                return
+            }
             try! evmTx?.sign(privateKey: fromChain.privateKey!)
             let result = try? web3.eth.sendRawTransaction(evmTx!)
 //            print("evmSend ethereumTx ", ethereumTx)

@@ -145,7 +145,7 @@
                     </constraints>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hq3-0z-VB0">
-                    <rect key="frame" x="60" y="175.33333333333337" width="273" height="273"/>
+                    <rect key="frame" x="66" y="181.33333333333337" width="261" height="261"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <integer key="value" value="6"/>
@@ -212,13 +212,13 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RWO-dd-aOf" secondAttribute="trailing" constant="12" id="1Wh-cf-VjN"/>
                 <constraint firstItem="Log-Tr-ulL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="38" id="3nQ-NV-BJB"/>
                 <constraint firstItem="VyT-AB-xel" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="5rC-8L-Zsp"/>
-                <constraint firstItem="Hq3-0z-VB0" firstAttribute="leading" secondItem="i9d-Tg-NPS" secondAttribute="leading" constant="6" id="6sa-ba-70U"/>
+                <constraint firstItem="Hq3-0z-VB0" firstAttribute="leading" secondItem="i9d-Tg-NPS" secondAttribute="leading" constant="12" id="6sa-ba-70U"/>
                 <constraint firstItem="Hq3-0z-VB0" firstAttribute="centerY" secondItem="i9d-Tg-NPS" secondAttribute="centerY" id="7sn-bR-IAR"/>
                 <constraint firstItem="i9d-Tg-NPS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="54" id="BiU-Tn-g69"/>
-                <constraint firstItem="Hq3-0z-VB0" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="top" constant="6" id="GLg-wo-OOL"/>
+                <constraint firstItem="Hq3-0z-VB0" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="top" constant="12" id="GLg-wo-OOL"/>
                 <constraint firstAttribute="bottom" secondItem="UkY-bX-F9E" secondAttribute="bottom" constant="38" id="GvJ-Hp-0lm"/>
                 <constraint firstItem="RWO-dd-aOf" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="bottom" constant="24" id="IVc-Ra-SvO"/>
-                <constraint firstItem="Hq3-0z-VB0" firstAttribute="trailing" secondItem="i9d-Tg-NPS" secondAttribute="trailing" constant="-6" id="IeG-b7-CLD"/>
+                <constraint firstItem="Hq3-0z-VB0" firstAttribute="trailing" secondItem="i9d-Tg-NPS" secondAttribute="trailing" constant="-12" id="IeG-b7-CLD"/>
                 <constraint firstItem="RWO-dd-aOf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="J74-Xd-q58"/>
                 <constraint firstItem="VyT-AB-xel" firstAttribute="top" secondItem="Log-Tr-ulL" secondAttribute="bottom" constant="8" id="LCk-b9-iF1"/>
                 <constraint firstItem="Grn-gw-zaI" firstAttribute="top" secondItem="RWO-dd-aOf" secondAttribute="bottom" constant="20" id="S9V-Ex-DvI"/>
@@ -232,7 +232,7 @@
                 <constraint firstItem="i9d-Tg-NPS" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="pxN-0Q-B2Y"/>
                 <constraint firstItem="UkY-bX-F9E" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="uTc-Hw-inX"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="i9d-Tg-NPS" secondAttribute="trailing" constant="54" id="vLC-3h-oQc"/>
-                <constraint firstItem="Hq3-0z-VB0" firstAttribute="bottom" secondItem="i9d-Tg-NPS" secondAttribute="bottom" constant="-6" id="yle-MG-qLO"/>
+                <constraint firstItem="Hq3-0z-VB0" firstAttribute="bottom" secondItem="i9d-Tg-NPS" secondAttribute="bottom" constant="-12" id="yle-MG-qLO"/>
             </constraints>
             <point key="canvasLocation" x="70.992366412213741" y="20.422535211267608"/>
         </view>

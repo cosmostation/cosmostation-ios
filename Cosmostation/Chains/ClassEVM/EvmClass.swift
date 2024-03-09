@@ -61,7 +61,16 @@ class EvmClass: CosmosClass {
         
         if (supportCosmos) {
             let channel = getConnection()
+            cosmosAuth = nil
+            cosmosBalances = nil
+            cosmosVestings.removeAll()
+            cosmosDelegations.removeAll()
+            cosmosUnbondings.removeAll()
+            cosmosRewards.removeAll()
+            cosmosCommissions.removeAll()
             fetchAuth(group, channel)
+            fetchBalance(group, channel)
+            
             group.notify(queue: .main) {
                 try? channel.close()
                 WUtils.onParseVestingAccount(self)
@@ -224,13 +233,13 @@ extension EvmClass {
         group.enter()
         DispatchQueue.global().async {
             let contractAddress = EthereumAddress.init(tokenInfo.address!)
-            let erc20token = ERC20(web3: self.getWeb3Connection()!, provider: self.getWeb3Connection()!.provider, address: contractAddress!)
-            if let erc20Balance = try? erc20token.getBalance(account: accountEthAddr) {
-                tokenInfo.setAmount(String(erc20Balance))
-                group.leave()
-            } else {
-                group.leave()
+            if let connection = self.getWeb3Connection() {
+                let erc20token = ERC20(web3: connection, provider: connection.provider, address: contractAddress!)
+                if let erc20Balance = try? erc20token.getBalance(account: accountEthAddr) {
+                    tokenInfo.setAmount(String(erc20Balance))
+                }
             }
+            group.leave()
         }
     }
 }

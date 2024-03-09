@@ -142,7 +142,7 @@
                     </constraints>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xt9-i3-n96">
-                    <rect key="frame" x="60" y="155.66666666666663" width="273" height="273"/>
+                    <rect key="frame" x="66" y="161.66666666666663" width="261" height="261"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <integer key="value" value="6"/>
@@ -173,14 +173,14 @@
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstItem="Xt9-i3-n96" firstAttribute="bottom" secondItem="jvu-Gn-DDF" secondAttribute="bottom" constant="-6" id="0DH-ub-jLv"/>
+                <constraint firstItem="Xt9-i3-n96" firstAttribute="bottom" secondItem="jvu-Gn-DDF" secondAttribute="bottom" constant="-12" id="0DH-ub-jLv"/>
                 <constraint firstItem="Xt9-i3-n96" firstAttribute="centerX" secondItem="jvu-Gn-DDF" secondAttribute="centerX" id="0tw-yE-CQs"/>
                 <constraint firstItem="Xt9-i3-n96" firstAttribute="centerY" secondItem="jvu-Gn-DDF" secondAttribute="centerY" id="4n8-cj-hhs"/>
                 <constraint firstItem="CzN-4r-kn9" firstAttribute="top" secondItem="oBF-2o-bRk" secondAttribute="bottom" constant="8" id="8YL-ZQ-DNp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jZh-Ce-tC6" secondAttribute="trailing" constant="12" id="8v8-Sb-UYs"/>
                 <constraint firstItem="jZh-Ce-tC6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="9pd-q2-mvE"/>
-                <constraint firstItem="Xt9-i3-n96" firstAttribute="top" secondItem="jvu-Gn-DDF" secondAttribute="top" constant="6" id="Gsw-Hr-gyZ"/>
-                <constraint firstItem="Xt9-i3-n96" firstAttribute="trailing" secondItem="jvu-Gn-DDF" secondAttribute="trailing" constant="-6" id="IcJ-g8-2lt"/>
+                <constraint firstItem="Xt9-i3-n96" firstAttribute="top" secondItem="jvu-Gn-DDF" secondAttribute="top" constant="12" id="Gsw-Hr-gyZ"/>
+                <constraint firstItem="Xt9-i3-n96" firstAttribute="trailing" secondItem="jvu-Gn-DDF" secondAttribute="trailing" constant="-12" id="IcJ-g8-2lt"/>
                 <constraint firstItem="jvu-Gn-DDF" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="SRc-hw-jJR"/>
                 <constraint firstItem="oBF-2o-bRk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Tr3-3P-b3a"/>
                 <constraint firstItem="CzN-4r-kn9" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Ze5-7P-siN"/>
@@ -189,7 +189,7 @@
                 <constraint firstItem="jvu-Gn-DDF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="54" id="jX0-Sc-8BC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jvu-Gn-DDF" secondAttribute="trailing" constant="54" id="l86-xX-SQg"/>
                 <constraint firstItem="oBF-2o-bRk" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="o3C-CE-a69"/>
-                <constraint firstItem="Xt9-i3-n96" firstAttribute="leading" secondItem="jvu-Gn-DDF" secondAttribute="leading" constant="6" id="taF-VT-TVS"/>
+                <constraint firstItem="Xt9-i3-n96" firstAttribute="leading" secondItem="jvu-Gn-DDF" secondAttribute="leading" constant="12" id="taF-VT-TVS"/>
             </constraints>
             <point key="canvasLocation" x="48" y="21"/>
         </view>

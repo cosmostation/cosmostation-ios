@@ -34,6 +34,12 @@ class NoticeSheet: BaseVC {
             noticeMsgLabel.text = NSLocalizedString("msg_token_github", comment: "")
             subBtn.setTitle(NSLocalizedString("setting_github_title", comment: ""), for: .normal)
             okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
+            
+        } else if (noticeType == .NodeDownGuide) {
+            noticeTitleLabel.text = NSLocalizedString("str_node_down_title", comment: "")
+            noticeMsgLabel.text = NSLocalizedString("msg_node_down", comment: "")
+            subBtn.isHidden = true
+            okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
         }
     }
     
@@ -64,4 +70,5 @@ class NoticeSheet: BaseVC {
 public enum NoticeType: Int {
     case SwapInitWarn = 0
     case TokenGithub = 1
+    case NodeDownGuide = 2
 }

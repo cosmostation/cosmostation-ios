@@ -34,6 +34,7 @@ class ChainNeutron: CosmosClass  {
         bechAccountPrefix = "neutron"
         validatorPrefix = "neutronvaloper"
         supportStaking = false
+        supportCw20 = true
         
         grpcHost = "grpc-neutron.cosmostation.io"
     }
@@ -43,6 +44,11 @@ class ChainNeutron: CosmosClass  {
         fetchChainParam2(group)
         
         let channel = getConnection()
+        cosmosAuth = nil
+        cosmosBalances = nil
+        neutronDeposited = NSDecimalNumber.zero
+        neutronVesting = nil
+        fetchOnlyAuth(group, channel)
         fetchBalance(group, channel)
         fetchNeutronVesting(group, channel)
         fetchVaultDeposit(group, channel)
@@ -84,6 +90,17 @@ class ChainNeutron: CosmosClass  {
 }
 
 extension ChainNeutron {
+    
+    func fetchOnlyAuth(_ group: DispatchGroup, _ channel: ClientConnection) {
+        group.enter()
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = bechAddress }
+        if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
+            self.cosmosAuth = response.account
+            group.leave()
+        } else {
+            group.leave()
+        }
+    }
     
     func fetchVaultDeposit(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()

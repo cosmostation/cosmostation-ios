@@ -30,15 +30,16 @@ class CosmosClass: BaseChain {
     var grpcHost = ""
     var grpcPort = 443
     
-    lazy var rewardAddress = ""
-    lazy var cosmosAuth = Google_Protobuf_Any.init()
-    lazy var cosmosValidators = Array<Cosmos_Staking_V1beta1_Validator>()
+    
+    var cosmosAuth: Google_Protobuf_Any?
     var cosmosBalances: [Cosmos_Base_V1beta1_Coin]?
     lazy var cosmosVestings = Array<Cosmos_Base_V1beta1_Coin>()
     lazy var cosmosDelegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     lazy var cosmosUnbondings = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
     lazy var cosmosRewards = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
     lazy var cosmosCommissions = Array<Cosmos_Base_V1beta1_Coin>()
+    lazy var rewardAddress = ""
+    lazy var cosmosValidators = Array<Cosmos_Staking_V1beta1_Validator>()
     
     lazy var mintscanCw20Tokens = [MintscanToken]()
     lazy var mintscanChainParam = JSON()
@@ -71,7 +72,15 @@ class CosmosClass: BaseChain {
         }
         
         let channel = getConnection()
+        cosmosAuth = nil
+        cosmosBalances = nil
+        cosmosVestings.removeAll()
+        cosmosDelegations.removeAll()
+        cosmosUnbondings.removeAll()
+        cosmosRewards.removeAll()
+        cosmosCommissions.removeAll()
         fetchAuth(group, channel)
+        fetchBalance(group, channel)
         
         group.notify(queue: .main) {
             try? channel.close()
@@ -328,7 +337,7 @@ extension CosmosClass {
                 case .success(let value):
                     self.mintscanChainParam = value
                 case .failure:
-                    print("fetchChainParam2 error")
+                    print("fetchChainParam2 error", self.tag)
                 }
                 group.leave()
             }
@@ -336,13 +345,14 @@ extension CosmosClass {
     
     func fetchCw20Info(_ group: DispatchGroup) {
         group.enter()
+//        print("fetchCw20Info ", BaseNetWork.msCw20InfoUrl(self))
         AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get)
             .responseDecodable(of: [MintscanToken].self) { response in
                 switch response.result {
                 case .success(let value):
                     self.mintscanCw20Tokens = value
                 case .failure:
-                    print("fetchCw20Info error")
+                    print("fetchCw20Info error", self.tag)
                 }
                 group.leave()
             }
@@ -379,12 +389,9 @@ extension CosmosClass {
     
     func fetchAuth(_ group: DispatchGroup, _ channel: ClientConnection) {
         group.enter()
-        let channel = getConnection()
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = bechAddress }
         if let response = try? Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.wait() {
-            self.cosmosVestings.removeAll()
             self.cosmosAuth = response.account
-            fetchBalance(group, channel)
             if (self.supportStaking) {
                 fetchDelegation(group, channel)
                 fetchUnbondings(group, channel)
@@ -413,7 +420,6 @@ extension CosmosClass {
         group.enter()
         let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = bechAddress }
         if let response = try? Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel).delegatorDelegations(req, callOptions: getCallOptions()).response.wait() {
-            self.cosmosDelegations.removeAll()
             response.delegationResponses.forEach { delegation in
                 if (delegation.balance.amount != "0") {
                     self.cosmosDelegations.append(delegation)
@@ -452,7 +458,6 @@ extension CosmosClass {
         group.enter()
         let req = Cosmos_Distribution_V1beta1_QueryValidatorCommissionRequest.with { $0.validatorAddress = bechOpAddress! }
         if let response = try? Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel).validatorCommission(req, callOptions: getCallOptions()).response.wait() {
-            self.cosmosCommissions.removeAll()
             response.commission.commission.forEach { commi in
                 if (commi.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
                     self.cosmosCommissions.append(Cosmos_Base_V1beta1_Coin(commi.denom, commi.getAmount()))

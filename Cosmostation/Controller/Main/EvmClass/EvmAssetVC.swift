@@ -159,7 +159,7 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "Coin"
             view.cntLabel.text = "1"
         } else {
-            view.titleLabel.text = "Tokens"
+            view.titleLabel.text = "Erc20 Tokens"
             view.cntLabel.text = String(toDisplayErc20Tokens.count)
         }
         return view

@@ -307,7 +307,8 @@
 "str_share_evm_address" = "Share Evm style address";
 "str_copy_bech_address" = "Copy Cosmos style address";
 "str_share_bech_address" = "Share Cosmos style address";
-"str_token_github" = "토큰 정보 확인";
+"str_token_github" = "Check Token Info";
+"str_node_down_title" = "⚠️ Node Down";
 
 
 "btn_delegate" = "  Delegate";
@@ -386,6 +387,7 @@
 "msg_show_all_proposals" = "Show all proposals.";
 "msg_hide_scam_proposals" = "Filters out suspected of scam proposals.";
 "msg_token_github" = "Currently, the selected chain does not need to manually add tokens to the chain. Cosmostation Wallet displays information for all tokens (CW20, ERC20) with existing quantity.\n\nIf you hold the token but do not see it, try submitting the PR through the Github link below.";
+"msg_node_down" = "▪ If there is a problem with the node you are currently using, you can easily switch to another node through [Settings > Manage Chains] and continue using the service.\n\n ▪ If all nodes are unavailable, the chain being used is being upgraded. Please wait until the upgrade is complete.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
