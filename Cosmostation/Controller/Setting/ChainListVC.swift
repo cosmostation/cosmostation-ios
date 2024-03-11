@@ -9,7 +9,7 @@
 import UIKit
 import Lottie
 
-class ChainListVC: BaseVC, BaseSheetDelegate {
+class ChainListVC: BaseVC, EndpointDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchEmptyLayer: UIView!
@@ -96,24 +96,15 @@ class ChainListVC: BaseVC, BaseSheetDelegate {
     
     func onDisplayEndPointSheet(_ chain: CosmosClass) {
         loadingView.isHidden = true
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.targetChain = chain
-        baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SwitchEndpoint
-        onStartSheet(baseSheet)
+        let endpointSheet = SelectEndpointSheet(nibName: "SelectEndpointSheet", bundle: nil)
+        endpointSheet.targetChain = chain
+        endpointSheet.endpointDelegate = self
+        onStartSheet(endpointSheet, 420)
     }
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SwitchEndpoint) {
-            if let index = result["index"] as? Int,
-               let chainName = result["chainName"] as? String {
-                let chain = searchCosmosChains.filter { $0.name == chainName }.first!
-                let endpoint = chain.getChainParam()["grpc_endpoint"].arrayValue[index]["url"].stringValue
-                BaseData.instance.setGrpcEndpoint(chain, endpoint)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
+    func onEndpointUpdated() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
 

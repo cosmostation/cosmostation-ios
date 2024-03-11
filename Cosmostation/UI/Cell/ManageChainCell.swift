@@ -50,7 +50,7 @@ class ManageChainCell: UITableViewCell {
             grpcEndpointLabel.text = chain.getGrpc().host + " : " +  String(chain.getGrpc().port)
         }
         evmLayer.isHidden = false
-        evmEndpointLabel.text = chain.evmRpcURL
+        evmEndpointLabel.text = chain.getEvmRpc()
     }
     
     func bindManageCosmosClassChain(_ chain: CosmosClass) {

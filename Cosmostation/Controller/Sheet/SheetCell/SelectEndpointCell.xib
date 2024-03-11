@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,26 +30,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="340" height="68"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provider" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjO-Yx-bCP">
-                                <rect key="frame" x="19.999999999999996" y="14.000000000000002" width="59.666666666666657" height="17.666666666666671"/>
+                                <rect key="frame" x="20.000000000000004" y="13.999999999999998" width="52.333333333333343" height="16.333333333333329"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconSuccess" translatesAutoresizingMaskIntoConstraints="NO" id="fY4-RM-ryV">
+                                <rect key="frame" x="76.333333333333329" y="14.333333333333336" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="I1r-w7-9Lp"/>
+                                    <constraint firstAttribute="width" constant="16" id="Kbu-Fc-GS7"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="endpoint" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLn-yq-TBz">
-                                <rect key="frame" x="20" y="37.666666666666664" width="300" height="15.333333333333336"/>
+                                <rect key="frame" x="20" y="36.333333333333336" width="300" height="14"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BPV-Fj-GSv">
-                                <rect key="frame" x="310" y="13.666666666666664" width="8" height="8"/>
+                                <rect key="frame" x="310" y="13.333333333333336" width="8" height="8"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="8" id="UtP-NX-dBg"/>
                                     <constraint firstAttribute="width" constant="8" id="gfZ-By-cHV"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFG-IB-X54">
-                                <rect key="frame" x="320" y="17.666666666666668" width="0.0" height="0.0"/>
+                                <rect key="frame" x="320" y="17.333333333333332" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
@@ -75,6 +82,8 @@
                             <constraint firstItem="jFG-IB-X54" firstAttribute="firstBaseline" secondItem="mjO-Yx-bCP" secondAttribute="firstBaseline" id="dJQ-2j-UYU"/>
                             <constraint firstItem="OLn-yq-TBz" firstAttribute="leading" secondItem="mjO-Yx-bCP" secondAttribute="leading" id="egb-7y-OQv"/>
                             <constraint firstAttribute="trailing" secondItem="NK6-8I-JdH" secondAttribute="trailing" constant="12" id="fEk-Aa-nNI"/>
+                            <constraint firstItem="fY4-RM-ryV" firstAttribute="leading" secondItem="mjO-Yx-bCP" secondAttribute="trailing" constant="4" id="gfY-FI-cjR"/>
+                            <constraint firstItem="fY4-RM-ryV" firstAttribute="centerY" secondItem="mjO-Yx-bCP" secondAttribute="centerY" id="guf-UJ-nCB"/>
                             <constraint firstAttribute="bottom" secondItem="NK6-8I-JdH" secondAttribute="bottom" id="h76-LH-fe8"/>
                             <constraint firstAttribute="trailing" secondItem="OLn-yq-TBz" secondAttribute="trailing" constant="20" id="rqu-gs-ohm"/>
                         </constraints>
@@ -95,6 +104,7 @@
                 <outlet property="endpointLabel" destination="OLn-yq-TBz" id="TgE-dT-r07"/>
                 <outlet property="providerLabel" destination="mjO-Yx-bCP" id="dWJ-6f-3P1"/>
                 <outlet property="rootView" destination="NOV-2b-hZo" id="cuz-en-Hdj"/>
+                <outlet property="seletedImg" destination="fY4-RM-ryV" id="dSB-cP-g10"/>
                 <outlet property="speedImg" destination="BPV-Fj-GSv" id="XO4-Lt-SP4"/>
                 <outlet property="speedTimeLabel" destination="jFG-IB-X54" id="lhd-ZQ-1zG"/>
             </connections>
@@ -102,6 +112,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="iconSuccess" width="24" height="24"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

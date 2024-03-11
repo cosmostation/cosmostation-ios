@@ -128,7 +128,7 @@ class EvmClass: CosmosClass {
         if (self.web3 != nil && self.web3?.provider.session != nil) {
             return web3
         } else {
-            guard let url = URL(string: evmRpcURL) else { return  nil }
+            guard let url = URL(string: getEvmRpc()) else { return  nil }
             self.web3 = try? Web3.new(url)
             return web3
         }
@@ -163,6 +163,13 @@ class EvmClass: CosmosClass {
     
     deinit {
         web3 = nil
+    }
+    
+    func getEvmRpc() -> String {
+        if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_EVM_RPC_ENDPOINT +  " : " + self.name) {
+            return endpoint.trimmingCharacters(in: .whitespaces)
+        }
+        return evmRpcURL
     }
 }
 

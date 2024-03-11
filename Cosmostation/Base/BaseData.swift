@@ -690,6 +690,10 @@ extension BaseData {
         UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + chain.name)
     }
     
+    func setEvmRpcEndpoint(_ chain : EvmClass, _ endpoint: String) {
+        UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_EVM_RPC_ENDPOINT +  " : " + chain.name)
+    }
+    
     //Skip swap info
     func setLastSwapInfoTime() {
         let now = Date().millisecondsSince1970

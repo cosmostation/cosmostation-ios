@@ -119,9 +119,6 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SwitchAutoPass) {
             sheetTitle.text = NSLocalizedString("str_autopass", comment: "")
             
-        } else if (sheetType == .SwitchEndpoint) {
-            sheetTitle.text = NSLocalizedString("title_select_end_point", comment: "")
-            
         } else if (sheetType == .SelectSwapInputChain) {
             sheetTitle.text = NSLocalizedString("title_select_input_chain", comment: "")
             sheetSearchBar.isHidden = false
@@ -321,9 +318,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SwitchAutoPass) {
             return AutoPass.getAutoPasses().count
             
-        } else if (sheetType == .SwitchEndpoint) {
-            return targetChain.getChainParam()["grpc_endpoint"].arrayValue.count
-            
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
             return swapChainsSearch.count
             
@@ -425,11 +419,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SwitchAutoPass) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
             cell?.onBindAutoPass(indexPath.row)
-            return cell!
-            
-        } else if (sheetType == .SwitchEndpoint) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectEndpointCell") as? SelectEndpointCell
-            cell?.onBindEndpoint(indexPath.row, targetChain)
             return cell!
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
@@ -540,17 +529,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "account" : selectedAccount]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
-        } else if (sheetType == .SwitchEndpoint) {
-            let cell = sheetTableView.cellForRow(at: indexPath) as? SelectEndpointCell
-            if (cell?.gapTime != nil) {
-                let result: [String : Any] = ["index" : indexPath.row, "chainName" : targetChain.name]
-                sheetDelegate?.onSelectedSheet(sheetType, result)
-                
-            } else {
-                onShowToast(NSLocalizedString("error_useless_end_point", comment: ""))
-                return
-            }
-            
         } else if (sheetType == .SelectDelegatedAction) {
             let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : delegation.delegation.validatorAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -649,7 +627,6 @@ public enum SheetType: Int {
     case SwitchCurrency = 13
     case SwitchPriceColor = 14
     case SwitchAutoPass = 15
-    case SwitchEndpoint = 16
     
     case SelectSwapInputChain = 21
     case SelectSwapOutputChain = 22
