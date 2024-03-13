@@ -272,10 +272,21 @@ extension CosmosClass {
         return getChainParam()["fee"]["base"].intValue
     }
     
+    func getFeeBaseGasAmount() -> UInt64 {
+        guard let limit = getChainParam()["fee"]["init_gas_limit"].uInt64 else {
+            return UInt64(BASE_GAS_AMOUNT)!
+        }
+        return limit
+    }
+    
+    func getFeeBaseGasAmount() -> NSDecimalNumber {
+        return NSDecimalNumber(string: String(getFeeBaseGasAmount()))
+    }
+    
     //get chainlist suggest fees array
     func getDefaultFeeCoins() -> [Cosmos_Base_V1beta1_Coin] {
         var result = [Cosmos_Base_V1beta1_Coin]()
-        let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
+        let gasAmount: NSDecimalNumber = getFeeBaseGasAmount()
         if (getFeeInfos().count > 0) {
             let feeDatas = getFeeInfos()[getFeeBasePosition()].FeeDatas
             feeDatas.forEach { feeData in
@@ -298,7 +309,7 @@ extension CosmosClass {
         }
         if (feeCoin != nil) {
             return Cosmos_Tx_V1beta1_Fee.with {
-                $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
+                $0.gasLimit = getFeeBaseGasAmount()
                 $0.amount = [feeCoin!]
             }
         }
@@ -307,12 +318,12 @@ extension CosmosClass {
     
     //get user selected fee
     func getUserSelectedFee(_ position: Int, _ denom: String) -> Cosmos_Tx_V1beta1_Fee {
-        let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
+        let gasAmount: NSDecimalNumber = getFeeBaseGasAmount()
         let feeDatas = getFeeInfos()[position].FeeDatas
         let rate = feeDatas.filter { $0.denom == denom }.first!.gasRate
         let coinAmount = rate!.multiplying(by: gasAmount, withBehavior: handler0Up)
         return Cosmos_Tx_V1beta1_Fee.with {
-            $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
+            $0.gasLimit = getFeeBaseGasAmount()
             $0.amount = [Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = coinAmount.stringValue }]
         }
     }
