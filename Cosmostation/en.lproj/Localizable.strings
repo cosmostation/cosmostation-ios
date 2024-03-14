@@ -177,8 +177,8 @@
 "str_voting_end_time" = "Voting End Time";
 "str_request_amount" = "Request Amount";
 "str_voting_description" = "Description";
-"str_voting_period" = "Voting Period Proposals";
-"str_vote_proposals" = "Finished Proposals";
+"str_voting_period" = "Live Proposals";
+"str_voting_finished" = "Finished Proposals";
 "str_vote_reject_by_qourum" = "The quorum is NOT established, need more votes.";
 "str_vote_reject_by_veto" = "The quorum is established, but VETO.";
 "str_vote_reject_by_no" = "The quorum is established, but the majority has voted NO.";
@@ -204,6 +204,7 @@
 "str_big_loss_msg" = "If you proceed with the currently selected swap, significant property damage is expected.\n\nPlease check the expected input and output values and decide carefully.";
 "str_memo_optional" = "Memo (Optional)";
 "str_tx_result" = "Tx Result";
+"str_vote_all" = "Vote All";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -951,6 +952,7 @@
 "title_reward_detail_list" = "Reward Detail";
 "title_earn_list" = "Earning List";
 "title_claimable_chains" = "Claimable Chains";
+"title_voting_period_proposals" = "Voting Period Proposals";
 
 
 "proposal_type_basic" = "Basic";

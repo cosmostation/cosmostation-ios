@@ -177,8 +177,8 @@
 "str_voting_end_time" = "投票終了時間";
 "str_request_amount" = "請求金額";
 "str_voting_description" = "説明";
-"str_voting_period" = "完成した提案書";
-"str_vote_proposals" = "提案";
+"str_voting_period" = "投票期間の提案";
+"str_voting_finished" = "完成した提案書";
 "str_vote_reject_by_qourum" = "定足数が満たされていません。 もっと多くの投票が必要です。";
 "str_vote_reject_by_veto" = "定足数は決まっているが、拒否権はある。";
 "str_vote_reject_by_no" = "定足数は確定したが、過半数がNOに投票した。";
@@ -204,6 +204,7 @@
 "str_big_loss_msg" = "現在選択されているスワップを進めると、かなりの財産上の損害が予想されます。\n\n期待される入力/出力値を確認してから慎重に決定してください。";
 "str_memo_optional" = "メモ（任意）";
 "str_tx_result" = "Tx 結果";
+"str_vote_all" = "全員に投票する";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -951,6 +952,7 @@
 "title_reward_detail_list" = "Reward Detail";
 "title_earn_list" = "Earning List";
 "title_claimable_chains" = "リワード対象チェーン";
+"title_voting_period_proposals" = "Voting Period Proposals";
 
 
 "proposal_type_basic" = "Basic";

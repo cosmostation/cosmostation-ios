@@ -182,9 +182,9 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Loading Skeleton" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOm-4h-c1H">
-                                <rect key="frame" x="255" y="26" width="80" height="20.333333333333329"/>
+                                <rect key="frame" x="235" y="26" width="100" height="20.333333333333329"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="W4o-IA-MFt"/>
+                                    <constraint firstAttribute="width" constant="100" id="W4o-IA-MFt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                                 <color key="textColor" name="_color01"/>
@@ -192,7 +192,7 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="lastLineFillPercent">
-                                        <integer key="value" value="80"/>
+                                        <integer key="value" value="100"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
                                         <integer key="value" value="8"/>

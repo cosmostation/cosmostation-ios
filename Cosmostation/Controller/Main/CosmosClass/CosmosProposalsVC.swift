@@ -171,7 +171,7 @@ extension CosmosProposalsVC: UITableViewDelegate, UITableViewDataSource {
             else { view.cntLabel.text = String(filteredVotingPeriods.count) }
             
         } else if (section == 1) {
-            view.titleLabel.text = NSLocalizedString("str_vote_proposals", comment: "")
+            view.titleLabel.text = NSLocalizedString("str_voting_finished", comment: "")
             if (isShowAll) { view.cntLabel.text = String(etcPeriods.count) }
             else { view.cntLabel.text = String(filteredEtcPeriods.count) }
         }

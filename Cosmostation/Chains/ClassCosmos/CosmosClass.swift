@@ -235,6 +235,11 @@ extension CosmosClass {
         return nil
     }
     
+    func voteThreshold() -> NSDecimalNumber {
+        let threshold = getChainParam()["voting_threshold"].uInt64Value
+        return NSDecimalNumber(value: threshold)
+    }
+    
     func gasMultiply() -> Double {
         if let mutiply = getChainParam()["fee"]["simul_gas_multiply"].double {
             return mutiply
