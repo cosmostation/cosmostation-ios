@@ -96,11 +96,11 @@ extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.row == 0 || indexPath.row == 1) {
+        if (indexPath.row <= 2) {
             return UITableView.automaticDimension
         } else {
             if (!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) {
@@ -127,16 +127,21 @@ extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
             self.present(claimStartVC, animated: true)
             
         } else if (indexPath.row == 2) {
+            let voteStartVC = AllChainVoteStartVC(nibName: "AllChainVoteStartVC", bundle: nil)
+            voteStartVC.modalTransitionStyle = .coverVertical
+            self.present(voteStartVC, animated: true)
+            
+        } else if (indexPath.row == 3) {
             let swapStartVC = SwapStartVC(nibName: "SwapStartVC", bundle: nil)
             swapStartVC.modalTransitionStyle = .coverVertical
             self.present(swapStartVC, animated: true)
             
-        } else if (indexPath.row == 3) {
+        } else if (indexPath.row == 4) {
             let dappStartVC = DappStartVC(nibName: "DappStartVC", bundle: nil)
             dappStartVC.modalTransitionStyle = .coverVertical
             self.present(dappStartVC, animated: true)
             
-        } else {
+        } else if (indexPath.row == 5) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
             baseSheet.sheetType = .SelectBuyCrypto

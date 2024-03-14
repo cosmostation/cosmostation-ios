@@ -81,10 +81,3 @@ func All_IBC_Chains() -> [CosmosClass] {
     result.append(contentsOf: ALLEVMCLASS().filter { $0.supportCosmos == true } )
     return result
 }
-
-//func AllChains() -> [CosmosClass] {
-//    var result = [CosmosClass]()
-//    result.append(contentsOf: ALLCOSMOSCLASS())
-//    result.append(contentsOf:  ALLEVMCLASS())
-//    return result
-//}

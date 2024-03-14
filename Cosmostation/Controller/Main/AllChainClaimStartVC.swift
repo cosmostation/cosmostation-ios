@@ -108,34 +108,7 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
                 
                 onSimul()
             }
-            
         }
-        
-        
-//        if (baseAccount.getDisplayCosmosChains().filter { $0.fetched == false }.count == 0) {
-//            baseAccount.getDisplayCosmosChains().forEach { chain in
-//                let valueableReward = chain.valueableRewards()
-//                let txFee = chain.getInitPayableFee()
-//                if (valueableReward.count > 0 && txFee != nil) {
-//                    valueableRewards.append((chain, valueableReward, nil, false, nil))
-//                }
-//            }
-//            
-//            cntLabel.text = String(valueableRewards.count)
-//            loadingView.isHidden = true
-//            
-//            if (valueableRewards.count == 0) {
-//                emptyView.isHidden = false
-//                claimBtn.isHidden = true
-//                
-//            } else {
-//                cntLabel.isHidden = false
-//                tableView.isHidden = false
-//                tableView.reloadData()
-//                
-//                onSimul()
-//            }
-//        }
     }
     
     func onSimul() {
