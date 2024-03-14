@@ -182,7 +182,8 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if let claimableReward = selectedChain.cosmosRewards.filter({ $0.validatorAddress == fromValAddress }).first {
+        if let claimableReward = selectedChain.cosmosRewards.filter({ $0.validatorAddress == fromValAddress }).first,
+           claimableReward.reward.count > 0 {
             let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
             claimRewards.claimableRewards = [claimableReward]
             claimRewards.selectedChain = selectedChain
@@ -203,7 +204,8 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
             return
         }
-        if let claimableReward = selectedChain.cosmosRewards.filter({ $0.validatorAddress == fromValAddress }).first {
+        if let claimableReward = selectedChain.cosmosRewards.filter({ $0.validatorAddress == fromValAddress }).first,
+           claimableReward.reward.count > 0 {
             let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
             compounding.claimableRewards = [claimableReward]
             compounding.selectedChain = selectedChain
