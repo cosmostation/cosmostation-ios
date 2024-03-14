@@ -42,6 +42,7 @@ class SelectEndpointCell: UITableViewCell {
             let endpoint = cosmosChain.getChainParam()["grpc_endpoint"].arrayValue[position]
             providerLabel.text = endpoint["provider"].string
             endpointLabel.text = endpoint["url"].string
+            endpointLabel.adjustsFontSizeToFitWidth = true
             
             let checkTime = CFAbsoluteTimeGetCurrent()
             let host = endpoint["url"].stringValue.components(separatedBy: ":")[0].trimmingCharacters(in: .whitespaces)
@@ -90,7 +91,8 @@ class SelectEndpointCell: UITableViewCell {
         if let evmChain = chain as? EvmClass {
             let endpoint = evmChain.getChainParam()["evm_rpc_endpoint"].arrayValue[position]
             providerLabel.text = endpoint["provider"].string
-            endpointLabel.text = endpoint["url"].string
+            endpointLabel.text = endpoint["url"].string?.replacingOccurrences(of: "https://", with: "")
+            endpointLabel.adjustsFontSizeToFitWidth = true
             
             let checkTime = CFAbsoluteTimeGetCurrent()
             let url = endpoint["url"].stringValue

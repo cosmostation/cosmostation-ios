@@ -46,16 +46,16 @@ class SelectEndpointSheet: BaseVC {
             
             if (gRPCList != nil && evmRPCList == nil) {
                 seletcedType = EndPointType.gRPC
-                titleLabel.isHidden = false
+                titleLabel.text = NSLocalizedString("title_select_end_point", comment: "") + "  (gRPC)"
                 endpointTypeSegment.isHidden = true
                 
             } else if (gRPCList == nil && evmRPCList != nil) {
                 seletcedType = EndPointType.evmRPC
-                titleLabel.isHidden = false
+                titleLabel.text = NSLocalizedString("title_select_end_point", comment: "") + "  (evm RPC)"
                 endpointTypeSegment.isHidden = true
                 
             } else if (gRPCList != nil && evmRPCList != nil) {
-                titleLabel.isHidden = true
+                titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
                 endpointTypeSegment.isHidden = false
                 
                 endpointTypeSegment.insertSegment(withTitle: "gRPC Endpoint", at: EndPointType.gRPC.rawValue, animated: false)
@@ -71,7 +71,6 @@ class SelectEndpointSheet: BaseVC {
     }
     
     override func setLocalizedString() {
-        titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
     }
     
     

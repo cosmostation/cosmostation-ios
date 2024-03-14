@@ -157,20 +157,19 @@ extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             let chain = searchEvmChains[indexPath.row]
-            if (chain.supportCosmos && !(chain is ChainOktEVM)) {
-                loadingView.isHidden = false
-                if (chain.getChainParam().isEmpty == true) {
-                    Task {
-                        if let rawParam = try? await chain.fetchChainParam() {
-                            chain.mintscanChainParam = rawParam
-                            DispatchQueue.main.async {
-                                self.onDisplayEndPointSheet(chain)
-                            }
+            if (chain is ChainOktEVM) { return }
+            loadingView.isHidden = false
+            if (chain.getChainParam().isEmpty == true) {
+                Task {
+                    if let rawParam = try? await chain.fetchChainParam() {
+                        chain.mintscanChainParam = rawParam
+                        DispatchQueue.main.async {
+                            self.onDisplayEndPointSheet(chain)
                         }
                     }
-                } else {
-                    self.onDisplayEndPointSheet(chain)
                 }
+            } else {
+                self.onDisplayEndPointSheet(chain)
             }
             
         } else if (indexPath.section == 1) {

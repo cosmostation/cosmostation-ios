@@ -216,7 +216,11 @@ class CosmosClass: BaseChain {
 extension CosmosClass {
     
     func getChainParam() -> JSON {
-        return mintscanChainParam["params"]["chainlist_params"]
+        let chainlist_params = mintscanChainParam["params"]["chainlist_params"]
+        if (!chainlist_params.isEmpty) {
+            return chainlist_params
+        }
+        return mintscanChainParam
     }
     
     func isGasSimulable() -> Bool {
@@ -775,7 +779,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainMars())
     result.append(ChainMedibloc())
     result.append(ChainNeutron())
-//    result.append(ChainNibiru())
+    result.append(ChainNibiru())
     result.append(ChainNoble())
     result.append(ChainNyx())
     result.append(ChainOmniflix())
