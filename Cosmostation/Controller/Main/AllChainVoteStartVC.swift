@@ -115,6 +115,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
     }
     
     func onUpdateView() {
+        voteBtn.isEnabled = false
         emptyView.isHidden = true
         filterBtn.isHidden = false
         loadingView.isHidden = true
@@ -129,35 +130,28 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
         
         toDisplayInfos.removeAll()
         if (isShowAll) {
-            toDisplayInfos = allLiveInfo
+            toDisplayInfos = allLiveInfo.map { $0 }
         } else {
-            for i in allLiveInfo.indices {
+            allLiveInfo.forEach { info in
                 var filteredProposal = [MintscanProposal]()
-                let proposals = allLiveInfo[i].msProposals
-                let myVotes = allLiveInfo[i].msMyVotes
+                let proposals = info.msProposals
+                let myVotes = info.msMyVotes
                 proposals.forEach { proposal in
                     if (myVotes.filter({ $0.proposal_id == proposal.id }).count ==  0) {
                         filteredProposal.append(proposal)
                     }
                 }
                 if (filteredProposal.count > 0) {
-                    toDisplayInfos.append(VoteAllModel.init(allLiveInfo[i].basechain, filteredProposal, myVotes))
+                    toDisplayInfos.append(VoteAllModel.init(info.basechain, filteredProposal, myVotes))
                 }
             }
         }
-//        self.allLiveInfo.forEach({ info in
-//            print("allLiveInfo ", info.basechain.tag, "   ",info.msProposals.count)
-//        })
-//        self.toDisplayInfos.forEach({ info in
-//            print("toDisplayInfos ", info.basechain.tag, "   ",info.msProposals.count)
-//        })
-//        
+        
         if (toDisplayInfos.count == 0) {
             emptyView.isHidden = false
-        } else {
-            tableView.isHidden = false
-            tableView.reloadData()
         }
+        tableView.isHidden = false
+        tableView.reloadData()
     }
     
     func onSimul(_ section: Int) {
@@ -238,8 +232,8 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
             confirmBtn.isEnabled = false
             voteBtn.isHidden = true
             confirmBtn.isHidden = false
-            toDisplayInfos.forEach { model in
-                model.isBusy = true
+            for i in toDisplayInfos.indices {
+                toDisplayInfos[i].isBusy = true
             }
             tableView.reloadData()
             
@@ -430,7 +424,8 @@ extension AllChainVoteStartVC {
 }
 
 
-class VoteAllModel {
+struct VoteAllModel {
+    
     var basechain: BaseChain!
     var msProposals = [MintscanProposal]()
     var msMyVotes = [MintscanMyVotes]()
@@ -445,7 +440,7 @@ class VoteAllModel {
         self.msMyVotes = msMyVotes
     }
     
-    func onClear() {
+    mutating func onClear() {
         self.toVotes = []
         self.txFee = nil
         self.txResponse = nil
