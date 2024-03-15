@@ -1032,7 +1032,7 @@
 "error_send_disable" = "まだ転送が有効になっていません。";
 "error_not_voting_not" = "今は投票できません。";
 "error_not_voting_period" = "投票期間ではありません。";
-"error_no_bonding_no_vote" = "委任量がないため投票できません。";
+"error_no_bonding_no_vote" = "代表団が足りないため投票できません。";
 "error_already_vote" = "すでに投票しています。";
 "error_no_opinion" = "ご意見をお選びください。";
 "error_not_yet" = "準備中...";

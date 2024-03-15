@@ -1032,7 +1032,7 @@
 "error_send_disable" = "Token transfer is locked.";
 "error_not_voting_not" = "Can not vote now.";
 "error_not_voting_period" = "Not voting period.";
-"error_no_bonding_no_vote" = "This proposal can only vote on delegators.";
+"error_no_bonding_no_vote" = "You cannot vote because there is not enough delegation.";
 "error_already_vote" = "Already voted.";
 "error_no_opinion" = "Please select your opinion.";
 "error_not_yet" = "Coming soon!";

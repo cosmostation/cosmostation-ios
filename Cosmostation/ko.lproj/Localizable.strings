@@ -1031,7 +1031,7 @@
 "error_send_disable" = "아직 전송이 활성화 되지 않았습니다.";
 "error_not_voting_not" = "지금은 투표할 수 없습니다..";
 "error_not_voting_period" = "투표 기간이 아닙니다.";
-"error_no_bonding_no_vote" = "위임량이 없음으로 투표를 하실 수 없습니다.";
+"error_no_bonding_no_vote" = "위임량이 충분하지 않아 투표를 하실 수 없습니다.";
 "error_already_vote" = "이미 투표를 하였습니다.";
 "error_no_opinion" = "의견을 선택해 주세요.";
 "error_not_yet" = "준비중 입니다!";

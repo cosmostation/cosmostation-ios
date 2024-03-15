@@ -137,16 +137,23 @@ class CosmosProposalsVC: BaseVC {
     }
     
     @IBAction func onClickVote(_ sender: BaseButton) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        let delegated = selectedChain.delegationAmountSum()
+        let voteThreshold = selectedChain.voteThreshold()
+        if (delegated.compare(voteThreshold).rawValue <= 0) {
+            onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
+            return
+        }
+        
         var toVoteProposals = [MintscanProposal]()
         votingPeriods.forEach { proposal in
             if (toVoteList.contains(proposal.id!)) {
                 toVoteProposals.append(proposal)
             }
-        }
-        
-        if (selectedChain.isTxFeePayable() == false) {
-            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
         }
         let vote = CosmosVote(nibName: "CosmosVote", bundle: nil)
         vote.selectedChain = selectedChain
