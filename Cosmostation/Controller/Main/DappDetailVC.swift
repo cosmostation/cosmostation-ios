@@ -504,7 +504,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 }
                 
             } else if (method == "cos_supportedChainIds" || method == "ten_supportedChainIds") {
-                if let chainIds = BaseData.instance.supportConfig?["supportChainIds"].arrayValue {
+                if let chainIds = BaseData.instance.dAppConfig?["supportChainIds"].arrayValue {
                     let data:JSON = ["official": chainIds, "unofficial": []]
                     approveWebToApp(data, messageJSON, bodyJSON["messageId"])
                 } else {
@@ -512,7 +512,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 }
                 
             } else if (method == "ten_supportedChainNames" || method == "cos_supportedChainNames") {
-                if let chainNames = BaseData.instance.supportConfig?["supportChainNames"].arrayValue {
+                if let chainNames = BaseData.instance.dAppConfig?["supportChainNames"].arrayValue {
                     let data:JSON = ["official": chainNames, "unofficial": []]
                     approveWebToApp(data, messageJSON, bodyJSON["messageId"])
                 } else {
@@ -523,14 +523,14 @@ extension DappDetailVC: WKScriptMessageHandler {
                 approveWebToApp(true, messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "cos_activatedChainIds" || method == "ten_activatedChainIds") {
-                if let chainIds = BaseData.instance.supportConfig?["supportChainIds"].arrayValue[0] {
+                if let chainIds = BaseData.instance.dAppConfig?["supportChainIds"].arrayValue[0] {
                     approveWebToApp(chainIds, messageJSON, bodyJSON["messageId"])
                 } else {
                     rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])
                 }
                 
             } else if (method == "cos_activatedChainNames" || method == "ten_activatedChainNames") {
-                if let chainNames = BaseData.instance.supportConfig?["supportChainNames"].arrayValue[0] {
+                if let chainNames = BaseData.instance.dAppConfig?["supportChainNames"].arrayValue[0] {
                     approveWebToApp(chainNames, messageJSON, bodyJSON["messageId"])
                 } else {
                     rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])

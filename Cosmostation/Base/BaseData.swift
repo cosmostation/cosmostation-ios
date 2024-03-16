@@ -23,11 +23,12 @@ final class BaseData: NSObject{
     
     var reviewMode = true
     var mintscanChains: JSON?
-    var supportConfig: JSON?
-    var baseAccount: BaseAccount?
+    var mintscanChainParams: JSON?
     var mintscanUSDPrices: [MintscanPrice]?
     var mintscanPrices: [MintscanPrice]?
     var mintscanAssets: [MintscanAsset]?
+    var dAppConfig: JSON?
+    var baseAccount: BaseAccount?
     
     public override init() {
         super.init();

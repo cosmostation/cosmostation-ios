@@ -14,6 +14,7 @@ import SwiftyJSON
 class BaseNetWork {
     
     func fetchChainList() {
+//        print("fetchChainList ", BaseNetWork.msSupportChains())
         AF.request(BaseNetWork.msSupportChains(), method: .get)
             .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
@@ -26,15 +27,29 @@ class BaseNetWork {
             }
     }
     
-    func fetchSupportConfig() {
-        AF.request(BaseNetWork.msSupportConfigs(), method: .get)
+    func fetchChainParams() {
+//        print("fetchChainParams ", BaseNetWork.msChainParams())
+        AF.request(BaseNetWork.msChainParams(), method: .get)
             .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let value):
-                    BaseData.instance.supportConfig = value
+                    BaseData.instance.mintscanChainParams = value
+                case .failure:
+                    print("fetchChainParams error ", response.error)
+                }
+            }
+    }
+    
+    func fetchdAppConfig() {
+//        print("fetchdAppConfig ", BaseNetWork.dAppConfigs())
+        AF.request(BaseNetWork.dAppConfigs(), method: .get)
+            .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.dAppConfig = value
                     
                 case .failure:
-                    print("fetchSupportConfig error ", response.error)
+                    print("fetchdAppConfig error ", response.error)
                 }
             }
     }
@@ -120,7 +135,11 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v10/meta/support/chains"
     }
     
-    static func msSupportConfigs() -> String {
+    static func msChainParams() -> String {
+        return MINTSCAN_API_URL + "v10/utils/params"
+    }
+    
+    static func dAppConfigs() -> String {
         return ResourceDappBase + "config.json"
     }
     
