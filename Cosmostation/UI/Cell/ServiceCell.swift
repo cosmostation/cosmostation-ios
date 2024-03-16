@@ -33,12 +33,12 @@ class ServiceCell: UITableViewCell {
             
         } else if (position == 1) {
             serviceImg.image = UIImage(named: "imgServiceClaim")
-            titleLabel.text = "CLAIM REWARDS"
+            titleLabel.text = "ALL CHAIN REWARDS"
             msgLabel.text = "Easily claim all rewards\nexceeding $0.1 across Cosmos\nchains with a single click."
             
         } else if (position == 2) {
             serviceImg.image = UIImage(named: "imgServiceVote")
-            titleLabel.text = "GOVERNANCE"
+            titleLabel.text = "ALL CHAIN VOTE"
             msgLabel.text = "Check the list of live proposals\nof the chains you staked and\nvote for."
             
         } else if (position == 3) {
