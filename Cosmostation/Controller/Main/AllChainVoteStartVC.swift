@@ -71,6 +71,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
     
     @IBAction func onClickFilter(_ sender: UIButton) {
         if (toDisplayInfos.filter { $0.isBusy == true }.count > 0) { return }
+        if (toDisplayInfos.filter { $0.txResponse != nil }.count > 0) { return }
         isShowAll = !isShowAll
         if (isShowAll) {
             filterBtn.setImage(UIImage(named: "iconVoteAllShowAll"), for: .normal)
