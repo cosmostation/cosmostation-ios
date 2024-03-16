@@ -343,6 +343,16 @@ extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (toDisplayInfos[indexPath.section].isBusy) { return }
+        if (toDisplayInfos[indexPath.section].txResponse != nil) { return }
+        if let cosmosChain = toDisplayInfos[indexPath.section].basechain as? CosmosClass,
+           let proposalId = toDisplayInfos[indexPath.section].msProposals[indexPath.row].id {
+            guard let url = BaseNetWork.getProposalDetailUrl(cosmosChain, proposalId) else { return }
+            self.onShowSafariWeb(url)
+        }
+    }
 }
 
 extension AllChainVoteStartVC {
