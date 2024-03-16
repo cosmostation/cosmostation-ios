@@ -23,7 +23,9 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
     @IBOutlet weak var voteBtn: BaseButton!
     @IBOutlet weak var confirmBtn: BaseButton!
     @IBOutlet weak var emptyView: UIView!
-    @IBOutlet weak var loadingView: LottieAnimationView!
+    @IBOutlet weak var lodingView: UIView!
+    @IBOutlet weak var lottieView: LottieAnimationView!
+    @IBOutlet weak var progressLabel: UILabel!
     
     var isShowAll = false
     var allLiveInfo = [VoteAllModel]()
@@ -34,12 +36,15 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
         
         baseAccount = BaseData.instance.baseAccount
         
-        loadingView.isHidden = false
-        loadingView.animation = LottieAnimation.named("loading")
-        loadingView.contentMode = .scaleAspectFit
-        loadingView.loopMode = .loop
-        loadingView.animationSpeed = 1.3
-        loadingView.play()
+        titleLabel.isHidden = true
+        voteBtn.isHidden = true
+        
+        lottieView.isHidden = false
+        lottieView.animation = LottieAnimation.named("loading")
+        lottieView.contentMode = .scaleAspectFit
+        lottieView.loopMode = .loop
+        lottieView.animationSpeed = 1.3
+        lottieView.play()
         
         tableView.isHidden = true
         tableView.delegate = self
@@ -116,10 +121,12 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
     }
     
     func onUpdateView() {
+        titleLabel.isHidden = false
+        voteBtn.isHidden = false
         voteBtn.isEnabled = false
         emptyView.isHidden = true
         filterBtn.isHidden = false
-        loadingView.isHidden = true
+        lodingView.isHidden = true
         
         self.allLiveInfo.sort {
             if ($0.basechain.tag == "cosmos118") { return true }
@@ -153,6 +160,12 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
         }
         tableView.isHidden = false
         tableView.reloadData()
+    }
+    
+    func onUpdateProgress(_ progress: Int, _ allCnt: Int) {
+        DispatchQueue.main.async(execute: {
+            self.progressLabel.text = "Checked " + String(progress) +  "/" +  String(allCnt)
+        })
     }
     
     func onSimul(_ section: Int) {
@@ -360,6 +373,7 @@ extension AllChainVoteStartVC {
     
     func onFetchProposalInfos(_ stakedChains : [BaseChain]) {
         Task(priority: .high) {
+            var progress = 0
             await stakedChains.concurrentForEach { chain in
                 var toShowProposals = [MintscanProposal]()
                 if let proposals = try? await AF.request(BaseNetWork.msProposals(chain), method: .get).serializingDecodable([JSON].self).value {
@@ -381,6 +395,8 @@ extension AllChainVoteStartVC {
                     }
                     self.allLiveInfo.append(VoteAllModel.init(chain, toShowProposals,myVotes))
                 }
+                progress = progress + 1
+                self.onUpdateProgress(progress, stakedChains.count)
             }
             
             DispatchQueue.main.async(execute: {

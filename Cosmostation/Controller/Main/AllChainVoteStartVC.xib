@@ -12,6 +12,9 @@
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
         </array>
+        <array key="SpoqaHanSansNeo-Medium.otf">
+            <string>SpoqaHanSansNeo-Medium</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AllChainVoteStartVC" customModule="Cosmostation" customModuleProvider="target">
@@ -19,7 +22,9 @@
                 <outlet property="confirmBtn" destination="kGi-Ul-jeV" id="hE4-gC-pOA"/>
                 <outlet property="emptyView" destination="6uD-aR-HBx" id="QMq-KP-mH5"/>
                 <outlet property="filterBtn" destination="Lbx-9p-hne" id="zZ3-3I-zIi"/>
-                <outlet property="loadingView" destination="Odn-0k-mj6" id="hAU-qh-c6E"/>
+                <outlet property="lodingView" destination="AMs-Rk-byJ" id="b4Z-yT-0Te"/>
+                <outlet property="lottieView" destination="Odn-0k-mj6" id="ovf-cz-OrH"/>
+                <outlet property="progressLabel" destination="ZFi-rV-BC2" id="8so-eX-7a3"/>
                 <outlet property="tableView" destination="Rxc-9N-mjG" id="Mgp-0H-IMc"/>
                 <outlet property="titleLabel" destination="Dw0-T1-ydv" id="CqU-Pr-moC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -112,13 +117,33 @@
                         <action selector="onClickVote:" destination="-1" eventType="touchUpInside" id="21c-UA-mAX"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Odn-0k-mj6" customClass="LottieAnimationView" customModule="Lottie">
-                    <rect key="frame" x="106.66666666666669" y="383.66666666666669" width="180" height="110"/>
-                    <viewLayoutGuide key="safeArea" id="j2o-Wj-RB6"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AMs-Rk-byJ">
+                    <rect key="frame" x="106.66666666666669" y="373.66666666666669" width="180" height="130"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Odn-0k-mj6" customClass="LottieAnimationView" customModule="Lottie">
+                            <rect key="frame" x="0.0" y="0.0" width="180" height="110"/>
+                            <viewLayoutGuide key="safeArea" id="j2o-Wj-RB6"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="110" id="6WE-lw-Cxz"/>
+                                <constraint firstAttribute="width" constant="180" id="oms-2c-LvT"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFi-rV-BC2">
+                            <rect key="frame" x="89.999999999999986" y="114" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="110" id="6WE-lw-Cxz"/>
-                        <constraint firstAttribute="width" constant="180" id="oms-2c-LvT"/>
+                        <constraint firstAttribute="height" constant="130" id="PRX-M7-alN"/>
+                        <constraint firstAttribute="width" constant="180" id="QM5-Gu-du0"/>
+                        <constraint firstItem="Odn-0k-mj6" firstAttribute="top" secondItem="AMs-Rk-byJ" secondAttribute="top" id="ect-ET-G0L"/>
+                        <constraint firstItem="ZFi-rV-BC2" firstAttribute="centerX" secondItem="AMs-Rk-byJ" secondAttribute="centerX" id="h8O-me-YQv"/>
+                        <constraint firstItem="Odn-0k-mj6" firstAttribute="centerX" secondItem="AMs-Rk-byJ" secondAttribute="centerX" id="pfg-jr-mPL"/>
+                        <constraint firstItem="ZFi-rV-BC2" firstAttribute="top" secondItem="Odn-0k-mj6" secondAttribute="bottom" constant="4" id="vGo-Xc-Iju"/>
                     </constraints>
                 </view>
             </subviews>
@@ -127,12 +152,13 @@
             <color key="tintColor" name="_primary"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Xcn-oX-mWI" secondAttribute="trailing" constant="8" id="0dI-1l-oLe"/>
-                <constraint firstItem="Odn-0k-mj6" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="5Z4-Dv-VCR"/>
                 <constraint firstItem="Xcn-oX-mWI" firstAttribute="top" secondItem="Rxc-9N-mjG" secondAttribute="bottom" constant="8" id="5qO-bc-QoJ"/>
                 <constraint firstItem="kGi-Ul-jeV" firstAttribute="top" secondItem="Xcn-oX-mWI" secondAttribute="top" id="65l-DF-aLc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Rxc-9N-mjG" secondAttribute="trailing" id="81d-B8-dyg"/>
                 <constraint firstItem="Lbx-9p-hne" firstAttribute="centerY" secondItem="Dw0-T1-ydv" secondAttribute="centerY" id="9RS-dc-6Xp"/>
                 <constraint firstItem="Dw0-T1-ydv" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="Bht-TR-Fiy"/>
+                <constraint firstItem="AMs-Rk-byJ" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="Chf-2G-RBx"/>
+                <constraint firstItem="AMs-Rk-byJ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="DjZ-zz-gHT"/>
                 <constraint firstItem="6uD-aR-HBx" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="IGb-dc-Wo5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Lbx-9p-hne" secondAttribute="trailing" constant="16" id="JQO-Ce-a9D"/>
                 <constraint firstItem="kGi-Ul-jeV" firstAttribute="bottom" secondItem="Xcn-oX-mWI" secondAttribute="bottom" id="KIQ-Nk-YUN"/>
@@ -143,7 +169,6 @@
                 <constraint firstItem="kGi-Ul-jeV" firstAttribute="leading" secondItem="Xcn-oX-mWI" secondAttribute="leading" id="eVd-qj-zcw"/>
                 <constraint firstItem="kGi-Ul-jeV" firstAttribute="trailing" secondItem="Xcn-oX-mWI" secondAttribute="trailing" id="icU-WE-h1u"/>
                 <constraint firstItem="6uD-aR-HBx" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="r1q-wW-JTB"/>
-                <constraint firstItem="Odn-0k-mj6" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="rqf-qW-HQQ"/>
                 <constraint firstItem="Rxc-9N-mjG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yfc-YK-hHn"/>
             </constraints>
             <point key="canvasLocation" x="40" y="20"/>
