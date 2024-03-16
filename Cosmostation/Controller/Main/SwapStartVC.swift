@@ -164,9 +164,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             
             let inputChannel = getConnection(inputCosmosChain)
             if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.bechAddress),
-               let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.bechAddress),
-               let inputParam = try? await inputCosmosChain.fetchChainParam() {
-                inputCosmosChain.mintscanChainParam = inputParam
+               let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.bechAddress) {
                 inputCosmosChain.cosmosAuth = inputAuth?.account ?? Google_Protobuf_Any()
                 inputCosmosChain.cosmosBalances = inputBal!
                 WUtils.onParseVestingAccount(inputCosmosChain)
@@ -174,9 +172,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             
             let outputChannel = getConnection(outputCosmosChain)
             if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.bechAddress),
-               let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.bechAddress),
-               let outputParam = try? await outputCosmosChain.fetchChainParam() {
-                outputCosmosChain.mintscanChainParam = outputParam
+               let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.bechAddress) {
                 outputCosmosChain.cosmosAuth = outputAuth?.account ?? Google_Protobuf_Any()
                 outputCosmosChain.cosmosBalances = outputBal!
                 WUtils.onParseVestingAccount(outputCosmosChain)
@@ -678,9 +674,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                         
                         let inputChannel = getConnection(inputCosmosChain)
                         if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.bechAddress),
-                           let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.bechAddress),
-                           let inputParam = try? await inputCosmosChain.fetchChainParam() {
-                            inputCosmosChain.mintscanChainParam = inputParam
+                           let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.bechAddress) {
                             inputCosmosChain.cosmosAuth = inputAuth?.account ?? Google_Protobuf_Any()
                             inputCosmosChain.cosmosBalances = inputBal!
                             WUtils.onParseVestingAccount(inputCosmosChain)
@@ -710,9 +704,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                         
                         let outputChannel = getConnection(outputCosmosChain)
                         if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.bechAddress),
-                           let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.bechAddress),
-                           let outputParam = try? await outputCosmosChain.fetchChainParam() {
-                            outputCosmosChain.mintscanChainParam = outputParam
+                           let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.bechAddress) {
                             outputCosmosChain.cosmosAuth = outputAuth?.account ?? Google_Protobuf_Any()
                             outputCosmosChain.cosmosBalances = outputBal!
                             WUtils.onParseVestingAccount(outputCosmosChain)

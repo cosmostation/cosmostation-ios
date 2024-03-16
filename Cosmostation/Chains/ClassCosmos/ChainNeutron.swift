@@ -41,8 +41,6 @@ class ChainNeutron: CosmosClass  {
     
     override func fetchData(_ id: Int64) {
         let group = DispatchGroup()
-        fetchChainParam2(group)
-        
         let channel = getConnection()
         cosmosAuth = nil
         cosmosBalances = nil
@@ -56,8 +54,8 @@ class ChainNeutron: CosmosClass  {
         group.notify(queue: .main) {
             try? channel.close()
             
-            self.vaultsList = self.getChainParam()["vaults"].arrayValue
-            self.daosList = self.getChainParam()["daos"].arrayValue
+            self.vaultsList = self.getChainListParam()["vaults"].arrayValue
+            self.daosList = self.getChainListParam()["daos"].arrayValue
             
             WUtils.onParseVestingAccount(self)
             self.fetched = true

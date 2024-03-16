@@ -94,9 +94,8 @@ class StakeDelegateCell: UITableViewCell {
                 rewardTitle.text = "Reward"
             }
             
-            
             //Display monthly est reward amount
-            let apr = NSDecimalNumber(string: baseChain.mintscanChainParam["params"]["apr"].string ?? "0")
+            let apr = NSDecimalNumber(string: baseChain.getChainParam()["params"]["apr"].string ?? "0")
             let staked = NSDecimalNumber(string: delegation.balance.amount)
             let comm = NSDecimalNumber.one.subtracting(NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18))
             let est = staked.multiplying(by: apr).multiplying(by: comm, withBehavior: handler0).dividing(by: NSDecimalNumber.init(string: "12"), withBehavior: handler0).multiplying(byPowerOf10: -msAsset.decimals!)

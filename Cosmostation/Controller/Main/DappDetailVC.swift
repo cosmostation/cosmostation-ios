@@ -444,10 +444,6 @@ extension CosmosClass {
             }
         }
     }
-    
-    func fetchFilteredChainParam() async throws -> JSON {
-        return try await AF.request(BaseNetWork.msChainParam(self), method: .get).serializingDecodable(JSON.self).value
-    }
 }
 
 extension DappDetailVC: WKScriptMessageHandler {
@@ -469,13 +465,6 @@ extension DappDetailVC: WKScriptMessageHandler {
                 
                 if let filteredChainsWithChainId = baseAccount.allCosmosClassChains.filter({ $0.chainId == chainId  && $0.isDefault == true }).first {
                     filteredChainsWithChainId.fetchFilteredCosmosChain(self.baseAccount)
-                    if (filteredChainsWithChainId.getChainParam().isEmpty == true) {
-                        Task {
-                            if let rawParam = try? await filteredChainsWithChainId.fetchChainParam() {
-                                filteredChainsWithChainId.mintscanChainParam = rawParam
-                            }
-                        }
-                    }
                     
                     self.selectedChain = filteredChainsWithChainId
                     data["address"].stringValue = filteredChainsWithChainId.bechAddress
@@ -484,13 +473,6 @@ extension DappDetailVC: WKScriptMessageHandler {
                     
                 } else if let filteredChainWithChainName = baseAccount.allCosmosClassChains.filter({ $0.apiName == chainId && $0.isDefault == true }).first {
                     filteredChainWithChainName.fetchFilteredCosmosChain(self.baseAccount)
-                    if (filteredChainWithChainName.getChainParam().isEmpty == true) {
-                        Task {
-                            if let rawParam = try? await filteredChainWithChainName.fetchChainParam() {
-                                filteredChainWithChainName.mintscanChainParam = rawParam
-                            }
-                        }
-                    }
                     
                     self.selectedChain = filteredChainWithChainName
                     data["address"].stringValue = filteredChainWithChainName.bechAddress
@@ -708,13 +690,6 @@ extension DappDetailVC {
             let proposalNamespace = namespaces.value
             if let currentChain = baseAccount.allCosmosClassChains.filter({ $0.chainId == proposalNamespace.chains?.first?.reference }).first {
                 currentChain.fetchFilteredCosmosChain(self.baseAccount)
-                if (currentChain.getChainParam().isEmpty == true) {
-                    Task {
-                        if let rawParam = try? await currentChain.fetchChainParam() {
-                            currentChain.mintscanChainParam = rawParam
-                        }
-                    }
-                }
                 
                 self.selectedChain = currentChain
                 let accounts = Set(namespaces.value.chains!.filter { chain in

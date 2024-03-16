@@ -42,7 +42,6 @@ class CosmosClass: BaseChain {
     lazy var cosmosValidators = Array<Cosmos_Staking_V1beta1_Validator>()
     
     lazy var mintscanCw20Tokens = [MintscanToken]()
-    lazy var mintscanChainParam = JSON()
     
     //get bech style info from seed
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
@@ -66,7 +65,6 @@ class CosmosClass: BaseChain {
     
     override func fetchData(_ id: Int64) {
         let group = DispatchGroup()
-        fetchChainParam2(group)
         if (supportCw20) {
             fetchCw20Info(group)
         }
@@ -216,19 +214,19 @@ class CosmosClass: BaseChain {
 extension CosmosClass {
     
     func getChainParam() -> JSON {
-        let chainlist_params = mintscanChainParam["params"]["chainlist_params"]
-        if (!chainlist_params.isEmpty) {
-            return chainlist_params
-        }
-        return mintscanChainParam
+        return BaseData.instance.mintscanChainParams?[apiName] ?? JSON()
+    }
+    
+    func getChainListParam() -> JSON {
+        return getChainParam()["params"]["chainlist_params"] ?? JSON()
     }
     
     func isGasSimulable() -> Bool {
-        return getChainParam()["fee"]["isSimulable"].bool ?? true
+        return getChainListParam()["fee"]["isSimulable"].bool ?? true
     }
     
     func isBankLocked() -> Bool {
-        return getChainParam()["isBankLocked"].bool ?? false
+        return getChainListParam()["isBankLocked"].bool ?? false
     }
     
     func feeThreshold() -> String? {
@@ -236,12 +234,12 @@ extension CosmosClass {
     }
     
     func voteThreshold() -> NSDecimalNumber {
-        let threshold = getChainParam()["voting_threshold"].uInt64Value
+        let threshold = getChainListParam()["voting_threshold"].uInt64Value
         return NSDecimalNumber(value: threshold)
     }
     
     func gasMultiply() -> Double {
-        if let mutiply = getChainParam()["fee"]["simul_gas_multiply"].double {
+        if let mutiply = getChainListParam()["fee"]["simul_gas_multiply"].double {
             return mutiply
         }
         return 1.2
@@ -249,7 +247,7 @@ extension CosmosClass {
     
     func getFeeInfos() -> [FeeInfo] {
         var result = [FeeInfo]()
-        getChainParam()["fee"]["rate"].arrayValue.forEach { rate in
+        getChainListParam()["fee"]["rate"].arrayValue.forEach { rate in
             result.append(FeeInfo.init(rate.stringValue))
         }
         if (result.count == 1) {
@@ -278,11 +276,11 @@ extension CosmosClass {
     }
     
     func getFeeBasePosition() -> Int {
-        return getChainParam()["fee"]["base"].intValue
+        return getChainListParam()["fee"]["base"].intValue
     }
     
     func getFeeBaseGasAmount() -> UInt64 {
-        guard let limit = getChainParam()["fee"]["init_gas_limit"].uInt64 else {
+        guard let limit = getChainListParam()["fee"]["init_gas_limit"].uInt64 else {
             return UInt64(BASE_GAS_AMOUNT)!
         }
         return limit
@@ -343,26 +341,6 @@ extension CosmosClass {
 //about mintscan api
 extension CosmosClass {
     
-    func fetchChainParam() async throws -> JSON {
-//        print("fetchChainParam ", BaseNetWork.msChainParam(self))
-        return try await AF.request(BaseNetWork.msChainParam(self), method: .get).serializingDecodable(JSON.self).value
-    }
-    
-    func fetchChainParam2(_ group: DispatchGroup) {
-        group.enter()
-//        print("fetchChainParam2 ", BaseNetWork.msChainParam(self))
-        AF.request(BaseNetWork.msChainParam(self), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let value):
-                    self.mintscanChainParam = value
-                case .failure:
-                    print("fetchChainParam2 error", self.tag)
-                }
-                group.leave()
-            }
-    }
-    
     func fetchCw20Info(_ group: DispatchGroup) {
         group.enter()
 //        print("fetchCw20Info ", BaseNetWork.msCw20InfoUrl(self))
@@ -377,7 +355,6 @@ extension CosmosClass {
                 group.leave()
             }
     }
-    
 }
 
 

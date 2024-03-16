@@ -59,7 +59,6 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
                 
             case .failure:
                 self.onShowNetworkAlert()
-                
             }
         }
     }

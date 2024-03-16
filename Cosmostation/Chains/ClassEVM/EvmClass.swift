@@ -55,7 +55,6 @@ class EvmClass: CosmosClass {
     
     override func fetchData(_ id: Int64) {
         let group = DispatchGroup()
-        fetchChainParam2(group)
         fetchErc20Info2(group)
         fetchEvmBalance(group)
         

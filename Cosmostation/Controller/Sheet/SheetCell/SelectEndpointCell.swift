@@ -39,7 +39,7 @@ class SelectEndpointCell: UITableViewCell {
     
     func onBindGrpcEndpoint(_ position: Int, _ chain: BaseChain) {
         if let cosmosChain = chain as? CosmosClass {
-            let endpoint = cosmosChain.getChainParam()["grpc_endpoint"].arrayValue[position]
+            let endpoint = cosmosChain.getChainListParam()["grpc_endpoint"].arrayValue[position]
             providerLabel.text = endpoint["provider"].string
             endpointLabel.text = endpoint["url"].string
             endpointLabel.adjustsFontSizeToFitWidth = true
@@ -89,7 +89,7 @@ class SelectEndpointCell: UITableViewCell {
     
     func onBindEvmEndpoint(_ position: Int, _ chain: BaseChain) {
         if let evmChain = chain as? EvmClass {
-            let endpoint = evmChain.getChainParam()["evm_rpc_endpoint"].arrayValue[position]
+            let endpoint = evmChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[position]
             providerLabel.text = endpoint["provider"].string
             endpointLabel.text = endpoint["url"].string?.replacingOccurrences(of: "https://", with: "")
             endpointLabel.adjustsFontSizeToFitWidth = true

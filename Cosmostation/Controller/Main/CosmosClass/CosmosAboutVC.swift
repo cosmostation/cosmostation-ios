@@ -31,7 +31,7 @@ class CosmosAboutVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        chainParam = selectedChain.mintscanChainParam
+        chainParam = selectedChain.getChainParam()
     }
     
     override func viewWillAppear(_ animated: Bool) {

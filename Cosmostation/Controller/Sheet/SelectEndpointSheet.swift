@@ -41,8 +41,8 @@ class SelectEndpointSheet: BaseVC {
         
         endpointTypeSegment.removeAllSegments()
         if let cosmosChain = targetChain as? CosmosClass {
-            gRPCList = cosmosChain.getChainParam()["grpc_endpoint"].array
-            evmRPCList = cosmosChain.getChainParam()["evm_rpc_endpoint"].array
+            gRPCList = cosmosChain.getChainListParam()["grpc_endpoint"].array
+            evmRPCList = cosmosChain.getChainListParam()["evm_rpc_endpoint"].array
             
             if (gRPCList != nil && evmRPCList == nil) {
                 seletcedType = EndPointType.gRPC
@@ -116,13 +116,13 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
         if (cell?.gapTime != nil) {
             if (tableView == grpcTableView) {
                 if let cosmosChain = targetChain as? CosmosClass {
-                    let endpoint = cosmosChain.getChainParam()["grpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                    let endpoint = cosmosChain.getChainListParam()["grpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
                     BaseData.instance.setGrpcEndpoint(cosmosChain, endpoint)
                 }
                 
             } else if (tableView == evmTableView) {
                 if let evmChain = targetChain as? EvmClass {
-                    let endpoint = evmChain.getChainParam()["evm_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                    let endpoint = evmChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
                     BaseData.instance.setEvmRpcEndpoint(evmChain, endpoint)
                 }
             }

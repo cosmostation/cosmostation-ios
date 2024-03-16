@@ -143,15 +143,6 @@ class BaseNetWork {
         return ResourceDappBase + "config.json"
     }
     
-    static func msChainParam(_ chain: BaseChain) -> String {
-        if let evmChain = chain as? EvmClass,
-           evmChain.supportCosmos == false {
-            return ResourceBase + chain.apiName + "/param.json"
-        } else {
-            return MINTSCAN_API_URL + "v10/utils/params/" + chain.apiName
-        }
-    }
-    
     static func msProposals(_ chain: BaseChain) -> String {
         return MINTSCAN_API_URL + "v10/" + chain.apiName + "/proposals"
     }

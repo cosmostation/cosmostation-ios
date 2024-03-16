@@ -35,7 +35,6 @@ class AboutStakingCell: UITableViewCell {
     }
     
     func onBindStakingInfo(_ chain: CosmosClass, _ json: JSON) {
-        
         let unbondingSec = json["params"]["staking_params"]["params"]["unbonding_time"].stringValue.filter({ $0.isNumber })
         if let time = UInt64(unbondingSec) {
             let unbondingDay = UInt16(time / 24 / 60 / 60)
