@@ -605,14 +605,18 @@ extension CosmosClass {
     func rewardAllCoins() -> [Cosmos_Base_V1beta1_Coin] {
         var result = [Cosmos_Base_V1beta1_Coin]()
         cosmosRewards.forEach({ reward in
-            reward.reward.forEach { coin in
-                let calAmount = NSDecimalNumber(string: coin.amount) .multiplying(byPowerOf10: -18, withBehavior: handler0Down)
-                if (calAmount != NSDecimalNumber.zero) {
-                    let calReward = Cosmos_Base_V1beta1_Coin.with {
-                        $0.denom = coin.denom;
-                        $0.amount = calAmount.stringValue
+            reward.reward.forEach { deCoin in
+                if BaseData.instance.getAsset(apiName, deCoin.denom) != nil {
+                    let deCoinAmount = deCoin.getAmount()
+                    if (deCoinAmount != NSDecimalNumber.zero) {
+                        if let index = result.firstIndex(where: { $0.denom == deCoin.denom }) {
+                            let exist = NSDecimalNumber(string: result[index].amount)
+                            let addes = exist.adding(deCoinAmount)
+                            result[index].amount = addes.stringValue
+                        } else {
+                            result.append(Cosmos_Base_V1beta1_Coin(deCoin.denom, deCoinAmount))
+                        }
                     }
-                    result.append(calReward)
                 }
             }
         })
