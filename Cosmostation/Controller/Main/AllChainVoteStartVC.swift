@@ -122,7 +122,6 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
     
     func onUpdateView() {
         titleLabel.isHidden = false
-        voteBtn.isHidden = false
         voteBtn.isEnabled = false
         emptyView.isHidden = true
         filterBtn.isHidden = false
@@ -157,6 +156,8 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
         
         if (toDisplayInfos.count == 0) {
             emptyView.isHidden = false
+        } else {
+            voteBtn.isHidden = false
         }
         tableView.isHidden = false
         tableView.reloadData()
