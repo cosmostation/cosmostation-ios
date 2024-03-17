@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,26 +27,26 @@
                         <rect key="frame" x="8" y="4" width="556" height="72"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="ndq-Qr-WPk">
-                                <rect key="frame" x="16" y="16" width="20" height="20"/>
+                                <rect key="frame" x="12" y="10" width="28" height="28"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="cNa-Dw-2y4"/>
-                                    <constraint firstAttribute="width" constant="20" id="s8m-NB-OBn"/>
+                                    <constraint firstAttribute="height" constant="28" id="cNa-Dw-2y4"/>
+                                    <constraint firstAttribute="width" constant="28" id="s8m-NB-OBn"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rH2-b3-aao">
-                                <rect key="frame" x="40" y="17.333333333333329" width="40.666666666666657" height="17.666666666666671"/>
+                                <rect key="frame" x="44" y="15.33333333333333" width="40.666666666666657" height="17.666666666666671"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuX-xC-DfQ">
-                                <rect key="frame" x="18" y="42" width="486" height="15.333333333333336"/>
+                                <rect key="frame" x="14" y="44" width="490" height="15.333333333333336"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNA-VT-IUR">
-                                <rect key="frame" x="384" y="18.333333333333332" width="120" height="15.333333333333332"/>
+                                <rect key="frame" x="384" y="16.333333333333332" width="120" height="15.333333333333332"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="dtR-6F-n48"/>
                                 </constraints>
@@ -74,8 +74,8 @@
                             <constraint firstAttribute="trailing" secondItem="Y8L-Fz-jx7" secondAttribute="trailing" id="MWM-Vv-kGZ"/>
                             <constraint firstItem="YuX-xC-DfQ" firstAttribute="top" secondItem="ndq-Qr-WPk" secondAttribute="bottom" constant="6" id="NO4-y6-blx"/>
                             <constraint firstItem="rH2-b3-aao" firstAttribute="leading" secondItem="ndq-Qr-WPk" secondAttribute="trailing" constant="4" id="cn6-bF-VeP"/>
-                            <constraint firstItem="ndq-Qr-WPk" firstAttribute="top" secondItem="D98-tm-Xkr" secondAttribute="top" constant="16" id="dRV-8W-BSc"/>
-                            <constraint firstItem="ndq-Qr-WPk" firstAttribute="leading" secondItem="D98-tm-Xkr" secondAttribute="leading" constant="16" id="rBP-Xe-Dzy"/>
+                            <constraint firstItem="ndq-Qr-WPk" firstAttribute="top" secondItem="D98-tm-Xkr" secondAttribute="top" constant="10" id="dRV-8W-BSc"/>
+                            <constraint firstItem="ndq-Qr-WPk" firstAttribute="leading" secondItem="D98-tm-Xkr" secondAttribute="leading" constant="12" id="rBP-Xe-Dzy"/>
                             <constraint firstAttribute="height" constant="72" id="tct-pZ-OHV"/>
                             <constraint firstItem="nNA-VT-IUR" firstAttribute="trailing" secondItem="YuX-xC-DfQ" secondAttribute="trailing" id="v7C-4d-ezT"/>
                         </constraints>
