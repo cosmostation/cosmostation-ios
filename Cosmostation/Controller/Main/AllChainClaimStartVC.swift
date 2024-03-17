@@ -39,7 +39,7 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
         loadingView.play()
         
         cntLabel.isHidden = true
-        tableView.isHidden = true
+        tableView.isHidden = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -93,22 +93,23 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
                     valueableRewards.append((chain, valueableReward, nil, false, nil))
                 }
             }
-            
-            cntLabel.text = String(valueableRewards.count)
-            loadingView.isHidden = true
-            
-            if (valueableRewards.count == 0) {
-                emptyView.isHidden = false
-                claimBtn.isHidden = true
-                
-            } else {
-                cntLabel.isHidden = false
-                tableView.isHidden = false
-                tableView.reloadData()
-                
-                onSimul()
-            }
+            onUpdateview()
+            onSimul()
         }
+    }
+    
+    func onUpdateview() {
+        cntLabel.text = String(valueableRewards.count)
+        loadingView.isHidden = true
+        if (valueableRewards.count == 0) {
+            emptyView.isHidden = false
+            claimBtn.isHidden = true
+            
+        } else {
+            cntLabel.isHidden = false
+        }
+        tableView.isHidden = false
+        tableView.reloadData()
     }
     
     func onSimul() {
@@ -222,6 +223,18 @@ extension AllChainClaimStartVC: UITableViewDelegate, UITableViewDataSource {
                            valueableRewards[indexPath.row].2, valueableRewards[indexPath.row].3,
                            valueableRewards[indexPath.row].4)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if (valueableRewards[indexPath.row].2 == nil) { return nil }
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completion in
+            self.valueableRewards.remove(at: indexPath.row)
+            self.onUpdateview()
+            completion(true)
+        }
+        deleteAction.backgroundColor = .colorBg
+        deleteAction.image = UIImage(systemName: "trash")
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
 }

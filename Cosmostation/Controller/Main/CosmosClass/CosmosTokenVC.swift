@@ -36,14 +36,7 @@ class CosmosTokenVC: BaseVC {
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
         
-        
         onUpdateView()
-//        if (selectedChain is EvmClass) {
-//            onUpdateView()
-//        } else {
-//            onRequestFetch()
-//        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -192,24 +185,6 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             return
             
         }
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        if (indexPath.section == 0) {
-//            let transfer = CosmosTransfer(nibName: "CosmosTransfer", bundle: nil)
-//            transfer.selectedChain = selectedChain
-//            transfer.toSendDenom = mintscanCw20Tokens[indexPath.row].address
-//            transfer.modalTransitionStyle = .coverVertical
-//            self.present(transfer, animated: true)
-//            
-//        } else {
-//            let transfer = Erc20Transfer(nibName: "Erc20Transfer", bundle: nil)
-//            transfer.selectedChain = selectedChain
-//            transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].address
-//            transfer.modalTransitionStyle = .coverVertical
-//            self.present(transfer, animated: true)
-//        }
     }
     
     
