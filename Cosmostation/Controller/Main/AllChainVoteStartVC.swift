@@ -367,6 +367,30 @@ extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
             self.onShowSafariWeb(url)
         }
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completion in
+            if (self.toDisplayInfos[indexPath.section].isBusy == true) { return }
+            if (self.toDisplayInfos[indexPath.section].txResponse != nil) { return }
+            if (self.toDisplayInfos[indexPath.section].msProposals.count > 1) {
+                self.toDisplayInfos[indexPath.section].msProposals.remove(at: indexPath.row)
+                self.onSectionReload(indexPath.section)
+                self.onSimul(indexPath.section)
+                
+            } else {
+                self.toDisplayInfos.remove(at: indexPath.section)
+                if (self.toDisplayInfos.count == 0) {
+                    self.emptyView.isHidden = false
+                    self.voteBtn.isEnabled = false
+                }
+                self.tableView.reloadData()
+            }
+            completion(true)
+        }
+        deleteAction.backgroundColor = .colorBg
+        deleteAction.image = UIImage(systemName: "trash")
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }
 
 extension AllChainVoteStartVC {

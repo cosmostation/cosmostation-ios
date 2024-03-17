@@ -93,12 +93,12 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
                     valueableRewards.append((chain, valueableReward, nil, false, nil))
                 }
             }
-            onUpdateview()
+            onUpdateView()
             onSimul()
         }
     }
     
-    func onUpdateview() {
+    func onUpdateView() {
         cntLabel.text = String(valueableRewards.count)
         loadingView.isHidden = true
         if (valueableRewards.count == 0) {
@@ -229,7 +229,7 @@ extension AllChainClaimStartVC: UITableViewDelegate, UITableViewDataSource {
         if (valueableRewards[indexPath.row].2 == nil) { return nil }
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completion in
             self.valueableRewards.remove(at: indexPath.row)
-            self.onUpdateview()
+            self.onUpdateView()
             completion(true)
         }
         deleteAction.backgroundColor = .colorBg
