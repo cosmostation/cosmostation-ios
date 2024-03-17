@@ -52,7 +52,7 @@ class VoteAllChainCell: UITableViewCell {
     func onBindVote(_ proposal: MintscanProposal, _ myVotes: [MintscanMyVotes]) {
         let title = "# ".appending(String(proposal.id!)).appending("  ").appending(proposal.title ?? "")
         titleLabel.text = title
-        timeLabel.text = WDP.dpTime(proposal.voting_end_time).appending(" ").appending(WDP.dpTimeGap(proposal.voting_end_time))
+        timeLabel.text = WDP.dpFullTime(proposal.voting_end_time).appending(" ").appending(WDP.dpTimeGap(proposal.voting_end_time))
         
         
         if (proposal.toVoteOption == Cosmos_Gov_V1beta1_VoteOption.yes) {
