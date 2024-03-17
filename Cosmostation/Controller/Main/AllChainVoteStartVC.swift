@@ -382,6 +382,13 @@ extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
                 if (self.toDisplayInfos.count == 0) {
                     self.emptyView.isHidden = false
                     self.voteBtn.isEnabled = false
+                    self.voteBtn.isHidden = true
+                } else {
+                    DispatchQueue.main.async {
+                        if (self.toDisplayInfos.filter { $0.toVotes == [] || $0.txFee == nil }.count == 0) {
+                            self.voteBtn.isEnabled = true
+                        }
+                    }
                 }
                 self.tableView.reloadData()
             }
