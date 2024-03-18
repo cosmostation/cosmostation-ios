@@ -20,8 +20,10 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var claimBtn: BaseButton!
     @IBOutlet weak var confirmBtn: BaseButton!
-    @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var lodingView: UIView!
+    @IBOutlet weak var lottieView: LottieAnimationView!
+    @IBOutlet weak var progressLabel: UILabel!
     
     var valueableRewards = [(CosmosClass, [Cosmos_Distribution_V1beta1_DelegationDelegatorReward], 
                              Cosmos_Tx_V1beta1_Fee?, Bool, Cosmos_Tx_V1beta1_GetTxResponse?)] ()
@@ -31,12 +33,11 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
         
         baseAccount = BaseData.instance.baseAccount
         
-        loadingView.isHidden = false
-        loadingView.animation = LottieAnimation.named("loading")
-        loadingView.contentMode = .scaleAspectFit
-        loadingView.loopMode = .loop
-        loadingView.animationSpeed = 1.3
-        loadingView.play()
+        lottieView.animation = LottieAnimation.named("loading")
+        lottieView.contentMode = .scaleAspectFit
+        lottieView.loopMode = .loop
+        lottieView.animationSpeed = 1.3
+        lottieView.play()
         
         cntLabel.isHidden = true
         tableView.isHidden = false
@@ -95,12 +96,21 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
             }
             onUpdateView()
             onSimul()
+            
+        } else {
+            DispatchQueue.main.async(execute: {
+                let totalCnt = self.baseAccount.getDisplayCosmosChains().count +
+                                self.baseAccount.getDisplayEvmChains().count
+                let checkedCnt = self.baseAccount.getDisplayCosmosChains().filter { $0.fetched == true }.count +
+                                    self.baseAccount.getDisplayEvmChains().filter { $0.fetched == true }.count
+                self.progressLabel.text = "Checked " + String(checkedCnt) +  "/" +  String(totalCnt)
+            })
         }
     }
     
     func onUpdateView() {
         cntLabel.text = String(valueableRewards.count)
-        loadingView.isHidden = true
+        lodingView.isHidden = true
         if (valueableRewards.count == 0) {
             emptyView.isHidden = false
             claimBtn.isHidden = true
