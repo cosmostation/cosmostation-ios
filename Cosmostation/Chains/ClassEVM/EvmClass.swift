@@ -174,11 +174,6 @@ class EvmClass: CosmosClass {
 
 extension EvmClass {
     
-    func fetchErc20Info() async throws -> [MintscanToken] {
-//        print("fetchErc20Info ", BaseNetWork.msErc20InfoUrl(self))
-        return try await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
-    }
-    
     func fetchErc20Info2(_ group: DispatchGroup) {
 //        print("fetchErc20Info2 ", BaseNetWork.msErc20InfoUrl(self))
         group.enter()

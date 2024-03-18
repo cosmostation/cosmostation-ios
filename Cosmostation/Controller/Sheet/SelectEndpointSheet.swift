@@ -48,11 +48,13 @@ class SelectEndpointSheet: BaseVC {
                 seletcedType = EndPointType.gRPC
                 titleLabel.text = NSLocalizedString("title_select_end_point", comment: "") + "  (gRPC)"
                 endpointTypeSegment.isHidden = true
+                evmTableView.isHidden = true
                 
             } else if (gRPCList == nil && evmRPCList != nil) {
                 seletcedType = EndPointType.evmRPC
                 titleLabel.text = NSLocalizedString("title_select_end_point", comment: "") + "  (evm RPC)"
                 endpointTypeSegment.isHidden = true
+                grpcTableView.isHidden = true
                 
             } else if (gRPCList != nil && evmRPCList != nil) {
                 titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
