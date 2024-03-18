@@ -1736,6 +1736,8 @@
 		E1945E50222E842B00A1436F /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E4F222E842B00A1436F /* BaseVC.swift */; };
 		E1945E52223124F000A1436F /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E51223124F000A1436F /* BaseData.swift */; };
 		E1945E542231256800A1436F /* BaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E532231256800A1436F /* BaseConstant.swift */; };
+		E1989BF72BA81763009B5619 /* ChainBaseEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1989BF62BA81763009B5619 /* ChainBaseEVM.swift */; };
+		E1989BF82BA81763009B5619 /* ChainBaseEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1989BF62BA81763009B5619 /* ChainBaseEVM.swift */; };
 		E19993EA2B295873000F4A6B /* loadingSmallWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = E19993E92B295873000F4A6B /* loadingSmallWhite.json */; };
 		E19993EB2B295873000F4A6B /* loadingSmallWhite.json in Resources */ = {isa = PBXBuildFile; fileRef = E19993E92B295873000F4A6B /* loadingSmallWhite.json */; };
 		E19E8B3D2A92290800001BF5 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19E8B3C2A92290800001BF5 /* UIColor+Colors.swift */; };
@@ -2700,6 +2702,7 @@
 		E1945E4F222E842B00A1436F /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		E1945E51223124F000A1436F /* BaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
 		E1945E532231256800A1436F /* BaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConstant.swift; sourceTree = "<group>"; };
+		E1989BF62BA81763009B5619 /* ChainBaseEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBaseEVM.swift; sourceTree = "<group>"; };
 		E19993E92B295873000F4A6B /* loadingSmallWhite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingSmallWhite.json; sourceTree = "<group>"; };
 		E19E8B3C2A92290800001BF5 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		E19E8B3F2A92299700001BF5 /* UIFont+Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Fonts.swift"; sourceTree = "<group>"; };
@@ -2894,6 +2897,7 @@
 				04CB911A2A90C41E00375354 /* EvmClass.swift */,
 				04D279EF2A67C98E00AF046A /* ChainEthereum.swift */,
 				04C63D322B87619900D4A366 /* ChainAltheaEVM.swift */,
+				E1989BF62BA81763009B5619 /* ChainBaseEVM.swift */,
 				04C63D382B87653C00D4A366 /* ChainCantoEVM.swift */,
 				04C63D3E2B8A1AA300D4A366 /* ChainDymensionEVM.swift */,
 				04C63D2F2B875F1800D4A366 /* ChainEvmosEVM.swift */,
@@ -5010,6 +5014,7 @@
 				04CFF0342AC58D4400FB3187 /* SelectFeeCoinCell.swift in Sources */,
 				18FFB41E281AF533004E65BB /* BinanceSegwitAddrCoder.swift in Sources */,
 				181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */,
+				E1989BF82BA81763009B5619 /* ChainBaseEVM.swift in Sources */,
 				E11069B92AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.pb.swift in Sources */,
 				047843962AC991B300462F1C /* injective_peggy_v1_msgs.pb.swift in Sources */,
 				046EA8742AD04A2500A2FCE7 /* desmos_profiles_v3_query_app_links.pb.swift in Sources */,
@@ -5744,6 +5749,7 @@
 				046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */,
 				04CFF0332AC58D4400FB3187 /* SelectFeeCoinCell.swift in Sources */,
 				E11069B82AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.pb.swift in Sources */,
+				E1989BF72BA81763009B5619 /* ChainBaseEVM.swift in Sources */,
 				E122DBF92A8A468E006D1E7B /* cosmos_genutil_module_v1_module.pb.swift in Sources */,
 				E122DBAD2A8A468D006D1E7B /* cosmos_params_module_v1_module.pb.swift in Sources */,
 				047843952AC991B300462F1C /* injective_peggy_v1_msgs.pb.swift in Sources */,

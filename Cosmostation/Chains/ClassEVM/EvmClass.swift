@@ -255,6 +255,7 @@ func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
 //    result.append(ChainAltheaEVM())
+    result.append(ChainBaseEVM())
     result.append(ChainCantoEVM())
     result.append(ChainDymensionEVM())
     result.append(ChainEvmosEVM())

@@ -1,32 +1,32 @@
 //
-//  ChainOptimism.swift
+//  ChainBaseEVM.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2024/02/27.
+//  Created by yongjoo jung on 2024/03/18.
 //  Copyright © 2024 wannabit. All rights reserved.
 //
 
 import Foundation
 
-class ChainOptimism: EvmClass  {
+class ChainBaseEVM: EvmClass  {
     
     override init() {
         super.init()
         
-        name = "Optimism"
-        tag = "optimism60"
-        logo1 = "chainOptimism"
-        logo2 = "chainOptimism2"
-        apiName = "optimism"
+        name = "Base"
+        tag = "base60"
+        logo1 = "chainBase"
+        logo2 = "chainBase2"
+        apiName = "base"
         
         coinSymbol = "ETH"
         coinGeckoId = "weth"
-        coinLogo = "tokenEth_Op"
+        coinLogo = "tokenEth_base"
         
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
-        evmRpcURL = "https://mainnet.optimism.io"
-        explorerURL = "https://optimistic.etherscan.io/"
+        evmRpcURL = "https://mainnet.base.org"
+        explorerURL = "https://basescan.org/"
         addressURL = explorerURL + "address/%@"
         txURL = explorerURL + "tx/%@"
         
