@@ -128,6 +128,64 @@ extension Cosmos_Staking_V1beta1_Infraction: CaseIterable {
 
 #endif  // swift(>=4.2)
 
+/// TokenizeShareLockStatus indicates whether the address is able to tokenize shares
+enum Cosmos_Staking_V1beta1_TokenizeShareLockStatus: SwiftProtobuf.Enum {
+  typealias RawValue = Int
+
+  /// UNSPECIFIED defines an empty tokenize share lock status
+  case unspecified // = 0
+
+  /// LOCKED indicates the account is locked and cannot tokenize shares
+  case locked // = 1
+
+  /// UNLOCKED indicates the account is unlocked and can tokenize shares
+  case unlocked // = 2
+
+  /// LOCK_EXPIRING indicates the account is unable to tokenize shares, but
+  /// will be able to tokenize shortly (after 1 unbonding period)
+  case lockExpiring // = 3
+  case UNRECOGNIZED(Int)
+
+  init() {
+    self = .unspecified
+  }
+
+  init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unspecified
+    case 1: self = .locked
+    case 2: self = .unlocked
+    case 3: self = .lockExpiring
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  var rawValue: Int {
+    switch self {
+    case .unspecified: return 0
+    case .locked: return 1
+    case .unlocked: return 2
+    case .lockExpiring: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension Cosmos_Staking_V1beta1_TokenizeShareLockStatus: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  static var allCases: [Cosmos_Staking_V1beta1_TokenizeShareLockStatus] = [
+    .unspecified,
+    .locked,
+    .unlocked,
+    .lockExpiring,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
 /// HistoricalInfo contains header and validator information for a given block.
 /// It is stored as part of staking module's state, which persists the `n` most
 /// recent HistoricalInfo
@@ -325,9 +383,7 @@ struct Cosmos_Staking_V1beta1_Validator {
   /// Clears the value of `commission`. Subsequent reads from it will return its default value.
   mutating func clearCommission() {_uniqueStorage()._commission = nil}
 
-  /// min_self_delegation is the validator's self declared minimum self delegation.
-  ///
-  /// Since: cosmos-sdk 0.46
+  /// Deprecated: This field has been deprecated with LSM in favor of the validator bond
   var minSelfDelegation: String {
     get {return _storage._minSelfDelegation}
     set {_uniqueStorage()._minSelfDelegation = newValue}
@@ -343,6 +399,18 @@ struct Cosmos_Staking_V1beta1_Validator {
   var unbondingIds: [UInt64] {
     get {return _storage._unbondingIds}
     set {_uniqueStorage()._unbondingIds = newValue}
+  }
+
+  /// Number of shares self bonded from the validator
+  var validatorBondShares: String {
+    get {return _storage._validatorBondShares}
+    set {_uniqueStorage()._validatorBondShares = newValue}
+  }
+
+  /// Number of shares either tokenized or owned by a liquid staking provider
+  var liquidShares: String {
+    get {return _storage._liquidShares}
+    set {_uniqueStorage()._liquidShares = newValue}
   }
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -444,6 +512,9 @@ struct Cosmos_Staking_V1beta1_Delegation {
 
   /// shares define the delegation shares received.
   var shares: String = String()
+
+  /// has this delegation been marked as a validator self bond.
+  var validatorBond: Bool = false
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -602,6 +673,18 @@ struct Cosmos_Staking_V1beta1_Params {
   /// min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators
   var minCommissionRate: String = String()
 
+  /// validator_bond_factor is required as a safety check for tokenizing shares and
+  /// delegations from liquid staking providers
+  var validatorBondFactor: String = String()
+
+  /// global_liquid_staking_cap represents a cap on the portion of stake that
+  /// comes from liquid staking providers
+  var globalLiquidStakingCap: String = String()
+
+  /// validator_liquid_staking_cap represents a cap on the portion of stake that
+  /// comes from liquid staking providers for a specific validator
+  var validatorLiquidStakingCap: String = String()
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -724,9 +807,45 @@ struct Cosmos_Staking_V1beta1_ValidatorUpdates {
   init() {}
 }
 
+/// TokenizeShareRecord represents a tokenized delegation
+struct Cosmos_Staking_V1beta1_TokenizeShareRecord {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var id: UInt64 = 0
+
+  var owner: String = String()
+
+  /// module account take the role of delegator
+  var moduleAccount: String = String()
+
+  /// validator delegated to for tokenize share record creation
+  var validator: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// PendingTokenizeShareAuthorizations stores a list of addresses that have their
+/// tokenize share enablement in progress
+struct Cosmos_Staking_V1beta1_PendingTokenizeShareAuthorizations {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var addresses: [String] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Cosmos_Staking_V1beta1_BondStatus: @unchecked Sendable {}
 extension Cosmos_Staking_V1beta1_Infraction: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_TokenizeShareLockStatus: @unchecked Sendable {}
 extension Cosmos_Staking_V1beta1_HistoricalInfo: @unchecked Sendable {}
 extension Cosmos_Staking_V1beta1_CommissionRates: @unchecked Sendable {}
 extension Cosmos_Staking_V1beta1_Commission: @unchecked Sendable {}
@@ -748,6 +867,8 @@ extension Cosmos_Staking_V1beta1_RedelegationEntryResponse: @unchecked Sendable 
 extension Cosmos_Staking_V1beta1_RedelegationResponse: @unchecked Sendable {}
 extension Cosmos_Staking_V1beta1_Pool: @unchecked Sendable {}
 extension Cosmos_Staking_V1beta1_ValidatorUpdates: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_TokenizeShareRecord: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_PendingTokenizeShareAuthorizations: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -768,6 +889,15 @@ extension Cosmos_Staking_V1beta1_Infraction: SwiftProtobuf._ProtoNameProviding {
     0: .same(proto: "INFRACTION_UNSPECIFIED"),
     1: .same(proto: "INFRACTION_DOUBLE_SIGN"),
     2: .same(proto: "INFRACTION_DOWNTIME"),
+  ]
+}
+
+extension Cosmos_Staking_V1beta1_TokenizeShareLockStatus: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "TOKENIZE_SHARE_LOCK_STATUS_UNSPECIFIED"),
+    1: .same(proto: "TOKENIZE_SHARE_LOCK_STATUS_LOCKED"),
+    2: .same(proto: "TOKENIZE_SHARE_LOCK_STATUS_UNLOCKED"),
+    3: .same(proto: "TOKENIZE_SHARE_LOCK_STATUS_LOCK_EXPIRING"),
   ]
 }
 
@@ -971,6 +1101,8 @@ extension Cosmos_Staking_V1beta1_Validator: SwiftProtobuf.Message, SwiftProtobuf
     11: .standard(proto: "min_self_delegation"),
     12: .standard(proto: "unbonding_on_hold_ref_count"),
     13: .standard(proto: "unbonding_ids"),
+    14: .standard(proto: "validator_bond_shares"),
+    15: .standard(proto: "liquid_shares"),
   ]
 
   fileprivate class _StorageClass {
@@ -987,6 +1119,8 @@ extension Cosmos_Staking_V1beta1_Validator: SwiftProtobuf.Message, SwiftProtobuf
     var _minSelfDelegation: String = String()
     var _unbondingOnHoldRefCount: Int64 = 0
     var _unbondingIds: [UInt64] = []
+    var _validatorBondShares: String = String()
+    var _liquidShares: String = String()
 
     static let defaultInstance = _StorageClass()
 
@@ -1006,6 +1140,8 @@ extension Cosmos_Staking_V1beta1_Validator: SwiftProtobuf.Message, SwiftProtobuf
       _minSelfDelegation = source._minSelfDelegation
       _unbondingOnHoldRefCount = source._unbondingOnHoldRefCount
       _unbondingIds = source._unbondingIds
+      _validatorBondShares = source._validatorBondShares
+      _liquidShares = source._liquidShares
     }
   }
 
@@ -1037,6 +1173,8 @@ extension Cosmos_Staking_V1beta1_Validator: SwiftProtobuf.Message, SwiftProtobuf
         case 11: try { try decoder.decodeSingularStringField(value: &_storage._minSelfDelegation) }()
         case 12: try { try decoder.decodeSingularInt64Field(value: &_storage._unbondingOnHoldRefCount) }()
         case 13: try { try decoder.decodeRepeatedUInt64Field(value: &_storage._unbondingIds) }()
+        case 14: try { try decoder.decodeSingularStringField(value: &_storage._validatorBondShares) }()
+        case 15: try { try decoder.decodeSingularStringField(value: &_storage._liquidShares) }()
         default: break
         }
       }
@@ -1088,6 +1226,12 @@ extension Cosmos_Staking_V1beta1_Validator: SwiftProtobuf.Message, SwiftProtobuf
       if !_storage._unbondingIds.isEmpty {
         try visitor.visitPackedUInt64Field(value: _storage._unbondingIds, fieldNumber: 13)
       }
+      if !_storage._validatorBondShares.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._validatorBondShares, fieldNumber: 14)
+      }
+      if !_storage._liquidShares.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._liquidShares, fieldNumber: 15)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -1110,6 +1254,8 @@ extension Cosmos_Staking_V1beta1_Validator: SwiftProtobuf.Message, SwiftProtobuf
         if _storage._minSelfDelegation != rhs_storage._minSelfDelegation {return false}
         if _storage._unbondingOnHoldRefCount != rhs_storage._unbondingOnHoldRefCount {return false}
         if _storage._unbondingIds != rhs_storage._unbondingIds {return false}
+        if _storage._validatorBondShares != rhs_storage._validatorBondShares {return false}
+        if _storage._liquidShares != rhs_storage._liquidShares {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -1303,6 +1449,7 @@ extension Cosmos_Staking_V1beta1_Delegation: SwiftProtobuf.Message, SwiftProtobu
     1: .standard(proto: "delegator_address"),
     2: .standard(proto: "validator_address"),
     3: .same(proto: "shares"),
+    4: .standard(proto: "validator_bond"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1314,6 +1461,7 @@ extension Cosmos_Staking_V1beta1_Delegation: SwiftProtobuf.Message, SwiftProtobu
       case 1: try { try decoder.decodeSingularStringField(value: &self.delegatorAddress) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.validatorAddress) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.shares) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.validatorBond) }()
       default: break
       }
     }
@@ -1329,6 +1477,9 @@ extension Cosmos_Staking_V1beta1_Delegation: SwiftProtobuf.Message, SwiftProtobu
     if !self.shares.isEmpty {
       try visitor.visitSingularStringField(value: self.shares, fieldNumber: 3)
     }
+    if self.validatorBond != false {
+      try visitor.visitSingularBoolField(value: self.validatorBond, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1336,6 +1487,7 @@ extension Cosmos_Staking_V1beta1_Delegation: SwiftProtobuf.Message, SwiftProtobu
     if lhs.delegatorAddress != rhs.delegatorAddress {return false}
     if lhs.validatorAddress != rhs.validatorAddress {return false}
     if lhs.shares != rhs.shares {return false}
+    if lhs.validatorBond != rhs.validatorBond {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1576,6 +1728,9 @@ extension Cosmos_Staking_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._M
     4: .standard(proto: "historical_entries"),
     5: .standard(proto: "bond_denom"),
     6: .standard(proto: "min_commission_rate"),
+    7: .standard(proto: "validator_bond_factor"),
+    8: .standard(proto: "global_liquid_staking_cap"),
+    9: .standard(proto: "validator_liquid_staking_cap"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1590,6 +1745,9 @@ extension Cosmos_Staking_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._M
       case 4: try { try decoder.decodeSingularUInt32Field(value: &self.historicalEntries) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self.bondDenom) }()
       case 6: try { try decoder.decodeSingularStringField(value: &self.minCommissionRate) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.validatorBondFactor) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.globalLiquidStakingCap) }()
+      case 9: try { try decoder.decodeSingularStringField(value: &self.validatorLiquidStakingCap) }()
       default: break
       }
     }
@@ -1618,6 +1776,15 @@ extension Cosmos_Staking_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._M
     if !self.minCommissionRate.isEmpty {
       try visitor.visitSingularStringField(value: self.minCommissionRate, fieldNumber: 6)
     }
+    if !self.validatorBondFactor.isEmpty {
+      try visitor.visitSingularStringField(value: self.validatorBondFactor, fieldNumber: 7)
+    }
+    if !self.globalLiquidStakingCap.isEmpty {
+      try visitor.visitSingularStringField(value: self.globalLiquidStakingCap, fieldNumber: 8)
+    }
+    if !self.validatorLiquidStakingCap.isEmpty {
+      try visitor.visitSingularStringField(value: self.validatorLiquidStakingCap, fieldNumber: 9)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1628,6 +1795,9 @@ extension Cosmos_Staking_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._M
     if lhs.historicalEntries != rhs.historicalEntries {return false}
     if lhs.bondDenom != rhs.bondDenom {return false}
     if lhs.minCommissionRate != rhs.minCommissionRate {return false}
+    if lhs.validatorBondFactor != rhs.validatorBondFactor {return false}
+    if lhs.globalLiquidStakingCap != rhs.globalLiquidStakingCap {return false}
+    if lhs.validatorLiquidStakingCap != rhs.validatorLiquidStakingCap {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1824,6 +1994,88 @@ extension Cosmos_Staking_V1beta1_ValidatorUpdates: SwiftProtobuf.Message, SwiftP
 
   static func ==(lhs: Cosmos_Staking_V1beta1_ValidatorUpdates, rhs: Cosmos_Staking_V1beta1_ValidatorUpdates) -> Bool {
     if lhs.updates != rhs.updates {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_TokenizeShareRecord: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".TokenizeShareRecord"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "id"),
+    2: .same(proto: "owner"),
+    3: .standard(proto: "module_account"),
+    4: .same(proto: "validator"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.id) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.owner) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.moduleAccount) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.validator) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.id != 0 {
+      try visitor.visitSingularUInt64Field(value: self.id, fieldNumber: 1)
+    }
+    if !self.owner.isEmpty {
+      try visitor.visitSingularStringField(value: self.owner, fieldNumber: 2)
+    }
+    if !self.moduleAccount.isEmpty {
+      try visitor.visitSingularStringField(value: self.moduleAccount, fieldNumber: 3)
+    }
+    if !self.validator.isEmpty {
+      try visitor.visitSingularStringField(value: self.validator, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_TokenizeShareRecord, rhs: Cosmos_Staking_V1beta1_TokenizeShareRecord) -> Bool {
+    if lhs.id != rhs.id {return false}
+    if lhs.owner != rhs.owner {return false}
+    if lhs.moduleAccount != rhs.moduleAccount {return false}
+    if lhs.validator != rhs.validator {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_PendingTokenizeShareAuthorizations: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".PendingTokenizeShareAuthorizations"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "addresses"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedStringField(value: &self.addresses) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.addresses.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.addresses, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_PendingTokenizeShareAuthorizations, rhs: Cosmos_Staking_V1beta1_PendingTokenizeShareAuthorizations) -> Bool {
+    if lhs.addresses != rhs.addresses {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -24,8 +24,11 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 enum Cosmos_Orm_V1alpha1_StorageType: SwiftProtobuf.Enum {
   typealias RawValue = Int
 
-  /// STORAGE_TYPE_DEFAULT_UNSPECIFIED indicates the persistent storage where all
-  /// data is stored in the regular Merkle-tree backed KV-store.
+  /// STORAGE_TYPE_DEFAULT_UNSPECIFIED indicates the persistent
+  /// KV-storage where primary key entries are stored in merkle-tree
+  /// backed commitment storage and indexes and seqs are stored in
+  /// fast index storage. Note that the Cosmos SDK before store/v2alpha1
+  /// does not support this.
   case defaultUnspecified // = 0
 
   /// STORAGE_TYPE_MEMORY indicates in-memory storage that will be
@@ -39,6 +42,21 @@ enum Cosmos_Orm_V1alpha1_StorageType: SwiftProtobuf.Enum {
   /// will by default be ignored when importing and exporting a module's
   /// state from JSON.
   case transient // = 2
+
+  /// STORAGE_TYPE_INDEX indicates persistent storage which is not backed
+  /// by a merkle-tree and won't affect the app hash. Note that the Cosmos SDK
+  /// before store/v2alpha1 does not support this.
+  case index // = 3
+
+  /// STORAGE_TYPE_INDEX indicates persistent storage which is backed by
+  /// a merkle-tree. With this type of storage, both primary and index keys
+  /// will affect the app hash and this is generally less efficient
+  /// than using STORAGE_TYPE_DEFAULT_UNSPECIFIED which separates index
+  /// keys into index storage. Note that modules built with the
+  /// Cosmos SDK before store/v2alpha1 must specify STORAGE_TYPE_COMMITMENT
+  /// instead of STORAGE_TYPE_DEFAULT_UNSPECIFIED or STORAGE_TYPE_INDEX
+  /// because this is the only type of persistent storage available.
+  case commitment // = 4
   case UNRECOGNIZED(Int)
 
   init() {
@@ -50,6 +68,8 @@ enum Cosmos_Orm_V1alpha1_StorageType: SwiftProtobuf.Enum {
     case 0: self = .defaultUnspecified
     case 1: self = .memory
     case 2: self = .transient
+    case 3: self = .index
+    case 4: self = .commitment
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -59,6 +79,8 @@ enum Cosmos_Orm_V1alpha1_StorageType: SwiftProtobuf.Enum {
     case .defaultUnspecified: return 0
     case .memory: return 1
     case .transient: return 2
+    case .index: return 3
+    case .commitment: return 4
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -73,6 +95,8 @@ extension Cosmos_Orm_V1alpha1_StorageType: CaseIterable {
     .defaultUnspecified,
     .memory,
     .transient,
+    .index,
+    .commitment,
   ]
 }
 
@@ -190,6 +214,8 @@ extension Cosmos_Orm_V1alpha1_StorageType: SwiftProtobuf._ProtoNameProviding {
     0: .same(proto: "STORAGE_TYPE_DEFAULT_UNSPECIFIED"),
     1: .same(proto: "STORAGE_TYPE_MEMORY"),
     2: .same(proto: "STORAGE_TYPE_TRANSIENT"),
+    3: .same(proto: "STORAGE_TYPE_INDEX"),
+    4: .same(proto: "STORAGE_TYPE_COMMITMENT"),
   ]
 }
 

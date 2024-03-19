@@ -79,11 +79,6 @@ struct Cosmos_Bank_V1beta1_QueryAllBalancesRequest {
   /// Clears the value of `pagination`. Subsequent reads from it will return its default value.
   mutating func clearPagination() {self._pagination = nil}
 
-  /// resolve_denom is the flag to resolve the denom into a human-readable form from the metadata.
-  ///
-  /// Since: cosmos-sdk 0.50
-  var resolveDenom: Bool = false
-
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -686,7 +681,6 @@ extension Cosmos_Bank_V1beta1_QueryAllBalancesRequest: SwiftProtobuf.Message, Sw
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "address"),
     2: .same(proto: "pagination"),
-    3: .standard(proto: "resolve_denom"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -697,7 +691,6 @@ extension Cosmos_Bank_V1beta1_QueryAllBalancesRequest: SwiftProtobuf.Message, Sw
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.address) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._pagination) }()
-      case 3: try { try decoder.decodeSingularBoolField(value: &self.resolveDenom) }()
       default: break
       }
     }
@@ -714,16 +707,12 @@ extension Cosmos_Bank_V1beta1_QueryAllBalancesRequest: SwiftProtobuf.Message, Sw
     try { if let v = self._pagination {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     } }()
-    if self.resolveDenom != false {
-      try visitor.visitSingularBoolField(value: self.resolveDenom, fieldNumber: 3)
-    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Cosmos_Bank_V1beta1_QueryAllBalancesRequest, rhs: Cosmos_Bank_V1beta1_QueryAllBalancesRequest) -> Bool {
     if lhs.address != rhs.address {return false}
     if lhs._pagination != rhs._pagination {return false}
-    if lhs.resolveDenom != rhs.resolveDenom {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -26,7 +26,7 @@ import NIOConcurrencyHelpers
 import SwiftProtobuf
 
 
-/// Msg defines the crisis Msg service.
+/// Msg defines the circuit Msg service.
 ///
 /// Usage: instantiate `Cosmos_Circuit_V1_MsgClient`, then call methods of this protocol to make API calls.
 internal protocol Cosmos_Circuit_V1_MsgClientProtocol: GRPCClient {
@@ -168,7 +168,7 @@ internal struct Cosmos_Circuit_V1_MsgNIOClient: Cosmos_Circuit_V1_MsgClientProto
   }
 }
 
-/// Msg defines the crisis Msg service.
+/// Msg defines the circuit Msg service.
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
 internal protocol Cosmos_Circuit_V1_MsgAsyncClientProtocol: GRPCClient {
   static var serviceDescriptor: GRPCServiceDescriptor { get }
@@ -337,7 +337,7 @@ internal enum Cosmos_Circuit_V1_MsgClientMetadata {
   }
 }
 
-/// Msg defines the crisis Msg service.
+/// Msg defines the circuit Msg service.
 ///
 /// To build a server, implement a class that conforms to this protocol.
 internal protocol Cosmos_Circuit_V1_MsgProvider: CallHandlerProvider {
@@ -400,7 +400,7 @@ extension Cosmos_Circuit_V1_MsgProvider {
   }
 }
 
-/// Msg defines the crisis Msg service.
+/// Msg defines the circuit Msg service.
 ///
 /// To implement a server, implement an object which conforms to this protocol.
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)

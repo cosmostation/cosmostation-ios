@@ -283,35 +283,6 @@ struct Cosmos_Base_Abci_V1beta1_SearchTxsResult {
   init() {}
 }
 
-/// SearchBlocksResult defines a structure for querying blocks pageable
-struct Cosmos_Base_Abci_V1beta1_SearchBlocksResult {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  /// Count of all blocks
-  var totalCount: Int64 = 0
-
-  /// Count of blocks in current page
-  var count: Int64 = 0
-
-  /// Index of current page, start from 1
-  var pageNumber: Int64 = 0
-
-  /// Count of total pages
-  var pageTotal: Int64 = 0
-
-  /// Max count blocks per page
-  var limit: Int64 = 0
-
-  /// List of blocks in current page
-  var blocks: [Tendermint_Types_Block] = []
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Cosmos_Base_Abci_V1beta1_TxResponse: @unchecked Sendable {}
 extension Cosmos_Base_Abci_V1beta1_ABCIMessageLog: @unchecked Sendable {}
@@ -323,7 +294,6 @@ extension Cosmos_Base_Abci_V1beta1_SimulationResponse: @unchecked Sendable {}
 extension Cosmos_Base_Abci_V1beta1_MsgData: @unchecked Sendable {}
 extension Cosmos_Base_Abci_V1beta1_TxMsgData: @unchecked Sendable {}
 extension Cosmos_Base_Abci_V1beta1_SearchTxsResult: @unchecked Sendable {}
-extension Cosmos_Base_Abci_V1beta1_SearchBlocksResult: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -821,68 +791,6 @@ extension Cosmos_Base_Abci_V1beta1_SearchTxsResult: SwiftProtobuf.Message, Swift
     if lhs.pageTotal != rhs.pageTotal {return false}
     if lhs.limit != rhs.limit {return false}
     if lhs.txs != rhs.txs {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Cosmos_Base_Abci_V1beta1_SearchBlocksResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".SearchBlocksResult"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "total_count"),
-    2: .same(proto: "count"),
-    3: .standard(proto: "page_number"),
-    4: .standard(proto: "page_total"),
-    5: .same(proto: "limit"),
-    6: .same(proto: "blocks"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularInt64Field(value: &self.totalCount) }()
-      case 2: try { try decoder.decodeSingularInt64Field(value: &self.count) }()
-      case 3: try { try decoder.decodeSingularInt64Field(value: &self.pageNumber) }()
-      case 4: try { try decoder.decodeSingularInt64Field(value: &self.pageTotal) }()
-      case 5: try { try decoder.decodeSingularInt64Field(value: &self.limit) }()
-      case 6: try { try decoder.decodeRepeatedMessageField(value: &self.blocks) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.totalCount != 0 {
-      try visitor.visitSingularInt64Field(value: self.totalCount, fieldNumber: 1)
-    }
-    if self.count != 0 {
-      try visitor.visitSingularInt64Field(value: self.count, fieldNumber: 2)
-    }
-    if self.pageNumber != 0 {
-      try visitor.visitSingularInt64Field(value: self.pageNumber, fieldNumber: 3)
-    }
-    if self.pageTotal != 0 {
-      try visitor.visitSingularInt64Field(value: self.pageTotal, fieldNumber: 4)
-    }
-    if self.limit != 0 {
-      try visitor.visitSingularInt64Field(value: self.limit, fieldNumber: 5)
-    }
-    if !self.blocks.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.blocks, fieldNumber: 6)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Cosmos_Base_Abci_V1beta1_SearchBlocksResult, rhs: Cosmos_Base_Abci_V1beta1_SearchBlocksResult) -> Bool {
-    if lhs.totalCount != rhs.totalCount {return false}
-    if lhs.count != rhs.count {return false}
-    if lhs.pageNumber != rhs.pageNumber {return false}
-    if lhs.pageTotal != rhs.pageTotal {return false}
-    if lhs.limit != rhs.limit {return false}
-    if lhs.blocks != rhs.blocks {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

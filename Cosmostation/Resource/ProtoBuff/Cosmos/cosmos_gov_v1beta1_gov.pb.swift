@@ -168,7 +168,7 @@ struct Cosmos_Gov_V1beta1_WeightedVoteOption {
   /// option defines the valid vote options, it must not contain duplicate vote options.
   var option: Cosmos_Gov_V1beta1_VoteOption = .unspecified
 
-  /// weight is the vote weight associated with the vote option.
+  /// weight is the vote weight associated with the vote option. 
   var weight: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()

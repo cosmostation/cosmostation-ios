@@ -52,7 +52,7 @@ struct Cosmos_Circuit_V1_MsgAuthorizeCircuitBreaker {
   fileprivate var _permissions: Cosmos_Circuit_V1_Permissions? = nil
 }
 
-/// MsgAuthorizeCircuitBreaker defines the Msg/AuthorizeCircuitBreaker response type.
+/// MsgAuthorizeCircuitBreakerResponse defines the Msg/AuthorizeCircuitBreaker response type.
 struct Cosmos_Circuit_V1_MsgAuthorizeCircuitBreakerResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -86,7 +86,7 @@ struct Cosmos_Circuit_V1_MsgTripCircuitBreaker {
   init() {}
 }
 
-/// MsgTripCircuitBreaker defines the Msg/TripCircuitBreaker response type.
+/// MsgTripCircuitBreakerResponse defines the Msg/TripCircuitBreaker response type.
 struct Cosmos_Circuit_V1_MsgTripCircuitBreakerResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for

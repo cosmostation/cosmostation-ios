@@ -33,11 +33,6 @@ internal protocol Cosmos_Gov_V1_QueryClientProtocol: GRPCClient {
   var serviceName: String { get }
   var interceptors: Cosmos_Gov_V1_QueryClientInterceptorFactoryProtocol? { get }
 
-  func constitution(
-    _ request: Cosmos_Gov_V1_QueryConstitutionRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Cosmos_Gov_V1_QueryConstitutionRequest, Cosmos_Gov_V1_QueryConstitutionResponse>
-
   func proposal(
     _ request: Cosmos_Gov_V1_QueryProposalRequest,
     callOptions: CallOptions?
@@ -82,24 +77,6 @@ internal protocol Cosmos_Gov_V1_QueryClientProtocol: GRPCClient {
 extension Cosmos_Gov_V1_QueryClientProtocol {
   internal var serviceName: String {
     return "cosmos.gov.v1.Query"
-  }
-
-  /// Constitution queries the chain's constitution.
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to Constitution.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func constitution(
-    _ request: Cosmos_Gov_V1_QueryConstitutionRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Cosmos_Gov_V1_QueryConstitutionRequest, Cosmos_Gov_V1_QueryConstitutionResponse> {
-    return self.makeUnaryCall(
-      path: Cosmos_Gov_V1_QueryClientMetadata.Methods.constitution.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeConstitutionInterceptors() ?? []
-    )
   }
 
   /// Proposal queries proposal details based on ProposalID.
@@ -310,11 +287,6 @@ internal protocol Cosmos_Gov_V1_QueryAsyncClientProtocol: GRPCClient {
   static var serviceDescriptor: GRPCServiceDescriptor { get }
   var interceptors: Cosmos_Gov_V1_QueryClientInterceptorFactoryProtocol? { get }
 
-  func makeConstitutionCall(
-    _ request: Cosmos_Gov_V1_QueryConstitutionRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Cosmos_Gov_V1_QueryConstitutionRequest, Cosmos_Gov_V1_QueryConstitutionResponse>
-
   func makeProposalCall(
     _ request: Cosmos_Gov_V1_QueryProposalRequest,
     callOptions: CallOptions?
@@ -364,18 +336,6 @@ extension Cosmos_Gov_V1_QueryAsyncClientProtocol {
 
   internal var interceptors: Cosmos_Gov_V1_QueryClientInterceptorFactoryProtocol? {
     return nil
-  }
-
-  internal func makeConstitutionCall(
-    _ request: Cosmos_Gov_V1_QueryConstitutionRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Cosmos_Gov_V1_QueryConstitutionRequest, Cosmos_Gov_V1_QueryConstitutionResponse> {
-    return self.makeAsyncUnaryCall(
-      path: Cosmos_Gov_V1_QueryClientMetadata.Methods.constitution.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeConstitutionInterceptors() ?? []
-    )
   }
 
   internal func makeProposalCall(
@@ -477,18 +437,6 @@ extension Cosmos_Gov_V1_QueryAsyncClientProtocol {
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
 extension Cosmos_Gov_V1_QueryAsyncClientProtocol {
-  internal func constitution(
-    _ request: Cosmos_Gov_V1_QueryConstitutionRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Cosmos_Gov_V1_QueryConstitutionResponse {
-    return try await self.performAsyncUnaryCall(
-      path: Cosmos_Gov_V1_QueryClientMetadata.Methods.constitution.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeConstitutionInterceptors() ?? []
-    )
-  }
-
   internal func proposal(
     _ request: Cosmos_Gov_V1_QueryProposalRequest,
     callOptions: CallOptions? = nil
@@ -605,9 +553,6 @@ internal struct Cosmos_Gov_V1_QueryAsyncClient: Cosmos_Gov_V1_QueryAsyncClientPr
 
 internal protocol Cosmos_Gov_V1_QueryClientInterceptorFactoryProtocol: Sendable {
 
-  /// - Returns: Interceptors to use when invoking 'constitution'.
-  func makeConstitutionInterceptors() -> [ClientInterceptor<Cosmos_Gov_V1_QueryConstitutionRequest, Cosmos_Gov_V1_QueryConstitutionResponse>]
-
   /// - Returns: Interceptors to use when invoking 'proposal'.
   func makeProposalInterceptors() -> [ClientInterceptor<Cosmos_Gov_V1_QueryProposalRequest, Cosmos_Gov_V1_QueryProposalResponse>]
 
@@ -638,7 +583,6 @@ internal enum Cosmos_Gov_V1_QueryClientMetadata {
     name: "Query",
     fullName: "cosmos.gov.v1.Query",
     methods: [
-      Cosmos_Gov_V1_QueryClientMetadata.Methods.constitution,
       Cosmos_Gov_V1_QueryClientMetadata.Methods.proposal,
       Cosmos_Gov_V1_QueryClientMetadata.Methods.proposals,
       Cosmos_Gov_V1_QueryClientMetadata.Methods.vote,
@@ -651,12 +595,6 @@ internal enum Cosmos_Gov_V1_QueryClientMetadata {
   )
 
   internal enum Methods {
-    internal static let constitution = GRPCMethodDescriptor(
-      name: "Constitution",
-      path: "/cosmos.gov.v1.Query/Constitution",
-      type: GRPCCallType.unary
-    )
-
     internal static let proposal = GRPCMethodDescriptor(
       name: "Proposal",
       path: "/cosmos.gov.v1.Query/Proposal",
@@ -713,9 +651,6 @@ internal enum Cosmos_Gov_V1_QueryClientMetadata {
 internal protocol Cosmos_Gov_V1_QueryProvider: CallHandlerProvider {
   var interceptors: Cosmos_Gov_V1_QueryServerInterceptorFactoryProtocol? { get }
 
-  /// Constitution queries the chain's constitution.
-  func constitution(request: Cosmos_Gov_V1_QueryConstitutionRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Gov_V1_QueryConstitutionResponse>
-
   /// Proposal queries proposal details based on ProposalID.
   func proposal(request: Cosmos_Gov_V1_QueryProposalRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Gov_V1_QueryProposalResponse>
 
@@ -753,15 +688,6 @@ extension Cosmos_Gov_V1_QueryProvider {
     context: CallHandlerContext
   ) -> GRPCServerHandlerProtocol? {
     switch name {
-    case "Constitution":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Cosmos_Gov_V1_QueryConstitutionRequest>(),
-        responseSerializer: ProtobufSerializer<Cosmos_Gov_V1_QueryConstitutionResponse>(),
-        interceptors: self.interceptors?.makeConstitutionInterceptors() ?? [],
-        userFunction: self.constitution(request:context:)
-      )
-
     case "Proposal":
       return UnaryServerHandler(
         context: context,
@@ -848,12 +774,6 @@ internal protocol Cosmos_Gov_V1_QueryAsyncProvider: CallHandlerProvider {
   static var serviceDescriptor: GRPCServiceDescriptor { get }
   var interceptors: Cosmos_Gov_V1_QueryServerInterceptorFactoryProtocol? { get }
 
-  /// Constitution queries the chain's constitution.
-  @Sendable func constitution(
-    request: Cosmos_Gov_V1_QueryConstitutionRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Cosmos_Gov_V1_QueryConstitutionResponse
-
   /// Proposal queries proposal details based on ProposalID.
   @Sendable func proposal(
     request: Cosmos_Gov_V1_QueryProposalRequest,
@@ -922,15 +842,6 @@ extension Cosmos_Gov_V1_QueryAsyncProvider {
     context: CallHandlerContext
   ) -> GRPCServerHandlerProtocol? {
     switch name {
-    case "Constitution":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Cosmos_Gov_V1_QueryConstitutionRequest>(),
-        responseSerializer: ProtobufSerializer<Cosmos_Gov_V1_QueryConstitutionResponse>(),
-        interceptors: self.interceptors?.makeConstitutionInterceptors() ?? [],
-        wrapping: self.constitution(request:context:)
-      )
-
     case "Proposal":
       return GRPCAsyncServerHandler(
         context: context,
@@ -1011,10 +922,6 @@ extension Cosmos_Gov_V1_QueryAsyncProvider {
 
 internal protocol Cosmos_Gov_V1_QueryServerInterceptorFactoryProtocol {
 
-  /// - Returns: Interceptors to use when handling 'constitution'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeConstitutionInterceptors() -> [ServerInterceptor<Cosmos_Gov_V1_QueryConstitutionRequest, Cosmos_Gov_V1_QueryConstitutionResponse>]
-
   /// - Returns: Interceptors to use when handling 'proposal'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeProposalInterceptors() -> [ServerInterceptor<Cosmos_Gov_V1_QueryProposalRequest, Cosmos_Gov_V1_QueryProposalResponse>]
@@ -1053,7 +960,6 @@ internal enum Cosmos_Gov_V1_QueryServerMetadata {
     name: "Query",
     fullName: "cosmos.gov.v1.Query",
     methods: [
-      Cosmos_Gov_V1_QueryServerMetadata.Methods.constitution,
       Cosmos_Gov_V1_QueryServerMetadata.Methods.proposal,
       Cosmos_Gov_V1_QueryServerMetadata.Methods.proposals,
       Cosmos_Gov_V1_QueryServerMetadata.Methods.vote,
@@ -1066,12 +972,6 @@ internal enum Cosmos_Gov_V1_QueryServerMetadata {
   )
 
   internal enum Methods {
-    internal static let constitution = GRPCMethodDescriptor(
-      name: "Constitution",
-      path: "/cosmos.gov.v1.Query/Constitution",
-      type: GRPCCallType.unary
-    )
-
     internal static let proposal = GRPCMethodDescriptor(
       name: "Proposal",
       path: "/cosmos.gov.v1.Query/Proposal",

@@ -37,11 +37,6 @@ internal protocol Cosmos_Base_Node_V1beta1_ServiceClientProtocol: GRPCClient {
     _ request: Cosmos_Base_Node_V1beta1_ConfigRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Cosmos_Base_Node_V1beta1_ConfigRequest, Cosmos_Base_Node_V1beta1_ConfigResponse>
-
-  func status(
-    _ request: Cosmos_Base_Node_V1beta1_StatusRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Cosmos_Base_Node_V1beta1_StatusRequest, Cosmos_Base_Node_V1beta1_StatusResponse>
 }
 
 extension Cosmos_Base_Node_V1beta1_ServiceClientProtocol {
@@ -64,24 +59,6 @@ extension Cosmos_Base_Node_V1beta1_ServiceClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeConfigInterceptors() ?? []
-    )
-  }
-
-  /// Status queries for the node status.
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to Status.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func status(
-    _ request: Cosmos_Base_Node_V1beta1_StatusRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Cosmos_Base_Node_V1beta1_StatusRequest, Cosmos_Base_Node_V1beta1_StatusResponse> {
-    return self.makeUnaryCall(
-      path: Cosmos_Base_Node_V1beta1_ServiceClientMetadata.Methods.status.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeStatusInterceptors() ?? []
     )
   }
 }
@@ -153,11 +130,6 @@ internal protocol Cosmos_Base_Node_V1beta1_ServiceAsyncClientProtocol: GRPCClien
     _ request: Cosmos_Base_Node_V1beta1_ConfigRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Cosmos_Base_Node_V1beta1_ConfigRequest, Cosmos_Base_Node_V1beta1_ConfigResponse>
-
-  func makeStatusCall(
-    _ request: Cosmos_Base_Node_V1beta1_StatusRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Cosmos_Base_Node_V1beta1_StatusRequest, Cosmos_Base_Node_V1beta1_StatusResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -181,18 +153,6 @@ extension Cosmos_Base_Node_V1beta1_ServiceAsyncClientProtocol {
       interceptors: self.interceptors?.makeConfigInterceptors() ?? []
     )
   }
-
-  internal func makeStatusCall(
-    _ request: Cosmos_Base_Node_V1beta1_StatusRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Cosmos_Base_Node_V1beta1_StatusRequest, Cosmos_Base_Node_V1beta1_StatusResponse> {
-    return self.makeAsyncUnaryCall(
-      path: Cosmos_Base_Node_V1beta1_ServiceClientMetadata.Methods.status.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeStatusInterceptors() ?? []
-    )
-  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -206,18 +166,6 @@ extension Cosmos_Base_Node_V1beta1_ServiceAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeConfigInterceptors() ?? []
-    )
-  }
-
-  internal func status(
-    _ request: Cosmos_Base_Node_V1beta1_StatusRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Cosmos_Base_Node_V1beta1_StatusResponse {
-    return try await self.performAsyncUnaryCall(
-      path: Cosmos_Base_Node_V1beta1_ServiceClientMetadata.Methods.status.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeStatusInterceptors() ?? []
     )
   }
 }
@@ -243,9 +191,6 @@ internal protocol Cosmos_Base_Node_V1beta1_ServiceClientInterceptorFactoryProtoc
 
   /// - Returns: Interceptors to use when invoking 'config'.
   func makeConfigInterceptors() -> [ClientInterceptor<Cosmos_Base_Node_V1beta1_ConfigRequest, Cosmos_Base_Node_V1beta1_ConfigResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'status'.
-  func makeStatusInterceptors() -> [ClientInterceptor<Cosmos_Base_Node_V1beta1_StatusRequest, Cosmos_Base_Node_V1beta1_StatusResponse>]
 }
 
 internal enum Cosmos_Base_Node_V1beta1_ServiceClientMetadata {
@@ -254,7 +199,6 @@ internal enum Cosmos_Base_Node_V1beta1_ServiceClientMetadata {
     fullName: "cosmos.base.node.v1beta1.Service",
     methods: [
       Cosmos_Base_Node_V1beta1_ServiceClientMetadata.Methods.config,
-      Cosmos_Base_Node_V1beta1_ServiceClientMetadata.Methods.status,
     ]
   )
 
@@ -262,12 +206,6 @@ internal enum Cosmos_Base_Node_V1beta1_ServiceClientMetadata {
     internal static let config = GRPCMethodDescriptor(
       name: "Config",
       path: "/cosmos.base.node.v1beta1.Service/Config",
-      type: GRPCCallType.unary
-    )
-
-    internal static let status = GRPCMethodDescriptor(
-      name: "Status",
-      path: "/cosmos.base.node.v1beta1.Service/Status",
       type: GRPCCallType.unary
     )
   }
@@ -281,9 +219,6 @@ internal protocol Cosmos_Base_Node_V1beta1_ServiceProvider: CallHandlerProvider 
 
   /// Config queries for the operator configuration.
   func config(request: Cosmos_Base_Node_V1beta1_ConfigRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Base_Node_V1beta1_ConfigResponse>
-
-  /// Status queries for the node status.
-  func status(request: Cosmos_Base_Node_V1beta1_StatusRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Base_Node_V1beta1_StatusResponse>
 }
 
 extension Cosmos_Base_Node_V1beta1_ServiceProvider {
@@ -307,15 +242,6 @@ extension Cosmos_Base_Node_V1beta1_ServiceProvider {
         userFunction: self.config(request:context:)
       )
 
-    case "Status":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Cosmos_Base_Node_V1beta1_StatusRequest>(),
-        responseSerializer: ProtobufSerializer<Cosmos_Base_Node_V1beta1_StatusResponse>(),
-        interceptors: self.interceptors?.makeStatusInterceptors() ?? [],
-        userFunction: self.status(request:context:)
-      )
-
     default:
       return nil
     }
@@ -335,12 +261,6 @@ internal protocol Cosmos_Base_Node_V1beta1_ServiceAsyncProvider: CallHandlerProv
     request: Cosmos_Base_Node_V1beta1_ConfigRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Cosmos_Base_Node_V1beta1_ConfigResponse
-
-  /// Status queries for the node status.
-  @Sendable func status(
-    request: Cosmos_Base_Node_V1beta1_StatusRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Cosmos_Base_Node_V1beta1_StatusResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -371,15 +291,6 @@ extension Cosmos_Base_Node_V1beta1_ServiceAsyncProvider {
         wrapping: self.config(request:context:)
       )
 
-    case "Status":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Cosmos_Base_Node_V1beta1_StatusRequest>(),
-        responseSerializer: ProtobufSerializer<Cosmos_Base_Node_V1beta1_StatusResponse>(),
-        interceptors: self.interceptors?.makeStatusInterceptors() ?? [],
-        wrapping: self.status(request:context:)
-      )
-
     default:
       return nil
     }
@@ -391,10 +302,6 @@ internal protocol Cosmos_Base_Node_V1beta1_ServiceServerInterceptorFactoryProtoc
   /// - Returns: Interceptors to use when handling 'config'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeConfigInterceptors() -> [ServerInterceptor<Cosmos_Base_Node_V1beta1_ConfigRequest, Cosmos_Base_Node_V1beta1_ConfigResponse>]
-
-  /// - Returns: Interceptors to use when handling 'status'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeStatusInterceptors() -> [ServerInterceptor<Cosmos_Base_Node_V1beta1_StatusRequest, Cosmos_Base_Node_V1beta1_StatusResponse>]
 }
 
 internal enum Cosmos_Base_Node_V1beta1_ServiceServerMetadata {
@@ -403,7 +310,6 @@ internal enum Cosmos_Base_Node_V1beta1_ServiceServerMetadata {
     fullName: "cosmos.base.node.v1beta1.Service",
     methods: [
       Cosmos_Base_Node_V1beta1_ServiceServerMetadata.Methods.config,
-      Cosmos_Base_Node_V1beta1_ServiceServerMetadata.Methods.status,
     ]
   )
 
@@ -411,12 +317,6 @@ internal enum Cosmos_Base_Node_V1beta1_ServiceServerMetadata {
     internal static let config = GRPCMethodDescriptor(
       name: "Config",
       path: "/cosmos.base.node.v1beta1.Service/Config",
-      type: GRPCCallType.unary
-    )
-
-    internal static let status = GRPCMethodDescriptor(
-      name: "Status",
-      path: "/cosmos.base.node.v1beta1.Service/Status",
       type: GRPCCallType.unary
     )
   }

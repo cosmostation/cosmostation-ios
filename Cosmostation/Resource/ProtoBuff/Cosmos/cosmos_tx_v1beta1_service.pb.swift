@@ -24,8 +24,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 enum Cosmos_Tx_V1beta1_OrderBy: SwiftProtobuf.Enum {
   typealias RawValue = Int
 
-  /// ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults
-  /// to ASC in this case.
+  /// ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case.
   case unspecified // = 0
 
   /// ORDER_BY_ASC defines ascending order
@@ -72,8 +71,7 @@ extension Cosmos_Tx_V1beta1_OrderBy: CaseIterable {
 
 #endif  // swift(>=4.2)
 
-/// BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC
-/// method.
+/// BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.
 enum Cosmos_Tx_V1beta1_BroadcastMode: SwiftProtobuf.Enum {
   typealias RawValue = Int
 
@@ -84,12 +82,12 @@ enum Cosmos_Tx_V1beta1_BroadcastMode: SwiftProtobuf.Enum {
   /// BROADCAST_MODE_BLOCK is not supported by the SDK from v0.47.x onwards.
   case block // = 1
 
-  /// BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits
-  /// for a CheckTx execution response only.
+  /// BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for
+  /// a CheckTx execution response only.
   case sync // = 2
 
-  /// BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client
-  /// returns immediately.
+  /// BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns
+  /// immediately.
   case async // = 3
   case UNRECOGNIZED(Int)
 
@@ -141,8 +139,6 @@ struct Cosmos_Tx_V1beta1_GetTxsEventRequest {
   // methods supported on all messages.
 
   /// events is the list of transaction event type.
-  /// Deprecated post v0.47.x: use query instead, which should contain a valid
-  /// events query.
   var events: [String] = []
 
   /// pagination defines a pagination for the request.
@@ -158,19 +154,12 @@ struct Cosmos_Tx_V1beta1_GetTxsEventRequest {
 
   var orderBy: Cosmos_Tx_V1beta1_OrderBy = .unspecified
 
-  /// page is the page number to query, starts at 1. If not provided, will
-  /// default to first page.
+  /// page is the page number to query, starts at 1. If not provided, will default to first page.
   var page: UInt64 = 0
 
   /// limit is the total number of results to be returned in the result page.
   /// If left empty it will default to a value to be set by each app.
   var limit: UInt64 = 0
-
-  /// query defines the transaction event query that is proxied to Tendermint's
-  /// TxSearch RPC method. The query must be valid.
-  ///
-  /// Since cosmos-sdk 0.50
-  var query: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -396,8 +385,7 @@ struct Cosmos_Tx_V1beta1_GetBlockWithTxsRequest {
   fileprivate var _pagination: Cosmos_Base_Query_V1beta1_PageRequest? = nil
 }
 
-/// GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs
-/// method.
+/// GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.
 ///
 /// Since: cosmos-sdk 0.45.2
 struct Cosmos_Tx_V1beta1_GetBlockWithTxsResponse {
@@ -647,7 +635,6 @@ extension Cosmos_Tx_V1beta1_GetTxsEventRequest: SwiftProtobuf.Message, SwiftProt
     3: .standard(proto: "order_by"),
     4: .same(proto: "page"),
     5: .same(proto: "limit"),
-    6: .same(proto: "query"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -661,7 +648,6 @@ extension Cosmos_Tx_V1beta1_GetTxsEventRequest: SwiftProtobuf.Message, SwiftProt
       case 3: try { try decoder.decodeSingularEnumField(value: &self.orderBy) }()
       case 4: try { try decoder.decodeSingularUInt64Field(value: &self.page) }()
       case 5: try { try decoder.decodeSingularUInt64Field(value: &self.limit) }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self.query) }()
       default: break
       }
     }
@@ -687,9 +673,6 @@ extension Cosmos_Tx_V1beta1_GetTxsEventRequest: SwiftProtobuf.Message, SwiftProt
     if self.limit != 0 {
       try visitor.visitSingularUInt64Field(value: self.limit, fieldNumber: 5)
     }
-    if !self.query.isEmpty {
-      try visitor.visitSingularStringField(value: self.query, fieldNumber: 6)
-    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -699,7 +682,6 @@ extension Cosmos_Tx_V1beta1_GetTxsEventRequest: SwiftProtobuf.Message, SwiftProt
     if lhs.orderBy != rhs.orderBy {return false}
     if lhs.page != rhs.page {return false}
     if lhs.limit != rhs.limit {return false}
-    if lhs.query != rhs.query {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

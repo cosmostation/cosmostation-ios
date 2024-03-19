@@ -29,12 +29,12 @@ struct Cosmos_Slashing_V1beta1_ValidatorSigningInfo {
 
   var address: String = String()
 
-  /// Height at which validator was first a candidate OR was un-jailed
+  /// Height at which validator was first a candidate OR was unjailed
   var startHeight: Int64 = 0
 
-  /// Index which is incremented every time a validator is bonded in a block and
-  /// _may_ have signed a pre-commit or not. This in conjunction with the
-  /// signed_blocks_window param determines the index in the missed block bitmap.
+  /// Index which is incremented each time the validator was a bonded
+  /// in a block and may have signed a precommit or not. This in conjunction with the
+  /// `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
   var indexOffset: Int64 = 0
 
   /// Timestamp until which the validator is jailed due to liveness downtime.
@@ -47,13 +47,12 @@ struct Cosmos_Slashing_V1beta1_ValidatorSigningInfo {
   /// Clears the value of `jailedUntil`. Subsequent reads from it will return its default value.
   mutating func clearJailedUntil() {self._jailedUntil = nil}
 
-  /// Whether or not a validator has been tombstoned (killed out of validator
-  /// set). It is set once the validator commits an equivocation or for any other
-  /// configured misbehavior.
+  /// Whether or not a validator has been tombstoned (killed out of validator set). It is set
+  /// once the validator commits an equivocation or for any other configured misbehiavor.
   var tombstoned: Bool = false
 
-  /// A counter of missed (unsigned) blocks. It is used to avoid unnecessary
-  /// reads in the missed block bitmap.
+  /// A counter kept to avoid unnecessary array reads.
+  /// Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
   var missedBlocksCounter: Int64 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()

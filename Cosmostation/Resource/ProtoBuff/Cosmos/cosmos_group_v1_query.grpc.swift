@@ -348,7 +348,7 @@ extension Cosmos_Group_V1_QueryClientProtocol {
   }
 
   /// Groups queries all groups in state.
-  /// 
+  ///
   /// Since: cosmos-sdk 0.47.1
   ///
   /// - Parameters:
@@ -1073,7 +1073,7 @@ internal protocol Cosmos_Group_V1_QueryProvider: CallHandlerProvider {
   func tallyResult(request: Cosmos_Group_V1_QueryTallyResultRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Group_V1_QueryTallyResultResponse>
 
   /// Groups queries all groups in state.
-  /// 
+  ///
   /// Since: cosmos-sdk 0.47.1
   func groups(request: Cosmos_Group_V1_QueryGroupsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Group_V1_QueryGroupsResponse>
 }
@@ -1313,7 +1313,7 @@ internal protocol Cosmos_Group_V1_QueryAsyncProvider: CallHandlerProvider {
   ) async throws -> Cosmos_Group_V1_QueryTallyResultResponse
 
   /// Groups queries all groups in state.
-  /// 
+  ///
   /// Since: cosmos-sdk 0.47.1
   @Sendable func groups(
     request: Cosmos_Group_V1_QueryGroupsRequest,

@@ -280,7 +280,6 @@ struct Cosmos_Gov_V1_Proposal {
   mutating func clearVotingEndTime() {_uniqueStorage()._votingEndTime = nil}
 
   /// metadata is any arbitrary metadata attached to the proposal.
-  /// the recommended format of the metadata is to be found here: https://docs.cosmos.network/v0.47/modules/gov#proposal-3
   var metadata: String {
     get {return _storage._metadata}
     set {_uniqueStorage()._metadata = newValue}
@@ -302,20 +301,12 @@ struct Cosmos_Gov_V1_Proposal {
     set {_uniqueStorage()._summary = newValue}
   }
 
-  /// proposer is the address of the proposal sumbitter
+  /// Proposer is the address of the proposal sumbitter
   ///
   /// Since: cosmos-sdk 0.47
   var proposer: String {
     get {return _storage._proposer}
     set {_uniqueStorage()._proposer = newValue}
-  }
-
-  /// expedited defines if the proposal is expedited
-  ///
-  /// Since: cosmos-sdk 0.50
-  var expedited: Bool {
-    get {return _storage._expedited}
-    set {_uniqueStorage()._expedited = newValue}
   }
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -364,8 +355,7 @@ struct Cosmos_Gov_V1_Vote {
   /// options is the weighted vote options.
   var options: [Cosmos_Gov_V1_WeightedVoteOption] = []
 
-  /// metadata is any arbitrary metadata to attached to the vote.
-  /// the recommended format of the metadata is to be found here: https://docs.cosmos.network/v0.47/modules/gov#vote-5
+  /// metadata is any  arbitrary metadata to attached to the vote.
   var metadata: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -454,124 +444,66 @@ struct Cosmos_Gov_V1_Params {
   // methods supported on all messages.
 
   /// Minimum deposit for a proposal to enter voting period.
-  var minDeposit: [Cosmos_Base_V1beta1_Coin] {
-    get {return _storage._minDeposit}
-    set {_uniqueStorage()._minDeposit = newValue}
-  }
+  var minDeposit: [Cosmos_Base_V1beta1_Coin] = []
 
   /// Maximum period for Atom holders to deposit on a proposal. Initial value: 2
   /// months.
   var maxDepositPeriod: SwiftProtobuf.Google_Protobuf_Duration {
-    get {return _storage._maxDepositPeriod ?? SwiftProtobuf.Google_Protobuf_Duration()}
-    set {_uniqueStorage()._maxDepositPeriod = newValue}
+    get {return _maxDepositPeriod ?? SwiftProtobuf.Google_Protobuf_Duration()}
+    set {_maxDepositPeriod = newValue}
   }
   /// Returns true if `maxDepositPeriod` has been explicitly set.
-  var hasMaxDepositPeriod: Bool {return _storage._maxDepositPeriod != nil}
+  var hasMaxDepositPeriod: Bool {return self._maxDepositPeriod != nil}
   /// Clears the value of `maxDepositPeriod`. Subsequent reads from it will return its default value.
-  mutating func clearMaxDepositPeriod() {_uniqueStorage()._maxDepositPeriod = nil}
+  mutating func clearMaxDepositPeriod() {self._maxDepositPeriod = nil}
 
   /// Duration of the voting period.
   var votingPeriod: SwiftProtobuf.Google_Protobuf_Duration {
-    get {return _storage._votingPeriod ?? SwiftProtobuf.Google_Protobuf_Duration()}
-    set {_uniqueStorage()._votingPeriod = newValue}
+    get {return _votingPeriod ?? SwiftProtobuf.Google_Protobuf_Duration()}
+    set {_votingPeriod = newValue}
   }
   /// Returns true if `votingPeriod` has been explicitly set.
-  var hasVotingPeriod: Bool {return _storage._votingPeriod != nil}
+  var hasVotingPeriod: Bool {return self._votingPeriod != nil}
   /// Clears the value of `votingPeriod`. Subsequent reads from it will return its default value.
-  mutating func clearVotingPeriod() {_uniqueStorage()._votingPeriod = nil}
+  mutating func clearVotingPeriod() {self._votingPeriod = nil}
 
   ///  Minimum percentage of total stake needed to vote for a result to be
   ///  considered valid.
-  var quorum: String {
-    get {return _storage._quorum}
-    set {_uniqueStorage()._quorum = newValue}
-  }
+  var quorum: String = String()
 
   ///  Minimum proportion of Yes votes for proposal to pass. Default value: 0.5.
-  var threshold: String {
-    get {return _storage._threshold}
-    set {_uniqueStorage()._threshold = newValue}
-  }
+  var threshold: String = String()
 
   ///  Minimum value of Veto votes to Total votes ratio for proposal to be
   ///  vetoed. Default value: 1/3.
-  var vetoThreshold: String {
-    get {return _storage._vetoThreshold}
-    set {_uniqueStorage()._vetoThreshold = newValue}
-  }
+  var vetoThreshold: String = String()
 
   ///  The ratio representing the proportion of the deposit value that must be paid at proposal submission.
-  var minInitialDepositRatio: String {
-    get {return _storage._minInitialDepositRatio}
-    set {_uniqueStorage()._minInitialDepositRatio = newValue}
-  }
-
-  /// The cancel ratio which will not be returned back to the depositors when a proposal is cancelled.
-  ///
-  /// Since: cosmos-sdk 0.50
-  var proposalCancelRatio: String {
-    get {return _storage._proposalCancelRatio}
-    set {_uniqueStorage()._proposalCancelRatio = newValue}
-  }
-
-  /// The address which will receive (proposal_cancel_ratio * deposit) proposal deposits.
-  /// If empty, the (proposal_cancel_ratio * deposit) proposal deposits will be burned.
-  ///
-  /// Since: cosmos-sdk 0.50
-  var proposalCancelDest: String {
-    get {return _storage._proposalCancelDest}
-    set {_uniqueStorage()._proposalCancelDest = newValue}
-  }
-
-  /// Duration of the voting period of an expedited proposal.
-  ///
-  /// Since: cosmos-sdk 0.50
-  var expeditedVotingPeriod: SwiftProtobuf.Google_Protobuf_Duration {
-    get {return _storage._expeditedVotingPeriod ?? SwiftProtobuf.Google_Protobuf_Duration()}
-    set {_uniqueStorage()._expeditedVotingPeriod = newValue}
-  }
-  /// Returns true if `expeditedVotingPeriod` has been explicitly set.
-  var hasExpeditedVotingPeriod: Bool {return _storage._expeditedVotingPeriod != nil}
-  /// Clears the value of `expeditedVotingPeriod`. Subsequent reads from it will return its default value.
-  mutating func clearExpeditedVotingPeriod() {_uniqueStorage()._expeditedVotingPeriod = nil}
-
-  /// Minimum proportion of Yes votes for proposal to pass. Default value: 0.67.
-  ///
-  /// Since: cosmos-sdk 0.50
-  var expeditedThreshold: String {
-    get {return _storage._expeditedThreshold}
-    set {_uniqueStorage()._expeditedThreshold = newValue}
-  }
-
-  ///  Minimum expedited deposit for a proposal to enter voting period.
-  var expeditedMinDeposit: [Cosmos_Base_V1beta1_Coin] {
-    get {return _storage._expeditedMinDeposit}
-    set {_uniqueStorage()._expeditedMinDeposit = newValue}
-  }
+  var minInitialDepositRatio: String = String()
 
   /// burn deposits if a proposal does not meet quorum
-  var burnVoteQuorum: Bool {
-    get {return _storage._burnVoteQuorum}
-    set {_uniqueStorage()._burnVoteQuorum = newValue}
-  }
+  var burnVoteQuorum: Bool = false
 
   /// burn deposits if the proposal does not enter voting period
-  var burnProposalDepositPrevote: Bool {
-    get {return _storage._burnProposalDepositPrevote}
-    set {_uniqueStorage()._burnProposalDepositPrevote = newValue}
-  }
+  var burnProposalDepositPrevote: Bool = false
 
   /// burn deposits if quorum with vote type no_veto is met
-  var burnVoteVeto: Bool {
-    get {return _storage._burnVoteVeto}
-    set {_uniqueStorage()._burnVoteVeto = newValue}
-  }
+  var burnVoteVeto: Bool = false
+
+  /// The ratio representing the proportion of the deposit value minimum that must be met when making a deposit.
+  /// Default value: 0.01. Meaning that for a chain with a min_deposit of 100stake, a deposit of 1stake would be
+  /// required.
+  ///
+  /// Since: cosmos-sdk 0.50
+  /// NOTE: backported from v50 (https://github.com/cosmos/cosmos-sdk/pull/18146)
+  var minDepositRatio: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
-  fileprivate var _storage = _StorageClass.defaultInstance
+  fileprivate var _maxDepositPeriod: SwiftProtobuf.Google_Protobuf_Duration? = nil
+  fileprivate var _votingPeriod: SwiftProtobuf.Google_Protobuf_Duration? = nil
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
@@ -711,7 +643,6 @@ extension Cosmos_Gov_V1_Proposal: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     11: .same(proto: "title"),
     12: .same(proto: "summary"),
     13: .same(proto: "proposer"),
-    14: .same(proto: "expedited"),
   ]
 
   fileprivate class _StorageClass {
@@ -728,7 +659,6 @@ extension Cosmos_Gov_V1_Proposal: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     var _title: String = String()
     var _summary: String = String()
     var _proposer: String = String()
-    var _expedited: Bool = false
 
     static let defaultInstance = _StorageClass()
 
@@ -748,7 +678,6 @@ extension Cosmos_Gov_V1_Proposal: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       _title = source._title
       _summary = source._summary
       _proposer = source._proposer
-      _expedited = source._expedited
     }
   }
 
@@ -780,7 +709,6 @@ extension Cosmos_Gov_V1_Proposal: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         case 11: try { try decoder.decodeSingularStringField(value: &_storage._title) }()
         case 12: try { try decoder.decodeSingularStringField(value: &_storage._summary) }()
         case 13: try { try decoder.decodeSingularStringField(value: &_storage._proposer) }()
-        case 14: try { try decoder.decodeSingularBoolField(value: &_storage._expedited) }()
         default: break
         }
       }
@@ -832,9 +760,6 @@ extension Cosmos_Gov_V1_Proposal: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       if !_storage._proposer.isEmpty {
         try visitor.visitSingularStringField(value: _storage._proposer, fieldNumber: 13)
       }
-      if _storage._expedited != false {
-        try visitor.visitSingularBoolField(value: _storage._expedited, fieldNumber: 14)
-      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -857,7 +782,6 @@ extension Cosmos_Gov_V1_Proposal: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         if _storage._title != rhs_storage._title {return false}
         if _storage._summary != rhs_storage._summary {return false}
         if _storage._proposer != rhs_storage._proposer {return false}
-        if _storage._expedited != rhs_storage._expedited {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -1099,171 +1023,87 @@ extension Cosmos_Gov_V1_Params: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     5: .same(proto: "threshold"),
     6: .standard(proto: "veto_threshold"),
     7: .standard(proto: "min_initial_deposit_ratio"),
-    8: .standard(proto: "proposal_cancel_ratio"),
-    9: .standard(proto: "proposal_cancel_dest"),
-    10: .standard(proto: "expedited_voting_period"),
-    11: .standard(proto: "expedited_threshold"),
-    12: .standard(proto: "expedited_min_deposit"),
     13: .standard(proto: "burn_vote_quorum"),
     14: .standard(proto: "burn_proposal_deposit_prevote"),
     15: .standard(proto: "burn_vote_veto"),
+    16: .standard(proto: "min_deposit_ratio"),
   ]
 
-  fileprivate class _StorageClass {
-    var _minDeposit: [Cosmos_Base_V1beta1_Coin] = []
-    var _maxDepositPeriod: SwiftProtobuf.Google_Protobuf_Duration? = nil
-    var _votingPeriod: SwiftProtobuf.Google_Protobuf_Duration? = nil
-    var _quorum: String = String()
-    var _threshold: String = String()
-    var _vetoThreshold: String = String()
-    var _minInitialDepositRatio: String = String()
-    var _proposalCancelRatio: String = String()
-    var _proposalCancelDest: String = String()
-    var _expeditedVotingPeriod: SwiftProtobuf.Google_Protobuf_Duration? = nil
-    var _expeditedThreshold: String = String()
-    var _expeditedMinDeposit: [Cosmos_Base_V1beta1_Coin] = []
-    var _burnVoteQuorum: Bool = false
-    var _burnProposalDepositPrevote: Bool = false
-    var _burnVoteVeto: Bool = false
-
-    static let defaultInstance = _StorageClass()
-
-    private init() {}
-
-    init(copying source: _StorageClass) {
-      _minDeposit = source._minDeposit
-      _maxDepositPeriod = source._maxDepositPeriod
-      _votingPeriod = source._votingPeriod
-      _quorum = source._quorum
-      _threshold = source._threshold
-      _vetoThreshold = source._vetoThreshold
-      _minInitialDepositRatio = source._minInitialDepositRatio
-      _proposalCancelRatio = source._proposalCancelRatio
-      _proposalCancelDest = source._proposalCancelDest
-      _expeditedVotingPeriod = source._expeditedVotingPeriod
-      _expeditedThreshold = source._expeditedThreshold
-      _expeditedMinDeposit = source._expeditedMinDeposit
-      _burnVoteQuorum = source._burnVoteQuorum
-      _burnProposalDepositPrevote = source._burnProposalDepositPrevote
-      _burnVoteVeto = source._burnVoteVeto
-    }
-  }
-
-  fileprivate mutating func _uniqueStorage() -> _StorageClass {
-    if !isKnownUniquelyReferenced(&_storage) {
-      _storage = _StorageClass(copying: _storage)
-    }
-    return _storage
-  }
-
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        // The use of inline closures is to circumvent an issue where the compiler
-        // allocates stack space for every case branch when no optimizations are
-        // enabled. https://github.com/apple/swift-protobuf/issues/1034
-        switch fieldNumber {
-        case 1: try { try decoder.decodeRepeatedMessageField(value: &_storage._minDeposit) }()
-        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._maxDepositPeriod) }()
-        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._votingPeriod) }()
-        case 4: try { try decoder.decodeSingularStringField(value: &_storage._quorum) }()
-        case 5: try { try decoder.decodeSingularStringField(value: &_storage._threshold) }()
-        case 6: try { try decoder.decodeSingularStringField(value: &_storage._vetoThreshold) }()
-        case 7: try { try decoder.decodeSingularStringField(value: &_storage._minInitialDepositRatio) }()
-        case 8: try { try decoder.decodeSingularStringField(value: &_storage._proposalCancelRatio) }()
-        case 9: try { try decoder.decodeSingularStringField(value: &_storage._proposalCancelDest) }()
-        case 10: try { try decoder.decodeSingularMessageField(value: &_storage._expeditedVotingPeriod) }()
-        case 11: try { try decoder.decodeSingularStringField(value: &_storage._expeditedThreshold) }()
-        case 12: try { try decoder.decodeRepeatedMessageField(value: &_storage._expeditedMinDeposit) }()
-        case 13: try { try decoder.decodeSingularBoolField(value: &_storage._burnVoteQuorum) }()
-        case 14: try { try decoder.decodeSingularBoolField(value: &_storage._burnProposalDepositPrevote) }()
-        case 15: try { try decoder.decodeSingularBoolField(value: &_storage._burnVoteVeto) }()
-        default: break
-        }
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.minDeposit) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._maxDepositPeriod) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._votingPeriod) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.quorum) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.threshold) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.vetoThreshold) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.minInitialDepositRatio) }()
+      case 13: try { try decoder.decodeSingularBoolField(value: &self.burnVoteQuorum) }()
+      case 14: try { try decoder.decodeSingularBoolField(value: &self.burnProposalDepositPrevote) }()
+      case 15: try { try decoder.decodeSingularBoolField(value: &self.burnVoteVeto) }()
+      case 16: try { try decoder.decodeSingularStringField(value: &self.minDepositRatio) }()
+      default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every if/case branch local when no optimizations
-      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-      // https://github.com/apple/swift-protobuf/issues/1182
-      if !_storage._minDeposit.isEmpty {
-        try visitor.visitRepeatedMessageField(value: _storage._minDeposit, fieldNumber: 1)
-      }
-      try { if let v = _storage._maxDepositPeriod {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-      } }()
-      try { if let v = _storage._votingPeriod {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-      } }()
-      if !_storage._quorum.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._quorum, fieldNumber: 4)
-      }
-      if !_storage._threshold.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._threshold, fieldNumber: 5)
-      }
-      if !_storage._vetoThreshold.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._vetoThreshold, fieldNumber: 6)
-      }
-      if !_storage._minInitialDepositRatio.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._minInitialDepositRatio, fieldNumber: 7)
-      }
-      if !_storage._proposalCancelRatio.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._proposalCancelRatio, fieldNumber: 8)
-      }
-      if !_storage._proposalCancelDest.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._proposalCancelDest, fieldNumber: 9)
-      }
-      try { if let v = _storage._expeditedVotingPeriod {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
-      } }()
-      if !_storage._expeditedThreshold.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._expeditedThreshold, fieldNumber: 11)
-      }
-      if !_storage._expeditedMinDeposit.isEmpty {
-        try visitor.visitRepeatedMessageField(value: _storage._expeditedMinDeposit, fieldNumber: 12)
-      }
-      if _storage._burnVoteQuorum != false {
-        try visitor.visitSingularBoolField(value: _storage._burnVoteQuorum, fieldNumber: 13)
-      }
-      if _storage._burnProposalDepositPrevote != false {
-        try visitor.visitSingularBoolField(value: _storage._burnProposalDepositPrevote, fieldNumber: 14)
-      }
-      if _storage._burnVoteVeto != false {
-        try visitor.visitSingularBoolField(value: _storage._burnVoteVeto, fieldNumber: 15)
-      }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.minDeposit.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.minDeposit, fieldNumber: 1)
+    }
+    try { if let v = self._maxDepositPeriod {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._votingPeriod {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    if !self.quorum.isEmpty {
+      try visitor.visitSingularStringField(value: self.quorum, fieldNumber: 4)
+    }
+    if !self.threshold.isEmpty {
+      try visitor.visitSingularStringField(value: self.threshold, fieldNumber: 5)
+    }
+    if !self.vetoThreshold.isEmpty {
+      try visitor.visitSingularStringField(value: self.vetoThreshold, fieldNumber: 6)
+    }
+    if !self.minInitialDepositRatio.isEmpty {
+      try visitor.visitSingularStringField(value: self.minInitialDepositRatio, fieldNumber: 7)
+    }
+    if self.burnVoteQuorum != false {
+      try visitor.visitSingularBoolField(value: self.burnVoteQuorum, fieldNumber: 13)
+    }
+    if self.burnProposalDepositPrevote != false {
+      try visitor.visitSingularBoolField(value: self.burnProposalDepositPrevote, fieldNumber: 14)
+    }
+    if self.burnVoteVeto != false {
+      try visitor.visitSingularBoolField(value: self.burnVoteVeto, fieldNumber: 15)
+    }
+    if !self.minDepositRatio.isEmpty {
+      try visitor.visitSingularStringField(value: self.minDepositRatio, fieldNumber: 16)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Cosmos_Gov_V1_Params, rhs: Cosmos_Gov_V1_Params) -> Bool {
-    if lhs._storage !== rhs._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
-        let _storage = _args.0
-        let rhs_storage = _args.1
-        if _storage._minDeposit != rhs_storage._minDeposit {return false}
-        if _storage._maxDepositPeriod != rhs_storage._maxDepositPeriod {return false}
-        if _storage._votingPeriod != rhs_storage._votingPeriod {return false}
-        if _storage._quorum != rhs_storage._quorum {return false}
-        if _storage._threshold != rhs_storage._threshold {return false}
-        if _storage._vetoThreshold != rhs_storage._vetoThreshold {return false}
-        if _storage._minInitialDepositRatio != rhs_storage._minInitialDepositRatio {return false}
-        if _storage._proposalCancelRatio != rhs_storage._proposalCancelRatio {return false}
-        if _storage._proposalCancelDest != rhs_storage._proposalCancelDest {return false}
-        if _storage._expeditedVotingPeriod != rhs_storage._expeditedVotingPeriod {return false}
-        if _storage._expeditedThreshold != rhs_storage._expeditedThreshold {return false}
-        if _storage._expeditedMinDeposit != rhs_storage._expeditedMinDeposit {return false}
-        if _storage._burnVoteQuorum != rhs_storage._burnVoteQuorum {return false}
-        if _storage._burnProposalDepositPrevote != rhs_storage._burnProposalDepositPrevote {return false}
-        if _storage._burnVoteVeto != rhs_storage._burnVoteVeto {return false}
-        return true
-      }
-      if !storagesAreEqual {return false}
-    }
+    if lhs.minDeposit != rhs.minDeposit {return false}
+    if lhs._maxDepositPeriod != rhs._maxDepositPeriod {return false}
+    if lhs._votingPeriod != rhs._votingPeriod {return false}
+    if lhs.quorum != rhs.quorum {return false}
+    if lhs.threshold != rhs.threshold {return false}
+    if lhs.vetoThreshold != rhs.vetoThreshold {return false}
+    if lhs.minInitialDepositRatio != rhs.minInitialDepositRatio {return false}
+    if lhs.burnVoteQuorum != rhs.burnVoteQuorum {return false}
+    if lhs.burnProposalDepositPrevote != rhs.burnProposalDepositPrevote {return false}
+    if lhs.burnVoteVeto != rhs.burnVoteVeto {return false}
+    if lhs.minDepositRatio != rhs.minDepositRatio {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

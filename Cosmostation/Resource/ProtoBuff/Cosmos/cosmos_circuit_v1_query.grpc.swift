@@ -26,7 +26,7 @@ import NIOConcurrencyHelpers
 import SwiftProtobuf
 
 
-/// Msg defines the crisis Msg service.
+/// Query defines the circuit gRPC querier service.
 ///
 /// Usage: instantiate `Cosmos_Circuit_V1_QueryClient`, then call methods of this protocol to make API calls.
 internal protocol Cosmos_Circuit_V1_QueryClientProtocol: GRPCClient {
@@ -166,7 +166,7 @@ internal struct Cosmos_Circuit_V1_QueryNIOClient: Cosmos_Circuit_V1_QueryClientP
   }
 }
 
-/// Msg defines the crisis Msg service.
+/// Query defines the circuit gRPC querier service.
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
 internal protocol Cosmos_Circuit_V1_QueryAsyncClientProtocol: GRPCClient {
   static var serviceDescriptor: GRPCServiceDescriptor { get }
@@ -335,7 +335,7 @@ internal enum Cosmos_Circuit_V1_QueryClientMetadata {
   }
 }
 
-/// Msg defines the crisis Msg service.
+/// Query defines the circuit gRPC querier service.
 ///
 /// To build a server, implement a class that conforms to this protocol.
 internal protocol Cosmos_Circuit_V1_QueryProvider: CallHandlerProvider {
@@ -396,7 +396,7 @@ extension Cosmos_Circuit_V1_QueryProvider {
   }
 }
 
-/// Msg defines the crisis Msg service.
+/// Query defines the circuit gRPC querier service.
 ///
 /// To implement a server, implement an object which conforms to this protocol.
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
