@@ -349,7 +349,7 @@ class CosmosClassVC: BaseVC {
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 4)
         tabbar.items.append(coinTabBar)
         if (selectedChain.supportCw20 || selectedChain is EvmClass) { tabbar.items.append(tokenTabBar) }
-        if (selectedChain.supportNft) { tabbar.items.append(nftTabBar) }
+        if (selectedChain.supportCw721) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(historyTabBar)
         if (!selectedChain.getChainListParam().isEmpty && !(selectedChain is ChainOktEVM)) { tabbar.items.append(aboutTabBar) }
         

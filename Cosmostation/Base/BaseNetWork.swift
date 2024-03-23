@@ -139,6 +139,10 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v10/utils/params"
     }
     
+    static func msCw721InfoUrl(_ chain: BaseChain) -> String {
+        return ResourceBase + chain.apiName + "/cw721.json"
+    }
+    
     static func dAppConfigs() -> String {
         return ResourceDappBase + "config.json"
     }

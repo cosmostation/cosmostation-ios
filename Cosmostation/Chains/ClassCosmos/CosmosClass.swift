@@ -24,7 +24,7 @@ class CosmosClass: BaseChain {
     var evmAddress = ""
     
     var supportCw20 = false
-    var supportNft = false
+    var supportCw721 = false
     var supportStaking = true
     
     var grpcHost = ""
@@ -42,6 +42,7 @@ class CosmosClass: BaseChain {
     lazy var cosmosValidators = Array<Cosmos_Staking_V1beta1_Validator>()
     
     lazy var mintscanCw20Tokens = [MintscanToken]()
+    lazy var mintscanCw721List = [JSON]()
     
     //get bech style info from seed
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
@@ -65,6 +66,7 @@ class CosmosClass: BaseChain {
     
     override func fetchData(_ id: Int64) {
         mintscanCw20Tokens.removeAll()
+        mintscanCw721List.removeAll()
         cosmosAuth = nil
         cosmosBalances = nil
         cosmosVestings.removeAll()
@@ -76,6 +78,7 @@ class CosmosClass: BaseChain {
         Task {
             let channel = getConnection()
             if let cw20Tokens = try? await fetchCw20Info(),
+               let cw721List = try? await fetchCw721Info(),
                let auth = try? await fetchAuth(channel),
                let balance = try? await fetchBalance(channel),
                let delegations = try? await fetchDelegation(channel),
@@ -83,7 +86,8 @@ class CosmosClass: BaseChain {
                let rewards = try? await fetchRewards(channel),
                let commission = try? await fetchCommission(channel),
                let rewardaddr = try? await fetchRewardAddress(channel) {
-                self.mintscanCw20Tokens = cw20Tokens
+                self.mintscanCw20Tokens = cw20Tokens ?? []
+                self.mintscanCw721List = cw721List ?? []
                 self.cosmosAuth = auth
                 self.cosmosBalances = balance
                 delegations?.forEach({ delegation in
@@ -368,9 +372,15 @@ extension CosmosClass {
 //about mintscan api
 extension CosmosClass {
     
-    func fetchCw20Info() async throws -> [MintscanToken] {
+    func fetchCw20Info() async throws -> [MintscanToken]? {
         if (!supportCw20) { return [] }
-        return try await AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
+        return try? await AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
+    }
+    
+    func fetchCw721Info() async throws -> [JSON]? {
+        if (!supportCw721) { return [] }
+        print("fetchCw721Info ", BaseNetWork.msCw721InfoUrl(self))
+        return try? await AF.request(BaseNetWork.msCw721InfoUrl(self), method: .get).serializingDecodable([JSON].self).value
     }
 }
 
@@ -705,75 +715,75 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     var result = [CosmosClass]()
     result.removeAll()
     result.append(ChainCosmos())
-    result.append(ChainAkash())
-//    result.append(ChainAlthea118())
-    result.append(ChainArchway())
-    result.append(ChainAssetMantle())
-    result.append(ChainAxelar())
-    result.append(ChainBand())
-    result.append(ChainBitcana())
-    result.append(ChainBitsong())
-    result.append(ChainCelestia())
-    result.append(ChainChihuahua())
-    result.append(ChainComdex())
-    result.append(ChainCoreum())
-    result.append(ChainCrescent())
-    result.append(ChainCryptoorg())
-    result.append(ChainCudos())
-    result.append(ChainDesmos())
-    result.append(ChainDydx())
-    result.append(ChainEmoney())
-    result.append(ChainFetchAi())
-    result.append(ChainFetchAi60Secp())
-    result.append(ChainFetchAi60Old())
-    result.append(ChainFinschia())
-    result.append(ChainGovgen())
-    result.append(ChainGravityBridge())
-    result.append(ChainInjective())
-    result.append(ChainIris())
-    result.append(ChainIxo())
-    result.append(ChainJuno())
-    result.append(ChainKava459())
-    result.append(ChainKava118())
-    result.append(ChainKi())
-    result.append(ChainKyve())
-    result.append(ChainLike())
-    result.append(ChainLum880())
-    result.append(ChainLum118())
-    result.append(ChainMars())
-    result.append(ChainMedibloc())
-    result.append(ChainNeutron())
-    result.append(ChainNibiru())
-    result.append(ChainNoble())
-    result.append(ChainNyx())
-    result.append(ChainOmniflix())
-    result.append(ChainOnomy())
-    result.append(ChainOsmosis())
-    result.append(ChainPassage())
-    result.append(ChainPersistence118())
-    result.append(ChainPersistence750())
-    result.append(ChainProvenance())
-    result.append(ChainQuasar())
-    result.append(ChainQuicksilver())
-    result.append(ChainRegen())
-    result.append(ChainRizon())
-    result.append(ChainSecret118())
-    result.append(ChainSecret529())
-    result.append(ChainSei())
-    result.append(ChainSentinel())
-    result.append(ChainShentu())
-    result.append(ChainSommelier())
-    result.append(ChainStafi())
+//    result.append(ChainAkash())
+////    result.append(ChainAlthea118())
+//    result.append(ChainArchway())
+//    result.append(ChainAssetMantle())
+//    result.append(ChainAxelar())
+//    result.append(ChainBand())
+//    result.append(ChainBitcana())
+//    result.append(ChainBitsong())
+//    result.append(ChainCelestia())
+//    result.append(ChainChihuahua())
+//    result.append(ChainComdex())
+//    result.append(ChainCoreum())
+//    result.append(ChainCrescent())
+//    result.append(ChainCryptoorg())
+//    result.append(ChainCudos())
+//    result.append(ChainDesmos())
+//    result.append(ChainDydx())
+//    result.append(ChainEmoney())
+//    result.append(ChainFetchAi())
+//    result.append(ChainFetchAi60Secp())
+//    result.append(ChainFetchAi60Old())
+//    result.append(ChainFinschia())
+//    result.append(ChainGovgen())
+//    result.append(ChainGravityBridge())
+//    result.append(ChainInjective())
+//    result.append(ChainIris())
+//    result.append(ChainIxo())
+//    result.append(ChainJuno())
+//    result.append(ChainKava459())
+//    result.append(ChainKava118())
+//    result.append(ChainKi())
+//    result.append(ChainKyve())
+//    result.append(ChainLike())
+//    result.append(ChainLum880())
+//    result.append(ChainLum118())
+//    result.append(ChainMars())
+//    result.append(ChainMedibloc())
+//    result.append(ChainNeutron())
+//    result.append(ChainNibiru())
+//    result.append(ChainNoble())
+//    result.append(ChainNyx())
+//    result.append(ChainOmniflix())
+//    result.append(ChainOnomy())
+//    result.append(ChainOsmosis())
+//    result.append(ChainPassage())
+//    result.append(ChainPersistence118())
+//    result.append(ChainPersistence750())
+//    result.append(ChainProvenance())
+//    result.append(ChainQuasar())
+//    result.append(ChainQuicksilver())
+//    result.append(ChainRegen())
+//    result.append(ChainRizon())
+//    result.append(ChainSecret118())
+//    result.append(ChainSecret529())
+//    result.append(ChainSei())
+//    result.append(ChainSentinel())
+//    result.append(ChainShentu())
+//    result.append(ChainSommelier())
+//    result.append(ChainStafi())
     result.append(ChainStargaze())
-    result.append(ChainStride())
-    result.append(ChainTeritori())
-    result.append(ChainTerra())
-    result.append(ChainUmee())
-    result.append(ChainXpla())
-    
-    result.append(ChainBinanceBeacon())
-    result.append(ChainOkt996Secp())
-    result.append(ChainOkt996Keccak())
+//    result.append(ChainStride())
+//    result.append(ChainTeritori())
+//    result.append(ChainTerra())
+//    result.append(ChainUmee())
+//    result.append(ChainXpla())
+//    
+//    result.append(ChainBinanceBeacon())
+//    result.append(ChainOkt996Secp())
+//    result.append(ChainOkt996Keccak())
     
     
     

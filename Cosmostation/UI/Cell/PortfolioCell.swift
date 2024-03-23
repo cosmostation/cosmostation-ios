@@ -78,7 +78,7 @@ class PortfolioCell: UITableViewCell {
             cw20Tag.isHidden = false
         }
         
-        if (!BaseData.instance.reviewMode && chain.supportNft) {
+        if (!BaseData.instance.reviewMode && chain.supportCw721) {
             tagLayer.isHidden = false
             nftTag.isHidden = false
         }
