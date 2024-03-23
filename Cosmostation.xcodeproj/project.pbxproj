@@ -665,6 +665,14 @@
 		0492AE982A83CCB9001360F0 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492AE962A83CCB9001360F0 /* SettingsVC.swift */; };
 		0494B3B62B68FA930064BCD5 /* Token.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0494B3B52B68FA930064BCD5 /* Token.xcassets */; };
 		0494B3B72B68FA930064BCD5 /* Token.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0494B3B52B68FA930064BCD5 /* Token.xcassets */; };
+		0494CBF52BAF39BA00FA3E49 /* NftListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494CBF32BAF39BA00FA3E49 /* NftListCell.swift */; };
+		0494CBF62BAF39BA00FA3E49 /* NftListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494CBF42BAF39BA00FA3E49 /* NftListCell.xib */; };
+		0494CBF72BAF39BA00FA3E49 /* NftListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494CBF32BAF39BA00FA3E49 /* NftListCell.swift */; };
+		0494CBF82BAF39BA00FA3E49 /* NftListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494CBF42BAF39BA00FA3E49 /* NftListCell.xib */; };
+		0494CBFB2BAF442E00FA3E49 /* NftListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494CBF92BAF442E00FA3E49 /* NftListHeader.swift */; };
+		0494CBFC2BAF442E00FA3E49 /* NftListHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494CBFA2BAF442E00FA3E49 /* NftListHeader.xib */; };
+		0494CBFD2BAF442E00FA3E49 /* NftListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494CBF92BAF442E00FA3E49 /* NftListHeader.swift */; };
+		0494CBFE2BAF442E00FA3E49 /* NftListHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494CBFA2BAF442E00FA3E49 /* NftListHeader.xib */; };
 		04951DC32B7F6E6200A03FB1 /* QrAddressPopup2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04951DC12B7F6E6200A03FB1 /* QrAddressPopup2VC.swift */; };
 		04951DC42B7F6E6200A03FB1 /* QrAddressPopup2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04951DC12B7F6E6200A03FB1 /* QrAddressPopup2VC.swift */; };
 		04951DC52B7F6E6200A03FB1 /* QrAddressPopup2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04951DC22B7F6E6200A03FB1 /* QrAddressPopup2VC.xib */; };
@@ -2194,6 +2202,10 @@
 		0492AE902A83CC9B001360F0 /* ServiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceVC.swift; sourceTree = "<group>"; };
 		0492AE962A83CCB9001360F0 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		0494B3B52B68FA930064BCD5 /* Token.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Token.xcassets; sourceTree = "<group>"; };
+		0494CBF32BAF39BA00FA3E49 /* NftListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftListCell.swift; sourceTree = "<group>"; };
+		0494CBF42BAF39BA00FA3E49 /* NftListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NftListCell.xib; sourceTree = "<group>"; };
+		0494CBF92BAF442E00FA3E49 /* NftListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftListHeader.swift; sourceTree = "<group>"; };
+		0494CBFA2BAF442E00FA3E49 /* NftListHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NftListHeader.xib; sourceTree = "<group>"; };
 		04951DC12B7F6E6200A03FB1 /* QrAddressPopup2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrAddressPopup2VC.swift; sourceTree = "<group>"; };
 		04951DC22B7F6E6200A03FB1 /* QrAddressPopup2VC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QrAddressPopup2VC.xib; sourceTree = "<group>"; };
 		049B691E29D1736B0027B82D /* MintscanProposal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanProposal.swift; sourceTree = "<group>"; };
@@ -3892,6 +3904,10 @@
 				041540F92BA4126D00CD5AA1 /* VoteAllChainCell.xib */,
 				041540FE2BA4139500CD5AA1 /* VoteAllChainHeader.swift */,
 				041541012BA413A300CD5AA1 /* VoteAllChainHeader.xib */,
+				0494CBF32BAF39BA00FA3E49 /* NftListCell.swift */,
+				0494CBF42BAF39BA00FA3E49 /* NftListCell.xib */,
+				0494CBF92BAF442E00FA3E49 /* NftListHeader.swift */,
+				0494CBFA2BAF442E00FA3E49 /* NftListHeader.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -4310,6 +4326,7 @@
 				0400EF502ADF7EF4007BA97F /* KavaSwapAction.xib in Resources */,
 				04A68C202ABDA3220041FA13 /* SelectSwapChainCell.xib in Resources */,
 				04A68C322AC13A560041FA13 /* CosmosProposalsVC.xib in Resources */,
+				0494CBF82BAF39BA00FA3E49 /* NftListCell.xib in Resources */,
 				0400EEF62ADBEEF5007BA97F /* KavaLendListVC.xib in Resources */,
 				0400EEB22ADBB3C5007BA97F /* KavaDefiVC.xib in Resources */,
 				E16200352AF0CFFD0008F397 /* SelectEndpointCell.xib in Resources */,
@@ -4455,6 +4472,7 @@
 				047842DB2AC87C1000462F1C /* CosmosTxResult.xib in Resources */,
 				18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */,
 				0472D4862B03588F00B9E6E8 /* NoticeSheet.xib in Resources */,
+				0494CBFE2BAF442E00FA3E49 /* NftListHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4541,6 +4559,7 @@
 				041540FC2BA4126D00CD5AA1 /* VoteAllChainCell.xib in Resources */,
 				04FC65642B0C8E77008F2110 /* OkWithdraw.xib in Resources */,
 				0409D2FD2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
+				0494CBFC2BAF442E00FA3E49 /* NftListHeader.xib in Resources */,
 				15B24C882AE9039A0009B359 /* TxSignRequestSheet.xib in Resources */,
 				E131F44A2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */,
 				0400EF132ADBF763007BA97F /* KavaLendListMyCell.xib in Resources */,
@@ -4550,6 +4569,7 @@
 				E162003D2AF242B70008F397 /* AddressBookSheet.xib in Resources */,
 				0494B3B62B68FA930064BCD5 /* Token.xcassets in Resources */,
 				04527DC12A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
+				0494CBF62BAF39BA00FA3E49 /* NftListCell.xib in Resources */,
 				04FAD9DE2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				0400EF2B2ADD48DB007BA97F /* KavaSwapListMyCell.xib in Resources */,
 				E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */,
@@ -5167,6 +5187,7 @@
 				04FF6B9E2B230FE1009DCA89 /* ChainNibiru.swift in Sources */,
 				0478437A2AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */,
 				04C8179B2BA98D75006B800A /* cosmos_gov_v1_query.pb.swift in Sources */,
+				0494CBF72BAF39BA00FA3E49 /* NftListCell.swift in Sources */,
 				E15980AA2A83ADB60032892B /* MainTabVC.swift in Sources */,
 				047843F12AC9A11D00462F1C /* ChainBand.swift in Sources */,
 				0438A8072AE135B1006FA213 /* kava_cdp_v1beta1_query.grpc.swift in Sources */,
@@ -5281,6 +5302,7 @@
 				04C816D92BA98D75006B800A /* cosmos_gov_module_v1_module.pb.swift in Sources */,
 				04C817452BA98D75006B800A /* cosmos_consensus_v1_query.grpc.swift in Sources */,
 				04B789582ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift in Sources */,
+				0494CBFD2BAF442E00FA3E49 /* NftListHeader.swift in Sources */,
 				E15980A02A83A9D70032892B /* SlideOutTransition.swift in Sources */,
 				0400EEC62ADBB522007BA97F /* kava_incentive_v1beta1_params.pb.swift in Sources */,
 				04C816F92BA98D75006B800A /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
@@ -5913,6 +5935,7 @@
 				04FF6B9D2B230FE1009DCA89 /* ChainNibiru.swift in Sources */,
 				047843792AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */,
 				04C8179A2BA98D75006B800A /* cosmos_gov_v1_query.pb.swift in Sources */,
+				0494CBF52BAF39BA00FA3E49 /* NftListCell.swift in Sources */,
 				048DBCE2280EC5E90007275E /* MWords.swift in Sources */,
 				047843F02AC9A11D00462F1C /* ChainBand.swift in Sources */,
 				0438A8062AE135B1006FA213 /* kava_cdp_v1beta1_query.grpc.swift in Sources */,
@@ -6027,6 +6050,7 @@
 				04C816D82BA98D75006B800A /* cosmos_gov_module_v1_module.pb.swift in Sources */,
 				04C817442BA98D75006B800A /* cosmos_consensus_v1_query.grpc.swift in Sources */,
 				E1CD6B002AEAAEF200376909 /* AboutSocialsCell.swift in Sources */,
+				0494CBFB2BAF442E00FA3E49 /* NftListHeader.swift in Sources */,
 				04B789572ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift in Sources */,
 				E159809F2A83A9D70032892B /* SlideOutTransition.swift in Sources */,
 				04C816F82BA98D75006B800A /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
