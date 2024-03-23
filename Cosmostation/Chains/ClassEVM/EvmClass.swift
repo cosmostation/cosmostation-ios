@@ -55,57 +55,74 @@ class EvmClass: CosmosClass {
     
     override func fetchData(_ id: Int64) {
         mintscanErc20Tokens.removeAll()
-        fetchEvmBalance()
         Task {
             if let erc20Tokens = try? await fetchErc20Info() {
                 if (erc20Tokens != nil) {
                     self.mintscanErc20Tokens = erc20Tokens!
                 }
-                
-                if (supportCosmos) {
-                    cosmosAuth = nil
-                    cosmosBalances = nil
-                    cosmosVestings.removeAll()
-                    cosmosDelegations.removeAll()
-                    cosmosUnbondings.removeAll()
-                    cosmosRewards.removeAll()
-                    cosmosCommissions.removeAll()
-                    
-                    let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel),
-                       let balance = try? await fetchBalance(channel),
-                       let delegations = try? await fetchDelegation(channel),
-                       let unbonding = try? await fetchUnbondings(channel),
-                       let rewards = try? await fetchRewards(channel),
-                       let commission = try? await fetchCommission(channel),
-                       let rewardaddr = try? await fetchRewardAddress(channel) {
-                        
-                        self.cosmosAuth = auth
-                        self.cosmosBalances = balance
-                        delegations?.forEach({ delegation in
-                            if (delegation.balance.amount != "0") {
-                                self.cosmosDelegations.append(delegation)
-                            }
-                        })
-                        if (unbonding != nil) {
-                            self.cosmosUnbondings = unbonding!
-                        }
-                        if (rewards != nil) {
-                            self.cosmosRewards = rewards!
-                        }
-                        commission?.commission.forEach { commi in
-                            if (commi.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
-                                self.cosmosCommissions.append(Cosmos_Base_V1beta1_Coin(commi.denom, commi.getAmount()))
-                            }
-                        }
-                        self.rewardAddress = (rewardaddr ?? "").replacingOccurrences(of: "\"", with: "")
-                        
-                        DispatchQueue.main.async {
-                            try? channel.close()
-                        }
+            }
+            DispatchQueue.main.async {
+                DispatchQueue.global().async {
+                    if let balance = try? self.getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
+                        self.evmBalances = NSDecimalNumber(string: String(balance ?? "0"))
                     }
-                    
+                    DispatchQueue.main.async(execute: {
+                        if (self.supportCosmos) {
+                            self.fetchCosmosData(id)
+                            
+                        } else {
+                            self.fetched = true
+                            self.allCoinValue = self.allCoinValue()
+                            self.allCoinUSDValue = self.allCoinValue(true)
+                            self.fetchAllErc20Balance(id)
+                            BaseData.instance.updateRefAddressesCoinValue(
+                                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+                                           self.evmBalances.stringValue, self.allCoinUSDValue.stringValue,
+                                           nil, (self.evmBalances != NSDecimalNumber.zero ? 1 : 0) ))
+                            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                        }
+                    });
                 }
+            }
+        }
+    }
+    
+    func fetchCosmosData(_ id: Int64) {
+        cosmosAuth = nil
+        cosmosBalances = nil
+        cosmosVestings.removeAll()
+        cosmosDelegations.removeAll()
+        cosmosUnbondings.removeAll()
+        cosmosRewards.removeAll()
+        cosmosCommissions.removeAll()
+        Task {
+            let channel = getConnection()
+            if let auth = try? await fetchAuth(channel),
+               let balance = try? await fetchBalance(channel),
+               let delegations = try? await fetchDelegation(channel),
+               let unbonding = try? await fetchUnbondings(channel),
+               let rewards = try? await fetchRewards(channel),
+               let commission = try? await fetchCommission(channel),
+               let rewardaddr = try? await fetchRewardAddress(channel) {
+                self.cosmosAuth = auth
+                self.cosmosBalances = balance
+                delegations?.forEach({ delegation in
+                    if (delegation.balance.amount != "0") {
+                        self.cosmosDelegations.append(delegation)
+                    }
+                })
+                if (unbonding != nil) {
+                    self.cosmosUnbondings = unbonding!
+                }
+                if (rewards != nil) {
+                    self.cosmosRewards = rewards!
+                }
+                commission?.commission.forEach { commi in
+                    if (commi.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
+                        self.cosmosCommissions.append(Cosmos_Base_V1beta1_Coin(commi.denom, commi.getAmount()))
+                    }
+                }
+                self.rewardAddress = (rewardaddr ?? "").replacingOccurrences(of: "\"", with: "")
             }
             
             DispatchQueue.main.async {
@@ -115,21 +132,16 @@ class EvmClass: CosmosClass {
                 self.allCoinUSDValue = self.allCoinValue(true)
                 self.fetchAllErc20Balance(id)
                 
-                if (self.supportCosmos) {
-                    BaseData.instance.updateRefAddressesCoinValue(
-                        RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                                   self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                                   nil, self.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
-                } else {
-                    BaseData.instance.updateRefAddressesCoinValue(
-                        RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                                   self.evmBalances.stringValue, self.allCoinUSDValue.stringValue,
-                                   nil, (self.evmBalances != NSDecimalNumber.zero ? 1 : 0) ))
-                }
+                BaseData.instance.updateRefAddressesCoinValue(
+                    RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+                               self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                               nil, self.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                try? channel.close()
             }
         }
     }
+    
     
     //fetch only balance for add account check
     override func fetchPreCreate() {
@@ -207,14 +219,6 @@ extension EvmClass {
     func fetchErc20Info() async throws -> [MintscanToken]?  {
         return try? await AF.request(BaseNetWork.msErc20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
     }
-    
-    func fetchEvmBalance() {
-        DispatchQueue.global().async {
-            if let balance = try? self.getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
-                self.evmBalances = NSDecimalNumber(string: String(balance ?? "0"))
-            }
-        }
-    }
 }
 
 extension EvmClass {
@@ -269,16 +273,16 @@ func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
 //    result.append(ChainAltheaEVM())
-//    result.append(ChainBaseEVM())
-//    result.append(ChainCantoEVM())
-//    result.append(ChainDymensionEVM())
-//    result.append(ChainEvmosEVM())
-//    result.append(ChainHumansEVM())
-//    result.append(ChainKavaEVM())
-//    result.append(ChainOktEVM())
-//    result.append(ChainOptimism())
-//    result.append(ChainPolygon())
-//    result.append(ChainXplaEVM())
+    result.append(ChainBaseEVM())
+    result.append(ChainCantoEVM())
+    result.append(ChainDymensionEVM())
+    result.append(ChainEvmosEVM())
+    result.append(ChainHumansEVM())
+    result.append(ChainKavaEVM())
+    result.append(ChainOktEVM())
+    result.append(ChainOptimism())
+    result.append(ChainPolygon())
+    result.append(ChainXplaEVM())
     
     //Add cosmos chain id for ibc
     result.forEach { chain in

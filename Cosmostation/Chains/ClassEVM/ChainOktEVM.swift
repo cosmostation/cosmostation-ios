@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import web3swift
 import Alamofire
 import SwiftyJSON
 
@@ -48,23 +49,37 @@ class ChainOktEVM: EvmClass {
     
     override func fetchData(_ id: Int64) {
         mintscanErc20Tokens.removeAll()
-        fetchEvmBalance()
+        Task {
+            if let erc20Tokens = try? await fetchErc20Info() {
+                if (erc20Tokens != nil) {
+                    self.mintscanErc20Tokens = erc20Tokens!
+                }
+            }
+            DispatchQueue.main.async {
+                DispatchQueue.global().async {
+                    if let balance = try? self.getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
+                        self.evmBalances = NSDecimalNumber(string: String(balance ?? "0"))
+                    }
+                    DispatchQueue.main.async(execute: {
+                        self.fetchCosmosLcdData(id)
+                    });
+                }
+            }
+        }
+    }
+    
+    func fetchCosmosLcdData(_ id: Int64) {
         lcdNodeInfo = JSON()
         lcdAccountInfo = JSON()
         lcdOktDeposits = JSON()
         lcdOktWithdaws = JSON()
         lcdOktTokens.removeAll()
-        
         Task {
-            if let erc20Tokens = try? await fetchErc20Info(),
-               let nodeInfo = try? await fetchNodeInfo(),
+            if let nodeInfo = try? await fetchNodeInfo(),
                let accountInfo = try? await fetchAccountInfo(bechAddress),
                let okDeposit = try? await fetchOktDeposited(bechAddress),
                let okWithdraw = try? await fetchOktWithdraw(bechAddress),
                let okTokens = try? await fetchOktTokens() {
-                if (erc20Tokens != nil) {
-                    self.mintscanErc20Tokens = erc20Tokens!
-                }
                 self.lcdNodeInfo = nodeInfo ?? JSON()
                 self.lcdAccountInfo = accountInfo ?? JSON()
                 self.lcdOktDeposits = okDeposit ?? JSON()
