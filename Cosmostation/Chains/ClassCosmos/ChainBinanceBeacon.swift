@@ -34,32 +34,51 @@ class ChainBinanceBeacon: CosmosClass  {
     }
     
     override func fetchData(_ id: Int64) {
-        let group = DispatchGroup()
+        lcdNodeInfo = JSON()
+        lcdAccountInfo = JSON()
+        lcdBeaconTokens.removeAll()
         
-        fetchNodeInfo(group)
-        fetchAccountInfo(group, bechAddress)
-        fetchBeaconTokens(group)
-        fetchBeaconMiniTokens(group)
-        
-        group.notify(queue: .main) {
-            self.fetched = true
-            self.allCoinValue = self.allCoinValue()
-            self.allCoinUSDValue = self.allCoinValue(true)
+        Task {
+            if let nodeInfo = try? await fetchNodeInfo(),
+               let accountInfo = try? await fetchAccountInfo(bechAddress),
+               let beaconTokens = try? await fetchBeaconTokens(),
+               let miniTokens = try? await fetchBeaconMiniTokens() {
+                self.lcdNodeInfo = nodeInfo ?? JSON()
+                self.lcdAccountInfo = accountInfo ?? JSON()
+                
+                beaconTokens?.forEach { beaconToken in
+                    self.lcdBeaconTokens.append(beaconToken)
+                }
+                miniTokens?.forEach { miniToken in
+                    self.lcdBeaconTokens.append(miniToken)
+                }
+            }
             
-            BaseData.instance.updateRefAddressesCoinValue(
-                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                           self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                           nil, self.lcdAccountInfo.bnbCoins?.count))
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            DispatchQueue.main.async {
+                self.fetched = true
+                self.allCoinValue = self.allCoinValue()
+                self.allCoinUSDValue = self.allCoinValue(true)
+                
+                BaseData.instance.updateRefAddressesCoinValue(
+                    RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+                               self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                               nil, self.lcdAccountInfo.bnbCoins?.count))
+                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            }
         }
     }
     
     override func fetchPreCreate() {
-        let group = DispatchGroup()
-        fetchAccountInfo(group, bechAddress)
-        group.notify(queue: .main) {
-            self.fetched = true
-            NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+        lcdAccountInfo = JSON()
+        Task {
+            if let accountInfo = try? await fetchAccountInfo(bechAddress) {
+                self.lcdAccountInfo = accountInfo ?? JSON()
+            }
+            
+            DispatchQueue.main.async {
+                self.fetched = true
+                NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+            }
         }
     }
     
@@ -79,70 +98,20 @@ class ChainBinanceBeacon: CosmosClass  {
 
 extension ChainBinanceBeacon {
     
-    func fetchNodeInfo(_ group: DispatchGroup) {
-//        print("fetchNodeInfo Start ", BaseNetWork.lcdNodeInfoUrl(self))
-        group.enter()
-        AF.request(BaseNetWork.lcdNodeInfoUrl(self), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let value):
-                    self.lcdNodeInfo = value
-//                    print("fetchNodeInfo ", value)
-                case .failure:
-                    print("fetchNodeInfo error")
-                }
-                group.leave()
-            }
+    func fetchNodeInfo() async throws -> JSON? {
+        return try? await AF.request(BaseNetWork.lcdNodeInfoUrl(self), method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchAccountInfo(_ group: DispatchGroup, _ address: String) {
-//        print("fetchAccountInfo Start ", BaseNetWork.lcdAccountInfoUrl(self, address))
-        group.enter()
-        AF.request(BaseNetWork.lcdAccountInfoUrl(self, address), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let value):
-                    self.lcdAccountInfo = value
-//                    print("fetchAccountInfo ", value)
-                case .failure:
-                    print("fetchAccountInfo error")
-                }
-                group.leave()
-            }
+    func fetchAccountInfo(_ address: String) async throws -> JSON? {
+        return try? await AF.request(BaseNetWork.lcdAccountInfoUrl(self, address), method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchBeaconTokens(_ group: DispatchGroup) {
-//        print("fetchBeaconTokens Start ", BaseNetWork.lcdBeaconTokenUrl())
-        group.enter()
-        AF.request(BaseNetWork.lcdBeaconTokenUrl(), method: .get, parameters: ["limit":"1000"])
-            .responseDecodable(of: [JSON].self) { response in
-                switch response.result {
-                case .success(let values):
-                    values.forEach { value in
-                        self.lcdBeaconTokens.append(value)
-                    }
-                case .failure:
-                    print("fetchBeaconTokens error")
-                }
-                group.leave()
-            }
+    func fetchBeaconTokens() async throws -> [JSON]? {
+        return try? await AF.request(BaseNetWork.lcdBeaconTokenUrl(), method: .get, parameters: ["limit":"1000"]).serializingDecodable([JSON].self).value
     }
     
-    func fetchBeaconMiniTokens(_ group: DispatchGroup) {
-//        print("fetchBeaconMiniTokens Start ", BaseNetWork.lcdBeaconMiniTokenUrl())
-        group.enter()
-        AF.request(BaseNetWork.lcdBeaconMiniTokenUrl(), method: .get, parameters: ["limit":"1000"])
-            .responseDecodable(of: [JSON].self) { response in
-                switch response.result {
-                case .success(let values):
-                    values.forEach { value in
-                        self.lcdBeaconTokens.append(value)
-                    }
-                case .failure:
-                    print("fetchBeaconMiniTokens error")
-                }
-                group.leave()
-            }
+    func fetchBeaconMiniTokens() async throws -> [JSON]? {
+        return try? await AF.request(BaseNetWork.lcdBeaconMiniTokenUrl(), method: .get, parameters: ["limit":"1000"]).serializingDecodable([JSON].self).value
     }
     
     

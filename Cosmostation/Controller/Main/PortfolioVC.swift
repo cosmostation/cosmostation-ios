@@ -126,12 +126,16 @@ class PortfolioVC: BaseVC {
     
     @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
-        onUpdateRow(tag)
+        Task {
+            onUpdateRow(tag)
+        }
     }
     
     @objc func onFetchTokenDone(_ notification: NSNotification) {
         let tag = notification.object as! String
-        onUpdateRow(tag)
+        Task {
+            onUpdateRow(tag)
+        }
     }
     
     @objc func onFetchPrice(_ notification: NSNotification) {
