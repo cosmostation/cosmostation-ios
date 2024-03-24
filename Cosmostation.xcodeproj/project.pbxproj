@@ -634,6 +634,8 @@
 		047C10742AAC310600AFA159 /* QrAddressVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047C10702AAC310600AFA159 /* QrAddressVC.xib */; };
 		047DCEE228855F4800253CAA /* MintscanMyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DCEE128855F4800253CAA /* MintscanMyVote.swift */; };
 		047DCEE328855F4800253CAA /* MintscanMyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DCEE128855F4800253CAA /* MintscanMyVote.swift */; };
+		04806BC52BB06DCA0048F232 /* Cw721Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04806BC42BB06DCA0048F232 /* Cw721Model.swift */; };
+		04806BC62BB06DCA0048F232 /* Cw721Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04806BC42BB06DCA0048F232 /* Cw721Model.swift */; };
 		04815BDE2A41DB120006A906 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 04815BDD2A41DB120006A906 /* SwiftProtobuf */; };
 		04815BE12A41DB410006A906 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 04815BE02A41DB410006A906 /* GRPC */; };
 		048427A52B3BE09900C8D7D8 /* NeutronDao.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048427A42B3BE09900C8D7D8 /* NeutronDao.storyboard */; };
@@ -2187,6 +2189,7 @@
 		047C106F2AAC310600AFA159 /* QrAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrAddressVC.swift; sourceTree = "<group>"; };
 		047C10702AAC310600AFA159 /* QrAddressVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QrAddressVC.xib; sourceTree = "<group>"; };
 		047DCEE128855F4800253CAA /* MintscanMyVote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanMyVote.swift; sourceTree = "<group>"; };
+		04806BC42BB06DCA0048F232 /* Cw721Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw721Model.swift; sourceTree = "<group>"; };
 		048427A42B3BE09900C8D7D8 /* NeutronDao.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NeutronDao.storyboard; sourceTree = "<group>"; };
 		048427A72B3BE21200C8D7D8 /* NeutronSingleDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronSingleDao.swift; sourceTree = "<group>"; };
 		048427AA2B3BE21F00C8D7D8 /* NeutronMultiDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronMultiDao.swift; sourceTree = "<group>"; };
@@ -3405,6 +3408,7 @@
 				E131A3C52AACD0E000943013 /* OktHistory.swift */,
 				04BA9BD02A978131003E2404 /* RefAddress.swift */,
 				E16200362AF139C60008F397 /* AddressBook.swift */,
+				04806BC42BB06DCA0048F232 /* Cw721Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4868,6 +4872,7 @@
 				047843A82AC991B300462F1C /* injective_exchange_v1beta1_tx.pb.swift in Sources */,
 				04B7899C2ACAC9B100E9BE88 /* ibc_core_connection_v1_query.grpc.swift in Sources */,
 				04C817BB2BA98D75006B800A /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
+				04806BC62BB06DCA0048F232 /* Cw721Model.swift in Sources */,
 				04C940C52AEA529900415256 /* ChainHumans.swift in Sources */,
 				0402B8222ACC7A8700824B3F /* ChainNyx.swift in Sources */,
 				04C816C52BA98D75006B800A /* cosmos_autocli_v1_options.pb.swift in Sources */,
@@ -5616,6 +5621,7 @@
 				047843A72AC991B300462F1C /* injective_exchange_v1beta1_tx.pb.swift in Sources */,
 				04B7899B2ACAC9B100E9BE88 /* ibc_core_connection_v1_query.grpc.swift in Sources */,
 				04C817BA2BA98D75006B800A /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
+				04806BC52BB06DCA0048F232 /* Cw721Model.swift in Sources */,
 				04C940C42AEA529900415256 /* ChainHumans.swift in Sources */,
 				0402B8212ACC7A8700824B3F /* ChainNyx.swift in Sources */,
 				04C816C42BA98D75006B800A /* cosmos_autocli_v1_options.pb.swift in Sources */,

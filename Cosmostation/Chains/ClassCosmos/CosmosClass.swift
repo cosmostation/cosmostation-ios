@@ -43,6 +43,8 @@ class CosmosClass: BaseChain {
     
     lazy var mintscanCw20Tokens = [MintscanToken]()
     lazy var mintscanCw721List = [JSON]()
+    lazy var cw721Models = [Cw721Model]()
+    var cw721Fetched = false
     
     //get bech style info from seed
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
@@ -379,7 +381,6 @@ extension CosmosClass {
     
     func fetchCw721Info() async throws -> [JSON]? {
         if (!supportCw721) { return [] }
-        print("fetchCw721Info ", BaseNetWork.msCw721InfoUrl(self))
         return try? await AF.request(BaseNetWork.msCw721InfoUrl(self), method: .get).serializingDecodable([JSON].self).value
     }
 }
@@ -460,7 +461,7 @@ extension CosmosClass {
         mintscanCw20Tokens.forEach { token in
             fetchCw20Balance(group, channel, token)
         }
-
+        
         group.notify(queue: .main) {
             self.allTokenValue = self.allTokenValue()
             self.allTokenUSDValue = self.allTokenValue(true)
@@ -472,7 +473,7 @@ extension CosmosClass {
             try? channel.close()
         }
     }
-
+    
     func fetchCw20Balance(_ group: DispatchGroup, _ channel: ClientConnection, _ tokenInfo: MintscanToken) {
         group.enter()
         DispatchQueue.global().async {
@@ -490,6 +491,62 @@ extension CosmosClass {
                 group.leave()
             }
         }
+    }
+    
+    func fetchAllCw721() {
+        cw721Fetched = false
+        cw721Models.removeAll()
+        Task {
+            let channel = getConnection()
+            await mintscanCw721List.concurrentForEach { list in
+                var tokens = [Cw721TokenModel]()
+                if let tokenIds = try? await self.fetchCw721TokenIds(channel, list), !tokenIds.isEmpty {
+                    await tokenIds["tokens"].arrayValue.concurrentForEach { tokenId in
+                        if let tokenInfo = try? await self.fetchCw721TokenInfo(channel, list, tokenId.stringValue),
+                           let tokenDetail = try? await AF.request(tokenInfo.ipfsUrl, method: .get).serializingDecodable(JSON.self).value {
+                            tokens.append(Cw721TokenModel.init(tokenId.stringValue, tokenInfo, tokenDetail))
+                        }
+                    }
+                }
+                if (!tokens.isEmpty) {
+                    self.cw721Models.append(Cw721Model(list, tokens))
+                }
+            }
+            DispatchQueue.main.async(execute: {
+                self.cw721Fetched = true
+                NotificationCenter.default.post(name: Notification.Name("FetchNFTs"), object: self.tag, userInfo: nil)
+                try? channel.close()
+            })
+        }
+        
+    }
+    
+    func fetchCw721TokenIds(_ channel: ClientConnection, _ list: JSON) async throws -> JSON {
+        let query: JSON = ["tokens" : ["owner" : self.bechAddress, "limit" : 50, "start_after" : "0"]]
+        let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+        let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+            $0.address = list["contractAddress"].stringValue
+            $0.queryData = Data(base64Encoded: queryBase64)!
+        }
+        if let result = try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.get().data,
+           let tokenIds = try? JSONDecoder().decode(JSON.self, from: result), tokenIds["tokens"].arrayValue.count > 0 {
+            return tokenIds
+        }
+        return JSON()
+    }
+    
+    func fetchCw721TokenInfo(_ channel: ClientConnection, _ list: JSON, _ tokenId: String) async throws -> JSON {
+        let query: JSON = ["nft_info" : ["token_id" : tokenId]]
+        let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+        let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+            $0.address = list["contractAddress"].stringValue
+            $0.queryData = Data(base64Encoded: queryBase64)!
+        }
+        if let result = try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.get().data,
+           let tokenInfo = try? JSONDecoder().decode(JSON.self, from: result) {
+            return tokenInfo
+        }
+        return JSON()
     }
     
     func balanceAmount(_ denom: String) -> NSDecimalNumber {
@@ -742,7 +799,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
 //    result.append(ChainInjective())
 //    result.append(ChainIris())
 //    result.append(ChainIxo())
-//    result.append(ChainJuno())
+    result.append(ChainJuno())
 //    result.append(ChainKava459())
 //    result.append(ChainKava118())
 //    result.append(ChainKi())
@@ -824,4 +881,12 @@ extension Cosmos_Base_V1beta1_DecCoin {
     func getAmount() -> NSDecimalNumber {
         return NSDecimalNumber(string: amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
     }
+}
+
+
+extension JSON {
+    var ipfsUrl: String {
+        return self["token_uri"].stringValue.replacingOccurrences(of: "ipfs://", with: "https://ipfs.io/ipfs/")
+    }
+    
 }

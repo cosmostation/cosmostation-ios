@@ -9,10 +9,13 @@
 import UIKit
 
 class NftListHeader: UICollectionReusableView {
+    
+    @IBOutlet weak var rootView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var cntLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
 }

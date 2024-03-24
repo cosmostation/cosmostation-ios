@@ -16,7 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR">
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="NftListHeader" reuseIdentifier="" id="U6b-Vx-4bR" customClass="NftListHeader" customModule="Cosmostation" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="395" height="40"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
@@ -55,6 +55,11 @@
                 <constraint firstItem="AV7-ac-xQQ" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="e7n-uj-Sa8"/>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="AV7-ac-xQQ" secondAttribute="trailing" id="olA-7F-HzN"/>
             </constraints>
+            <connections>
+                <outlet property="cntLabel" destination="9HM-26-xBX" id="aYq-0u-b4z"/>
+                <outlet property="rootView" destination="AV7-ac-xQQ" id="0X1-RR-bTe"/>
+                <outlet property="titleLabel" destination="CQO-NM-7G8" id="RAv-dD-YvF"/>
+            </connections>
             <point key="canvasLocation" x="93.89312977099236" y="16.197183098591552"/>
         </collectionReusableView>
     </objects>
