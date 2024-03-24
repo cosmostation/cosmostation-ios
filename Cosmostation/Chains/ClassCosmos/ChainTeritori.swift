@@ -23,6 +23,7 @@ class ChainTeritori: CosmosClass  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "tori"
         validatorPrefix = "torivaloper"
+        supportCw721 = true
         
         grpcHost = "grpc-teritori.cosmostation.io"
     }
