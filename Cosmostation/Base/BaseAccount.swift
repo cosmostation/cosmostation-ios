@@ -101,7 +101,8 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                Task(priority: .medium) {
+//                Task(priority: .medium) {
+                Task {
                     await getDisplayCosmosChains().concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)
@@ -234,7 +235,8 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                Task(priority: .high) {
+//                Task(priority: .high) {
+                Task {
                     await getDisplayEvmChains().concurrentForEach { chain in
                         if (chain.evmAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)

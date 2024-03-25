@@ -585,7 +585,7 @@ extension CommonTransfer {
     func evmSendSimul() {
         evmTx = nil
         DispatchQueue.global().async { [self] in
-            guard let web3 = (fromChain as! EvmClass).getWeb3Connection() else {
+            guard let web3 = (fromChain as! EvmClass).web3 else {
                 return
             }
             let chainID = web3.provider.network?.chainID
@@ -672,7 +672,7 @@ extension CommonTransfer {
     
     func evmSend() {
         DispatchQueue.global().async { [self] in
-            guard let web3 = (fromChain as! EvmClass).getWeb3Connection() else {
+            guard let web3 = (fromChain as! EvmClass).web3 else {
                 return
             }
             try! evmTx?.sign(privateKey: fromChain.privateKey!)

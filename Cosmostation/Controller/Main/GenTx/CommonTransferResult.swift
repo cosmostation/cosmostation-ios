@@ -214,7 +214,7 @@ extension CommonTransferResult {
     
     func fetchEvmTx() {
         DispatchQueue.global().async { [self] in
-            guard let web3 = (fromChain as! EvmClass).getWeb3Connection() else {
+            guard let web3 = (fromChain as! EvmClass).web3 else {
                 return
             }
             do {

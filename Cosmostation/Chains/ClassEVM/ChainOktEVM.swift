@@ -49,22 +49,30 @@ class ChainOktEVM: EvmClass {
     
     override func fetchData(_ id: Int64) {
         mintscanErc20Tokens.removeAll()
-        Task {
-            if let erc20Tokens = try? await fetchErc20Info() {
-                if (erc20Tokens != nil) {
-                    self.mintscanErc20Tokens = erc20Tokens!
-                }
+        
+        DispatchQueue(label: "evmBalance", attributes: .concurrent).async {
+            if let url = URL(string: self.getEvmRpc()),
+               let web3 = try? Web3.new(url),
+               let balance = try? web3.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
+                self.web3 = web3
+                self.evmBalances = NSDecimalNumber(string: String(balance))
+//                print("evmBalances ", self.tag,  "  ", self.evmBalances)
             }
-            DispatchQueue.main.async {
-                DispatchQueue.global().async {
-                    if let balance = try? self.getWeb3Connection()?.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
-                        self.evmBalances = NSDecimalNumber(string: String(balance ?? "0"))
+            
+            DispatchQueue.main.async(execute: {
+                Task {
+                    if let erc20Tokens = try? await self.fetchErc20Info() {
+                        if (erc20Tokens != nil) {
+                            self.mintscanErc20Tokens = erc20Tokens!
+//                            print("Erc20Tokens ", self.tag,  "  ", self.mintscanErc20Tokens.count)
+                        }
                     }
                     DispatchQueue.main.async(execute: {
+                        self.fetchAllErc20Balance(id)
                         self.fetchCosmosLcdData(id)
                     });
                 }
-            }
+            });
         }
     }
     
@@ -93,7 +101,6 @@ class ChainOktEVM: EvmClass {
                 self.fetched = true
                 self.allCoinValue = self.allCoinValue()
                 self.allCoinUSDValue = self.allCoinValue(true)
-                self.fetchAllErc20Balance(id)
                 
                 BaseData.instance.updateRefAddressesCoinValue(
                     RefAddress(id, self.tag, self.bechAddress, self.evmAddress,

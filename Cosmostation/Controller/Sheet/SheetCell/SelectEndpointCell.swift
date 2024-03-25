@@ -100,29 +100,28 @@ class SelectEndpointCell: UITableViewCell {
             seletedImg.isHidden = (evmChain.getEvmRpc() != url)
             
             DispatchQueue.global().async {
-                do {
-                    let url = URL(string: url)
-                    let web3 = try Web3.new(url!)
+                if let url = URL(string: url),
+                   let web3 = try? Web3.new(url),
+                   let balance = try? web3.eth.getBalance(address: EthereumAddress.init("0x8D97689C9818892B700e27F316cc3E41e17fBeb9")!) {
                     self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
-                    
-                    DispatchQueue.main.async {
-                        let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
-                        if (self.gapTime! <= 1.2) {
-                            self.speedImg.image = UIImage.init(named: "ImgGovPassed")
-                        } else if (self.gapTime! <= 3) {
-                            self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
-                        } else {
-                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        }
-                        self.speedTimeLabel.text = gapFormat
-                    }
-                    
-                } catch {
-                    print(error)
+                } else {
                     DispatchQueue.main.async {
                         self.speedImg.image = UIImage.init(named: "ImgGovRejected")
                         self.speedTimeLabel.text = "Unknown"
                     }
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
+                    if (self.gapTime! <= 1.2) {
+                        self.speedImg.image = UIImage.init(named: "ImgGovPassed")
+                    } else if (self.gapTime! <= 3) {
+                        self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
+                    } else {
+                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                    }
+                    self.speedTimeLabel.text = gapFormat
                 }
             }
         }
