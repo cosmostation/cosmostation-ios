@@ -42,6 +42,7 @@ final class BaseData: NSObject{
     }
     
     func getPrice(_ geckoId: String?, _ usd: Bool? = false) -> NSDecimalNumber {
+        if (geckoId == nil) { return NSDecimalNumber.zero }
         if (usd == true) {
             if let price = mintscanUSDPrices?.filter({ $0.coinGeckoId == geckoId }).first {
                 return NSDecimalNumber.init(value: price.current_price ?? 0).rounding(accordingToBehavior: handler12Down)
@@ -57,6 +58,7 @@ final class BaseData: NSObject{
     }
     
     func priceChange(_ geckoId: String?) -> NSDecimalNumber {
+        if (geckoId == nil) { return NSDecimalNumber.zero.rounding(accordingToBehavior: handler2Down) }
         if let price = mintscanPrices?.filter({ $0.coinGeckoId == geckoId }).first {
             return NSDecimalNumber.init(value: price.daily_price_change_in_percent ?? 0).rounding(accordingToBehavior: handler2Down)
         }
