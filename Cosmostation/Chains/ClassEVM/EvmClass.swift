@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import web3swift
 import Alamofire
 import BigInt
 import SwiftyJSON
@@ -25,9 +24,7 @@ class EvmClass: CosmosClass {
     lazy var addressURL = ""
     lazy var txURL = ""
     
-    var web3: web3?
     var evmBalances = NSDecimalNumber.zero
-    
     lazy var mintscanErc20Tokens = [MintscanToken]()
     
     override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
@@ -55,6 +52,7 @@ class EvmClass: CosmosClass {
     }
     
     override func fetchData(_ id: Int64) {
+        fetchState = .Busy
         mintscanErc20Tokens.removeAll()
         Task {
             do {
@@ -69,16 +67,20 @@ class EvmClass: CosmosClass {
 //                    print("evmBalances ", tag, "   ", evmBalances)
                 }
                 await fetchAllErc20Balance(id)
+                
             } catch {
                 print("Error Evm", self.tag,  error)
-                //TODO Handle Error
+                DispatchQueue.main.async {
+                    self.fetchState = .Fail
+                    NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                }
             }
             
             if (supportCosmos) {
                 await self.fetchCosmosData(id)
             } else {
                 DispatchQueue.main.async(execute: {
-                    self.fetched = true
+                    self.fetchState = .Success
                     self.allCoinValue = self.allCoinValue()
                     self.allCoinUSDValue = self.allCoinValue(true)
                     BaseData.instance.updateRefAddressesCoinValue(
@@ -97,71 +99,61 @@ class EvmClass: CosmosClass {
         cosmosBalances = nil
         cosmosVestings.removeAll()
         cosmosDelegations.removeAll()
-        cosmosUnbondings.removeAll()
-        cosmosRewards.removeAll()
+        cosmosUnbondings = nil
+        cosmosRewards = nil
         cosmosCommissions.removeAll()
+        rewardAddress = nil
         
-        let channel = getConnection()
-        if let auth = try? await fetchAuth(channel),
-           let balance = try? await fetchBalance(channel),
-           let delegations = try? await fetchDelegation(channel),
-           let unbonding = try? await fetchUnbondings(channel),
-           let rewards = try? await fetchRewards(channel),
-           let commission = try? await fetchCommission(channel),
-           let rewardaddr = try? await fetchRewardAddress(channel) {
-            self.cosmosAuth = auth
-            self.cosmosBalances = balance
-            delegations?.forEach({ delegation in
-                if (delegation.balance.amount != "0") {
-                    self.cosmosDelegations.append(delegation)
+        do {
+            let channel = getConnection()
+            if let auth = try await fetchAuth(channel),
+               let balance = try? await fetchBalance(channel),
+               let delegations = try? await fetchDelegation(channel),
+               let unbonding = try? await fetchUnbondings(channel),
+               let rewards = try? await fetchRewards(channel),
+               let commission = try? await fetchCommission(channel),
+               let rewardaddr = try? await fetchRewardAddress(channel) {
+                self.cosmosAuth = auth
+                self.cosmosBalances = balance
+                delegations?.forEach({ delegation in
+                    if (delegation.balance.amount != "0") {
+                        self.cosmosDelegations.append(delegation)
+                    }
+                })
+                self.cosmosUnbondings = unbonding
+                self.cosmosRewards = rewards
+                commission?.commission.forEach { commi in
+                    if (commi.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
+                        self.cosmosCommissions.append(Cosmos_Base_V1beta1_Coin(commi.denom, commi.getAmount()))
+                    }
                 }
-            })
-            if (unbonding != nil) {
-                self.cosmosUnbondings = unbonding!
+                self.rewardAddress = rewardaddr?.replacingOccurrences(of: "\"", with: "")
             }
-            if (rewards != nil) {
-                self.cosmosRewards = rewards!
-            }
-            commission?.commission.forEach { commi in
-                if (commi.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
-                    self.cosmosCommissions.append(Cosmos_Base_V1beta1_Coin(commi.denom, commi.getAmount()))
-                }
-            }
-            self.rewardAddress = (rewardaddr ?? "").replacingOccurrences(of: "\"", with: "")
-        }
-        
-        DispatchQueue.main.async {
-            WUtils.onParseVestingAccount(self)
-            self.fetched = true
-            self.allCoinValue = self.allCoinValue()
-            self.allCoinUSDValue = self.allCoinValue(true)
             
-            BaseData.instance.updateRefAddressesCoinValue(
-                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                           self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                           nil, self.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
-            try? channel.close()
+            DispatchQueue.main.async {
+                WUtils.onParseVestingAccount(self)
+                self.fetchState = .Success
+                self.allCoinValue = self.allCoinValue()
+                self.allCoinUSDValue = self.allCoinValue(true)
+                
+                BaseData.instance.updateRefAddressesCoinValue(
+                    RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+                               self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                               nil, self.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
+                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                try? channel.close()
+            }
+            
+        } catch {
+            print("error ",tag, "  ", error)
+            DispatchQueue.main.async {
+                self.fetchState = .Fail
+                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            }
         }
     }
     
-    
-    //fetch only balance for add account check
     override func fetchPreCreate() {
-        //Do not using Task, only DispatchQueue : make slow
-//        DispatchQueue(label: "evmBalance", attributes: .concurrent).async {
-//            if let url = URL(string: self.getEvmRpc()),
-//               let web3 = try? Web3.new(url),
-//               let balance = try? web3.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
-//                self.web3 = web3
-//                self.evmBalances = NSDecimalNumber(string: String(balance))
-//            }
-//            
-//            DispatchQueue.main.async(execute: {
-//                self.fetched = true
-//                NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
-//            });
-//        }
         Task {
             let balanceJson = try await fetchEvmBalance(self.evmAddress)
             if let balance = balanceJson?["result"].stringValue.hexToNSDecimal {
@@ -169,7 +161,7 @@ class EvmClass: CosmosClass {
             }
             
             DispatchQueue.main.async(execute: {
-                self.fetched = true
+                self.fetchState = .Success
                 NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
             });
         }
@@ -208,10 +200,6 @@ class EvmClass: CosmosClass {
             result = result.adding(value)
         }
         return result
-    }
-    
-    deinit {
-        web3 = nil
     }
     
     func getEvmRpc() -> String {

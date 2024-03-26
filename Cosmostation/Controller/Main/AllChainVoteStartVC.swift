@@ -96,8 +96,8 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
     }
     
     func onInitView() {
-        if (baseAccount.getDisplayCosmosChains().filter { $0.fetched == false }.count == 0 &&
-            baseAccount.getDisplayEvmChains().filter { $0.fetched == false }.count == 0) {
+        if (baseAccount.getDisplayCosmosChains().filter { $0.fetchState == .Busy }.count == 0 &&
+            baseAccount.getDisplayEvmChains().filter { $0.fetchState == .Busy }.count == 0) {
             
             var stakedChains = [BaseChain]()
             baseAccount.getDisplayCosmosChains().filter { $0.isDefault == true }.forEach { chain in
@@ -233,16 +233,11 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
     }
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
-        self.dismiss(animated: true) {
-            self.baseAccount.getDisplayEvmChains().forEach { chain in
-                chain.fetched = false
-            }
-            self.baseAccount.getDisplayCosmosChains().forEach { chain in
-                chain.fetched = false
-            }
-            self.baseAccount.fetchDisplayEvmChains()
-            self.baseAccount.fetchDisplayCosmosChains()
-        }
+        self.baseAccount.getDisplayEvmChains().forEach { $0.fetchState = .Idle }
+        self.baseAccount.getDisplayCosmosChains().forEach { $0.fetchState = .Idle }
+        self.baseAccount.fetchDisplayEvmChains()
+        self.baseAccount.fetchDisplayCosmosChains()
+        self.dismiss(animated: true)
     }
     
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {

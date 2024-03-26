@@ -22,10 +22,10 @@ class CosmosStakingInfoVC: BaseVC {
     
     var selectedChain: CosmosClass!
     var rewardAddress: String?
-    var validators = Array<Cosmos_Staking_V1beta1_Validator>()
-    var delegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
-    var unbondings = Array<UnbondingEntry>()
-    var rewards = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
+    var validators = [Cosmos_Staking_V1beta1_Validator]()
+    var delegations = [Cosmos_Staking_V1beta1_DelegationResponse]()
+    var unbondings = [UnbondingEntry]()
+    var rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]?
     var cosmostationValAddress: String?
 
     override func viewDidLoad() {
@@ -77,7 +77,7 @@ class CosmosStakingInfoVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
-        if (selectedChain.fetched == false) {
+        if (selectedChain.fetchState == .Busy) {
             refresher.endRefreshing()
         } else {
             DispatchQueue.global().async {
@@ -101,7 +101,7 @@ class CosmosStakingInfoVC: BaseVC {
             rewards = selectedChain.cosmosRewards
             unbondings.removeAll()
             
-            selectedChain.cosmosUnbondings.forEach { unbonding in
+            selectedChain.cosmosUnbondings?.forEach { unbonding in
                 unbonding.entries.forEach { entry in
                     unbondings.append(UnbondingEntry.init(validatorAddress: unbonding.validatorAddress, entry: entry))
                 }
@@ -182,7 +182,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if let claimableReward = selectedChain.cosmosRewards.filter({ $0.validatorAddress == fromValAddress }).first,
+        if let claimableReward = selectedChain.cosmosRewards?.filter({ $0.validatorAddress == fromValAddress }).first,
            claimableReward.reward.count > 0 {
             let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
             claimRewards.claimableRewards = [claimableReward]
@@ -204,7 +204,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
             return
         }
-        if let claimableReward = selectedChain.cosmosRewards.filter({ $0.validatorAddress == fromValAddress }).first,
+        if let claimableReward = selectedChain.cosmosRewards?.filter({ $0.validatorAddress == fromValAddress }).first,
            claimableReward.reward.count > 0 {
             let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
             compounding.claimableRewards = [claimableReward]
@@ -350,7 +350,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
-            UIPasteboard.general.string = selectedChain.rewardAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+            UIPasteboard.general.string = selectedChain.rewardAddress?.trimmingCharacters(in: .whitespacesAndNewlines)
             self.onShowToast(NSLocalizedString("address_copied", comment: ""))
             
         } else if (indexPath.section == 1) {
@@ -372,11 +372,11 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         if (indexPath.section == 1) {
             let delegation = delegations[indexPath.row]
-            let rewards = selectedChain.cosmosRewards.filter { $0.validatorAddress == delegation.delegation.validatorAddress }
+            let rewards = selectedChain.cosmosRewards?.filter { $0.validatorAddress == delegation.delegation.validatorAddress }
                 
             let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
             rewardListPopupVC.selectedChain = selectedChain
-            rewardListPopupVC.rewards = rewards
+            rewardListPopupVC.rewards = rewards!
             
             return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return rewardListPopupVC }) { _ in
                 UIMenu(title: "", children: [])

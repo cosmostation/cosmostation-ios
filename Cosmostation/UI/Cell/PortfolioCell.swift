@@ -83,16 +83,22 @@ class PortfolioCell: UITableViewCell {
             nftTag.isHidden = false
         }
         
-        if (chain.fetched) {
+        
+        if (chain.fetchState == .Fail) {
+            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            loadingLabel.isHidden = true
+            reposeErrorLabel.isHidden = false
+            
+        } else if (chain.fetchState == .Success) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
             
-            if (!(chain is ChainOkt996Keccak) && !(chain is ChainBinanceBeacon)) {
-                if (chain.cosmosBalances == nil) {
-                    reposeErrorLabel.isHidden = false
-                    return
-                }
-            }
+//            if (!(chain is ChainOkt996Keccak) && !(chain is ChainBinanceBeacon)) {
+//                if (chain.cosmosBalances == nil) {
+//                    reposeErrorLabel.isHidden = false
+//                    return
+//                }
+//            }
             
             if (BaseData.instance.getHideValue()) {
                 currencyLabel.text = ""
@@ -116,21 +122,29 @@ class PortfolioCell: UITableViewCell {
         logoImg2.image = UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
         
-        if (chain.fetched) {
+        
+        
+        if (chain.fetchState == .Fail) {
+            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            loadingLabel.isHidden = true
+            reposeErrorLabel.isHidden = false
+            
+        } else if (chain.fetchState == .Success) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
             
-            if (!(chain is ChainOktEVM)) {
-                if (chain.supportCosmos && chain.cosmosBalances == nil) {
-                    reposeErrorLabel.isHidden = false
-                    return
-                }
-            }
+//            if (!(chain is ChainOktEVM)) {
+//                if (chain.supportCosmos && chain.cosmosBalances == nil) {
+//                    reposeErrorLabel.isHidden = false
+//                    return
+//                }
+//            }
             
 //            if (chain.web3 == nil) {
 //                reposeErrorLabel.isHidden = false
 //                return
 //            }
+            
             if (BaseData.instance.getHideValue()) {
                 currencyLabel.text = ""
                 valueLabel.font = .fontSize14Bold

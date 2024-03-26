@@ -26,7 +26,7 @@ class AboutRewardAddressCell: UITableViewCell {
     func onBindStakingInfo(_ chain: CosmosClass) {
         rewardAddressLabel.text = chain.rewardAddress
         rewardAddressLabel.adjustsFontSizeToFitWidth = true
-        if (!chain.rewardAddress.isEmpty && chain.rewardAddress != chain.bechAddress) {
+        if (chain.rewardAddress != nil && chain.rewardAddress != chain.bechAddress) {
             rootView.backgroundView.layer.borderWidth = 1
             rootView.backgroundView.layer.borderColor = UIColor.colorPrimary.cgColor
         }

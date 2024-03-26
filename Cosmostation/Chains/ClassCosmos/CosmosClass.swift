@@ -33,13 +33,13 @@ class CosmosClass: BaseChain {
     
     var cosmosAuth: Google_Protobuf_Any?
     var cosmosBalances: [Cosmos_Base_V1beta1_Coin]?
-    lazy var cosmosVestings = Array<Cosmos_Base_V1beta1_Coin>()
-    lazy var cosmosDelegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
-    lazy var cosmosUnbondings = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
-    lazy var cosmosRewards = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
-    lazy var cosmosCommissions = Array<Cosmos_Base_V1beta1_Coin>()
-    lazy var rewardAddress = ""
-    lazy var cosmosValidators = Array<Cosmos_Staking_V1beta1_Validator>()
+    var cosmosVestings = [Cosmos_Base_V1beta1_Coin]()
+    var cosmosDelegations = [Cosmos_Staking_V1beta1_DelegationResponse]()
+    var cosmosUnbondings: [Cosmos_Staking_V1beta1_UnbondingDelegation]?
+    var cosmosRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]?
+    var cosmosCommissions =  [Cosmos_Base_V1beta1_Coin]()
+    var rewardAddress:  String?
+    var cosmosValidators = [Cosmos_Staking_V1beta1_Validator]()
     
     lazy var mintscanCw20Tokens = [MintscanToken]()
     lazy var mintscanCw721List = [JSON]()
@@ -67,63 +67,72 @@ class CosmosClass: BaseChain {
     }
     
     override func fetchData(_ id: Int64) {
+        print("fetchData ", self.tag)
+        fetchState = .Busy
         mintscanCw20Tokens.removeAll()
         mintscanCw721List.removeAll()
         cosmosAuth = nil
         cosmosBalances = nil
         cosmosVestings.removeAll()
         cosmosDelegations.removeAll()
-        cosmosUnbondings.removeAll()
-        cosmosRewards.removeAll()
+        cosmosUnbondings = nil
+        cosmosRewards = nil
         cosmosCommissions.removeAll()
+        rewardAddress = nil
         
         Task {
-            let channel = getConnection()
-            if let cw20Tokens = try? await fetchCw20Info(),
-               let cw721List = try? await fetchCw721Info(),
-               let auth = try? await fetchAuth(channel),
-               let balance = try? await fetchBalance(channel),
-               let delegations = try? await fetchDelegation(channel),
-               let unbonding = try? await fetchUnbondings(channel),
-               let rewards = try? await fetchRewards(channel),
-               let commission = try? await fetchCommission(channel),
-               let rewardaddr = try? await fetchRewardAddress(channel) {
-                self.mintscanCw20Tokens = cw20Tokens ?? []
-                self.mintscanCw721List = cw721List ?? []
-                self.cosmosAuth = auth
-                self.cosmosBalances = balance
-                delegations?.forEach({ delegation in
-                    if (delegation.balance.amount != "0") {
-                        self.cosmosDelegations.append(delegation)
+            do {
+                let channel = getConnection()
+                if let cw20Tokens = try await fetchCw20Info(),
+                   let cw721List = try await fetchCw721Info(),
+                   let auth = try await fetchAuth(channel),
+                   let balance = try? await fetchBalance(channel),
+                   let delegations = try? await fetchDelegation(channel),
+                   let unbonding = try? await fetchUnbondings(channel),
+                   let rewards = try? await fetchRewards(channel),
+                   let commission = try? await fetchCommission(channel),
+                   let rewardaddr = try? await fetchRewardAddress(channel) {
+                    self.mintscanCw20Tokens = cw20Tokens
+                    self.mintscanCw721List = cw721List
+                    self.cosmosAuth = auth
+                    self.cosmosBalances = balance
+                    delegations?.forEach({ delegation in
+                        if (delegation.balance.amount != "0") {
+                            self.cosmosDelegations.append(delegation)
+                        }
+                    })
+                    self.cosmosUnbondings = unbonding
+                    self.cosmosRewards = rewards
+                    commission?.commission.forEach { commi in
+                        if (commi.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
+                            self.cosmosCommissions.append(Cosmos_Base_V1beta1_Coin(commi.denom, commi.getAmount()))
+                        }
                     }
-                })
-                if (unbonding != nil) {
-                    self.cosmosUnbondings = unbonding!
+                    self.rewardAddress = rewardaddr?.replacingOccurrences(of: "\"", with: "")
                 }
-                if (rewards != nil) {
-                    self.cosmosRewards = rewards!
-                }
-                commission?.commission.forEach { commi in
-                    if (commi.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
-                        self.cosmosCommissions.append(Cosmos_Base_V1beta1_Coin(commi.denom, commi.getAmount()))
-                    }
-                }
-                self.rewardAddress = (rewardaddr ?? "").replacingOccurrences(of: "\"", with: "")
-            }
-            
-            DispatchQueue.main.async {
-                WUtils.onParseVestingAccount(self)
-                self.fetched = true
-                self.allCoinValue = self.allCoinValue()
-                self.allCoinUSDValue = self.allCoinValue(true)
-                if (self.supportCw20) { self.fetchAllCw20Balance(id) }
                 
-                BaseData.instance.updateRefAddressesCoinValue(
-                    RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                               self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                               nil, self.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
-                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
-                try? channel.close()
+                DispatchQueue.main.async {
+                    print("success ", self.tag)
+                    WUtils.onParseVestingAccount(self)
+                    self.fetchState = .Success
+                    self.allCoinValue = self.allCoinValue()
+                    self.allCoinUSDValue = self.allCoinValue(true)
+                    if (self.supportCw20) { self.fetchAllCw20Balance(id) }
+                    
+                    BaseData.instance.updateRefAddressesCoinValue(
+                        RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+                                   self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                                   nil, self.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
+                    NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                    try? channel.close()
+                }
+                
+            } catch {
+                print("error ",tag, "  ", error)
+                DispatchQueue.main.async {
+                    self.fetchState = .Fail
+                    NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                }
             }
         }
     }
@@ -137,7 +146,7 @@ class CosmosClass: BaseChain {
                 self.cosmosBalances = balance
             }
             DispatchQueue.main.async {
-                self.fetched = true
+                self.fetchState = .Success
                 NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
                 try? channel.close()
             }
@@ -158,6 +167,7 @@ class CosmosClass: BaseChain {
     
     var stakeInfoTask: Task<(), Never>?
     func fetchStakeData() {
+        cosmosValidators.removeAll()
         if (cosmosValidators.count > 0 || stakeInfoTask?.hashValue != nil) { return }
         stakeInfoTask = Task {
             let channel = getConnection()
@@ -376,12 +386,12 @@ extension CosmosClass {
     
     func fetchCw20Info() async throws -> [MintscanToken]? {
         if (!supportCw20) { return [] }
-        return try? await AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
+        return try await AF.request(BaseNetWork.msCw20InfoUrl(self), method: .get).serializingDecodable([MintscanToken].self).value
     }
     
     func fetchCw721Info() async throws -> [JSON]? {
         if (!supportCw721) { return [] }
-        return try? await AF.request(BaseNetWork.msCw721InfoUrl(self), method: .get).serializingDecodable([JSON].self).value
+        return try await AF.request(BaseNetWork.msCw721InfoUrl(self), method: .get).serializingDecodable([JSON].self).value
     }
 }
 
@@ -393,40 +403,40 @@ extension CosmosClass {
         if (channel == nil) { return nil }
         let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 300 }
         let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_BONDED" }
-        return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel!).validators(req).response.get().validators
+        return try await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel!).validators(req).response.get().validators
     }
     
     func fetchUnbondedValidator(_ channel: ClientConnection?) async throws -> [Cosmos_Staking_V1beta1_Validator]? {
         if (channel == nil) { return nil }
         let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
         let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_UNBONDED" }
-        return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel!).validators(req).response.get().validators
+        return try await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel!).validators(req).response.get().validators
     }
     
     func fetchUnbondingValidator(_ channel: ClientConnection?) async throws -> [Cosmos_Staking_V1beta1_Validator]? {
         if (channel == nil) { return nil }
         let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
         let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_UNBONDING" }
-        return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel!).validators(req).response.get().validators
+        return try await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel!).validators(req).response.get().validators
     }
     
     func fetchAuth(_ channel: ClientConnection?) async throws -> Google_Protobuf_Any? {
         if (channel == nil) { return nil }
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = bechAddress }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel!).account(req, callOptions: getCallOptions()).response.get().account
+        return try await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel!).account(req, callOptions: getCallOptions()).response.get().account
     }
     
     func fetchBalance(_ channel: ClientConnection?) async throws -> [Cosmos_Base_V1beta1_Coin]? {
         if (channel == nil) { return nil }
         let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
         let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = bechAddress; $0.pagination = page }
-        return try? await Cosmos_Bank_V1beta1_QueryNIOClient(channel: channel!).allBalances(req, callOptions: getCallOptions()).response.get().balances
+        return try await Cosmos_Bank_V1beta1_QueryNIOClient(channel: channel!).allBalances(req, callOptions: getCallOptions()).response.get().balances
     }
     
     func fetchDelegation(_ channel: ClientConnection?) async throws -> [Cosmos_Staking_V1beta1_DelegationResponse]? {
         if (channel == nil) { return nil }
         let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = bechAddress }
-        return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel!).delegatorDelegations(req, callOptions: getCallOptions()).response.get().delegationResponses
+        return try await Cosmos_Staking_V1beta1_QueryNIOClient(channel: channel!).delegatorDelegations(req, callOptions: getCallOptions()).response.get().delegationResponses
     }
     
     func fetchUnbondings(_ channel: ClientConnection?) async throws -> [Cosmos_Staking_V1beta1_UnbondingDelegation]? {
@@ -438,20 +448,20 @@ extension CosmosClass {
     func fetchRewards(_ channel: ClientConnection?) async throws -> [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]? {
         if (channel == nil) { return nil }
         let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = bechAddress }
-        return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel!).delegationTotalRewards(req, callOptions: getCallOptions()).response.get().rewards
+        return try await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel!).delegationTotalRewards(req, callOptions: getCallOptions()).response.get().rewards
     }
     
     func fetchCommission(_ channel: ClientConnection?) async throws -> Cosmos_Distribution_V1beta1_ValidatorAccumulatedCommission? {
         if (channel == nil) { return nil }
         if (bechOpAddress == nil) { return nil }
         let req = Cosmos_Distribution_V1beta1_QueryValidatorCommissionRequest.with { $0.validatorAddress = bechOpAddress! }
-        return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel!).validatorCommission(req, callOptions: getCallOptions()).response.get().commission
+        return try await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel!).validatorCommission(req, callOptions: getCallOptions()).response.get().commission
     }
     
     func fetchRewardAddress(_ channel: ClientConnection?) async throws -> String? {
         if (channel == nil) { return nil }
         let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = bechAddress }
-        return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel!).delegatorWithdrawAddress(req, callOptions: getCallOptions()).response.get().withdrawAddress
+        return try await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel!).delegatorWithdrawAddress(req, callOptions: getCallOptions()).response.get().withdrawAddress
     }
     
     func fetchAllCw20Balance(_ id: Int64) {
@@ -612,7 +622,7 @@ extension CosmosClass {
     
     func unbondingAmountSum() -> NSDecimalNumber {
         var sum = NSDecimalNumber.zero
-        cosmosUnbondings.forEach({ unbonding in
+        cosmosUnbondings?.forEach({ unbonding in
             for entry in unbonding.entries {
                 sum = sum.adding(NSDecimalNumber(string: entry.balance))
             }
@@ -632,7 +642,7 @@ extension CosmosClass {
     
     func rewardAmountSum(_ denom: String) -> NSDecimalNumber {
         var result =  NSDecimalNumber.zero
-        cosmosRewards.forEach({ reward in
+        cosmosRewards?.forEach({ reward in
             result = result.adding(NSDecimalNumber(string: reward.reward.filter{ $0.denom == denom }.first?.amount ?? "0"))
         })
         return result.multiplying(byPowerOf10: -18, withBehavior: handler0Down)
@@ -649,7 +659,7 @@ extension CosmosClass {
     
     func rewardAllCoins() -> [Cosmos_Base_V1beta1_Coin] {
         var result = [Cosmos_Base_V1beta1_Coin]()
-        cosmosRewards.forEach({ reward in
+        cosmosRewards?.forEach({ reward in
             reward.reward.forEach { deCoin in
                 if BaseData.instance.getAsset(apiName, deCoin.denom) != nil {
                     let deCoinAmount = deCoin.getAmount()
@@ -693,7 +703,7 @@ extension CosmosClass {
     
     func claimableRewards() -> [Cosmos_Distribution_V1beta1_DelegationDelegatorReward] {
         var result = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
-        cosmosRewards.forEach { reward in
+        cosmosRewards?.forEach { reward in
             for i in 0..<reward.reward.count {
                 let rewardAmount = NSDecimalNumber(string: reward.reward[i].amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
                 if let msAsset = BaseData.instance.getAsset(self.apiName, reward.reward[i].denom) {
@@ -711,7 +721,7 @@ extension CosmosClass {
     
     func valueableRewards() -> [Cosmos_Distribution_V1beta1_DelegationDelegatorReward] {
         var result = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
-        cosmosRewards.forEach { reward in
+        cosmosRewards?.forEach { reward in
             var eachRewardValue = NSDecimalNumber.zero
             for i in 0..<reward.reward.count {
                 let rewardAmount = NSDecimalNumber(string: reward.reward[i].amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)

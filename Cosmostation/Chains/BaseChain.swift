@@ -24,7 +24,7 @@ class BaseChain {
     var publicKey: Data?
     
     
-    var fetched = false
+    var fetchState = FetchState.Idle
     var allCoinValue = NSDecimalNumber.zero
     var allCoinUSDValue = NSDecimalNumber.zero
     var allTokenValue = NSDecimalNumber.zero
@@ -80,4 +80,12 @@ func All_IBC_Chains() -> [CosmosClass] {
     result.append(contentsOf: ALLCOSMOSCLASS())
     result.append(contentsOf: ALLEVMCLASS().filter { $0.supportCosmos == true } )
     return result
+}
+
+
+enum FetchState: Int {
+    case Idle = -1
+    case Busy = 0
+    case Success = 1
+    case Fail = 2
 }

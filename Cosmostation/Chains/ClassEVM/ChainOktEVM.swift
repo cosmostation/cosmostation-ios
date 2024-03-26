@@ -48,6 +48,7 @@ class ChainOktEVM: EvmClass {
     }
     
     override func fetchData(_ id: Int64) {
+        fetchState = .Busy
         mintscanErc20Tokens.removeAll()
         Task {
             do {
@@ -65,7 +66,10 @@ class ChainOktEVM: EvmClass {
                 
             } catch {
                 print("Error Evm", self.tag,  error)
-                //TODO Handle Error
+                DispatchQueue.main.async {
+                    self.fetchState = .Fail
+                    NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                }
             }
             await self.fetchCosmosLcdData(id)
         }
@@ -93,7 +97,7 @@ class ChainOktEVM: EvmClass {
             }
             
             DispatchQueue.main.async {
-                self.fetched = true
+                self.fetchState = .Success
                 self.allCoinValue = self.allCoinValue()
                 self.allCoinUSDValue = self.allCoinValue(true)
                 
@@ -105,6 +109,10 @@ class ChainOktEVM: EvmClass {
             }
         } catch {
             print("Error Cosmos", self.tag,  error)
+            DispatchQueue.main.async {
+                self.fetchState = .Fail
+                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            }
         }
     }
     
@@ -116,7 +124,7 @@ class ChainOktEVM: EvmClass {
             }
             
             DispatchQueue.main.async {
-                self.fetched = true
+                self.fetchState = .Success
                 NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
             }
         }

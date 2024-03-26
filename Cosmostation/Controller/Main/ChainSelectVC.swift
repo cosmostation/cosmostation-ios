@@ -90,8 +90,8 @@ class ChainSelectVC: BaseVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if (allEvmChains.filter { $0.fetched == false }.count == 0 &&
-            allCosmosChains.filter { $0.fetched == false }.count == 0) {
+        if (allEvmChains.filter { $0.fetchState == .Busy }.count == 0 &&
+            allCosmosChains.filter { $0.fetchState == .Busy }.count == 0) {
             DispatchQueue.main.async {
                 self.selectBtn.isEnabled = true
                 self.loadingView.stop()
@@ -143,24 +143,15 @@ class ChainSelectVC: BaseVC {
                 }
             }
         }
-        if (allEvmChains.filter { $0.fetched == false }.count == 0 &&
-            allCosmosChains.filter { $0.fetched == false }.count == 0) {
+        
+        if (allEvmChains.filter { $0.fetchState == .Busy }.count == 0 &&
+            allCosmosChains.filter { $0.fetchState == .Busy }.count == 0) {
             DispatchQueue.main.async {
                 self.selectBtn.isEnabled = true
                 self.loadingView.stop()
                 self.loadingView.isHidden = true
             }
         }
-        
-//        searchCosmosChains.filter { $0.fetched == false }.forEach { chain in
-//            print("chain ", chain.tag)
-//        }
-//        
-//        searchEvmChains.filter { $0.fetched == false }.forEach { chain in
-//            print("chain ", chain.tag)
-//        }
-//        print("searchCosmosChains ", searchCosmosChains.filter { $0.fetched == false })
-//        print("searchEvmChains ", searchEvmChains.filter { $0.fetched == false })
     }
     
     

@@ -99,17 +99,16 @@ class SelectEndpointCell: UITableViewCell {
             
             seletedImg.isHidden = (evmChain.getEvmRpc() != url)
             
-            DispatchQueue.global().async {
-                if let url = URL(string: url),
-                   let web3 = try? Web3.new(url),
-                   let balance = try? web3.eth.getBalance(address: EthereumAddress.init("0x8D97689C9818892B700e27F316cc3E41e17fBeb9")!) {
+            Task {
+                do {
+                    let balanceJson = try await evmChain.fetchEvmBalance("0x8D97689C9818892B700e27F316cc3E41e17fBeb9")
                     self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
-                } else {
+                    
+                } catch {
                     DispatchQueue.main.async {
                         self.speedImg.image = UIImage.init(named: "ImgGovRejected")
                         self.speedTimeLabel.text = "Unknown"
                     }
-                    return
                 }
                 
                 DispatchQueue.main.async {

@@ -75,8 +75,8 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
     }
     
     func onInitView() {
-        if (baseAccount.getDisplayCosmosChains().filter { $0.fetched == false }.count == 0 &&
-            baseAccount.getDisplayEvmChains().filter { $0.fetched == false }.count == 0) {
+        if (baseAccount.getDisplayCosmosChains().filter { $0.fetchState == .Busy }.count == 0 &&
+            baseAccount.getDisplayEvmChains().filter { $0.fetchState == .Busy }.count == 0) {
 
             baseAccount.getDisplayCosmosChains().forEach { chain in
                 let valueableReward = chain.valueableRewards()
@@ -100,8 +100,8 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
             DispatchQueue.main.async(execute: {
                 let totalCnt = self.baseAccount.getDisplayCosmosChains().count +
                                 self.baseAccount.getDisplayEvmChains().count
-                let checkedCnt = self.baseAccount.getDisplayCosmosChains().filter { $0.fetched == true }.count +
-                                    self.baseAccount.getDisplayEvmChains().filter { $0.fetched == true }.count
+                let checkedCnt = self.baseAccount.getDisplayCosmosChains().filter { $0.fetchState != .Busy }.count +
+                                    self.baseAccount.getDisplayEvmChains().filter { $0.fetchState != .Busy }.count
                 self.progressLabel.text = "Checked " + String(checkedCnt) +  "/" +  String(totalCnt)
             })
         }
@@ -162,12 +162,11 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
     }
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
-        self.dismiss(animated: true) {
-            self.baseAccount.getDisplayCosmosChains().forEach { chain in
-                chain.fetched = false
-            }
-            self.baseAccount.fetchDisplayCosmosChains()
-        }
+        self.baseAccount.getDisplayEvmChains().forEach { $0.fetchState = .Idle }
+        self.baseAccount.getDisplayCosmosChains().forEach { $0.fetchState = .Idle }
+        self.baseAccount.fetchDisplayEvmChains()
+        self.baseAccount.fetchDisplayCosmosChains()
+        self.dismiss(animated: true)
     }
     
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {

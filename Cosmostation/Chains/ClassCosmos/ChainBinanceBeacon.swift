@@ -34,36 +34,45 @@ class ChainBinanceBeacon: CosmosClass  {
     }
     
     override func fetchData(_ id: Int64) {
+        fetchState = .Busy
         lcdNodeInfo = JSON()
         lcdAccountInfo = JSON()
         lcdBeaconTokens.removeAll()
         
         Task {
-            if let nodeInfo = try? await fetchNodeInfo(),
-               let accountInfo = try? await fetchAccountInfo(bechAddress),
-               let beaconTokens = try? await fetchBeaconTokens(),
-               let miniTokens = try? await fetchBeaconMiniTokens() {
-                self.lcdNodeInfo = nodeInfo ?? JSON()
-                self.lcdAccountInfo = accountInfo ?? JSON()
-                
-                beaconTokens?.forEach { beaconToken in
-                    self.lcdBeaconTokens.append(beaconToken)
+            do {
+                if let nodeInfo = try await fetchNodeInfo(),
+                   let accountInfo = try await fetchAccountInfo(bechAddress),
+                   let beaconTokens = try await fetchBeaconTokens(),
+                   let miniTokens = try await fetchBeaconMiniTokens() {
+                    self.lcdNodeInfo = nodeInfo
+                    self.lcdAccountInfo = accountInfo
+                    beaconTokens.forEach { beaconToken in
+                        self.lcdBeaconTokens.append(beaconToken)
+                    }
+                    miniTokens.forEach { miniToken in
+                        self.lcdBeaconTokens.append(miniToken)
+                    }
                 }
-                miniTokens?.forEach { miniToken in
-                    self.lcdBeaconTokens.append(miniToken)
-                }
-            }
-            
-            DispatchQueue.main.async {
-                self.fetched = true
-                self.allCoinValue = self.allCoinValue()
-                self.allCoinUSDValue = self.allCoinValue(true)
                 
-                BaseData.instance.updateRefAddressesCoinValue(
-                    RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                               self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                               nil, self.lcdAccountInfo.bnbCoins?.count))
-                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                DispatchQueue.main.async {
+                    self.fetchState = .Success
+                    self.allCoinValue = self.allCoinValue()
+                    self.allCoinUSDValue = self.allCoinValue(true)
+                    
+                    BaseData.instance.updateRefAddressesCoinValue(
+                        RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+                                   self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                                   nil, self.lcdAccountInfo.bnbCoins?.count))
+                    NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                }
+                
+            } catch {
+                print("Error Cosmos", self.tag,  error)
+                DispatchQueue.main.async {
+                    self.fetchState = .Fail
+                    NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                }
             }
         }
     }
@@ -76,7 +85,7 @@ class ChainBinanceBeacon: CosmosClass  {
             }
             
             DispatchQueue.main.async {
-                self.fetched = true
+                self.fetchState = .Success
                 NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
             }
         }
@@ -99,19 +108,19 @@ class ChainBinanceBeacon: CosmosClass  {
 extension ChainBinanceBeacon {
     
     func fetchNodeInfo() async throws -> JSON? {
-        return try? await AF.request(BaseNetWork.lcdNodeInfoUrl(self), method: .get).serializingDecodable(JSON.self).value
+        return try await AF.request(BaseNetWork.lcdNodeInfoUrl(self), method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchAccountInfo(_ address: String) async throws -> JSON? {
-        return try? await AF.request(BaseNetWork.lcdAccountInfoUrl(self, address), method: .get).serializingDecodable(JSON.self).value
+        return try await AF.request(BaseNetWork.lcdAccountInfoUrl(self, address), method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchBeaconTokens() async throws -> [JSON]? {
-        return try? await AF.request(BaseNetWork.lcdBeaconTokenUrl(), method: .get, parameters: ["limit":"1000"]).serializingDecodable([JSON].self).value
+        return try await AF.request(BaseNetWork.lcdBeaconTokenUrl(), method: .get, parameters: ["limit":"1000"]).serializingDecodable([JSON].self).value
     }
     
     func fetchBeaconMiniTokens() async throws -> [JSON]? {
-        return try? await AF.request(BaseNetWork.lcdBeaconMiniTokenUrl(), method: .get, parameters: ["limit":"1000"]).serializingDecodable([JSON].self).value
+        return try await AF.request(BaseNetWork.lcdBeaconMiniTokenUrl(), method: .get, parameters: ["limit":"1000"]).serializingDecodable([JSON].self).value
     }
     
     
@@ -130,7 +139,7 @@ extension ChainBinanceBeacon {
     func lcdBalanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if (denom == stakeDenom) {
             let amount = lcdBalanceAmount(denom)
-            var msPrice = BaseData.instance.getPrice(BNB_GECKO_ID, usd)
+            let msPrice = BaseData.instance.getPrice(BNB_GECKO_ID, usd)
             return msPrice.multiplying(by: amount, withBehavior: handler6)
         }
         return NSDecimalNumber.zero

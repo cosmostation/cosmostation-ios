@@ -65,14 +65,13 @@ class DeriveCell: UITableViewCell {
         } else {
             hdPathLabel.text = chain.evmAddress
         }
-//        if (chain.supportCosmos) {
-//            cosmosTag.isHidden = false
-//        }
         
-        if (chain.fetched) {
+        if (chain.fetchState == .Fail) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
+            reposeErrorLabel.isHidden  = false
             
+        } else if (chain.fetchState == .Success) {
             let dpAmount = chain.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
             denomLabel.text = chain.coinSymbol
             amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
@@ -88,7 +87,6 @@ class DeriveCell: UITableViewCell {
             } else {
                 coinCntLabel.text = "0 Coins"
             }
-            
             denomLabel.isHidden = false
             amountLabel.isHidden = false
             coinCntLabel.isHidden = false
@@ -129,7 +127,12 @@ class DeriveCell: UITableViewCell {
 //            keyTypeTag.isHidden = false
 //        }
         
-        if (chain.fetched) {
+        if (chain.fetchState == .Fail) {
+            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            loadingLabel.isHidden = true
+            reposeErrorLabel.isHidden  = false
+            
+        } else if (chain.fetchState == .Success) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
             
@@ -159,19 +162,15 @@ class DeriveCell: UITableViewCell {
                 coinCntLabel.isHidden = false
                 
             } else {
-                if (chain.cosmosBalances == nil) {
-                    reposeErrorLabel.isHidden  = false
-                } else {
-                    let availableAmount = chain.balanceAmount(stakeDenom)
-                    if let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
-                        WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
-                        denomLabel.isHidden = false
-                        amountLabel.isHidden = false
-                    }
-                    let coinCnt = chain.cosmosBalances?.count ?? 0
-                    coinCntLabel.text = String(coinCnt) + " Coins"
-                    coinCntLabel.isHidden = false
+                let availableAmount = chain.balanceAmount(stakeDenom)
+                if let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+                    WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
+                    denomLabel.isHidden = false
+                    amountLabel.isHidden = false
                 }
+                let coinCnt = chain.cosmosBalances?.count ?? 0
+                coinCntLabel.text = String(coinCnt) + " Coins"
+                coinCntLabel.isHidden = false
             }
             
         } else {

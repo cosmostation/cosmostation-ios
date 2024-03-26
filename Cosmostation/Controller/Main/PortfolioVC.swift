@@ -112,14 +112,14 @@ class PortfolioVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
-        if (toDisplayEvmChains.filter { $0.fetched == false }.count > 0 ||
-            toDisplayCosmosChains.filter { $0.fetched == false }.count > 0) {
+        if (toDisplayEvmChains.filter { $0.fetchState == .Busy }.count > 0 ||
+            toDisplayCosmosChains.filter { $0.fetchState == .Busy }.count > 0) {
             refresher.endRefreshing()
             
         } else {
             BaseNetWork().fetchPrices()
-            toDisplayEvmChains.forEach { $0.fetched = false }
-            toDisplayCosmosChains.forEach { $0.fetched = false }
+            toDisplayEvmChains.forEach { $0.fetchState = .Idle }
+            toDisplayCosmosChains.forEach { $0.fetchState = .Idle }
             baseAccount.fetchDisplayEvmChains()
             baseAccount.fetchDisplayCosmosChains()
             tableView.reloadData()
@@ -301,14 +301,14 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             let selectedChain = searchEvmChains[indexPath.row]
-            if (selectedChain.fetched == false) { return }
-            if (!(selectedChain is ChainOktEVM)) {
-                if (selectedChain.supportCosmos && selectedChain.cosmosBalances == nil) {
-                    onNodedownPopup()
-                    return
-                }
-            }
-            if (selectedChain.web3 == nil) {
+            if (selectedChain.fetchState != .Success) { return }
+//            if (!(selectedChain is ChainOktEVM)) {
+//                if (selectedChain.supportCosmos && selectedChain.cosmosBalances == nil) {
+//                    onNodedownPopup()
+//                    return
+//                }
+//            }
+            if (selectedChain.fetchState == .Fail) {
                 onNodedownPopup()
                 return
             }
@@ -330,13 +330,17 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             
         } else if (indexPath.section == 1) {
             let selectedChain = searchCosmosChains[indexPath.row]
-            if (selectedChain.fetched == false) { return }
-            if (!(selectedChain is ChainOkt996Keccak) && !(selectedChain is ChainBinanceBeacon)) {
-                if (selectedChain.cosmosBalances == nil) {
-                    onNodedownPopup()
-                    return
-                }
+            if (selectedChain.fetchState != .Success) { return }
+            if (selectedChain.fetchState == .Fail) {
+                onNodedownPopup()
+                return
             }
+//            if (!(selectedChain is ChainOkt996Keccak) && !(selectedChain is ChainBinanceBeacon)) {
+//                if (selectedChain.cosmosBalances == nil) {
+//                    onNodedownPopup()
+//                    return
+//                }
+//            }
             detailChainTag = selectedChain.tag
             let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
             cosmosClassVC.selectedChain = selectedChain

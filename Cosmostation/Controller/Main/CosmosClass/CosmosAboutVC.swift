@@ -70,7 +70,7 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (section == 2) {
             view.titleLabel.text = "Reward Address"
-            if (!selectedChain.rewardAddress.isEmpty && selectedChain.rewardAddress != selectedChain.bechAddress) {
+            if (selectedChain.rewardAddress != nil && selectedChain.rewardAddress != selectedChain.bechAddress) {
                 view.cntLabel.text = "(Changed)"
                 view.cntLabel.textColor = .colorPrimary
             } else {
@@ -118,8 +118,8 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 2) {
-            if (!selectedChain.rewardAddress.isEmpty) {
-                UIPasteboard.general.string = selectedChain.rewardAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+            if (selectedChain.rewardAddress != nil) {
+                UIPasteboard.general.string = selectedChain.rewardAddress?.trimmingCharacters(in: .whitespacesAndNewlines)
                 self.onShowToast(NSLocalizedString("address_copied", comment: ""))
             }
         }

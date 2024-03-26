@@ -83,7 +83,7 @@ class CosmosCoinVC: BaseVC {
     }
 
     @objc func onRequestFetch() {
-        if (selectedChain.fetched == false) {
+        if (selectedChain.fetchState == .Busy) {
             refresher.endRefreshing()
         } else {
             DispatchQueue.global().async {
@@ -389,10 +389,10 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        if (indexPath.section == 0 && indexPath.row == 0 && selectedChain.supportStaking == true && selectedChain.cosmosRewards.count > 0) {
+        if (indexPath.section == 0 && indexPath.row == 0 && selectedChain.supportStaking == true && selectedChain.cosmosRewards?.count ?? 0 > 0) {
             let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
             rewardListPopupVC.selectedChain = selectedChain
-            rewardListPopupVC.rewards = selectedChain.cosmosRewards
+            rewardListPopupVC.rewards = selectedChain.cosmosRewards!
             return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return rewardListPopupVC }) { _ in
                 UIMenu(title: "", children: [])
             }

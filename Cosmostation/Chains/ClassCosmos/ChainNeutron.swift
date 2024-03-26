@@ -40,6 +40,7 @@ class ChainNeutron: CosmosClass  {
     }
     
     override func fetchData(_ id: Int64) {
+        fetchState = .Busy
         cosmosAuth = nil
         cosmosBalances = nil
         neutronDeposited = NSDecimalNumber.zero
@@ -48,36 +49,44 @@ class ChainNeutron: CosmosClass  {
         daosList = getChainListParam()["daos"].arrayValue
         
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel),
-               let balance = try? await fetchBalance(channel),
-               let vault = try? await fetchVaultDeposit(channel),
-               let vesting = try? await fetchNeutronVesting(channel) {
-                self.cosmosAuth = auth
-                self.cosmosBalances = balance
-                if let data = vault,
-                   let deposited = try? JSONDecoder().decode(JSON.self, from: data),
-                   let amount = deposited["power"].string {
-                    self.neutronDeposited = NSDecimalNumber(string: amount)
+            do {
+                let channel = getConnection()
+                if let auth = try await fetchAuth(channel),
+                   let balance = try await fetchBalance(channel),
+                   let vault = try? await fetchVaultDeposit(channel),
+                   let vesting = try? await fetchNeutronVesting(channel) {
+                    self.cosmosAuth = auth
+                    self.cosmosBalances = balance
+                    if let vault = vault,
+                       let deposited = try? JSONDecoder().decode(JSON.self, from: vault) {
+                        self.neutronDeposited = NSDecimalNumber(string: deposited["power"].string)
+                    }
+                    if let vesting = vesting,
+                       let vestingInfo = try? JSONDecoder().decode(JSON.self, from: vesting) {
+                        self.neutronVesting = vestingInfo
+                    }
                 }
-                if let data = vesting,
-                   let vestingInfo = try? JSONDecoder().decode(JSON.self, from: data) {
-                    self.neutronVesting = vestingInfo
-                }
-            }
-            
-            DispatchQueue.main.async {
-                WUtils.onParseVestingAccount(self)
-                self.fetched = true
-                self.allCoinValue = self.allCoinValue()
-                self.allCoinUSDValue = self.allCoinValue(true)
                 
-                BaseData.instance.updateRefAddressesCoinValue(
-                    RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                               self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                               nil, self.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
-                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
-                try? channel.close()
+                DispatchQueue.main.async {
+                    WUtils.onParseVestingAccount(self)
+                    self.fetchState = .Success
+                    self.allCoinValue = self.allCoinValue()
+                    self.allCoinUSDValue = self.allCoinValue(true)
+                    
+                    BaseData.instance.updateRefAddressesCoinValue(
+                        RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+                                   self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                                   nil, self.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
+                    NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                    try? channel.close()
+                }
+                
+            } catch {
+                print("error ",tag, "  ", error)
+                DispatchQueue.main.async {
+                    self.fetchState = .Fail
+                    NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                }
             }
         }
     }
@@ -109,7 +118,7 @@ extension ChainNeutron {
             $0.address = NEUTRON_VAULT_ADDRESS
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel!).smartContractState(req, callOptions: getCallOptions()).response.get().data
+        return try await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel!).smartContractState(req, callOptions: getCallOptions()).response.get().data
     }
     
     func fetchNeutronVesting(_ channel: ClientConnection?) async throws -> Data? {
@@ -120,7 +129,7 @@ extension ChainNeutron {
             $0.address = NEUTRON_VESTING_CONTRACT_ADDRESS
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel!).smartContractState(req, callOptions: getCallOptions()).response.get().data
+        return try await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel!).smartContractState(req, callOptions: getCallOptions()).response.get().data
     }
     
     func neutronVestingAmount() -> NSDecimalNumber  {
