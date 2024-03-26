@@ -205,6 +205,8 @@
 "str_memo_optional" = "メモ（任意）";
 "str_tx_result" = "Tx 結果";
 "str_vote_all" = "全員に投票する";
+"str_show_all_proposal" = "ライブ提案";
+"str_hide_done_proposal" = "投票された提案を除く";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -390,6 +392,7 @@
 "msg_hide_voted_proposals" = "すでに投票された提案をフィルターします。";
 "msg_token_github" = "現時点では、選択したチェーンにトークンを手動で追加する必要はありません。 Cosmostation Wallet には、既存の数量を持つすべてのトークン (CW20、ERC20) の情報が表示されます。\n\nトークンを保持しているのにそれが表示されない場合は、以下の Github リンクから PR を送信してみてください。";
 "msg_node_down" = "▪ 現在使用しているノードに問題がある場合は、[設定 > チェーン管理]から簡単に別のノードに切り替えてサービスを継続してご利用いただけます。\n\n ▪ すべてのノードが使用できない場合、使用されているチェーンはアップグレード中です。 アップグレードが完了するまでお待ちください。";
+"msg_vote_all_detail" = "投票できる提案をすべて選択する必要があります。\n後で投票したい提案をスワイプして除外してください。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";

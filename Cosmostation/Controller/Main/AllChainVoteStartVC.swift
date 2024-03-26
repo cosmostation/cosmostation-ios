@@ -19,6 +19,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var filterBtn: UIButton!
+    @IBOutlet weak var filterMsgLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var voteBtn: BaseButton!
     @IBOutlet weak var confirmBtn: BaseButton!
@@ -37,6 +38,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
         baseAccount = BaseData.instance.baseAccount
         
         titleLabel.isHidden = true
+        filterMsgLabel.isHidden = true
         voteBtn.isHidden = true
         
         lottieView.isHidden = false
@@ -59,7 +61,8 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
     }
     
     override func setLocalizedString() {
-        titleLabel.text = NSLocalizedString("str_voting_period", comment: "")
+        titleLabel.text = NSLocalizedString("str_hide_done_proposal", comment: "")
+        filterMsgLabel.text = NSLocalizedString("msg_vote_all_detail", comment: "")
         voteBtn.setTitle(NSLocalizedString("str_vote_all", comment: ""), for: .normal)
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
@@ -80,10 +83,10 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
         isShowAll = !isShowAll
         if (isShowAll) {
             filterBtn.setImage(UIImage(named: "iconVoteAllShowAll"), for: .normal)
-            onShowToast(NSLocalizedString("msg_show_all_proposals", comment: ""))
+            titleLabel.text = NSLocalizedString("str_show_all_proposal", comment: "")
         }  else {
             filterBtn.setImage(UIImage(named: "iconVoteAllFiltered"), for: .normal)
-            onShowToast(NSLocalizedString("msg_hide_voted_proposals", comment: ""))
+            titleLabel.text = NSLocalizedString("str_hide_done_proposal", comment: "")
         }
         onUpdateView()
     }
@@ -122,6 +125,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
     
     func onUpdateView() {
         titleLabel.isHidden = false
+        filterMsgLabel.isHidden = false
         voteBtn.isEnabled = false
         emptyView.isHidden = true
         filterBtn.isHidden = false
@@ -327,7 +331,7 @@ extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 46
+        return 34
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

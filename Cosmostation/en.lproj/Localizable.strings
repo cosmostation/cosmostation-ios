@@ -205,6 +205,8 @@
 "str_memo_optional" = "Memo (Optional)";
 "str_tx_result" = "Tx Result";
 "str_vote_all" = "Vote All";
+"str_show_all_proposal" = "Live Proposals";
+"str_hide_done_proposal" = "Excluding voted Proposals";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -390,6 +392,7 @@
 "msg_hide_voted_proposals" = "Filters proposals that have already been voted on.";
 "msg_token_github" = "Currently, the selected chain does not need to manually add tokens to the chain. Cosmostation Wallet displays information for all tokens (CW20, ERC20) with existing quantity.\n\nIf you hold the token but do not see it, try submitting the PR through the Github link below.";
 "msg_node_down" = "▪ If there is a problem with the node you are currently using, you can easily switch to another node through [Settings > Manage Chains] and continue using the service.\n\n ▪ If all nodes are unavailable, the chain being used is being upgraded. Please wait until the upgrade is complete.";
+"msg_vote_all_detail" = "You must select all proposals that are live to vote.\nPlease swipe to exclude proposals that you want to vote on later.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
