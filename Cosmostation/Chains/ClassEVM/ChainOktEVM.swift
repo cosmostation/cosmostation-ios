@@ -49,50 +49,45 @@ class ChainOktEVM: EvmClass {
     
     override func fetchData(_ id: Int64) {
         mintscanErc20Tokens.removeAll()
-        
-        DispatchQueue(label: "evmBalance", attributes: .concurrent).async {
-            if let url = URL(string: self.getEvmRpc()),
-               let web3 = try? Web3.new(url),
-               let balance = try? web3.eth.getBalance(address: EthereumAddress.init(self.evmAddress)!) {
-                self.web3 = web3
-                self.evmBalances = NSDecimalNumber(string: String(balance))
-//                print("evmBalances ", self.tag,  "  ", self.evmBalances)
-            }
-            
-            DispatchQueue.main.async(execute: {
-                Task {
-                    if let erc20Tokens = try? await self.fetchErc20Info() {
-                        if (erc20Tokens != nil) {
-                            self.mintscanErc20Tokens = erc20Tokens!
-//                            print("Erc20Tokens ", self.tag,  "  ", self.mintscanErc20Tokens.count)
-                        }
-                    }
-                    DispatchQueue.main.async(execute: {
-                        self.fetchAllErc20Balance(id)
-                        self.fetchCosmosLcdData(id)
-                    });
+        Task {
+            do {
+                let erc20Tokens = try await self.fetchErc20Info()
+                let balanceJson = try await fetchEvmBalance(self.evmAddress)
+                
+                if let erc20Tokens = erc20Tokens {
+                    self.mintscanErc20Tokens = erc20Tokens
                 }
-            });
+                if let balance = balanceJson?["result"].stringValue.hexToNSDecimal {
+                    self.evmBalances = balance()
+//                    print("evmBalances ", tag, "   ", evmBalances)
+                }
+                await fetchAllErc20Balance(id)
+                
+            } catch {
+                print("Error Evm", self.tag,  error)
+                //TODO Handle Error
+            }
+            await self.fetchCosmosLcdData(id)
         }
     }
     
-    func fetchCosmosLcdData(_ id: Int64) {
+    func fetchCosmosLcdData(_ id: Int64) async {
         lcdNodeInfo = JSON()
         lcdAccountInfo = JSON()
         lcdOktDeposits = JSON()
         lcdOktWithdaws = JSON()
         lcdOktTokens.removeAll()
-        Task {
-            if let nodeInfo = try? await fetchNodeInfo(),
-               let accountInfo = try? await fetchAccountInfo(bechAddress),
-               let okDeposit = try? await fetchOktDeposited(bechAddress),
-               let okWithdraw = try? await fetchOktWithdraw(bechAddress),
-               let okTokens = try? await fetchOktTokens() {
-                self.lcdNodeInfo = nodeInfo ?? JSON()
-                self.lcdAccountInfo = accountInfo ?? JSON()
-                self.lcdOktDeposits = okDeposit ?? JSON()
-                self.lcdOktWithdaws = okWithdraw ?? JSON()
-                okTokens?["data"].array?.forEach({ value in
+        do {
+            if let nodeInfo = try await fetchNodeInfo(),
+               let accountInfo = try await fetchAccountInfo(bechAddress),
+               let okDeposit = try await fetchOktDeposited(bechAddress),
+               let okWithdraw = try await fetchOktWithdraw(bechAddress),
+               let okTokens = try await fetchOktTokens() {
+                self.lcdNodeInfo = nodeInfo
+                self.lcdAccountInfo = accountInfo
+                self.lcdOktDeposits = okDeposit
+                self.lcdOktWithdaws = okWithdraw
+                okTokens["data"].array?.forEach({ value in
                     self.lcdOktTokens.append(value)
                 })
             }
@@ -108,6 +103,8 @@ class ChainOktEVM: EvmClass {
                                nil, self.lcdAccountInfo.oktCoins?.count))
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
             }
+        } catch {
+            print("Error Cosmos", self.tag,  error)
         }
     }
     
@@ -172,23 +169,23 @@ extension ChainOktEVM {
     }
     
     func fetchAccountInfo(_ address: String) async throws -> JSON? {
-        return try? await AF.request(BaseNetWork.lcdAccountInfoUrl(self, address), method: .get).serializingDecodable(JSON.self).value
+        return try await AF.request(BaseNetWork.lcdAccountInfoUrl(self, address), method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchOktDeposited(_ address: String) async throws -> JSON? {
-        return try? await AF.request(BaseNetWork.lcdOktDepositUrl(address), method: .get).serializingDecodable(JSON.self).value
+        return try await AF.request(BaseNetWork.lcdOktDepositUrl(address), method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchOktWithdraw(_ address: String) async throws -> JSON? {
-        return try? await AF.request(BaseNetWork.lcdOktWithdrawUrl(address), method: .get).serializingDecodable(JSON.self).value
+        return try await AF.request(BaseNetWork.lcdOktWithdrawUrl(address), method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchOktTokens() async throws -> JSON? {
-        return try? await AF.request(BaseNetWork.lcdOktTokenUrl(), method: .get).serializingDecodable(JSON.self).value
+        return try await AF.request(BaseNetWork.lcdOktTokenUrl(), method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchOktValdators() async throws -> [JSON]? {
-        return try? await AF.request(BaseNetWork.lcdOktValidatorsUrl(), method: .get, parameters: ["status":"all"]).serializingDecodable([JSON].self).value
+        return try await AF.request(BaseNetWork.lcdOktValidatorsUrl(), method: .get, parameters: ["status":"all"]).serializingDecodable([JSON].self).value
     }
     
     

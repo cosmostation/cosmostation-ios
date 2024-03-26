@@ -22,7 +22,7 @@ class NftListCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        nftImageView.image = nil
+        nftImageView.image = UIImage(named: "imgNftPlaceHolder")
         titleLabel.text = ""
     }
     

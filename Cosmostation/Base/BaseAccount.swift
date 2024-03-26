@@ -101,7 +101,6 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-//                Task(priority: .medium) {
                 Task {
                     await getDisplayCosmosChains().concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
@@ -116,7 +115,7 @@ extension BaseAccount {
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                Task(priority: .medium) {
+                Task {
                     await getDisplayCosmosChains().concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
@@ -135,7 +134,7 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                Task(priority: .medium) {
+                Task {
                     await allCosmosClassChains.concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)
@@ -149,7 +148,7 @@ extension BaseAccount {
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                Task(priority: .medium) {
+                Task {
                     await allCosmosClassChains.concurrentForEach { chain in
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
@@ -235,7 +234,6 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-//                Task(priority: .high) {
                 Task {
                     await getDisplayEvmChains().concurrentForEach { chain in
                         if (chain.evmAddress.isEmpty) {
@@ -250,7 +248,7 @@ extension BaseAccount {
             
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                Task(priority: .high) {
+                Task {
                     await getDisplayEvmChains().concurrentForEach { chain in
                         if (chain.evmAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
@@ -269,7 +267,7 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                Task(priority: .high) {
+                Task {
                     await allEvmClassChains.concurrentForEach { chain in
                         if (chain.evmAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)
@@ -283,7 +281,7 @@ extension BaseAccount {
 
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
-                Task(priority: .high) {
+                Task {
                     await allEvmClassChains.concurrentForEach { chain in
                         if (chain.evmAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
@@ -414,7 +412,7 @@ extension BaseAccount {
         if (type == .withMnemonic) {
             allEvmClassChains = ALLEVMCLASS()
             allCosmosClassChains = ALLCOSMOSCLASS()
-            Task(priority: .high) {
+            Task {
                 await allEvmClassChains.concurrentForEach { chain in
                     if (chain.evmAddress.isEmpty) {
                         chain.setInfoWithSeed(seed!, self.lastHDPath)
@@ -426,7 +424,7 @@ extension BaseAccount {
                 }
             }
             
-            Task(priority: .medium) {
+            Task {
                 await allCosmosClassChains.concurrentForEach { chain in
                     if (chain.bechAddress.isEmpty) {
                         chain.setInfoWithSeed(seed!, self.lastHDPath)
@@ -441,7 +439,7 @@ extension BaseAccount {
         } else if (type == .onlyPrivateKey) {
             allEvmClassChains = ALLEVMCLASS()
             allCosmosClassChains = ALLCOSMOSCLASS().filter({ $0.isDefault == true || $0.tag == "okt996_Secp"})
-            Task(priority: .high) {
+            Task {
                 await allEvmClassChains.concurrentForEach { chain in
                     if (chain.evmAddress.isEmpty) {
                         chain.setInfoWithPrivateKey(Data.fromHex(privateKeyString!)!)
@@ -451,7 +449,7 @@ extension BaseAccount {
                     }
                 }
             }
-            Task(priority: .medium) {
+            Task {
                 await allCosmosClassChains.concurrentForEach { chain in
                     if (chain.bechAddress.isEmpty) {
                         chain.setInfoWithPrivateKey(Data.fromHex(privateKeyString!)!)

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Alamofire
+import BigInt
+import SwiftyJSON
 
 class PortfolioVC: BaseVC {
     

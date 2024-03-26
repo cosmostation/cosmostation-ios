@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SwiftProtobuf
 import web3swift
+import BigInt
 
 
 
@@ -834,6 +835,11 @@ extension Date {
 }
 
 extension String {
+    func hexToNSDecimal() -> NSDecimalNumber{
+        if (self.isEmpty) { return NSDecimalNumber.zero }
+        return NSDecimalNumber(string: String(BigUInt(self.stripHexPrefix(), radix: 16) ?? "0"))
+    }
+    
     func index(from: Int) -> Index {
         return self.index(startIndex, offsetBy: from)
     }

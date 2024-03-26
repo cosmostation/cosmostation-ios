@@ -127,10 +127,10 @@ class PortfolioCell: UITableViewCell {
                 }
             }
             
-            if (chain.web3 == nil) {
-                reposeErrorLabel.isHidden = false
-                return
-            }
+//            if (chain.web3 == nil) {
+//                reposeErrorLabel.isHidden = false
+//                return
+//            }
             if (BaseData.instance.getHideValue()) {
                 currencyLabel.text = ""
                 valueLabel.font = .fontSize14Bold

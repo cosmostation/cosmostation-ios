@@ -214,9 +214,15 @@ extension CommonTransferResult {
     
     func fetchEvmTx() {
         DispatchQueue.global().async { [self] in
-            guard let web3 = (fromChain as! EvmClass).web3 else {
+//            guard let web3 = (fromChain as! EvmClass).web3 else {
+//                return
+//            }
+            let evmChain = (fromChain as! EvmClass)
+            let url = URL(string: evmChain.getEvmRpc())
+            guard let web3 = try? Web3.new(url!) else {
                 return
             }
+            
             do {
                 let receiptTx = try web3.eth.getTransactionReceipt(evmHash!)
                 self.evmRecipient = receiptTx

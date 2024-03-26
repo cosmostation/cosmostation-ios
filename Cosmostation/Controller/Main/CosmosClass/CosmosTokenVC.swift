@@ -60,8 +60,9 @@ class CosmosTokenVC: BaseVC {
         Task {
             if (selectedChain.supportCw20) {
                 selectedChain.fetchAllCw20Balance(baseAccount.id)
-            } else if let evmChain = selectedChain as? EvmClass {
-                evmChain.fetchAllErc20Balance(baseAccount.id)
+            } 
+            else if let evmChain = selectedChain as? EvmClass {
+//                evmChain.fetchAllErc20Balance(baseAccount.id)
             }
         }
     }
