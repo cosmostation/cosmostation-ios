@@ -24,9 +24,11 @@ struct Cw721TokenModel {
     var tokenInfo = JSON()
     var tokenDetails = JSON()
     
-    init(_ tokenId: String, _ tokenInfo: JSON, _ tokenDetails: JSON) {
+    init(_ tokenId: String, _ tokenInfo: JSON, _ tokenDetails: JSON?) {
         self.tokenId = tokenId
         self.tokenInfo = tokenInfo
-        self.tokenDetails = tokenDetails
+        if let tokenDetails = tokenDetails {
+            self.tokenDetails = tokenDetails
+        }
     }
 }
