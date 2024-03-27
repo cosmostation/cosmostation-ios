@@ -351,7 +351,7 @@ class CosmosClassVC: BaseVC {
         if (selectedChain.supportCw20 || selectedChain is EvmClass) { tabbar.items.append(tokenTabBar) }
         if (selectedChain.supportCw721) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(historyTabBar)
-        if (!selectedChain.getChainListParam().isEmpty && !(selectedChain is ChainOktEVM)) { tabbar.items.append(aboutTabBar) }
+        if (!selectedChain.getChainListParam().isEmpty) { tabbar.items.append(aboutTabBar) }
         
         tabbar.barTintColor = .clear
         tabbar.selectionIndicatorStrokeColor = .white

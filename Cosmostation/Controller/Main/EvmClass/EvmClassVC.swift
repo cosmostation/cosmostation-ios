@@ -155,6 +155,7 @@ class EvmClassVC: BaseVC {
         assetList.alpha = 1
         nftList.alpha = 0
         historyList.alpha = 0
+        AboutList.alpha = 0
     }
     
     @IBAction func onClickHideValue(_ sender: UIButton) {

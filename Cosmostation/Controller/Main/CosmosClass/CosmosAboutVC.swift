@@ -33,22 +33,6 @@ class CosmosAboutVC: BaseVC {
         
         chainParam = selectedChain.getChainParam()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchStakeDone(_:)), name: Notification.Name("FetchStakeData"), object: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchStakeData"), object: nil)
-    }
-    
-    @objc func onFetchStakeDone(_ notification: NSNotification) {
-        DispatchQueue.main.async {
-            self.tableView.reloadSections(IndexSet(2...2), with: .none)
-        }
-    }
 }
 
 
@@ -116,7 +100,7 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
         } else if (indexPath.section == 3) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AboutSocialsCell") as! AboutSocialsCell
             cell.vc = self
-            cell.onBindSocial(selectedChain, chainParam)
+            cell.onBindSocial(chainParam)
             return cell
         }
         return UITableViewCell()

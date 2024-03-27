@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 
 class AboutDescriptionCell: UITableViewCell {
+    
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var chainNameLabel: UILabel!
     @IBOutlet weak var chainDescriptionLabel: UILabel!
@@ -24,7 +25,7 @@ class AboutDescriptionCell: UITableViewCell {
         rootView.setBlur()
     }
     
-    func onBindDescription(_ chain: CosmosClass, _ json: JSON) {
+    func onBindDescription(_ chain: BaseChain, _ json: JSON) {
         chainNameLabel.text = chain.name
         let languageCode = Locale.current.languageCode
         if (BaseData.instance.getLanguage() == 1 && !json["en"].stringValue.isEmpty) {
