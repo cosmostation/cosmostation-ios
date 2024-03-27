@@ -108,7 +108,7 @@ class EvmClass: CosmosClass {
         do {
             let channel = getConnection()
             if let auth = try await fetchAuth(channel),
-               let balance = try? await fetchBalance(channel),
+               let balance = try await fetchBalance(channel),
                let delegations = try? await fetchDelegation(channel),
                let unbonding = try? await fetchUnbondings(channel),
                let rewards = try? await fetchRewards(channel),
@@ -161,6 +161,7 @@ class EvmClass: CosmosClass {
     }
     
     override func fetchPreCreate() {
+        self.evmBalances = NSDecimalNumber.zero
         Task {
             let balanceJson = try await fetchEvmBalance(self.evmAddress)
             if let balance = balanceJson?["result"].stringValue.hexToNSDecimal {

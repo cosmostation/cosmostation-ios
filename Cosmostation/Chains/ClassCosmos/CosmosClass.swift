@@ -86,7 +86,7 @@ class CosmosClass: BaseChain {
                 if let cw20Tokens = try await fetchCw20Info(),
                    let cw721List = try await fetchCw721Info(),
                    let auth = try await fetchAuth(channel),
-                   let balance = try? await fetchBalance(channel),
+                   let balance = try await fetchBalance(channel),
                    let delegations = try? await fetchDelegation(channel),
                    let unbonding = try? await fetchUnbondings(channel),
                    let rewards = try? await fetchRewards(channel),
@@ -145,12 +145,13 @@ class CosmosClass: BaseChain {
     
     //fetch only balance for add account check
     override func fetchPreCreate() {
-        self.cosmosBalances?.removeAll()
+        self.cosmosBalances = [Cosmos_Base_V1beta1_Coin]()
         Task {
             let channel = getConnection()
             if let balance = try? await fetchBalance(channel) {
                 self.cosmosBalances = balance
             }
+            print("fetchPreCreate ",self.cosmosBalances )
             DispatchQueue.main.async {
                 self.fetchState = .Success
                 NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
