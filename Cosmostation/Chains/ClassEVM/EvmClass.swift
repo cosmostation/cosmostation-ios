@@ -152,6 +152,8 @@ class EvmClass: CosmosClass {
                    errorMessage.contains(self.bechAddress) == true,
                    errorMessage.contains("not found") == true {
                     self.fetchState = .Success
+                    BaseData.instance.updateRefAddressesCoinValue(
+                        RefAddress(id, self.tag, self.bechAddress, self.evmAddress))
                 } else {
                     self.fetchState = .Fail
                 }

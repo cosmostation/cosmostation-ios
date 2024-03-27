@@ -134,6 +134,8 @@ class CosmosClass: BaseChain {
                        errorMessage.contains(self.bechAddress) == true,
                        errorMessage.contains("not found") == true {
                         self.fetchState = .Success
+                        BaseData.instance.updateRefAddressesCoinValue(
+                            RefAddress(id, self.tag, self.bechAddress, self.evmAddress))
                     } else {
                         self.fetchState = .Fail
                     }
@@ -779,7 +781,7 @@ extension CosmosClass {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(8000))
         return callOptions
     }
 }

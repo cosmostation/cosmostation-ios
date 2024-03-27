@@ -106,7 +106,7 @@ extension BaseAccount {
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)
                         }
-                        if (chain.fetchState != .Busy) {
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                             chain.fetchData(self.id)
                         }
                     }
@@ -120,7 +120,7 @@ extension BaseAccount {
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
-                        if (chain.fetchState != .Busy) {
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                             chain.fetchData(self.id)
                         }
                     }
@@ -139,7 +139,7 @@ extension BaseAccount {
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)
                         }
-                        if (chain.fetchState != .Busy) {
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                             chain.fetchData(self.id)
                         }
                     }
@@ -153,7 +153,7 @@ extension BaseAccount {
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
-                        if (chain.fetchState != .Busy) {
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                             chain.fetchData(self.id)
                         }
                     }
@@ -173,7 +173,7 @@ extension BaseAccount {
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)
                         }
-                        if (chain.fetchState != .Busy) {
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                             chain.fetchData(self.id)
                         }
                     }
@@ -187,7 +187,7 @@ extension BaseAccount {
                         if (chain.bechAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
-                        if (chain.fetchState != .Busy) {
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                             chain.fetchData(self.id)
                         }
                     }
@@ -239,7 +239,7 @@ extension BaseAccount {
                         if (chain.evmAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)
                         }
-                        if (chain.fetchState != .Busy) {
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                             chain.fetchData(self.id)
                         }
                     }
@@ -253,7 +253,7 @@ extension BaseAccount {
                         if (chain.evmAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
-                        if (chain.fetchState != .Busy) {
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                             chain.fetchData(self.id)
                         }
                     }
@@ -272,7 +272,7 @@ extension BaseAccount {
                         if (chain.evmAddress.isEmpty) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)
                         }
-                        if (chain.fetchState != .Busy) {
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                             chain.fetchData(self.id)
                         }
                     }
@@ -286,7 +286,7 @@ extension BaseAccount {
                         if (chain.evmAddress.isEmpty) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
-                        if (chain.fetchState != .Busy) {
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                             chain.fetchData(self.id)
                         }
                     }
@@ -418,7 +418,7 @@ extension BaseAccount {
                         chain.setInfoWithSeed(seed!, self.lastHDPath)
 //                        print("evmAddress ", chain.tag, "  ", chain.evmAddress)
                     }
-                    if (chain.fetchState != .Busy) {
+                    if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                         chain.fetchPreCreate()
                     }
                 }
@@ -430,7 +430,7 @@ extension BaseAccount {
                         chain.setInfoWithSeed(seed!, self.lastHDPath)
 //                        print("bechAddress ", chain.tag, "  ", chain.bechAddress)
                     }
-                    if (chain.fetchState != .Busy) {
+                    if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                         chain.fetchPreCreate()
                     }
                 }
@@ -444,7 +444,7 @@ extension BaseAccount {
                     if (chain.evmAddress.isEmpty) {
                         chain.setInfoWithPrivateKey(Data.fromHex(privateKeyString!)!)
                     }
-                    if (chain.fetchState != .Busy) {
+                    if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                         chain.fetchPreCreate()
                     }
                 }
@@ -454,7 +454,7 @@ extension BaseAccount {
                     if (chain.bechAddress.isEmpty) {
                         chain.setInfoWithPrivateKey(Data.fromHex(privateKeyString!)!)
                     }
-                    if (chain.fetchState != .Busy) {
+                    if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
                         chain.fetchPreCreate()
                     }
                 }
