@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,21 +16,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="125" id="KGk-i7-Jjw" customClass="AboutSocialsCell" customModule="Cosmostation" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="433" height="125"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="273" id="KGk-i7-Jjw" customClass="AboutSocialsCell" customModule="Cosmostation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="447" height="273"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="433" height="125"/>
+                <rect key="frame" x="0.0" y="0.0" width="447" height="273"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ShA-9z-abU">
-                        <rect key="frame" x="14" y="42" width="405" height="69"/>
+                        <rect key="frame" x="14" y="42" width="419" height="69"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sac-S3-w5D">
-                                <rect key="frame" x="0.0" y="0.0" width="81" height="69"/>
+                                <rect key="frame" x="0.0" y="0.0" width="83.666666666666671" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWP-2b-oLG">
-                                        <rect key="frame" x="20.666666666666664" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="22" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="IaX-tF-qNc"/>
                                             <constraint firstAttribute="height" constant="40" id="WZf-uK-Evc"/>
@@ -42,7 +42,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Web Site" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrG-go-uos">
-                                        <rect key="frame" x="15.666666666666668" y="44" width="49.666666666666657" height="23"/>
+                                        <rect key="frame" x="16.999999999999996" y="44" width="49.666666666666657" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>
@@ -50,6 +50,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="Obq-Zm-aUO"/>
                                     <constraint firstItem="vWP-2b-oLG" firstAttribute="centerX" secondItem="Sac-S3-w5D" secondAttribute="centerX" id="YuB-Bo-ecj"/>
                                     <constraint firstItem="vWP-2b-oLG" firstAttribute="top" secondItem="Sac-S3-w5D" secondAttribute="top" id="gIc-Ih-ZIw"/>
                                     <constraint firstAttribute="bottom" secondItem="CrG-go-uos" secondAttribute="bottom" constant="2" id="qpE-o4-e7e"/>
@@ -58,10 +59,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKt-Si-Byf">
-                                <rect key="frame" x="81" y="0.0" width="81" height="69"/>
+                                <rect key="frame" x="83.666666666666671" y="0.0" width="84.000000000000014" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OSd-uu-0tc">
-                                        <rect key="frame" x="20.666666666666671" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="22" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Hus-Id-xbH"/>
                                             <constraint firstAttribute="width" constant="40" id="Z10-ag-Ega"/>
@@ -73,7 +74,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Twitter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uiB-EU-vpk">
-                                        <rect key="frame" x="20.333333333333325" y="44" width="40.666666666666657" height="23"/>
+                                        <rect key="frame" x="21.666666666666654" y="44" width="40.666666666666657" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>
@@ -86,13 +87,14 @@
                                     <constraint firstItem="uiB-EU-vpk" firstAttribute="centerX" secondItem="SKt-Si-Byf" secondAttribute="centerX" id="cFd-ru-zcg"/>
                                     <constraint firstItem="OSd-uu-0tc" firstAttribute="centerX" secondItem="SKt-Si-Byf" secondAttribute="centerX" id="jBf-I1-XPP"/>
                                     <constraint firstAttribute="bottom" secondItem="uiB-EU-vpk" secondAttribute="bottom" constant="2" id="q3b-D9-q5y"/>
+                                    <constraint firstAttribute="height" constant="69" id="rX8-Vq-Sca"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ru-hN-Qg4">
-                                <rect key="frame" x="162" y="0.0" width="81" height="69"/>
+                                <rect key="frame" x="167.66666666666666" y="0.0" width="83.666666666666657" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5H-xi-MZk">
-                                        <rect key="frame" x="20.666666666666657" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="22" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="k1j-IY-XNi"/>
                                             <constraint firstAttribute="width" constant="40" id="vEy-Ok-XdN"/>
@@ -104,7 +106,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Github" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Uv-pC-4Qh">
-                                        <rect key="frame" x="21" y="44" width="39" height="23"/>
+                                        <rect key="frame" x="22.333333333333343" y="44" width="39" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>
@@ -116,26 +118,27 @@
                                     <constraint firstItem="6Uv-pC-4Qh" firstAttribute="top" secondItem="z5H-xi-MZk" secondAttribute="bottom" constant="4" id="VyE-Q9-c8h"/>
                                     <constraint firstItem="6Uv-pC-4Qh" firstAttribute="centerX" secondItem="4Ru-hN-Qg4" secondAttribute="centerX" id="kVZ-vY-Gzc"/>
                                     <constraint firstAttribute="bottom" secondItem="6Uv-pC-4Qh" secondAttribute="bottom" constant="2" id="ndZ-eX-i8W"/>
+                                    <constraint firstAttribute="height" constant="69" id="pIg-vq-2Kc"/>
                                     <constraint firstItem="z5H-xi-MZk" firstAttribute="centerX" secondItem="4Ru-hN-Qg4" secondAttribute="centerX" id="xdE-rQ-cNz"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oPq-vo-0a0">
-                                <rect key="frame" x="243" y="0.0" width="81" height="69"/>
+                                <rect key="frame" x="251.33333333333331" y="0.0" width="84" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPt-Iv-o2h">
-                                        <rect key="frame" x="20.666666666666686" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="22" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="TAH-az-0zX"/>
                                             <constraint firstAttribute="height" constant="40" id="W9d-zS-TWz"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="imgSocialBlog"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="imgSocialDocs"/>
                                         <connections>
-                                            <action selector="onClickBlog:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XMt-Rg-V6A"/>
+                                            <action selector="onClickDocs:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="N27-Qc-qME"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blog" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jd6-uK-ehA">
-                                        <rect key="frame" x="27.666666666666686" y="44" width="25.666666666666671" height="23"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Docs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jd6-uK-ehA">
+                                        <rect key="frame" x="28" y="44" width="28" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>
@@ -143,6 +146,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="E43-eX-hFd"/>
                                     <constraint firstItem="pPt-Iv-o2h" firstAttribute="centerX" secondItem="oPq-vo-0a0" secondAttribute="centerX" id="Jfy-eK-PgY"/>
                                     <constraint firstAttribute="bottom" secondItem="Jd6-uK-ehA" secondAttribute="bottom" constant="2" id="KuL-KZ-2cg"/>
                                     <constraint firstItem="Jd6-uK-ehA" firstAttribute="top" secondItem="pPt-Iv-o2h" secondAttribute="bottom" constant="4" id="MoG-qi-Crq"/>
@@ -151,10 +155,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVA-Uy-YvL">
-                                <rect key="frame" x="324" y="0.0" width="81" height="69"/>
+                                <rect key="frame" x="335.33333333333331" y="0.0" width="83.666666666666686" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-FJ-FaR">
-                                        <rect key="frame" x="20.666666666666686" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="21.666666666666686" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="BZ8-fM-X8l"/>
                                             <constraint firstAttribute="height" constant="40" id="Rom-Nv-84U"/>
@@ -166,7 +170,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CoinGecko" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pde-Yj-v2q">
-                                        <rect key="frame" x="10.000000000000004" y="44" width="61.333333333333343" height="23"/>
+                                        <rect key="frame" x="11.000000000000004" y="44" width="61.333333333333343" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>
@@ -177,8 +181,142 @@
                                     <constraint firstItem="ibd-FJ-FaR" firstAttribute="top" secondItem="OVA-Uy-YvL" secondAttribute="top" id="15f-pK-2cd"/>
                                     <constraint firstAttribute="bottom" secondItem="Pde-Yj-v2q" secondAttribute="bottom" constant="2" id="A3Y-9b-SAl"/>
                                     <constraint firstItem="Pde-Yj-v2q" firstAttribute="centerX" secondItem="OVA-Uy-YvL" secondAttribute="centerX" id="DG4-nV-JRv"/>
+                                    <constraint firstAttribute="height" constant="69" id="T98-2M-J62"/>
                                     <constraint firstItem="ibd-FJ-FaR" firstAttribute="centerX" secondItem="OVA-Uy-YvL" secondAttribute="centerX" id="Th9-tS-AJM"/>
                                     <constraint firstItem="Pde-Yj-v2q" firstAttribute="top" secondItem="ibd-FJ-FaR" secondAttribute="bottom" constant="4" id="rsf-eN-dWv"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5v7-Wd-WOf">
+                        <rect key="frame" x="36" y="135" width="375" height="69"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNy-dW-7ID">
+                                <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="69"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OtG-XG-CXC">
+                                        <rect key="frame" x="27" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="PqY-zt-Vzi"/>
+                                            <constraint firstAttribute="width" constant="40" id="TLu-pO-5nN"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="imgSocialForum"/>
+                                        <connections>
+                                            <action selector="onClickForum:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nwS-9l-sL3"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6J-EE-f1T">
+                                        <rect key="frame" x="27.999999999999996" y="44" width="37.666666666666657" height="23"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                        <color key="textColor" name="_color03"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="OtG-XG-CXC" firstAttribute="top" secondItem="FNy-dW-7ID" secondAttribute="top" id="Ukz-4i-Yax"/>
+                                    <constraint firstAttribute="bottom" secondItem="w6J-EE-f1T" secondAttribute="bottom" constant="2" id="hkc-lm-gLv"/>
+                                    <constraint firstAttribute="height" constant="69" id="oDj-fG-cMY"/>
+                                    <constraint firstItem="w6J-EE-f1T" firstAttribute="centerX" secondItem="FNy-dW-7ID" secondAttribute="centerX" id="sSN-i2-Qxb"/>
+                                    <constraint firstItem="w6J-EE-f1T" firstAttribute="top" secondItem="OtG-XG-CXC" secondAttribute="bottom" constant="4" id="tD8-4g-kFq"/>
+                                    <constraint firstItem="OtG-XG-CXC" firstAttribute="centerX" secondItem="FNy-dW-7ID" secondAttribute="centerX" id="vQi-Db-nRM"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aj0-B7-js0">
+                                <rect key="frame" x="93.666666666666657" y="0.0" width="94" height="69"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iX-FN-beD">
+                                        <rect key="frame" x="27" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="8VC-xu-vHV"/>
+                                            <constraint firstAttribute="height" constant="40" id="wIw-Ns-0Hs"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="imgSocialGov"/>
+                                        <connections>
+                                            <action selector="onClickGov:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="M2p-Jp-ID2"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Governance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoX-8f-7T0">
+                                        <rect key="frame" x="12.666666666666686" y="44" width="68.666666666666671" height="23"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                        <color key="textColor" name="_color03"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="UoX-8f-7T0" firstAttribute="top" secondItem="3iX-FN-beD" secondAttribute="bottom" constant="4" id="5XJ-gB-4p5"/>
+                                    <constraint firstAttribute="height" constant="69" id="ahI-gt-Ms9"/>
+                                    <constraint firstAttribute="bottom" secondItem="UoX-8f-7T0" secondAttribute="bottom" constant="2" id="dfX-6o-Zrd"/>
+                                    <constraint firstItem="3iX-FN-beD" firstAttribute="top" secondItem="aj0-B7-js0" secondAttribute="top" id="fP9-Jj-wnE"/>
+                                    <constraint firstItem="UoX-8f-7T0" firstAttribute="centerX" secondItem="aj0-B7-js0" secondAttribute="centerX" id="rLb-xw-hm1"/>
+                                    <constraint firstItem="3iX-FN-beD" firstAttribute="centerX" secondItem="aj0-B7-js0" secondAttribute="centerX" id="rQ8-tM-i4W"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdm-uW-jEN">
+                                <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="69"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0i-6f-lq0">
+                                        <rect key="frame" x="26.666666666666686" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="NpM-d2-oYA"/>
+                                            <constraint firstAttribute="width" constant="40" id="ocp-vf-QZ3"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="imgSocialMedium"/>
+                                        <connections>
+                                            <action selector="onClickMedium:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="AEk-0E-leF"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipe-Hn-Lrv">
+                                        <rect key="frame" x="23.666666666666689" y="44" width="46.333333333333343" height="23"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                        <color key="textColor" name="_color03"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ipe-Hn-Lrv" firstAttribute="top" secondItem="p0i-6f-lq0" secondAttribute="bottom" constant="4" id="8Dr-HA-u7g"/>
+                                    <constraint firstAttribute="bottom" secondItem="ipe-Hn-Lrv" secondAttribute="bottom" constant="2" id="ACh-Nk-vOv"/>
+                                    <constraint firstItem="p0i-6f-lq0" firstAttribute="top" secondItem="qdm-uW-jEN" secondAttribute="top" id="Khy-Sr-0RW"/>
+                                    <constraint firstAttribute="height" constant="69" id="X3w-9a-68w"/>
+                                    <constraint firstItem="ipe-Hn-Lrv" firstAttribute="centerX" secondItem="qdm-uW-jEN" secondAttribute="centerX" id="eal-ym-FdP"/>
+                                    <constraint firstItem="p0i-6f-lq0" firstAttribute="centerX" secondItem="qdm-uW-jEN" secondAttribute="centerX" id="rwd-h3-d3H"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Kr-F4-F4q">
+                                <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="69"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MY7-Fc-krl">
+                                        <rect key="frame" x="26.666666666666686" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="8Xn-ZH-eZZ"/>
+                                            <constraint firstAttribute="height" constant="40" id="ckO-hj-4nE"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="imgSocialBlog"/>
+                                        <connections>
+                                            <action selector="onClickBlog:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="u7E-fk-Y0q"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blog" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ge5-8A-GqD">
+                                        <rect key="frame" x="34" y="44" width="25.666666666666671" height="23"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                        <color key="textColor" name="_color03"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="61z-Fm-872"/>
+                                    <constraint firstItem="MY7-Fc-krl" firstAttribute="centerX" secondItem="7Kr-F4-F4q" secondAttribute="centerX" id="BeN-nM-hJc"/>
+                                    <constraint firstItem="Ge5-8A-GqD" firstAttribute="top" secondItem="MY7-Fc-krl" secondAttribute="bottom" constant="4" id="OsY-ez-FYq"/>
+                                    <constraint firstItem="Ge5-8A-GqD" firstAttribute="centerX" secondItem="7Kr-F4-F4q" secondAttribute="centerX" id="S02-0W-d7H"/>
+                                    <constraint firstItem="MY7-Fc-krl" firstAttribute="top" secondItem="7Kr-F4-F4q" secondAttribute="top" id="ibD-Sk-jpr"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ge5-8A-GqD" secondAttribute="bottom" constant="2" id="ul7-g0-D3U"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -186,23 +324,41 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="5v7-Wd-WOf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="36" id="2YH-VM-UVl"/>
+                    <constraint firstAttribute="bottom" secondItem="5v7-Wd-WOf" secondAttribute="bottom" constant="68" id="5y4-It-eZP"/>
                     <constraint firstItem="ShA-9z-abU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="42" id="6rF-xm-upG"/>
                     <constraint firstItem="ShA-9z-abU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="a2I-AG-oiR"/>
+                    <constraint firstItem="5v7-Wd-WOf" firstAttribute="top" secondItem="ShA-9z-abU" secondAttribute="bottom" constant="24" id="cet-s2-lDA"/>
+                    <constraint firstAttribute="trailing" secondItem="5v7-Wd-WOf" secondAttribute="trailing" constant="36" id="ijk-xc-f20"/>
                     <constraint firstAttribute="trailing" secondItem="ShA-9z-abU" secondAttribute="trailing" constant="14" id="lJE-eQ-cAL"/>
-                    <constraint firstAttribute="bottom" secondItem="ShA-9z-abU" secondAttribute="bottom" constant="14" id="lxE-c4-BPd"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" name="_primary"/>
-            <point key="canvasLocation" x="391.60305343511448" y="17.253521126760564"/>
+            <connections>
+                <outlet property="blogView" destination="7Kr-F4-F4q" id="clS-UJ-Xqi"/>
+                <outlet property="docsView" destination="oPq-vo-0a0" id="h1V-ph-9Ab"/>
+                <outlet property="forumView" destination="FNy-dW-7ID" id="LNA-I9-8yk"/>
+                <outlet property="geckoView" destination="OVA-Uy-YvL" id="cps-vJ-qy3"/>
+                <outlet property="githubView" destination="4Ru-hN-Qg4" id="RxL-ZC-YSK"/>
+                <outlet property="govView" destination="aj0-B7-js0" id="gcR-P0-cIM"/>
+                <outlet property="homepageView" destination="Sac-S3-w5D" id="2Wl-8c-b6f"/>
+                <outlet property="mediumView" destination="qdm-uW-jEN" id="W9A-np-hi0"/>
+                <outlet property="twitterView" destination="SKt-Si-Byf" id="KJh-aJ-01v"/>
+            </connections>
+            <point key="canvasLocation" x="402.29007633587787" y="69.366197183098592"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="imgSocialBlog" width="40" height="40"/>
+        <image name="imgSocialDocs" width="40" height="40"/>
+        <image name="imgSocialForum" width="40" height="40"/>
         <image name="imgSocialGecko" width="40" height="40"/>
         <image name="imgSocialGithub" width="40" height="40"/>
+        <image name="imgSocialGov" width="40" height="40"/>
         <image name="imgSocialHome" width="40" height="40"/>
+        <image name="imgSocialMedium" width="40" height="40"/>
         <image name="imgSocialTwitter" width="40" height="40"/>
         <namedColor name="_color03">
             <color red="0.54100000858306885" green="0.60000002384185791" blue="0.68199998140335083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

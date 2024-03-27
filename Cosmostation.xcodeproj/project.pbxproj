@@ -703,6 +703,8 @@
 		04A68C362AC156AA0041FA13 /* CosmosProposalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A68C332AC156AA0041FA13 /* CosmosProposalCell.swift */; };
 		04A68C372AC156AA0041FA13 /* CosmosProposalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A68C342AC156AA0041FA13 /* CosmosProposalCell.xib */; };
 		04A68C382AC156AA0041FA13 /* CosmosProposalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A68C342AC156AA0041FA13 /* CosmosProposalCell.xib */; };
+		04B2A2F22BB42560001300E9 /* EvmAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */; };
+		04B2A2F32BB42560001300E9 /* EvmAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */; };
 		04B789312ACAC9B100E9BE88 /* ibc_applications_fee_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B788FB2ACAC9AC00E9BE88 /* ibc_applications_fee_v1_tx.pb.swift */; };
 		04B789322ACAC9B100E9BE88 /* ibc_applications_fee_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B788FB2ACAC9AC00E9BE88 /* ibc_applications_fee_v1_tx.pb.swift */; };
 		04B789332ACAC9B100E9BE88 /* ibc_core_types_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B788FC2ACAC9AC00E9BE88 /* ibc_core_types_v1_genesis.pb.swift */; };
@@ -2221,6 +2223,7 @@
 		04A68C2E2AC13A560041FA13 /* CosmosProposalsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosProposalsVC.xib; sourceTree = "<group>"; };
 		04A68C332AC156AA0041FA13 /* CosmosProposalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosProposalCell.swift; sourceTree = "<group>"; };
 		04A68C342AC156AA0041FA13 /* CosmosProposalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosProposalCell.xib; sourceTree = "<group>"; };
+		04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmAboutVC.swift; sourceTree = "<group>"; };
 		04B788FB2ACAC9AC00E9BE88 /* ibc_applications_fee_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_tx.pb.swift; sourceTree = "<group>"; };
 		04B788FC2ACAC9AC00E9BE88 /* ibc_core_types_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_types_v1_genesis.pb.swift; sourceTree = "<group>"; };
 		04B788FD2ACAC9AC00E9BE88 /* ibc_lightclients_localhost_v2_localhost.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_localhost_v2_localhost.pb.swift; sourceTree = "<group>"; };
@@ -4161,6 +4164,7 @@
 				E1DBD3E32B6220C60058E0DC /* EvmAssetVC.swift */,
 				E1DBD3E62B6220DC0058E0DC /* EvmNftVC.swift */,
 				E1DBD3E92B6220EE0058E0DC /* EvmHistoryVC.swift */,
+				04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */,
 			);
 			path = EvmClass;
 			sourceTree = "<group>";
@@ -5052,6 +5056,7 @@
 				04C817B52BA98D75006B800A /* cosmos_base_reflection_v1beta1_reflection.pb.swift in Sources */,
 				04C8178F2BA98D75006B800A /* cosmos_nft_module_v1_module.pb.swift in Sources */,
 				04C63D3D2B8767A300D4A366 /* ChainXplaEVM.swift in Sources */,
+				04B2A2F32BB42560001300E9 /* EvmAboutVC.swift in Sources */,
 				E1657B0C2AD0159D00264A21 /* SecButton.swift in Sources */,
 				04C8177F2BA98D75006B800A /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				0400EEEA2ADBE1D3007BA97F /* kava_pricefeed_v1beta1_query.pb.swift in Sources */,
@@ -5800,6 +5805,7 @@
 				04C817B42BA98D75006B800A /* cosmos_base_reflection_v1beta1_reflection.pb.swift in Sources */,
 				04C8178E2BA98D75006B800A /* cosmos_nft_module_v1_module.pb.swift in Sources */,
 				044ECB232A95DEB70042DB3C /* ChainLum880.swift in Sources */,
+				04B2A2F22BB42560001300E9 /* EvmAboutVC.swift in Sources */,
 				04C63D3C2B8767A300D4A366 /* ChainXplaEVM.swift in Sources */,
 				04C8177E2BA98D75006B800A /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				E1657B0B2AD0159D00264A21 /* SecButton.swift in Sources */,
