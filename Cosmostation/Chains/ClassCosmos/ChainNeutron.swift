@@ -84,7 +84,13 @@ class ChainNeutron: CosmosClass  {
             } catch {
                 print("error ",tag, "  ", error)
                 DispatchQueue.main.async {
-                    self.fetchState = .Fail
+                    if let errorMessage = (error as? GRPCStatus)?.message,
+                       errorMessage.contains(self.bechAddress) == true,
+                       errorMessage.contains("not found") == true {
+                        self.fetchState = .Success
+                    } else {
+                        self.fetchState = .Fail
+                    }
                     NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
                 }
             }
