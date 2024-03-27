@@ -67,7 +67,6 @@ class CosmosClass: BaseChain {
     }
     
     override func fetchData(_ id: Int64) {
-        print("fetchData ", self.tag)
         fetchState = .Busy
         mintscanCw20Tokens.removeAll()
         mintscanCw721List.removeAll()
@@ -112,11 +111,11 @@ class CosmosClass: BaseChain {
                 }
                 
                 DispatchQueue.main.async {
-                    print("success ", self.tag)
                     WUtils.onParseVestingAccount(self)
                     self.fetchState = .Success
                     self.allCoinValue = self.allCoinValue()
                     self.allCoinUSDValue = self.allCoinValue(true)
+//                    print("Done ", self.tag, "  ", self.allCoinValue)
                     if (self.supportCw20) { self.fetchAllCw20Balance(id) }
                     
                     BaseData.instance.updateRefAddressesCoinValue(
@@ -128,7 +127,7 @@ class CosmosClass: BaseChain {
                 }
                 
             } catch {
-                print("error ",tag, "  ", error)
+//                print("error ",tag, "  ", error)
                 DispatchQueue.main.async {
                     if let errorMessage = (error as? GRPCStatus)?.message,
                        errorMessage.contains(self.bechAddress) == true,
@@ -153,7 +152,6 @@ class CosmosClass: BaseChain {
             if let balance = try? await fetchBalance(channel) {
                 self.cosmosBalances = balance
             }
-            print("fetchPreCreate ",self.cosmosBalances )
             DispatchQueue.main.async {
                 self.fetchState = .Success
                 NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
@@ -520,10 +518,15 @@ extension CosmosClass {
             await mintscanCw721List.concurrentForEach { list in
                 var tokens = [Cw721TokenModel]()
                 if let tokenIds = try? await self.fetchCw721TokenIds(channel, list), !tokenIds.isEmpty {
+                    print("tokenIds ", list["name"], "  ", tokenIds)
                     await tokenIds["tokens"].arrayValue.concurrentForEach { tokenId in
-                        if let tokenInfo = try? await self.fetchCw721TokenInfo(channel, list, tokenId.stringValue),
-                           let tokenDetail = try? await AF.request(tokenInfo.ipfsUrl, method: .get).serializingDecodable(JSON.self).value {
-                            tokens.append(Cw721TokenModel.init(tokenId.stringValue, tokenInfo, tokenDetail))
+//                        if let tokenInfo = try? await self.fetchCw721TokenInfo(channel, list, tokenId.stringValue),
+//                           let tokenDetail = try? await AF.request(tokenInfo.ipfsUrl, method: .get).serializingDecodable(JSON.self).value {
+//                            tokens.append(Cw721TokenModel.init(tokenId.stringValue, tokenInfo, tokenDetail))
+//                        }
+                        if let tokenInfo = try? await self.fetchCw721TokenInfo(channel, list, tokenId.stringValue) {
+                            print("tokenInfo ", tokenInfo)
+                            tokens.append(Cw721TokenModel.init(tokenId.stringValue, tokenInfo, nil))
                         }
                     }
                 }
@@ -791,75 +794,75 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     var result = [CosmosClass]()
     result.removeAll()
     result.append(ChainCosmos())
-    result.append(ChainAkash())
-//    result.append(ChainAlthea118())
-    result.append(ChainArchway())
-    result.append(ChainAssetMantle())
-    result.append(ChainAxelar())
-    result.append(ChainBand())
-    result.append(ChainBitcana())
-    result.append(ChainBitsong())
-    result.append(ChainCelestia())
-    result.append(ChainChihuahua())
-    result.append(ChainComdex())
-    result.append(ChainCoreum())
-    result.append(ChainCrescent())
-    result.append(ChainCryptoorg())
-    result.append(ChainCudos())
-    result.append(ChainDesmos())
-    result.append(ChainDydx())
-    result.append(ChainEmoney())
-    result.append(ChainFetchAi())
-    result.append(ChainFetchAi60Secp())
-    result.append(ChainFetchAi60Old())
-    result.append(ChainFinschia())
-    result.append(ChainGovgen())
-    result.append(ChainGravityBridge())
-    result.append(ChainInjective())
-    result.append(ChainIris())
-    result.append(ChainIxo())
-    result.append(ChainJuno())
-    result.append(ChainKava459())
-    result.append(ChainKava118())
-    result.append(ChainKi())
-    result.append(ChainKyve())
-    result.append(ChainLike())
-    result.append(ChainLum880())
-    result.append(ChainLum118())
-    result.append(ChainMars())
-    result.append(ChainMedibloc())
-    result.append(ChainNeutron())
-    result.append(ChainNibiru())
-    result.append(ChainNoble())
-    result.append(ChainNyx())
-    result.append(ChainOmniflix())
-    result.append(ChainOnomy())
-    result.append(ChainOsmosis())
-    result.append(ChainPassage())
-    result.append(ChainPersistence118())
-    result.append(ChainPersistence750())
-    result.append(ChainProvenance())
-    result.append(ChainQuasar())
-    result.append(ChainQuicksilver())
-    result.append(ChainRegen())
-    result.append(ChainRizon())
-    result.append(ChainSecret118())
-    result.append(ChainSecret529())
-    result.append(ChainSei())
-    result.append(ChainSentinel())
-    result.append(ChainShentu())
-    result.append(ChainSommelier())
-    result.append(ChainStafi())
+//    result.append(ChainAkash())
+////    result.append(ChainAlthea118())
+//    result.append(ChainArchway())
+//    result.append(ChainAssetMantle())
+//    result.append(ChainAxelar())
+//    result.append(ChainBand())
+//    result.append(ChainBitcana())
+//    result.append(ChainBitsong())
+//    result.append(ChainCelestia())
+//    result.append(ChainChihuahua())
+//    result.append(ChainComdex())
+//    result.append(ChainCoreum())
+//    result.append(ChainCrescent())
+//    result.append(ChainCryptoorg())
+//    result.append(ChainCudos())
+//    result.append(ChainDesmos())
+//    result.append(ChainDydx())
+//    result.append(ChainEmoney())
+//    result.append(ChainFetchAi())
+//    result.append(ChainFetchAi60Secp())
+//    result.append(ChainFetchAi60Old())
+//    result.append(ChainFinschia())
+//    result.append(ChainGovgen())
+//    result.append(ChainGravityBridge())
+//    result.append(ChainInjective())
+//    result.append(ChainIris())
+//    result.append(ChainIxo())
+//    result.append(ChainJuno())
+//    result.append(ChainKava459())
+//    result.append(ChainKava118())
+//    result.append(ChainKi())
+//    result.append(ChainKyve())
+//    result.append(ChainLike())
+//    result.append(ChainLum880())
+//    result.append(ChainLum118())
+//    result.append(ChainMars())
+//    result.append(ChainMedibloc())
+//    result.append(ChainNeutron())
+//    result.append(ChainNibiru())
+//    result.append(ChainNoble())
+//    result.append(ChainNyx())
+//    result.append(ChainOmniflix())
+//    result.append(ChainOnomy())
+//    result.append(ChainOsmosis())
+//    result.append(ChainPassage())
+//    result.append(ChainPersistence118())
+//    result.append(ChainPersistence750())
+//    result.append(ChainProvenance())
+//    result.append(ChainQuasar())
+//    result.append(ChainQuicksilver())
+//    result.append(ChainRegen())
+//    result.append(ChainRizon())
+//    result.append(ChainSecret118())
+//    result.append(ChainSecret529())
+//    result.append(ChainSei())
+//    result.append(ChainSentinel())
+//    result.append(ChainShentu())
+//    result.append(ChainSommelier())
+//    result.append(ChainStafi())
     result.append(ChainStargaze())
-    result.append(ChainStride())
-    result.append(ChainTeritori())
-    result.append(ChainTerra())
-    result.append(ChainUmee())
-    result.append(ChainXpla())
-    
-    result.append(ChainBinanceBeacon())
-    result.append(ChainOkt996Secp())
-    result.append(ChainOkt996Keccak())
+//    result.append(ChainStride())
+//    result.append(ChainTeritori())
+//    result.append(ChainTerra())
+//    result.append(ChainUmee())
+//    result.append(ChainXpla())
+//    
+//    result.append(ChainBinanceBeacon())
+//    result.append(ChainOkt996Secp())
+//    result.append(ChainOkt996Keccak())
     
     
     
@@ -903,9 +906,3 @@ extension Cosmos_Base_V1beta1_DecCoin {
 }
 
 
-extension JSON {
-    var ipfsUrl: String {
-        return self["token_uri"].stringValue.replacingOccurrences(of: "ipfs://", with: "https://ipfs.io/ipfs/")
-    }
-    
-}

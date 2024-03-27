@@ -32,3 +32,10 @@ struct Cw721TokenModel {
         }
     }
 }
+
+
+extension JSON {
+    var ipfsUrl: String {
+        return self["token_uri"].stringValue.replacingOccurrences(of: "ipfs://", with: "https://ipfs.io/ipfs/")
+    }
+}

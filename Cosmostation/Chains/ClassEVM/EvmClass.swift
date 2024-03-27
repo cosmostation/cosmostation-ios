@@ -136,6 +136,7 @@ class EvmClass: CosmosClass {
                 self.fetchState = .Success
                 self.allCoinValue = self.allCoinValue()
                 self.allCoinUSDValue = self.allCoinValue(true)
+                print("Done ", self.tag, "  ", self.allCoinValue)
                 
                 BaseData.instance.updateRefAddressesCoinValue(
                     RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
@@ -146,7 +147,7 @@ class EvmClass: CosmosClass {
             }
             
         } catch {
-            print("error ",tag, "  ", error)
+//            print("error ",tag, "  ", error)
             DispatchQueue.main.async {
                 if let errorMessage = (error as? GRPCStatus)?.message,
                    errorMessage.contains(self.bechAddress) == true,
@@ -278,16 +279,16 @@ func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
 //    result.append(ChainAltheaEVM())
-    result.append(ChainBaseEVM())
-    result.append(ChainCantoEVM())
-    result.append(ChainDymensionEVM())
-    result.append(ChainEvmosEVM())
-    result.append(ChainHumansEVM())
-    result.append(ChainKavaEVM())
-    result.append(ChainOktEVM())
-    result.append(ChainOptimism())
-    result.append(ChainPolygon())
-    result.append(ChainXplaEVM())
+//    result.append(ChainBaseEVM())
+//    result.append(ChainCantoEVM())
+//    result.append(ChainDymensionEVM())
+//    result.append(ChainEvmosEVM())
+//    result.append(ChainHumansEVM())
+//    result.append(ChainKavaEVM())
+//    result.append(ChainOktEVM())
+//    result.append(ChainOptimism())
+//    result.append(ChainPolygon())
+//    result.append(ChainXplaEVM())
     
     //Add cosmos chain id for ibc
     result.forEach { chain in

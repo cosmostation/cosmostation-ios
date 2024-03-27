@@ -28,6 +28,7 @@ class CosmosClassVC: BaseVC {
     @IBOutlet weak var aboutList: UIView!
     
     var addtokenBarBtn: UIBarButtonItem!
+    var addNftBarBtn: UIBarButtonItem!
     var explorerBarBtn: UIBarButtonItem!
     
     var selectedChain: CosmosClass!
@@ -95,6 +96,12 @@ class CosmosClassVC: BaseVC {
         addtokenBtn.addTarget(self, action:  #selector(onClickAddToken), for: .touchUpInside)
         addtokenBtn.frame = CGRectMake(0, 0, 40, 30)
         addtokenBarBtn = UIBarButtonItem(customView: addtokenBtn)
+        
+        let addNftBtn: UIButton = UIButton(type: .custom)
+        addNftBtn.setImage(UIImage(named: "iconAddNFTInfo"), for: .normal)
+        addNftBtn.addTarget(self, action:  #selector(onClickAddNft), for: .touchUpInside)
+        addNftBtn.frame = CGRectMake(0, 0, 40, 30)
+        addNftBarBtn = UIBarButtonItem(customView: addNftBtn)
         
         let explorerBtn: UIButton = UIButton(type: .custom)
         explorerBtn.setImage(UIImage(named: "iconExplorer"), for: .normal)
@@ -189,6 +196,11 @@ class CosmosClassVC: BaseVC {
         warnSheet.selectedChain = selectedChain
         warnSheet.noticeType = .TokenGithub
         onStartSheet(warnSheet)
+    }
+    
+    @objc func onClickAddNft() {
+        print("onClickAddNft")
+        
     }
     
     func onSendTx() {
@@ -514,7 +526,7 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             nftList.alpha = 1
             historyList.alpha = 0
             aboutList.alpha = 0
-            navigationItem.rightBarButtonItems = [explorerBarBtn]
+            navigationItem.rightBarButtonItems = [explorerBarBtn, addNftBarBtn]
             
         } else if (item.tag == 3) {
             coinList.alpha = 0
