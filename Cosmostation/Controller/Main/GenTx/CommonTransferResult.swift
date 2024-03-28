@@ -40,7 +40,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var cosmosTxResponse: Cosmos_Tx_V1beta1_GetTxResponse?
     
     var evmHash: String?
-    var evmRecipient: TransactionReceipt?
+    var evmRecipient: JSON?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,10 +97,9 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
         loadingView.isHidden = true
         confirmBtn.isEnabled = true
         if (txStyle == .WEB3_STYLE) {
-            if (evmRecipient!.status != .ok) {
+            if (evmRecipient?["result"]["status"].stringValue != "0x1") {
                 failView.isHidden = false
                 failExplorerBtn.isHidden = false
-                failMsgLabel.text = evmRecipient?.logsBloom.debugDescription
                 
             } else {
                 successView.isHidden = false
@@ -213,27 +212,33 @@ extension CommonTransferResult {
     }
     
     func fetchEvmTx() {
-        DispatchQueue.global().async { [self] in
-//            guard let web3 = (fromChain as! EvmClass).web3 else {
-//                return
-//            }
-            let evmChain = (fromChain as! EvmClass)
-            let url = URL(string: evmChain.getEvmRpc())
-            guard let web3 = try? Web3.new(url!) else {
-                return
-            }
-            
+        Task {
             do {
-                let receiptTx = try web3.eth.getTransactionReceipt(evmHash!)
-                self.evmRecipient = receiptTx
-                DispatchQueue.main.async {
-                    self.onUpdateView()
+                let evmChain = (fromChain as? EvmClass)
+                let recipient = try await evmChain?.fetchEvmTxReceipt(evmHash!)
+                if (recipient?["result"].isEmpty == true) {
+                    self.confirmBtn.isEnabled = true
+                    self.fetchCnt = self.fetchCnt - 1
+                    if (self.fetchCnt > 0) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                            self.fetchEvmTx()
+                        });
+                        
+                    } else {
+                        DispatchQueue.main.async {
+                            self.onShowMoreWait()
+                        }
+                    }
+                    
+                } else {
+                    self.evmRecipient = recipient
+                    DispatchQueue.main.async {
+                        self.onUpdateView()
+                    }
                 }
                 
             } catch {
-                DispatchQueue.main.async {
-                    self.confirmBtn.isEnabled = true
-                }
+                self.confirmBtn.isEnabled = true
                 self.fetchCnt = self.fetchCnt - 1
                 if (self.fetchCnt > 0) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
@@ -245,6 +250,7 @@ extension CommonTransferResult {
                         self.onShowMoreWait()
                     }
                 }
+                
             }
         }
     }

@@ -272,6 +272,11 @@ extension EvmClass {
 //            print("", tag, "   ", tokenInfo.symbol, "  ", tokenInfo.amount)
         }
     }
+    
+    func fetchEvmTxReceipt(_ txHash: String) async throws -> JSON? {
+        let param: Parameters = ["method": "eth_getTransactionReceipt", "params": [txHash], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
 }
 
 
@@ -279,16 +284,16 @@ func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
 //    result.append(ChainAltheaEVM())
-//    result.append(ChainBaseEVM())
-//    result.append(ChainCantoEVM())
-//    result.append(ChainDymensionEVM())
-//    result.append(ChainEvmosEVM())
-//    result.append(ChainHumansEVM())
-//    result.append(ChainKavaEVM())
-//    result.append(ChainOktEVM())
-//    result.append(ChainOptimism())
-//    result.append(ChainPolygon())
-//    result.append(ChainXplaEVM())
+    result.append(ChainBaseEVM())
+    result.append(ChainCantoEVM())
+    result.append(ChainDymensionEVM())
+    result.append(ChainEvmosEVM())
+    result.append(ChainHumansEVM())
+    result.append(ChainKavaEVM())
+    result.append(ChainOktEVM())
+    result.append(ChainOptimism())
+    result.append(ChainPolygon())
+    result.append(ChainXplaEVM())
     
     //Add cosmos chain id for ibc
     result.forEach { chain in

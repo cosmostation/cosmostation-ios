@@ -86,6 +86,7 @@ class CommonTransfer: BaseVC {
     var evmGasTitle: [String] = [NSLocalizedString("str_low", comment: ""), NSLocalizedString("str_average", comment: ""), NSLocalizedString("str_high", comment: "")]
     var evmGasPrice: [BigUInt] = [28000000000, 28000000000, 28000000000]
     var evmGasLimit: BigUInt = 21000
+    var web3: web3?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,6 +111,17 @@ class CommonTransfer: BaseVC {
         toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeDenom)))
+        
+        if let evmChain = fromChain as? EvmClass,
+           let url = URL(string: evmChain.getEvmRpc()) {
+            do {
+                self.web3 = try Web3.new(url)
+            } catch {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true)
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -585,12 +597,8 @@ extension CommonTransfer {
     func evmSendSimul() {
         evmTx = nil
         DispatchQueue.global().async { [self] in
-//            guard let web3 = (fromChain as! EvmClass).web3 else {
-//                return
-//            }
-            let evmChain = (fromChain as! EvmClass)
-            let url = URL(string: evmChain.getEvmRpc())
-            guard let web3 = try? Web3.new(url!) else {
+            
+            guard let web3 = self.web3 else {
                 return
             }
             
@@ -678,19 +686,13 @@ extension CommonTransfer {
     
     func evmSend() {
         DispatchQueue.global().async { [self] in
-//            guard let web3 = (fromChain as! EvmClass).web3 else {
-//                return
-//            }
-            let evmChain = (fromChain as! EvmClass)
-            let url = URL(string: evmChain.getEvmRpc())
-            guard let web3 = try? Web3.new(url!) else {
+            
+            guard let web3 = self.web3 else {
                 return
             }
             
             try! evmTx?.sign(privateKey: fromChain.privateKey!)
             let result = try? web3.eth.sendRawTransaction(evmTx!)
-//            print("evmSend ethereumTx ", ethereumTx)
-//            print("evmSend result ", result)
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                 self.loadingView.isHidden = true
                 let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
