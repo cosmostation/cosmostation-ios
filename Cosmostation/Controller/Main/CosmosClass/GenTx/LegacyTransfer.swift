@@ -383,7 +383,7 @@ extension LegacyTransfer {
                                              signerAddress: self.selectedChain.bechAddress,
                                              sequence: bnbChain.lcdAccountInfo["sequence"].intValue,
                                              accountNumber: bnbChain.lcdAccountInfo["account_number"].intValue,
-                                             chainId: self.selectedChain.chainId)
+                                             chainId: self.selectedChain.chainIdCosmos)
         
         var encoding: ParameterEncoding = URLEncoding.default
         encoding = HexEncoding(data: try bnbMsg.encode())

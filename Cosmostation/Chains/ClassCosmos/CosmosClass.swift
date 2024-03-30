@@ -870,8 +870,8 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     
     
     result.forEach { chain in
-        if let chainId = BaseData.instance.mintscanChains?["chains"].arrayValue.filter({ $0["chain"].stringValue == chain.apiName }).first?["chain_id"].stringValue {
-            chain.chainId = chainId
+        if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
+            chain.chainIdCosmos = cosmosChainId
         }
     }
     if (BaseData.instance.getHideLegacy()) {

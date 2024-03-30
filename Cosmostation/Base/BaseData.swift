@@ -22,7 +22,6 @@ final class BaseData: NSObject{
     var copySalt: String?
     
     var reviewMode = true
-    var mintscanChains: JSON?
     var mintscanChainParams: JSON?
     var mintscanUSDPrices: [MintscanPrice]?
     var mintscanPrices: [MintscanPrice]?

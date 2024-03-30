@@ -27,7 +27,7 @@ class ChainOkt996Keccak: CosmosClass  {
         
         name = "OKT"
         tag = "okt996_Keccak"
-        chainId = "exchain-66"
+        chainIdCosmos = "exchain-66"
         logo1 = "chainOkt"
         logo2 = "chainOkt2"
         apiName = "okc"

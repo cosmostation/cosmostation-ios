@@ -12,7 +12,7 @@ import Foundation
 class BaseChain {
     var name: String!
     var tag: String!
-    var chainId: String!
+    var chainIdCosmos: String!
     var logo1: String!
     var logo2: String!
     var isDefault = true

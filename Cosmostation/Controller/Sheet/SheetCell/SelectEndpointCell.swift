@@ -55,7 +55,7 @@ class SelectEndpointCell: UITableViewCell {
                 do {
                     let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest.init()
                     let nodeInfo = try await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: channel).getNodeInfo(req, callOptions: getCallOptions()).response.get()
-                    if (nodeInfo.defaultNodeInfo.network == chain.chainId) {
+                    if (nodeInfo.defaultNodeInfo.network == chain.chainIdCosmos) {
                         self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
                         let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
                         if (self.gapTime! <= 1.2) {

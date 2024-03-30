@@ -14,6 +14,8 @@ import GRPC
 
 class EvmClass: CosmosClass {
     
+    var chainIdEvm: String!
+    
     var supportCosmos = false
     
     var coinSymbol = ""
@@ -297,8 +299,12 @@ func ALLEVMCLASS() -> [EvmClass] {
     
     //Add cosmos chain id for ibc
     result.forEach { chain in
-        if let chainId = BaseData.instance.mintscanChains?["chains"].arrayValue.filter({ $0["chain"].stringValue == chain.apiName }).first?["chain_id"].stringValue {
-            chain.chainId = chainId
+        if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
+            chain.chainIdCosmos = cosmosChainId
+        }
+        
+        if let evmChainId = chain.getChainListParam()["chain_id_evm"].string {
+            chain.chainIdEvm = evmChainId
         }
     }
     return result

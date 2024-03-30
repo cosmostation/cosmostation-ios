@@ -323,7 +323,7 @@ class DappDetailVC: BaseVC {
         
         if (isEditFee == false && (signDoc["fee"]["amount"].isEmpty || signDoc["fee"]["gas"] == "0") || isEditFee == true) {
             let chainId = signDoc["chain_id"].stringValue
-            if let targetChain = baseAccount.allCosmosClassChains.filter({ $0.chainId == chainId }).first {
+            if let targetChain = baseAccount.allCosmosClassChains.filter({ $0.chainIdCosmos == chainId }).first {
                 if let gasRate = targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == targetChain.stakeDenom }).first {
                     let gasLimit = NSDecimalNumber.init(value: UInt64((Double(signDoc["fee"]["gas"].stringValue) ?? 0) * targetChain.gasMultiply()))
                     let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
@@ -463,7 +463,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 data["isLedger"] = false
                 data["name"].stringValue = baseAccount.name
                 
-                if let filteredChainsWithChainId = baseAccount.allCosmosClassChains.filter({ $0.chainId == chainId  && $0.isDefault == true }).first {
+                if let filteredChainsWithChainId = baseAccount.allCosmosClassChains.filter({ $0.chainIdCosmos == chainId  && $0.isDefault == true }).first {
                     filteredChainsWithChainId.fetchFilteredCosmosChain(self.baseAccount)
                     
                     self.selectedChain = filteredChainsWithChainId
@@ -688,12 +688,12 @@ extension DappDetailVC {
         proposal.requiredNamespaces.forEach { namespaces in
             let caip2Namespace = namespaces.key
             let proposalNamespace = namespaces.value
-            if let currentChain = baseAccount.allCosmosClassChains.filter({ $0.chainId == proposalNamespace.chains?.first?.reference }).first {
+            if let currentChain = baseAccount.allCosmosClassChains.filter({ $0.chainIdCosmos == proposalNamespace.chains?.first?.reference }).first {
                 currentChain.fetchFilteredCosmosChain(self.baseAccount)
                 
                 self.selectedChain = currentChain
                 let accounts = Set(namespaces.value.chains!.filter { chain in
-                    baseAccount.allCosmosClassChains.filter({ $0.chainId == chain.reference }).first != nil
+                    baseAccount.allCosmosClassChains.filter({ $0.chainIdCosmos == chain.reference }).first != nil
                 }.compactMap { chain in
                     WalletConnectSwiftV2.Account(chainIdentifier: chain.absoluteString, address: self.selectedChain.bechAddress)
                 })
@@ -852,7 +852,7 @@ extension DappDetailVC {
         
         if (isEditFee == false && (signDoc["fee"]["amount"].isEmpty || signDoc["fee"]["gas"] == "0") || isEditFee == true) {
             let chainId = signDoc["chain_id"].stringValue
-            if let targetChain = baseAccount.allCosmosClassChains.filter({ $0.chainId == chainId }).first {
+            if let targetChain = baseAccount.allCosmosClassChains.filter({ $0.chainIdCosmos == chainId }).first {
                 if let gasRate = targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == targetChain.stakeDenom }).first {
                     let gasLimit = NSDecimalNumber.init(value: UInt64((Double(signDoc["fee"]["gas"].stringValue) ?? 0) * targetChain.gasMultiply()))
                     let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)

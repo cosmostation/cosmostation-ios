@@ -130,7 +130,7 @@ extension BepTxResult {
                                                signerAddress: fromChain.bechAddress,
                                                sequence: bnbAuth["sequence"].intValue,
                                                accountNumber: bnbAuth["account_number"].intValue,
-                                               chainId: fromChain.chainId!)
+                                               chainId: fromChain.chainIdCosmos!)
         
         var encoding: ParameterEncoding = URLEncoding.default
         encoding = HexEncoding(data: try! bnbMsg.encode())
@@ -335,7 +335,7 @@ extension BepTxResult {
                                               signerAddress: toChain.bechAddress,
                                               sequence: bnbAuth["sequence"].intValue,
                                               accountNumber: bnbAuth["account_number"].intValue,
-                                              chainId: toChain.chainId)
+                                              chainId: toChain.chainIdCosmos)
         
         var encoding: ParameterEncoding = URLEncoding.default
         encoding = HexEncoding(data: try! bnbMsg.encode())

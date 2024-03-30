@@ -22,7 +22,7 @@ class ChainBinanceBeacon: CosmosClass  {
         
         name = "BNB Beacon"
         tag = "binanceBeacon"
-        chainId = "Binance-Chain-Tigris"
+        chainIdCosmos = "Binance-Chain-Tigris"
         logo1 = "chainBnbBeacon"
         logo2 = "chainBnbBeacon2"
         apiName = ""

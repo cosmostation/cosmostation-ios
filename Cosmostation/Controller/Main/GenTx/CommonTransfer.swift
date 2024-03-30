@@ -568,12 +568,12 @@ class CommonTransfer: BaseVC {
         } else if (txStyle == .COSMOS_STYLE) {
             // some chain not support simulate (assetmantle)  24.2.21
             if ((fromChain as! CosmosClass).isGasSimulable() == false) {
-                if (fromChain.chainId != toChain.chainId) {
+                if (fromChain.chainIdCosmos != toChain.chainIdCosmos) {
                     ibcPath = WUtils.getMintscanPath((fromChain as! CosmosClass), (toChain as! CosmosClass), toSendDenom)
                 }
                 return onUpdateFeeViewAfterSimul(nil)
             }
-            if (fromChain.chainId == toChain.chainId) {         // Inchain Send!
+            if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {         // Inchain Send!
                 if (sendType == .Only_Cosmos_CW20) {            // Inchain CW20 Send!
                     inChainWasmSendSimul()
                 } else {                                        // Inchain Coin Send!  (Only_Cosmos_Coin, CosmosEVM_Coin)
@@ -1060,8 +1060,8 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectCosmosRecipientChain) {
             if let chainId = result["chainId"] as? String {
-                if (chainId != toChain.chainId) {
-                    onUpdateToChain(recipientableChains.filter({ $0.chainId == chainId }).first!)
+                if (chainId != toChain.chainIdCosmos) {
+                    onUpdateToChain(recipientableChains.filter({ $0.chainIdCosmos == chainId }).first!)
                 }
             }
         } else if (sheetType == .SelectFeeDenom) {
@@ -1107,7 +1107,7 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                 evmSend()
                 
             } else if (txStyle == .COSMOS_STYLE) {
-                if (fromChain.chainId == toChain.chainId) {         // Inchain Send!
+                if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {         // Inchain Send!
                     if (sendType == .Only_Cosmos_CW20) {            // Inchain CW20 Send!
                         inChainWasmSend()
                     } else {                                        // Inchain Coin Send!  (Only_Cosmos_Coin, CosmosEVM_Coin)

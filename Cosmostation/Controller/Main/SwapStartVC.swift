@@ -126,18 +126,18 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             }
             
             sChains?["chains"].arrayValue.forEach({ sChain in
-                if let skipChain = allSwapableChains.filter({ $0.chainId == sChain["chain_id"].stringValue && $0.isDefault == true }).first {
+                if let skipChain = allSwapableChains.filter({ $0.chainIdCosmos == sChain["chain_id"].stringValue && $0.isDefault == true }).first {
                     skipChains.append(skipChain)
                 }
             })
             
             //Remove no supporting denom chain
             let chainIds = skipChains.map { chain in
-                chain.chainId
+                chain.chainIdCosmos
             }
             chainIds.forEach { chainId in
                 if (skipAssets?["chain_to_assets_map"][chainId!]["assets"].arrayValue.count ?? 0 == 0) {
-                    skipChains = skipChains.filter({ $0.chainId != chainId })
+                    skipChains = skipChains.filter({ $0.chainIdCosmos != chainId })
                 }
             }
             
@@ -147,7 +147,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             
             // $0.isDefault 예외처리 확인 카바
             inputCosmosChain = skipChains.filter({ $0.tag == lastSwapSet[0] }).first ?? skipChains.filter({ $0.tag == "cosmos118" }).first!
-            skipAssets?["chain_to_assets_map"][inputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
+            skipAssets?["chain_to_assets_map"][inputCosmosChain.chainIdCosmos]["assets"].arrayValue.forEach({ json in
                 if BaseData.instance.getAsset(inputCosmosChain.apiName, json["denom"].stringValue) != nil {
                     inputAssetList.append(json)
                 }
@@ -155,7 +155,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == lastSwapSet[1] }.first ?? inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first!
             
             outputCosmosChain = skipChains.filter({ $0.tag == lastSwapSet[2] }).first ?? skipChains.filter({ $0.tag == "neutron118" }).first!
-            skipAssets?["chain_to_assets_map"][outputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
+            skipAssets?["chain_to_assets_map"][outputCosmosChain.chainIdCosmos]["assets"].arrayValue.forEach({ json in
                 if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
                     outputAssetList.append(json)
                 }
@@ -479,9 +479,9 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     func onBindSkipRouteReq(_ amount: String) -> JSON {
         var routeReq = JSON()
         routeReq["amount_in"].stringValue = amount
-        routeReq["source_asset_chain_id"].stringValue = inputCosmosChain.chainId
+        routeReq["source_asset_chain_id"].stringValue = inputCosmosChain.chainIdCosmos
         routeReq["source_asset_denom"].stringValue = inputMsAsset.denom!
-        routeReq["dest_asset_chain_id"].stringValue = outputCosmosChain.chainId
+        routeReq["dest_asset_chain_id"].stringValue = outputCosmosChain.chainIdCosmos
         routeReq["dest_asset_denom"].stringValue = outputMsAsset.denom!
         routeReq["cumulative_affiliate_fee_bps"] = "100"
         routeReq["client_id"] = "cosmostation_ios"
@@ -492,7 +492,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         var msgReq = JSON()
         var address_list = [String]()
         route["chain_ids"].array?.forEach({ chain_Id in
-            if let address = allSwapableChains.filter({ $0.chainId == chain_Id.stringValue && $0.isDefault == true }).first?.bechAddress {
+            if let address = allSwapableChains.filter({ $0.chainIdCosmos == chain_Id.stringValue && $0.isDefault == true }).first?.bechAddress {
                 address_list.append(address)
             }
         })
@@ -659,13 +659,13 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectSwapInputChain) {
             if let chainId = result["chainId"] as? String {
-                if (inputCosmosChain.chainId != chainId) {
+                if (inputCosmosChain.chainIdCosmos != chainId) {
                     view.isUserInteractionEnabled = false
                     loadingView.isHidden = false
                     Task {
-                        inputCosmosChain = skipChains.filter({ $0.chainId == chainId }).first!
+                        inputCosmosChain = skipChains.filter({ $0.chainIdCosmos == chainId }).first!
                         inputAssetList.removeAll()
-                        skipAssets?["chain_to_assets_map"][inputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
+                        skipAssets?["chain_to_assets_map"][inputCosmosChain.chainIdCosmos]["assets"].arrayValue.forEach({ json in
                             if BaseData.instance.getAsset(inputCosmosChain.apiName, json["denom"].stringValue) != nil {
                                 inputAssetList.append(json)
                             }
@@ -689,13 +689,13 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
             
         } else if (sheetType == .SelectSwapOutputChain) {
             if let chainId = result["chainId"] as? String {
-                if (outputCosmosChain.chainId != chainId) {
+                if (outputCosmosChain.chainIdCosmos != chainId) {
                     loadingView.isHidden = false
                     view.isUserInteractionEnabled = false
                     Task {
-                        outputCosmosChain = skipChains.filter({ $0.chainId == chainId }).first!
+                        outputCosmosChain = skipChains.filter({ $0.chainIdCosmos == chainId }).first!
                         outputAssetList.removeAll()
-                        skipAssets?["chain_to_assets_map"][outputCosmosChain.chainId]["assets"].arrayValue.forEach({ json in
+                        skipAssets?["chain_to_assets_map"][outputCosmosChain.chainIdCosmos]["assets"].arrayValue.forEach({ json in
                             if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
                                 outputAssetList.append(json)
                             }

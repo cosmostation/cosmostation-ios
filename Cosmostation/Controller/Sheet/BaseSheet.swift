@@ -538,7 +538,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
-            let result: [String : Any] = ["index" : indexPath.row, "chainId" : swapChainsSearch[indexPath.row].chainId]
+            let result: [String : Any] = ["index" : indexPath.row, "chainId" : swapChainsSearch[indexPath.row].chainIdCosmos]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset)  {
@@ -554,7 +554,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectCosmosRecipientChain) {
-            let result: [String : Any] = ["index" : indexPath.row, "chainId" : cosmosChainList[indexPath.row].chainId]
+            let result: [String : Any] = ["index" : indexPath.row, "chainId" : cosmosChainList[indexPath.row].chainIdCosmos]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {

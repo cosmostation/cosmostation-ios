@@ -13,20 +13,6 @@ import SwiftyJSON
 
 class BaseNetWork {
     
-    func fetchChainList() {
-//        print("fetchChainList ", BaseNetWork.msSupportChains())
-        AF.request(BaseNetWork.msSupportChains(), method: .get)
-            .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
-                switch response.result {
-                case .success(let value):
-                    BaseData.instance.mintscanChains = value
-                    
-                case .failure:
-                    print("fetchChainList error ", response.error)
-                }
-            }
-    }
-    
     func fetchChainParams() {
 //        print("fetchChainParams ", BaseNetWork.msChainParams())
         AF.request(BaseNetWork.msChainParams(), method: .get)
@@ -129,10 +115,6 @@ class BaseNetWork {
     
     static func msErc20InfoUrl(_ chain: BaseChain) -> String {
         return MINTSCAN_API_URL + "v10/assets/" +  chain.apiName + "/erc20/info"
-    }
-    
-    static func msSupportChains() -> String {
-        return MINTSCAN_API_URL + "v10/meta/support/chains"
     }
     
     static func msChainParams() -> String {
