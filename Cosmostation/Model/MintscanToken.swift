@@ -10,7 +10,6 @@ import Foundation
 import SwiftyJSON
 
 public class MintscanToken: Codable {
-    var id: Int64?
     var chainId: Int64?
     var chainName: String?
     var address: String?            //we handle contract address as denom
@@ -37,7 +36,6 @@ public class MintscanToken: Codable {
     }
     
     enum CodingKeys : String, CodingKey {
-        case id
         case chainId
         case chainName
         case address
