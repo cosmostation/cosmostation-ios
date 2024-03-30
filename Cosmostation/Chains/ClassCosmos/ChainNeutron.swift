@@ -72,7 +72,7 @@ class ChainNeutron: CosmosClass  {
                     self.fetchState = .Success
                     self.allCoinValue = self.allCoinValue()
                     self.allCoinUSDValue = self.allCoinValue(true)
-                    print("Done ", self.tag, "  ", self.allCoinValue)
+//                    print("Done ", self.tag, "  ", self.allCoinValue)
                     
                     BaseData.instance.updateRefAddressesCoinValue(
                         RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
@@ -83,7 +83,7 @@ class ChainNeutron: CosmosClass  {
                 }
                 
             } catch {
-//                print("error ",tag, "  ", error)
+                print("error ",tag, "  ", error)
                 DispatchQueue.main.async {
                     if let errorMessage = (error as? GRPCStatus)?.message,
                        errorMessage.contains(self.bechAddress) == true,
@@ -127,7 +127,7 @@ extension ChainNeutron {
             $0.address = NEUTRON_VAULT_ADDRESS
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel!).smartContractState(req, callOptions: getCallOptions()).response.get().data
+        return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel!).smartContractState(req, callOptions: getCallOptions()).response.get().data
     }
     
     func fetchNeutronVesting(_ channel: ClientConnection?) async throws -> Data? {
@@ -138,7 +138,7 @@ extension ChainNeutron {
             $0.address = NEUTRON_VESTING_CONTRACT_ADDRESS
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel!).smartContractState(req, callOptions: getCallOptions()).response.get().data
+        return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel!).smartContractState(req, callOptions: getCallOptions()).response.get().data
     }
     
     func neutronVestingAmount() -> NSDecimalNumber  {
