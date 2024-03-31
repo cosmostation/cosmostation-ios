@@ -369,7 +369,7 @@ extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Not Now") { action, view, completion in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Skip") { action, view, completion in
             if (self.toDisplayInfos[indexPath.section].isBusy == true) { return }
             if (self.toDisplayInfos[indexPath.section].txResponse != nil) { return }
             if (self.toDisplayInfos[indexPath.section].msProposals.count > 1) {

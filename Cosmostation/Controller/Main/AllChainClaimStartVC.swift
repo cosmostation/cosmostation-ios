@@ -233,7 +233,7 @@ extension AllChainClaimStartVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if (valueableRewards[indexPath.row].isBusy == true) { return nil }
         if (valueableRewards[indexPath.row].txResponse != nil) { return nil }
-        let deleteAction = UIContextualAction(style: .destructive, title: "Not Now") { action, view, completion in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Skip") { action, view, completion in
             self.valueableRewards.remove(at: indexPath.row)
             self.onUpdateView()
             completion(true)
