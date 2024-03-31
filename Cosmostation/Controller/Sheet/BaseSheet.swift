@@ -8,12 +8,14 @@
 
 import UIKit
 import SwiftyJSON
+import Lottie
 
 class BaseSheet: BaseVC, UISearchBarDelegate {
     
     @IBOutlet weak var sheetTitle: UILabel!
     @IBOutlet weak var sheetSearchBar: UISearchBar!
     @IBOutlet weak var sheetTableView: UITableView!
+    @IBOutlet weak var loadingView: LottieAnimationView!
     
     var sheetType: SheetType?
     var sheetDelegate: BaseSheetDelegate?
@@ -50,6 +52,13 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadingView.isHidden = true
+        loadingView.animation = LottieAnimation.named("loading")
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.loopMode = .loop
+        loadingView.animationSpeed = 1.3
+        loadingView.play()
         
         updateTitle()
         
@@ -142,22 +151,52 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectSwapInputAsset) {
             sheetTitle.text = NSLocalizedString("title_select_input_asset", comment: "")
             sheetSearchBar.isHidden = false
-            swapAssets.sort {
-                if ($0["symbol"] == "ATOM") { return true }
-                if ($1["symbol"] == "ATOM") { return false }
-                return $0["symbol"].stringValue < $1["symbol"].stringValue
+            loadingView.isHidden = false
+            DispatchQueue.global().async { [self] in
+                swapAssets.sort {
+                    if ($0["symbol"] == "ATOM") { return true }
+                    if ($1["symbol"] == "ATOM") { return false }
+                    let value0 = targetChain.balanceValue($0["denom"].stringValue)
+                    let value1 = targetChain.balanceValue($1["denom"].stringValue)
+                    if (value0.compare(value1).rawValue > 0 ) { return true }
+                    if (value0.compare(value1).rawValue < 0 ) { return false }
+                    let amount0 = targetChain.balanceAmount($0["denom"].stringValue)
+                    let amount1 = targetChain.balanceAmount($1["denom"].stringValue)
+                    if (amount0.compare(amount1).rawValue > 0 ) { return true }
+                    if (amount0.compare(amount1).rawValue < 0 ) { return false }
+                    return $0["symbol"].stringValue < $1["symbol"].stringValue
+                }
+                swapAssetsSearch = swapAssets
+                DispatchQueue.main.async(execute: {
+                    self.loadingView.isHidden = true
+                    self.sheetTableView.reloadData()
+                })
             }
-            swapAssetsSearch = swapAssets
             
         } else if (sheetType == .SelectSwapOutputAsset) {
             sheetTitle.text = NSLocalizedString("title_select_output_asset", comment: "")
             sheetSearchBar.isHidden = false
-            swapAssets.sort {
-                if ($0["symbol"] == "ATOM") { return true }
-                if ($1["symbol"] == "ATOM") { return false }
-                return $0["symbol"].stringValue < $1["symbol"].stringValue
+            loadingView.isHidden = false
+            DispatchQueue.global().async { [self] in
+                swapAssets.sort {
+                    if ($0["symbol"] == "ATOM") { return true }
+                    if ($1["symbol"] == "ATOM") { return false }
+                    let value0 = targetChain.balanceValue($0["denom"].stringValue)
+                    let value1 = targetChain.balanceValue($1["denom"].stringValue)
+                    if (value0.compare(value1).rawValue > 0 ) { return true }
+                    if (value0.compare(value1).rawValue < 0 ) { return false }
+                    let amount0 = targetChain.balanceAmount($0["denom"].stringValue)
+                    let amount1 = targetChain.balanceAmount($1["denom"].stringValue)
+                    if (amount0.compare(amount1).rawValue > 0 ) { return true }
+                    if (amount0.compare(amount1).rawValue < 0 ) { return false }
+                    return $0["symbol"].stringValue < $1["symbol"].stringValue
+                }
+                swapAssetsSearch = swapAssets
+                DispatchQueue.main.async(execute: {
+                    self.loadingView.isHidden = true
+                    self.sheetTableView.reloadData()
+                })
             }
-            swapAssetsSearch = swapAssets
             
         } else if (sheetType == .SelectSwapSlippage) {
             sheetTitle.text = NSLocalizedString("title_select_slippage", comment: "")

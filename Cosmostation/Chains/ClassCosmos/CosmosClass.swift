@@ -576,11 +576,11 @@ extension CosmosClass {
     }
     
     func balanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
+        let amount = balanceAmount(denom)
+        if (amount == NSDecimalNumber.zero) { return NSDecimalNumber.zero }
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
-            let amount = balanceAmount(denom)
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
-            
         }
         return NSDecimalNumber.zero
     }

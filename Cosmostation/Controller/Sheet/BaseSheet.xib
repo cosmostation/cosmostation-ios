@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaseSheet" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="loadingView" destination="vqz-1r-J9r" id="mfy-uL-LYj"/>
                 <outlet property="sheetSearchBar" destination="XSr-gA-zxD" id="JBL-Gr-TwA"/>
                 <outlet property="sheetTableView" destination="y3H-2O-YKP" id="VMW-qX-frw"/>
                 <outlet property="sheetTitle" destination="fQz-pl-DzJ" id="21m-mP-QUY"/>
@@ -38,6 +39,14 @@
                     <color key="backgroundColor" name="_divider"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.80000000000000004" id="K1e-c9-jcx"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vqz-1r-J9r" customClass="LottieAnimationView" customModule="Lottie">
+                    <rect key="frame" x="106.66666666666669" y="383.66666666666669" width="180" height="110"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="5s8-lp-O5n"/>
+                        <constraint firstAttribute="width" constant="180" id="gJf-ta-3T6"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="y3H-2O-YKP">
@@ -64,12 +73,14 @@
                 <constraint firstAttribute="bottom" secondItem="y3H-2O-YKP" secondAttribute="bottom" id="It2-8q-kwj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="O6T-Wd-Q5b" secondAttribute="trailing" constant="12" id="ShF-fI-uEM"/>
                 <constraint firstItem="XSr-gA-zxD" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.45" id="UJZ-nb-oWD"/>
+                <constraint firstItem="vqz-1r-J9r" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="UZU-j9-XlC"/>
                 <constraint firstItem="y3H-2O-YKP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VqD-RM-Zhg"/>
                 <constraint firstItem="XSr-gA-zxD" firstAttribute="centerY" secondItem="fQz-pl-DzJ" secondAttribute="centerY" id="Zb4-Bf-LSx"/>
                 <constraint firstItem="y3H-2O-YKP" firstAttribute="top" secondItem="O6T-Wd-Q5b" secondAttribute="bottom" id="c80-fa-xcu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XSr-gA-zxD" secondAttribute="trailing" constant="4" id="cBA-jF-fRz"/>
                 <constraint firstItem="O6T-Wd-Q5b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="fbg-WD-fKn"/>
                 <constraint firstItem="fQz-pl-DzJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="lfK-98-Ddr"/>
+                <constraint firstItem="vqz-1r-J9r" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="rNR-qd-jNc"/>
                 <constraint firstItem="fQz-pl-DzJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="waU-4s-JD9"/>
             </constraints>
             <point key="canvasLocation" x="139.69465648854961" y="20.422535211267608"/>
