@@ -318,11 +318,12 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
         }
         if (selectedChain is ChainBinanceBeacon) {
             let sendDenom = lcdBalances[indexPath.row]["symbol"].stringValue
-            if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
-                onBepSelectDialog(nil, sendDenom)
-            } else{
-                onStartLegacyTransferVC(lcdBalances[indexPath.row]["symbol"].stringValue)
-            }
+//            if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
+//                onBepSelectDialog(nil, sendDenom)
+//            } else{
+//
+//            }
+            onStartLegacyTransferVC(lcdBalances[indexPath.row]["symbol"].stringValue)
             return
             
         } else if (selectedChain is ChainOkt996Keccak) {
@@ -361,13 +362,15 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.section == 2) {
                 if (selectedChain.tag.starts(with: "kava") == true) {
                     let sendDenom = bridgedCoins[indexPath.row].denom
-                    if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
-                        onBepSelectDialog(.Only_Cosmos_Coin, sendDenom)
-                        return
-                    } else {
-                        onStartTransferVC(.Only_Cosmos_Coin, sendDenom)
-                        return
-                    }
+//                    if (WUtils.isHtlcSwappableCoin(selectedChain, sendDenom)) {
+//                        onBepSelectDialog(.Only_Cosmos_Coin, sendDenom)
+//                        return
+//                    } else {
+//                        onStartTransferVC(.Only_Cosmos_Coin, sendDenom)
+//                        return
+//                    }
+                    onStartTransferVC(.Only_Cosmos_Coin, sendDenom)
+                    return
                     
                 } else {
                     onStartTransferVC(.Only_Cosmos_Coin, bridgedCoins[indexPath.row].denom)
