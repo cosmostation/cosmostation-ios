@@ -72,6 +72,9 @@ class DeriveCell: UITableViewCell {
             reposeErrorLabel.isHidden  = false
             
         } else if (chain.fetchState == .Success) {
+            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            loadingLabel.isHidden = true
+            
             let dpAmount = chain.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
             denomLabel.text = chain.coinSymbol
             amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
