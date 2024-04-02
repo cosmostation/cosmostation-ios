@@ -233,7 +233,7 @@ let ICON_2002                   = "ICON_2002";
 
 
 let ResourceBase = "https://raw.githubusercontent.com/cosmostation/chainlist/master/chain/"
-let ResourceDappBase = "https://raw.githubusercontent.com/cosmostation/chainlist/master/dapp/"
+let ResourceDappBase = "https://raw.githubusercontent.com/cosmostation/chainlist/master/wallet_mobile/dapp/"
 let MintscanUrl = "https://www.mintscan.io/"
 let GeckoUrl = "https://www.coingecko.com/en/coins/"
 
