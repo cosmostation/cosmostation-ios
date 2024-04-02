@@ -47,6 +47,8 @@ class SelectAddressListSheet: BaseVC {
         
 //        print("sendType ", sendType)
         
+        var tempRefBechAddresses = [RefAddress]()
+        
         if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20) {
             //only support EVM address style
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
@@ -69,8 +71,8 @@ class SelectAddressListSheet: BaseVC {
             BaseData.instance.selectAllRefAddresses().filter {
                 $0.bechAddress.starts(with: (toChain as! CosmosClass).bechAccountPrefix! + "1") &&
                 $0.bechAddress != senderBechAddress }.forEach { refAddress in
-                    if (refBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
-                        refBechAddresses.append(refAddress)
+                    if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
+                        tempRefBechAddresses.append(refAddress)
                     }
                 }
             
@@ -89,8 +91,8 @@ class SelectAddressListSheet: BaseVC {
             BaseData.instance.selectAllRefAddresses().filter {
                 $0.bechAddress.starts(with: (toChain as! CosmosClass).bechAccountPrefix! + "1") &&
                 $0.bechAddress != senderBechAddress }.forEach { refAddress in
-                    if (refBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
-                        refBechAddresses.append(refAddress)
+                    if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
+                        tempRefBechAddresses.append(refAddress)
                     }
                 }
             BaseData.instance.selectAllAddressBooks().forEach { book in
@@ -123,6 +125,18 @@ class SelectAddressListSheet: BaseVC {
                 return account0.order < account1.order
             }
             return false
+        }
+        
+        let allBaseChain = All_BASE_Chains()
+        let hideLegacy = BaseData.instance.getHideLegacy()
+        if (hideLegacy) {
+            tempRefBechAddresses.forEach { refAddress in
+                if (allBaseChain.filter { $0.tag == refAddress.chainTag && $0.isDefault == true }.count > 0) {
+                    refBechAddresses.append(refAddress)
+                }
+            }
+        } else {
+            refBechAddresses = tempRefBechAddresses
         }
         
         refBechAddresses.sort {

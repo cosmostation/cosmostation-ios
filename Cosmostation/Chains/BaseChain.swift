@@ -82,6 +82,13 @@ func All_IBC_Chains() -> [CosmosClass] {
     return result
 }
 
+func All_BASE_Chains() -> [BaseChain] {
+    var result = [CosmosClass]()
+    result.append(contentsOf: ALLCOSMOSCLASS())
+    result.append(contentsOf: ALLEVMCLASS())
+    return result
+}
+
 
 enum FetchState: Int {
     case Idle = -1
