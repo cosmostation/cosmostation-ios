@@ -178,10 +178,10 @@ extension SelectAddressListSheet: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else if (tableView == evmStyleTableView) {
-            if (section == 1) {
+            if (section == 0) {
                view.titleLabel.text = "My Account"
                view.cntLabel.text = String(refEvmAddresses.count)
-           }  else {
+            } else if (section == 1) {
                view.titleLabel.text = "Address Book"
                view.cntLabel.text = String(evmAddressBook.count)
            }
