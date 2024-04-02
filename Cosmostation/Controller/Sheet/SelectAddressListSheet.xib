@@ -16,8 +16,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectAddressListSheet" customModule="Cosmostation" customModuleProvider="target">
             <connections>
-                <outlet property="sheetTableView" destination="b5x-TK-YzV" id="zz8-q7-2bj"/>
-                <outlet property="sheetTitle" destination="uQ4-G7-9VM" id="Uvs-2P-uat"/>
+                <outlet property="addressStyleSegment" destination="hE3-6M-tNM" id="GLL-DF-FMb"/>
+                <outlet property="cosmosStyleTableView" destination="b5x-TK-YzV" id="4aH-dE-mNH"/>
+                <outlet property="evmStyleTableView" destination="aXq-H8-Upc" id="Bai-GX-3Kk"/>
+                <outlet property="sheetTitle" destination="Q12-DL-G9N" id="Q4e-vm-0Ed"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,21 +28,39 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sheet Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQ4-G7-9VM">
-                    <rect key="frame" x="20" y="95" width="84.666666666666671" height="20.333333333333329"/>
-                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
-                    <color key="textColor" name="_color01"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qgP-WS-406">
-                    <rect key="frame" x="12" y="139.33333333333334" width="369" height="0.66666666666665719"/>
-                    <color key="backgroundColor" name="_divider"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xEg-41-MaZ">
+                    <rect key="frame" x="20" y="95" width="353" height="59.333333333333343"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sheet Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q12-DL-G9N">
+                            <rect key="frame" x="0.0" y="0.0" width="84.666666666666671" height="20.333333333333332"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hE3-6M-tNM">
+                            <rect key="frame" x="0.0" y="28.333333333333329" width="353" height="32"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <segments>
+                                <segment title="Cosmos Style"/>
+                                <segment title="EVM Style"/>
+                            </segments>
+                            <color key="tintColor" name="_primary"/>
+                            <color key="selectedSegmentTintColor" name="_primary"/>
+                            <connections>
+                                <action selector="onClickSegment:" destination="-1" eventType="valueChanged" id="W9L-3d-4dV"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="0.80000000000000004" id="Chp-Bi-SRk"/>
+                        <constraint firstItem="hE3-6M-tNM" firstAttribute="centerX" secondItem="xEg-41-MaZ" secondAttribute="centerX" id="Hup-Di-UJE"/>
                     </constraints>
-                </view>
+                </stackView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="b5x-TK-YzV">
-                    <rect key="frame" x="0.0" y="140" width="393" height="712"/>
+                    <rect key="frame" x="0.0" y="170.33333333333331" width="393" height="681.66666666666674"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aXq-H8-Upc">
+                    <rect key="frame" x="0.0" y="170.33333333333331" width="393" height="681.66666666666674"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
@@ -48,15 +68,17 @@
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstItem="uQ4-G7-9VM" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="1S2-JP-kB7"/>
                 <constraint firstItem="b5x-TK-YzV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="1uL-9d-dqV"/>
+                <constraint firstItem="aXq-H8-Upc" firstAttribute="trailing" secondItem="b5x-TK-YzV" secondAttribute="trailing" id="3vl-wM-ibV"/>
+                <constraint firstItem="b5x-TK-YzV" firstAttribute="top" secondItem="xEg-41-MaZ" secondAttribute="bottom" constant="16" id="4n6-5C-kMH"/>
+                <constraint firstItem="xEg-41-MaZ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="6Gd-SF-jJW"/>
+                <constraint firstItem="aXq-H8-Upc" firstAttribute="leading" secondItem="b5x-TK-YzV" secondAttribute="leading" id="FoX-ku-CWL"/>
                 <constraint firstItem="b5x-TK-YzV" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="LrQ-Cr-Bmb"/>
-                <constraint firstItem="uQ4-G7-9VM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="OMJ-Xb-Ge1"/>
-                <constraint firstItem="b5x-TK-YzV" firstAttribute="top" secondItem="qgP-WS-406" secondAttribute="bottom" id="QFe-3v-fcC"/>
-                <constraint firstItem="qgP-WS-406" firstAttribute="top" secondItem="uQ4-G7-9VM" secondAttribute="bottom" constant="24" id="VGf-cy-f8l"/>
-                <constraint firstItem="qgP-WS-406" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="oTP-Zq-dKE"/>
+                <constraint firstItem="aXq-H8-Upc" firstAttribute="top" secondItem="b5x-TK-YzV" secondAttribute="top" id="e5h-Pe-pWg"/>
+                <constraint firstItem="xEg-41-MaZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="kaL-tn-SWV"/>
+                <constraint firstItem="aXq-H8-Upc" firstAttribute="bottom" secondItem="b5x-TK-YzV" secondAttribute="bottom" id="n1K-1G-M0Z"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="b5x-TK-YzV" secondAttribute="trailing" id="py7-CJ-xN4"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qgP-WS-406" secondAttribute="trailing" constant="12" id="yrG-46-iur"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xEg-41-MaZ" secondAttribute="trailing" constant="20" id="uRB-D1-Qlo"/>
             </constraints>
             <point key="canvasLocation" x="-118" y="20"/>
         </view>
@@ -67,9 +89,6 @@
         </namedColor>
         <namedColor name="_colorBg">
             <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="_divider">
-            <color red="1" green="1" blue="1" alpha="0.20200000703334808" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
             <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

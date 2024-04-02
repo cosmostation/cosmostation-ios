@@ -114,11 +114,13 @@ class CommonTransfer: BaseVC {
         
         if let evmChain = fromChain as? EvmClass,
            let url = URL(string: evmChain.getEvmRpc()) {
-            do {
-                self.web3 = try Web3.new(url)
-            } catch {
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true)
+            DispatchQueue.global().async { [self] in
+                do {
+                    self.web3 = try Web3.new(url)
+                } catch {
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true)
+                    }
                 }
             }
         }
@@ -686,7 +688,6 @@ extension CommonTransfer {
     
     func evmSend() {
         DispatchQueue.global().async { [self] in
-            
             guard let web3 = self.web3 else {
                 return
             }
