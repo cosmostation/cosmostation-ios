@@ -472,7 +472,6 @@ extension CosmosClass {
     }
     
     func fetchAllCw20Balance(_ id: Int64) {
-        //TODO option
         let channel = getConnection()
         let group = DispatchGroup()
         mintscanCw20Tokens.forEach { token in

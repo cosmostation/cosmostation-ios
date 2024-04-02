@@ -51,10 +51,12 @@ class ChainNeutron: CosmosClass  {
         Task {
             do {
                 let channel = getConnection()
-                if let auth = try await fetchAuth(channel),
+                if let cw20Tokens = try await fetchCw20Info(),
+                   let auth = try await fetchAuth(channel),
                    let balance = try await fetchBalance(channel),
                    let vault = try? await fetchVaultDeposit(channel),
                    let vesting = try? await fetchNeutronVesting(channel) {
+                    self.mintscanCw20Tokens = cw20Tokens
                     self.cosmosAuth = auth
                     self.cosmosBalances = balance
                     if let vault = vault,
@@ -73,6 +75,7 @@ class ChainNeutron: CosmosClass  {
                     self.allCoinValue = self.allCoinValue()
                     self.allCoinUSDValue = self.allCoinValue(true)
 //                    print("Done ", self.tag, "  ", self.allCoinValue)
+                    if (self.supportCw20) { self.fetchAllCw20Balance(id) }
                     
                     BaseData.instance.updateRefAddressesCoinValue(
                         RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
