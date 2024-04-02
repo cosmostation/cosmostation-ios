@@ -32,7 +32,6 @@ class BaseNetWork {
             .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let value):
-                    print("Test1234 : ", value)
                     BaseData.instance.dAppConfig = value
                     
                 case .failure:
