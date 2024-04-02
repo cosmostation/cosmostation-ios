@@ -61,7 +61,11 @@ class AboutSocialsCell: UITableViewCell {
             vc?.onShowToast("No Infomation.")
             return
         }
-        vc?.onShowSafariWeb(url)
+        if (UIApplication.shared.canOpenURL(url)) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            vc?.onShowSafariWeb(url)
+        }
     }
     
     @IBAction func onClickGithub(_ sender: UIButton) {
@@ -117,11 +121,18 @@ class AboutSocialsCell: UITableViewCell {
     }
     
     @IBAction func onClickBlog(_ sender: UIButton) {
-        let site = json["params"]["chainlist_params"]["about"]["blog"].stringValue
-        guard let url = URL(string: site) else {
-            vc?.onShowToast("No Infomation.")
+        let blog = json["params"]["chainlist_params"]["about"]["blog"].stringValue
+        if let url = URL(string: blog) {
+            vc?.onShowSafariWeb(url)
             return
         }
-        vc?.onShowSafariWeb(url)
+        
+        let medium = json["params"]["chainlist_params"]["about"]["medium"].stringValue
+        if let url = URL(string: medium) {
+            vc?.onShowSafariWeb(url)
+            return
+        }
+        
+        vc?.onShowToast("No Infomation.")
     }
 }
