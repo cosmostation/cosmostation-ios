@@ -137,29 +137,6 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v10/" + chain.apiName + "/account/" + address + "/votes"
     }
     
-    static func getTxDetailUrl(_ chain: BaseChain, _ txHash: String) -> URL? {
-        if (chain is ChainBinanceBeacon) {
-            return URL(string: BNB_BEACON_EXPLORER + "tx/" + txHash)
-        } else if (chain.tag.starts(with: "okt")) {
-            return URL(string: OKT_EXPLORER + "tx/" + txHash)
-        }
-        return URL(string: MintscanUrl + chain.apiName + "/transactions/" + txHash)
-    }
-    
-    static func getAccountDetailUrl(_ chain: CosmosClass) -> URL? {
-        if (chain is ChainBinanceBeacon) {
-            return URL(string: BNB_BEACON_EXPLORER + "address/" + chain.bechAddress)
-        } else if (chain.tag.starts(with: "okt")) {
-            return URL(string: OKT_EXPLORER + "address/" + chain.bechAddress)
-        }
-        return URL(string: MintscanUrl + chain.apiName + "/account/" + chain.bechAddress)
-    }
-    
-    static func getProposalDetailUrl(_ chain: BaseChain, _ proposalId: UInt64) -> URL? {
-        return URL(string: MintscanUrl + chain.apiName + "/proposals/" + String(proposalId))
-    }
-    
-    
     static func SkipChains() -> String {
         return SKIP_API_URL + "v1/info/chains"
     }

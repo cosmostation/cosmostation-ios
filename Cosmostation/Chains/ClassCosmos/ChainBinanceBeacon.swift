@@ -68,7 +68,7 @@ class ChainBinanceBeacon: CosmosClass  {
                 }
                 
             } catch {
-                print("Error Cosmos", self.tag,  error)
+//                print("Error Cosmos", self.tag,  error)
                 DispatchQueue.main.async {
                     self.fetchState = .Fail
                     NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
@@ -98,6 +98,22 @@ class ChainBinanceBeacon: CosmosClass  {
     
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
         return lcdBalanceValue(stakeDenom, usd)
+    }
+    
+    
+    override func getExplorerAccount() -> URL? {
+        if let url = URL(string: BNB_BEACON_EXPLORER + "address/" + bechAddress) {
+            return url
+        }
+        return nil
+    }
+    
+    override func getExplorerTx(_ hash: String?) -> URL? {
+        if let txhash = hash,
+           let url = URL(string: BNB_BEACON_EXPLORER + "tx/" + txhash) {
+            return url
+        }
+        return nil
     }
     
     static func assetImg(_ original_symbol: String) -> URL {

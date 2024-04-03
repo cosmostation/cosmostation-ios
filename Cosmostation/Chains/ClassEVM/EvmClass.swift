@@ -215,6 +215,19 @@ class EvmClass: CosmosClass {
         return result
     }
     
+    
+    override func getExplorerAccount() -> URL? {
+        if (supportCosmos) {
+            return super.getExplorerAccount()
+        } else {
+            if let urlString = getChainListParam()["explorer"]["account"].string,
+               let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: evmAddress)) {
+                return url
+            }
+        }
+        return nil
+    }
+    
     func getEvmRpc() -> String {
         if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_EVM_RPC_ENDPOINT +  " : " + self.name) {
             return endpoint.trimmingCharacters(in: .whitespaces)

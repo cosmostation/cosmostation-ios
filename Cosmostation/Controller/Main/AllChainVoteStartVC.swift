@@ -363,7 +363,7 @@ extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
         if (toDisplayInfos[indexPath.section].txResponse != nil) { return }
         if let cosmosChain = toDisplayInfos[indexPath.section].basechain as? CosmosClass,
            let proposalId = toDisplayInfos[indexPath.section].msProposals[indexPath.row].id {
-            guard let url = BaseNetWork.getProposalDetailUrl(cosmosChain, proposalId) else { return }
+            guard let url = cosmosChain.getExplorerProposal(proposalId) else { return }
             self.onShowSafariWeb(url)
         }
     }

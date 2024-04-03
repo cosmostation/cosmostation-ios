@@ -248,6 +248,31 @@ class CosmosClass: BaseChain {
         return URL(string: ResourceBase + apiName + "/moniker/" + opAddress + ".png") ?? URL(string: "")!
     }
     
+    override func getExplorerAccount() -> URL? {
+        if let urlString = getChainListParam()["explorer"]["account"].string,
+           let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: bechAddress)) {
+            return url
+        }
+        return nil
+    }
+    
+    override func getExplorerTx(_ hash: String?) -> URL? {
+        if let urlString = getChainListParam()["explorer"]["tx"].string,
+           let txhash = hash,
+           let url = URL(string: urlString.replacingOccurrences(of: "${hash}", with: txhash)) {
+            return url
+        }
+        return nil
+    }
+    
+    override func getExplorerProposal(_ id: UInt64) -> URL? {
+        if let urlString = getChainListParam()["explorer"]["proposal"].string,
+           let url = URL(string: urlString.replacingOccurrences(of: "${id}", with: String(id))) {
+            return url
+        }
+        return nil
+    }
+    
     func getGrpc() -> (host: String, port: Int) {
         if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + self.name) {
             if (endpoint.components(separatedBy: ":").count == 2) {

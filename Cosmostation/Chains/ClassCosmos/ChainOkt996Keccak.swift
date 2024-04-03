@@ -89,7 +89,7 @@ class ChainOkt996Keccak: CosmosClass  {
                 }
                 
             } catch {
-                print("Error Cosmos", self.tag,  error)
+//                print("Error Cosmos", self.tag,  error)
                 DispatchQueue.main.async {
                     self.fetchState = .Fail
                     NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
@@ -229,6 +229,5 @@ extension ChainOkt996Keccak {
 }
 
 let OKT_LCD = "https://exchainrpc.okex.org/okexchain/v1/"
-let OKT_EXPLORER = "https://www.oklink.com/oktc/"
 let OKT_BASE_FEE = "0.008"
 let OKT_GECKO_ID = "oec-token"

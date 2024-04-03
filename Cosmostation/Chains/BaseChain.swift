@@ -45,6 +45,12 @@ class BaseChain {
     
     func isTxFeePayable() -> Bool { return false }
     
+    func getExplorerAccount() -> URL? { return nil }
+    
+    func getExplorerTx(_ hash: String?) -> URL? { return nil }
+    
+    func getExplorerProposal(_ id: UInt64) -> URL? { return nil }
+    
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if (usd == true) {
             return allCoinUSDValue.adding(allTokenUSDValue)
@@ -52,6 +58,7 @@ class BaseChain {
             return allCoinValue.adding(allTokenValue)
         }
     }
+        
 }
 
 

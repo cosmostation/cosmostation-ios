@@ -37,4 +37,21 @@ class ChainKavaEVM: EvmClass  {
         addressURL = explorerURL + "address/%@"
         txURL = explorerURL + "tx/%@"
     }
+    
+//    override func getExplorerAccount() -> URL? {
+//        if let urlString = getChainListParam()["evm_explorer"]["account"].string,
+//           let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: evmAddress)) {
+//            return url
+//        }
+//        return nil
+//    }
+//    
+//    override func getExplorerTx(_ hash: String?) -> URL? {
+//        if let urlString = getChainListParam()["evm_explorer"]["tx"].string,
+//           let txhash = hash,
+//           let url = URL(string: urlString.replacingOccurrences(of: "${hash}", with: txhash)) {
+//            return url
+//        }
+//        return nil
+//    }
 }

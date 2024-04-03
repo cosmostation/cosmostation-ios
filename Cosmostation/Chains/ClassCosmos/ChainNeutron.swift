@@ -86,7 +86,7 @@ class ChainNeutron: CosmosClass  {
                 }
                 
             } catch {
-                print("error ",tag, "  ", error)
+//                print("error ",tag, "  ", error)
                 DispatchQueue.main.async {
                     if let errorMessage = (error as? GRPCStatus)?.message,
                        errorMessage.contains(self.bechAddress) == true,

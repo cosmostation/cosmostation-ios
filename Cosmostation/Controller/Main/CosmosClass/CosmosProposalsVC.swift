@@ -261,7 +261,7 @@ extension CosmosProposalsVC: UITableViewDelegate, UITableViewDataSource {
                 proposalId = filteredEtcPeriods[indexPath.row].id!
             }
         }
-        guard let url = BaseNetWork.getProposalDetailUrl(selectedChain, proposalId) else { return }
+        guard let url = selectedChain.getExplorerProposal(proposalId) else { return }
         self.onShowSafariWeb(url)
     }
     

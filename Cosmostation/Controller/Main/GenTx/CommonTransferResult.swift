@@ -135,11 +135,11 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
         if (txStyle == .WEB3_STYLE) {
-            guard let url = URL(string:String(format: (fromChain as! EvmClass).txURL, evmHash!)) else { return }
+            guard let url = fromChain.getExplorerTx(evmHash) else { return }
             self.onShowSafariWeb(url)
             
         } else if (txStyle == .COSMOS_STYLE) {
-            guard let url = BaseNetWork.getTxDetailUrl(fromChain, cosmosBroadcastTxResponse!.txhash) else { return }
+            guard let url = fromChain.getExplorerTx(cosmosBroadcastTxResponse?.txhash) else { return }
             self.onShowSafariWeb(url)
         }
     }

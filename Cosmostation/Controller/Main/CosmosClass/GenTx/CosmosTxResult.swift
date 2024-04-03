@@ -170,18 +170,16 @@ class CosmosTxResult: BaseVC {
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
+        var hash: String?
         if (selectedChain is ChainBinanceBeacon) {
-            guard let url = BaseNetWork.getTxDetailUrl(selectedChain, legacyResult!["hash"].stringValue) else { return }
-            self.onShowSafariWeb(url)
-            
+            hash = legacyResult!["hash"].string
         } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-            guard let url = BaseNetWork.getTxDetailUrl(selectedChain, legacyResult!["txhash"].stringValue) else { return }
-            self.onShowSafariWeb(url)
-            
+            hash = legacyResult!["txhash"].string
         } else {
-            guard let url = BaseNetWork.getTxDetailUrl(selectedChain, broadcastTxResponse!.txhash) else { return }
-            self.onShowSafariWeb(url)
+            hash = broadcastTxResponse?.txhash
         }
+        guard let url = selectedChain.getExplorerTx(hash) else { return }
+        self.onShowSafariWeb(url)
     }
     
     
