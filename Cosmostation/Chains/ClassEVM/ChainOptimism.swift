@@ -26,9 +26,6 @@ class ChainOptimism: EvmClass  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         evmRpcURL = "https://mainnet.optimism.io"
-        explorerURL = "https://optimistic.etherscan.io/"
-        addressURL = explorerURL + "address/%@"
-        txURL = explorerURL + "tx/%@"
         
     }
     

@@ -33,8 +33,5 @@ class ChainDymensionEVM: EvmClass  {
         
         grpcHost = "grpc-dymension.cosmostation.io"
         evmRpcURL = "https://rpc-dymension-evm.cosmostation.io"
-        explorerURL = "https://www.mintscan.io/dymension/"
-        addressURL = explorerURL + "address/%@"
-        txURL = explorerURL + "tx/%@"
     }
 }

@@ -301,11 +301,11 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             let selectedChain = searchEvmChains[indexPath.row]
-            if (selectedChain.fetchState != .Success) { return }
             if (selectedChain.fetchState == .Fail) {
                 onNodedownPopup()
                 return
             }
+            if (selectedChain.fetchState != .Success) { return }
             detailChainTag = selectedChain.tag
             if (selectedChain.supportCosmos) {
                 let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
@@ -324,11 +324,11 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             
         } else if (indexPath.section == 1) {
             let selectedChain = searchCosmosChains[indexPath.row]
-            if (selectedChain.fetchState != .Success) { return }
             if (selectedChain.fetchState == .Fail) {
                 onNodedownPopup()
                 return
             }
+            if (selectedChain.fetchState != .Success) { return }
             detailChainTag = selectedChain.tag
             let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
             cosmosClassVC.selectedChain = selectedChain

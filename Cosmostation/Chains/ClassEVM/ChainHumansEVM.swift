@@ -33,8 +33,5 @@ class ChainHumansEVM: EvmClass  {
         
         grpcHost = "grpc-humans.cosmostation.io"
         evmRpcURL = "https://rpc-humans-evm.cosmostation.io"
-        explorerURL = "https://www.mintscan.io/humans/"
-        addressURL = explorerURL + "address/%@"
-        txURL = explorerURL + "tx/%@"
     }
 }

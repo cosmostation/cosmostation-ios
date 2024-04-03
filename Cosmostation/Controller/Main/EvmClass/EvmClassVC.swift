@@ -177,7 +177,7 @@ class EvmClassVC: BaseVC {
     }
     
     @objc func onClickExplorer() {
-        guard let url = URL(string:String(format: selectedChain.addressURL, selectedChain.evmAddress)) else { return }
+        guard let url = selectedChain.getExplorerAccount() else { return }
         self.onShowSafariWeb(url)
     }
     

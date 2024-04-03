@@ -26,9 +26,6 @@ class ChainBaseEVM: EvmClass  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         evmRpcURL = "https://mainnet.base.org"
-        explorerURL = "https://basescan.org/"
-        addressURL = explorerURL + "address/%@"
-        txURL = explorerURL + "tx/%@"
         
     }
     

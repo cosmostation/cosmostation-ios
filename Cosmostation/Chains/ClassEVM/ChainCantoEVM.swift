@@ -33,8 +33,5 @@ class ChainCantoEVM: EvmClass  {
         
         grpcHost = "grpc-canto.cosmostation.io"
         evmRpcURL = "https://rpc-canto-evm.cosmostation.io"
-        explorerURL = "https://www.mintscan.io/canto/"
-        addressURL = explorerURL + "address/%@"
-        txURL = explorerURL + "tx/%@"
     }
 }

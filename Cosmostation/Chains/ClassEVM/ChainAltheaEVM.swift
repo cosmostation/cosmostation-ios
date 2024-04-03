@@ -33,8 +33,5 @@ class ChainAltheaEVM: EvmClass  {
         
         grpcHost = "grpc-althea.cosmostation.io"
         evmRpcURL = "https://rpc-althea-evm.cosmostation.io"
-        explorerURL = "https://www.mintscan.io/althea/"
-        addressURL = explorerURL + "address/%@"
-        txURL = explorerURL + "tx/%@"
     }
 }

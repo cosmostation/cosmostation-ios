@@ -42,9 +42,6 @@ class ChainOktEVM: EvmClass {
         supportStaking = false
         
         evmRpcURL = "https://exchainrpc.okex.org"
-        explorerURL = "https://www.oklink.com/oktc/"
-        addressURL = explorerURL + "address/%@"
-        txURL = explorerURL + "tx/%@"
     }
     
     override func fetchData(_ id: Int64) {

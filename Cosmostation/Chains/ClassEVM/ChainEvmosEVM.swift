@@ -33,8 +33,5 @@ class ChainEvmosEVM: EvmClass  {
         
         grpcHost = "grpc-evmos.cosmostation.io"
         evmRpcURL = "https://rpc-evmos-evm.cosmostation.io"
-        explorerURL = "https://www.mintscan.io/evmos/"
-        addressURL = explorerURL + "address/%@"
-        txURL = explorerURL + "tx/%@"
     }
 }

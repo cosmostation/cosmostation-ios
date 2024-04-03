@@ -23,9 +23,6 @@ class EvmClass: CosmosClass {
     var coinLogo = ""
     
     lazy var evmRpcURL = ""
-    lazy var explorerURL = ""
-    lazy var addressURL = ""
-    lazy var txURL = ""
     
     var evmBalances = NSDecimalNumber.zero
     lazy var mintscanErc20Tokens = [MintscanToken]()
